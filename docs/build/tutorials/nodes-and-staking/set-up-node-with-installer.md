@@ -5,11 +5,11 @@ sidebar_position: 2
 
 # Run an Avalanche Node using the Install Script
 
-We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required. Script can also be used for unattended, [automated installs](set-up-node-with-installer.md#unattended-installation).
+We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required. Script can also be used for unattended, [automated installs](#unattended-installation).
 
 ## Before you start
 
-Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware with the following mimimum specifications. Note that as network usage increases, hardware requirements may change.
 
 * CPU: Equivalent of 8 AWS vCPU
 * RAM: 16 GiB
@@ -17,7 +17,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 * Network: sustained 5Mbps up/down bandwidth
 
-Please note that HW requirements scale with amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
+Please note that HW requirements shall scale with the amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
 
 This install script assumes:
 
@@ -120,13 +120,13 @@ Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 
 Confirm with `y`, or `n` if the detected IP is wrong (or empty), and then enter the correct IP at the next prompt.
 
-Next, you have to set up RPC port access for your node. Those are used to query the node for its internal state, send commands to the node, or to interact with the platform and its chains (sending transactions, for example). You will be prompted:
+Next, you have to set up RPC port access for your node. Those are used to query the node for its internal state, to send commands to the node, or to interact with the platform and its chains (sending transactions, for example). You will be prompted:
 
 ```text
 Do you want the RPC port to be accessible to any or only local network interface? [any, local]:
 ```
 
-If you're ok with sending RPC requests only from the node machine itself, enter `local` at the prompt. If you want to be able to send RPC requests to your node from a remote machine, enter `any`. Please note that if you choose to allow RPC requests on any network interface you will need to set up a firewall to only let through RPC requests from known IP addresses, otherwise your node willbe accessible to anyone and  might be overwhelmed by RPC calls from malicious actors! If you do not plan to use your node to send RPC calls, enter `local` for increased node security.
+If you're ok with sending RPC requests only from the node machine itself, enter `local` at the prompt. If you want to be able to send RPC requests to your node from a remote machine, enter `any`. Please note that if you choose to allow RPC requests on any network interface you will need to set up a firewall to only let through RPC requests from known IP addresses, otherwise your node will be accessible to anyone and  might be overwhelmed by RPC calls from malicious actors! If you do not plan to use your node to send RPC calls, enter `local` for increased node security.
 
 The script will then continue with system service creation and finish with starting the service:
 
@@ -297,10 +297,10 @@ To run an archival mainnet node with dynamic IP and database located at `/home/n
 ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
 ```
 
-To reinstall the node using node version 1.7.9 and use specific IP and local RPC only:
+To reinstall the node using node version 1.7.10 and use specific IP and local RPC only:
 
 ```bash
-./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.9 --rpc local
+./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.10 --rpc local
 ```
 
 ## Node configuration
