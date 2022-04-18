@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Run an Avalanche Node using the Install Script
 
-We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required. Script can also be used for unattended, [automated installs](set-up-node-with-installer.md#unattended-installation).
 
 ## Before you start
 
@@ -15,6 +15,9 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 * RAM: 16 GiB
 * Storage: 512 GiB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+* Network: sustained 5Mbps up/down bandwidth
+
+Please note that HW requirements scale with amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
 
 This install script assumes:
 
@@ -23,9 +26,9 @@ This install script assumes:
 
 ### Environment considerations
 
-If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
+If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script. It will probably work on any distribution that uses `systemd` but it has been developed for and tested on Ubuntu.
 
-If you have a node already running on the computer, stop it before running the script.
+If you have a node already running on the computer, stop it before running the script. Script won't touch the node working directory so you won't need to bootstrap the node again.
 
 #### Node running from terminal
 
@@ -63,6 +66,10 @@ If your node is running on a cloud provider computer instance, it will have a st
 If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
 
 As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found (like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) ), and your service provider support might help too.
+
+:::warning
+Please note that a fully connected Avalanche node maintains and communicates over a couple of thousand of live TCP connections. For some low-powered and older home routers that might be too much to handle. If that is the case you may experience lagging on other computers connected to the same router, node getting benched, failing to sync and similar issues.
+:::
 
 ## Running the script
 
@@ -113,19 +120,27 @@ Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 
 Confirm with `y`, or `n` if the detected IP is wrong (or empty), and then enter the correct IP at the next prompt.
 
-The script will then continue with system service creation and finish with starting the service.
+Next, you have to set up RPC port access for your node. Those are used to query the node for its internal state, send commands to the node, or to interact with the platform and its chains (sending transactions, for example). You will be prompted:
 
 ```text
-Installing service with public IP: 3.15.152.14
+Do you want the RPC port to be accessible to any or only local network interface? [any, local]:
+```
+
+If you're ok with sending RPC requests only from the node machine itself, enter `local` at the prompt. If you want to be able to send RPC requests to your node from a remote machine, enter `any`. Please note that if you choose to allow RPC requests on any network interface you will need to set up a firewall to only let through RPC requests from known IP addresses, otherwise your node willbe accessible to anyone and  might be overwhelmed by RPC calls from malicious actors! If you do not plan to use your node to send RPC calls, enter `local` for increased node security.
+
+The script will then continue with system service creation and finish with starting the service:
+
+```text
 Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service → /etc/systemd/system/avalanchego.service.
 
 Done!
 
-Your node should now be bootstrapping on the main net.
+Your node should now be bootstrapping.
 Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
+C-Chain configuration file is /home/ubuntu/.avalanchego/configs/chains/C/config.json
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
-To follow the log use (ctrl+C to stop):
+To follow the log use (ctrl-c to stop):
 sudo journalctl -u avalanchego -f
 
 Reach us over on https://chat.avax.network if you're having problems.
@@ -239,9 +254,58 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
+## Advanced node configuration
+
+Without any additional arguments, the script installs the node in a most common configuration. But the script also enables various advanced options to be configured, via the command line prompts. Following is a list of advanced options and their usage:
+
+* `admin` - [Admin API](../../avalanchego-apis/admin.md) will be enabled
+* `archival` - disables database pruning and preserves the complete transaction history
+* `db-dir` - use to provide the full path to the location where the database will be stored
+* `fuji` - node will connect to Fuji testnet instead of the mainnet
+* `index` - [Index API](../../avalanchego-apis/index-api.md) will be enabled
+* `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be used as the public IP node will advertise to the network
+* `rpc` - use `any` or `local` argument to select any or local network interface to be used to listen for RPC calls
+* `version` - install a specific node version, instead of the latest. See [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
+
+Please note that configuring `index` and `archival` options on an existing node will require a fresh bootstrap to recreate the database.
+
+Complete script usage can be displayed by entering:
+
+```bash
+./avalanchego-installer.sh --help
+```
+
+### Unattended installation
+
+If you want to use the script in an automated environment where you cannot enter the data at the prompts you must provide at least the `rpc` and `ip` options. For example:
+
+```bash
+./avalanchego-installer.sh --ip 1.2.3.4 --rpc local
+```
+
+### Usage examples
+
+To run a Fuji node with indexing enabled and autodetected static IP:
+
+```bash
+./avalanchego-installer.sh --fuji --ip static --index
+```
+
+To run an archival mainnet node with dynamic IP and database located at `/home/node/db`:
+
+```bash
+./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
+```
+
+To reinstall the node using node version 1.7.9 and use specific IP and local RPC only:
+
+```bash
+./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.9 --rpc local
+```
+
 ## Node configuration
 
-File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/avalanchego-config-flags.md). Default configuration may look like this:
+File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/avalanchego-config-flags.md). Configuration may look like this:
 
 ```json
 {
@@ -251,6 +315,8 @@ File that configures node operation is `~/.avalanchego/configs/node.json`. You c
 ```
 
 Note that configuration file needs to be a properly formatted `JSON` file, so switches are formatted differently than for command line, so don't enter options like `--dynamic-public-ip=opendns` but as in the example above.
+
+Script also creates an empty C-Chain config file, located at `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can configure the C-Chain, as described in detail [here](../../references/chain-config-flags.md).
 
 ## Using a previous version
 
@@ -307,6 +373,22 @@ After the script has updated, run it again with the `--reinstall` config flag:
 ```
 
 This will delete the existing service file, and run the installer from scratch, like it was started for the first time. Note that the database and NodeID will be left intact.
+
+## Removing the node installation
+
+If you want to remove the node installation from the machine, you can run the script with the `--remove` option, like this:
+
+```bash
+./avalanchego-installer.sh --remove
+```
+
+This will remove the service, service definition file and node binaries. It will not remove the working directory, node ID definition or the node database. To remove those as well, you can type:
+
+```bash
+rm -rf ~/.avalanchego/
+```
+
+Please note that this is irreversible and the database and node ID will be deleted!
 
 ## What next?
 
