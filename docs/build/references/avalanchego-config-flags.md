@@ -286,6 +286,10 @@ Whether to color/highlight display logs. Default highlights when the output is a
 
 Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
 
+#### `--log-disable-display-plugin-logs` (boolean):
+
+Disables displaying plugin logs in stdout. Defaults to `false`.
+
 ## Network ID
 
 #### `--network-id` (string):
@@ -412,12 +416,17 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 
 It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
 
-| CLI Key                                   | JSON Key                   |
-| :---------------------------------------- | :------------------------- |
-| --consensus-accepted-frontier-gossip-size | gossipAcceptedFrontierSize |
-| --consensus-on-accept-gossip-size         | gossipOnAcceptSize         |
-| --consensus-app-gossip-non-validator-size | appGossipNonValidatorSize  |
-| --consensus-app-gossip-validator-size     | appGossipValidatorSize     |
+| CLI Key                                                 | JSON Key                               |
+| :------------------------------------------------------ | :------------------------------------- |
+| --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
+| --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
+| --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |
+| --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
+| --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
+| --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
+| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
+| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
+| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
 
 ## Version
 
@@ -431,19 +440,39 @@ The following options may affect the correctness of a node. Only power users sho
 
 ### Gossiping
 
-#### `--consensus-app-gossip-non-validator-size` (uint):
-
-Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
-
 #### `--consensus-app-gossip-validator-size` (uint):
 
 Number of validators to gossip an AppGossip message to. Defaults to `10`.
 
-#### `--consensus-accepted-frontier-gossip-size` (uint):
+#### `--consensus-app-gossip-non-validator-size` (uint):
+
+Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
+
+#### `--consensus-app-gossip-peer-size` (uint):
+
+Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
+
+#### `--consensus-accepted-frontier-gossip-validator-size` (uint):
+
+Number of validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+
+#### `--consensus-accepted-frontier-gossip-non-validator-size` (uint):
+
+Number of non-validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+
+#### `--consensus-accepted-frontier-gossip-peer-size` (uint):
 
 Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
 
-#### `--consensus-on-accept-gossip-size` (uint):
+#### `--consensus-on-accept-gossip-validator-size` (uint):
+
+Number of validators to gossip to each accepted container to. Defaults to `0`.
+
+#### `--consensus-on-accept-gossip-non-validator-size` (uint):
+
+Number of non-validators to gossip to each accepted container to. Defaults to `0`.
+
+#### `--consensus-on-accept-gossip-peer-size` (uint):
 
 Number of peers to gossip to each accepted container to. Defaults to `20`.
 
@@ -560,7 +589,7 @@ Snow consensus defines `k` as the number of validators that are sampled during e
 
 #### `--snow-quorum-size` (int):
 
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
+Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `15`.
 
 #### `--snow-virtuous-commit-threshold` (int):
 
@@ -568,7 +597,19 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 #### `--snow-rogue-commit-threshold` (int):
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
+Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
+
+### `snow-optimal-processing` (int):
+
+Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
+
+### `snow-max-processing` (int):
+
+Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
+
+### `snow-max-time-processing` (duration):
+
+Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
 
 ### Continuous Profiling
 

@@ -47,23 +47,20 @@ Building the node from source is recommended if you're a developer looking to ex
 
 #### **Source Code**
 
-If you want to build the node from source, you're first going to need to install Go 1.16.8 or later. Follow the instructions [here](https://golang.org/doc/install).
+If you want to build the node from source, you're first going to need to install Go 1.17.9 or later. Follow the instructions [here](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.16.8 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
-Download the AvalancheGo repository:
+Download the AvalancheGo repository into your `$GOPATH`:
 
 ```sh
+cd $GOPATH
+mkdir -p src/github.com/ava-labs
 git clone git@github.com:ava-labs/avalanchego.git
-```
-
-Note: This checkouts to master branch. For the latest stable version, checkout to the latest tag.
-
-Change to the `avalanchego` directory:
-
-```sh
 cd avalanchego
 ```
+
+Note: This checkouts to the master branch. For the latest stable version, checkout the latest tag.
 
 Build AvalancheGo:
 
@@ -71,7 +68,13 @@ Build AvalancheGo:
 ./scripts/build.sh
 ```
 
-The binary, named `avalanchego`, is in `avalanchego/build`.
+The binary, named `avalanchego`, is in `avalanchego/build`. If you've followed the instructions so far, this will be within your `$GOPATH` at: `$GOPATH/src/github.com/ava-labs/avalanchego/build`.
+
+To begin running AvalancheGo, run the following (hit Ctrl+C to stop your node):
+
+```sh
+./build/avalanchego
+```
 
 #### **Binary**
 
@@ -139,224 +142,8 @@ To be able to make API calls to your node from other machines, when starting up 
 
 To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
 
-### Create a Keystore User
+### What Next?
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore.md#keystorecreateuser):
+Now that you've launched your Avalanche node, what should you do next?
 
-```sh
-curl -X POST --data '{
-     "jsonrpc": "2.0",
-     "id": 1,
-     "method": "keystore.createUser",
-     "params": {
-         "username": "YOUR USERNAME HERE",
-         "password": "YOUR PASSWORD HERE"
-     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
-```
-
-The response should be:
-
-```json
-{
-     "jsonrpc":"2.0",
-     "result":{"success":true},
-     "id":1
-}
-```
-
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](../../avalanchego-apis/keystore.md) to see how.
-
-:::danger
-**You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
-:::
-
-### Create an Address
-
-Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
-
-To create a new address on the X-Chain, call [`avm.createAddress`](../../avalanchego-apis/x-chain.mdx#avmcreateaddress), a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx):
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :2,
-    "method" :"avm.createAddress",
-    "params" :{
-        "username":"YOUR USERNAME HERE",
-        "password":"YOUR PASSWORD HERE"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-If your node isn’t finished bootstrapping, this call will return status `503` with message `API call rejected because chain is not done bootstrapping`.
-
-Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID (or alias) is `X` (i.e., the X-Chain).
-
-The response should look like this:
-
-```json
-{
-    "jsonrpc":"2.0",
-    "id":2,
-    "result" :{
-        "address":"X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75"
-    }
-}
-```
-
-Your user now controls the address `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` on the X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
-
-### Send Funds From Avalanche Wallet to Your Node
-
-:::caution
-_**Note: the instructions below move real funds.**_
-:::
-
-Let’s move funds from the Avalanche Wallet to your node.
-
-Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, then `Mnemonic Key Phrase`. Enter your mnemonic phrase.
-
-Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
-
-![web wallet send tab](/img/web-wallet-send-tab(4)(4)(5)(5)(6)(7)(4)(1)(5).png)
-
-We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :3,
-    "method" :"avm.getBalance",
-    "params" :{
-        "address":"X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75",
-        "assetID"  :"AVAX"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric string.
-
-The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
-
-```json
-{
-    "jsonrpc":"2.0",
-    "id"     :3,
-    "result" :{
-        "balance":2000000,
-        "utxoIDs": [
-            {
-                "txID": "x6vR85YPNRf5phpLAEC7Sd6Tq2PXWRt3AAHAK4BpjxyjRyhtu",
-                "outputIndex": 0
-            }
-        ]
-    }
-}
-```
-
-### Send AVAX
-
-Now, let’s send some AVAX by making an API call to our node:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :5,
-    "method" :"avm.send",
-    "params" :{
-        "assetID"    :"AVAX",
-        "amount"     :1000,
-        "to"         :"X-avax1w4nt49gyv4e99ldqevy50l2kz55y9efghep0cs",
-        "changeAddr" :"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username"   :"YOUR USERNAME HERE",
-        "password"   :"YOUR PASSWORD HERE"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-`amount` specifies the number of nAVAX to send.
-
-If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
-
-In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below.
-
-:::info
-
-[Transaction Fees](../../../learn/platform-overview/transaction-fees.md)
-
-:::
-
-When you send this request, the node will authenticate you using your username and password. Then, it will look through all the [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controlled by your user until it finds enough AVAX to satisfy the request.
-
-The response contains the transaction’s ID. It will be different for every invocation of `send`.
-
-```json
-{
-    "jsonrpc":"2.0",
-    "id"     :5,
-    "result" :{
-        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD",
-        "changeAddr" :"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
-}
-```
-
-#### Checking the Transaction Status
-
-This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avmgettxstatus):
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :6,
-    "method" :"avm.getTxStatus",
-    "params" :{
-        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-The response should indicate that the transaction was accepted:
-
-```json
-{
-    "jsonrpc":"2.0",
-    "id"     :6,
-    "result" :{
-        "status":"Accepted"
-    }
-}
-```
-
-You might also see that `status` is `Processing` if the network has not yet finalized the transaction.
-
-Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :7,
-    "method" :"avm.getBalance",
-    "params" :{
-        "address":"X-avax1w4nt49gyv4e99ldqevy50l2kz55y9efghep0cs",
-        "assetID"  :"AVAX"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-The response should be:
-
-```json
-{
-    "jsonrpc":"2.0",
-    "id"     :7,
-    "result" :{
-        "balance":1000
-    }
-}
-```
-
-In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` to see that AVAX we sent was deducted from its balance, as well as the transaction fee.
-
-
+Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](add-a-validator.md) to take it a step further.
