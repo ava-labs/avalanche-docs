@@ -26,6 +26,7 @@
 /build/tutorials/platform/subnet/create-custom-blockchain/ /build/tutorials/platform/subnets/create-custom-blockchain 301
 /build/tutorials/platform/subnet/subnet-faq/ /build/tutorials/platform/subnets/subnet-faq 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
+/build/tutorials/platform/deploying-cross-chain-evm-bridge /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
 /v/v1.0.4/build/apis /build/avalanchego-apis  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
