@@ -3,14 +3,14 @@
 ## Introduction
 
 This tutorial assumes that:
-- A [Subnet](../platform/subnets/create-a-subnet.md) has been created
-- An [EVM blockchain](../platform/subnets/create-evm-blockchain.md) has been created
-- Your Node is currently [validating](../platform/subnets/create-a-subnet.md#adding-subnet-validators) your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain.md#build-genesis))
+- A [Subnet](create-a-subnet.md) has been created
+- An [EVM blockchain](create-evm-blockchain.md) has been created
+- Your Node is currently [validating](create-a-subnet.md#adding-subnet-validators) your target Subnet
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](create-evm-blockchain.md#build-genesis))
 
 ## Step 1: Setting up MetaMask
 
-#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](../platform/subnets/create-evm-blockchain.md#connect-with-metamask)
+#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](create-evm-blockchain.md#connect-with-metamask)
 
 * **``Network Name``**: Custom Subnet EVM
 * **``New RPC URL``**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
@@ -84,4 +84,4 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 ## Other Tools
 
-You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](./using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](../../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
