@@ -104,3 +104,9 @@ cd subnet-evm
 ./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
+
+## Appendices
+
+### Websocket Support on DFK Subnet
+* Production: wss://subnets.avax.network/defi-kingdoms/dfk-chain/ws
+* Testnet: wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws

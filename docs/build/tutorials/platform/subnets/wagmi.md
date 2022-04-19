@@ -32,3 +32,7 @@ We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) t
 * Chain ID: 11111
 * Symbol: WGM
 * Explorer: https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer
+
+## WebSocket Support
+
+* URL: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
