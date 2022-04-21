@@ -41,25 +41,19 @@ const sidebars = {
         'learn/setup-your-ledger-nano-s-with-avalanche',
         {
           type: 'link',
-          label: 'Blockchain Basic', // The link label
-          href: 'https://support.avalabs.org/en/collections/2353492-blockchain-basics', // The external URL
+          label: 'FAQ', 
+          href: 'https://support.avax.network/en/', 
         },
         {
           type: 'link',
-          label: 'FAQ', // The link label
-          href: 'https://support.avax.network/en/', // The external URL
-        },
-
-        {
-          type: 'link',
-          label: 'Forum', // The link label
-          href: 'https://forum.avax.network/', // The external URL
+          label: 'Whitepapers', 
+          href: 'https://www.avalabs.org/whitepapers', 
         },
         {
           type: 'link',
-          label: 'Ecosystem', // The link label
-          href: 'https://ecosystem.avax.network/', // The external URL
-        },
+          label: 'Audits', 
+          href: 'https://github.com/ava-labs/audits', 
+        }
       ],
     },
     {
@@ -75,8 +69,8 @@ const sidebars = {
             'build/release-notes/avalanchego',
             {
               type: 'link',
-              label: 'Avalanche Notify', // The link label
-              href: 'https://notify.avax.network/', // The external URL
+              label: 'Avalanche Notify', 
+              href: 'https://notify.avax.network/', 
             },
           ],
         },
@@ -123,18 +117,18 @@ const sidebars = {
                 },
                 {
                   type: 'link',
-                  label: 'Maintain an Avalanche Node', // The link label
-                  href: 'https://youtu.be/o4Fww-sHoaQ', // The external URL
+                  label: 'Maintain an Avalanche Node', 
+                  href: 'https://youtu.be/o4Fww-sHoaQ', 
                 },
                 {
                   type: 'link',
-                  label: 'Run an Avalanche Node and Become a Validator', // The link label
-                  href: 'https://youtu.be/ZyQPeSSCbYU', // The external URL
+                  label: 'Run an Avalanche Node and Become a Validator', 
+                  href: 'https://youtu.be/ZyQPeSSCbYU', 
                 },
                 {
                   type: 'link',
-                  label: 'Run an Avalanche Node and Stake with the Avalanche Wallet', // The link label
-                  href: 'https://youtu.be/ZyQPeSSCbYU', // The external URL
+                  label: 'Run an Avalanche Node and Stake with the Avalanche Wallet', 
+                  href: 'https://youtu.be/ZyQPeSSCbYU', 
                 },
               ],
             },
@@ -224,16 +218,6 @@ const sidebars = {
             },
           ],
         },
-        {
-          type: 'link',
-          label: 'Whitepapers', // The link label
-          href: 'https://www.avalabs.org/whitepapers', // The external URL
-        },
-        {
-          type: 'link',
-          label: 'Audits', // The link label
-          href: 'https://github.com/ava-labs/audits', // The external URL
-        }
       ],
     },
   ],
