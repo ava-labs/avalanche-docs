@@ -233,9 +233,10 @@ const sidebars = {
           type: 'link',
           label: 'Audits', // The link label
           href: 'https://github.com/ava-labs/audits', // The external URL
-        }
+        },
       ],
     },
+    'disclaimer'
   ],
 
 };
