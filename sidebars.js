@@ -40,11 +40,6 @@ const sidebars = {
         'learn/avalanche-bridge-faq',
         {
           type: 'link',
-          label: 'FAQ', 
-          href: 'https://support.avax.network/en/', 
-        },
-        {
-          type: 'link',
           label: 'Whitepapers', 
           href: 'https://www.avalabs.org/whitepapers', 
         },
@@ -218,6 +213,11 @@ const sidebars = {
           ],
         },
       ],
+    },
+    {
+      type: 'link',
+      label: 'Product Support', 
+      href: 'https://support.avax.network/en/', 
     },
   ],
 
