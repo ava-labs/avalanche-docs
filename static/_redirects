@@ -21,6 +21,8 @@
 /build/avalanchego-apis/metrics-api/ /build/avalanchego-apis/metrics 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
+/learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
+/learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /v/v1.0.4/build/apis /build/avalanchego-apis  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301

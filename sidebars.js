@@ -38,7 +38,6 @@ const sidebars = {
           ],
         },
         'learn/avalanche-bridge-faq',
-        'learn/setup-your-ledger-nano-s-with-avalanche',
         {
           type: 'link',
           label: 'FAQ', 

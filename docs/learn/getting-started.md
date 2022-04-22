@@ -22,7 +22,7 @@ An _address_ can hold a balance of cryptocurrencies. A _wallet_ controls a set o
 
 You can access your wallet on the [Avalanche Wallet](https://wallet.avax.network/) website. You can follow [this](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) guide to set up a new own wallet.
 
-You can and should use a [hardware Ledger](./setup-your-ledger-nano-s-with-avalanche.md) to log into your wallet. **Using a hardware wallet is the most secure way of accessing your tokens** because your private keys and the passphrase never leave the device. If you have an amount of tokens you would not be comfortable losing, it is strongly advised to invest in a hardware wallet.
+You can and should use a [hardware Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche) to log into your wallet. **Using a hardware wallet is the most secure way of accessing your tokens** because your private keys and the passphrase never leave the device. If you have an amount of tokens you would not be comfortable losing, it is strongly advised to invest in a hardware wallet.
 
 Once you have your wallet, you may want to send your AVAX from an exchange to your wallet. See [here](https://support.avax.network/en/articles/5315157-how-to-send-avax-from-an-exchange-to-the-avalanche-wallet) for a guide on doing so.
 
