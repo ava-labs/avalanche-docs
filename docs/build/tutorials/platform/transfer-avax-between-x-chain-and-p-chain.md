@@ -6,7 +6,7 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 ## Requirements
 
-You've completed [Getting Started](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md).
+You've completed [Getting Started](../nodes-and-staking/build/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md).
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
@@ -296,5 +296,5 @@ Just as before, we can call [`avm.getBalance`](../../avalanchego/avalanchego-api
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
-Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/validate/add-a-validator.md) on the Primary Network.
 

@@ -15,7 +15,7 @@ In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a f
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../nodes-and-staking/build/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 ## Create the NFT Family
 

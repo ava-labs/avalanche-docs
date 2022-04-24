@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Platform Chain (P-Chain) API
 
-This API allows clients to interact with the [P-Chain](../../../learn/platform-overview/README.md#platform-chain-p-chain), which maintains Avalanche’s [validator](../../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
+This API allows clients to interact with the [P-Chain](../../../learn/platform-overview/README.md#platform-chain-p-chain), which maintains Avalanche’s [validator](../../../build/tutorials/nodes-and-staking/validate/staking.md#validators) set and handles blockchain creation.
 
 ## Endpoint
 
@@ -32,7 +32,7 @@ Note that once you issue the transaction to add a node as a delegator, there is 
 
 :::info
 
-[Staking](../../../learn/platform-overview/staking.md)
+[Staking](../../../build/tutorials/nodes-and-staking/validate/staking.md)
 
 :::
 
@@ -117,7 +117,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 :::info
 
-[Staking](../../../learn/platform-overview/staking.md)
+[Staking](../../../build/tutorials/nodes-and-staking/validate/staking.md)
 
 :::
 
@@ -1414,7 +1414,7 @@ platform.getSubnets(
 * `id` is the Subnet’s ID.  
 * `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
 
-See [here](../../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
+See [here](../../tutorials/nodes-and-staking/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
 #### **Example Call**
 

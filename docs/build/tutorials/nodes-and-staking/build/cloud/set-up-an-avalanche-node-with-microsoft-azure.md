@@ -1,6 +1,6 @@
 ---
 description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here. 
-sidebar_position: 11
+sidebar_position: 2
 ---
 
 # Run an Avalanche Node with Microsoft Azure
@@ -259,7 +259,7 @@ This will make our instance up to date with the latest security patches for our 
 
 ### Set up the Avalanche Node {#5688}
 
-Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the "IPv4 Public IP" copied from the Azure Portal we set up earlier.
+Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](../set-up-node-with-installer.md) tutorial which automates the installation process. You will need the "IPv4 Public IP" copied from the Azure Portal we set up earlier.
 
 Once the installation is complete, our node should now be bootstrapping! We can run the following command to take a peek at the latest status of the avalanchego node:
 

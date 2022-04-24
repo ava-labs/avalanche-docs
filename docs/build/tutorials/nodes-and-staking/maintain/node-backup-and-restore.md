@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Node Backup and Restore
@@ -18,7 +18,7 @@ The installation itself can be easily recreated by installing the node on a new 
 
 ## NodeID
 
-NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../references/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
+NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../../references/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
 
 * `staker.crt`
 * `staker.key`
@@ -26,7 +26,7 @@ NodeID is a unique identifier that differentiates your node from all the other p
 In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All we need to do to recreate the node on another machine is to run a new installation with those same two files.
 
 :::caution
-If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../avalanchego/avalanchego-apis/keystore.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it.
+If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../../avalanchego/avalanchego-apis/keystore.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it.
 :::
 
 ### Backup
@@ -49,7 +49,7 @@ On a default Linux installation, the path to them will be `/home/USERNAME/.avala
 
 `scp` is a 'secure copy' command line program, available built-in on Linux and MacOS computers. There is also a Windows version, `pscp`, as part of the [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) package. If using `pscp`, in the following commands replace each usage of `scp` with `pscp -scp`.
 
-To copy the files from the node, you will need to be able to remotely log into the machine. You can use account password, but the secure and recommended way is to use the SSH keys. The procedure for acquiring and setting up SSH keys is highly dependent on your cloud provider and machine configuration. You can refer to our [Amazon Web Services](setting-up-an-avalanche-node-with-amazon-web-services-aws.md) and [Microsoft Azure](set-up-an-avalanche-node-with-microsoft-azure.md) setup guides for those providers. Other providers will have similar procedures.
+To copy the files from the node, you will need to be able to remotely log into the machine. You can use account password, but the secure and recommended way is to use the SSH keys. The procedure for acquiring and setting up SSH keys is highly dependent on your cloud provider and machine configuration. You can refer to our [Amazon Web Services](../build/cloud/setting-up-an-avalanche-node-with-amazon-web-services-aws.md) and [Microsoft Azure](../build/cloud/set-up-an-avalanche-node-with-microsoft-azure.md) setup guides for those providers. Other providers will have similar procedures.
 
 When you have means of remote login into the machine, you can copy the files over with the following command:
 
@@ -69,7 +69,7 @@ Once executed, this command will create `avalanche_backup` directory in you home
 
 To restore your node from a backup, we need to do the reverse: restore `staker.key` and `staker.crt` from the backup to the working directory of the node.
 
-First, we need to do the usual [installation](set-up-node-with-installer.md) of the node. This will create a new NodeID, which we need to replace. When the node is installed correctly, log into the machine where the node is running and stop it:
+First, we need to do the usual [installation](../build/set-up-node-with-installer.md) of the node. This will create a new NodeID, which we need to replace. When the node is installed correctly, log into the machine where the node is running and stop it:
 
 ```text
 sudo systemctl stop avalanchego
@@ -163,7 +163,7 @@ Once executed, this command will create `avalanche_db_backup.zip` directory in y
 _This tutorial assumes you have already completed "Database Backup" and have
 a backup at ~/avalanche_db_backup.zip._
 
-First, we need to do the usual [installation](set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
+First, we need to do the usual [installation](../build/set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
 
 ```
 sudo systemctl stop avalanchego

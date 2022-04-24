@@ -12,4 +12,5 @@
 | [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
 | [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
 | [**Integration with C-Chain**](integrate-exchange-with-avalanche.md) | Guidelines for exchange integration with Ethereum-compatible C-Chain |
+| [**Run a Five Node Network with Avash**](run-a-five-node-network-with-avash.md) | Run a Five Node Network with Avash |
 

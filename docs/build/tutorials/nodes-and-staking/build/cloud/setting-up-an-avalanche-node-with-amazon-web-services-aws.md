@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 1
 description: This tutorial will guide you through setting up an Avalanche node on Amazon Web Services (AWS). Cloud services like AWS are a good way to ensure that your node is highly secure, available, and accessible.
 ---
 
@@ -197,7 +197,7 @@ This also reboots the instance. Wait 5 minutes, then log in again by running thi
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
+You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](../set-up-node-with-installer.md) tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
 
 Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
 
@@ -244,7 +244,7 @@ The response contains the node ID.
 
 In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
 
-AvalancheGo has other APIs, such as the [Health API](../../avalanchego/avalanchego-apis/health.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` (created during the installation process) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+AvalancheGo has other APIs, such as the [Health API](../../../../avalanchego/avalanchego-apis/health.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` (created during the installation process) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
@@ -287,5 +287,5 @@ If you need to increase the volume size, follow these instructions from AWS:
 
 ## Wrap Up
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](../../maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 

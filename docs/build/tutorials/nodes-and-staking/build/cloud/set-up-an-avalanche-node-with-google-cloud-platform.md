@@ -1,6 +1,6 @@
 ---
 description: 'GCP Validator Provisioning'
-sidebar_position: 14
+sidebar_position: 3
 ---
 
 # Run an Avalanche Node with Google Cloud Platform

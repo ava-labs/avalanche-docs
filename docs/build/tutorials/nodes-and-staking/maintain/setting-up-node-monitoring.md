@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 ---
 
 # Monitor an Avalanche Node
@@ -110,7 +110,7 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z ca
 Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 :::warning
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect!
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](../build/cloud/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect!
 :::
 
 If everything is ok, let's move on.

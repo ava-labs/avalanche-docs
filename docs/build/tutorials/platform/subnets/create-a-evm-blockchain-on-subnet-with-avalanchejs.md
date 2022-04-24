@@ -36,7 +36,7 @@ cd avalanchego
 
 ### Build Binary
 
-Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../../nodes-and-staking/run-avalanche-node.md).
+Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../../nodes-and-staking/build/run-avalanche-node.md).
 
 ```bash
 ./scripts/build.sh

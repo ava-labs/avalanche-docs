@@ -10,7 +10,7 @@ Additionally, Ava Labs maintains an implementation of the [Rosetta API](https://
 
 ### Running an Avalanche node
 
-If you want to build your node form source or include it in a docker image, reference the [AvalancheGo GitHub repository](https://github.com/ava-labs/avalanchego). To quickly get up and running, you can use the [node installation script](../nodes-and-staking/set-up-node-with-installer.md) that automates installing and updating avalanchego node as a systemd service on Linux, using prebuilt binaries.
+If you want to build your node form source or include it in a docker image, reference the [AvalancheGo GitHub repository](https://github.com/ava-labs/avalanchego). To quickly get up and running, you can use the [node installation script](../nodes-and-staking/build/set-up-node-with-installer.md) that automates installing and updating avalanchego node as a systemd service on Linux, using prebuilt binaries.
 
 ### Configuring an Avalanche node
 

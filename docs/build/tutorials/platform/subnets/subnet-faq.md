@@ -23,7 +23,7 @@ A blockchain validator is someone who is responsible for verifying transactions 
 A subnet, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A validator may be a member of many subnets to provide its validation service. 
 
 ### How do I recruit/create validators for a subnet?
-If you have resources, you can create validators by staking AVAX tokens by following [this](../../../../learn/platform-overview/staking.md#validators).
+If you have resources, you can create validators by staking AVAX tokens by following [this](../../../../build/tutorials/nodes-and-staking/validate/staking.md#validators).
 
 If you are resource bound, you can incentivize other validators to be part of your subnet. At this early stage of subnet development, there is no marketplace for validators to advertise their nodes for subnet yet. It is up to each subnet owner to reach out and incentivize validators to validate their subnet. 
 

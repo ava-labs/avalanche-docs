@@ -14,9 +14,9 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Prerequisites
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../nodes-and-staking/run-avalanche-node.md) tutorial.
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../nodes-and-staking/build/run-avalanche-node.md) tutorial.
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../../nodes-and-staking/validate/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../../nodes-and-staking/validate/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Virtual Machine
 
@@ -40,7 +40,7 @@ Every blockchain is validated by a [subnet](README.md). Before you can create a 
 The subnet needs validators in it to, well, validate blockchains.
 
 :::info
-[Add a node to the Validator Set](../../nodes-and-staking/add-a-validator.md)
+[Add a node to the Validator Set](../../nodes-and-staking/validate/add-a-validator.md)
 :::
 
 
@@ -188,13 +188,13 @@ curl -X POST --data '{
 
 If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
 
-More information can be found in the [Adding a Subnet Validator](../../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
+More information can be found in the [Adding a Subnet Validator](../../nodes-and-staking/validate/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
 You can interact with this new instance of the VM. The API endpoint of the blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. The last part in the endpoint is the blockchain ID, which is `sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. Every blockchain ID is different from each other, so this is not a static ID. Your blockchain ID and the endpoint can be different.
 
-You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](https://docs.avax.network/build/avalanchego/avalanchego-apis/admin/#adminaliaschain)
+You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](../../../../build/avalanchego/avalanchego-apis/admin/#adminaliaschain)
 
 ### Verify Genesis Block
 
