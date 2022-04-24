@@ -84,7 +84,7 @@ You do not need to have AVAX funds on your validating node. In fact, it's best p
 
 #### Monitoring {#monitoring}
 
-Follow this [tutorial](../../../../build/tutorials/nodes-and-staking/maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
+Follow this [tutorial](../../../../build/tutorials/avalanchego-node/maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
 
 #### Validating In Fuji
 

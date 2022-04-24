@@ -10,7 +10,7 @@ This section provides documents on how to build and maintain an AvalancheGo node
 |  |  |
 | :--- | :--- |
 | [**Run an Avalanche Node Using Install Script**](./build/set-up-node-with-installer.md) | How to install and run AvalancheGo |
-| [**Run an Avalanche Node Manually**](./build/run-avalanche-node.md) | How to install without the installer script |
+| [**Run an Avalanche Node Manually**](./build/run-avalanche-node-manually.md) | How to install without the installer script |
 | [**Set Up an Avalanche Node with Amazon Web Services (AWS)**](./build/cloud/setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS |
 | [**Set Up an Avalanche Node with Microsoft Azure**](./build/cloud/set-up-an-avalanche-node-with-microsoft-azure.md) | Create a node that runs on Microsoft Azure |
 | [**Set Up an Avalanche Node with Google GCP**](./build/cloud/set-up-an-avalanche-node-with-google-cloud-platform.md) | Create a node that runs on Google GCP |

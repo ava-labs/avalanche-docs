@@ -136,7 +136,7 @@ install_prometheus() {
   echo "You can also check Prometheus web interface, available on http://your-node-host-ip:9090/"
   echo
   echo "If everything looks ok you can now continue with installing Grafana. Refer to the tutorial:"
-  echo "https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-node-monitoring#grafana"
+  echo "https://docs.avax.network/build/tutorials/avalanchego-node/setting-up-node-monitoring#grafana"
   echo
   echo "Reach out to us on https://chat.avax.network if you're having problems."
 
@@ -168,7 +168,7 @@ install_grafana() {
   echo "You can also check Grafana web interface, available on http://your-node-host-ip:3000/"
   echo
   echo "Now you need to set up Prometheus as a data source for Grafana. Refer to the tutorial:"
-  echo "https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-node-monitoring#exporter"
+  echo "https://docs.avax.network/build/tutorials/avalanchego-node/setting-up-node-monitoring#exporter"
   echo
   echo "Reach out to us on https://chat.avax.network if you're having problems."
 
@@ -261,7 +261,7 @@ install_exporter() {
   echo "sudo systemctl status node_exporter"
   echo
   echo "Now you need to set up Grafana dashboards next. Refer to the tutorial:"
-  echo "https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-node-monitoring#dashboards"
+  echo "https://docs.avax.network/build/tutorials/avalanchego-node/setting-up-node-monitoring#dashboards"
   echo
   echo "Reach out to us on https://chat.avax.network if you're having problems."
 }
@@ -275,7 +275,7 @@ install_dashboards() {
     echo "Node monitoring installation not found!"
     echo
     echo "Please refer to the tutorial:"
-    echo "https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-node-monitoring"
+    echo "https://docs.avax.network/build/tutorials/avalanchego-node/setting-up-node-monitoring"
     echo
     usage
     exit 0

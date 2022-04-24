@@ -16,7 +16,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../build/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -52,7 +52,7 @@ Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `
 
 ![Web wallet earn tab](/img/web-wallet-earn-tab.png)
 
-Fill out the staking parameters. They are explained in more detail in [this doc](../../../../build/tutorials/nodes-and-staking/validate/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+Fill out the staking parameters. They are explained in more detail in [this doc](../../../../build/tutorials/avalanchego-node/validate/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
 
 ![Earn validate](/img/earn-validate.png)
 
