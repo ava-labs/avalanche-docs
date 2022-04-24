@@ -99,7 +99,7 @@ This could cause automatic constructor verification failures. If you receive err
 
 ### Solidity Constructors
 
-Constructors and inherited constructors can can cause problems verifying the constructor arguments.
+Constructors and inherited constructors can cause problems verifying the constructor arguments.
 
 example:
 
