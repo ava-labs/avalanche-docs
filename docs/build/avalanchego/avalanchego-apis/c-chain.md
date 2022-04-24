@@ -34,7 +34,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 :::info
-On the [public api node](../public-api.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
+On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
 
@@ -50,7 +50,7 @@ For example, to interact with the C-Chain's Ethereum APIs via websocket on local
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-Note: on localhost, use `ws://`. When using the [Public API](../public-api.md) or another host that supports encryption, use `wss://`.
+Note: on localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
 
 To interact with other instances of the EVM via the websocket endpoint:
 
@@ -77,7 +77,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 :::info
 
-Note: For batched requests on the [public api node](../public-api.md) , the maximum number of items is 40. We are working on to support a larger batch size. 
+Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size. 
 
 :::
 

@@ -62,7 +62,7 @@ const sidebars = {
           items: [
             'build/avalanchego/README',
             'build/avalanchego/release-notes',
-            'build/avalanchego/public-api',
+            'build/avalanchego/public-api-server',
             {
               type: 'category',
               label: 'AvalancheGo APIs',

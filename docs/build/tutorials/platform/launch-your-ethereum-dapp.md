@@ -53,7 +53,7 @@ Instead of proxying network operations through MetaMask, you can use the public 
 
 The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
-For more information, see [documentation](../../avalanchego/public-api.md).
+For more information, see [documentation](../../avalanchego/public-api-server.md).
 
 However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
 

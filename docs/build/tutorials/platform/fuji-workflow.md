@@ -221,7 +221,7 @@ The Avalanche Explorer allows you to explore the network on [Mainnet](https://ex
 
 ### Public API
 
-See [here.](https://docs.avax.network/build/tools/public-api)
+See [here.](https://docs.avax.network/build/tools/public-api-server)
 
 ### AvalancheJS Examples
 

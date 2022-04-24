@@ -1,8 +1,8 @@
 # 04/24/2022
 /build/release-notes/avalanchego/ /build/avalanchego/release-notes 301
 /build/release-notes/avalanchego /build/avalanchego/release-notes 301
-/build/tools/public-api/ /build/avalanchego/public-api 301
-/build/tools/public-api /build/avalanchego/public-api 301
+/build/tools/public-api/ /build/avalanchego/public-api-server 301
+/build/tools/public-api /build/avalanchego/public-api-server 301
 /build/tools/postman-avalanche-collection/ /build/avalanchego/postman-avalanche-collection 301
 /build/tools/postman-avalanche-collection  /build/avalanchego/postman-avalanche-collection 301
 /build/avalanchego-apis/ /build/avalanchego/avalanchego-apis 301
