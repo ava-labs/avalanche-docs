@@ -60,7 +60,8 @@ const sidebars = {
           type: 'category',
           label: 'AvalancheGo Server Software',
           items: [
-            'build/avalanchego/avalanchego',
+            'build/avalanchego/README',
+            'build/avalanchego/release-notes',
             'build/avalanchego/public-api',
             {
               type: 'category',

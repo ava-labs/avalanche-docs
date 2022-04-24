@@ -1,9 +1,5 @@
 # Overview
 
-[**Public API**](../avalanchego/public-api.md): Learn about the public API server you can use to interact with the Avalanche Network.
-
-[**Postman Collection**](../avalanchego/postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
-
 [**AvalancheJS**](avalanchejs/README.md) is Avalanche's JavaScript library written in TypesScript which enables browser and Node.js clients to make API calls to Avalanche nodes. It provides a wide suite of tools to make asset creation, balance management, and funds transfer easy. AvalancheJS has tools for managing the node itself, accessing the Admin, Keystore, and Platform APIs built into Avalanche nodes.
 
 [**Avalanche Wallet SDK**](avalanche-wallet-sdk/README.md) is a TypeScript library for managing wallets.
