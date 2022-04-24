@@ -1,3 +1,42 @@
+# 04/24/2022
+/build/release-notes/avalanchego/ /build/avalanchego/release-notes 301
+/build/release-notes/avalanchego /build/avalanchego/release-notes 301
+/build/tools/public-api/ /build/avalanchego/public-api 301
+/build/tools/public-api /build/avalanchego/public-api 301
+/build/tools/postman-avalanche-collection/ /build/avalanchego/postman-avalanche-collection 301
+/build/tools/postman-avalanche-collection  /build/avalanchego/postman-avalanche-collection 301
+/build/avalanchego-apis/ /build/avalanchego/avalanchego-apis 301
+/build/avalanchego-apis /build/avalanchego/avalanchego-apis 301
+/build/avalanchego-apis/issuing-api-calls/ /build/avalanchego/avalanchego-apis/issuing-api-calls 301
+/build/avalanchego-apis/issuing-api-calls /build/avalanchego/avalanchego-apis/issuing-api-calls 301
+/build/avalanchego-apis/p-chain/ /build/avalanchego/avalanchego-apis/p-chain 301
+/build/avalanchego-apis/p-chain /build/avalanchego/avalanchego-apis/p-chain 301
+/build/avalanchego-apis/c-chain/ /build/avalanchego/avalanchego-apis/c-chain 301
+/build/avalanchego-apis/c-chain /build/avalanchego/avalanchego-apis/c-chain 301
+/build/avalanchego-apis/x-chain/ /build/avalanchego/avalanchego-apis/x-chain 301
+/build/avalanchego-apis/x-chain /build/avalanchego/avalanchego-apis/x-chain 301
+/build/avalanchego-apis/deprecated-api-calls/ /build/avalanchego/avalanchego-apis/deprecated-api-calls 301
+/build/avalanchego-apis/deprecated-api-calls /build/avalanchego/avalanchego-apis/deprecated-api-calls 301
+/build/avalanchego-apis/admin/ /build/avalanchego/avalanchego-apis/admin 301
+/build/avalanchego-apis/admin /build/avalanchego/avalanchego-apis/admin 301
+/build/avalanchego-apis/auth/ /build/avalanchego/avalanchego-apis/auth 301
+/build/avalanchego-apis/auth  /build/avalanchego/avalanchego-apis/auth 301
+/build/avalanchego-apis/health/ /build/avalanchego/avalanchego-apis/health 301
+/build/avalanchego-apis/health /build/avalanchego/avalanchego-apis/health 301
+/build/avalanchego-apis/index-api/ /build/avalanchego/avalanchego-apis/index-api 301
+/build/avalanchego-apis/index-api /build/avalanchego/avalanchego-apis/index-api 301
+/build/avalanchego-apis/info/ /build/avalanchego/avalanchego-apis/info 301
+/build/avalanchego-apis/info /build/avalanchego/avalanchego-apis/info 301
+/build/avalanchego-apis/ipc/ /build/avalanchego/avalanchego-apis/ipc 301
+/build/avalanchego-apis/ipc /build/avalanchego/avalanchego-apis/ipc 301
+/build/avalanchego-apis/keystore/ /build/avalanchego/avalanchego-apis/keystore 301
+/build/avalanchego-apis/keystore /build/avalanchego/avalanchego-apis/keystore 301
+/build/avalanchego-apis/metrics/ /build/avalanchego/avalanchego-apis/metrics 301
+/build/avalanchego-apis/metrics /build/avalanchego/avalanchego-apis/metrics 301
+# 04/21/2022
+/learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
+/learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
+# since the begining
 /learn /learn/getting-started/ 301
 /learn/ /learn/getting-started/ 301
 /learn/platf /learn/platform-overview  301
@@ -21,8 +60,6 @@
 /build/avalanchego-apis/metrics-api/ /build/avalanchego-apis/metrics 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
-/learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
-/learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /v/v1.0.4/build/apis /build/avalanchego/avalanchego-apis  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
