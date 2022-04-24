@@ -152,21 +152,6 @@ const sidebars = {
                     },
                   ],
                 },
-                {
-                  type: 'link',
-                  label: 'Maintain an Avalanche Node', 
-                  href: 'https://youtu.be/o4Fww-sHoaQ', 
-                },
-                {
-                  type: 'link',
-                  label: 'Run an Avalanche Node and Become a Validator', 
-                  href: 'https://youtu.be/ZyQPeSSCbYU', 
-                },
-                {
-                  type: 'link',
-                  label: 'Run an Avalanche Node and Stake with the Avalanche Wallet', 
-                  href: 'https://youtu.be/ZyQPeSSCbYU', 
-                },
               ],
             },
             {
