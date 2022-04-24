@@ -121,7 +121,7 @@ When you want to tear down the network, run `exit` to exit Avash.
 
 ### Verifying Nodes are Connected
 
-As a sanity check, we can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../../avalanchego-apis/info.md#infopeers).
+As a sanity check, we can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../../avalanchego/avalanchego-apis/info.md#infopeers).
 
 ```sh
 curl -X POST --data '{
@@ -181,7 +181,7 @@ curl -X POST --data '{
 
 ### Getting AVAX {#getting-avax}
 
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain private key that you can import in order to get AVAX. The private key is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you [create a keystore user](../../avalanchego-apis/keystore.md#keystorecreateuser) on a node, you can [import this key](../../avalanchego-apis/x-chain.mdx), and the funds it holds, with:
+When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain private key that you can import in order to get AVAX. The private key is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you [create a keystore user](../../avalanchego/avalanchego-apis/keystore.md#keystorecreateuser) on a node, you can [import this key](../../avalanchego/avalanchego-apis/x-chain.mdx), and the funds it holds, with:
 
 ```sh
 curl --location --request POST 'localhost:9650/ext/platform' \

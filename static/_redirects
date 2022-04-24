@@ -23,14 +23,14 @@
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge 301
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
-/v/v1.0.4/build/apis /build/avalanchego-apis  301
+/v/v1.0.4/build/apis /build/avalanchego/avalanchego-apis  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.0.4/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /build/tutorials/smart-digital-assets/create-a-fix-cap-asset  301
 /v/v1.1.1/build/getting-started /learn/getting-started  301
 /v/v1.1.1/build/tutorials/nodes-and-staking /build/tutorials/nodes-and-staking  301
 /v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
-/v1.0/en/api/keystore/ /build/avalanchego-apis/keystore-api  301
+/v1.0/en/api/keystore/ /build/avalanchego/avalanchego-apis/keystore-api  301
 /v1.0/en/references/command-line-interface/ /build/references/command-line-interface  301
 /v1.0/en/tools/avalanche.js/api/classes/utils_base58.base58/ /build/tools/avalanchejs/api  301
 /v1.0/en/tools/avalanchejs/api/classes/api_avm_keychain.keypair/ /build/tools/avalanchejs/api  301

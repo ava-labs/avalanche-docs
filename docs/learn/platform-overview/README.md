@@ -75,18 +75,18 @@ The **X-Chain** acts as a decentralized platform for creating and trading digita
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../build/avalanchego-apis/x-chain.mdx) allows clients to create and trade assets on the X-Chain and other instances of the AVM. See [this](../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md) for more details.
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../build/avalanchego/avalanchego-apis/x-chain.mdx) allows clients to create and trade assets on the X-Chain and other instances of the AVM. See [this](../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md) for more details.
 
 
 ## Platform Chain (P-Chain)
 
 The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
 
-The [P-Chain API](../../build/avalanchego-apis/p-chain.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+The [P-Chain API](../../build/avalanchego/avalanchego-apis/p-chain.md) allows clients to create subnets, add validators to subnets, and create blockchains.
 
 ## Contract Chain (C-Chain)
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/c-chain.md).
+The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego/avalanchego-apis/c-chain.md).
 
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 

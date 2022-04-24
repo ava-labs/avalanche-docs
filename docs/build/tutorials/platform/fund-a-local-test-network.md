@@ -36,7 +36,7 @@ Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLi
 
 ## X-Chain
 
-Import `ewoq` into the [X-Chain](../../avalanchego-apis/x-chain.mdx).
+Import `ewoq` into the [X-Chain](../../avalanchego/avalanchego-apis/x-chain.mdx).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
@@ -95,7 +95,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 
 ## C-Chain
 
-Import `ewoq` into the [C-Chain](../../avalanchego-apis/c-chain.md).
+Import `ewoq` into the [C-Chain](../../avalanchego/avalanchego-apis/c-chain.md).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
@@ -159,7 +159,7 @@ To see this account on Metamask, follow these steps:
 
 ## P-Chain
 
-Import `ewoq` into the [P-Chain](../../avalanchego-apis/p-chain.md).
+Import `ewoq` into the [P-Chain](../../avalanchego/avalanchego-apis/p-chain.md).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \

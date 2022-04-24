@@ -66,7 +66,7 @@ Swap the source and destination chains by selecting them from the **Source** and
 
 ## Transferring from the P-Chain to C-Chain with API Calls
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the P-Chain, and user credentials [created](../../avalanchego-apis/keystore.md#keystorecreateuser) and stored in the node's keystore.
+If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the P-Chain, and user credentials [created](../../avalanchego/avalanchego-apis/keystore.md#keystorecreateuser) and stored in the node's keystore.
 
 All the example API calls below assume the node is running locally (that is, listening on `127.0.0.1`). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
@@ -141,7 +141,7 @@ Now we have everything we need to transfer the tokens.
 
 ### Transfer from the P-Chain to C-Chain
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`platform.exportAVAX`](../../avalanchego-apis/p-chain.md#platformexportavax) call:
+Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`platform.exportAVAX`](../../avalanchego/avalanchego-apis/p-chain.md#platformexportavax) call:
 
 ```sh
 curl -X POST --data '{  
@@ -225,7 +225,7 @@ The response should look like this:
 }
 ```
 
-To finish the transfer, call P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/p-chain.md#platformimportavax)
+To finish the transfer, call P-Chain’s [`platform.importAVAX`](../../avalanchego/avalanchego-apis/p-chain.md#platformimportavax)
 
 ```sh
 curl -X POST --data '{  

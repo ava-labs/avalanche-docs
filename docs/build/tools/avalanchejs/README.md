@@ -16,7 +16,7 @@ The APIs currently supported by default are:
 * PlatformVM API
 * Socket API
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the Avalanche Platform Specification found in the [Platform Chain Specification](../../../build/avalanchego-apis/p-chain), [Exchange Chain (X-Chain) Specification](../../../build/avalanchego-apis/x-chain), [Contract Chain (C-Chain) Specification](../../../build/avalanchego-apis/c-chain).
+We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the Avalanche Platform Specification found in the [Platform Chain Specification](../../../build/avalanchego/avalanchego-apis/p-chain), [Exchange Chain (X-Chain) Specification](../../../build/avalanchego/avalanchego-apis/x-chain), [Contract Chain (C-Chain) Specification](../../../build/avalanchego/avalanchego-apis/c-chain).
 
 Using AvalancheJS, developers can:
 

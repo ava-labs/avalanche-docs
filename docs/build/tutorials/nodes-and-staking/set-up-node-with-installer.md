@@ -258,11 +258,11 @@ Done!
 
 Without any additional arguments, the script installs the node in a most common configuration. But the script also enables various advanced options to be configured, via the command line prompts. Following is a list of advanced options and their usage:
 
-* `admin` - [Admin API](../../avalanchego-apis/admin.md) will be enabled
+* `admin` - [Admin API](../../avalanchego/avalanchego-apis/admin.md) will be enabled
 * `archival` - disables database pruning and preserves the complete transaction history
 * `db-dir` - use to provide the full path to the location where the database will be stored
 * `fuji` - node will connect to Fuji testnet instead of the mainnet
-* `index` - [Index API](../../avalanchego-apis/index-api.md) will be enabled
+* `index` - [Index API](../../avalanchego/avalanchego-apis/index-api.md) will be enabled
 * `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be used as the public IP node will advertise to the network
 * `rpc` - use `any` or `local` argument to select any or local network interface to be used to listen for RPC calls
 * `version` - install a specific node version, instead of the latest. See [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
@@ -396,7 +396,7 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
+Now you can [interact with your node](../../avalanchego/avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../avalanchego/postman-avalanche-collection.md) to more easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 

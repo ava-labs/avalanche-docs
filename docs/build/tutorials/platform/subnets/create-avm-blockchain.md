@@ -39,7 +39,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. The AVM and Coreth have a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state.
 
-The [AVM’s documentation](../../../avalanchego-apis/x-chain.mdx) specifies that the argument to [`avm.buildGenesis`](../../../avalanchego-apis/x-chain.mdx#avm.buildGenesis) should look like this:
+The [AVM’s documentation](../../../avalanchego/avalanchego-apis//x-chain.mdx) specifies that the argument to [`avm.buildGenesis`](../../../avalanchego/avalanchego-apis//x-chain.mdx#avm.buildGenesis) should look like this:
 
 ```json
 {
@@ -91,7 +91,7 @@ The [AVM’s documentation](../../../avalanchego-apis/x-chain.mdx) specifies tha
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../../avalanchego-apis/x-chain.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../../learn/platform-overview/transaction-fees.md#transaction-fees)
+To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../../avalanchego/avalanchego-apis//x-chain.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../../learn/platform-overview/transaction-fees.md#transaction-fees)
 
 Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`:
 
@@ -168,7 +168,7 @@ This returns the byte representation of your blockchain’s genesis state:
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego/avalanchego-apis//p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetsubnets).
 
 ```sh
 curl -X POST --data '{
@@ -203,7 +203,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
 ```sh
 curl -X POST --data '{
@@ -253,7 +253,7 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platformgetblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchainstatus) on that node:
 
 ```sh
 curl -X POST --data '{
@@ -286,7 +286,7 @@ You can interact with this new instance of the AVM almost the same way you’d i
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
 
-  [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin#admin-aliaschain)
+  [admin.aliasChain](https://docs.avax.network/build/avalanchego/avalanchego-apis/admin#admin-aliaschain)
 
 * Addresses are prepended with custom blockchain's ID `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`. This can be a different ID when you create your blockchain.
 * Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX...
@@ -349,7 +349,7 @@ curl -X POST --data '{
 }
 ```
 
-Now let's send 1 unit of `asset1` to the new address with [`avm.send`](../../../avalanchego-apis/x-chain.mdx#avm.send).
+Now let's send 1 unit of `asset1` to the new address with [`avm.send`](../../../avalanchego/avalanchego-apis//x-chain.mdx#avm.send).
 
 ```sh
 curl -X POST --data '{
@@ -466,7 +466,7 @@ This address had 100,000,000 `asset1`, then we sent 1 unit to the other address 
 
 ### Mint Asset
 
-Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../../avalanchego-apis/x-chain.mdx#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
+Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../../avalanchego/avalanchego-apis//x-chain.mdx#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
 
 ```sh
 curl -X POST --data '{
@@ -499,7 +499,7 @@ curl -X POST --data '{
 }
 ```
 
-Let's check the balance with [`avm.getAllBalances`](../../../avalanchego-apis/x-chain.mdx#avm.getAllBalances).
+Let's check the balance with [`avm.getAllBalances`](../../../avalanchego/avalanchego-apis//x-chain.mdx#avm.getAllBalances).
 
 ```sh
 curl -X POST --data '{

@@ -59,7 +59,7 @@ If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/node
 
 ### Interacting with the C-Chain
 
-Interacting with the C-Chain is identical to interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/c-chain.md).
+Interacting with the C-Chain is identical to interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego/avalanchego-apis/c-chain.md).
 
 Please note that `personal_` namespace is turned off by default. To turn it on, you need to pass the appropriate command line switch to your node, like in the above config example.
 

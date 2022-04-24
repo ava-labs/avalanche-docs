@@ -3,7 +3,7 @@ sidebar_position: 7
 ---
 # Admin API
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [config flag](../references/avalanchego-config-flags.md) `--api-admin-enabled=true`.
+This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [config flag](../../references/avalanchego-config-flags.md) `--api-admin-enabled=true`.
 
 ## Format
 
@@ -205,7 +205,7 @@ curl -X POST --data '{
 
 ### admin.loadVMs
 
-Dynamically loads any virtual machines installed on the node as plugins. See [here](../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
 
 #### Signature
 
