@@ -14,9 +14,9 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Prerequisites
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../avalanchego-node/build/run-avalanche-node-manually.md) tutorial.
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../avalanchego-node/build/run-avalanche-node-manually.md) tutorial.
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../../avalanchego-node/validate/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../../avalanchego-node/validate/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../avalanchego-node/validate/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../avalanchego-node/validate/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Virtual Machine
 
@@ -40,7 +40,7 @@ Every blockchain is validated by a [subnet](README.md). Before you can create a 
 The subnet needs validators in it to, well, validate blockchains.
 
 :::info
-[Add a node to the Validator Set](../../avalanchego-node/validate/add-a-validator.md)
+[Add a node to the Validator Set](../avalanchego-node/validate/add-a-validator.md)
 :::
 
 
@@ -76,7 +76,7 @@ Our genesis data will be `fP1vxkpyLWnH9dD6BQA`.
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego/avalanchego-apis//p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego/avalanchego-apis//p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego/avalanchego-apis//p-chain.md#platformgetsubnets).
 
 Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
 
@@ -113,7 +113,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
 ```sh
 curl -X POST --data '{
@@ -163,7 +163,7 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../avalanchego/avalanchego-apis//p-chain.md#platformgetblockchainstatus) on that node:
 
 ```sh
 curl -X POST --data '{
@@ -188,13 +188,13 @@ curl -X POST --data '{
 
 If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
 
-More information can be found in the [Adding a Subnet Validator](../../avalanchego-node/validate/add-a-validator.md#adding-a-subnet-validator) tutorial.
+More information can be found in the [Adding a Subnet Validator](../avalanchego-node/validate/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
 You can interact with this new instance of the VM. The API endpoint of the blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. The last part in the endpoint is the blockchain ID, which is `sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. Every blockchain ID is different from each other, so this is not a static ID. Your blockchain ID and the endpoint can be different.
 
-You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](../../../../build/avalanchego/avalanchego-apis/admin/#adminaliaschain)
+You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](../../../build/avalanchego/avalanchego-apis/admin/#adminaliaschain)
 
 ### Verify Genesis Block
 

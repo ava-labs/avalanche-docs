@@ -16,7 +16,7 @@ _Just want the commands? Jump to the [end](#just-want-the-commands-we-got-you)!_
 ## Build `AvalancheGo` Binary and Create the Plugin Build Directory
 
 First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
-You can follow [this comprehensive guide](../../avalanchego-node/build/run-avalanche-node-manually.md) to complete
+You can follow [this comprehensive guide](../avalanchego-node/build/run-avalanche-node-manually.md) to complete
 this step. For this tutorial, we recommend compiling from source instead of using the `AvalancheGo Installer`.
 
 ## Build `subnet-evm` Binary
