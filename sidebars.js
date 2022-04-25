@@ -56,12 +56,12 @@ const sidebars = {
       collapsible: true,
       collapsed: false,
       items: [
+        'build/avalanchego-release-notes',
         {
           type: 'category',
-          label: 'AvalancheGo APIs and Release',
+          label: 'AvalancheGo APIs',
           items: [
             'build/avalanchego/README',
-            'build/avalanchego/release-notes',
             'build/avalanchego/public-api-server',
             {
               type: 'category',
