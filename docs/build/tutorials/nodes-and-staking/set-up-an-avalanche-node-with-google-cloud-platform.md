@@ -136,7 +136,7 @@ Terraform enables us to see what it would do if we were to run it without actual
 1. In a terminal which is able to execute the `tf` binary, `cd` to the ~`my-avax-project` directory that you renamed in step 3 of `Terraform Configuration`.
 2. Execute the command `tf apply`
 
-If you want to ensure that terraform does **exactly** what you saw in the `apply` output, you can optionally request for the the `plan` output to be saved to a file to feed to `apply`. This is generally considered best practice in highly fluid environments where rapid change is occuring from multiple sources.
+If you want to ensure that terraform does **exactly** what you saw in the `apply` output, you can optionally request for the the `plan` output to be saved to a file to feed to `apply`. This is generally considered best practice in highly fluid environments where rapid change is occurring from multiple sources.
 
 ## Conclusion
 
