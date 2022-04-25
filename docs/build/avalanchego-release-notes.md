@@ -2,7 +2,7 @@
 
 :::info
 
-[Upgrade Your AvalancheGo Node](./tutorials/nodes-and-staking/upgrade-your-avalanchego-node.mdx)
+[Upgrade Your AvalancheGo Node](./tutorials/avalanchego-node/maintain/upgrade-your-avalanchego-node.mdx)
 
 :::
 
