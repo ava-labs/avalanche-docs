@@ -15,8 +15,6 @@
 /build/avalanchego-apis/c-chain /build/avalanchego/avalanchego-apis/c-chain 301
 /build/avalanchego-apis/x-chain/ /build/avalanchego/avalanchego-apis/x-chain 301
 /build/avalanchego-apis/x-chain /build/avalanchego/avalanchego-apis/x-chain 301
-/build/avalanchego-apis/deprecated-api-calls/ /build/avalanchego/avalanchego-apis/deprecated-api-calls 301
-/build/avalanchego-apis/deprecated-api-calls /build/avalanchego/avalanchego-apis/deprecated-api-calls 301
 /build/avalanchego-apis/admin/ /build/avalanchego/avalanchego-apis/admin 301
 /build/avalanchego-apis/admin /build/avalanchego/avalanchego-apis/admin 301
 /build/avalanchego-apis/auth/ /build/avalanchego/avalanchego-apis/auth 301
