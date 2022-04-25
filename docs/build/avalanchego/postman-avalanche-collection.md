@@ -9,7 +9,7 @@ description: Postman is a free tool used by developers to quickly and easily sen
 
 Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs. It is available as both an online tool and an application for Linux, MacOS and Windows. Postman allows you to quickly issue API calls and see the responses in a nicely formatted, searchable form.
 
-We have made a Postman collection for [Avalanche](https://docs.avax.network), that includes all the public API calls that are available on [AvalancheGo instance](release-notes.md), allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
+We have made a Postman collection for [Avalanche](https://docs.avax.network), that includes all the public API calls that are available on [AvalancheGo instance](../avalanchego-release-notes.md), allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
 
 Along with the API collection, there is also the example Avalanche environment for Postman, that defines common variables such as IP address of the node, your Avalanche addresses and similar common elements of the queries, so you don't have to enter them multiple times.
 

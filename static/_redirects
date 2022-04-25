@@ -26,8 +26,8 @@
 /build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-google-cloud-platform build/tutorials/avalanchego-node/build/cloud/set-up-an-avalanche-node-with-google-cloud-platform 301
 /build/tutorials/nodes-and-staking/run-offline-pruning/ /build/tutorials/avalanchego-node/maintain/run-offline-pruning 301
 /build/tutorials/nodes-and-staking/run-offline-pruning /build/tutorials/avalanchego-node/maintain/run-offline-pruning 301
-/build/release-notes/avalanchego/ /build/avalanchego/release-notes 301
-/build/release-notes/avalanchego /build/avalanchego/release-notes 301
+/build/release-notes/avalanchego/ /build/avalanchego-release-notes 301
+/build/release-notes/avalanchego /build/avalanchego-release-notes 301
 /build/tools/public-api/ /build/avalanchego/public-api-server 301
 /build/tools/public-api /build/avalanchego/public-api-server 301
 /build/tools/postman-avalanche-collection/ /build/avalanchego/postman-avalanche-collection 301
