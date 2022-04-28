@@ -242,6 +242,9 @@ See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https
 
 ## Miscellaneous
 
+### Sanctioned Addresses
+DO NOT USE the Bridge if you are on the Specially Designated Nationals (SDN) List of the Office of Foreign Assets Control (OFAC) or any other sanctions list or you are otherwise a sanctioned person or from a sanctioned jurisdiction.
+
 ### I can't see my tokens in my wallet. Are they lost forever?
 
 No. It is very likely a user interface issue, and the tokens are there but you just don't see the tokens. See [here](avalanche-bridge-faq.md#cant-see-funds).
