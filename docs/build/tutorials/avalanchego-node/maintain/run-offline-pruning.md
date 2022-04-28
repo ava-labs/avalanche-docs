@@ -1,4 +1,5 @@
 ---
+sidebar_position: 3
 decription: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
 ---
 

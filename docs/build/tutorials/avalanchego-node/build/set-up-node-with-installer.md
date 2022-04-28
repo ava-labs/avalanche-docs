@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 
@@ -51,7 +51,7 @@ Look for line that doesn't have `grep` on it. In this example, that is the secon
 
 #### Node working files
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to. Check out this [tutorial](node-backup-and-restore.md) for backup and restore procedure.
+If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to. Check out this [tutorial](../maintain/node-backup-and-restore.md) for backup and restore procedure.
 
 ### Networking considerations
 
@@ -258,11 +258,11 @@ Done!
 
 Without any additional arguments, the script installs the node in a most common configuration. But the script also enables various advanced options to be configured, via the command line prompts. Following is a list of advanced options and their usage:
 
-* `admin` - [Admin API](../../avalanchego/avalanchego-apis/admin.md) will be enabled
+* `admin` - [Admin API](../../../avalanchego/avalanchego-apis/admin.md) will be enabled
 * `archival` - disables database pruning and preserves the complete transaction history
 * `db-dir` - use to provide the full path to the location where the database will be stored
 * `fuji` - node will connect to Fuji testnet instead of the mainnet
-* `index` - [Index API](../../avalanchego/avalanchego-apis/index-api.md) will be enabled
+* `index` - [Index API](../../../avalanchego/avalanchego-apis/index-api.md) will be enabled
 * `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be used as the public IP node will advertise to the network
 * `rpc` - use `any` or `local` argument to select any or local network interface to be used to listen for RPC calls
 * `version` - install a specific node version, instead of the latest. See [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
@@ -305,7 +305,7 @@ To reinstall the node using node version 1.7.10 and use specific IP and local RP
 
 ## Node configuration
 
-File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/avalanchego-config-flags.md). Configuration may look like this:
+File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../../references/avalanchego-config-flags.md). Configuration may look like this:
 
 ```json
 {
@@ -316,7 +316,7 @@ File that configures node operation is `~/.avalanchego/configs/node.json`. You c
 
 Note that configuration file needs to be a properly formatted `JSON` file, so switches are formatted differently than for command line, so don't enter options like `--dynamic-public-ip=opendns` but as in the example above.
 
-Script also creates an empty C-Chain config file, located at `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can configure the C-Chain, as described in detail [here](../../references/chain-config-flags.md).
+Script also creates an empty C-Chain config file, located at `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can configure the C-Chain, as described in detail [here](../../../references/chain-config-flags.md).
 
 ## Using a previous version
 
@@ -396,9 +396,9 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../avalanchego/avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../avalanchego/postman-avalanche-collection.md) to more easily issue commands to your node.
+Now you can [interact with your node](../../../avalanchego/avalanchego-apis/issuing-api-calls.md), [stake your tokens](../validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](../maintain/setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../../avalanchego/postman-avalanche-collection.md) to more easily issue commands to your node.
 
-Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
+Finally, if you haven't already, it is a good idea to [back up](../maintain/node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 

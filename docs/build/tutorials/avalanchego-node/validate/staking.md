@@ -1,8 +1,9 @@
 ---
+sidebar_position: 1
 description: Learn how to stake on Avalanche by validating or delegating
 ---
 
-# Staking
+# What is Staking?
 
 Staking is the process of locking up tokens to support a network while receiving a reward in return (rewards can be increased network utility, monetary compensation, etc.). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
@@ -29,7 +30,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
-You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../build/avalanchego/avalanchego-apis/info.md#infouptime)
+You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../../../build/avalanchego/avalanchego-apis/info.md#infouptime)
 You can get another opinion on your node's uptime from Avalanche's [Validator Health dashboard](https://stats.avax.network/dashboard/validator-health-check/).
 If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward.
 If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.
@@ -83,7 +84,7 @@ You do not need to have AVAX funds on your validating node. In fact, it's best p
 
 #### Monitoring {#monitoring}
 
-Follow this [tutorial](../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
+Follow this [tutorial](../../../../build/tutorials/avalanchego-node/maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
 
 #### Validating In Fuji
 

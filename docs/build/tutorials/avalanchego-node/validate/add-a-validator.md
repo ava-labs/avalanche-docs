@@ -1,12 +1,12 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 # Add a Node to the Validator Set
 
 ## Introduction
 
-The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network on Avalanche.
+The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
@@ -16,7 +16,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -24,7 +24,7 @@ In order to ensure your node is well-connected, make sure that your node can rec
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](../../avalanchego/avalanchego-apis/info.md#infogetnodeid):
+Get your node’s ID by calling [`info.getNodeID`](../../../avalanchego/avalanchego-apis/info.md#infogetnodeid):
 
 ![getNodeID postman](/img/getNodeID-postman.png)
 
@@ -52,7 +52,7 @@ Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `
 
 ![Web wallet earn tab](/img/web-wallet-earn-tab.png)
 
-Fill out the staking parameters. They are explained in more detail in [this doc](../../../learn/platform-overview/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+Fill out the staking parameters. They are explained in more detail in [this doc](../../../../build/tutorials/avalanchego-node/validate/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
 
 ![Earn validate](/img/earn-validate.png)
 
@@ -60,7 +60,7 @@ You should see this success message, and your balance should be updated.
 
 ![Your validation transaction is sent](/img/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](../../avalanchego/avalanchego-apis/p-chain.md#platformgetpendingvalidators) verifies that our transaction was accepted.
+Calling [`platform.getPendingValidators`](../../../avalanchego/avalanchego-apis/p-chain.md#platformgetpendingvalidators) verifies that our transaction was accepted.
 
 ![getPendingValidators postman](/img/getPendingValidators-postman.png)
 
@@ -76,7 +76,7 @@ That’s it!
 
 ## Add a validator with API calls
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](../../avalanchego/avalanchego-apis/p-chain.md#platformaddvalidator).
+We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](../../../avalanchego/avalanchego-apis/p-chain.md#platformaddvalidator).
 
 This method’s signature is:
 
@@ -100,7 +100,7 @@ Let’s go through and examine these arguments.
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../avalanchego/avalanchego-apis/info.md#infogetnodeid):
+This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../../avalanchego/avalanchego-apis/info.md#infogetnodeid):
 
 ```sh
 curl -X POST --data '{
@@ -183,7 +183,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego/avalanchego-apis/p-chain.md#platformgettxstatus):
+We can check the transaction’s status by calling [`platform.getTxStatus`](../../../avalanchego/avalanchego-apis/p-chain.md#platformgettxstatus):
 
 ```sh
 curl -X POST --data '{
@@ -196,7 +196,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego/avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../../avalanchego/avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
 ```sh
 curl -X POST --data '{
@@ -230,4 +230,4 @@ When the time reaches `1584021450`, this node will start validating the Primary 
 
 ## Adding Validators to a Subnet
 
-This [tutorial](../platform/subnets/create-a-subnet.md#adding-subnet-validators) will show you how to add validators to a subnet.
+This [tutorial](../../subnets/create-a-subnet.md#adding-subnet-validators) will show you how to add validators to a subnet.

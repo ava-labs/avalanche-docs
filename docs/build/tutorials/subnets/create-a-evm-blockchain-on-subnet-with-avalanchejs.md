@@ -36,7 +36,7 @@ cd avalanchego
 
 ### Build Binary
 
-Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../../nodes-and-staking/run-avalanche-node.md).
+Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../avalanchego-node/build/run-avalanche-node-manually.md).
 
 ```bash
 ./scripts/build.sh
@@ -65,7 +65,7 @@ You can directly build the `subnet-evm` binary inside the plugins folder as well
 
 ## Setting up Local Avalanche Network
 
-For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../../../tools/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
+For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../../tools/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 
 ### Clone Avalanche Network Runner

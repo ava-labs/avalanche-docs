@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 description: The quickest way to learn about Avalanche is to run a node and interact with the network and geared toward people interested in how the Avalanche Platform works.
 ---
 
@@ -41,7 +41,7 @@ Let’s install AvalancheGo, the Go implementation of an Avalanche node, and con
 
 The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
-Downloading [pre-built binary](run-avalanche-node.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Downloading [pre-built binary](run-avalanche-node-manually.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
 
 Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
 
@@ -117,7 +117,7 @@ When the node starts, it has to bootstrap (catch up with the rest of the network
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego/avalanchego-apis/info.md#infoisbootstrapped) by copying and pasting the following command:
+To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../../avalanchego/avalanchego-apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
 ```sh
 curl -X POST --data '{
@@ -132,7 +132,7 @@ curl -X POST --data '{
 
 If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
 
-Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
+Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](../validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
 
 You can use `Ctrl + C` to kill the node.
 
@@ -146,4 +146,4 @@ To connect to the Fuji Testnet instead of the main net, use argument `--network-
 
 Now that you've launched your Avalanche node, what should you do next?
 
-Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](add-a-validator.md) to take it a step further.
+Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](../validate/add-a-validator.md) to take it a step further.
