@@ -8,11 +8,11 @@ Suppose there is an Income Sharing Agreement (ISA) with 10M shares, and no more 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../avalanchego-node/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md).
+You've completed [Run an Avalanche Node](../avalanchego-node/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../overview/getting-started/avalanche-platform-overview.md).
 
 ## Create the Asset
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego/avalanchego-apis//x-chain.mdx).
+Our asset will exist on the [X-Chain](../../../overview/getting-started/avalanche-platform-overview.md#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego/avalanchego-apis//x-chain.mdx).
 
 The signature for this method is:
 

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here. 
 ---
 

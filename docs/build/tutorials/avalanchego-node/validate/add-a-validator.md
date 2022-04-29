@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## Introduction
 
-The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network on Avalanche.
+The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../../overview/getting-started/avalanche-platform-overview.md). In this tutorial, we’ll add a node to the Primary Network on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
@@ -16,7 +16,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../../../overview/getting-started/avalanche-platform-overview.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 

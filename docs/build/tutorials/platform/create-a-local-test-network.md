@@ -198,4 +198,4 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 }'
 ```
 
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), [C-Chain](../../../learn/platform-overview/README.md#contract-chain-c-chain), and [P-Chain](../../../learn/platform-overview/README.md#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](../../../overview/getting-started/avalanche-platform-overview.md#exchange-chain-x-chain), [C-Chain](../../../overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain), and [P-Chain](../../../overview/getting-started/avalanche-platform-overview.md#platform-chain-p-chain). The only subnet that exists is the Primary Network.

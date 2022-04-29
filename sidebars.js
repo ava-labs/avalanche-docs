@@ -19,34 +19,39 @@ const sidebars = {
   // But you can create a sidebar manually
 
   tutorialSidebar: [
-    'intro',
     {
       type: 'category',
-      label: 'Learn',
+      label: 'Overview',
       collapsible: true,
       collapsed: false,
       items: [
-        'learn/getting-started',
+        {
+          type: 'category',
+          label: 'Getting Started',
+          items: [
+            'overview/getting-started/intro',
+            'overview/getting-started/avalanche-platform-overview',
+            'overview/getting-started/avalanche-consensus',
+            {
+              type: 'link',
+              label: 'Whitepapers', 
+              href: 'https://www.avalabs.org/whitepapers', 
+            },
+          ],
+        },
         {
           type: 'category',
           label: 'Platform',
           items: [
-            'learn/platform-overview/README',
-            'learn/platform-overview/avalanche-consensus',
             'learn/platform-overview/transaction-fees'
           ],
-        },
-        'learn/avalanche-bridge-faq',
-        {
-          type: 'link',
-          label: 'Whitepapers', 
-          href: 'https://www.avalabs.org/whitepapers', 
         },
         {
           type: 'link',
           label: 'Audits', 
           href: 'https://github.com/ava-labs/audits', 
-        }
+        },
+        'learn/avalanche-bridge-faq',
       ],
     },
     {

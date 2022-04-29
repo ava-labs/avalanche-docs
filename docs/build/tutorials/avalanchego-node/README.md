@@ -29,5 +29,5 @@ This section provides documents on how to build and maintain an AvalancheGo node
 |  |  |
 | :--- | :--- |
 | [**What is Staking?**](./validate/staking.md) | Explain the concept of staking |
-| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../../../learn/platform-overview/README.md) |
+| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../../../overview/getting-started/avalanche-platform-overview.md) |
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](./validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet |
