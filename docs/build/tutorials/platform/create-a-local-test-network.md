@@ -5,9 +5,8 @@
 This tutorial explains several methods of creating a local test network.
 
 There are currently three options to launch such a local network:
-* Using the [Avalanche Network Runner](../../tools/network-runner.md) (recommended)
+* Using the [Avalanche Network Runner](../../tools/network-runner/) (recommended)
 * Manually starting each AvalancheGo node (not recommended)
-* Using [Avash](../../tools/avash.md) (Note that Avash is Deprecated)
 
 ## Create a Local Test Network
 
@@ -86,116 +85,3 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-### Avash
-
-:::warning
-
-Avash is deprecated and is being replaced with the [Avalanche Network Runner](#avalanche-network-runner)
-
-:::
-
-We assume you’ve installed [Avash](../../tools/avash.md).
-
-To open Avash:
-
-```sh
-cd $GOPATH/src/github.com/ava-labs/avash
-```
-
-```sh
-go build
-```
-
-```sh
-./avash
-```
-
-Now we’re in Avash. To start the network:
-
-```
-runscript scripts/five_node_staking.lua
-```
-
-The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
-When you want to tear down the network, run `exit` to exit Avash.
-
-### Verifying Nodes are Connected
-
-As a sanity check, we can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../../avalanchego-apis/info.md#infopeers).
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.peers"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
-```
-
-(Note that if you used the Avalanche Network Runner, the node's API port will not be `9650` -- see [here](#avalanche-network-runner).
-
-`peers` should have 4 entries. Example output:
-
-```json
-{
-    "jsonrpc":"2.0",
-    "result":{
-        "numPeers":"4",
-        "peers":[
-            {
-                "ip":"127.0.0.1:36698",
-                "publicIP":"127.0.0.1:9655",
-                "nodeID":"NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:09-05:00"
-            },
-            {
-                "ip":"127.0.0.1:37036",
-                "publicIP":"127.0.0.1:9657",
-                "nodeID":"NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:18-05:00"
-            },
-            {
-                "ip":"127.0.0.1:38764",
-                "publicIP":"127.0.0.1:9659",
-                "nodeID":"NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:15-05:00"
-            },
-            {
-                "ip":"127.0.0.1:60194",
-                "publicIP":"127.0.0.1:9653",
-                "nodeID":"NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:09-05:00"
-            }
-        ]
-    },
-    "id":1
-}
-```
-
-### Getting AVAX {#getting-avax}
-
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain private key that you can import in order to get AVAX. The private key is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you [create a keystore user](../../avalanchego-apis/keystore.md#keystorecreateuser) on a node, you can [import this key](../../avalanchego-apis/x-chain.mdx), and the funds it holds, with:
-
-```sh
-curl --location --request POST 'localhost:9650/ext/platform' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc": "2.0",
-    "method": "platform.importKey",
-    "params":{
-        "username":"USERNAME GOES HERE",
-        "password":"PASSWORD GOES HERE",
-          "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
-    },
-    "id": 1
-}'
-```
-
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), [C-Chain](../../../learn/platform-overview/README.md#contract-chain-c-chain), and [P-Chain](../../../learn/platform-overview/README.md#platform-chain-p-chain). The only subnet that exists is the Primary Network.

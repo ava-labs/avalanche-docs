@@ -2,7 +2,7 @@
 
 The Avalanche Network Runner **(ANR)** allows a user to define, create and interact with a network of Avalanche nodes. It can be used for development and testing.
 
-Developing P2P systems is hard, and blockchains are no exceptions. A developer can't just focus on the functionality on a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing isn't addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
+Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on the functionality of a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
 
 In the context of avalanche, **[subnets](https://docs.avax.network/build/tutorials/platform/subnets/)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem. 
 
@@ -43,6 +43,9 @@ There are two main ways to use the network-runner:
 Running the binary, the user can send requests to the RPC server in order to start a network, create subnets, add nodes to the network, remove nodes from the network, restart nodes, etc.. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
 
 Each node can then also be reached via [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) endpoints which each node exposes.
+
+The following diagram is a simplified view of the high level architecture of the tool:
+![ANR architecture](grpc-networkrunner.svg "Simplified ANR architecture")
 
 ## Examples
 When running with the binary, ANR runs a server process as an RPC server which then waits for API calls and handles them.
@@ -238,7 +241,7 @@ avalanche-network-runner control add-node \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH}
 ```
 
-Adding a node also supports some of the same parameters to start the network resp. to run subnets:
+It's also possible to provide custom parameters, similar to starting the network:
 
 ```bash
 	--node-config '{"index-enabled":false, "api-admin-enabled":true,"network-peer-list-gossip-frequency":"300ms"}'
@@ -283,6 +286,7 @@ The Subnet EVM is a simplified version of Coreth VM (C-Chain).
 This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality.
 It can be used to create your own fully Ethereum-compatible subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 
+### subnet-cli
 **At this moment the ANR requires an additional tool, `subnet-cli`, to be able to create the necessary configuration to deploy a subnet in a local custom test-network. Generally, getting a subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
 
 
@@ -420,11 +424,117 @@ Check it all up:
 curl -X POST -k http://localhost:8081/v1/control/status -d ''
 ```
 
-DONE!
+DONE! You are now running your very own Ethereum blockchain on Avalanche!
+
+### RPC server `blobvm` example
+
+While above we configured and deployed an Ethereum compatible subnet, Avalanche supports deploying your completely custom blockchain, still taking advantage of existing Avalanche infrastructure and its consensus protocol.
+
+A custom blockchain requires your custom VM. In this tutorial we are going to deploy a custom VM with a subnet. The process is very similar to the `subnet-evm` one, except that the VM is different. We will also need the `subnet-cli` tool for this tutorial, check [this](#subnet-cli) for some context.
+
+The VM we are going to use here is the [blobvm](https://github.com/ava-labs/blobvm). This is a simple VM which enables content-addressable storage of arbitrary keys/values using any EIP-712 compatible wallet.
+
+Install and start the RPC server just as in [start the server](#start-the-server)
+Make sure the server is up:
+
+```bash
+curl -X POST -k http://localhost:8081/v1/ping -d ''
+```
+
+First, download/install `subnet-cli`:
+
+```bash
+# or download from https://github.com/ava-labs/subnet-cli/releases
+cd ${HOME}/go/src/github.com/ava-labs/subnet-cli
+go install -v .
+```
+
+Create a VM ID:
+
+```bash
+subnet-cli create VMID blobvm 
+# kM6h4LYe3AcEU1MB2UNg6ubzAiDAALZzpVrbX8zn3hXF6Avd8
+```
+
+Build or... 
+
+```bash
+rm -rf ${HOME}/go/src/github.com/ava-labs/avalanchego/build
+cd ${HOME}/go/src/github.com/ava-labs/avalanchego
+./scripts/build.sh
+```
+
+...[download](https://github.com/ava-labs/avalanchego/releases) `avalanchego` (if not done already)
+
+Clone and build the `blobvm` plugin (requires `golang` installation):
+
+```bash
+git clone https://github.com/ava-labs/blobvm ${HOME}/go/src/github.com/ava-labs/blobvm
+cd ${HOME}/go/src/github.com/ava-labs/blobvm 
+go build -v \
+-o ${HOME}/go/src/github.com/ava-labs/avalanchego/build/plugins/kM6h4LYe3AcEU1MB2UNg6ubzAiDAALZzpVrbX8zn3hXF6Avd8 \
+./cmd/blobvm
+```
+
+Verify everything has been built correctly:
+
+```bash
+find ${HOME}/go/src/github.com/ava-labs/avalanchego/build
+# should yield something like: 
+# .../build
+# .../build/plugins
+# .../build/plugins/kM6h4LYe3AcEU1MB2UNg6ubzAiDAALZzpVrbX8zn3hXF6Avd8
+# .../build/plugins/evm
+# .../build/avalanchego
+```
+
+Every VM needs a genesis file in order to be deployed on Avalanche.
+For the blobvm, the file is very simple, and that repository contains a helper tool to create it:
+
+```bash
+# generate the genesis for the custom VM
+cd ${HOME}/go/src/github.com/ava-labs/blobvm
+go install -v ./cmd/blob-cli
+echo "[]" > /tmp/alloc.json
+blob-cli genesis 1 /tmp/alloc.json --genesis-file /tmp/blobvm.genesis.json
+# print contents
+cat /tmp/blobvm.genesis.json
+```
+
+Set some environment variables for convenience:
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
+AVALANCHEGO_PLUGIN_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/plugins"
+```
+
+Now start the nodes with custom VM support.
+For this, we need to point set the `custom-vms` parameter (a map) to contain the genesis and the vm name:
+
+```bash
+curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO","pluginDir":"'${AVALANCHEGO_PLUGIN_PATH}'","customVms":{"blobvm":"/tmp/blobvm.genesis.json"}}'
+
+# or
+avalanche-network-runner control start \
+--log-level debug \
+--endpoint="0.0.0.0:8080" \
+--avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
+--plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
+--custom-vms '{"blobvm":"/tmp/blobvm.genesis.json"}'
+```
+
+Check it all up:
+```bash
+# to get cluster information including blockchain ID
+curl -X POST -k http://localhost:8081/v1/control/status -d ''
+```
+
+DONE! You are now running your very own custom blockchain!
 
 ## Using Avalanche Network as a Library
 
-The Avalanche Network Runner is meant to be imported into your programs so that you can use it to programatically start, interact with and stop Avalanche networks. For an example of using the Network Runner in a program, see the code in the example [above](#run-an-example).
+The Avalanche Network Runner can also be imported as a library into your programs so that you can use it to programatically start, interact with and stop Avalanche networks. For an example of using the Network Runner in a program, see an [example](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/fivenodenetwork/main.go).
 
 Creating a network is as simple as:
 
@@ -489,82 +599,9 @@ You can create a network where nodes are running different binaries -- just prov
 
 After adding a node, you may want to call the network's `Healthy` method again and wait until the new node is healthy before making API calls to it.
 
-## Creating Custom Networks
+### Creating Custom Networks
 
 To create custom networks, pass a custom config (the second parameter) to the `local.NewNetwork(logging.Logger, network.Config)` function. The config defines the number of nodes when the network starts, the genesis state of the network, and the configs for each node.
 
 Please refer to [NetworkConfig](https://github.com/ava-labs/avalanche-network-runner#network-creation) for more details.
 
-<!--- TODO uncomment this when we suport K8s better
-## Kubernetes Backend
-
-It's possible to create a network with a Kubernetes backend, offering higher flexibility and scalability in defining and running a development and test network.
-
-An example can be found at `examples/k8s/main.go`. This example program creates a network of five nodes, each of which runs in a Kubernetes pod.
-
-Note that the Kubernetes backend should only be used by advanced users and requires significantly more setup to use. 
-
-### AvalancheGo Operator
-
-In order for AvalancheGo nodes to run in a Kubernetes cluster, we use the [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/). Therefore, for an AvalancheGo network to be runnable on Kubernetes, the `avalanchego-operator` dependency must be fulfilled. Essentially, the operator allows AvalancheGo nodes to run inside a Kubernetes cluster in a stateful manner.
-
-Please find the AvalancheGo Operator code at [https://github.com/ava-labs/avalanchego-operator.](https://github.com/ava-labs/avalanchego-operator)
-
-There are a multitude of possible configurations and setups when running Kubernetes, depending on your organization, preferences and environment. Generally, the Kubernetes admin should be responsible for installing and running the operator, as it involves setting up roles, services and permissions. Please refer to the AvalancheGo Operator documentation for instructions on installation, configuration, deployment, etc.
-
-To install the AvalancheGo Operator in a local Kubernetes network (like `minikube` or `k3s`), assuming the Kubernetes environment has already been created and configured:
-
-* Clone the AvalancheGo Operator repository above
-* `make install` inside the AvalancheGo Operator repository (requires standard build tools)
-* `make run` inside the AvalancheGo Operator repository
-
-This will run the AvalancheGo operator inside the cluster. The most important link to a deployment is the `Kind` parameter, which needs to be set to `Avalanchego` for the operator to kick in. (See next section for details.)
-
-You should only run the AvalancheGo Operator on a local Kubernetes cluster for testing before deploying to a remote Kubernetes cluster. If your goal is to simply run an Avalanche network locally, use the Local Backend of the Avalanche Network Runner.
-
-### Configuration
-
-Essentially, using a network with the Kubernetes backend is the same as using a network with the local backend.
-
-The main difference lies in creating the network definition due to the properties and requirements of Kubernetes.
-
-The key elements which should be provided are the genesis JSON file, the TLS certificates and keys for the node identity, and optionally configuration files for the AvalancheGo nodes. This is similar to the local backend implementation. 
-
-It is left to the user to implement a means of providing the configuration to the network (reading and parsing files, etc.). `examples/k8s/main.go` provides an example of how to do it.
-The Kubernetes-specific information needs to be provided in the `ImplSpecificConfig` of the `network.Config` (describes the network) and the `node.Config` (describes each individual node) structs.
-For Kubernetes, each of these are represented as `Avalanchego` types from the AvalancheGo Operator package `github.com/ava-labs/avalanchego-operator`, which provides the interface to Kubernetes. The `k8s.ObjectSpec` acts as a helper layer to create such objects. Therefore, to create Kubernetes node definitions compatible with the AvalancheGo Operator, define instances of `k8s.ObjectSpec` for each node and pass these as `ImplSpecificConfig` member to a `node.Config`.
-
-Example configuration defined in JSON:
-
-```json
-    {
-      "namespace": "my-avalanchego-test",
-      "identifier": "node-id-0",
-      "kind": "Avalanchego",
-      "apiVersion": "chain.avax.network/v1alpha1",
-      "image": "avaplatform/avalanchego",
-      "tag": "v1.7.1"
-    }
-```
-
-Example configuration defined in Go:
-
-```go
-spec := &k8s.ObjectSpec{
-  Namespace:  "my-avalanchego-test",
-  Identifier: "node-id-0",
-  Kind:       "Avalanchego",
-  APIVersion: "chain.avax.network/v1alpha1",
-  Image:      "avaplatform/avalanchego",
-  Tag:        "v1.7.1",
-```
-
-**Note:** It is currently not possible to create a default network without any configuration for Kubernetes. This might be addressed in a future iteration.
-
-**IMPORTANT**
-To run a custom network in this way, the executable which will run this code needs to have access to the Kubernetes cluster. One way to achieve this is to deploy the executable as a pod itself into the cluster. An example script can be found at `examples/k8s/Dockerfile`. Create its image by running `docker build -f ./examples/k8s/Dockerfile -t <IMAGE>:<TAG> .` from the Avalanche Network Runner repository root.  The defaults for these examples are `<IMAGE>=k8s-netrunner` and `<TAG>=alpha`. An example pod definition using these properties can then be deployed to the cluster via `kubectl apply -f examples/k8s/simple-netrunner-pod.yaml`. Make sure the `Namespace` definitions match. If you change any of `IMAGE` or `TAG`, the `simple-netrunner-pod.yaml` file needs to be edited accordingly. Don't forget to edit `DOCKERFILE` if you start customizing.
-
-Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script for doing this is at `examples/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f examples/k8s/svc-rbac.yaml`. Once again, make sure namespaces match if customizing.
- 
-Please note one more time that there are multitudes of ways about how to deploy and configure Kubernetes networks. We provide here only a couple of examples. **None of these examples are meant to be used in production, and the Avalanche Network runner is not meant to run production nodes.**
--->
