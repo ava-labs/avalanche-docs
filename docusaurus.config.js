@@ -73,9 +73,40 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'tutorialSidebar',
-            label: 'NavBar',
-          },
+            sidebarId: 'quickStart',
+            label: 'QuickStart',
+          },     
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'dapps',
+            label: 'DApps',
+          },  
+
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'subnets',
+            label: 'Subnets',
+          }, 
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'apis',
+            label: 'APIs',
+          }, 
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'nodes',
+            label: 'Nodes',
+          }, 
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'community',
+            label: 'Community',
+          }, 
           {
             type: 'localeDropdown',
             position: 'right',
