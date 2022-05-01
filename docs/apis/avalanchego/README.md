@@ -1,6 +1,6 @@
 # Overview
 
-[**API Specifications**](./apis/README.md): Learn about all APIs provided by AvalancheGo server software.
+[**APIs**](./apis/README.md): Learn about all APIs provided by AvalancheGo server software.
 
 [**Public API Server**](public-api-server.md): Learn about the public API server you can use to interact with the Avalanche Network.
 
