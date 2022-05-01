@@ -1,4 +1,5 @@
 # 05/02/2022
+#overview
 /learn/avalanche-bridge-faq https://support.avax.network/en/collections/3073022-avalanche-bridge 301
 /learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge 301
 /learn/getting-started/ /overview/getting-started/general-concepts 301
@@ -7,6 +8,7 @@
 /learn/platform-overview /overview/getting-started/avalanche-platform-overview 301
 /learn/platform-overview/avalanche-consensus/ /overview/getting-started/avalanche-consensus 301
 /learn/platform-overview/avalanche-consensus /overview/getting-started/avalanche-consensus 301
+#subnets
 /build/tutorials/platform/subnets/ /subnets 301
 /build/tutorials/platform/subnets  /subnets 301
 /build/tutorials/platform/subnets/create-a-subnet/ /subnets/create-a-subnet 301
@@ -33,33 +35,40 @@
 /build/tutorials/platform/subnets/setup-dfk-node  /subnets/setup-dfk-node 301
 /build/tutorials/platform/subnets/subnet-faq/ /subnets/subnet-faq 301
 /build/tutorials/platform/subnets/subnet-faq /subnets/subnet-faq 301
-/build/tutorials/nodes-and-staking/ /build/tutorials/avalanchego-node 301
-/build/tutorials/nodes-and-staking /build/tutorials/avalanchego-node 301
-/build/tutorials/nodes-and-staking/set-up-node-with-installer/ /build/tutorials/nodes/build/set-up-node-with-installer 301
-/build/tutorials/nodes-and-staking/set-up-node-with-installer /build/tutorials/nodes/build/set-up-node-with-installer 301
-/build/tutorials/nodes-and-staking/node-backup-and-restore/ /build/tutorials/nodes/maintain/node-backup-and-restore 301
-/build/tutorials/nodes-and-staking/node-backup-and-restore /build/tutorials/nodes/maintain/node-backup-and-restore 301
-/build/tutorials/nodes-and-staking/setting-up-node-monitoring/ /build/tutorials/nodes/maintain/setting-up-node-monitoring 301
-/build/tutorials/nodes-and-staking/setting-up-node-monitoring /build/tutorials/nodes/maintain/setting-up-node-monitoring 301
-/build/tutorials/nodes-and-staking/add-a-validator/ /build/tutorials/nodes/validate/add-a-validator 301
-/build/tutorials/nodes-and-staking/add-a-validator /build/tutorials/nodes/validate/add-a-validator 301
-/build/tutorials/nodes-and-staking/run-avalanche-node/ /build/tutorials/nodes/build/run-avalanche-node-manually 301
-/build/tutorials/nodes-and-staking/run-avalanche-node /build/tutorials/nodes/build/run-avalanche-node-manually 301
-/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws/ /build/tutorials/nodes/build/cloud/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
-/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws /build/tutorials/nodes/build/cloud/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /build/tutorials/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet /build/tutorials/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
-/build/tutorials/nodes-and-staking/upgrade-your-nodes/ /build/tutorials/nodes/maintain/upgrade-your-avalanchego-node 301
-/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node /build/tutorials/nodes/maintain/upgrade-your-avalanchego-node 301
-/build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure/ /build/tutorials/nodes/build/cloud/set-up-an-avalanche-node-with-microsoft-azure 301
-/build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure /build/tutorials/nodes/build/cloud/set-up-an-avalanche-node-with-microsoft-azure 301
-/build/tutorials/nodes-and-staking/hetzner-volume-migration /build/tutorials/nodes/maintain/hetzner-volume-migration 301
-/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /build/tutorials/platform/run-a-five-node-network-with-avash 301
-/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash /build/tutorials/platform/run-a-five-node-network-with-avash 301
-/build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-google-cloud-platform/ build/tutorials/nodes/build/cloud/set-up-an-avalanche-node-with-google-cloud-platform 301
-/build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-google-cloud-platform build/tutorials/nodes/build/cloud/set-up-an-avalanche-node-with-google-cloud-platform 301
-/build/tutorials/nodes-and-staking/run-offline-pruning/ /build/tutorials/nodes/maintain/run-offline-pruning 301
-/build/tutorials/nodes-and-staking/run-offline-pruning /build/tutorials/nodes/maintain/run-offline-pruning 301
+#nodes
+/nodes-and-staking/ /nodes 301
+/nodes-and-staking  /nodes 301
+/nodes-and-staking/set-up-node-with-installer/ /nodes/build/set-up-node-with-installer 301
+/nodes-and-staking/set-up-node-with-installer  /nodes/build/set-up-node-with-installer 301
+/nodes-and-staking/node-backup-and-restore/ /nodes/maintain/node-backup-and-restore 301
+/nodes-and-staking/node-backup-and-restore  /nodes/maintain/node-backup-and-restore 301
+/nodes-and-staking/setting-up-node-monitoring/ /nodes/maintain/setting-up-node-monitoring 301
+/nodes-and-staking/setting-up-node-monitoring  /nodes/maintain/setting-up-node-monitoring 301
+/nodes-and-staking/add-a-validator/ /nodes/validate/add-a-validator 301
+/nodes-and-staking/add-a-validator  /nodes/validate/add-a-validator 301
+/nodes-and-staking/run-avalanche-node/ /nodes/build/run-avalanche-node-manually 301
+/nodes-and-staking/run-avalanche-node  /nodes/build/run-avalanche-node-manually 301
+/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws/ /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
+/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws  /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
+/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
+/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
+/nodes-and-staking/upgrade-your-nodes/ /nodes/maintain/upgrade-your-avalanchego-node 301
+/nodes-and-staking/upgrade-your-nodes  /nodes/maintain/upgrade-your-avalanchego-node 301
+/nodes-and-staking/upgrade-your-avalanchego-node /nodes/maintain/upgrade-your-avalanchego-node 301
+/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure/ /nodes/build/set-up-an-avalanche-node-with-microsoft-azure 301
+/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure  /nodes/build/set-up-an-avalanche-node-with-microsoft-azure 301
+/nodes-and-staking/hetzner-volume-migration /nodes/maintain/hetzner-volume-migration 301
+/nodes-and-staking/set-up-an-avalanche-node-with-google-cloud-platform/ /nodes/build/set-up-an-avalanche-node-with-google-cloud-platform 301
+/nodes-and-staking/set-up-an-avalanche-node-with-google-cloud-platform  /nodes/build/set-up-an-avalanche-node-with-google-cloud-platform 301
+/nodes-and-staking/run-offline-pruning/ /nodes/maintain/run-offline-pruning 301
+/nodes-and-staking/run-offline-pruning  /nodes/maintain/run-offline-pruning 301
+/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/run-a-five-node-network-with-avash 301
+/nodes-and-staking/run-a-five-node-network-with-avash  /quickstart/run-a-five-node-network-with-avash 301
+/build/references/avalanchego-config-flags/ /nodes/maintain/avalanchego-config-flags 301
+/build/references/avalanchego-config-flags  /nodes/maintain/avalanchego-config-flags
+/build/references/chain-config-flags/  /nodes/maintain/chain-config-flags 301
+/build/references/chain-config-flags  /nodes/maintain/chain-config-flags 301
+
 /build/release-notes/avalanchego/ /build/avalanchego-release-notes 301
 /build/release-notes/avalanchego /build/avalanchego-release-notes 301
 /build/tools/public-api/ /build/avalanchego/public-api-server 301
@@ -101,7 +110,7 @@
 /learn/platf /learn/platform-overview  301
 /build/get-started /build/tutorials/ 301
 /build/references/command-line-interface/ /build/../nodes/maintain/avalanchego-config-flags/ 301
-/build/tutorials/nodes-and-staking/avash /build/tools/avash  301
+/nodes-and-staking/avash /build/tools/avash  301
 /build/tutorials/platform/create-a-subnet /subnets/create-a-subnet 301
 /build/tutorials/platform/create-a-virtual-machine-vm /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/create-avm-blockchain /subnets/create-avm-blockchain 301
@@ -124,7 +133,7 @@
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.0.4/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /build/tutorials/smart-digital-assets/create-a-fix-cap-asset  301
 /v/v1.1.1/build/getting-started /  301
-/v/v1.1.1/build/tutorials/nodes-and-staking /build/tutorials/nodes-and-staking  301
+/v/v1.1.1/nodes-and-staking /nodes-and-staking  301
 /v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
 /v1.0/en/api/keystore/ /build/apis/avalanchego/apis/keystore-api  301
 /v1.0/en/references/command-line-interface/ /build/references/command-line-interface  301
