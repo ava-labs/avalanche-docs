@@ -65,6 +65,18 @@ const config = {
         },
         items: [
           {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'overview',
+            label: 'Overview',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'tutorialSidebar',
+            label: 'NavBar',
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },

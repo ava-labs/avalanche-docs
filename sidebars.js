@@ -21,41 +21,6 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'category',
-      label: 'Overview',
-      collapsible: true,
-      collapsed: false,
-      items: [
-        {
-          type: 'category',
-          label: 'Getting Started',
-          items: [
-            'overview/getting-started/intro',
-            'overview/getting-started/avalanche-platform-overview',
-            'overview/getting-started/avalanche-consensus',
-            {
-              type: 'link',
-              label: 'Whitepapers', 
-              href: 'https://www.avalabs.org/whitepapers', 
-            },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Platform',
-          items: [
-            'learn/platform-overview/transaction-fees'
-          ],
-        },
-        {
-          type: 'link',
-          label: 'Audits', 
-          href: 'https://github.com/ava-labs/audits', 
-        },
-        'learn/avalanche-bridge-faq',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Build',
       collapsible: true,
       collapsed: false,
@@ -246,6 +211,46 @@ const sidebars = {
       href: 'https://support.avax.network/en/', 
     },
   ],
+
+
+  overview: [
+    {
+      type: 'category',
+      label: 'Overview',
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: 'category',
+          label: 'Getting Started',
+          items: [
+            'overview/getting-started/intro',
+            'overview/getting-started/avalanche-platform-overview',
+            'overview/getting-started/avalanche-consensus',
+            {
+              type: 'link',
+              label: 'Whitepapers', 
+              href: 'https://www.avalabs.org/whitepapers', 
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Platform',
+          items: [
+            'learn/platform-overview/transaction-fees'
+          ],
+        },
+        {
+          type: 'link',
+          label: 'Audits', 
+          href: 'https://github.com/ava-labs/audits', 
+        },
+        'learn/avalanche-bridge-faq',
+      ],
+    },
+  ],
+
 
 };
 
