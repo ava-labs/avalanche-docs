@@ -190,6 +190,7 @@ const sidebars = {
     },
   ],
   community: [
+    'community/README',
     {
       type: 'link',
       label: 'Product Support',
@@ -203,8 +204,6 @@ const sidebars = {
       ],
     },
   ],
-
-
 };
 
 module.exports = sidebars;
