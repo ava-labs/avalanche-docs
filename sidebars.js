@@ -80,7 +80,6 @@ const sidebars = {
     },
   ],
   dapps: [
-    'dapps/README',
     {
       type: 'category',
       label: 'Smart Contract',

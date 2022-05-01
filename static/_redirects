@@ -146,33 +146,51 @@
 /build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash /quickstart/run-a-five-node-network-with-avash 301
 /build/tools/network-runner/ /quickstart/network-runner 301
 /build/tools/network-runner /quickstart/network-runner 301
-
-
+#dapps
+/build/tutorials/smart-contracts/ /dapps/smart-contracts/ 301
+/build/tutorials/smart-contracts /dapps/smart-contracts/ 301
+/build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically/ /dapps/smart-contracts/add-avalanche-to-metamask-programmatically 301
+/build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically /dapps/smart-contracts/add-avalanche-to-metamask-programmatically 301
+/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask/ /dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask 301
+/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask /dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask 301
+/build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain/ /dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain 301
+/build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain /dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain 301
+/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain /dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain 301
+/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain/ /dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain 301
+/build/tutorials/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace/ /dapps/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace 301
+/build/tutorials/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace /dapps/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace 301
+/build/tutorials/smart-contracts/verify-smart-contracts-with-truffle-verify/ /dapps/smart-contracts/verify-smart-contracts-with-truffle-verify 301
+/build/tutorials/smart-contracts/verify-smart-contracts-with-truffle-verify /dapps/smart-contracts/verify-smart-contracts-with-truffle-verify 301
+/build/tutorials/smart-contracts/verify-smart-contracts/ /dapps/smart-contracts/verify-smart-contracts 301
+/build/tutorials/smart-contracts/verify-smart-contracts /dapps/smart-contracts/verify-smart-contracts 301
+/build/tutorials/smart-digital-assets/ /dapps/smart-digital-assets/ 301
+/build/tutorials/smart-digital-assets /dapps/smart-digital-assets/ 301
+/build/tutorials/smart-digital-assets/create-a-fix-cap-asset/ /dapps/smart-digital-assets/create-a-fix-cap-asset 301
+/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /dapps/smart-digital-assets/create-a-fix-cap-asset 301
+/build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
+/build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1/ /dapps/smart-digital-assets/creating-a-nft-part-1 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1 /dapps/smart-digital-assets/creating-a-nft-part-1 301
+/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset/ /dapps/smart-digital-assets/creating-a-variable-cap-asset 301
+/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset /dapps/smart-digital-assets/creating-a-variable-cap-asset 301
+/dapps/smart-digital-assets/creating-a-variable-cap-asset/ /dapps/smart-digital-assets/wallet-nft-studio 301
+/dapps/smart-digital-assets/creating-a-variable-cap-asset /dapps/smart-digital-assets/wallet-nft-studio 301
+#community
+/build/tutorials/tutorials-contest/ /community/tutorials-contest/ 301
+/build/tutorials/tutorials-contest /community/tutorials-contest/ 301
 # 04/21/2022
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 # since the begining
-/learn /learn/getting-started/ 301
-/learn/ /learn/getting-started/ 301
-/learn/platf /learn/platform-overview  301
-/build/get-started /build/tutorials/ 301
-/build/references/command-line-interface/ /build/../nodes/maintain/avalanchego-config-flags/ 301
-/nodes-and-staking/avash /build/tools/avash  301
+/learn / 301
+/learn/ / 301
+/learn/platf /overview/getting-started/avalanche-platform-overview  301
+/build/get-started / 301
+/build/references/command-line-interface/ /nodes/maintain/avalanchego-config-flags/ 301
 /build/tutorials/platform/create-a-subnet /subnets/create-a-subnet 301
 /build/tutorials/platform/create-a-virtual-machine-vm /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/create-avm-blockchain /subnets/create-avm-blockchain 301
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
-/build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche /learn/setup-your-ledger-nano-s-with-avalanche 301
-/build/avalanchego-apis/platform-chain-p-chain-api/ /build/avalanchego-apis/p-chain 301
-/build/avalanchego-apis/contract-chain-c-chain-api/ /build/avalanchego-apis/c-chain 301
-/build/avalanchego-apis/exchange-chain-x-chain-api/ /build/avalanchego-apis/x-chain 301
-/build/avalanchego-apis/admin-api/ /build/avalanchego-apis/admin 301
-/build/avalanchego-apis/auth-api/ /build/avalanchego-apis/auth 301
-/build/avalanchego-apis/health-api/ /build/avalanchego-apis/health 301
-/build/avalanchego-apis/info-api/ /build/avalanchego-apis/info 301
-/build/avalanchego-apis/ipc-api/ /build/avalanchego-apis/ipc 301
-/build/avalanchego-apis/keystore-api/ /build/avalanchego-apis/keystore 301
-/build/avalanchego-apis/metrics-api/ /build/avalanchego-apis/metrics 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
 /v/v1.0.4/build/apis /apis/avalanchego/apis/  301
