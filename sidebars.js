@@ -41,7 +41,6 @@ const sidebars = {
       label: 'Audits',
       href: 'https://github.com/ava-labs/audits',
     },
-    'overview/avalanche-bridge-faq',
   ],
 
   quickStart: [

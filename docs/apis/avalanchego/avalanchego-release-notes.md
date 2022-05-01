@@ -1,4 +1,4 @@
-# AvalancheGo Release Notes
+# Release Notes
 
 :::info
 
