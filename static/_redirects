@@ -1,6 +1,8 @@
 # 05/02/2022
-/learn/avalanche-bridge-faq https://support.avax.network/en/collections/3073022-avalanche-bridge
-/learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge
+/learn/avalanche-bridge-faq https://support.avax.network/en/collections/3073022-avalanche-bridge 301
+/learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge 301
+/learn/getting-started/ /overview/getting-started/general-concepts 301
+/learn/getting-started  /overview/getting-started/general-concepts 301
 /learn/platform-overview/ /overview/getting-started/avalanche-platform-overview 301
 /learn/platform-overview /overview/getting-started/avalanche-platform-overview 301
 /learn/platform-overview/avalanche-consensus/ /overview/getting-started/avalanche-consensus 301
@@ -121,7 +123,7 @@
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.0.4/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /build/tutorials/smart-digital-assets/create-a-fix-cap-asset  301
-/v/v1.1.1/build/getting-started /learn/getting-started  301
+/v/v1.1.1/build/getting-started /  301
 /v/v1.1.1/build/tutorials/nodes-and-staking /build/tutorials/nodes-and-staking  301
 /v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
 /v1.0/en/api/keystore/ /build/apis/avalanchego/apis/keystore-api  301
