@@ -115,6 +115,39 @@
 /build/tools/avalanche-wallet-sdk   /apis/avalanche-wallet-sdk/ 301
 /build/tools/avalanche-wallet-sdk/wallet-classes/ /apis/avalanche-wallet-sdk/wallet-classes 301
 /build/tools/avalanche-wallet-sdk/wallet-classes  /apis/avalanche-wallet-sdk/wallet-classes 301
+#quickstart
+/build/tutorials/platform/ /quickstart/ 301
+/build/tutorials/platform  /quickstart/ 301
+/build/tutorials/platform/create-a-local-test-network/ /quickstart/create-a-local-test-network 301
+/build/tutorials/platform/create-a-local-test-network  /quickstart/create-a-local-test-network 301
+/build/tutorials/platform/fuji-workflow/ /quickstart/fuji-workflow 301
+/build/tutorials/platform/fuji-workflow  /quickstart/fuji-workflow 301
+/build/tutorials/platform/avalanche-summit-fuji-quickstart/ /quickstart/avalanche-summit-fuji-quickstart 301
+/build/tutorials/platform/avalanche-summit-fuji-quickstart  /quickstart/avalanche-summit-fuji-quickstart 301
+/build/tutorials/platform/fund-a-local-test-network/ /quickstart/fund-a-local-test-network 301
+/build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
+/build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
+/build/tutorials/platform/integrate-exchange-with-avalanche  /quickstart/exchanges/integrate-exchange-with-avalanche 301
+/build/tutorials/platform/launch-your-ethereum-dapp/ /quickstart/launch-your-ethereum-dapp 301
+/build/tutorials/platform/launch-your-ethereum-dapp /quickstart/launch-your-ethereum-dapp 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/transfer-avax-between-x-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain /quickstart/transfer-avax-between-x-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/transfer-avax-between-x-chain-and-p-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain /quickstart/transfer-avax-between-x-chain-and-p-chain 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/transfer-avax-between-p-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/transfer-avax-between-p-chain-and-c-chain 301
+/build/tutorials/platform/adjusting-gas-price-during-high-network-activity/ /quickstart/adjusting-gas-price-during-high-network-activity 301
+/build/tutorials/platform/adjusting-gas-price-during-high-network-activity /quickstart/adjusting-gas-price-during-high-network-activity 301
+/build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript/ /quickstart/sending-transactions-with-dynamic-fees-using-javascript 301
+/build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript /quickstart/sending-transactions-with-dynamic-fees-using-javascript 301
+/learn/platform-overview/transaction-fees/ /quickstart/transaction-fees 301
+/learn/platform-overview/transaction-fees  /quickstart/transaction-fees 301
+/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/run-a-five-node-network-with-avash 301
+/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash /quickstart/run-a-five-node-network-with-avash 301
+/build/tools/network-runner/ /quickstart/network-runner 301
+/build/tools/network-runner /quickstart/network-runner 301
+
+
 # 04/21/2022
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
