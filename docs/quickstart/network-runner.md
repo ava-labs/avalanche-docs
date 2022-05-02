@@ -4,7 +4,7 @@ The Avalanche Network Runner **(ANR)** allows a user to define, create and inter
 
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on the functionality of a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
 
-In the context of avalanche, **[subnets](https://docs.avax.network/build/tutorials/platform/subnets/)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem. 
+In the context of avalanche, **[subnets](../subnets/README.md)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem. 
 
 The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of avalanchego nodes with support for custom node, subnet and network configurations, allowing to locally test code before deploying to mainnet or even public testnets like `fuji`.
 
@@ -22,7 +22,7 @@ Clone the repository with:
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases) ready to use.
+There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases).
 
 To build and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
 ```bash
@@ -36,16 +36,18 @@ Unless otherwise specified, file paths given below are relative to the root of t
 
 There are two main ways to use the network-runner:
 * Run ANR as a binary
+
   This is the recommended approach for most use cases. Doesn't require golang installation and provides a RPC server with an HTTP API and a client library for easy interaction.
 * Import this repository into your go program
+
   This allows for custom network scenarios and high flexibility, but requires more code to be written. 
 
-Running the binary, the user can send requests to the RPC server in order to start a network, create subnets, add nodes to the network, remove nodes from the network, restart nodes, etc.. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
+Running the binary, the user can send requests to the RPC server in order to start a network, create subnets, add nodes to the network, remove nodes from the network, restart nodes, etc. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
 
 Each node can then also be reached via [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) endpoints which each node exposes.
 
 The following diagram is a simplified view of the high level architecture of the tool:
-![ANR architecture](/img/grpc-networkrunner.svg "Simplified ANR Architecture")
+![ANR architecture](/img/grpc-networkrunner.svg)
 
 ## Examples 
 
@@ -64,8 +66,8 @@ avalanche-network-runner server \
 Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to be run in a separate terminal.
 
 The RPC server listens to two ports:
-* `port`: the main gRPC port (see [gRPC](https://grpc.io/)
-* `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/) ), which allows for HTTP requests
+* `port`: the main gRPC port (see [gRPC](https://grpc.io/).
+* `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
 
 When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
 Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
@@ -78,8 +80,10 @@ Each of the examples below will show both modes, claritying its usage.
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/ping -d ''
+```
 
-# or
+or
+```bash
 avalanche-network-runner ping \
 --log-level debug \
 --endpoint="0.0.0.0:8080"
@@ -91,10 +95,14 @@ avalanche-network-runner ping \
 # replace execPath with the path to AvalancheGo on your machine
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 AVALANCHEGO_EXEC_PATH="avalanchego"
+```
 
+```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
@@ -116,7 +124,7 @@ See the [subnet](#network-runner-rpc-server-subnet-evm-example) section for deta
 
 The network-runner supports avalanchego node configuration at different levels.
 1. If neither `--global-node-config` nor `--custom-node-configs` is supplied, all nodes get a standard set of config options. Currently this set contains:
-    ```bash
+    ```json
         {
         "network-peer-list-gossip-frequency":"250ms",
         "network-max-reconnect-delay":"1s",
@@ -145,19 +153,25 @@ The network-runner supports avalanchego node configuration at different levels.
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/health -d ''
+```
 
-# or
+or
+```bash
 avalanche-network-runner control health \
 --log-level debug \
 --endpoint="0.0.0.0:8080"
 ```
 
+The response to this call is actually pretty large, as it contains the state of the whole cluster. At the very end of it there should be a text saying `healthy:true` (it would say `false` if it wasn't healthy).
+
 #### get API endpoints of all nodes in the cluster
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/uris -d ''
+```
 
-# or
+or
+```bash
 avalanche-network-runner control uris \
 --log-level debug \
 --endpoint="0.0.0.0:8080"
@@ -167,14 +181,16 @@ avalanche-network-runner control uris \
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/status -d ''
+```
 
-# or
+or
+```bash
 avalanche-network-runner control status \
 --log-level debug \
 --endpoint="0.0.0.0:8080"
 ```
 
-#### stream cluster status:
+#### stream cluster status
 
 ```bash
 avalanche-network-runner control \
@@ -185,12 +201,14 @@ stream-status \
 --endpoint="0.0.0.0:8080"
 ```
 
-#### remove (stop) a node:
+#### remove (stop) a node
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/removenode -d '{"name":"node5"}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control remove-node \
 --request-timeout=3m \
 --log-level debug \
@@ -207,12 +225,16 @@ In this example we are stopping the node named `node1`.
 ```bash
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 AVALANCHEGO_EXEC_PATH="avalanchego"
+```
 
-# Note that you can restart the node with a different binary by providing
-# a different execPath
+Note that you can restart the node with a different binary by providing
+
+```bash
 curl -X POST -k http://localhost:8081/v1/control/restartnode -d '{"name":"node1","execPath":"'${AVALANCHEGO_EXEC_PATH}'","logLevel":"INFO"}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control restart-node \
 --request-timeout=3m \
 --log-level debug \
@@ -228,12 +250,16 @@ In this example we are adding a node named `node1`.
 ```bash
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 AVALANCHEGO_EXEC_PATH="avalanchego"
+```
 
-# Note that you can add the new node with a different binary by providing
-# a different execPath
+Note that you can add the new node with a different binary by providing
+
+```bash
 curl -X POST -k http://localhost:8081/v1/control/addnode -d '{"name":"node99","execPath":"'${AVALANCHEGO_EXEC_PATH}'","logLevel":"INFO"}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control add-node \
 --request-timeout=3m \
 --log-level debug \
@@ -250,7 +276,7 @@ It's also possible to provide custom parameters, similar to starting the network
 ```
 
 `--node-config` allows to specify specific avalanchego config parameters to the new node.
-See [here](https://docs.avax.network/build/references/avalanchego-config-flags) for the reference of supported flags.
+See [here](../nodes/maintain/avalanchego-config-flags.md) for the reference of supported flags.
 
 **Note**: The following parameters will be *ignored* if set in `--node-config`, because the network runner needs to set its own in order to function properly:
 `--log-dir`
@@ -270,8 +296,10 @@ Note that this will still require to stop your RPC server process with `Ctrl-C` 
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/stop -d ''
+```
 
-# or
+or
+```bash
 avalanche-network-runner control stop \
 --log-level debug \
 --endpoint="0.0.0.0:8080"
@@ -279,7 +307,7 @@ avalanche-network-runner control stop \
 
 ## Subnets
 ANR can be a great helper tool working with subnets. We recommend using it to develop and test new subnets before deploying them in public networks.
-For general subnet documentation, please refer to [subnets](https://docs.avax.network/build/tutorials/platform/subnets/). 
+For general subnet documentation, please refer to [subnets](../subnets).
 These examples expect a basic understanding of what subnets are and their usage.
 
 ### RPC server `subnet-evm` example
@@ -409,8 +437,10 @@ For this, we need to point set the `custom-vms` parameter (a map) to contain the
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO","pluginDir":"'${AVALANCHEGO_PLUGIN_PATH}'","customVms":{"subnetevm":"/tmp/subnet-evm.genesis.json"}}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
@@ -515,8 +545,10 @@ For this, we need to point set the `custom-vms` parameter (a map) to contain the
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO","pluginDir":"'${AVALANCHEGO_PLUGIN_PATH}'","customVms":{"blobvm":"/tmp/blobvm.genesis.json"}}'
+```
 
-# or
+or
+```bash
 avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
