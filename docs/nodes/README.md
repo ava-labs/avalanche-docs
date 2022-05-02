@@ -19,15 +19,17 @@ This section provides documents on how to build and maintain an AvalancheGo node
 ## Maintain
 |  |  |
 | :--- | :--- |
-| [**Set up Node Monitoring**](./maintain/setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo |
 | [**Node Backup and Restore**](./maintain/node-backup-and-restore.md) | Back up important files to be able to restore your node |
 | [**Upgrade Your AvalancheGo Node**](./maintain/upgrade-your-avalanchego-node.mdx) | Upgrade your Avalanche node |
+| [**Monitor an Avalanche Node**](./maintain/setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo |
+| [**Grafana Dashboards**](./maintain/grafana-dashboards.mdx) | Pre-configured Grafana dashboards |
+| [**AvalancheGo Config and Flags**](./maintain/avalanchego-config-flags.md) |  Configuration and flags for an Avalanche node  |
+| [**Chain Configs**](./maintain/chain-config-flags.md) | Chain specific configurations |
 | [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md) | C-Chain offline pruning |
-
 
 ## Validate
 |  |  |
 | :--- | :--- |
 | [**What is Staking?**](./validate/staking.md) | Explain the concept of staking |
-| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../overview/getting-started/avalanche-platform-overview.md) |
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](./validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet |
+| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../overview/getting-started/avalanche-platform-overview.md) |
