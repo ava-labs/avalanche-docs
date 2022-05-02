@@ -56,7 +56,6 @@ const sidebars = {
     'quickstart/transaction-fees',
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
-    'quickstart/run-a-five-node-network-with-avash',
     'quickstart/network-runner',
     {
       type: 'category',
