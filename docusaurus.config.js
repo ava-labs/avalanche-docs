@@ -74,7 +74,7 @@ const config = {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'quickStart',
-            label: 'QuickStart',
+            label: 'Quick Start',
           },     
           {
             type: 'docSidebar',
