@@ -33,8 +33,8 @@
 /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge  /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/subnets/setup-dfk-node/ /subnets/setup-dfk-node 301
 /build/tutorials/platform/subnets/setup-dfk-node  /subnets/setup-dfk-node 301
-/build/tutorials/platform/subnets/subnet-faq/ /subnets/subnet-faq 301
-/build/tutorials/platform/subnets/subnet-faq /subnets/subnet-faq 301
+/build/tutorials/platform/subnets/subnet-faq/ https://support.avax.network/en/articles/6158840-subnet-faq 301
+/build/tutorials/platform/subnets/subnet-faq  https://support.avax.network/en/articles/6158840-subnet-faq 301
 #nodes
 /nodes-and-staking/ /nodes 301
 /nodes-and-staking  /nodes 301
