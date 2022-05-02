@@ -68,6 +68,8 @@
 /build/references/avalanchego-config-flags  /nodes/maintain/avalanchego-config-flags
 /build/references/chain-config-flags/  /nodes/maintain/chain-config-flags 301
 /build/references/chain-config-flags  /nodes/maintain/chain-config-flags 301
+/learn/platform-overview/staking/ /nodes/validate/staking 301
+/learn/platform-overview/staking  /nodes/validate/staking 301
 #apis
 /build/release-notes/avalanchego/ /apis/avalanchego/avalanchego-release-notes 301
 /build/release-notes/avalanchego  /apis/avalanchego/avalanchego-release-notes 301
