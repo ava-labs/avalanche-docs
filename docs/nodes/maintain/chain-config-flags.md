@@ -70,7 +70,12 @@ The default C-Chain config is:
   "offline-pruning-enabled": false,
   "offline-pruning-bloom-filter-size": 512,
   "offline-pruning-data-directory": "",
-  "max-outbound-active-requests": 8
+  "max-outbound-active-requests": 8,
+  "state-sync-enabled": false,
+  "state-sync-skip-resume": false,
+  "state-sync-min-blocks": 300000,
+  "state-sync-ids": "",
+  "state-sync-server-trie-cache": 64
 }
 ```
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change your node will remain with the old values, which might adversely affect your node operation.
@@ -415,6 +420,29 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 #### `keystore-insecure-unlock-allowed` (bool):
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
+
+
+### State Sync Settings
+
+#### `state-sync-enabled` (boolean):
+
+Set to `true` to start the C-Chain with state sync enabled. The peer will download chain state from peers up to a recent block near tip, then proceed with normal bootstrapping. Defaults to `false`.
+
+#### `state-sync-skip-resume` (boolean):
+
+If set to `true`, the chain will not resume a previously started state sync operation that did not complete. Normally, the chain should be able to resume state syncing without any issue. Defaults to `false`.
+
+#### `state-sync-min-blocks` (int):
+
+Minimum number of blocks the chain should be ahead of the local node to prefer state syncing over bootstrapping. If the node's database is already close to the chain's tip, bootstrapping is more efficient. Defaults to `300000`.
+
+#### `state-sync-ids` (string):
+
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. If not specified (or empty), peers are selected at random. Defaults to empty string.
+
+#### `state-sync-server-trie-cache` (int):
+
+Size of trie cache used for providing state sync data to peers in MBs. Should be a multiple of `64`. Defaults to `64`.
 
 ## X-Chain Configs
 
