@@ -167,16 +167,10 @@
 /build/tutorials/smart-contracts/verify-smart-contracts /dapps/smart-contracts/verify-smart-contracts 301
 /build/tutorials/smart-digital-assets/ /dapps/smart-digital-assets/ 301
 /build/tutorials/smart-digital-assets /dapps/smart-digital-assets/ 301
-/build/tutorials/smart-digital-assets/create-a-fix-cap-asset/ /dapps/smart-digital-assets/create-a-fix-cap-asset 301
-/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /dapps/smart-digital-assets/create-a-fix-cap-asset 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
 /build/tutorials/smart-digital-assets/creating-a-nft-part-1/ /dapps/smart-digital-assets/creating-a-nft-part-1 301
 /build/tutorials/smart-digital-assets/creating-a-nft-part-1 /dapps/smart-digital-assets/creating-a-nft-part-1 301
-/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset/ /dapps/smart-digital-assets/creating-a-variable-cap-asset 301
-/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset /dapps/smart-digital-assets/creating-a-variable-cap-asset 301
-/dapps/smart-digital-assets/creating-a-variable-cap-asset/ /dapps/smart-digital-assets/wallet-nft-studio 301
-/dapps/smart-digital-assets/creating-a-variable-cap-asset /dapps/smart-digital-assets/wallet-nft-studio 301
 #community
 /build/tutorials/tutorials-contest/ /community/tutorials-contest/ 301
 /build/tutorials/tutorials-contest /community/tutorials-contest/ 301
@@ -198,7 +192,6 @@
 /v/v1.0.4/build/apis /apis/avalanchego/apis/  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
-/v/v1.0.4/build/tutorials/smart-digital-assets/create-a-fix-cap-asset /build/tutorials/smart-digital-assets/create-a-fix-cap-asset  301
 /v/v1.1.1/build/getting-started /  301
 /v/v1.1.1/nodes-and-staking /nodes-and-staking  301
 /v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
