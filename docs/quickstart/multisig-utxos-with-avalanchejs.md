@@ -751,7 +751,7 @@ sendBaseTx()
 
 Run this file using `node examples/sendBaseTx.js`, see the txID in the output, and look for it in the Fuji explorer.
 
-![](/img/multisig-utxos-3.png)
+![](/img/multisig-utxos-3.jpeg)
 
 
 ## Export Multi-Sig UTXO From X to P-Chain
@@ -855,7 +855,7 @@ exportXP()
 
 Run this file using `node examples/exportXP.js`, see the txID in the output, and look for it in the [Fuji explorer](https://explorer-xp.avax-test.network/blockchain/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm).
 
-![](/img/multisig-utxos-4.png)
+![](/img/multisig-utxos-4.jpeg)
 
 In the above image, we are consuming UTXO with the amount `0.486...`, and generating outputs with the amount `0.382...` (change output) and `0.003` and `0.1` (exported output). The remaining `0.001` is burned as transaction fees.
 
@@ -944,7 +944,7 @@ async function importP() {
 }
 ```
 
-![](/img/multisig-utxos-5.png)
+![](/img/multisig-utxos-5.jpeg)
 
 In the above image, we are consuming the above exported UTXOs with amounts `0.003` and `0.1`, and generating outputs with amount `0.092...` (change output imported on P-Chain) and 2 `0.005` imported outputs (1 multi-sig and 1 single-sig). The remaining `0.001` is burned as transaction fees.
 
@@ -1142,4 +1142,4 @@ addDelegator()
 
 Run this file using `node examples/addDelegatorTx.js`, see the txID in the output, and look for it in the Fuji explorer.
 
-![](/img/multisig-utxos-7.png)
+![](/img/multisig-utxos-7.jpeg)
