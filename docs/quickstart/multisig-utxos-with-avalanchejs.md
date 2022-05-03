@@ -6,9 +6,9 @@ An account on a chain that follows the UTXO model doesn't have a parameter like 
 
 The outputs are the result of a transaction that can be spent by the owner of that output. For example, an account has 3 outputs that it can spend, and hence are currently unspent. That is why we call them Unspent Transaction Outputs (UTXOs). So it is better to use the term unspent outputs rather than just outputs. Similarly, we add the amount in the UTXOs owned by an address to calculate its balance. Signing a transaction basically adds the signature of the UTXO owners included in the inputs.
 
-If an account A wants to send 10 AVAX to account B, then it has to include all those unspent outputs in a transaction, that are owned by A and whose sum of amounts in those outputs is more than or equal to 10. These UTXOs will be included as inputs in a transaction. Account A also has to create outputs with amount 10 and the owner being the receiver (here B). There could be multiple outputs in the outputs array. This means, that using these UTXOs, we can create multiple outputs with different amounts to different addresses.
+If an account A wants to send 1.3 AVAX to account B, then it has to include all those unspent outputs in a transaction, that are owned by A and whose sum of amounts in those outputs is more than or equal to 1.3. These UTXOs will be included as inputs in a transaction. Account A also has to create outputs with amount 1.3 and the owner being the receiver (here B). There could be multiple outputs in the outputs array. This means, that using these UTXOs, we can create multiple outputs with different amounts to different addresses.
 
-Once the transaction is committed, the UTXOs in the inputs will be consumed and outputs will become new UTXOs for the receiver. If the inputs have more amount unlocked than being consumed by the outputs, then the excess amount will be burned as fees. Therefore, we should also create a change output which will be assigned to us, if there is an excess amount in the input.
+Once the transaction is committed, the UTXOs in the inputs will be consumed and outputs will become new UTXOs for the receiver. If the inputs have more amount unlocked than being consumed by the outputs, then the excess amount will be burned as fees. Therefore, we should also create a change output which will be assigned to us, if there is an excess amount in the input. In the diagram given below, a total of 1.72 AVAX is getting unlocked in inputs, therefore we have also created a change output for the excess amount (0.41 AVAX) to the sender's address. The remaining amount after being consumed by the outputs like receiver's and change output, is burned as fees (0.01 AVAX).
 
 ![](/img/multisig-utxos-1.png)
 
@@ -25,13 +25,13 @@ On Avalanche, we can even create cross-chain outputs. This means that we can do 
 * Export transaction on source chain
 * Import transactions on the destination chain
 
-Atomic transactions are similar to other transactions. We use UTXOs of the source chain as inputs and create outputs owned by destination chain addresses. When the export transactions are issued, the newly created UTXOs lie in the **Exported Atomic Memory**. These are neither on the source chain nor on the destination chain. These UTXOs can only be used as inputs by their owners on the destination chain while making import transactions. Using these UTXOs on the atomic memory, we can create multiple outputs with different amounts or addresses.
+Atomic transactions are similar to other transactions. We use UTXOs of the source chain as inputs and create outputs owned by destination chain addresses. When the export transactions are issued, the newly created UTXOs stay in the **Exported Atomic Memory**. These are neither on the source chain nor on the destination chain. These UTXOs can only be used as inputs by their owners on the destination chain while making import transactions. Using these UTXOs on the atomic memory, we can create multiple outputs with different amounts or addresses.
 
 ![](/img/multisig-utxos-2.png)
 
 ## UTXOs on C-Chain
 
-We can't use UTXOs on C-Chain to do regular transactions because it follows the account-based approach. In C-Chain, each address (account) is mapped with its balance, and the assets are transferred simply by adding and subtracting from this balance using the virtual machine.
+We can't use UTXOs on C-Chain to do regular transactions because C-Chain follows the account-based approach. In C-Chain, each address (account) is mapped with its balance, and the assets are transferred simply by adding and subtracting from this balance using the virtual machine.
 
 But we can export UTXOs with one or multiple owners to C-Chain and then import them by signing the transaction with the qualified spenders containing those UTXOs as inputs. The output on C-Chain can only have a single owner (a hexadecimal address). Similarly while exporting from C-Chain to other chains, we can have multiple owners for the output, but input will be signed only by the account whose balance is getting used.
 
@@ -325,7 +325,7 @@ const createEVMInput = (amount, addresses, assetID, nonce) => {
 }
 ```
 
-## Create EVM Output
+### Create EVM Output
 
 The `createEVMOutput()` function will create EVM output for importing assets on C-Chain.
 
@@ -508,7 +508,7 @@ const checkChain = (chainID, ownerAddress) => {
 }
 ```
 
-For getting UTXOs from an address, let's make another function `getUnspentOutputs()`. This function will fetch UTXOs from a given address and source chain. The `sourceChain` will be used to fetch exported UTXOs that are not yet imported. The exported outputs lie in the exported atomic memory. This parameter will only be used when we want to import assets.
+For getting UTXOs from an address, let's make another function `getUnspentOutputs()`. This function will fetch UTXOs from a given address and source chain. The `sourceChain` will be used to fetch exported UTXOs that are not yet imported. The exported outputs stay in the exported atomic memory. This parameter will only be used when we want to import assets.
 
 ```javascript
 // UTXOs for spending unspent outputs
@@ -737,7 +737,7 @@ Let's discuss the arguments of `createInputsAndOutputs()` in detail -
 
 In the above parameters, if `fee` is less than the fees actually required for that transaction, then there will be no surplus amount left by outputs over inputs because any surplus will be converted into a change output. This can cause transaction failure. So keep the fees in accordance with the transaction as mentioned [here](https://docs.avax.network/learn/platform-overview/transaction-fees/#fee-schedule).
 
-Also, the `sourceChain` parameter is required for fetching exported UTXOs that do not lie yet on the destination chain. For non-export/import transactions, this parameter is not required.
+Also, the `sourceChain` parameter is required for fetching exported UTXOs that do not exist yet on the destination chain. For non-export/import transactions, this parameter is not required.
 
 The `createInputsAndOutputs()` function will return `inputs` and `outputs` required for any transaction. The last element of the outputs array would be change output. And the order of other outputs will be the same as that in the `outputConfig`. Signature indexes corresponding to their owners are already included in the inputs. We can create an unsigned base transaction using the `BaseTx` and `UnsignedTx` classes as shown above. The `.sign()` function basically adds the required signatures from the keychain at the place indicated by signature indexes.
 
@@ -861,7 +861,7 @@ In the above image, we are consuming UTXO with the amount `0.486...`, and genera
 
 ## Import Multi-Sig UTXO From X to P-Chain
 
-After exporting the UTXOs from the source chain, it lies in the exported atomic memory i.e. these are neither on the source chain nor on the destination chain. Paste the following snippets into a new file `importP.js`.
+After exporting the UTXOs from the source chain, it stays in the exported atomic memory i.e. these are neither on the source chain nor on the destination chain. Paste the following snippets into a new file `importP.js`.
 
 ### Import Dependencies
 
