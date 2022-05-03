@@ -28,7 +28,6 @@ const sidebars = {
         'overview/getting-started/intro',
         'overview/getting-started/avalanche-platform-overview',
         'overview/getting-started/avalanche-consensus',
-        'overview/getting-started/general-concepts',
         {
           type: 'link',
           label: 'Whitepapers',
