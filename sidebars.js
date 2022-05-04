@@ -28,7 +28,6 @@ const sidebars = {
         'overview/getting-started/intro',
         'overview/getting-started/avalanche-platform-overview',
         'overview/getting-started/avalanche-consensus',
-        'overview/getting-started/general-concepts',
         {
           type: 'link',
           label: 'Whitepapers',
@@ -49,14 +48,13 @@ const sidebars = {
     'quickstart/fuji-workflow',
     'quickstart/avalanche-summit-fuji-quickstart',
     'quickstart/fund-a-local-test-network',
-    'quickstart/launch-your-ethereum-dapp',
     'quickstart/transfer-avax-between-x-chain-and-c-chain',
     'quickstart/transfer-avax-between-x-chain-and-p-chain',
     'quickstart/transfer-avax-between-p-chain-and-c-chain',
+    'quickstart/multisig-utxos-with-avalanchejs',
     'quickstart/transaction-fees',
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
-    'quickstart/run-a-five-node-network-with-avash',
     'quickstart/network-runner',
     {
       type: 'category',
@@ -81,6 +79,7 @@ const sidebars = {
     },
   ],
   dapps: [
+    'dapps/launch-your-ethereum-dapp',
     {
       type: 'category',
       label: 'Smart Contract',
@@ -103,7 +102,7 @@ const sidebars = {
         },
       ],
     },
-      
+
   ],
   subnets: [
     {
