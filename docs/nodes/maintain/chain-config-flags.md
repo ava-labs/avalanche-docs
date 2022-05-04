@@ -438,7 +438,7 @@ Minimum number of blocks the chain should be ahead of the local node to prefer s
 
 #### `state-sync-ids` (string):
 
-Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. If not specified (or empty), peers are selected at random. Defaults to empty string.
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. If not specified (or empty), peers are selected at random. Defaults to empty string.
 
 #### `state-sync-server-trie-cache` (int):
 
