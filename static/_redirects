@@ -1,6 +1,8 @@
 #05/04/02
 /build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/network-runner/#start-a-new-avalanche-network-with-five-nodes-a-cluster 301
 /build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash /quickstart/network-runner/#start-a-new-avalanche-network-with-five-nodes-a-cluster 301
+/build/tutorials/platform/launch-your-ethereum-dapp/ /dapps/launch-your-ethereum-dapp 301
+/build/tutorials/platform/launch-your-ethereum-dapp /dapps/launch-your-ethereum-dapp 301
 
 # 05/02/2022
 #overview
@@ -132,8 +134,6 @@
 /build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
 /build/tutorials/platform/integrate-exchange-with-avalanche  /quickstart/exchanges/integrate-exchange-with-avalanche 301
-/build/tutorials/platform/launch-your-ethereum-dapp/ /quickstart/launch-your-ethereum-dapp 301
-/build/tutorials/platform/launch-your-ethereum-dapp /quickstart/launch-your-ethereum-dapp 301
 /build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/transfer-avax-between-x-chain-and-c-chain 301
 /build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain /quickstart/transfer-avax-between-x-chain-and-c-chain 301
 /build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/transfer-avax-between-x-chain-and-p-chain 301
