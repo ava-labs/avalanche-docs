@@ -52,6 +52,7 @@ const sidebars = {
     'quickstart/transfer-avax-between-x-chain-and-c-chain',
     'quickstart/transfer-avax-between-x-chain-and-p-chain',
     'quickstart/transfer-avax-between-p-chain-and-c-chain',
+    'quickstart/multisig-utxos-with-avalanchejs',
     'quickstart/transaction-fees',
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
