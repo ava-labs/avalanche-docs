@@ -48,7 +48,6 @@ const sidebars = {
     'quickstart/fuji-workflow',
     'quickstart/avalanche-summit-fuji-quickstart',
     'quickstart/fund-a-local-test-network',
-    'quickstart/launch-your-ethereum-dapp',
     'quickstart/transfer-avax-between-x-chain-and-c-chain',
     'quickstart/transfer-avax-between-x-chain-and-p-chain',
     'quickstart/transfer-avax-between-p-chain-and-c-chain',
@@ -80,6 +79,7 @@ const sidebars = {
     },
   ],
   dapps: [
+    'dapps/launch-your-ethereum-dapp',
     {
       type: 'category',
       label: 'Smart Contract',
