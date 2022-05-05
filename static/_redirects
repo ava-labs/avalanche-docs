@@ -1,6 +1,24 @@
 #05/05/2022
 /build/tutorials/ / 301
 /build/tutorials  / 301
+/build/references/platform-transaction-serialization/ /quickstart/references/platform-transaction-serialization 301
+/build/references/platform-transaction-serialization /quickstart/references/platform-transaction-serialization 301
+/build/references/coreth-arc20s/ /quickstart/references/coreth-arc20s 301
+/build/references/coreth-arc20s  /quickstart/references/coreth-arc20s 301
+/build/references/avm-transaction-serialization/ /quickstart/references/avm-transaction-serialization 301
+/build/references/avm-transaction-serialization  /quickstart/references/avm-transaction-serialization 301
+/build/references/network-protocol/ /quickstart/references/network-protocol 301
+/build/references/network-protocol /quickstart/references/network-protocol 301
+/build/tools/abigen/ /quickstart/references/abigen 301
+/build/tools/abigen  /quickstart/references/abigen 301
+/build/tools/avash/  /quickstart/references/avash 301
+/build/tools/avash   /quickstart/references/avash 301
+/build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
+/build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
+/build/references/network-protocol/ /quickstart/references/network-protocol 301
+/build/references/network-protocol  /quickstart/references/network-protocol 301
+/build/references/serialization-primitives/ /quickstart/references/serialization-primitives 301
+/build/references/serialization-primitives  /quickstart/references/serialization-primitives 301
 
 #05/04/2022
 /build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/network-runner/#start-a-new-avalanche-network-with-five-nodes-a-cluster 301
