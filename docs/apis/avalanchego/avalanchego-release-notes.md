@@ -538,7 +538,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
 **Config Options**
-* Removed `--coreth-config`. See [here.](../../nodes/maintain/avalanchego-config-flags.md#c-chain-config)
+* Removed `--coreth-config`. See [here.](../../nodes/maintain/chain-config-flags.md#c-chain-configs)
 * Added `--throttler-inbound-node-max-processing-msgs`. See [here.](../../nodes/maintain/avalanchego-config-flags.md#message-rate-limiting-throttling)
 * Added `--db-config-file`. See [here.](../../nodes/maintain/avalanchego-config-flags.md#database-config)
 
@@ -565,7 +565,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 * Changed the default size of the outbound at-large message allocation from 32 MiB to 6 MiB.
 * Changed the default maximum number of bytes a node can take from the inbound at-large message allocation from 4 MiB to 2 MiB.
 * Changed the default maximum number of bytes a node can take from the outbound at-large message allocation from 4 MiB to 2 MiB.
-* Added additional inbound message rate-limiting. A node will not read more messages from a peer until it is processing less than `--throttler-inbound-node-max-processing-msgs` from that peer.  
+* Added additional inbound message rate-limiting. A node will not read more messages from a peer until it is processing less than `--throttler-inbound-node-max-processing-msgs` from that peer.
 * Changed default number of non-validators an AppGossip message is gossiped to from 2 to 0.
 * Changed default number of validators an AppGossip message is gossiped to from 4 to 6.
 * Introduced the ability for a VM to gossip to specific validators rather than just uniformly randomly.
@@ -611,7 +611,7 @@ The following are deprecated and should no longer be used. They may be removed i
 
 * API method `avm.exportAVAX` should be removed in favor of `avm.export`
 * API method `avm.importAVAX` should be removed in favor of `avm.import`
-* Config option `coreth-config` should be removed in favor of a [chain config file](../../nodes/maintain/avalanchego-config-flags.md#c-chain-config).
+* Config option `coreth-config` should be removed in favor of a [chain config file](../../nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 ## v1.6.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0))
 
@@ -679,7 +679,7 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 
 * Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
 * Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
-* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --&gt; `SendPut`). 
+* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --&gt; `SendPut`).
 
 **P-Chain**
 
@@ -754,7 +754,7 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 **Coreth**
 
-* Updated to Geth v1.10.7.  
+* Updated to Geth v1.10.7.
 
 ## v1.5.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0))
 
@@ -1535,7 +1535,7 @@ Please note that this release contains breaking changes described [here](https:/
 * Generalized the codec package to be able to manage multiple codecs with different versions.
 * Added Epoch to the Vertex interface in preparation of a future release.
 * Deferred transaction hashing to reduce CPU/Memory utilization past fast checks.
-* For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
+* For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/).
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
 

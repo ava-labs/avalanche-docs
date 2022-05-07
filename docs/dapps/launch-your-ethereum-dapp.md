@@ -55,7 +55,7 @@ The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.
 
 For more information, see [documentation](../apis/avalanchego/public-api-server.md).
 
-However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
+However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.
 
 ## Running Your Own Node
 
@@ -67,7 +67,7 @@ For development and experimental purposes, [here](../nodes/build/run-avalanche-n
 
 Node configuration options are explained [here](../nodes/maintain/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
 
-On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../nodes/maintain/avalanchego-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
+On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../nodes/maintain/chain-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
 
 By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/chains/C/config.json`. We will go over how to adjust the config to cover some common use cases in the following sections.
 
