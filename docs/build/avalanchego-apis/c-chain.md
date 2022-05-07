@@ -5,11 +5,11 @@ sidebar_position: 4
 
 # Contract Chain (C-Chain) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../../overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
+_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/README.md#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
 
 ## Deploying a Smart Contract
 
-[Deploy a Smart Contract on Avalanche Using Remix and MetaMask](../../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+[Deploy a Smart Contract on Avalanche Using Remix and MetaMask](../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
 
 ## Ethereum APIs
 
@@ -34,7 +34,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 :::info
-On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
+On the [public api node](../tools/public-api.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
 
@@ -50,7 +50,7 @@ For example, to interact with the C-Chain's Ethereum APIs via websocket on local
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-Note: on localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+Note: on localhost, use `ws://`. When using the [Public API](../tools/public-api.md) or another host that supports encryption, use `wss://`.
 
 To interact with other instances of the EVM via the websocket endpoint:
 
@@ -77,7 +77,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 :::info
 
-Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
+Note: For batched requests on the [public api node](../tools/public-api.md) , the maximum number of items is 40. We are working on to support a larger batch size.
 
 :::
 
@@ -190,7 +190,7 @@ curl -X POST --data '{
 }
 ```
 
-For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
+For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](../../learn/platform-overview/transaction-fees.md#c-chain-fees).
 
 ## Avalanche Specific APIs
 
@@ -761,7 +761,7 @@ curl -X POST --data '{
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../../nodes/maintain/chain-config-flags.md#c-chain-configs) `--coreth-admin-api-enabled:true`.
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../nodes/maintain/chain-config-flags.md#c-chain-configs) `--coreth-admin-api-enabled:true`.
 
 ### Endpoint
 

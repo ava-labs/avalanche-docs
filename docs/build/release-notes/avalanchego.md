@@ -1,8 +1,8 @@
-# Release Notes
+# AvalancheGo
 
 :::info
 
-[Upgrade Your AvalancheGo Node](../../nodes/maintain/upgrade-your-avalanchego-node.mdx)
+[Upgrade Your AvalancheGo Node](../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.mdx)
 
 :::
 
@@ -539,8 +539,8 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Config Options**
 * Removed `--coreth-config`. See [here.](../../nodes/maintain/chain-config-flags.md#c-chain-configs)
-* Added `--throttler-inbound-node-max-processing-msgs`. See [here.](../../nodes/maintain/avalanchego-config-flags.md#message-rate-limiting-throttling)
-* Added `--db-config-file`. See [here.](../../nodes/maintain/avalanchego-config-flags.md#database-config)
+* Added `--throttler-inbound-node-max-processing-msgs`. See [here.](../references/avalanchego-config-flags.md#message-rate-limiting-throttling)
+* Added `--db-config-file`. See [here.](../references/avalanchego-config-flags.md#database-config)
 
 **API**
 * API method `avm.exportAVAX` has been removed. Use `avm.export` instead.
@@ -646,7 +646,7 @@ Fix race condition during timeout manager startup.
 
 **Config Options**
 
-* Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../../nodes/maintain/avalanchego-config-flags.md))
+* Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../references/avalanchego-config-flags.md))
 * Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
 
 ## PRE\_RELEASE v1.6.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji))

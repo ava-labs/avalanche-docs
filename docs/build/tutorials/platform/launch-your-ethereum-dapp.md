@@ -11,9 +11,9 @@ The purpose of this document is to help you with launching your existing dapp on
 
 ## Platform Basics
 
-Avalanche is a [network of networks](../overview/getting-started/avalanche-platform-overview.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
+Avalanche is a [network of networks](../../../learn/platform-overview/README.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
 
-C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result, you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../overview/getting-started/avalanche-consensus.md) enables.
+C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result, you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../../../learn/platform-overview/avalanche-consensus.md) enables.
 
 Coreth is loaded as a plugin into [AvalancheGo](https://github.com/ava-labs/avalanchego), the client node application used to run Avalanche network.
 
@@ -21,7 +21,7 @@ As far as your dapp is concerned, it will be running the same as on Ethereum, ju
 
 ## Accessing Avalanche C-Chain
 
-C-Chain exposes the [same API](../apis/avalanchego/apis/c-chain.md) as go-ethereum, so you can use all the familiar APIs that are available on Ethereum for interaction with the platform.
+C-Chain exposes the [same API](../../avalanchego-apis/c-chain.md) as go-ethereum, so you can use all the familiar APIs that are available on Ethereum for interaction with the platform.
 
 There are multiple ways of working with the C-Chain.
 
@@ -45,7 +45,7 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 * **Symbol**: `AVAX`
 * **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-In your application's web interface, you can [add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
+In your application's web interface, you can [add Avalanche programmatically](../smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
 
 ### Using the Public API Nodes
 
@@ -53,7 +53,7 @@ Instead of proxying network operations through MetaMask, you can use the public 
 
 The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
-For more information, see [documentation](../apis/avalanchego/public-api-server.md).
+For more information, see [documentation](../../tools/public-api.md).
 
 However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.
 
@@ -61,13 +61,13 @@ However, public API does not expose all the APIs that are available on the node,
 
 If you don't want your dapp to depend on a centralized service you don't control, or have specific needs that cannot be met through the public API, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
 
-For development and experimental purposes, [here](../nodes/build/run-avalanche-node-manually.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to run a node on a Linux machine, you can use the [installer script](../nodes/build/set-up-node-with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
+For development and experimental purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to run a node on a Linux machine, you can use the [installer script](../nodes-and-staking/set-up-node-with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
 
 ### Node Configuration
 
-Node configuration options are explained [here](../nodes/maintain/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
+Node configuration options are explained [here](../../references/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
 
-On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../nodes/maintain/chain-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
+On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../../../nodes/maintain/chain-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
 
 By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/chains/C/config.json`. We will go over how to adjust the config to cover some common use cases in the following sections.
 
@@ -113,13 +113,13 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 }
 ```
 
-Default config values for the C-Chain can be seen [here](../nodes/maintain/avalanchego-config-flags#c-chain-configs).
+Default config values for the C-Chain can be seen [here](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
 
 ### Running a Local Test Network
 
 If you need a private test network to test your dapp, [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-For more information, see [documentation](../quickstart/network-runner.md).
+For more information, see [documentation](../../tools/network-runner.md).
 
 ## Developing and Deploying Contracts
 
@@ -127,18 +127,18 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer too
 
 ### Remix
 
-There is a [tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
+There is a [tutorial](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
 
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](../dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain.md).
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md).
 
 ### Hardhat
 
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-For more information see [this doc](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md).
+For more information see [this doc](../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md).
 
 ## Avalanche Explorer
 
@@ -161,7 +161,7 @@ Smart contract verification provides transparency for users interacting with sma
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
-See [this](../dapps/smart-contracts/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Sourcify and Truffle.
+See [this](../smart-contracts/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Sourcify and Truffle.
 
 ## Contract security checks
 
