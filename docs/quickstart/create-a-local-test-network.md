@@ -12,7 +12,7 @@ There are currently two options to launch such a local network:
 
 ### Avalanche Network Runner
 
-Please refer to the dedicated Avalanche Network Runner documentation at [ANR](./network-runner.md "Avalanche Network Runner").
+Please refer to the dedicated [Avalanche Network Runner documentation.](./network-runner.md#start-a-new-avalanche-network-with-five-nodes-a-cluster)
 
 ### Manually
 
