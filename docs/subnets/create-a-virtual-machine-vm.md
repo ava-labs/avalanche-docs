@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../overview/getting-started/avalanche-platform-overview.md#virtual-machines)
+One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../overview/getting-started/avalanche-platform.md#virtual-machines)
 
 In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
 

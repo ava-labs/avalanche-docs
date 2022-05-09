@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine (AVM)](../overview/getting-started/avalanche-platform-overview.md#exchange-chain-x-chain). In this tutorial, we’ll create a X-Chain alike blockchain by creating a new instance of the AVM.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine (AVM)](../overview/getting-started/avalanche-platform.md#exchange-chain-x-chain). In this tutorial, we’ll create a X-Chain alike blockchain by creating a new instance of the AVM.
 
 If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
@@ -282,7 +282,7 @@ More information can be found in the [Adding a Subnet Validator](../nodes/valida
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../overview/getting-started/avalanche-platform-overview.md#exchange-chain-x-chain). There are some small differences:
+You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../overview/getting-started/avalanche-platform.md#exchange-chain-x-chain). There are some small differences:
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
 
