@@ -767,6 +767,10 @@ Node will stop reading messages from a peer when it is processing this many mess
 Will resume reading messages from the peer when it is processing less than this many messages.
 Defaults to `1024`.
 
+#### `throttler-inbound-cpu-min-recheck-freq` (duration):
+
+In the CPU-based network throttler, check at least this often whether the node's CPU usage has fallen to an acceptable level.
+
 #### `--throttler-outbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
@@ -778,6 +782,10 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 #### `--throttler-outbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
+
+#### `cpu-tracker-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly.
 
 ### Connection Rate-Limiting
 
