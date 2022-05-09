@@ -6,6 +6,17 @@
 
 :::
 
+## v1.7.11 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
+
+**Networking**
+
+- Bandwidth reduction improvements:
+    - By default, non-validators now send only pull queries, not push queries.
+    - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
+    - See new [flags](../../nodes/maintain/chain-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
+
 ## v1.7.10 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.10))
 
 
