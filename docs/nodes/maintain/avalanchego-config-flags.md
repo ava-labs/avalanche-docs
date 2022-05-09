@@ -812,7 +812,7 @@ The maximum allowed scaling of the current CPU target based on the current actua
 
 #### `--cpu-validator-alloc-portion` (float):
 
-Of the targetd CPU cores in `cpu-target`, reserve this portion of the CPU for usage by validators. Must be in [0,1]
+Of the targeted CPU cores in `cpu-target`, reserve this portion of the CPU for usage by validators. Must be in [0,1]
 
 #### `--cpu-target-per-non-validator-max-fraction` (float):
 
