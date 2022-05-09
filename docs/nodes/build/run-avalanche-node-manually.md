@@ -30,7 +30,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 
 * CPU: Equivalent of 8 AWS vCPU
 * RAM: 16 GiB
-* Storage: 512 GiB
+* Storage: 1 TB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
