@@ -89,11 +89,11 @@ Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
 
 #### `--bootstrap-ids` (string):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
+Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
 
 #### `--bootstrap-ips` (string):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
+Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
 
 #### `--bootstrap-retry-enabled` (boolean):
 
@@ -110,6 +110,17 @@ Max number of containers in an Ancestors message sent by this node. Defaults to 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+
+
+## State Syncing
+
+#### `--state-sync-ids` (string):
+
+State sync IDs is a comma-separated list of validator IDs. The specified validators will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--state-sync-ips`. The default value is empty, which results in all validators being sampled.
+
+#### `--state-sync-ips` (string):
+
+State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be the same with the number of given `--state-sync-ids`.
 
 ## Chain Configs
 
@@ -767,6 +778,10 @@ Node will stop reading messages from a peer when it is processing this many mess
 Will resume reading messages from the peer when it is processing less than this many messages.
 Defaults to `1024`.
 
+#### `throttler-inbound-cpu-min-recheck-freq` (duration):
+
+In the CPU-based network throttler, check at least this often whether the node's CPU usage has fallen to an acceptable level.
+
 #### `--throttler-outbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
@@ -779,7 +794,13 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
 
+#### `cpu-tracker-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly.
+
 ### CPU Throttling
+
+These flags govern how much CPU usage can be consumed by handling communications from peers
 
 #### `--cpu-target` (uint):
 
@@ -796,7 +817,6 @@ Of the targetd CPU cores in `cpu-target`, reserve this portion of the CPU for us
 #### `--cpu-target-per-non-validator-max-fraction` (float):
 
 Max CPU usage of any single non validator can use as a percentage of the CPU target allocated to peers. Must be in [0,1]
-
 
 ### Connection Rate-Limiting
 
