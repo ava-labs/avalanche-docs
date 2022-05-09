@@ -289,9 +289,9 @@ When specifying a log level note that all logs with the specified priority or hi
 
 The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
 
-#### `--log-display-highlight` (string, `{auto, plain, colors}`):
+#### `--log-format` (string, `{auto, plain, colors, json}`):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+The structure of log format. Defaults to `auto` which formats terminal-like logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
 
 #### `--log-dir` (string, file path):
 
@@ -300,6 +300,22 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 #### `--log-disable-display-plugin-logs` (boolean):
 
 Disables displaying plugin logs in stdout. Defaults to `false`.
+
+#### `--log-rotater-max-size` (uint):
+
+The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
+
+#### `--log-rotater-max-files` (uint):
+
+The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
+
+#### `--log-rotater-max-age` (uint):
+
+The maximum number of days to retain old log files based on the timestamp encoded in their filename. 0 means retain all old log files. Defaults to `0`.
+
+#### `--log-rotater-compress-enabled` (boolean):
+
+Enables the compression of rotated log files through gzip. Defaults to `false`.
 
 ## Network ID
 

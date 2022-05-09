@@ -17,6 +17,16 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
     - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
     - See new [flags](../../nodes/maintain/chain-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
 
+**Logging**
+- Changed AvalancheGo's internal logger with [uber-go/zap](https://github.com/uber-go/zap).
+- Changed AvalanceGo's log rotation with [lumberjack](https://github.com/natefinch/lumberjack).
+- Renamed `log-display-highlight` to `log-format` and added `json` option.
+- Added `log-rotater-max-size`, `log-rotater-max-files`, `log-rotater-max-age`, `log-rotater-compress-enabled` options for log rotation.
+
+**PlatformVM**
+- Added `subnetID` parameter to `platform.getTotalStake` API call.
+- Added `connected` field for subnet validators in `platform.getCurrentValidators` and `platform.getPendingValidators` API call.
+
 ## v1.7.10 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.10))
 
 

@@ -51,7 +51,7 @@ platform.addDelegator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -137,7 +137,7 @@ platform.addValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -212,7 +212,7 @@ platform.addSubnetValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string,
@@ -322,7 +322,7 @@ platform.createBlockchain(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -394,7 +394,7 @@ platform.createSubnet(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -456,7 +456,7 @@ platform.exportAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -504,7 +504,7 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
+Get the private key that controls a given address.
 The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
 
 #### **Signature**
@@ -712,7 +712,7 @@ curl -X POST --data '{
         "encoding": "json"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P 
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 ##### **Example Response**
 
@@ -1130,7 +1130,7 @@ platform.getMaxStakeAmount(
         startTime: int,
         endTime: int
     }
-) -> 
+) ->
 {
     amount: uint64
 }
@@ -1176,7 +1176,7 @@ Get the minimum amount of AVAX required to validate the Primary Network and the 
 #### **Signature**
 
 ```sh
-platform.getMinStake() -> 
+platform.getMinStake() ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
@@ -1315,7 +1315,7 @@ platform.getRewardUTXOs({
 
 * `txID` is the ID of the staking or delegating transaction
 * `numFetched` is the number of returned UTXOs
-* `utxos` is an array of encoded reward UTXOs 
+* `utxos` is an array of encoded reward UTXOs
 * `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 
 #### **Example Call**
@@ -1410,8 +1410,8 @@ platform.getSubnets(
 ```
 
 * `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `id` is the Subnet’s ID.
+* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
 
 See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1527,10 +1527,12 @@ Get the total amount of nAVAX staked on the Primary Network.
 #### **Signature**
 
 ```sh
-platform.getTotalStake() -> {stake: int}
+platform.getTotalStake(subnetID: string) -> {stake: int}
 ```
 
-#### **Example Call**
+#### Primary Network Example
+
+##### **Example Call**
 
 ```sh
 curl -X POST --data '{
@@ -1542,13 +1544,41 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+##### **Example Response**
 
 ```json
 {
     "jsonrpc": "2.0",
     "result": {
         "stake": "279825917679866811"
+    },
+    "id": 1
+}
+```
+
+#### Subnet Example
+
+##### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTotalStake",
+    "params": {
+        "subnetID": "2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
+    },
+    "id": 1
+}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+##### **Example Response**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "weight": "100000"
     },
     "id": 1
 }
@@ -1738,7 +1768,7 @@ platform.getUTXOs(
         sourceChain: string, //optional
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -1945,7 +1975,7 @@ platform.importAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     tx: string,
     changeAddr: string
