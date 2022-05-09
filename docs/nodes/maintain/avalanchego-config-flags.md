@@ -399,18 +399,20 @@ If `true` this node does not expose subnet blockchain contents to non-validators
 
 Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
 
-| CLI Key                          | JSON Key              |
-| :------------------------------- | :-------------------- |
-| --snow-sample-size               | k                     |
-| --snow-quorum-size               | alpha                 |
-| --snow-virtuous-commit-threshold | betaVirtuous          |
-| --snow-rogue-commit-threshold    | betaRogue             |
-| --snow-concurrent-repolls        | concurrentRepolls     |
-| --snow-optimal-processing        | optimalProcessing     |
-| --snow-max-processing            | maxOutstandingItems   |
-| --snow-max-time-processing       | maxItemProcessingTime |
-| --snow-avalanche-batch-size      | batchSize             |
-| --snow-avalanche-num-parents     | parentSize            |
+| CLI Key                             | JSON Key                  |
+| :---------------------------------  | :-----------------------  |
+| --snow-sample-size                  | k                         |
+| --snow-quorum-size                  | alpha                     |
+| --snow-virtuous-commit-threshold    | betaVirtuous              |
+| --snow-rogue-commit-threshold       | betaRogue                 |
+| --snow-concurrent-repolls           | concurrentRepolls         |
+| --snow-optimal-processing           | optimalProcessing         |
+| --snow-max-processing               | maxOutstandingItems       |
+| --snow-max-time-processing          | maxItemProcessingTime     |
+| --snow-mixed-query-num-push-vdr     | mixedQueryNumPushVdr      |
+| --snow-mixed-query-num-push-non-vdr | mixedQueryNumPushNondVdr  |
+| --snow-avalanche-batch-size         | batchSize                 |
+| --snow-avalanche-num-parents        | parentSize                |
 
 ##### Gossip Configs
 
@@ -610,6 +612,14 @@ Maximum number of processing items to be considered healthy. Reports unhealthy i
 ### `snow-max-time-processing` (duration):
 
 Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
+
+### `snow-mixed-query-num-push-vdr` (uint):
+
+If this node is a validator, when a container is inserted into consensus, send a Push Query to this many validators and a Pull Query to the others. Must be <= k. Defaults to `10`.
+
+### `snow-mixed-query-num-push-non-vdr` (uint):
+
+fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
 
 ### Continuous Profiling
 
