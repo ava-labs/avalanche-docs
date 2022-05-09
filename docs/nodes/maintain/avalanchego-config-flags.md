@@ -779,6 +779,25 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
 
+### CPU Throttling
+
+#### `--cpu-target` (uint):
+
+Target usage of this many CPU cores. Value should be in range (0, total core count]
+
+#### `--cpu-target-max-scaling` (float):
+
+The maximum allowed scaling of the current CPU target based on the current actual usage. Must be greater than 0
+
+#### `--cpu-validator-alloc-portion` (float):
+
+Of the targetd CPU cores in `cpu-target`, reserve this portion of the CPU for usage by validators. Must be in [0,1]
+
+#### `--cpu-target-per-non-validator-max-fraction` (float):
+
+Max CPU usage of any single non validator can use as a percentage of the CPU target allocated to peers. Must be in [0,1]
+
+
 ### Connection Rate-Limiting
 
 #### `--inbound-connection-throttling-cooldown` (duration):
