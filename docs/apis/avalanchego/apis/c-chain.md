@@ -1,5 +1,5 @@
 ---
-description: More information available regarding Avalanche Go APIs and learning how to interact with the C-Chain. 
+description: More information available regarding Avalanche Go APIs and learning how to interact with the C-Chain.
 sidebar_position: 4
 ---
 
@@ -77,7 +77,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 :::info
 
-Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size. 
+Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
 
 :::
 
@@ -761,7 +761,7 @@ curl -X POST --data '{
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../../nodes/maintain/avalanchego-config-flags.md#c-chain-config) `--coreth-admin-api-enabled:true`.
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../../nodes/maintain/chain-config-flags.md#c-chain-configs) `--coreth-admin-api-enabled:true`.
 
 ### Endpoint
 

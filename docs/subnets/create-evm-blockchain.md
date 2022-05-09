@@ -151,7 +151,7 @@ The default Subnet EVM provided below has some well defined parameters. The defa
 
 `allowFeeRecipients`: Enables fee recipients. By default, all fees are burned (sent to the blackhole address). However, it is possible to enable block producers to set a fee recipient (get compensated for blocks they produce).
 
-With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/avalanchego-config-flags.md#chain-configs) with the following:
+With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/chain-config-flags.md#c-chain-configs) with the following:
 
 ```json
 {
