@@ -26,7 +26,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'overview/getting-started/intro',
-        'overview/getting-started/avalanche-platform-overview',
+        'overview/getting-started/avalanche-platform',
         'overview/getting-started/avalanche-consensus',
         {
           type: 'link',
