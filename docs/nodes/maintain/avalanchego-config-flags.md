@@ -768,51 +768,87 @@ Timeout while dialing a peer.
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
-#### `--throttler-inbound-bandwidth-refill-rate` (uint):
+#### CPU based
+
+Rate-limiting based on how much CPU usage a peer causes. 
+
+##### `cpu-tracker-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly.
+
+##### `--cpu-target` (uint):
+
+Target usage of this many CPU cores. Value should be in range (0, total core count].
+
+##### `--cpu-target-max-scaling` (float):
+
+The maximum allowed scaling of the current CPU target based on the current actual usage. Must be greater than 0.
+
+##### `--cpu-validator-alloc-portion` (float):
+
+Of the targeted CPU cores in `cpu-target`, reserve this portion of the CPU for usage by validators. Must be in [0,1].
+
+##### `--cpu-target-per-non-validator-max-fraction` (float):
+
+Max CPU usage of any single non validator can use as a percentage of the CPU target allocated to peers. Must be in [0,1].
+
+##### `throttler-inbound-cpu-min-recheck-freq` (duration):
+
+Check at least this often whether the node's CPU usage has fallen to an acceptable level.
+
+#### Bandwidth based
+
+Rate-limiting based on the bandwidth a peer uses. 
+
+##### `--throttler-inbound-bandwidth-refill-rate` (uint):
 
 Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
 
-#### `--throttler-inbound-bandwidth-max-burst-size` (uint):
+##### `--throttler-inbound-bandwidth-max-burst-size` (uint):
 
 Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
 
-#### `--throttler-inbound-at-large-alloc-size` (uint):
+#### Message size based
+
+Rate-limiting based on the total size, in bytes, of unprocessed messages. 
+
+##### `--throttler-inbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
 
-#### `--throttler-inbound-validator-alloc-size` (uint):
+##### `--throttler-inbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-inbound-node-max-at-large-bytes` (uint):
+##### `--throttler-inbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` (2 MiB).
 
-#### `--throttler-inbound-node-max-processing-msgs` (uint):
+#### Message based
+
+Rate-limiting based on the number of unprocessed messages. 
+
+##### `--throttler-inbound-node-max-processing-msgs` (uint):
 
 Node will stop reading messages from a peer when it is processing this many messages from the peer.
 Will resume reading messages from the peer when it is processing less than this many messages.
 Defaults to `1024`.
 
-#### `throttler-inbound-cpu-min-recheck-freq` (duration):
+#### Outbound
 
-In the CPU-based network throttler, check at least this often whether the node's CPU usage has fallen to an acceptable level.
+Rate-limiting for outbound messages.
 
-#### `--throttler-outbound-at-large-alloc-size` (uint):
+##### `--throttler-outbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
 
-#### `--throttler-outbound-validator-alloc-size` (uint):
+##### `--throttler-outbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-outbound-node-max-at-large-bytes` (uint):
+##### `--throttler-outbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
-
-#### `cpu-tracker-halflife` (duration):
-
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly.
 
 ### Connection Rate-Limiting
 
