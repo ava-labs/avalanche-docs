@@ -2,7 +2,7 @@
 
 ## Non-Fungible Tokens on Avalanche
 
-[Avalanche](../../overview/getting-started/avalanche-platform-overview.md) natively supports the creation of of digital assets including fixed-cap assets, variable-cap assets, and non-fungible tokens (NFTs).
+[Avalanche](../../overview/getting-started/avalanche-platform.md) natively supports the creation of of digital assets including fixed-cap assets, variable-cap assets, and non-fungible tokens (NFTs).
 
 Some assets are fungible, meaning all units of that asset are perfectly interchangeable. Notes of a currency are fungible, for example: one $5 note is the treated the same as any other $5 note. Some assets, by contrast, are non-fungible. That is, elements are not unique and perfectly interchangeable. Real estate is non-fungible because each piece of land is distinct.
 

@@ -15,7 +15,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Bandwidth reduction improvements:
     - By default, non-validators now send only pull queries, not push queries.
     - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
-    - See new [flags](../../nodes/maintain/chain-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
+    - See new [flags](../../nodes/maintain/avalanchego-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
 
 **Logging**
 - Changed AvalancheGo's internal logger with [uber-go/zap](https://github.com/uber-go/zap).

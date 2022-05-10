@@ -2,7 +2,7 @@
 slug: /
 ---
 
-# What is Avalanche?
+# Overview
 
 ## Introduction
 
@@ -34,7 +34,7 @@ Learn more technical components of the Avalanche consensus protocol by reading t
 
 ## Snowman Consensus Protocol
 
-Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](overview/getting-started/avalanche-platform-overview.md#platform-chain-p-chain) and [C-Chain](overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain) implement the Snowman consensus protocol.
+Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](overview/getting-started/avalanche-platform.md#platform-chain-p-chain) and [C-Chain](overview/getting-started/avalanche-platform.md#contract-chain-c-chain) implement the Snowman consensus protocol.
 
 ## Key Features
 
