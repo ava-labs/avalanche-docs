@@ -8,11 +8,20 @@ There is a public API server that allows developers to access the Avalanche netw
 
 ## Using the Public API nodes
 
-The public API server is at `https://api.avax.network/` for Avalanche Mainnet and `https://api.avax-test.network/` for Avalanche Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](./apis/issuing-api-calls.md). Namely, use the following end points for each chain respectively:
+The public API server is at `api.avax.network` for Avalanche Mainnet and `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](./apis/issuing-api-calls.md). Namely, use the following end points for each chain respectively:
 
+### HTTP
 * For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
 * For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
 * For P-Chain API, the URL is `https://api.avax.network/ext/P`.
+
+Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://api.avax.network/`.
+
+### WebSocket
+* For C-Chain API, the URL is `wss://api.avax.network/ext/bc/C/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`. 
+
 
 ## Supported APIs
 
