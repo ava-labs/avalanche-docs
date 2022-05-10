@@ -254,7 +254,6 @@ You can also issue a `subnetevm.decodeBlock` to make sure your encoded genesis b
 
 ```sh
 curl -X POST --data '{
-    {
     "jsonrpc": "2.0",
     "id"     : 1,
     "method" : "subnetevm.decodeGenesis",
