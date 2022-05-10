@@ -46,8 +46,8 @@ platform.addDelegator(
         endTime: int,
         stakeAmount: int,
         rewardAddress: string,
-        from: []string, //optional
-        changeAddr: string, //optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -132,8 +132,8 @@ platform.addValidator(
         stakeAmount: int,
         rewardAddress: string,
         delegationFeeRate: float,
-        from: []string, //optional
-        changeAddr: string, //optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -207,8 +207,8 @@ platform.addSubnetValidator(
         startTime: int,
         endTime: int,
         weight: int,
-        from: []string, //optional
-        changeAddr: string, //optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -316,9 +316,9 @@ platform.createBlockchain(
         vmID: string,
         name: string,
         genesisData: string,
-        encoding: string, //optional
-        from: []string, //optional
-        changeAddr: string, //optional
+        encoding: string, // optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -389,8 +389,8 @@ platform.createSubnet(
     {
         controlKeys: []string,
         threshold: int,
-        from: []string, //optional
-        changeAddr: string, //optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -450,9 +450,9 @@ Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain
 platform.exportAVAX(
     {
         amount: int,
-        from: []string, //optional
+        from: []string, // optional
         to: string,
-        changeAddr: string, //optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -961,16 +961,16 @@ List the current validators of the given Subnet.
 
 ```sh
 platform.getCurrentValidators({
-    subnetID: string, //optional
-    nodeIDs: string[], //optional
+    subnetID: string, // optional
+    nodeIDs: string[], // optional
 }) -> {
     validators: []{
         txID: string,
         startTime: string,
         endTime: string,
-        stakeAmount: string, //optional
+        stakeAmount: string,
         nodeID: string,
-        weight: string, //optional
+        weight: string,
         rewardOwner: {
             locktime: string,
             threshold: string,
@@ -984,7 +984,7 @@ platform.getCurrentValidators({
             txID: string,
             startTime: string,
             endTime: string,
-            stakeAmount: string, //optional
+            stakeAmount: string,
             nodeID: string,
             rewardOwner: {
                 locktime: string,
@@ -1006,20 +1006,19 @@ platform.getCurrentValidators({
   * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
   * `nodeID` is the validator’s node ID.
   * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
-  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
-  * `uptime` is the % of time the queried node has reported the peer as online.
-  * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator:
+  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Omitted if `subnetID` is not the Primary Network.
+  * `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not the Primary Network.
+  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not the Primary Network.
+  * `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not the Primary Network.
+  * `connected` is if the node is connected and tracks the subnet.
+  * `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not the Primary Network.
     * `txID` is the delegator transaction.
     * `startTime` is the Unix time when the delegator started.
     * `endTime` is the Unix time when the delegator stops.
-    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
+    * `stakeAmount` is the amount of nAVAX this delegator staked.
     * `nodeID` is the validating node’s node ID.
     * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
     * `potentialReward` is the potential reward earned from staking
-* `delegators`: (**deprecated as of v1.0.1. See note at top of method documentation.**)
 
 #### **Example Call**
 
@@ -1214,18 +1213,18 @@ List the validators in the pending validator set of the specified Subnet. Each v
 
 ```sh
 platform.getPendingValidators({
-    subnetID: string, //optional
-    nodeIDs: string[], //optional
+    subnetID: string, // optional
+    nodeIDs: string[], // optional
 }) -> {
     validators: []{
         txID: string,
         startTime: string,
         endTime: string,
-        stakeAmount: string, //optional
+        stakeAmount: string,
         nodeID: string,
         delegationFee: string,
         connected: bool,
-        weight: string, //optional
+        weight: string,
     },
     delegators: []{
         txID: string,
@@ -1245,7 +1244,7 @@ platform.getPendingValidators({
   * `endTime` is the Unix time when the validator stops validating the Subnet.
   * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
   * `nodeID` is the validator’s node ID.
-  * `connected` if the node is connected.
+  * `connected` if the node is connected and tracks the subnet.
   * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
 * `delegators`:
   * `txID` is the delegator transaction.
@@ -1305,7 +1304,7 @@ Returns the UTXOs that were rewarded after the provided transaction's staking or
 ```sh
 platform.getRewardUTXOs({
     txID: string,
-    encoding: string //optional
+    encoding: string // optional
 }) -> {
     numFetched: integer,
     utxos: []string,
@@ -1356,7 +1355,7 @@ Retrieve an assetID for a subnet’s staking asset. Currently, this only returns
 
 ```sh
 platform.getStakingAssetID({
-    subnetID: string //optional
+    subnetID: string // optional
 }) -> {
     assetID: string
 }
@@ -1595,7 +1594,7 @@ Optional `encoding` parameter to specify the format for the returned transaction
 ```sh
 platform.getTx({
     txID: string,
-    encoding: string //optional
+    encoding: string // optional
 }) -> {
     tx: string,
     encoding: string,
@@ -1760,13 +1759,13 @@ Gets the UTXOs that reference a given set of addresses.
 platform.getUTXOs(
     {
         addresses: []string,
-        limit: int, //optional
-        startIndex: { //optional
+        limit: int, // optional
+        startIndex: { // optional
             address: string,
             utxo: string
         },
-        sourceChain: string, //optional
-        encoding: string, //optional
+        sourceChain: string, // optional
+        encoding: string, // optional
     },
 ) ->
 {
@@ -1970,8 +1969,8 @@ platform.importAVAX(
     {
         to: string,
         sourceChain: string,
-        from: []string, //optional
-        changeAddr: string, //optional
+        from: []string, // optional
+        changeAddr: string, // optional
         username: string,
         password: string
     }
@@ -2071,7 +2070,7 @@ Issue a transaction to the Platform Chain.
 ```sh
 platform.issueTx({
     tx: string,
-    encoding: string, //optional
+    encoding: string, // optional
 }) -> {txID: string}
 ```
 
@@ -2154,7 +2153,7 @@ Sample validators from the specified Subnet.
 platform.sampleValidators(
     {
         size: int,
-        subnetID: string, //optional
+        subnetID: string, // optional
     }
 ) ->
 {
