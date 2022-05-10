@@ -35,6 +35,7 @@ const sidebars = {
         },
       ],
     },
+    'overview/projects',
     {
       type: 'link',
       label: 'Audits',
