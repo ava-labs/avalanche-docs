@@ -27,7 +27,7 @@ Please always check [subnet-evem repo](https://github.com/ava-labs/subnet-evm) f
 
 ## Run Local Network
 
-[`scripts/run.sh`](scripts/run.sh) automatically installs [avalanchego], sets up a local network,
+[`scripts/run.sh`](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) automatically installs [avalanchego], sets up a local network,
 and creates a `subnet-evm` genesis file. The usage of this script is
 
 ```bash
