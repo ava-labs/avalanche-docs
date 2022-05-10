@@ -15,7 +15,7 @@ The public API server is at `api.avax.network` for Avalanche Mainnet and `api.av
 * For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
 * For P-Chain API, the URL is `https://api.avax.network/ext/P`.
 
-Note: on Fuji testnet, use `https://api.avax-test.network/` instead of `https://api.avax.network/`.
+Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://api.avax.network/`.
 
 ### WebSocket
 * For C-Chain API, the URL is `wss://api.avax.network/ext/bc/C/ws`.
