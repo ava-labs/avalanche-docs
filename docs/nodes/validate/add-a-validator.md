@@ -230,4 +230,4 @@ When the time reaches `1584021450`, this node will start validating the Primary 
 
 ## Adding Validators to a Subnet
 
-This [tutorial](../../subnets/create-a-subnet.md#adding-subnet-validators) will show you how to add validators to a subnet.
+This [tutorial](../../subnets/subnet-deepdive.md#adding-subnet-validators) will show you how to add validators to a subnet.

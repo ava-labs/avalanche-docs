@@ -1,3 +1,7 @@
+#05/10/2022
+/build/tutorials/platform/subnets/create-a-subnet/ /subnets/subnet-deepdive 301
+/build/tutorials/platform/subnets/create-a-subnet  /subnets/subnet-deepdive 301
+
 #05/09/2022
 /overview/getting-started/avalanche-platform-overview/ /overview/getting-started/avalanche-platform 301
 /overview/getting-started/avalanche-platform-overview  /overview/getting-started/avalanche-platform 301
@@ -67,10 +71,6 @@
 #subnets
 /build/tutorials/platform/subnets/ /subnets 301
 /build/tutorials/platform/subnets  /subnets 301
-/build/tutorials/platform/subnets/create-a-subnet/ /subnets/create-a-subnet 301
-/build/tutorials/platform/subnets/create-a-subnet  /subnets/create-a-subnet 301
-/build/tutorials/platform/subnets/create-avm-blockchain/ /subnets/create-avm-blockchain 301
-/build/tutorials/platform/subnets/create-avm-blockchain  /subnets/create-avm-blockchain 301
 /build/tutorials/platform/subnets/create-evm-blockchain/ /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-evm-blockchain  /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm/ /subnets/create-a-virtual-machine-vm 301
@@ -233,9 +233,7 @@
 /learn/platf /overview/getting-started/avalanche-platform  301
 /build/get-started / 301
 /build/references/command-line-interface/ /nodes/maintain/avalanchego-config-flags/ 301
-/build/tutorials/platform/create-a-subnet /subnets/create-a-subnet 301
 /build/tutorials/platform/create-a-virtual-machine-vm /subnets/create-a-virtual-machine-vm 301
-/build/tutorials/platform/create-avm-blockchain /subnets/create-avm-blockchain 301
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
