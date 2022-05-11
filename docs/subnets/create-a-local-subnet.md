@@ -126,7 +126,7 @@ with a user-specified `concurrency`, `base-fee`, and `priority-fee`.
 
 To get started, open the directory `cmd/simulator` and add your network's endpoints to
 the file at `.simulator/config.yml` (these will be provided after running
-`./scripts/run.sh`):
+`./scripts/run.sh`. With the example above, the correct endpoints is `http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc` to replace `http://localhost:9650/ext/bc/my-chain/rpc`.):
 
 ```yaml
 endpoints:
@@ -136,7 +136,8 @@ priority-fee: 1
 concurrency: 10
 ```
 
-Once your config is specified, you can run the tool by either invoking `go run main.go` or by installing the tool (`go install -v .`) and running the binary
+
+Once your config is specified, you can run the tool by either invoking `go run main.go` under the directory `cmd/simulator` or by installing the tool (`go install -v .`) and running the binary
 (`simulator`).
 
 To make getting started easier, the ewoq key `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`
@@ -151,47 +152,77 @@ _The private key for the ewoq address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52
 If you followed the directions successfully, you should see the following:
 
 ```bash
-2022/03/14 08:13:32 loaded config (endpoints=[http://localhost:53120/ext/bc/367dTowpd77GrwTsxcnw7EPPzkAQVnFqga4EQxHPUxcBBNjCQ/rpc http://localhost:53122/ext/bc/367dTowpd77GrwTsxcnw7EPPzkAQVnFqga4EQxHPUxcBBNjCQ/rpc http://localhost:53124/ext/bc/367dTowpd77GrwTsxcnw7EPPzkAQVnFqga4EQxHPUxcBBNjCQ/rpc http://localhost:53126/ext/bc/367dTowpd77GrwTsxcnw7EPPzkAQVnFqga4EQxHPUxcBBNjCQ/rpc http://localhost:53128/ext/bc/367dTowpd77GrwTsxcnw7EPPzkAQVnFqga4EQxHPUxcBBNjCQ/rpc] concurrency=1000 base fee=1 priority fee=250)
-2022/03/14 08:13:32 loaded worker 0x27a0D44AC25233652c02b1a92dD2C7D46059b053 (balance=100000000000000000000000000 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xdea66C24b333E0aAfD1fFA828976D8C666D73d77 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xe15BCae0612A6fbf3f7dF99dD4Ab3FE88A33b759 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xe2848eF46c89d235d66021d82d80DeBB009Ee787 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xeAB317a6525298c862A07EE66A9Ea772C549834D (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xeAfA0Aa4e5f2F55C55dc32E41b87C11fBFF8770C (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xf4ee33ABa173E95179D48A0b3D52623d8b239Ba9 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xf7C811A6563eb527e2AfF6026A11EE17994eF9F5 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xfD27a32854e612D62858a5ac520a5f17A4d223c7 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xfD757bc4966BB48321928a8c64A3113B682AEADa (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xfE8458B6cFA844B55331511b785cED82EBF56630 (balance=0 nonce=0)
-2022/03/14 08:13:32 loaded worker 0xfc5649FE1FC631d6B8e1D48B21300F2E8F3508E5 (balance=0 nonce=0)
-2022/03/14 08:13:32 [block created] index: 0 base fee: 1 block gas cost: <nil> block txs: 0
-2022/03/14 08:13:34 [block created] index: 1 base fee: 1 block gas cost: 0 block txs: 1
-2022/03/14 08:13:34 [block created] index: 2 base fee: 1 block gas cost: 0 block txs: 1
-2022/03/14 08:13:34 [stats] historical TPS: 1.000000 last 10s TPS: 0.100000 total txs: 2 total time(s): 2
-2022/03/14 08:13:36 [block created] index: 3 base fee: 1 block gas cost: 0 block txs: 1
-2022/03/14 08:13:36 [stats] historical TPS: 0.750000 last 10s TPS: 0.200000 total txs: 3 total time(s): 4
+> go run main.go
+go: downloading github.com/ava-labs/subnet-evm v0.1.2
+go: downloading github.com/spf13/viper v1.10.1
+2022/05/11 09:49:22 loaded config (endpoints=[http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc] concurrency=25 base fee=1 priority fee=10)
+2022/05/11 09:49:22 loaded worker 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (balance=100000000000000000000000000 nonce=0)
+2022/05/11 09:49:22 0xe8859AF6c05b512dF80A66b81dE89FDAB9fE5C1c requesting funds from master
+2022/05/11 09:49:22 0xa2B32bcbA31d4dC7728aD73165cdeea5eCeD5e70 requesting funds from master
+2022/05/11 09:49:22 0x837438175627A7A2ABbccf1727c5cA46fA7274b5 requesting funds from master
+2022/05/11 09:49:22 0x14c908A82047C6bC66cd9282b4D68f3e003659f8 requesting funds from master
+2022/05/11 09:49:22 0xbeE6DF853592d3699ac3292D134F59BEF278B048 requesting funds from master
+2022/05/11 09:49:22 0x028Bc164dcC1c10f1Db5a1175c58eA84a7Fd34c9 requesting funds from master
+2022/05/11 09:49:22 0x664D97348Bdb73fc3bC4447B4676573dbF6eEE5A requesting funds from master
+2022/05/11 09:49:22 0x455aAB371261DC41a048e42Bf147ced4FaDE5fCF requesting funds from master
+2022/05/11 09:49:22 0xA9b5C64E057F50730CA4Ba6205d55fa08C03ff75 requesting funds from master
+2022/05/11 09:49:22 0x57645A2bdCEb6cFbC95e6a5Cac70F0c05B8d8515 requesting funds from master
+2022/05/11 09:49:24 [block created] t: 2022-05-11 09:49:22 -0600 MDT index: 1 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
+2022/05/11 09:49:24 [block created] t: 2022-05-11 09:49:24 -0600 MDT index: 2 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
+2022/05/11 09:49:24 [stats] historical TPS: 1.00 last 10s TPS: 0.10 total txs: 2 historical GPS: 21000.0, last 10s GPS: 2100.0 elapsed: 2s
+2022/05/11 09:49:26 [block created] t: 2022-05-11 09:49:26 -0600 MDT index: 3 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
+2022/05/11 09:49:26 [stats] historical TPS: 0.75 last 10s TPS: 0.20 total txs: 3 historical GPS: 15750.0, last 10s GPS: 4200.0 elapsed: 4s
+2022/05/11 09:49:28 [block created] t: 2022-05-11 09:49:28 -0600 MDT index: 4 base fee: 1 block gas cost: 0 block txs: 2 gas used: 42000
+2022/05/11 09:49:28 [stats] historical TPS: 0.83 last 10s TPS: 0.30 total txs: 5 historical GPS: 17500.0, last 10s GPS: 6300.0 elapsed: 6s
+2022/05/11 09:49:30 [block created] t: 2022-05-11 09:49:30 -0600 MDT index: 5 base fee: 1 block gas cost: 0 block txs: 4 gas used: 84000
+2022/05/11 09:49:30 [stats] historical TPS: 1.12 last 10s TPS: 0.50 total txs: 9 historical GPS: 23625.0, last 10s GPS: 10500.0 elapsed: 8s
+2022/05/11 09:49:32 [block created] t: 2022-05-11 09:49:32 -0600 MDT index: 6 base fee: 1 block gas cost: 0 block txs: 5 gas used: 105000
+2022/05/11 09:49:32 [stats] historical TPS: 1.40 last 10s TPS: 0.90 total txs: 14 historical GPS: 29400.0, last 10s GPS: 18900.0 elapsed: 10s
+2022/05/11 09:49:34 [block created] t: 2022-05-11 09:49:34 -0600 MDT index: 7 base fee: 1 block gas cost: 0 block txs: 6 gas used: 126000
+2022/05/11 09:49:34 [stats] historical TPS: 1.67 last 10s TPS: 1.30 total txs: 20 historical GPS: 35000.0, last 10s GPS: 27300.0 elapsed: 12s
+2022/05/11 09:49:36 [block created] t: 2022-05-11 09:49:36 -0600 MDT index: 8 base fee: 1 block gas cost: 0 block txs: 7 gas used: 147000
+2022/05/11 09:49:36 [stats] historical TPS: 1.93 last 10s TPS: 1.80 total txs: 27 historical GPS: 40500.0, last 10s GPS: 37800.0 elapsed: 14s
+2022/05/11 09:49:38 [block created] t: 2022-05-11 09:49:38 -0600 MDT index: 9 base fee: 1 block gas cost: 0 block txs: 8 gas used: 168000
+2022/05/11 09:49:38 [stats] historical TPS: 2.19 last 10s TPS: 2.40 total txs: 35 historical GPS: 45937.5, last 10s GPS: 50400.0 elapsed: 16s
+2022/05/11 09:49:40 [block created] t: 2022-05-11 09:49:40 -0600 MDT index: 10 base fee: 1 block gas cost: 0 block txs: 9 gas used: 189000
+2022/05/11 09:49:40 [stats] historical TPS: 2.44 last 10s TPS: 3.00 total txs: 44 historical GPS: 51333.3, last 10s GPS: 63000.0 elapsed: 18s
+2022/05/11 09:49:42 [block created] t: 2022-05-11 09:49:42 -0600 MDT index: 11 base fee: 1 block gas cost: 0 block txs: 9 gas used: 189000
+2022/05/11 09:49:42 [stats] historical TPS: 2.65 last 10s TPS: 3.50 total txs: 53 historical GPS: 55650.0, last 10s GPS: 73500.0 elapsed: 20s
+2022/05/11 09:49:44 [block created] t: 2022-05-11 09:49:44 -0600 MDT index: 12 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
+2022/05/11 09:49:44 [stats] historical TPS: 2.86 last 10s TPS: 3.90 total txs: 63 historical GPS: 60136.4, last 10s GPS: 81900.0 elapsed: 22s
+2022/05/11 09:49:46 [block created] t: 2022-05-11 09:49:46 -0600 MDT index: 13 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
+2022/05/11 09:49:46 [stats] historical TPS: 3.04 last 10s TPS: 4.30 total txs: 73 historical GPS: 63875.0, last 10s GPS: 90300.0 elapsed: 24s
 .....
-2022/03/14 08:17:36 [block created] index: 125 base fee: 1 block gas cost: 2000000 block txs: 101
-2022/03/14 08:17:36 [stats] historical TPS: 30.409836 last 10s TPS: 49.900000 total txs: 7420 total time(s): 244
-2022/03/14 08:17:38 0x7A3Bba23Db6247E4474D9bFF4C11bB755137276d requesting funds from master
-2022/03/14 08:17:38 [block created] index: 126 base fee: 1 block gas cost: 2000000 block txs: 101
-2022/03/14 08:17:38 [stats] historical TPS: 30.573171 last 10s TPS: 50.000000 total txs: 7521 total time(s): 246
-2022/03/14 08:17:40 0x44461F32FeCa6c5a0De1DEF46FD170325464e0fE requesting funds from master
-2022/03/14 08:17:40 [block created] index: 127 base fee: 1 block gas cost: 2000000 block txs: 101
-2022/03/14 08:17:40 [stats] historical TPS: 30.733871 last 10s TPS: 50.100000 total txs: 7622 total time(s): 248
-2022/03/14 08:17:40 0x77d027fA9E6B4a217247398abDdDA93bDeE38d30 requesting funds from master
-2022/03/14 08:17:42 [block created] index: 128 base fee: 1 block gas cost: 2000000 block txs: 99
-2022/03/14 08:17:42 [stats] historical TPS: 30.884000 last 10s TPS: 50.300000 total txs: 7721 total time(s): 250
-2022/03/14 08:17:44 0x5f46A3E9D0A94351CE60e0205A9C4028eD9474c2 requesting funds from master
-2022/03/14 08:17:44 0x7C51Ca57Ab8a3BbfE4C13a25683Ca0756eDb7f0A requesting funds from master
-2022/03/14 08:17:44 [block created] index: 129 base fee: 1 block gas cost: 2000000 block txs: 101
-2022/03/14 08:17:44 [stats] historical TPS: 31.039683 last 10s TPS: 50.200000 total txs: 7822 total time(s): 252
-2022/03/14 08:17:46 [block created] index: 130 base fee: 1 block gas cost: 2000000 block txs: 99
-2022/03/14 08:17:46 [stats] historical TPS: 31.185039 last 10s TPS: 50.300000 total txs: 7921 total time(s): 254
-2022/03/14 08:17:48 0x6e0BdcdD7813A5eb2C2767D5FD5535a4358081ed requesting funds from master
-2022/03/14 08:17:48 0x19499a0FdE9eAe40df7dd4108e174168a920499F requesting funds from master
-2022/03/14 08:17:48 [block created] index: 131 base fee: 1 block gas cost: 2000000 block txs: 100
-2022/03/14 08:17:48 [stats] historical TPS: 31.332031 last 10s TPS: 50.100000 total txs: 8021 total time(s): 256
-2022/03/14 08:17:50 [block created] index: 132 base fee: 1 block gas cost: 2000000 block txs: 99
-2022/03/14 08:17:50 [stats] historical TPS: 31.472868 last 10s TPS: 50.000000 total txs: 8120 total time(s): 258
+
+2022/05/11 09:55:51 [stats] historical TPS: 4.89 last 10s TPS: 5.00 total txs: 1896 historical GPS: 102618.6, last 10s GPS: 105000.0 elapsed: 6m28s
+2022/05/11 09:55:52 0xa2B32bcbA31d4dC7728aD73165cdeea5eCeD5e70 requesting funds from master
+2022/05/11 09:55:53 [block created] t: 2022-05-11 09:55:52 -0600 MDT index: 196 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:55:53 [stats] historical TPS: 4.89 last 10s TPS: 5.10 total txs: 1907 historical GPS: 102684.6, last 10s GPS: 107100.0 elapsed: 6m30s
+2022/05/11 09:55:54 0x14c908A82047C6bC66cd9282b4D68f3e003659f8 requesting funds from master
+2022/05/11 09:55:55 [block created] t: 2022-05-11 09:55:54 -0600 MDT index: 197 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:55:55 [stats] historical TPS: 4.89 last 10s TPS: 5.20 total txs: 1918 historical GPS: 102750.0, last 10s GPS: 109200.0 elapsed: 6m32s
+2022/05/11 09:55:56 0xbeE6DF853592d3699ac3292D134F59BEF278B048 requesting funds from master
+2022/05/11 09:55:57 [block created] t: 2022-05-11 09:55:56 -0600 MDT index: 198 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:55:57 [stats] historical TPS: 4.90 last 10s TPS: 5.30 total txs: 1929 historical GPS: 102814.7, last 10s GPS: 111300.0 elapsed: 6m34s
+2022/05/11 09:55:58 0x028Bc164dcC1c10f1Db5a1175c58eA84a7Fd34c9 requesting funds from master
+2022/05/11 09:55:59 [block created] t: 2022-05-11 09:55:58 -0600 MDT index: 199 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:55:59 [stats] historical TPS: 4.90 last 10s TPS: 5.40 total txs: 1940 historical GPS: 102878.8, last 10s GPS: 113400.0 elapsed: 6m36s
+2022/05/11 09:56:00 0x664D97348Bdb73fc3bC4447B4676573dbF6eEE5A requesting funds from master
+2022/05/11 09:56:01 [block created] t: 2022-05-11 09:56:00 -0600 MDT index: 200 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:56:01 [stats] historical TPS: 4.90 last 10s TPS: 5.50 total txs: 1951 historical GPS: 102942.2, last 10s GPS: 115500.0 elapsed: 6m38s
+2022/05/11 09:56:02 0x455aAB371261DC41a048e42Bf147ced4FaDE5fCF requesting funds from master
+2022/05/11 09:56:03 [block created] t: 2022-05-11 09:56:02 -0600 MDT index: 201 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:56:03 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1962 historical GPS: 103005.0, last 10s GPS: 115500.0 elapsed: 6m40s
+2022/05/11 09:56:04 0xA9b5C64E057F50730CA4Ba6205d55fa08C03ff75 requesting funds from master
+2022/05/11 09:56:05 [block created] t: 2022-05-11 09:56:04 -0600 MDT index: 202 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:56:05 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1973 historical GPS: 103067.2, last 10s GPS: 115500.0 elapsed: 6m42s
+2022/05/11 09:56:06 0x57645A2bdCEb6cFbC95e6a5Cac70F0c05B8d8515 requesting funds from master
+2022/05/11 09:56:07 [block created] t: 2022-05-11 09:56:06 -0600 MDT index: 203 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:56:07 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1984 historical GPS: 103128.7, last 10s GPS: 115500.0 elapsed: 6m44s
+2022/05/11 09:56:09 [block created] t: 2022-05-11 09:56:08 -0600 MDT index: 204 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
+2022/05/11 09:56:09 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1995 historical GPS: 103189.7, last 10s GPS: 115500.0 elapsed: 6m46s
+2022/05/11 09:56:11 [block created] t: 2022-05-11 09:56:10 -0600 MDT index: 205 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
+2022/05/11 09:56:11 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 2005 historical GPS: 103198.5, last 10s GPS: 115500.0 elapsed: 6m48s
+2022/05/11 09:56:13 [block created] t: 2022-05-11 09:56:12 -0600 MDT index: 206 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
+2022/05/11 09:56:13 [stats] historical TPS: 4.91 last 10s TPS: 5.40 total txs: 2015 historical GPS: 103207.3, last 10s GPS: 113400.0 elapsed: 6m50s
 ```
