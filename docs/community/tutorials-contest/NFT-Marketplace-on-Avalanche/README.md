@@ -617,7 +617,6 @@ FUJI Testnet Settings:
 - Symbol: AVAX
 - Explorer: https://testnet.snowtrace.io
 
-You may find the configurations for the Avalanche Mainnet and Local Testnet (AVASH) [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask).
 
 Next, we will add the network configuration in hardhat config file [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not know how that file works then take a look at [here](https://hardhat.org/config/#networks-configuration).
 
