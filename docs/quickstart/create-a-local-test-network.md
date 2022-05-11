@@ -189,7 +189,7 @@ The response to this call is actually pretty large, as it contains the state of 
 }
 ```
 
-To get API endpoints of all nodes in the cluster {#retrieve-all-nodes}
+#### To get API endpoints of all nodes in the cluster {#retrieve-all-nodes}
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/uris -d ''
