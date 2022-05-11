@@ -218,7 +218,7 @@ Response
 
 Now you have a 5-nodes network with HTTP ports (where API calls should be sent) `30301`, `31072`, `37730`, `40108` , and `64470`.
 
-Please refer to the dedicated [Avalanche Network Runner documentation](./network-runner.md#start-a-new-avalanche-network-with-five-nodes-a-cluster) for more information.
+Please refer to the dedicated [Avalanche Network Runner documentation](./network-runner.md) for more information.
 
 ## Manually
 
