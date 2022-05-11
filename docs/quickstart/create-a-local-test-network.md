@@ -125,7 +125,7 @@ The response to this call is actually pretty large, as it contains the state of 
     "nodeInfos": {
       "node1": {
         "name": "node1",
-        "execPath": "/Users/yulindong/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
         "uri": "http://127.0.0.1:40108",
         "id": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
         "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node1/log",
@@ -136,7 +136,7 @@ The response to this call is actually pretty large, as it contains the state of 
       },
       "node2": {
         "name": "node2",
-        "execPath": "/Users/yulindong/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
         "uri": "http://127.0.0.1:64470",
         "id": "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
         "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node2/log",
@@ -147,7 +147,7 @@ The response to this call is actually pretty large, as it contains the state of 
       },
       "node3": {
         "name": "node3",
-        "execPath": "/Users/yulindong/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
         "uri": "http://127.0.0.1:30301",
         "id": "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
         "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node3/log",
@@ -158,7 +158,7 @@ The response to this call is actually pretty large, as it contains the state of 
       },
       "node4": {
         "name": "node4",
-        "execPath": "/Users/yulindong/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
         "uri": "http://127.0.0.1:31072",
         "id": "NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu",
         "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node4/log",
@@ -169,7 +169,7 @@ The response to this call is actually pretty large, as it contains the state of 
       },
       "node5": {
         "name": "node5",
-        "execPath": "/Users/yulindong/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
         "uri": "http://127.0.0.1:37730",
         "id": "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
         "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node5/log",
