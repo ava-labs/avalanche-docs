@@ -62,7 +62,6 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 
 Avalanche supports the creation of new instances of the Avalanche VM.
 * [Create a Blockchain Running Subnet-EVM](../../subnets/create-evm-blockchain.md)
-* [Create a Blockchain Running AVM](../../subnets/create-avm-blockchain.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
 * [Create a Virtual Machine (VM)](../../subnets/create-a-virtual-machine-vm.md)

@@ -107,7 +107,6 @@ const sidebars = {
   subnets: [
     'subnets/README',
     'subnets/create-a-local-subnet',
-    'subnets/create-avm-blockchain',
     'subnets/create-evm-blockchain',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
