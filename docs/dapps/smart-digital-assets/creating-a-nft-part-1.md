@@ -15,7 +15,7 @@ In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a f
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform-overview.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 ## Create the NFT Family
 
@@ -153,7 +153,7 @@ The response contains a list of UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../quickstart/references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../specs/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
 
 ```
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
@@ -165,7 +165,7 @@ is expressed in hexadecimal as:
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](.../../quickstart/references/avm-transaction-serialization.md):
+Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](.../../specs/avm-transaction-serialization.md):
 
 ```
 NFT Mint Output
@@ -233,7 +233,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](.../../quickstart/references/avm-transaction-serialization.md#nft-transfer-output).
+Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../apis/avalanchego/apis/x-chain.mdx#avmgetutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](.../../specs/avm-transaction-serialization.md#nft-transfer-output).
 
 ```sh
 curl -X POST --data '{
@@ -299,7 +299,7 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output](.../../quickstart/references/avm-transaction-serialization.md#nft-transfer-output). Also, note that the Payload is included.
+Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output](.../../specs/avm-transaction-serialization.md#nft-transfer-output). Also, note that the Payload is included.
 
 ## Send the NFT
 

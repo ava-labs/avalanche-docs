@@ -18,7 +18,7 @@ All configuration options and their default values are described [here](../../no
 
 You can supply configuration options on the command line, or use a config file, which can be easier to work with when supplying many options. You can specify the config file location with `—config-file=config.json`, where `config.json` is a JSON file whose keys and values are option names and values.
 
-Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../nodes/maintain/avalanchego-config-flags.md#chain-configs).
+Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. An example C-Chain config file:
 
@@ -92,7 +92,7 @@ Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To
 
 ### (Optional) Custom Golang SDK
 
-If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly (when you call `block.Hash()`) because it doesn't take into account the added [ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98) header field in Avalanche C-Chain blocks, which is used move AVAX between chains (X-Chain and P-Chain). You can read more about our multi-chain abstraction [here](../../overview/getting-started/avalanche-platform-overview.md) (out of scope for a normal C-Chain integration).
+If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly (when you call `block.Hash()`) because it doesn't take into account the added [ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98) header field in Avalanche C-Chain blocks, which is used move AVAX between chains (X-Chain and P-Chain). You can read more about our multi-chain abstraction [here](../../overview/getting-started/avalanche-platform.md) (out of scope for a normal C-Chain integration).
 
 If you plan on reading JSON responses directly or use web3.js (doesn't recompute hash received over the wire) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
 

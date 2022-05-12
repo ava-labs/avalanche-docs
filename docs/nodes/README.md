@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Overview
+# Nodes Overview
 
 This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
 
@@ -32,4 +32,4 @@ This section provides documents on how to build and maintain an AvalancheGo node
 | :--- | :--- |
 | [**What is Staking?**](./validate/staking.md) | Explain the concept of staking |
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](./validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet |
-| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../overview/getting-started/avalanche-platform-overview.md) |
+| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../overview/getting-started/avalanche-platform.md) |

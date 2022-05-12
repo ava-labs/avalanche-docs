@@ -16,7 +16,7 @@ For this tutorial I have used [Visual Studio Code](https://code.visualstudio.com
 ### Dependencies
 * [NodeJS v8.9.4 or later](https://nodejs.org/en/).
 * Truffle, which you can install with npm install -g truffle
-* (Optional) [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
+* (Optional) [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network. 
 
 ### Setting up a Truffle project
 

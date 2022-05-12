@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Overview
+# Subnets Overview
 
 Avalanche features 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special subnet, and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
@@ -60,7 +60,6 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 
 Avalanche supports the creation of new instances of the Avalanche VM.
 * [Create a Blockchain Running Subnet-EVM](create-evm-blockchain.md)
-* [Create a Blockchain Running AVM](create-avm-blockchain.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
 * [Create a Virtual machine (VM)](create-a-virtual-machine-vm.md)

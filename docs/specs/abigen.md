@@ -1,6 +1,4 @@
----
-sidebar_position: 8
----
+
 # Abigen
 
 Compile a solidity contract into golang to deploy and call contracts programmatically.

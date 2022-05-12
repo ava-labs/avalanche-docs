@@ -4,55 +4,225 @@
 
 This tutorial explains several methods of creating a local test network.
 
-There are currently three options to launch such a local network:
+There are currently two options to launch such a local network:
 * Using the [Avalanche Network Runner](../quickstart/network-runner.md) (recommended)
 * Manually starting each AvalancheGo node (not recommended)
-* Using [Avash](../quickstart/references/avash.md) (Note that Avash is Deprecated)
 
-## Create a Local Test Network
+## Avalanche Network Runner
 
-The below commands assume you have [AvalancheGo](../nodes/build/run-avalanche-node-manually.md#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+### Installation
 
-### Avalanche Network Runner
+The Avalanche Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
 
-Install the [Avalanche Network Runner](../quickstart/network-runner.md) by cloning the repo:
+That repository's README details the tool.
 
-```
+Clone the repository with:
+
+```bash
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-As this is a `go` tool, we recommend installing according to the `$GOPATH` convention. The rest of this tutorial assumes this convention.
+There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases). You can download and install it on to your computer. 
 
-Change the working directory to this repository:
 
-```sh
-cd $GOPATH/src/github.com/ava-labs/avalanche-network-runner
+To build from the source and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
+
+```bash
+cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
+go install -v ./cmd/avalanche-network-runner
 ```
 
-Run the example network configuration:
+`avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
 
-```
-go run ./examples/local/fivenodenetwork/main.go
-```
+Unless otherwise specified, file paths given below are relative to the root of this repository. 
 
-This creates a 5 node network where each node has a randomly generated API port. Note that you may provide configurations to the Avalanche Network Runner so that it uses predefined API ports for each node. Please see the Network Runner's [documentation](../quickstart/network-runner.md) for details.
+When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them.
+Therefore we run one shell with the RPC server, and another one for issuing calls.
 
-After you run the above command, check the output to see the API port of each node. The output will contain something like this:
+### Start the server
 
-```
-INFO [12-07|18:32:48] local/network.go#380: adding node "node-0" 
-with tmp dir at /tmp/avalanchego-network-runner-2634315498, 
-logs at /tmp/avalanchego-network-runner-2634315498/logs, 
-DB at /tmp/avalanchego-network-runner-2634315498, 
-P2P port 33833, 
-API port 33695
+```bash
+avalanche-network-runner server \
+--log-level debug \
+--port=":8080" \
+--grpc-gateway-port=":8081"
 ```
 
-To make API calls, use the `API port`, which in this example is `33695`. Each node will have a unique API port.
+Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to be run in a separate terminal.
 
-Once you have a node's API port, you can make API calls to it as shown [here.](#verifying-nodes-are-connected)
+The RPC server listens to two ports:
+* `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
+* `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
 
-### Manually
+When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
+Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
+
+Each of the examples below will show both modes, claritying its usage.
+
+### Start a New Avalanche Network with Five Nodes (a cluster)
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+AVALANCHEGO_EXEC_PATH="avalanchego"
+```
+
+```bash
+curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
+```
+
+or
+```bash
+avalanche-network-runner control start \
+--log-level debug \
+--endpoint="0.0.0.0:8080" \
+--number-of-nodes=5 \
+--avalanchego-path ${AVALANCHEGO_EXEC_PATH}
+```
+
+Response
+
+```json
+{
+  "clusterInfo": {
+    "nodeNames": [],
+    "nodeInfos": {},
+    "pid": 98315,
+    "rootDataDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647",
+    "healthy": false,
+    "attachedPeerInfos": {},
+    "customVmsHealthy": false,
+    "customVms": {}
+  }
+}
+```
+
+
+Use this command to check if all the nodes in the cluster are healthy
+
+```bash
+curl -X POST -k http://localhost:8081/v1/control/health -d ''
+```
+or
+```bash
+avalanche-network-runner control health \
+--log-level debug \
+--endpoint="0.0.0.0:8080"
+```
+
+The response to this call is actually pretty large, as it contains the state of the whole cluster. At the very end of it there should be a text saying `healthy:true` (it would say `false` if it wasn't healthy).
+
+```json
+{
+  "clusterInfo": {
+    "nodeNames": [
+      "node3",
+      "node4",
+      "node5",
+      "node1",
+      "node2"
+    ],
+    "nodeInfos": {
+      "node1": {
+        "name": "node1",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "uri": "http://127.0.0.1:40108",
+        "id": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
+        "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node1/log",
+        "dbDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node1/db-dir",
+        "pluginDir": "",
+        "whitelistedSubnets": "",
+        "config": "eyJhcGktYWRtaW4tZW5hYmxlZCI6dHJ1ZSwiYXBpLWlwY3MtZW5hYmxlZCI6dHJ1ZSwiZGItZGlyIjoiL3Zhci9mb2xkZXJzLzBoL3Y0bnJiYnNuMXZ2YnI1aDJ3ZnJoNWg1MDAwMDBnbi9UL25ldHdvcmstcnVubmVyLXJvb3QtZGF0YTM1NzU0NTg2NDcvbm9kZTEvZGItZGlyIiwiaGVhbHRoLWNoZWNrLWZyZXF1ZW5jeSI6IjJzIiwiaW5kZXgtZW5hYmxlZCI6dHJ1ZSwibG9nLWRpciI6Ii92YXIvZm9sZGVycy8waC92NG5yYmJzbjF2dmJyNWgyd2ZyaDVoNTAwMDAwZ24vVC9uZXR3b3JrLXJ1bm5lci1yb290LWRhdGEzNTc1NDU4NjQ3L25vZGUxL2xvZyIsImxvZy1kaXNwbGF5LWxldmVsIjoiSU5GTyIsImxvZy1sZXZlbCI6IklORk8iLCJuZXR3b3JrLW1heC1yZWNvbm5lY3QtZGVsYXkiOiIxcyIsIm5ldHdvcmstcGVlci1saXN0LWdvc3NpcC1mcmVxdWVuY3kiOiIyNTBtcyIsInBsdWdpbi1kaXIiOiIiLCJwdWJsaWMtaXAiOiIxMjcuMC4wLjEiLCJ3aGl0ZWxpc3RlZC1zdWJuZXRzIjoiIn0="
+      },
+      "node2": {
+        "name": "node2",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "uri": "http://127.0.0.1:64470",
+        "id": "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
+        "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node2/log",
+        "dbDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node2/db-dir",
+        "pluginDir": "",
+        "whitelistedSubnets": "",
+        "config": "eyJhcGktYWRtaW4tZW5hYmxlZCI6dHJ1ZSwiYXBpLWlwY3MtZW5hYmxlZCI6dHJ1ZSwiZGItZGlyIjoiL3Zhci9mb2xkZXJzLzBoL3Y0bnJiYnNuMXZ2YnI1aDJ3ZnJoNWg1MDAwMDBnbi9UL25ldHdvcmstcnVubmVyLXJvb3QtZGF0YTM1NzU0NTg2NDcvbm9kZTIvZGItZGlyIiwiaGVhbHRoLWNoZWNrLWZyZXF1ZW5jeSI6IjJzIiwiaW5kZXgtZW5hYmxlZCI6dHJ1ZSwibG9nLWRpciI6Ii92YXIvZm9sZGVycy8waC92NG5yYmJzbjF2dmJyNWgyd2ZyaDVoNTAwMDAwZ24vVC9uZXR3b3JrLXJ1bm5lci1yb290LWRhdGEzNTc1NDU4NjQ3L25vZGUyL2xvZyIsImxvZy1kaXNwbGF5LWxldmVsIjoiSU5GTyIsImxvZy1sZXZlbCI6IklORk8iLCJuZXR3b3JrLW1heC1yZWNvbm5lY3QtZGVsYXkiOiIxcyIsIm5ldHdvcmstcGVlci1saXN0LWdvc3NpcC1mcmVxdWVuY3kiOiIyNTBtcyIsInBsdWdpbi1kaXIiOiIiLCJwdWJsaWMtaXAiOiIxMjcuMC4wLjEiLCJ3aGl0ZWxpc3RlZC1zdWJuZXRzIjoiIn0="
+      },
+      "node3": {
+        "name": "node3",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "uri": "http://127.0.0.1:30301",
+        "id": "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
+        "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node3/log",
+        "dbDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node3/db-dir",
+        "pluginDir": "",
+        "whitelistedSubnets": "",
+        "config": "eyJhcGktYWRtaW4tZW5hYmxlZCI6dHJ1ZSwiYXBpLWlwY3MtZW5hYmxlZCI6dHJ1ZSwiZGItZGlyIjoiL3Zhci9mb2xkZXJzLzBoL3Y0bnJiYnNuMXZ2YnI1aDJ3ZnJoNWg1MDAwMDBnbi9UL25ldHdvcmstcnVubmVyLXJvb3QtZGF0YTM1NzU0NTg2NDcvbm9kZTMvZGItZGlyIiwiaGVhbHRoLWNoZWNrLWZyZXF1ZW5jeSI6IjJzIiwiaW5kZXgtZW5hYmxlZCI6dHJ1ZSwibG9nLWRpciI6Ii92YXIvZm9sZGVycy8waC92NG5yYmJzbjF2dmJyNWgyd2ZyaDVoNTAwMDAwZ24vVC9uZXR3b3JrLXJ1bm5lci1yb290LWRhdGEzNTc1NDU4NjQ3L25vZGUzL2xvZyIsImxvZy1kaXNwbGF5LWxldmVsIjoiSU5GTyIsImxvZy1sZXZlbCI6IklORk8iLCJuZXR3b3JrLW1heC1yZWNvbm5lY3QtZGVsYXkiOiIxcyIsIm5ldHdvcmstcGVlci1saXN0LWdvc3NpcC1mcmVxdWVuY3kiOiIyNTBtcyIsInBsdWdpbi1kaXIiOiIiLCJwdWJsaWMtaXAiOiIxMjcuMC4wLjEiLCJ3aGl0ZWxpc3RlZC1zdWJuZXRzIjoiIn0="
+      },
+      "node4": {
+        "name": "node4",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "uri": "http://127.0.0.1:31072",
+        "id": "NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu",
+        "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node4/log",
+        "dbDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node4/db-dir",
+        "pluginDir": "",
+        "whitelistedSubnets": "",
+        "config": "eyJhcGktYWRtaW4tZW5hYmxlZCI6dHJ1ZSwiYXBpLWlwY3MtZW5hYmxlZCI6dHJ1ZSwiZGItZGlyIjoiL3Zhci9mb2xkZXJzLzBoL3Y0bnJiYnNuMXZ2YnI1aDJ3ZnJoNWg1MDAwMDBnbi9UL25ldHdvcmstcnVubmVyLXJvb3QtZGF0YTM1NzU0NTg2NDcvbm9kZTQvZGItZGlyIiwiaGVhbHRoLWNoZWNrLWZyZXF1ZW5jeSI6IjJzIiwiaW5kZXgtZW5hYmxlZCI6dHJ1ZSwibG9nLWRpciI6Ii92YXIvZm9sZGVycy8waC92NG5yYmJzbjF2dmJyNWgyd2ZyaDVoNTAwMDAwZ24vVC9uZXR3b3JrLXJ1bm5lci1yb290LWRhdGEzNTc1NDU4NjQ3L25vZGU0L2xvZyIsImxvZy1kaXNwbGF5LWxldmVsIjoiSU5GTyIsImxvZy1sZXZlbCI6IklORk8iLCJuZXR3b3JrLW1heC1yZWNvbm5lY3QtZGVsYXkiOiIxcyIsIm5ldHdvcmstcGVlci1saXN0LWdvc3NpcC1mcmVxdWVuY3kiOiIyNTBtcyIsInBsdWdpbi1kaXIiOiIiLCJwdWJsaWMtaXAiOiIxMjcuMC4wLjEiLCJ3aGl0ZWxpc3RlZC1zdWJuZXRzIjoiIn0="
+      },
+      "node5": {
+        "name": "node5",
+        "execPath": "/Users/testuser/workspace/src/github.com/ava-labs/avalanchego/build/avalanchego",
+        "uri": "http://127.0.0.1:37730",
+        "id": "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
+        "logDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node5/log",
+        "dbDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647/node5/db-dir",
+        "pluginDir": "",
+        "whitelistedSubnets": "",
+        "config": "eyJhcGktYWRtaW4tZW5hYmxlZCI6dHJ1ZSwiYXBpLWlwY3MtZW5hYmxlZCI6dHJ1ZSwiZGItZGlyIjoiL3Zhci9mb2xkZXJzLzBoL3Y0bnJiYnNuMXZ2YnI1aDJ3ZnJoNWg1MDAwMDBnbi9UL25ldHdvcmstcnVubmVyLXJvb3QtZGF0YTM1NzU0NTg2NDcvbm9kZTUvZGItZGlyIiwiaGVhbHRoLWNoZWNrLWZyZXF1ZW5jeSI6IjJzIiwiaW5kZXgtZW5hYmxlZCI6dHJ1ZSwibG9nLWRpciI6Ii92YXIvZm9sZGVycy8waC92NG5yYmJzbjF2dmJyNWgyd2ZyaDVoNTAwMDAwZ24vVC9uZXR3b3JrLXJ1bm5lci1yb290LWRhdGEzNTc1NDU4NjQ3L25vZGU1L2xvZyIsImxvZy1kaXNwbGF5LWxldmVsIjoiSU5GTyIsImxvZy1sZXZlbCI6IklORk8iLCJuZXR3b3JrLW1heC1yZWNvbm5lY3QtZGVsYXkiOiIxcyIsIm5ldHdvcmstcGVlci1saXN0LWdvc3NpcC1mcmVxdWVuY3kiOiIyNTBtcyIsInBsdWdpbi1kaXIiOiIiLCJwdWJsaWMtaXAiOiIxMjcuMC4wLjEiLCJ3aGl0ZWxpc3RlZC1zdWJuZXRzIjoiIn0="
+      }
+    },
+    "pid": 98315,
+    "rootDataDir": "/var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data3575458647",
+    "healthy": true,
+    "attachedPeerInfos": {},
+    "customVmsHealthy": false,
+    "customVms": {}
+  }
+}
+```
+
+#### To get API endpoints of all nodes in the cluster {#retrieve-all-nodes}
+
+```bash
+curl -X POST -k http://localhost:8081/v1/control/uris -d ''
+```
+
+or
+```bash
+avalanche-network-runner control uris \
+--log-level debug \
+--endpoint="0.0.0.0:8080"
+```
+
+Response
+
+```json
+{
+  "uris": [
+    "http://127.0.0.1:30301",
+    "http://127.0.0.1:31072",
+    "http://127.0.0.1:37730",
+    "http://127.0.0.1:40108",
+    "http://127.0.0.1:64470"
+  ]
+}
+```
+
+Now you have a 5-nodes network with HTTP ports (where API calls should be sent) `30301`, `31072`, `37730`, `40108` , and `64470`.
+
+Please refer to the dedicated [Avalanche Network Runner documentation](./network-runner.md) for more information.
+
+## Manually
+
+The below commands assume you have [AvalancheGo](../nodes/build/run-avalanche-node-manually.md#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
 The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 
@@ -86,116 +256,6 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-### Avash
+## Next Step
 
-:::warning
-
-Avash is deprecated and is being replaced with the [Avalanche Network Runner](#avalanche-network-runner)
-
-:::
-
-We assume you’ve installed [Avash](../quickstart/references/avash.md).
-
-To open Avash:
-
-```sh
-cd $GOPATH/src/github.com/ava-labs/avash
-```
-
-```sh
-go build
-```
-
-```sh
-./avash
-```
-
-Now we’re in Avash. To start the network:
-
-```
-runscript scripts/five_node_staking.lua
-```
-
-The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
-When you want to tear down the network, run `exit` to exit Avash.
-
-### Verifying Nodes are Connected
-
-As a sanity check, we can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../apis/avalanchego/apis/info.md#infopeers).
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.peers"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
-```
-
-(Note that if you used the Avalanche Network Runner, the node's API port will not be `9650` -- see [here](#avalanche-network-runner).
-
-`peers` should have 4 entries. Example output:
-
-```json
-{
-    "jsonrpc":"2.0",
-    "result":{
-        "numPeers":"4",
-        "peers":[
-            {
-                "ip":"127.0.0.1:36698",
-                "publicIP":"127.0.0.1:9655",
-                "nodeID":"NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:09-05:00"
-            },
-            {
-                "ip":"127.0.0.1:37036",
-                "publicIP":"127.0.0.1:9657",
-                "nodeID":"NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:18-05:00"
-            },
-            {
-                "ip":"127.0.0.1:38764",
-                "publicIP":"127.0.0.1:9659",
-                "nodeID":"NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:15-05:00"
-            },
-            {
-                "ip":"127.0.0.1:60194",
-                "publicIP":"127.0.0.1:9653",
-                "nodeID":"NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
-                "version":"avalanche/1.0.5",
-                "lastSent":"2020-11-15T09:29:16-05:00",
-                "lastReceived":"2020-11-15T09:29:09-05:00"
-            }
-        ]
-    },
-    "id":1
-}
-```
-
-### Getting AVAX {#getting-avax}
-
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain private key that you can import in order to get AVAX. The private key is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you [create a keystore user](../apis/avalanchego/apis/keystore.md#keystorecreateuser) on a node, you can [import this key](../apis/avalanchego/apis/x-chain.mdx), and the funds it holds, with:
-
-```sh
-curl --location --request POST 'localhost:9650/ext/platform' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc": "2.0",
-    "method": "platform.importKey",
-    "params":{
-        "username":"USERNAME GOES HERE",
-        "password":"PASSWORD GOES HERE",
-          "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
-    },
-    "id": 1
-}'
-```
-
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](../overview/getting-started/avalanche-platform-overview.md#exchange-chain-x-chain), [C-Chain](../overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain), and [P-Chain](../overview/getting-started/avalanche-platform-overview.md#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+Check out [Fund a Local Test Network](./fund-a-local-test-network.md).

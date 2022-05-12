@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
 
 If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-custom-blockchain.md).
 
@@ -54,10 +54,10 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](../overview/getting-started/avalanche-platform-overview.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../overview/getting-started/avalanche-platform.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
-[Create a Subnet](create-a-subnet.md)
+[Create a Subnet](subnet-deepdive.md)
 :::
 
 ### Add Validators to the Subnet
@@ -151,7 +151,7 @@ The default Subnet EVM provided below has some well defined parameters. The defa
 
 `allowFeeRecipients`: Enables fee recipients. By default, all fees are burned (sent to the blackhole address). However, it is possible to enable block producers to set a fee recipient (get compensated for blocks they produce).
 
-With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/avalanchego-config-flags.md#chain-configs) with the following:
+With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/chain-config-flags.md#c-chain-configs) with the following:
 
 ```json
 {
@@ -254,7 +254,6 @@ You can also issue a `subnetevm.decodeBlock` to make sure your encoded genesis b
 
 ```sh
 curl -X POST --data '{
-    {
     "jsonrpc": "2.0",
     "id"     : 1,
     "method" : "subnetevm.decodeGenesis",
@@ -432,7 +431,7 @@ More information can be found in the [Adding a Subnet Validator](../nodes/valida
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
-You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../overview/getting-started/avalanche-platform-overview.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/apis/avalanchego/apis/admin#admin-aliaschain).
+You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/apis/avalanchego/apis/admin#admin-aliaschain).
 
 ### Verify Chain ID
 

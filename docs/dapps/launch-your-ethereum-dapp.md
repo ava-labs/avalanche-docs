@@ -11,7 +11,7 @@ The purpose of this document is to help you with launching your existing dapp on
 
 ## Platform Basics
 
-Avalanche is a [network of networks](../overview/getting-started/avalanche-platform-overview.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
+Avalanche is a [network of networks](../overview/getting-started/avalanche-platform.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
 
 C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result, you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../overview/getting-started/avalanche-consensus.md) enables.
 
@@ -55,7 +55,7 @@ The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.
 
 For more information, see [documentation](../apis/avalanchego/public-api-server.md).
 
-However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
+However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.
 
 ## Running Your Own Node
 
@@ -67,7 +67,7 @@ For development and experimental purposes, [here](../nodes/build/run-avalanche-n
 
 Node configuration options are explained [here](../nodes/maintain/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
 
-On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../nodes/maintain/avalanchego-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
+On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../nodes/maintain/chain-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
 
 By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/chains/C/config.json`. We will go over how to adjust the config to cover some common use cases in the following sections.
 
@@ -113,7 +113,7 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 }
 ```
 
-Default config values for the C-Chain can be seen [here](https://docs.avax.network/build/../nodes/maintain/avalanchego-config-flags#c-chain-configs).
+Default config values for the C-Chain can be seen [here](../nodes/maintain/avalanchego-config-flags#c-chain-configs).
 
 ### Running a Local Test Network
 

@@ -1,6 +1,4 @@
----
-sidebar_position: 4
----
+
 # Cryptographic Primitives
 
 [Avalanche](../../#avalanche) uses a variety of cryptographic primitives for its different functions. This file summarizes the type and kind of cryptography used at the network and blockchain layers.
