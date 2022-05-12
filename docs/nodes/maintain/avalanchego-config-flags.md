@@ -774,27 +774,27 @@ Rate-limiting based on how much CPU usage a peer causes.
 
 ##### `cpu-tracker-halflife` (duration):
 
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly.
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to 15 seconds.
 
-##### `--cpu-target` (uint):
+##### `throttler-inbound-cpu-validator-alloc` (float):
 
-Target usage of this many CPU cores. Value should be in range (0, total core count].
+Number of CPU reserved for use by validators. Value should be in range (0, total core count]. 
+Defaults to half of the number of CPUs on the machine.
 
-##### `--cpu-target-max-scaling` (float):
+##### `--throttler-inbound-cpu-at-large-alloc` (float):
 
-The maximum allowed scaling of the current CPU target based on the current actual usage. Must be greater than 0.
+Number of CPU that can be used by any peer. Value should be in range (0, total core count].
+Defaults to half of the number of CPUs on the machine.
 
-##### `--cpu-validator-alloc-portion` (float):
+##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
-Of the targeted CPU cores in `cpu-target`, reserve this portion of the CPU for usage by validators. Must be in [0,1].
+The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then
+one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1].
 
-##### `--cpu-target-per-non-validator-max-fraction` (float):
+##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
-Max CPU usage of any single non validator can use as a percentage of the CPU target allocated to peers. Must be in [0,1].
-
-##### `throttler-inbound-cpu-min-recheck-freq` (duration):
-
-Check at least this often whether the node's CPU usage has fallen to an acceptable level.
+In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level.
 
 #### Bandwidth based
 
