@@ -778,13 +778,14 @@ Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics chang
 
 ##### `throttler-inbound-cpu-validator-alloc` (float):
 
-Number of CPU reserved for use by validators. Value should be in range (0, total core count]. 
+Number of CPU allocated for use by validators. Value should be in range (0, total core count]. 
 Defaults to half of the number of CPUs on the machine.
 
 ##### `--throttler-inbound-cpu-at-large-alloc` (float):
 
-Number of CPU that can be used by any peer. Value should be in range (0, total core count].
+Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
+See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 
 ##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
