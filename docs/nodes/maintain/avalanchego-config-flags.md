@@ -73,7 +73,7 @@ Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. T
 
 #### `--http-shutdown-timeout` (duration):
 
-Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
+Maximum duration to wait for existing connections to complete during node shutdown. Defaults to `10s`.
 
 ## Assertions
 
@@ -690,7 +690,7 @@ If true, compress certain messages sent to peers to reduce bandwidth usage.
 
 #### `--network-initial-timeout` (duration):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
 
 #### `--network-initial-reconnect-delay` (duration):
 
@@ -702,11 +702,11 @@ Maximum delay duration must be waited before attempting to reconnect a peer. Def
 
 #### `--network-minimum-timeout` (duration):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
+Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
 
 #### `--network-maximum-timeout` (duration):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
 
 #### `--network-maximum-inbound-timeout` (duration):
 
@@ -774,7 +774,7 @@ Rate-limiting based on how much CPU usage a peer causes.
 
 ##### `cpu-tracker-halflife` (duration):
 
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to 15 seconds.
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to `15s`.
 
 ##### `throttler-inbound-cpu-validator-alloc` (float):
 
@@ -791,11 +791,11 @@ See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 
 The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
 For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then
-one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1].
+one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
 
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
-In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level.
+In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level. Defaults to `5s`.
 
 #### Bandwidth based
 
