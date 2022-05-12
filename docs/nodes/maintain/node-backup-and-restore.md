@@ -18,7 +18,7 @@ The installation itself can be easily recreated by installing the node on a new 
 
 ## NodeID
 
-NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../quickstart/references/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
+NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../specs/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
 
 * `staker.crt`
 * `staker.key`
