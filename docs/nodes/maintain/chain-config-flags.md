@@ -448,3 +448,8 @@ Please note that if `index-transactions` is set to true, it must always be set t
 Allows incomplete indices. Default value is `false`.
 
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
+
+
+## Subnets Configs
+
+As mentioned above, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
