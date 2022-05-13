@@ -20,9 +20,9 @@ Next, install [yarn](https://yarnpkg.com):
 npm install -g yarn
 ```
 
-### AvalancheGo and Avash
+### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avash](https://docs.avax.network/build/tools/avash) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](https://docs.avax.network/quickstart/network-runner) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
 
 ### Solidity and Avalanche
 
@@ -61,7 +61,7 @@ You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/av
 
 ### Accounts
 
-Prints a list of accounts on the local Avash network.
+Prints a list of accounts on the local ANR network.
 
 ```text
 $ yarn accounts --network local
@@ -81,7 +81,7 @@ npx hardhat accounts --network local
 
 ### Balances
 
-Prints a list of accounts and their corresponding AVAX balances on the local Avash network.
+Prints a list of accounts and their corresponding AVAX balances on the local ANR network.
 
 ```text
 $ yarn balances --network local
@@ -105,9 +105,9 @@ Notice that the first account is already funded. This is because this address is
 
 Run `yarn hardhat` to list Hardhat's version, usage instructions, global options and available tasks.
 
-## Typical Avash Workflow
+## Typical Avalanche Network Runner Workflow
 
-### Run Avash
+### Run Avalanche Network Runner
 
 First confirm you have the latest AvalancheGo built.
 
@@ -120,19 +120,34 @@ $ ./scripts/build.sh
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
-Start Avash and run a script to start a new local network.
+Confirm you have ANR installed by following the steps listed [here](https://docs.avax.network/quickstart/create-a-local-test-network#installation)
+
+Start Avalanche Network Runner and run a script to start a new local network.
+
+### Start the server
 
 ```text
-$ cd /path/to/avash
-$ git fetch -p
-$ git checkout master
-$ go build
-$ ./avash
-Config file set: /Users/username/.avash.yaml
-Avash successfully configured.
-$ avash> runscript scripts/five_node_staking.lua
-RunScript: Running scripts/five_node_staking.lua
-RunScript: Successfully ran scripts/five_node_staking.lua
+cd /path/to/anr
+avalanche-network-runner server \
+--log-level debug \
+--port=":8080" \
+--grpc-gateway-port=":8081"
+```
+
+### Start a New Avalanche Network with Five Nodes (a cluster)
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+AVALANCHEGO_EXEC_PATH="avalanchego"
+```
+
+```bash
+avalanche-network-runner control start \
+--log-level debug \
+--endpoint="0.0.0.0:8080" \
+--number-of-nodes=5 \
+--avalanchego-path ${AVALANCHEGO_EXEC_PATH}
 ```
 
 Now you're running a local Avalanche network with 5 nodes.
@@ -307,8 +322,8 @@ Now we can interact with our `ERC-20` contract:
 undefined
 > value.toString()
 '123456789'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x00', _isBigNumber: true }
 > value.toString()
 '0'
 ```
@@ -350,12 +365,12 @@ Note: Since this is a local network, we did not need to wait until transaction i
 Now we can ensure that tokens are transferred:
 
 ```javascript
-> let value = await coin.balanceOf(accounts[0])
-undefined
+> value = await coin.balanceOf(accounts[0])
+BigNumber { _hex: '0x075bccb1', _isBigNumber: true }
 > value.toString()
 '123456689'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x64', _isBigNumber: true }
 > value.toString()
 '100'
 ```
@@ -398,12 +413,12 @@ Now we can call the contract with `signer1`, which is `account[1]`.
 Let's check balances now:
 
 ```javascript
-> let value = await coin.balanceOf(accounts[0])
-undefined
+> value = await coin.balanceOf(accounts[0])
+BigNumber { _hex: '0x075bccb6', _isBigNumber: true }
 > value.toString()
 '123456694'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x5f', _isBigNumber: true }
 > value.toString()
 '95'
 ```
