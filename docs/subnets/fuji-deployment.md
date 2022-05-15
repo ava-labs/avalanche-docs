@@ -14,6 +14,30 @@ For this tutorial, we recommend that you follow [Run an Avalanche Node Manually]
 
   _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`_
 
+To get the NodeID of this Fuji node, call the following curl command to [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+The response should look something like:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    },
+    "id": 1
+}
+```
+
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#run-subnet-cli-wizard).
+
 
 ### Subnet-cli
 
@@ -124,12 +148,12 @@ a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
 command and you'll have a subnet with a running `subnet-evm` instance 5 minutes
 later.
 
-To make NodeID-XXXX a validator, create a subnet, add NodeID-XXXX to the
+To make `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) a validator, create a subnet, add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the
 subnet (comma separated with multiple validators), and create a `subnet-evm`-based blockhain, run the following command:
 
 ```bash
 subnet-cli wizard \
---node-ids=NodeID-XXXX \
+--node-ids=NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD \
 --vm-genesis-path=networks/11111/genesis.json \
 --vm-id=srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy \
 --chain-name=subnetevm
@@ -154,15 +178,18 @@ Example Config File:
   "health-check-frequency": "2s",
   "log-display-level": "INFO",
   "log-level": "INFO",
-  "whitelisted-subnets": "<PROVIDED BY SPACES-CLI>"
+  "whitelisted-subnets": "p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz"
 }
 ```
 
 Example Node Args:
 
 ```bash
---whitelisted-subnets=<PROVIDED BY SPACES CLI> --network-id=fuji
+--whitelisted-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
 ```
+
+Note: `p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of subnet-id, please replace it with your correct subnet-id.
+
 
 ## Restart Node
 
