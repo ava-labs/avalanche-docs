@@ -52,7 +52,7 @@ P-Chain.
 :::info
 
 You can find an example of a genesis file to use when launching your own
-`subnet-evm` in the [networks folder](./networks/11111/genesis.json).
+`subnet-evm` in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
 
 :::
 
