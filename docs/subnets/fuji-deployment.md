@@ -91,7 +91,7 @@ P-Chain.
 ## Build Binary
 
 First, you'll need to compile the subnet-evm into a binary that AvalancheGo
-can interact with. To do this, first install `subnet-evm`  (assumes you don't
+can interact with. To do this, first install [`subnet-evm`](https://github.com/ava-labs/subnet-evm)  (assumes you don't
 yet have the `subnet-evm` repository downloaded):
 
 ```bash
