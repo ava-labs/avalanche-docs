@@ -95,6 +95,7 @@ is the directory where you have checked out AvalancheGo project.
 This build directory is structured as:
 
 ```
+build-dir
 |_avalanchego
   |_build
     |_plugins
