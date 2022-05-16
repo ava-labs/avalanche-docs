@@ -1,11 +1,6 @@
----
-sidebar_position: 1
----
+# Subnet Deep Dive
 
-# Create a Subnet
-
-**Please checkout [subnet-cli](https://github.com/ava-labs/subnet-cli#subnet-cli-wizard) for the fast way to create a subnet.** You are welcome to read this document to understand how subnet is created.
-
+This document provides details on how a subnet is created using relevant APIs. Please refer other documents on how to develop a subnet.
 
 ## Introduction
 

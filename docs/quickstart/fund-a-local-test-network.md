@@ -6,6 +6,12 @@ In [Create a Local Test Network](create-a-local-test-network.md), we showed you 
 
 We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain. **NOTE** this same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
 
+:::info
+
+The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. If you are using Avalanche Network Runner, please check [here](./create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
+
+:::
+
 ## Create a User
 
 First run `keystore.createUser` to create a user in the local keystore.
@@ -148,7 +154,13 @@ curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 
 To see this account on Metamask, follow these steps:
 
-* Set up Metamask by following [this](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md#local-testnet-avash-settings-avash-tutorial) and create a `Avalanche Local` network.
+* Set up Metamask by using the info below:
+    - **Network Name**: Avalanche Local C-Chain
+    - **New RPC URL**: [http://127.0.0.1:9650/ext/bc/C/rpc](http://127.0.0.1:9650/ext/bc/C/rpc)
+    - **ChainID**: `43112`
+    - **Symbol**: `AVAX`
+
+
 * Create a new account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask
 
 !["Metamask import account"](/img/Metamask-Import-Account.png)

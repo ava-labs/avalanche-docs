@@ -42,13 +42,6 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: N/A
 
-#### **[Deprecated] Local Testnet (AVASH) Settings:** [(Avash Tutorial)](../../quickstart/references/avash.md)
-
-* **Network Name**: Avalanche Local
-* **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
-* **ChainID**: `43112`
-* **Symbol**: `AVAX`
-* **Explorer**: N/A
 
 ## Step 2: Funding your C-Chain address
 

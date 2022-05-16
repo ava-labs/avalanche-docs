@@ -420,7 +420,7 @@ As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded 
 
 ##### `validatorOnly` (bool):
 
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../../subnets/create-a-subnet.md#private-subnets)
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../../subnets/subnet-deepdive.md#private-subnets)
 
 ##### Consensus Parameters
 

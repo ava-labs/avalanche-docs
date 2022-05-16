@@ -140,6 +140,9 @@ If you want to experiment and play with your node, read on.
 
 To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` (e.g. `./build/avalanchego --http-host=`)
 
+
+#### Connect to Fuji Testnet
+
 To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
 
 ### What Next?

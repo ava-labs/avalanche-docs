@@ -66,7 +66,7 @@ avalanche-network-runner server \
 Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to be run in a separate terminal.
 
 The RPC server listens to two ports:
-* `port`: the main gRPC port (see [gRPC](https://grpc.io/).
+* `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
 * `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
 
 When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
