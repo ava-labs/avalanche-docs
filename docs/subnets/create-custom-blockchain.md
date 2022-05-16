@@ -31,7 +31,7 @@ Every blockchain is an instance of a virtual machine. For example X-Chain is an 
 Every blockchain is validated by a [subnet](README.md). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
-[Create a Subnet](subnet-deepdive.md)
+[Create a Local EVM Subnet](./create-a-local-subnet.md)
 :::
 
 
@@ -40,7 +40,7 @@ Every blockchain is validated by a [subnet](README.md). Before you can create a 
 The subnet needs validators in it to, well, validate blockchains.
 
 :::info
-[Add a node to the Validator Set](../nodes/validate/add-a-validator.md)
+[Add a node to the Validator Set](./subnet-deepdive.md#adding-subnet-validators)
 :::
 
 
