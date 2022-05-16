@@ -1,3 +1,7 @@
+#05/16/2022
+/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
+/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking 301
+
 #05/12/2022
 /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
 /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain  /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
@@ -130,8 +134,8 @@
 /build/tutorials/nodes-and-staking/run-avalanche-node  /nodes/build/run-avalanche-node-manually 301
 /build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws/ /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
 /build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws  /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
+/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
+/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking 301
 /build/tutorials/nodes-and-staking/upgrade-your-nodes/ /nodes/maintain/upgrade-your-avalanchego-node 301
 /build/tutorials/nodes-and-staking/upgrade-your-nodes  /nodes/maintain/upgrade-your-avalanchego-node 301
 /build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node /nodes/maintain/upgrade-your-avalanchego-node 301

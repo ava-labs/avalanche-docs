@@ -7,7 +7,7 @@ Every node has a built-in keystore. Clients create users on the keystore, which 
 
 _**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
 
-For validation and delegation on the mainnet, you should issue transactions through [the wallet](../../../nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+For validation and delegation on the mainnet, you should issue transactions through [the wallet](../../../nodes/validate/staking.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
 
 ## Format
 
