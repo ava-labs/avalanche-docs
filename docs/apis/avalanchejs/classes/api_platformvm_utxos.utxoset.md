@@ -201,7 +201,7 @@ Name | Type | Default | Description |
 `networkID` | number | DefaultNetworkID | Networkid, [DefaultNetworkID](../modules/utils_constants.md#const-defaultnetworkid) |
 `blockchainID` | Buffer | - | Blockchainid, default undefined |
 `avaxAssetID` | Buffer | - | [Buffer](https://github.com/feross/buffer) of the asset ID for AVAX |
-`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) recieves the stake at the end of the staking period |
+`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) receives the stake at the end of the staking period |
 `fromAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who pays the fees and the stake |
 `changeAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who gets the change leftover from the staking payment |
 `nodeID` | Buffer | - | The node ID of the validator being added. |
@@ -237,7 +237,7 @@ Name | Type | Default | Description |
 `networkID` | number | DefaultNetworkID | NetworkID, [DefaultNetworkID](../modules/utils_constants.md#const-defaultnetworkid) |
 `blockchainID` | Buffer | - | BlockchainID, default undefined |
 `avaxAssetID` | Buffer | - | [Buffer](https://github.com/feross/buffer) of the asset ID for AVAX |
-`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) recieves the stake at the end of the staking period |
+`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) receives the stake at the end of the staking period |
 `fromAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who pays the fees and the stake |
 `changeAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who gets the change leftover from the staking payment |
 `nodeID` | Buffer | - | The node ID of the validator being added. |
@@ -370,7 +370,7 @@ Name | Type | Default | Description |
 `blockchainID` | Buffer | - | The [Buffer](https://github.com/feross/buffer) representing the BlockchainID for the transaction |
 `amount` | BN | - | The amount being exported as a [BN](https://github.com/indutny/bn.js/) |
 `avaxAssetID` | Buffer | - | [Buffer](https://github.com/feross/buffer) of the asset ID for AVAX |
-`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who recieves the AVAX |
+`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who receives the AVAX |
 `fromAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who owns the AVAX |
 `changeAddresses` | Buffer[] | undefined | An array of addresses as [Buffer](https://github.com/feross/buffer) who gets the change leftover of the AVAX |
 `destinationChain` | Buffer | undefined | Optional. A [Buffer](https://github.com/feross/buffer) for the chainid where to send the asset. |
