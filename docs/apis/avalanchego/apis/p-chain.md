@@ -224,7 +224,7 @@ platform.addSubnetValidator(
 * `startTime` is the unix time when the validator starts validating the subnet.
 * `endTime` is the unix time when the validator stops validating the subnet.
 * `weight` is the validator’s weight used for sampling.
-* `from` are the fund addresses that you want to use to pay for this operation. If omitted, uses any of user's addresses as needed.
+* `from` are the fund addresses that the user wants to use to pay for this operation. If omitted, use any of user's addresses as needed.
 * `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses) will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
 * `password` is `username`‘s password.
