@@ -48,6 +48,12 @@ Hardhat uses `hardhat.config.js` as the configuration file. You can define tasks
 
 In our repository we use a pre-configured file [hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts). This file configures necessary network information to provide smooth interaction with Avalanche. There are also some pre-defined private keys for testing on a local test network.
 
+:::info
+
+The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. If you are using Avalanche Network Runner, please check [here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
+
+:::
+
 ## Hardhat Tasks
 
 You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts). There are two tasks included as examples: `accounts` and `balances`. Both have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
