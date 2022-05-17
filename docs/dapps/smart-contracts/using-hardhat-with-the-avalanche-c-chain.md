@@ -133,7 +133,7 @@ Start Avalanche Network Runner and run a script to start a new local network.
 ### Start the server
 
 ```text
-$ cd /path/to/Avalanche Network Runner
+$ cd /path/to/Avalanche-Network-Runner
 $ avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
