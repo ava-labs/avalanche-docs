@@ -71,8 +71,8 @@
 /build/references/network-protocol /quickstart/references/network-protocol 301
 /build/tools/abigen/ /quickstart/references/abigen 301
 /build/tools/abigen  /quickstart/references/abigen 301
-/build/tools/avash/  /quickstart/references/avash 301
-/build/tools/avash   /quickstart/references/avash 301
+/build/tools/avash/  /quickstart/network-runner 301
+/build/tools/avash   /quickstart/network-runner 301
 /build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
 /build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
 /build/references/network-protocol/ /quickstart/references/network-protocol 301

@@ -264,7 +264,7 @@ Edit the deployment script in `scripts/deploy.ts`
 "deploy": "npx hardhat run scripts/deploy.ts",
 ```
 
-You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avash), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
+You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avalanche Network Runner), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
 
 ```text
 yarn deploy --network mainnet

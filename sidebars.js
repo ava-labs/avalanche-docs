@@ -57,7 +57,6 @@ const sidebars = {
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/network-runner',
-    'quickstart/references/avash',
     {
       type: 'category',
       label: 'Exchanges',
