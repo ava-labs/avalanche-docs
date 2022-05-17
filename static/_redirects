@@ -1,6 +1,8 @@
 #05/17/2022
 /quickstart/references/avash/  /quickstart/network-runner 301
 /quickstart/references/avash   /quickstart/network-runner 301
+/dapps/smart-digital-assets/creating-a-nft-part-1/ / 301
+/dapps/smart-digital-assets/creating-a-nft-part-1  / 301
 
 #05/16/2022
 /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
@@ -251,8 +253,9 @@
 /build/tutorials/smart-digital-assets /dapps/smart-digital-assets/ 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
-/build/tutorials/smart-digital-assets/creating-a-nft-part-1/ /dapps/smart-digital-assets/creating-a-nft-part-1 301
-/build/tutorials/smart-digital-assets/creating-a-nft-part-1 /dapps/smart-digital-assets/creating-a-nft-part-1 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1/ / 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1  / 301
+
 #community
 /build/tutorials/tutorials-contest/ /community/tutorials-contest/ 301
 /build/tutorials/tutorials-contest /community/tutorials-contest/ 301
