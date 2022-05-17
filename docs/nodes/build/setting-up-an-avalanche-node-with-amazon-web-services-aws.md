@@ -87,21 +87,21 @@ Click the **Next: Configure Instance Details** button in the bottom right-hand c
 
 The instance details can stay as their defaults.
 
-### Optional: Using Spot Instances or Reserved Instances {#c99a}
+### Optional: Using Reserved Instances {#c99a}
 
-By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
+By default, you will be charged hourly for running your EC2 instance. For a long term usage that is not optimal.
 
-The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
-
-The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
+You could save money by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
 
 ### Add Storage, Tags, Security Group {#dbf5}
 
 Click the **Next: Add Storage** button in the bottom right corner of the screen.
 
-You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
+You need to add space to your instance's disk. You should start with at least 700GB of disk space. Although upgrades to reduce disk usage are always in development, on average the database will continually grow, so you need to constantly monitor disk usage on the node and increase disk space if needed.
 
-![Select 100 GB for the disk size.](/img/add-storage.png)
+Note that the image below shows 100GB as disk size, which was appropriate at the time the screenshot was taken. You should check the current [recommended disk space size](https://github.com/ava-labs/avalanchego#installation) before entering the actual value here.
+
+![Select disk size.](/img/add-storage.png)
 
 Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
 

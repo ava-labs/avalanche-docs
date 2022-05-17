@@ -1,8 +1,8 @@
-# Run a Node on DFK Subnet
+# Run a Mainnet Node on DeFi Kingdoms Subnet
 
 ## Introduction
 
-[DeFi Kingdoms](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
+[DeFi Kingdoms](https://defikingdoms.com/) recently launched the [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
 
 This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
 

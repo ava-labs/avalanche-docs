@@ -87,6 +87,8 @@ const sidebars = {
   subnets: [
     'subnets/README',
     'subnets/create-a-local-subnet',
+    'subnets/fuji-deployment',
+    'subnets/setup-dfk-node',
     'subnets/create-evm-blockchain',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
@@ -96,7 +98,6 @@ const sidebars = {
     'subnets/deploying-cross-chain-evm-bridge',
     'subnets/spaces',
     'subnets/wagmi',
-    'subnets/setup-dfk-node',
     {
       type: 'link',
       label: 'Subnet FAQ',
