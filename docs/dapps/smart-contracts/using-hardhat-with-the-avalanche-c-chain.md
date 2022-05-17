@@ -67,7 +67,7 @@ You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/av
 
 ### Accounts
 
-Prints a list of accounts on the local ANR network.
+Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
 $ yarn accounts --network local
@@ -87,7 +87,7 @@ npx hardhat accounts --network local
 
 ### Balances
 
-Prints a list of accounts and their corresponding AVAX balances on the local ANR network.
+Prints a list of accounts and their corresponding AVAX balances on the local Avalanche Network Runner network.
 
 ```text
 $ yarn balances --network local
@@ -126,14 +126,14 @@ $ ./scripts/build.sh
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
-Confirm you have ANR installed by following the steps listed [here](https://docs.avax.network/quickstart/create-a-local-test-network#installation)
+Confirm you have Avalanche Network Runner installed by following the steps listed [here](https://docs.avax.network/quickstart/create-a-local-test-network#installation)
 
 Start Avalanche Network Runner and run a script to start a new local network.
 
 ### Start the server
 
 ```text
-$ cd /path/to/anr
+$ cd /path/to/Avalanche Network Runner
 $ avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
