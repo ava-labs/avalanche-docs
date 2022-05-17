@@ -127,7 +127,7 @@ This build directory is structured as:
 
 ```
 build-dir
-|_avalanchego (note: this is binary for AvalancheGo, not a directory)
+|_avalanchego (note: this is the AvalancheGo binary, not a directory)
 |_plugins
   |_evm
 ```
