@@ -22,7 +22,7 @@ npm install -g yarn
 
 ### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](https://docs.avax.network/quickstart/network-runner) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](../../quickstart/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
 
 ### Solidity and Avalanche
 
@@ -50,7 +50,7 @@ In our repository we use a pre-configured file [hardhat.config.ts](https://githu
 
 :::info
 
-The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. If you are using Avalanche Network Runner, please check [here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
+The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. Please check [here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
 
 :::
 
@@ -126,7 +126,7 @@ $ ./scripts/build.sh
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
-Confirm you have Avalanche Network Runner installed by following the steps listed [here](https://docs.avax.network/quickstart/create-a-local-test-network#installation)
+Confirm you have Avalanche Network Runner installed by following the steps listed [here](../../quickstart/create-a-local-test-network.md#installation)
 
 Start Avalanche Network Runner and run a script to start a new local network.
 
