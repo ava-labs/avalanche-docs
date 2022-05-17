@@ -133,8 +133,8 @@ Start Avalanche Network Runner and run a script to start a new local network.
 ### Start the server
 
 ```text
-cd /path/to/anr
-avalanche-network-runner server \
+$ cd /path/to/anr
+$ avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
 --grpc-gateway-port=":8081"
@@ -145,11 +145,11 @@ avalanche-network-runner server \
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-AVALANCHEGO_EXEC_PATH="avalanchego"
+$ AVALANCHEGO_EXEC_PATH="avalanchego"
 ```
 
 ```bash
-avalanche-network-runner control start \
+$ avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
 --number-of-nodes=5 \
@@ -168,7 +168,7 @@ Note: If you see `Error: Invalid JSON RPC response: "API call rejected because c
 $ cd /path/to/avalanche-smart-contract-quickstart
 $ yarn fund-cchain-addresses
 yarn run v1.22.4
-npx hardhat run scripts/fund-cchain-addresses.js --network local
+npx hardhat run scripts/fund-cchain-addresses.js
 Exporting 1000 AVAX to each address on the C-Chain...
 2b75ae74ScLkWe5GVFTYJoP2EniMywkcZySQUoFGN2EJLiPDgp
 Importing AVAX to the C-Chain...
@@ -221,6 +221,15 @@ npx hardhat balances --network local
 0x3C7daE394BBf8e9EE1359ad14C1C47003bD06293 has balance 1000010000000000000000
 0x61e0B3CD93F36847Abbd5d40d6F00a8eC6f3cfFB has balance 1000010000000000000000
 0x0Fa8EA536Be85F32724D57A37758761B86416123 has balance 1000010000000000000000
+```
+
+Note: If you see `Error HH108: Cannot connect to the network local. Please make sure your node is running, and check your internet connection and networks config`, ensure that you are using a valid Node Port. See which ports the Nodes are using by running the command: 
+
+```text
+$ cd /path/to/avalanche-network-runner
+$ avalanche-network-runner control uris \ 
+--log-level debug \
+--endpoint="0.0.0.0:8080"  
 ```
 
 ### Compile Smart Contracts
