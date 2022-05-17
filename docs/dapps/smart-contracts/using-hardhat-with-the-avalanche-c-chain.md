@@ -20,9 +20,9 @@ Next, install [yarn](https://yarnpkg.com):
 npm install -g yarn
 ```
 
-### AvalancheGo and Avash
+### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avash](https://docs.avax.network/build/tools/avash) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](../../quickstart/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
 
 ### Solidity and Avalanche
 
@@ -48,6 +48,12 @@ Hardhat uses `hardhat.config.js` as the configuration file. You can define tasks
 
 In our repository we use a pre-configured file [hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts). This file configures necessary network information to provide smooth interaction with Avalanche. There are also some pre-defined private keys for testing on a local test network.
 
+:::info
+
+The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. Please check [here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
+
+:::
+
 ## Hardhat Tasks
 
 You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts). There are two tasks included as examples: `accounts` and `balances`. Both have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
@@ -61,7 +67,7 @@ You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/av
 
 ### Accounts
 
-Prints a list of accounts on the local Avash network.
+Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
 $ yarn accounts --network local
@@ -81,7 +87,7 @@ npx hardhat accounts --network local
 
 ### Balances
 
-Prints a list of accounts and their corresponding AVAX balances on the local Avash network.
+Prints a list of accounts and their corresponding AVAX balances on the local Avalanche Network Runner network.
 
 ```text
 $ yarn balances --network local
@@ -105,9 +111,9 @@ Notice that the first account is already funded. This is because this address is
 
 Run `yarn hardhat` to list Hardhat's version, usage instructions, global options and available tasks.
 
-## Typical Avash Workflow
+## Typical Avalanche Network Runner Workflow
 
-### Run Avash
+### Run Avalanche Network Runner
 
 First confirm you have the latest AvalancheGo built.
 
@@ -120,19 +126,34 @@ $ ./scripts/build.sh
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
-Start Avash and run a script to start a new local network.
+Confirm you have Avalanche Network Runner installed by following the steps listed [here](../../quickstart/create-a-local-test-network.md#installation)
+
+Start Avalanche Network Runner and run a script to start a new local network.
+
+### Start the server
 
 ```text
-$ cd /path/to/avash
-$ git fetch -p
-$ git checkout master
-$ go build
-$ ./avash
-Config file set: /Users/username/.avash.yaml
-Avash successfully configured.
-$ avash> runscript scripts/five_node_staking.lua
-RunScript: Running scripts/five_node_staking.lua
-RunScript: Successfully ran scripts/five_node_staking.lua
+$ cd /path/to/Avalanche-Network-Runner
+$ avalanche-network-runner server \
+--log-level debug \
+--port=":8080" \
+--grpc-gateway-port=":8081"
+```
+
+### Start a New Avalanche Network with Five Nodes (a cluster)
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+$ AVALANCHEGO_EXEC_PATH="avalanchego"
+```
+
+```bash
+$ avalanche-network-runner control start \
+--log-level debug \
+--endpoint="0.0.0.0:8080" \
+--number-of-nodes=5 \
+--avalanchego-path ${AVALANCHEGO_EXEC_PATH}
 ```
 
 Now you're running a local Avalanche network with 5 nodes.
@@ -147,7 +168,7 @@ Note: If you see `Error: Invalid JSON RPC response: "API call rejected because c
 $ cd /path/to/avalanche-smart-contract-quickstart
 $ yarn fund-cchain-addresses
 yarn run v1.22.4
-npx hardhat run scripts/fund-cchain-addresses.js --network local
+npx hardhat run scripts/fund-cchain-addresses.js
 Exporting 1000 AVAX to each address on the C-Chain...
 2b75ae74ScLkWe5GVFTYJoP2EniMywkcZySQUoFGN2EJLiPDgp
 Importing AVAX to the C-Chain...
@@ -202,6 +223,15 @@ npx hardhat balances --network local
 0x0Fa8EA536Be85F32724D57A37758761B86416123 has balance 1000010000000000000000
 ```
 
+Note: If you see `Error HH108: Cannot connect to the network local. Please make sure your node is running, and check your internet connection and networks config`, ensure that you are using a valid Node Port. See which ports the Nodes are using by running the command: 
+
+```text
+$ cd /path/to/avalanche-network-runner
+$ avalanche-network-runner control uris \ 
+--log-level debug \
+--endpoint="0.0.0.0:8080"  
+```
+
 ### Compile Smart Contracts
 
 In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json) there's a `compile` script.
@@ -234,7 +264,7 @@ Edit the deployment script in `scripts/deploy.ts`
 "deploy": "npx hardhat run scripts/deploy.ts",
 ```
 
-You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avash), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
+You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avalanche Network Runner), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
 
 ```text
 yarn deploy --network mainnet
@@ -307,8 +337,8 @@ Now we can interact with our `ERC-20` contract:
 undefined
 > value.toString()
 '123456789'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x00', _isBigNumber: true }
 > value.toString()
 '0'
 ```
@@ -350,12 +380,12 @@ Note: Since this is a local network, we did not need to wait until transaction i
 Now we can ensure that tokens are transferred:
 
 ```javascript
-> let value = await coin.balanceOf(accounts[0])
-undefined
+> value = await coin.balanceOf(accounts[0])
+BigNumber { _hex: '0x075bccb1', _isBigNumber: true }
 > value.toString()
 '123456689'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x64', _isBigNumber: true }
 > value.toString()
 '100'
 ```
@@ -398,12 +428,12 @@ Now we can call the contract with `signer1`, which is `account[1]`.
 Let's check balances now:
 
 ```javascript
-> let value = await coin.balanceOf(accounts[0])
-undefined
+> value = await coin.balanceOf(accounts[0])
+BigNumber { _hex: '0x075bccb6', _isBigNumber: true }
 > value.toString()
 '123456694'
-> let value = await coin.balanceOf(accounts[1])
-undefined
+> value = await coin.balanceOf(accounts[1])
+BigNumber { _hex: '0x5f', _isBigNumber: true }
 > value.toString()
 '95'
 ```

@@ -1,3 +1,7 @@
+#05/17/2022
+/quickstart/references/avash/  /quickstart/network-runner 301
+/quickstart/references/avash   /quickstart/network-runner 301
+
 #05/16/2022
 /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
 /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking 301
@@ -71,8 +75,8 @@
 /build/references/network-protocol /quickstart/references/network-protocol 301
 /build/tools/abigen/ /quickstart/references/abigen 301
 /build/tools/abigen  /quickstart/references/abigen 301
-/build/tools/avash/  /quickstart/references/avash 301
-/build/tools/avash   /quickstart/references/avash 301
+/build/tools/avash/  /quickstart/network-runner 301
+/build/tools/avash   /quickstart/network-runner 301
 /build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
 /build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
 /build/references/network-protocol/ /quickstart/references/network-protocol 301
