@@ -127,10 +127,9 @@ This build directory is structured as:
 
 ```
 build-dir
-|_avalanchego
-  |_build
-    |_plugins
-      |_evm
+|_avalanchego (note: this is the AvalancheGo binary, not a directory)
+|_plugins
+  |_evm
 ```
 
 To put the `subnet-evm` binary in the right place, run the following command
