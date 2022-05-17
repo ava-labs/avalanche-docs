@@ -498,7 +498,7 @@ Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of e
 
 ```text
 build-dir
-|_avalanchego (note: this is binary for AvalancheGo, not a directory)
+|_avalanchego (note: this is the AvalancheGo binary, not a directory)
 |_plugins
   |_evm
 ```
