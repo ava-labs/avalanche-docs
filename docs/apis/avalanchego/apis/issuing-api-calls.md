@@ -70,7 +70,7 @@ ext/bc/C
 
 C-Chain and many subnets run a version of the EthereumVM (EVM). EVM exposes its own endpoints, which are also accessible on the node: JSON-RPC, and Websocket.
 
-#### JSON-RPC EVM endpoints
+#### JSON-RPC EVM Endpoints
 
 To interact with C-Chain EVM via the JSON-RPC use the endpoint:
 
