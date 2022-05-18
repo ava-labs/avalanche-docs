@@ -38,7 +38,7 @@ In general, they are formatted like:
 /ext/[api-name]
 ```
 
-So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that not some APIs have additional path components, most notably the chain RPC endpoints which includes the subnet chain RPCs. We'll go over those in detail in the next section.
+So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the subnet chain RPCs. We'll go over those in detail in the next section.
 
 So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
 
