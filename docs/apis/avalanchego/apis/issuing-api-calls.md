@@ -56,7 +56,7 @@ In general, chain endpoints are formatted as:
 ext/bc/[blockchainID]
 ```
 
-### Primary network endpoints
+### Primary Network Endpoints
 
 The Primary Network consists of three chains: X, P and C chain. As those chains are present on every node, there are also convenient aliases defined that can be used instead of the full blockchainIDs. So, the endpoints look like:
 
