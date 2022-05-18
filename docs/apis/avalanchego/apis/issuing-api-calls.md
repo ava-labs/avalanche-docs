@@ -25,7 +25,7 @@ For example, if you're making RPC calls on the local node, the base URL might lo
 If you're making RPC calls to remote nodes, then the instead of `127.0.0.1` you should use the public IP of the server where the node is. Note that by default the node will only accept API calls on the local interface, so you will need to set up the [`http-host`](../../../nodes/maintain/chain-config-flags.md#--http-host-string) config flag on the node. Also, you will need to make sure the firewall and/or security policy allows access to the `http-port` from the internet.
 
 :::caution
-When setting up RPC access to a remote node, make sure you don't leave the `http-port` accessible to everyone! There are malicious actors that scan for nodes that have unrestricted access to their RPC port and then use those nodes for spamming them with resource-intensive queries which can knock the node offline. Only allow access to your node's RPC port from known IP addresses!
+When setting up RPC access to a node, make sure you don't leave the `http-port` accessible to everyone! There are malicious actors that scan for nodes that have unrestricted access to their RPC port and then use those nodes for spamming them with resource-intensive queries which can knock the node offline. Only allow access to your node's RPC port from known IP addresses!
 :::
 
 ### Endpoint Path
