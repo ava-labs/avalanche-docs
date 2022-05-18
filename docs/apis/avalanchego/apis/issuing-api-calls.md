@@ -28,7 +28,7 @@ If you're making RPC calls to remote nodes, then the instead of `127.0.0.1` you 
 When setting up RPC access to a remote node, make sure you don't leave the `http-port` accessible to everyone! There are malicious actors that scan for nodes that have unrestricted access to their RPC port and then use those nodes for spamming them with resource-intensive queries which can knock the node offline. Only allow access to your node's RPC port from known IP addresses!
 :::
 
-### Endpoint path
+### Endpoint Path
 
 Each API’s documentation specifies what endpoint path a user should make calls to in order to access the API’s methods.
 
