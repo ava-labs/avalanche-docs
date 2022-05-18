@@ -7,7 +7,7 @@ This guide explains how to make calls to APIs exposed by Avalanche nodes.
 
 ## Endpoints {#endpoints}
 
-An API call is made to an endpoint, which is a URL, made up of the base URL which is the address and the port of the node, and the path the particular endpoint the API call is on.
+An API call is made to an endpoint, which is a URL, made up of the base URI which is the address and the port of the node, and the path the particular endpoint the API call is on.
 
 ### Base URL
 
