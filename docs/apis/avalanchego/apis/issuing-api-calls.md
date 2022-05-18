@@ -96,7 +96,7 @@ Or for the WAGMI subnet on te Fuji testnet:
 http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
 ```
 
-#### Websocket EVM endpoints
+#### Websocket EVM Endpoints
 
 To interact with C-Chain via the websocket endpoint, use:
 
