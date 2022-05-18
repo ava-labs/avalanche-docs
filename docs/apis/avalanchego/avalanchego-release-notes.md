@@ -10,22 +10,71 @@
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
-**Networking**
+**State Sync**
 
-- Bandwidth reduction improvements:
-    - By default, non-validators now send only pull queries, not push queries.
-    - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
-    - See new [flags](../../nodes/maintain/avalanchego-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
+- Added state syncer engine to facilitate VM state syncing, rather than full historical syncing
+- Added `GetStateSummaryFrontier`, `StateSummaryFrontier`, `GetAcceptedStateSummary`, `AcceptedStateSummary` as P2P messages
+- Updated `Ancestors` message specification to expect an empty response if the container is unknown
+- Added `--state-sync-ips` and `--state-sync-ids` flags to allow manual overrides of which nodes to query for accepted state summaries
+- Updated networking library to permanently track all manually tracked peers, rather than just beacons
+- Added state sync support to the `metervm`
+- Added state sync support to the `proposervm`
+- Added state sync support to the `rpcchainvm`
 
-**Logging**
-- Changed AvalancheGo's internal logger with [uber-go/zap](https://github.com/uber-go/zap).
-- Changed AvalanceGo's log rotation with [lumberjack](https://github.com/natefinch/lumberjack).
-- Renamed `log-display-highlight` to `log-format` and added `json` option.
-- Added `log-rotater-max-size`, `log-rotater-max-files`, `log-rotater-max-age`, `log-rotater-compress-enabled` options for log rotation.
+**ProposerVM**
 
-**PlatformVM**
-- Added `subnetID` parameter to `platform.getTotalStake` API call.
-- Added `connected` field for subnet validators in `platform.getCurrentValidators` and `platform.getPendingValidators` API call.
+- Prevented rejected blocks from overwriting the `proposervm` height index
+- Optimized `proposervm` block rewind to utilize the height index if available
+- Ensured `proposervm` height index is marked as repaired in `Initialize` if it is fully repaired on startup
+- Removed `--reset-proposervm-height-index`. The height index will be reset upon first restart
+- Optimized `proposervm` heigh index resetting to periodically flush deletions
+
+**Bug Fixes**
+
+- Fixed IPC message issuance and restructured consensus event callbacks to be checked at compile time
+- Fixed bootstrapping startup logic to correctly startup if initially connected to enough stake
+- Fixed panic on concurrent map read/write in P-chain wallet SDK
+- Fixed `rpcchainvm` panic by sanitizing http response codes
+- Fixed incorrect JSON tag on `platformvm.BaseTx`
+- Fixed `AppRequest`, `AppResponse`, and `AppGossip` stringers used in logging
+
+**API/Client**
+
+- Supported client implementations pointing to non-standard URIs
+- Introduced `ids.NodeID` type to standardize logging and simplify API service and client implementations
+- Added `subnetID` as an argument to `platform.getTotalStake`
+- Added `connected` to the subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Add missing `admin` API client methods
+- Improved `indexer` API client implementation to avoid encoding edge cases
+
+**CPU Tracking and Rate Limiting**
+
+- Added inverse CPU utilization calculations to determine how long the utilization will stay about a given value
+- Added CPU targeting on a per node basis
+- Scaled CPU tracking by the system's real CPU usage
+- Added CPU rate limiting of network messages based on the CPU target
+
+**Documentation**
+
+- Increased recommended disk size to 1 TB
+- Updated issue template
+- Documented additional `snowman.Block` invariants
+
+**Miscellaneous**
+
+- Standardized RPC specification of timestamp fields
+- Switch to `zap` for logging
+- Logged health checks whenever a failing health check is queried
+- Added metrics to track the amount of over gossipping of `peerlist` messages
+- Added `--snow-mixed-query-num-push-vdr` and `--snow-mixed-query-num-push-non-vdr` to allow parameterization of sending push queries
+- Added callback support for the validator set manager
+
+**Cleanup**
+
+- Refactored easily separable `platformvm` files into separate smaller packages
+- Simplified default version parsing
+- Fixed various typos
+- Converted some structs to interfaces to better support mocked testing
 
 ## v1.7.10 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.10))
 
