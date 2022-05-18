@@ -66,7 +66,7 @@ ext/bc/P
 ext/bc/C
 ```
 
-### C-Chain and Subnet EVM endpoints
+### C-Chain and Subnet EVM Endpoints
 
 C-Chain and many subnets run a version of the EthereumVM (EVM). EVM exposes its own endpoints, which are also accessible on the node: JSON-RPC, and Websocket.
 
