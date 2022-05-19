@@ -1,3 +1,7 @@
+#05/18/2022
+/subnets/subnet-deepdive/ /subnets/create-a-local-subnet 301
+/subnets/subnet-deepdive  /subnets/create-a-local-subnet 301
+
 #05/17/2022
 /quickstart/references/avash/  /quickstart/network-runner 301
 /quickstart/references/avash   /quickstart/network-runner 301
@@ -31,10 +35,10 @@
 /quickstart/references/serialization-primitives  /specs/serialization-primitives 301
 
 #05/10/2022
-/build/tutorials/platform/subnets/create-a-subnet/ /subnets/subnet-deepdive 301
-/build/tutorials/platform/subnets/create-a-subnet  /subnets/subnet-deepdive 301
-/subnets/create-a-subnet/ /subnets/subnet-deepdive 301
-/subnets/create-a-subnet  /subnets/subnet-deepdive 301
+/build/tutorials/platform/subnets/create-a-subnet/ /subnets/create-a-local-subnet 301
+/build/tutorials/platform/subnets/create-a-subnet  /subnets/create-a-local-subnet 301
+/subnets/create-a-subnet/ /subnets/create-a-local-subnet 301
+/subnets/create-a-subnet  /subnets/create-a-local-subnet 301
 
 #05/09/2022
 /overview/getting-started/avalanche-platform-overview/ /overview/getting-started/avalanche-platform 301

@@ -228,6 +228,3 @@ The response should include the node we just added:
 
 When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
 
-## Adding Validators to a Subnet
-
-This [tutorial](../../subnets/subnet-deepdive.md#adding-subnet-validators) will show you how to add validators to a subnet.

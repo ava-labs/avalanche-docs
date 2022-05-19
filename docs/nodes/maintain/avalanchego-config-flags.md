@@ -420,7 +420,14 @@ As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded 
 
 ##### `validatorOnly` (bool):
 
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../../subnets/subnet-deepdive.md#private-subnets)
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. 
+
+Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
+
+Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+
+Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
+
 
 ##### Consensus Parameters
 
