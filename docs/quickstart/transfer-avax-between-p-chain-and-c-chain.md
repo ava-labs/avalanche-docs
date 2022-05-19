@@ -155,7 +155,7 @@ curl -X POST --data '{
         "username":"myUsername",    
         "password":"myPassword" 
     }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to; you can import the AVAX to an address that you own in MetaMask or another third-party service.
@@ -238,7 +238,7 @@ curl -X POST --data '{
         "sourceChain": "C", 
         "to":"P-avax1fw57u4tp7xzx0k6ufn7tj9caua59mt9gqcvy7m"    
     }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 where `to` is the bech32 encoded address the P-Chain address which you sent the funds to in the previous step.

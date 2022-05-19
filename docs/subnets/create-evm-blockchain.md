@@ -318,7 +318,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response contains the transaction ID:
@@ -348,7 +348,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getBlockchains",
     "params" :{}
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response confirms that the blockchain was created:
@@ -394,7 +394,7 @@ curl -X POST --data '{
     "params" :{
         "blockchainID":"zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 ```json
