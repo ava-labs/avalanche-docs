@@ -153,8 +153,11 @@ a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
 command and you'll have a subnet with a running `subnet-evm` instance 5 minutes
 later.
 
-To make `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) a validator, create a subnet, add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the
-subnet (comma separated with multiple validators), and create a `subnet-evm`-based blockhain, run the following command:
+Run the following command to:
+* Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) as a validator to the primary network (comma separated if multiple validators, and skipping any that already exist);
+* Create a subnet;
+* Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the subnet;
+* Create a new blockhain with a virtual machine whose id is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` 
 
 ```bash
 subnet-cli wizard \
