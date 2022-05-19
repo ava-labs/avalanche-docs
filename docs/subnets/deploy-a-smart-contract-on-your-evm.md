@@ -5,7 +5,7 @@
 This tutorial assumes that:
 - A [Subnet](create-a-local-subnet.md) has been created
 - An [EVM blockchain](create-evm-blockchain.md) has been created
-- Your Node is currently [validating](subnet-deepdive.md#adding-subnet-validators) your target Subnet
+- Your Node is currently validating your target Subnet
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](create-evm-blockchain.md#build-genesis))
 
 ## Step 1: Setting up MetaMask
