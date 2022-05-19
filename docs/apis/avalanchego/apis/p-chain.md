@@ -219,11 +219,11 @@ platform.addSubnetValidator(
 }
 ```
 
-* `nodeID` is the node ID of the validator.
-* `subnetID` is the subnet they will validate.
-* `startTime` is the unix time when the validator starts validating the subnet.
-* `endTime` is the unix time when the validator stops validating the subnet.
-* `weight` is the validator’s weight used for sampling.
+* `nodeID` is the node ID of the validator being added to the subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
+* `subnetID` is the ID of the subnet we’re adding a validator to.
+* `startTime` is the unix time when the validator starts validating the subnet. It must be at or after the time that the validator starts validating the Primary Network
+* `endTime` is the unix time when the validator stops validating the subnet. It must be at or before the time that the validator stops validating the Primary Network.
+* `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 * `from` are the fund addresses that the user wants to use to pay for this operation. If omitted, use any of user's addresses as needed.
 * `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses) will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
