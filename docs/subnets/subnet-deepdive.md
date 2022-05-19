@@ -27,7 +27,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 This gives the first control key (again, it actually gives the _address_ of the first control key). The key is held by the user we just specified.
@@ -53,7 +53,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response contains the second control key, which is held by the user we just specified:
@@ -86,7 +86,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
@@ -112,7 +112,7 @@ curl -X POST --data '{
     "method": "platform.getSubnets",
     "params": {},
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response confirms that our subnet was created:
@@ -133,7 +133,7 @@ The response confirms that our subnet was created:
         ]
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}
 ```
 
 ### Adding Subnet Validators  {#adding-subnet-validators}
@@ -206,7 +206,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response has the transaction ID, as well as the address the change went to.
@@ -232,7 +232,7 @@ curl -X POST --data '{
         "txID":"2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
@@ -243,7 +243,7 @@ curl -X POST --data '{
     "method": "platform.getPendingValidators",
     "params": {"subnetID":"3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g"},
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response should include the node we just added:

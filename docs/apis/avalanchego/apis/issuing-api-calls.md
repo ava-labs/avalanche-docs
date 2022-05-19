@@ -5,7 +5,7 @@ sidebar_position: 2
 
 This guide explains how to make calls to APIs exposed by Avalanche nodes.
 
-## Endpoints {#endpoints}
+## Endpoints
 
 An API call is made to an endpoint, which is a URL, made up of the base URI which is the address and the port of the node, and the path the particular endpoint the API call is on.
 
@@ -43,7 +43,7 @@ So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is 
 So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
 
 ```
-127.0.0.1:9650/ext/info
+http://127.0.0.1:9650/ext/info
 ```
 
 ## Primary Network and Subnet RPC calls
@@ -117,7 +117,7 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
 :::info
-When using the [Public API](../public-api-server.md) or another host that supports HTTPS, use `wss://` instad of `ws://`.
+When using the [Public API](../public-api-server.md) or another host that supports HTTPS, use `https://` or `wss://` instad of `http://` or `ws://`. 
 
 Also, note that the [public api](../public-api-server.md#supported-apis) only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
 :::
