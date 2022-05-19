@@ -113,7 +113,7 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 }
 ```
 
-Default config values for the C-Chain can be seen [here](../nodes/maintain/avalanchego-config-flags#c-chain-configs).
+Default config values for the C-Chain can be seen [here](../nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 ### Running a Local Test Network
 
