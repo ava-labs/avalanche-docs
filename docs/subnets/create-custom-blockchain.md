@@ -35,15 +35,6 @@ Every blockchain is validated by a [subnet](README.md). Before you can create a 
 :::
 
 
-### Add Validators to the Subnet
-
-The subnet needs validators in it to, well, validate blockchains.
-
-:::info
-[Add a node to the Validator Set](./subnet-deepdive.md#adding-subnet-validators)
-:::
-
-
 ### Create the Genesis Data {#create-the-genesis-data}
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. TimestampVM uses CB58 encoded data as genesis data. There is `encode` and `decode` static API methods that can be used to encode/decode string data. See [TimestampVM API](create-a-virtual-machine-vm.md#api).
