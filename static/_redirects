@@ -85,8 +85,6 @@
 /build/tools/avash   /quickstart/network-runner 301
 /build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
 /build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
-/build/references/network-protocol/ /quickstart/references/network-protocol 301
-/build/references/network-protocol  /quickstart/references/network-protocol 301
 /build/references/serialization-primitives/ /quickstart/references/serialization-primitives 301
 /build/references/serialization-primitives  /quickstart/references/serialization-primitives 301
 
