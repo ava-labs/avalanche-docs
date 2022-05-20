@@ -71,21 +71,18 @@ working as expected (_make sure your $GOBIN is in your $PATH_):
 subnet-cli create key
 ```
 
-This creates a file `.subnet-cli.pk` under the current directory with a private key. 
-`subnet-cli` will assume you have funds on this key (or `--private-key-path`) on the P-Chain for the
-rest of this walkthrough. 
+This creates a file `.subnet-cli.pk` under the current directory with a private key. By default, 
+`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions. 
 
+To get fund on this key on Fuji TestNet, follow these steps:
 
-The easiest way to do this (**for testing only**) is:
-
-1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)).
+1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network.
 2. Request funds from the [faucet](https://faucet.avax-test.network).
 3. Move the test funds (faucet sends avax token on either the X or C-Chain) to the P-Chain ([tutorial between X/P chains](../quickstart/transfer-avax-between-x-chain-and-p-chain.md) or [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).    
 
-After following these 3 steps, your test key should now have a balance on the
-P-Chain.
+After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 
-
+Check [here](./subnet-cli.md#subnet-cli-create-key) for more info.
 
 ## Build Binary
 
@@ -142,11 +139,15 @@ mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalan
 
 The easiest and fastest way to get your new subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
-add validators, create subnets, and create blockchains.
+add validators, create subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
 
-_The `subnet-cli` DOES NOT need to be run on the same host where you are
+
+:::info
+The `subnet-cli` DOES NOT need to be run on the same host where you are
 running your validator. By default, it interfaces exclusively with the public
-Avalanche API Endpoints._
+Avalanche API Endpoints.
+
+:::
 
 To make it as easy as possible to get started, the `subnet-cli` also provides
 a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
@@ -180,7 +181,7 @@ You can find an example of a genesis file to use when launching your own
 
 :::
 
-As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be needed in next step. 
+As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be needed in next step. See [here](./subnet-cli.md#subnet-cli-wizard) for more detailed logs.
 
 ## Add New Subnet to Node Whitelist
 
