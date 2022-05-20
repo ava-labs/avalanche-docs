@@ -88,6 +88,7 @@ const sidebars = {
     'subnets/create-a-local-subnet',
     'subnets/fuji-deployment',
     'subnets/setup-dfk-node',
+    'subnets/subnet-cli',
     'subnets/create-evm-blockchain',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
