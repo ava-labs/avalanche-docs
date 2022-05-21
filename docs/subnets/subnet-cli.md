@@ -49,7 +49,7 @@ Use "subnet-cli [command] --help" for more information about a command.
 
 ### Network Selection
 
-Should a `subnet-cli` command need to call an API end point, `--public-uri` is used to specify where the end point is.
+Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end point is.
 * The default value is `https://api.avax-test.network` which points to the Fuji Testnet. 
 * For Mainnet, please use `https://api.avax.network`. 
 * For local, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the correct port number for use.
