@@ -52,7 +52,7 @@ Use "subnet-cli [command] --help" for more information about a command.
 Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end point is.
 * The default value is `https://api.avax-test.network` which points to the Fuji Testnet. 
 * For Mainnet, please use `https://api.avax.network`. 
-* For local, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the correct port number for use.
+* For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the correct port number for use.
 
 ### Ledger Support
 
@@ -113,7 +113,7 @@ After following these 3 steps, your test key should now have a balance on the P-
 For local testing, you can use the key in [.insecure.ewoq.key](https://github.com/ava-labs/subnet-cli/blob/main/.insecure.ewoq.key) which is pre-funded. 
 
 #### Mainnet
-For Mainnet, we strongly recommend use an account associated with a [ledger](#ledger-support) for all your operations. 
+For Mainnet, we strongly recommend to use an account associated with a [ledger](#ledger-support) for all your operations. 
 
 
 ### `subnet-cli wizard`
