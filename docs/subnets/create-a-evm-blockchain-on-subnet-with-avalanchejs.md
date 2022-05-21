@@ -495,4 +495,4 @@ Creating a new chain will take few seconds. You can also view the logs on the Av
 
 ## Interacting with the New Blockchain with MetaMask
 
-We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-evm-blockchain#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
+We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
