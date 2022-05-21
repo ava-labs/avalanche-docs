@@ -98,6 +98,13 @@ Each Bech32 address is composed of the following components
 3. Base-32 encoded string for the data part of the address (the 20-byte address itself).
 4. A 6-character base-32 encoded error correction code using the BCH algorithm.
 
+For example the following Bech32 address, `X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
+
+1. `avax`
+2. `1`
+3. `9rknw8l0grnfunjrzwxlxync6zrlu33y`
+4. `2jxhrg`
+
 Depending on the `networkID` which is passed in when instantiating `Avalanche` the encoded addresses will have a distinctive HRP per each network. AvalancheJS has address encoding for past networks.
 
 * 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
