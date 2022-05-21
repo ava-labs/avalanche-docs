@@ -100,10 +100,10 @@ Each Bech32 address is composed of the following components
 
 For example the following Bech32 address, `X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
 
-1. `avax`
-2. `1`
-3. `9rknw8l0grnfunjrzwxlxync6zrlu33y`
-4. `2jxhrg`
+1. HRP: `avax`
+2. Separator: `1`
+3. Address: `9rknw8l0grnfunjrzwxlxync6zrlu33y`
+4. Checksum: `2jxhrg`
 
 Depending on the `networkID` which is passed in when instantiating `Avalanche` the encoded addresses will have a distinctive HRP per each network. AvalancheJS has address encoding for past networks.
 
