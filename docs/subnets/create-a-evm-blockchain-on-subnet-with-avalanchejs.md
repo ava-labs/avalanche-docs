@@ -291,7 +291,7 @@ Put your Ethereum derived hexadecimal address (without `0x`) like what you have 
 ```json
 "chainId": 11111
 ```
-Put a unique number as chain id for your chain. Conflicting chain ids can cause problems. You can read more about all of these parameters [here](../subnets/create-evm-blockchain#create-the-genesis-data).
+Put a unique number as chain id for your chain. Conflicting chain ids can cause problems. 
 
 ## Creating Subnet
 

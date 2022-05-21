@@ -1,4 +1,4 @@
-# Fuji Testnet Deployment
+# Create an EVM Subnet on Fuji Testnet
 
 After trying out a subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet. 
 
@@ -9,7 +9,6 @@ All IDs in this article are for illustration purpose. They can be different in y
 :::
 
 
-
 ## Prerequisites
 
 - 1+ nodes running on Fuji Testnet (does not need to be a validator)
@@ -18,7 +17,7 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ### Fuji Testnet
 
-For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step particularly:
+For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step particularly to start your node on Fuji:
 
   _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`_
 
@@ -247,3 +246,178 @@ ERROR[01-26|05:54:19] chains/manager.go#270: error creating chain 2AM3vsuLoJdGBG
 ## Next Step
 
 Next step is to deploy the subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi Kingdoms Subnet as an example.
+
+
+# Appendix
+
+## Create the Genesis Data
+
+Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data.
+
+### Subnet EVM Genesis
+
+The default Subnet EVM provided below has some well defined parameters. The default Subnet EVM genesis looks like:
+
+```json
+{
+  "config": {
+    "chainId": 43214,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 8000000,
+      "minBaseFee": 25000000000,
+      "targetGas": 15000000,
+      "baseFeeChangeDenominator": 36,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 1000000,
+      "targetBlockRate": 2,
+      "blockGasCostStep": 200000
+    },
+    "allowFeeRecipients": false
+  },
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x295BE96E64066972000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "0x7A1200",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+#### Chain Config
+
+`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues.
+
+##### Hardforks
+
+`homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` are hardfork activation times. Changing these may cause issues, so treat them carefully.
+
+##### Fee Config
+
+`gasLimit`: Gas limit of blocks.
+
+`minBaseFee`: Minimum base fee of transactions. It is also the initial base fee for EIP-1559 blocks.
+
+`targetGas`: The target gas consumption of blocks. If the network starts producing blocks with gas cost higher than this, base fees are increased accordingly.
+
+`baseFeeChangeDenominator`: The amount the base fee can change between blocks.
+
+`minBlockGasCost`: Minimum gas cost a block should cover.
+
+`maxBlockGasCost`: Maximum gas cost a block should cover.
+
+`targetBlockRate`: The targeted block rate that network should produce blocks. If the network starts producing faster than this, base fees are increased accordingly.
+
+`blockGasCostStep`: The block gas cost change step between blocks.
+
+##### Custom Fee Recipients
+
+`allowFeeRecipients`: Enables fee recipients. By default, all fees are burned (sent to the blackhole address). However, it is possible to enable block producers to set a fee recipient (get compensated for blocks they produce).
+
+With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/chain-config-flags.md#c-chain-configs) with the following:
+
+```json
+{
+  "feeRecipient": "<YOUR 0x-ADDRESS>"
+}
+```
+
+For example if the created chain ID is `zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE` then you should put that configuration under `~/.avalanchego/configs/chains/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/config.json`. Note that the chain ID part (`zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE`) can be different when you create your own chain.
+
+Note: If you enable this feature but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks they produce.
+
+#### Alloc
+
+Alloc defines addresses and their initial balances. This should be changed accordingly for each chain. The `alloc` field expects key-value pairs. Keys of each entry must be a valid `address`. The `balance` field in the value can be either a `hexadecimal` or `number` to indicate initial balance of the address. The default value contains `8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` with `50000000000000000000000000` balance in it. Default:
+
+```json
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x295BE96E64066972000000"
+    }
+  }
+```
+
+#### Header
+
+The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`, `number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis header fields.
+
+
+### Connect with Metamask
+
+Subnet EVM supports almost every tool that C-Chain and EVM supports. For instance, let's connect Metamask with our Subnet EVM.
+
+First we need to create a new network in Metamask. It can be added in Settings > Networks > Add a network.
+
+`Network Name`: Any name to indicate this network.
+
+`New RPC URL`: This must be the RPC URL of our node. In this case it is `http://127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`
+
+`Chain ID`: The Chain ID specified in genesis. In this case `13213`.
+
+`Currency Symbol`: Any symbol for this token.
+
+It should look like:
+![Add Network](/img/sevm-m1.png)
+
+Now we can access our account with initial balance. We used `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as our initial account. The private key of this account is `56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`. This private key is publicly shared, so don't use this account in mainnet or testnets. The genesis block allocates 333,333,333,333,333,333,333 coins to this account, which is equivalent to `333.3333` SET.
+
+Let's import this private key into Metamask.
+
+- Click on Metamask.
+- From "My Accounts" click on "Import Account":
+  ![Import Account](/img/sevm-m2.png)
+
+Now you can import your private key in this screen. When you pasted your private key, click on "Import". You should be able to see your account with some balances in it. For example:
+
+![Account with Balance](/img/sevm-m3.png)
+
+Now we can send funds to another account:
+
+- Click on "Send" in your Metamask.
+- Input an address or select "Transfer between my accounts"
+- Select an address
+- Input your amount. It should be look like this
+
+![Account with Balance](/img/sevm-m4.png)
+
+- Click on Next
+- You can inspect your transaction in this screen:
+  ![Account with Balance](/img/sevm-m5.png)
+
+For example let's verify the base fee is indeed the configured one. Remind that in our genesis we specified `minBaseFee` as 13000000000 which is equivalent to 13 Gwei. Let's click "Edit" above on the "Estimated gas fee" section.
+
+![Gas Fee](/img/sevm-m6.png)
+
+- Click on "Save" in the "Edit priority" dialog when you're done.
+- Now we can confirm our transaction. Click on "Confirm"
+- After a while your transaction will be confirmed. When confirmed it should look like this:
+
+![Confirmed](/img/sevm-m7.png)
+
+You can inspect your confirmed transaction.
+
+![Confirmed Inspect](/img/sevm-m8.png)
+
+## Other Tools
+
+You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
