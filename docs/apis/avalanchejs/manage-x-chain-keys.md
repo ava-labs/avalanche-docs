@@ -1,6 +1,6 @@
 # Manage X-Chain Keys
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it&rsquo;s registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
 
 ```ts
 import {
@@ -52,7 +52,7 @@ let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 
 ## Working with Keychains {#working-with-keychains}
 
-The X-Chain&rsquo;s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+The X-Chain's KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
 
 ```text
 let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
@@ -63,7 +63,7 @@ let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 
 ## Working with Keypairs {#working-with-keypairs}
 
-The X-Chain&rsquo;s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+The X-Chain's KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
 
 ```ts
 let address = keypair.getAddress(); //returns Buffer
@@ -116,7 +116,7 @@ Depending on the `networkID` which is passed in when instantiating `Avalanche` t
 * 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
 * 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
 
-Here&rsquo;s the mapping of `networkID` to bech32 HRP.
+Here's the mapping of `networkID` to bech32 HRP.
 
 ```ts
 export const NetworkIDToHRP = {
