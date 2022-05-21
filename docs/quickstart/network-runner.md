@@ -316,7 +316,7 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart-c
 It can be used to create your own fully Ethereum-compatible subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 
 ### subnet-cli
-**At this moment the ANR requires an additional tool, `subnet-cli`, to be able to create the necessary configuration to deploy a subnet in a local custom test-network. Generally, getting a subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
+**At this moment the ANR requires an additional tool, [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a subnet in a local custom test-network. Generally, getting a subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
 
 
 Install and start the RPC server just as in [start the server](#start-the-server)

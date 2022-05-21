@@ -2,8 +2,6 @@
 
 The [`subnet-cli`)](https://github.com/ava-labs/subnet-cli) is a command-line interface to manage Avalanche Subnets.
 
-It **DOES NOT** need to be run on the same host where you are running your validator. By default, it interfaces exclusively with the public Avalanche API Endpoints.
-
 ## Install
 
 ### Source
@@ -47,12 +45,14 @@ Flags:
 Use "subnet-cli [command] --help" for more information about a command.
 ```
 
+It **DOES NOT** need to be run on the same host where you are running your validator. By default, it interfaces exclusively with the public Avalanche API Endpoints.
+
 ### Network Selection
 
 Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end point is.
 * The default value is `https://api.avax-test.network` which points to the Fuji Testnet. 
 * For Mainnet, please use `https://api.avax.network`. 
-* For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the correct port number for use.
+* For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the [correct port number for use](../quickstart/create-a-local-test-network.md#retrieve-all-nodes).
 
 ### Ledger Support
 
