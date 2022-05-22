@@ -1,4 +1,4 @@
-# Create a Local EVM Subnet
+# Create an EVM Subnet on Local
 
 To learn how to develope a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
 
@@ -229,4 +229,4 @@ go: downloading github.com/spf13/viper v1.10.1
 
 ## Next Step
 
-After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./fuji-deployment.md).
+After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./create-a-fuji-subnet.md).

@@ -1,60 +1,259 @@
----
-sidebar_position: 3
----
+# Create an EVM Subnet on Fuji Testnet
 
-# Create a Blockchain Running the Subnet EVM
+After trying out a subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet. 
 
-## Introduction
+:::warning
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
+All IDs in this article are for illustration purpose. They can be different in your own run-through of this tutorial.
 
-If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-custom-blockchain.md).
-
-_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
+:::
 
 
-## Building the VM
+## Prerequisites
 
-First start with cloning the Subnet EVM repository.
+- 1+ nodes running on Fuji Testnet (does not need to be a validator)
+- [`subnet-cli`](https://github.com/ava-labs/subnet-cli) installed
+- `subnet-cli` private key with some Fuji AVAX
 
-```sh
-git clone git@github.com:ava-labs/subnet-evm.git
+### Fuji Testnet
+
+For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step particularly to start your node on Fuji:
+
+  _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`_
+
+To get the NodeID of this Fuji node, call the following curl command to [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+The response should look something like:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    },
+    "id": 1
+}
+```
+
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#run-subnet-cli-wizard).
+
+:::info
+
+With more data on Fuji testnet, it may take a while to bootstrap Fuji Testnet from scratch. 
+
+:::
+
+
+### Subnet-cli
+
+```bash
+git clone https://github.com/ava-labs/subnet-cli.git;
+cd subnet-cli;
+go install -v .;
+```
+
+Once you have installed it, run `subnet-cli` on your console to confirm it is
+working as expected (_make sure your $GOBIN is in your $PATH_):
+
+
+### `Subnet-cli` Private Key 
+
+```bash
+subnet-cli create key
+```
+
+This creates a file `.subnet-cli.pk` under the current directory with a private key. By default, 
+`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions. 
+
+To get fund on this key on Fuji TestNet, follow these steps:
+
+1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network.
+2. Request funds from the [faucet](https://faucet.avax-test.network).
+3. Move the test funds (faucet sends avax token on either the X or C-Chain) to the P-Chain ([tutorial between X/P chains](../quickstart/transfer-avax-between-x-chain-and-p-chain.md) or [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).    
+
+After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
+
+Check [here](./subnet-cli.md#subnet-cli-create-key) for more info.
+
+## Build Binary
+
+First, you'll need to compile the subnet-evm into a binary that AvalancheGo
+can interact with. To do this, first install [`subnet-evm`](https://github.com/ava-labs/subnet-evm)  (assumes you don't
+yet have the `subnet-evm` repository downloaded):
+
+```bash
+git clone https://github.com/ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
-Subnet VM has a [build script](https://github.com/ava-labs/subnet-evm/blob/master/scripts/build.sh) that builds the binary of this VM.
+Create a VMID with string `subnetevm` which you can change to whatever you like. 
+This command is used to generate a valid VMID based on some string to uniquely
+identify a VM. This should stay the same for all versions of the VM, so it
+should be based on a word rather than the hash of some code.
 
-The path to the executable, can be provided to the build script via arguments. For example:
-
-```sh
-./scripts/build.sh ./build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
+```bash
+subnet-cli create VMID subnetevm
+```
+This will prints this output:
+```bash
+created a new VMID srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy from subnetevm
 ```
 
-If no argument is given, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
-(The part `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` is the default ID of this VM and corresponds to the string "subnetevm" zero-extended in a 32 byte array and encoded in CB58.)
-
-AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../nodes/maintain/avalanchego-config-flags.md#build-directory) for more information.
-
-Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../nodes/maintain/avalanchego-config-flags.md#vm-configs). In this tutorial we used `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` as our VM ID.
-
-Copy built VM binary into the AvalancheGo plugin directory. In this tutorial we put AvalancheGo and Subnet-EVM repositories under the same folder:
-
-```sh
-cp ./build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ../avalanchego/build/plugins/
+Now issue this command to build 
+```bash
+./scripts/build.sh build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-## Running the Node
+## Move Binary
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) tutorial.
+Once the `subnet-evm` binary is built, you'll need to move it to AvalancheGo's
+plugin directory (within the [--build-dir](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string)) so it can be run by your node.
+When building `avalanchego` from source (see [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)), this defaults to `avalanchego/build/plugins` in which `avalanchego` 
+is the directory where you have checked out AvalancheGo project.
+This build directory is structured as:
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes/validate/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes/validate/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+```
+build-dir
+|_avalanchego (note: this is the AvalancheGo binary, not a directory)
+|_plugins
+  |_evm
+```
+
+To put the `subnet-evm` binary in the right place, run the following command
+(assuming the `avalanchego` and `subnet-evm` repos are in the same folder):
+
+```bash
+mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalanchego/build/plugins;
+```
+
+## Run `subnet-cli wizard`
+
+The easiest and fastest way to get your new subnet off the ground is to use the
+[`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
+add validators, create subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
 
 
-## Create the Genesis Data {#create-the-genesis-data}
+:::info
+The `subnet-cli` DOES NOT need to be run on the same host where you are
+running your validator. By default, it interfaces exclusively with the public
+Avalanche API Endpoints.
+
+:::
+
+To make it as easy as possible to get started, the `subnet-cli` also provides
+a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
+command and you'll have a subnet with a running `subnet-evm` instance 5 minutes
+later.
+
+Run the following command to:
+* Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) as a validator to the primary network (comma separated if multiple validators, and skipping any that already exist);
+* Create a subnet;
+* Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the subnet;
+* Create a new blockhain with a virtual machine whose id is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` 
+
+```bash
+subnet-cli wizard \
+--node-ids=NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD \
+--vm-genesis-path=networks/11111/genesis.json \
+--vm-id=srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy \
+--chain-name=subnetevm
+```
+
+By default, the private key in `.subnet-cli.pk` file which was created from [the step above](#subnet-cli-private-key) is used to pay the cost of this transaction. 
+You can use `--private-key-path` to specify a different file.
+
+As mentioned before, the `vm-id` was generated by calling `subnet-cli create VMID subnetevm`. You can
+use any value here, the only important thing is to make sure the binary you have generated has the same name.
+
+:::info
+
+You can find an example of a genesis file to use when launching your own
+`subnet-evm` in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
+
+:::
+
+As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be needed in next step. See [here](./subnet-cli.md#subnet-cli-wizard) for more detailed logs.
+
+## Add New Subnet to Node Whitelist
+
+During the execution of the `wizard` command, you will be prompted to add your
+new subnetID to your node. This is done using the `whitelisted-subnets` config.
+You can provide the `whitelisted-subnets` argument by modifying your config
+file (reference [here](../nodes/maintain/avalanchego-config-flags.md#whitelist)) or providing an argument on startup.
+
+Example Config File:
+
+```json
+{
+  "network-id": "fuji",
+  "health-check-frequency": "2s",
+  "log-display-level": "INFO",
+  "log-level": "INFO",
+  "whitelisted-subnets": "p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz"
+}
+```
+
+Example Node Args:
+
+```bash
+--whitelisted-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
+```
+
+Note: `p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of subnet-id, please replace it with your correct subnet-id.
+
+
+## Restart Node
+
+Once you've updated your config, you'll need to restart your AvalancheGo node for the changes to take effect.
+
+If you completed the steps successfully, you'll see the node print out something like these (ignore the exact value of all ids, they are just for illustraction purpose):
+
+```bash
+INFO [01-25|16:47:04] chains/manager.go#246: creating chain:
+    ID: 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
+    VMID:sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
+INFO [01-25|16:47:04] api/server/server.go#203: adding route /ext/bc/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm/events
+INFO [01-25|16:47:04] api/server/server.go#203: adding route /ext/bc/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm
+INFO [01-25|16:47:04] api/server/server.go#203: adding route /ext/bc/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm/wallet
+INFO [01-25|16:47:04] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/snowman/transitive.go#67: initializing consensus engine
+INFO [01-25|16:47:04] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/snowman/bootstrap/bootstrapper.go#225: Starting bootstrap...
+INFO [01-25|16:47:04] <P Chain> snow/engine/snowman/bootstrap/bootstrapper.go#458: waiting for the remaining chains in this subnet to finish syncing
+INFO [01-25|16:47:04] api/server/server.go#203: adding route /ext/bc/2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD/public
+INFO [01-25|16:47:04] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/common/bootstrapper.go#235: Bootstrapping started syncing with 2 vertices in the accepted frontier
+INFO [01-25|16:47:05] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/snowman/bootstrap/bootstrapper.go#419: bootstrapping fetched 69 blocks. Executing state transitions...
+INFO [01-25|16:47:06] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/common/queue/jobs.go#181: executed 69 operations
+INFO [01-25|16:47:06] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/snowman/transitive.go#354: bootstrapping finished with 2DUxceCx71L5TLTeLpKUQxSBVm8vTKPmFs2usAyRnusUzs4Q4M as the last accepted block
+```
+
+If you didn't put the `subnet-evm` binary in the right place, you'll see something
+like:
+
+```bash
+INFO [01-26|05:54:19] chains/manager.go#246: creating chain:
+    ID: 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
+    VMID:sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
+ERROR[01-26|05:54:19] chains/manager.go#270: error creating chain 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD: error while looking up VM: there is no ID with alias sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
+```
+
+## Next Step
+
+Next step is to deploy the subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi Kingdoms Subnet as an example.
+
+
+## Appendix
+
+### Create the Genesis Data
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data.
 
-### Subnet EVM Genesis
 
 The default Subnet EVM provided below has some well defined parameters. The default Subnet EVM genesis looks like:
 
@@ -299,145 +498,6 @@ This should return the same genesis block, provided in `subnetevm.buildGenesis` 
 }
 ```
 
-## Create the Blockchain
-
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../apis/avalanchego/apis/p-chain.md#platformgetsubnets).
-
-Now let's create the blockchain by issuing the `platform.createBlockchain` call:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.createBlockchain",
-    "params" : {
-        "subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL",
-        "vmID":"srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy",
-        "name":"My new EVM",
-        "genesisData": "FT1GtzvmB3sw5wm2qHXtxy7zXWSzxnoj5vNzu6XCqBCBry2d7MVhYfHg9LJkSpALjPpWKUK3wCGfr5syszjDkLSpEccQXNLvnvhrPTRjyBPdikKLLxqJFqrHpHcxVh3dnoxxP8DAp6h6Vvu4Y4xWU6SH9d5UfR8AHkQfaXLZGNgpj8EdtBALpyyS6KD5UY6W8MeYTfmtH5DW5hrsKZLe8oWEc62wEWNesruy6rtLjQ4He5wLh1Tq81PTdN4KJEmnrS68uYeZexPNZ6avxTDNWFLAqNVaMxuC1uuwzf366SxZsZjsm4t3MBwzSYiCQPYo7ruxXeN9xoqcZT2MoP1TTSTdeweFHdq1w9HT7RGdS2MzgJKy8YeU6enUXtWqcDtQ3BNb3Q6Bh11vdqPMoyRkWmFrcZTgc9jjaRx3XrRXY9wA4qCYRhjRYjKzSg5K463janpNkgvwH6eF4ev2xFcVFHFYqUVLpTEoigKesopASGkNf4v2HPQ1ZLvVofiEbfp5g9CfnKN2S7dkXvYbS2YdkjAo4G4M74uBRGpqrk4qJH6M1zqbFTZHnt6A1rsFBhnGEJFyw4Nimu5w6PTW9w3RLUFrnMejfscDLvN2ETGuXqX847Bd1Aw8NfMdqfvDfCjvAuX5se6BfTJYXMedDR6sWjjsEJGhiMLZpUfrgMzMtkZGVHqV5augcWPqHEjUXkLXEUCU8AcvdzNciRP9Q9s7ZzLqHauzdDc1ae2K9itGJVHXuyhqWk7xSGuZRusvutjxDDqfAngLHF5hqyku42ZaDtNYe7wSGyAdDt8a4VstuUd7LNmt2zHDescsAauEVZE6WjYSrc3dcmSQE5HV6zgEbqgSkEo5ZZMcb5xupT7GAyXn8opFH28kjTPgnnWZi6MNCdrvdMzgshwf3N5ecaJZh1vx9LSwUScw2jg8G6AF4bw7gBpB7t2P4EYd4LtMbNzQCS5Hexak7WEmdhcJ2s1Y2aYcs84F4QgHFy63FhfMxa3iDM252nHC4NPN2XMRd2cbzy59jBcMk99mderGstng25bsxyMhZFGQEnwbLZ4Xs3phCiwcAAo7wkNTyC7eWqmk7FNhGCovucBLgfjNLuUD4DMPEHMMrApknXQh132gp6uUvWbGFnoyDsamaB6L2sVAmo2cCg4Xk6tcNEm3KCdf8H4iXz1a7mbEzUcy9FmxGrhk1YppQryUXP97Nt2tQjd7GM2expSsxdTAyQFjoHeuGHbu6oNmdQLbFgprRd16hDeJJD9PxN79AQAojJQBU14LHN5vLEH5GoKDs7yoMa3iC7h",
-        "username":"USERNAME GOES HERE",
-        "password":"PASSWORD GOES HERE"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-The response contains the transaction ID:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "txID": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
-    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-  },
-  "id": 1
-}
-```
-
-The chain ID is same this transaction ID. So our chain ID in this example is `zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE`.
-
-### Verify Success {#verify-success}
-
-After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
-
-To check, call [`platform.getBlockchains`](../apis/avalanchego/apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"platform.getBlockchains",
-    "params" :{}
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-The response confirms that the blockchain was created:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "blockchains": [
-      {
-        "id": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
-        "name": "evm2",
-        "subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL",
-        "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"
-      },
-      {
-        "id": "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU",
-        "name": "C-Chain",
-        "subnetID": "11111111111111111111111111111111LpoYY",
-        "vmID": "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6"
-      },
-      {
-        "id": "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed",
-        "name": "X-Chain",
-        "subnetID": "11111111111111111111111111111111LpoYY",
-        "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
-      }
-    ]
-  },
-  "id": 1
-}
-```
-
-### Validating the Blockchain {#validating-blockchain}
-
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../apis/avalanchego/apis/p-chain.md#platformgetblockchainstatus) on that node:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"platform.getBlockchainStatus",
-    "params" :{
-        "blockchainID":"zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "status": "Validating"
-  },
-  "id": 1
-}
-```
-
-If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL`) as well as add the node to the subnet's validator set.
-
-More information can be found in the [Adding a Subnet Validator](../nodes/validate/add-a-validator.md#adding-a-subnet-validator) tutorial.
-
-## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
-
-You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/apis/avalanchego/apis/admin#admin-aliaschain).
-
-### Verify Chain ID
-
-We specified a chainID of `13213`, which is equivalent to `0x339d` in hex. Let's verify our chain ID with the RPC call:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_chainId",
-    "params": [],
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc
-```
-
-Result should be:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": "0x339d"
-}
-```
-
 ### Connect with Metamask
 
 Subnet EVM supports almost every tool that C-Chain and EVM supports. For instance, let's connect Metamask with our Subnet EVM.
@@ -494,6 +554,6 @@ You can inspect your confirmed transaction.
 
 ![Confirmed Inspect](/img/sevm-m8.png)
 
-## Other Tools
+### Other Tools
 
 You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
