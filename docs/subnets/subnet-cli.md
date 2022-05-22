@@ -1,6 +1,6 @@
 # Subnet CLI
 
-The [`subnet-cli`)](https://github.com/ava-labs/subnet-cli) is a command-line interface to manage Avalanche Subnets.
+The [`subnet-cli`](https://github.com/ava-labs/subnet-cli) is a command-line interface to manage Avalanche Subnets.
 
 ## Install
 
@@ -12,7 +12,7 @@ cd subnet-cli;
 go install -v .;
 ```
 
-Once you have installed `subnet-cli`, check the help page to confirm it is
+Once you have installed `subnet-cli`, run command `subnet-cli` to confirm it is
 working as expected (_make sure your $GOBIN is in your $PATH_):
 
 ### Pre-Built Binaries
@@ -22,6 +22,7 @@ You can also download binary directly from [here](https://github.com/ava-labs/su
 ## Usage
 
 ```bash
+> subnet-cli 
 subnet-cli CLI
 
 Usage:
@@ -50,14 +51,14 @@ It **DOES NOT** need to be run on the same host where you are running your valid
 ### Network Selection
 
 Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end point is.
-* The default value is `https://api.avax-test.network` which points to the Fuji Testnet. 
-* For Mainnet, please use `https://api.avax.network`. 
+* The default value is `https://api.avax-test.network` which points to the Fuji Testnet. If you run a local node on Fuji Testnet, you can use the URI from your local node too. 
+* For Mainnet, please use `https://api.avax.network`. If you run a local node on Mainnet, you can use the URI from your local node too. 
 * For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the [correct port number for use](../quickstart/create-a-local-test-network.md#retrieve-all-nodes).
 
 ### Ledger Support
 
 To use your [ledger](https://www.ledger.com) with `subnet-cli`, just add the
-`-l`/`--ledger` flag to any command below.
+`-l`/`--ledger` flag to any command.
 
 For example, to create 4 node network on Fuji Testnet with Ledger, you would run:
 
@@ -71,7 +72,7 @@ subnet-cli wizard \
 ```
 
 _Make sure you've downloaded the latest version of the
-[Avalanche Ledger App](https://docs.avax.network/learn/setup-your-ledger-nano-s-with-avalanche)!_
+[Avalanche Ledger App](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)!_
 
 ### `subnet-cli create VMID`
 
@@ -102,7 +103,7 @@ This creates a file `.subnet-cli.pk` under the current directory with a private 
 #### Fuji TestNet
 To get fund on this key on Fuji TestNet, follow these steps:
 
-1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network.
+1. User your private key in the `.subnet-cli.pk` file on the [Avalanche web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network.
 2. Request funds from the [faucet](https://faucet.avax-test.network).
 3. Move the test funds (faucet sends avax token on either the X or C-Chain) to the P-Chain ([tutorial between X/P chains](../quickstart/transfer-avax-between-x-chain-and-p-chain.md) or [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).    
 
@@ -245,7 +246,7 @@ You can check this url [https://explorer-xp.avax-test.network/blockchain/2eKMpwd
 subnet-cli create subnet
 ```
 
-To create a subnet in the local network:
+To create a subnet on the local network:
 
 ```bash
 subnet-cli create subnet \
@@ -506,10 +507,7 @@ subnet-cli status blockchain \
 --private-uri=http://127.0.0.1:12913  \
 --blockchain-id="2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M" \
 --check-bootstrapped
-```
 
-
-```text
 2022-05-20T16:20:55.362-0600	info	client/client.go:81	fetching X-Chain id
 2022-05-20T16:20:55.363-0600	info	client/client.go:87	fetched X-Chain id	{"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
 2022-05-20T16:20:55.363-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "http://127.0.0.1:12913"}
