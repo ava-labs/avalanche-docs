@@ -10,6 +10,8 @@
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
+**The first startup of the C-Chain will cause an increase in CPU and IO usage due to an index update. This index update runs in the background and does not impact restart time.**
+
 **State Sync**
 
 - Added state syncer engine to facilitate VM state syncing, rather than full historical syncing
@@ -20,6 +22,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Added state sync support to the `metervm`
 - Added state sync support to the `proposervm`
 - Added state sync support to the `rpcchainvm`
+- Added beta state sync support to `coreth`
 
 **ProposerVM**
 
@@ -27,12 +30,14 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Optimized `proposervm` block rewind to utilize the height index if available
 - Ensured `proposervm` height index is marked as repaired in `Initialize` if it is fully repaired on startup
 - Removed `--reset-proposervm-height-index`. The height index will be reset upon first restart
-- Optimized `proposervm` heigh index resetting to periodically flush deletions
+- Optimized `proposervm` height index resetting to periodically flush deletions
 
 **Bug Fixes**
 
 - Fixed IPC message issuance and restructured consensus event callbacks to be checked at compile time
+- Fixed `coreth` metrics initialization
 - Fixed bootstrapping startup logic to correctly startup if initially connected to enough stake
+- Fixed `coreth` panic during metrics collection
 - Fixed panic on concurrent map read/write in P-chain wallet SDK
 - Fixed `rpcchainvm` panic by sanitizing http response codes
 - Fixed incorrect JSON tag on `platformvm.BaseTx`
@@ -42,49 +47,36 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 - Supported client implementations pointing to non-standard URIs
 - Introduced `ids.NodeID` type to standardize logging and simplify API service and client implementations
+- Changed client implementations to use standard types rather than `string`s wherever possible
 - Added `subnetID` as an argument to `platform.getTotalStake`
 - Added `connected` to the subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
 - Add missing `admin` API client methods
 - Improved `indexer` API client implementation to avoid encoding edge cases
 
-**CPU Tracking and Rate Limiting**
-
-- Added inverse CPU utilization calculations to determine how long the utilization will stay about a given value
-- Added CPU targeting on a per node basis
-- Scaled CPU tracking by the system's real CPU usage
-- Added CPU rate limiting of network messages based on the CPU target
-
 **Networking**
 
-- Bandwidth reduction improvements:
-    - By default, non-validators now send only pull queries, not push queries.
-    - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
-    - See new [flags](../../nodes/maintain/avalanchego-config-flags.md) `snow-mixed-query-num-push-vdr` and `snow-mixed-query-num-push-non-vdr`.
+- Added `--snow-mixed-query-num-push-vdr` and `--snow-mixed-query-num-push-non-vdr` to allow parameterization of sending push queries
+  - By default, non-validators now send only pull queries, not push queries.
+  - By default, validators now send both pull queries and push queries upon inserting a container into consensus. Previously, nodes sent only push queries.
+- Added metrics to track the amount of over gossipping of `peerlist` messages
+- Added custom message queueing support to outbound `Peer` messages
+- Reused `Ping` messages to avoid needless memory allocations
 
 **Logging**
-- Changed AvalancheGo's internal logger with [uber-go/zap](https://github.com/uber-go/zap).
-- Changed AvalanceGo's log rotation with [lumberjack](https://github.com/natefinch/lumberjack).
+
+- Replaced AvalancheGo's internal logger with [uber-go/zap](https://github.com/uber-go/zap).
+- Replaced AvalancheGo's log rotation with [lumberjack](https://github.com/natefinch/lumberjack).
 - Renamed `log-display-highlight` to `log-format` and added `json` option.
 - Added `log-rotater-max-size`, `log-rotater-max-files`, `log-rotater-max-age`, `log-rotater-compress-enabled` options for log rotation.
-
-**PlatformVM**
-- Added `subnetID` parameter to `platform.getTotalStake` API call.
-- Added `connected` field for subnet validators in `platform.getCurrentValidators` and `platform.getPendingValidators` API call.
-
-**Documentation**
-
-- Increased recommended disk size to 1 TB
-- Updated issue template
-- Documented additional `snowman.Block` invariants
 
 **Miscellaneous**
 
 - Standardized RPC specification of timestamp fields
-- Switch to `zap` for logging
 - Logged health checks whenever a failing health check is queried
-- Added metrics to track the amount of over gossipping of `peerlist` messages
-- Added `--snow-mixed-query-num-push-vdr` and `--snow-mixed-query-num-push-non-vdr` to allow parameterization of sending push queries
 - Added callback support for the validator set manager
+- Increased `coreth` trie tip buffer size to 32
+- Added CPU usage metrics for AvalancheGo and all sub-processes
+- Added Disk IO usage metrics for AvalancheGo and all sub-processes
 
 **Cleanup**
 
@@ -92,6 +84,13 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Simplified default version parsing
 - Fixed various typos
 - Converted some structs to interfaces to better support mocked testing
+- Refactored IP utils
+
+**Documentation**
+
+- Increased recommended disk size to 1 TB
+- Updated issue template
+- Documented additional `snowman.Block` invariants
 
 ## v1.7.10 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.10))
 
