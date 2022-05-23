@@ -2147,6 +2147,10 @@ Let’s make a Vertex:
    73 fa 32 c4 86 fe 9f ee b3 92 ee 37 45 30 c6 fe 07 6b 08 a1 11 fd 58 e9 74 e7 f9 03 a5 29 51 d2 
    // num txs
    00 00 00 01 
+   // size of the transaction 
+   00 00 01 7b 
+   // ?
+   00 00 00 00 
    // base tx from above
    [omitted for brevity]
    // num restrictions
