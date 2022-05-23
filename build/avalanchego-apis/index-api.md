@@ -13,6 +13,7 @@ This document shows how to query data from AvalancheGo's Index API. The Index AP
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 For data format, please refer to following:
+
 * [AVM (X-Chain) Transaction Format](../references/avm-transaction-serialization.md)
 * [Platform Transaction Format](../references/platform-transaction-serialization.md)
 * [Coreth Atomic Transaction Format](../references/coreth-atomic-transaction-serialization.md)
