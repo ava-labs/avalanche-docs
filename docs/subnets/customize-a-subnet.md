@@ -1,3 +1,8 @@
+---
+Title: Customize a Subnet
+Description: How to customerize a subnet by utilizing Genesis, Precompile and Blockchain Configs.
+---
+
 # Customize a Subnet
 
 A subnet can be customized by utilizing one or more of the following configurations:
