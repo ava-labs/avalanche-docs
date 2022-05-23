@@ -1,6 +1,6 @@
 # Customize a Subnet
 
-A subnet can be customized by specifying one or more of the following:
+A subnet can be customized by utilizing one or more of the following configurations:
 * Genesis
 * Precompile
 * Blocchain Configs 
