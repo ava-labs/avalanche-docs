@@ -89,6 +89,7 @@ const sidebars = {
     'subnets/create-a-fuji-subnet',
     'subnets/setup-dfk-node',
     'subnets/subnet-cli',
+    'subnets/customize-a-subnet',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
     'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
