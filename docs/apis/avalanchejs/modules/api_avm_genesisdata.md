@@ -20,7 +20,7 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/apis/avm/genesisdata.ts:20](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisdata.ts#L20)*
+*Defined in [src/apis/avm/genesisdata.ts:20](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/genesisdata.ts#L20)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **buffer**: *[SerializedType](utils_serialization.md#serializedtype)* = "Buffer"
 
-*Defined in [src/apis/avm/genesisdata.ts:22](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisdata.ts#L22)*
+*Defined in [src/apis/avm/genesisdata.ts:22](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/genesisdata.ts#L22)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **decimalString**: *[SerializedType](utils_serialization.md#serializedtype)* = "decimalString"
 
-*Defined in [src/apis/avm/genesisdata.ts:21](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisdata.ts#L21)*
+*Defined in [src/apis/avm/genesisdata.ts:21](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/genesisdata.ts#L21)*

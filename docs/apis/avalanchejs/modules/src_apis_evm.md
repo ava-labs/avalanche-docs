@@ -9,12 +9,23 @@
 * [AmountInput](src_apis_evm.md#amountinput)
 * [AmountOutput](src_apis_evm.md#amountoutput)
 * [AssetAmountDestination](src_apis_evm.md#assetamountdestination)
+* [CreateKeyPairResponse](src_apis_evm.md#createkeypairresponse)
 * [EVMAPI](src_apis_evm.md#evmapi)
 * [EVMBaseTx](src_apis_evm.md#evmbasetx)
 * [EVMConstants](src_apis_evm.md#evmconstants)
 * [EVMInput](src_apis_evm.md#evminput)
 * [EVMOutput](src_apis_evm.md#evmoutput)
+* [ExportAVAXParams](src_apis_evm.md#exportavaxparams)
+* [ExportKeyParams](src_apis_evm.md#exportkeyparams)
+* [ExportParams](src_apis_evm.md#exportparams)
 * [ExportTx](src_apis_evm.md#exporttx)
+* [GetAssetDescriptionParams](src_apis_evm.md#getassetdescriptionparams)
+* [GetAtomicTxParams](src_apis_evm.md#getatomictxparams)
+* [GetAtomicTxStatusParams](src_apis_evm.md#getatomictxstatusparams)
+* [GetUTXOsParams](src_apis_evm.md#getutxosparams)
+* [ImportAVAXParams](src_apis_evm.md#importavaxparams)
+* [ImportKeyParams](src_apis_evm.md#importkeyparams)
+* [ImportParams](src_apis_evm.md#importparams)
 * [ImportTx](src_apis_evm.md#importtx)
 * [KeyChain](src_apis_evm.md#keychain)
 * [KeyPair](src_apis_evm.md#keypair)
@@ -52,6 +63,12 @@ ___
 
 ___
 
+###  CreateKeyPairResponse
+
+• **CreateKeyPairResponse**:
+
+___
+
 ###  EVMAPI
 
 • **EVMAPI**:
@@ -82,9 +99,69 @@ ___
 
 ___
 
+###  ExportAVAXParams
+
+• **ExportAVAXParams**:
+
+___
+
+###  ExportKeyParams
+
+• **ExportKeyParams**:
+
+___
+
+###  ExportParams
+
+• **ExportParams**:
+
+___
+
 ###  ExportTx
 
 • **ExportTx**:
+
+___
+
+###  GetAssetDescriptionParams
+
+• **GetAssetDescriptionParams**:
+
+___
+
+###  GetAtomicTxParams
+
+• **GetAtomicTxParams**:
+
+___
+
+###  GetAtomicTxStatusParams
+
+• **GetAtomicTxStatusParams**:
+
+___
+
+###  GetUTXOsParams
+
+• **GetUTXOsParams**:
+
+___
+
+###  ImportAVAXParams
+
+• **ImportAVAXParams**:
+
+___
+
+###  ImportKeyParams
+
+• **ImportKeyParams**:
+
+___
+
+###  ImportParams
+
+• **ImportParams**:
 
 ___
 
