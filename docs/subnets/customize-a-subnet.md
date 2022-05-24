@@ -8,7 +8,7 @@ Description: How to customerize a subnet by utilizing Genesis, Precompile and Bl
 A subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following configurations:
 * Genesis
 * Precompile
-* Blocchain Configs 
+* Blockchain Configs 
 
 ## Genesis
 
