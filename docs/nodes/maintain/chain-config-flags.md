@@ -467,7 +467,7 @@ The parameters are as follows:
 
 ### `index-transactions` (boolean):
 
-Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.mdx#avmgetaddresstxs).
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.md#avmgetaddresstxs).
 
 Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
 

@@ -149,7 +149,7 @@ To be able to make API calls to your node from other machines, when starting up 
 
 #### Connect to Fuji Testnet
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax.network/)
 
 ### What Next?
 
