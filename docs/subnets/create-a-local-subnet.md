@@ -12,11 +12,15 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We
 
 Run `echo $GOPATH`. **It should not be empty.**
 
+
+As a few software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may get error running the commands below.
+
 Download the `subnet-evm` repository into your `$GOPATH`:
 
 ```sh
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
+cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ```
