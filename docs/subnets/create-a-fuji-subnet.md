@@ -76,7 +76,7 @@ This creates a file `.subnet-cli.pk` under the current directory with a private 
 To get fund on this key on Fuji TestNet, follow these steps:
 
 1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network.
-2. Request funds from the [faucet](https://faucet.avax-test.network).
+2. Request funds from the [faucet](https://faucet.avax.network).
 3. Move the test funds (faucet sends avax token on either the X or C-Chain) to the P-Chain ([tutorial between X/P chains](../quickstart/transfer-avax-between-x-chain-and-p-chain.md) or [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).    
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
