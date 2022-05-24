@@ -2086,6 +2086,10 @@ A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount
 +--------------+---------------+------------------------------+
 | tx_count     : int           | 4 bytes                      |
 +--------------+---------------+------------------------------+
+| txs_size     : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| ??           : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
 | transactions : []Transaction | 4 + size(transactions) bytes |
 +--------------+---------------+------------------------------+
 | restrictions : []Restriction | 4 + size(restrictions) bytes |
@@ -2098,14 +2102,16 @@ A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount
 
 ```text
 message Vertex {
-    uint16 codec_id = 1;             // 04 bytes
-    bytes chain_id = 2;              // 32 bytes
-    uint64 height = 3;               // 08 bytes
-    uint32 epoch = 4;                // 04 bytes
-    repeated bytes parent_ids = 5;   // 04 bytes + 32 bytes * len(parent_ids)
-    uint32 tx_count = 5;             // 04 bytes
-    repeated bytes transactions = 7; // 04 bytes + 32 bytes * len(transactions)
-    repeated bytes restrictions = 8; // 04 bytes + 32 bytes * len(restrictions)
+    uint16 codec_id = 1;              // 04 bytes
+    bytes chain_id = 2;               // 32 bytes
+    uint64 height = 3;                // 08 bytes
+    uint32 epoch = 4;                 // 04 bytes
+    repeated bytes parent_ids = 5;    // 04 bytes + 32 bytes * len(parent_ids)
+    uint32 tx_count = 5;              // 04 bytes
+    uint32 txs_size = 6;              // 04 bytes
+    uint32 ???????? = 7;              // 04 bytes
+    repeated bytes transactions = 9;  // 04 bytes + 32 bytes * len(transactions)
+    repeated bytes restrictions = 10; // 04 bytes + 32 bytes * len(restrictions)
 }
 ```
 
