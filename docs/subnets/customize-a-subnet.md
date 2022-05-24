@@ -100,7 +100,7 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 ### Chain Config
 
-`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision and publish their IDs properly. 
+`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly. 
 
 #### Hardforks
 
