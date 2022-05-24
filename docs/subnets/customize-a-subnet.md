@@ -43,8 +43,6 @@ The default Subnet EVM provided below has some well defined parameters. The defa
     },
     "allowFeeRecipients": false
   },
-  "airdropHash": "0xccbf8e430b30d08b5b3342208781c40b373d1b5885c1903828f367230a2568da",
-  "airdropAmount": "0x8AC7230489E80000",
   "alloc": {
     "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
       "balance": "0x295BE96E64066972000000"
@@ -92,12 +90,6 @@ The default Subnet EVM provided below has some well defined parameters. The defa
 #### Custom Fee Recipients
 
 See section [Setting a Custom Fee Recipient](#setting-a-custom-fee-recipient)
-
-
-### Air Drop
-`airdropHash`: 
-`airdropAmount`
-
 
 ### Alloc
 
