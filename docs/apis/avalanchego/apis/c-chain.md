@@ -266,7 +266,7 @@ curl -X POST --data '{
 
 ### avax.export
 
-Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
+Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
 #### Signature
 
@@ -321,7 +321,7 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
-Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -511,7 +511,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -569,7 +569,7 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
