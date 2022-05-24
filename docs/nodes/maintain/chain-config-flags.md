@@ -8,7 +8,7 @@ Some chains allow the node operator to provide a custom configuration. Avalanche
 
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir` AvalancheGo flag, as documented [here](avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value defaults to `$HOME/.avalanchego/configs/chains`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
 
-This also applies to subnets, for example, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
+This also applies to subnets, for example, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
@@ -450,6 +450,6 @@ Allows incomplete indices. Default value is `false`.
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 
 
-## Subnet Configs
+## Subnet Chain Configs
 
-As mentioned above, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
+As mentioned above, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`

@@ -28,7 +28,7 @@ Some examples of requirements include:
 
 ### Support for Private Blockchains
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](./customize-a-subnet.md#private-subnet) for more info.
 
 ### Separation of Concerns
 
@@ -61,6 +61,7 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 Avalanche supports the creation of new instances of the Avalanche VM.
 * [Create an EVM Subnet on Local](./create-a-local-subnet.md)
 * [Create an EVM Subnet on Fuji Testnet](./create-a-fuji-subnet.md)
+* [Customize a Subnet](./customize-a-subnet.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
 * [Create a Virtual machine (VM)](create-a-virtual-machine-vm.md)
