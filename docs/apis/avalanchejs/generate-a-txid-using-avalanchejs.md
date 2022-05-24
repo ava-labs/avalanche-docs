@@ -4,7 +4,7 @@
 
 A transaction id, or TxID, is a string of numbers and letters which identifies a specific transaction on the blockchain. TxIDs are one of the most core components that developers interact with when working on a blockchain system. They're deterministic and can be generated using [AvalancheGo](../avalanchego/README.md) or [AvalancheJS](../avalanchejs/README.md). 
 
-On the Avalanche network a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. [CB58](https://support.avax.network/en/articles/4587395-what-is-cb5) a base58 encoding with a checksum. Below are the steps for deterministically generating a TxID using AvalancheJS.
+On the Avalanche network a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. [CB58](https://support.avax.network/en/articles/4587395-what-is-cb5) is a base58 encoding with a checksum. Below are the steps for deterministically generating a TxID using AvalancheJS.
 
 ## Creating a Signed Transaction
 
