@@ -205,7 +205,7 @@ genesis file (under the `"config"` key):
 
 #### `feeRecipient` 
 
-With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../nodes/maintain/chain-config-flags.md#c-chain-configs) with the following:
+With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They need to update their EVM   [chain config](#feerecipient-1) with the following to specify where the fee should be sent to.
 
 ```json
 {
@@ -213,11 +213,10 @@ With this enabled, your validators can specify their addresses to collect fees. 
 }
 ```
 
-See [this](#blockchain-configs) for more information on the subnet configs.
 
 :::warning
 
-If you enable this feature but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks they produce.
+If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
 
@@ -649,10 +648,10 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 
 ## Chain Configs
 
-As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`.
+As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneblahblahblah`, the config file for this chain is located at `{chain-config-dir}/2ebCneblahblahblah/config.json`.
 
 
-For EVM Subnet, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
 
 ### Priority Regossip
@@ -685,7 +684,22 @@ You can override these defaults with the following config:
 
 ### `feeRecipient`
 
-See [this](#feerecipient).
+This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) to specify where the fees should be sent to.
+
+With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees. 
+
+```json
+{
+  "feeRecipient": "<YOUR 0x-ADDRESS>"
+}
+```
+
+
+:::warning
+
+If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+
+:::
 
 
 
