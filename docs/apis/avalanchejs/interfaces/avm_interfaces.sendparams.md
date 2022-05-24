@@ -25,7 +25,7 @@
 
 • **amount**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:135](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L135)*
+*Defined in [src/apis/avm/interfaces.ts:135](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L135)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **assetID**: *string | Buffer*
 
-*Defined in [src/apis/avm/interfaces.ts:134](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L134)*
+*Defined in [src/apis/avm/interfaces.ts:134](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L134)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **changeAddr**? : *string | undefined*
 
-*Defined in [src/apis/avm/interfaces.ts:138](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L138)*
+*Defined in [src/apis/avm/interfaces.ts:138](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L138)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **from**? : *string[] | Buffer[] | undefined*
 
-*Defined in [src/apis/avm/interfaces.ts:137](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L137)*
+*Defined in [src/apis/avm/interfaces.ts:137](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L137)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **memo**? : *string | Buffer | undefined*
 
-*Defined in [src/apis/avm/interfaces.ts:139](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L139)*
+*Defined in [src/apis/avm/interfaces.ts:139](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L139)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:133](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L133)*
+*Defined in [src/apis/avm/interfaces.ts:133](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L133)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **to**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:136](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L136)*
+*Defined in [src/apis/avm/interfaces.ts:136](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L136)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:132](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L132)*
+*Defined in [src/apis/avm/interfaces.ts:132](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L132)*

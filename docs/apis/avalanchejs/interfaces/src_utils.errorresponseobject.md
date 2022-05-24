@@ -20,7 +20,7 @@
 
 • **code**: *number*
 
-*Defined in [src/utils/errors.ts:376](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L376)*
+*Defined in [src/utils/errors.ts:376](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L376)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **data**? : *null*
 
-*Defined in [src/utils/errors.ts:378](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L378)*
+*Defined in [src/utils/errors.ts:378](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L378)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **message**: *string*
 
-*Defined in [src/utils/errors.ts:377](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L377)*
+*Defined in [src/utils/errors.ts:377](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L377)*

@@ -25,7 +25,7 @@
 
 • **C**: *[C](utils_constants.c.md)*
 
-*Defined in [src/utils/constants.ts:59](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L59)*
+*Defined in [src/utils/constants.ts:59](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/constants.ts#L59)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **P**: *[P](utils_constants.p.md)*
 
-*Defined in [src/utils/constants.ts:62](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L62)*
+*Defined in [src/utils/constants.ts:62](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/constants.ts#L62)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **X**: *[X](utils_constants.x.md)*
 
-*Defined in [src/utils/constants.ts:61](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L61)*
+*Defined in [src/utils/constants.ts:61](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/constants.ts#L61)*
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 • **hrp**: *string*
 
-*Defined in [src/utils/constants.ts:60](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L60)*
+*Defined in [src/utils/constants.ts:60](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/constants.ts#L60)*
