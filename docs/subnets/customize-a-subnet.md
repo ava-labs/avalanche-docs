@@ -8,7 +8,7 @@ A subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subn
 * Genesis
 * Precompile
 * Chain Configs 
-* Subnet Configs
+* Subnet Configs, which is chain-agnostic, not just for EVM Subnet.
 
 ## Genesis
 
@@ -618,6 +618,9 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`.
 
 
+For EVM Subnet, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+
+
 ### Priority Regossip
 
 A transaction is "regossiped" when the node does not find the transaction in
@@ -652,9 +655,9 @@ See [this](#feerecipient).
 
 ## Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets.  Subnet Configs are chain-agnostic, not just for EVM Subnet. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
 
-You can customize your subnet by setting parameters for the following
+You can customize your subnet by setting parameters for the following:
 * [Validator-only communication to create a private subnet](../nodes/maintain/avalanchego-config-flags#validatoronly-bool)
 * [Consensus](../nodes/maintain/avalanchego-config-flags#consensus-parameters) 
 * [Gossip](../nodes/maintain/avalanchego-config-flags#gossip-configs) 
