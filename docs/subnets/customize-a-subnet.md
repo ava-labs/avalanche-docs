@@ -13,14 +13,17 @@ And a subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/
 
 ## Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets.  Subnet Configs are chain-agnostic, not just for EVM Subnet. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
+Parameters for Subnet Configs must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
 
-You can customize your subnet by setting parameters for the following:
+Parameters specified in the Subnet Configs apply to all chains in the specified subnet.  They are are chain-agnostic, not just for EVM Subnet. 
+
+A subnet can customized by setting parameters for the following:
+
 * [Validator-only communication to create a private subnet](../nodes/maintain/avalanchego-config-flags#validatoronly-bool)
 * [Consensus](../nodes/maintain/avalanchego-config-flags#consensus-parameters) 
 * [Gossip](../nodes/maintain/avalanchego-config-flags#gossip-configs) 
 
-An example config file is:
+Here is an example config file:
 
 ```json
 {
@@ -39,7 +42,7 @@ Avalanche subnets are public by default. It means that every node can sync and l
 
 Subnet validators can choose not to publish contents of blockchains via its configuration. If a node sets [`validatorOnly`](../nodes/maintain/avalanchego-config-flags#validatoronly-bool) to true in its subnet configs, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
 
-:::info
+:::tip
 This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
 :::
 
@@ -48,7 +51,7 @@ This is a node-specific configuration. Every validator of this subnet has to use
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and semantics of its genesis data.
 
-The default Subnet EVM provided below has some well defined parameters. The default Subnet EVM genesis looks like:
+The default genesis Subnet EVM provided below has some well defined parameters:
 
 ```json
 {
