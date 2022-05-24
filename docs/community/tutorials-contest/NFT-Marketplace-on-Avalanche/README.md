@@ -634,7 +634,7 @@ networks:{
 ```
 
 Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet
-](https://faucet.avax-test.network/) to get some test AVAX for free.
+](https://faucet.avax.network/) to get some test AVAX for free.
 
 # Deploying the contracts
 
