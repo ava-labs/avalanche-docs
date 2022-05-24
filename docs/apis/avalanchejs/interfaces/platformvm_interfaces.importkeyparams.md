@@ -20,7 +20,7 @@
 
 • **password**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:104](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L104)*
+*Defined in [src/apis/platformvm/interfaces.ts:104](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L104)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **privateKey**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:105](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L105)*
+*Defined in [src/apis/platformvm/interfaces.ts:105](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L105)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:103](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L103)*
+*Defined in [src/apis/platformvm/interfaces.ts:103](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L103)*

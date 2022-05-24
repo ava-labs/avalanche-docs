@@ -25,7 +25,7 @@
 
 • **delegationFeeRate**? : *string | undefined*
 
-*Defined in [src/apis/platformvm/interfaces.ts:64](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L64)*
+*Defined in [src/apis/platformvm/interfaces.ts:64](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L64)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **endTime**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:61](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L61)*
+*Defined in [src/apis/platformvm/interfaces.ts:61](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L61)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **nodeID**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:59](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L59)*
+*Defined in [src/apis/platformvm/interfaces.ts:59](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L59)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:58](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L58)*
+*Defined in [src/apis/platformvm/interfaces.ts:58](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L58)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **rewardAddress**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:63](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L63)*
+*Defined in [src/apis/platformvm/interfaces.ts:63](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L63)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **stakeAmount**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L62)*
+*Defined in [src/apis/platformvm/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L62)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **startTime**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:60](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L60)*
+*Defined in [src/apis/platformvm/interfaces.ts:60](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L60)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:57](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L57)*
+*Defined in [src/apis/platformvm/interfaces.ts:57](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L57)*

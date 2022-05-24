@@ -23,7 +23,7 @@
 
 • **addresses**: *string[] | string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:135](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L135)*
+*Defined in [src/apis/platformvm/interfaces.ts:135](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L135)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **encoding**? : *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:140](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L140)*
+*Defined in [src/apis/platformvm/interfaces.ts:140](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L140)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **limit**: *number | 0*
 
-*Defined in [src/apis/platformvm/interfaces.ts:137](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L137)*
+*Defined in [src/apis/platformvm/interfaces.ts:137](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L137)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **persistOpts**? : *[PersistanceOptions](../classes/utils_persistanceoptions.persistanceoptions.md) | undefined*
 
-*Defined in [src/apis/platformvm/interfaces.ts:139](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L139)*
+*Defined in [src/apis/platformvm/interfaces.ts:139](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L139)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **sourceChain**? : *string | undefined*
 
-*Defined in [src/apis/platformvm/interfaces.ts:136](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L136)*
+*Defined in [src/apis/platformvm/interfaces.ts:136](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L136)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **startIndex**? : *[StartIndex](platformvm_interfaces.startindex.md) | undefined*
 
-*Defined in [src/apis/platformvm/interfaces.ts:138](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L138)*
+*Defined in [src/apis/platformvm/interfaces.ts:138](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L138)*

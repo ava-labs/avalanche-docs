@@ -20,7 +20,7 @@
 
 • **endIndex**: *[EndIndex](platformvm_interfaces.endindex.md)*
 
-*Defined in [src/apis/platformvm/interfaces.ts:151](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L151)*
+*Defined in [src/apis/platformvm/interfaces.ts:151](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L151)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **numFetched**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:149](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L149)*
+*Defined in [src/apis/platformvm/interfaces.ts:149](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L149)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **utxos**: *[UTXOSet](../classes/api_platformvm_utxos.utxoset.md)*
 
-*Defined in [src/apis/platformvm/interfaces.ts:150](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L150)*
+*Defined in [src/apis/platformvm/interfaces.ts:150](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L150)*
