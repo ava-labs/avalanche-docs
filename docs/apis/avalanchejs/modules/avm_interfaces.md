@@ -39,4 +39,4 @@
 * [SendParams](../interfaces/avm_interfaces.sendparams.md)
 * [SendResponse](../interfaces/avm_interfaces.sendresponse.md)
 * [StartIndexInterface](../interfaces/avm_interfaces.startindexinterface.md)
-* [UTXOID](../interfaces/avm_interfaces.utxoid.md)
+* [iUTXOID](../interfaces/avm_interfaces.iutxoid.md)

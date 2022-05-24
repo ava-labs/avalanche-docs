@@ -18,4 +18,4 @@
 
 • **isAccepted**: *boolean*
 
-*Defined in [src/apis/index/interfaces.ts:40](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/interfaces.ts#L40)*
+*Defined in [src/apis/index/interfaces.ts:40](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/index/interfaces.ts#L40)*

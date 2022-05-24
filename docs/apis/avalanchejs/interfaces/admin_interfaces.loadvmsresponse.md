@@ -19,7 +19,7 @@
 
 • **failedVMs**? : *object*
 
-*Defined in [src/apis/admin/interfaces.ts:46](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L46)*
+*Defined in [src/apis/admin/interfaces.ts:46](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/admin/interfaces.ts#L46)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **newVMs**: *object*
 
-*Defined in [src/apis/admin/interfaces.ts:45](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L45)*
+*Defined in [src/apis/admin/interfaces.ts:45](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/admin/interfaces.ts#L45)*
