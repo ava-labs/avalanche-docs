@@ -141,7 +141,7 @@ Now we have everything we need to transfer the tokens.
 
 ### Transfer from the X-Chain to C-Chain
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../apis/avalanchego/apis/x-chain.mdx#avmexport) call:
+Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../apis/avalanchego/apis/x-chain.md#avmexport) call:
 
 ```sh
 curl -X POST --data '{  
@@ -225,7 +225,7 @@ The response should look like this:
 }
 ```
 
-To finish the transfer, call [`avm.import`](../apis/avalanchego/apis/x-chain.mdx#avmimport).
+To finish the transfer, call [`avm.import`](../apis/avalanchego/apis/x-chain.md#avmimport).
 
 ```sh
 curl -X POST --data '{  
