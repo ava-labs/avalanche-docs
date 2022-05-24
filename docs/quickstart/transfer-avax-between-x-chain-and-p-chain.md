@@ -110,7 +110,7 @@ The response should look like this:
     "jsonrpc": "2.0",
     "result": {
         "txID": "MqEaeWc4rfkw9fhRMuMTN7KUTNpFmh9Fd7KSre1ZqTsTQG73h",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
     },
     "id": 1
 }
@@ -262,7 +262,7 @@ curl -X POST --data '{
         "password":"myPassword"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 where `to` is the X-Chain address the AVAX is being sent to.

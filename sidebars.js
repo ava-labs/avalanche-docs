@@ -86,9 +86,9 @@ const sidebars = {
   subnets: [
     'subnets/README',
     'subnets/create-a-local-subnet',
-    'subnets/fuji-deployment',
+    'subnets/create-a-fuji-subnet',
     'subnets/setup-dfk-node',
-    'subnets/create-evm-blockchain',
+    'subnets/subnet-cli',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
     'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',

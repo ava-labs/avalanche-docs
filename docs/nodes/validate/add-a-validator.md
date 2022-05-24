@@ -167,7 +167,7 @@ curl -X POST --data '{
         "password":"PASSWORD"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response has the transaction ID, as well as the address the change went to.
@@ -193,7 +193,7 @@ curl -X POST --data '{
         "txID":"6pb3mthunogehapzqmubmx6n38ii3lzytvdrxumovwkqftzls"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
@@ -204,7 +204,7 @@ curl -X POST --data '{
     "method": "platform.getPendingValidators",
     "params": {},
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response should include the node we just added:
@@ -218,7 +218,7 @@ The response should include the node we just added:
                 "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
                 "startTime": "1584021450",
                 "endtime": "1584121156",
-                "stakeAmount": "2000000000000",
+                "stakeAmount": "2000000000000"
             }
         ]
     },

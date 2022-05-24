@@ -8,7 +8,7 @@ sidebar_position: 5
 
 Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine (Timestamp VM).
 
-If you want a blockchain that has capabilities of  C-Chain (EVM), see [Create EVM Blockchain](create-evm-blockchain.md).
+If you want a blockchain that has capabilities of  C-Chain (EVM), see [Create an EVM Subnet on Fuji Testnet](./create-a-fuji-subnet.md).
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
@@ -84,7 +84,7 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response contains the transaction ID:
@@ -112,7 +112,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getBlockchains",
     "params" :{}
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 The response confirms that the blockchain was created:
@@ -164,7 +164,7 @@ curl -X POST --data '{
     "params" :{
         "blockchainID":"sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 ```json

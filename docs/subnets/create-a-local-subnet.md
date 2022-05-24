@@ -1,12 +1,16 @@
-# Create a Local EVM Subnet
+# Create an EVM Subnet on Local
 
 To learn how to develope a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
 
 ## Clone Subnet-evm 
 
-First install Go 1.17.9 or later. Follow the instructions [here](https://golang.org/doc/install).
+First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.17.9 or above.** 
+
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac. 
+
+Run `echo $GOPATH`. **It should not be empty.**
 
 Download the `subnet-evm` repository into your `$GOPATH`:
 
@@ -229,4 +233,4 @@ go: downloading github.com/spf13/viper v1.10.1
 
 ## Next Step
 
-After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./fuji-deployment.md).
+After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./create-a-fuji-subnet.md).

@@ -1,3 +1,9 @@
+#05/23/2022
+/subnets/fuji-deployment/ /subnets/create-a-fuji-subnet 301
+/subnets/fuji-deployment  /subnets/create-a-fuji-subnet 301
+/subnets/create-evm-blockchain/ /subnets/create-a-fuji-subnet 301
+/subnets/create-evm-blockchain  /subnets/create-a-fuji-subnet 301
+
 #05/18/2022
 /subnets/subnet-deepdive/ /subnets/create-a-local-subnet 301
 /subnets/subnet-deepdive  /subnets/create-a-local-subnet 301
@@ -85,8 +91,6 @@
 /build/tools/avash   /quickstart/network-runner 301
 /build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
 /build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
-/build/references/network-protocol/ /quickstart/references/network-protocol 301
-/build/references/network-protocol  /quickstart/references/network-protocol 301
 /build/references/serialization-primitives/ /quickstart/references/serialization-primitives 301
 /build/references/serialization-primitives  /quickstart/references/serialization-primitives 301
 
