@@ -134,6 +134,7 @@ const sidebars = {
         'apis/avalanchejs/create-an-asset-on-the-x-chain',
         'apis/avalanchejs/manage-x-chain-keys',
         'apis/avalanchejs/send-an-asset-on-the-x-chain',
+        'apis/avalanchejs/generate-a-txid-using-avalanchejs',
       ],
     },
     {
