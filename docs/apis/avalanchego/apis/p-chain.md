@@ -712,7 +712,6 @@ curl -X POST --data '{
         "encoding": "json"
     },
     "id": 1
-
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P 
 ```
 ##### **Example Response**
