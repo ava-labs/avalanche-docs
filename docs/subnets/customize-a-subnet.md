@@ -1,14 +1,14 @@
 ---
-Title: Customize a Subnet
 Description: How to customerize a subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize a Subnet
+# Customize an EVM Subnet
 
 A subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following configurations:
 * Genesis
 * Precompile
-* Blockchain Configs 
+* Chain Configs 
+* Subnet Configs
 
 ## Genesis
 
@@ -613,9 +613,9 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 
 
 
-## Blockchain Configs
+## Chain Configs
 
-As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`.
+As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`.
 
 
 ### Priority Regossip
@@ -626,7 +626,7 @@ a block after `priority-regossip-frequency` (defaults to `1m`). By default, up t
 
 Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of
 important addresses (like bridge relayers). To do so, you'll need to update your
-[chain config](https://docs.avax.network/nodes/maintain/chain-config-flags#subnet-configs) with the following:
+[chain config](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) with the following:
 
 ```json
 {
@@ -649,4 +649,31 @@ You can override these defaults with the following config:
 ### `feeRecipient`
 
 See [this](#feerecipient).
+
+## Subnet Configs
+
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info.
+
+An example config file is:
+
+```json
+{
+  "validatorOnly": false,
+  "consensusParameters": {
+    "k": 25,
+    "alpha": 18
+  },
+  "appGossipNonValidatorSize": 10
+}
+```
+
+### Private Subnet
+
+Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
+
+Subnet validators can choose not to publish contents of blockchains via its configuration. If a node sets [`validatorOnly`](../nodes/maintain/avalanchego-config-flags#validatoronly-bool) to true in its subnet configs, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+
+:::info
+This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
+:::
 

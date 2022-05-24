@@ -450,6 +450,6 @@ Allows incomplete indices. Default value is `false`.
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 
 
-## Subnet Configs
+## Subnet Chain Configs
 
 As mentioned above, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
