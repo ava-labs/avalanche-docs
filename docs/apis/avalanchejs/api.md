@@ -1,6 +1,6 @@
 # API
 
-## AvalancheJS - [v3.13.1](https://github.com/ava-labs/avalanchejs/releases/tag/v3.13.1)
+## AvalancheJS - [v3.14.0](https://github.com/ava-labs/avalanchejs/releases/tag/v3.14.0)
 
 ### Modules
 

@@ -89,6 +89,7 @@ const sidebars = {
     'subnets/create-a-fuji-subnet',
     'subnets/setup-dfk-node',
     'subnets/subnet-cli',
+    'subnets/customize-a-subnet',
     'subnets/create-a-virtual-machine-vm',
     'subnets/create-custom-blockchain',
     'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
@@ -133,6 +134,7 @@ const sidebars = {
         'apis/avalanchejs/create-an-asset-on-the-x-chain',
         'apis/avalanchejs/manage-x-chain-keys',
         'apis/avalanchejs/send-an-asset-on-the-x-chain',
+        'apis/avalanchejs/generate-a-txid-using-avalanchejs',
       ],
     },
     {

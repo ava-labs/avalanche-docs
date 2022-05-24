@@ -19,9 +19,9 @@
 
 • **size**: *number | string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:47](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L47)*
+*Defined in [src/apis/platformvm/interfaces.ts:47](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L47)*
 
-*Defined in [src/apis/platformvm/interfaces.ts:52](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L52)*
+*Defined in [src/apis/platformvm/interfaces.ts:52](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L52)*
 
 ___
 
@@ -29,6 +29,6 @@ ___
 
 • **subnetID**? : *Buffer | string | undefined*
 
-*Defined in [src/apis/platformvm/interfaces.ts:48](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L48)*
+*Defined in [src/apis/platformvm/interfaces.ts:48](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L48)*
 
-*Defined in [src/apis/platformvm/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L53)*
+*Defined in [src/apis/platformvm/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L53)*

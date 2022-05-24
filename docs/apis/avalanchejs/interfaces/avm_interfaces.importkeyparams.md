@@ -24,7 +24,7 @@
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[password](common_interfaces.credsinterface.md#password)*
 
-*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L11)*
+*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/interfaces.ts#L11)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **privateKey**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L62)*
+*Defined in [src/apis/avm/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L62)*
 
 ___
 
@@ -42,4 +42,4 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[username](common_interfaces.credsinterface.md#username)*
 
-*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L10)*
+*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/interfaces.ts#L10)*

@@ -2,7 +2,7 @@
 description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
 sidebar_position: 5
 ---
-import Iframe from 'react-iframe'
+
 
 # Exchange Chain (X-Chain) API
 
@@ -292,7 +292,7 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](x-chain.mdx#avmcreatevariablecapasset).
+Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
 
 #### **Signature**
 
@@ -510,7 +510,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.mdx#avmcreatenftasset). 
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.md#avmcreatenftasset). 
 
 #### **Signature**
 
@@ -642,7 +642,7 @@ curl -X POST --data '{
 ### avm.exportKey
 
 Get the private key that controls a given address.
-The returned private key can be added to a user with [`avm.importKey`](x-chain.mdx#avmimportkey).
+The returned private key can be added to a user with [`avm.importKey`](x-chain.md#avmimportkey).
 
 #### **Signature**
 

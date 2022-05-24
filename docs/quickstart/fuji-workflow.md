@@ -69,7 +69,7 @@ As long as you have the menmonic phrase, you can re-generate your private keys a
 
 ## Get a Drip from the Fuji Faucet
 
-We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the [Fuji faucet website](https://faucet.avax-test.network). These AVAX are for the Fuji Testnet and have no monetary value.
+We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the [Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji Testnet and have no monetary value.
 
 ![Requesting AVAX](/img/faucet-request.png)
 
@@ -209,7 +209,7 @@ For additional and valuable resources please see below.
 
 ### Faucet
 
-The [Fuji Faucet](https://faucet.avax-test.network) sends AVAX to X-Chain or C-Chain addresses to help you test. (This testnet Avax has no value.)
+The [Fuji Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain addresses to help you test. (This testnet Avax has no value.)
 
 ### Wallet
 

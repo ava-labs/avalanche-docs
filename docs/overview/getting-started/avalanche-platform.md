@@ -29,7 +29,7 @@ Some examples of requirements include:
 
 ### Support for Private Blockchains
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../../subnets/customize-a-subnet.md#private-subnet) for more info.
 
 ### Separation of Concerns
 
@@ -73,7 +73,7 @@ The **X-Chain** acts as a decentralized platform for creating and trading digita
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.mdx) allows clients to create and trade assets on the X-Chain and other instances of the AVM. 
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM. 
 
 
 ## Platform Chain (P-Chain)

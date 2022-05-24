@@ -442,7 +442,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this transaction, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or C-Chain's [`avax.import`](c-chain.md#avaximport) with assetID `AVAX` to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this transaction, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or C-Chain's [`avax.import`](c-chain.md#avaximport) with assetID `AVAX` to complete the transfer.
 
 #### **Signature**
 
@@ -1931,7 +1931,7 @@ curl -X POST --data '{
 
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method with assetID `AVAX` to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method with assetID `AVAX` to initiate the transfer.
 
 #### **Signature**
 

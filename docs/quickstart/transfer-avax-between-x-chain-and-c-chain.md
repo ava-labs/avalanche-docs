@@ -8,7 +8,7 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md).
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
+In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax.network), which is a free and easy way to get to play around with Avalanche.
 
 ## Transferring AVAX using the web wallet
 
@@ -141,7 +141,7 @@ Now we have everything we need to transfer the tokens.
 
 ### Transfer from the X-Chain to C-Chain
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../apis/avalanchego/apis/x-chain.mdx#avmexport) call:
+Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../apis/avalanchego/apis/x-chain.md#avmexport) call:
 
 ```sh
 curl -X POST --data '{  
@@ -225,7 +225,7 @@ The response should look like this:
 }
 ```
 
-To finish the transfer, call [`avm.import`](../apis/avalanchego/apis/x-chain.mdx#avmimport).
+To finish the transfer, call [`avm.import`](../apis/avalanchego/apis/x-chain.md#avmimport).
 
 ```sh
 curl -X POST --data '{  

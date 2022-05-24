@@ -5,7 +5,7 @@
 This tutorial assumes that:
 - [An Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created
 - Your Node is currently validating your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./create-a-fuji-subnet.md#build-genesis)).
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
 ## Step 1: Setting up MetaMask
 

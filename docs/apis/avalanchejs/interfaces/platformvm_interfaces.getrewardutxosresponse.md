@@ -20,7 +20,7 @@
 
 • **encoding**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:29](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L29)*
+*Defined in [src/apis/platformvm/interfaces.ts:29](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L29)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **numFetched**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:27](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L27)*
+*Defined in [src/apis/platformvm/interfaces.ts:27](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L27)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **utxos**: *string[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:28](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L28)*
+*Defined in [src/apis/platformvm/interfaces.ts:28](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L28)*
