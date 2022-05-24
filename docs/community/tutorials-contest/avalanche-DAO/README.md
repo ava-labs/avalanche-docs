@@ -277,7 +277,7 @@ Now we need compile our contract, I'm using the 0.8.0 version compiler, and clic
 ![](assets/avalanche-dao-remix-compiler.png)
 
 In the environment section we choose the `Injected Web3` option, in account we chose an account from our metamask plugin in the FUJI network, make sure that your account have the necessary avax for the deploy and the minimum for create a proposal.   
-[Here you can find the Faucet](https://faucet.avax-test.network/).  
+[Here you can find the Faucet](https://faucet.avax.network/).  
 Click on the `Deploy` button and confirm the transaction in REMIX and Metamask and await for a few seconds.  
 
 ![](assets/avalanche-dao-deploy-smartContract.png)
