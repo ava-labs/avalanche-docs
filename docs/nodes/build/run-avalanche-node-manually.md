@@ -61,6 +61,7 @@ Download the AvalancheGo repository into your `$GOPATH`:
 ```sh
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
+cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/avalanchego.git
 cd avalanchego
 ```
