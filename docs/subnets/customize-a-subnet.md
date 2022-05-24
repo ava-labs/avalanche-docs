@@ -1,5 +1,5 @@
 ---
-Description: How to customerize a subnet by utilizing Genesis, Precompile and Blockchain Configs.
+Description: How to customize a subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
 # Customize a Subnet
