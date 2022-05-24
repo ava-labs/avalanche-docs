@@ -77,7 +77,7 @@ As you may have noticed while transferring AVAX using the Avalanche Wallet, a cr
 
 ### Step 1 - Export AVAX from the X-Chain
 
-To export AVAX, call the X-Chain’s [`avm.export`](../apis/avalanchego/apis/x-chain.mdx#avmexport) method with `AVAX` assetID.
+To export AVAX, call the X-Chain’s [`avm.export`](../apis/avalanchego/apis/x-chain.md#avmexport) method with `AVAX` assetID.
 
 Your call should look like this:
 
@@ -116,7 +116,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../apis/avalanchego/apis/x-chain.mdx#avmgettxstatus):
+We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../apis/avalanchego/apis/x-chain.md#avmgettxstatus):
 
 ```sh
 curl -X POST --data '{
@@ -141,7 +141,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](../apis/avalanchego/apis/x-chain.mdx#avmgetbalance) to check that the AVAX was deducted from an address held by our user:
+We can also call [`avm.getBalance`](../apis/avalanchego/apis/x-chain.md#avmgetbalance) to check that the AVAX was deducted from an address held by our user:
 
 ```sh
 curl -X POST --data '{
@@ -271,7 +271,7 @@ This returns the transaction ID, and we can check that the transaction was commi
 
 ### Step 2 - Import AVAX to X-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../apis/avalanchego/apis/x-chain.mdx#avmimport):
+To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../apis/avalanchego/apis/x-chain.md#avmimport):
 
 ```sh
 curl -X POST --data '{
@@ -290,7 +290,7 @@ curl -X POST --data '{
 
 Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../apis/avalanchego/apis/p-chain.md#platformexportavax).
 
-Just as before, we can call [`avm.getBalance`](../apis/avalanchego/apis/x-chain.mdx#avmgetbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+Just as before, we can call [`avm.getBalance`](../apis/avalanchego/apis/x-chain.md#avmgetbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
 
 ## Wrapping Up
 

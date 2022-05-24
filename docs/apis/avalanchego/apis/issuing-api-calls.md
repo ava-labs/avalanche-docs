@@ -126,7 +126,7 @@ Also, note that the [public api](../public-api-server.md#supported-apis) only su
 
 Most of the built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](x-chain.mdx). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+Suppose we want to call the `getTxStatus` method of the [X-Chain API](x-chain.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:
 
@@ -134,7 +134,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](x-chain.mdx#avmgettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](x-chain.md#avmgettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 
