@@ -652,7 +652,12 @@ See [this](#feerecipient).
 
 ## Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info.
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
+
+You can customize your subnet by setting parameters for the following
+* [Validator-only communication to create a private subnet](../nodes/maintain/avalanchego-config-flags#validatoronly-bool)
+* [Consensus](../nodes/maintain/avalanchego-config-flags#consensus-parameters) 
+* [Gossip](../nodes/maintain/avalanchego-config-flags#gossip-configs) 
 
 An example config file is:
 
