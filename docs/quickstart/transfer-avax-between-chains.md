@@ -46,7 +46,7 @@ The script in this tutorial uses **X Chain <-> C Chain** transfers. Depending on
 
 Select the **examples/avm** folder to view the AvalancheJS X-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [```avm/buildExportTx-cchain-avax.ts```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
 
-![Image for post](/img/export-x2c.png)
+![Image for post](/img/ajs-export-cchain-res.png)
 
 Modify your Avalanche object to match your endpoint parameters.
 
