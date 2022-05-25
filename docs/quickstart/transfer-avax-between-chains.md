@@ -137,5 +137,5 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 
 ## Wrapping Up
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using AvalancheJS.
+That’s it! Now, you can swap AVAX back and forth between each chain by using AvalancheJS.
 
