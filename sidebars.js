@@ -49,6 +49,7 @@ const sidebars = {
     'quickstart/fund-a-local-test-network',
     'quickstart/fuji-workflow',
     'quickstart/avalanche-summit-fuji-quickstart',
+    'quickstart/transfer-avax-between-chains',
     'quickstart/transfer-avax-between-x-chain-and-c-chain',
     'quickstart/transfer-avax-between-x-chain-and-p-chain',
     'quickstart/transfer-avax-between-p-chain-and-c-chain',
