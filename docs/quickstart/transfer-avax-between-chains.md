@@ -18,7 +18,7 @@ The easiest way to transfer AVAX between chains is to use [AvalancheJS](https://
 
 ![Image for post](/img/examples.png)
 
-Select the **examples** folder to view the source code for AJS examples. To send AVAX between the X-Chain and C-Chain see the following:
+Select the **examples** folder to view the source code for AJS examples. To send AVAX between the Chains see the following:
 
 | Title | Path |
 | :--- | :--- |
@@ -26,10 +26,25 @@ Select the **examples** folder to view the source code for AJS examples. To send
 | [**EVM : Import Avax from X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts) | _X Chain >> C Chain_ |
 | [**EVM : Export Avax to X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) | _C Chain >> X Chain_ |
 | [**AVM : Import Avax from C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) | _C Chain >> X Chain_ |
+| [**AVM : Export Avax to P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-PChain.ts) | _X Chain >> P Chain_ |
+| [**PlatformVM : Import Avax from X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildImportTx-XChain.ts) | _X Chain >> P Chain_ |
+| [**PlatformVM : Export Avax to X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildExportTx-XChain.ts) | _P Chain >> X Chain_ |
+| [**AVM : Import Avax from P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-PChain.ts) | _P Chain >> X Chain_ |
+| [**EVM : Export Avax to P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-pchain.ts) | _C Chain >> P Chain_ |
+| [**PlatformVM : Import Avax from C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildImportTx-CChain.ts) | _C Chain >> P Chain_ |
+| [**PlatformVm : Export Avax to C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildExportTx-CChain.ts) | _P Chain >> C Chain_ |
+| [**EVM : Import Avax from P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-PChain.ts) | _P Chain >> C Chain_ |
+
 
 ### Step 2 - Modify your export
 
-Select the **examples/avm** folder to view the source code for AJS examples. To send AVAX from the X-Chain to the C-Chain, select [avm/buildExportTx-cchain-avax.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
+:::info
+
+The script in this tutorial uses **X Chain <-> C Chain** transfers. Depending on which chains you want to interact with, the scripts you use could be different. Please check the table above for more information.
+
+:::
+
+Select the **examples/avm** folder to view the AvalancheJS X-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [avm/buildExportTx-cchain-avax.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
 
 ![Image for post](/img/export-x2c.png)
 
