@@ -82,6 +82,31 @@ A cross-chain transfer is a two step process: first a transaction to export the 
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
 
+You can retrieve the transaction data by running the following:
+```zsh
+avalanchejs $ ts-node examples/avm/getTx.ts
+```
+
+Returns:
+```js     
+{
+  unsignedTx: {
+    networkID: 1337,
+    blockchainID: 'qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7',
+    outputs: [ [Object] ],
+    inputs: [],
+    memo: '0x41564d207574696c697479206d6574686f64206275696c64496d706f7274547820746f20696d706f7274204156415820746f2074686520582d436861696e2066726f6d2074686520432d436861696e',
+    sourceChain: 'BR28ypgLATNS6PbtHMiJ7NQ61vfpT27Hj8tAcZ1AHsfU5cz88',
+    importedInputs: [ [Object] ]
+  },
+  credentials: [
+    {
+      fxID: 'spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ',
+      credential: [Object]
+    }
+  ]
+}
+```
 ### Transfer from the C-Chain to X-Chain
 
 To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
