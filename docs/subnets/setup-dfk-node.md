@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This artciles describes how to run a Mainnet node on [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer). It can be applied to any other subnet, where the corresponding part of the subnet info should be replaced. 
+This article describes how to run a Mainnet node on [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer). It can be applied to any other subnet, where the corresponding part of the subnet info should be replaced. 
 
 Following necessary steps are needed to run your node on the DFK Subnet:
 
