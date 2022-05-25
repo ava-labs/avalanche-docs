@@ -1,4 +1,8 @@
-#05/23/2022
+#05/24/2022
+/quickstart/avalanche-summit-fuji-quickstart/ / 301
+/quickstart/avalanche-summit-fuji-quickstart  / 301
+
+# 05/23/2022
 /subnets/fuji-deployment/ /subnets/create-a-fuji-subnet 301
 /subnets/fuji-deployment  /subnets/create-a-fuji-subnet 301
 /subnets/create-evm-blockchain/ /subnets/create-a-fuji-subnet 301
@@ -220,8 +224,6 @@
 /build/tutorials/platform/create-a-local-test-network  /quickstart/create-a-local-test-network 301
 /build/tutorials/platform/fuji-workflow/ /quickstart/fuji-workflow 301
 /build/tutorials/platform/fuji-workflow  /quickstart/fuji-workflow 301
-/build/tutorials/platform/avalanche-summit-fuji-quickstart/ /quickstart/avalanche-summit-fuji-quickstart 301
-/build/tutorials/platform/avalanche-summit-fuji-quickstart  /quickstart/avalanche-summit-fuji-quickstart 301
 /build/tutorials/platform/fund-a-local-test-network/ /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
