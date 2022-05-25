@@ -121,7 +121,11 @@ If you are using the pre-built binaries on Linux:
 
 When the node starts, it has to bootstrap (catch up with the rest of the network). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
-`INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
+```text
+[05-25|17:18:48.479] INFO <P Chain> snowman/transitive.go:339 consensus starting with 3CEShuttaoY46vofsZsUtrC3BdiJaNgWP9Xgud89WqwBvDVC5 as the last accepted block
+[05-25|17:18:48.482] INFO <C Chain> snowman/transitive.go:339 consensus starting with cAhvmHwAqhsw8MtbRXf3e3pzm3RnMC7Gn9uqunRHb6jzUyWab as the last accepted block
+[05-25|17:19:06.516] INFO <X Chain> avalanche/transitive.go:306 consensus starting with 1 vertices in the accepted frontier
+```
 
 To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../apis/avalanchego/apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
