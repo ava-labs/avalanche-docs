@@ -2061,20 +2061,20 @@ A vertex is a collection of transactions. It's the DAG equivalent of a block in 
 
 ### What Vertex Contains
 
-A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `VertexSize`, `Restrictions`, and `Transactions`.
+A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TransactionSize`, `Transactions`, and `Restrictions`.
 
 * **`ChainID`** is the ID of the chain this vertex exists on.
 * **`Height`** is the maximum height of a parent vertex plus 1.
 * **`Epoch`** is the epoch this vertex belongs to.
 * **`ParentIDs`** are the IDs of this vertex's parents.
+* **`TransactionCount`** is the total number of transactions in this vertex.
+* **`TransactionSize`** is the total size of the transactions in this vertex.
 * **`Transactions`** are the transactions in this vertex.
 * **`Restrictions`** are IDs of transactions that must be accepted in the same epoch as this vertex or an earlier one.
 
 ### Gantt Vertex Specification
 
 ```text
-+--------------+---------------+------------------------------+
-| codec_id     : uint16        | 2 bytes                      |
 +--------------+---------------+------------------------------+
 | chain_id     : [32]byte      | 32 bytes                     |
 +--------------+---------------+------------------------------+
