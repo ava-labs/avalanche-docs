@@ -90,7 +90,7 @@ where `blockchainID` is the ID of the blockchain running the EVM. So for example
 http://127.0.0.1/ext/bc/2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX/rpc
 ```
 
-Or for the WAGMI subnet on te Fuji testnet:
+Or for the WAGMI subnet on the Fuji testnet:
 
 ```
 http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
