@@ -69,12 +69,15 @@ index.getLastAccepted({
 }
 ```
 
-where:
+##### Request
+
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
 
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
@@ -126,6 +129,13 @@ index.getContainerByIndex({
   index: string
 }
 ```
+
+##### Request
+
+* `index` is how many containers were accepted in this index before this one
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
 
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
@@ -184,11 +194,18 @@ index.getContainerByID({
 }
 ```
 
+##### Request
+
+* `containerID` is the container's ID
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
+
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
+* `index` is how many containers were accepted in this index before this one
 
 #### **Example Call**
 
@@ -242,11 +259,19 @@ index.getContainerRange({
 }
 ```
 
+##### Request
+
+* `startIndex` is the beginning index
+* `numToFetch` is the number of containers to fetch
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
+
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
+* `index` is how many containers were accepted in this index before this one
 
 #### **Example Call**
 
@@ -296,7 +321,14 @@ index.getIndex({
 }
 ```
 
-where `encoding` is `"cb58"` or `"hex"`.
+##### Request
+
+* `containerID` is the ID of the container to fetch
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
+
+* `index` is how many containers were accepted in this index before this one
 
 #### **Example Call**
 
@@ -341,6 +373,15 @@ index.isAccepted({
   isAccepted: bool
 }
 ```
+
+##### Request
+
+* `containerID` is the ID of the container to fetch
+* `encoding` is `"cb58"` or `"hex"`
+
+##### Response
+
+* `isAccepted` displays if the container has been accepted
 
 #### **Example Call**
 
