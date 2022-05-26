@@ -4,7 +4,7 @@
 
 This article shows how to transfer AVAX tokens programmatically between any two chains of the Primary Network.
 
-If you are looking for how to transfter AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-between-the-x-chain-and-c-chain-in-the-avalanche-wallet).
+If you are looking for how to transfter AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
 
 ## Requirements
 
