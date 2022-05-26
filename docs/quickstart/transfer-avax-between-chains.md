@@ -48,7 +48,7 @@ Select the **examples/avm** folder to view the AvalancheJS X-Chain examples. To 
 
 ![Image for post](/img/ajs-export-cchain-res.png)
 
-Modify your Avalanche object to match your endpoint parameters.
+#### Modify your Avalanche object to match your endpoint parameters:
 
 ```js
 const ip: string = "localhost" | "custom"
@@ -79,6 +79,21 @@ const port: number = 13445
 const protocol: string = "http"
 const networkID: number = 1337
 ```
+
+#### Edit the amount of AVAX you want to send:
+by default th script sets the amount to send as the wallets entire AVAX balance:
+
+```js
+const balance: BN = new BN(getBalanceResponse.balance)
+const amount: BN = balance.sub(fee)
+```
+
+Change the amount you want to send by passing the value as a string
+
+```js
+  const value: BN = new BN("10000000000000000")
+  const amount: BN = value.sub(fee)
+  ```
 
 ### Step 3 - Run the Export and Import scripts
 
