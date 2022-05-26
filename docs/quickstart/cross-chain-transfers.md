@@ -88,7 +88,7 @@ const balance: BN = new BN(getBalanceResponse.balance)
 const amount: BN = balance.sub(fee)
 ```
 
-Change the amount by creating a new _BN_ variable: (```value```) and assigning it a string type value (```"10000000000000000"```) 
+Change the amount by creating a new _BN_ variable: (```value```) and assigning it a string value (```"10000000000000000"```) 
 ```js
   const value: BN = new BN("10000000000000000")
   const amount: BN = value.sub(fee)
