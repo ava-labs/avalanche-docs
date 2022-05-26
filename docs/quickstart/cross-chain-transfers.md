@@ -1,4 +1,4 @@
-# Cross Chain Transfers
+# Transfers AVAX Tokens Between Chains
 
 ## Introduction
 

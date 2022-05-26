@@ -47,7 +47,7 @@ Depending on the network used, there are three ways to get funds to your C-Chain
 
 ### **Using Avalanche Wallet**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](.././../quickstart/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-between-the-x-chain-and-c-chain-in-the-avalanche-wallet). Wallet can be used on test and local networks, too.
 
 ### **Using Test Network Faucet**
 

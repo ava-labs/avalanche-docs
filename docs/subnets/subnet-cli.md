@@ -113,7 +113,7 @@ To get fund on this key on Fuji TestNet, follow these steps:
 
 1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network and locate your C-Chain address which starts with `0x`.
 2. Request funds from the [faucet](https://faucet.avax.network) using your C-Chain address.
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).  
+3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-between-the-x-chain-and-c-chain-in-the-avalanche-wallet)).  
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 

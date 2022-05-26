@@ -1,3 +1,12 @@
+#05/26/2022transfer-avax-between-x-ch
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain  /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+
+
 #05/24/2022
 /quickstart/avalanche-summit-fuji-quickstart/ / 301
 /quickstart/avalanche-summit-fuji-quickstart  / 301
@@ -228,12 +237,6 @@
 /build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
 /build/tutorials/platform/integrate-exchange-with-avalanche  /quickstart/exchanges/integrate-exchange-with-avalanche 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/transfer-avax-between-x-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain /quickstart/transfer-avax-between-x-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/transfer-avax-between-x-chain-and-p-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain /quickstart/transfer-avax-between-x-chain-and-p-chain 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/transfer-avax-between-p-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/transfer-avax-between-p-chain-and-c-chain 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity/ /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript/ /quickstart/sending-transactions-with-dynamic-fees-using-javascript 301
