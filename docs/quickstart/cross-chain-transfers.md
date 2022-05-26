@@ -1,4 +1,4 @@
-# Transfer AVAX Between Chains
+# Cross Chain Transfers
 
 ## Introduction
 
