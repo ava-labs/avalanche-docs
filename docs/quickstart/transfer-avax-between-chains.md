@@ -6,7 +6,7 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are  familiar with and have cloned the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
+You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with and have cloned the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
@@ -81,15 +81,14 @@ const networkID: number = 1337
 ```
 
 #### Edit the amount of AVAX you want to send:
-by default th script sets the amount to send as the wallets entire AVAX balance:
+By default the script sends the wallet's entire AVAX balance:
 
 ```js
 const balance: BN = new BN(getBalanceResponse.balance)
 const amount: BN = balance.sub(fee)
 ```
 
-Change the amount you want to send by passing the value as a string
-
+Change the amount by creating a new _BN_ variable: (```value```) and assigning it a string type value (```"10000000000000000"```) 
 ```js
   const value: BN = new BN("10000000000000000")
   const amount: BN = value.sub(fee)
@@ -106,7 +105,7 @@ Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 
 ### Step 4 - Done!
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the C-Chain. AvalancheJS will do both and show its the progress while doing so.
+A cross-chain transfer is a two-step process: first a transaction to export the funds from the X-Chain, and another to import them to the C-Chain. AvalancheJS will do both and show its progress while doing so.
 
 ![Image for post](/img/ajs-getTx.png)
 
@@ -137,11 +136,11 @@ Returns:
   ]
 }
 ```
-### Transfer from the C-Chain to X-Chain
+### Transfer from the C-Chain to the X-Chain
 
 To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
-Swap source and destination chain, by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
+Swap source and destination chains by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
 
 ```zsh
 avalanchejs $ ts-node examples/evm/buildExportTx-xchain-avax.ts
