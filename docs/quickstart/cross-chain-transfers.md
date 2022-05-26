@@ -1,14 +1,16 @@
-# Cross Chain Transfers
+# Transfer AVAX Tokens Between Chains
 
 ## Introduction
 
 This article shows how to transfer AVAX tokens programmatically between any two chains of the Primary Network.
 
+If you are looking for how to transfter AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
+
 ## Requirements
 
-You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
+You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
 
-To use AvalancheJS, can clone the repo or add it to an existing project by running the following command:
+To use AvalancheJS, you can clone the repo or add it to an existing project by running the following command:
 
 ```zsh
 $ yarn add --dev avalanche
@@ -172,4 +174,3 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ## Wrapping Up
 
 That’s it! Now, you can swap AVAX back and forth between each chain by using AvalancheJS.
-
