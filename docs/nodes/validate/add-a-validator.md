@@ -125,7 +125,7 @@ The response has your node’s ID:
 
 `startTime` and `endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter (start validating) and leave (stop validating.) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+When one issues a transaction to join the Primary Network they specify the time they will enter (start validating) and leave (stop validating.) The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 `stakeAmount`
 
