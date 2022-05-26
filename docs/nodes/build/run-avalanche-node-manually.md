@@ -19,7 +19,7 @@ If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche 
 :::
 
 :::info
-If you're interested in using a third-party service to host your node or run a validator, [check out the options](https://docs.avax.network/learn/community#blockchain-infrastructure-and-node-services).
+If you're interested in using a third-party service to host your node or run a validator, [check out the options](https://docs.avax.network/nodes/#build).
 :::
 
 This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
@@ -30,7 +30,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 
 * CPU: Equivalent of 8 AWS vCPU
 * RAM: 16 GiB
-* Storage: 512 GiB
+* Storage: 1 TB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
@@ -121,7 +121,11 @@ If you are using the pre-built binaries on Linux:
 
 When the node starts, it has to bootstrap (catch up with the rest of the network). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
-`INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
+```text
+[05-25|17:18:48.479] INFO <P Chain> snowman/transitive.go:339 consensus starting with 3CEShuttaoY46vofsZsUtrC3BdiJaNgWP9Xgud89WqwBvDVC5 as the last accepted block
+[05-25|17:18:48.482] INFO <C Chain> snowman/transitive.go:339 consensus starting with cAhvmHwAqhsw8MtbRXf3e3pzm3RnMC7Gn9uqunRHb6jzUyWab as the last accepted block
+[05-25|17:19:06.516] INFO <X Chain> avalanche/transitive.go:306 consensus starting with 1 vertices in the accepted frontier
+```
 
 To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../apis/avalanchego/apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
@@ -149,7 +153,7 @@ To be able to make API calls to your node from other machines, when starting up 
 
 #### Connect to Fuji Testnet
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax.network/)
 
 ### What Next?
 

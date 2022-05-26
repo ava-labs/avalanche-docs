@@ -25,7 +25,7 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 ## Supported APIs
 
-The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.mdx), [P-Chain](./apis/p-chain.md) and [C-Chain](./apis/c-chain.md). For a full list of available APIs see [here](./apis/README.md).
+The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md) and [C-Chain](./apis/c-chain.md). For a full list of available APIs see [here](./apis/README.md).
 
 
 :::info

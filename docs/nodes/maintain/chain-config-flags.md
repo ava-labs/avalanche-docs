@@ -8,7 +8,7 @@ Some chains allow the node operator to provide a custom configuration. Avalanche
 
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir` AvalancheGo flag, as documented [here](avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value defaults to `$HOME/.avalanchego/configs/chains`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
 
-This also applies to subnets, for example, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
+This also applies to subnets, for example, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
@@ -70,7 +70,12 @@ The default C-Chain config is:
   "offline-pruning-enabled": false,
   "offline-pruning-bloom-filter-size": 512,
   "offline-pruning-data-directory": "",
-  "max-outbound-active-requests": 8
+  "max-outbound-active-requests": 8,
+  "state-sync-enabled": false,
+  "state-sync-skip-resume": false,
+  "state-sync-min-blocks": 300000,
+  "state-sync-ids": "",
+  "state-sync-server-trie-cache": 64
 }
 ```
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change your node will remain with the old values, which might adversely affect your node operation.
@@ -416,6 +421,29 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
+
+### State Sync Settings
+
+#### `state-sync-enabled` (boolean):
+
+Set to `true` to start the C-Chain with state sync enabled. The peer will download chain state from peers up to a recent block near tip, then proceed with normal bootstrapping. Defaults to `false`.
+
+#### `state-sync-skip-resume` (boolean):
+
+If set to `true`, the chain will not resume a previously started state sync operation that did not complete. Normally, the chain should be able to resume state syncing without any issue. Defaults to `false`.
+
+#### `state-sync-min-blocks` (int):
+
+Minimum number of blocks the chain should be ahead of the local node to prefer state syncing over bootstrapping. If the node's database is already close to the chain's tip, bootstrapping is more efficient. Defaults to `300000`.
+
+#### `state-sync-ids` (string):
+
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. If not specified (or empty), peers are selected at random. Defaults to empty string.
+
+#### `state-sync-server-trie-cache` (int):
+
+Size of trie cache used for providing state sync data to peers in MBs. Should be a multiple of `64`. Defaults to `64`.
+
 ## X-Chain Configs
 
 In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json`.
@@ -439,7 +467,7 @@ The parameters are as follows:
 
 ### `index-transactions` (boolean):
 
-Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.mdx#avmgetaddresstxs).
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.md#avmgetaddresstxs).
 
 Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
 
@@ -450,6 +478,6 @@ Allows incomplete indices. Default value is `false`.
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 
 
-## Subnet Configs
+## Subnet Chain Configs
 
-As mentioned above, if a subnet's chain id is `2ebCneblahblahblah`, the config for this chain should be at `{chain-config-dir}/2ebCneblahblahblah/config.json`
+As mentioned above, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`

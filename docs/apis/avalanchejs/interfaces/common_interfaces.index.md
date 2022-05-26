@@ -19,7 +19,7 @@
 
 • **address**: *string*
 
-*Defined in [src/common/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L19)*
+*Defined in [src/common/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/interfaces.ts#L19)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **utxo**: *string*
 
-*Defined in [src/common/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L20)*
+*Defined in [src/common/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/interfaces.ts#L20)*

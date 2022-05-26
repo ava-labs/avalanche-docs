@@ -18,4 +18,4 @@
 
 • **nodeIDs**: *string[]*
 
-*Defined in [src/apis/info/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/info/interfaces.ts#L17)*
+*Defined in [src/apis/info/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/interfaces.ts#L17)*
