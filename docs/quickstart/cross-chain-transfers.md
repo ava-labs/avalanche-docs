@@ -6,7 +6,15 @@ This article shows how to transfer AVAX tokens programmatically between any two 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with and have cloned the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
+You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
+
+To use AvalancheJS, can clone the repo or add it to an existing project by running the following command:
+
+```zsh
+$ yarn add --dev avalanche
+```
+For this tutorial we will use a cli to run the example scripts directly from an AvalancheJS directory.
+
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax.network), which is a free and easy way to get to play around with Avalanche.
 
