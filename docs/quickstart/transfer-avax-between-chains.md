@@ -48,7 +48,7 @@ Select the **examples/avm** folder to view the AvalancheJS X-Chain examples. To 
 
 ![Image for post](/img/ajs-export-cchain-res.png)
 
-#### Modify your Avalanche object to match your endpoint parameters:
+#### Modify your Avalanche network configuration
 
 ```js
 const ip: string = "localhost" | "custom"
