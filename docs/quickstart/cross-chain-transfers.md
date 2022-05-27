@@ -10,7 +10,12 @@ If you are looking for how to transfter AVAX tokens using the web wallet, please
 
 You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
 
-To use AvalancheJS, you can clone the repo or add it to an existing project by running the following command:
+To use AvalancheJS, you can clone the repo:
+```zsh
+$ git clone https://github.com/ava-labs/avalanchejs.git
+```
+
+or add it to an existing project:
 
 ```zsh
 $ yarn add --dev avalanche
@@ -24,6 +29,54 @@ In order to send AVAX, you need to have some AVAX! You can get real AVAX by buyi
 ## Transferring AVAX using AvalancheJS
 
 The easiest way to transfer AVAX between chains is to use [AvalancheJS](https://github.com/ava-labs/AvalancheJS) which is a programmatic way to access and move AVAX.
+
+AvalancheJS allows you to create and sign transactions locally which is why it is the recommended way to transfer AVAX between chains. We are moving away from using AvalancheGo's keystore because it requires you to keep your keys on a full node which makes them a target for malicious hackers.
+
+You can manage private keys you use with AvalancheJS directly in the AvalancheJS directory by doing the following:
+
+Rename [``secrets.example``](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to ``secrets.json``
+
+Add your Private Key as an object
+```json
+{
+  "newPassword": "newPassword",
+  "oldPassword": "oldPassword",
+  "password": "password",
+  "token": "token",
+  "user": "user",
+  "privateKey": "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+}
+```
+
+Import your private key into your project
+```js
+import { privateKey } from "../secrets.json"
+```
+
+By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPrivateKey```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as ```privKey``` to  to sign transactions. 
+
+```js
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+```
+
+The bech32 address which derived from this private key is : ```X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p```
+
+That key is pre-funded on the local network when using Avalanche Network Runner and has the following AVAX in the genesis block/vertex of each chain on the primary subnet:
+
+- X-Chain: 300000000000000000 nAVAX
+
+- P-Chain: 30000000000000000 nAVAX
+
+- C-Chain: 50000000000000000000000000 nAVAX
+
+
+
+You can simply replace this with the imported private key:
+```js
+const privKey: string = privateKey
+```
+
+
 
 ### Step 1 - Open AvalancheJS
 
@@ -61,32 +114,97 @@ Select the **examples/avm** folder to view the AvalancheJS X-Chain examples. To 
 
 #### Modify your Avalanche network configuration
 
-If you are making calls to your Node from another machine, or started your node using [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) you might use a custom IP
+Depending on how you started your node, you might use a custom settings for your Avalanche Network
+
+_Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) to learn more about custom Node configurations_
+
+**IP Address**
+
+If you're using a local node:
 ```js
-const ip: string = "localhost" | "custom" 
+const ip: string = "localhost" 
 ```
 
+Or a custom node IP:
+```js
+const ip: string = "<YOUR-NODE-IP-HERE>" 
+```
+
+If you want to work directly with the [Avalanche Public API](../apis/avalanchego/public-api-server.md) server:
+
+Mainnet:
+```js
+const ip: string = "api.avax.network"  
+```
+
+Fuji Testnet:
+```js
+const ip: string = "api.avax-test.network" 
+```
+**Port Number**
+
+Local node:
 ```js
 const port: number = 9650
 ```
+
+Custom port:
 ```js
-const protocol: string = "http" | "https"
+const port: number = "<YOUR-NODE-PORT-HERE>"
+```
+**Protocol**
+
+Local node:
+```js
+const protocol: string = "http"
 ```
 
-Depending on the networkID which is passed in when instantiating Avalanche the encoded addresses will have a distinctive HRP per each network.
+[Avalanche Public API](../apis/avalanchego/public-api-server.md):
 ```js
-const networkID: number =
-  0: "custom"
-  1: "avax"
-  2: "cascade"
-  3: "denali"
-  4: "everest"
-  5: "fuji"
-  1337: "custom"
-  12345: "local"
+const protocol: string = "https"
+```
+
+**Network ID**
+
+Depending on the networkID which is passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
+
+_Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
+
+
+Mainnet:
+```js
+const networkID: number = 1
+  ```
+Fuji Testnet:
+```js
+const networkID: number = 5
   ```
 
-Example:
+Custom Network:
+```js
+const networkID: number = 1337
+  ```
+
+We use Bech32 to encode our addresses. Each Bech32 address is composed of the following components:
+- A Human-Readable Part (HRP).
+- The number “1” is a separator (the last digit 1 seen is considered the separator).
+- Base-32 encoded string for the data part of the address (the 20-byte address itself).
+- A 6-character base-32 encoded error correction code using the BCH algorithm.
+
+AvalancheJS has address encoding for the following networks
+
+```text
+0 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+1 - X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+2 - X-cascade19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+3 - X-denali19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+4 - X-everest19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+5 - X-fuji19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+1337 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+```
+
+Example Configuration:
 ```js
 const ip: string = "localhost"
 const port: number = 9650
@@ -95,16 +213,17 @@ const networkID: number = 5
 ```
 
 #### Edit The Amount Of AVAX You Want To Send:
+
 By default the script sends the wallet's entire AVAX balance:
+
+For this tutorial we import our [Private key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [```xKeychain```](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. This means ```X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p``` is the ```balance``` holder and will pay the fee to export AVAX. 
 
 ```js
 const balance: BN = new BN(getBalanceResponse.balance)
 const amount: BN = balance.sub(fee)
 ```
 
-
-
-Change the amount by creating a new _BN_ variable: ```value``` and assigning it a string value ```"10000000000000000"``` (.01 AVAX) 
+Change the amount by creating a new _BN_ variable: ```value``` and assigning it a string value ```"10000000000000000"``` (.01 AVAX) as an example.
 
 ```js
   const value: BN = new BN("10000000000000000")
@@ -121,6 +240,9 @@ Between X/P/C chains there is shared memory. First, tokens are exported from the
 
 To complete a transfer from the X-Chain to the C-Chain , we must run both the Export and Import scripts. 
 
+This example uses **[buildExportTx-cchain-avax.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-ant.ts)** to export AVAX from the X-Chain 
+and
+**[buildImportTx-xchain.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-cchain-ant.ts)** to import AVAX to the C-Chain
 
 ```zsh
 avalanchejs $ ts-node examples/avm/buildExportTx-cchain-avax.ts
