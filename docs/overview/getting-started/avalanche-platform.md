@@ -37,7 +37,7 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 ### Application-Specific Requirements
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](../../nodes/build/run-avalanche-node-manually.md#requirements) so that the application doesn’t suffer from low performance due to slow validators.
 
 ## Virtual Machines
 

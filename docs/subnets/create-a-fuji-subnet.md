@@ -162,7 +162,7 @@ Run the following command to:
 ```bash
 subnet-cli wizard \
 --node-ids=NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD \
---vm-genesis-path=networks/11111/genesis.json \
+--vm-genesis-path=my-genesis.json \
 --vm-id=srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy \
 --chain-name=subnetevm
 ```
@@ -176,7 +176,7 @@ use any value here, the only important thing is to make sure the binary you have
 :::info
 
 You can find an example of a genesis file to use when launching your own
-`subnet-evm` in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
+`subnet-evm` in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 :::
 

@@ -228,7 +228,7 @@ module.exports = {
 
 ### Genesis Data
 
-Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can also find it inside the `networks/11111/` folder of the `subnet-evm` repo or simply copy and paste the following data inside the `genesis.json` file of the project folder.
+Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can also find it inside the `networks/11111/` folder of the `subnet-evm` repo or simply copy and paste the following data inside the `genesis.json` file of the project folder. (Note that fields `airdropHash` and `airdropAmount` have been removed.)
 
 ```json
 {
@@ -256,8 +256,6 @@ Each blockchain has some genesis state when it’s created. Each VM defines the 
 			"blockGasCostStep": 500000
 		}
 	},
-	"airdropHash": "0xccbf8e430b30d08b5b3342208781c40b373d1b5885c1903828f367230a2568da",
-	"airdropAmount": "0x8AC7230489E80000",
 	"alloc": {
 		"d109c2fCfc7fE7AE9ccdE37529E50772053Eb7EE": {
 			"balance": "0x52B7D2DCC80CD2E4000000"

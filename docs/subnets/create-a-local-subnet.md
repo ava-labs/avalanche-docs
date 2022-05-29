@@ -1,6 +1,6 @@
 # Create an EVM Subnet on Local
 
-To learn how to develope a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
+To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
 
 ## Clone Subnet-evm 
 

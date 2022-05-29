@@ -140,7 +140,7 @@ Here is a command to create a subnet on Fuji Testnet:
 ```bash
 > subnet-cli wizard \
 --node-ids=NodeID-nBwT3MfSHA4es5o3iB5cMtkPng4eC861 \
---vm-genesis-path=networks/11111/genesis.json \
+--vm-genesis-path=my-genesis.json \
 --vm-id=kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG \
 --chain-name=bayysubnet
 ```
@@ -179,7 +179,7 @@ Ready to run wizard, should we continue?
 *--------------------------*---------------------------------------------------*
 | VM ID                    | kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG |
 *--------------------------*---------------------------------------------------*
-| VM GENESIS PATH          | networks/11111/genesis.json                       |
+| VM GENESIS PATH          | my-genesis.json                                   |
 *--------------------------*---------------------------------------------------*
 ✔ Yes, let's create! I agree to pay the fee!
 
@@ -233,7 +233,7 @@ created blockchain "2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q" (took 21
 *-------------------------*----------------------------------------------------*
 | VM ID                   | kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG  |
 *-------------------------*----------------------------------------------------*
-| VM GENESIS PATH         | networks/11111/genesis.json                        |
+| VM GENESIS PATH         | my-genesis.json                                    |
 *-------------------------*----------------------------------------------------*
 ```
 
