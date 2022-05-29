@@ -23,7 +23,7 @@ After iterating over the database and deleting any old trie nodes that it can, o
 
 In order to enable offline pruning, you need to update the C-Chain config file to include the parameters `offline-pruning-enabled` and `offline-pruning-data-directory`.
 
-The default location of the C-Chain config file is `~/.avalanchego/configs/chains/C/config.json`. You can update the directory for chain configs by passing in the directory of your choice via the CLI arg: `chain-config-dir`. For example, if you start your node with:
+The default location of the C-Chain config file is `~/.avalanchego/configs/chains/C/config.json`. **Please note that by default, this file does not exist. You would need to create it manually.** You can update the directory for chain configs by passing in the directory of your choice via the CLI arg: `chain-config-dir`. See [this](./chain-config-flags.md) for more info. For example, if you start your node with:
 
 ```
 ./build/avalanchego --chain-config-dir=/home/ubuntu/chain-configs
