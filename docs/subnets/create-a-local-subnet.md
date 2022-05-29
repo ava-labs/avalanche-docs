@@ -28,7 +28,7 @@ This will clone and checkout to `master` branch.
 
 :::info
 
-Please always check [subnet-evem repo](https://github.com/ava-labs/subnet-evm) for the latest updates.
+Please always check [subnet-evm repo](https://github.com/ava-labs/subnet-evm) for the latest updates.
  
 ::: 
 
