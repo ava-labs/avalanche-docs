@@ -21,6 +21,13 @@ Example JSON config file:
 }
 ```
 
+:::tip
+
+[Install Script](../build/set-up-node-with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you would need to create it manually if needed.
+
+:::
+
+
 #### `--config-file-content` (string):
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
