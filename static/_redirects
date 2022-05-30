@@ -1,3 +1,8 @@
+#05/30/2022
+/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
+/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
+
+
 #05/24/2022
 /quickstart/avalanche-summit-fuji-quickstart/ / 301
 /quickstart/avalanche-summit-fuji-quickstart  / 301
@@ -121,8 +126,8 @@
 /build/tutorials/platform/subnets/create-evm-blockchain  /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm/ /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm  /subnets/create-a-virtual-machine-vm 301
-/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-custom-blockchain 301
-/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-custom-blockchain 301
+/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
+/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
 /build/tutorials/platform/subnets/spaces/ /subnets/spaces 301
 /build/tutorials/platform/subnets/spaces  /subnets/spaces 301
 /build/tutorials/platform/subnets/wagmi/ /subnets/wagmi 301
@@ -287,7 +292,7 @@
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.1.1/build/getting-started /  301
 /v/v1.1.1/nodes-and-staking /nodes-and-staking  301
-/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
+/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /subnets/create-a-fuji-subnet  301
 /v1.0/en/api/keystore/ /apis/avalanchego/apis/keystore-api  301
 /v1.0/en/references/command-line-interface/ /build/references/command-line-interface  301
 /v1.0/en/tools/avalanche.js/api/classes/utils_base58.base58/ /build/tools/avalanchejs/api  301

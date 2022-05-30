@@ -70,11 +70,9 @@ subnet-cli wizard \
 --vm-id=tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH \
 --chain-name=test
 ```
-:::info
-We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
-:::
-
 :::tip
+We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
+
 
 Make sure you've downloaded the latest version of the
 [Avalanche Ledger App](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)!
