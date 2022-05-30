@@ -97,9 +97,9 @@ You can also integrate a new Subnet on the live [faucet](https://faucet.avax.net
 * **CHAINID** - Chain ID of the chain
 * **EXPLORER** - Base URL of standard explorer's website.
 * **IMAGE** - URL of the icon of the chain that will be shown in the dropdown.
-* **MAX_PRIORITY_FEE** - Maximum tip per faucet drop (for EIP1559 supported chains)
-* **MAX_FEE** - Maximum fee that can be paid for a faucet drop
-* **DRIP_AMOUNT** - Amount of coins to send per request
+* **MAX_PRIORITY_FEE** - Maximum tip per faucet drop in **wei** or **10<sup>-18</sup>** unit (for EIP1559 supported chains)
+* **MAX_FEE** - Maximum fee that can be paid for a faucet drop in **wei** or **10<sup>-18</sup>** unit
+* **DRIP_AMOUNT** - Amount of coins to send per request in **gwei** or **10<sup>-9</sup>** unit
 * **RECALIBRATE** *(optional)* - Number of seconds after which the nonce and balance will recalibrate
 * **RATELIMIT** - Number of times (MAX_LIMIT) to allow per user within the WINDOW_SIZE (in minutes)
 
