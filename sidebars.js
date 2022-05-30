@@ -47,6 +47,7 @@ const sidebars = {
     'quickstart/README',
     'quickstart/create-a-local-test-network',
     'quickstart/fund-a-local-test-network',
+    'quickstart/avalanche-faucet',
     'quickstart/fuji-workflow',
     'quickstart/transfer-avax-between-x-chain-and-c-chain',
     'quickstart/transfer-avax-between-x-chain-and-p-chain',

@@ -4,8 +4,8 @@
 | :--- | :--- |
 | [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
 | [**Fund a Local Test Network**](fund-a-local-test-network.md) | Fund an address on a local Avalanche test network. |
+| [**Avalanche Faucet**](avalanche-faucet.md) | Get free test coins or build, deploy and integrate Subnet Faucet with Avalanche |
 | [**Fuji Workflow**](fuji-workflow.md) | Avalanche Fuji Workflow. |
-| [**Avalanche Faucet**](avalanche-faucet.md) | Build, Deploy or Integrate Subnet Faucet with Avalanche |
 | [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
 | [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
 | [**Transfer AVAX Between the P-Chain and C-Chain**](transfer-avax-between-p-chain-and-c-chain.md) | Send AVAX between the P-Chain and C-Chain |
