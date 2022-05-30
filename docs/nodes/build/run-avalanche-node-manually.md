@@ -19,7 +19,7 @@ If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche 
 :::
 
 :::info
-If you're interested in using a third-party service to host your node or run a validator, [check out the options](https://docs.avax.network/nodes/#build).
+If you're interested in using a third-party service to host your node or run a validator, [check out the options](../build/).
 :::
 
 This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
