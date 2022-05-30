@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](https://docs.avax.network/build/tools/network-runner) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](../quickstart/network-runner.md) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
 
 In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
 
@@ -25,7 +25,7 @@ In this tutorial, we’ll go through an example Fuji workflow to show how it can
 
 ## Generate a Mnemonic
 
-To begin, we'll create a mnemonic phrase with [AvalancheJS](https://docs.avax.network/build/tools/avalanchejs). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portugese, Chinese Simplified and Chinese Traditional.
+To begin, we'll create a mnemonic phrase with [AvalancheJS](../apis/avalanchejs/README.md). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portugese, Chinese Simplified and Chinese Traditional.
 
 First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
 
@@ -221,7 +221,7 @@ The Avalanche Explorer allows you to explore the network on [Mainnet](https://ex
 
 ### Public API
 
-See [here.](https://docs.avax.network/build/tools/public-api-server)
+See [here.](../apis/avalanchego/public-api-server.md)
 
 ### AvalancheJS Examples
 
