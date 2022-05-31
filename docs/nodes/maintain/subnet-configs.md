@@ -8,7 +8,7 @@ decription: In this doc, learn how to run offline pruning on your node to reduce
 
 It is possible to provide parameters for a subnet. Parameters here apply to all chains in the specified subnet. 
 
-AvalancheGo looks for files specified with `{subnetID}.json` under `--subnet-config-dir` as documented [here](./avalanchego-config-flags.md#subnet-configs). AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](./avalanchego-config-flags.md#whitelisted-subnets-string).
+AvalancheGo looks for files specified with `{subnetID}.json` under `--subnet-config-dir` as documented [here](./avalanchego-config-flags.md#subnet-configs). 
 
 
 Here is an example of subnet config file:
