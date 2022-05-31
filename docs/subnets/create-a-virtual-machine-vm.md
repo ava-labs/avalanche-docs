@@ -1240,7 +1240,7 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](create-custom-blockchain.md#interact-with-the-new-blockchain).
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. 
 
 #### timestampvm.getBlock
 
@@ -1528,4 +1528,3 @@ In this tutorial, we learned:
 * The `rpcchainvm` type, which allows blockchains to run in their own processes.
 * An actual implementation of `block.ChainVM` and `snowman.Block`.
 
-Now we can create a new blockchain with this custom virtual machine by following [this](create-custom-blockchain.md).

@@ -91,7 +91,6 @@ const sidebars = {
     'subnets/subnet-cli',
     'subnets/customize-a-subnet',
     'subnets/create-a-virtual-machine-vm',
-    'subnets/create-custom-blockchain',
     'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
     'subnets/deploy-a-smart-contract-on-your-evm',
     'subnets/deploying-cross-chain-evm-bridge',
