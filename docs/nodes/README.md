@@ -25,6 +25,7 @@ This section provides documents on how to build and maintain an AvalancheGo node
 | [**Grafana Dashboards**](./maintain/grafana-dashboards.md) | Pre-configured Grafana dashboards |
 | [**AvalancheGo Config and Flags**](./maintain/avalanchego-config-flags.md) |  Configuration and flags for an Avalanche node  |
 | [**Chain Configs**](./maintain/chain-config-flags.md) | Chain specific configurations |
+| [**Subnet Configs**](./maintain/subnet-configs.md) | Subnet specific configurations |
 | [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md) | C-Chain offline pruning |
 
 ## Validate
