@@ -53,7 +53,7 @@ Import your private key into your project
 import { privateKey } from "../secrets.json"
 ```
 
-By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPrivateKey```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as ```privKey``` to  to sign transactions. 
+By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPrivateKey```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as ```privKey``` to sign transactions. 
 
 ```js
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
