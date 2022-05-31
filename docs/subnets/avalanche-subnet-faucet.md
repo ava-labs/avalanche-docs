@@ -58,7 +58,7 @@ You can also integrate a new Subnet on the live [faucet](https://faucet.avax.net
 
 Add the configuration in the array of `evmchains` inside the [config.json](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) file and make a PR.
 
-## Building and Deploying Faucet
+## Building and Deploying a Faucet
 
 You can also deploy and build your faucet by using the [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) repository.
 
