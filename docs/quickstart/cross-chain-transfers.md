@@ -23,7 +23,7 @@ $ yarn add --dev avalanche
 For this tutorial we will use a cli to run the example scripts directly from an AvalancheJS directory.
 
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax.network), which is a free and easy way to get to play around with Avalanche.
+In order to send AVAX, you need to have some AVAX!  You can use a pre-funded account on local network or get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax.network), which is a free and easy way to get to play around with Avalanche. After getting comfortable with your code, you can run the code on Mainnet by making necessary changes. 
 
 
 ## Transferring AVAX using AvalancheJS
