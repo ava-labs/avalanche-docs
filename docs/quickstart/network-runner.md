@@ -37,7 +37,7 @@ Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you ru
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-AVALANCHEGO_EXEC_PATH="avalanchego"
+AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
 ```
 
 Unless otherwise specified, file paths given below are relative to the root of this repository. 
