@@ -1121,7 +1121,7 @@ This patch:
 
 **Apricot Phase 2 - Patch 5 - DB Upgrade**
 
-**This upgrade is more involved than the typical version update.**.\*\*
+**This upgrade is more involved than the typical version update.**
 
 :::caution
 This update is backwards compatible. It is optional, but encouraged. The patch includes significant performance improvements and numerous other updates.
