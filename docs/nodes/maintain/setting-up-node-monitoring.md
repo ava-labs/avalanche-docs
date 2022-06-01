@@ -108,6 +108,7 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z ca
 Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
 
+
 Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 :::warning

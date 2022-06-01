@@ -5,7 +5,11 @@ sidebar_position: 4
 
 # Contract Chain (C-Chain) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
+
+:::info
+Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the [C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
+
+:::
 
 ## Deploying a Smart Contract
 
@@ -50,7 +54,11 @@ For example, to interact with the C-Chain's Ethereum APIs via websocket on local
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-Note: on localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+:::tip
+
+On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+:::
+
 
 To interact with other instances of the EVM via the websocket endpoint:
 
@@ -77,7 +85,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 :::info
 
-Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
+For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
 
 :::
 
@@ -761,7 +769,7 @@ curl -X POST --data '{
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../../nodes/maintain/chain-config-flags.md#c-chain-configs) `--coreth-admin-api-enabled:true`.
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [C-Chain config flag `--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean) .
 
 ### Endpoint
 
