@@ -11,7 +11,7 @@ The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-t
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
 :::danger
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [AvalancheGO API](../../apis/avalanchego/apis/README.md) or ask for help on [Discord.](https://chat.avalabs.org/)
 :::
 
 ## Requirements
@@ -40,11 +40,11 @@ The response has your node’s ID:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+  },
+  "id": 1
 }
 ```
 
@@ -115,17 +115,17 @@ The response has your node’s ID:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji"
+  },
+  "id": 1
 }
 ```
 
 `startTime` and `endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter (start validating) and leave (stop validating.) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+When one issues a transaction to join the Primary Network they specify the time they will enter (start validating) and leave (stop validating.) The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 `stakeAmount`
 
@@ -174,12 +174,12 @@ The response has the transaction ID, as well as the address the change went to.
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "6pb3mthunogehapzqmubmx6n38ii3lzytvdrxumovwkqftzls",
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "6pb3mthunogehapzqmubmx6n38ii3lzytvdrxumovwkqftzls",
+    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
+  },
+  "id": 1
 }
 ```
 
@@ -211,20 +211,19 @@ The response should include the node we just added:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "validators": [
-            {
-                "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
-                "startTime": "1584021450",
-                "endtime": "1584121156",
-                "stakeAmount": "2000000000000"
-            }
-        ]
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "validators": [
+      {
+        "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
+        "startTime": "1584021450",
+        "endtime": "1584121156",
+        "stakeAmount": "2000000000000"
+      }
+    ]
+  },
+  "id": 1
 }
 ```
 
 When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
-

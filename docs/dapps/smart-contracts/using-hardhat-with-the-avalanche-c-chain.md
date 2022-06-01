@@ -26,7 +26,7 @@ npm install -g yarn
 
 ### Solidity and Avalanche
 
-It is also helpful to have a basic understanding of [Solidity](https://docs.soliditylang.org) and [Avalanche](https://docs.avax.network).
+It is also helpful to have a basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
 
 ## Dependencies
 

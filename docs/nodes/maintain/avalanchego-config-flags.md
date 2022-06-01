@@ -21,6 +21,12 @@ Example JSON config file:
 }
 ```
 
+:::tip
+
+[Install Script](../build/set-up-node-with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you would need to create it manually if needed.
+
+:::
+
 #### `--config-file-content` (string):
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
@@ -73,7 +79,7 @@ Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. T
 
 #### `--http-shutdown-timeout` (duration):
 
-Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
+Maximum duration to wait for existing connections to complete during node shutdown. Defaults to `10s`.
 
 ## Assertions
 
@@ -89,11 +95,11 @@ Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
 
 #### `--bootstrap-ids` (string):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
+Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
 
 #### `--bootstrap-ips` (string):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
+Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
 
 #### `--bootstrap-retry-enabled` (boolean):
 
@@ -110,6 +116,16 @@ Max number of containers in an Ancestors message sent by this node. Defaults to 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+
+## State Syncing
+
+#### `--state-sync-ids` (string):
+
+State sync IDs is a comma-separated list of validator IDs. The specified validators will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--state-sync-ips`. The default value is empty, which results in all validators being sampled.
+
+#### `--state-sync-ips` (string):
+
+State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be the same with the number of given `--state-sync-ids`.
 
 ## Chain Configs
 
@@ -278,9 +294,9 @@ When specifying a log level note that all logs with the specified priority or hi
 
 The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
 
-#### `--log-display-highlight` (string, `{auto, plain, colors}`):
+#### `--log-format` (string, `{auto, plain, colors, json}`):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+The structure of log format. Defaults to `auto` which formats terminal-like logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
 
 #### `--log-dir` (string, file path):
 
@@ -289,6 +305,22 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 #### `--log-disable-display-plugin-logs` (boolean):
 
 Disables displaying plugin logs in stdout. Defaults to `false`.
+
+#### `--log-rotater-max-size` (uint):
+
+The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
+
+#### `--log-rotater-max-files` (uint):
+
+The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
+
+#### `--log-rotater-max-age` (uint):
+
+The maximum number of days to retain old log files based on the timestamp encoded in their filename. 0 means retain all old log files. Defaults to `0`.
+
+#### `--log-rotater-compress-enabled` (boolean):
+
+Enables the compression of rotated log files through gzip. Defaults to `false`.
 
 ## Network ID
 
@@ -366,7 +398,9 @@ Comma separated list of subnet IDs that this node would validate if added to. De
 
 ### Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
+
+Full reference for all configuration options for a subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
 
 #### `--subnet-config-dir` (string):
 
@@ -385,55 +419,15 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 }
 ```
 
+:::tip
+
+By default, none of these directories and/or files exist. You would need to create them manually if needed.
+
+:::
+
 #### `--subnet-config-content` (string):
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
-
-#### Parameters
-
-##### `validatorOnly` (bool):
-
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. 
-
-Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
-
-Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
-
-Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
-
-
-##### Consensus Parameters
-
-Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
-
-| CLI Key                          | JSON Key              |
-| :------------------------------- | :-------------------- |
-| --snow-sample-size               | k                     |
-| --snow-quorum-size               | alpha                 |
-| --snow-virtuous-commit-threshold | betaVirtuous          |
-| --snow-rogue-commit-threshold    | betaRogue             |
-| --snow-concurrent-repolls        | concurrentRepolls     |
-| --snow-optimal-processing        | optimalProcessing     |
-| --snow-max-processing            | maxOutstandingItems   |
-| --snow-max-time-processing       | maxItemProcessingTime |
-| --snow-avalanche-batch-size      | batchSize             |
-| --snow-avalanche-num-parents     | parentSize            |
-
-##### Gossip Configs
-
-It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
-
-| CLI Key                                                 | JSON Key                               |
-| :------------------------------------------------------ | :------------------------------------- |
-| --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
-| --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
-| --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |
-| --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
-| --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
-| --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
-| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
-| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
-| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a subnet.
 
 ## Version
 
@@ -606,17 +600,25 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
 
-### `snow-optimal-processing` (int):
+#### `snow-optimal-processing` (int):
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-### `snow-max-processing` (int):
+#### `snow-max-processing` (int):
 
 Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
 
-### `snow-max-time-processing` (duration):
+#### `snow-max-time-processing` (duration):
 
 Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
+
+#### `snow-mixed-query-num-push-vdr` (uint):
+
+If this node is a validator, when a container is inserted into consensus, send a Push Query to this many validators and a Pull Query to the others. Must be <= k. Defaults to `10`.
+
+#### `snow-mixed-query-num-push-non-vdr` (uint):
+
+fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
 
 ### Continuous Profiling
 
@@ -660,7 +662,7 @@ If true, compress certain messages sent to peers to reduce bandwidth usage.
 
 #### `--network-initial-timeout` (duration):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
 
 #### `--network-initial-reconnect-delay` (duration):
 
@@ -672,11 +674,11 @@ Maximum delay duration must be waited before attempting to reconnect a peer. Def
 
 #### `--network-minimum-timeout` (duration):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
+Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
 
 #### `--network-maximum-timeout` (duration):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
 
 #### `--network-maximum-inbound-timeout` (duration):
 
@@ -738,41 +740,85 @@ Timeout while dialing a peer.
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
-#### `--throttler-inbound-bandwidth-refill-rate` (uint):
+#### CPU based
+
+Rate-limiting based on how much CPU usage a peer causes.
+
+##### `cpu-tracker-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to `15s`.
+
+##### `throttler-inbound-cpu-validator-alloc` (float):
+
+Number of CPU allocated for use by validators. Value should be in range (0, total core count].
+Defaults to half of the number of CPUs on the machine.
+
+##### `--throttler-inbound-cpu-at-large-alloc` (float):
+
+Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
+Defaults to half of the number of CPUs on the machine.
+See also `--throttler-inbound-cpu-node-max-at-large-portion`.
+
+##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
+
+The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+
+##### `throttler-inbound-cpu-max-recheck-delay` (duration):
+
+In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level. Defaults to `5s`.
+
+#### Bandwidth based
+
+Rate-limiting based on the bandwidth a peer uses.
+
+##### `--throttler-inbound-bandwidth-refill-rate` (uint):
 
 Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
 
-#### `--throttler-inbound-bandwidth-max-burst-size` (uint):
+##### `--throttler-inbound-bandwidth-max-burst-size` (uint):
 
 Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
 
-#### `--throttler-inbound-at-large-alloc-size` (uint):
+#### Message size based
+
+Rate-limiting based on the total size, in bytes, of unprocessed messages.
+
+##### `--throttler-inbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
 
-#### `--throttler-inbound-validator-alloc-size` (uint):
+##### `--throttler-inbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-inbound-node-max-at-large-bytes` (uint):
+##### `--throttler-inbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` (2 MiB).
 
-#### `--throttler-inbound-node-max-processing-msgs` (uint):
+#### Message based
+
+Rate-limiting based on the number of unprocessed messages.
+
+##### `--throttler-inbound-node-max-processing-msgs` (uint):
 
 Node will stop reading messages from a peer when it is processing this many messages from the peer.
 Will resume reading messages from the peer when it is processing less than this many messages.
 Defaults to `1024`.
 
-#### `--throttler-outbound-at-large-alloc-size` (uint):
+#### Outbound
+
+Rate-limiting for outbound messages.
+
+##### `--throttler-outbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
 
-#### `--throttler-outbound-validator-alloc-size` (uint):
+##### `--throttler-outbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-outbound-node-max-at-large-bytes` (uint):
+##### `--throttler-outbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
 

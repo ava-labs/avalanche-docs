@@ -735,7 +735,7 @@ Let's discuss the arguments of `createInputsAndOutputs()` in detail -
 * **fee** - Fee for this transaction to be consumed in inputs
 * **sourceChain** - Chain from which UTXOs will be fetched. Will take `chainID` as default.
 
-In the above parameters, if `fee` is less than the fees actually required for that transaction, then there will be no surplus amount left by outputs over inputs because any surplus will be converted into a change output. This can cause transaction failure. So keep the fees in accordance with the transaction as mentioned [here](https://docs.avax.network/learn/platform-overview/transaction-fees/#fee-schedule).
+In the above parameters, if `fee` is less than the fees actually required for that transaction, then there will be no surplus amount left by outputs over inputs because any surplus will be converted into a change output. This can cause transaction failure. So keep the fees in accordance with the transaction as mentioned [here](../quickstart/transaction-fees.md#fee-schedule).
 
 Also, the `sourceChain` parameter is required for fetching exported UTXOs that do not exist yet on the destination chain. For non-export/import transactions, this parameter is not required.
 

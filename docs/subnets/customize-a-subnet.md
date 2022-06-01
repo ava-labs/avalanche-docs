@@ -4,48 +4,23 @@ Description: How to customize a subnet by utilizing Genesis, Precompile and Bloc
 
 # Customize a Subnet
 
-All subnets can be customized by utilizing `Subnet Configs`.
+All subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 And a subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
-* Genesis
-* Precompile
-* Chain Configs 
+
+- Genesis
+- Precompile
+- Chain Configs
 
 ## Subnet Configs
 
-Parameters for Subnet Configs must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
-
-Parameters specified in the Subnet Configs apply to all chains in the specified subnet.  They are are chain-agnostic, not just for EVM Subnet. 
-
 A subnet can customized by setting parameters for the following:
 
-* [Validator-only communication to create a private subnet](../nodes/maintain/avalanchego-config-flags#validatoronly-bool)
-* [Consensus](../nodes/maintain/avalanchego-config-flags#consensus-parameters) 
-* [Gossip](../nodes/maintain/avalanchego-config-flags#gossip-configs) 
+- [Validator-only communication to create a private subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
+- [Consensus](../nodes/maintain/subnet-configs.md#consensus-parameters)
+- [Gossip](../nodes/maintain/subnet-configs.md#gossip-configs)
 
-Here is an example config file:
-
-```json
-{
-  "validatorOnly": false,
-  "consensusParameters": {
-    "k": 25,
-    "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
-}
-```
-
-### Private Subnet
-
-Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
-
-Subnet validators can choose not to publish contents of blockchains via its configuration. If a node sets [`validatorOnly`](../nodes/maintain/avalanchego-config-flags#validatoronly-bool) to true in its subnet configs, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
-
-:::tip
-This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
-:::
-
+See [here](../nodes/maintain/subnet-configs.md) for more info.
 
 ## Genesis
 
@@ -100,7 +75,7 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 ### Chain Config
 
-`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly. 
+`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly.
 
 #### Hardforks
 
@@ -132,27 +107,24 @@ See section [Setting a Custom Fee Recipient](#setting-a-custom-fee-recipient)
 
 See section [Setting the Genesis Allocation](#setting-the-genesis-allocation)
 
-
 ### Header
 
 The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`, `number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis header fields.
 
 ### Examples
 
-Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
-
+Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 Here are a few examples on how a genesis file is used:
-* [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
-* [subnet-cli](./subnet-cli.md#subnet-cli-create-blockchain)
 
+- [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
+- [subnet-cli](./subnet-cli.md#subnet-cli-create-blockchain)
 
 ### Setting the Genesis Allocation
 
-
 Alloc defines addresses and their initial balances. This should be changed accordingly for each chain. If you don't
 provide any genesis allocation, you won't be able to interact with your new
-chain (all transactions require a fee to be paid from the sender's balance). 
+chain (all transactions require a fee to be paid from the sender's balance).
 
 The `alloc` field expects key-value pairs. Keys of each entry must be a valid `address`. The `balance` field in the value can be either a `hexadecimal` or `number` to indicate initial balance of the address. The default value contains `8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` with `50000000000000000000000000` balance in it. Default:
 
@@ -163,7 +135,6 @@ The `alloc` field expects key-value pairs. Keys of each entry must be a valid `a
     }
   }
 ```
-
 
 To specify a different genesis allocation, populate the `alloc` field in the genesis JSON as follows:
 
@@ -206,9 +177,9 @@ genesis file (under the `"config"` key):
 }
 ```
 
-#### Fee Recipient 
+#### Fee Recipient
 
-With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They need to update their EVM   [chain config](#fee-recipient-1) with the following to specify where the fee should be sent to.
+With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They need to update their EVM [chain config](#fee-recipient-1) with the following to specify where the fee should be sent to.
 
 ```json
 {
@@ -216,13 +187,11 @@ With `allowFeeRecipients` enabled, your validators can specify their addresses t
 }
 ```
 
-
 :::warning
 
 If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
-
 
 ## Precompiles
 
@@ -236,7 +205,6 @@ subnet, you can provide an `AllowList` configuration in your genesis file:
 ```json
 {
   "config": {
-    
     "contractDeployerAllowListConfig": {
       "blockTimestamp": 0,
       "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
@@ -293,13 +261,15 @@ If you call `readAllowList(addr)` then you can read the current role of `addr`, 
 WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
 
 ### Restricting Who Can Submit Transactions
+
 Similar to restricting contract deployers, this precompile restricts which addresses may submit transactions on chain. Like the previous section, you can activate the precompile by including an `AllowList` configuration in your genesis file:
+
 ```json
 {
   "config": {
     "txAllowListConfig": {
       "blockTimestamp": 0,
-      "adminAddresses":["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   }
 }
@@ -398,15 +368,11 @@ _Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used t
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
-
-
 ## Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-
 For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
-
 
 ### Priority Regossip
 
@@ -440,7 +406,7 @@ You can override these defaults with the following config:
 
 This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) to specify where the fees should be sent to.
 
-With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees. 
+With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
 
 ```json
 {
@@ -448,12 +414,8 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 }
 ```
 
-
 :::warning
 
 If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
-
-
-

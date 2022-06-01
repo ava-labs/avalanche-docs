@@ -5,7 +5,10 @@ sidebar_position: 4
 
 # Contract Chain (C-Chain) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
+:::info
+Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the [C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
+
+:::
 
 ## Deploying a Smart Contract
 
@@ -37,7 +40,6 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
-
 To interact with C-Chain via the websocket endpoint:
 
 ```
@@ -50,7 +52,10 @@ For example, to interact with the C-Chain's Ethereum APIs via websocket on local
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-Note: on localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+:::tip
+
+On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+:::
 
 To interact with other instances of the EVM via the websocket endpoint:
 
@@ -66,18 +71,18 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 Avalanche offers an API interface identical to Geth's API except that it only supports the following services:
 
-* `web3_`
-* `net_`
-* `eth_`
-* `personal_`
-* `txpool_`
-* `debug_` (note: this is turned off on the public api node.)
+- `web3_`
+- `net_`
+- `eth_`
+- `personal_`
+- `txpool_`
+- `debug_` (note: this is turned off on the public api node.)
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
 :::info
 
-Note: For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
+For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
 
 :::
 
@@ -95,9 +100,9 @@ eth_getAssetBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `blk` is the block number or hash at which to retrieve the balance
-* `assetID` id of the asset for which the balance is requested
+- `address` owner of the asset
+- `blk` is the block number or hash at which to retrieve the balance
+- `assetID` id of the asset for which the balance is requested
 
 **Example Call**
 
@@ -118,9 +123,9 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x1388"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x1388"
 }
 ```
 
@@ -151,9 +156,9 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x34630b8a00"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x34630b8a00"
 }
 ```
 
@@ -184,9 +189,9 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x2540be400"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x2540be400"
 }
 ```
 
@@ -227,14 +232,14 @@ avax.getAtomicTx({
 
 **Request**
 
-* `txID` is the transacion ID. It should be in cb58 format.
-* `encoding` is the encoding format to use. Can be either `cb58` or `hex`. Defaults to `cb58`.
+- `txID` is the transacion ID. It should be in cb58 format.
+- `encoding` is the encoding format to use. Can be either `cb58` or `hex`. Defaults to `cb58`.
 
 **Response**
 
-* `tx` is the transaction encoded to `encoding`.
-* `encoding` is the `encoding`.
-* `blockHeight` is the height of the block which the transaction was included in.
+- `tx` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+- `blockHeight` is the height of the block which the transaction was included in.
 
 #### Example Call
 
@@ -254,13 +259,13 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "tx": "111111115k3oJsP1JGxvsZPFh1WXzSYNVDtvgvZ4qDWtAs5ccogA1RtT3Me5x8xgkj7cyxaNGEHuMv5U34qo94fnvHweLeSRf31ggt3MoD7MHSDw6LbiXeaJa3uwBDHzd6tPxw17478X13Ff7DkHtbWYYx2WTcJYk4nVP2swCHjBE3uQjmu6RdhtgZCxvnD6YVpEsXqvam6cDzpf5BLaosYCSt5p8SmLU2ppaSb6DPA4EW4679ygUxiDNP3SFagjUvzSrfBJRFCzsan4ZJqH8haYqpJL42TUN4q3eFKvscZfp2v2WWEEwJYmJP4Nc1P7wndeMxPFEm3vjkBaVUZ5k25TpYtghq6Kx897dVNaMSsTAoudwqTR1cCUGiR3bLfi82MgnvuApsYqtRfaD9deSHc8UA1ohPehkj9eaY",
-        "encoding": "cb58",
-        "blockHeight": "1"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": "111111115k3oJsP1JGxvsZPFh1WXzSYNVDtvgvZ4qDWtAs5ccogA1RtT3Me5x8xgkj7cyxaNGEHuMv5U34qo94fnvHweLeSRf31ggt3MoD7MHSDw6LbiXeaJa3uwBDHzd6tPxw17478X13Ff7DkHtbWYYx2WTcJYk4nVP2swCHjBE3uQjmu6RdhtgZCxvnD6YVpEsXqvam6cDzpf5BLaosYCSt5p8SmLU2ppaSb6DPA4EW4679ygUxiDNP3SFagjUvzSrfBJRFCzsan4ZJqH8haYqpJL42TUN4q3eFKvscZfp2v2WWEEwJYmJP4Nc1P7wndeMxPFEm3vjkBaVUZ5k25TpYtghq6Kx897dVNaMSsTAoudwqTR1cCUGiR3bLfi82MgnvuApsYqtRfaD9deSHc8UA1ohPehkj9eaY",
+    "encoding": "cb58",
+    "blockHeight": "1"
+  },
+  "id": 1
 }
 ```
 
@@ -281,12 +286,12 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain or P-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
-* `username` is the user that controls the address that transaction will be sent from.
-* `password` is `username`‘s password.
+- `to` is the X-Chain or P-Chain address the asset is sent to.
+- `amount` is the amount of the asset to send.
+- `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
+- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
+- `username` is the user that controls the address that transaction will be sent from.
+- `password` is `username`‘s password.
 
 #### Example Call
 
@@ -309,11 +314,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2W5JuFENitZKTpJsy9igBpTcEeBKxBHHGAUkgsSUnkjVVGQ9i8"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2W5JuFENitZKTpJsy9igBpTcEeBKxBHHGAUkgsSUnkjVVGQ9i8"
+  },
+  "id": 1
 }
 ```
 
@@ -337,15 +342,15 @@ avax.exportAVAX({
 
 **Request**
 
-* `to` is X-Chain or P-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
-* `username` is the user that controls the address that transaction will be sent from.
-* `password` is `username`‘s password.
+- `to` is X-Chain or P-Chain address the asset is sent to.
+- `amount` is the amount of the asset to send.
+- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
+- `username` is the user that controls the address that transaction will be sent from.
+- `password` is `username`‘s password.
 
 **Response**
 
-* `txID` is the txid of the completed ExportTx.
+- `txID` is the txid of the completed ExportTx.
 
 #### Example Call
 
@@ -369,11 +374,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2ffcxdkiKXXA4JdyRoS38dd7zoThkapNPeZuGPmmLBbiuBBHDa"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2ffcxdkiKXXA4JdyRoS38dd7zoThkapNPeZuGPmmLBbiuBBHDa"
+  },
+  "id": 1
 }
 ```
 
@@ -393,13 +398,13 @@ avax.exportKey({
 
 **Request**
 
-* `username` must control `address`.
-* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+- `username` must control `address`.
+- `address` is the address for which you want to export the corresponding private key. It should be in hex format.
 
 **Response**
 
-* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+- `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
+- `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
 
 #### Example Call
 
@@ -458,13 +463,13 @@ avax.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
+- `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
+- At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
+- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+- `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example**
 
@@ -491,21 +496,21 @@ This gives response:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "numFetched": "3",
-        "utxos": [
-            "11QEQTor9xZ1TyCyq8aFVShdP7YjM1ug9KuPUuMpgvQVz5qjEzo244NbJomjciNUPqUr1cD455dXhVrVNopnMXTQrTFY5kqrEVAQ3Ng9AnapQrYVEYiWc32F5CQuD3N5sB1EhQmMdJr5pis1QLjMmRQmut7Maafwup1vEU",
-            "11Eo6c9iUz3ERtmHbdUb3nzzMaqFffFQStshEsSTiFQP5xqfmeaeCFHCBajmoJUdQRHtkChGAmPucDfuCyBAEyGmmv2w8b7dX5sATxV7HxHZE4eak14GMGVEr7v3ij1B8mE82cymTJJz1X3PpRk2pTaxwEnLWfh1aAiTFC",
-            "118mpEHsia5sYYvKUx4j56mA7i1yvmLNyynm7LcmehcJJwMVY65smT4kGQgyc9DULwuaLTrUcsqbQutCdajoJXBdPVqvHMkYBTYQKs7WSmTXH8v7iUVqZfphMnS7VxVjGU1zykeTnbuAoZt4cFMUJzd8JaZk5eC82zmLmT"
-        ],
-        "endIndex": {
-            "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-            "utxo": "27q6nsuvtyT4mvXVnQQAXw1YKoTxCow5Qm91GZ678TU1SvUiC2"
-        },
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "3",
+    "utxos": [
+      "11QEQTor9xZ1TyCyq8aFVShdP7YjM1ug9KuPUuMpgvQVz5qjEzo244NbJomjciNUPqUr1cD455dXhVrVNopnMXTQrTFY5kqrEVAQ3Ng9AnapQrYVEYiWc32F5CQuD3N5sB1EhQmMdJr5pis1QLjMmRQmut7Maafwup1vEU",
+      "11Eo6c9iUz3ERtmHbdUb3nzzMaqFffFQStshEsSTiFQP5xqfmeaeCFHCBajmoJUdQRHtkChGAmPucDfuCyBAEyGmmv2w8b7dX5sATxV7HxHZE4eak14GMGVEr7v3ij1B8mE82cymTJJz1X3PpRk2pTaxwEnLWfh1aAiTFC",
+      "118mpEHsia5sYYvKUx4j56mA7i1yvmLNyynm7LcmehcJJwMVY65smT4kGQgyc9DULwuaLTrUcsqbQutCdajoJXBdPVqvHMkYBTYQKs7WSmTXH8v7iUVqZfphMnS7VxVjGU1zykeTnbuAoZt4cFMUJzd8JaZk5eC82zmLmT"
+    ],
+    "endIndex": {
+      "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+      "utxo": "27q6nsuvtyT4mvXVnQQAXw1YKoTxCow5Qm91GZ678TU1SvUiC2"
     },
-    "id": 1
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -527,15 +532,15 @@ avax.import({
 
 **Request**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the X-Chain's or P-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
-* `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
-* `username` is the user that controls the address that transaction will be sent from.
-* `password` is `username`‘s password.
+- `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the X-Chain's or P-Chain's `export`.
+- `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
+- `username` is the user that controls the address that transaction will be sent from.
+- `password` is `username`‘s password.
 
 **Response**
 
-* `txID` is the ID of the completed ImportTx.
+- `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
@@ -557,11 +562,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "6bJq9dbqhiQvoshT3uSUbg9oB24n7Ei6MLnxvrdmao78oHR9t"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "6bJq9dbqhiQvoshT3uSUbg9oB24n7Ei6MLnxvrdmao78oHR9t"
+  },
+  "id": 1
 }
 ```
 
@@ -585,15 +590,15 @@ avax.importAVAX({
 
 **Request**
 
-* `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
-* `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
-* `username` is the user that controls the address that transaction will be sent from.
-* `password` is `username`‘s password.
+- `to` is the address the AVAX is sent to. It should be in hex format.
+- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
+- `username` is the user that controls the address that transaction will be sent from.
+- `password` is `username`‘s password.
 
 **Response**
 
-* `txID` is the ID of the completed ImportTx.
+- `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
@@ -615,11 +620,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
+  },
+  "id": 1
 }
 ```
 
@@ -639,11 +644,11 @@ avax.importKey({
 
 **Request**
 
-* Add `privateKey` to `username`'s set of private keys.
+- Add `privateKey` to `username`'s set of private keys.
 
 **Response**
 
-* `address` is the address `username` now controls with the private key. It will be in hex format.
+- `address` is the address `username` now controls with the private key. It will be in hex format.
 
 #### Example Call
 
@@ -664,11 +669,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
+  },
+  "id": 1
 }
 ```
 
@@ -705,11 +710,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+  }
 }
 ```
 
@@ -728,10 +733,10 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 `status` is one of:
 
-* `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight` property
-* `Processing`: The transaction is being voted on by this node
-* `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
-* `Unknown`: The transaction hasn’t been seen by this node
+- `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight` property
+- `Processing`: The transaction is being voted on by this node
+- `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
+- `Unknown`: The transaction hasn’t been seen by this node
 
 #### **Example Call**
 
@@ -750,18 +755,18 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "status":"Accepted",
-        "blockHeight": "1"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "Accepted",
+    "blockHeight": "1"
+  }
 }
 ```
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../../../nodes/maintain/chain-config-flags.md#c-chain-configs) `--coreth-admin-api-enabled:true`.
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [C-Chain config flag `--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean) .
 
 ### Endpoint
 
@@ -781,7 +786,7 @@ Sets the log level of the C-Chain.
 admin.setLogLevel({level:string}) -> {success:bool}
 ```
 
-* `level` is the log level to be set.
+- `level` is the log level to be set.
 
 #### **Example Call**
 
@@ -800,11 +805,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -833,11 +838,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -866,11 +871,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -899,11 +904,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -932,10 +937,10 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```

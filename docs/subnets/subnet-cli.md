@@ -22,7 +22,7 @@ You can also download binary directly from [here](https://github.com/ava-labs/su
 ## Usage
 
 ```bash
-> subnet-cli 
+> subnet-cli
 subnet-cli CLI
 
 Usage:
@@ -51,9 +51,10 @@ It **DOES NOT** need to be run on the same host where you are running your valid
 ### Network Selection
 
 Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end point is.
-* The default value is `https://api.avax-test.network` which points to the Fuji Testnet. If you run a local node on Fuji Testnet, you can use the URI from your local node too. 
-* For Mainnet, please use `https://api.avax.network`. If you run a local node on Mainnet, you can use the URI from your local node too. 
-* For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the [correct port number for use](../quickstart/create-a-local-test-network.md#retrieve-all-nodes).
+
+- The default value is `https://api.avax-test.network` which points to the Fuji Testnet. If you run a local node on Fuji Testnet, you can use the URI from your local node too.
+- For Mainnet, please use `https://api.avax.network`. If you run a local node on Mainnet, you can use the URI from your local node too.
+- For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the actual port number of local AvalancheGo. To create a 5-node local network, please follow [this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the [correct port number for use](../quickstart/create-a-local-test-network.md#retrieve-all-nodes).
 
 ### Ledger Support
 
@@ -70,17 +71,14 @@ subnet-cli wizard \
 --vm-id=tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH \
 --chain-name=test
 ```
-:::info
-We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
-:::
 
 :::tip
+We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
 
 Make sure you've downloaded the latest version of the
 [Avalanche Ledger App](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)!
 
 :::
-
 
 ### `subnet-cli create VMID`
 
@@ -93,6 +91,7 @@ subnet-cli create VMID <identifier> [--hash]
 ```
 
 Example
+
 ```bash
 > subnet-cli create VMID subnetevm
 created a new VMID srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy from subnetevm
@@ -105,46 +104,49 @@ created a new VMID srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy from subnet
 created a new key ".subnet-cli.pk"
 ```
 
-This creates a file `.subnet-cli.pk` under the current directory with a private key. By default, 
-`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions. 
+This creates a file `.subnet-cli.pk` under the current directory with a private key. By default,
+`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions.
 
 #### Fuji TestNet
+
 To get fund on this key on Fuji TestNet, follow these steps:
 
 1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network and locate your C-Chain address which starts with `0x`.
 2. Request funds from the [faucet](https://faucet.avax.network) using your C-Chain address.
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).  
+3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [tutorial between C/P chains](../quickstart/transfer-avax-between-p-chain-and-c-chain.md)).
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 
 #### Local
 
-For local testing, you can use the key in [.insecure.ewoq.key](https://github.com/ava-labs/subnet-cli/blob/main/.insecure.ewoq.key) which is pre-funded. 
+For local testing, you can use the key in [.insecure.ewoq.key](https://github.com/ava-labs/subnet-cli/blob/main/.insecure.ewoq.key) which is pre-funded.
 
 #### Mainnet
-For Mainnet, we strongly recommend to use an account associated with a [ledger](#ledger-support) for all your operations. 
 
+For Mainnet, we strongly recommend to use an account associated with a [ledger](#ledger-support) for all your operations.
 
 ### `subnet-cli wizard`
 
 `wizard` is a magical command that:
 
-* Adds all NodeIDs as validators to the primary network (skipping any that
+- Adds all NodeIDs as validators to the primary network (skipping any that
   already exist)
-* Creates a subnet
-* Adds all NodeIDs as validators on the subnet
-* Creates a new blockchain
+- Creates a subnet
+- Adds all NodeIDs as validators on the subnet
+- Creates a new blockchain
 
 Here is a command to create a subnet on Fuji Testnet:
 
 ```bash
 > subnet-cli wizard \
 --node-ids=NodeID-nBwT3MfSHA4es5o3iB5cMtkPng4eC861 \
---vm-genesis-path=networks/11111/genesis.json \
+--vm-genesis-path=my-genesis.json \
 --vm-id=kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG \
 --chain-name=bayysubnet
 ```
+
 And its full printed log on the console:
+
 ```text
 2022-05-20T15:20:15.431-0600	info	client/client.go:81	fetching X-Chain id
 2022-05-20T15:20:15.766-0600	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
@@ -179,7 +181,7 @@ Ready to run wizard, should we continue?
 *--------------------------*---------------------------------------------------*
 | VM ID                    | kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG |
 *--------------------------*---------------------------------------------------*
-| VM GENESIS PATH          | networks/11111/genesis.json                       |
+| VM GENESIS PATH          | my-genesis.json                                   |
 *--------------------------*---------------------------------------------------*
 ✔ Yes, let's create! I agree to pay the fee!
 
@@ -233,20 +235,18 @@ created blockchain "2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q" (took 21
 *-------------------------*----------------------------------------------------*
 | VM ID                   | kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG  |
 *-------------------------*----------------------------------------------------*
-| VM GENESIS PATH         | networks/11111/genesis.json                        |
+| VM GENESIS PATH         | my-genesis.json                                    |
 *-------------------------*----------------------------------------------------*
 ```
 
 The following are created successfully:
-* Subnet: 2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW
-* Blockchain: 2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q
 
+- Subnet: 2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW
+- Blockchain: 2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q
 
 You can check this url [https://explorer-xp.avax-test.network/blockchain/2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q](https://explorer-xp.avax-test.network/blockchain/2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q) to see the blockchain and subnet:
 
 ![bayysubnet](/img/bayysubnet.png)
-
-
 
 ### `subnet-cli create subnet`
 
@@ -316,7 +316,6 @@ created subnet "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1" (took 1.0011
 
 ```
 
-
 ### `subnet-cli add validator`
 
 ```bash
@@ -340,7 +339,6 @@ subnet-cli add validator \
 ![add-validator-local-1](/img/add-validator-local-1.png)
 ![add-validator-local-2](/img/add-validator-local-2.png)
 
-
 ### `subnet-cli add subnet-validator`
 
 ```bash
@@ -351,7 +349,6 @@ subnet-cli add subnet-validator \
 
 To add a subnet validator to the local network:
 
-
 ```text
 > subnet-cli add subnet-validator \
 --private-key-path=.insecure.ewoq.key \
@@ -359,8 +356,8 @@ To add a subnet validator to the local network:
 --node-ids="NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5" \
 --subnet-id="24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1"
 ```
-And its console log:
 
+And its console log:
 
 ```text
 2022-05-20T16:10:22.980-0600	info	client/client.go:81	fetching X-Chain id
@@ -422,7 +419,6 @@ waiting for validator P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 to start validating 24tZ
 *-------------------------*----------------------------------------------------*
 ```
 
-
 ### `subnet-cli create blockchain`
 
 ```bash
@@ -444,7 +440,6 @@ subnet-cli create blockchain \
 --vm-id= kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG \
 --vm-genesis-path=bayysubnet.genesis
 ```
-
 
 ```text
 2022-05-20T16:19:33.652-0600	info	client/client.go:81	fetching X-Chain id
@@ -503,8 +498,6 @@ created blockchain "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M" (took 2.
 | VM GENESIS PATH         | bayysubnet.genesis                                 |
 *-------------------------*----------------------------------------------------*
 ```
-
-
 
 ### `subnet-cli status blockchain`
 

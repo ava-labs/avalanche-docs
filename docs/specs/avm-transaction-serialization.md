@@ -1151,6 +1151,8 @@ An NFT credential is the same as an [secp256k1 credential](avm-transaction-seria
 
 Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains), [`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains), [`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains), and [`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains). They all embed [`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), which contains common fields and operations.
 
+## Unsigned BaseTx
+
 ### What Base Tx Contains
 
 A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
@@ -1269,6 +1271,8 @@ Let’s make an base tx that uses the inputs and outputs from the previous examp
     0x00, 0x01, 0x02, 0x03,
 ]
 ```
+
+## Unsigned CreateAssetTx
 
 ### What Unsigned Create Asset Tx Contains
 
@@ -1393,6 +1397,8 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 ]
 ```
 
+## Unsigned OperationTx
+
 ### What Unsigned Operation Tx Contains
 
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
@@ -1494,6 +1500,8 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
     0xab, 0x08, 0x59,
 ]
 ```
+
+## Unsigned ImportTx
 
 ### What Unsigned Import Tx Contains
 
@@ -1603,6 +1611,8 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
     0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x07,
 ]
 ```
+
+## Unsigned ExportTx
 
 ### What Unsigned Export Tx Contains
 
