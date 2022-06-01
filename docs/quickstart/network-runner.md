@@ -30,6 +30,16 @@ cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
 go install -v ./cmd/avalanche-network-runner
 ```
 
+`avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
+
+Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.  
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+AVALANCHEGO_EXEC_PATH="avalanchego"
+```
+
 Unless otherwise specified, file paths given below are relative to the root of this repository. 
 
 ## Usage
@@ -90,12 +100,6 @@ avalanche-network-runner ping \
 ```
 
 #### start a new Avalanche network with five nodes (a cluster)
-
-```bash
-# replace execPath with the path to AvalancheGo on your machine
-# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-AVALANCHEGO_EXEC_PATH="avalanchego"
-```
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
