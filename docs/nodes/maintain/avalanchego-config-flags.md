@@ -27,7 +27,6 @@ Example JSON config file:
 
 :::
 
-
 #### `--config-file-content` (string):
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
@@ -117,7 +116,6 @@ Max number of containers in an Ancestors message sent by this node. Defaults to 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
-
 
 ## State Syncing
 
@@ -402,9 +400,7 @@ Comma separated list of subnet IDs that this node would validate if added to. De
 
 It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
 
-
 Full reference for all configuration options for a subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
-
 
 #### `--subnet-config-dir` (string):
 
@@ -429,13 +425,9 @@ By default, none of these directories and/or files exist. You would need to crea
 
 :::
 
-
-
-
 #### `--subnet-config-content` (string):
 
 As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a subnet.
-
 
 ## Version
 
@@ -750,7 +742,7 @@ These flags govern rate-limiting of inbound and outbound messages. For more info
 
 #### CPU based
 
-Rate-limiting based on how much CPU usage a peer causes. 
+Rate-limiting based on how much CPU usage a peer causes.
 
 ##### `cpu-tracker-halflife` (duration):
 
@@ -758,7 +750,7 @@ Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics chang
 
 ##### `throttler-inbound-cpu-validator-alloc` (float):
 
-Number of CPU allocated for use by validators. Value should be in range (0, total core count]. 
+Number of CPU allocated for use by validators. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
 
 ##### `--throttler-inbound-cpu-at-large-alloc` (float):
@@ -770,8 +762,7 @@ See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 ##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
 The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
-For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then
-one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
 
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
@@ -779,7 +770,7 @@ In the CPU rate-limiter, check at least this often whether the node's CPU usage 
 
 #### Bandwidth based
 
-Rate-limiting based on the bandwidth a peer uses. 
+Rate-limiting based on the bandwidth a peer uses.
 
 ##### `--throttler-inbound-bandwidth-refill-rate` (uint):
 
@@ -791,7 +782,7 @@ Max inbound bandwidth a node can use at once. See interface `throttling.Bandwidt
 
 #### Message size based
 
-Rate-limiting based on the total size, in bytes, of unprocessed messages. 
+Rate-limiting based on the total size, in bytes, of unprocessed messages.
 
 ##### `--throttler-inbound-at-large-alloc-size` (uint):
 
@@ -807,7 +798,7 @@ Maximum number of bytes a node can take from the at-large allocation of the inbo
 
 #### Message based
 
-Rate-limiting based on the number of unprocessed messages. 
+Rate-limiting based on the number of unprocessed messages.
 
 ##### `--throttler-inbound-node-max-processing-msgs` (uint):
 

@@ -1,5 +1,5 @@
 ---
-description: 'GCP Validator Provisioning'
+description: "GCP Validator Provisioning"
 sidebar_position: 5
 ---
 
@@ -34,6 +34,7 @@ We will create and utilize a single GCP `Project` for deployment of all resource
 #### Service Enablement
 
 Within our GCP project we will need to enable the following Cloud Services:
+
 - `Compute Engine`
 - `IAP`
 

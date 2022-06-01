@@ -1,8 +1,8 @@
 # Create an EVM Subnet on a Local Network
 
-To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
+To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility.
 
-## Clone Subnet-evm 
+## Clone Subnet-evm
 
 First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install). You can verify by runing `go version`.
 
@@ -25,8 +25,8 @@ This will clone and checkout to `master` branch.
 :::info
 
 Please always check [subnet-evm repo](https://github.com/ava-labs/subnet-evm) for the latest updates.
- 
-::: 
+
+:::
 
 ## Run Local Network
 
@@ -107,9 +107,9 @@ Response:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x0"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x0"
 }
 ```
 
@@ -123,7 +123,7 @@ pkill -9 -f srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 
 ## Connect with Metamask
 
-Please use the value provided by `MetaMask Quick Start` to connect with Metamask. 
+Please use the value provided by `MetaMask Quick Start` to connect with Metamask.
 
 ```text
 MetaMask Quick Start:
@@ -134,8 +134,7 @@ Chain ID: 99999
 Curreny Symbol: LEVM
 ```
 
-You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account. 
-
+You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
 
 ## Load Simulator
 
@@ -156,7 +155,6 @@ base-fee: 25
 priority-fee: 1
 concurrency: 10
 ```
-
 
 Once your config is specified, you can run the tool by either invoking `go run main.go` under the directory `cmd/simulator` or by installing the tool (`go install -v .`) and running the binary
 (`simulator`).
