@@ -8,17 +8,17 @@ sidebar_position: 3
 
 This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](../../apis/avalanchego/apis/metrics.md) to get information about the node
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
-* A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards)
+- [Prometheus](https://prometheus.io/) to gather and store data
+- [node_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
+- AvalancheGo’s [metrics API](../../apis/avalanchego/apis/metrics.md) to get information about the node
+- [Grafana](https://grafana.com/) to visualize data on a dashboard.
+- A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards)
 
 Prerequisites:
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
+- A running AvalancheGo node
+- Shell access to the machine running the node
+- Administrator privileges on the machine
 
 This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other Linux flavors that use `systemd` for running services and `apt-get` for package management might work but have not been tested. Community member has reported it works on Debian 10, might work on other Debian releases as well.
 
@@ -36,6 +36,7 @@ In order to make node monitoring easier to install, we have made a script that d
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/monitoring-installer.sh;\
 chmod 755 monitoring-installer.sh;
 ```
+
 This will download the script and make it executable.
 
 Script itself is run multiple times with different arguments, each installing a different tool or part of the environment. To make sure it downloaded and set up correctly, begin by running:
@@ -43,6 +44,7 @@ Script itself is run multiple times with different arguments, each installing a 
 ```bash
 ./monitoring-installer.sh --help
 ```
+
 It should display:
 
 ```text
@@ -86,7 +88,9 @@ prometheus.tar.gz                           100%[===============================
 2021-11-05 14:16:11 URL:https://github-releases.githubusercontent.com/6838921/a215b0e7-df1f-402b-9541-a3ec9d431f76?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T141610Z&X-Amz-Expires=300&X-Amz-Signature=72a8ae4c6b5cea962bb9cad242cb4478082594b484d6a519de58b8241b319d94&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=6838921&response-content-disposition=attachment%3B%20filename%3Dprometheus-2.31.0.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [68274531/68274531] -> "prometheus.tar.gz" [1]
 ...
 ```
+
 You may be prompted to confirm additional package installs, do that if asked. Script run should end with instructions on how to check that Prometheus installed correctly. Let's do that, run:
+
 ```bash
 sudo systemctl status prometheus
 ```
@@ -107,7 +111,6 @@ CGroup: /system.slice/prometheus.service
 Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=81 maxSegment=84
 Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
-
 
 Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
@@ -142,6 +145,7 @@ Get:5 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [114 kB]
 Get:6 https://packages.grafana.com/oss/deb stable InRelease [12.1 kB]
 ...
 ```
+
 To make sure it’s running properly:
 
 ```text
@@ -156,16 +160,18 @@ You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjus
 
 Prometheus and Grafana are now installed, we're ready for the next step.
 
-## Step 3: Set up node\_exporter <a id="exporter"></a>
+## Step 3: Set up node_exporter <a id="exporter"></a>
 
-In addition to metrics from AvalancheGo, let’s set up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
+In addition to metrics from AvalancheGo, let’s set up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node_exporter, a Prometheus plugin.
 
 Run the script to execute the third step:
 
 ```bash
 ./monitoring-installer.sh --3
 ```
+
 The output should look something like this:
+
 ```text
 AvalancheGo monitoring installer
 --------------------------------
@@ -179,29 +185,34 @@ node_exporter.tar.gz                        100%[===============================
 2021-11-05 14:57:25 URL:https://github-releases.githubusercontent.com/9524057/6dc22304-a1f5-419b-b296-906f6dd168dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T145725Z&X-Amz-Expires=300&X-Amz-Signature=3890e09e58ea9d4180684d9286c9e791b96b0c411d8f8a494f77e99f260bdcbb&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=9524057&response-content-disposition=attachment%3B%20filename%3Dnode_exporter-1.2.2.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [8296266/8296266] -> "node_exporter.tar.gz" [1]
 node_exporter-1.2.2.linux-arm64/LICENSE
 ```
+
 Again, we check that the service is running correctly:
+
 ```bash
 sudo systemctl status node_exporter
 ```
+
 If the service is running, Prometheus, Grafana and node_exporter should all work together now. To check, in your browser visit Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
 
-* Prometheus
-* avalanchego
-* avalanchego-machine
+- Prometheus
+- avalanchego
+- avalanchego-machine
 
 Make sure that all of them have `State` as `UP`.
 
 :::info
 If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
+
 ```yaml
-  - job_name: 'avalanchego'
-    metrics_path: '/ext/metrics'
-    scheme: 'https'
-    tls_config:
-      insecure_skip_verify: true
-    static_configs:
-      - targets: ['localhost:9650']
+- job_name: "avalanchego"
+  metrics_path: "/ext/metrics"
+  scheme: "https"
+  tls_config:
+    insecure_skip_verify: true
+  static_configs:
+    - targets: ["localhost:9650"]
 ```
+
 Mind the spacing (leading spaces too)! You will need admin privileges to do that (use `sudo`). Restart prometheus service afterwards with `sudo systemctl restart prometheus`.
 :::
 
@@ -214,7 +225,9 @@ Run the script to install the dashboards:
 ```bash
 ./monitoring-installer.sh --4
 ```
+
 It will produce output something like this:
+
 ```text
 AvalancheGo monitoring installer
 --------------------------------
@@ -228,6 +241,7 @@ Downloaded: 1 files, 49K in 0s (132 MB/s)
 Last-modified header missing -- time-stamps turned off.
 ...
 ```
+
 This will download the latest versions of the dashboards from GitHub and provision Grafana to load them, as well as defining Prometheus as a datasource. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
 
 ![Imported dashboards](/img/monitoring-01-dashboards.png)
@@ -263,6 +277,7 @@ The variable format is:
 ```text
 Subnet name:<BlockchainID>
 ```
+
 and the separator between entries is a comma. Entries for Spaces and Wagmi look like:
 
 ```text

@@ -2,6 +2,7 @@
 sidebar_position: 6
 description: Reference for all available chain config options and flags.
 ---
+
 # Chain Configs
 
 Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
@@ -15,8 +16,6 @@ This also applies to subnets, for example, if a subnet's chain id is `2ebCneCbwt
 By default, none of these directories and/or files exist. You would need to create them manually if needed.
 
 :::
-
-
 
 The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
@@ -86,6 +85,7 @@ The default C-Chain config is:
   "state-sync-server-trie-cache": 64
 }
 ```
+
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change your node will remain with the old values, which might adversely affect your node operation.
 
 ### Continuous Profiling
@@ -433,7 +433,6 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
-
 ### State Sync Settings
 
 #### `state-sync-enabled` (boolean):
@@ -490,7 +489,6 @@ If `index-transactions` is set to true, it must always be set to true for the no
 Allows incomplete indices. Default value is `false`.
 
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
-
 
 ## Subnet Chain Configs
 

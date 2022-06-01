@@ -1,6 +1,7 @@
 ---
 sidebar_position: 13
 ---
+
 # Keystore API
 
 Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
@@ -38,8 +39,8 @@ keystore.createUser(
 ) -> {success:bool}
 ```
 
-* `username` and `password` can be at most 1024 characters.
-* Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
+- `username` and `password` can be at most 1024 characters.
+- Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
 
 #### **Example Call**
 
@@ -59,11 +60,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -95,9 +96,9 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{"success" : true}
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": { "success": true }
 }
 ```
 
@@ -140,12 +141,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "user":"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
-        "encoding":"cb58"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "user": "4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
+    "encoding": "cb58"
+  }
 }
 ```
 
@@ -187,11 +188,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "success":true
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "success": true
+  }
 }
 ```
 
@@ -219,13 +220,10 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "users":[
-            "myUsername"
-        ]
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "users": ["myUsername"]
+  }
 }
 ```
-
