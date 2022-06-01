@@ -1602,7 +1602,7 @@ There are two primary components to this upgrade:
 ## v1.0.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6))
 
 :::danger
-Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
+Please note that this release contains breaking changes. It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
 :::
 
 - Removed deprecated formats of platform.getTxStatus and platform.getCurrentValidators.
@@ -1623,7 +1623,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 ## v1.0.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5))
 
 :::danger
-Please note that the release after this one, v1.0.6, will contain the breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
+Please note that the release after this one, v1.0.6, will contain the breaking changes. Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
 :::
 
 The changes in this release, v1.0.5, are backwards compatible with previous releases. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
