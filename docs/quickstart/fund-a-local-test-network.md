@@ -4,17 +4,28 @@
 
 In [Create a Local Test Network](create-a-local-test-network.md), we showed you how to launch a 5 node local test network. Once you have a local network the next step is to fund an address so that you can begin creating transactions and interacting with smart-contracts.
 
-We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain. **NOTE** this same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
+We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain. 
+
 
 :::info
+This same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
+
 
 The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. If you are using Avalanche Network Runner, please check [here](./create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
 
 :::
 
+:::warning
+Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md): you should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password. 
+:::
+
 ## Create a User
 
-First run `keystore.createUser` to create a user in the local keystore.
+:::tip
+This step can be skipped if you are only interesting in how to check the fund balance on X/P/C Chain. 
+:::
+
+First run [`keystore.createUser`](../apis/avalanchego/apis/keystore.md#keystorecreateuser) to create a user in the local keystore.
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/keystore' \
@@ -38,11 +49,16 @@ curl --location --request POST '127.0.0.1:9650/ext/keystore' \
 }
 ```
 
-Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`—aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
+Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
 
 ## X-Chain
 
-Import `ewoq` into the [X-Chain](../apis/avalanchego/apis/x-chain.md).
+### Import Key
+:::tip
+This step can be skipped if you are only interesting in how to check the fund balance on X Chain. It shows how to get the correct address. 
+:::
+
+Import `ewoq` into the [X-Chain via avm.importKey API](../apis/avalanchego/apis/x-chain.md#avmimportkey).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
@@ -101,7 +117,12 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 
 ## C-Chain
 
-Import `ewoq` into the [C-Chain](../apis/avalanchego/apis/c-chain.md).
+### Import Key
+:::tip
+This step can be skipped if you are only interesting in how to check the fund balance on C Chain. It just shows how to get the correct address. 
+:::
+
+Import `ewoq` into the [C-Chain via avax.importKey API](../apis/avalanchego/apis/c-chain.md#avaximportkey).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
@@ -171,7 +192,13 @@ To see this account on Metamask, follow these steps:
 
 ## P-Chain
 
-Import `ewoq` into the [P-Chain](../apis/avalanchego/apis/p-chain.md).
+### Import Key
+:::tip
+This step can be skipped if you are only interesting in how to check the fund balance on P Chain. It just shows how to get the correct address. 
+:::
+
+
+Import `ewoq` into the [P-Chain via platform.importKey API](../apis/avalanchego/apis/p-chain.md#platformimportkey).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
