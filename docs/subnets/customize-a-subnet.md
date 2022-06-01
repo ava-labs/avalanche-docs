@@ -4,7 +4,7 @@ Description: How to customize a subnet by utilizing Genesis, Precompile and Bloc
 
 # Customize a Subnet
 
-All subnets can be customized by utilizing `Subnet Configs`.
+All subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 And a subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
 * Genesis
@@ -13,38 +13,14 @@ And a subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/
 
 ## Subnet Configs
 
-Parameters for Subnet Configs must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter. See [here](../nodes/maintain/avalanchego-config-flags.md#subnet-configs) for more info. 
-
-Parameters specified in the Subnet Configs apply to all chains in the specified subnet.  They are are chain-agnostic, not just for EVM Subnet. 
-
 A subnet can customized by setting parameters for the following:
 
-* [Validator-only communication to create a private subnet](../nodes/maintain/avalanchego-config-flags#validatoronly-bool)
-* [Consensus](../nodes/maintain/avalanchego-config-flags#consensus-parameters) 
-* [Gossip](../nodes/maintain/avalanchego-config-flags#gossip-configs) 
+* [Validator-only communication to create a private subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
+* [Consensus](../nodes/maintain/subnet-configs.md#consensus-parameters) 
+* [Gossip](../nodes/maintain/subnet-configs.md#gossip-configs) 
 
-Here is an example config file:
+See [here](../nodes/maintain/subnet-configs.md) for more info. 
 
-```json
-{
-  "validatorOnly": false,
-  "consensusParameters": {
-    "k": 25,
-    "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
-}
-```
-
-### Private Subnet
-
-Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
-
-Subnet validators can choose not to publish contents of blockchains via its configuration. If a node sets [`validatorOnly`](../nodes/maintain/avalanchego-config-flags#validatoronly-bool) to true in its subnet configs, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
-
-:::tip
-This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
-:::
 
 
 ## Genesis
