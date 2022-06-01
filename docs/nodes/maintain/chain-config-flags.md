@@ -122,7 +122,11 @@ Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
 
 Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
 
-Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
+:::note
+
+If you populate this field, it will override the defaults so you must include every service you wish to enable.
+
+:::
 
 #### `public-eth`:
 
@@ -477,7 +481,9 @@ The parameters are as follows:
 
 Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.md#avmgetaddresstxs).
 
-Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
+:::note
+If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
+:::
 
 ### `index-allow-incomplete` (boolean):
 

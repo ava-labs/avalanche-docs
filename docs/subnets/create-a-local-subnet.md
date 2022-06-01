@@ -1,16 +1,12 @@
-# Create an EVM Subnet on Local
+# Create an EVM Subnet on a Local Network
 
 To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
 
 ## Clone Subnet-evm 
 
-First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
+First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install). You can verify by runing `go version`.
 
-Run `go version`. **It should be 1.17.9 or above.** 
-
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac. 
-
-Run `echo $GOPATH`. **It should not be empty.**
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac. You can verify by running `echo $GOPATH`.
 
 As a few software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may get error running the commands below.
 
@@ -48,9 +44,10 @@ git pull
 ./scripts/run.sh 1.7.11 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 
-_This ewoq address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`) is a prefunded address on the local network, see [here](../quickstart/fund-a-local-test-network) for more info. The private key for this address is
-`0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`._
-
+:::note
+This ewoq address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`) is a prefunded address on the local network, see [here](../quickstart/fund-a-local-test-network) for more info. The private key for this address is
+`0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
+:::
 
 With this command, `avalanchego`, `avalanche-network-runner` and GoLang packages will be downloaded and installed on a `/tmp` directory. Note: please make sure that your have fast internet connection to download these packages, otherwise, it will take a long time.
 
@@ -123,6 +120,22 @@ pkill -P 79100
 kill -2 79100
 pkill -9 -f srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
+
+## Connect with Metamask
+
+Please use the value provided by `MetaMask Quick Start` to connect with Metamask. 
+
+```text
+MetaMask Quick Start:
+Funded Address: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Network Name: Local EVM
+RPC URL: http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
+Chain ID: 99999
+Curreny Symbol: LEVM
+```
+
+You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account. 
+
 
 ## Load Simulator
 

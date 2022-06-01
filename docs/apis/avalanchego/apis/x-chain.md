@@ -836,7 +836,9 @@ Returns all transactions that change the balance of the given address. A transac
 * A UTXO that the transaction consumes was at least partially owned by the address.
 * A UTXO that the transaction produces is at least partially owned by the address.
 
+:::tip
 Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+:::
 
 #### **Signature**
 
