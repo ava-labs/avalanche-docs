@@ -18,7 +18,7 @@ If you are running AvalancheJS on a [Local Test Network](create-a-local-test-net
 
 Together, you can deploy local test networks and run tests on them.
 
-## Setting up 
+## Getting Started
 
 To use AvalancheJS, you can clone the repo:
 ```zsh
@@ -299,30 +299,34 @@ Returns:
 
 By default our scripts import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [```xKeychain```](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. This means ```X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p``` is the ```balance``` holder and will pay the fee to export AVAX. 
 
-You can manage private keys you use with AvalancheJS directly in the AvalancheJS directory by doing the following:
+You can manage the private keys you use with AvalancheJS directly in the AvalancheJS directory by doing the following:
 
-Rename [``secrets.example``](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to ``secrets.json``
+1. Rename [``secrets.example``](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to ``secrets.json``
 
-Add your Private Key as an object.
+2. Add your Private Key as an object.
 ```json
+// secrets.json
 {
   "privateKey": "<YOUR-PRIVATE-KEY-HERE>"
 }
 ```
 
-Import your private key into the example script.
+3. Import your private key into the example script.
 ```js
+// buildExportTx-cchain-avax.ts
 import { privateKey } from "../secrets.json"
 ```
 
 By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPrivateKey```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as ```privKey``` to sign transactions. 
 
 ```js
+// buildExportTx-cchain-avax.ts
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 ```
 
 To run AvalancheJS scripts on Mainnet or Fuji, you can simply replace this with the imported private key:
 ```js
+// buildExportTx-cchain-avax.ts
 const privKey: string = privateKey
 ```
 
