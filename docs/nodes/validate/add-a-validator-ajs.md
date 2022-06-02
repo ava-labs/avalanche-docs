@@ -16,7 +16,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md).In this tutorial, we use [AvalancheJS](https://github.com/ava-labs/AvalancheJS) to help us make API calls.
+You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md).In this tutorial, we use [AvalancheJS](https://github.com/ava-labs/AvalancheJS) and [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -25,6 +25,8 @@ In order to ensure your node is well-connected, make sure that your node can rec
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
 Get your node’s ID by calling [`info.getNodeID`](../../apis/avalanchego/apis/info.md#infogetnodeid):
+
+![getNodeID postman](/img/getNodeID-postman.png)
 
 
 ```sh
