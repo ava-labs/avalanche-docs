@@ -16,14 +16,14 @@ WAGMI and Fuji chains are not interconnected by default, however, we could make 
 
 Here is the basic high-level workflow of the bridge -
 
-* Users deposit token on the Bridge contract
-* Bridge contract asks Handler contract to perform deposit action
-* Handler contract **locks** the deposited token in the token safe
-* Bridge contract emits `Deposit` event
-* Relayer receives the `Deposit` event from the source chain
-* Relayer creates a voting proposal on the destination chain to mint a new token
-* After threshold relayer votes, the proposal is executed
-* Tokens are **minted** to the recipient's address
+- Users deposit token on the Bridge contract
+- Bridge contract asks Handler contract to perform deposit action
+- Handler contract **locks** the deposited token in the token safe
+- Bridge contract emits `Deposit` event
+- Relayer receives the `Deposit` event from the source chain
+- Relayer creates a voting proposal on the destination chain to mint a new token
+- After threshold relayer votes, the proposal is executed
+- Tokens are **minted** to the recipient's address
 
 Bridging tokens from source to destination chain involves the **lock and mint** approach. Whereas bridging tokens from destination to source chain involves **burn and release** approach. We cannot mint and burn tokens that we do not control. Therefore we lock them in the token safe on the source chain. And mint the corresponding token (which we will deploy and hence control) on the destination chain.
 
@@ -33,18 +33,18 @@ Bridging tokens from source to destination chain involves the **lock and mint** 
 
 These are the requirement to follow this tutorial -
 
-* Add [WAGMI](./wagmi.md#adding-wagmi-to-metamask) and [Fuji](../quickstart/fuji-workflow.md#set-up-fuji-network-on-metamask-optional) chain on the MetaMask network
-* Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
-* `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
-* `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax.network/)
-* Wrapped `WGM` tokens on the WAGMI chain. Send a few `WGM` coins to the `wWGM` token address (see 2nd point), to receive the same amount of `wWGM`. Always keep some `WGM` coins, to cover transaction fees.
+- Add [WAGMI](./wagmi.md#adding-wagmi-to-metamask) and [Fuji](../quickstart/fuji-workflow.md#set-up-fuji-network-on-metamask-optional) chain on the MetaMask network
+- Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
+- `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
+- `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax.network/)
+- Wrapped `WGM` tokens on the WAGMI chain. Send a few `WGM` coins to the `wWGM` token address (see 2nd point), to receive the same amount of `wWGM`. Always keep some `WGM` coins, to cover transaction fees.
 
 ## Setting Up Environment
 
 Let's make a new directory `deploy-bridge`, where we will be keeping our bridge codes. We will be using the following repositories -
 
-* [ChainSafe/chainbridge-deploy](https://github.com/ChainSafe/chainbridge-deploy) - This will help us in setting up of our bridge contracts
-* [ChainSafe/chainbridge](https://github.com/ChainSafe/ChainBridge) - This will help us in setting up of our off-chain relayer.
+- [ChainSafe/chainbridge-deploy](https://github.com/ChainSafe/chainbridge-deploy) - This will help us in setting up of our bridge contracts
+- [ChainSafe/chainbridge](https://github.com/ChainSafe/ChainBridge) - This will help us in setting up of our off-chain relayer.
 
 ### Installing Chainbridge Command Line Tool
 
@@ -76,9 +76,9 @@ SRC_TOKEN="0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4"
 RESOURCE_ID="0x00"
 ```
 
-* `SRC_ADDR` and `DST_ADDR` are the addresses that will deploy bridge contracts and will act as a relayer.
-* `SRC_TOKEN` is the token that we want to bridge. Here is the address of the wrapped ERC20 version of the WGM coin aka wWGM.
-* `RESOURCE_ID` could be anything. It identifies our bridged ERC20 tokens on both sides (WAGMI and Fuji).
+- `SRC_ADDR` and `DST_ADDR` are the addresses that will deploy bridge contracts and will act as a relayer.
+- `SRC_TOKEN` is the token that we want to bridge. Here is the address of the wrapped ERC20 version of the WGM coin aka wWGM.
+- `RESOURCE_ID` could be anything. It identifies our bridged ERC20 tokens on both sides (WAGMI and Fuji).
 
 Every time we make changes to these config variables, we have to update our bash environment. Run the following command according to the relative location of the file. These variables are temporary and are only there in the current terminal session, and will be flushed, once the session is over. Make sure to load these environment variables anywhere you will using them in the bash commands (like `$SRC_GATEWAY` or `$SRC_ADDR`)
 
@@ -90,8 +90,8 @@ source ./configVars
 
 We need to set up our source chain as follows -
 
-* Deploy Bridge and Handler contract with `$SRC_ADDR` as default and only relayer
-* Register the `wWGM` token as a resource on the bridge
+- Deploy Bridge and Handler contract with `$SRC_ADDR` as default and only relayer
+- Register the `wWGM` token as a resource on the bridge
 
 ### Deploy contracts
 
@@ -135,11 +135,11 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 25000000000 bridge
 
 We need to set up our destination chain as follows -
 
-* Deploy Bridge and Handler contract with `$DST_ADDR` as default and only relayer
-* Deploy mintable and burnable ERC20 contract representing bridged `wWGM` token
-* Register the `wWGM` token as a resource on the bridge
-* Register the` wWGM` token as mintable/burnable on the bridge
-* Giving permissions to Handler contract to mint new `wWGM` tokens
+- Deploy Bridge and Handler contract with `$DST_ADDR` as default and only relayer
+- Deploy mintable and burnable ERC20 contract representing bridged `wWGM` token
+- Register the `wWGM` token as a resource on the bridge
+- Register the` wWGM` token as mintable/burnable on the bridge
+- Giving permissions to Handler contract to mint new `wWGM` tokens
 
 ### Deploy Contracts
 
@@ -176,8 +176,9 @@ cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 bridge
 ### Setting Token as Mintable and Burnable on Bridge
 
 The bridge has two options when it receives a deposit of a token -
-* Lock the received token on one chain and mint the corresponding token on the other chain
-* Burn the received token on one chain and release the corresponding token on the other chain
+
+- Lock the received token on one chain and mint the corresponding token on the other chain
+- Burn the received token on one chain and release the corresponding token on the other chain
 
 We cannot mint or burn any token which we do not control. Though we can lock and release such tokens by putting them in a token safe. The bridge has to know which token it can burn. With the following command, we can set the resource as burnable. The bridge will choose the action accordingly, by seeing the token as burnable or not.
 
@@ -264,10 +265,11 @@ echo "{
   ]
 }" >> config.json
 ```
+
 Check and confirm the details in the `config.json` file.
 
 > In the above command, you can see that `blockConfirmations` is set to `0`. This will work well for networks like Avalanche because the block is confirmed once it's committed. Unlike other chains such as Ethereum, which requires 20-30 block confirmations. Therefore, use this configuration with caution, depending on the type of chain you are using.
-> 
+>
 > It can cause serious problems if a corresponding token is minted or released based on an unconfirmed block.
 
 ### Set Up Keys

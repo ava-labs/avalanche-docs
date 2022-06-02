@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 decription: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
 ---
 
@@ -37,8 +37,8 @@ In order to enable offline pruning, update the C-Chain config file to include th
 
 ```json
 {
-    "offline-pruning-enabled": true,
-    "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
+  "offline-pruning-enabled": true,
+  "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
 }
 ```
 
@@ -76,8 +76,8 @@ In order to ensure that users do not mistakenly leave offline pruning enabled fo
 
 ```json
 {
-    "offline-pruning-enabled": false,
-    "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
+  "offline-pruning-enabled": false,
+  "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
 }
 ```
 
@@ -140,7 +140,7 @@ INFO [02-09|00:59:05.449] Compacting database                      range=0xe0-0x
 INFO [02-09|00:59:34.365] Compacting database                      range=0xf0-     elapsed=16m49.005s
 INFO [02-09|00:59:34.367] Database compaction finished             elapsed=16m49.006s
 INFO [02-09|00:59:34.367] State pruning successful                 pruned=24.82GiB elapsed=39m34.749s
-INFO [02-09|00:59:34.367] Completed offline pruning. Re-initializing blockchain. 
+INFO [02-09|00:59:34.367] Completed offline pruning. Re-initializing blockchain.
 INFO [02-09|00:59:34.387] Loaded most recent local header          number=10,671,401 hash=b52d0a..7bd166 age=40m29s
 INFO [02-09|00:59:34.387] Loaded most recent local full block      number=10,671,401 hash=b52d0a..7bd166 age=40m29s
 INFO [02-09|00:59:34.387] Initializing snapshots                   async=true
@@ -148,14 +148,14 @@ DEBUG[02-09|00:59:34.390] Reinjecting stale transactions           count=0
 INFO [02-09|00:59:34.395] Transaction pool price threshold updated price=470,000,000,000
 INFO [02-09|00:59:34.396] Transaction pool price threshold updated price=225,000,000,000
 INFO [02-09|00:59:34.396] Transaction pool price threshold updated price=0
-INFO [02-09|00:59:34.396] lastAccepted = 0xb52d0a1302e4055b487c3a0243106b5e13a915c6e178da9f8491cebf017bd166 
+INFO [02-09|00:59:34.396] lastAccepted = 0xb52d0a1302e4055b487c3a0243106b5e13a915c6e178da9f8491cebf017bd166
 INFO [02-09|00:59:34] <C Chain> snow/engine/snowman/transitive.go#67: initializing consensus engine
 INFO [02-09|00:59:34] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#220: Starting bootstrap...
 INFO [02-09|00:59:34] chains/manager.go#246: creating chain:
     ID: 2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM
     VMID:jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq
-INFO [02-09|00:59:34.425] Enabled APIs: public-eth, public-eth-filter, net, web3, internal-public-eth, internal-public-blockchain, internal-public-transaction-pool, avax 
-DEBUG[02-09|00:59:34.425] Allowed origin(s) for WS RPC interface [*] 
+INFO [02-09|00:59:34.425] Enabled APIs: public-eth, public-eth-filter, net, web3, internal-public-eth, internal-public-blockchain, internal-public-transaction-pool, avax
+DEBUG[02-09|00:59:34.425] Allowed origin(s) for WS RPC interface [*]
 INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/avax
 INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/rpc
 INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/ws

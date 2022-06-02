@@ -1,5 +1,5 @@
 ---
-description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here. 
+description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here.
 sidebar_position: 4
 ---
 
@@ -75,7 +75,7 @@ Select Yes for Azure Spot instance, select Eviction type to Capacity Only and **
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Choose "Select size" to change the Virtual Machine size, and from the menu select D2s\_v4 under the D-Series v4 selection (This size has 2 Cores, 8 GB Memory and enables Premium SSDs). You can use F2s\_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
+Choose "Select size" to change the Virtual Machine size, and from the menu select D2s_v4 under the D-Series v4 selection (This size has 2 Cores, 8 GB Memory and enables Premium SSDs). You can use F2s_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
 
 ![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
@@ -83,7 +83,7 @@ Once you have selected the size of the Virtual Machine, select "View pricing his
 
 ![Image for post](https://miro.medium.com/max/763/1*UQYmhtL8JMhrOkaWk8cloA.png)
 
-At the time of this article, spot pricing for D2s\_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
+At the time of this article, spot pricing for D2s_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
 
 There are some regions which are even cheaper, East US for example is $0.01060 per hour or around $92.86 a year!
 
@@ -137,11 +137,11 @@ Now that you have your public IP select the default allow ssh rule on the left u
 
 ![Image for post](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
 
-Then select "+ Add an inbound rule" to add another rule for RPC access, this should also be restricted to only your IP. Change Source to "IP Addresses" and enter in your public IP returned from google into the Source IP field. This time change the "Destination port ranges" field to 9650 and select "TCP" as the protocol. Change the priority to 110 and give it a name of "Avalanche\_RPC" and press Add.
+Then select "+ Add an inbound rule" to add another rule for RPC access, this should also be restricted to only your IP. Change Source to "IP Addresses" and enter in your public IP returned from google into the Source IP field. This time change the "Destination port ranges" field to 9650 and select "TCP" as the protocol. Change the priority to 110 and give it a name of "Avalanche_RPC" and press Add.
 
 ![Image for post](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
 
-Select "+ Add an inbound rule" to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep "Source" set to "Any". Change the Destination port range to "9651" and change the protocol to "TCP". Enter a priority of 120 and a name of Avalanche\_Protocol and press Add.
+Select "+ Add an inbound rule" to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep "Source" set to "Any". Change the Destination port range to "9651" and change the protocol to "TCP". Enter a priority of 120 and a name of Avalanche_Protocol and press Add.
 
 ![Image for post](https://miro.medium.com/max/662/1*tIMEp7O83NIUitWwlcHAxw.png)
 
@@ -195,7 +195,7 @@ Then start the VM
 
 The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
-On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select "Advanced" at the bottom
+On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select "Advanced" at the bottom
 
 ![Image for post](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
 
@@ -227,11 +227,11 @@ To log onto the Avalanche node, open command prompt by searching for "cmd" and s
 
 Then use the following command and replace the EnterYourAzureIPHere with the static IP address shown on the Azure portal.
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@EnterYourAzureIPHere
+ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@EnterYourAzureIPHere
 
 for my example its:
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@13.74.10.81
+ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@13.74.10.81
 
 The first time you connect you will receive a prompt asking to continue, enter yes.
 
@@ -325,4 +325,3 @@ scp -i C:\Avalanche\avalanche_key.pem -r ubuntu@EnterYourAzureIPHere:/home/ubunt
 As before, we’ll need to replace "EnterYourAzureIPHere" with the appropriate value that we retrieved. This backs up our staking key and staking certificate into the C:\Avalanche folder we created before.
 
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
-

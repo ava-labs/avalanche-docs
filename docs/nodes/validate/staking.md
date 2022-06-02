@@ -19,14 +19,14 @@ When a validator is done validating the [Primary Network](http://support.avalabs
 Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
 :::
 
-* The minimum amount that a validator must stake is 2,000 AVAX
-* The minimum amount that a delegator must delegate is 25 AVAX
-* The minimum amount of time one can stake funds for validation is 2 weeks
-* The maximum amount of time one can stake funds for validation is 1 year
-* The minimum amount of time one can stake funds for delegation is 2 weeks
-* The maximum amount of time one can stake funds for delegation is 1 year
-* The minimum delegation fee rate is 2%
-* The maximum weight of a validator (their own stake + stake delegated to them) is the minimum of 3 million AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total (not per delegator)
+- The minimum amount that a validator must stake is 2,000 AVAX
+- The minimum amount that a delegator must delegate is 25 AVAX
+- The minimum amount of time one can stake funds for validation is 2 weeks
+- The maximum amount of time one can stake funds for validation is 1 year
+- The minimum amount of time one can stake funds for delegation is 2 weeks
+- The maximum amount of time one can stake funds for delegation is 1 year
+- The minimum delegation fee rate is 2%
+- The maximum weight of a validator (their own stake + stake delegated to them) is the minimum of 3 million AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total (not per delegator)
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
@@ -42,11 +42,11 @@ Note that only checking the uptime of your validator as measured by non-staking 
 
 When you add a node to the validator set, you specify:
 
-* Your node’s ID
-* When you want to start and stop validating
-* How many AVAX you are staking
-* The address to send any rewards to
-* Your delegation fee rate (see below)
+- Your node’s ID
+- When you want to start and stop validating
+- How many AVAX you are staking
+- The address to send any rewards to
+- Your delegation fee rate (see below)
 
 :::info
 The minimum amount that a validator must stake is 2,000 AVAX.
@@ -96,10 +96,10 @@ A delegator is a token holder, who wants to participate in staking, but chooses 
 
 When you delegate stake to a validator, you specify:
 
-* The ID of the node you’re delegating to
-* When you want to start/stop delegating stake (must be while the validator is validating)
-* How many AVAX you are staking
-* The address to send any rewards to
+- The ID of the node you’re delegating to
+- When you want to start/stop delegating stake (must be while the validator is validating)
+- How many AVAX you are staking
+- The address to send any rewards to
 
 :::info
 The minimum amount that a delegator must delegate is 25 AVAX.
@@ -128,4 +128,3 @@ When a node leaves the validator set, the validators vote on whether the leaving
 Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
 
 Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again. The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
-

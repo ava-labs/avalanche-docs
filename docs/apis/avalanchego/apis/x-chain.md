@@ -3,7 +3,6 @@ description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
 sidebar_position: 5
 ---
 
-
 # Exchange Chain (X-Chain) API
 
 The [X-Chain](../../../overview/getting-started/avalanche-platform.md#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine (AVM). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
@@ -166,12 +165,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "bytes": "0x0000000000010006617373657431000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6d794669786564436170417373657400044d464341000000000100000000000000010000000700000000000186a10000000000000000000000010000000152b219bc1b9ab0a9f2e3f9216e4460bd5db8d153bfa57c3c",
-        "encoding": "hex"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "bytes": "0x0000000000010006617373657431000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6d794669786564436170417373657400044d464341000000000100000000000000010000000700000000000186a10000000000000000000000010000000152b219bc1b9ab0a9f2e3f9216e4460bd5db8d153bfa57c3c",
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
@@ -206,17 +205,17 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "address": "X-avax12c6n252g5v3w6a6v69f0mnnzwr77jxzr3q3u7d"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "X-avax12c6n252g5v3w6a6v69f0mnnzwr77jxzr3q3u7d"
+  },
+  "id": 1
 }
 ```
 
 ### avm.createFixedCapAsset
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`. 
+Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
 
 #### **Signature**
 
@@ -240,14 +239,14 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` and `password` denote the user paying the transaction fee.
+- Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+- `assetID` is the ID of the new asset.
 
 #### **Example Call**
 
@@ -281,12 +280,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "assetID":"ZiKfqRXCZgHLgZ4rxGU9Qbycdzuq5DRY4tdSNS9ku8kcNxNLD",
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "assetID": "ZiKfqRXCZgHLgZ4rxGU9Qbycdzuq5DRY4tdSNS9ku8kcNxNLD",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
@@ -312,12 +311,12 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+- `amount` units of `assetID` will be created and controlled by address `to`.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
 
 #### **Example Call**
 
@@ -342,18 +341,18 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`. 
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
 
 #### **Signature**
 
@@ -377,15 +376,15 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` pays the transaction fee.
+- `assetID` is the ID of the new asset.
+- `changeAddr` in the result is the address where any change was sent.
 
 #### **Example Call**
 
@@ -425,19 +424,18 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "assetID":"2QbZFE7J4MAny9iXHUwq8Pz8SpFhWk3maCw4SkinVPv6wPmAbK",
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "assetID": "2QbZFE7J4MAny9iXHUwq8Pz8SpFhWk3maCw4SkinVPv6wPmAbK",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`. 
-
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
 
 #### **Signature**
 
@@ -460,14 +458,14 @@ avm.createNFTAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` pays the transaction fee.
+- `assetID` is the ID of the new asset.
+- `changeAddr` in the result is the address where any change was sent.
 
 #### **Example Call**
 
@@ -499,18 +497,18 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "assetID": "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "assetID": "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
 }
 ```
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.md#avmcreatenftasset). 
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
 
 #### **Signature**
 
@@ -531,14 +529,14 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "cb58".
+- `assetID` is the assetID of the newly created NFT asset.
+- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+- `encoding` is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 
@@ -563,19 +561,19 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
 ### avm.export
 
-Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, 
-you must call the [C-Chain's `avax.import`](c-chain.md#avaximport) or the 
+Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method,
+you must call the [C-Chain's `avax.import`](c-chain.md#avaximport) or the
 [P-Chain's `platform.importAVAX`](p-chain.md#platformimportavax) to complete the transfer.
 
 #### **Signature**
@@ -596,16 +594,16 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent. Use `AVAX` for AVAX exports.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by `username`
-* `password` is `username`‘s password.
+- `to` is the P-Chain or C-Chain address the asset is sent to.
+- `amount` is the amount of the asset to send.
+- `assetID` is the asset id of the asset which is sent. Use `AVAX` for AVAX exports.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by `username`
+- `password` is `username`‘s password.
 
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
 
 #### **Example Call**
 
@@ -630,12 +628,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2Eu16yNaepP57XrrJgjKGpiEDandpiGWW8xbUm6wcTYny3fejj",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2Eu16yNaepP57XrrJgjKGpiEDandpiGWW8xbUm6wcTYny3fejj",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
 }
 ```
 
@@ -654,8 +652,8 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+- `username` must control `address`.
+- `privateKey` is the string representation of the private key that controls `address`.
 
 #### **Example Call**
 
@@ -676,11 +674,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "privateKey": "PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+  }
 }
 ```
 
@@ -716,20 +714,20 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "balances": [
-            {
-                "asset": "AVAX",
-                "balance": "102"
-            },
-            {
-                "asset": "2sdnziCz37Jov3QSNMXcFRGFJ1tgauaj6L7qfk7yUcRPfQMC79",
-                "balance": "10000"
-            }
-        ]
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "balances": [
+      {
+        "asset": "AVAX",
+        "balance": "102"
+      },
+      {
+        "asset": "2sdnziCz37Jov3QSNMXcFRGFJ1tgauaj6L7qfk7yUcRPfQMC79",
+        "balance": "10000"
+      }
+    ]
+  },
+  "id": 1
 }
 ```
 
@@ -748,10 +746,10 @@ avm.getAssetDescription({assetID: string}) -> {
 }
 ```
 
-* `assetID` is the id of the asset for which the information is requested.
-* `name` is the asset’s human-readable, not necessarily unique name.
-* `symbol` is the asset’s symbol.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+- `assetID` is the id of the asset for which the information is requested.
+- `name` is the asset’s human-readable, not necessarily unique name.
+- `symbol` is the asset’s symbol.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
 
 #### **Example Call**
 
@@ -794,8 +792,8 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `assetID` id of the asset for which the balance is requested
+- `address` owner of the asset
+- `assetID` id of the asset for which the balance is requested
 
 #### **Example Call**
 
@@ -815,28 +813,30 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "balance":"299999999999900",
-        "utxoIDs":[
-            {
-                "txID":"WPQdyLNqHfiEKp4zcCpayRHYDVYuh1hqs9c1RqgZXS4VPgdvo",
-                "outputIndex":1
-            }
-        ]
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "balance": "299999999999900",
+    "utxoIDs": [
+      {
+        "txID": "WPQdyLNqHfiEKp4zcCpayRHYDVYuh1hqs9c1RqgZXS4VPgdvo",
+        "outputIndex": 1
+      }
+    ]
+  }
 }
 ```
 
-### avm.getAddressTxs 
+### avm.getAddressTxs
 
 Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
 
-* A UTXO that the transaction consumes was at least partially owned by the address.
-* A UTXO that the transaction produces is at least partially owned by the address.
+- A UTXO that the transaction consumes was at least partially owned by the address.
+- A UTXO that the transaction produces is at least partially owned by the address.
 
+:::tip
 Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+:::
 
 #### **Signature**
 
@@ -854,14 +854,14 @@ avm.getAddressTxs({
 
 **Request parameters**
 
-* `address`: The address for which we're fetching related transactions
-* `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
-* `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
+- `address`: The address for which we're fetching related transactions
+- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
+- `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
 
 **Response parameters**
 
-* `txIDs`: List of transaction IDs that affected the balance of this address.
-* `cursor`: Page number or offset. Use this in request to get the next page.
+- `txIDs`: List of transaction IDs that affected the balance of this address.
+- `cursor`: Page number or offset. Use this in request to get the next page.
 
 #### **Example Call**
 
@@ -882,14 +882,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txIDs": [
-            "SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"
-        ],
-        "cursor": "1"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txIDs": ["SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"],
+    "cursor": "1"
+  },
+  "id": 1
 }
 ```
 
@@ -927,97 +925,90 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "tx": {
-            "unsignedTx": {
-                "networkID": 1,
-                "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-                "outputs": [
-                    {
-                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                        "output": {
-                            "addresses": [
-                                "X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"
-                            ],
-                            "amount": 1530084210,
-                            "locktime": 0,
-                            "threshold": 1
-                        }
-                    }
-                ],
-                "inputs": [],
-                "memo": "0x",
-                "sourceChain": "11111111111111111111111111111111LpoYY",
-                "importedInputs": [
-                    {
-                        "txID": "28jfD1CViCz7CKawJBzmHCQRWtk6xwzcBjCVErH6dBo11JLvmw",
-                        "outputIndex": 0,
-                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                        "input": {
-                            "amount": 1531084210,
-                            "signatureIndices": [
-                                0
-                            ]
-                        }
-                    }
-                ]
-            },
-            "credentials": [
-                {
-                    "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                    "credential": {
-                        "signatures": [
-                            "0x447ea3c6725add24e240b3179f9cc28ab5410c48f822d32d12459861ca816765297dbfe07e1957e3b470d39e6f56f10269dd7f8c4e108857db874b2c4ba1a22401"
-                        ]
-                    }
-                }
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "networkID": 1,
+        "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+        "outputs": [
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": ["X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"],
+              "amount": 1530084210,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
+        ],
+        "inputs": [],
+        "memo": "0x",
+        "sourceChain": "11111111111111111111111111111111LpoYY",
+        "importedInputs": [
+          {
+            "txID": "28jfD1CViCz7CKawJBzmHCQRWtk6xwzcBjCVErH6dBo11JLvmw",
+            "outputIndex": 0,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 1531084210,
+              "signatureIndices": [0]
+            }
+          }
+        ]
+      },
+      "credentials": [
+        {
+          "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+          "credential": {
+            "signatures": [
+              "0x447ea3c6725add24e240b3179f9cc28ab5410c48f822d32d12459861ca816765297dbfe07e1957e3b470d39e6f56f10269dd7f8c4e108857db874b2c4ba1a22401"
             ]
-        },
-        "encoding": "json"
+          }
+        }
+      ]
     },
-    "id": 1
+    "encoding": "json"
+  },
+  "id": 1
 }
 ```
 
 Where:
 
-* `credentials` is a list of this transaction's credentials. Each credential proves that this transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a list of signatures.
-* `unsignedTx` is the non-signature portion of the transaction.
-* `networkID` is the ID of the network this transaction happened on. (Avalanche Mainnet is `1`.)
-* `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
-* Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to another chain.
-* Each element of `inputs` is an input of this transaction which has not been imported from another chain.
-* Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the blockchain ID that assets are being imported from, and the inputs that are being imported.
-* Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
+- `credentials` is a list of this transaction's credentials. Each credential proves that this transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a list of signatures.
+- `unsignedTx` is the non-signature portion of the transaction.
+- `networkID` is the ID of the network this transaction happened on. (Avalanche Mainnet is `1`.)
+- `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
+- Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to another chain.
+- Each element of `inputs` is an input of this transaction which has not been imported from another chain.
+- Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the blockchain ID that assets are being imported from, and the inputs that are being imported.
+- Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
 
 An output contains:
 
-* `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
-* `fxID`: The ID of the FX this output uses.
-* `output`: The FX-specific contents of this output.
+- `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
+- `fxID`: The ID of the FX this output uses.
+- `output`: The FX-specific contents of this output.
 
 Most outputs use the secp256k1 FX, look like this:
 
 ```json
 {
-    "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-    "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-    "output": {
-        "addresses": [
-            "X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"
-        ],
-        "amount": 1530084210,
-        "locktime": 0,
-        "threshold": 1
-    }
+  "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+  "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+  "output": {
+    "addresses": ["X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"],
+    "amount": 1530084210,
+    "locktime": 0,
+    "threshold": 1
+  }
 }
 ```
 
 The above output can be consumed after Unix time `locktime` by a transaction that has signatures from `threshold` of the addresses in `addresses`.
-
 
 ### avm.getTxStatus
 
@@ -1031,10 +1022,10 @@ avm.getTxStatus({txID: string}) -> {status: string}
 
 `status` is one of:
 
-* `Accepted`: The transaction is (or will be) accepted by every node
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
-* `Unknown`: The transaction hasn’t been seen by this node
+- `Accepted`: The transaction is (or will be) accepted by every node
+- `Processing`: The transaction is being voted on by this node
+- `Rejected`: The transaction will never be accepted by any node in the network
+- `Unknown`: The transaction hasn’t been seen by this node
 
 #### **Example Call**
 
@@ -1053,11 +1044,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "status":"Accepted"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "Accepted"
+  }
 }
 ```
 
@@ -1089,13 +1080,13 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination (when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
+- `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
+- At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
+- When using pagination (when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+- `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example**
 
@@ -1118,23 +1109,23 @@ This gives response:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "numFetched": "5",
-        "utxos": [
-            "11PQ1sNw9tcXjVki7261souJnr1TPFrdVCu5JGZC7Shedq3a7xvnTXkBQ162qMYxoerMdwzCM2iM1wEQPwTxZbtkPASf2tWvddnsxPEYndVSxLv8PDFMwBGp6UoL35gd9MQW3UitpfmFsLnAUCSAZHWCgqft2iHKnKRQRz",
-            "11RCDVNLzFT8KmriEJN7W1in6vB2cPteTZHnwaQF6kt8B2UANfUkcroi8b8ZSEXJE74LzX1mmBvtU34K6VZPNAVxzF6KfEA8RbYT7xhraioTsHqxVr2DJhZHpR3wGWdjUnRrqSSeeKGE76HTiQQ8WXoABesvs8GkhVpXMK",
-            "11GxS4Kj2od4bocNWMQiQhcBEHsC3ZgBP6edTgYbGY7iiXgRVjPKQGkhX5zj4NC62ZdYR3sZAgp6nUc75RJKwcvBKm4MGjHvje7GvegYFCt4RmwRbFDDvbeMYusEnfVwvpYwQycXQdPFMe12z4SP4jXjnueernYbRtC4qL",
-            "11S1AL9rxocRf2NVzQkZ6bfaWxgCYch7Bp2mgzBT6f5ru3XEMiVZM6F8DufeaVvJZnvnHWtZqocoSRZPHT5GM6qqCmdbXuuqb44oqdSMRvLphzhircmMnUbNz4TjBxcChtks3ZiVFhdkCb7kBNLbBEmtuHcDxM7MkgPjHw",
-            "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
-        ],
-        "endIndex": {
-            "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
-            "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
-        },
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "5",
+    "utxos": [
+      "11PQ1sNw9tcXjVki7261souJnr1TPFrdVCu5JGZC7Shedq3a7xvnTXkBQ162qMYxoerMdwzCM2iM1wEQPwTxZbtkPASf2tWvddnsxPEYndVSxLv8PDFMwBGp6UoL35gd9MQW3UitpfmFsLnAUCSAZHWCgqft2iHKnKRQRz",
+      "11RCDVNLzFT8KmriEJN7W1in6vB2cPteTZHnwaQF6kt8B2UANfUkcroi8b8ZSEXJE74LzX1mmBvtU34K6VZPNAVxzF6KfEA8RbYT7xhraioTsHqxVr2DJhZHpR3wGWdjUnRrqSSeeKGE76HTiQQ8WXoABesvs8GkhVpXMK",
+      "11GxS4Kj2od4bocNWMQiQhcBEHsC3ZgBP6edTgYbGY7iiXgRVjPKQGkhX5zj4NC62ZdYR3sZAgp6nUc75RJKwcvBKm4MGjHvje7GvegYFCt4RmwRbFDDvbeMYusEnfVwvpYwQycXQdPFMe12z4SP4jXjnueernYbRtC4qL",
+      "11S1AL9rxocRf2NVzQkZ6bfaWxgCYch7Bp2mgzBT6f5ru3XEMiVZM6F8DufeaVvJZnvnHWtZqocoSRZPHT5GM6qqCmdbXuuqb44oqdSMRvLphzhircmMnUbNz4TjBxcChtks3ZiVFhdkCb7kBNLbBEmtuHcDxM7MkgPjHw",
+      "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
+    ],
+    "endIndex": {
+      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
     },
-    "id": 1
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -1161,22 +1152,22 @@ This gives response:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "numFetched": "4",
-        "utxos": [
-            "115ZLnNqzCsyugMY5kbLnsyP2y4se4GJBbKHjyQnbPfRBitqLaxMizsaXbDMU61fHV2MDd7fGsDnkMzsTewULi94mcjk1bfvP7aHYUG2i3XELpV9guqsCtv7m3m3Kg4Ya1m6tAWqT7PhvAaW4D3fk8W1KnXu5JTWvYBqD2",
-            "11QASUuhw9M1r52maTFUZ4fnuQby9inX77VYxePQoNavEyCPuHN5cCWPQnwf8fMrydFXVMPAcS4UJAcLjSFskNEmtVPDMY4UyHwh2MChBju6Y7V8yYf3JBmYt767NPsdS3EqgufYJMowpud8fNyH1to4pAdd6A9CYbD8KG",
-            "11MHPUWT8CsdrtMWstYpFR3kobsvRrLB4W8tP9kDjhjgLkCJf9aaJQM832oPcvKBsRhCCxfKdWr2UWPztRCU9HEv4qXVwRhg9fknAXzY3a9rXXPk9HmArxMHLzGzRECkXpXb2dAeqaCsZ637MPMrJeWiovgeAG8c5dAw2q",
-            "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
-        ],
-        "endIndex": {
-            "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
-            "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
-        },
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "4",
+    "utxos": [
+      "115ZLnNqzCsyugMY5kbLnsyP2y4se4GJBbKHjyQnbPfRBitqLaxMizsaXbDMU61fHV2MDd7fGsDnkMzsTewULi94mcjk1bfvP7aHYUG2i3XELpV9guqsCtv7m3m3Kg4Ya1m6tAWqT7PhvAaW4D3fk8W1KnXu5JTWvYBqD2",
+      "11QASUuhw9M1r52maTFUZ4fnuQby9inX77VYxePQoNavEyCPuHN5cCWPQnwf8fMrydFXVMPAcS4UJAcLjSFskNEmtVPDMY4UyHwh2MChBju6Y7V8yYf3JBmYt767NPsdS3EqgufYJMowpud8fNyH1to4pAdd6A9CYbD8KG",
+      "11MHPUWT8CsdrtMWstYpFR3kobsvRrLB4W8tP9kDjhjgLkCJf9aaJQM832oPcvKBsRhCCxfKdWr2UWPztRCU9HEv4qXVwRhg9fknAXzY3a9rXXPk9HmArxMHLzGzRECkXpXb2dAeqaCsZ637MPMrJeWiovgeAG8c5dAw2q",
+      "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
+    ],
+    "endIndex": {
+      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
     },
-    "id": 1
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -1202,19 +1193,19 @@ This gives response:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "numFetched": "1",
-        "utxos": [
-            "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMuxgu73ukQbPjXtDgyBCE1cgrJjqDPgboUswV5BGAYhnuxunkHS3xncB599V3mxyvWnwVwNPmq3mKQwF5EWhfTaXkhqE5VFr92yQBk9Nh5ekZBDSFGCSC"
-        ],
-        "endIndex": {
-            "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
-            "utxo": "2Sz2XwRYqUHwPeiKoRnZ6ht88YqzAF1SQjMYZQQaB5wBFkAqST"
-        },
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "1",
+    "utxos": [
+      "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMuxgu73ukQbPjXtDgyBCE1cgrJjqDPgboUswV5BGAYhnuxunkHS3xncB599V3mxyvWnwVwNPmq3mKQwF5EWhfTaXkhqE5VFr92yQBk9Nh5ekZBDSFGCSC"
+    ],
+    "endIndex": {
+      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "utxo": "2Sz2XwRYqUHwPeiKoRnZ6ht88YqzAF1SQjMYZQQaB5wBFkAqST"
     },
-    "id": 1
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -1233,10 +1224,10 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
-* `username` is the user that controls `to`.
-* `txID` is the ID of the newly created atomic transaction.
+- `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
+- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
+- `username` is the user that controls `to`.
+- `txID` is the ID of the newly created atomic transaction.
 
 #### **Example Call**
 
@@ -1258,11 +1249,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2gXpf4jFoMAWQ3rxBfavgFfSdLkL2eFUYprKsUQuEdB5H6Jo1H"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2gXpf4jFoMAWQ3rxBfavgFfSdLkL2eFUYprKsUQuEdB5H6Jo1H"
+  },
+  "id": 1
 }
 ```
 
@@ -1280,7 +1271,7 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
 
 #### **Example Call**
 
@@ -1301,11 +1292,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "address":"X-avax1mwlnrzv0ezdycx4qhqj77j55cwgcvtf29zvmpy"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "address": "X-avax1mwlnrzv0ezdycx4qhqj77j55cwgcvtf29zvmpy"
+  }
 }
 ```
 
@@ -1342,11 +1333,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+  }
 }
 ```
 
@@ -1381,11 +1372,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "addresses": ["X-avax1rt4vac58crp0p59yf640c4gycm6creg2rt8hc6"]
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "addresses": ["X-avax1rt4vac58crp0p59yf640c4gycm6creg2rt8hc6"]
+  },
+  "id": 1
 }
 ```
 
@@ -1408,12 +1399,12 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- `to` is the X-Chain address the asset is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
 
 #### **Example Call**
 
@@ -1439,12 +1430,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
@@ -1469,11 +1460,11 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `memo` is an optional message, whose length can be up to 256 bytes.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+- `memo` is an optional message, whose length can be up to 256 bytes.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
 
 #### **Example Call**
 
@@ -1508,12 +1499,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
@@ -1535,11 +1526,11 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
-* `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
-* `to` is the X-Chain address the NFT is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the NFT being sent.)
+- `assetID` is the asset ID of the NFT being sent.
+- `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
+- `to` is the X-Chain address the NFT is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the NFT being sent.)
 
 #### **Example Call**
 
@@ -1564,12 +1555,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "DoR2UtG1Trd3Q8gWXVevNxD666Q3DPqSFmBSMPQ9dWTV8Qtuy",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "DoR2UtG1Trd3Q8gWXVevNxD666Q3DPqSFmBSMPQ9dWTV8Qtuy",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
 }
 ```
 
@@ -1610,11 +1601,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+  }
 }
 ```
 
@@ -1641,12 +1632,12 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- `to` is the X-Chain address the asset is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
 
 #### **Example Call**
 
@@ -1672,12 +1663,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
@@ -1706,11 +1697,11 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
 
 #### **Example Call**
 
@@ -1745,12 +1736,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 
@@ -1844,22 +1835,21 @@ func main() {
 
 **Operations**
 
-| Command | Description | Example | Arguments |
-| :--- | :--- | :--- | :--- |
-| **NewSet** | create a new address map set | {"newSet":{}} |  |
-| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
-| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":\["X-fuji..."\]}} | addresses - list of addresses to match |
+| Command          | Description                  | Example                                                      | Arguments                                                                                                                          |
+| :--------------- | :--------------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| **NewSet**       | create a new address map set | {"newSet":{}}                                                |                                                                                                                                    |
+| **NewBloom**     | create a new bloom set.      | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set    | {"addAddresses":{"addresses":\["X-fuji..."\]}}               | addresses - list of addresses to match                                                                                             |
 
 Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
 
 **Set details**
 
-* **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
-* **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered.  If the addresses is in the filter, you will be sent the transaction.
+- **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
+- **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered. If the addresses is in the filter, you will be sent the transaction.
 
 #### **Example Response**
 
 ```json
 2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
-
