@@ -240,7 +240,21 @@ Returns:
 
 ## Transfer from the C-Chain to the X-Chain
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction:
+
+1. Select the **`examples/evm`** folder to view the AvalancheJS C-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
+
+2. You can change the amount of AVAX to send by editing the _BN_ variable: `avaxAmount`. The sample code assigns this as `1e7` or `10000000` (.01 AVAX)
+
+The fee here will only be for exporting the asset. The import fees will be deducted from the UTXOs present on the Exported Atomic Memory, a memory location where UTXOs lie after getting exported but before being imported. If there is only a single UTXO, then it will be deducted from it.
+
+```ts
+//buildExportTx-xchain-avax.ts
+let avaxAmount: BN = new BN(1e7)
+let fee: BN = baseFee.div(new BN(1e9))
+fee = fee.add(new BN(1e6))
+```
+_Note: When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) will cause the txn to fail._
 
 Swap source and destination chains by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
 
@@ -250,7 +264,7 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 avalanchejs $ ts-node examples/avm/buildImportTx-cchain.ts
 Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
-
+_As with the export and import scripts, be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to ['buildExportTx-xchain-avax.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) to execute the script properly._
 ## Running On A Local Network
 
 You can also walk thorugh this tutorial on a [Local Test Network](create-a-local-test-network.md).
@@ -412,7 +426,7 @@ You can retrieve the transaction data by running the following:
 ```zsh
 avalanchejs $ ts-node examples/avm/getTx.ts
 ```
-_As with the export and import scripts, be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration-1) to ['getTx.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts) to execute the script properly._
+
 
 Returns:
 
