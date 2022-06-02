@@ -40,11 +40,11 @@ The response has your node’s ID:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+  },
+  "id": 1
 }
 ```
 
@@ -115,11 +115,11 @@ The response has your node’s ID:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji"
+  },
+  "id": 1
 }
 ```
 
@@ -174,12 +174,12 @@ The response has the transaction ID, as well as the address the change went to.
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "6pb3mthunogehapzqmubmx6n38ii3lzytvdrxumovwkqftzls",
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "6pb3mthunogehapzqmubmx6n38ii3lzytvdrxumovwkqftzls",
+    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
+  },
+  "id": 1
 }
 ```
 
@@ -211,20 +211,19 @@ The response should include the node we just added:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "validators": [
-            {
-                "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
-                "startTime": "1584021450",
-                "endtime": "1584121156",
-                "stakeAmount": "2000000000000"
-            }
-        ]
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "validators": [
+      {
+        "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
+        "startTime": "1584021450",
+        "endtime": "1584121156",
+        "stakeAmount": "2000000000000"
+      }
+    ]
+  },
+  "id": 1
 }
 ```
 
 When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
-

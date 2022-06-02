@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+
 # Issuing API Calls
 
 This guide explains how to make calls to APIs exposed by Avalanche nodes.
@@ -17,8 +18,8 @@ The base of the URL is always:
 
 where
 
-* `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../../../nodes/maintain/avalanchego-config-flags.md#http-server) `http-port` (default value `9650`).
+- `node-ip` is the IP address of the node the call is to.
+- `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../../../nodes/maintain/avalanchego-config-flags.md#http-server) `http-port` (default value `9650`).
 
 For example, if you're making RPC calls on the local node, the base URL might look like this: `127.0.0.1:9650`.
 
@@ -117,7 +118,7 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
 :::info
-When using the [Public API](../public-api-server.md) or another host that supports HTTPS, use `https://` or `wss://` instad of `http://` or `ws://`. 
+When using the [Public API](../public-api-server.md) or another host that supports HTTPS, use `https://` or `wss://` instad of `http://` or `ws://`.
 
 Also, note that the [public api](../public-api-server.md#supported-apis) only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
 :::
@@ -138,8 +139,8 @@ The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
 where:
 
-* Argument `txID` is the ID of the transaction we’re getting the status of.
-* Returned value `status` is the status of the transaction in question.
+- Argument `txID` is the ID of the transaction we’re getting the status of.
+- Returned value `status` is the status of the transaction in question.
 
 To call this method, then:
 
@@ -154,10 +155,10 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. (In practice is always 2.0)
-* `method` specifies the service (`avm`) and method (`getTxStatus`) that we want to invoke.
-* `params` specifies the arguments to the method.
-* `id` is the ID of this request. Request IDs should be unique.
+- `jsonrpc` specifies the version of the JSON RPC protocol. (In practice is always 2.0)
+- `method` specifies the service (`avm`) and method (`getTxStatus`) that we want to invoke.
+- `params` specifies the arguments to the method.
+- `id` is the ID of this request. Request IDs should be unique.
 
 That’s it!
 
@@ -167,16 +168,16 @@ If the call is successful, the response will look like this:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "Status":"Success"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "Status": "Success"
+  },
+  "id": 1
 }
 ```
 
-* `id` is the ID of the request that this response corresponds to.
-* `result` is the returned values of `getTxStatus`.
+- `id` is the ID of the request that this response corresponds to.
+- `result` is the returned values of `getTxStatus`.
 
 ### JSON RPC Error Response
 
@@ -203,4 +204,3 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 ## Sending and Receiving Bytes
 
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
-

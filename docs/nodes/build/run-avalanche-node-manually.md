@@ -9,10 +9,10 @@ The quickest way to learn about Avalanche is to run a node and interact with the
 
 In this tutorial, we will:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+- Install and run an Avalanche node
+- Connect to Avalanche
+- Send AVAX
+- Add your node to the validator set
 
 :::caution
 If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
@@ -28,10 +28,10 @@ This tutorial is primarily geared toward developers and people interested in how
 
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
-* CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 1 TB
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- CPU: Equivalent of 8 AWS vCPU
+- RAM: 16 GiB
+- Storage: 1 TB
+- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -49,12 +49,11 @@ Building the node from source is recommended if you're a developer looking to ex
 
 First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.17.9 or above.** 
+Run `go version`. **It should be 1.17.9 or above.**
 
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac. 
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac.
 
 Run `echo $GOPATH`. **It should not be empty.**
-
 
 Download the AvalancheGo repository into your `$GOPATH`:
 
@@ -140,7 +139,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+If this returns `true`, the chain is bootstrapped; otherwise, it returns `false`. If you make other API calls to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
 
 Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](../validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
 
@@ -149,7 +148,6 @@ You can use `Ctrl + C` to kill the node.
 If you want to experiment and play with your node, read on.
 
 To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` (e.g. `./build/avalanchego --http-host=`)
-
 
 #### Connect to Fuji Testnet
 
