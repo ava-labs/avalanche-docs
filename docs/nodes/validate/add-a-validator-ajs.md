@@ -90,7 +90,32 @@ or add it to an existing project:
 $ yarn add --dev avalanche
 ```
 For this tutorial we will use a CLI to run the example scripts directly from an AvalancheJS directory.
+## Typical Fuji Workflow
+### Key Management
+By default our scripts import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [```pKeychain```](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers.  
 
+```ts
+const pchain: PlatformVMAPI = avalanche.PChain()
+const pKeychain: KeyChain = pchain.keyChain()
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+pKeychain.importKey(privKey)
+```
+
+You can import the keys you want use with AvalancheJS directly into the AvalancheJS example script by doing the following:
+
+1. Navigate to the [private key value in the script](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/platformvm/buildAddValidatorTx.ts#L22)
+
+```js
+// buildAddValidatorTx.ts
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+```
+
+2. To run the script on Fuji, replace the `privKey` value with the imported private key.
+
+```js
+// buildAddValidatorTx.ts
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
+```
 ### Step 1 - Open AvalancheJS
 
 Open your AvalancheJS directory and select the **```examples/platformvm```** folder to view the source code for the examples scripts. 
@@ -98,8 +123,6 @@ Open your AvalancheJS directory and select the **```examples/platformvm```** fol
 We will use our [**```buildAddValidatorTx.ts```**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts) script to add a validator.
 
 ![ajs-add-validator](../../../static/img/ajs-addValidator.png)
-
-<br></br>
 
 Let’s go through and examine these variables.
 
@@ -110,7 +133,7 @@ const protocol: string = "http"
 const networkID: number = 5
 const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
 ```
-Depending on how you started your node, you might use custom settings for your Avalanche Network
+Depending on how you started your node, you might use custom settings for your Avalanche Network.
 
 _Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) to learn more about custom Node configurations_
 
@@ -155,27 +178,16 @@ const protocol: string = "http"
 
 `Network ID`
 
-Depending on the networkID which is passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network. Be sure to configure the networkID accordingly per each workflow.
+Depending on the networkID which is passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
 
-Executing the script on Avalanche Mainnet:
-```js
-const networkID: number = 1
-  ```
-
-AvalancheJS expects the following format: _1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg_
-
-Executing the script on Fuji:
+Fuji:
 ```js
 const networkID: number = 5
   ```
 
 AvalancheJS expects the following format: _5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
-
 You can learn more about our encoded addresses [here](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses)
-
-<br></br>
-
 
 Here we determine the node's staking period and delegation Fee
 
@@ -189,6 +201,8 @@ const delegationFee: number = 10
 `nodeID`
 
 This is the node ID of the validator being added. To get your node’s ID, use the example script: [`getNodeID.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts)
+
+_Be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to ['getNodeID.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts) to execute the script properly._
 
 ```sh
 avalanchejs $ ts-node examples/info/getNodeID.ts
@@ -221,47 +235,6 @@ const main = async (): Promise<any> => {
 
 In order to validate the Primary Network, one must stake AVAX. This parameter defines the amount of AVAX staked.
 
-### Key Management
-By default our scripts import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [```pKeychain```](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers.  
-
-```ts
-const pchain: PlatformVMAPI = avalanche.PChain()
-const pKeychain: KeyChain = pchain.keyChain()
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
-```
-
-You can import private keys to employ with AvalancheJS directly in the AvalancheJS directory by doing the following:
-
-1. Rename [``secrets.example``](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to ``secrets.json``
-
-2. Add your Private Key as an object.
-```json
-// secrets.json
-{
-  "privateKey": "<YOUR-PRIVATE-KEY-HERE>"
-}
-```
-
-3. Import your private key into the example script.
-```js
-// buildAddValidatorTx.ts
-import { privateKey } from "../secrets.json"
-```
-
-By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPrivateKey```](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as ```privKey``` to sign transactions. 
-
-```js
-// buildAddValidatorTx.ts
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-```
-
-To run AvalancheJS scripts on Mainnet or Fuji, you can simply replace this with the imported private key.
-```js
-// buildAddValidatorTx.ts
-const privKey: string = privateKey
-```
-
 
 ### Step 2 - Issue The Transaction
 
@@ -286,11 +259,18 @@ Now let’s issue the transaction. We use `const startTime: BN = UnixNow().add(n
     asOf
   )
 ```
+### Step 2 - Execute The Add Validator Script
+_Note: Be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to each example script to ensure proper execution._
+
+
+Run the command:
+```zsh
+avlanchejs $ ts-node examples/platformvm/buildAddValidatorTx.ts
+```
 
 The response has the transaction ID.
 
-```zsh
-avlanchejs $ ts-node examples/platformvm/buildAddValidatorTx.ts
+```
 avlanchejs $ Success! TXID: A64nRYNXxnaMwdDBAM8AXaQA7GFd3GMfvJkjSLqoMwTVXbFbM
 ```
 
@@ -298,9 +278,11 @@ We can check the transaction’s status by running the example script: [`getTxSt
 
 ```sh
 avalanchejs $ ts-node examples/platformvm/getTxStatus.ts
-avalanchejs $ { status: 'Committed' }
 ```
 
+```sh
+avalanchejs $ { status: 'Committed' }
+```
 The status should be `Committed`, meaning the transaction was successful. We can call run example script: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts)and see that the node is now in the pending validator set for the Primary Network:
 ```sh
 avalanchejs $ ts-node examples/platformvm/getPendingValidators.ts    
