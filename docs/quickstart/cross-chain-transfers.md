@@ -261,7 +261,7 @@ Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 
 ![Image for post](/img/ajs-getTx.png)
 
-That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
+That's it! You've transferred AVAX from the X-Chain to C-Chain! 
 
 You can retrieve the transaction data by running the following:
 
