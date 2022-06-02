@@ -12,7 +12,7 @@ This tutorial will show how to set up infrastructure to monitor an instance of [
 - [node_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
 - AvalancheGo’s [metrics API](../../apis/avalanchego/apis/metrics.md) to get information about the node
 - [Grafana](https://grafana.com/) to visualize data on a dashboard.
-- A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards)
+- A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-monitoring/tree/main/grafana/dashboards)
 
 Prerequisites:
 
@@ -33,7 +33,7 @@ The system as described here **should not** be opened to the public internet. Ne
 In order to make node monitoring easier to install, we have made a script that does most of the work for you. To download and run the script, log into the machine the node runs on with a user that has administrator privileges and enter the following command:
 
 ```bash
-wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/monitoring-installer.sh;\
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/main/grafana/monitoring-installer.sh ;\
 chmod 755 monitoring-installer.sh;
 ```
 
@@ -48,7 +48,7 @@ Script itself is run multiple times with different arguments, each installing a 
 It should display:
 
 ```text
-Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--help]
+Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--5|--help]
 
 Options:
 --help   Shows this message
