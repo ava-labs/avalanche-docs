@@ -8,7 +8,7 @@ If you are looking for how to transfter AVAX tokens using the web wallet, please
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md). You are familiar with the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
+You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md), are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md), and are familiar with the [AvalancheJS](https://github.com/ava-labs/AvalancheJS) repo.
 
 ## Getting Started
 
@@ -42,7 +42,7 @@ The sample code imports the [Pre-Generated Private Key](https://github.com/ava-l
 
 You can import the keys you use with AvalancheJS directly in the AvalancheJS example script by doing the following:
 
-1. Navigate to the private [key value in the script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30)
+1. Navigate to the [private key value in the script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30).
 
 ```js
 // buildExportTx-cchain-avax.ts
@@ -90,9 +90,9 @@ Select the **`examples/avm`** folder to view the AvalancheJS X-Chain examples. T
 
 #### **Modify Your Avalanche Network Configuration**
 
-Depending on how you started your node, you might use custom settings for your Avalanche Network
+Depending on how you started your node, you might use custom settings for your Avalanche Network.
 
-_Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) to learn more about custom Node configurations_
+_Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) to learn more about custom Node configurations._
 
 Below are the following objects in your Avalanche Network:
 
@@ -164,7 +164,7 @@ _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 const networkID: number = 5;
 ```
 
-You can learn more about our encoded addresses [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses)
+You can learn more about our encoded addresses [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
 **Edit the amount of AVAX you want to send:**
 
@@ -288,7 +288,7 @@ $ ./scripts/build.sh
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
-Confirm you have Avalanche Network Runner installed by following the steps listed [here](create-a-local-test-network.md#installation)
+Confirm you have Avalanche Network Runner installed by following the steps listed [here](create-a-local-test-network.md#installation).
 
 Start Avalanche Network Runner and run a script to start a new local network.
 
@@ -361,7 +361,7 @@ const port: number = "<YOUR-NODE-PORT-HERE>";
 
 **Protocol**
 
-The protocol we use to connect to the node's IP
+The protocol we use to connect to the node's IP.
 
 ```js
 const protocol: string = "http";
@@ -378,7 +378,7 @@ Local Network:
 const networkID: number = 1337;
 ```
 
-You can learn more about our encoded addresses [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses)
+You can learn more about our encoded addresses [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
 **Edit the amount of AVAX you want to send:**
 
@@ -398,7 +398,7 @@ const amount: BN = value.sub(fee);
 
 We must pass the value in WEI format. For reference, 10 \*\* 18 WEI = 1 AVAX
 
-You can use the [snowtrace unit converter](https://snowtrace.io/unitconverter) to view more unit conversions
+You can use the [snowtrace unit converter](https://snowtrace.io/unitconverter) to view more unit conversions.
 
 ### Step 5 - Run The Export And Import Scripts
 
