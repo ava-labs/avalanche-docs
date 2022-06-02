@@ -127,7 +127,7 @@ Select the **`examples/avm`** folder to view the AvalancheJS X-Chain examples. T
 
 **Modify your Avalanche network configuration**
 
-Depending on how you started your node, you might use custom settings for your Avalanche Network
+Depending on how you started your node, you might use custom settings for your Avalanche Network.
 
 You might notice that Avalanche Network Runner produces new ports for each node during node cluster deployment. Be sure to change configurations accordingly with each new cluster.
 
