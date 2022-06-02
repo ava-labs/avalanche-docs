@@ -43,7 +43,7 @@ The easiest way to transfer AVAX between chains is to use [AvalancheJS](https://
 
 AvalancheJS allows you to create and sign transactions locally which is why it is the recommended way to transfer AVAX between chains. We are moving away from using AvalancheGo's keystore because it requires you to keep your keys on a full node which makes them a target for malicious hackers.
 
-You will find both a [Fuji Workflow](cross-chain-transfers.md#typical-fuji-workflow) and [Avalanche Network Runner Workflow](cross-chain-transfers.md#typical-avalanche-network-runner-workflow) in this tutorial.
+You will find both a [Fuji Workflow](./cross-chain-transfers.md#typical-fuji-workflow) and [Avalanche Network Runner Workflow](./cross-chain-transfers.md#typical-avalanche-network-runner-workflow) in this tutorial.
 
 ## Typical Avalanche Network Runner Workflow
 
@@ -62,7 +62,7 @@ Confirm you have Avalanche Network Runner installed by following the steps liste
 
 Start Avalanche Network Runner and run a script to start a new local network.
 
-### Step 1 - Start the server
+### Step 1 - Start The Server
 
 ```text
 $ cd /path/to/Avalanche-Network-Runner
@@ -72,7 +72,7 @@ $ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-### Step 2 - Start a New Avalanche Network with Five Nodes (a cluster)
+### Step 2 - Start A New Avalanche Network With Five Nodes (a cluster)
 
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
@@ -92,7 +92,7 @@ Now you're running a local Avalanche network with 5 nodes.
 
 ### Step 3 - Open AvalancheJS
 
-Open your AvalancheJS directory and select the **`examples`** folder to view the source code for the examples scripts.
+Open your AvalancheJS directory and select the [**`examples`**](https://github.com/ava-labs/avalanchejs/tree/master/examples) folder to view the source code for the examples scripts.
 
 ![Image for post](/img/examples.png)
 
@@ -121,21 +121,17 @@ The script in this tutorial uses **X Chain <-> C Chain** transfers. Depending on
 
 :::
 
-<br></br>
-
 Select the **`examples/avm`** folder to view the AvalancheJS X-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
 
 ![Image for post](/img/ajs-export-cchain-res.png)
 
-### Modify your Avalanche network configuration
+**Modify your Avalanche network configuration**
 
 Depending on how you started your node, you might use custom settings for your Avalanche Network
 
 You might notice that Avalanche Network Runner produces new ports for each node during node cluster deployment. Be sure to change configurations accordingly with each new cluster.
 
-_Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-up-node-with-installer#advanced-node-configuration) to learn more about custom Node configurations_
-
-Below are the following objects in your Avalanche Network:
+Below are the settings for running code with local network:
 
 ```js
 const ip: string = "localhost";
@@ -146,9 +142,7 @@ const networkID: number = 1337;
 
 **IP Address**
 
-You Node's IP address
-
-By default, Avalanche Network Runner uses localhost.
+By default, AvalancheJS uses localhost.
 
 ```js
 const ip: string = "localhost";
@@ -214,7 +208,7 @@ AvalancheJS has address encoding for the following networks
 12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
 ```
 
-### Edit The Amount Of AVAX You Want To Send:
+**Edit the amount of AVAX you want to send:**
 
 By default the scripts send the wallet's entire AVAX balance:
 
@@ -236,7 +230,7 @@ We must pass the value in WEI format. For reference, 10 \*\* 18 WEI = 1 AVAX
 
 You can use the [snowtrace unit converter](https://snowtrace.io/unitconverter) to view more unit conversions
 
-### Step 5 - Run the Export and Import scripts
+### Step 5 - Run The Export And Import scripts
 
 Between X/P/C chains there is shared memory. First, tokens are exported from the source chain to the shared memory, then imported by the destination chain.
 
@@ -357,7 +351,7 @@ Select the **`examples/avm`** folder to view the AvalancheJS X-Chain examples. T
 
 ![Image for post](/img/ajs-export-cchain-res.png)
 
-### Modify your Avalanche network configuration
+**Modify Your Avalanche Network Configuration**
 
 Depending on how you started your node, you might use custom settings for your Avalanche Network
 
@@ -442,7 +436,7 @@ const networkID: number = 5;
 
 You can learn more about our encoded addresses [here](cross-chain-transfers.md#network-id)
 
-#### Edit The Amount Of AVAX You Want To Send:
+**Edit the amount of AVAX you want to send:**
 
 By default the scripts send the wallet's entire AVAX balance:
 
@@ -462,7 +456,7 @@ We must pass the value in WEI format. For reference, 10 \*\* 18 WEI = 1 AVAX
 
 You can use the [snowtrace unit converter](https://snowtrace.io/unitconverter) to view more unit conversions
 
-### Transfer from the C-Chain to the X-Chain
+## Transfer from the C-Chain to the X-Chain
 
 To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
