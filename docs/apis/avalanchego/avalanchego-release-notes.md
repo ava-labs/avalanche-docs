@@ -971,7 +971,7 @@ _Added_
 
 **Prometheus Metrics**
 
-Many Prometheus metrics were renamed, and many histograms were replaced with 2 gauges. See [here](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) for updated Grafana Dashboards.
+Many Prometheus metrics were renamed, and many histograms were replaced with 2 gauges. See [here](https://github.com/ava-labs/avalanche-monitoring/tree/master/grafana/dashboards) for updated Grafana Dashboards.
 
 This release also adds helper methods to the `utils/metric` package.
 

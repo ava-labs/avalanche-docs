@@ -234,7 +234,7 @@ AvalancheGo monitoring installer
 
 Downloading...
 Last-modified header missing -- time-stamps turned off.
-2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
+2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/master/grafana/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
 FINISHED --2021-11-05 14:57:47--
 Total wall clock time: 0.2s
 Downloaded: 1 files, 49K in 0s (132 MB/s)
