@@ -182,8 +182,7 @@ Fuji Testnet:
 const networkID: number = 5;
 ```
 
-Custom Network:
-
+Local Network:
 ```js
 const networkID: number = 1337;
 ```
@@ -212,14 +211,14 @@ AvalancheJS has address encoding for the following networks
 
 By default the scripts send the wallet's entire AVAX balance:
 
-When using Avalanche Network Runner, we import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [`xKeychain`](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. This means `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` is the `balance` holder and will pay the `fee` to export AVAX.
+The sample code imports the [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to the [`xKeychain`](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. This means `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` is the `balance` holder and will pay the `fee` to export AVAX.
 
 ```js
 const balance: BN = new BN(getBalanceResponse.balance);
 const amount: BN = balance.sub(fee);
 ```
 
-Change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
+You can change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
 
 ```js
 const value: BN = new BN("10000000000000000");
@@ -251,6 +250,8 @@ That key is pre-funded on the local network when using Avalanche Network Runner 
 - P-Chain: 30000000000000000 nAVAX
 
 - C-Chain: 50000000000000000000000000 nAVAX
+
+Before running the export and import scripts for I.E. `buildExportTx-cchain-avax.ts` and `buildImportTx-xchain.ts`, be sure to apply the necessary changes to the code to execute them.
 
 ```zsh
 avalanchejs $ ts-node examples/avm/buildExportTx-cchain-avax.ts
@@ -297,27 +298,7 @@ Returns:
 
 By default our scripts import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [`xKeychain`](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. This means `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` is the `balance` holder and will pay the fee to export AVAX.
 
-You can manage the private keys you use with AvalancheJS directly in the AvalancheJS directory by doing the following:
-
-1. Rename [`secrets.example`](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to `secrets.json`
-
-2. Add your Private Key as an object.
-
-```json
-// secrets.json
-{
-  "privateKey": "<YOUR-PRIVATE-KEY-HERE>"
-}
-```
-
-3. Import your private key into the example script.
-
-```js
-// buildExportTx-cchain-avax.ts
-import { privateKey } from "../secrets.json";
-```
-
-By default, the scripts use the AvalancheJS constant, [`DefaultLocalGenesisPrivateKey`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as `privKey` to sign transactions.
+You can import the keys you use with AvalancheJS directly in the AvalancheJS example script by doing the following:
 
 ```js
 // buildExportTx-cchain-avax.ts
@@ -328,14 +309,12 @@ To run AvalancheJS scripts on Mainnet or Fuji, you can simply replace this with 
 
 ```js
 // buildExportTx-cchain-avax.ts
-const privKey: string = privateKey;
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
 ```
 
 ### Step 1 - Open AvalancheJS
 
 Open your AvalancheJS directory and select the **`examples`** folder to view the source code for the examples scripts.
-
-![Image for post](/img/examples.png)
 
 ### Step 2 - Modify Your Export
 
@@ -344,8 +323,6 @@ Open your AvalancheJS directory and select the **`examples`** folder to view the
 The script in this tutorial uses **X Chain <-> C Chain** transfers. Depending on which chains you want to interact with, the scripts you use could be different. Please check the table above for more information.
 
 :::
-
-<br></br>
 
 Select the **`examples/avm`** folder to view the AvalancheJS X-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
 
@@ -360,7 +337,7 @@ _Note: See [Advanced Configurations](https://docs.avax.network/nodes/build/set-u
 Below are the following objects in your Avalanche Network:
 
 ```js
-const ip: string = "172.11.111.123";
+const ip: string = "localhost";
 const port: number = 9650;
 const protocol: string = "http";
 const networkID: number = 5;
@@ -374,19 +351,13 @@ If you're using a local node:
 const ip: string = "localhost";
 ```
 
-Or a custom IP address:
+Or a custom IP address such as an [elastic IP](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#assign-an-elastic-ip):
 
 ```js
 const ip: string = "<YOUR-NODE-IP-ADDRESS-HERE>";
 ```
 
-You can also perform this tutorial on the Avalanche Mainnet or Fuji Testnet by connecting to the [Avalanche Public API](../apis/avalanchego/public-api-server.md) server:
-
-Mainnet:
-
-```js
-const ip: string = "api.avax.network";
-```
+You can also perform this tutorial by connecting to the [Avalanche Public API](../apis/avalanchego/public-api-server.md) server:
 
 Fuji Testnet:
 
@@ -422,13 +393,6 @@ Depending on the networkID which is passed in when instantiating Avalanche, the 
 
 _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
-Mainnet:
-
-```js
-const networkID: number = 1;
-```
-
-Fuji Testnet:
 
 ```js
 const networkID: number = 5;
