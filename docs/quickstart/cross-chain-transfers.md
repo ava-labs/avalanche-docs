@@ -38,7 +38,7 @@ AvalancheJS allows you to create and sign transactions locally which is why it i
 
 ### Key Management
 
-By default our scripts import our [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [`xKeychain`](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. Before we begin executing scripts on Fuji, we must replace the default key with our private key. 
+The sample code imports the [Pre-Generated Private Key](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) to our [`xKeychain`](https://github.com/ava-labs/avalanchejs/blob/46ce89f395133702320a77cba4bb9cb818b48fe8/examples/avm/buildExportTx-cchain-avax.ts#L31) to obtain signers. Before we begin executing scripts on Fuji, we must replace the default key with our private key. 
 
 You can import the keys you use with AvalancheJS directly in the AvalancheJS example script by doing the following:
 
@@ -175,7 +175,7 @@ const balance: BN = new BN(getBalanceResponse.balance);
 const amount: BN = balance.sub(fee);
 ```
 
-Change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
+You can change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
 
 ```js
 const value: BN = new BN("10000000000000000");
@@ -365,6 +365,26 @@ const networkID: number = 1337;
 ```
 
 You can learn more about our encoded addresses [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses)
+
+**Edit the amount of AVAX you want to send:**
+
+By default the scripts send the wallet's entire AVAX balance:
+
+```js
+const balance: BN = new BN(getBalanceResponse.balance);
+const amount: BN = balance.sub(fee);
+```
+
+You can change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
+
+```js
+const value: BN = new BN("10000000000000000");
+const amount: BN = value.sub(fee);
+```
+
+We must pass the value in WEI format. For reference, 10 \*\* 18 WEI = 1 AVAX
+
+You can use the [snowtrace unit converter](https://snowtrace.io/unitconverter) to view more unit conversions
 
 ### Step 5 - Run The Export And Import Scripts
 
