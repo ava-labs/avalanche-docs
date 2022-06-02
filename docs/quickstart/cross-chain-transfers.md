@@ -303,14 +303,14 @@ You can manage private keys you use with AvalancheJS directly in the AvalancheJS
 
 Rename [``secrets.example``](https://github.com/ava-labs/avalanchejs/blob/master/examples/secrets.example) to ``secrets.json``
 
-Add your Private Key as an object
+Add your Private Key as an object.
 ```json
 {
   "privateKey": "<YOUR-PRIVATE-KEY-HERE>"
 }
 ```
 
-Import your private key into your project
+Import your private key into the example script.
 ```js
 import { privateKey } from "../secrets.json"
 ```
@@ -321,7 +321,7 @@ By default, the scripts use the AvalancheJS constant, [```DefaultLocalGenesisPri
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 ```
 
-You can simply replace this with the imported private key:
+To run AvalancheJS scripts on Mainnet or Fuji, you can simply replace this with the imported private key:
 ```js
 const privKey: string = privateKey
 ```
