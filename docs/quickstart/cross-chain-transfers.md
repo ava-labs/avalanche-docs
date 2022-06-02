@@ -171,6 +171,7 @@ You can learn more about our encoded addresses [here](../apis/avalanchejs/manage
 By default the scripts send the wallet's entire AVAX balance:
 
 ```js
+// buildExportTx-cchain-avax.ts
 const balance: BN = new BN(getBalanceResponse.balance);
 const amount: BN = balance.sub(fee);
 ```
@@ -178,6 +179,7 @@ const amount: BN = balance.sub(fee);
 You can change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
 
 ```js
+// buildExportTx-cchain-avax.ts
 const value: BN = new BN("10000000000000000");
 const amount: BN = value.sub(fee);
 ```
@@ -194,14 +196,25 @@ To complete a transfer from the X-Chain to the C-Chain , we must run both the Ex
 
 By default, the scripts use the AvalancheJS constant, [`DefaultLocalGenesisPrivateKey`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts#L30) as `privKey` to sign transactions.
 
-Ensure that you [import your private key](./cross-chain-transfers.md#key-management)
+Before running the export and import scripts (`buildExportTx-cchain-avax.ts` and `buildImportTx-xchain.ts`) be sure to apply the necessary changes to the parameters, such as `ip` or `protocol`, to ensure proper execution. Additionally, you need to [import your private key into the sample code](./cross-chain-transfers.md#key-management).
 
-Before running the export and import scripts (`buildExportTx-cchain-avax.ts` and `buildImportTx-xchain.ts`) be sure to apply the necessary changes to the parameters, such as `ip` or `protocol`, to ensure proper execution.
-
-```zsh
+Run the example export script:
+```sh
 avalanchejs $ ts-node examples/avm/buildExportTx-cchain-avax.ts
+```
+
+This returns:
+```sh
 Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
+```
+
+Run the example import script:
+```sh
 avalanchejs $ ts-node examples/evm/buildImportTx-xchain.ts
+```
+
+This returns:
+```sh
 Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 ```
 
@@ -254,7 +267,7 @@ let avaxAmount: BN = new BN(1e7)
 let fee: BN = baseFee.div(new BN(1e9))
 fee = fee.add(new BN(1e6))
 ```
-_Note: When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) will cause the txn to fail._
+_Note: When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) may cause the import txn to fail._
 
 Swap source and destination chains by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
 
@@ -385,6 +398,7 @@ You can learn more about our encoded addresses [here](../apis/avalanchejs/manage
 By default the scripts send the wallet's entire AVAX balance:
 
 ```js
+// buildExportTx-cchain-avax.ts
 const balance: BN = new BN(getBalanceResponse.balance);
 const amount: BN = balance.sub(fee);
 ```
@@ -392,6 +406,7 @@ const amount: BN = balance.sub(fee);
 You can change the amount by creating a new _BN_ variable: `value` and assigning it a string value `"10000000000000000"` (.01 AVAX) as an example.
 
 ```js
+// buildExportTx-cchain-avax.ts
 const value: BN = new BN("10000000000000000");
 const amount: BN = value.sub(fee);
 ```
@@ -410,10 +425,27 @@ By default, the scripts use the AvalancheJS constant, [`DefaultLocalGenesisPriva
 
 Before running the export and import scripts (`buildExportTx-cchain-avax.ts` and `buildImportTx-xchain.ts`) be sure to apply the necessary changes to the parameters, such as `port`, to ensure proper execution.
 
-```zsh
+Run the example export script:
+
+```sh
 avalanchejs $ ts-node examples/avm/buildExportTx-cchain-avax.ts
+```
+
+This returns:
+
+```sh
 Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
+```
+
+Run the example Import script:
+
+```sh
 avalanchejs $ ts-node examples/evm/buildImportTx-xchain.ts
+```
+
+This returns:
+
+```sh
 Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 ```
 
@@ -426,7 +458,7 @@ You can retrieve the transaction data by running the following:
 ```zsh
 avalanchejs $ ts-node examples/avm/getTx.ts
 ```
-
+_As with the export and import scripts, be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration-1) to ['getTx.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts) to execute the script properly._
 
 Returns:
 
