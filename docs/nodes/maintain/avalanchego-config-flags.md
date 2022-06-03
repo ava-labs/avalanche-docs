@@ -463,7 +463,7 @@ Number of non-validators to gossip to when gossiping accepted frontier. Defaults
 
 #### `--consensus-accepted-frontier-gossip-peer-size` (uint):
 
-Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
+Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
 #### `--consensus-on-accept-gossip-validator-size` (uint):
 
@@ -475,7 +475,7 @@ Number of non-validators to gossip to each accepted container to. Defaults to `0
 
 #### `--consensus-on-accept-gossip-peer-size` (uint):
 
-Number of peers to gossip to each accepted container to. Defaults to `20`.
+Number of peers to gossip to each accepted container to. Defaults to `10`.
 
 ### Benchlist
 
@@ -846,15 +846,15 @@ Defaults to `1m`.
 
 #### `--network-peer-list-num-validator-ips` (int):
 
-Defaults to `20`.
+Defaults to `15`.
 
 #### `--network-peer-list-validator-gossip-size` (int):
 
-Defaults to `25`.
+Defaults to `20`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int):
 
-Defaults to `25`.
+Defaults to `10`.
 
 #### ` --network-peer-read-buffer-size` (int):
 
