@@ -3,6 +3,13 @@
 
 To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
 
+:::info
+
+Avalanche-CLI is very early in its lifecycle. It will evolve rapidly over the coming weeks and months. Until we achieve our first mature release, we are not committed to preserving backwards compatibility. Commands may be renamed or removed in future versions. Please check this page and [project](https://github.com/ava-labs/avalanche-cli) often.
+
+:::
+
+
 ## Quickstart
 
 Launch your own custom subnet:
@@ -17,11 +24,6 @@ Shut down your local deployment with:
 avalanche network stop [snapshotName]
 ```
 
-## Disclaimer
-
-**This beta project is very early in its lifecycle. It will evolve rapidly over the coming weeks and months. Until we achieve our first mature release, we are not committed to preserving backwards compatibility. Commands may be renamed or removed in future versions.**
-
-**We wanted to get this in your hands as soon as possible, so it's releasing before it's "complete." Bug reports and feedback on future directions are appreciated and encouraged! That said, we have LOTS planned and many new features are on the way.**
 
 ### Currently Supported Functionality
 - Creation of Subnet-EVM configs
@@ -37,19 +39,54 @@ The tool has been tested on Linux and Mac. Windows is currently not supported.
 
 ### Instructions
 
-To use Avalanche-CLI, you'll first need to install golang. Follow the instructions here: https://go.dev/doc/install.
 
-Once go is installed, install the latest version with
+First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
+
+Run `go version`. **It should be 1.17.9 or above.**
+
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac.
+
+Run `echo $GOPATH`. **It should not be empty.**
+
+Add `$GOPATH/bin` in the `$PATH` environment variable as the following command will install `avalanche` binary into `$GOPATH/bin`, otherwise, you will not be able to run the binary unless you specify its location in each command.
+
+
+Install the latest version of `avalanche` with
 
 `go install github.com/ava-labs/avalanche-cli@latest`
 
-## Subnets
+Run `avalanche` command on your console:
+
+```text
+> avalanche
+Avalanche CLI is a command line tool that gives developers access to
+everything Avalanche. This beta release specializes in helping developers
+build and test subnets.
+
+To get started, look at the documentation for the subcommands or jump right
+in with avalanche subnet create myNewSubnet.
+
+Usage:
+  avalanche [command]
+
+Available Commands:
+  help        Help about any command
+  network     Manage locally deployed subnets
+  subnet      Create and deploy subnets
+
+Flags:
+  -h, --help               help for avalanche
+      --log-level string   log level for the application (default "ERROR")
+
+Use "avalanche [command] --help" for more information about a command.
+```
+
+## Subnet
 
 The subnet command suite provides a collection of tools for developing and deploying subnets.
 
 To get started, use the `avalanche subnet create` command wizard to walk through the configuration of your very first subnet. Then, go ahead and deploy it with the `avalanche subnet deploy` command. You can use the rest of the commands to manage your subnet configurations.
 
-To learn more about subnets, check out https://docs.avax.network/subnets/.
 
 ### Subnet-EVM
 
