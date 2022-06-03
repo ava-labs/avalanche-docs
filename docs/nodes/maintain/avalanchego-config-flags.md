@@ -864,6 +864,32 @@ Size of the buffer that peer messages are read into (there is one buffer per pee
 
 Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
 
+### Resource Usage Tracking
+
+#### `--system-tracker-frequency` (duration):
+
+Frequency to check the real system usage of tracked processes. More frequent checks --> usage metrics are more accurate, but more expensive to track. Defaults to `500ms`.
+
+#### `--system-tracker-processing-halflife` (duration):
+
+Halflife to use for the processing requests tracker. Larger halflife --> usage metrics change more slowly. Defaults to `15s`.
+
+#### `--system-tracker-cpu-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics change more slowly. Defaults to `15s`.
+
+#### `--system-tracker-disk-halflife` (duration):
+
+Halflife to use for the disk tracker. Larger halflife --> disk usage metrics change more slowly. Defaults to `1m`.
+
+#### `--system-tracker-disk-required-available-space` (uint): 
+
+"Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
+
+#### `--system-tracker-disk-warning-threshold-available-space` (uint):
+
+Warning threshold for the number of available bytes on disk, under which the node will be considered unhealthy. Must be >= `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1 GiB).
+
 ### Plugin Mode
 
 #### `--plugin-mode-enabled` (bool):
@@ -890,3 +916,4 @@ The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5i
 `--vm-aliases-file-content` (string):
 
 As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
+
