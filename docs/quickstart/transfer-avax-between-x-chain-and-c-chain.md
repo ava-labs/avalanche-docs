@@ -93,7 +93,7 @@ curl -X POST --data '{
     "params" :{
         "username" :"myUsername",
         "password":"myPassword",
-        "address": "X-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e"
+        "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -150,7 +150,7 @@ curl -X POST --data '{
     "method" :"avm.export",
     "params" :{ 
         "assetID": "AVAX",
-        "to": "C-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
+        "to": "C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
         "amount": 5000000,  
         "username":"myUsername",    
         "password":"myPassword" 
@@ -202,7 +202,7 @@ curl -X POST --data '{
     "id"     :1,    
     "method" :"avax.exportAVAX",
     "params" :{ 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",   
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",   
         "assetID": "AVAX",
         "amount": 5000000,  
         "username":"myUsername",    
@@ -236,7 +236,7 @@ curl -X POST --data '{
         "username":"myUsername",    
         "password":"myPassword",    
         "sourceChain": "C", 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"    
     }   
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
