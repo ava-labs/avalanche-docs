@@ -160,7 +160,7 @@ curl -X POST --data '{
         "startTime":'$(date --date="10 minutes" +%s)',
         "endTime":'$(date --date="30 days" +%s)',
         "stakeAmount":2000000000000,
-        "rewardAddress":"P-avax1d4wfwrfgu4dkkyq7dlhx0lt69y2hjkjeejnhca",
+        "rewardAddress":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "delegationFeeRate":10,
         "username":"USERNAME",
