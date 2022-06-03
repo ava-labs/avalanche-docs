@@ -215,7 +215,26 @@ You can create a new metamask account by importing the private key `0x56289e99c9
 
 You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md).  Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 
+Heres an example of our Fuji Network config from the [Avalanche smart contract quickstart repo:](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
+```ts
+fuji: {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      gasPrice: 225000000000,
+      chainId: 43113,
+      accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
+    }
+```
+
+To connect with the network we deployed with Avalanche-CLI, we would create a network config that looks similar to this:
+```ts
+testChain: {
+      url: "http://127.0.0.1:34483/ext/bc/WiXgSZX5zEWPZRdqZJyzirLUUcGn2pbX1Fci8enXns9wRejCW/rpc",
+      gasPrice: 225000000000,
+      chainId: 970601,
+      accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
+    }
+```
 ## Next Step
 
 After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./create-a-fuji-subnet.md).
