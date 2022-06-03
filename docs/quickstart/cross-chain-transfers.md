@@ -213,13 +213,13 @@ Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 That's it! You've transferred AVAX from the X-Chain to C-Chain! 
 
 
-You can pass this txID into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run it 
+You can pass this txID `r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run 
 
 ```zsh
 avalanchejs $ ts-node examples/avm/getTx.ts
 ```
 
-Returns:
+which returns:
 
 ```js
 {
