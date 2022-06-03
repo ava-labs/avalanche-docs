@@ -90,13 +90,13 @@ To get started, use the `avalanche subnet create` command wizard to walk through
 
 ### Subnet-EVM
 
-Subnet-EVM is a configurable Ethereum virtual machine designed for subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out https://github.com/ava-labs/subnet-evm.
+Subnet-EVM is a configurable Ethereum virtual machine designed for subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out the [github project](https://github.com/ava-labs/subnet-evm).
 
 ### Create a Custom Subnet Configuration
 
-If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration here: https://docs.avax.network/subnets/customize-a-subnet/.
+If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration [here](./customize-a-subnet.md).
 
-One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check https://chainlist.org/ to see if the value you'd like is already in use.
+One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
 To use the wizard, run
 
@@ -132,7 +132,7 @@ To deploy, run
 
 `avalanche subnet deploy <subnetName>`
 
-Local deploys will start a multi-node Avalanche network in the background on your machine. To manage that network, see the `avalanche network` command tree.
+Local deploys will start a multi-node Avalanche network in the background on your machine. To manage that network, see [the `avalanche network` command tree](#network).
 
 If you'd like some additional information on how you can deploy your subnet to Fuji Testnet, run
 
@@ -141,7 +141,7 @@ If you'd like some additional information on how you can deploy your subnet to F
 ### Deploying to Fuji
 If you can't wait to for this tool's fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
 
-First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed here: https://docs.avax.network/subnets/subnet-cli.
+First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./subnet-cli.md).
 
 ### Delete a Subnet Configuration
 
