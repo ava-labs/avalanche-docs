@@ -185,13 +185,36 @@ To stop your local network and clear its state, run
 
 `avalanche network clean`
 
-This will delete all stored state for all local subnets. You will need to redeploy your subnet configurations one by one to use them again.
+This will delete all stored states for all local subnets. You will need to redeploy your subnet configurations one by one to use them again.
 
 ### Checking Network Status
 
 If you'd like to determine whether or not a local Avalanche network is running on your macine, run
 
 `avalanche network status`
+
+
+## Connect with Metamask
+
+**To-Be-Updated**
+
+Please use the value provided by `MetaMask Quick Start` to connect with Metamask.
+
+```text
+MetaMask Quick Start:
+Funded Address: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Network Name: Local EVM
+RPC URL: http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
+Chain ID: 99999
+Currency Symbol: LEVM
+```
+
+You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
+
+## Smart Contract
+
+You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md).  Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+
 
 ## Next Step
 
