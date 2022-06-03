@@ -226,7 +226,7 @@ fuji: {
     }
 ```
 
-To connect with the network we deployed with Avalanche-CLI, we would create a network config that looks similar to this:
+To connect to the Local Network that we deployed with the Avalanche-CLI, we would create a network setting that looks similar to this:
 ```ts
 testChain: {
       url: "http://127.0.0.1:34483/ext/bc/WiXgSZX5zEWPZRdqZJyzirLUUcGn2pbX1Fci8enXns9wRejCW/rpc",
