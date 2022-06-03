@@ -134,14 +134,11 @@ To deploy, run
 
 Local deploys will start a multi-node Avalanche network in the background on your machine. To manage that network, see [the `avalanche network` command tree](#network).
 
-If you'd like some additional information on how you can deploy your subnet to Fuji Testnet, run
-
-`avalanche subnet instructions <subnetName>`
 
 ### Deploying to Fuji
 If you can't wait to for this tool's fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
 
-First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./subnet-cli.md).
+First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
 
 ### Delete a Subnet Configuration
 
@@ -157,16 +154,6 @@ When a subnet is deployed locally, it runs on a local, multi-node Avalanche netw
 
 This network currently supports multiple, concurrently deployed subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
 
-### Stopping the Local Network
-
-To stop a running local network, run
-
-`avalanche network stop [snapshotName]`
-
-This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
-`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
-If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
-
 ### Starting/Restarting the Local Network
 
 To start or restart a stopped network, run
@@ -179,6 +166,18 @@ If not provided, the last snapshot created with a unnamed `stop` will be used.
 If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no subnet has been deployed yet), the command will fail.
 
 Deploying a subnet locally will start the network automatically.
+
+
+### Stopping the Local Network
+
+To stop a running local network, run
+
+`avalanche network stop [snapshotName]`
+
+This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
+`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
+If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
+
 
 ### Deleting the Local Network
 
