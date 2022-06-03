@@ -87,7 +87,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.export",
     "params" :{
-        "to":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
+        "to":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "assetID": "AVAX",
         "amount": 5000000,
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
@@ -168,7 +168,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "to":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
+        "to":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "sourceChain":"X",
         "changeAddr":"P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
@@ -211,7 +211,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBalance",
     "params":{
-        "address":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
+        "address":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
@@ -255,7 +255,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
     "params": {
-        "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "amount":3000000,
         "changeAddr":"P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
@@ -279,7 +279,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.import",
     "params" :{
-        "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "sourceChain":"P",
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
