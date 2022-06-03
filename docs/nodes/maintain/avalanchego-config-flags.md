@@ -812,7 +812,7 @@ Rate-limiting for outbound messages.
 
 ##### `--throttler-outbound-at-large-alloc-size` (uint):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
 
 ##### `--throttler-outbound-validator-alloc-size` (uint):
 
