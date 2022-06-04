@@ -222,7 +222,7 @@ If you'd like to see the raw genesis file, supply the `--genesis` flag:
 
 `avalanche subnet describe <subnetName> --genesis`
 
-Example
+Example:
 
 ```text
 > avalanche subnet describe firstsubnet --genesis
@@ -292,7 +292,34 @@ To deploy, run
 
 `avalanche subnet deploy <subnetName>`
 
-Local deploys will start a multi-node Avalanche network in the background on your machine. Progress will be shown until it completes.
+Local deploys will start a multi-node Avalanche network in the background on your machine. Progress will be shown until it completes. It also prints info needed for connecting with Metamask.
+
+Example:
+
+```text
+> avalanche subnet deploy firstsubnet
+✔ Local Network
+Deploying [firstsubnet] to Local Network
+Backend controller started, pid: 71505, output at: /var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/avalanche-cli-backend57656025
+Avalanchego installation successful
+dialing endpoint ":8097"
+VM ready. Trying to boot network...
+Network has been booted. Wait until healthy. Please be patient, this will take some time...
+...............................................................................
+Network ready to use. Local network node endpoints:
+Endpoint at node node4 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node5 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:49912/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node1 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:47497/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node2 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:62099/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node3 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:48498/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+
+Metamask connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
+Network name:     firstsubnet
+Chain ID:         12345
+Currency Symbol:  TEST
+```
 
 To manage that network, see [the `avalanche network` command tree](#network).
 
@@ -316,6 +343,24 @@ When a subnet is deployed locally, it runs on a local, multi-node Avalanche netw
 
 This network currently supports multiple, concurrently deployed subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
 
+### Stopping the Local Network
+
+To stop a running local network, run
+
+`avalanche network stop [snapshotName]`
+
+This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
+`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
+If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
+
+Example:
+
+```text
+> avalanche network stop
+dialing endpoint ":8097"
+Network stopped successfully.
+```
+
 ### Starting/Restarting the Local Network
 
 To start or restart a stopped network, run
@@ -329,15 +374,20 @@ If the default snapshot doesn't exist (because no `stop` has been run yet, and/o
 
 Deploying a subnet locally will start the network automatically.
 
-### Stopping the Local Network
+Example:
 
-To stop a running local network, run
-
-`avalanche network stop [snapshotName]`
-
-This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
-`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
-If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
+```text
+> avalanche network start
+dialing endpoint ":8097"
+Starting previously deployed and stopped snapshot
+.....................
+Network ready to use. Local network node endpoints:
+Endpoint at node node3 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:48498/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node4 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node5 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:49912/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node1 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:47497/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node2 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:62099/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+```
 
 ### Deleting the Local Network
 
@@ -347,6 +397,14 @@ To stop your local network and clear its state, run
 
 This will delete all stored states for all local subnets. You will need to redeploy your subnet configurations one by one to use them again.
 
+Example:
+
+```text
+> avalanche network clean
+dialing endpoint ":8097"
+Process terminated.
+```
+
 ### Checking Network Status
 
 If you'd like to determine whether or not a local Avalanche network is running on your macine, run
@@ -355,43 +413,33 @@ If you'd like to determine whether or not a local Avalanche network is running o
 
 ## Connect with Metamask
 
-**To-Be-Updated**
-
-Please use the value provided by `MetaMask Quick Start` to connect with Metamask.
+Please use the value provided by `Metamask connection details` to connect with Metamask.
 
 ```text
-MetaMask Quick Start:
-Funded Address: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
-Network Name: Local EVM
-RPC URL: http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-Chain ID: 99999
-Currency Symbol: LEVM
+Metamask connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
+Network name:     firstsubnet
+Chain ID:         12345
+Currency Symbol:  TEST
 ```
 
 You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
+
+Here is a screenshot of Metamask when everything is set correctly:
+![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
 
 ## Smart Contract
 
 You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 
-For example, here is the Fuji Network setting from the [Avalanche smart contract quickstart repo:](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-
-```ts
-fuji: {
-      url: "https://api.avax-test.network/ext/bc/C/rpc",
-      gasPrice: 225000000000,
-      chainId: 43113,
-      accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
-    }
-```
-
 To connect to the Local Network that we deployed with the Avalanche-CLI, we would create a network setting that looks similar to this:
 
-```ts
+```json
 testChain: {
-      url: "http://127.0.0.1:34483/ext/bc/WiXgSZX5zEWPZRdqZJyzirLUUcGn2pbX1Fci8enXns9wRejCW/rpc",
+      url: "http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc",
       gasPrice: 225000000000,
-      chainId: 970601,
+      chainId: 12345,
       accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
     }
 ```
