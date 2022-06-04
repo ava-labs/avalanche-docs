@@ -100,7 +100,7 @@ const protocol: string = "http";
 const networkID: number = 5;
 ```
 
-However, to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md), the following changes are needed:
+However, to connect directly to the [Avalanche Fuji Testnet API server](../apis/avalanchego/public-api-server.md), the following changes are needed:
 
 ```js
 const ip: string = "api.avax-test.network";
@@ -242,6 +242,16 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 avalanchejs $ ts-node examples/avm/buildImportTx-cchain.ts
 Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
+
+## Typical Mainnet Workflow
+
+The Fuji workflow above can be adapted to Mainnet with the following modifications:
+
+- The correct private key.
+- Network setting should be to a Mainnet node, either [a local node on Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](../apis/avalanchego/public-api-server.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
+- `const networkID: number = 1;` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- Set the correct amount to send.
+- The correct receiving address.
 
 ## Typical Local Workflow
 
