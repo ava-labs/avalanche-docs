@@ -292,7 +292,7 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
 
 
-_As with the export and import scripts, be sure to apply changes to the  [necessary changes](./cross-chain-transfers.md#setting-up-the-import-script) to [`buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [`buildImportTx-cchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts)to execute the script properly._
+_As with the export and import scripts, be sure to apply changes to the [necessary changes](./cross-chain-transfers.md#setting-up-the-import-script) to [`buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [`buildImportTx-cchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts)to execute the script properly._
 
 
 
