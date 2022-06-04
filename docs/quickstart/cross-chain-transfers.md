@@ -113,7 +113,7 @@ To use a local node started with [`--network-id=fuji`](../nodes/maintain/avalanc
 const ip: string = "localhost";
 ```
 
-Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md) server:
+Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md):
 
 ```js
 const ip: string = "api.avax-test.network";
@@ -127,7 +127,7 @@ To use a local node started with [`--network-id=fuji`](../nodes/maintain/avalanc
 const port: number = 9650;
 ```
 
-Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md) server:
+Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md):
 
 ```js
 const port: number = 443;
@@ -141,7 +141,7 @@ To use a local node started with [`--network-id=fuji`](../nodes/maintain/avalanc
 const protocol: string = "http";
 ```
 
-Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md) server:
+Or to connect directly to the [Avalanche public server for Fuji Testnet](../apis/avalanchego/public-api-server.md):
 
 ```js
 const protocol: string = "https";
