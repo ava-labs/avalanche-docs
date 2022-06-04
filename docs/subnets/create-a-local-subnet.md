@@ -1,18 +1,17 @@
 # Create an EVM Subnet on a Local Network
 
-
 To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
 
 :::info
 
-Avalanche-CLI is very early in its lifecycle. It will evolve rapidly over the coming weeks and months. Until we achieve our first mature release, we are not committed to preserving backwards compatibility. Commands may be renamed or removed in future versions. Please check this page and [project](https://github.com/ava-labs/avalanche-cli) often.
+Avalanche-CLI is very early in its lifecycle. It will evolve rapidly over the coming weeks and months. Until we achieve our first mature release, we are not committed to preserving backwards compatibility. Commands may be renamed or removed in future versions. Examples and their output may become outdated. Please check this page and [the github project](https://github.com/ava-labs/avalanche-cli) often and run through the commands to experience them.
 
 :::
-
 
 ## Quickstart
 
 Launch your own custom subnet:
+
 ```bash
 go install github.com/ava-labs/avalanche-cli@latest
 avalanche subnet create <subnetName>
@@ -20,25 +19,33 @@ avalanche subnet deploy <subnetName>
 ```
 
 Shut down your local deployment with:
+
 ```bash
-avalanche network stop [snapshotName]
+avalanche network stop
 ```
 
+Restart your local deployment (from where you left off) with:
+
+```bash
+avalanche network start
+```
 
 ### Currently Supported Functionality
+
 - Creation of Subnet-EVM configs
 - Local deployment of Subnet-EVM based subnets
 
 ### Notable Missing Features
+
 - Fuji and mainnet Subnet-EVM deploys
 
 ## Installation
 
 ### Comptatibility
+
 The tool has been tested on Linux and Mac. Windows is currently not supported.
 
 ### Instructions
-
 
 First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
 
@@ -49,7 +56,6 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We
 Run `echo $GOPATH`. **It should not be empty.**
 
 Add `$GOPATH/bin` in the `$PATH` environment variable as the following command will install `avalanche` binary into `$GOPATH/bin`, otherwise, you will not be able to run the binary unless you specify its location in each command.
-
 
 Install the latest version of `avalanche` with
 
@@ -87,24 +93,31 @@ The subnet command suite provides a collection of tools for developing and deplo
 
 To get started, use the `avalanche subnet create` command wizard to walk through the configuration of your very first subnet. Then, go ahead and deploy it with the `avalanche subnet deploy` command. You can use the rest of the commands to manage your subnet configurations.
 
-
 ### Subnet-EVM
 
 Subnet-EVM is a configurable Ethereum virtual machine designed for subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out the [github project](https://github.com/ava-labs/subnet-evm).
 
 ### Create a Custom Subnet Configuration
 
-If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration [here](./customize-a-subnet.md).
-
-One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
-
-To use the wizard, run
-
 `avalanche subnet create <subnetName>`
 
-The wizard won't customize every aspect of the Subnet-EVM genesis for you. For many fields, it chooses reasonable defaults. If you'd like complete control, you can specify a custom genesis by providing a path to the file you'd like to use. Run with:
+If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration [here](./customize-a-subnet.md).
+
+Example:
+
+Command `avalanche subnet create firstsubet` walks through following questions:
+
+- Choose a VM: default to SubnetEVM
+- Pick a chain ID
+- Set fees: default to Avalanche C-Chain's setting
+- Airdrop: default to airdrop 1 million tokens
+- Add a custom precompile to modify the EVM: default to no.
+
+The wizard won't customize every aspect of the Subnet-EVM genesis for you. If you'd like complete control, you can specify a custom genesis by providing a path to the file you'd like to use. Run with:
 
 `avalanche subnet create <subnetName> --file <filepath>`
+
+One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
 By default, creating a subnet configuration with the same subnetName as one that already exists will fail. To overwrite an existing config, use the force flag:
 
@@ -116,13 +129,160 @@ You can list the subnets you've created with
 
 `avalanche subnet list`
 
+Example:
+
+```text
+> avalanche subnet list
++-------------+-------------+-----------+
+|   SUBNET    |    CHAIN    |   TYPE    |
++-------------+-------------+-----------+
+| firstsubnet | firstsubnet | SubnetEVM |
++-------------+-------------+-----------+
+```
+
 To see the details of a specific configuration, run
 
 `avalanche subnet describe <subnetName>`
 
-By default, the command prints a summary of the config. If you'd like to see the raw genesis file, supply the `--genesis` flag:
+Example:
+
+```text
+> avalanche subnet describe firstsubnet
+
+ _____       _        _ _
+|  __ \     | |      (_) |
+| |  | | ___| |_ __ _ _| |___
+| |  | |/ _ \ __/ _  | | / __|
+| |__| |  __/ || (_| | | \__ \
+|_____/ \___|\__\__,_|_|_|___/
++-------------+-------------+
+|  PARAMETER  |    VALUE    |
++-------------+-------------+
+| Subnet Name | firstsubnet |
++-------------+-------------+
+| ChainId     |       12345 |
++-------------+-------------+
+
+  _____              _____             __ _
+ / ____|            / ____|           / _(_)
+| |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
+| | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
+| |__| | (_| \__ \ | |___| (_) | | | | | | | (_| |
+ \_____|\__,_|___/  \_____\___/|_| |_|_| |_|\__, |
+                                             __/ |
+                                            |___/
++--------------------------+-------------+
+|      GAS PARAMETER       |    VALUE    |
++--------------------------+-------------+
+| GasLimit                 |     8000000 |
++--------------------------+-------------+
+| MinBaseFee               | 25000000000 |
++--------------------------+-------------+
+| TargetGas                |    15000000 |
++--------------------------+-------------+
+| BaseFeeChangeDenominator |          36 |
++--------------------------+-------------+
+| MinBlockGasCost          |           0 |
++--------------------------+-------------+
+| MaxBlockGasCost          |     1000000 |
++--------------------------+-------------+
+| TargetBlockRate          |           2 |
++--------------------------+-------------+
+| BlockGasCostStep         |      200000 |
++--------------------------+-------------+
+
+          _         _
+    /\   (_)       | |
+   /  \   _ _ __ __| |_ __ ___  _ __
+  / /\ \ | | '__/ _  | '__/ _ \| '_ \
+ / ____ \| | | | (_| | | | (_) | |_) |
+/_/    \_\_|_|  \__,_|_|  \___/| .__/
+                               | |
+                               |_|
++--------------------------------------------+------------------------+---------------------------+
+|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
++--------------------------------------------+------------------------+---------------------------+
+| 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
++--------------------------------------------+------------------------+---------------------------+
+
+
+  _____                                    _ _
+ |  __ \                                  (_) |
+ | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
+ |  ___/ '__/ _ \/ __/ _ \| '_   _ \| '_ \| | |/ _ \/ __|
+ | |   | | |  __/ (_| (_) | | | | | | |_) | | |  __/\__ \
+ |_|   |_|  \___|\___\___/|_| |_| |_| .__/|_|_|\___||___/
+                                    | |
+                                    |_|
+
+No precompiles set
+```
+
+If you'd like to see the raw genesis file, supply the `--genesis` flag:
 
 `avalanche subnet describe <subnetName> --genesis`
+
+Example
+
+```text
+> avalanche subnet describe firstsubnet --genesis
+{
+    "config": {
+        "chainId": 12345,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "petersburgBlock": 0,
+        "istanbulBlock": 0,
+        "muirGlacierBlock": 0,
+        "subnetEVMTimestamp": 0,
+        "feeConfig": {
+            "gasLimit": 8000000,
+            "targetBlockRate": 2,
+            "minBaseFee": 25000000000,
+            "targetGas": 15000000,
+            "baseFeeChangeDenominator": 36,
+            "minBlockGasCost": 0,
+            "maxBlockGasCost": 1000000,
+            "blockGasCostStep": 200000
+        },
+        "contractDeployerAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "contractNativeMinterConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "txAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        }
+    },
+    "nonce": "0x0",
+    "timestamp": "0x0",
+    "extraData": "0x",
+    "gasLimit": "0x7a1200",
+    "difficulty": "0x0",
+    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "alloc": {
+        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
+            "balance": "0xd3c21bcecceda1000000"
+        }
+    },
+    "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "airdropAmount": null,
+    "number": "0x0",
+    "gasUsed": "0x0",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "baseFeePerGas": null
+}
+```
 
 ### Deploying Subnets Locally
 
@@ -132,11 +292,13 @@ To deploy, run
 
 `avalanche subnet deploy <subnetName>`
 
-Local deploys will start a multi-node Avalanche network in the background on your machine. To manage that network, see [the `avalanche network` command tree](#network).
+Local deploys will start a multi-node Avalanche network in the background on your machine. Progress will be shown until it completes.
 
+To manage that network, see [the `avalanche network` command tree](#network).
 
 ### Deploying to Fuji
-If you can't wait to for this tool's fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
+
+If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
 
 First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
 
@@ -167,7 +329,6 @@ If the default snapshot doesn't exist (because no `stop` has been run yet, and/o
 
 Deploying a subnet locally will start the network automatically.
 
-
 ### Stopping the Local Network
 
 To stop a running local network, run
@@ -177,7 +338,6 @@ To stop a running local network, run
 This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
 `snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
 If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
-
 
 ### Deleting the Local Network
 
@@ -192,7 +352,6 @@ This will delete all stored states for all local subnets. You will need to redep
 If you'd like to determine whether or not a local Avalanche network is running on your macine, run
 
 `avalanche network status`
-
 
 ## Connect with Metamask
 
@@ -213,7 +372,7 @@ You can create a new metamask account by importing the private key `0x56289e99c9
 
 ## Smart Contract
 
-You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md).  Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 
 For example, here is the Fuji Network setting from the [Avalanche smart contract quickstart repo:](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
@@ -227,6 +386,7 @@ fuji: {
 ```
 
 To connect to the Local Network that we deployed with the Avalanche-CLI, we would create a network setting that looks similar to this:
+
 ```ts
 testChain: {
       url: "http://127.0.0.1:34483/ext/bc/WiXgSZX5zEWPZRdqZJyzirLUUcGn2pbX1Fci8enXns9wRejCW/rpc",
@@ -235,6 +395,7 @@ testChain: {
       accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
     }
 ```
+
 ## Next Step
 
 After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./create-a-fuji-subnet.md).
