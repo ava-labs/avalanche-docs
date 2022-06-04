@@ -213,13 +213,15 @@ which returns:
 
 ### Transfer from the C-Chain to the X-Chain
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction:
+To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
-- Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
+#### Export the Avax Token From C-Chain to X-Chain
 
-- Make necessary changes as above for private key and network settings.
+Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
 
-- You can change the amount of AVAX to send by editing the _BN_ variable: `avaxAmount`. The sample code assigns this as `1e7` or `10000000` (0.01 AVAX)
+Make necessary changes as above for private key and network settings.
+
+You can change the amount of AVAX to send by editing the _BN_ variable: `avaxAmount`. The sample code assigns this as `1e7` or `10000000` (0.01 AVAX)
 
 The fee here will only be for exporting the asset. The import fees will be deducted from the UTXOs present on the Exported Atomic Memory, a memory location where UTXOs stay after getting exported but before being imported.
 
@@ -233,11 +235,16 @@ fee = fee.add(new BN(1e6));
 When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (0.001 AVAX) may cause the import txn to fail.
 :::
 
-The following sequence demonstrates how to send AVAX back to the X-Chain:
+Run the export script:
 
 ```zsh
 avalanchejs $ ts-node examples/evm/buildExportTx-xchain-avax.ts
 Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
+```
+
+#### Import the Avax Token From C-Chain to X-Chain
+
+```zsh
 avalanchejs $ ts-node examples/avm/buildImportTx-cchain.ts
 Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
