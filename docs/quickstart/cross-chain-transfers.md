@@ -67,7 +67,7 @@ AVM is for X-Chaim, EVM for C-Chain, and PlatformVM for P-Chain.
 
 This tutorial uses [**X Chain <-> C Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar. 
 
-### Transfer from the C-Chain to the X-Chain
+### Transfer from the X-Chain to the C-Chain
 
 
 #### Locate the Code
@@ -170,10 +170,10 @@ const balance: BN = new BN(getBalanceResponse.balance);
 const amount: BN = balance.sub(fee);
 ```
 
-To send a different amount, please replace the code above with the following. Below sets a new value of 0.01 AVAX (10000000000000000 GWEI). Value is set in WEI format where 10 \*\* 18 WEI = 1 AVAX
+To send a different amount, please replace the code above with the following. Below sets a new value of 0.01 AVAX (`10000000` GWEI). Value is set in GWEI format where `1e9` GWEI = 1 AVAX
 
 ```js
-const value: BN = new BN("10000000000000000");
+const value: BN = new BN("10000000");
 const amount: BN = value.sub(fee);
 ```
 
@@ -198,7 +198,28 @@ Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
 ```
 
 
+Setting up the import script:
+
+1. Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm) folder to view the AvalancheJS C-Chain examples. To send AVAX from the C-Chain to the X-Chain, select [`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
+
+2. Navigate to this part of the code and ensure that the [`parameters`](./cross-chain-transfers.md#network-setting) are suitable for your network:
+
+```ts
+const ip: string = "localhost";
+const port: number = 9650;
+const protocol: string = "http";
+const networkID: number = 5;
+```
+
+3. Navigate to this part of the code and ensure that the `cHexAddress`(_Your C-Chain wallet address_) and `private key` are correct:
+
+```ts
+const cHexAddress: string = "<YOUR-CCHAIN-WALLET-ADDRESS-HERE>"
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
+```
+
 Run the import script:
+
 ```sh
 avalanchejs $ ts-node examples/evm/buildImportTx-xchain.ts
 ```
@@ -258,7 +279,7 @@ fee = fee.add(new BN(1e6))
 ```
 
 :::tip
-When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) may cause the import txn to fail._
+When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) may cause the import txn to fail.
 :::
 
 Swap source and destination chains by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
@@ -286,7 +307,7 @@ Most of the code are already set to run it on a local network. Do check the foll
 
 ```js
 const ip: string = "localhost";
-const port: number = "30301";  // Change this one to the correct value
+const port: number = 30301;  // Change this one to the correct value
 const protocol: string = "http";
 const networkID: number = 1337;
 
