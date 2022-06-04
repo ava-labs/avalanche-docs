@@ -438,7 +438,6 @@ For example: to connect `Hardhat` to the local network that deployed with the Av
 ```json
 testChain: {
       url: "http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc",
-      gasPrice: 225000000000,
       chainId: 12345,
       accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
     }
