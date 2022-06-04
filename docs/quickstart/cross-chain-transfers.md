@@ -63,7 +63,7 @@ AVM is for X-Chaim, EVM for C-Chain, and PlatformVM for P-Chain.
 
 :::
 
-## Typical Fuji Workflow
+## Fuji Workflow
 
 This tutorial uses [**X Chain <-> C Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar.
 
@@ -243,7 +243,7 @@ avalanchejs $ ts-node examples/avm/buildImportTx-cchain.ts
 Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
 
-## Typical Mainnet Workflow
+## Mainnet Workflow
 
 The Fuji workflow above can be adapted to Mainnet with the following modifications:
 
@@ -253,11 +253,11 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 - Set the correct amount to send.
 - The correct receiving address.
 
-## Typical Local Workflow
+## Local Workflow
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port number by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the port is 30301.
+Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port number by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 30301.
 
 ### Locate the Example Code and Make Necessary Changes
 
@@ -265,7 +265,7 @@ Most of the code are already set to run it on a local network. Do check the foll
 
 ```js
 const ip: string = "localhost";
-const port: number = 30301; // Change this one to the correct value
+const port: number = 30301; // Change this to the correct value
 const protocol: string = "http";
 const networkID: number = 1337;
 ```
