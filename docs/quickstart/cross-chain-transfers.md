@@ -2,15 +2,16 @@
 
 ## Introduction
 
-This article shows how to transfer AVAX tokens programmatically between any two chains of the Primary Network.
+This article shows how to transfer AVAX tokens programmatically between any two chains (X/P/C chains) of the Primary Network.
 
 If you are looking for how to transfter AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
 
 ## Prerequisites
 
-You've completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md), are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md), and [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
-
-Also [ts-node](https://www.npmjs.com/package/ts-node#installation) is needed to run the examples.
+- You are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md).
+- You have completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md).
+- You are faimilar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
+- You have installed [ts-node](https://www.npmjs.com/package/ts-node#installation) so that you can follow examples in this tutorial.
 
 ## Getting Started
 
@@ -26,9 +27,9 @@ or add it to an existing project:
 $ yarn add --dev avalanche
 ```
 
-For this tutorial we will use a CLI to run the example scripts directly from an AvalancheJS directory.
+For this tutorial we will use `ts-node` to run the example scripts directly from an AvalancheJS directory.
 
-In order to send AVAX, you need to have some AVAX! You can use a pre-funded account on local network or get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy way to get to play around with Avalanche. After getting comfortable with your code, you can run the code on Mainnet by making necessary changes.
+In order to send AVAX, you need to have some AVAX. You can use a pre-funded account on local network or get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy way to get to play around with Avalanche. After getting comfortable with your code, you can run the code on Mainnet after making necessary changes.
 
 ## Transferring AVAX using AvalancheJS
 
@@ -38,7 +39,7 @@ AvalancheJS allows you to create and sign transactions locally which is why it i
 
 ### Example Code
 
-Following codes can be found under the [examples](https://github.com/ava-labs/avalanchejs/tree/master/examples) directory of the AvalancheJS project.
+Following files can be found under the [examples](https://github.com/ava-labs/avalanchejs/tree/master/examples) directory of the AvalancheJS project.
 
 | Source Chain  | Title                                                                                                                                     | Path                 |
 | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------- |
@@ -65,15 +66,15 @@ AVM is for X-Chaim, EVM for C-Chain, and PlatformVM for P-Chain.
 
 ## Fuji Workflow
 
-This tutorial uses [**X Chain <-> C Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar.
+This tutorial uses [**X-Chain <-> C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar.
 
 ### Transfer from the X-Chain to the C-Chain
 
-#### Locate the Code
+To transfer a specified amount token from X-Chain to C-Chain, the token needs to be first exported from the X-Chain, then imported to C-Chain.
 
-Select the [**`examples/avm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm) folder to view the AvalancheJS X-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
+#### Export the Avax Token From X-Chain to C-Chain
 
-#### Make Necessary Changes
+Select the [**`examples/avm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm) folder to view the AvalancheJS X-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts).
 
 ##### Private Key
 
@@ -121,7 +122,7 @@ const networkID: number = 5;
 
 To learn more about encoded addresses, click [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
-**Set the Correct Amount to Send:**
+**Set the Correct Amount To Send:**
 
 By default the scripts send the wallet's entire AVAX balance:
 
@@ -141,14 +142,10 @@ const amount: BN = value.sub(fee);
 Snowtrace provides a [unit converter](https://snowtrace.io/unitconverter) between different units
 :::
 
-#### Execute The Export And Import Scripts
-
-To transfer the specified amount token from X-Chain to C-Chain, the token needs to be first exported from the X-Chain, then imported to C-Chain.
-
 Run the export script:
 
 ```sh
-avalanchejs $ ts-node examples/avm/buildExportTx-cchain-avax.ts
+$ ts-node examples/avm/buildExportTx-cchain-avax.ts
 ```
 
 This returns:
@@ -157,13 +154,13 @@ This returns:
 Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
 ```
 
-#### Setting Up The Import Script
+#### Import the Avax Token From X-Chain to C-Chain
 
-1. Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To send AVAX from the C-Chain to the X-Chain, select [`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
+Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To import AVAX to the C-Chain from the X-Chain, select [`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
 
-2. Copy the [network setting from above](#network-setting) into `evm/buildImportTx-xchain.ts`.
+Copy the [network setting from above](#network-setting) into `evm/buildImportTx-xchain.ts`.
 
-3. Navigate to this part of the code and ensure that the `cHexAddress`(_Your C-Chain wallet address_) and `private key` are correct:
+Navigate to this part of the code and ensure that the `cHexAddress`(_Your C-Chain wallet address_) and `private key` are correct:
 
 ```ts
 const cHexAddress: string = "<YOUR-CCHAIN-WALLET-ADDRESS-HERE>";
@@ -173,7 +170,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
 Run the import script:
 
 ```sh
-avalanchejs $ ts-node examples/evm/buildImportTx-xchain.ts
+$ ts-node examples/evm/buildImportTx-xchain.ts
 ```
 
 This returns:
@@ -184,10 +181,12 @@ Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain!
 
+#### Verify the Transaction
+
 You can now pass this txID `r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
 
 ```zsh
-avalanchejs $ ts-node examples/avm/getTx.ts
+$ ts-node examples/avm/getTx.ts
 ```
 
 which returns:
@@ -216,7 +215,7 @@ which returns:
 
 To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction:
 
-- Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To send AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
+- Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
 
 - Make necessary changes as above for private key and network settings.
 
