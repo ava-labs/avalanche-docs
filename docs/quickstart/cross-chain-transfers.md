@@ -198,7 +198,7 @@ Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
 ```
 
 
-Setting up the import script:
+#### Setting Up The Import Script
 
 1. Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm) folder to view the AvalancheJS C-Chain examples. To send AVAX from the C-Chain to the X-Chain, select [`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
 
@@ -282,7 +282,7 @@ fee = fee.add(new BN(1e6))
 When exporting AVAX, be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (.001 AVAX) may cause the import txn to fail.
 :::
 
-Swap source and destination chains by running the [C-Chain Export](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [X-Chain Import](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts) scripts.
+The following sequence demonstrates how to send AVAX back to the X-Chain:
 
 ```zsh
 avalanchejs $ ts-node examples/evm/buildExportTx-xchain-avax.ts
@@ -292,7 +292,7 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 ```
 
 
-_As with the export and import scripts, be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to ['buildExportTx-xchain-avax.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) to execute the script properly._
+_As with the export and import scripts, be sure to apply changes to the  [necessary changes](./cross-chain-transfers.md#setting-up-the-import-script) to [`buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts) and [`buildImportTx-cchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts)to execute the script properly._
 
 
 
