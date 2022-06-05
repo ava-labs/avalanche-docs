@@ -47,7 +47,7 @@ Unless otherwise specified, file paths given below are relative to the root of t
 When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them.
 Therefore we run one shell with the RPC server, and another one for issuing calls.
 
-### Start the server
+### Start the Server
 
 ```bash
 avalanche-network-runner server \
@@ -68,7 +68,7 @@ Alternatively, plain HTTP can be used to issue calls, without the need to use th
 
 Each of the examples below will show both modes, claritying its usage.
 
-### Start a New Avalanche Network with Five Nodes (a cluster)
+### Start a New Avalanche Network with Five Nodes (a Cluster)
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
@@ -188,7 +188,7 @@ The response to this call is actually pretty large, as it contains the state of 
 }
 ```
 
-#### To get API endpoints of all nodes in the cluster {#retrieve-all-nodes}
+#### To Get API Endpoints of All Nodes in the Cluster {#retrieve-all-nodes}
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/uris -d ''

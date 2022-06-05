@@ -14,7 +14,7 @@ In this tutorial, we’ll go through an example Fuji workflow to show how it can
 6. Examine the resulting transaction on the Avalanche Explorer
 7. Use the mnemonic to sign into the web wallet
 
-## Set up Fuji network on Metamask (optional)
+## Set up Fuji Network on Metamask (optional)
 
 - **Network Name**: Avalanche FUJI C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
