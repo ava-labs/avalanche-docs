@@ -51,7 +51,7 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#run-subnet-cli-wizard).
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#subnet-cli-wizard).
 
 :::info
 
@@ -70,7 +70,7 @@ go install -v .;
 Once you have installed it, run `subnet-cli` on your console to confirm it is
 working as expected (_make sure your $GOBIN is in your $PATH_):
 
-### `Subnet-cli` Private Key
+### Private Key
 
 ```bash
 subnet-cli create key
@@ -83,8 +83,7 @@ To get fund on this key on Fuji TestNet, follow these steps:
 
 1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network and locate your C-Chain address which starts with `0x`.
 2. Request funds from the [faucet](https://faucet.avax.network) using your C-Chain address.
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
-
+3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [tutorial between C/P chains](../quickstart/cross-chain-transfers.md)).
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 
@@ -152,7 +151,7 @@ To put the `subnet-evm` binary in the right place, run the following command
 mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalanchego/build/plugins;
 ```
 
-## Run `subnet-cli wizard`
+## Subnet-cli Wizard
 
 The easiest and fastest way to get your new subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
@@ -326,4 +325,4 @@ You can inspect your confirmed transaction.
 
 ### Other Tools
 
-You can use subnet-evm just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use subnet-evm just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
