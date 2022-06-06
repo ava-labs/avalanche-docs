@@ -211,7 +211,7 @@ Success! TXID: ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain!
 
-You can verify this TX by copy / pasting the import TXID into [Avascan](https://testnet.avascan.info/blockchain/c/tx/ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub)
+You can verify this TX by copy / pasting the import TXID into [Avascan](https://testnet.avascan.info/blockchain/c/tx/ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub).
 
 ### Transfer from the C-Chain to the X-Chain
 
