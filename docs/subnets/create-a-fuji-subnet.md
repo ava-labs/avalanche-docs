@@ -51,7 +51,7 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#run-subnet-cli-wizard).
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#subnet-cli-wizard).
 
 :::info
 
@@ -70,7 +70,7 @@ go install -v .;
 Once you have installed it, run `subnet-cli` on your console to confirm it is
 working as expected (_make sure your $GOBIN is in your $PATH_):
 
-### `Subnet-cli` Private Key
+### Private Key
 
 ```bash
 subnet-cli create key
@@ -151,7 +151,7 @@ To put the `subnet-evm` binary in the right place, run the following command
 mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalanchego/build/plugins;
 ```
 
-## Run `subnet-cli wizard`
+## Subnet-cli Wizard
 
 The easiest and fastest way to get your new subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can

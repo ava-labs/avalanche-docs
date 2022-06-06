@@ -82,7 +82,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 }
 ```
 
-### Check X-Chain balance
+### Check X-chain Balance
 
 Confirm the `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address now has a balance of 300m AVAX on the X-Chain.
 
@@ -147,7 +147,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 }
 ```
 
-### Check the C-Chain balance
+### Check the C-Chain Balance
 
 Confirm the `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` address has a balance of 50m (0x295be96e64066972000000 in hex) AVAX on the C-Chain.
 
@@ -223,7 +223,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 }
 ```
 
-### Check P-Chain balance
+### Check P-Chain Balance
 
 Confirm the `P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address has a balance of 30m AVAX on the P-Chain. 20m should be unlocked and 10m locked and stakeable.
 
