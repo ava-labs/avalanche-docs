@@ -151,12 +151,12 @@ $ ts-node examples/avm/buildExportTx-cchain-avax.ts
 This returns:
 
 ```sh
-Success! TXID: LjWWen7AwA3gP2op2V2Gwyoh9iNbPp9ZggFqAAs6YtPUscWvg
+Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 ```
 
 #### Verify the Transaction
 
-You can now pass this txID `LjWWen7AwA3gP2op2V2Gwyoh9iNbPp9ZggFqAAs6YtPUscWvg` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
+You can now pass this txID `2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
 
 ```zsh
 $ ts-node examples/avm/getTx.ts
@@ -169,13 +169,17 @@ which returns:
   unsignedTx: {
     networkID: 5,
     blockchainID: '2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm',
-    outputs: [],
-    inputs: [ [Object] ],
+    outputs: [ [Object] ],
+    inputs: [ [Object], [Object] ],
     memo: '0x41564d207574696c697479206d6574686f64206275696c644578706f7274547820746f206578706f7274204156415820746f2074686520432d436861696e2066726f6d2074686520582d436861696e',
     destinationChain: 'yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp',
     exportedOutputs: [ [Object] ]
   },
   credentials: [
+    {
+      fxID: 'spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ',
+      credential: [Object]
+    },
     {
       fxID: 'spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ',
       credential: [Object]
@@ -206,12 +210,12 @@ $ ts-node examples/evm/buildImportTx-xchain.ts
 This returns:
 
 ```sh
-Success! TXID: ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub
+Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 ```
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain!
 
-You can verify this TX by copy / pasting the import TXID into [Avascan](https://testnet.avascan.info/blockchain/c/tx/ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub).
+You can verify this TX by copy / pasting the import TXID into [Avascan](https://testnet.avascan.info/blockchain/c/tx/2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc).
 
 ### Transfer from the C-Chain to the X-Chain
 
