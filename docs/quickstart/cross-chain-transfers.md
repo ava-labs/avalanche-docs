@@ -249,10 +249,10 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 ```
 
 #### Import the Avax Token From C-Chain to X-Chain
-Before we run the example import script, we need to make some changes to the code:
+Before we run the [example import script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts), we need to make some changes to the code:
 
-1. Change the [Network Setting](./cross-chain-transfers.md#network-setting) to meet [Local](./cross-chain-transfers.md#local-workflow), [Fuji](./cross-chain-transfers.md#network-setting), or [Mainnet](./cross-chain-transfers.md#mainnet-workflow) network requirements.
-2. Import your Private Key by following the steps listed [here](./cross-chain-transfers.md#private-key).
+1. Change the [Network Setting](#network-setting) to meet Fuji network requirements.
+2. Import your Private Key by following the steps listed [here](#private-key).
 3. Run the Script!
 
 ```zsh
