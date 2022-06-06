@@ -8,26 +8,58 @@ Avalanche-CLI is very early in its lifecycle. It will evolve rapidly over the co
 
 :::
 
-## Quickstart
+## Installation
 
-Launch your own custom subnet:
+To download a binary for the latest release, run:
 
 ```bash
-go install github.com/ava-labs/avalanche-cli@latest
-avalanche subnet create <subnetName>
-avalanche subnet deploy <subnetName>
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+```
+
+The binary will be installed inside the `./` directory (relative to where the install command was run).
+
+:::note
+Downloading binaries from the Github UI will cause permission errors when running it the first time on Mac.
+:::
+
+To add the binary to your path, run
+
+```bash
+cd bin
+export PATH=$PWD:$PATH
+```
+
+To add it to your path permanently, add an export command to your shell initialization script (ex: .bashrc).
+
+### Installing in Custom Location
+
+To download the binary into a specific directory, run:
+
+```
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b <relative directory>
+```
+
+## Quickstart
+
+After installing, launch your own custom subnet:
+
+```bash
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+cd bin
+./avalanche subnet create <subnetName>
+./avalanche subnet deploy <subnetName>
 ```
 
 Shut down your local deployment with:
 
 ```bash
-avalanche network stop
+./avalanche network stop
 ```
 
 Restart your local deployment (from where you left off) with:
 
 ```bash
-avalanche network start
+./avalanche network start
 ```
 
 ### Currently Supported Functionality
@@ -38,54 +70,6 @@ avalanche network start
 ### Notable Missing Features
 
 - Fuji and mainnet Subnet-EVM deploys
-
-## Installation
-
-### Comptatibility
-
-The tool has been tested on Linux and Mac. Windows is currently not supported.
-
-### Instructions
-
-First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
-
-Run `go version`. **It should be 1.17.9 or above.**
-
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac.
-
-Run `echo $GOPATH`. **It should not be empty.**
-
-Add `$GOPATH/bin` in the `$PATH` environment variable as the following command will install `avalanche` binary into `$GOPATH/bin`, otherwise, you will not be able to run the binary unless you specify its location in each command.
-
-Install the latest version of `avalanche` with
-
-`go install github.com/ava-labs/avalanche-cli@latest`
-
-Run `avalanche` command on your console:
-
-```text
-> avalanche
-Avalanche CLI is a command line tool that gives developers access to
-everything Avalanche. This beta release specializes in helping developers
-build and test subnets.
-
-To get started, look at the documentation for the subcommands or jump right
-in with avalanche subnet create myNewSubnet.
-
-Usage:
-  avalanche [command]
-
-Available Commands:
-  help        Help about any command
-  network     Manage locally deployed subnets
-  subnet      Create and deploy subnets
-
-Flags:
-  -h, --help               help for avalanche
-      --log-level string   log level for the application (default "ERROR")
-
-Use "avalanche [command] --help" for more information about a command.
-```
 
 ## Subnet
 
@@ -132,7 +116,7 @@ You can list the subnets you've created with
 Example:
 
 ```text
-> avalanche subnet list
+> ./avalanche subnet list
 +-------------+-------------+-----------+
 |   SUBNET    |    CHAIN    |   TYPE    |
 +-------------+-------------+-----------+
@@ -147,7 +131,7 @@ To see the details of a specific configuration, run
 Example:
 
 ```text
-> avalanche subnet describe firstsubnet
+> ./avalanche subnet describe firstsubnet
 
  _____       _        _ _
 |  __ \     | |      (_) |
@@ -225,7 +209,7 @@ If you'd like to see the raw genesis file, supply the `--genesis` flag:
 Example:
 
 ```text
-> avalanche subnet describe firstsubnet --genesis
+> ./avalanche subnet describe firstsubnet --genesis
 {
     "config": {
         "chainId": 12345,
@@ -297,7 +281,7 @@ Local deploys will start a multi-node Avalanche network in the background on you
 Example:
 
 ```text
-> avalanche subnet deploy firstsubnet
+> ./avalanche subnet deploy firstsubnet
 ✔ Local Network
 Deploying [firstsubnet] to Local Network
 Backend controller started, pid: 71505, output at: /var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/avalanche-cli-backend57656025
@@ -356,7 +340,7 @@ If not provided, a default snapshot will be created. The default snapshot will b
 Example:
 
 ```text
-> avalanche network stop
+> ./avalanche network stop
 dialing endpoint ":8097"
 Network stopped successfully.
 ```
@@ -377,7 +361,7 @@ Deploying a subnet locally will start the network automatically.
 Example:
 
 ```text
-> avalanche network start
+> ./avalanche network start
 dialing endpoint ":8097"
 Starting previously deployed and stopped snapshot
 .....................
@@ -400,7 +384,7 @@ This will delete all stored deploy state for all local subnet deployments. This 
 Example:
 
 ```text
-> avalanche network clean
+> ./avalanche network clean
 dialing endpoint ":8097"
 Process terminated.
 ```
