@@ -238,7 +238,7 @@ fee = fee.add(new BN(1e6));
 ```
 
 :::tip
-You do not need to adjust `fee`, you will however adjust `avaxAmount`, the variable that the sample code uses to define the amount of AVAX that the user will send. Be sure to send enough to support import fees (constant .001 AVAX). Sending less than `1e6` or `1000000` (0.001 AVAX) may cause the import txn to fail.
+You do not need to adjust `fee`, you will however adjust `avaxAmount`, the variable that the sample code uses to define the amount of AVAX that the user will send. Be sure to send enough to support import fees (constant .001  AVAX or 1e6 gwei). Sending less than 0.001 AVAX may cause the import txn to fail.
 :::
 
 Run the export script:
