@@ -395,7 +395,7 @@ To stop your local network and clear its state, run
 
 `avalanche network clean`
 
-This will delete all stored states for all local subnets. You will need to redeploy your subnet configurations one by one to use them again.
+This will delete all stored deploy state for all local subnet deployments. This will not delete any of your subnet configurations. You will need to redeploy your subnet configurations one by one to use them again.
 
 Example:
 
@@ -418,7 +418,7 @@ Please use the value provided by `Metamask connection details` to connect with M
 ```text
 Metamask connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
 Network name:     firstsubnet
 Chain ID:         12345
 Currency Symbol:  TEST
