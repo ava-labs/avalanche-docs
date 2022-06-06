@@ -64,6 +64,10 @@ AVM is for X-Chaim, EVM for C-Chain, and PlatformVM for P-Chain.
 
 :::
 
+### Transaction Fee
+
+Transaction fees are fixed on X-Chain and P-Chain, while dynamic on C-Chain, see [this article](./transaction-fees.md#fee-schedule) for details. When transfering tokens, please take fee into consideration in calculating total amount to be transferred.
+
 ## Fuji Workflow
 
 This tutorial uses [**X-Chain <-> C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar.
@@ -237,10 +241,6 @@ let fee: BN = baseFee.div(new BN(1e9));
 fee = fee.add(new BN(1e6));
 ```
 
-:::tip
-You do not need to adjust `fee`, you will however adjust `avaxAmount`, the variable that the sample code uses to define the amount of AVAX that the user will send. Be sure to send enough to support import fees (constant .001  AVAX or 1e6 gwei). Sending less than 0.001 AVAX may cause the import txn to fail.
-:::
-
 Run the export script:
 
 ```zsh
@@ -249,6 +249,7 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 ```
 
 #### Import the Avax Token From C-Chain to X-Chain
+
 Before we run the [example import script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts), we need to make some changes to the code:
 
 1. Change the [Network Setting](#network-setting) to meet Fuji network requirements.
