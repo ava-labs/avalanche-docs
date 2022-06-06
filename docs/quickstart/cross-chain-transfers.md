@@ -151,7 +151,37 @@ $ ts-node examples/avm/buildExportTx-cchain-avax.ts
 This returns:
 
 ```sh
-Success! TXID: Rgg2412kaczRYC3taasvG6bYoqG7tBQG6WfacNdumKDKsVWpF
+Success! TXID: LjWWen7AwA3gP2op2V2Gwyoh9iNbPp9ZggFqAAs6YtPUscWvg
+```
+
+#### Verify the Transaction
+
+You can now pass this txID `LjWWen7AwA3gP2op2V2Gwyoh9iNbPp9ZggFqAAs6YtPUscWvg` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
+
+```zsh
+$ ts-node examples/avm/getTx.ts
+```
+
+which returns:
+
+```js
+{
+  unsignedTx: {
+    networkID: 5,
+    blockchainID: '2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm',
+    outputs: [],
+    inputs: [ [Object] ],
+    memo: '0x41564d207574696c697479206d6574686f64206275696c644578706f7274547820746f206578706f7274204156415820746f2074686520432d436861696e2066726f6d2074686520582d436861696e',
+    destinationChain: 'yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp',
+    exportedOutputs: [ [Object] ]
+  },
+  credentials: [
+    {
+      fxID: 'spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ',
+      credential: [Object]
+    }
+  ]
+}
 ```
 
 #### Import the Avax Token From X-Chain to C-Chain
@@ -176,40 +206,12 @@ $ ts-node examples/evm/buildImportTx-xchain.ts
 This returns:
 
 ```sh
-Success! TXID: r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1
+Success! TXID: ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub
 ```
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain!
 
-#### Verify the Transaction
-
-You can now pass this txID `r2yYqcnCJcdeV5gddZ8NUoG5ZD3Ef7DxbkiE9xn4RxFcDdMd1` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
-
-```zsh
-$ ts-node examples/avm/getTx.ts
-```
-
-which returns:
-
-```js
-{
-  unsignedTx: {
-    networkID: 1,
-    blockchainID: '2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM',
-    outputs: [],
-    inputs: [ [Object] ],
-    memo: '0x',
-    destinationChain: '11111111111111111111111111111111LpoYY',
-    exportedOutputs: [ [Object] ]
-  },
-  credentials: [
-    {
-      fxID: 'spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ',
-      credential: [Object]
-    }
-  ]
-}
-```
+You can verify this TX by copy / pasting the import TXID into [Avascan](https://testnet.avascan.info/blockchain/c/tx/ft33QHCH542wWUwrjdVf9APtAjPWqzqbqE43nCRECdbzhzVub)
 
 ### Transfer from the C-Chain to the X-Chain
 
@@ -243,6 +245,11 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 ```
 
 #### Import the Avax Token From C-Chain to X-Chain
+Before we run the example import script, we need to make some changes to the code:
+
+1. Change the [Network Setting](./cross-chain-transfers.md#network-setting) to meet [Local](./cross-chain-transfers.md#local-workflow), [Fuji](./cross-chain-transfers.md#network-setting), or [Mainnet](./cross-chain-transfers.md#mainnet-workflow) network requirements.
+2. Import your Private Key by following the steps listed [here](./cross-chain-transfers.md#private-key).
+3. Run the Script!
 
 ```zsh
 avalanchejs $ ts-node examples/avm/buildImportTx-cchain.ts
