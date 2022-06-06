@@ -77,7 +77,7 @@ cd avalanche-network-runner
 
 ### Install ANR binary
 
-The following command will install the ANR binary inside `$GOPATH/bin`. Make sure, you have the `$GOPATH/bin` path set in the `$PATH` environment variable, otherwise, you will not be able to run the binary unless you specify its location in each command.
+The following command will install the ANR binary inside `$GOPATH/bin`. Please make sure that you have the `$GOPATH/bin` path set in the `$PATH` environment variable, otherwise, you will not be able to run the binary unless you specify its location in each command.
 
 ```bash
 go install -v ./cmd/avalanche-network-runner

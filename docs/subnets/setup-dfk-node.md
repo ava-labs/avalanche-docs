@@ -84,7 +84,7 @@ If you want to pass the whitelisted subnets through the command line flag. You c
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
 
-## Just want the commands? We got you...
+## Just Want the Commands? We Got You...
 
 :::caution
 Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
