@@ -219,7 +219,7 @@ To return the AVAX back to the X-Chain, you need to do the transfer in the oppos
 
 #### Export the Avax Token From C-Chain to X-Chain
 
-Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts)
+Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts).
 
 Make necessary changes as above for private key and network settings.
 
