@@ -22,9 +22,9 @@ This section provides documents on how to build and maintain an AvalancheGo node
 | [**Node Backup and Restore**](./maintain/node-backup-and-restore.md) | Back up important files to be able to restore your node |
 | [**Upgrade Your AvalancheGo Node**](./maintain/upgrade-your-avalanchego-node.mdx) | Upgrade your Avalanche node |
 | [**Monitor an Avalanche Node**](./maintain/setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo |
-| [**Grafana Dashboards**](./maintain/grafana-dashboards.md) | Pre-configured Grafana dashboards |
 | [**AvalancheGo Config and Flags**](./maintain/avalanchego-config-flags.md) |  Configuration and flags for an Avalanche node  |
 | [**Chain Configs**](./maintain/chain-config-flags.md) | Chain specific configurations |
+| [**Subnet Configs**](./maintain/subnet-configs.md) | Subnet specific configurations |
 | [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md) | C-Chain offline pruning |
 
 ## Validate

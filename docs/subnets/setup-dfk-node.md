@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This article describes how to run a Mainnet node on [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer). It can be applied to any other subnet, where the corresponding part of the subnet info should be replaced. 
+This article describes how to run a Mainnet node on [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer). It can be applied to any other subnet, where the corresponding part of the subnet info should be replaced.
 
 Following necessary steps are needed to run your node on the DFK Subnet:
 
@@ -84,7 +84,7 @@ If you want to pass the whitelisted subnets through the command line flag. You c
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
 
-## Just want the commands? We got you...
+## Just Want the Commands? We Got You...
 
 :::caution
 Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**

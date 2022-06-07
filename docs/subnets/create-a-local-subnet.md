@@ -1,237 +1,430 @@
-# Create an EVM Subnet on Local
+# Create an EVM Subnet on a Local Network
 
-To learn how to develope a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Subnet-evm](https://github.com/ava-labs/subnet-evm) provides such a utility. 
-
-## Clone Subnet-evm 
-
-First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install).
-
-Run `go version`. **It should be 1.17.9 or above.** 
-
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. We recommend `~/workspace` on a Mac. 
-
-Run `echo $GOPATH`. **It should not be empty.**
-
-As a few software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may get error running the commands below.
-
-Download the `subnet-evm` repository into your `$GOPATH`:
-
-```sh
-cd $GOPATH
-mkdir -p src/github.com/ava-labs
-cd src/github.com/ava-labs
-git clone git@github.com:ava-labs/subnet-evm.git
-cd subnet-evm
-```
-
-This will clone and checkout to `master` branch.
+To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
 
 :::info
 
-Please always check [subnet-evem repo](https://github.com/ava-labs/subnet-evm) for the latest updates.
- 
-::: 
+Avalanche-CLI is very early in its lifecycle. It will evolve rapidly over the coming weeks and months. Until we achieve our first mature release, we are not committed to preserving backwards compatibility. Commands may be renamed or removed in future versions. Examples and their output may become outdated. Please check this page and [the github project](https://github.com/ava-labs/avalanche-cli) often and run through the commands to experience them.
 
-## Run Local Network
+:::
 
-[`scripts/run.sh`](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) automatically installs `avalanchego`, sets up a local network,
-and creates a `subnet-evm` genesis file. The usage of this script is
+## Installation
 
-```bash
-./scripts/run.sh [AVALANCHEGO VERSION] [GENESIS_ADDRESS]
-```
+To download a binary for the latest release, run:
 
 ```bash
-# to startup a local cluster (good for development)
-cd ${HOME}/go/src/github.com/ava-labs/subnet-evm
-./scripts/run.sh 1.7.10 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-_This ewoq address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`) is a prefunded address on the local network, see [here](../quickstart/fund-a-local-test-network) for more info. The private key for this address is
-`0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`._
+The binary will be installed inside the `./` directory (relative to where the install command was run).
 
+:::note
+Downloading binaries from the Github UI will cause permission errors when running it the first time on Mac.
+:::
 
-With this command, `avalanchego`, `avalanche-network-runner` and GoLang packages will be downloaded and installed on a `/tmp` directory. Note: please make sure that your have fast internet connection to download these packages, otherwise, it will take a long time.
-
-Once the the network is started up, the following info will be printed to the
-console:
+To add the binary to your path, run
 
 ```bash
-cluster is ready!
-
-Logs Directory: /var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/network-runner-root-data2328077371
-
-EVM Chain ID: 99999
-Funded Address: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
-RPC Endpoints:
-- http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-- http://127.0.0.1:23930/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-- http://127.0.0.1:31984/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-- http://127.0.0.1:41274/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-- http://127.0.0.1:57529/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-
-WS Endpoints:
-- ws://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/ws
-- ws://127.0.0.1:23930/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/ws
-- ws://127.0.0.1:31984/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/ws
-- ws://127.0.0.1:41274/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/ws
-- ws://127.0.0.1:57529/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/ws
-
-MetaMask Quick Start:
-Funded Address: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
-Network Name: Local EVM
-RPC URL: http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc
-Chain ID: 99999
-Curreny Symbol: LEVM
-network-runner RPC server is running on PID 79100...
-
-use the following command to terminate:
-
-pkill -P 79100
-kill -2 79100
-pkill -9 -f srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
+cd bin
+export PATH=$PWD:$PATH
 ```
 
-You can then ping the local cluster or add the network to MetaMask:
+To add it to your path permanently, add an export command to your shell initialization script (ex: .bashrc).
+
+### Installing in Custom Location
+
+To download the binary into a specific directory, run:
+
+```
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b <relative directory>
+```
+
+## Quickstart
+
+After installing, launch your own custom subnet:
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc": "2.0",
-    "method": "eth_blockNumber",
-    "params":[],
-    "id": 1
-}'
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+cd bin
+./avalanche subnet create <subnetName>
+./avalanche subnet deploy <subnetName>
 ```
 
-Response:
+Shut down your local deployment with:
 
-```json
+```bash
+./avalanche network stop
+```
+
+Restart your local deployment (from where you left off) with:
+
+```bash
+./avalanche network start
+```
+
+### Currently Supported Functionality
+
+- Creation of Subnet-EVM configs
+- Local deployment of Subnet-EVM based subnets
+
+### Notable Missing Features
+
+- Fuji and mainnet Subnet-EVM deploys
+
+## Subnet
+
+The subnet command suite provides a collection of tools for developing and deploying subnets.
+
+To get started, use the `avalanche subnet create` command wizard to walk through the configuration of your very first subnet. Then, go ahead and deploy it with the `avalanche subnet deploy` command. You can use the rest of the commands to manage your subnet configurations.
+
+### Subnet-EVM
+
+Subnet-EVM is a configurable Ethereum virtual machine designed for subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out the [github project](https://github.com/ava-labs/subnet-evm).
+
+### Create a Custom Subnet Configuration
+
+`avalanche subnet create <subnetName>`
+
+If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration [here](./customize-a-subnet.md).
+
+Example:
+
+Command `avalanche subnet create firstsubet` walks through following questions:
+
+- Choose a VM: default to SubnetEVM
+- Pick a chain ID
+- Set fees: default to Avalanche C-Chain's setting
+- Airdrop: default to airdrop 1 million tokens
+- Add a custom precompile to modify the EVM: default to no.
+
+The wizard won't customize every aspect of the Subnet-EVM genesis for you. If you'd like complete control, you can specify a custom genesis by providing a path to the file you'd like to use. Run with:
+
+`avalanche subnet create <subnetName> --file <filepath>`
+
+One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
+
+By default, creating a subnet configuration with the same subnetName as one that already exists will fail. To overwrite an existing config, use the force flag:
+
+`avalanche subnet create <existingSubnetName> -f`
+
+### View Created Subnet Configurations
+
+You can list the subnets you've created with
+
+`avalanche subnet list`
+
+Example:
+
+```text
+> ./avalanche subnet list
++-------------+-------------+-----------+
+|   SUBNET    |    CHAIN    |   TYPE    |
++-------------+-------------+-----------+
+| firstsubnet | firstsubnet | SubnetEVM |
++-------------+-------------+-----------+
+```
+
+To see the details of a specific configuration, run
+
+`avalanche subnet describe <subnetName>`
+
+Example:
+
+```text
+> ./avalanche subnet describe firstsubnet
+
+ _____       _        _ _
+|  __ \     | |      (_) |
+| |  | | ___| |_ __ _ _| |___
+| |  | |/ _ \ __/ _  | | / __|
+| |__| |  __/ || (_| | | \__ \
+|_____/ \___|\__\__,_|_|_|___/
++-------------+-------------+
+|  PARAMETER  |    VALUE    |
++-------------+-------------+
+| Subnet Name | firstsubnet |
++-------------+-------------+
+| ChainId     |       12345 |
++-------------+-------------+
+
+  _____              _____             __ _
+ / ____|            / ____|           / _(_)
+| |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
+| | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
+| |__| | (_| \__ \ | |___| (_) | | | | | | | (_| |
+ \_____|\__,_|___/  \_____\___/|_| |_|_| |_|\__, |
+                                             __/ |
+                                            |___/
++--------------------------+-------------+
+|      GAS PARAMETER       |    VALUE    |
++--------------------------+-------------+
+| GasLimit                 |     8000000 |
++--------------------------+-------------+
+| MinBaseFee               | 25000000000 |
++--------------------------+-------------+
+| TargetGas                |    15000000 |
++--------------------------+-------------+
+| BaseFeeChangeDenominator |          36 |
++--------------------------+-------------+
+| MinBlockGasCost          |           0 |
++--------------------------+-------------+
+| MaxBlockGasCost          |     1000000 |
++--------------------------+-------------+
+| TargetBlockRate          |           2 |
++--------------------------+-------------+
+| BlockGasCostStep         |      200000 |
++--------------------------+-------------+
+
+          _         _
+    /\   (_)       | |
+   /  \   _ _ __ __| |_ __ ___  _ __
+  / /\ \ | | '__/ _  | '__/ _ \| '_ \
+ / ____ \| | | | (_| | | | (_) | |_) |
+/_/    \_\_|_|  \__,_|_|  \___/| .__/
+                               | |
+                               |_|
++--------------------------------------------+------------------------+---------------------------+
+|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
++--------------------------------------------+------------------------+---------------------------+
+| 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
++--------------------------------------------+------------------------+---------------------------+
+
+
+  _____                                    _ _
+ |  __ \                                  (_) |
+ | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
+ |  ___/ '__/ _ \/ __/ _ \| '_   _ \| '_ \| | |/ _ \/ __|
+ | |   | | |  __/ (_| (_) | | | | | | |_) | | |  __/\__ \
+ |_|   |_|  \___|\___\___/|_| |_| |_| .__/|_|_|\___||___/
+                                    | |
+                                    |_|
+
+No precompiles set
+```
+
+If you'd like to see the raw genesis file, supply the `--genesis` flag:
+
+`avalanche subnet describe <subnetName> --genesis`
+
+Example:
+
+```text
+> ./avalanche subnet describe firstsubnet --genesis
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x0"
+    "config": {
+        "chainId": 12345,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "petersburgBlock": 0,
+        "istanbulBlock": 0,
+        "muirGlacierBlock": 0,
+        "subnetEVMTimestamp": 0,
+        "feeConfig": {
+            "gasLimit": 8000000,
+            "targetBlockRate": 2,
+            "minBaseFee": 25000000000,
+            "targetGas": 15000000,
+            "baseFeeChangeDenominator": 36,
+            "minBlockGasCost": 0,
+            "maxBlockGasCost": 1000000,
+            "blockGasCostStep": 200000
+        },
+        "contractDeployerAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "contractNativeMinterConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "txAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        }
+    },
+    "nonce": "0x0",
+    "timestamp": "0x0",
+    "extraData": "0x",
+    "gasLimit": "0x7a1200",
+    "difficulty": "0x0",
+    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "alloc": {
+        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
+            "balance": "0xd3c21bcecceda1000000"
+        }
+    },
+    "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "airdropAmount": null,
+    "number": "0x0",
+    "gasUsed": "0x0",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "baseFeePerGas": null
 }
 ```
 
-To terminate the cluster, run the following commands:
+### Deploying Subnets Locally
 
-```bash
-pkill -P 79100
-kill -2 79100
-pkill -9 -f srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
+Currently, this tool only supports local subnet deploys. Fuji and Mainnet deploys will be arriving shortly.
+
+To deploy, run
+
+`avalanche subnet deploy <subnetName>`
+
+Local deploys will start a multi-node Avalanche network in the background on your machine. Progress will be shown until it completes. It also prints info needed for connecting with Metamask.
+
+Example:
+
+```text
+> ./avalanche subnet deploy firstsubnet
+✔ Local Network
+Deploying [firstsubnet] to Local Network
+Backend controller started, pid: 71505, output at: /var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/avalanche-cli-backend57656025
+Avalanchego installation successful
+dialing endpoint ":8097"
+VM ready. Trying to boot network...
+Network has been booted. Wait until healthy. Please be patient, this will take some time...
+...............................................................................
+Network ready to use. Local network node endpoints:
+Endpoint at node node4 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node5 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:49912/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node1 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:47497/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node2 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:62099/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node3 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:48498/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+
+Metamask connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Network name:     firstsubnet
+Chain ID:         12345
+Currency Symbol:  TEST
 ```
 
-## Load Simulator
+To manage that network, see [the `avalanche network` command tree](#network).
 
-When building developing your own blockchain using `subnet-evm`, you may want
-to analyze how your fee paramterization behaves and/or how many resources your VM
-uses under different load patterns. For this reason, we developed `cmd/simulator`.
-`cmd/simulator` lets your drive arbitrary load across any number of [endpoints]
-with a user-specified `concurrency`, `base-fee`, and `priority-fee`.
+### Deploying to Fuji
 
-To get started, open the directory `cmd/simulator` and add your network's endpoints to
-the file at `.simulator/config.yml` (these will be provided after running
-`./scripts/run.sh`. With the example above, the correct endpoints is `http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc` to replace `http://localhost:9650/ext/bc/my-chain/rpc`.):
+If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
 
-```yaml
-endpoints:
-  - http://localhost:9650/ext/bc/my-chain/rpc
-base-fee: 25
-priority-fee: 1
-concurrency: 10
+First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
+
+### Delete a Subnet Configuration
+
+To delete a created subnet configuration, run
+
+`avalanche subnet delete <subnetName>`
+
+## Network
+
+The network command suite provides a collection of tools for managing local subnet deployments.
+
+When a subnet is deployed locally, it runs on a local, multi-node Avalanche network. Deploying a subnet locally will start this network in the background. This command suite allows you to shutdown and restart that network.
+
+This network currently supports multiple, concurrently deployed subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
+
+### Stopping the Local Network
+
+To stop a running local network, run
+
+`avalanche network stop [snapshotName]`
+
+This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
+`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
+If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
+
+Example:
+
+```text
+> ./avalanche network stop
+dialing endpoint ":8097"
+Network stopped successfully.
 ```
 
+### Starting/Restarting the Local Network
 
-Once your config is specified, you can run the tool by either invoking `go run main.go` under the directory `cmd/simulator` or by installing the tool (`go install -v .`) and running the binary
-(`simulator`).
+To start or restart a stopped network, run
 
-To make getting started easier, the ewoq key `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`
-has been pre-added to the simulator key directory and can be added to genesis during local network
-creation (`./scripts/run.sh 1.7.10 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`).
-If you do not add this key to genesis, you'll need to manually fund the
-`master` account when prompted in the terminal.
+`avalanche network start [snapshotName]`
 
-_The private key for the ewoq address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`) is
-`0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`._
+`snapshotName` is optional, if provided the named snapshot will be used to start the network (if found).
+If not provided, the last snapshot created with a unnamed `stop` will be used.
 
-If you followed the directions successfully, you should see the following:
+If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no subnet has been deployed yet), the command will fail.
 
-```bash
-> go run main.go
-go: downloading github.com/ava-labs/subnet-evm v0.1.2
-go: downloading github.com/spf13/viper v1.10.1
-2022/05/11 09:49:22 loaded config (endpoints=[http://127.0.0.1:14463/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtGjF4JkGs/rpc] concurrency=25 base fee=1 priority fee=10)
-2022/05/11 09:49:22 loaded worker 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (balance=100000000000000000000000000 nonce=0)
-2022/05/11 09:49:22 0xe8859AF6c05b512dF80A66b81dE89FDAB9fE5C1c requesting funds from master
-2022/05/11 09:49:22 0xa2B32bcbA31d4dC7728aD73165cdeea5eCeD5e70 requesting funds from master
-2022/05/11 09:49:22 0x837438175627A7A2ABbccf1727c5cA46fA7274b5 requesting funds from master
-2022/05/11 09:49:22 0x14c908A82047C6bC66cd9282b4D68f3e003659f8 requesting funds from master
-2022/05/11 09:49:22 0xbeE6DF853592d3699ac3292D134F59BEF278B048 requesting funds from master
-2022/05/11 09:49:22 0x028Bc164dcC1c10f1Db5a1175c58eA84a7Fd34c9 requesting funds from master
-2022/05/11 09:49:22 0x664D97348Bdb73fc3bC4447B4676573dbF6eEE5A requesting funds from master
-2022/05/11 09:49:22 0x455aAB371261DC41a048e42Bf147ced4FaDE5fCF requesting funds from master
-2022/05/11 09:49:22 0xA9b5C64E057F50730CA4Ba6205d55fa08C03ff75 requesting funds from master
-2022/05/11 09:49:22 0x57645A2bdCEb6cFbC95e6a5Cac70F0c05B8d8515 requesting funds from master
-2022/05/11 09:49:24 [block created] t: 2022-05-11 09:49:22 -0600 MDT index: 1 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
-2022/05/11 09:49:24 [block created] t: 2022-05-11 09:49:24 -0600 MDT index: 2 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
-2022/05/11 09:49:24 [stats] historical TPS: 1.00 last 10s TPS: 0.10 total txs: 2 historical GPS: 21000.0, last 10s GPS: 2100.0 elapsed: 2s
-2022/05/11 09:49:26 [block created] t: 2022-05-11 09:49:26 -0600 MDT index: 3 base fee: 1 block gas cost: 0 block txs: 1 gas used: 21000
-2022/05/11 09:49:26 [stats] historical TPS: 0.75 last 10s TPS: 0.20 total txs: 3 historical GPS: 15750.0, last 10s GPS: 4200.0 elapsed: 4s
-2022/05/11 09:49:28 [block created] t: 2022-05-11 09:49:28 -0600 MDT index: 4 base fee: 1 block gas cost: 0 block txs: 2 gas used: 42000
-2022/05/11 09:49:28 [stats] historical TPS: 0.83 last 10s TPS: 0.30 total txs: 5 historical GPS: 17500.0, last 10s GPS: 6300.0 elapsed: 6s
-2022/05/11 09:49:30 [block created] t: 2022-05-11 09:49:30 -0600 MDT index: 5 base fee: 1 block gas cost: 0 block txs: 4 gas used: 84000
-2022/05/11 09:49:30 [stats] historical TPS: 1.12 last 10s TPS: 0.50 total txs: 9 historical GPS: 23625.0, last 10s GPS: 10500.0 elapsed: 8s
-2022/05/11 09:49:32 [block created] t: 2022-05-11 09:49:32 -0600 MDT index: 6 base fee: 1 block gas cost: 0 block txs: 5 gas used: 105000
-2022/05/11 09:49:32 [stats] historical TPS: 1.40 last 10s TPS: 0.90 total txs: 14 historical GPS: 29400.0, last 10s GPS: 18900.0 elapsed: 10s
-2022/05/11 09:49:34 [block created] t: 2022-05-11 09:49:34 -0600 MDT index: 7 base fee: 1 block gas cost: 0 block txs: 6 gas used: 126000
-2022/05/11 09:49:34 [stats] historical TPS: 1.67 last 10s TPS: 1.30 total txs: 20 historical GPS: 35000.0, last 10s GPS: 27300.0 elapsed: 12s
-2022/05/11 09:49:36 [block created] t: 2022-05-11 09:49:36 -0600 MDT index: 8 base fee: 1 block gas cost: 0 block txs: 7 gas used: 147000
-2022/05/11 09:49:36 [stats] historical TPS: 1.93 last 10s TPS: 1.80 total txs: 27 historical GPS: 40500.0, last 10s GPS: 37800.0 elapsed: 14s
-2022/05/11 09:49:38 [block created] t: 2022-05-11 09:49:38 -0600 MDT index: 9 base fee: 1 block gas cost: 0 block txs: 8 gas used: 168000
-2022/05/11 09:49:38 [stats] historical TPS: 2.19 last 10s TPS: 2.40 total txs: 35 historical GPS: 45937.5, last 10s GPS: 50400.0 elapsed: 16s
-2022/05/11 09:49:40 [block created] t: 2022-05-11 09:49:40 -0600 MDT index: 10 base fee: 1 block gas cost: 0 block txs: 9 gas used: 189000
-2022/05/11 09:49:40 [stats] historical TPS: 2.44 last 10s TPS: 3.00 total txs: 44 historical GPS: 51333.3, last 10s GPS: 63000.0 elapsed: 18s
-2022/05/11 09:49:42 [block created] t: 2022-05-11 09:49:42 -0600 MDT index: 11 base fee: 1 block gas cost: 0 block txs: 9 gas used: 189000
-2022/05/11 09:49:42 [stats] historical TPS: 2.65 last 10s TPS: 3.50 total txs: 53 historical GPS: 55650.0, last 10s GPS: 73500.0 elapsed: 20s
-2022/05/11 09:49:44 [block created] t: 2022-05-11 09:49:44 -0600 MDT index: 12 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
-2022/05/11 09:49:44 [stats] historical TPS: 2.86 last 10s TPS: 3.90 total txs: 63 historical GPS: 60136.4, last 10s GPS: 81900.0 elapsed: 22s
-2022/05/11 09:49:46 [block created] t: 2022-05-11 09:49:46 -0600 MDT index: 13 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
-2022/05/11 09:49:46 [stats] historical TPS: 3.04 last 10s TPS: 4.30 total txs: 73 historical GPS: 63875.0, last 10s GPS: 90300.0 elapsed: 24s
-.....
+Deploying a subnet locally will start the network automatically.
 
-2022/05/11 09:55:51 [stats] historical TPS: 4.89 last 10s TPS: 5.00 total txs: 1896 historical GPS: 102618.6, last 10s GPS: 105000.0 elapsed: 6m28s
-2022/05/11 09:55:52 0xa2B32bcbA31d4dC7728aD73165cdeea5eCeD5e70 requesting funds from master
-2022/05/11 09:55:53 [block created] t: 2022-05-11 09:55:52 -0600 MDT index: 196 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:55:53 [stats] historical TPS: 4.89 last 10s TPS: 5.10 total txs: 1907 historical GPS: 102684.6, last 10s GPS: 107100.0 elapsed: 6m30s
-2022/05/11 09:55:54 0x14c908A82047C6bC66cd9282b4D68f3e003659f8 requesting funds from master
-2022/05/11 09:55:55 [block created] t: 2022-05-11 09:55:54 -0600 MDT index: 197 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:55:55 [stats] historical TPS: 4.89 last 10s TPS: 5.20 total txs: 1918 historical GPS: 102750.0, last 10s GPS: 109200.0 elapsed: 6m32s
-2022/05/11 09:55:56 0xbeE6DF853592d3699ac3292D134F59BEF278B048 requesting funds from master
-2022/05/11 09:55:57 [block created] t: 2022-05-11 09:55:56 -0600 MDT index: 198 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:55:57 [stats] historical TPS: 4.90 last 10s TPS: 5.30 total txs: 1929 historical GPS: 102814.7, last 10s GPS: 111300.0 elapsed: 6m34s
-2022/05/11 09:55:58 0x028Bc164dcC1c10f1Db5a1175c58eA84a7Fd34c9 requesting funds from master
-2022/05/11 09:55:59 [block created] t: 2022-05-11 09:55:58 -0600 MDT index: 199 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:55:59 [stats] historical TPS: 4.90 last 10s TPS: 5.40 total txs: 1940 historical GPS: 102878.8, last 10s GPS: 113400.0 elapsed: 6m36s
-2022/05/11 09:56:00 0x664D97348Bdb73fc3bC4447B4676573dbF6eEE5A requesting funds from master
-2022/05/11 09:56:01 [block created] t: 2022-05-11 09:56:00 -0600 MDT index: 200 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:56:01 [stats] historical TPS: 4.90 last 10s TPS: 5.50 total txs: 1951 historical GPS: 102942.2, last 10s GPS: 115500.0 elapsed: 6m38s
-2022/05/11 09:56:02 0x455aAB371261DC41a048e42Bf147ced4FaDE5fCF requesting funds from master
-2022/05/11 09:56:03 [block created] t: 2022-05-11 09:56:02 -0600 MDT index: 201 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:56:03 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1962 historical GPS: 103005.0, last 10s GPS: 115500.0 elapsed: 6m40s
-2022/05/11 09:56:04 0xA9b5C64E057F50730CA4Ba6205d55fa08C03ff75 requesting funds from master
-2022/05/11 09:56:05 [block created] t: 2022-05-11 09:56:04 -0600 MDT index: 202 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:56:05 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1973 historical GPS: 103067.2, last 10s GPS: 115500.0 elapsed: 6m42s
-2022/05/11 09:56:06 0x57645A2bdCEb6cFbC95e6a5Cac70F0c05B8d8515 requesting funds from master
-2022/05/11 09:56:07 [block created] t: 2022-05-11 09:56:06 -0600 MDT index: 203 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:56:07 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1984 historical GPS: 103128.7, last 10s GPS: 115500.0 elapsed: 6m44s
-2022/05/11 09:56:09 [block created] t: 2022-05-11 09:56:08 -0600 MDT index: 204 base fee: 1 block gas cost: 0 block txs: 11 gas used: 231000
-2022/05/11 09:56:09 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 1995 historical GPS: 103189.7, last 10s GPS: 115500.0 elapsed: 6m46s
-2022/05/11 09:56:11 [block created] t: 2022-05-11 09:56:10 -0600 MDT index: 205 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
-2022/05/11 09:56:11 [stats] historical TPS: 4.91 last 10s TPS: 5.50 total txs: 2005 historical GPS: 103198.5, last 10s GPS: 115500.0 elapsed: 6m48s
-2022/05/11 09:56:13 [block created] t: 2022-05-11 09:56:12 -0600 MDT index: 206 base fee: 1 block gas cost: 0 block txs: 10 gas used: 210000
-2022/05/11 09:56:13 [stats] historical TPS: 4.91 last 10s TPS: 5.40 total txs: 2015 historical GPS: 103207.3, last 10s GPS: 113400.0 elapsed: 6m50s
+Example:
+
+```text
+> ./avalanche network start
+dialing endpoint ":8097"
+Starting previously deployed and stopped snapshot
+.....................
+Network ready to use. Local network node endpoints:
+Endpoint at node node3 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:48498/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node4 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node5 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:49912/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node1 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:47497/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Endpoint at node node2 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:62099/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+```
+
+### Deleting the Local Network
+
+To stop your local network and clear its state, run
+
+`avalanche network clean`
+
+This will delete all stored deploy state for all local subnet deployments. This will not delete any of your subnet configurations. You will need to redeploy your subnet configurations one by one to use them again.
+
+Example:
+
+```text
+> ./avalanche network clean
+dialing endpoint ":8097"
+Process terminated.
+```
+
+### Checking Network Status
+
+If you'd like to determine whether or not a local Avalanche network is running on your macine, run
+
+`avalanche network status`
+
+## Connect with Metamask
+
+Please use the value provided by `Metamask connection details` to connect with Metamask.
+
+```text
+Metamask connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Network name:     firstsubnet
+Chain ID:         12345
+Currency Symbol:  TEST
+```
+
+You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
+
+Here is a screenshot of Metamask when everything is set correctly:
+![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
+
+## Smart Contract
+
+You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+
+For example: to connect `Hardhat` to the local network that deployed with the Avalanche-CLI, we would create a network setting in `hardhat.config.ts` that looks similar to this:
+
+```json
+testChain: {
+      url: "http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc",
+      chainId: 12345,
+      accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
+    }
 ```
 
 ## Next Step

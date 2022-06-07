@@ -20,15 +20,15 @@ Avalanche’s subnet architecture makes regulatory compliance manageable. As men
 
 Some examples of requirements include:
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+- Validators must be located in a given country
+- Validators must pass a KYC/AML checks
+- Validators must hold a certain license
 
 (To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
 
 ### Support for Private Blockchains
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](./customize-a-subnet.md#private-subnet) for more info.
+You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../nodes/maintain/subnet-configs.md#private-subnet) for more info.
 
 ### Separation of Concerns
 
@@ -36,7 +36,7 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 ### Application-Specific Requirements
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](../nodes/build/run-avalanche-node-manually.md#requirements) so that the application doesn’t suffer from low performance due to slow validators.
 
 ## Virtual Machines
 
@@ -56,13 +56,6 @@ Ethereum made a step toward solving this problem with smart contracts. Developer
 
 Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go (other languages will be supported in the future).
 
-### Creating Your Blockchain and Virtual Machine
+## Developing Your Own Subnet
 
-Avalanche supports the creation of new instances of the Avalanche VM.
-* [Create an EVM Subnet on Local](./create-a-local-subnet.md)
-* [Create an EVM Subnet on Fuji Testnet](./create-a-fuji-subnet.md)
-* [Customize a Subnet](./customize-a-subnet.md)
-
-Avalanche also supports creating custom blockchains with virtual machines.
-* [Create a Virtual machine (VM)](create-a-virtual-machine-vm.md)
-* [Create a Custom Blockchain](create-custom-blockchain.md)
+Plesae check out documents listed on the left panel to develop your own subnets with customized virtual machine and blockchain.
