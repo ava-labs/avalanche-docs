@@ -159,7 +159,7 @@ const delegationFee: number = 10
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, use the example script: [`getNodeID.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts) and follow the listed steps below:
+This is the node ID of the validator being added. To get your node’s ID, use the example script: [`getNodeID.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts) and follow the steps listed below:
 
 1. open the [**`examples/info`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/info) directory and select [**`getNodeID.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts).
 
@@ -267,17 +267,34 @@ const startTime: BN = new BN(1654656829) // Wed Jun 08 2022 02:53:49 GMT+0000
 const endTime: BN = new BN(1662602029) // Thu Sep 08 2022 01:53:49 GMT+0000
 ```
 
-#### Reward and Change Addresses
+#### Addresses
 
-`rewardAddress`
+`toAddresses`
 
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to rewardAddress. The original stake will be sent back to an address controlled by username.
+An array of addresses as [Buffer](https://github.com/feross/buffer) who receive the staked tokens at the end of the staking period.
+
+`fromAddresses`
+
+An array of addresses as a [Buffer](https://github.com/feross/buffer) who own the staking UTXOs.
+
+`changeAddresses`
+
+Any change resulting from this transaction will be sent to these addresses. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+
+`rewardAddresses`
+
+When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to rewardAddresses. The original stake will be sent back to an address controlled by username.
 
 A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
 
-`changeAddr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+By default, the example uses the variable `pAddressStrings` to define `toAddresses`, `fromAddresses`, `changeAddress` and `rewardAddresses`:
+
+```js
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
+```
+
+This retrieves the P-Chain addresses that belong to the `private key` value that appears earlier in the example.
 
 If you wish to change these addresses, please follow the steps below:
 
@@ -295,19 +312,21 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   )
 ```
 
-and change the specified `pAddressStrings` to the P-Chain address of choice.
+and change the specified `pAddressStrings` to the P-Chain address of choice. Please use array format when passing in each new P-Chain address.
 
 ```js
 const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
 ...
-    pAddressStrings,
-    pAddressStrings,
-    "<YOUR-PCHAIN-ADDRESS-HERE>",
+    ["<YOUR-PCHAIN-ADDRESS-HERE>"],
+    ["<YOUR-PCHAIN-ADDRESS-HERE>"],
+    ["<YOUR-PCHAIN-ADDRESS-HERE>"],
 ...
-    "<YOUR-PCHAIN-ADDRESS-HERE>",
+    ["<YOUR-PCHAIN-ADDRESS-HERE>"],
 ...
   )
 ```
+
+
 
 ### Execute the Add Validator Script
 Now that we have made all of the necessary changes to our example script, it's time to add a validator to the Fuji Network.
@@ -384,5 +403,4 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on Mainnet](../../nodes/maintain/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](../../apis/avalanchego/public-api-server.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1;` based on [this](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
-- Set the correct amount to send.
-- The correct receiving address.
+- Set the correct amount to stake.
