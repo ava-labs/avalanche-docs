@@ -60,7 +60,7 @@ Following files can be found under the [examples](https://github.com/ava-labs/av
 
 The naming convention in the file and directory names are:
 
-AVM is for X-Chaim, EVM for C-Chain, and PlatformVM for P-Chain.
+AVM is for X-Chain, EVM for C-Chain, and PlatformVM for P-Chain.
 
 :::
 
