@@ -217,7 +217,7 @@ const main = async (): Promise<any> => {
 }
 ```
 
-To stake a different amount, please replace the code above with a stake amount that is greater than 1 AVAX. Below sets a new value of 10,000 AVAX (`10000000000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX. 
+To stake a different amount, please replace the code above with a stake amount of 1 AVAX or greater. Below sets a new value of 10,000 AVAX (`10000000000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX. 
 
 Please follow the Example below for steps to change the stake amount:
 
@@ -294,7 +294,7 @@ By default, the example uses the variable `pAddressStrings` to define `toAddress
 const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
 ```
 
-This retrieves the P-Chain addresses that belong to the `private key` value that appears earlier in the example.
+This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
 
 If you wish to change these addresses, please follow the steps below:
 
