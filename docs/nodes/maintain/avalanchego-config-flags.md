@@ -21,12 +21,6 @@ Example JSON config file:
 }
 ```
 
-:::tip
-
-[Install Script](../build/set-up-node-with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you would need to create it manually if needed.
-
-:::
-
 #### `--config-file-content` (string):
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
@@ -116,6 +110,7 @@ Max number of containers in an Ancestors message sent by this node. Defaults to 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+
 
 ## State Syncing
 
@@ -398,9 +393,7 @@ Comma separated list of subnet IDs that this node would validate if added to. De
 
 ### Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
-
-Full reference for all configuration options for a subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
 
 #### `--subnet-config-dir` (string):
 
@@ -419,15 +412,57 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 }
 ```
 
-:::tip
-
-By default, none of these directories and/or files exist. You would need to create them manually if needed.
-
-:::
-
 #### `--subnet-config-content` (string):
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a subnet.
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
+
+#### Parameters
+
+##### `validatorOnly` (bool):
+
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. 
+
+Avalanche subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
+
+Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+
+Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
+
+
+##### Consensus Parameters
+
+Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
+
+| CLI Key                             | JSON Key                  |
+| :---------------------------------  | :-----------------------  |
+| --snow-sample-size                  | k                         |
+| --snow-quorum-size                  | alpha                     |
+| --snow-virtuous-commit-threshold    | betaVirtuous              |
+| --snow-rogue-commit-threshold       | betaRogue                 |
+| --snow-concurrent-repolls           | concurrentRepolls         |
+| --snow-optimal-processing           | optimalProcessing         |
+| --snow-max-processing               | maxOutstandingItems       |
+| --snow-max-time-processing          | maxItemProcessingTime     |
+| --snow-mixed-query-num-push-vdr     | mixedQueryNumPushVdr      |
+| --snow-mixed-query-num-push-non-vdr | mixedQueryNumPushNondVdr  |
+| --snow-avalanche-batch-size         | batchSize                 |
+| --snow-avalanche-num-parents        | parentSize                |
+
+##### Gossip Configs
+
+It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
+
+| CLI Key                                                 | JSON Key                               |
+| :------------------------------------------------------ | :------------------------------------- |
+| --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
+| --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
+| --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |
+| --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
+| --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
+| --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
+| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
+| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
+| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
 
 ## Version
 
@@ -463,7 +498,7 @@ Number of non-validators to gossip to when gossiping accepted frontier. Defaults
 
 #### `--consensus-accepted-frontier-gossip-peer-size` (uint):
 
-Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
+Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
 
 #### `--consensus-on-accept-gossip-validator-size` (uint):
 
@@ -475,7 +510,7 @@ Number of non-validators to gossip to each accepted container to. Defaults to `0
 
 #### `--consensus-on-accept-gossip-peer-size` (uint):
 
-Number of peers to gossip to each accepted container to. Defaults to `10`.
+Number of peers to gossip to each accepted container to. Defaults to `20`.
 
 ### Benchlist
 
@@ -600,23 +635,23 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
 
-#### `snow-optimal-processing` (int):
+### `snow-optimal-processing` (int):
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-#### `snow-max-processing` (int):
+### `snow-max-processing` (int):
 
 Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
 
-#### `snow-max-time-processing` (duration):
+### `snow-max-time-processing` (duration):
 
 Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
 
-#### `snow-mixed-query-num-push-vdr` (uint):
+### `snow-mixed-query-num-push-vdr` (uint):
 
 If this node is a validator, when a container is inserted into consensus, send a Push Query to this many validators and a Pull Query to the others. Must be <= k. Defaults to `10`.
 
-#### `snow-mixed-query-num-push-non-vdr` (uint):
+### `snow-mixed-query-num-push-non-vdr` (uint):
 
 fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
 
@@ -742,7 +777,7 @@ These flags govern rate-limiting of inbound and outbound messages. For more info
 
 #### CPU based
 
-Rate-limiting based on how much CPU usage a peer causes.
+Rate-limiting based on how much CPU usage a peer causes. 
 
 ##### `cpu-tracker-halflife` (duration):
 
@@ -750,7 +785,7 @@ Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics chang
 
 ##### `throttler-inbound-cpu-validator-alloc` (float):
 
-Number of CPU allocated for use by validators. Value should be in range (0, total core count].
+Number of CPU allocated for use by validators. Value should be in range (0, total core count]. 
 Defaults to half of the number of CPUs on the machine.
 
 ##### `--throttler-inbound-cpu-at-large-alloc` (float):
@@ -762,7 +797,8 @@ See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 ##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
 The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
-For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then
+one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
 
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
@@ -770,7 +806,7 @@ In the CPU rate-limiter, check at least this often whether the node's CPU usage 
 
 #### Bandwidth based
 
-Rate-limiting based on the bandwidth a peer uses.
+Rate-limiting based on the bandwidth a peer uses. 
 
 ##### `--throttler-inbound-bandwidth-refill-rate` (uint):
 
@@ -782,7 +818,7 @@ Max inbound bandwidth a node can use at once. See interface `throttling.Bandwidt
 
 #### Message size based
 
-Rate-limiting based on the total size, in bytes, of unprocessed messages.
+Rate-limiting based on the total size, in bytes, of unprocessed messages. 
 
 ##### `--throttler-inbound-at-large-alloc-size` (uint):
 
@@ -798,7 +834,7 @@ Maximum number of bytes a node can take from the at-large allocation of the inbo
 
 #### Message based
 
-Rate-limiting based on the number of unprocessed messages.
+Rate-limiting based on the number of unprocessed messages. 
 
 ##### `--throttler-inbound-node-max-processing-msgs` (uint):
 
@@ -812,7 +848,7 @@ Rate-limiting for outbound messages.
 
 ##### `--throttler-outbound-at-large-alloc-size` (uint):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
 
 ##### `--throttler-outbound-validator-alloc-size` (uint):
 
@@ -846,15 +882,15 @@ Defaults to `1m`.
 
 #### `--network-peer-list-num-validator-ips` (int):
 
-Defaults to `15`.
+Defaults to `20`.
 
 #### `--network-peer-list-validator-gossip-size` (int):
 
-Defaults to `20`.
+Defaults to `25`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int):
 
-Defaults to `10`.
+Defaults to `25`.
 
 #### ` --network-peer-read-buffer-size` (int):
 
@@ -863,32 +899,6 @@ Size of the buffer that peer messages are read into (there is one buffer per pee
 #### `--network-peer-write-buffer-size` (int):
 
 Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
-
-### Resource Usage Tracking
-
-#### `--system-tracker-frequency` (duration):
-
-Frequency to check the real system usage of tracked processes. More frequent checks --> usage metrics are more accurate, but more expensive to track. Defaults to `500ms`.
-
-#### `--system-tracker-processing-halflife` (duration):
-
-Halflife to use for the processing requests tracker. Larger halflife --> usage metrics change more slowly. Defaults to `15s`.
-
-#### `--system-tracker-cpu-halflife` (duration):
-
-Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics change more slowly. Defaults to `15s`.
-
-#### `--system-tracker-disk-halflife` (duration):
-
-Halflife to use for the disk tracker. Larger halflife --> disk usage metrics change more slowly. Defaults to `1m`.
-
-#### `--system-tracker-disk-required-available-space` (uint): 
-
-"Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
-
-#### `--system-tracker-disk-warning-threshold-available-space` (uint):
-
-Warning threshold for the number of available bytes on disk, under which the node will be considered unhealthy. Must be >= `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1 GiB).
 
 ### Plugin Mode
 
@@ -916,4 +926,3 @@ The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5i
 `--vm-aliases-file-content` (string):
 
 As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
-

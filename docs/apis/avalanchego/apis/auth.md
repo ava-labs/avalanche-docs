@@ -1,7 +1,6 @@
 ---
 sidebar_position: 8
 ---
-
 # Auth API
 
 When you run a node, you can require that API calls have an authorization token attached. This API manages the creation and revocation of authorization tokens.
@@ -14,9 +13,7 @@ This API is only reachable if the node is started with [config flag](../../../no
 
 Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify the file to read the Auth API's password from, with argument `--api-auth-password-file`. You must provide this password in order to create/revoke authorization tokens.
 
-:::tip
-If you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
-:::
+Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
 
 ## Format
 
@@ -45,9 +42,9 @@ auth.newToken(
 ) -> {token: string}
 ```
 
-- `password` is this node’s authorization token password.
-- `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
-- `token` is the authorization token.
+* `password` is this node’s authorization token password.
+* `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
+* `token` is the authorization token.
 
 #### **Example Call**
 
@@ -69,11 +66,11 @@ This call will generate an authorization token that allows access to API endpoin
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "result": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps"
-  },
-  "id": 1
+    "jsonrpc": "2.0",
+    "result": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps"
+    },
+    "id": 1
 }
 ```
 
@@ -106,8 +103,8 @@ auth.revokeToken(
 ) -> {success: bool}
 ```
 
-- `password` is this node’s authorization token password.
-- `token` is the authorization token being revoked.
+* `password` is this node’s authorization token password.
+* `token` is the authorization token being revoked.
 
 #### **Example Call**
 
@@ -127,11 +124,11 @@ curl -X POST --data '{
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "result": {
-    "success": true
-  },
-  "id": 1
+    "jsonrpc": "2.0",
+    "result": {
+        "success": true
+    },
+    "id": 1
 }
 ```
 
@@ -150,8 +147,8 @@ auth.changePassword(
 ) -> {success: bool}
 ```
 
-- `oldPassword` is this node’s current authorization token password.
-- `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `oldPassword` is this node’s current authorization token password.
+* `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
 
 #### **Example Call**
 
@@ -171,10 +168,11 @@ curl -X POST --data '{
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "result": {
-    "success": true
-  },
-  "id": 1
+    "jsonrpc": "2.0",
+    "result": {
+        "success": true
+    },
+    "id": 1
 }
 ```
+

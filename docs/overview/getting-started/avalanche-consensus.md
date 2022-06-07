@@ -192,5 +192,5 @@ Avalanche is very performant. It can process thousands of transactions per secon
 
 ## Summary
 
-Avalanche consensus is a radical breakthrough in distributed systems. It represents as large a leap forward as the classical and Nakamoto consensus protocols that came before it. Now that you have a better understanding of how it works, check out other documentations for building game-changing Dapps and financial instruments on Avalanche.
+Avalanche consensus is a radical breakthrough in distributed systems. It represents as large a leap forward as the classical and Nakamoto consensus protocols that came before it. Now that you have a better understanding of how it works, check out other [documentation](https://docs.avax.network) for building game-changing Dapps and financial instruments on Avalanche.
 

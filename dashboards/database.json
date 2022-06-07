@@ -1,0 +1,1412 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 42,
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [
+        "Avalanche"
+      ],
+      "type": "dashboards"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": null,
+      "description": "Database read rate. Note that these reads may be from caches and not from disk.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_read_size_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Bytes Read",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Database Read Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Database write rate.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_write_size_sum{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "Write Rate",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Database Write Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how many of each database operation is performed each second across all chains",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Operations per Second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how long each database operation is taking on average",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Operations Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how many of each database operation is performed each second on X-Chain",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "X-Chain Operations per Second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how long each database operation is taking on average on X-Chain",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "X-Chain Operations Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how many of each database operation is performed each second on P-Chain",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "P-Chain Operations per Second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how long each database operation is taking on average on P-Chain",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "P-Chain Operations Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how many of each database operation is performed each second across all chains",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 29
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "C-Chain Operations per Second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Measures how long each database operation is taking on average on C-Chain",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 29
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "C-Chain Operations Latency",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": [
+    "Avalanche"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Database",
+  "uid": "R8N89hznk",
+  "version": 17
+}

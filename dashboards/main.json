@@ -1,0 +1,1561 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Home dashboard with the most important indicators for your node and machine",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 38,
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [
+        "Avalanche"
+      ],
+      "type": "dashboards"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": null,
+      "description": "Stake weighted average uptime of your node, as reported by network peers. If this falls below 80% node probably won't be rewarded for the current staking period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 85
+              },
+              {
+                "color": "yellow",
+                "value": 90
+              },
+              {
+                "color": "green",
+                "value": 95
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 39,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_network_node_uptime_weighted_average{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Uptime average",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "Percentage of the stake that view your node as sufficiently online and correct to vote that node be awarded at the end of the staking period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 60
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "green",
+                "value": 80
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 41,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_network_node_uptime_rewarding_stake{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "Rewarding stake",
+          "refId": "A"
+        }
+      ],
+      "title": "Rewarding stake",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Number of accepted and rejected vertices on the X chain in the last minute",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 16,
+      "links": [
+        {
+          "title": "X Chain dashboard",
+          "url": "/d/ceRH2Am7z/x-chain?orgId=1"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))>0",
+          "interval": "",
+          "legendFormat": "Accepted",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_X_vtx_rejected_count{job=\"avalanchego\"}[1m]))>0",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Rejected",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "X Chain Vertices",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Number of accepted and rejected blocks on the P chain in the last minute.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 9,
+        "x": 12,
+        "y": 6
+      },
+      "id": 21,
+      "links": [
+        {
+          "title": "P Chain dashboard",
+          "url": "/d/uWlS20i7z/p-chain?orgId=1"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[1m]))>0",
+          "interval": "",
+          "legendFormat": "Accepted",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_P_blks_rejected_count{job=\"avalanchego\"}[1m]))>0",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Rejected",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "P Chain Blocks",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of P-Chain blocks this node has proposed on the network in the last day. Since block production on P-Chain is usually below the target rate, every node proposes P blocks.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 21,
+        "y": 6
+      },
+      "id": 44,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_P_blks_built{job=\"avalanchego\"}[1d]))",
+          "interval": "",
+          "legendFormat": "Proposed P blocks",
+          "refId": "A"
+        }
+      ],
+      "title": "Proposed P blocks",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Percentage of CPU used",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Machine details",
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
+            }
+          ],
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "(1 - avg(irate(node_cpu_seconds_total{job=~\"avalanchego-machine\", mode=\"idle\"}[1m])) by (instance)) * 100",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "CPU",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "Percentage of storage filled",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Detail view",
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
+            }
+          ],
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "max(((node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"} - node_filesystem_free_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) / node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) * 100) by (instance)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Disk Space Used",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "Number of currently failing internal health checks",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 4,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 2
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 6,
+        "y": 7
+      },
+      "id": 37,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "avalanche_health_checks_failing{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Failing health checks",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "Average time to get a response from a peer",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Networking Dashboard",
+              "url": "/d/jB1TgdZ7z/network?orgId=1&refresh=10s"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500000000
+              },
+              {
+                "color": "dark-red",
+                "value": 1000000000
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 7
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_requests_average_latency",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Latency",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Amount of AVAX currently staked",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 12
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_P_vm_total_staked{job=\"avalanchego\"}/1000000000",
+          "interval": "",
+          "legendFormat": "AVAX",
+          "refId": "A"
+        }
+      ],
+      "title": "Total staked",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Amount of network stake node is currently connected to",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 0.75
+              },
+              {
+                "color": "dark-green",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 12
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "avalanche_P_vm_percent_connected{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Stake connected",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Number of peers node is connected to",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Networking Dashboard",
+              "url": "/d/jB1TgdZ7z/network?orgId=1&refresh=10s"
+            }
+          ],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 12
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "expr": "avalanche_network_peers{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "Peers",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Peer count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Number of accepted and rejected blocks on the C chain in the last minute.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 9,
+        "x": 12,
+        "y": 12
+      },
+      "id": 23,
+      "links": [
+        {
+          "title": "C Chain dashboard",
+          "url": "/d/Gl1I20mnk/c-chain?orgId=1"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[1m]))>0",
+          "interval": "",
+          "legendFormat": "Accepted",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_C_blks_rejected_count{job=\"avalanchego\"}[1m]))>0",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Rejected",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "C Chain Blocks",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of blocks this node has proposed on the C-Chain in the last day. Since C-Chain blocks are produced at a fast rate, block producers are selected by stake weight.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 21,
+        "y": 12
+      },
+      "id": 43,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "round(increase(avalanche_C_blks_built{job=\"avalanchego\"}[1d]))",
+          "interval": "",
+          "legendFormat": "Built C blocks",
+          "refId": "A"
+        }
+      ],
+      "title": "Proposed C blocks",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Number of blocks/vertices accepted in the last minute",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 0,
+        "y": 17
+      },
+      "id": 28,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))",
+          "interval": "",
+          "legendFormat": "X Chain",
+          "refId": "A"
+        },
+        {
+          "expr": "round(increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "P Chain",
+          "refId": "B"
+        },
+        {
+          "expr": "round(increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "C Chain",
+          "refId": "C"
+        }
+      ],
+      "title": "Accepted Blocks/Vertices",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "description": "Number of blocks/vertices currently being processed by the node",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 3,
+        "y": 17
+      },
+      "id": 18,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "X Chain",
+          "refId": "A"
+        },
+        {
+          "expr": "avalanche_P_blks_processing{job=\"avalanchego\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "P Chain",
+          "refId": "B"
+        },
+        {
+          "expr": "avalanche_C_blks_processing{job=\"avalanchego\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "C Chain",
+          "refId": "C"
+        }
+      ],
+      "title": "Processing",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "description": "Number of peers currently being benched (ignored) by the node",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 6,
+        "y": 17
+      },
+      "id": 29,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "avalanche_X_benchlist_benched_num{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "X Chain",
+          "refId": "A"
+        },
+        {
+          "expr": "avalanche_P_benchlist_benched_num{job=\"avalanchego\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "P Chain",
+          "refId": "B"
+        },
+        {
+          "expr": "avalanche_C_benchlist_benched_num{job=\"avalanchego\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "C Chain",
+          "refId": "C"
+        }
+      ],
+      "title": "Benched nodes",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "description": "Percentage of successful queries per chain in the last minute",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0.8,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 90
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 9,
+        "y": 17
+      },
+      "id": 30,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "expr": "(increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
+          "interval": "",
+          "legendFormat": "X Chain",
+          "refId": "A"
+        },
+        {
+          "expr": "(increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "P Chain",
+          "refId": "B"
+        },
+        {
+          "expr": "(increase(avalanche_C_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_C_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_C_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "C Chain",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Queries success",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "How long each database operation is taking on average",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_get_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_has_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_compact_size_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_put_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_delete_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_reset_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_replay_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Database Operations Latency",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 32,
+  "style": "dark",
+  "tags": [
+    "Avalanche"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Avalanche Main Dashboard",
+  "uid": "kBQpRdWnk",
+  "version": 7
+}

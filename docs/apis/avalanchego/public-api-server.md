@@ -11,28 +11,29 @@ There is a public API server that allows developers to access the Avalanche netw
 The public API server is at `api.avax.network` for Avalanche Mainnet and `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](./apis/issuing-api-calls.md). Namely, use the following end points for each chain respectively:
 
 ### HTTP
-
-- For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
-- For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
-- For P-Chain API, the URL is `https://api.avax.network/ext/bc/P`.
+* For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
+* For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
+* For P-Chain API, the URL is `https://api.avax.network/ext/bc/P`.
 
 Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://api.avax.network/`.
 
 ### WebSocket
+* For C-Chain API, the URL is `wss://api.avax.network/ext/bc/C/ws`.
 
-- For C-Chain API, the URL is `wss://api.avax.network/ext/bc/C/ws`.
+Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`. 
 
-Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 ## Supported APIs
 
 The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md) and [C-Chain](./apis/c-chain.md). For a full list of available APIs see [here](./apis/README.md).
 
+
 :::info
 The public API only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
 
-For batched C-Chain requests on the public api node, the maximum number of items is 40. We are working on to support a larger batch size.
+For batched C-Chain requests on the public api node, the maximum number of items is 40. We are working on to support a larger batch size. 
 :::
+
 
 ## Sticky sessions
 
@@ -51,3 +52,4 @@ Usage of public API nodes is free and available to everyone without any authenti
 ## Support
 
 If you have questions, problems or suggestions, come [talk to us](https://chat.avalabs.org/).
+

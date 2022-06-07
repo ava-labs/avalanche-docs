@@ -2,7 +2,6 @@
 sidebar_position: 6
 description: Reference for all available chain config options and flags.
 ---
-
 # Chain Configs
 
 Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
@@ -10,12 +9,6 @@ Some chains allow the node operator to provide a custom configuration. Avalanche
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir` AvalancheGo flag, as documented [here](avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value defaults to `$HOME/.avalanchego/configs/chains`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
 
 This also applies to subnets, for example, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
-
-:::tip
-
-By default, none of these directories and/or files exist. You would need to create them manually if needed.
-
-:::
 
 The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
@@ -85,7 +78,6 @@ The default C-Chain config is:
   "state-sync-server-trie-cache": 64
 }
 ```
-
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change your node will remain with the old values, which might adversely affect your node operation.
 
 ### Continuous Profiling
@@ -122,11 +114,7 @@ Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
 
 Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
 
-:::note
-
-If you populate this field, it will override the defaults so you must include every service you wish to enable.
-
-:::
+Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
 
 #### `public-eth`:
 
@@ -433,6 +421,7 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
+
 ### State Sync Settings
 
 #### `state-sync-enabled` (boolean):
@@ -480,15 +469,14 @@ The parameters are as follows:
 
 Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.md#avmgetaddresstxs).
 
-:::note
-If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
-:::
+Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
 
 ### `index-allow-incomplete` (boolean):
 
 Allows incomplete indices. Default value is `false`.
 
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
+
 
 ## Subnet Chain Configs
 

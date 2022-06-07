@@ -8,18 +8,20 @@ Once you have your node up and running, it's time to prepare for disaster recove
 
 When running, a complete node installation along with the database can grow to be multiple gigabytes in size. Having to back up and restore such a large volume of data can be expensive, complicated and time-consuming. Luckily, there is a better way.
 
-Instead of having to back up and restore everything, we need to back up only what is essential, that is, those files that cannot be reconstructed because they are unique to your node. For Avalanchego node, unique files are those that identify your node on the network, in other words, files that define your NodeID.
+Instead of having to back up and restore everything, we need to back up only what is essential, that is, those files that cannot be reconstructed because they are unique to your node. For Avalanchego node, unique files are those that identify your node on the network, in other words, files that define your NodeID. 
+
 
 Even if your node is a validator on the network and has multiple delegations on it, you don't need to worry about backing up anything else, because the validation and delegation transactions are also stored on the blockchain and will be restored during bootstrapping, along with the rest of the blockchain data.
 
 The installation itself can be easily recreated by installing the node on a new machine, and all the remaining gigabytes of blockchain data can be easily recreated by the process of bootstrapping, which copies the data over from other network peers. However, if you would like to speed up the process, see the [Database Backup and Restore section](#database)
 
+
 ## NodeID
 
 NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../specs/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
 
-- `staker.crt`
-- `staker.key`
+* `staker.crt`
+* `staker.key`
 
 In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All we need to do to recreate the node on another machine is to run a new installation with those same two files.
 
@@ -103,7 +105,7 @@ Once the files have been replaced, log into the machine and start the node using
 sudo systemctl start avalanchego
 ```
 
-You can now check that the node is restored with the correct NodeID by issuing the [getNodeID](../../apis/avalanchego/apis/info.md#infogetnodeid) API call in the same console you ran the previous command:
+You can now check that the node is restored with the correct NodeID by issuing the [getNodeID](https://docs.avax.network/build/apis/avalanchego/apis/info#info-getnodeid) API call in the same console you ran the previous command:
 
 ```text
 curl -X POST --data '{
@@ -142,29 +144,26 @@ size of the backup and speed up the transfer using `scp`:
 ```
 zip -r avalanche_db_backup.zip .avalanchego/db
 ```
-
 _Note: It may take > 30 minutes to zip the node's DB._
 
 Next, you can transfer the backup to another machine:
-
 ```
 scp -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
-
 This assumes the username on the machine is `ubuntu`, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
 
 ```
 scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
-
 Once executed, this command will create `avalanche_db_backup.zip` directory in you home directory.
+
 
 ### Database Restore
 
 _This tutorial assumes you have already completed "Database Backup" and have
 a backup at ~/avalanche_db_backup.zip._
 
-First, we need to do the usual [installation](../build/set-up-node-with-installer.md) of the node. When the node is installed correctly, log into the machine where the node is running and stop it:
+First, we need to do the usual [installation](../build/set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
 
 ```
 sudo systemctl stop avalanchego
@@ -190,13 +189,11 @@ unzip avalanche_db_backup.zip
 ```
 
 After the database has been restored on a new node, use this command to start the node:
-
 ```
 sudo systemctl start avalanchego
 ```
 
 Node should now be running from the database on the new instance. To check that everything is in order and that node is not bootstrapping from scratch (which would indicate a problem), use:
-
 ```
 sudo journalctl -u avalanchego -f
 ```
@@ -222,7 +219,6 @@ Same as shown previously, you need to stop the node (on both machines):
 ```
 sudo systemctl stop avalanchego
 ```
-
 :::warning
 You must stop the Avalanche node before you back up the database otherwise data
 could become corrupted.
@@ -262,3 +258,4 @@ The node should be catching up to the network and fetching a small number of blo
 Essential part of securing your node is the backup that enables full and painless restoration of your node. Following this tutorial you can rest easy knowing that should you ever find yourself in a situation where you need to restore your node from scratch, you can easily and quickly do so.
 
 If you have any problems following this tutorial, comments you want to share with us or just want to chat, you can reach us on our [Discord](https://chat.avalabs.org/) server.
+

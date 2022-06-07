@@ -1,16 +1,3 @@
-#06/01/2022 transfer-avax-between-x-ch
-/quickstart/transfer-avax-between-x-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
-/quickstart/transfer-avax-between-x-chain-and-c-chain  /quickstart/cross-chain-transfers 301
-/quickstart/transfer-avax-between-x-chain-and-p-chain/ /quickstart/cross-chain-transfers 301
-/quickstart/transfer-avax-between-x-chain-and-p-chain  /quickstart/cross-chain-transfers 301
-/quickstart/transfer-avax-between-p-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
-/quickstart/transfer-avax-between-p-chain-and-c-chain  /quickstart/cross-chain-transfers 301
-
-#05/30/2022
-/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
-/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
-
-
 #05/24/2022
 /quickstart/avalanche-summit-fuji-quickstart/ / 301
 /quickstart/avalanche-summit-fuji-quickstart  / 301
@@ -134,8 +121,8 @@
 /build/tutorials/platform/subnets/create-evm-blockchain  /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm/ /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm  /subnets/create-a-virtual-machine-vm 301
-/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
-/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
+/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-custom-blockchain 301
+/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-custom-blockchain 301
 /build/tutorials/platform/subnets/spaces/ /subnets/spaces 301
 /build/tutorials/platform/subnets/spaces  /subnets/spaces 301
 /build/tutorials/platform/subnets/wagmi/ /subnets/wagmi 301
@@ -241,12 +228,12 @@
 /build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
 /build/tutorials/platform/integrate-exchange-with-avalanche  /quickstart/exchanges/integrate-exchange-with-avalanche 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain  /quickstart/cross-chain-transfers 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/cross-chain-transfers 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain  /quickstart/cross-chain-transfers 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/transfer-avax-between-x-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain /quickstart/transfer-avax-between-x-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/transfer-avax-between-x-chain-and-p-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain /quickstart/transfer-avax-between-x-chain-and-p-chain 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/transfer-avax-between-p-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/transfer-avax-between-p-chain-and-c-chain 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity/ /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript/ /quickstart/sending-transactions-with-dynamic-fees-using-javascript 301
@@ -300,7 +287,7 @@
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.1.1/build/getting-started /  301
 /v/v1.1.1/nodes-and-staking /nodes-and-staking  301
-/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /subnets/create-a-fuji-subnet  301
+/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
 /v1.0/en/api/keystore/ /apis/avalanchego/apis/keystore-api  301
 /v1.0/en/references/command-line-interface/ /build/references/command-line-interface  301
 /v1.0/en/tools/avalanche.js/api/classes/utils_base58.base58/ /build/tools/avalanchejs/api  301

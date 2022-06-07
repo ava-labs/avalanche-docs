@@ -6,7 +6,7 @@
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). You've also performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)  to get funds to your C-Chain address.
+You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](.././../quickstart/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
 
 ## Dependencies
 
@@ -247,7 +247,7 @@ truffle(development)> await web3.eth.getBalance(accounts[1]);
 
 ### Fund your account
 
-If you wish to fund accounts your own, follow the steps in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../../quickstart/transfer-avax-between-x-chain-and-c-chain.md) tutorial. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
 ### Personal APIs
 

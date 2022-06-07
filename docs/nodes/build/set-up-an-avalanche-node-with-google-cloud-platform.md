@@ -1,5 +1,5 @@
 ---
-description: "GCP Validator Provisioning"
+description: 'GCP Validator Provisioning'
 sidebar_position: 5
 ---
 
@@ -34,7 +34,6 @@ We will create and utilize a single GCP `Project` for deployment of all resource
 #### Service Enablement
 
 Within our GCP project we will need to enable the following Cloud Services:
-
 - `Compute Engine`
 - `IAP`
 
@@ -100,12 +99,10 @@ Terraform uses a state file(s) to compose a differential between current infrast
 
 Authentication to GCP from terraform has a few different options which are layed out [here](https://www.terraform.io/language/settings/backends/gcs). Please chose the option that aligns with your context and ensure those steps are completed before continuing.
 
-:::note
+**NOTE**
 
 Depending upon how you intend to execute your terraform operations you may or may not need to enable public access to the bucket. Obviously, not exposing the bucket for `public` access (even if authenticated) is preferable. If you intend to simply run terraform commands from your local machine then you will need to open the access up.
 I recommend to employ a full CI/CD pipeline using GCP Cloud Build which if utilized will mean the bucket can be marked as `private`. A full walkthrough of Cloud Build setup in this context can be found [here](https://cloud.google.com/architecture/managing-infrastructure-as-code)
-
-:::
 
 ### Clone Github Repository
 

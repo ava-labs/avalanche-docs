@@ -47,7 +47,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
 ### **Using Avalanche Wallet**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). Wallet can be used on test and local networks, too.
+On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../../quickstart/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
 
 ### **Using Test Network Faucet**
 
