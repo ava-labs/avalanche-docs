@@ -46,20 +46,21 @@ After installing, launch your own custom subnet:
 ```bash
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 cd bin
-./avalanche subnet create <subnetName>
-./avalanche subnet deploy <subnetName>
+export PATH=$PWD:$PATH
+avalanche subnet create <subnetName>
+avalanche subnet deploy <subnetName>
 ```
 
 Shut down your local deployment with:
 
 ```bash
-./avalanche network stop
+avalanche network stop
 ```
 
 Restart your local deployment (from where you left off) with:
 
 ```bash
-./avalanche network start
+avalanche network start
 ```
 
 ### Currently Supported Functionality
@@ -116,7 +117,7 @@ You can list the subnets you've created with
 Example:
 
 ```text
-> ./avalanche subnet list
+> avalanche subnet list
 +-------------+-------------+-----------+
 |   SUBNET    |    CHAIN    |   TYPE    |
 +-------------+-------------+-----------+
@@ -131,7 +132,7 @@ To see the details of a specific configuration, run
 Example:
 
 ```text
-> ./avalanche subnet describe firstsubnet
+> avalanche subnet describe firstsubnet
 
  _____       _        _ _
 |  __ \     | |      (_) |
@@ -209,7 +210,7 @@ If you'd like to see the raw genesis file, supply the `--genesis` flag:
 Example:
 
 ```text
-> ./avalanche subnet describe firstsubnet --genesis
+> avalanche subnet describe firstsubnet --genesis
 {
     "config": {
         "chainId": 12345,
@@ -281,7 +282,7 @@ Local deploys will start a multi-node Avalanche network in the background on you
 Example:
 
 ```text
-> ./avalanche subnet deploy firstsubnet
+> avalanche subnet deploy firstsubnet
 ✔ Local Network
 Deploying [firstsubnet] to Local Network
 Backend controller started, pid: 71505, output at: /var/folders/0h/v4nrbbsn1vvbr5h2wfrh5h500000gn/T/avalanche-cli-backend57656025
@@ -340,7 +341,7 @@ If not provided, a default snapshot will be created. The default snapshot will b
 Example:
 
 ```text
-> ./avalanche network stop
+> avalanche network stop
 dialing endpoint ":8097"
 Network stopped successfully.
 ```
@@ -361,7 +362,7 @@ Deploying a subnet locally will start the network automatically.
 Example:
 
 ```text
-> ./avalanche network start
+> avalanche network start
 dialing endpoint ":8097"
 Starting previously deployed and stopped snapshot
 .....................
@@ -384,7 +385,7 @@ This will delete all stored deploy state for all local subnet deployments. This 
 Example:
 
 ```text
-> ./avalanche network clean
+> avalanche network clean
 dialing endpoint ":8097"
 Process terminated.
 ```
