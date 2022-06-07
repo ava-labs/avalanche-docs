@@ -204,7 +204,7 @@ const delegationFee: number = 10
 
 This is the node ID of the validator being added. To get your node’s ID, use the example script: [`getNodeID.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts)
 
-_Be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to ['getNodeID.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts) to execute the script properly._
+_Be sure to apply the [necessary changes](../../quickstart/cross-chain-transfers.md#modify-your-avalanche-network-configuration) to ['getNodeID.ts'](https://github.com/ava-labs/avalanchejs/blob/master/examples/info/getNodeID.ts) to execute the script properly._
 
 ```sh
 avalanchejs $ ts-node examples/info/getNodeID.ts
@@ -262,7 +262,7 @@ Now let’s issue the transaction. We use `const startTime: BN = UnixNow().add(n
   )
 ```
 ### Step 2 - Execute The Add Validator Script
-_Note: Be sure to apply the [necessary changes](./cross-chain-transfers.md#modify-your-avalanche-network-configuration) to each example script to ensure proper execution._
+_Note: Be sure to apply the [necessary changes](../../quickstart/cross-chain-transfers.md#modify-your-avalanche-network-configuration) to each example script to ensure proper execution._
 
 
 Run the command:
