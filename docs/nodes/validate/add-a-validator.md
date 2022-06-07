@@ -283,7 +283,7 @@ Any change resulting from this transaction will be sent to these addresses. You 
 
 `rewardAddresses`
 
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to rewardAddresses. The original stake will be sent back to an address controlled by username.
+When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
 
 A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
 
