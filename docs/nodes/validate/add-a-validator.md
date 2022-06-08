@@ -100,7 +100,7 @@ Locate this line in the file
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
 ```
 
-and replace this with a [private key that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
+and replace this with a private key that you control. You can use [this code to generate a new key](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```js
 const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
@@ -194,7 +194,7 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
 
-No change is needed in the addresses for the default action. For customization, please refer to [the this section](#customizing-addresses).
+No change is needed in the addresses for the default action. For customization, please refer to [this section](#customizing-addresses).
 
 #### Execute the Code
 
@@ -270,7 +270,7 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this node will start validating the Primary Network. When it reaches `1662602029` (Thu Sep 08 2022 01:53:49 GMT+0000), this node will stop validating the Primary Network. The staked AVAX will be returned to the user's `P-chain address`, and the rewards, if any, will be given to `rewardAddress`.
+When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this node will start validating the Primary Network. When it reaches `1662602029` (Thu Sep 08 2022 01:53:49 GMT+0000), this node will stop validating the Primary Network. The staked AVAX and the rewards, if any, will be returned to `pAddressStrings`.
 
 #### Customizing Addresses
 
@@ -326,8 +326,8 @@ Now we can pass in each address according to it's slot in the `pAddressStrings` 
 const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   utxoSet,
   [pAddressStrings[0], pAddressStrings[1]], // toAddresses, one or more addresses
-  [], // fromAddresses
-  [], // changeAddresses
+  [pAddressStrings[0]], // fromAddresses, required for backward-compatibility
+  [pAddressStrings[0]], // changeAddresses, required for backward-compatibility
   nodeID,
   startTime,
   endTime,
