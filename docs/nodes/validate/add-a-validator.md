@@ -16,7 +16,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md).In this tutorial, we use [AvalancheJS](../../apis/avalanchejs/README.md) and [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). In this tutorial, we use [AvalancheJS](../../apis/avalanchejs/README.md) and [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -98,7 +98,7 @@ Locate this line in the file
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
 ```
 
-and replace this with a private key that you control.
+and replace this with a [private key that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```js
 const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
@@ -184,8 +184,6 @@ Avalanche allows for delegation of stake. This parameter is the percent fee this
 
 #### Stake Amount
 
-In order to validate the Fuji Network, one must stake AVAX.
-
 The sample code assigns the variable, `stakeAmount` to be the minimum amount of AVAX that a node must stake to become a validator(1 AVAX).
 
 ```ts
@@ -194,7 +192,7 @@ const stakeAmount: any = await pchain.getMinStake();
 
 To stake a different amount, please replace the code above with a stake amount of 1 AVAX or greater. Below sets a new value of 10,000 AVAX (`10000000000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX.
 
-Please follow the Example below for steps to change the stake amount:
+Please follow the example below for steps to change the stake amount:
 
 Locate this line in the file
 
