@@ -194,7 +194,7 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
 
-No change is needed in the addresses for the default action. For customization, please refer to [the next section](#customizing-addresses).
+No change is needed in the addresses for the default action. For customization, please refer to [the this section](#customizing-addresses).
 
 #### Execute the Code
 
@@ -286,8 +286,6 @@ An array of addresses who receive the staked tokens at the end of the staking pe
 When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
 
 A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
-
-If you want to customize the `to`, `from`, `change`, and `reward` addresses, please adapt the example below into your project.
 
 Locate this part of the code
 
