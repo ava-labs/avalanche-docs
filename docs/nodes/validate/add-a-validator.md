@@ -184,35 +184,7 @@ Avalanche allows for delegation of stake. This parameter is the percent fee this
 
 #### Stake Amount
 
-The sample code assigns the variable, `stakeAmount` to be the minimum amount of AVAX that a node must stake to become a validator(1 AVAX).
-
-```ts
-const stakeAmount: any = await pchain.getMinStake();
-```
-
-To stake a different amount, please replace the code above with a stake amount of 1 AVAX or greater. Below sets a new value of 10,000 AVAX (`10000000000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX.
-
-Please follow the example below for steps to change the stake amount:
-
-Locate this line in the file
-
-```js
-  const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-    ...
-    stakeAmount.minValidatorStake,
-    ...
-  )
-```
-
-and change the default value to a new `BN` value, for example:
-
-```js
-  const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-    ...
-    new BN(1e12),
-    ...
-  )
-```
+Set the the proper staking amount when calling `pchain.buildAddValidatorTx` by replacing `stakeAmount.minValidatorStake` with a number such as `BN(1e12)` which is 10,000 AVAX, in the example code.
 
 #### Addresses
 
