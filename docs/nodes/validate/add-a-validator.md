@@ -182,7 +182,7 @@ Avalanche allows for delegation of stake. This parameter is the percent fee this
 
 #### Stake Amount
 
-Set the the proper staking amount when calling `pchain.buildAddValidatorTx` by replacing `stakeAmount.minValidatorStake` with a number such as `BN(1e12)` which is 10,000 AVAX, in the example code.
+Set the the proper staking amount in calling `pchain.buildAddValidatorTx` by replacing `stakeAmount.minValidatorStake` with a number in the unit of gwei, for example, `BN(1e12)` which is 10,000 AVAX.
 
 #### Addresses
 
