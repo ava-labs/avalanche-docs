@@ -186,25 +186,6 @@ Set the the proper staking amount in calling `pchain.buildAddValidatorTx` by rep
 
 #### Addresses
 
-  
-`toAddresses`
-
-An array of addresses who receive the staked tokens at the end of the staking period.
-
-`fromAddresses`
-
-An array of addresses as a who own the staking UTXOs.
-
-`changeAddresses`
-
-Any change/left-over resulting from this transaction will be sent to these addresses. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
-
-`rewardAddresses`
-
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
-
-A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
-
 By default, the example uses the variable `pAddressStrings` to define `toAddresses`, `fromAddresses`, `changeAddresses` and `rewardAddresses`:
 
 ```js
@@ -213,63 +194,7 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
 
-#### Customizing Addresses
-
-If you want to customize the `to`, `from`, `change`, and `reward` addresses, please adapt the example below into your project.
-
-Locate this part of the code
-
-```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
-```
-
-and replace `privKey` with [private keys that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
-```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
-privKey = 'PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t'
-pKeychain.importKey(privKey)
-privKey = 'PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA'
-pKeychain.importKey(privKey)
-priKey = 'PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC'
-pKeychain.importKey(privKey)
-
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
-```
-
-This example would create a keychain with 4 addresses:
-
-```ts
-[
-  'P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p', // pAddressStrings[0]
-  'P-custom186e8ee4qnhnazrnyv2k9u44607ux70syngdz6l', // pAddressStrings[1]
-  'P-custom1pdu8d8ss5p329l4vtn23p25cjr57qt5yw2cnsn', // pAddressStrings[2]
-  'P-custom152s2upkznxeucwnp68wmg6wmy863qd2sz6ktww'  // pAddressStrings[3]
-]
-```
-
-Now we can pass in each address according to it's slot in the `pAddressStrings` array:
-
-```ts
-
-  const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-    utxoSet,
-    [pAddressStrings[0], pAddressStrings[1]], // toAddresses
-    [pAddressStrings[1]], // fromAddresses
-    [pAddressStrings[2]], // changeAddresses
-    nodeID,
-    startTime,
-    endTime,
-    stakeAmount.minValidatorStake,
-    [pAddressStrings[3]], //rewardAddresses
-    delegationFee,
-    locktime,
-    threshold,
-    memo,
-    asOf
-  )
-  ```
+No change is needed in the addresses for the default action. For customization, please refer to [the next section](#customizing-addresses).
 
 #### Execute the Code
 
@@ -332,15 +257,91 @@ $ ts-node examples/platformvm/getPendingValidators.ts
 The response should include the node we just added:
 
 ```json
-{ validators: [{
-"nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
-"startTime": "1654656829",
-"endtime": "1662602029",
-"stakeAmount": "1000000000"
-}], delegators: [] }
+{
+  "validators": [
+    {
+      "nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
+      "startTime": "1654656829",
+      "endtime": "1662602029",
+      "stakeAmount": "1000000000"
+    }
+  ],
+  "delegators": []
+}
 ```
 
 When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this node will start validating the Primary Network. When it reaches `1662602029` (Thu Sep 08 2022 01:53:49 GMT+0000), this node will stop validating the Primary Network. The staked AVAX will be returned to the user's `P-chain address`, and the rewards, if any, will be given to `rewardAddress`.
+
+#### Customizing Addresses
+
+There are 4 addresses which are needed when calling `pchain.buildAddValidatorTx`. Only 2 of them can be changed: `toAddresses` and `rewardAddresses`. For backward-compatibility reasons, `fromAddresses` and `changeAddresses`
+are just placeholders and are ignored.
+
+`toAddresses`
+
+An array of addresses who receive the staked tokens at the end of the staking period.
+
+`rewardAddresses`
+
+When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
+
+A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
+
+If you want to customize the `to`, `from`, `change`, and `reward` addresses, please adapt the example below into your project.
+
+Locate this part of the code
+
+```ts
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+pKeychain.importKey(privKey);
+```
+
+and replace `privKey` with [private keys that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
+
+```ts
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t";
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA";
+pKeychain.importKey(privKey);
+priKey = "PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC";
+pKeychain.importKey(privKey);
+
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
+```
+
+This example would create a keychain with 4 addresses:
+
+```ts
+[
+  "P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p", // pAddressStrings[0]
+  "P-custom186e8ee4qnhnazrnyv2k9u44607ux70syngdz6l", // pAddressStrings[1]
+  "P-custom1pdu8d8ss5p329l4vtn23p25cjr57qt5yw2cnsn", // pAddressStrings[2]
+  "P-custom152s2upkznxeucwnp68wmg6wmy863qd2sz6ktww", // pAddressStrings[3]
+];
+```
+
+Now we can pass in each address according to it's slot in the `pAddressStrings` array:
+
+```ts
+const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
+  utxoSet,
+  [pAddressStrings[0], pAddressStrings[1]], // toAddresses, one or more addresses
+  [], // fromAddresses
+  [], // changeAddresses
+  nodeID,
+  startTime,
+  endTime,
+  stakeAmount.minValidatorStake,
+  [pAddressStrings[2], pAddressStrings[3]], //rewardAddresses, one or more addresses
+  delegationFee,
+  locktime,
+  threshold,
+  memo,
+  asOf
+);
+```
 
 ### Mainnet Workflow
 
