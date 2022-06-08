@@ -186,6 +186,7 @@ Set the the proper staking amount when calling `pchain.buildAddValidatorTx` by r
 
 #### Addresses
 
+  
 `toAddresses`
 
 An array of addresses who receive the staked tokens at the end of the staking period.
@@ -212,35 +213,63 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
 
-If you wish to change these addresses, please follow the steps below:
+#### Customizing Addresses
 
-Locate this line in the file
+If you want to customize the `to`, `from`, `change`, and `reward` addresses, please adapt the example below into your project.
 
-```js
-const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-...
-    pAddressStrings // toAddresses,
-    pAddressStrings // fromAddresses,
-    pAddressStrings // changeAddresses,
-...
-    pAddressStrings // rewardAddresses,
-...
-  )
+Locate this part of the code
+
+```ts
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+pKeychain.importKey(privKey)
 ```
 
-and change the specified `pAddressStrings` to the P-Chain address of choice. Please use array format when passing in each new P-Chain address.
+and replace `privKey` with [private keys that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
+```ts
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+pKeychain.importKey(privKey)
+privKey = 'PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t'
+pKeychain.importKey(privKey)
+privKey = 'PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA'
+pKeychain.importKey(privKey)
+priKey = 'PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC'
+pKeychain.importKey(privKey)
 
-```js
-const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-...
-    ["<YOUR-PCHAIN-ADDRESS-HERE>"] // toAddresses,
-    ["<YOUR-PCHAIN-ADDRESS-HERE>"] // fromAddresses,
-    ["<YOUR-PCHAIN-ADDRESS-HERE>"] // changeAddresses ,
-...
-    ["<YOUR-PCHAIN-ADDRESS-HERE>"] // rewardAddresses,
-...
-  )
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
 ```
+
+This example would create a keychain with 4 addresses:
+
+```ts
+[
+  'P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p', // pAddressStrings[0]
+  'P-custom186e8ee4qnhnazrnyv2k9u44607ux70syngdz6l', // pAddressStrings[1]
+  'P-custom1pdu8d8ss5p329l4vtn23p25cjr57qt5yw2cnsn', // pAddressStrings[2]
+  'P-custom152s2upkznxeucwnp68wmg6wmy863qd2sz6ktww'  // pAddressStrings[3]
+]
+```
+
+Now we can pass in each address according to it's slot in the `pAddressStrings` array:
+
+```ts
+
+  const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
+    utxoSet,
+    [pAddressStrings[0], pAddressStrings[1]], // toAddresses
+    [pAddressStrings[1]], // fromAddresses
+    [pAddressStrings[2]], // changeAddresses
+    nodeID,
+    startTime,
+    endTime,
+    stakeAmount.minValidatorStake,
+    [pAddressStrings[3]], //rewardAddresses
+    delegationFee,
+    locktime,
+    threshold,
+    memo,
+    asOf
+  )
+  ```
 
 #### Execute the Code
 
