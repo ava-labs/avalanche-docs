@@ -33,7 +33,7 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"info.getNodeID"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+}' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
 ```
 
 The response has your node’s ID:
@@ -73,13 +73,13 @@ We can also add a node to the validator set using [AvalancheJS](../../apis/avala
 To use AvalancheJS, you can clone the repo:
 
 ```zsh
-$ git clone https://github.com/ava-labs/avalanchejs.git
+git clone https://github.com/ava-labs/avalanchejs.git
 ```
 
 or add it to an existing project:
 
 ```zsh
-$ yarn add avalanche
+yarn add avalanche
 ```
 
 For this tutorial we will use [`ts-node`](https://www.npmjs.com/package/ts-node) to run the example scripts directly from an AvalancheJS directory.
@@ -97,13 +97,13 @@ We will use the [**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avala
 Locate this line in the file
 
 ```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 ```
 
 and replace this with a private key that you control. You can use [this code to generate a new key](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```js
-const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 ```
 
 #### Network Setting
@@ -111,19 +111,19 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
 The following settings work when using a local node started with [`--network-id=fuji`](../../nodes/maintain/avalanchego-config-flags.md#network-id):
 
 ```js
-const ip: string = "localhost";
-const port: number = 9650;
-const protocol: string = "http";
-const networkID: number = 5;
+const ip: string = "localhost"
+const port: number = 9650
+const protocol: string = "http"
+const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API server](../../apis/avalanchego/public-api-server.md), the following changes are needed:
 
 ```js
-const ip: string = "api.avax-test.network";
-const port: number = 443;
-const protocol: string = "https";
-const networkID: number = 5;
+const ip: string = "api.avax-test.network"
+const port: number = 443
+const protocol: string = "https"
+const networkID: number = 5
 ```
 
 Depending on the networkID passed in when instantiating an `Avalanche` object in the code, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
@@ -139,10 +139,10 @@ To learn more about encoded addresses, click [here](../../apis/avalanchejs/manag
 Next we need to specify the node's validation period and delegation fee.
 
 ```ts
-const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg";
-const startTime: BN = UnixNow().add(new BN(60 * 1));
-const endTime: BN = startTime.add(new BN(26300000));
-const delegationFee: number = 10;
+const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
+const startTime: BN = UnixNow().add(new BN(60 * 1))
+const endTime: BN = startTime.add(new BN(26300000))
+const delegationFee: number = 10
 ```
 
 #### Node ID
@@ -165,15 +165,15 @@ To create your own start times, please follow the steps below:
 Locate this line in the file
 
 ```ts
-const startTime: BN = UnixNow().add(new BN(60 * 1));
-const endTime: BN = startTime.add(new BN(26300000));
+const startTime: BN = UnixNow().add(new BN(60 * 1))
+const endTime: BN = startTime.add(new BN(26300000))
 ```
 
 Change `startTime` and `endTime` to new `BN` values, for example:
 
 ```ts
-const startTime: BN = new BN(1654656829); // Wed Jun 08 2022 02:53:49 GMT+0000
-const endTime: BN = new BN(1662602029); // Thu Sep 08 2022 01:53:49 GMT+0000
+const startTime: BN = new BN(1654656829) // Wed Jun 08 2022 02:53:49 GMT+0000
+const endTime: BN = new BN(1662602029) // Thu Sep 08 2022 01:53:49 GMT+0000
 ```
 
 #### Delegation Fee Rate
@@ -189,7 +189,7 @@ Set the the proper staking amount in calling `pchain.buildAddValidatorTx` by rep
 By default, the example uses the variable `pAddressStrings` to define `toAddresses`, `fromAddresses`, `changeAddresses` and `rewardAddresses`:
 
 ```js
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
 ```
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
@@ -203,13 +203,13 @@ Now that we have made all of the necessary changes to our example script, it's t
 Run the command:
 
 ```zsh
-$ ts-node examples/platformvm/buildAddValidatorTx.ts
+ts-node examples/platformvm/buildAddValidatorTx.ts
 ```
 
 The response has the transaction ID.
 
 ```
-$ Success! TXID: 2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra
+Success! TXID: 2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra
 ```
 
 We can check the transaction’s status by running the example script: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts) following the steps below:
@@ -237,13 +237,13 @@ const main = async (): Promise<any> => {
 Run the command:
 
 ```sh
-$ ts-node examples/platformvm/getTxStatus.ts
+ts-node examples/platformvm/getTxStatus.ts
 ```
 
 This returns:
 
 ```sh
-$ { status: 'Committed' }
+{ status: 'Committed' }
 ```
 
 The status should be `Committed`, meaning the transaction was successful.
@@ -251,7 +251,7 @@ The status should be `Committed`, meaning the transaction was successful.
 We can see if the node is now in the pending validator set for the Fuji network by using the example:[`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Just change the [network settings](#network-setting) to meet Fuji requirements and then run the script:
 
 ```sh
-$ ts-node examples/platformvm/getPendingValidators.ts
+ts-node examples/platformvm/getPendingValidators.ts
 ```
 
 The response should include the node we just added:
@@ -285,28 +285,28 @@ An array of addresses who receive the staked tokens at the end of the staking pe
 
 When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
 
-A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
+A validator’s stake is never slashed, regardless of their behavior they will always receive their stake back when they’re done validating.
 
 Locate this part of the code
 
 ```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
-pKeychain.importKey(privKey);
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+pKeychain.importKey(privKey)
 ```
 
 and replace `privKey` with [private keys that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
-pKeychain.importKey(privKey);
-privKey = "PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t";
-pKeychain.importKey(privKey);
-privKey = "PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA";
-pKeychain.importKey(privKey);
-priKey = "PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC";
-pKeychain.importKey(privKey);
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+pKeychain.importKey(privKey)
+privKey = "PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t"
+pKeychain.importKey(privKey)
+privKey = "PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA"
+pKeychain.importKey(privKey)
+priKey = "PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC"
+pKeychain.importKey(privKey)
 
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
 ```
 
 This example would create a keychain with 4 addresses:
@@ -317,7 +317,7 @@ This example would create a keychain with 4 addresses:
   "P-custom186e8ee4qnhnazrnyv2k9u44607ux70syngdz6l", // pAddressStrings[1]
   "P-custom1pdu8d8ss5p329l4vtn23p25cjr57qt5yw2cnsn", // pAddressStrings[2]
   "P-custom152s2upkznxeucwnp68wmg6wmy863qd2sz6ktww", // pAddressStrings[3]
-];
+]
 ```
 
 Now we can pass in each address according to it's slot in the `pAddressStrings` array:
@@ -338,7 +338,7 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   threshold,
   memo,
   asOf
-);
+)
 ```
 
 ### Mainnet Workflow
@@ -347,5 +347,5 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on Mainnet](../../nodes/maintain/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](../../apis/avalanchego/public-api-server.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1;` based on [this](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to stake.
