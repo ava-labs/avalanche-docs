@@ -11,7 +11,7 @@ The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-t
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
 :::danger
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [AvalancheGO API](../../apis/avalanchego/apis/README.md) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, feel free to join our [Discord](https://chat.avalabs.org/) to ask questions.
 :::
 
 ## Requirements
@@ -52,7 +52,7 @@ The response has your node’s ID:
 
 Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator` under the `Validate` section.
 
-Fill out the staking parameters. They are explained in more detail in [this doc](../validate/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+Fill out the staking parameters. They are explained in more detail in [this doc](../validate/staking.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
 
 You should a success message, and your balance should be updated.
 
@@ -85,6 +85,8 @@ $ yarn add --dev avalanche
 For this tutorial we will use [`ts-node`](https://www.npmjs.com/package/ts-node) to run the example scripts directly from an AvalancheJS directory.
 
 ### Fuji Workflow
+
+In this section, we will use Fuji Testnet to show how to add a node to the validator set.
 
 Open your AvalancheJS directory and select the [**`examples/platformvm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/platformvm) folder to view the source code for the examples scripts.
 
@@ -124,21 +126,17 @@ const protocol: string = "https";
 const networkID: number = 5;
 ```
 
-Depending on the networkID passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
+Depending on the networkID passed in when instantiating an `Avalanche` object in the code, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
 
 _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
 For Fuji Testnet, 5 is the correct value to use.
 
-```js
-const networkID: number = 5;
-```
-
 To learn more about encoded addresses, click [here](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
-#### Staking and Delegation
+#### Settings for Validation
 
-Here we determine the node's validation period and delegation fee.
+Next we need to specify the node's validation period and delegation fee.
 
 ```ts
 const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg";
@@ -153,7 +151,7 @@ This is the node ID of the validator being added. See [above section](#retrieve-
 
 #### Staking Period
 
-`startTime` and `endTime` are required to specify the time of starting/leaving validation. The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+`startTime` and `endTime` are required to specify the time of starting/leaving validation. The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can start a new validation on the Primary Network after finishing one, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 The sample code uses `const startTime: BN = UnixNow().add(new BN(60 * 1))` and
 `const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future to use as the values of `startTime` and `endTime`, respectively.
@@ -180,7 +178,7 @@ const endTime: BN = new BN(1662602029); // Thu Sep 08 2022 01:53:49 GMT+0000
 
 #### Delegation Fee Rate
 
-Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `10` and someone delegates to this validator, then when the delegation period is over, 10% of the reward goes to the validator and the rest goes to the delegator.
+Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `10` and someone delegates to this validator, then when the delegation period is over, 10% of the reward goes to the validator and the rest goes to the delegator, if this node meets the validation reward requirements.
 
 #### Stake Amount
 
