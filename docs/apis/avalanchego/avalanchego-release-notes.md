@@ -6,7 +6,6 @@
 
 :::
 
-
 ## v1.7.12 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.12))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
@@ -49,7 +48,6 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Removed weird json rpc private interface
 - Standardized json imports
 - Added vm factory interface checks
-
 
 ## v1.7.11 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11))
 
@@ -1663,7 +1661,7 @@ Please note that this release contains breaking changes. It changes the default 
 - Deferred transaction hashing to reduce CPU/Memory utilization past fast checks.
 - For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/).
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
+For assistance with this update, you can join our [Discord](https://chat.avax.network/) for help.
 
 ## v1.0.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5))
 
@@ -1685,7 +1683,7 @@ The changes in this release, v1.0.5, are backwards compatible with previous rele
 - Optimized AVM load user to avoid reading unnecessary information from disk.
 - Removed a memory allocation + copy in socket sending for the full length of the message.
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+For assistance with this update, you can join our [Discord](https://chat.avax.network/) for help.
 
 ## v1.0.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4))
 
@@ -1735,4 +1733,4 @@ In this new format, reason will not be present unless the status is Dropped.
 Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
 ```
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+For assistance with this update, you can join our [Discord](https://chat.avax.network/) for help.
