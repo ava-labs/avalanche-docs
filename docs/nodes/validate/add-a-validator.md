@@ -154,7 +154,7 @@ This is the node ID of the validator being added. See [above section](#retrieve-
 `startTime` and `endTime` are required to specify the time of starting/leaving validation. The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can start a new validation on the Primary Network after finishing one, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 The sample code uses `const startTime: BN = UnixNow().add(new BN(60 * 1))` and
-`const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future to use as the values of `startTime` and `endTime`, respectively.
+`const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future (at the time when this article was written) to use as the values of `startTime` and `endTime`, respectively.
 
 :::tip
 You can create your own unix timestamp [here](https://www.unixtimestamp.com/) or by using the `UnixNow()` method
@@ -224,7 +224,7 @@ An array of addresses as a [Buffer](https://github.com/feross/buffer) who own th
 
 `changeAddresses`
 
-Any change resulting from this transaction will be sent to these addresses. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Any change/left-over resulting from this transaction will be sent to these addresses. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
 
 `rewardAddresses`
 
@@ -270,7 +270,7 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   )
 ```
 
-### Execute the Add Validator Script
+#### Execute the Code
 
 Now that we have made all of the necessary changes to our example script, it's time to add a validator to the Fuji Network.
 
@@ -311,13 +311,13 @@ const main = async (): Promise<any> => {
 Run the command:
 
 ```sh
-avalanchejs $ ts-node examples/platformvm/getTxStatus.ts
+$ ts-node examples/platformvm/getTxStatus.ts
 ```
 
 This returns:
 
 ```sh
-avalanchejs $ { status: 'Committed' }
+$ { status: 'Committed' }
 ```
 
 The status should be `Committed`, meaning the transaction was successful.
@@ -325,13 +325,13 @@ The status should be `Committed`, meaning the transaction was successful.
 We can see if the node is now in the pending validator set for the Fuji network by using the example:[`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Just change the [network settings](#network-setting) to meet Fuji requirements and then run the script:
 
 ```sh
-avalanchejs $ ts-node examples/platformvm/getPendingValidators.ts
+$ ts-node examples/platformvm/getPendingValidators.ts
 ```
 
 The response should include the node we just added:
 
 ```sh
-avalanchejs $ { validators: [{
+$ { validators: [{
                 "nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
                 "startTime": "1654656829",
                 "endtime": "1662602029",
@@ -339,7 +339,7 @@ avalanchejs $ { validators: [{
                 }], delegators: [] }
 ```
 
-When the time reaches `1654656829`, this node will start validating the Primary Network. When it reaches `1662602029`, this node will stop validating the Primary Network. The staked AVAX will be returned to the user's `P-chain address`, and the rewards, if any, will be given to `rewardAddress`.
+When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this node will start validating the Primary Network. When it reaches `1662602029` (Thu Sep 08 2022 01:53:49 GMT+0000), this node will stop validating the Primary Network. The staked AVAX will be returned to the user's `P-chain address`, and the rewards, if any, will be given to `rewardAddress`.
 
 ### Mainnet Workflow
 
