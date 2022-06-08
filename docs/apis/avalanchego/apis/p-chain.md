@@ -75,11 +75,11 @@ curl -X POST --data '{
     "method": "platform.addDelegator",
     "params": {
         "nodeID":"NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
-        "rewardAddress":"P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy",
+        "rewardAddress":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "startTime":1594102400,
         "endTime":1604102400,
         "stakeAmount":100000,
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
         "password":"myPassword"
@@ -160,8 +160,8 @@ curl -X POST --data '{
     "method": "platform.addValidator",
     "params": {
         "nodeID":"NodeID-ARCLrphAHZ28xZEBfUL7SVAmzkTZNe1LK",
-        "rewardAddress":"P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy",
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "rewardAddress":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "startTime":'$(date --date="10 minutes" +%s)',
         "endTime":'$(date --date="2 days" +%s)',
@@ -236,7 +236,7 @@ curl -X POST --data '{
         "startTime":1583524047,
         "endTime":1604102399,
         "weight":1,
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
         "password":"myPassword"
@@ -291,7 +291,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "address": "P-avax12lqey27sfujqq6mc5a3jr5av56cjsu8hg2d3hx"
+    "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
   },
   "id": 1
 }
@@ -348,7 +348,7 @@ curl -X POST --data '{
         "name":"My new timestamp",
         "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
         "encoding": "cb58",
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
         "password":"myPassword"
@@ -409,11 +409,11 @@ curl -X POST --data '{
     "method": "platform.createSubnet",
     "params": {
         "controlKeys":[
-            "P-avax13xqjvp8r2entvw5m29jxxjhmp3hh6lz8laep9m",
-            "P-avax165mp4efnel8rkdeqe5ztggspmw4v40j7pfjlhu"
+            "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+            "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
         ],
         "threshold":2,
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
         "password":"myPassword"
@@ -472,9 +472,9 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
     "params": {
-        "to":"X-avax1yv8cwj9kq3527feemtmh5gkvezna5xys08mxet",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "amount":1,
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
         "password":"myPassword"
@@ -525,7 +525,7 @@ curl -X POST --data '{
     "params" :{
         "username" :"myUsername",
         "password": "myPassword",
-        "address": "P-avax1zwp96clwehpwm57r9ftzdm7rnuslrunj68ua3r"
+        "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -578,7 +578,7 @@ curl -X POST --data '{
   "id"     : 1,
   "method" :"platform.getBalance",
   "params" :{
-      "address":"P-avax1m8wnvtqvthsxxlrrsu3f43kf9wgch5tyfx4nmf"
+      "address":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
   }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1038,7 +1038,7 @@ curl -X POST --data '{
         "rewardOwner": {
           "locktime": "0",
           "threshold": "1",
-          "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"]
+          "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
         },
         "potentialReward": "117431493426",
         "delegationFee": "10.0000",
@@ -1054,7 +1054,7 @@ curl -X POST --data '{
             "rewardOwner": {
               "locktime": "0",
               "threshold": "1",
-              "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"]
+              "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
             },
             "potentialReward": "11743144774"
           }
@@ -1771,7 +1771,7 @@ platform.getUTXOs(
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
+Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
 
 ```sh
 curl -X POST --data '{
@@ -1779,7 +1779,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getUTXOs",
     "params" :{
-        "addresses":["P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx", "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr"],
+        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
         "encoding": "cb58"
     }
@@ -1801,7 +1801,7 @@ This gives response:
       "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
     ],
     "endIndex": {
-      "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
+      "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
     },
     "encoding": "cb58"
@@ -1818,10 +1818,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getUTXOs",
     "params" :{
-        "addresses":["P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr"],
+        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
         "startIndex": {
-            "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
+            "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
         "encoding": "cb58"
@@ -1843,7 +1843,7 @@ This gives response:
       "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
     ],
     "endIndex": {
-      "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
+      "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
     },
     "encoding": "cb58"
@@ -1862,7 +1862,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getUTXOs",
     "params" :{
-        "addresses":["P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr"],
+        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "sourceChain": "X",
         "encoding": "cb58"
     }
@@ -1880,7 +1880,7 @@ This gives response:
       "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMvGwefFXr2EaH2FML6mZuCehMLDdXSVE5aBwc8ePn8WqtZgDv9W641JZoLQhWY8fmvitiBLrc3Zd1aJPDxPouUVXFmLEbmcUnQxfw1Hyz1jpPbWSioowb"
     ],
     "endIndex": {
-      "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
+      "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "S5UKgWoVpoGFyxfisebmmRf8WqC7ZwcmYwS7XaDVZqoaFcCwK"
     },
     "encoding": "cb58"
@@ -1977,8 +1977,8 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "to": "P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
-        "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
+        "to": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username": "myUsername",
         "password": "myPassword"
@@ -2038,7 +2038,7 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "address": "P-avax19hwpvkx2p5q99w87dlpfhqpt3czyh8ywasfaym"
+    "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
   }
 }
 ```
@@ -2119,7 +2119,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "addresses": ["P-avax1ffksh2m592yjzwfp2xmdxe3z4ushln9s09z5p0"]
+    "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
   },
   "id": 1
 }

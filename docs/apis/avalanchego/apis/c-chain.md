@@ -301,7 +301,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avax.export",
     "params" :{
-        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "amount": 500,
         "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
         "username":"myUsername",
@@ -361,7 +361,7 @@ curl -X POST --data '{
     "method" :"avax.exportAVAX",
     "params" :{
         "from": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"],
-        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "amount": 500,
         "changeAddr": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
         "username":"myUsername",
@@ -473,7 +473,7 @@ avax.getUTXOs(
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+Suppose we want all UTXOs that reference at least one of `C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
 
 ```sh
 curl -X POST --data '{
@@ -481,10 +481,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avax.getUTXOs",
     "params" :{
-        "addresses":["C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf"],
+        "addresses":["C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "sourceChain": "X",
         "startIndex": {
-            "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+            "address": "C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
             "utxo": "22RXW7SWjBrrxu2vzDkd8uza7fuEmNpgbj58CxBob9UbP37HSB"
         },
         "encoding": "cb58"
@@ -505,7 +505,7 @@ This gives response:
       "118mpEHsia5sYYvKUx4j56mA7i1yvmLNyynm7LcmehcJJwMVY65smT4kGQgyc9DULwuaLTrUcsqbQutCdajoJXBdPVqvHMkYBTYQKs7WSmTXH8v7iUVqZfphMnS7VxVjGU1zykeTnbuAoZt4cFMUJzd8JaZk5eC82zmLmT"
     ],
     "endIndex": {
-      "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+      "address": "C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "27q6nsuvtyT4mvXVnQQAXw1YKoTxCow5Qm91GZ678TU1SvUiC2"
     },
     "encoding": "cb58"

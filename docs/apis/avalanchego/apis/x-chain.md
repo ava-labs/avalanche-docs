@@ -207,7 +207,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "address": "X-avax12c6n252g5v3w6a6v69f0mnnzwr77jxzr3q3u7d"
+    "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
   },
   "id": 1
 }
@@ -260,15 +260,15 @@ curl -X POST --data '{
         "symbol":"MFCA",
         "initialHolders": [
             {
-                "address": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+                "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
                 "amount": 10000
             },
             {
-                "address":"X-avax1y0h66sjk0rlnh9kppnfskwpw2tpcluzxh9png8",
+                "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
                 "amount":50000
             }
         ],
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
@@ -328,8 +328,8 @@ curl -X POST --data '{
     "params" :{
         "amount":10000000,
         "assetID":"i1EqsthjiFTxunrj8WD2xFSrQ5p2siEKQacmCCB5qBFVqfSL2",
-        "to":"X-avax1ap39w4a7fk0au083rrmnhc2pqk20yjt6s3gzkx",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
@@ -399,20 +399,20 @@ curl -X POST --data '{
         "minterSets":[
             {
                 "minters":[
-                    "X-avax14q0p6y4yzweuugz9p080kapajwvac3ur755n7d"
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
                 ],
                 "threshold": 1
             },
             {
                 "minters": [
-                    "X-avax1fzyldr3mwn6lj7y46edhua6vr5ayx0ruuhezpv",
-                    "X-avax1x5mrgxj0emysnnzyszamqxhq95t2kwcp9n3fy3",
-                    "X-avax13zmrjvj75h3578rn3sfth8p64t2ll4gm4tv2rp"
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
                 ],
                 "threshold": 2
             }
         ],
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
@@ -548,8 +548,8 @@ curl -X POST --data '{
     "params" :{
         "assetID":"2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
         "payload":"2EWh72jYQvEJF9NLk",
-        "to":"X-avax1ap39w4a7fk0au083rrmnhc2pqk20yjt6s3gzkx",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
@@ -613,10 +613,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.export",
     "params" :{
-        "to":"C-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "to":"C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "amount": 10,
         "assetID": "AVAX",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
@@ -665,7 +665,7 @@ curl -X POST --data '{
     "params" :{
         "username":"myUsername",
         "password":"myPassword",
-        "address":"X-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e"
+        "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -803,7 +803,7 @@ curl -X POST --data '{
   "id"     : 1,
   "method" :"avm.getBalance",
   "params" :{
-      "address":"X-avax1ns3jzhqyk7parg29qan56k0fcxwstc76cjqq2s",
+      "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "assetID": "2pYGetDWyKdHxpFxh2LHeoLNCH6H5vxxCxHQtFnnFaYxLsqtHC"
   }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
@@ -1090,7 +1090,7 @@ avm.getUTXOs({
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
 
 ```sh
 curl -X POST --data '{
@@ -1098,7 +1098,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf", "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
         "encoding": "cb58"
     }
@@ -1120,7 +1120,7 @@ This gives response:
       "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
     ],
     "endIndex": {
-      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
     },
     "encoding": "cb58"
@@ -1137,10 +1137,10 @@ curl -X POST --data '{
     "id"     :2,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
         "endIndex": {
-            "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+            "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
         "encoding": "cb58"
@@ -1162,7 +1162,7 @@ This gives response:
       "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
     ],
     "endIndex": {
-      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
     },
     "encoding": "cb58"
@@ -1181,7 +1181,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf", "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
         "sourceChain": "P",
         "encoding": "cb58"
@@ -1200,7 +1200,7 @@ This gives response:
       "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMuxgu73ukQbPjXtDgyBCE1cgrJjqDPgboUswV5BGAYhnuxunkHS3xncB599V3mxyvWnwVwNPmq3mKQwF5EWhfTaXkhqE5VFr92yQBk9Nh5ekZBDSFGCSC"
     ],
     "endIndex": {
-      "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "2Sz2XwRYqUHwPeiKoRnZ6ht88YqzAF1SQjMYZQQaB5wBFkAqST"
     },
     "encoding": "cb58"
@@ -1237,7 +1237,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.import",
     "params" :{
-        "to":"X-avax1s7aygrkrtxflmrlyadlhqu70a6f4a4n8l2tru8",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "sourceChain":"C",
         "username":"myUsername",
         "password":"myPassword"
@@ -1295,7 +1295,7 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "address": "X-avax1mwlnrzv0ezdycx4qhqj77j55cwgcvtf29zvmpy"
+    "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
   }
 }
 ```
@@ -1374,7 +1374,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "addresses": ["X-avax1rt4vac58crp0p59yf640c4gycm6creg2rt8hc6"]
+    "addresses": ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
   },
   "id": 1
 }
@@ -1416,8 +1416,8 @@ curl -X POST --data '{
     "params" :{
         "assetID"   : "AVAX",
         "amount"    : 10000,
-        "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "memo"      : "hi, mom!",
         "username"  : "userThatControlsAtLeast10000OfThisAsset",
@@ -1477,7 +1477,7 @@ curl -X POST --data '{
         "outputs": [
             {
                 "assetID" : "AVAX",
-                "to"      : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+                "to"      : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
                 "amount"  : 1000000000
             },
             {
@@ -1487,7 +1487,7 @@ curl -X POST --data '{
             }
         ],
         "memo"      : "hi, mom!",
-        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "username",
         "password"  : "myPassword"
@@ -1542,8 +1542,8 @@ curl -X POST --data '{
     "params" :{
         "assetID"   : "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
         "groupID"   : 0,
-        "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "myUsername",
         "password"  : "myPassword"
@@ -1649,9 +1649,9 @@ curl -X POST --data '{
     "params" :{
         "assetID"   : "AVAX",
         "amount"    : 10000,
-        "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
         "memo"      : "hi, mom!",
-        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "userThatControlsAtLeast10000OfThisAsset",
         "password"  : "myPassword"
@@ -1714,7 +1714,7 @@ curl -X POST --data '{
         "outputs": [
             {
                 "assetID" : "AVAX",
-                "to"      : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+                "to"      : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
                 "amount"  : 1000000000
             },
             {
@@ -1724,7 +1724,7 @@ curl -X POST --data '{
             }
         ],
         "memo"      : "hi, mom!",
-        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "username",
         "password"  : "myPassword"
