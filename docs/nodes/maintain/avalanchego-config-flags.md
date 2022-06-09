@@ -340,13 +340,13 @@ The identity of the network the node should connect to. Can be one of:
 
 Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
 
-#### `--dynamic-public-ip` (string):
+`--public-ip-resolution-frequency` (duration):
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
 
-`--dynamic-update-duration` (duration):
+`--public-ip-resolution-service` (string):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+Only acceptable values are `ifconfigco`, `opendns` or `ifconfigme`. When provided, the node will use that service to periodically resolve/update its public IP.
 
 ## Signature Verification
 
