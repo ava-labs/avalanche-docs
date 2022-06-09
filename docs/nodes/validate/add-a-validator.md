@@ -294,16 +294,16 @@ let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 pKeychain.importKey(privKey)
 ```
 
-and replace `privKey` with [private keys that you control](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
+and replace `privKey` with private keys that you control. To generate a new keypair, we can use the [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) example script along with [Fuji Network Settings](#network-setting).
 
 ```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+let privKey: string = "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
 pKeychain.importKey(privKey)
-privKey = "PrivateKey-FLKnwy3eFr75LHw6mPn8RAsAcWPq4WD8erMWiTK4KsLvkuP2t"
+privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG"
 pKeychain.importKey(privKey)
-privKey = "PrivateKey-2AUhohZSb86GKXE3mTBNVQGDWYpgR3FGHh7r6gqFoUzXDBNCcA"
+privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s"
 pKeychain.importKey(privKey)
-priKey = "PrivateKey-JeiGENXTFw5NWzBR18iacf1mL18VosfHf5eURhvmqSiAZKLaC"
+priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91"
 pKeychain.importKey(privKey)
 
 const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
@@ -313,10 +313,10 @@ This example would create a keychain with 4 addresses:
 
 ```ts
 [
-  "P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p", // pAddressStrings[0]
-  "P-custom186e8ee4qnhnazrnyv2k9u44607ux70syngdz6l", // pAddressStrings[1]
-  "P-custom1pdu8d8ss5p329l4vtn23p25cjr57qt5yw2cnsn", // pAddressStrings[2]
-  "P-custom152s2upkznxeucwnp68wmg6wmy863qd2sz6ktww", // pAddressStrings[3]
+  "P-fuji1jx644d9y00y5q4hz8cq4wr75a2erne2y4e32xc", // pAddressStrings[0]
+  "P-fuji1wchdgdp94j8tszlpsp56qvgkvdn20svpmnm8qk", // pAddressStrings[1]
+  "P-fuji1f36kkpy6yzd7ayrywxvvprns7qlrcu3hwqdya8", // pAddressStrings[2]
+  "P-fuji1qw7yt3fp43kuwsufff4vhezs2yl00slr09vmh5", // pAddressStrings[3]
 ]
 ```
 
