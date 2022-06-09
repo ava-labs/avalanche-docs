@@ -10,12 +10,13 @@ There's no CEO who can authorize spending based on their own whims and no chance
 
 ## How the DAO's work?
 
-The backbone of a DAO is an smart contracts. The smart contracts defines the rules of the organization.  
-Generally the DAO const of two main smart contracts the ERC20 token that is a governance token  and the smart contract that have the rules for the DAO.
-So like a DAO's member you need to have some governance tokens and then deposit to the DAO contract, and then we can create a proposal if the proposal is accepted the
-other members in the DAO can start to vote.  
+The backbone of a DAO is in smart contracts. The smart contracts defines the rules of the organization.  
+
+Generally the DAO consists of two main smart contracts: the ERC20 token that is a governance token, and the smart contract that have the rules for the DAO. So like a DAO's members you need to have some governance tokens and then deposit to the DAO contract, and then we can create a proposal if the proposal is accepted the other members in the DAO can start to vote.  
+
 The vote is based in how many governance tokens have been deposited on the DAO.  
-For example if you have a hundred of the governance tokens but you deposited only twenty tokens on the DAO contract only twenty tokens will be taken into account for you vote.
+
+For example if you have a 100 of the governance tokens but you deposited only 20 tokens on the DAO contract only 20 tokens will be taken into account for you vote.
 
 ## Let's start to build our DAO
 
