@@ -521,7 +521,7 @@ Timeout before killing an unresponsive chain. Defaults to `5s`.
 
 #### `--creation-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX (.001 AVAX) per transaction. This can only be changed in a local network.
+Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX (.001 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--min-delegator-stake` (int):
 
