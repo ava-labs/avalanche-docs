@@ -519,10 +519,6 @@ Time between gossiping accepted frontiers. Defaults to `10s`.
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
 
-#### `--creation-tx-fee` (int):
-
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX (.001 AVAX) per transaction. This can only be changed on a local network.
-
 #### `--min-delegator-stake` (int):
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
@@ -569,7 +565,7 @@ The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults 
 
 #### `--tx-fee` (int):
 
-The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction. This can only be changed on a local network.
+The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction.
 
 #### `--uptime-requirement` (float):
 
