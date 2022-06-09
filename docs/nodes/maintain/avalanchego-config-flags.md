@@ -342,7 +342,7 @@ Validators must know their public facing IP addresses so they can let other node
 
 `--public-ip-resolution-frequency` (duration):
 
-Frequency at which we resolve/update our public IP and renew NAT mappings, if applicable. Default to 5 minutes.
+Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
 
 `--public-ip-resolution-service` (string):
 
