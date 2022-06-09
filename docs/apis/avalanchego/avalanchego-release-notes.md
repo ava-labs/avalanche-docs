@@ -23,7 +23,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Miscellaneous**
 
 - Fixed `platform.getCurrentValidators` API to correctly mark a node as connected to itself on subnets.
-- Fixed `platform.getBlockchainStatus` to correctly report `Unknown` for blockchains that are not manged by the `P-Chain`
+- Fixed `platform.getBlockchainStatus` to correctly report `Unknown` for blockchains that are not managed by the `P-Chain`
 - Added process metrics by default in the `rpcchainvm#Server`
 - Added `Database` health checks
 - Removed the deprecated `Database.Stat` call from the `rpcdb#Server`
