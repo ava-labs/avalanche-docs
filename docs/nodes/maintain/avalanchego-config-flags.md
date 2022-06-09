@@ -531,7 +531,7 @@ Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX
 
 #### `--min-delegation-fee` (int):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet.
+The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration):
 
