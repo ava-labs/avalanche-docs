@@ -2,7 +2,7 @@
 
 ## What is a DAO
 
-The DAO's are systems that help us to work with people around the world in a safety and clear way.  
+The DAO's are systems that help us to work with people around the world in a safe and clear way.  
 
 Think of them like an internet-native business that's collectively owned and managed by its members. They have built-in treasuries that no one has the authority to access without the approval of the group. Decisions are governed by proposals and voting to ensure everyone in the organization has a voice.
 
