@@ -340,13 +340,13 @@ The identity of the network the node should connect to. Can be one of:
 
 Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
 
-#### `--dynamic-public-ip` (string):
+`--public-ip-resolution-frequency` (duration):
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Frequency at which we resolve/update our public IP and renew NAT mappings, if applicable. Default to 5 minutes.
 
-`--dynamic-update-duration` (duration):
+`--public-ip-resolution-service` (string):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+Only acceptable values are `ifconfigco`, `opendns` or `ifconfigme`. When provided, the node will use that service to periodically resolve/update its public IP.
 
 ## Signature Verification
 
@@ -882,7 +882,7 @@ Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics chang
 
 Halflife to use for the disk tracker. Larger halflife --> disk usage metrics change more slowly. Defaults to `1m`.
 
-#### `--system-tracker-disk-required-available-space` (uint): 
+#### `--system-tracker-disk-required-available-space` (uint):
 
 "Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
 
@@ -916,4 +916,3 @@ The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5i
 `--vm-aliases-file-content` (string):
 
 As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
-
