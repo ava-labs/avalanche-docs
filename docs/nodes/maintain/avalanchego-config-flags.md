@@ -519,6 +519,18 @@ Time between gossiping accepted frontiers. Defaults to `10s`.
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
 
+#### `--create-asset-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new assets. This can only be changed on a local network.
+
+#### `--create-subnet-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new subnets. This can only be changed on a local network.
+
+#### `--create-blockchain-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new blockchains. This can only be changed on a local network.
+
 #### `--min-delegator-stake` (int):
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
