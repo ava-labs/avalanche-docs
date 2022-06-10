@@ -529,7 +529,7 @@ Transaction fee, in nAVAX, for transactions that create new subnets. Defaults to
 
 #### `--create-blockchain-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new blockchains. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--min-delegator-stake` (int):
 
