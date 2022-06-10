@@ -525,7 +525,7 @@ Transaction fee, in nAVAX, for transactions that create new assets. This can onl
 
 #### `--create-subnet-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new subnets. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--create-blockchain-tx-fee` (int):
 
