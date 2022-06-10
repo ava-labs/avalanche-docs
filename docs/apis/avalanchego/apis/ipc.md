@@ -9,6 +9,12 @@ The IPC API allows users to create UNIX domain sockets for blockchains to publis
 
 A node will only expose this API if it is started with [config flag](../../../nodes/maintain/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
 
+:::info
+
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+
+:::
+
 ## IPC Message Format
 
 Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.

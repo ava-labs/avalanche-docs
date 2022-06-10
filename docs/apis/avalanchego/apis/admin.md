@@ -6,8 +6,11 @@ sidebar_position: 7
 
 This API can be used for measuring node health and debugging.
 
-:::warning
+:::info
 The Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [config flag `--api-admin-enabled=true`](../../../nodes/maintain/avalanchego-config-flags.md#--api-admin-enabled-boolean).
+
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+
 :::
 
 ## Format
