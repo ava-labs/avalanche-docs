@@ -521,7 +521,7 @@ Timeout before killing an unresponsive chain. Defaults to `5s`.
 
 #### `--create-asset-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new assets. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--create-subnet-tx-fee` (int):
 
