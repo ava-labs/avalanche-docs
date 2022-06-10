@@ -20,6 +20,7 @@ const config = {
   favicon: 'img/favicon.png',
   organizationName: 'ava-labs', // Usually your GitHub org/user name.
   projectName: 'avalanche-docs', // Usually your repo name.
+  trailingSlash: false,
 
   scripts: [
     'scripts/intercom-app.js',
