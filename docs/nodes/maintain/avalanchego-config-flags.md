@@ -506,6 +506,11 @@ build-dir
 
 ### Consensus Parameters
 
+:::note
+Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
+
+:::
+
 #### `--consensus-gossip-frequency` (duration):
 
 Time between gossiping accepted frontiers. Defaults to `10s`.
@@ -514,61 +519,69 @@ Time between gossiping accepted frontiers. Defaults to `10s`.
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
 
-#### `--creation-tx-fee` (int):
+#### `--create-asset-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX (.001 AVAX) per transaction.
+Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
+
+#### `--create-subnet-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+
+#### `--create-blockchain-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--min-delegator-stake` (int):
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
 
-Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
+Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net. This can only be changed on a local network.
 
 #### `--min-delegation-fee` (int):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet.
+The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration):
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks.)
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on a local network.
 
 #### `--min-validator-stake` (int):
 
-The minimum stake, in nAVAX, required to validate the Primary Network.
+The minimum stake, in nAVAX, required to validate the Primary Network. This can only be changed on a local network.
 
 Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
 
 #### `--max-stake-duration` (duration):
 
-The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet.
+The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet. This can only be changed on a local network.
 
 #### `--max-validator-stake` (int):
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator.
+The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator. This can only be changed on a local network.
 
 #### `--stake-minting-period` (duration):
 
-Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days).
+Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days). This can only be changed on a local network.
 
 #### `--stake-max-consumption-rate` (uint):
 
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years.
+The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. This can only be changed on a local network.
 
 #### `--stake-min-consumption-rate` (uint):
 
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years.
+The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. This can only be changed on a local network.
 
 #### `--stake-supply-cap` (uint):
 
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX.
+The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
 
 #### `--tx-fee` (int):
 
-The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1,000,000` nAVAX per transaction.
+The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction.
 
 #### `--uptime-requirement` (float):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.8`.
+Fraction of time a validator must be online to receive rewards. Defaults to `0.8`. This can only be changed on a local network.
 
 ### Snow Parameters
 
