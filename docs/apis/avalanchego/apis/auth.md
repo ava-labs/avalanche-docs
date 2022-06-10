@@ -14,8 +14,11 @@ This API is only reachable if the node is started with [config flag](../../../no
 
 Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify the file to read the Auth API's password from, with argument `--api-auth-password-file`. You must provide this password in order to create/revoke authorization tokens.
 
-:::tip
+:::info
 If you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+
 :::
 
 ## Format

@@ -12,6 +12,12 @@ You should only create a keystore user on a node that you operate, as the node o
 
 For validation and delegation on the mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md) or [the wallet](../../../nodes/validate/staking.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
 
+:::info
+
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+
+:::
+
 ## Format
 
 This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
