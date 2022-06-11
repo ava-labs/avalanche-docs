@@ -82,18 +82,46 @@ const sidebars = {
   ],
   subnets: [
     'subnets/README',
-    'subnets/create-a-local-subnet',
-    'subnets/create-a-fuji-subnet',
-    'subnets/setup-dfk-node',
-    'subnets/avalanche-subnet-faucet',
-    'subnets/subnet-cli',
-    'subnets/customize-a-subnet',
-    'subnets/create-a-virtual-machine-vm',
-    'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-    'subnets/deploy-a-smart-contract-on-your-evm',
-    'subnets/deploying-cross-chain-evm-bridge',
-    'subnets/spaces',
-    'subnets/wagmi',
+    {
+      type: 'category',
+      label: 'Build',
+      collapsed: false,
+      items: [
+        'subnets/create-a-local-subnet',
+        'subnets/create-a-fuji-subnet',
+        'subnets/setup-dfk-node',
+        'subnets/deploy-a-smart-contract-on-your-evm',
+        'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Customize',
+      collapsed: false,
+      items: [
+        'subnets/customize-a-subnet',
+        'subnets/create-a-virtual-machine-vm',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tools',
+      collapsed: false,
+      items: [
+        'subnets/avalanche-subnet-faucet',
+        'subnets/subnet-cli',
+        'subnets/deploying-cross-chain-evm-bridge',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Examples',
+      collapsed: false,
+      items: [
+          'subnets/spaces',
+          'subnets/wagmi',
+      ],
+    },
     {
       type: 'link',
       label: 'Subnet FAQ',
