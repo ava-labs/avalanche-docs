@@ -2,21 +2,7 @@
 sidebar_position: 2
 ---
 
-import Iframe from "react-iframe";
-
 # Upgrade Your AvalancheGo Node
-
-<Iframe
-  url="https://www.youtube.com/embed/o4Fww-sHoaQ"
-  width="100%"
-  height="480px"
-  id="myId"
-  className="video-container"
-  display="initial"
-  position="relative"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-/>
 
 ## **Backup your node**
 
@@ -95,7 +81,7 @@ Now we are ready to download the new version of the node. You can either downloa
 
 Downloading pre-built binary is easier and recommended if you're just looking to run your own node and stake on it.
 
-Building the node [from source](upgrade-your-avalanchego-node.mdx#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
 
 ## **Download Pre-built Binary**
 
