@@ -340,11 +340,11 @@ The identity of the network the node should connect to. Can be one of:
 
 Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
 
-`--public-ip-resolution-frequency` (duration):
+#### `--public-ip-resolution-frequency` (duration):
 
 Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
 
-`--public-ip-resolution-service` (string):
+#### `--public-ip-resolution-service` (string):
 
 Only acceptable values are `ifconfigco`, `opendns` or `ifconfigme`. When provided, the node will use that service to periodically resolve/update its public IP.
 
