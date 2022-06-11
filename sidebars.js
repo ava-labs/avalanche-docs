@@ -105,7 +105,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Utility',
+      label: 'Tools',
       collapsed: false,
       items: [
         'subnets/avalanche-subnet-faucet',
