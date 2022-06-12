@@ -591,7 +591,7 @@ DONE! You are now running your very own custom blockchain!
 
 ## Using Avalanche Network as a Library
 
-The Avalanche Network Runner can also be imported as a library into your programs so that you can use it to programatically start, interact with and stop Avalanche networks. For an example of using the Network Runner in a program, see an [example](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/fivenodenetwork/main.go).
+The Avalanche Network Runner can also be imported as a library into your programs so that you can use it to programmatically start, interact with and stop Avalanche networks. For an example of using the Network Runner in a program, see an [example](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/fivenodenetwork/main.go).
 
 Creating a network is as simple as:
 
