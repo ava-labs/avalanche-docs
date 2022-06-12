@@ -297,7 +297,8 @@ pKeychain.importKey(privKey)
 and replace `privKey` with private keys that you control. To generate a new keypair, we can use the [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) example script along with [Fuji Network Settings](#network-setting).
 
 ```ts
-let privKey: string = "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
+let privKey: string =
+  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
 pKeychain.importKey(privKey)
 privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG"
 pKeychain.importKey(privKey)
@@ -312,12 +313,10 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
 This example would create a keychain with 4 addresses:
 
 ```ts
-[
   "P-fuji1jx644d9y00y5q4hz8cq4wr75a2erne2y4e32xc", // pAddressStrings[0]
   "P-fuji1wchdgdp94j8tszlpsp56qvgkvdn20svpmnm8qk", // pAddressStrings[1]
   "P-fuji1f36kkpy6yzd7ayrywxvvprns7qlrcu3hwqdya8", // pAddressStrings[2]
   "P-fuji1qw7yt3fp43kuwsufff4vhezs2yl00slr09vmh5", // pAddressStrings[3]
-]
 ```
 
 Now we can pass in each address according to it's slot in the `pAddressStrings` array:

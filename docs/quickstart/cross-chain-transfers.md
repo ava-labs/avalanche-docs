@@ -79,13 +79,13 @@ Select the [**`examples/avm`**](https://github.com/ava-labs/avalanchejs/tree/mas
 Locate this line in the file
 
 ```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 ```
 
 and replace this with a private key that you control.
 
 ```js
-const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 ```
 
 ##### Network Setting
@@ -93,19 +93,19 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
 The following settings work when using a local node started with [`--network-id=fuji`](../nodes/maintain/avalanchego-config-flags.md#network-id):
 
 ```js
-const ip: string = "localhost";
-const port: number = 9650;
-const protocol: string = "http";
-const networkID: number = 5;
+const ip: string = "localhost"
+const port: number = 9650
+const protocol: string = "http"
+const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API server](../apis/avalanchego/public-api-server.md), the following changes are needed:
 
 ```js
-const ip: string = "api.avax-test.network";
-const port: number = 443;
-const protocol: string = "https";
-const networkID: number = 5;
+const ip: string = "api.avax-test.network"
+const port: number = 443
+const protocol: string = "https"
+const networkID: number = 5
 ```
 
 Depending on the networkID passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
@@ -115,7 +115,7 @@ _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 For Fuji Testnet, 5 is the correct value to use.
 
 ```js
-const networkID: number = 5;
+const networkID: number = 5
 ```
 
 To learn more about encoded addresses, click [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
@@ -125,15 +125,15 @@ To learn more about encoded addresses, click [here](../apis/avalanchejs/manage-x
 By default the scripts send the wallet's entire AVAX balance:
 
 ```js
-const balance: BN = new BN(getBalanceResponse.balance);
-const amount: BN = balance.sub(fee);
+const balance: BN = new BN(getBalanceResponse.balance)
+const amount: BN = balance.sub(fee)
 ```
 
 To send a different amount, please replace the code above with the following. Below sets a new value of 0.01 AVAX (`10000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX
 
 ```js
-const value: BN = new BN("10000000");
-const amount: BN = value.sub(fee);
+const value: BN = new BN("10000000")
+const amount: BN = value.sub(fee)
 ```
 
 :::tip
@@ -195,8 +195,8 @@ Copy the [network setting from above](#network-setting) into `evm/buildImportTx-
 Navigate to this part of the code and ensure that the `cHexAddress`(_Your C-Chain wallet address_) and `private key` are correct:
 
 ```ts
-const cHexAddress: string = "<YOUR-CCHAIN-WALLET-ADDRESS-HERE>";
-const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
+const cHexAddress: string = "<YOUR-CCHAIN-WALLET-ADDRESS-HERE>"
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 ```
 
 Run the import script:
@@ -230,9 +230,9 @@ You can change the amount of AVAX to send by editing the _BN_ variable: `avaxAmo
 The fee here will only be for exporting the asset. The import fees will be deducted from the UTXOs present on the Exported Atomic Memory, a memory location where UTXOs stay after getting exported but before being imported.
 
 ```ts
-let avaxAmount: BN = new BN(1e7);
-let fee: BN = baseFee.div(new BN(1e9));
-fee = fee.add(new BN(1e6));
+let avaxAmount: BN = new BN(1e7)
+let fee: BN = baseFee.div(new BN(1e9))
+fee = fee.add(new BN(1e6))
 ```
 
 Run the export script:
@@ -261,7 +261,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](../apis/avalanchego/public-api-server.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1;` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.
 - The correct receiving address.
 
@@ -276,10 +276,10 @@ Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.m
 Most of the code are already set to run it on a local network. Do check the following values to make sure they are correct.
 
 ```js
-const ip: string = "localhost";
-const port: number = 30301; // Change this to the correct value
-const protocol: string = "http";
-const networkID: number = 1337;
+const ip: string = "localhost"
+const port: number = 30301 // Change this to the correct value
+const protocol: string = "http"
+const networkID: number = 1337
 ```
 
 Then run the export and import scripts to transfer tokens across chains.
