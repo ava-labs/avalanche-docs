@@ -43,4 +43,6 @@ This gives response where utxos will be in `hex` format:
 }
 ```
 
+You can also use `json` if it is supported.
+
 This set of changes only deprecates the cb58 encoding type over the APIs. `txIDs`, `chainIDs`, and `subnetIDs` which are represented using cb58 are unmodified.
