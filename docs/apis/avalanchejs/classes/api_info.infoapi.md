@@ -52,7 +52,7 @@ Class for interacting with a node's InfoAPI.
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/info/api.ts:162](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L162)*
+*Defined in [src/apis/info/api.ts:162](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L162)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
 
@@ -73,7 +73,7 @@ Name | Type | Default | Description |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseURL](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L29)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L28)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L28)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L30)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L30)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/jrpcapi.ts#L12)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L12)*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcID](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:13](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/jrpcapi.ts#L13)*
+*Defined in [src/common/jrpcapi.ts:13](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L13)*
 
 ## Methods
 
@@ -123,7 +123,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:15](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/jrpcapi.ts#L15)*
+*Defined in [src/common/jrpcapi.ts:15](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L15)*
 
 **Parameters:**
 
@@ -144,7 +144,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L53)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L53)*
 
 Returns the baseURL's path.
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **getBlockchainID**(`alias`: string): *Promise‹string›*
 
-*Defined in [src/apis/info/api.ts:33](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L33)*
+*Defined in [src/apis/info/api.ts:33](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L33)*
 
 Fetches the blockchainID from the node for a given alias.
 
@@ -178,7 +178,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L58)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L58)*
 
 Returns the baseURL's database.
 
@@ -190,7 +190,7 @@ ___
 
 ▸ **getNetworkID**(): *Promise‹number›*
 
-*Defined in [src/apis/info/api.ts:62](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L62)*
+*Defined in [src/apis/info/api.ts:62](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L62)*
 
 Fetches the networkID from the node.
 
@@ -204,7 +204,7 @@ ___
 
 ▸ **getNetworkName**(): *Promise‹string›*
 
-*Defined in [src/apis/info/api.ts:74](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L74)*
+*Defined in [src/apis/info/api.ts:74](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L74)*
 
 Fetches the network name this node is running on
 
@@ -218,7 +218,7 @@ ___
 
 ▸ **getNodeID**(): *Promise‹string›*
 
-*Defined in [src/apis/info/api.ts:86](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L86)*
+*Defined in [src/apis/info/api.ts:86](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L86)*
 
 Fetches the nodeID from the node.
 
@@ -232,7 +232,7 @@ ___
 
 ▸ **getNodeIP**(): *Promise‹string›*
 
-*Defined in [src/apis/info/api.ts:50](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L50)*
+*Defined in [src/apis/info/api.ts:50](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L50)*
 
 Fetches the IP address from the node.
 
@@ -246,7 +246,7 @@ ___
 
 ▸ **getNodeVersion**(): *Promise‹string›*
 
-*Defined in [src/apis/info/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L98)*
+*Defined in [src/apis/info/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L98)*
 
 Fetches the version of Gecko this node is running
 
@@ -262,7 +262,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:77](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/jrpcapi.ts#L77)*
+*Defined in [src/common/jrpcapi.ts:77](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L77)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -275,7 +275,7 @@ ___
 
 ▸ **getTxFee**(): *Promise‹[GetTxFeeResponse](../interfaces/info_interfaces.gettxfeeresponse.md)›*
 
-*Defined in [src/apis/info/api.ts:110](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L110)*
+*Defined in [src/apis/info/api.ts:110](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L110)*
 
 Fetches the transaction fee from the node.
 
@@ -289,7 +289,7 @@ ___
 
 ▸ **isBootstrapped**(`chain`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/info/api.ts:124](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L124)*
+*Defined in [src/apis/info/api.ts:124](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L124)*
 
 Check whether a given chain is done bootstrapping
 
@@ -309,7 +309,7 @@ ___
 
 ▸ **peers**(`nodeIDs`: string[]): *Promise‹[PeersResponse](../interfaces/info_interfaces.peersresponse.md)[]›*
 
-*Defined in [src/apis/info/api.ts:143](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L143)*
+*Defined in [src/apis/info/api.ts:143](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L143)*
 
 Returns the peers connected to the node.
 
@@ -331,7 +331,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/apibase.ts#L37)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseURL.
 
@@ -349,7 +349,7 @@ ___
 
 ▸ **uptime**(): *Promise‹[UptimeResponse](../interfaces/info_interfaces.uptimeresponse.md)›*
 
-*Defined in [src/apis/info/api.ts:159](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/info/api.ts#L159)*
+*Defined in [src/apis/info/api.ts:159](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/info/api.ts#L159)*
 
 Returns the network's observed uptime of this node.
 

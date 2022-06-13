@@ -24,7 +24,7 @@
 
 • **assetID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:190](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L190)*
+*Defined in [src/apis/avm/interfaces.ts:190](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L190)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **changeAddr**? : *string*
 
-*Defined in [src/apis/avm/interfaces.ts:189](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L189)*
+*Defined in [src/apis/avm/interfaces.ts:189](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L189)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **from**? : *string[]*
 
-*Defined in [src/apis/avm/interfaces.ts:188](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L188)*
+*Defined in [src/apis/avm/interfaces.ts:188](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L188)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **groupID**: *number*
 
-*Defined in [src/apis/avm/interfaces.ts:191](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L191)*
+*Defined in [src/apis/avm/interfaces.ts:191](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L191)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:187](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L187)*
+*Defined in [src/apis/avm/interfaces.ts:187](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L187)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **to**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:192](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L192)*
+*Defined in [src/apis/avm/interfaces.ts:192](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L192)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:186](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L186)*
+*Defined in [src/apis/avm/interfaces.ts:186](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L186)*

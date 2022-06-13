@@ -8,6 +8,8 @@
 
   ↳ [GetLastAcceptedParams](index_interfaces.getlastacceptedparams.md)
 
+  ↳ [GetLastVertexParams](index_interfaces.getlastvertexparams.md)
+
   ↳ [GetContainerByIndexParams](index_interfaces.getcontainerbyindexparams.md)
 
   ↳ [GetContainerByIDParams](index_interfaces.getcontainerbyidparams.md)
@@ -30,4 +32,4 @@
 
 • **encoding**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/index/interfaces.ts#L7)*
+*Defined in [src/apis/index/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/interfaces.ts#L7)*

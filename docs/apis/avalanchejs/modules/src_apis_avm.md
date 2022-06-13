@@ -80,6 +80,7 @@
 * [UTXOID](src_apis_avm.md#utxoid)
 * [UTXOSet](src_apis_avm.md#utxoset)
 * [UnsignedTx](src_apis_avm.md#unsignedtx)
+* [Vertex](src_apis_avm.md#vertex)
 * [iUTXOID](src_apis_avm.md#iutxoid)
 
 ## References
@@ -525,6 +526,12 @@ ___
 ###  UnsignedTx
 
 • **UnsignedTx**:
+
+___
+
+###  Vertex
+
+• **Vertex**:
 
 ___
 

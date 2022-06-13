@@ -21,7 +21,7 @@
 
 • **endTime**: *BN*
 
-*Defined in [src/apis/platformvm/interfaces.ts:203](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L203)*
+*Defined in [src/apis/platformvm/interfaces.ts:203](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L203)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **nodeID**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:201](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L201)*
+*Defined in [src/apis/platformvm/interfaces.ts:201](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L201)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **startTime**: *BN*
 
-*Defined in [src/apis/platformvm/interfaces.ts:202](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L202)*
+*Defined in [src/apis/platformvm/interfaces.ts:202](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L202)*
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 • **subnetID**? : *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:200](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L200)*
+*Defined in [src/apis/platformvm/interfaces.ts:200](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L200)*

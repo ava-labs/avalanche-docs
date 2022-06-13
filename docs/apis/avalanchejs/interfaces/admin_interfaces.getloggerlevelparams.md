@@ -18,4 +18,4 @@
 
 • **loggerName**? : *string*
 
-*Defined in [src/apis/admin/interfaces.ts:21](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/admin/interfaces.ts#L21)*
+*Defined in [src/apis/admin/interfaces.ts:21](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L21)*

@@ -1,6 +1,6 @@
 # API
 
-## AvalancheJS - [v3.14.0](https://github.com/ava-labs/avalanchejs/releases/tag/v3.14.0)
+## AvalancheJS - [v3.15.0](https://github.com/ava-labs/avalanchejs/releases/tag/v3.15.0)
 
 ### Modules
 
@@ -22,6 +22,7 @@
   * [AVM Outputs](modules/api_avm_outputs.md)
   * [AVM Transactions](modules/api_avm_transactions.md)
   * [AVM UTXOs](modules/api_avm_utxos.md)
+  * [AVM Vertex](modules/api_avm_vertex.md)
 * [Admin](modules/api_admin.md)
 * [Auth](modules/api_auth.md)
 * [EVM](modules/api_evm.md)
