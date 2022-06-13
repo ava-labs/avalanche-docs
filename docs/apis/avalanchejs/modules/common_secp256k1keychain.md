@@ -19,4 +19,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/secp256k1.ts:38](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/common/secp256k1.ts#L38)*
+*Defined in [src/common/secp256k1.ts:38](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/secp256k1.ts#L38)*

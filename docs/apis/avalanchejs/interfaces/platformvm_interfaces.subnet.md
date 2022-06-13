@@ -20,7 +20,7 @@
 
 • **controlKeys**: *string[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:163](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L163)*
+*Defined in [src/apis/platformvm/interfaces.ts:163](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L163)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **ids**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:162](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L162)*
+*Defined in [src/apis/platformvm/interfaces.ts:162](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L162)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **threshold**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:164](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L164)*
+*Defined in [src/apis/platformvm/interfaces.ts:164](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L164)*

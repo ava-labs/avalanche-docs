@@ -19,7 +19,7 @@
 
 • **minDelegatorStake**: *BN*
 
-*Defined in [src/apis/platformvm/interfaces.ts:196](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L196)*
+*Defined in [src/apis/platformvm/interfaces.ts:196](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L196)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **minValidatorStake**: *BN*
 
-*Defined in [src/apis/platformvm/interfaces.ts:195](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/platformvm/interfaces.ts#L195)*
+*Defined in [src/apis/platformvm/interfaces.ts:195](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L195)*

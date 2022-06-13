@@ -18,4 +18,4 @@
 
 • **assetID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:83](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/apis/avm/interfaces.ts#L83)*
+*Defined in [src/apis/avm/interfaces.ts:83](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L83)*

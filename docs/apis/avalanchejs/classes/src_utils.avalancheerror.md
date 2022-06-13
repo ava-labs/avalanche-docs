@@ -122,7 +122,7 @@
 
 \+ **new AvalancheError**(`m`: string, `code`: string): *[AvalancheError](src_utils.avalancheerror.md)*
 
-*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L48)*
+*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/errors.ts#L48)*
 
 **Parameters:**
 
@@ -139,7 +139,7 @@ Name | Type |
 
 • **errorCode**: *string*
 
-*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L48)*
+*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/errors.ts#L48)*
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 *Inherited from [AvalancheError](src_utils.avalancheerror.md).[message](src_utils.avalancheerror.md#message)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1023
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1029
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 *Inherited from [AvalancheError](src_utils.avalancheerror.md).[name](src_utils.avalancheerror.md#name)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1022
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1028
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 *Inherited from [AvalancheError](src_utils.avalancheerror.md).[stack](src_utils.avalancheerror.md#optional-stack)*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1024
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1030
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 ▪ **Error**: *ErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1033
+Defined in node_modules/typescript/lib/lib.es5.d.ts:1039
 
 ## Methods
 
@@ -185,6 +185,6 @@ Defined in node_modules/typescript/lib/lib.es5.d.ts:1033
 
 ▸ **getCode**(): *string*
 
-*Defined in [src/utils/errors.ts:55](https://github.com/ava-labs/avalanchejs/blob/4e59193/src/utils/errors.ts#L55)*
+*Defined in [src/utils/errors.ts:55](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/errors.ts#L55)*
 
 **Returns:** *string*
