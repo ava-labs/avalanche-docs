@@ -127,7 +127,7 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -150,8 +150,8 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "user": "4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
-    "encoding": "cb58"
+    "user": "7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc00000000",
+    "encoding": "hex"
   }
 }
 ```
@@ -173,7 +173,7 @@ keystore.importUser(
 ) -> {success:bool}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -185,7 +185,7 @@ curl -X POST --data '{
     "params" :{
         "username":"myUsername",
         "password":"myPassword",
-        "user"    :"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi"
+        "user"    :"0x7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc000000008cf2d869"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
