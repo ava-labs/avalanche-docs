@@ -1545,7 +1545,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either "hex", or "json". Defaults to "hex".
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "hex" or "json". Defaults to "hex".
 
 #### **Signature**
 
