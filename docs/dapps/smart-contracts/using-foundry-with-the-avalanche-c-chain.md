@@ -133,7 +133,7 @@ type                    2
 ```
 
 
-Well done! You just minted your first NFT from your contract. You can sanity check the owner of the NFT with currentTokenId equal to 1 by running the below cast call command. 
+Well done! You just minted your first NFT from your contract. You can check the owner of `tokenId` 1 by running the `cast call` command below:
 
 ```zsh
 cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <NFT-CONTRACT-ADDRESS> "ownerOf(uint256)" 1
