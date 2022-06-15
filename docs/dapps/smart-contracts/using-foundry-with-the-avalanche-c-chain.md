@@ -29,7 +29,7 @@ In order to deploy contracts, you need to have some AVAX. You can use a pre-fund
 
 ## Implement a Game Item NFT
 
-We will use our example ERC721 smart contract, [`NFT.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3fbba0ac28f6420e9be5d2635d5f23693f80127a/contracts/NFT.sol) found in `lib/avalanche-smart-contract-quickstart/contracts` of your foundry project.
+We will use our example ERC721 smart contract, [`NFT.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3fbba0ac28f6420e9be5d2635d5f23693f80127a/contracts/NFT.sol) found in `./contracts` of our project.
 
 ```ts
 //SPDX-License-Identifier: MIT
