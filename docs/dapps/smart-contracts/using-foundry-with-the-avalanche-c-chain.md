@@ -63,7 +63,7 @@ contract NFT is ERC721 {
 }
 ```
 
-Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our git submodules. We import Openzeppelin's open source implementation of the ERC721 standard which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a players wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
+Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the ERC721 standard which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
 
 # Compile & deploy with forge
 
@@ -82,19 +82,19 @@ export RPC_URL=<YOUR-RPC-ENDPOINT>
 export PRIVATE_KEY=<YOUR-PRIVATE-KEY>
 ```
 
-Since we are deploying on Fuji our `RPC_URL` export should be:
+Since we are deploying to Fuji testnet, our `RPC_URL` export should be:
 
 ```zsh
 export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 ```
 
-Once set, you can deploy your NFT with Forge by running the below command while adding the relevant constructor arguments of the NFT contract:
+Once set, you can deploy your NFT with Forge by running the command below while adding the relevant constructor arguments of the NFT contract:
 
 ```zsh
 forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <NFT-NAME> <NFT-SYMBOL> 
 ```
 
-If successfully deployed, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
+Upon successful deployment, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
 
 Here's an example output from an NFT deployment.
 
@@ -107,7 +107,7 @@ Transaction hash: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32
 ```
 
 # Using Cast to Interact with the Smart Contract
-We can call functions on our NFT contract with Cast, Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
+We can call functions on our NFT contract with [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
 
 Given that you already set your RPC and private key env variables during deployment, mint an NFT from your contract by running:
 
@@ -155,4 +155,4 @@ export PRIVATE_KEY=<YOUR-PRIVATE-KEY>
 
 ## Local Workflow
 
-Support for local networks is in development.
+Support for use with a local network is in development.
