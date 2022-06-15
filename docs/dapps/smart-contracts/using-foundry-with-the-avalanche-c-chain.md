@@ -10,12 +10,12 @@ Foundry manages your dependencies, compiles your project, runs tests, deploys, a
 
 ## Prerequisites
 
-- You have installed [foundry](https://book.getfoundry.sh/getting-started/installation.html) so that you can follow examples in this tutorial.
-- You have installed and are familiar with [Avalanche-Cli](../../subnets/create-a-local-subnet.md)
+- You have installed [foundry](https://book.getfoundry.sh/getting-started/installation.html)
+- You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
 ## Getting Started
 
-This section will walk you through creating an ERC721 with Foundry and [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+This section will walk you through creating an ERC721 with Foundry and Avalanche Smart Contract Quickstart.
 
 Clone the Avalanche Smart Contract Quickstart repo and install its dependencies by running:
 
@@ -91,7 +91,7 @@ export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 Once set, you can deploy your NFT with Forge by running the below command while adding the relevant constructor arguments of the NFT contract:
 
 ```zsh
-forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <name> <symbol> 
+forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <NFT-NAME> <NFT-SYMBOL> 
 ```
 
 If successfully deployed, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
@@ -112,7 +112,7 @@ We can call functions on our NFT contract with Cast, Foundry's command-line tool
 Given that you already set your RPC and private key env variables during deployment, mint an NFT from your contract by running:
 
 ```zsh
-cast send --rpc-url=$RPC_URL <contractAddress>  "awardItem(address)" <arg> --private-key=$PRIVATE_KEY
+cast send --rpc-url=$RPC_URL <NFT-CONTRACT-ADDRESS> "awardItem(address)" <RECIPIENT-ADDRESS> --private-key=$PRIVATE_KEY
 ```
 
 Upon success, the command line will display the [transaction data](https://testnet.snowtrace.io/tx/0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c).
@@ -136,7 +136,7 @@ type                    2
 Well done! You just minted your first NFT from your contract. You can sanity check the owner of the NFT with currentTokenId equal to 1 by running the below cast call command. 
 
 ```zsh
-cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <contractAddress> "ownerOf(uint256)" 1
+cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <NFT-CONTRACT-ADDRESS> "ownerOf(uint256)" 1
 ```
 
 The address you provided above should be returned as the owner.
