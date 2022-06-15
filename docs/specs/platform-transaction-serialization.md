@@ -1818,3 +1818,75 @@ Let’s make a subnet auth:
   0x00, 0x00, 0x00, 0x00
 ]
 ```
+
+## Block
+
+A Block is a collection of transactions. It's the linear blockchain equivalent of a vertex in a DAG.
+
+### What Block Contains
+
+A Block contains a `ParentID`, `Height`, `Timestamp`, `TransactionCount`, `Transactions`.
+
+* **`ParentID`** is the ID of this block's parents.
+* **`Height`** is the maximum height of a parent block plus 1.
+* **`TransactionCount`** is the total number of transactions in this block.
+* **`Transactions`** are the transactions in this block.
+
+### Gantt Block Specification
+
+```text
++--------------+---------------+------------------------------+
+| parent_id    : [32]byte      | 32 bytes                     |
++--------------+---------------+------------------------------+
+| height       : long          | 8 bytes                      |
++--------------+---------------+------------------------------+
+| tx_count     : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| transactions : []Transaction | 4 + size(transactions) bytes |
++--------------+---------------+-----------------------------------------+
+|   34 + size(transactions) bytes                                        |
++------------------------------------------------------------------------+
+```
+
+### Proto Block Specification
+
+```text
+message Block {
+    uint16 codec_id = 1;              // 04 bytes
+    bytes parent_id = 2;              // 32 bytes
+    uint64 height = 3;                // 08 bytes
+    uint32 tx_count = 4;              // 04 bytes
+    repeated bytes transactions = 5;  // size(transactions)
+}
+```
+
+### Block Example
+
+Let’s make a Block:
+
+* **`CodecID`**: `0x0000`
+* **`ParentID`**: `0xf25d0d4446d92ea2b63d2fc07126f461a8760d86f5b12a88edc57e8495418699`
+* **`Height`**: `0`
+* **`Transactions`**: `[Example CreateSubnetTx as defined above]`
+
+```text
+[
+    CodecID          <- 0x0000
+    ChainID          <- 0xf25d0d4446d92ea2b63d2fc07126f461a8760d86f5b12a88edc57e8495418699
+    Height           <- 0x0000000000000000 
+    Transactions     <- [Example CreateSubnetTx defined above]
+]
+=
+[
+   // codec id
+   00 00
+   // chain id
+   f2 5d 0d 44 46 d9 2e a2 b6 3d 2f c0 71 26 f4 61 a8 76 0d 86 f5 b1 2a 88 ed c5 7e 84 95 41 86 99
+   // height
+   00 00 00 00 00 00 00 00 
+   // num txs
+   00 00 00 01 
+   // create subnet tx from above
+   [omitted for brevity]
+]
+```
