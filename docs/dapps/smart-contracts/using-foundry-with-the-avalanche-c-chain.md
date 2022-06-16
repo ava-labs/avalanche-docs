@@ -4,7 +4,7 @@
 
 This article shows how to deploy and interact with smart contracts using foundry on the [Fuji C-Chain](../../quickstart/fuji-workflow.md).
 
-[Foundry](https://book.getfoundry.sh/) is a smart contract development toolchain written in Rust.
+[Foundry](https://github.com/foundry-rs/foundry) is a smart contract development toolchain written in Rust.
 
 Foundry manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.
 
