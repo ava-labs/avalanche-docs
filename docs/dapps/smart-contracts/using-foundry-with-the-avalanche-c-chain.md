@@ -10,9 +10,9 @@ Foundry manages your dependencies, compiles your project, runs tests, deploys, a
 
 ## Prerequisites
 
-- You have installed [Foundry](https://github.com/foundry-rs/foundry#installation); This installation includes the `forge` and `cast` binaries used in this walk-through.
+- You have installed [Foundry](https://github.com/foundry-rs/foundry#installation); This installation includes the `forge` and `cast` binaries used in this walk-through
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-- If you plan on running locally, ensure that you have installed and are familiar with [Avalanche Network Runner](https://docs.avax.network/quickstart/network-runner#installation)
+- If you plan on running locally, ensure that you have installed and are familiar with [Avalanche Network Runner](../../quickstart/network-runner)
 ## Getting Started
 
 This section will walk you through creating an ERC721 with Foundry and Avalanche Smart Contract Quickstart.
