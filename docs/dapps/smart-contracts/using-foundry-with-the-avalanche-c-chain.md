@@ -169,7 +169,7 @@ Next, deploy a new Avalanche Network with five nodes (a Cluster) locally.
 go run examples/local/fivenodenetwork/main.go
 ```
 
-Next, modify the environment variables to be:
+Next, modify the environment variables in your Foundry project:
 ```zsh
 export RPC_URL=http://localhost:9650/ext/bc/C/rpc
 export PRIVATE_KEY=56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
