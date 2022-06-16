@@ -51,7 +51,13 @@ You can also use `json` if the api supports it.
 
 ## Affected APIs
 
-Following APIs are affected with this change:
+Following APIs are affected with this change.
+
+:::tip
+
+When going through this API list, please make sure to check default/omitted encoding parameter. Before the new release of `cb58` deprecation is out, by default, `cb58` is used for encoding parameter if not specified in these APIs. You would need to add `"encoding": "hex"` (or `"encoding": "json"` if supported) explicitly and update your code to handle the response accordingly.
+
+:::
 
 ### X-Chain API
 
