@@ -10,12 +10,12 @@ Foundry manages your dependencies, compiles your project, runs tests, deploys, a
 
 ## Prerequisites
 
-- You have installed [Foundry](https://github.com/foundry-rs/foundry#installation); This installation includes the `forge` and `cast` binaries used in this walk-through.
+- You have [installed Foundry](https://github.com/foundry-rs/foundry#installation). This installation includes the `forge` and `cast` binaries used in this walk-through.
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 - If you plan on running locally, ensure that you have installed and are familiar with [Avalanche Network Runner](../../quickstart/network-runner).
 ## Getting Started
 
-This section will walk you through creating an ERC721 with Foundry and Avalanche Smart Contract Quickstart.
+This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721) with Foundry and Avalanche Smart Contract Quickstart.
 Clone the Avalanche Smart Contract Quickstart repo and install its dependencies by running:
 
 ```zsh
@@ -62,7 +62,7 @@ contract NFT is ERC721 {
 }
 ```
 
-Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the ERC721 standard which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
+Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the [ERC721 standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
 
 # Compile & deploy with Forge
 [Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a command-line tool that ships with Foundry. Forge tests, builds, and deploys your smart contracts.
