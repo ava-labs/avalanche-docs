@@ -2,7 +2,7 @@
 
 ## Overview
 
-For performance reasons, we are working to deprecate `cb58` encoding in favor of `hex` in the response of AvalancheGo API calls. Transaction IDs (`txIDs`), `chainIDs`, and `subnetIDs` which are represented using `cb58` are unchanged.
+We are working to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changes the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
 
 To prepare for this change, you can now specify `hex` for the `encoding` parameter in places where `cb58` is used explicitly or by default. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
 
