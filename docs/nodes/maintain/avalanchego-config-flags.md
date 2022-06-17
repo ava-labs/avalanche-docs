@@ -53,7 +53,7 @@ The password needed to create/revoke authorization tokens. If `--api-auth-requir
 
 If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../../apis/avalanchego/apis/health.md) for more information.
 
-#### `--index-enabled` (boolean): {#index-enabled}
+#### `--index-enabled` (boolean):
 
 If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../../apis/avalanchego/apis/index-api.md) for more information.
 

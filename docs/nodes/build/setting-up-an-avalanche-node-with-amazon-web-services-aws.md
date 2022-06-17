@@ -17,7 +17,7 @@ To get started, you'll need:
 
 This tutorial assumes your local machine has a Unix style terminal. If you're on Windows, you'll have to adapt some of the commands used here.
 
-## Log Into AWS {#ff31}
+## Log Into AWS
 
 Signing up for AWS is outside the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
@@ -43,7 +43,7 @@ Click `Create key pair`. You should see a success message, and the key file shou
 
 ![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
 
-## Create a Security Group {#f8df}
+## Create a Security Group
 
 An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
 
@@ -63,7 +63,7 @@ Add a tag to the new security group with key `Name` and value`Avalanche Security
 
 Click `Create security group`. You should see the new security group in the list of security groups.
 
-## Launch an EC2 Instance {#0682}
+## Launch an EC2 Instance
 
 Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
 
@@ -87,13 +87,13 @@ Click the **Next: Configure Instance Details** button in the bottom right-hand c
 
 The instance details can stay as their defaults.
 
-### Optional: Using Reserved Instances {#c99a}
+### Optional: Using Reserved Instances
 
 By default, you will be charged hourly for running your EC2 instance. For a long term usage that is not optimal.
 
 You could save money by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
 
-### Add Storage, Tags, Security Group {#dbf5}
+### Add Storage, Tags, Security Group
 
 Click the **Next: Add Storage** button in the bottom right corner of the screen.
 
@@ -143,7 +143,7 @@ Select the instance you just created. This will associate the new Elastic IP wit
 
 ![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo {#829e}
+## Set Up AvalancheGo
 
 Go back to the EC2 Dashboard and select `Running Instances`.
 
@@ -266,7 +266,7 @@ scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 
 Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet (like an external hard drive.)
 
-### Upgrading Your Node {#9ac7}
+### Upgrading Your Node
 
 AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
 
