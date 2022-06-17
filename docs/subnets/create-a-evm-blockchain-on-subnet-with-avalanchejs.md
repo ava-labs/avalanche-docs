@@ -339,7 +339,6 @@ The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is 
 
 ```javascript
 const args = require("yargs").argv;
-const SubnetAuth = require("avalanche").platformvm.SubnetAuth;
 const {
   platform,
   info,
@@ -358,10 +357,12 @@ async function addSubnetValidator() {
     subnetID,
   } = args;
 
+  const pAddresses = pKeyChain.getAddresses();
+
   // Creating subnet auth
-  const addressIndex = Buffer.alloc(4);
-  addressIndex.writeUIntBE(0x0, 0, 4);
-  const subnetAuth = new SubnetAuth([addressIndex]);
+  const subnetAuth = [
+    [0, pAddresses[0]]
+  ]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildAddSubnetValidatorTx(
@@ -373,6 +374,8 @@ async function addSubnetValidator() {
     new BN(endTime), // timestamp after which validation ends
     new BN(weight), // weight of the validator
     subnetID, // subnet id for validation
+    undefined, // memo
+    undefined, // asOf
     subnetAuth // subnet owners' address indices signing this tx
   );
 
@@ -425,7 +428,6 @@ Let's import the dependencies by using the following snippet. We are importing `
 
 ```javascript
 const args = require("yargs").argv;
-const SubnetAuth = require("avalanche").platformvm.SubnetAuth;
 
 const genesisJSON = require("./genesis.json");
 const {
@@ -467,10 +469,12 @@ async function createBlockchain() {
   // Getting CB58 encoded bytes of genesis
   genesisBytes = JSON.stringify(genesisJSON);
 
+  const pAddresses = pKeyChain.getAddresses();
+
   // Creating subnet auth
-  const addressIndex = Buffer.alloc(4);
-  addressIndex.writeUIntBE(0x0, 0, 4);
-  const subnetAuth = new SubnetAuth([addressIndex]);
+  const subnetAuth = [
+    [0, pAddresses[0]]
+  ]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildCreateChainTx(
@@ -482,6 +486,8 @@ async function createBlockchain() {
     vmName, // Name of the VM this chain is referencing
     [], // Array of feature extensions
     genesisBytes, // Stringified geneis JSON file
+    undefined, // memo
+    undefined, // asOf
     subnetAuth // subnet owners' address indices signing this tx
   );
 
