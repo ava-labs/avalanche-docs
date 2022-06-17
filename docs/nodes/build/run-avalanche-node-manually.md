@@ -11,12 +11,6 @@ In this tutorial, we will:
 
 - Install and run an Avalanche node
 - Connect to Avalanche
-- Send AVAX
-- Add your node to the validator set
-
-:::caution
-If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
-:::
 
 :::info
 If you're interested in using a third-party service to host your node or run a validator, [check out the options](../README.md#build).
@@ -26,6 +20,8 @@ This tutorial is primarily geared toward developers and people interested in how
 
 ## Requirements
 
+### Computer Hardware and OS
+
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 - CPU: Equivalent of 8 AWS vCPU
@@ -33,9 +29,27 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 - Storage: 1 TB
 - OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
-## Run an Avalanche Node and Send Funds
+### Networking
 
-Let’s install AvalancheGo, the Go implementation of an Avalanche node, and connect to the Avalanche Public Testnet.
+To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+
+#### Running on a Cloud Provider
+
+If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already.
+
+#### Running on a Home Connection
+
+If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. You will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
+
+As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found (like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) ), and your service provider support might help too.
+
+:::warning
+Please note that a fully connected Avalanche node maintains and communicates over a couple of thousand of live TCP connections. For some low-powered and older home routers that might be too much to handle. If that is the case you may experience lagging on other computers connected to the same router, node getting benched, failing to sync and similar issues.
+:::
+
+## Run an Avalanche Node
+
+Let’s install AvalancheGo, the GoLang implementation of an Avalanche node, and connect to the Avalanche primary network.
 
 ### Download AvalancheGo
 
@@ -114,6 +128,8 @@ If you are using the pre-built binaries on Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
+By default (without specifying any parameters), this node will connect to the Mainnet which may take much longer time to finish bootstrapping. See [this](#connect-to-fuji-testnet) for connecting to Fuji Testnet.
+
 When the node starts, it has to bootstrap (catch up with the rest of the network). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
 ```text
@@ -141,16 +157,16 @@ Your node is running and connected now. If you want to use your node as a valida
 
 You can use `Ctrl + C` to kill the node.
 
-If you want to experiment and play with your node, read on.
-
 To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` (e.g. `./build/avalanchego --http-host=`)
 
 #### Connect to Fuji Testnet
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax.network/)
+To connect to the Fuji Testnet instead of the Mainnet, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax.network/)
 
-### What Next?
+## What Next?
 
 Now that you've launched your Avalanche node, what should you do next?
 
 Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](../validate/add-a-validator.md) to take it a step further.
+
+Also check out the [Maintain](../README.md#maintain) section to learn about how to maintain and customize your node to fit your needs.

@@ -2,7 +2,9 @@
 
 ## Overview
 
-For performance reasons, we are working to deprecate `cb58` encoding in favor of `hex`. To prepare for this change, you can now specify `hex` for the `encoding` parameter in places where `cb58` is used explicitly or by default. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos)
+We are working to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changes the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
+
+To prepare for this change, you can now specify `hex` (or `json` if supported) for the `encoding` parameter in places where `cb58` is used **by default** or explicitly. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
 
 - `encoding` sets the format for the returned UTXOs.
 
@@ -47,11 +49,15 @@ This gives response where utxos will be in `hex` format:
 
 You can also use `json` if the api supports it.
 
-This set of changes only deprecates the cb58 encoding parameter over APIs. Transaction IDs (`txIDs`), `chainIDs`, and `subnetIDs` which are represented using cb58 are unmodified.
-
 ## Affected APIs
 
-Following APIs are affected with this change:
+Following APIs are affected with this change.
+
+:::tip
+
+When going through this API list, please make sure to check the omitted/default encoding parameter. Before the new release of `cb58` deprecation is out, by default, `cb58` is used for the encoding parameter if not specified in these APIs. You will need to add `"encoding": "hex"` (or `"encoding": "json"` if supported) explicitly and update your code to handle the response accordingly.
+
+:::
 
 ### X-Chain API
 
