@@ -12,11 +12,11 @@ import {
   Tx,
   InitialStates,
   SECPMintOutput,
-  SECPTransferOutput
+  SECPTransferOutput,
 } from "avalanche/dist/apis/avm"
 import {
   PrivateKeyPrefix,
-  DefaultLocalGenesisPrivateKey
+  DefaultLocalGenesisPrivateKey,
 } from "avalanche/dist/utils"
 
 const ip: string = "localhost"
@@ -87,7 +87,7 @@ We want to mint an asset with 507 units held by the managed key. This sets up th
 ```ts
 // Create outputs for the asset's initial state
 const amount: BN = new BN(507)
-const vcapSecpOutput: SECPTransferOutput  = new SECPTransferOutput(
+const vcapSecpOutput: SECPTransferOutput = new SECPTransferOutput(
   amount,
   xAddresses,
   locktime,
@@ -142,7 +142,7 @@ const txid: string = await xchain.issueTx(tx)
 console.log(`Success! TXID: ${txid}`)
 ```
 
-## Get the status of the transaction {#get-the-status-of-the-transaction}
+## Get the status of the transaction
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the transaction ID through the AVM API.
 
@@ -153,11 +153,11 @@ const status: string = await xchain.getTxStatus(id)
 
 The statuses can be one of "Accepted", "Processing", "Unknown", and "Rejected":
 
-* "Accepted" indicates that the transaction has been accepted as valid by the network and executed
-* "Processing" indicates that the transaction is being voted on.
-* "Unknown" indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* "Rejected" indicates the node knows about the transaction, but it conflicted with an accepted transaction
+- "Accepted" indicates that the transaction has been accepted as valid by the network and executed
+- "Processing" indicates that the transaction is being voted on.
+- "Unknown" indicates that node knows nothing about the transaction, indicating the node doesn’t have it
+- "Rejected" indicates the node knows about the transaction, but it conflicted with an accepted transaction
 
-## Identifying the newly created asset {#identifying-the-newly-created-asset}
+## Identifying the newly created asset
 
 The X-Chain uses the transaction ID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the "AssetID" of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.

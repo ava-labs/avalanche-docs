@@ -56,19 +56,19 @@ The minimum amount that a validator must stake is 2,000 AVAX.
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 :::
 
-### Running a Validator {#running-a-validator}
+### Running a Validator
 
 If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
 When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
 
-#### Allow API calls {#allow-api-calls}
+#### Allow API calls
 
 To make API calls to your node from remote machines, allow traffic on the API port (`9650` by default), and run your node with argument `--http-host=`
 
 You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines (e.g., your personal computer.)
 
-#### Why is my uptime low? {#why-is-my-uptime-low}
+#### Why is my uptime low?
 
 Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to receive a staking reward.
 
@@ -76,13 +76,13 @@ You can also see the connections a node has by calling `info.peers`, as well as 
 
 If your node's uptime is low, make sure you're setting config option `--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP traffic on port 9651.
 
-#### Secret Management {#secret-management}
+#### Secret Management
 
 The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file (and `staker.crt`) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
 
 You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in "cold" addresses whose private key is not on any computer.
 
-#### Monitoring {#monitoring}
+#### Monitoring
 
 Follow this [tutorial](../maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
 
@@ -109,7 +109,7 @@ The minimum amount that a delegator must delegate is 25 AVAX.
 Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network).
 :::
 
-### Delegator rewards {#delegator-rewards}
+### Delegator rewards
 
 If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
