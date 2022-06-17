@@ -1826,10 +1826,10 @@ A Block is a collection of transactions. It's the linear blockchain equivalent o
 
 A Block contains a `ParentID`, `Height`, `Timestamp`, `TransactionCount`, `Transactions`.
 
-* **`ParentID`** is the ID of this block's parents.
-* **`Height`** is the maximum height of a parent block plus 1.
-* **`TransactionCount`** is the total number of transactions in this block.
-* **`Transactions`** are the transactions in this block.
+- **`ParentID`** is the ID of this block's parents.
+- **`Height`** is the maximum height of a parent block plus 1.
+- **`TransactionCount`** is the total number of transactions in this block.
+- **`Transactions`** are the transactions in this block.
 
 ### Gantt Block Specification
 
@@ -1863,16 +1863,16 @@ message Block {
 
 Let’s make a Block:
 
-* **`CodecID`**: `0x0000`
-* **`ParentID`**: `0xf25d0d4446d92ea2b63d2fc07126f461a8760d86f5b12a88edc57e8495418699`
-* **`Height`**: `0`
-* **`Transactions`**: `[Example CreateSubnetTx as defined above]`
+- **`CodecID`**: `0x0000`
+- **`ParentID`**: `0xf25d0d4446d92ea2b63d2fc07126f461a8760d86f5b12a88edc57e8495418699`
+- **`Height`**: `0`
+- **`Transactions`**: `[Example CreateSubnetTx as defined above]`
 
 ```text
 [
     CodecID          <- 0x0000
     ChainID          <- 0xf25d0d4446d92ea2b63d2fc07126f461a8760d86f5b12a88edc57e8495418699
-    Height           <- 0x0000000000000000 
+    Height           <- 0x0000000000000000
     Transactions     <- [Example CreateSubnetTx defined above]
 ]
 =
@@ -1882,9 +1882,9 @@ Let’s make a Block:
    // chain id
    f2 5d 0d 44 46 d9 2e a2 b6 3d 2f c0 71 26 f4 61 a8 76 0d 86 f5 b1 2a 88 ed c5 7e 84 95 41 86 99
    // height
-   00 00 00 00 00 00 00 00 
+   00 00 00 00 00 00 00 00
    // num txs
-   00 00 00 01 
+   00 00 00 01
    // create subnet tx from above
    [omitted for brevity]
 ]
