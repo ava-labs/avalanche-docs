@@ -52,10 +52,10 @@ This command generates static content into the `build` directory and can be serv
 
 **Please make sure that you run this command to see if there is any error in building the package, and fix them before pushing your changes.**
 
+### Format
+
+We strongly recommend [Visual Studio Code](https://visualstudio.microsoft.com/) with [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) whose configuration file can be found [here](./.prettierrc).
+
 ## Search
 
 Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
-
-## Format
-
-We strongly recommend [Visual Studio Code](https://visualstudio.microsoft.com/) with [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) whose configuration file can be found [here](./.prettierrc).
