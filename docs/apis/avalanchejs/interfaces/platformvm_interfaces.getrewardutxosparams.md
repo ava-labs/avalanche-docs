@@ -19,7 +19,7 @@
 
 • **encoding**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:23](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L23)*
+*Defined in [src/apis/platformvm/interfaces.ts:23](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L23)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **txID**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:22](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L22)*
+*Defined in [src/apis/platformvm/interfaces.ts:22](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L22)*

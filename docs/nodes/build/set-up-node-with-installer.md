@@ -2,7 +2,6 @@
 sidebar_position: 1
 ---
 
-
 # Run an Avalanche Node using the Install Script
 
 We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required. Script can also be used for unattended, [automated installs](#unattended-installation).
@@ -11,18 +10,18 @@ We have a shell (bash) script that installs AvalancheGo on your computer. This s
 
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware with the following mimimum specifications. Note that as network usage increases, hardware requirements may change.
 
-* CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 512 GiB
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
-* Network: sustained 5Mbps up/down bandwidth
+- CPU: Equivalent of 8 AWS vCPU
+- RAM: 16 GiB
+- Storage: 1 TB
+- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- Network: sustained 5Mbps up/down bandwidth
 
 Please note that HW requirements shall scale with the amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
 
 This install script assumes:
 
-* AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges (can run `sudo`)
+- AvalancheGo is not running and not already installed as a service
+- User running the script has superuser privileges (can run `sudo`)
 
 ### Environment considerations
 
@@ -126,7 +125,7 @@ Next, you have to set up RPC port access for your node. Those are used to query 
 Do you want the RPC port to be accessible to any or only local network interface? [any, local]:
 ```
 
-If you're ok with sending RPC requests only from the node machine itself, enter `local` at the prompt. If you want to be able to send RPC requests to your node from a remote machine, enter `any`. Please note that if you choose to allow RPC requests on any network interface you will need to set up a firewall to only let through RPC requests from known IP addresses, otherwise your node will be accessible to anyone and  might be overwhelmed by RPC calls from malicious actors! If you do not plan to use your node to send RPC calls, enter `local` for increased node security.
+If you're ok with sending RPC requests only from the node machine itself, enter `local` at the prompt. If you want to be able to send RPC requests to your node from a remote machine, enter `any`. Please note that if you choose to allow RPC requests on any network interface you will need to set up a firewall to only let through RPC requests from known IP addresses, otherwise your node will be accessible to anyone and might be overwhelmed by RPC calls from malicious actors! If you do not plan to use your node to send RPC calls, enter `local` for increased node security.
 
 The script will then continue with system service creation and finish with starting the service:
 
@@ -258,14 +257,14 @@ Done!
 
 Without any additional arguments, the script installs the node in a most common configuration. But the script also enables various advanced options to be configured, via the command line prompts. Following is a list of advanced options and their usage:
 
-* `admin` - [Admin API](../../apis/avalanchego/apis/admin.md) will be enabled
-* `archival` - disables database pruning and preserves the complete transaction history
-* `db-dir` - use to provide the full path to the location where the database will be stored
-* `fuji` - node will connect to Fuji testnet instead of the mainnet
-* `index` - [Index API](../../apis/avalanchego/apis/index-api.md) will be enabled
-* `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be used as the public IP node will advertise to the network
-* `rpc` - use `any` or `local` argument to select any or local network interface to be used to listen for RPC calls
-* `version` - install a specific node version, instead of the latest. See [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
+- `admin` - [Admin API](../../apis/avalanchego/apis/admin.md) will be enabled
+- `archival` - disables database pruning and preserves the complete transaction history
+- `db-dir` - use to provide the full path to the location where the database will be stored
+- `fuji` - node will connect to Fuji testnet instead of the mainnet
+- `index` - [Index API](../../apis/avalanchego/apis/index-api.md) will be enabled
+- `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be used as the public IP node will advertise to the network
+- `rpc` - use `any` or `local` argument to select any or local network interface to be used to listen for RPC calls
+- `version` - install a specific node version, instead of the latest. See [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
 
 Please note that configuring `index` and `archival` options on an existing node will require a fresh bootstrap to recreate the database.
 
@@ -396,9 +395,8 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../apis/avalanchego/apis/issuing-api-calls.md), [stake your tokens](../validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](../maintain/setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../apis/avalanchego/postman-avalanche-collection.md) to more easily issue commands to your node.
+Now you can [interact with your node](../../apis/avalanchego/apis/issuing-api-calls.md), [stake your tokens](../validate/staking.md), or level up your installation by setting up [node monitoring](../maintain/setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../apis/avalanchego/postman-avalanche-collection.md) to more easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back up](../maintain/node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
-

@@ -42,23 +42,16 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: N/A
 
-#### **[Deprecated] Local Testnet (AVASH) Settings:** [(Avash Tutorial)](../../quickstart/references/avash.md)
-
-* **Network Name**: Avalanche Local
-* **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
-* **ChainID**: `43112`
-* **Symbol**: `AVAX`
-* **Explorer**: N/A
 
 ## Step 2: Funding your C-Chain address
 
 ### **Using Avalanche Wallet**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../../quickstart/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). Wallet can be used on test and local networks, too.
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-Chain address. Faucet will automatically know that it needs to send the test AVAX to C-Chain. Click the captcha checkbox and select 'Request AVAX' button. Your address will receive test AVAX in a few seconds.
+For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your C-Chain address. Faucet will automatically know that it needs to send the test AVAX to C-Chain. Click the captcha checkbox and select 'Request AVAX' button. Your address will receive test AVAX in a few seconds.
 
 ### Funding on local testnet
 

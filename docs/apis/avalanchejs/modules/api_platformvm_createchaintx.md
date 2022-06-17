@@ -18,4 +18,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/createchaintx.ts:22](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/createchaintx.ts#L22)*
+*Defined in [src/apis/platformvm/createchaintx.ts:22](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/createchaintx.ts#L22)*

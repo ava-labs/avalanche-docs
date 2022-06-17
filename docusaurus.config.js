@@ -20,6 +20,7 @@ const config = {
   favicon: 'img/favicon.png',
   organizationName: 'ava-labs', // Usually your GitHub org/user name.
   projectName: 'avalanche-docs', // Usually your repo name.
+  trailingSlash: false,
 
   scripts: [
     'scripts/intercom-app.js',
@@ -55,7 +56,8 @@ const config = {
       metadata: [
         {name: 'twitter:card', content: 'summary_large_image'},
         {name: 'twitter:description', content: 'Avalanche is the fastest smart contracts platform in the blockchain industry, as measured by time-to-finality, and has the most validators securing its activity of any proof-of-stake protocol.'},
-        {name: 'twitter:title', content:'Documentation and Tutorials for Avalanche'}
+        {name: 'twitter:title', content:'Developer Documentation and Tutorials for Avalanche'},
+        {name: 'keywords', content: 'Developer Documentation and Tutorials for Avalanche'}
       ],
       navbar: {
         title: '',
@@ -100,6 +102,12 @@ const config = {
             position: 'left',
             sidebarId: 'nodes',
             label: 'Nodes',
+          }, 
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'specs',
+            label: 'Specs',
           }, 
           {
             type: 'docSidebar',

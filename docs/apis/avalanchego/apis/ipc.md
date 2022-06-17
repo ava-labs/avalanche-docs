@@ -1,12 +1,19 @@
 ---
 sidebar_position: 12
-description: The IPC API allows users to create UNIX domain sockets for blockchains to publish to. Find out more information here. 
+description: The IPC API allows users to create UNIX domain sockets for blockchains to publish to. Find out more information here.
 ---
+
 # IPC API
 
 The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
 
 A node will only expose this API if it is started with [config flag](../../../nodes/maintain/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
+
+:::info
+
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+
+:::
 
 ## IPC Message Format
 
@@ -45,9 +52,9 @@ Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
-* `blockchainID` is the blockchain that will publish accepted vertices.
-* `consensusURL` is the path of the Unix domain socket the vertices are published to.
-* `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+- `blockchainID` is the blockchain that will publish accepted vertices.
+- `consensusURL` is the path of the Unix domain socket the vertices are published to.
+- `decisionsURL` is the path of the Unix domain socket the transactions are published to.
 
 #### **Example Call**
 
@@ -66,12 +73,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "result":{
-        "decisionsURL":"/tmp/1-11111111111111111111111111111111LpoYY-consensus",
-        "consensusURL":"/tmp/1-11111111111111111111111111111111LpoYY-decisions"
-    },
-    "id":1
+  "jsonrpc": "2.0",
+  "result": {
+    "decisionsURL": "/tmp/1-11111111111111111111111111111111LpoYY-consensus",
+    "consensusURL": "/tmp/1-11111111111111111111111111111111LpoYY-decisions"
+  },
+  "id": 1
 }
 ```
 
@@ -85,7 +92,7 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
-* `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
+- `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
 
 #### **Example Call**
 
@@ -104,11 +111,10 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "result":{
-        "success":true
-    },
-    "id":1
+  "jsonrpc": "2.0",
+  "result": {
+    "success": true
+  },
+  "id": 1
 }
 ```
-

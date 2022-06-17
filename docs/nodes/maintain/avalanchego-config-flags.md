@@ -21,6 +21,12 @@ Example JSON config file:
 }
 ```
 
+:::tip
+
+[Install Script](../build/set-up-node-with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you would need to create it manually if needed.
+
+:::
+
 #### `--config-file-content` (string):
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
@@ -73,7 +79,7 @@ Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. T
 
 #### `--http-shutdown-timeout` (duration):
 
-Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
+Maximum duration to wait for existing connections to complete during node shutdown. Defaults to `10s`.
 
 ## Assertions
 
@@ -89,11 +95,11 @@ Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
 
 #### `--bootstrap-ids` (string):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
+Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
 
 #### `--bootstrap-ips` (string):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
+Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
 
 #### `--bootstrap-retry-enabled` (boolean):
 
@@ -110,6 +116,16 @@ Max number of containers in an Ancestors message sent by this node. Defaults to 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+
+## State Syncing
+
+#### `--state-sync-ids` (string):
+
+State sync IDs is a comma-separated list of validator IDs. The specified validators will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--state-sync-ips`. The default value is empty, which results in all validators being sampled.
+
+#### `--state-sync-ips` (string):
+
+State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be the same with the number of given `--state-sync-ids`.
 
 ## Chain Configs
 
@@ -278,9 +294,9 @@ When specifying a log level note that all logs with the specified priority or hi
 
 The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
 
-#### `--log-display-highlight` (string, `{auto, plain, colors}`):
+#### `--log-format` (string, `{auto, plain, colors, json}`):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+The structure of log format. Defaults to `auto` which formats terminal-like logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
 
 #### `--log-dir` (string, file path):
 
@@ -289,6 +305,22 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 #### `--log-disable-display-plugin-logs` (boolean):
 
 Disables displaying plugin logs in stdout. Defaults to `false`.
+
+#### `--log-rotater-max-size` (uint):
+
+The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
+
+#### `--log-rotater-max-files` (uint):
+
+The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
+
+#### `--log-rotater-max-age` (uint):
+
+The maximum number of days to retain old log files based on the timestamp encoded in their filename. 0 means retain all old log files. Defaults to `0`.
+
+#### `--log-rotater-compress-enabled` (boolean):
+
+Enables the compression of rotated log files through gzip. Defaults to `false`.
 
 ## Network ID
 
@@ -308,13 +340,13 @@ The identity of the network the node should connect to. Can be one of:
 
 Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
 
-#### `--dynamic-public-ip` (string):
+#### `--public-ip-resolution-frequency` (duration):
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
 
-`--dynamic-update-duration` (duration):
+#### `--public-ip-resolution-service` (string):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+Only acceptable values are `ifconfigco`, `opendns` or `ifconfigme`. When provided, the node will use that service to periodically resolve/update its public IP.
 
 ## Signature Verification
 
@@ -366,7 +398,9 @@ Comma separated list of subnet IDs that this node would validate if added to. De
 
 ### Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
+
+Full reference for all configuration options for a subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
 
 #### `--subnet-config-dir` (string):
 
@@ -385,48 +419,15 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 }
 ```
 
+:::tip
+
+By default, none of these directories and/or files exist. You would need to create them manually if needed.
+
+:::
+
 #### `--subnet-config-content` (string):
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
-
-#### Parameters
-
-##### `validatorOnly` (bool):
-
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../../subnets/create-a-subnet.md#private-subnets)
-
-##### Consensus Parameters
-
-Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
-
-| CLI Key                          | JSON Key              |
-| :------------------------------- | :-------------------- |
-| --snow-sample-size               | k                     |
-| --snow-quorum-size               | alpha                 |
-| --snow-virtuous-commit-threshold | betaVirtuous          |
-| --snow-rogue-commit-threshold    | betaRogue             |
-| --snow-concurrent-repolls        | concurrentRepolls     |
-| --snow-optimal-processing        | optimalProcessing     |
-| --snow-max-processing            | maxOutstandingItems   |
-| --snow-max-time-processing       | maxItemProcessingTime |
-| --snow-avalanche-batch-size      | batchSize             |
-| --snow-avalanche-num-parents     | parentSize            |
-
-##### Gossip Configs
-
-It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
-
-| CLI Key                                                 | JSON Key                               |
-| :------------------------------------------------------ | :------------------------------------- |
-| --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
-| --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
-| --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |
-| --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
-| --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
-| --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
-| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
-| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
-| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a subnet.
 
 ## Version
 
@@ -462,7 +463,7 @@ Number of non-validators to gossip to when gossiping accepted frontier. Defaults
 
 #### `--consensus-accepted-frontier-gossip-peer-size` (uint):
 
-Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
+Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
 #### `--consensus-on-accept-gossip-validator-size` (uint):
 
@@ -474,7 +475,7 @@ Number of non-validators to gossip to each accepted container to. Defaults to `0
 
 #### `--consensus-on-accept-gossip-peer-size` (uint):
 
-Number of peers to gossip to each accepted container to. Defaults to `20`.
+Number of peers to gossip to each accepted container to. Defaults to `10`.
 
 ### Benchlist
 
@@ -498,12 +499,17 @@ Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of e
 
 ```text
 build-dir
-|_avalanchego
-    |_plugins
-      |_evm
+|_avalanchego (note: this is the AvalancheGo binary, not a directory)
+|_plugins
+  |_evm
 ```
 
 ### Consensus Parameters
+
+:::note
+Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
+
+:::
 
 #### `--consensus-gossip-frequency` (duration):
 
@@ -513,61 +519,69 @@ Time between gossiping accepted frontiers. Defaults to `10s`.
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
 
-#### `--creation-tx-fee` (int):
+#### `--create-asset-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX (.001 AVAX) per transaction.
+Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
+
+#### `--create-subnet-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+
+#### `--create-blockchain-tx-fee` (int):
+
+Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--min-delegator-stake` (int):
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
 
-Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
+Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net. This can only be changed on a local network.
 
 #### `--min-delegation-fee` (int):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet.
+The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration):
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks.)
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on a local network.
 
 #### `--min-validator-stake` (int):
 
-The minimum stake, in nAVAX, required to validate the Primary Network.
+The minimum stake, in nAVAX, required to validate the Primary Network. This can only be changed on a local network.
 
 Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
 
 #### `--max-stake-duration` (duration):
 
-The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet.
+The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet. This can only be changed on a local network.
 
 #### `--max-validator-stake` (int):
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator.
+The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator. This can only be changed on a local network.
 
 #### `--stake-minting-period` (duration):
 
-Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days).
+Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days). This can only be changed on a local network.
 
 #### `--stake-max-consumption-rate` (uint):
 
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years.
+The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. This can only be changed on a local network.
 
 #### `--stake-min-consumption-rate` (uint):
 
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years.
+The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. This can only be changed on a local network.
 
 #### `--stake-supply-cap` (uint):
 
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX.
+The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
 
 #### `--tx-fee` (int):
 
-The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1,000,000` nAVAX per transaction.
+The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction.
 
 #### `--uptime-requirement` (float):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.8`.
+Fraction of time a validator must be online to receive rewards. Defaults to `0.8`. This can only be changed on a local network.
 
 ### Snow Parameters
 
@@ -599,17 +613,25 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
 
-### `snow-optimal-processing` (int):
+#### `snow-optimal-processing` (int):
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-### `snow-max-processing` (int):
+#### `snow-max-processing` (int):
 
 Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
 
-### `snow-max-time-processing` (duration):
+#### `snow-max-time-processing` (duration):
 
 Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
+
+#### `snow-mixed-query-num-push-vdr` (uint):
+
+If this node is a validator, when a container is inserted into consensus, send a Push Query to this many validators and a Pull Query to the others. Must be <= k. Defaults to `10`.
+
+#### `snow-mixed-query-num-push-non-vdr` (uint):
+
+fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
 
 ### Continuous Profiling
 
@@ -653,7 +675,7 @@ If true, compress certain messages sent to peers to reduce bandwidth usage.
 
 #### `--network-initial-timeout` (duration):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
 
 #### `--network-initial-reconnect-delay` (duration):
 
@@ -665,11 +687,11 @@ Maximum delay duration must be waited before attempting to reconnect a peer. Def
 
 #### `--network-minimum-timeout` (duration):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
+Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
 
 #### `--network-maximum-timeout` (duration):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
 
 #### `--network-maximum-inbound-timeout` (duration):
 
@@ -731,41 +753,85 @@ Timeout while dialing a peer.
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
-#### `--throttler-inbound-bandwidth-refill-rate` (uint):
+#### CPU based
+
+Rate-limiting based on how much CPU usage a peer causes.
+
+##### `cpu-tracker-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to `15s`.
+
+##### `throttler-inbound-cpu-validator-alloc` (float):
+
+Number of CPU allocated for use by validators. Value should be in range (0, total core count].
+Defaults to half of the number of CPUs on the machine.
+
+##### `--throttler-inbound-cpu-at-large-alloc` (float):
+
+Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
+Defaults to half of the number of CPUs on the machine.
+See also `--throttler-inbound-cpu-node-max-at-large-portion`.
+
+##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
+
+The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+
+##### `throttler-inbound-cpu-max-recheck-delay` (duration):
+
+In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level. Defaults to `5s`.
+
+#### Bandwidth based
+
+Rate-limiting based on the bandwidth a peer uses.
+
+##### `--throttler-inbound-bandwidth-refill-rate` (uint):
 
 Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
 
-#### `--throttler-inbound-bandwidth-max-burst-size` (uint):
+##### `--throttler-inbound-bandwidth-max-burst-size` (uint):
 
 Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
 
-#### `--throttler-inbound-at-large-alloc-size` (uint):
+#### Message size based
+
+Rate-limiting based on the total size, in bytes, of unprocessed messages.
+
+##### `--throttler-inbound-at-large-alloc-size` (uint):
 
 Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
 
-#### `--throttler-inbound-validator-alloc-size` (uint):
+##### `--throttler-inbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-inbound-node-max-at-large-bytes` (uint):
+##### `--throttler-inbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` (2 MiB).
 
-#### `--throttler-inbound-node-max-processing-msgs` (uint):
+#### Message based
+
+Rate-limiting based on the number of unprocessed messages.
+
+##### `--throttler-inbound-node-max-processing-msgs` (uint):
 
 Node will stop reading messages from a peer when it is processing this many messages from the peer.
 Will resume reading messages from the peer when it is processing less than this many messages.
 Defaults to `1024`.
 
-#### `--throttler-outbound-at-large-alloc-size` (uint):
+#### Outbound
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` (6 MiB).
+Rate-limiting for outbound messages.
 
-#### `--throttler-outbound-validator-alloc-size` (uint):
+##### `--throttler-outbound-at-large-alloc-size` (uint):
+
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+
+##### `--throttler-outbound-validator-alloc-size` (uint):
 
 Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
 
-#### `--throttler-outbound-node-max-at-large-bytes` (uint):
+##### `--throttler-outbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
 
@@ -793,15 +859,15 @@ Defaults to `1m`.
 
 #### `--network-peer-list-num-validator-ips` (int):
 
-Defaults to `20`.
+Defaults to `15`.
 
 #### `--network-peer-list-validator-gossip-size` (int):
 
-Defaults to `25`.
+Defaults to `20`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int):
 
-Defaults to `25`.
+Defaults to `10`.
 
 #### ` --network-peer-read-buffer-size` (int):
 
@@ -810,6 +876,32 @@ Size of the buffer that peer messages are read into (there is one buffer per pee
 #### `--network-peer-write-buffer-size` (int):
 
 Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+
+### Resource Usage Tracking
+
+#### `--system-tracker-frequency` (duration):
+
+Frequency to check the real system usage of tracked processes. More frequent checks --> usage metrics are more accurate, but more expensive to track. Defaults to `500ms`.
+
+#### `--system-tracker-processing-halflife` (duration):
+
+Halflife to use for the processing requests tracker. Larger halflife --> usage metrics change more slowly. Defaults to `15s`.
+
+#### `--system-tracker-cpu-halflife` (duration):
+
+Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics change more slowly. Defaults to `15s`.
+
+#### `--system-tracker-disk-halflife` (duration):
+
+Halflife to use for the disk tracker. Larger halflife --> disk usage metrics change more slowly. Defaults to `1m`.
+
+#### `--system-tracker-disk-required-available-space` (uint):
+
+"Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
+
+#### `--system-tracker-disk-warning-threshold-available-space` (uint):
+
+Warning threshold for the number of available bytes on disk, under which the node will be considered unhealthy. Must be >= `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1 GiB).
 
 ### Plugin Mode
 

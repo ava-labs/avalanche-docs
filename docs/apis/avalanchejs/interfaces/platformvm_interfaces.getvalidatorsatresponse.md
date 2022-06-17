@@ -18,4 +18,4 @@
 
 • **validators**: *object*
 
-*Defined in [src/apis/platformvm/interfaces.ts:38](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L38)*
+*Defined in [src/apis/platformvm/interfaces.ts:38](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L38)*

@@ -11,9 +11,9 @@ This tutorial will guide you through setting up an Avalanche node on [Amazon Web
 
 To get started, you'll need:
 
-* An AWS account
-* A terminal with which to SSH into your AWS machine
-* A place to securely store and back up files
+- An AWS account
+- A terminal with which to SSH into your AWS machine
+- A place to securely store and back up files
 
 This tutorial assumes your local machine has a Unix style terminal. If you're on Windows, you'll have to adapt some of the commands used here.
 
@@ -25,15 +25,15 @@ It is _highly_ recommended that you set up Multi-Factor Authentication on your A
 
 Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
 
-![AWS Management Console.png](/img/image(35).png)
+![AWS Management Console.png](</img/image(35).png>)
 
 To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
 
-![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](/img/image(38).png)
+![Select "Key Pairs" under the "Network & Security" drop-down.](</img/image(38).png>)
 
 Select **Create key pair** to launch the key pair creation wizard.
 
-![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
+![Select "Create key pair."](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
 Name your key `avalanche`. If your local machine has MacOS or Linux, select the `pem` file format. If it's Windows, use the `ppk` file format. Optionally, you can add tags for the key pair to assist with tracking.
 
@@ -47,11 +47,11 @@ Click `Create key pair`. You should see a success message, and the key file shou
 
 An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
 
-![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
+![Select "Security Groups" underneath "Network & Security."](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
 This opens the Security Groups panel. Click **Create security group** in the top right of the Security Groups panel.
 
-![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
+![Select "Create security group."](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
 You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. (Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
 
@@ -67,7 +67,7 @@ Click `Create security group`. You should see the new security group in the list
 
 Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
 
-![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
+![Select "Launch Instance."](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
 Select **Ubuntu 20.04 LTS (HVM), SSD Volume Type** for the operating system.
 
@@ -87,25 +87,25 @@ Click the **Next: Configure Instance Details** button in the bottom right-hand c
 
 The instance details can stay as their defaults.
 
-### Optional: Using Spot Instances or Reserved Instances {#c99a}
+### Optional: Using Reserved Instances {#c99a}
 
-By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
+By default, you will be charged hourly for running your EC2 instance. For a long term usage that is not optimal.
 
-The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
-
-The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
+You could save money by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
 
 ### Add Storage, Tags, Security Group {#dbf5}
 
 Click the **Next: Add Storage** button in the bottom right corner of the screen.
 
-You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
+You need to add space to your instance's disk. You should start with at least 700GB of disk space. Although upgrades to reduce disk usage are always in development, on average the database will continually grow, so you need to constantly monitor disk usage on the node and increase disk space if needed.
 
-![Select 100 GB for the disk size.](/img/add-storage.png)
+Note that the image below shows 100GB as disk size, which was appropriate at the time the screenshot was taken. You should check the current [recommended disk space size](https://github.com/ava-labs/avalanchego#installation) before entering the actual value here.
+
+![Select disk size.](/img/add-storage.png)
 
 Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
 
-![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
+![Add a tag with key "Name" and value "My Avalanche Node."](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
 Now assign the security group created earlier to the instance. Choose **Select an existing security group** and choose the security group created earlier.
 
@@ -125,11 +125,11 @@ You should see a new pop up that confirms the instance is launching!
 
 By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
 
-![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
+![Select "Elastic IPs" under "Network & Security."](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
 Select **Allocate Elastic IP address**.
 
-![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
+![Select "Allocate Elastic IP address."](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
 Select the region your instance is running in, and choose to use Amazon’s pool of IPv4 addresses. Click **Allocate**.
 
@@ -137,7 +137,7 @@ Select the region your instance is running in, and choose to use Amazon’s pool
 
 Select the Elastic IP you just created from the Elastic IP manager. From the **Actions** drop-down, choose **Associate Elastic IP address**.
 
-![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
+![Under "Actions", select "Associate Elastic IP address."](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
 Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
 
@@ -183,7 +183,7 @@ If the permissions are **not** set correctly, you will see the following error.
 
 You are now logged into the EC2 instance.
 
-![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
+![You're on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
 If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
 
@@ -276,16 +276,13 @@ AvalancheGo is an ongoing project and there are regular version upgrades. Most u
 
 Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
 
-
 ## Increase Volume Size
 
 If you need to increase the volume size, follow these instructions from AWS:
 
-* [Request modifications to your EBS volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html)
-* [Extend a Linux file system after resizing a volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
-
+- [Request modifications to your EBS volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html)
+- [Extend a Linux file system after resizing a volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
 
 ## Wrap Up
 
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](../maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
-

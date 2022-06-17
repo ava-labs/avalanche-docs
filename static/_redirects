@@ -1,4 +1,71 @@
+#06/01/2022 transfer-avax-between-x-ch
+/quickstart/transfer-avax-between-x-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/quickstart/transfer-avax-between-x-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+/quickstart/transfer-avax-between-x-chain-and-p-chain/ /quickstart/cross-chain-transfers 301
+/quickstart/transfer-avax-between-x-chain-and-p-chain  /quickstart/cross-chain-transfers 301
+/quickstart/transfer-avax-between-p-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/quickstart/transfer-avax-between-p-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+
+#05/30/2022
+/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
+/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
+
+
+#05/24/2022
+/quickstart/avalanche-summit-fuji-quickstart/ / 301
+/quickstart/avalanche-summit-fuji-quickstart  / 301
+
+# 05/23/2022
+/subnets/fuji-deployment/ /subnets/create-a-fuji-subnet 301
+/subnets/fuji-deployment  /subnets/create-a-fuji-subnet 301
+/subnets/create-evm-blockchain/ /subnets/create-a-fuji-subnet 301
+/subnets/create-evm-blockchain  /subnets/create-a-fuji-subnet 301
+
+#05/18/2022
+/subnets/subnet-deepdive/ /subnets/create-a-local-subnet 301
+/subnets/subnet-deepdive  /subnets/create-a-local-subnet 301
+
+#05/17/2022
+/quickstart/references/avash/  /quickstart/network-runner 301
+/quickstart/references/avash   /quickstart/network-runner 301
+/dapps/smart-digital-assets/creating-a-nft-part-1/ / 301
+/dapps/smart-digital-assets/creating-a-nft-part-1  / 301
+
+#05/16/2022
+/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
+/nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking 301
+
+#05/12/2022
+/dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
+/dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain  /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
+/dapps/smart-digital-assets/wallet-nft-studio/ https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet 301
+/dapps/smart-digital-assets/wallet-nft-studio  https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet 301
+/quickstart/references/abigen/ /specs/abigen 301
+/quickstart/references/abigen  /specs/abigen 301
+/quickstart/references/avm-transaction-serialization/ /specs/avm-transaction-serialization 301
+/quickstart/references/avm-transaction-serialization  /specs/avm-transaction-serialization 301
+/quickstart/references/coreth-arc20s/ /specs/coreth-arc20s 301
+/quickstart/references/coreth-arc20s  /specs/coreth-arc20s 301
+/quickstart/references/coreth-atomic-transaction-serialization/  /specs/coreth-atomic-transaction-serialization 301
+/quickstart/references/coreth-atomic-transaction-serialization  /specs/coreth-atomic-transaction-serialization 301
+/quickstart/references/cryptographic-primitives/ /specs/cryptographic-primitives 301
+/quickstart/references/cryptographic-primitives  /specs/cryptographic-primitives 301
+/quickstart/references/network-protocol/ /specs/network-protocol 301
+/quickstart/references/network-protocol  /specs/network-protocol 301
+/quickstart/references/platform-transaction-serialization/ /specs/platform-transaction-serialization 301
+/quickstart/references/platform-transaction-serialization  /specs/platform-transaction-serialization 301
+/quickstart/references/serialization-primitives/ /specs/serialization-primitives 301
+/quickstart/references/serialization-primitives  /specs/serialization-primitives 301
+
+#05/10/2022
+/build/tutorials/platform/subnets/create-a-subnet/ /subnets/create-a-local-subnet 301
+/build/tutorials/platform/subnets/create-a-subnet  /subnets/create-a-local-subnet 301
+/subnets/create-a-subnet/ /subnets/create-a-local-subnet 301
+/subnets/create-a-subnet  /subnets/create-a-local-subnet 301
+
 #05/09/2022
+/overview/getting-started/avalanche-platform-overview/ /overview/getting-started/avalanche-platform 301
+/overview/getting-started/avalanche-platform-overview  /overview/getting-started/avalanche-platform 301
 /build/tutorials/tutorials-contest/red-dev-avalanche-chainlink-tutorial/ /community/tutorials-contest/red-dev-avalanche-chainlink-tutorial 301
 /build/tutorials/tutorials-contest/red-dev-avalanche-chainlink-tutorial  /community/tutorials-contest/red-dev-avalanche-chainlink-tutorial 301
 /build/tutorials/tutorials-contest/tutorials-contest/pangolin-token-subgraph/ /community/tutorials-contest/pangolin-token-subgraph 301
@@ -37,18 +104,16 @@
 /build/references/network-protocol /quickstart/references/network-protocol 301
 /build/tools/abigen/ /quickstart/references/abigen 301
 /build/tools/abigen  /quickstart/references/abigen 301
-/build/tools/avash/  /quickstart/references/avash 301
-/build/tools/avash   /quickstart/references/avash 301
+/build/tools/avash/  /quickstart/network-runner 301
+/build/tools/avash   /quickstart/network-runner 301
 /build/references/cryptographic-primitives/ /quickstart/references/cryptographic-primitives 301
 /build/references/cryptographic-primitives /quickstart/references/cryptographic-primitives 301
-/build/references/network-protocol/ /quickstart/references/network-protocol 301
-/build/references/network-protocol  /quickstart/references/network-protocol 301
 /build/references/serialization-primitives/ /quickstart/references/serialization-primitives 301
 /build/references/serialization-primitives  /quickstart/references/serialization-primitives 301
 
 #05/04/2022
-/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/network-runner/#start-a-new-avalanche-network-with-five-nodes-a-cluster 301
-/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash /quickstart/network-runner/#start-a-new-avalanche-network-with-five-nodes-a-cluster 301
+/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash/ /quickstart/create-a-local-test-network 301
+/build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash  /quickstart/create-a-local-test-network 301
 /build/tutorials/platform/launch-your-ethereum-dapp/ /dapps/launch-your-ethereum-dapp 301
 /build/tutorials/platform/launch-your-ethereum-dapp /dapps/launch-your-ethereum-dapp 301
 
@@ -58,23 +123,19 @@
 /learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge 301
 /learn/getting-started/ / 301
 /learn/getting-started  / 301
-/learn/platform-overview/ /overview/getting-started/avalanche-platform-overview 301
-/learn/platform-overview /overview/getting-started/avalanche-platform-overview 301
+/learn/platform-overview/ /overview/getting-started/avalanche-platform 301
+/learn/platform-overview  /overview/getting-started/avalanche-platform 301
 /learn/platform-overview/avalanche-consensus/ /overview/getting-started/avalanche-consensus 301
 /learn/platform-overview/avalanche-consensus /overview/getting-started/avalanche-consensus 301
 #subnets
 /build/tutorials/platform/subnets/ /subnets 301
 /build/tutorials/platform/subnets  /subnets 301
-/build/tutorials/platform/subnets/create-a-subnet/ /subnets/create-a-subnet 301
-/build/tutorials/platform/subnets/create-a-subnet  /subnets/create-a-subnet 301
-/build/tutorials/platform/subnets/create-avm-blockchain/ /subnets/create-avm-blockchain 301
-/build/tutorials/platform/subnets/create-avm-blockchain  /subnets/create-avm-blockchain 301
 /build/tutorials/platform/subnets/create-evm-blockchain/ /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-evm-blockchain  /subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm/ /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/subnets/create-a-virtual-machine-vm  /subnets/create-a-virtual-machine-vm 301
-/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-custom-blockchain 301
-/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-custom-blockchain 301
+/build/tutorials/platform/subnets/create-custom-blockchain/ /subnets/create-a-fuji-subnet 301
+/build/tutorials/platform/subnets/create-custom-blockchain  /subnets/create-a-fuji-subnet 301
 /build/tutorials/platform/subnets/spaces/ /subnets/spaces 301
 /build/tutorials/platform/subnets/spaces  /subnets/spaces 301
 /build/tutorials/platform/subnets/wagmi/ /subnets/wagmi 301
@@ -104,8 +165,8 @@
 /build/tutorials/nodes-and-staking/run-avalanche-node  /nodes/build/run-avalanche-node-manually 301
 /build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws/ /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
 /build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws  /nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
-/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet 301
+/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet/ /nodes/validate/staking 301
+/build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet  /nodes/validate/staking 301
 /build/tutorials/nodes-and-staking/upgrade-your-nodes/ /nodes/maintain/upgrade-your-avalanchego-node 301
 /build/tutorials/nodes-and-staking/upgrade-your-nodes  /nodes/maintain/upgrade-your-avalanchego-node 301
 /build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node /nodes/maintain/upgrade-your-avalanchego-node 301
@@ -176,18 +237,16 @@
 /build/tutorials/platform/create-a-local-test-network  /quickstart/create-a-local-test-network 301
 /build/tutorials/platform/fuji-workflow/ /quickstart/fuji-workflow 301
 /build/tutorials/platform/fuji-workflow  /quickstart/fuji-workflow 301
-/build/tutorials/platform/avalanche-summit-fuji-quickstart/ /quickstart/avalanche-summit-fuji-quickstart 301
-/build/tutorials/platform/avalanche-summit-fuji-quickstart  /quickstart/avalanche-summit-fuji-quickstart 301
 /build/tutorials/platform/fund-a-local-test-network/ /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/fund-a-local-test-network /quickstart/fund-a-local-test-network 301
 /build/tutorials/platform/integrate-exchange-with-avalanche/ /quickstart/exchanges/integrate-exchange-with-avalanche 301
 /build/tutorials/platform/integrate-exchange-with-avalanche  /quickstart/exchanges/integrate-exchange-with-avalanche 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/transfer-avax-between-x-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain /quickstart/transfer-avax-between-x-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/transfer-avax-between-x-chain-and-p-chain 301
-/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain /quickstart/transfer-avax-between-x-chain-and-p-chain 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/transfer-avax-between-p-chain-and-c-chain 301
-/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/transfer-avax-between-p-chain-and-c-chain 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain  /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain  /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain/ /quickstart/cross-chain-transfers 301
+/build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain  /quickstart/cross-chain-transfers 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity/ /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/adjusting-gas-price-during-high-network-activity /quickstart/adjusting-gas-price-during-high-network-activity 301
 /build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript/ /quickstart/sending-transactions-with-dynamic-fees-using-javascript 301
@@ -217,8 +276,9 @@
 /build/tutorials/smart-digital-assets /dapps/smart-digital-assets/ 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
 /build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain 301
-/build/tutorials/smart-digital-assets/creating-a-nft-part-1/ /dapps/smart-digital-assets/creating-a-nft-part-1 301
-/build/tutorials/smart-digital-assets/creating-a-nft-part-1 /dapps/smart-digital-assets/creating-a-nft-part-1 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1/ / 301
+/build/tutorials/smart-digital-assets/creating-a-nft-part-1  / 301
+
 #community
 /build/tutorials/tutorials-contest/ /community/tutorials-contest/ 301
 /build/tutorials/tutorials-contest /community/tutorials-contest/ 301
@@ -228,12 +288,10 @@
 # since the begining
 /learn / 301
 /learn/ / 301
-/learn/platf /overview/getting-started/avalanche-platform-overview  301
+/learn/platf /overview/getting-started/avalanche-platform  301
 /build/get-started / 301
 /build/references/command-line-interface/ /nodes/maintain/avalanchego-config-flags/ 301
-/build/tutorials/platform/create-a-subnet /subnets/create-a-subnet 301
 /build/tutorials/platform/create-a-virtual-machine-vm /subnets/create-a-virtual-machine-vm 301
-/build/tutorials/platform/create-avm-blockchain /subnets/create-avm-blockchain 301
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
@@ -242,7 +300,7 @@
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301
 /v/v1.1.1/build/getting-started /  301
 /v/v1.1.1/nodes-and-staking /nodes-and-staking  301
-/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /build/tutorials/platform/create-custom-blockchain  301
+/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /subnets/create-a-fuji-subnet  301
 /v1.0/en/api/keystore/ /apis/avalanchego/apis/keystore-api  301
 /v1.0/en/references/command-line-interface/ /build/references/command-line-interface  301
 /v1.0/en/tools/avalanche.js/api/classes/utils_base58.base58/ /build/tools/avalanchejs/api  301

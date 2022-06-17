@@ -21,7 +21,7 @@
 
 ▸ **SelectInputClass**(`inputID`: number, ...`args`: any[]): *[Input](../classes/common_inputs.input.md)*
 
-*Defined in [src/apis/evm/inputs.ts:32](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/inputs.ts#L32)*
+*Defined in [src/apis/evm/inputs.ts:32](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/evm/inputs.ts#L32)*
 
 Takes a buffer representing the output and returns the proper [Input](../classes/common_inputs.input.md) instance.
 

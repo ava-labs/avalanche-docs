@@ -18,7 +18,7 @@
 
 ▸ **SelectCredentialClass**(`credid`: number, ...`args`: any[]): *[Credential](../classes/common_signature.credential.md)*
 
-*Defined in [src/apis/platformvm/credentials.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/credentials.ts#L17)*
+*Defined in [src/apis/platformvm/credentials.ts:17](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/credentials.ts#L17)*
 
 Takes a buffer representing the credential and returns the proper [Credential](../classes/common_signature.credential.md) instance.
 

@@ -3,21 +3,20 @@
 ## Introduction
 
 This tutorial assumes that:
-- A [Subnet](create-a-subnet.md) has been created
-- An [EVM blockchain](create-evm-blockchain.md) has been created
-- Your Node is currently [validating](create-a-subnet.md#adding-subnet-validators) your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](create-evm-blockchain.md#build-genesis))
+
+- [An Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created
+- Your Node is currently validating your target Subnet
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
 ## Step 1: Setting up MetaMask
 
-#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](create-evm-blockchain.md#connect-with-metamask)
+#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
 
-* **``Network Name``**: Custom Subnet EVM
-* **``New RPC URL``**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
-* **``ChainID``**: Subnet EVM ChainID
-* **``Symbol``**: Subnet EVM Token Symbol
-* **``Explorer``**: N/A
-
+- **`Network Name`**: Custom Subnet EVM
+- **`New RPC URL`**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
+- **`ChainID`**: Subnet EVM ChainID
+- **`Symbol`**: Subnet EVM Token Symbol
+- **`Explorer`**: N/A
 
 ![remix subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
 
@@ -25,7 +24,7 @@ You should see a balance of your Subnet's Native Token in Metamask.
 
 ![remix subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
 
-## Step 2: Connect MetaMask and Deploy a Smart Contract 
+## Step 2: Connect MetaMask and Deploy a Smart Contract
 
 ### Using Remix
 
@@ -61,7 +60,6 @@ Now, the smart contract is compiled, MetaMask is injected, and we are ready to d
 
 ![remix subnet evm sc deploy](/img/remix-subnet-evm-sc-deploy.png)
 
-
 Confirm the transaction on the MetaMask pop up.
 
 ![remix subnet evm sc conf1](/img/remix-subnet-evm-sc-conf1.png)
@@ -79,8 +77,6 @@ The contract ABI and Bytecode are available on the compiler tab.
 ![remix subnet evm sc abi](/img/remix-subnet-evm-sc-abi.png)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
-
-
 
 ## Other Tools
 

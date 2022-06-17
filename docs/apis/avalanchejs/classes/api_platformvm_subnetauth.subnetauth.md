@@ -10,10 +10,6 @@
 
 ## Index
 
-### Constructors
-
-* [constructor](api_platformvm_subnetauth.subnetauth.md#constructor)
-
 ### Properties
 
 * [_codecID](api_platformvm_subnetauth.subnetauth.md#protected-_codecid)
@@ -24,6 +20,7 @@
 
 ### Methods
 
+* [addAddressIndex](api_platformvm_subnetauth.subnetauth.md#addaddressindex)
 * [deserialize](api_platformvm_subnetauth.subnetauth.md#deserialize)
 * [fromBuffer](api_platformvm_subnetauth.subnetauth.md#frombuffer)
 * [getAddressIndices](api_platformvm_subnetauth.subnetauth.md#getaddressindices)
@@ -35,22 +32,6 @@
 * [serialize](api_platformvm_subnetauth.subnetauth.md#serialize)
 * [toBuffer](api_platformvm_subnetauth.subnetauth.md#tobuffer)
 
-## Constructors
-
-###  constructor
-
-\+ **new SubnetAuth**(`addressIndices`: Buffer[]): *[SubnetAuth](api_platformvm_subnetauth.subnetauth.md)*
-
-*Defined in [src/apis/platformvm/subnetauth.ts:73](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L73)*
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`addressIndices` | Buffer[] | undefined |
-
-**Returns:** *[SubnetAuth](api_platformvm_subnetauth.subnetauth.md)*
-
 ## Properties
 
 ### `Protected` _codecID
@@ -59,7 +40,7 @@ Name | Type | Default |
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[_codecID](common_nbytes.nbytes.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -69,7 +50,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L17)*
+*Defined in [src/apis/platformvm/subnetauth.ts:17](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L17)*
 
 ___
 
@@ -79,7 +60,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:16](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L16)*
+*Defined in [src/apis/platformvm/subnetauth.ts:16](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L16)*
 
 ___
 
@@ -87,7 +68,7 @@ ___
 
 • **addressIndices**: *Buffer[]* = []
 
-*Defined in [src/apis/platformvm/subnetauth.ts:43](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L43)*
+*Defined in [src/apis/platformvm/subnetauth.ts:54](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L54)*
 
 ___
 
@@ -95,9 +76,27 @@ ___
 
 • **numAddressIndices**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/apis/platformvm/subnetauth.ts:44](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L44)*
+*Defined in [src/apis/platformvm/subnetauth.ts:55](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L55)*
 
 ## Methods
+
+###  addAddressIndex
+
+▸ **addAddressIndex**(`index`: Buffer): *void*
+
+*Defined in [src/apis/platformvm/subnetauth.ts:34](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L34)*
+
+Add an address index for Subnet Auth signing
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`index` | Buffer | the Buffer of the address index to add  |
+
+**Returns:** *void*
+
+___
 
 ###  deserialize
 
@@ -105,7 +104,7 @@ ___
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[deserialize](common_output.standardparseableoutput.md#deserialize)*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:25](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L25)*
+*Defined in [src/apis/platformvm/subnetauth.ts:25](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L25)*
 
 **Parameters:**
 
@@ -122,7 +121,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:46](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L46)*
+*Defined in [src/apis/platformvm/subnetauth.ts:57](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L57)*
 
 **Parameters:**
 
@@ -139,7 +138,7 @@ ___
 
 ▸ **getAddressIndices**(): *Buffer[]*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:39](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L39)*
+*Defined in [src/apis/platformvm/subnetauth.ts:50](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L50)*
 
 Returns an array of AddressIndices as Buffers
 
@@ -153,7 +152,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getCodecID](common_nbytes.nbytes.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -165,7 +164,7 @@ ___
 
 ▸ **getNumAddressIndices**(): *number*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:32](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L32)*
+*Defined in [src/apis/platformvm/subnetauth.ts:43](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L43)*
 
 Returns the number of address indices as a number
 
@@ -179,7 +178,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getTypeID](common_nbytes.nbytes.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -193,7 +192,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getTypeName](common_nbytes.nbytes.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -207,7 +206,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[sanitizeObject](common_nbytes.nbytes.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -227,7 +226,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:19](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L19)*
+*Defined in [src/apis/platformvm/subnetauth.ts:19](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L19)*
 
 **Parameters:**
 
@@ -243,7 +242,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/apis/platformvm/subnetauth.ts:61](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/subnetauth.ts#L61)*
+*Defined in [src/apis/platformvm/subnetauth.ts:72](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/subnetauth.ts#L72)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [SubnetAuth](api_platformvm_subnetauth.subnetauth.md).
 

@@ -25,7 +25,7 @@
 
 • **changeAddr**? : *string*
 
-*Defined in [src/apis/avm/interfaces.ts:150](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L150)*
+*Defined in [src/apis/avm/interfaces.ts:150](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L150)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **from**? : *string[] | Buffer[]*
 
-*Defined in [src/apis/avm/interfaces.ts:149](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L149)*
+*Defined in [src/apis/avm/interfaces.ts:149](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L149)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **memo**? : *string | Buffer*
 
-*Defined in [src/apis/avm/interfaces.ts:151](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L151)*
+*Defined in [src/apis/avm/interfaces.ts:151](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L151)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **outputs**: *[SOutputsParams](avm_interfaces.soutputsparams.md)[]*
 
-*Defined in [src/apis/avm/interfaces.ts:148](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L148)*
+*Defined in [src/apis/avm/interfaces.ts:148](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L148)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[password](common_interfaces.credsinterface.md#password)*
 
-*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L11)*
+*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/interfaces.ts#L11)*
 
 ___
 
@@ -69,4 +69,4 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[username](common_interfaces.credsinterface.md#username)*
 
-*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/interfaces.ts#L10)*
+*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/interfaces.ts#L10)*

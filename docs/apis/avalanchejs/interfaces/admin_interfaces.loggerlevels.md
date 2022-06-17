@@ -25,7 +25,7 @@
 
 • **C**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L30)*
+*Defined in [src/apis/admin/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L30)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **C.http**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L31)*
+*Defined in [src/apis/admin/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L31)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **P**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L32)*
+*Defined in [src/apis/admin/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L32)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **P.http**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L33)*
+*Defined in [src/apis/admin/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L33)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **X**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L34)*
+*Defined in [src/apis/admin/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L34)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **X.http**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:35](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L35)*
+*Defined in [src/apis/admin/interfaces.ts:35](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L35)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **http**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:36](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L36)*
+*Defined in [src/apis/admin/interfaces.ts:36](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L36)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 • **main**: *[Level](admin_interfaces.level.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:37](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L37)*
+*Defined in [src/apis/admin/interfaces.ts:37](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L37)*

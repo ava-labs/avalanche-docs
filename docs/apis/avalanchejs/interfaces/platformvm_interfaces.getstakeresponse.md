@@ -19,7 +19,7 @@
 
 • **staked**: *BN*
 
-*Defined in [src/apis/platformvm/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L17)*
+*Defined in [src/apis/platformvm/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L17)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **stakedOutputs**: *[TransferableOutput](../classes/api_platformvm_outputs.transferableoutput.md)[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L18)*
+*Defined in [src/apis/platformvm/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/interfaces.ts#L18)*
