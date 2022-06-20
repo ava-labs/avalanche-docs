@@ -221,7 +221,21 @@ Custom config is not yet supported for RocksDB.
 
 #### `--genesis` (string):
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data.
+
+This are the main properties in the JSON file:
+
+- `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32],
+- `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
+- `startTime`: The time of the beginning of the blockchain, must be a timestamp in seconds,
+- `initialStakeDuration`: The initial stake duration in seconds,
+- `initialStakeDurationOffset`: The initial stake duration offset between stakers in seconds,
+- `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well),
+- `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one,
+- `cChainGenesis`: Specify the chains that exist upon this network's creation,
+- `message`: A fun quote,
+
+For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
 
 #### `--genesis-content` (string):
 
