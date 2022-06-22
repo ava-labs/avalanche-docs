@@ -176,6 +176,10 @@ curl -X POST --data '{
 
 ### avm.createAddress
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Create a new address controlled by the given user.
 
 #### **Signature**
@@ -214,6 +218,10 @@ curl -X POST --data '{
 ```
 
 ### avm.createFixedCapAsset
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
 
@@ -291,6 +299,10 @@ curl -X POST --data '{
 
 ### avm.mint
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
 
 #### **Signature**
@@ -351,6 +363,10 @@ curl -X POST --data '{
 ```
 
 ### avm.createVariableCapAsset
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
 
@@ -435,6 +451,10 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
 
 #### **Signature**
@@ -508,6 +528,10 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
 
 #### **Signature**
@@ -571,6 +595,10 @@ curl -X POST --data '{
 ```
 
 ### avm.export
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method,
 you must call the [C-Chain's `avax.import`](c-chain.md#avaximport) or the
@@ -638,6 +666,10 @@ curl -X POST --data '{
 ```
 
 ### avm.exportKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Get the private key that controls a given address.
 The returned private key can be added to a user with [`avm.importKey`](x-chain.md#avmimportkey).
@@ -1211,6 +1243,10 @@ This gives response:
 
 ### avm.import
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method to initiate the transfer.
 
 #### **Signature**
@@ -1258,6 +1294,10 @@ curl -X POST --data '{
 ```
 
 ### avm.importKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Give a user control over an address by providing the private key that controls the address.
 
@@ -1343,6 +1383,10 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 List addresses controlled by the given user.
 
 #### **Signature**
@@ -1381,6 +1425,10 @@ curl -X POST --data '{
 ```
 
 ### avm.send
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Send a quantity of an asset to an address.
 
@@ -1440,6 +1488,10 @@ curl -X POST --data '{
 ```
 
 ### avm.sendMultiple
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
 
@@ -1509,6 +1561,10 @@ curl -X POST --data '{
 ```
 
 ### avm.sendNFT
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Send a non-fungible token.
 
@@ -1611,6 +1667,10 @@ curl -X POST --data '{
 
 ### wallet.send
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
@@ -1673,6 +1733,10 @@ curl -X POST --data '{
 ```
 
 ### wallet.sendMultiple
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
 
