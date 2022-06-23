@@ -271,6 +271,10 @@ curl -X POST --data '{
 
 ### avax.export
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
 #### Signature
@@ -323,6 +327,10 @@ curl -X POST --data '{
 ```
 
 ### avax.exportAVAX
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 **DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
@@ -383,6 +391,10 @@ curl -X POST --data '{
 ```
 
 ### avax.exportKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
 
@@ -516,6 +528,10 @@ This gives response:
 
 ### avax.import
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
@@ -571,6 +587,10 @@ curl -X POST --data '{
 ```
 
 ### avax.importAVAX
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 **DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
@@ -629,6 +649,10 @@ curl -X POST --data '{
 ```
 
 ### avax.importKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Give a user control over an address by providing the private key that controls the address.
 
