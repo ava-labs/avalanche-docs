@@ -1122,7 +1122,7 @@ avm.getUTXOs({
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
+Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
 ```sh
 curl -X POST --data '{
@@ -1130,7 +1130,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
         "encoding": "cb58"
     }
@@ -1171,7 +1171,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "limit":5,
-        "endIndex": {
+        "startIndex": {
             "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
@@ -1213,7 +1213,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
         "sourceChain": "P",
         "encoding": "cb58"
