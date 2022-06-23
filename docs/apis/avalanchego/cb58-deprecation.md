@@ -1,6 +1,10 @@
 # Deprecating CB58 in AvalancheGo API
 
-For performance reasons, we are working to deprecate `cb58` encoding in favor of `hex`. To prepare for this change, you can now specify `hex` for the `encoding` parameter in places where `cb58` is used explicitly or by default. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos)
+## Overview
+
+We are working to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changes the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
+
+To prepare for this change, you can now specify `hex` (or `json` if supported) for the `encoding` parameter in places where `cb58` is used **by default** or explicitly. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
 
 - `encoding` sets the format for the returned UTXOs.
 
@@ -45,4 +49,50 @@ This gives response where utxos will be in `hex` format:
 
 You can also use `json` if the api supports it.
 
-This set of changes only deprecates the cb58 encoding parameter over APIs. Transaction IDs (`txIDs`), `chainIDs`, and `subnetIDs` which are represented using cb58 are unmodified.
+## Affected APIs
+
+Following APIs are affected with this change.
+
+:::tip
+
+When going through this API list, please make sure to check the omitted/default encoding parameter. Before the new release of `cb58` deprecation is out, by default, `cb58` is used for the encoding parameter if not specified in these APIs. You will need to add `"encoding": "hex"` (or `"encoding": "json"` if supported) explicitly and update your code to handle the response accordingly.
+
+:::
+
+### X-Chain API
+
+- [avm.buildGenesis](./apis/x-chain.md#avmbuildgenesis)
+- [avm.mintNFT](./apis/x-chain.md#avmmintnft)
+- [avm.getTx](./apis/x-chain.md#avmgettx)
+- [avm.getUTXOs](./apis/x-chain.md#avmgetutxos)
+- [avm.issueTx](./apis/x-chain.md#avmissuetx)
+- [wallet.issueTx](./apis/x-chain.md#walletissuetx)
+
+### P-Chain API
+
+- [platform.createBlockchain](./apis/p-chain.md#platformcreateblockchain)
+- [platform.getBlock](./apis/p-chain.md#platformgetblock)
+- [platform.getRewardUTXOs](./apis/p-chain.md#platformgetrewardutxos)
+- [platform.getTx](./apis/p-chain.md#platformgettx)
+- [platform.getUTXOs](./apis/p-chain.md#platformgetutxos)
+- [platform.issueTx](./apis/p-chain.md#platformissuetx)
+
+### C-Chain API
+
+- [avax.getAtomicTx](./apis/c-chain.md#avaxgetatomictx)
+- [avax.getUTXOs](./apis/c-chain.md#avaxgetutxos)
+- [avax.issueTx](./apis/c-chain.md#avaxissuetx)
+
+### Index API
+
+- [index.getLastAccepted](./apis/index-api.md#indexgetlastaccepted)
+- [index.getContainerByIndex](./apis/index-api.md#indexgetcontainerbyindex)
+- [index.getContainerByID](./apis/index-api.md#indexgetcontainerbyindex)
+- [index.getContainerRange](./apis/index-api.md#indexgetcontainerrange)
+- [index.getIndex](./apis/index-api.md#indexgetindex)
+- [index.isAccepted](./apis/index-api.md#indexisaccepted)
+
+### Keystore API
+
+- [keystore.exportUser](./apis/keystore.md#keystoreexportuser)
+- [keystore.importUser](./apis/keystore.md#keystoreimportuser)

@@ -4,13 +4,16 @@ sidebar_position: 13
 
 # Keystore API
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
-
 :::warning
-You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.
+Because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
 :::
 
-For validation and delegation on the mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md) or [the wallet](../../../nodes/validate/staking.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+
+For validation and cross-chain transfer on the Mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised. See following docs for details:
+
+- [Transfer AVAX Tokens Between Chains](../../../quickstart/cross-chain-transfers.md)
+- [Add a Node to the Validator Set](../../../nodes/validate/add-a-validator.md)
 
 :::info
 
