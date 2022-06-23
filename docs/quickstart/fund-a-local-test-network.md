@@ -14,7 +14,7 @@ The port in this tutorial uses 9650. Depending on how you start your local netwo
 :::
 
 :::warning
-Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md): Because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
+Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md), because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
 :::
 
 ## Create a User
