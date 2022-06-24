@@ -791,7 +791,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getAssetDescription",
     "params" :{
-        "assetID" :"2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
+        "assetID" :"FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -802,7 +802,7 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "assetID": "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe",
+        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
         "name": "Avalanche",
         "symbol": "AVAX",
         "denomination": "9"
