@@ -563,7 +563,7 @@ Let’s make an NFT transfer output with:
 
 * **`TypeID`**: `11`
 * **`GroupID`**: `12345`
-* **`Payload`**: `0x431100`
+* **`Payload`**: `NFT Payload`
 * **`Locktime`**: `54321`
 * **`Threshold`**: `1`
 * **`Addresses`**:
@@ -574,7 +574,7 @@ Let’s make an NFT transfer output with:
 [
     TypeID    <- 0x0000000b
     GroupID   <- 0x00003039
-    Payload   <- 0x431100
+    Payload   <- 0x4e4654205061796c6f6164
     Locktime  <- 0x000000000000d431
     Threshold <- 0x00000001
     Addresses <- [
@@ -589,9 +589,10 @@ Let’s make an NFT transfer output with:
     // groupID:
     0x00, 0x00, 0x30, 0x39,
     // length of payload:
-    0x00, 0x00, 0x00, 0x03,
+    0x00, 0x00, 0x00, 0x0b,
     // payload:
-    0x43, 0x11, 0x00,
+    0x4e, 0x46, 0x54, 0x20, 0x50, 0x61, 0x79, 0x6c, 
+    0x6f, 0x61, 0x64,
     // locktime:
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
     // threshold:
