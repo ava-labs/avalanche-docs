@@ -793,7 +793,7 @@ curl -X POST --data '{
     "params" :{
         "assetID" :"FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
     }
-}' -H 'content-type:application/json;' https://api.avax.network/ext/bc/X
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
