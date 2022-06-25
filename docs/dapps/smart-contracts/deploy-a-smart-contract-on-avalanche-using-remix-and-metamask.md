@@ -6,7 +6,7 @@ decription: In this doc, learn how to deploy and test a smart contract on Avalan
 
 ## Introduction
 
-![Primary Network](/img/image(21).png)
+![Primary Network](</img/image(21).png>)
 
 Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](../../apis/avalanchego/apis/c-chain.md) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties that could considerably improve the performance of DApps and the user experience.
 
@@ -16,32 +16,31 @@ Today, we will deploy and test a smart contract on Avalanche using Remix and Met
 
 Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
-![metamask network dropdown](/img/image(60).png)
+![metamask network dropdown](</img/image(60).png>)
 
 #### **Avalanche Mainnet Settings:**
 
-* **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-* **ChainID**: `43114`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
+- **Network Name**: Avalanche Mainnet C-Chain
+- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+- **ChainID**: `43114`
+- **Symbol**: `AVAX`
+- **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
 #### **FUJI Testnet Settings:**
 
-* **Network Name**: Avalanche FUJI C-Chain
-* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `43113`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+- **Network Name**: Avalanche FUJI C-Chain
+- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+- **ChainID**: `43113`
+- **Symbol**: `AVAX`
+- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 #### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../quickstart/network-runner.md)
 
-* **Network Name**: Avalanche Local C-Chain
-* **New RPC URL**: [http://127.0.0.1:34890/ext/bc/C/rpc](http://127.0.0.1:34890/ext/bc/C/rpc) (Note: the port number should match your local setting which can be different from 34890.)
-* **ChainID**: `43112`
-* **Symbol**: `AVAX`
-* **Explorer**: N/A
-
+- **Network Name**: Avalanche Local C-Chain
+- **New RPC URL**: [http://127.0.0.1:34890/ext/bc/C/rpc](http://127.0.0.1:34890/ext/bc/C/rpc) (Note: the port number should match your local setting which can be different from 34890.)
+- **ChainID**: `43112`
+- **Symbol**: `AVAX`
+- **Explorer**: N/A
 
 ## Step 2: Funding your C-Chain address
 
@@ -98,4 +97,3 @@ The contract ABI and Bytecode are available on the compiler tab.
 ![ABI bytecode](/img/abi-bytecode.png)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
-

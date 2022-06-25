@@ -12,27 +12,24 @@ Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
 ![contract_tab](/img/verify-and-publish1.png)
 
-
 Click _Verify & Publish_ to enter the smart contract verification page.
 
 ![SRC](/img/verify-src.png)
-
 
 [Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
 ![libraries](/img/verify-libraries.png)
 
-
 The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
 
 ## Requirements
 
-* **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
-* Contracts must be flattened.
-  * Includes will not work.  
-* Contracts should be compile-able in [Remix](https://remix.ethereum.org).
-  * A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs.  This might cause validation issues.
-* The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
+- **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
+- Contracts must be flattened.
+  - Includes will not work.
+- Contracts should be compile-able in [Remix](https://remix.ethereum.org).
+  - A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs. This might cause validation issues.
+- The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
 
 ## Libraries
 
@@ -66,15 +63,15 @@ Example [online converter](https://emn178.github.io/online-tools/keccak_256.html
 
 ## Examples
 
-* [SwapFlashLoan](https://testnet.snowtrace.io/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
+- [SwapFlashLoan](https://testnet.snowtrace.io/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
 
 SwapFlashLoan uses swaputils and mathutils:
 
-* [SwapUtils](https://testnet.snowtrace.io/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
+- [SwapUtils](https://testnet.snowtrace.io/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
 
 SwapUtils requires mathutils:
 
-* [MathUtils](https://testnet.snowtrace.io/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
+- [MathUtils](https://testnet.snowtrace.io/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
 
 ## Caveats
 
@@ -92,7 +89,7 @@ The C-Chain Explorer interprets all keccak256(...) strings, even those in commen
 
 ```javascript
 /// keccak256("1");
-keccak256("2");
+keccak256("2")
 ```
 
 This could cause automatic constructor verification failures. If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
@@ -122,4 +119,3 @@ contract Main is Parent {
 ```
 
 If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
-
