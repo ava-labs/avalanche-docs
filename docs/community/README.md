@@ -1,6 +1,6 @@
-# Community Overview 
+# Community Overview
 
-## Community Channels 
+## Community Channels
 
 The [Avalanche ecosystem](https://ecosystem.avax.network/) is a fast-growing network of developers collaborating to build a better future with everyone.
 
