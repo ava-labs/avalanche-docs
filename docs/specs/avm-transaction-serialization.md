@@ -1,5 +1,3 @@
-
-
 # AVM Transaction Format
 
 This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine (AVM). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
@@ -17,7 +15,7 @@ Transferable outputs wrap an output with an asset ID.
 A transferable output contains an `AssetID` and an [`Output`](avm-transaction-serialization.md#outputs).
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). For example, this can be a [SECP256K1 transfer output](avm-transaction-serialization.md#secp256k1-transfer-output).
+* **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). Outputs have four possible types: [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
 
 ### Gantt Transferable Output Specification
 
