@@ -163,7 +163,7 @@ npm install --save avalanche dotenv yargs
 Make a `config.js` file and store the following information, about the node and its respective URI.
 
 ```javascript
-require("dotenv").config();
+require("dotenv").config()
 
 module.exports = {
   protocol: "http",
@@ -171,7 +171,7 @@ module.exports = {
   port: 14760,
   networkID: 1337,
   privKey: process.env.PRIVATEKEY,
-};
+}
 ```
 
 We have `networkID: 1337` for the local network. Mainnet has `43114`, and Fuji has `43113`. Put the port here, that you have copied earlier from the ANR's output. Rest all should remain the same. Here we are also accessing `PRIVATEKEY` from the `.env` file. So make sure to include your funded private key in the `.env` file which was provided by ANR.
@@ -187,31 +187,31 @@ Always put secret information like the `.env` file restricted to yourself only a
 This code will serve as the helper function for all other functions spread over different files. It will instantiate all the necessary Avalanche APIs using AvalancheJS and export them for other files to use it. Other files can simply import and re-use. Make a new file `importAPI.js` and paste the following code inside it.
 
 ```javascript
-const { Avalanche, BinTools, BN } = require("avalanche");
+const { Avalanche, BinTools, BN } = require("avalanche")
 
 // Importing node details and Private key from the config file.
-const { ip, port, protocol, networkID, privKey } = require("./config.js");
+const { ip, port, protocol, networkID, privKey } = require("./config.js")
 
 // For encoding and decoding to CB58 and buffers.
-const bintools = BinTools.getInstance();
+const bintools = BinTools.getInstance()
 
 // Avalanche instance
-const avalanche = new Avalanche(ip, port, protocol, networkID);
+const avalanche = new Avalanche(ip, port, protocol, networkID)
 
 // Platform and Info API
-const platform = avalanche.PChain();
-const info = avalanche.Info();
+const platform = avalanche.PChain()
+const info = avalanche.Info()
 
 // Keychain for signing transactions
-const pKeyChain = platform.keyChain();
-pKeyChain.importKey(privKey);
-const pAddressStrings = pKeyChain.getAddressStrings();
+const pKeyChain = platform.keyChain()
+pKeyChain.importKey(privKey)
+const pAddressStrings = pKeyChain.getAddressStrings()
 
 // UTXOs for spending unspent outputs
 const utxoSet = async () => {
-  const platformUTXOs = await platform.getUTXOs(pAddressStrings);
-  return platformUTXOs.utxos;
-};
+  const platformUTXOs = await platform.getUTXOs(pAddressStrings)
+  return platformUTXOs.utxos
+}
 
 // Exporting these for other files to use
 module.exports = {
@@ -222,7 +222,7 @@ module.exports = {
   bintools,
   utxoSet,
   BN,
-};
+}
 ```
 
 ### Genesis Data
@@ -303,7 +303,7 @@ const {
   pKeyChain,
   pAddressStrings,
   utxoSet,
-} = require("./importAPI.js");
+} = require("./importAPI.js")
 
 async function createSubnet() {
   // Creating unsgined tx
@@ -312,17 +312,17 @@ async function createSubnet() {
     pAddressStrings, // from
     pAddressStrings, // change address
     pAddressStrings // subnet owners' address array
-  );
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Tx ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Tx ID: ", txId)
 }
 
-createSubnet();
+createSubnet()
 ```
 
 Make sure to keep the `txID` you received for this transaction. Once this transaction is accepted, a new subnet with the same ID will be created. You can run this program now with the following command.
@@ -338,7 +338,7 @@ The newly created subnet requires validators to validate the transactions on the
 The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the help of comments. All the transaction calls of AvalancheJS starting with `build` will return an unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to the network.
 
 ```javascript
-const args = require("yargs").argv;
+const args = require("yargs").argv
 const {
   platform,
   info,
@@ -346,7 +346,7 @@ const {
   pAddressStrings,
   utxoSet,
   BN,
-} = require("./importAPI.js");
+} = require("./importAPI.js")
 
 async function addSubnetValidator() {
   let {
@@ -355,14 +355,12 @@ async function addSubnetValidator() {
     endTime,
     weight = 20,
     subnetID,
-  } = args;
+  } = args
 
-  const pAddresses = pKeyChain.getAddresses();
+  const pAddresses = pKeyChain.getAddresses()
 
   // Creating subnet auth
-  const subnetAuth = [
-    [0, pAddresses[0]]
-  ]
+  const subnetAuth = [[0, pAddresses[0]]]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildAddSubnetValidatorTx(
@@ -377,17 +375,17 @@ async function addSubnetValidator() {
     undefined, // memo
     undefined, // asOf
     subnetAuth // subnet owners' address indices signing this tx
-  );
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Tx ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Tx ID: ", txId)
 }
 
-addSubnetValidator();
+addSubnetValidator()
 ```
 
 We have to pass command-line arguments like `nodeID`, `startTime`, `endTime`, `weight` and `subnetID` while calling the command. If we do not pass any nodeID, then by default it will use ID corresponding to the URI in the `config.js` by calling the `info.getNodeID()` API from AvalancheJS. Similarly, the default weight will be 20, if not passed. You can run this program now with the following command.
@@ -427,16 +425,16 @@ Let's write functions to build a new blockchain using the already created `genes
 Let's import the dependencies by using the following snippet. We are importing `yargs` for reading command-line flags.
 
 ```javascript
-const args = require("yargs").argv;
+const args = require("yargs").argv
 
-const genesisJSON = require("./genesis.json");
+const genesisJSON = require("./genesis.json")
 const {
   platform,
   pKeyChain,
   pAddressStrings,
   bintools,
   utxoSet,
-} = require("./importAPI");
+} = require("./importAPI")
 ```
 
 ### Decoding CB58 `vmID` to String
@@ -446,8 +444,8 @@ We have used the utility function for decoding `vmName` from the `vmID`. vmID is
 ```javascript
 // Returns string representing vmName of the provided vmID
 function convertCB58ToString(cb58Str) {
-  const buff = bintools.cb58Decode(cb58Str);
-  return buff.toString();
+  const buff = bintools.cb58Decode(cb58Str)
+  return buff.toString()
 }
 ```
 
@@ -458,23 +456,21 @@ Now we will work upon the `createBlockchain()` function. This function takes 3-4
 ```javascript
 // Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
 async function createBlockchain() {
-  const { subnetID, chainName } = args;
+  const { subnetID, chainName } = args
 
   // Generating vmName if only vmID is provied, else assigning args.vmID
   const vmName =
     typeof args.vmName !== "undefined"
       ? args.vmName
-      : convertCB58ToString(args.vmID);
+      : convertCB58ToString(args.vmID)
 
   // Getting CB58 encoded bytes of genesis
-  genesisBytes = JSON.stringify(genesisJSON);
+  genesisBytes = JSON.stringify(genesisJSON)
 
-  const pAddresses = pKeyChain.getAddresses();
+  const pAddresses = pKeyChain.getAddresses()
 
   // Creating subnet auth
-  const subnetAuth = [
-    [0, pAddresses[0]]
-  ]
+  const subnetAuth = [[0, pAddresses[0]]]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildCreateChainTx(
@@ -489,14 +485,14 @@ async function createBlockchain() {
     undefined, // memo
     undefined, // asOf
     subnetAuth // subnet owners' address indices signing this tx
-  );
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Create chain transaction ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Create chain transaction ID: ", txId)
 }
 ```
 

@@ -28,34 +28,32 @@ If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/node
 
 :::
 
-
 ```json
 {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "local-txs-enabled": true,
-    "pruning-enabled": false,
-    "eth-apis": [
-        "internal-public-eth",
-        "internal-public-blockchain",
-        "internal-public-transaction-pool",
-        "internal-public-tx-pool",
-        "internal-public-debug",
-        "internal-private-debug",
-        "internal-public-account",
-        "internal-private-personal",
-        "debug-tracer",
-        "web3",
-        "public-eth",
-        "public-eth-filter",
-        "private-admin",
-        "public-debug",
-        "private-debug",
-        "net"
-    ]
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "local-txs-enabled": true,
+  "pruning-enabled": false,
+  "eth-apis": [
+    "internal-public-eth",
+    "internal-public-blockchain",
+    "internal-public-transaction-pool",
+    "internal-public-tx-pool",
+    "internal-public-debug",
+    "internal-private-debug",
+    "internal-public-account",
+    "internal-private-personal",
+    "debug-tracer",
+    "web3",
+    "public-eth",
+    "public-eth-filter",
+    "private-admin",
+    "public-debug",
+    "private-debug",
+    "net"
+  ]
 }
 ```
-
 
 ### Interacting with the C-Chain
 
@@ -73,14 +71,14 @@ You can find the Rosetta server implementation for Avalanche C-Chain [here](http
 
 Avalanche C-Chain transactions are identical to standard EVM transactions with 2 exceptions:
 
-* They must be signed with Avalanche’s ChainID (43114).
-* The detailed dynamic gas fee can be found [here](../../quickstart/transaction-fees.md#c-chain-fees).
+- They must be signed with Avalanche’s ChainID (43114).
+- The detailed dynamic gas fee can be found [here](../../quickstart/transaction-fees.md#c-chain-fees).
 
 For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
 
-* [MetaMask and Remix](../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-* [Truffle](../../dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
-* [Hardhat](../../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
+- [MetaMask and Remix](../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+- [Truffle](../../dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
+- [Hardhat](../../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
 
 ## Ingesting On-Chain Data
 
@@ -99,4 +97,3 @@ If you plan on reading JSON responses directly or use web3.js (doesn't recompute
 ## Support
 
 If you have any problems or questions, reach out either directly to our developers, or on our public [Discord](https://chat.avalabs.org/) server.
-

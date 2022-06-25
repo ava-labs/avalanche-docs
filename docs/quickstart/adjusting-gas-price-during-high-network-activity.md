@@ -40,7 +40,7 @@ The maximum price per unit of gas, that the user is willing to pay for their tra
 `Gas tip cap` is the maximum price per unit of gas, that the user is willing to pay above the base price to prioritize their transaction. But the tip is capped by both the gas tip cap as well as the gas fee cap. The actual tip paid above the `base fee` of the block is known as the `effective gas tip`.
 
 ```javascript
-EffectiveTip = min(MaxFeeCap - BaseFee, GasTipCap);
+EffectiveTip = min(MaxFeeCap - BaseFee, GasTipCap)
 ```
 
 Consider the following examples (here GWEI or nAVAX is one-billionth of AVAX) -

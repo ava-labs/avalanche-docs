@@ -1,13 +1,13 @@
 # Verifying Smart Contracts with Truffle Verify
 
-_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_ 
+_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
 
 _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
-
 
 ## Create a project
 
 Make sure you have truffle installed:
+
 ```
 npm install -g truffle
 ```
@@ -20,37 +20,33 @@ cd MetaCoin
 ```
 
 Download ("unbox") the MetaCoin box:
+
 ```zsh
 truffle unbox metacoin
 ```
 
-
 Once this operation is completed, you'll now have a project structure with the following items:
 
-* ``contracts/``: Directory for Solidity contracts
-* ``migrations/``: Directory for scriptable deployment files
-* ``test/``: Directory for test files for testing your application and contracts
-* ``truffle.js``: Truffle configuration file
+- `contracts/`: Directory for Solidity contracts
+- `migrations/`: Directory for scriptable deployment files
+- `test/`: Directory for test files for testing your application and contracts
+- `truffle.js`: Truffle configuration file
 
 ## Compiling
+
 Before we compile our smart contract, we must set up our environment
-
-
 
 Run the following commands:
 
 ```zsh
-npm init -y 
+npm init -y
 ```
 
-
-```zsh 
-yarn add @truffle/hdwallet-provider yarn add -D truffle-plugin-verify 
+```zsh
+yarn add @truffle/hdwallet-provider yarn add -D truffle-plugin-verify
 ```
 
-
-
-Create a ``.env.json`` file in your project's root directory:
+Create a `.env.json` file in your project's root directory:
 
 ```json
 {
@@ -58,11 +54,10 @@ Create a ``.env.json`` file in your project's root directory:
   "snowtraceApiKey": "your-snowtrace-api-key"
 }
 ```
+
 _Get your snowtrace API key [here](https://snowtrace.io/myapikey)_
- 
 
-Configure your ``truffle-config.js`` file to the appropriate settings:
-
+Configure your `truffle-config.js` file to the appropriate settings:
 
 ```js
 /**
@@ -85,10 +80,10 @@ Configure your ``truffle-config.js`` file to the appropriate settings:
  *
  */
 
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider")
 
 //
-const { snowtraceApiKey, mnemonic } = require("./.env.json");
+const { snowtraceApiKey, mnemonic } = require("./.env.json")
 
 module.exports = {
   /**
@@ -101,25 +96,26 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
-   plugins: [
-    'truffle-plugin-verify'
-  ],
+  plugins: ["truffle-plugin-verify"],
   api_keys: {
-    snowtrace: snowtraceApiKey
+    snowtrace: snowtraceApiKey,
   },
   networks: {
-
     fuji: {
-        provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
-        network_id: 1,
-        timeoutBlocks: 200,
-        confirmations: 5
-    }
-  }
-};
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          `https://api.avax-test.network/ext/bc/C/rpc`
+        ),
+      network_id: 1,
+      timeoutBlocks: 200,
+      confirmations: 5,
+    },
+  },
+}
 ```
-_Network can be configured for mainnet deployment(see Alternatives)_ 
- 
+
+_Network can be configured for mainnet deployment(see Alternatives)_
 
 Run the following command:
 
@@ -127,59 +123,52 @@ Run the following command:
 truffle compile
 ```
 
+Once this operation is completed, your `./build/contracts` folder should contain the following items:
 
-Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
-
-
-* ``ConvertLib.json`` 
-* ``MetaCoin.json``
-* ``Migrations.json``
-
+- `ConvertLib.json`
+- `MetaCoin.json`
+- `Migrations.json`
 
 ## Migrate
 
 Run the following command:
+
 ```zsh
 npx truffle migrate --network fuji
 ```
 
-
 You should see the txn activity in your terminal
-![truffle-verify-txn1](/img/truffle-verify-txn1.png) 
+![truffle-verify-txn1](/img/truffle-verify-txn1.png)
 
-![truffle-verify-txn2](/img/truffle-verify-txn2.png) 
+![truffle-verify-txn2](/img/truffle-verify-txn2.png)
 
-![truffle-verify-txn3](/img/truffle-verify-txn3.png) 
-
+![truffle-verify-txn3](/img/truffle-verify-txn3.png)
 
 ## Truffle verify
 
 Truffle verify allows users to verify contracts from the CLI
 
 ### Fuji Testnet
+
 Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle verify [here](https://github.com/rkalis/truffle-plugin-verify)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
-
 1. Run the following command:
+
 ```zsh
 npx truffle run verify ConvertLib MetaCoin --network fuji
 ```
 
-
 2. Wait for the verification message from the CLI
-![truffle-verify-message1](/img/truffle-verify-message1.png)
-
-
+   ![truffle-verify-message1](/img/truffle-verify-message1.png)
 
 3. View the verified contract
-![truffle-verify-view-contract](/img/truffle-verify-view-contract.png)
+   ![truffle-verify-view-contract](/img/truffle-verify-view-contract.png)
 
+### Mainnet
 
-### Mainnet 
-
-Configure your ``truffle-config.js`` file to the appropriate settings:
+Configure your `truffle-config.js` file to the appropriate settings:
 
 ```js
 module.exports = {
@@ -201,15 +190,15 @@ module.exports = {
   }
 };
 ```
+
 Run the following commands:
+
 ```zsh
 truffle migrate --network mainnet
 ```
 
-
 ```zsh
 truffle verify CovertLib MetaCoin --network mainnet
 ```
-
 
 Thanks for reading 🔺

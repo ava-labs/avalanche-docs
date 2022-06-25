@@ -58,4 +58,4 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 
 ## Developing Your Own Subnet
 
-Plesae check out documents listed on the left panel to develop your own subnets with customized virtual machine and blockchain.
+Please check out documents listed on the left panel to develop your own subnets with customized virtual machine and blockchain.

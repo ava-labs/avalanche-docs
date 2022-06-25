@@ -20,6 +20,10 @@ This API uses the `json 2.0` RPC format.
 
 ### platform.addDelegator
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Add a delegator to the Primary Network.
 
 A delegator stakes AVAX and specifies a validator (the delegatee) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators (weight) in proportion to the stake delegated to them.
@@ -102,6 +106,10 @@ curl -X POST --data '{
 ```
 
 ### platform.addValidator
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
@@ -189,6 +197,10 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
 
 #### **Signature**
@@ -260,6 +272,10 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Create a new address controlled by the given user.
 
 #### **Signature**
@@ -298,6 +314,10 @@ curl -X POST --data '{
 ```
 
 ### platform.createBlockchain
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
 
@@ -371,6 +391,10 @@ curl -X POST --data '{
 ```
 
 ### platform.createSubnet
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Create a new subnet.
 
@@ -497,6 +521,10 @@ curl -X POST --data '{
 ```
 
 ### platform.exportKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Get the private key that controls a given address.
 The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
@@ -1771,7 +1799,7 @@ platform.getUTXOs(
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
+Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
 ```sh
 curl -X POST --data '{
@@ -1779,7 +1807,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getUTXOs",
     "params" :{
-        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
         "encoding": "cb58"
     }
@@ -1940,6 +1968,10 @@ curl -X POST --data '{
 
 ### platform.importAVAX
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
 Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method with assetID `AVAX` to initiate the transfer.
@@ -2001,6 +2033,10 @@ curl -X POST --data '{
 ```
 
 ### platform.importKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Give a user control over an address by providing the private key that controls the address.
 
@@ -2087,6 +2123,10 @@ curl -X POST --data '{
 ```
 
 ### platform.listAddresses
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 List addresses controlled by the given user.
 

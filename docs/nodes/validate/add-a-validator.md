@@ -56,11 +56,13 @@ Fill out the staking parameters. They are explained in more detail in [this doc]
 
 You should a success message, and your balance should be updated.
 
-Calling [`platform.getPendingValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators) verifies that our transaction was accepted.
+Calling [`platform.getPendingValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators) verifies that your transaction was accepted. Note that this API call should be made before your node's validation start time, otherwise, the return will not include your node's id as it is no longer pending.
 
 Go back to the `Earn` tab, and click `Estimated Rewards`.
 
 Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+
+You can also call [`platform.getCurrentValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetcurrentvalidators) to check that your node's id is included in the response.
 
 That’s it!
 
@@ -198,7 +200,7 @@ No change is needed in the addresses for the default action. For customization, 
 
 #### Execute the Code
 
-Now that we have made all of the necessary changes to our example script, it's time to add a validator to the Fuji Network.
+Now that we have made all of the necessary changes to the example script, it's time to add a validator to the Fuji Network.
 
 Run the command:
 

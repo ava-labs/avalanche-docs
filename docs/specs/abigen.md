@@ -1,4 +1,3 @@
-
 # Abigen
 
 Compile a solidity contract into golang to deploy and call contracts programmatically.
@@ -7,7 +6,7 @@ Compile a solidity contract into golang to deploy and call contracts programmati
 
 Download the solidity compiler from [solc-bin](https://github.com/ethereum/solc-bin).
 
-Copy the appropriate compiler into your current path.  ~/bin/ is a common path in most linux distributions.
+Copy the appropriate compiler into your current path. ~/bin/ is a common path in most linux distributions.
 
 ```shell
 # cp linux-amd64/solc-linux-amd64-v0.8.9+commit.e5eed63a ~/bin

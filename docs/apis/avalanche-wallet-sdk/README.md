@@ -16,20 +16,20 @@ It provides high-level methods to transact on Avalanche's X-Chain, P-Chain and C
 
 The wallet types are supported:
 
-* Singleton Wallets
-* Ledger Wallets
-* Mnemonic Wallets
-* XPUB Wallets
+- Singleton Wallets
+- Ledger Wallets
+- Mnemonic Wallets
+- XPUB Wallets
 
 Using `avalanche-wallet-sdk`, developers can:
 
-* Receive and send tokens and NFTs.
-* Transfer funds between chains
-* Add a node to the validator set
-* Delegate stake to a validator
-* Create keystore files from wallet instances
-* Get the transaction history of a wallet
-* Mint NFTs on the X-Chain
+- Receive and send tokens and NFTs.
+- Transfer funds between chains
+- Add a node to the validator set
+- Delegate stake to a validator
+- Create keystore files from wallet instances
+- Get the transaction history of a wallet
+- Mint NFTs on the X-Chain
 
 ### Installation
 
@@ -59,30 +59,30 @@ let myWallet = MnemonicWallet.create()
 
 // Fired when the wallet starts using a new address
 // Used only with HD wallets (Mnemonic, Ledger, and XPUB)
-myWallet.on('addressChanged', (addresses)=>{
-    // Use the most recent addresses from the wallet
+myWallet.on("addressChanged", (addresses) => {
+  // Use the most recent addresses from the wallet
 })
 
 // Fired when X chain balance is updated
-myWallet.on('balanceChangedX', (newBalance)=>{
-    // Recent X chain balance
+myWallet.on("balanceChangedX", (newBalance) => {
+  // Recent X chain balance
 })
 
 // Fired when P chain AVAX balance is updated
-myWallet.on('balanceChangedP', (newBalance)=>{
-    // Recent P chain AVAX balance
+myWallet.on("balanceChangedP", (newBalance) => {
+  // Recent P chain AVAX balance
 })
 
 // Fired when C chain AVAX balance is updated
-myWallet.on('balanceChangedC', (newBalance)=>{
-    // Recent C chain AVAX balance
+myWallet.on("balanceChangedC", (newBalance) => {
+  // Recent C chain AVAX balance
 })
 ```
 
 #### Sending AVAX
 
 ```typescript
-import {MnemonicWallet, BN} from '@avalabs/avalanche-wallet-sdk'
+import { MnemonicWallet, BN } from "@avalabs/avalanche-wallet-sdk"
 
 let myWallet = MnemonicWallet.create()
 
@@ -103,7 +103,7 @@ let txID = await myWallet.sendAvax(to, amount)
 By default the SDK is connected to the Avalanche Mainnet.
 
 ```typescript
-import { NetworkConstants, Network} from '@avalabs/avalanche-wallet-sdk';
+import { NetworkConstants, Network } from "@avalabs/avalanche-wallet-sdk"
 
 // Set to Mainnet
 Network.setNetwork(NetworkConstants.MainnetConfig)
@@ -117,7 +117,7 @@ Network.setNetwork(NetworkConstants.TestnetConfig)
 Token amounts are represented in their smallest divisible unit using BN.js. The `Utils` namespace has helper functions to display BN numbers in a human readable way.
 
 ```typescript
-import {Utils} from '@avalabs/avalanche-wallet-sdk'
+import { Utils } from "@avalabs/avalanche-wallet-sdk"
 
 // On X-Chain and P-Chain AVAX has 9 decimals
 let amtX = new BN(1234567000000)
@@ -133,7 +133,7 @@ Utils.bnToAvaxC(amtC) // 1,234.567
 Use the `WebsocketProvider` class to update wallet balances in real time without polling.
 
 ```typescript
-import { Network, NetworkConstants } from 'avalanche-wallet-sdk';
+import { Network, NetworkConstants } from "avalanche-wallet-sdk"
 
 // Create a websocket provider from the network currently used by the SDK
 const provider = Network.WebsocketProvider.fromActiveNetwork()
@@ -154,24 +154,23 @@ provider.setNetwork(NetworkConstants.TestnetConfig) // connect to Fuji testnet
 The SDK comes loaded with a set of ERC20 contracts. You can add additional contracts like this:
 
 ```typescript
-import { Assets } from '@avalabs/avalanche-wallet-sdk'
+import { Assets } from "@avalabs/avalanche-wallet-sdk"
 
 // Will try to fetch details about the ERC20 contract
-try{
-    await Assets.addErc20Token('0x34B6C87bb59Eb37EFe35C8d594a234Cd8C654D50'); // Testnet DAI
-}catch(e){
-    // Contract not found or not valid
+try {
+  await Assets.addErc20Token("0x34B6C87bb59Eb37EFe35C8d594a234Cd8C654D50") // Testnet DAI
+} catch (e) {
+  // Contract not found or not valid
 }
 
 // or from known data
 let tokenData = {
-    chainId: 43114,
-    address: '0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a',
-    decimals: 18,
-    name: 'Dai Stablecoin',
-    symbol: 'DAI',
+  chainId: 43114,
+  address: "0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a",
+  decimals: 18,
+  name: "Dai Stablecoin",
+  symbol: "DAI",
 }
 
 Assets.addErc20TokenFromData(tokenData)
 ```
-
