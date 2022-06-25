@@ -18,4 +18,4 @@
 
 • **txID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:99](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L99)*
+*Defined in [src/apis/avm/interfaces.ts:99](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/interfaces.ts#L99)*

@@ -246,6 +246,88 @@ Let’s make a transferable operation:
 
 Outputs have four possible types: [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
 
+## SECP256K1 Mint Output
+
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+
+### **What SECP256K1 Mint Output Contains**
+
+A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+
+* **`TypeID`** is the ID for this output type. It is `0x00000006`.
+* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
+* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
+* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+
+### **Gantt SECP256K1 Mint Output Specification**
+
+```text
++-----------+------------+--------------------------------+
+| type_id   : int        |                       4 bytes  |
++-----------+------------+--------------------------------+
+| locktime  : long       |                       8 bytes  |
++-----------+------------+--------------------------------+
+| threshold : int        |                       4 bytes  |
++-----------+------------+--------------------------------+
+| addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
++-----------+------------+--------------------------------+
+                         | 20 + 20 * len(addresses) bytes |
+                         +--------------------------------+
+```
+
+### **Proto SECP256K1 Mint Output Specification**
+
+```text
+message SECP256K1MintOutput {
+    uint32 typeID = 1;            // 04 bytes
+    uint64 locktime = 2;          // 08 bytes
+    uint32 threshold = 3;         // 04 bytes
+    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+}
+```
+
+### **SECP256K1 Mint Output Example**
+
+Let’s make a SECP256K1 mint output with:
+
+* **`TypeID`**: `6`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
+* **`Addresses`**:
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
+
+```text
+[
+    TypeID    <- 0x00000006
+    Locktime  <- 0x000000000000d431
+    Threshold <- 0x00000001
+    Addresses <- [
+        0x51025c61fbcfc078f69334f834be6dd26d55a955,
+        0xc3344128e060128ede3523a24a461c8943ab0859,
+    ]
+]
+=
+[
+    // typeID:
+    0x00, 0x00, 0x00, 0x06,
+    // locktime:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
+    // threshold:
+    0x00, 0x00, 0x00, 0x01,
+    // number of addresses:
+    0x00, 0x00, 0x00, 0x02,
+    // addrs[0]:
+    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
+    0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
+    0x6d, 0x55, 0xa9, 0x55,
+    // addrs[1]:
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
+]
+```
+
 ## SECP256K1 Transfer Output
 
 A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
@@ -336,51 +418,56 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Mint Output
+## NFT Mint Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+An NFT mint output is an NFT that is owned by a collection of addresses.
 
-### **What SECP256K1 Mint Output Contains**
+### **What NFT Mint Output Contains**
 
-A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000006`.
+* **`TypeID`** is the ID for this output type. It is `0x0000000a`.
+* **`GroupID`** is an int that specifies the group this NFT is issued to.
 * **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
 * **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
 * **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
 
-### **Gantt SECP256K1 Mint Output Specification**
+### **Gantt NFT Mint Output Specification**
 
 ```text
 +-----------+------------+--------------------------------+
-| type_id   : int        |                       4 bytes  |
+| type_id   : int        |                        4 bytes |
 +-----------+------------+--------------------------------+
-| locktime  : long       |                       8 bytes  |
+| group_id  : int        |                        4 bytes |
 +-----------+------------+--------------------------------+
-| threshold : int        |                       4 bytes  |
+| locktime  : long       |                        8 bytes |
++-----------+------------+--------------------------------+
+| threshold : int        |                        4 bytes |
 +-----------+------------+--------------------------------+
 | addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
 +-----------+------------+--------------------------------+
-                         | 20 + 20 * len(addresses) bytes |
+                         | 24 + 20 * len(addresses) bytes |
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Output Specification**
+### **Proto NFT Mint Output Specification**
 
 ```text
-message SECP256K1MintOutput {
+message NFTMintOutput {
     uint32 typeID = 1;            // 04 bytes
-    uint64 locktime = 2;          // 08 bytes
-    uint32 threshold = 3;         // 04 bytes
-    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+    uint32 group_id = 2;          // 04 bytes
+    uint64 locktime = 3;          // 08 bytes
+    uint32 threshold = 4;         // 04 bytes
+    repeated bytes addresses = 5; // 04 bytes + 20 bytes * len(addresses)
 }
 ```
 
-### **SECP256K1 Mint Output Example**
+### **NFT Mint Output Example**
 
-Let’s make a SECP256K1 mint output with:
+Let’s make an NFT mint output with:
 
-* **`TypeID`**: `6`
+* **`TypeID`**: `10`
+* **`GroupID`**: `12345`
 * **`Locktime`**: `54321`
 * **`Threshold`**: `1`
 * **`Addresses`**:
@@ -389,7 +476,8 @@ Let’s make a SECP256K1 mint output with:
 
 ```text
 [
-    TypeID    <- 0x00000006
+    TypeID    <- 0x0000000a
+    GroupID   <- 0x00003039
     Locktime  <- 0x000000000000d431
     Threshold <- 0x00000001
     Addresses <- [
@@ -399,8 +487,10 @@ Let’s make a SECP256K1 mint output with:
 ]
 =
 [
-    // typeID:
-    0x00, 0x00, 0x00, 0x06,
+    // TypeID
+    0x00, 0x00, 0x00, 0x0a,
+    // groupID:
+    0x00, 0x00, 0x30, 0x39,
     // locktime:
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
     // threshold:
@@ -502,96 +592,6 @@ Let’s make an NFT transfer output with:
     0x00, 0x00, 0x00, 0x03,
     // payload:
     0x43, 0x11, 0x00,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // threshold:
-    0x00, 0x00, 0x00, 0x01,
-    // number of addresses:
-    0x00, 0x00, 0x00, 0x02,
-    // addrs[0]:
-    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
-    0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
-    0x6d, 0x55, 0xa9, 0x55,
-    // addrs[1]:
-    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
-    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
-    0x43, 0xab, 0x08, 0x59,
-]
-```
-
-## NFT Mint Output
-
-An NFT mint output is an NFT that is owned by a collection of addresses.
-
-### **What NFT Mint Output Contains**
-
-An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and `Addresses`.
-
-* **`TypeID`** is the ID for this output type. It is `0x0000000a`.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
-
-### **Gantt NFT Mint Output Specification**
-
-```text
-+-----------+------------+--------------------------------+
-| type_id   : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| group_id  : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| locktime  : long       |                        8 bytes |
-+-----------+------------+--------------------------------+
-| threshold : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
-+-----------+------------+--------------------------------+
-                         | 24 + 20 * len(addresses) bytes |
-                         +--------------------------------+
-```
-
-### **Proto NFT Mint Output Specification**
-
-```text
-message NFTMintOutput {
-    uint32 typeID = 1;            // 04 bytes
-    uint32 group_id = 2;          // 04 bytes
-    uint64 locktime = 3;          // 08 bytes
-    uint32 threshold = 4;         // 04 bytes
-    repeated bytes addresses = 5; // 04 bytes + 20 bytes * len(addresses)
-}
-```
-
-### **NFT Mint Output Example**
-
-Let’s make an NFT mint output with:
-
-* **`TypeID`**: `10`
-* **`GroupID`**: `12345`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
-
-```text
-[
-    TypeID    <- 0x0000000a
-    GroupID   <- 0x00003039
-    Locktime  <- 0x000000000000d431
-    Threshold <- 0x00000001
-    Addresses <- [
-        0x51025c61fbcfc078f69334f834be6dd26d55a955,
-        0xc3344128e060128ede3523a24a461c8943ab0859,
-    ]
-]
-=
-[
-    // TypeID
-    0x00, 0x00, 0x00, 0x0a,
-    // groupID:
-    0x00, 0x00, 0x30, 0x39,
     // locktime:
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
     // threshold:
@@ -1151,6 +1151,8 @@ An NFT credential is the same as an [secp256k1 credential](avm-transaction-seria
 
 Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains), [`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains), [`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains), and [`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains). They all embed [`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), which contains common fields and operations.
 
+## Unsigned BaseTx
+
 ### What Base Tx Contains
 
 A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
@@ -1269,6 +1271,8 @@ Let’s make an base tx that uses the inputs and outputs from the previous examp
     0x00, 0x01, 0x02, 0x03,
 ]
 ```
+
+## Unsigned CreateAssetTx
 
 ### What Unsigned Create Asset Tx Contains
 
@@ -1393,6 +1397,8 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 ]
 ```
 
+## Unsigned OperationTx
+
 ### What Unsigned Operation Tx Contains
 
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
@@ -1494,6 +1500,8 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
     0xab, 0x08, 0x59,
 ]
 ```
+
+## Unsigned ImportTx
 
 ### What Unsigned Import Tx Contains
 
@@ -1603,6 +1611,8 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
     0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x07,
 ]
 ```
+
+## Unsigned ExportTx
 
 ### What Unsigned Export Tx Contains
 
@@ -1834,7 +1844,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
 * **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
 * **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
 * **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the [output](avm-transaction-serialization.md#transferable-output) object that created this utxo. The serialization of Outputs was defined above.
+* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above. Valid output types are [SECP Mint Output](avm-transaction-serialization.md#secp256k1-mint-output), [SECP Transfer Output](avm-transaction-serialization.md#secp256k1-transfer-output), [NFT Mint Output](avm-transaction-serialization.md#nft-mint-output), [NFT Transfer Output](avm-transaction-serialization.md#nft-transfer-output).
 
 ### Gantt UTXO Specification
 
@@ -1866,9 +1876,51 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO Examples
 
-Let’s make a UTXO from the signed transaction created above:
+Let’s make a UTXO with a SECP Mint Output:
+
+* **`CodecID`**: `0`
+* **`TxID`**: `0x47c92ed62d18e3cccda512f60a0d5b1e939b6ab73fb2d011e5e306e79bd0448f`
+* **`UTXOIndex`**: `0` = `0x00000001`
+* **`AssetID`**: `0x47c92ed62d18e3cccda512f60a0d5b1e939b6ab73fb2d011e5e306e79bd0448f`
+* **`Output`**: `0x00000006000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a`
+
+```text
+[
+    CodecID   <- 0x0000
+    TxID      <- 0x47c92ed62d18e3cccda512f60a0d5b1e939b6ab73fb2d011e5e306e79bd0448f
+    UTXOIndex <- 0x00000001
+    AssetID   <- 0x47c92ed62d18e3cccda512f60a0d5b1e939b6ab73fb2d011e5e306e79bd0448f
+    Output    <- 00000006000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a
+]
+=
+[
+    // codecID:
+    0x00, 0x00,
+    // txID:
+    0x47, 0xc9, 0x2e, 0xd6, 0x2d, 0x18, 0xe3, 0xcc, 
+    0xcd, 0xa5, 0x12, 0xf6, 0x0a, 0x0d, 0x5b, 0x1e, 
+    0x93, 0x9b, 0x6a, 0xb7, 0x3f, 0xb2, 0xd0, 0x11, 
+    0xe5, 0xe3, 0x06, 0xe7, 0x9b, 0xd0, 0x44, 0x8f,
+    // utxo index:
+    0x00, 0x00, 0x00, 0x01,
+    // assetID:
+    0x47, 0xc9, 0x2e, 0xd6, 0x2d, 0x18, 0xe3, 0xcc, 
+    0xcd, 0xa5, 0x12, 0xf6, 0x0a, 0x0d, 0x5b, 0x1e, 
+    0x93, 0x9b, 0x6a, 0xb7, 0x3f, 0xb2, 0xd0, 0x11, 
+    0xe5, 0xe3, 0x06, 0xe7, 0x9b, 0xd0, 0x44, 0x8f,
+    // secp mint output:
+    0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+    0x00, 0x00, 0x00, 0x01, 0x3c, 0xb7, 0xd3, 0x84, 
+    0x2e, 0x8c, 0xee, 0x6a, 0x0e, 0xbd, 0x09, 0xf1, 
+    0xfe, 0x88, 0x4f, 0x68, 0x61, 0xe1, 0xb2, 0x9c, 
+    0x62, 0x76, 0xaa, 0x2a,
+]
+```
+
+Let’s make a UTXO with a SECP Transfer Output from the signed transaction created above:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1886,7 +1938,7 @@ Let’s make a UTXO from the signed transaction created above:
 ]
 =
 [
-    // Codec ID:
+    // codecID:
     0x00, 0x00,
     // txID:
     0xf9, 0x66, 0x75, 0x0f, 0x43, 0x88, 0x67, 0xc3,
@@ -1900,7 +1952,7 @@ Let’s make a UTXO from the signed transaction created above:
     0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
     0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    // output:
+    // secp transfer output:
     0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
@@ -1910,6 +1962,92 @@ Let’s make a UTXO from the signed transaction created above:
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
     0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
     0x24, 0x25, 0x26, 0x27,
+]
+```
+
+Let’s make a UTXO with an NFT Mint Output:
+
+* **`CodecID`**: `0`
+* **`TxID`**: `0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7`
+* **`UTXOIndex`**: `0` = `0x00000001`
+* **`AssetID`**: `0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7`
+* **`Output`**: `0x0000000a00000000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a`
+
+```text
+[
+    CodecID   <- 0x0000
+    TxID      <- 0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7
+    UTXOIndex <- 0x00000001
+    AssetID   <- 0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7
+    Output    <- 0000000a00000000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a
+]
+=
+[
+    // codecID:
+    0x00, 0x00,
+    // txID:
+    0x03, 0xc6, 0x86, 0xef, 0xe8, 0xd8, 0x0c, 0x51, 
+    0x9f, 0x35, 0x69, 0x29, 0xf6, 0xda, 0x94, 0x5f, 
+    0x7f, 0xf9, 0x03, 0x78, 0xf0, 0x04, 0x4b, 0xb0, 
+    0xe1, 0xa5, 0xd6, 0xc1, 0xad, 0x06, 0xba, 0xe7,
+    // utxo index:
+    0x00, 0x00, 0x00, 0x01,
+    // assetID:
+    0x03, 0xc6, 0x86, 0xef, 0xe8, 0xd8, 0x0c, 0x51, 
+    0x9f, 0x35, 0x69, 0x29, 0xf6, 0xda, 0x94, 0x5f, 
+    0x7f, 0xf9, 0x03, 0x78, 0xf0, 0x04, 0x4b, 0xb0, 
+    0xe1, 0xa5, 0xd6, 0xc1, 0xad, 0x06, 0xba, 0xe7,
+    // nft mint output:
+    0x00, 0x00, 0x00, 0x0a, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+    0x3c, 0xb7, 0xd3, 0x84, 0x2e, 0x8c, 0xee, 0x6a, 
+    0x0e, 0xbd, 0x09, 0xf1, 0xfe, 0x88, 0x4f, 0x68, 
+    0x61, 0xe1, 0xb2, 0x9c, 0x62, 0x76, 0xaa, 0x2a,
+]
+```
+
+Let’s make a UTXO with an NFT Transfer Output:
+
+* **`CodecID`**: `0`
+* **`TxID`**: `0xa68f794a7de7bdfc5db7ba5b73654304731dd586bbf4a6d7b05be6e49de2f936`
+* **`UTXOIndex`**: `0` = `0x00000001`
+* **`AssetID`**: `0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7`
+* **`Output`**: `0x0000000b000000000000000b4e4654205061796c6f6164000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a`
+
+```text
+[
+    CodecID   <- 0x0000
+    TxID      <- 0xa68f794a7de7bdfc5db7ba5b73654304731dd586bbf4a6d7b05be6e49de2f936
+    UTXOIndex <- 0x00000001
+    AssetID   <- 0x03c686efe8d80c519f356929f6da945f7ff90378f0044bb0e1a5d6c1ad06bae7
+    Output    <- 0000000b000000000000000b4e4654205061796c6f6164000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c6276aa2a
+]
+=
+[
+    // codecID:
+    0x00, 0x00,
+    // txID:
+    0xa6, 0x8f, 0x79, 0x4a, 0x7d, 0xe7, 0xbd, 0xfc, 
+    0x5d, 0xb7, 0xba, 0x5b, 0x73, 0x65, 0x43, 0x04, 
+    0x73, 0x1d, 0xd5, 0x86, 0xbb, 0xf4, 0xa6, 0xd7, 
+    0xb0, 0x5b, 0xe6, 0xe4, 0x9d, 0xe2, 0xf9, 0x36,
+    // utxo index:
+    0x00, 0x00, 0x00, 0x01,
+    // assetID:
+    0x03, 0xc6, 0x86, 0xef, 0xe8, 0xd8, 0x0c, 0x51, 
+    0x9f, 0x35, 0x69, 0x29, 0xf6, 0xda, 0x94, 0x5f, 
+    0x7f, 0xf9, 0x03, 0x78, 0xf0, 0x04, 0x4b, 0xb0, 
+    0xe1, 0xa5, 0xd6, 0xc1, 0xad, 0x06, 0xba, 0xe7,
+    // nft transfer output:
+    0x00, 0x00, 0x00, 0x0b, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x0b, 0x4e, 0x46, 0x54, 0x20, 
+    0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x3c, 
+    0xb7, 0xd3, 0x84, 0x2e, 0x8c, 0xee, 0x6a, 0x0e, 
+    0xbd, 0x09, 0xf1, 0xfe, 0x88, 0x4f, 0x68, 0x61, 
+    0xe1, 0xb2, 0x9c, 0x62, 0x76, 0xaa, 0x2a,
 ]
 ```
 
@@ -1959,7 +2097,6 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, 
 |           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
 |                 + len(name) + len(symbol) + size(initial_states) bytes |
 +------------------------------------------------------------------------+
-```
 
 ### Proto GenesisAsset Specification
 
@@ -2056,3 +2193,106 @@ Let’s make a GenesisAsset:
 ]
 ```
 
+## Vertex
+
+A vertex is a collection of transactions. It's the DAG equivalent of a block in a linear blockchain.
+
+### What Vertex Contains
+
+A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TransactionSize`, `Transactions`, and `Restrictions`.
+
+* **`ChainID`** is the ID of the chain this vertex exists on.
+* **`Height`** is the maximum height of a parent vertex plus 1.
+* **`Epoch`** is the epoch this vertex belongs to.
+* **`ParentIDs`** are the IDs of this vertex's parents.
+* **`TransactionCount`** is the total number of transactions in this vertex.
+* **`TransactionSize`** is the total size of the transactions in this vertex.
+* **`Transactions`** are the transactions in this vertex.
+* **`Restrictions`** are IDs of transactions that must be accepted in the same epoch as this vertex or an earlier one.
+
+### Gantt Vertex Specification
+
+```text
++--------------+---------------+------------------------------+
+| chain_id     : [32]byte      | 32 bytes                     |
++--------------+---------------+------------------------------+
+| height       : long          | 8 bytes                      |
++--------------+---------------+------------------------------+
+| epoch        : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| parent_ids   : []ParentID    | 4 + size(parent_ids) bytes   |
++--------------+---------------+------------------------------+
+| tx_count     : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| txs_size     : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| transactions : []Transaction | 4 + size(transactions) bytes |
++--------------+---------------+------------------------------+
+| restrictions : []Restriction | 4 + size(restrictions) bytes |
++--------------+---------------+-----------------------------------------+
+|   64 + size(parentIDs) + size(restrictions) + size(transactions) bytes |
++------------------------------------------------------------------------+
+```
+
+### Proto Vertex Specification
+
+```text
+message Vertex {
+    uint16 codec_id = 1;              // 04 bytes
+    bytes chain_id = 2;               // 32 bytes
+    uint64 height = 3;                // 08 bytes
+    uint32 epoch = 4;                 // 04 bytes
+    repeated bytes parent_ids = 5;    // 04 bytes + 32 bytes * count(parent_ids)
+    uint32 tx_count = 5;              // 04 bytes
+    uint32 txs_size = 6;              // 04 bytes
+    repeated bytes transactions = 9;  // 04 bytes + size(transactions)
+    repeated bytes restrictions = 10; // 04 bytes + size(restrictions)
+}
+```
+
+### Vertex Example
+
+Let’s make a Vertex:
+
+* **`CodecID`**: `0x0000`
+* **`ChainID`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`Height`**: `3`
+* **`Epoch`**: `0`
+* **`ParentIDs`**: ["0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
+* **`Transactions`**: `[Example BaseTx as defined above]`
+* **`Restrictions`**: []
+
+```text
+[
+    CodecID          <- 0x0000
+    ChainID          <- 0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf
+    Height           <- 0x0000000000000003 
+    Epoch            <- 0x00000000
+    ParentIDs        <- [0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
+    Transactions     <- [Example BaseTx defined above]
+    Restrictions     <- []
+]
+=
+[
+   // codec id
+   00 00
+   // chain id
+   d8 91 ad 56 05 6d 9c 01 f1 8f 43 f5 8b 5c 78 4a d0 7a 4a 49 cf 3d 1f 11 62 38 04 b5 cb a2 c6 bf 
+   // height
+   00 00 00 00 00 00 00 03 
+   // epoch
+   00 00 00 00 
+   // num parent IDs
+   00 00 00 01 
+   // parent id 1
+   73 fa 32 c4 86 fe 9f ee b3 92 ee 37 45 30 c6 fe 07 6b 08 a1 11 fd 58 e9 74 e7 f9 03 a5 29 51 d2 
+   // num txs
+   00 00 00 01 
+   // size of the transaction 
+   00 00 01 7b 
+   // base tx from above
+   [omitted for brevity]
+   // num restrictions
+   00 00 00 00 
+]
+```

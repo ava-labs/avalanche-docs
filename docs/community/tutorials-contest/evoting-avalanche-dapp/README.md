@@ -1,4 +1,3 @@
-
 # Create a Voting dApp on Avalanche using ReactJS
 
 ## Introduction
@@ -9,15 +8,15 @@ Truffle Suite is a toolkit for launching decentralized applications (dApps) on E
 
 ## Prerequisites
 
-* Basic familarity with [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-* Basic familarity with [ReactJS](https://reactjs.org/).
-* Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
+- Basic familarity with [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
+- Basic familarity with [ReactJS](https://reactjs.org/).
+- Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-* [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
-* [Metamask](https://metamask.io) extension added to the browser.
+- [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
+- [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
+- [Metamask](https://metamask.io) extension added to the browser.
 
 ## Initializing the working directory
 
@@ -166,9 +165,9 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.0"
-    }
-  }
+      version: "0.8.0",
+    },
+  },
 };
 ```
 
@@ -332,7 +331,7 @@ Create a new file in the `migrations` directory named `2_deploy_contracts.js`, a
 ```javascript
 const MainContract = artifacts.require("MainContract");
 
-module.exports = function(deployer) {
+module.exports = function (deployer) {
   deployer.deploy(MainContract);
 };
 ```
@@ -367,7 +366,7 @@ When deploying smart contracts to the C-Chain, it will require some deployment c
 
 ### **Fund your account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax-test.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
 ![](./assets/evoting-dapp-02-wallet-c-chain-address.png)
 
@@ -526,7 +525,7 @@ So, now add the following line under the `//Importing...` section of `App.js` to
 
 ```javascript
 // 1. Importing other modules
-import {GetWeb3, GetContract, GetAccount} from './BlockchainUtil';
+import { GetWeb3, GetContract, GetAccount } from "./BlockchainUtil";
 ```
 
 Paste the following code inside the `init()` function of `App.js`
@@ -535,22 +534,22 @@ Paste the following code inside the `init()` function of `App.js`
 // 2. Load web3
 const Web3 = new GetWeb3();
 this.web3 = await Web3.getWeb3();
-this.setState({web3: this.web3});
+this.setState({ web3: this.web3 });
 
 // 3. Load Account
 const Account = new GetAccount();
 this.account = await Account.getAccount(this.web3);
-this.setState({account: this.account[0]});
+this.setState({ account: this.account[0] });
 
 // 4. Load Contract
 const Contract = new GetContract();
 this.mainInstance = await Contract.getContract(this.web3, contractJson);
-this.setState({mainInstance: this.mainInstance});
+this.setState({ mainInstance: this.mainInstance });
 ```
 
 ### CreateElection Component
 
-Now let's make a component that will create new elections using our deployed smart contract. Create the file `CreateElection.js` inside of the project `src` directory and use the code as given in this [file](./frontend/CreateElection.js). The code is commented to draw attention to the important parts.
+Now let's make a component that will create new elections using our deployed smart contract. Create the file `CreateElection.js` inside of the project `src` directory and use the code as given in this [file](./frontend/CreateElection.js.md). The code is commented to draw attention to the important parts.
 
 ### ActiveElections Component
 
@@ -568,10 +567,15 @@ Now we need to update our `App.js` file with all the components that we have mad
 
 ```javascript
 // 1. Importing other modules
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import CreateElection from "./CreateElection"
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import CreateElection from "./CreateElection";
 import ActiveElections from "./ActiveElections";
-import contractJson from './build/contracts/MainContract.json';
+import contractJson from "./build/contracts/MainContract.json";
 ```
 
 **Load components** - Inside the `<div>` tag of `return()` function in `App.js`, replace the sample text (`Avalanche evoting`) with the the code of the following components.
@@ -581,23 +585,45 @@ import contractJson from './build/contracts/MainContract.json';
 <Router>
   {/* Default route to ActiveElections component */}
   <Route path="/" exact>
-    <Redirect to="/active"/>
+    <Redirect to="/active" />
   </Route>
 
   {/* Navbar */}
-  <nav className="navbar navbar-dark shadow" style={{backgroundColor: "#1b2021", height: "60px", color: "white", marginBottom: "50px"}}>
+  <nav
+    className="navbar navbar-dark shadow"
+    style={{
+      backgroundColor: "#1b2021",
+      height: "60px",
+      color: "white",
+      marginBottom: "50px",
+    }}
+  >
     {/* Link to Active election page (nav-header) */}
-    <Link to = "/active"><b style = {{cursor: "pointer", color: "white"}}>Avalanche Elections</b></Link>
+    <Link to="/active">
+      <b style={{ cursor: "pointer", color: "white" }}>Avalanche Elections</b>
+    </Link>
 
     {/* Account address on the right side of the navbar  */}
-    <span style={{float: "right"}}>{this.state.account}</span>
+    <span style={{ float: "right" }}>{this.state.account}</span>
   </nav>
 
   {/* Route to CreateElection page */}
-  {<Route path="/createElection" exact component={() => <CreateElection account={this.state.account}/>}/>}
+  {
+    <Route
+      path="/createElection"
+      exact
+      component={() => <CreateElection account={this.state.account} />}
+    />
+  }
 
   {/* Route to Active election page */}
-  {<Route path="/active" exact component={() => <ActiveElections account={this.state.account}/>}/>}
+  {
+    <Route
+      path="/active"
+      exact
+      component={() => <ActiveElections account={this.state.account} />}
+    />
+  }
 </Router>
 ```
 
@@ -613,13 +639,13 @@ Now go to the project root directory, i.e. `avalanche-voting` directory, and run
 
 Don't forget to set up Metamask with Fuji testnet and also fund the account with Fuji C-Chain test tokens to vote. In the Metamask extension, add a custom RPC by clicking at the network dropdown in the centre of the extension. Fill in the details as shown below
 
-| Info | Value |
-| :--- | :--- |
-| Network Name | Avalanche Fuji |
-| New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
-| Chain ID | 43113 |
-| Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
+| Info               | Value                                                                                    |
+| :----------------- | :--------------------------------------------------------------------------------------- |
+| Network Name       | Avalanche Fuji                                                                           |
+| New RPC URL        | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
+| Chain ID           | 43113                                                                                    |
+| Currency Symbol    | AVAX-C                                                                                   |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io)                             |
 
 ## Conclusion
 

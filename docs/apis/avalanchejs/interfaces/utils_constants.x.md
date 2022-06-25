@@ -25,7 +25,7 @@
 
 • **alias**: *string*
 
-*Defined in [src/utils/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L30)*
+*Defined in [src/utils/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L30)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **avaxAssetID**? : *string*
 
-*Defined in [src/utils/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L34)*
+*Defined in [src/utils/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L34)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **blockchainID**: *string*
 
-*Defined in [src/utils/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L29)*
+*Defined in [src/utils/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L29)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **creationTxFee**: *BN | number*
 
-*Defined in [src/utils/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L32)*
+*Defined in [src/utils/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L32)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **fee**? : *BN*
 
-*Defined in [src/utils/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L36)*
+*Defined in [src/utils/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L36)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **mintTxFee**: *BN*
 
-*Defined in [src/utils/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L33)*
+*Defined in [src/utils/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L33)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **txFee**? : *BN | number*
 
-*Defined in [src/utils/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L35)*
+*Defined in [src/utils/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L35)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 • **vm**: *string*
 
-*Defined in [src/utils/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L31)*
+*Defined in [src/utils/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/8033096/src/utils/constants.ts#L31)*

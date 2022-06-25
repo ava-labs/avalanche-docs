@@ -5,8 +5,9 @@
 This tutorial explains several methods of creating a local test network.
 
 There are currently two options to launch such a local network:
-* Using the [Avalanche Network Runner](../quickstart/network-runner.md) (recommended)
-* Manually starting each AvalancheGo node (not recommended)
+
+- Using the [Avalanche Network Runner](../quickstart/network-runner.md) (recommended)
+- Manually starting each AvalancheGo node (not recommended)
 
 ## Avalanche Network Runner
 
@@ -22,8 +23,7 @@ Clone the repository with:
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases). You can download and install it on to your computer. 
-
+There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases). You can download and install it on to your computer.
 
 To build from the source and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
 
@@ -34,12 +34,20 @@ go install -v ./cmd/avalanche-network-runner
 
 `avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
 
-Unless otherwise specified, file paths given below are relative to the root of this repository. 
+Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.
+
+```bash
+# replace execPath with the path to AvalancheGo on your machine
+# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
+```
+
+Unless otherwise specified, file paths given below are relative to the root of this repository.
 
 When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them.
 Therefore we run one shell with the RPC server, and another one for issuing calls.
 
-### Start the server
+### Start the Server
 
 ```bash
 avalanche-network-runner server \
@@ -51,27 +59,23 @@ avalanche-network-runner server \
 Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to be run in a separate terminal.
 
 The RPC server listens to two ports:
-* `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
-* `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
+
+- `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
+- `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
 
 When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
 Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
 
 Each of the examples below will show both modes, claritying its usage.
 
-### Start a New Avalanche Network with Five Nodes (a cluster)
-
-```bash
-# replace execPath with the path to AvalancheGo on your machine
-# e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-AVALANCHEGO_EXEC_PATH="avalanchego"
-```
+### Start a New Avalanche Network with Five Nodes (a Cluster)
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
 ```
 
 or
+
 ```bash
 avalanche-network-runner control start \
 --log-level debug \
@@ -97,13 +101,14 @@ Response
 }
 ```
 
-
 Use this command to check if all the nodes in the cluster are healthy
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/health -d ''
 ```
+
 or
+
 ```bash
 avalanche-network-runner control health \
 --log-level debug \
@@ -115,13 +120,7 @@ The response to this call is actually pretty large, as it contains the state of 
 ```json
 {
   "clusterInfo": {
-    "nodeNames": [
-      "node3",
-      "node4",
-      "node5",
-      "node1",
-      "node2"
-    ],
+    "nodeNames": ["node3", "node4", "node5", "node1", "node2"],
     "nodeInfos": {
       "node1": {
         "name": "node1",
@@ -189,13 +188,14 @@ The response to this call is actually pretty large, as it contains the state of 
 }
 ```
 
-#### To get API endpoints of all nodes in the cluster {#retrieve-all-nodes}
+#### To Get API Endpoints of All Nodes in the Cluster {#retrieve-all-nodes}
 
 ```bash
 curl -X POST -k http://localhost:8081/v1/control/uris -d ''
 ```
 
 or
+
 ```bash
 avalanche-network-runner control uris \
 --log-level debug \

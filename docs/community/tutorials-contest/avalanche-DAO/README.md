@@ -2,7 +2,7 @@
 
 ## What is a DAO
 
-The DAO's are systems that help us to work with people around the world in a safety and clear way.  
+The DAO's are systems that help us to work with people around the world in a safe and clear way.  
 
 Think of them like an internet-native business that's collectively owned and managed by its members. They have built-in treasuries that no one has the authority to access without the approval of the group. Decisions are governed by proposals and voting to ensure everyone in the organization has a voice.
 
@@ -10,12 +10,13 @@ There's no CEO who can authorize spending based on their own whims and no chance
 
 ## How the DAO's work?
 
-The backbone of a DAO is an smart contracts. The smart contracts defines the rules of the organization.  
-Generally the DAO const of two main smart contracts the ERC20 token that is a governance token  and the smart contract that have the rules for the DAO.
-So like a DAO's member you need to have some governance tokens and then deposit to the DAO contract, and then we can create a proposal if the proposal is accepted the
-other members in the DAO can start to vote.  
+The backbone of a DAO is in smart contracts. The smart contracts defines the rules of the organization.  
+
+Generally the DAO consists of two main smart contracts: the ERC20 token that is a governance token, and the smart contract that have the rules for the DAO. So like a DAO's members you need to have some governance tokens and then deposit to the DAO contract, and then we can create a proposal if the proposal is accepted the other members in the DAO can start to vote.  
+
 The vote is based in how many governance tokens have been deposited on the DAO.  
-For example if you have a hundred of the governance tokens but you deposited only twenty tokens on the DAO contract only twenty tokens will be taken into account for you vote.
+
+For example if you have a 100 of the governance tokens but you deposited only 20 tokens on the DAO contract only 20 tokens will be taken into account for you vote.
 
 ## Let's start to build our DAO
 
@@ -277,7 +278,7 @@ Now we need compile our contract, I'm using the 0.8.0 version compiler, and clic
 ![](assets/avalanche-dao-remix-compiler.png)
 
 In the environment section we choose the `Injected Web3` option, in account we chose an account from our metamask plugin in the FUJI network, make sure that your account have the necessary avax for the deploy and the minimum for create a proposal.   
-[Here you can find the Faucet](https://faucet.avax-test.network/).  
+[Here you can find the Faucet](https://faucet.avax.network/).  
 Click on the `Deploy` button and confirm the transaction in REMIX and Metamask and await for a few seconds.  
 
 ![](assets/avalanche-dao-deploy-smartContract.png)

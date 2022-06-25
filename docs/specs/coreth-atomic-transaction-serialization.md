@@ -11,11 +11,11 @@ Some data is prepended with a codec ID (unt16) that denotes how the data should 
 
 Inputs to Coreth Atomic Transactions are either an `EVMInput` from this chain or a `TransferableInput` (which contains a `SECP256K1TransferInput`) from another chain. The `EVMInput` will be used in `ExportTx` to spend funds from this chain, while the `TransferableInput` will be used to import atomic UTXOs from another chain.
 
-### EVM Input
+## EVM Input
 
 Input type that specifies an EVM account to deduct the funds from as part of an `ExportTx`.
 
-#### What EVM Input Contains
+### What EVM Input Contains
 
 An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
 
@@ -24,7 +24,7 @@ An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
 * **`AssetID`** is the ID of the asset to transfer.
 * **`Nonce`** is the nonce of the EVM account exporting funds.
 
-#### Gantt EVM Input Specification
+### Gantt EVM Input Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -40,7 +40,7 @@ An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
                       +-------------------------+
 ```
 
-#### Proto EVM Input Specification
+### Proto EVM Input Specification
 
 ```text
 message  {
@@ -51,7 +51,7 @@ message  {
 }
 ```
 
-#### EVM Input Example
+### EVM Input Example
 
 Let's make an EVM Input:
 
@@ -85,11 +85,11 @@ Let's make an EVM Input:
 ]
 ```
 
-### Transferable Input
+## Transferable Input
 
 Transferable Input wraps a `SECP256K1TransferInput`. Transferable inputs describe a specific UTXO with a provided transfer input.
 
-#### What Transferable Input Contains
+### What Transferable Input Contains
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
@@ -98,7 +98,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 * **`AssetID`** is a 32-byte array that defines which asset this input references.
 * **`Input`** is a `SECP256K1TransferInput`, as defined below.
 
-#### Gantt Transferable Input Specification
+### Gantt Transferable Input Specification
 
 ```text
 +------------+----------+------------------------+
@@ -114,7 +114,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-#### Proto Transferable Input Specification
+### Proto Transferable Input Specification
 
 ```text
 message TransferableInput {
@@ -125,7 +125,7 @@ message TransferableInput {
 }
 ```
 
-#### Transferable Input Example
+### Transferable Input Example
 
 Let's make a transferable input:
 
@@ -162,11 +162,11 @@ Let's make a transferable input:
 ]
 ```
 
-### SECP256K1 Transfer Input
+## SECP256K1 Transfer Input
 
 A [secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
 
-#### What SECP256K1 Transfer Input Contains
+### What SECP256K1 Transfer Input Contains
 
 A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
@@ -174,7 +174,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 * **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
 
-#### Gantt SECP256K1 Transfer Input Specification
+### Gantt SECP256K1 Transfer Input Specification
 
 ```text
 +-------------------------+-------------------------------------+
@@ -188,7 +188,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Input Specification
+### Proto SECP256K1 Transfer Input Specification
 
 ```text
 message SECP256K1TransferInput {
@@ -198,7 +198,7 @@ message SECP256K1TransferInput {
 }
 ```
 
-#### SECP256K1 Transfer Input Example
+### SECP256K1 Transfer Input Example
 
 Let's make a payment input with:
 
@@ -231,11 +231,11 @@ Outputs to Coreth Atomic Transactions are either an `EVMOutput` to be added to t
 
 The EVM Output will be used in `ImportTx` to add funds to this chain, while the `TransferableOutput` will be used to export atomic UTXOs to another chain.
 
-### EVM Output
+## EVM Output
 
 Output type specifying a state change to be applied to an EVM account as part of an `ImportTx`.
 
-#### What EVM Output Contains
+### What EVM Output Contains
 
 An EVM Output contains an `address`, `amount`, and `assetID`.
 
@@ -243,7 +243,7 @@ An EVM Output contains an `address`, `amount`, and `assetID`.
 * **`Amount`** is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
 * **`AssetID`** is the ID of the asset to transfer.
 
-#### Gantt EVM Output Specification
+### Gantt EVM Output Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -257,7 +257,7 @@ An EVM Output contains an `address`, `amount`, and `assetID`.
                       +-------------------------+
 ```
 
-#### Proto EVM Output Specification
+### Proto EVM Output Specification
 
 ```text
 message  {
@@ -267,7 +267,7 @@ message  {
 }
 ```
 
-#### EVM Output Example
+### EVM Output Example
 
 Let's make an EVM Output:
 
@@ -297,18 +297,18 @@ Let's make an EVM Output:
 ]
 ```
 
-### Transferable Output
+## Transferable Output
 
 Transferable outputs wrap a `SECP256K1TransferOutput` with an asset ID.
 
-#### What Transferable Output Contains
+### What Transferable Output Contains
 
 A transferable output contains an `AssetID` and an `Output` which is a `SECP256K1TransferOutput`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references.
 * **`Output`** is a `SECP256K1TransferOutput` as defined below.
 
-#### Gantt Transferable Output Specification
+### Gantt Transferable Output Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -320,7 +320,7 @@ A transferable output contains an `AssetID` and an `Output` which is a `SECP256K
                       +-------------------------+
 ```
 
-#### Proto Transferable Output Specification
+### Proto Transferable Output Specification
 
 ```text
 message TransferableOutput {
@@ -329,7 +329,7 @@ message TransferableOutput {
 }
 ```
 
-#### Transferable Output Example
+### Transferable Output Example
 
 Let's make a transferable output:
 
@@ -362,11 +362,11 @@ Let's make a transferable output:
 ]
 ```
 
-### SECP256K1 Transfer Output
+## SECP256K1 Transfer Output
 
 A [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
 
-#### What SECP256K1 Transfer Output Contains
+### What SECP256K1 Transfer Output Contains
 
 A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
 
@@ -376,7 +376,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
 * **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
 * **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
 
-#### Gantt SECP256K1 Transfer Output Specification
+### Gantt SECP256K1 Transfer Output Specification
 
 ```text
 +-----------+------------+--------------------------------+
@@ -394,7 +394,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Output Specification
+### Proto SECP256K1 Transfer Output Specification
 
 ```text
 message SECP256K1TransferOutput {
@@ -406,7 +406,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-#### SECP256K1 Transfer Output Example
+### SECP256K1 Transfer Output Example
 
 Let's make a secp256k1 transfer output with:
 
@@ -450,11 +450,11 @@ Let's make a secp256k1 transfer output with:
 
 Atomic Transactions are used to move funds between chains. There are two types `ImportTx` and `ExportTx`.
 
-### ExportTx
+## ExportTx
 
 ExportTx is a transaction to export funds from Coreth to a different chain.
 
-#### What ExportTx Contains
+### What ExportTx Contains
 
 An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, and `exportedOutputs`.
 
@@ -465,7 +465,7 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
 * **`inputs`** is an array of EVM Inputs to fund the ExportTx.
 * **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
 
-#### Gantt ExportTx Specification
+### Gantt ExportTx Specification
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -485,7 +485,7 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ExportTx Example
+### ExportTx Example
 
 Let's make an EVM Output:
 
@@ -555,11 +555,11 @@ Let's make an EVM Output:
 ]
 ```
 
-### ImportTx
+## ImportTx
 
 ImportTx is a transaction to import funds to Coreth from another chain.
 
-#### What ImportTx Contains
+### What ImportTx Contains
 
 An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
 
@@ -570,7 +570,7 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
 * **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
 * **`Outs`** is an array of EVM Outputs to be imported to this chain.
 
-#### Gantt ImportTx Specification
+### Gantt ImportTx Specification
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -590,7 +590,7 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ImportTx Example
+### ImportTx Example
 
 Let's make an ImportTx:
 
@@ -664,16 +664,16 @@ Let's make an ImportTx:
 
 Credentials have one possible type: `SECP256K1Credential`. Each credential is paired with an Input. The order of the credentials match the order of the inputs.
 
-### SECP256K1 Credential
+## SECP256K1 Credential
 
 A [secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-machine) credential contains a list of 65-byte recoverable signatures.
 
-#### What SECP256K1 Credential Contains
+### What SECP256K1 Credential Contains
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
 * **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
 
-#### Gantt SECP256K1 Credential Specification
+### Gantt SECP256K1 Credential Specification
 
 ```text
 +------------------------------+---------------------------------+
@@ -685,7 +685,7 @@ A [secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-m
                                +---------------------------------+
 ```
 
-#### Proto SECP256K1 Credential Specification
+### Proto SECP256K1 Credential Specification
 
 ```text
 message SECP256K1Credential {
@@ -694,7 +694,7 @@ message SECP256K1Credential {
 }
 ```
 
-#### SECP256K1 Credential Example
+### SECP256K1 Credential Example
 
 Let's make a payment input with:
 
@@ -921,4 +921,3 @@ Let’s make a UTXO from the signed transaction created above:
     0x24, 0x25, 0x26, 0x27,
 ]
 ```
-

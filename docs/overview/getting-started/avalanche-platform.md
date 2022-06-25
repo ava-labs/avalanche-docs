@@ -6,7 +6,6 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 
 Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
-Here are tutorials on [creating a subnet](../../subnets/subnet-deepdive.md) and [adding validators](../../nodes/validate/add-a-validator.md) to a subnet.
 
 ![Primary network](/img/primary-network.png)
 
@@ -30,7 +29,7 @@ Some examples of requirements include:
 
 ### Support for Private Blockchains
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../../nodes/maintain/subnet-configs.md#private-subnet) for more info.
 
 ### Separation of Concerns
 
@@ -38,7 +37,7 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 ### Application-Specific Requirements
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](../../nodes/build/run-avalanche-node-manually.md#requirements) so that the application doesn’t suffer from low performance due to slow validators.
 
 ## Virtual Machines
 
@@ -58,14 +57,10 @@ Ethereum made a step toward solving this problem with smart contracts. Developer
 
 Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go (other languages will be supported in the future).
 
-### Creating Your Blockchain and Virtual Machine
+## Developing Your Own Subnet 
 
-Avalanche supports the creation of new instances of the Avalanche VM.
-* [Create a Blockchain Running Subnet-EVM](../../subnets/create-evm-blockchain.md)
+Check out [Subnets](../../subnets/README.md) on how to develop your own subnets with customized virtual machine and blockchain.
 
-Avalanche also supports creating custom blockchains with virtual machines.
-* [Create a Virtual Machine (VM)](../../subnets/create-a-virtual-machine-vm.md)
-* [Create a Custom Blockchain](../../subnets/create-custom-blockchain.md)
 
 ## Exchange Chain (X-Chain)
 
@@ -73,7 +68,7 @@ The **X-Chain** acts as a decentralized platform for creating and trading digita
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.mdx) allows clients to create and trade assets on the X-Chain and other instances of the AVM. 
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM. 
 
 
 ## Platform Chain (P-Chain)

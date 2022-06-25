@@ -9,33 +9,47 @@ The quickest way to learn about Avalanche is to run a node and interact with the
 
 In this tutorial, we will:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
-
-:::caution
-If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
-:::
+- Install and run an Avalanche node
+- Connect to Avalanche
 
 :::info
-If you're interested in using a third-party service to host your node or run a validator, [check out the options](https://docs.avax.network/learn/community#blockchain-infrastructure-and-node-services).
+If you're interested in using a third-party service to host your node or run a validator, [check out the options](../README.md#build).
 :::
 
 This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
 
 ## Requirements
 
+### Computer Hardware and OS
+
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
-* CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 512 GiB
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- CPU: Equivalent of 8 AWS vCPU
+- RAM: 16 GiB
+- Storage: 1 TB
+- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
-## Run an Avalanche Node and Send Funds
+### Networking
 
-Let’s install AvalancheGo, the Go implementation of an Avalanche node, and connect to the Avalanche Public Testnet.
+To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+
+#### Running on a Cloud Provider
+
+If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already.
+
+#### Running on a Home Connection
+
+If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. You will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
+
+As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found (like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) ), and your service provider support might help too.
+
+:::warning
+Please note that a fully connected Avalanche node maintains and communicates over a couple of thousand of live TCP connections. For some low-powered and older home routers that might be too much to handle. If that is the case you may experience lagging on other computers connected to the same router, node getting benched, failing to sync and similar issues.
+:::
+
+## Run an Avalanche Node
+
+Let’s install AvalancheGo, the GoLang implementation of an Avalanche node, and connect to the Avalanche primary network.
 
 ### Download AvalancheGo
 
@@ -47,15 +61,16 @@ Building the node from source is recommended if you're a developer looking to ex
 
 #### **Source Code**
 
-If you want to build the node from source, you're first going to need to install Go 1.17.9 or later. Follow the instructions [here](https://golang.org/doc/install).
+First install Go 1.17.9 or later, however as the time of writing, please don't use Go v1.18.x versions. Follow the instructions [here](https://golang.org/doc/install). You can verify by runing `go version`.
 
-Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
 Download the AvalancheGo repository into your `$GOPATH`:
 
 ```sh
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
+cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/avalanchego.git
 cd avalanchego
 ```
@@ -113,9 +128,15 @@ If you are using the pre-built binaries on Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
+By default (without specifying any parameters), this node will connect to the Mainnet which may take much longer time to finish bootstrapping. See [this](#connect-to-fuji-testnet) for connecting to Fuji Testnet.
+
 When the node starts, it has to bootstrap (catch up with the rest of the network). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
-`INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
+```text
+[05-25|17:18:48.479] INFO <P Chain> snowman/transitive.go:339 consensus starting with 3CEShuttaoY46vofsZsUtrC3BdiJaNgWP9Xgud89WqwBvDVC5 as the last accepted block
+[05-25|17:18:48.482] INFO <C Chain> snowman/transitive.go:339 consensus starting with cAhvmHwAqhsw8MtbRXf3e3pzm3RnMC7Gn9uqunRHb6jzUyWab as the last accepted block
+[05-25|17:19:06.516] INFO <X Chain> avalanche/transitive.go:306 consensus starting with 1 vertices in the accepted frontier
+```
 
 To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../apis/avalanchego/apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
@@ -130,20 +151,22 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+If this returns `true`, the chain is bootstrapped; otherwise, it returns `false`. If you make other API calls to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
 
 Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](../validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
 
 You can use `Ctrl + C` to kill the node.
 
-If you want to experiment and play with your node, read on.
-
 To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` (e.g. `./build/avalanchego --http-host=`)
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+#### Connect to Fuji Testnet
 
-### What Next?
+To connect to the Fuji Testnet instead of the Mainnet, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax.network/)
+
+## What Next?
 
 Now that you've launched your Avalanche node, what should you do next?
 
 Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](../validate/add-a-validator.md) to take it a step further.
+
+Also check out the [Maintain](../README.md#maintain) section to learn about how to maintain and customize your node to fit your needs.

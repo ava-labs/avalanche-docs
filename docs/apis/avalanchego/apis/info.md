@@ -6,6 +6,10 @@ sidebar_position: 11
 
 This API can be used to access basic information about the node.
 
+:::info
+This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+:::
+
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
@@ -45,11 +49,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "blockchainID":"sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "blockchainID": "sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM"
+  }
 }
 ```
 
@@ -77,11 +81,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "networkID":"2"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "networkID": "2"
+  }
 }
 ```
 
@@ -109,11 +113,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "networkName":"local"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "networkName": "local"
+  }
 }
 ```
 
@@ -141,11 +145,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+  },
+  "id": 1
 }
 ```
 
@@ -173,11 +177,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "ip": "192.168.1.1:9651"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "ip": "192.168.1.1:9651"
+  },
+  "id": 1
 }
 ```
 
@@ -198,10 +202,10 @@ info.getNodeVersion() -> {
 
 where:
 
-* `version` is this node's version
-* `databaseVersion` is the version of the database this node is using
-* `gitCommit` is the Git commit that this node was built from
-* `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this node runs
+- `version` is this node's version
+- `databaseVersion` is the version of the database this node is using
+- `gitCommit` is the Git commit that this node was built from
+- `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this node runs
 
 #### **Example Call**
 
@@ -217,25 +221,25 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "version": "avalanche/1.4.10",
-        "databaseVersion": "v1.4.5",
-        "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
-        "vmVersions": {
-            "avm": "v1.4.10",
-            "evm": "v0.5.5-rc.1",
-            "platform": "v1.4.10"
-        }
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "version": "avalanche/1.4.10",
+    "databaseVersion": "v1.4.5",
+    "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
+    "vmVersions": {
+      "avm": "v1.4.10",
+      "evm": "v0.5.5-rc.1",
+      "platform": "v1.4.10"
+    }
+  },
+  "id": 1
 }
 ```
-
 
 ### info.getVMs
 
 Get the virtual machines installed on this node.
+
 #### **Signature**
 
 ```
@@ -262,24 +266,12 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "result": {
     "vms": {
-      "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq": [
-        "avm"
-      ],
-      "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6": [
-        "evm"
-      ],
-      "qd2U4HDWUvMrVUeTcCHp6xH3Qpnn1XbU5MDdnBoiifFqvgXwT": [
-        "nftfx"
-      ],
-      "rWhpuQPF1kb72esV2momhMuTYGkEb1oL29pt2EBXWmSy4kxnT": [
-        "platform"
-      ],
-      "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": [
-        "propertyfx"
-      ],
-      "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": [
-        "secp256k1fx"
-      ]
+      "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq": ["avm"],
+      "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6": ["evm"],
+      "qd2U4HDWUvMrVUeTcCHp6xH3Qpnn1XbU5MDdnBoiifFqvgXwT": ["nftfx"],
+      "rWhpuQPF1kb72esV2momhMuTYGkEb1oL29pt2EBXWmSy4kxnT": ["platform"],
+      "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": ["propertyfx"],
+      "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": ["secp256k1fx"]
     }
   },
   "id": 1
@@ -315,11 +307,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "isBootstrapped": true
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "isBootstrapped": true
+  },
+  "id": 1
 }
 ```
 
@@ -348,15 +340,15 @@ info.peers({
 }
 ```
 
-* `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
-* `ip` is the remote IP of the peer.
-* `publicIP` is the public IP of the peer.
-* `nodeID` is the prefixed Node ID of the peer.
-* `version` shows which version the peer runs on.
-* `lastSent` is the timestamp of last message sent to the peer.
-* `lastReceived` is the timestamp of last message received from the peer.
-* `benched` shows chain IDs that the peer is being benched.
-* `observedUptime` is the uptime of this node observed by the peer.
+- `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+- `ip` is the remote IP of the peer.
+- `publicIP` is the public IP of the peer.
+- `nodeID` is the prefixed Node ID of the peer.
+- `version` shows which version the peer runs on.
+- `lastSent` is the timestamp of last message sent to the peer.
+- `lastReceived` is the timestamp of last message received from the peer.
+- `benched` shows chain IDs that the peer is being benched.
+- `observedUptime` is the uptime of this node observed by the peer.
 
 #### **Example Call**
 
@@ -375,43 +367,43 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "numPeers":3,
-        "peers":[
-          {
-             "ip":"206.189.137.87:9651",
-             "publicIP":"206.189.137.87:9651",
-             "nodeID":"NodeID-8PYXX47kqLDe2wD4oPbvRRchcnSzMA4J4",
-             "version":"avalanche/0.5.0",
-             "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:57Z",
-             "benched": [],
-             "observedUptime": "99",
-          },
-          {
-             "ip":"158.255.67.151:9651",
-             "publicIP":"158.255.67.151:9651",
-             "nodeID":"NodeID-C14fr1n8EYNKyDfYixJ3rxSAVqTY3a8BP",
-             "version":"avalanche/0.5.0",
-             "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:34Z",
-             "benched": [],
-             "observedUptime": "75",
-          },
-          {
-             "ip":"83.42.13.44:9651",
-             "publicIP":"83.42.13.44:9651",
-             "nodeID":"NodeID-LPbcSMGJ4yocxYxvS2kBJ6umWeeFbctYZ",
-             "version":"avalanche/0.5.0",
-             "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:55Z",
-             "benched": [],
-             "observedUptime": "95",
-          }
-        ]
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "numPeers": 3,
+    "peers": [
+      {
+        "ip": "206.189.137.87:9651",
+        "publicIP": "206.189.137.87:9651",
+        "nodeID": "NodeID-8PYXX47kqLDe2wD4oPbvRRchcnSzMA4J4",
+        "version": "avalanche/0.5.0",
+        "lastSent": "2020-06-01T15:23:02Z",
+        "lastReceived": "2020-06-01T15:22:57Z",
+        "benched": [],
+        "observedUptime": "99"
+      },
+      {
+        "ip": "158.255.67.151:9651",
+        "publicIP": "158.255.67.151:9651",
+        "nodeID": "NodeID-C14fr1n8EYNKyDfYixJ3rxSAVqTY3a8BP",
+        "version": "avalanche/0.5.0",
+        "lastSent": "2020-06-01T15:23:02Z",
+        "lastReceived": "2020-06-01T15:22:34Z",
+        "benched": [],
+        "observedUptime": "75"
+      },
+      {
+        "ip": "83.42.13.44:9651",
+        "publicIP": "83.42.13.44:9651",
+        "nodeID": "NodeID-LPbcSMGJ4yocxYxvS2kBJ6umWeeFbctYZ",
+        "version": "avalanche/0.5.0",
+        "lastSent": "2020-06-01T15:23:02Z",
+        "lastReceived": "2020-06-01T15:22:55Z",
+        "benched": [],
+        "observedUptime": "95"
+      }
+    ]
+  }
 }
 ```
 
@@ -429,8 +421,8 @@ info.getTxFee() ->
 }
 ```
 
-* `creationTxFee` is the fee for creating assets on the network.
-* `txFee` is the fee for making transactions on the network.
+- `creationTxFee` is the fee for creating assets on the network.
+- `txFee` is the fee for making transactions on the network.
 
 #### **Example Call**
 
@@ -446,12 +438,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "creationTxFee": "10000000",
-        "txFee": "1000000"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "creationTxFee": "10000000",
+    "txFee": "1000000"
+  }
 }
 ```
 
@@ -469,8 +461,8 @@ info.uptime() ->
 }
 ```
 
-* `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
-* `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
+- `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
+- `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
 
 #### **Example Call**
 
@@ -486,11 +478,11 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result": {
-        "rewardingStakePercentage": "100.0000",
-        "weightedAveragePercentage": "99.0000"
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "rewardingStakePercentage": "100.0000",
+    "weightedAveragePercentage": "99.0000"
+  }
 }
 ```

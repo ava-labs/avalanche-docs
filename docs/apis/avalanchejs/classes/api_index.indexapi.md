@@ -48,7 +48,7 @@ Class for interacting with a node's IndexAPI.
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/index/api.ts:214](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L214)*
+*Defined in [src/apis/index/api.ts:214](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L214)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
 
@@ -69,7 +69,7 @@ Name | Type | Default | Description |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseURL](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L29)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L28)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L28)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L30)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L30)*
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/jrpcapi.ts#L12)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L12)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcID](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:13](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/jrpcapi.ts#L13)*
+*Defined in [src/common/jrpcapi.ts:13](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L13)*
 
 ## Methods
 
@@ -119,7 +119,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:15](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/jrpcapi.ts#L15)*
+*Defined in [src/common/jrpcapi.ts:15](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L15)*
 
 **Parameters:**
 
@@ -140,7 +140,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L53)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L53)*
 
 Returns the baseURL's path.
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **getContainerByID**(`containerID`: string, `encoding`: string, `baseURL`: string): *Promise‹[GetContainerByIDResponse](../interfaces/index_interfaces.getcontainerbyidresponse.md)›*
 
-*Defined in [src/apis/index/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L98)*
+*Defined in [src/apis/index/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L98)*
 
 Get contrainer by ID
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **getContainerByIndex**(`index`: string, `encoding`: string, `baseURL`: string): *Promise‹[GetContainerByIndexResponse](../interfaces/index_interfaces.getcontainerbyindexresponse.md)›*
 
-*Defined in [src/apis/index/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L67)*
+*Defined in [src/apis/index/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L67)*
 
 Get container by index
 
@@ -196,7 +196,7 @@ ___
 
 ▸ **getContainerRange**(`startIndex`: number, `numToFetch`: number, `encoding`: string, `baseURL`: string): *Promise‹[GetContainerRangeResponse](../interfaces/index_interfaces.getcontainerrangeresponse.md)[]›*
 
-*Defined in [src/apis/index/api.ts:130](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L130)*
+*Defined in [src/apis/index/api.ts:130](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L130)*
 
 Get container range
 
@@ -221,7 +221,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L58)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L58)*
 
 Returns the baseURL's database.
 
@@ -233,7 +233,7 @@ ___
 
 ▸ **getIndex**(`containerID`: string, `encoding`: string, `baseURL`: string): *Promise‹string›*
 
-*Defined in [src/apis/index/api.ts:163](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L163)*
+*Defined in [src/apis/index/api.ts:163](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L163)*
 
 Get index by containerID
 
@@ -255,7 +255,7 @@ ___
 
 ▸ **getLastAccepted**(`encoding`: string, `baseURL`: string): *Promise‹[GetLastAcceptedResponse](../interfaces/index_interfaces.getlastacceptedresponse.md)›*
 
-*Defined in [src/apis/index/api.ts:38](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L38)*
+*Defined in [src/apis/index/api.ts:38](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L38)*
 
 Get last accepted tx, vtx or block
 
@@ -278,7 +278,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:81](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/jrpcapi.ts#L81)*
+*Defined in [src/common/jrpcapi.ts:77](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/jrpcapi.ts#L77)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -291,7 +291,7 @@ ___
 
 ▸ **isAccepted**(`containerID`: string, `encoding`: string, `baseURL`: string): *Promise‹[IsAcceptedResponse](../interfaces/index_interfaces.isacceptedresponse.md)›*
 
-*Defined in [src/apis/index/api.ts:194](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/index/api.ts#L194)*
+*Defined in [src/apis/index/api.ts:194](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/index/api.ts#L194)*
 
 Check if container is accepted
 
@@ -315,7 +315,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/apibase.ts#L37)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/8033096/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseURL.
 

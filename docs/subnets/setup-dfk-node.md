@@ -1,10 +1,10 @@
-# Run a Node on DFK Subnet
+# Run a Mainnet Node on DeFi Kingdoms Subnet
 
 ## Introduction
 
-[DeFi Kingdoms](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
+This article describes how to run a Mainnet node on [DeFi Kingdoms (DFK) Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer). It can be applied to any other subnet, where the corresponding part of the subnet info should be replaced.
 
-This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
+Following necessary steps are needed to run your node on the DFK Subnet:
 
 1. Build the AvalancheGo binary and create the plugin build directory
 2. Build the plugin binary for the DFK subnet-evm
@@ -51,7 +51,7 @@ Once you start the node, it will begin syncing the Primary Network. Once the nod
 
 You can skip this section if you want to pass whitelisted subnets through command-line flags.
 
-You need to edit your existing config file for your node. In this tutorial, you will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file anywhere on your file system, you will just need to specify its location via the flag `--config-file=<file path>` when you start your node.
+You need to create a new config file or edit your existing one for your node. In this tutorial, you will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file anywhere on your file system, you will just need to specify its location via the flag `--config-file=<file path>` when you start your node. See [this](../nodes/maintain/avalanchego-config-flags.md#config-file) for more info on configuration file and flags.
 
 You will need to add the DFK Subnet ID to the whitelisted subnets section of the config file:
 
@@ -84,7 +84,7 @@ If you want to pass the whitelisted subnets through the command line flag. You c
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
 
-## Just want the commands? We got you...
+## Just Want the Commands? We Got You...
 
 :::caution
 Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
@@ -93,6 +93,7 @@ Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It sho
 ```bash
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
+cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/avalanchego.git
 cd avalanchego
 ./scripts/build.sh

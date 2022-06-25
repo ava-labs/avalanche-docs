@@ -1,5 +1,5 @@
 ---
-description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here. 
+description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here.
 sidebar_position: 4
 ---
 
@@ -13,7 +13,7 @@ Running a validator and staking with Avalanche provides extremely competitive re
 
 Not only does running a validator node enable you to receive rewards in AVAX, but later you will also be able to validate other subnets in the ecosystem as well and receive rewards in the token native to their subnets.
 
-Hardware requirements to run a validator are relatively modest: 8 CPU cores, 16 GB of RAM and 512 GB SSD. It also doesn't use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
+Hardware requirements to run a validator are relatively modest: 8 CPU cores, 16 GB of RAM and 1 TB SSD. It also doesn't use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
 
 Currently the minimum amount required to stake to become a validator is 2,000 AVAX (which can be reduced over time as price increases). Alternatively, validators can also charge a small fee to enable users to delegate their stake with them to help towards running costs. You can use a calculator [here](https://vscout.io/) to see how much rewards you would earn when running a node, compared to delegating.
 
@@ -23,9 +23,9 @@ In this article we will step through the process of configuring a node on Micros
 
 At the time of this article, spot pricing for a virtual machine with 2 Cores and 8 GB memory costs as little as $0.01060 per hour which works out at about $113.44 a year, **a saving of 83.76%! compared to normal pay as you go prices.** In comparison a virtual machine in AWS with 2 Cores and 4 GB Memory with spot pricing is around $462 a year.
 
-## Initial Subscription Configuration {#6e8d}
+## Initial Subscription Configuration
 
-### Set up 2 Factor {#b9d0}
+### Set up 2 Factor
 
 First you will need a Microsoft Account, if you don’t have one already you will see an option to create one at the following link. If you already have one, make sure to set up 2 Factor authentication to secure your node by going to the following link and then selecting "Two-step verification" and following the steps provided.
 
@@ -49,7 +49,7 @@ Enter your billing details and confirm identity as part of the sign-up process, 
 
 ![Image for post](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
-## Create a Virtual Machine {#41ac}
+## Create a Virtual Machine
 
 Now that we have a subscription, we can create the Ubuntu Virtual Machine for our Avalanche Node. Select the Icon in the top left for the Menu and choose "+ Create a resource".
 
@@ -75,7 +75,7 @@ Select Yes for Azure Spot instance, select Eviction type to Capacity Only and **
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Choose "Select size" to change the Virtual Machine size, and from the menu select D2s\_v4 under the D-Series v4 selection (This size has 2 Cores, 8 GB Memory and enables Premium SSDs). You can use F2s\_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
+Choose "Select size" to change the Virtual Machine size, and from the menu select D2s_v4 under the D-Series v4 selection (This size has 2 Cores, 8 GB Memory and enables Premium SSDs). You can use F2s_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
 
 ![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
@@ -83,7 +83,7 @@ Once you have selected the size of the Virtual Machine, select "View pricing his
 
 ![Image for post](https://miro.medium.com/max/763/1*UQYmhtL8JMhrOkaWk8cloA.png)
 
-At the time of this article, spot pricing for D2s\_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
+At the time of this article, spot pricing for D2s_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
 
 There are some regions which are even cheaper, East US for example is $0.01060 per hour or around $92.86 a year!
 
@@ -93,7 +93,7 @@ Below you can see the price history of the VM over the last 3 months for North E
 
 ![Image for post](https://miro.medium.com/max/968/1*OJ4monpMy8DhWw_HWycMjg.png)
 
-### Cheaper than Amazon AWS {#45e9}
+### Cheaper than Amazon AWS
 
 As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
 
@@ -101,7 +101,7 @@ The next step is to change the username for the VM, to align with other Avalanch
 
 ![Image for post](https://miro.medium.com/max/780/1*CNmFTz056EUmahfi5zG3JQ.png)
 
-### Disks {#ed2e}
+### Disks
 
 Select Next: Disks to then configure the disks for the instance. There are 2 choices for disks, either Premium SSD which offer greater performance with a 64 GB disk costs around $10 a month, or there is the standard SSD which offers lower performance and is around $5 a month. You also have to pay $0.002 per 10,000 transaction units (reads / writes and deletes) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
 
@@ -109,7 +109,7 @@ Select Next: Networking to move onto the network configuration
 
 ![Image for post](https://miro.medium.com/max/763/1*Oqv9nA8KoSIyq95DuPDN4g.png)
 
-### Network Config {#bc5d}
+### Network Config
 
 You want to use a Static IP so that the public IP assigned to the node doesn’t change in the event it stops. Under Public IP select "Create new"
 
@@ -137,11 +137,11 @@ Now that you have your public IP select the default allow ssh rule on the left u
 
 ![Image for post](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
 
-Then select "+ Add an inbound rule" to add another rule for RPC access, this should also be restricted to only your IP. Change Source to "IP Addresses" and enter in your public IP returned from google into the Source IP field. This time change the "Destination port ranges" field to 9650 and select "TCP" as the protocol. Change the priority to 110 and give it a name of "Avalanche\_RPC" and press Add.
+Then select "+ Add an inbound rule" to add another rule for RPC access, this should also be restricted to only your IP. Change Source to "IP Addresses" and enter in your public IP returned from google into the Source IP field. This time change the "Destination port ranges" field to 9650 and select "TCP" as the protocol. Change the priority to 110 and give it a name of "Avalanche_RPC" and press Add.
 
 ![Image for post](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
 
-Select "+ Add an inbound rule" to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep "Source" set to "Any". Change the Destination port range to "9651" and change the protocol to "TCP". Enter a priority of 120 and a name of Avalanche\_Protocol and press Add.
+Select "+ Add an inbound rule" to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep "Source" set to "Any". Change the Destination port range to "9651" and change the protocol to "TCP". Enter a priority of 120 and a name of Avalanche_Protocol and press Add.
 
 ![Image for post](https://miro.medium.com/max/662/1*tIMEp7O83NIUitWwlcHAxw.png)
 
@@ -165,7 +165,7 @@ Once your deployment has finished, select "Go to resource"
 
 ![Image for post](https://miro.medium.com/max/608/1*dXl1RkH6xZvHkdI1d-XsOQ.png)
 
-## Change the Provisioned Disk Size {#00dc}
+## Change the Provisioned Disk Size
 
 By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD. You should increase this to 250 GB, to allow for database growth.
 
@@ -191,11 +191,11 @@ Then start the VM
 
 ![Image for post](https://miro.medium.com/max/929/1*vgVR-3sRejyBcXrMn65v5g.png)
 
-## Connect to the Avalanche Node {#8bb7}
+## Connect to the Avalanche Node
 
 The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
-On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select "Advanced" at the bottom
+On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select "Advanced" at the bottom
 
 ![Image for post](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
 
@@ -215,7 +215,7 @@ It should look something like the below, except with a different PC name / user 
 
 ![Image for post](https://miro.medium.com/max/736/1*F-YK0xdB92cIweCQFGGRvA.png)
 
-### Find your Avalanche Node Public IP {#4687}
+### Find your Avalanche Node Public IP
 
 From the Azure Portal make a note of your static public IP address that has been assigned to your node.
 
@@ -227,11 +227,11 @@ To log onto the Avalanche node, open command prompt by searching for "cmd" and s
 
 Then use the following command and replace the EnterYourAzureIPHere with the static IP address shown on the Azure portal.
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@EnterYourAzureIPHere
+ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@EnterYourAzureIPHere
 
 for my example its:
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@13.74.10.81
+ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@13.74.10.81
 
 The first time you connect you will receive a prompt asking to continue, enter yes.
 
@@ -243,7 +243,7 @@ You should now be connected to your Node.
 
 The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
-### Update Linux with security patches {#8a1c}
+### Update Linux with Security Patches
 
 Now that we are on our node, it’s a good idea to update it to the latest packages. To do this, run the following commands, one-at-a-time, in order:
 
@@ -257,7 +257,7 @@ sudo reboot
 
 This will make our instance up to date with the latest security patches for our operating system. This will also reboot the node. We’ll give the node a minute or two to boot back up, then log in again, same as before.
 
-### Set up the Avalanche Node {#5688}
+### Set up the Avalanche Node
 
 Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](../build/set-up-node-with-installer.md) tutorial which automates the installation process. You will need the "IPv4 Public IP" copied from the Azure Portal we set up earlier.
 
@@ -294,7 +294,7 @@ The node can take some time (upward of an hour at this moment writing) to bootst
 
 We can always use "sudo systemctl status avalanchego" to peek at the latest status of our service as before, as well.
 
-### Get your NodeID {#20a7}
+### Get Your NodeID
 
 We absolutely must get our NodeID if we plan to do any validating on this node. This is retrieved from the RPC as well. We call the following curl command to get our NodeID.
 
@@ -314,7 +314,7 @@ If all is well, the response should look something like:
 
 That portion that says, "NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR" is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
 
-### Backup your Staking Keys {#ef3e}
+### Backup Your Staking Keys
 
 The last thing that should be done is backing up our staking keys in the untimely event that our instance is corrupted or terminated. It’s just good practice for us to keep these keys. To back them up, we use the following command:
 
@@ -325,4 +325,3 @@ scp -i C:\Avalanche\avalanche_key.pem -r ubuntu@EnterYourAzureIPHere:/home/ubunt
 As before, we’ll need to replace "EnterYourAzureIPHere" with the appropriate value that we retrieved. This backs up our staking key and staking certificate into the C:\Avalanche folder we created before.
 
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
-

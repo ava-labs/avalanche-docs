@@ -18,4 +18,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/api.ts:72](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/api.ts#L72)*
+*Defined in [src/apis/platformvm/api.ts:72](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/platformvm/api.ts#L72)*

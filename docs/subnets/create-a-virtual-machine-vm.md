@@ -17,12 +17,13 @@ A blockchain can run as a separate process from AvalancheGo and can communicate 
 Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/tree/v1.2.1)
 
 ---
+
 **NOTES**
-* IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try.
-* In this tutorial we used AvalancheGo v1.7.4 and TimestampVM v1.2.1. The code in latest version/branch can be different than ones presented in this page.
+
+- IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try.
+- In this tutorial we used AvalancheGo v1.7.4 and TimestampVM v1.2.1. The code in latest version/branch can be different than ones presented in this page.
+
 ---
-
-
 
 ## Interfaces
 
@@ -225,7 +226,6 @@ type Block interface {
 ### `choices.Decidable`
 
 This interface is the superset of every decidable object, such as transactions, blocks and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/choices/decidable.go)
-
 
 ```go title="/snow/choices/decidable.go"
 // Decidable represents element that can be decided.
@@ -694,6 +694,7 @@ func (b *Block) Bytes() []byte { return b.bytes }
 #### Helper Functions
 
 These methods are convenience methods for blocks, they're not a part of the block interface.
+
 ```go
 // Initialize sets [b.bytes] to [bytes], [b.id] to hash([b.bytes]),
 // [b.status] to [status] and [b.vm] to [vm]
@@ -805,7 +806,9 @@ func (vm *VM) Initialize(
 ```
 
 ##### initGenesis
+
 `initGenesis` is a helper method which initializes the genesis block from given bytes and puts into the state.
+
 ```go title="/timestampvm/vm.go"
 // Initializes Genesis if required
 func (vm *VM) initGenesis(genesisData []byte) error {
@@ -957,6 +960,7 @@ func (vm *VM) BuildBlock() (snowman.Block, error) {
 #### NotifyBlockReady
 
 `NotifyBlockReady` is a helper method that can send messages to the consensus engine through `toEngine` channel.
+
 ```go title="/timestampvm/vm.go"
 // NotifyBlockReady tells the consensus engine that a new block
 // is ready to be created
@@ -986,7 +990,6 @@ func (vm *VM) getBlock(blkID ids.ID) (*Block, error) {
 	return vm.state.GetBlock(blkID)
 }
 ```
-
 
 #### proposeBlock
 
@@ -1036,7 +1039,6 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
 }
 ```
 
-
 #### NewBlock
 
 `NewBlock` creates a new block with given block parameters.
@@ -1068,6 +1070,7 @@ func (vm *VM) NewBlock(parentID ids.ID, height uint64, data [dataLen]byte, times
 ```
 
 #### SetPreference
+
 `SetPreference` implements the `block.ChainVM`. It sets the preferred block ID.
 
 ```go title="/timestampvm/vm.go"
@@ -1155,9 +1158,9 @@ type StaticService struct{}
 
 For each API method, there is:
 
-* A struct that defines the method’s arguments
-* A struct that defines the method’s return values
-* A method that implements the API method, and is parameterized on the above 2 structs
+- A struct that defines the method’s arguments
+- A struct that defines the method’s return values
+- A method that implements the API method, and is parameterized on the above 2 structs
 
 This API method encodes a string to its byte representation using a given encoding scheme. It can be used to encode data that is then put in a block and proposed as the next block for this chain.
 
@@ -1240,7 +1243,7 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](create-custom-blockchain.md#interact-with-the-new-blockchain).
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID.
 
 #### timestampvm.getBlock
 
@@ -1258,10 +1261,10 @@ timestampvm.getBlock({id: string}) ->
     }
 ```
 
-* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 (with checksum) representation of the block’s 32 byte payload
-* `timestamp` is the Unix timestamp when this block was created
-* `parentID` is the block’s parent
+- `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
+- `data` is the base 58 (with checksum) representation of the block’s 32 byte payload
+- `timestamp` is the Unix timestamp when this block was created
+- `parentID` is the block’s parent
 
 **Example Call**
 
@@ -1355,7 +1358,7 @@ Propose the next block on this blockchain.
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
-* `data` is the base 58 (with checksum) representation of the proposed block’s 32 byte payload.
+- `data` is the base 58 (with checksum) representation of the proposed block’s 32 byte payload.
 
 **Example Call**
 
@@ -1437,7 +1440,6 @@ func main() {
 
 Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
 
-
 ### Executable Binary
 
 This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.1/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
@@ -1476,16 +1478,19 @@ To install the virtual machine onto your node, you need to move the built virtua
 Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
 Copy the binary into the plugins directory.
+
 ```bash
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
 
 #### Node is not running
+
 If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
 
 #### Node is already running
 
 Load the binary with the `loadVMs` API.
+
 ```bash
 curl -sX POST --data '{
     "jsonrpc":"2.0",
@@ -1494,22 +1499,26 @@ curl -sX POST --data '{
     "params" :{}
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
+
 Confirm the response of `loadVMs` contains the newly installed virtual machine
 `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any others that weren't
 already installed previously in the response.
+
 ```json
 {
   "jsonrpc": "2.0",
   "result": {
     "newVMs": {
-      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["timestampvm", "timestamp"],
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+        "timestampvm",
+        "timestamp"
+      ],
       "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": []
     }
   },
   "id": 1
 }
 ```
-
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
 For more details about VM configs, see [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
@@ -1523,9 +1532,7 @@ That’s it! That’s the entire implementation of a VM which defines a blockcha
 
 In this tutorial, we learned:
 
-* The `block.ChainVM` interface, which all VMs that define a linear chain must implement
-* The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
-* The `rpcchainvm` type, which allows blockchains to run in their own processes.
-* An actual implementation of `block.ChainVM` and `snowman.Block`.
-
-Now we can create a new blockchain with this custom virtual machine by following [this](create-custom-blockchain.md).
+- The `block.ChainVM` interface, which all VMs that define a linear chain must implement
+- The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
+- The `rpcchainvm` type, which allows blockchains to run in their own processes.
+- An actual implementation of `block.ChainVM` and `snowman.Block`.

@@ -48,6 +48,8 @@
 * [SECPXFEROUTPUTID](api_avm_constants.avmconstants.md#static-secpxferoutputid)
 * [SECPXFEROUTPUTID_CODECONE](api_avm_constants.avmconstants.md#static-secpxferoutputid_codecone)
 * [SYMBOLMAXLEN](api_avm_constants.avmconstants.md#static-symbolmaxlen)
+* [VERTEX](api_avm_constants.avmconstants.md#static-vertex)
+* [VERTEX_CODECONE](api_avm_constants.avmconstants.md#static-vertex_codecone)
 
 ## Properties
 
@@ -55,7 +57,7 @@
 
 ▪ **ADDRESSLENGTH**: *number* = 20
 
-*Defined in [src/apis/avm/constants.ts:81](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L81)*
+*Defined in [src/apis/avm/constants.ts:85](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L85)*
 
 ___
 
@@ -63,7 +65,7 @@ ___
 
 ▪ **ASSETIDLEN**: *number* = 32
 
-*Defined in [src/apis/avm/constants.ts:73](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L73)*
+*Defined in [src/apis/avm/constants.ts:77](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L77)*
 
 ___
 
@@ -71,7 +73,7 @@ ___
 
 ▪ **ASSETNAMELEN**: *number* = 128
 
-*Defined in [src/apis/avm/constants.ts:79](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L79)*
+*Defined in [src/apis/avm/constants.ts:83](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L83)*
 
 ___
 
@@ -79,7 +81,7 @@ ___
 
 ▪ **BASETX**: *number* = 0
 
-*Defined in [src/apis/avm/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L45)*
+*Defined in [src/apis/avm/constants.ts:49](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L49)*
 
 ___
 
@@ -87,7 +89,7 @@ ___
 
 ▪ **BASETX_CODECONE**: *number* = 0
 
-*Defined in [src/apis/avm/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L47)*
+*Defined in [src/apis/avm/constants.ts:51](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L51)*
 
 ___
 
@@ -95,7 +97,7 @@ ___
 
 ▪ **BLOCKCHAINIDLEN**: *number* = 32
 
-*Defined in [src/apis/avm/constants.ts:75](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L75)*
+*Defined in [src/apis/avm/constants.ts:79](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L79)*
 
 ___
 
@@ -103,7 +105,7 @@ ___
 
 ▪ **CREATEASSETTX**: *number* = 1
 
-*Defined in [src/apis/avm/constants.ts:49](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L49)*
+*Defined in [src/apis/avm/constants.ts:53](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L53)*
 
 ___
 
@@ -111,7 +113,7 @@ ___
 
 ▪ **CREATEASSETTX_CODECONE**: *number* = 1
 
-*Defined in [src/apis/avm/constants.ts:51](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L51)*
+*Defined in [src/apis/avm/constants.ts:55](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L55)*
 
 ___
 
@@ -119,7 +121,7 @@ ___
 
 ▪ **EXPORTTX**: *number* = 4
 
-*Defined in [src/apis/avm/constants.ts:61](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L61)*
+*Defined in [src/apis/avm/constants.ts:65](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L65)*
 
 ___
 
@@ -127,7 +129,7 @@ ___
 
 ▪ **EXPORTTX_CODECONE**: *number* = 4
 
-*Defined in [src/apis/avm/constants.ts:63](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L63)*
+*Defined in [src/apis/avm/constants.ts:67](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L67)*
 
 ___
 
@@ -135,7 +137,7 @@ ___
 
 ▪ **IMPORTTX**: *number* = 3
 
-*Defined in [src/apis/avm/constants.ts:57](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L57)*
+*Defined in [src/apis/avm/constants.ts:61](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L61)*
 
 ___
 
@@ -143,7 +145,7 @@ ___
 
 ▪ **IMPORTTX_CODECONE**: *number* = 3
 
-*Defined in [src/apis/avm/constants.ts:59](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L59)*
+*Defined in [src/apis/avm/constants.ts:63](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L63)*
 
 ___
 
@@ -151,7 +153,7 @@ ___
 
 ▪ **LATESTCODEC**: *number* = 0
 
-*Defined in [src/apis/avm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L7)*
+*Defined in [src/apis/avm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L7)*
 
 ___
 
@@ -159,7 +161,7 @@ ___
 
 ▪ **NFTCREDENTIAL**: *number* = 14
 
-*Defined in [src/apis/avm/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L69)*
+*Defined in [src/apis/avm/constants.ts:73](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L73)*
 
 ___
 
@@ -167,7 +169,7 @@ ___
 
 ▪ **NFTCREDENTIAL_CODECONE**: *number* = 131076
 
-*Defined in [src/apis/avm/constants.ts:71](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L71)*
+*Defined in [src/apis/avm/constants.ts:75](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L75)*
 
 ___
 
@@ -175,7 +177,7 @@ ___
 
 ▪ **NFTFXID**: *number* = 1
 
-*Defined in [src/apis/avm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L11)*
+*Defined in [src/apis/avm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L11)*
 
 ___
 
@@ -183,7 +185,7 @@ ___
 
 ▪ **NFTMINTOPID**: *number* = 12
 
-*Defined in [src/apis/avm/constants.ts:37](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L37)*
+*Defined in [src/apis/avm/constants.ts:37](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L37)*
 
 ___
 
@@ -191,7 +193,7 @@ ___
 
 ▪ **NFTMINTOPID_CODECONE**: *number* = 131074
 
-*Defined in [src/apis/avm/constants.ts:39](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L39)*
+*Defined in [src/apis/avm/constants.ts:39](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L39)*
 
 ___
 
@@ -199,7 +201,7 @@ ___
 
 ▪ **NFTMINTOUTPUTID**: *number* = 10
 
-*Defined in [src/apis/avm/constants.ts:25](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L25)*
+*Defined in [src/apis/avm/constants.ts:25](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L25)*
 
 ___
 
@@ -207,7 +209,7 @@ ___
 
 ▪ **NFTMINTOUTPUTID_CODECONE**: *number* = 131072
 
-*Defined in [src/apis/avm/constants.ts:27](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L27)*
+*Defined in [src/apis/avm/constants.ts:27](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L27)*
 
 ___
 
@@ -215,7 +217,7 @@ ___
 
 ▪ **NFTXFEROPID**: *number* = 13
 
-*Defined in [src/apis/avm/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L41)*
+*Defined in [src/apis/avm/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L41)*
 
 ___
 
@@ -223,7 +225,7 @@ ___
 
 ▪ **NFTXFEROPID_CODECONE**: *number* = 131075
 
-*Defined in [src/apis/avm/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L43)*
+*Defined in [src/apis/avm/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L43)*
 
 ___
 
@@ -231,7 +233,7 @@ ___
 
 ▪ **NFTXFEROUTPUTID**: *number* = 11
 
-*Defined in [src/apis/avm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L21)*
+*Defined in [src/apis/avm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L21)*
 
 ___
 
@@ -239,7 +241,7 @@ ___
 
 ▪ **NFTXFEROUTPUTID_CODECONE**: *number* = 131073
 
-*Defined in [src/apis/avm/constants.ts:23](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L23)*
+*Defined in [src/apis/avm/constants.ts:23](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L23)*
 
 ___
 
@@ -247,7 +249,7 @@ ___
 
 ▪ **OPERATIONTX**: *number* = 2
 
-*Defined in [src/apis/avm/constants.ts:53](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L53)*
+*Defined in [src/apis/avm/constants.ts:57](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L57)*
 
 ___
 
@@ -255,7 +257,7 @@ ___
 
 ▪ **OPERATIONTX_CODECONE**: *number* = 2
 
-*Defined in [src/apis/avm/constants.ts:55](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L55)*
+*Defined in [src/apis/avm/constants.ts:59](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L59)*
 
 ___
 
@@ -263,7 +265,7 @@ ___
 
 ▪ **SECPCREDENTIAL**: *number* = 9
 
-*Defined in [src/apis/avm/constants.ts:65](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L65)*
+*Defined in [src/apis/avm/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L69)*
 
 ___
 
@@ -271,7 +273,7 @@ ___
 
 ▪ **SECPCREDENTIAL_CODECONE**: *number* = 65540
 
-*Defined in [src/apis/avm/constants.ts:67](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L67)*
+*Defined in [src/apis/avm/constants.ts:71](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L71)*
 
 ___
 
@@ -279,7 +281,7 @@ ___
 
 ▪ **SECPFXID**: *number* = 0
 
-*Defined in [src/apis/avm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L9)*
+*Defined in [src/apis/avm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L9)*
 
 ___
 
@@ -287,7 +289,7 @@ ___
 
 ▪ **SECPINPUTID**: *number* = 5
 
-*Defined in [src/apis/avm/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L29)*
+*Defined in [src/apis/avm/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L29)*
 
 ___
 
@@ -295,7 +297,7 @@ ___
 
 ▪ **SECPINPUTID_CODECONE**: *number* = 65536
 
-*Defined in [src/apis/avm/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L31)*
+*Defined in [src/apis/avm/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L31)*
 
 ___
 
@@ -303,7 +305,7 @@ ___
 
 ▪ **SECPMINTOPID**: *number* = 8
 
-*Defined in [src/apis/avm/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L33)*
+*Defined in [src/apis/avm/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L33)*
 
 ___
 
@@ -311,7 +313,7 @@ ___
 
 ▪ **SECPMINTOPID_CODECONE**: *number* = 65539
 
-*Defined in [src/apis/avm/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L35)*
+*Defined in [src/apis/avm/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L35)*
 
 ___
 
@@ -319,7 +321,7 @@ ___
 
 ▪ **SECPMINTOUTPUTID**: *number* = 6
 
-*Defined in [src/apis/avm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L13)*
+*Defined in [src/apis/avm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L13)*
 
 ___
 
@@ -327,7 +329,7 @@ ___
 
 ▪ **SECPMINTOUTPUTID_CODECONE**: *number* = 65537
 
-*Defined in [src/apis/avm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L15)*
+*Defined in [src/apis/avm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L15)*
 
 ___
 
@@ -335,7 +337,7 @@ ___
 
 ▪ **SECPXFEROUTPUTID**: *number* = 7
 
-*Defined in [src/apis/avm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L17)*
+*Defined in [src/apis/avm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L17)*
 
 ___
 
@@ -343,7 +345,7 @@ ___
 
 ▪ **SECPXFEROUTPUTID_CODECONE**: *number* = 65538
 
-*Defined in [src/apis/avm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L19)*
+*Defined in [src/apis/avm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L19)*
 
 ___
 
@@ -351,4 +353,20 @@ ___
 
 ▪ **SYMBOLMAXLEN**: *number* = 4
 
-*Defined in [src/apis/avm/constants.ts:77](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/constants.ts#L77)*
+*Defined in [src/apis/avm/constants.ts:81](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L81)*
+
+___
+
+### `Static` VERTEX
+
+▪ **VERTEX**: *number* = 0
+
+*Defined in [src/apis/avm/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L45)*
+
+___
+
+### `Static` VERTEX_CODECONE
+
+▪ **VERTEX_CODECONE**: *number* = 0
+
+*Defined in [src/apis/avm/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/avm/constants.ts#L47)*

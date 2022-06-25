@@ -18,4 +18,4 @@
 
 • **loggerLevels**: *[LoggerLevels](admin_interfaces.loggerlevels.md)*
 
-*Defined in [src/apis/admin/interfaces.ts:41](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/admin/interfaces.ts#L41)*
+*Defined in [src/apis/admin/interfaces.ts:41](https://github.com/ava-labs/avalanchejs/blob/8033096/src/apis/admin/interfaces.ts#L41)*

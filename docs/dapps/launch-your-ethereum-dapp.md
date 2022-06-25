@@ -113,7 +113,7 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 }
 ```
 
-Default config values for the C-Chain can be seen [here](../nodes/maintain/avalanchego-config-flags#c-chain-configs).
+Default config values for the C-Chain can be seen [here](../nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 ### Running a Local Test Network
 
@@ -146,7 +146,7 @@ An essential part of the smart contract development environment is the explorer,
 
 ## Avalanche Faucet
 
-For development purposes, you will need test tokens. Avalanche has a [Faucet](https://faucet.avax-test.network/) that drips test tokens to the address of your choice. Paste your C-Chain address there.
+For development purposes, you will need test tokens. Avalanche has a [Faucet](https://faucet.avax.network/) that drips test tokens to the address of your choice. Paste your C-Chain address there.
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 

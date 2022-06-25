@@ -617,7 +617,6 @@ FUJI Testnet Settings:
 - Symbol: AVAX
 - Explorer: https://testnet.snowtrace.io
 
-
 Next, we will add the network configuration in hardhat config file [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not know how that file works then take a look at [here](https://hardhat.org/config/#networks-configuration).
 
 ```js
@@ -634,7 +633,7 @@ networks:{
 ```
 
 Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet
-](https://faucet.avax-test.network/) to get some test AVAX for free.
+](https://faucet.avax.network/) to get some test AVAX for free.
 
 # Deploying the contracts
 
@@ -707,7 +706,7 @@ Add bootstrap CDN in the head section of [`public/index.html`](./NFT-Marketplace
 </html>
 ```
 
-Start with a fresh [`App.js`](NFT-Marketplace-dApp/frontend/src/App.js) file. Import the `ethers` library and assign the contract addresses to constant strings.
+Start with a fresh [`App.js`](NFT-Marketplace-dApp/frontend/src/App.js.md) file. Import the `ethers` library and assign the contract addresses to constant strings.
 
 Since there aren't any auctions yet, we need to create one first. However, before creating an auction, we need to mint an NFT.
 
@@ -876,7 +875,7 @@ mv artifacts/contracts/NFT.sol/NFT.json frontend/src/artifacts/NFT.json # Moves 
 mv artifacts/contracts/AuctionManager.sol/AuctionManager.json frontend/src/artifacts/AuctionManager.json # Moves AuctionManager.json to the newly created folder.
 ```
 
-Import them in the React code at the top of [App.js](NFT-Marketplace-dApp/frontend/src/App.js).
+Import them in the React code at the top of [App.js](NFT-Marketplace-dApp/frontend/src/App.js.md).
 
 ```js
 import AuctionArtifact from "./artifacts/Auction.json";

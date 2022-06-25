@@ -49,7 +49,7 @@ create_config_file () {
     echo "  \"db-dir\": \"$dbdirOpt\",">>node.json
   fi
   if [ "$ipChoice" = "1" ]; then
-    echo "  \"dynamic-public-ip\": \"opendns\"">>node.json
+    echo "  \"public-ip-resolution-service\": \"opendns\"">>node.json
   else
     echo "  \"public-ip\": \"$foundIP\"">>node.json
   fi
