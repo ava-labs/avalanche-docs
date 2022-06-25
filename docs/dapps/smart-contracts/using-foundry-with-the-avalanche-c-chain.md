@@ -13,6 +13,7 @@ Foundry manages your dependencies, compiles your project, runs tests, deploys, a
 - You have [installed Foundry](https://github.com/foundry-rs/foundry#installation). This installation includes the `forge` and `cast` binaries used in this walk-through.
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 - If you plan on running locally, ensure that you have installed and are familiar with [Avalanche Network Runner](../../quickstart/network-runner).
+
 ## Getting Started
 
 This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721) with Foundry and Avalanche Smart Contract Quickstart.
@@ -65,15 +66,16 @@ contract NFT is ERC721 {
 Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the [ERC721 standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
 
 # Compile & deploy with Forge
+
 [Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a command-line tool that ships with Foundry. Forge tests, builds, and deploys your smart contracts.
 
 To compile the NFT contract run:
 
- ```zsh
- forge build
- ``` 
- 
- By default the compiler output will be in the `out` directory. To deploy our compiled contract with Forge we have to set environment variables for the RPC endpoint and the private key we want to use to deploy.
+```zsh
+forge build
+```
+
+By default the compiler output will be in the `out` directory. To deploy our compiled contract with Forge we have to set environment variables for the RPC endpoint and the private key we want to use to deploy.
 
 Set your environment variables by running:
 
@@ -91,7 +93,7 @@ export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 Once set, you can [deploy your NFT with Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) by running the command below while adding the values for `_name` and `_symbol`, the relevant [constructor arguments](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3ad93abf50fba65e3aab68f23382bcace73968be/contracts/NFT.sol#L13) of the NFT contract:
 
 ```zsh
-forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args GameItem ITM 
+forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args GameItem ITM
 ```
 
 Upon successful deployment, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
@@ -107,33 +109,36 @@ Transaction hash: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32
 ```
 
 _Note: Please store your `Deployed to` address for use in the next section._
+
 # Using Cast to Interact with the Smart Contract
+
 We can call functions on our NFT contract with [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
 
 Mint an NFT from your contract by replacing `<NFT-CONTRACT-ADDRESS>` with your `Deployed to` address and `<NFT-RECIPIENT-ADDRESS>` with an address of your choice.
 
 _Note: This section assumes that you have already set your RPC and private key env variables during deployment_
+
 ```zsh
 cast send --rpc-url=$RPC_URL  <NFT-CONTRACT-ADDRESS> "awardItem(address)" <NFT-RECIPIENT-ADDRESS> --private-key=$PRIVATE_KEY
 ```
 
 Upon success, the command line will display the [transaction data](https://testnet.snowtrace.io/tx/0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c).
+
 ```zsh
 blockHash               0x1d9b0364fe002eeddd0e32be0c27d6797c63dffb51fe555ea446357759e6a6f8
 blockNumber             10714448
-contractAddress         
+contractAddress
 cumulativeGasUsed       90837
 effectiveGasPrice       28000000000
 gasUsed                 90837
 logs                    [{"address":"0x45857b942723fff8ee7acd2b1d6515d9965c16e5","topics":["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef","0x0000000000000000000000000000000000000000000000000000000000000000","0x000000000000000000000000845095a03a6686e24b90fed55e11f4ec808b1ab3","0x0000000000000000000000000000000000000000000000000000000000000001"],"data":"0x","blockHash":"0x1d9b0364fe002eeddd0e32be0c27d6797c63dffb51fe555ea446357759e6a6f8","blockNumber":"0xa37d50","transactionHash":"0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c","transactionIndex":"0x0","logIndex":"0x0","removed":false}]
 logsBloom               0x00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000040000000000000000000000000008010000000000000000040000000000000000000000000000020000040000000000000800000000002000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000060080000000000000000000000000000000000000000000000000000000000000000
-root                    
+root
 status                  1
 transactionHash         0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c
 transactionIndex        0
 type                    2
 ```
-
 
 Well done! You just minted your first NFT from your contract. You can check the owner of `tokenId` 1 by running the `cast call` command below:
 
@@ -142,6 +147,7 @@ cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <NFT-CONTRACT-ADDRESS> "
 ```
 
 The address you provided above should be returned as the owner.
+
 ```zsh
 0x000000000000000000000000845095a03a6686e24b90fed55e11f4ec808b1ab3
 ```
@@ -160,20 +166,24 @@ export PRIVATE_KEY=<YOUR-PRIVATE-KEY>
 The Fuji workflow above can be adapted to a Local Network by doing following:
 
 In a new terminal navigate to your [Avalanche Network Runner](../../quickstart/network-runner.md) directory.
+
 ```zsh
 cd /path/to/Avalanche-Network-Runner
 ```
 
 Next, deploy a new Avalanche Network with five nodes (a Cluster) locally.
+
 ```zsh
 go run examples/local/fivenodenetwork/main.go
 ```
 
 Next, modify the environment variables in your Foundry project:
+
 ```zsh
 export RPC_URL=http://localhost:9650/ext/bc/C/rpc
 export PRIVATE_KEY=56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
 ```
+
 :::warning
 The example PRIVATE_KEY variable above provides a pre-funded account on Avalanche Network Runner and should be used for LOCAL DEVELOPMENT ONLY.
 :::

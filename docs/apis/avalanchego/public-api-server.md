@@ -41,7 +41,7 @@ Requests to the public API server API are distributed by a load balancer to an i
 If you're using [AvalancheJS](../avalanchejs/README.md) to access the public API, simply set the following in your code:
 
 ```javascript
-avalanche.setRequestConfig("withCredentials", true);
+avalanche.setRequestConfig("withCredentials", true)
 ```
 
 ## Availability

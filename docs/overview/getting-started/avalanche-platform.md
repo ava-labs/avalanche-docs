@@ -1,11 +1,10 @@
 ---
-description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here. 
+description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here.
 ---
 
-# Avalanche Platform 
+# Avalanche Platform
 
 Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
-
 
 ![Primary network](/img/primary-network.png)
 
@@ -21,9 +20,9 @@ Avalanche’s subnet architecture makes regulatory compliance manageable. As men
 
 Some examples of requirements include:
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+- Validators must be located in a given country
+- Validators must pass a KYC/AML checks
+- Validators must hold a certain license
 
 (To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
 
@@ -57,10 +56,9 @@ Ethereum made a step toward solving this problem with smart contracts. Developer
 
 Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go (other languages will be supported in the future).
 
-## Developing Your Own Subnet 
+## Developing Your Own Subnet
 
 Check out [Subnets](../../subnets/README.md) on how to develop your own subnets with customized virtual machine and blockchain.
-
 
 ## Exchange Chain (X-Chain)
 
@@ -68,8 +66,7 @@ The **X-Chain** acts as a decentralized platform for creating and trading digita
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM. 
-
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
 ## Platform Chain (P-Chain)
 
@@ -82,4 +79,3 @@ The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) allows clients to crea
 The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md).
 
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
-

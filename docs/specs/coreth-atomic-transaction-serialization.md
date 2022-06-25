@@ -1,4 +1,3 @@
-
 # Coreth Atomic Transaction Format
 
 This page is meant to be the single source of truth for how we serialize atomic transactions in `Coreth`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) for cryptographic user identification.
@@ -19,10 +18,10 @@ Input type that specifies an EVM account to deduct the funds from as part of an 
 
 An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
 
-* **`Address`** is the EVM address from which to transfer funds.
-* **`Amount`** is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
-* **`AssetID`** is the ID of the asset to transfer.
-* **`Nonce`** is the nonce of the EVM account exporting funds.
+- **`Address`** is the EVM address from which to transfer funds.
+- **`Amount`** is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
+- **`AssetID`** is the ID of the asset to transfer.
+- **`Nonce`** is the nonce of the EVM account exporting funds.
 
 ### Gantt EVM Input Specification
 
@@ -55,10 +54,10 @@ message  {
 
 Let's make an EVM Input:
 
-* `Address: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc`
-* `Amount: 2000000`
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Nonce: 0`
+- `Address: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc`
+- `Amount: 2000000`
+- `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+- `Nonce: 0`
 
 ```text
 [
@@ -93,10 +92,10 @@ Transferable Input wraps a `SECP256K1TransferInput`. Transferable inputs describ
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is a `SECP256K1TransferInput`, as defined below.
+- **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
+- **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
+- **`AssetID`** is a 32-byte array that defines which asset this input references.
+- **`Input`** is a `SECP256K1TransferInput`, as defined below.
 
 ### Gantt Transferable Input Specification
 
@@ -129,10 +128,10 @@ message TransferableInput {
 
 Let's make a transferable input:
 
-* `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
-* `UTXOIndex: 1`
-* `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+- `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
+- `UTXOIndex: 1`
+- `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+- `Input: "Example SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -170,9 +169,9 @@ A [secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-m
 
 A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+- **`TypeID`** is the ID for this input type. It is `0x00000005`.
+- **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
+- **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
 
 ### Gantt SECP256K1 Transfer Input Specification
 
@@ -202,9 +201,9 @@ message SECP256K1TransferInput {
 
 Let's make a payment input with:
 
-* **`TypeId`**: 5
-* **`Amount`**: 500000000000
-* **`AddressIndices`**: \[0\]
+- **`TypeId`**: 5
+- **`Amount`**: 500000000000
+- **`AddressIndices`**: \[0\]
 
 ```text
 [
@@ -239,9 +238,9 @@ Output type specifying a state change to be applied to an EVM account as part of
 
 An EVM Output contains an `address`, `amount`, and `assetID`.
 
-* **`Address`** is the EVM address that will receive the funds.
-* **`Amount`** is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
-* **`AssetID`** is the ID of the asset to transfer.
+- **`Address`** is the EVM address that will receive the funds.
+- **`Amount`** is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
+- **`AssetID`** is the ID of the asset to transfer.
 
 ### Gantt EVM Output Specification
 
@@ -271,9 +270,9 @@ message  {
 
 Let's make an EVM Output:
 
-* `Address: 0x0eb5ccb85c29009b6060decb353a38ea3b52cd20`
-* `Amount: 500000000000`
-* `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+- `Address: 0x0eb5ccb85c29009b6060decb353a38ea3b52cd20`
+- `Amount: 500000000000`
+- `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
 
 ```text
 [
@@ -305,8 +304,8 @@ Transferable outputs wrap a `SECP256K1TransferOutput` with an asset ID.
 
 A transferable output contains an `AssetID` and an `Output` which is a `SECP256K1TransferOutput`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is a `SECP256K1TransferOutput` as defined below.
+- **`AssetID`** is a 32-byte array that defines which asset this output references.
+- **`Output`** is a `SECP256K1TransferOutput` as defined below.
 
 ### Gantt Transferable Output Specification
 
@@ -333,8 +332,8 @@ message TransferableOutput {
 
 Let's make a transferable output:
 
-* `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+- `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+- `Output: "Example SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -370,11 +369,11 @@ A [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-
 
 A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`TypeID`** is the ID for this output type. It is `0x00000007`.
+- **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
+- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
 
 ### Gantt SECP256K1 Transfer Output Specification
 
@@ -410,12 +409,12 @@ message SECP256K1TransferOutput {
 
 Let's make a secp256k1 transfer output with:
 
-* **`TypeID`**: 7
-* **`Amount`**: 1000000
-* **`Locktime`**: 0
-* **`Threshold`**: 1
-* **`Addresses`**:
-  * 0x66f90db6137a78f76b3693f7f2bc507956dae563
+- **`TypeID`**: 7
+- **`Amount`**: 1000000
+- **`Locktime`**: 0
+- **`Threshold`**: 1
+- **`Addresses`**:
+  - 0x66f90db6137a78f76b3693f7f2bc507956dae563
 
 ```text
 [
@@ -458,12 +457,12 @@ ExportTx is a transaction to export funds from Coreth to a different chain.
 
 An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, and `exportedOutputs`.
 
-* **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`destinationChain`** is a 32-byte array that defines which blockchain this transaction exports funds to.
-* **`inputs`** is an array of EVM Inputs to fund the ExportTx.
-* **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
+- **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
+- **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
+- **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
+- **`destinationChain`** is a 32-byte array that defines which blockchain this transaction exports funds to.
+- **`inputs`** is an array of EVM Inputs to fund the ExportTx.
+- **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
 
 ### Gantt ExportTx Specification
 
@@ -489,14 +488,14 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
 
 Let's make an EVM Output:
 
-* **`TypeID`**: `1`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
-* **`Inputs`**:
-  * `"Example EVMInput as defined above"`
-* **`Exportedoutputs`**:
-  * `"Example TransferableOutput as defined above"`
+- **`TypeID`**: `1`
+- **`NetworkID`**: `12345`
+- **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+- **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+- **`Inputs`**:
+  - `"Example EVMInput as defined above"`
+- **`Exportedoutputs`**:
+  - `"Example TransferableOutput as defined above"`
 
 ```text
 [
@@ -563,12 +562,12 @@ ImportTx is a transaction to import funds to Coreth from another chain.
 
 An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
 
-* **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`sourceChain`** is a 32-byte array that defines which blockchain from which to import funds.
-* **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
-* **`Outs`** is an array of EVM Outputs to be imported to this chain.
+- **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
+- **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
+- **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
+- **`sourceChain`** is a 32-byte array that defines which blockchain from which to import funds.
+- **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
+- **`Outs`** is an array of EVM Outputs to be imported to this chain.
 
 ### Gantt ImportTx Specification
 
@@ -594,14 +593,14 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
 
 Let's make an ImportTx:
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
-* **`ImportedInputs`**:
-  * `"Example TransferableInput as defined above"`
-* **`Outs`**:
-  * `"Example EVMOutput as defined above"`
+- **`TypeID`**: `0`
+- **`NetworkID`**: `12345`
+- **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+- **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+- **`ImportedInputs`**:
+  - `"Example TransferableInput as defined above"`
+- **`Outs`**:
+  - `"Example EVMOutput as defined above"`
 
 ```text
 [
@@ -670,8 +669,8 @@ A [secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-m
 
 ### What SECP256K1 Credential Contains
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
+- **`TypeID`** is the ID for this type. It is `0x00000009`.
+- **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
 
 ### Gantt SECP256K1 Credential Specification
 
@@ -698,9 +697,9 @@ message SECP256K1Credential {
 
 Let's make a payment input with:
 
-* **`TypeID`**: 9
-* **`signatures`**:
-  * `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
+- **`TypeID`**: 9
+- **`signatures`**:
+  - `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
 
 ```text
 [
@@ -736,9 +735,9 @@ A signed transaction contains an unsigned `AtomicTx` and credentials.
 
 A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`AtomicTx`** is an atomic transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential corresponds to the input at the same index in the AtomicTx
+- **`CodecID`** The only current valid codec id is `00 00`.
+- **`AtomicTx`** is an atomic transaction, as described above.
+- **`Credentials`** is an array of credentials. Each credential corresponds to the input at the same index in the AtomicTx
 
 ### Gantt Signed Transaction Specification
 
@@ -768,9 +767,9 @@ message Tx {
 
 Let's make a signed transaction that uses the unsigned transaction and credential from the previous examples.
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* **`Credentials`**
+- **`CodecID`**: `0`
+- **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+- **`Credentials`**
 
   `0x00000009000000010acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a300`
 
@@ -839,11 +838,11 @@ A UTXO is a standalone representation of a transaction output.
 
 A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+- **`CodecID`** The only valid `CodecID` is `00 00`
+- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
+- **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
+- **`AssetID`** is a 32-byte array that defines which asset this utxo references.
+- **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
 
 ### Gantt UTXO Specification
 
@@ -879,11 +878,11 @@ message Utxo {
 
 Let’s make a UTXO from the signed transaction created above:
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: 0 = 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example EVMOutput as defined above"`
+- **`CodecID`**: `0`
+- **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+- **`UTXOIndex`**: 0 = 0x00000000
+- **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+- **`Output`**: `"Example EVMOutput as defined above"`
 
 ```text
 [

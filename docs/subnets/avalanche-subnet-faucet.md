@@ -293,8 +293,8 @@ You can disable these Captcha verifications and rate limiters for testing the pu
 Comment or remove these 2 lines from the `server.ts` file
 
 ```javascript
-new RateLimiter(app, [GLOBAL_RL]);
-new RateLimiter(app, evmchains);
+new RateLimiter(app, [GLOBAL_RL])
+new RateLimiter(app, evmchains)
 ```
 
 ### Disabling Captcha Verification

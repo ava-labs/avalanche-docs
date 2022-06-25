@@ -18,15 +18,15 @@ Main network data:
 
 ```javascript
 export const AVALANCHE_MAINNET_PARAMS = {
-    chainId: '0xA86A',
-    chainName: 'Avalanche Mainnet C-Chain',
-    nativeCurrency: {
-        name: 'Avalanche',
-        symbol: 'AVAX',
-        decimals: 18
-    },
-    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://snowtrace.io/']
+  chainId: "0xA86A",
+  chainName: "Avalanche Mainnet C-Chain",
+  nativeCurrency: {
+    name: "Avalanche",
+    symbol: "AVAX",
+    decimals: 18,
+  },
+  rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+  blockExplorerUrls: ["https://snowtrace.io/"],
 }
 ```
 
@@ -34,15 +34,15 @@ Test network data:
 
 ```javascript
 export const AVALANCHE_TESTNET_PARAMS = {
-    chainId: '0xA869',
-    chainName: 'Avalanche Testnet C-Chain',
-    nativeCurrency: {
-        name: 'Avalanche',
-        symbol: 'AVAX',
-        decimals: 18
-    },
-    rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+  chainId: "0xA869",
+  chainName: "Avalanche Testnet C-Chain",
+  nativeCurrency: {
+    name: "Avalanche",
+    symbol: "AVAX",
+    decimals: 18,
+  },
+  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+  blockExplorerUrls: ["https://testnet.snowtrace.io/"],
 }
 ```
 
@@ -51,18 +51,18 @@ export const AVALANCHE_TESTNET_PARAMS = {
 To add the network to MetaMask, we need to call the `wallet_addEthereumChain` method, exposed by the web3 provider.
 
 ```javascript
-  function addAvalancheNetwork() {
-    injected.getProvider().then(provider => {
-      provider
-        .request({
-          method: 'wallet_addEthereumChain',
-          params: [AVALANCHE_MAINNET_PARAMS]
-        })
-        .catch((error: any) => {
-          console.log(error)
-        })
-    })
-  }
+function addAvalancheNetwork() {
+  injected.getProvider().then((provider) => {
+    provider
+      .request({
+        method: "wallet_addEthereumChain",
+        params: [AVALANCHE_MAINNET_PARAMS],
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
+  })
+}
 ```
 
 Where `injected` is initialized as a `web3-react/injected-connector` used to interface with MetaMask APIs. Usage for other popular web frameworks is similar. Replace `AVALANCHE_MAINNET_PARAMS` with `AVALANCHE_TESTNET_PARAMS` if you want to add the test network.
@@ -86,4 +86,3 @@ If they approve, your app will be connected to the Avalanche network. Very easy,
 Dapps users are often not very technically sophisticated and onboarding them needs to be as seamless and easy as possible. Manually adding a new network to MetaMask is a hurdle than a certain percentage of your potential users will not be able to clear. Removing that requirement is a simple step that will enhance their experience and enable more users to get to actually use your dapp.
 
 If you have any questions, problems, or ideas on how to improve, or simply want to join our developer community, you can contact us on our [Discord](https://chat.avalabs.org/) server.
-

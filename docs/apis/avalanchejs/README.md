@@ -55,21 +55,21 @@ This will generate a pure Javascript library and place it in a folder named "web
 The AvalancheJS library can be imported into your existing Node.js project as follows:
 
 ```ts
-const avalanche = require("avalanche");
+const avalanche = require("avalanche")
 ```
 
 Or into your TypeScript project like this:
 
 ```ts
-import { Avalanche } from "avalanche";
+import { Avalanche } from "avalanche"
 ```
 
 ## Importing essentials
 
 ```ts
-import { Avalanche, BinTools, Buffer, BN } from "avalanche";
+import { Avalanche, BinTools, Buffer, BN } from "avalanche"
 
-let bintools = BinTools.getInstance();
+let bintools = BinTools.getInstance()
 ```
 
 The above lines import the libraries used in the tutorials. The libraries include:
