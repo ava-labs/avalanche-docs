@@ -16,6 +16,12 @@ The installation itself can be easily recreated by installing the node on a new 
 
 ## NodeID
 
+:::warning
+
+If more than one running **validators** share the same NodeID, it will dramatically impact the uptime calculation of the validator which will very likely disqualify the validator from receiving the staking rewards. Please make sure only one validator with the same NodeID run at one time.
+
+:::
+
 NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../specs/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
 
 - `staker.crt`
