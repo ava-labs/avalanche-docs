@@ -18,7 +18,7 @@ The installation itself can be easily recreated by installing the node on a new 
 
 :::warning
 
-If more than one running nodes share the same NodeID, the communications from other nodes to this NodeID will be random to one of these nodes. If this NodeID is of a validator, it will will dramatically impact the uptime calculation of the validator which will very likely disqualify the validator from receiving the staking rewards. Please make sure only one node with the same NodeID run at one time.
+If more than one running nodes share the same NodeID, the communications from other nodes in the Avalanche network to this NodeID will be random to one of these nodes. If this NodeID is of a validator, it will dramatically impact the uptime calculation of the validator which will very likely disqualify the validator from receiving the staking rewards. Please make sure only one node with the same NodeID run at one time.
 
 :::
 
