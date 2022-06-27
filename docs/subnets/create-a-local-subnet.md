@@ -63,6 +63,19 @@ Restart your local deployment (from where you left off) with:
 avalanche network start
 ```
 
+### Docker
+
+To make Avalanche CLI working in a docker, adding this
+
+```json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "fd00::/80"
+}
+```
+
+to `/etc/docker/daemon.json` on the host, then restarting the docker service. This is because ipv6 is used to resolve local bootstrap IPs, and it is not enabled on a docker container by default.
+
 ### Currently Supported Functionality
 
 - Creation of Subnet-EVM configs
