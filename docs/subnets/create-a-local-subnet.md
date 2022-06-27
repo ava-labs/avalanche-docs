@@ -65,7 +65,7 @@ avalanche network start
 
 ### Docker
 
-To make Avalanche CLI working in a docker, adding this
+To make Avalanche CLI working in a docker, add this
 
 ```json
 {
@@ -74,7 +74,7 @@ To make Avalanche CLI working in a docker, adding this
 }
 ```
 
-to `/etc/docker/daemon.json` on the host, then restarting the docker service. This is because ipv6 is used to resolve local bootstrap IPs, and it is not enabled on a docker container by default.
+to `/etc/docker/daemon.json` on the host, then restart the docker service. This is because ipv6 is used to resolve local bootstrap IPs, and it is not enabled on a docker container by default.
 
 ### Currently Supported Functionality
 
