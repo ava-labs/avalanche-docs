@@ -7,7 +7,7 @@ description: Learn how to stake on Avalanche by validating or delegating
 
 Staking is the process of locking up tokens to support a network while receiving a reward in return (rewards can be increased network utility, monetary compensation, etc.). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
-## How does proof-of-stake work?
+## How Does Proof-of-stake Work?
 
 To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
@@ -68,7 +68,7 @@ To make API calls to your node from remote machines, allow traffic on the API po
 
 You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines (e.g., your personal computer.)
 
-#### Why is my uptime low?
+#### Why Is My Uptime Low?
 
 Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to receive a staking reward.
 
@@ -109,7 +109,7 @@ The minimum amount that a delegator must delegate is 25 AVAX.
 Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network).
 :::
 
-### Delegator rewards
+### Delegator Rewards
 
 If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
@@ -117,11 +117,11 @@ When you issue the transaction to delegate tokens, the staked tokens and transac
 
 ## FAQ
 
-### Is there a tool to check the health of a validator?
+### Is There a Tool to Check the Health of a Validator?
 
 Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check).
 
-### How is it determined whether a validator receives a staking reward?
+### How Is It Determined Whether a Validator Receives a Staking Reward?
 
 When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator calculates that the leaving node was responsive for more than the required uptime (currently 80%), the validator will vote for the leaving node to receive a staking reward. Otherwise, the validator will vote that the leaving node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the leaving node receives a reward or not.
 
