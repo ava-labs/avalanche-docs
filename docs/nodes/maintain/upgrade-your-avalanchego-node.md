@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Upgrade Your AvalancheGo Node
 
-## **Backup your node**
+## Backup Your Node
 
 Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
 
@@ -18,7 +18,7 @@ Then download `staker.crt` and `staker.key` files and keep them somewhere safe a
 
 If you use your node for development purposes and have keystore users on your node, you should back up those too.
 
-## Node installed using the installer script
+## Node Installed Using the Installer Script
 
 If you installed your node using the [installer script](../build/set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
 
@@ -50,15 +50,15 @@ And that is it, your node is upgraded to the latest version.
 
 If you installed your node manually, proceed with the rest of the tutorial.
 
-## **Stop the old node version**
+## Stop the Old Node Version
 
 After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
 
-### Node running from terminal
+### Node Running from Terminal
 
 If your node is running in a terminal stop it by pressing `ctrl+c`.
 
-### Node running as a service
+### Node Running as a Service
 
 If your node is running as a service, stop it by entering:
 
@@ -66,7 +66,7 @@ If your node is running as a service, stop it by entering:
 
 (your service may be named differently, `avalanche.service`, or similar)
 
-### Node running in background
+### Node Running in Background
 
 If your node is running in the background (by running with `nohup`, for example) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
 
@@ -83,7 +83,7 @@ Downloading pre-built binary is easier and recommended if you're just looking to
 
 Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
 
-## **Download Pre-built Binary**
+## Download Pre-built Binary
 
 If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want (probably the latest one.)
 
@@ -106,7 +106,7 @@ The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 You are now ready to run the new version of the node.
 
-### Running the node from terminal
+### Running the Node from Terminal
 
 If you are using the pre-built binaries on MacOS:
 
@@ -122,7 +122,7 @@ If you are using the pre-built binaries on Linux:
 
 Add `nohup` at the start of the command if you want to run the node in the background.
 
-### Running the node as a service
+### Running the Node as a Service
 
 If you're running the node as a service, you need to replace the old binaries with the new ones.
 
@@ -130,7 +130,7 @@ If you're running the node as a service, you need to replace the old binaries wi
 
 and then restart the service with `sudo systemctl start avalanchego.service`.
 
-## **Build from source**
+## Build from Source
 
 First clone our Github repo (you can skip this step if you’ve done this before):
 

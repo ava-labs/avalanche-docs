@@ -20,7 +20,7 @@ You've completed [Run an Avalanche Node](../build/run-avalanche-node-manually.md
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
-## Add a validator with Avalanche Wallet
+## Add a Validator with Avalanche Wallet
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
@@ -66,7 +66,7 @@ You can also call [`platform.getCurrentValidators`](../../apis/avalanchego/apis/
 
 That’s it!
 
-## Add a validator with AvalancheJS
+## Add a Validator with AvalancheJS
 
 We can also add a node to the validator set using [AvalancheJS](../../apis/avalanchejs/README.md).
 
