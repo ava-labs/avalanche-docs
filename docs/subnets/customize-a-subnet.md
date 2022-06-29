@@ -97,7 +97,7 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 `maxBlockGasCost`: maxBlockGasCost sets the maximum amount of gas to charge for the production of a block.
 
-`blockGasCostStep`: b lockGasCostStep determines how much to increase/decrease the block gas cost depending on the amount of time elapsed since the previous block.
+`blockGasCostStep`: blockGasCostStep determines how much to increase/decrease the block gas cost depending on the amount of time elapsed since the previous block.
 
 If the block is produced at the target rate, the block gas cost will stay the same as the block gas cost for the parent block.
 
