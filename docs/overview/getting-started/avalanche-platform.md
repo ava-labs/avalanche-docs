@@ -10,7 +10,7 @@ Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#excha
 
 ## Subnets
 
-A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one subnet. A subnet can have and validate many blockchains. A validator may be a member of many subnets.
 
 A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
 
