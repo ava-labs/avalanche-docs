@@ -103,7 +103,7 @@ If the block is produced at the target rate, the block gas cost will stay the sa
 
 If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for each second faster/slower than the target block rate accordingly.
 
-_Note: if the blockGasCostStep is set to a very large number, it effectively requires block production to go no faster than the targetBlockRate. Ex: if a block is produced two seconds faster than the target block rate, the block gas cost will increase by 2 \* BlockGasCostStep._
+_Note: if the blockGasCostStep is set to a very large number, it effectively requires block production to go no faster than the targetBlockRate. Ex: if a block is produced two seconds faster than the target block rate, the block gas cost will increase by 2 \* blockGasCostStep._
 
 #### Custom Fee Recipients
 
