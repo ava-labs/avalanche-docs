@@ -347,7 +347,7 @@ platform.createBlockchain(
 - `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
 - `name` is a human-readable name for the new blockchain. Not necessarily unique.
 - `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-- `encoding` specifies the format to use for `genesisData`. Can be either "cb58" or "hex". Defaults to "cb58". Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
+- `encoding` specifies the format to use for `genesisData`. Can only be `hex` when a value is provided. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
 - `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
@@ -366,8 +366,8 @@ curl -X POST --data '{
         "vmID":"timestamp",
         "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
-        "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
-        "encoding": "cb58",
+        "genesisData": "0x07000000000000000000000000000000000000000000000000000000000000000016943a",
+        "encoding": "hex",
         "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
@@ -655,41 +655,12 @@ platform.getBlock({
 **Request**
 
 - `blockID` is the block ID. It should be in cb58 format.
-- `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
 **Response**
 
 - `block` is the transaction encoded to `encoding`.
 - `encoding` is the `encoding`.
-
-#### CB58 Example
-
-##### **Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getBlock",
-    "params": {
-        "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
-        "encoding": "cb58"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-##### **Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "block": "11111BwoDGdFYQfsbfJ35VKjMP6z5dtggBJqFay7KN33GdqpU8ZFAvaSVegwfADYFipsCpTft27TA8h99krBjsMvFZ5TgFYrQCNN2DkyXQSVuGadYh8UhZ6Ptp3HwVYvXWHaDwjt3mEs9fkoS5JiTDfrrp3w6ws2LTksv3LGtb66iWjWgnHU46WgY2wVqnwrit2x7mYGTgJpXeziLCY66Hnnu1jAy5hYhK2Ek37XhvBcd1UeTcPAFsEtFdLr8Ku19K2dYYNvvuz7YnJjuqxUjtNoC61UcKrtTyJCqRuyA85NRFD7ZYVKwSd13CevyZWuBiBWZkukUpLhJwTcWnFnzbntKDCMdip4kAtQueDkjYnrXu2AWS3SXiJTSmZm55iwn4iE9sqBs6Rj1CnrakGi7sCcXg1UyYu5scmb5RVDKDtZPNLr5Vb6oTWaM4egHfwgT98koZ28rSw8otJfv4q1BH9vrS4N7pUJxh9grnksG9TQDtjBjD9tmhxC8iSLYTwGNxitAqjZd7SGE9",
-    "encoding": "cb58"
-  },
-  "id": 1
-}
-```
 
 #### Hex Example
 
@@ -1330,7 +1301,7 @@ platform.getRewardUTXOs({
 - `txID` is the ID of the staking or delegating transaction
 - `numFetched` is the number of returned UTXOs
 - `utxos` is an array of encoded reward UTXOs
-- `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -1353,10 +1324,10 @@ curl -X POST --data '{
   "result": {
     "numFetched": "2",
     "utxos": [
-      "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
-      "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+      "0x0000a195046108a85e60f7a864bb567745a37f50c6af282103e47cc62f036cee404700000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c1f01765",
+      "0x0000ae8b1b94444eed8de9a81b1222f00f1b4133330add23d8ac288bffa98b85271100000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216473d042a"
     ],
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1602,7 +1573,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58", "hex", or "json". Defaults to "cb58".
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "hex" or "json". Defaults to "hex".
 
 #### **Signature**
 
@@ -1613,35 +1584,6 @@ platform.getTx({
 }) -> {
     tx: string,
     encoding: string,
-}
-```
-
-#### CB58 Example
-
-##### **Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getTx",
-    "params": {
-        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
-        "encoding": "cb58"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-##### **Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "tx": "111117ukQs6mcsKobtCH2jrVemXbPL2SgZTxJ4Lg7zazMjo4Kyyo33YNwnwhUJToHRk7zmCFXbL6BieJWpLch9Aa8opKr7qJeWPjSWhriX9TQLBt5jxq9ijX9JB3dwNG7MtY5KXS6EWF3w3tHBL5GTfL36F2b1PJfcWQQoTgeQWoe8MJXM27LGjnkhTMEzuNpTyrEcranPgXwdy9nNVZiLGMyYpzXbnmV2JUkGZXap8Ye3faWBwNg1La4aCXFKZ7ADMSiQUgqWYDMGZkDEg3yXNifSsBiAvqeCTx8kKp4B5W1vsgf3Tko2XW6A3SrkNVFVmbqCNjPKPpKeoSPnAC5Wmrb9zTMSZqYG9F6E7myow4o7tubbeDU3FC6fSws5ytQAnFseKUUT94jBGFGDD9pAuXExFwdwgRRUUS228ai4AZMqEF7KW5J9FhFQCUxMyprLxdPEUrjw3jW",
-    "encoding": "cb58"
-  },
-  "id": 1
 }
 ```
 
@@ -1795,7 +1737,7 @@ platform.getUTXOs(
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 - When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 - When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-- `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example**
 
@@ -1809,7 +1751,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1822,17 +1764,17 @@ This gives response:
   "result": {
     "numFetched": "5",
     "utxos": [
-      "11PQ1sNw9tcXjVki7261souJnr1TPFrdVCu5JGZC7Shedq3a7xvnTXkBQ162qMYxoerMdwzCM2iM1wEQPwTxZbtkPASf2tWvddnsxPEYndVSxLv8PDFMwBGp6UoL35gd9MQW3UitpfmFsLnAUCSAZHWCgqft2iHKnKRQRz",
-      "11RCDVNLzFT8KmriEJN7W1in6vB2cPteTZHnwaQF6kt8B2UANfUkcroi8b8ZSEXJE74LzX1mmBvtU34K6VZPNAVxzF6KfEA8RbYT7xhraioTsHqxVr2DJhZHpR3wGWdjUnRrqSSeeKGE76HTiQQ8WXoABesvs8GkhVpXMK",
-      "11GxS4Kj2od4bocNWMQiQhcBEHsC3ZgBP6edTgYbGY7iiXgRVjPKQGkhX5zj4NC62ZdYR3sZAgp6nUc75RJKwcvBKm4MGjHvje7GvegYFCt4RmwRbFDDvbeMYusEnfVwvpYwQycXQdPFMe12z4SP4jXjnueernYbRtC4qL",
-      "11S1AL9rxocRf2NVzQkZ6bfaWxgCYch7Bp2mgzBT6f5ru3XEMiVZM6F8DufeaVvJZnvnHWtZqocoSRZPHT5GM6qqCmdbXuuqb44oqdSMRvLphzhircmMnUbNz4TjBxcChtks3ZiVFhdkCb7kBNLbBEmtuHcDxM7MkgPjHw",
-      "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
+      "0x0000a195046108a85e60f7a864bb567745a37f50c6af282103e47cc62f036cee404700000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c1f01765",
+      "0x0000ae8b1b94444eed8de9a81b1222f00f1b4133330add23d8ac288bffa98b85271100000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216473d042a",
+      "0x0000731ce04b1feefa9f4291d869adc30a33463f315491e164d89be7d6d2d7890cfc00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21600dd3047",
+      "0x0000b462030cc4734f24c0bc224cf0d16ee452ea6b67615517caffead123ab4fbf1500000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c71b387e",
+      "0x000054f6826c39bc957c0c6d44b70f961a994898999179cc32d21eb09c1908d7167b00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f2166290e79d"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1850,9 +1792,9 @@ curl -X POST --data '{
         "limit":5,
         "startIndex": {
             "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
-            "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
+            "utxo": "0x62fc816bb209857923770c286192ab1f9e3f11e4a7d4ba0943111c3bbfeb9e4a5ea72fae"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1865,16 +1807,16 @@ This gives response:
   "result": {
     "numFetched": "4",
     "utxos": [
-      "115ZLnNqzCsyugMY5kbLnsyP2y4se4GJBbKHjyQnbPfRBitqLaxMizsaXbDMU61fHV2MDd7fGsDnkMzsTewULi94mcjk1bfvP7aHYUG2i3XELpV9guqsCtv7m3m3Kg4Ya1m6tAWqT7PhvAaW4D3fk8W1KnXu5JTWvYBqD2",
-      "11QASUuhw9M1r52maTFUZ4fnuQby9inX77VYxePQoNavEyCPuHN5cCWPQnwf8fMrydFXVMPAcS4UJAcLjSFskNEmtVPDMY4UyHwh2MChBju6Y7V8yYf3JBmYt767NPsdS3EqgufYJMowpud8fNyH1to4pAdd6A9CYbD8KG",
-      "11MHPUWT8CsdrtMWstYpFR3kobsvRrLB4W8tP9kDjhjgLkCJf9aaJQM832oPcvKBsRhCCxfKdWr2UWPztRCU9HEv4qXVwRhg9fknAXzY3a9rXXPk9HmArxMHLzGzRECkXpXb2dAeqaCsZ637MPMrJeWiovgeAG8c5dAw2q",
-      "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
+      "0x000020e182dd51ee4dcd31909fddd75bb3438d9431f8e4efce86a88a684f5c7fa09300000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21662861d59",
+      "0x0000a71ba36c475c18eb65dc90f6e85c4fd4a462d51c5de3ac2cbddf47db4d99284e00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21665f6f83f",
+      "0x0000925424f61cb13e0fbdecc66e1270de68de9667b85baa3fdc84741d048daa69fa00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216afecf76a",
+      "0x000082f30327514f819da6009fad92b5dba24d27db01e29ad7541aa8e6b6b554615c00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216779c2d59"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1892,7 +1834,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "sourceChain": "X",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1905,13 +1847,13 @@ This gives response:
   "result": {
     "numFetched": "1",
     "utxos": [
-      "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMvGwefFXr2EaH2FML6mZuCehMLDdXSVE5aBwc8ePn8WqtZgDv9W641JZoLQhWY8fmvitiBLrc3Zd1aJPDxPouUVXFmLEbmcUnQxfw1Hyz1jpPbWSioowb"
+      "0x00001f989ffaf18a18a59bdfbf209342aa61c6a62a67e8639d02bb3c8ddab315c6fa0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000000746a528800000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29cd704fe76"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "S5UKgWoVpoGFyxfisebmmRf8WqC7ZwcmYwS7XaDVZqoaFcCwK"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -2093,7 +2035,7 @@ platform.issueTx({
 ```
 
 - `tx` is the byte representation of a transaction.
-- `encoding` specifies the encoding format for the transaction bytes. Can be either "cb58" or "hex". Defaults to "cb58".
+- `encoding` specifies the encoding format for the transaction bytes. Can only be `hex` when a value is provided.
 - `txID` is the transaction’s ID.
 
 #### **Example Call**
@@ -2103,8 +2045,8 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.issueTx",
     "params": {
-        "tx":"111Bit5JNASbJyTLrd2kWkYRoc96swEWoWdmEhuGAFK3rCAyTnTzomuFwgx1SCUdUE71KbtXPnqj93KGr3CeftpPN37kVyqBaAQ5xaDjr7wVBTUYi9iV7kYJnHF61yovViJF74mJJy7WWQKeRMDRTiPuii5gsd11gtNahCCsKbm9seJtk2h1wAPZn9M1eL84CGVPnLUiLP",
-        "encoding": "cb58"
+        "tx":"0x00000009de31b4d8b22991d51aa6aa1fc733f23a851a8c9400000000000186a0000000005f041280000000005f9ca900000030390000000000000001fceda8f90fcb5d30614b99d79fc4baa29307762668f16eb0259a57c2d3b78c875c86ec2045792d4df2d926c40f829196e0bb97ee697af71f5b0a966dabff749634c8b729855e937715b0e44303fd1014daedc752006011b730",
+        "encoding": "hex"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
