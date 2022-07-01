@@ -184,7 +184,7 @@ Get container by ID.
 
 ```sh
 index.getContainerByID({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   id: string,
@@ -197,7 +197,7 @@ index.getContainerByID({
 
 ##### Request
 
-- `containerID` is the container's ID
+- `id` is the container's ID
 - `encoding` is `"hex"` only.
 
 ##### Response
@@ -217,7 +217,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getContainerByID",
     "params": {
-        "containerID": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
         "encoding":"hex"
     },
     "id": 1
@@ -317,7 +317,7 @@ Get a container's index.
 
 ```sh
 index.getIndex({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   index: string
@@ -326,7 +326,7 @@ index.getIndex({
 
 ##### Request
 
-- `containerID` is the ID of the container to fetch
+- `id` is the ID of the container to fetch
 - `encoding` is `"hex"` only.
 
 ##### Response
@@ -342,7 +342,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getIndex",
     "params": {
-        "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "id":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
         "encoding": "hex"
     },
     "id": 1
@@ -369,7 +369,7 @@ Returns true if the container is in this index.
 
 ```sh
 index.isAccepted({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   isAccepted: bool
@@ -378,7 +378,7 @@ index.isAccepted({
 
 ##### Request
 
-- `containerID` is the ID of the container to fetch
+- `id` is the ID of the container to fetch
 - `encoding` is `"hex"` only.
 
 ##### Response
@@ -394,7 +394,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.isAccepted",
     "params": {
-        "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "id":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
         "encoding": "hex"
     },
     "id": 1
