@@ -379,7 +379,7 @@ index.isAccepted({
 ##### Request
 
 - `id` is the ID of the container to fetch
-- # `encoding` is `"hex"` only.
+- `encoding` is `"hex"` only.
 
 ##### Response
 
