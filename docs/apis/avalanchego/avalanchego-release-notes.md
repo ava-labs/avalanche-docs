@@ -6,6 +6,47 @@
 
 :::
 
+## v1.7.14 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.14))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
+
+**APIs**
+
+:::warning
+These API format changes are breaking changes. https://api.avax.network and https://api.avax-test.network have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal.
+:::
+
+- Removed `CB58` as an encoding option from all APIs
+- Added `HexC` and `HexNC` as encoding options for all APIs that accept an encoding format
+- Removed the `Success` response from all APIs
+- Replaced `containerID` with `id` in the indexer API
+
+**PlatformVM**
+
+- Fixed incorrect `P-chain` height in `Snowman++` when staking is disabled
+- Moved `platformvm` transactions to be defined in a sub-package
+- Moved `platformvm` genesis management to be defined in a sub-package
+- Moved `platformvm` state to be defined in a sub-package
+- Standardized `platformvm` transactions to always be referenced via pointer
+- Moved the `platformvm` transaction builder to be defined in a sub-package
+- Fixed uptime rounding during node shutdown
+
+**Networking**
+
+- Updated `Connected` and `Disconnected` messages to only be sent to chains if the peer is tracking the subnet
+- Updated the minimum TLS version on the p2p network to `v1.3`
+- Supported context cancellation in the networking rate limiters
+- Added `ChitsV2` message format for the p2p network to be used in a future upgrade
+
+**Miscellaneous**
+
+- Fixed `--public-ip-resolution-frequency` invalid overwrite of the resolution service
+- Added additional metrics to distinguish between virtuous and rogue currently processing transactions
+- Suppressed the super cool `avalanchego` banner when `stdout` is not directed to a terminal
+- Updated linter version
+- Improved various comments and documentation
+- Standardized primary network handling across subnet maps
+
 ## v1.7.13 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.13))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
