@@ -808,7 +808,7 @@ Sets the log level of the C-Chain.
 #### **Signature**
 
 ```text
-admin.setLogLevel({level:string}) -> {success:bool}
+admin.setLogLevel({level:string}) -> {}
 ```
 
 - `level` is the log level to be set.
@@ -832,9 +832,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -845,7 +843,7 @@ Starts a CPU profile.
 #### **Signature**
 
 ```text
-admin.startCPUProfiler() -> {success:bool}
+admin.startCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -865,9 +863,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -878,7 +874,7 @@ Stops and writes a CPU profile.
 #### **Signature**
 
 ```text
-admin.stopCPUProfiler() -> {success:bool}
+admin.stopCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -898,9 +894,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -911,7 +905,7 @@ Runs and writes a memory profile.
 #### **Signature**
 
 ```text
-admin.memoryProfile() -> {success:bool}
+admin.memoryProfile() -> {}
 ```
 
 #### **Example Call**
@@ -931,9 +925,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -944,7 +936,7 @@ Runs a mutex profile writing to the `coreth_performance_c` directory.
 #### **Signature**
 
 ```text
-admin.lockProfile() -> {success:bool}
+admin.lockProfile() -> {}
 ```
 
 #### **Example Call**
@@ -964,8 +956,6 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```

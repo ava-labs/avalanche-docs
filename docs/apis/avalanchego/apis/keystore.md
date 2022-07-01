@@ -45,7 +45,7 @@ keystore.createUser(
         username:string,
         password:string
     }
-) -> {success:bool}
+) -> {}
 ```
 
 - `username` and `password` can be at most 1024 characters.
@@ -71,9 +71,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -84,7 +82,7 @@ Delete a user.
 #### **Signature**
 
 ```sh
-keystore.deleteUser({username: string, password:string}) -> {success: bool}
+keystore.deleteUser({username: string, password:string}) -> {}
 ```
 
 #### **Example Call**
@@ -107,7 +105,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": { "success": true }
+  "result": {}
 }
 ```
 
@@ -173,7 +171,7 @@ keystore.importUser(
         user:string,
         encoding:string //optional
     }
-) -> {success:bool}
+) -> {}
 ```
 
 `encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
@@ -199,9 +197,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 

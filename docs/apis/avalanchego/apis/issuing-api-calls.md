@@ -170,7 +170,7 @@ If the call is successful, the response will look like this:
 {
   "jsonrpc": "2.0",
   "result": {
-    "Status": "Success"
+    "Status": "Accepted"
   },
   "id": 1
 }
