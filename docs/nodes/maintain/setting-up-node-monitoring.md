@@ -28,7 +28,7 @@ This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other
 The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
 :::
 
-## Monitoring installer script
+## Monitoring Installer Script
 
 In order to make node monitoring easier to install, we have made a script that does most of the work for you. To download and run the script, log into the machine the node runs on with a user that has administrator privileges and enter the following command:
 
@@ -254,7 +254,7 @@ Some graphs may take some time to populate fully, as they need a series of datap
 
 You can bookmark the main dashboard as it shows the most important information about the node at a glance. Every dashboard has a link to all the others as the first row, so you can move between them easily.
 
-## Step 5: Additional dashboards (optional)
+## Step 5: Additional Dashboards (optional)
 
 Step 4 installs the basic set of dashboards that make sense to have on any node. Step 5 is for installing additional dashboards that may not be useful for every installation.
 

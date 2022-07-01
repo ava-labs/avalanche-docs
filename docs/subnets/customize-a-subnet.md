@@ -83,21 +83,30 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 #### Fee Config
 
-`gasLimit`: Gas limit of blocks.
+`gasLimit`: Sets the max amount of gas consumed per block.
 
-`minBaseFee`: Minimum base fee of transactions. It is also the initial base fee for EIP-1559 blocks.
+`targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target producing a block every 2 seconds. If the network starts producing faster than this, base fees are increased accordingly.
 
-`targetGas`: The target gas consumption of blocks. If the network starts producing blocks with gas cost higher than this, base fees are increased accordingly.
+`minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets the minimum gas price for any transaction included in that block, this effectively sets a minimum gas price for any transaction.
 
-`baseFeeChangeDenominator`: The amount the base fee can change between blocks.
+`targetGas`: Specifies the targeted amount of gas (including block gas cost) to consume within a rolling 10-seconds window. When the dynamic fee algorithm observes that network activity is above/below the `targetGas`, it increases/decreases the base fee proportionally to how far above/below the target actual network activity is. If the network starts producing blocks with gas cost higher than this, base fees are increased accordingly.
 
-`minBlockGasCost`: Minimum gas cost a block should cover.
+`baseFeeChangeDenominator`: Divides the difference between actual and target utilization to determine how much to increase/decrease the base fee. A larger denominator indicates a slower changing, stickier base fee, while a lower denominator allows the base fee to adjust more quickly.
 
-`maxBlockGasCost`: Maximum gas cost a block should cover.
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
 
-`targetBlockRate`: The targeted block rate that network should produce blocks. If the network starts producing faster than this, base fees are increased accordingly.
+`maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
 
-`blockGasCostStep`: The block gas cost change step between blocks.
+`blockGasCostStep`: Determines how much to increase/decrease the block gas cost depending on the amount of time elapsed since the previous block.
+
+If the block is produced at the target rate, the block gas cost will stay the same as the block gas cost for the parent block.
+
+If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for each second faster/slower than the target block rate accordingly.
+
+:::note
+If the `blockGasCostStep` is set to a very large number, it effectively requires block production to go no faster than the `targetBlockRate`. For example, if a block is produced two seconds faster than the target block rate, the block gas cost will increase by `2 * blockGasCostStep`.
+
+:::
 
 #### Custom Fee Recipients
 
