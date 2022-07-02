@@ -170,7 +170,7 @@ If the call is successful, the response will look like this:
 {
   "jsonrpc": "2.0",
   "result": {
-    "Status": "Success"
+    "Status": "Accepted"
   },
   "id": 1
 }
@@ -203,4 +203,4 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 
 ## Sending and Receiving Bytes
 
-Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
+Unless otherwise noted, when bytes are sent in an API call/response, they are in hex representation. However, Transaction IDs (txIDs), chainIDs, and subnetIDs are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum.

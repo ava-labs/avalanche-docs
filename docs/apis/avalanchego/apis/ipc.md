@@ -89,7 +89,7 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 #### **Signature**
 
 ```sh
-ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
+ipcs.unpublishBlockchain({blockchainID: string}) -> {}
 ```
 
 - `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
@@ -112,9 +112,7 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "result": {
-    "success": true
-  },
+  "result": {},
   "id": 1
 }
 ```

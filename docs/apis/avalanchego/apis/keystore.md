@@ -45,7 +45,7 @@ keystore.createUser(
         username:string,
         password:string
     }
-) -> {success:bool}
+) -> {}
 ```
 
 - `username` and `password` can be at most 1024 characters.
@@ -71,9 +71,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -84,7 +82,7 @@ Delete a user.
 #### **Signature**
 
 ```sh
-keystore.deleteUser({username: string, password:string}) -> {success: bool}
+keystore.deleteUser({username: string, password:string}) -> {}
 ```
 
 #### **Example Call**
@@ -107,7 +105,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": { "success": true }
+  "result": {}
 }
 ```
 
@@ -130,7 +128,7 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -153,8 +151,8 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "user": "4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
-    "encoding": "cb58"
+    "user": "7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc00000000",
+    "encoding": "hex"
   }
 }
 ```
@@ -173,10 +171,10 @@ keystore.importUser(
         user:string,
         encoding:string //optional
     }
-) -> {success:bool}
+) -> {}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -188,7 +186,7 @@ curl -X POST --data '{
     "params" :{
         "username":"myUsername",
         "password":"myPassword",
-        "user"    :"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi"
+        "user"    :"0x7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc000000008cf2d869"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
@@ -199,9 +197,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
