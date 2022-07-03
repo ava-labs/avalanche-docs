@@ -7,7 +7,7 @@ sidebar_position: 1
 | Title                                              | Description                                                                                                                                         |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Issuing API Calls**](issuing-api-calls.md)      | This guide explains how to make calls to APIs exposed by Avalanche nodes.                                                                           |
-| The [**Platform Chain (P-Chain) API**](p-chain.md) | Allows clients to interact with the P-Chain (Platform Chain), which maintains Avalanche’s validator set and handles blockchain and subnet creation. |
+| The [**Platform Chain (P-Chain) API**](p-chain.md) | Allows clients to interact with the P-Chain (Platform Chain), which maintains Avalanche’s validator set and handles blockchain and Subnet creation. |
 | The [**Contract Chain (C-Chain) API**](c-chain.md) | Allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances.                                         |
 | The [**Exchange Chain (X-Chain) API**](x-chain.md) | Allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM.                                    |
 | The [**Admin API**](admin.md)                      | Allows clients to examine a node’s internal state, set of connections, and similar internal protocol data.                                          |

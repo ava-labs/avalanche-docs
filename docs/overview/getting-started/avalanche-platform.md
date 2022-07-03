@@ -4,7 +4,7 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 
 # Avalanche Platform
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all Avalanche validators which is also referred as the Primary Network. The Primary Network is a special [subnet](../../subnets/README.md), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all Avalanche validators which is also referred as the Primary Network. The Primary Network is a special [subnet](../../subnets/README.md), and all members of all custom Subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
 ![Primary network](/img/primary-network.png)
 
@@ -16,9 +16,9 @@ The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche
 
 ## Platform Chain (P-Chain)
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active Subnets, and enables the creation of new Subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
 
-The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) allows clients to create Subnets, add validators to Subnets, and create blockchains.
 
 ## Exchange Chain (X-Chain)
 

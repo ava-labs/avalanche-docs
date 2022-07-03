@@ -57,4 +57,4 @@ Returned TXID: eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX
 
 ## Summary
 
-TxIDs are a core component of any blockchain system. They are used extensively in Avalanche when creating transactions, issuing new assets and even spinning up subnets and validators. TxIDs are deterministically created by `sha256` hashing a `Buffer` of the transaction and then CB58 encoding the hash.
+TxIDs are a core component of any blockchain system. They are used extensively in Avalanche when creating transactions, issuing new assets and even spinning up Subnets and validators. TxIDs are deterministically created by `sha256` hashing a `Buffer` of the transaction and then CB58 encoding the hash.

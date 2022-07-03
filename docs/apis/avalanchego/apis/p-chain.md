@@ -201,7 +201,7 @@ curl -X POST --data '{
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this Subnet.
 
 #### **Signature**
 
@@ -225,11 +225,11 @@ platform.addSubnetValidator(
 }
 ```
 
-- `nodeID` is the node ID of the validator being added to the subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
-- `subnetID` is the ID of the subnet we’re adding a validator to.
-- `startTime` is the unix time when the validator starts validating the subnet. It must be at or after the time that the validator starts validating the Primary Network
-- `endTime` is the unix time when the validator stops validating the subnet. It must be at or before the time that the validator stops validating the Primary Network.
-- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
+- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
+- `subnetID` is the ID of the Subnet we’re adding a validator to.
+- `startTime` is the unix time when the validator starts validating the Subnet. It must be at or after the time that the validator starts validating the Primary Network
+- `endTime` is the unix time when the validator stops validating the Subnet. It must be at or before the time that the validator stops validating the Primary Network.
+- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the Subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 - `from` are the fund addresses that the user wants to use to pay for this operation. If omitted, use any of user's addresses as needed.
 - `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses) will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
@@ -396,7 +396,7 @@ curl -X POST --data '{
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Create a new subnet.
+Create a new Subnet.
 
 The subnet’s ID is the same as this transaction’s ID.
 
@@ -419,7 +419,7 @@ platform.createSubnet(
 }
 ```
 
-- In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
+- In order to add a validator to this Subnet, `threshold` signatures are required from the addresses in `controlKeys`
 - `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
@@ -987,7 +987,7 @@ platform.getCurrentValidators({
 }
 ```
 
-- `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 - `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
@@ -1000,7 +1000,7 @@ platform.getCurrentValidators({
   - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not the Primary Network.
   - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not the Primary Network.
   - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not the Primary Network.
-  - `connected` is if the node is connected and tracks the subnet.
+  - `connected` is if the node is connected and tracks the Subnet.
   - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not the Primary Network.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
@@ -1121,7 +1121,7 @@ platform.getMaxStakeAmount(
 }
 ```
 
-- `subnetID` is a Buffer or cb58 string representing subnet
+- `subnetID` is a Buffer or cb58 string representing Subnet
 - `nodeID` is a string representing ID of the node whose stake amount is required during the given duration
 - `startTime` is a big number denoting start time of the duration during which stake amount of the node is required.
 - `endTime` is a big number denoting end time of the duration during which stake amount of the node is required.
@@ -1222,7 +1222,7 @@ platform.getPendingValidators({
 }
 ```
 
-- `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 - `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
@@ -1230,7 +1230,7 @@ platform.getPendingValidators({
   - `endTime` is the Unix time when the validator stops validating the Subnet.
   - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
   - `nodeID` is the validator’s node ID.
-  - `connected` if the node is connected and tracks the subnet.
+  - `connected` if the node is connected and tracks the Subnet.
   - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
 - `delegators`:
   - `txID` is the delegator transaction.
@@ -1347,7 +1347,7 @@ platform.getStakingAssetID({
 }
 ```
 
-- `subnetID` is the subnet whose assetID is requested.
+- `subnetID` is the Subnet whose assetID is requested.
 - `assetID` is the assetID for a subnet’s staking asset.
 
 #### **Example Call**
@@ -1394,9 +1394,9 @@ platform.getSubnets(
 }
 ```
 
-- `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
+- `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all Subnets.
 - `id` is the Subnet’s ID.
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet.
 
 See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1861,7 +1861,7 @@ This gives response:
 
 ### platform.getValidatorsAt
 
-Get the validators and their weights of a subnet or the Primary Network at a given P-Chain height.
+Get the validators and their weights of a Subnet or the Primary Network at a given P-Chain height.
 
 #### **Signature**
 
@@ -1875,7 +1875,7 @@ platform.getValidatorsAt(
 ```
 
 - `height` is the P-Chain height to get the validator set at.
-- `subnetID` is the subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
+- `subnetID` is the Subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
 
 #### **Example Call**
 

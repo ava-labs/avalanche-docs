@@ -394,19 +394,19 @@ Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
 #### `--whitelisted-subnets` (string):
 
-Comma separated list of subnet IDs that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
+Comma separated list of Subnet IDs that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
 
 ### Subnet Configs
 
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
+It is possible to provide parameters for Subnets. Parameters here apply to all chains in the specified Subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
 
-Full reference for all configuration options for a subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
+Full reference for all configuration options for a Subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
 
 #### `--subnet-config-dir` (string):
 
-Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
+Specifies the directory that contains Subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
 
-Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
+Example: Let's say we have a Subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
 ```json
 {
@@ -427,7 +427,7 @@ By default, none of these directories and/or files exist. You would need to crea
 
 #### `--subnet-config-content` (string):
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a subnet.
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
 
 ## Version
 
@@ -525,7 +525,7 @@ Transaction fee, in nAVAX, for transactions that create new assets. Defaults to 
 
 #### `--create-subnet-tx-fee` (int):
 
-Transaction fee, in nAVAX, for transactions that create new subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--create-blockchain-tx-fee` (int):
 

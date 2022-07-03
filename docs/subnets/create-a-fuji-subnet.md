@@ -6,8 +6,8 @@ In this article, we show how to do the following on Fuji Testnet.
 
 - Create a virtual machine based on subnet-evm.
 - Add a node as a validator to the primary network.
-- Create a subnet.
-- Add the same node to the newly created subnet.
+- Create a Subnet.
+- Add the same node to the newly created Subnet.
 - Create a blockchain with the specified virtual machine.
 
 :::tip
@@ -155,7 +155,7 @@ mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalan
 
 The easiest and fastest way to get your new subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
-add validators, create subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
+add validators, create Subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
 
 :::info
 The `subnet-cli` DOES NOT need to be run on the same host where you are

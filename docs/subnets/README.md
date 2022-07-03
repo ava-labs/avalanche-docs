@@ -1,6 +1,6 @@
 # Subnets Overview
 
-A **Subnet** is a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many subnets.
+A **Subnet** is a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets.
 
 Avalanche's 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain) are validated and secured by all the Avalanche validators which is a special Subnet and referred as the Primary Network.
 
@@ -8,7 +8,7 @@ Avalanche's 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-
 
 (Image from [this article](https://medium.com/@arikan/a-comparison-of-heterogeneous-blockchain-networks-4bf7ff2fe279))
 
-Subnets are independent and don’t share execution thread, storage or networking with other subnets or the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Protocol.
+Subnets are independent and don’t share execution thread, storage or networking with other Subnets or the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Protocol.
 
 Subnets are effectively ‘Blockchain-as-a-Service’ secured by some portion of Avalanche validators.
 
@@ -48,4 +48,4 @@ Avalanche validators are incentivized by Subnet owners to validator their Subnet
 
 ## Developing Your Own Subnet
 
-Please check out documents listed on the left panel to develop your own subnets with customized virtual machine and blockchain.
+Please check out documents listed on the left panel to develop your own Subnets with customized virtual machine and blockchain.

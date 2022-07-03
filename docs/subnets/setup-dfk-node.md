@@ -43,17 +43,17 @@ The long string `mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv` is the CB58 
 
 ## Whitelisting DFK Subnet and Restarting the Node
 
-AvalancheGo will only validate the primary network by default. In order to add the DFK Subnet, you will need to add the DFK Subnet ID to the set of whitelisted subnets in the node's config file or pass it through the command line options of the node. Once the node's config file has been updated, you will need to start the Avalanche node (restart if already running).
+AvalancheGo will only validate the primary network by default. In order to add the DFK Subnet, you will need to add the DFK Subnet ID to the set of whitelisted Subnets in the node's config file or pass it through the command line options of the node. Once the node's config file has been updated, you will need to start the Avalanche node (restart if already running).
 
 Once you start the node, it will begin syncing the Primary Network. Once the node reaches the point in the Platform Chain where the DFK Subnet is created, it will begin syncing the DFK Subnet as well, and will start validating once it has fully bootstrapped.
 
 ### Updating Config File
 
-You can skip this section if you want to pass whitelisted subnets through command-line flags.
+You can skip this section if you want to pass whitelisted Subnets through command-line flags.
 
 You need to create a new config file or edit your existing one for your node. In this tutorial, you will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file anywhere on your file system, you will just need to specify its location via the flag `--config-file=<file path>` when you start your node. See [this](../nodes/maintain/avalanchego-config-flags.md#config-file) for more info on configuration file and flags.
 
-You will need to add the DFK Subnet ID to the whitelisted subnets section of the config file:
+You will need to add the DFK Subnet ID to the whitelisted Subnets section of the config file:
 
 ```json
 {
@@ -62,7 +62,7 @@ You will need to add the DFK Subnet ID to the whitelisted subnets section of the
 }
 ```
 
-Whitelisted subnets is a comma separated list of subnet IDs, so if you are validating more than one subnet, you can simply add a comma to the end of the list and append the DFK Subnet ID `Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ`.
+Whitelisted Subnets is a comma separated list of subnet IDs, so if you are validating more than one subnet, you can simply add a comma to the end of the list and append the DFK Subnet ID `Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ`.
 
 ### Running the Node
 
@@ -78,7 +78,7 @@ If you went through the steps to set up a config file, then you can launch your 
 ./build/avalanchego --config-file ~/.avalanchego/config.json
 ```
 
-If you want to pass the whitelisted subnets through the command line flag. You can append the other flags or even the `--config-file` flag as well, according to your need.
+If you want to pass the whitelisted Subnets through the command line flag. You can append the other flags or even the `--config-file` flag as well, according to your need.
 
 ```bash
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
