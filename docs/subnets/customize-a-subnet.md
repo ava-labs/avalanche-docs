@@ -16,7 +16,7 @@ And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/
 
 A Subnet can customized by setting parameters for the following:
 
-- [Validator-only communication to create a private subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
+- [Validator-only communication to create a private Subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
 - [Consensus](../nodes/maintain/subnet-configs.md#consensus-parameters)
 - [Gossip](../nodes/maintain/subnet-configs.md#gossip-configs)
 
@@ -198,7 +198,7 @@ With `allowFeeRecipients` enabled, your validators can specify their addresses t
 
 :::warning
 
-If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
 
@@ -379,7 +379,7 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 
 ## Chain Configs
 
-As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
@@ -425,6 +425,6 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 
 :::warning
 
-If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::

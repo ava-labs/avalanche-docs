@@ -4,7 +4,7 @@
 
 A blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. On Avalanche, VM serves as the blueprint for creating different instances of independent blockchains, yet sharing the same ruleset.
 
-All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their Subnet and invite other validators to be a part of it. A validator can be a part of multiple Subnets, but it must be validating the primary Subnet.
+All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary Subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their Subnet and invite other validators to be a part of it. A validator can be a part of multiple Subnets, but it must be validating the primary Subnet.
 
 On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages Subnets, Subnet validators, Subnet blockchain, etc. In this tutorial, you will learn about creating your Subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that Subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [subnet series of tutorials](../subnets/README.md), you can get various great articles explaining Subnets, building custom VMs, and a lot more.
 
@@ -333,7 +333,7 @@ node createSubnet.js
 
 ## Adding Subnet Validator
 
-The newly created Subnet requires validators to validate the transactions on the subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the Subnet. Only transactions signed by the threshold (here 1) number of Subnet owners will be accepted to add validators. The Subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the Subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
+The newly created Subnet requires validators to validate the transactions on the Subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the Subnet. Only transactions signed by the threshold (here 1) number of Subnet owners will be accepted to add validators. The Subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the Subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
 
 The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the help of comments. All the transaction calls of AvalancheJS starting with `build` will return an unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to the network.
 
@@ -401,7 +401,7 @@ We will keep the start time 5 minutes later than the current time. This `$(date 
 
 ## Whitelisting Subnet from the Node
 
-Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their Subnet without any consent. If a node wants to validate the newly added subnet, then it must restart its `avalanchego` binary with the new Subnet being whitelisted.
+Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their Subnet without any consent. If a node wants to validate the newly added Subnet, then it must restart its `avalanchego` binary with the new Subnet being whitelisted.
 
 ```bash
 avalanche-network-runner control restart-node \
@@ -517,4 +517,4 @@ Creating a new chain will take few seconds. You can also view the logs on the Av
 
 ## Interacting with the New Blockchain with MetaMask
 
-We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
+We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this Subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.

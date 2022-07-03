@@ -1,6 +1,6 @@
 # Create an EVM Subnet on a Local Network
 
-To learn how to develop a subnet, the first step is to create a local Subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
+To learn how to develop a Subnet, the first step is to create a local Subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
 
 :::info
 
@@ -41,7 +41,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 
 ## Quickstart
 
-After installing, launch your own custom subnet:
+After installing, launch your own custom Subnet:
 
 ```bash
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
@@ -325,7 +325,7 @@ To manage that network, see [the `avalanche network` command tree](#network).
 
 If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your Subnet.
 
-First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
+First, export your Subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
 
 ### Delete a Subnet Configuration
 

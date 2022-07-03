@@ -130,7 +130,7 @@ Additional optional parameters which can be passed to the start command:
 ```
 
 `--plugin-dir` and `--custom-vms` are parameters relevant to Subnet operation.
-See the [subnet](#network-runner-rpc-server-subnet-evm-example) section for details about how to run Subnets.
+See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
 
 The network-runner supports avalanchego node configuration at different levels.
 
@@ -299,7 +299,7 @@ See [here](../nodes/maintain/avalanchego-config-flags.md) for the reference of s
 `--db-dir`
 
 `--custom-vms` allows to configure custom VMs supported by this node.
-See the [subnet](#network-runner-rpc-server-subnet-evm-example) section for details about how to run Subnets.
+See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
 
 **Note**: The following Subnet parameters will be set from the global network configuration to this node:
 `--whitelisted-subnets`
@@ -481,7 +481,7 @@ DONE! You are now running your very own Ethereum blockchain on Avalanche!
 
 ### RPC server `blobvm` example
 
-While above we configured and deployed an Ethereum compatible subnet, Avalanche supports deploying your completely custom blockchain, still taking advantage of existing Avalanche infrastructure and its consensus protocol.
+While above we configured and deployed an Ethereum compatible Subnet, Avalanche supports deploying your completely custom blockchain, still taking advantage of existing Avalanche infrastructure and its consensus protocol.
 
 A custom blockchain requires your custom VM. In this tutorial we are going to deploy a custom VM with a Subnet. The process is very similar to the `subnet-evm` one, except that the VM is different. We will also need the `subnet-cli` tool for this tutorial, check [this](#subnet-cli) for some context.
 

@@ -637,7 +637,7 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 
 ### **What Unsigned Add Subnet Validator Tx Contains**
 
-An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+An unsigned add Subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -645,8 +645,8 @@ An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte subnet id
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
+- **`SubnetID`** a 32 byte Subnet id
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
 
 ### **Gantt Unsigned Add Subnet Validator Tx Specification**
 
@@ -677,7 +677,7 @@ message AddSubnetValidatorTx {
 
 ### **Unsigned Add Subnet Validator Tx Example**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add Subnet validator tx that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
 - **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -900,7 +900,7 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 - **`VMID`** ID of the VM running on the new chain
 - **`FxIDs`** IDs of the feature extensions running on the new chain
 - **`GenesisData`** Byte representation of genesis state of the new chain
-- **`SubnetAuth`** Authorizes this blockchain to be added to this subnet
+- **`SubnetAuth`** Authorizes this blockchain to be added to this Subnet
 
 ### **Gantt Unsigned Create Chain Tx Specification**
 
@@ -983,7 +983,7 @@ Let’s make an unsigned create chain tx that uses the inputs and outputs from t
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   // end base tx
 
-  // subnet id
+  // Subnet id
   0x8c, 0x86, 0xd0, 0x7c, 0xd6, 0x02, 0x18, 0x66,
   0x18, 0x63, 0xe0, 0x11, 0x65, 0x52, 0xdc, 0xcd,
   0x5b, 0xd8, 0x4c, 0x56, 0x4b, 0xd2, 0x9d, 0x71,
@@ -1049,7 +1049,7 @@ Let’s make an unsigned create chain tx that uses the inputs and outputs from t
 
 ### **What Unsigned Create Subnet Tx Contains**
 
-An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+An unsigned create Subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
 
 - **`BaseTx`**
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
@@ -1077,7 +1077,7 @@ message CreateSubnetTx {
 
 ### **Unsigned Create Subnet Tx Example**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
+Let’s make an unsigned create Subnet tx that uses the inputs from the previous examples:
 
 - **`BaseTx`**: "Example BaseTx as defined above but with TypeID set to 16"
 - **`RewardsOwner`**:
@@ -1764,10 +1764,10 @@ Let’s make a stakeablelockout with:
 
 ### **What Subnet Auth Contains**
 
-Specifies the addresses whose signatures will be provided to demonstrate that the owners of a subnet approve something.
+Specifies the addresses whose signatures will be provided to demonstrate that the owners of a Subnet approve something.
 
 - **`TypeID`** is the ID for this type. It is `0x0000000a`.
-- **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
+- **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a Subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
 
 ### **Gantt Subnet Auth Specification**
 
@@ -1792,7 +1792,7 @@ message SubnetAuth {
 
 ### **Subnet Auth Example**
 
-Let’s make a subnet auth:
+Let’s make a Subnet auth:
 
 - **`TypeID`**: `10`
 - **`AddressIndices`**: [`0`]

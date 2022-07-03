@@ -1,6 +1,6 @@
 # Create an EVM Subnet on Fuji Testnet
 
-After trying out a subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
+After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
 
 In this article, we show how to do the following on Fuji Testnet.
 
@@ -153,7 +153,7 @@ mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalan
 
 ## Subnet-cli Wizard
 
-The easiest and fastest way to get your new subnet off the ground is to use the
+The easiest and fastest way to get your new Subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
 add validators, create Subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
 
@@ -166,14 +166,14 @@ Avalanche API Endpoints.
 
 To make it as easy as possible to get started, the `subnet-cli` also provides
 a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
-command and you'll have a subnet with a running `subnet-evm` instance a few minutes
+command and you'll have a Subnet with a running `subnet-evm` instance a few minutes
 later.
 
 Run the following command to:
 
 - Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) as a validator to the primary network (comma separated if multiple validators, and skipping any that already exist);
-- Create a subnet;
-- Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the subnet;
+- Create a Subnet;
+- Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the Subnet;
 - Create a new blockhain with a virtual machine whose id is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
 
 ```bash
@@ -263,7 +263,7 @@ ERROR[01-26|05:54:19] chains/manager.go#270: error creating chain 2AM3vsuLoJdGBG
 
 ## Next Step
 
-Next step is to deploy the subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi Kingdoms Subnet as an example.
+Next step is to deploy the Subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi Kingdoms Subnet as an example.
 
 ## Appendix
 

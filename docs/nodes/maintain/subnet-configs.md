@@ -32,7 +32,7 @@ If `true` this node does not expose Subnet blockchain contents to non-validators
 
 Avalanche Subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in Subnets, even they're not validating the listened Subnet.
 
-Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this Subnet from this node.
+Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this Subnet's validators. Other peers will not be able to learn contents of this Subnet from this node.
 
 :::tip
 This is a node-specific configuration. Every validator of this Subnet has to use this configuration in order to create a full private Subnet.
