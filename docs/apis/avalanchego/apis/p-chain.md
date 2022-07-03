@@ -398,7 +398,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Create a new Subnet.
 
-The subnet’s ID is the same as this transaction’s ID.
+The Subnet’s ID is the same as this transaction’s ID.
 
 #### **Signature**
 
