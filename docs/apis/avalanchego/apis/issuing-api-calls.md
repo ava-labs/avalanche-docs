@@ -39,7 +39,7 @@ In general, they are formatted like:
 /ext/[api-name]
 ```
 
-So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the subnet chain RPCs. We'll go over those in detail in the next section.
+So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the Subnet chain RPCs. We'll go over those in detail in the next section.
 
 So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
 
@@ -79,19 +79,19 @@ To interact with C-Chain EVM via the JSON-RPC use the endpoint:
 /ext/bc/C/rpc
 ```
 
-To interact with subnet instances of the EVM via the JSON-RPC endpoint:
+To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
 
 ```
 /ext/bc/[blockchainID]/rpc
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the Swimmer Network (a subnet that runs the Crabada game) running on a local node would be:
+where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the Swimmer Network (a Subnet that runs the Crabada game) running on a local node would be:
 
 ```
 http://127.0.0.1/ext/bc/2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX/rpc
 ```
 
-Or for the WAGMI subnet on the Fuji testnet:
+Or for the WAGMI Subnet on the Fuji testnet:
 
 ```
 http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc

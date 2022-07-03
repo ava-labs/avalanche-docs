@@ -33,7 +33,7 @@ These API format changes are breaking changes. https://api.avax.network and http
 
 **Networking**
 
-- Updated `Connected` and `Disconnected` messages to only be sent to chains if the peer is tracking the subnet
+- Updated `Connected` and `Disconnected` messages to only be sent to chains if the peer is tracking the Subnet
 - Updated the minimum TLS version on the p2p network to `v1.3`
 - Supported context cancellation in the networking rate limiters
 - Added `ChitsV2` message format for the p2p network to be used in a future upgrade
@@ -45,7 +45,7 @@ These API format changes are breaking changes. https://api.avax.network and http
 - Suppressed the super cool `avalanchego` banner when `stdout` is not directed to a terminal
 - Updated linter version
 - Improved various comments and documentation
-- Standardized primary network handling across subnet maps
+- Standardized primary network handling across Subnet maps
 
 ## v1.7.13 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.13))
 
@@ -65,7 +65,7 @@ State Sync v0.1 (v1.7.11) and v0.2 (v1.7.12) are not compatible with State Sync 
 
 **Miscellaneous**
 
-- Fixed `platform.getCurrentValidators` API to correctly mark a node as connected to itself on subnets.
+- Fixed `platform.getCurrentValidators` API to correctly mark a node as connected to itself on Subnets.
 - Fixed `platform.getBlockchainStatus` to correctly report `Unknown` for blockchains that are not managed by the `P-Chain`
 - Added process metrics by default in the `rpcchainvm#Server`
 - Added `Database` health checks
@@ -161,7 +161,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Introduced `ids.NodeID` type to standardize logging and simplify API service and client implementations
 - Changed client implementations to use standard types rather than `string`s wherever possible
 - Added `subnetID` as an argument to `platform.getTotalStake`
-- Added `connected` to the subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Added `connected` to the Subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
 - Add missing `admin` API client methods
 - Improved `indexer` API client implementation to avoid encoding edge cases
 
@@ -211,8 +211,8 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Networking**
 
 - Improved vertex and block gossiping for validators with low stake weight.
-- Added peers metric by subnet.
-- Added percentage of stake connected metric by subnet.
+- Added peers metric by Subnet.
+- Added percentage of stake connected metric by Subnet.
 
 **APIs**
 
@@ -241,7 +241,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Logging**
 
-- Added piping of subnet logs to stdout.
+- Added piping of Subnet logs to stdout.
 - Lazily initialized logs to avoid opening files that are never written to.
 - Added support for arbitrarily deleted log files while avalanchego is running.
 - Removed redundant logging configs.
@@ -249,7 +249,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Miscellaneous**
 
 - Updated minimum go version to `v1.17.9`.
-- Added subnet bootstrapping health checks.
+- Added Subnet bootstrapping health checks.
 - Supported multiple tags per codec instantiation.
 - Added minor fail-fast optimization to string packing.
 - Removed dead code.
@@ -263,7 +263,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Updates**
 
-- Improved subnet gossip to only send messages to nodes participating in that subnet.
+- Improved Subnet gossip to only send messages to nodes participating in that Subnet.
 - Fixed inlined VM initialization to correctly register static APIs.
 - Added logging for file descriptor limit errors.
 - Removed dead code from network packer.
@@ -296,7 +296,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Fixed incorrect `OutputOwners` in the P-chain `ImportTx` builder.
 - Improved FD limit error logging and warnings.
 - Rounded bootstrapping ETAs to the nearest second.
-- Added gossip config support to the subnet configs.
+- Added gossip config support to the Subnet configs.
 - Optimized various queue removals for improved memory freeing.
 - Added a basic X-chain E2E usage test to the new testing framework.
 
@@ -397,7 +397,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Miscellaneous**
 
-- Added tracked subnets to be reported in calls to the `info.peers` API.
+- Added tracked Subnets to be reported in calls to the `info.peers` API.
 - Updated gRPC implementations to use `buf` tooling and standardized naming and locations.
 - Added a consistent hashing implementation to be used in future improvements.
 - Fixed database iteration invariants to report `ErrClosed` rather than silently exiting.
@@ -747,7 +747,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Subnets**
 
-- Added the ability for a client to configure a subnet as private to restrict membership to only approved validators.
+- Added the ability for a client to configure a Subnet as private to restrict membership to only approved validators.
 
 **Networking**
 
@@ -790,7 +790,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Upgrades**
 
-- Added ability to specify subnet configs
+- Added ability to specify Subnet configs
 - Added various new networking config values
 - Removed legacy messages from the network library
 - Fixed P-chain mempool bug that impacted AddValidator transactions on local networks
@@ -877,7 +877,7 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 **P-Chain**
 
 - Added functionality to track changes in validator weight by block.
-- Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
+- Added API method `GetValidatorsAt` which allows for retrieval of a Subnet's (or the Primary Network's) validator set at a given P-Chain height.
 
 **C-Chain**
 
@@ -930,8 +930,8 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 **Subnets**
 
-- Added `subnetID`s to the handshake message. This notifies peers about which subnets a node is interesting in syncing.
-- Optimized subnet container gossiping.
+- Added `subnetID`s to the handshake message. This notifies peers about which Subnets a node is interesting in syncing.
+- Optimized Subnet container gossiping.
 
 **AVM**
 
@@ -1162,7 +1162,7 @@ The patch includes performance improvements, and monitoring improvements:
 This update is backwards compatible. It is optional, but encouraged.
 :::
 
-The patch includes performance improvements, monitoring improvements, and subnet fixes:
+The patch includes performance improvements, monitoring improvements, and Subnet fixes:
 
 - Changed the AVM's fee definition to enforce fees to be paid in the chain's native asset. This doesn't change the X-Chain's behavior, but it makes other AVM instances usable.
 - Added the ability to specify configs to specific chains. This deprecates the `coreth-config` CLI parameter.
@@ -1204,7 +1204,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 If the previously installed node version is &lt;= v1.4.4 then this node may have stopped processing blocks. This update will repair the node and perform a database migration. If the previously installed node version is &gt;=v1.4.5 then this node will use the existing database and does not need to perform a database migration.
 
 - Fixed the pre-migration node to correctly verify the P-chain block `SHraz7TtMfTQ5DX1rREhNZW1bi7PpPzAq7xoJAwrWNQrLhQcD`.
-- Fixed regression in `platformvm.GetBlockchains` to correctly return the primary subnet blockchains.
+- Fixed regression in `platformvm.GetBlockchains` to correctly return the primary Subnet blockchains.
 - Updated the grpc version to v1.37.
 - Optimized peerlist sampling.
 - Added database benchmarks.
@@ -1245,7 +1245,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
   - Removed the usage of `versiondb`s being passed through blocks to pass state references that can be modified and read without re-parsing objects.
   - Implemented a base state manager to properly cache and mange writes to the underlying database.
   - Implemented CoW validator sets to enable caching multiple validator sets in memory.
-  - Indexed chains by subnet to avoid touching unused state objects.
+  - Indexed chains by Subnet to avoid touching unused state objects.
   - Indexed validators by `nodeID` to avoid unnecessary iterations while accepting `addDelegator` and `addSubnetValidator` transactions.
   - Reduced the number of key-value pairs dedicated to managing validator sets on disk and validator uptimes.
 - Added staking reward look-ups to the `platformvm`'s API to support indexing of rewards.
@@ -1255,7 +1255,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Updated the `avm`'s state management to use `prefixdb`s, record caching metrics, and share additional code with the `platformvm`.
 - Simplified `UTXO` management and indexing in the `avm` and `platformvm`.
 - Restructured address parsing and management to be fully shared across compatible VM instances.
-- Restructured shared memory of the primary subnet to be fully shared across VM instances.
+- Restructured shared memory of the primary Subnet to be fully shared across VM instances.
 - Added a chain state implementation to support seamless caching over existing VM implementations and to simplify the implementation of new VMs.
 - Integrated the new chain state manager into the `rpcchainvm`, which also adds various metrics.
 - Added `upgradeBytes` and `configBytes` to the standard VM interface to better support future network upgrades.
@@ -1333,7 +1333,7 @@ This update is backwards compatible. It is optional, but encouraged.
 
 The patch includes bug fixes and performance improvements that aim to optimize the upcoming `db-upgrade` release.
 
-- Skipped tailing delay in bootstrapping so that all chains finish as soon as the last chain is marked as bootstrapped in a subnet.
+- Skipped tailing delay in bootstrapping so that all chains finish as soon as the last chain is marked as bootstrapped in a Subnet.
 - Improved message handling during bootstrapping to handle messages while waiting for other chains to sync.
 - Reduced sampler allocations by re-using existing samplers.
 - Updated docker scripts to only push images from the `master` branch.
@@ -1567,7 +1567,7 @@ Change Summary:
 - Added additional health checks into the networking layer.
 - Added \`percent of stake connected\` as a reported metric.
 - Added bootstrapping restart logic to ensure the node has caught up to the current tip, even during times of high throughput.
-- Added subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
+- Added Subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
 - Prevented verification of rejected blocks to avoid unnecessary computation.
 - Removed gossiping of non-preferred blocks to the network.
 - Switched the network timeout calculator to use an EWMA of the observed network latency.
@@ -1761,7 +1761,7 @@ This update is optional but encouraged. The patch includes quality of life impro
 :::
 
 ```text
-• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
+• Added Subnet whitelisting to allow a node owner to choose which Subnets to validate.
 ```
 
 ```text

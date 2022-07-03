@@ -131,11 +131,11 @@ For Mainnet, we strongly recommend to use an account associated with a [ledger](
 
 - Adds all NodeIDs as validators to the primary network (skipping any that
   already exist)
-- Creates a subnet
-- Adds all NodeIDs as validators on the subnet
+- Creates a Subnet
+- Adds all NodeIDs as validators on the Subnet
 - Creates a new blockchain
 
-Here is a command to create a subnet on Fuji Testnet:
+Here is a command to create a Subnet on Fuji Testnet:
 
 ```bash
 > subnet-cli wizard \
@@ -254,7 +254,7 @@ You can check this url [https://explorer-xp.avax-test.network/blockchain/2eKMpwd
 subnet-cli create subnet
 ```
 
-To create a subnet on the local network:
+To create a Subnet on the local network:
 
 ```bash
 subnet-cli create subnet \
@@ -347,7 +347,7 @@ subnet-cli add subnet-validator \
 --subnet-id="[YOUR-SUBNET-ID]"
 ```
 
-To add a subnet validator to the local network:
+To add a Subnet validator to the local network:
 
 ```text
 > subnet-cli add subnet-validator \

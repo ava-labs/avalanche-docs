@@ -258,17 +258,17 @@ You can bookmark the main dashboard as it shows the most important information a
 
 Step 4 installs the basic set of dashboards that make sense to have on any node. Step 5 is for installing additional dashboards that may not be useful for every installation.
 
-Currently, there is only one additional dashboard: Subnets. If your node is running any subnets, you may want to add this as well. Do:
+Currently, there is only one additional dashboard: Subnets. If your node is running any Subnets, you may want to add this as well. Do:
 
 ```bash
 ./monitoring-installer.sh --5
 ```
 
-This will add the subnets dashboard. It allows you to monitor operational data for any subnet that is synced on the node. There is a subnet switcher that allows you to switch between different subnets. As there are many subnets and not every node will have all of them, by default, it comes populated only with Spaces and Wagmi subnets that exist on Fuji testnet:
+This will add the Subnets dashboard. It allows you to monitor operational data for any Subnet that is synced on the node. There is a Subnet switcher that allows you to switch between different Subnets. As there are many Subnets and not every node will have all of them, by default, it comes populated only with Spaces and Wagmi Subnets that exist on Fuji testnet:
 
 ![Subnets switcher](/img/monitoring-03-subnets.png)
 
-To configure the dashboard and add any subnets that your node is syncing, you will need to edit the dashboard. Select the `dashboard settings` icon (image of a cog) in the upper right corner of the dashboard display and switch to `Variables` section and select the `subnet` variable. It should look something like this:
+To configure the dashboard and add any Subnets that your node is syncing, you will need to edit the dashboard. Select the `dashboard settings` icon (image of a cog) in the upper right corner of the dashboard display and switch to `Variables` section and select the `subnet` variable. It should look something like this:
 
 ![Variables screen](/img/monitoring-04-variables.png)
 
@@ -284,7 +284,7 @@ and the separator between entries is a comma. Entries for Spaces and Wagmi look 
 Spaces (Fuji) : 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, WAGMI (Fuji) : 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
 ```
 
-After editing the values, press `Update` and then click `Save dashboard` button and confirm. Press the back arrow in the upper left corner to return to the dashboard. New values should now be selectable from the dropdown and data for the selected subnet will be shown in the panels.
+After editing the values, press `Update` and then click `Save dashboard` button and confirm. Press the back arrow in the upper left corner to return to the dashboard. New values should now be selectable from the dropdown and data for the selected Subnet will be shown in the panels.
 
 ## Updating
 

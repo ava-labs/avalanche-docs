@@ -16,7 +16,7 @@ Once the transaction is committed, the UTXOs in the inputs will be consumed and 
 
 UTXOs can be associated with multiple addresses. If there are multiple owners of a UTXO, then we must note the `threshold` value. We have to include signatures of a threshold number of UTXO owners with the unsigned transaction to consume UTXOs present in the inputs. The threshold value of a UTXO is set while issuing the transaction.
 
-We can use these multi-sig UTXOs as inputs for multiple purposes and not only for sending assets. For example, we can use them to create subnets, add delegators, add validators, etc.
+We can use these multi-sig UTXOs as inputs for multiple purposes and not only for sending assets. For example, we can use them to create Subnets, add delegators, add validators, etc.
 
 ## Atomic Transactions
 

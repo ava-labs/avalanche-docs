@@ -47,7 +47,7 @@ curl --location --request POST '127.0.0.1:9650/ext/keystore' \
 }
 ```
 
-Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
+Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, aka `ewoq`, into any of the 3 blockchains on the default Subnet. After importing the key you can check the balance to confirm that it worked.
 
 ## X-Chain
 
