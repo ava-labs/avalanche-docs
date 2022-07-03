@@ -4,7 +4,7 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 
 # Avalanche Platform
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all Avalanche validators which is also referred as the Primary Network. The Primary Network is a special [subnet](../../subnets/README.md), and all members of all custom Subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all Avalanche validators which is also referred as the Primary Network. The Primary Network is a special [Subnet](../../subnets/README.md), and all members of all custom Subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
 ![Primary network](/img/primary-network.png)
 
