@@ -48,4 +48,4 @@ Avalanche validators are incentivized by Subnet owners to validator their Subnet
 
 ## Developing Your Own Subnet
 
-Please check out documents listed on the left panel to develop your own Subnets with customized virtual machine and blockchain.
+Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
