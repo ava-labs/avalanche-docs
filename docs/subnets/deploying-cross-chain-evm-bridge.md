@@ -6,7 +6,7 @@ In this tutorial, we will be building a bridge between **[WAGMI](./wagmi.md)** a
 
 The wrapped version of a native coin is its pegged ERC20 representation. Wrapping it with the ERC20 standard makes certain processes like delegated transactions much easier. You can easily get wrapped tokens by sending the native coin to the wrapped token contract address.
 
-> WAGMI is an independent EVM-based test chain deployed on a custom subnet on the Avalanche network.
+> WAGMI is an independent EVM-based test chain deployed on a custom Subnet on the Avalanche network.
 
 We will be using **Chainsafe**'s bridge repository, to easily set up a robust and secure bridge.
 
