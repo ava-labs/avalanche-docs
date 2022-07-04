@@ -6,7 +6,7 @@ Avalanche's 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-
 
 ![image](/img/subnet-validators.png)
 
-(Image from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
 Subnets are independent and don’t share execution thread, storage or networking with other Subnets or the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Protocol.
 
