@@ -1,11 +1,10 @@
-# Deprecating CB58 in AvalancheGo API
+# CB58 Deprecation in AvalancheGo API
 
 ## Overview
 
-With [AvalancheGo v1.7.14 release](./avalanchego-release-notes.md#v1714-view-on-github), we have published changes to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changed the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
+With [AvalancheGo v1.7.14 release](./avalanchego-release-notes.md#v1714-view-on-github), we have published changes to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only impacted the encoding format for data with variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
 
-Our AvalancheGo API documents have been updated to reflect this change: `hex` is now the default value for the `encoding` parameter
-in places where `cb58` used to be the default value.
+Our [AvalancheGo API documents](./apis/README.md) have been updated to reflect this change: `hex` is now the default value for the `encoding` parameter in places where `cb58` used to be default.
 
 You will need to change your code to handle the response correctly. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
 
@@ -58,7 +57,7 @@ Following APIs are affected with this change.
 
 :::tip
 
-When going through this API list, please make sure to check the omitted/default encoding parameter. Prior to AvalancheGo v1.7.14, by default, `cb58` is used for the `encoding` parameter if not specified in these APIs. With AvalancheGo v1.7.14, `hex` is the default value.
+When going through this API list, please make sure to check the omitted/default encoding parameter. Prior to AvalancheGo v1.7.14, by default, `cb58` is used for the `encoding` parameter if not specified in these APIs. With AvalancheGo v1.7.14 and forward, `hex` is default.
 
 :::
 
