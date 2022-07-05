@@ -2,13 +2,16 @@
 
 ## Overview
 
-We are working to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changes the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
+With [AvalancheGo v1.7.14 release](./avalanchego-release-notes.md#v1714-view-on-githubhttpsgithubcomava-labsavalanchegoreleasestagv1714), we have published changes to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changed the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
 
-To prepare for this change, you can now specify `hex` (or `json` if supported) for the `encoding` parameter in places where `cb58` is used **by default** or explicitly. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
+Our AvalancheGo API documents have been updated to reflect this change: `hex` is now the default value for the `encoding` parameter
+in places where `cb58` used to be the default value.
+
+You will need to change your code to handle the response correctly. For example, for API call [`avm.getUTXOs`](./apis/x-chain.md#avmgetutxos) in which
 
 - `encoding` sets the format for the returned UTXOs.
 
-you can specify `"encoding": "hex"` when issuing the API call.
+you can specify `"encoding": "hex"` when issuing the API call or leave it empty which will take the default value of `hex`.
 
 ```sh
 curl -X POST --data '{
@@ -16,7 +19,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getUTXOs",
     "params" :{
-        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
         "encoding": "hex"
     }
@@ -55,7 +58,7 @@ Following APIs are affected with this change.
 
 :::tip
 
-When going through this API list, please make sure to check the omitted/default encoding parameter. Before the new release of `cb58` deprecation is out, by default, `cb58` is used for the encoding parameter if not specified in these APIs. You will need to add `"encoding": "hex"` (or `"encoding": "json"` if supported) explicitly and update your code to handle the response accordingly.
+When going through this API list, please make sure to check the omitted/default encoding parameter. Prior to AvalancheGo v1.7.14, by default, `cb58` is used for the `encoding` parameter if not specified in these APIs. With AvalancheGo v1.7.14, `hex` is the default value.
 
 :::
 
