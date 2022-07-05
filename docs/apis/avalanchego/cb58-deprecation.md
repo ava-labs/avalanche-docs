@@ -2,7 +2,7 @@
 
 ## Overview
 
-With [AvalancheGo v1.7.14 release](./avalanchego-release-notes.md#v1714-view-on-githubhttpsgithubcomava-labsavalanchegoreleasestagv1714), we have published changes to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changed the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
+With [AvalancheGo v1.7.14 release](./avalanchego-release-notes.md#v1714-view-on-github), we have published changes to deprecate `cb58` encoding in favor of `hex` in the return of AvalancheGo API calls. This only changed the supported encoding formats for variable length representations (such as UTXOs, transactions, blocks, etc). Other data represented using `cb58` such as addresses and IDs (txIDs, chainIDs, subnetIDs, and utxoIDs) are unchanged.
 
 Our AvalancheGo API documents have been updated to reflect this change: `hex` is now the default value for the `encoding` parameter
 in places where `cb58` used to be the default value.
