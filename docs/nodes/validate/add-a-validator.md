@@ -92,7 +92,7 @@ In this section, we will use Fuji Testnet to show how to add a node to the valid
 
 Open your AvalancheJS directory and select the [**`examples/platformvm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/platformvm) folder to view the source code for the examples scripts.
 
-We will use the [**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts) script to add a validator. To learn more about the `buildAddValidatorTx` API, please click [here](../../apis/avalanchejs/classes/api_platformvm.platformvmapi.md#buildaddvalidatortx).
+We will use the [**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts) script to add a validator. To learn more about the `buildAddValidatorTx` API, please click [here](https://github.com/ava-labs/avalanchejs-docs/blob/main/classes/api_platformvm.platformvmapi.md#buildaddvalidatortx).
 
 #### Private Key
 
