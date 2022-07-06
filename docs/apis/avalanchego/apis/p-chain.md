@@ -115,7 +115,7 @@ Add a validator to the Primary Network. You must stake AVAX to do this. If the n
 
 The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward (if any.) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
 
-The validation period must be between 2 weeks and 1 year.
+The validation period must be between 2 weeks and 1 year for the Mainnet, and 24 hours and 1 year for Fuji Testnet.
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
