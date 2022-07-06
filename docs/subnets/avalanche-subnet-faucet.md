@@ -45,7 +45,7 @@ You can also integrate a new Subnet on the live [faucet](https://faucet.avax.net
 }
 ```
 
-- **ID** - Each subnet chain should have a unique and relatable ID.
+- **ID** - Each Subnet chain should have a unique and relatable ID.
 - **NAME** - Name of the Subnet chain that will appear on the website.
 - **RPC** - A valid RPC URL for accessing the chain.
 - **CHAINID** - Chain ID of the chain

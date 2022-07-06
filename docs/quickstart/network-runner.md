@@ -6,7 +6,7 @@ Developing P2P systems is hard, and blockchains are no different. A developer ca
 
 In the context of avalanche, **[subnets](../subnets/README.md)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
 
-The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of avalanchego nodes with support for custom node, subnet and network configurations, allowing to locally test code before deploying to mainnet or even public testnets like `fuji`.
+The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of avalanchego nodes with support for custom node, Subnet and network configurations, allowing to locally test code before deploying to mainnet or even public testnets like `fuji`.
 
 **Note that this tool is not for running production nodes, and that because it is being heavily developed right now, documentation might differ slightly from the actual code.**
 
@@ -55,7 +55,7 @@ There are two main ways to use the network-runner:
 
   This allows for custom network scenarios and high flexibility, but requires more code to be written.
 
-Running the binary, the user can send requests to the RPC server in order to start a network, create subnets, add nodes to the network, remove nodes from the network, restart nodes, etc. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
+Running the binary, the user can send requests to the RPC server in order to start a network, create Subnets, add nodes to the network, remove nodes from the network, restart nodes, etc. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
 
 Each node can then also be reached via [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) endpoints which each node exposes.
 
@@ -129,8 +129,8 @@ Additional optional parameters which can be passed to the start command:
 	--custom-node-configs" '{"node1":{"log-level":"debug","api-admin-enabled":false},"node2":{...},...}'
 ```
 
-`--plugin-dir` and `--custom-vms` are parameters relevant to subnet operation.
-See the [subnet](#network-runner-rpc-server-subnet-evm-example) section for details about how to run subnets.
+`--plugin-dir` and `--custom-vms` are parameters relevant to Subnet operation.
+See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
 
 The network-runner supports avalanchego node configuration at different levels.
 
@@ -299,9 +299,9 @@ See [here](../nodes/maintain/avalanchego-config-flags.md) for the reference of s
 `--db-dir`
 
 `--custom-vms` allows to configure custom VMs supported by this node.
-See the [subnet](#network-runner-rpc-server-subnet-evm-example) section for details about how to run subnets.
+See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
 
-**Note**: The following subnet parameters will be set from the global network configuration to this node:
+**Note**: The following Subnet parameters will be set from the global network configuration to this node:
 `--whitelisted-subnets`
 `--plugin-dir`
 
@@ -323,19 +323,19 @@ avalanche-network-runner control stop \
 
 ## Subnets
 
-ANR can be a great helper tool working with subnets. We recommend using it to develop and test new subnets before deploying them in public networks.
-For general subnet documentation, please refer to [subnets](../subnets).
-These examples expect a basic understanding of what subnets are and their usage.
+ANR can be a great helper tool working with Subnets. We recommend using it to develop and test new Subnets before deploying them in public networks.
+For general Subnet documentation, please refer to [subnets](../subnets).
+These examples expect a basic understanding of what Subnets are and their usage.
 
 ### RPC server `subnet-evm` example
 
 The Subnet EVM is a simplified version of Coreth VM (C-Chain).
 This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality.
-It can be used to create your own fully Ethereum-compatible subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
+It can be used to create your own fully Ethereum-compatible Subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 
 ### subnet-cli
 
-**At this moment the ANR requires an additional tool, [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a subnet in a local custom test-network. Generally, getting a subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
+**At this moment the ANR requires an additional tool, [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. Generally, getting a Subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent Subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
 
 Install and start the RPC server just as in [start the server](#start-the-server)
 Make sure the server is up:
@@ -481,9 +481,9 @@ DONE! You are now running your very own Ethereum blockchain on Avalanche!
 
 ### RPC server `blobvm` example
 
-While above we configured and deployed an Ethereum compatible subnet, Avalanche supports deploying your completely custom blockchain, still taking advantage of existing Avalanche infrastructure and its consensus protocol.
+While above we configured and deployed an Ethereum compatible Subnet, Avalanche supports deploying your completely custom blockchain, still taking advantage of existing Avalanche infrastructure and its consensus protocol.
 
-A custom blockchain requires your custom VM. In this tutorial we are going to deploy a custom VM with a subnet. The process is very similar to the `subnet-evm` one, except that the VM is different. We will also need the `subnet-cli` tool for this tutorial, check [this](#subnet-cli) for some context.
+A custom blockchain requires your custom VM. In this tutorial we are going to deploy a custom VM with a Subnet. The process is very similar to the `subnet-evm` one, except that the VM is different. We will also need the `subnet-cli` tool for this tutorial, check [this](#subnet-cli) for some context.
 
 The VM we are going to use here is the [blobvm](https://github.com/ava-labs/blobvm). This is a simple VM which enables content-addressable storage of arbitrary keys/values using any EIP-712 compatible wallet.
 

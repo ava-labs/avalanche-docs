@@ -231,6 +231,7 @@ const sidebars = {
 
   community: [
     'community/README',
+    'community/bug-bounty',
     {
       type: 'link',
       label: 'Product Support',
