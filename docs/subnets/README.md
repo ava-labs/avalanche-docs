@@ -1,24 +1,22 @@
 # Subnets Overview
 
-A **Subnet** is a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet; and a Subnet can validate many blockchains. A subnet can define its own rules regarding its membership and token economy. A validator may be a member of many Subnets.
+A **Subnet** is a sovereign network which defines its own rules regarding its membership and token economics. It is composed of a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet, and a Subnet can have many blockchains. A validator may be a member of many Subnets.
 
-Avalanche's 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain) are validated and secured by all the Avalanche validators which compose a special Subnet and is referred as the Primary Network.
+Avalanche's 3 built-in blockchains: Platform Chain (P-Chain), Contract Chain (C-Chain) and Exchange Chain (X-Chain) are validated and secured by all the Avalanche validators which compose a special Subnet and is referred as the Primary Network.
 
 ![image](/img/subnet-validators.png)
 
-(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets).)
+(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
-Subnets are independent and don’t share execution thread, storage or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Protocol.
-
-Subnets are effectively ‘Blockchain-as-a-Service’ secured by some portion of Avalanche validators.
+Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Protocol.
 
 ## Advantages
 
-A Subnet manages its own membership, it can create its own token economy and rules, and may require that its constituent validators have certain properties.
+A Subnet manages its own membership, it can create its own token economics and rules, and may require that its constituent validators have certain properties.
 
-### Independent Token Economy
+### Independent Token Economics
 
-Subnets can have their own token economy with their own native tokens and fee markets. They can launch their own blockchains with customized virtual machines. See [Customize a Subnet](../subnets/customize-a-subnet.md) for more details.
+Subnets can have their own token economics with their own native tokens and fee markets. They can launch their own blockchains with customized virtual machines. See [Customize a Subnet](../subnets/customize-a-subnet.md) for more details.
 
 ### Compliance
 
