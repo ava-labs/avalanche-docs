@@ -22,20 +22,20 @@ Click to metamask icon on the browser and select the network drop-down menu. Her
 
 Now, we need to set these boxes with correct values.
 
-* **Network Name**: Avalanche C-Chain
-* **New RPC URL**:
-  * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
-  * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-  * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) 
-* **ChainID**:
-  * **Mainnet:** `43114` 
-  * **Fuji Testnet:** `43113` 
-  * **Local Testnet:** `43112` 
-* **Symbol**: AVAX
-* **Explorer**:
-  * **Mainnet:** [https://snowtrace.io](https://snowtrace.io/) 
-  * **Fuji Testnet:** [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
-  * **Localnet:** n/a 
+- **Network Name**: Avalanche C-Chain
+- **New RPC URL**:
+  - **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+  - **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+  - **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
+- **ChainID**:
+  - **Mainnet:** `43114`
+  - **Fuji Testnet:** `43113`
+  - **Local Testnet:** `43112`
+- **Symbol**: AVAX
+- **Explorer**:
+  - **Mainnet:** [https://snowtrace.io](https://snowtrace.io/)
+  - **Fuji Testnet:** [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
+  - **Localnet:** n/a
 
 ![Image for post](/img/erc20-metamask.png)
 
@@ -76,7 +76,7 @@ You should view this page. On this page, first, click "SOLIDITY" from "Featured 
 Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
 
 ```javascript
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol"
 ```
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
@@ -154,4 +154,3 @@ Enter your address and an amount in WEI. For example, I will mint 1000 tst token
 Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to "Add Token" button and select "Custom Token" tab.
 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
-

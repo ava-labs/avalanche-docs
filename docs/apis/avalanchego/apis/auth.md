@@ -106,7 +106,7 @@ auth.revokeToken(
         password: string,
         token: string
     }
-) -> {success: bool}
+) -> {}
 ```
 
 - `password` is this node’s authorization token password.
@@ -131,9 +131,7 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "result": {
-    "success": true
-  },
+  "result": {},
   "id": 1
 }
 ```
@@ -150,7 +148,7 @@ auth.changePassword(
         oldPassword: string,
         newPassword: string
     }
-) -> {success: bool}
+) -> {}
 ```
 
 - `oldPassword` is this node’s current authorization token password.
@@ -175,9 +173,7 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "result": {
-    "success": true
-  },
+  "result": {},
   "id": 1
 }
 ```

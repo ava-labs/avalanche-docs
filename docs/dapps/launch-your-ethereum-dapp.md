@@ -2,7 +2,6 @@
 description: The purpose of this document is to help you with launching your existing Ethereum dapp on Avalanche, get the basics of Avalanche Platform and how it works.
 ---
 
-
 # Launch Your Ethereum dApp on Avalanche
 
 ## Overview
@@ -11,7 +10,7 @@ The purpose of this document is to help you with launching your existing dapp on
 
 ## Platform Basics
 
-Avalanche is a [network of networks](../overview/getting-started/avalanche-platform.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
+Avalanche is a [network of networks](../overview/getting-started/avalanche-platform.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple Subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
 
 C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result, you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../overview/getting-started/avalanche-consensus.md) enables.
 
@@ -31,19 +30,19 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 
 #### **Avalanche Mainnet Settings:**
 
-* **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-* **ChainID**: `43114`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
+- **Network Name**: Avalanche Mainnet C-Chain
+- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+- **ChainID**: `43114`
+- **Symbol**: `AVAX`
+- **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
 #### **FUJI Testnet Settings:**
 
-* **Network Name**: Avalanche FUJI C-Chain
-* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `43113`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+- **Network Name**: Avalanche FUJI C-Chain
+- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+- **ChainID**: `43113`
+- **Symbol**: `AVAX`
+- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 In your application's web interface, you can [add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
 
@@ -95,21 +94,21 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 
 ```json
 {
-    "eth-apis": [
-        "public-eth",
-        "public-eth-filter",
-        "net",
-        "web3",
-        "internal-public-eth",
-        "internal-public-blockchain",
-        "internal-public-transaction-pool",
-        "public-debug",
-        "private-debug",
-        "debug-tracer",
-        "internal-public-debug",
-        "internal-private-debug"
-    ],
-    "pruning-enabled": false
+  "eth-apis": [
+    "public-eth",
+    "public-eth-filter",
+    "net",
+    "web3",
+    "internal-public-eth",
+    "internal-public-blockchain",
+    "internal-public-transaction-pool",
+    "public-debug",
+    "private-debug",
+    "debug-tracer",
+    "internal-public-debug",
+    "internal-private-debug"
+  ],
+  "pruning-enabled": false
 }
 ```
 
@@ -128,7 +127,6 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer too
 ### Remix
 
 There is a [tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
-
 
 ### Truffle
 
@@ -154,10 +152,10 @@ If you need, you can also run a faucet locally, but building it from the [reposi
 
 Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://snowtrace.io/). The procedure is simple:
 
-* navigate to your published contract address on the explorer
-* on the `code` tab select `verify & publish`
-* copy and paste the flattened source code and enter all the build parameters exactly as they are on the published contract
-* click `verify & publish`
+- navigate to your published contract address on the explorer
+- on the `code` tab select `verify & publish`
+- copy and paste the flattened source code and enter all the build parameters exactly as they are on the published contract
+- click `verify & publish`
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
@@ -169,9 +167,9 @@ Due to the nature of distributed apps, it is very hard to fix bugs once the appl
 
 Most popular are:
 
-* [Slither](https://github.com/crytic/slither), here's a [tutorial](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/)
-* [MythX](https://mythx.io/)
-* [Mythril](https://github.com/ConsenSys/mythril)
+- [Slither](https://github.com/crytic/slither), here's a [tutorial](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/)
+- [MythX](https://mythx.io/)
+- [Mythril](https://github.com/ConsenSys/mythril)
 
 We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
 
@@ -200,4 +198,3 @@ If you need the log filtering functionality, you should use a websocket connecti
 ## Support
 
 Using this tutorial you should be able to quickly get up to speed on Avalanche, deploy, and test your dapps. If you have questions, problems, or just want to chat with us, you can reach us on our public [Discord](https://chat.avalabs.org/) server. We'd love to hear from you and find out what you're building on Avalanche!
-

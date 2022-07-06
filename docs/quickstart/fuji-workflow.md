@@ -29,12 +29,12 @@ To begin, we'll create a mnemonic phrase with [AvalancheJS](../apis/avalanchejs/
 First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
 
 ```typescript
-import { Mnemonic } from "avalanche";
-const mnemonic: Mnemonic = Mnemonic.getInstance();
-const strength: number = 256;
-const wordlist = mnemonic.getWordlists("english") as string[];
-const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist);
-console.log(m);
+import { Mnemonic } from "avalanche"
+const mnemonic: Mnemonic = Mnemonic.getInstance()
+const strength: number = 256
+const wordlist = mnemonic.getWordlists("english") as string[]
+const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
+console.log(m)
 // "pool hat domain flame stomach canal fury master farm gown tide supreme winner motion this first divide spray forum wall reopen bounce spider palm"
 ```
 
@@ -43,18 +43,18 @@ console.log(m);
 After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) keypairs.
 
 ```typescript
-import HDNode from "avalanche/utils/hdnode";
-const seed: Buffer = mnemonic.mnemonicToSeedSync(m);
-const hdnode: HDNode = new HDNode(seed);
+import HDNode from "avalanche/utils/hdnode"
+const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
+const hdnode: HDNode = new HDNode(seed)
 
 for (let i: number = 0; i <= 2; i++) {
   // Deriving the _i_th external BIP44 X-Chain address
-  const child: HDNode = hdnode.derive(`m/44'/9000'/0'/0/${i}`);
-  keychain.importKey(child.privateKeyCB58);
+  const child: HDNode = hdnode.derive(`m/44'/9000'/0'/0/${i}`)
+  keychain.importKey(child.privateKeyCB58)
 }
 
-const xAddressStrings: string[] = xchain.keyChain().getAddressStrings();
-console.log(xAddressStrings);
+const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
+console.log(xAddressStrings)
 // [
 //   'X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40',
 //   'X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y',
@@ -91,9 +91,9 @@ We can also use the Fuji Explorer to get the balance for the 1st BIP44-derived a
 Alternatively, we can use AvalancheJS to get the balance.
 
 ```typescript
-const address: string = "X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40";
-const balance: any = await xchain.getBalance(address, "AVAX");
-console.log(balance);
+const address: string = "X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40"
+const balance: any = await xchain.getBalance(address, "AVAX")
+console.log(balance)
 // {
 //   balance: '2000000000',
 //   utxoIDs: [
@@ -111,22 +111,22 @@ The faucet sent 2 AVAX to the first address we generated. Let's send AVAX from t
 
 ```typescript
 // get the AVAX asset ID
-const avaxAssetID: string = Defaults.network[networkID].X["avaxAssetID"];
+const avaxAssetID: string = Defaults.network[networkID].X["avaxAssetID"]
 
 // get the AVAX balance for the 1st address
 const getBalanceResponse: any = await xchain.getBalance(
   xAddressStrings[0],
   avaxAssetID
-);
-const balance: BN = new BN(getBalanceResponse.balance);
+)
+const balance: BN = new BN(getBalanceResponse.balance)
 
 // subtract the fee
-const fee: BN = xchain.getDefaultTxFee();
-const amount: BN = balance.sub(fee);
+const fee: BN = xchain.getDefaultTxFee()
+const amount: BN = balance.sub(fee)
 
 // get the UTXOs for the 1st address
-const avmUTXOResponse: any = await xchain.getUTXOs(xAddressStrings[0]);
-const utxoSet: UTXOSet = avmUTXOResponse.utxos;
+const avmUTXOResponse: any = await xchain.getUTXOs(xAddressStrings[0])
+const utxoSet: UTXOSet = avmUTXOResponse.utxos
 
 // build an UnsignedTx sending AVAX from the first external BIP44 address to the second external BIP44 address
 const unsignedTx: UnsignedTx = await xchain.buildBaseTx(
@@ -136,14 +136,14 @@ const unsignedTx: UnsignedTx = await xchain.buildBaseTx(
   [xAddressStrings[1]],
   [xAddressStrings[0]],
   [xAddressStrings[1]]
-);
+)
 
 // sign it
-const tx: Tx = unsignedTx.sign(xKeychain);
+const tx: Tx = unsignedTx.sign(xKeychain)
 
 // issue it and get a txid
-const txid: string = await xchain.issueTx(tx);
-console.log(`Success! TXID: ${txid}`);
+const txid: string = await xchain.issueTx(tx)
+console.log(`Success! TXID: ${txid}`)
 // Success! TXID: ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g
 ```
 
@@ -152,9 +152,9 @@ console.log(`Success! TXID: ${txid}`);
 We can verify that the transaction, `ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g`, was successful using AvalancheJS.
 
 ```typescript
-const txid: string = "ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g";
-const status: string = await xchain.getTxStatus(txid);
-console.log(status);
+const txid: string = "ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g"
+const status: string = await xchain.getTxStatus(txid)
+console.log(status)
 // Accepted
 ```
 
@@ -171,9 +171,9 @@ We can also use the Fuji Explorer to get the balance for the 2nd address—[X-fu
 Alternatively, we can use AvalancheJS to get the balance.
 
 ```typescript
-const address: string = "X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y";
-const balance: any = await xchain.getBalance(address, "AVAX");
-console.log(balance);
+const address: string = "X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y"
+const balance: any = await xchain.getBalance(address, "AVAX")
+console.log(balance)
 // {
 //   balance: '1999000000',
 //   utxoIDs: [

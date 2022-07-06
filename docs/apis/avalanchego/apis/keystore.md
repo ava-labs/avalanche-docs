@@ -4,13 +4,16 @@ sidebar_position: 13
 
 # Keystore API
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
-
 :::warning
-You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.
+Because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
 :::
 
-For validation and delegation on the mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md) or [the wallet](../../../nodes/validate/staking.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+
+For validation and cross-chain transfer on the Mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised. See following docs for details:
+
+- [Transfer AVAX Tokens Between Chains](../../../quickstart/cross-chain-transfers.md)
+- [Add a Node to the Validator Set](../../../nodes/validate/add-a-validator.md)
 
 :::info
 
@@ -42,7 +45,7 @@ keystore.createUser(
         username:string,
         password:string
     }
-) -> {success:bool}
+) -> {}
 ```
 
 - `username` and `password` can be at most 1024 characters.
@@ -68,9 +71,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -81,7 +82,7 @@ Delete a user.
 #### **Signature**
 
 ```sh
-keystore.deleteUser({username: string, password:string}) -> {success: bool}
+keystore.deleteUser({username: string, password:string}) -> {}
 ```
 
 #### **Example Call**
@@ -104,7 +105,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": { "success": true }
+  "result": {}
 }
 ```
 
@@ -127,7 +128,7 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -150,8 +151,8 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "user": "4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
-    "encoding": "cb58"
+    "user": "7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc00000000",
+    "encoding": "hex"
   }
 }
 ```
@@ -170,10 +171,10 @@ keystore.importUser(
         user:string,
         encoding:string //optional
     }
-) -> {success:bool}
+) -> {}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either "cb58" or "hex". Defaults to "cb58".
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -185,7 +186,7 @@ curl -X POST --data '{
     "params" :{
         "username":"myUsername",
         "password":"myPassword",
-        "user"    :"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi"
+        "user"    :"0x7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc000000008cf2d869"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
@@ -196,9 +197,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 

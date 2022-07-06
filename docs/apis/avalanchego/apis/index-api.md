@@ -72,14 +72,14 @@ index.getLastAccepted({
 
 ##### Request
 
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 
 ##### Response
 
 - `id` is the container's ID
 - `bytes` is the byte representation of the container
 - `timestamp` is the time at which this node accepted the container
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 
 #### **Example Call**
 
@@ -90,7 +90,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getLastAccepted",
     "params": {
-        "encoding":"cb58"
+        "encoding": "hex"
     },
     "id": 1
 }'
@@ -104,9 +104,9 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "id": 1,
   "result": {
     "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-    "bytes": "111115HRzXVDSeonLBcv6QdJkQFjPzPEobMWy7PyGuoheggsMCx73MVXZo2hJMEXXvR5gFFasTRJH36aVkLiWHtTTFcghyFTqjaHnBhdXTRiLaYcro3jpseqLAFVn3ngnAB47nebQiBBKmg3nFWKzQUDxMuE6uDGXgnGouDSaEKZxfKreoLHYNUxH56rgi5c8gKFYSDi8AWBgy26siwAWj6V8EgFnPVgm9pmKCfXio6BP7Bua4vrupoX8jRGqdrdkN12dqGAibJ78Rf44SSUXhEvJtPxAzjEGfiTyAm5BWFqPdheKN72HyrBBtwC6y7wG6suHngZ1PMBh93Ubkbt8jjjGoEgs5NjpasJpE8YA9ZMLTPeNZ6ELFxV99zA46wvkjAwYHGzegBXvzGU5pGPbg28iW3iKhLoYAnReysY4x3fBhjPBsags37Z9P3SqioVifVX4wwzxYqbV72u1AWZ4JNmsnhVDP196Gu99QTzmySGTVGP5ABNdZrngTRfmGTFCRbt9CHsgNbhgetkxbsEG7tySi3gFxMzGuJ2Npk2gnSr68LgtYdSHf48Ns",
+    "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
     "timestamp": "2021-04-02T15:34:00.262979-07:00",
-    "encoding": "cb58",
+    "encoding": "hex",
     "index": "0"
   }
 }
@@ -134,7 +134,7 @@ index.getContainerByIndex({
 ##### Request
 
 - `index` is how many containers were accepted in this index before this one
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 
 ##### Response
 
@@ -142,7 +142,7 @@ index.getContainerByIndex({
 - `bytes` is the byte representation of the container
 - `timestamp` is the time at which this node accepted the container
 - `index` is how many containers were accepted in this index before this one
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 
 #### **Example Call**
 
@@ -154,7 +154,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "method": "index.getContainerByIndex",
     "params": {
         "index":0,
-        "encoding":"cb58"
+        "encoding": "hex"
     },
     "id": 1
 }'
@@ -168,9 +168,9 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "id": 1,
   "result": {
     "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-    "bytes": "111115HRzXVDSeonLBcv6QdJkQFjPzPEobMWy7PyGuoheggsMCx73MVXZo2hJMEXXvR5gFFasTRJH36aVkLiWHtTTFcghyFTqjaHnBhdXTRiLaYcro3jpseqLAFVn3ngnAB47nebQiBBKmg3nFWKzQUDxMuE6uDGXgnGouDSaEKZxfKreoLHYNUxH56rgi5c8gKFYSDi8AWBgy26siwAWj6V8EgFnPVgm9pmKCfXio6BP7Bua4vrupoX8jRGqdrdkN12dqGAibJ78Rf44SSUXhEvJtPxAzjEGfiTyAm5BWFqPdheKN72HyrBBtwC6y7wG6suHngZ1PMBh93Ubkbt8jjjGoEgs5NjpasJpE8YA9ZMLTPeNZ6ELFxV99zA46wvkjAwYHGzegBXvzGU5pGPbg28iW3iKhLoYAnReysY4x3fBhjPBsags37Z9P3SqioVifVX4wwzxYqbV72u1AWZ4JNmsnhVDP196Gu99QTzmySGTVGP5ABNdZrngTRfmGTFCRbt9CHsgNbhgetkxbsEG7tySi3gFxMzGuJ2Npk2gnSr68LgtYdSHf48Ns",
+    "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
     "timestamp": "2021-04-02T15:34:00.262979-07:00",
-    "encoding": "cb58",
+    "encoding": "hex",
     "index": "0"
   }
 }
@@ -184,7 +184,7 @@ Get container by ID.
 
 ```sh
 index.getContainerByID({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   id: string,
@@ -197,15 +197,15 @@ index.getContainerByID({
 
 ##### Request
 
-- `containerID` is the container's ID
-- `encoding` is `"cb58"` or `"hex"`
+- `id` is the container's ID
+- `encoding` is `"hex"` only.
 
 ##### Response
 
 - `id` is the container's ID
 - `bytes` is the byte representation of the container
 - `timestamp` is the time at which this node accepted the container
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 - `index` is how many containers were accepted in this index before this one
 
 #### **Example Call**
@@ -217,7 +217,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getContainerByID",
     "params": {
-        "containerID": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
         "encoding":"hex"
     },
     "id": 1
@@ -232,7 +232,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "id": 1,
   "result": {
     "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-    "bytes": "111115HRzXVDSeonLBcv6QdJkQFjPzPEobMWy7PyGuoheggsMCx73MVXZo2hJMEXXvR5gFFasTRJH36aVkLiWHtTTFcghyFTqjaHnBhdXTRiLaYcro3jpseqLAFVn3ngnAB47nebQiBBKmg3nFWKzQUDxMuE6uDGXgnGouDSaEKZxfKreoLHYNUxH56rgi5c8gKFYSDi8AWBgy26siwAWj6V8EgFnPVgm9pmKCfXio6BP7Bua4vrupoX8jRGqdrdkN12dqGAibJ78Rf44SSUXhEvJtPxAzjEGfiTyAm5BWFqPdheKN72HyrBBtwC6y7wG6suHngZ1PMBh93Ubkbt8jjjGoEgs5NjpasJpE8YA9ZMLTPeNZ6ELFxV99zA46wvkjAwYHGzegBXvzGU5pGPbg28iW3iKhLoYAnReysY4x3fBhjPBsags37Z9P3SqioVifVX4wwzxYqbV72u1AWZ4JNmsnhVDP196Gu99QTzmySGTVGP5ABNdZrngTRfmGTFCRbt9CHsgNbhgetkxbsEG7tySi3gFxMzGuJ2Npk2gnSr68LgtYdSHf48Ns",
+    "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
     "timestamp": "2021-04-02T15:34:00.262979-07:00",
     "encoding": "hex",
     "index": "0"
@@ -264,14 +264,14 @@ index.getContainerRange({
 
 - `startIndex` is the beginning index
 - `numToFetch` is the number of containers to fetch
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 
 ##### Response
 
 - `id` is the container's ID
 - `bytes` is the byte representation of the container
 - `timestamp` is the time at which this node accepted the container
-- `encoding` is `"cb58"` or `"hex"`
+- `encoding` is `"hex"` only.
 - `index` is how many containers were accepted in this index before this one
 
 #### **Example Call**
@@ -285,7 +285,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "params": {
         "startIndex":0,
         "numToFetch":100,
-        "encoding":"cb58"
+        "encoding": "hex"
     },
     "id": 1
 }'
@@ -300,9 +300,9 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "result": [
     {
       "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-      "bytes": "111115HRzXVDSeonLBcv6QdJkQFjPzPEobMWy7PyGuoheggsMCx73MVXZo2hJMEXXvR5gFFasTRJH36aVkLiWHtTTFcghyFTqjaHnBhdXTRiLaYcro3jpseqLAFVn3ngnAB47nebQiBBKmg3nFWKzQUDxMuE6uDGXgnGouDSaEKZxfKreoLHYNUxH56rgi5c8gKFYSDi8AWBgy26siwAWj6V8EgFnPVgm9pmKCfXio6BP7Bua4vrupoX8jRGqdrdkN12dqGAibJ78Rf44SSUXhEvJtPxAzjEGfiTyAm5BWFqPdheKN72HyrBBtwC6y7wG6suHngZ1PMBh93Ubkbt8jjjGoEgs5NjpasJpE8YA9ZMLTPeNZ6ELFxV99zA46wvkjAwYHGzegBXvzGU5pGPbg28iW3iKhLoYAnReysY4x3fBhjPBsags37Z9P3SqioVifVX4wwzxYqbV72u1AWZ4JNmsnhVDP196Gu99QTzmySGTVGP5ABNdZrngTRfmGTFCRbt9CHsgNbhgetkxbsEG7tySi3gFxMzGuJ2Npk2gnSr68LgtYdSHf48Ns",
+      "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
       "timestamp": "2021-04-02T15:34:00.262979-07:00",
-      "encoding": "cb58",
+      "encoding": "hex",
       "index": "0"
     }
   ]
@@ -317,7 +317,7 @@ Get a container's index.
 
 ```sh
 index.getIndex({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   index: string
@@ -326,8 +326,8 @@ index.getIndex({
 
 ##### Request
 
-- `containerID` is the ID of the container to fetch
-- `encoding` is `"cb58"` or `"hex"`
+- `id` is the ID of the container to fetch
+- `encoding` is `"hex"` only.
 
 ##### Response
 
@@ -342,8 +342,8 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getIndex",
     "params": {
-        "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-        "encoding":"cb58"
+        "id":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding": "hex"
     },
     "id": 1
 }'
@@ -369,7 +369,7 @@ Returns true if the container is in this index.
 
 ```sh
 index.isAccepted({
-  containerID: string,
+  id: string,
   encoding: string
 }) -> {
   isAccepted: bool
@@ -378,8 +378,8 @@ index.isAccepted({
 
 ##### Request
 
-- `containerID` is the ID of the container to fetch
-- `encoding` is `"cb58"` or `"hex"`
+- `id` is the ID of the container to fetch
+- `encoding` is `"hex"` only.
 
 ##### Response
 
@@ -394,8 +394,8 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.isAccepted",
     "params": {
-        "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-        "encoding":"cb58"
+        "id":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding": "hex"
     },
     "id": 1
 }'

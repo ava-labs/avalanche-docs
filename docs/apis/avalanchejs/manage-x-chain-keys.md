@@ -3,54 +3,57 @@
 AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
 
 ```ts
-import {
-  Avalanche,
-  BinTools,
-  Buffer,
-  BN
-} from "avalanche" 
+import { Avalanche, BinTools, Buffer, BN } from "avalanche"
 
-let bintools = BinTools.getInstance();
+let bintools = BinTools.getInstance()
 
-let myNetworkID = 12345; //default is 1, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
-let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
-let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
+let myNetworkID = 12345 //default is 1, we want to override that for our local network
+let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU" // The X-Chain blockchainID on this network
+let ava = new avalanche.Avalanche(
+  "localhost",
+  9650,
+  "http",
+  myNetworkID,
+  myBlockchainID
+)
+let xchain = ava.XChain() //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Accessing the Keychain {#accessing-the-keychain}
+## Accessing the Keychain
 
 The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
 
 ```ts
-let myKeychain = xchain.keyChain();
+let myKeychain = xchain.keyChain()
 ```
 
 This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
 
-## Creating X-Chain Key Pairs {#creating-x-chain-key-pairs}
+## Creating X-Chain Key Pairs
 
 The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
 
 ```ts
-let newAddress1 = myKeychain.makeKey(); //returns a Buffer for the address
+let newAddress1 = myKeychain.makeKey() //returns a Buffer for the address
 ```
 
 You may also import your existing private key into the KeyChain using either a Buffer…
 
 ```ts
-let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //returns a Buffer
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let mypk = bintools.avaDeserialize(
+  "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+) //returns a Buffer
+let newAddress2 = myKeychain.importKey(mypk) //returns a Buffer for the address
 ```
 
 … or an Avalanche serialized string works, too:
 
 ```ts
-let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+let newAddress2 = myKeychain.importKey(mypk) //returns a Buffer for the address
 ```
 
-## Working with Keychains {#working-with-keychains}
+## Working with Keychains
 
 The X-Chain's KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
 
@@ -61,30 +64,30 @@ let exists = myKeychain.hasKey(newAddress1); //returns true if the address is ma
 let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 ```
 
-## Working with Keypairs {#working-with-keypairs}
+## Working with Keypairs
 
 The X-Chain's KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
 
 ```ts
-let address = keypair.getAddress(); //returns Buffer
-let addressString = keypair.getAddressString(); //returns string
+let address = keypair.getAddress() //returns Buffer
+let addressString = keypair.getAddressString() //returns string
 
-let pubk = keypair.getPublicKey(); //returns Buffer
-let pubkstr = keypair.getPublicKeyString(); //returns a CB58 encoded string
+let pubk = keypair.getPublicKey() //returns Buffer
+let pubkstr = keypair.getPublicKeyString() //returns a CB58 encoded string
 
-let privk = keypair.getPrivateKey(); //returns Buffer
-let privkstr = keypair.getPrivateKeyString(); //returns a CB58 encoded string
+let privk = keypair.getPrivateKey() //returns Buffer
+let privkstr = keypair.getPrivateKeyString() //returns a CB58 encoded string
 
-keypair.generateKey(); //creates a new random KeyPair
+keypair.generateKey() //creates a new random KeyPair
 
-let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let successul = keypair.importKey(mypk); //returns boolean if private key imported successfully
+let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+let successul = keypair.importKey(mypk) //returns boolean if private key imported successfully
 
-let message = Buffer.from("Wubalubadubdub");
-let signature = keypair.sign(message); //returns a Buffer with the signature
+let message = Buffer.from("Wubalubadubdub")
+let signature = keypair.sign(message) //returns a Buffer with the signature
 
-let signerPubk = keypair.recover(message, signature);
-let isValid = keypair.verify(message, signature); //returns a boolean
+let signerPubk = keypair.recover(message, signature)
+let isValid = keypair.verify(message, signature) //returns a boolean
 ```
 
 ## Encode Bech32 Addresses {#encode-bech32-addresses}
@@ -107,14 +110,14 @@ For example the following Bech32 address, `X-avax19rknw8l0grnfunjrzwxlxync6zrlu3
 
 Depending on the `networkID` which is passed in when instantiating `Avalanche` the encoded addresses will have a distinctive HRP per each network. AvalancheJS also has address encoding for past networks `cascade`, `denali`, and `everest`.
 
-* 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-* 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
-* 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
-* 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
-* 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
-* 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
-* 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-* 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
 
 Here's the mapping of `networkID` to bech32 HRP.
 
@@ -127,7 +130,7 @@ export const NetworkIDToHRP = {
   4: "everest",
   5: "fuji",
   1337: "custom",
-  12345: "local"
+  12345: "local",
 }
 ```
 

@@ -215,7 +215,7 @@ To interact with other instances of the EVM AVAX endpoints:
 
 ### avax.getAtomicTx
 
-Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned transaction. Can be either `cb58` or `hex`. Defaults to `cb58`.
+Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned transaction. Can only be `hex` when a value is provided.
 
 #### Signature
 
@@ -233,7 +233,7 @@ avax.getAtomicTx({
 **Request**
 
 - `txID` is the transacion ID. It should be in cb58 format.
-- `encoding` is the encoding format to use. Can be either `cb58` or `hex`. Defaults to `cb58`.
+- `encoding` is the encoding format to use. Can only be `hex` when a value is provided.
 
 **Response**
 
@@ -250,7 +250,7 @@ curl -X POST --data '{
     "method" :"avax.getAtomicTx",
     "params" :{
         "txID":"2GD5SRYJQr2kw5jE73trBFiAgVQyrCaeg223TaTyJFYXf2kPty",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
@@ -261,8 +261,8 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "tx": "111111115k3oJsP1JGxvsZPFh1WXzSYNVDtvgvZ4qDWtAs5ccogA1RtT3Me5x8xgkj7cyxaNGEHuMv5U34qo94fnvHweLeSRf31ggt3MoD7MHSDw6LbiXeaJa3uwBDHzd6tPxw17478X13Ff7DkHtbWYYx2WTcJYk4nVP2swCHjBE3uQjmu6RdhtgZCxvnD6YVpEsXqvam6cDzpf5BLaosYCSt5p8SmLU2ppaSb6DPA4EW4679ygUxiDNP3SFagjUvzSrfBJRFCzsan4ZJqH8haYqpJL42TUN4q3eFKvscZfp2v2WWEEwJYmJP4Nc1P7wndeMxPFEm3vjkBaVUZ5k25TpYtghq6Kx897dVNaMSsTAoudwqTR1cCUGiR3bLfi82MgnvuApsYqtRfaD9deSHc8UA1ohPehkj9eaY",
-    "encoding": "cb58",
+    "tx": "0x000000000000000030399d0775f450604bd2fbc49ce0c5c1c6dfeb2dc2acb8c92c26eeae6e6df4502b19d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000018212d6807a0ec9c1b26321418fe7a548180b5be728ce53fe7e98ab5755ed316100000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000003a352a382400000000100000000000000018db97c7cece249c2b98bdc0226cc4c2a57bf52fc000003a3529edd17dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000010000000900000001ead19377f015422fbb8731204fcf6d6879dd05146c2d5b5594e2fea2cb420b2f40bd457b71e279e547790b28fe5482f278c76cf39b2dce5c2e6c53352fe6827d002cc7d20d",
+    "encoding": "hex",
     "blockHeight": "1"
   },
   "id": 1
@@ -270,6 +270,10 @@ curl -X POST --data '{
 ```
 
 ### avax.export
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
@@ -323,6 +327,10 @@ curl -X POST --data '{
 ```
 
 ### avax.exportAVAX
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 **DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
@@ -383,6 +391,10 @@ curl -X POST --data '{
 ```
 
 ### avax.exportKey
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
 
@@ -469,7 +481,7 @@ avax.getUTXOs(
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 - When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 - When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-- `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
+- `encoding` sets the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example**
 
@@ -487,7 +499,7 @@ curl -X POST --data '{
             "address": "C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
             "utxo": "22RXW7SWjBrrxu2vzDkd8uza7fuEmNpgbj58CxBob9UbP37HSB"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
@@ -500,21 +512,25 @@ This gives response:
   "result": {
     "numFetched": "3",
     "utxos": [
-      "11QEQTor9xZ1TyCyq8aFVShdP7YjM1ug9KuPUuMpgvQVz5qjEzo244NbJomjciNUPqUr1cD455dXhVrVNopnMXTQrTFY5kqrEVAQ3Ng9AnapQrYVEYiWc32F5CQuD3N5sB1EhQmMdJr5pis1QLjMmRQmut7Maafwup1vEU",
-      "11Eo6c9iUz3ERtmHbdUb3nzzMaqFffFQStshEsSTiFQP5xqfmeaeCFHCBajmoJUdQRHtkChGAmPucDfuCyBAEyGmmv2w8b7dX5sATxV7HxHZE4eak14GMGVEr7v3ij1B8mE82cymTJJz1X3PpRk2pTaxwEnLWfh1aAiTFC",
-      "118mpEHsia5sYYvKUx4j56mA7i1yvmLNyynm7LcmehcJJwMVY65smT4kGQgyc9DULwuaLTrUcsqbQutCdajoJXBdPVqvHMkYBTYQKs7WSmTXH8v7iUVqZfphMnS7VxVjGU1zykeTnbuAoZt4cFMUJzd8JaZk5eC82zmLmT"
+      "0x0000a799e7448acf74ca9223159a04f93b948f99cf28509f908839532b2f85baffc300000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c22d23171",
+      "0x00006385c683d43bdbe754c224be36c5004ea7ce49c0849cadeaea6af93dae18cc7700000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29cb81cc877",
+      "0x000038137283c94582351b86c3e90808312636769e3f5c14fbf1152d6634f770695c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c7412490e"
     ],
     "endIndex": {
       "address": "C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
-      "utxo": "27q6nsuvtyT4mvXVnQQAXw1YKoTxCow5Qm91GZ678TU1SvUiC2"
+      "utxo": "0x9333ef8a05f26acf2d8766f94723f749870fa2ca80c19c33cc945d79013d7c50fd023beb"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
 ```
 
 ### avax.import
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
@@ -571,6 +587,10 @@ curl -X POST --data '{
 ```
 
 ### avax.importAVAX
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 **DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
@@ -630,6 +650,10 @@ curl -X POST --data '{
 
 ### avax.importKey
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Give a user control over an address by providing the private key that controls the address.
 
 #### Signature
@@ -679,7 +703,7 @@ curl -X POST --data '{
 
 ### avax.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
 
 #### **Signature**
 
@@ -700,8 +724,9 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avax.issueTx",
     "params" :{
-        "tx":"111Bit5JNASbJyTLrd2kWkYRoc96swEWoWdmEhuGAFK3rCAyTnTzomuFwgx1SCUdUE71KbtXPnqj93KGr3CeftpPN37kVyqBaAQ5xaDjr7wVBTUYi9iV7kYJnHF61yovViJF74mJJy7WWQKeRMDRTiPuii5gsd11gtNahCCsKbm9seJtk2h1wAPZn9M1eL84CGVPnLUiLP",
-        "encoding": "cb58"
+        "tx":"0x00000009de31b4d8b22991d51aa6aa1fc733f23a851a8c9400000000000186a0000000005f041280000000005f9ca900000030390000000000000001fceda8f90fcb5d30614b99d79fc4baa29307762668f16eb0259a57c2d3b78c875c86ec2045792d4df2d926c40f829196e0bb97ee697af71f5b0a966dabff749634c8b729855e937715b0e44303fd1014daedc752006011b730",
+        "encoding": "hex"
+
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
@@ -783,7 +808,7 @@ Sets the log level of the C-Chain.
 #### **Signature**
 
 ```text
-admin.setLogLevel({level:string}) -> {success:bool}
+admin.setLogLevel({level:string}) -> {}
 ```
 
 - `level` is the log level to be set.
@@ -807,9 +832,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -820,7 +843,7 @@ Starts a CPU profile.
 #### **Signature**
 
 ```text
-admin.startCPUProfiler() -> {success:bool}
+admin.startCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -840,9 +863,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -853,7 +874,7 @@ Stops and writes a CPU profile.
 #### **Signature**
 
 ```text
-admin.stopCPUProfiler() -> {success:bool}
+admin.stopCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -873,9 +894,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -886,7 +905,7 @@ Runs and writes a memory profile.
 #### **Signature**
 
 ```text
-admin.memoryProfile() -> {success:bool}
+admin.memoryProfile() -> {}
 ```
 
 #### **Example Call**
@@ -906,9 +925,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -919,7 +936,7 @@ Runs a mutex profile writing to the `coreth_performance_c` directory.
 #### **Signature**
 
 ```text
-admin.lockProfile() -> {success:bool}
+admin.lockProfile() -> {}
 ```
 
 #### **Example Call**
@@ -939,8 +956,6 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```

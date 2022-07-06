@@ -1,6 +1,6 @@
 # Create an EVM Subnet on a Local Network
 
-To learn how to develop a subnet, the first step is to create a local subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
+To learn how to develop a Subnet, the first step is to create a local Subnet so that you can experience it freely without too much constraints. [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) provides such a utility.
 
 :::info
 
@@ -41,7 +41,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 
 ## Quickstart
 
-After installing, launch your own custom subnet:
+After installing, launch your own custom Subnet:
 
 ```bash
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
@@ -63,10 +63,23 @@ Restart your local deployment (from where you left off) with:
 avalanche network start
 ```
 
+### Docker
+
+To make Avalanche CLI working in a docker, add this
+
+```json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "fd00::/80"
+}
+```
+
+to `/etc/docker/daemon.json` on the host, then restart the docker service. This is because ipv6 is used to resolve local bootstrap IPs, and it is not enabled on a docker container by default.
+
 ### Currently Supported Functionality
 
 - Creation of Subnet-EVM configs
-- Local deployment of Subnet-EVM based subnets
+- Local deployment of Subnet-EVM based Subnets
 
 ### Notable Missing Features
 
@@ -74,19 +87,19 @@ avalanche network start
 
 ## Subnet
 
-The subnet command suite provides a collection of tools for developing and deploying subnets.
+The Subnet command suite provides a collection of tools for developing and deploying Subnets.
 
-To get started, use the `avalanche subnet create` command wizard to walk through the configuration of your very first subnet. Then, go ahead and deploy it with the `avalanche subnet deploy` command. You can use the rest of the commands to manage your subnet configurations.
+To get started, use the `avalanche subnet create` command wizard to walk through the configuration of your very first Subnet. Then, go ahead and deploy it with the `avalanche subnet deploy` command. You can use the rest of the commands to manage your subnet configurations.
 
 ### Subnet-EVM
 
-Subnet-EVM is a configurable Ethereum virtual machine designed for subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out the [github project](https://github.com/ava-labs/subnet-evm).
+Subnet-EVM is a configurable Ethereum virtual machine designed for Subnets. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, check out the [github project](https://github.com/ava-labs/subnet-evm).
 
 ### Create a Custom Subnet Configuration
 
 `avalanche subnet create <subnetName>`
 
-If you don't provide any arguments, the subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about subnet configuration [here](./customize-a-subnet.md).
+If you don't provide any arguments, the Subnet creation wizard will walk you through the entire process. This will create a genesis file for your network. It contains all of the information you need to airdrop tokens, set a gas config, and enable any custom precompiles. You can read more about Subnet configuration [here](./customize-a-subnet.md).
 
 Example:
 
@@ -104,13 +117,13 @@ The wizard won't customize every aspect of the Subnet-EVM genesis for you. If yo
 
 One special note: Every EVM-based chain has a parameter called the `chainId`. When choosing a `chainId` for your network, you should choose a unique value. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
-By default, creating a subnet configuration with the same subnetName as one that already exists will fail. To overwrite an existing config, use the force flag:
+By default, creating a Subnet configuration with the same subnetName as one that already exists will fail. To overwrite an existing config, use the force flag:
 
 `avalanche subnet create <existingSubnetName> -f`
 
 ### View Created Subnet Configurations
 
-You can list the subnets you've created with
+You can list the Subnets you've created with
 
 `avalanche subnet list`
 
@@ -271,7 +284,7 @@ Example:
 
 ### Deploying Subnets Locally
 
-Currently, this tool only supports local subnet deploys. Fuji and Mainnet deploys will be arriving shortly.
+Currently, this tool only supports local Subnet deploys. Fuji and Mainnet deploys will be arriving shortly.
 
 To deploy, run
 
@@ -310,23 +323,23 @@ To manage that network, see [the `avalanche network` command tree](#network).
 
 ### Deploying to Fuji
 
-If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your subnet.
+If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your Subnet.
 
-First, export your subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
+First, export your Subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
 
 ### Delete a Subnet Configuration
 
-To delete a created subnet configuration, run
+To delete a created Subnet configuration, run
 
 `avalanche subnet delete <subnetName>`
 
 ## Network
 
-The network command suite provides a collection of tools for managing local subnet deployments.
+The network command suite provides a collection of tools for managing local Subnet deployments.
 
-When a subnet is deployed locally, it runs on a local, multi-node Avalanche network. Deploying a subnet locally will start this network in the background. This command suite allows you to shutdown and restart that network.
+When a Subnet is deployed locally, it runs on a local, multi-node Avalanche network. Deploying a Subnet locally will start this network in the background. This command suite allows you to shutdown and restart that network.
 
-This network currently supports multiple, concurrently deployed subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
+This network currently supports multiple, concurrently deployed Subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
 
 ### Stopping the Local Network
 
@@ -334,7 +347,7 @@ To stop a running local network, run
 
 `avalanche network stop [snapshotName]`
 
-This graceful shutdown will preserve network state. When restarted, your subnet should resume at the same place it left off.
+This graceful shutdown will preserve network state. When restarted, your Subnet should resume at the same place it left off.
 `snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
 If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
 
@@ -355,9 +368,9 @@ To start or restart a stopped network, run
 `snapshotName` is optional, if provided the named snapshot will be used to start the network (if found).
 If not provided, the last snapshot created with a unnamed `stop` will be used.
 
-If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no subnet has been deployed yet), the command will fail.
+If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no Subnet has been deployed yet), the command will fail.
 
-Deploying a subnet locally will start the network automatically.
+Deploying a Subnet locally will start the network automatically.
 
 Example:
 
@@ -380,7 +393,7 @@ To stop your local network and clear its state, run
 
 `avalanche network clean`
 
-This will delete all stored deploy state for all local subnet deployments. This will not delete any of your subnet configurations. You will need to redeploy your subnet configurations one by one to use them again.
+This will delete all stored deploy state for all local Subnet deployments. This will not delete any of your Subnet configurations. You will need to redeploy your Subnet configurations one by one to use them again.
 
 Example:
 
@@ -392,7 +405,7 @@ Process terminated.
 
 ### Checking Network Status
 
-If you'd like to determine whether or not a local Avalanche network is running on your macine, run
+If you'd like to determine whether or not a local Avalanche network is running on your machine, run
 
 `avalanche network status`
 
@@ -416,7 +429,7 @@ Here is a screenshot of Metamask when everything is set correctly:
 
 ## Smart Contract
 
-You can use this newly created subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use this newly created Subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 
 For example: to connect `Hardhat` to the local network that deployed with the Avalanche-CLI, we would create a network setting in `hardhat.config.ts` that looks similar to this:
 

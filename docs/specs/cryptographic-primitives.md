@@ -1,4 +1,3 @@
-
 # Cryptographic Primitives
 
 [Avalanche](../../#avalanche) uses a variety of cryptographic primitives for its different functions. This file summarizes the type and kind of cryptography used at the network and blockchain layers.
@@ -35,10 +34,10 @@ Avalanche uses the convention `chainID-address` to specify which chain an addres
 
 Addresses on the X-Chain and P-Chain use the [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) standard outlined in [BIP 0173](https://en.bitcoin.it/wiki/BIP_0173). There are four parts to a Bech32 address scheme. In order of appearance:
 
-* A human-readable part (HRP). On mainnet this is `avax`.
-* The number `1`, which separates the HRP from the address and error correction code.
-* A base-32 encoded string representing the 20 byte address.
-* A 6-character base-32 encoded error correction code.
+- A human-readable part (HRP). On mainnet this is `avax`.
+- The number `1`, which separates the HRP from the address and error correction code.
+- A base-32 encoded string representing the 20 byte address.
+- A 6-character base-32 encoded error correction code.
 
 Additionally, an Avalanche address is prefixed with the alias of the chain it exists on, followed by a dash. For example, X-Chain addresses are prefixed with `X-`.
 
@@ -130,4 +129,3 @@ Avalanche nodes support the full Ethereum Virtual Machine (EVM) and precisely du
 ## Cryptography in Other Virtual Machines
 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
-

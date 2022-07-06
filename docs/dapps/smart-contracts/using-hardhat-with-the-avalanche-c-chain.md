@@ -223,13 +223,13 @@ npx hardhat balances --network local
 0x0Fa8EA536Be85F32724D57A37758761B86416123 has balance 1000010000000000000000
 ```
 
-Note: If you see `Error HH108: Cannot connect to the network local. Please make sure your node is running, and check your internet connection and networks config`, ensure that you are using a valid Node Port. See which ports the Nodes are using by running the command: 
+Note: If you see `Error HH108: Cannot connect to the network local. Please make sure your node is running, and check your internet connection and networks config`, ensure that you are using a valid Node Port. See which ports the Nodes are using by running the command:
 
 ```text
 $ cd /path/to/avalanche-network-runner
-$ avalanche-network-runner control uris \ 
+$ avalanche-network-runner control uris \
 --log-level debug \
---endpoint="0.0.0.0:8080"  
+--endpoint="0.0.0.0:8080"
 ```
 
 ### Compile Smart Contracts
@@ -445,4 +445,3 @@ We've succesfully transfered 5 tokes from `accounts[1]` to `accounts[0]`
 Now you have the tools you need to launch a local Avalanche network, create a Hardhat project, as well as create, compile, deploy and interact with Solidity contracts.
 
 Join our [Discord Server](https://chat.avax.network) to learn more and ask any questions you may have.
-
