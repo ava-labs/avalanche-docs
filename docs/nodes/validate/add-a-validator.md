@@ -10,7 +10,7 @@ The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-t
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which Subnets, which blockchains exist, and which Subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
-:::danger
+:::warning
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, feel free to join our [Discord](https://chat.avalabs.org/) to ask questions.
 :::
 
