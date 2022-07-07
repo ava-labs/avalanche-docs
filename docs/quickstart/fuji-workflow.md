@@ -100,8 +100,8 @@ for (let i: number = 0; i <= 2; i++) {
   // Deriving the _i_th external BIP44 C-Chain address
   const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
   keyChain.importKey(child.privateKey)
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
   // Converting the BIP44 addresses to hexadecimal addresses
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
   privateKeys.push(child.privateKey.toString("hex"))
   cAddresses.push(cchainAddress)
 }
