@@ -260,7 +260,7 @@ avalanche-network-runner control restart-node \
 
 #### add a node
 
-In this example we are adding a node named `node1`.
+In this example we are adding a node named `node99`.
 
 ```bash
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
