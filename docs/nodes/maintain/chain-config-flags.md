@@ -39,13 +39,13 @@ The default C-Chain config is:
   "coreth-admin-api-enabled": false,
   "coreth-admin-api-dir": "",
   "eth-apis": [
-    "public-eth",
-    "public-eth-filter",
+    "eth",
+    "eth-filter",
     "net",
     "web3",
-    "internal-public-eth",
-    "internal-public-blockchain",
-    "internal-public-transaction-pool"
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction-pool"
   ],
   "continuous-profiler-dir": "",
   "continuous-profiler-frequency": 900000000000,
@@ -120,7 +120,7 @@ Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
 
 #### `eth-apis` ([]string):
 
-Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
 :::note
 
@@ -128,14 +128,14 @@ If you populate this field, it will override the defaults so you must include ev
 
 :::
 
-#### `public-eth`:
+#### `eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 `eth_coinbase`
 `eth_etherbase`
 
-#### `public-eth-filter`:
+#### `eth-filter`:
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
@@ -153,24 +153,19 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 - `eth_getFilterLogs`
 - `eth_getFilterChanges`
 
-#### `private-admin`:
+#### `admin`:
 
 Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 - `admin_importChain`
 - `admin_exportChain`
 
-#### `public-debug`:
+#### `debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 - `debug_dumpBlock`
 - `debug_accountRange`
-
-#### `private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
 - `debug_preimage`
 - `debug_getBadBlocks`
 - `debug_storageRangeAt`
@@ -208,7 +203,7 @@ Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 - `web3_clientVersion`
 - `web3_sha3`
 
-#### `internal-public-eth`:
+#### `internal-eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -217,7 +212,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_maxPriorityFeePerGas`
 - `eth_feeHistory`
 
-#### `internal-public-blockchain`:
+#### `internal-blockchain`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -240,7 +235,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_estimateGas`
 - `eth_createAccessList`
 
-#### `internal-public-transaction-pool`:
+#### `internal-transaction`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -262,7 +257,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_pendingTransactions`
 - `eth_resend`
 
-#### `internal-public-tx-pool`:
+#### `internal-tx-pool`:
 
 Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
@@ -271,28 +266,23 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 - `txpool_status`
 - `txpool_inspect`
 
-#### `internal-public-debug`:
+#### `internal-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 - `debug_getHeaderRlp`
 - `debug_getBlockRlp`
 - `debug_printBlock`
-
-#### `internal-private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
-#### `internal-public-account`:
+#### `internal-account`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 - `eth_accounts`
 
-#### `internal-private-personal`:
+#### `internal-personal`:
 
 Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 

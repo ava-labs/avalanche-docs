@@ -82,7 +82,7 @@ To re-bootstrap the node, stop it, delete the database (by default stored in `~/
 
 #### Running a Node in Debug Mode
 
-By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `public-debug`, `private-debug`, `debug-tracer`, `internal-public-debug` and `internal-private-debug` APIs.
+By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `debug`, `debug-tracer`, and `internal-debug` APIs.
 
 :::note
 Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
@@ -95,18 +95,16 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 ```json
 {
   "eth-apis": [
-    "public-eth",
-    "public-eth-filter",
+    "eth",
+    "eth-filter",
     "net",
     "web3",
-    "internal-public-eth",
-    "internal-public-blockchain",
-    "internal-public-transaction-pool",
-    "public-debug",
-    "private-debug",
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction",
+    "debug",
     "debug-tracer",
-    "internal-public-debug",
-    "internal-private-debug"
+    "internal-debug",
   ],
   "pruning-enabled": false
 }
