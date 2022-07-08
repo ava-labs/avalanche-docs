@@ -78,9 +78,6 @@ console.log(cAddresses)
 //   '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
 // ]
 ```
-
-**Note** that we're using `keyChain` which has been defined as a new instance of a `C Chain KeyChain`. Another example of creating an empty keychain can be seen in [this example AvalancheJS script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/newKeyChain.ts). There are links to dozens of AvalancheJS examples in [the resources listed below](fuji-workflow.md#resources).
-
 #### Generate private keys from a mnemonic
 
 As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
@@ -91,7 +88,7 @@ For example, if you want to generate the private keys for the first 3 address in
 - [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C)
 - [0xa14dFb7d8593c44a47A07298eCEA774557036ff3](https://testnet.snowtrace.io/address/0xa14dFb7d8593c44a47A07298eCEA774557036ff3)
 
-you might add the following to the example script above:
+you might update the example script above to the following:
 
 ```typescript
 const cAddresses: string[] = []
@@ -142,7 +139,7 @@ We can also use the Fuji Explorer to get the balance for the 1st address—[0x2d
 
 ![1st derived address balance](/img/faucet-fuji-wf-alt-balance.png)
 
-Alternatively, we can use ethersJS to get the balance.
+Alternatively, we can use [ethersJS](https://docs.ethers.io/v5/) to get the balance.
 
 ```typescript
 const ethers = require("ethers")
