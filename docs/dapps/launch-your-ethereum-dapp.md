@@ -104,7 +104,7 @@ An example C-Chain config file that includes the archival mode, enables debug AP
     "internal-transaction",
     "debug",
     "debug-tracer",
-    "internal-debug",
+    "internal-debug"
   ],
   "pruning-enabled": false
 }
