@@ -373,6 +373,71 @@ interface NativeMinterInterface {
 
 _Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used together._
 
+### Configuring Dynamic Fees
+
+You can configure the parameters of the dynamic fee algorithm on chain using the `FeeConfigManager`. In order to activate this feature, you will need to provide the `FeeConfigManager` in the genesis:
+
+```json
+{
+  "config": {
+    "feeManagerConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+    }
+  }
+}
+```
+
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions) above.
+
+The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+
+The FeeConfigManager implements the following interface:
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
+
+interface IFeeManager is IAllowList {
+  // Set fee config fields to contract storage
+  function setFeeConfig(
+    uint256 gasLimit,
+    uint256 targetBlockRate,
+    uint256 minBaseFee,
+    uint256 targetGas,
+    uint256 baseFeeChangeDenominator,
+    uint256 minBlockGasCost,
+    uint256 maxBlockGasCost,
+    uint256 blockGasCostStep
+  ) external;
+
+  // Get fee config from the contract storage
+  function getFeeConfig()
+    external
+    view
+    returns (
+      uint256 gasLimit,
+      uint256 targetBlockRate,
+      uint256 minBaseFee,
+      uint256 targetGas,
+      uint256 baseFeeChangeDenominator,
+      uint256 minBlockGasCost,
+      uint256 maxBlockGasCost,
+      uint256 blockGasCostStep
+    );
+
+  // Get the last block number changed the fee config from the contract storage
+  function getFeeConfigLastChangedAt() external view returns (uint256 blockNumber);
+}
+```
+
+In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
+
+* `getFeeConfig` - retrieves the current dynamic fee config
+* `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
+* `setFeeConfig` - sets the dynamic fee config on chain (see [here](https://docs.avax.network/subnets/customize-a-subnet#fee-config) for details on the fee config parameters)
+
 ### Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
