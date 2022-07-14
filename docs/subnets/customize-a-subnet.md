@@ -388,7 +388,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 }
 ```
 
-The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions) above.
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
 
 The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
@@ -436,7 +436,7 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
-- `setFeeConfig` - sets the dynamic fee config on chain (see [here](https://docs.avax.network/subnets/customize-a-subnet#fee-config) for details on the fee config parameters)
+- `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
 ### Examples
 
