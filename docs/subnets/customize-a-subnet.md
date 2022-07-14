@@ -434,9 +434,9 @@ interface IFeeManager is IAllowList {
 
 In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
 
-* `getFeeConfig` - retrieves the current dynamic fee config
-* `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
-* `setFeeConfig` - sets the dynamic fee config on chain (see [here](https://docs.avax.network/subnets/customize-a-subnet#fee-config) for details on the fee config parameters)
+- `getFeeConfig` - retrieves the current dynamic fee config
+- `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
+- `setFeeConfig` - sets the dynamic fee config on chain (see [here](https://docs.avax.network/subnets/customize-a-subnet#fee-config) for details on the fee config parameters)
 
 ### Examples
 
