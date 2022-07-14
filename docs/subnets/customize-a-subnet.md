@@ -392,8 +392,6 @@ The FeeConfigManager implements the FeeManager interface which includes the same
 
 The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
-The FeeConfigManager implements the following interface:
-
 ```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
