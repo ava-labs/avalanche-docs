@@ -1321,7 +1321,7 @@ As you can also see from the comments of the relayer file. There are different w
 
 In this video on the left terminal I am using our custom scripts to interact with chains and on the right terminal I am using our relay to create the cross chain communication.
 
-https://user-images.githubusercontent.com/65618011/177062973-b6561d79-79df-47af-ae3e-5368ab38e1c0.mov
+![Test relayer with scripts](./assets/howToTestRelayerWithScripts.mov)
 
 ##### What happens on the video?
 
@@ -1338,7 +1338,7 @@ https://user-images.githubusercontent.com/65618011/177062973-b6561d79-79df-47af-
 
 #### Test relayer for old events
 
-https://user-images.githubusercontent.com/65618011/177063396-d5f42da1-8224-42bd-bff7-0086e963fcb9.mov
+![Test relayer for old events](./assets/howToTestRelayerForOldEvents.mov)
 
 ##### What happens on the video?
 
