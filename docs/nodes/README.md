@@ -27,6 +27,7 @@ This section provides documents on how to build and maintain an AvalancheGo node
 | [**Chain Configs**](./maintain/chain-config-flags.md)                            | Chain specific configurations                               |
 | [**Subnet Configs**](./maintain/subnet-configs.md)                               | Subnet specific configurations                              |
 | [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md)             | C-Chain offline pruning                                     |
+| [**AvalancheGo Node Tools**](./maintain/tools-list.md)                           | AvalancheGo Node Tools                                      |
 
 ## Validate
 

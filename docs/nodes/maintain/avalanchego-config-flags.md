@@ -346,7 +346,7 @@ Frequency at which this node resolves/updates its public IP and renew NAT mappin
 
 #### `--public-ip-resolution-service` (string):
 
-Only acceptable values are `ifconfigco`, `opendns` or `ifconfigme`. When provided, the node will use that service to periodically resolve/update its public IP.
+Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`. When provided, the node will use that service to periodically resolve/update its public IP.
 
 ## Signature Verification
 
