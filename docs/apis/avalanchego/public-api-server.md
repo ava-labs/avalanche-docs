@@ -28,6 +28,8 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md) and [C-Chain](./apis/c-chain.md). For a full list of available APIs see [here](./apis/README.md).
 
+C-Chain on the public API servers has the archival mode enabled, similar to that of an Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) to which you can send archival API requests.
+
 :::info
 The public API only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
 
