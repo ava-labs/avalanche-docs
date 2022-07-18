@@ -67,7 +67,7 @@ This is a tool to run and interact with a local Avalanche network.
 
 Related docs
 
-- [Avalanche Network Runner](../quickstart/network-runner.md)
+- [Avalanche Network Runner](../subnets/network-runner.md)
 
 ## Avalanche Developer Docs
 

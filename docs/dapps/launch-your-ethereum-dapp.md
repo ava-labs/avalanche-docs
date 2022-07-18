@@ -118,7 +118,7 @@ Default config values for the C-Chain can be seen [here](../nodes/maintain/chain
 
 If you need a private test network to test your dapp, [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-For more information, see [documentation](../quickstart/network-runner.md).
+For more information, see [documentation](../subnets/network-runner.md).
 
 ## Developing and Deploying Contracts
 

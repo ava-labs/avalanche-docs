@@ -6,7 +6,7 @@ This tutorial explains several methods of creating a local test network.
 
 There are currently two options to launch such a local network:
 
-- Using the [Avalanche Network Runner](../quickstart/network-runner.md) (recommended)
+- Using the [Avalanche Network Runner](../subnets/network-runner.md) (recommended)
 - Manually starting each AvalancheGo node (not recommended)
 
 ## Avalanche Network Runner
@@ -218,7 +218,7 @@ Response
 
 Now you have a 5-nodes network with HTTP ports (where API calls should be sent) `30301`, `31072`, `37730`, `40108` , and `64470`.
 
-Please refer to the dedicated [Avalanche Network Runner documentation](./network-runner.md) for more information.
+Please refer to the dedicated [Avalanche Network Runner documentation](../subnets/network-runner.md) for more information.
 
 ## Manually
 
