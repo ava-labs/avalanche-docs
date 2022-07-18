@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](../quickstart/network-runner.md) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](../subnets/network-runner.md) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
 
 In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
 
@@ -78,6 +78,7 @@ console.log(cAddresses)
 //   '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
 // ]
 ```
+
 #### Generate private keys from a mnemonic
 
 As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
