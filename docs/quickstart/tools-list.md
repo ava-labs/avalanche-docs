@@ -39,7 +39,7 @@ Document: [Avalanche Network Runner](../subnets/network-runner.md)
 
 ## Avalanche Plugin Manager (APM)
 
-Avalanche Plugin Manager (**APM**) is a command-line tool to manage virtual machines binaries on existing avalanchego instances. It enables to add/remove node to subnets, upgrade the VM plugin binaries as new versions get released to the plugin repository.
+Avalanche Plugin Manager (**APM**) is a command-line tool to manage virtual machines binaries on existing avalanchego instances. It enables to add/remove nodes to subnets, upgrade the VM plugin binaries as new versions get released to the plugin repository.
 
 Github: [https://github.com/ava-labs/apm](https://github.com/ava-labs/apm)
 
