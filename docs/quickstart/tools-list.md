@@ -9,7 +9,7 @@ AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on your
 
 Github: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
 
-Document: [Run an Avalanche Node Using the Install Script](../../nodes/build/set-up-node-with-installer.md)
+Document: [Run an Avalanche Node Using the Install Script](../nodes/build/set-up-node-with-installer.md)
 
 ## Avalanche CLI
 
@@ -17,7 +17,7 @@ Avalanche CLI is a command line tool that gives developers access to everything 
 
 Github: [https://github.com/ava-labs/avalanche-cli](https://github.com/ava-labs/avalanche-cli)
 
-Document: [Create an EVM Subnet on a Local Network](../../subnets/create-a-local-subnet.md)
+Document: [Create an EVM Subnet on a Local Network](../subnets/create-a-local-subnet.md)
 
 ## Subnet CLI
 
@@ -25,7 +25,7 @@ Subnet CLI is command-line interface to manage Avalanche Subnets.
 
 Github: [https://github.com/ava-labs/subnet-cli](https://github.com/ava-labs/subnet-cli)
 
-Document: [Subnet CLI](../../subnets/subnet-cli.md)
+Document: [Subnet CLI](../subnets/subnet-cli.md)
 
 ## Avalanche Network Runner (ANR)
 
@@ -33,7 +33,7 @@ The Avalanche Network Runner **(ANR)** allows a user to define, create and inter
 
 Github: [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
 
-Document: [Avalanche Network Runner](../../quickstart/network-runner.md)
+Document: [Avalanche Network Runner](../subnets/network-runner.md)
 
 ## Avalanche Plugin Manager (APM)
 

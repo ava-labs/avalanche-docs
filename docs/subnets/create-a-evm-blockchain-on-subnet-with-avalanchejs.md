@@ -64,7 +64,7 @@ You can directly build the `subnet-evm` binary inside the plugins folder as well
 
 ## Setting up Local Avalanche Network
 
-For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../quickstart/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
+For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 ### Clone Avalanche Network Runner
 
