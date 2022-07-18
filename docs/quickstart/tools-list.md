@@ -1,6 +1,15 @@
-# AvalancheGo Node Tools
+# Tools and Utilities
 
-Here is a list of tools related to AvalancheGo nodes. Please check each tool for its applicability as we are actively working on them.
+There are a number of tools for managing your node and developing Subnets. This
+page lists the most popular ones and explains what they do.
+
+## AvalancheGo Installer
+
+AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+
+Github: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
+
+Document: [Run an Avalanche Node Using the Install Script](../../nodes/build/set-up-node-with-installer.md)
 
 ## Avalanche CLI
 
@@ -32,7 +41,7 @@ Avalanche Plugin Manager (APM) is a command-line tool to manage virtual machines
 
 Github: [https://github.com/ava-labs/apm](https://github.com/ava-labs/apm)
 
-## avalanche-plugins-core
+### avalanche-plugins-core
 
 `avalanche-plugins-core` is plugin repository that ships with the `apm`. A plugin repository consists of a set of virtual machine and subnet definitions that the `apm` consumes to allow users to quickly and easily download and manage VM binaries.
 
@@ -43,11 +52,3 @@ Github: [https://github.com/ava-labs/avalanche-plugins-core](https://github.com/
 A single command to launch Avalanche nodes from scratch that joins any network of choice (e.g., test, fuji, main) or create a custom Avalanche network. Provisions all resources required to run a node or network with recommended setups (configurable).
 
 Github: [https://github.com/ava-labs/avalanche-ops](https://github.com/ava-labs/avalanche-ops)
-
-## Avalanchego Installer
-
-Avalanchego Installer is a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
-
-Github: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
-
-Document: [Run an Avalanche Node Using the Install Script](../../nodes/build/set-up-node-with-installer.md)
