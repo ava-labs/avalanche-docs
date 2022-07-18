@@ -11,4 +11,4 @@
 | [**Adjusting Gas Price During High Network Activity**](adjusting-gas-price-during-high-network-activity.md)               | Adjusting Gas Price During High Network Activity                         |
 | [**Sending Transactions with Dynamic Fees using Javascript**](sending-transactions-with-dynamic-fees-using-javascript.md) | Sending Transactions with Dynamic Fees using Javascript                  |
 | [**C-Chain Exchange Integration**](./integrate-exchange-with-avalanche.md)                                                | Guidelines for exchange integration with Ethereum-compatible C-Chain     |
-| [**Tools and Utilities**](./tools-listmd)                                                                                 | Collection of popular tools for maintaining nodes and developing Subnets |
+| [**Tools and Utilities**](./tools-list.md)                                                                                | Collection of popular tools for maintaining nodes and developing Subnets |
