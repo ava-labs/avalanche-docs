@@ -33,7 +33,7 @@ To build avalanche-cli you have to first install golang. Follow the instructions
 
 After downloading golang, to download avalanche-cli's latest version, run:
 
-```
+```bash
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
@@ -41,8 +41,8 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 
 To add avalanche to PATH, run:
 
-```
-cd bin
+```bash
+cd bin;\
 export PATH=$PWD:$PATH
 ```
 
@@ -52,7 +52,7 @@ export PATH=$PWD:$PATH
 
 To download the binary to a specific directory, run:
 
-```
+```bash
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b <relative-directory>
 ```
 
@@ -80,7 +80,7 @@ To add avalanche command to your path:
 
 To create the subnet, run:
 
-```
+```bash
 avalanche subnet create <subnetName>
 ```
 
@@ -99,13 +99,13 @@ You have successfully created the genesis file for your subnet. You can read mor
 
 To see details about the subnet, run:
 
-```
+```bash
 avalanche subnet describe <subnetName>
 ```
 
 To see the genesis file directly, run:
 
-```
+```bash
 avalanche subnet describe <subnetName> --genesis
 ```
 
@@ -113,13 +113,13 @@ avalanche subnet describe <subnetName> --genesis
 
 To deploy the subnet locally, run:
 
-```
+```bash
 avalanche subnet deploy <subnetName> -l
 ```
 
 After a successful deployment, an example of what you would see:
 
-```
+```text
 Network ready to use. Local network node endpoints:
 Endpoint at node node4 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
 Endpoint at node node5 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:61314/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
@@ -141,7 +141,7 @@ Important thing to keep in mind is that, now that you have deployed your subnet 
 
 To stop running the subnet, you could run:
 
-```
+```bash
 avalanche network stop
 ```
 
@@ -149,7 +149,7 @@ avalanche network stop
 
 To start running the subnet, you could run:
 
-```
+```bash
 avalanche network start
 ```
 
@@ -165,7 +165,7 @@ Firstly, we will be adding our subnet to [metamask](https://metamask.io/). To ad
 
 Example Values:
 
-```
+```text
 Network Name: <subnetName>
 New RPC URL: http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
 ChainID: 676767
@@ -188,7 +188,7 @@ If you followed the exact steps in this tutorial, you would see that your balanc
 
 To interact with the subnet using Hardhat, refer to [Using Hardhat with the Avalanche C-Chain](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain). It is very similar to interacting with C-Chain. You only have to change `hardhat.config.ts` file. Inside that file, find the exported js object and inside of it find `networks`. Add a new network which will be your subnet.
 
-```
+```typescript
 subnet: {
   url: "<yourRpcUrl>",
   chainId: <yourChainId>,
@@ -198,7 +198,7 @@ subnet: {
 
 Example Values:
 
-```
+```typescript
 subnet: {
   url: "http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc",
   chainId: 676767,
@@ -206,10 +206,13 @@ subnet: {
 }
 ```
 
+Example Updated File: [hardhat.config.ts](./hardhat.config.ts.md)
+
 Now you can run any commands ran in the tutorial with `--network subnet` parameter
+
 Example command:
 
-```
+```bash
 yarn deploy --network subnet
 ```
 
