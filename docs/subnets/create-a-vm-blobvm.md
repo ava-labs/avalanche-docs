@@ -723,6 +723,7 @@ Whenever a transaction is submitted to VM, it first gets initialized, verified, 
 ```go
 vm.mempool.Add(tx)
 ```
+
 `Add` method of mempool is implemented in the [mempool.go](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go#L43) file. It has the following functions:
 
 - Verifies if the transaction ID exists in the mempool or not
@@ -753,6 +754,7 @@ During initialization of VM, [NewTimeBuilder](https://github.com/ava-labs/blobvm
 go vm.builder.Build()
 go vm.builder.Gossip()
 ```
+
 [Gossip()](https://github.com/ava-labs/blobvm/blob/master/vm/block_builder.go#L183) method initiates gossip of new transactions from the mempool at regular intervals as set initially by `vm.config.GossipInterval`.
 
 Functions of [Build()](https://github.com/ava-labs/blobvm/blob/master/vm/block_builder.go#L166) method:
@@ -1157,7 +1159,7 @@ Finally, it will return the block to the caller, which is the VM and hence the c
 
 [Storage](https://github.com/ava-labs/blobvm/blob/master/chain/storage.go) handles all the database operations like storing transactions, blocks, account balance, etc. Everything is stored as key-value pair for all types (block, transaction, balance, etc.) of data.
 
-We prefix different types of keys with a unique byte. For eg. the block identifier is prefixed with `0x0` and the transaction ID with `0x1`. Similarly, we have [prefix]() for other types as well. The prefix and original ID are separated by a `ByteDelimiter`. Prefixing is necessary for identifying the type of raw byte a particular key is pointing to.
+We prefix different types of keys with a unique byte. For eg. the block identifier is prefixed with `0x0` and the transaction ID with `0x1`. Similarly, we have [prefix](https://github.com/ava-labs/blobvm/blob/master/chain/storage.go#L29) for other types as well. The prefix and original ID are separated by a `ByteDelimiter`. Prefixing is necessary for identifying the type of raw byte a particular key is pointing to.
 
 ```go
 const (
@@ -1174,11 +1176,12 @@ const (
 ```
 
 We have 5 types of key-value pairs in total -
-* **Block** - For storing block data.
-* **Transaction** - For storing transaction ID.
-* **Transaction Value** - For storing transaction data i.e. the blob.
-* **Key** - For storing metadata of a blob like blob size, associated txID and timestamp.
-* **Balance** - For storing account balance.
+
+- **Block** - For storing block data.
+- **Transaction** - For storing transaction ID.
+- **Transaction Value** - For storing transaction data i.e. the blob.
+- **Key** - For storing metadata of a blob like blob size, associated txID and timestamp.
+- **Balance** - For storing account balance.
 
 Prefixing each type of data is handled in separate functions. For eg., block prefixing is handled [here](https://github.com/ava-labs/blobvm/blob/master/chain/storage.go#L47). It takes the `blockID` and returns something like `0x0/<blockID>` as a byte array.
 
@@ -1216,7 +1219,7 @@ func SetBalance(db database.KeyValueWriter, address common.Address, bal uint64) 
 
 - **ModifyBalance** - This function will modify the balance of an address depending upon the parameters `add` and `change`. It will simply perform the `SafeAdd` and `SafeSub` operation on the existing balance. `add` bool parameter indicates whether to add or subtract the `change` amount from the existing balance. Finally, it will call the `SetBalance` function with the updated amount.
 
-    It is called while executing the transactions. For transfer transactions, it will [reduce](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go#L39) the sender's balance and [increase](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go#L42) the receiver's balance. And for every transaction, it will be called to [reduce](https://github.com/ava-labs/blobvm/blob/master/chain/tx.go#L104) the fee from the sender.
+It is called while executing the transactions. For transfer transactions, it will [reduce](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go#L39) the sender's balance and [increase](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go#L42) the receiver's balance. And for every transaction, it will be called to [reduce](https://github.com/ava-labs/blobvm/blob/master/chain/tx.go#L104) the fee from the sender.
 
 ```go
 func ModifyBalance(db database.KeyValueReaderWriter, address common.Address, add bool, change uint64) (uint64, error) {
