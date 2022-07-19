@@ -6,7 +6,7 @@ If you are not familiar with subnets, virtual machines or similar terminology yo
 
 This tutorial's goal is to deploy and start a basic subnet in your local machine. So that you can interact with the subnet using [Remix](https://remix.ethereum.org/) and [Hardhat](https://hardhat.org/). In this tutorial we will be using [avalanche-cli](https://github.com/ava-labs/avalanche-cli) to create and deploy the subnet. If you ever encounter an error, refer to [Troubleshoot Common Issues](#troubleshoot-common-issues) section.
 
-> avalanche-cli is in beta version. So it might get updated fairly frequently. It is best to refer to the latest version from its [github page](https://github.com/ava-labs/avalanche-cli).
+:::info avalanche-cli is in beta version. So it might get updated fairly frequently. It is best to refer to the latest version from its [github page](https://github.com/ava-labs/avalanche-cli). :::
 
 If you want to customize your subnet you can refer to the optional [Customize the Subnet](#customize-the-subnet) section, while creating your subnet.
 
@@ -37,7 +37,7 @@ After downloading golang, to download avalanche-cli's latest version, run:
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-> This command will download the bin to the `./` (relative to where the command has run). To download in a custom location refer to [Installing in Custom Location](#installing-in-custom-location).
+:::note This command will download the bin to the `./` (relative to where the command has run). To download in a custom location refer to [Installing in Custom Location](#installing-in-custom-location). :::
 
 To add avalanche to PATH, run:
 
@@ -46,7 +46,7 @@ cd bin
 export PATH=$PWD:$PATH
 ```
 
-> This command will add avalanche-cli to the PATH temporarily, which means that, when you reopen your terminal you would not be able to run 'avalanche' command. So, to add it permanantly refer to [Add Avalanche Command Permanently](#add-avalanche-command-permanently) section.
+:::note This command will add avalanche-cli to the PATH temporarily, which means that, when you reopen your terminal you would not be able to run 'avalanche' command. So, to add it permanantly refer to [Add Avalanche Command Permanently](#add-avalanche-command-permanently) section. :::
 
 #### Installing in Custom Location
 
@@ -74,7 +74,7 @@ To add avalanche command to your path:
 2. Add this line, `export PATH="<path-of-avalanche-bin-directory>:${PATH}"` to the file.
 3. Restart the terminal and run `avalanche`.
 
-> If you have run the installation command at `$HOME` directory. `<path-of-avalanche-bin-directory>` would be `${HOME}/bin`
+:::note If you have run the installation command at `$HOME` directory. `<path-of-avalanche-bin-directory>` would be `${HOME}/bin`. :::
 
 ## Step 2: Create the subnet
 
@@ -145,7 +145,7 @@ To stop running the subnet, you could run:
 avalanche network stop
 ```
 
-> Do not worry, when you stop running the subnet it will save the state of the subnet and when it starts again it will continue from that state.
+:::info Do not worry, when you stop running the subnet it will save the state of the subnet and when it starts again it will continue from that state. :::
 
 To start running the subnet, you could run:
 
@@ -153,7 +153,7 @@ To start running the subnet, you could run:
 avalanche network start
 ```
 
-> Do not worry, when you restart the subnet rpc urls will not change. Therefore, you do not have to adjust the network in your metamask or anywhere else.
+:::info Do not worry, when you restart the subnet rpc urls will not change. Therefore, you do not have to adjust the network in your metamask or anywhere else. :::
 
 ## Step 4: Interact with the Subnet
 
@@ -225,13 +225,13 @@ To checkout current precompiles provided by Ava Labs refer to [this](https://doc
 
 This tutorial will show how to interact with them using Remix.
 
-> Before trying to interact with any of the precompiles make sure to add them while [creating the subnet](#step-2-create-the-subnet). You can not add them afterwards.
+:::caution Before trying to interact with any of the precompiles make sure to add them while [creating the subnet](#step-2-create-the-subnet). You can not add them afterwards. :::
 
 #### General steps to interact with precompiles
 
 1. While creating the subnet you will be prompted `Advanced: Would you like to add a custom precompile to modify the EVM?:` answer `Yes` then choose the precompile you would like to add. Make sure to add your address as admin by following `Add admin` and entering your address. Do not forget that you can always get more details by selecting `More info` inside the command line.
 
-   > If you are adding the `Transaction allow list` precompile, make sure to add the airdrop reciever address as admin so that the address with funds could send transactions.
+   :::warning If you are adding the `Transaction allow list` precompile, make sure to add the airdrop reciever address as admin so that the address with funds could send transactions. :::
 
 2. Open [remix](https://remix.ethereum.org) and make sure that your metamask is using your subnet and the remix's environment is using `Injected Web3`. Then, create a solidity file with respective recommended file name and add the respective precompile interface, refer to specific precompile to see details.
 
