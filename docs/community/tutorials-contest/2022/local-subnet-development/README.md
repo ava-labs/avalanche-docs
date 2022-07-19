@@ -29,7 +29,7 @@ Steps to follow:
 
 ## Step 1: Install avalanche-cli
 
-To build avalanche-cli you have to first install golang since avalanche-cli is written in golang. Follow the instructions here: [https://go.dev/doc/install](https://go.dev/doc/install).
+To build avalanche-cli you have to first install golang. Follow the instructions here: [https://go.dev/doc/install](https://go.dev/doc/install).
 
 After downloading golang, to download avalanche-cli's latest version, run:
 
@@ -90,9 +90,10 @@ Example walk through:
 
 - `Choose your VM`: SubnetEVM
 - `ChainId`: 676767
+- `Select a symbol for your subnet's native token`: SUB
 - `How would you like to set the fees`: Low disk use...
 - `How would you like to distribute the funds`: Airdrop 1 million tokens to the default address
-- `Would you like to add a precompile to modify the EVM`: No
+- `Advanced: Would you like to add a custom precompile to modify the EVM?`: No
 
 You have successfully created the genesis file for your subnet. You can read more about genesis [here](https://docs.avax.network/subnets/customize-a-subnet#genesis).
 
@@ -131,7 +132,7 @@ RPC URL:          http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshyb
 Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
 Network name:     subnetName
 Chain ID:         676767
-Currency Symbol:  TEST
+Currency Symbol:  SUB
 ```
 
 Make sure to save `Metamask connection details`. You will need the relevant information (RPC URL, Funded address, etc.) to interact with your subnet
@@ -168,7 +169,7 @@ Example Values:
 Network Name: <subnetName>
 New RPC URL: http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
 ChainID: 676767
-Symbol: TEST
+Symbol: SUB
 ```
 
 #### Access Funded Accounts
@@ -365,10 +366,10 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 
 ## Customize the Subnet
 
-- `VM`: To understand what VMs are you can refer to [this](https://docs.avax.network/subnets#virtual-machines). To create your custom VM you can refer to [this](https://docs.avax.network/subnets/create-a-virtual-machine-vm).
+- `VM`: To understand and create your custom VM you can refer to [this](https://docs.avax.network/subnets/create-a-virtual-machine-vm).
 - `ChainId`: You want your `ChainId` parameter to be unique. To make sure that your subnet is secure against replay attacks. To see registered `ChainIds` you can check [chainlist.org](https://chainlist.org/). At the top right of the site make sure to turn on the button to include testnets.
 - `Gas Parameters`: Ava Labs recommends the low-low option and C-Chain currently uses this option. But, if you know what you are doing you are free to customize. Note that higher disk usage has some trade offs, it would require more processing power and cause it to be more expensive to maintain.
-- `Airdrop Address`: You would not like to use the default address in production, that is recieving the 1 million tokens. Because it is a compromised wallet, which means that its private key is well known by others. If you add a custom address to recieve airdrop. Avalanche-cli will ask you to give an amount in AVAX, in that case do not enter the value thinking as in `ether` but in `gwei` to correctly airdrop the amount you want. As an example, to airdrop `1` whole token, as in one ether, you would enter the value `1000000000`.
+- `Airdrop Address`: You would not like to use the default address in production, that is recieving the 1 million tokens. Because, it is a compromised wallet, which means that its private key is well known by others. If you add a custom address to recieve airdrop. Avalanche-cli will ask you to give an amount in AVAX, in that case do not enter the value thinking as in `ether` but in `gwei` to correctly airdrop the amount you want. As an example, to airdrop `1` whole token, as in one ether, you would enter the value `1000000000`.
 - `Precompiles`: You can learn what precompiles are by refering to [this](https://docs.avax.network/subnets/customize-a-subnet#precompiles).
 
 ## Troubleshoot Common Issues
@@ -412,7 +413,6 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
   - For `Contract Deployer Allow List`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers).
   - For `Transaction Allow List`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions).
   - For `Native Minter`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins).
-  
 
 ## Conclusion
 
@@ -420,10 +420,8 @@ That is it! That is how you could create and deploy your local subnet from scrat
 
 In this tutorial, we learned:
 
-* Installing and using avalanche-cli
-* Creating a subnet and customizing it
-* Deploy the subnet locally for local development
-* Interacting with locally deployed subnet using Remix and hardhat
-* Optionally we learned how to interact with precompiles
-
-
+- Installing and using avalanche-cli.
+- Creating a subnet and customizing it.
+- Deploying the subnet locally for local development.
+- Interacting with locally deployed subnet using Remix and Hardhat.
+- Optionally, we learned how to interact with precompiles.
