@@ -46,7 +46,7 @@ networks: {
     chainId: 99999,
     gasPrice: "auto",
     accounts: [`${PK}`, ],
-  }
+  },
 }
 ```
 
@@ -106,7 +106,6 @@ yarn safe create --network subnet --singleton 0x95CA0a568236fC7413Cd2b794A7da244
 
 Output:
 ```zsh
-$ hardhat create --network subnet --singleton 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6 --factory 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
 Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 Singleton: 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6
 Setup data: 0xb63e800d0000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000008db97c7cece249c2b98bdc0226cc4c2a57bf52fc0000000000000000000000000000000000000000000000000000000000000000
@@ -375,7 +374,7 @@ Now lets check the balances of the Safe and EOA addresses using curl.
 **Safe balance(0)**
 
 ```zsh
-sh-3.2$ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
 {
   "jsonrpc": "2.0",
   "method": "eth_getBalance",
@@ -405,9 +404,9 @@ Output
 {"jsonrpc":"2.0","id":1,"result":"0xd3c216ac85648b2da900"}
 ```
 
-And there you have it! We've transferred 1000 _LEVM_ from our Safe to address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
+And there you have it! We've transferred 1000 _LEVM_ from our Safe to address, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
 
-### Calling other Functions
+### Other Functions
 As long as you have the ABI for a contract, you can apply the workflow outlined above to call other functions.
 
 For instance, if we wanted to approve a spend, we would create a transaction json file with the necessary data such as the example below.
@@ -435,10 +434,28 @@ For instance, if we wanted to approve a spend, we would create a transaction jso
 ```
 
 Then we would use the same tasks from before:
-- `yarn safe propose-multi <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>` to generate the txn data
-- `yarn safe propose <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-ADDRESS>`
-- `yarn safe sign <SAFE-TX-HASH>`
-- `yarn submit <SAFE-TX-HASH>`
+1. Generate the txn data with `yarn safe propose-multi`
+
+```zsh
+yarn safe propose-multi <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>
+```
+2. Create a proposal with `yarn safe propose`
+
+```zsh
+yarn safe propose <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-ADDRESS>
+```
+
+3. Sign the proposal with `yarn safe sign-proposal`
+
+```zsh
+yarn safe sign-proposal <SAFE-TX-HASH>
+```
+4. Submit the proposal with `yarn safe submit-proposal`
+
+```zsh
+yarn submit <SAFE-TX-HASH>
+```
+
 ## Local Workflow
 
 ### Start the Local Network
@@ -449,15 +466,17 @@ Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.m
 
 Most of the code is already set to follow this tutorial on a local network. Do check the following values in `hardhat.config.ts` to make sure they are correct.
 
-```js
-    subnet: {
-      url: `http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc`,
-      chainId: 99999,
-      gasPrice: "auto",
-      accounts: [
-        "56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
-      ],
-    },
+```ts
+networks: {
+  subnet: {
+    url: `http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc`,
+    chainId: 99999,
+    gasPrice: "auto",
+    accounts: [
+      "56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+    ],
+  },
+}
 ```
 
 Then run the deployment and interaction methods follow the exercises in this tutorial. 
