@@ -292,7 +292,7 @@ type Rules struct {
 }
 ```
 
-Next, at about [line 533](./example/params/config.go#L496) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
+Next, at about [line 533](./example/params/config.go#L533) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
 
 ```diff
 func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
