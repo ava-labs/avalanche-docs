@@ -67,7 +67,7 @@ This will clone and checkout to `master` branch.
 To add a novel stateful precompile into subnet-evm we have to follow these steps:
 
 1. Modify the [example/precompile/params.go](./example/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
-2. Create your own custom precompile contract and place it under [example/precompile](./example/precompile/) folder. In this tutorial we have created [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go).
+2. Create your own custom precompile contract and place it under [example/precompile](./red-dev-ecrecover-x-chain/example/precompile/) folder. In this tutorial we have created [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go).
 3. Modify the [example/params/config.go](./example/params/config.go). This supports adding the chain configuration and managed the subnet-evm via the genesis.json file. Since, the precompiles is optional and can be added or removed from the subnet-evm at anytime which can be managed by the genesis.json file.
 4. Modify the [example/scripts/run.sh](./example/scripts/run.sh) to include the custom precompile configuration.
 
