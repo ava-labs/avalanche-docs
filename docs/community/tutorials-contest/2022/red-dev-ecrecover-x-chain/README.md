@@ -10,9 +10,10 @@ In this tutorial, we describe each step of setting up the environment and adding
 
 To get the most out of this tutorial, you will need to have a basic understanding of Avalanche, Linux, Go (a.k.a. GoLang), Solidity, and how to write dApps and use Remix. If you do not yet know about these topics, see the [**Resources**](#resources) section at the end for links to learn more.
 
-## Overview
 
-At the very highest level, here is an overview of the process we will take you through in this tutorial. First we are going to show you how to install the necessary software required to run the subnet-evm as a local network, and then we will will explain to you how to add a precompile contract to the subnet-evm, using the signature-verification precompile we just described as an example. After that, with the help of the Remix, we can create a simple Solidity interface to connect to and use the precompile.
+## Important: Regarding the Example Code Included
+
+In this tutorial you will find examples, and we have also included copies of the entire files from subnet-evm in a folder called <i>examples</i>. <b>Only use these files as a reference.</b> When making your own precompile, start with a current fork of subnet-evm and make your changes line-by-line to those files instead.
 
 # Prerequisites
 
