@@ -12,11 +12,11 @@ This tutorial assumes that:
 - Your Node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
-## Fuji Workflow
+## Custom Network Workflow
 
 
-### Deploy the Safe Contracts
 
+### Setup
 Set up the repository by running thew following Commands:
 
 ```zsh
@@ -24,23 +24,31 @@ git https://github.com/safe-global/safe-contracts.git
 cd safe-contracts
 ```
 
-Next, change `.env.example` to `.env` and set the `MNEMONIC` value to your wallet's _seed phrase_ or _private key_.
+Next, change `.env.example` to `.env`, set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
 
+Example
 ```env
-MNEMONIC=<"YOUR-SEED-PHRASE-HERE">
+PK="56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"
+PK2=""
+INFURA_KEY=""
+# Used for custom network
+NODE_URL="http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc"
+NETWORK="subnet"
 ```
+
 
 Next, add your Subnet Network parameters to [`hardhat.congfig.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
 
 ```ts
     subnet: {
-      url: <"YOUR-SUBNET-RPC-HERE">,
-      chainId: <"YOUR-SUBNET-CHAIN-ID-HERE">,
+      url: NODE_URL,
+      chainId: 99999,
       gasPrice: "auto",
-      accounts: { mnemonic: MNEMONIC },
-    },
+      accounts: [`${PK}`, ],
+    }
 ```
 
+### Deploy the Safe Contracts
 
 Finally, deploy the contracts by running:
 
@@ -51,7 +59,6 @@ yarn hardhat --network subnet deploy
 This will deploy the contracts to your Subnet EVM!
 
 ```zsh
-Nothing to compile
 deploying "SimulateTxAccessor" (tx: 0xb2104e7067e35e1d2176ee53f6030bbcef4a12051505daca603d097d87ebd3e2)...: deployed at 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922 with 237301 gas
 deploying "GnosisSafeProxyFactory" (tx: 0x8faec24dda341141e02d1b898ceefe445b2893b3f600f1f79a5e04e3a91396cd)...: deployed at 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25 with 865918 gas
 deploying "DefaultCallbackHandler" (tx: 0xa1a48e8869c71cb10e9ca5f2ce20420c44ce09dc32aa13efbd2ebc3796bcf145)...: deployed at 0x5aa01B3b5877255cE50cc55e8986a7a5fe29C70e with 541390 gas
@@ -74,7 +81,7 @@ The [safe-deployments](https://github.com/safe-global/safe-deployments) reposito
 
 The important part is how to create the signature to confirm a transaction. More information on this can be found in the [Safe docs](https://docs.gnosis-safe.io/contracts/signatures).
 
-To make this easier the Safe team provides multiple CLIs ([safe-cli](https://github.com/5afe/safe-cli#safe-cli) and [safe-tasks](https://github.com/5afe/safe-tasks#gnosis-safe-tasks)) and an the [safe-core-sdk](https://github.com/safe-global/safe-core-sdk/tree/main/packages/safe-core-sdk#safe-core-sdk).
+To make this easier the Safe team provides multiple CLIs ([safe-cli](https://github.com/5afe/safe-cli#safe-cli) and [safe-tasks](https://github.com/5afe/safe-tasks#gnosis-safe-tasks)) and the [safe-core-sdk](https://github.com/safe-global/safe-core-sdk/tree/main/packages/safe-core-sdk#safe-core-sdk).
 
 ### Using Safe Tasks
 
@@ -87,19 +94,7 @@ git clone https://github.com/5afe/safe-tasks.git
 cd safe-tasks
 ```
 
-As previously described, change `.env.example` to `.env` and set the `MNEMONIC` value to your wallet's _seed phrase_ or _private key_.
-
-Next, add your Subnet Network parameters to [`hardhat.congfig.ts`](https://github.com/5afe/safe-tasks/blob/master/hardhat.config.ts):
-
-```ts
-    subnet: {
-      url: <"YOUR-SUBNET-RPC-HERE">,
-      chainId: <"YOUR-SUBNET-CHAIN-ID-HERE">,
-      gasPrice: "auto",
-      accounts: { mnemonic: MNEMONIC },
-    },
-```
-
+Implement the environment and network setup [above](#setup) to prepare the Safe-Tasks project.
 ### Create a Safe
 Now lets create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
 
@@ -107,7 +102,7 @@ Now lets create a Safe using the previously deployed `GnosisSafeL2` and `GnosisS
 yarn safe create --network subnet --singleton 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6 --factory 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
 ```
 
-output:
+Output:
 ```zsh
 $ hardhat create --network subnet --singleton 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6 --factory 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
 Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
@@ -117,6 +112,9 @@ Nonce: 1658256419254
 To (factory): 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
 Data: 0x1688f0b900000000000000000000000095ca0a568236fc7413cd2b794a7da24422c2bbb600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000018217c8e9b60000000000000000000000000000000000000000000000000000000000000164b63e800d0000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000008db97c7cece249c2b98bdc0226cc4c2a57bf52fc000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 ```
+
+
+Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", informs us that our safe contract lives at the address `0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114`. We will utilize this address throughout the rest of the tutorial.
 
 Lets inspect our Safe details by running the following:
 
@@ -137,9 +135,9 @@ Modules:
 ```
 
 The output above illustrates a few things:
-- `Singleton -` This is the contract that holds the logic for our safe to interact with. In this case, the Smart Contract we are using is [`GnosisSafeL2.sol`](https://github.com/safe-global/safe-contracts/blob/main/contracts/GnosisSafeL2.sol), A multisignature wallet with support for confirmations using signed messages based on [ERC191](https://eips.ethereum.org/EIPS/eip-191).
--  `Owners -` The addresses that are allowed to sign and submit proposals. These can be can either be EOAs or other smart contract accounts.
-- `Threshold -` The amount of signatures required to submit a proposal
+- `Singleton` - This is the contract that holds the logic for our safe to interact with. In this case, the Smart Contract we are using is [`GnosisSafeL2.sol`](https://github.com/safe-global/safe-contracts/blob/main/contracts/GnosisSafeL2.sol), A multisignature wallet with support for confirmations using signed messages based on [ERC191](https://eips.ethereum.org/EIPS/eip-191).
+-  `Owners` - The addresses that are allowed to sign and submit proposals. These can be can either be EOAs or other smart contract accounts.
+- `Threshold` - The amount of signatures required to submit a proposal.
 
 ### Add an Owner
 To add an owner we must first generate the data required to submit a proposal.
@@ -160,11 +158,12 @@ Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/
     }
 ]
 ```
-Next, run the following command to obtain the encoded data we need to complete the txn:
+Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the safe.
+
 ```zsh
-yarn safe propose-multi 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export addOwner.json
+yarn safe propose-multi 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export exmple/addOwner.json
 ```
-This will create a new file in the examples directory, `addOwner.json` 
+This will create a new file, `addOwner.json`, in the examples directory.
 
 ```json
 {
@@ -185,12 +184,12 @@ This will create a new file in the examples directory, `addOwner.json`
 }
 ```
 
-Notice the `data` value has the parameter encoded as a single hexadecimal string.
+Notice the `data` value has the parameters encoded as a single hexadecimal string.
 - `addOwnerWithThreshold` has the function signature `0d582f13`
-- `address` is appears in the data as `82ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba`
+- `address` appears in the data as `82ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba`
 - `threshold` appears at the end of the data as `2`
 
-Now we can the `data` value as an argument for our proposal:
+Now we can use the `data` value as an argument for our proposal.
 ```zsh
 yarn safe propose 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
@@ -202,7 +201,9 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 Safe transaction hash: 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc
 ```
 
-Next, we will sign and submit our Proposal's tx hash, `0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc`, with a few short commands.
+As you can see, making a proposal generates a `Safe transaction hash` which we will use to complete this tutorial.
+
+Next, we will sign and submit our Proposal's tx hash, `0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc`, with the tasks, `sign-proposal` and `submit-proposal`.
 
 **Sign:**
 
@@ -228,12 +229,10 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Ethereum transaction hash: 0x99b35740246b91e5137f0128427e220ec7772aab17b20b6b9d4bcc7e0c73685f
 ```
 
-Now lets check the owners of our safe by using the `info` task:
-
-
+Now that we've successfully submitted a proposal, lets check the owners of our safe by using the `info` task:
 
 ```zsh
-yarn safe submit-proposal 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc
+yarn safe info 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
 
 Output:
@@ -247,6 +246,8 @@ Nonce: 1
 Fallback Handler: 0x0000000000000000000000000000000000000000
 Modules: 
 ```
+
+It is worth noting that you can also achieve the same result by using [Hardhat with your Custom EVM](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain#interact-with-smart-contract).
 
 As we can see,`Owners` now includes a new address and `threshold`, the amount of signatures needed to execute a transaction, has increased to 2.
 ## Local Workflow
