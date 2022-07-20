@@ -42,7 +42,7 @@ Verify that you've installed Go by running the command below:
 ```
 $ go version
 ```
-![go-v](img/go-v.png)
+![go-v](ecrecover-x-chain-00-go-v.png)
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
