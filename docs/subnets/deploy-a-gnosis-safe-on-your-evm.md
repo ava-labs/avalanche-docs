@@ -346,10 +346,10 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Signature: 0x636ba2a89023b1e81032a43dd1172743f7916e31647eb87ec95c541c091ebf1873605d39d8039431a7dceeeab691e48b96b50f93e91acde5e67295e9f051e7031f
 ```
 
-By default, Hardhat uses _account 0_ to sign transactions. Since we've imported another private key and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we want to sign with by adding the flag `--signerindex` to our `sign-proposal` task 
+By default, Hardhat uses _account 0_ to sign transactions. Since we've imported another private key and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we want to sign with by adding the flag `--signer` to our `sign-proposal` task 
 
 ```zsh
-yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d --signerindex 1
+yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d --signer 1
 ```
 
 Output:
