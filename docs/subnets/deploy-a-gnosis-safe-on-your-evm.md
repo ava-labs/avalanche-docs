@@ -37,15 +37,17 @@ NETWORK="subnet"
 ```
 
 
-Next, add your Subnet Network parameters to [`hardhat.congfig.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
+Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
 
 ```ts
-    subnet: {
-      url: NODE_URL,
-      chainId: 99999,
-      gasPrice: "auto",
-      accounts: [`${PK}`, ],
-    }
+networks: {
+  subnet: {
+    url: NODE_URL,
+    chainId: 99999,
+    gasPrice: "auto",
+    accounts: [`${PK}`, ],
+  }
+}
 ```
 
 ### Deploy the Safe Contracts
@@ -161,7 +163,7 @@ Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/
 Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the safe.
 
 ```zsh
-yarn safe propose-multi 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export exmple/addOwner.json
+yarn safe propose-multi 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
 ```
 This will create a new file, `addOwner.json`, in the examples directory.
 
@@ -189,7 +191,7 @@ Notice the `data` value has the parameters encoded as a single hexadecimal strin
 - `address` appears in the data as `82ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba`
 - `threshold` appears at the end of the data as `2`
 
-Now we can use the `data` value as an argument for our proposal.
+Now we can use the `--data` flag and pass in the `data` above as an argument for our proposal.
 ```zsh
 yarn safe propose 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
@@ -205,7 +207,7 @@ As you can see, making a proposal generates a `Safe transaction hash` which we w
 
 Next, we will sign and submit our Proposal's tx hash, `0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc`, with the tasks, `sign-proposal` and `submit-proposal`.
 
-**Sign:**
+#### Sign
 
 ```zsh
 yarn safe sign-proposal 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc
@@ -217,7 +219,7 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Signature: 0x094e84aab062cb03f9abca3b80fb9931934c83920024fb8fa83b7b8d1a2aab305ab1f4d54e3a59ad7633f3f36d5db9b9976db268e05e0559c1c017fd3836540020
 ```
 
-**Submit:**
+#### Submit
 ```zsh
 yarn safe submit-proposal 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc
 ```
@@ -247,22 +249,209 @@ Fallback Handler: 0x0000000000000000000000000000000000000000
 Modules: 
 ```
 
-It is worth noting that you can also achieve the same result by using [Hardhat with your Custom EVM](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain#interact-with-smart-contract).
+It is worth noting that you can also check the owners of the safe by using [Hardhat with your Custom EVM](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain#interact-with-smart-contract).
 
 As we can see,`Owners` now includes a new address and `threshold`, the amount of signatures needed to execute a transaction, has increased to 2.
+
+### Send Native Currency from your Safe
+Lets apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
+This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your subnet to MetaMask, [please read this excerpt](http://localhost:3000/subnets/create-a-fuji-subnet#connect-with-metamask).
+
+
+Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe tx.
+
+To include our second signer, we will have to import another _private key_ into the project by adding it to `.env` and `hardhat.config.ts` 
+
+Example `.env`:
+
+```js
+PK="56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"
+PK2="cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc"
+INFURA_KEY=""
+# Used for custom network
+NODE_URL="http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc"
+NETWORK="subnet"
+```
+
+Example `hardhat.config.ts`
+
+```ts
+// Load environment variables.
+dotenv.config();
+const {
+  NETWORK,
+  NODE_URL,
+  INFURA_KEY,
+  MNEMONIC,
+  PK,
+  PK2,
+  SOLIDITY_VERSION,
+  SOLIDITY_SETTINGS,
+} = process.env;
+
+...
+networks: {
+  subnet: {
+        url: NODE_URL,
+        chainId: 99999,
+        gasPrice: "auto",
+        accounts: [`${PK}`, `${PK2}` ],
+      },
+    },
+```
+
+In this example, we're sending 1000 _LEVM_ from our Safe to the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
+
+Let's ensure that our Safe has enough funds by using a simple curl request.
+
+```zsh
+curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+{
+  "jsonrpc": "2.0",
+  "method": "eth_getBalance",
+  "params": ["0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114", "latest"],
+  "id": 1
+}
+'
+```
+
+Output:
+```zsh
+{"jsonrpc":"2.0","id":1,"result":"0x3e8"}
+```
+
+Now that we've verified that our Safe has enough Native Tokens(1000), lets create a proposal to send some to an EOA.
+
+```zsh
+yarn safe propose 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --value 1000 --to 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+```
+Notice that we've added the `value` flag and passed in our target amount. We've also changed our `to` flag to be our our target address. You can find the other flags and parameters for this task [here](https://github.com/5afe/safe-tasks/blob/52067e3ac5b8a1db3a4ab54fec0ee628c0bd4f3a/src/execution/proposing.ts).
+
+Output:
+```zsh
+Running on subnet
+Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
+Safe transaction hash: 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
+```
+
+#### Sign with Two Owners
+
+```zsh
+yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
+```
+
+Output:
+```zsh
+Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Signature: 0x636ba2a89023b1e81032a43dd1172743f7916e31647eb87ec95c541c091ebf1873605d39d8039431a7dceeeab691e48b96b50f93e91acde5e67295e9f051e7031f
+```
+
+By default, Hardhat uses _account 0_ to sign transactions. Since we've imported another private key and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we want to sign with by adding the flag `--signerindex` to our `sign-proposal` task 
+
+```zsh
+yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d --signerindex 1
+```
+
+Output:
+```zsh
+Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x82DdaF3f1fcd3c18F5664cD7fb12bD8C38D5d4ba
+Signature: 0x11d7e983417280bdf1c55da51359eb06262f0feadad1c6ebdf497a6e6db92c5e506536c1c2b6bd3ef726d163c710d5adcbe787a2440be5ad79cac52e950407b21f
+```
+
+#### Submit
+
+```zsh
+yarn safe submit-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
+```
+
+Output:
+```zsh
+Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Ethereum transaction hash: 0x074d823b8d111af9e87d0e4374e3a5382a4de9952df4f49db5ee4b52f945760b
+```
+
+Now lets check the balances of the Safe and EOA addresses using curl.
+
+**Safe balance(0)**
+
+```zsh
+sh-3.2$ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+{
+  "jsonrpc": "2.0",
+  "method": "eth_getBalance",
+  "params": ["0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114", "latest"],
+  "id": 1
+}
+```
+Output:
+```zsh
+{"jsonrpc":"2.0","id":1,"result":"0x0"}
+```
+
+**EOA Balance(99,9999.63)**
+
+```zsh
+curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+{
+  "jsonrpc": "2.0",
+  "method": "eth_getBalance",
+  "params": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"],
+  "id": 1
+}
+'
+```
+Output
+```zsh
+{"jsonrpc":"2.0","id":1,"result":"0xd3c216ac85648b2da900"}
+```
+
+And there you have it! We've transferred 1000 _LEVM_ from our Safe to address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
+
+### Calling other Functions
+As long as you have the ABI for a contract, you can apply the workflow outlined above to call other functions.
+
+For instance, if we wanted to approve a spend, we would create a transaction json file with the necessary data such as the example below.
+
+[`tx_input.sample.json:`](https://github.com/5afe/safe-tasks/blob/master/tx_input.sample.json)
+
+```json
+[
+    {
+        "to": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+        "value": "0.1",
+        "operation": 0
+    },
+    {
+        "to": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+        "value": "0",
+        "method": "approve(address,uint256)",
+        "params": [
+            "0xd0Dab4E640D95E9E8A47545598c33e31bDb53C7c",
+            "1000000000000"
+        ],
+        "operation": 0
+    }
+]
+```
+
+Then we would use the same tasks from before:
+- `yarn safe propose-multi <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>` to generate the txn data
+- `yarn safe propose <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-ADDRESS>`
+- `yarn safe sign <SAFE-TX-HASH>`
+- `yarn submit <SAFE-TX-HASH>`
 ## Local Workflow
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port number by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 13076.
+Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port numbers by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 49435.
 
 ### Locate the Hardhat Network Configuration and Make Necessary Changes
 
-Most of the code are already set to run it on a local network. Do check the following values in `hardhat.config.ts` to make sure they are correct.
+Most of the code is already set to follow this tutorial on a local network. Do check the following values in `hardhat.config.ts` to make sure they are correct.
 
 ```js
     subnet: {
-      url: `http://127.0.0.1:13076/ext/bc/2iu7cwjqicwzytFRRgfyCzaFQtJw53C7WSoDEU7KWRo8mhVFRj/rpc`,
+      url: `http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc`,
       chainId: 99999,
       gasPrice: "auto",
       accounts: [
@@ -271,4 +460,4 @@ Most of the code are already set to run it on a local network. Do check the foll
     },
 ```
 
-Then run the deployment and interaction methods follow the exercise in this tutorial. 
+Then run the deployment and interaction methods follow the exercises in this tutorial. 
