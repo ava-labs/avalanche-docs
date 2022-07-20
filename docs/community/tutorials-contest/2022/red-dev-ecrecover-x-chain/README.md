@@ -65,18 +65,18 @@ This will clone and checkout to `master` branch.
 
 To add a novel stateful precompile into subnet-evm we have to follow these steps:
 
-1. Modify the [precompile/params.go](./precompile/params.go) - which is used to define the designated address for the stateful precompiles.
-2. Create your own custom precompile contract and place it under [precompile](./precompile/) folder. In this tutorial we have created [contract_xchain_ecrecover.go](./precompile/contract_xchain_ecrecover.go).
-3. Modify the [params/config.go](./params/config.go). This supports adding the chain configuration and managed the subnet-evm via the genesis.json file. Since, the precompiles is optional and can be added or removed from the subnet-evm at anytime which can be managed by the genesis.json file.
-4. Modify the [scripts/run.sh](./scripts/run.sh) to include the custom precompile configuration.
+1. Modify the [example/precompile/params.go](./example/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
+2. Create your own custom precompile contract and place it under [example/precompile](./example/precompile/) folder. In this tutorial we have created [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go).
+3. Modify the [example/params/config.go](./example/params/config.go). This supports adding the chain configuration and managed the subnet-evm via the genesis.json file. Since, the precompiles is optional and can be added or removed from the subnet-evm at anytime which can be managed by the genesis.json file.
+4. Modify the [example/scripts/run.sh](./example/scripts/run.sh) to include the custom precompile configuration.
 
-### Modify the [precompile/params.go](./precompile/params.go) file
+### Modify the [example/precompile/params.go](./example/precompile/params.go) file
 
-As we mentioned earlier, the [precompile/params.go](./precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of subnet-evm, users should start at 0x0300000000000000000000000000000000000000 to ensure that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
+As we mentioned earlier, the [example/precompile/params.go](./example/precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of subnet-evm, users should start at 0x0300000000000000000000000000000000000000 to ensure that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
 
 We have taken the address `0x0300000000000000000000000000000000000000` for this tutorial.
 
-We have made changes below in the [params.go](./precompile/params.go) file at about [line 13](./precompile/params.go#L13) to declare the gas estimation value:
+We have made changes below in the [params.go](./example/precompile/params.go) file at about [line 13](./example/precompile/params.go#L13) to declare the gas estimation value:
 
 ```diff
 const (
@@ -87,7 +87,7 @@ const (
 )
 ```
 
-Next, at about [line 28](./precompile/params.go#L28) we have declared varaible ContractXchainECRecoverAddress and assign the designated contract address:
+Next, at about [line 28](./example/precompile/params.go#L28) we have declared varaible ContractXchainECRecoverAddress and assign the designated contract address:
 
 ```diff
 var (
@@ -103,7 +103,7 @@ var (
 	}
 )
 ```
-### Create a new custom [contract_xchain_ecrecover.go](./precompile/contract_xchain_ecrecover.go) contracts
+### Create a new custom [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go) contracts
 
 We have then created the precompile contract below. All stateful precompile contracts should implement the interfaces Address(), Contract(), Configure() and Timestamp().
 
@@ -239,11 +239,11 @@ func createXChainECRecoverPrecompile(precompileAddr common.Address) StatefulPrec
 
 (Please note that we are still working to repair one final defect in this example contract. After computing the correct X-Chain address of the signer, it does not yet return this value to the calling dApp due to an issue concerning data types. We expect to have this resolved soon.)
 
-### Modify the [params/config.go](./params/config.go) file
+### Modify the [example/params/config.go](./example/params/config.go) file
 
-As we mentioned earlier, the [params/config.go](./params/config.go) is used to add the chain configuration and managed the subnet-evm via the genesis.json file.
+As we mentioned earlier, the [example/params/config.go](./example/params/config.go) is used to add the chain configuration and managed the subnet-evm via the genesis.json file.
 
-We have implemented the changes below in the [params.go](./precompile/params.go) file. At about [line 122](./params/config.go#L122) we have added the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct with this we add or remove the precompiles through genesis.json file:
+We have implemented the changes below in the [params.go](./example/precompile/params.go) file. At about [line 122](./example/params/config.go#L122) we have added the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct with this we add or remove the precompiles through genesis.json file:
 
 ```diff
 type ChainConfig struct {
@@ -254,7 +254,7 @@ type ChainConfig struct {
 }
 ```
 
-Next, at about [line 563](./params/config.go#L563), we have included our custom precompiles intio the stateful precompiled configs:
+Next, at about [line 563](./example/params/config.go#L563), we have included our custom precompiles intio the stateful precompiled configs:
 
 ```diff
 func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompileConfig {
@@ -270,7 +270,7 @@ func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompi
 + 	}
 }
 ```
-Next, at about [line 496](./params/config.go#L496) we have introduced a boolean variable `IsContractXChainECRecoverEnabled` to enable mapping of the addresses to the stateful precompile:
+Next, at about [line 496](./example/params/config.go#L496) we have introduced a boolean variable `IsContractXChainECRecoverEnabled` to enable mapping of the addresses to the stateful precompile:
 
 ```diff
 type Rules struct {
@@ -292,7 +292,7 @@ type Rules struct {
 }
 ```
 
-Next, at about [line 533](./params/config.go#L496) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
+Next, at about [line 533](./example/params/config.go#L496) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
 
 ```diff
 func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
@@ -311,7 +311,7 @@ func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
 }
 ```
 
-Next, at about [line 261](./params/config.go#L261) we created a function to return the fork enabled status based on block timestamp:
+Next, at about [line 261](./example/params/config.go#L261) we created a function to return the fork enabled status based on block timestamp:
 
 ```diff
 func (c *ChainConfig) IsTxAllowList(blockTimestamp *big.Int) bool {
@@ -322,11 +322,11 @@ func (c *ChainConfig) IsTxAllowList(blockTimestamp *big.Int) bool {
 + }
 ```
 
-### Modify the [scripts/run.sh](./scripts/run.sh)
+### Modify the [example/scripts/run.sh](./example/scripts/run.sh)
 
-The [scripts/run.sh](./scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the subnet-evm by configuring in the genesis.json file.
+The [example/scripts/run.sh](./example/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the subnet-evm by configuring in the genesis.json file.
 
-We have to modify the default genesis.json setting in the [scripts/run.sh](./scripts/run.sh) to enable our custom precompile. At about [line 125](./scripts/run.sh#L125) under config object we have added the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [params/config.go line 122](./params/config.go#L122):
+We have to modify the default genesis.json setting in the [example/scripts/run.sh](./example/scripts/run.sh) to enable our custom precompile. At about [line 125](./example/scripts/run.sh#L125) under config object we have added the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [example/params/config.go line 122](./example/params/config.go#L122):
 
 ```diff
 {
@@ -469,7 +469,7 @@ You can create a new metamask account by importing the private key `0x56289e99c9
 
 ## Using the Precompile from Remix
 
-You can copy paste the Solidity interface [contract_xchain_ecrecover.sol](./precompile/contract_xchain_ecrecover.sol) into Remix and compile it by hitting “Compile contract_xchain_ecrecover.sol”.
+You can copy paste the Solidity interface [contract_xchain_ecrecover.sol](./example/precompile/contract_xchain_ecrecover.sol) into Remix and compile it by hitting “Compile contract_xchain_ecrecover.sol”.
 
 Once you’ve compiled the interface, you can navigate to the Deploy tab in remix, select “Injected Web3” for your local environment so that you can interact with your EVM instance, and paste the address 0x0300000000000000000000000000000000000000 of the precompile in the field to the right of “At Address”.
 
