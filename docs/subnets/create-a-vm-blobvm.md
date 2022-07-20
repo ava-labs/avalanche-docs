@@ -24,7 +24,7 @@ VM modules are served as a binary plugin to the `avalanchego` software. The node
 
 Virtual Machines are created as a module, whose binary is registered by a node running `avalanchego`, against the **vmID** (binary file name must be vmID). VMID is a user-defined string that is zero-extended to a 32-byte array and encoded in CB58.
 
-We can build multiple chains with the registered VM. A VM is registered, only when its built binary is present at the required location, as explained [here](#How-to-Use-a-VM).
+We can build multiple chains with the registered VM. A VM is registered, only when its built binary is present at the required location, as explained [here](#how-to-use-a-vm).
 
 ### APIs for a VM
 
@@ -77,7 +77,7 @@ func (m *manager) buildChain(chainParams ChainParameters, sb Subnet) (*chain, er
 
 ### Initializing a VM
 
-Chains are functional, only when the instantiated VMs are initialized and the node is bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found [later](####Initialize) in the documentation.
+Chains are functional, only when the instantiated VMs are initialized and the node is bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found [later](#initialize) in the documentation.
 
 ```go
 if err := vm.Initialize(
@@ -1518,7 +1518,7 @@ vm.preferred, vm.lastAccepted = gBlkID, genesisBlk
 log.Info("initialized blobvm from genesis", "block", gBlkID)
 ```
 
-- Finally, it will start the builder and gossiper as explained in the [block bulder](#Block-Builder) section.
+- Finally, it will start the builder and gossiper as explained in the [block bulder](#block-builder) section.
 
 ```go
 go vm.builder.Build()
@@ -1620,9 +1620,9 @@ func ParseBlock(
 
 #### [BuildBlock](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L377)
 
-The consensus engine calls the` vm.BuildBlock()` method whenever it is the node's turn to propose a block (there must be a pending transaction in the mempool) and returns the stateless block. This makes use of the `chain.BuildBlock()` method to get the block. This is explained in the [Builder](#Builder) section.
+The consensus engine calls the` vm.BuildBlock()` method whenever it is the node's turn to propose a block (there must be a pending transaction in the mempool) and returns the stateless block. This makes use of the `chain.BuildBlock()` method to get the block. This is explained in the [Builder](#builder) section.
 
-This method will also handle the next block generation using VM's `HandlerGenerateBlock()` method, as explained in the [Block Builder](#Block-Builder) section.
+This method will also handle the next block generation using VM's `HandlerGenerateBlock()` method, as explained in the [Block Builder](#block-builder) section.
 
 ```go
 func (vm *VM) BuildBlock() (snowman.Block, error) {
