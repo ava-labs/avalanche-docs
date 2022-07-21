@@ -32,7 +32,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Updated Snowman and Avalanche consensus engines to report original container preferences before processing the provided container
 - Fixed inbound message byte throttler context cancellation cleanup
 - Removed case sensitivity of IP resolver services
-- Added failing health check when a whitelisted subnet fails to initialize a chain
+- Added failing health check when a whitelisted Subnet fails to initialize a chain
 
 **Miscellaneous**
 
