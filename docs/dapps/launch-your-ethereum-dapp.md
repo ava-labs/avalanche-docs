@@ -181,7 +181,7 @@ Here are the main differences you should be aware of.
 
 ### Measuring Time
 
-Avalanche does not use the same mechanism to measure time as Ethereum which uses consistent block times. Instead, Avalanche supports asynchronous block issuance. block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
+Avalanche does not use the same mechanism to measure time as Ethereum which uses consistent block times. Instead, Avalanche supports asynchronous block issuance, block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
 
 Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
