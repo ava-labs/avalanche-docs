@@ -5,7 +5,7 @@ page lists the most popular ones, explains what they do and their intended usage
 
 ## AvalancheGo Installer
 
-AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on a Linux computer. This script sets up full, running node in a matter of minutes with minimal user input required. This is convenient if you want to run the node as a service on a standalone Linux installation, for example to set up a (subnet) validator, use the node as a private RPC server and similar uses. It also makes upgrading or reinstalling the nodes easy.
+AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on a Linux computer. This script sets up full, running node in a matter of minutes with minimal user input required. This is convenient if you want to run the node as a service on a standalone Linux installation, for example to set up a (Subnet) validator, use the node as a private RPC server and similar uses. It also makes upgrading or reinstalling the nodes easy.
 
 Github: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
 
@@ -15,7 +15,7 @@ If you want to run a node in a more complex environment, like in a docker or kub
 
 ## Avalanche CLI
 
-Avalanche CLI is a developer-centric command line tool that gives you access to everything Avalanche. Setting up a local network, creating a subnet, customizing the subnet/VM configuration - this is the tool to use. It is under rapid development, so check back for new versions with expanded functionality.
+Avalanche CLI is a developer-centric command line tool that gives you access to everything Avalanche. Setting up a local network, creating a subnet, customizing the Subnet/VM configuration - this is the tool to use. It is under rapid development, so check back for new versions with expanded functionality.
 
 Github: [https://github.com/ava-labs/avalanche-cli](https://github.com/ava-labs/avalanche-cli)
 
@@ -23,7 +23,7 @@ Document: [Create an EVM Subnet on a Local Network](../subnets/create-a-local-su
 
 ## Subnet CLI
 
-Subnet CLI is command-line interface to manage Avalanche Subnets. It is intended for provisioning testnet or mainnet subnets in production and allows for the use of Ledger device to store the controlling keys to the subnet for increased operational security.
+Subnet CLI is command-line interface to manage Avalanche Subnets. It is intended for provisioning testnet or mainnet subnets in production and allows for the use of Ledger device to store the controlling keys to the Subnet for increased operational security.
 
 Github: [https://github.com/ava-labs/subnet-cli](https://github.com/ava-labs/subnet-cli)
 
@@ -45,7 +45,7 @@ Github: [https://github.com/ava-labs/apm](https://github.com/ava-labs/apm)
 
 ### avalanche-plugins-core
 
-`avalanche-plugins-core` is plugin repository that ships with the `apm`. A plugin repository consists of a set of virtual machine and subnet definitions that the `apm` consumes to allow users to quickly and easily download and manage VM binaries.
+`avalanche-plugins-core` is plugin repository that ships with the `apm`. A plugin repository consists of a set of virtual machine and Subnet definitions that the `apm` consumes to allow users to quickly and easily download and manage VM binaries.
 
 Github: [https://github.com/ava-labs/avalanche-plugins-core](https://github.com/ava-labs/avalanche-plugins-core)
 
