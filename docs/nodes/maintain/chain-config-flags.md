@@ -155,7 +155,9 @@ If you populate this field, it will override the defaults so you must include ev
 
 :::
 
-#### `public-eth` (deprecated) or `eth`:
+#### `eth`:
+
+The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -180,14 +182,18 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 - `eth_getFilterLogs`
 - `eth_getFilterChanges`
 
-#### `private-admin` (deprecated) or `admin`:
+#### `admin`:
+
+The API name `private-admin` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `admin`.
 
 Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 - `admin_importChain`
 - `admin_exportChain`
 
-#### `private-debug` (deprecated) or `public-debug` (deprecated) or `debug`:
+#### `debug`:
+
+The API names `private-debug` and `public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `debug`.
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -230,7 +236,9 @@ Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 - `web3_clientVersion`
 - `web3_sha3`
 
-#### `internal-public-eth` (deprecated) or `internal-eth`:
+#### `internal-eth`:
+
+The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-eth`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -239,7 +247,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_maxPriorityFeePerGas`
 - `eth_feeHistory`
 
-#### `internal-public-blockchain` (deprecated) or `internal-blockchain`:
+#### `internal-blockchain`:
+
+The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-blockchain`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -262,7 +272,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_estimateGas`
 - `eth_createAccessList`
 
-#### `internal-public-transaction-pool` (deprecated) or `internal-transaction`:
+#### `internal-transaction`:
+
+The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-transaction`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -284,7 +296,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_pendingTransactions`
 - `eth_resend`
 
-#### `internal-public-tx-pool` (deprecated) or `internal-tx-pool`:
+#### `internal-tx-pool`:
+
+The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-tx-pool`.
 
 Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
@@ -293,7 +307,9 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 - `txpool_status`
 - `txpool_inspect`
 
-#### `internal-public-debug` (deprecated) or `internal-private-debug` (deprecated) or `internal-debug`:
+#### `internal-debug`:
+
+The API names `internal-private-debug` and `internal-public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `internal-debug`.
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -303,13 +319,17 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
-#### `internal-public-account` (deprecated) or `internal-account`:
+#### `internal-account`:
+
+The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-account`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 - `eth_accounts`
 
-#### `internal-private-personal` (deprecated) or `internal-personal`:
+#### `internal-personal`:
+
+The API name `internal-private-personal` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-personal`.
 
 Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 
