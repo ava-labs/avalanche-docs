@@ -181,9 +181,13 @@ Here are the main differences you should be aware of.
 
 ### Measuring Time
 
-It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is a great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
+Avalanche does not use the same pricing mechanism as Ethereum does. Ethereum uses its consistent block times along with the gas per block as the indicator to set the BaseFee. 
 
-Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing and to be within 30 seconds of the real time.
+In Avalanche, that idea doesn’t make sense. Avalanche allows asynchronous block issuance (there is not necessarily a consistent block time). It targets every 2 seconds but varies depending on if there are more transactions to put in a block. 
+
+Avalanche uses the amount of gas used over time to calculate the modifications to the [BaseFee](https://medium.com/nethermind-eth/the-manipulation-of-the-basefee-in-the-context-of-eip-1559-4b082898271c). If there are enough transactions that are willing to subsidize the cost of producing a block earlier, then it can generate another block. 
+
+Essentially, while there is still space in the blocks being issued, there is no space in the time window they were issued in.
 
 ### Finality
 
