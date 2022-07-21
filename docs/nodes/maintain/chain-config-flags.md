@@ -130,24 +130,23 @@ While the current version continues to accept deprecated values, they may not be
 
 The mapping of deprecated values and their updated equivilant follows:
 
-| Deprecated                              | Use instead            |
-|-----------------------------------------|------------------------|
-| `public-eth`                            | `eth`                  |
-| `public-eth-filter`                     | `eth-filter`           |
-| `private-admin`                         | `admin`                |
-| `private-debug`                         | `debug`                |
-| `public-debug`                          | `debug`                |
-| `internal-public-eth`                   | `internal-eth`         |
-| `internal-public-blockchain`            | `internal-blockchain`  |
-| `internal-public-transaction-pool`      | `internal-transaction` |
-| `internal-public-tx-pool`               | `internal-tx-pool`     |
-| `internal-public-debug`                 | `internal-debug`       |
-| `internal-private-debug`                | `internal-debug`       |
-| `internal-public-account`               | `internal-account`     |
-| `internal-private-personal`             | `internal-personal`    |
+| Deprecated                         | Use instead            |
+| ---------------------------------- | ---------------------- |
+| `public-eth`                       | `eth`                  |
+| `public-eth-filter`                | `eth-filter`           |
+| `private-admin`                    | `admin`                |
+| `private-debug`                    | `debug`                |
+| `public-debug`                     | `debug`                |
+| `internal-public-eth`              | `internal-eth`         |
+| `internal-public-blockchain`       | `internal-blockchain`  |
+| `internal-public-transaction-pool` | `internal-transaction` |
+| `internal-public-tx-pool`          | `internal-tx-pool`     |
+| `internal-public-debug`            | `internal-debug`       |
+| `internal-private-debug`           | `internal-debug`       |
+| `internal-public-account`          | `internal-account`     |
+| `internal-private-personal`        | `internal-personal`    |
 
 :::
-
 
 :::note
 
@@ -164,7 +163,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 `eth_coinbase`
 `eth_etherbase`
 
-#### `public-eth-filter` (deprecated) or `eth-filter`:
+#### `eth-filter`:
+
+The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth-filter`.
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
