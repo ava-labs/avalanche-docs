@@ -124,18 +124,45 @@ Use the `eth-apis` field to specify the exact set of below services to enable on
 
 :::note
 
+The names used in this configuration flag have been updated in coreth `v.0.8.4`.
+The previous names containing `public-` and `private-` are deprecated.
+While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
+
+The mapping of deprecated values and their updated equivilant follows:
+
+| Deprecated                              | Use instead            |
+|-----------------------------------------|------------------------|
+| `public-eth`                            | `eth`                  |
+| `public-eth-filter`                     | `eth-filter`           |
+| `private-admin`                         | `admin`                |
+| `private-debug`                         | `debug`                |
+| `public-debug`                          | `debug`                |
+| `internal-public-eth`                   | `internal-eth`         |
+| `internal-public-blockchain`            | `internal-blockchain`  |
+| `internal-public-transaction-pool`      | `internal-transaction` |
+| `internal-public-tx-pool`               | `internal-tx-pool`     |
+| `internal-public-debug`                 | `internal-debug`       |
+| `internal-private-debug`                | `internal-debug`       |
+| `internal-public-account`               | `internal-account`     |
+| `internal-private-personal`             | `internal-personal`    |
+
+:::
+
+
+:::note
+
 If you populate this field, it will override the defaults so you must include every service you wish to enable.
 
 :::
 
-#### `eth`:
+#### `public-eth` (deprecated) or `eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 `eth_coinbase`
 `eth_etherbase`
 
-#### `eth-filter`:
+#### `public-eth-filter` (deprecated) or `eth-filter`:
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
@@ -153,14 +180,14 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 - `eth_getFilterLogs`
 - `eth_getFilterChanges`
 
-#### `admin`:
+#### `private-admin` (deprecated) or `admin`:
 
 Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 - `admin_importChain`
 - `admin_exportChain`
 
-#### `debug`:
+#### `private-debug` (deprecated) or `public-debug` (deprecated) or `debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -203,7 +230,7 @@ Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 - `web3_clientVersion`
 - `web3_sha3`
 
-#### `internal-eth`:
+#### `internal-public-eth` (deprecated) or `internal-eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -212,7 +239,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_maxPriorityFeePerGas`
 - `eth_feeHistory`
 
-#### `internal-blockchain`:
+#### `internal-public-blockchain` (deprecated) or `internal-blockchain`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -235,7 +262,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_estimateGas`
 - `eth_createAccessList`
 
-#### `internal-transaction`:
+#### `internal-public-transaction-pool` (deprecated) or `internal-transaction`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -257,7 +284,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_pendingTransactions`
 - `eth_resend`
 
-#### `internal-tx-pool`:
+#### `internal-public-tx-pool` (deprecated) or `internal-tx-pool`:
 
 Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
@@ -266,7 +293,7 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 - `txpool_status`
 - `txpool_inspect`
 
-#### `internal-debug`:
+#### `internal-public-debug` (deprecated) or `internal-private-debug` (deprecated) or `internal-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -276,13 +303,13 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
-#### `internal-account`:
+#### `internal-public-account` (deprecated) or `internal-account`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 - `eth_accounts`
 
-#### `internal-personal`:
+#### `internal-private-personal` (deprecated) or `internal-personal`:
 
 Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 
