@@ -21,7 +21,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Coreth**
 
 - Bumped go-ethereum dependency to v1.10.20
-- Updated API names used to enable services in `eth-api` config flag. Prior names are supported but deprecated, please update configurations [accordingly](https://docs.avax.network/nodes/maintain/chain-config-flags#c-chain-configs)
+- Updated API names used to enable services in `eth-api` config flag. Prior names are supported but deprecated, please update configurations [accordingly](../../nodes/maintain/chain-config-flags.md#c-chain-configs)
 - Optimized state sync by parallelizing trie syncing
 - Added `eth_syncing` API for compatibility. Note: This API is only accessible after bootstrapping and always returns `"false"`, since the node will no longer be syncing at that point
 - Added metrics to the atomic transaction mempool
