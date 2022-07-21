@@ -183,7 +183,7 @@ Here are the main differences you should be aware of.
 
 Avalanche does not use the same pricing mechanism as Ethereum does. Ethereum uses its consistent block times along with the gas per block as the indicator to set the BaseFee. 
 
-In Avalanche, that idea doesn’t make sense. Avalanche allows asynchronous block issuance (there is not necessarily a consistent block time). It targets every 2 seconds but varies depending on if there are more transactions to put in a block. 
+Instead, Avalanche supports asynchronous block issuance. Block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
 
 Avalanche uses the amount of gas used over time to calculate the modifications to the [BaseFee](https://medium.com/nethermind-eth/the-manipulation-of-the-basefee-in-the-context-of-eip-1559-4b082898271c). If there are enough transactions that are willing to subsidize the cost of producing a block earlier, then it can generate another block. 
 
