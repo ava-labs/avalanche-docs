@@ -2,7 +2,7 @@
 
 This tutorial will show you how to extend Avalanche's subnet-evm with custom functionality. It adds a novel stateful precompile contract to verify the X-Chain signature of a message that has been signed using the Avalanche Wallet or by other means.
 
-Previously, we at [red·dev](https://www.red.dev) wrote a [tutorial](https://docs.avax.network/community/tutorials-contest/red-dev-sig-verify-tutorial) on the same topic using solidity. But we think it is faster, more user-friendly, and more gas-efficient to recreate it as a stateful precompile that works similarly to ecrecover(), a precompile already built into subnet-evm that can verify C-Chain signatures.
+Previously, we at [red·dev](https://www.red.dev) wrote a [tutorial](https://docs.avax.network/community/tutorials-contest/red-dev-sig-verify-tutorial) on the same topic using solidity. But we think it is faster, more user-friendly, and more gas-efficient to recreate it as a stateful precompile that works similarly to ecrecover(), a precompile that is already built into subnet-evm that can verify C-Chain signatures.
 
 In this tutorial, we describe each step of setting up the environment and adding the new stateful precompile. For more information, see the **Resources** section at the end of this tutorial.
 
@@ -12,8 +12,7 @@ To get the most out of this tutorial, you will need to have a basic understandin
 
 
 ## Important: Regarding the Example Code Included
-
-In this tutorial you will find examples, and we have also included copies of the entire files from subnet-evm in a folder called <i>examples</i>. <b>Only use these files as a reference.</b> When making your own precompile, start with a current fork of subnet-evm and make your changes line-by-line to those files instead.
+In this tutorial you will find examples, and we have also included copies of the entire files that we have added or changed from subnet-evm in a folder called <i>example</i>. <b>Only use these files as a reference.</b> When making your own precompile, start with a current fork of subnet-evm and make your changes line-by-line to those preexisting files instead.
 
 # Prerequisites
 
@@ -46,7 +45,7 @@ $ go version
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
-As a few software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may get error running the commands below.
+As some software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`. Otherwise, you may get errors running the commands below.
 
 ## Clone Subnet-evm
 
@@ -64,16 +63,16 @@ This will clone and checkout to `master` branch.
 
 ## Add a Stateful Precompile
 
-To add a novel stateful precompile into subnet-evm we have to follow these steps:
+To add a novel stateful precompile into subnet-evm, follow these steps:
 
-1. Modify the [example/precompile/params.go](./example/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
-2. Create your own custom precompile contract and place it under example/precompile folder. In this tutorial we have created [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go).
-3. Modify the [example/params/config.go](./example/params/config.go). This supports adding the chain configuration and managed the subnet-evm via the genesis.json file. Since, the precompiles is optional and can be added or removed from the subnet-evm at anytime which can be managed by the genesis.json file.
-4. Modify the [example/scripts/run.sh](./example/scripts/run.sh) to include the custom precompile configuration.
+1. Modify the [precompile/params.go](./example/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
+2. Create your own custom precompile contract and place it under the precompile folder. In this tutorial we have created [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go).
+3. Modify the [params/config.go](./example/params/config.go). This supports adding the chain configuration and managed the subnet-evm via the genesis.json file. Since, the precompiles is optional and can be added or removed from the subnet-evm at anytime which can be managed by the genesis.json file.
+4. Modify the [scripts/run.sh](./example/scripts/run.sh) to include the custom precompile configuration.
 
 ### Modify the [example/precompile/params.go](./example/precompile/params.go) file
 
-As we mentioned earlier, the [example/precompile/params.go](./example/precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of subnet-evm, users should start at 0x0300000000000000000000000000000000000000 to ensure that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
+As we mentioned earlier, the [precompile/params.go](./example/precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of subnet-evm, users should start at 0x0300000000000000000000000000000000000000 to ensure that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
 
 We have taken the address `0x0300000000000000000000000000000000000000` for this tutorial.
 
@@ -104,139 +103,15 @@ var (
 	}
 )
 ```
-### Create a new custom [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go) contracts
+### Create a new custom [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go) contract
 
-We have then created the precompile contract below. All stateful precompile contracts should implement the interfaces Address(), Contract(), Configure() and Timestamp().
+We have created the precompile contract [contract_xchain_ecrecover.go](./example/precompile/contract_xchain_ecrecover.go). All stateful precompile contracts should implement the interfaces Address(), Contract(), Configure() and Timestamp().
 
 The xChainECRecoverReadSignature contains the function selector which can be used in solidity smart contracts to execute the precompile.
 
 The getXChainECRecover() function contains the business logic for verifying the signature and returning the X-Chain address.
 
-
-```
-// (c) 2019-2020, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
-package precompile
-
-import (
-	"crypto/sha256"
-	"math/big"
-
-	"github.com/btcsuite/btcutil/bech32"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"golang.org/x/crypto/ripemd160"
-)
-
-var (
-	_ StatefulPrecompileConfig = &ContractXChainECRecoverConfig{}
-	// Singleton StatefulPrecompiledContract for XChain ECRecover.
-	ContractXChainECRecoverPrecompile StatefulPrecompiledContract = createXChainECRecoverPrecompile(ContractXchainECRecoverAddress)
-
-	xChainECRecoverReadSignature = CalculateFunctionSelector("getXChainECRecover(bytes32,uint8,bytes32,bytes32)")
-)
-
-// ContractXChainECRecoverConfig uses it to implement the StatefulPrecompileConfig
-type ContractXChainECRecoverConfig struct {
-	BlockTimestamp *big.Int `json:"blockTimestamp"`
-}
-
-// Address returns the address of the XChain ECRecover contract.
-func (c *ContractXChainECRecoverConfig) Address() common.Address {
-	return ContractXchainECRecoverAddress
-}
-
-// Contract returns the singleton stateful precompiled contract to be used for the XChain ECRecover.
-func (c *ContractXChainECRecoverConfig) Contract() StatefulPrecompiledContract {
-	return ContractXChainECRecoverPrecompile
-}
-
-// Configure configures [state] with the desired admins based on [c].
-func (c *ContractXChainECRecoverConfig) Configure(state StateDB) {
-	
-}
-
-func (c *ContractXChainECRecoverConfig) Timestamp() *big.Int { return c.BlockTimestamp }
-
-func allZero(b []byte) bool {
-	for _, byte := range b {
-		if byte != 0 {
-			return false
-		}
-	}
-	return true
-}
-
-// getXChainECRecover returns an execution function that reads the input and return the input from the given [precompileAddr].
-// The execution function parses the input into a string and returns the string
-func getXChainECRecover(precompileAddr common.Address) RunStatefulPrecompileFunc {
-	return func(evm PrecompileAccessibleState, callerAddr common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-		if remainingGas, err = deductGas(suppliedGas, XChainECRecoverCost); err != nil {
-			return nil, 0, err
-		}
-
-		const ecRecoverInputLength = 128
-
-		input = common.RightPadBytes(input, ecRecoverInputLength)
-
-		// "input" is (hash, v, r, s), each 32 bytes
-		// but for ecrecover we want (r, s, v)
-
-		r := new(big.Int).SetBytes(input[64:96])
-		s := new(big.Int).SetBytes(input[96:128])
-		v := input[63]
-
-		// tighter sig s values input homestead only apply to tx sigs
-		if !allZero(input[32:63]) || !crypto.ValidateSignatureValues(v, r, s, false) {
-			return nil, remainingGas, nil
-		}
-
-		// We must make sure not to modify the 'input', so placing the 'v' along with
-		// the signature needs to be done on a new allocation
-
-		sig := make([]byte, 65)
-		copy(sig, input[64:128])
-		sig[64] = v
-
-		// v needs to be at the end for libsecp256k1
-		pubk, err := crypto.SigToPub(input[:32], sig)
-		publicKey := crypto.CompressPubkey(pubk)
-
-		// make sure the public key is a valid one
-		if err != nil {
-			return nil, remainingGas, nil
-		}
-
-		sha := sha256.Sum256(publicKey)
-		ripemd := ripemd160.New()
-		ripemd.Write(sha[:])
-		ripe := ripemd.Sum(nil)
-
-		conv, err := bech32.ConvertBits(ripe, 8, 5, true)
-		if err != nil {
-			log.Info("Error:", err)
-		}
-		encoded, err := bech32.Encode("fuji", conv)
-		xchain := "X-" + encoded
-
-		if err != nil {
-			log.Info("Error:", err)
-		}
-
-		return []byte(xchain), remainingGas, nil
-	}
-}
-
-// createXChainECRecoverPrecompile returns a StatefulPrecompiledContract with R/W control of an allow list at [precompileAddr] and a native coin minter.
-func createXChainECRecoverPrecompile(precompileAddr common.Address) StatefulPrecompiledContract {
-	funcGetXChainECRecover := newStatefulPrecompileFunction(xChainECRecoverReadSignature, getXChainECRecover(precompileAddr))
-
-	// Construct the contract with no fallback function.
-	contract := newStatefulPrecompileWithFunctionSelectors(nil, []*statefulPrecompileFunction{xChainECRecover,funcGetXChainECRecover})
-	return contract
-}
-```
+Please [go take a look at it now](./example/precompile/contract_xchain_ecrecover.go).
 
 (Please note that we are still working to repair one final defect in this example contract. After computing the correct X-Chain address of the signer, it does not yet return this value to the calling dApp due to an issue concerning data types. We expect to have this resolved soon.)
 
@@ -323,11 +198,11 @@ func (c *ChainConfig) IsTxAllowList(blockTimestamp *big.Int) bool {
 + }
 ```
 
-### Modify the [example/scripts/run.sh](./example/scripts/run.sh)
+### Modify [scripts/run.sh](./example/scripts/run.sh)
 
-The [example/scripts/run.sh](./example/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the subnet-evm by configuring in the genesis.json file.
+The [scripts/run.sh](./example/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the subnet-evm by configuring in the genesis.json file.
 
-We have to modify the default genesis.json setting in the [example/scripts/run.sh](./example/scripts/run.sh) to enable our custom precompile. At about [line 125](./example/scripts/run.sh#L125) under config object we have added the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [example/params/config.go line 122](./example/params/config.go#L122):
+We have to modify the default genesis.json setting in the [scripts/run.sh](./example/scripts/run.sh) to enable our custom precompile. At about [line 125](./example/scripts/run.sh#L125) under config object we have added the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [params/config.go line 122](./example/params/config.go#L122):
 
 ```diff
 {
@@ -491,4 +366,4 @@ Here is a list of resources that can give you a detailed idea of what is mention
 4. [Remix](https://remix-project.org/)
 5. [GoLang](https://go.dev/)
 # Conclusion
-The ability to add stateful precompiles to an Avalanche subnet based on subnet-evm opens up a world of possibilities. We chose to write a precompile to address one significant use-case, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the subnet-evm.
+The ability to add stateful precompiles to an Avalanche subnet based on subnet-evm opens up a world of possibilities. We chose to write a precompile to address one significant use-case pertaining to subnet inter-communication, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the subnet-evm.
