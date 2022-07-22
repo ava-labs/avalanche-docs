@@ -110,7 +110,19 @@ func getXChainECRecover(precompileAddr common.Address) RunStatefulPrecompileFunc
 		if err != nil {
 			log.Info("Error:", err)
 		}
-		return []byte(xchain), remainingGas, nil
+
+		// To return the x-chain address as a string to Solidity,
+		// the variable must first be padded as follows or it will throw an error.
+
+		xChainLength := len(xchain)
+		out := []byte(string(xchain))
+		zeroArray := [64]byte{}
+		out = append(zeroArray[:], out...)
+		out[31] = 32 //32 is the padding
+		out[63] = byte(xChainLength)
+		out = common.RightPadBytes(out, ecRecoverInputLength)
+
+		return out, remainingGas, nil
 	}
 }
 
