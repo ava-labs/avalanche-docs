@@ -2,33 +2,33 @@
 
 ## Introduction
 
-Hi there! In this tutorial, we will be learning how to create a custom genesis file for your subnet.
+Hi there! In this tutorial, we will be learning how to create a custom genesis file for your Subnet.
 
-We will start by deploying a very simple subnet using the subnet wizard. Then we will learn about the genesis file and how to customize it for our needs.
+We will start by deploying a very simple Subnet using the Subnet wizard. Then we will learn about the genesis file and how to customize it for our needs.
 
 Next, we will create a simple game!
 
-We will create and deploy a new subnet using our custom genesis file for the game. Finally, we will be deploying the Game contract to the subnet.
+We will create and deploy a new Subnet using our custom genesis file for the game. Finally, we will be deploying the Game contract to the Subnet.
 
-The Game contract has a simple function called `play` that accepts `LUCK` tokens (native currency of our subnet) and the contract will either lock the tokens or **mint** 2x the amount of tokens to the player. Yes, it's going to mint native tokens.
+The Game contract has a simple function called `play` that accepts `LUCK` tokens (native currency of our Subnet) and the contract will either lock the tokens or **mint** 2x the amount of tokens to the player. Yes, it's going to mint native tokens.
 
-At the end of the tutorial, you will *hopefully* have a solid understanding of how to customize the genesis file of your subnet.
+At the end of the tutorial, you will *hopefully* have a solid understanding of how to customize the genesis file of your Subnet.
 
 I hope you enjoy this tutorial!
 
 ## Table of Contents
 
-- [Avalanche - Creating a Genesis file for your Subnet](#avalanche---creating-a-genesis-file-for-your-subnet)
+- [Avalanche - Creating a Genesis file for your Subnet](#avalanche---creating-a-genesis-file-for-your-Subnet)
   - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
     - [Metamask](#metamask)
     - [Avalanche CLI](#avalanche-cli)
-- [Creating and deploying a simple subnet](#creating-and-deploying-a-simple-subnet)
-  - [What is a subnet?](#what-is-a-subnet)
-    - [Subnets](#subnets)
+- [Creating and deploying a simple Subnet](#creating-and-deploying-a-simple-Subnet)
+  - [What is a Subnet?](#what-is-a-Subnet)
+    - [Subnets](#Subnets)
     - [Genesis file](#genesis-file)
-  - [Creating a simple subnet](#creating-a-simple-subnet)
+  - [Creating a simple Subnet](#creating-a-simple-Subnet)
       - [Choose your VM](#choose-your-vm)
       - [Chain id](#chain-id)
       - [Token symbol](#token-symbol)
@@ -38,7 +38,7 @@ I hope you enjoy this tutorial!
         - [Native Minting](#native-minting)
         - [Configure Contract deployment whitelist](#configure-contract-deployment-whitelist)
         - [Configure Transaction allow list](#configure-transaction-allow-list)
-  - [Deploying the subnet](#deploying-the-subnet)
+  - [Deploying the Subnet](#deploying-the-Subnet)
 - [Understanding the Genesis file](#understanding-the-genesis-file)
     - [Config](#config)
       - [`chainId`](#chainid)
@@ -76,7 +76,7 @@ I hope you enjoy this tutorial!
   - [Allocating native tokens](#allocating-native-tokens)
   - [Minting native tokens](#minting-native-tokens)
   - [Restricting contract deployers](#restricting-contract-deployers)
-- [Creating and deploying the Subnet using the custom genesis file](#creating-and-deploying-the-subnet-using-the-custom-genesis-file)
+- [Creating and deploying the Subnet using the custom genesis file](#creating-and-deploying-the-Subnet-using-the-custom-genesis-file)
 - [Deploying the game contract](#deploying-the-game-contract)
   - [Metamask configuration](#metamask-configuration)
   - [Metamask Gas configuration](#metamask-gas-configuration)
@@ -120,40 +120,40 @@ $ cd ./bin/avalanche
 $ export PATH=$PWD:$PATH
 ```
 
-We're ready to deploy our first subnet.
+We're ready to deploy our first Subnet.
 
-# Creating and deploying a simple subnet
+# Creating and deploying a simple Subnet
 
-## What is a subnet?
+## What is a Subnet?
 
-> A subnet, or subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one subnet. A subnet can have and validate many blockchains. A validator may be a member of many subnets. 
+> A Subnet, or Subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets. 
 > 
-> Subnets are independent and don’t share execution thread, storage or networking with other subnets or the Primary Network, effectively allowing the network to scale up easily. They share the benefits provided by the Avalanche Protocol such as low cost and fast to finality.
+> Subnets are independent and don’t share execution thread, storage or networking with other Subnets or the Primary Network, effectively allowing the network to scale up easily. They share the benefits provided by the Avalanche Protocol such as low cost and fast to finality.
 > 
-> A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+> A Subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
 
-[Here is a great introduction to subnets by Avalanche](https://docs.avax.network/subnets)
+[Here is a great introduction to Subnets by Avalanche](https://docs.avax.network/Subnets)
 
 ### Subnets
 
-Subnets is a great technology! It's still advancing and a bit complicated. There is almost no tooling for subnets and it's a bit difficult to work with them.
+Subnets is a great technology! It's still advancing and a bit complicated. There is almost no tooling for Subnets and it's a bit difficult to work with them.
 
 Avalanche has changed that! The Avalanche team has developed an amazing tool to make this process a breeze.
-Now you can deploy your own production-ready subnet with just a few commands. The tool will guide you through configuring your subnet and deploying it!
+Now you can deploy your own production-ready Subnet with just a few commands. The tool will guide you through configuring your Subnet and deploying it!
 
 ### Genesis file
 
-The genesis file is a file that contains the initial configuration of the subnet. Avalanche will generate a genesis file for you based on some parameters you provide. On the other hand, you can also create your own genesis file! This will allow you to have more control over the configuration of your subnet.
+The genesis file is a file that contains the initial configuration of the Subnet. Avalanche will generate a genesis file for you based on some parameters you provide. On the other hand, you can also create your own genesis file! This will allow you to have more control over the configuration of your Subnet.
 
-## Creating a simple subnet
+## Creating a simple Subnet
 
-For this time, let's take the easy way out and use the CLI to deploy a subnet to see how things work.
+For this time, let's take the easy way out and use the CLI to deploy a Subnet to see how things work.
 
 ```bash
-$ avalanche subnet create testSubnet
+$ avalanche Subnet create testSubnet
 ```
 
-This command will run the wizard to create a subnet.
+This command will run the wizard to create a Subnet.
 
 There are six steps in the wizard:
 
@@ -167,7 +167,7 @@ Chain id is a unique identifier for the network. This value must be unique so ch
 
 #### Token symbol
 
-Token symbol is the symbol of the native token used in the subnet. For instance, on the C-Chain, the symbol is `AVAX` and on the Ethereum mainnet, the symbol is `ETH`. You can use any symbol you want.
+Token symbol is the symbol of the native token used in the Subnet. For instance, on the C-Chain, the symbol is `AVAX` and on the Ethereum mainnet, the symbol is `ETH`. You can use any symbol you want.
 
 #### Gas configuration
 
@@ -181,7 +181,7 @@ We will go with C-Chain default fees.
 
 #### Airdropping native tokens
 
-This step will define how you want to distribute the funds in your subnet. You can choose the addresses and amounts you want to distribute.
+This step will define how you want to distribute the funds in your Subnet. You can choose the addresses and amounts you want to distribute.
 Let's go with the simplest case.
 
 ```bash
@@ -202,17 +202,17 @@ Here you can set up a custom precompile to unlock some useful functions.
 
 ##### Native Minting
 
-This precompile allows admins to permit designated contracts to mint the native token on your subnet.
+This precompile allows admins to permit designated contracts to mint the native token on your Subnet.
 We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractNativeMinterConfig) section.
 
 ##### Configure Contract deployment whitelist
 
-This precompile restricts who has the ability to deploy contracts on your subnet.
+This precompile restricts who has the ability to deploy contracts on your Subnet.
 We will discuss this in more detail in the [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig) section.
 
 ##### Configure Transaction allow list
 
-This precompile restricts who has the ability to make transactions on your subnet.
+This precompile restricts who has the ability to make transactions on your Subnet.
 We will discuss this in more detail in the [`txAllowListConfig`](#txAllowListConfig) section.
 
 However, we are not gonna do any of these yet. Choose `No` and proceed.
@@ -221,13 +221,13 @@ However, we are not gonna do any of these yet. Choose `No` and proceed.
 > Successfully created genesis
 ```
 
-Congrats! You just created a subnet! 👏🎉
-## Deploying the subnet
+Congrats! You just created a Subnet! 👏🎉
+## Deploying the Subnet
 
-This is the most fun part. We will deploy the subnet that we just created, and it's so easy to do, thanks to Avalanche CLI!
+This is the most fun part. We will deploy the Subnet that we just created, and it's so easy to do, thanks to Avalanche CLI!
 
 ```bash
-$ avalanche subnet deploy testSubnet
+$ avalanche Subnet deploy testSubnet
 
 > ? Choose a network to deploy on:
   ▸ Local Network
@@ -235,7 +235,7 @@ $ avalanche subnet deploy testSubnet
     Mainnet
 ```
 
-We will deploy the subnet on a local network so choose `Local Network` here.
+We will deploy the Subnet on a local network so choose `Local Network` here.
 
 This process will install Avalanchego (if not already installed) and start the network. This will take a couple of minutes so, this is a good time to refresh your coffee ☕
 
@@ -257,31 +257,31 @@ You can use this configuration to add a new network to your metamask. Then you c
 Notice that you will see the same private key if you've chosen `Airdrop 1 million tokens to the default address (do not use in production)` in the [airdrop step](#how-would-you-like-to-distribute-funds).
 Thus, the private key is exposed and anyone can access the account. For that reason, it's not a good idea to use this in production.
 
-After importing the account on metamask, let's change the network to our subnet.
+After importing the account on metamask, let's change the network to our Subnet.
 
 ![Metamask account page](.github/images/metamask2.png)
 
-How awesome is that? `TEST` is the native token of our subnet and it's airdropped to our address. You can now deploy smart contracts and interact with the network.
+How awesome is that? `TEST` is the native token of our Subnet and it's airdropped to our address. You can now deploy smart contracts and interact with the network.
 
 # Understanding the Genesis file
 
-Before starting, I'd like to acknowledge that this section is very similar to [Avax docs - Customize a Subnet](https://docs.avax.network/subnets/customize-a-subnet). However, I've made some changes to make it more comprehensive and easier to understand.
+Before starting, I'd like to acknowledge that this section is very similar to [Avax docs - Customize a Subnet](https://docs.avax.network/Subnets/customize-a-Subnet). However, I've made some changes to make it more comprehensive and easier to understand.
 
-Subnet wizard is an awesome tool to customize your subnet and might be a good starting point for you.
+Subnet wizard is an awesome tool to customize your Subnet and might be a good starting point for you.
 
 We have mentioned the [genesis file](#genesis-file) above. The wizard generates this file for you but you can also create **your own genesis file!** This will allow you to customize the network more easily and in depth.
 
-Let's take a look at the genesis file of our subnet which the wizard created for us.
+Let's take a look at the genesis file of our Subnet which the wizard created for us.
 
 ```bash
-# use your subnet name instead of testSubnet
+# use your Subnet name instead of testSubnet
 $ cat ~/.avalanche-cli/testSubnet_genesis.json
 ```
 
 To access the genesis file, you can also use:
 
 ```bash
-$ avalanche subnet describe testSubnet --genesis
+$ avalanche Subnet describe testSubnet --genesis
 ```
 
 Yes, the genesis file is in json format. The output should look like:
@@ -300,7 +300,7 @@ Yes, the genesis file is in json format. The output should look like:
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
+    "SubnetEVMTimestamp": 0,
     "feeConfig": {
       "gasLimit": 8000000,
       "targetBlockRate": 2,
@@ -345,7 +345,7 @@ Yes, the genesis file is in json format. The output should look like:
 }
 ```
 
-Pretty scary, right? But it's not that bad as it seems. The genesis file is a json file that contains the configuration of the subnet and the block header of the genesis block, which is the first block in the network.
+Pretty scary, right? But it's not that bad as it seems. The genesis file is a json file that contains the configuration of the Subnet and the block header of the genesis block, which is the first block in the network.
 
 Let's dive into the genesis file a little bit more.
 
@@ -353,15 +353,15 @@ Let's dive into the genesis file a little bit more.
 
 #### `chainId`
 
-The chain ID of the subnet. We've set this to 1234 [when we created the subnet](#chain-id).
+The chain ID of the Subnet. We've set this to 1234 [when we created the Subnet](#chain-id).
 
 #### Hardforks
 
-`eip150Block`, `eip150Hash`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp`
+`eip150Block`, `eip150Hash`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `SubnetEVMTimestamp`
 
 These are the blocks where the network has been adopted to the new protocol release. [Here is the full list](https://github.com/ethereum/execution-specs#ethereum-protocol-releases).
 
-When there is a new protocol release, to activate that protocol on your subnet, you can add the configuration for the new protocol to the genesis file and point it to a block number in the future as the activation block number.
+When there is a new protocol release, to activate that protocol on your Subnet, you can add the configuration for the new protocol to the genesis file and point it to a block number in the future as the activation block number.
 
 ### Fee Config
 
@@ -425,7 +425,7 @@ This value is set to `200000` in C-Chain.
 ### Validator fee recipient
 This configuration allows validators to specify a fee recipient. 
 
-Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#setting-a-custom-fee-recipient)
+Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#setting-a-custom-fee-recipient)
 
 ```json
 {
@@ -440,7 +440,7 @@ You can enable some precompiled contracts in the genesis file. These contracts p
 
 #### `contractDeployerAllowListConfig`
 
-This configuration allows you specify which addresses are authorized to deploy contracts. You can also customize this [in the last step of the subnet wizard](#configure-contract-deployment-whitelist).
+This configuration allows you specify which addresses are authorized to deploy contracts. You can also customize this [in the last step of the Subnet wizard](#configure-contract-deployment-whitelist).
 If you'd like to restrict the contract deployer to a specific list of addresses, you can set the `contractDeployerAllowListConfig` to a JSON object with the following properties:
 
 ```json
@@ -451,12 +451,12 @@ If you'd like to restrict the contract deployer to a specific list of addresses,
 ```
 
 Admin addresses can deploy new contracts and add new Admin and Deployer addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000000`.
-[You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers)
+[You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-smart-contract-deployers)
 
 
 #### `contractNativeMinterConfig`
 
-This configuration lets you use a smart contract to mint native tokens in your subnet. This is useful if you want to use your own token minting system.  
+This configuration lets you use a smart contract to mint native tokens in your Subnet. This is useful if you want to use your own token minting system.  
 
 If you'd like to use a smart contract to mint native tokens, you can set the `contractNativeMinterConfig` to a JSON object with the following properties:
 
@@ -467,7 +467,7 @@ If you'd like to use a smart contract to mint native tokens, you can set the `co
 }
 ```
 
-Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
+Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#minting-native-coins)
 
 #### `txAllowListConfig`
 
@@ -481,7 +481,7 @@ If you'd like to restrict the transaction sender to a specific list of addresses
 }
 ```
 
-Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions)
+Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-who-can-submit-transactions)
 
 ### Genesis block
 This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field) 
@@ -544,7 +544,7 @@ In our genesis file. The balance is set to `0xd3c21bcecceda1000000` which corres
 
 We learned a lot! Now we can create our genesis file! 
 
-I'd like to create a subnet where people can earn native tokens by playing a simple game. 
+I'd like to create a Subnet where people can earn native tokens by playing a simple game. 
 
 The network doesn't need to be very fast. I'll set the transaction fees high because the game will mint native tokens to players so we should be burning some of them to help inflation.
 
@@ -563,7 +563,7 @@ To get started, create a new file named `genesis.json` and fill it with the foll
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0
+    "SubnetEVMTimestamp": 0
   },
   "alloc": {
    
@@ -585,7 +585,7 @@ This is a boilerplate genesis file. We are going to fill in the fields that we n
 
 ## Setting the chain id
 
-The first thing to do is to pick a unique [chain id](#chainid) for our subnet. We can check [chainlist](https://chainlist.org/) to find a chain id that is not used. I'll go with `321123` because it looks good.
+The first thing to do is to pick a unique [chain id](#chainid) for our Subnet. We can check [chainlist](https://chainlist.org/) to find a chain id that is not used. I'll go with `321123` because it looks good.
 
 ```json
 {
@@ -597,7 +597,7 @@ The first thing to do is to pick a unique [chain id](#chainid) for our subnet. W
 
 ## Configuring fees and gas
 
-I have an old computer so I want my subnet to be - slow. So, I'll set the `gasLimit` to `5,000,000`, the `targetBlockRate` to 5 seconds and the `targetGas` to `10000000`.
+I have an old computer so I want my Subnet to be - slow. So, I'll set the `gasLimit` to `5,000,000`, the `targetBlockRate` to 5 seconds and the `targetGas` to `10000000`.
 
 Then I'll set the `minBaseFee` to 60 nAvax (gwei) which is `60000000000` wei to make sure that the transaction fees are high enough to help the network.
 
@@ -704,7 +704,7 @@ Now we're done! The final config looks like:
         "petersburgBlock": 0,
         "istanbulBlock": 0,
         "muirGlacierBlock": 0,
-        "subnetEVMTimestamp": 0,
+        "SubnetEVMTimestamp": 0,
         "feeConfig": {
             "gasLimit": 5000000,
             "targetBlockRate": 5,
@@ -748,22 +748,22 @@ Now we're done! The final config looks like:
 
 # Creating and deploying the Subnet using the custom genesis file
 
-We will use `genesis.json` to create a new subnet. This part is pretty simple.
+We will use `genesis.json` to create a new Subnet. This part is pretty simple.
 
-Let's first delete the old subnet that we created using the wizard.
+Let's first delete the old Subnet that we created using the wizard.
 
 ```bash
-$ avalanche subnet delete testSubnet
+$ avalanche Subnet delete testSubnet
 
-> Deleted subnet
+> Deleted Subnet
 ```
 
-Next, we will create a new subnet using the genesis file.
+Next, we will create a new Subnet using the genesis file.
 
 ```bash
-# avalanche subnet create <subnetName> --file <filepath>
+# avalanche Subnet create <SubnetName> --file <filepath>
 
-$ avalanche subnet create game --file ./genesis.json
+$ avalanche Subnet create game --file ./genesis.json
 # Use SubnetEVM
 
 > Using specified genesis
@@ -774,8 +774,8 @@ $ avalanche subnet create game --file ./genesis.json
 Now let's deploy it!
   
 ```bash
-# avalanche subnet deploy <subnetName>
-$ avalanche subnet deploy game
+# avalanche Subnet deploy <SubnetName>
+$ avalanche Subnet deploy game
 
 # choose local network as deployment target
 
@@ -793,7 +793,7 @@ Awesomeness! Great work!
 
 ## Metamask configuration
 
-Before going to the next step, make sure you've added the subnet to metamask by following the same steps in the [`Deploying the subnet`](#deploying-the-subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
+Before going to the next step, make sure you've added the Subnet to metamask by following the same steps in the [`Deploying the Subnet`](#deploying-the-Subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
 
 ![Metamask account look](.github/images/metamask3.png)
 ## Metamask Gas configuration
@@ -814,7 +814,7 @@ After making a few transactions, metamask should start automatically adjusting t
 
 ## Deploying the contract
 
-We will use [remix](https://remix.ethereum.org/) to deploy the game contract on the subnet.
+We will use [remix](https://remix.ethereum.org/) to deploy the game contract on the Subnet.
 
 Go to the website and create a blank workspace.
 
@@ -827,7 +827,7 @@ Next, create a folder and under that folder, create two files with the following
 ### NativeMinterInterface.sol
 
 This is the `ContractNativeMinter` interface. We know the contract is deployed at `0x0200000000000000000000000000000000000001`.
-[See more about it here.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
+[See more about it here.](https://docs.avax.network/Subnets/customize-a-Subnet#minting-native-coins)
 
 ```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
@@ -906,7 +906,7 @@ Confirm the transaction with your metamask wallet.
 
 ![Deployed contracts](.github/images/game_deployed.png)
 
-Yay! We deployed a smart contract in our subnet! That sounds fantastic!
+Yay! We deployed a smart contract in our Subnet! That sounds fantastic!
 
 ## Setting Game contract as Minter
 
@@ -964,12 +964,12 @@ And my luck is back!
 # Conclusion
 This is the end of the tutorial. I hope you've enjoyed it as much as I've enjoyed writing it. Subnets are literally amazing and I'm very excited for the future of this technology.
 
-You now have the ability to create your own subnet and customize it to your needs. Go play with the parameters, try something new, and enjoy!
+You now have the ability to create your own Subnet and customize it to your needs. Go play with the parameters, try something new, and enjoy!
 
 Please feel free to create an issue if you have any questions!
 
 Thanks for reading :heart:
 
 ## Resources
-- [Avax Docs](https://docs.avax.network/subnets)
+- [Avax Docs](https://docs.avax.network/Subnets)
 - [Explanation of genesis file](https://gist.github.com/0mkara/b953cc2585b18ee098cd#file-genesis-md)
