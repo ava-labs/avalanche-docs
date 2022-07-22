@@ -16,6 +16,12 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 ## v1.7.15 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.15))
 
+:::warning
+
+This version should not be used in a production environment. [v1.7.16](#v1716-view-on-github) resolves a database leak introduced in this release.
+
+:::
+
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
 
 **PlatformVM**
