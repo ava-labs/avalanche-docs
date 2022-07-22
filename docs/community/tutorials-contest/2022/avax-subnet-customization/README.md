@@ -1,4 +1,4 @@
-# Avalanche - Creating a Genesis file for your Subnet
+# Avalanche - Creating a Genesis File For Your Subnet
 
 ## Introduction
 
@@ -18,28 +18,28 @@ I hope you enjoy this tutorial!
 
 ## Table of Contents
 
-- [Avalanche - Creating a Genesis file for your Subnet](#avalanche---creating-a-genesis-file-for-your-Subnet)
+- [Avalanche - Creating a Genesis File For Your Subnet](#avalanche---creating-a-genesis-file-for-your-Subnet)
   - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
     - [Metamask](#metamask)
     - [Avalanche CLI](#avalanche-cli)
-- [Creating and deploying a simple Subnet](#creating-and-deploying-a-simple-Subnet)
-  - [What is a Subnet?](#what-is-a-Subnet)
+- [Creating and deploying a Simple Subnet](#creating-and-deploying-a-simple-Subnet)
+  - [What Is a Subnet?](#what-is-a-Subnet)
     - [Subnets](#Subnets)
-    - [Genesis file](#genesis-file)
-  - [Creating a simple Subnet](#creating-a-simple-Subnet)
-      - [Choose your VM](#choose-your-vm)
-      - [Chain id](#chain-id)
-      - [Token symbol](#token-symbol)
-      - [Gas configuration](#gas-configuration)
-      - [Airdropping native tokens](#airdropping-native-tokens)
-      - [Adding a custom precompile to modify the EVM](#adding-a-custom-precompile-to-modify-the-evm)
+    - [Genesis File](#genesis-file)
+  - [Creating a Simple Subnet](#creating-a-simple-Subnet)
+      - [Choose Your VM](#choose-your-vm)
+      - [Chain Id](#chain-id)
+      - [Token Symbol](#token-symbol)
+      - [Gas Configuration](#gas-configuration)
+      - [Airdropping Native Tokens](#airdropping-native-tokens)
+      - [Adding a Custom Precompile To Modify the EVM](#adding-a-custom-precompile-to-modify-the-evm)
         - [Native Minting](#native-minting)
-        - [Configure Contract deployment whitelist](#configure-contract-deployment-whitelist)
-        - [Configure Transaction allow list](#configure-transaction-allow-list)
+        - [Configure Contract Deployment Whitelist](#configure-contract-deployment-whitelist)
+        - [Configure Transaction Allow List](#configure-transaction-allow-list)
   - [Deploying the Subnet](#deploying-the-Subnet)
-- [Understanding the Genesis file](#understanding-the-genesis-file)
+- [Understanding the Genesis File](#understanding-the-genesis-file)
     - [Config](#config)
       - [`chainId`](#chainid)
       - [Hardforks](#hardforks)
@@ -52,12 +52,12 @@ I hope you enjoy this tutorial!
       - [`minBlockGasCost`](#minblockgascost)
       - [`maxBlockGasCost`](#maxblockgascost)
       - [`blockGasCostStep`](#blockgascoststep)
-    - [Validator fee recipient](#validator-fee-recipient)
+    - [Validator Fee Recipient](#validator-fee-recipient)
     - [Precompiles](#precompiles)
       - [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig)
       - [`contractNativeMinterConfig`](#contractnativeminterconfig)
       - [`txAllowListConfig`](#txallowlistconfig)
-    - [Genesis block](#genesis-block)
+    - [Genesis Block](#genesis-block)
       - [`nonce`](#nonce)
       - [`timestamp`](#timestamp)
       - [`extraData`](#extradata)
@@ -69,23 +69,23 @@ I hope you enjoy this tutorial!
       - [`gasUsed`](#gasused)
       - [`number`](#number)
       - [`airdropHash` `baseFeePerGas` `airdropAmount`](#airdrophash-basefeepergas-airdropamount)
-    - [Native token allocation](#native-token-allocation)
-- [Creating a custom genesis file](#creating-a-custom-genesis-file)
-  - [Setting the chain id](#setting-the-chain-id)
-  - [Configuring fees and gas](#configuring-fees-and-gas)
-  - [Allocating native tokens](#allocating-native-tokens)
-  - [Minting native tokens](#minting-native-tokens)
-  - [Restricting contract deployers](#restricting-contract-deployers)
-- [Creating and deploying the Subnet using the custom genesis file](#creating-and-deploying-the-Subnet-using-the-custom-genesis-file)
-- [Deploying the game contract](#deploying-the-game-contract)
-  - [Metamask configuration](#metamask-configuration)
-  - [Metamask Gas configuration](#metamask-gas-configuration)
-  - [Deploying the contract](#deploying-the-contract)
+    - [Native Token Allocation](#native-token-allocation)
+- [Creating a Custom Genesis File](#creating-a-custom-genesis-file)
+  - [Setting the Chain Id](#setting-the-chain-id)
+  - [Configuring Fees and Gas](#configuring-fees-and-gas)
+  - [Allocating Native Tokens](#allocating-native-tokens)
+  - [Minting Native Tokens](#minting-native-tokens)
+  - [Restricting Contract Deployers](#restricting-contract-deployers)
+- [Creating and Deploying the Subnet Using the Custom Genesis File](#creating-and-deploying-the-Subnet-using-the-custom-genesis-file)
+- [Deploying the Game Contract](#deploying-the-game-contract)
+  - [Metamask Configuration](#metamask-configuration)
+  - [Metamask Gas Configuration](#metamask-gas-configuration)
+  - [Deploying the Contract](#deploying-the-contract)
     - [NativeMinterInterface.sol](#nativeminterinterfacesol)
     - [Game.sol](#gamesol)
     - [Compiling and deploying](#compiling-and-deploying)
-  - [Setting Game contract as Minter](#setting-game-contract-as-minter)
-  - [Play the game!](#play-the-game)
+  - [Setting Game Contract as a Minter](#setting-game-contract-as-minter)
+  - [Play the Game](#play-the-game)
 - [Conclusion](#conclusion)
   - [Resources](#resources)
 
@@ -122,9 +122,9 @@ $ export PATH=$PWD:$PATH
 
 We're ready to deploy our first Subnet.
 
-# Creating and deploying a simple Subnet
+# Creating and deploying a Simple Subnet
 
-## What is a Subnet?
+## What Is a Subnet?
 
 > A Subnet, or Subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets. 
 > 
@@ -141,11 +141,11 @@ Subnets is a great technology! It's still advancing and a bit complicated. There
 Avalanche has changed that! The Avalanche team has developed an amazing tool to make this process a breeze.
 Now you can deploy your own production-ready Subnet with just a few commands. The tool will guide you through configuring your Subnet and deploying it!
 
-### Genesis file
+### Genesis File
 
 The genesis file is a file that contains the initial configuration of the Subnet. Avalanche will generate a genesis file for you based on some parameters you provide. On the other hand, you can also create your own genesis file! This will allow you to have more control over the configuration of your Subnet.
 
-## Creating a simple Subnet
+## Creating a Simple Subnet
 
 For this time, let's take the easy way out and use the CLI to deploy a Subnet to see how things work.
 
@@ -157,19 +157,19 @@ This command will run the wizard to create a Subnet.
 
 There are six steps in the wizard:
 
-#### Choose your VM
+#### Choose Your VM
 
 Choose SubnetEVM here
 
-#### Chain id
+#### Chain Id
 
 Chain id is a unique identifier for the network. This value must be unique so check [chainlist](https://chainlist.org/) to see if the chain id is already in use.
 
-#### Token symbol
+#### Token Symbol
 
 Token symbol is the symbol of the native token used in the Subnet. For instance, on the C-Chain, the symbol is `AVAX` and on the Ethereum mainnet, the symbol is `ETH`. You can use any symbol you want.
 
-#### Gas configuration
+#### Gas Configuration
 
 This step will define the gas configuration of your network. You can choose a preset fee configuration or create your own. Keep in mind that more transaction throughput means more disk usage.
 
@@ -179,7 +179,7 @@ We will go with C-Chain default fees.
 > Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
 ```
 
-#### Airdropping native tokens
+#### Airdropping Native Tokens
 
 This step will define how you want to distribute the funds in your Subnet. You can choose the addresses and amounts you want to distribute.
 Let's go with the simplest case.
@@ -189,7 +189,7 @@ How would you like to distribute funds?
 > Airdrop 1 million tokens to the default address (do not use in production)
 ```
 
-#### Adding a custom precompile to modify the EVM
+#### Adding a Custom Precompile To Modify the EVM
 
 ```bash
 ? Advanced: Would you like to add a custom precompile to modify the EVM?: 
@@ -205,12 +205,12 @@ Here you can set up a custom precompile to unlock some useful functions.
 This precompile allows admins to permit designated contracts to mint the native token on your Subnet.
 We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractNativeMinterConfig) section.
 
-##### Configure Contract deployment whitelist
+##### Configure Contract Deployment Whitelist
 
 This precompile restricts who has the ability to deploy contracts on your Subnet.
 We will discuss this in more detail in the [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig) section.
 
-##### Configure Transaction allow list
+##### Configure Transaction Allow List
 
 This precompile restricts who has the ability to make transactions on your Subnet.
 We will discuss this in more detail in the [`txAllowListConfig`](#txAllowListConfig) section.
@@ -263,7 +263,7 @@ After importing the account on metamask, let's change the network to our Subnet.
 
 How awesome is that? `TEST` is the native token of our Subnet and it's airdropped to our address. You can now deploy smart contracts and interact with the network.
 
-# Understanding the Genesis file
+# Understanding the Genesis File
 
 Before starting, I'd like to acknowledge that this section is very similar to [Avax docs - Customize a Subnet](https://docs.avax.network/Subnets/customize-a-Subnet). However, I've made some changes to make it more comprehensive and easier to understand.
 
@@ -422,7 +422,7 @@ For example, if the `targetBlockRate` is set to 2 seconds, `blockGasCostStep` is
 This value is set to `200000` in C-Chain.
 
 
-### Validator fee recipient
+### Validator Fee Recipient
 This configuration allows validators to specify a fee recipient. 
 
 Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#setting-a-custom-fee-recipient)
@@ -483,7 +483,7 @@ If you'd like to restrict the transaction sender to a specific list of addresses
 
 Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-who-can-submit-transactions)
 
-### Genesis block
+### Genesis Block
 This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field) 
 
 #### `nonce`
@@ -522,7 +522,7 @@ This is the number of the genesis block. It is usually set to `0x0`.
 #### `airdropHash` `baseFeePerGas` `airdropAmount`
 You can remove or leave these fields as they are. I'd recommend removing them. I'm not sure what they do.
 
-### Native token allocation
+### Native Token Allocation
 We've done this part of the configuration [using the wizard](#airdropping-native-tokens).
 It's pretty straightforward. You can set the `alloc` to a JSON object with the following properties:
 
@@ -540,7 +540,7 @@ Two important things to notice here:
 
 In our genesis file. The balance is set to `0xd3c21bcecceda1000000` which corresponds to `1000000000000000000000000` in decimal. You can also type in the balance in decimal. Notice that this number is in wei and it's equal to 1,000,000 Avax. You can use [Snowtrace unitconverter](https://snowtrace.io/unitconverter) to convert between units.
 
-# Creating a custom genesis file
+# Creating a Custom Genesis File
 
 We learned a lot! Now we can create our genesis file! 
 
@@ -583,7 +583,7 @@ To get started, create a new file named `genesis.json` and fill it with the foll
 
 This is a boilerplate genesis file. We are going to fill in the fields that we need.
 
-## Setting the chain id
+## Setting the Chain Id
 
 The first thing to do is to pick a unique [chain id](#chainid) for our Subnet. We can check [chainlist](https://chainlist.org/) to find a chain id that is not used. I'll go with `321123` because it looks good.
 
@@ -595,7 +595,7 @@ The first thing to do is to pick a unique [chain id](#chainid) for our Subnet. W
 }
 ```
 
-## Configuring fees and gas
+## Configuring Fees and Gas
 
 I have an old computer so I want my Subnet to be - slow. So, I'll set the `gasLimit` to `5,000,000`, the `targetBlockRate` to 5 seconds and the `targetGas` to `10000000`.
 
@@ -633,7 +633,7 @@ Almost forgot! We should also update the `gasLimit` in the genesis block header.
 }
 ```
 
-## Allocating native tokens
+## Allocating Native Tokens
 
 Let's allocate some native tokens for our address. You should use your own address here. `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b` is my address.
 
@@ -650,7 +650,7 @@ Let's allocate some native tokens for our address. You should use your own addre
 I'm being generous and allocating only 1000 tokens for myself. 1000 tokens corresponds to `1000000000000000000000` in wei and that's `0x3635C9ADC5DEA00000` in hexadecimal. Keep in mind that you can also write this in decimal. I'm going to use the hexadecimal notation here because it looks better. You can use [Decimal to Hexadecimal converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to convert between units.
 
 
-## Minting native tokens
+## Minting Native Tokens
 
 We will use [`contractNativeMinterConfig`](#contractnativeminterconfig) to mint native tokens in the game.
 
@@ -669,7 +669,7 @@ We will add our address as an Admin so we can add new Minter and Admin addresses
 }
 ```
 
-## Restricting contract deployers
+## Restricting Contract Deployers
 
 We will deploy the contracts and players will use those contracts to play the game. So we don't need other people to deploy the contracts. We can restrict the smart contract deployers by using [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig).
 
@@ -746,7 +746,7 @@ Now we're done! The final config looks like:
 }
 ```
 
-# Creating and deploying the Subnet using the custom genesis file
+# Creating and Deploying the Subnet Using the Custom Genesis File
 
 We will use `genesis.json` to create a new Subnet. This part is pretty simple.
 
@@ -789,14 +789,14 @@ $ avalanche Subnet deploy game
 
 Awesomeness! Great work!
 
-# Deploying the game contract
+# Deploying the Game Contract
 
-## Metamask configuration
+## Metamask Configuration
 
 Before going to the next step, make sure you've added the Subnet to metamask by following the same steps in the [`Deploying the Subnet`](#deploying-the-Subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
 
 ![Metamask account look](.github/images/metamask3.png)
-## Metamask Gas configuration
+## Metamask Gas Configuration
 
 **! IMPORTANT**
 
@@ -812,7 +812,7 @@ If you're using the *Enhanced Gas Fee UI* which is an experimental feature in me
 
 After making a few transactions, metamask should start automatically adjusting the gas fee to the optimal value.
 
-## Deploying the contract
+## Deploying the Contract
 
 We will use [remix](https://remix.ethereum.org/) to deploy the game contract on the Subnet.
 
@@ -908,7 +908,7 @@ Confirm the transaction with your metamask wallet.
 
 Yay! We deployed a smart contract in our Subnet! That sounds fantastic!
 
-## Setting Game contract as Minter
+## Setting Game Contract as a Minter
 
 We're admin in [`contractNativeMinterConfig`](#contractnativeminterconfig).
 Which means we can add new Minters to the network using `NativeMinterInterface`.
@@ -931,7 +931,7 @@ Confirm the transaction with your metamask wallet. We can call this function bec
 
 Now the `Game.sol` contract is a minter and can mint native tokens!
 
-## Play the game!
+## Play the Game
 
 In the deploy tab: 
 - Set the value to 100 Ether or any other amount you want to play with.
