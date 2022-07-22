@@ -29,7 +29,7 @@ $ wget https://storage.googleapis.com/golang/go1.18.3.linux-amd64.tar.gz
 ```
 Extract go1.18.3.linux-amd64.tar.gz to /usr/local:
 ```
-$ tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
+$ sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
 ```
 Add /usr/local/go/bin to the PATH environment variable. You can do this by adding the following line to your $HOME/.profile or /etc/profile (for a system-wide installation):
 
@@ -113,7 +113,9 @@ The getXChainECRecover() function contains the business logic for verifying the 
 
 Please [go take a look at it now](./example/precompile/contract_xchain_ecrecover.go).
 
-(Please note that we are still working to repair one final defect in this example contract. After computing the correct X-Chain address of the signer, it does not yet return this value to the calling dApp due to an issue concerning data types. We expect to have this resolved soon.)
+Returning the recovered X-Chain address was the trickiest part of writing this code since Avalanche X-Chain addresses are not in the same format as EVM addresses. You will see at the end that we had to return it as a byte[] but pad it with special bytes at the beginning to prevent an error from being thrown as Solidity interprets it as a string. Depending on the type of data your custom precompile returns, you may encounter a similar issue. Let our pain be your gain!
+
+Note that in the case of a bad signature, the call to the precompile from Solidity may throw an error, or the precompile may return an X-Chain address that does not match the expected X-Chain address. Both responses should be considered negative. The only positive response is if the X-Chain address returned exactly matches the expected X-Chain address.
 
 ### Modify the [example/params/config.go](./example/params/config.go) File
 
