@@ -1,3 +1,4 @@
+```javascript
 const { ethers } = require("ethers");
 const dotenv = require("dotenv");
 
@@ -12,11 +13,12 @@ const AVAX_TOKEN_ABI =
 	require("../artifacts/contracts/Token/AvaxToken.sol/AvaxToken").abi;
 dotenv.config();
 
-/* Balance script that allows us to check balances on both chains
-   On Avax it prints out the ERC20 balance of the user and the bridge. 
-	 	(We are printing out the balance of the bridge because as users lock tokens bridge's balance of the ERC20 will increase)
-	 On Subnet it prints out the native token balance of the user 
- */
+/* 
+  Balance script that allows us to check balances on both chains
+  On Avax it prints out the ERC20 balance of the user and the bridge.
+    (We are printing out the balance of the bridge because as users lock tokens bridge's balance of the ERC20 will increase)
+  On Subnet it prints out the native token balance of the user
+*/
 module.exports = balance = async (from) => {
 	let provider;
 	let signer;
@@ -53,3 +55,4 @@ module.exports = balance = async (from) => {
 		return;
 	}
 };
+```

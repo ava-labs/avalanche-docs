@@ -1,3 +1,4 @@
+```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
@@ -21,3 +22,4 @@ interface NativeMinterInterface {
     // Mint [amount] number of native coins and send to [addr]
     function mintNativeCoin(address addr, uint256 amount) external;
 }
+```

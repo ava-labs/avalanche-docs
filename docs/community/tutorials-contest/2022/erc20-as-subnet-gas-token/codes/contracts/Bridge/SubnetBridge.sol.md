@@ -1,3 +1,4 @@
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
@@ -7,30 +8,33 @@ contract SubnetBridge {
     address public admin;
     /* Address to send tokens to burn them */
     address public burnAddress = address(0x0);
-    /* Increments with each `lock()` indicates the transferCount
-     and prevents double counting of the event */
+    /* Gets incremented with each `burn()`, indicates the transferCount
+    and prevents double processing the event */
     uint public nonce;
 
-    /* Contract that represents NativeMinterInterface */
+    /* Represents NativeMinterInterface */
     NativeMinterInterface public nativeMinter =
         NativeMinterInterface(
-            /* Native Minter contract is always at this address 
-            as explained at https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins  
-            */
+            /*
+                Native Minter contract is always at this address
+                as explained at https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins
+             */
             address(0x0200000000000000000000000000000000000001)
         );
 
-    /* Mapping to hold processed nonce values */
+    /* Mapping to hold whether nonce is processed or not */
     mapping(uint => bool) public processedNonces;
 
     /* Allows us to indicate whether it is a `mint()` or `burn()` when emitting an event */
-    enum Step {
+    enum Type {
         Mint,
         Burn
     }
 
-    /* Event that is emitted with both `release()` and `lock()`
-       Relayer listens to this event  
+    /*
+        Event that is emitted with both `mint()` and `burn()`
+        Relayer listens to events emitted by `burn()`
+        Potential frontend application may want to listen to events emitted by `mint()`
     */
     event Transfer(
         address from,
@@ -38,7 +42,7 @@ contract SubnetBridge {
         uint amount,
         uint time,
         uint nonce,
-        Step indexed step
+        Type indexed transferType
     );
 
     /* Modifier to allow some functions to be only called by admin */
@@ -47,7 +51,7 @@ contract SubnetBridge {
         _;
     }
 
-    /* Contstructor that sets admin as the sender */
+    /* Constructor that sets admin as the sender */
     constructor() {
         admin = msg.sender;
     }
@@ -63,10 +67,7 @@ contract SubnetBridge {
         uint amount,
         uint avaxNonce
     ) external onlyAdmin {
-        require(
-            processedNonces[avaxNonce] == false,
-            "nonce already proccessed"
-        );
+        require(processedNonces[avaxNonce] == false, "nonce already processed");
         processedNonces[avaxNonce] = true;
 
         nativeMinter.mintNativeCoin(to, amount);
@@ -76,31 +77,33 @@ contract SubnetBridge {
             amount,
             block.timestamp,
             avaxNonce,
-            Step.Mint
+            Type.Mint
         );
     }
 
-    /* Function that is called by the user to burn their tokens.
-       Relayer listens to this event and if the nonce is not processed, 
-       it will call `release()` of the AvaxBridge
-     */
+    /*
+        Function that is called by the user to burn their tokens.
+        Relayer listens to this event and if the nonce is not processed,
+        it will call `release()` of the AvaxBridge
+    */
     function burn(address to) external payable {
         require(msg.value > 0, "You have to burn more than 0 tokens");
         /* Send native token to 0x0 address, effectively burning native token */
         (bool sent, ) = payable(burnAddress).call{value: msg.value}("");
         require(sent, "Failed to send native token");
 
-        /* Event that is emmited for relayer to process */
+        /* Event that is emitted for relayer to process */
         emit Transfer(
             msg.sender,
             to,
             msg.value,
             block.timestamp,
             nonce,
-            Step.Burn
+            Type.Burn
         );
 
         /* Increment the nonce to prevent double counting */
         nonce++;
     }
 }
+```

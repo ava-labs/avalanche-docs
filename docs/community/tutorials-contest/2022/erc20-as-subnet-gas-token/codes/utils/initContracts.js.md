@@ -1,3 +1,4 @@
+```javascript
 const { ethers } = require("ethers");
 /* Get ABIs of the contracts directly from the artifact folder created by hardhat after each compilation */
 const SUBNET_BRIDGE_ABI =
@@ -15,7 +16,7 @@ module.exports = (signers) => {
 	const avaxBridgeAdmin = new ethers.Contract(
 		AVAX_BRIDGE_ADDRESS,
 		AVAX_BRIDGE_ABI,
-		signers.avax.bridgeAdmin
+		signers.avax.admin
 	);
 	/* SubnetBridge contract with signer access of bridgeAdmin */
 	const subnetBridgeUser = new ethers.Contract(
@@ -27,7 +28,7 @@ module.exports = (signers) => {
 	const subnetBridgeAdmin = new ethers.Contract(
 		SUBNET_BRIDGE_ADDRESS,
 		SUBNET_BRIDGE_ABI,
-		signers.subnet.bridgeAdmin
+		signers.subnet.admin
 	);
 	/* AvaxBridge contract with signer access of user */
 	const avaxBridgeUser = new ethers.Contract(
@@ -41,3 +42,4 @@ module.exports = (signers) => {
 		subnet: { admin: subnetBridgeAdmin, user: subnetBridgeUser },
 	};
 };
+```

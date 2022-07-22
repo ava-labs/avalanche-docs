@@ -1,3 +1,4 @@
+```javascript
 const { ethers } = require("ethers");
 const dotenv = require("dotenv");
 
@@ -9,37 +10,38 @@ const initContracts = require("./utils/initContracts");
 dotenv.config();
 
 /* Relayer application
-
-Could be run by 
-	`node ./relayer.js`, 
-	`node ./relayer.js <avaxBlockNumber>`, 
-	`node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`,
-	`node ./relayer.js -1 <subnetBlockNumber>`
-
+ 
+Could be run by
+  	`node ./relayer.js`,
+  	`node ./relayer.js <avaxBlockNumber>`,
+  	`node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`,
+  	`node ./relayer.js -1 <subnetBlockNumber>`
+ 
 When run with `node ./relayer.js`:
-	Relayer will subscribe to events from recent blocks on Avax and Subnet
-	Therefore, it might not processes an event that is emitted 1000 blocks ago
-	If you want to start the relayer and make a transaction, current way of running is what you are looking for
-
+  	Relayer will subscribe to events from recent blocks on Avax and Subnet
+  	Therefore, it might not processes an event that is emitted 1000 blocks ago
+  	If you want to start the relayer and make a transaction, current way of running is what you are looking for
+ 
 When run with `node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`
-	Relayer will look for events on Avax and Subnet from the block number you provided 
-	and will iterate through the next 10 blocks for event. Will processes observed event
-	Therefore, if you have a burn or lock event emitted 1000 blocks ago, you can process it by giving the right blockNumber
-	If you want to start the relayer to processes an old burn or lock event, current way of running is what you are looking for
-
+  	Relayer will look for events on Avax and Subnet from the block number you provided
+  	and will iterate through the next 10 blocks for the event. Will processes observed event
+  	Therefore, if you have a burn or lock event emitted 1000 blocks ago, you can process it by giving the right blockNumber
+  	If you want to start the relayer to processes an old burn or lock event, current way of running is what you are looking for
+  
 When run with `node ./relayer.js -1 <subnetBlockNumber>` or `node ./relayer.js <avaxBlockNumber>`
-	Relayer will look for events on either Avax or Subnet from the block number you provided
-	and will iterate through the next 10 blocks for event. Will processes observed event
-	"-1" as block number means do not processes any old blocks for that chain.
-	Therefore, `node ./relayer.js -1 <subnetBlockNumber>` will only process events for subnet.
-	If tou want to start the relayer to process an old burn or lock event just on one chain, current way of running is what you are looking for
+  	Relayer will look for events on either Avax or Subnet from the block number you provided
+  	and will iterate through the next 10 blocks for the event. Will processes observed event
+  	"-1" as block number means do not process any old blocks for that chain.
+  	Therefore, `node ./relayer.js -1 <subnetBlockNumber>` will only process events for the subnet.
+  	If you want to start the relayer to process an old burn or lock event just on one chain, current way of running is what you are looking for
 */
 const main = async () => {
-	/* If there is a need for sending transactions
-		Add it to the txs array.
-		Because of the `setInterval()` relayer will send transactions every 5 seconds if at least 1 transaction exists
-		We wait 5 seconds inbetween transactions to make sure we do not replace our own transactions before they are mined.
-	*/
+	/* 
+    	If there is a need for sending transactions
+      	Add it to the txs array.
+      	Because of the `setInterval()` relayer will send transactions every 5 seconds if at least 1 transaction exists
+      	We wait 5 seconds in between transactions to make sure we do not replace our own transactions before they are added to a block.
+   	 */
 	let txs = [];
 
 	/* Init providers, signer and bridgeContract */
@@ -47,18 +49,20 @@ const main = async () => {
 	const signers = initSigners(providers);
 	const bridgeContracts = initContracts(signers);
 
-	/* For Avax
-		Relayer gets command line arguments
-		If commandline argument exists and it is not -1 
-		Then process next 10 blocks and process events from these block number
-	*/
+	/* 
+		For Avax
+			Relayer gets command line arguments
+			If command line argument exists and it is not -1
+			Then process next 10 blocks and process events from these block number
+	 */
 	if (process.argv[2] && parseInt(process.argv[2]) !== -1) {
 		const startBlock = parseInt(process.argv[2]);
 		const recentBlock = await providers.avax.getBlockNumber();
-		/* If startBlock + 10 exceeds the recent block it would throw an error.
+		/*
+			If startBlock + 10 exceeds the recent block it would throw an error.
 			Since we would be trying to process blocks that are not there.
-		 	Therefore, we set endBlock to the smaller one of two
-		*/
+			Therefore, we set endBlock to the smaller one of two
+     	 */
 		const endBlock =
 			startBlock + 10 >= recentBlock ? recentBlock : startBlock + 10;
 		/* Reset blockNumber of the provider to process those blocks */
@@ -81,11 +85,12 @@ const main = async () => {
 			nonce: event.args.nonce,
 		}));
 
-		/* Since we are looking for old events
-			They might have been already processed 
+		/*
+			Since we are looking for old events
+			They might have been already processed
 			Therefore, check if corresponding nonce is already processed or not
 			If not, add it to the txs array
-		*/
+		 */
 		await Promise.all(
 			oldAvaxEvents.map(async (event) => {
 				const { to, amount, nonce } = event;
@@ -96,9 +101,9 @@ const main = async () => {
 					)}, nonce: ${nonce}`
 				);
 				/* Check if nonce is processed or not */
-				const isProccessed =
+				const isProcessed =
 					await localBridgeContracts.subnet.admin.processedNonces(nonce);
-				if (!isProccessed) {
+				if (!isProcessed) {
 					/* If not processed add tx to txs array */
 					console.log("OLD: is not processed, will mint on subnet\n");
 					txs.push(event);
@@ -110,18 +115,20 @@ const main = async () => {
 	}
 
 	// Pretty familiar as above, provider is changed
-	/* For Subnet 
-		Relayer gets command line arguments
-		If commandline argument exists and it is not -1 
-		Then process next 10 blocks and process events from these block number
-	*/
+	/* 
+		For Subnet
+      		Relayer gets command line arguments
+      		If command line argument exists and it is not -1
+     		Then process next 10 blocks and process events from these block number
+  	 */
 	if (process.argv[3] && parseInt(process.argv[3]) !== -1) {
 		const startBlock = parseInt(process.argv[3]);
 		const recentBlock = await providers.subnet.getBlockNumber();
-		/* If startBlock + 10 exceeds the recent block it would throw an error.
-			Since we would be trying to process blocks that are not there.
-		 	Therefore, we set endBlock to the smaller one of two
-		*/
+		/* 
+      		If startBlock + 10 exceeds the recent block it would throw an error.
+      		Since we would be trying to process blocks that are not there.
+      		Therefore, we set endBlock to the smaller one of two   
+		 */
 		const endBlock =
 			startBlock + 10 >= recentBlock ? recentBlock : startBlock + 10;
 		/* Reset blockNumber of the provider to process those blocks */
@@ -144,11 +151,12 @@ const main = async () => {
 			nonce: event.args.nonce,
 		}));
 
-		/* Since we are looking for old events
-			They might have been already processed 
-			Therefore, check if corresponding nonce is already processed or not
-			If not, add it to the txs array
-		*/
+		/* 
+      		Since we are looking for old events
+     		They might have been already processed
+     		Therefore, check if corresponding nonce is already processed or not
+      		If not, add it to the txs array
+		 */
 		await Promise.all(
 			oldSubnetEvents.map(async (event) => {
 				const { to, amount, nonce } = event;
@@ -159,9 +167,9 @@ const main = async () => {
 					)}, nonce: ${nonce}`
 				);
 				/* Check if nonce is processed or not */
-				const isProccessed =
+				const isProcessed =
 					await localBridgeContracts.subnet.admin.processedNonces(nonce);
-				if (!isProccessed) {
+				if (!isProcessed) {
 					/* If not processed add tx to txs array */
 					console.log("OLD: is not processed, will release on subnet\n");
 					txs.push(event);
@@ -173,36 +181,37 @@ const main = async () => {
 	}
 
 	/* With above 2 functions we have processed old blocks */
-	console.log("\n\nOld events proccessed");
+	console.log("\n\nOld events processed");
 
-	/* Now we subscribe to bridgeContract events on both chains
+	/* 
+		Now we subscribe to bridgeContract events on both chains
 		Which allows us to run a function whenever a new event is observed
-	*/
+  	 */
 
 	/* Subscribe to bridge events on avax */
 	bridgeContracts.avax.admin.on(
 		/* Subscribe to "Transfer" event */
 		"Transfer",
-		async (from, to, amount, date, nonce, step) => {
-			/* 
-				step 0 means it is a release event
-				step 1 means it is a lock event
-
-				We only care for lock events as relayer. On lock events we will mint on subnet
-				We have added the release event for frontend applications.
-			*/
-			if (step === 1) {
+		async (from, to, amount, date, nonce, type) => {
+			/*
+        		type 0 means it is a release event
+        		type 1 means it is a lock event
+ 
+        		We only care for lock events as relayer. On lock events we will mint on subnet
+       			We have added the release event for frontend applications.
+			 */
+			if (type === 1) {
 				console.log("Lock happened on avax");
 				console.log(
 					`Transfer: from: ${from}, to: ${to}, amount: ${ethers.utils.formatEther(
 						amount
-					)}, date: ${date}, nonce: ${nonce}, step: ${step}`
+					)}, date: ${date}, nonce: ${nonce}, type: ${type}`
 				);
 				/* Check if nonce is processed or not */
-				const isProccessed = await bridgeContracts.subnet.admin.processedNonces(
+				const isProcessed = await bridgeContracts.subnet.admin.processedNonces(
 					nonce
 				);
-				if (!isProccessed) {
+				if (!isProcessed) {
 					/* If not processed add tx to txs array */
 					console.log("is not processed, will mint on subnet\n");
 					txs.push({ chain: "subnet", to, amount, nonce });
@@ -217,26 +226,26 @@ const main = async () => {
 	bridgeContracts.subnet.admin.on(
 		/* Subscribe to "Transfer" event */
 		"Transfer",
-		async (from, to, amount, date, nonce, step) => {
-			/* 
-				step 0 means it is a mint event
-				step 1 means it is a burn event
-
-				We only care for burn events as relayer. On burn events we will release on subnet
-				We have added the mint event for frontend applications.
-			*/
-			if (step === 1) {
+		async (from, to, amount, date, nonce, type) => {
+			/*
+        		type 0 means it is a mint event
+        		type 1 means it is a burn event
+ 
+        		We only care for burn events as relayer. On burn events we will release on subnet
+        		We have added the mint event for frontend applications.
+			 */
+			if (type === 1) {
 				console.log("Burn happened on subnet");
 				console.log(
 					`Transfer: from: ${from}, to: ${to}, amount: ${ethers.utils.formatEther(
 						amount
-					)}, date: ${date}, nonce: ${nonce}, step: ${step}`
+					)}, date: ${date}, nonce: ${nonce}, type: ${type}`
 				);
 				/* Check if nonce is processed or not */
-				const isProccessed = await bridgeContracts.avax.admin.processedNonces(
+				const isProcessed = await bridgeContracts.avax.admin.processedNonces(
 					nonce
 				);
-				if (!isProccessed) {
+				if (!isProcessed) {
 					/* If not processed add tx to txs array */
 					console.log("is not processed, will release on avax\n");
 					txs.push({ chain: "avax", to, amount, nonce });
@@ -248,14 +257,16 @@ const main = async () => {
 	);
 	console.log("Started listening for new events\n\n");
 
-	/* This function gets to run each 5 seconds and it sends `mint` or `release` transactions to the bridge contract
-		We wait 5 seconds inbetween transactions to make sure we do not replace our own transactions before they are mined.
-	*/
+	/* 
+		This function gets to run each 5 seconds and it sends `mint` or `release` transactions to the bridge contract
+		We wait 5 seconds in between transactions to make sure we do not replace our own transactions before they are added to a block.
+	 */
 	setInterval(async () => {
 		/* If there is not transactions to send do nothing */
 		if (txs.length > 0) {
-			/* If provided blockNumbers for avax or subnet are close to current blocks of the chains
-			 Then a transaction might get added to the txs array twice. Once processesing old blocks (but pretty recent) and once subscribed to new events.
+			/* 
+        		If provided blockNumbers for avax or subnet are close to current blocks of the chains
+        		Then a transaction might get added to the txs array twice. Once processing old blocks (but pretty recent) and once subscribed to new events.
 			 */
 			txs = txs.filter(
 				(value, index, self) =>
@@ -286,3 +297,4 @@ main().catch((error) => {
 	console.error(error);
 	process.exitCode = 1;
 });
+```

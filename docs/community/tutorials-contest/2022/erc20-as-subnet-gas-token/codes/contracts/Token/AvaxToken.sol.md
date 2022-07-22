@@ -1,3 +1,4 @@
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
@@ -12,3 +13,8 @@ contract AvaxToken is ERC20 {
         _mint(msg.sender, MAX_SUPPLY);
     }
 }
+
+
+
+
+```
