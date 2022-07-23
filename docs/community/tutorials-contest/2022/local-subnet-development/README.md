@@ -151,9 +151,9 @@ Chain ID:         676767
 Currency Symbol:  SUB
 ```
 
-Make sure to save `Metamask connection details`. You will need the relevant information (RPC URL, Funded address, etc.) to interact with your Subnet
+Make sure to save `Metamask connection details`. You will need the relevant information (RPC URL, Funded address, etc.) to interact with your Subnet.
 
-Important thing to keep in mind is that, now that you have deployed your Subnet it has started running in your local machine. So, after you are done interacting with your Subnet you can stop running it and when you want to interact with it again, you can start running it.
+Important thing to keep in mind is that, now that you have deployed your Subnet, it has started running in your local machine. So, after you are done interacting with your Subnet you can stop it.
 
 To stop running the Subnet, you could run:
 
@@ -163,7 +163,7 @@ avalanche network stop
 
 :::info
 
-Do not worry, when you stop running the Subnet it will save the state of the Subnet and when it starts again it will continue from that state.
+When you stop running the Subnet it will save the state of the Subnet and when it starts again it will continue from that state.
 
 :::
 
@@ -175,7 +175,7 @@ avalanche network start
 
 :::info
 
-Do not worry, when you restart the Subnet rpc urls will not change. Therefore, you do not have to adjust the network in your metamask or anywhere else.
+When you restart the Subnet rpc urls will not change. Therefore, you do not have to adjust the network in your metamask or anywhere else.
 
 :::
 
@@ -185,7 +185,7 @@ This tutorial will cover interacting with the Subnet through [Remix](https://rem
 
 ### Step 4.1: Using Remix
 
-Firstly, we will be adding our Subnet to [metamask](https://metamask.io/). To add the Subnet, refer to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask) you should replace the values with your Subnet values that are printed out after you have created it. If your balance is zero after you add Subnet to the metamask, refer to [Access Funded Accounts](#access-funded-accounts).
+First, we will be adding our Subnet to [metamask](https://metamask.io/). To add the Subnet, refer to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask) you should replace the values with your Subnet values that are printed out after you have created it. If your balance is zero after you add Subnet to the metamask, refer to [Access Funded Accounts](#access-funded-accounts).
 
 Example Values:
 
@@ -341,7 +341,7 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 
 - `avalanche`, `avalanche subnet`
   - `"command not found: avalanche"`
-    It means that `avalanche` command is not added to the PATH environment variable. It could be caused by following reasons;
+    It means that the directory containing `avalanche` command is not added to the PATH environment variable. It could be caused by following reasons;
     - You have added the wrong `bin` directory to your environment variables.
       - Make sure to find where the `bin` directory is and run `export PATH=$PWD:$PATH` inside the `bin` directory.
     - You have added it to the PATH environment variable temporarily and restarted your terminal.
