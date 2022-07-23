@@ -25,7 +25,7 @@ Steps to follow:
 
    4.2 Using Hardhat
 
-5. Interact with precompiles (Optional)
+5. Interact with Precompiles (Optional)
 
 ## Requirements
 
@@ -260,18 +260,20 @@ Before trying to interact with any of the precompiles make sure to add them whil
 
 #### General Steps to Interact with Precompiles
 
-1. While creating the Subnet you will be prompted `Advanced: Would you like to add a custom precompile to modify the EVM?:` answer `Yes` then choose the precompile you would like to add. Make sure to add your address as admin by following `Add admin` and entering your address. Do not forget that you can always get more details by selecting `More info` inside the command line.
+1. While creating the Subnet you will be prompted `Advanced: Would you like to add a custom precompile to modify the EVM?:` answer `Yes` then choose the precompile you would like to add. Continue by selecting `Add Admin`, it will ask for an address. This address is your account's public address, it allows others to interact with your account. To get your account's public address, open your metamask extension, hover over your account's label (which is 'Account 1' for the image) and click to copy the address to your clipboard. Paste that address to the command line to use your metamask account as the admin of the precompile. Do not forget that you can always get more details by selecting `More info` inside the command line.
+
+   ![Metamask Account Public Address](./assets/accountPublicAddress.png)
 
    :::warning
 
-   If you are adding the `Transaction allow list` precompile, make sure to add the airdrop reciever address as admin so that the address with funds could send transactions.
+   If you are adding the `Transaction allow list` precompile, make sure to add the airdrop receiver address as admin so that the address with funds could send transactions.
 
    :::
 
 2. Open [remix](https://remix.ethereum.org) and make sure that your metamask is using your Subnet and the remix's environment is using `Injected Web3`. Then, create a solidity file with respective recommended file name and add the respective precompile interface, refer to specific precompile to see details.
 
 3. Load precompile to the respective address, refer to specific precompile to see their addresses.
-4. Call precompile functions
+4. Call precompile functions.
 
 ##### Interact with Contract Deployer Allow List
 
@@ -332,7 +334,7 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 - `VM`: To understand and create your custom VM you can refer to [this](https://docs.avax.network/subnets/create-a-virtual-machine-vm).
 - `ChainId`: You want your `ChainId` parameter to be unique. To make sure that your Subnet is secure against replay attacks. To see registered `ChainIds` you can check [chainlist.org](https://chainlist.org/). At the top right of the site make sure to turn on the button to include testnets.
 - `Gas Parameters`: Ava Labs recommends the low-low option and C-Chain currently uses this option. But, if you know what you are doing you are free to customize. Note that higher disk usage has some trade offs, it would require more processing power and cause it to be more expensive to maintain.
-- `Airdrop Address`: You would not like to use the default address in production, that is recieving the 1 million tokens. Because, it is a compromised wallet, which means that its private key is well known by others. If you add a custom address to recieve airdrop. Avalanche-cli will ask you to give an amount in AVAX, in that case do not enter the value thinking as in `ether` but in `gwei` to correctly airdrop the amount you want. As an example, to airdrop `1` whole token, as in one ether, you would enter the value `1000000000`.
+- `Airdrop Address`: You would not like to use the default address in production, that is receiving the 1 million tokens. Because, it is a compromised wallet, which means that its private key is well known by others. If you add a custom address to receive airdrop. Avalanche-cli will ask you to give an amount in AVAX, in that case do not enter the value thinking as in `ether` but in `gwei` to correctly airdrop the amount you want. As an example, to airdrop `1` whole token, as in one ether, you would enter the value `1000000000`.
 - `Precompiles`: You can learn what precompiles are by refering to [this](https://docs.avax.network/subnets/customize-a-subnet#precompiles).
 
 ## Troubleshoot Common Issues
