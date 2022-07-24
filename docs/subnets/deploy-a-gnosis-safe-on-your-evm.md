@@ -120,7 +120,7 @@ Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", 
 Lets inspect our Safe details by running the following:
 
 ```zsh
-yarn safe info 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --network subnet
+yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 
 ```
 
 Output:
@@ -162,7 +162,7 @@ Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/
 Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the safe.
 
 ```zsh
-yarn safe propose-multi 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
+yarn safe propose-multi --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
 ```
 This will create a new file, `addOwner.json`, in the examples directory.
 
@@ -192,7 +192,7 @@ Notice the `data` value has the parameters encoded as a single hexadecimal strin
 
 Now we can use the `--data` flag and pass in the `data` above as an argument for our proposal.
 ```zsh
-yarn safe propose 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
+yarn safe propose --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002
 ```
 
 Output:
@@ -233,7 +233,7 @@ Ethereum transaction hash: 0x99b35740246b91e5137f0128427e220ec7772aab17b20b6b9d4
 Now that we've successfully submitted a proposal, lets check the owners of our safe by using the `info` task:
 
 ```zsh
-yarn safe info 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
+yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
 
 Output:
@@ -322,7 +322,7 @@ Output:
 Now that we've verified that our Safe has enough Native Tokens(1000), lets create a proposal to send some to an EOA.
 
 ```zsh
-yarn safe propose 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --value 1000 --to 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+yarn safe propose  --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --value 1000 --to 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```
 Notice that we've added the `value` flag and passed in our target amount. We've also changed our `to` flag to be our our target address. You can find the other flags and parameters for this task [here](https://github.com/5afe/safe-tasks/blob/52067e3ac5b8a1db3a4ab54fec0ee628c0bd4f3a/src/execution/proposing.ts).
 
@@ -437,12 +437,12 @@ Then we would use the same tasks from before:
 1. Generate the txn data with `yarn safe propose-multi`
 
 ```zsh
-yarn safe propose-multi <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>
+yarn safe propose-multi --network subnet <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>
 ```
 2. Create a proposal with `yarn safe propose`
 
 ```zsh
-yarn safe propose <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-ADDRESS>
+yarn safe propose --network subnet <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-ADDRESS>
 ```
 
 3. Sign the proposal with `yarn safe sign-proposal`
@@ -454,6 +454,25 @@ yarn safe sign-proposal <SAFE-TX-HASH>
 
 ```zsh
 yarn submit <SAFE-TX-HASH>
+```
+
+## Managing a Proxy using Gnosis Safe
+This part of the article aims to illustrate the use cases of a multi signature Safe protocol applied to managing a [Proxy smart contract](https://docs.openzeppelin.com/contracts/4.x/api/proxy).
+
+Use cases in mind:
+- `Vault` - Asset management contract. Treasury.
+- `Registry` - A database of user addresses and privelages. Owners, Stakers, Validators, Token holders, Whitelists. 
+
+### Deploy the proxy
+
+
+### Transfer Proxy Admin to Safe address
+
+
+### Use `propose-multi`
+
+```zsh
+yarn safe propose-multi <SAFE-ADDRESS> examples/upgrade.json --export examples/upgradeData.json
 ```
 
 ## Local Workflow
