@@ -164,10 +164,7 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: 'doc',
-      id: 'apis/metrics'
-    },
+    'apis/metrics'
   ],
   nodes: [
     'nodes/README',
