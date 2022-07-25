@@ -164,6 +164,11 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: 'link',
+      label: 'Avalanche Metrics API',
+      href: 'https://metrics.avax.network/',
+    },
   ],
   nodes: [
     'nodes/README',
