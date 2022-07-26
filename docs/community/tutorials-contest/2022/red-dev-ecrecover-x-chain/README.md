@@ -117,11 +117,13 @@ Returning the recovered X-Chain address was the trickiest part of writing this c
 
 Note that in the case of a bad signature, the call to the precompile from Solidity may throw an error, or the precompile may return an X-Chain address that does not match the expected X-Chain address. Both responses should be considered negative. The only positive response is if the X-Chain address returned exactly matches the expected X-Chain address.
 
-### Modify the [example/params/config.go](./example/params/config.go) File
+### Modify the [params/config.go](./example/params/config.go) File
 
-As we mentioned earlier, the [example/params/config.go](./example/params/config.go) is used to add the chain configuration and managed the Subnet-evm via the genesis.json file.
+As we mentioned earlier, the [params/config.go](./example/params/config.go) is used to add the chain configuration and managed the Subnet-evm via the genesis.json file.
 
-We have implemented the changes below in the [params.go](./example/precompile/params.go) file. At about [line 122](./example/params/config.go#L122) we have added the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct with this we add or remove the precompiles through genesis.json file:
+We have implemented the changes below in the example [params.go](./example/precompile/params.go) file. Five sections of this file require modifications.
+
+First, at about [line 122](./example/params/config.go#L122) we have added the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct with this we add or remove the precompiles through genesis.json file:
 
 ```diff
 type ChainConfig struct {
@@ -132,23 +134,18 @@ type ChainConfig struct {
 }
 ```
 
-Next, at about [line 563](./example/params/config.go#L563), we have included our custom precompiles intio the stateful precompiled configs:
+Second, at about [line 261](./example/params/config.go#L261) we have created a function to return the fork enabled status based on block timestamp:
 
 ```diff
-func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompileConfig {
-	statefulPrecompileConfigs := make([]precompile.StatefulPrecompileConfig, 0)
-
-	if c.ContractDeployerAllowListConfig.Timestamp() != nil {
-		statefulPrecompileConfigs = append(statefulPrecompileConfigs, &c.ContractDeployerAllowListConfig)
-	}
-    	.....
-    	.....
-+   	if c.ContractXChainECRecoverConfig.Timestamp() != nil {
-+ 		statefulPrecompileConfigs = append(statefulPrecompileConfigs, &c.ContractXChainECRecoverConfig)
-+ 	}
+func (c *ChainConfig) IsTxAllowList(blockTimestamp *big.Int) bool {
+	return utils.IsForked(c.TxAllowListConfig.Timestamp(), blockTimestamp)
 }
++ func (c *ChainConfig) IsXChainECRecover(blockTimestamp *big.Int) bool {
++	  return utils.IsForked(c.ContractXChainECRecoverConfig.Timestamp(), blockTimestamp)
++ }
 ```
-Next, at about [line 496](./example/params/config.go#L496) we have introduced a boolean variable `IsContractXChainECRecoverEnabled` to enable mapping of the addresses to the stateful precompile:
+
+Third, at about [line 496](./example/params/config.go#L496) we have introduced a boolean variable `IsContractXChainECRecoverEnabled` to enable mapping of the addresses to the stateful precompile:
 
 ```diff
 type Rules struct {
@@ -170,7 +167,7 @@ type Rules struct {
 }
 ```
 
-Next, at about [line 533](./example/params/config.go#L533) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
+Fourth, at about [line 533](./example/params/config.go#L533) we have set the enabled status of the `IsContractXChainECRecoverEnabled` by checking whether a fork scheduled at given block timestamp is active at the given head block:
 
 ```diff
 func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
@@ -189,17 +186,22 @@ func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
 }
 ```
 
-Next, at about [line 261](./example/params/config.go#L261) we created a function to return the fork enabled status based on block timestamp:
+And fifth, at about [line 563](./example/params/config.go#L563), we have included our custom precompiles intio the stateful precompiled configs:
 
 ```diff
-func (c *ChainConfig) IsTxAllowList(blockTimestamp *big.Int) bool {
-	return utils.IsForked(c.TxAllowListConfig.Timestamp(), blockTimestamp)
-}
-+ func (c *ChainConfig) IsXChainECRecover(blockTimestamp *big.Int) bool {
-+	  return utils.IsForked(c.ContractXChainECRecoverConfig.Timestamp(), blockTimestamp)
-+ }
-```
+func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompileConfig {
+	statefulPrecompileConfigs := make([]precompile.StatefulPrecompileConfig, 0)
 
+	if c.ContractDeployerAllowListConfig.Timestamp() != nil {
+		statefulPrecompileConfigs = append(statefulPrecompileConfigs, &c.ContractDeployerAllowListConfig)
+	}
+    	.....
+    	.....
++   	if c.ContractXChainECRecoverConfig.Timestamp() != nil {
++ 		statefulPrecompileConfigs = append(statefulPrecompileConfigs, &c.ContractXChainECRecoverConfig)
++ 	}
+}
+```
 ### Modify [scripts/run.sh](./example/scripts/run.sh)
 
 The [scripts/run.sh](./example/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the Subnet-evm by configuring in the genesis.json file.
