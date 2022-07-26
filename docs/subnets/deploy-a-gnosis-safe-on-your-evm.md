@@ -14,8 +14,6 @@ This tutorial assumes that:
 
 ## Custom Network Workflow
 
-
-
 ### Setup
 Set up the repository by running thew following Commands:
 
@@ -24,18 +22,17 @@ git https://github.com/safe-global/safe-contracts.git
 cd safe-contracts
 ```
 
-Next, change `.env.example` to `.env`, set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
+Next, change `.env.example` to `.env` And set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
 
-Example
+Example:
 ```env
-PK="56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"
+PK="YOUR-PRIVATE-KEY-HERE"
 PK2=""
 INFURA_KEY=""
 # Used for custom network
-NODE_URL="http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc"
+NODE_URL="<YOUR-SUBNET-NODE-URL-HERE>"
 NETWORK="subnet"
 ```
-
 
 Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
 
@@ -58,7 +55,7 @@ Finally, deploy the contracts by running:
 yarn hardhat --network subnet deploy
 ```
 
-This will deploy the contracts to your Subnet EVM!
+This will deploy the Safe contracts to your Subnet EVM!
 
 ```zsh
 deploying "SimulateTxAccessor" (tx: 0xb2104e7067e35e1d2176ee53f6030bbcef4a12051505daca603d097d87ebd3e2)...: deployed at 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922 with 237301 gas
@@ -89,7 +86,7 @@ To make this easier the Safe team provides multiple CLIs ([safe-cli](https://git
 
 Lets take a look on how to create a Safe and propose transactions on a Subnet using Safe Tasks.
 
-First, clone and navigate to the [safe-tasks repository](https://github.com/5afe/safe-tasks) by running the following command:
+First, in a new project, clone and navigate to the [safe-tasks repository](https://github.com/5afe/safe-tasks) by running the following command:
 
 ```zsh
 git clone https://github.com/5afe/safe-tasks.git
@@ -101,7 +98,7 @@ Implement the environment and network setup [above](#setup) to prepare the Safe-
 Now lets create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
 
 ```zsh
-yarn safe create --network subnet --singleton 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6 --factory 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
+yarn safe create --network subnet --singleton <"YOUR-GnosisSafeL2-ADDRESS"> --factory <"YOUR-GnosisSafeProxyFactory-ADDRESS">
 ```
 
 Output:
@@ -115,7 +112,7 @@ Data: 0x1688f0b900000000000000000000000095ca0a568236fc7413cd2b794a7da24422c2bbb6
 ```
 
 
-Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", informs us that our safe contract lives at the address `0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114`. We will utilize this address throughout the rest of the tutorial.
+Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", informs us that our safe contract lives at the address `0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114`.For demonstration purposes, we will utilize this address For this section of the article.
 
 Lets inspect our Safe details by running the following:
 
@@ -259,7 +256,7 @@ This part of the tutorial requires that your Safe holds at least 1000 Native Tok
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe tx.
 
-To include our second signer, we will have to import another _private key_ into the project by adding it to `.env` and `hardhat.config.ts` 
+To include our second signer, we will have to import another _private key_ into the project by adding it to `.env` and `hardhat.config.ts` in our `safe-tasks` project.
 
 Example `.env`:
 
@@ -335,6 +332,8 @@ Safe transaction hash: 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c301
 
 #### Sign with Two Owners
 
+Follow the same workflow from before to sign a proposal.
+
 ```zsh
 yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
 ```
@@ -358,6 +357,7 @@ Signature: 0x11d7e983417280bdf1c55da51359eb06262f0feadad1c6ebdf497a6e6db92c5e506
 ```
 
 #### Submit
+Now that both owners have signed the proposal, the `threshold` requirement has been met and we can now submit the proposal. 
 
 ```zsh
 yarn safe submit-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
@@ -457,23 +457,321 @@ yarn submit <SAFE-TX-HASH>
 ```
 
 ## Managing a Proxy using Gnosis Safe
-This part of the article aims to illustrate the use cases of a multi signature Safe protocol applied to managing a [Proxy smart contract](https://docs.openzeppelin.com/contracts/4.x/api/proxy).
 
-Use cases in mind:
-- `Vault` - Asset management contract. Treasury.
-- `Registry` - A database of user addresses and privelages. Owners, Stakers, Validators, Token holders, Whitelists. 
+:::warning
+
+This part of the tutorial is better suited for advanced users as the operations from each project work together asynchronously which may lead to errors if the user misses a step.
+
+Please pay careful attention to which project and which step of the workflow you are in when following this part of the tutorial.
+
+:::
+
+This part of the article aims to illustrate the use of a Multi-Signature Safe Protocol to manage an [Upgradeable Proxy Smart Contract](https://docs.openzeppelin.com/contracts/4.x/api/proxy). For this tutorial we will use a [Transparent Upgradeable Proxy](https://blog.openzeppelin.com/the-transparent-proxy-pattern/). To learn more about proxy upgrade patterns, please review the Open Zeppelin docs [here](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies) and see the diagram below.
+
+![Proxy](../../static/img/Proxy-IMG.png)
+
+Some use cases may apply such as:
+- `Upgrading a Vault` - Point the proxy implementation to a new treasury smart contract.
+- `Upgrading a Registry` - Migrate a database of user addresses and privileges to a new smart contract. This may include Owners, Stakers, Validators, Token holders, Whitelists. 
+
+### Setup
+For this part of the tutorial, we will need to open and and navigate to a new [Proxy Contract Quickstart Project](https://github.com/ava-labs/avalanche-smart-contract-quickstart/tree/proxy-contract-implementation) by running the following Commands:
+
+```zsh
+git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart
+cd avalanche-smart-contract-quickstart
+git checkout origin/proxy-contract-implementation
+```
+
+Implement the environment and network setup [above](#setup) to prepare the Proxy Smart Contract project.
 
 ### Deploy the proxy
 
-
-### Transfer Proxy Admin to Safe address
-
-
-### Use `propose-multi`
+Lets deploy the proxy contracts by running the following command:
 
 ```zsh
-yarn safe propose-multi <SAFE-ADDRESS> examples/upgrade.json --export examples/upgradeData.json
+npx hardhat run --network subnet scripts/deployStorage.ts
 ```
+
+Output:
+```zsh
+Deploying Storage...
+Storage deployed to: 0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b
+{ storeValue: '42' }
+```
+
+This command actually executed 3 operations:
+- Deployed a Proxy Admin contract and assigned the deployer's address as the owner
+- Deployed the `Storage` contract and set the `storeValue` to 42
+- Deployed a Transparent upgradeable proxy and added the `Storage` contract's address as its `implementation`
+
+Notice the line _Storage deployed to:_ in our deployment output includes the address `0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b`
+
+This is our Proxy address which matches our proxy address in `.openzeppelin`, session file that includes all relevant proxy contract information.
+
+Example:
+```json
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xd8215b138ef5eA0ecFc49fBaD1a30A18a109A06c",
+    "txHash": "0xf0457a8ca950fe526cc9d60fb578761538d037ea2f939758c6810a3b1e6b95d4"
+  },
+  "proxies": [
+    {
+      "address": "0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b",
+      "txHash": "0x10480134bfe1709277e4e03aeed2825355c87f6a35633c6ed06a114fc9ce06a6",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "cba9f8cf52e3c449631a04ea218a6cedcaf7c366669cfc257c89a008266c768f": {
+      "address": "0x42420054623f00CE5F04Ae4Fb8905f3Dd04DD27a",
+      "txHash": "0x6494655b779015d7cac8f32b7fa1d6437616de71e71312cbf17cf9cc1054ea35",
+      "layout": {
+        "storage": [
+          {
+            "label": "number",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "Storage",
+            "src": "contracts/Storage.sol:7"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    }
+  }
+}
+``` 
+
+### Transfer Proxy Admin to Safe address
+Next, lets transfer Proxy Admin privileges to our Gnosis safe by adding our it's address to our `transferProxyOwnership.ts` script.
+
+
+```ts
+// transferProxyOwnership.ts
+  const gnosisSafe = <"YOUR-SAFE-ADDRESS-HERE">
+```
+Next run the script to execute the transfer.
+```zsh
+npx hardhat run --network subnet scripts/transferProxyOwnership.ts
+```
+
+Output:
+```zsh
+Transferring ownership of ProxyAdmin...
+✔ 0x1189D8E94cAD398612cc4638f80B18d421e74a31 (transparent) proxy ownership transfered through admin proxy
+Transferred ownership of ProxyAdmin to: 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff
+```
+
+Now that we have transferred ownership to our Gnosis Safe, we can upgrade the proxy implementation. 
+
+### Execute the Upgrade
+
+#### Deploy a new Logic Contract
+
+For this step we will deploy a new implementation for the proxy contract to interact with.
+
+Run the following command to deploy [`StorageV2`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/076f191ca74cd1d15304f7fb945aa53e860ab506/contracts/StorageV2.sol), an upgraded version of our [`Storage`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/076f191ca74cd1d15304f7fb945aa53e860ab506/contracts/Storage.sol) contract:
+
+```zsh
+npx hardhat run --network subnet scripts/deployStorageV2.ts
+```
+
+Output:
+```zsh
+Deploying Storage2...
+StorageV2 deployed to: 0x32CaF0D54B0578a96A1aDc7269F19e7398358174
+```
+
+`0x32CaF0D54B0578a96A1aDc7269F19e7398358174` would be our new `implementation address`, the logic contract referenced later in this tutorial.
+
+#### Use Hardhat to interact with the Proxy
+
+Now is a good time for us to use Hardhat to interact with the proxy to ensure that we are on the right track.
+
+First setup Hardhat console to run on your subnet.
+
+```zsh
+npx hardhat console --network subnet
+```
+
+Then connect to the contracts with the following steps:
+
+Connect hardhat to an instance of the `Storage` contract at the deployed address.
+```zsh
+> const storage = await ethers.getContractAt('Storage','YOUR-PROXY-ADDRESS-HERE')
+```
+
+Retrieve the stored number set during deployment.
+```zsh
+(await storage.retrieve()).toString()
+'42'
+```
+
+#### Create the Upgrade Tx
+
+Next we will use the `propose-multi` task to create an upgrade tx. 
+
+Create a new file,`upgrade.json`, in the `examples` directory of your `safe-task` project 
+
+```json
+// examples/upgrade.json
+[
+    {
+        "to": <"YOUR-PROXY-ADMIN-ADDRESS-HERE">,
+        "value": "0",
+        "method": "upgrade(address,address)",
+        "params": [
+            <"YOUR-PROXY-ADDRESS-HERE">,
+            <"YOUR-IMPLEMENTATION-ADDRESS-HERE">
+        ],
+        "operation": 0
+    }
+]
+```
+Ensure that the following parameters are set correctly:
+
+- `to` - Should be set to the proxy admin address found in `avalanche-smart-contract-quickstart/.openzeppelin/<"YOUR-NETWORK-SESSION">.json`
+- `method` - Ensure that you have the function name and argument types correct.
+- `params` - An `upgrade` call needs both a `proxy address` and `implementation address` to be passed in as arguments
+
+
+Next create the Tx data by running the following command:
+
+```zsh
+yarn safe propose-multi <"YOUR-SAFE-ADDRESS"> examples/upgrade.json --export examples/upgradeData.json
+```
+
+Output:
+```json
+{
+  "version": "1.0",
+  "chainId": "99999",
+  "createdAt": 1658795403593,
+  "meta": {
+    "name": "Custom Transactions"
+  },
+  "transactions": [
+    {
+      "to": "0xd8215b138ef5eA0ecFc49fBaD1a30A18a109A06c",
+      "value": "0",
+      "data": "0x99a88ec40000000000000000000000005dda6fa725248d95d2086f4fceb6ba6bdfebc45b00000000000000000000000032caf0d54b0578a96a1adc7269f19e7398358174",
+      "operation": 0
+    }
+  ]
+}
+```
+
+Notice that the `data` value consists of the calldata we will use to call the `upgrade` function.
+
+#### Create the Proposal
+
+```zsh
+yarn safe propose --network subnet <"YOUR-SAFE-ADDRESS-HERE"> --to <"YOUR-PROXY-ADMIN-ADDRESS-HERE"> --data <"YOUR-TX-DATA-HERE">
+```
+
+```zsh
+Running on subnet
+Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff
+Safe transaction hash: 0xd9a5d0e57eaa1763f36cb7208c227e9ee2d6ec03ae4a4947bb8a99a96eef6376
+```
+
+#### Sign the Proposal
+```
+yarn safe sign-proposal <"YOUR-SAFE-TX-HASH-HERE"> 
+```
+
+Output:
+```
+Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Signature: 0x702f6f29903e434ea5fee10a79541a463a2c18d730f32c0b61a1101960aa802d317974c0d3d6cbe2fff53a65b911906613aad8da23da2be74afaea688d1bd49220
+```
+
+#### Submit Proposal
+```
+yarn safe submit-proposal <"YOUR-SAFE-TX-HASH-HERE"> 
+```
+
+Output:
+```zsh
+Running on subnet
+Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Ethereum transaction hash: 0x48f142e5174532c32b191cf3eee6a5d93320330b2c0e8dfff61d53c46064e3c4
+```
+
+Our transaction hash lets us know that the EVM has mined the transaction!
+
+#### Use Hardhat to interact with the Upgraded Proxy
+
+Now we will use hardhat to ensure that our proxy was successfully upgraded.
+
+First, navigate back to hardhat console in your `avalanche-smart-contract-quickstart-project` and instantiate `StorageV2` at our proxy address.
+
+```zsh
+> const storageV2 = await ethers.getContractAt('StorageV2','<"YOUR-PROXY-ADDRESS-HERE">')
+```
+
+Notice that we are now using `StorageV2` at our original proxy address. Since, we've upgraded our implementation, our we can call the original address but interact with the new contract. 
+
+Lets check the stored value to ensure that we have retained the data from the previous implementation..
+
+```zsh
+> (await storageV2.retrieve()).toString()
+'42'
+```
+
+Great! We've successfully retrieved the previously stored value from the contract!
+
+Now let's call our upgraded contract's new function [`increment`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/964129dfb7cb9271b396927e9ea8b009e321cda1/contracts/StorageV2.sol#L24-L27) which adds 1 to the stored value:
+
+```zsh
+> await storageV2.increment()
+{
+  hash: '0x2ed9dff3f909a50f191d41ff59ab423907fbc23b4cf7b3721907d933a710b848',
+  type: 0,
+  accessList: null,
+  blockHash: '0x70be069ddf5c353cef0f6e3047b20e9e8c52b837228c131d3e0ad8c84b4c39f4',
+  blockNumber: 124,
+  transactionIndex: 0,
+  confirmations: 1,
+  from: '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+  gasPrice: BigNumber { _hex: '0x05d21dba00', _isBigNumber: true },
+  gasLimit: BigNumber { _hex: '0x8931', _isBigNumber: true },
+  to: '0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b',
+  value: BigNumber { _hex: '0x00', _isBigNumber: true },
+  nonce: 125,
+  data: '0xd09de08a',
+  r: '0xd5ee62766bf7f88946c0d565dbb90b80e2a93df42137b1c13ac44808f7727297',
+  s: '0x4f46a263fdd6f5518ca2cfd43440ee14b5dfec2322e045a3eebdd1d51558c6db',
+  v: 200034,
+  creates: null,
+  chainId: 99999,
+  wait: [Function (anonymous)]
+}
+```
+
+The transaction data shows us that the operation was successful!
+
+Now, lets check the stored number.
+
+```zsh
+> (await storageV2.retrieve()).toString()
+'43'
+```
+
+And there you have it. 
+We have successfully done the following:
+- Deployed a [Transparent Upgradeable Proxy](https://blog.openzeppelin.com/the-transparent-proxy-pattern/)
+- [Transferred proxy admin ownership](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-transferOwnership-address-) to a Gnosis Safe
+- [Upgraded our proxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ProxyAdmin-upgrade-contract-TransparentUpgradeableProxy-address-) to a new implementation
 
 ## Local Workflow
 
@@ -498,4 +796,4 @@ networks: {
 }
 ```
 
-Then run the deployment and interaction methods follow the exercises in this tutorial. 
+Then run the deployment and interaction methods to follow the exercises in this tutorial. 
