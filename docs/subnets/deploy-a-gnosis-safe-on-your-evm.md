@@ -263,7 +263,7 @@ Lets apply the very same steps above to a workflow where we send the Native Curr
 This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
 
 
-Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe tx.
+Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe transaction.
 
 To include our second signer, we will have to import another _private key_ into the project by adding it to `.env` and `hardhat.config.ts` in our `safe-tasks` project.
 
