@@ -9,7 +9,7 @@ If you are looking for more information regarding the Gnosis Safe protocol, plea
 This tutorial assumes that:
 
 - [A Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created.
-- Your Node is currently validating your target Subnet.
+- Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
 
