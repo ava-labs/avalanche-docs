@@ -511,12 +511,12 @@ Storage deployed to: 0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b
 
 This command actually executed 3 operations:
 - Deployed a Proxy Admin contract and assigned the deployer's address as the owner
-- Deployed the `Storage` contract and set the `storeValue` to 42
+- Deployed the `Storage` contract and set the `number` to 42
 - Deployed a Transparent upgradeable proxy and added the `Storage` contract's address as its `implementation`
 
 Notice the line _Storage deployed to:_ in our deployment output includes the address `0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b`
 
-This is our Proxy address which matches our proxy address in `.openzeppelin`, a session file that includes all relevant proxy contract information.
+This is our proxy address which you can also find in `.openzeppelin`, a session file that includes all of the project's proxy contract information.
 
 Example:
 ```json
@@ -561,7 +561,7 @@ Example:
 ``` 
 
 ### Transfer The Proxy Admin Role To A Safe
-Next, lets transfer Proxy Admin privileges to our Gnosis safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
+Next, lets transfer proxy admin privileges to our Gnosis Safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
 
 
 ```ts
@@ -600,7 +600,7 @@ Deploying Storage2...
 StorageV2 deployed to: 0x32CaF0D54B0578a96A1aDc7269F19e7398358174
 ```
 
-`0x32CaF0D54B0578a96A1aDc7269F19e7398358174` would be our new `implementation address`, the logic contract referenced later in this tutorial.
+`0x32CaF0D54B0578a96A1aDc7269F19e7398358174` will be our new `implementation` address, the logic contract consumed by the proxy contract.
 
 #### Use Hardhat To Interact With The Proxy
 
