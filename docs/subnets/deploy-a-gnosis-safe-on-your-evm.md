@@ -92,7 +92,7 @@ To make this easier the Safe team provides multiple CLIs ([safe-cli](https://git
 
 ### Using Safe Tasks
 
-Lets take a look on how to create a Safe and propose transactions on a Subnet using Safe Tasks, a Hardhat task collection for the Safe contracts.
+Let's take a look on how to create a Safe and propose transactions on a Subnet using Safe Tasks, a Hardhat task collection for the Safe contracts.
 
 First, in a new project, clone and navigate to the [safe-tasks repository](https://github.com/5afe/safe-tasks) by running the following command:
 
