@@ -82,7 +82,7 @@ To re-bootstrap the node, stop it, delete the database (by default stored in `~/
 
 #### Running a Node in Debug Mode
 
-By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `public-debug`, `private-debug`, `debug-tracer`, `internal-public-debug` and `internal-private-debug` APIs.
+By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `debug`, `debug-tracer`, and `internal-debug` APIs.
 
 :::note
 Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
@@ -95,18 +95,16 @@ An example C-Chain config file that includes the archival mode, enables debug AP
 ```json
 {
   "eth-apis": [
-    "public-eth",
-    "public-eth-filter",
+    "eth",
+    "eth-filter",
     "net",
     "web3",
-    "internal-public-eth",
-    "internal-public-blockchain",
-    "internal-public-transaction-pool",
-    "public-debug",
-    "private-debug",
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction",
+    "debug",
     "debug-tracer",
-    "internal-public-debug",
-    "internal-private-debug"
+    "internal-debug"
   ],
   "pruning-enabled": false
 }
@@ -181,7 +179,9 @@ Here are the main differences you should be aware of.
 
 ### Measuring Time
 
-It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is a great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
+Avalanche does not use the same mechanism to measure time as Ethereum which uses consistent block times. Instead, Avalanche supports asynchronous block issuance, block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
+
+Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
 Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing and to be within 30 seconds of the real time.
 

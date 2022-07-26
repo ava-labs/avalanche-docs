@@ -54,14 +54,7 @@ const sidebars = {
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
-    {
-      type: 'category',
-      label: 'Exchanges',
-      collapsed: false,
-      items: [
-        'quickstart/integrate-exchange-with-avalanche'
-      ],
-    },
+    'quickstart/integrate-exchange-with-avalanche'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -172,6 +165,7 @@ const sidebars = {
         },
       ],
     },
+    'apis/metrics'
   ],
   nodes: [
     'nodes/README',

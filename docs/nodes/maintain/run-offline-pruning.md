@@ -154,7 +154,7 @@ INFO [02-09|00:59:34] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#22
 INFO [02-09|00:59:34] chains/manager.go#246: creating chain:
     ID: 2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM
     VMID:jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq
-INFO [02-09|00:59:34.425] Enabled APIs: public-eth, public-eth-filter, net, web3, internal-public-eth, internal-public-blockchain, internal-public-transaction-pool, avax
+INFO [02-09|00:59:34.425] Enabled APIs: eth, eth-filter, net, web3, internal-eth, internal-blockchain, internal-transaction, avax
 DEBUG[02-09|00:59:34.425] Allowed origin(s) for WS RPC interface [*]
 INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/avax
 INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/rpc
