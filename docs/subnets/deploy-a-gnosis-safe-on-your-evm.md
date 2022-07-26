@@ -27,6 +27,7 @@ Set up the safe-contracts repository by running the following Commands:
 ```zsh
 git https://github.com/safe-global/safe-contracts.git
 cd safe-contracts
+yarn
 ```
 
 Next, change `.env.example` to `.env` And set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
@@ -98,6 +99,7 @@ First, in a new project, clone and navigate to the [safe-tasks repository](https
 ```zsh
 git clone https://github.com/5afe/safe-tasks.git
 cd safe-tasks
+yarn
 ```
 
 Implement the environment and network setup [above](#setup) to prepare the Safe-Tasks project.
@@ -258,7 +260,7 @@ As shown above, `Owners` now includes a new address and `threshold`, the amount 
 
 ### Send Native Currency from your Safe
 Lets apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
-This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your subnet to MetaMask, [please read this excerpt](http://localhost:3000/subnets/create-a-fuji-subnet#connect-with-metamask).
+This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
 
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe tx.
@@ -486,7 +488,8 @@ For this part of the tutorial, we will need to clone the [Avalanche Smart Contra
 ```zsh
 git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart
 cd avalanche-smart-contract-quickstart
-git checkout origin/proxy-contract-implementation
+git switch proxy-contract-implementation 
+yarn
 ```
 
 Next, implement the environment and network setup [above](#setup) to prepare the Proxy Smart Contract project.
@@ -503,7 +506,7 @@ Output:
 ```zsh
 Deploying Storage...
 Storage deployed to: 0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b
-{ storeValue: '42' }
+{ number: '42' }
 ```
 
 This command actually executed 3 operations:
@@ -616,9 +619,11 @@ Connect hardhat to an instance of the `Storage` contract at the deployed address
 > const storage = await ethers.getContractAt('Storage','YOUR-PROXY-ADDRESS-HERE')
 ```
 
+You can reference your proxy address from the `Storage` contract deployment or `.openzeppelin`.
+
 Retrieve the stored number set during deployment.
 ```zsh
-(await storage.retrieve()).toString()
+>(await storage.retrieve()).toString()
 '42'
 ```
 
@@ -647,7 +652,7 @@ Ensure that the following parameters are set correctly:
 
 - `to` - Should be set to the proxy admin address found in `avalanche-smart-contract-quickstart/.openzeppelin/<"YOUR-NETWORK-SESSION">.json`.
 - `method` - Ensure that you have the function name and argument types correct.
-- `params` - An `upgrade` call needs both a `proxy address` and `implementation address` to be passed in as arguments.
+- `params` - An `upgrade` call needs both a `proxy address` and `implementation address` to be passed in as arguments. In this case we, our implementation address will be our `StorageV2` contract address.
 
 
 Next create the Tx data by running the following command:
@@ -722,7 +727,7 @@ Now we will use hardhat to ensure that our proxy was successfully upgraded.
 First, navigate back to hardhat console in your `avalanche-smart-contract-quickstart-project` and instantiate `StorageV2` at our proxy address.
 
 ```zsh
-> const storageV2 = await ethers.getContractAt('StorageV2','<"YOUR-PROXY-ADDRESS-HERE">')
+> const storageV2 = await ethers.getContractAt('StorageV2','YOUR-PROXY-ADDRESS-HERE')
 ```
 
 Notice that we are now using `StorageV2` at our original proxy address. Since, we've upgraded our implementation, our we can call the original address but interact with the new contract. 
