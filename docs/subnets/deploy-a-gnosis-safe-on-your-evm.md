@@ -10,7 +10,7 @@ This tutorial assumes that:
 
 - [A Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created.
 - Your node is currently validating your target Subnet.
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
+- Your wallet has a balance of the Subnet native token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
@@ -104,7 +104,7 @@ yarn
 
 Implement the environment and network setup [above](#setup) to prepare the Safe-Tasks project.
 ### Create a Safe
-Now lets create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
+Now let's create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
 
 ```zsh
 yarn safe create --network subnet --singleton <"YOUR-GnosisSafeL2-ADDRESS-HERE"> --factory <"YOUR-GnosisSafeProxyFactory-ADDRESS-HERE">
@@ -123,7 +123,7 @@ Data: 0x1688f0b900000000000000000000000095ca0a568236fc7413cd2b794a7da24422c2bbb6
 
 Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", informs us that our safe contract lives at the address `0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114`. For demonstration purposes, we will utilize this address for this section of the article.
 
-Lets inspect our Safe details by running the following:
+Let's inspect our Safe details by running the following:
 
 ```zsh
 yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 
@@ -236,7 +236,7 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Ethereum transaction hash: 0x99b35740246b91e5137f0128427e220ec7772aab17b20b6b9d4bcc7e0c73685f
 ```
 
-Now that we've successfully submitted a proposal, lets check the owners of our Safe by using the `info` task:
+Now that we've successfully submitted a proposal, let's check the owners of our Safe by using the `info` task:
 
 ```zsh
 yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
@@ -259,8 +259,8 @@ It is worth noting that you can also check the owners of the Safe by using [Hard
 As shown above, `Owners` now includes a new address and `threshold`, the amount of signatures needed to execute a transaction, has increased to 2.
 
 ### Send Native Currency from Your Safe
-Lets apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
-This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your Subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
+Let's apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
+This part of the tutorial requires that your Safe holds at least 1000 native tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your Subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
 
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe transaction.
@@ -325,7 +325,7 @@ Output:
 {"jsonrpc":"2.0","id":1,"result":"0x3e8"}
 ```
 
-Now that we've verified that our Safe has enough Native Tokens(1000), lets create a proposal to send some to an EOA.
+Now that we've verified that our Safe has enough native tokens(1000), let's create a proposal to send some to an EOA.
 
 ```zsh
 yarn safe propose  --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --value 1000 --to 0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
@@ -378,7 +378,7 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Ethereum transaction hash: 0x074d823b8d111af9e87d0e4374e3a5382a4de9952df4f49db5ee4b52f945760b
 ```
 
-Now lets check the balances of the Safe and EOA addresses using curl.
+Now let's check the balances of the Safe and EOA addresses using curl.
 
 **Safe balance(0)**
 
@@ -496,7 +496,7 @@ Next, implement the environment and network setup [above](#setup) to prepare the
 
 ### Deploy the proxy
 
-Lets deploy the proxy contracts by running the following command:
+Let's deploy the proxy contracts by running the following command:
 
 ```zsh
 npx hardhat run --network subnet scripts/deployStorage.ts
@@ -561,7 +561,7 @@ Example:
 ``` 
 
 ### Transfer The Proxy Admin Role To A Safe
-Next, lets transfer proxy admin privileges to our Gnosis Safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
+Next, let's transfer proxy admin privileges to our Gnosis Safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
 
 
 ```ts
@@ -718,7 +718,7 @@ Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff with 0x8db97C7cEcE249c2
 Ethereum transaction hash: 0x48f142e5174532c32b191cf3eee6a5d93320330b2c0e8dfff61d53c46064e3c4
 ```
 
-Our transaction hash lets us know that the EVM has mined the transaction!
+Our transaction hash let's us know that the EVM has mined the transaction!
 
 #### Use Hardhat To Interact With The Upgraded Proxy
 
@@ -732,7 +732,7 @@ First, navigate back to hardhat console in your `avalanche-smart-contract-quicks
 
 Notice that we are now using `StorageV2` at our original proxy address. Since, we've upgraded our implementation, our we can call the original address but interact with the new contract. 
 
-Lets check the stored value to ensure that we have retained the data from the previous implementation..
+Let's check the stored value to ensure that we have retained the data from the previous implementation..
 
 ```zsh
 > (await storageV2.retrieve()).toString()
@@ -771,7 +771,7 @@ Now let's call our upgraded contract's new function [`increment`](https://github
 
 The transaction data shows us that the operation was successful!
 
-Now, lets check the stored number.
+Now, let's check the stored number.
 
 ```zsh
 > (await storageV2.retrieve()).toString()
