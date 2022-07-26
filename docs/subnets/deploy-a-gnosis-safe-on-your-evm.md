@@ -39,7 +39,6 @@ PK2=""
 INFURA_KEY=""
 # Used for custom network
 NODE_URL="<YOUR-SUBNET-NODE-RPC-URL-HERE>"
-NETWORK="subnet"
 ```
 
 Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
@@ -210,7 +209,7 @@ Safe transaction hash: 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d
 
 As you can see, creating a proposal generates a `Safe transaction hash` which we will use to complete this tutorial.
 
-Next, we will sign and submit our Proposal's tx hash, `0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc`, with the tasks, `sign-proposal` and `submit-proposal`.
+Next, we will sign and submit our proposal's tx hash, `0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc`, with the tasks, `sign-proposal` and `submit-proposal`.
 
 #### Sign
 
