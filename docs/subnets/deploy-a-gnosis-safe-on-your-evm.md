@@ -30,7 +30,7 @@ cd safe-contracts
 yarn
 ```
 
-Next, change `.env.example` to `.env` And set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
+Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
 
 Example:
 ```env
@@ -38,7 +38,7 @@ PK="YOUR-PRIVATE-KEY-HERE"
 PK2=""
 INFURA_KEY=""
 # Used for custom network
-NODE_URL="<YOUR-SUBNET-NODE-URL-HERE>"
+NODE_URL="<YOUR-SUBNET-NODE-RPC-URL-HERE>"
 NETWORK="subnet"
 ```
 
@@ -83,7 +83,7 @@ _Note: Record your GnosisSafeL2 and GnosisSafeProxyFactory addresses to complete
 The deployment of the contracts is using a [proxy factory](https://github.com/safe-global/safe-contracts/blob/v1.3.0/contracts/proxies/GnosisSafeProxyFactory.sol), therefore the address is depending on the bytecode. If the address is the same then the deployment bytecode of the contract is also the same (assuming that the target chain follows the EVM specifications set in the Ethereum Yellowpaper).
 
 
-## Interacting With The Safe
+## Interacting with the Safe
 The [safe-deployments](https://github.com/safe-global/safe-deployments) repository contains the ABI files for the different versions of the Safe that can be used with all common Ethereum tools to interact with the Safe.
 
 The important part is how to create the signature to confirm a transaction. More information on this can be found in the [Safe docs](https://docs.gnosis-safe.io/contracts/signatures).
@@ -94,7 +94,7 @@ To make this easier the Safe team provides multiple CLIs ([safe-cli](https://git
 
 Let's take a look on how to create a Safe and propose transactions on a Subnet using Safe Tasks, a Hardhat task collection for the Safe contracts.
 
-First, in a new project, clone and navigate to the [safe-tasks repository](https://github.com/5afe/safe-tasks) by running the following command:
+First, in a new directory, clone and navigate to the [safe-tasks repository](https://github.com/5afe/safe-tasks) by running the following command:
 
 ```zsh
 git clone https://github.com/5afe/safe-tasks.git
@@ -142,7 +142,7 @@ Modules:
 ```
 
 The output above illustrates a few things:
-- `Singleton` - This is the contract that holds the logic for our safe to interact with. In this case, the Smart Contract we are using is [`GnosisSafeL2.sol`](https://github.com/safe-global/safe-contracts/blob/main/contracts/GnosisSafeL2.sol), A multisignature wallet with support for confirmations using signed messages based on [ERC191](https://eips.ethereum.org/EIPS/eip-191).
+- `Singleton` - This is the contract that holds the logic for our Safe to interact with. In this case, the Smart Contract we are using is [`GnosisSafeL2.sol`](https://github.com/safe-global/safe-contracts/blob/main/contracts/GnosisSafeL2.sol), A multisignature wallet with support for confirmations using signed messages based on [ERC191](https://eips.ethereum.org/EIPS/eip-191).
 -  `Owners` - The addresses that are allowed to sign and submit proposals. These can be can either be EOAs or other smart contract accounts.
 - `Threshold` - The amount of signatures required to submit a proposal.
 
@@ -165,7 +165,7 @@ Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/
     }
 ]
 ```
-Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the safe.
+Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the Safe.
 
 ```zsh
 yarn safe propose-multi --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
@@ -236,7 +236,7 @@ Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2
 Ethereum transaction hash: 0x99b35740246b91e5137f0128427e220ec7772aab17b20b6b9d4bcc7e0c73685f
 ```
 
-Now that we've successfully submitted a proposal, lets check the owners of our safe by using the `info` task:
+Now that we've successfully submitted a proposal, lets check the owners of our Safe by using the `info` task:
 
 ```zsh
 yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
@@ -254,13 +254,13 @@ Fallback Handler: 0x0000000000000000000000000000000000000000
 Modules: 
 ```
 
-It is worth noting that you can also check the owners of the safe by using [Hardhat with your Custom EVM](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain#interact-with-smart-contract).
+It is worth noting that you can also check the owners of the Safe by using [Hardhat with your Custom EVM](https://docs.avax.network/dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain#interact-with-smart-contract).
 
 As shown above, `Owners` now includes a new address and `threshold`, the amount of signatures needed to execute a transaction, has increased to 2.
 
-### Send Native Currency from your Safe
+### Send Native Currency from Your Safe
 Lets apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
-This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
+This part of the tutorial requires that your Safe holds at least 1000 Native Tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your Subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
 
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe transaction.
