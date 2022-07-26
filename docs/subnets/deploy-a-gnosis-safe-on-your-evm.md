@@ -305,7 +305,7 @@ networks: {
     },
 ```
 
-In this example, we're sending 1000 _LEVM_ from our Safe to the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
+In this example, we're sending 1000 _LEVM_ (which is the native token on the Subnet we are working with) from our Safe to the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
 
 Let's ensure that our Safe has enough funds by using a simple curl request.
 
