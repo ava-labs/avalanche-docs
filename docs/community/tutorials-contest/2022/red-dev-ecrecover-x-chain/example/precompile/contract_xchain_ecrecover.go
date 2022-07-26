@@ -19,7 +19,6 @@ var (
 	// Singleton StatefulPrecompiledContract for XChain ECRecover.
 	ContractXChainECRecoverPrecompile StatefulPrecompiledContract = createXChainECRecoverPrecompile(ContractXchainECRecoverAddress)
 
-	xChainECRecoverSignature     = CalculateFunctionSelector("xChainECRecover(string)") // address, amount
 	xChainECRecoverReadSignature = CalculateFunctionSelector("getXChainECRecover(bytes32,uint8,bytes32,bytes32)")
 )
 
