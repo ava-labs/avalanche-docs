@@ -464,7 +464,7 @@ yarn submit <SAFE-TX-HASH>
 
 ## Managing a Proxy using Gnosis Safe
 
-:::warning
+:::caution
 
 This part of the tutorial is better suited for advanced users as the operations from each project work together asynchronously which may lead to errors if the user misses a step.
 
