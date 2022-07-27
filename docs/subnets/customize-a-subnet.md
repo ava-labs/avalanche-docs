@@ -11,7 +11,7 @@ And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/
 - Genesis
 - Precompile
 - Chain Configs
-- [Upgrade Configs](#enabling-or-disabling-precompiles-as-network-upgrades) (`upgrade.json`)
+- [Upgrade Configs](##network-upgrades-enabledisable-precompiles) (`upgrade.json`)
 
 ## Subnet Configs
 
@@ -453,7 +453,7 @@ These upgrades can be specified in a file named `upgrade.json` placed in the sam
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 100,        // timestamp precompile should activate at
+        "blockTimestamp": 100,      // timestamp precompile should activate at
         "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
