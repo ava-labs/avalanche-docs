@@ -11,6 +11,7 @@ And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/
 - Genesis
 - Precompile
 - Chain Configs
+- [Upgrade Configs](#enabling-or-disabling-precompiles-as-network-upgrades) (`upgrade.json`)
 
 ## Subnet Configs
 
