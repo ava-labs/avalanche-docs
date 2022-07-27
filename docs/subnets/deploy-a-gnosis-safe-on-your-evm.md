@@ -10,7 +10,7 @@ This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on [Mainnet](../subnets/subnet-cli), [Fuji](../subnets/create-a-fuji-subnet) or a [Local network](../subnets/create-a-local-subnet).
 - Your node is currently validating your target Subnet.
-- Your wallet has a balance of the Subnet native token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
+- Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
@@ -54,8 +54,9 @@ networks: {
 }
 ```
 
-_Note: `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when applying this workflow to your projects._
-
+:::note
+ `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when following this workflow.
+:::
 ### Deploy the Safe Contracts
 
 At this point we have set up the Subnet and can make calls to the RPC endpoint. You can use the RPC URL value to define `NODE_URL` in your `.env` file. We can execute the workflow on a local or remote node as long as we have the [proper IP address](../apis/avalanchego/apis/issuing-api-calls#endpoints).
@@ -81,7 +82,9 @@ deploying "GnosisSafeL2" (tx: 0x341ec664d3a5c2c98f1c3f5862651ba82e0c2d12875d69ad
 deploying "GnosisSafe" (tx: 0x10dcf8c5f53ae698c77d7f60d6756b4b24f2f8224e14e21658c421e158a84cd4)...: deployed at 0x789a5FDac2b37FCD290fb2924382297A6AE65860 with 5086960 gas
 ✨  Done in 26.90s.
 ```
-_Note: Record your GnosisSafeL2 and GnosisSafeProxyFactory addresses to complete this tutorial_
+:::note
+Please record your GnosisSafeL2 and GnosisSafeProxyFactory addresses to complete this tutorial
+:::
 
 The deployment of the contracts is using a [proxy factory](https://github.com/safe-global/safe-contracts/blob/v1.3.0/contracts/proxies/GnosisSafeProxyFactory.sol), therefore the address is depending on the bytecode. If the address is the same then the deployment bytecode of the contract is also the same (assuming that the target chain follows the EVM specifications set in the Ethereum Yellowpaper).
 
@@ -481,7 +484,7 @@ yarn safe sign-proposal <SAFE-TX-HASH>
 yarn submit <SAFE-TX-HASH>
 ```
 
-## Managing a Proxy using Gnosis Safe
+## Managing a Proxy Using Gnosis Safe
 
 :::caution
 
@@ -511,7 +514,7 @@ yarn
 
 Next, implement the environment and network setup [above](#setup) to prepare the Proxy Smart Contract project.
 
-### Deploy the proxy
+### Deploy the Proxy
 
 Let's deploy the proxy contracts by running the following command:
 
@@ -577,7 +580,7 @@ Example:
 }
 ``` 
 
-### Transfer The Proxy Admin Role To A Safe
+### Transfer the Proxy Admin Role to a Safe
 Next, let's transfer proxy admin privileges to our Gnosis Safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
 
 
@@ -599,9 +602,9 @@ Transferred ownership of ProxyAdmin to: 0xCA2922E98339C359D818b8f7ad3c897C0e18a7
 
 Now that we have transferred ownership to our Gnosis Safe, we can upgrade the proxy implementation. 
 
-### Upgrade The Contract
+### Upgrade the Contract
 
-#### Deploy A New Logic Contract
+#### Deploy a New Logic Contract
 
 For this step we will deploy a new implementation for the proxy contract to interact with.
 
@@ -619,7 +622,7 @@ StorageV2 deployed to: 0x32CaF0D54B0578a96A1aDc7269F19e7398358174
 
 `0x32CaF0D54B0578a96A1aDc7269F19e7398358174` will be our new `implementation` address, the logic contract consumed by the proxy contract.
 
-#### Use Hardhat To Interact With The Proxy
+#### Use Hardhat to Interact with the Proxy
 
 Now is a good time for us to use Hardhat to interact with the proxy to ensure that we are on the right track.
 
@@ -644,7 +647,7 @@ Retrieve the stored number set during deployment.
 '42'
 ```
 
-#### Create The Upgrade Tx
+#### Create the Upgrade Tx
 
 Next we will use the `propose-multi` task to create an upgrade tx. 
 
@@ -700,7 +703,7 @@ Output:
 
 Notice that the `data` value consists of the calldata we will use to call the `upgrade` function.
 
-#### Create The Proposal
+#### Create the Proposal
 
 ```zsh
 yarn safe propose --network subnet "<YOUR-SAFE-ADDRESS-HERE>" --to "<YOUR-PROXY-ADMIN-ADDRESS-HERE>" --data "<YOUR-TX-DATA-HERE>"
@@ -737,7 +740,7 @@ Ethereum transaction hash: 0x48f142e5174532c32b191cf3eee6a5d93320330b2c0e8dfff61
 
 Our transaction hash let's us know that the EVM has mined the transaction!
 
-#### Use Hardhat To Interact With The Upgraded Proxy
+#### Use Hardhat to Interact With the Upgraded Proxy
 
 Now we will use hardhat to ensure that our proxy was successfully upgraded.
 

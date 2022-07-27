@@ -82,7 +82,6 @@ const sidebars = {
         'subnets/setup-dfk-node',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-        'subnets/deploy-a-gnosis-safe-on-your-evm',
       ],
     },
     {
@@ -103,6 +102,7 @@ const sidebars = {
         'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
+        'subnets/deploy-a-gnosis-safe-on-your-evm',
       ],
     },
     {
