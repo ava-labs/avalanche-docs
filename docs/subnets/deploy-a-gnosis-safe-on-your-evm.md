@@ -8,7 +8,7 @@ If you are looking for more information regarding the Gnosis Safe protocol, plea
 ## Prerequisites
 This tutorial assumes that:
 
-- [A Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created.
+- A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on [Mainnet](../subnets/subnet-cli), [Fuji](../subnets/create-a-fuji-subnet) or a [Local network](../subnets/create-a-local-subnet).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
@@ -46,7 +46,7 @@ Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github
 ```ts
 networks: {
   subnet: {
-    url: NODE_URL,
+    url: `${NODE_URL}`,
     chainId: 99999,
     gasPrice: "auto",
     accounts: [`${PK}`, ],
@@ -54,7 +54,11 @@ networks: {
 }
 ```
 
+_Note: `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when applying this workflow to your projects_
+
 ### Deploy the Safe Contracts
+
+At this point we have set up the Subnet and can make calls to the RPC endpoint. You can use the RPC URL value to define `NODE_URL` in your `.env` file. We can execute the workflow on a local or remote node as long as we have the [proper IP address](../apis/avalanchego/apis/issuing-api-calls#endpoints).
 
 Finally, deploy the contracts by running:
 
@@ -787,7 +791,7 @@ We have successfully done the following:
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port numbers by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 49435.
+Follow [Create a Local Test Network](../subnets/create-a-local-subnet.md) to start a 5-node local network. Make sure that you get one of the port numbers by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 49435.
 
 ### Locate the Hardhat Network Configuration and Make Necessary Changes
 
