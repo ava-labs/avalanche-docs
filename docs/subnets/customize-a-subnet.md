@@ -516,7 +516,7 @@ Example:
 }
 ```
 
-This example enables the `feeManagerConfig` at the block immediately after timestamp `1668950000`, enables `txAllowListConfig` at the block immediately after timestamp `1668960000`, and disables `feeManagerConfig` at the block immediately after timestamp `1668970000`.
+This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables `txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig` at the first block with timestamp >= `1668970000`.
 
 ## Chain Configs
 
