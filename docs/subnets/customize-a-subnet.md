@@ -440,6 +440,71 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
+### Enabling or disabling precompiles as network upgrades
+
+In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
+
+These upgrades can be specified in a file named `upgrade.json` placed in the same directory as `config.json` using the following format:
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 0,        // timestamp precompile should activate at
+        "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
+      }
+    }
+}
+```
+
+To disable a precompile, the following format should be used:
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 100, // timestamp the precompile should deactivate at
+        "disable": true, 
+      }
+    }
+  ]
+}
+```
+
+Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation  (otherwise the node will refuse to start).
+
+Upgrades may be removed from `upgrade.json` or modified prior to the associated `blockTimestamp`. However, it is recommended to treat `precompileUpgrades` as append-only.
+
+Example:
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 100,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "txAllowListConfig": {
+        "blockTimestamp": 200,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 300,
+        "disable": true
+      }
+    }
+  ]
+}
+```
+
+This example enables the `feeManagerConfig` at the block immediately after timestamp `100`, enables `txAllowListConfig` at the block immediately after timestamp `200`, and disables `feeManagerConfig` at the block immediately after timestamp `300`.
+
+
+
 ## Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
