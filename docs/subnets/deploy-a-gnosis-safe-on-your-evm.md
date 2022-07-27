@@ -34,7 +34,7 @@ Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's
 
 Example:
 ```env
-PK="YOUR-PRIVATE-KEY-HERE"
+PK="<YOUR-PRIVATE-KEY-HERE>"
 PK2=""
 INFURA_KEY=""
 # Used for custom network
@@ -110,7 +110,7 @@ Implement the environment and network setup [above](#setup) to prepare the Safe-
 Now let's create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
 
 ```zsh
-yarn safe create --network subnet --singleton <"YOUR-GnosisSafeL2-ADDRESS-HERE"> --factory <"YOUR-GnosisSafeProxyFactory-ADDRESS-HERE">
+yarn safe create --network subnet --singleton "<YOUR-GnosisSafeL2-ADDRESS-HERE>" --factory "<YOUR-GnosisSafeProxyFactory-ADDRESS-HERE>"
 ```
 
 Output:
@@ -583,7 +583,7 @@ Next, let's transfer proxy admin privileges to our Gnosis Safe by adding it's ad
 
 ```ts
 // transferProxyOwnership.ts
-  const gnosisSafe = <"YOUR-SAFE-ADDRESS-HERE">
+  const gnosisSafe = "<YOUR-SAFE-ADDRESS-HERE>"
 ```
 Next run the script to execute the transfer.
 ```zsh
@@ -633,7 +633,7 @@ Then connect to the contracts with the following steps:
 
 Connect hardhat to an instance of the `Storage` contract at the deployed address.
 ```zsh
-> const storage = await ethers.getContractAt('Storage','YOUR-PROXY-ADDRESS-HERE')
+> const storage = await ethers.getContractAt('Storage','<YOUR-PROXY-ADDRESS-HERE>')
 ```
 
 You can reference your proxy address from the `Storage` contract deployment or `.openzeppelin`.
@@ -654,12 +654,12 @@ Create a new file, `upgrade.json`, in the `examples` directory of your `safe-tas
 // examples/upgrade.json
 [
     {
-        "to": <"YOUR-PROXY-ADMIN-ADDRESS-HERE">,
+        "to": "<YOUR-PROXY-ADMIN-ADDRESS-HERE>",
         "value": "0",
         "method": "upgrade(address,address)",
         "params": [
-            <"YOUR-PROXY-ADDRESS-HERE">,
-            <"YOUR-IMPLEMENTATION-ADDRESS-HERE">
+            "<YOUR-PROXY-ADDRESS-HERE>",
+            "<YOUR-IMPLEMENTATION-ADDRESS-HERE>"
         ],
         "operation": 0
     }
@@ -667,7 +667,7 @@ Create a new file, `upgrade.json`, in the `examples` directory of your `safe-tas
 ```
 Ensure that the following parameters are set correctly:
 
-- `to` - Should be set to the proxy admin address found in `avalanche-smart-contract-quickstart/.openzeppelin/<"YOUR-NETWORK-SESSION">.json`.
+- `to` - Should be set to the proxy admin address found in `avalanche-smart-contract-quickstart/.openzeppelin/"<YOUR-NETWORK-SESSION>".json`.
 - `method` - Ensure that you have the function name and argument types correct.
 - `params` - An `upgrade` call needs both a `proxy address` and `implementation address` to be passed in as arguments. In this case we, our implementation address will be our `StorageV2` contract address.
 
@@ -675,7 +675,7 @@ Ensure that the following parameters are set correctly:
 Next create the Tx data by running the following command:
 
 ```zsh
-yarn safe propose-multi <"YOUR-SAFE-ADDRESS"> examples/upgrade.json --export examples/upgradeData.json
+yarn safe propose-multi "<YOUR-SAFE-ADDRESS>" examples/upgrade.json --export examples/upgradeData.json
 ```
 
 Output:
@@ -703,7 +703,7 @@ Notice that the `data` value consists of the calldata we will use to call the `u
 #### Create The Proposal
 
 ```zsh
-yarn safe propose --network subnet <"YOUR-SAFE-ADDRESS-HERE"> --to <"YOUR-PROXY-ADMIN-ADDRESS-HERE"> --data <"YOUR-TX-DATA-HERE">
+yarn safe propose --network subnet "<YOUR-SAFE-ADDRESS-HERE>" --to "<YOUR-PROXY-ADMIN-ADDRESS-HERE>" --data "<YOUR-TX-DATA-HERE>"
 ```
 
 ```zsh
@@ -714,7 +714,7 @@ Safe transaction hash: 0xd9a5d0e57eaa1763f36cb7208c227e9ee2d6ec03ae4a4947bb8a99a
 
 #### Sign
 ```
-yarn safe sign-proposal <"YOUR-SAFE-TX-HASH-HERE"> 
+yarn safe sign-proposal "<YOUR-SAFE-TX-HASH-HERE>" 
 ```
 
 Output:
@@ -725,7 +725,7 @@ Signature: 0x702f6f29903e434ea5fee10a79541a463a2c18d730f32c0b61a1101960aa802d317
 
 #### Submit
 ```
-yarn safe submit-proposal <"YOUR-SAFE-TX-HASH-HERE"> 
+yarn safe submit-proposal "<YOUR-SAFE-TX-HASH-HERE>" 
 ```
 
 Output:
