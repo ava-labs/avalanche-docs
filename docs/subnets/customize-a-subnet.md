@@ -453,7 +453,7 @@ These upgrades can be specified in a file named `upgrade.json` placed in the sam
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 0,        // timestamp precompile should activate at
+        "blockTimestamp": 100,        // timestamp precompile should activate at
         "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
