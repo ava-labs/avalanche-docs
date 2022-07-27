@@ -443,6 +443,8 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 
 ### Network Upgrades: Enable/Disable Precompiles
 
+Disclaimer: performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
 
 These upgrades can be specified in a file named `upgrade.json` placed in the same directory as `config.json` using the following format:
