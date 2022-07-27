@@ -8,10 +8,10 @@ All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
 
-- Genesis
-- Precompile
-- Chain Configs
-- [Upgrade Configs](##network-upgrades-enabledisable-precompiles) (`upgrade.json`)
+- [Genesis](#genesis)
+- [Precompile](#precompiles)
+- [Upgrade Configs](#network-upgrades-enabledisable-precompiles)
+- [Chain Configs](#chain-configs)
 
 ## Subnet Configs
 
@@ -439,11 +439,15 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 
 ### Network Upgrades: Enable/Disable Precompiles
 
-Disclaimer: performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+:::warning
+
+Performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+
+:::
 
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
 
-These upgrades can be specified in a file named `upgrade.json` placed in the same directory as `config.json` using the following format:
+These upgrades can be specified in a file named `upgrade.json` placed in the same directory as [`config.json`](#chain-configs) using the following format:
 
 ```json
 {
