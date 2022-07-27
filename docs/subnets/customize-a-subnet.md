@@ -441,7 +441,7 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
-### Enabling or disabling precompiles as network upgrades
+### Network Upgrades: Enable/Disable Precompiles
 
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
 
