@@ -437,10 +437,6 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-### Examples
-
-Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
-
 ### Network Upgrades: Enable/Disable Precompiles
 
 Disclaimer: performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
@@ -448,12 +444,13 @@ Disclaimer: performing a network upgrade requires coordinating the upgrade netwo
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
 
 These upgrades can be specified in a file named `upgrade.json` placed in the same directory as `config.json` using the following format:
+
 ```json
 {
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 100,      // timestamp precompile should activate at
+        "blockTimestamp": 100, // timestamp precompile should activate at
         "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
@@ -462,20 +459,21 @@ These upgrades can be specified in a file named `upgrade.json` placed in the sam
 ```
 
 To disable a precompile, the following format should be used:
+
 ```json
 {
   "precompileUpgrades": [
     {
       "<precompileName>": {
         "blockTimestamp": 100, // timestamp the precompile should deactivate at
-        "disable": true, 
+        "disable": true
       }
     }
   ]
 }
 ```
 
-Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation  (otherwise the node will refuse to start).
+Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation (otherwise the node will refuse to start).
 
 Enabling and disabling a precompile is a network upgrade and should always be done with caution. As a worst-case scenario/backup measure, a network upgrade that has not been activated is still safe to abort since the chain is still processing blocks using the prior rule set.
 
@@ -484,6 +482,7 @@ As a best practice, it's recommended to treat `precompileUpgrades` as always app
 If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json` from the end of the list of upgrades. As long as the blockchain has not accepted a block with a timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
 
 Example:
+
 ```json
 {
   "precompileUpgrades": [
@@ -511,7 +510,9 @@ Example:
 
 This example enables the `feeManagerConfig` at the block immediately after timestamp `100`, enables `txAllowListConfig` at the block immediately after timestamp `200`, and disables `feeManagerConfig` at the block immediately after timestamp `300`.
 
+### Examples
 
+Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
 ## Chain Configs
 
