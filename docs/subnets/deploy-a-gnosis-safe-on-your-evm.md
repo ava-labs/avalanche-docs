@@ -414,6 +414,21 @@ Output
 ```zsh
 {"jsonrpc":"2.0","id":1,"result":"0x3635c9adc5dea00000"}
 ```
+:::tip
+
+We can reformat `BigNumber` values to human readable values by using hardhat console.
+
+Example:
+```zsh
+npx hardhat console --network subnet
+ethers.utils.formatUnits(await ethers.BigNumber.from('0x3635c9adc5dea00000'))
+```
+Output
+```zsh
+'1000.0'
+```
+:::
+
 
 And there you have it! We've transferred 1000 _LEVM_ from our Safe to address, `0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559`.
 
