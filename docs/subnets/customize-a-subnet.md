@@ -454,6 +454,7 @@ These upgrades can be specified in a file named `upgrade.json` placed in the sam
         "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
+  ]
 }
 ```
 
