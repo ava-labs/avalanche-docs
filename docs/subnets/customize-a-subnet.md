@@ -475,7 +475,11 @@ To disable a precompile, the following format should be used:
 
 Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation  (otherwise the node will refuse to start).
 
-Upgrades may be removed from `upgrade.json` or modified prior to the associated `blockTimestamp`. However, it is recommended to treat `precompileUpgrades` as append-only.
+Enabling and disabling a precompile is a network upgrade and should always be done with caution. As a worst-case scenario/backup measure, a network upgrade that has not been activated is still safe to abort since the chain is still processing blocks using the prior rule set.
+
+As a best practice, it's recommended to treat `precompileUpgrades` as always append only.
+
+If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json` from the end of the list of upgrades. As long as the blockchain has not accepted a block with a timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
 
 Example:
 ```json
