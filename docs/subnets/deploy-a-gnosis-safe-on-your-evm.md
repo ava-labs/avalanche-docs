@@ -278,7 +278,6 @@ PK2="cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc"
 INFURA_KEY=""
 # Used for custom network
 NODE_URL="http://127.0.0.1:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc"
-NETWORK="subnet"
 ```
 
 Example `hardhat.config.ts`
@@ -300,7 +299,7 @@ const {
 ...
 networks: {
   subnet: {
-        url: NODE_URL,
+        url: `${NODE_URL}`,
         chainId: 99999,
         gasPrice: "auto",
         accounts: [`${PK}`, `${PK2}` ],
@@ -806,7 +805,7 @@ We have successfully done the following:
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../subnets/create-a-local-subnet.md) to start a 5-node local network. Make sure that you get one of the port numbers by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 49435.
+Follow [Create a Local Test Network](../subnets/create-a-local-subnet.md) to start a local Subnet EVM. Make sure that you get one of the port numbers by following running the command: [`avalanche network status`](../subnets/create-a-local-subnet#checking-network-status). In this tutorial, we will assume one of the ports is 49435.
 
 ### Locate the Hardhat Network Configuration and Make Necessary Changes
 
