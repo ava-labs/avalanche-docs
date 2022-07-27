@@ -437,7 +437,11 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-### Network Upgrades: Enable/Disable Precompiles
+### Examples
+
+Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
+
+## Network Upgrades: Enable/Disable Precompiles
 
 :::warning
 
@@ -454,7 +458,7 @@ These upgrades can be specified in a file named `upgrade.json` placed in the sam
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 100, // timestamp precompile should activate at
+        "blockTimestamp": 1668950000, // unix timestamp precompile should activate at
         "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
@@ -469,7 +473,7 @@ To disable a precompile, the following format should be used:
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 100, // timestamp the precompile should deactivate at
+        "blockTimestamp": 1668950000, // unix timestamp the precompile should deactivate at
         "disable": true
       }
     }
@@ -492,19 +496,19 @@ Example:
   "precompileUpgrades": [
     {
       "feeManagerConfig": {
-        "blockTimestamp": 100,
+        "blockTimestamp": 1668950000,
         "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
       }
     },
     {
       "txAllowListConfig": {
-        "blockTimestamp": 200,
+        "blockTimestamp": 1668960000,
         "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
       }
     },
     {
       "feeManagerConfig": {
-        "blockTimestamp": 300,
+        "blockTimestamp": 1668970000,
         "disable": true
       }
     }
@@ -512,11 +516,7 @@ Example:
 }
 ```
 
-This example enables the `feeManagerConfig` at the block immediately after timestamp `100`, enables `txAllowListConfig` at the block immediately after timestamp `200`, and disables `feeManagerConfig` at the block immediately after timestamp `300`.
-
-### Examples
-
-Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
+This example enables the `feeManagerConfig` at the block immediately after timestamp `1668950000`, enables `txAllowListConfig` at the block immediately after timestamp `1668960000`, and disables `feeManagerConfig` at the block immediately after timestamp `1668970000`.
 
 ## Chain Configs
 
