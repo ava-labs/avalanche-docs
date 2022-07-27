@@ -54,7 +54,7 @@ networks: {
 }
 ```
 
-_Note: `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when applying this workflow to your projects_
+_Note: `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when applying this workflow to your projects._
 
 ### Deploy the Safe Contracts
 
