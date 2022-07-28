@@ -1,4 +1,10 @@
-# Build a Complex VM (Part 3 - BlobVM)
+# How to Build a Complex VM
+
+This is part of series of tutorials for building a Virtual Machine (VM):
+
+- [Introduction to Virtual Machine](./introduction-to-vm.md)
+- [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
+- How to Build a Complex VM (this article)
 
 ## Introduction
 
@@ -10,8 +16,8 @@ Blobs are small chunks of data. In BlobVM, we divide a file into small blobs and
 
 Make sure you have followed the previous tutorials in this series:
 
-* Build a Virtual Machine - [Part 1](/subnets/build-a-vm-part-1)
-* Build a Simple VM - [Part 2](/subnets/create-a-virtual-machine-vm)
+- [Introduction to Virtual Machine](./introduction-to-vm.md)
+- [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
 
 ## Components of the BlobVM
 
@@ -333,7 +339,7 @@ func (t *Transaction) Execute(g *Genesis, db database.Database, blk *StatelessBl
 	return nil
 }
 ```
- 
+
 Here's the overview on how to create and issue a signed transaction:
 
 - Create an unsigned transaction with required fields.
@@ -630,7 +636,7 @@ A block once built, has 3 states:
   - Delete block from `vm.verifiedBlocks`
   - Add block to `vm.blocks` cache
 
-When the consensus engine receives the built block, it calls the block's [`Verify()`](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L227) method. This method serves the following functions* -
+When the consensus engine receives the built block, it calls the block's [`Verify()`](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L227) method. This method serves the following functions\* -
 
 - At least 1 transaction and block timestamp should be within 10s in the future (futureBound).
 
@@ -1050,6 +1056,7 @@ func (svc *PublicService) IssueRawTx(_ *http.Request, args *IssueRawTxArgs, repl
 	return fmt.Errorf("%v", errs)
 }
 ```
+
 It accepts `IssueRawTxArgs` that contain transaction bytes. It processes the request as following
 
 - Unmarshal transaction bytes into VM-defined transaction object
@@ -1074,7 +1081,7 @@ Let's look at the parameters this method takes:
 - **dbManager** - The manager of the database this VM will persist data to.
 - **genesisBytes** - The byte-encoding of the genesis information of this VM.
 - **upgradeBytes** - To facilitate network upgrades
-- **configBytes** - VM specific [configurations](https://github.com/ava-labs/blobvm/blob/master/vm/config.go#L10) like BuildInterval, GossipInterval,  etc.
+- **configBytes** - VM specific [configurations](https://github.com/ava-labs/blobvm/blob/master/vm/config.go#L10) like BuildInterval, GossipInterval, etc.
 - **toEngine** - The channel used to send messages to the consensus engine.
 - **fxs** - Feature extensions that attach to this VM.
 - **appSender** - For sending data to `avalanchego` for things like gossiping.

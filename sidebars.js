@@ -90,9 +90,9 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/customize-a-subnet',
+        'subnets/introduction-to-vm',
         'subnets/create-a-virtual-machine-vm',
-        'subnets/create-a-vm-blobvm',
-        'subnets/build-a-vm-part-1',
+        'subnets/create-a-vm-blobvm'
       ],
     },
     {

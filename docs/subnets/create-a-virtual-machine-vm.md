@@ -1,4 +1,10 @@
-# How to Build a Simple VM (Part 2 - TimestampVM)
+# How to Build a Simple VM
+
+This is part of series of tutorials for building a Virtual Machine (VM):
+
+- [Introduction to Virtual Machine](./introduction-to-vm.md)
+- How to Build a Simple VM (this article)
+- [How to Build a Complex VM](./create-a-vm-blobvm.md)
 
 ## Introduction
 
@@ -10,7 +16,7 @@ Such a server is useful because it can be used to prove a piece of data existed 
 
 Make sure you have followed the previous tutorial in this series. We have discussed about interfaces and other concepts:
 
-* Build a Virtual Machine - [Part 1](/subnets/build-a-vm-part-1)
+- Build a Virtual Machine - [Part 1](/subnets/build-a-vm-part-1)
 
 ## TimestampVM Implementation
 
