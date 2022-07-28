@@ -32,6 +32,8 @@ The consensus engine is already provided by AvalancheGo. We only need to impleme
 
 VM modules are served as a binary plugin to the `avalanchego` software. The nodes that want to power their chains using a particular VM, must have the built binary in their `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/` (if they haven't built from source), and `$SOURCE_DIR/build/plugins/` if they are building from source. This can also be customized (see [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details). There could be multiple VM plugins in this directory.
 
+A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
+
 ## High-Level Overview
 
 Virtual Machines are created as a module, whose binary is registered by a node running `avalanchego`, against the **vmID** (binary file name must be vmID). VMID is a user-defined string that is zero-extended to a 32-byte array and encoded in CB58.
@@ -345,3 +347,9 @@ type Decidable interface {
 	Status() Status
 }
 ```
+
+## rpcchainvm
+
+`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [server](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
+
+To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
