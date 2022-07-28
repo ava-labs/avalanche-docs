@@ -15,6 +15,8 @@ Make sure you have followed the previous tutorials in this series:
 
 ## Components of the BlobVM
 
+The main task of a VM is to represent initial state (genesis state) and block structure containing state transitioning details. One of the most common structure to represent state transitions is **transaction**. When a block with transactions, is applied to the current state, the state transition will happen by simply executing the transactions. The order of transactions will matter here.
+
 BlobVM has the following components to handle the tasks from transaction to block acceptance
 
 - **Transaction** - Transaction structure, initialization, execution etc.
@@ -26,12 +28,11 @@ BlobVM has the following components to handle the tasks from transaction to bloc
 - **Storage** - Stores and retrieves data of the chain's state.
 - **Virtual Machine** - Entry point for all the components to orchestrate them according to the consensus engine and API requests.
 - **Service** - API handlers for interacting with VM and initialized chain.
-- **Client** - For interacting with service APIs.
 - **Factory** - For creating new instances of the virtual machine.
 
 ## Transaction Lifecycle in BlobVM
 
-Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through transactions. VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state.
+Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through blocks and more specifically, transactions. VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state.
 
 - User calls `client.IssueRawTx` or directly make RPC to `service`
 - `service.IssueRawTx()` is called using handlers
@@ -83,7 +84,7 @@ We have divided the components into 3 packages. We will be looking at each of th
 
 ### Transactions
 
-The state of a chain can only be updated by issuing a signed transaction. A signed transaction contains an unsigned transaction and a signature (of the sender). In a virtual machine, we can have multiple types of unsigned transactions, to achieve different tasks. In BlobVM, we have 2 types of unsigned transactions:
+At the very basic level, the state of a chain can only be updated by issuing a signed transaction. A signed transaction contains an unsigned transaction and a signature (of the sender). The signature is necessary to identify the sender. In a virtual machine, we can have multiple types of unsigned transactions, to achieve different tasks. In BlobVM, we have 2 types of unsigned transactions:
 
 - [TransferTx](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go) - For transferring coins between the accounts
 - [SetTx](https://github.com/ava-labs/blobvm/blob/master/chain/set_tx.go) - For storing blob data on the chain
@@ -149,7 +150,7 @@ func (b *BaseTx) ExecuteBase(g *Genesis) error {
 
 - [`Execute()`](https://github.com/ava-labs/blobvm/blob/master/chain/unsigned_tx.go#L34) executes the specific check for a transaction and may perform state change on the database instance provided as an argument. Each type of transaction should implement its own execute method. For eg. `TransferTx` execute balance modification i.e. add transfer amount to the receiver and deduct the same amount from the sender.
 
-A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it is in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. The database for the former is aborted as this is just a local execution for validating transactions before gossiping. Whereas the database for the latter is committed after the block is accepted by the network.
+A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. The database for the former is aborted as this is just a local execution for validating transactions before gossiping. Whereas the database for the latter is committed after the block is accepted by the network.
 
 Let's have a detailed look on `TransferTx` and `SetTx`:
 
