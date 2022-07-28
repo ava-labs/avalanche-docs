@@ -447,6 +447,8 @@ Subnet-EVM contains example contracts for precompiles under `/contract-examples`
 
 Performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
 
+Any mistakes in configuring network upgrades or coordinating them on validators may cause the network to halt and recovering may be difficult.
+
 :::
 
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a different configuration if desired.
@@ -483,13 +485,19 @@ To disable a precompile, the following format should be used:
 
 Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation (otherwise the node will refuse to start).
 
-Enabling and disabling a precompile is a network upgrade and should always be done with caution. As a worst-case scenario/backup measure, a network upgrade that has not been activated is still safe to abort since the chain is still processing blocks using the prior rule set.
+Enabling and disabling a precompile is a network upgrade and should always be done with caution.
 
-As a best practice, it's recommended to treat `precompileUpgrades` as always append only.
+:::danger
+
+For safety, you should always treat `precompileUpgrades` as append-only.
+
+As a last resort measure, it is possible to abort or reconfigure a precompile upgrade that has not been activated since the chain is still processing blocks using the prior rule set.
+
+:::
 
 If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json` from the end of the list of upgrades. As long as the blockchain has not accepted a block with a timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
 
-Example:
+### Example
 
 ```json
 {
@@ -517,6 +525,8 @@ Example:
 ```
 
 This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables `txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig` at the first block with timestamp >= `1668970000`.
+
+When the precompile is disabled, its storage will be wiped so it is necessary to re-apply the desired configuration.
 
 ## Chain Configs
 
