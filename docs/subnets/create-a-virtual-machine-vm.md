@@ -16,7 +16,7 @@ Such a server is useful because it can be used to prove a piece of data existed 
 
 Make sure you have followed the previous tutorial in this series. We have discussed about interfaces and other concepts:
 
-- Build a Virtual Machine - [Part 1](/subnets/build-a-vm-part-1)
+- [Introduction to Virtual Machine](./introduction-to-vm.md)
 
 ## TimestampVM Implementation
 
