@@ -92,6 +92,7 @@ const sidebars = {
         'subnets/customize-a-subnet',
         'subnets/create-a-virtual-machine-vm',
         'subnets/create-a-vm-blobvm',
+        'subnets/build-a-vm-part-1',
       ],
     },
     {
