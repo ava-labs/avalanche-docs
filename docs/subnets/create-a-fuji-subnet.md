@@ -64,19 +64,19 @@ With more data on Fuji testnet, it may take a while to bootstrap Fuji Testnet fr
 
 :::
 
-### avalanche-CLI 
+### avalanche-CLI
 
-If not yet installed, install `avalanche-CLI` following the tutorial at [avalanche-CLI installation](../create-a-local-subnet#installation)
+If not yet installed, install `avalanche-CLI` following the tutorial at [avalanche-CLI installation](create-a-local-subnet.md#installation)
 
 ### Private Key
 
 All commands which require a transaction require a private key accessible to the tool.
 `avalanche-CLI` supports the following key operations:
 
-  * create
-  * delete
-  * export
-  * list 
+- create
+- delete
+- export
+- list
 
 :::warning
 
@@ -114,6 +114,7 @@ The `delete` command of course deletes a private key:
 ```bash
 avalanche key delete mytestkey
 ```
+
 Be careful though to always have a key available for commands involving transactions.
 
 The `export` command will **print your private key** in hex format to STDOUT.
@@ -122,6 +123,7 @@ The `export` command will **print your private key** in hex format to STDOUT.
 avalanche key export mytestkey
 21940fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5f0b
 ```
+
 (this key is intentionally modified).
 
 Finally, the `list` command will list all your keys in your system and their associated addresses (the keys are stored in a special directory on your file system, tampering with the directory will result in malfunction of the tool).
@@ -146,6 +148,7 @@ avalanche key list
 ```
 
 #### Funding the key
+
 :::danger
 
 Do these steps only to follow this tutorial for fuji addresses. To access the wallet for mainnet, the use of a ledger device is strongly suggested.
@@ -161,7 +164,7 @@ After following these 3 steps, your test key should now have a balance on the P-
 
 ## Create a EVM subnet
 
-Creating a subnet with `avalanche-CLI` for `fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your subnet on the local file system. Afterwards the subnet needs to be *deployed*.
+Creating a subnet with `avalanche-CLI` for `fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your subnet on the local file system. Afterwards the subnet needs to be _deployed_.
 
 To create an EVM subnet, run the `subnet create` command with a name of your choice:
 
@@ -173,8 +176,8 @@ This will start a series of prompts to customize your EVM subnet to your needs. 
 The first prompt asks for the type of the virtual machine (see [Virtual Machine](#Virtual-Machine)).
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose your VM: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose your VM:
   ▸ SubnetEVM
     Custom
 ```
@@ -199,8 +202,8 @@ Token symbol: TST
 At this point, the user is prompted for the fee structure of the subnet, so that fees can be tuned to the needs:
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? How would you like to set fees: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How would you like to set fees:
   ▸ Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
     Medium disk use / Medium Throughput 2 mil   gas/s
     High disk use   / High Throughput   5 mil   gas/s
@@ -208,14 +211,14 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Go back to previous step
 ```
 
-You can navigate with the arrow keys to select the suitable setting. Let's assume `Medium disk use / Medium Throughput 2 mil   gas/s` for this tutorial.
+You can navigate with the arrow keys to select the suitable setting. Let's assume `Medium disk use / Medium Throughput 2 mil gas/s` for this tutorial.
 
 The next question is about the airdrop:
 
 ```bash
 ✔ Medium disk use / Medium Throughput 2 mil   gas/s
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? How would you like to distribute funds: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How would you like to distribute funds:
   ▸ Airdrop 1 million tokens to the default address (do not use in production)
     Customize your airdrop
     Go back to previous step
@@ -227,8 +230,8 @@ The final question is asking for precompiles. Precompiles are powerful customiza
 
 ```bash
 ✔ Airdrop 1 million tokens to the default address (do not use in production)
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Advanced: Would you like to add a custom precompile to modify the EVM?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Advanced: Would you like to add a custom precompile to modify the EVM?:
   ▸ No
     Yes
     Go back to previous step
@@ -242,7 +245,6 @@ Successfully created genesis
 ```
 
 It's possible to abort the process with Ctrl-C at any time.
-
 
 At this point, the specification of the new subnet is created on disk, but is not deployed yet.
 
@@ -333,19 +335,19 @@ go run main.go subnet list
 +------------+------------+----------+-----------+----------+
 ```
 
-
 ## Deploy the subnet
+
 To deploy our new subnet, we can run
 
 ```bash
 avalanche subnet deploy testsubnet
 ```
 
-This will start a new prompt series. 
+This will start a new prompt series.
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose a network to deploy on: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to deploy on:
   ▸ Local Network
     Fuji
     Mainnet
@@ -357,9 +359,9 @@ We are then asked to provide which private key to use for the deployment. The de
 ```bash
 ✔ Fuji
 Deploying [testsubnet] to Fuji
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which private key should be used to issue the transaction?: 
-    test 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which private key should be used to issue the transaction?:
+    test
   ▸ mytestkey
 ```
 
@@ -369,8 +371,8 @@ Subnets are currently permissioned only. Therefore, the process now requires the
 Configure which addresses may add new validators to the subnet.
 These addresses are known as your control keys. You will also
 set how many control keys are required to add a validator.
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Set control keys: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Set control keys:
   ▸ Add control key
     Done
     Cancel
@@ -382,8 +384,8 @@ Enter at `Add control key` and provide at least one key. You can enter multiple 
 ```bash
 ✔ Add control key
 Enter P-Chain address (Ex: `P-...`): P-fuji1vaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasz
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Set control keys: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Set control keys:
     Add control key
   ▸ Done
     Cancel
@@ -419,8 +421,8 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 
 Well done! You have just created your own subnet with your own Subnet EVM running on `fuji`!
 
-
 ## Add a validator
+
 This new subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet.
 
 :::info
@@ -436,17 +438,17 @@ avalanche subnet addValidator testsubnet
 As this operation involves a new [transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), we need to tell the tool which private key to use:
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which private key should be used to issue the transaction?: 
-    test 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which private key should be used to issue the transaction?:
+    test
   ▸ mytestkey
 ```
 
 We are here a bit ahead of our time, the tool announces mainnet support. Just choose `Fuji`:
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose a network to deploy on. This command only supports Fuji currently.: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to deploy on. This command only supports Fuji currently.:
   ▸ Fuji
     Mainnet (coming soon)
 ```
@@ -456,16 +458,16 @@ Now we need the **NodeID** of our new validator from the very beginning of this 
 ```bash
 What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAAAAAAAAAAAAAAAAAQGjPhUy
 ```
-(this ID is intentionally modified)
 
+(this ID is intentionally modified)
 
 The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want to initially to identify a good value here. The range is 1 to 100, but the minimum for a subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
 We'll select 30 for this one:
 
 ```bash
-se the arrow keys to navigate: ↓ ↑ → ← 
-? What stake weight would you like to assign to the validator?: 
+se the arrow keys to navigate: ↓ ↑ → ←
+? What stake weight would you like to assign to the validator?:
     Default (20)
   ▸ Custom
 ```
@@ -477,8 +479,8 @@ se the arrow keys to navigate: ↓ ↑ → ←
 We then need to specify when the validator will start validating. The time must be in the future. Custom will require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Let's take the default this time:
 
 ```bash
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Start time: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Start time:
   ▸ Start in one minute
     Custom
 ```
@@ -487,13 +489,13 @@ Finally, specify how long it will be validating:
 
 ```bash
 ✔ Start in one minute
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? How long should your validator validate for?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How long should your validator validate for?:
   ▸ Until primary network validator expires
     Custom
 ```
 
-If we choose `Custom` here, we'll have to enter a **duration**, which is a time span expressed in hours. For example, we could say 200 days = 24 * 200 = 4800h 
+If we choose `Custom` here, we'll have to enter a **duration**, which is a time span expressed in hours. For example, we could say 200 days = 24 \* 200 = 4800h
 
 ```bash
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
@@ -502,7 +504,7 @@ If we choose `Custom` here, we'll have to enter a **duration**, which is a time 
 The user is shown an actual date of when that is now:
 
 ```bash
-? Your validator will finish staking by 2023-02-13 12:26:55: 
+? Your validator will finish staking by 2023-02-13 12:26:55:
   ▸ Yes
     No
 ```
@@ -524,10 +526,10 @@ This might take a couple of seconds, and if successful, it will print:
 Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
 ```
 
-This means the node has now been added as validator to the given subnet on fuji! 
-
+This means the node has now been added as validator to the given subnet on fuji!
 
 ## Join a subnet
+
 You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
 This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
 
@@ -535,20 +537,20 @@ First also a bit of "marketing" (announcing not yet available mainnet support):
 
 ```bash
 avalanche subnet join testsubnet
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose a network to validate on (this command only supports public networks): 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to validate on (this command only supports public networks):
   ▸ Fuji
     Mainnet
 ```
 
-In the [deploy a subnet](#deploy-a-subnet) section, we saw that a subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key *must* call [addSubnetValidator](#../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this subnet (by calling an API in the background).
+In the [deploy a subnet](#deploy-a-subnet) section, we saw that a subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this subnet (by calling an API in the background).
 
 ```bash
 Would you like to check if your node is allowed to join this subnet?
 If not, the subnet's control key holder must call avalanche subnet
 addValidator with your NodeID.
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Check whitelist?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Check whitelist?:
     Yes
   ▸ No
 ```
@@ -577,8 +579,8 @@ The tool doesn't know where exactly it's located so it requires the full path. W
 VM binary written to /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 This will edit your existing config file. This edit is nondestructive,
 but it's always good to have a backup.
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Proceed?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Proceed?:
   ▸ Yes
     No
 ```
@@ -595,7 +597,6 @@ The config file has been edited. To use it, make sure to start the node with the
 ```
 
 It is **required to restart the node**.
-
 
 If we would have chosen "Manual" instead, the tool will just print _instructions_. The user will have to follow these instructions and apply them to the node. Note that the IDs for the VM and subnets will be different in your case.
 
@@ -632,8 +633,8 @@ After you update your config, you will need to restart your node for the changes
 take effect.
 ```
 
-
 ## Subnet export
+
 This tool is most useful on the machine where a validator is or will be running. In order to allow a VM to run on a different machine, the configuration can be exported. We just need to provide a path to where to export the data:
 
 ```bash
@@ -644,10 +645,11 @@ avalanche subnet export testsubnet
 The file is in text format and it should not be tampered with. It can then be used to import the configuration on a different machine.
 
 ## Subnet import
+
 To import a VM specification exported in the previous section, just issue the `import` command with the path to the file after having copied the file over:
 
 ```bash
-avalanche subnet import /tmp/testsubnet-export.dat 
+avalanche subnet import /tmp/testsubnet-export.dat
 Subnet imported successfully
 ```
 
@@ -661,9 +663,6 @@ avalanche subnet list
 | testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
 +---------------+---------------+----------+-----------+----------+
 ```
-
-
-
 
 ## Appendix
 
