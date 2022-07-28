@@ -10,8 +10,8 @@ Blobs are small chunks of data. In BlobVM, we divide a file into small blobs and
 
 Make sure you have followed the previous tutorials in this series:
 
-* Build a Virtual Machine - [Part 1](/build-a-vm-part-1)
-* Build a Simple VM - [Part 2](/build-a-vm-part-2)
+* Build a Virtual Machine - [Part 1](/subnets/build-a-vm-part-1)
+* Build a Simple VM - [Part 2](/subnets/create-a-virtual-machine-vm)
 
 ## Components of the BlobVM
 
