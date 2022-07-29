@@ -1,6 +1,16 @@
 # Create an EVM Subnet on Fuji Testnet
 
+:::note
+
+This document has been updated using the new Avalanche-CLI to deploy a Subnet on Fuji. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
+
+:::
+
 After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
+
+:::warning
+Avalanche CLI does not provide Ledger support yet, please don't try this tutorial on the Mainnet.
+:::
 
 In this article, we show how to do the following on Fuji Testnet.
 
@@ -13,7 +23,7 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ## Prerequisites
 
-- 1+ nodes running and synced on Fuji Testnet 
+- 1+ nodes running and synced on Fuji Testnet
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
@@ -169,7 +179,7 @@ After following these 3 steps, your test key should now have a balance on the P-
 
 ## Create an EVM subnet
 
-Creating a subnet with `Avalanche-CLI` for `fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your subnet on the local file system. Afterwards the subnet needs to be _deployed_. This in fact allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `fuji` - and eventually to mainnet. 
+Creating a Subnet with `Avalanche-CLI` for `fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This in fact allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `fuji` - and eventually to mainnet.
 
 To create an EVM subnet, run the `subnet create` command with a name of your choice:
 
@@ -177,7 +187,7 @@ To create an EVM subnet, run the `subnet create` command with a name of your cho
 avalanche subnet create testsubnet
 ```
 
-This will start a series of prompts to customize your EVM subnet to your needs. Most prompts have some validation to reduce issues due to invalid input.
+This will start a series of prompts to customize your EVM Subnet to your needs. Most prompts have some validation to reduce issues due to invalid input.
 The first prompt asks for the type of the virtual machine (see [Virtual Machine](#Virtual-Machine)).
 
 ```bash
@@ -216,12 +226,12 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Go back to previous step
 ```
 
-You can navigate with the arrow keys to select the suitable setting. Let's assume `Low disk use    / Low Throughput    1.5 mil gas/s` for this tutorial.
+You can navigate with the arrow keys to select the suitable setting. Let's assume `Low disk use / Low Throughput 1.5 mil gas/s` for this tutorial.
 
 The next question is about the airdrop:
 
 ```bash
-✔ Low disk use    / Low Throughput    1.5 mil gas/s 
+✔ Low disk use    / Low Throughput    1.5 mil gas/s
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? How would you like to distribute funds:
   ▸ Airdrop 1 million tokens to the default address (do not use in production)
@@ -251,7 +261,7 @@ Successfully created genesis
 
 It's possible to abort the process with Ctrl-C at any time.
 
-At this point, the specification of the new subnet is created on disk, but is not deployed yet.
+At this point, the specification of the new Subnet is created on disk, but is not deployed yet.
 
 We can print the specification to disk by running the `describe` command:
 
@@ -410,7 +420,7 @@ If the private key is not funded or does not have enough funds, we'll get an err
 Error: insufficient funds: provided UTXOs need 100000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-If the private key is funded, but the **control key** is incorrect (not controlled by the private key), the subnet will be created, but _not the blockchain_:
+If the private key is funded, but the **control key** is incorrect (not controlled by the private key), the Subnet will be created, but _not the blockchain_:
 
 ```bash
 Subnet has been created with ID: 2EkPnvnDiLgudnf8NjtxaNcVFtdAAnUPvaoNBrc9WG5tNmmfaK. Now creating blockchain...
@@ -424,15 +434,15 @@ Subnet has been created with ID: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2M
 Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" with VM ID "tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw": https://api.avax-test.network/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
 ```
 
-Well done! You have just created your own subnet with your own Subnet EVM running on `fuji`!
+Well done! You have just created your own Subnet with your own Subnet EVM running on `fuji`!
 
 ## Add a validator
 
-This new subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet. 
+This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
 
 :::info
 
-Adding a validator on a subnet requires that the validator is already a validator on the primary network.
+Adding a validator on a Subnet requires that the validator is already a validator on the primary network.
 
 :::
 
@@ -466,7 +476,7 @@ What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAA
 
 (this ID is intentionally modified)
 
-The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want to initially to identify a good value here. The range is 1 to 100, but the minimum for a subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
+The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want to initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
 We'll select 30 for this one:
 
@@ -492,7 +502,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 :::warning
 
-If the `join` command is not successfully completed before this time elapses and the validator's stake weight is >20% of the subnet, the subnet may have down time.
+If the `join` command is not successfully completed before this time elapses and the validator's stake weight is >20% of the subnet, the Subnet may have down time.
 
 :::
 
@@ -537,7 +547,7 @@ This might take a couple of seconds, and if successful, it will print:
 Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
 ```
 
-This means the node has now been added as validator to the given subnet on fuji!
+This means the node has now been added as validator to the given Subnet on fuji!
 
 ## Join a subnet
 
@@ -554,7 +564,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-In the [deploy a subnet](#deploy-a-subnet) section, we saw that a subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this subnet (by calling an API in the background).
+In the [deploy a subnet](#deploy-a-subnet) section, we saw that a Subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
 
 ```bash
 Would you like to check if your node is allowed to join this subnet?
@@ -664,7 +674,7 @@ avalanche subnet import /tmp/testsubnet-export.dat
 Subnet imported successfully
 ```
 
-After this the whole subnet configuration should be available on the target machine:
+After this the whole Subnet configuration should be available on the target machine:
 
 ```bash
 avalanche subnet list
