@@ -82,6 +82,7 @@ const sidebars = {
         'subnets/setup-dfk-node',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
+        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
