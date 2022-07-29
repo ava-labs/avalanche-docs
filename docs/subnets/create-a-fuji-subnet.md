@@ -35,7 +35,7 @@ That is, the VM defines the behavior of the blockchain.
 
 This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as most other Ethereum client functionality.
 
-### Fuji Testnet
+## Fuji Testnet
 
 For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-Fuji-testnet) and this step particularly to start your node on Fuji:
 
@@ -63,7 +63,7 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing. We will need this id in the later section when calling [addValidator](#Add-a-validator).
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing. We will need this id in the later section when calling [addValidator](#add-a-validator).
 
 :::info
 
@@ -71,7 +71,7 @@ With more data on Fuji testnet, it may take a while to bootstrap Fuji Testnet fr
 
 :::
 
-### Avalanche-CLI
+## Avalanche-CLI
 
 If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](create-a-local-subnet.md#installation)
 
@@ -177,7 +177,7 @@ Do these steps only to follow this tutorial for Fuji addresses. To access the wa
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 
-## Create an EVM subnet
+## Create an EVM Subnet
 
 Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This in fact allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to Mainnet.
 
@@ -188,7 +188,7 @@ avalanche subnet create testsubnet
 ```
 
 This will start a series of prompts to customize your EVM Subnet to your needs. Most prompts have some validation to reduce issues due to invalid input.
-The first prompt asks for the type of the virtual machine (see [Virtual Machine](#Virtual-Machine)).
+The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -436,7 +436,9 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 
 Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
 
-## Add a validator
+To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
+ 
+## Add a Validator
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
 
@@ -476,12 +478,12 @@ What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAA
 
 (this ID is intentionally modified)
 
-The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want to initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
+The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
 We'll select 30 for this one:
 
 ```bash
-se the arrow keys to navigate: ↓ ↑ → ←
+Use the arrow keys to navigate: ↓ ↑ → ←
 ? What stake weight would you like to assign to the validator?:
     Default (20)
   ▸ Custom
@@ -549,7 +551,7 @@ Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DH
 
 This means the node has now been added as validator to the given Subnet on Fuji!
 
-## Join a subnet
+## Join a Subnet
 
 You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
 This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
@@ -564,7 +566,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-In the [deploy a subnet](#deploy-a-subnet) section, we saw that a Subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
+In the [deploy the subnet](#deploy-the-subnet) section, we saw that a Subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
 
 ```bash
 Would you like to check if your node is allowed to join this subnet?
@@ -587,7 +589,7 @@ There are now two choices possible: Automatic and Manual configuration. As menti
 
 We need to provide a path to a config file. If this command were to be run on the box where your validator is running, then you could point this to the actually used config file, e.g. `/etc/avalanchego/config.json` - just make sure the tool has **write** access to the file. Or you could just copy the file later. In any case, the tool will either try to edit the existing file specified by the given path, or create a new file. Again, write permissions are required.
 
-Next, we need to provide the plugin directory. We described VMs at the beginning of this tutorial [Virtual Machine](#Virtual-Machine). Each VM runs its own plugin, therefore avalanchego needs to be able to access the correspondent plugin binary. As this is the `join` command, which doesn't know yet about the plugin, we need to provide the directory where the plugin is installed. Make sure to provide the location for your case:
+Next, we need to provide the plugin directory. We described VMs at the beginning of this tutorial [Virtual Machine](#virtual-machine). Each VM runs its own plugin, therefore avalanchego needs to be able to access the correspondent plugin binary. As this is the `join` command, which doesn't know yet about the plugin, we need to provide the directory where the plugin is installed. Make sure to provide the location for your case:
 
 ```bash
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
@@ -654,7 +656,7 @@ After you update your config, you will need to restart your node for the changes
 take effect.
 ```
 
-## Subnet export
+## Subnet Export
 
 This tool is most useful on the machine where a validator is or will be running. In order to allow a VM to run on a different machine, the configuration can be exported. We just need to provide a path to where to export the data:
 
@@ -665,7 +667,7 @@ avalanche subnet export testsubnet
 
 The file is in text format and it should not be tampered with. It can then be used to import the configuration on a different machine.
 
-## Subnet import
+## Subnet Import
 
 To import a VM specification exported in the previous section, just issue the `import` command with the path to the file after having copied the file over:
 
