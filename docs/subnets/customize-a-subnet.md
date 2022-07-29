@@ -2,7 +2,7 @@
 Description: How to customize a Subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize a Subnet
+# Customize Your EVM-Powered Subnet
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
