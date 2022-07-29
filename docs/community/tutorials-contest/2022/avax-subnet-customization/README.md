@@ -4,7 +4,7 @@
 
 Hi there! In this tutorial, we will be learning how to create a custom genesis file for your Subnet.
 
-We will start by deploying a very simple Subnet using the Subnet wizard. Then we will learn about the genesis file and how to customize it for our needs.
+We will start by deploying a very simple Subnet using [the Subnet wizard](https://github.com/ava-labs/avalanche-cli). Then we will learn about the genesis file and how to customize it for our needs.
 
 Next, we will create a simple game!
 
