@@ -78,12 +78,12 @@ to `/etc/docker/daemon.json` on the host, then restart the docker service. This 
 
 ### Currently Supported Functionality
 
-- Creation of Subnet-EVM configs
-- Local deployment of Subnet-EVM based Subnets
+- Local deployment of Subnet-EVM based subnets
+- Fuji deployment of Subnet-EVM based subnets
 
 ### Notable Missing Features
 
-- Fuji and mainnet Subnet-EVM deploys
+- Mainnet Subnet-EVM deployment
 
 ## Subnet
 
