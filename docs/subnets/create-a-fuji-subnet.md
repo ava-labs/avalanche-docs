@@ -2,7 +2,7 @@
 
 :::note
 
-This document has been updated using the new Avalanche-CLI to deploy a Subnet on Fuji. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-Fuji-subnet-subnet-cli.md).
+This document has been updated using the new Avalanche-CLI to deploy a Subnet on Fuji. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
 
 :::
 
