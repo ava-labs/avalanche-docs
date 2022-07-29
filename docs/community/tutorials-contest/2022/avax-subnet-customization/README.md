@@ -158,19 +158,19 @@ This command will run the wizard to create a Subnet.
 
 There are six steps in the wizard:
 
-##### Choose Your VM
+#### Choose Your VM
 
 Choose SubnetEVM here
 
-##### Chain Id
+#### Chain Id
 
 Chain id is a unique identifier for the network. This value must be unique so check [chainlist](https://chainlist.org/) to see if the chain id is already in use.
 
-##### Token Symbol
+#### Token Symbol
 
 Token symbol is the symbol of the native token used in the Subnet. For instance, on the C-Chain, the symbol is `AVAX` and on the Ethereum mainnet, the symbol is `ETH`. You can use any symbol you want.
 
-##### Gas Configuration
+#### Gas Configuration
 
 This step will define the gas configuration of your network. You can choose a preset fee configuration or create your own. Keep in mind that more transaction throughput means more disk usage.
 
@@ -180,7 +180,7 @@ We will go with C-Chain default fees.
 > Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
 ```
 
-##### Airdropping Native Tokens
+#### Airdropping Native Tokens
 
 This step will define how you want to distribute the funds in your Subnet. You can choose the addresses and amounts you want to distribute.
 Let's go with the simplest case.
@@ -190,7 +190,7 @@ How would you like to distribute funds?
 > Airdrop 1 million tokens to the default address (do not use in production)
 ```
 
-##### Adding a Custom Precompile To Modify the EVM
+#### Adding a Custom Precompile To Modify the EVM
 
 ```bash
 ? Advanced: Would you like to add a custom precompile to modify the EVM?: 
@@ -201,7 +201,7 @@ How would you like to distribute funds?
 
 Here you can set up a custom precompile to unlock some useful functions.
 
-###### Native Minting
+##### Native Minting
 
 This precompile allows admins to permit designated contracts to mint the native token on your Subnet.
 We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractNativeMinterConfig) section.
@@ -351,13 +351,13 @@ Pretty scary, right? But it's not that bad as it seems. The genesis file is a js
 
 Let's dive into the genesis file a little bit more.
 
-#### Config
+### Config
 
-##### `chainId`
+#### `chainId`
 
 The chain ID of the Subnet. We've set this to 1234 [when we created the Subnet](#chain-id).
 
-##### Hardforks
+#### Hardforks
 
 `eip150Block`, `eip150Hash`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `SubnetEVMTimestamp`
 
@@ -365,25 +365,25 @@ These are the blocks where the network has been adopted to the new protocol rele
 
 When there is a new protocol release, to activate that protocol on your Subnet, you can add the configuration for the new protocol to the genesis file and point it to a block number in the future as the activation block number.
 
-#### Fee Config
+### Fee Config
 
-##### `gasLimit`
+#### `gasLimit`
 
 The total amount of gas that can be used in a single block. Keep in mind that this impacts how much computation happens in one block. This is set to `8,000,000` in C-Chain. Also, the value represents the maximum amount of gas a single transaction can use.
 
-##### `targetBlockRate`
+#### `targetBlockRate`
 
 The network aims to produce a new block in `targetBlockRate` seconds. This value is in **seconds**. If the network starts producing faster than this, [base fees are increased accordingly](#blockgascoststep). Otherwise, if the network starts producing slower than this, [base fees are decreased accordingly](#blockgascoststep). This value is set to `2` in C-Chain.
 
-##### `minBaseFee`
+#### `minBaseFee`
 
 The minimum base fee that can be used by a transaction. It also shows how much gas will it cost to do native token transfers. The value is in wei and set to `25000000000` in C-Chain. It corresponds to 25 nAvax (gwei). You can use [Snowtrace unitconverter](https://snowtrace.io/unitconverter) to convert between units.
 
-##### `targetGas`
+#### `targetGas`
 
 The targeted amount of gas (including block gas cost) to consume within a rolling 10s window.
 
-##### `baseFeeChangeDenominator`
+#### `baseFeeChangeDenominator`
 
 The base fee can change over time. If the parent block used **more** gas than its target, the base fee should **increase**. Otherwise, if the parent block used **less** gas than its target, the base fee should **decrease**.
 
@@ -401,21 +401,21 @@ Setting this value to a larger value means that the base fee will change more gr
 
 For further information, see [eip1559](https://eips.ethereum.org/EIPS/eip-1559)
 
-##### `minBlockGasCost`
+#### `minBlockGasCost`
 
 Minimum gas cost a block should cover. This value is set to `0` in C-Chain.
 
-##### `maxBlockGasCost`
+#### `maxBlockGasCost`
 
 Maximum gas cost a block should cover. This value is set to `1,000,000` in C-Chain.
 
 > `minBlockGasCost` and `maxBlockGasCost` bounds the gas cost of a block.
 
-##### `blockGasCostStep`
+#### `blockGasCostStep`
 
 This value determines the block gas change rate depending on the [`targetBlockRate`](#targetblockrate). If the parent block is produced at the `targetBlockRate`, the block gas cost will stay the same. If the parent block is produced at a **slower** rate, the block gas cost will **decrease**. If the parent block is produced at a **faster** rate, the block gas cost will **increase**. The amount of change is determined by the following formula:
 
-```
+```js
 (blockGasCostStep) * (targetBlockRate - parent block production time)
 ```
 
@@ -423,7 +423,7 @@ For example, if the `targetBlockRate` is set to 2 seconds, `blockGasCostStep` is
 
 This value is set to `200000` in C-Chain.
 
-#### Validator Fee Recipient
+### Validator Fee Recipient
 
 This configuration allows validators to specify a fee recipient.
 
@@ -501,7 +501,7 @@ The timestamp of the creation of the genesis block.
 
 Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
-##### `gasLimit`
+##### `gasLimit` value
 
 The total amount of gas that can be used in a single block. It should be set to the same value as in [the fee config](#fee-config). The value `0x7a1200` is hexadecimal and it's equal to `8,000,000`.
 
@@ -812,9 +812,7 @@ Before going to the next step, make sure you've added the Subnet to metamask by 
 
 ![Metamask account look](.github/images/metamask3.png)
 
-### Metamask Gas Configuration
-
-**! IMPORTANT**
+### Metamask Gas Configuration **! IMPORTANT**
 
 Because we've set the base fee to 60 nAvax, you may need to increase the `Max priority fee` when confirming the transaction on metamask popup. Otherwise the transaction may fail.
 
