@@ -437,11 +437,11 @@ Use the following configuration to enable validators to receive fees. [You can f
 }
 ```
 
-#### Precompiles
+### Precompiles
 
 You can enable some precompiled contracts in the genesis file. These contracts provide God mode functionalities and are very useful for some cases. If you'd not like to use them, you can disable them by setting the config fields to null or by simply removing them from the genesis file.
 
-##### `contractDeployerAllowListConfig`
+#### `contractDeployerAllowListConfig`
 
 This configuration allows you specify which addresses are authorized to deploy contracts. You can also customize this [in the last step of the Subnet wizard](#configure-contract-deployment-whitelist).
 If you'd like to restrict the contract deployer to a specific list of addresses, you can set the `contractDeployerAllowListConfig` to a JSON object with the following properties:
@@ -456,7 +456,7 @@ If you'd like to restrict the contract deployer to a specific list of addresses,
 Admin addresses can deploy new contracts and add new Admin and Deployer addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000000`.
 [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-smart-contract-deployers)
 
-##### `contractNativeMinterConfig`
+#### `contractNativeMinterConfig`
 
 This configuration lets you use a smart contract to mint native tokens in your Subnet. This is useful if you want to use your own token minting system.  
 
@@ -471,7 +471,7 @@ If you'd like to use a smart contract to mint native tokens, you can set the `co
 
 Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#minting-native-coins)
 
-##### `txAllowListConfig`
+#### `txAllowListConfig`
 
 This configures allows you to specify which addresses are authorized to make transactions. It's especially useful if you're building a private network.
 If you'd like to restrict the transaction sender to a specific list of addresses, you can set the `txAllowListConfig` to a JSON object with the following properties:
@@ -485,58 +485,58 @@ If you'd like to restrict the transaction sender to a specific list of addresses
 
 Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-who-can-submit-transactions)
 
-#### Genesis Block
+### Genesis Block
 
 This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field)
 
-##### `nonce`
+#### `nonce`
 
 The result of the mining process iteration is this value. It can be any value in the genesis block, which is commonly set to `0x0`.
 
-##### `timestamp`
+#### `timestamp`
 
 The timestamp of the creation of the genesis block.
 
-##### `extraData`
+#### `extraData`
 
 Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
-##### `gasLimit` value
+#### `gasLimit` value
 
 The total amount of gas that can be used in a single block. It should be set to the same value as in [the fee config](#fee-config). The value `0x7a1200` is hexadecimal and it's equal to `8,000,000`.
 
-##### `difficulty`
+#### `difficulty`
 
 The difficulty level applied during the nonce discovering of this block. It is usually set to `0x0` for the genesis block.
 
-##### `mixHash`
+#### `mixHash`
 
 [Quotation from Explanation of genesis file](#resources)  
 > The combination of nonce and `mixHash` must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
 
 This isn't so important for the genesis block. You can set it to `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-##### `coinbase`
+#### `coinbase`
 
 This is the address of the miner who mined the genesis block. It is usually set to `0x0000000000000000000000000000000000000000` for the genesis block.
 
-##### `parentHash`
+#### `parentHash`
 
 This is the Keccak 256-bit hash of the entire parent block’s header. It is usually set to `0x0000000000000000000000000000000000000000000000000000000000000000` for the genesis block.
 
-##### `gasUsed`
+#### `gasUsed`
 
 This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-##### `number`
+#### `number`
 
 This is the number of the genesis block. It is usually set to `0x0`.
 
-##### `airdropHash` `baseFeePerGas` `airdropAmount`
+#### `airdropHash` `baseFeePerGas` `airdropAmount`
 
 You can remove or leave these fields as they are. I'd recommend removing them. I'm not sure what they do.
 
-#### Native Token Allocation
+### Native Token Allocation
 
 We've done this part of the configuration [using the wizard](#airdropping-native-tokens).
 It's pretty straightforward. You can set the `alloc` to a JSON object with the following properties:
