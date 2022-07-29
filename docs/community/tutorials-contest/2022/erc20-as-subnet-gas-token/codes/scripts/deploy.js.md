@@ -31,8 +31,8 @@ const initSigners = require("../utils/initSigners");
 dotenv.config();
 
 /* 
-	Deploy script that allow us to deploy:
-		AvaxToken, AvaxBridge, SubnetBridge contract
+	Deploy script that allows us to deploy:
+		AvaxToken, AvaxBridge, SubnetBridge contracts
 	And set SubnetBridge contract as a `Minter` for the NativeMinter precompile
  */
 module.exports = deploy = async () => {
@@ -56,7 +56,7 @@ module.exports = deploy = async () => {
 	const AvaxBridgeFactory = new ethers.ContractFactory(
 		AVAX_BRIDGE_ABI,
 		AVAX_BRIDGE_BYTECODE,
-		signers.avax.bridgeAdmin
+		signers.avax.admin
 	);
 	const avaxBridge = await AvaxBridgeFactory.deploy(avaxToken.address);
 	await avaxBridge.deployTransaction.wait();
@@ -66,7 +66,7 @@ module.exports = deploy = async () => {
 	const SubnetBridgeFactory = new ethers.ContractFactory(
 		SUBNET_BRIDGE_ABI,
 		SUBNET_BRIDGE_BYTECODE,
-		signers.subnet.bridgeAdmin
+		signers.subnet.admin
 	);
 	const subnetBridge = await SubnetBridgeFactory.deploy();
 	await subnetBridge.deployTransaction.wait();
@@ -76,7 +76,7 @@ module.exports = deploy = async () => {
 	const nativeMinter = new ethers.Contract(
 		SUBNET_NATIVE_MINTER_ADDRESS,
 		SUBNET_NATIVE_MINTER_ABI,
-		signers.subnet.bridgeAdmin
+		signers.subnet.admin
 	);
 	const setNativeMinterTx = await nativeMinter.setEnabled(subnetBridge.address);
 	await setNativeMinterTx.wait();
@@ -85,7 +85,7 @@ module.exports = deploy = async () => {
 	/* 
 		Whenever we run this deploy script, deployed contract addresses will be changed.
 		Rather than manually updating them we write the updated address to the `variables/contractAddress.js`
-		Inside our code, whenever we try to access the address of a file we use this file as the source of truth.
+		Inside our code, whenever we try to access the address of a contract we use this file as the source of truth.
 	 */
 	fs.writeFileSync(
 		"variables/contractAddresses.js",
