@@ -29,47 +29,47 @@ I hope you enjoy this tutorial!
     - [Subnets](#Subnets)
     - [Genesis File](#genesis-file)
   - [Creating a Simple Subnet](#creating-a-simple-Subnet)
-      - [Choose Your VM](#choose-your-vm)
-      - [Chain Id](#chain-id)
-      - [Token Symbol](#token-symbol)
-      - [Gas Configuration](#gas-configuration)
-      - [Airdropping Native Tokens](#airdropping-native-tokens)
-      - [Adding a Custom Precompile To Modify the EVM](#adding-a-custom-precompile-to-modify-the-evm)
-        - [Native Minting](#native-minting)
-        - [Configure Contract Deployment Whitelist](#configure-contract-deployment-whitelist)
-        - [Configure Transaction Allow List](#configure-transaction-allow-list)
+    - [Choose Your VM](#choose-your-vm)
+    - [Chain Id](#chain-id)
+    - [Token Symbol](#token-symbol)
+    - [Gas Configuration](#gas-configuration)
+    - [Airdropping Native Tokens](#airdropping-native-tokens)
+    - [Adding a Custom Precompile To Modify the EVM](#adding-a-custom-precompile-to-modify-the-evm)
+      - [Native Minting](#native-minting)
+      - [Configure Contract Deployment Whitelist](#configure-contract-deployment-whitelist)
+      - [Configure Transaction Allow List](#configure-transaction-allow-list)
   - [Deploying the Subnet](#deploying-the-Subnet)
 - [Understanding the Genesis File](#understanding-the-genesis-file)
-    - [Config](#config)
-      - [`chainId`](#chainid)
-      - [Hardforks](#hardforks)
-    - [Fee Config](#fee-config)
-      - [`gasLimit`](#gaslimit)
-      - [`targetBlockRate`](#targetblockrate)
-      - [`minBaseFee`](#minbasefee)
-      - [`targetGas`](#targetgas)
-      - [`baseFeeChangeDenominator`](#basefeechangedenominator)
-      - [`minBlockGasCost`](#minblockgascost)
-      - [`maxBlockGasCost`](#maxblockgascost)
-      - [`blockGasCostStep`](#blockgascoststep)
-    - [Validator Fee Recipient](#validator-fee-recipient)
-    - [Precompiles](#precompiles)
-      - [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig)
-      - [`contractNativeMinterConfig`](#contractnativeminterconfig)
-      - [`txAllowListConfig`](#txallowlistconfig)
-    - [Genesis Block](#genesis-block)
-      - [`nonce`](#nonce)
-      - [`timestamp`](#timestamp)
-      - [`extraData`](#extradata)
-      - [`gasLimit`](#gaslimit-1)
-      - [`difficulty`](#difficulty)
-      - [`mixHash`](#mixhash)
-      - [`coinbase`](#coinbase)
-      - [`parentHash`](#parenthash)
-      - [`gasUsed`](#gasused)
-      - [`number`](#number)
-      - [`airdropHash` `baseFeePerGas` `airdropAmount`](#airdrophash-basefeepergas-airdropamount)
-    - [Native Token Allocation](#native-token-allocation)
+  - [Config](#config)
+    - [`chainId`](#chainid)
+    - [Hardforks](#hardforks)
+  - [Fee Config](#fee-config)
+    - [`gasLimit`](#gaslimit)
+    - [`targetBlockRate`](#targetblockrate)
+    - [`minBaseFee`](#minbasefee)
+    - [`targetGas`](#targetgas)
+    - [`baseFeeChangeDenominator`](#basefeechangedenominator)
+    - [`minBlockGasCost`](#minblockgascost)
+    - [`maxBlockGasCost`](#maxblockgascost)
+    - [`blockGasCostStep`](#blockgascoststep)
+  - [Validator Fee Recipient](#validator-fee-recipient)
+  - [Precompiles](#precompiles)
+    - [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig)
+    - [`contractNativeMinterConfig`](#contractnativeminterconfig)
+    - [`txAllowListConfig`](#txallowlistconfig)
+  - [Genesis Block](#genesis-block)
+    - [`nonce`](#nonce)
+    - [`timestamp`](#timestamp)
+    - [`extraData`](#extradata)
+    - [`gasLimit`](#gaslimit-1)
+    - [`difficulty`](#difficulty)
+    - [`mixHash`](#mixhash)
+    - [`coinbase`](#coinbase)
+    - [`parentHash`](#parenthash)
+    - [`gasUsed`](#gasused)
+    - [`number`](#number)
+    - [`airdropHash` `baseFeePerGas` `airdropAmount`](#airdrophash-basefeepergas-airdropamount)
+  - [Native Token Allocation](#native-token-allocation)
 - [Creating a Custom Genesis File](#creating-a-custom-genesis-file)
   - [Setting the Chain Id](#setting-the-chain-id)
   - [Configuring Fees and Gas](#configuring-fees-and-gas)
@@ -92,6 +92,7 @@ I hope you enjoy this tutorial!
 ## Prerequisites
 
 ### Metamask
+
 You need to have [Metamask](https://metamask.io/) extension installed on your browser.
 
 ### Avalanche CLI
@@ -99,7 +100,7 @@ You need to have [Metamask](https://metamask.io/) extension installed on your br
 Create a folder for Avalanche CLI.
 
 ```bash
-$ mkdir -p ~/avalanche
+mkdir -p ~/avalanche
 ```
 
 Go to that directory and download the Avalanche CLI.
@@ -116,8 +117,8 @@ $ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scrip
 Go to the directory where you just downloaded the CLI and add it to your PATH. So you can run the CLI from anywhere.
 
 ```bash
-$ cd ./bin/avalanche
-$ export PATH=$PWD:$PATH
+cd ./bin/avalanche
+export PATH=$PWD:$PATH
 ```
 
 We're ready to deploy our first Subnet.
@@ -126,10 +127,10 @@ We're ready to deploy our first Subnet.
 
 ## What Is a Subnet?
 
-> A Subnet, or Subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets. 
-> 
+> A Subnet, or Subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets.
+>
 > Subnets are independent and don’t share execution thread, storage or networking with other Subnets or the Primary Network, effectively allowing the network to scale up easily. They share the benefits provided by the Avalanche Protocol such as low cost and fast to finality.
-> 
+>
 > A Subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
 
 [Here is a great introduction to Subnets by Avalanche](https://docs.avax.network/Subnets)
@@ -150,7 +151,7 @@ The genesis file is a file that contains the initial configuration of the Subnet
 For this time, let's take the easy way out and use the CLI to deploy a Subnet to see how things work.
 
 ```bash
-$ avalanche Subnet create testSubnet
+avalanche Subnet create testSubnet
 ```
 
 This command will run the wizard to create a Subnet.
@@ -222,6 +223,7 @@ However, we are not gonna do any of these yet. Choose `No` and proceed.
 ```
 
 Congrats! You just created a Subnet! 👏🎉
+
 ## Deploying the Subnet
 
 This is the most fun part. We will deploy the Subnet that we just created, and it's so easy to do, thanks to Avalanche CLI!
@@ -281,7 +283,7 @@ $ cat ~/.avalanche-cli/testSubnet_genesis.json
 To access the genesis file, you can also use:
 
 ```bash
-$ avalanche Subnet describe testSubnet --genesis
+avalanche Subnet describe testSubnet --genesis
 ```
 
 Yes, the genesis file is in json format. The output should look like:
@@ -367,7 +369,7 @@ When there is a new protocol release, to activate that protocol on your Subnet, 
 
 #### `gasLimit`
 
-The total amount of gas that can be used in a single block. Keep in mind that this impacts how much computation happens in one block. This is set to `8,000,000` in C-Chain. Also, the value represents the maximum amount of gas a single transaction can use. 
+The total amount of gas that can be used in a single block. Keep in mind that this impacts how much computation happens in one block. This is set to `8,000,000` in C-Chain. Also, the value represents the maximum amount of gas a single transaction can use.
 
 #### `targetBlockRate`
 
@@ -421,9 +423,9 @@ For example, if the `targetBlockRate` is set to 2 seconds, `blockGasCostStep` is
 
 This value is set to `200000` in C-Chain.
 
-
 ### Validator Fee Recipient
-This configuration allows validators to specify a fee recipient. 
+
+This configuration allows validators to specify a fee recipient.
 
 Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#setting-a-custom-fee-recipient)
 
@@ -434,6 +436,7 @@ Use the following configuration to enable validators to receive fees. [You can f
   }
 }
 ```
+
 ### Precompiles
 
 You can enable some precompiled contracts in the genesis file. These contracts provide God mode functionalities and are very useful for some cases. If you'd not like to use them, you can disable them by setting the config fields to null or by simply removing them from the genesis file.
@@ -452,7 +455,6 @@ If you'd like to restrict the contract deployer to a specific list of addresses,
 
 Admin addresses can deploy new contracts and add new Admin and Deployer addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000000`.
 [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-smart-contract-deployers)
-
 
 #### `contractNativeMinterConfig`
 
@@ -484,45 +486,58 @@ If you'd like to restrict the transaction sender to a specific list of addresses
 Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-who-can-submit-transactions)
 
 ### Genesis Block
-This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field) 
+
+This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field)
 
 #### `nonce`
+
 The result of the mining process iteration is this value. It can be any value in the genesis block, which is commonly set to `0x0`.
 
 #### `timestamp`
+
 The timestamp of the creation of the genesis block.
 
 #### `extraData`
+
 Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
 #### `gasLimit`
+
 The total amount of gas that can be used in a single block. It should be set to the same value as in [the fee config](#fee-config). The value `0x7a1200` is hexadecimal and it's equal to `8,000,000`.
 
 #### `difficulty`
+
 The difficulty level applied during the nonce discovering of this block. It is usually set to `0x0` for the genesis block.
 
 #### `mixHash`
+
 [Quotation from Explanation of genesis file](#resources)  
-> The combination of nonce and `mixHash` must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid. 
+> The combination of nonce and `mixHash` must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
 
 This isn't so important for the genesis block. You can set it to `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
 #### `coinbase`
+
 This is the address of the miner who mined the genesis block. It is usually set to `0x0000000000000000000000000000000000000000` for the genesis block.
 
 #### `parentHash`
+
 This is the Keccak 256-bit hash of the entire parent block’s header. It is usually set to `0x0000000000000000000000000000000000000000000000000000000000000000` for the genesis block.
 
 #### `gasUsed`
+
 This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
 #### `number`
+
 This is the number of the genesis block. It is usually set to `0x0`.
 
 #### `airdropHash` `baseFeePerGas` `airdropAmount`
+
 You can remove or leave these fields as they are. I'd recommend removing them. I'm not sure what they do.
 
 ### Native Token Allocation
+
 We've done this part of the configuration [using the wizard](#airdropping-native-tokens).
 It's pretty straightforward. You can set the `alloc` to a JSON object with the following properties:
 
@@ -535,6 +550,7 @@ It's pretty straightforward. You can set the `alloc` to a JSON object with the f
 ```
 
 Two important things to notice here:
+
 - The `address_without_0x` is the address of the account that will receive the tokens. Must **NOT** include the `0x` prefix.
 - Balance is the amount of tokens that will be allocated **in wei** to the account.
 
@@ -542,9 +558,9 @@ In our genesis file. The balance is set to `0xd3c21bcecceda1000000` which corres
 
 # Creating a Custom Genesis File
 
-We learned a lot! Now we can create our genesis file! 
+We learned a lot! Now we can create our genesis file!
 
-I'd like to create a Subnet where people can earn native tokens by playing a simple game. 
+I'd like to create a Subnet where people can earn native tokens by playing a simple game.
 
 The network doesn't need to be very fast. I'll set the transaction fees high because the game will mint native tokens to players so we should be burning some of them to help inflation.
 
@@ -649,12 +665,11 @@ Let's allocate some native tokens for our address. You should use your own addre
 
 I'm being generous and allocating only 1000 tokens for myself. 1000 tokens corresponds to `1000000000000000000000` in wei and that's `0x3635C9ADC5DEA00000` in hexadecimal. Keep in mind that you can also write this in decimal. I'm going to use the hexadecimal notation here because it looks better. You can use [Decimal to Hexadecimal converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to convert between units.
 
-
 ## Minting Native Tokens
 
 We will use [`contractNativeMinterConfig`](#contractnativeminterconfig) to mint native tokens in the game.
 
-We will add our address as an Admin so we can add new Minter and Admin addresses in the future. 
+We will add our address as an Admin so we can add new Minter and Admin addresses in the future.
 
 **Use your own address** instead of `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b`.
 
@@ -673,7 +688,7 @@ We will add our address as an Admin so we can add new Minter and Admin addresses
 
 We will deploy the contracts and players will use those contracts to play the game. So we don't need other people to deploy the contracts. We can restrict the smart contract deployers by using [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig).
 
-We will add our address as an Admin so we can add new Deployer and Admin addresses in the future. 
+We will add our address as an Admin so we can add new Deployer and Admin addresses in the future.
 
 **Use your own address** instead of `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b`.
 
@@ -796,6 +811,7 @@ Awesomeness! Great work!
 Before going to the next step, make sure you've added the Subnet to metamask by following the same steps in the [`Deploying the Subnet`](#deploying-the-Subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
 
 ![Metamask account look](.github/images/metamask3.png)
+
 ## Metamask Gas Configuration
 
 **! IMPORTANT**
@@ -856,6 +872,7 @@ interface NativeMinterInterface {
 ```
 
 ### Game.sol
+
 A simple contract I made for the sake of this tutorial.
 
 Basically, the player calls the `play` function with sending some `LUCK` tokens. The function generates a random number and by 50% chance, the player gets 2x the amount of tokens; otherwise, the tokens are stuck in the contract.
@@ -933,7 +950,8 @@ Now the `Game.sol` contract is a minter and can mint native tokens!
 
 ## Play the Game
 
-In the deploy tab: 
+In the deploy tab:
+
 - Set the value to 100 Ether or any other amount you want to play with.
 - Find `Game` contract under deployed contracts section in remix.
 - Call `play` function.
@@ -962,6 +980,7 @@ And my luck is back!
 ![luck back](.github/images/luckisback.png)
 
 # Conclusion
+
 This is the end of the tutorial. I hope you've enjoyed it as much as I've enjoyed writing it. Subnets are literally amazing and I'm very excited for the future of this technology.
 
 You now have the ability to create your own Subnet and customize it to your needs. Go play with the parameters, try something new, and enjoy!
@@ -971,5 +990,6 @@ Please feel free to create an issue if you have any questions!
 Thanks for reading :heart:
 
 ## Resources
+
 - [Avax Docs](https://docs.avax.network/Subnets)
 - [Explanation of genesis file](https://gist.github.com/0mkara/b953cc2585b18ee098cd#file-genesis-md)
