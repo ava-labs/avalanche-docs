@@ -19,18 +19,18 @@ Could be run by
  
 When run with `node ./relayer.js`:
   	Relayer will subscribe to events from recent blocks on Avax and Subnet
-  	Therefore, it might not processes an event that is emitted 1000 blocks ago
+  	Therefore, it might not process an event that is emitted 1000 blocks ago
   	If you want to start the relayer and make a transaction, current way of running is what you are looking for
  
 When run with `node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`
   	Relayer will look for events on Avax and Subnet from the block number you provided
-  	and will iterate through the next 10 blocks for the event. Will processes observed event
+  	and will iterate through the next 10 blocks for the event. Will process observed event
   	Therefore, if you have a burn or lock event emitted 1000 blocks ago, you can process it by giving the right blockNumber
-  	If you want to start the relayer to processes an old burn or lock event, current way of running is what you are looking for
+  	If you want to start the relayer to process an old burn or lock event, current way of running is what you are looking for
   
 When run with `node ./relayer.js -1 <subnetBlockNumber>` or `node ./relayer.js <avaxBlockNumber>`
   	Relayer will look for events on either Avax or Subnet from the block number you provided
-  	and will iterate through the next 10 blocks for the event. Will processes observed event
+  	and will iterate through the next 10 blocks for the event. Will process observed event
   	"-1" as block number means do not process any old blocks for that chain.
   	Therefore, `node ./relayer.js -1 <subnetBlockNumber>` will only process events for the subnet.
   	If you want to start the relayer to process an old burn or lock event just on one chain, current way of running is what you are looking for
@@ -44,7 +44,7 @@ const main = async () => {
    	 */
 	let txs = [];
 
-	/* Init providers, signer and bridgeContract */
+	/* Init providers, signers and bridgeContracts */
 	const providers = initProviders();
 	const signers = initSigners(providers);
 	const bridgeContracts = initContracts(signers);
@@ -262,11 +262,11 @@ const main = async () => {
 		We wait 5 seconds in between transactions to make sure we do not replace our own transactions before they are added to a block.
 	 */
 	setInterval(async () => {
-		/* If there is not transactions to send do nothing */
+		/* If there is no transaction to send, do nothing */
 		if (txs.length > 0) {
 			/* 
         		If provided blockNumbers for avax or subnet are close to current blocks of the chains
-        		Then a transaction might get added to the txs array twice. Once processing old blocks (but pretty recent) and once subscribed to new events.
+        		Then a transaction might get added to the txs array twice. Once processing old blocks (but pretty recent) and once subscribed to new events. Therefore, we have to eliminate same txs by filtering.
 			 */
 			txs = txs.filter(
 				(value, index, self) =>
