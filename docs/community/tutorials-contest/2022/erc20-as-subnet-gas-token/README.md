@@ -4,7 +4,11 @@
 
 Purpose of this tutorial is to use a ERC-20 C-chain token as the gas fee token on a Subnet by deploying a bridge. We will not be using a bridge provider, instead we will be implementing our own bridge to truly understand how bridges work and how to modify them to our needs. Bridge we will be implementing is a [trusted](#trusted-and-trustless-bridges) bridge and it uses [lock-mint](#lock-mint-and-burn-release-mechanisms) mechanism to transfer assets from C-chain to Subnet and [burn-release](#lock-mint-and-burn-release-mechanisms) mechanism from Subnet to C-chain.
 
+:::caution
+
 DISCLAIMER: The bridge implementation in this tutorial is a proof of concept and is not production ready.
+
+:::
 
 ## Prerequisites
 
