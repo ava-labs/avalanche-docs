@@ -61,7 +61,7 @@ I hope you enjoy this tutorial!
     - [`nonce`](#nonce)
     - [`timestamp`](#timestamp)
     - [`extraData`](#extradata)
-    - [`gasLimit`](#gaslimit-1)
+    - [`gasLimit`](#gaslimit-value)
     - [`difficulty`](#difficulty)
     - [`mixHash`](#mixhash)
     - [`coinbase`](#coinbase)
