@@ -73,7 +73,7 @@ We will have bridge contracts on both chains. Users will send transactions to th
 
 - [NodeJS](https://nodejs.org/en/) must be installed.
 - [npm](https://www.npmjs.com/) must be installed.
-- [Hardhat](https://www.npmjs.com/) must be installed.
+- [Hardhat](https://hardhat.org/) must be installed.
 
 ## Getting Started
 
@@ -396,11 +396,11 @@ In this video on the left terminal I am using our custom scripts to interact wit
 - Start the relayer
 - An already processed event appears on the console of the relayer therefore it does not get processed
 - Check the balances to make sure already processed event is not processed
-- Lock 20 ERC20s token from avax and see the updated balances of user and the bridge on avax
+- Lock 20 ERC20 token from avax and see the updated balances of user and the bridge on avax
 - Relayer observes the transaction and sends a transaction to mint native tokens on Subnet
 - Check the balances on both Subnet and avax. As expected our Subnet native token balance increases by 20
 - Burn 5 native tokens from Subnet and see the updated balance of the user
-- Relayer observers the transaction and sends a transaction to release ERC20 tokens on avax
+- Relayer observers the transaction and sends a transaction to release 5 ERC20 tokens on avax
 - Check balance on both Subnet and Avax. As expected our ERC20 balance increases by 5 and bridge's decreases by 5
 
 #### Test Relayer for Old Events
@@ -411,7 +411,7 @@ In this video on the left terminal I am using our custom scripts to interact wit
 
 - Start by a lock transaction from avax with amount 40. As stated in the video this transaction was sent when the relayer was not working. Therefore, it is not processed and it will not be processed when we start the relayer with `node relayer.js` because there has been many blocks after it
 - Check balances on both chains
-- Start the relayer with `node relayer.js` to show that the event is not getting processed. Printed events are events that happened on the Subnet. Since there is no blocks building on my local Subnet other than my own, my old burns are considered old and therefore shown
+- Start the relayer with `node relayer.js` to show that the event is not getting processed. Printed events are events that happened on the Subnet. Since there are no blocks building on my local Subnet other than my own, my old burns are considered new and therefore shown
 - Start the relayer with `node relayer.js <blockNumber>` to show that event will be processed and will be printed as "OLD: "
 - Check balances on both chains to confirm that old lock event on avax has been processed by relayer and tokens have been minted on avax
 
@@ -427,6 +427,7 @@ Things to check out;
   - You have your private keys inside the .env file and you have downloaded dotenv package by running `npm i dotenv`.
   - Your Subnet has NativeMinter precompile with bridgeAdmin account as the admin.
   - You have created a contractAddresses.js file inside the variables folder. If you did not create this file, deploy.js would fail.
+  - If you are trying to bridge from Subnet to avax, in other words trying to burn from Subnet and release from avax, make sure that AvaxBridge has enough ERC20 tokens to release.
 
 ## Security and Maintenance
 
