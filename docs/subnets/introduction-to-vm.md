@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is part of series of tutorials for building a Virtual Machine (VM):
+This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - Introduction to Virtual Machine (this article)
 - [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
