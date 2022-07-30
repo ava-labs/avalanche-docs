@@ -88,7 +88,7 @@ By default, debug APIs are disabled. To enable them, you need to enable the appr
 Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
 :::
 
-#### Example C-Chain config file
+#### Example C-Chain Config File
 
 An example C-Chain config file that includes the archival mode, enables debug APIs as well as default EVM APIs:
 
@@ -146,7 +146,7 @@ For development purposes, you will need test tokens. Avalanche has a [Faucet](ht
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 
-## Contract verification
+## Contract Verification
 
 Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://snowtrace.io/). The procedure is simple:
 
@@ -159,7 +159,7 @@ If successful, the `code` tab will now have a green checkmark, and your users wi
 
 See [this](../dapps/smart-contracts/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Sourcify and Truffle.
 
-## Contract security checks
+## Contract Security Checks
 
 Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
 
@@ -171,7 +171,7 @@ Most popular are:
 
 We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
 
-## Gotchas and things to look out for
+## Gotchas and Things to Look out For
 
 Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There are some differences you need to be aware of, otherwise, you may create subtle bugs or inconsistencies in how your dapps behave.
 
