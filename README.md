@@ -56,6 +56,11 @@ This command generates static content into the `build` directory and can be serv
 
 We strongly recommend [Visual Studio Code](https://visualstudio.microsoft.com/) with [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) whose configuration file can be found [here](./.prettierrc).
 
+Conventions:
+
+- Title case is used in section header.
+- All word `Subnet` should have first letter upper cased, excluding the context of a command or logs.
+
 ## Search
 
 Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
