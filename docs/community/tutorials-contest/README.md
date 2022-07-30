@@ -1,4 +1,4 @@
-# Winners
+# Winners of the 2021 Tutorials Contest
 
 On Aug 2nd 2021, Avalanche launched a [contest](https://medium.com/avalancheavax/avalanche-launches-developer-tutorial-contest-with-50k-in-prizes-7d8b4422399f) for the best developer tutorials to help others build on the platform. Anyone was able to submit a tutorial, with selected tutorials eligible to win a portion of the $50,000 prize pool.
 
