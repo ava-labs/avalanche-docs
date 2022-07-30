@@ -1008,7 +1008,7 @@ This is the data that is returned from the contract request.
 
 `Type: Function`
 
-_not yet implemented_
+_has not yet been implemented_
 
 ---
 
