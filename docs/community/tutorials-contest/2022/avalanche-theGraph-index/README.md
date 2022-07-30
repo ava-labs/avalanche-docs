@@ -1,10 +1,8 @@
-## Indexing an Avalanche Local Subnet with The Graph
+# Indexing an Avalanche Local Subnet with The Graph
 
-### Introduction
+## Introduction
 
 [Avalanche](https://www.avax.network/) is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche is the first decentralized smart contracts platform built for the scale of global finance, with near-instant transaction finality. Avalanche is a blockchain that promises to combine scaling capabilities and quick confirmation times through its Avalanche Consensus Protocol. It can process 4,500 TPS (transactions per second). For Ethereum, that number is 14 TPS.
-
-![avax](./images/1.jpeg "avax")
 
 Blockchains have traditionally been referred to as being slow and unscalable. Avalanche embraces an innovative approach to concensus that solve these problems without compromising on security.
 
@@ -15,9 +13,7 @@ deployments.
 * Building and launching highly scalable and decentralized applications (Dapps).
 * Building arbitrarily complex digital assets with custom rules, covenants, and riders (smart assets).
 
-![cost](./images/38.jpeg "cost")
-
-### Avalanche Features 3 Built-in Blockchains: 
+## Avalanche Features 3 Built-in Blockchains: 
 
 * Exchange Chain (X-Chain)
 * Platform Chain (P-Chain)
@@ -33,13 +29,13 @@ The Avalanche Architecture is composed of:
 * Subnetworks
 * Virtual Machines
 
-### The Graph Protocol
+## The Graph Protocol
 
 [The Graph](https://thegraph.com/) is an open-sourced indexing protocol for organising blockchain data and making it easily accessible using [GraphQL](https://graphql.org/). This software collects, processes and stores data from various blockchain applications to facilitate effecient information retrieval. The Graph stored data into various indices called Subgraphs, allowing applications to query it. These queries are initiated using GraphQL, a language originally created by facebook. The Graph has the ability to query networks like Ethereum and IPFS. Anyone can build and publish open subgraphs.
 
 ![graph](./images/21.png "graph")
 
-### Prerequisites
+## Prerequisites
 
 1. NodeJS and Yarn
 
@@ -69,12 +65,12 @@ In summary, we will be discussing the following:
 3. Indexing our Subnet using The Graph
 
 
-### Running an EVM Subnet on the Local Network Using the Avalanche-cli
+## Running an EVM Subnet on the Local Network Using the Avalanche-cli
 
 We will be creating an EVM on our local machine to give us a basic feel on how a Subnet functions. The [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) is a novel tool that allow us to have a local network up in minutes.
 
 
-1. Installation
+### Installation
 
 Open up you MacOs command line utility and run the following command
 
@@ -95,10 +91,7 @@ export PATH=$PWD:PATH
 
 This makes the `avalanche` command available globally. For more information about [environment-variables](https://apple.stackexchange.com/questions/106778/how-do-i-set-environment-variables-on-os-x) and [avalanche-cli-commands](https://docs.avax.network/subnets/create-a-local-subnet#quickstart) visit the respective links.
 
-![variables](./images/cover.jpeg "variables")
-
-
-2. Initialising a Default Subnet
+### Initialising a Default Subnet
 
 We will be using the `avalanche subnet create` command line wizard to get our network running. ASAP.
 In the same directory where the binary was installed, run the following command
@@ -147,7 +140,7 @@ avalanche subnet list
 ![list](./images/9.png "list")
 
 
-3. Deploying the Subnet Locally.
+### Deploying the Subnet Locally.
 
 To deploy the newly created Subnet locally, run the following command
 
@@ -160,6 +153,8 @@ avalanche subnet deploy <SubnetName>
 When a Subnet is run locally, it starts a multi-node (5 node) Avalanche Network in the background.
 
 ![deploy_f](./images/11.png "deploy_f")
+
+### Configuring Metamask
 
 To test the functionality of the just created Subnet, go ahead and add the configuration details to [Metamask](https://metamask.io/).
 You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
@@ -175,7 +170,7 @@ avalanche network stop <snapshotName>
 
 
 
-### Deploying Smart Contracts with Remix
+## Deploying Smart Contracts with Remix
 
 1. Setting up Remix
 
@@ -189,7 +184,11 @@ Navigate to the [Remix](https://remix.ethereum.org/) platform and import the tes
 https://github.com/FibrinLab/example-subgraph/blob/master/contracts/Gravity.sol
 ```
 
+:::info
+
 This repo contains the official sample subgraph for the [gravatar](https://en.gravatar.com/) registry.
+
+:::
 
 1. Deployment Steps
 
@@ -213,7 +212,7 @@ Please take note of the deployment address as we will be making use of it subseq
 
 
 
-### Indexing Our Subnet Using the Graph
+## Indexing Our Subnet Using the Graph
 
 1. Installing Dependencies
 
@@ -370,7 +369,7 @@ Watch the magic happen.
 
 ![graph1](./images/37.png "graph1").
 
-### Conclusion
+## Conclusion
 
 In summary, we have deployed a Local Subnet using the Avalanche-cli. We further went ahead to deploy smart contracts, run a Graph node and Index our nodes using `The Graph`. How cool is that? lol.
 
