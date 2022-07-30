@@ -24,7 +24,7 @@ I hope you enjoy this tutorial!
   - [Prerequisites](#prerequisites)
     - [Metamask](#metamask)
     - [Avalanche CLI](#avalanche-cli)
-- [Creating and deploying a Simple Subnet](#creating-and-deploying-a-simple-Subnet)
+- [Creating and Deploying a Simple Subnet](#creating-and-deploying-a-simple-Subnet)
   - [What Is a Subnet?](#what-is-a-Subnet)
     - [Subnets](#Subnets)
     - [Genesis File](#genesis-file)
@@ -123,7 +123,7 @@ export PATH=$PWD:$PATH
 
 We're ready to deploy our first Subnet.
 
-## Creating and deploying a Simple Subnet
+## Creating and Deploying a Simple Subnet
 
 ### What Is a Subnet?
 
