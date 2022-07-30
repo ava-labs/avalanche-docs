@@ -140,7 +140,7 @@ $ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-### Start a New Avalanche Network with Five Nodes (a cluster)
+### Start a New Avalanche Network with Five Nodes
 
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
