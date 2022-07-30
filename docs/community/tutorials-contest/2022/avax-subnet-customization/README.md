@@ -1,4 +1,4 @@
-# Avalanche - Creating a Genesis File For Your Subnet
+# Avalanche - Creating a Genesis File for Your Subnet
 
 ## Introduction
 
@@ -18,7 +18,7 @@ I hope you enjoy this tutorial!
 
 ## Table of Contents
 
-- [Avalanche - Creating a Genesis File For Your Subnet](#avalanche---creating-a-genesis-file-for-your-Subnet)
+- [Avalanche - Creating a Genesis File for Your Subnet](#avalanche---creating-a-genesis-file-for-your-Subnet)
   - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
@@ -34,7 +34,7 @@ I hope you enjoy this tutorial!
     - [Token Symbol](#token-symbol)
     - [Gas Configuration](#gas-configuration)
     - [Airdropping Native Tokens](#airdropping-native-tokens)
-    - [Adding a Custom Precompile To Modify the EVM](#adding-a-custom-precompile-to-modify-the-evm)
+    - [Adding a Custom Precompile to Modify the Evm](#adding-a-custom-precompile-to-modify-the-evm)
       - [Native Minting](#native-minting)
       - [Configure Contract Deployment Whitelist](#configure-contract-deployment-whitelist)
       - [Configure Transaction Allow List](#configure-transaction-allow-list)
@@ -83,7 +83,7 @@ I hope you enjoy this tutorial!
   - [Deploying the Contract](#deploying-the-contract)
     - [NativeMinterInterface.sol](#nativeminterinterfacesol)
     - [Game.sol](#gamesol)
-    - [Compiling and deploying](#compiling-and-deploying)
+    - [Compiling and Deploying](#compiling-and-deploying)
   - [Setting Game Contract as a Minter](#setting-game-contract-as-minter)
   - [Play the Game](#play-the-game)
 - [Conclusion](#conclusion)
@@ -190,7 +190,7 @@ How would you like to distribute funds?
 > Airdrop 1 million tokens to the default address (do not use in production)
 ```
 
-#### Adding a Custom Precompile To Modify the EVM
+#### Adding a Custom Precompile to Modify the Evm
 
 ```bash
 ? Advanced: Would you like to add a custom precompile to modify the EVM?: 
@@ -907,7 +907,7 @@ When you're done, it should look like this:
 
 ![files](.github/images/files.png)
 
-#### Compiling and deploying
+#### Compiling and Deploying
 
 After creating the files, we should compile `Game.sol`.
 
