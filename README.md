@@ -58,8 +58,8 @@ We strongly recommend [Visual Studio Code](https://visualstudio.microsoft.com/) 
 
 Conventions:
 
-- Title case is used in section header.
-- All word `Subnet` should have first letter upper cased, excluding the context of a command or logs.
+- Title case is used in all section headers.
+- All words `Subnet` should have first letter upper cased, except in the context of a command, path or logs.
 
 ## Search
 
