@@ -95,7 +95,7 @@ I hope you enjoy this tutorial!
 
 You need to have [Metamask](https://metamask.io/) extension installed on your browser.
 
-#### Avalanche CLI
+#### Avalanche Cli
 
 Create a folder for Avalanche CLI.
 
@@ -158,7 +158,7 @@ This command will run the wizard to create a Subnet.
 
 There are six steps in the wizard:
 
-#### Choose Your VM
+#### Choose Your Vm
 
 Choose SubnetEVM here
 
