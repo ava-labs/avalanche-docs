@@ -106,7 +106,7 @@ Example walk through:
 
 - `Choose your VM`: SubnetEVM
 - `ChainId`: 676767
-- `Select a symbol for your subnet's native token`: SUB
+- `Token symbol`: SUB
 - `How would you like to set the fees`: Low disk use...
 - `How would you like to distribute the funds`: Airdrop 1 million tokens to the default address
 - `Advanced: Would you like to add a custom precompile to modify the EVM?`: No
@@ -137,14 +137,22 @@ After a successful deployment, an example of what you would see:
 
 ```text
 Network ready to use. Local network node endpoints:
-Endpoint at node node4 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
-Endpoint at node node5 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:61314/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
-Endpoint at node node1 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:29281/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
-Endpoint at node node2 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:56438/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
-Endpoint at node node3 for blockchain "2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf" with VM ID "srEXiWaHq58RK6uZMmUNaMF2FzG7vPzREsiXsptAHk9gsZNvN": http://127.0.0.1:51473/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
++-------+------------+-------------------------------------------------------------------------------------+
+| NODE  |     VM     |                                         URL                                         |
++-------+------------+-------------------------------------------------------------------------------------+
+| node1 | subnetName | http://127.0.0.1:9650/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc |
++-------+------------+-------------------------------------------------------------------------------------+
+| node2 | subnetName | http://127.0.0.1:9652/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc |
++-------+------------+-------------------------------------------------------------------------------------+
+| node3 | subnetName | http://127.0.0.1:9654/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc |
++-------+------------+-------------------------------------------------------------------------------------+
+| node4 | subnetName | http://127.0.0.1:9656/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc |
++-------+------------+-------------------------------------------------------------------------------------+
+| node5 | subnetName | http://127.0.0.1:9658/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc |
++-------+------------+-------------------------------------------------------------------------------------+
 
 Metamask connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
+RPC URL:          http://127.0.0.1:9650/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc
 Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
 Network name:     subnetName
 Chain ID:         676767
@@ -191,7 +199,7 @@ Example Values:
 
 ```text
 Network Name: <subnetName>
-New RPC URL: http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc
+New RPC URL: http://127.0.0.1:9650/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc
 ChainID: 676767
 Symbol: SUB
 ```
@@ -224,7 +232,7 @@ Example Values:
 
 ```typescript
 subnet: {
-  url: "http://127.0.0.1:37868/ext/bc/2ALrMJ74YHrq6gRXzZkmYaAx6tJhshybkWr8m71r56E7Cv25Qf/rpc",
+  url: "http://127.0.0.1:9650/ext/bc/2KY4TYoJwuJWLeSfj4Mae4t4sBCwGrx48QyGWg3zWwP5PhZjHV/rpc",
   chainId: 676767,
   accounts: ["56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"]
 }
