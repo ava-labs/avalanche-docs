@@ -166,7 +166,7 @@ That means the node has successfully bootstrapped the Subnet and is now in sync.
 
 If you want to inspect the process of Subnet syncing, you can use the RPC call to check for the [blockchain status](../apis/avalanchego/apis/p-chain.md#platformgetblockchainstatus).
 
-For a more in-depth look into Subnet operation, check out the blockchain log. By default, the log can be found in `~/.avalanchego/logs/<ChainID>.log` where you replace the <ChainID> with the actual ID of the blockchain in your Subnet.
+For a more in-depth look into Subnet operation, check out the blockchain log. By default, the log can be found in `~/.avalanchego/logs/ChainID.log` where you replace the `ChainID` with the actual ID of the blockchain in your Subnet.
 
 For an even more thorough (and pretty!) insight into how the node and the Subnet is behaving, you can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node operation, as well as a dedicated dashboard for Subnet data. Check out the [tutorial](../nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
 
