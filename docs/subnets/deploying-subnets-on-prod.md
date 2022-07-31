@@ -6,7 +6,7 @@ After architecting your Subnet environment on the [local machine](create-a-local
 
 The architecture of the environment your particular Subnet will use will be greatly influenced by the type of load and activity your Subnet is designed to support so your solution will most likely differ from what we propose here. Still, it might be useful to follow along, to build up the intuition for the type of questions you will need to consider.
 
-## Node setup
+## Node Setup
 
 Avalanche nodes are essential elements for running your Subnet in production. At a minimum, your Subnet will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](../nodes/README.md) on a server.
 
@@ -14,7 +14,7 @@ Avalanche nodes are essential elements for running your Subnet in production. At
 
 Although AvalancheGo can run on a MacOS or a Windows computer, we strongly recommend running nodes on computers running Linux as they are designed specifically for server loads and all the tools and utilities needed for administering a server are native to Linux.
 
-### Hardware specification
+### Hardware Specification
 
 For running AvalancheGo as a validator on the Primary Network the recommended configuration is as follows:
 
@@ -28,17 +28,17 @@ That is the configuration sufficient for running a Primary Network node. Any res
 
 Be sure to set up monitoring of resource consumption for your nodes because resource exhaustion may cause your node to slow down or even halt, which may severely impact your Subnet negatively.
 
-### Server location
+### Server Location
 
 You can run a node on a physical computer that you own and run, or on a cloud instance. Although running on your own HW may seem like a good idea, unless you have a sizeable DevOps 24/7 staff we recommend using cloud service providers as they generally provide reliable computing resources that you can count on to be properly maintained and monitored.
 
-#### Local servers
+#### Local Servers
 
 If you plan on running nodes on your own hardware, make sure they satisfy the minimum HW specification as outlined earlier. Pay close attention to proper networking setup, making sure the p2p port (9651) is accessible and public IP properly configured on the node. Make sure the node is connected to the network physically (not over WiFi), and that the router is powerful enough to handle a couple of thousands of persistent TCP connections and that network bandwidth can accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
 When installing the AvalancheGo client on the machines, unless you have a dedicated DevOps staff that will take care of node setup and configuration, we recommend using the [installer script](../nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of the setup process for you, set up the node as a system service and will enable easy node upgrades.
 
-#### Cloud providers
+#### Cloud Providers
 
 There are a number of different cloud providers. We have documents that show how to set up a node on the most popular ones:
 * [Amazon Web Services](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
@@ -59,33 +59,33 @@ You should be aware that 5 is the minimum we recommend. But, from a decentraliza
 
 Considering that at times you will have to take nodes offline, for routine maintenance (at least for node upgrades which happen with some regularity) or unscheduled outages and failures you need to be able to routinely handle at least one node being offline without your Subnet performance degrading.
 
-### Node bootstrap
+### Node Bootstrap
 
 Once you set up the node instances and install AvalancheGo clients on them, nodes will need to boostrap (sync with the network). This is a lengthy process, as the nodes need to catch up and replay all the network activity since the genesis up to the present moment. Full bootstrap on a node can take more than a week, but there are ways to shorten that process, depending on your circumstances.
 
-#### State sync
+#### State Sync
 
 If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for subnet validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
 
-#### Database copy
+#### Database Copy
 
 Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
 
 Please make sure you don't reuse any node's node-id by accident, especially don't restore another node's ID, see [here](../nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node must has its own unique node id, otherwise, the nodes sharing the same id will not behave correctly, which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.
 
-## Subnet deploy
+## Subnet Deploy
 
 Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
 
 Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.md). We will highlight the main steps below.
 
-### Ledger HW wallet
+### Ledger HW Wallet
 
 When creating the Subnet, you will be required to have a private key that will control the administrative functions of the Subnet (adding validators, managing the configuration). Needless to say, whoever has this private key has complete control over the Subnet and the way it runs. Therefore, protecting that key is of the utmost operational importance. Which is why we strongly recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and access that private key. 
 
 Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because losing control of the managing would be catastrophic. General instruction on how to use a Ledger device with Avalanche can be found [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
-### Genesis file
+### Genesis File
 
 The structure that defines the most important parameters in a Subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already. 
 
@@ -174,7 +174,7 @@ For a more in-depth look into Subnet operation, check out the blockchain log. By
 
 For an even more thorough (and pretty!) insight into how the node and the Subnet is behaving, you can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node operation, as well as a dedicated dashboard for Subnet data. Check out the [tutorial](../nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
 
-### Managing validation
+### Managing Validation
 
 On Avalanche all validations are limited in time and can range from two weeks up to one year. Furthermore, subnet validations are always a subset of the Primary Network validation period (must be shorter or the same). That means that periodically your validators will expire and you will need to submit a new validation transaction for both the Primary Network and your Subnet.
 
