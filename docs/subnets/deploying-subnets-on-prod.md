@@ -36,7 +36,7 @@ You can run a node on a physical computer that you own and run, or on a cloud in
 
 If you plan on running nodes on your own hardware, make sure they satisfy the minimum HW specification as outlined earlier. Pay close attention to proper networking setup, making sure the p2p port (9651) is accessible and public IP properly configured on the node. Make sure the node is connected to the network physically (not over WiFi), and that the router is powerful enough to handle a couple of thousands of persistent TCP connections and that network bandwidth can accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
-When installing the AvalancheGo client on the machines, unless you have a dedicated DevOps staff that will take care of node setup and configuration, we recommend using the [installer script](../nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of the setup process for you, set up the node as a system service and will enable easy node upgrades.
+When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that will take care of node setup and configuration, we recommend using the [installer script](../nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of the setup process for you, set up the node as a system service and will enable easy node upgrades.
 
 #### Cloud Providers
 
@@ -61,7 +61,7 @@ Considering that at times you will have to take nodes offline, for routine maint
 
 ### Node Bootstrap
 
-Once you set up the node instances and install AvalancheGo clients on them, nodes will need to boostrap (sync with the network). This is a lengthy process, as the nodes need to catch up and replay all the network activity since the genesis up to the present moment. Full bootstrap on a node can take more than a week, but there are ways to shorten that process, depending on your circumstances.
+Once you set up the server and install AvalancheGo on them, nodes will need to boostrap (sync with the network). This is a lengthy process, as the nodes need to catch up and replay all the network activity since the genesis up to the present moment. Full bootstrap on a node can take more than a week, but there are ways to shorten that process, depending on your circumstances.
 
 #### State Sync
 
