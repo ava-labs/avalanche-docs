@@ -93,7 +93,7 @@ If you want to review, we have a description of the genesis file in our document
 
 ### Subnet-CLI Wizard
 
-Creating a subnet is a multistep process. You need to:
+Creating a Subnet is a multistep process. You need to:
 * create a `WMID`
 * create the Subnet
 * create the blockchain in the Subnet
