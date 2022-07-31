@@ -75,7 +75,7 @@ Please make sure you don't reuse any node's node-id by accident, especially don'
 
 ## Subnet deploy
 
-Once you have the nodes set up you are ready to deploy the actual subnet. Right now, the recommended tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
+Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
 
 Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.md). We will highlight the main steps below.
 
