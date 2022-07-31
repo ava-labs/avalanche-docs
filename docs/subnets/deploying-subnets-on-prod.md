@@ -8,7 +8,7 @@ The architecture of the environment your particular Subnet will use will be grea
 
 ## Node setup
 
-Nodes are essential elements for running your Subnet in production. At a minimum, your Subnet will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego) on a server.
+Avalanche nodes are essential elements for running your Subnet in production. At a minimum, your Subnet will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](../nodes/README.md) on a server.
 
 ### Server OS
 
