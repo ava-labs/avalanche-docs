@@ -87,7 +87,7 @@ Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage o
 
 ### Genesis file
 
-The structure that defines the most important parameters in a subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already. 
+The structure that defines the most important parameters in a Subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already. 
 
 If you want to review, we have a description of the genesis file in our document on [customizing EVM Subnets](customize-a-subnet.md).
 
