@@ -41,7 +41,7 @@ Now, we need to set these boxes with correct values.
 
 After setting up all the parameters correctly, we should see this page. For now, we have 0 AVAX.
 
-## Fund your C-Chain address
+## Fund Your C-Chain Address
 
 Depending on the network used, there are three ways to get funds to your C-Chain address.
 
@@ -53,7 +53,7 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your C-Chain address.
 
-### Funding on local testnet
+### Funding on Local Testnet
 
 On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 

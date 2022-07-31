@@ -82,6 +82,7 @@ const sidebars = {
         'subnets/setup-dfk-node',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
+        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
@@ -164,6 +165,7 @@ const sidebars = {
         },
       ],
     },
+    'apis/metrics'
   ],
   nodes: [
     'nodes/README',
@@ -231,8 +233,8 @@ const sidebars = {
       type: 'category',
       label: 'Tutorials Contest',
       items: [
-        'community/tutorials-contest/README',
-      ],
+        'community/tutorials-contest/2021'
+      ]
     },
   ],
 };

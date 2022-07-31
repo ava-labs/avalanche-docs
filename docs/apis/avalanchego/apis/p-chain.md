@@ -1439,8 +1439,20 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```sh
-platform.getStake({addresses: []string}) -> {staked: int}
+platform.getStake(
+    {addresses: []string}
+) ->
+{
+    staked: int,
+    stakedOutputs:  []string,
+    encoding: string
+}
 ```
+
+- `addresses` are the addresses to get information about.
+- `staked` is the amount of nAVAX staked by addresses provided.
+- `stakedOutputs` are the string representation of staked outputs.
+- `encoding` specifies the format for the returned outputs.
 
 #### **Example Call**
 
@@ -1450,8 +1462,7 @@ curl -X POST --data '{
     "method": "platform.getStake",
     "params": {
         "addresses": [
-            "P-everest1g3ea9z5kmkzwnxp8vr8rpjh6lqw4r0ufec460d",
-            "P-everest12un03rm579fewele99c4v53qnmymwu46dv3s5v"
+            "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
         ]
     },
     "id": 1
@@ -1465,7 +1476,11 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "staked": "5000000"
+    "staked": "26870333254",
+    "stakedOutputs": [
+      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
+    ],
+    "encoding": "hex"
   },
   "id": 1
 }
