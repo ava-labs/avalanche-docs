@@ -71,6 +71,8 @@ If the nodes you will be running as validators don't need to have the full trans
 
 Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
 
+Please make sure you don't reuse any node's node-id by accident, especially don't restore another node's ID, see [here](../nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node must has its own unique node id, otherwise, the nodes sharing the same id will not behave correctly, which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.
+
 ## Subnet deploy
 
 Once you have the nodes set up you are ready to deploy the actual subnet. Right now, the recommended tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
