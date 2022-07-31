@@ -81,7 +81,7 @@ Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.
 
 ### Ledger HW wallet
 
-When creating the Subnet, you will be required to have a private key that will control the administrative functions of the subnet (adding validators, managing the configuration). Needless to say, whoever has this private key has complete control over the Subnet and the way it runs. Therefore, protecting that key is of the utmost operational importance. Which is why we strongly recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and access that private key. 
+When creating the Subnet, you will be required to have a private key that will control the administrative functions of the Subnet (adding validators, managing the configuration). Needless to say, whoever has this private key has complete control over the Subnet and the way it runs. Therefore, protecting that key is of the utmost operational importance. Which is why we strongly recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and access that private key. 
 
 Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because losing control of the managing would be catastrophic. General instruction on how to use a Ledger device with Avalanche can be found [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
