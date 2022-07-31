@@ -182,7 +182,7 @@ Unless managed properly and in a timely manner, that can be disruptive for your 
 
 ## Conclusion
 
-Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your subnet to production and you are now better prepared to launch your Subnet successfully.
+Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your Subnet to production and you are now better prepared to launch your Subnet successfully.
 
 Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and subnet health and alert you if anything out of the ordinary happens. 
 
