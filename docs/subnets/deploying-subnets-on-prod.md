@@ -55,6 +55,8 @@ Number of validators on a subnet is a crucial decision you need to make. For sta
 
 For stability reasons our recommendation is to have **at least** 5 full validators on your Subnet. If you have less than 5 validators your Subnet liveness will be at risk whenever a single validator goes offline, and if you have less than 4 even one offline node will halt your Subnet.
 
+You should be aware that 5 is the minimum we recommend. But, from a decentralization standpoint having more validators is always better as it increases the stability of your Subnet and makes it more resilient to both technical failures and adversarial action. In a nutshell: run as many Subnet validators as you can.
+
 Considering that at times you will have to take nodes offline, for routine maintenance (at least for node upgrades which happen with some regularity) or unscheduled outages and failures you need to be able to routinely handle at least one node being offline without your Subnet performance degrading.
 
 ### Node bootstrap
@@ -63,11 +65,11 @@ Once you set up the node instances and install AvalancheGo clients on them, node
 
 #### State sync
 
-If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for subnet validation exclusively, you can use the state sync without any issues.
+If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for subnet validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
 
 #### Database copy
 
-Good way to cut down on bootstrap times on multiple nodes is databse copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
+Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
 
 ## Subnet deploy
 
@@ -180,7 +182,7 @@ Unless managed properly and in a timely manner, that can be disruptive for your 
 
 Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your subnet to production and you are now better prepared to launch your Subnet successfully.
 
-Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. Things can change and go sideways in unexpected ways so you always need to be on your toes, and constantly monitor the nodes and subnet health. 
+Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and subnet health and alert you if anything out of the ordinary happens. 
 
 If you have any questions, doubts or would like to chat, please check out our [Discord server](https://chat.avax.network/), where we host a dedicated `#subnet-chat` channel dedicated to talking about all things Subnet.
 
