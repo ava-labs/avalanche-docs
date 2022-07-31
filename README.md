@@ -64,3 +64,23 @@ Conventions:
 ## Search
 
 Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
+
+## i18n
+
+[Docusaurus i18n tutorial](https://docusaurus.io/docs/next/i18n/tutorial) and [Chinese version](https://docusaurus.io/zh-CN/docs/next/i18n/tutorial).
+
+### zh-Hans
+
+On your local box, run
+
+```
+yarn run start -- --locale zh-Hans
+```
+
+Then load `http://localhost:3000/zh-Hans/`
+
+To [regenerate translation file for plugin](https://docusaurus.io/docs/next/i18n/tutorial#translate-plugin-data)
+
+```
+yarn run write-translations -- --locale zh-Hans
+```
