@@ -20,9 +20,7 @@ This API uses the `json 2.0` RPC format.
 
 ### platform.addDelegator
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Add a delegator to the Primary Network.
 
@@ -107,9 +105,7 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
@@ -119,9 +115,7 @@ The validation period must be between 2 weeks and 1 year for the Mainnet, and 24
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
-:::info
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to us on [Discord.](https://chat.avalabs.org/)
-:::
+:::info Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to us on [Discord.](https://chat.avalabs.org/) :::
 
 #### **Signature**
 
@@ -197,9 +191,7 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this Subnet.
 
@@ -272,9 +264,7 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Create a new address controlled by the given user.
 
@@ -315,9 +305,7 @@ curl -X POST --data '{
 
 ### platform.createBlockchain
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
 
@@ -392,9 +380,7 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Create a new Subnet.
 
@@ -522,12 +508,9 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
-Get the private key that controls a given address.
-The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
+Get the private key that controls a given address. The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
 
 #### **Signature**
 
@@ -1925,9 +1908,7 @@ curl -X POST --data '{
 
 ### platform.importAVAX
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
@@ -1991,9 +1972,7 @@ curl -X POST --data '{
 
 ### platform.importKey
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Give a user control over an address by providing the private key that controls the address.
 
@@ -2081,9 +2060,7 @@ curl -X POST --data '{
 
 ### platform.listAddresses
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 List addresses controlled by the given user.
 

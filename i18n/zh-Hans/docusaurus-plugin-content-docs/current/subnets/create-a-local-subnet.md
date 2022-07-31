@@ -348,9 +348,7 @@ To stop a running local network, run
 
 `avalanche network stop [snapshotName]`
 
-This graceful shutdown will preserve network state. When restarted, your Subnet should resume at the same place it left off.
-`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
-If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
+This graceful shutdown will preserve network state. When restarted, your Subnet should resume at the same place it left off. `snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`. If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
 
 Example:
 
@@ -366,8 +364,7 @@ To start or restart a stopped network, run
 
 `avalanche network start [snapshotName]`
 
-`snapshotName` is optional, if provided the named snapshot will be used to start the network (if found).
-If not provided, the last snapshot created with a unnamed `stop` will be used.
+`snapshotName` is optional, if provided the named snapshot will be used to start the network (if found). If not provided, the last snapshot created with a unnamed `stop` will be used.
 
 If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no Subnet has been deployed yet), the command will fail.
 
@@ -425,8 +422,7 @@ Currency Symbol:  TEST
 
 You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
 
-Here is a screenshot of Metamask when everything is set correctly:
-![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
+Here is a screenshot of Metamask when everything is set correctly: ![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
 
 ## Smart Contract
 

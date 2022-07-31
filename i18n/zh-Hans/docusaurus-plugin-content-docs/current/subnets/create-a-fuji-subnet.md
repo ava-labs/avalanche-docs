@@ -28,8 +28,7 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ## Virtual Machine
 
-Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../overview/getting-started/avalanche-platform.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
-That is, the VM defines the behavior of the blockchain.
+Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../overview/getting-started/avalanche-platform.md#virtual-machines), much like an object in an object-oriented language is an instance of a class. That is, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
 
@@ -77,8 +76,7 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 ### Private Key
 
-All commands which issue a transaction require a private key loaded into the tool.
-`Avalanche-CLI` supports the following key operations:
+All commands which issue a transaction require a private key loaded into the tool. `Avalanche-CLI` supports the following key operations:
 
 - create
 - delete
@@ -113,8 +111,7 @@ Key created
 +-----------+-------------------------------+-------------------------------------------------+---------------+
 ```
 
-The C-Chain address (`0x86BB07a534ADF43786ECA5Dd34A97e3F96927e4F`) is the one which can be used to fund your key from the [faucet](https://faucet.avax.network/).
-The command also prints P-Chain addresses for both the default local network and `Fuji`. The latter (`P-fuji1a3azftqvygc4tlqsdvd82wks2u7nx85rhk6zqh`) is the one needed for this tutorial.
+The C-Chain address (`0x86BB07a534ADF43786ECA5Dd34A97e3F96927e4F`) is the one which can be used to fund your key from the [faucet](https://faucet.avax.network/). The command also prints P-Chain addresses for both the default local network and `Fuji`. The latter (`P-fuji1a3azftqvygc4tlqsdvd82wks2u7nx85rhk6zqh`) is the one needed for this tutorial.
 
 The `delete` command of course deletes a private key:
 
@@ -187,8 +184,7 @@ To create an EVM subnet, run the `subnet create` command with a name of your cho
 avalanche subnet create testsubnet
 ```
 
-This will start a series of prompts to customize your EVM Subnet to your needs. Most prompts have some validation to reduce issues due to invalid input.
-The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
+This will start a series of prompts to customize your EVM Subnet to your needs. Most prompts have some validation to reduce issues due to invalid input. The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -197,8 +193,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-As we are creating an EVM subnet, we can accept the default `SubnetEVM`.
-Next, we are asked for a Chain ID. You should provide your own ID. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
+As we are creating an EVM subnet, we can accept the default `SubnetEVM`. Next, we are asked for a Chain ID. You should provide your own ID. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
 ```bash
 ✔ SubnetEVM
@@ -368,8 +363,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-This tutorial is about deploying to `Fuji`, so we navigate with the arrow keys to `Fuji` and hit enter.
-We are then asked to provide which private key to use for the deployment. The deployment basically consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet). Therefore the key needs to be funded.
+This tutorial is about deploying to `Fuji`, so we navigate with the arrow keys to `Fuji` and hit enter. We are then asked to provide which private key to use for the deployment. The deployment basically consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet). Therefore the key needs to be funded.
 
 ```bash
 ✔ Fuji
@@ -393,8 +387,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Cancel
 ```
 
-Enter at `Add control key` and provide at least one key. You can enter multiple addresses, we'll use just one here. When no more addresses need to be added, hit `Done`.
-(The address provided here is intentionally invalid. The address has a checksum and the tool will make sure it's a valid address).
+Enter at `Add control key` and provide at least one key. You can enter multiple addresses, we'll use just one here. When no more addresses need to be added, hit `Done`. (The address provided here is intentionally invalid. The address has a checksum and the tool will make sure it's a valid address).
 
 ```bash
 ✔ Add control key
@@ -437,7 +430,7 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
 
 To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
- 
+
 ## Add a Validator
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
@@ -553,8 +546,7 @@ This means the node has now been added as validator to the given Subnet on Fuji!
 
 ## Join a Subnet
 
-You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
-This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
+You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command. This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
 
 First also a bit of "marketing" (announcing not yet available Mainnet support):
 

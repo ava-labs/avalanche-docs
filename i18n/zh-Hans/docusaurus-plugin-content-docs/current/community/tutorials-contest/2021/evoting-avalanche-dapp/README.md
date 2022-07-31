@@ -628,7 +628,7 @@ import contractJson from "./build/contracts/MainContract.json";
 ```
 
 > We have used few other dependencies which we didn't install earlier. So, run the following command in the terminal of your project directory.
->
+> 
 > ```bash
 > npm install --save rimble-ui react-router-dom --force
 > ```
@@ -640,7 +640,7 @@ Now go to the project root directory, i.e. `avalanche-voting` directory, and run
 Don't forget to set up Metamask with Fuji testnet and also fund the account with Fuji C-Chain test tokens to vote. In the Metamask extension, add a custom RPC by clicking at the network dropdown in the centre of the extension. Fill in the details as shown below
 
 | Info               | Value                                                                                    |
-| :----------------- | :--------------------------------------------------------------------------------------- |
+|:------------------ |:---------------------------------------------------------------------------------------- |
 | Network Name       | Avalanche Fuji                                                                           |
 | New RPC URL        | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
 | Chain ID           | 43113                                                                                    |

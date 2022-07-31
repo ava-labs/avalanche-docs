@@ -156,7 +156,7 @@ function getPrivateKey(mnemonic, activeIndex = 0) {
 
 // importing keys in the key chain - use this if you have any private keys
 // privateKeys.forEach((privKey) => {
-// 	importPrivateKeys(privKey)
+//  importPrivateKeys(privKey)
 // })
 
 // importing private keys from mnemonic

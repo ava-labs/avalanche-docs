@@ -1,10 +1,10 @@
-const Collectible = artifacts.require('Collectible')
-const Marketplace = artifacts.require('Marketplace')
+const Collectible = artifacts.require('Collectible');
 
-module.exports = function (deployer) {
-    deployer.deploy(Collectible)
-    deployer.deploy(Marketplace)
-} as Truffle.Migration
+const Marketplace = artifacts.require('Marketplace');
 
-// because of https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
-export { }
+module.exports = (function (deployer) {
+  deployer.deploy(Collectible);
+  deployer.deploy(Marketplace);
+} as Truffle.Migration); // because of https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
+
+export {};

@@ -6,16 +6,13 @@ In [Create a Local Test Network](create-a-local-test-network.md), we showed you 
 
 We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain.
 
-:::info
-This same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
+:::info This same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
 
 The port in this tutorial uses 9650. Depending on how you start your local network, it could be different. If you are using Avalanche Network Runner, please check [here](./create-a-local-test-network.md#retrieve-all-nodes) to see how to retrieve the port numbers.
 
 :::
 
-:::warning
-Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md), because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
-:::
+:::warning Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md), because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet. :::
 
 ## Create a User
 

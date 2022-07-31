@@ -15,9 +15,7 @@ To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-i
 
 When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token whitepaper](https://www.avalabs.org/whitepapers) to learn more about AVAX and the mechanics of staking.
 
-:::caution
-Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
-:::
+:::caution Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**. :::
 
 - The minimum amount that a validator must stake is 2,000 AVAX
 - The minimum amount that a delegator must delegate is 25 AVAX
@@ -30,11 +28,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
-You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../apis/avalanchego/apis/info.md#infouptime)
-You can get another opinion on your node's uptime from Avalanche's [Validator Health dashboard](https://stats.avax.network/dashboard/validator-health-check/).
-If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward.
-If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.
-Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your node's true uptime.
+You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../apis/avalanchego/apis/info.md#infouptime) You can get another opinion on your node's uptime from Avalanche's [Validator Health dashboard](https://stats.avax.network/dashboard/validator-health-check/). If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward. If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue. Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your node's true uptime.
 
 ## Validators
 
@@ -52,9 +46,7 @@ When you add a node to the validator set, you specify:
 The minimum amount that a validator must stake is 2,000 AVAX.
 :::
 
-:::warning
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
-:::
+:::warning Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap). :::
 
 ### Running a Validator
 
@@ -105,9 +97,7 @@ When you delegate stake to a validator, you specify:
 The minimum amount that a delegator must delegate is 25 AVAX.
 :::
 
-:::warning
-Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network).
-:::
+:::warning Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network). :::
 
 ### Delegator Rewards
 

@@ -29,9 +29,7 @@ NodeID is a unique identifier that differentiates your node from all the other p
 
 In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All we need to do to recreate the node on another machine is to run a new installation with those same two files.
 
-:::caution
-If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../apis/avalanchego/apis/keystore.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it.
-:::
+:::caution If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../apis/avalanchego/apis/keystore.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it. :::
 
 ### Backup
 
@@ -123,11 +121,9 @@ You should see your original NodeID. Restore process is done.
 
 ## Database
 
-Normally, when starting a new node, you can just bootstrap from scratch. However, there are situations when you
-may prefer to reuse an existing database (ex: preserve keystore records, reduce sync time).
+Normally, when starting a new node, you can just bootstrap from scratch. However, there are situations when you may prefer to reuse an existing database (ex: preserve keystore records, reduce sync time).
 
-This tutorial will walk you through compressing your node's
-DB and moving it to another computer using `zip` and `scp`.
+This tutorial will walk you through compressing your node's DB and moving it to another computer using `zip` and `scp`.
 
 ### Database Backup
 
@@ -142,8 +138,7 @@ You must stop the Avalanche node before you back up the database otherwise data
 could become corrupted.
 :::
 
-Once the node is stopped, you can `zip` the database directory to reduce the
-size of the backup and speed up the transfer using `scp`:
+Once the node is stopped, you can `zip` the database directory to reduce the size of the backup and speed up the transfer using `scp`:
 
 ```
 zip -r avalanche_db_backup.zip .avalanchego/db
@@ -167,8 +162,7 @@ Once executed, this command will create `avalanche_db_backup.zip` directory in y
 
 ### Database Restore
 
-_This tutorial assumes you have already completed "Database Backup" and have
-a backup at ~/avalanche_db_backup.zip._
+_This tutorial assumes you have already completed "Database Backup" and have a backup at ~/avalanche_db_backup.zip._
 
 First, we need to do the usual [installation](../build/set-up-node-with-installer.md) of the node. When the node is installed correctly, log into the machine where the node is running and stop it:
 
@@ -181,15 +175,13 @@ You must stop the Avalanche node before you restore the database otherwise data
 could become corrupted.
 :::
 
-We're ready to restore the database. First, let's move the DB on the existing
-node (you can remove this old DB later if the restore was successful):
+We're ready to restore the database. First, let's move the DB on the existing node (you can remove this old DB later if the restore was successful):
 
 ```
 mv .avalanchego/db .avalanchego/db-old
 ```
 
-Next, we'll unzip the backup we moved from another node (this will place the
-unzipped files in `~/.avalanchego/db` when the command is run in the home directory):
+Next, we'll unzip the backup we moved from another node (this will place the unzipped files in `~/.avalanchego/db` when the command is run in the home directory):
 
 ```
 unzip avalanche_db_backup.zip

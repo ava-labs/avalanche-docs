@@ -229,9 +229,9 @@ Source: [https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?se
 
 You can also interact with a deployed subgraph programmatically from your frontend application. To do this, you will need a GraphQL client like [Apollo](https://www.apollographql.com/docs/) that will act as a communication layer between your application and The Graph. First, open up a terminal in your project folder and install Apollo and GraphQL. You can use either  [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) to install both using the commands below like so.
 
-```npm install @apollo/client graphql```
+`npm install @apollo/client graphql`
 
-```yarn add @apollo/client graphql```
+`yarn add @apollo/client graphql`
 
 Then get the API URL from the subgraph you want to use. The API URL can be gotten from The Graph explorer page of the deployed subgraph. In the Pangolin example which you have been working on, the API URL for HTTP queries is [https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex](https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex).
 
@@ -342,7 +342,7 @@ type Transfer @entity {
 }
 ```
 
-The content contains one entity - `Transfer` indicated by the `@entity` directive. The fields that may up the entity are `id`, `from`, `to`, `address`. Notice that these fields closely mirror the event signature of the Transfer event of the Pangolin token. The fields have their type specified and all are NON NULLABLE as indicated by the exclamation mark. 
+The content contains one entity - `Transfer` indicated by the `@entity` directive. The fields that may up the entity are `id`, `from`, `to`, `address`. Notice that these fields closely mirror the event signature of the Transfer event of the Pangolin token. The fields have their type specified and all are NON NULLABLE as indicated by the exclamation mark.
 
 The next important piece is the [AssemblyScript](https://www.assemblyscript.org/) Mappings. AssemblyScript is used to transform data from the blockchain’s events and GraphQL entities into a format that can be loaded on The Graph Node. Before writing your event handler mapping for the `Transfer` event in the `mappings.ts` file under the `src` folder, you will need to generate the AssemblyScript classes from your ABI and `schema.graphql` file. Run the command below to do so.
 

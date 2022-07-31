@@ -43,7 +43,7 @@ This is a node-specific configuration. Every validator of this Subnet has to use
 Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a Subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](./avalanchego-config-flags.md#snow-parameters).
 
 | CLI Key                             | JSON Key                 |
-| :---------------------------------- | :----------------------- |
+|:----------------------------------- |:------------------------ |
 | --snow-sample-size                  | k                        |
 | --snow-quorum-size                  | alpha                    |
 | --snow-virtuous-commit-threshold    | betaVirtuous             |
@@ -62,7 +62,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 It's possible to define different Gossip configurations for each Subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your Subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](./avalanchego-config-flags.md#gossiping).
 
 | CLI Key                                                 | JSON Key                               |
-| :------------------------------------------------------ | :------------------------------------- |
+|:------------------------------------------------------- |:-------------------------------------- |
 | --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
 | --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
 | --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |

@@ -63,9 +63,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **APIs**
 
-:::warning
-These API format changes are breaking changes. https://api.avax.network and https://api.avax-test.network have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal.
-:::
+:::warning These API format changes are breaking changes. https://api.avax.network and https://api.avax-test.network have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal. :::
 
 - Removed `CB58` as an encoding option from all APIs
 - Added `HexC` and `HexNC` as encoding options for all APIs that accept an encoding format
@@ -1437,17 +1435,13 @@ The patch reduces the size of gossiped peerlist messages and introduces a new fl
 
 **Apricot Phase 2**
 
-:::danger
-**Please note that this change is not backwards compatible with previous releases.**
+:::danger **Please note that this change is not backwards compatible with previous releases.**
 
-**The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
-:::
+**The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.** :::
 
-:::caution
-This upgrade applies the Ethereum Berlin upgrade to the C-chain, adds a new AVM endpoint, and includes various stability improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
+:::caution This upgrade applies the Ethereum Berlin upgrade to the C-chain, adds a new AVM endpoint, and includes various stability improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
 
-The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
-:::
+The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet. :::
 
 **The primary components to this upgrade include:**
 
@@ -1526,11 +1520,9 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 
 **Apricot Phase 1**
 
-:::danger
-Please note that this change is not backwards compatible with previous releases.
+:::danger Please note that this change is not backwards compatible with previous releases.
 
-This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
-:::
+This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy. :::
 
 The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the Fuji testnet and 10 AM EST, March 31st 2021 on mainnet.
 
@@ -1605,11 +1597,9 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 
-:::danger
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
+:::danger This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
 
-Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments.
-:::
+Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments. :::
 
 Change Summary:
 
@@ -1657,9 +1647,7 @@ Removed command line arguments:
 
 **Apricot Phase 0 - Upgrade 1**
 
-:::danger
-**Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.**
-:::
+:::danger **Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.** :::
 
 The primary components to this upgrade include:
 
@@ -1753,9 +1741,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 
 **Apricot Phase 0**
 
-:::danger
-**Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC (6 p.m. EST). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
-:::
+:::danger **Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC (6 p.m. EST). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.** :::
 
 There are two primary components to this upgrade:
 
@@ -1785,9 +1771,7 @@ For assistance with this update, you can join our [Discord](https://chat.avax.ne
 
 ## v1.0.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5))
 
-:::danger
-Please note that the release after this one, v1.0.6, will contain the breaking changes. Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
-:::
+:::danger Please note that the release after this one, v1.0.6, will contain the breaking changes. Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change. :::
 
 The changes in this release, v1.0.5, are backwards compatible with previous releases. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
 
@@ -1807,9 +1791,7 @@ For assistance with this update, you can join our [Discord](https://chat.avax.ne
 
 ## v1.0.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4))
 
-:::danger
-This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
-:::
+:::danger This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible. :::
 
 ```text
 • Added Subnet whitelisting to allow a node owner to choose which Subnets to validate.

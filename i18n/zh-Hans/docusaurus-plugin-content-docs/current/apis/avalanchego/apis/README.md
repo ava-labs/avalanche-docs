@@ -5,7 +5,7 @@ sidebar_position: 1
 # AvalancheGo APIs Overview
 
 | Title                                              | Description                                                                                                                                         |
-| :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+|:-------------------------------------------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Issuing API Calls**](issuing-api-calls.md)      | This guide explains how to make calls to APIs exposed by Avalanche nodes.                                                                           |
 | The [**Platform Chain (P-Chain) API**](p-chain.md) | Allows clients to interact with the P-Chain (Platform Chain), which maintains Avalanche’s validator set and handles blockchain and Subnet creation. |
 | The [**Contract Chain (C-Chain) API**](c-chain.md) | Allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances.                                         |

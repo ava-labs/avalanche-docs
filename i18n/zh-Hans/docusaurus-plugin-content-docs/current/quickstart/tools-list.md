@@ -1,7 +1,6 @@
 # Tools and Utilities
 
-There are a number of tools for managing your node and developing Subnets. This
-page lists the most popular ones, explains what they do and their intended usage.
+There are a number of tools for managing your node and developing Subnets. This page lists the most popular ones, explains what they do and their intended usage.
 
 ## AvalancheGo Installer
 

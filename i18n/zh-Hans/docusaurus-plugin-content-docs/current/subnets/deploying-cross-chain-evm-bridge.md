@@ -138,7 +138,7 @@ We need to set up our destination chain as follows -
 - Deploy Bridge and Handler contract with `$DST_ADDR` as default and only relayer
 - Deploy mintable and burnable ERC20 contract representing bridged `wWGM` token
 - Register the `wWGM` token as a resource on the bridge
-- Register the` wWGM` token as mintable/burnable on the bridge
+- Register the`wWGM` token as mintable/burnable on the bridge
 - Giving permissions to Handler contract to mint new `wWGM` tokens
 
 ### Deploy Contracts
@@ -269,7 +269,7 @@ echo "{
 Check and confirm the details in the `config.json` file.
 
 > In the above command, you can see that `blockConfirmations` is set to `0`. This will work well for networks like Avalanche because the block is confirmed once it's committed. Unlike other chains such as Ethereum, which requires 20-30 block confirmations. Therefore, use this configuration with caution, depending on the type of chain you are using.
->
+> 
 > It can cause serious problems if a corresponding token is minted or released based on an unconfirmed block.
 
 ### Set Up Keys

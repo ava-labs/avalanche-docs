@@ -230,7 +230,7 @@ There are various Bitcoin Improvement Proposals (BIP) that proposes the standard
 
 `m / purpose' / coin_type' / account' / change / address_index`
 
-* **purpose** - Always set to 44'. 
+* **purpose** - Always set to 44'.
 * **coin\_type** - Specifies the type of cryptocurrency coin, allowing for multicurrency HD wallets where each currency has its subtree under the second level.
 * **account** - Allows users to subdivide their wallets into separate logical subaccounts, for accounting or organizational purposes.
 * **change** - It has 2 subtrees, one normal receiving address and the other for receiving change tokens which are reverted when you supplied more than the required transaction cost.
@@ -679,13 +679,13 @@ Don't forget to set up Metamask with Avalanche Fuji testnet and also fund the ac
 
 In the Metamask extension, add a custom RPC by clicking at the network dropdown in the centre of the extension. Fill in the details as shown in the below image.
 
-| Info | Value |
-| :--- | :--- |
-| Network Name | Avalanche Fuji |
-| New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
-| Chain ID | 43113 |
-| Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
+| Info               | Value                                                                                    |
+|:------------------ |:---------------------------------------------------------------------------------------- |
+| Network Name       | Avalanche Fuji                                                                           |
+| New RPC URL        | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
+| Chain ID           | 43113                                                                                    |
+| Currency Symbol    | AVAX-C                                                                                   |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io)                             |
 
 > If you find any difficulty in setting up the project, then feel free to clone this repository [https://github.com/rajranjan0608/dfm/tree/avalanche](https://github.com/rajranjan0608/dfm/tree/avalanche), and follow the steps in the `README.md` file of this repo in order to run the application.
 

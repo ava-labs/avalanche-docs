@@ -6,9 +6,7 @@ sidebar_position: 11
 
 This API can be used to access basic information about the node.
 
-:::info
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
-:::
+:::info This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md). :::
 
 ## Format
 

@@ -65,7 +65,7 @@ contract NFT is ERC721 {
 
 Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the [ERC721 standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
 
-# Compile & deploy with Forge
+# Compile & Deploy with Forge
 
 [Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a command-line tool that ships with Foundry. Forge tests, builds, and deploys your smart contracts.
 

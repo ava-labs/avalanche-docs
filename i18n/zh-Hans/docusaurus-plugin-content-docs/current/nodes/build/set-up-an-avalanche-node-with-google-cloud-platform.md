@@ -11,9 +11,7 @@ This document was written by a community member, some information may be out of 
 
 ## Introduction
 
-Google's Cloud Platform (GCP) is a scalable, trusted and reliable hosting platform. Google operates a significant amount of it's own global networking infrastructure. It's [fiber network](https://cloud.google.com/blog/products/networking/google-cloud-networking-in-depth-cloud-cdn) is **huge** and it can provide highly stable and consistent global connectivity.
-In this article we will leverage GCP to deploy a node on which Avalanche can installed via [terraform](https://www.terraform.io/).
-Leveraging `terraform` may seem like overkill, but speaking as someone who has managed extremely large compute estates for over a decade I believe it will set you apart as an operator and administrator as it will enable you greater flexibility and provide the basis on which you can easily build further automation.
+Google's Cloud Platform (GCP) is a scalable, trusted and reliable hosting platform. Google operates a significant amount of it's own global networking infrastructure. It's [fiber network](https://cloud.google.com/blog/products/networking/google-cloud-networking-in-depth-cloud-cdn) is **huge** and it can provide highly stable and consistent global connectivity. In this article we will leverage GCP to deploy a node on which Avalanche can installed via [terraform](https://www.terraform.io/). Leveraging `terraform` may seem like overkill, but speaking as someone who has managed extremely large compute estates for over a decade I believe it will set you apart as an operator and administrator as it will enable you greater flexibility and provide the basis on which you can easily build further automation.
 
 ## Conventions
 
@@ -102,15 +100,13 @@ Authentication to GCP from terraform has a few different options which are layed
 
 :::note
 
-Depending upon how you intend to execute your terraform operations you may or may not need to enable public access to the bucket. Obviously, not exposing the bucket for `public` access (even if authenticated) is preferable. If you intend to simply run terraform commands from your local machine then you will need to open the access up.
-I recommend to employ a full CI/CD pipeline using GCP Cloud Build which if utilized will mean the bucket can be marked as `private`. A full walkthrough of Cloud Build setup in this context can be found [here](https://cloud.google.com/architecture/managing-infrastructure-as-code)
+Depending upon how you intend to execute your terraform operations you may or may not need to enable public access to the bucket. Obviously, not exposing the bucket for `public` access (even if authenticated) is preferable. If you intend to simply run terraform commands from your local machine then you will need to open the access up. I recommend to employ a full CI/CD pipeline using GCP Cloud Build which if utilized will mean the bucket can be marked as `private`. A full walkthrough of Cloud Build setup in this context can be found [here](https://cloud.google.com/architecture/managing-infrastructure-as-code)
 
 :::
 
 ### Clone Github Repository
 
-I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project).
-Documentation below assumes you are using this repository but if you have another terraform skelaton similar steps will apply.
+I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project). Documentation below assumes you are using this repository but if you have another terraform skelaton similar steps will apply.
 
 ### Terraform Configuration
 
@@ -143,5 +139,4 @@ If you want to ensure that terraform does **exactly** what you saw in the `apply
 
 ## Conclusion
 
-Establishing CI/CD practices using tools such as Github and Terraform to manage your infrastructure assets is a great way to ensure base disaster recovery capabilities and to ensure you have a place to embed any ~tweaks you have to make operationally removing the potential to miss them when you have to scale from 1 node to 10.
-Having an automated pipeline also gives you a place to build a bigger house... what starts as your interest in building and managing a single AVAX node today can quickly change into you building an infrastructure operation for many different chains working with multiple different team members. I hope this may have inspired you to take a leap into automation in this context!
+Establishing CI/CD practices using tools such as Github and Terraform to manage your infrastructure assets is a great way to ensure base disaster recovery capabilities and to ensure you have a place to embed any ~tweaks you have to make operationally removing the potential to miss them when you have to scale from 1 node to 10. Having an automated pipeline also gives you a place to build a bigger house... what starts as your interest in building and managing a single AVAX node today can quickly change into you building an infrastructure operation for many different chains working with multiple different team members. I hope this may have inspired you to take a leap into automation in this context!

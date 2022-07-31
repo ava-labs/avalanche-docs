@@ -25,11 +25,11 @@ It is _highly_ recommended that you set up Multi-Factor Authentication on your A
 
 Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
 
-![AWS Management Console.png](</img/image(35).png>)
+![AWS Management Console.png](/img/image(35).png)
 
 To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
 
-![Select "Key Pairs" under the "Network & Security" drop-down.](</img/image(38).png>)
+![Select "Key Pairs" under the "Network & Security" drop-down.](/img/image(38).png)
 
 Select **Create key pair** to launch the key pair creation wizard.
 

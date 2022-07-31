@@ -24,9 +24,7 @@ This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other
 
 ### Caveat: Security
 
-:::danger
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
-:::
+:::danger The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices. :::
 
 ## Monitoring Installer Script
 
@@ -114,9 +112,7 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z ca
 
 Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
-:::warning
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect!
-:::
+:::warning You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect! :::
 
 If everything is ok, let's move on.
 
@@ -154,9 +150,7 @@ sudo systemctl status grafana-server
 
 which should again show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` from your browser. Log in with username: admin, password: admin, and you will be prompted to set up a new, secure password. Do that.
 
-:::warning
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjust the cloud instance settings to allow connections to port 3000. If on public internet, make sure to only allow your IP to connect!
-:::
+:::warning You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjust the cloud instance settings to allow connections to port 3000. If on public internet, make sure to only allow your IP to connect! :::
 
 Prometheus and Grafana are now installed, we're ready for the next step.
 
@@ -200,8 +194,7 @@ If the service is running, Prometheus, Grafana and node_exporter should all work
 
 Make sure that all of them have `State` as `UP`.
 
-:::info
-If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
+:::info If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
 
 ```yaml
 - job_name: "avalanchego"
@@ -213,8 +206,7 @@ If you run your AvalancheGo node with TLS enabled on your API port, you will nee
     - targets: ["localhost:9650"]
 ```
 
-Mind the spacing (leading spaces too)! You will need admin privileges to do that (use `sudo`). Restart prometheus service afterwards with `sudo systemctl restart prometheus`.
-:::
+Mind the spacing (leading spaces too)! You will need admin privileges to do that (use `sudo`). Restart prometheus service afterwards with `sudo systemctl restart prometheus`. :::
 
 All that's left to do now is to provision the datasource and install the actual dashboards that will show us the data.
 

@@ -44,8 +44,7 @@ AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/aval
 
 Unless otherwise specified, file paths given below are relative to the root of this repository.
 
-When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them.
-Therefore we run one shell with the RPC server, and another one for issuing calls.
+When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them. Therefore we run one shell with the RPC server, and another one for issuing calls.
 
 ### Start the Server
 
@@ -63,8 +62,7 @@ The RPC server listens to two ports:
 - `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
 - `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
 
-When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
-Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
+When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls. Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
 
 Each of the examples below will show both modes, claritying its usage.
 

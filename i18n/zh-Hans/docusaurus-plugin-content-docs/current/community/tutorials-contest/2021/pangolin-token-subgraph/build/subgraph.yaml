@@ -2,7 +2,8 @@ specVersion: 0.0.2
 schema:
   file: schema.graphql
 dataSources:
-  - kind: ethereum/contract
+  - 
+    kind: ethereum/contract
     name: Png
     network: avalanche
     source:
@@ -15,9 +16,11 @@ dataSources:
       entities:
         - Transfer
       abis:
-        - name: Png
+        - 
+          name: Png
           file: Png/abis/Png.json
       eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
+        - 
+          event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: Png/Png.wasm

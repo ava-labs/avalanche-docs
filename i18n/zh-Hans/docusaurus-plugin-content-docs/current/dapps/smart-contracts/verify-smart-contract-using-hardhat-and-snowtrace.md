@@ -10,8 +10,7 @@ After deploying a smart contract one can verify the smart contract on Snowtrace 
 
 ## Flatten a Smart Contract using Hardhat
 
-To flatten the contract run the command:
-`npx hardhat flatten <path-to-contract> >> <flat-contract-name>.sol`
+To flatten the contract run the command: `npx hardhat flatten <path-to-contract> >> <flat-contract-name>.sol`
 
 ## Clean up the flattened Smart Contract
 
@@ -19,16 +18,14 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
 
 - Remove all but the top SPDX license.
 
-  - If the contract uses multiple SPDX licenses, use both licenses by adding AND:
-    `SPDX-License-Identifier: MIT AND BSD-3-Clause`
+  - If the contract uses multiple SPDX licenses, use both licenses by adding AND: `SPDX-License-Identifier: MIT AND BSD-3-Clause`
 
 ## Verify the Smart Contract using Snowtrace
 
 1. Search for the contract in Snowtrace
 2. Click on the contract tab
 
-   1. If the contract is unverified you will see something similar to the image below
-      ![snowtraceHH-1](/img/snowtraceHH-1.png)
+   1. If the contract is unverified you will see something similar to the image below ![snowtraceHH-1](/img/snowtraceHH-1.png)
 
    <br></br>
 
@@ -37,16 +34,14 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
 
    1. **Solidity (Single file)**
    2. **The compiler version you used to compile the deployed contract**
-   3. The open-source license type (select none if applicable)
-      ![snowtraceHH-2](/img/snowtraceHH-2.png)
+   3. The open-source license type (select none if applicable) ![snowtraceHH-2](/img/snowtraceHH-2.png)
 
    <br></br>
 
 5. Copy and paste the code from the flattened contract into the appropriate box
 6. **If optimization was used when compiling the contract, make sure to select “Yes” in the dropdown menu labeled “Optimization”**
 
-   1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number of runs
-      ![snowtraceHH-3](/img/snowtraceHH-3.png)
+   1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number of runs ![snowtraceHH-3](/img/snowtraceHH-3.png)
 
    <br></br>
 

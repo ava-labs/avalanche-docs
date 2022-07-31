@@ -103,8 +103,7 @@ If the block is produced at the target rate, the block gas cost will stay the sa
 
 If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for each second faster/slower than the target block rate accordingly.
 
-:::note
-If the `blockGasCostStep` is set to a very large number, it effectively requires block production to go no faster than the `targetBlockRate`. For example, if a block is produced two seconds faster than the target block rate, the block gas cost will increase by `2 * blockGasCostStep`.
+:::note If the `blockGasCostStep` is set to a very large number, it effectively requires block production to go no faster than the `targetBlockRate`. For example, if a block is produced two seconds faster than the target block rate, the block gas cost will increase by `2 * blockGasCostStep`.
 
 :::
 
@@ -131,9 +130,7 @@ Here are a few examples on how a genesis file is used:
 
 ### Setting the Genesis Allocation
 
-Alloc defines addresses and their initial balances. This should be changed accordingly for each chain. If you don't
-provide any genesis allocation, you won't be able to interact with your new
-chain (all transactions require a fee to be paid from the sender's balance).
+Alloc defines addresses and their initial balances. This should be changed accordingly for each chain. If you don't provide any genesis allocation, you won't be able to interact with your new chain (all transactions require a fee to be paid from the sender's balance).
 
 The `alloc` field expects key-value pairs. Keys of each entry must be a valid `address`. The `balance` field in the value can be either a `hexadecimal` or `number` to indicate initial balance of the address. The default value contains `8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` with `50000000000000000000000000` balance in it. Default:
 
@@ -158,10 +155,7 @@ To specify a different genesis allocation, populate the `alloc` field in the gen
   },
 ```
 
-The keys in the allocation are [hex](https://en.wikipedia.org/wiki/Hexadecimal) addresses **without the canonical `0x` prefix**.
-The balances are denominated in Wei ([10^18 Wei = 1 Whole Unit of Native Token](https://eth-converter.com/)) and expressed as
-hex strings **with the canonical `0x` prefix**. You can use [this converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html)
-to translate between decimal and hex numbers.
+The keys in the allocation are [hex](https://en.wikipedia.org/wiki/Hexadecimal) addresses **without the canonical `0x` prefix**. The balances are denominated in Wei ([10^18 Wei = 1 Whole Unit of Native Token](https://eth-converter.com/)) and expressed as hex strings **with the canonical `0x` prefix**. You can use [this converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html) to translate between decimal and hex numbers.
 
 The above example yields the following genesis allocations (denominated in whole units of the native token ie. 1 AVAX/1 WAGMI):
 
@@ -172,11 +166,9 @@ The above example yields the following genesis allocations (denominated in whole
 
 ### Setting a Custom Fee Recipient
 
-By default, all fees are burned (sent to the blackhole address with `"allowFeeRecipients": false`). However, it is
-possible to enable block producers to set a fee recipient (who will get compensated for blocks they produce).
+By default, all fees are burned (sent to the blackhole address with `"allowFeeRecipients": false`). However, it is possible to enable block producers to set a fee recipient (who will get compensated for blocks they produce).
 
-To enable this feature, you'll need to add the following to your
-genesis file (under the `"config"` key):
+To enable this feature, you'll need to add the following to your genesis file (under the `"config"` key):
 
 ```json
 {
@@ -208,8 +200,7 @@ Subnet EVM can provide custom functionalities with precompiled contracts. These 
 
 ### Restricting Smart Contract Deployers
 
-If you'd like to restrict who has the ability to deploy contracts on your
-subnet, you can provide an `AllowList` configuration in your genesis file:
+If you'd like to restrict who has the ability to deploy contracts on your subnet, you can provide an `AllowList` configuration in your genesis file:
 
 ```json
 {
@@ -222,13 +213,7 @@ subnet, you can provide an `AllowList` configuration in your genesis file:
 }
 ```
 
-In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admins` or to add
-`Deployers`. Both `Admins` and `Deployers` can deploy contracts. To provide
-a great UX with factory contracts, the `tx.Origin` is checked for being a valid
-deployer instead of the caller of `CREATE`. This means that factory contracts will still be
-able to create new contracts as long as the sender of the original transaction is an allow
-listed deployer.
+In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the `Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admins` or to add `Deployers`. Both `Admins` and `Deployers` can deploy contracts. To provide a great UX with factory contracts, the `tx.Origin` is checked for being a valid deployer instead of the caller of `CREATE`. This means that factory contracts will still be able to create new contracts as long as the sender of the original transaction is an allow listed deployer.
 
 The `Stateful Precompile` powering the `ContractDeployerAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
 
@@ -255,13 +240,9 @@ interface AllowListInterface {
 }
 ```
 
-If you attempt to add a `Deployer` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
+If you attempt to add a `Deployer` and you are not an `Admin`, you will see something like: ![admin fail](/img/admin_fail.png)
 
-If you attempt to deploy a contract but you are not an `Admin` not
-a `Deployer`, you will see something like:
-![deploy fail](/img/deploy_fail.png)
+If you attempt to deploy a contract but you are not an `Admin` not a `Deployer`, you will see something like: ![deploy fail](/img/deploy_fail.png)
 
 The allow list has three roles: `None`, `Deployer`, and `Admin`.
 
@@ -284,9 +265,7 @@ Similar to restricting contract deployers, this precompile restricts which addre
 }
 ```
 
-In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables them to add other `Admins` or to add
-`Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
+In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the `Admin` of the `ContractDeployerAllowList`. This enables them to add other `Admins` or to add `Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
 
 The `Stateful Precompile` powering the `TxAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
 
@@ -313,12 +292,9 @@ interface AllowListInterface {
 }
 ```
 
-If you attempt to add an `Allowed` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
+If you attempt to add an `Allowed` and you are not an `Admin`, you will see something like: ![admin fail](/img/admin_fail.png)
 
-If you attempt to submit a transaction but you are not an `Admin` or not
-`Allowed`, you will see something like: `cannot issue transaction from non-allow listed address`
+If you attempt to submit a transaction but you are not an `Admin` or not `Allowed`, you will see something like: `cannot issue transaction from non-allow listed address`
 
 The allow list has three roles: `None`, `Allowed`, and `Admin`.
 
@@ -448,13 +424,9 @@ For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../
 
 ### Priority Regossip
 
-A transaction is "regossiped" when the node does not find the transaction in
-a block after `priority-regossip-frequency` (defaults to `1m`). By default, up to 16 transactions
-(max 1 per address) are regossiped to validators per minute.
+A transaction is "regossiped" when the node does not find the transaction in a block after `priority-regossip-frequency` (defaults to `1m`). By default, up to 16 transactions (max 1 per address) are regossiped to validators per minute.
 
-Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of
-important addresses (like bridge relayers). To do so, you'll need to update your
-[chain config](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) with the following:
+Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of important addresses (like bridge relayers). To do so, you'll need to update your [chain config](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) with the following:
 
 ```json
 {
@@ -462,8 +434,7 @@ important addresses (like bridge relayers). To do so, you'll need to update your
 }
 ```
 
-By default, up to 32 transactions from priority addresses (max 16 per address) are regossipped to validators per second.
-You can override these defaults with the following config:
+By default, up to 32 transactions from priority addresses (max 16 per address) are regossipped to validators per second. You can override these defaults with the following config:
 
 ```json
 {

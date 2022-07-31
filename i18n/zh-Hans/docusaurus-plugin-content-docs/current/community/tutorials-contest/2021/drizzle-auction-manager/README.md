@@ -7,7 +7,7 @@ Learn how to create an Avalanche-based auction bidding with a ReactJS frontend.
 
 We will learn how to build smart contracts by making an auction bidding and deploy them on Avalanche and interact with them using ReactJS and Drizzle.
 
-We are going to generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our auction bidding frontend. React is useful for the frontend due to its efficiency and user-friendly blockchain interaction. For the backend,  [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the Avalanche blockchain using [Truffle Suite](https://www.trufflesuite.com). 
+We are going to generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our auction bidding frontend. React is useful for the frontend due to its efficiency and user-friendly blockchain interaction. For the backend,  [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the Avalanche blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
 ## Prerequisites
 
@@ -27,8 +27,7 @@ We are going to generate [ReactJS](https://reactjs.org) boilerplate code using `
 
 The developer needs to set up a working directory according to ReactJS and Truffle.
 
-Follow the steps below to create the application. Open up the terminal and navigate to the directory where you would like to create this application.
-Now create a new directory with `mkdir <directory_name>` command. Change the current directory to this newly created directory using `cd <directory_name>`. For instance: if we name it `bid`, then
+Follow the steps below to create the application. Open up the terminal and navigate to the directory where you would like to create this application. Now create a new directory with `mkdir <directory_name>` command. Change the current directory to this newly created directory using `cd <directory_name>`. For instance: if we name it `bid`, then
 
 ```bash
 mkdir bid
@@ -100,7 +99,7 @@ To create a boilerplate for the Truffle project execute the following command in
 truffle init
 ```
 Now, the initial project is being set up. Solidity code will be stored in the `contracts` directory. Deployment functions written in JavaScript will be stored in the `migrations` folder. By default, the `/build/contracts` folder contains information about the compiled and deployed contract, like the ABI, in JSON format. These meta-files are commonly referred to as `artifacts`.
- 
+
 `truffle-config.js` is another *config* file created by the `truffle init` command. This file carries a lot of information like how to deploy a contract, how to choose a network to deploy the following contract, and much more. Thus it became a priority to save this file for reference and we can create a copy of this file using the command mentioned below.
 
 ```bash
@@ -492,7 +491,7 @@ export function DrizzleProvider({ drizzle, children }) {
         }
     });
     drizzleVariables.initialized && unsubscribe()
-    
+
     return <Context.Provider value={{drizzle, drizzleVariables}}>{children}</Context.Provider>;
 }
 
@@ -556,7 +555,7 @@ const [cacheKeys, setCacheKey] = useState({
     auctionAnalytics: [null]
 });
 ```
-Suppose we want to cache `isRegistered` method, then this can be done using 
+Suppose we want to cache `isRegistered` method, then this can be done using
 ```javascript
 const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0]);
 setCacheKey({
@@ -585,13 +584,13 @@ Don't forget to set up Metamask with Avalanche Fuji testnet and also fund the ac
 
 In the Metamask extension, add a custom RPC by clicking at the network dropdown in the center of the extension. Fill in the details as shown in the below image.
 
-| Info | Value |
-| :--- | :--- |
-| Network Name | Avalanche Fuji |
-| New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
-| Chain ID | 43113 |
-| Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
+| Info               | Value                                                                                    |
+|:------------------ |:---------------------------------------------------------------------------------------- |
+| Network Name       | Avalanche Fuji                                                                           |
+| New RPC URL        | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
+| Chain ID           | 43113                                                                                    |
+| Currency Symbol    | AVAX-C                                                                                   |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io)                             |
 
 
 ![](./assets/drizzle-auction-01-demo-drizzle-auction.gif)

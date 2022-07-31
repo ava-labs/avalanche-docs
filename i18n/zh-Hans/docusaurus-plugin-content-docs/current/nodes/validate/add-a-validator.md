@@ -10,9 +10,7 @@ The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-t
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which Subnets, which blockchains exist, and which Subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
-:::warning
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, feel free to join our [Discord](https://chat.avalabs.org/) to ask questions.
-:::
+:::warning Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, feel free to join our [Discord](https://chat.avalabs.org/) to ask questions. :::
 
 ## Requirements
 
@@ -155,12 +153,9 @@ This is the node ID of the validator being added. See [above section](#retrieve-
 
 `startTime` and `endTime` are required to specify the time of starting/leaving validation. The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can start a new validation on the Primary Network after finishing one, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
-The sample code uses `const startTime: BN = UnixNow().add(new BN(60 * 1))` and
-`const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future (at the time when this article was written) to use as the values of `startTime` and `endTime`, respectively.
+The sample code uses `const startTime: BN = UnixNow().add(new BN(60 * 1))` and `const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future (at the time when this article was written) to use as the values of `startTime` and `endTime`, respectively.
 
-:::tip
-You can create your own unix timestamp [here](https://www.unixtimestamp.com/) or by using the `UnixNow()` method
-:::
+:::tip You can create your own unix timestamp [here](https://www.unixtimestamp.com/) or by using the `UnixNow()` method :::
 
 To create your own start times, please follow the steps below:
 
@@ -276,8 +271,7 @@ When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this nod
 
 #### Customizing Addresses
 
-There are 4 addresses which are needed when calling `pchain.buildAddValidatorTx`. Only 2 of them can be changed: `toAddresses` and `rewardAddresses`. For backward-compatibility reasons, `fromAddresses` and `changeAddresses`
-are just placeholders and are ignored.
+There are 4 addresses which are needed when calling `pchain.buildAddValidatorTx`. Only 2 of them can be changed: `toAddresses` and `rewardAddresses`. For backward-compatibility reasons, `fromAddresses` and `changeAddresses` are just placeholders and are ignored.
 
 `toAddresses`
 

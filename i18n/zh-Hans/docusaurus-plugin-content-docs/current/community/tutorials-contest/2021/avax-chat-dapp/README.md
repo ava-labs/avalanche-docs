@@ -8,7 +8,7 @@ In this tutorial we will build a decentralized chat application on Avalanche's F
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
 
-# Implementing the smart contract 
+# Implementing the smart contract
 
 Our chat dApp needs the basic functionality allowing users to connect with and share messages with friends. To accomplish this, we will write the functions responsible for creating an account, adding friends and sending messages.
 
@@ -19,7 +19,7 @@ We will define 3 functions :
 * The `checkUserExists(pubkey)` function is used to check if a user is registered with our application or not. It will help make sure duplicate users are not created and it will also be called from other functions to check their existence.
 
 * The `createAccount(username)` function registers a new user on the platform with the provided username.
-    
+
 * The `getUsername(pubkey)` function will return the username of the given user if it exists.
 
 ## Adding friends
@@ -88,7 +88,7 @@ Create a `Database.sol` file in the Remix file explorer, and paste the following
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Database {
-    
+
     // Stores the default name of an user and her friends info
     struct user {
         string name;
@@ -112,47 +112,47 @@ contract Database {
     mapping(address => user) userList;
     // Collection of messages communicated in a channel between two users
     mapping(bytes32 => message[]) allMessages; // key : Hash(user1,user2)
-    
+
     // It checks whether a user(identified by its public key)
     // has created an account on this application or not
     function checkUserExists(address pubkey) public view returns(bool) {
         return bytes(userList[pubkey].name).length > 0;
     }
-    
+
     // Registers the caller(msg.sender) to our app with a non-empty username
     function createAccount(string calldata name) external {
         require(checkUserExists(msg.sender)==false, "User already exists!");
         require(bytes(name).length>0, "Username cannot be empty!"); 
         userList[msg.sender].name = name;
     }
-    
+
     // Returns the default name provided by an user
     function getUsername(address pubkey) external view returns(string memory) {
         require(checkUserExists(pubkey), "User is not registered!");
         return userList[pubkey].name;
     }
-    
+
     // Adds new user as your friend with an associated nickname
     function addFriend(address friend_key, string calldata name) external {
         require(checkUserExists(msg.sender), "Create an account first!");
         require(checkUserExists(friend_key), "User is not registered!");
         require(msg.sender!=friend_key, "Users cannot add themselves as friends!");
         require(checkAlreadyFriends(msg.sender,friend_key)==false, "These users are already friends!");
-        
+
         _addFriend(msg.sender, friend_key, name);
         _addFriend(friend_key, msg.sender, userList[msg.sender].name);
     }
-    
+
     // Checks if two users are already friends or not
     function checkAlreadyFriends(address pubkey1, address pubkey2) internal view returns(bool) {
-        
+
         if(userList[pubkey1].friendList.length > userList[pubkey2].friendList.length)
         {
             address tmp = pubkey1;
             pubkey1 = pubkey2;
             pubkey2 = tmp;
         }
-    
+
         for(uint i=0; i<userList[pubkey1].friendList.length; ++i)
         {
             if(userList[pubkey1].friendList[i].pubkey == pubkey2)
@@ -160,18 +160,18 @@ contract Database {
         }
         return false;
     }
-    
+
     // A helper function to update the friendList
     function _addFriend(address me, address friend_key, string memory name) internal {
         friend memory newFriend = friend(friend_key,name);
         userList[me].friendList.push(newFriend);
     }
-    
+
     // Returns list of friends of the sender
     function getMyFriendList() external view returns(friend[] memory) {
         return userList[msg.sender].friendList;
     }
-    
+
     // Returns a unique code for the channel created between the two users
     // Hash(key1,key2) where key1 is lexicographically smaller than key2
     function _getChatCode(address pubkey1, address pubkey2) internal pure returns(bytes32) {
@@ -180,18 +180,18 @@ contract Database {
         else
             return keccak256(abi.encodePacked(pubkey2, pubkey1));
     }
-    
+
     // Sends a new message to a given friend
     function sendMessage(address friend_key, string calldata _msg) external {
         require(checkUserExists(msg.sender), "Create an account first!");
         require(checkUserExists(friend_key), "User is not registered!");
         require(checkAlreadyFriends(msg.sender,friend_key), "You are not friends with the given user");
-        
+
         bytes32 chatCode = _getChatCode(msg.sender, friend_key);
         message memory newMsg = message(msg.sender, block.timestamp, _msg);
         allMessages[chatCode].push(newMsg);
     }
-    
+
     // Returns all the chat messages communicated in a channel
     function readMessage(address friend_key) external view returns(message[] memory) {
         bytes32 chatCode = _getChatCode(msg.sender, friend_key);
@@ -202,11 +202,11 @@ contract Database {
 
 Navigate to the Solidity compiler Tab on the left side navigation bar and click the blue button to compile the `Database.sol` contract. Note down the `ABI` as it will be required in the next section.
 
-Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected Web3" (make sure Metamask is loaded) and click "Deploy" button. 
+Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected Web3" (make sure Metamask is loaded) and click "Deploy" button.
 
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, Note down the `contract address`.
- 
-> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
+
+> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)
 
 # Creating a frontend in React
 
@@ -386,7 +386,7 @@ export function AddNewChat( props ){
                 </Modal.Footer>
             </Modal>
         </div>  
-    
+
     );
 }
 ```
@@ -421,7 +421,7 @@ export function App( props ) {
     const [activeChatMessages, setActiveChatMessages] = useState(null);
     const [showConnectButton, setShowConnectButton] = useState("block");
     const [myContract, setMyContract] = useState(null);
-  
+
     // Save the contents of abi in a variable
     const contractABI = abi; 
     let provider;
@@ -434,24 +434,24 @@ export function App( props ) {
             provider = new ethers.providers.Web3Provider( window.ethereum );
             signer = provider.getSigner();
             try {
-				const contract = new ethers.Contract( CONTRACT_ADDRESS, contractABI, signer );
-				setMyContract( contract );
-				const address = await signer.getAddress();         
-				let present = await contract.checkUserExists( address );
-				let username;
-				if( present )
-					username = await contract.getUsername( address );
-				else {
-					username = prompt('Enter a username', 'Guest'); 
-					if( username === '' ) username = 'Guest';
-					await contract.createAccount( username );
-				}
-				setMyName( username );
-				setMyPublicKey( address );
-				setShowConnectButton( "none" );
-			} catch(err) {
-				alert("CONTRACT_ADDRESS not set properly!");
-			}
+                const contract = new ethers.Contract( CONTRACT_ADDRESS, contractABI, signer );
+                setMyContract( contract );
+                const address = await signer.getAddress();         
+                let present = await contract.checkUserExists( address );
+                let username;
+                if( present )
+                    username = await contract.getUsername( address );
+                else {
+                    username = prompt('Enter a username', 'Guest'); 
+                    if( username === '' ) username = 'Guest';
+                    await contract.createAccount( username );
+                }
+                setMyName( username );
+                setMyPublicKey( address );
+                setShowConnectButton( "none" );
+            } catch(err) {
+                alert("CONTRACT_ADDRESS not set properly!");
+            }
         } else {
             alert("Couldn't connect to Metamask");
         }    
@@ -470,21 +470,21 @@ export function App( props ) {
     // Add a friend to the users' Friends List
     async function addChat( name, publicKey ) {
         try {
-			let present = await myContract.checkUserExists( publicKey );
-			if( !present ) {
-				alert("Given address not found: Ask him to join the app :)");
-				return;
-			}
-			try {
-				await myContract.addFriend( publicKey, name );
-				const frnd = { "name": name, "publicKey": publicKey };
-				setFriends( friends.concat(frnd) );
-			} catch(err) {
-				alert("Friend already Added! You can't be friend with the same person twice ;P");
-			}
-		} catch(err) {
-			alert("Invalid address!")
-		}
+            let present = await myContract.checkUserExists( publicKey );
+            if( !present ) {
+                alert("Given address not found: Ask him to join the app :)");
+                return;
+            }
+            try {
+                await myContract.addFriend( publicKey, name );
+                const frnd = { "name": name, "publicKey": publicKey };
+                setFriends( friends.concat(frnd) );
+            } catch(err) {
+                alert("Friend already Added! You can't be friend with the same person twice ;P");
+            }
+        } catch(err) {
+            alert("Invalid address!")
+        }
     }
 
     // Sends messsage to an user 
@@ -542,7 +542,7 @@ export function App( props ) {
             <Message marginLeft={ margin } sender={ sender } data={ message.data } timeStamp={ message.timeStamp } />
         );
     }) : null;
-  
+
     // Displays each card
     const chats = friends ? friends.map( ( friend ) => {
      return (
@@ -592,10 +592,10 @@ export function App( props ) {
                         {/* The form with send button and message input fields */}
                         <div className="SendMessage"  style={{ borderTop:"2px solid black", position:"relative", bottom:"0px", padding:"10px 45px 0 45px", margin:"0 95px 0 0", width:"97%" }}>
                             <Form onSubmit={ (e) => {
-			                	e.preventDefault();
-			                	sendMessage( document.getElementById( 'messageData' ).value );
-			                	document.getElementById( 'messageData' ).value = "";
-			                }}>
+                                e.preventDefault();
+                                sendMessage( document.getElementById( 'messageData' ).value );
+                                document.getElementById( 'messageData' ).value = "";
+                            }}>
                                 <Form.Row className="align-items-center">
                                     <Col xs={9}>
                                         <Form.Control id="messageData" className="mb-2"  placeholder="Send Message" />
@@ -789,8 +789,8 @@ export const abi = [
     }
 ]
 ```
- 
-> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
+
+> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)
 
 Now its time to run our React app. Use the following command to start the React app.
 ```bash
@@ -802,11 +802,11 @@ npm start
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the app.
 
 * User registration and adding a new friend  
-![preview](./images/avax-chat-app-register.gif)   
-Make sure your friend is also registered to the application while adding him as a friend.
+  ![preview](./images/avax-chat-app-register.gif)   
+  Make sure your friend is also registered to the application while adding him as a friend.
 
 * Chatting with friend  
-![preview](./images/avax-chat-app-chat_preview.gif)
+  ![preview](./images/avax-chat-app-chat_preview.gif)
 
 # Conclusion
 Congratulations! We have successfully developed a decentralized chat application which can be deployed on Avalanche. We also created a boilerplate React application to use as the frontend for our dApp. As a next step, You can improve the application by adding features like delete messages, block users, or create groups of friends. You can also optimize the gas cost by limiting the maximum number of messages stored.
@@ -825,8 +825,7 @@ Congratulations! We have successfully developed a decentralized chat application
 
 ## Application crash
 
-![Error](./images/avax-chat-app-error.png)
-Check if you have updated the `CONTRACT_ADDRESS` variable in `src/index.js` properly!
+![Error](./images/avax-chat-app-error.png) Check if you have updated the `CONTRACT_ADDRESS` variable in `src/index.js` properly!
 
 # About the Author(s)
 

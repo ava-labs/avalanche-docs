@@ -1,7 +1,7 @@
 # Smart Contracts Overview
 
 | Title                                                                                                                                 | Description                                                                                   |
-| :------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------- |
+|:------------------------------------------------------------------------------------------------------------------------------------- |:--------------------------------------------------------------------------------------------- |
 | [**Add Avalanche to MetaMask programmatically**](add-avalanche-to-metamask-programmatically.md)                                       | Simple tutorial showing how to add Avalanche network to MetaMask from your front-end code.    |
 | [**Create an ERC-20 Token Using Solidity**](create-erc-20-token-on-avalanche-c-chain.md)                                              | Create an Ethereum ERC-20 token on Avalanche.                                                 |
 | [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Deploy and test a smart contract on Avalanche using Remix and MetaMask.                       |

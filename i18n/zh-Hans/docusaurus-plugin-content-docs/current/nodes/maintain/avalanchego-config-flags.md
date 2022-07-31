@@ -169,47 +169,46 @@ As an alternative to `--db-config-file`, it allows specifying base64 encoded dat
 
 #### LevelDB Config
 
-A LevelDB config file must be JSON and may have these keys.
-Any keys not given will receive the default value.
+A LevelDB config file must be JSON and may have these keys. Any keys not given will receive the default value.
 
 ```go
 {
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
-	"blockCacheCapacity": int
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
-	"blockSize": int
-	// CompactionExpandLimitFactor limits compaction size after expanded.  This
-	// will be multiplied by table size limit at compaction target level.
-	"compactionExpandLimitFactor": int
-	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
-	// that a single 'sorted table' generates.  This will be multiplied by
-	// table size limit at grandparent level.
-	"compactionGPOverlapsFactor": int
-	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
-	// trigger compaction.
-	"compactionL0Trigger": int
-	// CompactionSourceLimitFactor limits compaction source size. This doesn't
-	// apply to level-0.  This will be multiplied by table size limit at
-	// compaction target level.
-	"compactionSourceLimitFactor": int
-	// CompactionTableSize limits size of 'sorted table' that compaction
-	// generates.  The limits for each level will be calculated as:
-	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
-	// The multiplier for each level can also fine-tuned using
-	// CompactionTableSizeMultiplierPerLevel.
-	"compactionTableSize": int
-	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
-	"compactionTableSizeMultiplier": float
-	"compactionTableSizeMultiplierPerLevel": []float
-	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
-	"compactionTotalSizeMultiplier": float64
-	// OpenFilesCacheCapacity defines the capacity of the open files caching.
-	"openFilesCacheCapacity": int
-	// There are two buffers of size WriteBuffer used.
-	"writeBuffer": int
-	"filterBitsPerKey": int
+    // BlockSize is the minimum uncompressed size in bytes of each 'sorted
+    // table' block.
+    "blockCacheCapacity": int
+    // BlockSize is the minimum uncompressed size in bytes of each 'sorted
+    // table' block.
+    "blockSize": int
+    // CompactionExpandLimitFactor limits compaction size after expanded.  This
+    // will be multiplied by table size limit at compaction target level.
+    "compactionExpandLimitFactor": int
+    // CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
+    // that a single 'sorted table' generates.  This will be multiplied by
+    // table size limit at grandparent level.
+    "compactionGPOverlapsFactor": int
+    // CompactionL0Trigger defines number of 'sorted table' at level-0 that will
+    // trigger compaction.
+    "compactionL0Trigger": int
+    // CompactionSourceLimitFactor limits compaction source size. This doesn't
+    // apply to level-0.  This will be multiplied by table size limit at
+    // compaction target level.
+    "compactionSourceLimitFactor": int
+    // CompactionTableSize limits size of 'sorted table' that compaction
+    // generates.  The limits for each level will be calculated as:
+    //   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
+    // The multiplier for each level can also fine-tuned using
+    // CompactionTableSizeMultiplierPerLevel.
+    "compactionTableSize": int
+    // CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+    "compactionTableSizeMultiplier": float
+    "compactionTableSizeMultiplierPerLevel": []float
+    // CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+    "compactionTotalSizeMultiplier": float64
+    // OpenFilesCacheCapacity defines the capacity of the open files caching.
+    "openFilesCacheCapacity": int
+    // There are two buffers of size WriteBuffer used.
+    "writeBuffer": int
+    "filterBitsPerKey": int
 }
 ```
 
@@ -364,9 +363,7 @@ The port through which the network peers will connect to this node externally. H
 
 Avalanche uses Proof of Stake (PoS) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`. Note that this can not be specified on public networks (`Fuji` and `Mainnet`).
 
-Setting this flag to `false` **does not** mean "this node is not a validator."
-It means that this node will sample all nodes, not just validators.
-**You should not set this flag to false unless you understand what you are doing.**
+Setting this flag to `false` **does not** mean "this node is not a validator." It means that this node will sample all nodes, not just validators. **You should not set this flag to false unless you understand what you are doing.**
 
 #### `--staking-tls-cert-file` (string, file path):
 
@@ -506,8 +503,7 @@ build-dir
 
 ### Consensus Parameters
 
-:::note
-Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
+:::note Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
 
 :::
 
@@ -763,19 +759,15 @@ Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics chang
 
 ##### `throttler-inbound-cpu-validator-alloc` (float):
 
-Number of CPU allocated for use by validators. Value should be in range (0, total core count].
-Defaults to half of the number of CPUs on the machine.
+Number of CPU allocated for use by validators. Value should be in range (0, total core count]. Defaults to half of the number of CPUs on the machine.
 
 ##### `--throttler-inbound-cpu-at-large-alloc` (float):
 
-Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
-Defaults to half of the number of CPUs on the machine.
-See also `--throttler-inbound-cpu-node-max-at-large-portion`.
+Number of CPU allocated for use by any peer. Value should be in range (0, total core count]. Defaults to half of the number of CPUs on the machine. See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 
 ##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
-The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
-For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node. For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to`1/3`.
 
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
@@ -815,9 +807,7 @@ Rate-limiting based on the number of unprocessed messages.
 
 ##### `--throttler-inbound-node-max-processing-msgs` (uint):
 
-Node will stop reading messages from a peer when it is processing this many messages from the peer.
-Will resume reading messages from the peer when it is processing less than this many messages.
-Defaults to `1024`.
+Node will stop reading messages from a peer when it is processing this many messages from the peer. Will resume reading messages from the peer when it is processing less than this many messages. Defaults to `1024`.
 
 #### Outbound
 
@@ -869,7 +859,7 @@ Defaults to `20`.
 
 Defaults to `10`.
 
-#### ` --network-peer-read-buffer-size` (int):
+#### `--network-peer-read-buffer-size` (int):
 
 Size of the buffer that peer messages are read into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
 

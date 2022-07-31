@@ -1,5 +1,5 @@
 {
     "port": 8081,
-    "avax_server" : "http://localhost",
-    "avax_port" : 9650
+    "avax_server": "http://localhost",
+    "avax_port": 9650
 }

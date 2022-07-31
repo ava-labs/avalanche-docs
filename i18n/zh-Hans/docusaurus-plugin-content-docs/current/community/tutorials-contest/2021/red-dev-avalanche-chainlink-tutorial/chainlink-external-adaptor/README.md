@@ -2,13 +2,11 @@
 
 Adaptor for communicating smart contract with real world data
 
-cd chainlink-external-adaptor/
-npm install
+cd chainlink-external-adaptor/ npm install
 
 # start / stop server
 
-npm run startServer -  To start the server
-npm run stopServer - TO stop the server
+npm run startServer -  To start the server npm run stopServer - TO stop the server
 
 Usage
 *****

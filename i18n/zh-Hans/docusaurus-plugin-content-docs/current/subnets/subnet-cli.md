@@ -12,8 +12,7 @@ cd subnet-cli;
 go install -v .;
 ```
 
-Once you have installed `subnet-cli`, run command `subnet-cli` to confirm it is
-working as expected (_make sure your $GOBIN is in your $PATH_):
+Once you have installed `subnet-cli`, run command `subnet-cli` to confirm it is working as expected (_make sure your $GOBIN is in your $PATH_):
 
 ### Pre-Built Binaries
 
@@ -58,8 +57,7 @@ Should a `subnet-cli` command call an API end point, `--public-uri` is used to s
 
 ### Ledger Support
 
-To use your [ledger](https://www.ledger.com) with `subnet-cli`, just add the
-`-l`/`--ledger` flag to any command.
+To use your [ledger](https://www.ledger.com) with `subnet-cli`, just add the `-l`/`--ledger` flag to any command.
 
 For example, to create 4 node network on Fuji Testnet with Ledger, you would run:
 
@@ -72,19 +70,15 @@ subnet-cli wizard \
 --chain-name=test
 ```
 
-:::tip
-We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
+:::tip We strongly recommend that you use ledger for any operation on Mainnet and practice it on Fuji Testnet.
 
-Make sure you've downloaded the latest version of the
-[Avalanche Ledger App](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)!
+Make sure you've downloaded the latest version of the [Avalanche Ledger App](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)!
 
 :::
 
 ### `subnet-cli create VMID`
 
-This command is used to generate a valid VMID based on some string to uniquely
-identify a VM. This should stay the same for all versions of the VM, so it
-should be based on a word rather than the hash of some code.
+This command is used to generate a valid VMID based on some string to uniquely identify a VM. This should stay the same for all versions of the VM, so it should be based on a word rather than the hash of some code.
 
 ```bash
 subnet-cli create VMID <identifier> [--hash]
@@ -104,8 +98,7 @@ created a new VMID srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy from subnet
 created a new key ".subnet-cli.pk"
 ```
 
-This creates a file `.subnet-cli.pk` under the current directory with a private key. By default,
-`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions.
+This creates a file `.subnet-cli.pk` under the current directory with a private key. By default, `subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions.
 
 #### Fuji TestNet
 
@@ -129,8 +122,7 @@ For Mainnet, we strongly recommend to use an account associated with a [ledger](
 
 `wizard` is a magical command that:
 
-- Adds all NodeIDs as validators to the primary network (skipping any that
-  already exist)
+- Adds all NodeIDs as validators to the primary network (skipping any that already exist)
 - Creates a Subnet
 - Adds all NodeIDs as validators on the Subnet
 - Creates a new blockchain
@@ -148,12 +140,12 @@ Here is a command to create a Subnet on Fuji Testnet:
 And its full printed log on the console:
 
 ```text
-2022-05-20T15:20:15.431-0600	info	client/client.go:81	fetching X-Chain id
-2022-05-20T15:20:15.766-0600	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
-2022-05-20T15:20:15.766-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "https://api.avax-test.network"}
-2022-05-20T15:20:15.788-0600	info	client/client.go:105	fetched AVAX asset id	{"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
-2022-05-20T15:20:15.788-0600	info	client/client.go:107	fetching network information
-2022-05-20T15:20:15.822-0600	info	client/client.go:116	fetched network information	{"networkId": 5, "networkName": "fuji"}
+2022-05-20T15:20:15.431-0600    info    client/client.go:81 fetching X-Chain id
+2022-05-20T15:20:15.766-0600    info    client/client.go:87 fetched X-Chain id  {"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
+2022-05-20T15:20:15.766-0600    info    client/client.go:96 fetching AVAX asset id  {"uri": "https://api.avax-test.network"}
+2022-05-20T15:20:15.788-0600    info    client/client.go:105    fetched AVAX asset id   {"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
+2022-05-20T15:20:15.788-0600    info    client/client.go:107    fetching network information
+2022-05-20T15:20:15.822-0600    info    client/client.go:116    fetched network information {"networkId": 5, "networkName": "fuji"}
 
 nBwT3MfSHA4es5o3iB5cMtkPng4eC861 is already a validator on 11111111111111111111111111111111LpoYY
 
@@ -186,14 +178,14 @@ Ready to run wizard, should we continue?
 ✔ Yes, let's create! I agree to pay the fee!
 
 
-2022-05-20T15:20:19.820-0600	info	client/p.go:131	creating subnet	{"dryMode": false, "assetId": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK", "createSubnetTxFee": 100000000}
-2022-05-20T15:20:19.996-0600	info	platformvm/checker.go:74	polling subnet	{"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW"}
-2022-05-20T15:20:19.997-0600	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "expectedStatus": "Committed"}
-2022-05-20T15:20:19.997-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T15:20:22.075-0600	info	poll/poll.go:66	poll confirmed	{"took": "2.077636191s"}
-2022-05-20T15:20:22.075-0600	info	platformvm/checker.go:88	finding subnets	{"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW"}
-2022-05-20T15:20:22.075-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T15:20:22.274-0600	info	poll/poll.go:66	poll confirmed	{"took": "199.097562ms"}
+2022-05-20T15:20:19.820-0600    info    client/p.go:131 creating subnet {"dryMode": false, "assetId": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK", "createSubnetTxFee": 100000000}
+2022-05-20T15:20:19.996-0600    info    platformvm/checker.go:74    polling subnet  {"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW"}
+2022-05-20T15:20:19.997-0600    info    platformvm/checker.go:48    polling P-Chain tx  {"txId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "expectedStatus": "Committed"}
+2022-05-20T15:20:19.997-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T15:20:22.075-0600    info    poll/poll.go:66 poll confirmed  {"took": "2.077636191s"}
+2022-05-20T15:20:22.075-0600    info    platformvm/checker.go:88    finding subnets {"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW"}
+2022-05-20T15:20:22.075-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T15:20:22.274-0600    info    poll/poll.go:66 poll confirmed  {"took": "199.097562ms"}
 created subnet "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW" (took 2.276733753s)
 
 
@@ -204,16 +196,16 @@ When you're finished, restart your node.
 ✔ Yes, let's continue! I've updated --whitelisted-subnets, built my VM, and restarted my node(s)!
 
 
-2022-05-20T15:21:48.203-0600	info	client/p.go:299	adding subnet validator	{"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "txFee": 1000000, "start": "2022-05-20T15:22:17.781-0600", "end": "2023-03-16T14:52:49.000-0600", "weight": 1000}
-2022-05-20T15:21:48.457-0600	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "fHt8L9EHx1UJiEYmEZ3zVCpYssKirRvkQmPfufdvUMhueXRK5", "expectedStatus": "Committed"}
-2022-05-20T15:21:48.457-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T15:21:50.670-0600	info	poll/poll.go:66	poll confirmed	{"took": "2.213119396s"}
+2022-05-20T15:21:48.203-0600    info    client/p.go:299 adding subnet validator {"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "txFee": 1000000, "start": "2022-05-20T15:22:17.781-0600", "end": "2023-03-16T14:52:49.000-0600", "weight": 1000}
+2022-05-20T15:21:48.457-0600    info    platformvm/checker.go:48    polling P-Chain tx  {"txId": "fHt8L9EHx1UJiEYmEZ3zVCpYssKirRvkQmPfufdvUMhueXRK5", "expectedStatus": "Committed"}
+2022-05-20T15:21:48.457-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T15:21:50.670-0600    info    poll/poll.go:66 poll confirmed  {"took": "2.213119396s"}
 added nBwT3MfSHA4es5o3iB5cMtkPng4eC861 to subnet 2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW validator set (took 2.213119396s)
 
 waiting for validator nBwT3MfSHA4es5o3iB5cMtkPng4eC861 to start validating 2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW...(could take a few minutes)
 
 
-2022-05-20T15:24:51.521-0600	info	client/p.go:497	creating blockchain	{"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "chainName": "bayysubnet", "vmId": "kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG", "createBlockchainTxFee": 100000000}
+2022-05-20T15:24:51.521-0600    info    client/p.go:497 creating blockchain {"subnetId": "2RRgV44HPUQWLWLTpfSPMUcfpCfG4HpKKHV3KgwLccyDzqaoeW", "chainName": "bayysubnet", "vmId": "kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG", "createBlockchainTxFee": 100000000}
 created blockchain "2eKMpwdnMS1ebx3FDa6Axr8GTLFvKytwjWvKawXj37Nf65mq3Q" (took 214.712453ms)
 
 *-------------------------*----------------------------------------------------*
@@ -265,13 +257,13 @@ subnet-cli create subnet \
 And its console log:
 
 ```text
-2022-05-20T16:00:48.583-0600	info	client/client.go:81	fetching X-Chain id
-2022-05-20T16:00:48.585-0600	info	client/client.go:87	fetched X-Chain id	{"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
-2022-05-20T16:00:48.585-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "http://127.0.0.1:12913"}
-2022-05-20T16:00:48.585-0600	info	client/client.go:105	fetched AVAX asset id	{"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
-2022-05-20T16:00:48.585-0600	info	client/client.go:107	fetching network information
-2022-05-20T16:00:48.585-0600	info	client/client.go:116	fetched network information	{"networkId": 1337, "networkName": "network-1337"}
-2022-05-20T16:00:48.604-0600	info	client/p.go:131	creating subnet	{"dryMode": true, "assetId": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC", "createSubnetTxFee": 100000000}
+2022-05-20T16:00:48.583-0600    info    client/client.go:81 fetching X-Chain id
+2022-05-20T16:00:48.585-0600    info    client/client.go:87 fetched X-Chain id  {"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
+2022-05-20T16:00:48.585-0600    info    client/client.go:96 fetching AVAX asset id  {"uri": "http://127.0.0.1:12913"}
+2022-05-20T16:00:48.585-0600    info    client/client.go:105    fetched AVAX asset id   {"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
+2022-05-20T16:00:48.585-0600    info    client/client.go:107    fetching network information
+2022-05-20T16:00:48.585-0600    info    client/client.go:116    fetched network information {"networkId": 1337, "networkName": "network-1337"}
+2022-05-20T16:00:48.604-0600    info    client/p.go:131 creating subnet {"dryMode": true, "assetId": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC", "createSubnetTxFee": 100000000}
 
 Ready to create subnet resources, should we continue?
 *-------------------------*----------------------------------------------------*
@@ -291,14 +283,14 @@ Ready to create subnet resources, should we continue?
 
 
 
-2022-05-20T16:00:53.753-0600	info	client/p.go:131	creating subnet	{"dryMode": false, "assetId": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC", "createSubnetTxFee": 100000000}
-2022-05-20T16:00:53.776-0600	info	platformvm/checker.go:74	polling subnet	{"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1"}
-2022-05-20T16:00:53.776-0600	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "expectedStatus": "Committed"}
-2022-05-20T16:00:53.776-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T16:00:54.776-0600	info	poll/poll.go:66	poll confirmed	{"took": "1.000622527s"}
-2022-05-20T16:00:54.776-0600	info	platformvm/checker.go:88	finding subnets	{"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1"}
-2022-05-20T16:00:54.776-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T16:00:54.777-0600	info	poll/poll.go:66	poll confirmed	{"took": "486.234µs"}
+2022-05-20T16:00:53.753-0600    info    client/p.go:131 creating subnet {"dryMode": false, "assetId": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC", "createSubnetTxFee": 100000000}
+2022-05-20T16:00:53.776-0600    info    platformvm/checker.go:74    polling subnet  {"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1"}
+2022-05-20T16:00:53.776-0600    info    platformvm/checker.go:48    polling P-Chain tx  {"txId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "expectedStatus": "Committed"}
+2022-05-20T16:00:53.776-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T16:00:54.776-0600    info    poll/poll.go:66 poll confirmed  {"took": "1.000622527s"}
+2022-05-20T16:00:54.776-0600    info    platformvm/checker.go:88    finding subnets {"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1"}
+2022-05-20T16:00:54.776-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T16:00:54.777-0600    info    poll/poll.go:66 poll confirmed  {"took": "486.234µs"}
 created subnet "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1" (took 1.001108761s)
 (subnet must be whitelisted beforehand via --whitelisted-subnets flag!)
 
@@ -336,8 +328,7 @@ subnet-cli add validator \
 --validate-reward-fee-percent=3
 ```
 
-![add-validator-local-1](/img/add-validator-local-1.png)
-![add-validator-local-2](/img/add-validator-local-2.png)
+![add-validator-local-1](/img/add-validator-local-1.png) ![add-validator-local-2](/img/add-validator-local-2.png)
 
 ### `subnet-cli add subnet-validator`
 
@@ -360,12 +351,12 @@ To add a Subnet validator to the local network:
 And its console log:
 
 ```text
-2022-05-20T16:10:22.980-0600	info	client/client.go:81	fetching X-Chain id
-2022-05-20T16:10:22.981-0600	info	client/client.go:87	fetched X-Chain id	{"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
-2022-05-20T16:10:22.981-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "http://127.0.0.1:12913"}
-2022-05-20T16:10:22.981-0600	info	client/client.go:105	fetched AVAX asset id	{"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
-2022-05-20T16:10:22.981-0600	info	client/client.go:107	fetching network information
-2022-05-20T16:10:22.982-0600	info	client/client.go:116	fetched network information	{"networkId": 1337, "networkName": "network-1337"}
+2022-05-20T16:10:22.980-0600    info    client/client.go:81 fetching X-Chain id
+2022-05-20T16:10:22.981-0600    info    client/client.go:87 fetched X-Chain id  {"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
+2022-05-20T16:10:22.981-0600    info    client/client.go:96 fetching AVAX asset id  {"uri": "http://127.0.0.1:12913"}
+2022-05-20T16:10:22.981-0600    info    client/client.go:105    fetched AVAX asset id   {"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
+2022-05-20T16:10:22.981-0600    info    client/client.go:107    fetching network information
+2022-05-20T16:10:22.982-0600    info    client/client.go:116    fetched network information {"networkId": 1337, "networkName": "network-1337"}
 
 Ready to add subnet validator, should we continue?
 *-------------------------*----------------------------------------------------*
@@ -391,10 +382,10 @@ Ready to add subnet validator, should we continue?
 
 
 
-2022-05-20T16:10:28.853-0600	info	client/p.go:299	adding subnet validator	{"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "txFee": 1000000, "start": "2022-05-20T16:10:58.852-0600", "end": "2022-09-06T16:00:00.000-0600", "weight": 1000}
-2022-05-20T16:10:28.857-0600	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "gmrRTRK6671pBVopxHoPRx77hcvEvc5UKER1fFNgaRiFPY5Qh", "expectedStatus": "Committed"}
-2022-05-20T16:10:28.859-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T16:10:29.861-0600	info	poll/poll.go:66	poll confirmed	{"took": "1.002120951s"}
+2022-05-20T16:10:28.853-0600    info    client/p.go:299 adding subnet validator {"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "txFee": 1000000, "start": "2022-05-20T16:10:58.852-0600", "end": "2022-09-06T16:00:00.000-0600", "weight": 1000}
+2022-05-20T16:10:28.857-0600    info    platformvm/checker.go:48    polling P-Chain tx  {"txId": "gmrRTRK6671pBVopxHoPRx77hcvEvc5UKER1fFNgaRiFPY5Qh", "expectedStatus": "Committed"}
+2022-05-20T16:10:28.859-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T16:10:29.861-0600    info    poll/poll.go:66 poll confirmed  {"took": "1.002120951s"}
 added P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 to subnet 24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1 validator set (took 1.002120951s)
 
 waiting for validator P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 to start validating 24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1...(could take a few minutes)
@@ -442,12 +433,12 @@ subnet-cli create blockchain \
 ```
 
 ```text
-2022-05-20T16:19:33.652-0600	info	client/client.go:81	fetching X-Chain id
-2022-05-20T16:19:33.653-0600	info	client/client.go:87	fetched X-Chain id	{"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
-2022-05-20T16:19:33.653-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "http://127.0.0.1:12913"}
-2022-05-20T16:19:33.653-0600	info	client/client.go:105	fetched AVAX asset id	{"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
-2022-05-20T16:19:33.653-0600	info	client/client.go:107	fetching network information
-2022-05-20T16:19:33.653-0600	info	client/client.go:116	fetched network information	{"networkId": 1337, "networkName": "network-1337"}
+2022-05-20T16:19:33.652-0600    info    client/client.go:81 fetching X-Chain id
+2022-05-20T16:19:33.653-0600    info    client/client.go:87 fetched X-Chain id  {"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
+2022-05-20T16:19:33.653-0600    info    client/client.go:96 fetching AVAX asset id  {"uri": "http://127.0.0.1:12913"}
+2022-05-20T16:19:33.653-0600    info    client/client.go:105    fetched AVAX asset id   {"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
+2022-05-20T16:19:33.653-0600    info    client/client.go:107    fetching network information
+2022-05-20T16:19:33.653-0600    info    client/client.go:116    fetched network information {"networkId": 1337, "networkName": "network-1337"}
 
 Ready to create blockchain resources, should we continue?
 *-------------------------*----------------------------------------------------*
@@ -475,7 +466,7 @@ Ready to create blockchain resources, should we continue?
 
 
 
-2022-05-20T16:19:36.072-0600	info	client/p.go:497	creating blockchain	{"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "chainName": "bayysubnet", "vmId": "kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG", "createBlockchainTxFee": 100000000}
+2022-05-20T16:19:36.072-0600    info    client/p.go:497 creating blockchain {"subnetId": "24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1", "chainName": "bayysubnet", "vmId": "kL1G2oVE8BVXCBFQrwS2QkDnW4SBG86X5NoMSsiLidwyj3itG", "createBlockchainTxFee": 100000000}
 created blockchain "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M" (took 2.65577ms)
 
 *-------------------------*----------------------------------------------------*
@@ -509,22 +500,22 @@ subnet-cli status blockchain \
 --blockchain-id="2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M" \
 --check-bootstrapped
 
-2022-05-20T16:20:55.362-0600	info	client/client.go:81	fetching X-Chain id
-2022-05-20T16:20:55.363-0600	info	client/client.go:87	fetched X-Chain id	{"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
-2022-05-20T16:20:55.363-0600	info	client/client.go:96	fetching AVAX asset id	{"uri": "http://127.0.0.1:12913"}
-2022-05-20T16:20:55.363-0600	info	client/client.go:105	fetched AVAX asset id	{"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
-2022-05-20T16:20:55.363-0600	info	client/client.go:107	fetching network information
-2022-05-20T16:20:55.363-0600	info	client/client.go:116	fetched network information	{"networkId": 1337, "networkName": "network-1337"}
+2022-05-20T16:20:55.362-0600    info    client/client.go:81 fetching X-Chain id
+2022-05-20T16:20:55.363-0600    info    client/client.go:87 fetched X-Chain id  {"id": "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"}
+2022-05-20T16:20:55.363-0600    info    client/client.go:96 fetching AVAX asset id  {"uri": "http://127.0.0.1:12913"}
+2022-05-20T16:20:55.363-0600    info    client/client.go:105    fetched AVAX asset id   {"id": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"}
+2022-05-20T16:20:55.363-0600    info    client/client.go:107    fetching network information
+2022-05-20T16:20:55.363-0600    info    client/client.go:116    fetched network information {"networkId": 1337, "networkName": "network-1337"}
 
 Checking blockchain...
-2022-05-20T16:20:55.364-0600	info	platformvm/checker.go:127	polling blockchain	{"blockchainId": "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M", "expectedBlockchainStatus": "Validating"}
-2022-05-20T16:20:55.365-0600	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M", "expectedStatus": "Committed"}
-2022-05-20T16:20:55.365-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T16:20:55.365-0600	info	poll/poll.go:66	poll confirmed	{"took": "211.231µs"}
-2022-05-20T16:20:55.365-0600	info	poll/poll.go:42	start polling	{"internal": "1s"}
-2022-05-20T16:20:55.365-0600	info	platformvm/checker.go:148	waiting for blockchain status	{"current": "Created"}
-2022-05-20T16:20:56.367-0600	info	platformvm/checker.go:148	waiting for blockchain status	{"current": "Created"}
-2022-05-20T16:20:57.367-0600	info	platformvm/checker.go:148	waiting for blockchain status	{"current": "Created"}
-2022-05-20T16:20:58.368-0600	info	platformvm/checker.go:148	waiting for blockchain status	{"current": "Created"}
+2022-05-20T16:20:55.364-0600    info    platformvm/checker.go:127   polling blockchain  {"blockchainId": "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M", "expectedBlockchainStatus": "Validating"}
+2022-05-20T16:20:55.365-0600    info    platformvm/checker.go:48    polling P-Chain tx  {"txId": "2HxSBTxcRK6iZFftghTBW66HjSYfAEkvwtkX3e8EDWabiGEG4M", "expectedStatus": "Committed"}
+2022-05-20T16:20:55.365-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T16:20:55.365-0600    info    poll/poll.go:66 poll confirmed  {"took": "211.231µs"}
+2022-05-20T16:20:55.365-0600    info    poll/poll.go:42 start polling   {"internal": "1s"}
+2022-05-20T16:20:55.365-0600    info    platformvm/checker.go:148   waiting for blockchain status   {"current": "Created"}
+2022-05-20T16:20:56.367-0600    info    platformvm/checker.go:148   waiting for blockchain status   {"current": "Created"}
+2022-05-20T16:20:57.367-0600    info    platformvm/checker.go:148   waiting for blockchain status   {"current": "Created"}
+2022-05-20T16:20:58.368-0600    info    platformvm/checker.go:148   waiting for blockchain status   {"current": "Created"}
 ......
 ```

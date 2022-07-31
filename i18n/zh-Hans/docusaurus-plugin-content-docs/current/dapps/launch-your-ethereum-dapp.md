@@ -74,19 +74,15 @@ By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/ch
 
 If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which is enabled by default to conserve disk space. To preserve full historical state, include `"pruning-enabled": false` in the C-Chain config file.
 
-:::note
-After changing the flag to disable the database pruning, you will need to run the bootstrap process again, as the node will not backfill any already pruned and missing data.
+:::note After changing the flag to disable the database pruning, you will need to run the bootstrap process again, as the node will not backfill any already pruned and missing data.
 
-To re-bootstrap the node, stop it, delete the database (by default stored in `~/.avalanchego/db/`) and start the node again.
-:::
+To re-bootstrap the node, stop it, delete the database (by default stored in `~/.avalanchego/db/`) and start the node again. :::
 
 #### Running a Node in Debug Mode
 
 By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `debug`, `debug-tracer`, and `internal-debug` APIs.
 
-:::note
-Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
-:::
+:::note Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well! :::
 
 #### Example C-Chain Config File
 

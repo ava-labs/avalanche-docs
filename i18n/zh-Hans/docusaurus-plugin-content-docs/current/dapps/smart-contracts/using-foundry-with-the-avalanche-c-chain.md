@@ -16,8 +16,7 @@ Foundry manages your dependencies, compiles your project, runs tests, deploys, a
 
 ## Getting Started
 
-This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721) with Foundry and Avalanche Smart Contract Quickstart.
-Clone the Avalanche Smart Contract Quickstart repo and install its dependencies by running:
+This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721) with Foundry and Avalanche Smart Contract Quickstart. Clone the Avalanche Smart Contract Quickstart repo and install its dependencies by running:
 
 ```zsh
 git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git

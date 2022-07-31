@@ -15,9 +15,7 @@ _Just want the commands? Jump to the [end](#just-want-the-commands-we-got-you)!_
 
 ## Build `AvalancheGo` Binary and Create the Plugin Build Directory
 
-First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
-You can follow [this comprehensive guide](../nodes/build/run-avalanche-node-manually.md) to complete
-this step. For this tutorial, we recommend compiling from source instead of using the `AvalancheGo Installer`.
+First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs). You can follow [this comprehensive guide](../nodes/build/run-avalanche-node-manually.md) to complete this step. For this tutorial, we recommend compiling from source instead of using the `AvalancheGo Installer`.
 
 ## Build `subnet-evm` Binary
 
@@ -86,9 +84,7 @@ If you want to pass the whitelisted Subnets through the command line flag. You c
 
 ## Just Want the Commands? We Got You...
 
-:::caution
-Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
-:::
+:::caution Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.** :::
 
 ```bash
 cd $GOPATH

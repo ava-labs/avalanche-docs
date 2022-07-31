@@ -5,8 +5,7 @@ sidebar_position: 4
 
 # Contract Chain (C-Chain) API
 
-:::info
-Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the [C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
+:::info Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the [C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
 
 :::
 
@@ -36,9 +35,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 #### WebSocket Endpoints
 
-:::info
-On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
-:::
+:::info On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API :::
 
 To interact with C-Chain via the websocket endpoint:
 
@@ -54,8 +51,7 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::tip
 
-On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
-:::
+On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`. :::
 
 To interact with other instances of the EVM via the websocket endpoint:
 
@@ -271,9 +267,7 @@ curl -X POST --data '{
 
 ### avax.export
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
@@ -328,9 +322,7 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 **DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
@@ -392,9 +384,7 @@ curl -X POST --data '{
 
 ### avax.exportKey
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
 
@@ -528,9 +518,7 @@ This gives response:
 
 ### avax.import
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
@@ -588,9 +576,7 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 **DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
@@ -650,9 +636,7 @@ curl -X POST --data '{
 
 ### avax.importKey
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
+:::warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md). :::
 
 Give a user control over an address by providing the private key that controls the address.
 

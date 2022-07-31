@@ -124,9 +124,7 @@ Use the `eth-apis` field to specify the exact set of below services to enable on
 
 :::note
 
-The names used in this configuration flag have been updated in coreth `v.0.8.14`.
-The previous names containing `public-` and `private-` are deprecated.
-While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
+The names used in this configuration flag have been updated in coreth `v.0.8.14`. The previous names containing `public-` and `private-` are deprecated. While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
 
 The mapping of deprecated values and their updated equivilant follows:
 
@@ -160,8 +158,7 @@ The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously u
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
-`eth_coinbase`
-`eth_etherbase`
+`eth_coinbase` `eth_etherbase`
 
 #### `eth-filter`:
 
@@ -424,8 +421,7 @@ If true, enables preimages. Defaults to false.
 
 #### `offline-pruning-enabled` (boolean):
 
-If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.**
-While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](../maintain/run-offline-pruning.md#disk-space-considerations)
+If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.** While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](../maintain/run-offline-pruning.md#disk-space-considerations)
 
 Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
 
@@ -518,9 +514,7 @@ The parameters are as follows:
 
 Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../../apis/avalanchego/apis/x-chain.md#avmgetaddresstxs).
 
-:::note
-If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
-:::
+:::note If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below). :::
 
 ### `index-allow-incomplete` (boolean):
 

@@ -1,4 +1,4 @@
-# Avalanche Developer ERC721 Tutorial 
+# Avalanche Developer ERC721 Tutorial
 
 ## Introduction
 
@@ -16,7 +16,7 @@ For this tutorial I have used [Visual Studio Code](https://code.visualstudio.com
 ### Dependencies
 * [NodeJS v8.9.4 or later](https://nodejs.org/en/).
 * Truffle, which you can install with npm install -g truffle
-* (Optional) [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network. 
+* (Optional) [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network.
 
 ### Setting up a Truffle project
 
@@ -26,8 +26,7 @@ truffle init -y
 npm init -y
 ```
 
-2. The first one will provide you with a base structure of a Truffle project and the second one will include a **package.json** file to keep track of the dependencies.
-Afterwards, include the following dependencies which will help us build and test the smart contracts.
+2. The first one will provide you with a base structure of a Truffle project and the second one will include a **package.json** file to keep track of the dependencies. Afterwards, include the following dependencies which will help us build and test the smart contracts.
 ```powershell
 npm install @openzeppelin/contracts @truffle/hdwallet-provider dotenv typescript typechain truffle-typings ts-node 
 npm install --save-dev @openzeppelin/test-helpers solidity-coverage
@@ -89,8 +88,7 @@ This file is the entrypoint of our Truffle project. As you can see, we specify t
 MNEMONIC='paste your metamask mnemonic here which is twelve words long believe me'
 APIKEY=YOUR_DATAHUB_API_KEY_FOR_THE_FUJI_TESTNET
 ```
-Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/signup)'s testnet RPC. There is a free plan which you can use. For that you would need to register, grab your APIKEY and paste it into your **.env** file. 
-Complete DataHub onboarding guide to DataHub 2.0 can be found [HERE](https://docs.figment.io/guides/getting-started-with-datahub)
+Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/signup)'s testnet RPC. There is a free plan which you can use. For that you would need to register, grab your APIKEY and paste it into your **.env** file. Complete DataHub onboarding guide to DataHub 2.0 can be found [HERE](https://docs.figment.io/guides/getting-started-with-datahub)
 
 4. We would also need two more configuration files in order to build our initial TypeScript environment. Let us create a **tsconfig.json** under the root of our project with the following contents:
 
@@ -139,7 +137,7 @@ As well as a **tsconfig.migrate.json** again under the root folder of our projec
 
 This file simply extends our base **tsconfig.json** by taking the folder **migrations/** contents into account. We will go through migrating in more detail after we have finished implementing and testing our contracts.
 
-5. Add `generate` script in your **package.json**: 
+5. Add `generate` script in your **package.json**:
 
 ```json
 "scripts": {
@@ -162,14 +160,14 @@ Whenever you make changes to your smart contract you would need to run `npm run 
 pragma solidity ^0.8.6;
 ```
 
-* Next we import the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) contract from Open Zeppelin. This contract is an extension of their [**ERC721.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol) contract which takes metadata of an NFT into account as well. We will also use the popular [**SafeMath.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol) library for our mathematical operations. This is a library which prevents unsigned integer overflows: 
+* Next we import the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) contract from Open Zeppelin. This contract is an extension of their [**ERC721.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol) contract which takes metadata of an NFT into account as well. We will also use the popular [**SafeMath.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol) library for our mathematical operations. This is a library which prevents unsigned integer overflows:
 
 ```solidity
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 ```
 
-* Now that we have done that let us define our **Collectible** contract which will inherit from the **ERC721URIStorage**. This would allow us to use all the functions and access all the public state variables which that contract offers. Pretty cool, right? 
+* Now that we have done that let us define our **Collectible** contract which will inherit from the **ERC721URIStorage**. This would allow us to use all the functions and access all the public state variables which that contract offers. Pretty cool, right?
 ```solidity
 contract Collectible is ERC721URIStorage {
 ```
@@ -186,14 +184,11 @@ contract Collectible is ERC721URIStorage {
     }
     Item[] private items;
     event ItemMinted(uint256 tokenId, address creator, string metadata, uint256 royalty);
-    
+
     constructor() ERC721("NFTCollectible", "NFTC") {}
 ```
 
-The main thing to note here is the **Item** struct. We need one to keep track of some extra on-chain data that our NFTs can have. In our case this is the **owner**, the **creator** and the **royalty** which would be a percentage of the price paid out to the **creator** on each purchase of the NFT. 
-With each minting, a new **Item** will be pushed to the array of items. This array can be then used to display those properties on the frontend, for example.
-We define an **ItemMinted** event due to our custom NFTs which we will emit at the end of our minting function. Last but not least, as you can see, we initialize the ERC721 constructor by providing it a name for our token contract and a symbol. These are the two parameters which it takes. Our constructor does not have any, hence the empty body.
-The mappings are used to keep track of information such as whether a metadata hash has been minted, meaning that we prevent the minting of that metadata again and also to map the token id to an **Item**.
+The main thing to note here is the **Item** struct. We need one to keep track of some extra on-chain data that our NFTs can have. In our case this is the **owner**, the **creator** and the **royalty** which would be a percentage of the price paid out to the **creator** on each purchase of the NFT. With each minting, a new **Item** will be pushed to the array of items. This array can be then used to display those properties on the frontend, for example. We define an **ItemMinted** event due to our custom NFTs which we will emit at the end of our minting function. Last but not least, as you can see, we initialize the ERC721 constructor by providing it a name for our token contract and a symbol. These are the two parameters which it takes. Our constructor does not have any, hence the empty body. The mappings are used to keep track of information such as whether a metadata hash has been minted, meaning that we prevent the minting of that metadata again and also to map the token id to an **Item**.
 
 * The **createCollectible(string memory metadata, uint256 royalty)** function:
 
@@ -220,8 +215,7 @@ function createCollectible(string memory metadata, uint256 royalty) public retur
     }
 ```
 
-The function takes two parameters - metadata and royalty. In the beginning of the function body we see a couple of guard conditions which are used to prevent unwanted transaction execution and to revert the transaction if the conditions are not fulfilled. We use the mapping which we have defined above to check whether the metadata has been minted. We also check whether the royalty is between 0% and 40%. Should we pass these conditions, we can now move on to creating our **Item** with the information we have. 
-At this point the creator is both the owner and the creator, so we use **msg.sender** which is one of Solidity's global variables and denotes the caller of the function. Our third property is the royalty. After we push this **Item** to the array, we make use of the functions which the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) provides us, namely: 
+The function takes two parameters - metadata and royalty. In the beginning of the function body we see a couple of guard conditions which are used to prevent unwanted transaction execution and to revert the transaction if the conditions are not fulfilled. We use the mapping which we have defined above to check whether the metadata has been minted. We also check whether the royalty is between 0% and 40%. Should we pass these conditions, we can now move on to creating our **Item** with the information we have. At this point the creator is both the owner and the creator, so we use **msg.sender** which is one of Solidity's global variables and denotes the caller of the function. Our third property is the royalty. After we push this **Item** to the array, we make use of the functions which the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) provides us, namely:
 
 ```solidity
 _safeMint(msg.sender, newItemId);
@@ -236,7 +230,7 @@ This will do the minting for us and associate the item id (token id) with the me
     function getItemsLength() public view returns (uint256) {
         return items.length;
     }
-    
+
     function getItem(uint256 tokenId) public view returns (address, address, uint256)
     {
         return (tokenIdToItem[tokenId].owner, tokenIdToItem[tokenId].creator, tokenIdToItem[tokenId].royalty);
@@ -246,8 +240,7 @@ This will do the minting for us and associate the item id (token id) with the me
 
 ### Creating our NFT Marketplace.sol contract
 
-1. Inside the **contracts/** folder, we create a new [**Marketplace.sol**](./contracts/Marketplace.sol) file again with the necessary functionality.
-This might look slighly more complicated but once again, I will go through each line of code, so that at the end you can make sense of the logic entirely.
+1. Inside the **contracts/** folder, we create a new [**Marketplace.sol**](./contracts/Marketplace.sol) file again with the necessary functionality. This might look slighly more complicated but once again, I will go through each line of code, so that at the end you can make sense of the logic entirely.
 
 2. [**Marketplace.sol**](./contracts/Marketplace.sol) logic
 
@@ -257,7 +250,7 @@ This might look slighly more complicated but once again, I will go through each 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 ```
-* Next we will import our already created [**Collectible.sol**](./contracts/Collectible.sol) contract and inherit from it, since we would want to make use of some of the public state variables there: 
+* Next we will import our already created [**Collectible.sol**](./contracts/Collectible.sol) contract and inherit from it, since we would want to make use of some of the public state variables there:
 
 ```solidity
 import './Collectible.sol';
@@ -302,7 +295,7 @@ Note: You might have noticed that we again use **SafeMath** for the uint256. Thi
 You can see that again we have a struct for the **Listing** of a NFT. We use it to define who has listed a NFT and for what price. We have again some mappings to keep track of vital information such as to which token id a listing belongs to, whether the token id has been listed, as we do not want any double listings of the same NFT and also we have a mapping to keep track of the address that can claim the NFT after it has been listed. This is of course the owner of the item. We need this, because you will see in a bit that we transfer the NFT to the smart contract when listing it, thus making the smart contract the new owner. We have some events for the different functions, namely for listing, cancelling a listing and buying an item. The new concepts which you see here are the modifiers. These can be appended as function modifiers to the functions and act exactly the same as the require() statements. They are usually used to prevent writing the same conditions for different functions or restricting access only to specific addresses. In this case we have two modifiers. The first one is used to prevent other addresses from listing a token which they do not own, whereas the second one is used for allowing only the address that has listed the token to cancel the listing.
 
 * The **listItem(uint256 tokenId, uint256 price)** function:
- 
+
 ```solidity
 function listItem(uint256 tokenId, uint256 price) public onlyTokenOwner(tokenId) 
     {
@@ -426,10 +419,9 @@ before(async () => {
     collectible = await Collectible.new({ from: contractDeployer })
 });
 ```
-Note: We do not actually need **{from: contractDeployer}** as a parameter. If it is missing, Truffle would automatically take the first address into consideration for the function call. However, you will see that for minting an NFT we would use the **creator** address, so we would then need to specify this.
-Each function of our contracts would be part of a **describe()** block. That way we can structure our tests efficiently, so that we can find our way easier.
+Note: We do not actually need **{from: contractDeployer}** as a parameter. If it is missing, Truffle would automatically take the first address into consideration for the function call. However, you will see that for minting an NFT we would use the **creator** address, so we would then need to specify this. Each function of our contracts would be part of a **describe()** block. That way we can structure our tests efficiently, so that we can find our way easier.
 
-3. In the first **describe()** block we test whether our contract was deployed correctly. For that we need to write individual tests or **it()**. 
+3. In the first **describe()** block we test whether our contract was deployed correctly. For that we need to write individual tests or **it()**.
 
 ```typescript 
 describe('Collectible deployment', async () => {
@@ -509,7 +501,7 @@ As you can see an **it()** function takes as parameters a description of the tes
     })
 ```
 
-* First we check that the *'metadata'* is not minted. For that we call the **hasBeenMinted('metadata')** function which is in fact our mapping in our **Collectible.sol** file. This returns us a boolean which is false. 
+* First we check that the *'metadata'* is not minted. For that we call the **hasBeenMinted('metadata')** function which is in fact our mapping in our **Collectible.sol** file. This returns us a boolean which is false.
 * Afterwards, we expect that the minting function reverts if we provide a royalty that is not between 0% and 40%. In that case we try with 41%.
 * Then, before we complete the transaction we can check what the return value would be. As we know, our **createCollectible()** function returns a token id. We can grab this by executing the function without changing the state:
 
@@ -542,7 +534,7 @@ it('Mint a NFT and emit events.', async () => {
         })
 ```
 
-Our variable which is the result of the function call is no longer the token id, but a transaction receipt, meaning that we obtain much more information out of it. Cool, right? Let us put this information to use. We test whether the correct events are emitted since they are the signal that we need. In this case we have two. One is the *Transfer* event which comes from the **\_safeMint(msg.sender, newItemId)** function of the **ERC721.sol** smart contract. The other one is our own *ItemMinted* event. We check for the correct name and the correct arguments. 
+Our variable which is the result of the function call is no longer the token id, but a transaction receipt, meaning that we obtain much more information out of it. Cool, right? Let us put this information to use. We test whether the correct events are emitted since they are the signal that we need. In this case we have two. One is the *Transfer* event which comes from the **\_safeMint(msg.sender, newItemId)** function of the **ERC721.sol** smart contract. The other one is our own *ItemMinted* event. We check for the correct name and the correct arguments.
 
 * In the remaining **it()**-s we check whether the mappings were updated accordingly and whether our **Item** has the correct values. Our final **it()** makes sure that the transaction reverts if we call the **createCollectible()** function with the same metadata parameter value.
 
@@ -554,8 +546,7 @@ npx truffle test
 
 Note: You might notice that this would run the command *truffle compile* beforehand. This would create a **build/contracts** folder in our root directory where the .json representations of all of our used contracts are stored. These are in fact used when you call functions on the frontend.
 
-II. Go inside the [**marketplace.test.ts**](./test/marketplace.test.ts) file and have a look at the code.
-As you may notice, most of the concepts such as testing the deployment, function reverts and emitted events are repeated here, so I will only go through the differences:
+II. Go inside the [**marketplace.test.ts**](./test/marketplace.test.ts) file and have a look at the code. As you may notice, most of the concepts such as testing the deployment, function reverts and emitted events are repeated here, so I will only go through the differences:
 
 1. Once again, at the top we are importing the **Marketplace** contract as well as some helping functions:
 
@@ -566,8 +557,7 @@ import { expectRevert, BN } from '@openzeppelin/test-helpers'
 import { convertTokensToWei } from '../utils/tokens'
 ```
 
-We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a **utils/** folder of our project's root which we do not have yet, so let us create it and inside of it create a [**tokens.ts**](./utils/tokens.ts) file.
-Then copy the code below in there:
+We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a **utils/** folder of our project's root which we do not have yet, so let us create it and inside of it create a [**tokens.ts**](./utils/tokens.ts) file. Then copy the code below in there:
 
 ```typescript
 export const convertTokensToWei = (n) => {
@@ -577,10 +567,9 @@ export const convertTokensToWei = (n) => {
 module.exports = { convertTokensToWei }
 ```
 
-We use this function, so that we do not have to write 18 zeroes after the AVAX amount that a buyer would pay for a NFT. In reality, transfering 5 AVAX means that we transfer 5000000000000000000 as a value. In order to not have to write all those zeroes, we can simply call convertTokensToWei('5') and the function will add the zeroes for us.
-Now, back to our [**marketplace.test.ts**](./test/marketplace.test.ts) test script. 
+We use this function, so that we do not have to write 18 zeroes after the AVAX amount that a buyer would pay for a NFT. In reality, transfering 5 AVAX means that we transfer 5000000000000000000 as a value. In order to not have to write all those zeroes, we can simply call convertTokensToWei('5') and the function will add the zeroes for us. Now, back to our [**marketplace.test.ts**](./test/marketplace.test.ts) test script.
 
-2. We create a **before()** hook. There we deploy the marketplace contract and we also mint a NFT. Notice again that our **Marketplace.sol** has all the functions which **Collectible.sol** has, hence we can call the **createCollectible()** function: 
+2. We create a **before()** hook. There we deploy the marketplace contract and we also mint a NFT. Notice again that our **Marketplace.sol** has all the functions which **Collectible.sol** has, hence we can call the **createCollectible()** function:
 
 ```typescript
 before(async () => {

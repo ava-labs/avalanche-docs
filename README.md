@@ -74,7 +74,7 @@ Search is powered by Algolia and the config file is located [here](https://githu
 On your local box, run
 
 ```
-yarn run start --locale zh-Hans
+yarn run start -- --locale zh-Hans
 ```
 
 Then load `http://localhost:3000/zh-Hans/`

@@ -27,7 +27,7 @@ Openzeppelin has come up with a smart way where you just need to store the prefi
 
 To achieve this we need to rename our images/videos with respect to tokenID. Make sure to have all the assets in a single folder if you plan to create a collection of NFT's.
 
-Image / Video for tokenID 0 should be named 0 followed by the extension (jpg, png, tiff, gif, mp4, etc...) 
+Image / Video for tokenID 0 should be named 0 followed by the extension (jpg, png, tiff, gif, mp4, etc...)
 
 ![image-naming](images/minting-erc721-00-image-naming.png)
 
@@ -35,7 +35,7 @@ Here I have a single image named 0 to represent the image corresponding to the t
 
 Let's upload these assets to pinata for pinning on IPFS.
 
-In the pinata dashboard you should see an upload button. 
+In the pinata dashboard you should see an upload button.
 
 ![pinata-upload-button](images/minting-erc721-01-pinata-upload-button.png)
 
@@ -61,11 +61,9 @@ You can now click on the name of the folder to see its content on IPFS.
 
 So now we have the baseURI for the assets to get any asset all we need to do is append the tokenID and extension to the baseURI.
 
-This is the baseURI in my case.
-https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2
+This is the baseURI in my case. https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2
 
-To get asset for tokenID 0 all I need to do is append "/" +  tokenID + extension (.gif in this case) 
-https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif
+To get asset for tokenID 0 all I need to do is append "/" +  tokenID + extension (.gif in this case) https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif
 
 
 ### Getting metadata ready to be uploaded to decentralized storage
@@ -120,7 +118,7 @@ For this tutorial I named it <code>MyNFT.sol</code> make sure to have the <code>
 
 ![remix-file-created](images/minting-erc721-12-remix-file-created.png)
 
-I have attached the code for the NFT in the same repository. 
+I have attached the code for the NFT in the same repository.
 
 * Let's go through the code.
     * Inherits
@@ -202,8 +200,7 @@ https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/i
 
 The format is as follows.
 
-*Testnet* - 
-https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
+*Testnet* - https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
 
 *Mainnet* - https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
 

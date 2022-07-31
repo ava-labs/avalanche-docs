@@ -1,7 +1,7 @@
 # Quick Start Overview
 
 | Title                                                                                                                     | Description                                                              |
-| :------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
+|:------------------------------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
 | [**Create a Local Test Network**](create-a-local-test-network.md)                                                         | Create a local Avalanche test network.                                   |
 | [**Fund a Local Test Network**](fund-a-local-test-network.md)                                                             | Fund an address on a local Avalanche test network.                       |
 | [**Fuji Workflow**](fuji-workflow.md)                                                                                     | Avalanche Fuji Workflow.                                                 |

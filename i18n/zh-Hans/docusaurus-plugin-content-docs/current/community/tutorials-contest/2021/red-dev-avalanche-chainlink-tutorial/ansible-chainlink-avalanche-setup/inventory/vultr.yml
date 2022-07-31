@@ -3,5 +3,6 @@ plugin: vultr
 api_account: reddev
 user: root
 keyed_groups:
-  - prefix: tag
+  - 
+    prefix: tag
     key: tag

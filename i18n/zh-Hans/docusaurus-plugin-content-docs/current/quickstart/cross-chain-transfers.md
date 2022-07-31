@@ -42,7 +42,7 @@ AvalancheJS allows you to create and sign transactions locally which is why it i
 Following files can be found under the [examples](https://github.com/ava-labs/avalanchejs/tree/master/examples) directory of the AvalancheJS project.
 
 | Transfer From >> To      | Export                                                                                                                                  | Import                                                                                                                                    |
-| :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+|:------------------------ |:--------------------------------------------------------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------------------- |
 | **_X-Chain >> C-Chain_** | [**X-Chain : Export Avax to C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)   | [**C-Chain : Import Avax from X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)        |
 | **_X-Chain >> P-Chain_** | [**X-Chain : Export Avax to P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-PChain.ts)        | [**P-Chain : Import Avax from X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildImportTx-XChain.ts) |
 | **_P-Chain >> X-Chain_** | [**P-Chain : Export Avax to X-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildExportTx-XChain.ts) | [**X-Chain : Import Avax from P-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-PChain.ts)        |
@@ -136,9 +136,7 @@ const value: BN = new BN("10000000")
 const amount: BN = value.sub(fee)
 ```
 
-:::tip
-Snowtrace provides a [unit converter](https://snowtrace.io/unitconverter) between different units
-:::
+:::tip Snowtrace provides a [unit converter](https://snowtrace.io/unitconverter) between different units :::
 
 Run the export script:
 

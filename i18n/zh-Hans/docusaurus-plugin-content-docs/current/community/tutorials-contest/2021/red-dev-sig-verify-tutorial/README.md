@@ -231,8 +231,7 @@ Let's take a closer look at its supporting functions and key features.
 
 ### Bech32 Encoding
 
-We have ported Bech32 to Solidity from the [Bech32 Javascript library](https://github.com/bitcoinjs/bech32).
-There are four functions, **polymod**, **prefixChk**, **encode** and **convert**, used to convert to Bech32 address.
+We have ported Bech32 to Solidity from the [Bech32 Javascript library](https://github.com/bitcoinjs/bech32). There are four functions, **polymod**, **prefixChk**, **encode** and **convert**, used to convert to Bech32 address.
 
 ```solidity
 bytes constant CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';

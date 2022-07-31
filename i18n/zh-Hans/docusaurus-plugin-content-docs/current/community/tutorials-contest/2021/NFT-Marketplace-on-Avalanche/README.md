@@ -159,8 +159,7 @@ And that's all.
 
 # Contracts for the marketplace
 
-We will have two contracts, `AuctionManager` and `Auction` contracts. AuctionManager contract will create the auctions by deploying the Auction contract using the parameters.
-Here is how it will work:
+We will have two contracts, `AuctionManager` and `Auction` contracts. AuctionManager contract will create the auctions by deploying the Auction contract using the parameters. Here is how it will work:
 
 - The auction creator enters parameters for direct buy price, starting price, minimum bid increment, the token id, and the auction end time.
 - The auction creator gives approval for the NFT that will be auctioned to the AuctionManager.
@@ -186,11 +185,7 @@ contract Auction {
 
 ### Events
 
-There will be four events in the contract.
-`NewBid` will be emitted each time there is a new bid.
-`WithdrawToken` will be emitted when the highest bidder withdraws the token.
-`WithdrawFunds` will be emitted when the auction owner withdraws the funds.
-`AuctionCancelled` will be emitted when the auction gets canceled.
+There will be four events in the contract. `NewBid` will be emitted each time there is a new bid. `WithdrawToken` will be emitted when the highest bidder withdraws the token. `WithdrawFunds` will be emitted when the auction owner withdraws the funds. `AuctionCancelled` will be emitted when the auction gets canceled.
 
 ```solidity
 contract Auction {
@@ -250,8 +245,7 @@ contract Auction {
 }
 ```
 
-We would be using block numbers instead of timestamps. If we were developing this application on another chain such as Ethereum Mainnet, block timestamps are being set by the miners, and they are spoofable.
-However, in Avalanche, there is no set block rate; thus, we cannot rely on block numbers. We will be using `block.timestamp` to measure time. Timestamps are guaranteed to be within 30 seconds of real-time therefore we do not need to worry about it. [Read more about it here.](https://support.avax.network/en/articles/5106526-measuring-time-in-smart-contracts).
+We would be using block numbers instead of timestamps. If we were developing this application on another chain such as Ethereum Mainnet, block timestamps are being set by the miners, and they are spoofable. However, in Avalanche, there is no set block rate; thus, we cannot rely on block numbers. We will be using `block.timestamp` to measure time. Timestamps are guaranteed to be within 30 seconds of real-time therefore we do not need to worry about it. [Read more about it here.](https://support.avax.network/en/articles/5106526-measuring-time-in-smart-contracts).
 
 The auction will end when the current timestamp is greater than or equal to the `endTime`. `endTime` is the end timestamp of the auction.
 
@@ -278,11 +272,7 @@ constructor(address _creator,uint _endTime,uint _minIncrement,uint _directBuyPri
 
 #### Get the auction state
 
-Let's start with the `getAuctionState` function as we are going to use it in other functions.
-First, we need to check if the auction has been canceled and return `AuctionState.CANCELLED` in that case.
-Then, we need to check if anyone bid more or equal to the direct buy price and return `AuctionState.DIRECT_BUY` in that case.
-Then, we need to check if the current timestamp is greater or equal to the `endTime` and return `AuctionState.ENDED` in that case.
-Otherwise, we will return `AuctionState.OPEN`.
+Let's start with the `getAuctionState` function as we are going to use it in other functions. First, we need to check if the auction has been canceled and return `AuctionState.CANCELLED` in that case. Then, we need to check if anyone bid more or equal to the direct buy price and return `AuctionState.DIRECT_BUY` in that case. Then, we need to check if the current timestamp is greater or equal to the `endTime` and return `AuctionState.ENDED` in that case. Otherwise, we will return `AuctionState.OPEN`.
 
 ```solidity
 // Get the auction state
@@ -296,8 +286,7 @@ function getAuctionState() public view returns(AuctionState) {
 
 #### Placing bids
 
-Let's start building the function for placing bids.
-The user calls the `placeBid` function and sends an amount of AVAX.
+Let's start building the function for placing bids. The user calls the `placeBid` function and sends an amount of AVAX.
 
 Firstly, there are few things we need to check;
 
@@ -396,8 +385,7 @@ function cancelAuction() external returns(bool){ // Cancel the auction
 
 #### Withdraw Token
 
-After the auction has been completed, the highest bidder should be able to withdraw the NFT token.
-The `msg.sender` must be the highest bidder and the auction must be completed by either direct buy or timeout, otherwise the function must revert. After that, The NFT with the token id `tokenId` will be transferred to the highest bidder.
+After the auction has been completed, the highest bidder should be able to withdraw the NFT token. The `msg.sender` must be the highest bidder and the auction must be completed by either direct buy or timeout, otherwise the function must revert. After that, The NFT with the token id `tokenId` will be transferred to the highest bidder.
 
 We've set the max bidder initial value to the auction creator's wallet address, so if the auction times out and no one bids, the auction creator will be able to withdraw the token.
 
@@ -413,8 +401,7 @@ function withdrawToken() external returns(bool){
 
 #### Withdraw Funds
 
-After the auction has been completed, the auction creator should be able to withdraw the funds.
-The `msg.sender` must be the auction owner and the auction must be completed by either a direct buy or timeout; otherwise, the function must revert. After that, the max bid amount must be transferred to the auction creator.
+After the auction has been completed, the auction creator should be able to withdraw the funds. The `msg.sender` must be the auction owner and the auction must be completed by either a direct buy or timeout; otherwise, the function must revert. After that, the max bid amount must be transferred to the auction creator.
 
 ```solidity
 // Withdraw the funds after the auction is over
@@ -447,13 +434,11 @@ function allBids()
 }
 ```
 
-Our **Auction** contract is ready. Here is the complete code:
-[Auction Contract](NFT-Marketplace-dApp/contracts/Auction.sol)
+Our **Auction** contract is ready. Here is the complete code: [Auction Contract](NFT-Marketplace-dApp/contracts/Auction.sol)
 
 ## Auction Manager Contract
 
-We will use this contract to get a list of all auctions, and to create new ones.
-Let's start with the basic structure.
+We will use this contract to get a list of all auctions, and to create new ones. Let's start with the basic structure.
 
 ```solidity
 pragma solidity ^0.7.0;
@@ -608,8 +593,7 @@ We are going to test the marketplace on AVAX Fuji Testnet. First, you need to ad
 
 ![Networks](images/nft-marketplace-networks.png)
 
-We will deploy our contracts on FUJI testnet.
-FUJI Testnet Settings:
+We will deploy our contracts on FUJI testnet. FUJI Testnet Settings:
 
 - Network Name: Avalanche FUJI C-Chain
 - New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
@@ -632,8 +616,7 @@ networks:{
 }
 ```
 
-Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet
-](https://faucet.avax.network/) to get some test AVAX for free.
+Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet ](https://faucet.avax.network/) to get some test AVAX for free.
 
 # Deploying the contracts
 
@@ -672,8 +655,7 @@ $ npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script
 
 Pretty simple! If this looks unfamiliar to you, you may want to take a look at [hardhat guides](https://hardhat.org/guides/deploying.html).
 
-Do not forget to note the addresses, as we will need them afterward to interact with the contracts.
-![Deployed](images/nft-marketplace-deployed.png)
+Do not forget to note the addresses, as we will need them afterward to interact with the contracts. ![Deployed](images/nft-marketplace-deployed.png)
 
 # React App
 
@@ -863,8 +845,7 @@ Our form is ready! Let's see how we are going to interact with the contracts.
 
 ### Contract ABI's
 
-We will use Contract Application Binary Interface (ABI) to interact with the contracts. It is the standard way to do it.
-You can find the `ABI` of the compiled contracts in `artifacts/contracts/ContractName/ContractName.json` file. Create a `frontend/src/artifacts` folder and move all those `json` files there to reach them easier within the React code.
+We will use Contract Application Binary Interface (ABI) to interact with the contracts. It is the standard way to do it. You can find the `ABI` of the compiled contracts in `artifacts/contracts/ContractName/ContractName.json` file. Create a `frontend/src/artifacts` folder and move all those `json` files there to reach them easier within the React code.
 
 **If you can not find the json files try running `npx hardhat compile` on your terminal**
 
@@ -929,21 +910,17 @@ class App extends React.Component {
 
 Inside the init function we are creating instances of the signer, auction manager contract and our NFT contract. We will use them later.
 
-[Take a look at here to learn more about Ethers JS.](https://docs.ethers.io/v5/getting-started/)
-Refresh the page now, metamask should prompt you to connect your account.
+[Take a look at here to learn more about Ethers JS.](https://docs.ethers.io/v5/getting-started/) Refresh the page now, metamask should prompt you to connect your account.
 
-![Choose account](images/nft-marketplace-choose-account.png)
-![Choose account next](images/nft-marketplace-choose-account-next.png)
+![Choose account](images/nft-marketplace-choose-account.png) ![Choose account next](images/nft-marketplace-choose-account-next.png)
 
-Choose your account and continue.
-Congrats! We have connected metamask to our website.
+Choose your account and continue. Congrats! We have connected metamask to our website.
 
 ## Minting an NFT
 
 Let's build the mint function, which we will call when the `Mint NFT` button is pressed.
 
-We are going to use the `this.nft` object which we created inside the init function earlier.
-There is a function named `getItem()` inside our NFT contract. We have to call it and pass 0.5 AVAX to mint an NFT.
+We are going to use the `this.nft` object which we created inside the init function earlier. There is a function named `getItem()` inside our NFT contract. We have to call it and pass 0.5 AVAX to mint an NFT.
 
 ```js
 async mint() {
@@ -1037,8 +1014,7 @@ Here they are! I can see all the NFT's I've minted.
 
 ## Creating an auction
 
-So far, so good! Let's build a function for creating auctions.
-Before calling the `createAuction` function in the auction manager, first, we have to give approval for the token that we are going to auction. Giving approval to the auction manager will let the auction manager transfer our token to the newly created auction contract.
+So far, so good! Let's build a function for creating auctions. Before calling the `createAuction` function in the auction manager, first, we have to give approval for the token that we are going to auction. Giving approval to the auction manager will let the auction manager transfer our token to the newly created auction contract.
 
 Here are the steps.
 
@@ -1489,8 +1465,7 @@ Edit the `render` function
 
 ![Auction Page](images/nft-marketplace-auction-page.png)
 
-Now, we will have to make those buttons at the bottom functional.
-Let's write a function for each one!
+Now, we will have to make those buttons at the bottom functional. Let's write a function for each one!
 
 ## Auction Functions
 
@@ -1535,8 +1510,7 @@ Before placing a bid, we must switch to another account on metamask since the au
 
 ![Bid Placed on Auction](images/nft-marketplace-bidplaced.png)
 
-We've placed a bid on the auction!
-Now let's wait a bit until the auction is over, then we can withdraw our new token if no one bids a higher value.
+We've placed a bid on the auction! Now let's wait a bit until the auction is over, then we can withdraw our new token if no one bids a higher value.
 
 ### Withdraw Token
 
@@ -1561,8 +1535,7 @@ Call this function when the `Withdraw Token` button is pressed.
 
 ![Auction Ended](images/nft-marketplace-auction-ended.png)
 
-After some time, the auction is finally over, and our bid is still the highest one. Let's withdraw our new NFT token.
-Note: It would be nice to hide the end time when the auction is not open.
+After some time, the auction is finally over, and our bid is still the highest one. Let's withdraw our new NFT token. Note: It would be nice to hide the end time when the auction is not open.
 
 Approving the transaction...
 
@@ -1626,8 +1599,7 @@ Call this function when the `Cancel Auction` button is pressed.
 ...
 ```
 
-We have to create a new auction to demonstrate this since we cannot cancel an auction that has been bid already.
-Create a new auction, click on the `Cancel Auction` button and confirm the transaction.
+We have to create a new auction to demonstrate this since we cannot cancel an auction that has been bid already. Create a new auction, click on the `Cancel Auction` button and confirm the transaction.
 
 After refreshing the page, we can see that the auction has been canceled.
 
@@ -1771,8 +1743,7 @@ See the code for all of the buttons
 
 ## Finishing the React App
 
-That's all we need to do. Now, we have a functional marketplace where we can create auctions and sell NFT's.
-We had an attribute called `value` that is assigned randomly to each of the NFT's. We've displayed this attribute on the auction page.
+That's all we need to do. Now, we have a functional marketplace where we can create auctions and sell NFT's. We had an attribute called `value` that is assigned randomly to each of the NFT's. We've displayed this attribute on the auction page.
 
 If this were an image or any attribute else instead of an integer, we would still be able to display it by making a simple change in our code. For instance, to retrieve the metadata (image URL and other attributes) of an NFT token, use the `tokenURI(uint256 tokenId)` function to get the token uri from the NFT contract. You may want to take a look at [`IERC721Metadata`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#IERC721Metadata) to learn more about it.
 
