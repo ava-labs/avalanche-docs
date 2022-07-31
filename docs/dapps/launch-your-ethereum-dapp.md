@@ -82,31 +82,29 @@ To re-bootstrap the node, stop it, delete the database (by default stored in `~/
 
 #### Running a Node in Debug Mode
 
-By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `public-debug`, `private-debug`, `debug-tracer`, `internal-public-debug` and `internal-private-debug` APIs.
+By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `debug`, `debug-tracer`, and `internal-debug` APIs.
 
 :::note
 Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
 :::
 
-#### Example C-Chain config file
+#### Example C-Chain Config File
 
 An example C-Chain config file that includes the archival mode, enables debug APIs as well as default EVM APIs:
 
 ```json
 {
   "eth-apis": [
-    "public-eth",
-    "public-eth-filter",
+    "eth",
+    "eth-filter",
     "net",
     "web3",
-    "internal-public-eth",
-    "internal-public-blockchain",
-    "internal-public-transaction-pool",
-    "public-debug",
-    "private-debug",
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction",
+    "debug",
     "debug-tracer",
-    "internal-public-debug",
-    "internal-private-debug"
+    "internal-debug"
   ],
   "pruning-enabled": false
 }
@@ -118,7 +116,7 @@ Default config values for the C-Chain can be seen [here](../nodes/maintain/chain
 
 If you need a private test network to test your dapp, [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-For more information, see [documentation](../quickstart/network-runner.md).
+For more information, see [documentation](../subnets/network-runner.md).
 
 ## Developing and Deploying Contracts
 
@@ -148,7 +146,7 @@ For development purposes, you will need test tokens. Avalanche has a [Faucet](ht
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 
-## Contract verification
+## Contract Verification
 
 Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://snowtrace.io/). The procedure is simple:
 
@@ -161,7 +159,7 @@ If successful, the `code` tab will now have a green checkmark, and your users wi
 
 See [this](../dapps/smart-contracts/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Sourcify and Truffle.
 
-## Contract security checks
+## Contract Security Checks
 
 Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
 
@@ -173,7 +171,7 @@ Most popular are:
 
 We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
 
-## Gotchas and things to look out for
+## Gotchas and Things to Look out For
 
 Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There are some differences you need to be aware of, otherwise, you may create subtle bugs or inconsistencies in how your dapps behave.
 
@@ -181,7 +179,9 @@ Here are the main differences you should be aware of.
 
 ### Measuring Time
 
-It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is a great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
+Avalanche does not use the same mechanism to measure time as Ethereum which uses consistent block times. Instead, Avalanche supports asynchronous block issuance, block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
+
+Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
 Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing and to be within 30 seconds of the real time.
 

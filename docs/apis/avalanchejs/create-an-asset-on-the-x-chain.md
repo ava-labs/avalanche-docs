@@ -1,6 +1,6 @@
 # Create an Asset on the X-Chain
 
-This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avalanche Network Runner](../../quickstart/network-runner.md). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps. The whole example can be found [here](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildCreateAssetTx.ts).
+This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avalanche Network Runner](../../subnets/network-runner.md). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps. The whole example can be found [here](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildCreateAssetTx.ts).
 
 ```ts
 import { Avalanche, BN, Buffer } from "avalanche"
