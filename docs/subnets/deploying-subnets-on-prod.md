@@ -158,7 +158,7 @@ Jul 30 18:26:31 node-fuji avalanchego[1728308]:     ID: 2ebCneCbwthjQ1rYT41nhd7M
 Jul 30 18:26:31 node-fuji avalanchego[1728308]:     VMID:srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-That means the node has detected the subnet, and is attempting to initialize it and start bootstrapping the Subnet. It might take some time (if there are already transactions on the subnet), and eventually it will finish the bootstrap with a message like:
+That means the node has detected the subnet, and is attempting to initialize it and start bootstrapping the Subnet. It might take some time (if there are already transactions on the Subnet), and eventually it will finish the bootstrap with a message like:
 
 ```text
 Jul 30 18:27:21 node-fuji avalanchego[1728308]: [07-30|18:27:21.055] INFO <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain> snowman/transitive.go:333 consensus starting with J5wjmotMCrM2DKxeBTBPfwgCPpvsjtuqWNozLog2TomTjSuGK as the last accepted block
