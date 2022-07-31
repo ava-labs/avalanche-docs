@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After architecting your Subnet environment on the [local machine](create-a-local-subnet.md), proving the design and testing it out on [the testnet](create-a-fuji-subnet.md), eventually you will need to deploy your Subnet to production environment. Running a subnet in production is much more involved than local and testnet deploys, as your Subnet will have to take care of real world usage, maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose of this document is to point out a set of general considerations and propose potential solutions to them.
+After architecting your Subnet environment on the [local machine](create-a-local-subnet.md), proving the design and testing it out on [the testnet](create-a-fuji-subnet.md), eventually you will need to deploy your Subnet to production environment. Running a Subnet in production is much more involved than local and testnet deploys, as your Subnet will have to take care of real world usage, maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose of this document is to point out a set of general considerations and propose potential solutions to them.
 
 The architecture of the environment your particular Subnet will use will be greatly influenced by the type of load and activity your Subnet is designed to support so your solution will most likely differ from what we propose here. Still, it might be useful to follow along, to build up the intuition for the type of questions you will need to consider.
 
