@@ -233,8 +233,8 @@ const sidebars = {
       type: 'category',
       label: 'Tutorials Contest',
       items: [
-        'community/tutorials-contest/README',
-      ],
+        'community/tutorials-contest/2021'
+      ]
     },
   ],
 };
