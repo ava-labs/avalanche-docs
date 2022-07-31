@@ -1,0 +1,25 @@
+{
+    "name": "Shooter",
+    "tokenId": 0,
+    "image": "https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif",
+    "description": "Shooter NFT",
+    "attributes": [
+        {    
+            "trait_type": "Background",
+            "value": "Brown"
+        },
+        {    
+            "trait_type": "Body Color",
+            "value": "Black"
+        },
+        {    
+            "trait_type": "Eyes",
+            "value": "Red"
+        },
+        {    
+            "trait_type": "Bullet Color",
+            "value": "Yellow"
+        }
+    ]
+}
+        
