@@ -4,13 +4,13 @@ Recently, Avalanche called for developers to rise to an occasion: [a contest](ht
 
 ![Image for post](/img/tutorial-contest.png)
 
-We’re pleased to announce the winners! 
+We’re pleased to announce the winners!
 
-* [Winner Name 1](https://github.com) with the [Name of Tutorial 1](entry_directory/README.md)
-* [Winner Name 2](https://github.com) with the [Name of Tutorial 2](entry_directory/README.md)
-* [Winner Name 3](https://github.com) with the [Name of Tutorial 3](entry_directory/README.md)
-* [Winner Name 4](https://github.com) with the [Name of Tutorial 4](entry_directory/README.md)
-* [Winner Name 5](https://github.com) with the [Name of Tutorial 5](entry_directory/README.md)
-* [Winner Name 6](https://github.com) with the [Name of Tutorial 6](entry_directory/README.md)
+- [Winner Name 1](https://github.com) with the [Name of Tutorial 1](./entry_directory/README.md)
+- [Winner Name 2](https://github.com) with the [Name of Tutorial 2](./entry_directory/README.md)
+- [Winner Name 3](https://github.com) with the [Name of Tutorial 3](./entry_directory/README.md)
+- [Winner Name 4](https://github.com) with the [Name of Tutorial 4](./entry_directory/README.md)
+- [Winner Name 5](https://github.com) with the [Name of Tutorial 5](./entry_directory/README.md)
+- [Winner Name 6](https://github.com) with the [Name of Tutorial 6](./entry_directory/README.md)
 
 A giant thank you to our winners, and another to all who participated.
