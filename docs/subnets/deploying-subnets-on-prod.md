@@ -81,35 +81,107 @@ When creating the Subnet, you will be required to have a private key that will c
 
 Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because losing control of the managing would be catastrophic. General instruction on how to use a Ledger device with Avalanche can be found [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
+### Genesis file
+
+The structure that defines the most important parameters in a subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already. 
+
+If you want to review, we have a description of the genesis file in our document on [customizing EVM Subnets](customize-a-subnet.md).
+
 ### Subnet-CLI Wizard
 
 Creating a subnet is a multistep process. You need to:
-* create a WMID
-* create the controlling key
+* create a `WMID`
 * create the Subnet
 * create the blockchain in the Subnet
 * add validators to Subnet
 
 Fortunately, to minimize potential errors and streamline the process Subnet-CLi has a Wizard command that does most of the work for you snd guides you through the process.
 
-### Create a subnet
+Before running the wizard you will need to [create the `WMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the genesis `json` file.
 
+An example of wizard command line could look like:
 
+```bash
+subnet-cli wizard \
+--ledger \
+--node-ids=NodeID-741aqvs6R4iuHDyd1qT1NrFTmsgu78dc4,NodeID-K7Y79oAmBntAcdkyY1CLxCim8QuqcZbBp,NodeID-C3EY6u4v7DDi6YEbYf1wmXdvkEFXYuXNW,NodeID-AiLGeqQfh9gZY3Y8wLMD15tuJtsJHq5Qi \
+--vm-genesis-path=prod-genesis.json \
+--vm-id=tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH \
+--chain-name=prodSubnet
+```
 
-### Create the blockchain
+Please refer to the Subnet-CLI docs for [detailed instructions](subnet-cli.md#subnet-cli-wizard).
 
-### Add the validators
+If the wizard completes correctly your Subnet will now be created, deployed and available to see in [the Subnet explorer](https://subnets.avax.network/subnets). Congrats!
+
+You can also use Subnet-CLI to manage your Subnet after the initial deploy, to add new validators, renew ones that expired and so on. Familiarize yourself with Subnet-CLI, you be using it often!
 
 ## Validator Configuration
 
+Running nodes as Subnet validators warrants some additional considerations, above those when running a regular node or a Primary Network-only validator.
+
 ### Subnet Whitelisting
 
-### Bootstrapping
+For a node to join a subnet, there are two prerequisites:
+* Primary Network validation
+* Subnet whitelisting
+
+Primary Network validation means that a node cannot join a subnet as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a subnet. Of course, this is valid only for subnet validators, if you need a non-validating subnet node, then the node doesn't need to be a validator at all.
+
+To have a node start syncing the Subnet, you need to add the `--whitelisted-subnets` command line option, or `whitelisted-subnets` key to the node config file (found at `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync multiple subnets, so you can add them as a comma-separated list of subnet IDs.
+
+An example of a node config syncing two subnets:
+
+```json
+{
+  "dynamic-public-ip": "opendns",
+  "http-host": "",
+  "whitelisted-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY,Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk"
+}
+```
+
+But that is not all. Besides the whitelist containing the SubnetID, node also needs to have the plugin that contains the VM instance the blockchain in the Subnet will run. You should have already been through that on testnet and Fuji, but for a refresher, you can refer to [this tutorial](create-a-fuji-subnet.md).
+
+So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins` directory where the node binary is (for installer-script created nodes that would be `~/avalanche-node/plugins/`). 
+
+### Subnet Bootstrapping
+
+After you have added the whitelist and placed the VM binary in the correct directory, your node is ready to start syncing with the Subnet. Restart the node and monitor the log output. You should notice something similar to:
+
+```text
+Jul 30 18:26:31 node-fuji avalanchego[1728308]: [07-30|18:26:31.422] INFO chains/manager.go:262 creating chain:
+Jul 30 18:26:31 node-fuji avalanchego[1728308]:     ID: 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt
+Jul 30 18:26:31 node-fuji avalanchego[1728308]:     VMID:srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
+```
+
+That means the node has detected the subnet, and is attempting to initialize it and start bootstrapping the Subnet. It might take some time (if there are already transactions on the subnet), and eventually it will finish the bootstrap with a message like:
+
+```text
+Jul 30 18:27:21 node-fuji avalanchego[1728308]: [07-30|18:27:21.055] INFO <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain> snowman/transitive.go:333 consensus starting with J5wjmotMCrM2DKxeBTBPfwgCPpvsjtuqWNozLog2TomTjSuGK as the last accepted block
+```
+
+That means the node has successfully bootstrapped the Subnet and is now in sync. If the node is one of the validators, it will start validating any transactions that get posted to the Subnet.
 
 ### Monitoring
 
+If you want to inspect the process of Subnet syncing, you can use the RPC call to check for the [blockchain status](../apis/avalanchego/apis/p-chain.md#platformgetblockchainstatus).
+
+For a more in-depth look into Subnet operation, check out the blockchain log. By default, the log can be found in `~/.avalanchego/logs/<ChainID>.log` where you replace the <ChainID> with the actual ID of the blockchain in your Subnet.
+
+For an even more thorough (and pretty!) insight into how the node and the Subnet is behaving, you can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node operation, as well as a dedicated dashboard for Subnet data. Check out the [tutorial](../nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
+
 ### Managing validation
 
-## Othre considerations
+On Avalanche all validations are limited in time and can range from two weeks up to one year. Furthermore, subnet validations are always a subset of the Primary Network validation period (must be shorter or the same). That means that periodically your validators will expire and you will need to submit a new validation transaction for both the Primary Network and your Subnet.
+
+Unless managed properly and in a timely manner, that can be disruptive for your Subnet (if all validators expire at the same time your Subnet will halt). To avoid that, keep notes on when a particular validation is set to expire and be ready to renew it as soon as possible. Also, when initially setting up the nodes, make sure to stagger the validator expiry so they don't all expire on the same date. Setting end dates at least a day apart is a good practice, as well as setting reminders for each expiry.
 
 ## Conclusion
+
+Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your subnet to production and you are now better prepared to launch your Subnet successfully.
+
+Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. Things can change and go sideways in unexpected ways so you always need to be on your toes, and constantly monitor the nodes and subnet health. 
+
+If you have any questions, doubts or would like to chat, please check out our [Discord server](https://chat.avax.network/), where we host a dedicated `#subnet-chat` channel dedicated to talking about all things Subnet.
+
+We hope to see you there! 
