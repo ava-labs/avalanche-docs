@@ -4,19 +4,19 @@
     "description": "The label for version current"
   },
   "sidebar.overview.category.Getting Started": {
-    "message": "Getting Started",
+    "message": "入门指南",
     "description": "The label for category Getting Started in sidebar overview"
   },
   "sidebar.overview.link.Whitepapers": {
-    "message": "Whitepapers",
+    "message": "白皮书",
     "description": "The label for link Whitepapers in sidebar overview, linking to https://www.avalabs.org/whitepapers"
   },
   "sidebar.overview.link.Audits": {
-    "message": "Audits",
+    "message": "审计",
     "description": "The label for link Audits in sidebar overview, linking to https://github.com/ava-labs/audits"
   },
   "sidebar.dapps.category.Smart Contract": {
-    "message": "Smart Contract",
+    "message": "智能合同",
     "description": "The label for category Smart Contract in sidebar dapps"
   },
   "sidebar.subnets.category.Build": {
