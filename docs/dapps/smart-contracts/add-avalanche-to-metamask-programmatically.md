@@ -10,7 +10,7 @@ Since March 2021 Metamask has implemented that EIP as part of their Metamask [Cu
 
 Let's see how it works.
 
-## Data structures
+## Data Structures
 
 To add the Avalanche network to Metamask, we need to prepare the data structures that will be contain all the necessary data.
 
@@ -46,7 +46,7 @@ export const AVALANCHE_TESTNET_PARAMS = {
 }
 ```
 
-## Adding the network
+## Adding the Network
 
 To add the network to MetaMask, we need to call the `wallet_addEthereumChain` method, exposed by the web3 provider.
 
@@ -69,7 +69,7 @@ Where `injected` is initialized as a `web3-react/injected-connector` used to int
 
 Typical usage pattern would be to expose a button calling that method if you get `Wrong Network` or `Error connecting` errors when attempting to establish a connection to MetaMask.
 
-## User experience
+## User Experience
 
 When users first come to your dapp's website they need to approve connection to MetaMask. After they do that, if you don't detect successful web3 network connection, you can present them with a dialog asking them to confirm switch to a new network:
 

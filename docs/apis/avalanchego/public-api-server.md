@@ -26,13 +26,17 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 ## Supported APIs
 
-The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md) and [C-Chain](./apis/c-chain.md). For a full list of available APIs see [here](./apis/README.md).
+The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md), [C-Chain](./apis/c-chain.md), and full archival for the Primary Network. However, it does not support [Index APIs](./apis/index-api.md).
 
-:::info
+For a full list of available APIs see [here](./apis/README.md).
+
+## Limitations
+
 The public API only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
 
 For batched C-Chain requests on the public api node, the maximum number of items is 40. We are working on to support a larger batch size.
-:::
+
+The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](../../nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
 
 ## Sticky sessions
 

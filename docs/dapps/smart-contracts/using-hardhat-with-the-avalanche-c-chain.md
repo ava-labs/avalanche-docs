@@ -22,7 +22,7 @@ npm install -g yarn
 
 ### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](../../quickstart/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
 
 ### Solidity and Avalanche
 
@@ -140,7 +140,7 @@ $ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-### Start a New Avalanche Network with Five Nodes (a cluster)
+### Start a New Avalanche Network with Five Nodes
 
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
