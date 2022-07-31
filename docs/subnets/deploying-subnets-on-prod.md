@@ -130,7 +130,7 @@ For a node to join a subnet, there are two prerequisites:
 * Primary Network validation
 * Subnet whitelisting
 
-Primary Network validation means that a node cannot join a subnet as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a subnet. Of course, this is valid only for subnet validators, if you need a non-validating subnet node, then the node doesn't need to be a validator at all.
+Primary Network validation means that a node cannot join a Subnet as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a Subnet. Of course, this is valid only for Subnet validators, if you need a non-validating Subnet node, then the node doesn't need to be a validator at all.
 
 To have a node start syncing the Subnet, you need to add the `--whitelisted-subnets` command line option, or `whitelisted-subnets` key to the node config file (found at `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync multiple subnets, so you can add them as a comma-separated list of subnet IDs.
 
