@@ -26,7 +26,7 @@ For running AvalancheGo as a validator on the Primary Network the recommended co
 
 That is the configuration sufficient for running a Primary Network node. Any resource requirements for your Subnet come on top of this, so you should not go below this configuration, but may need to step up the specification if you expect your Subnet to handle a significant amount of transactions.
 
-Be sure to set up monitoring of resource consumption for your nodes because resource exhaustion may cause your Subnet to slow down or even halt.
+Be sure to set up monitoring of resource consumption for your nodes because resource exhaustion may cause your node to slow down or even halt, which may severely impact your Subnet negatively.
 
 ### Server location
 
