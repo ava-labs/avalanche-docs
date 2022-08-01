@@ -36,7 +36,7 @@
     "description": "The label of footer link with label=GitHub linking to https://github.com/ava-labs/avalanche-docs"
   },
   "copyright": {
-    "message": "Copyright © 2021 Ava Labs, Inc.",
+    "message": "Copyright © 2022 Ava Labs, Inc.",
     "description": "The footer copyright"
   }
 }
