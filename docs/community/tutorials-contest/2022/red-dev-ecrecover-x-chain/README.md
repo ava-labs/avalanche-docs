@@ -1,4 +1,4 @@
-# How to Extend Avalanche's Subnet-evm with a stateful Precompile
+# How to Extend Avalanche's Subnet-evm with a Stateful Precompile
 
 This tutorial will show you how to extend Avalanche's Subnet-evm with custom functionality. It adds a novel stateful precompile contract to verify the X-Chain signature of a message that has been signed using the Avalanche Wallet or by other means.
 
@@ -55,14 +55,14 @@ git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
-This will clone and checkout to `master` branch.
+This will clone and checkout the `master` branch.
 
 ## Add a Stateful Precompile
 
 To add a novel stateful precompile into Subnet-evm, follow these steps:
 
 1. Modify the [precompile/params.go](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
-2. Create your own custom precompile contract and place it under the precompile folder. In this tutorial we have created as an example [contract_xchain_ecrecover.go](./contract_xchain_ecrecover.go). (We reference this example throughout the tutorial. Of course, you'll need to replace each of these references with similar references to your own precompile.)
+2. Create your own custom precompile contract and place it under the precompile folder. In this tutorial we have created as an example [contract_xchain_ecrecover.go](./contract_xchain_ecrecover.go). (We reference this example throughout the tutorial. Of course, you'll need to replace each of these references with ones to your own precompile.)
 3. Modify the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go). This supports adding the chain configuration and managed the Subnet-evm via the `genesis.json` file. Since, the precompiles is optional and can be added or removed from the Subnet-evm at anytime which can be managed by the `genesis.json` file.
 4. Modify the [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) to include the custom precompile configuration.
 
@@ -115,7 +115,7 @@ Note that in the case of a bad signature, the call to the precompile from Solidi
 
 ### Modify the Config File
 
-As we mentioned earlier, the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go) is used to add the chain configuration and managed the Subnet-evm via the genesis.json file. Five sections of this file require modifications.
+As we mentioned earlier, the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go) is used to add the chain configuration and managed the Subnet-evm via the `genesis.json` file. Five sections of this file require modifications.
 
 First, at about [line 122](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L122), add the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct which will manage the new precompile through the `genesis.json` file:
 
@@ -200,7 +200,7 @@ func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompi
 
 The script [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the Subnet-evm by configuring in the `genesis.json` file.
 
-Modify the default `genesis.json` setting in the [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) to enable the custom precompile. At about [line 125](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L125) under config object, add the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [params/config.go line 122](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L122):
+Modify the default `genesis.json` setting in the [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) to enable the custom precompile. At about [line 125](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L125) under the `config` object, add the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [params/config.go line 122](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L122):
 
 ```diff
 {
@@ -237,7 +237,7 @@ Modify the default `genesis.json` setting in the [scripts/run.sh](https://github
 The final step is to run the local Subnet-evm.
 
 [`scripts/run.sh`](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) automatically installs `avalanchego`, sets up a local network,
-and creates a `Subnet-evm` genesis file. The usage of this script is
+and creates a `Subnet-evm` genesis file. The usage of this script is:
 
 ```bash
 ./scripts/run.sh [AVALANCHEGO VERSION] [GENESIS_ADDRESS]
@@ -253,7 +253,7 @@ cd ${HOME}/go/src/github.com/ava-labs/subnet-evm
 Note that this address (`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`) is a prefunded address on the local network, see [here](https://docs.avax.network/quickstart/fund-a-local-test-network) for more info. The private key for this address is
 `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
 
-With this command, `avalanchego`, `avalanche-network-runner` and GoLang packages will be downloaded and installed on a `/tmp` directory. Note: please make sure that your have fast internet connection to download these packages, otherwise, it will take a long time.
+With this command, `avalanchego`, `avalanche-network-runner` and `GoLang` packages will be downloaded and installed on a `/tmp` directory. Note: please make sure that your have fast internet connection to download these packages, otherwise, it will take a long time.
 
 Once the the network is started up, the following info will be printed to the console (parts clipped for brevity):
 
@@ -333,7 +333,7 @@ Chain ID: 99999
 Curreny Symbol: LEVM
 ```
 
-You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
+You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`, and then you can start working with this account.
 
 
 ## Using the Precompile from Remix
@@ -342,19 +342,19 @@ You can copy paste the Solidity interface [contract_xchain_ecrecover.sol](./cont
 
 Once you’ve compiled the interface, you can navigate to the Deploy tab in remix, select “Injected Web3” for your local environment so that you can interact with your EVM instance, and paste the address `0x0300000000000000000000000000000000000000` of the precompile in the field to the right of “At Address”.
 
-Clicking “At Address” will deploy the interface at that address, as if you had deployed a fully implemented contract in Solidity and from there you can interact with the precompile directly in Solidity.
+Clicking “At Address” will deploy the interface at that address, as if you had deployed a fully implemented contract in Solidity, and from there you can interact with the precompile directly in Solidity.
 
-As input to the `getXChainECRecover()` function, pass prefixed hashed message, r, s and v from the signature as arguments. The function will return the X-chain address which signed the message.
+As input to the `getXChainECRecover()` function, pass the prefixed hashed message, r, s and v from the signature as arguments. The function will return the X-chain address which signed the message.
 
 ### Extraction Tool
 For your convenience, we have created a simple tool to make it easy to extract the prefixed hashed message and the r, s, and v values required by this function: [Avalanche Wallet Signature Extraction Tool](https://rediyeti.com/avax-sig-extraction-tool)
 
 # Resources
-Here is a list of resources that can give you a detailed idea of what is mentioned in this tutorial.
+Here is a list of resources that can give you background and additional information about the topics mentioned in this tutorial.
 
 
 1. [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
-2. [Customise a Subnet](https://docs.avax.network/subnets/customize-a-subnet)
+2. [Customize a Subnet](https://docs.avax.network/subnets/customize-a-subnet)
 3. [Create an EVM Subnet on a Local Network](https://docs.avax.network/subnets/create-a-local-subnet)
 4. [Remix](https://remix-project.org/)
 5. [GoLang](https://go.dev/)
