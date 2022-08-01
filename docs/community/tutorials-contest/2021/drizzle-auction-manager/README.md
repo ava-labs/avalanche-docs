@@ -146,7 +146,7 @@ module.exports = {
 ```
 Here we are setting the `gas` and `gasprice` to an appropriate value of the Avalanche C-chain. The developer may observe that `contract_build_directory` is being used to change the default location of `artifacts` from the project root directory to the `src` folder. Since React is unable to access the files present outside the `src` folder.
 
-## Recieve Avalanche Credentials
+## Receive Avalanche Credentials
 
 For deploying smart contracts we need two things: A node connected to the Avalanche network and an account with few AVAX. Avalanche connected node through RPC (Remote Procedure Call) is provided for free by the Avalanche Networks.
 
