@@ -453,8 +453,8 @@ Our bridge implementation is a naive one. It should give the reader a deep under
 
 - More Bridge Operators
   - Rather than trusting on a single account, we might use a multi-sig wallet. For example, it could be a 4 of 5 multi-sig wallet. Allowing us to confirm transactions with 5 accounts and on 4 confirmation it would allow for execution. In that case, we would have a multi-sig smart contract and that contract would be the admin of the bridges. There will be 5 different relayer applications running with 5 different accounts' private keys. Each of them would send transactions to the multi-sig smart contract. When 4 of them sends the transaction, smart contract would execute the mint or release function on the bridge contract. This approach would increases both the security and ease of maintanance of our bridge. Because of this approach, when one computer that runs the relayer application has to have a maintenance or have an electricity outage bridge would function normally. But, just because we have more bridge operators our bridge is not fully secure.
-- Auditing Smart Contract
-  - Smart Contract should be audited. But, do not forget audited does not mean it is bug free.
+- Auditing Smart Contracts
+  - Smart Contracts should be audited. But, do not forget audited does not mean it is bug free.
 - Testing Relayer Application
   - Relayer application should be audited and tested as well.
   - If we decide to use a multi-sig wallet we have to update our relayer application to call relevant functions on the multi-sig contract rather than directly calling bridge contracts.
@@ -471,3 +471,6 @@ Things achieved:
 - Created a relayer application to communicate with both chains.
 - Tested relayer to make sure communication between chains are established.
 - Used ERC-20 token as the gas token on the Subnet.
+
+## References 
+  * [Further Readings](https://github.com/securing/SCSVS/blob/prerelease/SCSVSv2/2.0/0x200-Components/0x206-C6-Bridge.md)
