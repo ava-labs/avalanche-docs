@@ -43,7 +43,7 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Pl
 
 As some software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`. Otherwise, you may get errors running the commands below.
 
-## Clone Subnet-EVM
+## Clone the Subnet-EVM Repo
 
 Download the [`Subnet-EVM`](https://github.com/ava-labs/subnet-evm.git) repository into your `$GOPATH`:
 
