@@ -1,3 +1,7 @@
+08/01/2022
+/apis/avalanche-wallet-sdk /apis/avalanchejs 301
+/apis/avalanche-wallet-sdk/wallet-classes /apis/avalanchejs 301
+
 07/31/2022
 /community/tutorials-contest/red-dev-avalanche-chainlink-tutorial /community/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial 301
 /community/tutorials-contest/pangolin-token-subgraph /community/tutorials-contest/2021/pangolin-token-subgraph 301
@@ -245,10 +249,7 @@
 /build/tools/avalanchejs/manage-x-chain-keys /apis/avalanchejs/manage-x-chain-keys 301
 /build/tools/avalanchejs/send-an-asset-on-the-x-chain/ /apis/avalanchejs/send-an-asset-on-the-x-chain 301
 /build/tools/avalanchejs/send-an-asset-on-the-x-chain /apis/avalanchejs/send-an-asset-on-the-x-chain 301
-/build/tools/avalanche-wallet-sdk/ /apis/avalanche-wallet-sdk/ 301
-/build/tools/avalanche-wallet-sdk /apis/avalanche-wallet-sdk/ 301
-/build/tools/avalanche-wallet-sdk/wallet-classes/ /apis/avalanche-wallet-sdk/wallet-classes 301
-/build/tools/avalanche-wallet-sdk/wallet-classes /apis/avalanche-wallet-sdk/wallet-classes 301
+
 #quickstart
 /build/tutorials/platform/ /quickstart/ 301
 /build/tutorials/platform /quickstart/ 301
