@@ -65,7 +65,7 @@ After copy and paste the address here, click request 20 AVAX. This test faucet t
 
 Then check your wallet balance and you should have some test token in your metamask.
 
-## Create mintable token
+## Create Mintable Token
 
 Now, we can create our mintable token on Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
 

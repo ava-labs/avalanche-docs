@@ -335,7 +335,7 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-## Interacting with your contract
+## Interacting with Your Contract
 
 Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
 
@@ -351,7 +351,7 @@ This returns:
 undefined
 ```
 
-### Writing a number to the blockchain
+### Writing a Number to the Blockchain
 
 Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
 
@@ -383,7 +383,7 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### Reading a Number from the Blockhain
 
 To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
 

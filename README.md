@@ -84,3 +84,27 @@ To [regenerate translation file for plugin](https://docusaurus.io/docs/next/i18n
 ```
 yarn run write-translations -- --locale zh-Hans
 ```
+
+#### Crowdin
+
+`crowdin.yml` has been created in this project.
+
+After merging to master branch, do the following to get the latest code for translation.
+
+Generate the JSON translation files for the default language in /i18n/en
+
+```
+yarn run write-translations
+```
+
+Upload all the JSON and Markdown translation files:
+
+```
+yarn run crowdin upload
+```
+
+Use the Crowdin CLI to download the translated JSON and Markdown files.
+
+```
+yarn run crowdin download
+```
