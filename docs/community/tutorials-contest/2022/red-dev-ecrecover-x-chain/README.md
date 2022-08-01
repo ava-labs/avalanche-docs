@@ -20,23 +20,29 @@ To get the most out of this tutorial, you will need to have a basic understandin
 ## Install Go
 
 Download the Go package. We have used version 1.18.3 for this tutorial:
+
 ```
 $ wget https://storage.googleapis.com/golang/go1.18.3.linux-amd64.tar.gz
 ```
+
 Extract `go1.18.3.linux-amd64.tar.gz` to `/usr/local`:
+
 ```
 $ sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
 ```
+
 Add `/usr/local/go/bin` to the PATH environment variable. You can do this by adding the following line to your `$HOME/.profile` or `/etc/profile` (for a system-wide installation):
 
 ```
 export PATH=$PATH:/usr/local/go/bin
 ```
+
 Verify that you've installed Go by running the command below:
 
 ```
 $ go version
 ```
+
 ![go-v](ecrecover-x-chain-00-go-v.png)
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
@@ -99,6 +105,7 @@ var (
 	}
 )
 ```
+
 ### Create a New Custom Precompile Contract
 
 We have created the example precompile contract [contract_xchain_ecrecover.go](./contract_xchain_ecrecover.go). All stateful precompile contracts should implement the interfaces `Address()`, `Contract()`, `Configure()` and `Timestamp()`.
@@ -180,7 +187,7 @@ func (c *ChainConfig) AvalancheRules(blockNum, blockTimestamp *big.Int) Rules {
 }
 ```
 
-And fifth, at about [line 563](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L563),  include your custom precompiles into the stateful precompiled configs:
+And fifth, at about [line 563](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L563), include your custom precompiles into the stateful precompiled configs:
 
 ```diff
 func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompileConfig {
@@ -196,6 +203,7 @@ func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompi
 + 	}
 }
 ```
+
 ### Modify the Run Script
 
 The script [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the Subnet-EVM by configuring in the `genesis.json` file.
@@ -242,7 +250,6 @@ and creates a `Subnet-EVM` genesis file. The usage of this script is:
 ```bash
 ./scripts/run.sh [AVALANCHEGO VERSION] [GENESIS_ADDRESS]
 ```
-
 
 ```bash
 # to startup a local cluster (good for development)
@@ -335,7 +342,6 @@ Curreny Symbol: LEVM
 
 You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`, and then you can start working with this account.
 
-
 ## Using the Precompile from Remix
 
 You can copy paste the Solidity interface [contract_xchain_ecrecover.sol](./contract_xchain_ecrecover.sol) into Remix and compile it by hitting “Compile contract_xchain_ecrecover.sol”.
@@ -347,16 +353,19 @@ Clicking “At Address” will deploy the interface at that address, as if you h
 As input to the `getXChainECRecover()` function, pass the prefixed hashed message, r, s and v from the signature as arguments. The function will return the X-chain address which signed the message.
 
 ### Extraction Tool
+
 For your convenience, we have created a simple tool to make it easy to extract the prefixed hashed message and the r, s, and v values required by this function: [Avalanche Wallet Signature Extraction Tool](https://rediyeti.com/avax-sig-extraction-tool)
 
 # Resources
-Here is a list of resources that can give you background and additional information about the topics mentioned in this tutorial.
 
+Here is a list of resources that can give you background and additional information about the topics mentioned in this tutorial.
 
 1. [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
 2. [Customize a Subnet](https://docs.avax.network/subnets/customize-a-subnet)
 3. [Create an EVM Subnet on a Local Network](https://docs.avax.network/subnets/create-a-local-subnet)
 4. [Remix](https://remix-project.org/)
 5. [GoLang](https://go.dev/)
+
 # Conclusion
+
 The ability to add stateful precompiles to an Avalanche Subnet based on Subnet-EVM opens up a world of possibilities. We chose to write a precompile to address one significant use-case pertaining to Subnet inter-communication, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the Subnet-EVM.
