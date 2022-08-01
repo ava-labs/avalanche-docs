@@ -12,82 +12,9 @@ We will create and deploy a new Subnet using our custom genesis file for the gam
 
 The Game contract has a simple function called `play` that accepts `LUCK` tokens (native currency of our Subnet) and the contract will either lock the tokens or **mint** 2x the amount of tokens to the player. Yes, it's going to mint native tokens.
 
-At the end of the tutorial, you will *hopefully* have a solid understanding of how to customize the genesis file of your Subnet.
+At the end of the tutorial, you will _hopefully_ have a solid understanding of how to customize the genesis file of your Subnet.
 
 I hope you enjoy this tutorial!
-
-## Table of Contents
-
-- [Avalanche - Creating a Genesis File for Your Subnet](#avalanche---creating-a-genesis-file-for-your-subnet)
-  - [Introduction](#introduction)
-  - [Table of Contents](#table-of-contents)
-  - [Prerequisites](#prerequisites)
-    - [Metamask](#metamask)
-    - [Avalanche Cli](#avalanche-cli)
-- [Creating and Deploying a Simple Subnet](#creating-and-deploying-a-simple-subnet)
-  - [What Is a Subnet?](#what-is-a-subnet)
-    - [Subnets](#subnets)
-    - [Genesis File](#genesis-file)
-  - [Creating a Simple Subnet](#creating-a-simple-subnet)
-    - [Choose Your Vm](#choose-your-vm)
-    - [Chain Id](#chain-id)
-    - [Token Symbol](#token-symbol)
-    - [Gas Configuration](#gas-configuration)
-    - [Airdropping Native Tokens](#airdropping-native-tokens)
-    - [Adding a Custom Precompile to Modify the Evm](#adding-a-custom-precompile-to-modify-the-evm)
-      - [Native Minting](#native-minting)
-      - [Configure Contract Deployment Whitelist](#configure-contract-deployment-whitelist)
-      - [Configure Transaction Allow List](#configure-transaction-allow-list)
-  - [Deploying the Subnet](#deploying-the-subnet)
-- [Understanding the Genesis File](#understanding-the-genesis-file)
-  - [Config](#config)
-    - [`chainId`](#chainid)
-    - [Hardforks](#hardforks)
-  - [Fee Config](#fee-config)
-    - [`gasLimit`](#gaslimit)
-    - [`targetBlockRate`](#targetblockrate)
-    - [`minBaseFee`](#minbasefee)
-    - [`targetGas`](#targetgas)
-    - [`baseFeeChangeDenominator`](#basefeechangedenominator)
-    - [`minBlockGasCost`](#minblockgascost)
-    - [`maxBlockGasCost`](#maxblockgascost)
-    - [`blockGasCostStep`](#blockgascoststep)
-  - [Validator Fee Recipient](#validator-fee-recipient)
-  - [Precompiles](#precompiles)
-    - [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig)
-    - [`contractNativeMinterConfig`](#contractnativeminterconfig)
-    - [`txAllowListConfig`](#txallowlistconfig)
-  - [Genesis Block](#genesis-block)
-    - [`nonce`](#nonce)
-    - [`timestamp`](#timestamp)
-    - [`extraData`](#extradata)
-    - [`gasLimit`](#gaslimit-value)
-    - [`difficulty`](#difficulty)
-    - [`mixHash`](#mixhash)
-    - [`coinbase`](#coinbase)
-    - [`parentHash`](#parenthash)
-    - [`gasUsed`](#gasused)
-    - [`number`](#number)
-    - [`airdropHash` `baseFeePerGas` `airdropAmount`](#airdrophash-basefeepergas-airdropamount)
-  - [Native Token Allocation](#native-token-allocation)
-- [Creating a Custom Genesis File](#creating-a-custom-genesis-file)
-  - [Setting the Chain Id](#setting-the-chain-id)
-  - [Configuring Fees and Gas](#configuring-fees-and-gas)
-  - [Allocating Native Tokens](#allocating-native-tokens)
-  - [Minting Native Tokens](#minting-native-tokens)
-  - [Restricting Contract Deployers](#restricting-contract-deployers)
-- [Creating and Deploying the Subnet Using the Custom Genesis File](#creating-and-deploying-the-subnet-using-the-custom-genesis-file)
-- [Deploying the Game Contract](#deploying-the-game-contract)
-  - [Metamask Configuration](#metamask-configuration)
-  - [Metamask Gas Configuration](#metamask-gas-configuration)
-  - [Deploying the Contract](#deploying-the-contract)
-    - [NativeMinterInterface.sol](#nativeminterinterfacesol)
-    - [Game.sol](#gamesol)
-    - [Compiling and Deploying](#compiling-and-deploying)
-  - [Setting Game Contract as a Minter](#setting-game-contract-as-minter)
-  - [Play the Game](#play-the-game)
-- [Conclusion](#conclusion)
-  - [Resources](#resources)
 
 ### Prerequisites
 
@@ -193,7 +120,7 @@ How would you like to distribute funds?
 #### Adding a Custom Precompile to Modify the Evm
 
 ```bash
-? Advanced: Would you like to add a custom precompile to modify the EVM?: 
+? Advanced: Would you like to add a custom precompile to modify the EVM?:
   ▸ No
     Yes
     Go back to previous step
@@ -458,7 +385,7 @@ Admin addresses can deploy new contracts and add new Admin and Deployer addresse
 
 #### `contractNativeMinterConfig`
 
-This configuration lets you use a smart contract to mint native tokens in your Subnet. This is useful if you want to use your own token minting system.  
+This configuration lets you use a smart contract to mint native tokens in your Subnet. This is useful if you want to use your own token minting system.
 
 If you'd like to use a smart contract to mint native tokens, you can set the `contractNativeMinterConfig` to a JSON object with the following properties:
 
@@ -511,7 +438,8 @@ The difficulty level applied during the nonce discovering of this block. It is u
 
 #### `mixHash`
 
-[Quotation from Explanation of genesis file](#resources)  
+[Quotation from Explanation of genesis file](#resources)
+
 > The combination of nonce and `mixHash` must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
 
 This isn't so important for the genesis block. You can set it to `0x0000000000000000000000000000000000000000000000000000000000000000`.
@@ -581,9 +509,7 @@ To get started, create a new file named `genesis.json` and fill it with the foll
     "muirGlacierBlock": 0,
     "SubnetEVMTimestamp": 0
   },
-  "alloc": {
-   
-  },
+  "alloc": {},
   "nonce": "0x0",
   "timestamp": "0x0",
   "extraData": "0x00",
@@ -625,14 +551,14 @@ The final configuration looks like:
 {
   "config": {
     "feeConfig": {
-        "gasLimit": 5000000,
-        "targetBlockRate": 5,
-        "minBaseFee": 60000000000,
-        "targetGas": 10000000,
-        "baseFeeChangeDenominator": 50,
-        "minBlockGasCost": 0,
-        "maxBlockGasCost": 5000000,
-        "blockGasCostStep": 10000
+      "gasLimit": 5000000,
+      "targetBlockRate": 5,
+      "minBaseFee": 60000000000,
+      "targetGas": 10000000,
+      "baseFeeChangeDenominator": 50,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 5000000,
+      "blockGasCostStep": 10000
     }
   }
 }
@@ -707,57 +633,53 @@ Now we're done! The final config looks like:
 
 ```json
 {
-    "config": {
-        "chainId": 321123,
-        "homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-        "eip155Block": 0,
-        "eip158Block": 0,
-        "byzantiumBlock": 0,
-        "constantinopleBlock": 0,
-        "petersburgBlock": 0,
-        "istanbulBlock": 0,
-        "muirGlacierBlock": 0,
-        "SubnetEVMTimestamp": 0,
-        "feeConfig": {
-            "gasLimit": 5000000,
-            "targetBlockRate": 5,
-            "minBaseFee": 60000000000,
-            "targetGas": 10000000,
-            "baseFeeChangeDenominator": 50,
-            "minBlockGasCost": 0,
-            "maxBlockGasCost": 5000000,
-            "blockGasCostStep": 10000
-        },
-        "contractDeployerAllowListConfig": {
-            "blockTimestamp": 0,
-            "adminAddresses": [
-                "0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"
-            ]
-        },
-        "contractNativeMinterConfig": {
-            "blockTimestamp": 0,
-            "adminAddresses": [
-                "0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"
-            ]
-        }
+  "config": {
+    "chainId": 321123,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "SubnetEVMTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 5000000,
+      "targetBlockRate": 5,
+      "minBaseFee": 60000000000,
+      "targetGas": 10000000,
+      "baseFeeChangeDenominator": 50,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 5000000,
+      "blockGasCostStep": 10000
     },
-    "alloc": {
-        "0000000b9af48743ef1188f3F20c9b8B90F52a5b": {
-            "balance": "0x3635C9ADC5DEA00000"
-        }
+    "contractDeployerAllowListConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
     },
-    "nonce": "0x0",
-    "timestamp": "0x0",
-    "extraData": "0x00",
-    "gasLimit": "5000000",
-    "difficulty": "0x0",
-    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "coinbase": "0x0000000000000000000000000000000000000000",
-    "number": "0x0",
-    "gasUsed": "0x0",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    "contractNativeMinterConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
+    }
+  },
+  "alloc": {
+    "0000000b9af48743ef1188f3F20c9b8B90F52a5b": {
+      "balance": "0x3635C9ADC5DEA00000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "5000000",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
 }
 ```
 
@@ -787,7 +709,7 @@ $ avalanche Subnet create game --file ./genesis.json
 ```
 
 Now let's deploy it!
-  
+
 ```bash
 ## avalanche Subnet deploy <SubnetName>
 $ avalanche Subnet deploy game
@@ -820,7 +742,7 @@ Here is how:
 
 ![change gas fee](.github/images/changegasfee.gif)
 
-If you're using the *Enhanced Gas Fee UI* which is an experimental feature in metamask, you can set the gas fee to *Aggresive* and that should work.
+If you're using the _Enhanced Gas Fee UI_ which is an experimental feature in metamask, you can set the gas fee to _Aggresive_ and that should work.
 
 ![aggresive](.github/images/aggresive.gif)
 
