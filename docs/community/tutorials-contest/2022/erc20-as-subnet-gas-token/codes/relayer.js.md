@@ -168,7 +168,7 @@ const main = async () => {
 				);
 				/* Check if nonce is processed or not */
 				const isProcessed =
-					await localBridgeContracts.subnet.admin.processedNonces(nonce);
+					await localBridgeContracts.avax.admin.processedNonces(nonce);
 				if (!isProcessed) {
 					/* If not processed add tx to txs array */
 					console.log("OLD: is not processed, will release on subnet\n");
@@ -208,15 +208,19 @@ const main = async () => {
 					)}, date: ${date}, nonce: ${nonce}, type: ${type}`
 				);
 				/* Check if nonce is processed or not */
-				const isProcessed = await bridgeContracts.subnet.admin.processedNonces(
-					nonce
-				);
-				if (!isProcessed) {
-					/* If not processed add tx to txs array */
-					console.log("is not processed, will mint on subnet\n");
-					txs.push({ chain: "subnet", to, amount, nonce });
-				} else {
-					console.log("is already processed\n");
+				try {
+					const isProcessed = await bridgeContracts.subnet.admin.processedNonces(
+						nonce
+					);
+					if (!isProcessed) {
+						/* If not processed add tx to txs array */
+						console.log("is not processed, will mint on subnet\n");
+						txs.push({ chain: "subnet", to, amount, nonce });
+					} else {
+						console.log("is already processed\n");
+					}
+				} catch (error) {
+					console.log("error while checking processedNonces on subnet bridge: ", error);
 				}
 			}
 		}
@@ -242,15 +246,19 @@ const main = async () => {
 					)}, date: ${date}, nonce: ${nonce}, type: ${type}`
 				);
 				/* Check if nonce is processed or not */
-				const isProcessed = await bridgeContracts.avax.admin.processedNonces(
-					nonce
-				);
-				if (!isProcessed) {
-					/* If not processed add tx to txs array */
-					console.log("is not processed, will release on avax\n");
-					txs.push({ chain: "avax", to, amount, nonce });
-				} else {
-					console.log("is already processed\n");
+				try {
+					const isProcessed = await bridgeContracts.avax.admin.processedNonces(
+						nonce
+					);
+					if (!isProcessed) {
+						/* If not processed add tx to txs array */
+						console.log("is not processed, will release on avax\n");
+						txs.push({ chain: "avax", to, amount, nonce });
+					} else {
+						console.log("is already processed\n");
+					}
+				} catch {
+					console.log("error while checking processedNonces on avax bridge: ", error);
 				}
 			}
 		}
@@ -268,27 +276,30 @@ const main = async () => {
         		If provided blockNumbers for avax or subnet are close to current blocks of the chains
         		Then a transaction might get added to the txs array twice. Once processing old blocks (but pretty recent) and once subscribed to new events. Therefore, we have to eliminate same txs by filtering.
 			 */
-			txs = txs.filter(
-				(value, index, self) =>
-					index ===
-					self.findIndex(
-						(t) => t.place === value.place && t.name === value.name
-					)
-			);
+            txs = txs.filter((value, index) => {
+                const _value = JSON.stringify(value);
+                return index === txs.findIndex(obj => {
+                    return JSON.stringify(obj) === _value;
+                })
+            });
 			console.log("txs: ", txs);
 			let tx;
 			/* Remove the first element from the array and destructure it */
 			const { chain, to, amount, nonce } = txs.shift();
 			/* Check which chain the transaction will be sent to  */
-			if (chain === "avax") {
-				/* Call `release()` on avax */
-				tx = await bridgeContracts[chain].admin.release(to, amount, nonce);
-			} else if (chain === "subnet") {
-				/* Call `mint()` on subnet */
-				tx = await bridgeContracts[chain].admin.mint(to, amount, nonce);
-			} else return;
-			await tx.wait();
-			console.log("transaction processed, token minted or released");
+			try {
+				if (chain === "avax") {
+					/* Call `release()` on avax */
+					tx = await bridgeContracts[chain].admin.release(to, amount, nonce);
+				} else if (chain === "subnet") {
+					/* Call `mint()` on subnet */
+					tx = await bridgeContracts[chain].admin.mint(to, amount, nonce);
+				} else return;
+				await tx.wait();
+				console.log("transaction processed, token minted or released");
+			} catch (error) {
+				console.log("error sending transaction: ", error);
+			}
 		}
 	}, 5000);
 };
