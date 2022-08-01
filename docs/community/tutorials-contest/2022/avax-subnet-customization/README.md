@@ -33,8 +33,8 @@ mkdir -p ~/avalanche
 Go to that directory and download the Avalanche CLI.
 
 ```bash
-$ cd ~/avalanche
-$ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+cd ~/avalanche
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 
 > ava-labs/avalanche-cli info checking GitHub for latest tag
 > ava-labs/avalanche-cli info found version: 0.1.3 for linux/amd64
@@ -78,7 +78,7 @@ The genesis file is a file that contains the initial configuration of the Subnet
 For this time, let's take the easy way out and use the CLI to deploy a Subnet to see how things work.
 
 ```bash
-avalanche Subnet create testSubnet
+avalanche subnet create testSubnet
 ```
 
 This command will run the wizard to create a Subnet.
@@ -131,7 +131,7 @@ Here you can set up a custom precompile to unlock some useful functions.
 ##### Native Minting
 
 This precompile allows admins to permit designated contracts to mint the native token on your Subnet.
-We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractNativeMinterConfig) section.
+We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractnativeminterconfig) section.
 
 ###### Configure Contract Deployment Whitelist
 
@@ -141,7 +141,7 @@ We will discuss this in more detail in the [`contractDeployerAllowListConfig`](#
 ###### Configure Transaction Allow List
 
 This precompile restricts who has the ability to make transactions on your Subnet.
-We will discuss this in more detail in the [`txAllowListConfig`](#txAllowListConfig) section.
+We will discuss this in more detail in the [`txAllowListConfig`](#txallowlistconfig) section.
 
 However, we are not gonna do any of these yet. Choose `No` and proceed.
 
@@ -156,7 +156,7 @@ Congrats! You just created a Subnet! 👏🎉
 This is the most fun part. We will deploy the Subnet that we just created, and it's so easy to do, thanks to Avalanche CLI!
 
 ```bash
-$ avalanche Subnet deploy testSubnet
+avalanche subnet deploy testSubnet
 
 > ? Choose a network to deploy on:
   ▸ Local Network
@@ -183,7 +183,7 @@ You can use this configuration to add a new network to your metamask. Then you c
 
 ![Metamask network config](.github/images/metamask.png)
 
-Notice that you will see the same private key if you've chosen `Airdrop 1 million tokens to the default address (do not use in production)` in the [airdrop step](#how-would-you-like-to-distribute-funds).
+Notice that you will see the same private key if you've chosen `Airdrop 1 million tokens to the default address (do not use in production)` in the [airdrop step](#airdropping-native-tokens).
 Thus, the private key is exposed and anyone can access the account. For that reason, it's not a good idea to use this in production.
 
 After importing the account on metamask, let's change the network to our Subnet.
@@ -204,13 +204,13 @@ Let's take a look at the genesis file of our Subnet which the wizard created for
 
 ```bash
 ## use your Subnet name instead of testSubnet
-$ cat ~/.avalanche-cli/testSubnet_genesis.json
+cat ~/.avalanche-cli/testSubnet_genesis.json
 ```
 
 To access the genesis file, you can also use:
 
 ```bash
-avalanche Subnet describe testSubnet --genesis
+avalanche subnet describe testSubnet --genesis
 ```
 
 Yes, the genesis file is in json format. The output should look like:
@@ -690,7 +690,7 @@ We will use `genesis.json` to create a new Subnet. This part is pretty simple.
 Let's first delete the old Subnet that we created using the wizard.
 
 ```bash
-$ avalanche Subnet delete testSubnet
+avalanche subnet delete testSubnet
 
 > Deleted Subnet
 ```
@@ -698,9 +698,9 @@ $ avalanche Subnet delete testSubnet
 Next, we will create a new Subnet using the genesis file.
 
 ```bash
-## avalanche Subnet create <SubnetName> --file <filepath>
+## avalanche subnet create <SubnetName> --file <filepath>
 
-$ avalanche Subnet create game --file ./genesis.json
+avalanche subnet create game --file ./genesis.json
 ## Use SubnetEVM
 
 > Using specified genesis
@@ -711,8 +711,8 @@ $ avalanche Subnet create game --file ./genesis.json
 Now let's deploy it!
 
 ```bash
-## avalanche Subnet deploy <SubnetName>
-$ avalanche Subnet deploy game
+## avalanche subnet deploy <SubnetName>
+avalanche subnet deploy game
 
 ## choose local network as deployment target
 
