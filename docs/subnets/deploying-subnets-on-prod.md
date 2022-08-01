@@ -41,6 +41,7 @@ When installing the AvalancheGo node on the machines, unless you have a dedicate
 #### Cloud Providers
 
 There are a number of different cloud providers. We have documents that show how to set up a node on the most popular ones:
+
 * [Amazon Web Services](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
 * [Azure](../nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
 * [Google Cloud Platform](../nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
@@ -94,6 +95,7 @@ If you want to review, we have a description of the genesis file in our document
 ### Subnet-CLI Wizard
 
 Creating a Subnet is a multistep process. You need to:
+
 * create a `WMID`
 * create the Subnet
 * create the blockchain in the Subnet
@@ -127,6 +129,7 @@ Running nodes as Subnet validators warrants some additional considerations, abov
 ### Subnet Whitelisting
 
 For a node to join a subnet, there are two prerequisites:
+
 * Primary Network validation
 * Subnet whitelisting
 
