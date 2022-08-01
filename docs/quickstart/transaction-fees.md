@@ -4,7 +4,7 @@ description: In order to prevent spam, transactions on Avalanche require the pay
 
 # Avalanche Transaction Fee
 
-In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned (destroyed forever).**
+In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in AVAX. **The transaction fee is burned (destroyed forever).**
 
 When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
 
