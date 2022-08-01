@@ -1,3 +1,21 @@
+08/01/2022
+/apis/avalanche-wallet-sdk /apis/avalanchejs 301
+/apis/avalanche-wallet-sdk/wallet-classes /apis/avalanchejs 301
+
+07/31/2022
+/community/tutorials-contest/red-dev-avalanche-chainlink-tutorial /community/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial 301
+/community/tutorials-contest/pangolin-token-subgraph /community/tutorials-contest/2021/pangolin-token-subgraph 301
+/community/tutorials-contest/hardhat-fork /community/tutorials-contest/2021/hardhat-fork 301
+/community/tutorials-contest/red-dev-sig-verify-tutorial /community/tutorials-contest/2021/red-dev-sig-verify-tutorial 301
+/community/tutorials-contest/evoting-avalanche-dapp /community/tutorials-contest/2021/evoting-avalanche-dapp 301
+/community/tutorials-contest/avalanche-DAO /community/tutorials-contest/2021/avalanche-DAO 301
+/community/tutorials-contest/NFT-Marketplace-on-Avalanche /community/tutorials-contest/2021/NFT-Marketplace-on-Avalanche 301
+/community/tutorials-contest/avalanche-erc721-tutorial /community/tutorials-contest/2021/avalanche-erc721-tutorial 301
+/community/tutorials-contest/how-to-mint-erc721-using-openzeppelin/tutorial /community/tutorials-contest/2021/how-to-mint-erc721-using-openzeppelin/tutorial 301
+/community/tutorials-contest/avax-chat-dapp /community/tutorials-contest/2021/avax-chat-dapp 301
+/community/tutorials-contest/drizzle-auction-manager /community/tutorials-contest/2021/drizzle-auction-manager 301
+/community/tutorials-contest/distributed-file-manager /community/tutorials-contest/2021/distributed-file-manager 301
+
 #07/17/2022
 /quickstart/network-runner /subnets/network-runner 301
 /quickstart/exchanges/integrate-exchange-with-avalanche /quickstart/integrate-exchange-with-avalanche 301
@@ -231,10 +249,7 @@
 /build/tools/avalanchejs/manage-x-chain-keys /apis/avalanchejs/manage-x-chain-keys 301
 /build/tools/avalanchejs/send-an-asset-on-the-x-chain/ /apis/avalanchejs/send-an-asset-on-the-x-chain 301
 /build/tools/avalanchejs/send-an-asset-on-the-x-chain /apis/avalanchejs/send-an-asset-on-the-x-chain 301
-/build/tools/avalanche-wallet-sdk/ /apis/avalanche-wallet-sdk/ 301
-/build/tools/avalanche-wallet-sdk /apis/avalanche-wallet-sdk/ 301
-/build/tools/avalanche-wallet-sdk/wallet-classes/ /apis/avalanche-wallet-sdk/wallet-classes 301
-/build/tools/avalanche-wallet-sdk/wallet-classes /apis/avalanche-wallet-sdk/wallet-classes 301
+
 #quickstart
 /build/tutorials/platform/ /quickstart/ 301
 /build/tutorials/platform /quickstart/ 301

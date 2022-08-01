@@ -129,11 +129,20 @@ State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses 
 
 ## Chain Configs
 
-Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
+Some blockchains allow the node operator to provide custom configurations. These custom configurations are broken down into two categories: network upgrades and optional chain configurations. AvalancheGo reads in these configurations from the chain configuration directory and passes them into the VM on initialization.
 
-It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used.
+:::note
+Please replace `chain-config-dir` and `blockchainID` with actual value.
+:::
+
+The network upgrades are passed in from the location: `chain-config-dir`/`blockchainID`/upgrade.json. After a blockchain has activated a network upgrade, the same upgrade configuration must always be passed in to ensure that the network upgrades activate at the correct time.
+
+The chain configs are passed in from the location `chain-config-dir`/`blockchainID`/config.json. This configuration is used by the VM to handle optional configuration flags such as enabling/disabling APIs, updating log level, etc. The chain configuration is intended to provide optional configuration parameters and the VM will use default values if nothing is passed in.
+`chain-config-dir`/`blockchainID`/config.json
 
 Full reference for all configuration options for specific chains can be found in a separate [chain config flags](chain-config-flags.md) document.
+
+Full reference for subnet-evm upgrade configuration can be found in a separate [Customize a Subnet](../../subnets/customize-a-subnet.md) document.
 
 #### `--chain-config-dir` (string):
 
