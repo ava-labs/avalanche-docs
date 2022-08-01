@@ -361,19 +361,18 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 
 - `avalanche subnet create <subnetName>`
 
-  - `"Error: Configuration already exists..."`
+  - `"Error: configuration already exists."`
     It means that you have already created a Subnet with the same name. To check if that is the case, you can run `avalanche subnet list` which would list the Subnets you have. If you have a Subnet with the same name, you can try to create with a different name, delete the existing Subnet by running `avalanche subnet delete <subnetName>` or overwrite the existing one by running `avalanche subnet create <subnetName> --force`
 
 ### Step 3: Deploy the Subnet
 
 - `avalanche subnet deploy <subnetName> -l`
 
-  - `"Error: failed to query network health: ..."`
-    You can check logs which are located at `$HOME/.avalanche-cli/logs` or try to run the command once more.
+  - `"Subnet <subnetName> has already been deployed"`
+    As it says, it means that your Subnet has already been deployed. To check currently running blockchains run `avalanche network status`. If it provides network information, try to connect to your Subnet using metamask to check if everythings all right. If it does not provide network information or you are having problems with interacting with your Subnet. Run `avalanche network clean`, this command will stop the local network and delete the state. Then, run `avalanche subnet deploy <subnetName> -l` again.
 
-  - `"Error: failed to start network : ..."`
-    It means that you have deployed a Subnet before and are trying to deploy another one without stopping the initial one. You can check the status by running `avalanche network status`. To solve this issue, run:
-    `avalanche network stop` and try to deploy your Subnet again.
+  - `"Error: failed to query network health: ..."`
+    You can check logs which are located at `$HOME/.avalanche-cli` or try to run the command once more.
 
 ### Step 4: Interact with the Subnet
 
