@@ -1,8 +1,8 @@
-# How to Extend Avalanche's Subnet-evm with a Stateful Precompile
+# How to Extend Avalanche's Subnet-EVM with a Stateful Precompile
 
-This tutorial will show you how to extend Avalanche's Subnet-evm with custom functionality. It adds a novel stateful precompile contract to verify the X-Chain signature of a message that has been signed using the Avalanche Wallet or by other means.
+This tutorial will show you how to extend Avalanche's Subnet-EVM with custom functionality. It adds a novel stateful precompile contract to verify the X-Chain signature of a message that has been signed using the Avalanche Wallet or by other means.
 
-Previously, we at [red·dev](https://www.red.dev) wrote a [tutorial](https://docs.avax.network/community/tutorials-contest/red-dev-sig-verify-tutorial) on the same topic using solidity. But we think it is faster, more user-friendly, and more gas-efficient to recreate it as a stateful precompile that works similarly to `ecrecover()`, a precompile that is already built into Subnet-evm that can verify C-Chain signatures.
+Previously, we at [red·dev](https://www.red.dev) wrote a [tutorial](https://docs.avax.network/community/tutorials-contest/red-dev-sig-verify-tutorial) on the same topic using solidity. But we think it is faster, more user-friendly, and more gas-efficient to recreate it as a stateful precompile that works similarly to `ecrecover()`, a precompile that is already built into Subnet-EVM that can verify C-Chain signatures.
 
 In this tutorial, we describe each step of setting up the environment and adding the new stateful precompile. For more information, see the **Resources** section at the end of this tutorial.
 
@@ -43,9 +43,9 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Pl
 
 As some software will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`. Otherwise, you may get errors running the commands below.
 
-## Clone Subnet-evm
+## Clone Subnet-EVM
 
-Download the [`Subnet-evm`](https://github.com/ava-labs/subnet-evm.git) repository into your `$GOPATH`:
+Download the [`Subnet-EVM`](https://github.com/ava-labs/subnet-evm.git) repository into your `$GOPATH`:
 
 ```sh
 cd $GOPATH
@@ -59,16 +59,16 @@ This will clone and checkout the `master` branch.
 
 ## Add a Stateful Precompile
 
-To add a novel stateful precompile into Subnet-evm, follow these steps:
+To add a novel stateful precompile into Subnet-EVM, follow these steps:
 
 1. Modify the [precompile/params.go](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go) - which is used to define the designated address for the stateful precompiles.
 2. Create your own custom precompile contract and place it under the precompile folder. In this tutorial we have created as an example [contract_xchain_ecrecover.go](./contract_xchain_ecrecover.go). (We reference this example throughout the tutorial. Of course, you'll need to replace each of these references with ones to your own precompile.)
-3. Modify the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go). This supports adding the chain configuration and managed the Subnet-evm via the `genesis.json` file. Since, the precompiles is optional and can be added or removed from the Subnet-evm at anytime which can be managed by the `genesis.json` file.
+3. Modify the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go). This supports adding the chain configuration and managed the Subnet-EVM via the `genesis.json` file. Since, the precompiles is optional and can be added or removed from the Subnet-EVM at anytime which can be managed by the `genesis.json` file.
 4. Modify the [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) to include the custom precompile configuration.
 
 ### Modify the Parameters File
 
-As we mentioned earlier, the [precompile/params.go](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of Subnet-evm, users should start at `0x0300000000000000000000000000000000000000` to ensure that their own modifications do not conflict with stateful precompiles that may be added to Subnet-evm in the future.
+As we mentioned earlier, the [precompile/params.go](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go) is used to define the designated address for the stateful precompiles. The designated address should not be conflict with the any other precompile addresses. For forks of Subnet-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure that their own modifications do not conflict with stateful precompiles that may be added to Subnet-EVM in the future.
 
 We have taken the address `0x0300000000000000000000000000000000000000` for this tutorial.
 
@@ -115,7 +115,7 @@ Note that in the case of a bad signature, the call to the precompile from Solidi
 
 ### Modify the Config File
 
-As we mentioned earlier, the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go) is used to add the chain configuration and managed the Subnet-evm via the `genesis.json` file. Five sections of this file require modifications.
+As we mentioned earlier, the [params/config.go](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go) is used to add the chain configuration and managed the Subnet-EVM via the `genesis.json` file. Five sections of this file require modifications.
 
 First, at about [line 122](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L122), add the new custom contract `ContractXChainECRecoverConfig` in the ChainConfig struct which will manage the new precompile through the `genesis.json` file:
 
@@ -198,7 +198,7 @@ func (c *ChainConfig) enabledStatefulPrecompiles() []precompile.StatefulPrecompi
 ```
 ### Modify the Run Script
 
-The script [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the Subnet-evm by configuring in the `genesis.json` file.
+The script [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) by default includes the default configuration. Since, the precompiles created under precompile folder are optional and can be added to the Subnet-EVM by configuring in the `genesis.json` file.
 
 Modify the default `genesis.json` setting in the [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) to enable the custom precompile. At about [line 125](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L125) under the `config` object, add the configuration for custom precompile. The configuration name `contractXChainECRecover` can be derived from [params/config.go line 122](https://github.com/ava-labs/subnet-evm/blob/master/params/config.go#L122):
 
@@ -232,12 +232,12 @@ Modify the default `genesis.json` setting in the [scripts/run.sh](https://github
 }
 ```
 
-## Run the Local Subnet-evm
+## Run the Local Subnet-EVM
 
-The final step is to run the local Subnet-evm.
+The final step is to run the local Subnet-EVM.
 
 [`scripts/run.sh`](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh) automatically installs `avalanchego`, sets up a local network,
-and creates a `Subnet-evm` genesis file. The usage of this script is:
+and creates a `Subnet-EVM` genesis file. The usage of this script is:
 
 ```bash
 ./scripts/run.sh [AVALANCHEGO VERSION] [GENESIS_ADDRESS]
@@ -359,4 +359,4 @@ Here is a list of resources that can give you background and additional informat
 4. [Remix](https://remix-project.org/)
 5. [GoLang](https://go.dev/)
 # Conclusion
-The ability to add stateful precompiles to an Avalanche Subnet based on Subnet-evm opens up a world of possibilities. We chose to write a precompile to address one significant use-case pertaining to Subnet inter-communication, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the Subnet-evm.
+The ability to add stateful precompiles to an Avalanche Subnet based on Subnet-EVM opens up a world of possibilities. We chose to write a precompile to address one significant use-case pertaining to Subnet inter-communication, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the Subnet-EVM.
