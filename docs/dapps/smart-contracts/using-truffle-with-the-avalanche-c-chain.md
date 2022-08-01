@@ -14,7 +14,7 @@ You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-ma
 - [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 - Truffle, which you can install with `npm install -g truffle`
 
-## Start up a local Avalanche network
+## Start up a Local Avalanche Network
 
 [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) allows you to spin up private test network deployments. Start a local five node Avalanche network:
 
@@ -26,7 +26,7 @@ cd /path/to/avalanche-network-runner
 
 A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
 
-## Create truffle directory and install dependencies
+## Create Truffle Directory and Install Dependencies
 
 Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
 
@@ -145,7 +145,7 @@ contract Storage {
 
 `Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
 
-## Add new migration
+## Add New Migration
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
 
@@ -223,7 +223,7 @@ truffle(development)> await web3.eth.getBalance(accounts[1])
 
 Notice that `accounts[0]` (default account) has some balance, while `accounts[1]` has no balance.
 
-### Scripting account funding
+### Scripting Account Funding
 
 There is a convenient script that funds the `accounts` list . You can find it [here](https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js). You can also download it using this command:
 
@@ -246,7 +246,7 @@ truffle(development)> await web3.eth.getBalance(accounts[1]);
 '1000000000000000000'
 ```
 
-### Fund your account
+### Fund Your Account
 
 If you wish to fund accounts your own, follow the steps in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 

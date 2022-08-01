@@ -41,16 +41,6 @@ Related docs
 
 - [AvalancheJS](../apis/avalanchejs/README.md)
 
-## Wallet SDK
-
-[Link to github](https://github.com/ava-labs/avalanche-wallet-sdk)
-
-A typescript library for creating and managing decentralized wallets.
-
-Related docs
-
-- [Wallet SDK](../apis/avalanche-wallet-sdk/README.md)
-
 ## Avalanche Wallet
 
 [Link to github](https://github.com/ava-labs/avalanche-wallet)
@@ -67,7 +57,7 @@ This is a tool to run and interact with a local Avalanche network.
 
 Related docs
 
-- [Avalanche Network Runner](../quickstart/network-runner.md)
+- [Avalanche Network Runner](../subnets/network-runner.md)
 
 ## Avalanche Developer Docs
 
