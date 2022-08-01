@@ -96,14 +96,14 @@ If you want to review, we have a description of the genesis file in our document
 
 Creating a Subnet is a multistep process. You need to:
 
-- create a `WMID`
+- create a `VMID`
 - create the Subnet
 - create the blockchain in the Subnet
 - add validators to Subnet
 
 Fortunately, to minimize potential errors and streamline the process Subnet-CLi has a Wizard command that does most of the work for you snd guides you through the process.
 
-Before running the wizard you will need to [create the `WMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the genesis `json` file.
+Before running the wizard you will need to [create the `VMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the genesis `json` file.
 
 An example of wizard command line could look like:
 
