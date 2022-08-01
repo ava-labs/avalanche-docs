@@ -75,9 +75,9 @@ We will have bridge contracts on both chains. Users will send transactions to th
 
 ## Requirements
 
-- [NodeJS](https://nodejs.org/en/) must be installed.
-- [npm](https://www.npmjs.com/) must be installed.
-- [Hardhat](https://hardhat.org/) must be installed.
+- [NodeJS](https://nodejs.org/en/) >= 16.0.0 must be installed.
+- [npm](https://www.npmjs.com/) >= 8.15.0 must be installed.
+- [Hardhat](https://hardhat.org/) >= 2.10.1 must be installed.
 
 ## Getting Started
 
