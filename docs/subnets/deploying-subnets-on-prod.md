@@ -18,11 +18,11 @@ Although AvalancheGo can run on a MacOS or a Windows computer, we strongly recom
 
 For running AvalancheGo as a validator on the Primary Network the recommended configuration is as follows:
 
-* CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 1TB with at least 3000 IOPS
-* OS: Ubuntu 18.04/20.04
-* Network: Reliable IPv4 or IPv6 network connection, with an open public port
+- CPU: Equivalent of 8 AWS vCPU
+- RAM: 16 GiB
+- Storage: 1TB with at least 3000 IOPS
+- OS: Ubuntu 18.04/20.04
+- Network: Reliable IPv4 or IPv6 network connection, with an open public port
 
 That is the configuration sufficient for running a Primary Network node. Any resource requirements for your Subnet come on top of this, so you should not go below this configuration, but may need to step up the specification if you expect your Subnet to handle a significant amount of transactions.
 
@@ -42,9 +42,9 @@ When installing the AvalancheGo node on the machines, unless you have a dedicate
 
 There are a number of different cloud providers. We have documents that show how to set up a node on the most popular ones:
 
-* [Amazon Web Services](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-* [Azure](../nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
-* [Google Cloud Platform](../nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
+- [Amazon Web Services](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
+- [Azure](../nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
+- [Google Cloud Platform](../nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
 
 There is a whole range of other cloud providers that may offer lower prices or better deals for your particular needs, so it makes sense to shop around.
 
@@ -82,13 +82,13 @@ Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.
 
 ### Ledger HW Wallet
 
-When creating the Subnet, you will be required to have a private key that will control the administrative functions of the Subnet (adding validators, managing the configuration). Needless to say, whoever has this private key has complete control over the Subnet and the way it runs. Therefore, protecting that key is of the utmost operational importance. Which is why we strongly recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and access that private key. 
+When creating the Subnet, you will be required to have a private key that will control the administrative functions of the Subnet (adding validators, managing the configuration). Needless to say, whoever has this private key has complete control over the Subnet and the way it runs. Therefore, protecting that key is of the utmost operational importance. Which is why we strongly recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and access that private key.
 
 Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because losing control of the managing would be catastrophic. General instruction on how to use a Ledger device with Avalanche can be found [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
 ### Genesis File
 
-The structure that defines the most important parameters in a Subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already. 
+The structure that defines the most important parameters in a Subnet is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet to production you probably have it mapped out already.
 
 If you want to review, we have a description of the genesis file in our document on [customizing EVM Subnets](customize-a-subnet.md).
 
@@ -96,10 +96,10 @@ If you want to review, we have a description of the genesis file in our document
 
 Creating a Subnet is a multistep process. You need to:
 
-* create a `WMID`
-* create the Subnet
-* create the blockchain in the Subnet
-* add validators to Subnet
+- create a `WMID`
+- create the Subnet
+- create the blockchain in the Subnet
+- add validators to Subnet
 
 Fortunately, to minimize potential errors and streamline the process Subnet-CLi has a Wizard command that does most of the work for you snd guides you through the process.
 
@@ -130,8 +130,8 @@ Running nodes as Subnet validators warrants some additional considerations, abov
 
 For a node to join a subnet, there are two prerequisites:
 
-* Primary Network validation
-* Subnet whitelisting
+- Primary Network validation
+- Subnet whitelisting
 
 Primary Network validation means that a node cannot join a Subnet as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a Subnet. Of course, this is valid only for Subnet validators, if you need a non-validating Subnet node, then the node doesn't need to be a validator at all.
 
@@ -149,7 +149,7 @@ An example of a node config syncing two subnets:
 
 But that is not all. Besides the whitelist containing the SubnetID, node also needs to have the plugin that contains the VM instance the blockchain in the Subnet will run. You should have already been through that on testnet and Fuji, but for a refresher, you can refer to [this tutorial](create-a-fuji-subnet.md).
 
-So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins` directory where the node binary is (for installer-script created nodes that would be `~/avalanche-node/plugins/`). 
+So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins` directory where the node binary is (for installer-script created nodes that would be `~/avalanche-node/plugins/`).
 
 ### Subnet Bootstrapping
 
@@ -187,8 +187,8 @@ Unless managed properly and in a timely manner, that can be disruptive for your 
 
 Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your Subnet to production and you are now better prepared to launch your Subnet successfully.
 
-Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and Subnet health and alert you if anything out of the ordinary happens. 
+Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and Subnet health and alert you if anything out of the ordinary happens.
 
 If you have any questions, doubts or would like to chat, please check out our [Discord server](https://chat.avax.network/), where we host a dedicated `#subnet-chat` channel dedicated to talking about all things Subnet.
 
-We hope to see you there! 
+We hope to see you there!
