@@ -1,14 +1,16 @@
 # Create a chat dApp using Solidity and ReactJS
 
-# Introduction
+## Introduction
+
 In this tutorial we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
 
-# Requirements
+## Requirements
+
 * Basic familiarity with [ReactJS](https://reactjs.org/) and [Solidity](https://soliditylang.org/)
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
 
-# Implementing the smart contract 
+## Implementing the smart contract
 
 Our chat dApp needs the basic functionality allowing users to connect with and share messages with friends. To accomplish this, we will write the functions responsible for creating an account, adding friends and sending messages.
 
@@ -19,7 +21,7 @@ We will define 3 functions :
 * The `checkUserExists(pubkey)` function is used to check if a user is registered with our application or not. It will help make sure duplicate users are not created and it will also be called from other functions to check their existence.
 
 * The `createAccount(username)` function registers a new user on the platform with the provided username.
-    
+
 * The `getUsername(pubkey)` function will return the username of the given user if it exists.
 
 ## Adding friends
@@ -56,7 +58,7 @@ We would maintain 2 collections in our database:
 
 * `allMessages` stores the messages. As Solidity does not allow user-defined keys in a mapping, we can instead hash the public keys of the two users. This value can then be stored in the mapping.
 
-# Deploying the smart contract
+## Deploying the smart contract
 
 ## Setting up Metamask
 
@@ -202,32 +204,36 @@ contract Database {
 
 Navigate to the Solidity compiler Tab on the left side navigation bar and click the blue button to compile the `Database.sol` contract. Note down the `ABI` as it will be required in the next section.
 
-Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected Web3" (make sure Metamask is loaded) and click "Deploy" button. 
+Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected Web3" (make sure Metamask is loaded) and click "Deploy" button.
 
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, Note down the `contract address`.
- 
+
 > An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
 
-# Creating a frontend in React
+## Creating a frontend in React
 
 Now, we are going to create a React app scaffold and set up the frontend of the application.
 
 Open a terminal and navigate to the directory where we will create the application.
+
 ```bash
 cd /path/to/directory
 ```
 
 Now use `npm` to install create-react-app. `-g` flag denotes that the package should be installed globally.
+
 ```bash
 npm install -g create-react-app
 ```
 
 Create a new react app.
+
 ```bash
 create-react-app avalanche-chat-app
 ```
 
 Move to the newly created directory and install the given dependencies.
+
 ```bash
 cd avalanche-chat-app
 npm install --save ethers@5.1.4 react-bootstrap@1.5.2 bootstrap@4.6.0
@@ -621,7 +627,6 @@ export function App( props ) {
 
 > **Note:** Write down the contract address obtained from `Implementing the smart contract` section in the variable called `CONTRACT_ADDRESS` on line 9 of `App.jsx`.
 
-
 Open the `index.js` file inside the `src` directory and paste the following code :
 
 ```javascript
@@ -789,29 +794,31 @@ export const abi = [
     }
 ]
 ```
- 
+
 > An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
 
 Now its time to run our React app. Use the following command to start the React app.
+
 ```bash
 npm start
 ```
 
-# Walkthrough
+## Walkthrough
 
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the app.
 
 * User registration and adding a new friend  
-![preview](./images/avax-chat-app-register.gif)   
+![preview](./images/avax-chat-app-register.gif)
 Make sure your friend is also registered to the application while adding him as a friend.
 
 * Chatting with friend  
 ![preview](./images/avax-chat-app-chat_preview.gif)
 
-# Conclusion
+## Conclusion
+
 Congratulations! We have successfully developed a decentralized chat application which can be deployed on Avalanche. We also created a boilerplate React application to use as the frontend for our dApp. As a next step, You can improve the application by adding features like delete messages, block users, or create groups of friends. You can also optimize the gas cost by limiting the maximum number of messages stored.
 
-# Troubleshooting
+## Troubleshooting
 
 ## Transaction Failure
 
@@ -828,10 +835,10 @@ Congratulations! We have successfully developed a decentralized chat application
 ![Error](./images/avax-chat-app-error.png)
 Check if you have updated the `CONTRACT_ADDRESS` variable in `src/index.js` properly!
 
-# About the Author(s)
+## About the Author(s)
 
 The tutorial was created by [Nimish Agrawal](https://github.com/realnimish) & [Sayan Kar](https://github.com/SayanKar). You can also reach out to them on LinkedIn [@Nimish Agrawal](https://www.linkedin.com/in/realnimish) and [@Sayan Kar](https://www.linkedin.com/in/sayan-kar-).
 
-# References
+## References
 
-- Smart contract deployment process - [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
+* Smart contract deployment process - [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)

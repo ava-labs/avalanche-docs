@@ -22,13 +22,13 @@ Ethereum has its own notion of `networkID` and `chainID`. These have no relation
 
 To interact with C-Chain via the JSON-RPC endpoint:
 
-```
+```sh
 /ext/bc/C/rpc
 ```
 
 To interact with other instances of the EVM via the JSON-RPC endpoint:
 
-```
+```sh
 /ext/bc/blockchainID/rpc
 ```
 
@@ -42,13 +42,13 @@ On the [public api node](../public-api-server.md#supported-apis), it only suppor
 
 To interact with C-Chain via the websocket endpoint:
 
-```
+```sh
 /ext/bc/C/ws
 ```
 
 For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
 
-```
+```sh
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
@@ -59,7 +59,7 @@ On localhost, use `ws://`. When using the [Public API](../public-api-server.md) 
 
 To interact with other instances of the EVM via the websocket endpoint:
 
-```
+```sh
 /ext/bc/blockchainID/ws
 ```
 
@@ -203,13 +203,13 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
-```
+```sh
 /ext/bc/C/avax
 ```
 
 To interact with other instances of the EVM AVAX endpoints:
 
-```
+```sh
 /ext/bc/blockchainID/avax
 ```
 
@@ -279,7 +279,7 @@ Export an asset from the C-Chain to X-Chain or P-Chain. After calling this metho
 
 #### Signature
 
-```
+```sh
 avax.export({
     to: string,
     amount: int,
