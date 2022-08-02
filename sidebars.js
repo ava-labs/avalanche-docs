@@ -225,6 +225,7 @@ const sidebars = {
       type: 'category',
       label: 'Tutorials Contest',
       items: [
+        'community/tutorials-contest/2022',
         'community/tutorials-contest/2021'
       ]
     },
