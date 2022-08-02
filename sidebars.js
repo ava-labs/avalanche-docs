@@ -106,6 +106,7 @@ const sidebars = {
         'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
+        'subnets/deploy-a-gnosis-safe-on-your-evm',
       ],
     },
     {
@@ -226,6 +227,7 @@ const sidebars = {
       type: 'category',
       label: 'Tutorials Contest',
       items: [
+        'community/tutorials-contest/2022',
         'community/tutorials-contest/2021'
       ]
     },
