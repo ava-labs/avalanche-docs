@@ -1301,7 +1301,7 @@ func ParseBlock(
 
 #### [BuildBlock](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L377)
 
-The consensus engine calls the` vm.BuildBlock()` method whenever it is the node's turn to propose a block (there must be a pending transaction in the mempool) and returns the stateless block. This makes use of the `chain.BuildBlock()` method to get the block. This is explained in the [Builder](#builder) section.
+The consensus engine calls the `vm.BuildBlock()` method whenever it is the node's turn to propose a block (there must be a pending transaction in the mempool) and returns the stateless block. This makes use of the `chain.BuildBlock()` method to get the block. This is explained in the [Builder](#builder) section.
 
 This method will also handle the next block generation using VM's `HandlerGenerateBlock()` method, as explained in the [Block Builder](#block-builder) section.
 
