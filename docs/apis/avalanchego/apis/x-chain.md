@@ -1630,7 +1630,7 @@ This call is made to the wallet API endpoint:
 
 #### Signature
 
-```
+```sh
 wallet.issueTx({
     tx: string,
     encoding: string, //optional

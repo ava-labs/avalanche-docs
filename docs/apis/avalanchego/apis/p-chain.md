@@ -8,7 +8,7 @@ This API allows clients to interact with the [P-Chain](../../../overview/getting
 
 ## Endpoint
 
-```
+```sh
 /ext/bc/P
 ```
 

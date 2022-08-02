@@ -64,7 +64,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **APIs**
 
 :::warning
-These API format changes are breaking changes. https://api.avax.network and https://api.avax-test.network have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal.
+These API format changes are breaking changes. <https://api.avax.network> and <https://api.avax-test.network> have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal.
 :::
 
 - Removed `CB58` as an encoding option from all APIs
