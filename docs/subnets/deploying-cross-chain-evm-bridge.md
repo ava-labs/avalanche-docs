@@ -2,7 +2,7 @@
 
 :::warning
 
-This tutorial is for demo purpose on how to build a cross-chain bridge. It is not for production use. You must take the full responsibility to ensure its security.
+This tutorial is for demo purpose on how to build a cross-chain bridge. It is not for production use. You must take the full responsibility to ensure your bridge's security.
 
 :::
 
