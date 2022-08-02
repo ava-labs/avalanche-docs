@@ -104,6 +104,7 @@ const sidebars = {
         'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
+        'subnets/deploy-a-gnosis-safe-on-your-evm',
       ],
     },
     {
