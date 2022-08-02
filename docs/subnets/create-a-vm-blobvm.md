@@ -8,7 +8,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-In this tutorial, we will learn all about virtual machines and how we can build them by taking references from [BlobVM](https://github.com/ava-labs/blobvm). It's a virtual machine that can be used to instantiate key-value blockchains for storing files like images, videos, etc. in an efficient way.
+In this tutorial, we will learn all about Virtual Machines and how we can build them by taking references from [BlobVM](https://github.com/ava-labs/blobvm). It's a Virtual Machine that can be used to instantiate key-value blockchains for storing files like images, videos, etc. in an efficient way.
 
 Blobs are small chunks of data. In BlobVM, we divide a file into small blobs and store them as a key-value pair. The key of these small chunks of a file is linked together as the children of the root. This tree is also stored as JSON data against the root's key.
 
@@ -23,7 +23,7 @@ Make sure you have followed the previous tutorials in this series:
 
 The main task of a VM is to represent initial state (genesis state) and block structure containing state transitioning details. One of the most common structure to represent state transitions is **transaction**. When a block with transactions, is applied to the current state, the state transition will happen by simply executing the transactions. The order of transactions will matter here.
 
-BlobVM has the following components to handle the tasks from transaction to block acceptance
+BlobVM has the following components to handle the tasks from transaction to block acceptance:
 
 - **Transaction** - Transaction structure, initialization, execution etc.
 - **Mempool** - Heap (min and max) for keeping pending transactions locally on the node.
@@ -34,19 +34,19 @@ BlobVM has the following components to handle the tasks from transaction to bloc
 - **Storage** - Stores and retrieves data of the chain's state.
 - **Virtual Machine** - Entry point for all the components to orchestrate them according to the consensus engine and API requests.
 - **Service** - API handlers for interacting with VM and initialized chain.
-- **Factory** - For creating new instances of the virtual machine.
+- **Factory** - For creating new instances of the Virtual Machine.
 
 ## Transaction Lifecycle in BlobVM
 
-Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through blocks and more specifically, transactions. VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state.
+A Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through blocks and more specifically, transactions. A VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state:
 
 - User calls `client.IssueRawTx` or directly make RPC to `service`
-- `service.IssueRawTx()` is called using handlers
+- `service.IssueRawTx()` is called using handlers to
   - Receive transaction bytes as arguments
   - Unmarshal bytes into a transaction object
   - Initialize transaction object with message digest, txID, etc.
-  - Submit transaction to VM
-- Transaction is submitted to virtual machine - `vm.Submit()`
+  - Submit the transaction to VM
+- The transaction is submitted to the Virtual Machine - `vm.Submit()` to
   - Get the preferred (last accepted) block
   - Get the execution context of the preferred block that includes
     - Recent TxIDs (Txns in the lookback window e.g last 10s as defined in Genesis)
@@ -56,7 +56,7 @@ Virtual Machine exposes APIs or handlers for users to make direct RPC to service
   - Execute transaction locally with execution context, dummy database, and block
   - Add valid transaction to mempool - `mempool.newTxs`
     - Call `mempool.addPending()` to signal VM to build block for the newly added tx
-- Gossip new transactions from `mempool.newTxs` at regular intervals
+- Gossips new transactions from `mempool.newTxs` at regular intervals
 - Signals consensus engine to build blocks out of pending transactions in the mempool
 - ProposerVM delays the request until it is the node's turn to propose a block
 - The consensus engine calls `vm.BuildBlock()` to get the block from VM
@@ -90,7 +90,7 @@ We have divided the components into 3 packages. We will be looking at each of th
 
 ### Transactions
 
-At the very basic level, the state of a chain can only be updated by issuing a signed transaction. A signed transaction contains an unsigned transaction and a signature (of the sender). The signature is necessary to identify the sender. In a virtual machine, we can have multiple types of unsigned transactions, to achieve different tasks. In BlobVM, we have 2 types of unsigned transactions:
+At the very basic level, the state of a chain can only be updated by issuing a signed transaction. A signed transaction contains an unsigned transaction and a signature (of the sender). The signature is necessary to identify the sender. In a Virtual Machine, we can have multiple types of unsigned transactions, to achieve different tasks. In BlobVM, we have 2 types of unsigned transactions:
 
 - [TransferTx](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go) - For transferring coins between the accounts
 - [SetTx](https://github.com/ava-labs/blobvm/blob/master/chain/set_tx.go) - For storing blob data on the chain
@@ -1023,7 +1023,7 @@ func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
 }
 ```
 
-In the above function, a new RPC server is created with the `PublicService`. It implements all the RPCs supported by the virtual machine. It has access to a VM instance in its structure, that is passed while creating it (see the above function).
+In the above function, a new RPC server is created with the `PublicService`. It implements all the RPCs supported by the Virtual Machine. It has access to a VM instance in its structure, that is passed while creating it (see the above function).
 
 ```go
 type PublicService struct {
@@ -1348,6 +1348,6 @@ func (vm *VM) LastAccepted() (ids.ID, error) {
 
 ## Conclusion
 
-This documentation covers the implementation and explanations of a virtual machine by taking reference from BlobVM. Different VMs can have different implementations depending upon their use case. A common thing among them could be the interface for a linear or DAG VM.
+This documentation covers the implementation and explanations of a Virtual Machine by taking reference from BlobVM. Different VMs can have different implementations depending upon their use case. A common thing among them could be the interface for a linear or DAG VM.
 
 You can learn about using BlobVM in more detail through the [README](https://github.com/ava-labs/blobvm/blob/master/README.md) provided in its repository.
