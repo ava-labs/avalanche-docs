@@ -1180,7 +1180,7 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58.
+This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58. See [here](./subnet-cli.md#subnet-cli-create-vmid) for more details.
 
 ### VM Aliases
 
@@ -1211,11 +1211,11 @@ Copy the binary into the plugins directory.
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
 
-#### Node is not running
+#### Node Is Not Running
 
 If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
 
-#### Node is already running
+#### Node Is Already Running
 
 Load the binary with the `loadVMs` API.
 
