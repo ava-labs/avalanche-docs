@@ -56,40 +56,13 @@ Handlers serve the response for the incoming HTTP requests. Handlers can also be
 
 For any developers familiar with object-oriented programming, this is very similar to static and non-static methods on a class.
 
-### Registering a VM
-
-While [registering a VM](https://github.com/ava-labs/avalanchego/blob/master/vms/manager.go#L93), we store its **factory** against the **vmID**. As the name suggests, a VM factory can create new VM instances.
-
-Using the VM's instance, we can initialize it and can create a new blockchain. Note that, instantiating a VM is different than initializing it. We initialize the instance of a VM with parameters like genesis, database manager, etc. to create a functional blockchain. A functional chain doesn't mean the node will start issuing blocks and processing transactions. This will only happen once the node has been bootstrapped.
-
-```go
-// Registering a factory inside avalanchego
-func (m *manager) RegisterFactory(vmID ids.ID, factory Factory) error {
-    ...
-    m.factories[vmID] = factory
-    ...
-}
-```
-
-### Instantiating a VM
+### VM Factory
 
 Each VM has a **factory** that is capable of creating new VM instances. A VM can be initialized as a blockchain along with handlers for accessing it, only when we have the VM's instance. The factory's `New` method shown below, returns the VM's instance to its caller in `AvalancheGo`. It's generally in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the VM.
 
 ```go
 // Returning a new VM instance from VM's factory
 func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil }
-```
-
-A VM's functionality is exposed to `AvalancheGo` by registering its factory and [instantiating](https://github.com/ava-labs/avalanchego/blob/master/chains/manager.go#L399) a new VM using this factory whenever a chain is required to be built.
-
-```go
-// Instantiating a new VM from its factory in avalanchego
-func (m *manager) buildChain(chainParams ChainParameters, sb Subnet) (*chain, error) {
-    ...
-    vmFactory, err := m.VMManager.GetFactory(vmID)
-    vm, err := vmFactory.New(ctx.Context)
-    ...
-}
 ```
 
 ### Initializing a VM
