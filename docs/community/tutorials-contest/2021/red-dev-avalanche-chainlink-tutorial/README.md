@@ -277,7 +277,7 @@ Access <http://localhost:6688> in your favorite browser, and this will return to
 
 ## Create a new bridge
 
-First, create a new bridge which will point to the external adaptor listening address, which is in our case (<<<<<http://<$HOST>:8081>>>>>)
+First, create a new bridge which will point to the external adaptor listening address, which is in our case (<http://<$HOST>:8081>)
 
 ![chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
 
