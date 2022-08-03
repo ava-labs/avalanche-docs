@@ -14,7 +14,7 @@ Such a server is useful because it can be used to prove a piece of data existed 
 
 ## Prerequisites
 
-Make sure you have followed the previous tutorial in this series. We have discussed about interfaces and other concepts:
+Make sure you're familiar with the previous tutorial in this series, which dives into what virtual machines are.
 
 - [Introduction to Virtual Machines](./introduction-to-vm.md)
 
