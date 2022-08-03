@@ -2,15 +2,16 @@
 Description: How to customize a Subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize a Subnet
+# Customize Your EVM-Powered Subnet
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
 
-- Genesis
-- Precompile
-- Chain Configs
+- [Genesis](#genesis)
+- [Precompile](#precompiles)
+- [Upgrade Configs](#network-upgrades-enabledisable-precompiles)
+- [Chain Configs](#chain-configs)
 
 ## Subnet Configs
 
@@ -165,7 +166,7 @@ to translate between decimal and hex numbers.
 
 The above example yields the following genesis allocations (denominated in whole units of the native token ie. 1 AVAX/1 WAGMI):
 
-```
+```text
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC: 100000000 (0x52B7D2DCC80CD2E4000000=100000000000000000000000000 Wei)
 0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B: 49463 (0xa796504b1cb5a7c0000=49463000000000000000000 Wei)
 ```
@@ -373,9 +374,159 @@ interface NativeMinterInterface {
 
 _Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used together._
 
+### Configuring Dynamic Fees
+
+You can configure the parameters of the dynamic fee algorithm on chain using the `FeeConfigManager`. In order to activate this feature, you will need to provide the `FeeConfigManager` in the genesis:
+
+```json
+{
+  "config": {
+    "feeManagerConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+    }
+  }
+}
+```
+
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
+
+The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
+
+interface IFeeManager is IAllowList {
+  // Set fee config fields to contract storage
+  function setFeeConfig(
+    uint256 gasLimit,
+    uint256 targetBlockRate,
+    uint256 minBaseFee,
+    uint256 targetGas,
+    uint256 baseFeeChangeDenominator,
+    uint256 minBlockGasCost,
+    uint256 maxBlockGasCost,
+    uint256 blockGasCostStep
+  ) external;
+
+  // Get fee config from the contract storage
+  function getFeeConfig()
+    external
+    view
+    returns (
+      uint256 gasLimit,
+      uint256 targetBlockRate,
+      uint256 minBaseFee,
+      uint256 targetGas,
+      uint256 baseFeeChangeDenominator,
+      uint256 minBlockGasCost,
+      uint256 maxBlockGasCost,
+      uint256 blockGasCostStep
+    );
+
+  // Get the last block number changed the fee config from the contract storage
+  function getFeeConfigLastChangedAt() external view returns (uint256 blockNumber);
+}
+```
+
+In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
+
+- `getFeeConfig` - retrieves the current dynamic fee config
+- `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
+- `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
+
 ### Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
+
+## Network Upgrades: Enable/Disable Precompiles
+
+:::warning
+
+Performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+
+Any mistakes in configuring network upgrades or coordinating them on validators may cause the network to halt and recovering may be difficult.
+
+:::
+
+In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a new configuration if desired.
+
+These upgrades can be specified in a file named `upgrade.json` placed in the same directory as [`config.json`](#chain-configs) using the following format:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 1668950000, // unix timestamp precompile should activate at
+        "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
+      }
+    }
+  ]
+}
+```
+
+To disable a precompile, the following format should be used:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 1668950000, // unix timestamp the precompile should deactivate at
+        "disable": true
+      }
+    }
+  ]
+}
+```
+
+Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation (otherwise the node will refuse to start).
+
+Enabling and disabling a precompile is a network upgrade and should always be done with caution.
+
+:::danger
+
+For safety, you should always treat `precompileUpgrades` as append-only.
+
+As a last resort measure, it is possible to abort or reconfigure a precompile upgrade that has not been activated since the chain is still processing blocks using the prior rule set.
+
+:::
+
+If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json` from the end of the list of upgrades. As long as the blockchain has not accepted a block with a timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
+
+### Example
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "txAllowListConfig": {
+        "blockTimestamp": 1668960000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668970000,
+        "disable": true
+      }
+    }
+  ]
+}
+```
+
+This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables `txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig` at the first block with timestamp >= `1668970000`.
+
+When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
 
 ## Chain Configs
 

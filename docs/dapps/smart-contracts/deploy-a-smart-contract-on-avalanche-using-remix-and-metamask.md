@@ -34,7 +34,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 - **Symbol**: `AVAX`
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-#### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../quickstart/network-runner.md)
+#### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
 
 - **Network Name**: Avalanche Local C-Chain
 - **New RPC URL**: [http://127.0.0.1:34890/ext/bc/C/rpc](http://127.0.0.1:34890/ext/bc/C/rpc) (Note: the port number should match your local setting which can be different from 34890.)
@@ -52,7 +52,7 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your C-Chain address. Faucet will automatically know that it needs to send the test AVAX to C-Chain. Click the captcha checkbox and select 'Request AVAX' button. Your address will receive test AVAX in a few seconds.
 
-### Funding on local testnet
+### Funding on Local Testnet
 
 On a local network, you can easily fund your addresses by following [this](../../quickstart/create-a-local-test-network.md#getting-avax).
 
