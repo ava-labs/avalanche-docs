@@ -10,16 +10,15 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 A Virtual Machine is a blueprint for a blockchain and a blockchain instantiates from a VM, very much similar to a class-object relationship. A Virtual Machine can define following: issuance of transactions, transaction types, block structure, block building algorithm, keeping pending transactions in the mempool, gossiping transactions to the connected nodes, etc.
 
-## Block and State
+## Blocks and State
 
-Virtual Machines can be broken down into 2 components: state and block. The most basic work of a VM is to:
+Virtual Machines can be broken down into 2 components: blocks and state. The functionality provided by VMs is to:
 
-- Define the representation of the blockchain's state
+- Define the representation of a blockchain's state
 - Represent the operations in that state
 - Apply the operations in that state
 
-A block in a blockchain contains state transition details. When a block is applied to the current blockchain state, the state transition happens. Similarly, if we have a chain of blocks from the genesis block to the last accepted block, and we apply each block in order on the genesis state, then by state transitions, we can reach the most recent state. Since every virtuous node on the network has the same genesis state and chain of blocks, each of them will reach the same state.
-
+Each block in the blockchain contains a set of state transitions. Each block is applied in order from the blockchain's initial genesis block to its last accepted block to reach the latest state of the blockchain.
 ## Blockchain
 
 A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs mainly deal with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block issued by VM. Here is a brief overview:
