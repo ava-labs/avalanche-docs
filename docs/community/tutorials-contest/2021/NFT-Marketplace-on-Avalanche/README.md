@@ -2,7 +2,7 @@
 
 Step by step tutorial to build your own NFT marketplace on Avalanche using Hardhat and React.
 
-# Table of contents
+## Table of contents
 
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
@@ -58,7 +58,7 @@ Step by step tutorial to build your own NFT marketplace on Avalanche using Hardh
 - [Deploying to the Avalanche Mainnet](#deploying-to-the-avalanche-mainnet)
 - [Conclusion](#conclusion)
 
-# Introduction
+## Introduction
 
 We will be using [React JS](https://reactjs.org) to build the frontend of our NFT Marketplace and we will use [Ethers JS](https://docs.ethers.io/v5/) to interact with the smart contracts on the frontend. For the backend, we will be using our smart contracts that will be deployed on the [Avalanche](https://www.avax.network/) chain and that's all. Our NFT Marketplace will live on the blockchain. Totally decentralized! We will be using Hardhat to compile and deploy our smart contracts.
 
@@ -80,7 +80,7 @@ We will be using [React JS](https://reactjs.org) to build the frontend of our NF
 - [Metamask](https://metamask.io) extension must be installed on your browser.
 - [create-react-app](https://www.npmjs.com/package/create-react-app) must be installed.
 
-# Getting Started
+## Getting Started
 
 ## Building the workspace
 
@@ -157,7 +157,7 @@ The logic here is very simple.
 
 And that's all.
 
-# Contracts for the marketplace
+## Contracts for the marketplace
 
 We will have two contracts, `AuctionManager` and `Auction` contracts. AuctionManager contract will create the auctions by deploying the Auction contract using the parameters.
 Here is how it will work:
@@ -602,7 +602,7 @@ Here is the complete code: [AuctionManager.sol](NFT-Marketplace-dApp/contracts/A
 
 That's all for the contracts!
 
-# AVAX Fuji Testnet
+## AVAX Fuji Testnet
 
 We are going to test the marketplace on AVAX Fuji Testnet. First, you need to add AVAX Fuji Testnet to metamask. Open metamask and view networks, then click on `Custom RPC`.
 
@@ -612,10 +612,10 @@ We will deploy our contracts on FUJI testnet.
 FUJI Testnet Settings:
 
 - Network Name: Avalanche FUJI C-Chain
-- New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
+- New RPC URL: <https://api.avax-test.network/ext/bc/C/rpc>
 - ChainID: 43113
 - Symbol: AVAX
-- Explorer: https://testnet.snowtrace.io
+- Explorer: <https://testnet.snowtrace.io>
 
 Next, we will add the network configuration in hardhat config file [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not know how that file works then take a look at [here](https://hardhat.org/config/#networks-configuration).
 
@@ -635,7 +635,7 @@ networks:{
 Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet
 ](https://faucet.avax.network/) to get some test AVAX for free.
 
-# Deploying the contracts
+## Deploying the contracts
 
 We need to deploy our `NFT` and `AuctionManager` contracts to the Fuji Testnet. We will use hardhat to deploy the contracts, [learn more about it here](https://hardhat.org/guides/deploying.html). Start by editing the [`scripts/deploy.js`](NFT-Marketplace-dApp/scripts/deploy.js) file.
 
@@ -666,8 +666,8 @@ main()
 After you are done editing [`deploy.js`](NFT-Marketplace-dApp/scripts/deploy.js), execute the following lines on your terminal to run the [`deploy.js`](NFT-Marketplace-dApp/scripts/deploy.js) script.
 
 ```shell
-$ npx hardhat compile  # Compiles the contracts
-$ npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script on fuji test network, "fuji" is specified inside the hardhat config file
+npx hardhat compile  # Compiles the contracts
+npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script on fuji test network, "fuji" is specified inside the hardhat config file
 ```
 
 Pretty simple! If this looks unfamiliar to you, you may want to take a look at [hardhat guides](https://hardhat.org/guides/deploying.html).
@@ -675,7 +675,7 @@ Pretty simple! If this looks unfamiliar to you, you may want to take a look at [
 Do not forget to note the addresses, as we will need them afterward to interact with the contracts.
 ![Deployed](images/nft-marketplace-deployed.png)
 
-# React App
+## React App
 
 Let's build an interface to interact with our marketplace. We are going to use `react` and `ether.js`.
 
@@ -1776,11 +1776,11 @@ We had an attribute called `value` that is assigned randomly to each of the NFT'
 
 If this were an image or any attribute else instead of an integer, we would still be able to display it by making a simple change in our code. For instance, to retrieve the metadata (image URL and other attributes) of an NFT token, use the `tokenURI(uint256 tokenId)` function to get the token uri from the NFT contract. You may want to take a look at [`IERC721Metadata`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#IERC721Metadata) to learn more about it.
 
-# Using with other NFT contracts
+## Using with other NFT contracts
 
 Selling another NFT instead of creating a contract is possible. As you may have noticed, we have only used the `approve` and `transferFrom` functions to transfer the NFT to our Market Place contract. Those functions are a standard in ERC-721, so this marketplace is compatible with almost any NFT token.
 
-# Next steps
+## Next steps
 
 There are a couple of things to test and consider before going any further.
 
@@ -1805,7 +1805,7 @@ Before deploying a contract to production, we should test every possible scenari
 
 It's always good to give the user clear instructions and make them feel comfortable. You should look from a user's point of view and try to think of every possible scenario & outcome.
 
-# Deploying to the Avalanche Mainnet
+## Deploying to the Avalanche Mainnet
 
 Deploying to Mainnet is the same as deploying to [Testnet](#avax-fuji-testnet); the only difference is that you have to pay real funds instead of test funds.
 
@@ -1827,11 +1827,11 @@ networks:{
 After that, we will run the deploy script just like we did when deploying to the test net.
 
 ```shell
-$ npx hardhat compile # Compiles the contracts
-$ npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Avalanche Mainnet, "mainnet" is specified inside the hardhat config file
+npx hardhat compile # Compiles the contracts
+npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Avalanche Mainnet, "mainnet" is specified inside the hardhat config file
 ```
 
-# Conclusion
+## Conclusion
 
 You now have the basic knowledge to start your NFT Marketplace. Congrats!
 

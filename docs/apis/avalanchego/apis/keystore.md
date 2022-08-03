@@ -39,7 +39,7 @@ Create a new user with the specified username and password.
 
 #### **Signature**
 
-```sh
+```zsh
 keystore.createUser(
     {
         username:string,
@@ -53,7 +53,7 @@ keystore.createUser(
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -81,13 +81,13 @@ Delete a user.
 
 #### **Signature**
 
-```sh
+```zsh
 keystore.deleteUser({username: string, password:string}) -> {}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -115,7 +115,7 @@ Export a user. The user can be imported to another node with [`keystore.importUs
 
 #### **Signature**
 
-```sh
+```zsh
 keystore.exportUser(
     {
         username:string,
@@ -132,7 +132,7 @@ keystore.exportUser(
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -163,7 +163,7 @@ Import a user. `password` must match the user’s password. `username` doesn’t
 
 #### **Signature**
 
-```sh
+```zsh
 keystore.importUser(
     {
         username:string,
@@ -178,7 +178,7 @@ keystore.importUser(
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -207,13 +207,13 @@ List the users in this keystore.
 
 #### **Signature**
 
-```sh
+```zsh
 keystore.ListUsers() -> {users:[]string}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

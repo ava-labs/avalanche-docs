@@ -213,7 +213,7 @@ Dynamically loads any virtual machines installed on the node as plugins. See [he
 
 #### Signature
 
-```sh
+```zsh
 admin.loadVMs() -> {
     newVMs: map[string][]string
     failedVMs: map[string]string,

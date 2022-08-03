@@ -22,7 +22,7 @@ This API set is for a specific node, it is unavailable on the [public server](..
 
 To get the node metrics:
 
-```sh
+```zsh
 curl -X POST 127.0.0.1:9650/ext/metrics
 ```
 
