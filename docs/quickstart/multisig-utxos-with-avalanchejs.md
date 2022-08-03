@@ -10,7 +10,7 @@ If an account A wants to send 1.3 AVAX to account B, then it has to include all 
 
 Once the transaction is committed, the UTXOs in the inputs will be consumed and outputs will become new UTXOs for the receiver. If the inputs have more amount unlocked than being consumed by the outputs, then the excess amount will be burned as fees. Therefore, we should also create a change output which will be assigned to us, if there is an excess amount in the input. In the diagram given below, a total of 1.72 AVAX is getting unlocked in inputs, therefore we have also created a change output for the excess amount (0.41 AVAX) to the sender's address. The remaining amount after being consumed by the outputs like receiver's and change output, is burned as fees (0.01 AVAX).
 
-![multisig utxos 1](/img/multisig-utxos-1.png)
+![](/img/multisig-utxos-1.png)
 
 ## Multi-Signature UTXOs
 
@@ -27,7 +27,7 @@ On Avalanche, we can even create cross-chain outputs. This means that we can do 
 
 Atomic transactions are similar to other transactions. We use UTXOs of the source chain as inputs and create outputs owned by destination chain addresses. When the export transactions are issued, the newly created UTXOs stay in the **Exported Atomic Memory**. These are neither on the source chain nor on the destination chain. These UTXOs can only be used as inputs by their owners on the destination chain while making import transactions. Using these UTXOs on the atomic memory, we can create multiple outputs with different amounts or addresses.
 
-![multisig utxos 2](/img/multisig-utxos-2.png)
+![](/img/multisig-utxos-2.png)
 
 ## UTXOs on C-Chain
 
@@ -775,7 +775,7 @@ sendBaseTx()
 
 Run this file using `node examples/sendBaseTx.js`, see the txID in the output, and look for it in the Fuji explorer.
 
-![multisig utxos 3](/img/multisig-utxos-3.jpeg)
+![](/img/multisig-utxos-3.jpeg)
 
 ## Export Multi-Sig UTXO From X to P-Chain
 
@@ -875,7 +875,7 @@ exportXP()
 
 Run this file using `node examples/exportXP.js`, see the txID in the output, and look for it in the [Fuji explorer](https://explorer-xp.avax-test.network/blockchain/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm).
 
-![multisig utxos 4](/img/multisig-utxos-4.jpeg)
+![](/img/multisig-utxos-4.jpeg)
 
 In the above image, we are consuming UTXO with the amount `0.486...`, and generating outputs with the amount `0.382...` (change output) and `0.003` and `0.1` (exported output). The remaining `0.001` is burned as transaction fees.
 
@@ -961,7 +961,7 @@ async function importP() {
 }
 ```
 
-![multisig utxos 5](/img/multisig-utxos-5.jpeg)
+![](/img/multisig-utxos-5.jpeg)
 
 In the above image, we are consuming the above exported UTXOs with amounts `0.003` and `0.1`, and generating outputs with amount `0.092...` (change output imported on P-Chain) and 2 `0.005` imported outputs (1 multi-sig and 1 single-sig). The remaining `0.001` is burned as transaction fees.
 
@@ -1033,7 +1033,7 @@ async function importP() {
 importP()
 ```
 
-![multisig utxos 6](/img/multisig-utxos-6.png)
+![](/img/multisig-utxos-6.png)
 
 You can use [Avascan](https://testnet.avascan.info/) to view import and export transactions on C-Chain.
 
@@ -1145,4 +1145,4 @@ addDelegator()
 
 Run this file using `node examples/addDelegatorTx.js`, see the txID in the output, and look for it in the Fuji explorer.
 
-![multisig utxos 7](/img/multisig-utxos-7.jpeg)
+![](/img/multisig-utxos-7.jpeg)

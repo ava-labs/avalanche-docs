@@ -29,8 +29,8 @@ We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) t
 ## Adding WAGMI to MetaMask
 
 - Network Name: WAGMI
-- RPC URL: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc](https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc)
+- RPC URL: https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc
 - WS URL: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
 - Chain ID: 11111
 - Symbol: WGM
-- Explorer: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer](https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer)
+- Explorer: https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer

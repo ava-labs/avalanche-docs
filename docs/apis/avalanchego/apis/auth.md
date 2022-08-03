@@ -39,7 +39,7 @@ Creates a new authorization token that grants access to one or more API endpoint
 
 #### **Signature**
 
-```zsh
+```sh
 auth.newToken(
     {
         password: string,
@@ -54,7 +54,7 @@ auth.newToken(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.newToken",
@@ -84,7 +84,7 @@ This authorization token should be included in API calls by giving header `Autho
 
 For example, to call [`info.peers`](info.md#infopeers) with this token:
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -100,7 +100,7 @@ Revoke a previously generated token. The given token will no longer grant access
 
 #### **Signature**
 
-```zsh
+```sh
 auth.revokeToken(
     {
         password: string,
@@ -114,7 +114,7 @@ auth.revokeToken(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.revokeToken",
@@ -142,7 +142,7 @@ Change this node’s authorization token password. Any authorization tokens crea
 
 #### **Signature**
 
-```zsh
+```sh
 auth.changePassword(
     {
         oldPassword: string,
@@ -156,7 +156,7 @@ auth.changePassword(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.changePassword",

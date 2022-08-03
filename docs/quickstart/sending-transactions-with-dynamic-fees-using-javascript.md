@@ -23,7 +23,7 @@ Open the terminal and install the following dependencies in a new folder.
 - avalanche
 - dotenv
 
-```zsh
+```
 npm install ethers avalanche dotenv
 ```
 

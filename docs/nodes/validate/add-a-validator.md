@@ -28,7 +28,7 @@ First, we show you how to add your node as a validator by using [Avalanche Walle
 
 Get your node’s ID by calling [`info.getNodeID`](../../apis/avalanchego/apis/info.md#infogetnodeid):
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -210,7 +210,7 @@ ts-node examples/platformvm/buildAddValidatorTx.ts
 
 The response has the transaction ID.
 
-```zsh
+```
 Success! TXID: 2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra
 ```
 
@@ -238,13 +238,13 @@ const main = async (): Promise<any> => {
 
 Run the command:
 
-```zsh
+```sh
 ts-node examples/platformvm/getTxStatus.ts
 ```
 
 This returns:
 
-```zsh
+```sh
 { status: 'Committed' }
 ```
 
@@ -252,7 +252,7 @@ The status should be `Committed`, meaning the transaction was successful.
 
 We can see if the node is now in the pending validator set for the Fuji network by using the example:[`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Just change the [network settings](#network-setting) to meet Fuji requirements and then run the script:
 
-```zsh
+```sh
 ts-node examples/platformvm/getPendingValidators.ts
 ```
 

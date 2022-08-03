@@ -7,6 +7,7 @@ In this tutorial we will be making a **Distributed File Manager** using the **IP
 
 For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications dApps on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with the [Avalanche](https://avax.network) network, which is an instance of the EVM.
 
+
 ## Prerequisites
 
 * Basic familarity with [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
@@ -29,11 +30,11 @@ From the title, **Distributed File Manager**, you have got an idea that it's abo
 
 Currently, we are dominated by the **client-server** model of communication which is following **HTTP** aka **Hypertext Transfer Protocol**. This means that, in between the communication between two devices, one has to be the server (which will serve or respond with data) and the other should be the client (which will receive or request data). The major problem with this client-server model is that the client would have to request data from the server, far away from it, even if the same data was previously received by its neighbour or was available somewhere closer. This would cause high latency (delay in receiving data) and low bandwidths (speed of data transfer).
 
-![distributed file manager server vs p2p](./assets/distributed-file-manager-00-server-vs-p2p.jpeg)
+![](./assets/distributed-file-manager-00-server-vs-p2p.jpeg)
 
 **IPFS** is a relatively new protocol, which aims to resolve these issues. It follows the **peer-to-peer** model of communication, in which there could be an arbitrary number of servers responding to the client with the required data. Once the client has the data (or even just bits of other data), it can then act as a server. Every node connected to the network can act as a server if it has the required software installed. Sending data from multiple servers may seem inefficient, however, the protocol is designed this way. The data is hashed and divided into pieces that can be transmitted and stored separately, but given sufficient, information can be re-joined later. Once all the pieces are in place, it makes the whole file.
 
-![distributed file manager ipfs swarm](./assets/distributed-file-manager-01-ipfs-swarm.jpeg)
+![](./assets/distributed-file-manager-01-ipfs-swarm.jpeg)
 
 **IPFS** is a large swarm of such nodes, which chose to serve data. We need IPFS clients to connect to those nodes and upload data. We can also connect to the network using the available javascript client libraries like `ipfs-http-client`. There are several providers like **Infura**, which provides an HTTP portal to view the files on the IPFS. More technical details are provided ahead in the tutorial.
 
@@ -215,21 +216,21 @@ Then the root seed is passed to a one-way hash function to generate a 512-bit se
 * A seed called a chain code (256 bits)
 * An index number (32 bits)
 
-![distributed file-manager master private public key generation](./assets/distributed-file-manager-02-master-private-public-key-generation.png)
+![](./assets/distributed-file-manager-02-master-private-public-key-generation.png)
 
 The index number can range from 0 to 2^32 - 1. Thus using a parent with a given private key and chain code we can generate 2^32 or around 4 Billion child key pairs. In a normal derivation, we use parent public key and chain code to generate children. But this could be vulnerable to security threats and hence we can make derivation hard by using the parent's private key instead of the public key for CKD. This process is known as **Hardened child key derivation**. And to distinguish it from normal derivation, we use different index numbers. For normal derivation index number is from 0 to 2^31 - 1 and for hardened derivation, it is from 2^31 to 2^32 - 1. Hardened index number start from 2 Billion which make it difficult to read, so we use i' to represent index 2^31 + i, where 0 &lt;= i &lt;= 2^32 - 1.
 
-![distributed file manager child public private key generation](./assets/distributed-file-manager-03-child-public-private-key-generation.png)
+![](./assets/distributed-file-manager-03-child-public-private-key-generation.png)
 
 Master keys along with master chain code can create child keys which can further create grandchild keys and so on. Each generation is known as a tree level. Keys in an HD wallet are identified using a **path** naming convention, with each level of the tree separated by a slash (/) character. Private keys derived from the master private key start with **m**. Public keys derived from the master public key start with **M**. An HD path `m/0` represents the 0th or first child private key derived from the master. Similarly, `m/3'/1` denotes the 2nd child private key of the 4th or (2^31 + 3)th hardened child derived from the master.
 
-![distributed file manager hdwallet](./assets/distributed-file-manager-04-hdwallet.png)
+![](./assets/distributed-file-manager-04-hdwallet.png)
 
 There are various Bitcoin Improvement Proposals (BIP) that proposes the standard way of deriving paths. BIP0044 (44th proposal) specifies the structure as consisting of five predefined tree levels:
 
 `m / purpose' / coin_type' / account' / change / address_index`
 
-* **purpose** - Always set to 44'.
+* **purpose** - Always set to 44'. 
 * **coin\_type** - Specifies the type of cryptocurrency coin, allowing for multicurrency HD wallets where each currency has its subtree under the second level.
 * **account** - Allows users to subdivide their wallets into separate logical subaccounts, for accounting or organizational purposes.
 * **change** - It has 2 subtrees, one normal receiving address and the other for receiving change tokens which are reverted when you supplied more than the required transaction cost.
@@ -267,11 +268,11 @@ npm start
 
 It might take few seconds, to show output as in the image below.
 
-![distributed file manager localhost react server](./assets/distributed-file-manager-05-localhost-react-server.png)
+![](./assets/distributed-file-manager-05-localhost-react-server.png)
 
 In a web browser, visit the URL [http://localhost:3000](http://localhost:3000). If npm start has not encountered any errors, we will see the text "Distributed File Manager" at the top of the page as shown in this image :
 
-![distributed file manager localhost react server](./assets/distributed-file-manager-06-localhost-frontend.png)
+![](./assets/distributed-file-manager-06-localhost-frontend.png)
 
 ## Create the FileManager contract
 
@@ -389,7 +390,7 @@ When deploying smart contracts to the Avalanche network, it will require some de
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
-![distributed file manager avalanche c chain address](./assets/distributed-file-manager-07-avalanche-c-chain-address.png)
+![](./assets/distributed-file-manager-07-avalanche-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -411,7 +412,7 @@ truffle migrate --network development
 
 On successful execution of this command, you should see:
 
-```zsh
+```
 Starting migrations...
 ======================
 > Network name:    'fuji'
@@ -688,7 +689,7 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 
 > If you find any difficulty in setting up the project, then feel free to clone this repository [https://github.com/rajranjan0608/dfm/tree/avalanche](https://github.com/rajranjan0608/dfm/tree/avalanche), and follow the steps in the `README.md` file of this repo in order to run the application.
 
-![distributed file manager final dapplication](./assets/distributed-file-manager-08-final-dapplication.gif)
+![](./assets/distributed-file-manager-08-final-dapplication.gif)
 
 ## Conclusion
 

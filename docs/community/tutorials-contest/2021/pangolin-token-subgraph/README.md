@@ -342,7 +342,7 @@ type Transfer @entity {
 }
 ```
 
-The content contains one entity - `Transfer` indicated by the `@entity` directive. The fields that may up the entity are `id`, `from`, `to`, `address`. Notice that these fields closely mirror the event signature of the Transfer event of the Pangolin token. The fields have their type specified and all are NON NULLABLE as indicated by the exclamation mark.
+The content contains one entity - `Transfer` indicated by the `@entity` directive. The fields that may up the entity are `id`, `from`, `to`, `address`. Notice that these fields closely mirror the event signature of the Transfer event of the Pangolin token. The fields have their type specified and all are NON NULLABLE as indicated by the exclamation mark. 
 
 The next important piece is the [AssemblyScript](https://www.assemblyscript.org/) Mappings. AssemblyScript is used to transform data from the blockchain’s events and GraphQL entities into a format that can be loaded on The Graph Node. Before writing your event handler mapping for the `Transfer` event in the `mappings.ts` file under the `src` folder, you will need to generate the AssemblyScript classes from your ABI and `schema.graphql` file. Run the command below to do so.
 

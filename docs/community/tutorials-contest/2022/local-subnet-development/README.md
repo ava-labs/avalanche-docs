@@ -77,7 +77,7 @@ To add avalanche command to your path:
 1. Open shell config file.
    - If you are using `zsh` shell, open `${HOME}/.zprofile` in a text editor.
    - If you are suing `bash` shell, open `${HOME}/.bash_profile` in a text editor.
-2. Add this line, `export PATH="<path-of-avalanche-bin-directory>:${PATH}"` to the file.
+2. Add this line, ` export PATH="<path-of-avalanche-bin-directory>:${PATH}"` to the file.
 3. Restart the terminal and run `avalanche`.
 
 ##### Linux
