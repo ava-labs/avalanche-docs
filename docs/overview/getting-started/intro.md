@@ -12,7 +12,7 @@ A key difference between Avalanche and other decentralized networks is the conse
 
 ## AVAX
 
-AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the multiple subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the multiple Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
 ## Avalanche Consensus Protocol
 
@@ -69,4 +69,3 @@ Create your own public or private blockchains.
 ### Designed for Finance
 
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
-

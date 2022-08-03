@@ -2,23 +2,24 @@
 
 ## AvalancheGo
 
-[Link to github](https://github.com/ava-labs/avalanchego) 
+[Link to github](https://github.com/ava-labs/avalanchego)
 
 Go implementation of an Avalanche node.
 
 Related docs
-* [AvalanacheGo](../apis/avalanchego/README.md)
-* [Nodes](../nodes/README.md)
+
+- [AvalanacheGo](../apis/avalanchego/README.md)
+- [Nodes](../nodes/README.md)
 
 ## Coreth
 
-[Link to github](https://github.com/ava-labs/coreth) 
+[Link to github](https://github.com/ava-labs/coreth)
 
 Coreth (from core Ethereum) is the [Virtual Machine (VM)](./getting-started/avalanche-platform.md#virtual-machines) that defines the Avalanche Contract Chain (C-Chain).
 
 Related docs
-* [C-Chain APIs](../apis/avalanchego/apis/c-chain.md)
 
+- [C-Chain APIs](../apis/avalanchego/apis/c-chain.md)
 
 ## Subnet-EVM
 
@@ -27,9 +28,8 @@ Related docs
 Subnet EVM is the [Virtual Machine (VM)](./getting-started/avalanche-platform.md#virtual-machines) that defines the Subnet Contract Chains. Subnet EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
 
 Related docs
-* [Subnets](../subnets/README.md)
 
-
+- [Subnets](../subnets/README.md)
 
 ## AvalancheJS
 
@@ -38,25 +38,16 @@ Related docs
 The Avalanche platform JavaScript library.
 
 Related docs
-* [AvalancheJS](../apis/avalanchejs/README.md)
 
-## Wallet SDK
-
-[Link to github](https://github.com/ava-labs/avalanche-wallet-sdk)
-
-A typescript library for creating and managing decentralized wallets.
-
-Related docs
-* [Wallet SDK](../apis/avalanche-wallet-sdk/README.md)
-
+- [AvalancheJS](../apis/avalanchejs/README.md)
 
 ## Avalanche Wallet
 
 [Link to github](https://github.com/ava-labs/avalanche-wallet)
 
 Related docs
-* [Wallet](https://support.avax.network/en/collections/3391518-core)
 
+- [Wallet](https://support.avax.network/en/collections/3391518-core)
 
 ## Avalanche Network Runner
 
@@ -65,13 +56,11 @@ Related docs
 This is a tool to run and interact with a local Avalanche network.
 
 Related docs
-* [Avalanche Network Runner](../quickstart/network-runner.md)
 
+- [Avalanche Network Runner](../subnets/network-runner.md)
 
 ## Avalanche Developer Docs
 
 [Link to github](https://github.com/ava-labs/avalanche-docs)
 
 Avalanche developer documentation and tutorials which is this site.
-
-

@@ -109,7 +109,7 @@ I recommend to employ a full CI/CD pipeline using GCP Cloud Build which if utili
 
 ### Clone Github Repository
 
-I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](/scripts/terraform-gcp/projects/my-avax-project/main.tf).
+I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project).
 Documentation below assumes you are using this repository but if you have another terraform skelaton similar steps will apply.
 
 ### Terraform Configuration

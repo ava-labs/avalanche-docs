@@ -242,7 +242,7 @@ Get the virtual machines installed on this node.
 
 #### **Signature**
 
-```
+```sh
 info.getVMs() -> {
     vms: map[string][]string
 }

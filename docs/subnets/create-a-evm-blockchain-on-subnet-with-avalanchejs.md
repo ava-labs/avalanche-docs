@@ -4,9 +4,9 @@
 
 A blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. On Avalanche, VM serves as the blueprint for creating different instances of independent blockchains, yet sharing the same ruleset.
 
-All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their subnet and invite other validators to be a part of it. A validator can be a part of multiple subnets, but it must be validating the primary subnet.
+All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary Subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their Subnet and invite other validators to be a part of it. A validator can be a part of multiple Subnets, but it must be validating the primary Subnet.
 
-On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages subnets, subnet validators, subnet blockchain, etc. In this tutorial, you will learn about creating your subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [subnet series of tutorials](../subnets/README.md), you can get various great articles explaining subnets, building custom VMs, and a lot more.
+On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages Subnets, Subnet validators, Subnet blockchain, etc. In this tutorial, you will learn about creating your Subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that Subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [Subnet series of tutorials](../subnets/README.md), you can get various great articles explaining Subnets, building custom VMs, and a lot more.
 
 ## Requirements
 
@@ -64,7 +64,7 @@ You can directly build the `subnet-evm` binary inside the plugins folder as well
 
 ## Setting up Local Avalanche Network
 
-For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../quickstart/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
+For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 ### Clone Avalanche Network Runner
 
@@ -120,7 +120,7 @@ avalanche-network-runner control uris \
 --endpoint="0.0.0.0:8080"
 ```
 
-For the demonstration purpose, let us choose `node1` as our subject node for making requests and finally making it a validator on our subnet. Make sure to copy its `URI` and `PORT`, as we will need that later.
+For the demonstration purpose, let us choose `node1` as our subject node for making requests and finally making it a validator on our Subnet. Make sure to copy its `URI` and `PORT`, as we will need that later.
 
 ANR also provides us with the funded account with the following credentials.
 
@@ -129,7 +129,7 @@ P-Chain Address 1:     P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p
 P-Chain Address 1 Key: PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
 ```
 
-We will be using these keys for signing transactions and as the controller of subnets.
+We will be using these keys for signing transactions and as the controller of Subnets.
 
 ## Setting up Node.js Project
 
@@ -163,7 +163,7 @@ npm install --save avalanche dotenv yargs
 Make a `config.js` file and store the following information, about the node and its respective URI.
 
 ```javascript
-require("dotenv").config();
+require("dotenv").config()
 
 module.exports = {
   protocol: "http",
@@ -171,7 +171,7 @@ module.exports = {
   port: 14760,
   networkID: 1337,
   privKey: process.env.PRIVATEKEY,
-};
+}
 ```
 
 We have `networkID: 1337` for the local network. Mainnet has `43114`, and Fuji has `43113`. Put the port here, that you have copied earlier from the ANR's output. Rest all should remain the same. Here we are also accessing `PRIVATEKEY` from the `.env` file. So make sure to include your funded private key in the `.env` file which was provided by ANR.
@@ -187,31 +187,31 @@ Always put secret information like the `.env` file restricted to yourself only a
 This code will serve as the helper function for all other functions spread over different files. It will instantiate all the necessary Avalanche APIs using AvalancheJS and export them for other files to use it. Other files can simply import and re-use. Make a new file `importAPI.js` and paste the following code inside it.
 
 ```javascript
-const { Avalanche, BinTools, BN } = require("avalanche");
+const { Avalanche, BinTools, BN } = require("avalanche")
 
 // Importing node details and Private key from the config file.
-const { ip, port, protocol, networkID, privKey } = require("./config.js");
+const { ip, port, protocol, networkID, privKey } = require("./config.js")
 
 // For encoding and decoding to CB58 and buffers.
-const bintools = BinTools.getInstance();
+const bintools = BinTools.getInstance()
 
 // Avalanche instance
-const avalanche = new Avalanche(ip, port, protocol, networkID);
+const avalanche = new Avalanche(ip, port, protocol, networkID)
 
 // Platform and Info API
-const platform = avalanche.PChain();
-const info = avalanche.Info();
+const platform = avalanche.PChain()
+const info = avalanche.Info()
 
 // Keychain for signing transactions
-const pKeyChain = platform.keyChain();
-pKeyChain.importKey(privKey);
-const pAddressStrings = pKeyChain.getAddressStrings();
+const pKeyChain = platform.keyChain()
+pKeyChain.importKey(privKey)
+const pAddressStrings = pKeyChain.getAddressStrings()
 
 // UTXOs for spending unspent outputs
 const utxoSet = async () => {
-  const platformUTXOs = await platform.getUTXOs(pAddressStrings);
-  return platformUTXOs.utxos;
-};
+  const platformUTXOs = await platform.getUTXOs(pAddressStrings)
+  return platformUTXOs.utxos
+}
 
 // Exporting these for other files to use
 module.exports = {
@@ -222,7 +222,7 @@ module.exports = {
   bintools,
   utxoSet,
   BN,
-};
+}
 ```
 
 ### Genesis Data
@@ -293,9 +293,9 @@ Put a unique number as chain id for your chain. Conflicting chain ids can cause 
 
 ## Creating Subnet
 
-Let's make a file for creating a new subnet by issuing `buildCreateSubnetTx` on AvalancheJS' `platform` API. Two of the interesting arguments of this function are `subnet-owner` and `threshold`.
+Let's make a file for creating a new Subnet by issuing `buildCreateSubnetTx` on AvalancheJS' `platform` API. Two of the interesting arguments of this function are `subnet-owner` and `threshold`.
 
-Subnet owners control the subnets by creating signed transactions for adding validators, creating new chains, etc. Whereas the threshold defines the minimum signature required for approving on behalf of all subnet owners. By default it is 1, so will not pass any argument for that, as we have only one subnet owner. Code is well commented for you to understand.
+Subnet owners control the Subnets by creating signed transactions for adding validators, creating new chains, etc. Whereas the threshold defines the minimum signature required for approving on behalf of all Subnet owners. By default it is 1, so will not pass any argument for that, as we have only one Subnet owner. Code is well commented for you to understand.
 
 ```javascript
 const {
@@ -303,7 +303,7 @@ const {
   pKeyChain,
   pAddressStrings,
   utxoSet,
-} = require("./importAPI.js");
+} = require("./importAPI.js")
 
 async function createSubnet() {
   // Creating unsgined tx
@@ -311,21 +311,21 @@ async function createSubnet() {
     await utxoSet(), // set of utxos this tx will consume
     pAddressStrings, // from
     pAddressStrings, // change address
-    pAddressStrings // subnet owners' address array
-  );
+    pAddressStrings // Subnet owners' address array
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Tx ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Tx ID: ", txId)
 }
 
-createSubnet();
+createSubnet()
 ```
 
-Make sure to keep the `txID` you received for this transaction. Once this transaction is accepted, a new subnet with the same ID will be created. You can run this program now with the following command.
+Make sure to keep the `txID` you received for this transaction. Once this transaction is accepted, a new Subnet with the same ID will be created. You can run this program now with the following command.
 
 ```bash
 node createSubnet.js
@@ -333,12 +333,12 @@ node createSubnet.js
 
 ## Adding Subnet Validator
 
-The newly created subnet requires validators to validate the transactions on the subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the subnet. Only transactions signed by the threshold (here 1) number of subnet owners will be accepted to add validators. The subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
+The newly created Subnet requires validators to validate the transactions on the Subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the Subnet. Only transactions signed by the threshold (here 1) number of Subnet owners will be accepted to add validators. The Subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the Subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
 
 The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the help of comments. All the transaction calls of AvalancheJS starting with `build` will return an unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to the network.
 
 ```javascript
-const args = require("yargs").argv;
+const args = require("yargs").argv
 const {
   platform,
   info,
@@ -346,7 +346,7 @@ const {
   pAddressStrings,
   utxoSet,
   BN,
-} = require("./importAPI.js");
+} = require("./importAPI.js")
 
 async function addSubnetValidator() {
   let {
@@ -355,14 +355,12 @@ async function addSubnetValidator() {
     endTime,
     weight = 20,
     subnetID,
-  } = args;
+  } = args
 
-  const pAddresses = pKeyChain.getAddresses();
+  const pAddresses = pKeyChain.getAddresses()
 
-  // Creating subnet auth
-  const subnetAuth = [
-    [0, pAddresses[0]]
-  ]
+  // Creating Subnet auth
+  const subnetAuth = [[0, pAddresses[0]]]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildAddSubnetValidatorTx(
@@ -373,21 +371,21 @@ async function addSubnetValidator() {
     new BN(startTime), // timestamp after which validation starts
     new BN(endTime), // timestamp after which validation ends
     new BN(weight), // weight of the validator
-    subnetID, // subnet id for validation
+    subnetID, // Subnet id for validation
     undefined, // memo
     undefined, // asOf
-    subnetAuth // subnet owners' address indices signing this tx
-  );
+    subnetAuth // Subnet owners' address indices signing this tx
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Tx ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Tx ID: ", txId)
 }
 
-addSubnetValidator();
+addSubnetValidator()
 ```
 
 We have to pass command-line arguments like `nodeID`, `startTime`, `endTime`, `weight` and `subnetID` while calling the command. If we do not pass any nodeID, then by default it will use ID corresponding to the URI in the `config.js` by calling the `info.getNodeID()` API from AvalancheJS. Similarly, the default weight will be 20, if not passed. You can run this program now with the following command.
@@ -403,7 +401,7 @@ We will keep the start time 5 minutes later than the current time. This `$(date 
 
 ## Whitelisting Subnet from the Node
 
-Subnet owners can add any node to their subnet. That doesn't mean the nodes start validating their subnet without any consent. If a node wants to validate the newly added subnet, then it must restart its `avalanchego` binary with the new subnet being whitelisted.
+Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their Subnet without any consent. If a node wants to validate the newly added Subnet, then it must restart its `avalanchego` binary with the new Subnet being whitelisted.
 
 ```bash
 avalanche-network-runner control restart-node \
@@ -418,7 +416,7 @@ Once the node has restarted, it will again be re-assigned to a random API port. 
 
 ## Creating Blockchain
 
-Once the subnet setup is complete, subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by the subnet validators, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
+Once the Subnet setup is complete, Subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by the Subnet validators, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
 
 Let's write functions to build a new blockchain using the already created `genesis.json` and `subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps. Go through the steps by understanding each function and pasting it in your `createBlockchain.js` file.
 
@@ -427,16 +425,16 @@ Let's write functions to build a new blockchain using the already created `genes
 Let's import the dependencies by using the following snippet. We are importing `yargs` for reading command-line flags.
 
 ```javascript
-const args = require("yargs").argv;
+const args = require("yargs").argv
 
-const genesisJSON = require("./genesis.json");
+const genesisJSON = require("./genesis.json")
 const {
   platform,
   pKeyChain,
   pAddressStrings,
   bintools,
   utxoSet,
-} = require("./importAPI");
+} = require("./importAPI")
 ```
 
 ### Decoding CB58 `vmID` to String
@@ -446,8 +444,8 @@ We have used the utility function for decoding `vmName` from the `vmID`. vmID is
 ```javascript
 // Returns string representing vmName of the provided vmID
 function convertCB58ToString(cb58Str) {
-  const buff = bintools.cb58Decode(cb58Str);
-  return buff.toString();
+  const buff = bintools.cb58Decode(cb58Str)
+  return buff.toString()
 }
 ```
 
@@ -458,45 +456,43 @@ Now we will work upon the `createBlockchain()` function. This function takes 3-4
 ```javascript
 // Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
 async function createBlockchain() {
-  const { subnetID, chainName } = args;
+  const { subnetID, chainName } = args
 
   // Generating vmName if only vmID is provied, else assigning args.vmID
   const vmName =
     typeof args.vmName !== "undefined"
       ? args.vmName
-      : convertCB58ToString(args.vmID);
+      : convertCB58ToString(args.vmID)
 
   // Getting CB58 encoded bytes of genesis
-  genesisBytes = JSON.stringify(genesisJSON);
+  genesisBytes = JSON.stringify(genesisJSON)
 
-  const pAddresses = pKeyChain.getAddresses();
+  const pAddresses = pKeyChain.getAddresses()
 
-  // Creating subnet auth
-  const subnetAuth = [
-    [0, pAddresses[0]]
-  ]
+  // Creating Subnet auth
+  const subnetAuth = [[0, pAddresses[0]]]
 
   // Creating unsgined tx
   const unsignedTx = await platform.buildCreateChainTx(
     await utxoSet(), // set of utxos this tx is consuming
     pAddressStrings, // from
     pAddressStrings, // change
-    subnetID, // id of subnet on which chain is being created
+    subnetID, // id of Subnet on which chain is being created
     chainName, // Name of blockchain
     vmName, // Name of the VM this chain is referencing
     [], // Array of feature extensions
     genesisBytes, // Stringified geneis JSON file
     undefined, // memo
     undefined, // asOf
-    subnetAuth // subnet owners' address indices signing this tx
-  );
+    subnetAuth // Subnet owners' address indices signing this tx
+  )
 
   // signing unsgined tx with pKeyChain
-  const tx = unsignedTx.sign(pKeyChain);
+  const tx = unsignedTx.sign(pKeyChain)
 
   // issuing tx
-  const txId = await platform.issueTx(tx);
-  console.log("Create chain transaction ID: ", txId);
+  const txId = await platform.issueTx(tx)
+  console.log("Create chain transaction ID: ", txId)
 }
 ```
 
@@ -504,7 +500,7 @@ The code above is self-explanatory -
 
 - Processing command-line flags to constants - `subnetID`, `chainName` and `vmID`.
 - Building stringified JSON from genesis.json
-- Creating subnet auth array.
+- Creating Subnet auth array.
 - Creating unsigned tx by calling `platform.buildCreateChainTx`.
 - Signing and issuing the signed tx.
 
@@ -521,4 +517,4 @@ Creating a new chain will take few seconds. You can also view the logs on the Av
 
 ## Interacting with the New Blockchain with MetaMask
 
-We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
+We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this Subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.

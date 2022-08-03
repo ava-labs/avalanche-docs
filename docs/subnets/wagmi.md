@@ -17,9 +17,9 @@ The WAGMI ("We're All Going to Make It") Subnet Demo is a high throughput testbe
 
 Everyone that has used the the C-Chain more than twice (~970k addresses) has been airdropped 10 WGM tokens. With the current fee parameterization, this should be enough for hundreds of txs.
 
-This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a production VM (coreth). Many underestimate how useful the isolation of subnets is for performing complex VM testing on a live network (without impacting the stability of the primary network).
+This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a production VM (coreth). Many underestimate how useful the isolation of Subnets is for performing complex VM testing on a live network (without impacting the stability of the primary network).
 
-We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) that surfaces aggregated usage statistics about the subnet.
+We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) that surfaces aggregated usage statistics about the Subnet.
 
 ## Subnet Info
 

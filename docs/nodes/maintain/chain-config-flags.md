@@ -9,7 +9,7 @@ Some chains allow the node operator to provide a custom configuration. Avalanche
 
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir` AvalancheGo flag, as documented [here](avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value defaults to `$HOME/.avalanchego/configs/chains`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
 
-This also applies to subnets, for example, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+This also applies to Subnets, for example, if a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 :::tip
 
@@ -39,13 +39,13 @@ The default C-Chain config is:
   "coreth-admin-api-enabled": false,
   "coreth-admin-api-dir": "",
   "eth-apis": [
-    "public-eth",
-    "public-eth-filter",
+    "eth",
+    "eth-filter",
     "net",
     "web3",
-    "internal-public-eth",
-    "internal-public-blockchain",
-    "internal-public-transaction-pool"
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction-pool"
   ],
   "continuous-profiler-dir": "",
   "continuous-profiler-frequency": 900000000000,
@@ -120,7 +120,33 @@ Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
 
 #### `eth-apis` ([]string):
 
-Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
+
+:::note
+
+The names used in this configuration flag have been updated in coreth `v.0.8.14`.
+The previous names containing `public-` and `private-` are deprecated.
+While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
+
+The mapping of deprecated values and their updated equivilant follows:
+
+| Deprecated                         | Use instead            |
+| ---------------------------------- | ---------------------- |
+| `public-eth`                       | `eth`                  |
+| `public-eth-filter`                | `eth-filter`           |
+| `private-admin`                    | `admin`                |
+| `private-debug`                    | `debug`                |
+| `public-debug`                     | `debug`                |
+| `internal-public-eth`              | `internal-eth`         |
+| `internal-public-blockchain`       | `internal-blockchain`  |
+| `internal-public-transaction-pool` | `internal-transaction` |
+| `internal-public-tx-pool`          | `internal-tx-pool`     |
+| `internal-public-debug`            | `internal-debug`       |
+| `internal-private-debug`           | `internal-debug`       |
+| `internal-public-account`          | `internal-account`     |
+| `internal-private-personal`        | `internal-personal`    |
+
+:::
 
 :::note
 
@@ -128,14 +154,18 @@ If you populate this field, it will override the defaults so you must include ev
 
 :::
 
-#### `public-eth`:
+#### `eth`:
+
+The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 `eth_coinbase`
 `eth_etherbase`
 
-#### `public-eth-filter`:
+#### `eth-filter`:
+
+The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth-filter`.
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
@@ -153,24 +183,23 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 - `eth_getFilterLogs`
 - `eth_getFilterChanges`
 
-#### `private-admin`:
+#### `admin`:
+
+The API name `private-admin` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `admin`.
 
 Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 - `admin_importChain`
 - `admin_exportChain`
 
-#### `public-debug`:
+#### `debug`:
+
+The API names `private-debug` and `public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `debug`.
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 - `debug_dumpBlock`
 - `debug_accountRange`
-
-#### `private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
 - `debug_preimage`
 - `debug_getBadBlocks`
 - `debug_storageRangeAt`
@@ -208,7 +237,9 @@ Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 - `web3_clientVersion`
 - `web3_sha3`
 
-#### `internal-public-eth`:
+#### `internal-eth`:
+
+The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-eth`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -217,7 +248,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_maxPriorityFeePerGas`
 - `eth_feeHistory`
 
-#### `internal-public-blockchain`:
+#### `internal-blockchain`:
+
+The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-blockchain`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -240,7 +273,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_estimateGas`
 - `eth_createAccessList`
 
-#### `internal-public-transaction-pool`:
+#### `internal-transaction`:
+
+The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-transaction`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -262,7 +297,9 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 - `eth_pendingTransactions`
 - `eth_resend`
 
-#### `internal-public-tx-pool`:
+#### `internal-tx-pool`:
+
+The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-tx-pool`.
 
 Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
@@ -271,28 +308,29 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 - `txpool_status`
 - `txpool_inspect`
 
-#### `internal-public-debug`:
+#### `internal-debug`:
+
+The API names `internal-private-debug` and `internal-public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `internal-debug`.
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 - `debug_getHeaderRlp`
 - `debug_getBlockRlp`
 - `debug_printBlock`
-
-#### `internal-private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
-#### `internal-public-account`:
+#### `internal-account`:
+
+The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-account`.
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 - `eth_accounts`
 
-#### `internal-private-personal`:
+#### `internal-personal`:
+
+The API name `internal-private-personal` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-personal`.
 
 Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 
@@ -492,4 +530,4 @@ This config value is ignored if there is no X-Chain indexed data in the DB and `
 
 ## Subnet Chain Configs
 
-As mentioned above, if a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+As mentioned above, if a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`

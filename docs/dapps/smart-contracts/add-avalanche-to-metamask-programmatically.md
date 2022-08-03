@@ -10,7 +10,7 @@ Since March 2021 Metamask has implemented that EIP as part of their Metamask [Cu
 
 Let's see how it works.
 
-## Data structures
+## Data Structures
 
 To add the Avalanche network to Metamask, we need to prepare the data structures that will be contain all the necessary data.
 
@@ -18,15 +18,15 @@ Main network data:
 
 ```javascript
 export const AVALANCHE_MAINNET_PARAMS = {
-    chainId: '0xA86A',
-    chainName: 'Avalanche Mainnet C-Chain',
-    nativeCurrency: {
-        name: 'Avalanche',
-        symbol: 'AVAX',
-        decimals: 18
-    },
-    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://snowtrace.io/']
+  chainId: "0xA86A",
+  chainName: "Avalanche Mainnet C-Chain",
+  nativeCurrency: {
+    name: "Avalanche",
+    symbol: "AVAX",
+    decimals: 18,
+  },
+  rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+  blockExplorerUrls: ["https://snowtrace.io/"],
 }
 ```
 
@@ -34,42 +34,42 @@ Test network data:
 
 ```javascript
 export const AVALANCHE_TESTNET_PARAMS = {
-    chainId: '0xA869',
-    chainName: 'Avalanche Testnet C-Chain',
-    nativeCurrency: {
-        name: 'Avalanche',
-        symbol: 'AVAX',
-        decimals: 18
-    },
-    rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+  chainId: "0xA869",
+  chainName: "Avalanche Testnet C-Chain",
+  nativeCurrency: {
+    name: "Avalanche",
+    symbol: "AVAX",
+    decimals: 18,
+  },
+  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+  blockExplorerUrls: ["https://testnet.snowtrace.io/"],
 }
 ```
 
-## Adding the network
+## Adding the Network
 
 To add the network to MetaMask, we need to call the `wallet_addEthereumChain` method, exposed by the web3 provider.
 
 ```javascript
-  function addAvalancheNetwork() {
-    injected.getProvider().then(provider => {
-      provider
-        .request({
-          method: 'wallet_addEthereumChain',
-          params: [AVALANCHE_MAINNET_PARAMS]
-        })
-        .catch((error: any) => {
-          console.log(error)
-        })
-    })
-  }
+function addAvalancheNetwork() {
+  injected.getProvider().then((provider) => {
+    provider
+      .request({
+        method: "wallet_addEthereumChain",
+        params: [AVALANCHE_MAINNET_PARAMS],
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
+  })
+}
 ```
 
 Where `injected` is initialized as a `web3-react/injected-connector` used to interface with MetaMask APIs. Usage for other popular web frameworks is similar. Replace `AVALANCHE_MAINNET_PARAMS` with `AVALANCHE_TESTNET_PARAMS` if you want to add the test network.
 
 Typical usage pattern would be to expose a button calling that method if you get `Wrong Network` or `Error connecting` errors when attempting to establish a connection to MetaMask.
 
-## User experience
+## User Experience
 
 When users first come to your dapp's website they need to approve connection to MetaMask. After they do that, if you don't detect successful web3 network connection, you can present them with a dialog asking them to confirm switch to a new network:
 
@@ -86,4 +86,3 @@ If they approve, your app will be connected to the Avalanche network. Very easy,
 Dapps users are often not very technically sophisticated and onboarding them needs to be as seamless and easy as possible. Manually adding a new network to MetaMask is a hurdle than a certain percentage of your potential users will not be able to clear. Removing that requirement is a simple step that will enhance their experience and enable more users to get to actually use your dapp.
 
 If you have any questions, problems, or ideas on how to improve, or simply want to join our developer community, you can contact us on our [Discord](https://chat.avalabs.org/) server.
-

@@ -1,22 +1,23 @@
 ---
-Description: How to customize a subnet by utilizing Genesis, Precompile and Blockchain Configs.
+Description: How to customize a Subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize a Subnet
+# Customize Your EVM-Powered Subnet
 
-All subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
+All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
-And a subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
+And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
 
-- Genesis
-- Precompile
-- Chain Configs
+- [Genesis](#genesis)
+- [Precompile](#precompiles)
+- [Upgrade Configs](#network-upgrades-enabledisable-precompiles)
+- [Chain Configs](#chain-configs)
 
 ## Subnet Configs
 
-A subnet can customized by setting parameters for the following:
+A Subnet can customized by setting parameters for the following:
 
-- [Validator-only communication to create a private subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
+- [Validator-only communication to create a private Subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
 - [Consensus](../nodes/maintain/subnet-configs.md#consensus-parameters)
 - [Gossip](../nodes/maintain/subnet-configs.md#gossip-configs)
 
@@ -83,21 +84,30 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 #### Fee Config
 
-`gasLimit`: Gas limit of blocks.
+`gasLimit`: Sets the max amount of gas consumed per block.
 
-`minBaseFee`: Minimum base fee of transactions. It is also the initial base fee for EIP-1559 blocks.
+`targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target producing a block every 2 seconds. If the network starts producing faster than this, base fees are increased accordingly.
 
-`targetGas`: The target gas consumption of blocks. If the network starts producing blocks with gas cost higher than this, base fees are increased accordingly.
+`minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets the minimum gas price for any transaction included in that block, this effectively sets a minimum gas price for any transaction.
 
-`baseFeeChangeDenominator`: The amount the base fee can change between blocks.
+`targetGas`: Specifies the targeted amount of gas (including block gas cost) to consume within a rolling 10-seconds window. When the dynamic fee algorithm observes that network activity is above/below the `targetGas`, it increases/decreases the base fee proportionally to how far above/below the target actual network activity is. If the network starts producing blocks with gas cost higher than this, base fees are increased accordingly.
 
-`minBlockGasCost`: Minimum gas cost a block should cover.
+`baseFeeChangeDenominator`: Divides the difference between actual and target utilization to determine how much to increase/decrease the base fee. A larger denominator indicates a slower changing, stickier base fee, while a lower denominator allows the base fee to adjust more quickly.
 
-`maxBlockGasCost`: Maximum gas cost a block should cover.
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
 
-`targetBlockRate`: The targeted block rate that network should produce blocks. If the network starts producing faster than this, base fees are increased accordingly.
+`maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
 
-`blockGasCostStep`: The block gas cost change step between blocks.
+`blockGasCostStep`: Determines how much to increase/decrease the block gas cost depending on the amount of time elapsed since the previous block.
+
+If the block is produced at the target rate, the block gas cost will stay the same as the block gas cost for the parent block.
+
+If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for each second faster/slower than the target block rate accordingly.
+
+:::note
+If the `blockGasCostStep` is set to a very large number, it effectively requires block production to go no faster than the `targetBlockRate`. For example, if a block is produced two seconds faster than the target block rate, the block gas cost will increase by `2 * blockGasCostStep`.
+
+:::
 
 #### Custom Fee Recipients
 
@@ -156,7 +166,7 @@ to translate between decimal and hex numbers.
 
 The above example yields the following genesis allocations (denominated in whole units of the native token ie. 1 AVAX/1 WAGMI):
 
-```
+```text
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC: 100000000 (0x52B7D2DCC80CD2E4000000=100000000000000000000000000 Wei)
 0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B: 49463 (0xa796504b1cb5a7c0000=49463000000000000000000 Wei)
 ```
@@ -189,7 +199,7 @@ With `allowFeeRecipients` enabled, your validators can specify their addresses t
 
 :::warning
 
-If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
 
@@ -364,13 +374,163 @@ interface NativeMinterInterface {
 
 _Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used together._
 
+### Configuring Dynamic Fees
+
+You can configure the parameters of the dynamic fee algorithm on chain using the `FeeConfigManager`. In order to activate this feature, you will need to provide the `FeeConfigManager` in the genesis:
+
+```json
+{
+  "config": {
+    "feeManagerConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+    }
+  }
+}
+```
+
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
+
+The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
+
+interface IFeeManager is IAllowList {
+  // Set fee config fields to contract storage
+  function setFeeConfig(
+    uint256 gasLimit,
+    uint256 targetBlockRate,
+    uint256 minBaseFee,
+    uint256 targetGas,
+    uint256 baseFeeChangeDenominator,
+    uint256 minBlockGasCost,
+    uint256 maxBlockGasCost,
+    uint256 blockGasCostStep
+  ) external;
+
+  // Get fee config from the contract storage
+  function getFeeConfig()
+    external
+    view
+    returns (
+      uint256 gasLimit,
+      uint256 targetBlockRate,
+      uint256 minBaseFee,
+      uint256 targetGas,
+      uint256 baseFeeChangeDenominator,
+      uint256 minBlockGasCost,
+      uint256 maxBlockGasCost,
+      uint256 blockGasCostStep
+    );
+
+  // Get the last block number changed the fee config from the contract storage
+  function getFeeConfigLastChangedAt() external view returns (uint256 blockNumber);
+}
+```
+
+In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
+
+- `getFeeConfig` - retrieves the current dynamic fee config
+- `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
+- `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
+
 ### Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
+## Network Upgrades: Enable/Disable Precompiles
+
+:::warning
+
+Performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+
+Any mistakes in configuring network upgrades or coordinating them on validators may cause the network to halt and recovering may be difficult.
+
+:::
+
+In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a new configuration if desired.
+
+These upgrades can be specified in a file named `upgrade.json` placed in the same directory as [`config.json`](#chain-configs) using the following format:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 1668950000, // unix timestamp precompile should activate at
+        "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
+      }
+    }
+  ]
+}
+```
+
+To disable a precompile, the following format should be used:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "<precompileName>": {
+        "blockTimestamp": 1668950000, // unix timestamp the precompile should deactivate at
+        "disable": true
+      }
+    }
+  ]
+}
+```
+
+Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the block timestamps must be in increasing order. Once an upgrade has been activated (a block after the specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it was configured at the time of activation (otherwise the node will refuse to start).
+
+Enabling and disabling a precompile is a network upgrade and should always be done with caution.
+
+:::danger
+
+For safety, you should always treat `precompileUpgrades` as append-only.
+
+As a last resort measure, it is possible to abort or reconfigure a precompile upgrade that has not been activated since the chain is still processing blocks using the prior rule set.
+
+:::
+
+If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json` from the end of the list of upgrades. As long as the blockchain has not accepted a block with a timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
+
+### Example
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "txAllowListConfig": {
+        "blockTimestamp": 1668960000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    },
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668970000,
+        "disable": true
+      }
+    }
+  ]
+}
+```
+
+This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables `txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig` at the first block with timestamp >= `1668970000`.
+
+When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
+
 ## Chain Configs
 
-As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of subnets can have its own custom configuration. If a subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
@@ -416,6 +576,6 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 
 :::warning
 
-If `allowFeeRecipients` feature is enabled on the subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
