@@ -8,7 +8,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
+In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is the [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's blockchain contains the timestamp when it was created along with a 32-byte piece of data. Each block’s timestamp is after its parent’s timestamp.
 
 Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
 
