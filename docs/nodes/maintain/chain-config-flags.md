@@ -320,6 +320,26 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
+#### `debug-handler`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_verbosity`
+- `debug_vmodule`
+- `debug_backtraceAt`
+- `debug_memStats`
+- `debug_gcStats`
+- `debug_blockProfile`
+- `debug_setBlockProfileRate`
+- `debug_writeBlockProfile`
+- `debug_mutexProfile`
+- `debug_setMutexProfileFraction`
+- `debug_writeMutexProfile`
+- `debug_writeMemProfile`
+- `debug_stacks`
+- `debug_freeOSMemory`
+- `debug_setGCPercent`
+
 #### `internal-account`:
 
 The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-account`.
