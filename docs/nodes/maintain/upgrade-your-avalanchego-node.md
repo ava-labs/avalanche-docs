@@ -110,13 +110,13 @@ You are now ready to run the new version of the node.
 
 If you are using the pre-built binaries on MacOS:
 
-```
+```zsh
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
 If you are using the pre-built binaries on Linux:
 
-```
+```zsh
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 

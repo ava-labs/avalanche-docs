@@ -48,7 +48,7 @@ Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
 #### **Signature**
 
-```sh
+```zsh
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
@@ -58,7 +58,7 @@ ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisio
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.publishBlockchain",
@@ -88,7 +88,7 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
 #### **Signature**
 
-```sh
+```zsh
 ipcs.unpublishBlockchain({blockchainID: string}) -> {}
 ```
 
@@ -96,7 +96,7 @@ ipcs.unpublishBlockchain({blockchainID: string}) -> {}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.unpublishBlockchain",

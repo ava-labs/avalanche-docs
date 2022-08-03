@@ -15,8 +15,8 @@ your Solidity code. It has even a functionality to let you use 'console.log' in 
 It's not the purpose of this tutorial to go over all those functionalities (maybe in another tutorial, why not :) ), so
 here is a few links if you want to know more about it:
 
-* https://hardhat.org/getting-started/
-* https://github.com/nomiclabs/hardhat
+* [https://hardhat.org/getting-started](https://hardhat.org/getting-started/)
+* [https://github.com/nomiclabs/hardhat](https://github.com/nomiclabs/hardhat)
 
 ## What is the 'fork' functionality ?
 
@@ -30,7 +30,7 @@ we will use [Pangolin](https://pangolin.exchange/)
 
 The flow of it would be:
 
-```
+```zsh
 1* Your send a call to Swapper's swap function 
 2* Swapper use Pangolin's router `swapExactTokensForTokens` function, it will find the appropriate Pair contract address to call
 3* Pangolin's router call a Pair contract to make the swap
@@ -188,10 +188,10 @@ hardhat: {
   [here](https://docs.avax.network/build/apis/avalanchego/apis/c-chain).
 * `gasPrice` is a dynamic value on Avalanche's CChain (see this [post](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) for more information). For test purposes we can use a fixed value (225 nAvax)
 * `forking` is where you configure the parameter of the fork.
-    * `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
+  * `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
       running as full archive node. Hardhat will take care of getting the state of the CChain from this node and start a
       local development network on which you'll be able to deploy and test your code.
-    * `blockNumber` Specify at which block Hardhat will create a fork. It is optional so if you don't set it, the
+  * `blockNumber` Specify at which block Hardhat will create a fork. It is optional so if you don't set it, the
       default behaviour would be to fork the CChain at the latest known block. Now since you want to be able to run your
       tests in a deterministic manner, I recommend you to specify a specific block number.
 
@@ -303,11 +303,11 @@ dotenv.config();
 
 I won't go over in details about those, just notice that we use `typechain`, which is a tool that generate automatically
 typescript bindings for your solidity contracts. Basically it means that, when we instantiate an object corresponding to a
-Solidity contract, we will have full typings and auto-completion. 
+Solidity contract, we will have full typings and auto-completion.
 It saves you a lot of time and help you write better and safer
 code. (I can't emphasize enough how much I love Typescript)
 
-In the snippet below we can see the `beforeEach` function (it is a [hook](https://mochajs.org/#hooks) actually) that 
+In the snippet below we can see the `beforeEach` function (it is a [hook](https://mochajs.org/#hooks) actually) that
 will run before each test case we write in this file.
 
 ```ts
@@ -343,9 +343,9 @@ describe("Swappity swap", function () {
 Couple of things to note here :
 
 * `await ethers.provider.send(
-  "hardhat_reset", ...` It will reset the state of your CChain fork. Meaning that each one of your test will run on a 
+  "hardhat_reset", ...` It will reset the state of your CChain fork. Meaning that each one of your test will run on a
    clean instance.
-* `let accounts = await ethers.getSigners()` Ethers provides us a way to get access to some ``Signers`. Which is a 
+* `let accounts = await ethers.getSigners()` Ethers provides us a way to get access to some ``Signers`. Which is a
    way to represent CChain account that we can use in our tests.
 * `const swapperFactory = await ethers.getContractFactory("Swapper")` We get here via Ethers a ContractFactory that is an
   abstraction used to deploy smart contracts.
@@ -529,7 +529,7 @@ In this tutorial learned how to set up our Hardhat environment to use a fork of 
 for our tests, If you want to learn more about Hardhat, I can't recommend you enough to have a look at their
 [official documentation](https://hardhat.org/getting-started/)
 
-I hope you learned something with this tutorial, let me know if you spot a mistake, typo ... 
+I hope you learned something with this tutorial, let me know if you spot a mistake, typo ...
 Also if you would like to have another tutorial on how to use X with Avalanche, let me know !
 
 # Additional links

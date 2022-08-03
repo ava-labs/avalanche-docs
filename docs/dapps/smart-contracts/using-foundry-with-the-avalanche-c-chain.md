@@ -65,7 +65,7 @@ contract NFT is ERC721 {
 
 Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the [ERC721 standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
 
-# Compile & deploy with Forge
+## Compile & deploy with Forge
 
 [Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a command-line tool that ships with Foundry. Forge tests, builds, and deploys your smart contracts.
 
@@ -110,7 +110,7 @@ Transaction hash: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32
 
 _Note: Please store your `Deployed to` address for use in the next section._
 
-# Using Cast to Interact with the Smart Contract
+## Using Cast to Interact with the Smart Contract
 
 We can call functions on our NFT contract with [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
 

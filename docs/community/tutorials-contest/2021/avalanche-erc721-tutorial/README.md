@@ -91,7 +91,7 @@ module.exports = {
 
 This file is the entrypoint of our Truffle project. As you can see, we specify two networks on which we would like to deploy our smart contracts after we are done with them, namely *fuji* and *mainnet*. We utilize the [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) library, so that we provide a RPC to which we can connect to to deploy our contracts as well as a mnemonic which will be used to sign the transaction to do that. As you can see, some of the variables are accessed via process.env. These are defined in a separate **.env** file in the root of our project and have the following structure:
 
-```sh
+```zsh
 MNEMONIC='paste your metamask mnemonic here which is twelve words long believe me'
 APIKEY=YOUR_DATAHUB_API_KEY_FOR_THE_FUJI_TESTNET
 ```

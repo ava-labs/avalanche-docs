@@ -13,7 +13,7 @@ This tutorial assumes that:
 #### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
 
 - **`Network Name`**: Custom Subnet EVM
-- **`New RPC URL`**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
+- **`New RPC URL`**: [http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc](http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc) (Note: the port number should match your local setting which can be different from 9650.)
 - **`ChainID`**: Subnet EVM ChainID
 - **`Symbol`**: Subnet EVM Token Symbol
 - **`Explorer`**: N/A

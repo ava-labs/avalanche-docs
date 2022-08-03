@@ -35,7 +35,7 @@ Each API’s documentation specifies what endpoint path a user should make calls
 
 In general, they are formatted like:
 
-```sh
+```zsh
 /ext/[api-name]
 ```
 
@@ -43,7 +43,7 @@ So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is 
 
 So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
 
-```sh
+```zsh
 http://127.0.0.1:9650/ext/info
 ```
 
@@ -53,7 +53,7 @@ Besides the APIs that are local to the node, like Admin or Metrics APIs, nodes a
 
 In general, chain endpoints are formatted as:
 
-```sh
+```zsh
 ext/bc/[blockchainID]
 ```
 
@@ -61,7 +61,7 @@ ext/bc/[blockchainID]
 
 The Primary Network consists of three chains: X, P and C chain. As those chains are present on every node, there are also convenient aliases defined that can be used instead of the full blockchainIDs. So, the endpoints look like:
 
-```sh
+```zsh
 ext/bc/X
 ext/bc/P
 ext/bc/C
@@ -75,25 +75,25 @@ C-Chain and many subnets run a version of the EthereumVM (EVM). EVM exposes its 
 
 To interact with C-Chain EVM via the JSON-RPC use the endpoint:
 
-```sh
+```zsh
 /ext/bc/C/rpc
 ```
 
 To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
 
-```sh
+```zsh
 /ext/bc/[blockchainID]/rpc
 ```
 
 where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the Swimmer Network (a Subnet that runs the Crabada game) running on a local node would be:
 
-```sh
+```zsh
 http://127.0.0.1/ext/bc/2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX/rpc
 ```
 
 Or for the WAGMI Subnet on the Fuji testnet:
 
-```sh
+```zsh
 http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
 ```
 
@@ -101,19 +101,19 @@ http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
 
 To interact with C-Chain via the websocket endpoint, use:
 
-```sh
+```zsh
 /ext/bc/C/ws
 ```
 
 To interact with other instances of the EVM via the websocket endpoint:
 
-```sh
+```zsh
 /ext/bc/blockchainID/ws
 ```
 
 where `blockchainID` is the ID of the blockchain running the EVM. For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
 
-```sh
+```zsh
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
@@ -144,7 +144,7 @@ where:
 
 To call this method, then:
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :4,
