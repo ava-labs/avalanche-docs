@@ -41,7 +41,6 @@ const sidebars = {
       label: 'Audits',
       href: 'https://github.com/ava-labs/audits',
     },
-    'disclaimer'
   ],
 
   quickStart: [
@@ -113,8 +112,8 @@ const sidebars = {
       label: 'Examples',
       collapsed: false,
       items: [
-          'subnets/spaces',
-          'subnets/wagmi',
+        'subnets/spaces',
+        'subnets/wagmi',
       ],
     },
     {
@@ -231,6 +230,6 @@ const sidebars = {
       ]
     },
   ],
-};
+}
 
-module.exports = sidebars;
+module.exports = sidebars
