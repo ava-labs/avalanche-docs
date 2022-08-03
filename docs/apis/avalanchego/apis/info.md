@@ -28,13 +28,13 @@ Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adm
 
 #### **Signature**
 
-```sh
+```zsh
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -63,13 +63,13 @@ Get the ID of the network this node is participating in.
 
 #### **Signature**
 
-```sh
+```zsh
 info.getNetworkID() -> {networkID:int}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -95,13 +95,13 @@ Get the name of the network this node is participating in.
 
 #### **Signature**
 
-```sh
+```zsh
 info.getNetworkName() -> {networkName:string}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -127,13 +127,13 @@ Get the ID of this node.
 
 #### **Signature**
 
-```sh
+```zsh
 info.getNodeID() -> {nodeID: string}
 ```
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -165,7 +165,7 @@ info.getNodeIP() -> {ip: string}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -191,7 +191,7 @@ Get the version of this node.
 
 #### **Signature**
 
-```sh
+```zsh
 info.getNodeVersion() -> {
     version: string,
     databaseVersion: string,
@@ -209,7 +209,7 @@ where:
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -242,7 +242,7 @@ Get the virtual machines installed on this node.
 
 #### **Signature**
 
-```
+```zsh
 info.getVMs() -> {
     vms: map[string][]string
 }
@@ -284,7 +284,7 @@ Check whether a given chain is done bootstrapping
 
 #### **Signature**
 
-```sh
+```zsh
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
@@ -292,7 +292,7 @@ info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -321,7 +321,7 @@ Get a description of peer connections.
 
 #### **Signature**
 
-```sh
+```zsh
 info.peers({
     nodeIDs: string[] // optional
 }) ->
@@ -352,7 +352,7 @@ info.peers({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -413,7 +413,7 @@ Get the fees of the network.
 
 #### **Signature**
 
-```sh
+```zsh
 info.getTxFee() ->
 {
     creationTxFee: uint64,
@@ -426,7 +426,7 @@ info.getTxFee() ->
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -453,7 +453,7 @@ Returns the network's observed uptime of this node.
 
 #### **Signature**
 
-```sh
+```zsh
 info.uptime() ->
 {
     rewardingStakePercentage: float64,
@@ -466,7 +466,7 @@ info.uptime() ->
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

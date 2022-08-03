@@ -169,7 +169,7 @@ The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs previ
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
-Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
+Adds the following RPC calls (see [https://eth.wiki/json-rpc/API](https://eth.wiki/json-rpc/API) for complete documentation):
 
 - `eth_newPendingTransactionFilter`
 - `eth_newPendingTransactions`

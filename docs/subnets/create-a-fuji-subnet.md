@@ -437,7 +437,7 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
 
 To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
- 
+
 ## Add a Validator
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
@@ -597,7 +597,7 @@ Next, we need to provide the plugin directory. We described VMs at the beginning
 
 The tool doesn't know where exactly it's located so it requires the full path. With the path given, it will copy the VM binary to the provided location:
 
-```
+```zsh
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
 VM binary written to /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 This will edit your existing config file. This edit is nondestructive,
@@ -610,7 +610,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Hitting `Yes` will attempt at writing the config file:
 
-```
+```zsh
 ✔ Yes
 The config file has been edited. To use it, make sure to start the node with the '--config-file' option, e.g.
 
@@ -686,4 +686,3 @@ avalanche subnet list
 | testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
 +---------------+---------------+----------+-----------+----------+
 ```
-

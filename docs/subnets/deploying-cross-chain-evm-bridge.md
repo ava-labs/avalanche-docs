@@ -33,7 +33,7 @@ Here is the basic high-level workflow of the bridge -
 
 Bridging tokens from source to destination chain involves the **lock and mint** approach. Whereas bridging tokens from destination to source chain involves **burn and release** approach. We cannot mint and burn tokens that we do not control. Therefore we lock them in the token safe on the source chain. And mint the corresponding token (which we will deploy and hence control) on the destination chain.
 
-![](/img/chainsafe-bridge-1-workflow.png)
+![chainsafe bridge workflow](/img/chainsafe-bridge-1-workflow.png)
 
 ## Requirements
 
@@ -144,7 +144,7 @@ We need to set up our destination chain as follows -
 - Deploy Bridge and Handler contract with `$DST_ADDR` as default and only relayer
 - Deploy mintable and burnable ERC20 contract representing bridged `wWGM` token
 - Register the `wWGM` token as a resource on the bridge
-- Register the` wWGM` token as mintable/burnable on the bridge
+- Register the `wWGM` token as mintable/burnable on the bridge
 - Giving permissions to Handler contract to mint new `wWGM` tokens
 
 ### Deploy Contracts
@@ -328,7 +328,7 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 25000000000 erc20 
 
 This transaction will transfer 0.1 wWGM to token safe and emit a `Deposit` event, which will be captured by the relayer. Following this event, it will send a voting proposal to the destination chain. Since the threshold is 1, the bridge will execute the proposal, and new wWGM minted to the recipient's address. Here is the screenshot of the output from the relayer.
 
-![](/img/chainsafe-bridge-2-relayer-output.png)
+![chainsafe bridge relayer output](/img/chainsafe-bridge-2-relayer-output.png)
 
 Similarly, we can transfer the tokens back to the WAGMI chain.
 

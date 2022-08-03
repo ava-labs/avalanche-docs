@@ -33,7 +33,7 @@ Note: addresses should not include a chain prefix (ie. X-) in calls to the stati
 
 #### **Signature**
 
-```sh
+```zsh
 avm.buildGenesis({
     networkID: int,
     genesisData: JSON,
@@ -100,7 +100,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -184,7 +184,7 @@ Create a new address controlled by the given user.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.createAddress({
     username: string,
     password: string
@@ -193,7 +193,7 @@ avm.createAddress({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.createAddress",
@@ -227,7 +227,7 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 
 #### **Signature**
 
-```sh
+```zsh
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
@@ -258,7 +258,7 @@ avm.createFixedCapAsset({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -307,7 +307,7 @@ Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](x
 
 #### **Signature**
 
-```sh
+```zsh
 avm.mint({
     amount: int,
     assetID: string,
@@ -332,7 +332,7 @@ avm.mint({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -372,7 +372,7 @@ Create a new variable-cap, fungible asset. No units of the asset exist at initia
 
 #### **Signature**
 
-```sh
+```zsh
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
@@ -404,7 +404,7 @@ avm.createVariableCapAsset({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -459,7 +459,7 @@ Create a new non-fungible asset. No units of the asset exist at initialization. 
 
 #### **Signature**
 
-```sh
+```zsh
 avm.createNFTAsset({
     name: string,
     symbol: string,
@@ -489,7 +489,7 @@ avm.createNFTAsset({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -536,7 +536,7 @@ Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.mintNFT({
     assetID: string,
     payload: string,
@@ -564,7 +564,7 @@ avm.mintNFT({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -606,7 +606,7 @@ you must call the [C-Chain's `avax.import`](c-chain.md#avaximport) or the
 
 #### **Signature**
 
-```sh
+```zsh
 avm.export({
     to: string,
     amount: int,
@@ -635,7 +635,7 @@ avm.export({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -676,7 +676,7 @@ The returned private key can be added to a user with [`avm.importKey`](x-chain.m
 
 #### **Signature**
 
-```sh
+```zsh
 avm.exportKey({
     username: string,
     password: string,
@@ -689,7 +689,7 @@ avm.exportKey({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -720,7 +720,7 @@ Get the balances of all assets controlled by a given address.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getAllBalances({address:string}) -> {
     balances: []{
         asset: string,
@@ -731,7 +731,7 @@ avm.getAllBalances({address:string}) -> {
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -769,7 +769,7 @@ Get information about an asset.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getAssetDescription({assetID: string}) -> {
     assetId: string,
     name: string,
@@ -785,7 +785,7 @@ avm.getAssetDescription({assetID: string}) -> {
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -817,7 +817,7 @@ Get the balance of an asset controlled by a given address.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getBalance({
     address: string,
     assetID: string
@@ -829,7 +829,7 @@ avm.getBalance({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
   "jsonrpc":"2.0",
   "id"     : 1,
@@ -872,7 +872,7 @@ Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getAddressTxs({
     address: string,
     cursor: uint64,     // optional, leave empty to get the first page
@@ -897,7 +897,7 @@ avm.getAddressTxs({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
   "jsonrpc":"2.0",
   "id"     : 1,
@@ -929,7 +929,7 @@ Returns the specified transaction. The `encoding` parameter sets the format of t
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getTx({
     txID: string,
     encoding: string, //optional
@@ -941,7 +941,7 @@ avm.getTx({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1048,7 +1048,7 @@ Get the status of a transaction sent to the network.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
@@ -1061,7 +1061,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1090,7 +1090,7 @@ Gets the UTXOs that reference a given address. If sourceChain is specified, then
 
 #### **Signature**
 
-```sh
+```zsh
 avm.getUTXOs({
     addresses: []string,
     limit: int, //optional
@@ -1124,7 +1124,7 @@ avm.getUTXOs({
 
 Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1163,7 +1163,7 @@ This gives response:
 
 Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :2,
@@ -1207,7 +1207,7 @@ Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs
 
 Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1251,7 +1251,7 @@ Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Befo
 
 #### **Signature**
 
-```sh
+```zsh
 avm.import({
     to: string,
     sourceChain: string,
@@ -1267,7 +1267,7 @@ avm.import({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1303,7 +1303,7 @@ Give a user control over an address by providing the private key that controls t
 
 #### **Signature**
 
-```sh
+```zsh
 avm.importKey({
     username: string,
     password: string,
@@ -1315,7 +1315,7 @@ avm.importKey({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1346,7 +1346,7 @@ Send a signed transaction to the network. `encoding` specifies the format of the
 
 #### **Signature**
 
-```sh
+```zsh
 avm.issueTx({
     tx: string,
     encoding: string, //optional
@@ -1357,7 +1357,7 @@ avm.issueTx({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -1391,7 +1391,7 @@ List addresses controlled by the given user.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.listAddresses({
     username: string,
     password: string
@@ -1400,7 +1400,7 @@ avm.listAddresses({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.listAddresses",
@@ -1434,7 +1434,7 @@ Send a quantity of an asset to an address.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.send({
     amount: int,
     assetID: string,
@@ -1456,7 +1456,7 @@ avm.send({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1497,7 +1497,7 @@ Sends multiple transfers of `amount` of `assetID`, to a specified address from a
 
 #### **Signature**
 
-```sh
+```zsh
 avm.sendMultiple({
     outputs: []{
       assetID: string,
@@ -1520,7 +1520,7 @@ avm.sendMultiple({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1570,7 +1570,7 @@ Send a non-fungible token.
 
 #### **Signature**
 
-```sh
+```zsh
 avm.sendNFT({
     assetID: string,
     groupID: number,
@@ -1590,7 +1590,7 @@ avm.sendNFT({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1630,7 +1630,7 @@ This call is made to the wallet API endpoint:
 
 #### Signature
 
-```
+```zsh
 wallet.issueTx({
     tx: string,
     encoding: string, //optional
@@ -1641,7 +1641,7 @@ wallet.issueTx({
 
 #### Example call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -1679,7 +1679,7 @@ This call is made to the wallet API endpoint:
 
 #### **Signature**
 
-```sh
+```zsh
 wallet.send({
     amount: int,
     assetID: string,
@@ -1701,7 +1701,7 @@ wallet.send({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1746,7 +1746,7 @@ This call is made to the wallet API endpoint:
 
 #### **Signature**
 
-```sh
+```zsh
 wallet.sendMultiple({
     outputs: []{
       assetID: string,
@@ -1769,7 +1769,7 @@ wallet.sendMultiple({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
