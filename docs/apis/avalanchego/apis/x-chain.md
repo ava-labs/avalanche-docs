@@ -1638,13 +1638,13 @@ vertex.getVertex({
 
 **Request**
 
-* `vertexID` is the vertex ID. It should be in cb58 format.
-* `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
+- `vertexID` is the vertex ID. It should be in cb58 format.
+- `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
 
 **Response**
 
-* `vertex` is the vertex encoded to `encoding`.
-* `encoding` is the `encoding`.
+- `vertex` is the vertex encoded to `encoding`.
+- `encoding` is the `encoding`.
 
 #### JSON Example
 
@@ -1754,7 +1754,7 @@ This call is made to the wallet API endpoint:
 
 #### Signature
 
-```
+```sh
 wallet.issueTx({
     tx: string,
     encoding: string, //optional
