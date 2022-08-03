@@ -1180,7 +1180,7 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58. See [here](./subnet-cli.md#subnet-cli-create-vmid) for more details.
+This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58. See [here](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to create a VM ID.
 
 ### VM Aliases
 
