@@ -56,12 +56,12 @@ A Virtual Machine exposes APIs or handlers for users to make direct RPC to servi
   - Execute transaction locally with execution context, dummy database, and block
   - Add valid transaction to mempool - `mempool.newTxs`
     - Call `mempool.addPending()` to signal VM to build block for the newly added tx
-- Gossips new transactions from `mempool.newTxs` at regular intervals
-- Signals consensus engine to build blocks out of pending transactions in the mempool
+- The node running the VM, gossips new transactions to its peers from `mempool.newTxs` at regular intervals
+- VM signals consensus engine to build blocks out of pending transactions in the mempool
 - ProposerVM delays the request until it is the node's turn to propose a block
 - The consensus engine calls `vm.BuildBlock()` to get the block from VM
 - Engine calls `block.Verify()` method
-- Successfully verified blocks have gossiped within the network for consensus
+- Successfully verified blocks have been gossiped within the network for consensus
 - Blocks containing transactions are accepted or rejected according to the consensus results
 - Accepted blocks and related data are committed to the node's database
 
@@ -69,13 +69,13 @@ A Virtual Machine exposes APIs or handlers for users to make direct RPC to servi
 
 We have divided the components into 3 packages. We will be looking at each of these files and learning about their functions.
 
-- **vm**
+- **[vm](https://github.com/ava-labs/blobvm/tree/master/vm)**
   - block_builder.go
   - chain_vm.go
   - network.go
   - service.go
   - vm.go
-- **chain**
+- **[chain](https://github.com/ava-labs/blobvm/tree/master/chain)**
   - unsigned_tx.go
   - base_tx.go
   - transfer_tx.go
@@ -85,7 +85,7 @@ We have divided the components into 3 packages. We will be looking at each of th
   - mempool.go
   - storage.go
   - builder.go
-- **mempool**
+- **[mempool](https://github.com/ava-labs/blobvm/tree/master/mempool)**
   - mempool.go
 
 ### Transactions

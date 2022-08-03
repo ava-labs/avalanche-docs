@@ -94,7 +94,7 @@ func (m *manager) buildChain(chainParams ChainParameters, sb Subnet) (*chain, er
 
 ### Initializing a VM
 
-Blockchains are functional, only when the instantiated VMs are initialized and the node is bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found [later](#Initialize) in the documentation.
+Blockchains are functional, only when the instantiated VMs are initialized and the node is bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found in the [third part](/subnets/create-a-vm-blobvm#initialize) of this series.
 
 ```go
 if err := vm.Initialize(
@@ -125,7 +125,7 @@ Every VM should implement the following interfaces:
 
 ### `block.ChainVM`
 
-To reach a consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessed from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/snowman/block/vm.go).
+To reach a consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessed from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 ```go title="/snow/engine/snowman/block/vm.go"
 // ChainVM defines the required functionality of a Snowman VM.
@@ -189,7 +189,7 @@ type Parser interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/common/vm.go)
+You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go)
 
 ```go title="/snow/engine/common/vm.go"
 // VM describes the interface that all consensus VMs must implement
@@ -319,7 +319,7 @@ type Block interface {
 
 ### `choices.Decidable`
 
-This interface is the superset of every decidable object, such as transactions, blocks, and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/choices/decidable.go)
+This interface is the superset of every decidable object, such as transactions, blocks, and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go)
 
 ```go title="/snow/choices/decidable.go"
 // Decidable represents element that can be decided.
