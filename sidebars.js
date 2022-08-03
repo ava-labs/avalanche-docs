@@ -148,6 +148,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'AvalancheJS',
+      collapsed: false,
       items: [
         'apis/avalanchejs/README',
         'apis/avalanchejs/api',
@@ -224,6 +225,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Tutorials Contest',
+      collapsed: false,
       items: [
         'community/tutorials-contest/2022',
         'community/tutorials-contest/2021'
