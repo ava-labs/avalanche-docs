@@ -1251,7 +1251,7 @@ Get a block by its ID. If no ID is provided, get the latest block.
 
 **Signature**
 
-```sh
+```zsh
 timestampvm.getBlock({id: string}) ->
     {
         id: string,
@@ -1354,7 +1354,7 @@ Propose the next block on this blockchain.
 
 **Signature**
 
-```sh
+```zsh
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 

@@ -201,11 +201,11 @@ npm start
 
 It might take few seconds, to show output as in the image below.
 
-![](./assets/evoting-dapp-00-localhost-react-server.png)
+![evoting dapp localhost react server](./assets/evoting-dapp-00-localhost-react-server.png)
 
 In a browser, visit the URL of our running dApp: [http://localhost:3000](http://localhost:3000). If you followed the above steps, you would see the page as shown below.
 
-![](./assets/evoting-dapp-01-localhost-frontend.png)
+![evoting dapp localhost frontend](./assets/evoting-dapp-01-localhost-frontend.png)
 
 ## **Create Election smart contract**
 
@@ -368,7 +368,7 @@ When deploying smart contracts to the C-Chain, it will require some deployment c
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
-![](./assets/evoting-dapp-02-wallet-c-chain-address.png)
+![evoting dapp wallet c chain address](./assets/evoting-dapp-02-wallet-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -632,7 +632,7 @@ import contractJson from "./build/contracts/MainContract.json";
 > ```bash
 > npm install --save rimble-ui react-router-dom --force
 > ```
-
+>
 > Rimble UI library comes with a peer dependency of `react@16.9.0` which is not the latest version of React that we are using i.e. `react@17.0.2`. Running the `npm install` command without the `--force` tag would cause an `unable to resolve dependency tree` conflict. Thus, the `--force` tag is used to override any type of conflicts and proceeds with the installation anyway. Another way to resolve this conflict is by using the `--legacy-peer-deps` tag instead, but this would ignore all peer dependencies which we do not require, as the conflict is only between `react` and `rimble-ui`.
 
 Now go to the project root directory, i.e. `avalanche-voting` directory, and run the command `npm start`. The ReactJS server would start automatically. Visit [http://localhost:3000](http://localhost:3000) in a browser to interact with the dApp frontend.
@@ -651,7 +651,7 @@ Don't forget to set up Metamask with Fuji testnet and also fund the account with
 
 You have successfully built a full-fledged e-voting dApp with advanced features like creating custom elections, voting in them and deployed the smart contract on the Fuji test network using Truffle Suite. Along with that, we have also built the client-side application using ReactJS for interacting with the network. From this tutorial, you have learned not only how to make make and deploy smart contracts but also how to integrate ReactJS with the blockchain using Truffle Suite.
 
-![](./assets/evoting-dapp-03-evoting-demo.gif)
+![evoting dapp evoting demo](./assets/evoting-dapp-03-evoting-demo.gif)
 
 ## What's next?
 

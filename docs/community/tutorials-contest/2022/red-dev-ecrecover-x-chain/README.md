@@ -10,7 +10,7 @@ In this tutorial, we describe each step of setting up the environment and adding
 
 To get the most out of this tutorial, you will need to have a basic understanding of Avalanche, Linux, Go (a.k.a. GoLang), Solidity, and how to write dApps and use Remix. If you do not yet know about these topics, see the [**Resources**](#resources) section at the end for links to learn more.
 
-# Prerequisites
+## Prerequisites
 
 1. Ubuntu 20.04 or later
 2. [Go 1.18.3](https://storage.googleapis.com/golang/go1.18.3.linux-amd64.tar.gz)
@@ -21,26 +21,26 @@ To get the most out of this tutorial, you will need to have a basic understandin
 
 Download the Go package. We have used version 1.18.3 for this tutorial:
 
-```
-$ wget https://storage.googleapis.com/golang/go1.18.3.linux-amd64.tar.gz
+```zsh
+wget https://storage.googleapis.com/golang/go1.18.3.linux-amd64.tar.gz
 ```
 
 Extract `go1.18.3.linux-amd64.tar.gz` to `/usr/local`:
 
-```
-$ sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
+```zsh
+sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
 ```
 
 Add `/usr/local/go/bin` to the PATH environment variable. You can do this by adding the following line to your `$HOME/.profile` or `/etc/profile` (for a system-wide installation):
 
-```
+```zsh
 export PATH=$PATH:/usr/local/go/bin
 ```
 
 Verify that you've installed Go by running the command below:
 
-```
-$ go version
+```zsh
+go version
 ```
 
 ![go-v](ecrecover-x-chain-00-go-v.png)
@@ -53,7 +53,7 @@ As some software will be installed into `$GOPATH/bin`, please make sure that `$G
 
 Download the [`Subnet-EVM`](https://github.com/ava-labs/subnet-evm.git) repository into your `$GOPATH`:
 
-```sh
+```zsh
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
@@ -356,7 +356,7 @@ As input to the `getXChainECRecover()` function, pass the prefixed hashed messag
 
 For your convenience, we have created a simple tool to make it easy to extract the prefixed hashed message and the r, s, and v values required by this function: [Avalanche Wallet Signature Extraction Tool](https://rediyeti.com/avax-sig-extraction-tool)
 
-# Resources
+## Resources
 
 Here is a list of resources that can give you background and additional information about the topics mentioned in this tutorial.
 
@@ -366,6 +366,6 @@ Here is a list of resources that can give you background and additional informat
 4. [Remix](https://remix-project.org/)
 5. [GoLang](https://go.dev/)
 
-# Conclusion
+## Conclusion
 
 The ability to add stateful precompiles to an Avalanche Subnet based on Subnet-EVM opens up a world of possibilities. We chose to write a precompile to address one significant use-case pertaining to Subnet inter-communication, the ability to verify signatures signed with Avalanche X-Chain addresses, but the possibilities are endless. In any case, no matter what particular precompile you chose to write, you can follow the steps in this tutorial to integrate it into your fork of the Subnet-EVM.

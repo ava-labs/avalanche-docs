@@ -22,13 +22,13 @@ Ethereum has its own notion of `networkID` and `chainID`. These have no relation
 
 To interact with C-Chain via the JSON-RPC endpoint:
 
-```sh
+```zsh
 /ext/bc/C/rpc
 ```
 
 To interact with other instances of the EVM via the JSON-RPC endpoint:
 
-```sh
+```zsh
 /ext/bc/blockchainID/rpc
 ```
 
@@ -42,13 +42,13 @@ On the [public api node](../public-api-server.md#supported-apis), it only suppor
 
 To interact with C-Chain via the websocket endpoint:
 
-```sh
+```zsh
 /ext/bc/C/ws
 ```
 
 For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
 
-```sh
+```zsh
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
@@ -59,7 +59,7 @@ On localhost, use `ws://`. When using the [Public API](../public-api-server.md) 
 
 To interact with other instances of the EVM via the websocket endpoint:
 
-```sh
+```zsh
 /ext/bc/blockchainID/ws
 ```
 
@@ -92,7 +92,7 @@ In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance
 
 **Signature**
 
-```sh
+```zsh
 eth_getAssetBalance({
     address: string,
     blk: BlkNrOrHash,
@@ -106,7 +106,7 @@ eth_getAssetBalance({
 
 **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "eth_getAssetBalance",
@@ -135,7 +135,7 @@ Get the base fee for the next block.
 
 #### **Signature**
 
-```sh
+```zsh
 eth_baseFee() -> {}
 ```
 
@@ -143,7 +143,7 @@ eth_baseFee() -> {}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -168,7 +168,7 @@ Get the priority fee needed to be included in a block.
 
 #### **Signature**
 
-```sh
+```zsh
 eth_maxPriorityFeePerGas() -> {}
 ```
 
@@ -176,7 +176,7 @@ eth_maxPriorityFeePerGas() -> {}
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -203,13 +203,13 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
-```sh
+```zsh
 /ext/bc/C/avax
 ```
 
 To interact with other instances of the EVM AVAX endpoints:
 
-```sh
+```zsh
 /ext/bc/blockchainID/avax
 ```
 
@@ -243,7 +243,7 @@ avax.getAtomicTx({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -279,7 +279,7 @@ Export an asset from the C-Chain to X-Chain or P-Chain. After calling this metho
 
 #### Signature
 
-```sh
+```zsh
 avax.export({
     to: string,
     amount: int,
@@ -299,7 +299,7 @@ avax.export({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -362,7 +362,7 @@ avax.exportAVAX({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -420,7 +420,7 @@ avax.exportKey({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -452,7 +452,7 @@ Gets the UTXOs that reference a given address.
 
 #### **Signature**
 
-```sh
+```zsh
 avax.getUTXOs(
     {
         addresses: string,
@@ -487,7 +487,7 @@ avax.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -560,7 +560,7 @@ avax.import({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -622,7 +622,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -676,7 +676,7 @@ avax.importKey({
 
 #### Example Call
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -707,7 +707,7 @@ Send a signed transaction to the network. `encoding` specifies the format of the
 
 #### **Signature**
 
-```sh
+```zsh
 avax.issueTx({
     tx: string,
     encoding: string, //optional
@@ -718,7 +718,7 @@ avax.issueTx({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -749,7 +749,7 @@ Get the status of an atomic transaction sent to the network.
 
 #### **Signature**
 
-```sh
+```zsh
 avax.getAtomicTxStatus({txID: string}) -> {
   status: string,
   blockHeight: string // returned when status is Accepted
@@ -765,7 +765,7 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 #### **Example Call**
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

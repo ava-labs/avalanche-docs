@@ -58,7 +58,7 @@ Get the most recently accepted container.
 
 #### **Signature**
 
-```sh
+```zsh
 index.getLastAccepted({
   encoding:string
 }) -> {
@@ -83,7 +83,7 @@ index.getLastAccepted({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -118,7 +118,7 @@ Get container by index. The first container accepted is at index 0, the second i
 
 #### **Signature**
 
-```sh
+```zsh
 index.getContainerByIndex({
   index: uint64,
   encoding: string
@@ -146,7 +146,7 @@ index.getContainerByIndex({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -182,7 +182,7 @@ Get container by ID.
 
 #### **Signature**
 
-```sh
+```zsh
 index.getContainerByID({
   id: string,
   encoding: string
@@ -210,7 +210,7 @@ index.getContainerByID({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -246,7 +246,7 @@ Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startI
 
 #### **Signature**
 
-```sh
+```zsh
 index.getContainerRange({
   startIndex: uint64,
   numToFetch: uint64,
@@ -276,7 +276,7 @@ index.getContainerRange({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -315,7 +315,7 @@ Get a container's index.
 
 #### **Signature**
 
-```sh
+```zsh
 index.getIndex({
   id: string,
   encoding: string
@@ -335,7 +335,7 @@ index.getIndex({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -367,7 +367,7 @@ Returns true if the container is in this index.
 
 #### **Signature**
 
-```sh
+```zsh
 index.isAccepted({
   id: string,
   encoding: string
@@ -387,7 +387,7 @@ index.isAccepted({
 
 #### **Example Call**
 
-```sh
+```zsh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -427,7 +427,7 @@ To get an X-Chain transaction by its index (the order it was accepted in), use I
 
 For example, to get the _second_ transaction (note that `"index":1`) accepted on the X-Chain, do:
 
-```sh
+```zsh
 curl --location --request POST 'https://indexer-demo.avax.network/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -463,7 +463,7 @@ The ID of this transaction is `ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo
 
 To get the transaction by its ID, use API method `avm.getTx`:
 
-```sh
+```zsh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

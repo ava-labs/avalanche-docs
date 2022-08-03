@@ -25,7 +25,7 @@ In order to enable offline pruning, you need to update the C-Chain config file t
 
 The default location of the C-Chain config file is `~/.avalanchego/configs/chains/C/config.json`. **Please note that by default, this file does not exist. You would need to create it manually.** You can update the directory for chain configs by passing in the directory of your choice via the CLI arg: `chain-config-dir`. See [this](./chain-config-flags.md) for more info. For example, if you start your node with:
 
-```
+```zsh
 ./build/avalanchego --chain-config-dir=/home/ubuntu/chain-configs
 ```
 
@@ -46,13 +46,13 @@ This will set `/home/ubuntu/offline-pruning` as the directory to be used by the 
 
 Now that the C-Chain config file has been updated, you can start your node with the command (no CLI args are necessary if using the default chain config directory):
 
-```
+```zsh
 ./build/avalanchego
 ```
 
 Once AvalancheGo starts the C-Chain, you can expect to see update logs from the offline pruner:
 
-```
+```zsh
 INFO [02-09|00:20:15.625] Iterating state snapshot                 accounts=297,231 slots=6,669,708 elapsed=16.001s eta=1m29.03s
 INFO [02-09|00:20:23.626] Iterating state snapshot                 accounts=401,907 slots=10,698,094 elapsed=24.001s eta=1m32.522s
 INFO [02-09|00:20:31.626] Iterating state snapshot                 accounts=606,544 slots=13,891,948 elapsed=32.002s eta=1m10.927s
@@ -87,7 +87,7 @@ Now if your node restarts, it will be marked as having correctly disabled offlin
 
 You will see progress logs throughout the offline pruning run which will indicate the session's progress:
 
-```
+```zsh
 INFO [02-09|00:31:51.920] Pruning state data                       nodes=40,116,759 size=10.08GiB  elapsed=8m47.499s eta=12m50.961s
 INFO [02-09|00:31:59.921] Pruning state data                       nodes=41,659,059 size=10.47GiB  elapsed=8m55.499s eta=12m13.822s
 INFO [02-09|00:32:07.921] Pruning state data                       nodes=41,687,047 size=10.48GiB  elapsed=9m3.499s  eta=12m23.915s
@@ -116,7 +116,7 @@ INFO [02-09|00:35:03.039] Pruning state data                       nodes=43,446,
 
 When the node completes, it will emit the following log and resume normal operation:
 
-```
+```zsh
 INFO [02-09|00:42:16.009] Pruning state data                       nodes=93,649,812 size=23.53GiB  elapsed=19m11.588s eta=1m2.658s
 INFO [02-09|00:42:24.009] Pruning state data                       nodes=95,045,956 size=23.89GiB  elapsed=19m19.588s eta=45.149s
 INFO [02-09|00:42:32.009] Pruning state data                       nodes=96,429,410 size=24.23GiB  elapsed=19m27.588s eta=28.041s

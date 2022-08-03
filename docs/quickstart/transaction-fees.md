@@ -12,7 +12,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
-```
+```zsh
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
 +----------+-------------------+------------------------+
@@ -77,7 +77,7 @@ C-Chain atomic transactions (i.e. imports and exports from/to other chains) char
 
 Gas Used:
 
-```
+```zsh
 +---------------------+-------+
 | Item                : Gas   |
 +---------------------+-------+
