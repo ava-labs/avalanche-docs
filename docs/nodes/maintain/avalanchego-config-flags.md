@@ -784,7 +784,7 @@ See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 ##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
 
 The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
-For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333 `,then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to`1/3`.
+For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
 
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration):
 
@@ -878,7 +878,7 @@ Defaults to `20`.
 
 Defaults to `10`.
 
-#### `--network-peer-read-buffer-size` (int):
+#### ` --network-peer-read-buffer-size` (int):
 
 Size of the buffer that peer messages are read into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
 

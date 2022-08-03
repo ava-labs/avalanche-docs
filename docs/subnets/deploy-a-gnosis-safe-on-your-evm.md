@@ -1,21 +1,19 @@
 # Deploy a Gnosis Safe on Your Subnet EVM
 
 ## Introduction
-
 This article shows how to deploy and interact with a [Gnosis Safe](https://gnosis-safe.io/) programmatically on any [Subnet EVM](README.md).
 
 If you are looking for more information regarding the Gnosis Safe protocol, please check out [these developer docs](https://docs.gnosis-safe.io/).
 
 ## Prerequisites
-
 This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on [Mainnet](../subnets/subnet-cli), [Fuji](../subnets/create-a-fuji-subnet) or a [Local network](../subnets/create-a-local-subnet).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
-The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 
+The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 - [safe-contracts](https://github.com/safe-global/safe-contracts.git)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
@@ -24,7 +22,6 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 ## Custom Network Workflow
 
 ### Setup
-
 Set up the safe-contracts repository by running the following Commands:
 
 ```zsh
@@ -33,10 +30,9 @@ cd safe-contracts
 yarn
 ```
 
-Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`.
+Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's _private key_. Here, we can also add our node's RPC endpoint as our `NODE_URL`. 
 
 Example:
-
 ```env
 PK="<YOUR-PRIVATE-KEY-HERE>"
 PK2=""
@@ -61,7 +57,6 @@ networks: {
 :::note
  `chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct `chainId` when following this workflow.
 :::
-
 ### Deploy the Safe Contracts
 
 At this point we have set up the Subnet and can make calls to the RPC endpoint. You can use the RPC URL value to define `NODE_URL` in your `.env` file. We can execute the workflow on a local or remote node as long as we have the [proper IP address](../apis/avalanchego/apis/issuing-api-calls#endpoints).
@@ -87,15 +82,14 @@ deploying "GnosisSafeL2" (tx: 0x341ec664d3a5c2c98f1c3f5862651ba82e0c2d12875d69ad
 deploying "GnosisSafe" (tx: 0x10dcf8c5f53ae698c77d7f60d6756b4b24f2f8224e14e21658c421e158a84cd4)...: deployed at 0x789a5FDac2b37FCD290fb2924382297A6AE65860 with 5086960 gas
 ✨  Done in 26.90s.
 ```
-
 :::note
 Please record your GnosisSafeL2 and GnosisSafeProxyFactory addresses to complete this tutorial
 :::
 
 The deployment of the contracts is using a [proxy factory](https://github.com/safe-global/safe-contracts/blob/v1.3.0/contracts/proxies/GnosisSafeProxyFactory.sol), therefore the address is depending on the bytecode. If the address is the same then the deployment bytecode of the contract is also the same (assuming that the target chain follows the EVM specifications set in the Ethereum Yellowpaper).
 
-## Interacting with the Safe
 
+## Interacting with the Safe
 The [safe-deployments](https://github.com/safe-global/safe-deployments) repository contains the ABI files for the different versions of the Safe that can be used with all common Ethereum tools to interact with the Safe.
 
 The important part is how to create the signature to confirm a transaction. More information on this can be found in the [Safe docs](https://docs.gnosis-safe.io/contracts/signatures).
@@ -115,9 +109,7 @@ yarn
 ```
 
 Implement the environment and network setup [above](#setup) to prepare the Safe-Tasks project.
-
 ### Create a Safe
-
 Now let's create a Safe using the previously deployed `GnosisSafeL2` and `GnosisSafeProxyFactory` addresses:
 
 ```zsh
@@ -125,7 +117,6 @@ yarn safe create --network subnet --singleton "<YOUR-GnosisSafeL2-ADDRESS-HERE>"
 ```
 
 Output:
-
 ```zsh
 Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 Singleton: 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6
@@ -134,6 +125,7 @@ Nonce: 1658256419254
 To (factory): 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25
 Data: 0x1688f0b900000000000000000000000095ca0a568236fc7413cd2b794a7da24422c2bbb600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000018217c8e9b60000000000000000000000000000000000000000000000000000000000000164b63e800d0000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000008db97c7cece249c2b98bdc0226cc4c2a57bf52fc000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 ```
+
 
 Notice the line, "_Deploy Safe to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114_", informs us that our safe contract lives at the address `0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114`. For demonstration purposes, we will utilize this address for this section of the article.
 
@@ -144,7 +136,6 @@ yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
 
 Output:
-
 ```zsh
 Checking Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 Singleton: 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6
@@ -157,13 +148,11 @@ Modules:
 ```
 
 The output above illustrates a few things:
-
 - `Singleton` - This is the contract that holds the logic for our Safe to interact with. In this case, the Smart Contract we are using is [`GnosisSafeL2.sol`](https://github.com/safe-global/safe-contracts/blob/main/contracts/GnosisSafeL2.sol), A multisignature wallet with support for confirmations using signed messages based on [ERC191](https://eips.ethereum.org/EIPS/eip-191).
-- `Owners` - The addresses that are allowed to sign and submit proposals. These can be can either be EOAs or other smart contract accounts.
+-  `Owners` - The addresses that are allowed to sign and submit proposals. These can be can either be EOAs or other smart contract accounts.
 - `Threshold` - The amount of signatures required to submit a proposal.
 
 ### Add an Owner
-
 To add an owner we must first generate the data required to submit a proposal.
 
 Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/examples/add_owner.json) file in the examples directory and an address that you control to `params`.
@@ -182,13 +171,11 @@ Navigate to the [add_owner.json](https://github.com/5afe/safe-tasks/blob/master/
     }
 ]
 ```
-
 Next, we will call the `propose-multi` task to create a transaction based on the sample tx input json that adds an owner to the Safe.
 
 ```zsh
 yarn safe propose-multi --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
 ```
-
 This will create a new file, `addOwner.json`, in the examples directory.
 
 ```json
@@ -211,19 +198,16 @@ This will create a new file, `addOwner.json`, in the examples directory.
 ```
 
 Notice the `data` value has the parameters encoded as a single hexadecimal string.
-
 - `addOwnerWithThreshold` has the function signature `0d582f13`
 - `address` appears in the data as `82ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba`
 - `threshold` appears at the end of the data as `2`
 
 Now we can use the `--data` flag and pass in the `data` above as an argument for our proposal.
-
 ```zsh
 yarn safe propose --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002
 ```
 
 Output:
-
 ```zsh
 Running on subnet
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
@@ -241,20 +225,17 @@ yarn safe sign-proposal 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084
 ```
 
 Output:
-
 ```zsh
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 Signature: 0x094e84aab062cb03f9abca3b80fb9931934c83920024fb8fa83b7b8d1a2aab305ab1f4d54e3a59ad7633f3f36d5db9b9976db268e05e0559c1c017fd3836540020
 ```
 
 #### Submit
-
 ```zsh
 yarn safe submit-proposal 0x2837eb329c41078c97e2450eabf0b73caae94d08db06a5d9fe2084d33ef3f4cc
 ```
 
 Output:
-
 ```zsh
 Running on subnet
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
@@ -268,7 +249,6 @@ yarn safe info --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 ```
 
 Output:
-
 ```zsh
 Checking Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
 Singleton: 0x95CA0a568236fC7413Cd2b794A7da24422c2BBb6
@@ -285,9 +265,9 @@ It is worth noting that you can also check the owners of the Safe by using [Hard
 As shown above, `Owners` now includes a new address and `threshold`, the amount of signatures needed to execute a transaction, has increased to 2.
 
 ### Send Native Currency from Your Safe
-
 Let's apply the very same steps above to a workflow where we send the Native Currency of your Subnet to an EOA.
 This part of the tutorial requires that your Safe holds at least 1000 native tokens. You can send assets to your Safe the same way you would send Avax using [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet). To add your Subnet to MetaMask, [please read this excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
+
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to an increased `threshold` from our previous Safe transaction.
 
@@ -346,7 +326,6 @@ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dy
 ```
 
 Output:
-
 ```zsh
 {"jsonrpc":"2.0","id":1,"result":"0x3e8"}
 ```
@@ -356,11 +335,9 @@ Now that we've verified that our Safe has enough native tokens(1000), let's crea
 ```zsh
 yarn safe propose  --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --value 1000 --to 0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
 ```
-
 Notice that we've added the `value` flag and passed in our target amount. We've also changed our `to` flag to be our our target address. You can find the other flags and parameters for this task [here](https://github.com/5afe/safe-tasks/blob/52067e3ac5b8a1db3a4ab54fec0ee628c0bd4f3a/src/execution/proposing.ts).
 
 Output:
-
 ```zsh
 Running on subnet
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
@@ -376,35 +353,31 @@ yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c30
 ```
 
 Output:
-
 ```zsh
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 Signature: 0x636ba2a89023b1e81032a43dd1172743f7916e31647eb87ec95c541c091ebf1873605d39d8039431a7dceeeab691e48b96b50f93e91acde5e67295e9f051e7031f
 ```
 
-By default, Hardhat uses _account 0_ to sign transactions. Since we've imported another private key and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we want to sign with by adding the flag `--signer-index` to our `sign-proposal` task
+By default, Hardhat uses _account 0_ to sign transactions. Since we've imported another private key and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we want to sign with by adding the flag `--signer-index` to our `sign-proposal` task 
 
 ```zsh
 yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d --signer-index 1
 ```
 
 Output:
-
 ```zsh
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x82DdaF3f1fcd3c18F5664cD7fb12bD8C38D5d4ba
 Signature: 0x11d7e983417280bdf1c55da51359eb06262f0feadad1c6ebdf497a6e6db92c5e506536c1c2b6bd3ef726d163c710d5adcbe787a2440be5ad79cac52e950407b21f
 ```
 
 #### Submit
-
-Now that both owners have signed the proposal, the `threshold` requirement has been met and we can now submit the proposal.
+Now that both owners have signed the proposal, the `threshold` requirement has been met and we can now submit the proposal. 
 
 ```zsh
 yarn safe submit-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
 ```
 
 Output:
-
 ```zsh
 Using Safe at 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 Ethereum transaction hash: 0x074d823b8d111af9e87d0e4374e3a5382a4de9952df4f49db5ee4b52f945760b
@@ -423,9 +396,7 @@ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dy
   "id": 1
 }
 ```
-
 Output:
-
 ```zsh
 {"jsonrpc":"2.0","id":1,"result":"0x0"}
 ```
@@ -441,36 +412,29 @@ curl -X POST "http://127.0.0.1:17773/ext/bc/8ttPWTKt2FEs256fJkV2Yj5nJS1JPSfhN2gh
   "id": 1
 }
 ```
-
 Output
-
 ```zsh
 {"jsonrpc":"2.0","id":1,"result":"0x3635c9adc5dea00000"}
 ```
-
 :::tip
 
 We can reformat `BigNumber` values to human readable values by using hardhat console.
 
 Example:
-
 ```zsh
 npx hardhat console --network subnet
 ethers.utils.formatUnits(await ethers.BigNumber.from('0x3635c9adc5dea00000'))
 ```
-
 Output
-
 ```zsh
 '1000.0'
 ```
-
 :::
+
 
 And there you have it! We've transferred 1000 _LEVM_ from our Safe to address, `0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559`.
 
 ### Other Functions
-
 As long as you have the ABI for a contract, you can apply the workflow outlined above to call other functions.
 
 For instance, if we wanted to approve a spend, we would create a transaction json file with the necessary data such as the example below.
@@ -498,13 +462,11 @@ For instance, if we wanted to approve a spend, we would create a transaction jso
 ```
 
 Then we would use the same tasks from before:
-
 1. Generate the txn data with `yarn safe propose-multi`
 
 ```zsh
 yarn safe propose-multi --network subnet <SAFE-ADDRESS> <TX-FILE> --export <TX-DATA-FILE-NAME>
 ```
-
 2. Create a proposal with `yarn safe propose`
 
 ```zsh
@@ -516,7 +478,6 @@ yarn safe propose --network subnet <SAFE-ADDRESS> --data <TX-DATA> --to <TARGET-
 ```zsh
 yarn safe sign-proposal <SAFE-TX-HASH>
 ```
-
 4. Submit the proposal with `yarn safe submit-proposal`
 
 ```zsh
@@ -538,12 +499,10 @@ This part of the article aims to illustrate the use of a Multi-Signature Safe Pr
 ![Proxy](../../static/img/Proxy-IMG.png)
 
 Some use cases may apply such as:
-
 - `Upgrading a Vault` - Point the proxy implementation to a new treasury smart contract.
-- `Upgrading a Registry` - Migrate a database of user addresses and privileges to a new smart contract. This may include Owners, Stakers, Validators, Token holders, Whitelists.
+- `Upgrading a Registry` - Migrate a database of user addresses and privileges to a new smart contract. This may include Owners, Stakers, Validators, Token holders, Whitelists. 
 
 ### Setup
-
 For this part of the tutorial, we will need to clone the [Avalanche Smart Contract Quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart/tree/proxy-contract-implementation) and switch to the `proxy-contract-implementation` branch the by running the following Commands:
 
 ```zsh
@@ -564,7 +523,6 @@ npx hardhat run --network subnet scripts/deployStorage.ts
 ```
 
 Output:
-
 ```zsh
 Deploying Storage...
 Storage deployed to: 0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b
@@ -572,7 +530,6 @@ Storage deployed to: 0x5dda6Fa725248D95d2086F4fcEb6bA6bdfEbc45b
 ```
 
 This command actually executed 3 operations:
-
 - Deployed a Proxy Admin contract and assigned the deployer's address as the owner
 - Deployed the `Storage` contract and set the `number` to 42
 - Deployed a Transparent upgradeable proxy and added the `Storage` contract's address as its `implementation`
@@ -582,7 +539,6 @@ Notice the line _Storage deployed to:_ in our deployment output includes the add
 This is our proxy address which you can also find in `.openzeppelin`, a session file that includes all of the project's proxy contract information.
 
 Example:
-
 ```json
 {
   "manifestVersion": "3.2",
@@ -622,32 +578,29 @@ Example:
     }
   }
 }
-```
+``` 
 
 ### Transfer the Proxy Admin Role to a Safe
-
 Next, let's transfer proxy admin privileges to our Gnosis Safe by adding it's address to our [`transferProxyOwnership.ts`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/proxy-contract-implementation/scripts/transferProxyOwnership.ts) script.
+
 
 ```ts
 // transferProxyOwnership.ts
   const gnosisSafe = "<YOUR-SAFE-ADDRESS-HERE>"
 ```
-
 Next run the script to execute the transfer.
-
 ```zsh
 npx hardhat run --network subnet scripts/transferProxyOwnership.ts
 ```
 
 Output:
-
 ```zsh
 Transferring ownership of ProxyAdmin...
 ✔ 0x1189D8E94cAD398612cc4638f80B18d421e74a31 (transparent) proxy ownership transfered through admin proxy
 Transferred ownership of ProxyAdmin to: 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff
 ```
 
-Now that we have transferred ownership to our Gnosis Safe, we can upgrade the proxy implementation.
+Now that we have transferred ownership to our Gnosis Safe, we can upgrade the proxy implementation. 
 
 ### Upgrade the Contract
 
@@ -662,7 +615,6 @@ npx hardhat run --network subnet scripts/deployStorageV2.ts
 ```
 
 Output:
-
 ```zsh
 Deploying Storage2...
 StorageV2 deployed to: 0x32CaF0D54B0578a96A1aDc7269F19e7398358174
@@ -683,7 +635,6 @@ npx hardhat console --network subnet
 Then connect to the contracts with the following steps:
 
 Connect hardhat to an instance of the `Storage` contract at the deployed address.
-
 ```zsh
 > const storage = await ethers.getContractAt('Storage','<YOUR-PROXY-ADDRESS-HERE>')
 ```
@@ -691,7 +642,6 @@ Connect hardhat to an instance of the `Storage` contract at the deployed address
 You can reference your proxy address from the `Storage` contract deployment or `.openzeppelin`.
 
 Retrieve the stored number set during deployment.
-
 ```zsh
 >(await storage.retrieve()).toString()
 '42'
@@ -699,7 +649,7 @@ Retrieve the stored number set during deployment.
 
 #### Create the Upgrade Tx
 
-Next we will use the `propose-multi` task to create an upgrade tx.
+Next we will use the `propose-multi` task to create an upgrade tx. 
 
 Create a new file, `upgrade.json`, in the `examples` directory of your `safe-task` project.
 
@@ -718,12 +668,12 @@ Create a new file, `upgrade.json`, in the `examples` directory of your `safe-tas
     }
 ]
 ```
-
 Ensure that the following parameters are set correctly:
 
 - `to` - Should be set to the proxy admin address found in `avalanche-smart-contract-quickstart/.openzeppelin/"<YOUR-NETWORK-SESSION>".json`.
 - `method` - Ensure that you have the function name and argument types correct.
 - `params` - An `upgrade` call needs both a `proxy address` and `implementation address` to be passed in as arguments. In this case we, our implementation address will be our `StorageV2` contract address.
+
 
 Next create the Tx data by running the following command:
 
@@ -732,7 +682,6 @@ yarn safe propose-multi "<YOUR-SAFE-ADDRESS>" examples/upgrade.json --export exa
 ```
 
 Output:
-
 ```json
 {
   "version": "1.0",
@@ -767,26 +716,22 @@ Safe transaction hash: 0xd9a5d0e57eaa1763f36cb7208c227e9ee2d6ec03ae4a4947bb8a99a
 ```
 
 #### Sign
-
-```zsh
+```
 yarn safe sign-proposal "<YOUR-SAFE-TX-HASH-HERE>" 
 ```
 
 Output:
-
-```zsh
+```
 Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 Signature: 0x702f6f29903e434ea5fee10a79541a463a2c18d730f32c0b61a1101960aa802d317974c0d3d6cbe2fff53a65b911906613aad8da23da2be74afaea688d1bd49220
 ```
 
 #### Submit
-
-```zsh
+```
 yarn safe submit-proposal "<YOUR-SAFE-TX-HASH-HERE>" 
 ```
 
 Output:
-
 ```zsh
 Running on subnet
 Using Safe at 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff with 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
@@ -805,7 +750,7 @@ First, navigate back to hardhat console in your `avalanche-smart-contract-quicks
 > const storageV2 = await ethers.getContractAt('StorageV2','YOUR-PROXY-ADDRESS-HERE')
 ```
 
-Notice that we are now using `StorageV2` at our original proxy address. Since, we've upgraded our implementation, our we can call the original address but interact with the new contract.
+Notice that we are now using `StorageV2` at our original proxy address. Since, we've upgraded our implementation, our we can call the original address but interact with the new contract. 
 
 Let's check the stored value to ensure that we have retained the data from the previous implementation..
 
@@ -853,9 +798,8 @@ Now, let's check the stored number.
 '43'
 ```
 
-And there you have it.
+And there you have it. 
 We have successfully done the following:
-
 - Deployed a [Transparent Upgradeable Proxy](https://blog.openzeppelin.com/the-transparent-proxy-pattern/).
 - [Transferred proxy admin ownership](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-transferOwnership-address-) to a Gnosis Safe.
 - [Upgraded our proxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy#ProxyAdmin-upgrade-contract-TransparentUpgradeableProxy-address-) to a new implementation.
@@ -883,4 +827,4 @@ networks: {
 }
 ```
 
-Then run the deployment and interaction methods to follow the exercises in this tutorial.
+Then run the deployment and interaction methods to follow the exercises in this tutorial. 

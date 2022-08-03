@@ -12,7 +12,7 @@ You will need to change your code to handle the response correctly. For example,
 
 you can specify `"encoding": "hex"` when issuing the API call or leave it empty which will take the default value of `hex`.
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

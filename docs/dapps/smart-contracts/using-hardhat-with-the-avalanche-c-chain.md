@@ -33,9 +33,9 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 Clone the [quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and install the necessary packages via `yarn`.
 
 ```text
-git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
-cd avalanche-smart-contract-quickstart
-yarn
+$ git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
+$ cd avalanche-smart-contract-quickstart
+$ yarn
 ```
 
 ## Write Contracts
@@ -70,7 +70,7 @@ You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/av
 Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
-yarn accounts --network local
+$ yarn accounts --network local
 yarn run v1.22.4
 npx hardhat accounts --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
@@ -90,7 +90,7 @@ npx hardhat accounts --network local
 Prints a list of accounts and their corresponding AVAX balances on the local Avalanche Network Runner network.
 
 ```text
-yarn balances --network local
+$ yarn balances --network local
 yarn run v1.22.4
 npx hardhat balances --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC has balance 50000000000000000000000000
@@ -118,10 +118,10 @@ Run `yarn hardhat` to list Hardhat's version, usage instructions, global options
 First confirm you have the latest AvalancheGo built.
 
 ```text
-cd /path/to/avalanchego
-git fetch -p
-git checkout master
-./scripts/build.sh
+$ cd /path/to/avalanchego
+$ git fetch -p
+$ git checkout master
+$ ./scripts/build.sh
 ```
 
 (Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
@@ -133,8 +133,8 @@ Start Avalanche Network Runner and run a script to start a new local network.
 ### Start the server
 
 ```text
-cd /path/to/Avalanche-Network-Runner
-avalanche-network-runner server \
+$ cd /path/to/Avalanche-Network-Runner
+$ avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
 --grpc-gateway-port=":8081"
@@ -145,11 +145,11 @@ avalanche-network-runner server \
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
 # e.g., ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-AVALANCHEGO_EXEC_PATH="avalanchego"
+$ AVALANCHEGO_EXEC_PATH="avalanchego"
 ```
 
 ```bash
-avalanche-network-runner control start \
+$ avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
 --number-of-nodes=5 \
@@ -165,8 +165,8 @@ Transfer 1,000 AVAX from the X-Chain to each of the 10 accounts in `hardhat.conf
 Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
 
 ```text
-cd /path/to/avalanche-smart-contract-quickstart
-yarn fund-cchain-addresses
+$ cd /path/to/avalanche-smart-contract-quickstart
+$ yarn fund-cchain-addresses
 yarn run v1.22.4
 npx hardhat run scripts/fund-cchain-addresses.js
 Exporting 1000 AVAX to each address on the C-Chain...

@@ -18,13 +18,13 @@ If you are looking for how to transfter AVAX tokens using the web wallet, please
 To use AvalancheJS, you can clone the repo:
 
 ```zsh
-git clone https://github.com/ava-labs/avalanchejs.git
+$ git clone https://github.com/ava-labs/avalanchejs.git
 ```
 
 or add it to an existing project:
 
 ```zsh
-yarn add --dev avalanche
+$ yarn add --dev avalanche
 ```
 
 For this tutorial we will use `ts-node` to run the example scripts directly from an AvalancheJS directory.
@@ -142,13 +142,13 @@ Snowtrace provides a [unit converter](https://snowtrace.io/unitconverter) betwee
 
 Run the export script:
 
-```zsh
-ts-node examples/avm/buildExportTx-cchain-avax.ts
+```sh
+$ ts-node examples/avm/buildExportTx-cchain-avax.ts
 ```
 
 This returns:
 
-```zsh
+```sh
 Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 ```
 
@@ -157,7 +157,7 @@ Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 You can now pass this txID `2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
 
 ```zsh
-ts-node examples/avm/getTx.ts
+$ ts-node examples/avm/getTx.ts
 ```
 
 which returns:
@@ -201,13 +201,13 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 
 Run the import script:
 
-```zsh
-ts-node examples/evm/buildImportTx-xchain.ts
+```sh
+$ ts-node examples/evm/buildImportTx-xchain.ts
 ```
 
 This returns:
 
-```zsh
+```sh
 Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 ```
 

@@ -143,7 +143,7 @@ When building `avalanchego` from source (see [Run an Avalanche Node Manually](..
 is the directory where you have checked out AvalancheGo project.
 This build directory is structured as:
 
-```zsh
+```
 build-dir
 |_avalanchego (note: this is the AvalancheGo binary, not a directory)
 |_plugins

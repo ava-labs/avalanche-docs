@@ -472,6 +472,5 @@ Things achieved:
 - Tested relayer to make sure communication between chains are established.
 - Used ERC-20 token as the gas token on the Subnet.
 
-## References
-
-- [Further Readings](https://github.com/securing/SCSVS/blob/prerelease/SCSVSv2/2.0/0x200-Components/0x206-C6-Bridge.md)
+## References 
+  * [Further Readings](https://github.com/securing/SCSVS/blob/prerelease/SCSVSv2/2.0/0x200-Components/0x206-C6-Bridge.md)

@@ -8,7 +8,7 @@ This API allows clients to interact with the [P-Chain](../../../overview/getting
 
 ## Endpoint
 
-```zsh
+```sh
 /ext/bc/P
 ```
 
@@ -40,7 +40,7 @@ Once you issue the transaction to add a node as a delegator, there is no way to 
 
 #### **Signature**
 
-```zsh
+```sh
 platform.addDelegator(
     {
         nodeID: string,
@@ -73,7 +73,7 @@ platform.addDelegator(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addDelegator",
@@ -125,7 +125,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 #### **Signature**
 
-```zsh
+```sh
 platform.addValidator(
     {
         nodeID: string,
@@ -162,7 +162,7 @@ platform.addValidator(
 
 In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.)
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addValidator",
@@ -205,7 +205,7 @@ Add a validator to a Subnet other than the Primary Network. The Validator must v
 
 #### **Signature**
 
-```zsh
+```sh
 platform.addSubnetValidator(
     {
         nodeID: string,
@@ -238,7 +238,7 @@ platform.addSubnetValidator(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addSubnetValidator",
@@ -280,7 +280,7 @@ Create a new address controlled by the given user.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.createAddress({
     username: string,
     password: string
@@ -289,7 +289,7 @@ platform.createAddress({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -323,7 +323,7 @@ Create a new blockchain. Currently only supports the creation of new instances o
 
 #### **Signature**
 
-```zsh
+```sh
 platform.createBlockchain(
     {
         subnetID: string,
@@ -358,7 +358,7 @@ platform.createBlockchain(
 
 In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -402,7 +402,7 @@ The Subnet’s ID is the same as this transaction’s ID.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.createSubnet(
     {
         controlKeys: []string,
@@ -427,7 +427,7 @@ platform.createSubnet(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -464,7 +464,7 @@ Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain
 
 #### **Signature**
 
-```zsh
+```sh
 platform.exportAVAX(
     {
         amount: int,
@@ -491,7 +491,7 @@ platform.exportAVAX(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
@@ -531,7 +531,7 @@ The returned private key can be added to a user with [`platform.importKey`](p-ch
 
 #### **Signature**
 
-```zsh
+```sh
 platform.exportKey({
     username: string,
     password: string,
@@ -545,7 +545,7 @@ platform.exportKey({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -576,7 +576,7 @@ Get the balance of AVAX controlled by a given address.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getBalance({
     address:string
 }) -> {
@@ -600,7 +600,7 @@ platform.getBalance({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
   "jsonrpc":"2.0",
   "id"     : 1,
@@ -642,7 +642,7 @@ Get a block by its ID.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getBlock({
     blockID: string
     encoding: string // optional
@@ -666,7 +666,7 @@ platform.getBlock({
 
 ##### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlock",
@@ -695,7 +695,7 @@ curl -X POST --data '{
 
 ##### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlock",
@@ -775,7 +775,7 @@ Get all the blockchains that exist (excluding the P-Chain).
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getBlockchains() ->
 {
     blockchains: []{
@@ -795,7 +795,7 @@ platform.getBlockchains() ->
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlockchains",
@@ -865,7 +865,7 @@ Get the status of a blockchain.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getBlockchainStatus(
     {
         blockchainID: string
@@ -883,7 +883,7 @@ platform.getBlockchainStatus(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlockchainStatus",
@@ -912,7 +912,7 @@ Returns an upper bound on the number of AVAX that exist. This is an upper bound 
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getCurrentSupply() -> {supply: int}
 ```
 
@@ -920,7 +920,7 @@ platform.getCurrentSupply() -> {supply: int}
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentSupply",
@@ -949,7 +949,7 @@ List the current validators of the given Subnet.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getCurrentValidators({
     subnetID: string, // optional
     nodeIDs: string[], // optional
@@ -1012,7 +1012,7 @@ platform.getCurrentValidators({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentValidators",
@@ -1071,7 +1071,7 @@ Returns the height of the last accepted block.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getHeight() ->
 {
     height: int,
@@ -1080,7 +1080,7 @@ platform.getHeight() ->
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getHeight",
@@ -1107,7 +1107,7 @@ Returns the maximum amount of nAVAX staking to the named node during a particula
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getMaxStakeAmount(
     {
         subnetID: string,
@@ -1128,7 +1128,7 @@ platform.getMaxStakeAmount(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getMaxStakeAmount",
@@ -1160,7 +1160,7 @@ Get the minimum amount of AVAX required to validate the Primary Network and the 
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getMinStake() ->
 {
     minValidatorStake : uint64,
@@ -1170,7 +1170,7 @@ platform.getMinStake() ->
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1197,7 +1197,7 @@ List the validators in the pending validator set of the specified Subnet. Each v
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getPendingValidators({
     subnetID: string, // optional
     nodeIDs: string[], // optional
@@ -1241,7 +1241,7 @@ platform.getPendingValidators({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -1287,7 +1287,7 @@ Returns the UTXOs that were rewarded after the provided transaction's staking or
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getRewardUTXOs({
     txID: string,
     encoding: string // optional
@@ -1305,7 +1305,7 @@ platform.getRewardUTXOs({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getRewardUTXOs",
@@ -1339,7 +1339,7 @@ Retrieve an assetID for a subnet’s staking asset. Currently, this only returns
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getStakingAssetID({
     subnetID: string // optional
 }) -> {
@@ -1352,7 +1352,7 @@ platform.getStakingAssetID({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStakingAssetID",
@@ -1381,7 +1381,7 @@ Get info about the Subnets.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getSubnets(
     {ids: []string}
 ) ->
@@ -1402,7 +1402,7 @@ See [here](../../../nodes/validate/add-a-validator.md) for information on adding
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -1438,7 +1438,7 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getStake(
     {addresses: []string}
 ) ->
@@ -1456,7 +1456,7 @@ platform.getStake(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStake",
@@ -1492,13 +1492,13 @@ Get the current P-Chain timestamp.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getTimestamp() -> {time: string}
 ```
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTimestamp",
@@ -1526,7 +1526,7 @@ Get the total amount of nAVAX staked on the Primary Network.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getTotalStake(subnetID: string) -> {stake: int}
 ```
 
@@ -1534,7 +1534,7 @@ platform.getTotalStake(subnetID: string) -> {stake: int}
 
 ##### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTotalStake",
@@ -1560,7 +1560,7 @@ curl -X POST --data '{
 
 ##### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTotalStake",
@@ -1592,7 +1592,7 @@ Optional `encoding` parameter to specify the format for the returned transaction
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getTx({
     txID: string,
     encoding: string // optional
@@ -1606,7 +1606,7 @@ platform.getTx({
 
 ##### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTx",
@@ -1678,7 +1678,7 @@ Gets a transaction’s status by its ID. If the transaction was dropped, respons
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getTxStatus({
     txID: string
 }) -> {status: string}
@@ -1693,7 +1693,7 @@ platform.getTxStatus({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -1722,7 +1722,7 @@ Gets the UTXOs that reference a given set of addresses.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getUTXOs(
     {
         addresses: []string,
@@ -1758,7 +1758,7 @@ platform.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1797,7 +1797,7 @@ This gives response:
 
 Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1841,7 +1841,7 @@ Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs
 
 Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1880,7 +1880,7 @@ Get the validators and their weights of a Subnet or the Primary Network at a giv
 
 #### **Signature**
 
-```zsh
+```sh
 platform.getValidatorsAt(
     {
         height: int,
@@ -1935,7 +1935,7 @@ Before this method is called, you must call the X-Chain’s [`avm.export`](x-cha
 
 #### **Signature**
 
-```zsh
+```sh
 platform.importAVAX(
     {
         to: string,
@@ -1961,7 +1961,7 @@ platform.importAVAX(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
@@ -1999,7 +1999,7 @@ Give a user control over an address by providing the private key that controls t
 
 #### **Signature**
 
-```zsh
+```sh
 platform.importKey({
     username: string,
     password: string,
@@ -2011,7 +2011,7 @@ platform.importKey({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -2042,7 +2042,7 @@ Issue a transaction to the Platform Chain.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.issueTx({
     tx: string,
     encoding: string, // optional
@@ -2055,7 +2055,7 @@ platform.issueTx({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.issueTx",
@@ -2089,7 +2089,7 @@ List addresses controlled by the given user.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.listAddresses({
     username: string,
     password: string
@@ -2098,7 +2098,7 @@ platform.listAddresses({
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.listAddresses",
@@ -2128,7 +2128,7 @@ Sample validators from the specified Subnet.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.sampleValidators(
     {
         size: int,
@@ -2146,7 +2146,7 @@ platform.sampleValidators(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -2178,7 +2178,7 @@ Get the Subnet that validates a given blockchain.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.validatedBy(
     {
         blockchainID: string
@@ -2191,7 +2191,7 @@ platform.validatedBy(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.validatedBy",
@@ -2220,7 +2220,7 @@ Get the IDs of the blockchains a Subnet validates.
 
 #### **Signature**
 
-```zsh
+```sh
 platform.validates(
     {
         subnetID: string
@@ -2233,7 +2233,7 @@ platform.validates(
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.validates",
