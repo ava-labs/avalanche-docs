@@ -2,7 +2,7 @@
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
-- [Introduction to Virtual Machine](./introduction-to-vm.md)
+- [Introduction to Virtual Machines](./introduction-to-vm.md)
 - [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
 - How to Build a Complex VM (this article)
 
@@ -16,7 +16,7 @@ Blobs are small chunks of data. In BlobVM, we divide a file into small blobs and
 
 Make sure you have followed the previous tutorials in this series:
 
-- [Introduction to Virtual Machine](./introduction-to-vm.md)
+- [Introduction to Virtual Machines](./introduction-to-vm.md)
 - [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
 
 ## Components of the BlobVM
