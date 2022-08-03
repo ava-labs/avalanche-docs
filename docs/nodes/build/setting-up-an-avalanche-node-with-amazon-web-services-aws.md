@@ -83,7 +83,7 @@ Select the checkbox next to the c5.2xlarge instance in the table.
 
 Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
 
-![configure](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
+![](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
 The instance details can stay as their defaults.
 
@@ -285,4 +285,4 @@ If you need to increase the volume size, follow these instructions from AWS:
 
 ## Wrap Up
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring](../maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](../maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).

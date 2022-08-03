@@ -256,13 +256,13 @@ The IPs of all the proxies that the request has hopped through are stuffed insid
 
 The proxies that are set up by the owner of the server (reverse-proxies) are the trusted proxies on which we can rely and know that they have stuffed the actual IP of the requesters in between. Any proxy that is not set up by the server, should be considered an untrusted proxy. So, we can jump to the IP address added by the last proxy that we trust. The number of jumps that we want can be configured in the `config.json` file inside the `GLOBAL_RL` object.
 
-![faucet 5](/img/faucet-5.png)
+![](/img/faucet-5.png)
 
 #### Clients Behind Same Proxy
 
 Consider the below diagram. The server is set up with 2 reverse proxies. If the client is behind proxies, then we cannot get the client's actual IP, and instead will consider the proxy's IP as the client's IP. And if some other client is behind the same proxy, then those clients will be considered as a single entity and might get rate-limited faster.
 
-![faucet 6](/img/faucet-6.png)
+![](/img/faucet-6.png)
 
 Therefore it is advised to the users, to avoid using any proxy for accessing applications that have critical rate limits, like this faucet.
 
@@ -278,7 +278,7 @@ So, if you want to deploy this faucet, and have some reverse proxies in between,
         ...
 ```
 
-![faucet 7](/img/faucet-7.png)
+![](/img/faucet-7.png)
 
 It is also quite common to have Cloudflare as the last reverse proxy or the exposed server. Cloudflare provides a header **cf-connecting-ip** which is the IP of the client that requested the faucet and hence Cloudflare. We are using this as default.
 
@@ -361,7 +361,7 @@ docker run -p 3000:8000 --name faucet-container --env-file ../.env faucet-image
 
 The server will run on port 8000, and our Docker will also expose this port for the outer world to interact. We have exposed this port in the `Dockerfile`. But we cannot directly interact with the container port, so we had to bind this container port to our host port. For the host port, we have chosen 3000. This flag `-p 3000:8000` achieves the same.
 
-This will start our faucet application in a Docker container at port 3000 (port 8000 on the container). You can interact with the application by visiting [http://localhost:3000](http://localhost:3000) in your browser.
+This will start our faucet application in a Docker container at port 3000 (port 8000 on the container). You can interact with the application by visiting http://localhost:3000 in your browser.
 
 #### Stopping the Container
 
@@ -385,27 +385,27 @@ Using the faucet is quite straightforward, but for the sake of completeness, let
 
 ### Visit Avalanche Faucet Website
 
-Go to <https://faucet.avax.network>. You will see various network parameters like network name, faucet balance, drop amount, drop limit, faucet address, etc.
+Go to https://faucet.avax.network. You will see various network parameters like network name, faucet balance, drop amount, drop limit, faucet address, etc.
 
-![faucet 1](/img/faucet-1.jpeg)
+![](/img/faucet-1.jpeg)
 
 ### Select Network
 
 You can use the dropdown to select the network of your choice and get some free coins (each network may have a different drop amount).
 
-![faucet 2](/img/faucet-2.png)
+![](/img/faucet-2.png)
 
 ### Put Address and Request Coins
 
 Put your wallet address where you want to get a drop, and click the **Request** button. Within a second, you will get a **transaction hash** for the processed transaction. The hash would be a hyperlink to Subnet's explorer. You can see the transaction status, by clicking on that hyperlink.
 
-![faucet 3](/img/faucet-3.png)
+![](/img/faucet-3.png)
 
 ### More Interactions
 
 This is not just it. Using the buttons shown below, you can go to the Subnet explorer or add the Subnet to your browser wallet extensions like Metamask with a single click.
 
-![faucet 4](/img/faucet-4.png)
+![](/img/faucet-4.png)
 
 ### Probable Errors and Troubleshooting
 

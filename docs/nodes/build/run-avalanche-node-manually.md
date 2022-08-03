@@ -67,7 +67,7 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Pl
 
 Download the AvalancheGo repository into your `$GOPATH`:
 
-```zsh
+```sh
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
@@ -79,7 +79,7 @@ Note: This checkouts to the master branch. For the latest stable version, checko
 
 Build AvalancheGo:
 
-```zsh
+```sh
 ./scripts/build.sh
 ```
 
@@ -87,7 +87,7 @@ The binary, named `avalanchego`, is in `avalanchego/build`. If you've followed t
 
 To begin running AvalancheGo, run the following (hit Ctrl+C to stop your node):
 
-```zsh
+```sh
 ./build/avalanchego
 ```
 
@@ -112,19 +112,19 @@ The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 If you built from source:
 
-```zsh
+```sh
 ./build/avalanchego
 ```
 
 If you are using the pre-built binaries on MacOS:
 
-```zsh
+```sh
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
 If you are using the pre-built binaries on Linux:
 
-```zsh
+```sh
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
@@ -140,7 +140,7 @@ When the node starts, it has to bootstrap (catch up with the rest of the network
 
 To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../apis/avalanchego/apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

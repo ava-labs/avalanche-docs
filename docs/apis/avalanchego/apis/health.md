@@ -33,7 +33,7 @@ The node runs a set of health checks every 30 seconds, including a health check 
 
 #### **Signature**
 
-```zsh
+```sh
 health.health() -> {
     checks: []{
         checkName: {
@@ -64,7 +64,7 @@ More information on these measurements can be found in the documentation for the
 
 #### **Example Call**
 
-```zsh
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
