@@ -19,6 +19,7 @@ Virtual Machines can be broken down into 2 components: blocks and state. The fun
 - Apply the operations in that state
 
 Each block in the blockchain contains a set of state transitions. Each block is applied in order from the blockchain's initial genesis block to its last accepted block to reach the latest state of the blockchain.
+
 ## Blockchain
 
 A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs mainly deal with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block issued by VM. Here is a brief overview:
