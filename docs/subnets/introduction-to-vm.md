@@ -32,7 +32,7 @@ A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs
 6. Every virtuous node on the network should have the same verdict for a particular block
 7. It depends on the VM implementation on what to do with the accepted or rejected block
 
-The consensus engine has been already provided by `AvalancheGo` on the Avalanche network. Developers can implement and customize their own VM.
+AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
 
 ## How to Load a VM
 
