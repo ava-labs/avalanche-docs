@@ -230,9 +230,11 @@ This are the main properties in the JSON file:
 - `startTime`: The time of the beginning of the blockchain, it must be a timestamp in seconds and it can't be a time in the future.
 - `initialStakeDuration`: The initial stake duration in seconds.
 - `initialStakeDurationOffset`: The initial stake duration offset between stakers in seconds.
+
 ``` go
-    node[i].endStakingTime = startTime + initialStakeDuration - i * initialStakeDurationOffset
+node[i].endStakingTime = startTime + initialStakeDuration - i * initialStakeDurationOffset
 ```
+
 - `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well),
 - `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one,
 - `cChainGenesis`: Specify the chains that exist upon this network's creation,
