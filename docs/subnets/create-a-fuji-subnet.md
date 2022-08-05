@@ -437,7 +437,7 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
 
 To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
- 
+
 ## Add a Validator
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
@@ -687,3 +687,19 @@ avalanche subnet list
 +---------------+---------------+----------+-----------+----------+
 ```
 
+## Appendix
+
+### Connect with MetaMask
+
+To connect Metamask with your blockchain on the new Subnet running on your local computer, you can add a new network on Metamask with the following values:
+
+- Network Name: testsubnet
+- RPC URL: http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
+- Chain ID: 3333
+- Symbol: TST
+
+:::note
+
+Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes, including the public API server `https://api.avax-test.network/`, to connect to Metamask.
+
+:::
