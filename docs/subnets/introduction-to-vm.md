@@ -26,7 +26,7 @@ A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs
 
 1. A node wants to update the blockchain's state
 2. The node's VM will notify the consensus engine that it wants to update the state
-3. Consensus engine will request the block from the VM with updates in it
+3. Consensus engine will request the block from the VM with updates
 4. Consensus engine will verify the returned block. It will rely on VM's implementation of `verify()` method
 5. Consensus engine will gossip the successfully verified blocks within the network to reach consensus on it
 6. Depending upon the consensus results, the engine can either accept or reject the block
