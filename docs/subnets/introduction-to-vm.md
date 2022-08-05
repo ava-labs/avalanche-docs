@@ -37,30 +37,26 @@ AvalancheGo provides the consensus engine for every blockchain on the Avalanche 
 
 ## How to Load a VM
 
-VMs are created as a module, whose binary is registered by a node running `AvalancheGo`, against the **vmID** (binary file name must be vmID). VMID is a user-defined string that is zero-extended to a 32-byte array and encoded in CB58.
+VMs are created as a module, whose binary is registered by a node running `AvalancheGo`, against the **vmID** (binary file name must be vmID). VMID is a string that is zero-extended to a 32-byte array and encoded in CB58.
 
-The Avalanche nodes that want to power their chains with a particular VM, must have the built binary put in the proper place. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. There could be multiple VM plugins in this directory.
+In order to load a VM, its binary must be put it the proper place where `AvalancheGo` can find and load it. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. There could be multiple VM plugins in this directory.
 
-We can build multiple blockchains with the registered VM. A VM is registered, only when its built binary is present at the required location.
+A VM can be initialized as blockchains. A blockchain can run as a separate process from AvalancheGo and can communicate with `AvalancheGo` over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
-A blockchain can run as a separate process from AvalancheGo and can communicate with `AvalancheGo` over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
+### API Handlers
 
-### APIs for a VM
+We interact with a blockchain and underlying VM through API handlers. Specifically, these handlers are implemented as **Services**.
 
-We interact with a blockchain and underlying VM through **Static** and **Non-Static Handlers**. Handlers are used for making API calls to VM methods. Specifically, these handlers are implemented as **Services**.
+Handlers serve the response for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently making calls from other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
 
-### Handlers
+- **Blockchain Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. The path to access is with this pattern `/ext/bc/[chainID]`. In the VM code, they are referred as just handlers.
+- **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The path to access is with this pattern `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
 
-Handlers serve the response for the incoming HTTP requests. Handlers can also be wrapped with **gRPC** for efficiently making calls from other services such as `AvalancheGo`. Handlers help in creating APIs. VM implements 2 kinds of handlers:
-
-- **Non-Static Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. `/ext/bc/[chainID]`
-- **Static Handlers** - They help in directly accessing VM. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. `/ext/vm/[vmID]`
-
-For any developers familiar with object-oriented programming, this is very similar to static and non-static methods on a class.
+For any developers familiar with object-oriented programming, this is very similar to static and non-static methods on a class. Blockchain handlers are the methods on the object, blockchain in this case, while VM handlers are the methods on the class, VM.
 
 ### VM Factory
 
-Each VM has a **factory** that is capable of creating new VM instances. A VM can be initialized as a blockchain along with handlers for accessing it, only when we have the VM's instance. The factory's `New` method shown below, returns the VM's instance to its caller in `AvalancheGo`. It's generally in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the VM.
+Each VM has a **factory** that is to create new VM instances from which a blockchain can be initialized. The factory's `New` method as shown below, returns the VM's instance to its caller in `AvalancheGo`. It's generally in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the VM.
 
 ```go
 // Returning a new VM instance from VM's factory
@@ -69,7 +65,7 @@ func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil
 
 ### Initializing a VM
 
-Blockchains are functional, only when the instantiated VMs are initialized and the node is bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found in the [third part](/subnets/create-a-vm-blobvm#initialize) of this series.
+Blockchains are functional, only when the instantiated VMs are initialized and the node has been bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found in the [third part](./create-a-vm-blobvm.md#initialize) of this series.
 
 ```go
 if err := vm.Initialize(
@@ -88,7 +84,7 @@ You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/ma
 
 ### Interaction
 
-We can use the API handlers to issue transactions, query chain state, and other functionalities provided by the VM.
+We can use the API handlers to issue transactions, query chain state, and other functionalities provided by the blockchain.
 
 ## Interfaces
 
