@@ -22,15 +22,16 @@ Each block in the blockchain contains a set of state transitions. Each block is 
 
 ## Blockchain
 
-A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs mainly deal with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block issued by VM. Here is a brief overview:
+A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs mainly deal with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block built by the VM. Here is a brief overview:
 
-1. A validator node wants to update the blockchain's state
-2. It creates a block with state transition details in it
-3. It issues the block to the consensus engine
-4. Consensus engine gossips the block within the network to reach consensus on it
-5. Depending upon the consensus results, the engine can either accept or reject the block
-6. Every virtuous node on the network should have the same verdict for a particular block
-7. It depends on the VM implementation on what to do with the accepted or rejected block
+1. A node wants to update the blockchain's state
+2. The node's VM will notify the consensus engine that it wants to update the state
+3. Consensus engine will request the block from the VM with updates in it
+4. Consensus engine will verify the returned block. It will rely on VM's implementation of `verify()` method
+5. Consensus engine will gossip the successfully verified blocks within the network to reach consensus on it
+6. Depending upon the consensus results, the engine can either accept or reject the block
+7. Every virtuous node on the network should have the same verdict for a particular block
+8. It depends on the VM implementation on what to do with the accepted or rejected block
 
 AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
 
