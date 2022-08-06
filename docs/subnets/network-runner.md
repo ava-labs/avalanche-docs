@@ -138,7 +138,6 @@ Additional optional parameters which can be passed to the start command:
 ```
    "vm_name": human readable name for the VM
    "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
-   **optional** subnet_id: valid ID of a subnet you want the blockchain to be deployed to
 ```
 
 See the [avalanche-cli documentation] (#../subnets/create-a-local-subnet.md) for details about how to create and run subnets with our *avalanche-cli* tool.
@@ -339,7 +338,7 @@ It can be used to create your own fully Ethereum-compatible Subnet running on Av
 
 ### subnet-cli
 
-**At this moment the ANR requires an additional tool, [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. For a smoother experience, we recommend using [avalanche-cli](#../subnets/create-a-local-subnet.md) though, as it hides all this complexity away!** 
+**ANR requires an additional tool, such as [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. For a smoother experience, we recommend using [avalanche-cli](#../subnets/create-a-local-subnet.md) though, as it hides all this complexity away!** 
 
 Install and start the RPC server just as in [start the server](#start-the-server)
 Make sure the server is up:
@@ -581,7 +580,7 @@ avalanche-network-runner control start \
 --endpoint="0.0.0.0:8080" \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
 --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
---blockchain-specs '[{"vm_name":"blobvm","genesis":"/tmp/blobvm.genesis.json"}]' \
+--blockchain-specs '[{"vm_name":"blobvm","genesis":"/tmp/blobvm.genesis.json"}]' 
 ```
 
 Check it all up:
