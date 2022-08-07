@@ -22,7 +22,7 @@ Make sure you're familiar with the previous tutorial in this series, which dives
 
 Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/v1.2.1).
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/main).
 
 ### Codec
 

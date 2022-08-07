@@ -8,7 +8,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-In this tutorial, we will learn all about Virtual Machines and how we can build them by taking references from [BlobVM](https://github.com/ava-labs/blobvm). It's a Virtual Machine that can be used to instantiate key-value blockchains for storing files like images, videos, etc. in an efficient way.
+In this tutorial, we will learn all about how we can build a virtual machine by referencing [BlobVM](https://github.com/ava-labs/blobvm). It's a Virtual Machine that can be used to instantiate key-value blockchains for storing files like images, videos, etc. in an efficient way.
 
 Blobs are small chunks of data. In BlobVM, we divide a file into small blobs and store them as a key-value pair. The key of these small chunks of a file is linked together as the children of the root. This tree is also stored as JSON data against the root's key.
 
@@ -40,7 +40,7 @@ BlobVM has the following components to handle the tasks from transaction to bloc
 
 A Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through blocks and more specifically, transactions. A VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state:
 
-- User calls `client.IssueRawTx` or directly make RPC to `service`
+- Users call `client.IssueRawTx` or directly make RPC to `service`
 - `service.IssueRawTx()` is called using handlers to
   - Receive transaction bytes as arguments
   - Unmarshal bytes into a transaction object
@@ -154,7 +154,7 @@ func (b *BaseTx) ExecuteBase(g *Genesis) error {
 }
 ```
 
-- [`Execute()`](https://github.com/ava-labs/blobvm/blob/master/chain/unsigned_tx.go#L34) executes the specific check for a transaction and may perform state change on the database instance provided as an argument. Each type of transaction should implement its own execute method. For eg. `TransferTx` execute balance modification i.e. add transfer amount to the receiver and deduct the same amount from the sender.
+- [`Execute()`](https://github.com/ava-labs/blobvm/blob/master/chain/unsigned_tx.go#L34) executes the specific check for a transaction and may perform state change on the database instance provided as an argument. Each type of transaction should implement its own execute method. For example, `TransferTx` execute balance modification, i.e. add transfer amount to the receiver and deduct the same amount from the sender.
 
 A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. The database for the former is aborted as this is just a local execution for validating transactions before gossiping. Whereas the database for the latter is committed after the block is accepted by the network.
 
@@ -575,7 +575,7 @@ Let's have a look at the fields of StatelessBlock:
 
 The VM signals the consensus engine to build a block, whenever a new transaction is added to the mempool. But ProposerVM will delay the notification until it is the node's turn to build the block. When it is the node's turn, the consensus engine will receive the notification and will call the VM's `BuildBlock()` method.
 
-When the consensus engine calls VM to build a block, the VM invokes [`NewBlock()`](https://github.com/ava-labs/blobvm/blob/1fbb655246a2a41861f40d603ad40299b177252a/chain/block.go#L52) function to get the stateless block using arguments parent block, timestamp and recent context.
+When the consensus engine calls VM to build a block, the VM invokes [`NewBlock()`](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L52) function to get the stateless block using arguments parent block, timestamp and recent context.
 
 ```go
 func NewBlock(vm VM, parent snowman.Block, tmstp int64, context *Context) *StatelessBlock {
@@ -593,7 +593,7 @@ func NewBlock(vm VM, parent snowman.Block, tmstp int64, context *Context) *State
 }
 ```
 
-A newly created block can be initialized with necessary details of a stateless block like block ID, bytes, and timestamp using the block's [`init()`](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L112) method. This method is generally called when we have complete and final information about the stateful block inside. For e.g., this method is called at the end of the builder's [`chain.BuildBlock()`](https://github.com/ava-labs/blobvm/blob/master/chain/builder.go#L85) method.
+A newly created block can be initialized with necessary details of a stateless block like block ID, bytes, and timestamp using the block's [`init()`](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L112) method. This method is generally called when we have complete and final information about the stateful block inside. For example, this method is called at the end of the builder's [`chain.BuildBlock()`](https://github.com/ava-labs/blobvm/blob/master/chain/builder.go#L85) method.
 
 ```go
 func (b *StatelessBlock) init() error {
