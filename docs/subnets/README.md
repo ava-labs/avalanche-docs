@@ -46,6 +46,24 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 Avalanche validators are incentivized by Subnet owners to validator their Subnet. The incentive can be customized by each Subnet. Validators needs to take consideration of security and resource concerns before joining a Subnet.
 
+## Virtual Machines
+
+A **Virtual Machine** (VM) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+
+When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
+
+Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+
+### Why Virtual Machines?
+
+At first, blockchain networks had one Virtual Machine (VM) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
+
+People who wanted custom decentralized applications had to create their own, entirely new blockchain network from scratch. Doing so required a great deal of time and effort, offered limited security, and generally resulted in a bespoke, fragile blockchain that never got off the ground.
+
+Ethereum made a step toward solving this problem with smart contracts. Developers didn’t need to worry about networking and consensus, but creating decentralized applications was still hard. The Ethereum VM has low performance and imposes restrictions on smart contract developers. Solidity and the other few languages for writing Ethereum smart contracts are unfamiliar to most programmers.
+
+Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go (other languages will be supported in the future).
+
 ## Developing Your Own Subnet
 
 Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
