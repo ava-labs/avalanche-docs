@@ -8,11 +8,11 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 - [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
 - [How to Build a Complex VM](./create-a-vm-blobvm.md)
 
-A Virtual Machine is a blueprint for a blockchain and a blockchain instantiates from a VM, very much similar to a class-object relationship. A Virtual Machine can define following: issuance of transactions, transaction types, block structure, block building algorithm, keeping pending transactions in the mempool, gossiping transactions to the connected nodes, etc.
+A [Virtual Machine](./README.md#virtual-machines) is a blueprint for a blockchain and a blockchain instantiates from a VM, very much similar to a class-object relationship. A Virtual Machine can define following: issuance of transactions, transaction types, block structure, block building algorithm, keeping pending transactions in the mempool, gossiping transactions to the connected nodes, etc.
 
 ## Blocks and State
 
-Virtual Machines can be broken down into 2 components: blocks and state. The functionality provided by VMs is to:
+Virtual Machines deal with blocks and state. The functionality provided by VMs is to:
 
 - Define the representation of a blockchain's state
 - Represent the operations in that state
@@ -35,7 +35,7 @@ A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs
 
 AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
 
-## How to Load a VM
+## Load a VM
 
 VMs are created as a module, whose binary is registered by a node running `AvalancheGo`, against the **vmID** (binary file name must be vmID). VMID is a string that is zero-extended to a 32-byte array and encoded in CB58.
 
@@ -45,16 +45,16 @@ A VM can be initialized as blockchains. A blockchain can run as a separate proce
 
 ### API Handlers
 
-We interact with a blockchain and underlying VM through API handlers. Specifically, these handlers are implemented as **Services**.
+Users can interact with a blockchain and underlying VM through API handlers. Specifically, these handlers are implemented as **Services**.
 
-Handlers serve the response for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently making calls from other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
+Handlers serve responses for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently making calls from other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
 
-- **Blockchain Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. The path to access is with this pattern `/ext/bc/[chainID]`. In the VM code, they are referred as just handlers.
-- **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The path to access is with this pattern `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
+- **Blockchain Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. The access path pattern is `/ext/bc/[chainID]`. In the VM code, they are referred as just handlers.
+- **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The access path pattern is `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
 
-For any developers familiar with object-oriented programming, this is very similar to static and non-static methods on a class. Blockchain handlers are the methods on the object, blockchain in this case, while VM handlers are the methods on the class, VM.
+For any readers familiar with object-oriented programming, this is very similar to static and non-static methods on a class. Blockchain handlers are the methods on the object, blockchain in this case, while VM handlers are the methods on the class, VM.
 
-### VM Factory
+### Instantiate a VM
 
 Each VM has a **factory** that is to create new VM instances from which a blockchain can be initialized. The factory's `New` method as shown below, returns the VM's instance to its caller in `AvalancheGo`. It's generally in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the VM.
 
@@ -63,7 +63,7 @@ Each VM has a **factory** that is to create new VM instances from which a blockc
 func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil }
 ```
 
-### Initializing a VM
+### Initializing a VM to Create a Blockchain
 
 Blockchains are functional, only when the instantiated VMs are initialized and the node has been bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found in the [third part](./create-a-vm-blobvm.md#initialize) of this series.
 
@@ -88,7 +88,7 @@ We can use the API handlers to issue transactions, query chain state, and other 
 
 ## Interfaces
 
-The main task of a VM is to issue blocks to the consensus engine whenever requested. It is the VM's responsibility to handle user transactions, and include them into new blocks, mempool handling, and database handling.
+As stated before, the VM is responsible for parsing, storing, and building blocks (in no particular order) and must also handle the verification, acceptance/rejection of blocks and performing the corresponding state transitions.
 
 The consensus engine will just request the VM for new blocks whenever there is a signal (from VM) and according to other [congestion control mechanisms](https://github.com/ava-labs/avalanchego/blob/master/vms/proposervm/README.md), verify the block, gossip the block within the network for consensus, and request the VM to accept or reject the block.
 
@@ -328,6 +328,10 @@ type Decidable interface {
 
 ## rpcchainvm
 
-`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [server](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of `AvalancheGo` and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
+`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client.
+
+The [server](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC.
+
+The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of `AvalancheGo` and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
 
 To make things more concrete: suppose that `AvalancheGo` wants to retrieve a block from a chain run in this fashion. `AvalancheGo` calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to `AvalancheGo`.
