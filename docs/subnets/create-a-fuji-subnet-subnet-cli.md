@@ -97,7 +97,7 @@ Check [here](./subnet-cli.md#subnet-cli-create-key) for more info.
 
 ## Virtual Machine
 
-Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../overview/getting-started/avalanche-platform.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
+Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
 That is, the VM defines the behavior of the blockchain.
 
 [Subnet-evm](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-evm is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
