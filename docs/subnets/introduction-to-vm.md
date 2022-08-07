@@ -5,7 +5,7 @@
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - Introduction to Virtual Machines (this article)
-- [How to Build a Simple VM](./create-a-virtual-machine-vm.md)
+- [How to Build a Simple VM](./create-a-vm-timestampvm.md)
 - [How to Build a Complex VM](./create-a-vm-blobvm.md)
 
 A [Virtual Machine](./README.md#virtual-machines) is a blueprint for a blockchain and a blockchain instantiates from a VM, very much similar to a class-object relationship. A Virtual Machine can define following: issuance of transactions, transaction types, block structure, block building algorithm, keeping pending transactions in the mempool, gossiping transactions to the connected nodes, etc.

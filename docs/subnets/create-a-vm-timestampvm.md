@@ -591,7 +591,7 @@ func (vm *VM) initGenesis(genesisData []byte) error {
 
 #### CreateHandlers
 
-Registed handlers defined in `Service`. See [below](create-a-virtual-machine-vm.md#api) for more on APIs.
+Registed handlers defined in `Service`. See [below](create-a-vm-timestampvm.md#api) for more on APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateHandlers returns a map where:
@@ -620,7 +620,7 @@ func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`. See [below](create-a-virtual-machine-vm.md#static-api) for more on static APIs.
+Registers static handlers defined in `StaticService`. See [below](create-a-vm-timestampvm.md#static-api) for more on static APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateStaticHandlers returns a map where:
