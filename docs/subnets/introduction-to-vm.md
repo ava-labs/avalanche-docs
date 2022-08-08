@@ -22,7 +22,7 @@ Each block in the blockchain contains a set of state transitions. Each block is 
 
 ## Blockchain
 
-A blockchain has 2 components: **Consensus Engine** and **Virtual Machine**. VMs mainly deal with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block built by the VM. Here is a brief overview:
+A blockchain relies on 2 components: **Consensus Engine** and **Virtual Machine**. VM is the blueprint for a blockchain that mainly deals with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block built by the VM. Here is a brief overview:
 
 1. A node wants to update the blockchain's state
 2. The node's VM will notify the consensus engine that it wants to update the state
@@ -47,7 +47,7 @@ A VM can be initialized as blockchains. A blockchain can run as a separate proce
 
 Users can interact with a blockchain and underlying VM through API handlers. Specifically, these handlers are implemented as **Services**.
 
-Handlers serve responses for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently making calls from other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
+Handlers serve responses for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently communicating with other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
 
 - **Blockchain Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. The access path pattern is `/ext/bc/[chainID]`. In the VM code, they are referred as just handlers.
 - **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The access path pattern is `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
@@ -86,11 +86,15 @@ You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/ma
 
 We can use the API handlers to issue transactions, query chain state, and other functionalities provided by the blockchain.
 
+### ProposerVM and Consensus Engine
+
+ChainVMs are wrapped within the [ProposerVM]((https://github.com/ava-labs/avalanchego/blob/master/vms/proposervm/README.md)) to provide a soft leader. When a VM is ready to build a block, it will add a message to the `toEngine` channel that was passed in when the VM was initialized. The ProposerVM will intercept this message and wait for the time when it is that node's turn to propose a block on the chain to forward that message to the consensus engine. When the consensus engine receives that message, it will trigger a call to `BuildBlock()` on the VM, so that the VM can build a block to be issued into consensus.
+
+Once the VM has built a block, the consensus engine will call verify on the block, and then issue it into consensus. The consensus engine actively drives consensus and whenever a block has been decided, the engine will call Accept/Reject on the block.
+
 ## Interfaces
 
 As stated before, the VM is responsible for parsing, storing, and building blocks (in no particular order) and must also handle the verification, acceptance/rejection of blocks and performing the corresponding state transitions.
-
-The consensus engine will just request the VM for new blocks whenever there is a signal (from VM) and according to other [congestion control mechanisms](https://github.com/ava-labs/avalanchego/blob/master/vms/proposervm/README.md), verify the block, gossip the block within the network for consensus, and request the VM to accept or reject the block.
 
 Every VM should implement the following interfaces:
 

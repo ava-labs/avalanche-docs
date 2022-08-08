@@ -38,9 +38,9 @@ BlobVM has the following components to handle the tasks from transaction to bloc
 
 ## Transaction Lifecycle in BlobVM
 
-A Virtual Machine exposes APIs or handlers for users to make direct RPC to service or use the client to interact with the service. Every change on a chain happens through blocks and more specifically, transactions. A VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state:
+A Virtual Machine exposes APIs or handlers for users to make direct RPC to service. Every change on a chain happens through blocks and more specifically, transactions. A VM handles transactions internally since the consensus engine only cares about the block. Let's see, how a transaction goes through the network to update the chain's state:
 
-- Users call `client.IssueRawTx` or directly make RPC to `service`
+- User make RPC request to `service.IssueRawTx()`
 - `service.IssueRawTx()` is called using handlers to
   - Receive transaction bytes as arguments
   - Unmarshal bytes into a transaction object
@@ -156,7 +156,13 @@ func (b *BaseTx) ExecuteBase(g *Genesis) error {
 
 - [`Execute()`](https://github.com/ava-labs/blobvm/blob/master/chain/unsigned_tx.go#L34) executes the specific check for a transaction and may perform state change on the database instance provided as an argument. Each type of transaction should implement its own execute method. For example, `TransferTx` execute balance modification, i.e. add transfer amount to the receiver and deduct the same amount from the sender.
 
-A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. The database for the former is aborted as this is just a local execution for validating transactions before gossiping. Whereas the database for the latter is committed after the block is accepted by the network.
+A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. As mentioned earlier, verification of a block happens before gossiping it within the network for consensus.
+
+During a transaction's inclusion in the mempool, it is executed with a dummy database, and the database is aborted after the transaction's execution, so that, the transaction state is not saved to the disk.
+
+Whereas during a block's verification, all the transactions in the block is executed with the parent's database instance. After the block is accepted, the database is committed, so that, all the transaction's state is saved to the disk.
+
+By committing or aborting a database, we save or reject its state on the disk
 
 Let's have a detailed look on `TransferTx` and `SetTx`:
 
@@ -388,7 +394,7 @@ txID, err = cli.IssueRawTx(ctx, tx.Bytes())
 
 ### Mempool
 
-[Mempool](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go) is temporary memory for storing pending transactions. These are maintained at the local node level and can be flushed out when the node restarts. The new transactions received directly from a client or through app gossip, are stored inside this mempool.
+[Mempool](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go) is temporary memory for storing pending transactions. These are maintained at the local node level and can be flushed out when the node restarts. The new transactions received directly from a user or through app gossip, are stored inside this mempool.
 
 Mempool is ideally a Max Heap that pushes new transactions into the heap according to the transaction's price. It keeps the transaction with the highest price at the top.
 
