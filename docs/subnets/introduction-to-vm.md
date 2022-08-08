@@ -88,7 +88,7 @@ We can use the API handlers to issue transactions, query chain state, and other 
 
 ### ProposerVM and Consensus Engine
 
-ChainVMs are wrapped within the [ProposerVM]((https://github.com/ava-labs/avalanchego/blob/master/vms/proposervm/README.md)) to provide a soft leader. When a VM is ready to build a block, it will add a message to the `toEngine` channel that was passed in when the VM was initialized. The ProposerVM will intercept this message and wait for the time when it is that node's turn to propose a block on the chain to forward that message to the consensus engine. When the consensus engine receives that message, it will trigger a call to `BuildBlock()` on the VM, so that the VM can build a block to be issued into consensus.
+ChainVMs are wrapped within the [ProposerVM](https://github.com/ava-labs/avalanchego/blob/master/vms/proposervm/README.md) to provide a soft leader. When a VM is ready to build a block, it will add a message to the `toEngine` channel that was passed in when the VM was initialized. The ProposerVM will intercept this message and wait for the time when it is that node's turn to propose a block on the chain to forward that message to the consensus engine. When the consensus engine receives that message, it will trigger a call to `BuildBlock()` on the VM, so that the VM can build a block to be issued into consensus.
 
 Once the VM has built a block, the consensus engine will call verify on the block, and then issue it into consensus. The consensus engine actively drives consensus and whenever a block has been decided, the engine will call Accept/Reject on the block.
 
