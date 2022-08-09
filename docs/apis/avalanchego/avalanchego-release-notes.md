@@ -16,8 +16,8 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
   - Supporting easier parsing and usage of blocks
   - Improving separation of block execution with block definition
   - Unifying state definitions
-- Introduced support to send custom X-chain assets to the P-chain
-- Introduced support to use custom assets on the P-chain
+- Introduced support to send custom X-chain assets to the P-chain to be activated in a future upgrade
+- Introduced support to use custom assets on the P-chain to be activated in a future upgrade
 - Added VMs README to begin fully documenting plugin invariants
 - Added various comments around expected usages of VM tools
 
