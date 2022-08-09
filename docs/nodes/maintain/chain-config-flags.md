@@ -497,6 +497,8 @@ If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to 
 
 Set to `true` to start the C-Chain with state sync enabled. The peer will download chain state from peers up to a recent block near tip, then proceed with normal bootstrapping. Defaults to `false`.
 
+Please note that if you need historical data, state sync isn't the right option. However, it is sufficient if you are just running a validator.
+
 #### `state-sync-skip-resume` (boolean):
 
 If set to `true`, the chain will not resume a previously started state sync operation that did not complete. Normally, the chain should be able to resume state syncing without any issue. Defaults to `false`.
