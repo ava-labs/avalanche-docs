@@ -156,7 +156,7 @@ func (b *BaseTx) ExecuteBase(g *Genesis) error {
 
 - [`Execute()`](https://github.com/ava-labs/blobvm/blob/master/chain/unsigned_tx.go#L34) executes the specific check for a transaction and may perform state change on the database instance provided as an argument. Each type of transaction should implement its own execute method. For example, `TransferTx` execute balance modification, i.e. add transfer amount to the receiver and deduct the same amount from the sender.
 
-A transaction is executed 2 times. Before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. As mentioned earlier, verification of a block happens before gossiping it within the network for consensus.
+A transaction is executed 2 times: before [including](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L428) it in mempool and during [verification](https://github.com/ava-labs/blobvm/blob/master/chain/block.go#L213) of the block containing this transaction. As mentioned earlier, verification of a block happens before gossiping it within the network for consensus.
 
 During a transaction's inclusion in the mempool, it is executed with a dummy database, and the database is aborted after the transaction's execution, so that, the transaction state is not saved to the disk.
 
