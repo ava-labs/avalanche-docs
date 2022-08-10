@@ -6,7 +6,7 @@
 
 :::
 
-## v1.7.17 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.17))
+## v1.7.17 - Verbier ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.17))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
 
