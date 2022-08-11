@@ -23,7 +23,7 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ## Prerequisites
 
-- 1+ nodes running and synced on Fuji Testnet
+- 1+ nodes running and fully bootstrapped on Fuji Testnet. Check out [Nodes](../nodes/README.md) section on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
@@ -440,13 +440,15 @@ To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.inf
 
 ## Add a Validator
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
-
 :::info
 
-Adding a validator on a Subnet requires that the validator is already a validator on the primary network.
+Adding a validator on a Subnet requires that the node is already a validator on the primary network, which means that your node has **fully bootstrapped**.
+
+See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to become a validator.
 
 :::
+
+This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
 
 ```bash
 avalanche subnet addValidator testsubnet
