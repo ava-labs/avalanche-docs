@@ -371,7 +371,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 This tutorial is about deploying to `Fuji`, so we navigate with the arrow keys to `Fuji` and hit enter.
 We are then asked to provide which private key to use for the deployment. The deployment basically consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet). Therefore the key needs to be funded.
 
-Also, this tutorial assumes that a node is up and running and fully synced to `fuji`, and that `avalanche` is being run from the **same** box.
+Also, this tutorial assumes that a node is up running, fully bootstrapped on `Fuji`, and is being run from the **same** box.
 
 ```bash
 ✔ Fuji
@@ -705,5 +705,7 @@ To connect Metamask with your blockchain on the new Subnet running on your local
 :::note
 
 Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes, including the public API server `https://api.avax-test.network/`, to connect to Metamask.
+
+If you want to open up this node for others to access your Subnet, you should set it up properly with `https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it is out of scope for this tutorial on how to do that.
 
 :::
