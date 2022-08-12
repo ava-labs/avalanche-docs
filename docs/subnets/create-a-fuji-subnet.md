@@ -371,6 +371,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 This tutorial is about deploying to `Fuji`, so we navigate with the arrow keys to `Fuji` and hit enter.
 We are then asked to provide which private key to use for the deployment. The deployment basically consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet). Therefore the key needs to be funded.
 
+Also, this tutorial assumes that a node is up running, fully bootstrapped on `Fuji`, and is being run from the **same** box.
+
 ```bash
 ✔ Fuji
 Deploying [testsubnet] to Fuji
@@ -406,7 +408,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Cancel
 ```
 
-Finally, we need to define the threshold of how many keys are required for a change to be valid (there is some input validation). For example, if 1 key only is needed, as above, we'll enter just 1. The threshold can be arbitrary depending on the needs, e.g. 2 of 4 addresses, 1 of 3, 3 of 5, etc.
+Finally, we need to define the threshold of how many keys are required for a change to be valid (there is some input validation). For example, if 1 key only is needed, as above, we'll enter just 1. The threshold _could_ be arbitrary depending on the needs, e.g. 2 of 4 addresses, 1 of 3, 3 of 5, etc., but currently this tool only works if _at least one control key is owned by the same private key used here and the threshold is set to 1_.
 
 ```bash
 ✔ Enter required number of control key signatures to add a validator: 1
@@ -427,11 +429,11 @@ Subnet has been created with ID: 2EkPnvnDiLgudnf8NjtxaNcVFtdAAnUPvaoNBrc9WG5tNmm
 Error: insufficient authorization
 ```
 
-Therefore we need to provide a control key which we have indeed control of, and then it succeeds:
+Therefore we need to provide a control key which we have indeed control of, and then it succeeds. The output (assuming the node is running on `localhost` and the API port is set to standard `9650`) will look something like this:
 
 ```bash
 Subnet has been created with ID: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H. Now creating blockchain...
-Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" with VM ID "tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw": https://api.avax-test.network/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
+Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" with VM ID "tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw": http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
 ```
 
 Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
@@ -703,5 +705,7 @@ To connect Metamask with your blockchain on the new Subnet running on your local
 :::note
 
 Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes, including the public API server `https://api.avax-test.network/`, to connect to Metamask.
+
+If you want to open up this node for others to access your Subnet, you should set it up properly with `https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it is out of scope for this tutorial on how to do that.
 
 :::
