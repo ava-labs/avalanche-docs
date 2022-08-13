@@ -19,74 +19,37 @@ By default, none of these directories and/or files exist. You would need to crea
 
 The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
-For a given chain, AvalancheGo will look first for a config sub-directory whose name is the chain ID. If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias. If it's not found, it looks for a config sub-directory whose name is another alias for the chain. All folder and file names are case sensitive.
+For a given chain, AvalancheGo will follow the sequence below to look for its config file, where all folder and file names are case sensitive:
 
-Alternatively, for some setups it might be more convenient to provide config entirely via the command line. For that, you can use AvalancheGo `--chain-config-dir` flag, as documented [here](avalanchego-config-flags.md#--chain-config-content-string).
+- First it looks for a config sub-directory whose name is the chain ID
+- If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias
+- If it's not found, it looks for a config sub-directory whose name is another alias for the chain
 
-It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used.
+Alternatively, for some setups it might be more convenient to provide config entirely via the command line. For that, you can use AvalancheGo `--chain-config-content` flag, as documented [here](avalanchego-config-flags.md#--chain-config-content-string).
+
+It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used. And the values of these default config are printed when the node starts.
 
 ## C-Chain Configs
 
-In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json`.
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json`. This file does not exist by default.
 
 For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` should be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
 
-The default C-Chain config is:
+The C-Chain config is printed out in the log when a node starts. Default values for each config flag are specified below.
+
+Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change, your node will remain with the old values, which might adversely affect your node operation.
+
+For example, as of [AvalancheGo v1.7.17 (Verbier)](../../apis/avalanchego/avalanchego-release-notes.md#v1717---verbier-view-on-github), the default for [State Sync](#state-sync-enabled-boolean) is false. In order to enable it, you can add the following to `{chain-config-dir}/C/config.json`
 
 ```json
 {
-  "snowman-api-enabled": false,
-  "coreth-admin-api-enabled": false,
-  "coreth-admin-api-dir": "",
-  "eth-apis": [
-    "eth",
-    "eth-filter",
-    "net",
-    "web3",
-    "internal-eth",
-    "internal-blockchain",
-    "internal-transaction-pool"
-  ],
-  "continuous-profiler-dir": "",
-  "continuous-profiler-frequency": 900000000000,
-  "continuous-profiler-max-files": 5,
-  "rpc-gas-cap": 50000000,
-  "rpc-tx-fee-cap": 100,
-  "preimages-enabled": false,
-  "snapshot-async": true,
-  "snapshot-verification-enabled": false,
-  "pruning-enabled": true,
-  "allow-missing-tries": false,
-  "populate-missing-tries-parallelism": 1024,
-  "metrics-enabled": true,
-  "metrics-expensive-enabled": false,
-  "local-txs-enabled": false,
-  "api-max-duration": 0,
-  "ws-cpu-refill-rate": 0,
-  "ws-cpu-max-stored": 0,
-  "api-max-blocks-per-request": 0,
-  "allow-unfinalized-queries": false,
-  "allow-unprotected-txs": false,
-  "keystore-directory": "",
-  "keystore-external-signer": "",
-  "keystore-insecure-unlock-allowed": false,
-  "remote-tx-gossip-only-enabled": false,
-  "tx-regossip-frequency": 60000000000,
-  "tx-regossip-max-size": 15,
-  "log-level": "info",
-  "offline-pruning-enabled": false,
-  "offline-pruning-bloom-filter-size": 512,
-  "offline-pruning-data-directory": "",
-  "max-outbound-active-requests": 8,
-  "state-sync-enabled": false,
-  "state-sync-skip-resume": false,
-  "state-sync-min-blocks": 300000,
-  "state-sync-ids": "",
-  "state-sync-server-trie-cache": 64
+  "state-sync-enabled": true
 }
 ```
 
-Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change your node will remain with the old values, which might adversely affect your node operation.
+In order to make the new config take effect, `avalanchego` needs to be stopped and restarted.
+
+For this particular feature `State Sync` to work, you should rename/remove your current database, so that the node can be bootstrapped from scratch with state-sync enabled.
 
 ### Continuous Profiling
 
