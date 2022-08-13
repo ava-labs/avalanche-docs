@@ -266,7 +266,7 @@ At this point, the specification of the new Subnet is created on disk, but is no
 We can print the specification to disk by running the `describe` command:
 
 ```bash
-avalanche describe testsubnet
+avalanche subnet describe testsubnet
  _____       _        _ _
 |  __ \     | |      (_) |
 | |  | | ___| |_ __ _ _| |___
