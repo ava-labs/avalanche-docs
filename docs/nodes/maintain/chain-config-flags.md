@@ -55,29 +55,29 @@ For this particular feature `State Sync` to work, you should rename/remove your 
 
 #### `continuous-profiler-dir` (string):
 
-Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to "". If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
+Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to `""`. If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
 
 #### `continuous-profiler-frequency` (duration):
 
-Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
+Specifies the frequency to run the continuous profiler. Defaults `900000000000` nano seconds which is 15 minutes.
 
 #### `continuous-profiler-max-files` (int):
 
-Specifies the maximum number of profiles to keep before removing the oldest.
+Specifies the maximum number of profiles to keep before removing the oldest. Defaults to `5`.
 
 ### Enabling Avalanche Specific APIs
 
 #### `snowman-api-enabled` (boolean):
 
-Enables the Snowman API. Defaults to false.
+Enables the Snowman API. Defaults to `false`.
 
 #### `coreth-admin-api-enabled` (boolean):
 
-Enables the Admin API. Defaults to false.
+Enables the Admin API. Defaults to `false`.
 
 #### `coreth-admin-api-dir` (string):
 
-Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
+Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to `""`.
 
 ### Enabling EVM APIs
 
@@ -121,7 +121,7 @@ If you populate this field, it will override the defaults so you must include ev
 
 The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 `eth_coinbase`
 `eth_etherbase`
@@ -130,7 +130,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth-filter`.
 
-Enables the public filter API for the `eth_*` namespace. Defaults to true.
+Enables the public filter API for the `eth_*` namespace. Defaults to `true`.
 
 Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
 
@@ -150,7 +150,7 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 
 The API name `private-admin` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `admin`.
 
-Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
+Adds the following RPC calls to the `admin_*` namespace. Defaults to `false`.
 
 - `admin_importChain`
 - `admin_exportChain`
@@ -159,7 +159,7 @@ Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 The API names `private-debug` and `public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `debug`.
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 - `debug_dumpBlock`
 - `debug_accountRange`
@@ -172,7 +172,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 #### `net`:
 
-Adds the following RPC calls to the `net_*` namespace. Defaults to true.
+Adds the following RPC calls to the `net_*` namespace. Defaults to `true`.
 
 - `net_listening`
 - `net_peerCount`
@@ -182,7 +182,7 @@ Note: Coreth is a virtual machine and does not have direct access to the network
 
 #### `debug-tracer`:
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 - `debug_traceChain`
 - `debug_traceBlockByNumber`
@@ -195,7 +195,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 #### `web3`:
 
-Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
+Adds the following RPC calls to the `web3_*` namespace. Defaults to `true`.
 
 - `web3_clientVersion`
 - `web3_sha3`
@@ -204,7 +204,7 @@ Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 
 The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-eth`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 - `eth_gasPrice`
 - `eth_baseFee`
@@ -215,7 +215,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-blockchain`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 - `eth_chainId`
 - `eth_blockNumber`
@@ -240,7 +240,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-transaction`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 - `eth_getBlockTransactionCountByNumber`
 - `eth_getBlockTransactionCountByHash`
@@ -264,7 +264,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-tx-pool`.
 
-Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
+Adds the following RPC calls to the `txpool_*` namespace. Defaults to `false`.
 
 - `txpool_content`
 - `txpool_contentFrom`
@@ -275,7 +275,7 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
 The API names `internal-private-debug` and `internal-public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `internal-debug`.
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 - `debug_getHeaderRlp`
 - `debug_getBlockRlp`
@@ -285,7 +285,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 #### `debug-handler`:
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 - `debug_verbosity`
 - `debug_vmodule`
@@ -307,7 +307,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-account`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 - `eth_accounts`
 
@@ -315,7 +315,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 The API name `internal-private-personal` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-personal`.
 
-Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
+Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
 
 - `personal_listAccounts`
 - `personal_listWallets`
@@ -337,63 +337,63 @@ Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 
 #### `rpc-gas-cap` (int):
 
-The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `eth_call`). Defaults to 50,000,000.
+The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `eth_call`). Defaults to `50,000,000`.
 
 #### `rpc-tx-fee-cap` (int):
 
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to 100.
+Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to `100`.
 
 #### `api-max-duration` (duration):
 
-Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to `0` (no maximum).
 
 #### `api-max-blocks-per-request` (int):
 
-Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
+Maximum number of blocks to serve per `getLogs` request. Defaults to `0` (no maximum).
 
 #### `ws-cpu-refill-rate` (duration):
 
-The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (0).
+The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (`0`).
 
 #### `ws-cpu-max-stored` (duration):
 
-Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (`0`).
 
 #### `allow-unfinalized-queries` (boolean):
 
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to `false`.
 
 ### Transaction Pool
 
 #### `local-txs-enabled` (boolean):
 
-Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to false.
+Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to `false`.
 
 #### `allow-unprotected-txs` (boolean):
 
-If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
+If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to `false`.
 
 #### `remote-tx-gossip-only-enabled` (boolean):
 
-If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to false.
+If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to `false`.
 
 #### `tx-regossip-frequency` (duration):
 
-Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to 1 minute.
+Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to `60000000000` nano seconds which is 1 minute.
 
 #### `tx-regossip-max-size` (int):
 
-Maximum number of transactions to re-gossip at once. Defaults to 15.
+Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
 ### Metrics
 
 #### `metrics-enabled` (boolean):
 
-Enables metrics. Defaults to false.
+Enables metrics. Defaults to `false`.
 
 #### `metrics-expensive-enabled` (boolean):
 
-Enables expensive metrics. Defaults to false.
+Enables expensive metrics. Defaults to `false`.
 
 ### Database
 
@@ -403,7 +403,7 @@ If true, database pruning of obsolete historical data will be enabled. Should be
 
 #### `preimages-enabled` (boolean):
 
-If true, enables preimages. Defaults to false.
+If true, enables preimages. Defaults to `false`.
 
 #### `offline-pruning-enabled` (boolean):
 
@@ -428,11 +428,11 @@ This flag must be set when offline pruning is enabled and sets the directory tha
 
 #### `snapshot-async` (boolean):
 
-If true, allows snapshot generation to be executed asynchronously. Defaults to true.
+If true, allows snapshot generation to be executed asynchronously. Defaults to `true`.
 
 #### `snapshot-verification-enabled` (boolean):
 
-If true, verifies the complete snapshot after it has been generated. Defaults to false.
+If true, verifies the complete snapshot after it has been generated. Defaults to `false`.
 
 ### Log Level
 
@@ -444,15 +444,15 @@ Defines the C-chain log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"
 
 #### `keystore-directory` (string):
 
-The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty string (`""`).
 
 #### `keystore-external-signer` (string):
 
-Specifies an external URI for a clef-type signer. Defaults to the empty string (not enabled).
+Specifies an external URI for a clef-type signer. Defaults to the empty string (`""` as not enabled).
 
 #### `keystore-insecure-unlock-allowed` (bool):
 
-If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
+If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to `false`.
 
 ### State Sync Settings
 
@@ -472,7 +472,7 @@ Minimum number of blocks the chain should be ahead of the local node to prefer s
 
 #### `state-sync-ids` (string):
 
-Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. If not specified (or empty), peers are selected at random. Defaults to empty string.
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. If not specified (or empty), peers are selected at random. Defaults to empty string (`""`).
 
 #### `state-sync-server-trie-cache` (int):
 
