@@ -140,7 +140,7 @@ Additional optional parameters which can be passed to the start command:
    "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
 ```
 
-See the [avalanche-cli documentation] (#../subnets/create-a-local-subnet.md) for details about how to create and run Subnets with our _avalanche-cli_ tool.
+See the [avalanche-cli documentation](../subnets/create-a-local-subnet.md) for details about how to create and run Subnets with our _avalanche-cli_ tool.
 
 The network-runner supports avalanchego node configuration at different levels.
 
@@ -337,7 +337,7 @@ It can be used to create your own fully Ethereum-compatible Subnet running on Av
 
 ### subnet-cli
 
-**ANR requires an additional tool, such as [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. For a smoother experience, we recommend using [avalanche-cli](#../subnets/create-a-local-subnet.md) though, as it hides all this complexity away!**
+**ANR requires an additional tool, such as [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. For a smoother experience, we recommend using [avalanche-cli](../subnets/create-a-local-subnet.md) though, as it hides all this complexity away!**
 
 Install and start the RPC server just as in [start the server](#start-the-server)
 Make sure the server is up:
