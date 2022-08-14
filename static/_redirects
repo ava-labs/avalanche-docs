@@ -299,10 +299,6 @@
 /build/tutorials/smart-digital-assets/creating-a-nft-part-1/ / 301
 /build/tutorials/smart-digital-assets/creating-a-nft-part-1 / 301
 
-#community
-/build/tutorials/tutorials-contest/ /community/tutorials-contest/ 301
-/build/tutorials/tutorials-contest /community/tutorials-contest/ 301
-
 # 04/21/2022
 
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
@@ -312,35 +308,9 @@
 
 /learn / 301
 /learn/ / 301
-/learn/platf /overview/getting-started/avalanche-platform 301
 /build/get-started / 301
 /build/references/command-line-interface/ /nodes/maintain/avalanchego-config-flags/ 301
 /build/tutorials/platform/create-a-virtual-machine-vm /subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
-/v/v1.0.4/build/apis /apis/avalanchego/apis/ 301
-/v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives 301
-/v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization 301
-/v/v1.1.1/build/getting-started / 301
-/v/v1.1.1/nodes-and-staking /nodes-and-staking 301
-/v/v1.1.1/build/tutorials/platform/create-a-new-blockchain /subnets/create-a-fuji-subnet 301
-/v1.0/en/api/keystore/ /apis/avalanchego/apis/keystore-api 301
-/v1.0/en/references/command-line-interface/ /build/references/command-line-interface 301
-/v1.0/en/tools/avalanche.js/api/classes/utils_base58.base58/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_avm_keychain.keypair/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_avm_operations.utxoid/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_avm_outputs.secptransferoutput/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_platformvm_importtx.importtx/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_platformvm_transactions.unsignedtx/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/api_platformvm_validationtx.weightedvalidatortx/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/common_assetamount.standardassetamountdestination/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/common_output.outputowners/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/common_output.standardtransferableoutput/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/utils_db.db/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/classes/utils_payload.jsonpayload/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/modules/api_avm_initialstates/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/modules/api_avm_inputs/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/modules/api_metrics/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/api/modules/api_platformvm_utxos/ /build/tools/avalanchejs/api 301
-/v1.0/en/tools/avalanchejs/send-coins/ /build/tools/avalanchejs/send-an-asset-on-the-x-chain 301
