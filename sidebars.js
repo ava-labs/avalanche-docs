@@ -98,6 +98,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/customize-a-subnet',
+        'subnets/network-upgrade',
         'subnets/create-a-virtual-machine-vm',
       ],
     },

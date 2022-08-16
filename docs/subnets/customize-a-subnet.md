@@ -528,6 +528,10 @@ This example enables the `feeManagerConfig` at the first block with timestamp >=
 
 When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
 
+```
+INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain> github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig: {\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\“:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\“:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\“precompileUpgrades\“:[{\“feeManagerConfig\“:{\“adminAddresses\“:[\“0x6f0f6da1852857d7789f68a28bba866671f3880d\“],\“blockTimestamp\“:1660658400}}]}, Engine: Dummy Consensus Engine}”
+```
+
 ## Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
