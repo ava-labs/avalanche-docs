@@ -75,6 +75,16 @@ const sidebars = {
         'dapps/smart-contracts/add-avalanche-to-metamask-programmatically',
       ],
     },
+    {
+      type: 'category',
+      label: 'Non Fungible Tokens (NFTs)',
+      collapsed: true,
+      items: [
+        'dapps/nfts/README',
+        'dapps/nfts/intro-to-erc721s',
+        'dapps/nfts/preparing-nft-files',
+      ],
+    },
   ],
   subnets: [
     'subnets/README',
