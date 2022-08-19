@@ -1,6 +1,6 @@
 # Flow of a Single Blockchain
 
-![Blockchain Flow](/img/blockchain-flow.png)
+![Blockchain Flow](../../static/img/blockchain-flow.png)
 
 ## Intro
 
