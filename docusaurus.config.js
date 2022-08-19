@@ -35,6 +35,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
+          remarkPlugins: [require('mdx-mermaid')],
           // Please change this to your repo.
           editUrl: 'https://github.com/ava-labs/avalanche-docs/edit/master/',
         },
