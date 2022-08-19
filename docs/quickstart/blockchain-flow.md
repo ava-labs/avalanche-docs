@@ -14,8 +14,6 @@ graph LR
     I --> B 
 ```
 
-![Blockchain Flow](../../static/img/blockchain-flow.png)
-
 ## Intro
 
 The Avalanche network consists of 3 built-in blockchains: X-Chain, C-Chain, and P-Chain. The X-Chain is used to manage assets and uses the Avalanche consensus protocol. The C-Chain is used to create and interact with smart contracts and uses the Snowman consensus protocol. The P-Chain is used to coordinate validators and stake and also uses the Snowman consensus protocol. At the time of writing, the Avalanche network has ~1200 validators. A set of validators makes up a subnet. Subnets can validate 1 or more chains. It is a common misconception that 1 subnet = 1 chain and this is shown by the primary subnet of Avalanche which is made up of the X-Chain, C-Chain, and P-Chain.
