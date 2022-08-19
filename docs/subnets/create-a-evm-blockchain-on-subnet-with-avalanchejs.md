@@ -10,7 +10,7 @@ On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages Subnets,
 
 ## Requirements
 
-- [Go](https://golang.org/doc/install) version >= 1.17.9
+- [Go](https://golang.org/doc/install) version >= 1.18.1
 - [NodeJS](https://nodejs.org/en) Node >= 10.16 and npm >= 5.6
 
 ## Project structure

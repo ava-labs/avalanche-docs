@@ -24,6 +24,12 @@ C-Chain exposes the [same API](../apis/avalanchego/apis/c-chain.md) as go-ethere
 
 There are multiple ways of working with the C-Chain.
 
+### Through Core
+
+Powered by Avalanche, [Core](https://medium.com/avalancheavax/ava-labs-releases-core-an-all-in-one-web3-operating-system-for-avalanche-a844eb822887) is an all-in-one operating system bringing together Avalanche apps, Subnets, bridges, and NFTs in one seamless, high-performance browser experience. Putting in another way, Core is more than a wallet. It is a curated web3 operating system combining Wallet, Explorer, Bridge, Subnets, dApps, and more.
+
+In your application's web interface, follow [this to add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-programmatically.md#core).
+
 ### Through MetaMask
 
 You can access C-Chain through MetaMask, by defining a custom network. Go to MetaMask, log in, click the network dropdown, and select 'Custom RPC'. Data for Avalanche is as follows.
@@ -44,7 +50,7 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 - **Symbol**: `AVAX`
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-In your application's web interface, you can [add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
+In your application's web interface, you can [add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-programmatically.md#metamask) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
 
 ### Using the Public API Nodes
 
@@ -102,7 +108,7 @@ An example C-Chain config file that includes the archival mode, enables debug AP
     "internal-eth",
     "internal-blockchain",
     "internal-transaction",
-    "debug-tracer",
+    "debug-tracer"
   ],
   "pruning-enabled": false
 }
