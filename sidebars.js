@@ -54,7 +54,8 @@ const sidebars = {
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
-    'quickstart/integrate-exchange-with-avalanche'
+    'quickstart/integrate-exchange-with-avalanche',
+    'quickstart/blockchain-flow'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
