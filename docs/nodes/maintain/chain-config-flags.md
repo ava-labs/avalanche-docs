@@ -401,6 +401,18 @@ Enables expensive metrics. Defaults to `false`.
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
+:::note
+If a node is ever run with pruning disabled (archival mode), setting `pruning-enabled` to `true` will
+result in a warning and the node will shut down. This is to protect against unintentional
+misconfigurations of an archival node.
+To override this and switch to pruning mode, in addition to `pruning-enabled`, `allow-missing-tries`
+should be set to `true` as well.
+:::
+
+#### `allow-missing-tries` (boolean):
+
+If true, allows a node that was once configured as archival to switch to pruning mode. Defaults to `false`.
+
 #### `preimages-enabled` (boolean):
 
 If true, enables preimages. Defaults to `false`.
