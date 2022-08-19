@@ -6,16 +6,17 @@
 
 :::
 
-## v1.7.18 - Corralco ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.18))
+## v1.7.18 - Chapelco ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.18))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
 
 **Fixes**
 
+- Fixed bug in `codeToFetch` database accessors that caused an error when starting/stopping state sync
+- Fixed rare BAD BLOCK errors during C-chain bootstrapping
 - Fixed platformvm `couldn't get preferred block state` log due to attempted block building during bootstrapping
 - Fixed platformvm `failed to fetch next staker to reward` error log due to an incorrect `lastAcceptedID` reference
 - Fixed AWS AMI creation
-- Fixed bug in `codeToFetch` database accessors that caused an error when starting/stopping state sync
 
 **PlatformVM**
 
