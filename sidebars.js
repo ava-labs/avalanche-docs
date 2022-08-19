@@ -72,7 +72,7 @@ const sidebars = {
         'dapps/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace',
         'dapps/smart-contracts/verify-smart-contracts-with-truffle-verify',
         'dapps/smart-contracts/verify-smart-contracts',
-        'dapps/smart-contracts/add-avalanche-to-metamask-programmatically',
+        'dapps/smart-contracts/add-avalanche-programmatically',
       ],
     },
   ],
