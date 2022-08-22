@@ -3,7 +3,11 @@
 In the course of Subnet operation, you will inevitably need to upgrade or change some part of the software stack that is running your Subnet. If nothing else, you will have to upgrade the AvalancheGo node client. Same goes for the VM plugin binary that is used to run the blockchain on your Subnet, which is most likely the subnet-evm, the Subnet implementation of the Ethereum virtual machine. Also, you may want to change the configuration of the VM. This tutorial will guide you through the process of doing various Subnet upgrades and changes. We will point out things to watch out for and precautions you need to be mindful about.
 
 :::warning
-Upgrades are pretty delicate operations you need to be very careful about because wrong configuration, procedural mistakes or a botched upgrade can halt your subnet or even lead to data loss!
+NETWORK UPGRADES PERMANENTLY CHANGE THE RULES OF YOUR SUBNET
+
+Procedural mistakes or a botched upgrade can halt your subnet or lead to data loss!
+
+When performing a subnet upgrade, every single validator on the Subnet will need to perform the identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to every subnet validator so that they have time to perform the upgrade prior to activation.
 :::  
 
 ## General upgrade considerations
