@@ -3,13 +3,13 @@
 This tutorial will start you with a basic ERC721 (NFT) smart contract on the Avalanche Network, regardless of your previous development experience. We will deploy our NFT on the Avalanche Fuji Testnet and view it on the Snowtrace Testnet Explorer. Note that these are not transferable to the Mainnet. However, once you feel comfortable launching your project, you can do so on Avalanche Mainnet and list it on an NFT marketplace.
 
 The following tools will be used during this tutorial:
+
 - [Pinata](https://www.pinata.cloud/): To store your NFT images and metadata.
 - [OpenZeppelin’s Wizard](https://wizard.openzeppelin.com/): to create the ERC721 smart contract.
 - [Remix IDE](https://remix-project.org/): To edit the code and deploy it to Fuji.
-- [Avalanche Testnet Faucet](https://faucet.avax.network/): To fund the deployment. 
+- [Avalanche Testnet Faucet](https://faucet.avax.network/): To fund the deployment.
 - [MetaMask browser Extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn): To process transactions related to funding and deploying the smart contract.
 - [Snowtrace Testnet Explorer](https://testnet.snowtrace.io/): To view the deployed smart contract.
-
 
 :::caution
 **DISCLAIMER: This Solidity smart contract tutorial is for demonstration purposes only. Users should consider proper precautions, error handling, and safeguards for production use. No one at Ava Labs is responsible for your development, and you must take full responsibility for ensuring your code is secure.**
@@ -31,7 +31,7 @@ You will need the MetaMask Extension installed on whatever browser you are using
 
 ### Getting Testnet Funds
 
-Because we are deploying on the Fuji Network, you will need to get AVAX on the Fuji network. If you visit the [Avalanche Faucet](https://faucet.avax.network/), you can request up to 2 Fuji AVAX per day. Please enter the C Chain address of the account linked to your MetaMask in the previous step. 
+Because we are deploying on the Fuji Network, you will need to get AVAX on the Fuji network. If you visit the [Avalanche Faucet](https://faucet.avax.network/), you can request up to 2 Fuji AVAX per day. Please enter the C Chain address of the account linked to your MetaMask in the previous step.
 
 ![Avalanche Faucet](intro-to-erc721s/1-faucet.png)
 
@@ -65,7 +65,7 @@ Now, our contract is a little more populated:
 
 ![Contract Wizard SafeMint](intro-to-erc721s/4-wizard-safemint.png)
 
-For this simple example, we will not add any additional functionality to the `safeMint` function. Currently, it mints one NFT to the address specified in the function call. There is no cost to mint the NFT other than the gas fee for the transaction itself. 
+For this simple example, we will not add any additional functionality to the `safeMint` function. Currently, it mints one NFT to the address specified in the function call. There is no cost to mint the NFT other than the gas fee for the transaction itself.
 
 This `safeMint` function currently doubles as an airdrop function because the address the NFT is minted to does not need to be the function owner. This functionality becomes very useful when NFT collection owners want to give away NFTs for free outside of the normal minting window.
 

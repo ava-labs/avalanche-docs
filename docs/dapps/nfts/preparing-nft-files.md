@@ -38,17 +38,17 @@ If you right-click on the image, you can copy the image’s url. This URL is imp
 
 ## Preparing the metadata
 
-Now that we have the image uploaded and its URL, we can create the matching metadata file for it. 
+Now that we have the image uploaded and its URL, we can create the matching metadata file for it.
 
 Where this NFT is going to be an ERC721, we know we can use metadata standards often found on Marketplaces such as Joepegs.com. The .json file below is an example of what the [metadata](https://docs.opensea.io/docs/metadata-standards#metadata-structure) should look like.
 
 ```json
 {
-    "name": "",
-    "tokenId": 0,
-    "image": "",
-    "description": "",
-    "attributes": []
+  "name": "",
+  "tokenId": 0,
+  "image": "",
+  "description": "",
+  "attributes": []
 }
 ```
 
@@ -64,10 +64,10 @@ Below is an example of how you would fill out the fields in the metadata file.
 
 ```json
 {
-    "name": "Cool Photography",
-    "tokenId": 0,
-    "image": "https://gateway.pinata.cloud/ipfs/QmPWbixyMsaNkR9v612bBFbncKGmgXDKz9CgMtDDD7Bymw/0.png",
-    "description": "A cool image"
+  "name": "Cool Photography",
+  "tokenId": 0,
+  "image": "https://gateway.pinata.cloud/ipfs/QmPWbixyMsaNkR9v612bBFbncKGmgXDKz9CgMtDDD7Bymw/0.png",
+  "description": "A cool image"
 }
 ```
 
