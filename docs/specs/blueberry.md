@@ -1,6 +1,6 @@
 # Blueberry Changes
 
-This document specifies changes in Avalanche Blueberry (AvalanchGo v1.8.0) from Apricot (AvalanchGo v1.7.x).
+This document specifies changes in Avalanche Blueberry (AvalanchGo v1.8.0) from Apricot (AvalanchGo v1.1.0 to v1.7.18).
 
 ## Block Composition and Formation Logic
 
@@ -10,7 +10,7 @@ AvalancheGo v1.8.0 (Blueberry) slightly changes the way the P-chain selects tran
 
 #### Block Content
 
-Currently, AvalancheGo (with code name Apricot) allows the following block types with the following content:
+Currently, Apricot allows the following block types with the following content:
 
 - _Standard Blocks_ may contain multiple transactions of the following types:
   - CreateChainTx
@@ -25,7 +25,7 @@ Currently, AvalancheGo (with code name Apricot) allows the following block types
   - AdvanceTimeTx
 - _Options blocks_, i.e. _Commit Block_ and _Abort Block_ do not contain any transaction.
 
-Note that _Atomic Blocks_ are deprecated as of AvalancheGo v1.7.0. They used to contain `ImportTx` and `ExportTx` which are now included into Standard Blocks.
+Note that _Atomic Blocks_ have been deprecated during Apricot. They used to contain `ImportTx` and `ExportTx` which are now included in the _Standard Blocks_.
 
 Each block has an header containing:
 
@@ -71,7 +71,7 @@ Blueberry allows the following block types with the following content:
   - AddValidatorTx,
   - AddDelegatorTx,
   - AddSubnetValidatorTx.
-- _Proposal Blocks_ may contain a single transaction of the following types:
+- _Proposal Blocks_ may contain a single transaction of the following type:
   - RewardValidatorTx,
 - _Options blocks_, i.e. _Commit Block_ and _Abort Block_ do not contain any transactions.
 
@@ -81,10 +81,11 @@ Note that each block has an header containing:
 - Height
 - Time
 
-So the two main differences with respect to Apricot are:
+So the main differences with respect to Apricot are:
 
 - _AddValidatorTx_, _AddDelegatorTx_, _AddSubnetValidatorTx_ are included into Standard Blocks rather than Proposal Blocks so that they don't need to be voted on (i.e. followed by a Commit/Abort block).
 - Block timestamp is explicitly serialized into block header, to allow chain time update.
+- _AdvanceTimeTx_ transactions is not accepted anymore, for reasons explained in section [Chain Time Update Mechanism](#chain-time-update-mechanism)
 
 #### Blueberry Block Formation Logic
 
