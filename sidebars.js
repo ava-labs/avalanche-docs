@@ -79,7 +79,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Non Fungible Tokens (NFTs)',
-      collapsed: true,
+      collapsed: false,
       items: [
         'dapps/nfts/README',
         'dapps/nfts/intro-to-erc721s',
