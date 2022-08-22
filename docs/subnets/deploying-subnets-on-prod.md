@@ -20,7 +20,7 @@ For running AvalancheGo as a validator on the Primary Network the recommended co
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1TB with at least 3000 IOPS
+- Storage: 1 TiB with at least 3000 IOPS
 - OS: Ubuntu 18.04/20.04
 - Network: Reliable IPv4 or IPv6 network connection, with an open public port
 

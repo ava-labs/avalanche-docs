@@ -54,7 +54,8 @@ const sidebars = {
     'quickstart/adjusting-gas-price-during-high-network-activity',
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
-    'quickstart/integrate-exchange-with-avalanche'
+    'quickstart/integrate-exchange-with-avalanche',
+    'quickstart/blockchain-flow'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -72,7 +73,7 @@ const sidebars = {
         'dapps/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace',
         'dapps/smart-contracts/verify-smart-contracts-with-truffle-verify',
         'dapps/smart-contracts/verify-smart-contracts',
-        'dapps/smart-contracts/add-avalanche-to-metamask-programmatically',
+        'dapps/smart-contracts/add-avalanche-programmatically',
       ],
     },
   ],

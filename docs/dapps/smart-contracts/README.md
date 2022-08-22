@@ -9,4 +9,4 @@
 | [**Verifying Smart Contracts Using Hardhat and Snowtrace**](verify-smart-contract-using-hardhat-and-snowtrace.md)                     | Verifying Smart Contracts Using Hardhat and Snowtrace                                         |
 | [**Verifying Smart Contracts with Truffle Verify**](verify-smart-contracts-with-truffle-verify.md)                                    | Verify Smart Contracts with Sourcify and Truffle                                              |
 | [**Verify Smart Contracts on the C-Chain Explorer**](verify-smart-contracts.md)                                                       | Verify Smart Contracts on the C-Chain Explorer                                                |
-| [**Add Avalanche to MetaMask programmatically**](add-avalanche-to-metamask-programmatically.md)                                       | Simple tutorial showing how to add Avalanche network to MetaMask from your front-end code.    |
+| [**Add Avalanche programmatically**](add-avalanche-programmatically.md)                                                               | Simple tutorial showing how to add Avalanche network to your front-end code.                  |

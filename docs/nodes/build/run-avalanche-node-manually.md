@@ -26,7 +26,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1 TB
+- Storage: 1 TiB
 - OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ### Networking
@@ -61,7 +61,7 @@ Building the node from source is recommended if you're a developer looking to ex
 
 #### **Source Code**
 
-First install Go 1.17.9 or later. Follow the instructions [here](https://golang.org/doc/install). You can verify by runing `go version`.
+First install Go 1.18.1 or later. Follow the instructions [here](https://golang.org/doc/install). You can verify by runing `go version`.
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 

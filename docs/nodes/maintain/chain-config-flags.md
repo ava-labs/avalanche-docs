@@ -39,6 +39,8 @@ The C-Chain config is printed out in the log when a node starts. Default values 
 
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change, your node will remain with the old values, which might adversely affect your node operation.
 
+#### State Sync
+
 For example, as of [AvalancheGo v1.7.17 (Verbier)](../../apis/avalanchego/avalanchego-release-notes.md#v1717---verbier-view-on-github), the default for [State Sync](#state-sync-enabled-boolean) is false. In order to enable it, you can add the following to `{chain-config-dir}/C/config.json`
 
 ```json
@@ -371,11 +373,11 @@ Enables local transaction handling (prioritizes transactions submitted through t
 
 #### `allow-unprotected-txs` (boolean):
 
-If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to `false`.
+If `true`, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to `false`.
 
 #### `remote-tx-gossip-only-enabled` (boolean):
 
-If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to `false`.
+If `true`, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to `false`.
 
 #### `tx-regossip-frequency` (duration):
 
@@ -399,15 +401,29 @@ Enables expensive metrics. Defaults to `false`.
 
 #### `pruning-enabled` (boolean):
 
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+If `true`, database pruning of obsolete historical data will be enabled. This flag should be set to `false` for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+:::note
+
+If a node is ever run with `pruning-enabled` as `false` (archival mode), setting `pruning-enabled` to `true` will result in a warning and the node will shut down. This is to protect against unintentional
+misconfigurations of an archival node.
+
+To override this and switch to pruning mode, in addition to `pruning-enabled: true`, `allow-missing-tries`
+should be set to `true` as well.
+
+:::
+
+#### `allow-missing-tries` (boolean):
+
+If `true`, allows a node that was once configured as archival to switch to pruning mode. Defaults to `false`.
 
 #### `preimages-enabled` (boolean):
 
-If true, enables preimages. Defaults to `false`.
+If `true`, enables preimages. Defaults to `false`.
 
 #### `offline-pruning-enabled` (boolean):
 
-If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.**
+If `true`, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.**
 While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](../maintain/run-offline-pruning.md#disk-space-considerations)
 
 Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
@@ -428,11 +444,11 @@ This flag must be set when offline pruning is enabled and sets the directory tha
 
 #### `snapshot-async` (boolean):
 
-If true, allows snapshot generation to be executed asynchronously. Defaults to `true`.
+If `true`, allows snapshot generation to be executed asynchronously. Defaults to `true`.
 
 #### `snapshot-verification-enabled` (boolean):
 
-If true, verifies the complete snapshot after it has been generated. Defaults to `false`.
+If `true`, verifies the complete snapshot after it has been generated. Defaults to `false`.
 
 ### Log Level
 
@@ -452,7 +468,7 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 
 #### `keystore-insecure-unlock-allowed` (bool):
 
-If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to `false`.
+If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults to `false`.
 
 ### State Sync Settings
 
