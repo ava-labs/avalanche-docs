@@ -20,7 +20,7 @@ When assigning weight to the nodes, always use values greater than 20, as that i
 
 ## Upgrading subnet validator nodes
 
-AvalancheGo, the node client that is running the Avalanche validators is under constant and rapid development. New versions come out often (roughly every two weeks), bringing added capabilities, performance improvements or security fixes. Updates are usually optional, but from time to time (much rarely than regular updates) there will be an update that includes a network upgrade. Those upgrades are mandatory, and any node that does not upgrade in time will go offline when the network upgrade activates.
+AvalancheGo, the node client that is running the Avalanche validators is under constant and rapid development. New versions come out often (roughly every two weeks), bringing added capabilities, performance improvements or security fixes. Updates are usually optional, but from time to time (much less frequently than regular updates) there will be an update that includes a mandatory network upgrade. Those upgrades are MANDATORY for every node running the subnet. Any node that does not perform the update before the activation timestamp will immediately stop working when the upgrade activates.
 
 That's why having a node upgrade strategy is pretty important, and you should always strive to run the latest version of the AvalancheGo client.
 
