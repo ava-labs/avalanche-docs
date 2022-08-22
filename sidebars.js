@@ -100,6 +100,7 @@ const sidebars = {
       items: [
         'subnets/customize-a-subnet',
         'subnets/network-upgrade',
+        'subnets/subnet-upgrade',
         'subnets/create-a-virtual-machine-vm',
       ],
     },
