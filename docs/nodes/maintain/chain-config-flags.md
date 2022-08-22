@@ -39,6 +39,8 @@ The C-Chain config is printed out in the log when a node starts. Default values 
 
 Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change, your node will remain with the old values, which might adversely affect your node operation.
 
+#### State Sync
+
 For example, as of [AvalancheGo v1.7.17 (Verbier)](../../apis/avalanchego/avalanchego-release-notes.md#v1717---verbier-view-on-github), the default for [State Sync](#state-sync-enabled-boolean) is false. In order to enable it, you can add the following to `{chain-config-dir}/C/config.json`
 
 ```json
