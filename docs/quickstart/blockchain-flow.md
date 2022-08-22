@@ -53,7 +53,7 @@ is to pass messages from the network to the consensus engine. It receives these 
 
 ## Sender
 
-The main role of [the `sender`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/sender/sender.go) is to build and send outbound messages. It is actually a very thin wrapper around the normal networking code. The main difference here is that sender registers timeouts and tells the router to expect a response message. The timer starts on the sender side. If there is no response, sender will send a failed response to the router. If a node is repeatedly unresponsive, that node will get benched and senders will immediately start marking those messages as failed. If a sufficient amount of network deems the node benched, it might not get rewards (as a validator).
+The main role of [the `sender`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/sender/sender.go) is to build and send outbound messages. It is actually a very thin wrapper around the normal networking code. The main difference here is that sender registers timeouts and tells the router to expect a response message. The timer starts on the sender side. If there is no response, sender will send a failed response to the router. If a node is repeatedly unresponsive, that node will get benched and the sender will immediately start marking those messages as failed. If a sufficient amount of network deems the node benched, it might not get rewards (as a validator).
 
 ## Consensus Engine
 
