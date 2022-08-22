@@ -34,7 +34,7 @@ Continue the upgrade cycle until all the Subnet nodes are upgraded.
 
 ## Upgrading subnet VM plugin binaries
 
-Besides the AvalancheGo client itself, new versions get released for the VM binaries that run the blockchains on the Subnet. On most Subnets, that is the [subnet-evm](https://github.com/ava-labs/subnet-evm), so we'll discuss that, but the procedure is the similar for other VMs as well.
+Besides the AvalancheGo client itself, new versions get released for the VM binaries that run the blockchains on the Subnet. On most Subnets, that is the [subnet-evm](https://github.com/ava-labs/subnet-evm), so this tutorial will go through the steps for updating the subnet-evm binary. The update process will be similar for updating any VM plugin bianry.
 
 All the considerations for doing staggered node upgrades as discussed in previous section are valid for VM upgrades as well.
 
