@@ -27,7 +27,7 @@ Once the image and metadata files are ready, we can prepare to deploy a smart co
 
 ### MetaMask Extension
 
-You'll need the MetaMask Extension installed on whatever browser you're using to be able to fund the deployment of the smart contract. If you've not done so already, download MetaMask and [add the Fuji network to MetaMask](https://support.avax.network/en/articles/6224787-how-to-connect-metamask-to-the-fuji-testnet). Create or import a Fuji account as necessary.
+You'll need the MetaMask Extension installed on whatever browser you're using to be able to fund the deployment of the smart contract. If you've not done so already, download MetaMask and [add the Fuji network to MetaMask](../launch-your-ethereum-dapp.md#fuji-testnet-settings). Create or import a Fuji account as necessary.
 
 ### Getting Testnet Funds
 
@@ -138,3 +138,11 @@ Head back to the Snowtrace Testnet explorer page for your contract and refresh i
 By clicking on the [Txn Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd696eb8cde6f28347f6f99a2c9), you see that your NFT was created!
 
 ![Snowtrace Transaction](intro-to-erc721s/19-snowtrace-txn.png)
+
+## Mainnet
+
+All of the above steps can be used on Mainnet except the following changes:
+
+- Make sure that you [connect to the Mainnet with Metamask](../launch-your-ethereum-dapp.md#avalanche-mainnet-settings).
+- Make sure that you have AVAX tokens in your account to cover transaction costs.
+- You should use the Mainnet version of [Snowtrace Explorer](https://snowtrace.io/) to view transactions.
