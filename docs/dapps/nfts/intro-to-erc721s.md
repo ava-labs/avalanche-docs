@@ -87,7 +87,7 @@ Once completed, you'll get a green checkmark on the far left tab and will see op
 
 Now, we need to change the environment that Remix will try to use to deploy the smart contract. Click on the `Environment` drop-down, and select `Injected web3`.
 
-![Remix Web3](intro-to-erc721s/8-web3.png)
+![Remix Web3](intro-to-erc721s/8-provider.png)
 
 This should prompt you to connect with your MetaMask account. Once connected, you can verify the correct connection by checking that the Account number matches your MetaMask address.
 
@@ -107,7 +107,7 @@ It may take a second, but once completed, your newly deployed contract will appe
 
 Copy your contract’s address and open the [Snowtrace Testnet Explorer](https://testnet.snowtrace.io/). Paste your contract address in the search bar, and click `Search`.
 
-You'll now see information on your contract. The first transaction you see should be the contract deployment you just did in the Remix IDE.
+You'll now see [your contract information on Snowtrace](https://testnet.snowtrace.io/address/0xa03e85f4411e37cbaff635975bf38cb2737f0015). The first transaction you see should be the contract deployment you just did in the Remix IDE.
 
 ![Snowtrace](intro-to-erc721s/13-snowtrace.png)
 
@@ -135,6 +135,6 @@ Head back to the Snowtrace Testnet explorer page for your contract and refresh i
 
 ![Snowtrace Mint](intro-to-erc721s/18-snowtrace-mint.png)
 
-By clicking on the Txn Hash, you see that your NFT was created!
+By clicking on the [Txn Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd696eb8cde6f28347f6f99a2c9), you see that your NFT was created!
 
 ![Snowtrace Transaction](intro-to-erc721s/19-snowtrace-txn.png)

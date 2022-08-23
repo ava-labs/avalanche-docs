@@ -40,7 +40,7 @@ If you right-click on the image, you can copy the image’s url. This URL is imp
 
 Now that we have the image uploaded and its URL, we can create the matching metadata file for it.
 
-Where this NFT is going to be an ERC-721, we know we can use metadata standards often found on Marketplaces such as Joepegs.com. The .json file below is an example of what the [metadata](https://docs.opensea.io/docs/metadata-standards#metadata-structure) should look like.
+Where this NFT is going to be an ERC-721, we know we can use metadata standards often found on Marketplaces such as [Joepegs.com](https://joepegs.com). The .json file below is an example of what the [metadata](https://docs.opensea.io/docs/metadata-standards#metadata-structure) should look like.
 
 ```json
 {
@@ -85,4 +85,4 @@ You'll now repeat the folder upload process to add the metadata to Pinata. Follo
 
 Click on the metadata folder to be directed to the IPFS gateway and save the URL. This URL will be your base URL and won't need the direct file links. The smart contract will append the necessary file information for each NFT as needed. For example, my URL is `https://gateway.pinata.cloud/ipfs/QmYdWxbiwsfsYcW1CYQPgYujAc9FMLPG3fgFcxFskbSsFa`.
 
-Now that the image and metadata files are ready, we can prepare to deploy a smart contract.
+Now that the image and metadata files are ready, we can prepare to deploy a smart contractt by following this [ERC-721 tutorial](intro-to-erc721s.md).
