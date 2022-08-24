@@ -1,14 +1,20 @@
 # How to Upgrade a Subnet
 
-In the course of Subnet operation, you will inevitably need to upgrade or change some part of the software stack that is running your Subnet. If nothing else, you will have to upgrade the AvalancheGo node client. Same goes for the VM plugin binary that is used to run the blockchain on your Subnet, which is most likely the subnet-evm, the Subnet implementation of the Ethereum virtual machine. Also, you may want to change the configuration of the VM. This tutorial will guide you through the process of doing various Subnet upgrades and changes. We will point out things to watch out for and precautions you need to be mindful about.
+In the course of Subnet operation, you will inevitably need to upgrade or change some part of the software stack that is running your Subnet. If nothing else, you will have to upgrade the AvalancheGo node client. Same goes for the VM plugin binary that is used to run the blockchain on your Subnet, which is most likely the [subnet-evm](https://github.com/ava-labs/subnet-evm), the Subnet implementation of the Ethereum virtual machine.
+
+Node and VM upgrades usually don't change the way your Subnet functions, instead they keep your Subnet in sync with the rest of the network, bringing security, performance and feature upgrades. Most upgrades are optional, but all of them are recommended, and you should make optional upgrades part of your routine Subnet maintenance. Some upgrades will be mandatory, and those will be clearly communicated as such ahead of time, you need to pay special attention to those.
+
+Besides the upgrades due to new releases, you also may want to change the configuration of the VM, to alter the way Subnet runs, for various business or operational needs. These upgrades are solely the purview of your team, and you have complete control over the timing of their rollout. Any such change represents a **network upgrade** and needs to be carefully planned and executed. 
 
 :::warning
 NETWORK UPGRADES PERMANENTLY CHANGE THE RULES OF YOUR SUBNET
 
 Procedural mistakes or a botched upgrade can halt your subnet or lead to data loss!
 
-When performing a subnet upgrade, every single validator on the Subnet will need to perform the identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to every subnet validator so that they have time to perform the upgrade prior to activation.
+When performing a subnet upgrade, every single validator on the Subnet will need to perform the identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to every subnet validator so that they have time to perform the upgrade prior to activation. Make sure you have direct line of communication to all your validators!
 :::
+
+This tutorial will guide you through the process of doing various Subnet upgrades and changes. We will point out things to watch out for and precautions you need to be mindful about.
 
 ## General Upgrade Considerations
 
@@ -16,7 +22,7 @@ When operating a Subnet, you should always keep in mind that Proof of Stake netw
 
 Subnets can operate normally only if validators representing 80% or more of the cumulative validator weight is connected. If the amount of connected stake falls close to or below 80% Subnet performance (time to finality) will suffer, and ultimately the Subnet will halt (stop processing transactions).
 
-You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working.
+You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working at all times.
 
 :::info
 When assigning weight to the nodes, always use values greater than 20, as that is the default value of `snow-sample-size` network parameter and thus a minimum cumulative amount that is needed for normal Subnet operation. Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
@@ -119,16 +125,16 @@ For example, contents of the `upgrade.json` might look like:
 {
   "precompileUpgrades": [
     {
-      "feeManagerConfig": {
+      "txAllowListConfig": {
         "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
-        "blockTimestamp": 1660658400
+        "blockTimestamp": 1664013826
       }
     }
   ]
 }
 ```
 
-With the above we intend to change the FeeManager precompile `adminAddresses` to `0x6f0f6DA1852857d7789f68a28bba866671f3880D` at timestamp `1660658400`, which is the [Unix timestamp](https://www.unixtimestamp.com/) for 10:00 AM EDT 08/16/2022.
+With the above we intend to change the TransactionAllowList precompile `adminAddresses` to `0x6f0f6DA1852857d7789f68a28bba866671f3880D` at timestamp `1664013826`, which is the [Unix timestamp](https://www.unixtimestamp.com/) for UTC time 10:03:46, Sep 24 2022.
 
 Please refer to [Customize a Subnet](customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for a detailed discussion of possible precompile upgrade parameters.
 
@@ -143,8 +149,8 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 “:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\
 “:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\
 “subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\“precompileUpgrades\“:
-[{\“feeManagerConfig\“:{\“adminAddresses\“:[\
-“0x6f0f6da1852857d7789f68a28bba866671f3880d\“],\“blockTimestamp\“:1660658400}}]},
+[{\“txAllowListConfig\“:{\“adminAddresses\“:[\
+“0x6f0f6da1852857d7789f68a28bba866671f3880d\“],\“blockTimestamp\“:1664013826}}]},
 Engine: Dummy Consensus Engine}”
 ```
 
