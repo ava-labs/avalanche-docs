@@ -76,6 +76,16 @@ const sidebars = {
         'dapps/smart-contracts/add-avalanche-programmatically',
       ],
     },
+    {
+      type: 'category',
+      label: 'Non Fungible Tokens (NFTs)',
+      collapsed: false,
+      items: [
+        'dapps/nfts/README',
+        'dapps/nfts/intro-to-erc721s',
+        'dapps/nfts/preparing-nft-files',
+      ],
+    },
   ],
   subnets: [
     'subnets/README',
