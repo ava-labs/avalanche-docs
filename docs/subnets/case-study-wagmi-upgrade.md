@@ -21,11 +21,11 @@ The [WAGMI](https://subnets-test.avax.network/wagmi) ("We're All Going to Make I
 - Min Fee: 1 GWei (4% of C-Chain)
 - Target Block Rate: 2s (Same as C-Chain)
 
-Genesis file of WAGMI Subnet can be found [here](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
+You can check out the [Genesis file of WAGMI Subnet](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json) to see the initial configuration.
 
 ### Network Upgrades: Enable/Disable Precompiles
 
-Detailed description of how to do this can be found [here](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles). Here is a summary:
+Detailed description of how to do this can be found in [Customize a Subnet](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial. Here's a summary:
 
 - Network Upgrade utilizes existing precompile on the Subnet-EVM:
   - Restricting Smart Contract Deployers
@@ -75,7 +75,7 @@ The content of the `upgrade.json` is:
 }
 ```
 
-Detailed explanation of feeManagerConfig can be found [here](./customize-a-subnet.md#configuring-dynamic-fees).
+Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](./customize-a-subnet.md#configuring-dynamic-fees).
 
 With the above `upgrade.json`, we intend to change the `adminAddresses` at timestamp `1660658400`:
 
@@ -86,7 +86,7 @@ We place the `upgrade.json` file in the chain config directory, which in our cas
 
 When the node restarts, AvalancheGo reads the contents of the JSON file and passes it into subnet-evm. We see a log of the chain configuration that includes the updated precompile upgrade. It looks like this:
 
-```
+```text
 INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
 github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration
 config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0
