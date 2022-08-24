@@ -27,12 +27,12 @@ You can check out the [Genesis file of WAGMI Subnet](https://github.com/ava-labs
 
 Detailed description of how to do this can be found in [Customize a Subnet](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial. Here's a summary:
 
-- Network Upgrade utilizes existing precompile on the Subnet-EVM:
-  - Restricting Smart Contract Deployers
-  - Restricting Who Can Submit Transactions
-  - Minting Native Coins
-  - Configuring Dynamic Fees
-- Each of these precomiples can be individually enabled or disabled at a given timestamp as a network upgrade, or any of the parameters governing its behaviour changed.
+- Network Upgrade utilizes existing precompiles on the Subnet-EVM:
+  - ContractDeployerAllowList, for restricting smart contract deployers
+  - TransactionAllowList, for restricting who can submit transactions
+  - NativeMinter, for minting native coins
+  - FeeManager, for configuring dynamic fees
+- Each of these precompiles can be individually enabled or disabled at a given timestamp as a network upgrade, or any of the parameters governing its behaviour changed.
 - These upgrades must be specified in a file named `upgrade.json` placed in the same directory where [`config.json`](#chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
 
 ## Preparation
