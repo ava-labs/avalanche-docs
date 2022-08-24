@@ -96,8 +96,7 @@ const sidebars = {
       items: [
         'subnets/create-a-local-subnet',
         'subnets/create-a-fuji-subnet',
-        'subnets/deploying-subnets-on-prod',
-        'subnets/setup-dfk-node',
+
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
@@ -109,9 +108,25 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/customize-a-subnet',
+        'subnets/create-a-virtual-machine-vm',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Deploy',
+      collapsed: false,
+      items: [
+        'subnets/deploying-subnets-on-prod',
+        'subnets/setup-dfk-node'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Upgrade',
+      collapsed: false,
+      items: [
         'subnets/subnet-upgrade',
         'subnets/case-study-wagmi-upgrade',
-        'subnets/create-a-virtual-machine-vm',
       ],
     },
     {

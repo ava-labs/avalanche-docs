@@ -1,6 +1,6 @@
 # Case Study: WAGMI Upgrade
 
-This case study uses [WAGMI](https://subnets-test.avax.network/wagmi) Subnet upgrade to show how a network upgrade on an EVM-based Subnet can be done simply, and how the resulting upgrade can be used to dynamically control fee structure on the Subnet.
+This case study uses [WAGMI](https://subnets-test.avax.network/wagmi) Subnet upgrade to show how a network upgrade on an EVM-based (Ethereum Virtual Machine) Subnet can be done simply, and how the resulting upgrade can be used to dynamically control fee structure on the Subnet.
 
 ## Introduction
 
@@ -10,7 +10,7 @@ Instead of hardcoding the timing of network upgrades in client code like most EV
 
 ### WAGMI
 
-The [WAGMI](https://subnets-test.avax.network/wagmi) ("We're All Going to Make It") Subnet Demo is a high throughput testbed for EVM (Ethereum Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet C-Chain and will be used to experiment with release candidates before they make it into an official coreth release.
+The [WAGMI](https://subnets-test.avax.network/wagmi) ("We're All Going to Make It") Subnet Demo is a high throughput testbed for EVM optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet C-Chain and will be used to experiment with release candidates before they make it into an official coreth release.
 
 #### Network Parameters
 
@@ -21,7 +21,7 @@ The [WAGMI](https://subnets-test.avax.network/wagmi) ("We're All Going to Make I
 - Min Fee: 1 GWei (4% of C-Chain)
 - Target Block Rate: 2s (Same as C-Chain)
 
-You can check out the [Genesis file of WAGMI Subnet](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json) to see the initial configuration.
+You can check out the [Genesis file of WAGMI Subnet](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json) to see the initial configuration.
 
 ### Network Upgrades: Enable/Disable Precompiles
 
@@ -32,7 +32,7 @@ Detailed description of how to do this can be found in [Customize a Subnet](./cu
   - TransactionAllowList, for restricting who can submit transactions
   - NativeMinter, for minting native coins
   - FeeManager, for configuring dynamic fees
-- Each of these precompiles can be individually enabled or disabled at a given timestamp as a network upgrade, or any of the parameters governing its behaviour changed.
+- Each of these precompiles can be individually enabled or disabled at a given timestamp as a network upgrade, or any of the parameters governing its behavior changed.
 - These upgrades must be specified in a file named `upgrade.json` placed in the same directory where [`config.json`](#chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
 
 ## Preparation
@@ -84,7 +84,7 @@ With the above `upgrade.json`, we intend to change the `adminAddresses` at times
 
 We place the `upgrade.json` file in the chain config directory, which in our case is `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/`. After that, we restart the node so the upgrade file is loaded.
 
-When the node restarts, AvalancheGo reads the contents of the JSON file and passes it into subnet-evm. We see a log of the chain configuration that includes the updated precompile upgrade. It looks like this:
+When the node restarts, AvalancheGo reads the contents of the JSON file and passes it into Subnet-EVM. We see a log of the chain configuration that includes the updated precompile upgrade. It looks like this:
 
 ```text
 INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
@@ -120,11 +120,16 @@ And then open the `Manage Networks` menu in the networks dropdown. Select WAGMI 
 
 ![Core network selection](/img/network-upgrade/core-network-select.png)
 
-We then switch to WAGMI in the networks dropdown. We are ready to move on to Remix now, so we open it in the browser. First, we check that Remix sees the extension and correctly talks to it. We select `Deploy & run transactions` icon on the left edge, and on the Environment dropdown, select `Injected Provider`. We need to approve the Remix network access in the browser extension. When that is done, `Custom (11111) netowrk` is shown:
+We then switch to WAGMI in the networks dropdown. We are ready to move on to Remix now, so we open it in the browser. First, we check that Remix sees the extension and correctly talks to it. We select `Deploy & run transactions` icon on the left edge, and on the Environment dropdown, select `Injected Provider`. We need to approve the Remix network access in the Core browser extension. When that is done, `Custom (11111) network` is shown:
 
 ![Injected provider](/img/network-upgrade/remix-injected-provider.png)
 
-Good, we're talking to WAGMI Subnet. Next we need to load the contracts into Remix. Using 'load from Github' option from the Remix homescreen we load two contracts: [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract-examples/contracts/IAllowList.sol) and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract-examples/contracts/IFeeManager.sol). IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We compile IFeeManager.sol and deploy at the precompile address `0x0200000000000000000000000000000000000003` used on the [Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go#L33).
+Good, we're talking to WAGMI Subnet. Next we need to load the contracts into Remix. Using 'load from Github' option from the Remix homescreen we load two contracts:
+
+- [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract-examples/contracts/IAllowList.sol)
+- and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract-examples/contracts/IFeeManager.sol).
+
+IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We compile IFeeManager.sol and deploy at the precompile address `0x0200000000000000000000000000000000000003` used on the [Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go#L33).
 
 ![Deployed contract](/img/network-upgrade/deployed-contract.png)
 
@@ -146,4 +151,4 @@ That's it, fees changed! No network upgrades, no complex and risky deployments, 
 
 Network upgrades can be complex and perilous procedures to carry out safely. Our continuing efforts with Subnets is to make upgrades as painless and simple as possible. With the powerful combination of stateful precompiles and network upgrades via the upgrade configuration files we have managed to greatly simplify both the network upgrades and network parameter changes. This in turn enables much safer experimentation and many new use cases that were too risky and complex to carry out with high-coordination efforts required with the traditional network upgrade mechanisms.
 
-We hope this case study will help spark ideas for new things you may try on your own. We're looking forward to seeing what you have built and how easy upgrades help you in managing your Subnets! If you have any questions or issues, feel free to contact us on our [Discord](https://chat.avalabs.org). Or just reach out to tell us what exciting new things you have built! 
+We hope this case study will help spark ideas for new things you may try on your own. We're looking forward to seeing what you have built and how easy upgrades help you in managing your Subnets! If you have any questions or issues, feel free to contact us on our [Discord](https://chat.avalabs.org). Or just reach out to tell us what exciting new things you have built!
