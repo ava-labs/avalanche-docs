@@ -99,8 +99,8 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/customize-a-subnet',
-        'subnets/network-upgrade',
         'subnets/subnet-upgrade',
+        'subnets/case-study-wagmi-upgrade',
         'subnets/create-a-virtual-machine-vm',
       ],
     },
