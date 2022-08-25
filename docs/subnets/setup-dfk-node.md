@@ -29,7 +29,7 @@ Next, you will clone the DFK subnet-evm repository:
 cd $GOPATH/src/github.com
 mkdir DeFiKingdoms
 cd DeFiKingdoms
-git clone https://github.com/DefiKingdoms/subnet-evm
+git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
@@ -87,7 +87,7 @@ If you want to pass the whitelisted Subnets through the command line flag. You c
 ## Just Want the Commands? We Got You...
 
 :::caution
-Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.18.1 or above.** Run `echo $GOPATH`. **It should not be empty.**
 :::
 
 ```bash
@@ -100,7 +100,7 @@ cd avalanchego
 cd $GOPATH/src/github.com
 mkdir DeFiKingdoms
 cd DeFiKingdoms
-git clone https://github.com/DefiKingdoms/subnet-evm
+git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
