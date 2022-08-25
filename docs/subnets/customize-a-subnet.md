@@ -286,7 +286,7 @@ Similar to restricting contract deployers, this precompile restricts which addre
 ```
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables them to add other `Admins` or to add
+`Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
 `Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
 
 The `Stateful Precompile` powering the `TxAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
