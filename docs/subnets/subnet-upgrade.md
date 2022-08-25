@@ -25,7 +25,7 @@ Subnets can operate normally only if validators representing 80% or more of the 
 You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working at all times.
 
 :::info
-When assigning weight to the nodes, always use values greater than 20, as that is the default value of [`snow-sample-size` network parameter](../nodes/maintain/avalanchego-config-flags.md#snow-sample-size-int) and thus a minimum cumulative amount that is needed for normal Subnet operation. Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
+It is mandatory that the cumulative weight of all validators in the Subnet must be at least the value of [`snow-sample-size`](../nodes/maintain/avalanchego-config-flags.md#snow-sample-size-int) (default 20). For example, if there is only one validator in the Subnet, its weight must be at least `snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20. Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 :::
 
 ## Upgrading Subnet Validator Nodes
