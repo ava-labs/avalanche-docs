@@ -112,7 +112,9 @@ The owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D` can now configure the fee
 
 We will use [Remix](https://remix.ethereum.org) online Solidity IDE and the [Core Browser Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension). Core comes with WAGMI network built-in. Metamask will do as well but you will need to [add WAGMI](./wagmi.md#adding-wagmi-to-metamask) yourself.
 
-First we connect Core to WAGMI. Switch on the `Testnet Mode` in `Advanced` page in the hamburger menu:
+First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
+
+Then we connect Core to WAGMI, Switch on the `Testnet Mode` in `Advanced` page in the hamburger menu:
 
 ![Core testnet mode](/img/network-upgrade/core-testnet-mode.png)
 
@@ -133,7 +135,9 @@ IFeeManager is our precompile, but it references the IAllowList, so we need that
 
 ![Deployed contract](/img/network-upgrade/deployed-contract.png)
 
-Now we can interact with the FeeManager precompile from within Remix via Core. For example, we can use the `getFeeConfig` method to check the current fee configuration. Once we have the new desired configuration for the fees on the Subnet, we can use the `setFeeConfig` to change the parameters:
+Now we can interact with the FeeManager precompile from within Remix via Core. For example, we can use the `getFeeConfig` method to check the current fee configuration. This action can be performed by anyone as it is just a read operation.
+
+Once we have the new desired configuration for the fees on the Subnet, we can use the `setFeeConfig` to change the parameters. This action can **only** be performed by the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json` above](#deploying-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 
@@ -141,7 +145,7 @@ When we call that method by pressing the `transact` button, a new transaction is
 
 ![transaction](/img/network-upgrade/wagmi-tx.png)
 
-Immediately after the transaction is accepted, the new fee config takes effect. We can check with the `getFeeCofig` that the values are reflected in the active fee config:
+Immediately after the transaction is accepted, the new fee config takes effect. We can check with the `getFeeCofig` that the values are reflected in the active fee config (again this action can be performed by anyone):
 
 ![getFeeConfig](/img/network-upgrade/getFeeConfig.png)
 
