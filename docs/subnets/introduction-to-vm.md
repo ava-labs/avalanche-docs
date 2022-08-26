@@ -1,4 +1,4 @@
-# Introduction to Virtual Machines
+# Introduction to VMs
 
 ## Overview
 
