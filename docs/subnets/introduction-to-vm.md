@@ -52,7 +52,7 @@ Users can interact with a blockchain and its VM through handlers exposed by the 
 VMs expose two types of handlers to serve responses for incoming requests:
 
 - **Blockchain Handlers** - Referred to as handlers, these expose APIs to interact with a blockchain instantiated by a VM. The API's endpoint will be different for each chain. The endpoint for a handler is `/ext/bc/[chainID]`.
-- **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The access path pattern is `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
+- **VM Handlers** - Referred to as static handlers, these expose APIs to interact with the VM directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint for a static handler is `/ext/vm/[vmID]`.
 
 For any readers familiar with object-oriented programming, this is very similar to static and non-static methods on a class. Blockchain handlers are the methods on the object, blockchain in this case, while VM handlers are the methods on the class, VM.
 
