@@ -164,7 +164,7 @@ type Parser interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go)
+For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go).
 
 ```go title="/snow/engine/common/vm.go"
 // VM describes the interface that all consensus VMs must implement
