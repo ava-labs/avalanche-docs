@@ -255,7 +255,7 @@ type VM interface {
 
 The `snowman.Block` interface It define the functionality a block must implement to be a block in a linear Snowman chain.
 
-Let’s look at this interface and its methods. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go).
 
 ```go title="/snow/consensus/snowman/block.go"
 // Block is a possible decision that dictates the next canonical block.
