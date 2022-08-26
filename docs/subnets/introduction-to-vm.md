@@ -41,7 +41,7 @@ This decoupling between the application and consensus layer allows developers to
 
 VMs are supplied as binaries to a node running `AvalancheGo`. These binaries must be named the VM's assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
 
-In order to load a VM, its binary must be put it the proper place where `AvalancheGo` can find and load it. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. There could be multiple VM plugins in this directory.
+In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. Multiple VMs can be installed in this location.
 
 Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC calls. This is functionality is enabled by `rpcchainvm`, a special VM that wraps around other VM implementations so that they can communicate back and forth with the AvalancheGo.
 
