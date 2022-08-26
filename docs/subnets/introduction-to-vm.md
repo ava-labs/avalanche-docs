@@ -86,9 +86,6 @@ if err := vm.Initialize(
 
 You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L92) of `vm.initialize` in the BlobVM repository.
 
-### Interaction
-
-We can use the API handlers to issue transactions, query chain state, and other functionalities provided by the blockchain.
 
 ### ProposerVM and Consensus Engine
 
