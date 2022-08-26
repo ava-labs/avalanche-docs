@@ -47,7 +47,7 @@ Each VM runs as a separate process from AvalancheGo and communicates with `Avala
 
 ### API Handlers
 
-Users can interact with a blockchain and underlying VM through API handlers. Specifically, these handlers are implemented as **Services**.
+Users can interact with a blockchain and its VM through handlers exposed by the VM's API.
 
 Handlers serve responses for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently communicating with other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
 
