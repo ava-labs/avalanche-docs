@@ -437,7 +437,56 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-### Examples
+#### eth_FeeConfig API
+
+Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
+
+**Signature**
+
+```sh
+eth_feeConfig({
+    blk: BlkNrOrHash,
+}) -> {feeConfig: json}
+```
+
+- `blk` is the block number or hash at which to retrieve the fee config.
+
+**Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_feeConfig",
+    "params": [
+        "latest"
+    ],
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "feeConfig": {
+      "gasLimit": 8000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 33000000000,
+      "targetGas": 15000000,
+      "baseFeeChangeDenominator": 36,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 1000000,
+      "blockGasCostStep": 200000
+    },
+    "lastChangedAt": 0
+  }
+}
+```
+
+## Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
