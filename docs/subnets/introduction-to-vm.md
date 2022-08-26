@@ -26,12 +26,12 @@ A blockchain relies on two major components: The **Consensus Engine** and the **
 
 1. A node wants to update the blockchain's state
 2. The node's VM will notify the consensus engine that it wants to update the state
-3. Consensus engine will request the block from the VM with updates
-4. Consensus engine will verify the returned block and rely on VM's implementation of `verify()` method
-5. Consensus engine will gossip the successfully verified blocks within the network to reach consensus on this block
-6. Depending upon the consensus results, the engine can either accept or reject the block
-7. Every virtuous node on the network should have the same verdict for a particular block
-8. It depends on the VM implementation on what to do with the accepted or rejected block
+3. The consensus engine will request the block from the VM
+4. The consensus engine will verify the returned block using the VM's implementation of `Verify()`
+5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly verified block
+    - Every virtuous (well-behaved) node on the network will have the same preference for a particular block
+6. Depending upon the consensus results, the engine will either accept or reject the block
+    - What happens when a block is accepted or rejected is specific to the implementation of the VM
 
 AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
 
