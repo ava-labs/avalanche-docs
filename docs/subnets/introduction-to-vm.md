@@ -294,7 +294,7 @@ type Block interface {
 
 ### `choices.Decidable`
 
-This interface is the superset of every decidable object, such as transactions, blocks, and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go)
+This interface is a superset of every decidable object, such as transactions, blocks, and vertices. For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go).
 
 ```go title="/snow/choices/decidable.go"
 // Decidable represents element that can be decided.
