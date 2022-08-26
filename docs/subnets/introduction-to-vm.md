@@ -4,7 +4,7 @@
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
-- Introduction to Virtual Machines (this article)
+- Introduction to VMs (this article)
 - [How to Build a Simple VM](./create-a-vm-timestampvm.md)
 - [How to Build a Complex VM](./create-a-vm-blobvm.md)
 
