@@ -94,7 +94,7 @@ Every VM should implement the following interfaces:
 
 ### `block.ChainVM`
 
-To reach a consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessed from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface. For more information, see [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 ```go title="/snow/engine/snowman/block/vm.go"
 // ChainVM defines the required functionality of a Snowman VM.
