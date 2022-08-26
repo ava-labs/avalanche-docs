@@ -43,7 +43,7 @@ VMs are created as a module, whose binary is registered by a node running `Avala
 
 In order to load a VM, its binary must be put it the proper place where `AvalancheGo` can find and load it. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. There could be multiple VM plugins in this directory.
 
-A VM can be initialized as blockchains. A blockchain can run as a separate process from AvalancheGo and can communicate with `AvalancheGo` over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
+Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC calls. This is functionality is enabled by `rpcchainvm`, a special VM that wraps around other VM implementations so that they can communicate back and forth with the AvalancheGo.
 
 ### API Handlers
 
