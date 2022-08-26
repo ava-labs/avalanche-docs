@@ -90,8 +90,6 @@ You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/ma
 
 ## Interfaces
 
-As stated before, the VM is responsible for parsing, storing, and building blocks (in no particular order) and must also handle the verification, acceptance/rejection of blocks and performing the corresponding state transitions.
-
 Every VM should implement the following interfaces:
 
 ### `block.ChainVM`
