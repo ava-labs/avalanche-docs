@@ -39,7 +39,7 @@ This decoupling between the application and consensus layer allows developers to
 
 ## Installing a VM
 
-VMs are created as a module, whose binary is registered by a node running `AvalancheGo`, against the **vmID** (binary file name must be vmID). VMID is a string that is zero-extended to a 32-byte array and encoded in CB58.
+VMs are supplied as binaries to a node running `AvalancheGo`. These binaries must be named the VM's assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
 
 In order to load a VM, its binary must be put it the proper place where `AvalancheGo` can find and load it. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. There could be multiple VM plugins in this directory.
 
