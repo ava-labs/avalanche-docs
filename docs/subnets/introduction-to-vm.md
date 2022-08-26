@@ -49,7 +49,7 @@ Each VM runs as a separate process from AvalancheGo and communicates with `Avala
 
 Users can interact with a blockchain and its VM through handlers exposed by the VM's API.
 
-Handlers serve responses for the incoming HTTP requests; and handlers can also be wrapped with **gRPC** for efficiently communicating with other services such as `AvalancheGo`. VM implements 2 kinds of handlers:
+VMs expose two types of handlers to serve responses for incoming requests:
 
 - **Blockchain Handlers** - They help in interacting with blockchains instantiated by the VM. The API's endpoint will be different for different chains. The access path pattern is `/ext/bc/[chainID]`. In the VM code, they are referred as just handlers.
 - **VM Handlers** - They help in accessing VM directly. These are optional for reasons such as parsing genesis bytes required to instantiate new blockchains. The access path pattern is `/ext/vm/[vmID]`. In the VM code, they are referred as static handlers.
