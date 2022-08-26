@@ -2,7 +2,7 @@
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
-- [Introduction to Virtual Machines](./introduction-to-vm.md)
+- [Introduction to VMs](./introduction-to-vm.md)
 - How to Build a Simple VM (this article)
 - [How to Build a Complex VM](./create-a-vm-blobvm.md)
 
