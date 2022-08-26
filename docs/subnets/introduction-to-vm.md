@@ -22,7 +22,7 @@ Each block in the blockchain contains a set of state transitions. Each block is 
 
 ## Blockchain
 
-A blockchain relies on 2 components: **Consensus Engine** and **Virtual Machine**. VM is the blueprint for a blockchain that mainly deals with the implementation related to the block's structure: building and parsing. The Consensus Engine helps in reaching consensus on the block built by the VM. Here is a brief overview:
+A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines application specific behavior and how blocks are and built and parsed to create the blockchain. VMs all run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the state of the blockchain. Here's a quick example of how VMs interact with consensus:
 
 1. A node wants to update the blockchain's state
 2. The node's VM will notify the consensus engine that it wants to update the state
