@@ -163,7 +163,7 @@ type Parser interface {
 
 ### `common.VM`
 
-`common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
+`common.VM` is a type that every `VM` must implement.
 
 For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go).
 
