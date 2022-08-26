@@ -67,7 +67,9 @@ func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil
 
 ### Initializing a VM to Create a Blockchain
 
-Blockchains are functional, only when the instantiated VMs are initialized and the node has been bootstrapped. Initializing a VM involves setting up the database, block builder, mempool, genesis state, handlers, etc. This will expose the VM's API handlers, start accepting transactions, gossiping them across the network, building blocks, etc. More details on it can be found in the [third part](./create-a-vm-blobvm.md#initialize) of this series.
+Before a VM can run, AvalancheGo will initialize it by invoking its `Initialize` method. Here, the VM will bootstrap itself and sets up anything it requires before it starts running.
+
+This might involve setting up its database, mempool, genesis state, or anything else the VM requires to run. For more information, see the [third part](./create-a-vm-blobvm.md#initialize) of this series.
 
 ```go
 if err := vm.Initialize(
