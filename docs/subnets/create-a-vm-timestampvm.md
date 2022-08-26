@@ -16,7 +16,7 @@ Such a server is useful because it can be used to prove a piece of data existed 
 
 Make sure you're familiar with the previous tutorial in this series, which dives into what virtual machines are.
 
-- [Introduction to Virtual Machines](./introduction-to-vm.md)
+- [Introduction to VMs](./introduction-to-vm.md)
 
 ## TimestampVM Implementation
 
