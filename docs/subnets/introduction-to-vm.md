@@ -37,7 +37,7 @@ AvalancheGo provides the consensus engine for every blockchain on the Avalanche 
 
 This decoupling between the application and consensus layer allows developers to build their applications quickly by implementing virtual machines, without having to worry about the consensus layer managed by Avalanche which deals with how nodes agree on whether or not to accept a block.
 
-## Load a VM
+## Installing a VM
 
 VMs are created as a module, whose binary is registered by a node running `AvalancheGo`, against the **vmID** (binary file name must be vmID). VMID is a string that is zero-extended to a 32-byte array and encoded in CB58.
 
