@@ -58,7 +58,7 @@ For any readers familiar with object-oriented programming, static and non-static
 
 ### Instantiate a VM
 
-Each VM has a **factory** that is to create new VM instances from which a blockchain can be initialized. The factory's `New` method as shown below, returns the VM's instance to its caller in `AvalancheGo`. It's generally in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the VM.
+The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the VM. It's defined in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the `blobvm` repository.
 
 ```go
 // Returning a new VM instance from VM's factory
