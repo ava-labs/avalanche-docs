@@ -444,9 +444,7 @@ Subnet-EVM comes with an API request for getting fee config at a specific block.
 **Signature**
 
 ```sh
-eth_feeConfig({
-    blk: BlkNrOrHash,
-}) -> {feeConfig: json}
+eth_feeConfig([blk BlkNrOrHash]) -> {feeConfig: json}
 ```
 
 - `blk` is the block number or hash at which to retrieve the fee config.
@@ -576,6 +574,140 @@ If aborting an upgrade becomes necessary, you can remove the precompile upgrade 
 This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables `txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig` at the first block with timestamp >= `1668970000`.
 
 When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
+
+### eth_getChainConfig
+
+`eth_getChainConfig` returns chain config with parsed upgrade bytes.
+
+**Signature**
+
+```sh
+eth_getChainConfig({}) -> {chainConfig: json}
+```
+
+**Example Call**
+
+```sh
+curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc": "2.0",
+    "method": "eth_getChainConfig",
+    "params": [],
+    "id": 1
+}'
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "chainId": 43214,
+    "feeConfig": {
+      "gasLimit": 8000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 33000000000,
+      "targetGas": 15000000,
+      "baseFeeChangeDenominator": 36,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 1000000,
+      "blockGasCostStep": 200000
+    },
+    "allowFeeRecipients": true,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "contractDeployerAllowListConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    },
+    "contractNativeMinterConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    },
+    "feeManagerConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    },
+    "upgrades": {
+      "precompileUpgrades": [
+        {
+          "feeManagerConfig": {
+            "adminAddresses": null,
+            "blockTimestamp": 1661541259,
+            "disable": true
+          }
+        },
+        {
+          "feeManagerConfig": {
+            "adminAddresses": null,
+            "blockTimestamp": 1661541269
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+### eth_getActivatedPrecompiles
+
+`eth_getActivatedPrecompiles` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp.
+
+**Signature**
+
+```sh
+eth_getActivatedPrecompiles([timestamp uint]) -> {precompiles: []Precompile}
+```
+
+- `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it shows precompiles activated at the latest block timestamp.
+
+**Example Call**
+
+```sh
+curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc": "2.0",
+    "method": "eth_getActivatedPrecompiles",
+    "params": [],
+    "id": 1
+}'
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "contractDeployerAllowListConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    },
+    "contractNativeMinterConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    },
+    "feeManagerConfig": {
+      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+      "blockTimestamp": 0
+    }
+  }
+}
+```
 
 ## Chain Configs
 
