@@ -661,14 +661,14 @@ curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZs
 }
 ```
 
-### eth_getActivatedPrecompiles
+### eth_getActivatePrecompilesAt
 
-`eth_getActivatedPrecompiles` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp.
+`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp.
 
 **Signature**
 
 ```sh
-eth_getActivatedPrecompiles([timestamp uint]) -> {precompiles: []Precompile}
+eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
 ```
 
 - `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it shows precompiles activated at the latest block timestamp.
@@ -680,7 +680,7 @@ curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZs
 --header 'Content-Type: application/json' \
 --data-raw '{
     "jsonrpc": "2.0",
-    "method": "eth_getActivatedPrecompiles",
+    "method": "eth_getActivatePrecompilesAt",
     "params": [],
     "id": 1
 }'
