@@ -6,7 +6,9 @@ Description: How to customize a Subnet by utilizing Genesis, Precompile and Bloc
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
-And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
+A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](../nodes/maintain/chain-config-flags.md) for detailed explanation.
+
+A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
 
 - [Genesis](#genesis)
 - [Precompile](#precompiles)
