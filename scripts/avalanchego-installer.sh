@@ -60,7 +60,7 @@ create_config_file () {
   rm -f config.json
   echo "{" >>config.json
   if [ "$archivalOpt" = "true" ]; then
-    echo "  \"pruning-enabled\": \"false\"">>config.json
+    echo "  \"pruning-enabled\": false">>config.json
   fi
   echo "}" >>config.json
   mkdir -p $HOME/.avalanchego/configs/chains/C
