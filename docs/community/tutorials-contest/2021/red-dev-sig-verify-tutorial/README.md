@@ -75,14 +75,14 @@ First, you will need to hash the original message. Here is the standard way of h
 
 ***sha256(length(prefix) + prefix + length(message) + message)***
 
-The prefix is a so-called "magic prefix" string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an integer of the message size. After concatenating these together, hash the result with `sha256`. For example:
+The prefix is a so-called "magic prefix" string `0x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an integer of the message size. After concatenating these together, hash the result with `sha256`. For example:
 
 ```typescript
 function hashMessage(message: string) {
     let mBuf: Buffer = Buffer.from(message, 'utf8')
     let msgSize: Buffer = Buffer.alloc(4)
     msgSize.writeUInt32BE(mBuf.length, 0)
-    let msgBuf: Buffer = Buffer.from(`\x1AAvalanche Signed Message:\n${msgSize}${message}`, 'utf8')
+    let msgBuf: Buffer = Buffer.from(`0x1AAvalanche Signed Message:\n${msgSize}${message}`, 'utf8')
     let hash: Buffer = createHash('sha256').update(msgBuf).digest()
     let hashex: string = hash.toString('hex')
     let hashBuff: Buffer = Buffer.from(hashex, 'hex')
