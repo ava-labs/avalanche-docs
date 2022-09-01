@@ -6,7 +6,9 @@ Description: How to customize a Subnet by utilizing Genesis, Precompile and Bloc
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
-And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
+A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](../nodes/maintain/chain-config-flags.md) for detailed explanation.
+
+A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
 
 - [Genesis](#genesis)
 - [Precompile](#precompiles)
@@ -123,7 +125,7 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 
 ### Examples
 
-Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
+Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 Here are a few examples on how a genesis file is used:
 
@@ -286,7 +288,7 @@ Similar to restricting contract deployers, this precompile restricts which addre
 ```
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables them to add other `Admins` or to add
+`Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
 `Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
 
 The `Stateful Precompile` powering the `TxAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
@@ -437,7 +439,56 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-### Examples
+#### eth_FeeConfig API
+
+Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
+
+**Signature**
+
+```sh
+eth_feeConfig({
+    blk: BlkNrOrHash,
+}) -> {feeConfig: json}
+```
+
+- `blk` is the block number or hash at which to retrieve the fee config.
+
+**Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_feeConfig",
+    "params": [
+        "latest"
+    ],
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "feeConfig": {
+      "gasLimit": 8000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 33000000000,
+      "targetGas": 15000000,
+      "baseFeeChangeDenominator": 36,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 1000000,
+      "blockGasCostStep": 200000
+    },
+    "lastChangedAt": 0
+  }
+}
+```
+
+## Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 

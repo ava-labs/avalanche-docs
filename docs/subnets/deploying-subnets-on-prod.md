@@ -1,4 +1,4 @@
-# Deploying Subnets on Production Infrastructure
+# Deploy Subnets on Production Infrastructure
 
 ## Introduction
 
