@@ -4,6 +4,8 @@ A **Subnet** is a sovereign network which defines its own rules regarding its me
 
 Avalanche's 3 built-in blockchains: Platform Chain (P-Chain), Contract Chain (C-Chain) and Exchange Chain (X-Chain) are validated and secured by all the Avalanche validators which compose a special Subnet and is referred as the Primary Network.
 
+By definition, all Subnet validators must also validate the Avalanche Primary Network.
+
 ![image](/img/subnet-validators.png)
 
 (Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
