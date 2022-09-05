@@ -6,6 +6,14 @@
 
 :::
 
+## v1.8.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.1))
+
+Please upgrade your node as soon as possible.
+
+The changes in `v1.8.x` go into effect at 4 PM EDT on September 6th, 2022 on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+This release reduces flaky logging errors caused by nodes that have not yet upgraded to `v1.8.x`.
+
 ## v1.8.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0))
 
 This is a mandatory security upgrade. Please upgrade your node **as soon as possible.**
