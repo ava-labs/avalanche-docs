@@ -6,6 +6,11 @@
 
 :::
 
+## v1.8.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.4))
+
+Please upgrade your node **as soon as possible**.
+
+This release fixes a performance regression introduced in v1.8.x when serving blocks to peers.
 
 ## v1.8.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.2))
 
