@@ -6,6 +6,15 @@
 
 :::
 
+## v1.8.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.5))
+
+**Please upgrade your node as soon as possible.**
+
+This release fixes:
+
+- Invalid block status caching that prevented issuance of new blocks into consensus
+- Upgrade path when updating directly from `v1.7.x` to `>= v1.8.4`
+
 ## v1.8.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.4))
 
 Please upgrade your node **as soon as possible**.
