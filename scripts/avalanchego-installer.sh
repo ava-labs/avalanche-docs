@@ -37,10 +37,10 @@ create_config_file () {
     echo "  \"http-host\": \"\",">>node.json
   fi
   if [ "$adminOpt" = "true" ]; then
-    echo "  \"api-admin-enabled \": \"true\",">>node.json
+    echo "  \"api-admin-enabled\": true,">>node.json
   fi
   if [ "$indexOpt" = "true" ]; then
-    echo "  \"index-enabled\": \"true\",">>node.json
+    echo "  \"index-enabled\": true,">>node.json
   fi
   if [ "$fujiOpt" = "true" ]; then
     echo "  \"network-id\": \"fuji\",">>node.json
