@@ -240,6 +240,7 @@ const sidebars = {
     'specs/serialization-primitives',
     'specs/platform-transaction-serialization',
     'specs/abigen',
+    'specs/blueberry-changes'
   ],
 
 
