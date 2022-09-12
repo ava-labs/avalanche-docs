@@ -1,6 +1,6 @@
 # Blueberry Changes
 
-This document specifies changes in Avalanche “Blueberry” (AvalancheGo v1.8.x) from Avalanche Apricot Phase 5 (AvalancheGo v1.7.x).
+This document specifies changes in Avalanche “Blueberry”, which was pre-released in AvalancheGo v1.8.x and will be finalized in AvalancheGo v1.9.x, from Avalanche Apricot Phase 5 (AvalancheGo v1.7.x).
 
 ## Block Changes
 
