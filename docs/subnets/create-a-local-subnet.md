@@ -104,7 +104,7 @@ If you don't provide any arguments, the Subnet creation wizard will walk you thr
 
 Example:
 
-Command `avalanche subnet create firstsubet` walks through following questions:
+Command `avalanche subnet create firstsubnet` walks through following questions:
 
 - Choose a VM: default to SubnetEVM
 - Pick a chain ID
