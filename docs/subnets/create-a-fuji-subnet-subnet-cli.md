@@ -2,7 +2,7 @@
 
 :::note
 
-For the latest tool to deploy a Subnet on Fuji, please refer to [this article](./create-a-fuji-subnet.md). This artical is still applicable for Mainnet deploy with a Ledger.
+For the latest tool to deploy a Subnet on Fuji, please refer to [this article](./create-a-fuji-subnet.md). This article is still applicable for Mainnet deploy with a Ledger.
 
 :::
 
