@@ -122,7 +122,6 @@ check_reqs_rhel () {
   fi
 }
 getOsType () {
-case `uname` in
   which yum && { echo "RHEL"; return; }
   which zypper && { echo "openSUSE"; return; }
   which apt-get && { echo "Debian"; return; }
