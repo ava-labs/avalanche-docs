@@ -122,9 +122,9 @@ check_reqs_rhel () {
   fi
 }
 getOsType () {
-  which yum && { echo "RHEL"; return; }
-  which zypper && { echo "openSUSE"; return; }
-  which apt-get && { echo "Debian"; return; }
+  which yum 1>/dev/null 2>&1 && { echo "RHEL"; return; }
+  which zypper 1>/dev/null 2>&1 && { echo "openSUSE"; return; }
+  which apt-get 1>/dev/null 2>&1 && { echo "Debian"; return; }
 }
 
 
@@ -241,7 +241,7 @@ elif [ "$osType" = "RHEL" ]; then
   check_reqs_deb
 else
   #sorry, don't know you.
-  echo "Unsupported linux flavour/distribution: $osType!"
+  echo "Unsupported linux flavour/distribution: $osType"
   echo "Exiting."
   exit
 fi
