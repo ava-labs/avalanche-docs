@@ -87,7 +87,7 @@ remove_service_file () {
 }
 
 #helper function to check for presence of required commands, and install if missing
-check_reqs () {
+check_reqs_deb () {
   if ! command -v curl &> /dev/null
   then
       echo "curl could not be found, will install..."
@@ -104,6 +104,30 @@ check_reqs () {
       sudo apt-get install dnsutils -y
   fi
 }
+check_reqs_rhel () {
+  if ! command -v curl &> /dev/null
+  then
+      echo "curl could not be found, will install..."
+      sudo dnf install curl -y
+  fi
+  if ! command -v wget &> /dev/null
+  then
+      echo "wget could not be found, will install..."
+      sudo dnf install wget -y
+  fi
+  if ! command -v dig &> /dev/null
+  then
+      echo "dig could not be found, will install..."
+      sudo dnf install bind-utils -y
+  fi
+}
+getOsType () {
+case `uname` in
+  which yum && { echo "RHEL"; return; }
+  which zypper && { echo "openSUSE"; return; }
+  which apt-get && { echo "Debian"; return; }
+}
+
 
 #helper function that prints usage
 usage () {
@@ -201,13 +225,24 @@ if [ "$#" != 0 ]; then
 fi
 
 echo "Preparing environment..."
-check_reqs
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
 foundOS="$(uname)"                              #get OS
 if [ "$foundOS" != "Linux" ]; then
   #sorry, don't know you.
   echo "Unsupported operating system: $foundOS!"
+  echo "Exiting."
+  exit
+fi
+osType=$(getOsType) 
+if [ "$osType" = "Debian" ]; then
+  #sorry, don't know you.
+  check_reqs_deb
+elif [ "$osType" = "RHEL" ]; then
+  check_reqs_deb
+else
+  #sorry, don't know you.
+  echo "Unsupported linux flavour/distribution: $osType!"
   echo "Exiting."
   exit
 fi
