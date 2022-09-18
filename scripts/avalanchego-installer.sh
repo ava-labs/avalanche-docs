@@ -229,7 +229,7 @@ if [ "$osType" = "Debian" ]; then
   #sorry, don't know you.
   check_reqs_deb
 elif [ "$osType" = "RHEL" ]; then
-  check_reqs_deb
+  check_reqs_rhel
 else
   #sorry, don't know you.
   echo "Unsupported linux flavour/distribution: $osType"
