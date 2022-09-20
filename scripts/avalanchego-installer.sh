@@ -120,6 +120,16 @@ check_reqs_rhel () {
       echo "dig could not be found, will install..."
       sudo dnf install bind-utils -y
   fi
+  if ! command -v semanage &> /dev/null
+  then
+      echo "semanage could not be found, will install..."
+      sudo dnf install policycoreutils-python-utils -y
+  fi
+  if ! command -v restorecon &> /dev/null
+  then
+      echo "restorecon could not be found, will install..."
+      sudo dnf install policycoreutils -y
+  fi
 }
 getOsType () {
   which yum 1>/dev/null 2>&1 && { echo "RHEL"; return; }
