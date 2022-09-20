@@ -50,7 +50,7 @@ Each chain has one or more index. To see if a C-Chain block is accepted, for exa
 /ext/index/C/block
 ```
 
-## API Methods
+## Methods
 
 ### index.getLastAccepted
 
