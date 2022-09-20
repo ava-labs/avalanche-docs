@@ -307,8 +307,8 @@ echo "Node files unpacked into $HOME/avalanche-node"
 echo
 # on RHEL based systems, selinux prevents systemd running execs from home-dir, lets change this
 if [ "$osType" = "RHEL" ]; then
-  semanage fcontext -a -t bin_t "$HOME/avalanche-node/avalanchego"
-  restorecon -Fv "$HOME/avalanche-node/avalanchego"
+  sudo semanage fcontext -a -t bin_t "$HOME/avalanche-node/avalanchego"
+  sudo restorecon -Fv "$HOME/avalanche-node/avalanchego"
 fi
 if [ "$foundAvalancheGo" = "true" ]; then
   echo "Node upgraded, starting service..."
