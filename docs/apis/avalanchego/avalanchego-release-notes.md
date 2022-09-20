@@ -1789,7 +1789,7 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 - `api-auth-password`
 
-## **v1.2.4 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**)**
+## v1.2.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 4**
 
@@ -1803,7 +1803,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Added additional logging to CI.
 - Added the C-chain to the list of critical chains.
 
-## **v1.2.3 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**)**
+## v1.2.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 3**
 
@@ -1814,7 +1814,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
 - Simplified C-chain block handling.
 
-## **v1.2.2 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**)**
+## v1.2.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 2**
 
@@ -1834,7 +1834,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Improved C-chain handling of canonical chain to reduce the number of reorgs.
 - Improved C-chain handling of mock calls performed on the `pending` block.
 
-## **v1.2.1 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**)**
+## v1.2.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.1))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 
