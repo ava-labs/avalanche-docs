@@ -799,9 +799,7 @@ This API can be used for debugging. Note that the Admin API is disabled by defau
 /ext/bc/C/admin
 ```
 
-### Methods
-
-#### admin.setLogLevel
+### admin.setLogLevel
 
 Sets the log level of the C-Chain.
 
@@ -836,7 +834,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.startCPUProfiler
+### admin.startCPUProfiler
 
 Starts a CPU profile.
 
@@ -867,7 +865,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.stopCPUProfiler
+### admin.stopCPUProfiler
 
 Stops and writes a CPU profile.
 
@@ -898,7 +896,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.memoryProfile
+### admin.memoryProfile
 
 Runs and writes a memory profile.
 
@@ -929,7 +927,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.lockProfile
+### admin.lockProfile
 
 Runs a mutex profile writing to the `coreth_performance_c` directory.
 
