@@ -295,6 +295,11 @@ tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
 rm avalanchego-linux-*.tar.gz
 echo "Node files unpacked into $HOME/avalanche-node"
 echo
+# on RHEL based systems, selinux prevents systemd running execs from home-dir, lets change this
+if [ "$osType" = "RHEL" ]; then
+  semanage fcontext -a -t bin_t "$HOME/avalanche-node/avalanchego"
+  restorecon -Fv "$HOME/avalanche-node/avalanchego"
+fi
 if [ "$foundAvalancheGo" = "true" ]; then
   echo "Node upgraded, starting service..."
   sudo systemctl start avalanchego
@@ -397,6 +402,25 @@ create_config_file
 create_service_file
 chmod 644 avalanchego.service
 sudo cp -f avalanchego.service /etc/systemd/system/avalanchego.service
+
+foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+foundArch="$(uname -m)"                         #get system architecture
+foundOS="$(uname)"                              #get OS
+if [ "$foundOS" != "Linux" ]; then
+  #sorry, don't know you.
+  echo "Unsupported operating system: $foundOS!"
+  echo "Exiting."
+  exit
+fi
+foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+foundArch="$(uname -m)"                         #get system architecture
+foundOS="$(uname)"                              #get OS
+if [ "$foundOS" != "Linux" ]; then
+  #sorry, don't know you.
+  echo "Unsupported operating system: $foundOS!"
+  echo "Exiting."
+  exit
+fi
 sudo systemctl daemon-reload
 sudo systemctl start avalanchego
 sudo systemctl enable avalanchego
