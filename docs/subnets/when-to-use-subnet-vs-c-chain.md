@@ -16,7 +16,7 @@ Subnet workloads are isolated from the Primary Network; which means, the noisy n
 
 ## We Want Strict Access Control
 
-The C-Chain is open and permissionless where anyone can deploy and interact with contracts. However, for regulatory reasons, some applications may need a consistent access control mechanism for all on-chain transactions. With [Subnet-EVM](https://github.com/ava-labs/subnet-evm), an application can require “only authorized users may deploy contracts or make transactions.” And the allow-lists are only updated by the administrators, and the upgradability itself is implemented with the precompile contract, thus more transparent and auditable for compliance matters.
+The C-Chain is open and permissionless where anyone can deploy and interact with contracts. However, for regulatory reasons, some applications may need a consistent access control mechanism for all on-chain transactions. With [Subnet-EVM](https://github.com/ava-labs/subnet-evm), an application can require that “only authorized users may deploy contracts or make transactions.” Allow-lists are only updated by the administrators, and the upgradability itself is implemented with the precompile contract, thus more transparent and auditable for compliance matters.
 
 ## We Want High Composability with C-Chain Assets
 
@@ -30,4 +30,4 @@ The better approach is to scale up the security as the application accrues more 
 
 ## We Want Low Initial Cost
 
-C-Chain has economic advantages of low-cost deployment, whereas each Subnet validator is required to validate the Primary Network by staking AVAX (minimum 2,000 AVAX for Mainnet). For fault tolerance, we recommend at least five validators for a Subnet, even though there is no requirement that the Subnet owner should own all these 5 validators, it still further increases the operational overhead. If an application has relatively low transaction count, it can start with C-Chain deployment to leverage existing technical infrastructure, and later expand to a Subnet (see Cradada for an example). 
+C-Chain has economic advantages of low-cost deployment, whereas each Subnet validator is required to validate the Primary Network by staking AVAX (minimum 2,000 AVAX for Mainnet). For fault tolerance, we recommend at least five validators for a Subnet, even though there is no requirement that the Subnet owner should own all these 5 validators, it still further increases the operational overhead. If an application has relatively low transaction count, it can start with C-Chain deployment to leverage existing technical infrastructure, and later expand to a Subnet (see Crabada for an example). 
