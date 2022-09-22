@@ -40,7 +40,7 @@ Note that only checking the uptime of your validator as measured by non-staking 
 
 ### Fuji Testnet
 
-All staking parameters are the same as those on Mainnet except the following ones:
+On Fuji Testnet, all staking parameters are the same as those on Mainnet except the following ones:
 
 - The minimum amount that a validator must stake is 1 AVAX
 - The minimum amount that a delegator must delegate is 1 AVAX
