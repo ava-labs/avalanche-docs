@@ -20,7 +20,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 /ext/info
 ```
 
-## API Methods
+## Methods
 
 ### info.getBlockchainID
 

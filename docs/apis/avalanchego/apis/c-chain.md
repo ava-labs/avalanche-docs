@@ -16,7 +16,7 @@ Ethereum has its own notion of `networkID` and `chainID`. These have no relation
 
 ## Ethereum APIs
 
-### Ethereum API Endpoints
+### Endpoints
 
 #### JSON-RPC Endpoints
 
@@ -65,9 +65,7 @@ To interact with other instances of the EVM via the websocket endpoint:
 
 where `blockchainID` is the ID of the blockchain running the EVM.
 
-### Methods
-
-#### Standard Ethereum APIs
+### Standard Ethereum APIs
 
 Avalanche offers an API interface identical to Geth's API except that it only supports the following services:
 
@@ -86,7 +84,7 @@ For batched requests on the [public api node](../public-api-server.md) , the max
 
 :::
 
-#### eth_getAssetBalance
+### eth_getAssetBalance
 
 In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
 
@@ -849,9 +847,7 @@ This API can be used for debugging. Note that the Admin API is disabled by defau
 /ext/bc/C/admin
 ```
 
-### Methods
-
-#### admin.setLogLevel
+### admin.setLogLevel
 
 Sets the log level of the C-Chain.
 
@@ -886,7 +882,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.startCPUProfiler
+### admin.startCPUProfiler
 
 Starts a CPU profile.
 
@@ -917,7 +913,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.stopCPUProfiler
+### admin.stopCPUProfiler
 
 Stops and writes a CPU profile.
 
@@ -948,7 +944,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.memoryProfile
+### admin.memoryProfile
 
 Runs and writes a memory profile.
 
@@ -979,7 +975,7 @@ curl -X POST --data '{
 }
 ```
 
-#### admin.lockProfile
+### admin.lockProfile
 
 Runs a mutex profile writing to the `coreth_performance_c` directory.
 

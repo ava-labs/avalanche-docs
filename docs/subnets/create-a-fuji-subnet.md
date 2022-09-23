@@ -37,9 +37,11 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart c
 
 ## Fuji Testnet
 
-For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-Fuji-testnet) and this step particularly to start your node on Fuji:
+For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step below particularly to start your node on Fuji:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
+
+Also it is worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](../nodes/validate/staking.md#fuji-testnet) and you can get the test token from the [faucet](https://faucet.avax.network/).
 
 To get the NodeID of this Fuji node, call the following curl command to [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
 
