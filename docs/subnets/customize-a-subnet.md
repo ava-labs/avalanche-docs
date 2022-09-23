@@ -577,7 +577,7 @@ When a precompile disable takes effect (ie., after its `blockTimestamp` has pass
 
 ### eth_getChainConfig
 
-`eth_getChainConfig` returns chain config with parsed upgrade bytes.
+`eth_getChainConfig` returns chain config with parsed upgrade bytes. This API is enabled by default with `internal-blockchain` namespace.
 
 **Signature**
 
@@ -588,14 +588,12 @@ eth_getChainConfig({}) -> {chainConfig: json}
 **Example Call**
 
 ```sh
-curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc": "2.0",
-    "method": "eth_getChainConfig",
-    "params": [],
-    "id": 1
-}'
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_getChainConfig",
+    "params" :[]
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
 ```
 
 **Example Response**
@@ -663,7 +661,7 @@ curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZs
 
 ### eth_getActivatePrecompilesAt
 
-`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp.
+`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp. This API is enabled by default with `internal-blockchain` namespace.
 
 **Signature**
 
@@ -676,14 +674,12 @@ eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
 **Example Call**
 
 ```sh
-curl --location --request POST 'http://localhost:9662/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc' \
---header 'Content-Type: application/json' \
---data-raw '{
+curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "eth_getActivatePrecompilesAt",
     "params": [],
     "id": 1
-}'
+}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
 ```
 
 **Example Response**
