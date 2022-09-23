@@ -212,15 +212,13 @@ Subnet EVM can provide custom functionalities with precompiled contracts. These 
 ### Restricting Smart Contract Deployers
 
 If you'd like to restrict who has the ability to deploy contracts on your
-subnet, you can provide an `AllowList` configuration in your genesis file:
+subnet, you can provide an `AllowList` configuration in your genesis or upgrade file:
 
 ```json
 {
-  "config": {
-    "contractDeployerAllowListConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
-    }
+  "contractDeployerAllowListConfig": {
+    "blockTimestamp": 0,
+    "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
 ```
@@ -271,6 +269,21 @@ The allow list has three roles: `None`, `Deployer`, and `Admin`.
 If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Deployer`, and `Admin` respectively.
 
 WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
+
+#### Trustless Mode
+
+It's possible to enable this precompile without an admin address. In this mode you can define a list of addresses that are allowed to deploy contracts. This list is immutable and can't be changed. This mode is useful for networks that don't need a trusted party to manage the allow list. To enable this mode, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+
+```json
+{
+  "contractDeployerAllowListConfig": {
+    "blockTimestamp": 0,
+    "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+  }
+}
+```
+
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
 
 ### Restricting Who Can Submit Transactions
 
@@ -329,6 +342,21 @@ If you call `readAllowList(addr)` then you can read the current role of `addr`, 
 
 WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
 
+#### Trustless Mode
+
+It's possible to enable this precompile without an admin address. In this mode you can define a list of addresses that are allowed to submit transactions. This list is immutable and can't be changed. This mode is useful for networks that don't need a trusted party to manage the allow list. To enable this mode, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+
+```json
+{
+  "txAllowListConfig": {
+    "blockTimestamp": 0,
+    "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+  }
+}
+```
+
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
+
 ### Minting Native Coins
 
 You can mint native(gas) coins with a precompiled contract. In order to activate this feature, you can provide `nativeMinterConfig` in genesis:
@@ -374,7 +402,23 @@ interface NativeMinterInterface {
 }
 ```
 
-_Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used together._
+#### Trustless Mode
+
+It's possible to enable this precompile without an admin address. In this mode you can define a list of addresses that will receive native coins. This mode is useful for networks that requires one-time mint only without a trusted party. To enable this mode, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
+
+```json
+{
+  "contractNativeMinterConfig": {
+    "blockTimestamp": 0,
+    "initialMint": {
+      "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": "1000000000000000000",
+      "0x10037Fb06Ec4aB8c870a92AE3f00cD58e5D484b3": "0xde0b6b3a7640000"
+    }
+  }
+}
+```
+
+In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Coin) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
 
 ### Configuring Dynamic Fees
 
@@ -438,6 +482,30 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
+
+#### Trustless Mode
+
+It's possible to enable this precompile without an admin address. In this mode you can define your fee structure to take effect at the activation. This mode is useful for networks that don't need a trusted party to manage the fee config. To enable this mode, you need to specify the fee config in `initialFeeConfig` field in your genesis or upgrade file:
+
+```json
+{
+  "feeManagerConfig": {
+    "blockTimestamp": 0,
+    "initialFeeConfig": {
+      "gasLimit": 20000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "blockGasCostStep": 500000
+    }
+  }
+}
+```
+
+This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
 
 #### eth_FeeConfig API
 
@@ -592,7 +660,60 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 “subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\"precompileUpgrades\":[{\"feeManagerConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668950000}},{\"txAllowListConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668960000}},{\"feeManagerConfig\":{\"adminAddresses\":null,\"enabledAddresses\":null,\"blockTimestamp\":1668970000,\"disable\":true}}]}, Engine: Dummy Consensus Engine}"”
 ```
 
+You can also check activation of precompiles with [`getActivatePrecompilesAt API`](#getActivatePrecompilesAt) and the current chain config with [`getChainConfig API`](#eth_getChainConfig).
+
 Notice that `precompileUpgrades` entry correctly reflects the changes. That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!
+
+### Trustless Precompile Activation
+
+Precompiles are contracts that has certain features. These features could only be triggered by privileged addresses in previous releases of subnet-evm. For example, the `feeManagerConfig` precompile allows privileged addresses to change the fee structure of the network:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    }
+  ]
+}
+```
+
+In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to intract with the precompile in order to activate it's effect. I.e it needs to send a transaction with relevant fee structure to change it. This is a very powerful feature, but it also means that the network is vulnerable to a single point of failure. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
+
+In order to make these precompiles more trustless, we have introduced a new way to activate precompiles without admin addresses. This is done by setting relevant precompile initial configuration in either as an upgrade or as a genesis configuration. For example, the `feeManagerConfig` precompile can be configured as follows to change the fee structure on the activation:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "initialFeeConfig": {
+          "gasLimit": 20000000,
+          "targetBlockRate": 2,
+          "minBaseFee": 1000000000,
+          "targetGas": 100000000,
+          "baseFeeChangeDenominator": 48,
+          "minBlockGasCost": 0,
+          "maxBlockGasCost": 10000000,
+          "blockGasCostStep": 500000
+        }
+      }
+    }
+  ]
+}
+```
+
+Notice that there is no `adminAddresses` field in the configuration. This means that the precompile will be activated with the given configuration without any admin address. It also means there is no need to send a transaction to change the fee structure. The precompile will change the fee at the given timestamp.
+
+This is a trustless way to activate precompiles.
+
+_Note: If you trustlessly activate a precompile, then it will be activated as a precompile. If you want to change the configuration, you will need to first disable it then activate the precompile again with the new configuration._
+
+See every precompile initial configuration in their relevant `Trustless Mode` sections under [Precompiles](#precompiles).
 
 ### eth_getChainConfig
 
