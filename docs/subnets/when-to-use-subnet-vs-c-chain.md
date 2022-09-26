@@ -2,7 +2,7 @@
 
 Subnet is a subset of Avalanche Primary Network validators agreeing to run the same [Virtual Machines (VM)](../subnets/README.md#virtual-machines) with its own rules. Subnet enables extra dimensions of reliability, efficiency, and data sovereignty. It provides the ability to create custom blockchains for different use cases, while isolating high-traffic applications from congesting activity on the Primary Network. But such flexibility comes with its own set of tradeoffs. In this article, we discuss often-overlooked differentiating characteristics of Subnet, with primary focus on EVM-based applications (e.g., C-Chain, [Subnet-EVM](https://github.com/ava-labs/subnet-evm)). The goal is to identify pros and cons of building an app on C-Chain versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help developers make more informed decisions.
 
-## Reasons To Use a Subnet
+## When to Use a Subnet
 
 There are many advantages to running your own Subnet. If you find one or more of these a good match for your project then a Subnet might be a good solution for you. But make sure to check the reasons to use the C-Chain instead, as some trade-offs involved might make that a preferred solution.
 
