@@ -1,4 +1,4 @@
-# When to Use Subnet (vs. C-Chain)
+# When to Use Subnet vs. C-Chain
 
 Subnet is a subset of Avalanche Primary Network validators agreeing to run the same [Virtual Machines (VM)](../subnets/README.md#virtual-machines) with its own rules. Subnet enables extra dimensions of reliability, efficiency, and data sovereignty. It provides the ability to create custom blockchains for different use cases, while isolating high-traffic applications from congesting activity on the Primary Network. But such flexibility comes with its own set of tradeoffs. In this article, we discuss often-overlooked differentiating characteristics of Subnet, with primary focus on EVM-based applications (e.g., C-Chain, [Subnet-EVM](https://github.com/ava-labs/subnet-evm)). The goal is to identify pros and cons of building an app on C-Chain versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help developers make more informed decisions.
 
@@ -24,7 +24,7 @@ The C-Chain is open and permissionless where anyone can deploy and interact with
 
 ### We Need EVM Customization
 
-If your project is deployed on the C-Chain then your execution environment is dictated by the setup of the C-Chain. Changing any of the execution parameters means that the configuration of the C-Chain would need to change, and that is expensive, complex and difficult to change. So if your project needs some other capabilities, different execution parameters or precompiles that C-Chain does not provide, then Subnets are a solution you need. You can configure the EVM in a Subnet to run however you want, adding precompiles, and setting runtime parameters to whatever your project needs. 
+If your project is deployed on the C-Chain then your execution environment is dictated by the setup of the C-Chain. Changing any of the execution parameters means that the configuration of the C-Chain would need to change, and that is expensive, complex and difficult to change. So if your project needs some other capabilities, different execution parameters or precompiles that C-Chain does not provide, then Subnets are a solution you need. You can configure the EVM in a Subnet to run however you want, adding precompiles, and setting runtime parameters to whatever your project needs.
 
 ## When to Use the C-Chain
 
@@ -42,7 +42,7 @@ The better approach is to scale up the security as the application accrues more 
 
 ### We Want Low Initial Cost
 
-C-Chain has economic advantages of low-cost deployment, whereas each Subnet validator is required to validate the Primary Network by staking AVAX (minimum 2,000 AVAX for Mainnet). For fault tolerance, we recommend at least five validators for a Subnet, even though there is no requirement that the Subnet owner should own all these 5 validators, it still further increases the upfront costs. 
+C-Chain has economic advantages of low-cost deployment, whereas each Subnet validator is required to validate the Primary Network by staking AVAX (minimum 2,000 AVAX for Mainnet). For fault tolerance, we recommend at least five validators for a Subnet, even though there is no requirement that the Subnet owner should own all these 5 validators, it still further increases the upfront costs.
 
 ### We Want Low Operational Costs
 
