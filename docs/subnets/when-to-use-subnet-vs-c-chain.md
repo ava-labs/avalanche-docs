@@ -4,7 +4,7 @@ Subnet is a subset of Avalanche Primary Network validators agreeing to run the s
 
 ## Reasons To Use a Subnet
 
-There are many advantages to running your own Subnet. If you find one or more of these a good match for your project then a Subnet might be a good solution for you. But make sure to check the reasons to use th C-Chain instead, as some trade-offs involved might that a preferred solution.
+There are many advantages to running your own Subnet. If you find one or more of these a good match for your project then a Subnet might be a good solution for you. But make sure to check the reasons to use the C-Chain instead, as some trade-offs involved might make that a preferred solution.
 
 ### We Want Our Own Gas Token
 
@@ -28,7 +28,7 @@ If your project is deployed on the C-Chain then your execution environment is di
 
 ## When to Use the C-Chain
 
-All the reasons for using a Subnet outlined above are very attractive to developers and might make it seems that every new project should look into launching a Subnet instead of using the C-Chain. Of course, things are rarely that simple and without trade-offs. Here are some advantages of the C-Chain that you should take into account.
+All the reasons for using a Subnet outlined above are very attractive to developers and might make it seem that every new project should look into launching a Subnet instead of using the C-Chain. Of course, things are rarely that simple and without trade-offs. Here are some advantages of the C-Chain that you should take into account.
 
 ### We Want High Composability with C-Chain Assets
 
