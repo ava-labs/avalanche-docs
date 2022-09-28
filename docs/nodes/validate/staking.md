@@ -19,6 +19,8 @@ When a validator is done validating the [Primary Network](http://support.avalabs
 Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
 :::
 
+### Mainnet
+
 - The minimum amount that a validator must stake is 2,000 AVAX
 - The minimum amount that a delegator must delegate is 25 AVAX
 - The minimum amount of time one can stake funds for validation is 2 weeks
@@ -35,6 +37,15 @@ You can get another opinion on your node's uptime from Avalanche's [Validator He
 If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward.
 If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.
 Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your node's true uptime.
+
+### Fuji Testnet
+
+On Fuji Testnet, all staking parameters are the same as those on Mainnet except the following ones:
+
+- The minimum amount that a validator must stake is 1 AVAX
+- The minimum amount that a delegator must delegate is 1 AVAX
+- The minimum amount of time one can stake funds for validation is 24 hours
+- The minimum amount of time one can stake funds for delegation is 24 hours
 
 ## Validators
 
@@ -85,10 +96,6 @@ You do not need to have AVAX funds on your validating node. In fact, it's best p
 #### Monitoring
 
 Follow this [tutorial](../maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
-
-#### Validating In Fuji
-
-Validating in Fuji requires just `1 AVAX`. So you can easily set up your validator node and learn more about validating.
 
 ## Delegators
 

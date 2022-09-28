@@ -6,6 +6,38 @@
 
 :::
 
+## v1.8.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.6))
+
+This version is backwards compatible to [v1.8.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0). It is optional, but encouraged. The supported plugin version is `16`.
+
+**BLS**
+
+- Added BLS key file at `--staking-signer-key-file`
+- Exposed BLS proof of possession in the `info.getNodeID` API
+- Added BLS proof of possession to `AddPermissionlessValidatorTx`s for the Primary Network
+
+The default value of `--staking-signer-key-file` is `~/.avalanchego/staking/signer.key`. If the key file doesn't exist, it will be populated with a new key.
+
+**Networking**
+
+- Added P2P proto support to be activated in a future release
+- Fixed inbound bandwidth spike after leaving the validation set
+- Removed support for `ChitsV2` messages
+- Removed `ContainerID`s from `Put` and `PushQuery` messages
+- Added `pending_timeouts` metric to track the number of active timeouts a node is tracking
+- Fixed overflow in gzip decompression
+- Optimized memory usage in `peer.MessageQueue`
+
+**Miscellaneous**
+
+- Fixed bootstrapping ETA metric
+- Removed unused `unknown_txs_count` metric
+- Replaced duplicated code with generic implementations
+
+**Coreth**
+
+- Added failure reason to bad block API
+
 ## v1.8.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.5))
 
 Please upgrade your node as soon as possible.
@@ -1789,7 +1821,7 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 - `api-auth-password`
 
-## **v1.2.4 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**)**
+## v1.2.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 4**
 
@@ -1803,7 +1835,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Added additional logging to CI.
 - Added the C-chain to the list of critical chains.
 
-## **v1.2.3 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**)**
+## v1.2.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 3**
 
@@ -1814,7 +1846,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
 - Simplified C-chain block handling.
 
-## **v1.2.2 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**)**
+## v1.2.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 2**
 
@@ -1834,7 +1866,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Improved C-chain handling of canonical chain to reduce the number of reorgs.
 - Improved C-chain handling of mock calls performed on the `pending` block.
 
-## **v1.2.1 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**)**
+## v1.2.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.1))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 
