@@ -26,9 +26,9 @@ Each block has a header containing:
 - ParentID
 - Height
 
-### Blueberry
+### Banff
 
-Blueberry allows the following block types with the following content:
+Banff allows the following block types with the following content:
 
 - _Standard Blocks_ may contain multiple transactions of the following types:
   - CreateChainTx
