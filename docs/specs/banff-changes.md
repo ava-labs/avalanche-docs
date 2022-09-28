@@ -1,6 +1,6 @@
 # Banff Changes
 
-This document specifies changes in Avalanche “Banff”, which was pre-released in AvalancheGo v1.8.x and will be finalized in AvalancheGo v1.9.x, from Avalanche Apricot Phase 5 (AvalancheGo v1.7.x).
+This document specifies the changes in Avalanche “Banff”, which will be released in AvalancheGo v1.9.x.
 
 ## Block Changes
 
