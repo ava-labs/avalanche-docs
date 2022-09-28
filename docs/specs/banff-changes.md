@@ -230,8 +230,11 @@ TransformSubnetTx = 24
 AddPermissionlessValidatorTx = 25
 AddPermissionlessDelegatorTx = 26
 
-BlueberryProposalBlock = 27
-BlueberryAbortBlock = 28
-BlueberryCommitBlock = 29
-BlueberryStandardBlock = 30
+EmptyProofOfPossession = 27
+BLSProofOfPossession   = 28
+
+BanffProposalBlock = 29
+BanffAbortBlock = 30
+BanffCommitBlock = 31
+BanffStandardBlock = 32
 ```
