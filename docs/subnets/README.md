@@ -38,7 +38,7 @@ Different blockchain-based applications may require validators to have certain p
 
 ### Support for Private Blockchains
 
-You can create a Subnet where only certain pre-defined validators may join and create a private Subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../nodes/maintain/subnet-configs.md#private-Subnet) for more info.
+You can create a Subnet where only certain pre-defined validators may join and create a private Subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../nodes/maintain/subnet-configs.md#private-subnet) for more info.
 
 ### Separation of Concerns
 
