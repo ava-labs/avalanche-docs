@@ -248,6 +248,7 @@ const sidebars = {
     'specs/serialization-primitives',
     'specs/platform-transaction-serialization',
     'specs/abigen',
+    'specs/banff-changes'
   ],
 
 
