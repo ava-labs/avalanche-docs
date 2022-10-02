@@ -23,7 +23,7 @@ This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-cal
 /ext/admin
 ```
 
-## API Methods
+## Methods
 
 ### admin.alias
 
