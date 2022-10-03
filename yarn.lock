@@ -6458,10 +6458,10 @@ react-helmet-async@*, react-helmet-async@^1.3.0:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-iframe@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.8.2.tgz#a1fa6c08628bfe1f62dd4b3a0f3865a73572129b"
-  integrity sha512-vSXygR3IWDJtQwW9Kuffd608L2yIAcPWAJGGR/uUTlDK3Qn8Cxz3fqqxAsl9WCdsXojfN8RBFH++2K/LEhBjHg==
+react-iframe@1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.8.4.tgz#c7173d9a272647146a4af8b09359e22e7e5ef96c"
+  integrity sha512-/yhhubhUBjcckJyPJ/83ZLitM81wAptVpgdBVx5+d8D7U/lyynZGgFjY0SQpfUYvMK8UEh5QvCGpH94O5ehQsA==
   dependencies:
     object-assign "^4.1.1"
 
