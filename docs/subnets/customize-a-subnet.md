@@ -80,6 +80,8 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
 
 `chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly.
 
+You can use `eth_getChainConfig` RPC call to get the current chain config. See [here](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) for more info.
+
 #### Hardforks
 
 `homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` are hardfork activation times. Changing these may cause issues, so treat them carefully.
@@ -439,52 +441,7 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-#### eth_FeeConfig API
-
-Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
-
-**Signature**
-
-```sh
-eth_feeConfig([blk BlkNrOrHash]) -> {feeConfig: json}
-```
-
-- `blk` is the block number or hash at which to retrieve the fee config.
-
-**Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_feeConfig",
-    "params": [
-        "latest"
-    ],
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "feeConfig": {
-      "gasLimit": 8000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 33000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "lastChangedAt": 0
-  }
-}
-```
+You can get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#ethfeeconfig-api).
 
 ## Examples
 
@@ -577,141 +534,13 @@ This example enables the `feeManagerConfig` at the first block with timestamp >=
 
 When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
 
-### eth_getChainConfig
+You can check the activated precompiles at a timestamp with the [`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#ethgetactivateprecompilesat) RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) RPC method will also return the configured upgrades in the response.
 
-`eth_getChainConfig` returns chain config with parsed upgrade bytes. This API is enabled by default with `internal-blockchain` namespace.
-
-**Signature**
-
-```sh
-eth_getChainConfig({}) -> {chainConfig: json}
-```
-
-**Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"eth_getChainConfig",
-    "params" :[]
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "chainId": 43214,
-    "feeConfig": {
-      "gasLimit": 8000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 33000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "allowFeeRecipients": true,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
-    "contractDeployerAllowListConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "contractNativeMinterConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "feeManagerConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "upgrades": {
-      "precompileUpgrades": [
-        {
-          "feeManagerConfig": {
-            "adminAddresses": null,
-            "blockTimestamp": 1661541259,
-            "disable": true
-          }
-        },
-        {
-          "feeManagerConfig": {
-            "adminAddresses": null,
-            "blockTimestamp": 1661541269
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-### eth_getActivatePrecompilesAt
-
-`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp. This API is enabled by default with `internal-blockchain` namespace.
-
-**Signature**
-
-```sh
-eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
-```
-
-- `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it shows precompiles activated at the latest block timestamp.
-
-**Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_getActivatePrecompilesAt",
-    "params": [],
-    "id": 1
-}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "contractDeployerAllowListConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "contractNativeMinterConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "feeManagerConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    }
-  }
-}
-```
-
-## Chain Configs
+## AvalancheGo Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
 ### Priority Regossip
 
