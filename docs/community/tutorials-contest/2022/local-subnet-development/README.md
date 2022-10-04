@@ -193,7 +193,7 @@ This tutorial will cover interacting with the Subnet through [Remix](https://rem
 
 ### Step 4.1: Using Remix
 
-First, we will be adding our Subnet to [metamask](https://metamask.io/). To add the Subnet, refer to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask) you should replace the values with your Subnet values that are printed out after you have created it. If your balance is zero after you add Subnet to the metamask, refer to [Access Funded Accounts](#access-funded-accounts).
+First, we will be adding our Subnet to [metamask](https://metamask.io/). To add the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask) you should replace the values with your Subnet values that are printed out after you have created it. If your balance is zero after you add Subnet to the metamask, refer to [Access Funded Accounts](#access-funded-accounts).
 
 Example Values:
 

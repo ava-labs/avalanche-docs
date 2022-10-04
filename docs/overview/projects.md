@@ -25,7 +25,7 @@ Related docs
 
 [Link to github](https://github.com/ava-labs/subnet-evm)
 
-Subnet EVM is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Subnet Contract Chains. Subnet EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
+Subnet-EVM is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
 
 Related docs
 

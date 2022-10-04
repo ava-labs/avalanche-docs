@@ -29,7 +29,7 @@ See [here](../nodes/maintain/subnet-configs.md) for more info.
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and semantics of its genesis data.
 
-The default genesis Subnet EVM provided below has some well defined parameters:
+The default genesis Subnet-EVM provided below has some well defined parameters:
 
 ```json
 {
@@ -207,7 +207,7 @@ If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn'
 
 ## Precompiles
 
-Subnet EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
 
 ### Restricting Smart Contract Deployers
 
