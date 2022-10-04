@@ -6,6 +6,279 @@
 
 :::
 
+## PRE_RELEASE v1.9.0-fuji-post-upgrade ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji-post-upgrade))
+
+**Banff - Elastic Subnets - Fuji Post Upgrade Pre-release**
+
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
+
+This upgrade performs post-upgrade cleanup to the C-chain.
+
+The changes in the upgrade go into effect at 3 PM EDT, October 4th 2022 on the Fuji testnet.
+
+**All Fuji nodes should upgrade before 3 PM EDT, October 4th 2022.**
+
+The supported plugin version is `16`.
+
+**Upgrades**
+
+- Activated P2P serialization format change to Protobuf
+- Activated non-AVAX `ImportTx`/`ExportTx`s to/from the P-chain
+- Activated `Banff*` blocks on the P-chain
+- Deactivated `Apricot*` blocks on the P-chain
+- Activated `RemoveSubnetValidatorTx`s on the P-chain
+- Activated `TransformSubnetTx`s on the P-chain
+- Activated `AddPermissionlessValidatorTx`s on the P-chain
+- Activated `AddPermissionlessDelegatorTx`s on the P-chain
+- Deactivated ANT `ImportTx`/`ExportTx`s on the C-chain
+- Deactivated ANT precompiles on the C-chain
+
+**Deprecations**
+
+- Ubuntu 18.04 releases are deprecated and will not be provided for `>=v1.9.1`
+
+**Miscellaneous**
+
+- Fixed locked input signing in the P-chain wallet
+- Removed assertions from the logger interface
+- Removed `--assertions-enabled` flag
+- Fixed typo in `--bootstrap-max-time-get-ancestors` flag
+- Standardized exported P-Chain codec usage
+- Improved isolation and execution of the E2E tests
+- Updated the linked hashmap implementation to use generics
+
+## PRE_RELEASE v1.9.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji))
+
+**Banff - Elastic Subnets - Fuji Pre-release**
+
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
+
+This upgrade adds support for creating Proof-of-Stake Subnets.
+
+The changes in the upgrade go into effect at 10 AM EDT, October 3rd 2022 on the Fuji testnet. After Fuji is updated and verified, a mainnet compatible release will be published.
+
+**All Fuji nodes should upgrade before 10 AM EDT, October 3rd 2022.**
+
+The supported plugin version is `16`.
+
+**Upgrades**
+
+- Activated P2P serialization format change to Protobuf
+- Activated non-AVAX `ImportTx`/`ExportTx`s to/from the P-chain
+- Activated `Banff*` blocks on the P-chain
+- Deactivated `Apricot*` blocks on the P-chain
+- Activated `RemoveSubnetValidatorTx`s on the P-chain
+- Activated `TransformSubnetTx`s on the P-chain
+- Activated `AddPermissionlessValidatorTx`s on the P-chain
+- Activated `AddPermissionlessDelegatorTx`s on the P-chain
+- Deactivated ANT `ImportTx`/`ExportTx`s on the C-chain
+- Deactivated ANT precompiles on the C-chain
+
+**Deprecations**
+
+- Ubuntu 18.04 releases are deprecated and will not be provided for `>=v1.9.1`
+
+**Miscellaneous**
+
+- Fixed locked input signing in the P-chain wallet
+- Removed assertions from the logger interface
+- Removed `--assertions-enabled` flag
+- Fixed typo in `--bootstrap-max-time-get-ancestors` flag
+- Standardized exported P-Chain codec usage
+- Improved isolation and execution of the E2E tests
+- Updated the linked hashmap implementation to use generics
+
+## v1.8.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.6))
+
+This version is backwards compatible to [v1.8.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0). It is optional, but encouraged. The supported plugin version is `16`.
+
+**BLS**
+
+- Added BLS key file at `--staking-signer-key-file`
+- Exposed BLS proof of possession in the `info.getNodeID` API
+- Added BLS proof of possession to `AddPermissionlessValidatorTx`s for the Primary Network
+
+The default value of `--staking-signer-key-file` is `~/.avalanchego/staking/signer.key`. If the key file doesn't exist, it will be populated with a new key.
+
+**Networking**
+
+- Added P2P proto support to be activated in a future release
+- Fixed inbound bandwidth spike after leaving the validation set
+- Removed support for `ChitsV2` messages
+- Removed `ContainerID`s from `Put` and `PushQuery` messages
+- Added `pending_timeouts` metric to track the number of active timeouts a node is tracking
+- Fixed overflow in gzip decompression
+- Optimized memory usage in `peer.MessageQueue`
+
+**Miscellaneous**
+
+- Fixed bootstrapping ETA metric
+- Removed unused `unknown_txs_count` metric
+- Replaced duplicated code with generic implementations
+
+**Coreth**
+
+- Added failure reason to bad block API
+
+## v1.8.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.5))
+
+Please upgrade your node as soon as possible.
+
+The supported plugin version is `16`.
+
+**Fixes**
+
+- Fixed stale block reference by evicting blocks upon successful verification
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Removed check for Apricot Phase6 incompatible fork to unblock nodes that did not upgrade ahead of the activation time
+
+## v1.8.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.4))
+
+Please upgrade your node as soon as possible.
+
+The supported plugin version is `16`.
+
+**Caching**
+
+- Added temporarily invalid block caching to reduce repeated network requests
+- Added caching to the proposervm's inner block parsing
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Reduced the log level of `BAD BLOCK`s from `ERROR` to `DEBUG`
+- Deprecated Native Asset Call
+
+## v1.8.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.2))
+
+Please upgrade your node as soon as possible.
+
+The changes in `v1.8.x` go into effect at 4 PM EDT on September 6th, 2022 on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+The supported plugin version is `16`.
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Fixed live-lock in bootstrapping, after performing state-sync, by properly reporting `database.ErrNotFound` in `GetBlockIDAtHeight` rather than a formatted error
+- Increased the log level of `BAD BLOCK`s from `DEBUG` to `ERROR`
+- Fixed typo in Chain Config `String` function
+
+## v1.8.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.1))
+
+Please upgrade your node as soon as possible.
+
+The changes in `v1.8.x` go into effect at 4 PM EDT on September 6th, 2022 on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+The supported plugin version is `16`.
+
+**Miscellaneous**
+
+- Reduced the severity of not quickly connecting to bootstrap nodes from `FATAL` to `WARN`
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Reduced the log level of `BAD BLOCK`s from `ERROR` to `DEBUG`
+- Added Apricot Phase6 to Chain Config `String` function
+
+## v1.8.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0))
+
+This is a mandatory security upgrade. Please upgrade your node **as soon as possible.**
+
+The changes in the upgrade go into effect at **4 PM EDT on September 6th, 2022** on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+You may see some extraneous ERROR logs ("BAD BLOCK") on your node after upgrading. These may continue until the Apricot Phase 6 activation (at 4 PM EDT on September 6th).
+
+The supported plugin version is `16`.
+
+**PlatformVM APIs**
+
+- Fixed `GetBlock` API when requesting the encoding as `json`
+- Changed the json key in `AddSubnetValidatorTx`s from `subnet` to `subnetID`
+- Added multiple asset support to `getBalance`
+- Updated `PermissionlessValidator`s returned from `getCurrentValidators` and `getPendingValidators` to include `validationRewardOwner` and `delegationRewardOwner`
+- Deprecated `rewardOwner` in `PermissionlessValidator`s returned from `getCurrentValidators` and `getPendingValidators`
+- Added `subnetID` argument to `getCurrentSupply`
+- Added multiple asset support to `getStake`
+- Added `subnetID` argument to `getMinStake`
+
+**PlatformVM Structures**
+
+- Renamed existing blocks
+  - `ProposalBlock` -> `ApricotProposalBlock`
+  - `AbortBlock` -> `ApricotAbortBlock`
+  - `CommitBlock` -> `ApricotCommitBlock`
+  - `StandardBlock` -> `ApricotStandardBlock`
+  - `AtomicBlock` -> `ApricotAtomicBlock`
+- Added new block types **to be enabled in a future release**
+  - `BlueberryProposalBlock`
+    - Introduces a `Time` field and an unused `Txs` field before the remaining `ApricotProposalBlock` fields
+  - `BlueberryAbortBlock`
+    - Introduces a `Time` field before the remaining `ApricotAbortBlock` fields
+  - `BlueberryCommitBlock`
+    - Introduces a `Time` field before the remaining `ApricotCommitBlock` fields
+  - `BlueberryStandardBlock`
+    - Introduces a `Time` field before the remaining `ApricotStandardBlock` fields
+- Added new transaction types **to be enabled in a future release**
+  - `RemoveSubnetValidatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Allows a subnet owner to remove a validator from their subnet
+  - `TransformSubnetTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Allows a subnet owner to convert their subnet into a permissionless subnet
+  - `AddPermissionlessValidatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Adds a new validator to the requested permissionless subnet
+  - `AddPermissionlessDelegatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Adds a new delegator to the requested permissionless validator on the requested subnet
+
+**PlatformVM Block Building**
+
+- Fixed race in `AdvanceTimeTx` creation to avoid unnecessary block construction
+- Added `block_formation_logic.md` to describe how blocks are created
+- Refactored `BlockBuilder` into `ApricotBlockBuilder`
+- Added `BlueberryBlockBuilder`
+- Added `OptionBlock` builder visitor
+- Refactored `Mempool` issuance and removal logic to use transaction visitors
+
+**PlatformVM Block Execution**
+
+- Added support for executing `AddValidatorTx`, `AddDelegatorTx`, and `AddSubnetValidatorTx` inside of a `BlueberryStandardBlock`
+- Refactored time advancement into a standard state modification structure
+- Refactored `ProposalTxExecutor` to abstract state diff creation
+- Standardized upgrade checking rules
+- Refactored subnet authorization checking
+
+**Wallet**
+
+- Added support for new transaction types in the P-chain wallet
+- Fixed fee amounts used in the Primary Network wallet to reduce unnecessary fee burning
+
+**Networking**
+
+- Defined `p2p.proto` to be used for future network messages
+- Added `--network-tls-key-log-file-unsafe` to support inspecting p2p messages
+- Added `avalanche_network_accept_failed` metrics to track networking `Accept` errors
+
+**Miscellaneous**
+
+- Removed reserved fields from proto files and renumbered the existing fields
+- Added generic dynamically resized ring buffer
+- Updated gRPC version to `v1.49.0` to fix non-deterministic errors reported in the `rpcchainvm`
+- Removed `--signature-verification-enabled` flag
+- Removed dead code
+  - `ids.QueueSet`
+  - `timer.Repeater`
+  - `timer.NewStagedTimer`
+  - `timer.TimedMeter`
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Incorrectly deprecated Native Asset Call
+- Migrated to go-ethereum v1.10.23
+- Added API to fetch Chain Config
+
 ## v1.7.18 - Chapelco ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.18))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
@@ -1630,7 +1903,7 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 - `api-auth-password`
 
-## **v1.2.4 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**)**
+## v1.2.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 4**
 
@@ -1644,7 +1917,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Added additional logging to CI.
 - Added the C-chain to the list of critical chains.
 
-## **v1.2.3 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**)**
+## v1.2.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 3**
 
@@ -1655,7 +1928,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
 - Simplified C-chain block handling.
 
-## **v1.2.2 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**)**
+## v1.2.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 2**
 
@@ -1675,7 +1948,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Improved C-chain handling of canonical chain to reduce the number of reorgs.
 - Improved C-chain handling of mock calls performed on the `pending` block.
 
-## **v1.2.1 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**)**
+## v1.2.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.1))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 

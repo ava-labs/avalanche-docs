@@ -91,6 +91,14 @@ const sidebars = {
     'subnets/README',
     {
       type: 'category',
+      label: 'Plan',
+      collapsed: false,
+      items: [
+        'subnets/when-to-use-subnet-vs-c-chain'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Build',
       collapsed: false,
       items: [
@@ -242,6 +250,7 @@ const sidebars = {
     'specs/serialization-primitives',
     'specs/platform-transaction-serialization',
     'specs/abigen',
+    'specs/banff-changes'
   ],
 
 
