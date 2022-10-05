@@ -4,7 +4,7 @@ sidebar_position: 15
 
 # Subnet-EVM API
 
-[Subnet-EVM](github.com/ava-labs/subnet-evm) APIs are identical to [Coreth](github.com/ava-labs/coreth) APIs, except Avalanche Specific APIs starting with `avax`. Subnet-EVM also supports standart Ethereum APIs as well. For more information about Coreth APIs see [here](api/../c-chain.md).
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) APIs are identical to [Coreth](https://github.com/ava-labs/coreth) APIs, except Avalanche Specific APIs starting with `avax`. Subnet-EVM also supports standart Ethereum APIs as well. For more information about Coreth APIs see [here](api/../c-chain.md).
 
 Subnet-EVM has some additional APIs that are not available in Coreth.
 
