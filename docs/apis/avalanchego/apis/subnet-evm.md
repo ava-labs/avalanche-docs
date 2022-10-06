@@ -8,7 +8,7 @@ sidebar_position: 15
 
 Subnet-EVM has some additional APIs that are not available in Coreth.
 
-## eth_FeeConfig
+## eth_feeConfig
 
 Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
 
