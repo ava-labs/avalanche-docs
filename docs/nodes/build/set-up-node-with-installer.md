@@ -13,7 +13,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
 - Storage: 1 TiB
-- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- OS: Ubuntu 20.04 or MacOS &gt;= 12
 - Network: sustained 5Mbps up/down bandwidth
 
 Please note that HW requirements shall scale with the amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
