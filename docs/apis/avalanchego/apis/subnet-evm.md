@@ -57,8 +57,9 @@ curl -X POST --data '{
 
 ## eth_getChainConfig
 
-`eth_getChainConfig` returns chain config with parsed upgrade bytes. This API is enabled by default with `internal-blockchain` namespace.
+`eth_getChainConfig` returns the Chain Config of the blockchain. This API is enabled by default with `internal-blockchain` namespace.
 
+This API exists on the C-Chain as well, but in addition to the normal Chain Config returned by the C-Chain `eth_getChainConfig` on subnet-evm additionally returns the upgrade config, which specifies network upgrades activated after the genesis.
 **Signature**
 
 ```sh
