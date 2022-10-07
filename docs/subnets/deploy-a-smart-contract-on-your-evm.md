@@ -1,4 +1,4 @@
-# Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask
+# Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask
 
 ## Introduction
 
@@ -12,10 +12,10 @@ This tutorial assumes that:
 
 #### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
 
-- **`Network Name`**: Custom Subnet EVM
+- **`Network Name`**: Custom Subnet-EVM
 - **`New RPC URL`**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
-- **`ChainID`**: Subnet EVM ChainID
-- **`Symbol`**: Subnet EVM Token Symbol
+- **`ChainID`**: Subnet-EVM ChainID
+- **`Symbol`**: Subnet-EVM Token Symbol
 - **`Explorer`**: N/A
 
 ![remix Subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
@@ -80,4 +80,4 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 ## Other Tools
 
-You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.

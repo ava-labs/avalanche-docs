@@ -97,9 +97,7 @@ If you don't get the expected result, you can stop the `AvalancheGo`, examine an
 
 ## Network Upgrades
 
-Sometimes you need to do a network upgrade to change the genesis configuration and rules under which the Subnet operates. As before we will discuss `subnet-evm` upgrades, as that is the most commonly used Subnet VM.
-
-In regular EVM, network upgrades are a pretty involved process that includes deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can consist of enabling/disabling particular precompiles, or changing their parameters. Currently available precompiles allow you to:
+Sometimes you need to do a network upgrade to change the configured rules in the genesis under which the Chain operates. In regular EVM, network upgrades are a pretty involved process that includes deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can consist of enabling/disabling particular precompiles, or changing their parameters. Currently available precompiles allow you to:
 
 - Restrict Smart Contract Deployers
 - Restrict Who Can Submit Transactions

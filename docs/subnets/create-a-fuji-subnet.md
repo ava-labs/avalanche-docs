@@ -438,7 +438,7 @@ Subnet has been created with ID: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2M
 Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" with VM ID "tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw": http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
 ```
 
-Well done! You have just created your own Subnet with your own Subnet EVM running on `Fuji`!
+Well done! You have just created your own Subnet with your own Subnet-EVM running on `Fuji`!
 
 To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
 
