@@ -29,7 +29,7 @@ See [here](../nodes/maintain/subnet-configs.md) for more info.
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and semantics of its genesis data.
 
-The default genesis Subnet EVM provided below has some well defined parameters:
+The default genesis Subnet-EVM provided below has some well defined parameters:
 
 ```json
 {
@@ -79,6 +79,8 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 ### Chain Config
 
 `chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly.
+
+You can use `eth_getChainConfig` RPC call to get the current chain config. See [here](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) for more info.
 
 #### Hardforks
 
@@ -207,7 +209,7 @@ If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn'
 
 ## Precompiles
 
-Subnet EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
 
 ### Restricting Smart Contract Deployers
 
@@ -439,54 +441,7 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-#### eth_FeeConfig API
-
-Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
-
-**Signature**
-
-```sh
-eth_feeConfig({
-    blk: BlkNrOrHash,
-}) -> {feeConfig: json}
-```
-
-- `blk` is the block number or hash at which to retrieve the fee config.
-
-**Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_feeConfig",
-    "params": [
-        "latest"
-    ],
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "feeConfig": {
-      "gasLimit": 8000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 33000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "lastChangedAt": 0
-  }
-}
-```
+You can get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#ethfeeconfig-api).
 
 ## Examples
 
@@ -579,11 +534,13 @@ This example enables the `feeManagerConfig` at the first block with timestamp >=
 
 When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
 
-## Chain Configs
+You can check the activated precompiles at a timestamp with the [`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#ethgetactivateprecompilesat) RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) RPC method will also return the configured upgrades in the response.
+
+## AvalancheGo Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
 ### Priority Regossip
 

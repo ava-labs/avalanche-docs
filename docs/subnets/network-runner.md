@@ -331,7 +331,7 @@ These examples expect a basic understanding of what Subnets are and their usage.
 
 ### RPC server `subnet-evm` example
 
-The Subnet EVM is a simplified version of Coreth VM (C-Chain).
+The Subnet-EVM is a simplified version of Coreth VM (C-Chain).
 This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality.
 It can be used to create your own fully Ethereum-compatible Subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 

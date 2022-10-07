@@ -22,7 +22,7 @@ mkdir subnet-evm-demo
 cd subnet-evm-demo
 ```
 
-## Setting up AvalancheGo and Subnet EVM Binaries
+## Setting up AvalancheGo and Subnet-EVM Binaries
 
 Clients interact with Avalanche blockchain by issuing API calls to the nodes running `AvalancheGo`. We have to clone the repository, build its binary, and run it. If we want to deploy our blockchain, we have to put the blockchain's VM binary inside the `build/plugins` directory. Here we will also clone the `subnet-evm` repository, build the VM's binary, and copy it to the AvalancheGo's `build/plugins` directory. Follow the steps below -
 
