@@ -638,7 +638,7 @@ Precompiles are contracts that has certain features. These features could only b
 }
 ```
 
-In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to intract with the precompile in order to activate it's effect. I.e it needs to send a transaction with relevant fee structure to change it. This is a very powerful feature, but it also means that the network is vulnerable to a single point of failure. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
+In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to call the precompile in order to activate its effect. I.e it needs to send a transaction with a new fee config to perform the update. This is a very powerful feature, but it also gives a large amount of power to the admin address. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
 
 In order to make these precompiles more trustless, we have introduced a new way to activate precompiles without admin addresses. This is done by setting relevant precompile initial configuration in either as an upgrade or as a genesis configuration. For example, the `feeManagerConfig` precompile can be configured as follows to change the fee structure on the activation:
 
