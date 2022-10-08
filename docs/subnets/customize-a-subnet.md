@@ -406,7 +406,7 @@ interface NativeMinterInterface {
 
 #### Trustless Mode
 
-It's possible to enable this precompile without an admin address. In this mode you can define a list of addresses that will receive native coins. This mode is useful for networks that requires one-time mint only without a trusted party. To enable this mode, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
+It's possible to enable this precompile without an admin address. In this mode you can define a list of addresses that will receive an initial mint of the native coin when this precompile activates. This mode is useful for networks that require a one-time mint without specifying any allow listed or admin addresses with privileges to mint the native coin. To enable this mode, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
 
 ```json
 {
