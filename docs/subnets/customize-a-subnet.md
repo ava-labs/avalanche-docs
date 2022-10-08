@@ -664,7 +664,7 @@ In order to make these precompiles more trustless, we have introduced a new way 
 }
 ```
 
-Notice that there is no `adminAddresses` field in the configuration. This means that the precompile will be activated with the given configuration without any admin address. It also means there is no need to send a transaction to change the fee structure. The precompile will change the fee at the given timestamp.
+Notice that there is no `adminAddresses` field in the configuration. This means that there will be no admin address with privileges to perform another update. The precompile will simply update the fee configuration to the specified fee config when it activates.
 
 This is a trustless way to activate precompiles.
 
