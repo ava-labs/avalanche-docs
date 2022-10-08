@@ -420,7 +420,7 @@ It's possible to enable this precompile without an admin address. In this mode y
 }
 ```
 
-In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Coin) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
+In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about trustless precompiles see [Trustless Precompile Activation](#trustless-precompile-activation).
 
 ### Configuring Dynamic Fees
 
