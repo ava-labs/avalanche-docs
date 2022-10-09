@@ -25,7 +25,7 @@ cd packages/avalanche-connector-example
 npm start
 ```
 
-It everything works as expected, you should be able to load "http://localhost:3000/" on your browser, click on the "Connect Avalanche" button on the page as below:
+If everything works as expected, you should be able to load "http://localhost:3000/" on your browser, click on the "Connect Avalanche" button on the page as below:
 
 ![](/img/connect-core.jpeg)
 
