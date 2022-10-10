@@ -307,7 +307,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts.
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Restricting Who Can Submit Transactions
 
@@ -358,7 +358,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions.
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Minting Native Coins
 
@@ -412,7 +412,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000.
+In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Configuring Dynamic Fees
 
@@ -503,7 +503,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will set the fee config to the values specified in the `initialFeeConfig` field.
+This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ## Examples
 
