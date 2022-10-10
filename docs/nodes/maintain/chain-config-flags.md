@@ -89,7 +89,7 @@ Use the `eth-apis` field to specify the exact set of below services to enable on
 
 :::note
 
-The names used in this configuration flag have been updated in coreth `v.0.8.14`.
+The names used in this configuration flag have been updated in coreth `v0.8.14`.
 The previous names containing `public-` and `private-` are deprecated.
 While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
 
