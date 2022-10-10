@@ -211,6 +211,49 @@ If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn'
 
 Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
 
+### AllowList Interface
+
+The `AllowList` interface is used by precompiles to check if a given address is allowed to use a precompiled contract. `AllowList` consist of two main roles, `Admin` and `Enabled`. `Admin` can add/remove other `Admin` and `Enabled` addresses. `Enabled` addresses can use the precompiled contract, but cannot modify other roles.
+
+`AllowList` adds `adminAddresses` and `enabledAddresses` fields to precompile contract configurations. For instance fee manager precompile contract configuration looks like this:
+
+```json
+{
+  "feeManagerConfig": {
+    "blockTimestamp": 0,
+    "adminAddresses": [<list of addresses>],
+    "enabledAddresses": [<list of addresses>]
+  }
+}
+```
+
+`AllowList` configuration affects only the related precompile. For instance, the admin address in `feeManagerConfig` does not affect admin addresses in other activated precompiles.
+
+The `AllowList` solidity interface is defined as follows:
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IAllowList {
+  // Set [addr] to have the admin role over the precompile
+  function setAdmin(address addr) external;
+
+  // Set [addr] to be enabled on the precompile contract.
+  function setEnabled(address addr) external;
+
+  // Set [addr] to have no role the precompile contract.
+  function setNone(address addr) external;
+
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
+}
+```
+
+`readAllowList(addr)` will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
+
+_Note: `AllowList` is not an actual contract but just an interface. It's not callable by itself. This is used by other precompiles. Check other precompile sections to see how this works._
+
 ### Restricting Smart Contract Deployers
 
 If you'd like to restrict who has the ability to deploy contracts on your
@@ -226,49 +269,24 @@ subnet, you can provide an `AllowList` configuration in your genesis or upgrade 
 ```
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admins` or to add
-`Deployers`. Both `Admins` and `Deployers` can deploy contracts. To provide
+`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admin` or to add
+`Enabled` addresses. Both `Admin` and `Enabled` can deploy contracts. To provide
 a great UX with factory contracts, the `tx.Origin` is checked for being a valid
 deployer instead of the caller of `CREATE`. This means that factory contracts will still be
 able to create new contracts as long as the sender of the original transaction is an allow
 listed deployer.
 
-The `Stateful Precompile` powering the `ContractDeployerAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `ContractDeployerAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
 
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
-// SPDX-License-Identifier: MIT
-
-pragma solidity >=0.8.0;
-
-interface AllowListInterface {
-    // Set [addr] to have the admin role over the allow list
-    function setAdmin(address addr) external;
-
-    // Set [addr] to be enabled on the allow list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the allow list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-}
-```
-
-If you attempt to add a `Deployer` and you are not an `Admin`, you will see
+If you attempt to add a `Enabled` and you are not an `Admin`, you will see
 something like:
 ![admin fail](/img/admin_fail.png)
 
 If you attempt to deploy a contract but you are not an `Admin` not
-a `Deployer`, you will see something like:
+a `Enabled`, you will see something like:
 ![deploy fail](/img/deploy_fail.png)
 
-The allow list has three roles: `None`, `Deployer`, and `Admin`.
-
-If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Deployer`, and `Admin` respectively.
+If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
 
 WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
 
@@ -304,41 +322,18 @@ Similar to restricting contract deployers, this precompile restricts which addre
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
 `Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
-`Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
+`Allowed`. Both `Admins` and `Enabled` can submit transactions to the chain.
 
-The `Stateful Precompile` powering the `TxAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `TxAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
 
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
-// SPDX-License-Identifier: MIT
-
-pragma solidity >=0.8.0;
-
-interface AllowListInterface {
-    // Set [addr] to have the admin role over the allow list
-    function setAdmin(address addr) external;
-
-    // Set [addr] to be enabled on the allow list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the allow list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-}
-```
-
-If you attempt to add an `Allowed` and you are not an `Admin`, you will see
+If you attempt to add an `Enabled` and you are not an `Admin`, you will see
 something like:
 ![admin fail](/img/admin_fail.png)
 
 If you attempt to submit a transaction but you are not an `Admin` or not
-`Allowed`, you will see something like: `cannot issue transaction from non-allow listed address`
+`Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
 
-The allow list has three roles: `None`, `Allowed`, and `Admin`.
+The allow list has three roles: `None`, `Enabled`, and `Admin`.
 
 If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
 
@@ -374,35 +369,26 @@ You can mint native(gas) coins with a precompiled contract. In order to activate
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Minter` accounts. `Minters` and `Admins` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses same methods as in `ContractDeployerAllowList`.
+`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and `Enabled` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses same methods as in `ContractDeployerAllowList`.
 
-The `Stateful Precompile` powering the `ContractNativeMinter` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000001` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `ContractNativeMinter` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000001` (you can load this interface and interact directly in Remix):
 
 ```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
-// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
 
-pragma solidity >=0.8.0;
-
-interface NativeMinterInterface {
-    // Set [addr] to have the admin role over the minter list
-    function setAdmin(address addr) external;
-
-    // Set [addr] to be enabled on the minter list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the minter list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-
-    // Mint [amount] number of native coins and send to [addr]
-    function mintNativeCoin(address addr, uint256 amount) external;
+interface INativeMinter is IAllowList {
+  // Mint [amount] number of native coins and send to [addr]
+  function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
+
+`mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the amount in minimum denomination of native coins (10^-18). For example, if you want to mint 1 native coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
+
+Note that this uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
 
 #### Initial Configuration
 
@@ -439,7 +425,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 
 The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
 
-The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -479,11 +465,14 @@ interface IFeeManager is IAllowList {
 }
 ```
 
+FeeConfigManager precompiles uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
+
 In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
+-
 
 You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#ethfeeconfig-api).
 
@@ -623,7 +612,7 @@ That's it, your Subnet is all set and the desired upgrades will be activated at 
 
 ### Initial Precompile Configurations
 
-Precompiles can be managed by some priveleged addresses to change their configurations and activate their effects. For example, the `feeManagerConfig` precompile can have `adminAdresses` which can change the fee structure of the network.
+Precompiles can be managed by some priveleged addresses to change their configurations and activate their effects. For example, the `feeManagerConfig` precompile can have `adminAddresses` which can change the fee structure of the network.
 
 ```json
 {
