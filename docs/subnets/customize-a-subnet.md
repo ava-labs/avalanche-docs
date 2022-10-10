@@ -278,15 +278,15 @@ listed deployer.
 
 The `Stateful Precompile` contract powering the `ContractDeployerAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
 
-If you attempt to add a `Enabled` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
+- If you attempt to add a `Enabled` and you are not an `Admin`, you will see
+  something like:
+  ![admin fail](/img/admin_fail.png)
 
-If you attempt to deploy a contract but you are not an `Admin` not
-a `Enabled`, you will see something like:
-![deploy fail](/img/deploy_fail.png)
+- If you attempt to deploy a contract but you are not an `Admin` not
+  a `Enabled`, you will see something like:
+  ![deploy fail](/img/deploy_fail.png)
 
-If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
+- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
 
 :::warning
 
@@ -296,7 +296,7 @@ If you remove all of the admins from the allow list, it will no longer be possib
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate it's effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the deployer list. With this, you can define a list of addresses that are allowed to deploy contracts. Since there will be no admin address to manage the deployer list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the deployer list. With this, you can define a list of addresses that are allowed to deploy contracts. Since there will be no admin address to manage the deployer list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
 
 ```json
 {
@@ -307,7 +307,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further information about precompile initial configurations see [Initial Configs](#initial-configs).
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts.
 
 ### Restricting Who Can Submit Transactions
 
@@ -330,16 +330,14 @@ In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
 
 The `Stateful Precompile` contract powering the `TxAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
 
-If you attempt to add an `Enabled` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
+- If you attempt to add an `Enabled` and you are not an `Admin`, you will see
+  something like:
+  ![admin fail](/img/admin_fail.png)
 
-If you attempt to submit a transaction but you are not an `Admin` or not
-`Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
+- If you attempt to submit a transaction but you are not an `Admin` or not
+  `Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
 
-The allow list has three roles: `None`, `Enabled`, and `Admin`.
-
-If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
+- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
 
 :::warning
 
@@ -349,7 +347,7 @@ If you remove all of the admins from the allow list, it will no longer be possib
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate it's effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the tx allow list. With this, you can define a list of addresses that are allowed to submit transactions. Since there will be no admin address to manage the tx list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the tx allow list. With this, you can define a list of addresses that are allowed to submit transactions. Since there will be no admin address to manage the tx list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
 
 ```json
 {
@@ -360,7 +358,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further information about precompile initial configurations see [Initial Configs](#initial-configs).
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions.
 
 ### Minting Native Coins
 
@@ -394,13 +392,13 @@ interface INativeMinter is IAllowList {
 }
 ```
 
-`mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the amount in minimum denomination of native coins (10^-18). For example, if you want to mint 1 native coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
+`mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the amount in minimum denomination of native coins (10^18). For example, if you want to mint 1 native coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
 
 Note that this uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate it's effect on activation timestamp. This provides a way to enable the precompile without an admin address to mint native coins. With this, you can define a list of addresses that will receive an initial mint of the native coin when this precompile activates. This can be useful for networks that require a one-time mint without specifying any admin addresses. To use initial configuration, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to mint native coins. With this, you can define a list of addresses that will receive an initial mint of the native coin when this precompile activates. This can be useful for networks that require a one-time mint without specifying any admin addresses. To use initial configuration, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
 
 ```json
 {
@@ -414,7 +412,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about precompile initial configurations see [Initial Configs](#initial-configs).
+In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000.
 
 ### Configuring Dynamic Fees
 
@@ -431,7 +429,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 }
 ```
 
-The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
@@ -480,13 +478,12 @@ In addition to the AllowList interface, the FeeConfigManager adds the following 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
--
 
-You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#ethfeeconfig-api).
+You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#eth_feeconfig).
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate it's effect on activation timestamp. This provides a way to define your fee structure to take effect at the activation. To use the initial configuration, you need to specify the fee config in `initialFeeConfig` field in your genesis or upgrade file:
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to define your fee structure to take effect at the activation. To use the initial configuration, you need to specify the fee config in `initialFeeConfig` field in your genesis or upgrade file:
 
 ```json
 {
@@ -506,7 +503,7 @@ It's possible to enable this precompile with an initial configuration to activat
 }
 ```
 
-This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about precompile initial configurations see [Initial Configs](#initial-configs).
+This will set the fee config to the values specified in the `initialFeeConfig` field.
 
 ## Examples
 
@@ -614,13 +611,13 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 “subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\"precompileUpgrades\":[{\"feeManagerConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668950000}},{\"txAllowListConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668960000}},{\"feeManagerConfig\":{\"adminAddresses\":null,\"enabledAddresses\":null,\"blockTimestamp\":1668970000,\"disable\":true}}]}, Engine: Dummy Consensus Engine}"”
 ```
 
-Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the activated precompiles at a timestamp with the [`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#ethgetactivateprecompilesat) RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) RPC method will also return the configured upgrades in the response.
+Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the activated precompiles at a timestamp with the [`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactivateprecompilesat) RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#eth_getchainconfig) RPC method will also return the configured upgrades in the response.
 
 That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!
 
 ### Initial Precompile Configurations
 
-Precompiles can be managed by some priveleged addresses to change their configurations and activate their effects. For example, the `feeManagerConfig` precompile can have `adminAddresses` which can change the fee structure of the network.
+Precompiles can be managed by some privileged addresses to change their configurations and activate their effects. For example, the `feeManagerConfig` precompile can have `adminAddresses` which can change the fee structure of the network.
 
 ```json
 {
@@ -635,9 +632,9 @@ Precompiles can be managed by some priveleged addresses to change their configur
 }
 ```
 
-In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to call the precompile in order to activate its effect. I.e it needs to send a transaction with a new fee config to perform the update. This is a very powerful feature, but it also gives a large amount of power to the admin address. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
+In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to call the precompile in order to activate its effect; i.e. it needs to send a transaction with a new fee config to perform the update. This is a very powerful feature, but it also gives a large amount of power to the admin address. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
 
-With the initial configurations, precompiles can immediatly activate their effect on the activation timestamp. With this way admin addresses can be ommitted from the precompile configuration. For example, the `feeManagerConfig` precompile can have `initialFeeConfig` to setup the fee configuration on the activation:
+With the initial configurations, precompiles can immediately activate their effect on the activation timestamp. With this way admin addresses can be omitted from the precompile configuration. For example, the `feeManagerConfig` precompile can have `initialFeeConfig` to setup the fee configuration on the activation:
 
 ```json
 {
@@ -663,7 +660,11 @@ With the initial configurations, precompiles can immediatly activate their effec
 
 Notice that there is no `adminAddresses` field in the configuration. This means that there will be no admin addresses to manage the fee structure with this precompile. The precompile will simply update the fee configuration to the specified fee config when it activates on the `blockTimestamp` `1668950000`.
 
-_Note: If you want to change the precompile initial configuration, you will need to first disable it then activate the precompile again with the new configuration._
+:::info
+
+If you want to change the precompile initial configuration, you will need to first disable it then activate the precompile again with the new configuration.
+
+:::
 
 See every precompile initial configuration in their relevant `Initial Configuration` sections under [Precompiles](#precompiles).
 
