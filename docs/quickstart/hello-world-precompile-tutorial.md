@@ -214,7 +214,7 @@ UsedAddresses = []common.Address{
 	}
 ```
 
-Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`](../core/vm/evm.go#L222), [`STATICCALL`](../core/vm/evm.go#L401), [`DELEGATECALL`](core/vm/evm.go#L362), [`CALLCODE`](core/vm/evm.go#L311), it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L271-L272) if the precompile is enabled.
+Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L222), [`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L401), [`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L362), [`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L311), it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L271-L272) if the precompile is enabled.
 
 ## Step 2: Set Gas Costs
 
