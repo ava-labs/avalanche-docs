@@ -6,7 +6,7 @@ In this tutorial, we are going to walkthrough how we can generate a stateful pre
 ### Precompiled Contracts
 Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following precompiles are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
 
-We can see these precompile mappings from address to function here in the Ethereum vm. 
+We can see these precompile mappings from address to function here in the Ethereum VM. 
 
 ``` go
 // PrecompiledContractsBerlin contains the default set of pre-compiled Ethereum
@@ -862,3 +862,9 @@ ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
 ```
 
 ![](./../../static/img/2022-09-01-16-53-58.png)
+
+
+## Conclusion
+
+We have now created a stateful precompile from scratch with the precompile generation tool. We hope that this is a useful tool to the community!
+Now that you have created a simple stateful precompile, we urge you to create one of your own. If you have an idea for a stateful precompile that may be useful to the community, feel free to create a fork of the Subnet-EVM and create a pull request.
