@@ -716,11 +716,24 @@ avalanche-network-runner server \
 ```
 
 In another terminal tab run this command to get the latest local Subnet-EVM binary. 
+
 ``` bash 
 ./scripts/build.sh
 ```
 
-Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
+Clone the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary. 
+
+``` bash 
+cd ..
+git clone https://github.com/ava-labs/avalanchego.git
+cd avalanchego
+./scripts/build.sh
+cd build
+cp avalanchego ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
+
+```
+
+Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
 
 ``` bash 
 export AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
@@ -738,6 +751,7 @@ Finally we can use avalanche-network-runner to spin up some nodes that run the l
   --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "/tmp/subnet-evm-genesis.json"}]'
 ```
 
+We can look at the server terminal tab and see it booting up the local network.
 If the network startup is successful then you should see something like this.
 
 ``` bash
@@ -749,8 +763,7 @@ If the network startup is successful then you should see something like this.
 ```
 
 Sweet! Now we have blockchain RPCs that can be used to talk to the network!
-
-We now need to modify the hardhat config located in `./contract-examples/contracts/hardhat.config.ts`
+We now need to modify the hardhat config located in `./contract-examples/hardhat.config.ts`
 
 We need to modify the `local` network. 
 Let's change `chainId`, `gas`, and `gasPrice`. Make sure the `chainId` matches the one in the genesis file. 
@@ -866,5 +879,4 @@ ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
 
 ## Conclusion
 
-We have now created a stateful precompile from scratch with the precompile generation tool. We hope that this is a useful tool to the community!
-Now that you have created a simple stateful precompile, we urge you to create one of your own. If you have an idea for a stateful precompile that may be useful to the community, feel free to create a fork of the Subnet-EVM and create a pull request.
+We have now created a stateful precompile from scratch with the precompile generation tool. We hope you had fun and learned a little more about the Subnet-EVM. Now that you have created a simple stateful precompile, we urge you to create one of your own. If you have an idea for a stateful precompile that may be useful to the community, feel free to create a fork of the Subnet-EVM and create a pull request.
