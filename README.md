@@ -18,7 +18,7 @@ Contributing to the docs site is a great way to get involved with the Avalanche 
 
 ### Contents
 
-- All the docs are located in the [docs](docs) directory.
+- All the doc text are located in the [docs](docs) directory; image files are put under [static/img](static/img) directory where a sub-dir is strong recommended if there are multiple image files for a doc.
 - The left side-bar of the page is controlled by [sidebars.js](sidebars.js).
 - Extensive docs for Docusaurus can be found [here](https://docusaurus.io/docs).
 
