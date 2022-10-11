@@ -188,7 +188,7 @@ Typically, custom codes are required in only those areas.
 
 In `./precompile/hello_world.go`, we can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile. 
 
-![](2022-09-01-22-46-00.png)
+![](./../../static/img/2022-09-01-22-46-00.png)
 
 
 We can paste it here in `./precompile/params.go`.
@@ -250,7 +250,7 @@ func (c *sha256hash) RequiredGas(input []byte) uint64 {
 
 Ok time to `CTRL F` throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify. 
 
-![](2022-09-01-22-48-26.png)
+![](./../../static/img/2022-09-01-22-48-26.png)
 
 We can remove the `fmt` import and the `fmt` reference import as we will not use them in this tutorial.
 
@@ -861,4 +861,4 @@ Finally we can go back to the root and run
 ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
 ```
 
-![](2022-09-01-16-53-58.png)
+![](./../../static/img/2022-09-01-16-53-58.png)

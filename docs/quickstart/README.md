@@ -13,4 +13,4 @@
 | [**C-Chain Exchange Integration**](./integrate-exchange-with-avalanche.md)                                                | Guidelines for exchange integration with Ethereum-compatible C-Chain     |
 | [**Tools and Utilities**](./tools-list.md)                                                                                | Collection of popular tools for maintaining nodes and developing Subnets |
 | [**Flow of a Single Blockchain**](./blockchain-flow.md)                                                                   | The different components of a blockchain |
-| [**Hello World Stateful Precompile Tutorial**](./blockchain-flow.md)                                                      | Create A Stateful Precompile From Scratch |
+| [**Hello World Stateful Precompile Tutorial**](./hello-world-precompile-tutorial.md)                                                      | Create A Stateful Precompile From Scratch |
