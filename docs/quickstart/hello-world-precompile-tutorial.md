@@ -315,7 +315,7 @@ Ok time to `CTRL F` throughout the file with `CUSTOM CODE STARTS HERE` to find t
 
 We can remove the `fmt` import and the `fmt` reference import as we will not use them in this tutorial.
 
-Next we see this in `Equals()`.
+Next we see this in `Equal()`.
 
 ```go
 // Equal returns true if [s] is a [*HelloWorldConfig] and it has been configured identical to [c].
@@ -368,7 +368,7 @@ return equalsUpgrade && equalsAllow
 ```
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. Configure configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
+Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
 
 ``` go
 // Configure configures [state] with the initial configuration.
