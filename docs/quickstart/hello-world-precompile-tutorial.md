@@ -32,14 +32,16 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
-<<<<<<< HEAD
 A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface.
 ``` go 
+<<<<<<< HEAD
 =======
 A precompile follows this interface.
 
 ```go
 >>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+=======
+>>>>>>> c2e98076 (fixed link)
 // PrecompiledContract is the basic interface for native Go contracts. The implementation
 // requires a deterministic gas count based on the input size of the Run method of the
 // contract.
@@ -49,14 +51,16 @@ type PrecompiledContract interface {
 }
 ```
 
-<<<<<<< HEAD
 Here is an example of the [sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L238-L252) function.
 ``` go 
+<<<<<<< HEAD
 =======
 Here is an example of the sha256 precompile function.
 
 ```go
 >>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+=======
+>>>>>>> c2e98076 (fixed link)
 type sha256hash struct{}
 
 // RequiredGas returns the gas required to execute the pre-compiled contract.
@@ -75,7 +79,6 @@ func (c *sha256hash) Run(input []byte) ([]byte, error) {
 
 The CALL opcode (CALL, STATICCALL, DELEGATECALL, and CALLCODE) allows us to invoke this precompile.
 
-<<<<<<< HEAD
 The function signature of CALL in the EVM is as follows: 
 ``` go
  Call(caller ContractRef, 
@@ -87,6 +90,7 @@ The function signature of CALL in the EVM is as follows:
 ```
 
 Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result. 
+<<<<<<< HEAD
 =======
 The function signature of CALL in the EVM is as follows:
 
@@ -96,6 +100,8 @@ The function signature of CALL in the EVM is as follows:
 
 Smart contracts in solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result.
 >>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+=======
+>>>>>>> c2e98076 (fixed link)
 
 When a precompile function is called, it still goes through the `CALL` function in the EVM. However, it works a little differently. The EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function.
 
@@ -158,10 +164,14 @@ We will first create a Solidity interface that our precompile will implement.  T
 - Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo.
 - Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo.
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
+<<<<<<< HEAD
 - Download [solc]((https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html))
 =======
 We will first create a Solidity interface that our precompile will implement.  Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/subnet-evm/pull/290) with step by step commits you can follow to double check your work.
 >>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+=======
+- Download [solc](https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html)
+>>>>>>> c2e98076 (fixed link)
 
 # Tutorial
 
