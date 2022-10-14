@@ -660,6 +660,10 @@ With the initial configurations, precompiles can immediately activate their effe
 
 Notice that there is no `adminAddresses` field in the configuration. This means that there will be no admin addresses to manage the fee structure with this precompile. The precompile will simply update the fee configuration to the specified fee config when it activates on the `blockTimestamp` `1668950000`.
 
+:::note
+It's still possible to add `adminAddresses` or `enabledAddresses` along with these initial configurations. In this case, the precompile will be activated with the initial configuration, and admin/enabled addresses can access to the precompiled contract normally.
+:::
+
 :::info
 
 If you want to change the precompile initial configuration, you will need to first disable it then activate the precompile again with the new configuration.
