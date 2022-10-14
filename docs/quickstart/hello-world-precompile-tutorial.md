@@ -4,7 +4,7 @@ In this tutorial, we are going to walkthrough how we can generate a stateful pre
 ## Background
 
 ### Precompiled Contracts
-Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following precompiles are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
+Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following [precompiles](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81) are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
 
 We can see these precompile mappings from address to function here in the Ethereum VM. 
 
@@ -26,7 +26,7 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1. 
 
-A precompile follows this interface.
+A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface.
 ``` go 
 // PrecompiledContract is the basic interface for native Go contracts. The implementation
 // requires a deterministic gas count based on the input size of the Run method of the
@@ -37,7 +37,7 @@ type PrecompiledContract interface {
 }
 ```
 
-Here is an example of the sha256 precompile function.
+Here is an example of the [sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L238-L252) function.
 ``` go 
 type sha256hash struct{}
 
@@ -59,10 +59,15 @@ The CALL opcode (CALL, STATICCALL, DELEGATECALL, and CALLCODE) allows us to invo
 
 The function signature of CALL in the EVM is as follows: 
 ``` go
- Call(caller ContractRef, addr common.Address, input []byte, gas uint64, value *big.Int) (ret []byte, leftOverGas uint64, err error) {
+ Call(caller ContractRef, 
+ addr common.Address, 
+ input []byte, 
+ gas uint64,
+ value *big.Int) 
+ (ret []byte, leftOverGas uint64, err error) {
 ```
 
-Smart contracts in solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result. 
+Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result. 
 
 When a precompile function is called, it still goes through the `CALL` function in the EVM. However, it works a little differently. The EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function. 
 
@@ -84,7 +89,13 @@ A stateful precompile follows this interface.
 // StatefulPrecompiledContract is the interface for executing a precompiled contract
 type StatefulPrecompiledContract interface {
 	// Run executes the precompiled contract.
-	Run(accessibleState PrecompileAccessibleState, caller common.Address, addr  common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error)
+	Run(accessibleState PrecompileAccessibleState, 
+	caller common.Address, 
+	addr  common.Address, 
+	input []byte, 
+	suppliedGas uint64, 
+	readOnly bool) 
+	(ret []byte, remainingGas uint64, err error)
 
 }
 ```
@@ -94,9 +105,9 @@ Notice the most important difference between the stateful precompile and precomp
  With state access, we can modify balances, read/write the storage of other contracts, and could even hook into external storage outside of the bounds of the EVM’s merkle trie (note: this would come with repercussions for 
  state sync since part of the state would be moved off of the merkle trie). We can now write custom logic to make our own EVM. 
 
-### Assumption of Knowledge
 
-Here are some helpful resources on the EVM to solidify your knowledge.
+### Assumption of Knowledge
+We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowlege of the EVM, but it is extremely helpful. Here are some resources to get started. 
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
@@ -108,11 +119,18 @@ Here are some helpful resources on the EVM to solidify your knowledge.
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
 - [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
 
+
 ### The Process
 
-We will first create a Solidity interface that our precompile will implement.  Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/subnet-evm/pull/290) with step by step commits you can follow to double check your work. 
+We will first create a Solidity interface that our precompile will implement.  Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) with step by step commits you can follow to double check your work.
 
-## Tutorial
+### Prerequisites
+- Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo.
+- Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo.
+- Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
+- Download [solc]((https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html))
+
+# Tutorial
 
 We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access. 
 
@@ -138,7 +156,7 @@ interface IHelloWorld {
 Now we have an interface that our precompile can implement!
 Let's create an [abi](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#:~:text=Contract%20ABI%20Specification-,Basic%20Design,as%20described%20in%20this%20specification.) of our solidity code.
 
-In the same `./contract-examples/contracts` directory, let's [download solc](https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html) and run
+In the same `./contract-examples/contracts` directory, let's run
 ```
 solc --abi IHelloWorld.sol -o .
 ```
@@ -153,7 +171,7 @@ IHelloWorld.abi
 
 Note: The abi must have named outputs in order to generate the precompile template. 
 
-## Generating the precompile 
+### Generating the precompile 
 
 Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
 
@@ -721,11 +739,9 @@ In another terminal tab run this command to get the latest local Subnet-EVM bina
 ./scripts/build.sh
 ```
 
-Clone the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary. 
+Go to the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary. 
 
 ``` bash 
-cd ..
-git clone https://github.com/ava-labs/avalanchego.git
 cd avalanchego
 ./scripts/build.sh
 cd build
@@ -815,7 +831,7 @@ npx hardhat test --network local
 
 Great they passed! All the functions implemented in the precompile work as expected!
 
-**Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/subnet-evm/pull/290) to double check your work as well.  
+**Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.  
 
 ## Step 8: Create Genesis
 
