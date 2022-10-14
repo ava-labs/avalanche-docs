@@ -165,7 +165,7 @@ We will first create a Solidity interface that our precompile will implement.  T
 
 # Tutorial
 
-We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access.
+We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access. For the rest of the tutorial, we will be working in a new branch in Subnet-EVM. 
 
 We will place the interface in `./contract-examples/contracts`
 
