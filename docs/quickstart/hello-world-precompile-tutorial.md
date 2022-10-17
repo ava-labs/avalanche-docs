@@ -900,7 +900,7 @@ ginkgo.It("hello world", func() {
 	*/
 ```
 
-## Step 10: Run E2E Test
+### Step 10: Run E2E Test
 
 Now we can run it, this time with the `ENABLE_SOLIDITY_TESTS` flag on. We should expect this to pass since we did such thorough testing in Step 7.
 
