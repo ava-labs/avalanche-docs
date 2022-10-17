@@ -197,7 +197,7 @@ IHelloWorld.abi
 
 Note: The abi must have named outputs in order to generate the precompile template.
 
-### Generating the precompile
+### Generating the Precompile
 
 Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
 
