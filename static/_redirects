@@ -132,8 +132,6 @@
 /build/tutorials / 301
 /build/references/platform-transaction-serialization/ /quickstart/references/platform-transaction-serialization 301
 /build/references/platform-transaction-serialization /quickstart/references/platform-transaction-serialization 301
-/build/references/coreth-arc20s/ /quickstart/references/coreth-arc20s 301
-/build/references/coreth-arc20s /quickstart/references/coreth-arc20s 301
 /build/references/avm-transaction-serialization/ /quickstart/references/avm-transaction-serialization 301
 /build/references/avm-transaction-serialization /quickstart/references/avm-transaction-serialization 301
 /build/references/network-protocol/ /quickstart/references/network-protocol 301
