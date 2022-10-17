@@ -136,7 +136,7 @@ We will first create a Solidity interface that our precompile will implement. Th
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Download [solc](<(https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html)>)
 
-# Tutorial
+## Tutorial
 
 We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access.
 
@@ -228,7 +228,7 @@ Typically, custom codes are required in only those areas.
 */
 ```
 
-## Step 1: Set Contract Address
+### Step 1: Set Contract Address
 
 In `./precompile/hello_world.go`, we can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile.
 
@@ -260,7 +260,7 @@ UsedAddresses = []common.Address{
 
 Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L222), [`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L401), [`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L362), [`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L311), it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L271-L272) if the precompile is enabled.
 
-## Step 2: Set Gas Costs
+### Step 2: Set Gas Costs
 
 Set up gas costs. In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`. This is a good starting point for estimating gas costs.
 
@@ -290,7 +290,7 @@ func (c *sha256hash) RequiredGas(input []byte) uint64 {
 }
 ```
 
-## Step 3: Add Custom Code
+### Step 3: Add Custom Code
 
 Ok time to `CTRL F` throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify.
 
@@ -444,7 +444,7 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 }
 ```
 
-## Step 4: Add Upgradable Config
+### Step 4: Add Upgradable Config
 
 Let's now modify `params/precompile_config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`.
 
@@ -553,7 +553,7 @@ func (c *ChainConfig) GetActivePrecompiles(blockTimestamp *big.Int) PrecompileUp
 
 Done! All we had to do was follow the comments.
 
-## Step 5: Add Precompile Upgrade
+### Step 5: Add Precompile Upgrade
 
 Let's add our precompile upgrade in `params/config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
 
@@ -593,7 +593,7 @@ rules.IsHelloWorldEnabled = c.IsHelloWorld(blockTimestamp)
 
 Done! All we had to do was follow the comments.
 
-## Step 6: Add Test Contract
+### Step 6: Add Test Contract
 
 Let's add our test contract to `contract-examples/contracts`. This smart contract lets us interact with our precompile! We cast the HelloWorld precompile address to the IHelloWorld interface. In doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on that contract, we will be redirected to the HelloWorld precompile address. Let's name it `ExampleHelloWorld.sol`.
 
@@ -620,7 +620,7 @@ contract ExampleHelloWorld {
 
 Note that the contract methods do not need to have the same function signatures as the precompile. This contract is simply a wrapper.
 
-## Step 7: Add Precompile Solidity Tests
+### Step 7: Add Precompile Solidity Tests
 
 We can now write our hardhat test in `contract-examples/test`. This file is called `ExampleHelloWorld.ts`.
 
@@ -862,13 +862,13 @@ Great they passed! All the functions implemented in the precompile work as expec
 
 **Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.
 
-## Step 8: Create Genesis
+### Step 8: Create Genesis
 
 We can move our genesis file we created in the last step to `tests/e2e/genesis/`.
 
 `cp /tmp/subnet-evm-genesis.json tests/e2e/genesis/hello_world.json`
 
-## Step 9: Add E2E tests
+### Step 9: Add E2E tests
 
 In `tests/e2e/solidity/suites.go` we can now write our first e2e test!
 It's another nice copy and paste situation.
@@ -921,6 +921,6 @@ ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
 
 ![Ran 6 of 6 specs](./../../static/img/2022-09-01-16-53-58.png)
 
-## Conclusion
+### Conclusion
 
 We have now created a stateful precompile from scratch with the precompile generation tool. We hope you had fun and learned a little more about the Subnet-EVM. Now that you have created a simple stateful precompile, we urge you to create one of your own. If you have an idea for a stateful precompile that may be useful to the community, feel free to create a fork of the Subnet-EVM and create a pull request.
