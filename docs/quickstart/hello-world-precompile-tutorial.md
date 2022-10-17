@@ -5,16 +5,12 @@ In this tutorial, we are going to walkthrough how we can generate a stateful pre
 ## Background
 
 ### Precompiled Contracts
-<<<<<<< HEAD
-Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following [precompiles](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81) are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
-=======
 
-Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following precompiles are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following [precompiles](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81) are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
 
 We can see these precompile mappings from address to function here in the Ethereum VM.
 
-``` go
+```go
 // PrecompiledContractsBerlin contains the default set of pre-compiled Ethereum
 // contracts used in the Berlin release.
 var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
@@ -33,15 +29,8 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
 A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface.
-``` go 
-<<<<<<< HEAD
-=======
-A precompile follows this interface.
 
 ```go
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
-=======
->>>>>>> c2e98076 (fixed link)
 // PrecompiledContract is the basic interface for native Go contracts. The implementation
 // requires a deterministic gas count based on the input size of the Run method of the
 // contract.
@@ -52,15 +41,8 @@ type PrecompiledContract interface {
 ```
 
 Here is an example of the [sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L238-L252) function.
-``` go 
-<<<<<<< HEAD
-=======
-Here is an example of the sha256 precompile function.
 
 ```go
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
-=======
->>>>>>> c2e98076 (fixed link)
 type sha256hash struct{}
 
 // RequiredGas returns the gas required to execute the pre-compiled contract.
@@ -79,33 +61,22 @@ func (c *sha256hash) Run(input []byte) ([]byte, error) {
 
 The CALL opcode (CALL, STATICCALL, DELEGATECALL, and CALLCODE) allows us to invoke this precompile.
 
-The function signature of CALL in the EVM is as follows: 
-``` go
- Call(caller ContractRef, 
- addr common.Address, 
- input []byte, 
- gas uint64,
- value *big.Int) 
- (ret []byte, leftOverGas uint64, err error) {
-```
-
-Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result. 
-<<<<<<< HEAD
-=======
 The function signature of CALL in the EVM is as follows:
 
 ```go
- Call(caller ContractRef, addr common.Address, input []byte, gas uint64, value *big.Int) (ret []byte, leftOverGas uint64, err error) {
+ Call(caller ContractRef,
+ addr common.Address,
+ input []byte,
+ gas uint64,
+ value *big.Int)
+ (ret []byte, leftOverGas uint64, err error) {
 ```
 
-Smart contracts in solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result.
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
-=======
->>>>>>> c2e98076 (fixed link)
+Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain and an address (usually known as the contract address) is assigned to it. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM. It takes in the caller address, the contract address, the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data), gas, and value (native token). The function selector from the input lets the EVM know where to start from in the bytecode of the smart contract. It then executes a series of instructions (EVM opcodes) and returns the result.
 
 When a precompile function is called, it still goes through the `CALL` function in the EVM. However, it works a little differently. The EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function.
 
-``` go
+```go
   if p := precompiles[addr]; p != nil {
     return RunPrecompiledContract(p, input, contract)
   }
@@ -125,12 +96,12 @@ A stateful precompile follows this interface.
 // StatefulPrecompiledContract is the interface for executing a precompiled contract
 type StatefulPrecompiledContract interface {
 	// Run executes the precompiled contract.
-	Run(accessibleState PrecompileAccessibleState, 
-	caller common.Address, 
-	addr  common.Address, 
-	input []byte, 
-	suppliedGas uint64, 
-	readOnly bool) 
+	Run(accessibleState PrecompileAccessibleState,
+	caller common.Address,
+	addr  common.Address,
+	input []byte,
+	suppliedGas uint64,
+	readOnly bool)
 	(ret []byte, remainingGas uint64, err error)
 
 }
@@ -138,11 +109,11 @@ type StatefulPrecompiledContract interface {
 
 Notice the most important difference between the stateful precompile and precompile interface. We now inject state access to the `Run` function. Precompiles only took in a single byte slice as input. However, stateful precompile functions have complete access to the Subnet-EVM state, and can be used to implement a much wider range of functionalities.
 
- With state access, we can modify balances, read/write the storage of other contracts, and could even hook into external storage outside of the bounds of the EVM’s merkle trie (note: this would come with repercussions for state sync since part of the state would be moved off of the merkle trie). We can now write custom logic to make our own EVM.
-
+With state access, we can modify balances, read/write the storage of other contracts, and could even hook into external storage outside of the bounds of the EVM’s merkle trie (note: this would come with repercussions for state sync since part of the state would be moved off of the merkle trie). We can now write custom logic to make our own EVM.
 
 ### Assumption of Knowledge
-We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowlege of the EVM, but it is extremely helpful. Here are some resources to get started. 
+
+We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowlege of the EVM, but it is extremely helpful. Here are some resources to get started.
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
@@ -154,28 +125,20 @@ We assume that the user has knowledge of git, golang, and javascript. It is not 
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
 - [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
 
-
 ### The Process
 
-<<<<<<< HEAD
-We will first create a Solidity interface that our precompile will implement.  Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) with step by step commits you can follow to double check your work.
+We will first create a Solidity interface that our precompile will implement. Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) with step by step commits you can follow to double check your work.
 
 ### Prerequisites
+
 - Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo.
 - Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo.
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
-<<<<<<< HEAD
-- Download [solc]((https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html))
-=======
-We will first create a Solidity interface that our precompile will implement.  Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/subnet-evm/pull/290) with step by step commits you can follow to double check your work.
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
-=======
-- Download [solc](https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html)
->>>>>>> c2e98076 (fixed link)
+- Download [solc](<(https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html)>)
 
 # Tutorial
 
-We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access. For the rest of the tutorial, we will be working in a new branch in Subnet-EVM. 
+We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access.
 
 We will place the interface in `./contract-examples/contracts`
 
@@ -199,14 +162,9 @@ interface IHelloWorld {
 Now we have an interface that our precompile can implement!
 Let's create an [abi](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#:~:text=Contract%20ABI%20Specification-,Basic%20Design,as%20described%20in%20this%20specification.) of our solidity code.
 
-<<<<<<< HEAD
 In the same `./contract-examples/contracts` directory, let's run
-```
-=======
-In the same `./contract-examples/contracts` directory, let's [download solc](https://docs.soliditylang.org/en/v0.8.9/installing-solidity.html) and run
 
-```bash
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+```
 solc --abi IHelloWorld.sol -o .
 ```
 
@@ -214,17 +172,32 @@ This spits out the abi code!
 
 IHelloWorld.abi
 
-``` json
-[{"inputs":[],"name":"sayHello","outputs":[{"internalType":"string","name":"result","type":"string"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"recipient","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+```json
+[
+  {
+    "inputs": [],
+    "name": "sayHello",
+    "outputs": [
+      { "internalType": "string", "name": "result", "type": "string" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "recipient", "type": "string" }
+    ],
+    "name": "setGreeting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
 ```
 
 Note: The abi must have named outputs in order to generate the precompile template.
 
-<<<<<<< HEAD
-### Generating the precompile 
-=======
-## Generating the precompile
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
+### Generating the precompile
 
 Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
 
@@ -238,7 +211,7 @@ Wow! We just got a precompile template that's mostly complete located at `./prec
 
 The precompile gives us commented instructions on the first 25 lines of the autogenerated file. Let's look at the 10 steps and follow them step by step.
 
-``` go
+```go
 /* General guidelines for precompile development:
 1- Read the comment and set a suitable contract address in precompile/params.go. E.g:
 	HelloWorldAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
@@ -291,7 +264,7 @@ Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`
 
 Set up gas costs. In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`. This is a good starting point for estimating gas costs.
 
-``` go
+```go
 // Gas costs for stateful precompiles
 const (
 	writeGasCostPerSlot = 20_000
@@ -301,7 +274,7 @@ const (
 
 For example, we will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
-``` go
+```go
 	SayHelloGasCost uint64    = 5000
 	SetGreetingGasGost uint64 = 20_000
 ```
@@ -325,7 +298,7 @@ Ok time to `CTRL F` throughout the file with `CUSTOM CODE STARTS HERE` to find t
 
 We can remove the `fmt` import and the `fmt` reference import as we will not use them in this tutorial.
 
-Next we see this in `Equal()`.
+Next we see this in `Equals()`.
 
 ```go
 // Equal returns true if [s] is a [*HelloWorldConfig] and it has been configured identical to [c].
@@ -358,7 +331,7 @@ type HelloWorldConfig struct {
 If our HelloWorldConfig wrapped another config in its struct to implement the StatefulPrecompileConfig
 like so,
 
-``` go
+```go
 // HelloWorldConfig implements the StatefulPrecompileConfig
 // interface while adding in the IHelloWorld specific precompile address.
 
@@ -378,9 +351,9 @@ return equalsUpgrade && equalsAllow
 ```
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
+Let's set it up. Configure configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
 
-``` go
+```go
 // Configure configures [state] with the initial configuration.
 func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContext) {
 	// CUSTOM CODE STARTS HERE
@@ -396,18 +369,18 @@ func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContex
 }
 ```
 
-We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal. We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`.  You can copy and paste this cleaner version of the function in.
+We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal. We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`. You can copy and paste this cleaner version of the function in.
 
-``` go
+```go
 // Verify tries to verify HelloWorldConfig and returns an error accordingly.
 func (c *HelloWorldConfig) Verify() error {
 	return nil
 }
 ```
 
-Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol` interface with two functions `sayHello()` and `setGreeting()`.  We finally get to implement them here. If any contract calls these functions from the interface, the below function gets executed. This function is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
+Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol` interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here. If any contract calls these functions from the interface, the below function gets executed. This function is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
 
-``` go
+```go
 func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = deductGas(suppliedGas, SayHelloGasCost); err != nil {
 		return nil, 0, err
@@ -433,9 +406,9 @@ func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, 
 }
 ```
 
- We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input` and we will set that as the value in the state mapping with the key as `storageKey`.  
+We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input` and we will set that as the value in the state mapping with the key as `storageKey`.
 
-``` go
+```go
 func setGreeting(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = deductGas(suppliedGas, SetGreetingGasCost); err != nil {
 		return nil, 0, err
@@ -457,8 +430,8 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
       return nil, 0, errors.New("input string is longer than 32 bytes")
     }
 
-  // setGreeting is the execution function 
-  // "SetGreeting(name string)" and sets the storageKey 
+  // setGreeting is the execution function
+  // "SetGreeting(name string)" and sets the storageKey
   // in the string returned by hello world
   res := common.LeftPadBytes([]byte(inputStr), common.HashLength)
 	accessibleState.GetStateDB().SetState(HelloWorldAddress, common. BytesToHash([]byte("storageKey")), common.BytesToHash(res))
@@ -491,7 +464,7 @@ const (
 
 We should also add our precompile key to our `precompileKeys` slice. We use this slice to iterate over the keys and activate the precompiles.
 
-``` go
+```go
 // ADD YOUR PRECOMPILE HERE
 var precompileKeys = []precompileKey{contractDeployerAllowListKey, contractNativeMinterKey, txAllowListKey, feeManagerKey, helloWorldKey /* {yourPrecompile}Key */}
 ```
@@ -536,7 +509,7 @@ func (p *PrecompileUpgrade) getByKey(key precompileKey) (precompile.StatefulPrec
 }
 ```
 
-We should also define `GetHelloWorldConfig`. Given a `blockTimestamp`, we will return the `*precompile.HelloWorldConfig` if it is enabled. We use this function to check whether precompiles are enabled in `params/config.go`. This function is also used to construct a `PrecompileUpgrade` struct in `GetActivePrecompiles()`.  
+We should also define `GetHelloWorldConfig`. Given a `blockTimestamp`, we will return the `*precompile.HelloWorldConfig` if it is enabled. We use this function to check whether precompiles are enabled in `params/config.go`. This function is also used to construct a `PrecompileUpgrade` struct in `GetActivePrecompiles()`.
 
 ```go
 // GetHelloWorldConfig returns the latest forked HelloWorldConfig
@@ -549,9 +522,9 @@ func (c *ChainConfig) GetHelloWorldConfig(blockTimestamp *big.Int) *precompile.H
 }
 ```
 
-Finally, we can add our precompile in `GetActivePrecompiles()`,  which given a `blockTimestamp` returns a `PrecompileUpgrade` struct. This function is used in the Ethereum API and can give a user information about what precompiles are enabled at a certain block timestamp. For more information about our Ethereum API, check out this [link](https://docs.avax.network/apis/avalanchego/apis/subnet-evm).
+Finally, we can add our precompile in `GetActivePrecompiles()`, which given a `blockTimestamp` returns a `PrecompileUpgrade` struct. This function is used in the Ethereum API and can give a user information about what precompiles are enabled at a certain block timestamp. For more information about our Ethereum API, check out this [link](https://docs.avax.network/apis/avalanchego/apis/subnet-evm).
 
-``` go
+```go
 func (c *ChainConfig) GetActivePrecompiles(blockTimestamp *big.Int) PrecompileUpgrade {
 	pu := PrecompileUpgrade{}
 	if config := c.GetContractDeployerAllowListConfig(blockTimestamp); config != nil && !config.Disable {
@@ -584,21 +557,21 @@ Done! All we had to do was follow the comments.
 
 Let's add our precompile upgrade in `params/config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
 
-Let's add the bool to check if our precompile is enabled.  We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
+Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
 
-``` go
+```go
   IsContractNativeMinterEnabled      bool
   IsTxAllowListEnabled               bool
   IsFeeConfigManagerEnabled          bool
   IsHelloWorldEnabled                bool
   // ADD YOUR PRECOMPILE HERE
   // Is{YourPrecompile}Enabled       bool
- ```
+```
 
-We can add `IsHelloWorld()` which checks if we are equal or greater than the fork `blockTimestamp`. We use this to check out whether the precompile is enabled. We defined `GetHelloWorldConfig()` in the last step.  
+We can add `IsHelloWorld()` which checks if we are equal or greater than the fork `blockTimestamp`. We use this to check out whether the precompile is enabled. We defined `GetHelloWorldConfig()` in the last step.
 
 ```go
-// IsHelloWorld returns whether [blockTimestamp] is either equal to the HelloWorld 
+// IsHelloWorld returns whether [blockTimestamp] is either equal to the HelloWorld
 // fork block timestamp or greater.
 
 func (c *ChainConfig) IsHelloWorld(blockTimestamp *big.Int) bool {
@@ -651,109 +624,110 @@ Note that the contract methods do not need to have the same function signatures 
 
 We can now write our hardhat test in `contract-examples/test`. This file is called `ExampleHelloWorld.ts`.
 
-``` js
+```js
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
-import { expect } from "chai";
+import { expect } from "chai"
 import { ethers } from "hardhat"
-import {
-    Contract,
-    ContractFactory,
-} from "ethers"
+import { Contract, ContractFactory } from "ethers"
 
 describe("ExampleHelloWorld", function () {
-    let helloWorldContract: Contract;
+  let helloWorldContract: Contract
 
-    before(async function () {
-        // Deploy Hello World Contract
-        const ContractF: ContractFactory = await ethers.getContractFactory("ExampleHelloWorld");
-        helloWorldContract = await ContractF.deploy();
-        await helloWorldContract.deployed();
-        const helloWorldContractAddress: string = helloWorldContract.address;
-        console.log(`Contract deployed to: ${helloWorldContractAddress}`);
-    });
+  before(async function () {
+    // Deploy Hello World Contract
+    const ContractF: ContractFactory = await ethers.getContractFactory(
+      "ExampleHelloWorld"
+    )
+    helloWorldContract = await ContractF.deploy()
+    await helloWorldContract.deployed()
+    const helloWorldContractAddress: string = helloWorldContract.address
+    console.log(`Contract deployed to: ${helloWorldContractAddress}`)
+  })
 
-    it("should getHello properly", async function () {
-        let result = await helloWorldContract.callStatic.getHello();
-        expect(result).to.equal("Hello World!");
-    });
+  it("should getHello properly", async function () {
+    let result = await helloWorldContract.callStatic.getHello()
+    expect(result).to.equal("Hello World!")
+  })
 
-    it("should setGreeting and getHello", async function () {
-        const modifiedGreeting = "What's up";
-        let tx = await helloWorldContract.setGreeting(modifiedGreeting);
-        await tx.wait();
+  it("should setGreeting and getHello", async function () {
+    const modifiedGreeting = "What's up"
+    let tx = await helloWorldContract.setGreeting(modifiedGreeting)
+    await tx.wait()
 
-        expect(await helloWorldContract.callStatic.getHello()).to.be.equal(modifiedGreeting);
-    });
-});
+    expect(await helloWorldContract.callStatic.getHello()).to.be.equal(
+      modifiedGreeting
+    )
+  })
+})
 ```
 
 Let's also make sure to install yarn in `./contract-examples`
 
 ```bash
-npm install -g yarn 
-yarn 
+npm install -g yarn
+yarn
 
 ```
 
 Let's see if it passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary subnet) as well as another blockchain that follows the rules defined by the Subnet-EVM.
 
-To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain.  Put this file in `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
+To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain. Put this file in `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
 
 ```json
 {
-    "config": {
-        "chainId": 99999,
-        "homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-        "eip155Block": 0,
-        "eip158Block": 0,
-        "byzantiumBlock": 0,
-        "constantinopleBlock": 0,
-        "petersburgBlock": 0,
-        "istanbulBlock": 0,
-        "muirGlacierBlock": 0,
-        "subnetEVMTimestamp": 0,
-        "feeConfig": {
-            "gasLimit": 20000000,
-            "minBaseFee": 1000000000,
-            "targetGas": 100000000,
-            "baseFeeChangeDenominator": 48,
-            "minBlockGasCost": 0,
-            "maxBlockGasCost": 10000000,
-            "targetBlockRate": 2,
-            "blockGasCostStep": 500000
-        },
-        "helloWorldConfig": {
-            "blockTimestamp": 0
-        }
+  "config": {
+    "chainId": 99999,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 20000000,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "targetBlockRate": 2,
+      "blockGasCostStep": 500000
     },
-    "alloc": {
-        "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
-            "balance": "0x52B7D2DCC80CD2E4000000"
-        },
-        "0x0Fa8EA536Be85F32724D57A37758761B86416123": {
-            "balance": "0x52B7D2DCC80CD2E4000000"
-        }
+    "helloWorldConfig": {
+      "blockTimestamp": 0
+    }
+  },
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x52B7D2DCC80CD2E4000000"
     },
-    "nonce": "0x0",
-    "timestamp": "0x0",
-    "extraData": "0x00",
-    "gasLimit": "0x1312D00",
-    "difficulty": "0x0",
-    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "coinbase": "0x0000000000000000000000000000000000000000",
-    "number": "0x0",
-    "gasUsed": "0x0",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    "0x0Fa8EA536Be85F32724D57A37758761B86416123": {
+      "balance": "0x52B7D2DCC80CD2E4000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "0x1312D00",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
 }
 ```
 
-Adding this to our genesis enables our HelloWorld precompile.  
+Adding this to our genesis enables our HelloWorld precompile.
 
-``` json
+```json
 "helloWorldConfig": {
   "blockTimestamp": 0
 },
@@ -761,7 +735,7 @@ Adding this to our genesis enables our HelloWorld precompile.
 
 As a reminder, we defined `helloWorldConfig` in `./params/precompile_config.go`. By putting this in genesis, we enable our HelloWorld precompile at blockTimestamp 0.
 
-``` go
+```go
 // PrecompileUpgrade is a helper struct embedded in UpgradeConfig, representing
 // each of the possible stateful precompile types that can be activated
 // as a network upgrade.
@@ -793,17 +767,9 @@ In another terminal tab run this command to get the latest local Subnet-EVM bina
 ./scripts/build.sh
 ```
 
-<<<<<<< HEAD
-Go to the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary. 
-
-``` bash 
-=======
-Clone the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary.
+Go to the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary.
 
 ```bash
-cd ..
-git clone https://github.com/ava-labs/avalanchego.git
->>>>>>> 9cce351f (Fixes per [Markdown lint](https://github.com/DavidAnson/markdownlint))
 cd avalanchego
 ./scripts/build.sh
 cd build
@@ -813,7 +779,7 @@ cp avalanchego ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 
 Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
 
-``` bash
+```bash
 export AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
 export AVALANCHEGO_PLUGIN_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/plugins"
 ```
@@ -833,7 +799,7 @@ Finally we can use avalanche-network-runner to spin up some nodes that run the l
 We can look at the server terminal tab and see it booting up the local network.
 If the network startup is successful then you should see something like this.
 
-``` bash
+```bash
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9650/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9652/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9654/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
@@ -876,7 +842,7 @@ We also need to make sure `localRPC` points to the right value.
 
 Let's copy `local_rpc.example.json`.
 
-``` cp local_rpc.example.json local_rpc.json ```
+`cp local_rpc.example.json local_rpc.json`
 
 Now in `local_rpc.json` we can modify the rpc url to the one we just created. It should look something like this.
 
@@ -888,26 +854,26 @@ Now in `local_rpc.json` we can modify the rpc url to the one we just created. It
 
 Now if we go to `./contract-examples`, we can finally run our tests.
 
-``` bash
-npx hardhat test --network local 
+```bash
+npx hardhat test --network local
 ```
 
 Great they passed! All the functions implemented in the precompile work as expected!
 
-**Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.  
+**Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.
 
 ## Step 8: Create Genesis
 
-We can move our genesis file we created in the last step to  `tests/e2e/genesis/`.
+We can move our genesis file we created in the last step to `tests/e2e/genesis/`.
 
-```cp /tmp/subnet-evm-genesis.json  tests/e2e/genesis/hello_world.json```
+`cp /tmp/subnet-evm-genesis.json tests/e2e/genesis/hello_world.json`
 
 ## Step 9: Add E2E tests
 
 In `tests/e2e/solidity/suites.go` we can now write our first e2e test!
 It's another nice copy and paste situation.
 
-``` go
+```go
 ginkgo.It("hello world", func() {
 		err := startSubnet("./tests/e2e/genesis/hello_world.json")
 		gomega.Expect(err).Should(gomega.BeNil())
@@ -941,7 +907,7 @@ Now we can run it, this time with the `ENABLE_SOLIDITY_TESTS` flag on. We should
 We also need to modify the genesis in `./scripts/run.sh` to enable our precompile.
 Let's add this to the genesis.
 
-``` json
+```json
 "helloWorldConfig": {
   "blockTimestamp": 0
 },
