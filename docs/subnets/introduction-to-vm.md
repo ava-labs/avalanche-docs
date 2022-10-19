@@ -94,7 +94,9 @@ Every VM should implement the following interfaces:
 
 ### `block.ChainVM`
 
-To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface. For more information, see [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface.
+
+For more information, see [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 ```go title="/snow/engine/snowman/block/vm.go"
 // ChainVM defines the required functionality of a Snowman VM.
@@ -288,7 +290,9 @@ type Block interface {
 
 ### `choices.Decidable`
 
-This interface is a superset of every decidable object, such as transactions, blocks, and vertices. For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go).
+This interface is a superset of every decidable object, such as transactions, blocks, and vertices.
+
+For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go).
 
 ```go title="/snow/choices/decidable.go"
 // Decidable represents element that can be decided.
@@ -323,13 +327,3 @@ type Decidable interface {
 	Status() Status
 }
 ```
-
-## rpcchainvm
-
-`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client.
-
-The [server](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC.
-
-The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of `AvalancheGo` and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
-
-To make things more concrete: suppose that `AvalancheGo` wants to retrieve a block from a chain run in this fashion. `AvalancheGo` calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to `AvalancheGo`.
