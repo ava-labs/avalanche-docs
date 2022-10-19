@@ -949,7 +949,9 @@ func Upload(
 	return rk, nil
 }
 ```
+
 #### Example:
+
 ```shell
 blob-cli set-file ~/Downloads/computer.gif -> 6fe5a52f52b34fb1e07ba90bad47811c645176d0d49ef0c7a7b4b22013f676c8
 ```
@@ -1006,12 +1008,12 @@ func Download(ctx context.Context, cli client.Client, root common.Hash, f io.Wri
 ```
 
 #### Example
+
 ```go
 blob-cli resolve-file 6fe5a52f52b34fb1e07ba90bad47811c645176d0d49ef0c7a7b4b22013f676c8 computer_copy.gif
 ```
 
 ## Conclusion
-
 This documentation covers concepts about Virtual Machine by walking through a VM that implements a decentralized key-value store.
 
 You can learn more about the BlobVM by referencing the [README](https://github.com/ava-labs/blobvm/blob/master/README.md) in the GitHub repository.
