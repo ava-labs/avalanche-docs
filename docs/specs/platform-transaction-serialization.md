@@ -681,7 +681,7 @@ TODO
 
 ### What Unsigned Add Permissionless Validator Tx Contains
 
-An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `Signer`, `StakeOuts`, `ValidatorRewardsOwner`, `DelegatorRewardsOwner`, `DelegationShares`. The `TypeID` for this type is `0x0000000?`.
+An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`, `DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is `0x0000000?`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -689,14 +689,14 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet id
+- **`SubnetID`** a 32 byte Subnet ID of the subnet this validator is validating.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS key for this validator. If the [SubnetID] is not the primary network, this value is the empty signer.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
 - **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
 - **`DelegationShares`** a short which is the fee this validator charges delegators as a percentage, times 10,000 For example, if this validator has DelegationShares=300,000 then they take 30% of rewards from delegators.
 
-### Gantt Unsigned Add Subnet Permissionless Tx Specification
+### Gantt Unsigned Add Permissionless Validator Tx Specification
 
 ```text
 +---------------+----------------------+------------------------------------------------+
@@ -737,6 +737,57 @@ message AddPermissionlessValidatorTx {
 ```
 
 ### Unsigned Add Permissionless Validator Tx Example
+
+TODO
+
+## Unsigned Add Permissionless Delegator Tx
+
+### What Unsigned Add Permissionless Delegator Tx Contains
+
+An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type is `0x0000000?`.
+
+- **`BaseTx`**
+- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  - **`Weight`** is a long which is the amount the validator stakes
+- **`SubnetID`** a 32 byte Subnet ID of the subnet this validator is validating.
+- **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
+- **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
+
+### Gantt Unsigned Add Permissionless Delegator Tx Specification
+
+```text
++---------------+----------------------+------------------------------------------------+
+| base_tx       : BaseTx               |                            size(base_tx) bytes |
++---------------+----------------------+------------------------------------------------+
+| validator     : Validator            |                                       44 bytes |
++---------------+----------------------+------------------------------------------------+
+| subnet_id     : [32]byte             |                                       32 bytes |
++---------------+----------------------+------------------------------------------------+
+| stake_outs     : : []TransferOut     |                     4 + size(stake_outs) bytes |
++---------------+----------------------+------------------------------------------------+
+| delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
++---------------+----------------------+------------------------------------------------+
+| 80 + size(base_tx) + size(stake_outs) + size(delegator_rewards_owner) bytes           |
++---------------------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Add Permissionless Delegator Tx Specification
+
+```text
+message AddPermissionlessDelegatorTx {
+    BaseTx base_tx = 1;         // size(base_tx)
+    Validator validator = 2;    // size(validator)
+    SubnetID subnet_id = 3;     // 32 bytes
+    Signer signer = 4; // ? bytes
+    repeated TransferOut stake_outs = 5; // 4 bytes + size(stake_outs)
+    SECP256K1OutputOwners delegator_rewards_owner = 6; // size(delegator_rewards_owner) bytes
+}
+```
+
+### Unsigned Add Permissionless Delegator Tx Example
 
 TODO
 
