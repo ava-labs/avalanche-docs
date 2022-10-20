@@ -643,8 +643,8 @@ An unsigned Remove Subner validator tx contains a `BaseTx`, `NodeID`, `SubnetID`
 
 - **`BaseTx`**
 - **`NodeID`** is 20 bytes which is the node ID of the validator.
-- **`SubnetID`** a 32 byte Subnet id
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
+- **`SubnetID`** a 32-byte Subnet ID
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature which proves that the issuer has the right to remove the node from the Subnet. The array must be sorted low to high.
 
 ### Gantt Unsigned Remove Subnet Validator Tx Specification
 
@@ -689,7 +689,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet ID of the subnet this validator is validating.
+- **`SubnetID`** a 32-byte Subnet ID of the subnet this validator is validating.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS key for this validator. If the [SubnetID] is not the primary network, this value is the empty signer.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
@@ -788,6 +788,127 @@ message AddPermissionlessDelegatorTx {
 ```
 
 ### Unsigned Add Permissionless Delegator Tx Example
+
+TODO
+
+## Unsigned Transform Subnet Tx
+
+### What Unsigned Transform Subnet Tx Contains
+
+An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`, `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`, `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`, `MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+
+- **`BaseTx`**
+- **`SubnetID`** a 32-byte Subnet ID of the subnet to transform.
+- **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Subnet.
+  - Restrictions
+    - Must not be the Empty ID
+    - Must not be the AVAX ID
+- **`InitialSupply`** is a long which is the amount to initially specify as the current supply.
+  - Restrictions
+    - Must be > 0
+- **`MaximumSupply`** is a long which is the amount to specify as the maximum token supply.
+  - Restrictions
+    - Must be >= [InitialSupply]
+- **`MinConsumptionRate`** is a long which is the rate to allocate funds if the validator's stake duration is 0.
+- **`MaxConsumptionRate`** is a long which is the rate to allocate funds if the validator's stake duration is equal to the minting period.
+  - Restrictions
+    - Must be >= [MinConsumptionRate]
+    - Must be <= [reward.PercentDenominator]
+- **`MinValidatorStake`** is a long which the minimum amount of funds required to become a validator.
+  - Restrictions
+    - Must be > 0
+    - Must be <= [InitialSupply]
+- **`MaxValidatorStake`** is a long which is the maximum amount of funds a single validator can be allocated, including delegated funds.
+  - Restrictions:
+    - Must be >= [MinValidatorStake]
+    - Must be <= [MaximumSupply]
+- **`MinStakeDuration`** is a short which is the minimum number of seconds a staker can stake for.
+  - Restrictions
+    - Must be > 0
+- **`MaxStakeDuration`** is a short which is the maximum number of seconds a staker can stake for.
+  - Restrictions
+    - Must be >= [MinStakeDuration]
+    - Must be <= [GlobalMaxStakeDuration]
+- **`MinDelegationFee`** is a short is the minimum percentage a validator must charge a delegator for delegating.
+  - Restrictions
+    - Must be <= [reward.PercentDenominator]
+- **`MinDelegatorStake`** is a short which is the minimum amount of funds required to become a delegator.
+  - Restrictions
+    - Must be > 0
+- **`MaxValidatorWeightFactor`** is a byte which is the factor which calculates the maximum amount of delegation a validator can receive. Note: a value of 1 effectively disables delegation.
+  - Restrictions
+    - Must be > 0
+- **`UptimeRequirement`** is a short which is the minimum percentage a validator must be online and responsive to receive a reward.
+  - Restrictions
+    - Must be <= [reward.PercentDenominator]
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to authorizes this transformation. The array must be sorted low to high.
+
+### Gantt Unsigned Transform Subnet Tx Specification
+
+ ``, ``, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+
+```text
++----------------------+-------------+-----------------------------+
+| base_tx              : BaseTx      |         size(base_tx) bytes |
++----------------------+-------------+-----------------------------+
+| subnet_id            : [32]byte    |                    32 bytes |
++----------------------+-------------+-----------------------------+
+| asset_id             : [32]byte    |                    32 bytes |
++----------------------+-------------+-----------------------------+
+| initial_supply       : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| maximum_supply       : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| min_consumption_rate : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| max_consumption_rate : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| min_validator_stake  : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| max_validator_stake  : long        |                     8 bytes |
++----------------------+-------------+-----------------------------+
+| min_stake_duration   : short       |                     4 bytes |
++----------------------+-------------+-----------------------------+
+| max_stake_duration   : short       |                     4 bytes |
++----------------------+-------------+-----------------------------+
+| min_delegation_fee   : short       |                     4 bytes |
++----------------------+-------------+-----------------------------+
+| min_delegator_stake  : short       |                     4 bytes |
++----------------------+-------------+-----------------------------+
+| max_validator_weight_factor : byte |                      1 byte |
++----------------------+-------------+-----------------------------+
+| uptime_requirement   : short       |                     4 bytes |
++----------------------+-------------+-----------------------------+
+| subnet_auth          : SubnetAuth  | 4 bytes + len(sig_indices) bytes |
++----------------------+-------------+-----------------------------+
+| 137 + size(base_tx) + len(sig_indices) bytes                     |
++------------------------------------------------------------------+
+```
+
+### Proto Unsigned Transform Subnet Tx Specification
+
+```text
+message TransformSubnetTx {
+    BaseTx base_tx = 1;              // size(base_tx)
+    SubnetID subnet_id = 2;          // 32 bytes
+    bytes asset_id = 3;              // 32 bytes
+    uint64 initial_supply = 4;       // 08 bytes
+    uint64 maximum_supply = 5;       // 08 bytes
+    uint64 min_consumption_rate = 6; // 08 bytes
+    uint64 max_consumption_rate = 7; // 08 bytes
+    uint64 min_validator_stake = 8;  // 08 bytes
+    uint64 max_validator_stake = 9;  // 08 bytes
+    uint32 min_stake_duration = 10;  // 04 bytes
+    uint32 max_stake_duration = 11;  // 04 bytes
+    uint32 min_delegation_fee = 12;  // 04 bytes
+    uint32 min_delegator_stake = 13; // 04 bytes
+    byte max_validator_weight_factor = 14; // 01 byte
+    uint32 uptime_requirement = 15; // 04 bytes
+    SubnetAuth subnet_auth = 16;    // 04 bytes + len(sig_indices)
+}
+```
+
+### Unsigned Transform Subnet Tx Example
 
 TODO
 
