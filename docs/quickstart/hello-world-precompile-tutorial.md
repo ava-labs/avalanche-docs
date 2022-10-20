@@ -6,9 +6,9 @@ In this tutorial, we are going to walkthrough how we can generate a stateful pre
 
 ### Precompiled Contracts
 
-Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following [precompiles](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81) are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
+Ethereum uses precompiles to efficiently implement cryptographic primitives within the EVM instead of re-implementing the same primitives in Solidity. The following precompiles are currently included: ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and modular exponentiation.
 
-We can see these precompile mappings from address to function here in the Ethereum VM.
+We can see these [precompile](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81) mappings from address to function here in the Ethereum VM:
 
 ```go
 // PrecompiledContractsBerlin contains the default set of pre-compiled Ethereum
@@ -28,7 +28,7 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
-A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface.
+A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface:
 
 ```go
 // PrecompiledContract is the basic interface for native Go contracts. The implementation
@@ -69,7 +69,7 @@ The function signature of CALL in the EVM is as follows:
  input []byte,
  gas uint64,
  value *big.Int)
- (ret []byte, leftOverGas uint64, err error) {
+ (ret []byte, leftOverGas uint64, err error)
 ```
 
 Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain at their contract address. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM.
@@ -111,7 +111,6 @@ type StatefulPrecompiledContract interface {
 	suppliedGas uint64,
 	readOnly bool)
 	(ret []byte, remainingGas uint64, err error)
-
 }
 ```
 
@@ -121,7 +120,7 @@ With state access, we can modify balances, read/write the storage of other addre
 
 ### Assumption of Knowledge
 
-We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowlege of the EVM, but it is extremely helpful. Here are some resources to get started.
+We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowledge of the EVM, but it is extremely helpful. Here are some resources to get started.
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
@@ -270,7 +269,7 @@ Typically, custom codes are required in only those areas.
 
 ### Step 1: Set Contract Address
 
-Please `CTRL F` `CUSTOM CODE STARTS HERE` to find the first area where we can modify the precompile.
+Please search (`CTRL F`) `CUSTOM CODE STARTS HERE` to find the first area where we can modify the precompile.
 
 In `./precompile/hello_world.go`, we can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile.
 
@@ -316,7 +315,7 @@ const (
 )
 ```
 
-Now going back to `./precompile/hello_world.go`, we can modify our precompile function gas costs. Please `CTRL F` `SET A GAS COST HERE` to locate the default gas cost code.
+Now going back to `./precompile/hello_world.go`, we can modify our precompile function gas costs. Please search (`CTRL F`) `SET A GAS COST HERE` to locate the default gas cost code.
 
 We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
@@ -338,7 +337,7 @@ func (c *sha256hash) RequiredGas(input []byte) uint64 {
 
 ### Step 3: Add Custom Code
 
-Ok time to `CTRL F` throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify.
+Ok time to search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify.
 
 ![Custom code starts here](./../../static/img/2022-09-01-22-48-26.png)
 
@@ -492,9 +491,14 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 
 ### Step 4: Add Upgradable Config
 
+<<<<<<< HEAD
 Let's now modify `./params/precompile_config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`.
 
-This file helps set up stateful precompiles and related helper functions that can be activated as part of a network upgrade.
+# This file helps set up stateful precompiles and related helper functions that can be activated as part of a network upgrade.
+
+Let's now modify `params/precompile_config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
+
+> > > > > > > bbfa3367 (nits)
 
 Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference each of the possible stateful precompile types.
 
@@ -603,7 +607,12 @@ Done! All we had to do was follow the comments.
 
 ### Step 5: Add Precompile Upgrade
 
+<<<<<<< HEAD
 Let's add our precompile upgrade in `./params/config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
+=======
+Let's add our precompile upgrade in `params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
+
+> > > > > > > bbfa3367 (nits)
 
 Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
 
@@ -911,7 +920,14 @@ npx hardhat test --network local
 
 Great they passed! All the functions implemented in the precompile work as expected!
 
+<<<<<<< HEAD
 **Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
+=======
+:::note
+If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.
+:::
+
+> > > > > > > bbfa3367 (nits)
 
 ### Step 8: Create Genesis
 
