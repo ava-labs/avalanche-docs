@@ -635,7 +635,7 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 
 ## Unsigned Remove Subnet Validator Tx
 
-Removes a validator from a subnet.
+Removes a validator from a Subnet.
 
 ### What Unsigned Remove Subnet Validator Tx Contains
 
@@ -689,7 +689,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32-byte Subnet ID of the subnet this validator is validating.
+- **`SubnetID`** a 32-byte Subnet ID of the Subnet this validator is validating.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS key for this validator. If the [SubnetID] is not the primary network, this value is the empty signer.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
@@ -752,7 +752,7 @@ An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `S
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet ID of the subnet this validator is validating.
+- **`SubnetID`** a 32 byte Subnet ID of the Subnet this validator is validating.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
 
@@ -766,7 +766,7 @@ An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `S
 +---------------+----------------------+------------------------------------------------+
 | subnet_id     : [32]byte             |                                       32 bytes |
 +---------------+----------------------+------------------------------------------------+
-| stake_outs     : : []TransferOut     |                     4 + size(stake_outs) bytes |
+| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
 +---------------+----------------------+------------------------------------------------+
 | delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
 +---------------+----------------------+------------------------------------------------+
@@ -798,7 +798,7 @@ TODO
 An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`, `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`, `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`, `MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
 
 - **`BaseTx`**
-- **`SubnetID`** a 32-byte Subnet ID of the subnet to transform.
+- **`SubnetID`** a 32-byte Subnet ID of the Subnet to transform.
 - **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Subnet.
   - Restrictions
     - Must not be the Empty ID
