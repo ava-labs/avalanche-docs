@@ -56,7 +56,6 @@ const sidebars = {
     'quickstart/tools-list',
     'quickstart/integrate-exchange-with-avalanche',
     'quickstart/blockchain-flow',
-    'quickstart/hello-world-precompile-tutorial'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -105,7 +104,6 @@ const sidebars = {
       items: [
         'subnets/create-a-local-subnet',
         'subnets/create-a-fuji-subnet',
-
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
@@ -116,6 +114,7 @@ const sidebars = {
       label: 'Customize',
       collapsed: false,
       items: [
+        'subnets/hello-world-precompile-tutorial',
         'subnets/customize-a-subnet',
         'subnets/introduction-to-vm',
         'subnets/create-a-vm-timestampvm',

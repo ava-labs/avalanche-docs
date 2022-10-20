@@ -12,5 +12,4 @@
 | [**Sending Transactions with Dynamic Fees using Javascript**](sending-transactions-with-dynamic-fees-using-javascript.md) | Sending Transactions with Dynamic Fees using Javascript                  |
 | [**C-Chain Exchange Integration**](./integrate-exchange-with-avalanche.md)                                                | Guidelines for exchange integration with Ethereum-compatible C-Chain     |
 | [**Tools and Utilities**](./tools-list.md)                                                                                | Collection of popular tools for maintaining nodes and developing Subnets |
-| [**Flow of a Single Blockchain**](./blockchain-flow.md)                                                                   | The different components of a blockchain |
-| [**Hello World Stateful Precompile Tutorial**](./hello-world-precompile-tutorial.md)                                                      | Create A Stateful Precompile From Scratch |
+| [**Flow of a Single Blockchain**](./blockchain-flow.md)                                                                   | The different components of a blockchain                                 |
