@@ -633,6 +633,50 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 ]
 ```
 
+## Unsigned Remove Subnet Validator Tx
+
+Removes a validator from a subnet.
+
+### What Unsigned Remove Subnet Validator Tx Contains
+
+An unsigned Remove Subner validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+
+- **`BaseTx`**
+- **`NodeID`** is 20 bytes which is the node ID of the validator.
+- **`SubnetID`** a 32 byte Subnet id
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
+
+### Gantt Unsigned Remove Subnet Validator Tx Specification
+
+```text
++---------------+----------------------+------------------------------------------------+
+| base_tx       : BaseTx               |                            size(base_tx) bytes |
++---------------+----------------------+------------------------------------------------+
+| node_id       : string               |                                       20 bytes |
++---------------+----------------------+------------------------------------------------+
+| subnet_id     : [32]byte             |                                       32 bytes |
++---------------+----------------------+------------------------------------------------+
+| sig_indices   : SubnetAuth           |               4 bytes + len(sig_indices) bytes |
++---------------+----------------------+------------------------------------------------+
+| 52 + len(sig_indices) + size(base_tx) bytes                                           |
++---------------------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Remove Subnet Validator Tx Specification
+
+```text
+message RemoveSubnetValidatorTx {
+    BaseTx base_tx = 1;         // size(base_tx)
+    string node_id = 2;        // 20 bytes
+    SubnetID subnet_id = 3;     // 32 bytes
+    SubnetAuth subnet_auth = 4; // 04 bytes + len(sig_indices)
+}
+```
+
+### Unsigned Remove Subnet Validator Tx Example
+
+TODO
+
 ## Unsigned Add Permissionless Validator Tx
 
 ### What Unsigned Add Permissionless Validator Tx Contains
