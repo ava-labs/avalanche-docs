@@ -140,7 +140,7 @@ We will first create a Solidity interface that our precompile will implement. Th
 
 We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello` and `setGreeting`. These two functions will demonstrate the getting and setting respectively of a value using state access.
 
-We will place the interface in `./contract-examples/contracts`
+We will place the interface in `./contract-examples/contracts`. This interface should be named `IHelloWorld.sol`. You can copy and paste the below code into `IHelloWorld.sol`.
 
 ```sol
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
@@ -168,7 +168,7 @@ In the same `./contract-examples/contracts` directory, let's run
 solc --abi IHelloWorld.sol -o .
 ```
 
-This spits out the abi code!
+This spits out the abi code in `./contract-examples/contracts`!
 
 IHelloWorld.abi
 
@@ -201,7 +201,7 @@ Note: The abi must have named outputs in order to generate the precompile templa
 
 Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
 
-In the root of the repo run
+In the root of the Subnet-EVM repo run
 
 ```bash
 go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
@@ -230,11 +230,13 @@ Typically, custom codes are required in only those areas.
 
 ### Step 1: Set Contract Address
 
+Please `CTRL F` `CUSTOM CODE STARTS HERE` to find the first area where we can modify the precompile.
+
 In `./precompile/hello_world.go`, we can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile.
 
 ![Singleton StatefulPrecompiledContract and signatures](./../../static/img/2022-09-01-22-46-00.png)
 
-We can paste it here in `./precompile/params.go`.
+We can paste it here in `./precompile/params.go` and modify the default value to be the next available stateful precompile address. We simply increment the address by 1 from the last used address.
 
 ```go
 ContractDeployerAllowListAddress = common.HexToAddress("0x0200000000000000000000000000000000000000")
@@ -245,6 +247,8 @@ ContractDeployerAllowListAddress = common.HexToAddress("0x0200000000000000000000
 	// ADD YOUR PRECOMPILE HERE
 	// {YourPrecompile}Address       = common.HexToAddress("0x03000000000000000000000000000000000000??")
 ```
+
+We now have to add it to the slice of `UsedAddresses` as well.
 
 ```go
 UsedAddresses = []common.Address{
@@ -262,7 +266,7 @@ Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`
 
 ### Step 2: Set Gas Costs
 
-Set up gas costs. In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`. This is a good starting point for estimating gas costs.
+In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`. This is a good starting point for estimating gas costs.
 
 ```go
 // Gas costs for stateful precompiles
@@ -272,7 +276,9 @@ const (
 )
 ```
 
-For example, we will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
+Now going back to `./precompile/hello_world.go`, we can modify our precompile function gas costs. Please `CTRL F` `SET A GAS COST HERE` to locate the default gas cost code.
+
+We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
 ```go
 	SayHelloGasCost uint64    = 5000
@@ -671,7 +677,7 @@ yarn
 
 ```
 
-Let's see if it passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary subnet) as well as another blockchain that follows the rules defined by the Subnet-EVM.
+Let's see if it passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary network) as well as another blockchain that follows the rules defined by the Subnet-EVM.
 
 To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain. Put this file in `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
 
@@ -761,20 +767,21 @@ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-In another terminal tab run this command to get the latest local Subnet-EVM binary.
+The next steps are to build the Subnet-EVM binary with all the latest precompile changes and the lastest AvalancheGo Binary.
+
+In another terminal tab run this command in the root of the Subnet-EVM repo to get the latest local Subnet-EVM binary. This build script will place the binary in `AVALANCHEGO_PLUGIN_PATH` which we will define later.
 
 ```bash
 ./scripts/build.sh
 ```
 
-Go to the avalanchego repo in whatever directory you keep repos and run the command below to get the latest avalanchego binary.
+Leave the Subnet-EVM repo. Go to the AvalancheGo repo in whatever directory you keep repos and run the command below to get the latest AvalancheGo binary. The following commands build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later.
 
 ```bash
 cd avalanchego
 ./scripts/build.sh
 cd build
 cp avalanchego ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
-
 ```
 
 Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
@@ -840,9 +847,11 @@ networks: {
 
 We also need to make sure `localRPC` points to the right value.
 
-Let's copy `local_rpc.example.json`.
+Let's copy `local_rpc.example.json` which is located in `./contract-examples`
 
-`cp local_rpc.example.json local_rpc.json`
+```bash
+cp local_rpc.example.json local_rpc.json
+```
 
 Now in `local_rpc.json` we can modify the rpc url to the one we just created. It should look something like this.
 
@@ -852,7 +861,7 @@ Now in `local_rpc.json` we can modify the rpc url to the one we just created. It
 }
 ```
 
-Now if we go to `./contract-examples`, we can finally run our tests.
+Going to `./contract-examples`, we can finally run our tests by running the command below.
 
 ```bash
 npx hardhat test --network local
