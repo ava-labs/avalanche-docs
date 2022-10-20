@@ -639,7 +639,7 @@ Removes a validator from a subnet.
 
 ### What Unsigned Remove Subnet Validator Tx Contains
 
-An unsigned Remove Subner validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
 
 - **`BaseTx`**
 - **`NodeID`** is 20 bytes which is the node ID of the validator.
@@ -844,8 +844,6 @@ An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `Ini
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to authorizes this transformation. The array must be sorted low to high.
 
 ### Gantt Unsigned Transform Subnet Tx Specification
-
- ``, ``, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
 
 ```text
 +----------------------+-------------+-----------------------------+
