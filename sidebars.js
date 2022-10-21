@@ -114,8 +114,8 @@ const sidebars = {
       label: 'Customize',
       collapsed: false,
       items: [
-        'subnets/hello-world-precompile-tutorial',
         'subnets/customize-a-subnet',
+        'subnets/hello-world-precompile-tutorial',
         'subnets/introduction-to-vm',
         'subnets/create-a-vm-timestampvm',
         'subnets/create-a-vm-blobvm'
