@@ -120,7 +120,7 @@ With state access, we can modify balances, read/write the storage of other addre
 
 ### Assumption of Knowledge
 
-We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowledge of the EVM, but it is extremely helpful. Here are some resources to get started.
+We assume that the user has knowledge of git, golang, and javascript. The user should also be deeply familiar with the EVM since adding a stateful precompile is effectively modifying the EVM and requires an understanding of its invariants to do so correctly.
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
