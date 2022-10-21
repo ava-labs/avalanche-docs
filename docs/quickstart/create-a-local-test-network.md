@@ -66,7 +66,7 @@ The RPC server listens to two ports:
 When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
 Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
 
-Each of the examples below will show both modes, claritying its usage.
+Each of the examples below will show both modes, clarifying its usage.
 
 ### Start a New Avalanche Network with Five Nodes (a Cluster)
 
