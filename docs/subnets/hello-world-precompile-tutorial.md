@@ -320,7 +320,7 @@ Now going back to `./precompile/hello_world.go`, we can modify our precompile fu
 We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
 ```go
-	SayHelloGasCost uint64    = 5000
+	SayHelloGasCost uint64    = 5_000
 	SetGreetingGasGost uint64 = 20_000
 ```
 
@@ -829,10 +829,9 @@ In another terminal tab run this command in the root of the Subnet-EVM repo to g
 Leave the Subnet-EVM repo. Go to the AvalancheGo repo in whatever directory you keep repos and run the command below to get the latest AvalancheGo binary. The following commands build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later.
 
 ```bash
+cd $GOPATH
 cd avalanchego
 ./scripts/build.sh
-cd build
-cp avalanchego ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 ```
 
 Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
