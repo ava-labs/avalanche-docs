@@ -820,7 +820,7 @@ Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalancheg
 
 ```bash
 export AVALANCHEGO_EXEC_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/build/avalanchego"
-export AVALANCHEGO_PLUGIN_PATH="${GOPATH}/go/src/github.com/ava-labs/avalanchego/build/plugins"
+export AVALANCHEGO_PLUGIN_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/build/plugins"
 ```
 
 Finally we can use avalanche-network-runner to spin up some nodes that run the latest version of Subnet-EVM.
