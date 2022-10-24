@@ -206,9 +206,7 @@ In the same `./contract-examples/contracts` directory, let's run
 solcjs --abi IHelloWorld.sol
 ```
 
-This spits out the abi code in `./contract-examples/contracts` as
-
-IHelloWorld_sol_IHelloWorld.abi
+This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld_sol_IHelloWorld.abi`:
 
 ```json
 [
