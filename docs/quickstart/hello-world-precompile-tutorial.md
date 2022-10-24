@@ -120,7 +120,7 @@ With state access, we can modify balances, read/write the storage of other addre
 
 ### Assumption of Knowledge
 
-We assume that the user has knowledge of git, golang, and javascript. The user should also be deeply familiar with the EVM since adding a stateful precompile is effectively modifying the EVM and requires an understanding of its invariants to do so correctly.
+We assume that the user has knowledge of git, golang, and javascript. It is not necessary to have knowledge of the EVM, but it is extremely helpful. Here are some resources to get started.
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
@@ -134,20 +134,20 @@ We assume that the user has knowledge of git, golang, and javascript. The user s
 
 ### The Process
 
-We will first create a Solidity interface that our precompile will implement. Then we will use the PrecompileGen tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) with step by step commits you can follow to double check your work.
+We will first create a Solidity interface that our precompile will implement. Then we will use the precompile tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) with step by step commits you can follow to double check your work.
 
 ### Prerequisites
 
-- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo
-- Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo
+- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo.
+- Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo.
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
 
-First install the latest version of Go. Follow the instructions [here](https://go.dev/doc/install). You can verify by running `go version`.
+First install the latest version of Go. Follow the instructions [here](https://go.dev/doc/install). You can verify by running go version.
 
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
+Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running echo $GOPATH.
 
-As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin`is in your `$PATH`, otherwise, you may get error running the commands below.
+As a few things will be installed into $`GOPATH/bin`, please make sure that `$GOPATH/bin`is in your `$PATH`, otherwise, you may get error running the commands below.
 
 Download the following prerequisites into your `$GOPATH`:
 
@@ -157,7 +157,7 @@ mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 git clone git@github.com:ava-labs/avalanchego.git
-go install github.com/ava-labs/avalanche-network-runner@latest
+git clone https://github.com/ava-labs/avalanche-network-runner.git
 npm install -g solc
 ```
 
@@ -172,7 +172,7 @@ git checkout -b hello-world-stateful-precompile
 
 There will be code snippets to copy and paste into the appropriate files.
 
-We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These two functions will demonstrate the getting and setting respectively of a value stored in the precompile's state space.
+We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These two functions will demonstrate the getting and setting respectively of a value using state access.
 
 We will place the interface in `./contract-examples/contracts`. You can copy and paste the below code into `./contract-examples/contracts/IHelloWorld.sol`.
 
@@ -206,7 +206,7 @@ In the same `./contract-examples/contracts` directory, let's run
 solcjs --abi IHelloWorld.sol
 ```
 
-This spits out the abi code in `./contract-examples/contracts` as
+This spits out the abi code in `./contract-examples/contracts`!
 Rename this file to be called `IHelloWorld.abi`
 
 IHelloWorld.abi
@@ -320,7 +320,7 @@ Now going back to `./precompile/hello_world.go`, we can modify our precompile fu
 We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
 ```go
-	SayHelloGasCost uint64    = 5_000
+	SayHelloGasCost uint64    = 5000
 	SetGreetingGasGost uint64 = 20_000
 ```
 
@@ -494,15 +494,11 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 <<<<<<< HEAD
 Let's now modify `./params/precompile_config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`.
 
-<<<<<<< HEAD
 # This file helps set up stateful precompiles and related helper functions that can be activated as part of a network upgrade.
 
 Let's now modify `params/precompile_config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
 
 > > > > > > > bbfa3367 (nits)
-=======
-This file helps set up stateful precompiles that can be activated as part of a network upgrade and related helper functions.
->>>>>>> 6a94a0e9 (slight fix)
 
 Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference each of the possible stateful precompile types.
 
@@ -611,9 +607,6 @@ Done! All we had to do was follow the comments.
 
 ### Step 5: Add Precompile Upgrade
 
-<<<<<<< HEAD
-Let's add our precompile upgrade in `./params/config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
-=======
 Let's add our precompile upgrade in `params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
 
 > > > > > > > bbfa3367 (nits)
@@ -669,7 +662,7 @@ contract ExampleHelloWorld {
   address constant HELLO_WORLD_ADDRESS = 0x0200000000000000000000000000000000000004;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
 
-  function getHello() public view returns (string memory) {
+  function getHello() public returns (string memory) {
     return helloWorld.sayHello();
   }
 
@@ -833,9 +826,10 @@ In another terminal tab run this command in the root of the Subnet-EVM repo to g
 Leave the Subnet-EVM repo. Go to the AvalancheGo repo in whatever directory you keep repos and run the command below to get the latest AvalancheGo binary. The following commands build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later.
 
 ```bash
-cd $GOPATH
 cd avalanchego
 ./scripts/build.sh
+cd build
+cp avalanchego ${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego
 ```
 
 Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
