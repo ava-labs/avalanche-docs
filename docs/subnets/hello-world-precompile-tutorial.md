@@ -96,7 +96,7 @@ Precompiles are a shortcut to execute a function implemented by the EVM itself, 
 
 ### Stateful Precompiled Contracts
 
-A stateful precompile allows us to add even more functionality and customization to the Subnet-EVM. It builds on a precompile in that it adds state access. Stateful precompiles are not available in the default EVM, and are specific to Avalanche EVMs such as [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
+A stateful precompile builds on a precompile in that it adds state access. Stateful precompiles are not available in the default EVM, and are specific to Avalanche EVMs such as [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm). It allows us to add even more functionality and customization to the Subnet-EVM!
 
 A stateful precompile follows this interface.
 
@@ -343,7 +343,7 @@ Ok time to search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` 
 
 We can remove the `fmt` import and the `fmt` reference import as we will not use them in this tutorial.
 
-Next we see this in `Equals()`.
+Next we see this in `Equal()`.
 
 ```go
 // Equal returns true if [s] is a [*HelloWorldConfig] and it has been configured identical to [c].
@@ -396,7 +396,7 @@ return equalsUpgrade && equalsAllow
 ```
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. Configure configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
+Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
 
 ```go
 // Configure configures [state] with the initial configuration.
@@ -491,18 +491,9 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 
 ### Step 4: Add Upgradable Config
 
-<<<<<<< HEAD
-Let's now modify `./params/precompile_config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`.
+Let's now modify `./params/precompile_config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
 
-<<<<<<< HEAD
-# This file helps set up stateful precompiles and related helper functions that can be activated as part of a network upgrade.
-
-Let's now modify `params/precompile_config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
-
-> > > > > > > bbfa3367 (nits)
-=======
 This file helps set up stateful precompiles that can be activated as part of a network upgrade and related helper functions.
->>>>>>> 6a94a0e9 (slight fix)
 
 Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference each of the possible stateful precompile types.
 
@@ -611,12 +602,7 @@ Done! All we had to do was follow the comments.
 
 ### Step 5: Add Precompile Upgrade
 
-<<<<<<< HEAD
-Let's add our precompile upgrade in `./params/config.go`. We can `CTRL F` for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
-=======
 Let's add our precompile upgrade in `params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
-
-> > > > > > > bbfa3367 (nits)
 
 Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
 
@@ -833,16 +819,15 @@ In another terminal tab run this command in the root of the Subnet-EVM repo to g
 Leave the Subnet-EVM repo. Go to the AvalancheGo repo in whatever directory you keep repos and run the command below to get the latest AvalancheGo binary. The following commands build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later.
 
 ```bash
-cd $GOPATH
-cd avalanchego
+cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ```
 
 Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
 
 ```bash
-export AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/avalanchego"
-export AVALANCHEGO_PLUGIN_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/plugins"
+export AVALANCHEGO_EXEC_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/build/avalanchego"
+export AVALANCHEGO_PLUGIN_PATH="${GOPATH}/go/src/github.com/ava-labs/avalanchego/build/plugins"
 ```
 
 Finally we can use avalanche-network-runner to spin up some nodes that run the latest version of Subnet-EVM.
@@ -923,14 +908,7 @@ npx hardhat test --network local
 
 Great they passed! All the functions implemented in the precompile work as expected!
 
-<<<<<<< HEAD
-**Note:** If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
-=======
-:::note
-If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial) to double check your work as well.
-:::
-
-> > > > > > > bbfa3367 (nits)
+If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
 
 ### Step 8: Create Genesis
 
