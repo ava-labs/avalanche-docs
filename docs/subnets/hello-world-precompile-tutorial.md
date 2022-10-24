@@ -207,9 +207,8 @@ solcjs --abi IHelloWorld.sol
 ```
 
 This spits out the abi code in `./contract-examples/contracts` as
-Rename this file to be called `IHelloWorld.abi`
 
-IHelloWorld.abi
+IHelloWorld_sol_IHelloWorld.abi
 
 ```json
 [
@@ -243,7 +242,7 @@ Now that we have an abi for the precompile gen tool to interact with. We can run
 In the root of the Subnet-EVM repo run
 
 ```bash
-go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
+go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld_sol_IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
 ```
 
 Wow! We just got a precompile template that's mostly complete located at `./precompile/hello_world.go`. Let's fill out the rest!
@@ -430,11 +429,7 @@ func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, 
 	if remainingGas, err = deductGas(suppliedGas, SayHelloGasCost); err != nil {
 		return nil, 0, err
 	}
-	if readOnly {
-		return nil, remainingGas, vmerrs.ErrWriteProtection
-	}
 	// No input provided for this function
-
 	// CUSTOM CODE STARTS HERE
 	// Get the current state
 	currentState := accessibleState.GetStateDB()
