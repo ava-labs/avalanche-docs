@@ -157,7 +157,7 @@ mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 git clone git@github.com:ava-labs/avalanchego.git
-git clone https://github.com/ava-labs/avalanche-network-runner.git
+go install github.com/ava-labs/avalanche-network-runner@latest
 npm install -g solc
 ```
 
@@ -665,7 +665,7 @@ contract ExampleHelloWorld {
   address constant HELLO_WORLD_ADDRESS = 0x0200000000000000000000000000000000000004;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
 
-  function getHello() public returns (string memory) {
+  function getHello() public view returns (string memory) {
     return helloWorld.sayHello();
   }
 
