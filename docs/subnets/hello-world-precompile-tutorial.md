@@ -75,7 +75,7 @@ The function signature of CALL in the EVM is as follows:
 
 Precompiles are a shortcut to execute a function implemented by the EVM itself, rather than an actual contract. A precompile is associated with a fixed address defined in the EVM. There is no byte code associated with that address.
 
-When a precompile is called, under the hood, the EVM checks if the input address is a precompile address and if so it executes the precompile. Otherwise it loads the smart contract at the input address and runs it on the the EVM intrepreter with the specified input data.
+When a precompile is called, the EVM checks if the input address is a precompile address and if so it executes the precompile. Otherwise it loads the smart contract at the input address and runs it on the the EVM intrepreter with the specified input data.
 
 ### Stateful Precompiled Contracts
 
