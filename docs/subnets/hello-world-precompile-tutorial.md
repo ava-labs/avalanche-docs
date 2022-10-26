@@ -79,7 +79,7 @@ When a precompile is called, the EVM checks if the input address is a precompile
 
 ### Stateful Precompiled Contracts
 
-A stateful precompile builds on a precompile in that it adds state access. Stateful precompiles are not available in the default EVM, and are specific to Avalanche EVMs such as [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm). It allows us to add even more functionality and customization to the Subnet-EVM!
+A stateful precompile builds on a precompile in that it adds state access. Stateful precompiles are not available in the default EVM, and are specific to Avalanche EVMs such as [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
 A stateful precompile follows this interface.
 
@@ -97,13 +97,23 @@ type StatefulPrecompiledContract interface {
 }
 ```
 
-Notice the most important difference between the stateful precompile and precompile interface. We now inject state access, `PrecompileAccessibleState`, to the `Run` function. Precompiles only took in a single byte slice as input. However, stateful precompile functions have complete access to the Subnet-EVM state, and can be used to implement a much wider range of functionalities.
+A stateful precompile injects state access through the `PrecompileAccessibleState` interface to provide access to the EVM state including the ability to modify balances, read/write storage, or even execute any Golang code we want.
 
-With state access, we can modify balances, read/write the storage of other addresses, and create addresses. We can now write custom logic to make our own EVM.
+This way we can provide even more customization of the EVM through Stateful Precompiles than we can with the original precompile interface!
 
-### Assumption of Knowledge
+## Tutorial
 
-We assume that the user has knowledge of git, golang, and javascript. The user should also be deeply familiar with the EVM since adding a stateful precompile is effectively modifying the EVM and requires an understanding of its invariants to do so correctly.
+### Overview
+
+We will first create a Solidity interface that our precompile will implement. Then we will use the PrecompileGen tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) with step by step commits you can follow to double check your work.
+
+### Prerequisites
+
+This tutorial assumes familiarity with Golang and Javascript.
+
+Additionally, users should be deeply familiar with the EVM in order to understand its invariants since adding a Stateful Precompile modifies the EVM itself.
+
+Here are some recommended resources to learn the ins and outs of the EVM:
 
 - [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
@@ -115,11 +125,7 @@ We assume that the user has knowledge of git, golang, and javascript. The user s
 - [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
 - [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
 
-### The Process
-
-We will first create a Solidity interface that our precompile will implement. Then we will use the PrecompileGen tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) with step by step commits you can follow to double check your work.
-
-### Prerequisites
+Please install the following before getting started.
 
 - Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo
 - Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo
@@ -143,8 +149,6 @@ git clone git@github.com:ava-labs/avalanchego.git
 go install github.com/ava-labs/avalanche-network-runner@latest
 npm install -g solc
 ```
-
-## Tutorial
 
 For the tutorial, we will be working in a new branch in Subnet-EVM.
 
