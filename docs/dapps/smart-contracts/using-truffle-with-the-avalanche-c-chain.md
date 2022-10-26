@@ -2,29 +2,40 @@
 
 ## Introduction
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+This guide shows how to deploy and interact with smart contracts using Truffle on a local Avalanche Network.
+
+[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts.
+
+## Recommended Knowledge
+- Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
+- You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+- Basic understanding of the [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md)
+- performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). You've also performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
+- [NodeJS](https://nodejs.org/en) that comes with `npm`
+- Truffle, which you can install globally with `npm install -g truffle`
 
-## Dependencies
+### AvalancheGo and Avalanche Network Runner
 
-- [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
-- [NodeJS](https://nodejs.org/en) v8.9.4 or later.
-- Truffle, which you can install with `npm install -g truffle`
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. 
 
-## Start up a Local Avalanche Network
+[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 
-[Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) allows you to spin up private test network deployments. Start a local five node Avalanche network:
+Start a local five node Avalanche network:
 
-```text
+```zsh
 cd /path/to/avalanche-network-runner
 # start a five node staking network
 ./go run examples/local/fivenodenetwork/main.go
 ```
 
 A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
+
+## Getting Started
+
+This section will walk you through creating a simple number storage.
 
 ## Create Truffle Directory and Install Dependencies
 
@@ -109,7 +120,7 @@ module.exports = {
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-## Add Storage.sol
+## Write Contracts
 
 In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
 
@@ -412,3 +423,5 @@ You should see the number you stored.
 ## Summary
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+
+Join our [Discord Server](https://chat.avax.network) to learn more and ask any questions you may have.

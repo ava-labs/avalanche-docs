@@ -2,37 +2,47 @@
 
 ## Introduction
 
-Avalanche is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers—helping you build anything you can imagine.
+This guide shows how to deploy and interact with smart contracts using Hardhat on a local Avalanche Network and the [Fuji C-Chain](../../quickstart/fuji-workflow.md) as well as Avalanche's C-Chain, which are instances of the EVM.
 
-The Avalanche Network is composed of many blockchains. One of these blockchains is the C-Chain (Contract Chain), which is an Ethereum Virtual Machine instance. The C-Chain's API is almost identical to an Ethereum node's API. Avalanche offers the same interface as Ethereum but with higher speed, higher throughput, lower fees and lower transaction confirmation times. These properties considerably improve the performance of DApps and the user experience of smart contracts.
+[Hardhat](https://hardhat.org) is a smart contract development toolchain written in javascript. It manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.
 
-The goal of this guide is to lay out best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain. We'll be building smart contracts with development environment [Hardhat](https://hardhat.org).
+## Recommended Knowledge
+- Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
+- You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+- Basic understanding of the [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md)
+- performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
 
-## Prerequisites
+## Requirements
 
-### NodeJS and Yarn
-
-First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `14.17.0` at the time of writing. NodeJS bundles `npm`.
-
-Next, install [yarn](https://yarnpkg.com):
-
-```text
-npm install -g yarn
-```
+- [NodeJS](https://nodejs.org/en) that bundles with `npm` and `npx` 
+- [yarn](https://yarnpkg.com)
 
 ### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. [Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. 
 
-### Solidity and Avalanche
+[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
 
-It is also helpful to have a basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
+Start a local five node Avalanche network:
 
-## Dependencies
+```zsh
+cd /path/to/avalanche-network-runner
+# start a five node staking network
+./go run examples/local/fivenodenetwork/main.go
+```
+
+A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
+
+
+## Getting Started
+
+This section will walk you through creating an smart contract for a coin.
+
+### Clone Avalanche Smart Contract Quick Start
 
 Clone the [quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and install the necessary packages via `yarn`.
 
-```text
+```zsh
 $ git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
 $ cd avalanche-smart-contract-quickstart
 $ yarn
@@ -254,7 +264,7 @@ Compilation finished successfully
 ✨  Done in 2.13s.
 ```
 
-## Deploy Smart Contracts
+### Deploy Smart Contracts
 
 Hardhat enables deploying to multiple environments. In [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json) there is a script for deploying.
 

@@ -2,22 +2,43 @@
 
 ## Introduction
 
-This article shows how to deploy and interact with smart contracts using foundry on the [Fuji C-Chain](../../quickstart/fuji-workflow.md).
+This guide shows how to deploy and interact with smart contracts using foundry on on a local Avalanche Network amd the [Fuji C-Chain](../../quickstart/fuji-workflow.md), which is an instance of the EVM.
 
-[Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract development toolchain written in Rust.
+[Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract development toolchain written in Rust. It manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.
 
-Foundry manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.
+## Recommended Knowledge
+- Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
+- You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+- Basic understanding of the [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md)
+- performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
 
-## Prerequisites
+## Requirements
 
 - You have [installed Foundry](https://github.com/foundry-rs/foundry#installation). This installation includes the `forge` and `cast` binaries used in this walk-through.
-- You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
-- If you plan on running locally, ensure that you have installed and are familiar with [Avalanche Network Runner](../../subnets/network-runner).
+
+### AvalancheGo and Avalanche Network Runner
+
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. 
+
+[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+
+Start a local five node Avalanche network:
+
+```zsh
+cd /path/to/avalanche-network-runner
+# start a five node staking network
+./go run examples/local/fivenodenetwork/main.go
+```
+
+A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
 
 ## Getting Started
 
-This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721) with Foundry and Avalanche Smart Contract Quickstart.
-Clone the Avalanche Smart Contract Quickstart repo and install its dependencies by running:
+This section will walk you through creating an [ERC721](https://eips.ethereum.org/EIPS/eip-721).
+
+### Clone Avalanche Smart Contract Quick Start
+
+Clone the [quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and install the necessary packages via `yarn`.
 
 ```zsh
 git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
@@ -27,7 +48,7 @@ yarn
 
 In order to deploy contracts, you need to have some AVAX. You can get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy way to get to play around with Avalanche. After getting comfortable with your code, you can run it on Mainnet after making the necessary changes to your workflow.
 
-## Implement a Game Item NFT
+## Write Contracts
 
 We will use our example ERC721 smart contract, [`NFT.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3fbba0ac28f6420e9be5d2635d5f23693f80127a/contracts/NFT.sol) found in `./contracts` of our project.
 
@@ -110,7 +131,7 @@ Transaction hash: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32
 
 _Note: Please store your `Deployed to` address for use in the next section._
 
-# Using Cast to Interact with the Smart Contract
+## Using Cast to Interact with the Smart Contract
 
 We can call functions on our NFT contract with [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
 
@@ -187,3 +208,9 @@ export PRIVATE_KEY=56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8
 :::warning
 The example PRIVATE_KEY variable above provides a pre-funded account on Avalanche Network Runner and should be used for LOCAL DEVELOPMENT ONLY.
 :::
+
+## Summary
+
+Now you have the tools you need to launch a local Avalanche network, create a Foundry project, as well as create, compile, deploy and interact with Solidity contracts.
+
+Join our [Discord Server](https://chat.avax.network) to learn more and ask any questions you may have.
