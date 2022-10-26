@@ -64,35 +64,26 @@ The CALL opcode (CALL, STATICCALL, DELEGATECALL, and CALLCODE) allows us to invo
 The function signature of CALL in the EVM is as follows:
 
 ```go
- Call(caller ContractRef,
- addr common.Address,
- input []byte,
- gas uint64,
- value *big.Int)
- (ret []byte, leftOverGas uint64, err error)
+ Call(
+ 	caller ContractRef,
+ 	addr common.Address,
+ 	input []byte,
+ 	gas uint64,
+ 	value *big.Int,
+)(ret []byte, leftOverGas uint64, err error)
 ```
 
-Smart contracts in Solidity are compiled and converted into bytecode when they are first deployed. They are then stored on the blockchain at their contract address. When a user calls a function from a smart contract, it goes through the `CALL` function in the EVM.
+<!-- Smart contracts in Solidity are compiled and converted into EVM bytecode when they are first deployed.
 
-It takes in the
+When a function is called, the first 4 bytes of calldata specifies which function to call. These 4 bytes are known as the [function selector](https://docs.soliditylang.org/en/v0.8.12/abi-spec.html#function-selector).
 
-- caller address
-- the contract address
-- the input (function’s signature (truncated to the first leading four bytes) followed by the packed arguments data)
-- gas
-- value (native token)
+Based on the function selector, the smart contract knows which function in its own bytecode to execute. We imitate the function selector logic so that when you call a precompile it knows the exact execution function.
 
-Solidity uses the function selector from the input to give a jump destination in the bytecode. The EVM then executes a series of instructions (EVM opcodes) and returns the result.
+The preco However, the EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function written natively in the EVM. -->
 
-When a precompile function is called, it still goes through the `CALL` function in the EVM. However, the EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function.
+Precompiles are a shortcut to execute a function implemented by the EVM itself, rather than an actual contract. A precompile is associated with a fixed address defined in the EVM. There is no byte code associated with that address.
 
-The EVM performs the following steps:
-
-- Calculates `RequiredGas()`.
-- Subtracts result of `RequiredGas()` from remaining gas (EVM halts execution if it runs out of gas)
-- Executes `Run()`
-
-Precompiles are a shortcut to execute a function implemented by the EVM itself, rather than an actual contract.
+When a precompile is called, under the hood, the EVM checks if the input address is a precompile address and if so it executes the precompile. Otherwise it loads the smart contract at the input address and runs it on the the EVM intrepreter with the specified input data.
 
 ### Stateful Precompiled Contracts
 
