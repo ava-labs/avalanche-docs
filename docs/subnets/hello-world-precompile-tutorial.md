@@ -73,14 +73,6 @@ The function signature of CALL in the EVM is as follows:
 )(ret []byte, leftOverGas uint64, err error)
 ```
 
-<!-- Smart contracts in Solidity are compiled and converted into EVM bytecode when they are first deployed.
-
-When a function is called, the first 4 bytes of calldata specifies which function to call. These 4 bytes are known as the [function selector](https://docs.soliditylang.org/en/v0.8.12/abi-spec.html#function-selector).
-
-Based on the function selector, the smart contract knows which function in its own bytecode to execute. We imitate the function selector logic so that when you call a precompile it knows the exact execution function.
-
-The preco However, the EVM checks if the address is a precompile address from the mapping list and if so redirects to the precompile function written natively in the EVM. -->
-
 Precompiles are a shortcut to execute a function implemented by the EVM itself, rather than an actual contract. A precompile is associated with a fixed address defined in the EVM. There is no byte code associated with that address.
 
 When a precompile is called, under the hood, the EVM checks if the input address is a precompile address and if so it executes the precompile. Otherwise it loads the smart contract at the input address and runs it on the the EVM intrepreter with the specified input data.
