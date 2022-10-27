@@ -132,11 +132,6 @@ Here are some recommended resources to learn the ins and outs of the EVM:
 
 Please install the following before getting started.
 
-- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo
-- Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo
-- Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
-- Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
-
 First install the latest version of Go. Follow the instructions [here](https://go.dev/doc/install). You can verify by running `go version`.
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
@@ -144,6 +139,13 @@ Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Pl
 As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin`is in your `$PATH`, otherwise, you may get error running the commands below.
 
 Download the following prerequisites into your `$GOPATH`:
+
+- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo
+- Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo
+- Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
+- Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
+
+For easy copy paste, use the below commands.
 
 ```
 cd $GOPATH
