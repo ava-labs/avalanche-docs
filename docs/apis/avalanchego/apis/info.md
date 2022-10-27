@@ -443,13 +443,13 @@ info.getTxFee() ->
 
 - `txFee` is the default fee for making transactions.
 - `createAssetTxFee` is the fee for creating a new asset.
-- `createSubnetTxFee` is the fee for creating a new subnet.
-- `transformSubnetTxFee` is the fee for converting a PoA subnet into a PoS subnet.
+- `createSubnetTxFee` is the fee for creating a new Subnet.
+- `transformSubnetTxFee` is the fee for converting a PoA Subnet into a PoS Subnet.
 - `createBlockchainTxFee` is the fee for creating a new blockchain.
 - `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
 - `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
-- `addSubnetValidatorFee` is the fee for adding a new subnet validator.
-- `addSubnetDelegatorFee` is the fee for adding a new subnet delegator.
+- `addSubnetValidatorFee` is the fee for adding a new Subnet validator.
+- `addSubnetDelegatorFee` is the fee for adding a new Subnet delegator.
 
 All fees are denominated in nAVAX.
 

@@ -618,16 +618,16 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "result": {
     "balances": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000",
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000"
     },
     "unlockeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000",
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
     },
     "lockedStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000",
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
     },
     "lockedNotStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0",
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0"
     },
     "utxoIDs": [
       {
@@ -916,7 +916,7 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on amount of tokens that exist that can stake the requested subnet. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is an upper bound because it does not account for burnt tokens, including transaction fees.
 
 #### **Signature**
 
@@ -1010,16 +1010,16 @@ platform.getCurrentValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS subnet.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS subnet.
-  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS subnet.
-  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS subnet.
-  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS subnet.
-  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS subnet.
-  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS subnet.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
+  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS Subnet.
+  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
+  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
-  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS subnet.
+  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
     - `endTime` is the Unix time when the delegator stops.
@@ -1179,7 +1179,7 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of tokens required to validate the requested subnet and the minimum amount of tokens that can be delegated.
+Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of tokens that can be delegated.
 
 #### **Signature**
 
@@ -1256,10 +1256,10 @@ platform.getPendingValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS subnet.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS subnet.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
@@ -1424,7 +1424,7 @@ platform.getSubnets({
 
 - `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all Subnets.
 - `id` is the Subnet’s ID.
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet. If the subnet is a PoS subnet, then `threshold` will be `0` and `controlKeys` will be empty.
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be empty.
 
 See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1552,7 +1552,7 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of tokens staked on the requested subnet.
+Get the total amount of tokens staked on the requested Subnet.
 
 #### **Signature**
 
