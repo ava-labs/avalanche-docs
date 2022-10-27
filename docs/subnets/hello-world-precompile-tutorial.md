@@ -262,22 +262,23 @@ Typically, custom codes are required in only those areas.
 
 ### Step 1: Set Contract Address
 
-Please search (`CTRL F`) `CUSTOM CODE STARTS HERE` to find the first area where we can modify the precompile.
+In `./precompile/hello_world.go`, please search (`CTRL F`) `CUSTOM CODE STARTS HERE` to find the first area where we can modify the precompile.
 
-In `./precompile/hello_world.go`, we can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile.
+We can see our precompile address is set to some default value. We can cut the address from the var declaration block and remove it from the precompile.
 
 ![Singleton StatefulPrecompiledContract and signatures](./../../static/img/2022-09-01-22-46-00.png)
 
-We can paste it here in `./precompile/params.go` and modify the default value to be the next available stateful precompile address. We simply increment the address by 1 from the last used address.
+We can paste it here in `./precompile/params.go` and modify the default value to be the next user available stateful precompile address. For forks of subnet-evm, users should start at `0x0300000000000000000000000000000000000000` to ensure
+that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
 
 ```go
 ContractDeployerAllowListAddress = common.HexToAddress("0x0200000000000000000000000000000000000000")
-	ContractNativeMinterAddress      = common.HexToAddress("0x0200000000000000000000000000000000000001")
-	TxAllowListAddress               = common.HexToAddress("0x0200000000000000000000000000000000000002")
-	FeeConfigManagerAddress          = common.HexToAddress("0x0200000000000000000000000000000000000003")
-	HelloWorldAddress                = common.HexToAddress("0x0200000000000000000000000000000000000004")
-	// ADD YOUR PRECOMPILE HERE
-	// {YourPrecompile}Address       = common.HexToAddress("0x03000000000000000000000000000000000000??")
+ContractNativeMinterAddress      = common.HexToAddress("0x0200000000000000000000000000000000000001")
+TxAllowListAddress               = common.HexToAddress("0x0200000000000000000000000000000000000002")
+FeeConfigManagerAddress          = common.HexToAddress("0x0200000000000000000000000000000000000003")
+HelloWorldAddress                = common.HexToAddress("0x0300000000000000000000000000000000000000")
+// ADD YOUR PRECOMPILE HERE
+// {YourPrecompile}Address       = common.HexToAddress("0x03000000000000000000000000000000000000??")
 ```
 
 We now have to add it to the slice of `UsedAddresses` as well.
