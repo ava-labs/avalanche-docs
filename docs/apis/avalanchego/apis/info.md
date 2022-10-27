@@ -128,7 +128,13 @@ Get the ID of this node.
 #### **Signature**
 
 ```sh
-info.getNodeID() -> {nodeID: string}
+info.getNodeID() -> {
+  nodeID: string,
+  nodePOP: {
+    publicKey: string,
+    proofOfPossession: string
+  }
+}
 ```
 
 #### **Example Call**
@@ -147,7 +153,11 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
+    "nodePOP": {
+      "publicKey": "0x8f95423f7142d00a48e1014a3de8d28907d420dc33b3052a6dee03a3f2941a393c2351e354704ca66a3fc29870282e15",
+      "proofOfPossession": "0x86a3ab4c45cfe31cae34c1d06f212434ac71b1be6cfe046c80c162e057614a94a5bc9f1ded1a7029deb0ba4ca7c9b71411e293438691be79c2dbf19d1ca7c3eadb9c756246fc5de5b7b89511c7d7302ae051d9e03d7991138299b5ed6a570a98"
+    }
   },
   "id": 1
 }
