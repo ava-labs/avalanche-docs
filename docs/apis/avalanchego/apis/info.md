@@ -137,6 +137,9 @@ info.getNodeID() -> {
 }
 ```
 
+- `nodeID` is this node's ID
+- `nodePOP` is this node's BLS key and proof of possession
+
 #### **Example Call**
 
 ```sh
