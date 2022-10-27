@@ -299,7 +299,13 @@ Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`
 
 ### Step 2: Set Gas Costs
 
-In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`. This is a good starting point for estimating gas costs.
+In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`.
+
+`writeGasCostPerSlot` is the cost of one write such as modifying a state storage slot.
+
+`readGasCostPerSlot` is the cost of reading a state storage slot.
+
+This should be in your gas cost estimations based on how many times the precompile function does a read or a write. For example, if the precompile modifies the state slot of its precompile address twice then the gas cost for that function would be `40_000`.
 
 ```go
 // Gas costs for stateful precompiles
@@ -314,19 +320,8 @@ Now going back to `./precompile/hello_world.go`, we can modify our precompile fu
 We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot respectively so we can define the gas costs as follows.
 
 ```go
-	SayHelloGasCost uint64    = 5_000
-	SetGreetingGasGost uint64 = 20_000
-```
-
-**Example:**
-The sha256 precompile computes gas with the following equation
-
-```go
-// This method does not require any overflow checking as the input size gas costs
-// required for anything significant is so high it's impossible to pay for.
-func (c *sha256hash) RequiredGas(input []byte) uint64 {
-	return uint64(len(input)+31)/32*params.Sha256PerWordGas + params.Sha256BaseGas
-}
+	SayHelloGasCost    uint64 = readGasCostPerSlot
+	SetGreetingGasGost uint64 = writeGasCostPerSlot
 ```
 
 ### Step 3: Add Custom Code
