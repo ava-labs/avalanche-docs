@@ -129,11 +129,11 @@ Get the ID of this node.
 
 ```sh
 info.getNodeID() -> {
-  nodeID: string,
-  nodePOP: {
-    publicKey: string,
-    proofOfPossession: string
-  }
+    nodeID: string,
+    nodePOP: {
+        publicKey: string,
+        proofOfPossession: string
+    }
 }
 ```
 
@@ -426,13 +426,29 @@ Get the fees of the network.
 ```sh
 info.getTxFee() ->
 {
-    creationTxFee: uint64,
-    txFee: uint64
+    txFee: uint64,
+    createAssetTxFee: uint64,
+    createSubnetTxFee: uint64,
+    transformSubnetTxFee: uint64,
+    createBlockchainTxFee: uint64,
+    addPrimaryNetworkValidatorFee: uint64,
+    addPrimaryNetworkDelegatorFee: uint64,
+    addSubnetValidatorFee: uint64,
+    addSubnetDelegatorFee: uint64
 }
 ```
 
-- `creationTxFee` is the fee for creating assets on the network.
-- `txFee` is the fee for making transactions on the network.
+- `txFee` is the default fee for making transactions.
+- `createAssetTxFee` is the fee for creating a new asset.
+- `createSubnetTxFee` is the fee for creating a new subnet.
+- `transformSubnetTxFee` is the fee for converting a PoA subnet into a PoS subnet.
+- `createBlockchainTxFee` is the fee for creating a new blockchain.
+- `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
+- `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
+- `addSubnetValidatorFee` is the fee for adding a new subnet validator.
+- `addSubnetDelegatorFee` is the fee for adding a new subnet delegator.
+
+All fees are denominated in nAVAX.
 
 #### **Example Call**
 
@@ -451,8 +467,15 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "creationTxFee": "10000000",
-    "txFee": "1000000"
+    "txFee": "1000000",
+    "createAssetTxFee": "10000000",
+    "createSubnetTxFee": "1000000000",
+    "transformSubnetTxFee": "10000000000",
+    "createBlockchainTxFee": "1000000000",
+    "addPrimaryNetworkValidatorFee": "0",
+    "addPrimaryNetworkDelegatorFee": "0",
+    "addSubnetValidatorFee": "1000000",
+    "addSubnetDelegatorFee": "1000000"
   }
 }
 ```
