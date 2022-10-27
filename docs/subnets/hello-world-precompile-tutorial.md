@@ -229,11 +229,13 @@ This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld.a
 
 Note: The abi must have named outputs in order to generate the precompile template.
 
-Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
+Now that we have an abi for the precompile gen tool to interact with, we can run the following command to generate our HelloWorld precompile!
 
-In the root of the Subnet-EVM repo run
+Let's go back to the root of the Subnet-EVM repo and run the PrecompileGen script.
 
 ```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
+
 go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
 ```
 
