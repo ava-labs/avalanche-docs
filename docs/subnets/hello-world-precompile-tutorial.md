@@ -150,6 +150,8 @@ go install github.com/ava-labs/avalanche-network-runner@latest
 npm install -g solc
 ```
 
+### Step 0: Generating the Precompile
+
 For the tutorial, we will be working in a new branch in Subnet-EVM.
 
 ```bash
@@ -219,8 +221,6 @@ This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld_s
 ```
 
 Note: The abi must have named outputs in order to generate the precompile template.
-
-### Generating the Precompile
 
 Now that we have an abi for the precompile gen tool to interact with. We can run the following command to generate our HelloWorld precompile!
 
@@ -582,7 +582,7 @@ Done! All we had to do was follow the comments.
 
 ### Step 5: Add Precompile Upgrade
 
-Let's add our precompile upgrade in `params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
+Let's add our precompile upgrade in `./params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
 
 Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
 
