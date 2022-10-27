@@ -166,15 +166,15 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 git checkout -b hello-world-stateful-precompile
 ```
 
-There will be code snippets to copy and paste into the appropriate files.
-
-We will first start off by creating the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These two functions will demonstrate the getting and setting respectively of a value stored in the precompile's state space.
-
-We will place the interface in `./contract-examples/contracts`. You can copy and paste the below code into `./contract-examples/contracts/IHelloWorld.sol`.
+We will start off in this directory `./contract-examples/contracts`.
 
 ```bash
 cd contract-examples/contracts
 ```
+
+First we must create the Solidity interface that we want our precompile to implement. This will be the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These two functions will demonstrate the getting and setting respectively of a value stored in the precompile's state space.
+
+Create a new file called `IHelloWorld.sol` and copy and paste the below code.
 
 ```sol
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
@@ -185,10 +185,10 @@ cd contract-examples/contracts
 pragma solidity >=0.8.0;
 
 interface IHelloWorld {
- // sayHello returns the string located at [key]
+  // sayHello returns the string located at [key]
   function sayHello() external returns (string calldata result);
 
-// setGreeting sets the string located at [key]
+  // setGreeting sets the string located at [key]
   function setGreeting(string calldata response) external;
 }
 ```
