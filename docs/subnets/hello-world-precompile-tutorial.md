@@ -105,7 +105,12 @@ This way we can provide even more customization of the EVM through Stateful Prec
 
 ### Overview
 
-We will first create a Solidity interface that our precompile will implement. Then we will use the PrecompileGen tool to autogenerate functions and fill out the rest. We're not done yet! We will then have to update a few more places within the Subnet-EVM. Some of this work involves assigning a precompile address, adding the precompile to the list of Subnet-EVM precompiles, and finally enabling the precompile. Now we can see our functions in action as we write another solidity smart contract that interacts with our precompile. Lastly, we will write some tests to make sure everything works as promised. We will also have an [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) with step by step commits you can follow to double check your work.
+This is a brief overview of what this tutorial will cover.
+
+- Write a Solidity Interface
+- Generate the precompile template
+- Implement the precompile functions in Golang
+- Write and run tests
 
 ### Prerequisites
 
