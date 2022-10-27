@@ -199,10 +199,10 @@ Let's create an [abi](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#:~:
 In the same `./contract-examples/contracts` directory, let's run
 
 ```
-solcjs --abi IHelloWorld.sol
+solcjs --abi IHelloWorld.sol && mv IHelloWorld_sol_IHelloWorld.abi IHelloWorld.abi
 ```
 
-This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld_sol_IHelloWorld.abi`:
+This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld.abi`:
 
 ```json
 [
@@ -234,7 +234,7 @@ Now that we have an abi for the precompile gen tool to interact with. We can run
 In the root of the Subnet-EVM repo run
 
 ```bash
-go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld_sol_IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
+go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
 ```
 
 Wow! We just got a precompile template that's mostly complete located at `./precompile/hello_world.go`. Let's fill out the rest!
