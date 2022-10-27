@@ -1010,13 +1010,13 @@ platform.getCurrentValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not a PoS subnet.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS subnet.
   - `nodeID` is the validator’s node ID.
   - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS subnet.
   - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS subnet.
   - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS subnet.
   - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS subnet.
-  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not the Primary Network.
+  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS subnet.
   - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS subnet.
   - `connected` is if the node is connected and tracks the Subnet.
   - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS subnet.
@@ -1256,15 +1256,15 @@ platform.getPendingValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
   - `endTime` is the Unix time when the delegator stops.
-  - `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this delegator staked.
   - `nodeID` is the validating node’s node ID.
 
 #### **Example Call**
@@ -1552,7 +1552,7 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the requested subnet.
+Get the total amount of tokens staked on the requested subnet.
 
 #### **Signature**
 
