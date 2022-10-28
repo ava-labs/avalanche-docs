@@ -128,8 +128,17 @@ Get the ID of this node.
 #### **Signature**
 
 ```sh
-info.getNodeID() -> {nodeID: string}
+info.getNodeID() -> {
+    nodeID: string,
+    nodePOP: {
+        publicKey: string,
+        proofOfPossession: string
+    }
+}
 ```
+
+- `nodeID` is this node's ID
+- `nodePOP` is this node's BLS key and proof of possession
 
 #### **Example Call**
 
@@ -147,7 +156,11 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
+    "nodePOP": {
+      "publicKey": "0x8f95423f7142d00a48e1014a3de8d28907d420dc33b3052a6dee03a3f2941a393c2351e354704ca66a3fc29870282e15",
+      "proofOfPossession": "0x86a3ab4c45cfe31cae34c1d06f212434ac71b1be6cfe046c80c162e057614a94a5bc9f1ded1a7029deb0ba4ca7c9b71411e293438691be79c2dbf19d1ca7c3eadb9c756246fc5de5b7b89511c7d7302ae051d9e03d7991138299b5ed6a570a98"
+    }
   },
   "id": 1
 }
@@ -416,13 +429,29 @@ Get the fees of the network.
 ```sh
 info.getTxFee() ->
 {
-    creationTxFee: uint64,
-    txFee: uint64
+    txFee: uint64,
+    createAssetTxFee: uint64,
+    createSubnetTxFee: uint64,
+    transformSubnetTxFee: uint64,
+    createBlockchainTxFee: uint64,
+    addPrimaryNetworkValidatorFee: uint64,
+    addPrimaryNetworkDelegatorFee: uint64,
+    addSubnetValidatorFee: uint64,
+    addSubnetDelegatorFee: uint64
 }
 ```
 
-- `creationTxFee` is the fee for creating assets on the network.
-- `txFee` is the fee for making transactions on the network.
+- `txFee` is the default fee for making transactions.
+- `createAssetTxFee` is the fee for creating a new asset.
+- `createSubnetTxFee` is the fee for creating a new Subnet.
+- `transformSubnetTxFee` is the fee for converting a PoA Subnet into a PoS Subnet.
+- `createBlockchainTxFee` is the fee for creating a new blockchain.
+- `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
+- `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
+- `addSubnetValidatorFee` is the fee for adding a new Subnet validator.
+- `addSubnetDelegatorFee` is the fee for adding a new Subnet delegator.
+
+All fees are denominated in nAVAX.
 
 #### **Example Call**
 
@@ -441,8 +470,15 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "creationTxFee": "10000000",
-    "txFee": "1000000"
+    "txFee": "1000000",
+    "createAssetTxFee": "10000000",
+    "createSubnetTxFee": "1000000000",
+    "transformSubnetTxFee": "10000000000",
+    "createBlockchainTxFee": "1000000000",
+    "addPrimaryNetworkValidatorFee": "0",
+    "addPrimaryNetworkDelegatorFee": "0",
+    "addSubnetValidatorFee": "1000000",
+    "addSubnetDelegatorFee": "1000000"
   }
 }
 ```

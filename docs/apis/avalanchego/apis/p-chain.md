@@ -578,12 +578,12 @@ Get the balance of AVAX controlled by a given address.
 
 ```sh
 platform.getBalance({
-    address:string
+    addresses: []string
 }) -> {
-    balance: string,
-    unlocked: string,
-    lockedStakeable: string,
-    lockedNotStakeable: string,
+    balances: string -> int,
+    unlockeds: string -> int,
+    lockedStakeables: string -> int,
+    lockedNotStakeables: string -> int,
     utxoIDs: []{
         txID: string,
         outputIndex: int
@@ -591,11 +591,11 @@ platform.getBalance({
 }
 ```
 
-- `address` is the address to get the balance of.
-- `balance` is the total balance, in nAVAX.
-- `unlocked` is the unlocked balance, in nAVAX.
-- `lockedStakeable` is the locked stakeable balance, in nAVAX.
-- `lockedNotStakeable` is the locked and not stakeable balance, in nAVAX.
+- `addresses` are the addresses to get the balance of.
+- `balances` is a map from assetID to the total balance.
+- `unlockeds` is a map from assetID to the unlocked balance.
+- `lockedStakeables` is a map from assetID to the locked stakeable balance.
+- `lockedNotStakeables` is a map from assetID to the locked and not stakeable balance.
 - `utxoIDs` are the IDs of the UTXOs that reference `address`.
 
 #### **Example Call**
@@ -617,10 +617,18 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "balance": "20000000000000000",
-    "unlocked": "10000000000000000",
-    "lockedStakeable": "10000000000000000",
-    "lockedNotStakeable": "0",
+    "balances": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000"
+    },
+    "unlockeds": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
+    },
+    "lockedStakeables": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
+    },
+    "lockedNotStakeables": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0"
+    },
     "utxoIDs": [
       {
         "txID": "11111111111111111111111111111111LpoYY",
@@ -908,15 +916,17 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is an upper bound because it does not account for burnt tokens, including transaction fees.
 
 #### **Signature**
 
 ```sh
-platform.getCurrentSupply() -> {supply: int}
+platform.getCurrentSupply({
+    subnetID: string // optional
+}) -> {supply: int}
 ```
 
-- `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+- `supply` is an upper bound on the number of tokens that exist.
 
 #### **Example Call**
 
@@ -924,7 +934,9 @@ platform.getCurrentSupply() -> {supply: int}
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentSupply",
-    "params": {},
+    "params": {
+        "subnetID": "11111111111111111111111111111111LpoYY"
+    },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -961,7 +973,12 @@ platform.getCurrentValidators({
         stakeAmount: string,
         nodeID: string,
         weight: string,
-        rewardOwner: {
+        validationRewardOwner: {
+            locktime: string,
+            threshold: string,
+            addresses: string[]
+        },
+        delegationRewardOwner: {
             locktime: string,
             threshold: string,
             addresses: string[]
@@ -993,15 +1010,16 @@ platform.getCurrentValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  - `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Omitted if `subnetID` is not the Primary Network.
-  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not the Primary Network.
-  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not the Primary Network.
-  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not the Primary Network.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
+  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS Subnet.
+  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
+  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
-  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not the Primary Network.
+  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
     - `endTime` is the Unix time when the delegator stops.
@@ -1034,7 +1052,12 @@ curl -X POST --data '{
         "endTime": "1602960455",
         "stakeAmount": "2000000000000",
         "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
-        "rewardOwner": {
+        "validationRewardOwner": {
+          "locktime": "0",
+          "threshold": "1",
+          "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
+        },
+        "delegationRewardOwner": {
           "locktime": "0",
           "threshold": "1",
           "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
@@ -1156,12 +1179,14 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of tokens that can be delegated.
 
 #### **Signature**
 
 ```sh
-platform.getMinStake() ->
+platform.getMinStake({
+    subnetID: string // optional
+}) ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
@@ -1174,7 +1199,10 @@ platform.getMinStake() ->
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"platform.getMinStake"
+    "method" :"platform.getMinStake",
+    "params": {
+        "subnetID":"11111111111111111111111111111111LpoYY"
+    },
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
@@ -1228,15 +1256,15 @@ platform.getPendingValidators({
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
   - `endTime` is the Unix time when the delegator stops.
-  - `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this delegator staked.
   - `nodeID` is the validating node’s node ID.
 
 #### **Example Call**
@@ -1335,7 +1363,7 @@ curl -X POST --data '{
 
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+Retrieve an assetID for a subnet’s staking asset.
 
 #### **Signature**
 
@@ -1382,9 +1410,9 @@ Get info about the Subnets.
 #### **Signature**
 
 ```sh
-platform.getSubnets(
-    {ids: []string}
-) ->
+platform.getSubnets({
+    ids: []string
+}) ->
 {
     subnets: []{
         id: string,
@@ -1396,7 +1424,7 @@ platform.getSubnets(
 
 - `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all Subnets.
 - `id` is the Subnet’s ID.
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet.
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be empty.
 
 See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1439,18 +1467,18 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```sh
-platform.getStake(
-    {addresses: []string}
-) ->
+platform.getStake({
+    addresses: []string
+}) ->
 {
-    staked: int,
+    stakeds: string -> int,
     stakedOutputs:  []string,
     encoding: string
 }
 ```
 
 - `addresses` are the addresses to get information about.
-- `staked` is the amount of nAVAX staked by addresses provided.
+- `stakeds` is a map from assetID to the amount staked by addresses provided.
 - `stakedOutputs` are the string representation of staked outputs.
 - `encoding` specifies the format for the returned outputs.
 
@@ -1476,7 +1504,9 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "staked": "26870333254",
+    "stakeds": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
+    },
     "stakedOutputs": [
       "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
     ],
@@ -1522,12 +1552,17 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+Get the total amount of tokens staked on the requested Subnet.
 
 #### **Signature**
 
 ```sh
-platform.getTotalStake(subnetID: string) -> {stake: int}
+platform.getTotalStake({
+    subnetID: string
+}) -> {
+    stake: int
+    weight: int
+}
 ```
 
 #### Primary Network Example
@@ -1538,7 +1573,9 @@ platform.getTotalStake(subnetID: string) -> {stake: int}
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTotalStake",
-    "params": {},
+    "params": {
+      "subnetID": "11111111111111111111111111111111LpoYY"
+    },
     "id": 1
 }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
@@ -1550,7 +1587,8 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "stake": "279825917679866811"
+    "stake": "279825917679866811",
+    "weight": "279825917679866811"
   },
   "id": 1
 }
