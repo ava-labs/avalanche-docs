@@ -8,7 +8,7 @@
 
 ## v1.9.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.1))
 
-**Banff.1 - VM2**
+**Banff.1 - VM2 Messaging**
 
 This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `18`.
 
