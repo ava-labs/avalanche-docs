@@ -637,7 +637,7 @@ Done! All we had to do was follow the comments.
 
 ### Step 6: Add Test Contract
 
-Let's add our test contract to `contract-examples/contracts`. This smart contract lets us interact with our precompile! We cast the HelloWorld precompile address to the IHelloWorld interface. In doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on that contract, we will be redirected to the HelloWorld precompile address. Let's name it `ExampleHelloWorld.sol`.
+Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact with our precompile! We cast the HelloWorld precompile address to the IHelloWorld interface. In doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on that contract, we will be redirected to the HelloWorld precompile address. Let's name it `ExampleHelloWorld.sol`.
 
 ```sol
 //SPDX-License-Identifier: MIT
@@ -647,7 +647,7 @@ import "./IHelloWorld.sol";
 
 // ExampleHelloWorld shows how the HelloWorld precompile can be used in a smart contract.
 contract ExampleHelloWorld {
-  address constant HELLO_WORLD_ADDRESS = 0x0200000000000000000000000000000000000004;
+  address constant HELLO_WORLD_ADDRESS = 0x0300000000000000000000000000000000000000;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
 
   function getHello() public view returns (string memory) {
@@ -660,7 +660,7 @@ contract ExampleHelloWorld {
 }
 ```
 
-Note that the contract methods do not need to have the same function signatures as the precompile. This contract is simply a wrapper.
+Please note that this contract is simply a wrapper and is calling the precompile functions.
 
 ### Step 7: Add Precompile Solidity Tests
 
