@@ -599,7 +599,7 @@ Done! All we had to do was follow the comments.
 
 Let's add our precompile upgrade in `./params/config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
 
-Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information.
+Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct. `Rules` gives information about the blockchain, the version, and the precompile enablement status to functions that don't have this information. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
   IsContractNativeMinterEnabled      bool
@@ -610,7 +610,7 @@ Let's add the bool to check if our precompile is enabled. We are adding this to 
   // Is{YourPrecompile}Enabled       bool
 ```
 
-We can add `IsHelloWorld()` which checks if we are equal or greater than the fork `blockTimestamp`. We use this to check out whether the precompile is enabled. We defined `GetHelloWorldConfig()` in the last step.
+We can add `IsHelloWorld()` which checks if we are equal or greater than the fork `blockTimestamp`. We use this to check out whether the precompile is enabled. We defined `GetHelloWorldConfig()` in the last step. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 // IsHelloWorld returns whether [blockTimestamp] is either equal to the HelloWorld
@@ -622,7 +622,7 @@ func (c *ChainConfig) IsHelloWorld(blockTimestamp *big.Int) bool {
 }
 ```
 
-We can now add it to the `AvalancheRules()` which creates and returns a new instance of `Rules`.
+We can now add it to the `AvalancheRules()` which creates and returns a new instance of `Rules`. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 rules.IsContractNativeMinterEnabled = c.IsContractNativeMinter(blockTimestamp)
