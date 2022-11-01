@@ -494,6 +494,26 @@ Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync d
 
 Size of trie cache used for providing state sync data to peers in MBs. Should be a multiple of `64`. Defaults to `64`.
 
+### Cache confiugration
+
+#### `trie-clean-cache` (int):
+Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`. Defaults to `512`.
+
+#### `trie-dirty-cache` (int):
+Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed this limit, they are written to disk. Defaults to `256`.
+
+#### `trie-dirty-commit-target` (int):
+Memory limit to target in the dirty cache before performing a commit (in MBs). Defaults to `20`.
+
+#### `snapshot-cache` (int):
+Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of `64`. Defaults to `256`.
+
+### Miscellaneous
+
+#### `skip-upgrade-check` (bool):
+
+If set to `true`, the chain will skip verifying that all expected network upgrades have taken place before the last accepted block on startup. This allows node operators to recover if their node has accepted blocks after a network upgrade with a version of the code prior to the upgrade. Defaults to `false`.
+
 ## X-Chain Configs
 
 In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json`.
