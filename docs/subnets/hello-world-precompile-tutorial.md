@@ -389,7 +389,7 @@ return equalsUpgrade && equalsAllow
 #### Step 3.2 Modify Configure()
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever `blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with. The below code snippet can be copied and pasted to overwrite the default `Configure()` code.
+Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever `blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a default key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The `StateDB` allows us to store a key value mapping of 32 byte hashes. The below code snippet can be copied and pasted to overwrite the default `Configure()` code.
 
 ```go
 // Configure configures [state] with the initial configuration.
