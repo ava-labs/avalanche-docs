@@ -326,11 +326,11 @@ We will be getting and setting our greeting with `sayHello()` and `setGreeting()
 
 ### Step 3: Add Custom Code
 
-Ok time to search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify.
+Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the precompile that we need to modify. We should start with the reference imports code block.
 
 ![Custom code starts here](./../../static/img/2022-09-01-22-48-26.png)
 
-We can remove the `fmt` import and the `fmt` reference import as we will not use them in this tutorial.
+We can remove all of these reference imports and the associated imports. We only include these in our template so that the file compiles on generation.
 
 Next we see this in `Equal()`.
 
@@ -350,7 +350,7 @@ func (c *HelloWorldConfig) Equal(s StatefulPrecompileConfig) bool {
 }
 ```
 
-We can skip this step since our HelloWorldConfig struct looks like this.
+We can leave this function as is since we check `UpgradeableConfig` for equality which is the only field that `HelloWorldConfig` struct has.
 
 ```go
 // HelloWorldConfig implements the StatefulPrecompileConfig
