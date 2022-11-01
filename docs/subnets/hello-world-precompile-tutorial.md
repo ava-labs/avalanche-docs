@@ -464,16 +464,16 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 		return nil, remainingGas, err
 	}
 
-  // CUSTOM CODE STARTS HERE
-  // Check if the input string is longer than 32 bytes
+  	// CUSTOM CODE STARTS HERE
+  	// Check if the input string is longer than 32 bytes
     if len(inputStr) > 32 {
       return nil, 0, errors.New("input string is longer than 32 bytes")
     }
 
-  // setGreeting is the execution function
-  // "SetGreeting(name string)" and sets the storageKey
-  // in the string returned by hello world
-  res := common.LeftPadBytes([]byte(inputStr), common.HashLength)
+  	// setGreeting is the execution function
+  	// "SetGreeting(name string)" and sets the storageKey
+  	// in the string returned by hello world
+  	res := common.LeftPadBytes([]byte(inputStr), common.HashLength)
 	accessibleState.GetStateDB().SetState(HelloWorldAddress, common.BytesToHash([]byte("storageKey")), common.BytesToHash(res))
 
 	// This function does not return an output, leave this one as is
@@ -490,7 +490,7 @@ Let's now modify `./params/precompile_config.go`. We can search (`CTRL F`) for `
 
 This file helps set up stateful precompiles that can be activated as part of a network upgrade and related helper functions.
 
-Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference each of the possible stateful precompile types.
+Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference each of the possible stateful precompile types. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 const (
@@ -504,14 +504,14 @@ const (
 )
 ```
 
-We should also add our precompile key to our `precompileKeys` slice. We use this slice to iterate over the keys and activate the precompiles.
+We should also add our precompile key to our `precompileKeys` slice. We use this slice to iterate over the keys and activate the precompiles. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 // ADD YOUR PRECOMPILE HERE
 var precompileKeys = []precompileKey{contractDeployerAllowListKey, contractNativeMinterKey, txAllowListKey, feeManagerKey, helloWorldKey /* {yourPrecompile}Key */}
 ```
 
-We should add our precompile to the `PrecompileUpgrade` struct. The `PrecompileUpgrade` is a helper struct embedded in `UpgradeConfig` and represents each of the possible stateful precompile types that can be activated or deactivated as a network upgrade.
+We should add our precompile to the `PrecompileUpgrade` struct. The `PrecompileUpgrade` is a helper struct embedded in `UpgradeConfig` and represents each of the possible stateful precompile types that can be activated or deactivated as part of a network upgrade. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 type PrecompileUpgrade struct {
@@ -525,7 +525,7 @@ type PrecompileUpgrade struct {
 }
 ```
 
-In the `getByKey` function given a `precompileKey`, it returns the correct mapping of type `precompile.StatefulPrecompileConfig`. Here, we must set the `helloWorldKey` to map to the `helloWorldConfig`.
+In the `getByKey` function given a `precompileKey`, it returns the correct mapping of type `precompile.StatefulPrecompileConfig`. Here, we must set the `helloWorldKey` to map to the `helloWorldConfig`. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 func (p *PrecompileUpgrade) getByKey(key precompileKey) (precompile.StatefulPrecompileConfig, bool) {
@@ -551,7 +551,7 @@ func (p *PrecompileUpgrade) getByKey(key precompileKey) (precompile.StatefulPrec
 }
 ```
 
-We should also define `GetHelloWorldConfig`. Given a `blockTimestamp`, we will return the `*precompile.HelloWorldConfig` if it is enabled. We use this function to check whether precompiles are enabled in `./params/config.go`. This function is also used to construct a `PrecompileUpgrade` struct in `GetActivePrecompiles()`.
+We should also define `GetHelloWorldConfig`. Given a `blockTimestamp`, we will return the `*precompile.HelloWorldConfig` if it is enabled. We use this function to check whether precompiles are enabled in `./params/config.go`. This function is also used to construct a `PrecompileUpgrade` struct in `GetActivePrecompiles()`. The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 // GetHelloWorldConfig returns the latest forked HelloWorldConfig
@@ -564,7 +564,7 @@ func (c *ChainConfig) GetHelloWorldConfig(blockTimestamp *big.Int) *precompile.H
 }
 ```
 
-Finally, we can add our precompile in `GetActivePrecompiles()`, which given a `blockTimestamp` returns a `PrecompileUpgrade` struct. This function is used in the Ethereum API and can give a user information about what precompiles are enabled at a certain block timestamp. For more information about our Ethereum API, check out this [link](https://docs.avax.network/apis/avalanchego/apis/subnet-evm).
+Finally, we can add our precompile in `GetActivePrecompiles()`, which given a `blockTimestamp` returns a `PrecompileUpgrade` struct. This function is used in the Ethereum API and can give a user information about what precompiles are enabled at a certain block timestamp. For more information about our Ethereum API, check out this [link](https://docs.avax.network/apis/avalanchego/apis/subnet-evm). The below code snippet can be copied and pasted to overwrite the default code.
 
 ```go
 func (c *ChainConfig) GetActivePrecompiles(blockTimestamp *big.Int) PrecompileUpgrade {
@@ -581,7 +581,7 @@ func (c *ChainConfig) GetActivePrecompiles(blockTimestamp *big.Int) PrecompileUp
 	if config := c.GetFeeConfigManagerConfig(blockTimestamp); config != nil && !config.Disable {
 		pu.FeeManagerConfig = config
 	}
-  if config := c.GetHelloWorldConfig(blockTimestamp); config != nil && !config.Disable {
+  	if config := c.GetHelloWorldConfig(blockTimestamp); config != nil && !config.Disable {
 		pu.HelloWorldConfig = config
 	}
 	// ADD YOUR PRECOMPILE HERE
