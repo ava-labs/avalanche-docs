@@ -332,9 +332,9 @@ Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the
 
 We can remove all of these reference imports and the associated imports. We only include these in our template so that the file compiles on generation.
 
-#### Step 3.1 Modify Equals()
+#### Step 3.1 Modify Equal()
 
-Next we see this in `Equal()`.
+Next we see this in `Equal()`. The below code snippet can be copied and pasted to overwrite the default `Equal()` code.
 
 ```go
 // Equal returns true if [s] is a [*HelloWorldConfig] and it has been configured identical to [c].
@@ -389,7 +389,7 @@ return equalsUpgrade && equalsAllow
 #### Step 3.2 Modify Configure()
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever blockTimestamp the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with.
+Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever `blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. This will be the default value to start off with. The below code snippet can be copied and pasted to overwrite the default `Configure()` code.
 
 ```go
 // Configure configures [state] with the initial configuration.
@@ -409,7 +409,7 @@ func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContex
 
 #### Step 3.3 Modify Verify()
 
-We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal. We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`. You can copy and paste this cleaner version of the function in.
+We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal. We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`. The below code snippet can be copied and pasted to overwrite the default `Verify()` code.
 
 ```go
 // Verify tries to verify HelloWorldConfig and returns an error accordingly.
@@ -420,7 +420,7 @@ func (c *HelloWorldConfig) Verify() error {
 
 #### Step 3.4 Modify sayHello()
 
-Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol` interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here. If any contract calls these functions from the interface, the below function gets executed. This function is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
+Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol` interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here. If any contract calls these functions from the interface, the below function gets executed. This function is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`. The below code snippet can be copied and pasted to overwrite the default `sayHello` code.
 
 ```go
 func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
@@ -446,7 +446,7 @@ func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, 
 
 #### Step 3.5 Modify setGreeting()
 
-We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input` and we will set that as the value in the state mapping with the key as `storageKey`.
+We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input` and we will set that as the value in the state mapping with the key as `storageKey`. The below code snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
 
 ```go
 func setGreeting(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
