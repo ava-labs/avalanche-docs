@@ -144,6 +144,7 @@ Download the following prerequisites into your `$GOPATH`:
 - Git Clone [Avalanchego](https://github.com/ava-labs/avalanchego) repo
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
+- Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
 For easy copy paste, use the below commands.
 
@@ -155,6 +156,7 @@ git clone git@github.com:ava-labs/subnet-evm.git
 git clone git@github.com:ava-labs/avalanchego.git
 go install github.com/ava-labs/avalanche-network-runner@latest
 npm install -g solc
+npm install -g yarn
 ```
 
 ### Step 0: Generating the Precompile
@@ -637,7 +639,7 @@ Done! All we had to do was follow the comments.
 
 ### Step 6: Add Test Contract
 
-Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact with our precompile! We cast the HelloWorld precompile address to the IHelloWorld interface. In doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on that contract, we will be redirected to the HelloWorld precompile address. Let's name it `ExampleHelloWorld.sol`.
+Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact with our precompile! We cast the HelloWorld precompile address to the IHelloWorld interface. In doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on that contract, we will be redirected to the HelloWorld precompile address. The below code snippet can be copied and pasted into a new file called `ExampleHelloWorld.sol`.
 
 ```sol
 //SPDX-License-Identifier: MIT
@@ -664,7 +666,9 @@ Please note that this contract is simply a wrapper and is calling the precompile
 
 ### Step 7: Add Precompile Solidity Tests
 
-We can now write our hardhat test in `contract-examples/test`. This file is called `ExampleHelloWorld.ts`.
+#### Step 7.1 Add Hardhat Test
+
+We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be copied and pasted into a new file called `ExampleHelloWorld.ts`.
 
 ```js
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
@@ -705,17 +709,17 @@ describe("ExampleHelloWorld", function () {
 })
 ```
 
-Let's also make sure to install yarn in `./contract-examples`
+Let's also make sure to run yarn in `./contract-examples`
 
 ```bash
-npm install -g yarn
 yarn
-
 ```
 
-Let's see if it passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary network) as well as another blockchain that follows the rules defined by the Subnet-EVM.
+Let's see if our test contract passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary network) as well as another blockchain that follows the rules defined by the Subnet-EVM.
 
-To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain. Create the genesis in `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
+#### Step 7.2 Add Genesis
+
+To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain. Please and copy and paste the below code snippet (genesis) into `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
 
 ```json
 {
@@ -792,6 +796,8 @@ type PrecompileUpgrade struct {
 }
 ```
 
+#### Step 7.3 Launch Local Network
+
 Now we can get the network up and running.
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Here's some more information on [avalanche-network-runner](https://docs.avax.network/subnets/network-runner), how to download it, and how to use it.
@@ -808,6 +814,7 @@ The next steps are to build the Subnet-EVM binary with all the latest precompile
 In another terminal tab run this command in the root of the Subnet-EVM repo to get the latest local Subnet-EVM binary. This build script will place the binary in `AVALANCHEGO_PLUGIN_PATH` which we will define later.
 
 ```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh
 ```
 
@@ -818,7 +825,7 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ```
 
-Set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
+We can now set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest Avalanchego binary we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the Subnet-EVM binary we have just built.
 
 ```bash
 export AVALANCHEGO_EXEC_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/build/avalanchego"
@@ -848,11 +855,13 @@ If the network startup is successful then you should see something like this.
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9658/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 ```
 
+#### Step 7.4 Modify Hardhat Config
+
 Sweet! Now we have blockchain RPCs that can be used to talk to the network!
 We now need to modify the hardhat config located in `./contract-examples/hardhat.config.ts`
 
 We need to modify the `local` network.
-Let's change `chainId`, `gas`, and `gasPrice`. Make sure the `chainId` matches the one in the genesis file.
+Let's change `chainId`, `gas`, and `gasPrice`. Make sure the `chainId` matches the one in the genesis file. The below code snippet can be copied and pasted to override the default config.
 
 ```json
 networks: {
@@ -884,6 +893,7 @@ We also need to make sure `localRPC` points to the right value.
 Let's copy `local_rpc.example.json` which is located in `./contract-examples`
 
 ```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm/contract-examples
 cp local_rpc.example.json local_rpc.json
 ```
 
@@ -895,6 +905,8 @@ Now in `local_rpc.json` we can modify the rpc url to the one we just created. It
 }
 ```
 
+#### Step 7.5 Run Tests
+
 Going to `./contract-examples`, we can finally run our tests by running the command below.
 
 ```bash
@@ -903,7 +915,7 @@ npx hardhat test --network local
 
 Great they passed! All the functions implemented in the precompile work as expected!
 
-If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled is some code missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
+If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled and some code is missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
 
 ### Step 8: Create Genesis
 
@@ -914,7 +926,6 @@ We can move our genesis file we created in the last step to `tests/e2e/genesis/`
 ### Step 9: Add E2E tests
 
 In `tests/e2e/solidity/suites.go` we can now write our first e2e test!
-It's another nice copy and paste situation.
 
 ```go
 ginkgo.It("hello world", func() {
