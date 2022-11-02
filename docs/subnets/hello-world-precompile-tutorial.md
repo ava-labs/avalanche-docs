@@ -967,16 +967,12 @@ Copy and paste the code snippet below and add it to to the genesis located in `.
 },
 ```
 
-Now we can run our script, this time with the `ENABLE_SOLIDITY_TESTS` flag on.
+Now we can run our script with some flags specified.
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
-ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
+ENABLE_SOLIDITY_TESTS=true GINKGO_FOCUS_FLAGS="hello world" ./scripts/run.sh
 ```
-
-You should see something like this if all tests are successful
-
-![Ran 6 of 6 specs](./../../static/img/2022-09-01-16-53-58.png)
 
 ### Conclusion
 
