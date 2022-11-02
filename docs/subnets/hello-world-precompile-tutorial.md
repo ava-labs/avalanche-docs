@@ -919,13 +919,15 @@ If your tests failed, please retrace your steps. Most likely the error is that t
 
 ### Step 8: Create Genesis
 
-We can move our genesis file we created in the last step to `tests/e2e/genesis/`.
+We can move our genesis file we created in the last step to `./tests/e2e/genesis/`.
 
-`cp /tmp/subnet-evm-genesis.json tests/e2e/genesis/hello_world.json`
+```bash
+cp /tmp/subnet-evm-genesis.json $GOPATH/src/github.com/ava-labs/subnet-evm/tests/e2e/genesis/hello_world.json
+```
 
 ### Step 9: Add E2E tests
 
-In `tests/e2e/solidity/suites.go` we can now write our first e2e test!
+In `./tests/e2e/solidity/suites.go` we can now write our first e2e test! The below code snippet can be copied and pasted to add the new test.
 
 ```go
 ginkgo.It("hello world", func() {
@@ -956,8 +958,6 @@ ginkgo.It("hello world", func() {
 
 ### Step 10: Run E2E Test
 
-Now we can run it, this time with the `ENABLE_SOLIDITY_TESTS` flag on. We should expect this to pass since we did such thorough testing in Step 7.
-
 We also need to modify the genesis in `./scripts/run.sh` to enable our precompile.
 Let's add this to the genesis.
 
@@ -966,6 +966,8 @@ Let's add this to the genesis.
   "blockTimestamp": 0
 },
 ```
+
+Now we can run it, this time with the `ENABLE_SOLIDITY_TESTS` flag on.
 
 Finally we can go back to the root and run
 
