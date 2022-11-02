@@ -919,7 +919,7 @@ If your tests failed, please retrace your steps. Most likely the error is that t
 
 ### Step 8: Create Genesis
 
-We can move our genesis file we created in the last step to `./tests/e2e/genesis/`.
+We can move our genesis file we created in the last step to `./tests/e2e/genesis/hello_world.json`.
 
 ```bash
 cp /tmp/subnet-evm-genesis.json $GOPATH/src/github.com/ava-labs/subnet-evm/tests/e2e/genesis/hello_world.json
@@ -959,7 +959,7 @@ ginkgo.It("hello world", func() {
 ### Step 10: Run E2E Test
 
 We also need to modify the genesis in `./scripts/run.sh` to enable our precompile.
-Let's add this to the genesis.
+Copy and paste the code snippet below and add it to to the genesis located in `./scripts/run.sh`.
 
 ```json
 "helloWorldConfig": {
@@ -967,13 +967,14 @@ Let's add this to the genesis.
 },
 ```
 
-Now we can run it, this time with the `ENABLE_SOLIDITY_TESTS` flag on.
-
-Finally we can go back to the root and run
+Now we can run our script, this time with the `ENABLE_SOLIDITY_TESTS` flag on.
 
 ```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ENABLE_SOLIDITY_TESTS=true ./scripts/run.sh
 ```
+
+You should see something like this if all tests are successful
 
 ![Ran 6 of 6 specs](./../../static/img/2022-09-01-16-53-58.png)
 
