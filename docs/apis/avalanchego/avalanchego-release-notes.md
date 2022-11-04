@@ -18,6 +18,10 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Fixed regression where a snapshot could be marked as stale by the async acceptor during block processing
 - Added fine-grained block processing metrics
 
+**API**
+
+`platformvm.getCurrentValidators` and `platformvm.getPendingValidators` now include the BLS public key and proof of posession for each validator, if applicable.
+
 **RPCChainVM**
 
 - Added `validators.State` to the rpcchainvm server's `snow.Context`
