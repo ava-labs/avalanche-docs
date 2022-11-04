@@ -210,6 +210,7 @@ info.getNodeVersion() -> {
     databaseVersion: string,
     gitCommit: string,
     vmVersions: map[string]string,
+    rpcProtocolVersion: string,
 }
 ```
 
@@ -219,6 +220,7 @@ where:
 - `databaseVersion` is the version of the database this node is using
 - `gitCommit` is the Git commit that this node was built from
 - `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this node runs
+- `rpcProtocolVersion` is the RPCChainVM protocol version
 
 #### **Example Call**
 
@@ -236,13 +238,14 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "version": "avalanche/1.4.10",
+    "version": "avalanche/1.9.1",
     "databaseVersion": "v1.4.5",
-    "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
+    "rpcProtocolVersion": "18",
+    "gitCommit": "79cd09ba728e1cecef40acd60702f0a2d41ea404",
     "vmVersions": {
-      "avm": "v1.4.10",
-      "evm": "v0.5.5-rc.1",
-      "platform": "v1.4.10"
+      "avm": "v1.9.1",
+      "evm": "v0.11.1",
+      "platform": "v1.9.1"
     }
   },
   "id": 1
