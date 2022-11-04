@@ -987,6 +987,10 @@ platform.getCurrentValidators({
         delegationFee: string,
         uptime: string,
         connected: bool,
+        signer: {
+            publicKey: string,
+            proofOfPosession: string
+        },
         delegators: []{
             txID: string,
             startTime: string,
@@ -1019,6 +1023,7 @@ platform.getCurrentValidators({
   - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
   - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
+  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
   - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
@@ -1238,6 +1243,10 @@ platform.getPendingValidators({
         nodeID: string,
         delegationFee: string,
         connected: bool,
+        signer: { 
+            publicKey: string,
+            proofOfPosession: string
+        },
         weight: string,
     },
     delegators: []{
@@ -1259,6 +1268,7 @@ platform.getPendingValidators({
   - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
+  -  `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
   - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
