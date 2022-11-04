@@ -18,13 +18,10 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Fixed regression where a snapshot could be marked as stale by the async acceptor during block processing
 - Added fine-grained block processing metrics
 
-**APIs**
-
-- Added `rpcProtocolVersion` to the output of `info.getNodeVersion`
-
 **RPCChainVM**
 
 - Added `validators.State` to the rpcchainvm server's `snow.Context`
+- Added `rpcProtocolVersion` to the output of `info.getNodeVersion`
 - Added `rpcchainvm` protocol version to the output of the `--version` flag
 - Added `version.RPCChainVMProtocolCompatibility` map to easily compare plugin compatibility against avalanchego versions
 

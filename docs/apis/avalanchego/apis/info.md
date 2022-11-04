@@ -240,13 +240,13 @@ curl -X POST --data '{
   "result": {
     "version": "avalanche/1.9.1",
     "databaseVersion": "v1.4.5",
+    "rpcProtocolVersion": "18",
     "gitCommit": "79cd09ba728e1cecef40acd60702f0a2d41ea404",
     "vmVersions": {
       "avm": "v1.9.1",
       "evm": "v0.11.1",
       "platform": "v1.9.1"
-    },
-    "rpcProtocolVersion": "18"
+    }
   },
   "id": 1
 }
