@@ -10,7 +10,7 @@ By definition, all Subnet validators must also validate the Avalanche Primary Ne
 
 (Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
-Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Consensus.
+Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage(1) or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Consensus.
 
 ## Advantages
 
@@ -69,3 +69,6 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 ## Developing Your Own Subnet
 
 Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
+
+## Notes
+(1) Subnets do not share storage in logical level (keys/values) with other Subnets, but they share storage on disk level (LevelDB) and store their data into same database/folder in operating system.
