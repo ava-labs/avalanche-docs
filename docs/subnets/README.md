@@ -71,4 +71,4 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
 
 ## Notes
-(1) Subnets do not share storage in logical level (keys/values) with other subnets, but they share storage on disk level (LevelDB) and store their data into same database/folder in operating system.
+(1) Subnets do not share storage in logical level (keys/values) with other Subnets, but they share storage on disk level (LevelDB) and store their data into same database/folder in operating system.
