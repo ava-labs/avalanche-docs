@@ -413,6 +413,16 @@ should be set to `true` as well.
 
 :::
 
+#### `populate-missing-tries` (*uint64):
+
+If non-nil, sets the starting point for repopulating missing tries to re-generate archival merkle forest.
+
+To restore an archival merkle forest that has been corrupted (missing trie nodes for a section of the blockchain), specify the starting point of the last block on disk, where the full trie was available at that block to re-process blocks from that height onwards and re-generate the archival merkle forest on startup. This flag should be used once to re-generate the archival merkle forest and should be removed from the config after completion. This flag will cause the node to delay starting up while it re-processes old blocks.
+
+#### `populate-missing-tries-parallelism` (int):
+
+Number of concurrent readers to use when re-populating missing tries on startup. Defaults to 1024.
+
 #### `allow-missing-tries` (boolean):
 
 If `true`, allows a node that was once configured as archival to switch to pruning mode. Defaults to `false`.
