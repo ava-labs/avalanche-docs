@@ -6,6 +6,85 @@
 
 :::
 
+## v1.9.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.2))
+
+**Banff.2 - Additional BLS Support**
+
+This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `19`.
+
+**Coreth**
+
+- Added trie clean cache journaling to disk to improve processing time after restart
+- Fixed regression where a snapshot could be marked as stale by the async acceptor during block processing
+- Added fine-grained block processing metrics
+
+**RPCChainVM**
+
+- Added `validators.State` to the rpcchainvm server's `snow.Context`
+- Added `rpcProtocolVersion` to the output of `info.getNodeVersion`
+- Added `rpcchainvm` protocol version to the output of the `--version` flag
+- Added `version.RPCChainVMProtocolCompatibility` map to easily compare plugin compatibility against avalanchego versions
+
+**Builds**
+
+- Downgraded `ubuntu` release binaries from `jammy` to `focal`
+- Updated macos github runners to `macos-12`
+- Added workflow dispatch to build release binaries
+
+**BLS**
+
+- Added bls proof of possession to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Added bls public key to in-memory staker objects
+- Improved memory clearing of bls secret keys
+
+**Cleanup**
+
+- Fixed issue where the chain manager would attempt to start chain creation multiple times
+- Fixed race that caused the P-chain to finish bootstrapping before the primary network finished bootstrapping
+- Converted inbound message handling to expect usage of types rather than maps of fields
+- Simplified the `validators.Set` implementation
+- Added a warning if synchronous consensus messages take too long
+
+## v1.9.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.1))
+
+**Banff.1 - VM2 Messaging**
+
+This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `18`.
+
+**Features**
+
+- Added cross-chain messaging support to the VM interface
+- Added Ledger support to the Primary Network wallet
+- Converted Bionic builds to Jammy builds
+- Added `mock.gen.sh` to programmatically generate mock implementations
+- Added BLS signer to the `snow.Context`
+- Moved `base` from `rpc.NewEndpointRequester` to be included in the `method` in `SendRequest`
+- Converted `UnboundedQueue` to `UnboundedDeque`
+
+**Observability**
+
+- Added support for OpenTelemetry tracing
+- Converted periodic bootstrapping status update to be time-based
+- Removed duplicated fields from the json format of the node config
+- Configured min connected stake health check based on the consensus parameters
+- Added new consensus metrics
+- Documented how chain time is advanced in the PlatformVM with `chain_time_update.md`
+
+**Cleanup**
+
+- Converted chain creation to be handled asynchronously from the P-chain's execution environment
+- Removed `SetLinger` usage of P2P TCP connections
+- Removed `Banff` upgrade flow
+- Fixed ProposerVM inner block caching after verification
+- Fixed PlatformVM mempool verification to use an updated chain time
+- Removed deprecated CLI flags: `--dynamic-update-duration`, `--dynamic-public-ip`
+- Added unexpected Put bytes tests to the Avalanche and Snowman consensus engines
+- Removed mockery generated mock implementations
+- Converted safe math functions to use generics where possible
+- Added linting to prevent usage of `assert` in unit tests
+- Converted empty struct usage to `nil` for interface compliance checks
+- Added CODEOWNERs to own first rounds of PR review
+
 ## v1.9.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0))
 
 **Banff - Elastic Subnets**

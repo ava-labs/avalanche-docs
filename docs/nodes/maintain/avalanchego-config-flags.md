@@ -343,6 +343,33 @@ The identity of the network the node should connect to. Can be one of:
 - `--network-id=local` -&gt; Connect to a local test-network.
 - `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
+## OpenTelemetry
+
+AvalancheGo supports collecting and exporting [OpenTelemetry](https://opentelemetry.io/) traces.
+This might be useful for debugging, performance analysis, or monitoring.
+
+#### `--tracing-enabled` (boolean):
+
+If true, enable opentelemetry tracing. Defaults to `false`.
+
+#### `--tracing-endpoint` (string):
+
+The endpoint to export trace data to. Defaults to `localhost:4317`.
+
+#### `--tracing-insecure` (string):
+
+If true, don't use TLS when exporting trace data. Defaults to `true`.
+
+#### `--tracing-sample-rate` (float):
+
+The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample.
+Defaults to `0.1`.
+
+#### `--tracing-exporter-type`(string):
+
+Type of exporter to use for tracing. Options are [`grpc`,`http`]. Defaults to `grpc`.
+
+
 ## Public IP
 
 #### `--public-ip` (string):
