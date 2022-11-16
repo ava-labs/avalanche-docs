@@ -187,16 +187,16 @@ Create a new file called `IHelloWorld.sol` and copy and paste the below code.
 pragma solidity >=0.8.0;
 
 interface IHelloWorld {
-  // sayHello returns the string located at [key]
+  // sayHello returns the stored greeting string
   function sayHello() external returns (string calldata result);
 
-  // setGreeting sets the string located at [key]
+  // setGreeting  stores the greeting string
   function setGreeting(string calldata response) external;
 }
 ```
 
 Now we have an interface that our precompile can implement!
-Let's create an [abi](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#:~:text=Contract%20ABI%20Specification-,Basic%20Design,as%20described%20in%20this%20specification.) of our solidity code.
+Let's create an [ABI](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#contract-abi-specification) of our Solidity inteface.
 
 In the same `./contract-examples/contracts` directory, let's run
 
@@ -204,7 +204,7 @@ In the same `./contract-examples/contracts` directory, let's run
 solcjs --abi IHelloWorld.sol && mv IHelloWorld_sol_IHelloWorld.abi IHelloWorld.abi
 ```
 
-This spits out the abi code in `./contract-examples/contracts` as `IHelloWorld.abi`:
+This generates the ABI code and moves it to `./contract-examples/contracts` as `IHelloWorld.abi`:
 
 ```json
 [
@@ -469,7 +469,7 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
   	// CUSTOM CODE STARTS HERE
   	// Check if the input string is longer than 32 bytes
     if len(inputStr) > 32 {
-      return nil, 0, errors.New("input string is longer than 32 bytes")
+    	return nil, 0, errors.New("input string is longer than 32 bytes")
     }
 
   	// setGreeting is the execution function
@@ -809,7 +809,7 @@ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-The next steps are to build the Subnet-EVM binary with all the latest precompile changes and the lastest AvalancheGo Binary.
+The next steps are to build the Subnet-EVM binary with all the latest precompile changes and the latest AvalancheGo Binary.
 
 In another terminal tab run this command in the root of the Subnet-EVM repo to get the latest local Subnet-EVM binary. This build script will place the binary in `AVALANCHEGO_PLUGIN_PATH` which we will define later.
 
@@ -863,7 +863,7 @@ We now need to modify the hardhat config located in `./contract-examples/hardhat
 We need to modify the `local` network.
 Let's change `chainId`, `gas`, and `gasPrice`. Make sure the `chainId` matches the one in the genesis file. The below code snippet can be copied and pasted to override the default config.
 
-```json
+```js
 networks: {
     local: {
       //"http://{ip}:{port}/ext/bc/{chainID}/rpc
@@ -882,8 +882,6 @@ networks: {
         "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
         "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a"
       ],
-      gasPrice: 25000000000,
-      gas: 10000000,
     }
   }
 ```
