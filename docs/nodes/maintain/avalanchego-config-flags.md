@@ -685,7 +685,13 @@ If this node is a validator, when a container is inserted into consensus, send a
 
 #### `snow-mixed-query-num-push-non-vdr` (uint):
 
-fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
+If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
+
+### ProposerVM Parameters
+
+#### `proposervm-use-current-height` (bool):
+
+Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
 
 ### Continuous Profiling
 
