@@ -97,7 +97,7 @@ type StatefulPrecompiledContract interface {
 }
 ```
 
-A stateful precompile injects state access through the `PrecompileAccessibleState` interface to provide access to the EVM state including the ability to modify balances, read/write storage, or even execute any Golang code we want.
+A stateful precompile injects state access through the `PrecompileAccessibleState` interface to provide access to the EVM state including the ability to modify balances and read/write storage.
 
 This way we can provide even more customization of the EVM through Stateful Precompiles than we can with the original precompile interface!
 
@@ -188,7 +188,7 @@ pragma solidity >=0.8.0;
 
 interface IHelloWorld {
   // sayHello returns the stored greeting string
-  function sayHello() external returns (string calldata result);
+  function sayHello() external view returns (string calldata result);
 
   // setGreeting  stores the greeting string
   function setGreeting(string calldata response) external;
@@ -270,7 +270,7 @@ We can see our precompile address is set to some default value. We can cut the a
 
 ![Singleton StatefulPrecompiledContract and signatures](./../../static/img/2022-09-01-22-46-00.png)
 
-We can paste it here in `./precompile/params.go` and modify the default value to be the next user available stateful precompile address. For forks of subnet-evm, users should start at `0x0300000000000000000000000000000000000000` to ensure
+We can paste it here in [`./precompile/params.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/params.go) and modify the default value to be the next user available stateful precompile address. For forks of subnet-evm, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm in the future.
 
 ```go
@@ -301,7 +301,7 @@ Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`
 
 ### Step 2: Set Gas Costs
 
-In `precompile/params.go` we have `writeGasCostPerSlot` and `readGasCostPerSlot`.
+In [`precompile/params.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/params.go) we have `writeGasCostPerSlot` and `readGasCostPerSlot`.
 
 `writeGasCostPerSlot` is the cost of one write such as modifying a state storage slot.
 
@@ -488,7 +488,7 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 
 ### Step 4: Add Upgradable Config
 
-Let's now modify `./params/precompile_config.go`. We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
+Let's now modify [`./params/precompile_config.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/params/precompile_config.go). We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
 
 This file helps set up stateful precompiles that can be activated as part of a network upgrade and related helper functions.
 
@@ -779,7 +779,7 @@ Adding this to our genesis enables our HelloWorld precompile.
 },
 ```
 
-As a reminder, we defined `helloWorldConfig` in `./params/precompile_config.go`. By putting this in genesis, we enable our HelloWorld precompile at blockTimestamp 0.
+As a reminder, we defined `helloWorldConfig` in [`./params/precompile_config.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/params/precompile_config.go). By putting this in genesis, we enable our HelloWorld precompile at blockTimestamp 0.
 
 ```go
 // PrecompileUpgrade is a helper struct embedded in UpgradeConfig, representing
