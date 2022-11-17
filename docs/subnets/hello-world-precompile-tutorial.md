@@ -28,7 +28,7 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
-A [precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L53-L56) follows this interface:
+A [precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/contracts.go#L53-L56) follows this interface:
 
 ```go
 // PrecompiledContract is the basic interface for native Go contracts. The implementation
@@ -40,7 +40,7 @@ type PrecompiledContract interface {
 }
 ```
 
-Here is an example of the [sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/contracts.go#L238-L252) function.
+Here is an example of the [sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/contracts.go#L238-L252) function.
 
 ```go
 type sha256hash struct{}
@@ -81,7 +81,7 @@ When a precompile is called, the EVM checks if the input address is a precompile
 
 A stateful precompile builds on a precompile in that it adds state access. Stateful precompiles are not available in the default EVM, and are specific to Avalanche EVMs such as [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
-A stateful precompile follows this interface.
+A stateful precompile follows this [interface](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/contract.go#L64-L67).
 
 ```go
 // StatefulPrecompiledContract is the interface for executing a precompiled contract
@@ -297,7 +297,7 @@ UsedAddresses = []common.Address{
 	}
 ```
 
-Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L222), [`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L401), [`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L362), [`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L311), it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/master/core/vm/evm.go#L271-L272) if the precompile is enabled.
+Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing [`CALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L222), [`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L401), [`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L362), [`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L311), it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L271-L272) if the precompile is enabled.
 
 ### Step 2: Set Gas Costs
 
