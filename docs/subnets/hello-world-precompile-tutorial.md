@@ -943,7 +943,7 @@ Now we can run our script with some flags specified.
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
-ENABLE_SOLIDITY_TESTS=true GINKGO_FOCUS_FLAGS="hello world" ./scripts/run.sh
+SKIP_NETWORK_RUNNER_START=true SKIP_NETWORK_RUNNER_SHUTDOWN=true ENABLE_SOLIDITY_TESTS=true scripts/run.sh
 ```
 
 ### Conclusion
