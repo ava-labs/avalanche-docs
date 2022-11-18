@@ -10,7 +10,7 @@
 
 This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `19`.
 
-### Tracing
+**Tracing**
 
 - Added `context.Context` to all `VM` interface functions
 - Added `context.Context` to the `validators.State` interface
@@ -20,20 +20,20 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added `tracedHandler` implementation for `http.Handler`
 - Added `tracedConsensus` implementations for `snowman.Consensus` and `avalanche.Consensus`
 
-### Fixes
+**Fixes**
 
 - Fixed incorrect `NodeID` used in registered `AppRequest` timeouts
 - Fixed panic when calling `encdb#NewBatch` after `encdb#Close`
 - Fixed panic when calling `prefixdb#NewBatch` after `prefixdb#Close`
 
-### Configs
+**Configs**
 
 - Added `proposerMinBlockDelay` support to subnet configs
 - Added `providedFlags` field to the `initializing node` for easily observing custom node configs
 - Added `--chain-aliases-file` and `--chain-aliases-file-content` CLI flags
 - Added `--proposervm-use-current-height` CLI flag
 
-### Coreth
+**Coreth**
 
 - Added metric for number of processed and accepted transactions
 - Added wait for state sync goroutines to complete on shutdown
@@ -42,7 +42,7 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added back isForkIncompatible checks for all existing forks
 - Cleaned up Apricot Phase 6 code
 
-### Linting
+**Linting**
 
 - Added `unused-receiver` linter
 - Added `unused-parameter` linter
@@ -55,20 +55,20 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added `empty-lines` linter
 - Added `error-lint` linter
 
-### Testing
+**Testing**
 
 - Added `scripts/build_fuzz.sh` and initial fuzz tests
 - Added additional `Fx` tests
 - Added additional `messageQueue` tests
 - Fixed `vmRegisterer` tests
 
-### Documentation
+**Documentation**
 
 - Documented `Database.Put` invariant for `nil` and empty slices
 - Documented avalanchego's versioning scheme
 - Improved `vm.proto` docs
 
-### Miscellaneous
+**Miscellaneous**
 
 - Added peer gossip tracker
 - Added `avalanche_P_vm_time_until_unstake` and `avalanche_P_vm_time_until_unstake_subnet` metrics
@@ -80,7 +80,6 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added support for parsing future subnet uptime tracking data to the P-chain's state implementation
 - Increased validator set cache size
 - Added `avax.UTXOIDFromString` helper for managing `UTXOID`s more easily
-
 
 ## v1.9.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.2))
 
