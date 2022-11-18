@@ -40,7 +40,7 @@ This is a node-specific configuration. Every validator of this Subnet has to use
 
 #### `proposerMinBlockDelay` (time.Duration):
 
-The minimum delay enforce in building snowman++ blocks. Default is set to 1 second.
+The minimum delay performed when building snowman++ blocks. Default is set to 1 second.
 
 As one of the ways to control network congestion, Snowman++ makes sure that no two blocks can be build before a `proposerMinBlockDelay` seconds delay. Some high-performance custom VM may find this too strict. This flag allows tuning of maximal frequency at which blocks can be built.
 
