@@ -9,7 +9,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-The Avalanche Rust SDK is a developer toolkit composed of power building and
+The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and
 primitive types. This tutorial will walk you through the creation of a simple VM
 known as the [TimestampVM](https://github.com/ava-labs/timestampvm-rs) using the
 SDK. Each block in the TimestampVM's blockchain contains a monotonically increasing
