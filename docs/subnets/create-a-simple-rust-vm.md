@@ -17,11 +17,11 @@ timestamp when the block was created and a 32-byte payload of data.
 
 ## Prerequisites
 
-- Install the latest stable version of Rust using [rustup](https://www.rust-lang.org/tools/install)
+- Install the latest stable version of Rust using [rustup](https://www.rust-lang.org/tools/install).
 - Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
 repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
 - For developers new to Rust please visit the free online book [The
-Rust Programming Language](https://doc.rust-lang.org/book/)
+Rust Programming Language](https://doc.rust-lang.org/book/).
 
 If you are familiar with our Golang SDK and example VM's you will find the Rust
 SDK attempts to maintain some of these patterns and namespaces to reduce the
