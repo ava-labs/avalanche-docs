@@ -2,27 +2,40 @@
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
-- [Introduction to VMs](./introduction-to-vm.md)
-- [How to Build a Complex VM](./create-a-vm-blobvm.md)
-- How to Build a Simple Rust VM (this article)
+- [Introduction to VMs](./introduction-to-vm.md) - [How to Build a Complex
+VM](./create-a-vm-blobvm.md) - How to Build a Simple Rust VM (this article)
 
 ## Introduction
 
-In this tutorial, we’ll create a very simple Rust VM called the [TimestampVM](https://github.com/ava-labs/timestampvm-rs). Each block in the TimestampVM's blockchain contains a strictly increasing timestamp when the block was created and a 32-byte payload of data.
-
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
+The avalanche Rust SDK is a developer toolkit composed of power building and
+primitive types. This tutorial will walk you through the creation of a simple Vm
+known as the [TimestampVm](https://github.com/ava-labs/timestampvm-rs) using the
+SDK. Each block in the TimestampVM's blockchain contains a strictly increasing
+timestamp when the block was created and a 32-byte payload of data.
 
 ## Prerequisites
 
-Make sure you're familiar with the previous tutorial in this series, which dives into what virtual machines are.
+- Install the latest stable version of Rust using
+[rustup](https://www.rust-lang.org/tools/install)
+- Bookmark and review the
+[avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
+repository.
+- For developers new to Rust please visit the free online book [The
+Rust Programming Language](https://doc.rust-lang.org/book/)
 
-- [Introduction to VMs](./introduction-to-vm.md)
+If you are familiar with our Golang SDK and example Vm's you will find the Rust
+SDK attempts to maintain some of these patterns and namespaces to reduce the
+overhead of learning. If you are completely new to creating a custom Vm on
+Avalanche please review [Introduction to VMs](./introduction-to-vm.md).
 
 ## TimestampVM Implementation
 
-Now we know the interface our VM must implement and the libraries we can use to build a VM using the Rust SDK.
+Now we know the interface our VM must implement and the libraries we can use to
+build a VM using the Rust SDK.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm-rs).
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement
+`snowman.Block`. You can also follow the code in the [TimestampVM
+repository](https://github.com/ava-labs/timestampvm-rs).
 
 ### State
 
