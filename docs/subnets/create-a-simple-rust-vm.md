@@ -7,10 +7,10 @@ VM](./create-a-vm-blobvm.md) - How to Build a Simple Rust VM (this article)
 
 ## Introduction
 
-The avalanche Rust SDK is a developer toolkit composed of power building and
-primitive types. This tutorial will walk you through the creation of a simple Vm
-known as the [TimestampVm](https://github.com/ava-labs/timestampvm-rs) using the
-SDK. Each block in the TimestampVM's blockchain contains a strictly increasing
+The Avalanche Rust SDK is a developer toolkit composed of power building and
+primitive types. This tutorial will walk you through the creation of a simple VM
+known as the [TimestampVM](https://github.com/ava-labs/timestampvm-rs) using the
+SDK. Each block in the TimestampVM's blockchain contains a monotonically increasing
 timestamp when the block was created and a 32-byte payload of data.
 
 ## Prerequisites
@@ -23,9 +23,9 @@ repository specifically the traits and helpers defined in the [subnet/rpc](https
 - For developers new to Rust please visit the free online book [The
 Rust Programming Language](https://doc.rust-lang.org/book/)
 
-If you are familiar with our Golang SDK and example Vm's you will find the Rust
+If you are familiar with our Golang SDK and example VM's you will find the Rust
 SDK attempts to maintain some of these patterns and namespaces to reduce the
-overhead of learning. If you are completely new to creating a custom Vm on
+overhead of learning. If you are completely new to creating a custom VM on
 Avalanche please review [Introduction to VMs](./introduction-to-vm.md).
 
 ## TimestampVM Implementation
@@ -39,7 +39,7 @@ repository](https://github.com/ava-labs/timestampvm-rs).
 
 ### State
 
-`State` manages block and chain states for this Vm, both in-memory and persistent.
+`State` manages block and chain states for this VM, both in-memory and persistent.
 
 ```rust title="/timestampvm/src/state/mod.rs"
 #[derive(Clone)]
@@ -665,10 +665,9 @@ pub async fn verify(&mut self) -> io::Result<()> {
 
 #### accept
 
-`Accept` is called by the consensus engine to indicate this block is accepted.
+`accept` is called by the consensus engine to indicate this block is accepted.
 
 ```rust title="/timestampvm/src/block/mod.rs"
-/// Mark this Block accepted and update State accordingly.
 pub async fn accept(&mut self) -> io::Result<()> {
     self.set_status(choices::status::Status::Accepted);
 
@@ -686,7 +685,6 @@ pub async fn accept(&mut self) -> io::Result<()> {
 `Reject` is called by the consensus engine to indicate the block is rejected.
 
 ```rust title="/timestampvm/src/block/mod.rs"
-/// Mark this Block rejected and update State accordingly.
 pub async fn reject(&mut self) -> io::Result<()> {
     self.set_status(choices::status::Status::Rejected);
 
@@ -1061,19 +1059,27 @@ pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
     Ok(())
 }
 ```
-#### Other Functions
 
-### Factory
+### Mempool
+
+Overview The mempool is a buffer of volatile memory that stores pending
+transactions. Transactions are stored in the mempool whenever a node learns
+about a new transaction.
+
+The mempool implementation for timestampvm-rs is very simple.
+
+```rust
+ mempool: Arc::new(RwLock::new(VecDeque::with_capacity(100))),
+ ```
+ By using
+ [VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) we
+ can have better control of ordering (ex. pop_back(), pop_front()).
 
 ### Static API
 
-#### Encode
-
-#### Decode
-
 ### API
 
-In the below examples "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is the blockchain Id.
+In the below examples "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is the blockchain ID.
 
 #### timestampvm.getBlock
 
@@ -1124,10 +1130,6 @@ curl -X POST --data '{
 ```
 
 ### Plugin
-
-### Executable Binary
-
-### VM Aliases
 
 ### Installing a VM
 
