@@ -1077,7 +1077,169 @@ The mempool implementation for timestampvm-rs is very simple.
 
 ### Static API
 
+Note: If this method is called, no other method will be called on this VM.
+Each registered VM will have a single instance created to handle static
+APIs. This instance will be handled separately from instances created to
+service an instance of a chain.
+
+```rust title="/timestampvm/src/api/static_handlers.rs"
+#[rpc]
+pub trait Rpc {
+    #[rpc(name = "ping", alias("timestampvm.ping"))]
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>>;
+}
+
+/// Implements API services for the static handlers.
+pub struct Service {
+    pub vm: vm::Vm,
+}
+
+impl Service {
+    pub fn new(vm: vm::Vm) -> Self {
+        Self { vm }
+    }
+}
+
+impl Rpc for Service {
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>> {
+        log::debug!("ping called");
+        Box::pin(async move { Ok(crate::api::PingResponse { success: true }) })
+    }
+}
+```
+
 ### API
+
+Defines RPCs specific to the chain.
+
+```rust title="/timestampvm/src/api/chain_handlers.rs"
+#[rpc]
+pub trait Rpc {
+    /// Pings the VM.
+    #[rpc(name = "ping", alias("timestampvm.ping"))]
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>>;
+
+    /// Proposes the arbitrary data.
+    #[rpc(name = "proposeBlock", alias("timestampvm.proposeBlock"))]
+    fn propose_block(&self, args: ProposeBlockArgs) -> BoxFuture<Result<ProposeBlockResponse>>;
+
+    /// Fetches the last accepted block.
+    #[rpc(name = "lastAccepted", alias("timestampvm.lastAccepted"))]
+    fn last_accepted(&self) -> BoxFuture<Result<LastAcceptedResponse>>;
+
+    /// Fetches the block.
+    #[rpc(name = "getBlock", alias("timestampvm.getBlock"))]
+    fn get_block(&self, args: GetBlockArgs) -> BoxFuture<Result<GetBlockResponse>>;
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ProposeBlockArgs {
+    #[serde(with = "avalanche_types::codec::serde::base64_bytes")]
+    pub data: Vec<u8>,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ProposeBlockResponse {
+    /// TODO: returns Id for later query, using hash + time?
+    pub success: bool,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LastAcceptedResponse {
+    pub id: ids::Id,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct GetBlockArgs {
+    /// TODO: use "ids::Id"
+    /// if we use "ids::Id", it fails with:
+    /// "Invalid params: invalid type: string \"g25v3qDyAaHfR7kBev8tLUHouSgN5BJuZjy1BYS1oiHd2vres\", expected a borrowed string."
+    pub id: String,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct GetBlockResponse {
+    pub block: Block,
+}
+
+/// Implements API services for the chain-specific handlers.
+pub struct Service {
+    pub vm: vm::Vm,
+}
+
+impl Service {
+    pub fn new(vm: vm::Vm) -> Self {
+        Self { vm }
+    }
+}
+
+impl Rpc for Service {
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>> {
+        log::debug!("ping called");
+        Box::pin(async move { Ok(crate::api::PingResponse { success: true }) })
+    }
+
+    fn propose_block(&self, args: ProposeBlockArgs) -> BoxFuture<Result<ProposeBlockResponse>> {
+        log::debug!("propose_block called");
+        let vm = self.vm.clone();
+
+        Box::pin(async move {
+            vm.propose_block(args.data)
+                .await
+                .map_err(create_jsonrpc_error)?;
+            Ok(ProposeBlockResponse { success: true })
+        })
+    }
+
+    fn last_accepted(&self) -> BoxFuture<Result<LastAcceptedResponse>> {
+        log::debug!("last accepted method called");
+        let vm = self.vm.clone();
+
+        Box::pin(async move {
+            let vm_state = vm.state.read().await;
+            if let Some(state) = &vm_state.state {
+                let last_accepted = state
+                    .get_last_accepted_block_id()
+                    .await
+                    .map_err(create_jsonrpc_error)?;
+
+                return Ok(LastAcceptedResponse { id: last_accepted });
+            }
+
+            Err(Error {
+                code: ErrorCode::InternalError,
+                message: String::from("no state manager found"),
+                data: None,
+            })
+        })
+    }
+
+    fn get_block(&self, args: GetBlockArgs) -> BoxFuture<Result<GetBlockResponse>> {
+        let blk_id = ids::Id::from_str(&args.id).unwrap();
+        log::info!("get_block called for {}", blk_id);
+
+        let vm = self.vm.clone();
+
+        Box::pin(async move {
+            let vm_state = vm.state.read().await;
+            if let Some(state) = &vm_state.state {
+                let block = state
+                    .get_block(&blk_id)
+                    .await
+                    .map_err(create_jsonrpc_error)?;
+
+                return Ok(GetBlockResponse { block });
+            }
+
+            Err(Error {
+                code: ErrorCode::InternalError,
+                message: String::from("no state manager found"),
+                data: None,
+            })
+        })
+    }
+}
+```
 
 In the below examples "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is the blockchain ID.
 
@@ -1130,6 +1292,51 @@ curl -X POST --data '{
 ```
 
 ### Plugin
+
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+
+`main.rs`'s contents are:
+
+```rust title="timestampvm/src/bin/timestampvm/main.rs"
+async fn main() -> io::Result<()> {
+    let matches = Command::new(APP_NAME)
+        .version(crate_version!())
+        .about("Timestamp Vm")
+        .subcommands(vec![genesis::command(), vm_id::command()])
+        .get_matches();
+
+    // ref. https://github.com/env-logger-rs/env_logger/issues/47
+    env_logger::init_from_env(
+        env_logger::Env::default().filter_or(env_logger::DEFAULT_FILTER_ENV, "info"),
+    );
+
+    match matches.subcommand() {
+        Some((genesis::NAME, sub_matches)) => {
+            let data = sub_matches.get_one::<String>("DATA").expect("required");
+            let genesis = timestampvm::genesis::Genesis { data: data.clone() };
+            println!("{genesis}");
+
+            Ok(())
+        }
+
+        Some((vm_id::NAME, sub_matches)) => {
+            let vm_name = sub_matches.get_one::<String>("VM_NAME").expect("required");
+            let id = subnet::vm_name_to_id(vm_name)?;
+            println!("{id}");
+
+            Ok(())
+        }
+
+        _ => {
+            log::info!("starting timestampvm");
+
+            let (stop_ch_tx, stop_ch_rx): (Sender<()>, Receiver<()>) = broadcast::channel(1);
+            let vm_server = subnet::rpc::vm::server::Server::new(vm::Vm::new(), stop_ch_tx);
+            subnet::rpc::plugin::serve(vm_server, stop_ch_rx).await
+        }
+    }
+}
+```
 
 ### Installing a VM
 
