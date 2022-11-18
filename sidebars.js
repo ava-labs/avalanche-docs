@@ -104,6 +104,7 @@ const sidebars = {
       items: [
         'subnets/create-a-local-subnet',
         'subnets/create-a-fuji-subnet',
+        'subnets/create-a-mainnet-subnet',
 
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',

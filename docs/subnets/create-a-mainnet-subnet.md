@@ -1,14 +1,8 @@
-# Create an EVM Subnet on Fuji Testnet
+# Create an EVM Subnet on Mainnet
 
-:::note
+After trying out a Subnet on Fuji by following [this tutorial](./create-a-fuji-subnet.m), next step is to try it out on Mainnet.
 
-This document has been updated using the new Avalanche-CLI to deploy a Subnet on Fuji. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
-
-:::
-
-After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
-
-In this article, we show how to do the following on Fuji Testnet.
+In this article, we show how to do the following on Mainnet.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
@@ -19,7 +13,7 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ## Prerequisites
 
-- 1+ nodes running and fully bootstrapped on Fuji Testnet. Check out [Nodes](../nodes/README.md) section on how to run a node and become a validator.
+- 1+ nodes running and fully bootstrapped on Mainnet Testnet. Check out [Nodes](../nodes/README.md) section on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
