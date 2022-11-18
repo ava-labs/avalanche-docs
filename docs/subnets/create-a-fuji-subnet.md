@@ -75,7 +75,10 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 ### Private Key
 
-All commands which issue a transaction require a private key loaded into the tool.
+All commands which issue a transaction require either a private key loaded into the tool, or a connected ledger device.
+
+This tutorial focus on stored key usage.
+
 `Avalanche-CLI` supports the following key operations:
 
 - create

@@ -115,7 +115,7 @@ Note `key list` command can be used to get any ledger address in the sequence by
 one desired, or to a list of them (eg: `2`, or `0,4,7`). Also you can ask for addresses to be used on `Fuji` with `--fuji`
 param, and local networks with `--local` param.
 
-#### Funding the key
+#### Funding the ledger
 
 A new ledger device has no funds on it. Send funds via transfer to its correspondent addresses if you already have funds on a different address.
 
@@ -139,6 +139,8 @@ To deploy our new subnet, we can run
 avalanche subnet deploy testsubnet
 ```
 
+Note: if the ledger is blocked, or the Avalanche Ledger App is not running, the command will end with error.
+
 This will start a new prompt series.
 
 ```bash
@@ -150,31 +152,43 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 This tutorial is about deploying to `Mainnet`, so we navigate with the arrow keys to `Mainnet` and hit enter.
-We are then asked to provide which private key to use for the deployment. The deployment basically consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet). Therefore the key needs to be funded.
 
-Also, this tutorial assumes that a node is up running, fully bootstrapped on `Fuji`, and is being run from the **same** box.
+We are then asked to authorize the ledger to provide extended public key information to CLI.
 
-```bash
-✔ Fuji
-Deploying [testsubnet] to Fuji
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Which private key should be used to issue the transaction?:
-    test
-  ▸ mytestkey
+```
+✔ Mainnet
+Deploying [testsubnet] to Mainnet
+*** Please provide extended public key on the ledger device ***
 ```
 
-Subnets are currently permissioned only. Therefore, the process now requires the user to provide _which keys can control the subnet_. We are prompted to provide one or more **P-Chain addresses**. Only the keys corresponding to these addresses will be able to add or remove validators. Make sure to provide **Fuji P-Chain** addresses (`P-Fuji....`).
+Navigate to the ledger `Accept` window by using ledger's right button, and then authorize the request
+by pressing both left and right buttons.
+
+After that, the first mainnet ledger address (which will be used to fund the deploy) is shown.
+
+```
+Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
+```
+
+The deployment consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet) and a [createBlockchain transaction](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain), and so this first ledger address 
+must be funded to do the operation (funding described [here](#funding-the-ledger)).
+
+Also, this tutorial assumes that a node is up running, fully bootstrapped on `Mainnet`, and is being run from the **same** box.
+
+Subnets are currently permissioned only. Therefore, the process now requires the user to provide _which keys can control the subnet_. We are prompted to use only the tx creation key (here, the first ledger address), or a custom list of control keys.
 
 ```bash
-Configure which addresses may add new validators to the subnet.
+Configure which addresses may make changes to the subnet.
 These addresses are known as your control keys. You will also
-set how many control keys are required to add a validator.
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Set control keys:
-  ▸ Add control key
-    Done
-    Cancel
+set how many control keys are required to make a subnet change (the threshold).
+Use the arrow keys to navigate: ↓ ↑ → ← 
+? How would you like to set your control keys?: 
+  ▸ Use creation key
+    Use all stored keys
+    Custom list
 ```
+
+We are prompted to provide one or more **P-Chain addresses**. Only the keys corresponding to these addresses will be able to add or remove validators. Make sure to provide **Fuji P-Chain** addresses (`P-Fuji....`).
 
 Enter at `Add control key` and provide at least one key. You can enter multiple addresses, we'll use just one here. When no more addresses need to be added, hit `Done`.
 (The address provided here is intentionally invalid. The address has a checksum and the tool will make sure it's a valid address).
