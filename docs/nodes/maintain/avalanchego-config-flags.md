@@ -129,7 +129,7 @@ State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses 
 
 ## Chain Configs
 
-Some blockchains allow the node operator to provide custom configurations. These custom configurations are broken down into two categories: network upgrades and optional chain configurations. AvalancheGo reads in these configurations from the chain configuration directory and passes them into the VM on initialization.
+Some blockchains allow the node operator to provide custom configurations for individual blockchains. These custom configurations are broken down into two categories: network upgrades and optional chain configurations. AvalancheGo reads in these configurations from the chain configuration directory and passes them into the VM on initialization.
 
 :::note
 Please replace `chain-config-dir` and `blockchainID` with actual value.
@@ -151,6 +151,24 @@ Specifies the directory that contains chain configs, as described [here](chain-c
 #### `--chain-config-content` (string):
 
 As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
+
+#### `--chain-aliases-file` (string):
+
+Path to JSON file that defines aliases for Blockchain IDs. Defaults to `~/.avalanchego/configs/chains/aliases.json`. This flag is ignored if `--chain-aliases-file-content` is specified. Example content:
+
+```json
+{
+  "2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX": [
+    "Swimmer"
+  ]
+}
+```
+
+The above example aliases the Blockchain whose ID is `"2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX"` to `"Swimmer"`. Chain aliases are added after adding primary network aliases and before any changes to the aliases via the admin API. This means that the first alias included for a Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the full blockchainID. The Primary Alias is used in all metrics and logs.
+
+`--chain-aliases-file-content` (string):
+
+As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded aliases for Blockchains.
 
 ## Database
 
@@ -667,7 +685,13 @@ If this node is a validator, when a container is inserted into consensus, send a
 
 #### `snow-mixed-query-num-push-non-vdr` (uint):
 
-fmt.Sprintf("If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
+If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
+
+### ProposerVM Parameters
+
+#### `proposervm-use-current-height` (bool):
+
+Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
 
 ### Continuous Profiling
 
