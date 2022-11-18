@@ -596,7 +596,7 @@ impl Block {
 }
 ```
 
-#### Verify
+#### verify
 
 This method verifies that a block is valid and stores it in the memory. It is important to store the verified block in the memory and return them in the `vm.get_block()` method.
 
@@ -663,7 +663,7 @@ pub async fn verify(&mut self) -> io::Result<()> {
 }
 ```
 
-#### Accept
+#### accept
 
 `Accept` is called by the consensus engine to indicate this block is accepted.
 
@@ -681,7 +681,7 @@ pub async fn accept(&mut self) -> io::Result<()> {
 }
 ```
 
-#### Reject
+#### reject
 
 `Reject` is called by the consensus engine to indicate the block is rejected.
 
@@ -790,7 +790,7 @@ pub struct VmState {
 }
 ```
 
-#### Initialize
+#### initialize
 
 This method is called when a new instance of VM is initialized. Genesis block is created under this method.
 
@@ -857,7 +857,7 @@ async fn initialize(
 }
 ```
 
-#### CreateHandlers
+#### create_handlers
 
 Registered handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
 
@@ -879,7 +879,7 @@ async fn create_handlers(
 }
 ```
 
-#### CreateStaticHandlers
+#### create_static_handlers
 
 Registered handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
 
@@ -905,9 +905,9 @@ async fn create_static_handlers(
     Ok(handlers)
 }
 ```
-#### BuildBock
+#### build_block
 
-`BuildBlock` builds a new block and returns it. This is mainly requested by the consensus engine.
+`build_block` builds a new block and returns it. This is mainly requested by the consensus engine.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 /// Builds a block from mempool data.
@@ -949,11 +949,30 @@ async fn build_block(
 }
 ```
 
-#### NotifyBlockReady
+#### notify_block_ready
 
-#### GetBlock
+Signals the consensus engine that a new block is ready to be created.
+After this is sent the concensus engine will call back to `vm.build_block`.
 
-`GetBlock` returns the block with the given block ID.
+```rust title="/timestampvm/src/vm/mod.rs"
+pub async fn notify_block_ready(&self) {
+    let vm_state = self.state.read().await;
+    if let Some(engine) = &vm_state.to_engine {
+        engine
+            .send(subnet::rpc::common::message::Message::PendingTxs)
+            .await
+            .unwrap_or_else(|e| log::warn!("dropping message to consensus engine: {}", e));
+
+        log::info!("notified block ready!");
+    } else {
+        log::error!("consensus engine channel failed to initialized");
+    }
+}
+```
+
+#### get_block
+
+`get_block` returns the block with the given block ID.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 impl subnet::rpc::snowman::block::Getter for Vm {
@@ -971,7 +990,7 @@ impl subnet::rpc::snowman::block::Getter for Vm {
     }
 }
 ```
-#### proposeBlock
+#### propose_block
 
 Proposes arbitrary data to mempool and notifies that a block is ready for builds.
 Other VMs may optimize mempool with more complicated batching mechanisms.
@@ -1000,8 +1019,7 @@ pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
     Ok(())
 }
 ```
-
-#### ParseBlock
+#### parse_block
 
 Parse a block from its byte representation.
 
@@ -1032,16 +1050,16 @@ impl subnet::rpc::snowman::block::Parser for Vm {
 }
 ```
 
-#### SetPreference
+#### set_preference
 
 ```rust title="/timestampvm/src/vm/mod.rs"
-    /// Sets the container preference of the Vm.
-    pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
-        let mut vm_state = self.state.write().await;
-        vm_state.preferred = id;
+/// Sets the container preference of the Vm.
+pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
+    let mut vm_state = self.state.write().await;
+    vm_state.preferred = id;
 
-        Ok(())
-    }
+    Ok(())
+}
 ```
 #### Other Functions
 
@@ -1174,7 +1192,7 @@ That’s it! That’s the entire implementation of a VM which defines a blockcha
 
 In this tutorial, we learned:
 
-- The `block.ChainVM` interface, which all VMs that define a linear chain must implement
-- The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
-- The `rpcchainvm` type, which allows blockchains to run in their own processes.
-- An actual implementation of `block.ChainVM` and `snowman.Block`.
+- The `block::ChainVM` trait, which all VMs that define a linear chain must implement
+- The `snowman::Block` trait, which all blocks that are part of a linear chain must implement
+- The `subnet` mod, which allows blockchains to run in their own processes using the `rpcchainvm`.
+- An actual implementation of `block::ChainVM` and `snowman::Block`.
