@@ -973,6 +973,34 @@ impl subnet::rpc::snowman::block::Getter for Vm {
 ```
 #### proposeBlock
 
+Proposes arbitrary data to mempool and notifies that a block is ready for builds.
+Other VMs may optimize mempool with more complicated batching mechanisms.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
+    let size = d.len();
+    log::info!("received propose_block of {size} bytes");
+
+    if size > PROPOSE_LIMIT_BYTES {
+        log::info!("limit exceeded... returning an error...");
+        return Err(Error::new(
+            ErrorKind::InvalidInput,
+            format!(
+                "data {}-byte exceeds the limit {}-byte",
+                size, PROPOSE_LIMIT_BYTES
+            ),
+        ));
+    }
+
+    let mut mempool = self.mempool.write().await;
+    mempool.push_back(d);
+    log::info!("proposed {size} bytes of data for a block");
+
+    self.notify_block_ready().await;
+    Ok(())
+}
+```
+
 #### ParseBlock
 
 Parse a block from its byte representation.
@@ -1003,8 +1031,6 @@ impl subnet::rpc::snowman::block::Parser for Vm {
     }
 }
 ```
-
-#### NewBlock
 
 #### SetPreference
 
