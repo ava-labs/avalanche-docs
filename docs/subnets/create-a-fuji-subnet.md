@@ -85,7 +85,7 @@ All commands which issue a transaction require a private key loaded into the too
 
 :::warning
 
-The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key will be stored on your file system. Whoever gets access to that key will have access to any funds secured by that private key. In a future release, `Avalanche-CLI` will integrate with Ledger and support `Mainnet` operations.
+The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key will be stored on your file system. Whoever gets access to that key will have access to any funds secured by that private key. To deploy to Mainnet, follow [this tutorial](./create-a-mainnet-subnet).
 
 :::
 
