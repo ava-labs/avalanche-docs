@@ -362,7 +362,7 @@ impl State {
 }
 ```
 
-#### Block
+### Block
 
 This implementation of `snowman::Block` provides the VM with storage, retrieval and status of blocks.
 
