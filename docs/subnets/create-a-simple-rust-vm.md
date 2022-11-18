@@ -743,26 +743,267 @@ impl subnet::rpc::consensus::snowman::StatusWriter for Block {
 
 ### Virtual Machine
 
+Now, let’s look at our timestamp VM implementation, which implements the `block::ChainVM` trait.
+
+
+```rust title="/timestampvm/src/vm/mod.rs"
+pub struct Vm {
+    /// Maintains the Vm-specific states.
+    pub state: Arc<RwLock<VmState>>,
+    pub app_sender: Option<Box<dyn subnet::rpc::common::appsender::AppSender + Send + Sync>>,
+
+    /// A queue of data that have not been put into a block and proposed yet.
+    /// Mempool is not persistent, so just keep in memory via Vm.
+    pub mempool: Arc<RwLock<VecDeque<Vec<u8>>>>,
+}
+
+/// Represents VM-specific states.
+/// Defined in a separate struct, for interior mutability in [`Vm`](Vm).
+/// To be protected with `Arc` and `RwLock`.
+pub struct VmState {
+    pub ctx: Option<subnet::rpc::context::Context>,
+    pub version: Version,
+    pub genesis: Genesis,
+
+    /// Represents persistent Vm state.
+    pub state: Option<state::State>,
+    /// Currently preferred block Id.
+    pub preferred: ids::Id,
+    /// Channel to send messages to the snowman consensus engine.
+    pub to_engine: Option<Sender<subnet::rpc::common::message::Message>>,
+    /// Set "true" to indicate that the Vm has finished bootstrapping
+    /// for the chain.
+    pub bootstrapped: bool,
+}
+```
+
 #### Initialize
+
+This method is called when a new instance of VM is initialized. Genesis block is created under this method.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+async fn initialize(
+    &mut self,
+    ctx: Option<subnet::rpc::context::Context>,
+    db_manager: Box<dyn subnet::rpc::database::manager::Manager + Send + Sync>,
+    genesis_bytes: &[u8],
+    _upgrade_bytes: &[u8],
+    _config_bytes: &[u8],
+    to_engine: Sender<subnet::rpc::common::message::Message>,
+    _fxs: &[subnet::rpc::common::vm::Fx],
+    app_sender: Box<dyn subnet::rpc::common::appsender::AppSender + Send + Sync>,
+) -> io::Result<()> {
+    log::info!("initializing Vm");
+    let mut vm_state = self.state.write().await;
+
+    vm_state.ctx = ctx;
+
+    let version =
+        Version::parse(VERSION).map_err(|e| Error::new(ErrorKind::Other, e.to_string()))?;
+    vm_state.version = version;
+
+    let genesis = Genesis::from_slice(genesis_bytes)?;
+    vm_state.genesis = genesis;
+
+    let current = db_manager.current().await?;
+    let state = state::State {
+        db: Arc::new(RwLock::new(current.db)),
+        verified_blocks: Arc::new(RwLock::new(HashMap::new())),
+    };
+    vm_state.state = Some(state.clone());
+
+    vm_state.to_engine = Some(to_engine);
+
+    self.app_sender = Some(app_sender);
+
+    let has_last_accepted = state.has_last_accepted_block().await?;
+    if has_last_accepted {
+        let last_accepted_blk_id = state.get_last_accepted_block_id().await?;
+        vm_state.preferred = last_accepted_blk_id;
+        log::info!("initialized Vm with last accepted block {last_accepted_blk_id}");
+    } else {
+        let mut genesis_block = Block::new(
+            ids::Id::empty(),
+            0,
+            0,
+            vm_state.genesis.data.as_bytes().to_vec(),
+            choices::status::Status::default(),
+        )?;
+        genesis_block.set_state(state.clone());
+        genesis_block.accept().await?;
+
+        let genesis_blk_id = genesis_block.id();
+        vm_state.preferred = genesis_blk_id;
+        log::info!("initialized Vm with genesis block {genesis_blk_id}");
+    }
+
+    self.mempool = Arc::new(RwLock::new(VecDeque::with_capacity(100)));
+
+    log::info!("successfully initialized Vm");
+    Ok(())
+}
+```
 
 #### CreateHandlers
 
+Registered handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+/// Creates VM-specific handlers.
+async fn create_handlers(
+    &mut self,
+) -> io::Result<HashMap<String, subnet::rpc::common::http_handler::HttpHandler>> {
+    let svc = api::chain_handlers::Service::new(self.clone());
+    let mut handler = jsonrpc_core::IoHandler::new();
+    handler.extend_with(api::chain_handlers::Rpc::to_delegate(svc));
+
+    let http_handler = subnet::rpc::common::http_handler::HttpHandler::new_from_u8(0, handler)
+        .map_err(|_| Error::from(ErrorKind::InvalidData))?;
+
+    let mut handlers = HashMap::new();
+    handlers.insert("/rpc".to_string(), http_handler);
+    Ok(handlers)
+}
+```
+
 #### CreateStaticHandlers
 
+Registered handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
+
+Note: If this method is called, no other method will be called on this VM.
+Each registered VM will have a single instance created to handle static
+APIs. This instance will be handled separately from instances created to
+service an instance of a chain.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+/// Creates static handlers.
+async fn create_static_handlers(
+    &mut self,
+) -> io::Result<HashMap<String, subnet::rpc::common::http_handler::HttpHandler>> {
+    let svc = api::static_handlers::Service::new(self.clone());
+    let mut handler = jsonrpc_core::IoHandler::new();
+    handler.extend_with(api::static_handlers::Rpc::to_delegate(svc));
+
+    let http_handler = subnet::rpc::common::http_handler::HttpHandler::new_from_u8(0, handler)
+        .map_err(|_| Error::from(ErrorKind::InvalidData))?;
+
+    let mut handlers = HashMap::new();
+    handlers.insert("/static".to_string(), http_handler);
+    Ok(handlers)
+}
+```
 #### BuildBock
+
+`BuildBlock` builds a new block and returns it. This is mainly requested by the consensus engine.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+/// Builds a block from mempool data.
+async fn build_block(
+    &self,
+) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
+    let mut mempool = self.mempool.write().await;
+
+    log::info!("build_block called for {} mempool", mempool.len());
+    if mempool.is_empty() {
+        return Err(Error::new(ErrorKind::Other, "no pending block"));
+    }
+
+    let vm_state = self.state.read().await;
+    if let Some(state) = &vm_state.state {
+        self.notify_block_ready().await;
+
+        // "state" must have preferred block in cache/verified_block
+        // otherwise, not found error from rpcchainvm database
+        let prnt_blk = state.get_block(&vm_state.preferred).await?;
+        let unix_now = Utc::now().timestamp() as u64;
+
+        let first = mempool.pop_front().unwrap();
+        let mut block = Block::new(
+            prnt_blk.id(),
+            prnt_blk.height() + 1,
+            unix_now,
+            first,
+            choices::status::Status::Processing,
+        )?;
+        block.set_state(state.clone());
+        block.verify().await?;
+
+        log::info!("successfully built block");
+        return Ok(Box::new(block));
+    }
+
+    Err(Error::new(ErrorKind::NotFound, "state manager not found"))
+}
+```
 
 #### NotifyBlockReady
 
 #### GetBlock
 
+`GetBlock` returns the block with the given block ID.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+impl subnet::rpc::snowman::block::Getter for Vm {
+    async fn get_block(
+        &self,
+        blk_id: ids::Id,
+    ) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
+        let vm_state = self.state.read().await;
+        if let Some(state) = &vm_state.state {
+            let block = state.get_block(&blk_id).await?;
+            return Ok(Box::new(block));
+        }
+
+        Err(Error::new(ErrorKind::NotFound, "state manager not found"))
+    }
+}
+```
 #### proposeBlock
 
 #### ParseBlock
+
+Parse a block from its byte representation.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+impl subnet::rpc::snowman::block::Parser for Vm {
+    async fn parse_block(
+        &self,
+        bytes: &[u8],
+    ) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
+        let vm_state = self.state.read().await;
+        if let Some(state) = &vm_state.state {
+            let mut new_block = Block::from_slice(bytes)?;
+            new_block.set_status(choices::status::Status::Processing);
+            new_block.set_state(state.clone());
+            log::debug!("parsed block {}", new_block.id());
+
+            match state.get_block(&new_block.id()).await {
+                Ok(prev) => {
+                    log::debug!("returning previously parsed block {}", prev.id());
+                    return Ok(Box::new(prev));
+                }
+                Err(_) => return Ok(Box::new(new_block)),
+            };
+        }
+
+        Err(Error::new(ErrorKind::NotFound, "state manager not found"))
+    }
+}
+```
 
 #### NewBlock
 
 #### SetPreference
 
+```rust title="/timestampvm/src/vm/mod.rs"
+    /// Sets the container preference of the Vm.
+    pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
+        let mut vm_state = self.state.write().await;
+        vm_state.preferred = id;
+
+        Ok(())
+    }
+```
 #### Other Functions
 
 ### Factory
