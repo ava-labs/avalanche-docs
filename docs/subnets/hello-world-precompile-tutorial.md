@@ -138,7 +138,7 @@ First install the latest version of Go. Follow the instructions [here](https://g
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
-As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin`is in your `$PATH`, otherwise, you may get error running the commands below.
+As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may get error running the commands below.
 
 Download the following prerequisites into your `$GOPATH`:
 
@@ -336,7 +336,7 @@ Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the
 
 We can remove all of these reference imports and the associated imports. We only include these in our template so that the file compiles on generation.
 
-#### Step 3.1 Modify Equal()
+#### Step 3.1: Modify Equal()
 
 Next we see this in `Equal()`. The below code snippet can be copied and pasted to overwrite the default `Equal()` code.
 
@@ -390,7 +390,7 @@ equalsAllow := c.AllowListConfig.Equal(&other.AllowListConfig)
 return equalsUpgrade && equalsAllow
 ```
 
-#### Step 3.2 Modify Configure()
+#### Step 3.2: Modify Configure()
 
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
 Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever `blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a default key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The `StateDB` allows us to store a key value mapping of 32 byte hashes. The below code snippet can be copied and pasted to overwrite the default `Configure()` code.
@@ -411,7 +411,7 @@ func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContex
 }
 ```
 
-#### Step 3.3 Modify Verify()
+#### Step 3.3: Modify Verify()
 
 We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal. We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`. The below code snippet can be copied and pasted to overwrite the default `Verify()` code.
 
@@ -422,7 +422,7 @@ func (c *HelloWorldConfig) Verify() error {
 }
 ```
 
-#### Step 3.4 Modify sayHello()
+#### Step 3.4: Modify sayHello()
 
 Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol` interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here. If any contract calls these functions from the interface, the below function gets executed. This function is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`. The below code snippet can be copied and pasted to overwrite the default `sayHello` code.
 
@@ -448,7 +448,7 @@ func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, 
 }
 ```
 
-#### Step 3.5 Modify setGreeting()
+#### Step 3.5: Modify setGreeting()
 
 We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input` and we will set that as the value in the state mapping with the key as `storageKey`. The below code snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
 
@@ -668,7 +668,7 @@ Please note that this contract is simply a wrapper and is calling the precompile
 
 ### Step 7: Add Precompile Solidity Tests
 
-#### Step 7.1 Add Hardhat Test
+#### Step 7.1: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be copied and pasted into a new file called `ExampleHelloWorld.ts`.
 
@@ -719,7 +719,7 @@ yarn
 
 Let's see if our test contract passes! We need to get a local network up and running. A local network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So when we get the local network up and running, we will get the X, C, and P chains up (primary network) as well as another blockchain that follows the rules defined by the Subnet-EVM.
 
-#### Step 7.2 Add Genesis
+#### Step 7.2: Add Genesis
 
 To spin up these blockchains, we actually need to create and modify the genesis to enable our HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain. Please and copy and paste the below code snippet (genesis) into `/tmp/subnet-evm-genesis.json`. Note this should not be in your repo, but rather in the `/tmp` directory.
 
@@ -798,7 +798,7 @@ type PrecompileUpgrade struct {
 }
 ```
 
-#### Step 7.3 Launch Local Network
+#### Step 7.3: Launch Local Network
 
 Now we can get the network up and running.
 
@@ -857,7 +857,7 @@ If the network startup is successful then you should see something like this.
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9658/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 ```
 
-#### Step 7.4 Modify Hardhat Config
+#### Step 7.4: Modify Hardhat Config
 
 Sweet! Now we have blockchain RPCs that can be used to talk to the network!
 
@@ -879,7 +879,7 @@ Now in `local_rpc.json` we can modify the rpc url to the one we just created. We
 }
 ```
 
-#### Step 7.5 Run Tests
+#### Step 7.5: Run Tests
 
 Going to `./contract-examples`, we can finally run our tests by running the command below.
 
