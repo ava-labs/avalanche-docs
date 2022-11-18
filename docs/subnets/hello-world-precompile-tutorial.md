@@ -112,8 +112,7 @@ This is a brief overview of what this tutorial will cover.
 - Implement the precompile functions in Golang
 - Write and run tests
 
-Stateful precompiles are [alpha software](<(https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha)>). Build at your own risk.
-AND ARE NOT YET AUDITED. USE AT YOUR OWN RISK!
+Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha). Build at your own risk.
 
 ### Prerequisites
 
