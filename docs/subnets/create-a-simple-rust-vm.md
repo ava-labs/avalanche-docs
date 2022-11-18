@@ -1403,7 +1403,7 @@ since those are registered aliases in previous step.
 ## Wrapping Up
 
 That’s it! That’s the entire implementation of a VM which defines a
-blockchain-based timestamp server.
+blockchain-based timestamp server written in Rust!
 
 In this tutorial, we learned:
 
