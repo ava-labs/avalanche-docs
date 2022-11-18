@@ -1340,11 +1340,12 @@ async fn main() -> io::Result<()> {
 
 ### Installing a VM
 
-AvalancheGo searches for and registers plugins under the `plugins` directory of the
-[build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
+AvalancheGo searches for and registers plugins under the `plugins` directory of
+the [build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
 
-To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory.
-Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+To install the virtual machine onto your node, you need to move the built
+virtual machine binary under this directory.  Virtual machine executable names
+must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
 Copy the binary into the plugins directory.
 
@@ -1354,7 +1355,8 @@ cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 
 #### Node Is Not Running
 
-If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
+If your node isn't running yet, you can install all virtual machines under your
+`plugin` directory by starting the node.
 
 #### Node Is Already Running
 
@@ -1370,8 +1372,9 @@ curl -sX POST --data '{
 ```
 
 Confirm the response of `loadVMs` contains the newly installed virtual machine
-`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any others that weren't
-already installed previously in the response.
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual
+machine as well as any others that weren't already installed previously in the
+response.
 
 ```json
 {
@@ -1389,15 +1392,18 @@ already installed previously in the response.
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
-For more details about VM configs, see [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
+`/ext/vm/timestamp`.  For more details about VM configs, see
+[here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also
-accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
+In this tutorial, we used the VM's ID as the executable name to simplify the
+process. However, AvalancheGo would also accept `timestampvm` or `timestamp`
+since those are registered aliases in previous step.
 
 ## Wrapping Up
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
+That’s it! That’s the entire implementation of a VM which defines a
+blockchain-based timestamp server.
 
 In this tutorial, we learned:
 
