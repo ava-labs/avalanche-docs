@@ -19,7 +19,7 @@ timestamp when the block was created and a 32-byte payload of data.
 [rustup](https://www.rust-lang.org/tools/install)
 - Bookmark and review the
 [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
-repository.
+repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
 - For developers new to Rust please visit the free online book [The
 Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -1029,9 +1029,55 @@ impl subnet::rpc::snowman::block::Parser for Vm {
 
 ### API
 
+In the below examples "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is the blockchain Id.
+
 #### timestampvm.getBlock
 
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id"     : 1,
+    "method" : "timestampvm.getBlock",
+    "params" : [{"id":"SDfFUzkdzWZbJ6YMysPPNEF5dWLp9q35mEMaLa8Ha2w9aMKoC"}]
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
+
+# example response
+# {"jsonrpc":"2.0","result":{"block":{"data":"0x32596655705939524358","height":0,"parent_id":"11111111111111111111111111111111LpoYY","timestamp":0}},"id":1}
+```
+
 #### timestampvm.proposeBlock
+
+```sh
+# to propose data
+echo 1 | base64 | tr -d \\n
+# MQo=
+
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id"     : 1,
+    "method" : "timestampvm.proposeBlock",
+    "params" : [{"data":"MQo="}]
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
+
+# example response
+# {"jsonrpc":"2.0","result":{"success":true},"id":1}
+```
+
+#### timestampvm.lastAccepted
+
+Returns the Id of the last accepted block
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id"     : 1,
+    "method" : "timestampvm.lastAccepted",
+    "params" : []
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
+
+# example response
+# {"jsonrpc":"2.0","result":{"id":"SDfFUzkdzWZbJ6YMysPPNEF5dWLp9q35mEMaLa8Ha2w9aMKoC"},"id":1}
+```
 
 ### Plugin
 
