@@ -2,8 +2,10 @@
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
-- [Introduction to VMs](./introduction-to-vm.md) - [How to Build a Complex
-VM](./create-a-vm-blobvm.md) - How to Build a Simple Rust VM (this article)
+- [Introduction to VMs](./introduction-to-vm.md)
+- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
+- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
+- How to Build a Simple Rust VM (this article)
 
 ## Introduction
 
@@ -15,10 +17,8 @@ timestamp when the block was created and a 32-byte payload of data.
 
 ## Prerequisites
 
-- Install the latest stable version of Rust using
-[rustup](https://www.rust-lang.org/tools/install)
-- Bookmark and review the
-[avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
+- Install the latest stable version of Rust using [rustup](https://www.rust-lang.org/tools/install)
+- Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
 repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
 - For developers new to Rust please visit the free online book [The
 Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -33,8 +33,8 @@ Avalanche please review [Introduction to VMs](./introduction-to-vm.md).
 Now we know the interface our VM must implement and the libraries we can use to
 build a VM using the Rust SDK.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement
-`snowman.Block`. You can also follow the code in the [TimestampVM
+Let’s write our VM, which implements `block::ChainVM` and whose blocks implement
+`snowman::Block`. You can also follow the code in the [TimestampVM
 repository](https://github.com/ava-labs/timestampvm-rs).
 
 ### State
@@ -364,14 +364,14 @@ impl State {
 
 #### Block
 
-This implementation of `snowman.Block` provides the VM with storage, retrieval and status of blocks.
+This implementation of `snowman::Block` provides the VM with storage, retrieval and status of blocks.
 
-// Block is a block on the chain.
-// Each block contains:
-// 1) ParentID
-// 2) Height
-// 3) Timestamp
-// 4) A piece of data (hex encoded string)
+Block is a block on the chain.
+Each block contains:
+- ParentID
+- Height
+- Timestamp
+- A piece of data (hex encoded string)
 
 ```rust title="/timestampvm/src/block/mod.rs"
 #[serde_as]
@@ -682,7 +682,7 @@ pub async fn accept(&mut self) -> io::Result<()> {
 
 #### reject
 
-`Reject` is called by the consensus engine to indicate the block is rejected.
+`reject` is called by the consensus engine to indicate the block is rejected.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn reject(&mut self) -> io::Result<()> {
