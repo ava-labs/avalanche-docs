@@ -5,8 +5,9 @@
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - Introduction to VMs (this article)
-- [How to Build a Simple VM](./create-a-vm-timestampvm.md)
-- [How to Build a Complex VM](./create-a-vm-blobvm.md)
+- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
+- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
+- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
 A [Virtual Machine (VM)](./README.md#virtual-machines) is a blueprint for a blockchain. Blockchains are instantiated from a VM, similar to how objects are instantiated from a class definition. VMs can define anything you want, but will generally define transactions that are executed and how blocks are created.
 
@@ -29,9 +30,9 @@ A blockchain relies on two major components: The **Consensus Engine** and the **
 3. The consensus engine will request the block from the VM
 4. The consensus engine will verify the returned block using the VM's implementation of `Verify()`
 5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly verified block
-    - Every virtuous (well-behaved) node on the network will have the same preference for a particular block
+   - Every virtuous (well-behaved) node on the network will have the same preference for a particular block
 6. Depending upon the consensus results, the engine will either accept or reject the block
-    - What happens when a block is accepted or rejected is specific to the implementation of the VM
+   - What happens when a block is accepted or rejected is specific to the implementation of the VM
 
 AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
 
@@ -85,8 +86,6 @@ if err := vm.Initialize(
 ```
 
 You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L92) of `vm.initialize` in the BlobVM repository.
-
-
 
 ## Interfaces
 
