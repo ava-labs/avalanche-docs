@@ -19,9 +19,9 @@ timestamp when the block was created and a 32-byte payload of data.
 
 - Install the latest stable version of Rust using [rustup](https://www.rust-lang.org/tools/install).
 - Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
-repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
+  repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
 - For developers new to Rust please visit the free online book [The
-Rust Programming Language](https://doc.rust-lang.org/book/).
+  Rust Programming Language](https://doc.rust-lang.org/book/).
 
 If you are familiar with our Golang SDK and example VM's you will find the Rust
 SDK attempts to maintain some of these patterns and namespaces to reduce the
@@ -211,6 +211,7 @@ This implementation of `snowman::Block` provides the VM with storage, retrieval 
 
 Block is a block on the chain.
 Each block contains:
+
 - ParentID
 - Height
 - Timestamp
@@ -599,7 +600,6 @@ impl subnet::rpc::consensus::snowman::StatusWriter for Block {
 
 Now, let’s look at our timestamp VM implementation, which implements the `block::ChainVM` trait.
 
-
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub struct Vm {
     /// Maintains the Vm-specific states.
@@ -746,6 +746,7 @@ async fn create_static_handlers(
     Ok(handlers)
 }
 ```
+
 #### build_block
 
 `build_block` builds a new block and returns it. This is mainly requested by the consensus engine.
@@ -831,6 +832,7 @@ impl subnet::rpc::snowman::block::Getter for Vm {
     }
 }
 ```
+
 #### propose_block
 
 Proposes arbitrary data to mempool and notifies that a block is ready for builds.
@@ -860,6 +862,7 @@ pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
     Ok(())
 }
 ```
+
 #### parse_block
 
 Parse a block from its byte representation.
@@ -913,10 +916,11 @@ The mempool implementation for timestampvm-rs is very simple.
 
 ```rust
  mempool: Arc::new(RwLock::new(VecDeque::with_capacity(100))),
- ```
- By using
- [VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) we
- can have better control of ordering (ex. pop_back(), pop_front()).
+```
+
+By using
+[VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) we
+can have better control of ordering (ex. pop_back(), pop_front()).
 
 ### Static API
 
@@ -1187,7 +1191,7 @@ AvalancheGo searches for and registers plugins under the `plugins` directory of
 the [build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
 
 To install the virtual machine onto your node, you need to move the built
-virtual machine binary under this directory.  Virtual machine executable names
+virtual machine binary under this directory. Virtual machine executable names
 must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
 Copy the binary into the plugins directory.
@@ -1236,7 +1240,7 @@ response.
 ```
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
-`/ext/vm/timestamp`.  For more details about VM configs, see
+`/ext/vm/timestamp`. For more details about VM configs, see
 [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the
