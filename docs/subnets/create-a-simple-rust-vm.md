@@ -12,7 +12,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and
 primitive types. This tutorial will walk you through the creation of a simple VM
 known as the [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs) using the
-SDK. Each block in the TimestampVM's blockchain contains a monotonically increasing
+Rust SDK. Each block in the TimestampVM's blockchain contains a monotonically increasing
 timestamp when the block was created and a 32-byte payload of data.
 
 ## Prerequisites
@@ -24,15 +24,42 @@ timestamp when the block was created and a 32-byte payload of data.
   Rust Programming Language](https://doc.rust-lang.org/book/).
 
 If you have experimented with our Golang example VMs you will find the Rust SDK
-familiar. Completely new to creating a custom VM on Avalanche? No problem please
+fairly familiar. Completely new to creating a custom VM on Avalanche? No problem please
 review [Introduction to VMs](./introduction-to-vm.md).
+
+## Components
+
+A VM defines how a blockchain should be built. A block is populated with a
+transaction which mutates the state of the blockchain when executed.By executing
+a series of blocks chronologically, anyone verify and reconstruct the state of
+the blockchain at an arbitrary point in time.
+
+The TimestampVM RS repository has a few components to handle the lifecycle of tasks from
+a transaction being issued to a block being accepted across the network:
+
+- **Mempool** - Stores pending transactions that haven't been finalized yet.
+- **Block** - Defines the block format, how to verify it, and how it should be accepted or rejected across the network
+- **Virtual Machine** - Application-level logic. Implements the VM trait needed to interact with Avalanche consensus and defines the blueprint for the blockchain.
+- **Service** - Exposes APIs so users can interact with the VM.
+- **State** - Manages both in memory and persistent states.
 
 ## TimestampVM RS Implementation
 
-Now we know the interface our VM must implement and the libraries we can use to
+The TimestampVM RS implements the
+[snowman::block::ChainVM](https://github.com/ava-labs/avalanche-types-rs/blob/main/src/subnet/rpc/snowman/block.rs)
+trait. Below you will find additional documentation on the trait methods. To
+assist with a logical understanding of the expectations for these methods please
+see the code examples below.
+
+Additional Documentation
+- [ChainVM GoDoc](https://pkg.go.dev/github.com/ava-labs/avalanchego/snow/engine/snowman/block#ChainVm)
+- [Avalanche Proto Docs](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM)
+- [Snowman VMs](https://github.com/ava-labs/avalanchego/tree/master/vms#snowman-vms)
+
+Now we know the traits (interfaces) our VM must implement and the libraries we can use to
 build a VM using the Rust SDK.
 
-Let’s write our VM, which implements `block::ChainVM` and whose blocks implement
+Let’s write our VM, which implements `snowman::block::ChainVM` and whose blocks implement
 `snowman::Block`. You can also follow the code in the [TimestampVM RS repository](https://github.com/ava-labs/timestampvm-rs).
 
 ### State
@@ -300,7 +327,7 @@ impl Block {
         })
     }
 
-    /// Encodes the Block to JSON in bytes.
+    /// Encodes the [`Block`](Block) to JSON in bytes.
     pub fn to_slice(&self) -> io::Result<Vec<u8>> {
         serde_json::to_vec(&self).map_err(|e| {
             Error::new(
@@ -310,7 +337,7 @@ impl Block {
         })
     }
 
-    /// Loads Block from JSON bytes.
+    /// Loads [`Block`](Block) from JSON bytes.
     pub fn from_slice(d: impl AsRef<[u8]>) -> io::Result<Self> {
         let dd = d.as_ref();
         let mut b: Self = serde_json::from_slice(dd).map_err(|e| {
@@ -356,20 +383,23 @@ impl Block {
         self.status = status;
     }
 
+    /// Returns the byte representation of this block.
     pub fn bytes(&self) -> &[u8] {
         &self.bytes
     }
 
+    /// Returns the ID of this block
     pub fn id(&self) -> ids::Id {
         self.id
     }
 
+    /// Updates the state of the block.
     pub fn set_state(&mut self, state: state::State) {
         self.state = state;
     }
 
-    /// Verifies Block properties (e.g., heights),
-    /// and once verified, records it to the State.
+    /// Verifies [`Block`](Block) properties (e.g., heights),
+    /// and once verified, records it to the [`State`](crate::state::State).
     pub async fn verify(&mut self) -> io::Result<()> {
         if self.height == 0 && self.parent_id == ids::Id::empty() {
             log::debug!(
@@ -389,6 +419,7 @@ impl Block {
 
         let prnt_blk = self.state.get_block(&self.parent_id).await?;
 
+        // ensure the height of the block is immediately following its parent
         if prnt_blk.height != self.height - 1 {
             return Err(Error::new(
                 ErrorKind::InvalidData,
@@ -399,6 +430,7 @@ impl Block {
             ));
         }
 
+        // ensure block timestamp is after its parent
         if prnt_blk.timestamp > self.timestamp {
             return Err(Error::new(
                 ErrorKind::InvalidData,
@@ -409,11 +441,23 @@ impl Block {
             ));
         }
 
+        // ensure block timestamp is no more than an hour ahead of this nodes time
+        if self.timestamp >= (Utc::now() + Duration::hours(1)).timestamp() as u64 {
+            return Err(Error::new(
+                ErrorKind::InvalidData,
+                format!(
+                    "block timestamp {} is more than 1 hour ahead of local time",
+                    self.timestamp
+                ),
+            ));
+        }
+
+        // add newly verified block to memory
         self.state.add_verified(&self.clone()).await;
         Ok(())
     }
 
-    /// Mark this Block accepted and updates State accordingly.
+    /// Mark this [`Block`](Block) accepted and updates [`State`](crate::state::State) accordingly.
     pub async fn accept(&mut self) -> io::Result<()> {
         self.set_status(choices::status::Status::Accepted);
 
@@ -425,7 +469,7 @@ impl Block {
         Ok(())
     }
 
-    /// Mark this Block rejected and updates State accordingly.
+    /// Mark this [`Block`](Block) rejected and updates [`State`](crate::state::State) accordingly.
     pub async fn reject(&mut self) -> io::Result<()> {
         self.set_status(choices::status::Status::Rejected);
 
@@ -505,7 +549,7 @@ pub async fn verify(&mut self) -> io::Result<()> {
 
 #### accept
 
-`accept` is called by the consensus engine to indicate this block is accepted.
+Called by the consensus engine to indicate this block is accepted.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn accept(&mut self) -> io::Result<()> {
@@ -522,7 +566,7 @@ pub async fn accept(&mut self) -> io::Result<()> {
 
 #### reject
 
-`reject` is called by the consensus engine to indicate the block is rejected.
+Called by the consensus engine to indicate the block is rejected.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn reject(&mut self) -> io::Result<()> {
@@ -572,9 +616,12 @@ impl subnet::rpc::consensus::snowman::Block for Block {
 
 These methods are convenience methods for blocks.
 
+#### init
+
+Initializes a block from a bytes slice and status.
+
 ```rust title="/timestampvm/src/block/mod.rs"
 impl subnet::rpc::consensus::snowman::Initializer for Block {
-	/// Initializes a block from a bytes slice and status.
     async fn init(&mut self, bytes: &[u8], status: choices::status::Status) -> io::Result<()> {
         *self = Block::from_slice(bytes)?;
         self.status = status;
@@ -582,17 +629,21 @@ impl subnet::rpc::consensus::snowman::Initializer for Block {
         Ok(())
     }
 }
+```
 
+#### set_status
+
+Updates the status of this block.
+
+```rust title="/timestampvm/src/block/mod.rs"
 impl subnet::rpc::consensus::snowman::StatusWriter for Block {
-	/// Updates the status of this block.
     async fn set_status(&mut self, status: choices::status::Status) {
         self.set_status(status)
     }
 }
-
 ```
 
-### Virtual Machine
+### Coding the Virtual Machine
 
 Now, let’s look at our timestamp VM implementation, which implements the `block::ChainVM` trait.
 
@@ -720,10 +771,7 @@ async fn create_handlers(
 
 Registers handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
 
-
-
 ```rust title="/timestampvm/src/vm/mod.rs"
-/// Creates static handlers.
 async fn create_static_handlers(
     &mut self,
 ) -> io::Result<HashMap<String, subnet::rpc::common::http_handler::HttpHandler>> {
@@ -742,10 +790,10 @@ async fn create_static_handlers(
 
 #### build_block
 
-Builds a new block and returns it. This is mainly requested by the consensus engine.
+Builds a new block from mempool data and returns it. This is primarily requested
+by the consensus engine.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
-/// Builds a block from mempool data.
 async fn build_block(
     &self,
 ) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
@@ -914,7 +962,7 @@ The mempool implementation for timestampvm-rs is very simple.
 
 By using
 [VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) we
-can have better control of ordering (ex. pop_back(), pop_front()).
+can have better control of element ordering (ex. pop_back(), pop_front()).
 
 ### Static API
 
@@ -985,7 +1033,6 @@ pub struct ProposeBlockArgs {
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ProposeBlockResponse {
-    /// TODO: returns Id for later query, using hash + time?
     pub success: bool,
 }
 
@@ -996,9 +1043,6 @@ pub struct LastAcceptedResponse {
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct GetBlockArgs {
-    /// TODO: use "ids::Id"
-    /// if we use "ids::Id", it fails with:
-    /// "Invalid params: invalid type: string \"g25v3qDyAaHfR7kBev8tLUHouSgN5BJuZjy1BYS1oiHd2vres\", expected a borrowed string."
     pub id: String,
 }
 
