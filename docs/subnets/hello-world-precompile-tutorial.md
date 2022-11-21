@@ -161,7 +161,7 @@ npm install -g solc
 npm install -g yarn
 ```
 
-Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
+Please also use the [official github tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
 
 ### Step 0: Generating the Precompile
 
@@ -366,30 +366,6 @@ We can leave this function as is since we check `UpgradeableConfig` for equality
 type HelloWorldConfig struct {
 	UpgradeableConfig
 }
-```
-
-Note:
-
-If our `HelloWorldConfig` wrapped another config in its struct to implement the `StatefulPrecompileConfig`
-like so:
-
-```go
-// HelloWorldConfig implements the StatefulPrecompileConfig
-// interface while adding in the IHelloWorld specific precompile address.
-
-type HelloWorldConfig struct {
-  UpgradeableConfig
-  AllowListConfig
-}
-```
-
-We would have to modify the `Equal()` function as follows:
-
-```go
-equalsUpgrade := c.UpgradeableConfig.Equal(&other.UpgradeableConfig)
-equalsAllow := c.AllowListConfig.Equal(&other.AllowListConfig)
-
-return equalsUpgrade && equalsAllow
 ```
 
 #### Step 3.2: Modify Configure()
@@ -804,7 +780,7 @@ type PrecompileUpgrade struct {
 
 Now we can get the network up and running.
 
-Start the server in a terminal in a new tab using avalanche-network-runner. Here's some more information on [avalanche-network-runner](https://docs.avax.network/subnets/network-runner), how to download it, and how to use it.
+Start the server in a terminal in a new tab using avalanche-network-runner. Please check out [this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche Network Runner, how to download it, and how to use it.
 
 ```bash
 avalanche-network-runner server \
