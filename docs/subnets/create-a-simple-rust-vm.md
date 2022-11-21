@@ -1150,7 +1150,7 @@ curl -X POST --data '{
 
 #### timestampvm.proposeBlock
 
-Propose arbitrary data for a new block to concensus.
+Proposes arbitrary data for a new block to concensus.
 
 ```sh
 # to propose data
@@ -1265,7 +1265,7 @@ curl -sX POST --data '{
 ```
 
 Confirm the response of `loadVMs` contains the newly installed virtual machine
-`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual
+`tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX`. You'll see this virtual
 machine as well as any others that weren't already installed previously in the
 response.
 
@@ -1274,9 +1274,9 @@ response.
   "jsonrpc": "2.0",
   "result": {
     "newVMs": {
-      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
-        "timestampvm",
-        "timestamp"
+      "tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX": [
+        "timestampvm-rs",
+        "timestamp-rs"
       ],
       "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": []
     }
@@ -1285,12 +1285,12 @@ response.
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
-`/ext/vm/timestamp`. For more details about VM configs, see
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm-rs` and
+`/ext/vm/timestamp-rs`. For more details about VM configs, see
 [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the
-process. However, AvalancheGo would also accept `timestampvm` or `timestamp`
+process. However, AvalancheGo would also accept `timestampvm-rs` or `timestamp-rs`
 since those are registered aliases in previous step.
 
 ## Wrapping Up
