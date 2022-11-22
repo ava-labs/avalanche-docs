@@ -1,6 +1,6 @@
 # Create an EVM Subnet on Mainnet
 
-After trying out a Subnet on Fuji by following [this tutorial](./create-a-fuji-subnet), next step is to try it out on Mainnet.
+After trying out a Subnet on Fuji using stored keys, by following [this tutorial](./create-a-fuji-subnet), next step is to try it out on Mainnet.
 
 In this article, we show how to do the following on Mainnet.
 
@@ -108,7 +108,7 @@ by pressing both left and right buttons.
 ```
 
 The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j` which is the one needed 
-for this tutorial. Also prints the balance of the account, which, as said, should be at least to pay for the tx fee
+for this tutorial. Also prints the balance of the account, which, as said, should be enought to pay for the tx fee
 (2 AVAX for deploy op, see [Fees](../quickstart/transaction-fees))
 
 Note `key list` command can be used to get any ledger address in the sequence by changing the index param from `0` to the 
@@ -173,9 +173,9 @@ Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 The deployment consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet) and a [createBlockchain transaction](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain), and so this first ledger address 
 must be funded to do the operation (funding described [here](#funding-the-ledger)).
 
-Also, this tutorial assumes that a node is up running, fully bootstrapped on `Mainnet`, and is being run from the **same** box.
+Also, this tutorial assumes that a node is up and running, fully bootstrapped on `Mainnet`, and is being run from the **same** box.
 
-Subnets are currently permissioned only. Therefore, the process now requires the user to provide _which keys can control the subnet_. We are prompted to use only the tx creation key (here, the first ledger address), or a custom list of control keys.
+Subnets are currently permissioned only. Therefore, the process now requires the user to tell _which addresses can control the subnet_. We are prompted to use only the first ledger address (creation key), or a custom list of addresses.
 
 ```bash
 Configure which addresses may make changes to the subnet.
@@ -188,52 +188,75 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom list
 ```
 
-We are prompted to provide one or more **P-Chain addresses**. Only the keys corresponding to these addresses will be able to add or remove validators. Make sure to provide **Fuji P-Chain** addresses (`P-Fuji....`).
+For this tutorial, we opt for using the first ledger address, so enter at `Use creation key`. Only this address will be able
+to add or remove validators, or create blockchains on the subnet.
 
-Enter at `Add control key` and provide at least one key. You can enter multiple addresses, we'll use just one here. When no more addresses need to be added, hit `Done`.
-(The address provided here is intentionally invalid. The address has a checksum and the tool will make sure it's a valid address).
-
-```bash
-✔ Add control key
-Enter P-Chain address (Ex: `P-...`): P-fuji1vaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasz
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Set control keys:
-    Add control key
-  ▸ Done
-    Cancel
+```
+Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Finally, we need to define the threshold of how many keys are required for a change to be valid (there is some input validation). For example, if 1 key only is needed, as above, we'll enter just 1. The threshold _could_ be arbitrary depending on the needs, e.g. 2 of 4 addresses, 1 of 3, 3 of 5, etc., but currently this tool only works if _at least one control key is owned by the same private key used here and the threshold is set to 1_.
+Currently, besides indicating a list of addresses that will be control key, usually the user is required to  
+define the threshold of how many addresses are required for a change to be valid. In this case, as there is only
+one control key, the threshold is forced to 1, so that address and only that address can authorizate subnet
+changes (auth keys for chain creation). Will se more about this on [multisig section](#multisig-example).
 
-```bash
-✔ Enter required number of control key signatures to add a validator: 1
+Next, a tx for creating the subnet id is created and the user is asked to sign it by using the ledger.
+
+```
+*** Please sign subnet creation hash on the ledger device *** 
 ```
 
-Here the wizard completes, and the transaction is attempted.
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
+right button, and then authorize the request by pressing both left and right buttons.
 
-If the private key is not funded or does not have enough funds, we'll get an error message:
+Note that if the ledger is not funded or does not have enough funds, we'll get an error message:
 
 ```bash
 Error: insufficient funds: provided UTXOs need 100000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-If the private key is funded, but the **control key** is incorrect (not controlled by the private key), the Subnet will be created, but _not the blockchain_:
+After that, the subnet id will be created, taking 1 AVAX from ledger address, and a chain creation tx
+will be asked to be signed.
+
+```
+Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
+*** Please sign blockchain creation hash on the ledger device *** 
+```
+
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
+right button, and then authorize the request by pressing both left and right buttons.
+
+After that, a summary window for the deployment will be shown:
+
+```
++--------------------+------------------------------------------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                                                    |
++--------------------+------------------------------------------------------------------------------------+
+| Chain Name         | testsubnet                                                                         |
++--------------------+------------------------------------------------------------------------------------+
+| Subnet ID          | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
++--------------------+------------------------------------------------------------------------------------+
+| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                  |
++--------------------+------------------------------------------------------------------------------------+
+| Blockchain ID      | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
++--------------------+------------------------------------------------------------------------------------+
+| RPC URL            | http://127.0.0.1:9650/ext/bc/wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG/rpc |
++--------------------+------------------------------------------------------------------------------------+
+| P-Chain TXID       | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
++--------------------+------------------------------------------------------------------------------------+
+```
+
+In this case, ledger address is control key, so there will be no control key authorization error, but in other cases,
+if the control key is specified manually and is not controlled by the ledger, an error will occur:
 
 ```bash
-Subnet has been created with ID: 2EkPnvnDiLgudnf8NjtxaNcVFtdAAnUPvaoNBrc9WG5tNmmfaK. Now creating blockchain...
 Error: insufficient authorization
 ```
 
-Therefore we need to provide a control key which we have indeed control of, and then it succeeds. The output (assuming the node is running on `localhost` and the API port is set to standard `9650`) will look something like this:
+Well done! You have just created your own Subnet with your own Subnet-EVM running on `Mainnet`!
 
-```bash
-Subnet has been created with ID: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H. Now creating blockchain...
-Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" with VM ID "tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw": http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
-```
-
-Well done! You have just created your own Subnet with your own Subnet-EVM running on `Fuji`!
-
-To check on your new subnet, visit [Avascan testnet](https://testnet.avascan.info/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
+To check on your new subnet, visit [Explorer](https://subnets.avax.network/). The search works by PCHAIN TXID, so in this example, enter `wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG` into the search box and you should see confirmation on your shiny new blockchain tx.
 
 ## Add a Validator
 
