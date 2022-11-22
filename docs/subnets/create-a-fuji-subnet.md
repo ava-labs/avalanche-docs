@@ -2,29 +2,29 @@
 
 :::note
 
-This document has been updated using the new Avalanche-CLI to deploy a Subnet on Fuji. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
+This document has been updated using the new Avalanche-CLI to deploy a Subnet on `Fuji`. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
 
 :::
 
-After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
+After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on `Fuji` Testnet.
 
-In this article, we show how to do the following on Fuji Testnet.
+In this article, we show how to do the following on `Fuji` Testnet.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
 - Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
 
-All IDs in this article are for illustration purpose. They can be different in your own run-through of this tutorial.
+All IDs in this article are for illustration purposes. They can be different in your own run-through of this tutorial.
 
 ## Prerequisites
 
-- 1+ nodes running and fully bootstrapped on Fuji Testnet. Check out [Nodes](../nodes/README.md) section on how to run a node and become a validator.
+- 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section [Nodes](../nodes/README.md) on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
 
-Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
+Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
 That is, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
@@ -33,13 +33,13 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart c
 
 ## Fuji Testnet
 
-For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step below particularly to start your node on Fuji:
+For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
 Also it is worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](../nodes/validate/staking.md#fuji-testnet) and you can get the test token from the [faucet](https://faucet.avax.network/).
 
-To get the NodeID of this Fuji node, call the following curl command to [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
+To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
 
 ```text
 curl -X POST --data '{
@@ -65,7 +65,7 @@ That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID
 
 :::info
 
-With more data on Fuji testnet, it may take a while to bootstrap Fuji Testnet from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean) to shorten the time for bootstrapping.
+With more data on `Fuji` testnet, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean) to shorten the time for bootstrapping.
 
 :::
 
@@ -77,8 +77,8 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 All commands which issue a transaction require either a private key loaded into the tool, or a connected ledger device.
 
-This tutorial will only focus on stored key usage and leave ledger operation details for the mainnet deploy one, as
-mainnet operations requires ledger usage, while is fuji it is optional.
+This tutorial focuses on stored key usage and leave ledger operation details for the mainnet deploy one, as
+mainnet operations requires ledger usage, while for fuji it is optional.
 
 `Avalanche-CLI` supports the following key operations:
 
@@ -89,7 +89,7 @@ mainnet operations requires ledger usage, while is fuji it is optional.
 
 :::warning
 
-The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key will be stored on your file system. Whoever gets access to that key will have access to any funds secured by that private key. To deploy to Mainnet, follow [this tutorial](./create-a-mainnet-subnet).
+The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key will be stored on your file system. Whoever gets access to that key will have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
 
 :::
 
@@ -168,7 +168,7 @@ avalanche key list
 
 :::danger
 
-Do these steps only to follow this tutorial for Fuji addresses. To access the wallet for Mainnet, the use of a ledger device is strongly recommended.
+Do these steps only to follow this tutorial for `Fuji` addresses. To access the wallet for `Mainnet`, the use of a ledger device is strongly recommended.
 
 :::
 
@@ -177,11 +177,11 @@ Do these steps only to follow this tutorial for Fuji addresses. To access the wa
 2. **Export** your key via the `avalanche key export` command, then paste the output when selecting "Private key" while accessing the [web wallet](https://wallet.avax.network). (Private Key is the first option on the [web wallet](https://wallet.avax.network)).
 3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)).
 
-After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
+After following these 3 steps, your test key should now have a balance on the P-Chain on `Fuji` Testnet.
 
 ## Create an EVM Subnet
 
-Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This in fact allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to Mainnet.
+Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to `Mainnet`.
 
 To create an EVM subnet, run the `subnet create` command with a name of your choice:
 
@@ -555,14 +555,14 @@ This might take a couple of seconds, and if successful, it will print:
 Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
 ```
 
-This means the node has now been added as validator to the given Subnet on Fuji!
+This means the node has now been added as validator to the given Subnet on `Fuji`!
 
 ## Join a Subnet
 
 You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
 This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
 
-First also a bit of "marketing" (announcing not yet available Mainnet support):
+First network selection:
 
 ```bash
 avalanche subnet join testsubnet
