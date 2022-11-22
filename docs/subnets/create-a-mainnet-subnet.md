@@ -129,7 +129,7 @@ Creating a Subnet with `Avalanche-CLI` for `Mainnet` is the same way as creating
 
 In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This in fact allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` or `Mainnet`.
 
-See [this section](./creating-a-fuji-subnet#create-an-evm-subnet)
+See [this section](./create-a-fuji-subnet#create-an-evm-subnet)
 
 ## Deploy the Subnet
 
