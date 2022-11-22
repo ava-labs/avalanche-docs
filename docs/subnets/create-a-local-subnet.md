@@ -428,6 +428,12 @@ You can create a new metamask account by importing the private key `0x56289e99c9
 Here is a screenshot of Metamask when everything is set correctly:
 ![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
 
+It will be useful if we added some screenshots/instructions on how to import the private key from the subnet
+
+https://drive.google.com/file/d/1Q-pGmpHWenGpIEF2XrTCVhuNHNUPyOGk/view?usp=share_link
+https://drive.google.com/file/d/1fIkgEStTY2Ixeq7bMV5fl7eQYJN2ypZC/view?usp=share_link
+
+
 ## Smart Contract
 
 You can use this newly created Subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
