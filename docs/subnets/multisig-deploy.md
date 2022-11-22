@@ -1,5 +1,8 @@
 # Deploy a Subnet on Mainnet with Multisig Authorization
 
+Connect ledger 1, be sure it is unblocked and with the Avalanche Ledger App Running, as in
+
+
 ## Rationale
 
 Subnet operations can be done under a permissioned multisig scheme,
@@ -226,7 +229,7 @@ Error: wallet does not contain subnet auth keys
 exit status 1
 ```
 
-This can happend either because the original specified control keys (previous step) do not contain the
+This can happen either because the original specified control keys (previous step) do not contain the
 ledger address, or because the ledger address control key was not selected in the current step. In the given
 example, the ledger 0 address control key was not selected.
 
@@ -263,4 +266,135 @@ Last message requires the user to sign the subnet creation tx using connected le
 
 On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
 right button, and then authorize the request by pressing both left and right buttons.
+
+```
+Subnet has been created with ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Now creating blockchain...
+*** Please sign blockchain creation hash on the ledger device *** 
+```
+
+After successfull subnet creation, user will be asked to sing the blockchain creation tx.
+
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
+right button, and then authorize the request by pressing both left and right buttons.
+
+On sucess, subnet deploy details will be provided. As only 1 address signed the chain creation tx, a
+file will be written to disk to save the tx so as to continue the signing process with another command.
+
+```
++--------------------+----------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                    |
++--------------------+----------------------------------------------------+
+| Chain Name         | testsubnet                                         |
++--------------------+----------------------------------------------------+
+| Subnet ID          | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew |
++--------------------+----------------------------------------------------+
+| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii  |
++--------------------+----------------------------------------------------+
+
+1 of 2 required Blockchain Creation signatures have been signed. Saving tx to disk to enable remaining signing.
+
+Path to export partially signed tx to:
+```
+
+Enter name of file to write to disk, in this example, `partiallySigned.txt`. Should not exist on disk.
+CLI will ask until this condition is meet.
+
+```
+Path to export partially signed tx to: partiallySigned.txt
+
+Addresses remaining to sign the tx
+  P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+
+Connect a ledger with one of the remaining addresses or choose a stored key and run the signing command, or send "partiallySigned.txt" to another user for signing.
+
+Signing command:
+  avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
+```
+
+CLI ask the user to use another ledger, ledger 1 in this case which contains the address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af` to continue the signing process with `transaction sign` command.
+
+## Sign sign the chain creation tx with the transaction sign command
+
+### Ledger 1
+
+Connect ledger 1 device, unblock it, and run the Avalanche Ledger Application, as described in [How to use Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche) (up to and including point 4).
+Remind that Ledger 1 does not need to have funds, will used to provide subnet auth only, not to pay fees.
+
+When using CLI, it should recognice the ledger and use the associated address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af`
+as the one to do the second signature of the tx.
+
+### Issue the command and sign the tx
+
+Transaction in partiallySigned.txt will be recognized as mainnet one, and so ledger will be user automatically
+for signing. In fuji case, the user will be prompted to choose signing mechanism.
+
+```
+avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
+*** Please provide extended public key on the ledger device ***
+```
+
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
+
+```
+Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+*** Please sign tx hash on the ledger device *** 
+```
+
+Next, a new signing will be started for the create chain tx. If the ledger is not the correct one, the following
+error should be get instead:
+
+```
+Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+Error: wallet does not contain subnet auth keys
+exit status 1
+```
+
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
+
+After that the tx will be recognized as having all required signatures. If threshold were larger,
+the `transaction sign` command should be used as many times as needed with the different ledgers.
+
+```
+
+All 2 required Tx signatures have been signed. Saving tx to disk to enable commit.
+
+Overwritting partiallySigned.txt
+
+Tx is fully signed, and ready to be committed
+
+Commit command:
+  avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
+```
+
+Now, partiallySigned.txt constains a fully signed tx, ready to be deployed.
+
+### Issue the command to commit the tx
+
+```
+avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
+```
+
+tx will be recognized as mainnet one, and automatically deployed.
+
+```
++--------------------+-------------------------------------------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                                                     |
++--------------------+-------------------------------------------------------------------------------------+
+| Chain Name         | testsubnet                                                                          |
++--------------------+-------------------------------------------------------------------------------------+
+| Subnet ID          | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew                                  |
++--------------------+-------------------------------------------------------------------------------------+
+| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                   |
++--------------------+-------------------------------------------------------------------------------------+
+| Blockchain ID      | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
++--------------------+-------------------------------------------------------------------------------------+
+| RPC URL            | http://127.0.0.1:9650/ext/bc/2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj/rpc |
++--------------------+-------------------------------------------------------------------------------------+
+| P-Chain TXID       | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
++--------------------+-------------------------------------------------------------------------------------+
+```
+
+Now you have deployed a subnet to mainnet by using 2 ledgers to accomplish a multisig process!
 

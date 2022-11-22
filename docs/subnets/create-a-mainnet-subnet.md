@@ -252,8 +252,10 @@ for the deployment will be shown:
 In this case, the ledger address is the control key, so there will be no control key authorization error,
 but in general, if the control key is specified manually and is not controlled by the ledger, an error will occur:
 
-```bash
-Error: insufficient authorization
+```
+Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
+Error: wallet does not contain subnet auth keys
+exit status 1
 ```
 
 Will se more about this on [multisig deploy tutorial](./multisig-deploy).
