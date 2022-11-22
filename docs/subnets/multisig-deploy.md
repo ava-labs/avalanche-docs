@@ -242,7 +242,7 @@ when trying to pay the fee for the subnet creation tx, with:
 ✔ P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
 Your subnet auth keys for chain creation: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
 *** Please sign subnet creation hash on the ledger device *** 
-Error: insufficient funds: provided UTXOs need 100000000 more units of asset "rgNLkDPpANwqg3pHC4o9aGJmf2YU4GgTVUMRKAdnKodihkqgr"
+Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "rgNLkDPpANwqg3pHC4o9aGJmf2YU4GgTVUMRKAdnKodihkqgr"
 exit status 1
 ```
 
@@ -313,7 +313,7 @@ Signing command:
 
 CLI ask the user to use another ledger, ledger 1 in this case which contains the address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af` to continue the signing process with `transaction sign` command.
 
-## Sign sign the chain creation tx with the transaction sign command
+## Sign and commit the chain creation tx with the transaction commands
 
 ### Ledger 1
 
@@ -323,7 +323,7 @@ Remind that Ledger 1 does not need to have funds, will used to provide subnet au
 When using CLI, it should recognice the ledger and use the associated address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af`
 as the one to do the second signature of the tx.
 
-### Issue the command and sign the tx
+### Issue the command to sign the tx
 
 Transaction in partiallySigned.txt will be recognized as mainnet one, and so ledger will be user automatically
 for signing. In fuji case, the user will be prompted to choose signing mechanism.
@@ -397,4 +397,168 @@ tx will be recognized as mainnet one, and automatically deployed.
 ```
 
 Now you have deployed a subnet to mainnet by using 2 ledgers to accomplish a multisig process!
+
+## Create and sign multisig txs with the addValidator command
+
+addValidator command will also behave multisig, if the subnet was previously deployed with
+appropiate multisig params in control keys and threshold.
+
+Let's continue with the example of 5 control keys and threshold of two.
+
+```
+avalanche subnet addValidator testsubnet
+```
+
+First will need to specify network. Select `Mainnet`
+
+```
+Use the arrow keys to navigate: ↓ ↑ → ← 
+? Choose a network to add validator to.: 
+  ▸ Fuji
+    Mainnet
+```
+
+Then, similar to deploy, user is asked to select the 2 control keys to be used to sign the tx. Note
+there is no need to ask for the main set of control keys (the 5 given on deploy), or the threshold. That is
+already saved on chain for testsubnet.
+
+```
+✔ Mainnet
+Use the arrow keys to navigate: ↓ ↑ → ← 
+? Choose a subnet auth key: 
+  ▸ P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
+    P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+    P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
+    P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+    P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
+````
+
+As before, the user will need to indicate to use both ledger addresses for auth, and will need to have ledger 0
+connected in order to pay for the fee (0.001 AVAX) and be the first subnet auth signer.
+
+```
+✔ Mainnet
+✔ P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+Your subnet auth keys for add validator tx creation: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
+```
+
+Lets skip the validation node/period prompt description, as it is already described [here](./create-a-mainnet-subnet#add-a-avalidator). 
+
+Only note that start time for validator is not selected to be in one minute, to give more time to all the signing process
+to be finished.
+
+```
+Next, we need the NodeID of the validator you want to whitelist.
+
+Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how to query the NodeID from your node
+(Edit host IP address and port to match your deployment, if needed).
+What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+✔ Default (20)
+When should your validator start validating?
+If you validator is not ready by this time, subnet downtime can occur.
+✔ Custom
+When should the validator start validating? Enter a UTC datetime in 'YYYY-MM-DD HH:MM:SS' format: 2022-11-22 23:00:00
+✔ Until primary network validator expires
+NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+Network: Local Network
+Start time: 2022-11-22 23:00:00
+End time: 2023-11-22 15:57:27
+Weight: 20
+Inputs complete, issuing transaction to add the provided validator information...
+*** Please provide extended public key on the ledger device ***
+```
+
+Now the command ask the user to authorize the ledger to provide public key.
+
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
+
+```
+Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+*** Please sign add validator hash on the ledger device *** 
+```
+
+After that, ledger 0 address is shown, and user is asked to sign add validator tx on ledger.
+
+```
+Partial tx created
+
+1 of 2 required Add Validator signatures have been signed. Saving tx to disk to enable remaining signing.
+
+Path to export partially signed tx to:
+```
+
+As the case is multisig, tx is not fully signed, and a file is asked to write into, lets use partialAddValidatorTx.txt
+
+```
+Path to export partially signed tx to: partialAddValidatorTx.txt
+
+Addresses remaining to sign the tx
+  P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+
+Connect a ledger with one of the remaining addresses or choose a stored key and run the signing command, or send "partialAddValidatorTx.txt" to another user for signing.
+
+Signing command:
+  avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
+```
+
+## Sign and commit the add validator tx with the transaction commands
+
+Process is pretty similar to signing of chain creation tx. So some details will be omitted now.
+
+First, be sure that ledger 1 is connected, unblocked, and with Avalanche Ledger App running.
+
+### Issue the command to sign the tx
+
+Transaction in partialAddValidatorTx.txt will be recognized as mainnet one, and so ledger will be user automatically
+for signing.
+
+```
+avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
+*** Please provide extended public key on the ledger device ***
+```
+
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
+
+```
+Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+*** Please sign tx hash on the ledger device *** 
+```
+
+Next, a new signing will be started for the create chain tx.
+
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
+
+After that the tx will be recognized as having all required signatures.
+
+```
+
+All 2 required Tx signatures have been signed. Saving tx to disk to enable commit.
+
+Overwritting partialAddValidatorTx.txt
+
+Tx is fully signed, and ready to be committed
+
+Commit command:
+  avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
+```
+
+Now, partialAddValidatorTx.txt constains a fully signed tx, ready to be deployed.
+
+### Issue the command to commit the tx
+
+```
+avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
+```
+
+tx will be recognized as mainnet one, and automatically deployed.
+
+```
+Transaction successful, transaction ID: K7XNSwcmgjYX7BEdtFB3hEwQc6YFKRq9g7hAUPhW4J5bjhEJG
+```
+
+Now you have added a validator to the a subnet on mainnet by using 2 ledgers to accomplish a multisig process!
 
