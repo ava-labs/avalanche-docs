@@ -467,13 +467,13 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ mytestkey
 ```
 
-We are here a bit ahead of our time, the tool announces Mainnet support. Just choose `Fuji`:
+Choose `Fuji`:
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to deploy on. This command only supports Fuji currently.:
   ▸ Fuji
-    Mainnet (coming soon)
+    Mainnet
 ```
 
 Now we need the **NodeID** of our new validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
