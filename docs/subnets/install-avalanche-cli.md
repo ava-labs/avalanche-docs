@@ -37,6 +37,20 @@ To download the binary into a specific directory, run:
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b <relative directory>
 ```
 
+## Adding Avalanche-CLI to your PATH
+
+To call the `avalanche` binary from anywhere, you'll need to add it to your system path. If you installed
+the binary into the default location, you can run the following snippet to add it to your path.
+
+```
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+cd bin
+export PATH=$PWD:$PATH
+```
+
+To add it to your path permanently, add an export command to your shell initialization script (ex: (ex: .bashrc for
+Ubuntu or .zshrc for Mac)).
+
 ## Checking Your Installation
 
 You can test your installation by running `avalanche --version`. The tool should print the running version.
