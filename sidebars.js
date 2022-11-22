@@ -118,7 +118,9 @@ const sidebars = {
       items: [
         'subnets/create-evm-subnet-config',
         'subnets/create-a-local-subnet',
+        'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
+        'subnets/how-to-delete-subnet',
         'subnets/how-to-run-cli-with-docker',
       ],
     },
@@ -171,6 +173,14 @@ const sidebars = {
       items: [
           'subnets/spaces',
           'subnets/wagmi',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Technical Reference',
+      collapsed: false,
+      items: [
+          'subnets/reference-cli-commands'
       ],
     },
     {

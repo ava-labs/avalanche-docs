@@ -1,14 +1,29 @@
 # How to Deploy a Subnet on a Local Network
 
+This how-to guide focuses on taking an already created Subnet configuration and deploying it to a local Avalanche network.
+
+## Prerequisites
+
+- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
+- You have [created a Subnet configuration](create-evm-subnet-config)
+
 ## Deploying Subnets Locally
 
-To deploy, run
+In the following commands, make sure to substitute the name of your Subnet configuration for `<subnetnName>`.
+
+To deploy your subnet, run
 
 `avalanche subnet deploy <subnetName>`
 
-Local deploys will start a multi-node Avalanche network in the background on your machine. Progress will be shown until it completes. It also prints info needed for connecting with Metamask.
+and select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing the `--local` flag. For example:
 
-Example:
+`avalanche subnet deploy <subnetName> --local`
+
+The command may take a couple minutes to run.
+
+### Results
+
+If all works as expected, the command output should look something like this:
 
 ```text
 > avalanche subnet deploy firstsubnet
@@ -35,128 +50,20 @@ Chain ID:         12345
 Currency Symbol:  TEST
 ```
 
-To manage that network, see [the `avalanche network` command tree](#network).
+You can use the deployment details to connect to and interact with your subnet.
 
-### Deploying to Fuji
+To manage the newly deployed local Avalanche network, see [the `avalanche network` command tree](reference-cli-commands#network).
 
-If you can't wait to for this tool's Fuji integration, you can use the `subnet-cli` tool to deploy your Subnet.
+### Deploying multiple Subnets
 
-First, export your Subnet's genesis file with `avalanche subnet describe --genesis <subnetName>`. Then, use that genesis file to complete the instructions listed [here](./create-a-fuji-subnet.md#run-subnet-cli-wizard).
+You may deploy multiple subnets concurrently, but you cannot deploy the same subnet multiple times without resetting all deployed subnet state.
 
-### Delete a Subnet Configuration
+## Redeploying the Subnet
 
-To delete a created Subnet configuration, run
-
-`avalanche subnet delete <subnetName>`
-
-## Network
-
-The network command suite provides a collection of tools for managing local Subnet deployments.
-
-When a Subnet is deployed locally, it runs on a local, multi-node Avalanche network. Deploying a Subnet locally will start this network in the background. This command suite allows you to shutdown and restart that network.
-
-This network currently supports multiple, concurrently deployed Subnets and will eventually support nodes with varying configurations. Expect more functionality in future releases.
-
-### Stopping the Local Network
-
-To stop a running local network, run
-
-`avalanche network stop [snapshotName]`
-
-This graceful shutdown will preserve network state. When restarted, your Subnet should resume at the same place it left off.
-`snapshotName` is optional, if provided, a named snapshot will be created which can later be started again with `avalanche network start snapshotName`.
-If not provided, a default snapshot will be created. The default snapshot will be overwritten at each `stop`.
-
-Example:
-
-```text
-> avalanche network stop
-dialing endpoint ":8097"
-Network stopped successfully.
-```
-
-### Starting/Restarting the Local Network
-
-To start or restart a stopped network, run
-
-`avalanche network start [snapshotName]`
-
-`snapshotName` is optional, if provided the named snapshot will be used to start the network (if found).
-If not provided, the last snapshot created with a unnamed `stop` will be used.
-
-If the default snapshot doesn't exist (because no `stop` has been run yet, and/or no Subnet has been deployed yet), the command will fail.
-
-Deploying a Subnet locally will start the network automatically.
-
-Example:
-
-```text
-> avalanche network start
-dialing endpoint ":8097"
-Starting previously deployed and stopped snapshot
-.....................
-Network ready to use. Local network node endpoints:
-Endpoint at node node3 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:48498/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Endpoint at node node4 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Endpoint at node node5 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:49912/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Endpoint at node node1 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:47497/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Endpoint at node node2 for blockchain "n6yXZSaNXCvh6BUTJ2fgyc4iDxoz21NVaVgY3N4sSpTGMqJzc": http://127.0.0.1:62099/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-```
-
-### Deleting the Local Network
-
-To stop your local network and clear its state, run
+To redeploy the subnet, you first need to wipe the subnet state. This will permanently delete all data from all locally deployed subnets. To do so, run
 
 `avalanche network clean`
 
-This will delete all stored deploy state for all local Subnet deployments. This will not delete any of your Subnet configurations. You will need to redeploy your Subnet configurations one by one to use them again.
+You are now free to redeploy your subnet with
 
-Example:
-
-```text
-> avalanche network clean
-dialing endpoint ":8097"
-Process terminated.
-```
-
-### Checking Network Status
-
-If you'd like to determine whether or not a local Avalanche network is running on your machine, run
-
-`avalanche network status`
-
-## Connect with Metamask
-
-Please use the value provided by `Metamask connection details` to connect with Metamask.
-
-```text
-Metamask connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     firstsubnet
-Chain ID:         12345
-Currency Symbol:  TEST
-```
-
-You can create a new metamask account by importing the private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start experiencing with this account.
-
-Here is a screenshot of Metamask when everything is set correctly:
-![Avalanche CLI Metamask](/img/avalanche-cli-metamask.png)
-
-## Smart Contract
-
-You can use this newly created Subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
-
-For example: to connect `Hardhat` to the local network that deployed with the Avalanche-CLI, we would create a network setting in `hardhat.config.ts` that looks similar to this:
-
-```json
-testChain: {
-      url: "http://127.0.0.1:63196/ext/bc/2GAinA2PAEEEnuy1yTeqgqCbQWUGFTvUaiDSRiZgMrRRoLYs92/rpc",
-      chainId: 12345,
-      accounts: ["<YOUR-PRIVATE-KEY-HERE>"],
-    }
-```
-
-## Next Step
-
-After you feel comfortable moving forward, you should try it on the Fuji Testnet by following [this tutorial](./create-a-fuji-subnet.md).
+`avalanche subnet deploy <subnetName> --local`.
