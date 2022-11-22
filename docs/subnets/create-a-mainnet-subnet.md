@@ -15,8 +15,9 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 - 1+ nodes running and fully bootstrapped on Mainnet. Check out [Nodes](../nodes/README.md) section on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
+- a funded ledger device
 
-## Virtual Machine
+### Virtual Machine
 
 Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
 That is, the VM defines the behavior of the blockchain.
@@ -25,7 +26,7 @@ That is, the VM defines the behavior of the blockchain.
 
 This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as most other Ethereum client functionality.
 
-## Mainnet
+### Mainnet
 
 For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
 
@@ -61,7 +62,7 @@ It may take a while to bootstrap Mainnet from scratch. You can use [State-Sync](
 
 :::
 
-## Avalanche-CLI
+### Avalanche-CLI
 
 If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](create-a-local-subnet.md#installation)
 
