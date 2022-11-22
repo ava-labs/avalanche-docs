@@ -96,8 +96,8 @@ A authorization request in a common message in all CLI ops involving ledger:
 *** Please provide extended public key on the ledger device ***
 ```
 
-Navigate to the ledger `Accept` window by using ledger's right button, and then authorize the request
-by pressing both left and right buttons.
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by
+using ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 ```
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
@@ -161,8 +161,8 @@ Deploying [testsubnet] to Mainnet
 *** Please provide extended public key on the ledger device ***
 ```
 
-Navigate to the ledger `Accept` window by using ledger's right button, and then authorize the request
-by pressing both left and right buttons.
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using
+ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 After that, the first mainnet ledger address (which will be used to fund the deploy) is shown.
 
@@ -196,12 +196,13 @@ Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Currently, besides indicating a list of addresses that will be control key, usually the user is required to  
+Currently, besides indicating a list of addresses that will be control key, usually the user is required to
 define the threshold of how many addresses are required for a change to be valid. In this case, as there is only
-one control key, the threshold is forced to 1, so that address and only that address can authorizate subnet
-changes (auth keys for chain creation). Will se more about this on [multisig section](#multisig-example).
+one control key, the threshold is forced to 1 without asking to the user, so that address and only that address
+can authorizate subnet changes (auth keys for chain creation).
+Will se more about this on [multisig deploy tutorial](./multisig-deploy).
 
-Next, a tx for creating the subnet id is created and the user is asked to sign it by using the ledger.
+Next, a tx for creating the subnet id is generated and the user is asked to sign it by using the ledger.
 
 ```
 *** Please sign subnet creation hash on the ledger device *** 
@@ -216,7 +217,7 @@ Note that if the ledger is not funded or does not have enough funds, we'll get a
 Error: insufficient funds: provided UTXOs need 100000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-After that, the subnet id will be created, taking 1 AVAX from ledger address, and a chain creation tx
+For the success case, the subnet id will be created, taking 1 AVAX from ledger address, and a chain creation tx
 will be asked to be signed.
 
 ```
@@ -227,7 +228,8 @@ Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr
 On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
 right button, and then authorize the request by pressing both left and right buttons.
 
-After that, a summary window for the deployment will be shown:
+After that, the blockchain will be created, taking 1 AVAX from ledger address, and a summary window
+for the deployment will be shown:
 
 ```
 +--------------------+------------------------------------------------------------------------------------+
@@ -247,16 +249,23 @@ After that, a summary window for the deployment will be shown:
 +--------------------+------------------------------------------------------------------------------------+
 ```
 
-In this case, ledger address is control key, so there will be no control key authorization error, but in other cases,
-if the control key is specified manually and is not controlled by the ledger, an error will occur:
+In this case, the ledger address is the control key, so there will be no control key authorization error,
+but in general, if the control key is specified manually and is not controlled by the ledger, an error will occur:
 
 ```bash
 Error: insufficient authorization
 ```
 
+Will se more about this on [multisig deploy tutorial](./multisig-deploy).
+
 Well done! You have just created your own Subnet with your own Subnet-EVM running on `Mainnet`!
 
-To check on your new subnet, visit [Explorer](https://subnets.avax.network/). The search works by PCHAIN TXID, so in this example, enter `wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG` into the search box and you should see confirmation on your shiny new blockchain tx.
+To check on your new subnet, visit [Avalanche Explorer](https://subnets.avax.network/). The search works by PCHAIN TXID,
+so in this example, enter `wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG` into the search box and
+you should see confirmation on your shiny new blockchain tx.
+
+Also, the subnet id can be used in the search `2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db`, to get information on
+the associated subnet id tx.
 
 ## Add a Validator
 
@@ -274,28 +283,35 @@ This new Subnet is cool - but it doesn't have any dedicated validators yet! Let'
 avalanche subnet addValidator testsubnet
 ```
 
-As this operation involves a new [transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), we need to tell the tool which private key to use:
+First choose `Mainnet` as the network in which we want to add the subnet validator.
 
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Which private key should be used to issue the transaction?:
-    test
-  ▸ mytestkey
 ```
-
-We are here a bit ahead of our time, the tool announces Mainnet support. Just choose `Fuji`:
-
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to deploy on. This command only supports Fuji currently.:
+Use the arrow keys to navigate: ↓ ↑ → ← 
+? Choose a network to add validator to.: 
   ▸ Fuji
-    Mainnet (coming soon)
+    Mainnet
 ```
+
+As this operation involves a new [transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator),
+we need some address to authorize the subnet operation.
+As there is only one control key in the subnet, that one will be expected to be used for signing.
+No fee will be paid here that address is needed as control key for the subnet change authorization.
+
+```
+Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+```
+
+Also, as mainnet is beign used here, the tool asumes that the first ledger address will be used as signing address.
+So, it is expected that the connected ledger has the subnet control key as its first address.
 
 Now we need the **NodeID** of our new validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
 
 ```bash
-What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAAAAAAAAAAAAAAAAAQGjPhUy
+Next, we need the NodeID of the validator you want to whitelist.
+
+Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how to query the NodeID from your node
+(Edit host IP address and port to match your deployment, if needed).
+✔ What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
 ```
 
 (this ID is intentionally modified)
@@ -349,7 +365,7 @@ If we choose `Custom` here, we'll have to enter a **duration**, which is a time 
 The user is shown an actual date of when that is now:
 
 ```bash
-? Your validator will finish staking by 2023-02-13 12:26:55:
+? Your validator will finish staking by 2023-06-10 13:07:58:
   ▸ Yes
     No
 ```
@@ -357,28 +373,61 @@ The user is shown an actual date of when that is now:
 Confirm if correct. At this point the prompt series is complete and the transaction is attempted:
 
 ```bash
-NodeID: NodeID-BFa1padLXBj7VHa2JYvYGzcTBPQGjPhUy
-Network: Fuji
-Start time: 2022-07-28 12:26:55
-End time: 2023-02-13 12:26:55
+NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+Network: Mainnet
+Start time: 2022-11-22 13:07:58
+End time: 2023-06-10 13:07:58
 Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-This might take a couple of seconds, and if successful, it will print:
+Next we will be asked for ledger authorization:
 
-```bash
-Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
+```
+*** Please provide extended public key on the ledger device ***
 ```
 
-This means the node has now been added as validator to the given Subnet on Fuji!
+On ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using ledger's
+right button, and then authorize the request by pressing both left and right buttons.
+
+Ledger address will be shown:
+
+```
+Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
+```
+
+At this point, if the ledger address is not control key for the subnet, we will get an error:
+
+```
+Error: wallet does not contain subnet auth keys
+exit status 1
+```
+
+In other case, a request for signing the tx will be asked in CLI and in ledger:
+
+```
+*** Please sign add validator hash on the ledger device ***
+```
+
+On ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using ledger's
+right button, and then authorize the request by pressing both left and right buttons.
+
+This might take a couple of seconds, and will print, if successfull:
+
+```bash
+Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
+```
+
+This means the node has now been added as validator to the given Subnet on Mainnet!
+
+You can check for PCHAIN TXID information on [Avalanche Explorer](https://subnets.avax.network/)
 
 ## Join a Subnet
 
 You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
 This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
 
-First also a bit of "marketing" (announcing not yet available Mainnet support):
+First ask for network for which we are joining the validator. Choose `Mainnet`:
 
 ```bash
 avalanche subnet join testsubnet
@@ -466,7 +515,7 @@ line or systemd script), add the following flag to your node's startup command:
 comma-separating it).
 
 For example:
-./build/avalanchego --network-id=Fuji --whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+./build/avalanchego --network-id=Mainnet --whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 If you start the node via a JSON config file, add this to your config file:
 whitelisted-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
@@ -522,7 +571,7 @@ To connect Metamask with your blockchain on the new Subnet running on your local
 
 :::note
 
-Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes, including the public API server `https://api.avax-test.network/`, to connect to Metamask.
+Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes, including the public API server `https://api.avax.network/`, to connect to Metamask.
 
 If you want to open up this node for others to access your Subnet, you should set it up properly with `https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it is out of scope for this tutorial on how to do that.
 
