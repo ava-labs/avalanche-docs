@@ -1,10 +1,12 @@
-# How to Build a Complex VM
+# How to Build a Complex Golang VM
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - [Introduction to Virtual Machines](./introduction-to-vm.md)
-- [How to Build a Simple VM](./create-a-vm-timestampvm.md)
-- How to Build a Complex VM (this article)
+- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
+- How to Build a Complex Golang VM (this article)
+- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
+
 
 ## Introduction
 

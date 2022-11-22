@@ -119,7 +119,8 @@ const sidebars = {
         'subnets/customize-a-subnet',
         'subnets/introduction-to-vm',
         'subnets/create-a-vm-timestampvm',
-        'subnets/create-a-vm-blobvm'
+        'subnets/create-a-vm-blobvm',
+        'subnets/create-a-simple-rust-vm'
       ],
     },
     {

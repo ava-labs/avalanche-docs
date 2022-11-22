@@ -1,10 +1,11 @@
-# How to Build a Simple VM
+# How to Build a Simple Golang VM
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - [Introduction to VMs](./introduction-to-vm.md)
-- How to Build a Simple VM (this article)
-- [How to Build a Complex VM](./create-a-vm-blobvm.md)
+- How to Build a Simple Golang VM (this article)
+- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
+- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
 ## Introduction
 
