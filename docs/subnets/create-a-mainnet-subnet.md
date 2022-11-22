@@ -183,13 +183,12 @@ These addresses are known as your control keys. You will also
 set how many control keys are required to make a subnet change (the threshold).
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? How would you like to set your control keys?: 
-  ▸ Use creation key
-    Use all stored keys
+  ▸ Use ledger address
     Custom list
 ```
 
-For this tutorial, we opt for using the first ledger address, so enter at `Use creation key`. Only this address will be able
-to add or remove validators, or create blockchains on the subnet.
+For this tutorial, we opt for using the first ledger address, so enter at `Use ledger address`. Only this address will
+be abled to add or remove validators, or create blockchains on the subnet.
 
 ```
 Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
