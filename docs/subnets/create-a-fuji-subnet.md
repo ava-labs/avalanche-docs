@@ -77,8 +77,8 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 All commands which issue a transaction require either a private key loaded into the tool, or a connected ledger device.
 
-This tutorial focuses on stored key usage and leave ledger operation details for the mainnet deploy one, as
-mainnet operations requires ledger usage, while for fuji it is optional.
+This tutorial focuses on stored key usage and leave ledger operation details for the `Mainnet` deploy one, as
+`Mainnet` operations requires ledger usage, while for `Fuji` it is optional.
 
 `Avalanche-CLI` supports the following key operations:
 

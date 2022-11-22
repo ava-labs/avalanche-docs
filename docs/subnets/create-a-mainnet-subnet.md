@@ -165,7 +165,7 @@ Deploying [testsubnet] to Mainnet
 On the ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by using
 the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-After that, the first mainnet ledger address (which will be used to fund the deploy) is shown.
+After that, the first `Mainnet` ledger address (which will be used to fund the deploy) is shown.
 
 ```
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
@@ -304,7 +304,7 @@ That address will also pay the add subnet validator tx fee of 0.001 AVAX.
 Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Also, as mainnet is being used here, the tool assumes that the first ledger address will be used as signing address.
+Also, as `Mainnet` is being used here, the tool assumes that the first ledger address will be used as signing address.
 So, it is expected that the connected ledger has the subnet control key as its first address.
 
 Now we need the **NodeID** of our new validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
@@ -319,9 +319,7 @@ Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for ins
 
 (this ID is intentionally modified)
 
-The next question requires a bit of thinking. A validator has a weight, which defines how often it will be selected for decision making. You should think ahead of how many validators you want initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without any validators yet is 20. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
-
-We'll select 30 for this one:
+We'll select 30 as the stake weight. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -399,17 +397,11 @@ Ledger address will be shown:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-At this point, if the ledger address is not control key for the subnet, we will get an error:
+At this point, if the ledger address is not the control key for the subnet, we will get an error:
 
 ```
 Error: wallet does not contain subnet auth keys
 exit status 1
-```
-
-In other case, a request for signing the tx will be asked in CLI and in ledger:
-
-```
-*** Please sign add validator hash on the ledger device ***
 ```
 
 If the ledger has not enough funds, the following error message will be seen after that.
@@ -419,10 +411,16 @@ If the ledger has not enough funds, the following error message will be seen aft
 Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
+Otherwise, a request for signing the tx will be done in both the CLI and the ledger:
+
+```
+*** Please sign add validator hash on the ledger device ***
+```
+
 On the ledger a `Sign Hash` window will be active. Navigate to the ledger `Accept` window by using the ledger's
 right button, and then authorize the request by pressing both left and right buttons.
 
-This might take a couple of seconds, and will print, if successfull:
+This might take a couple of seconds, and will print, if successful:
 
 ```bash
 Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
