@@ -639,7 +639,7 @@ Removes a validator from a Subnet.
 
 ### What Unsigned Remove Subnet Validator Tx Contains
 
-An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
 
 - **`BaseTx`**
 - **`NodeID`** is 20 bytes which is the node ID of the validator.
@@ -681,7 +681,7 @@ TODO
 
 ### What Unsigned Add Permissionless Validator Tx Contains
 
-An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`, `DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is `0x0000000?`.
+An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`, `DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is 25 or `0x00000019`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -744,7 +744,7 @@ TODO
 
 ### What Unsigned Add Permissionless Delegator Tx Contains
 
-An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type is `0x0000000?`.
+An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type is 26 or `0x0000001a`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -795,7 +795,7 @@ TODO
 
 ### What Unsigned Transform Subnet Tx Contains
 
-An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`, `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`, `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`, `MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000?`.
+An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`, `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`, `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`, `MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID` for this type is 24 or `0x00000018`.
 
 - **`BaseTx`**
 - **`SubnetID`** a 32-byte Subnet ID of the Subnet to transform.
