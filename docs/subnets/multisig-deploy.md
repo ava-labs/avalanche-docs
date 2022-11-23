@@ -402,6 +402,8 @@ appropiate multisig params in control keys and threshold.
 
 Let's continue with the example of 5 control keys and threshold of two.
 
+Before starting, be sure that ledger 0 is connected, unblocked, and with Avalanche Ledger App running.
+
 ```
 avalanche subnet addValidator testsubnet
 ```
