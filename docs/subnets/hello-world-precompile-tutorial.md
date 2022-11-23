@@ -867,7 +867,7 @@ Going to `./contract-examples`, we can finally run our tests by running the comm
 npx hardhat test --network local
 ```
 
-Great they passed! All the functions implemented in the precompile work as expected!
+Great the `Hello World` tests passed! All the functions implemented in the precompile work as expected! Other precompile tests will fail as our local network only has the `Hello World` precompile enabled in the genesis file.
 
 If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled and some code is missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
 
@@ -897,14 +897,14 @@ ginkgo.It("hello world", func() {
 
 	// ADD YOUR PRECOMPILE HERE
 	/*
-			ginkgo.It("your precompile", func() {
+			ginkgo.It("your precompile", ginkgo.Label("solidity-with-npx"), func() {
 			err := startSubnet("./tests/e2e/genesis/{your_precompile}.json")
 			gomega.Expect(err).Should(gomega.BeNil())
-			running := runner.IsRunnerUp()
+			running := runner.IsRunnerUp(grpcEp)
 			gomega.Expect(running).Should(gomega.BeTrue())
-			runHardhatTests("./test/Example{YourPrecompile}Test.ts")
+			runHardhatTests("./test/{YourPrecompileTest}.ts")
 			stopSubnet()
-			running = runner.IsRunnerUp()
+			running = runner.IsRunnerUp(grpcEp)
 			gomega.Expect(running).Should(gomega.BeFalse())
 		})
 	*/
