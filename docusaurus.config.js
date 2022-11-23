@@ -159,6 +159,10 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/ava-labs/avalanche-docs',
+              },
+              {
+                label: 'Term of Use',
+                href: 'https://www.avax.network/terms-of-use',
               }
             ],
           },
