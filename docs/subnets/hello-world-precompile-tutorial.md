@@ -782,7 +782,7 @@ type PrecompileUpgrade struct {
 
 Now we can get the network up and running.
 
-Start the server in a terminal in a new tab using avalanche-network-runner. Please check out [this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche Network Runner, how to download it, and how to use it.
+Start the server in a terminal in a new tab using avalanche-network-runner. Please check out [this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche Network Runner, how to download it, and how to use it. The server will be on "listening" mode waiting for API calls.
 
 ```bash
 avalanche-network-runner server \
@@ -814,7 +814,7 @@ export AVALANCHEGO_EXEC_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/buil
 export AVALANCHEGO_PLUGIN_PATH="${GOPATH}/src/github.com/ava-labs/avalanchego/build/plugins"
 ```
 
-Finally we can use avalanche-network-runner to spin up some nodes that run the latest version of Subnet-EVM:
+The following command will "issue requests" to the server we just spun up. We can use avalanche-network-runner to spin up some nodes that run the latest version of Subnet-EVM:
 
 ```bash
   avalanche-network-runner control start \
@@ -867,7 +867,7 @@ Going to `./contract-examples`, we can finally run our tests by running the comm
 npx hardhat test --network local
 ```
 
-Great they passed! All the functions implemented in the precompile work as expected!
+Great the `Hello World` tests passed! All the functions implemented in the precompile work as expected! Other precompile tests will fail as their precompiles are not enabled. We only enabled the `Hello World` precompile in the genesis!
 
 If your tests failed, please retrace your steps. Most likely the error is that the precompile was not enabled and some code is missing. Please also use the [official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1) to double check your work as well.
 
@@ -897,14 +897,14 @@ ginkgo.It("hello world", func() {
 
 	// ADD YOUR PRECOMPILE HERE
 	/*
-			ginkgo.It("your precompile", func() {
+			ginkgo.It("your precompile", ginkgo.Label("solidity-with-npx"), func() {
 			err := startSubnet("./tests/e2e/genesis/{your_precompile}.json")
 			gomega.Expect(err).Should(gomega.BeNil())
-			running := runner.IsRunnerUp()
+			running := runner.IsRunnerUp(grpcEp)
 			gomega.Expect(running).Should(gomega.BeTrue())
-			runHardhatTests("./test/Example{YourPrecompile}Test.ts")
+			runHardhatTests("./test/{YourPrecompileTest}.ts")
 			stopSubnet()
-			running = runner.IsRunnerUp()
+			running = runner.IsRunnerUp(grpcEp)
 			gomega.Expect(running).Should(gomega.BeFalse())
 		})
 	*/
@@ -921,9 +921,12 @@ Copy and paste the code snippet below and add it to to the genesis located in `.
 },
 ```
 
+Kill any previous avalanche processes from the previous steps.
 Now we can run our script with some flags specified:
 
 ```bash
+pkill avalanche
+
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 SKIP_NETWORK_RUNNER_START=true SKIP_NETWORK_RUNNER_SHUTDOWN=true ENABLE_SOLIDITY_TESTS=true scripts/run.sh
 ```
