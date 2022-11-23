@@ -315,7 +315,7 @@ CLI asks the user to use another ledger, ledger 1 in this case which contains th
 ### Ledger 1
 
 Connect ledger 1 device, unblock it, and run the Avalanche Ledger Application, as described in [How to use Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche) (up to and including point 4).
-Remember that Ledger 1 does not need to have funds, nd will be used to provide subnet auth only, not to pay fees.
+Remember that Ledger 1 does not need to have funds, and will be used to provide subnet auth only, not to pay fees.
 
 When using CLI, it should recognize the ledger and use the associated address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af`
 as the one to do the second signature of the tx.
