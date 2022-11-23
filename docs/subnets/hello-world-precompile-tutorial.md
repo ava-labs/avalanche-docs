@@ -921,9 +921,12 @@ Copy and paste the code snippet below and add it to to the genesis located in `.
 },
 ```
 
+Kill any previous avalanche processes.
 Now we can run our script with some flags specified:
 
 ```bash
+pkill avalanche
+
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 SKIP_NETWORK_RUNNER_START=true SKIP_NETWORK_RUNNER_SHUTDOWN=true ENABLE_SOLIDITY_TESTS=true scripts/run.sh
 ```
