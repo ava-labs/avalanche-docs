@@ -28,7 +28,7 @@ To build and install the binary locally (requires `golang` to be installed. Chec
 
 ```bash
 cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
-go install -v ./cmd/avalanche-network-runner
+go install -v ./cmd
 ```
 
 `avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
