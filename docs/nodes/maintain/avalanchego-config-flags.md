@@ -235,10 +235,10 @@ This are the main properties in the JSON file:
 node[i].endStakingTime = startTime + initialStakeDuration - i * initialStakeDurationOffset
 ```
 
-- `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well),
-- `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one,
-- `cChainGenesis`: Specify the chains that exist upon this network's creation,
-- `message`: A fun quote,
+- `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well)
+- `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one
+- `cChainGenesis`: Specify the chains that exist upon this network's creation
+- `message`: A fun quote
 
 For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
 
