@@ -84,7 +84,7 @@ be needed to be funded to support the fee, while the others not).
 To get the first `Mainnet` address of your (connected, unblocked, avalanche app running) ledger device, execute
 the `key list` command:
 
-```
+```bash
 avalanche key list --ledger 0 --mainnet
 ```
 
@@ -93,14 +93,14 @@ to generate the address list.
 
 An authorization request is a common message in all CLI ops involving ledger:
 
-```
+```text
 *** Please provide extended public key on the ledger device ***
 ```
 
 On the ledger a `Provide Extended Public Key` window will be active. Navigate to the ledger `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-```
+```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 |  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
@@ -136,7 +136,7 @@ See [this section](./create-a-fuji-subnet#create-an-evm-subnet)
 
 To deploy our new subnet, we can run
 
-```
+```bash
 avalanche subnet deploy testsubnet
 ```
 
@@ -144,7 +144,7 @@ Note: if the ledger is blocked, or the Avalanche Ledger App is not running, the 
 
 This will start a new prompt series.
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to deploy on:
   ▸ Local Network
@@ -156,7 +156,7 @@ This tutorial is about deploying to `Mainnet`, so we navigate with the arrow key
 
 We are then asked to authorize the ledger to provide extended public key information to CLI.
 
-```
+```text
 ✔ Mainnet
 Deploying [testsubnet] to Mainnet
 *** Please provide extended public key on the ledger device ***
@@ -167,7 +167,7 @@ the ledger's right button, and then authorize the request by pressing both left 
 
 After that, the first `Mainnet` ledger address (which will be used to fund the deploy) is shown.
 
-```
+```text
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
@@ -178,7 +178,7 @@ Also, this tutorial assumes that a node is up and running, fully bootstrapped on
 
 Subnets are currently permissioned only. Therefore, the process now requires the user to tell _which addresses can control the subnet_. We are prompted to use only the first ledger address (creation key), or a custom list of addresses.
 
-```
+```text
 Configure which addresses may make changes to the subnet.
 These addresses are known as your control keys. You will also
 set how many control keys are required to make a subnet change (the threshold).
@@ -191,7 +191,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 For this tutorial, we opt for using the first ledger address, so enter at `Use ledger address`. Only this address will
 be abled to add or remove validators, or create blockchains on the subnet.
 
-```
+```text
 Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
@@ -204,7 +204,7 @@ You will see more about this on [multisig deploy tutorial](./multisig-deploy).
 
 Next, a tx for creating the subnet id is generated and the user is asked to sign it by using the ledger.
 
-```
+```text
 *** Please sign subnet creation hash on the ledger device *** 
 ```
 
@@ -213,7 +213,7 @@ right button, and then authorize the request by pressing both left and right but
 
 Note that if the ledger is not funded or does not have enough funds, we'll get an error message:
 
-```
+```text
 *** Please sign subnet creation hash on the ledger device *** 
 Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
@@ -221,7 +221,7 @@ Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "U
 For the success case, the subnet id will be created, taking 1 AVAX from the ledger address, and a chain creation tx
 will be asked to be signed.
 
-```
+```text
 Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
 *** Please sign blockchain creation hash on the ledger device *** 
 ```
@@ -232,7 +232,7 @@ right button, and then authorize the request by pressing both left and right but
 After that, the blockchain will be created, taking 1 AVAX from the ledger address, and a summary window
 for the deployment will be shown:
 
-```
+```text
 +--------------------+------------------------------------------------------------------------------------+
 | DEPLOYMENT RESULTS |                                                                                    |
 +--------------------+------------------------------------------------------------------------------------+
@@ -253,7 +253,7 @@ for the deployment will be shown:
 In this case, the ledger address is the control key, so there will be no control key authorization error,
 but in general, if the control key is specified manually and is not controlled by the ledger, an error will occur:
 
-```
+```text
 Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
 Error: wallet does not contain subnet auth keys
 exit status 1
@@ -282,13 +282,13 @@ See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-w
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running the `addValidator` command and adding the name of our subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the subnet.
 
-```
+```bash
 avalanche subnet addValidator testsubnet
 ```
 
 First choose `Mainnet` as the network in which we want to add the subnet validator.
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Choose a network to add validator to.: 
   ▸ Fuji
@@ -300,7 +300,7 @@ we need some address to authorize the subnet operation.
 As there is only one control key in the subnet, that one will be expected to be used for signing.
 That address will also pay the add subnet validator tx fee of 0.001 AVAX.
 
-```
+```text
 Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
@@ -309,7 +309,7 @@ So, it is expected that the connected ledger has the subnet control key as its f
 
 Now we need the **NodeID** of our new validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
 
-```
+```text
 Next, we need the NodeID of the validator you want to whitelist.
 
 Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how to query the NodeID from your node
@@ -321,20 +321,20 @@ Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for ins
 
 We'll select 30 as the stake weight. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What stake weight would you like to assign to the validator?:
     Default (20)
   ▸ Custom
 ```
 
-```
+```text
 ✔ What stake weight would you like to assign to the validator?: 30
 ```
 
 We then need to specify when the validator will start validating. The time must be in the future. Custom will require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Let's take the default this time:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Start time:
   ▸ Start in one minute
@@ -349,7 +349,7 @@ If the `join` command is not successfully completed before this time elapses and
 
 Finally, specify how long it will be validating:
 
-```
+```text
 ✔ Start in one minute
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? How long should your validator validate for?:
@@ -359,13 +359,13 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 If we choose `Custom` here, we'll have to enter a **duration**, which is a time span expressed in hours. For example, we could say 200 days = 24 \* 200 = 4800h
 
-```
+```text
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
 ```
 
 The user is shown an actual date of when that is now:
 
-```
+```text
 ? Your validator will finish staking by 2023-06-10 13:07:58:
   ▸ Yes
     No
@@ -373,7 +373,7 @@ The user is shown an actual date of when that is now:
 
 Confirm if correct. At this point the prompt series is complete and the transaction is attempted:
 
-```
+```text
 NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
 Network: Mainnet
 Start time: 2022-11-22 13:07:58
@@ -384,7 +384,7 @@ Inputs complete, issuing transaction to add the provided validator information..
 
 Next we will be asked for ledger authorization:
 
-```
+```text
 *** Please provide extended public key on the ledger device ***
 ```
 
@@ -393,27 +393,27 @@ right button, and then authorize the request by pressing both left and right but
 
 Ledger address will be shown:
 
-```
+```text
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
 At this point, if the ledger address is not the control key for the subnet, we will get an error:
 
-```
+```text
 Error: wallet does not contain subnet auth keys
 exit status 1
 ```
 
 If the ledger has not enough funds, the following error message will be seen after that.
 
-```
+```text
 *** Please sign subnet creation hash on the ledger device *** 
 Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
 Otherwise, a request for signing the tx will be done in both the CLI and the ledger:
 
-```
+```text
 *** Please sign add validator hash on the ledger device ***
 ```
 
@@ -422,7 +422,7 @@ right button, and then authorize the request by pressing both left and right but
 
 This might take a couple of seconds, and will print, if successful:
 
-```
+```text
 Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
 ```
 
@@ -435,13 +435,13 @@ You can check for PCHAIN TXID information on [Avalanche Explorer](https://subnet
 You might already have a running validator which you want to add to a specific subnet. For this we run the `join` command.
 This is a bit of a special command. The `join` command will either just _print the required instructions_ for your already running node or will attempt at configuring a config file the user provides.
 
-```
+```bash
 avalanche subnet join testsubnet
 ```
 
 First ask for network for which we are joining the validator. Choose `Mainnet`:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to validate on (this command only supports public networks):
   ▸ Fuji
@@ -450,7 +450,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 In the [deploy the subnet](#deploy-the-subnet) section, we saw that a Subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the subnet. A holder of a control key _must_ call [subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order to allow the node to validate the subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
 
-```
+```text
 Would you like to check if your node is allowed to join this subnet?
 If not, the subnet's control key holder must call avalanche subnet
 addValidator with your NodeID.
@@ -464,7 +464,7 @@ The default is `Yes` but we'll choose `No` here to speed up things, assuming the
 
 There are now two choices possible: Automatic and Manual configuration. As mentioned earlier, "Automatic" will attempt at editing a config file and setting up your plugin directory, while "Manual" will just print the required config to the screen. Let's see what "Automatic" does:
 
-```
+```text
 ✔ Automatic
 ✔ Path to your existing config file (or where it will be generated): config.json
 ```
@@ -473,13 +473,13 @@ We need to provide a path to a config file. If this command were to be run on th
 
 Next, we need to provide the plugin directory. We described VMs at the beginning of this tutorial [Virtual Machine](#virtual-machine). Each VM runs its own plugin, therefore avalanchego needs to be able to access the correspondent plugin binary. As this is the `join` command, which doesn't know yet about the plugin, we need to provide the directory where the plugin is installed. Make sure to provide the location for your case:
 
-```
+```text
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
 ```
 
 The tool doesn't know where exactly it's located so it requires the full path. With the path given, it will copy the VM binary to the provided location:
 
-```
+```text
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
 VM binary written to /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 This will edit your existing config file. This edit is nondestructive,
@@ -492,7 +492,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Hitting `Yes` will attempt at writing the config file:
 
-```
+```text
 ✔ Yes
 The config file has been edited. To use it, make sure to start the node with the '--config-file' option, e.g.
 
@@ -505,7 +505,7 @@ It is **required to restart the node**.
 
 If we would have chosen "Manual" instead, the tool will just print _instructions_. The user will have to follow these instructions and apply them to the node. Note that the IDs for the VM and subnets will be different in your case.
 
-```
+```text
 ✔ Manual
 
 To setup your node, you must do two things:
@@ -513,7 +513,7 @@ To setup your node, you must do two things:
 1. Add your VM binary to your node's plugin directory
 2. Update your node config to start validating the subnet
 
-To add the VM to your plugin directory, copy or `scp` from `/tmp/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw`
+To add the VM to your plugin directory, copy or scp from /tmp/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 
 If you installed avalanchego manually, your plugin directory is likely
 avalanchego/build/plugins.
@@ -542,7 +542,7 @@ take effect.
 
 This tool is most useful on the machine where a validator is or will be running. In order to allow a VM to run on a different machine, the configuration can be exported. We just need to provide a path to where to export the data:
 
-```
+```bash
 avalanche subnet export testsubnet
 ✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
 ```
@@ -553,14 +553,14 @@ The file is in text format and it should not be tampered with. It can then be us
 
 To import a VM specification exported in the previous section, just issue the `import` command with the path to the file after having copied the file over:
 
-```
+```bash
 avalanche subnet import /tmp/testsubnet-export.dat
 Subnet imported successfully
 ```
 
 After this the whole Subnet configuration should be available on the target machine:
 
-```
+```text
 avalanche subnet list
 +---------------+---------------+----------+-----------+----------+
 |    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
