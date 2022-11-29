@@ -105,7 +105,7 @@ avalanche subnet deploy testsubnet
 
 First step is to specify `Mainnet` as the network:
 
-```bash
+```
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to deploy on:
   ▸ Local Network
