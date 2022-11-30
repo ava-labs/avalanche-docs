@@ -1,10 +1,12 @@
-# How to Build a Complex VM
+# How to Build a Complex Golang VM
 
 This is part of a series of tutorials for building a Virtual Machine (VM):
 
 - [Introduction to Virtual Machines](./introduction-to-vm.md)
-- [How to Build a Simple VM](./create-a-vm-timestampvm.md)
-- How to Build a Complex VM (this article)
+- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
+- How to Build a Complex Golang VM (this article)
+- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
+
 
 ## Introduction
 
@@ -21,7 +23,7 @@ Make sure you have followed the previous tutorials in this series:
 
 ## Components
 
-A VM defines how a blockchain should be built. A block is populated with a set of transactions which mutate the state of the blockchain when executed. When a block with a set of transactions is applied to a given state, a state transition occurs by executing all of the transactions in the block in-order and applying it to the previous block of the blockchain. By executing a series of blocks chronologically, anyone verify and reconstruct the state of the blockchain at an arbitrary point in time.
+A VM defines how a blockchain should be built. A block is populated with a set of transactions which mutate the state of the blockchain when executed. When a block with a set of transactions is applied to a given state, a state transition occurs by executing all of the transactions in the block in-order and applying it to the previous block of the blockchain. By executing a series of blocks chronologically, anyone can verify and reconstruct the state of the blockchain at an arbitrary point in time.
 
 The BlobVM repository has a few components to handle the lifecycle of tasks from a transaction being issued to a block being accepted across the network:
 
