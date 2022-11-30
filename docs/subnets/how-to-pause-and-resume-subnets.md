@@ -92,3 +92,10 @@ If the network isn't running, the command instead prints
 Requesting network status...
 No local network running
 ```
+
+or
+
+```text
+Requesting network status...
+Error: timed out trying to contact backend controller, it is most probably not running
+```
