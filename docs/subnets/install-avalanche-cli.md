@@ -4,10 +4,6 @@
 
 Avalanche-CLI runs on Linux and Mac. Windows is currently not supported.
 
-## Prerequisites
-
-On Mac, Brew is required. Installation instructions can be found [here](https://brew.sh/).
-
 ## Instructions
 
 To download a binary for the latest release, run:

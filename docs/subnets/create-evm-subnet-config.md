@@ -1,7 +1,7 @@
 # How to create an EVM-based Subnet configuration
 
-To create an Ethereum Virtual Machine (EVM) compatible Subnet, you
-use [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
+To create an Ethereum Virtual Machine (EVM) compatible Subnet, Avalanche-CLI
+runs [Subnet-EVM](https://github.com/ava-labs/subnet-evm) as its virtual machine.
 
 ## Using the Subnet Creation Wizard
 

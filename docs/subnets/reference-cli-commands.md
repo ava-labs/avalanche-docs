@@ -1,26 +1,33 @@
-# Avalanche-CLI Commands
+# Avalanche-CLI commands
+
+Avalanche-CLI is a command line tool that gives developers access to
+everything Avalanche. This release specializes in helping developers
+build and test Subnets.
+
+To get started, look at the documentation for the subcommands or jump right
+in with `avalanche subnet create myNewSubnet`.
 
 ## Subnet
 
-The subnet command suite provides a collection of tools for developing
-and deploying subnets.
+The `subnet` command suite provides a collection of tools for developing
+and deploying Subnets.
 
-To get started, use the subnet create command wizard to walk through the
-configuration of your very first subnet. Then, go ahead and deploy it
-with the subnet deploy command. You can use the rest of the commands to
-manage your subnet configurations and live deployments.
+To get started, use the `subnet create` command wizard to walk through the
+configuration of your very first Subnet. Then, go ahead and deploy it
+with the `subnet deploy` command. You can use the rest of the commands to
+manage your Subnet configurations and live deployments.
 
-### addValidator
+### Subnet addValidator
 
-The subnet addValidator command whitelists a primary network validator to
-validate the provided deployed subnet.
+The `subnet addValidator` command whitelists a primary network validator to
+validate the provided deployed Subnet.
 
-To add the validator to the subnet's allow list, you first need to provide
+To add the validator to the Subnet's allow list, you first need to provide
 the subnetName and the validator's unique NodeID. The command then prompts
-for the validation start time, duration and stake weight. These values can
-all be collected with flags instead of prompts.
+for the validation start time, duration, and stake weight. You can bypass
+these prompts by providing the values with flags.
 
-This command currently only works on subnets deployed to either the Fuji testnet or Mainnet.
+This command currently only works on Subnets deployed to either the Fuji Testnet or Mainnet.
 
 **Usage:**
 
@@ -28,7 +35,9 @@ This command currently only works on subnets deployed to either the Fuji testnet
 
 **Flags:**
 
-```
+<!-- markdownlint-disable MD013 -->
+
+```shell
     --fuji fuji join on fuji (alias for `testnet`)
 -h, --help help for addValidator
 -k, --key string select the key to use [fuji deploy only]
@@ -43,12 +52,13 @@ This command currently only works on subnets deployed to either the Fuji testnet
     --weight uint set the staking weight of the validator to add
 ```
 
-### configure
+<!-- markdownlint-enable MD013 -->
 
-Avalanchego nodes can be configured at different levels.
-For example, subnets have their own subnet config (applies to all chains/VMs in the subnet).
-And each chain or VM can have its own specific chain config file.
-This command allows to set both config files.
+### Subnet configure
+
+AvalancheGo nodes support several different configuration files. Subnets have their own
+Subnet config which applies to all chains/VMs in the Subnet. Each chain within the Subnet
+can have its own chain config. This command allows you to set both config files.
 
 **Usage:**
 
@@ -56,24 +66,24 @@ This command allows to set both config files.
 
 **Flags:**
 
-```
+```shell
     --chain-config string    path to the chain configuration
 -h, --help                   help for configure
     --subnet-config string   path to the subnet configuration
 ```
 
-### create
+### Subnet create
 
-The subnet create command builds a new genesis file to configure your subnet.
-The command is structured as an interactive wizard. It will walk you through
-all the steps you need to create your first subnet.
+The `subnet create` command builds a new genesis file to configure your Subnet.
+By default, the command runs an interactive wizard. It walks you through
+all the steps you need to create your first Subnet.
 
-The tool supports deploying Subnet-EVM, SpacesVM, and custom vms. You
-can create a custom, user-generated genesis with a custom vm by providing
-the path to your genesis and vm binarires with the --genesis and --vm flags.
+The tool supports deploying Subnet-EVM, SpacesVM, and custom VMs. You
+can create a custom, user-generated genesis with a custom VM by providing
+the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
-By default, running the command with a subnetName that already exists will
-cause the command to fail. If you’d like to overwrite an existing
+By default, running the command with a subnetName that already exists
+causes the command to fail. If you’d like to overwrite an existing
 configuration, pass the -f flag.
 
 **Usage:**
@@ -82,7 +92,7 @@ configuration, pass the -f flag.
 
 **Flags:**
 
-```
+```shell
     --custom              use a custom VM template
     --evm                 use the SubnetEVM as the base template
 -f, --force               overwrite the existing configuration if one exists
@@ -94,9 +104,9 @@ configuration, pass the -f flag.
     --vm-version string   version of vm template to use
 ```
 
-### delete
+### Subnet delete
 
-The subnet delete command deletes an existing Subnet configuration.
+The `subnet delete` command deletes an existing Subnet configuration.
 
 **Usage:**
 
@@ -104,25 +114,22 @@ The subnet delete command deletes an existing Subnet configuration.
 
 **Flags:**
 
-```
+```shell
 -h, --help help for delete
 ```
 
-### deploy
+### Subnet deploy
 
-The subnet deploy command deploys your subnet configuration locally, to
-Fuji Testnet, or to Mainnet.
+The `subnet deploy` command deploys your Subnet configuration locally, to Fuji Testnet, or to Mainnet.
 
-At the end of the call, the command will print the RPC URL you can use
-to interact with the subnet.
+At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
 
-Subnets may only be deployed once. Subsequent calls of deploy to the
-same network (local, Fuji, Mainnet) are not allowed. If you'd like to
-redeploy a subnet locally for testing, you must first call [avalanche
-network clean](#clean) to reset all deployed chain state. Subsequent local
-deploys will redeploy the chain with fresh state. The same subnet can
-be deployed to multiple networks, so you can take your locally tested
-subnet and deploy it on Fuji or Mainnet.
+Avalanche-CLI only supports deploying an individual Subnet once per network. Subsequent
+attempts to deploy the same Subnet to the same network (local, Fuji, Mainnet) aren't
+allowed. If you'd like to redeploy a Subnet locally for testing, you must first call
+[avalanche network clean](#network-clean) to reset all deployed chain state. Subsequent local
+deploys redeploy the chain with fresh state. You can deploy the same Subnet to multiple
+networks, so you can take your locally tested Subnet and deploy it on Fuji or Mainnet.
 
 **Usage:**
 
@@ -130,7 +137,9 @@ subnet and deploy it on Fuji or Mainnet.
 
 **Flags:**
 
-```
+<!-- markdownlint-disable MD013 -->
+
+```shell
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
     --control-keys strings         addresses that may make subnet changes
 -f, --fuji testnet                 deploy to fuji (alias to testnet
@@ -146,12 +155,13 @@ subnet and deploy it on Fuji or Mainnet.
     --threshold uint32             required number of control key signatures to make subnet changes
 ```
 
-### describe
+<!-- markdownlint-enable MD013 -->
 
-The subnet describe command prints the details of a subnet configuration
-to the console. By default, the command will print a summary of the
-configuration. By providing the --genesis flag, the command will instead
-print out the raw genesis file.
+### Subnet describe
+
+The `subnet describe` command prints the details of a Subnet configuration to the console.
+By default, the command prints a summary of the configuration. By providing the --genesis
+flag, the command instead prints out the raw genesis file.
 
 **Usage:**
 
@@ -159,14 +169,14 @@ print out the raw genesis file.
 
 **Flags:**
 
-```
+```shell
 -g, --genesis   Print the genesis to the console directly instead of the summary
 -h, --help      help for describe
 ```
 
-### export
+### Subnet export
 
-The subnet export command prints the details of an existing subnet deploy.
+The `subnet export` command prints the details of an existing Subnet deploy.
 
 The command prompts for an output filename. You can also provide one with
 the --output flag.
@@ -177,19 +187,19 @@ the --output flag.
 
 **Flags:**
 
-```
+```shell
 -h, --help            help for export
 -o, --output string   write the export data to the provided file path
 ```
 
-### import
+### Subnet import
 
-The subnet import command will import a subnet configuration from a file or a git repository.
+The `subnet import` command imports a Subnet configuration from a file or a git repository.
 
-To import from a file, you can optionally provide the filepath as a command line argument.
-Alternatively, running the command without any arguments will trigger an interactive wizard.
-To import from a repo, go through the wizard. By default, an imported subnet will not
-overwrite an existing subnet with the same name. To allow overwrites, provide the --force
+To import from a file, you can optionally provide the path as a command line argument.
+Alternatively, running the command without any arguments triggers an interactive wizard.
+To import from a repo, go through the wizard. By default, an imported Subnet doesn't
+overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
 flag.
 
 **Usage:**
@@ -198,7 +208,9 @@ flag.
 
 **Flags:**
 
-```
+<!-- markdownlint-disable MD013 -->
+
+```shell
     --branch string   the repo branch to use if downloading a new repo
 -f, --force           overwrite the existing configuration if one exists
 -h, --help            help for import
@@ -206,26 +218,23 @@ flag.
     --subnet string   the subnet configuration to import from the provided repo
 ```
 
-### join
+<!-- markdownlint-enable MD013 -->
 
-The subnet join command configures your validator node to begin validating
-a new subnet.
+### Subnet join
 
-To complete this process, you must have access to the machine running your
-validator. If the CLI is running on the same machine as your validator,
-it can generate or update your node's config file automatically.
-Alternatively, the command can print the necessary instructions to
-update your node manually. To complete the validation process, the
-NodeID of your validator node must have been whitelisted by one of the
-subnet's control keys.
+The `subnet join` command configures your validator node to begin validating a new Subnet.
 
-After you update your validator's config, you will need to restart your
-validator manually. If the --avalanchego-config flag is provided, this
-command attempts to edit the config file at that path (requires the file
-to be readable and writable).
+To complete this process, you must have access to the machine running your validator. If the
+CLI is running on the same machine as your validator, it can generate or update your node's
+config file automatically. Alternatively, the command can print the necessary instructions
+to update your node manually. To complete the validation process, the Subnet admins must add
+the NodeID of your validator to the Subnet's allow list.
 
-This command currently only supports subnets deployed on the Fuji testnet
-and Mainnet.
+After you update your validator's config, you need to restart your validator manually. If
+you provide the `--avalanchego-config` flag, this command attempts to edit the config file
+at that path.
+
+This command currently only supports Subnets deployed on the Fuji Testnet and Mainnet.
 
 **Usage:**
 
@@ -233,7 +242,7 @@ and Mainnet.
 
 **Flags:**
 
-```
+```shell
     --avalanchego-config string   file path of the avalanchego config file
     --fail-if-not-validating      fail if whitelist check fails
     --force-whitelist-check       if true, force the whitelist check
@@ -248,10 +257,9 @@ and Mainnet.
     --testnet testnet             join on testnet (alias for `fuji`)
 ```
 
-### list
+### Subnet list
 
-The subnet list command prints the names of all created subnet
-configurations.
+The `subnet list` command prints the names of all created Subnet configurations.
 
 **Usage:**
 
@@ -259,13 +267,13 @@ configurations.
 
 **Flags:**
 
-```
+```shell
 -h, --help   help for list
 ```
 
-### publish
+### Subnet publish
 
-Publish the subnet's VM to a repository
+The `subnet publish` command publishes the Subnet's VM to a repository.
 
 **Usage:**
 
@@ -273,7 +281,9 @@ Publish the subnet's VM to a repository
 
 **Flags:**
 
-```
+<!-- markdownlint-disable MD013 -->
+
+```shell
     --alias string              We publish to a remote repo, but identify the repo locally under a user-provided alias (e.g. myrepo).
     --force                     If true, ignores if the subnet has been published in the past, and attempts a forced publish.
 -h, --help                      help for publish
@@ -283,9 +293,11 @@ Publish the subnet's VM to a repository
     --vm-file-path string       Path to the VM description file. If not given, a prompting sequence will be initiated.
 ```
 
-### stats
+<!-- markdownlint-enable MD013 -->
 
-Show validator statistics for the given subnet
+### Subnet stats
+
+The `subnet stats` command prints validator statistics for the given Subnet.
 
 **Usage:**
 
@@ -293,7 +305,7 @@ Show validator statistics for the given subnet
 
 **Flags:**
 
-```
+```shell
     --fuji fuji         print stats on fuji (alias for `testnet`)
 -h, --help              help for stats
     --mainnet mainnet   print stats on mainnet
@@ -302,22 +314,20 @@ Show validator statistics for the given subnet
 
 ## Network
 
-The network command suite provides a collection of tools for managing
-local subnet deployments.
+The network command suite provides a collection of tools for managing local Subnet
+deployments.
 
-When a subnet is deployed locally, it runs on a local, multi-node
-Avalanche network. Deploying a subnet locally will start this network
-in the background. This command suite allows you to shutdown,
-restart, and clear that network.
+When you deploy a Subnet locally, it runs on a local, multi-node Avalanche network. The
+`subnet deploy` command starts this network in the background. This command suite allows you
+to shutdown, restart, and clear that network.
 
-This network currently supports multiple, concurrently deployed
-subnets.
+This network currently supports multiple, concurrently deployed Subnets.
 
-### clean
+### Network clean
 
-The network clean command shuts down your local, multi-node network. All
-the deployed subnets will shutdown and delete their state. The network
-may be started again by deploying a new subnet configuration.
+The `network clean` command shuts down your local, multi-node network. All deployed Subnets
+shutdown and delete their state. You can restart the network by deploying a new Subnet
+configuration.
 
 **Usage:**
 
@@ -325,20 +335,18 @@ may be started again by deploying a new subnet configuration.
 
 **Flags:**
 
-```
+```shell
     --hard   Also clean downloaded avalanchego and plugin binaries
 -h, --help   help for clean
 ```
 
-### start
+### Network start
 
-The network start command starts a local, multi-node Avalanche network
-on your machine.
+The `network start` command starts a local, multi-node Avalanche network on your machine.
 
-By default, the command loads the default snapshot. If --snapshot-name flag
-is provided, that snapshot will be used for starting the network if
-it can be found. The command may fail if the local network is already
-running.
+By default, the command loads the default snapshot. If you provide the `--snapshot-name`
+flag, the network loads that snapshot instead. The command fails if the local network is
+already running.
 
 **Usage:**
 
@@ -346,16 +354,16 @@ running.
 
 **Flags:**
 
-```
+```shell
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
 -h, --help                         help for start
     --snapshot-name string         name of snapshot to use to start the network from (default "default-1654102509")
 ```
 
-### status
+### Network status
 
-The network status command prints whether or not a local Avalanche
-network is running and some basic stats about the network.
+The `network status` command prints whether or not a local Avalanche network is running and
+some basic stats about the network.
 
 **Usage:**
 
@@ -363,21 +371,19 @@ network is running and some basic stats about the network.
 
 **Flags:**
 
-```
+```shell
 -h, --help   help for status
 ```
 
-### stop
+### Stop
 
-The network stop command shuts down your local, multi-node network.
+The `network stop` command shuts down your local, multi-node network.
 
-All deployed subnets will shutdown gracefully and save their
-state. If snapshot-name flag is provided, the state will be saved
-under this named snapshot, which then can be restarted with
-"network start --snapshot-name snapshotName". Otherwise, the default snapshot
-will be created, or overwritten if it exists. The default
-snapshot can then be restarted without parameter
-("network start").
+All deployed Subnets shutdown gracefully and save their state. If you provide the
+`--snapshot-name` flag, the network saves its state under this named snapshot. You can
+reload this snapshot with `network start --snapshot-name <snapshotName>`. Otherwise, the
+network saves to the default snapshot, overwriting any existing state. You can reload the
+default snapshot with `network start`.
 
 **Usage:**
 
@@ -385,7 +391,7 @@ snapshot can then be restarted without parameter
 
 **Flags:**
 
-```
+```shell
 -h, --help                   help for stop
     --snapshot-name string   name of snapshot to use to save network state into (default "default-1654102509")
 ```
@@ -394,9 +400,9 @@ snapshot can then be restarted without parameter
 
 The transaction command suite provides all of the utilities required to sign multisig transactions.
 
-### commit
+### Transaction commit
 
-Commit a transaction by submitting it to the p-chain.
+The `transaction commit` command commits a transaction by submitting it to the p-chain.
 
 **Usage:**
 
@@ -404,14 +410,14 @@ Commit a transaction by submitting it to the p-chain.
 
 **Flags:**
 
-```
+```shell
 -h, --help                       help for commit
     --input-tx-filepath string   Path to the transaction signed by all signatories
 ```
 
-### sign
+### Transaction sign
 
-Sign a multisig transaction.
+The `transaction sign` command signs a multisig transaction.
 
 **Usage:**
 
@@ -419,32 +425,37 @@ Sign a multisig transaction.
 
 **Flags:**
 
-```
+<!-- markdownlint-disable MD013 -->
+
+```shell
 -h, --help                       help for sign
     --input-tx-filepath string   Path to the transaction file for signing
 -k, --key string                 select the key to use [fuji only]
 -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji)
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 ## Key
 
 The key command suite provides a collection of tools for creating and managing
-signing keys. You can use these keys to deploy subnets to the Fuji testnet,
+signing keys. You can use these keys to deploy Subnets to the Fuji Testnet,
 but these keys are NOT suitable to use in production environments. DO NOT use
-these keys on mainnet.
+these keys on Mainnet.
 
-To get started, use the key create command.
+To get started, use the `key create` command.
 
-### create
+### Key create
 
-The key create command generates a new private key to use for creating and controlling
-test subnets. Keys generated by this command are NOT cryptographically secure enough to
-use in production environments. DO NOT use these keys on mainnet.
+The `key create` command generates a new private key to use for creating and controlling
+test Subnets. Keys generated by this command are NOT cryptographically secure enough to
+use in production environments. DO NOT use these keys on Mainnet.
 
-The command works by generating a secp256 key and storing it with the provided keyName. You can use this key
-in other commands by providing this keyName.
+The command works by generating a secp256 key and storing it with the provided keyName. You
+can use this key in other commands by providing this keyName.
 
-If you'd like to import and existing key instead of generating one from scatch, provide the --file flag.
+If you'd like to import and existing key instead of generating one from scratch, provide the
+`--file` flag.
 
 **Usage:**
 
@@ -452,17 +463,17 @@ If you'd like to import and existing key instead of generating one from scatch, 
 
 **Flags:**
 
-```
+```shell
     --file string   import the key from an existing key file
 -f, --force         overwrite an existing key with the same name
 -h, --help          help for create
 ```
 
-### delete
+### Key delete
 
-The key delete command deletes an existing signing key.
+The `key delete` command deletes an existing signing key.
 
-To delete a key, provide the keyName. The command will prompt for confirmation
+To delete a key, provide the keyName. The command prompts for confirmation
 before deleting the key. To skip the confirmation, provide the --force flag.
 
 **Usage:**
@@ -470,18 +481,18 @@ before deleting the key. To skip the confirmation, provide the --force flag.
 
 **Flags:**
 
-```
+```shell
 -f, --force   delete the key without confirmation
 -h, --help    help for delete
 ```
 
-### export
+### Key export
 
-The key export command exports a created signing key. An exported key can
-be used externally or imported into another instance of the CLI.
+The `key export` command exports a created signing key. You can use an exported key in other
+applications or import it into another instance of Avalanche-CLI.
 
-By default, the tool writes the hex encoded key to stdout. If the --output
-flag is provided, the key will be written to a file of your choosing.
+By default, the tool writes the hex encoded key to stdout. If you provide the `--output`
+flag, the command writes the key to a file of your choosing.
 
 **Usage:**
 
@@ -489,14 +500,14 @@ flag is provided, the key will be written to a file of your choosing.
 
 **Flags:**
 
-```
+```shell
 -h, --help            help for export
 -o, --output string   write the key to the provided file path
 ```
 
-### list
+### Key list
 
-The key list command prints information for all stored signing
+The `key list` command prints information for all stored signing
 keys or for the ledger addresses associated to certain indices.
 
 **Usage:**
@@ -505,7 +516,7 @@ keys or for the ledger addresses associated to certain indices.
 
 **Flags:**
 
-```
+```shell
 -a, --all-networks   list all network addresses
 -c, --cchain         list C-Chain addresses (default true)
 -f, --fuji           list testnet (fuji) network addresses
