@@ -431,7 +431,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 }
 ```
 
-The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix). It can be also found in [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IFeeManager.sol):
 
@@ -507,7 +507,7 @@ It's possible to enable this precompile with an initial configuration to activat
 
 This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
-## Changing Fee Reward Mechanisms
+### Changing Fee Reward Mechanisms
 
 Fee reward mechanism can be configured with this stateful precompile contract. Configuration can include burning fees, sending fees to a predefined address, or enabling fees to be collected by block producers. This precompile can be configured as follows in the genesis file:
 
@@ -524,7 +524,7 @@ Fee reward mechanism can be configured with this stateful precompile contract. C
 
 `adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and `Enabled` are both eligible to change the current fee mechanism.
 
-The precompile implements the `RewardManager` interface which includes the `AllowList` interface. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `RewardManager` interface which includes the `AllowList` interface. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact directly in Remix). It can be also found in [IRewardManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IRewardManager.sol):
 
@@ -561,17 +561,17 @@ In addition to the AllowList interface, the RewardManager adds the following cap
 
 - `disableRewards` - disables block rewards and starts burning fees.
 
-- `currentRewardAddress` - returns the current reward address. This is the address to which fees are sent. It can include blackhole address (`0x010...0`) which means that fees are burned. It can also include a predefined hash (0x0000000000000000000000000000000000000000) denoting custom fee recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if custom fee recipients are allowed first.
+- `currentRewardAddress` - returns the current reward address. This is the address to which fees are sent. It can include blackhole address (`0x010...0`) which means that fees are burned. It can also include a predefined hash (`0x0000000000000000000000000000000000000000`) denoting custom fee recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if custom fee recipients are allowed first.
 
 - `areFeeRecipientsAllowed` - returns true if custom fee recipients are allowed.
 
-These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by block producers) can not be enabled at the same time. Enabling one mechanism will take over the previous mechanism. For example, if you enable `allowFeeRecipients` and then enable `disableRewards`, the `disableRewards` will take over and fees will be burned.
+These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by block producers) cannot be enabled at the same time. Enabling one mechanism will take over the previous mechanism. For example, if you enable `allowFeeRecipients` and then enable `disableRewards`, the `disableRewards` will take over and fees will be burned.
 
 _Note: Reward addresses or fee recipient addresses are not required to be an admin or enabled account._
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to change the fee reward mechanism This can be useful for networks that require a one-time reward mechanism change without specifying any admin addresses. Without this initial configuration, the precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. To use the initial configuration, you need to specify the initial reward mechanism in `initialRewardConfig` field in your genesis or upgrade file.
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to change the fee reward mechanism. This can be useful for networks that require a one-time reward mechanism change without specifying any admin addresses. Without this initial configuration, the precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. To use the initial configuration, you need to specify the initial reward mechanism in `initialRewardConfig` field in your genesis or upgrade file.
 
 In order to allow custom fee recipients, you need to specify the `allowFeeRecipients` field in the `initialRewardConfig`:
 
