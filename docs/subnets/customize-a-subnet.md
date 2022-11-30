@@ -231,7 +231,7 @@ The `AllowList` interface is used by precompiles to check if a given address is 
 
 `AllowList` configuration affects only the related precompile. For instance, the admin address in `feeManagerConfig` does not affect admin addresses in other activated precompiles.
 
-The `AllowList` solidity interface is defined as follows:
+The `AllowList` solidity interface is defined as follows, and can be found in [IAlowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -433,7 +433,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 
 The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
-The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix). It can be also found in [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IFeeManager.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -526,7 +526,7 @@ Fee reward mechanism can be configured with this stateful precompile contract. C
 
 The precompile implements the `RewardManager` interface which includes the `AllowList` interface. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
-The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact directly in Remix). It can be also found in [IRewardManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IRewardManager.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -826,7 +826,7 @@ You can override these defaults with the following config:
 
 ### Fee Recipient
 
-This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [FeeRewardManager precompile](#distributing-fee-rewards) to specify where the fees should be sent to.
+This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [FeeRewardManager precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
 
 With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
 
@@ -838,6 +838,6 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 
 :::warning
 
-If `allowFeeRecipients` or FeeRewardManager is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` or FeeRewardManager precompile is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
