@@ -46,7 +46,7 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 ## Validators
 
-Avalanche validators are incentivized by Subnet owners to validator their Subnet. The incentive can be customized by each Subnet. Validators needs to take consideration of security and resource concerns before joining a Subnet.
+Incentives are provided by Subnet owners in order to attract Avalanche validators to validate their Subnet, and this incentive can be customized by the Subnet. Validators must also take security and resource concerns into consideration when deciding whether to validate a given Subnet.
 
 ## Virtual Machines
 
