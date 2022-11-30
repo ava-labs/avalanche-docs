@@ -195,6 +195,56 @@ curl -X POST --data '{
 
 For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
 
+### eth_getChainConfig
+
+`eth_getChainConfig` returns chain config. This API is enabled by default with `internal-eth` namespace.
+
+**Signature**
+
+```sh
+eth_getChainConfig({}) -> {chainConfig: json}
+```
+
+**Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_getChainConfig",
+    "params" :[]
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "chainId": 43112,
+    "homesteadBlock": 0,
+    "daoForkBlock": 0,
+    "daoForkSupport": true,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "apricotPhase1BlockTimestamp": 0,
+    "apricotPhase2BlockTimestamp": 0,
+    "apricotPhase3BlockTimestamp": 0,
+    "apricotPhase4BlockTimestamp": 0,
+    "apricotPhase5BlockTimestamp": 0
+  }
+}
+```
+
 ## Avalanche Specific APIs
 
 ### Endpoints

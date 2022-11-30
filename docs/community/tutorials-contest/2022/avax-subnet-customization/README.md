@@ -835,7 +835,7 @@ After creating the files, we should compile `Game.sol`.
 
 ![Compile](.github/images/compiling.png)
 
-Go to the deploy tab, choose injected web3 as enviroment - connect your wallet - then choose Game in the contract dropdown. Then click the deploy button.
+Go to the deploy tab, choose injected web3 as environment - connect your wallet - then choose Game in the contract dropdown. Then click the deploy button.
 
 ![Deploy](.github/images/deploying.png)
 

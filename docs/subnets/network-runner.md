@@ -12,26 +12,14 @@ The ANR aims at being a tool for developers and system integrators alike, offeri
 
 ## Installation
 
-The Avalanche Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
-
-That repository's README details the tool.
-
-Clone the repository with:
-
 ```bash
-git clone https://github.com/ava-labs/avalanche-network-runner.git
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s -- -b $GOPATH/bin
+
+cd $GOPATH/bin
+export PATH=$PWD:$PATH
 ```
 
-There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases).
-
-To build and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
-
-```bash
-cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
-go install -v ./cmd/avalanche-network-runner
-```
-
-`avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
+`avalanche-network-runner` will be installed into `$GOPATH/bin`. 
 
 Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.
 
@@ -331,7 +319,7 @@ These examples expect a basic understanding of what Subnets are and their usage.
 
 ### RPC server `subnet-evm` example
 
-The Subnet EVM is a simplified version of Coreth VM (C-Chain).
+The Subnet-EVM is a simplified version of Coreth VM (C-Chain).
 This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality.
 It can be used to create your own fully Ethereum-compatible Subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 

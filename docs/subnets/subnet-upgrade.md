@@ -95,72 +95,16 @@ Refer to the previous section on how to make sure node is healthy and connected 
 
 If you don't get the expected result, you can stop the `AvalancheGo`, examine and follow closely step-by-step of the above. You are free to remove files under `~/avalanche-node/plugins`, however, you should keep in mind that removing files is to remove an existing VM binary. You must put the correct VM plugin in place before you restart AvalancheGo.
 
-## Changing Subnet Configuration
+## Network Upgrades
 
-Sometimes you need to do a Subnet upgrade to change the configuration and rules under which the Subnet operates. As before we will discuss `subnet-evm` upgrades, as that is the most commonly used Subnet VM.
-
-In regular EVM, network upgrades are a pretty involved process that includes deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can consist of enabling/disabling particular precompiles, or changing their parameters. Currently available precompiles allow you to:
+Sometimes you need to do a network upgrade to change the configured rules in the genesis under which the Chain operates. In regular EVM, network upgrades are a pretty involved process that includes deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can consist of enabling/disabling particular precompiles, or changing their parameters. Currently available precompiles allow you to:
 
 - Restrict Smart Contract Deployers
 - Restrict Who Can Submit Transactions
 - Mint Native Coins
 - Configure Dynamic Fees
 
-Please refer to [Customize a Subnet](customize-a-subnet.md) tutorial for a detailed discussion of all Subnet customization capabilities.
-
-The upgrades we want to make on a Subnet must be specified in a file named `upgrade.json` which should be placed in the same directory where [`config.json`](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`. For example, `WAGMI Subnet` upgrade should be placed in `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
-
-The content of the `upgrade.json` should be formatted according to the following:
-
-```json
-{
-  "precompileUpgrades": [
-    {
-      "[PRECOMPILE_NAME]": {
-        "[PARAMETER]": "[VALUE]",
-        "blockTimestamp": "[ACTIVATION_TIMESTAMP]"
-      }
-    }
-  ]
-}
-```
-
-For example, contents of the `upgrade.json` might look like:
-
-```json
-{
-  "precompileUpgrades": [
-    {
-      "txAllowListConfig": {
-        "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
-        "blockTimestamp": 1664013826
-      }
-    }
-  ]
-}
-```
-
-With the above we intend to change the TransactionAllowList precompile `adminAddresses` to `0x6f0f6DA1852857d7789f68a28bba866671f3880D` at timestamp `1664013826`, which is the [Unix timestamp](https://www.unixtimestamp.com/) for UTC time 10:03:46, Sep 24 2022.
-
 Please refer to [Customize a Subnet](customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for a detailed discussion of possible precompile upgrade parameters.
-
-After you have created the `upgrade.json` and placed it in the chain config directory, you need to restart the node for the upgrade file to be loaded (again, mke sure you don't restart all Subnet validators at once!). On node restart, it will print out the configuration of the chain, where you can double-check that the upgrade has loaded correctly. In our example:
-
-```text
-INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
-github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration
-config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0
-Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig:
-{\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\
-“:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\
-“:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\
-“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\“precompileUpgrades\“:
-[{\“txAllowListConfig\“:{\“adminAddresses\“:[\
-“0x6f0f6da1852857d7789f68a28bba866671f3880d\“],\“blockTimestamp\“:1664013826}}]},
-Engine: Dummy Consensus Engine}”
-```
-
-Notice that `precompileUpgrades` entry correctly reflects the changes. That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!
 
 ## Summary
 

@@ -1,3 +1,5 @@
+/subnets/create-a-virtual-machine-vm /subnets/introduction-to-vm 301
+
 # 08/18/2022
 
 /dapps/smart-contracts/add-avalanche-to-metamask-programmatically /dapps/smart-contracts/add-avalanche-programmatically 301
@@ -79,8 +81,6 @@
 /quickstart/references/abigen /specs/abigen 301
 /quickstart/references/avm-transaction-serialization/ /specs/avm-transaction-serialization 301
 /quickstart/references/avm-transaction-serialization /specs/avm-transaction-serialization 301
-/quickstart/references/coreth-arc20s/ /specs/coreth-arc20s 301
-/quickstart/references/coreth-arc20s /specs/coreth-arc20s 301
 /quickstart/references/coreth-atomic-transaction-serialization/ /specs/coreth-atomic-transaction-serialization 301
 /quickstart/references/coreth-atomic-transaction-serialization /specs/coreth-atomic-transaction-serialization 301
 /quickstart/references/cryptographic-primitives/ /specs/cryptographic-primitives 301
@@ -134,8 +134,6 @@
 /build/tutorials / 301
 /build/references/platform-transaction-serialization/ /quickstart/references/platform-transaction-serialization 301
 /build/references/platform-transaction-serialization /quickstart/references/platform-transaction-serialization 301
-/build/references/coreth-arc20s/ /quickstart/references/coreth-arc20s 301
-/build/references/coreth-arc20s /quickstart/references/coreth-arc20s 301
 /build/references/avm-transaction-serialization/ /quickstart/references/avm-transaction-serialization 301
 /build/references/avm-transaction-serialization /quickstart/references/avm-transaction-serialization 301
 /build/references/network-protocol/ /quickstart/references/network-protocol 301

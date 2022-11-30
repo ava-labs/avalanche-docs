@@ -55,7 +55,7 @@ const sidebars = {
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
     'quickstart/integrate-exchange-with-avalanche',
-    'quickstart/blockchain-flow'
+    'quickstart/blockchain-flow',
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -104,7 +104,6 @@ const sidebars = {
       items: [
         'subnets/create-a-local-subnet',
         'subnets/create-a-fuji-subnet',
-
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
@@ -116,7 +115,11 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/customize-a-subnet',
-        'subnets/create-a-virtual-machine-vm',
+        'subnets/hello-world-precompile-tutorial',
+        'subnets/introduction-to-vm',
+        'subnets/create-a-vm-timestampvm',
+        'subnets/create-a-vm-blobvm',
+        'subnets/create-a-simple-rust-vm'
       ],
     },
     {
@@ -154,8 +157,8 @@ const sidebars = {
       label: 'Examples',
       collapsed: false,
       items: [
-          'subnets/spaces',
-          'subnets/wagmi',
+        'subnets/spaces',
+        'subnets/wagmi',
       ],
     },
     {
@@ -240,7 +243,6 @@ const sidebars = {
   ],
 
   specs: [
-    'specs/coreth-arc20s',
     'specs/avm-transaction-serialization',
     'specs/coreth-atomic-transaction-serialization',
     'specs/cryptographic-primitives',
