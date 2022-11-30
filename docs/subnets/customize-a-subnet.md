@@ -565,7 +565,7 @@ In addition to the AllowList interface, the RewardManager adds the following cap
 
 - `areFeeRecipientsAllowed` - returns true if custom fee recipients are allowed.
 
-These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by block producers) can not be enabled at the same time. Enabling one mechanism will take over the previous mechanism. For example, if you enable `allowFeeRecipients` and then enable `disableRewards`, the `disableRewards` will take over and fees will be burned.
+These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by block producers) cannot be enabled at the same time. Enabling one mechanism will take over the previous mechanism. For example, if you enable `allowFeeRecipients` and then enable `disableRewards`, the `disableRewards` will take over and fees will be burned.
 
 _Note: Reward addresses or fee recipient addresses are not required to be an admin or enabled account._
 
