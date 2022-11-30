@@ -5,7 +5,7 @@ local Avalanche network.
 
 ## Prerequisites
 
-- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
+- [Avalanche-CLI installed](install-avalanche-cli)
 - You have [created a Subnet configuration](create-evm-subnet-config)
 
 ## Deploying Subnets locally
