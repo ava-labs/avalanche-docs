@@ -31,7 +31,9 @@ This command currently only works on Subnets deployed to either the Fuji Testnet
 
 **Usage:**
 
-`avalanche subnet addValidator [subnetName] [flags]`
+```shell
+avalanche subnet addValidator [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -62,7 +64,9 @@ can have its own chain config. This command allows you to set both config files.
 
 **Usage:**
 
-`avalanche subnet configure [subnetName] [flags]`
+```shell
+avalanche subnet configure [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -88,7 +92,9 @@ configuration, pass the `-f` flag.
 
 **Usage:**
 
-`avalanche subnet create [subnetName] [flags]`
+```shell
+avalanche subnet create [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -110,7 +116,9 @@ The `subnet delete` command deletes an existing Subnet configuration.
 
 **Usage:**
 
-`avalanche subnet delete [flags]`
+```shell
+avalanche subnet delete [flags]
+```
 
 **Flags:**
 
@@ -133,7 +141,9 @@ networks, so you can take your locally tested Subnet and deploy it on Fuji or Ma
 
 **Usage:**
 
-`avalanche subnet deploy [subnetName] [flags]`
+```shell
+avalanche subnet deploy [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -165,7 +175,9 @@ flag, the command instead prints out the raw genesis file.
 
 **Usage:**
 
-`avalanche subnet describe [subnetName] [flags]`
+```shell
+avalanche subnet describe [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -183,7 +195,9 @@ the `--output` flag.
 
 **Usage:**
 
-`avalanche subnet export [subnetName] [flags]`
+```shell
+avalanche subnet export [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -204,7 +218,9 @@ flag.
 
 **Usage:**
 
-`avalanche subnet import [subnetPath] [flags]`
+```shell
+avalanche subnet import [subnetPath] [flags]
+```
 
 **Flags:**
 
@@ -239,7 +255,9 @@ This command currently only supports Subnets deployed on the Fuji Testnet and Ma
 
 **Usage:**
 
-`avalanche subnet join [subnetName] [flags]`
+```shell
+avalanche subnet join [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -264,7 +282,9 @@ The `subnet list` command prints the names of all created Subnet configurations.
 
 **Usage:**
 
-`avalanche subnet list [flags]`
+```shell
+avalanche subnet list [flags]
+```
 
 **Flags:**
 
@@ -278,7 +298,9 @@ The `subnet publish` command publishes the Subnet's VM to a repository.
 
 **Usage:**
 
-`avalanche subnet publish [subnetName] [flags]`
+```shell
+avalanche subnet publish [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -302,7 +324,9 @@ The `subnet stats` command prints validator statistics for the given Subnet.
 
 **Usage:**
 
-`avalanche subnet stats [subnetName] [flags]`
+```shell
+avalanche subnet stats [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -332,7 +356,9 @@ configuration.
 
 **Usage:**
 
-`avalanche network clean [flags]`
+```shell
+avalanche network clean [flags]
+```
 
 **Flags:**
 
@@ -351,7 +377,9 @@ already running.
 
 **Usage:**
 
-`avalanche network start [flags]`
+```shell
+avalanche network start [flags]
+```
 
 **Flags:**
 
@@ -368,7 +396,9 @@ some basic stats about the network.
 
 **Usage:**
 
-`avalanche network status [flags]`
+```shell
+avalanche network status [flags]
+```
 
 **Flags:**
 
@@ -388,7 +418,9 @@ default snapshot with `network start`.
 
 **Usage:**
 
-`avalanche network stop [flags]`
+```shell
+avalanche network stop [flags]
+```
 
 **Flags:**
 
@@ -407,7 +439,9 @@ The `transaction commit` command commits a transaction by submitting it to the p
 
 **Usage:**
 
-`avalanche transaction commit [subnetName] [flags]`
+```shell
+avalanche transaction commit [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -422,7 +456,9 @@ The `transaction sign` command signs a multisig transaction.
 
 **Usage:**
 
-`avalanche transaction sign [subnetName] [flags]`
+```shell
+avalanche transaction sign [subnetName] [flags]
+```
 
 **Flags:**
 
@@ -460,7 +496,9 @@ If you'd like to import an existing key instead of generating one from scratch, 
 
 **Usage:**
 
-`avalanche key create [keyName] [flags]`
+```shell
+avalanche key create [keyName] [flags]
+```
 
 **Flags:**
 
@@ -478,7 +516,10 @@ To delete a key, provide the `keyName`. The command prompts for confirmation
 before deleting the key. To skip the confirmation, provide the `--force` flag.
 
 **Usage:**
-`avalanche key delete [keyName] [flags]`
+
+```shell
+avalanche key delete [keyName] [flags]
+```
 
 **Flags:**
 
@@ -513,7 +554,9 @@ keys or for the ledger addresses associated to certain indices.
 
 **Usage:**
 
-`avalanche key list [flags]`
+```shell
+avalanche key list [flags]
+```
 
 **Flags:**
 
