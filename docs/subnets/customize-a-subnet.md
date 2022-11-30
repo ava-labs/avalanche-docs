@@ -524,7 +524,7 @@ Fee reward mechanism can be configured with this stateful precompile contract. C
 
 `adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and `Enabled` are both eligible to change the current fee mechanism.
 
-The precompile implements the `RewardManager` interface which includes the `AllowList` interface. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `RewardManager` interface which includes the `AllowList` interface. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact directly in Remix):
 
