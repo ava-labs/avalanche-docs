@@ -431,7 +431,7 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 }
 ```
 
-The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
