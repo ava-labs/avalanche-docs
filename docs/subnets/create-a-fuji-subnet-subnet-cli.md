@@ -2,7 +2,7 @@
 
 :::note
 
-For the latest tool to deploy a Subnet on Fuji, please refer to [this article](./create-a-fuji-subnet.md). This artical is still applicable for Mainnet deploy with a Ledger.
+For the latest tool to deploy a Subnet on Fuji, please refer to [this article](./create-a-fuji-subnet.md). This article is still applicable for Mainnet deploy with a Ledger.
 
 :::
 
@@ -97,7 +97,7 @@ Check [here](./subnet-cli.md#subnet-cli-create-key) for more info.
 
 ## Virtual Machine
 
-Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../overview/getting-started/avalanche-platform.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
+Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
 That is, the VM defines the behavior of the blockchain.
 
 [Subnet-evm](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-evm is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
@@ -331,4 +331,4 @@ You can inspect your confirmed transaction.
 
 ### Other Tools
 
-You can use subnet-evm just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use subnet-evm just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.

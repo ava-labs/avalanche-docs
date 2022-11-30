@@ -6,7 +6,9 @@ Description: How to customize a Subnet by utilizing Genesis, Precompile and Bloc
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
-And a Subnet created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be further customized by utilizing one or more of the following methods:
+A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](../nodes/maintain/chain-config-flags.md) for detailed explanation.
+
+A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
 
 - [Genesis](#genesis)
 - [Precompile](#precompiles)
@@ -27,7 +29,7 @@ See [here](../nodes/maintain/subnet-configs.md) for more info.
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and semantics of its genesis data.
 
-The default genesis Subnet EVM provided below has some well defined parameters:
+The default genesis Subnet-EVM provided below has some well defined parameters:
 
 ```json
 {
@@ -78,6 +80,8 @@ The default genesis Subnet EVM provided below has some well defined parameters:
 
 `chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/) to avoid ID collision, reserve and publish your chain ID properly.
 
+You can use `eth_getChainConfig` RPC call to get the current chain config. See [here](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) for more info.
+
 #### Hardforks
 
 `homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` are hardfork activation times. Changing these may cause issues, so treat them carefully.
@@ -123,7 +127,7 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 
 ### Examples
 
-Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
+Another example of a genesis file can be found in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 Here are a few examples on how a genesis file is used:
 
@@ -205,70 +209,105 @@ If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn'
 
 ## Precompiles
 
-Subnet EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+
+### AllowList Interface
+
+The `AllowList` interface is used by precompiles to check if a given address is allowed to use a precompiled contract. `AllowList` consist of two main roles, `Admin` and `Enabled`. `Admin` can add/remove other `Admin` and `Enabled` addresses. `Enabled` addresses can use the precompiled contract, but cannot modify other roles.
+
+`AllowList` adds `adminAddresses` and `enabledAddresses` fields to precompile contract configurations. For instance fee manager precompile contract configuration looks like this:
+
+```json
+{
+  "feeManagerConfig": {
+    "blockTimestamp": 0,
+    "adminAddresses": [<list of addresses>],
+    "enabledAddresses": [<list of addresses>]
+  }
+}
+```
+
+`AllowList` configuration affects only the related precompile. For instance, the admin address in `feeManagerConfig` does not affect admin addresses in other activated precompiles.
+
+The `AllowList` solidity interface is defined as follows:
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IAllowList {
+  // Set [addr] to have the admin role over the precompile
+  function setAdmin(address addr) external;
+
+  // Set [addr] to be enabled on the precompile contract.
+  function setEnabled(address addr) external;
+
+  // Set [addr] to have no role the precompile contract.
+  function setNone(address addr) external;
+
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
+}
+```
+
+`readAllowList(addr)` will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
+
+_Note: `AllowList` is not an actual contract but just an interface. It's not callable by itself. This is used by other precompiles. Check other precompile sections to see how this works._
 
 ### Restricting Smart Contract Deployers
 
 If you'd like to restrict who has the ability to deploy contracts on your
-subnet, you can provide an `AllowList` configuration in your genesis file:
+subnet, you can provide an `AllowList` configuration in your genesis or upgrade file:
 
 ```json
 {
-  "config": {
-    "contractDeployerAllowListConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
-    }
+  "contractDeployerAllowListConfig": {
+    "blockTimestamp": 0,
+    "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
 ```
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admins` or to add
-`Deployers`. Both `Admins` and `Deployers` can deploy contracts. To provide
+`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admin` or to add
+`Enabled` addresses. Both `Admin` and `Enabled` can deploy contracts. To provide
 a great UX with factory contracts, the `tx.Origin` is checked for being a valid
 deployer instead of the caller of `CREATE`. This means that factory contracts will still be
 able to create new contracts as long as the sender of the original transaction is an allow
 listed deployer.
 
-The `Stateful Precompile` powering the `ContractDeployerAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `ContractDeployerAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000000` (you can load this interface and interact directly in Remix):
 
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
+- If you attempt to add a `Enabled` and you are not an `Admin`, you will see
+  something like:
+  ![admin fail](/img/admin_fail.png)
 
-// SPDX-License-Identifier: MIT
+- If you attempt to deploy a contract but you are not an `Admin` not
+  a `Enabled`, you will see something like:
+  ![deploy fail](/img/deploy_fail.png)
 
-pragma solidity >=0.8.0;
+- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
 
-interface AllowListInterface {
-    // Set [addr] to have the admin role over the allow list
-    function setAdmin(address addr) external;
+:::warning
 
-    // Set [addr] to be enabled on the allow list
-    function setEnabled(address addr) external;
+If you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
 
-    // Set [addr] to have no role over the allow list
-    function setNone(address addr) external;
+:::
 
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
+#### Initial Configuration
+
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the deployer list. With this, you can define a list of addresses that are allowed to deploy contracts. Since there will be no admin address to manage the deployer list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+
+```json
+{
+  "contractDeployerAllowListConfig": {
+    "blockTimestamp": 0,
+    "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+  }
 }
 ```
 
-If you attempt to add a `Deployer` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
-
-If you attempt to deploy a contract but you are not an `Admin` not
-a `Deployer`, you will see something like:
-![deploy fail](/img/deploy_fail.png)
-
-The allow list has three roles: `None`, `Deployer`, and `Admin`.
-
-If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Deployer`, and `Admin` respectively.
-
-WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Restricting Who Can Submit Transactions
 
@@ -286,46 +325,40 @@ Similar to restricting contract deployers, this precompile restricts which addre
 ```
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables them to add other `Admins` or to add
-`Allowed`. Both `Admins` and `Allowed` can submit transactions to the chain.
+`Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
+`Allowed`. Both `Admins` and `Enabled` can submit transactions to the chain.
 
-The `Stateful Precompile` powering the `TxAllowList` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `TxAllowList` adheres to the [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000002` (you can load this interface and interact directly in Remix):
 
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
+- If you attempt to add an `Enabled` and you are not an `Admin`, you will see
+  something like:
+  ![admin fail](/img/admin_fail.png)
 
-// SPDX-License-Identifier: MIT
+- If you attempt to submit a transaction but you are not an `Admin` or not
+  `Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
 
-pragma solidity >=0.8.0;
+- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
 
-interface AllowListInterface {
-    // Set [addr] to have the admin role over the allow list
-    function setAdmin(address addr) external;
+:::warning
 
-    // Set [addr] to be enabled on the allow list
-    function setEnabled(address addr) external;
+If you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
 
-    // Set [addr] to have no role over the allow list
-    function setNone(address addr) external;
+:::
 
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
+#### Initial Configuration
+
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to manage the tx allow list. With this, you can define a list of addresses that are allowed to submit transactions. Since there will be no admin address to manage the tx list, it can only be modified through a network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses` field in your genesis or upgrade file:
+
+```json
+{
+  "txAllowListConfig": {
+    "blockTimestamp": 0,
+    "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+  }
 }
 ```
 
-If you attempt to add an `Allowed` and you are not an `Admin`, you will see
-something like:
-![admin fail](/img/admin_fail.png)
-
-If you attempt to submit a transaction but you are not an `Admin` or not
-`Allowed`, you will see something like: `cannot issue transaction from non-allow listed address`
-
-The allow list has three roles: `None`, `Allowed`, and `Admin`.
-
-If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
-
-WARNING: if you remove all of the admins from the allow list, it will no longer be possible to update the allow list without modifying the subnet-evm to schedule a network upgrade.
+This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Minting Native Coins
 
@@ -342,37 +375,44 @@ You can mint native(gas) coins with a precompiled contract. In order to activate
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Minter` accounts. `Minters` and `Admins` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses same methods as in `ContractDeployerAllowList`.
+`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and `Enabled` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses same methods as in `ContractDeployerAllowList`.
 
-The `Stateful Precompile` powering the `ContractNativeMinter` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000001` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `ContractNativeMinter` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000001` (you can load this interface and interact directly in Remix):
 
 ```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
-// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
 
-pragma solidity >=0.8.0;
-
-interface NativeMinterInterface {
-    // Set [addr] to have the admin role over the minter list
-    function setAdmin(address addr) external;
-
-    // Set [addr] to be enabled on the minter list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the minter list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-
-    // Mint [amount] number of native coins and send to [addr]
-    function mintNativeCoin(address addr, uint256 amount) external;
+interface INativeMinter is IAllowList {
+  // Mint [amount] number of native coins and send to [addr]
+  function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
 
-_Note: Both `ContractDeployerAllowList` and `ContractNativeMinter` can be used together._
+`mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the amount in minimum denomination of native coins (10^18). For example, if you want to mint 1 native coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
+
+Note that this uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
+
+#### Initial Configuration
+
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to mint native coins. With this, you can define a list of addresses that will receive an initial mint of the native coin when this precompile activates. This can be useful for networks that require a one-time mint without specifying any admin addresses. To use initial configuration, you need to specify a map of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade file:
+
+```json
+{
+  "contractNativeMinterConfig": {
+    "blockTimestamp": 0,
+    "initialMint": {
+      "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": "1000000000000000000",
+      "0x10037Fb06Ec4aB8c870a92AE3f00cD58e5D484b3": "0xde0b6b3a7640000"
+    }
+  }
+}
+```
+
+In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
 ### Configuring Dynamic Fees
 
@@ -389,9 +429,9 @@ You can configure the parameters of the dynamic fee algorithm on chain using the
 }
 ```
 
-The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#restricting-who-can-submit-transactions) above.
+The FeeConfigManager implements the FeeManager interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. To see an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
 
-The `Stateful Precompile` powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
+The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix):
 
 ```solidity
 //SPDX-License-Identifier: MIT
@@ -431,13 +471,41 @@ interface IFeeManager is IAllowList {
 }
 ```
 
+FeeConfigManager precompiles uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
+
 In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters)
 
-### Examples
+You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](../apis/avalanchego/apis/subnet-evm.md#eth_feeconfig).
+
+#### Initial Configuration
+
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to define your fee structure to take effect at the activation. To use the initial configuration, you need to specify the fee config in `initialFeeConfig` field in your genesis or upgrade file:
+
+```json
+{
+  "feeManagerConfig": {
+    "blockTimestamp": 0,
+    "initialFeeConfig": {
+      "gasLimit": 20000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "blockGasCostStep": 500000
+    }
+  }
+}
+```
+
+This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+
+## Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
 
@@ -453,15 +521,17 @@ Any mistakes in configuring network upgrades or coordinating them on validators 
 
 In addition to specifying the configuration for each of the above precompiles in the genesis chain config, they can be individually enabled or disabled at a given timestamp as a network upgrade. Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled at a later timestamp with a new configuration if desired.
 
-These upgrades can be specified in a file named `upgrade.json` placed in the same directory as [`config.json`](#chain-configs) using the following format:
+These upgrades must be specified in a file named `upgrade.json` placed in the same directory where [`config.json`](#chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`. For example, `WAGMI Subnet` upgrade should be placed in `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
+
+The content of the `upgrade.json` should be formatted according to the following:
 
 ```json
 {
   "precompileUpgrades": [
     {
-      "<precompileName>": {
-        "blockTimestamp": 1668950000, // unix timestamp precompile should activate at
-        "precompileOption": "value" // precompile specific configuration options, eg. "adminAddresses"
+      "[PRECOMPILE_NAME]": {
+        "blockTimestamp": "[ACTIVATION_TIMESTAMP]", // unix timestamp precompile should activate at
+        "[PARAMETER]": "[VALUE]" // precompile specific configuration options, eg. "adminAddresses"
       }
     }
   ]
@@ -475,7 +545,7 @@ To disable a precompile, the following format should be used:
   "precompileUpgrades": [
     {
       "<precompileName>": {
-        "blockTimestamp": 1668950000, // unix timestamp the precompile should deactivate at
+        "blockTimestamp": "[DEACTIVATION_TIMESTAMP]", // unix timestamp the precompile should deactivate at
         "disable": true
       }
     }
@@ -528,11 +598,85 @@ This example enables the `feeManagerConfig` at the first block with timestamp >=
 
 When a precompile disable takes effect (ie., after its `blockTimestamp` has passed), its storage will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
 
-## Chain Configs
+After you have created the `upgrade.json` and placed it in the chain config directory, you need to restart the node for the upgrade file to be loaded (again, make sure you don't restart all Subnet validators at once!). On node restart, it will print out the configuration of the chain, where you can double-check that the upgrade has loaded correctly. In our example:
+
+```text
+INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
+github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration
+config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0
+Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig:
+{\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\
+“:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\
+“:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\
+“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\"precompileUpgrades\":[{\"feeManagerConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668950000}},{\"txAllowListConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668960000}},{\"feeManagerConfig\":{\"adminAddresses\":null,\"enabledAddresses\":null,\"blockTimestamp\":1668970000,\"disable\":true}}]}, Engine: Dummy Consensus Engine}"”
+```
+
+Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the activated precompiles at a timestamp with the [`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactivateprecompilesat) RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#eth_getchainconfig) RPC method will also return the configured upgrades in the response.
+
+That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!
+
+### Initial Precompile Configurations
+
+Precompiles can be managed by some privileged addresses to change their configurations and activate their effects. For example, the `feeManagerConfig` precompile can have `adminAddresses` which can change the fee structure of the network.
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+      }
+    }
+  ]
+}
+```
+
+In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change the fee structure of the network. The admin address has to call the precompile in order to activate its effect; i.e. it needs to send a transaction with a new fee config to perform the update. This is a very powerful feature, but it also gives a large amount of power to the admin address. If the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
+
+With the initial configurations, precompiles can immediately activate their effect on the activation timestamp. With this way admin addresses can be omitted from the precompile configuration. For example, the `feeManagerConfig` precompile can have `initialFeeConfig` to setup the fee configuration on the activation:
+
+```json
+{
+  "precompileUpgrades": [
+    {
+      "feeManagerConfig": {
+        "blockTimestamp": 1668950000,
+        "initialFeeConfig": {
+          "gasLimit": 20000000,
+          "targetBlockRate": 2,
+          "minBaseFee": 1000000000,
+          "targetGas": 100000000,
+          "baseFeeChangeDenominator": 48,
+          "minBlockGasCost": 0,
+          "maxBlockGasCost": 10000000,
+          "blockGasCostStep": 500000
+        }
+      }
+    }
+  ]
+}
+```
+
+Notice that there is no `adminAddresses` field in the configuration. This means that there will be no admin addresses to manage the fee structure with this precompile. The precompile will simply update the fee configuration to the specified fee config when it activates on the `blockTimestamp` `1668950000`.
+
+:::note
+It's still possible to add `adminAddresses` or `enabledAddresses` along with these initial configurations. In this case, the precompile will be activated with the initial configuration, and admin/enabled addresses can access to the precompiled contract normally.
+:::
+
+:::info
+
+If you want to change the precompile initial configuration, you will need to first disable it then activate the precompile again with the new configuration.
+
+:::
+
+See every precompile initial configuration in their relevant `Initial Configuration` sections under [Precompiles](#precompiles).
+
+## AvalancheGo Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain of Subnets can have its own custom configuration. If a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-evm, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
 ### Priority Regossip
 

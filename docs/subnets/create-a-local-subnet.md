@@ -104,7 +104,7 @@ If you don't provide any arguments, the Subnet creation wizard will walk you thr
 
 Example:
 
-Command `avalanche subnet create firstsubet` walks through following questions:
+Command `avalanche subnet create firstsubnet` walks through following questions:
 
 - Choose a VM: default to SubnetEVM
 - Pick a chain ID
@@ -430,7 +430,7 @@ Here is a screenshot of Metamask when everything is set correctly:
 
 ## Smart Contract
 
-You can use this newly created Subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use this newly created Subnet just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 
 For example: to connect `Hardhat` to the local network that deployed with the Avalanche-CLI, we would create a network setting in `hardhat.config.ts` that looks similar to this:
 

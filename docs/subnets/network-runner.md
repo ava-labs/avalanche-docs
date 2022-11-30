@@ -4,7 +4,7 @@ The Avalanche Network Runner **(ANR)** allows a user to define, create and inter
 
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on the functionality of a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
 
-In the context of avalanche, **[subnets](../subnets/README.md)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
+In the context of avalanche, **[Subnets](../subnets/README.md)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
 
 The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of avalanchego nodes with support for custom node, Subnet and network configurations, allowing to locally test code before deploying to mainnet or even public testnets like `fuji`.
 
@@ -12,26 +12,14 @@ The ANR aims at being a tool for developers and system integrators alike, offeri
 
 ## Installation
 
-The Avalanche Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
-
-That repository's README details the tool.
-
-Clone the repository with:
-
 ```bash
-git clone https://github.com/ava-labs/avalanche-network-runner.git
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s -- -b $GOPATH/bin
+
+cd $GOPATH/bin
+export PATH=$PWD:$PATH
 ```
 
-There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases).
-
-To build and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
-
-```bash
-cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
-go install -v ./cmd/avalanche-network-runner
-```
-
-`avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
+`avalanche-network-runner` will be installed into `$GOPATH/bin`. 
 
 Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.
 
@@ -107,7 +95,7 @@ avalanche-network-runner ping \
 #### start a new Avalanche network with five nodes (a cluster)
 
 ```bash
-curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO"}'
+curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5}'
 ```
 
 or
@@ -124,13 +112,23 @@ Additional optional parameters which can be passed to the start command:
 
 ```bash
   --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
-	--custom-vms '{"subnetevm":"/tmp/subnet-evm.genesis.json"}'
-	--global-node-config '{"index-enabled":false, "api-admin-enabled":true,"network-peer-list-gossip-frequency":"300ms"}'
+  --blockchain-specs '[{"vm_name":"subnetevm","genesis":"/tmp/subnet-evm.genesis.json"}]' \
+	--global-node-config '{"index-enabled":false, "api-admin-enabled":true,"network-peer-list-gossip-frequency":"300ms"}' \
 	--custom-node-configs" '{"node1":{"log-level":"debug","api-admin-enabled":false},"node2":{...},...}'
 ```
 
-`--plugin-dir` and `--custom-vms` are parameters relevant to Subnet operation.
-See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
+`--plugin-dir` and `--blockchain-specs` are parameters relevant to Subnet operation.
+
+`--plugin-dir` can be used to indicate to ANR where it will find plugin binaries for your own VMs. It is optional. If not set, ANR will assume a default location which is relative to the `avalanchego-path` given.
+
+`--blockchain-specs` specifies details about how to create your own blockchains. It takes a JSON array for each blockchain, with the following possible fields:
+
+```
+   "vm_name": human readable name for the VM
+   "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
+```
+
+See the [avalanche-cli documentation](../subnets/create-a-local-subnet.md) for details about how to create and run Subnets with our _avalanche-cli_ tool.
 
 The network-runner supports avalanchego node configuration at different levels.
 
@@ -223,11 +221,10 @@ curl -X POST -k http://localhost:8081/v1/control/removenode -d '{"name":"node5"}
 or
 
 ```bash
-avalanche-network-runner control remove-node \
+avalanche-network-runner control remove-node node5 \
 --request-timeout=3m \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
---node-name node5
 ```
 
 #### restart a node
@@ -244,17 +241,16 @@ AVALANCHEGO_EXEC_PATH="avalanchego"
 Note that you can restart the node with a different binary by providing
 
 ```bash
-curl -X POST -k http://localhost:8081/v1/control/restartnode -d '{"name":"node1","execPath":"'${AVALANCHEGO_EXEC_PATH}'","logLevel":"INFO"}'
+curl -X POST -k http://localhost:8081/v1/control/restartnode -d '{"name":"node1","execPath":"'${AVALANCHEGO_EXEC_PATH}'"}'
 ```
 
 or
 
 ```bash
-avalanche-network-runner control restart-node \
+avalanche-network-runner control restart-node node1 \
 --request-timeout=3m \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
---node-name node1 \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH}
 ```
 
@@ -270,25 +266,22 @@ AVALANCHEGO_EXEC_PATH="avalanchego"
 Note that you can add the new node with a different binary by providing
 
 ```bash
-curl -X POST -k http://localhost:8081/v1/control/addnode -d '{"name":"node99","execPath":"'${AVALANCHEGO_EXEC_PATH}'","logLevel":"INFO"}'
+curl -X POST -k http://localhost:8081/v1/control/addnode -d '{"name":"node99","execPath":"'${AVALANCHEGO_EXEC_PATH}'"}'
 ```
 
 or
 
 ```bash
-avalanche-network-runner control add-node \
+avalanche-network-runner control add-node node99 \
 --request-timeout=3m \
---log-level debug \
 --endpoint="0.0.0.0:8080" \
---node-name node99 \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH}
 ```
 
-It's also possible to provide custom parameters, similar to starting the network:
+It's also possible to provide individual node config parameters:
 
 ```bash
 	--node-config '{"index-enabled":false, "api-admin-enabled":true,"network-peer-list-gossip-frequency":"300ms"}'
-	--custom-vms '{"subnetevm":"/tmp/subnet-evm.genesis.json"}'
 ```
 
 `--node-config` allows to specify specific avalanchego config parameters to the new node.
@@ -297,9 +290,6 @@ See [here](../nodes/maintain/avalanchego-config-flags.md) for the reference of s
 **Note**: The following parameters will be _ignored_ if set in `--node-config`, because the network runner needs to set its own in order to function properly:
 `--log-dir`
 `--db-dir`
-
-`--custom-vms` allows to configure custom VMs supported by this node.
-See the [Subnet section](#network-runner-rpc-server-subnet-evm-example) for details about how to run Subnets.
 
 **Note**: The following Subnet parameters will be set from the global network configuration to this node:
 `--whitelisted-subnets`
@@ -323,19 +313,19 @@ avalanche-network-runner control stop \
 
 ## Subnets
 
-ANR can be a great helper tool working with Subnets. We recommend using it to develop and test new Subnets before deploying them in public networks.
-For general Subnet documentation, please refer to [subnets](../subnets).
+For general Subnet documentation, please refer to [Subnets](../subnets).
+ANR can be a great helper working with Subnets, and can be used to develop and test new Subnets before deploying them in public networks. However, for a smooth and guided experience, we recommend using [avalanche-cli](../subnets/create-a-local-subnet.md)
 These examples expect a basic understanding of what Subnets are and their usage.
 
 ### RPC server `subnet-evm` example
 
-The Subnet EVM is a simplified version of Coreth VM (C-Chain).
+The Subnet-EVM is a simplified version of Coreth VM (C-Chain).
 This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality.
 It can be used to create your own fully Ethereum-compatible Subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [subnet-evm](https://github.com/ava-labs/subnet-evm) for further information.
 
 ### subnet-cli
 
-**At this moment the ANR requires an additional tool, [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. Generally, getting a Subnet up and running requires a series of manual steps. We are working hard to make this experience smoother and allow for transparent Subnet definition and creation with improved tooling. Please stand-by.** Suggestions are highly appreciated!
+**ANR requires an additional tool, such as [`subnet-cli`](../subnets/subnet-cli.md), to be able to create the necessary configuration to deploy a Subnet in a local custom test-network. For a smoother experience, we recommend using [avalanche-cli](../subnets/create-a-local-subnet.md) though, as it hides all this complexity away!**
 
 Install and start the RPC server just as in [start the server](#start-the-server)
 Make sure the server is up:
@@ -456,7 +446,7 @@ Now start the nodes with custom VM support.
 For this, we need to point set the `custom-vms` parameter (a map) to contain the genesis and the vm name:
 
 ```bash
-curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO","pluginDir":"'${AVALANCHEGO_PLUGIN_PATH}'","customVms":{"subnetevm":"/tmp/subnet-evm.genesis.json"}}'
+curl -X POST -k http://localhost:8081/v1/control/start -d '{"execPath":"'${AVALANCHEGO_EXEC_PATH}'","numNodes":5,"logLevel":"INFO","pluginDir":"'${AVALANCHEGO_PLUGIN_PATH}'","blockchainSpecs":{"vm_name":"subnetevm","genesis":"/tmp/subnet-evm.genesis.json"}}'
 ```
 
 or
@@ -466,8 +456,8 @@ avalanche-network-runner control start \
 --log-level debug \
 --endpoint="0.0.0.0:8080" \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
+--blockchain-specs '[{"vm_name":"subnetevm","genesis":"/tmp/subnet-evm.genesis.json"}]' \
 --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
---custom-vms '{"subnetevm":"/tmp/subnet-evm.genesis.json"}'
 ```
 
 Check it all up:
@@ -577,7 +567,7 @@ avalanche-network-runner control start \
 --endpoint="0.0.0.0:8080" \
 --avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
 --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
---custom-vms '{"blobvm":"/tmp/blobvm.genesis.json"}'
+--blockchain-specs '[{"vm_name":"blobvm","genesis":"/tmp/blobvm.genesis.json"}]'
 ```
 
 Check it all up:

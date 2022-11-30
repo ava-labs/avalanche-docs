@@ -14,7 +14,7 @@ The [Avalanche ecosystem](https://ecosystem.avax.network/) is a fast-growing net
 
 - Watch our videos on [Youtube](https://youtube.com/avalancheavax).
 
-- Our code are located on [GitHub](https://github.com/ava-labs).
+- Our code is located on [GitHub](https://github.com/ava-labs).
 
 - Our support can be reached [here](https://support.avax.network/en/).
 

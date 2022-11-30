@@ -39,7 +39,6 @@ If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/node
     "internal-blockchain",
     "internal-transaction",
     "internal-tx-pool",
-    "internal-debug",
     "internal-account",
     "internal-personal",
     "debug-tracer",
@@ -47,7 +46,6 @@ If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/node
     "eth",
     "eth-filter",
     "admin",
-    "debug",
     "net"
   ]
 }

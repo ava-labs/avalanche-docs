@@ -159,6 +159,10 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/ava-labs/avalanche-docs',
+              },
+              {
+                label: 'Terms of Use',
+                href: 'https://www.avax.network/terms-of-use',
               }
             ],
           },
@@ -171,6 +175,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['rust'],
       },
       algolia: {
         appId: 'UAFD8IBIF7',

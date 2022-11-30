@@ -1,4 +1,4 @@
-# Deploying Subnets on Production Infrastructure
+# Deploy Subnets on Production Infrastructure
 
 ## Introduction
 
@@ -20,8 +20,8 @@ For running AvalancheGo as a validator on the Primary Network the recommended co
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1TB with at least 3000 IOPS
-- OS: Ubuntu 18.04/20.04
+- Storage: 1 TiB with at least 3000 IOPS
+- OS: Ubuntu 20.04
 - Network: Reliable IPv4 or IPv6 network connection, with an open public port
 
 That is the configuration sufficient for running a Primary Network node. Any resource requirements for your Subnet come on top of this, so you should not go below this configuration, but may need to step up the specification if you expect your Subnet to handle a significant amount of transactions.
