@@ -1,12 +1,18 @@
 # Deploying Cross-Chain EVM <-> EVM Bridge
 
+:::warning
+
+This tutorial is for demo purpose on how to build a cross-chain bridge. It is not for production use. You must take the full responsibility to ensure your bridge's security.
+
+:::
+
 ## Introduction
 
 In this tutorial, we will be building a bridge between **[WAGMI](./wagmi.md)** and **[Fuji](../quickstart/fuji-workflow.md)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 
 The wrapped version of a native coin is its pegged ERC20 representation. Wrapping it with the ERC20 standard makes certain processes like delegated transactions much easier. You can easily get wrapped tokens by sending the native coin to the wrapped token contract address.
 
-> WAGMI is an independent EVM-based test chain deployed on a custom subnet on the Avalanche network.
+> WAGMI is an independent EVM-based test chain deployed on a custom Subnet on the Avalanche network.
 
 We will be using **Chainsafe**'s bridge repository, to easily set up a robust and secure bridge.
 

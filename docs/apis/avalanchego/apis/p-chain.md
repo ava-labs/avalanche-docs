@@ -8,7 +8,7 @@ This API allows clients to interact with the [P-Chain](../../../overview/getting
 
 ## Endpoint
 
-```
+```sh
 /ext/bc/P
 ```
 
@@ -19,6 +19,10 @@ This API uses the `json 2.0` RPC format.
 ## Methods
 
 ### platform.addDelegator
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Add a delegator to the Primary Network.
 
@@ -103,11 +107,15 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
 The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward (if any.) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
 
-The validation period must be between 2 weeks and 1 year.
+The validation period must be between 2 weeks and 1 year for the Mainnet, and 24 hours and 1 year for Fuji Testnet.
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
@@ -189,7 +197,11 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
+Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this Subnet.
 
 #### **Signature**
 
@@ -213,11 +225,11 @@ platform.addSubnetValidator(
 }
 ```
 
-- `nodeID` is the node ID of the validator being added to the subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
-- `subnetID` is the ID of the subnet we’re adding a validator to.
-- `startTime` is the unix time when the validator starts validating the subnet. It must be at or after the time that the validator starts validating the Primary Network
-- `endTime` is the unix time when the validator stops validating the subnet. It must be at or before the time that the validator stops validating the Primary Network.
-- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
+- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
+- `subnetID` is the ID of the Subnet we’re adding a validator to.
+- `startTime` is the unix time when the validator starts validating the Subnet. It must be at or after the time that the validator starts validating the Primary Network
+- `endTime` is the unix time when the validator stops validating the Subnet. It must be at or before the time that the validator stops validating the Primary Network.
+- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the Subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 - `from` are the fund addresses that the user wants to use to pay for this operation. If omitted, use any of user's addresses as needed.
 - `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses) will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
@@ -260,6 +272,10 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Create a new address controlled by the given user.
 
 #### **Signature**
@@ -299,6 +315,10 @@ curl -X POST --data '{
 
 ### platform.createBlockchain
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
 
 #### **Signature**
@@ -327,7 +347,7 @@ platform.createBlockchain(
 - `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
 - `name` is a human-readable name for the new blockchain. Not necessarily unique.
 - `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-- `encoding` specifies the format to use for `genesisData`. Can be either "cb58" or "hex". Defaults to "cb58". Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
+- `encoding` specifies the format to use for `genesisData`. Can only be `hex` when a value is provided. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
 - `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
@@ -346,8 +366,8 @@ curl -X POST --data '{
         "vmID":"timestamp",
         "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
-        "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
-        "encoding": "cb58",
+        "genesisData": "0x07000000000000000000000000000000000000000000000000000000000000000016943a",
+        "encoding": "hex",
         "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
@@ -372,9 +392,13 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-Create a new subnet.
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
-The subnet’s ID is the same as this transaction’s ID.
+Create a new Subnet.
+
+The Subnet’s ID is the same as this transaction’s ID.
 
 #### **Signature**
 
@@ -395,7 +419,7 @@ platform.createSubnet(
 }
 ```
 
-- In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
+- In order to add a validator to this Subnet, `threshold` signatures are required from the addresses in `controlKeys`
 - `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
@@ -498,6 +522,10 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Get the private key that controls a given address.
 The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
 
@@ -550,12 +578,12 @@ Get the balance of AVAX controlled by a given address.
 
 ```sh
 platform.getBalance({
-    address:string
+    addresses: []string
 }) -> {
-    balance: string,
-    unlocked: string,
-    lockedStakeable: string,
-    lockedNotStakeable: string,
+    balances: string -> int,
+    unlockeds: string -> int,
+    lockedStakeables: string -> int,
+    lockedNotStakeables: string -> int,
     utxoIDs: []{
         txID: string,
         outputIndex: int
@@ -563,11 +591,11 @@ platform.getBalance({
 }
 ```
 
-- `address` is the address to get the balance of.
-- `balance` is the total balance, in nAVAX.
-- `unlocked` is the unlocked balance, in nAVAX.
-- `lockedStakeable` is the locked stakeable balance, in nAVAX.
-- `lockedNotStakeable` is the locked and not stakeable balance, in nAVAX.
+- `addresses` are the addresses to get the balance of.
+- `balances` is a map from assetID to the total balance.
+- `unlockeds` is a map from assetID to the unlocked balance.
+- `lockedStakeables` is a map from assetID to the locked stakeable balance.
+- `lockedNotStakeables` is a map from assetID to the locked and not stakeable balance.
 - `utxoIDs` are the IDs of the UTXOs that reference `address`.
 
 #### **Example Call**
@@ -589,10 +617,18 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "balance": "20000000000000000",
-    "unlocked": "10000000000000000",
-    "lockedStakeable": "10000000000000000",
-    "lockedNotStakeable": "0",
+    "balances": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000"
+    },
+    "unlockeds": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
+    },
+    "lockedStakeables": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
+    },
+    "lockedNotStakeables": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0"
+    },
     "utxoIDs": [
       {
         "txID": "11111111111111111111111111111111LpoYY",
@@ -627,41 +663,12 @@ platform.getBlock({
 **Request**
 
 - `blockID` is the block ID. It should be in cb58 format.
-- `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
 **Response**
 
 - `block` is the transaction encoded to `encoding`.
 - `encoding` is the `encoding`.
-
-#### CB58 Example
-
-##### **Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getBlock",
-    "params": {
-        "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
-        "encoding": "cb58"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-##### **Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "block": "11111BwoDGdFYQfsbfJ35VKjMP6z5dtggBJqFay7KN33GdqpU8ZFAvaSVegwfADYFipsCpTft27TA8h99krBjsMvFZ5TgFYrQCNN2DkyXQSVuGadYh8UhZ6Ptp3HwVYvXWHaDwjt3mEs9fkoS5JiTDfrrp3w6ws2LTksv3LGtb66iWjWgnHU46WgY2wVqnwrit2x7mYGTgJpXeziLCY66Hnnu1jAy5hYhK2Ek37XhvBcd1UeTcPAFsEtFdLr8Ku19K2dYYNvvuz7YnJjuqxUjtNoC61UcKrtTyJCqRuyA85NRFD7ZYVKwSd13CevyZWuBiBWZkukUpLhJwTcWnFnzbntKDCMdip4kAtQueDkjYnrXu2AWS3SXiJTSmZm55iwn4iE9sqBs6Rj1CnrakGi7sCcXg1UyYu5scmb5RVDKDtZPNLr5Vb6oTWaM4egHfwgT98koZ28rSw8otJfv4q1BH9vrS4N7pUJxh9grnksG9TQDtjBjD9tmhxC8iSLYTwGNxitAqjZd7SGE9",
-    "encoding": "cb58"
-  },
-  "id": 1
-}
-```
 
 #### Hex Example
 
@@ -909,15 +916,17 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is an upper bound because it does not account for burnt tokens, including transaction fees.
 
 #### **Signature**
 
 ```sh
-platform.getCurrentSupply() -> {supply: int}
+platform.getCurrentSupply({
+    subnetID: string // optional
+}) -> {supply: int}
 ```
 
-- `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+- `supply` is an upper bound on the number of tokens that exist.
 
 #### **Example Call**
 
@@ -925,7 +934,9 @@ platform.getCurrentSupply() -> {supply: int}
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentSupply",
-    "params": {},
+    "params": {
+        "subnetID": "11111111111111111111111111111111LpoYY"
+    },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -962,7 +973,12 @@ platform.getCurrentValidators({
         stakeAmount: string,
         nodeID: string,
         weight: string,
-        rewardOwner: {
+        validationRewardOwner: {
+            locktime: string,
+            threshold: string,
+            addresses: string[]
+        },
+        delegationRewardOwner: {
             locktime: string,
             threshold: string,
             addresses: string[]
@@ -971,6 +987,10 @@ platform.getCurrentValidators({
         delegationFee: string,
         uptime: string,
         connected: bool,
+        signer: {
+            publicKey: string,
+            proofOfPosession: string
+        },
         delegators: []{
             txID: string,
             startTime: string,
@@ -988,21 +1008,23 @@ platform.getCurrentValidators({
 }
 ```
 
-- `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 - `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  - `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Omitted if `subnetID` is not the Primary Network.
-  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not the Primary Network.
-  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not the Primary Network.
-  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not the Primary Network.
-  - `connected` is if the node is connected and tracks the subnet.
-  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not the Primary Network.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
+  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS Subnet.
+  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
+  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
+  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
+  - `connected` is if the node is connected and tracks the Subnet.
+  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
+  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
     - `endTime` is the Unix time when the delegator stops.
@@ -1035,7 +1057,12 @@ curl -X POST --data '{
         "endTime": "1602960455",
         "stakeAmount": "2000000000000",
         "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
-        "rewardOwner": {
+        "validationRewardOwner": {
+          "locktime": "0",
+          "threshold": "1",
+          "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
+        },
+        "delegationRewardOwner": {
           "locktime": "0",
           "threshold": "1",
           "addresses": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
@@ -1122,7 +1149,7 @@ platform.getMaxStakeAmount(
 }
 ```
 
-- `subnetID` is a Buffer or cb58 string representing subnet
+- `subnetID` is a Buffer or cb58 string representing Subnet
 - `nodeID` is a string representing ID of the node whose stake amount is required during the given duration
 - `startTime` is a big number denoting start time of the duration during which stake amount of the node is required.
 - `endTime` is a big number denoting end time of the duration during which stake amount of the node is required.
@@ -1157,12 +1184,14 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of tokens that can be delegated.
 
 #### **Signature**
 
 ```sh
-platform.getMinStake() ->
+platform.getMinStake({
+    subnetID: string // optional
+}) ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
@@ -1175,7 +1204,10 @@ platform.getMinStake() ->
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"platform.getMinStake"
+    "method" :"platform.getMinStake",
+    "params": {
+        "subnetID":"11111111111111111111111111111111LpoYY"
+    },
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
@@ -1211,6 +1243,10 @@ platform.getPendingValidators({
         nodeID: string,
         delegationFee: string,
         connected: bool,
+        signer: { 
+            publicKey: string,
+            proofOfPosession: string
+        },
         weight: string,
     },
     delegators: []{
@@ -1223,21 +1259,22 @@ platform.getPendingValidators({
 }
 ```
 
-- `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 - `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
-  - `connected` if the node is connected and tracks the subnet.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+  - `connected` if the node is connected and tracks the Subnet.
+  -  `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
   - `endTime` is the Unix time when the delegator stops.
-  - `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
+  - `stakeAmount` is the amount of tokens this delegator staked.
   - `nodeID` is the validating node’s node ID.
 
 #### **Example Call**
@@ -1302,7 +1339,7 @@ platform.getRewardUTXOs({
 - `txID` is the ID of the staking or delegating transaction
 - `numFetched` is the number of returned UTXOs
 - `utxos` is an array of encoded reward UTXOs
-- `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example Call**
 
@@ -1325,10 +1362,10 @@ curl -X POST --data '{
   "result": {
     "numFetched": "2",
     "utxos": [
-      "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
-      "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+      "0x0000a195046108a85e60f7a864bb567745a37f50c6af282103e47cc62f036cee404700000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c1f01765",
+      "0x0000ae8b1b94444eed8de9a81b1222f00f1b4133330add23d8ac288bffa98b85271100000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216473d042a"
     ],
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1336,7 +1373,7 @@ curl -X POST --data '{
 
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+Retrieve an assetID for a subnet’s staking asset.
 
 #### **Signature**
 
@@ -1348,7 +1385,7 @@ platform.getStakingAssetID({
 }
 ```
 
-- `subnetID` is the subnet whose assetID is requested.
+- `subnetID` is the Subnet whose assetID is requested.
 - `assetID` is the assetID for a subnet’s staking asset.
 
 #### **Example Call**
@@ -1383,9 +1420,9 @@ Get info about the Subnets.
 #### **Signature**
 
 ```sh
-platform.getSubnets(
-    {ids: []string}
-) ->
+platform.getSubnets({
+    ids: []string
+}) ->
 {
     subnets: []{
         id: string,
@@ -1395,9 +1432,9 @@ platform.getSubnets(
 }
 ```
 
-- `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
+- `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all Subnets.
 - `id` is the Subnet’s ID.
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be empty.
 
 See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1440,8 +1477,20 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```sh
-platform.getStake({addresses: []string}) -> {staked: int}
+platform.getStake({
+    addresses: []string
+}) ->
+{
+    stakeds: string -> int,
+    stakedOutputs:  []string,
+    encoding: string
+}
 ```
+
+- `addresses` are the addresses to get information about.
+- `stakeds` is a map from assetID to the amount staked by addresses provided.
+- `stakedOutputs` are the string representation of staked outputs.
+- `encoding` specifies the format for the returned outputs.
 
 #### **Example Call**
 
@@ -1451,8 +1500,7 @@ curl -X POST --data '{
     "method": "platform.getStake",
     "params": {
         "addresses": [
-            "P-everest1g3ea9z5kmkzwnxp8vr8rpjh6lqw4r0ufec460d",
-            "P-everest12un03rm579fewele99c4v53qnmymwu46dv3s5v"
+            "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
         ]
     },
     "id": 1
@@ -1466,7 +1514,13 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "staked": "5000000"
+    "stakeds": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
+    },
+    "stakedOutputs": [
+      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
+    ],
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1508,12 +1562,17 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+Get the total amount of tokens staked on the requested Subnet.
 
 #### **Signature**
 
 ```sh
-platform.getTotalStake(subnetID: string) -> {stake: int}
+platform.getTotalStake({
+    subnetID: string
+}) -> {
+    stake: int
+    weight: int
+}
 ```
 
 #### Primary Network Example
@@ -1524,7 +1583,9 @@ platform.getTotalStake(subnetID: string) -> {stake: int}
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTotalStake",
-    "params": {},
+    "params": {
+      "subnetID": "11111111111111111111111111111111LpoYY"
+    },
     "id": 1
 }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
@@ -1536,7 +1597,8 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "stake": "279825917679866811"
+    "stake": "279825917679866811",
+    "weight": "279825917679866811"
   },
   "id": 1
 }
@@ -1574,7 +1636,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58", "hex", or "json". Defaults to "cb58".
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "hex" or "json". Defaults to "hex".
 
 #### **Signature**
 
@@ -1585,35 +1647,6 @@ platform.getTx({
 }) -> {
     tx: string,
     encoding: string,
-}
-```
-
-#### CB58 Example
-
-##### **Example Call**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getTx",
-    "params": {
-        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
-        "encoding": "cb58"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-##### **Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "tx": "111117ukQs6mcsKobtCH2jrVemXbPL2SgZTxJ4Lg7zazMjo4Kyyo33YNwnwhUJToHRk7zmCFXbL6BieJWpLch9Aa8opKr7qJeWPjSWhriX9TQLBt5jxq9ijX9JB3dwNG7MtY5KXS6EWF3w3tHBL5GTfL36F2b1PJfcWQQoTgeQWoe8MJXM27LGjnkhTMEzuNpTyrEcranPgXwdy9nNVZiLGMyYpzXbnmV2JUkGZXap8Ye3faWBwNg1La4aCXFKZ7ADMSiQUgqWYDMGZkDEg3yXNifSsBiAvqeCTx8kKp4B5W1vsgf3Tko2XW6A3SrkNVFVmbqCNjPKPpKeoSPnAC5Wmrb9zTMSZqYG9F6E7myow4o7tubbeDU3FC6fSws5ytQAnFseKUUT94jBGFGDD9pAuXExFwdwgRRUUS228ai4AZMqEF7KW5J9FhFQCUxMyprLxdPEUrjw3jW",
-    "encoding": "cb58"
-  },
-  "id": 1
 }
 ```
 
@@ -1767,11 +1800,11 @@ platform.getUTXOs(
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 - When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 - When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-- `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
+Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
 ```sh
 curl -X POST --data '{
@@ -1779,9 +1812,9 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getUTXOs",
     "params" :{
-        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
         "limit":5,
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1794,17 +1827,17 @@ This gives response:
   "result": {
     "numFetched": "5",
     "utxos": [
-      "11PQ1sNw9tcXjVki7261souJnr1TPFrdVCu5JGZC7Shedq3a7xvnTXkBQ162qMYxoerMdwzCM2iM1wEQPwTxZbtkPASf2tWvddnsxPEYndVSxLv8PDFMwBGp6UoL35gd9MQW3UitpfmFsLnAUCSAZHWCgqft2iHKnKRQRz",
-      "11RCDVNLzFT8KmriEJN7W1in6vB2cPteTZHnwaQF6kt8B2UANfUkcroi8b8ZSEXJE74LzX1mmBvtU34K6VZPNAVxzF6KfEA8RbYT7xhraioTsHqxVr2DJhZHpR3wGWdjUnRrqSSeeKGE76HTiQQ8WXoABesvs8GkhVpXMK",
-      "11GxS4Kj2od4bocNWMQiQhcBEHsC3ZgBP6edTgYbGY7iiXgRVjPKQGkhX5zj4NC62ZdYR3sZAgp6nUc75RJKwcvBKm4MGjHvje7GvegYFCt4RmwRbFDDvbeMYusEnfVwvpYwQycXQdPFMe12z4SP4jXjnueernYbRtC4qL",
-      "11S1AL9rxocRf2NVzQkZ6bfaWxgCYch7Bp2mgzBT6f5ru3XEMiVZM6F8DufeaVvJZnvnHWtZqocoSRZPHT5GM6qqCmdbXuuqb44oqdSMRvLphzhircmMnUbNz4TjBxcChtks3ZiVFhdkCb7kBNLbBEmtuHcDxM7MkgPjHw",
-      "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
+      "0x0000a195046108a85e60f7a864bb567745a37f50c6af282103e47cc62f036cee404700000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c1f01765",
+      "0x0000ae8b1b94444eed8de9a81b1222f00f1b4133330add23d8ac288bffa98b85271100000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216473d042a",
+      "0x0000731ce04b1feefa9f4291d869adc30a33463f315491e164d89be7d6d2d7890cfc00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21600dd3047",
+      "0x0000b462030cc4734f24c0bc224cf0d16ee452ea6b67615517caffead123ab4fbf1500000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c71b387e",
+      "0x000054f6826c39bc957c0c6d44b70f961a994898999179cc32d21eb09c1908d7167b00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f2166290e79d"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1822,9 +1855,9 @@ curl -X POST --data '{
         "limit":5,
         "startIndex": {
             "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
-            "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
+            "utxo": "0x62fc816bb209857923770c286192ab1f9e3f11e4a7d4ba0943111c3bbfeb9e4a5ea72fae"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1837,16 +1870,16 @@ This gives response:
   "result": {
     "numFetched": "4",
     "utxos": [
-      "115ZLnNqzCsyugMY5kbLnsyP2y4se4GJBbKHjyQnbPfRBitqLaxMizsaXbDMU61fHV2MDd7fGsDnkMzsTewULi94mcjk1bfvP7aHYUG2i3XELpV9guqsCtv7m3m3Kg4Ya1m6tAWqT7PhvAaW4D3fk8W1KnXu5JTWvYBqD2",
-      "11QASUuhw9M1r52maTFUZ4fnuQby9inX77VYxePQoNavEyCPuHN5cCWPQnwf8fMrydFXVMPAcS4UJAcLjSFskNEmtVPDMY4UyHwh2MChBju6Y7V8yYf3JBmYt767NPsdS3EqgufYJMowpud8fNyH1to4pAdd6A9CYbD8KG",
-      "11MHPUWT8CsdrtMWstYpFR3kobsvRrLB4W8tP9kDjhjgLkCJf9aaJQM832oPcvKBsRhCCxfKdWr2UWPztRCU9HEv4qXVwRhg9fknAXzY3a9rXXPk9HmArxMHLzGzRECkXpXb2dAeqaCsZ637MPMrJeWiovgeAG8c5dAw2q",
-      "11K9kKhFg75JJQUFJEGiTmbdFm7r1Uw5zsyDLDY1uVc8zo42WNbgcpscNQhyNqNPKrgtavqtRppQNXSEHnBQxEEh5KbAEcb8SxVZjSCqhNxME8UTrconBkTETSA23SjUSk8AkbTRrLz5BAqB6jo9195xNmM3WLWt7mLJ24"
+      "0x000020e182dd51ee4dcd31909fddd75bb3438d9431f8e4efce86a88a684f5c7fa09300000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21662861d59",
+      "0x0000a71ba36c475c18eb65dc90f6e85c4fd4a462d51c5de3ac2cbddf47db4d99284e00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21665f6f83f",
+      "0x0000925424f61cb13e0fbdecc66e1270de68de9667b85baa3fdc84741d048daa69fa00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216afecf76a",
+      "0x000082f30327514f819da6009fad92b5dba24d27db01e29ad7541aa8e6b6b554615c00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216779c2d59"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1864,7 +1897,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
         "sourceChain": "X",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1877,13 +1910,13 @@ This gives response:
   "result": {
     "numFetched": "1",
     "utxos": [
-      "115P1k9aSVFBfi9siZZz135jkrBCdEMZMbZ82JaLLuML37cgVMvGwefFXr2EaH2FML6mZuCehMLDdXSVE5aBwc8ePn8WqtZgDv9W641JZoLQhWY8fmvitiBLrc3Zd1aJPDxPouUVXFmLEbmcUnQxfw1Hyz1jpPbWSioowb"
+      "0x00001f989ffaf18a18a59bdfbf209342aa61c6a62a67e8639d02bb3c8ddab315c6fa0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000000746a528800000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29cd704fe76"
     ],
     "endIndex": {
       "address": "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
       "utxo": "S5UKgWoVpoGFyxfisebmmRf8WqC7ZwcmYwS7XaDVZqoaFcCwK"
     },
-    "encoding": "cb58"
+    "encoding": "hex"
   },
   "id": 1
 }
@@ -1891,7 +1924,7 @@ This gives response:
 
 ### platform.getValidatorsAt
 
-Get the validators and their weights of a subnet or the Primary Network at a given P-Chain height.
+Get the validators and their weights of a Subnet or the Primary Network at a given P-Chain height.
 
 #### **Signature**
 
@@ -1905,7 +1938,7 @@ platform.getValidatorsAt(
 ```
 
 - `height` is the P-Chain height to get the validator set at.
-- `subnetID` is the subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
+- `subnetID` is the Subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
 
 #### **Example Call**
 
@@ -1939,6 +1972,10 @@ curl -X POST --data '{
 ```
 
 ### platform.importAVAX
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
@@ -2002,6 +2039,10 @@ curl -X POST --data '{
 
 ### platform.importKey
 
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
 Give a user control over an address by providing the private key that controls the address.
 
 #### **Signature**
@@ -2057,7 +2098,7 @@ platform.issueTx({
 ```
 
 - `tx` is the byte representation of a transaction.
-- `encoding` specifies the encoding format for the transaction bytes. Can be either "cb58" or "hex". Defaults to "cb58".
+- `encoding` specifies the encoding format for the transaction bytes. Can only be `hex` when a value is provided.
 - `txID` is the transaction’s ID.
 
 #### **Example Call**
@@ -2067,8 +2108,8 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.issueTx",
     "params": {
-        "tx":"111Bit5JNASbJyTLrd2kWkYRoc96swEWoWdmEhuGAFK3rCAyTnTzomuFwgx1SCUdUE71KbtXPnqj93KGr3CeftpPN37kVyqBaAQ5xaDjr7wVBTUYi9iV7kYJnHF61yovViJF74mJJy7WWQKeRMDRTiPuii5gsd11gtNahCCsKbm9seJtk2h1wAPZn9M1eL84CGVPnLUiLP",
-        "encoding": "cb58"
+        "tx":"0x00000009de31b4d8b22991d51aa6aa1fc733f23a851a8c9400000000000186a0000000005f041280000000005f9ca900000030390000000000000001fceda8f90fcb5d30614b99d79fc4baa29307762668f16eb0259a57c2d3b78c875c86ec2045792d4df2d926c40f829196e0bb97ee697af71f5b0a966dabff749634c8b729855e937715b0e44303fd1014daedc752006011b730",
+        "encoding": "hex"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
@@ -2087,6 +2128,10 @@ curl -X POST --data '{
 ```
 
 ### platform.listAddresses
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
 
 List addresses controlled by the given user.
 

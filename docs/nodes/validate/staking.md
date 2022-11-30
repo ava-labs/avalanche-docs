@@ -7,9 +7,9 @@ description: Learn how to stake on Avalanche by validating or delegating
 
 Staking is the process of locking up tokens to support a network while receiving a reward in return (rewards can be increased network utility, monetary compensation, etc.). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
-## How does proof-of-stake work?
+## How Does Proof-of-stake Work?
 
-To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../overview/getting-started/intro.md#avax). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
 ## Staking Parameters on Avalanche
 
@@ -18,6 +18,8 @@ When a validator is done validating the [Primary Network](http://support.avalabs
 :::caution
 Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
 :::
+
+### Mainnet
 
 - The minimum amount that a validator must stake is 2,000 AVAX
 - The minimum amount that a delegator must delegate is 25 AVAX
@@ -36,6 +38,15 @@ If your reported uptime is not close to 100%, there may be something wrong with 
 If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.
 Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your node's true uptime.
 
+### Fuji Testnet
+
+On Fuji Testnet, all staking parameters are the same as those on Mainnet except the following ones:
+
+- The minimum amount that a validator must stake is 1 AVAX
+- The minimum amount that a delegator must delegate is 1 AVAX
+- The minimum amount of time one can stake funds for validation is 24 hours
+- The minimum amount of time one can stake funds for delegation is 24 hours
+
 ## Validators
 
 **Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
@@ -52,7 +63,7 @@ When you add a node to the validator set, you specify:
 The minimum amount that a validator must stake is 2,000 AVAX.
 :::
 
-:::danger
+:::warning
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 :::
 
@@ -60,7 +71,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
-When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
+When you issue the transaction to add a validator, the staked tokens and transaction fee (which is 0) are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
 
 #### Allow API calls
 
@@ -68,7 +79,7 @@ To make API calls to your node from remote machines, allow traffic on the API po
 
 You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines (e.g., your personal computer.)
 
-#### Why is my uptime low?
+#### Why Is My Uptime Low?
 
 Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to receive a staking reward.
 
@@ -86,10 +97,6 @@ You do not need to have AVAX funds on your validating node. In fact, it's best p
 
 Follow this [tutorial](../maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
 
-#### Validating In Fuji
-
-Validating in Fuji requires just `1 AVAX`. So you can easily set up your validator node and learn more about validating.
-
 ## Delegators
 
 A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
@@ -105,11 +112,11 @@ When you delegate stake to a validator, you specify:
 The minimum amount that a delegator must delegate is 25 AVAX.
 :::
 
-:::danger
+:::warning
 Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network).
 :::
 
-### Delegator rewards
+### Delegator Rewards
 
 If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
@@ -117,14 +124,14 @@ When you issue the transaction to delegate tokens, the staked tokens and transac
 
 ## FAQ
 
-### Is there a tool to check the health of a validator?
+### Is There a Tool to Check the Health of a Validator?
 
 Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check).
 
-### How is it determined whether a validator receives a staking reward?
+### How Is It Determined Whether a Validator Receives a Staking Reward?
 
-When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator thinks that the node was online and responsive for more than the required amount of time (currently 80%), the validator will vote for the node to receive a staking reward. Otherwise, the validator will vote that the node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator calculates that the leaving node was responsive for more than the required uptime (currently 80%), the validator will vote for the leaving node to receive a staking reward. Otherwise, the validator will vote that the leaving node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the leaving node receives a reward or not.
 
-Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
+Each validator only votes "yes" or "no". It does not share its data such as the leaving node's uptime.
 
-Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again. The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
+Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again. The node's uptime during its first period in the validator set does not affect the uptime calculation in the second period, hence, has no impact on whether the node receives a staking reward for its second period in the validator set.

@@ -23,7 +23,7 @@ This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-cal
 /ext/admin
 ```
 
-## API Methods
+## Methods
 
 ### admin.alias
 
@@ -32,7 +32,7 @@ Assign an API endpoint an alias, a different endpoint for the API. The original 
 #### **Signature**
 
 ```text
-admin.alias({endpoint:string, alias:string}) -> {success:bool}
+admin.alias({endpoint:string, alias:string}) -> {}
 ```
 
 - `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
@@ -59,9 +59,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -79,7 +77,7 @@ admin.aliasChain(
         chain:string,
         alias:string
     }
-) -> {success:bool}
+) -> {}
 ```
 
 - `chain` is the blockchain’s ID.
@@ -105,9 +103,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -213,7 +209,7 @@ curl -X POST --data '{
 
 ### admin.loadVMs
 
-Dynamically loads any virtual machines installed on the node as plugins. See [here](../../../subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a virtual machine on a node.
 
 #### Signature
 
@@ -261,7 +257,7 @@ Writes a profile of mutex statistics to `lock.profile`.
 #### **Signature**
 
 ```text
-admin.lockProfile() -> {success:bool}
+admin.lockProfile() -> {}
 ```
 
 #### **Example Call**
@@ -281,9 +277,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -294,7 +288,7 @@ Writes a memory profile of the to `mem.profile`.
 #### **Signature**
 
 ```text
-admin.memoryProfile() -> {success:bool}
+admin.memoryProfile() -> {}
 ```
 
 #### **Example Call**
@@ -314,9 +308,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -333,7 +325,7 @@ admin.setLoggerLevel(
         logLevel: string, // optional
         displayLevel: string, // optional
     }
-) -> {success:bool}
+) -> {}
 ```
 
 - `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
@@ -363,9 +355,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -376,7 +366,7 @@ Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUPro
 #### **Signature**
 
 ```text
-admin.startCPUProfiler() -> {success:bool}
+admin.startCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -396,9 +386,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```
 
@@ -409,7 +397,7 @@ Stop the CPU profile that was previously started.
 #### **Signature**
 
 ```text
-admin.stopCPUProfiler() -> {success:bool}
+admin.stopCPUProfiler() -> {}
 ```
 
 #### **Example Call**
@@ -428,8 +416,6 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-    "success": true
-  }
+  "result": {}
 }
 ```

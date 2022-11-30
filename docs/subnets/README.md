@@ -1,22 +1,28 @@
----
-sidebar_position: 1
----
-
 # Subnets Overview
 
-Avalanche features 3 built-in blockchains: Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special subnet, and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+A **Subnet** is a sovereign network which defines its own rules regarding its membership and token economics. It is composed of a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet, and a Subnet can have many blockchains. A validator may be a member of many Subnets.
 
-![Primary network](/img/primary-network.png)
+Avalanche's 3 built-in blockchains: Platform Chain (P-Chain), Contract Chain (C-Chain) and Exchange Chain (X-Chain) are validated and secured by all the Avalanche validators which compose a special Subnet and is referred as the Primary Network.
 
-## Subnets
+By definition, all Subnet validators must also validate the Avalanche Primary Network.
 
-A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+![image](/img/subnet-validators.png)
 
-A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+
+Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage[^1] or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Consensus.
+
+## Advantages
+
+A Subnet manages its own membership, it can create its own token economics and rules, and may require that its constituent validators have certain properties.
+
+### Independent Token Economics
+
+Subnets can have their own token economics with their own native tokens and fee markets. They can launch their own blockchains with customized virtual machines. See [Customize a Subnet](../subnets/customize-a-subnet.md) for more details.
 
 ### Compliance
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
+Avalanche’s Subnet architecture makes regulatory compliance manageable. As mentioned above, a Subnet may require validators to meet a set of requirements.
 
 Some examples of requirements include:
 
@@ -26,17 +32,21 @@ Some examples of requirements include:
 
 (To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
 
-### Support for Private Blockchains
-
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../nodes/maintain/subnet-configs.md#private-subnet) for more info.
-
-### Separation of Concerns
-
-In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
-
 ### Application-Specific Requirements
 
 Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](../nodes/build/run-avalanche-node-manually.md#requirements) so that the application doesn’t suffer from low performance due to slow validators.
+
+### Support for Private Blockchains
+
+You can create a Subnet where only certain pre-defined validators may join and create a private Subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private. See [here](../nodes/maintain/subnet-configs.md#private-subnet) for more info.
+
+### Separation of Concerns
+
+In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The Subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
+
+## Validators
+
+Incentives are provided by Subnet owners in order to attract Avalanche validators to validate their Subnet, and this incentive can be customized by the Subnet. Validators must also take security and resource concerns into consideration when deciding whether to validate a given Subnet.
 
 ## Virtual Machines
 
@@ -44,7 +54,7 @@ A **Virtual Machine** (VM) defines the application-level logic of a blockchain. 
 
 When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same rule-set but is logically independent of other blockchains.
 
 ### Why Virtual Machines?
 
@@ -58,4 +68,6 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 
 ## Developing Your Own Subnet
 
-Plesae check out documents listed on the left panel to develop your own subnets with customized virtual machine and blockchain.
+Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
+
+[^1]: Subnets do not share storage in logical level (keys/values) with other Subnets, but they share storage on disk level (LevelDB) and store their data into same database/folder in operating system.

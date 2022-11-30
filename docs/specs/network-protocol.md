@@ -1,5 +1,3 @@
-
-
 # Network Protocol
 
 Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
@@ -155,7 +153,7 @@ The OpCode used by `Get` messages is: `0x04`.
 
 A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** defines which Subnets this message is destined for.
 
 **`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
 
@@ -211,7 +209,7 @@ The OpCode used by `Put` messages is: `0x05`.
 
 A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** defines which Subnets this message is destined for.
 
 **`RequestID`** is a counter that helps keep track of the messages sent by a node.
 
@@ -272,7 +270,7 @@ The OpCode used by `PushQuery` messages is: `0x06`.
 
 A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** defines which Subnets this message is destined for.
 
 **`RequestID`** is a counter that helps keep track of the messages sent by a node.
 
@@ -333,7 +331,7 @@ The OpCode used by `PullQuery` messages is: `0x07`.
 
 A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** defines which Subnets this message is destined for.
 
 **`RequestID`** is a counter that helps keep track of the messages sent by a node.
 
@@ -389,7 +387,7 @@ The OpCode used by `Chits` messages is: `0x08`.
 
 A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** defines which Subnets this message is destined for.
 
 **`RequestID`** is a counter that helps keep track of the messages sent by a node.
 
@@ -439,4 +437,3 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
         0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x60,
 ]
 ```
-

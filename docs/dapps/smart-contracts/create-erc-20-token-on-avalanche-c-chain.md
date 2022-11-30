@@ -4,11 +4,11 @@ description: ERC-20 tokens are the most fundamental and essential concept in Eth
 
 # Create an ERC-20 Token Using Solidity
 
-ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
+[ERC-20 tokens](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche.
 
-Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
+Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain. We are using Fuji Testnet in this tutorial.
 
-The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
+The article focuses on deploying a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us - to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
 
 ## Set up Metamask
 
@@ -22,50 +22,19 @@ Click to metamask icon on the browser and select the network drop-down menu. Her
 
 Now, we need to set these boxes with correct values.
 
-* **Network Name**: Avalanche C-Chain
-* **New RPC URL**:
-  * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
-  * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-  * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) 
-* **ChainID**:
-  * **Mainnet:** `43114` 
-  * **Fuji Testnet:** `43113` 
-  * **Local Testnet:** `43112` 
-* **Symbol**: AVAX
-* **Explorer**:
-  * **Mainnet:** [https://snowtrace.io](https://snowtrace.io/) 
-  * **Fuji Testnet:** [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
-  * **Localnet:** n/a 
-
-![Image for post](/img/erc20-metamask.png)
+- **Network Name**: Avalanche C-Chain
+- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+- **ChainID**: `43113`
+- **Symbol**: AVAX
+- **Explorer**: [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
 
 After setting up all the parameters correctly, we should see this page. For now, we have 0 AVAX.
 
-## Fund your C-Chain address
+## Fund Your C-Chain Address
 
-Depending on the network used, there are three ways to get funds to your C-Chain address.
+For funding on the Fuji Testnet, you can use the Test Network Faucet. Navigate to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your C-Chain address.
 
-### **Using Avalanche Wallet**
-
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). Wallet can be used on test and local networks, too.
-
-### **Using Test Network Faucet**
-
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your C-Chain address.
-
-### Funding on local testnet
-
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
-
-Let’s go to [avax faucet](https://faucet.avax.network/) and paste our C-Chain address, for example "0xfe8886bec537252040Dff36448C0F104Be635650".
-
-![Image for post](/img/erc20-faucet.png)
-
-After copy and paste the address here, click request 20 AVAX. This test faucet token has no value, it is just for development purposes.
-
-Then check your wallet balance and you should have some test token in your metamask.
-
-## Create mintable token
+## Create Mintable Token
 
 Now, we can create our mintable token on Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
 
@@ -75,13 +44,13 @@ You should view this page. On this page, first, click "SOLIDITY" from "Featured 
 
 Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
 
-```javascript
+```solidity
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
 ```
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
-After saving the file, we will see a bunch of files that are imported to remix. This is a remix feature that allows us to import a GitHub contract repository to remix by just giving the URL-Link. with an import statement.
+After saving the file, we will see a bunch of files that are imported to remix. This is a remix feature that allows us to import a GitHub contract repository to remix by just giving the URL-link with an import statement.
 
 ![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
@@ -91,11 +60,11 @@ We have ERC20PresetMinterPauser.sol file in the presets. This file is written by
 
 ## Deploy the Contract
 
-Open the second tab which is "SOLIDITY COMPILER" and select the solidity version that matches with the solidity version written in file as "pragma solidity …..". The version should be equal to or higher than the file’s version. For example, in my file, "pragma solidity ^0.6.0" is written so the required version is 0.6.0 or higher. As shown, in the compiler the solidity version is 0.6.6, which is ok. After checking the solidity version click the compile button. If you did not change anything in the file, or the solidity version is not wrong, the contract should compile without any errors.
+Open the tab with label `Solidity compiler` and select the solidity version that matches with the solidity version written in file as "pragma solidity …..". The version should be equal to or higher than the file’s version. For example, in my file, "pragma solidity ^0.6.0" is written so the required version is 0.6.0 or higher. As shown, in the compiler the solidity version is 0.6.6, which is ok. After checking the solidity version click the compile button. If you did not change anything in the file, or the solidity version is not wrong, the contract should compile without any errors.
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Then, let’s jump to the third tab which is DEPLOY & RUN TRANSACTION. Here before deploying our contract, we should change the environment. Click to the environment and select "Injected Web3". If a pop-up shows up and asks you to connect the account, click to connect. After, you should see the account address in the "ACCOUNT" textbox.
+Then, let’s jump to the tab with label `Deploy & run transactions`. Here before deploying our contract, we should change the environment. Click to the environment and select "Injected Web3". If a pop-up shows up and asks you to connect the account, click to connect. After, you should see the account address in the "ACCOUNT" textbox.
 
 The last thing before the deployment process is to set the contract that will be deployed as a token. Above the Deploy Button, there is a drop-down menu to select a contract. Select the contract named "ERC20PresetMinterPauser.sol".
 
@@ -147,11 +116,10 @@ Click to arrow beside the mint method to read it.
 
 Enter your address and an amount in WEI. For example, I will mint 1000 tst token so, I entered "1000000000000000000000"
 
-![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
-
 ## Add Token to Metamask
 
 Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to "Add Token" button and select "Custom Token" tab.
 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
+![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)

@@ -14,7 +14,7 @@ The port in this tutorial uses 9650. Depending on how you start your local netwo
 :::
 
 :::warning
-Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md): you should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.
+Keystore APIs are used in this tutorial, as warned in [Keystore API](../apis/avalanchego/apis/keystore.md), because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
 :::
 
 ## Create a User
@@ -47,7 +47,7 @@ curl --location --request POST '127.0.0.1:9650/ext/keystore' \
 }
 ```
 
-Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
+Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, aka `ewoq`, into any of the 3 blockchains on the default Subnet. After importing the key you can check the balance to confirm that it worked.
 
 ## X-Chain
 

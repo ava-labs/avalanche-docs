@@ -37,10 +37,10 @@ create_config_file () {
     echo "  \"http-host\": \"\",">>node.json
   fi
   if [ "$adminOpt" = "true" ]; then
-    echo "  \"api-admin-enabled \": \"true\",">>node.json
+    echo "  \"api-admin-enabled\": true,">>node.json
   fi
   if [ "$indexOpt" = "true" ]; then
-    echo "  \"index-enabled\": \"true\",">>node.json
+    echo "  \"index-enabled\": true,">>node.json
   fi
   if [ "$fujiOpt" = "true" ]; then
     echo "  \"network-id\": \"fuji\",">>node.json
@@ -60,7 +60,18 @@ create_config_file () {
   rm -f config.json
   echo "{" >>config.json
   if [ "$archivalOpt" = "true" ]; then
-    echo "  \"pruning-enabled\": \"false\"">>config.json
+    commaAdd=","
+  else
+    commaAdd=""
+  fi
+  if [ "$stateOpt" = "on" ]; then
+    echo "  \"state-sync-enabled\": true$commaAdd">>config.json
+  fi
+  if [ "$stateOpt" = "off" ]; then
+    echo "  \"state-sync-enabled\": false$commaAdd">>config.json
+  fi
+  if [ "$archivalOpt" = "true" ]; then
+    echo "  \"pruning-enabled\": false">>config.json
   fi
   echo "}" >>config.json
   mkdir -p $HOME/.avalanchego/configs/chains/C
@@ -97,7 +108,7 @@ check_reqs () {
 #helper function that prints usage
 usage () {
   echo "Usage: $0 [--list | --help | --reinstall | --remove] [--version <tag>] [--ip dynamic|static|<IP>]"
-  echo "                     [--RPC local|all] [--archival] [--index] [--db-dir <path>]"
+  echo "                     [--RPC local|all] [--archival] [--state-sync on|off] [--index] [--db-dir <path>]"
   echo "Options:"
   echo "   --help            Shows this message"
   echo "   --list            Lists 10 newest versions available to install"
@@ -108,6 +119,7 @@ usage () {
   echo "   --ip dynamic|static|<IP> Uses dynamic, static (autodetect) or provided public IP, will ask if not provided"
   echo "   --rpc local|any          Open RPC port (9650) to local or all network interfaces, will ask if not provided"
   echo "   --archival               If provided, will disable state pruning, defaults to pruning enabled"
+  echo "   --state-sync on|off      If provided explicitly turns C-Chain state sync on or off"
   echo "   --index                  If provided, will enable indexer and Index API, defaults to disabled"
   echo "   --db-dir <path>          Full path to the database directory, defaults to $HOME/.avalanchego/db"
   echo "   --fuji                   Connect to Fuji testnet, defaults to mainnet if omitted"
@@ -140,6 +152,7 @@ indexOpt="no"
 archivalOpt="no"
 dbdirOpt="no"
 ipOpt="ask"
+stateOpt="?"
 
 echo "AvalancheGo installer"
 echo "---------------------"
@@ -170,6 +183,7 @@ if [ "$#" != 0 ]; then
       --ip) assert_argument "$1" "$opt"; ipOpt="$1"; shift;;
       --rpc) assert_argument "$1" "$opt"; rpcOpt="$1"; shift;;
       --archival) archivalOpt='true';;
+      --state-sync) assert_argument "$1" "$opt"; stateOpt="$1"; shift;;
       --index) indexOpt='true';;
       --db-dir) assert_argument "$1" "$opt"; dbdirOpt="$1"; shift;;
       --fuji) fujiOpt='true';;
@@ -322,6 +336,15 @@ fi
 if [ "$archivalOpt" = "true" ]; then
   echo "Node pruning is disabled, node is running in archival mode."
   echo "Note that existing nodes need to bootstrap again to fill in the missing data."
+  echo ""
+fi
+if [ "$stateOpt" = "on" ]; then
+  echo "State sync will be enabled. Node will not replay the whole C-Chain transaction history,"
+  echo "instead it will only download the current chain state."
+  echo ""
+fi
+if [ "$stateOpt" = "off" ]; then
+  echo "State sync is disabled. Node will download and replay the whole C-Chain transaction history."
   echo ""
 fi
 if [ "$adminOpt" = "true" ]; then

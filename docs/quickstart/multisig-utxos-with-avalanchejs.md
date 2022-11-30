@@ -16,7 +16,7 @@ Once the transaction is committed, the UTXOs in the inputs will be consumed and 
 
 UTXOs can be associated with multiple addresses. If there are multiple owners of a UTXO, then we must note the `threshold` value. We have to include signatures of a threshold number of UTXO owners with the unsigned transaction to consume UTXOs present in the inputs. The threshold value of a UTXO is set while issuing the transaction.
 
-We can use these multi-sig UTXOs as inputs for multiple purposes and not only for sending assets. For example, we can use them to create subnets, add delegators, add validators, etc.
+We can use these multi-sig UTXOs as inputs for multiple purposes and not only for sending assets. For example, we can use them to create Subnets, add delegators, add validators, etc.
 
 ## Atomic Transactions
 
@@ -52,7 +52,7 @@ npm install --save avalanche dotenv
 Now create a configuration file named `config.js` for storing all the pieces of information regarding the network and chain we are connecting to. Since we are making transactions on the Fuji network, its network ID is 5. You can change the configuration according to the network you are using.
 
 ```javascript
-require("dotenv").config();
+require("dotenv").config()
 
 module.exports = {
   protocol: "https",
@@ -61,7 +61,7 @@ module.exports = {
   networkID: 5,
   privateKeys: JSON.parse(process.env.PRIVATEKEYS),
   mnemonic: process.env.MNEMONIC,
-};
+}
 ```
 
 Create a `.env` file for storing sensitive information which we can't make public like the private keys or the mnemonic. Here are the sample private keys, which you should not use. You can create a new account on [Avalanche Wallet](https://wallet.avax.network/) and paste the mnemonic here for demonstration.
@@ -83,12 +83,12 @@ Create a file `importAPI.js` for importing and setting up all the necessary APIs
 We need dependencies like the AvalancheJS module and other configurations. Let's import them at the top.
 
 ```javascript
-const { Avalanche, BinTools, BN } = require("avalanche");
-const Web3 = require("web3");
+const { Avalanche, BinTools, BN } = require("avalanche")
+const Web3 = require("web3")
 
-const MnemonicHelper = require("avalanche/dist/utils/mnemonic").default;
-const HDNode = require("avalanche/dist/utils/hdnode").default;
-const { privateToAddress } = require("ethereumjs-util");
+const MnemonicHelper = require("avalanche/dist/utils/mnemonic").default
+const HDNode = require("avalanche/dist/utils/hdnode").default
+const { privateToAddress } = require("ethereumjs-util")
 
 // Importing node details and Private key from the config file.
 const {
@@ -98,12 +98,12 @@ const {
   networkID,
   privateKeys,
   mnemonic,
-} = require("./config.js");
+} = require("./config.js")
 
-let { avaxAssetID, chainIDs } = require("./constants.js");
+let { avaxAssetID, chainIDs } = require("./constants.js")
 
 // For encoding and decoding to CB58 and buffers.
-const bintools = BinTools.getInstance();
+const bintools = BinTools.getInstance()
 ```
 
 ### Setup Avalanche APIs
@@ -112,14 +112,14 @@ To make API calls to the Avalanche network and different blockchains like X-Chai
 
 ```javascript
 // Avalanche instance
-const avalanche = new Avalanche(ip, port, protocol, networkID);
-const nodeURL = `${protocol}://${ip}:${port}/ext/bc/C/rpc`;
-const web3 = new Web3(nodeURL);
+const avalanche = new Avalanche(ip, port, protocol, networkID)
+const nodeURL = `${protocol}://${ip}:${port}/ext/bc/C/rpc`
+const web3 = new Web3(nodeURL)
 
 // Platform and Avax API
-const platform = avalanche.PChain();
-const avax = avalanche.XChain();
-const evm = avalanche.CChain();
+const platform = avalanche.PChain()
+const avax = avalanche.XChain()
+const evm = avalanche.CChain()
 ```
 
 ### Setup Keychains with Private Keys
@@ -132,12 +132,12 @@ const keyChains = {
   x: avax.keyChain(),
   p: platform.keyChain(),
   c: evm.keyChain(),
-};
+}
 
 function importPrivateKeys(privKey) {
-  keyChains.x.importKey(privKey);
-  keyChains.p.importKey(privKey);
-  keyChains.c.importKey(privKey);
+  keyChains.x.importKey(privKey)
+  keyChains.p.importKey(privKey)
+  keyChains.c.importKey(privKey)
 }
 ```
 
@@ -145,13 +145,13 @@ We can either use mnemonics to derive private keys from it or simply use the bar
 
 ```javascript
 function getPrivateKey(mnemonic, activeIndex = 0) {
-  const mnemonicHelper = new MnemonicHelper();
-  const seed = mnemonicHelper.mnemonicToSeedSync(mnemonic);
-  const hdNode = new HDNode(seed);
+  const mnemonicHelper = new MnemonicHelper()
+  const seed = mnemonicHelper.mnemonicToSeedSync(mnemonic)
+  const hdNode = new HDNode(seed)
 
-  const avaPath = `m/44'/9000'/0'/0/${activeIndex}`;
+  const avaPath = `m/44'/9000'/0'/0/${activeIndex}`
 
-  return hdNode.derive(avaPath).privateKeyCB58;
+  return hdNode.derive(avaPath).privateKeyCB58
 }
 
 // importing keys in the key chain - use this if you have any private keys
@@ -160,8 +160,8 @@ function getPrivateKey(mnemonic, activeIndex = 0) {
 // })
 
 // importing private keys from mnemonic
-importPrivateKeys(getPrivateKey(mnemonic, 0));
-importPrivateKeys(getPrivateKey(mnemonic, 1));
+importPrivateKeys(getPrivateKey(mnemonic, 0))
+importPrivateKeys(getPrivateKey(mnemonic, 1))
 ```
 
 ### Setup Addresses and Chain IDs
@@ -174,22 +174,22 @@ const addresses = {
   x: keyChains.x.getAddresses(),
   p: keyChains.p.getAddresses(),
   c: keyChains.c.getAddresses(),
-};
+}
 
 // String representation of addresses
 const addressStrings = {
   x: keyChains.x.getAddressStrings(),
   p: keyChains.p.getAddressStrings(),
   c: keyChains.c.getAddressStrings(),
-};
+}
 
-avaxAssetID = bintools.cb58Decode(avaxAssetID);
+avaxAssetID = bintools.cb58Decode(avaxAssetID)
 
 chainIDs = {
   x: bintools.cb58Decode(chainIDs.x),
   p: bintools.cb58Decode(chainIDs.p),
   c: bintools.cb58Decode(chainIDs.c),
-};
+}
 
 // Exporting these for other files to use
 module.exports = {
@@ -205,7 +205,7 @@ module.exports = {
   bintools,
   web3,
   BN,
-};
+}
 ```
 
 We can use the above-exported variables and APIs from other files as required.
@@ -223,23 +223,23 @@ We will be using `SECPTransferInput/SECPTransferOutput` for sending our assets.
 But since we can't use UTXOs on C-Chain, we cannot directly import them either. Therefore we need to create a different type of input/output for them called `EVMInput/EVMOutput`.
 
 ```javascript
-const { BN, chainIDs, web3 } = require("./importAPI");
+const { BN, chainIDs, web3 } = require("./importAPI")
 
 let SECPTransferInput,
   TransferableInput,
   SECPTransferOutput,
   TransferableOutput,
   EVMInput,
-  EVMOutput;
+  EVMOutput
 
 const getTransferClass = (chainID) => {
-  let vm = "";
+  let vm = ""
   if (chainID.compare(chainIDs.x) == 0) {
-    vm = "avm";
+    vm = "avm"
   } else if (chainID.compare(chainIDs.p) == 0) {
-    vm = "platformvm";
+    vm = "platformvm"
   } else if (chainID.compare(chainIDs.c) == 0) {
-    vm = "evm";
+    vm = "evm"
   }
   return ({
     SECPTransferInput,
@@ -249,8 +249,8 @@ const getTransferClass = (chainID) => {
     EVMInput,
     EVMOutput,
     index,
-  } = require(`avalanche/dist/apis/${vm}/index`));
-};
+  } = require(`avalanche/dist/apis/${vm}/index`))
+}
 ```
 
 Different chains have their own implementation of TransferInput/Output classes. Therefore we need to update the required modules according to the chain we issuing transactions on. To make it more modular, we created a `getTransferClass()` function, that will take `chainID` and import modules as required.
@@ -266,10 +266,10 @@ const createOutput = (amount, assetID, addresses, locktime, threshold) => {
     addresses,
     locktime,
     threshold
-  );
+  )
 
-  return new TransferableOutput(assetID, transferOutput);
-};
+  return new TransferableOutput(assetID, transferOutput)
+}
 ```
 
 ### Creating Transferable Input
@@ -286,14 +286,14 @@ const createInput = (
   threshold
 ) => {
   // creating transfer input
-  let transferInput = new SECPTransferInput(amount);
+  let transferInput = new SECPTransferInput(amount)
 
   // adding threshold signatures
-  addSignatureIndexes(spenders, threshold, transferInput);
+  addSignatureIndexes(spenders, threshold, transferInput)
 
   // creating transferable input
-  return new TransferableInput(txID, outputIndex, assetID, transferInput);
-};
+  return new TransferableInput(txID, outputIndex, assetID, transferInput)
+}
 ```
 
 ### Add Signature Indexes
@@ -304,18 +304,18 @@ By adding signature indexes we are not signing the inputs but just adding a plac
 
 ```javascript
 const addSignatureIndexes = (addresses, threshold, input) => {
-  let sigIndex = 0;
+  let sigIndex = 0
   addresses.every((address) => {
     if (threshold > 0) {
-      input.addSignatureIdx(sigIndex, address);
-      sigIndex++;
-      threshold--;
-      return true;
+      input.addSignatureIdx(sigIndex, address)
+      sigIndex++
+      threshold--
+      return true
     } else {
-      return false;
+      return false
     }
-  });
-};
+  })
+}
 ```
 
 ### Create EVM Input
@@ -326,12 +326,12 @@ EVM Inputs are required when we want to export assets from C-Chain. In the follo
 
 ```javascript
 const createEVMInput = (amount, addresses, assetID, nonce) => {
-  const hexAddress = addresses.at(-1);
-  const evmInput = new EVMInput(hexAddress, amount, assetID, nonce);
-  evmInput.addSignatureIdx(0, addresses[0]);
+  const hexAddress = addresses.at(-1)
+  const evmInput = new EVMInput(hexAddress, amount, assetID, nonce)
+  evmInput.addSignatureIdx(0, addresses[0])
 
-  return evmInput;
-};
+  return evmInput
+}
 ```
 
 ### Create EVM Output
@@ -340,8 +340,8 @@ The `createEVMOutput()` function will create EVM output for importing assets on 
 
 ```javascript
 const createEVMOutput = (amount, hexAddress, assetID) => {
-  return new EVMOutput(hexAddress, amount, assetID);
-};
+  return new EVMOutput(hexAddress, amount, assetID)
+}
 ```
 
 ### Update Transfer Class
@@ -357,9 +357,9 @@ const updateTransferClass = (chainID) => {
       TransferableOutput,
       EVMInput,
       EVMOutput,
-      (index = getTransferClass(chainID));
+      (index = getTransferClass(chainID))
   }
-};
+}
 ```
 
 ### Add UTXOs to Inputs
@@ -385,38 +385,38 @@ const updateInputs = async (
   chainID
 ) => {
   // Getting transferable inputs according to chain id
-  updateTransferClass(chainID);
+  updateTransferClass(chainID)
 
   let inputs = [],
     changeTransferableOutput = undefined,
-    netInputBalance = new BN(0);
+    netInputBalance = new BN(0)
 
   if (C.export) {
-    const nonce = await web3.eth.getTransactionCount(addresses.at(-1));
-    inputs.push(createEVMInput(toBeUnlocked, addresses, assetID, nonce));
+    const nonce = await web3.eth.getTransactionCount(addresses.at(-1))
+    inputs.push(createEVMInput(toBeUnlocked, addresses, assetID, nonce))
   } else {
     utxos.forEach((utxo) => {
-      let output = utxo.getOutput();
+      let output = utxo.getOutput()
       if (
         output.getOutputID() === 7 &&
         assetID.compare(utxo.getAssetID()) === 0 &&
         netInputBalance < toBeUnlocked
       ) {
-        let outputThreshold = output.getThreshold();
+        let outputThreshold = output.getThreshold()
 
         // spenders which we have in our keychain
-        let qualifiedSpenders = output.getSpenders(addresses);
+        let qualifiedSpenders = output.getSpenders(addresses)
 
         // create inputs only if we have custody of threshold or more number of utxo spenders
         if (outputThreshold <= qualifiedSpenders.length) {
-          let txID = utxo.getTxID();
-          let outputIndex = utxo.getOutputIdx();
-          let utxoAmount = output.amountValue;
-          let outputLocktime = output.getLocktime();
+          let txID = utxo.getTxID()
+          let outputIndex = utxo.getOutputIdx()
+          let utxoAmount = output.amountValue
+          let outputLocktime = output.getLocktime()
 
-          netInputBalance = netInputBalance.add(utxoAmount);
+          netInputBalance = netInputBalance.add(utxoAmount)
 
-          let excessAmount = netInputBalance.sub(toBeUnlocked);
+          let excessAmount = netInputBalance.sub(toBeUnlocked)
 
           // creating change transferable output
           if (excessAmount > 0) {
@@ -427,7 +427,7 @@ const updateInputs = async (
                 qualifiedSpenders,
                 outputLocktime,
                 outputThreshold
-              );
+              )
             }
           }
 
@@ -439,15 +439,15 @@ const updateInputs = async (
             assetID,
             qualifiedSpenders,
             outputThreshold
-          );
+          )
 
-          inputs.push(transferableInput);
+          inputs.push(transferableInput)
         }
       }
-    });
+    })
   }
-  return { inputs, changeTransferableOutput };
-};
+  return { inputs, changeTransferableOutput }
+}
 ```
 
 Only those UTXOs will be included whose output ID is `7` representing `SECPTransferOutput`. These outputs are used for transferring assets. Also, we are only including outputs containing `AVAX` assets. These conditions are checked in the following line -
@@ -459,9 +459,9 @@ if(output.getOutputID() === 7 && assetID.compare(utxo.getAssetID()) === 0 && net
 The following part in the above function creates the change output if the total included balance surpasses the required amount and the transaction is not a C-Chain export -
 
 ```javascript
-netInputBalance = netInputBalance.add(utxoAmount);
+netInputBalance = netInputBalance.add(utxoAmount)
 
-let excessAmount = netInputBalance.sub(toBeUnlocked);
+let excessAmount = netInputBalance.sub(toBeUnlocked)
 
 // creating change transferable output
 if (excessAmount > 0) {
@@ -472,7 +472,7 @@ if (excessAmount > 0) {
       qualifiedSpenders,
       outputLocktime,
       outputThreshold
-    );
+    )
   }
 }
 ```
@@ -486,7 +486,7 @@ module.exports = {
   createOutput,
   createEVMOutput,
   updateInputs,
-};
+}
 ```
 
 All the utility functions are created.
@@ -502,9 +502,9 @@ Now make a new file `createInputsAndOutputs.js` and paste the following snippets
 We need to import utility functions for creating outputs and inputs with the UTXOs.
 
 ```javascript
-const { BN, avax, platform, evm, chainIDs, bintools } = require("./importAPI");
+const { BN, avax, platform, evm, chainIDs, bintools } = require("./importAPI")
 
-const { createOutput, createEVMOutput, updateInputs } = require("./utils");
+const { createOutput, createEVMOutput, updateInputs } = require("./utils")
 ```
 
 `EVMInput` should be used as inputs while creating an export transaction from C-Chain and `EVMOutput` should be used as outputs while creating an import transaction on C-Chain. To make it easier to decide when to do what, let's make a function `checkChain()` that will return an object `C` (described earlier).
@@ -514,16 +514,16 @@ const checkChain = (chainID, ownerAddress) => {
   let C = {
     export: false,
     import: false,
-  };
+  }
   if (chainID.compare(chainIDs.c) == 0) {
     if (typeof ownerAddress == "string" && bintools.isHex(ownerAddress)) {
-      C.import = true;
+      C.import = true
     } else {
-      C.export = true;
+      C.export = true
     }
   }
-  return C;
-};
+  return C
+}
 ```
 
 For getting UTXOs from an address, let's make another function `getUnspentOutputs()`. This function will fetch UTXOs from a given address and source chain. The `sourceChain` will be used to fetch exported UTXOs that are not yet imported. The exported outputs stay in the exported atomic memory. This parameter will only be used when we want to import assets.
@@ -535,14 +535,14 @@ const getUnspentOutputs = async (
   chainID,
   sourceChain = undefined
 ) => {
-  let utxoSet;
+  let utxoSet
   if (chainID.compare(chainIDs.x) == 0) {
-    utxoSet = await avax.getUTXOs(addresses, sourceChain);
+    utxoSet = await avax.getUTXOs(addresses, sourceChain)
   } else if (chainID.compare(chainIDs.p) == 0) {
-    utxoSet = await platform.getUTXOs(addresses, sourceChain);
+    utxoSet = await platform.getUTXOs(addresses, sourceChain)
   }
-  return utxoSet.utxos.getAllUTXOs();
-};
+  return utxoSet.utxos.getAllUTXOs()
+}
 ```
 
 Now for organizing inputs and outputs and adding required signature indexes (not signatures) for each unspent output, adding change output, etc, we will make a `createInputsAndOutputs()` function. Paste the following snippet next.
@@ -557,21 +557,21 @@ const createInputsAndOutputs = async (
   fee,
   sourceChain
 ) => {
-  let locktime = new BN(0);
+  let locktime = new BN(0)
 
-  let C = checkChain(chainID, outputConfig[0].owners);
+  let C = checkChain(chainID, outputConfig[0].owners)
 
-  let utxos = [];
+  let utxos = []
   if (C.export) {
-    addresses.push("0x3b0e59fc2e9a82fa5eb3f042bc5151298e4f2cab"); // getHexAddress(addresses[0])
+    addresses.push("0x3b0e59fc2e9a82fa5eb3f042bc5151298e4f2cab") // getHexAddress(addresses[0])
   } else {
-    utxos = await getUnspentOutputs(addressStrings, chainID, sourceChain);
+    utxos = await getUnspentOutputs(addressStrings, chainID, sourceChain)
   }
 
-  let toBeUnlocked = fee;
+  let toBeUnlocked = fee
   outputConfig.forEach((output) => {
-    toBeUnlocked = toBeUnlocked.add(output.amount);
-  });
+    toBeUnlocked = toBeUnlocked.add(output.amount)
+  })
 
   // putting right utxos in the inputs
   let { inputs, changeTransferableOutput } = await updateInputs(
@@ -581,13 +581,13 @@ const createInputsAndOutputs = async (
     assetID,
     toBeUnlocked,
     chainID
-  );
+  )
 
-  let outputs = [];
+  let outputs = []
 
   // creating transferable outputs and transfer outputs
   outputConfig.forEach((output) => {
-    let newOutput;
+    let newOutput
     if (!C.import) {
       newOutput = createOutput(
         output.amount,
@@ -595,27 +595,27 @@ const createInputsAndOutputs = async (
         output.owners,
         locktime,
         output.threshold
-      );
+      )
     } else {
-      newOutput = createEVMOutput(output.amount, output.owners, assetID);
+      newOutput = createEVMOutput(output.amount, output.owners, assetID)
     }
-    outputs.push(newOutput);
-  });
+    outputs.push(newOutput)
+  })
 
   // pushing change output (if any)
   if (changeTransferableOutput != undefined && !C.import) {
-    outputs.push(changeTransferableOutput);
+    outputs.push(changeTransferableOutput)
   }
 
-  return { inputs, outputs };
-};
+  return { inputs, outputs }
+}
 ```
 
 Output config is basically an array of all outputs that we want to create. This excludes the change output because it will be automatically created. It has the following structure.
 
 ```javascript
 // Regular outputs
-[
+;[
   {
     amount: BigNumber,
     owners: [Buffer],
@@ -627,7 +627,7 @@ Output config is basically an array of all outputs that we want to create. This 
     amount: BigNumber,
     owners: "hex address string",
   }
-];
+]
 ```
 
 You will learn about these arguments and how we can actually pass this along with other arguments through the examples ahead.
@@ -639,7 +639,7 @@ Add the following snippet to export this function.
 ```javascript
 module.exports = {
   createInputsAndOutputs,
-};
+}
 ```
 
 We have created all the utility and helper functions. You can use this project structure to create different types of transactions like BaseTx, Export, Import, AddDelegator, etc. You should have the following files in your project now -
@@ -679,11 +679,11 @@ const {
   networkID,
   BN,
   avax,
-} = require("../importAPI");
+} = require("../importAPI")
 
-const { UnsignedTx, BaseTx } = require("avalanche/dist/apis/avm/index");
+const { UnsignedTx, BaseTx } = require("avalanche/dist/apis/avm/index")
 
-const { createInputsAndOutputs } = require("../createMultisig");
+const { createInputsAndOutputs } = require("../createMultisig")
 ```
 
 ### Send BaseTx
@@ -692,10 +692,10 @@ Now create the `sendBaseTx()` function to be called for sending base tx to the n
 
 ```javascript
 async function sendBaseTx() {
-  let memo = Buffer.from("Multisig Base Tx");
+  let memo = Buffer.from("Multisig Base Tx")
 
   // unlock amount = sum(output amounts) + fee
-  let fee = new BN(1e6);
+  let fee = new BN(1e6)
 
   // creating outputs of 0.5 (multisig) and 0.1 AVAX - change output will be added by the function in the last
   let outputConfig = [
@@ -709,7 +709,7 @@ async function sendBaseTx() {
       owners: [addresses.x[1]],
       threshold: 1,
     },
-  ];
+  ]
 
   let { inputs, outputs } = await createInputsAndOutputs(
     avaxAssetID,
@@ -718,14 +718,14 @@ async function sendBaseTx() {
     addressStrings.x,
     outputConfig,
     fee
-  );
+  )
 
-  const baseTx = new BaseTx(networkID, chainIDs.x, outputs, inputs, memo);
+  const baseTx = new BaseTx(networkID, chainIDs.x, outputs, inputs, memo)
 
-  const unsignedTx = new UnsignedTx(baseTx);
-  const tx = unsignedTx.sign(keyChains.x);
-  const txID = await avax.issueTx(tx);
-  console.log("TxID:", txID);
+  const unsignedTx = new UnsignedTx(baseTx)
+  const tx = unsignedTx.sign(keyChains.x)
+  const txID = await avax.issueTx(tx)
+  console.log("TxID:", txID)
 }
 ```
 
@@ -746,7 +746,7 @@ let outputConfig = [
     owners: [addresses.x[1]],
     threshold: 1,
   },
-];
+]
 ```
 
 Let's discuss the arguments of `createInputsAndOutputs()` in detail -
@@ -770,7 +770,7 @@ Once the multi-sig UTXO is created, this UTXO can only be used if we have the th
 Now call the `sendBaseTx()` function by adding this line
 
 ```javascript
-sendBaseTx();
+sendBaseTx()
 ```
 
 Run this file using `node examples/sendBaseTx.js`, see the txID in the output, and look for it in the Fuji explorer.
@@ -797,11 +797,11 @@ const {
   networkID,
   BN,
   avax,
-} = require("../importAPI");
+} = require("../importAPI")
 
-const { UnsignedTx, ExportTx } = require("avalanche/dist/apis/avm/index");
+const { UnsignedTx, ExportTx } = require("avalanche/dist/apis/avm/index")
 
-const { createInputsAndOutputs } = require("../createMultisig");
+const { createInputsAndOutputs } = require("../createMultisig")
 ```
 
 ### Send Export Transaction
@@ -812,10 +812,10 @@ The `fee` here will only be for exporting the asset. The import fees will be ded
 
 ```javascript
 async function exportXP() {
-  let memo = Buffer.from("Multisig Export Tx");
+  let memo = Buffer.from("Multisig Export Tx")
 
   // consuming amount = sum(output amount) + fee
-  let fee = new BN(1e6);
+  let fee = new BN(1e6)
 
   // creates mutlti-sig (0.1 AVAX) and single-sig (0.03 AVAX) output for exporting to P Address (0.001 AVAX will be fees)
   let outputConfig = [
@@ -829,7 +829,7 @@ async function exportXP() {
       owners: addresses.p,
       threshold: 2,
     },
-  ];
+  ]
 
   // importing fees will be deducted from these our other outputs in the exported output memory
   let { inputs, outputs } = await createInputsAndOutputs(
@@ -839,7 +839,7 @@ async function exportXP() {
     addressStrings.x,
     outputConfig,
     fee
-  );
+  )
 
   // outputs at index 0 and 1 are to be exported
   const exportTx = new ExportTx(
@@ -850,12 +850,12 @@ async function exportXP() {
     memo,
     chainIDs.p,
     [outputs[0], outputs[1]]
-  );
+  )
 
-  const unsignedTx = new UnsignedTx(exportTx);
-  const tx = unsignedTx.sign(keyChains.x);
-  const txID = await avax.issueTx(tx);
-  console.log("TxID:", txID);
+  const unsignedTx = new UnsignedTx(exportTx)
+  const tx = unsignedTx.sign(keyChains.x)
+  const txID = await avax.issueTx(tx)
+  console.log("TxID:", txID)
 }
 ```
 
@@ -870,7 +870,7 @@ All these inputs and outputs are array, and hence con contains multiple outputs 
 Call the function by adding the below function call.
 
 ```javascript
-exportXP();
+exportXP()
 ```
 
 Run this file using `node examples/exportXP.js`, see the txID in the output, and look for it in the [Fuji explorer](https://explorer-xp.avax-test.network/blockchain/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm).
@@ -897,14 +897,11 @@ const {
   networkID,
   BN,
   platform,
-} = require("../importAPI");
+} = require("../importAPI")
 
-const {
-  UnsignedTx,
-  ImportTx,
-} = require("avalanche/dist/apis/platformvm/index");
+const { UnsignedTx, ImportTx } = require("avalanche/dist/apis/platformvm/index")
 
-const { createInputsAndOutputs } = require("../createMultisig");
+const { createInputsAndOutputs } = require("../createMultisig")
 ```
 
 ### Send Import Transaction
@@ -915,13 +912,13 @@ An important point to note here is that all UTXOs that are included in this `imp
 
 ```javascript
 async function importP() {
-  let memo = Buffer.from("Multisig Import Tx");
+  let memo = Buffer.from("Multisig Import Tx")
 
   // Use this parameter if you have UTXOs exported from other chains - only exported outputs will be fetched
-  let sourceChain = "X";
+  let sourceChain = "X"
 
   // unlock amount = sum(output amount) + fee
-  let fee = new BN(1e6);
+  let fee = new BN(1e6)
 
   let outputConfig = [
     {
@@ -934,7 +931,7 @@ async function importP() {
       owners: addresses.p[0],
       threshold: 1,
     },
-  ];
+  ]
 
   // all the inputs here are the exported ones due to source chain parameter
   let { inputs, outputs } = await createInputsAndOutputs(
@@ -945,7 +942,7 @@ async function importP() {
     outputConfig,
     fee,
     sourceChain
-  );
+  )
 
   const importTx = new ImportTx(
     networkID,
@@ -955,12 +952,12 @@ async function importP() {
     memo,
     chainIDs.x,
     inputs
-  );
+  )
 
-  const unsignedTx = new UnsignedTx(importTx);
-  const tx = unsignedTx.sign(keyChains.x);
-  const txID = await platform.issueTx(tx);
-  console.log("TxID:", txID);
+  const unsignedTx = new UnsignedTx(importTx)
+  const tx = unsignedTx.sign(keyChains.x)
+  const txID = await platform.issueTx(tx)
+  console.log("TxID:", txID)
 }
 ```
 
@@ -984,18 +981,18 @@ const {
   networkID,
   BN,
   evm,
-} = require("../importAPI");
+} = require("../importAPI")
 
-const { UnsignedTx, ImportTx } = require("avalanche/dist/apis/evm/index");
+const { UnsignedTx, ImportTx } = require("avalanche/dist/apis/evm/index")
 
-const { createInputsAndOutputs } = require("../createMultisig");
+const { createInputsAndOutputs } = require("../createMultisig")
 
 async function importP() {
   // Use this parameter if you have UTXOs exported from other chains - only exported outputs will be fetched
-  let sourceChain = "X";
+  let sourceChain = "X"
 
   // unlock amount = sum(output amount) + fee (fees on C-Chain is dynamic)
-  let fee = new BN(0);
+  let fee = new BN(0)
 
   let outputConfig = [
     {
@@ -1006,7 +1003,7 @@ async function importP() {
       amount: new BN(2e4),
       owners: "0x3b0e59fc2e9a82fa5eb3f042bc5151298e4f2cab",
     },
-  ];
+  ]
 
   // all the inputs here are the exported ones due to source chain parameter
   let { inputs, outputs } = await createInputsAndOutputs(
@@ -1017,7 +1014,7 @@ async function importP() {
     outputConfig,
     fee,
     sourceChain
-  );
+  )
 
   const importTx = new ImportTx(
     networkID,
@@ -1025,15 +1022,15 @@ async function importP() {
     chainIDs.x,
     inputs,
     outputs
-  );
+  )
 
-  const unsignedTx = new UnsignedTx(importTx);
-  const tx = unsignedTx.sign(keyChains.x);
-  const txID = await evm.issueTx(tx);
-  console.log("TxID:", txID);
+  const unsignedTx = new UnsignedTx(importTx)
+  const tx = unsignedTx.sign(keyChains.x)
+  const txID = await evm.issueTx(tx)
+  console.log("TxID:", txID)
 }
 
-importP();
+importP()
 ```
 
 ![](/img/multisig-utxos-6.png)
@@ -1060,18 +1057,18 @@ const {
   networkID,
   BN,
   platform,
-} = require("../importAPI");
+} = require("../importAPI")
 
 const {
   UnsignedTx,
   AddDelegatorTx,
   SECPOwnerOutput,
   ParseableOutput,
-} = require("avalanche/dist/apis/platformvm/index");
+} = require("avalanche/dist/apis/platformvm/index")
 
-const { NodeIDStringToBuffer, UnixNow } = require("avalanche/dist/utils");
+const { NodeIDStringToBuffer, UnixNow } = require("avalanche/dist/utils")
 
-const { createInputsAndOutputs } = require("../createMultisig");
+const { createInputsAndOutputs } = require("../createMultisig")
 ```
 
 ### Sending AddDelegator Transaction
@@ -1080,15 +1077,15 @@ Now we will create the `addDelegator()` function which will use the multi-sig UT
 
 ```javascript
 async function addDelegator() {
-  let nodeID = NodeIDStringToBuffer("NodeID-4B4rc5vdD1758JSBYL1xyvE5NHGzz6xzH");
-  let locktime = new BN(0);
-  let stakeAmount = await platform.getMinStake();
-  let startTime = UnixNow().add(new BN(60 * 1));
-  let endTime = startTime.add(new BN(2630000));
-  let memo = Buffer.from("Multi-sig Add Delegator Tx");
+  let nodeID = NodeIDStringToBuffer("NodeID-4B4rc5vdD1758JSBYL1xyvE5NHGzz6xzH")
+  let locktime = new BN(0)
+  let stakeAmount = await platform.getMinStake()
+  let startTime = UnixNow().add(new BN(60 * 1))
+  let endTime = startTime.add(new BN(2630000))
+  let memo = Buffer.from("Multi-sig Add Delegator Tx")
 
   // unlock amount = sum(output amounts) + fee
-  let fee = new BN(1e6);
+  let fee = new BN(1e6)
 
   // creating stake amount output at 0th index
   let outputConfig = [
@@ -1097,11 +1094,11 @@ async function addDelegator() {
       owners: addresses.p,
       threshold: 2,
     },
-  ];
+  ]
 
   // outputs to be created for rewards
-  const rewardOutputOwners = new SECPOwnerOutput(addresses.p, locktime, 2);
-  const rewardOwners = new ParseableOutput(rewardOutputOwners);
+  const rewardOutputOwners = new SECPOwnerOutput(addresses.p, locktime, 2)
+  const rewardOwners = new ParseableOutput(rewardOutputOwners)
 
   let { inputs, outputs } = await createInputsAndOutputs(
     avaxAssetID,
@@ -1110,7 +1107,7 @@ async function addDelegator() {
     addressStrings.p,
     outputConfig,
     fee
-  );
+  )
 
   const addDelegatorTx = new AddDelegatorTx(
     networkID,
@@ -1124,26 +1121,26 @@ async function addDelegator() {
     stakeAmount.minDelegatorStake,
     [outputs[0]],
     rewardOwners
-  );
+  )
 
-  const unsignedTx = new UnsignedTx(addDelegatorTx);
-  const tx = unsignedTx.sign(keyChains.p);
-  const txID = await platform.issueTx(tx);
-  console.log("TxID:", txID);
+  const unsignedTx = new UnsignedTx(addDelegatorTx)
+  const tx = unsignedTx.sign(keyChains.p)
+  const txID = await platform.issueTx(tx)
+  console.log("TxID:", txID)
 }
 ```
 
 In the above transaction, the `outputs` param will be empty since we do not need to transfer any assets to the account. As you can see above we need to create another type of output, for indicating the reward for delegation.
 
 ```javascript
-const rewardOutputOwners = new SECPOwnerOutput(addresses.p, locktime, 2);
-const rewardOwners = new ParseableOutput(rewardOutputOwners);
+const rewardOutputOwners = new SECPOwnerOutput(addresses.p, locktime, 2)
+const rewardOwners = new ParseableOutput(rewardOutputOwners)
 ```
 
 Call the function by adding the below function call.
 
 ```javascript
-addDelegator();
+addDelegator()
 ```
 
 Run this file using `node examples/addDelegatorTx.js`, see the txID in the output, and look for it in the Fuji explorer.

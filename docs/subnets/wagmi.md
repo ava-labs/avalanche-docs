@@ -15,15 +15,17 @@ The WAGMI ("We're All Going to Make It") Subnet Demo is a high throughput testbe
 - Min Fee: 1 GWei (4% of C-Chain)
 - Target Block Rate: 2s (Same as C-Chain)
 
+Genesis file of WAGMI can be found [here](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json).
+
 Everyone that has used the the C-Chain more than twice (~970k addresses) has been airdropped 10 WGM tokens. With the current fee parameterization, this should be enough for hundreds of txs.
 
-This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a production VM (coreth). Many underestimate how useful the isolation of subnets is for performing complex VM testing on a live network (without impacting the stability of the primary network).
+This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a production VM (coreth). Many underestimate how useful the isolation of Subnets is for performing complex VM testing on a live network (without impacting the stability of the primary network).
 
-We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) that surfaces aggregated usage statistics about the subnet.
+We created a basic WAGMI Explorer [https://subnets-test.avax.network/wagmi](https://subnets-test.avax.network/wagmi) that surfaces aggregated usage statistics about the Subnet.
 
 ## Subnet Info
 
-- SubnetID: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://testnet.avascan.info/blockchains?subnet=28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY)
+- SubnetID: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
 - ChainID: [2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt](https://testnet.avascan.info/blockchain/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt)
 
 ## Adding WAGMI to MetaMask

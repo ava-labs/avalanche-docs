@@ -6,6 +6,640 @@
 
 :::
 
+## v1.9.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.3))
+
+**Banff.3 - Tracing**
+
+This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `19`.
+
+**Tracing**
+
+- Added `context.Context` to all `VM` interface functions
+- Added `context.Context` to the `validators.State` interface
+- Added additional message fields to `tracedRouter#HandleInbound`
+- Added `tracedVM` implementations for `block.ChainVM` and `vertex.DAGVM`
+- Added `tracedState` implementation for `validators.State`
+- Added `tracedHandler` implementation for `http.Handler`
+- Added `tracedConsensus` implementations for `snowman.Consensus` and `avalanche.Consensus`
+
+**Fixes**
+
+- Fixed incorrect `NodeID` used in registered `AppRequest` timeouts
+- Fixed panic when calling `encdb#NewBatch` after `encdb#Close`
+- Fixed panic when calling `prefixdb#NewBatch` after `prefixdb#Close`
+
+**Configs**
+
+- Added `proposerMinBlockDelay` support to subnet configs
+- Added `providedFlags` field to the `initializing node` for easily observing custom node configs
+- Added `--chain-aliases-file` and `--chain-aliases-file-content` CLI flags
+- Added `--proposervm-use-current-height` CLI flag
+
+**Coreth**
+
+- Added metric for number of processed and accepted transactions
+- Added wait for state sync goroutines to complete on shutdown
+- Increased go-ethereum dependency to v1.10.26
+- Increased soft cap on transaction size limits
+- Added back isForkIncompatible checks for all existing forks
+- Cleaned up Apricot Phase 6 code
+
+**Linting**
+
+- Added `unused-receiver` linter
+- Added `unused-parameter` linter
+- Added `useless-break` linter
+- Added `unhandled-error` linter
+- Added `unexported-naming` linter
+- Added `struct-tag` linter
+- Added `bool-literal-in-expr` linter
+- Added `early-return` linter
+- Added `empty-lines` linter
+- Added `error-lint` linter
+
+**Testing**
+
+- Added `scripts/build_fuzz.sh` and initial fuzz tests
+- Added additional `Fx` tests
+- Added additional `messageQueue` tests
+- Fixed `vmRegisterer` tests
+
+**Documentation**
+
+- Documented `Database.Put` invariant for `nil` and empty slices
+- Documented avalanchego's versioning scheme
+- Improved `vm.proto` docs
+
+**Miscellaneous**
+
+- Added peer gossip tracker
+- Added `avalanche_P_vm_time_until_unstake` and `avalanche_P_vm_time_until_unstake_subnet` metrics
+- Added `keychain.NewLedgerKeychainFromIndices`
+- Removed usage of `Temporary` error handling after `listener#Accept`
+- Removed `Parameters` from all `Consensus` interfaces
+- Updated `avalanche-network-runner` to `v1.3.0`
+- Added `ids.BigBitSet` to extend `ids.BitSet64` for arbitrarily large sets
+- Added support for parsing future subnet uptime tracking data to the P-chain's state implementation
+- Increased validator set cache size
+- Added `avax.UTXOIDFromString` helper for managing `UTXOID`s more easily
+
+## v1.9.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.2))
+
+**Banff.2 - Additional BLS Support**
+
+This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `19`.
+
+**Coreth**
+
+- Added trie clean cache journaling to disk to improve processing time after restart
+- Fixed regression where a snapshot could be marked as stale by the async acceptor during block processing
+- Added fine-grained block processing metrics
+
+**RPCChainVM**
+
+- Added `validators.State` to the rpcchainvm server's `snow.Context`
+- Added `rpcProtocolVersion` to the output of `info.getNodeVersion`
+- Added `rpcchainvm` protocol version to the output of the `--version` flag
+- Added `version.RPCChainVMProtocolCompatibility` map to easily compare plugin compatibility against avalanchego versions
+
+**Builds**
+
+- Downgraded `ubuntu` release binaries from `jammy` to `focal`
+- Updated macos github runners to `macos-12`
+- Added workflow dispatch to build release binaries
+
+**BLS**
+
+- Added bls proof of possession to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Added bls public key to in-memory staker objects
+- Improved memory clearing of bls secret keys
+
+**Cleanup**
+
+- Fixed issue where the chain manager would attempt to start chain creation multiple times
+- Fixed race that caused the P-chain to finish bootstrapping before the primary network finished bootstrapping
+- Converted inbound message handling to expect usage of types rather than maps of fields
+- Simplified the `validators.Set` implementation
+- Added a warning if synchronous consensus messages take too long
+
+## v1.9.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.1))
+
+**Banff.1 - VM2 Messaging**
+
+This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `18`.
+
+**Features**
+
+- Added cross-chain messaging support to the VM interface
+- Added Ledger support to the Primary Network wallet
+- Converted Bionic builds to Jammy builds
+- Added `mock.gen.sh` to programmatically generate mock implementations
+- Added BLS signer to the `snow.Context`
+- Moved `base` from `rpc.NewEndpointRequester` to be included in the `method` in `SendRequest`
+- Converted `UnboundedQueue` to `UnboundedDeque`
+
+**Observability**
+
+- Added support for OpenTelemetry tracing
+- Converted periodic bootstrapping status update to be time-based
+- Removed duplicated fields from the json format of the node config
+- Configured min connected stake health check based on the consensus parameters
+- Added new consensus metrics
+- Documented how chain time is advanced in the PlatformVM with `chain_time_update.md`
+
+**Cleanup**
+
+- Converted chain creation to be handled asynchronously from the P-chain's execution environment
+- Removed `SetLinger` usage of P2P TCP connections
+- Removed `Banff` upgrade flow
+- Fixed ProposerVM inner block caching after verification
+- Fixed PlatformVM mempool verification to use an updated chain time
+- Removed deprecated CLI flags: `--dynamic-update-duration`, `--dynamic-public-ip`
+- Added unexpected Put bytes tests to the Avalanche and Snowman consensus engines
+- Removed mockery generated mock implementations
+- Converted safe math functions to use generics where possible
+- Added linting to prevent usage of `assert` in unit tests
+- Converted empty struct usage to `nil` for interface compliance checks
+- Added CODEOWNERs to own first rounds of PR review
+
+## v1.9.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0))
+
+**Banff - Elastic Subnets**
+
+This upgrade adds support for creating Proof-of-Stake Subnets.
+
+This version is not backwards compatible. The changes in the upgrade go into effect at 12 PM EDT, October 18th 2022 on Mainnet.
+
+**All Mainnet nodes should upgrade before 12 PM EDT, October 18th 2022.**
+
+The supported plugin version is `17`.
+
+**Upgrades**
+
+- Activated P2P serialization format change to Protobuf
+- Activated non-AVAX `ImportTx`/`ExportTx`s to/from the P-chain
+- Activated `Banff*` blocks on the P-chain
+- Deactivated `Apricot*` blocks on the P-chain
+- Activated `RemoveSubnetValidatorTx`s on the P-chain
+- Activated `TransformSubnetTx`s on the P-chain
+- Activated `AddPermissionlessValidatorTx`s on the P-chain
+- Activated `AddPermissionlessDelegatorTx`s on the P-chain
+- Deactivated ANT `ImportTx`/`ExportTx`s on the C-chain
+- Deactivated ANT precompiles on the C-chain
+
+**Deprecations**
+
+- Ubuntu 18.04 releases are deprecated and will not be provided for `>=v1.9.1`
+
+**Miscellaneous**
+
+- Fixed locked input signing in the P-chain wallet
+- Removed assertions from the logger interface
+- Removed `--assertions-enabled` flag
+- Fixed typo in `--bootstrap-max-time-get-ancestors` flag
+- Standardized exported P-Chain codec usage
+- Improved isolation and execution of the E2E tests
+- Updated the linked hashmap implementation to use generics
+
+## PRE_RELEASE v1.9.0-fuji-post-upgrade ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji-post-upgrade))
+
+**Banff - Elastic Subnets - Fuji Post Upgrade Pre-release**
+
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
+
+This upgrade performs post-upgrade cleanup to the C-chain.
+
+The changes in the upgrade go into effect at 3 PM EDT, October 4th 2022 on the Fuji testnet.
+
+**All Fuji nodes should upgrade before 3 PM EDT, October 4th 2022.**
+
+The supported plugin version is `16`.
+
+**Upgrades**
+
+- Activated P2P serialization format change to Protobuf
+- Activated non-AVAX `ImportTx`/`ExportTx`s to/from the P-chain
+- Activated `Banff*` blocks on the P-chain
+- Deactivated `Apricot*` blocks on the P-chain
+- Activated `RemoveSubnetValidatorTx`s on the P-chain
+- Activated `TransformSubnetTx`s on the P-chain
+- Activated `AddPermissionlessValidatorTx`s on the P-chain
+- Activated `AddPermissionlessDelegatorTx`s on the P-chain
+- Deactivated ANT `ImportTx`/`ExportTx`s on the C-chain
+- Deactivated ANT precompiles on the C-chain
+
+**Deprecations**
+
+- Ubuntu 18.04 releases are deprecated and will not be provided for `>=v1.9.1`
+
+**Miscellaneous**
+
+- Fixed locked input signing in the P-chain wallet
+- Removed assertions from the logger interface
+- Removed `--assertions-enabled` flag
+- Fixed typo in `--bootstrap-max-time-get-ancestors` flag
+- Standardized exported P-Chain codec usage
+- Improved isolation and execution of the E2E tests
+- Updated the linked hashmap implementation to use generics
+
+## PRE_RELEASE v1.9.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji))
+
+**Banff - Elastic Subnets - Fuji Pre-release**
+
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
+
+This upgrade adds support for creating Proof-of-Stake Subnets.
+
+The changes in the upgrade go into effect at 10 AM EDT, October 3rd 2022 on the Fuji testnet. After Fuji is updated and verified, a mainnet compatible release will be published.
+
+**All Fuji nodes should upgrade before 10 AM EDT, October 3rd 2022.**
+
+The supported plugin version is `16`.
+
+**Upgrades**
+
+- Activated P2P serialization format change to Protobuf
+- Activated non-AVAX `ImportTx`/`ExportTx`s to/from the P-chain
+- Activated `Banff*` blocks on the P-chain
+- Deactivated `Apricot*` blocks on the P-chain
+- Activated `RemoveSubnetValidatorTx`s on the P-chain
+- Activated `TransformSubnetTx`s on the P-chain
+- Activated `AddPermissionlessValidatorTx`s on the P-chain
+- Activated `AddPermissionlessDelegatorTx`s on the P-chain
+- Deactivated ANT `ImportTx`/`ExportTx`s on the C-chain
+- Deactivated ANT precompiles on the C-chain
+
+**Deprecations**
+
+- Ubuntu 18.04 releases are deprecated and will not be provided for `>=v1.9.1`
+
+**Miscellaneous**
+
+- Fixed locked input signing in the P-chain wallet
+- Removed assertions from the logger interface
+- Removed `--assertions-enabled` flag
+- Fixed typo in `--bootstrap-max-time-get-ancestors` flag
+- Standardized exported P-Chain codec usage
+- Improved isolation and execution of the E2E tests
+- Updated the linked hashmap implementation to use generics
+
+## v1.8.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.6))
+
+This version is backwards compatible to [v1.8.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0). It is optional, but encouraged. The supported plugin version is `16`.
+
+**BLS**
+
+- Added BLS key file at `--staking-signer-key-file`
+- Exposed BLS proof of possession in the `info.getNodeID` API
+- Added BLS proof of possession to `AddPermissionlessValidatorTx`s for the Primary Network
+
+The default value of `--staking-signer-key-file` is `~/.avalanchego/staking/signer.key`. If the key file doesn't exist, it will be populated with a new key.
+
+**Networking**
+
+- Added P2P proto support to be activated in a future release
+- Fixed inbound bandwidth spike after leaving the validation set
+- Removed support for `ChitsV2` messages
+- Removed `ContainerID`s from `Put` and `PushQuery` messages
+- Added `pending_timeouts` metric to track the number of active timeouts a node is tracking
+- Fixed overflow in gzip decompression
+- Optimized memory usage in `peer.MessageQueue`
+
+**Miscellaneous**
+
+- Fixed bootstrapping ETA metric
+- Removed unused `unknown_txs_count` metric
+- Replaced duplicated code with generic implementations
+
+**Coreth**
+
+- Added failure reason to bad block API
+
+## v1.8.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.5))
+
+Please upgrade your node as soon as possible.
+
+The supported plugin version is `16`.
+
+**Fixes**
+
+- Fixed stale block reference by evicting blocks upon successful verification
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Removed check for Apricot Phase6 incompatible fork to unblock nodes that did not upgrade ahead of the activation time
+
+## v1.8.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.4))
+
+Please upgrade your node as soon as possible.
+
+The supported plugin version is `16`.
+
+**Caching**
+
+- Added temporarily invalid block caching to reduce repeated network requests
+- Added caching to the proposervm's inner block parsing
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Reduced the log level of `BAD BLOCK`s from `ERROR` to `DEBUG`
+- Deprecated Native Asset Call
+
+## v1.8.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.2))
+
+Please upgrade your node as soon as possible.
+
+The changes in `v1.8.x` go into effect at 4 PM EDT on September 6th, 2022 on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+The supported plugin version is `16`.
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Fixed live-lock in bootstrapping, after performing state-sync, by properly reporting `database.ErrNotFound` in `GetBlockIDAtHeight` rather than a formatted error
+- Increased the log level of `BAD BLOCK`s from `DEBUG` to `ERROR`
+- Fixed typo in Chain Config `String` function
+
+## v1.8.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.1))
+
+Please upgrade your node as soon as possible.
+
+The changes in `v1.8.x` go into effect at 4 PM EDT on September 6th, 2022 on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+The supported plugin version is `16`.
+
+**Miscellaneous**
+
+- Reduced the severity of not quickly connecting to bootstrap nodes from `FATAL` to `WARN`
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Reduced the log level of `BAD BLOCK`s from `ERROR` to `DEBUG`
+- Added Apricot Phase6 to Chain Config `String` function
+
+## v1.8.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.8.0))
+
+This is a mandatory security upgrade. Please upgrade your node **as soon as possible.**
+
+The changes in the upgrade go into effect at **4 PM EDT on September 6th, 2022** on both Fuji and Mainnet. You should upgrade your node before the changes go into effect, otherwise they may experience loss of uptime.
+
+You may see some extraneous ERROR logs ("BAD BLOCK") on your node after upgrading. These may continue until the Apricot Phase 6 activation (at 4 PM EDT on September 6th).
+
+The supported plugin version is `16`.
+
+**PlatformVM APIs**
+
+- Fixed `GetBlock` API when requesting the encoding as `json`
+- Changed the json key in `AddSubnetValidatorTx`s from `subnet` to `subnetID`
+- Added multiple asset support to `getBalance`
+- Updated `PermissionlessValidator`s returned from `getCurrentValidators` and `getPendingValidators` to include `validationRewardOwner` and `delegationRewardOwner`
+- Deprecated `rewardOwner` in `PermissionlessValidator`s returned from `getCurrentValidators` and `getPendingValidators`
+- Added `subnetID` argument to `getCurrentSupply`
+- Added multiple asset support to `getStake`
+- Added `subnetID` argument to `getMinStake`
+
+**PlatformVM Structures**
+
+- Renamed existing blocks
+  - `ProposalBlock` -> `ApricotProposalBlock`
+  - `AbortBlock` -> `ApricotAbortBlock`
+  - `CommitBlock` -> `ApricotCommitBlock`
+  - `StandardBlock` -> `ApricotStandardBlock`
+  - `AtomicBlock` -> `ApricotAtomicBlock`
+- Added new block types **to be enabled in a future release**
+  - `BlueberryProposalBlock`
+    - Introduces a `Time` field and an unused `Txs` field before the remaining `ApricotProposalBlock` fields
+  - `BlueberryAbortBlock`
+    - Introduces a `Time` field before the remaining `ApricotAbortBlock` fields
+  - `BlueberryCommitBlock`
+    - Introduces a `Time` field before the remaining `ApricotCommitBlock` fields
+  - `BlueberryStandardBlock`
+    - Introduces a `Time` field before the remaining `ApricotStandardBlock` fields
+- Added new transaction types **to be enabled in a future release**
+  - `RemoveSubnetValidatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Allows a subnet owner to remove a validator from their subnet
+  - `TransformSubnetTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Allows a subnet owner to convert their subnet into a permissionless subnet
+  - `AddPermissionlessValidatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Adds a new validator to the requested permissionless subnet
+  - `AddPermissionlessDelegatorTx`
+    - Can be included into `BlueberryStandardBlock`s
+    - Adds a new delegator to the requested permissionless validator on the requested subnet
+
+**PlatformVM Block Building**
+
+- Fixed race in `AdvanceTimeTx` creation to avoid unnecessary block construction
+- Added `block_formation_logic.md` to describe how blocks are created
+- Refactored `BlockBuilder` into `ApricotBlockBuilder`
+- Added `BlueberryBlockBuilder`
+- Added `OptionBlock` builder visitor
+- Refactored `Mempool` issuance and removal logic to use transaction visitors
+
+**PlatformVM Block Execution**
+
+- Added support for executing `AddValidatorTx`, `AddDelegatorTx`, and `AddSubnetValidatorTx` inside of a `BlueberryStandardBlock`
+- Refactored time advancement into a standard state modification structure
+- Refactored `ProposalTxExecutor` to abstract state diff creation
+- Standardized upgrade checking rules
+- Refactored subnet authorization checking
+
+**Wallet**
+
+- Added support for new transaction types in the P-chain wallet
+- Fixed fee amounts used in the Primary Network wallet to reduce unnecessary fee burning
+
+**Networking**
+
+- Defined `p2p.proto` to be used for future network messages
+- Added `--network-tls-key-log-file-unsafe` to support inspecting p2p messages
+- Added `avalanche_network_accept_failed` metrics to track networking `Accept` errors
+
+**Miscellaneous**
+
+- Removed reserved fields from proto files and renumbered the existing fields
+- Added generic dynamically resized ring buffer
+- Updated gRPC version to `v1.49.0` to fix non-deterministic errors reported in the `rpcchainvm`
+- Removed `--signature-verification-enabled` flag
+- Removed dead code
+  - `ids.QueueSet`
+  - `timer.Repeater`
+  - `timer.NewStagedTimer`
+  - `timer.TimedMeter`
+
+**[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
+
+- Incorrectly deprecated Native Asset Call
+- Migrated to go-ethereum v1.10.23
+- Added API to fetch Chain Config
+
+## v1.7.18 - Chapelco ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.18))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
+
+**Fixes**
+
+- Fixed bug in `codeToFetch` database accessors that caused an error when starting/stopping state sync
+- Fixed rare BAD BLOCK errors during C-chain bootstrapping
+- Fixed platformvm `couldn't get preferred block state` log due to attempted block building during bootstrapping
+- Fixed platformvm `failed to fetch next staker to reward` error log due to an incorrect `lastAcceptedID` reference
+- Fixed AWS AMI creation
+
+**PlatformVM**
+
+- Refactored platformvm metrics handling
+- Refactored platformvm block creation
+- Introduced support to prevent empty nodeID use on the P-chain to be activated in a future upgrade
+
+**Coreth**
+
+- Updated gas price estimation to limit lookback window based on block timestamps
+- Added metrics for processed/accepted gas
+- Simplified syntactic block verification
+- Ensured statedb errors during block processing are logged
+- Removed deprecated gossiper/block building logic from pre-Apricot Phase 4
+- Added marshal function for duration to improve config output
+
+**Miscellaneous**
+
+- Updated local network genesis to use a newer start time
+- Updated minimum golang version to go1.18.1
+- Removed support for RocksDB
+- Bumped go-ethereum version to v1.10.21
+- Added various additional tests
+- Introduced additional database invariants for all database implementations
+- Added retries to windows CI installations
+- Removed useless ID aliasing during chain creation
+
+## v1.7.17 - Verbier ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.17))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
+
+**VMs**
+
+- Refactored P-chain block state management
+  - Supporting easier parsing and usage of blocks
+  - Improving separation of block execution with block definition
+  - Unifying state definitions
+- Introduced support to send custom X-chain assets to the P-chain to be activated in a future upgrade
+- Introduced support to use custom assets on the P-chain to be activated in a future upgrade
+- Added VMs README to begin fully documenting plugin invariants
+- Added various comments around expected usages of VM tools
+
+**Coreth**
+
+- Added optional JSON logging
+- Added interface for supporting stateful precompiles
+- Removed legacy code format from the database
+
+**Fixes**
+
+- Fixed ungraceful gRPC connection closure during very long running requests
+- Fixed LevelDB panic during shutdown
+- Fixed verification of `--stake-max-consumption-rate` to include the upper-bound
+- Fixed various CI failures
+- Fixed flaky unit tests
+
+**Miscellaneous**
+
+- Added bootstrapping ETA metrics
+- Converted all logs to support structured fields
+- Improved Snowman++ oracle block verification error messages
+- Removed deprecated or unused scripts
+
+## v1.7.16 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.16))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
+
+**LevelDB**
+
+- Fix rapid disk growth by manually specifying the maximum manifest file size
+
+## v1.7.15 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.15))
+
+:::warning
+
+This version should not be used in a production environment. [v1.7.16](#v1716-view-on-github) resolves a database leak introduced in this release.
+
+:::
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged. The supported plugin version is `15`.
+
+**PlatformVM**
+
+- Replaced copy-on-write validator set data-structure to use tree diffs to optimize validator set additions
+- Replaced validation transactions with a standardized representation to remove transaction type handling
+- Migrated transaction execution to its own package
+- Removed child pointers from processing blocks
+- Added P-chain wallet helper for providing initial transactions
+
+**Coreth**
+
+- Bumped go-ethereum dependency to v1.10.20
+- Updated API names used to enable services in `eth-api` config flag. Prior names are supported but deprecated, please update configurations [accordingly](../../nodes/maintain/chain-config-flags.md#c-chain-configs)
+- Optimized state sync by parallelizing trie syncing
+- Added `eth_syncing` API for compatibility. Note: This API is only accessible after bootstrapping and always returns `"false"`, since the node will no longer be syncing at that point
+- Added metrics to the atomic transaction mempool
+- Added metrics for incoming/outgoing mempool gossip
+
+**Fixes**
+
+- Updated Snowman and Avalanche consensus engines to report original container preferences before processing the provided container
+- Fixed inbound message byte throttler context cancellation cleanup
+- Removed case sensitivity of IP resolver services
+- Added failing health check when a whitelisted Subnet fails to initialize a chain
+
+**Miscellaneous**
+
+- Added gRPC client metrics for dynamically created connections
+- Added uninitialized continuous time averager for when initial predictions are unreliable
+- Updated linter version
+- Documented various platform invariants
+- Cleaned up various dead parameters
+- Improved various tests
+
+## v1.7.14 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.14))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
+
+**APIs**
+
+:::warning
+These API format changes are breaking changes. <https://api.avax.network> and <https://api.avax-test.network> have been updated with this format. If you are using AvalancheGo APIs in your code, please ensure you have updated to the latest versions. See [this doc](cb58-deprecation.md) for details about the CB58 removal.
+:::
+
+- Removed `CB58` as an encoding option from all APIs
+- Added `HexC` and `HexNC` as encoding options for all APIs that accept an encoding format
+- Removed the `Success` response from all APIs
+- Replaced `containerID` with `id` in the indexer API
+
+**PlatformVM**
+
+- Fixed incorrect `P-chain` height in `Snowman++` when staking is disabled
+- Moved `platformvm` transactions to be defined in a sub-package
+- Moved `platformvm` genesis management to be defined in a sub-package
+- Moved `platformvm` state to be defined in a sub-package
+- Standardized `platformvm` transactions to always be referenced via pointer
+- Moved the `platformvm` transaction builder to be defined in a sub-package
+- Fixed uptime rounding during node shutdown
+
+**Networking**
+
+- Updated `Connected` and `Disconnected` messages to only be sent to chains if the peer is tracking the Subnet
+- Updated the minimum TLS version on the p2p network to `v1.3`
+- Supported context cancellation in the networking rate limiters
+- Added `ChitsV2` message format for the p2p network to be used in a future upgrade
+
+**Miscellaneous**
+
+- Fixed `--public-ip-resolution-frequency` invalid overwrite of the resolution service
+- Added additional metrics to distinguish between virtuous and rogue currently processing transactions
+- Suppressed the super cool `avalanchego` banner when `stdout` is not directed to a terminal
+- Updated linter version
+- Improved various comments and documentation
+- Standardized primary network handling across Subnet maps
+
 ## v1.7.13 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.13))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
@@ -24,7 +658,7 @@ State Sync v0.1 (v1.7.11) and v0.2 (v1.7.12) are not compatible with State Sync 
 
 **Miscellaneous**
 
-- Fixed `platform.getCurrentValidators` API to correctly mark a node as connected to itself on subnets.
+- Fixed `platform.getCurrentValidators` API to correctly mark a node as connected to itself on Subnets.
 - Fixed `platform.getBlockchainStatus` to correctly report `Unknown` for blockchains that are not managed by the `P-Chain`
 - Added process metrics by default in the `rpcchainvm#Server`
 - Added `Database` health checks
@@ -120,7 +754,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Introduced `ids.NodeID` type to standardize logging and simplify API service and client implementations
 - Changed client implementations to use standard types rather than `string`s wherever possible
 - Added `subnetID` as an argument to `platform.getTotalStake`
-- Added `connected` to the subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Added `connected` to the Subnet validators in responses to `platform.getCurrentValidators` and `platform.getPendingValidators`
 - Add missing `admin` API client methods
 - Improved `indexer` API client implementation to avoid encoding edge cases
 
@@ -170,8 +804,8 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Networking**
 
 - Improved vertex and block gossiping for validators with low stake weight.
-- Added peers metric by subnet.
-- Added percentage of stake connected metric by subnet.
+- Added peers metric by Subnet.
+- Added percentage of stake connected metric by Subnet.
 
 **APIs**
 
@@ -200,7 +834,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Logging**
 
-- Added piping of subnet logs to stdout.
+- Added piping of Subnet logs to stdout.
 - Lazily initialized logs to avoid opening files that are never written to.
 - Added support for arbitrarily deleted log files while avalanchego is running.
 - Removed redundant logging configs.
@@ -208,7 +842,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 **Miscellaneous**
 
 - Updated minimum go version to `v1.17.9`.
-- Added subnet bootstrapping health checks.
+- Added Subnet bootstrapping health checks.
 - Supported multiple tags per codec instantiation.
 - Added minor fail-fast optimization to string packing.
 - Removed dead code.
@@ -222,7 +856,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Updates**
 
-- Improved subnet gossip to only send messages to nodes participating in that subnet.
+- Improved Subnet gossip to only send messages to nodes participating in that Subnet.
 - Fixed inlined VM initialization to correctly register static APIs.
 - Added logging for file descriptor limit errors.
 - Removed dead code from network packer.
@@ -255,7 +889,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Fixed incorrect `OutputOwners` in the P-chain `ImportTx` builder.
 - Improved FD limit error logging and warnings.
 - Rounded bootstrapping ETAs to the nearest second.
-- Added gossip config support to the subnet configs.
+- Added gossip config support to the Subnet configs.
 - Optimized various queue removals for improved memory freeing.
 - Added a basic X-chain E2E usage test to the new testing framework.
 
@@ -356,7 +990,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Miscellaneous**
 
-- Added tracked subnets to be reported in calls to the `info.peers` API.
+- Added tracked Subnets to be reported in calls to the `info.peers` API.
 - Updated gRPC implementations to use `buf` tooling and standardized naming and locations.
 - Added a consistent hashing implementation to be used in future improvements.
 - Fixed database iteration invariants to report `ErrClosed` rather than silently exiting.
@@ -706,7 +1340,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Subnets**
 
-- Added the ability for a client to configure a subnet as private to restrict membership to only approved validators.
+- Added the ability for a client to configure a Subnet as private to restrict membership to only approved validators.
 
 **Networking**
 
@@ -749,7 +1383,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Upgrades**
 
-- Added ability to specify subnet configs
+- Added ability to specify Subnet configs
 - Added various new networking config values
 - Removed legacy messages from the network library
 - Fixed P-chain mempool bug that impacted AddValidator transactions on local networks
@@ -836,7 +1470,7 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 **P-Chain**
 
 - Added functionality to track changes in validator weight by block.
-- Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
+- Added API method `GetValidatorsAt` which allows for retrieval of a Subnet's (or the Primary Network's) validator set at a given P-Chain height.
 
 **C-Chain**
 
@@ -889,8 +1523,8 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 **Subnets**
 
-- Added `subnetID`s to the handshake message. This notifies peers about which subnets a node is interesting in syncing.
-- Optimized subnet container gossiping.
+- Added `subnetID`s to the handshake message. This notifies peers about which Subnets a node is interesting in syncing.
+- Optimized Subnet container gossiping.
 
 **AVM**
 
@@ -1121,7 +1755,7 @@ The patch includes performance improvements, and monitoring improvements:
 This update is backwards compatible. It is optional, but encouraged.
 :::
 
-The patch includes performance improvements, monitoring improvements, and subnet fixes:
+The patch includes performance improvements, monitoring improvements, and Subnet fixes:
 
 - Changed the AVM's fee definition to enforce fees to be paid in the chain's native asset. This doesn't change the X-Chain's behavior, but it makes other AVM instances usable.
 - Added the ability to specify configs to specific chains. This deprecates the `coreth-config` CLI parameter.
@@ -1163,7 +1797,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 If the previously installed node version is &lt;= v1.4.4 then this node may have stopped processing blocks. This update will repair the node and perform a database migration. If the previously installed node version is &gt;=v1.4.5 then this node will use the existing database and does not need to perform a database migration.
 
 - Fixed the pre-migration node to correctly verify the P-chain block `SHraz7TtMfTQ5DX1rREhNZW1bi7PpPzAq7xoJAwrWNQrLhQcD`.
-- Fixed regression in `platformvm.GetBlockchains` to correctly return the primary subnet blockchains.
+- Fixed regression in `platformvm.GetBlockchains` to correctly return the primary Subnet blockchains.
 - Updated the grpc version to v1.37.
 - Optimized peerlist sampling.
 - Added database benchmarks.
@@ -1204,7 +1838,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
   - Removed the usage of `versiondb`s being passed through blocks to pass state references that can be modified and read without re-parsing objects.
   - Implemented a base state manager to properly cache and mange writes to the underlying database.
   - Implemented CoW validator sets to enable caching multiple validator sets in memory.
-  - Indexed chains by subnet to avoid touching unused state objects.
+  - Indexed chains by Subnet to avoid touching unused state objects.
   - Indexed validators by `nodeID` to avoid unnecessary iterations while accepting `addDelegator` and `addSubnetValidator` transactions.
   - Reduced the number of key-value pairs dedicated to managing validator sets on disk and validator uptimes.
 - Added staking reward look-ups to the `platformvm`'s API to support indexing of rewards.
@@ -1214,7 +1848,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Updated the `avm`'s state management to use `prefixdb`s, record caching metrics, and share additional code with the `platformvm`.
 - Simplified `UTXO` management and indexing in the `avm` and `platformvm`.
 - Restructured address parsing and management to be fully shared across compatible VM instances.
-- Restructured shared memory of the primary subnet to be fully shared across VM instances.
+- Restructured shared memory of the primary Subnet to be fully shared across VM instances.
 - Added a chain state implementation to support seamless caching over existing VM implementations and to simplify the implementation of new VMs.
 - Integrated the new chain state manager into the `rpcchainvm`, which also adds various metrics.
 - Added `upgradeBytes` and `configBytes` to the standard VM interface to better support future network upgrades.
@@ -1292,7 +1926,7 @@ This update is backwards compatible. It is optional, but encouraged.
 
 The patch includes bug fixes and performance improvements that aim to optimize the upcoming `db-upgrade` release.
 
-- Skipped tailing delay in bootstrapping so that all chains finish as soon as the last chain is marked as bootstrapped in a subnet.
+- Skipped tailing delay in bootstrapping so that all chains finish as soon as the last chain is marked as bootstrapped in a Subnet.
 - Improved message handling during bootstrapping to handle messages while waiting for other chains to sync.
 - Reduced sampler allocations by re-using existing samplers.
 - Updated docker scripts to only push images from the `master` branch.
@@ -1464,7 +2098,7 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 - `api-auth-password`
 
-## **v1.2.4 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**)**
+## v1.2.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 4**
 
@@ -1478,7 +2112,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Added additional logging to CI.
 - Added the C-chain to the list of critical chains.
 
-## **v1.2.3 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**)**
+## v1.2.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 3**
 
@@ -1489,7 +2123,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
 - Simplified C-chain block handling.
 
-## **v1.2.2 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**)**
+## v1.2.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 2**
 
@@ -1509,7 +2143,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 - Improved C-chain handling of canonical chain to reduce the number of reorgs.
 - Improved C-chain handling of mock calls performed on the `pending` block.
 
-## **v1.2.1 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**)**
+## v1.2.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.1))
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 
@@ -1526,7 +2160,7 @@ Change Summary:
 - Added additional health checks into the networking layer.
 - Added \`percent of stake connected\` as a reported metric.
 - Added bootstrapping restart logic to ensure the node has caught up to the current tip, even during times of high throughput.
-- Added subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
+- Added Subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
 - Prevented verification of rejected blocks to avoid unnecessary computation.
 - Removed gossiping of non-preferred blocks to the network.
 - Switched the network timeout calculator to use an EWMA of the observed network latency.
@@ -1720,7 +2354,7 @@ This update is optional but encouraged. The patch includes quality of life impro
 :::
 
 ```text
-• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
+• Added Subnet whitelisting to allow a node owner to choose which Subnets to validate.
 ```
 
 ```text

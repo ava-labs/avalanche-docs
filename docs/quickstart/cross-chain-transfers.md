@@ -68,7 +68,7 @@ This tutorial uses [**X-Chain <-> C-Chain**](https://github.com/ava-labs/avalanc
 
 ### Transfer from the X-Chain to the C-Chain
 
-To transfer a specified amount token from X-Chain to C-Chain, the token needs to be first exported from the X-Chain, then imported to C-Chain.
+To transfer a specified amount token from X-Chain to C-Chain, the token needs to be first exported from the X-Chain to the atomic memory, from where it is then imported to C-Chain.
 
 #### Export the Avax Token From X-Chain to C-Chain
 
