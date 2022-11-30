@@ -1,4 +1,4 @@
-# How to Run Avalanche-CLI with Docker
+# How to run Avalanche-CLI with Docker
 
 To run Avalanche-CLI in a docker container, you need to enable ipv6.
 

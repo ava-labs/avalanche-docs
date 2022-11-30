@@ -1,6 +1,6 @@
-# How to View Your Created Subnets
+# How to view your created Subnets
 
-## List Subnet Configurations
+## List Subnet configurations
 
 You can list the Subnets you've created with
 
@@ -19,7 +19,7 @@ Example:
 +----------+-----------+------------+-----------+-----------+-------+----------+---------+
 ```
 
-## Describe Subnet Configurations
+## Describe Subnet configurations
 
 To see the details of a specific configuration, run
 
@@ -101,7 +101,7 @@ Example:
 No precompiles set
 ```
 
-### Viewing a Genesis File
+### Viewing a genesis file
 
 If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command:
 
