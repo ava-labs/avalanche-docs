@@ -38,6 +38,12 @@ Subnet validators can choose not to publish contents of blockchains via this con
 This is a node-specific configuration. Every validator of this Subnet has to use this configuration in order to create a full private Subnet.
 :::
 
+#### `proposerMinBlockDelay` (time.Duration):
+
+The minimum delay performed when building snowman++ blocks. Default is set to 1 second.
+
+As one of the ways to control network congestion, Snowman++ will only build a block `proposerMinBlockDelay` after the parent block's timestamp. Some high-performance custom VM may find this too strict. This flag allows tuning the frequency at which blocks are built.
+
 ### Consensus Parameters
 
 Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a Subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](./avalanchego-config-flags.md#snow-parameters).

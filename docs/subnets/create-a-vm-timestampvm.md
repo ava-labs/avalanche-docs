@@ -1,300 +1,29 @@
----
-sidebar_position: 4
----
+# How to Build a Simple Golang VM
 
-# Create a Virtual Machine (VM)
+This is part of a series of tutorials for building a Virtual Machine (VM):
+
+- [Introduction to VMs](./introduction-to-vm.md)
+- How to Build a Simple Golang VM (this article)
+- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
+- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../overview/getting-started/avalanche-platform.md#virtual-machines)
-
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
+In this tutorial, we’ll create a very simple VM called the [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's blockchain contains a strictly increasing timestamp when the block was created and a 32-byte payload of data.
 
 Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
 
-A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
+## Prerequisites
 
-Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/tree/v1.2.1)
+Make sure you're familiar with the previous tutorial in this series, which dives into what virtual machines are.
 
----
-
-**NOTES**
-
-- IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try.
-- In this tutorial we used AvalancheGo v1.7.4 and TimestampVM v1.2.1. The code in latest version/branch can be different than ones presented in this page.
-
----
-
-## Interfaces
-
-### `block.ChainVM`
-
-To reach consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessible from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/snowman/block/vm.go).
-
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away. Comments in the code provide more detail about interface methods.
-
-```go title="/snow/engine/snowman/block/vm.go"
-// ChainVM defines the required functionality of a Snowman VM.
-//
-// A Snowman VM is responsible for defining the representation of state,
-// the representation of operations on that state, the application of operations
-// on that state, and the creation of the operations. Consensus will decide on
-// if the operation is executed and the order operations are executed in.
-//
-// For example, suppose we have a VM that tracks an increasing number that
-// is agreed upon by the network.
-// The state is a single number.
-// The operation is setting the number to a new, larger value.
-// Applying the operation will save to the database the new value.
-// The VM can attempt to issue a new number, of larger value, at any time.
-// Consensus will ensure the network agrees on the number at every block height.
-type ChainVM interface {
-	common.VM
-	Getter
-	Parser
-
-	// Attempt to create a new block from data contained in the VM.
-	//
-	// If the VM doesn't want to issue a new block, an error should be
-	// returned.
-	BuildBlock() (snowman.Block, error)
-
-	// Notify the VM of the currently preferred block.
-	//
-	// This should always be a block that has no children known to consensus.
-	SetPreference(ids.ID) error
-
-	// LastAccepted returns the ID of the last accepted block.
-	//
-	// If no blocks have been accepted by consensus yet, it is assumed there is
-	// a definitionally accepted block, the Genesis block, that will be
-	// returned.
-	LastAccepted() (ids.ID, error)
-}
-
-// Getter defines the functionality for fetching a block by its ID.
-type Getter interface {
-	// Attempt to load a block.
-	//
-	// If the block does not exist, an error should be returned.
-	//
-	GetBlock(ids.ID) (snowman.Block, error)
-}
-
-// Parser defines the functionality for fetching a block by its bytes.
-type Parser interface {
-	// Attempt to create a block from a stream of bytes.
-	//
-	// The block should be represented by the full byte array, without extra
-	// bytes.
-	ParseBlock([]byte) (snowman.Block, error)
-}
-```
-
-### `common.VM`
-
-`common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
-
-You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/common/vm.go)
-
-```go title="/snow/engine/common/vm.go"
-// VM describes the interface that all consensus VMs must implement
-type VM interface {
-    // Contains handlers for VM-to-VM specific messages
-	AppHandler
-
-	// Returns nil if the VM is healthy.
-	// Periodically called and reported via the node's Health API.
-	health.Checkable
-
-	// Connector represents a handler that is called on connection connect/disconnect
-	validators.Connector
-
-	// Initialize this VM.
-	// [ctx]: Metadata about this VM.
-	//     [ctx.networkID]: The ID of the network this VM's chain is running on.
-	//     [ctx.chainID]: The unique ID of the chain this VM is running on.
-	//     [ctx.Log]: Used to log messages
-	//     [ctx.NodeID]: The unique staker ID of this node.
-	//     [ctx.Lock]: A Read/Write lock shared by this VM and the consensus
-	//                 engine that manages this VM. The write lock is held
-	//                 whenever code in the consensus engine calls the VM.
-	// [dbManager]: The manager of the database this VM will persist data to.
-	// [genesisBytes]: The byte-encoding of the genesis information of this
-	//                 VM. The VM uses it to initialize its state. For
-	//                 example, if this VM were an account-based payments
-	//                 system, `genesisBytes` would probably contain a genesis
-	//                 transaction that gives coins to some accounts, and this
-	//                 transaction would be in the genesis block.
-	// [toEngine]: The channel used to send messages to the consensus engine.
-	// [fxs]: Feature extensions that attach to this VM.
-	Initialize(
-		ctx *snow.Context,
-		dbManager manager.Manager,
-		genesisBytes []byte,
-		upgradeBytes []byte,
-		configBytes []byte,
-		toEngine chan<- Message,
-		fxs []*Fx,
-		appSender AppSender,
-	) error
-
-	// Bootstrapping is called when the node is starting to bootstrap this chain.
-	Bootstrapping() error
-
-	// Bootstrapped is called when the node is done bootstrapping this chain.
-	Bootstrapped() error
-
-	// Shutdown is called when the node is shutting down.
-	Shutdown() error
-
-	// Version returns the version of the VM this node is running.
-	Version() (string, error)
-
-	// Creates the HTTP handlers for custom VM network calls.
-	//
-	// This exposes handlers that the outside world can use to communicate with
-	// a static reference to the VM. Each handler has the path:
-	// [Address of node]/ext/VM/[VM ID]/[extension]
-	//
-	// Returns a mapping from [extension]s to HTTP handlers.
-	//
-	// Each extension can specify how locking is managed for convenience.
-	//
-	// For example, it might make sense to have an extension for creating
-	// genesis bytes this VM can interpret.
-	CreateStaticHandlers() (map[string]*HTTPHandler, error)
-
-	// Creates the HTTP handlers for custom chain network calls.
-	//
-	// This exposes handlers that the outside world can use to communicate with
-	// the chain. Each handler has the path:
-	// [Address of node]/ext/bc/[chain ID]/[extension]
-	//
-	// Returns a mapping from [extension]s to HTTP handlers.
-	//
-	// Each extension can specify how locking is managed for convenience.
-	//
-	// For example, if this VM implements an account-based payments system,
-	// it have an extension called `accounts`, where clients could get
-	// information about their accounts.
-	CreateHandlers() (map[string]*HTTPHandler, error)
-}
-```
-
-### `snowman.Block`
-
-You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear (Snowman) chain.
-
-Let’s look at this interface and its methods. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/consensus/snowman/block.go)
-
-```go title="/snow/consensus/snowman/block.go"
-// Block is a possible decision that dictates the next canonical block.
-//
-// Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
-// order. Specifically, if Verify is called, then the parent has already been
-// verified. If Accept is called, then the parent has already been accepted. If
-// Reject is called, the parent has already been accepted or rejected.
-//
-// If the status of the block is Unknown, ID is assumed to be able to be called.
-// If the status of the block is Accepted or Rejected; Parent, Verify, Accept,
-// and Reject will never be called.
-type Block interface {
-    choices.Decidable
-
-    // Parent returns the ID of this block's parent.
-    Parent() ids.ID
-
-    // Verify that the state transition this block would make if accepted is
-    // valid. If the state transition is invalid, a non-nil error should be
-    // returned.
-    //
-    // It is guaranteed that the Parent has been successfully verified.
-    Verify() error
-
-    // Bytes returns the binary representation of this block.
-    //
-    // This is used for sending blocks to peers. The bytes should be able to be
-    // parsed into the same block on another node.
-    Bytes() []byte
-
-    // Height returns the height of this block in the chain.
-    Height() uint64
-}
-```
-
-### `choices.Decidable`
-
-This interface is the superset of every decidable object, such as transactions, blocks and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/choices/decidable.go)
-
-```go title="/snow/choices/decidable.go"
-// Decidable represents element that can be decided.
-//
-// Decidable objects are typically thought of as either transactions, blocks, or
-// vertices.
-type Decidable interface {
-	// ID returns a unique ID for this element.
-	//
-	// Typically, this is implemented by using a cryptographic hash of a
-	// binary representation of this element. An element should return the same
-	// IDs upon repeated calls.
-	ID() ids.ID
-
-	// Accept this element.
-	//
-	// This element will be accepted by every correct node in the network.
-	Accept() error
-
-	// Reject this element.
-	//
-	// This element will not be accepted by any correct node in the network.
-	Reject() error
-
-	// Status returns this element's current status.
-	//
-	// If Accept has been called on an element with this ID, Accepted should be
-	// returned. Similarly, if Reject has been called on an element with this
-	// ID, Rejected should be returned. If the contents of this element are
-	// unknown, then Unknown should be returned. Otherwise, Processing should be
-	// returned.
-	Status() Status
-}
-```
-
-## rpcchainvm
-
-`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [server](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
-
-To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
-
-As another example, let's look at the server's `BuildBlock` method:
-
-```go
-func (vm *VMServer) BuildBlock(context.Context, *emptypb.Empty) (*vmproto.BuildBlockResponse, error) {
-	blk, err := vm.vm.BuildBlock()
-	if err != nil {
-		return nil, err
-	}
-	blkID := blk.ID()
-	parentID := blk.Parent()
-	timeBytes, err := blk.Timestamp().MarshalBinary()
-	return &vmproto.BuildBlockResponse{
-		Id:        blkID[:],
-		ParentID:  parentID[:],
-		Bytes:     blk.Bytes(),
-		Height:    blk.Height(),
-		Timestamp: timeBytes,
-	}, err
-}
-```
-
-It calls `vm.vm.BuildBlock()`, where `vm.vm` is the underlying VM implementation, and returns a new block.
+- [Introduction to VMs](./introduction-to-vm.md)
 
 ## TimestampVM Implementation
 
 Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/v1.2.1).
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/main).
 
 ### Codec
 
@@ -863,7 +592,7 @@ func (vm *VM) initGenesis(genesisData []byte) error {
 
 #### CreateHandlers
 
-Registed handlers defined in `Service`. See [below](create-a-virtual-machine-vm.md#api) for more on APIs.
+Registed handlers defined in `Service`. See [below](create-a-vm-timestampvm.md#api) for more on APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateHandlers returns a map where:
@@ -892,7 +621,7 @@ func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`. See [below](create-a-virtual-machine-vm.md#static-api) for more on static APIs.
+Registers static handlers defined in `StaticService`. See [below](create-a-vm-timestampvm.md#static-api) for more on static APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateStaticHandlers returns a map where:
@@ -1452,7 +1181,7 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58.
+This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58. See [this](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to create your own VM ID.
 
 ### VM Aliases
 
@@ -1483,11 +1212,11 @@ Copy the binary into the plugins directory.
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
 
-#### Node is not running
+#### Node Is Not Running
 
 If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
 
-#### Node is already running
+#### Node Is Already Running
 
 Load the binary with the `loadVMs` API.
 

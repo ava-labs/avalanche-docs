@@ -23,7 +23,7 @@ This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-cal
 /ext/admin
 ```
 
-## API Methods
+## Methods
 
 ### admin.alias
 
@@ -209,7 +209,7 @@ curl -X POST --data '{
 
 ### admin.loadVMs
 
-Dynamically loads any virtual machines installed on the node as plugins. See [here](../../../subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a virtual machine on a node.
 
 #### Signature
 

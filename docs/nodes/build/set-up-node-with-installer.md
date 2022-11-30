@@ -12,8 +12,8 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1 TB
-- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- Storage: 1 TiB
+- OS: Ubuntu 20.04 or MacOS &gt;= 12
 - Network: sustained 5Mbps up/down bandwidth
 
 Please note that HW requirements shall scale with the amount of AVAX staked on the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines than listed, and will use more bandwidth as well.
@@ -259,6 +259,7 @@ Without any additional arguments, the script installs the node in a most common 
 
 - `admin` - [Admin API](../../apis/avalanchego/apis/admin.md) will be enabled
 - `archival` - disables database pruning and preserves the complete transaction history
+- `state-sync` - if `on` state-sync for the C-Chain is used, if `off` it will use regular transaction replay to bootstrap; state-sync is much faster, but has no historical data
 - `db-dir` - use to provide the full path to the location where the database will be stored
 - `fuji` - node will connect to Fuji testnet instead of the mainnet
 - `index` - [Index API](../../apis/avalanchego/apis/index-api.md) will be enabled
@@ -294,6 +295,12 @@ To run an archival mainnet node with dynamic IP and database located at `/home/n
 
 ```bash
 ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
+```
+
+To use C-Chain state-sync to quickly bootstrap a mainnet node, with dynamic IP and local RPC only:
+
+```bash
+./avalanchego-installer.sh --state-sync on --ip dynamic --rpc local
 ```
 
 To reinstall the node using node version 1.7.10 and use specific IP and local RPC only:

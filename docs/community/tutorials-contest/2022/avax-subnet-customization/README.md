@@ -60,7 +60,7 @@ We're ready to deploy our first Subnet.
 >
 > A Subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
 
-[Here is a great introduction to Subnets by Avalanche](https://docs.avax.network/Subnets)
+[Here is a great introduction to Subnets by Avalanche](https://docs.avax.network/subnets)
 
 #### Subnets
 
@@ -194,7 +194,7 @@ How awesome is that? `TEST` is the native token of our Subnet and it's airdroppe
 
 ## Understanding the Genesis File
 
-Before starting, I'd like to acknowledge that this section is very similar to [Avax docs - Customize a Subnet](https://docs.avax.network/Subnets/customize-a-Subnet). However, I've made some changes to make it more comprehensive and easier to understand.
+Before starting, I'd like to acknowledge that this section is very similar to [Avax docs - Customize a Subnet](https://docs.avax.network/subnets/customize-a-subnet). However, I've made some changes to make it more comprehensive and easier to understand.
 
 Subnet wizard is an awesome tool to customize your Subnet and might be a good starting point for you.
 
@@ -354,7 +354,7 @@ This value is set to `200000` in C-Chain.
 
 This configuration allows validators to specify a fee recipient.
 
-Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#setting-a-custom-fee-recipient)
+Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#setting-a-custom-fee-recipient)
 
 ```json
 {
@@ -381,7 +381,7 @@ If you'd like to restrict the contract deployer to a specific list of addresses,
 ```
 
 Admin addresses can deploy new contracts and add new Admin and Deployer addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000000`.
-[You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-smart-contract-deployers)
+[You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers)
 
 #### `contractNativeMinterConfig`
 
@@ -396,7 +396,7 @@ If you'd like to use a smart contract to mint native tokens, you can set the `co
 }
 ```
 
-Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#minting-native-coins)
+Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
 
 #### `txAllowListConfig`
 
@@ -410,7 +410,7 @@ If you'd like to restrict the transaction sender to a specific list of addresses
 }
 ```
 
-Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/Subnets/customize-a-Subnet#restricting-who-can-submit-transactions)
+Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions)
 
 ### Genesis Block
 
@@ -730,7 +730,7 @@ Awesomeness! Great work!
 
 ### Metamask Configuration
 
-Before going to the next step, make sure you've added the Subnet to metamask by following the same steps in the [`Deploying the Subnet`](#deploying-the-Subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
+Before going to the next step, make sure you've added the Subnet to metamask by following the same steps in the [`Deploying the Subnet`](#deploying-the-subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
 
 ![Metamask account look](.github/images/metamask3.png)
 
@@ -763,7 +763,7 @@ Next, create a folder and under that folder, create two files with the following
 #### NativeMinterInterface.sol
 
 This is the `ContractNativeMinter` interface. We know the contract is deployed at `0x0200000000000000000000000000000000000001`.
-[See more about it here.](https://docs.avax.network/Subnets/customize-a-Subnet#minting-native-coins)
+[See more about it here.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
 
 ```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
@@ -835,7 +835,7 @@ After creating the files, we should compile `Game.sol`.
 
 ![Compile](.github/images/compiling.png)
 
-Go to the deploy tab, choose injected web3 as enviroment - connect your wallet - then choose Game in the contract dropdown. Then click the deploy button.
+Go to the deploy tab, choose injected web3 as environment - connect your wallet - then choose Game in the contract dropdown. Then click the deploy button.
 
 ![Deploy](.github/images/deploying.png)
 
@@ -911,5 +911,5 @@ Thanks for reading :heart:
 
 ### Resources
 
-- [Avax Docs](https://docs.avax.network/Subnets)
+- [Avax Docs](https://docs.avax.network/subnets)
 - [Explanation of genesis file](https://gist.github.com/0mkara/b953cc2585b18ee098cd#file-genesis-md)
