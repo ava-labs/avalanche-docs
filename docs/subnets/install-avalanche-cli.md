@@ -1,8 +1,8 @@
-# Avalanche-CLI Installation
+# Install Avalanche-CLI
 
 ## Compatibility
 
-The tool has been tested on Linux and Mac. Windows is currently not supported.
+Avalanche-CLI runs on Linux and Mac. Windows is currently not supported.
 
 ## Prerequisites
 
@@ -16,20 +16,9 @@ To download a binary for the latest release, run:
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-The binary will be installed inside the `./bin` directory (relative to where the install command was run).
+The script installs the binary inside the `~/bin` directory.
 
-_Downloading binaries from the Github UI will cause permission errors on Mac._
-
-To add the binary to your path, run
-
-```
-cd bin
-export PATH=$PWD:$PATH
-```
-
-To add it to your path permanently, add an export command to your shell initialization script (ex: .bashrc).
-
-## Installing in Custom Location
+## Installing in a custom location
 
 To download the binary into a specific directory, run:
 
@@ -43,26 +32,29 @@ To call the `avalanche` binary from anywhere, you'll need to add it to your syst
 the binary into the default location, you can run the following snippet to add it to your path.
 
 ```
-curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
-cd bin
-export PATH=$PWD:$PATH
+export PATH=~/bin:$PATH
 ```
 
-To add it to your path permanently, add an export command to your shell initialization script (ex: (ex: .bashrc for
-Ubuntu or .zshrc for Mac)).
+To add it to your path permanently, add an export command to your shell initialization script. If you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
 
-## Checking Your Installation
+For example:
+
+```
+export PATH=~/bin:$PATH >> .bashrc
+```
+
+## Checking your installation
 
 You can test your installation by running `avalanche --version`. The tool should print the running version.
 
 ## Updating
 
-To update your installation, you need to delete your current binary and download the latest version using the steps above.
+To update your installation, you need to delete your current binary and download the latest version using the preceding steps.
 
-## Building from Source
+## Building from source
 
 The source code is available in this [Github repo](https://github.com/ava-labs/avalanche-cli).
 
-After you've cloned the repository, check out the tag you'd like to run. You can compile the code by running `./scripts/build.sh` from the top level directory.
+After you've cloned the repository, checkout the tag you'd like to run. You can compile the code by running `./scripts/build.sh` from the top level directory.
 
-The binary will be available as `/bin/avalanche`.
+The build script names the binary `./bin/avalanche`.

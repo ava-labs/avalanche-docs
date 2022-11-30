@@ -1,59 +1,74 @@
-# How to Create an EVM-Based Subnet Configuration
+# How to create an EVM-based Subnet configuration
 
-To create an EVM-compatible subnet, you will create one using [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
+To create an Ethereum Virtual Machine (EVM) compatible Subnet, you
+use [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
 ## Using the Subnet Creation Wizard
 
-The Subnet Creation Wizard will walk you through the process of creating your subnet. To get started, pick a name for your Subnet and run
+The Subnet Creation Wizard walks you through the process of creating your Subnet. To get started,
+pick a name for your Subnet and run
 
-`avalanche subnet create <subnetName>`
+```shell
+avalanche subnet create <subnetName>
+```
 
-The following sections will walk through each question in the wizard.
+The following sections walk through each question in the wizard.
 
-### Choose Your VM
+### Choose your VM
 
 Select `SubnetEVM`.
 
-### Enter Your Subnet's ChainID
+### Enter your Subnet's ChainID
 
-Choose a unique positive integer for your EVM-style ChainID. Visit [ChainList](https://chainlist.org/) to verify that your selection is indeed unique.
+Choose a unique positive integer for your EVM-style ChainID. Visit
+[ChainList](https://chainlist.org/) to verify that your selection is indeed unique.
 
-### Token Symbol
+### Token symbol
 
-Enter a string to name your Subnet's native token. The token symbol does not necessarily need to be unique. Example token symbols are AVAX, JOE, and BTC.
+Enter a string to name your Subnet's native token. The token symbol doesn't necessarily need to be
+unique. Example token symbols are AVAX, JOE, and BTC.
 
-### Subnet-EVM Version
+### Subnet-EVM version
 
 Select `Use latest version`.
 
-### Gas Fee Configuration
+### Gas fee configuration
 
-Select your fee configuration. We highly recommend `Low disk use / Low Throughput 1.5 mil gas/s (C-Chain's setting)`.
+Select your fee configuration. The Ava Labs team highly recommends
+`Low disk use / Low Throughput 1.5 mil gas/s (C-Chain's setting)`.
 
 ### Airdrop
 
-For development subnets, select `Airdrop 1 million tokens to the default address (do not use in production)`.
+For development Subnets, select `Airdrop 1 million tokens to the default address (do not use in production)`.
 
-When you are ready to start more mature testing, select `Customize your airdrop` to distribute funds to additional addresses.
+When you are ready to start more mature testing, select `Customize your airdrop` to distribute
+funds to additional addresses.
 
 ### Precompiles
 
-If you'd like to add precompiles to customize your subnet, select `Yes`.
+If you'd like to add precompiles to customize your Subnet, select `Yes`.
 
 If you don't or don't know what that means, select `No`.
 
-### Wrapping Up
+### Wrapping up
 
-If all worked successfully, you will see `Successfully created subnet configuration`.
+If the command works successfully, it prints `Successfully created subnet configuration`.
 
-## Using a Custom Genesis
+## Using a custom genesis
 
-The Subnet Creation Wizard won't customize every aspect of the Subnet-EVM genesis for you. If you'd like complete control, you can specify a custom genesis by providing a path to the file you'd like to use. Run with:
+The Subnet Creation Wizard won't customize every aspect of the Subnet-EVM genesis for you. If
+you'd like complete control, you can specify a custom genesis by providing a path to the file
+you'd like to use. This bypasses most of the wizard's prompts. Run with:
 
-`avalanche subnet create <subnetName> --file <filepath>`
+```shell
+avalanche subnet create <subnetName> --file <filepath>
+```
 
-## Overwriting an Existing Subnet Config
+## Overwriting an existing Subnet config
 
-By default, creating a Subnet configuration with the same `subnetName` as one that already exists will fail. To overwrite an existing config, use the `-f` force flag:
+By default, creating a Subnet configuration with the same `subnetName` as one that already exists
+fails. To overwrite an existing config, use the `-f` force flag:
 
-`avalanche subnet create <existingSubnetName> -f`
+```shell
+avalanche subnet create <existingSubnetName> -f
+```
