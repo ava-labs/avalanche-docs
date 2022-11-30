@@ -23,7 +23,7 @@ Make sure you have followed the previous tutorials in this series:
 
 ## Components
 
-A VM defines how a blockchain should be built. A block is populated with a set of transactions which mutate the state of the blockchain when executed. When a block with a set of transactions is applied to a given state, a state transition occurs by executing all of the transactions in the block in-order and applying it to the previous block of the blockchain. By executing a series of blocks chronologically, anyone verify and reconstruct the state of the blockchain at an arbitrary point in time.
+A VM defines how a blockchain should be built. A block is populated with a set of transactions which mutate the state of the blockchain when executed. When a block with a set of transactions is applied to a given state, a state transition occurs by executing all of the transactions in the block in-order and applying it to the previous block of the blockchain. By executing a series of blocks chronologically, anyone can verify and reconstruct the state of the blockchain at an arbitrary point in time.
 
 The BlobVM repository has a few components to handle the lifecycle of tasks from a transaction being issued to a block being accepted across the network:
 
