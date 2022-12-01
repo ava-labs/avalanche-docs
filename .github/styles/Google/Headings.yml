@@ -38,3 +38,6 @@ exceptions:
   - to
   - with
   - from
+  - up
+  - sayHello()
+  - setGreeting()

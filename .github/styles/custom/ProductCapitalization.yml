@@ -14,3 +14,5 @@ swap:
   "(?i)subnet[ -]?cli": Subnet-CLI
   "(?i)metamask": MetaMask
   "(?i)chain[ -]?id": ChainID
+  "(?i)github": GitHub
+  "(?i)wagmi": WAGMI

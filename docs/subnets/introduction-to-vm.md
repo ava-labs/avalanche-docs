@@ -9,7 +9,10 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 - [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
 - [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
-A [Virtual Machine (VM)](./README.md#virtual-machines) is a blueprint for a blockchain. Blockchains are instantiated from a VM, similar to how objects are instantiated from a class definition. VMs can define anything you want, but will generally define transactions that are executed and how blocks are created.
+A [Virtual Machine (VM)](./README.md#virtual-machines) is a blueprint for a blockchain. Blockchains
+are instantiated from a VM, similar to how objects are instantiated from a class definition. VMs can
+define anything you want, but will generally define transactions that are executed and how blocks are
+created.
 
 ## Blocks and State
 
@@ -19,32 +22,48 @@ Virtual Machines deal with blocks and state. The functionality provided by VMs i
 - Represent the operations in that state
 - Apply the operations in that state
 
-Each block in the blockchain contains a set of state transitions. Each block is applied in order from the blockchain's initial genesis block to its last accepted block to reach the latest state of the blockchain.
+Each block in the blockchain contains a set of state transitions. Each block is applied in order
+from the blockchain's initial genesis block to its last accepted block to reach the latest state
+of the blockchain.
 
 ## Blockchain
 
-A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines application specific behavior and how blocks are and built and parsed to create the blockchain. VMs all run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the state of the blockchain. Here's a quick example of how VMs interact with consensus:
+A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines
+application specific behavior and how blocks are and built and parsed to create the blockchain. VMs
+all run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the
+state of the blockchain. Here's a quick example of how VMs interact with consensus:
 
 1. A node wants to update the blockchain's state
 2. The node's VM will notify the consensus engine that it wants to update the state
 3. The consensus engine will request the block from the VM
 4. The consensus engine will verify the returned block using the VM's implementation of `Verify()`
-5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly verified block
-   - Every virtuous (well-behaved) node on the network will have the same preference for a particular block
+5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly
+verified block
+   - Every virtuous (well-behaved) node on the network will have the same preference for a particular
+   block
 6. Depending upon the consensus results, the engine will either accept or reject the block
    - What happens when a block is accepted or rejected is specific to the implementation of the VM
 
-AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying and executing on behalf of the consensus engine.
+AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus
+engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying
+and executing on behalf of the consensus engine.
 
-This decoupling between the application and consensus layer allows developers to build their applications quickly by implementing virtual machines, without having to worry about the consensus layer managed by Avalanche which deals with how nodes agree on whether or not to accept a block.
+This decoupling between the application and consensus layer allows developers to build their
+applications quickly by implementing virtual machines, without having to worry about the consensus
+layer managed by Avalanche which deals with how nodes agree on whether or not to accept a block.
 
 ## Installing a VM
 
-VMs are supplied as binaries to a node running `AvalancheGo`. These binaries must be named the VM's assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
+VMs are supplied as binaries to a node running `AvalancheGo`. These binaries must be named the VM's
+assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
 
-In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See [here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details. Multiple VMs can be installed in this location.
+In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See
+[here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details.
+Multiple VMs can be installed in this location.
 
-Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC calls. This is functionality is enabled by `rpcchainvm`, a special VM that wraps around other VM implementations so that they can communicate back and forth with the AvalancheGo.
+Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC
+calls. This is functionality is enabled by `rpcchainvm`, a special VM that wraps around other VM
+implementations so that they can communicate back and forth with the AvalancheGo.
 
 ### API Handlers
 
@@ -52,14 +71,23 @@ Users can interact with a blockchain and its VM through handlers exposed by the 
 
 VMs expose two types of handlers to serve responses for incoming requests:
 
-- **Blockchain Handlers** - Referred to as handlers, these expose APIs to interact with a blockchain instantiated by a VM. The API's endpoint will be different for each chain. The endpoint for a handler is `/ext/bc/[chainID]`.
-- **VM Handlers** - Referred to as static handlers, these expose APIs to interact with the VM directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint for a static handler is `/ext/vm/[vmID]`.
+- **Blockchain Handlers** - Referred to as handlers, these expose APIs to interact with a blockchain
+instantiated by a VM. The API endpoint will be different for each chain. The endpoint for a handler
+is `/ext/bc/[chainID]`.
+- **VM Handlers** - Referred to as static handlers, these expose APIs to interact with the VM
+directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint
+for a static handler is `/ext/vm/[vmID]`.
 
-For any readers familiar with object-oriented programming, static and non-static handlers on a VM are analogous to static and non-static methods on a class. Blockchain handlers can be thought of as methods on an object, whereas VM handlers can be thought of as static methods on a class.
+For any readers familiar with object-oriented programming, static and non-static handlers on a VM are
+analogous to static and non-static methods on a class. Blockchain handlers can be thought of as methods
+on an object, whereas VM handlers can be thought of as static methods on a class.
 
 ### Instantiate a VM
 
-The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the VM. It's defined in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file of the `blobvm` repository.
+The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be
+initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the
+VM. It's defined in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file
+of the `blobvm` repository.
 
 ```go
 // Returning a new VM instance from VM's factory
@@ -68,9 +96,11 @@ func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil
 
 ### Initializing a VM to Create a Blockchain
 
-Before a VM can run, AvalancheGo will initialize it by invoking its `Initialize` method. Here, the VM will bootstrap itself and sets up anything it requires before it starts running.
+Before a VM can run, AvalancheGo will initialize it by invoking its `Initialize` method. Here, the
+VM will bootstrap itself and sets up anything it requires before it starts running.
 
-This might involve setting up its database, mempool, genesis state, or anything else the VM requires to run. For more information, see the [third part](./create-a-vm-blobvm.md#initialize) of this series.
+This might involve setting up its database, mempool, genesis state, or anything else the VM requires
+to run. For more information, see the [third part](./create-a-vm-blobvm.md#initialize) of this series.
 
 ```go
 if err := vm.Initialize(
@@ -85,7 +115,8 @@ if err := vm.Initialize(
 );
 ```
 
-You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L92) of `vm.initialize` in the BlobVM repository.
+You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L92) of
+`vm.initialize` in the BlobVM repository.
 
 ## Interfaces
 
@@ -93,7 +124,8 @@ Every VM should implement the following interfaces:
 
 ### `block.ChainVM`
 
-To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be compatible with Snowman, a VM must implement the `block.ChainVM` interface.
+To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be
+compatible with Snowman, a VM must implement the `block.ChainVM` interface.
 
 For more information, see [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
@@ -248,7 +280,8 @@ type VM interface {
 
 ### `snowman.Block`
 
-The `snowman.Block` interface It define the functionality a block must implement to be a block in a linear Snowman chain.
+The `snowman.Block` interface It define the functionality a block must implement to be a block in a
+linear Snowman chain.
 
 For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go).
 

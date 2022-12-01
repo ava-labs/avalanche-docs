@@ -3,4 +3,7 @@ message: Use '%s' instead of '%s'
 level: error
 swap:
   "(?i)tx": TX
+  "(?i)txs": TXs
   "(?i)hardfork": hard fork
+  "(?i)abi": ABI
+  "(?i)ABI": ABIs
