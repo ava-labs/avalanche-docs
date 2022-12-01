@@ -29,7 +29,7 @@ jobs:
       - uses: errata-ai/vale-action@reviewdog
         with:
           # files: docs/subnet/
-          file: "[docs/subnet/create-a-fuji-subnet.md]"
+          files: "[docs/subnet/create-a-fuji-subnet.md]"
           fail_on_error: true
           reporter: github-pr-check
           vale_flags: "--minAlertLevel=error"
