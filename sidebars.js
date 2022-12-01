@@ -108,14 +108,28 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Build',
+      label: 'Build Your First Subnet',
       collapsed: false,
       items: [
-        'subnets/create-a-local-subnet',
+        'subnets/install-avalanche-cli',
+        'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'How to Use Avalanche-CLI',
+      collapsed: false,
+      items: [
+        'subnets/create-evm-subnet-config',
+        'subnets/create-a-local-subnet',
+        'subnets/how-to-pause-and-resume-subnets',
+        'subnets/how-to-list-and-describe',
+        'subnets/how-to-delete-subnet',
+        'subnets/how-to-run-cli-with-docker',
       ],
     },
     {
@@ -168,6 +182,14 @@ const sidebars = {
       items: [
         'subnets/spaces',
         'subnets/wagmi',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Technical Reference',
+      collapsed: false,
+      items: [
+          'subnets/reference-cli-commands'
       ],
     },
     {
