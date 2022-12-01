@@ -509,7 +509,7 @@ This will set the fee config to the values specified in the `initialFeeConfig` f
 
 ### Changing Fee Reward Mechanisms
 
-Fee reward mechanism can be configured with this stateful precompile contract. Configuration can include burning fees, sending fees to a predefined address, or enabling fees to be collected by block producers. This precompile can be configured as follows in the genesis file:
+Fee reward mechanism can be configured with this stateful precompile contract called as `FeeRewardManager`. Configuration can include burning fees, sending fees to a predefined address, or enabling fees to be collected by block producers. This precompile can be configured as follows in the genesis file:
 
 ```json
 {
