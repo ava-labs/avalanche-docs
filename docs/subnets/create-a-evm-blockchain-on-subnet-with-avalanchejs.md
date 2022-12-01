@@ -2,20 +2,35 @@
 
 ## Introduction
 
-A blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. On Avalanche, VM serves as the blueprint for creating different instances of independent blockchains, yet sharing the same ruleset.
+A blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the
+genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function,
+transactions, and the API through which users can interact with the blockchain. On Avalanche, VM
+serves as the blueprint for creating different instances of independent blockchains, yet sharing the
+same rule set.
 
-All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary Subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their Subnet and invite other validators to be a part of it. A validator can be a part of multiple Subnets, but it must be validating the primary Subnet.
+All transactions on a blockchain need to be validated by the validators. **Subnets** are the group
+of validators that can validate one or many chains. On Avalanche, the primary Subnet, that currently
+validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their
+Subnet and invite other validators to be a part of it. A validator can be a part of multiple
+Subnets, but it must be validating the primary Subnet.
 
-On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages Subnets, Subnet validators, Subnet blockchain, etc. In this tutorial, you will learn about creating your Subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that Subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [Subnet series of tutorials](../subnets/README.md), you can get various great articles explaining Subnets, building custom VMs, and a lot more.
+On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages Subnets, Subnet validators,
+Subnet blockchain, etc. In this tutorial, you will learn about creating your Subnet and deploying
+**Ethereum Virtual Machine (EVM)** based blockchain on that Subnet through your Node.js application
+using **AvalancheJS**. AvalancheJS is a JavaScript library that allows you to issue commands to the
+Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc.
+On our [Subnet series of tutorials](../subnets/README.md), you can get various great articles
+explaining Subnets, building custom VMs, and a lot more.
 
 ## Requirements
 
 - [Go](https://golang.org/doc/install) version >= 1.18.1
 - [NodeJS](https://nodejs.org/en) Node >= 10.16 and npm >= 5.6
 
-## Project structure
+## Project Structure
 
-Open the terminal and make a new directory at your desired location. We will keep all the binaries and other codes in this folder.
+Open the terminal and make a new directory at your desired location. We will keep all the binaries
+and other codes in this folder.
 
 ```bash
 mkdir subnet-evm-demo
@@ -24,7 +39,11 @@ cd subnet-evm-demo
 
 ## Setting up AvalancheGo and Subnet-EVM Binaries
 
-Clients interact with Avalanche blockchain by issuing API calls to the nodes running `AvalancheGo`. We have to clone the repository, build its binary, and run it. If we want to deploy our blockchain, we have to put the blockchain's VM binary inside the `build/plugins` directory. Here we will also clone the `subnet-evm` repository, build the VM's binary, and copy it to the AvalancheGo's `build/plugins` directory. Follow the steps below -
+Clients interact with Avalanche blockchain by issuing API calls to the nodes running `AvalancheGo`.
+We have to clone the repository, build its binary, and run it. If we want to deploy our blockchain,
+we have to put the blockchain's VM binary inside the `build/plugins` directory. Here we will also
+clone the `subnet-evm` repository, build the VM's binary, and copy it to the AvalancheGo's
+`build/plugins` directory. Follow the steps below -
 
 ### Clone AvalancheGo Repository
 
@@ -35,7 +54,9 @@ cd avalanchego
 
 ### Build Binary
 
-Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../nodes/build/run-avalanche-node-manually.md).
+Running the below command will create an `avalanchego` binary inside the `build/` directory and will
+install the Coreth `evm` binary inside the `build/plugins` directory. For more information on
+running a node, please refer [this](../nodes/build/run-avalanche-node-manually.md).
 
 ```bash
 ./scripts/build.sh
@@ -52,7 +73,10 @@ cd subnet-evm
 
 ### Build Binary and Copy it to AvalancheGo Plugins
 
-Now run the following command to build the VM's binary inside the `build/` directory, named as `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. It is the id for this VM and corresponds to the string "**subnetevm**" zero-extended in a 32-byte array and encoded in CB58. Then copy it to AvalancheGo's `build/plugins` directory.
+Now run the following command to build the VM's binary inside the `build/` directory, named as
+`srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. It is the id for this VM and corresponds to the
+string "**Subnet-EVM**" zero-extended in a 32-byte array and encoded in CB58. Then copy it to
+AvalancheGo's `build/plugins` directory.
 
 ```bash
 ./scripts/build.sh build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
@@ -60,11 +84,14 @@ Now run the following command to build the VM's binary inside the `build/` direc
 cp build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ../avalanchego/build/plugins
 ```
 
-You can directly build the `subnet-evm` binary inside the plugins folder as well, by passing its location as the argument.
+You can directly build the `subnet-evm` binary inside the plugins folder as well, by passing its
+location as the argument.
 
 ## Setting up Local Avalanche Network
 
-For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
+For the development purpose, we can use [**Avalanche Network Runner
+(ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this
+tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 ### Clone Avalanche Network Runner
 
@@ -75,9 +102,11 @@ git clone https://github.com/ava-labs/avalanche-network-runner
 cd avalanche-network-runner
 ```
 
-### Install ANR binary
+### Install ANR Binary
 
-The following command will install the ANR binary inside `$GOPATH/bin`. Please make sure that you have the `$GOPATH/bin` path set in the `$PATH` environment variable, otherwise, you will not be able to run the binary unless you specify its location in each command.
+The following command will install the ANR binary inside `$GOPATH/bin`. Please make sure that you
+have the `$GOPATH/bin` path set in the `$PATH` environment variable, otherwise, you will not be able
+to run the binary unless you specify its location in each command.
 
 ```bash
 go install -v ./cmd/avalanche-network-runner
@@ -85,7 +114,9 @@ go install -v ./cmd/avalanche-network-runner
 
 ### Start RPC Server
 
-Run the following command to start the RPC server. This will help us in deploying our local cluster of validating nodes. Keep this tab open and run the subsequent commands in the new terminal (or tab).
+Run the following command to start the RPC server. This will help us in deploying our local cluster
+of validating nodes. Keep this tab open and run the subsequent commands in the new terminal (or
+tab).
 
 ```bash
 avalanche-network-runner server \
@@ -95,7 +126,9 @@ avalanche-network-runner server \
 
 ### Start 5 Node Cluster
 
-Run the following command to start a network cluster of 5 validating nodes, all running the AvalancheGo's binary and have the plugins of the `subnet-evm` VM. Put the `avalanchego` binary location as per your requirement.
+Run the following command to start a network cluster of 5 validating nodes, all running the
+AvalancheGo's binary and have the plugins of the `subnet-evm` VM. Put the `avalanchego` binary
+location as per your requirement.
 
 ```bash
 avalanche-network-runner control start \
@@ -103,7 +136,9 @@ avalanche-network-runner control start \
 --avalanchego-path ${HOME}/subnet-evm-demo/avalanchego/build/avalanchego
 ```
 
-You can see how the network is set up, and finally the node information at last (within 10-15 seconds), by viewing the logs in the previous tab. Now you have the local simulation of the Avalanche network, with 5 validating nodes.
+You can see how the network is set up, and finally the node information at last (within 10-15
+seconds), by viewing the logs in the previous tab. Now you have the local simulation of the
+Avalanche network, with 5 validating nodes.
 
 ```bash
 node1: node ID "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg", URI "http://localhost:48607"
@@ -120,7 +155,9 @@ avalanche-network-runner control uris \
 --endpoint="0.0.0.0:8080"
 ```
 
-For the demonstration purpose, let us choose `node1` as our subject node for making requests and finally making it a validator on our Subnet. Make sure to copy its `URI` and `PORT`, as we will need that later.
+For the demonstration purpose, let us choose `node1` as our subject node for making requests and
+finally making it a validator on our Subnet. Make sure to copy its `URI` and `PORT`, as we will need
+that later.
 
 ANR also provides us with the funded account with the following credentials.
 
@@ -133,7 +170,8 @@ We will be using these keys for signing transactions and as the controller of Su
 
 ## Setting up Node.js Project
 
-Make a new folder for the Node.js project inside the `subnet-evm-demo` directory, so that, the project structure would look like this.
+Make a new folder for the Node.js project inside the `subnet-evm-demo` directory, so that, the
+project structure would look like this.
 
 ```bash
 $HOME
@@ -144,11 +182,15 @@ $HOME
     |_subnet-evm-js
 ```
 
-There is no hard and fast rule to have the same project structre as demonstrated above. You can clone these repositories anywhere you want. You just have to run the commands accordingly to build binaries, copy VMs to `avalanchego/build/plugins/`, run avalanche network runner with the avalanchego's binary etc.
+There is no hard and fast rule to have the same project structure as demonstrated above. You can
+clone these repositories anywhere you want. You just have to run the commands accordingly to build
+binaries, copy VMs to `avalanchego/build/plugins/`, run Avalanche Network Runner with
+AvalancheGo's binary etc.
 
-### Installing dependencies
+### Installing Dependencies
 
-Here, `subnet-evm-js` is our node.js project folder. Move to the project directory and install the following dependencies.
+Here, `subnet-evm-js` is our node.js project folder. Move to the project directory and install the
+following dependencies.
 
 - avalanche (3.13.3 or above)
 - dotenv
@@ -158,7 +200,7 @@ Here, `subnet-evm-js` is our node.js project folder. Move to the project directo
 npm install --save avalanche dotenv yargs
 ```
 
-### Configuration and other details
+### Configuration and Other Details
 
 Make a `config.js` file and store the following information, about the node and its respective URI.
 
@@ -174,17 +216,24 @@ module.exports = {
 }
 ```
 
-We have `networkID: 1337` for the local network. Mainnet has `43114`, and Fuji has `43113`. Put the port here, that you have copied earlier from the ANR's output. Rest all should remain the same. Here we are also accessing `PRIVATEKEY` from the `.env` file. So make sure to include your funded private key in the `.env` file which was provided by ANR.
+We have `networkID: 1337` for the local network. Mainnet has `43114`, and Fuji has `43113`. Put the
+port here, that you have copied earlier from the ANR's output. Rest all should remain the same. Here
+we are also accessing `PRIVATEKEY` from the `.env` file. So make sure to include your funded private
+key in the `.env` file which was provided by ANR.
 
 ```env
 PRIVATEKEY="PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
 ```
 
-Always put secret information like the `.env` file restricted to yourself only and refrain from committing it to git by including it in the `.gitignore` file.
+Always put secret information like the `.env` file restricted to yourself only and refrain from
+committing it to git by including it in the `.gitignore` file.
 
 ### Import Libraries and Setup Instances for Avalanche APIs
 
-This code will serve as the helper function for all other functions spread over different files. It will instantiate all the necessary Avalanche APIs using AvalancheJS and export them for other files to use it. Other files can simply import and re-use. Make a new file `importAPI.js` and paste the following code inside it.
+This code will serve as the helper function for all other functions spread over different files. It
+will instantiate all the necessary Avalanche APIs using AvalancheJS and export them for other files
+to use it. Other files can simply import and re-use. Make a new file `importAPI.js` and paste the
+following code inside it.
 
 ```javascript
 const { Avalanche, BinTools, BN } = require("avalanche")
@@ -227,7 +276,11 @@ module.exports = {
 
 ### Genesis Data
 
-Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can also find it inside the `networks/11111/` folder of the `subnet-evm` repo or simply copy and paste the following data inside the `genesis.json` file of the project folder. (Note that fields `airdropHash` and `airdropAmount` have been removed.)
+Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics
+of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can
+also find it inside the `networks/11111/` folder of the `subnet-evm` repo or simply copy and paste
+the following data inside the `genesis.json` file of the project folder. (Note that fields
+`airdropHash` and `airdropAmount` have been removed.)
 
 ```json
 {
@@ -273,7 +326,9 @@ Each blockchain has some genesis state when it’s created. Each VM defines the 
 }
 ```
 
-This file will be responsible for setting up of origin state of the chain, like initial balance allocations of the native asset, transaction fees, restricting smart contract access, etc. You should look into 2 major parameters here in the genesis file -
+This file will be responsible for setting up of origin state of the chain, like initial balance
+allocations of the native asset, transaction fees, restricting smart contract access, etc. You
+should look into 2 major parameters here in the genesis file -
 
 ```json
 "alloc": {
@@ -283,19 +338,29 @@ This file will be responsible for setting up of origin state of the chain, like 
 }
 ```
 
-Put your Ethereum derived hexadecimal address (without `0x`) like what you have on the C-Chain. This address will receive the associated balance. Make sure to put your controlled address here, as without this you cannot distribute tokens to users for interacting with your chain (tokens are required for paying fees for the transactions). For development purposes, you can create a new address on MetaMask and use that here.
+Put your Ethereum derived hexadecimal address (without `0x`) like what you have on the C-Chain. This
+address will receive the associated balance. Make sure to put your controlled address here, as
+without this you cannot distribute tokens to users for interacting with your chain (tokens are
+required for paying fees for the transactions). For development purposes, you can create a new
+address on MetaMask and use that here.
 
 ```json
 "chainId": 11111
 ```
 
-Put a unique number as chain id for your chain. Conflicting chain ids can cause problems. You can read more about all of these parameters [here](../subnets/customize-a-subnet.md#genesis).
+Put a unique number as ChainID for your chain. Conflicting ChainIDs can cause problems. You can
+read more about all of these parameters [here](../subnets/customize-a-subnet.md#genesis).
 
 ## Creating Subnet
 
-Let's make a file for creating a new Subnet by issuing `buildCreateSubnetTx` on AvalancheJS' `platform` API. Two of the interesting arguments of this function are `subnet-owner` and `threshold`.
+Let's make a file for creating a new Subnet by issuing `buildCreateSubnetTx` on AvalancheJS'
+`platform` API. Two of the interesting arguments of this function are `subnet-owner` and
+`threshold`.
 
-Subnet owners control the Subnets by creating signed transactions for adding validators, creating new chains, etc. Whereas the threshold defines the minimum signature required for approving on behalf of all Subnet owners. By default it is 1, so will not pass any argument for that, as we have only one Subnet owner. Code is well commented for you to understand.
+Subnet owners control the Subnets by creating signed transactions for adding validators, creating
+new chains, etc. Whereas the threshold defines the minimum signature required for approving on
+behalf of all Subnet owners. By default it is 1, so will not pass any argument for that, as we have
+only one Subnet owner. Code is well commented for you to understand.
 
 ```javascript
 const {
@@ -325,7 +390,9 @@ async function createSubnet() {
 createSubnet()
 ```
 
-Make sure to keep the `txID` you received for this transaction. Once this transaction is accepted, a new Subnet with the same ID will be created. You can run this program now with the following command.
+Make sure to keep the `txID` you received for this transaction. Once this transaction is accepted, a
+new Subnet with the same ID will be created. You can run this program now with the following
+command.
 
 ```bash
 node createSubnet.js
@@ -333,9 +400,17 @@ node createSubnet.js
 
 ## Adding Subnet Validator
 
-The newly created Subnet requires validators to validate the transactions on the Subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the Subnet. Only transactions signed by the threshold (here 1) number of Subnet owners will be accepted to add validators. The Subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the Subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
+The newly created Subnet requires validators to validate the transactions on the Subnet's every
+blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the Subnet.
+Only transactions signed by the threshold (here 1) number of Subnet owners will be accepted to add
+validators. The Subnet owners which will sign this transaction is passed as the `subnetAuth`
+parameter. It is an array of indices, representing the Subnet owners from the array of addresses
+that we passed earlier in the `createSubnetTx()`.
 
-The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the help of comments. All the transaction calls of AvalancheJS starting with `build` will return an unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to the network.
+The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the
+help of comments. All the transaction calls of AvalancheJS starting with `build` will return an
+unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to
+the network.
 
 ```javascript
 const args = require("yargs").argv
@@ -388,7 +463,11 @@ async function addSubnetValidator() {
 addSubnetValidator()
 ```
 
-We have to pass command-line arguments like `nodeID`, `startTime`, `endTime`, `weight` and `subnetID` while calling the command. If we do not pass any nodeID, then by default it will use ID corresponding to the URI in the `config.js` by calling the `info.getNodeID()` API from AvalancheJS. Similarly, the default weight will be 20, if not passed. You can run this program now with the following command.
+We have to pass command-line arguments like `nodeID`, `startTime`, `endTime`, `weight` and
+`subnetID` while calling the command. If we do not pass any nodeID, then by default it will use ID
+corresponding to the URI in the `config.js` by calling the `info.getNodeID()` API from AvalancheJS.
+Similarly, the default weight will be 20, if not passed. You can run this program now with the
+following command.
 
 ```bash
 node addSubnetValidator.js \
@@ -397,11 +476,15 @@ node addSubnetValidator.js \
 --endTime $(date -v +14d +%s)
 ```
 
-We will keep the start time 5 minutes later than the current time. This `$(date -v +5M +%s)` will help to achieve the same. But you can put any timestamp in seconds there, given it is 20s later than the current time.
+We will keep the start time 5 minutes later than the current time. This `$(date -v +5M +%s)` will
+help to achieve the same. But you can put any timestamp in seconds there, given it is 20s later than
+the current time.
 
 ## Whitelisting Subnet from the Node
 
-Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their Subnet without any consent. If a node wants to validate the newly added Subnet, then it must restart its `avalanchego` binary with the new Subnet being whitelisted.
+Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their
+Subnet without any consent. If a node wants to validate the newly added Subnet, then it must restart
+its `avalanchego` binary with the new Subnet being whitelisted.
 
 ```bash
 avalanche-network-runner control restart-node \
@@ -412,17 +495,24 @@ avalanche-network-runner control restart-node \
 --whitelisted-subnets="<SUBNET_ID>"
 ```
 
-Once the node has restarted, it will again be re-assigned to a random API port. We have to update the `config.js` file with the new port.
+Once the node has restarted, it will again be re-assigned to a random API port. We have to update
+the `config.js` file with the new port.
 
 ## Creating Blockchain
 
-Once the Subnet setup is complete, Subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by the Subnet validators, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
+Once the Subnet setup is complete, Subnet owners can deploy any number of blockchains by building
+their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by
+the Subnet validators, then each node has to place the new VM binary in their
+`avalanchego/build/plugins/` folder.
 
-Let's write functions to build a new blockchain using the already created `genesis.json` and `subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps. Go through the steps by understanding each function and pasting it in your `createBlockchain.js` file.
+Let's write functions to build a new blockchain using the already created `genesis.json` and
+`subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps. Go through the
+steps by understanding each function and pasting it in your `createBlockchain.js` file.
 
 ### Importing Dependencies
 
-Let's import the dependencies by using the following snippet. We are importing `yargs` for reading command-line flags.
+Let's import the dependencies by using the following snippet. We are importing `yargs` for reading
+command-line flags.
 
 ```javascript
 const args = require("yargs").argv
@@ -439,7 +529,8 @@ const {
 
 ### Decoding CB58 `vmID` to String
 
-We have used the utility function for decoding `vmName` from the `vmID`. vmID is zero-extended in a 32-byte array and encoded in CB58 from a string. Paste the function shown below.
+We have used the utility function for decoding `vmName` from the `vmID`. vmID is zero-extended in a
+32-byte array and encoded in CB58 from a string. Paste the function shown below.
 
 ```javascript
 // Returns string representing vmName of the provided vmID
@@ -449,9 +540,13 @@ function convertCB58ToString(cb58Str) {
 }
 ```
 
-### Creating Blockchain
+### Create the Blockchain
 
-Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags as its input. The user must provide `subnetID` and `chainName` flag. The 3rd argument could be either `vmID` or `vmName`. Either one of them must be provided with the flags. Chain name is the name of blockchain you want to create with the provided `vmID` or `vmName`. The `vmID` must be the same as what we have created the `subnet-evm` binary with.
+Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags
+as its input. The user must provide `subnetID` and `chainName` flag. The third argument could be
+either `vmID` or `vmName`. Either one of them must be provided with the flags. Chain name is the
+name of blockchain you want to create with the provided `vmID` or `vmName`. The `vmID` must be the
+same as what we have created the `subnet-evm` binary with.
 
 ```javascript
 // Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
@@ -501,10 +596,12 @@ The code above is self-explanatory -
 - Processing command-line flags to constants - `subnetID`, `chainName` and `vmID`.
 - Building stringified JSON from genesis.json
 - Creating Subnet auth array.
-- Creating unsigned tx by calling `platform.buildCreateChainTx`.
-- Signing and issuing the signed tx.
+- Creating unsigned TX by calling `platform.buildCreateChainTx`.
+- Signing and issuing the signed TXs.
 
-Make sure to keep txID received by running this code. Once the transaction is committed, the txID will be the `blockchainID` or identifier for the newly created chain. You can run this program now with the following command.
+Make sure to keep txID received by running this code. Once the transaction is committed, the txID
+will be the `blockchainID` or identifier for the newly created chain. You can run this program now
+with the following command.
 
 ```bash
 node createBlockchain.js \
@@ -513,8 +610,14 @@ node createBlockchain.js \
 --vmName subnetevm
 ```
 
-Creating a new chain will take few seconds. You can also view the logs on the Avalanche Network Runner tab of the terminal.
+Creating a new chain will take few seconds. You can also view the logs on the Avalanche Network
+Runner tab of the terminal.
 
 ## Interacting with the New Blockchain with MetaMask
 
-We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this Subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
+We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added
+a validator to this Subnet, for validating different chains. Now it's time to interact with the new
+chain. You can follow this
+[part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn,
+how you can set up your MetaMask to interact with this chain. You can send tokens, create smart
+contracts, and do everything that you can do on C-Chain.

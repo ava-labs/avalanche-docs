@@ -9,13 +9,22 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-In this tutorial, we’ll create a very simple VM called the [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's blockchain contains a strictly increasing timestamp when the block was created and a 32-byte payload of data.
+In this tutorial, we’ll create a very simple VM called the
+[TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's
+blockchain contains a strictly increasing timestamp when the block was created and a 32-byte payload
+of data.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
+Such a server is useful because it can be used to prove a piece of data existed at the time the
+block was created. Suppose you have a book manuscript, and you want to be able to prove in the
+future that the manuscript exists today. You can add a block to the blockchain where the block’s
+payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today
+by showing that the block has the hash of your manuscript in its payload (this follows from the fact
+that finding the pre-image of a hash is impossible).
 
 ## Prerequisites
 
-Make sure you're familiar with the previous tutorial in this series, which dives into what virtual machines are.
+Make sure you're familiar with the previous tutorial in this series, which dives into what virtual
+machines are.
 
 - [Introduction to VMs](./introduction-to-vm.md)
 
@@ -23,11 +32,14 @@ Make sure you're familiar with the previous tutorial in this series, which dives
 
 Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/main).
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You
+can also follow the code in the [TimestampVM
+repository](https://github.com/ava-labs/timestampvm/tree/main).
 
 ### Codec
 
-`Codec` is required to encode/decode the block into byte representation. TimestampVM uses the default codec and manager.
+`Codec` is required to encode/decode the block into byte representation. TimestampVM uses the
+default codec and manager.
 
 ```go title="/timestampvm/codec.go"
 const (
@@ -54,7 +66,8 @@ func init() {
 
 ### State
 
-The `State` interface defines the database layer and connections. Each VM should define their own database methods. `State` embeds the `BlockState` which defines block-related state operations.
+The `State` interface defines the database layer and connections. Each VM should define their own
+database methods. `State` embeds the `BlockState` which defines block-related state operations.
 
 ```go title="/timestampvm/state.go"
 var (
@@ -283,6 +296,8 @@ Let’s look at our block implementation.
 
 The type declaration is:
 
+<!-- markdownlint-disable MD013 -->
+
 ```go title="/timestampvm/block.go"
 // Block is a block on the chain.
 // Each block contains:
@@ -303,11 +318,15 @@ type Block struct {
 }
 ```
 
-The `serialize:"true"` tag indicates that the field should be included in the byte representation of the block used when persisting the block or sending it to other nodes.
+<!-- markdownlint-enable MD013 -->
+
+The `serialize:"true"` tag indicates that the field should be included in the byte representation of
+the block used when persisting the block or sending it to other nodes.
 
 #### Verify
 
-This method verifies that a block is valid and stores it in the memory. It is important to store the verified block in the memory and return them in the `vm.GetBlock` method.
+This method verifies that a block is valid and stores it in the memory. It is important to store the
+verified block in the memory and return them in the `vm.GetBlock` method.
 
 ```go title="/timestampvm/block.go"
 // Verify returns nil iff this block is valid.
@@ -534,9 +553,10 @@ func (vm *VM) Initialize(
 }
 ```
 
-##### initGenesis
+##### `initGenesis`
 
-`initGenesis` is a helper method which initializes the genesis block from given bytes and puts into the state.
+`initGenesis` is a helper method which initializes the genesis block from given bytes and puts into
+the state.
 
 ```go title="/timestampvm/vm.go"
 // Initializes Genesis if required
@@ -592,7 +612,7 @@ func (vm *VM) initGenesis(genesisData []byte) error {
 
 #### CreateHandlers
 
-Registed handlers defined in `Service`. See [below](create-a-vm-timestampvm.md#api) for more on APIs.
+Registered handlers defined in `Service`. See [below](create-a-vm-timestampvm.md#api) for more on APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateHandlers returns a map where:
@@ -621,7 +641,8 @@ func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`. See [below](create-a-vm-timestampvm.md#static-api) for more on static APIs.
+Registers static handlers defined in `StaticService`. See
+[below](create-a-vm-timestampvm.md#static-api) for more on static APIs.
 
 ```go title="/timestampvm/vm.go"
 // CreateStaticHandlers returns a map where:
@@ -688,7 +709,8 @@ func (vm *VM) BuildBlock() (snowman.Block, error) {
 
 #### NotifyBlockReady
 
-`NotifyBlockReady` is a helper method that can send messages to the consensus engine through `toEngine` channel.
+`NotifyBlockReady` is a helper method that can send messages to the consensus engine through
+`toEngine` channel.
 
 ```go title="/timestampvm/vm.go"
 // NotifyBlockReady tells the consensus engine that a new block
@@ -720,9 +742,11 @@ func (vm *VM) getBlock(blkID ids.ID) (*Block, error) {
 }
 ```
 
-#### proposeBlock
+#### `proposeBlock`
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`, which we’ll see later.
+This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain
+that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`,
+which we’ll see later.
 
 ```go title="/timestampvm/vm.go"
 // proposeBlock appends [data] to [p.mempool].
@@ -772,6 +796,8 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
 
 `NewBlock` creates a new block with given block parameters.
 
+<!-- markdownlint-disable MD013 -->
+
 ```go title="/timestampvm/vm.go"
 // NewBlock returns a new Block where:
 // - the block's parent is [parentID]
@@ -798,6 +824,8 @@ func (vm *VM) NewBlock(parentID ids.ID, height uint64, data [dataLen]byte, times
 }
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 #### SetPreference
 
 `SetPreference` implements the `block.ChainVM`. It sets the preferred block ID.
@@ -812,7 +840,10 @@ func (vm *VM) SetPreference(id ids.ID) error {
 
 #### Other Functions
 
-These functions needs to be implemented for `block.ChainVM`. Most of them are just blank functions returning `nil`.
+These functions needs to be implemented for `block.ChainVM`. Most of them are just blank functions
+returning `nil`.
+
+<!-- markdownlint-disable MD013 -->
 
 ```go title="/timestampvm/vm.go"
 // Bootstrapped marks this VM as bootstrapped
@@ -858,6 +889,8 @@ func (vm *VM) AppRequestFailed(nodeID ids.ShortID, requestID uint32) error {
 func (vm *VM) HealthCheck() (interface{}, error) { return nil, nil }
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 ### Factory
 
 VMs should implement the `Factory` interface. `New` method in the interface returns a new VM instance.
@@ -874,7 +907,10 @@ func (f *Factory) New(*snow.Context) (interface{}, error) { return &VM{}, nil }
 
 ### Static API
 
-A VM may have a static API, which allows clients to call methods that do not query or update the state of a particular blockchain, but rather apply to the VM as a whole. This is analagous to static methods in computer programming. AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
+A VM may have a static API, which allows clients to call methods that do not query or update the
+state of a particular blockchain, but rather apply to the VM as a whole. This is analogous to static
+methods in computer programming. AvalancheGo uses [Gorilla’s RPC
+library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
 
 `StaticService` implements the static API for our VM.
 
@@ -891,7 +927,8 @@ For each API method, there is:
 - A struct that defines the method’s return values
 - A method that implements the API method, and is parameterized on the above 2 structs
 
-This API method encodes a string to its byte representation using a given encoding scheme. It can be used to encode data that is then put in a block and proposed as the next block for this chain.
+This API method encodes a string to its byte representation using a given encoding scheme. It can be
+used to encode data that is then put in a block and proposed as the next block for this chain.
 
 ```go title="/timestampvm/static_service.go"
 // EncodeArgs are arguments for Encode
@@ -972,13 +1009,15 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID.
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a
+client to propose the next block of this blockchain. The blockchain ID in the endpoint changes,
+since every blockchain has an unique ID.
 
-#### timestampvm.getBlock
+#### `timestampvm.getBlock`
 
 Get a block by its ID. If no ID is provided, get the latest block.
 
-**Signature**
+##### `getBlock` Signature
 
 ```sh
 timestampvm.getBlock({id: string}) ->
@@ -995,7 +1034,7 @@ timestampvm.getBlock({id: string}) ->
 - `timestamp` is the Unix timestamp when this block was created
 - `parentID` is the block’s parent
 
-**Example Call**
+##### `getBlock` Example Call
 
 ```bash
 curl -X POST --data '{
@@ -1008,7 +1047,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-**Example Response**
+##### `getBlock` Example Response
 
 ```json
 {
@@ -1023,7 +1062,7 @@ curl -X POST --data '{
 }
 ```
 
-**Implementation**
+##### `getBlock` Implementation
 
 ```go title="/timestampvm/service.go"
 // GetBlockArgs are the arguments to GetBlock
@@ -1077,11 +1116,11 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 }
 ```
 
-#### timestampvm.proposeBlock
+#### `timestampvm.proposeBlock`
 
 Propose the next block on this blockchain.
 
-**Signature**
+##### `proposeBlock` Signature
 
 ```sh
 timestampvm.proposeBlock({data: string}) -> {success: bool}
@@ -1089,7 +1128,7 @@ timestampvm.proposeBlock({data: string}) -> {success: bool}
 
 - `data` is the base 58 (with checksum) representation of the proposed block’s 32 byte payload.
 
-**Example Call**
+##### `proposeBlock` Example Call
 
 ```bash
 curl -X POST --data '{
@@ -1102,7 +1141,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-**Example Response**
+###### `proposeBlock` Example Response
 
 ```json
 {
@@ -1114,7 +1153,9 @@ curl -X POST --data '{
 }
 ```
 
-**Implementation**
+##### `proposeBlock` Implementation
+
+<!-- markdownlint-disable MD013 -->
 
 ```go title="/timestampvm/service.go"
 // ProposeBlockArgs are the arguments to ProposeValue
@@ -1146,9 +1187,12 @@ func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *P
 }
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 ### Plugin
 
-In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method,
+which serves our VM over gRPC so that AvalancheGo can call its methods.
 
 `main.go`'s contents are:
 
@@ -1171,23 +1215,31 @@ Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
 
 ### Executable Binary
 
-This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.1/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
+This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.1/scripts/build.sh)
+that builds an executable of this VM (when invoked, it runs the `main` method from above.)
 
-The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
+The path to the executable, as well as its name, can be provided to the build script via arguments.
+For example:
 
 ```text
 ./scripts/build.sh ../avalanchego/build/plugins timestampvm
 ```
 
-If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
+If no argument is given, the path defaults to a binary named with default VM ID:
+`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58. See [this](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to create your own VM ID.
+This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier
+for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array
+and encoded in CB58. See [this](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to
+create your own VM ID.
 
 ### VM Aliases
 
-Each VM has a pre-defined, static ID. For instance, the default ID of the TimestampVM is: `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
+Each VM has a pre-defined, static ID. For instance, the default ID of the TimestampVM is:
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
 
-It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
+It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a
+JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
 
 ```json
 {
@@ -1203,8 +1255,9 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
 AvalancheGo searches for and registers plugins under the `plugins` directory of the
 [build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
 
-To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory.
-Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+To install the virtual machine onto your node, you need to move the built virtual machine binary
+under this directory. Virtual machine executable names must be either a full virtual machine ID
+(encoded in CB58), or a VM alias.
 
 Copy the binary into the plugins directory.
 
@@ -1214,7 +1267,8 @@ cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 
 #### Node Is Not Running
 
-If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
+If your node isn't running yet, you can install all virtual machines under your `plugin` directory
+by starting the node.
 
 #### Node Is Already Running
 
@@ -1230,8 +1284,8 @@ curl -sX POST --data '{
 ```
 
 Confirm the response of `loadVMs` contains the newly installed virtual machine
-`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any others that weren't
-already installed previously in the response.
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any
+others that weren't already installed previously in the response.
 
 ```json
 {
@@ -1249,11 +1303,13 @@ already installed previously in the response.
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
-For more details about VM configs, see [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
+`/ext/vm/timestamp`. For more details about VM configs, see
+[here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also
-accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
+AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in
+previous step.
 
 ## Wrapping Up
 

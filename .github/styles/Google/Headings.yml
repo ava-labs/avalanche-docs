@@ -41,3 +41,4 @@ exceptions:
   - up
   - sayHello()
   - setGreeting()
+  - inside

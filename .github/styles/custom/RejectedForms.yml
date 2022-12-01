@@ -6,4 +6,4 @@ swap:
   "(?i)txs": TXs
   "(?i)hardfork": hard fork
   "(?i)abi": ABI
-  "(?i)ABI": ABIs
+  "(?i)abis": ABIs
