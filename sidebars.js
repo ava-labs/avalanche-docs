@@ -104,7 +104,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/install-avalanche-cli',
-        'subnets/create-first-subnet',
+        'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
