@@ -1,8 +1,8 @@
-# How to pause and resume local Subnets
+# How to Pause and Resume Local Subnets
 
 If you've deployed a Subnet locally, you can preserve and restore the state of your deployed Subnets.
 
-## Stopping the local network
+## Stopping the Local Network
 
 To gracefully stop a running local network while preserving state, run
 
@@ -17,7 +17,7 @@ When restarted, all of your deployed Subnets resume where they left off.
 Network stopped successfully.
 ```
 
-### Resuming the local network
+### Resuming the Local Network
 
 To resume a stopped network, run
 
@@ -52,7 +52,7 @@ Network ready to use. Local network node endpoints:
 
 <!-- markdownlint-enable MD013 -->
 
-## Checking network status
+## Checking Network Status
 
 If you'd like to determine whether or not a local Avalanche network is running on your machine, run
 
@@ -60,7 +60,7 @@ If you'd like to determine whether or not a local Avalanche network is running o
 avalanche network status
 ```
 
-### Example call
+### Example Call
 
 If the local network is running, the command prints something like
 

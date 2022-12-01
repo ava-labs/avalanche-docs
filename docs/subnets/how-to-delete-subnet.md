@@ -1,12 +1,12 @@
-# How to delete a Subnet
+# How to Delete a Subnet
 
-## Deleting a Subnet configuration
+## Deleting a Subnet Configuration
 
 To delete a created Subnet configuration, run
 
 `avalanche subnet delete <subnetName>`
 
-## Deleting a deployed Subnet
+## Deleting a Deployed Subnet
 
 You can't delete Subnets deployed to Mainnet or the Fuji Testnet.
 

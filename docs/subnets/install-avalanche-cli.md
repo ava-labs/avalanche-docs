@@ -14,7 +14,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 
 The script installs the binary inside the `~/bin` directory.
 
-## Adding Avalanche-CLI to your PATH
+## Adding Avalanche-CLI to Your PATH
 
 To call the `avalanche` binary from anywhere, you'll need to add it to your system path. If you installed
 the binary into the default location, you can run the following snippet to add it to your path.
@@ -32,7 +32,7 @@ For example:
 export PATH=~/bin:$PATH >> .bashrc
 ```
 
-## Checking your installation
+## Checking Your Installation
 
 You can test your installation by running `avalanche --version`. The tool should print the running version.
 
@@ -41,7 +41,7 @@ You can test your installation by running `avalanche --version`. The tool should
 To update your installation, you need to delete your current binary and download the latest version
 using the preceding steps.
 
-## Building from source
+## Building from Source
 
 The source code is available in this [Github repo](https://github.com/ava-labs/avalanche-cli).
 

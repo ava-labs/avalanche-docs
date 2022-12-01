@@ -1,4 +1,4 @@
-# Build your first Subnet
+# Build Your First Subnet
 
 The first step of learning Subnet development is learning to use [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
@@ -31,7 +31,7 @@ To add it to your path permanently, add an export command to your shell initiali
 
 For more detailed installation instructions, see [Avalanche-CLI Installation](install-avalanche-cli)
 
-## Create your Subnet configuration
+## Create Your Subnet Configuration
 
 This tutorials teaches you how to create an Ethereum Virtual Machine (EVM) based Subnet. To do so,
 you use Subnet-EVM, Avalanche's Subnet fork of the EVM. It supports airdrops, custom fee tokens,
@@ -49,11 +49,11 @@ with any name you like. Once you've picked your name, run
 
 The following sections walk through each question in the wizard.
 
-### Choose your VM
+### Choose Your VM
 
 Select `SubnetEVM`.
 
-### Enter your Subnet's ChainID
+### Enter Your Subnet's ChainID
 
 Choose a positive integer for your EVM-style ChainID.
 
@@ -63,16 +63,16 @@ Because this is a development Subnet, feel free to pick any number. Stay away fr
 ChainIDs such as 1 (Ethereum) or 43114 (Avalanche C-Chain) as those may cause issues with other
 tools.
 
-### Token symbol
+### Token Symbol
 
 Enter a string to name your Subnet's native token. The token symbol doesn't necessarily need to be unique.
 Example token symbols are AVAX, JOE, and BTC.
 
-### Subnet-EVM version
+### Subnet-EVM Version
 
 Select `Use latest version`.
 
-### Gas fee configuration
+### Gas Fee Configuration
 
 This question determines how to set gas fees on your Subnet.
 
@@ -93,13 +93,13 @@ funds to additional addresses.
 Precompiles are Avalanche's way of customizing the behavior of your Subnet. They're strictly an
 advanced feature, so you can safely select `No` for now.
 
-### Wrapping up
+### Wrapping Up
 
 If all worked successfully, the command prints `Successfully created subnet configuration`.
 
 You've successfully created your first Subnet configuration. Now it's time to deploy it.
 
-## Deploying Subnets locally
+## Deploying Subnets Locally
 
 To deploy your Subnet, run
 
@@ -158,7 +158,7 @@ Currency Symbol:  TUTORIAL
 You can use the deployment details to connect to and interact with your Subnet. Now it's time to
 interact with it.
 
-## Interacting with your Subnet
+## Interacting with Your Subnet
 
 You can use the value provided by `Browser Extension connection details` to connect to your Subnet
 with Metamask, Core, or any other wallet.
@@ -178,7 +178,7 @@ Currency Symbol:  TUTORIAL
 
 This tutorial uses Metamask.
 
-### Importing the test private key
+### Importing the Test Private Key
 
 :::warning
 This address derives from a well-known private key. Anyone can steal funds sent to this address.
@@ -224,7 +224,7 @@ action. You might want to try to [Deploy a Smart Contract on Your Subnet-EVM Usi
 
 ![Subnet in Metamask](/img/subnet-in-metamask.png)
 
-## Next steps
+## Next Steps
 
 Congrats Subnetooooor, you just deployed your first Subnet!
 

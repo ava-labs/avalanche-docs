@@ -1,4 +1,4 @@
-# How to deploy a Subnet on a local network
+# How to Deploy a Subnet on a Local Network
 
 This how-to guide focuses on taking an already created Subnet configuration and deploying it to a
 local Avalanche network.
@@ -8,7 +8,7 @@ local Avalanche network.
 - [Avalanche-CLI installed](install-avalanche-cli)
 - You have [created a Subnet configuration](create-evm-subnet-config)
 
-## Deploying Subnets locally
+## Deploying Subnets Locally
 
 In the following commands, make sure to substitute the name of your Subnet configuration for
 `<subnetName>`.
@@ -74,7 +74,7 @@ You can use the deployment details to connect to and interact with your Subnet.
 To manage the newly deployed local Avalanche network, see
 [the `avalanche network` command tree](reference-cli-commands#network).
 
-### Deploying multiple Subnets
+### Deploying Multiple Subnets
 
 You may deploy multiple Subnets concurrently, but you can't deploy the same Subnet multiple times
 without resetting all deployed Subnet state.

@@ -1,4 +1,4 @@
-# Avalanche-CLI commands
+# Avalanche-CLI Commands
 
 Avalanche-CLI is a command line tool that gives developers access to
 everything Avalanche. This release specializes in helping developers
@@ -17,7 +17,7 @@ configuration of your very first Subnet. Then, go ahead and deploy it
 with the `subnet deploy` command. You can use the rest of the commands to
 manage your Subnet configurations and live deployments.
 
-### Subnet addValidator
+### Subnet AddValidator
 
 The `subnet addValidator` command whitelists a primary network validator to
 validate the provided deployed Subnet.
@@ -56,7 +56,7 @@ avalanche subnet addValidator [subnetName] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet configure
+### Subnet Configure
 
 AvalancheGo nodes support several different configuration files. Subnets have their own
 Subnet config which applies to all chains/VMs in the Subnet. Each chain within the Subnet
@@ -76,7 +76,7 @@ avalanche subnet configure [subnetName] [flags]
     --subnet-config string   path to the subnet configuration
 ```
 
-### Subnet create
+### Subnet Create
 
 The `subnet create` command builds a new genesis file to configure your Subnet.
 By default, the command runs an interactive wizard. It walks you through
@@ -110,7 +110,7 @@ avalanche subnet create [subnetName] [flags]
     --vm-version string   version of vm template to use
 ```
 
-### Subnet delete
+### Subnet Delete
 
 The `subnet delete` command deletes an existing Subnet configuration.
 
@@ -126,7 +126,7 @@ avalanche subnet delete [flags]
 -h, --help help for delete
 ```
 
-### Subnet deploy
+### Subnet Deploy
 
 The `subnet deploy` command deploys your Subnet configuration locally, to Fuji Testnet, or to Mainnet.
 
@@ -167,7 +167,7 @@ avalanche subnet deploy [subnetName] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet describe
+### Subnet Describe
 
 The `subnet describe` command prints the details of a Subnet configuration to the console.
 By default, the command prints a summary of the configuration. By providing the `--genesis`
@@ -186,7 +186,7 @@ avalanche subnet describe [subnetName] [flags]
 -h, --help      help for describe
 ```
 
-### Subnet export
+### Subnet Export
 
 The `subnet export` command write the details of an existing Subnet deploy to a file.
 
@@ -206,7 +206,7 @@ avalanche subnet export [subnetName] [flags]
 -o, --output string   write the export data to the provided file path
 ```
 
-### Subnet import
+### Subnet Import
 
 The `subnet import` command imports a Subnet configuration from a file or a git repository.
 
@@ -236,7 +236,7 @@ avalanche subnet import [subnetPath] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet join
+### Subnet Join
 
 The `subnet join` command configures your validator node to begin validating a new Subnet.
 
@@ -276,7 +276,7 @@ avalanche subnet join [subnetName] [flags]
     --testnet testnet             join on testnet (alias for `fuji`)
 ```
 
-### Subnet list
+### Subnet List
 
 The `subnet list` command prints the names of all created Subnet configurations.
 
@@ -292,7 +292,7 @@ avalanche subnet list [flags]
 -h, --help   help for list
 ```
 
-### Subnet publish
+### Subnet Publish
 
 The `subnet publish` command publishes the Subnet's VM to a repository.
 
@@ -318,7 +318,7 @@ avalanche subnet publish [subnetName] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet stats
+### Subnet Stats
 
 The `subnet stats` command prints validator statistics for the given Subnet.
 
@@ -348,7 +348,7 @@ to shutdown, restart, and clear that network.
 
 This network currently supports multiple, concurrently deployed Subnets.
 
-### Network clean
+### Network Clean
 
 The `network clean` command shuts down your local, multi-node network. All deployed Subnets
 shutdown and delete their state. You can restart the network by deploying a new Subnet
@@ -367,7 +367,7 @@ avalanche network clean [flags]
 -h, --help   help for clean
 ```
 
-### Network start
+### Network Start
 
 The `network start` command starts a local, multi-node Avalanche network on your machine.
 
@@ -389,7 +389,7 @@ avalanche network start [flags]
     --snapshot-name string         name of snapshot to use to start the network from (default "default-1654102509")
 ```
 
-### Network status
+### Network Status
 
 The `network status` command prints whether or not a local Avalanche network is running and
 some basic stats about the network.
@@ -406,7 +406,7 @@ avalanche network status [flags]
 -h, --help   help for status
 ```
 
-### Network stop
+### Network Stop
 
 The `network stop` command shuts down your local, multi-node network.
 
@@ -433,7 +433,7 @@ avalanche network stop [flags]
 
 The `transaction` command suite provides all of the utilities required to sign multisig transactions.
 
-### Transaction commit
+### Transaction Commit
 
 The `transaction commit` command commits a transaction by submitting it to the p-chain.
 
@@ -450,7 +450,7 @@ avalanche transaction commit [subnetName] [flags]
     --input-tx-filepath string   Path to the transaction signed by all signatories
 ```
 
-### Transaction sign
+### Transaction Sign
 
 The `transaction sign` command signs a multisig transaction.
 
@@ -482,7 +482,7 @@ these keys on Mainnet.
 
 To get started, use the `key create` command.
 
-### Key create
+### Key Create
 
 The `key create` command generates a new private key to use for creating and controlling
 test Subnets. Keys generated by this command are NOT cryptographically secure enough to
@@ -508,7 +508,7 @@ avalanche key create [keyName] [flags]
 -h, --help          help for create
 ```
 
-### Key delete
+### Key Delete
 
 The `key delete` command deletes an existing signing key.
 
@@ -528,7 +528,7 @@ avalanche key delete [keyName] [flags]
 -h, --help    help for delete
 ```
 
-### Key export
+### Key Export
 
 The `key export` command exports a created signing key. You can use an exported key in other
 applications or import it into another instance of Avalanche-CLI.
@@ -547,7 +547,7 @@ flag, the command writes the key to a file of your choosing.
 -o, --output string   write the key to the provided file path
 ```
 
-### Key list
+### Key List
 
 The `key list` command prints information for all stored signing
 keys or for the ledger addresses associated to certain indices.
