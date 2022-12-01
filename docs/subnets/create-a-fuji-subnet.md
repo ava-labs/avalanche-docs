@@ -77,7 +77,7 @@ The response should look something like:
 ```
 
 That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing.
-We will need this id in the later section when calling [addValidator](#add-a-validator).
+We will need this ID in the later section when calling [addValidator](#add-a-validator).
 
 :::info
 
@@ -245,7 +245,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 As we are creating an EVM Subnet, we can accept the default `Subnet-EVM`.
-Next, we are asked for a Chain ID. You should provide your own ID. Check
+Next, we are asked for a ChainID. You should provide your own ID. Check
 [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
 ```bash
@@ -817,10 +817,12 @@ avalanche subnet list
 To connect MetaMask with your blockchain on the new Subnet running on your local computer, you can
 add a new network on MetaMask with the following values:
 
+```text
 - Network Name: testsubnet
 - RPC URL: <http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc>
 - Chain ID: 3333
 - Symbol: TST
+```
 
 :::note
 

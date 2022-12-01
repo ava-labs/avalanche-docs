@@ -13,3 +13,4 @@ swap:
   "(?i)avalanche network runner": Avalanche Network Runner
   "(?i)subnet[ -]?cli": Subnet-CLI
   "(?i)metamask": MetaMask
+  "(?i)chain[ -]?id": ChainID

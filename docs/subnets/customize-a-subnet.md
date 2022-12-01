@@ -82,9 +82,9 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
 
 ### Chain Config
 
-`chainID`: Denotes the chainID of to be created chain. Must be picked carefully since a conflict with
+`chainID`: Denotes the ChainID of to be created chain. Must be picked carefully since a conflict with
 other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/)
-to avoid ID collision, reserve and publish your chain ID properly.
+to avoid ID collision, reserve and publish your ChainID properly.
 
 You can use `eth_getChainConfig` RPC call to get the current chain config. See
 [here](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) for more info.
@@ -827,7 +827,7 @@ See every precompile initial configuration in their relevant `Initial Configurat
 ## AvalancheGo Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain
-of Subnets can have its own custom configuration. If a Subnet's chain id is
+of Subnets can have its own custom configuration. If a Subnet's ChainID is
 `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
