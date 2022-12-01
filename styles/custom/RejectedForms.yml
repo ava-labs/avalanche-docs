@@ -1,0 +1,6 @@
+extends: substitution
+message: Use '%s' instead of '%s'
+level: error
+swap:
+  "(?i)tx": TX
+  "(?i)hardfork": hard fork
