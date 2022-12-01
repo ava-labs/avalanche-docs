@@ -8,7 +8,7 @@ _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-
 
 Make sure you have truffle installed:
 
-```
+```zsh
 npm install -g truffle
 ```
 
