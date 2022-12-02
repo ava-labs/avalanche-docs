@@ -20,6 +20,10 @@ The overall config is `.vale.ini`. You can find the individual style in `.github
 
 Look at `.markdownlint.json`.
 
+## Adding a File to the CI for Style Checking
+
+Edit `.github/workflows/ci.yml`. Add the file or folder to the `files` tag in the `Vale` task.
+
 ## Run Checkers Locally
 
 For readability, the CI only print errors. You absolutely should address warnings and suggestions in

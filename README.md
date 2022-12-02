@@ -61,11 +61,10 @@ contents hosting service.
 **Please make sure that you run this command to see if there is any error in building the package,**
 **and fix them before pushing your changes.**
 
-### Format
+### Style
 
-We strongly recommend [Visual Studio Code](https://visualstudio.microsoft.com/) with
-[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) whose
-configuration file can be found [here](./.prettierrc).
+This repository uses a series of style checking and formatting tools. See `style-checker-notes.md`
+for more details.
 
 ## Search
 
