@@ -65,7 +65,7 @@ The response should look something like:
 ```
 
 That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing.
-We will need this id in the later section when calling [Subnet-CLI wizard](#subnet-cli-wizard).
+We will need this ID in the later section when calling [Subnet-CLI wizard](#subnet-cli-wizard).
 
 :::info
 
@@ -204,7 +204,7 @@ Run the following command to:
   already exist);
 - Create a Subnet;
 - Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the Subnet;
-- Create a new blockchain with a virtual machine whose id is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+- Create a new blockchain with a virtual machine whose ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
 
 ```bash
 subnet-cli wizard \
@@ -268,7 +268,7 @@ Once you've updated your config, you'll need to restart your AvalancheGo node fo
 take effect.
 
 If you completed the steps successfully, you'll see the node print out something like these (ignore
-the exact value of all ids, they are just for illustration purpose):
+the exact value of all IDs, they are just for illustration purpose):
 
 <!-- markdownlint-disable MD013 -->
 

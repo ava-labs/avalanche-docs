@@ -53,7 +53,7 @@ run from the `plugins` directory.
 
 AvalancheGo will only validate the primary network by default. In order to add the DFK Subnet, you
 will need to add the DFK Subnet ID to the set of whitelisted Subnets in the node's config file or
-pass it through the command line options of the node. Once the node's config file has been updated,
+pass it through the command-line options of the node. Once the node's config file has been updated,
 you will need to start the Avalanche node (restart if already running).
 
 Once you start the node, it will begin syncing the Primary Network. Once the node reaches the point
@@ -100,7 +100,7 @@ the config file on the command line:
 ./build/avalanchego --config-file ~/.avalanchego/config.json
 ```
 
-If you want to pass the whitelisted Subnets through the command line flag. You can append the other
+If you want to pass the whitelisted Subnets through the command-line flag. You can append the other
 flags or even the `--config-file` flag as well, according to your need.
 
 ```bash

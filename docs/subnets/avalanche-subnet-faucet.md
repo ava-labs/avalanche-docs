@@ -64,10 +64,10 @@ The following parameters are required.
 ```
 
 - `ID` - Each Subnet chain should have a unique and relatable ID.
-- `NAME` - Name of the Subnet chain that will appear on the website.
+- `NAME` - Name of the Subnet chain that will appear on the site.
 - `RPC` - A valid RPC URL for accessing the chain.
 - `CHAINID` - ChainID of the chain
-- `EXPLORER` - Base URL of standard explorer's website.
+- `EXPLORER` - Base URL of standard explorer's site.
 - `IMAGE` - URL of the icon of the chain that will be shown in the dropdown.
 - `MAX_PRIORITY_FEE` - Maximum tip per faucet drop in **wei** or **10<sup>-18</sup>** unit (for
   EIP1559 supported chains)
@@ -101,7 +101,7 @@ Clone this repository at your preferred location.
 git clone https://github.com/ava-labs/avalanche-faucet
 ```
 
-### Client Side Configurations
+### Client-Side Configurations
 
 We need to configure our application with the server API endpoints and CAPTCHA site keys. All the
 client-side configurations are there in the `client/src/config.json` file. Since there are no
@@ -136,8 +136,8 @@ leading `/v1/api` and the server is running on localhost at port 3000, then you 
 
 ### Server-Side Configurations
 
-On the server side, we need to configure 2 files - `.env` for secret keys and `config.json` for
-chain and API's rate limiting configurations.
+On the server-side, we need to configure 2 files - `.env` for secret keys and `config.json` for
+chain and API rate limiting configurations.
 
 #### Setup Environment Variables
 
@@ -355,7 +355,7 @@ faucet and hence Cloudflare. We are using this as default.
 ### CAPTCHA Verification
 
 CAPTCHA is required to prove the user is a human and not a bot. For this purpose, we will use
-[Google's reCAPTCHA](https://www.google.com/recaptcha/intro/v3.html). The server side will require
+[Google's reCAPTCHA](https://www.google.com/recaptcha/intro/v3.html). The server-side will require
 `CAPTCHA_SECRET` that should not be exposed. You can set the threshold score to pass the CAPTCHA
 test by the users
 [here](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
@@ -468,7 +468,7 @@ docker start faucet-container
 Using the faucet is quite straightforward, but for the sake of completeness, let's go through the
 steps, to collect your first test coins.
 
-### Visit Avalanche Faucet Website
+### Visit Avalanche Faucet Site
 
 Go to <https://faucet.avax.network>. You will see various network parameters like network name, faucet
 balance, drop amount, drop limit, faucet address, etc.
@@ -507,12 +507,12 @@ troubleshooting as shown below. If none of the troubleshooting works, reach us t
   Subnet can set its drop limits. The above message suggests that you have reached your drop limit,
   that is the number of times you could request coins within the window of X minutes. You should try
   requesting after X minutes. If you are facing this problem, even when you are requesting for the
-  first time in the window, you may be behind some proxy, WiFi, or VPN service that is also being
+  first time in the window, you may be behind some proxy, Wi-Fi, or VPN service that is also being
   used by some other user.
 
 - **CAPTCHA verification failed! Try refreshing** We are using v3 of [Google's
   reCAPTCHA](https://developers.google.com/recaptcha/docs/v3). This version uses scores between 0
-  and 1 to rate the interaction of humans with the website, with 0 being the most suspicious one.
+  and 1 to rate the interaction of humans with the site, with 0 being the most suspicious one.
   You do not have to solve any puzzle or mark the **I am not a Robot** checkbox. The score will be
   automatically calculated. We want our users to score at least 0.3 to use the faucet. This is
   configurable, and we will update the threshold after having broader data. But if you are facing
