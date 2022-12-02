@@ -51,3 +51,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_JSCPD: false
           VALIDATE_YAML: false
+          VALIDATE_GITLEAKS: false
