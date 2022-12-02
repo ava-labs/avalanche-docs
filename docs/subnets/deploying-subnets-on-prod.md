@@ -24,7 +24,7 @@ server.
 
 ### Server OS
 
-Although AvalancheGo can run on a MacOS or a Windows computer, we strongly recommend running nodes
+Although AvalancheGo can run on a macOS or a Windows computer, we strongly recommend running nodes
 on computers running Linux as they are designed specifically for server loads and all the tools and
 utilities needed for administering a server are native to Linux.
 
@@ -57,7 +57,7 @@ you can count on to be properly maintained and monitored.
 If you plan on running nodes on your own hardware, make sure they satisfy the minimum HW
 specification as outlined earlier. Pay close attention to proper networking setup, making sure the
 p2p port (9651) is accessible and public IP properly configured on the node. Make sure the node is
-connected to the network physically (not over WiFi), and that the router is powerful enough to
+connected to the network physically (not over Wi-Fi), and that the router is powerful enough to
 handle a couple of thousands of persistent TCP connections and that network bandwidth can
 accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
@@ -127,7 +127,7 @@ copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-r
 
 Please make sure you don't reuse any node's node-id by accident, especially don't restore another
 node's ID, see [here](../nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node
-must has its own unique node id, otherwise, the nodes sharing the same id will not behave correctly,
+must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly,
 which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.
 
 ## Subnet Deploy
@@ -178,7 +178,7 @@ Before running the wizard you will need to [create the
 `VMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the
 genesis `json` file.
 
-An example of wizard command line could look like:
+An example of wizard command-line could look like:
 
 <!-- markdownlint-disable MD013 -->
 

@@ -72,7 +72,7 @@ us in setting up of our bridge contracts
 - [`ChainSafe/ChainBridge`](https://github.com/ChainSafe/ChainBridge) - This will help us in setting
 up of our off-chain relayer.
 
-### Installing ChainBridge Command Line Tool
+### Installing ChainBridge Command-Line Tool
 
 Using the following command, we can clone and install ChainBridge's command-line tool. This will
 help us in setting up bridge contracts and demonstrating bridge transfers. Once the bridge contracts
@@ -280,7 +280,7 @@ Open a new terminal session, while keeping the previous session loaded with envi
 We have to load the environment variables in this session too. Load these variables in this session
 too using the `source` command.
 
-Now, move to the `deploy-bridge` directory and run the following command to clone the relayer repo
+Now, move to the `deploy-bridge` directory and run the following command to clone the relayer repository
 (implemented in Go), and build its binary.
 
 ```bash
@@ -364,7 +364,7 @@ the relayer, it will ask for this password.
 
 The setup is now complete - both on-chain and off-chain. Now we just have to start the relayer and
 test the bridge. For testing purposes, we will be using `cb-sol-cli` to make deposit transactions on
-the bridge. But you can make your front end and integrate it with the bridge using the ABIs.
+the bridge. But you can make your frontend and integrate it with the bridge using the ABIs.
 
 ### Start Relayer
 

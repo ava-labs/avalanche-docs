@@ -1173,7 +1173,7 @@ curl -X POST --data '{
 
 #### `timestampvm.lastAccepted`
 
-Returns the Id of the last accepted block.
+Returns the ID of the last accepted block.
 
 ```sh
 curl -X POST --data '{

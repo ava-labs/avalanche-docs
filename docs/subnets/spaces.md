@@ -15,4 +15,4 @@ In summary, Spaces is an experimental implementation of Subnet which includes th
 
 - [SpacesVM](https://github.com/ava-labs/spacesvm) => which is new Avalanche-native VM
 - [Spaces](https://github.com/ava-labs/spacesvm-js) => SpacesVM Subnet Demo
-- [Subnet-CLI](https://github.com/ava-labs/subnet-cli) => Subnet command line client
+- [Subnet-CLI](https://github.com/ava-labs/subnet-cli) => Subnet command-line client

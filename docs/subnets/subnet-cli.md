@@ -53,7 +53,7 @@ interfaces exclusively with the public Avalanche API Endpoints.
 
 ### Network Selection
 
-Should a `subnet-cli` command call an API end point, `--public-uri` is used to specify where the end
+Should a `subnet-cli` command call an API endpoint, `--public-uri` is used to specify where the end
 point is.
 
 - The default value is `https://api.avax-test.network` which points to the Fuji Testnet. If you run

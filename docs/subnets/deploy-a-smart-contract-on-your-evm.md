@@ -46,7 +46,7 @@ into the popup and _Click_ import.
 
 ![remix Subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
-For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 
 ![remix Subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
@@ -90,4 +90,3 @@ You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences
 RPC URL. For example you can deploy your contracts with
 [hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
 by changing `url` and `chainId` in the `hardhat.config.ts`.
-

@@ -164,8 +164,8 @@ As a few things will be installed into `$GOPATH/bin`, please make sure that `$GO
 
 Download the following prerequisites into your `$GOPATH`:
 
-- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repo
-- Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repo
+- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repository
+- Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
 - Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
@@ -267,7 +267,7 @@ Note: The ABI must have named outputs in order to generate the precompile templa
 Now that we have an ABI for the precompile gen tool to interact with, we can run the following
 command to generate our HelloWorld precompile!
 
-Let's go back to the root of the Subnet-EVM repo and run the PrecompileGen script:
+Let's go back to the root of the Subnet-EVM repository and run the PrecompileGen script:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -438,8 +438,8 @@ type HelloWorldConfig struct {
 The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
 Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever
 `blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a default
-key value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The
-`StateDB` allows us to store a key value mapping of 32 byte hashes. The below code snippet can be
+key-value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The
+`StateDB` allows us to store a key-value mapping of 32 byte hashes. The below code snippet can be
 copied and pasted to overwrite the default `Configure()` code.
 
 ```go
@@ -840,7 +840,7 @@ network will start up multiple blockchains. Blockchains are nothing but instance
 To spin up these blockchains, we actually need to create and modify the genesis to enable our
 HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain.
 Please and copy and paste the below code snippet (genesis) into `/tmp/subnet-evm-genesis.json`.
-Note this should not be in your repo, but rather in the `/tmp` directory.
+Note this should not be in your repository, but rather in the `/tmp` directory.
 
 ```json
 {
@@ -942,7 +942,7 @@ avalanche-network-runner server \
 The next steps are to build the Subnet-EVM binary with all the latest precompile changes and the
 latest AvalancheGo Binary.
 
-In another terminal tab run this command in the root of the Subnet-EVM repo to get the latest local
+In another terminal tab run this command in the root of the Subnet-EVM repository to get the latest local
 Subnet-EVM binary. This build script will place the binary in `AVALANCHEGO_PLUGIN_PATH` which we
 will define later:
 
@@ -951,9 +951,9 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh
 ```
 
-Leave the Subnet-EVM repo. Go to the AvalancheGo repo in whatever directory you keep repos and run
-the command below to get the latest AvalancheGo binary. The following commands build and copy the
-binary to the `AVALANCHEGO_EXEC_PATH` which we will define later:
+Leave the Subnet-EVM repository. Go to the AvalancheGo repository in whatever directory you keep
+repositoriess and run the command below to get the latest AvalancheGo binary. The following commands
+build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego

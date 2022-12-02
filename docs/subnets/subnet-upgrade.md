@@ -130,7 +130,7 @@ Make sure you use the correct VM ID, otherwise, your VM will not get updated and
 :::
 
 After you do that, you can start the node back up (if running as service do `sudo systemctl start
-avalanchego`). You can monitor the log output on the node to check that everything is ok, or you can
+avalanchego`). You can monitor the log output on the node to check that everything is OK, or you can
 use the
 [info.getNodeVersion()](https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeversion) API
 to check the versions. Example output would look like:

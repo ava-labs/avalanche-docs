@@ -1235,7 +1235,7 @@ create your own VM ID.
 
 ### VM Aliases
 
-Each VM has a pre-defined, static ID. For instance, the default ID of the TimestampVM is:
+Each VM has a predefined, static ID. For instance, the default ID of the TimestampVM is:
 `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
 
 It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a

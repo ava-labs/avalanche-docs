@@ -7,3 +7,4 @@ swap:
   "(?i)hardfork": hard fork
   "(?i)abi": ABI
   "(?i)abis": ABIs
+  "(?i)repos?": repository

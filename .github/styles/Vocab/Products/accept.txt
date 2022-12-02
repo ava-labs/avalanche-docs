@@ -41,8 +41,6 @@ relayer
 Relayer
 relayers
 Relayers
-repo
-Repo
 stdout
 subcommands
 Subnet

@@ -64,7 +64,7 @@ running a node, please refer [this](../nodes/build/run-avalanche-node-manually.m
 
 ### Clone Subnet-EVM Repository
 
-Move to the `subnet-evm-demo` directory, and clone the repo.
+Move to the `subnet-evm-demo` directory, and clone the repository.
 
 ```bash
 git clone https://github.com/ava-labs/subnet-evm
@@ -74,7 +74,7 @@ cd subnet-evm
 ### Build Binary and Copy it to AvalancheGo Plugins
 
 Now run the following command to build the VM's binary inside the `build/` directory, named as
-`srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. It is the id for this VM and corresponds to the
+`srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. It is the ID for this VM and corresponds to the
 string "**Subnet-EVM**" zero-extended in a 32-byte array and encoded in CB58. Then copy it to
 AvalancheGo's `build/plugins` directory.
 
@@ -189,7 +189,7 @@ AvalancheGo's binary etc.
 
 ### Installing Dependencies
 
-Here, `subnet-evm-js` is our node.js project folder. Move to the project directory and install the
+Here, `subnet-evm-js` is our Node.js project folder. Move to the project directory and install the
 following dependencies.
 
 - avalanche (3.13.3 or above)
@@ -278,7 +278,7 @@ module.exports = {
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics
 of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can
-also find it inside the `networks/11111/` folder of the `subnet-evm` repo or simply copy and paste
+also find it inside the `networks/11111/` folder of the `subnet-evm` repository or simply copy and paste
 the following data inside the `genesis.json` file of the project folder. (Note that fields
 `airdropHash` and `airdropAmount` have been removed.)
 
@@ -542,7 +542,7 @@ function convertCB58ToString(cb58Str) {
 
 ### Create the Blockchain
 
-Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags
+Now we will work upon the `createBlockchain()` function. This function takes 3-4 command-line flags
 as its input. The user must provide `subnetID` and `chainName` flag. The third argument could be
 either `vmID` or `vmName`. Either one of them must be provided with the flags. Chain name is the
 name of blockchain you want to create with the provided `vmID` or `vmName`. The `vmID` must be the
