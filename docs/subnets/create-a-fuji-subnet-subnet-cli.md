@@ -378,8 +378,8 @@ You can inspect your confirmed transaction.
 ### Other Tools
 
 You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `ChainID` and
-RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM
-Using Remix and MetaMask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your
-contracts with [hardhat quick start
-guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and
-`chainId` in the `hardhat.config.ts`.
+RPC URL. For example you can follow this article to
+[Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](./deploy-a-smart-contract-on-your-evm.md).
+Or you can deploy your contracts with
+[hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+by changing `url` and `chainId` in the `hardhat.config.ts`.
