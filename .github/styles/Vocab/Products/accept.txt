@@ -61,6 +61,7 @@ keyName
 liveness
 lookups
 Mainnet
+Markdownlint
 mempool
 Mempool
 MetaMask
@@ -99,6 +100,7 @@ Subnet-EVM
 Subnets
 superset
 Testnet
+textlint
 TXs
 Unix
 untrusted
