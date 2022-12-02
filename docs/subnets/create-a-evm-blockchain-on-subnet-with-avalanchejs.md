@@ -464,7 +464,7 @@ addSubnetValidator()
 ```
 
 We have to pass command-line arguments like `nodeID`, `startTime`, `endTime`, `weight` and
-`subnetID` while calling the command. If we do not pass any nodeID, then by default it will use ID
+`subnetID` while calling the command. If we do not pass any NodeID, then by default it will use ID
 corresponding to the URI in the `config.js` by calling the `info.getNodeID()` API from AvalancheJS.
 Similarly, the default weight will be 20, if not passed. You can run this program now with the
 following command.

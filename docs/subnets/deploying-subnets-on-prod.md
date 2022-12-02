@@ -125,7 +125,7 @@ across nodes, and as such can safely be copied from one node to another. Just ma
 node is not running during the copy process, as that can result in a corrupted database. Database
 copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
 
-Please make sure you don't reuse any node's node-id by accident, especially don't restore another
+Please make sure you don't reuse any node's NodeID by accident, especially don't restore another
 node's ID, see [here](../nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node
 must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly,
 which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.

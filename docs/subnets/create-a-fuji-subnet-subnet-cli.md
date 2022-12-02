@@ -173,7 +173,7 @@ build-dir
 ```
 
 To put the `subnet-evm` binary in the right place, run the following command
-(assuming the `avalanchego` and `subnet-evm` repos are in the same folder):
+(assuming the `avalanchego` and `subnet-evm` repositories are in the same folder):
 
 ```bash
 mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalanchego/build/plugins;

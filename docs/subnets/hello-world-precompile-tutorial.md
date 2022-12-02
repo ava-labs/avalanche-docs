@@ -952,7 +952,7 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
 Leave the Subnet-EVM repository. Go to the AvalancheGo repository in whatever directory you keep
-repositoriess and run the command below to get the latest AvalancheGo binary. The following commands
+repositories and run the command below to get the latest AvalancheGo binary. The following commands
 build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later:
 
 ```bash
