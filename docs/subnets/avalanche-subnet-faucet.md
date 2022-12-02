@@ -207,7 +207,7 @@ In the above configuration drip amount is in `nAVAX` or `gwei`, whereas fees are
 example, with the above configurations, the faucet will send `1 AVAX` with maximum fees per gas
 being `100 nAVAX` and priority fee as `2 nAVAX`.
 
-The rate limiter for C Chain will only accept 1 request in 60 minutes for a particular API and 2
+The rate limiter for C-Chain will only accept 1 request in 60 minutes for a particular API and 2
 requests in 60 minutes for the WAGMI chain. Though it will skip any failed requests so that users
 can request tokens again, even if there is some internal error in the application. On the other
 hand, the global rate limiter will allow 15 requests per minute on every API. This time failed

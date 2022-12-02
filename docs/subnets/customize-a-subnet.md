@@ -215,7 +215,7 @@ token, that is 1 AVAX/1 WAGMI):
 
 ### Setting a Custom Fee Recipient
 
-By default, all fees are burned (sent to the blackhole address with `"allowFeeRecipients": false`).
+By default, all fees are burned (sent to the black hole address with `"allowFeeRecipients": false`).
 However, it is possible to enable block producers to set a fee recipient (who will get compensated
 for blocks they produce).
 

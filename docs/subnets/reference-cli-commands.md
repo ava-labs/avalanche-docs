@@ -435,7 +435,7 @@ The `transaction` command suite provides all of the utilities required to sign m
 
 ### Transaction Commit
 
-The `transaction commit` command commits a transaction by submitting it to the p-chain.
+The `transaction commit` command commits a transaction by submitting it to the P-Chain.
 
 **Usage:**
 

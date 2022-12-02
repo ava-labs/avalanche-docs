@@ -11,7 +11,7 @@ Coreth release.
 
 ## Network Parameters
 
-- Network ID: 11111
+- NetworkID: 11111
 - ChainID: 11111
 - Block Gas Limit: 20,000,000 (2.5x C-Chain)
 - 10s Gas Target: 100,000,000 (~6.67x C-Chain)

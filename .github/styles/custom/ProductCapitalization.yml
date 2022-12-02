@@ -16,3 +16,8 @@ swap:
   "(?i)chain[ -]?id": ChainID
   "(?i)github": GitHub
   "(?i)wagmi": WAGMI
+  "(?i)subnet[ -]?id": SubnetID
+  "(?i)network[ -]?id": NetworkID
+  "(?i)c[ -]?chain": C-Chain
+  "(?i)p[ -]?chain": P-Chain
+  "(?i)x[ -]?chain": X-Chain
