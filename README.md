@@ -63,8 +63,8 @@ contents hosting service.
 
 ### Style
 
-This repository uses a series of style checking and formatting tools. See `style-checker-notes.md`
-for more details.
+This repository uses a series of style checking and formatting tools. See [`style-checker-notes.md`]
+(style-checker-notes.md) for more details.
 
 ## Search
 

@@ -14,15 +14,16 @@ Avalanche-Docs uses a variety of linting and style checking programs including
 
 ### Vale Configs
 
-The overall config is `.vale.ini`. You can find the individual style in `.github/styles`.
+The overall config is [`.vale.ini`](.vale.ini). You can find the individual style in [`.github/styles`](.github/styles).
 
 ### Markdown Lint Configs
 
-Look at `.markdownlint.json`.
+Look at [`.markdownlint.json`](.markdownlint.json).
 
 ## Adding a File to the CI for Style Checking
 
-Edit `.github/workflows/ci.yml`. Add the file or folder to the `files` tag in the `Vale` task.
+Edit [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Add the file or folder to the `files` 
+tag in the `Vale` task.
 
 ## Run Checkers Locally
 
