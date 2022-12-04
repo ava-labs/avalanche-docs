@@ -14,7 +14,8 @@ Avalanche-Docs uses a variety of linting and style checking programs including
 
 ### Vale Configs
 
-The overall config is [`.vale.ini`](.vale.ini). You can find the individual style in [`.github/styles`](.github/styles).
+The overall config is [`.vale.ini`](.vale.ini). You can find the individual style 
+in [`.github/styles`](.github/styles).
 
 ### Markdown Lint Configs
 
