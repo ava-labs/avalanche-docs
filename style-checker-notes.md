@@ -73,13 +73,15 @@ To block a specific word from appearing in the repository, add the word to
 
 If you would like to enforce a specific product name such as `Avalanche-CLI` as opposed to
 `avalanche-cli` or `Avalanche CLI`, you create a new regular expression substitution pattern in
-either [.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml) 
+either
+[.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml) 
 or [.github/styles/custom/RejectForms.yml`](.github/styles/custom/RejectForms.yml).
 
 ### Adding an Exception to an Existing Rule
 
 If you' like to add an exception to a Vale rule, navigate to the rule in `.github/styles` and add an
-entry under `exceptions`. See [.github/styles/GoogleModified/Headings.yml](.github/styles/GoogleModified/Headings.yml) for an example.
+entry under `exceptions`. See 
+[.github/styles/GoogleModified/Headings.yml](.github/styles/GoogleModified/Headings.yml) for an example.
 
 ### Ignoring Markdownlint Inline
 
