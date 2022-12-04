@@ -35,6 +35,7 @@ Config
 Coreth
 Crabada
 dapp
+dApp
 delegators
 deployer
 deployers
@@ -53,6 +54,7 @@ GitHub
 Golang
 gwei
 Gwei
+incentivized
 IPs
 JavaScript
 json
@@ -69,8 +71,11 @@ mintable
 Mintable
 multisig
 multistep
+Nakamoto
 npm
+parameterizable
 parameterization
+performant
 permissioned
 permissionless
 precompile
@@ -98,6 +103,8 @@ Subnet
 SUBNET
 Subnet-EVM
 Subnets
+subsampling
+Subsampling
 superset
 Testnet
 textlint

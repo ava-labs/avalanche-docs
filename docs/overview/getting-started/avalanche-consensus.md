@@ -4,7 +4,11 @@ description: Consensus is the task of getting a group of computers to come to an
 
 # Avalanche Blockchain Consensus
 
-Consensus is the task of getting a group of computers to come to an agreement on a decision. Computers can reach a consensus by following a set of steps called a consensus protocol. Avalanche is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high throughput. It is energy efficient and does not require special computer hardware. It performs well in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche consensus protocol. The whitepaper is [here.](https://www.avalabs.org/whitepapers)
+<!-- markdownlint-disable MD013 -->
+
+
+Consensus is the task of getting a group of computers to come to an agreement on a decision. Computers can reach a consensus by following a set of steps called a consensus protocol. Avalanche is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high throughput. It is energy efficient and does not require special computer hardware. It performs well in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche consensus protocol. The white-paper is [here.](https://www.avalabs.org/white-papers)
+
 
 ## Video
 
@@ -82,7 +86,7 @@ These values, which are constants, are quite small on the Avalanche Network. The
 
 Snowball is very scalable as the number of nodes on the network, _n_, increases. Regardless of the number of participants in the network, the number of consensus messages sent remains the same because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in the network.
 
-## DAGs (**D**irected **A**cyclic **G**raphs)
+## DAGs (Directed Acyclic Graphs)
 
 Now let's introduce a data structure called a DAG or Directed Acyclic Graph. A DAG gives a **partial ordering** of decisions. For example, check out the DAG in this diagram:
 
@@ -118,7 +122,7 @@ In this example we the acceptance threshold, β, is `4`. Transaction **V** has `
 
 ![Working example 4](/img/cons-05-Consensus_Doc_txY-3.png)
 
-Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It follows the same steps as before and subsamples _k_ (`4`) validators and asks if they prefer transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated accordingly.
+Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It follows the same steps as before and sub-samples _k_ (`4`) validators and asks if they prefer transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated accordingly.
 
 ![Working example 5](/img/cons-06-Consensus_Doc_txY-4.png)
 
@@ -136,7 +140,7 @@ Transaction **Z** gets a chit. It also has a confidence of `1` and `1` consecuti
 
 ## Vertices
 
-Everything discussed to this point is how Avalanche is described in [the Avalanche whitepaper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). The implementation of the Avalanche consensus protocol by Ava Labs (namely in AvalancheGo) has some optimizations for latency and throughput. The most important optimization is the use of **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very similar to how it's described above.
+Everything discussed to this point is how Avalanche is described in [the Avalanche white-paper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20white-paper.pdf). The implementation of the Avalanche consensus protocol by Ava Labs (namely in AvalancheGo) has some optimizations for latency and throughput. The most important optimization is the use of **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very similar to how it's described above.
 
 If a node receives a vote for a vertex, it counts as a vote for all the transactions in a vertex, and votes are applied transitively upward. A vertex is accepted when all the transactions which are in it are accepted. If a vertex contains a rejected transaction then it is rejected and all of its descendants are rejected. If a vertex is rejected, any valid transactions are re-issued into a new vertex which is not the child of a rejected vertex. New vertices are appended to preferred vertices.
 
@@ -178,13 +182,13 @@ Conflicting transactions are not guaranteed to be live. That's not really a prob
 
 Avalanche works for linear chains too. The protocol is largely the same as above, but each vertex has only one parent. This gives a total ordering of vertices. This is useful for certain applications where one needs to know if a transaction came before another transaction, such as with smart contracts. Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol for linear chains.
 
-If there are no undecided transactions, the Avalanche consensus protocol _quiesces_. That is, it does nothing if there is no work to be done. Avalanche is more sustainable than Proof-of-work where nodes need to constantly do work.
+If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does nothing if there is no work to be done. Avalanche is more sustainable than Proof-of-work where nodes need to constantly do work.
 
 Avalanche has no leader. Any node can propose a transaction and any node that has staked AVAX can vote on every transaction, which makes the network more robust and decentralized.
 
 ## Why Do We Care?
 
-Avalanche is a general consensus engine. It doesn't matter what type of application is put on top of it. The protocol allows the decoupling of the application layer from the consensus layer. If you're building a Dapp on Avalanche then you just need to define a few things, like how conflicts are defined and what is in a transaction. You don't need to worry about how nodes come to an agreement. The consensus protocol is a black box that put something into it and it comes back as accepted or rejected.
+Avalanche is a general consensus engine. It doesn't matter what type of application is put on top of it. The protocol allows the decoupling of the application layer from the consensus layer. If you're building a dApp on Avalanche then you just need to define a few things, like how conflicts are defined and what is in a transaction. You don't need to worry about how nodes come to an agreement. The consensus protocol is a black box that put something into it and it comes back as accepted or rejected.
 
 Avalanche can be used for all kinds of applications, not just P2P payment networks. Avalanche's Primary Network has an instance of the Ethereum Virtual Machine, which is backward compatible with existing Ethereum Dapps and dev tooling. The Ethereum consensus protocol has been replaced with Avalanche consensus to enable lower block latency and higher throughput.
 

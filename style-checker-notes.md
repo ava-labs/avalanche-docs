@@ -60,19 +60,21 @@ instructions to do so below.
 
 ### Adding New Approved Words/Spellings
 
-To add a new spelling rule, add the word to `.github/styles/Products/accept.txt`. The file is
+To add a new spelling rule, add the word to
+[.github/styles/Vocab/Products/accept.txt](.github/styles/Vocab/Products/accept.txt). The file is
 case-sensitive and plurals/other tenses count as separate words.
 
 ### Adding Rejected Words/Spellings
 
 To block a specific word from appearing in the repository, add the word to
-`.github/styles/Products/reject.txt`.
+[.github/styles/Vocab/Products/reject.txt](.github/styles/Vocab/Products/reject.txt).
 
 ### Enforcing a Specific Spelling
 
 If you would like to enforce a specific product name such as `Avalanche-CLI` as opposed to
 `avalanche-cli` or `Avalanche CLI`, you create a new regular expression substitution pattern in
-either `.github/styles/custom/ProductCapitalization.yml` or `.github/styles/custom/RejectForms.yml`.
+either [.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml) 
+or [.github/styles/custom/RejectForms.yml`](.github/styles/custom/RejectForms.yml).
 
 ### Adding an Exception to an Existing Rule
 

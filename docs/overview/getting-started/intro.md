@@ -1,6 +1,7 @@
 ---
 slug: /
 ---
+<!-- markdownlint-disable MD013 -->
 
 # Overview
 
@@ -30,11 +31,11 @@ In the common case when a transaction has no conflicts, finalization happens ver
 
 It is guaranteed (with high probability based on system parameters) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
 
-Learn more technical components of the Avalanche consensus protocol by reading the [whitepaper](https://arxiv.org/pdf/1906.08936.pdf).
+Learn more technical components of the Avalanche consensus protocol by reading the [white paper](https://arxiv.org/pdf/1906.08936.pdf).
 
 ## Snowman Consensus Protocol
 
-Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](overview/getting-started/avalanche-platform.md#platform-chain-p-chain) and [C-Chain](overview/getting-started/avalanche-platform.md#contract-chain-c-chain) implement the Snowman consensus protocol.
+Snowman is a chain-optimized consensus protocol-high-throughput, totally ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](overview/getting-started/avalanche-platform.md#platform-chain-p-chain) and [C-Chain](overview/getting-started/avalanche-platform.md#contract-chain-c-chain) implement the Snowman consensus protocol.
 
 ## Key Features
 
@@ -44,7 +45,7 @@ Uses a novel consensus protocol, developed by a team of Cornell computer scienti
 
 ### Scalability
 
-Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains.
+Capable of 4,500 transactions per second-an order of magnitude greater than existing blockchains.
 
 ### Security
 
@@ -60,7 +61,8 @@ Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-wo
 
 ### Smart Contract Support
 
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, Metamask, Truffle, and more.
+Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, 
+MetaMask, Truffle, and more.
 
 ### Private and Public Blockchains
 
@@ -68,4 +70,4 @@ Create your own public or private blockchains.
 
 ### Designed for Finance
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets.
+Native support for easily creating and trading digital smart assets with complex, custom rule-sets.
