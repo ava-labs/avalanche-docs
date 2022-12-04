@@ -32,7 +32,7 @@ Consensus is the task of getting a group of computers to come to an agreement on
 
 First, let's develop some intuition about the protocol. Imagine a room full of people trying to agree on what to get for lunch. Suppose it's a binary choice between pizza and barbecue. Some people might initially prefer pizza while others initially prefer barbecue. Ultimately, though, everyone's goal is to achieve **consensus**.
 
-Everyone asks a random subset of the people in the room what their lunch preference is. If more than half say pizza, the person thinks, "Ok, looks like things are leaning toward pizza. I prefer pizza now." That is, they adopt the _preference_ of the majority. Similarly, if a majority say barbecue, the person adopts barbecue as their preference.
+Everyone asks a random subset of the people in the room what their lunch preference is. If more than half say pizza, the person thinks, "OK, looks like things are leaning toward pizza. I prefer pizza now." That is, they adopt the _preference_ of the majority. Similarly, if a majority say barbecue, the person adopts barbecue as their preference.
 
 Everyone repeats this process. Each round, more and more people have the same preference. This is because the more people that prefer an option, the more likely someone is to receive a majority reply and adopt that option as their preference. After enough rounds, they reach consensus and decide on one option, which everyone prefers.
 

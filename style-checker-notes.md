@@ -79,7 +79,7 @@ or [.github/styles/custom/RejectForms.yml`](.github/styles/custom/RejectForms.ym
 ### Adding an Exception to an Existing Rule
 
 If you' like to add an exception to a Vale rule, navigate to the rule in `.github/styles` and add an
-entry under `exceptions`. See `.github/styles/GoogleModified/Headings.yml` for an example.
+entry under `exceptions`. See [.github/styles/GoogleModified/Headings.yml](.github/styles/GoogleModified/Headings.yml) for an example.
 
 ### Ignoring Markdownlint Inline
 
