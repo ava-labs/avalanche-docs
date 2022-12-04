@@ -39,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "textlint": "^12.2.4",
+    "textlint-rule-terminology": "^3.0.4"
   }
 }
