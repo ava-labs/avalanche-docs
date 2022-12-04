@@ -52,6 +52,7 @@ EOAs
 Ethereum
 feeRecipient
 GitHub
+github
 Golang
 gwei
 Gwei
@@ -75,6 +76,7 @@ multistep
 Nakamoto
 npm
 Ok
+OK
 parameterizable
 parameterization
 performant
