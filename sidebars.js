@@ -31,15 +31,15 @@ const sidebars = {
         {
           type: 'link',
           label: 'Whitepapers',
-          href: 'https://www.avalabs.org/whitepapers',
-        },
-      ],
+          href: 'https://www.avalabs.org/whitepapers'
+        }
+      ]
     },
     'overview/projects',
     {
       type: 'link',
       label: 'Audits',
-      href: 'https://github.com/ava-labs/audits',
+      href: 'https://github.com/ava-labs/audits'
     },
     'disclaimer'
   ],
@@ -56,7 +56,7 @@ const sidebars = {
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
     'quickstart/integrate-exchange-with-avalanche',
-    'quickstart/blockchain-flow',
+    'quickstart/blockchain-flow'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -70,8 +70,8 @@ const sidebars = {
         'dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain',
         'dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain',
         'dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace',
-        'dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify',
-      ],
+        'dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify'
+      ]
     },
     {
       type: 'category',
@@ -80,8 +80,8 @@ const sidebars = {
       items: [
         'dapps/nfts/README',
         'dapps/nfts/intro-to-erc721s',
-        'dapps/nfts/preparing-nft-files',
-      ],
+        'dapps/nfts/preparing-nft-files'
+      ]
     },
     {
       type: 'category',
@@ -92,9 +92,9 @@ const sidebars = {
         'dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain',
         'dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask',
         'dapps/smart-contracts/verify-smart-contracts',
-        'dapps/smart-contracts/add-avalanche-programmatically',
-      ],
-    },
+        'dapps/smart-contracts/add-avalanche-programmatically'
+      ]
+    }
   ],
   subnets: [
     'subnets/README',
@@ -120,7 +120,7 @@ const sidebars = {
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
-      ],
+      ]
     },
     {
       type: 'category',
@@ -132,8 +132,8 @@ const sidebars = {
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
-        'subnets/how-to-run-cli-with-docker',
-      ],
+        'subnets/how-to-run-cli-with-docker'
+      ]
     },
     {
       type: 'category',
@@ -146,7 +146,7 @@ const sidebars = {
         'subnets/create-a-vm-timestampvm',
         'subnets/create-a-vm-blobvm',
         'subnets/create-a-simple-rust-vm'
-      ],
+      ]
     },
     {
       type: 'category',
@@ -155,7 +155,7 @@ const sidebars = {
       items: [
         'subnets/deploying-subnets-on-prod',
         'subnets/setup-dfk-node'
-      ],
+      ]
     },
     {
       type: 'category',
@@ -163,8 +163,8 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/subnet-upgrade',
-        'subnets/case-study-wagmi-upgrade',
-      ],
+        'subnets/case-study-wagmi-upgrade'
+      ]
     },
     {
       type: 'category',
@@ -175,8 +175,8 @@ const sidebars = {
         'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
-        'subnets/deploy-a-gnosis-safe-on-your-evm',
-      ],
+        'subnets/deploy-a-gnosis-safe-on-your-evm'
+      ]
     },
     {
       type: 'category',
@@ -184,16 +184,16 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/spaces',
-        'subnets/wagmi',
-      ],
+        'subnets/wagmi'
+      ]
     },
     {
       type: 'category',
       label: 'Technical Reference',
       collapsed: false,
       items: [
-          'subnets/reference-cli-commands'
-      ],
+        'subnets/reference-cli-commands'
+      ]
     },
     {
       type: 'link',
