@@ -8,7 +8,7 @@ Avalanche-Docs uses a variety of linting and style checking programs including
   - [GitHub Action](https://github.com/errata-ai/vale-action)
 - [Markdownlint](https://github.com/DavidAnson/markdownlint)
   - Uses [Super-Linter](https://github.com/github/super-linter) as a GitHub Action. This pulls in a
-    few other linting tools such as [ESLint](https://eslint.org/) for JavaScript files.
+    few other linting tools.
 
 ## Config Files
 
@@ -20,10 +20,6 @@ in [`.github/styles`](.github/styles).
 ### Markdown Lint Configs
 
 Look at [`.markdownlint.json`](.markdownlint.json).
-
-### ESLint Configs
-
-Look at [`.eslintrc.json`](.eslintconfigrc.json).
 
 ## Adding a File to the CI for Style Checking
 
@@ -50,11 +46,6 @@ To run locally, install the [Markdownlint CLI](https://github.com/igorshubovych/
 
 Run with `markdownlint <filename>`. There is also an extension to add it to
 [VS Code](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint).
-
-### ESLint
-
-You can install locally by running `yarn`. Run `npx eslint <filename>`. You can use the `--fix` flag
-to fix many issues.
 
 ## Resolving Flagged Issues
 
