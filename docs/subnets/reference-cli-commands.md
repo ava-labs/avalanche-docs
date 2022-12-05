@@ -1,6 +1,6 @@
 # Avalanche-CLI Commands
 
-Avalanche-CLI is a command line tool that gives developers access to
+Avalanche-CLI is a command-line tool that gives developers access to
 everything Avalanche. This release specializes in helping developers
 build and test Subnets.
 
@@ -216,9 +216,9 @@ or importing from subnets running public networks
 
 #### Import from a File
 
-To import from a file, you can optionally provide the path as a command line argument.
+To import from a file, you can optionally provide the path as a command-line argument.
 Alternatively, running the command without any arguments triggers an interactive wizard.
-To import from a repo, go through the wizard. By default, an imported Subnet doesn't
+To import from a repository, go through the wizard. By default, an imported Subnet doesn't
 overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
 flag.
 
@@ -478,7 +478,7 @@ The `transaction` command suite provides all of the utilities required to sign m
 
 ### Transaction Commit
 
-The `transaction commit` command commits a transaction by submitting it to the p-chain.
+The `transaction commit` command commits a transaction by submitting it to the P-Chain.
 
 **Usage:**
 
