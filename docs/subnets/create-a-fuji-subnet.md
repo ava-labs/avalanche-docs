@@ -2,11 +2,13 @@
 
 :::note
 
-This document has been updated using the new Avalanche-CLI to deploy a Subnet on `Fuji`. If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
+This document has been updated using the new Avalanche-CLI to deploy a Subnet on `Fuji`.
+If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
 
 :::
 
-After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on `Fuji` Testnet.
+After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md),
+next step is to try it out on `Fuji` Testnet.
 
 In this article, it is shown how to do the following on `Fuji` Testnet.
 
@@ -15,16 +17,20 @@ In this article, it is shown how to do the following on `Fuji` Testnet.
 - Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
 
-All IDs in this article are for illustration purposes. They can be different in your own run-through of this tutorial.
+All IDs in this article are for illustration purposes. They can be different in your own
+run-through of this tutorial.
 
 ## Prerequisites
 
-- 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section [Nodes](../nodes/README.md) on how to run a node and become a validator.
+- 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section
+[Nodes](../nodes/README.md) on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
 
-Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
+Avalanche can run multiple blockchains. Each blockchain is an instance of a
+[Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in
+an object-oriented language is an instance of a class.
 That is, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract
@@ -35,7 +41,9 @@ most other Ethereum client features.
 
 ## Fuji Testnet
 
-For this tutorial, it is recommended that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step below particularly to start your node on `Fuji`:
+For this tutorial, it is recommended that you follow
+[Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)
+and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
@@ -70,7 +78,9 @@ The user is going to need this ID in the later section when calling [addValidato
 
 :::info
 
-With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean) to shorten the time for bootstrapping.
+With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch.
+You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean)
+to shorten the time for bootstrapping.
 
 :::
 
@@ -80,10 +90,11 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 ### Private Key
 
-All commands which issue a transaction require either a private key loaded into the tool, or a connected ledger device.
+All commands which issue a transaction require either a private key loaded into the tool, or
+a connected ledger device.
 
-This tutorial focuses on stored key usage and leave ledger operation details for the `Mainnet` deploy one, as
-`Mainnet` operations requires ledger usage, while for `Fuji` it is optional.
+This tutorial focuses on stored key usage and leave ledger operation details for the `Mainnet`
+deploy one, as `Mainnet` operations requires ledger usage, while for `Fuji` it is optional.
 
 `Avalanche-CLI` supports the following key operations:
 
@@ -94,7 +105,10 @@ This tutorial focuses on stored key usage and leave ledger operation details for
 
 :::warning
 
-The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key is going to be stored on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
+The private key created for this tutorial should only be used for testing operations on `Fuji` or
+other testnets. Do NOT use this key on `Mainnet`. The key is going to be stored on your file
+system. Whoever gets access to that key is going to have access to all funds secured by that
+private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
 
 :::
 
@@ -158,8 +172,8 @@ Key loaded
 ```
 
 Finally, the `list` command is going to list all your keys in your system and their associated addresses
-(the keys are stored in a special directory on your file system, tampering with the directory is going to
-result in malfunction of the tool).
+(the keys are stored in a special directory on your file system, tampering with the directory is
+going to result in malfunction of the tool).
 
 <!-- markdownlint-disable MD013 -->
 
@@ -188,7 +202,8 @@ avalanche key list
 
 :::danger
 
-Do these steps only to follow this tutorial for `Fuji` addresses. To access the wallet for `Mainnet`, the use of a ledger device is strongly recommended.
+Do these steps only to follow this tutorial for `Fuji` addresses. To access the wallet for `Mainnet`,
+the use of a ledger device is strongly recommended.
 
 :::
 
@@ -207,7 +222,12 @@ After following these 3 steps, your test key should now have a balance on the P-
 
 ## Create an EVM Subnet
 
-Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a [local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to `Mainnet`.
+Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a
+[local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create`
+commands only creates a specification of your Subnet on the local file system. Afterwards the
+Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the
+`create` command, then first deploying to a local network and successively to `Fuji` - and
+eventually to `Mainnet`.
 
 To create an EVM Subnet, run the `subnet create` command with a name of your choice:
 
@@ -423,8 +443,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Subnets are currently permissioned only. Therefore, the process now requires the user to provide
 _which keys can control the Subnet_. The user is prompted to provide one or more **P-Chain addresses**.
-Only the keys corresponding to these addresses is going to be able to add or remove validators. Make sure
-to provide **Fuji P-Chain** addresses (`P-Fuji....`).
+Only the keys corresponding to these addresses is going to be able to add or remove validators.
+Make sure to provide **Fuji P-Chain** addresses (`P-Fuji....`).
 
 ```bash
 Configure which addresses may add new validators to the subnet.
@@ -452,8 +472,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Finally, there is a need to define the threshold of how many keys are required for a change to be valid
-(there is some input validation). For example, if 1 key only is needed, as preceding, just enter
- 1. The threshold _could_ be arbitrary depending on the needs, for example 2 of 4 addresses,
+(there is some input validation). For example, if 1 key only is needed, as preceding, just enter 1.
+The threshold _could_ be arbitrary depending on the needs, for example 2 of 4 addresses,
 1 of 3, 3 of 5, etc., but currently this tool only works if _at least one control key is owned
 by the same private key used here and the threshold is set to 1_.
 
@@ -492,8 +512,8 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 
 Well done. You have just created your own Subnet with your own Subnet-EVM running on `Fuji`.
 
-To get your new Subnet information, visit [Avascan Testnet](https://testnet.avascan.info/). The search best
-works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
+To get your new Subnet information, visit [Avascan Testnet](https://testnet.avascan.info/). The
+search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
 into the search box and you should see your shiny new blockchain information.
 
 ## Add a Validator
@@ -632,7 +652,8 @@ This means the node has now been added as validator to the given Subnet on `Fuji
 You might already have a running validator which you want to add to a specific Subnet. For this 
 run the `join` command.
 This is a bit of a special command. The `join` command is going to either just _print the required
-instructions_ for your already running node or is going to attempt at configuring a config file the user provides.
+instructions_ for your already running node or is going to attempt at configuring a config file the
+user provides.
 
 First network selection:
 
@@ -644,8 +665,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-In the [Deploy the Subnet](#deploy-the-subnet) section, it has been shown that a Subnet is permissioned via a
-set of keys. Therefore not any node can be added as validator to the Subnet. A holder of a control
+In the [Deploy the Subnet](#deploy-the-subnet) section, it has been shown that a Subnet is permissioned
+via a set of keys. Therefore not any node can be added as validator to the Subnet. A holder of a control
 key _must_ call
 [Subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order
 to allow the node to validate the Subnet. So the tool allows the user now to verify if the node has
@@ -665,8 +686,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
 
 There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
-"Automatic" is going to attempt at editing a config file and setting up your plugin directory, while "Manual"
-is going to just print the required config to the screen. See what "Automatic" does:
+"Automatic" is going to attempt at editing a config file and setting up your plugin directory, while
+"Manual" is going to just print the required config to the screen. See what "Automatic" does:
 
 ```bash
 ✔ Automatic
@@ -721,8 +742,8 @@ The config file has been edited. To use it, make sure to start the node with the
 It is **required to restart the node**.
 
 If choosing "Manual" instead, the tool is going to just print _instructions_. The user is going to have
-to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is going to
-be different in your case.
+to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is
+going to be different in your case.
 
 ```bash
 ✔ Manual
@@ -759,8 +780,8 @@ take effect.
 
 ## Subnet Export
 
-This tool is most useful on the machine where a validator is or is going to be running. In order to allow a
-VM to run on a different machine, the configuration can be exported. Just need to provide a path
+This tool is most useful on the machine where a validator is or is going to be running. In order to
+allow a VM to run on a different machine, the configuration can be exported. Just need to provide a path
 to where to export the data:
 
 ```bash
