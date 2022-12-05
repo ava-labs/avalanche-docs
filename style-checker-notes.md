@@ -98,3 +98,15 @@ code block), you can add this style of comment:
 
 Make sure to replace `MD013` with the
 [rule](https://github.com/DavidAnson/markdownlint#rules--aliases) you'd like to override.
+
+## Managing Line Length
+
+Please don't ignore line length violations by ignoring Markdownlint rule MD013. The only place it
+is generally acceptable to do so is in code blocks. Generally, markdown text isn't affected by
+breaking text up with single newlines. To assist with managing line lengths, you may want to use
+[Rewrap](https://marketplace.visualstudio.com/items?itemName=stkb.rewrap) or another similar
+markdown line-wrapping tool.
+
+To use Rewrap, highlight the section of code you want to wrap and press `⌘/alt + q` to smartly wrap
+your lines. The one downside to Rewrap is that it doesn't properly break bold text. You need
+to manually add `**` to both the end of your wrapped line and the start of the next line.
