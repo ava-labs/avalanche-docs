@@ -108,3 +108,10 @@ Your focus should shift to preserving network stability and upgrading your nodes
 If you've mastered Subnet-EVM and are looking for an additional challenge, consider building a
 custom VM. The Avalanche network supports far more than just the EVM. Current VMs only scratch the
 surface of what's possible.
+
+Some ideas:
+
+- Port an existing blockchain project to Avalanche. For example: Use Bitcoin's VM or Solana's VM.
+- Create an app-specific VM instead of a general purpose VM. For example, create a DEX
+  or a CLOB VM instead of something like the EVM.
+- Create a more efficient implementation of the EVM.
