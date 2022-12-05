@@ -39,7 +39,7 @@ The Avalanche Architecture is composed of:
 
 1. NodeJS and Yarn
 
-First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `16.2.0` at the time of writing. NodeJS bundles `npm`.
+First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `18.x` at the time of writing. NodeJS bundles `npm`.
 
 Next, install the [yarn](https://yarnpkg.com) package manager:
 
