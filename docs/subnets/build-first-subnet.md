@@ -5,7 +5,7 @@ The first step of learning Subnet development is learning to use [Avalanche-CLI]
 The best way to get started is by jumping in and deploying your first Subnet.
 
 This tutorial walks you through the process of using Avalanche-CLI for the first time by creating a Subnet,
-deploying it to the local network, and connecting to it with Metamask.
+deploying it to the local network, and connecting to it with MetaMask.
 
 ## Installation
 
@@ -161,7 +161,7 @@ interact with it.
 ## Interacting with Your Subnet
 
 You can use the value provided by `Browser Extension connection details` to connect to your Subnet
-with Metamask, Core, or any other wallet.
+with MetaMask, Core, or any other wallet.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -176,7 +176,7 @@ Currency Symbol:  TUTORIAL
 
 <!-- markdownlint-enable MD013 -->
 
-This tutorial uses Metamask.
+This tutorial uses MetaMask.
 
 ### Importing the Test Private Key
 
@@ -186,16 +186,16 @@ Only use it on development networks that only you have access to. If you send pr
 this address, attackers may steal them instantly.
 :::
 
-First, you need to import your airdrop private key into Metamask. Do this by clicking the profile
+First, you need to import your airdrop private key into MetaMask. Do this by clicking the profile
 bubble in the top right corner and select `Import account`.
 
-![Import Metamask Account](/img/metamask-import.png)
+![Import MetaMask Account](/img/metamask-import.png)
 
 Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
 
 ![Import Account Private Key](/img/metamask-import-2.png)
 
-Next, rename the Metamask account to prevent confusion. Switch to the new account and click the
+Next, rename the MetaMask account to prevent confusion. Switch to the new account and click the
 three dot menu in the top right corner. Select `Account details`. Click the edit icon next to the
 account's name. Rename the account `DO NOT USE -- Public test key` to prevent confusion with any
 personal wallets.
@@ -206,12 +206,12 @@ Click the checkmark to confirm the change.
 
 ### Connect to the Subnet
 
-Next, you need to add your Subnet to Metamask's networks.
+Next, you need to add your Subnet to MetaMask's networks.
 
 Click the profile bubble in the top right corner and select `Settings`. Next, click `Networks`. Finally,
 click `Add network`.
 
-![Metamask Add Network](/img/metamask-network.png)
+![MetaMask Add Network](/img/metamask-network.png)
 
 At the bottom of the next page, select `Add a network manually`. Enter your Subnet's details,
 found in the output of your `avalanche subnet deploy` [command](#deploying-subnets-locally), into
@@ -220,9 +220,9 @@ the form and click `Save`.
 ![Add Subnet Network Details](/img/metamask-network-2.png)
 
 If all worked as expected, your balance should read 1 million tokens. Your Subnet is ready for
-action. You might want to try to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](deploy-a-smart-contract-on-your-evm).
+action. You might want to try to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](deploy-a-smart-contract-on-your-evm).
 
-![Subnet in Metamask](/img/subnet-in-metamask.png)
+![Subnet in MetaMask](/img/subnet-in-metamask.png)
 
 ## Next Steps
 
