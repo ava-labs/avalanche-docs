@@ -100,10 +100,11 @@ const sidebars = {
     'subnets/README',
     {
       type: 'category',
-      label: 'Plan',
+      label: 'Are Subnets Right For You?',
       collapsed: false,
       items: [
-        'subnets/when-to-use-subnet-vs-c-chain'
+        'subnets/when-to-use-subnet-vs-c-chain',
+        'subnets/subnet-development-lifecycle'
       ]
     },
     {

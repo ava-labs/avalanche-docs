@@ -61,6 +61,7 @@ JavaScript
 json
 JSON
 keyName
+KYCed
 liveness
 lookups
 Mainnet
@@ -96,6 +97,7 @@ relayers
 Relayers
 RPC
 RPCs
+Solana
 solc
 stakers
 stdout

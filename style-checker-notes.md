@@ -37,6 +37,9 @@ Local install [instructions](https://vale.sh/docs/vale-cli/installation/)
 
 Run the tool with `vale <filename>`. You can provide a file or a directory.
 
+The [`Vale` VS Code Extension](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-server)
+is quite useful for visualizing style errors in-line.
+
 ### Markdownlint
 
 To run locally, install the [Markdownlint CLI](https://github.com/igorshubovych/markdownlint-cli)
