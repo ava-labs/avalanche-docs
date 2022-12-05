@@ -50,7 +50,7 @@ avalanche.setRequestConfig("withCredentials", true)
 
 ## Availability
 
-Usage of public API nodes is free and available to everyone without any authentication or authorization. Rate limiting is present, but many of the API calls are cached, and the rate limits are quite high. If your application is running up against the limits, please [contact us](https://chat.avalabs.org) or try using a 3rd party RPC provider.
+Usage of public API nodes is free and available to everyone without any authentication or authorization. Rate limiting is present, but many of the API calls are cached, and the rate limits are quite high. If your application is running up against the limits, please [contact us](https://chat.avalabs.org) or try using a community RPC provider.
 
 ## Support
 
@@ -60,7 +60,7 @@ If you have questions, problems or suggestions, come [talk to us](https://chat.a
 
 :::warning Disclaimer
 
-Ava Labs offers no warranty/guarantee on the quality or uptime of these 3rd party RPC providers
+Ava Labs offers no warranty/guarantee on the quality or uptime of these community RPC providers
 :::
 
 ### Ankr
