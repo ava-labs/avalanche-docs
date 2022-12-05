@@ -73,8 +73,8 @@ Avalanche C-Chain transactions are identical to standard EVM transactions with 2
 For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
 
 - [MetaMask and Remix](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-- [Truffle](../dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
-- [Hardhat](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
+- [Truffle](../dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md)
+- [Hardhat](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
 
 ## Ingesting On-Chain Data
 

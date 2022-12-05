@@ -41,6 +41,7 @@ const sidebars = {
       label: 'Audits',
       href: 'https://github.com/ava-labs/audits',
     },
+    'disclaimer'
   ],
 
   quickStart: [
@@ -61,19 +62,15 @@ const sidebars = {
     'dapps/launch-your-ethereum-dapp',
     {
       type: 'category',
-      label: 'Smart Contract',
+      label: 'Developer Toolchains',
       collapsed: false,
       items: [
-        'dapps/smart-contracts/README',
-        'dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain',
-        'dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask',
-        'dapps/smart-contracts/using-foundry-with-the-avalanche-c-chain',
-        'dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain',
-        'dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain',
-        'dapps/smart-contracts/verify-smart-contract-using-hardhat-and-snowtrace',
-        'dapps/smart-contracts/verify-smart-contracts-with-truffle-verify',
-        'dapps/smart-contracts/verify-smart-contracts',
-        'dapps/smart-contracts/add-avalanche-programmatically',
+        'dapps/developer-toolchains/README',
+        'dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain',
+        'dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain',
+        'dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain',
+        'dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace',
+        'dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify',
       ],
     },
     {
@@ -84,6 +81,18 @@ const sidebars = {
         'dapps/nfts/README',
         'dapps/nfts/intro-to-erc721s',
         'dapps/nfts/preparing-nft-files',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Smart Contract',
+      collapsed: false,
+      items: [
+        'dapps/smart-contracts/README',
+        'dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain',
+        'dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask',
+        'dapps/smart-contracts/verify-smart-contracts',
+        'dapps/smart-contracts/add-avalanche-programmatically',
       ],
     },
   ],
@@ -99,14 +108,28 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Build',
+      label: 'Build Your First Subnet',
       collapsed: false,
       items: [
-        'subnets/create-a-local-subnet',
+        'subnets/install-avalanche-cli',
+        'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
         'subnets/create-a-fuji-subnet-subnet-cli'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'How to Use Avalanche-CLI',
+      collapsed: false,
+      items: [
+        'subnets/create-evm-subnet-config',
+        'subnets/create-a-local-subnet',
+        'subnets/how-to-pause-and-resume-subnets',
+        'subnets/how-to-list-and-describe',
+        'subnets/how-to-delete-subnet',
+        'subnets/how-to-run-cli-with-docker',
       ],
     },
     {
@@ -159,6 +182,14 @@ const sidebars = {
       items: [
         'subnets/spaces',
         'subnets/wagmi',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Technical Reference',
+      collapsed: false,
+      items: [
+          'subnets/reference-cli-commands'
       ],
     },
     {
