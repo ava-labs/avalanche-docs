@@ -50,7 +50,7 @@ avalanche.setRequestConfig("withCredentials", true)
 
 ## Availability
 
-Usage of public API nodes is free and available to everyone without any authentication or authorization. Rate limiting is present, but many of the API calls are cached, and the rate limits are quite high. If your application is running up against the limits, please [contact us](https://chat.avalabs.org).
+Usage of public API nodes is free and available to everyone without any authentication or authorization. Rate limiting is present, but many of the API calls are cached, and the rate limits are quite high. If your application is running up against the limits, please [contact us](https://chat.avalabs.org) or try using a 3rd party RPC provider.
 
 ## Support
 
@@ -62,3 +62,19 @@ If you have questions, problems or suggestions, come [talk to us](https://chat.a
 
 Ava Labs offers no warranty/guarantee on the quality or uptime of these 3rd party RPC providers
 :::
+
+### Ankr
+
+- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche`.
+- For X-Chain API, the URL is `https://rpc.ankr.com/avalanche-x`.
+- For P-Chain API, the URL is `https://rpc.ankr.com/avalanche-p`.
+- For Fuji Testnet API, the URL is `https://rpc.ankr.com/avalanche_fuji`.
+
+Features:
+
+- Archive Data Included.
+- Automatic geo-routing across North America, Europe, and Asia.
+
+Note: soft limited to 1 million daily requests per IP or referring domain. Batch calls limited to 1000.
+
+Support is available on the [Ankr Discord](https://discord.gg/9yVU8YvayA).
