@@ -55,3 +55,10 @@ Usage of public API nodes is free and available to everyone without any authenti
 ## Support
 
 If you have questions, problems or suggestions, come [talk to us](https://chat.avalabs.org/).
+
+## Community Providers
+
+:::warning Disclaimer
+
+Ava Labs offers no warranty/guarantee on the quality or uptime of these 3rd party RPC providers
+:::
