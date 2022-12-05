@@ -208,7 +208,13 @@ avalanche subnet export [subnetName] [flags]
 
 ### Subnet Import
 
-The `subnet import` command imports a Subnet configuration from a file or a git repository.
+The `subnet import` command imports configurations into avalanche-cli.
+
+This command supports importing from a file created on another computer,
+or importing from subnets running public networks
+(e.g. created manually or with the deprecated subnet-cli)
+
+#### Import from a file
 
 To import from a file, you can optionally provide the path as a command line argument.
 Alternatively, running the command without any arguments triggers an interactive wizard.
@@ -219,7 +225,7 @@ flag.
 **Usage:**
 
 ```shell
-avalanche subnet import [subnetPath] [flags]
+avalanche subnet import file [subnetPath] [flags]
 ```
 
 **Flags:**
@@ -235,6 +241,43 @@ avalanche subnet import [subnetPath] [flags]
 ```
 
 <!-- markdownlint-enable MD013 -->
+
+#### Import from a public network 
+
+The subnet import public command will import a subnet configuration from a running network.
+
+The genesis file should be available from the disk for this to work. 
+By default, an imported subnet will not overwrite an existing subnet with the same name. 
+To allow overwrites, provide the --force flag.
+
+**Usage:**
+
+```shell
+avalanche subnet import public [subnetPath] [flags]
+```
+
+**Flags:**
+
+<!-- markdownlint-disable MD013 -->
+
+```shell
+    --custom                     use a custom VM template
+    --evm                        import a subnet-evm
+-f, --force                      overwrite the existing configuration if one exists
+    --fuji fuji                  import from fuji (alias for `testnet`)
+    --genesis-file-path string   path to the genesis file
+-h, --help                       help for public
+    --mainnet mainnet            import from mainnet
+    --node-url string            [optional] URL of an already running subnet validator
+    --spacesvm                   use the SpacesVM as the base template
+    --subnet-id string           the subnet ID
+    --testnet testnet            import from testnet (alias for `fuji`)
+
+```
+
+<!-- markdownlint-enable MD013 -->
+
+
 
 ### Subnet Join
 
