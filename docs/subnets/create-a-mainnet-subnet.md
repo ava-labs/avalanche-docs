@@ -2,7 +2,7 @@
 
 After trying out a Subnet on `Fuji` using stored keys, by following [this tutorial](./create-a-fuji-subnet), next step is to try it out on `Mainnet`.
 
-In this article, we show how to do the following on `Mainnet`.
+In this article, it is shown how to do the following on `Mainnet`.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
@@ -28,7 +28,7 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart c
 
 ### Mainnet
 
-For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
+For this tutorial, it is recommended to follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
 
 Also it is worth pointing out that [you need at least 2000 AVAX to become a validator on Mainnet](../nodes/validate/staking.md#mainnet).
 
@@ -54,7 +54,7 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing. We is going to need this id in the later section when calling [addValidator](#add-a-validator).
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing. This is going to be needed in a later section when calling [addValidator](#add-a-validator).
 
 :::info
 
@@ -134,7 +134,7 @@ See [this section](./create-a-fuji-subnet#create-an-evm-subnet)
 
 ## Deploy the Subnet
 
-To deploy our new Subnet, we can run
+To deploy the new Subnet, run
 
 ```bash
 avalanche subnet deploy testsubnet
@@ -152,9 +152,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-This tutorial is about deploying to `Mainnet`, so we navigate with the arrow keys to `Mainnet` and hit enter.
+This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys to `Mainnet` and hit enter.
 
-We are then asked to authorize the ledger to provide extended public key information to CLI.
+The user is then asked to authorize the ledger to provide extended public key information to CLI.
 
 ```text
 ✔ Mainnet
@@ -176,7 +176,7 @@ must be funded to do the operation (funding described [here](#funding-the-ledger
 
 Also, this tutorial assumes that a node is up and running, fully bootstrapped on `Mainnet`, and is being run from the **same** box.
 
-Subnets are currently permissioned only. Therefore, the process now requires the user to tell _which addresses can control the Subnet_. We are prompted to use only the first ledger address (creation key), or a custom list of addresses.
+Subnets are currently permissioned only. Therefore, the process now requires the user to tell _which addresses can control the Subnet_. The user is prompted to use only the first ledger address (creation key), or a custom list of addresses.
 
 ```text
 Configure which addresses may make changes to the subnet.
@@ -188,7 +188,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom list
 ```
 
-For this tutorial, we opt for using the first ledger address, so enter at `Use ledger address`. Only this address is going to
+For this tutorial, it is opt to use the first ledger address, so enter at `Use ledger address`. Only this address is going to
 be able to add or remove validators, or create blockchains on the Subnet.
 
 ```text
@@ -211,7 +211,7 @@ Next, a TX for creating the Subnet id is generated and the user is asked to sign
 On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by using the ledger's
 right button, and then authorize the request by pressing both left and right buttons.
 
-Note that if the ledger is not funded or does not have enough funds, we'll get an error message:
+Note that if the ledger is not funded or does not have enough funds, the user is going to get an error message:
 
 ```text
 *** Please sign subnet creation hash on the ledger device *** 
@@ -280,13 +280,13 @@ See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-w
 
 :::
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet. Let's add one by running the `addValidator` command and adding the name of our Subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the Subnet.
+This new Subnet is cool - but it doesn't have any dedicated validators yet. Add one by running the `addValidator` command and adding the name of the Subnet. To be clear, this does _not start or run_ a validator, it only whitelists the node as a recognized validator on the Subnet.
 
 ```bash
 avalanche subnet addValidator testsubnet
 ```
 
-First choose `Mainnet` as the network in which we want to add the Subnet validator.
+First choose `Mainnet` as the network in which wanted to be used to add the Subnet validator.
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -296,7 +296,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 As this operation involves a new [transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator),
-we need some address to authorize the Subnet operation.
+some address is needed to authorize the Subnet operation.
 As there is only one control key in the Subnet, that one is going to be expected to be used for signing.
 That address is going to also pay the add Subnet validator TX fee of 0.001 AVAX.
 
@@ -307,7 +307,7 @@ Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3v
 Also, as `Mainnet` is being used here, the tool assumes that the first ledger address is going to be used as signing address.
 So, it is expected that the connected ledger has the Subnet control key as its first address.
 
-Now we need the **NodeID** of our new validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
+Now use the **NodeID** of the validator from the very beginning of this tutorial. For best results make sure the validator is running and synced.
 
 ```text
 Next, we need the NodeID of the validator you want to whitelist.
@@ -319,7 +319,7 @@ Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for ins
 
 (this ID is intentionally modified)
 
-We'll select 30 as the stake weight. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
+Select 30 as the stake weight. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the `weight` section.
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -332,7 +332,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ✔ What stake weight would you like to assign to the validator?: 30
 ```
 
-We then need to specify when the validator is going to start validating. The time must be in the future. Custom is going to require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Let's take the default this time:
+Then specify when the validator is going to start validating. The time must be in the future. Custom is going to require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Follow the default this time:
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -357,7 +357,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-If we choose `Custom` here, we'll have to enter a **duration**, which is a time span expressed in hours. For example, we could say `200 days = 24 \* 200 = 4800h`
+If choosing `Custom` here, it is needed to enter a **duration**, which is a time span expressed in hours. For example, say `200 days = 24 \* 200 = 4800h`
 
 ```text
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
@@ -382,7 +382,7 @@ Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-Next we is going to be asked for ledger authorization:
+Next the user is going to be asked for ledger authorization:
 
 ```text
 *** Please provide extended public key on the ledger device ***
@@ -397,7 +397,7 @@ Ledger address is going to be shown:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-At this point, if the ledger address is not the control key for the Subnet, we is going to get an error:
+At this point, if the ledger address is not the control key for the Subnet, the user is going to get an error:
 
 ```text
 Error: wallet does not contain subnet auth keys
@@ -432,14 +432,14 @@ You can get the P-Chain TXID information on [Avalanche Explorer](https://subnets
 
 ## Join a Subnet
 
-You might already have a running validator which you want to add to a specific Subnet. For this we run the `join` command.
+You might already have a running validator which you want to add to a specific Subnet. For this, run the `join` command.
 This is a bit of a special command. The `join` command is going to either just _print the required instructions_ for your already running node or is going to attempt at configuring a config file the user provides.
 
 ```bash
 avalanche subnet join testsubnet
 ```
 
-First ask for network for which we are joining the validator. Choose `Mainnet`:
+First ask for network for which the validator is joining. Choose `Mainnet`:
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -448,7 +448,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-In the [deploy the SUBNET](#deploy-the-subnet) section, we saw that a Subnet is permissioned via a set of keys. Therefore not any node can be added as validator to the Subnet. A holder of a control key _must_ call [SUBNET addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first to allow the node to validate the Subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
+In the [deploy the SUBNET](#deploy-the-subnet) section, a Subnet was shown to be permissioned via a set of keys. Therefore not any node can be added as validator to the Subnet. A holder of a control key _must_ call [SUBNET addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first to allow the node to validate the Subnet. So the tool allows the user now to verify if the node has already been permissioned ("whitelisted") to be a validator for this Subnet (by calling an API in the background).
 
 ```text
 Would you like to check if your node is allowed to join this subnet?
@@ -460,18 +460,18 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ No
 ```
 
-The default is `Yes` but we'll choose `No` here to speed up things, assuming the node is already whitelisted.
+The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
 
-There are now two choices possible: automatic and Manual configuration. As mentioned earlier, "Automatic" is going to attempt at editing a config file and setting up your plugin directory, while "Manual" is going to just print the required config to the screen. Let's see what "Automatic" does:
+There are now two choices possible: automatic and Manual configuration. As mentioned earlier, "Automatic" is going to attempt at editing a config file and setting up your plugin directory, while "Manual" is going to just print the required config to the screen. What "Automatic" does is:
 
 ```text
 ✔ Automatic
 ✔ Path to your existing config file (or where it is going to be generated): config.json
 ```
 
-We need to provide a path to a config file. If this command were to be run on the box where your validator is running, then you could point this to the actually used config file, for example `/etc/avalanchego/config.json` - just make sure the tool has **write** access to the file. Or you could just copy the file later. In any case, the tool is going to either try to edit the existing file specified by the given path, or create a new file. Again, write permissions are required.
+Provide a path to a config file. If this command were to be run on the box where your validator is running, then you could point this to the actually used config file, for example `/etc/avalanchego/config.json` - just make sure the tool has **write** access to the file. Or you could just copy the file later. In any case, the tool is going to either try to edit the existing file specified by the given path, or create a new file. Again, write permissions are required.
 
-Next, we need to provide the plugin directory. We described VMs at the beginning of this tutorial [Virtual Machine](#virtual-machine). Each VM runs its own plugin, therefore AvalancheGo needs to be able to access the correspondent plugin binary. As this is the `join` command, which doesn't know yet about the plugin, we need to provide the directory where the plugin is installed. Make sure to provide the location for your case:
+Next, provide the plugin directory. VMs were described at the beginning of this tutorial [Virtual Machine](#virtual-machine). Each VM runs its own plugin, therefore AvalancheGo needs to be able to access the correspondent plugin binary. As this is the `join` command, which doesn't know yet about the plugin, there is a need to provide the directory where the plugin is installed. Make sure to provide the location for your case:
 
 ```text
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
@@ -503,7 +503,7 @@ The config file has been edited. To use it, make sure to start the node with the
 
 It is **required to restart the node**.
 
-If we would have chosen "Manual" instead, the tool is going to just print _instructions_. The user is going to have to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is going to be different in your case.
+By choosing "Manual" instead, the tool is going to just print _instructions_. The user is going to have to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is going to be different in your case.
 
 ```text
 ✔ Manual
@@ -540,7 +540,7 @@ take effect.
 
 ## Subnet Export
 
-This tool is most useful on the machine where a validator is or is going to be running. In order to allow a VM to run on a different machine, the configuration can be exported. We just need to provide a path to where to export the data:
+This tool is most useful on the machine where a validator is or is going to be running. In order to allow a VM to run on a different machine, the configuration can be exported. Just provide a path to where to export the data:
 
 ```bash
 avalanche subnet export testsubnet
