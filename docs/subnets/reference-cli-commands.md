@@ -214,7 +214,7 @@ This command supports importing from a file created on another computer,
 or importing from subnets running public networks
 (e.g. created manually or with the deprecated subnet-cli)
 
-#### Import from a file
+#### Import from a File
 
 To import from a file, you can optionally provide the path as a command line argument.
 Alternatively, running the command without any arguments triggers an interactive wizard.
@@ -242,12 +242,12 @@ avalanche subnet import file [subnetPath] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-#### Import from a public network 
+#### Import from a Public Network 
 
-The subnet import public command will import a subnet configuration from a running network.
+The `subnet import public` command will import a Subnet configuration from a running network.
 
 The genesis file should be available from the disk for this to work. 
-By default, an imported subnet will not overwrite an existing subnet with the same name. 
+By default, an imported Subnet will not overwrite an existing Subnet with the same name. 
 To allow overwrites, provide the --force flag.
 
 **Usage:**
