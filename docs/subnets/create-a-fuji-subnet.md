@@ -31,7 +31,7 @@ That is, the VM defines the behavior of the blockchain.
 Chains. Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
 
 This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as
-most other Ethereum client functionality.
+most other Ethereum client features.
 
 ## Fuji Testnet
 
@@ -66,7 +66,7 @@ The response should look something like:
 ```
 
 That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing.
-We will need this ID in the later section when calling [addValidator](#add-a-validator).
+We is going to need this ID in the later section when calling [addValidator](#add-a-validator).
 
 :::info
 
@@ -94,18 +94,18 @@ This tutorial focuses on stored key usage and leave ledger operation details for
 
 :::warning
 
-The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key will be stored on your file system. Whoever gets access to that key will have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
+The private key created for this tutorial should only be used for testing operations on `Fuji` or other testnets. Do NOT use this key on `Mainnet`. The key is going to be stored on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
 
 :::
 
 Run `create` if you don't have any private key available yet. You can create multiple named keys.
-Each command requiring a key will therefore require the appropriate key name you want to use.
+Each command requiring a key is going to therefore require the appropriate key name you want to use.
 
 ```bash
 avalanche key create mytestkey
 ```
 
-This will generate a new key named `mytestkey`. The command will then also print addresses
+This is going to generate a new key named `mytestkey`. The command is going to then also print addresses
 associated with the key:
 
 <!-- markdownlint-disable MD013 -->
@@ -139,7 +139,7 @@ avalanche key delete mytestkey
 
 Be careful though to always have a key available for commands involving transactions.
 
-The `export` command will **print your private key** in hex format to stdout.
+The `export` command is going to **print your private key** in hex format to stdout.
 
 ```bash
 avalanche key export mytestkey
@@ -157,8 +157,8 @@ Loading user key...
 Key loaded
 ```
 
-Finally, the `list` command will list all your keys in your system and their associated addresses
-(the keys are stored in a special directory on your file system, tampering with the directory will
+Finally, the `list` command is going to list all your keys in your system and their associated addresses
+(the keys are stored in a special directory on your file system, tampering with the directory is going to
 result in malfunction of the tool).
 
 <!-- markdownlint-disable MD013 -->
@@ -215,7 +215,7 @@ To create an EVM Subnet, run the `subnet create` command with a name of your cho
 avalanche subnet create testsubnet
 ```
 
-This will start a series of prompts to customize your EVM Subnet to your needs. Most prompts have
+This is going to start a series of prompts to customize your EVM Subnet to your needs. Most prompts have
 some validation to reduce issues due to invalid input. The first prompt asks for the type of the
 virtual machine (see [Virtual Machine](#virtual-machine)).
 
@@ -294,7 +294,7 @@ prompt sequence and the command exits:
 Successfully created genesis
 ```
 
-It's possible to abort the process with Ctrl-C at any time.
+It's possible to end the process with Ctrl-C at any time.
 
 At this point, the specification of the new Subnet is created on disk, but is not deployed yet.
 
@@ -393,7 +393,7 @@ To deploy our new Subnet, we can run
 avalanche subnet deploy testsubnet
 ```
 
-This will start a new prompt series.
+This is going to start a new prompt series.
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -423,12 +423,12 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Subnets are currently permissioned only. Therefore, the process now requires the user to provide
 _which keys can control the Subnet_. We are prompted to provide one or more **P-Chain addresses**.
-Only the keys corresponding to these addresses will be able to add or remove validators. Make sure
+Only the keys corresponding to these addresses is going to be able to add or remove validators. Make sure
 to provide **Fuji P-Chain** addresses (`P-Fuji....`).
 
 ```bash
 Configure which addresses may add new validators to the subnet.
-These addresses are known as your control keys. You will also
+These addresses are known as your control keys. You is going to also
 set how many control keys are required to add a validator.
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Set control keys:
@@ -439,7 +439,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Enter at `Add control key` and provide at least one key. You can enter multiple addresses, we'll use
 just one here. When no more addresses need to be added, hit `Done`. (The address provided here is
-intentionally invalid. The address has a checksum and the tool will make sure it's a valid address).
+intentionally invalid. The address has a checksum and the tool is going to make sure it's a valid address).
 
 ```bash
 ✔ Add control key
@@ -452,7 +452,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Finally, we need to define the threshold of how many keys are required for a change to be valid
-(there is some input validation). For example, if 1 key only is needed, as above, we'll enter
+(there is some input validation). For example, if 1 key only is needed, as preceding, we'll enter
 just 1. The threshold _could_ be arbitrary depending on the needs, for example 2 of 4 addresses,
 1 of 3, 3 of 5, etc., but currently this tool only works if _at least one control key is owned
 by the same private key used here and the threshold is set to 1_.
@@ -470,7 +470,7 @@ Error: insufficient funds: provided UTXOs need 100000000 more units of asset "U8
 ```
 
 If the private key is funded, but the **control key** is incorrect (not controlled by the private
-key), the Subnet will be created, but _not the blockchain_:
+key), the Subnet is going to be created, but _not the blockchain_:
 
 ```bash
 Subnet has been created with ID: 2EkPnvnDiLgudnf8NjtxaNcVFtdAAnUPvaoNBrc9WG5tNmmfaK. Now creating blockchain...
@@ -479,7 +479,7 @@ Error: insufficient authorization
 
 Therefore we need to provide a control key which we have indeed control of, and then it succeeds.
 The output (assuming the node is running on `localhost` and the API port is set to standard `9650`)
-will look something like this:
+is going to look something like this:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -490,9 +490,9 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 
 <!-- markdownlint-enable MD013 -->
 
-Well done! You have just created your own Subnet with your own Subnet-EVM running on `Fuji`!
+Well done. You have just created your own Subnet with your own Subnet-EVM running on `Fuji`.
 
-To check on your new Subnet, visit [Avascan Testnet](https://testnet.avascan.info/). The search best
+To get your new Subnet information, visit [Avascan Testnet](https://testnet.avascan.info/). The search best
 works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
 into the search box and you should see your shiny new blockchain information.
 
@@ -508,7 +508,7 @@ become a validator.
 
 :::
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet! Let's add one by running
+This new Subnet is cool - but it doesn't have any dedicated validators yet. Let's add one by running
 the `addValidator` command and adding the name of our Subnet. To be clear, this does _not start or
 run_ a validator, it only whitelists the node as a recognized validator on the Subnet.
 
@@ -546,7 +546,7 @@ What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAA
 (this ID is intentionally modified)
 
 The next question requires a bit of thinking. A validator has a weight, which defines how often it
-will be selected for decision making. You should think ahead of how many validators you want
+is going to be selected for decision making. You should think ahead of how many validators you want
 initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without
 any validators yet is 20. The structure is a bit described at
 [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
@@ -565,8 +565,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ✔ What stake weight would you like to assign to the validator?: 30
 ```
 
-We then need to specify when the validator will start validating. The time must be in the future.
-Custom will require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Let's take the default
+We then need to specify when the validator is going to start validating. The time must be in the future.
+Custom is going to require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Let's take the default
 this time:
 
 ```bash
@@ -583,7 +583,7 @@ weight is >20% of the Subnet, the Subnet may have down time.
 
 :::
 
-Finally, specify how long it will be validating:
+Finally, specify how long it is going to be validating:
 
 ```bash
 ✔ Start in one minute
@@ -603,7 +603,7 @@ hours. For example, we could say 200 days = 24 \* 200 = 4800 hours
 The user is shown an actual date of when that is now:
 
 ```bash
-? Your validator will finish staking by 2023-02-13 12:26:55:
+? Your validator is going to finish staking by 2023-02-13 12:26:55:
   ▸ Yes
     No
 ```
@@ -619,7 +619,7 @@ Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-This might take a couple of seconds, and if successful, it will print:
+This might take a couple of seconds, and if successful, it is going to print:
 
 ```bash
 Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
@@ -631,8 +631,8 @@ This means the node has now been added as validator to the given Subnet on `Fuji
 
 You might already have a running validator which you want to add to a specific Subnet. For this we
 run the `join` command.
-This is a bit of a special command. The `join` command will either just _print the required
-instructions_ for your already running node or will attempt at configuring a config file the user provides.
+This is a bit of a special command. The `join` command is going to either just _print the required
+instructions_ for your already running node or is going to attempt at configuring a config file the user provides.
 
 First network selection:
 
@@ -664,19 +664,19 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 The default is `Yes` but we'll choose `No` here to speed up things, assuming the node is already whitelisted.
 
-There are now two choices possible: Automatic and Manual configuration. As mentioned earlier,
-"Automatic" will attempt at editing a config file and setting up your plugin directory, while "Manual"
-will just print the required config to the screen. Let's see what "Automatic" does:
+There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
+"Automatic" is going to attempt at editing a config file and setting up your plugin directory, while "Manual"
+is going to just print the required config to the screen. Let's see what "Automatic" does:
 
 ```bash
 ✔ Automatic
-✔ Path to your existing config file (or where it will be generated): config.json
+✔ Path to your existing config file (or where it is going to be generated): config.json
 ```
 
 We need to provide a path to a config file. If this command were to be run on the box where your
 validator is running, then you could point this to the actually used config file, for example
 `/etc/avalanchego/config.json` - just make sure the tool has **write** access to the file. Or you
-could just copy the file later. In any case, the tool will either try to edit the existing file
+could just copy the file later. In any case, the tool is going to either try to edit the existing file
 specified by the given path, or create a new file. Again, write permissions are required.
 
 Next, we need to provide the plugin directory. We described VMs at the beginning of this tutorial
@@ -690,12 +690,12 @@ sure to provide the location for your case:
 ```
 
 The tool doesn't know where exactly it's located so it requires the full path. With the path given,
-it will copy the VM binary to the provided location:
+it is going to copy the VM binary to the provided location:
 
 ```shell
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
 VM binary written to /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
-This will edit your existing config file. This edit is nondestructive,
+This is going to edit your existing config file. This edit is nondestructive,
 but it's always good to have a backup.
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Proceed?:
@@ -703,7 +703,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     No
 ```
 
-Hitting `Yes` will attempt at writing the config file:
+Hitting `Yes` is going to attempt at writing the config file:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -720,8 +720,8 @@ The config file has been edited. To use it, make sure to start the node with the
 
 It is **required to restart the node**.
 
-If we would have chosen "Manual" instead, the tool will just print _instructions_. The user will have
-to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets will
+If we would have chosen "Manual" instead, the tool is going to just print _instructions_. The user is going to have
+to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is going to
 be different in your case.
 
 ```bash
@@ -751,15 +751,15 @@ If you start the node via a JSON config file, add this to your config file:
 whitelisted-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 TIP: Try this command with the --avalanchego-config flag pointing to your config file,
-this tool will try to update the file automatically (make sure it can write to it).
+this tool is going to try to update the file automatically (make sure it can write to it).
 
-After you update your config, you will need to restart your node for the changes to
+After you update your config, you is going to need to restart your node for the changes to
 take effect.
 ```
 
 ## Subnet Export
 
-This tool is most useful on the machine where a validator is or will be running. In order to allow a
+This tool is most useful on the machine where a validator is or is going to be running. In order to allow a
 VM to run on a different machine, the configuration can be exported. We just need to provide a path
 to where to export the data:
 
@@ -808,7 +808,7 @@ add a new network on MetaMask with the following values:
 
 :::note
 
-Unless your Subnet has been deployed on other nodes, you will not be able to use other nodes,
+Unless your Subnet has been deployed on other nodes, you is going to not be able to use other nodes,
 including the public API server `https://api.avax-test.network/`, to connect to MetaMask.
 
 If you want to open up this node for others to access your Subnet, you should set it up properly
