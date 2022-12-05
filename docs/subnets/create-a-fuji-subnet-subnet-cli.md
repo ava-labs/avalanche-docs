@@ -2,24 +2,29 @@
 
 :::note
 
-For the latest tool to deploy a Subnet on Fuji, please refer to [this article](./create-a-fuji-subnet.md). This article is still applicable for Mainnet deploy with a Ledger.
+For the latest tool to deploy a Subnet on Fuji, please refer to [this
+article](./create-a-fuji-subnet.md). This article is still applicable for Mainnet deploy with a
+Ledger.
 
 :::
 
-After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md), next step is to try it out on Fuji Testnet.
+After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md),
+next step is to try it out on Fuji Testnet.
 
 In this article, we show how to do the following on Fuji Testnet.
 
-- Create a virtual machine based on subnet-evm.
+- Create a virtual machine based on Subnet-EVM.
 - Add a node as a validator to the primary network.
 - Create a Subnet.
 - Add the same node to the newly created Subnet.
 - Create a blockchain with the specified virtual machine.
 
-:::tip
-The same steps can be applied on Mainnet, see [here](./subnet-cli.md#network-selection) on how to switch to Mainnet when using `subnet-cli`. Furthermore, you should practice using Ledger by following [this](./subnet-cli.md#ledger-support) before deploying on Mainnet.
+:::tip The same steps can be applied on Mainnet, see [here](./subnet-cli.md#network-selection) on
+how to switch to Mainnet when using `subnet-cli`. Furthermore, you should practice using Ledger by
+following [this](./subnet-cli.md#ledger-support) before deploying on Mainnet.
 
-All IDs in this article are for illustration purpose. They can be different in your own run-through of this tutorial.
+All IDs in this article are for illustration purpose. They can be different in your own run-through
+of this tutorial.
 
 :::
 
@@ -31,7 +36,9 @@ All IDs in this article are for illustration purpose. They can be different in y
 
 ### Fuji Testnet
 
-For this tutorial, we recommend that you follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step particularly to start your node on Fuji:
+For this tutorial, we recommend that you follow [Run an Avalanche Node
+Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet) and this step
+particularly to start your node on Fuji:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`_
 
@@ -57,15 +64,16 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is ths NodeID, the entire thing. We will need this id in the later section when calling [subnet-cli wizard](#subnet-cli-wizard).
+That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing.
+We will need this ID in the later section when calling [Subnet-CLI wizard](#subnet-cli-wizard).
 
 :::info
 
-With more data on Fuji testnet, it may take a while to bootstrap Fuji Testnet from scratch.
+With more data on Fuji Testnet, it may take a while to bootstrap Fuji Testnet from scratch.
 
 :::
 
-### Subnet-cli
+### Subnet-CLI
 
 ```bash
 git clone https://github.com/ava-labs/subnet-cli.git;
@@ -83,13 +91,20 @@ subnet-cli create key
 ```
 
 This creates a file `.subnet-cli.pk` under the current directory with a private key. By default,
-`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have enough fund on this P-Chain address to pay for transactions.
+`subnet-cli` uses the key specified in file `.subnet-cli.pk` on the P-Chain to pay for the
+transaction fee, unless `--private-key-path` is used to overwrite. Please make sure that you have
+enough fund on this P-Chain address to pay for transactions.
 
-To get fund on this key on Fuji TestNet, follow these steps:
+To get fund on this key on Fuji Testnet, follow these steps:
 
-1. User your private key in the `.subnet-cli.pk` file on the [web wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the network and locate your C-Chain address which starts with `0x`.
+1. User your private key in the `.subnet-cli.pk` file on the [web
+   wallet](https://wallet.avax.network) to access this wallet. (Private Key is the first option on
+   the [web wallet](https://wallet.avax.network)). And pick **Fuji** on the top right corner as the
+   network and locate your C-Chain address which starts with `0x`.
 2. Request funds from the [faucet](https://faucet.avax.network) using your C-Chain address.
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left side of the web wallet (more details can be found on the [tutorial between C/P chains](../quickstart/cross-chain-transfers.md)).
+3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left
+   side of the web wallet (more details can be found on the [tutorial between C/P
+   chains](../quickstart/cross-chain-transfers.md)).
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on Fuji Testnet.
 
@@ -97,17 +112,23 @@ Check [here](./subnet-cli.md#subnet-cli-create-key) for more info.
 
 ## Virtual Machine
 
-Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an object-oriented language is an instance of a class.
-That is, the VM defines the behavior of the blockchain.
+Avalanche is a network composed of multiple blockchains. Each blockchain is an instance of a
+[Virtual Machine (VM)](../subnets/README.md#virtual-machines), much like an object in an
+object-oriented language is an instance of a class. That is, the VM defines the behavior of the
+blockchain.
 
-[Subnet-evm](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-evm is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
+[Subnet-evm](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract
+Chains. Subnet-evm is a simplified version of [Avalanche
+C-Chain](https://github.com/ava-labs/coreth).
 
-This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as most other Ethereum client functionality.
+This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as
+most other Ethereum client functionality.
 
 ### Build Binary
 
-First, you'll need to compile the subnet-evm into a binary that AvalancheGo can interact with. To do this, first install [`subnet-evm`](https://github.com/ava-labs/subnet-evm) (assumes you don't
-yet have the `subnet-evm` repository downloaded):
+First, you'll need to compile the Subnet-EVM into a binary that AvalancheGo can interact with. To do
+this, first install [`Subnet-EVM`](https://github.com/ava-labs/subnet-evm) (assumes you don't
+yet have the `Subnet-EVM` repository downloaded):
 
 ```bash
 git clone https://github.com/ava-labs/subnet-evm.git
@@ -137,13 +158,14 @@ Now issue this command to build
 
 ### Move Binary
 
-Once the `subnet-evm` binary is built, you'll need to move it to AvalancheGo's
-plugin directory (within the [--build-dir](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string)) so it can be run by your node.
-When building `avalanchego` from source (see [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)), this defaults to `avalanchego/build/plugins` in which `avalanchego`
-is the directory where you have checked out AvalancheGo project.
-This build directory is structured as:
+Once the `subnet-evm` binary is built, you'll need to move it to AvalancheGo's plugin directory
+(within the [--build-dir](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string)) so it
+can be run by your node. When building `avalanchego` from source (see [Run an Avalanche Node
+Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)), this defaults to
+`avalanchego/build/plugins` in which `avalanchego` is the directory where you have checked out
+AvalancheGo project. This build directory is structured as:
 
-```
+```text
 build-dir
 |_avalanchego (note: this is the AvalancheGo binary, not a directory)
 |_plugins
@@ -151,17 +173,17 @@ build-dir
 ```
 
 To put the `subnet-evm` binary in the right place, run the following command
-(assuming the `avalanchego` and `subnet-evm` repos are in the same folder):
+(assuming the `avalanchego` and `subnet-evm` repositories are in the same folder):
 
 ```bash
 mv ./subnet-evm/build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ./avalanchego/build/plugins;
 ```
 
-## Subnet-cli Wizard
+## Subnet-CLI Wizard
 
 The easiest and fastest way to get your new Subnet off the ground is to use the
 [`subnet-cli`](https://github.com/ava-labs/subnet-cli). This powerful CLI can
-add validators, create Subnets, and create blockchains. Documentation of subnet-cli can be found [here](./subnet-cli.md).
+add validators, create Subnets, and create blockchains. Documentation of Subnet-CLI can be found [here](./subnet-cli.md).
 
 :::info
 The `subnet-cli` DOES NOT need to be run on the same host where you are
@@ -171,16 +193,18 @@ Avalanche API Endpoints.
 :::
 
 To make it as easy as possible to get started, the `subnet-cli` also provides
-a `wizard` command that takes care of EVERYTHING for you. TL;DR, type one
+a `wizard` command that takes care of EVERYTHING for you. In summary, type one
 command and you'll have a Subnet with a running `subnet-evm` instance a few minutes
 later.
 
 Run the following command to:
 
-- Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) as a validator to the primary network (comma separated if multiple validators, and skipping any that already exist);
+- Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` (which was created [above](#fuji-testnet)) as a
+  validator to the primary network (comma separated if multiple validators, and skipping any that
+  already exist);
 - Create a Subnet;
 - Add `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` to the Subnet;
-- Create a new blockhain with a virtual machine whose id is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+- Create a new blockchain with a virtual machine whose ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
 
 ```bash
 subnet-cli wizard \
@@ -190,27 +214,32 @@ subnet-cli wizard \
 --chain-name=subnetevm
 ```
 
-By default, the private key in `.subnet-cli.pk` file which was created from [the step above](#subnet-cli-private-key) is used to pay the cost of this transaction.
-You can use `--private-key-path` to specify a different file.
+By default, the private key in `.subnet-cli.pk` file which was created from
+[the step above](#private-key) is used to pay the cost of this transaction. You can use
+`--private-key-path` to specify a different file.
 
-As mentioned before, the `vm-id` was generated by calling `subnet-cli create VMID subnetevm`. You can
-use any value here, the only important thing is to make sure the binary you have generated has the same name.
+As mentioned before, the `vm-id` was generated by calling `subnet-cli create VMID subnetevm`. You
+can use any value here, the only important thing is to make sure the binary you have generated has
+the same name.
 
 :::info
 
-You can find an example of a genesis file to use when launching your own
-`subnet-evm` in the [networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json). Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
+You can find an example of a genesis file to use when launching your own `subnet-evm` in the
+[networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/11111/genesis.json).
+Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 :::
 
-As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be needed in next step. See [here](./subnet-cli.md#subnet-cli-wizard) for more detailed logs.
+As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be
+needed in next step. See [here](./subnet-cli.md#subnet-cli-wizard) for more detailed logs.
 
 ## Add New Subnet to Node Whitelist
 
-During the execution of the `wizard` command, you will be prompted to add your
-new subnetID to your node. This is done using the `whitelisted-subnets` config.
-You can provide the `whitelisted-subnets` argument by modifying your config
-file (reference [here](../nodes/maintain/avalanchego-config-flags.md#whitelist)) or providing an argument on startup.
+During the execution of the `wizard` command, you will be prompted to add your new SubnetID to your
+node. This is done using the `whitelisted-subnets` config. You can provide the `whitelisted-subnets`
+argument by modifying your config file (reference
+[here](../nodes/maintain/avalanchego-config-flags.md#whitelist)) or providing an argument on
+startup.
 
 Example Config File:
 
@@ -224,21 +253,24 @@ Example Config File:
 }
 ```
 
-Example Node Args:
+Example Node Arguments:
 
 ```bash
 --whitelisted-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
 ```
 
-:::tip
-`p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of subnet-id, please replace it with your correct subnet-id.
-:::
+:::tip `p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of SubnetID, please
+replace it with your correct SubnetID. :::
 
 ## Restart Node
 
-Once you've updated your config, you'll need to restart your AvalancheGo node for the changes to take effect.
+Once you've updated your config, you'll need to restart your AvalancheGo node for the changes to
+take effect.
 
-If you completed the steps successfully, you'll see the node print out something like these (ignore the exact value of all ids, they are just for illustraction purpose):
+If you completed the steps successfully, you'll see the node print out something like these (ignore
+the exact value of all IDs, they are just for illustration purpose):
+
+<!-- markdownlint-disable MD013 -->
 
 ```bash
 INFO [01-25|16:47:04] chains/manager.go#246: creating chain:
@@ -257,8 +289,12 @@ INFO [01-25|16:47:06] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain>
 INFO [01-25|16:47:06] <2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD Chain> snow/engine/snowman/transitive.go#354: bootstrapping finished with 2DUxceCx71L5TLTeLpKUQxSBVm8vTKPmFs2usAyRnusUzs4Q4M as the last accepted block
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 If you didn't put the `subnet-evm` binary in the right place, you'll see something
 like:
+
+<!-- markdownlint-disable MD013 -->
 
 ```bash
 INFO [01-26|05:54:19] chains/manager.go#246: creating chain:
@@ -267,44 +303,52 @@ INFO [01-26|05:54:19] chains/manager.go#246: creating chain:
 ERROR[01-26|05:54:19] chains/manager.go#270: error creating chain 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD: error while looking up VM: there is no ID with alias sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 ## Next Step
 
-Next step is to deploy the Subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi Kingdoms Subnet as an example.
+Next step is to deploy the Subnet on to the Mainnet, see [this](./setup-dfk-node.md) using DeFi
+Kingdoms Subnet as an example.
 
 ## Appendix
 
-### Connect with Metamask
+### Connect with MetaMask
 
-Subnet-evm supports almost every tool that C-Chain and EVM supports. For instance, let's connect Metamask with our subnet-evm.
+Subnet-evm supports almost every tool that C-Chain and EVM supports. For instance, let's connect
+MetaMask with our Subnet-EVM.
 
-First we need to create a new network in Metamask. It can be added in Settings > Networks > Add a network.
+First we need to create a new network in MetaMask. It can be added in Settings > Networks > Add a network.
 
 `Network Name`: Any name to indicate this network.
 
 `New RPC URL`: This must be the RPC URL of our node. In this case it is `http://127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`
 
-`Chain ID`: The Chain ID specified in genesis. In this case `13213`.
+`Chain ID`: The ChainID specified in genesis. In this case `13213`.
 
 `Currency Symbol`: Any symbol for this token.
 
 It should look like:
 ![Add Network](/img/sevm-m1.png)
 
-Now we can access our account with initial balance. We used `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as our initial account. The private key of this account is `56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`. This private key is publicly shared, so don't use this account in mainnet or testnets. The genesis block allocates 333,333,333,333,333,333,333 coins to this account, which is equivalent to `333.3333` SET.
+Now we can access our account with initial balance. We used
+`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as our initial account. The private key of this account
+is `56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`. This private key is publicly
+shared, so don't use this account in Mainnet or testnets. The genesis block allocates
+333,333,333,333,333,333,333 coins to this account, which is equivalent to `333.3333` SET.
 
-Let's import this private key into Metamask.
+Let's import this private key into MetaMask.
 
-- Click on Metamask.
-- From "My Accounts" click on "Import Account":
-  ![Import Account](/img/sevm-m2.png)
+- Click on MetaMask.
+- From "My Accounts" click on "Import Account": ![Import Account](/img/sevm-m2.png)
 
-Now you can import your private key in this screen. When you pasted your private key, click on "Import". You should be able to see your account with some balances in it. For example:
+Now you can import your private key in this screen. When you pasted your private key, click on
+"Import." You should be able to see your account with some balances in it. For example:
 
 ![Account with Balance](/img/sevm-m3.png)
 
 Now we can send funds to another account:
 
-- Click on "Send" in your Metamask.
+- Click on "Send" in your MetaMask.
 - Input an address or select "Transfer between my accounts"
 - Select an address
 - Input your amount. It should be look like this
@@ -315,7 +359,9 @@ Now we can send funds to another account:
 - You can inspect your transaction in this screen:
   ![Account with Balance](/img/sevm-m5.png)
 
-For example let's verify the base fee is indeed the configured one. Remind that in our genesis we specified `minBaseFee` as 13000000000 which is equivalent to 13 Gwei. Let's click "Edit" above on the "Estimated gas fee" section.
+For example let's verify the base fee is indeed the configured one. Remind that in our genesis we
+specified `minBaseFee` as 13000000000 which is equivalent to 13 Gwei. Let's click "Edit" above on
+the "Estimated gas fee" section.
 
 ![Gas Fee](/img/sevm-m6.png)
 
@@ -331,4 +377,9 @@ You can inspect your confirmed transaction.
 
 ### Other Tools
 
-You can use subnet-evm just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can follow this article to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask](./deploy-a-smart-contract-on-your-evm.md). Or you can deploy your contracts with [hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `ChainID` and
+RPC URL. For example you can follow this article to
+[Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](./deploy-a-smart-contract-on-your-evm.md).
+Or you can deploy your contracts with
+[hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+by changing `url` and `chainId` in the `hardhat.config.ts`.
