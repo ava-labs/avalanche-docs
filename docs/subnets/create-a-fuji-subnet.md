@@ -70,7 +70,7 @@ We will need this ID in the later section when calling [addValidator](#add-a-val
 
 :::info
 
-With more data on `Fuji` testnet, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean) to shorten the time for bootstrapping.
+With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean) to shorten the time for bootstrapping.
 
 :::
 
