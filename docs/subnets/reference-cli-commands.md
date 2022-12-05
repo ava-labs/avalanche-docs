@@ -211,8 +211,8 @@ avalanche subnet export [subnetName] [flags]
 The `subnet import` command imports configurations into Avalanche-CLI.
 
 This command supports importing from a file created on another computer,
-or importing from subnets running public networks
-(e.g. created manually or with the deprecated Subnet-CLI)
+or importing from Subnets running public networks
+(for example, created manually or with the deprecated Subnet-CLI)
 
 #### Import from a File
 
