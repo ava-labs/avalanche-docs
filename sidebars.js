@@ -293,7 +293,7 @@ const sidebars = {
     {
       type: 'link',
       label: 'Product Support',
-      href: 'https://support.avax.network/en/',
+      href: 'https://support.avax.network/en/'
     },
     {
       type: 'category',
