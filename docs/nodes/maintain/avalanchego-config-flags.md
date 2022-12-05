@@ -255,7 +255,7 @@ This are the main properties in the JSON file:
 - `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32].
 - `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
 - `startTime`: The time of the beginning of the blockchain, it must be a Unix timestamp and it can't be a time in the future.
-- `initialStakeDuration`: The initial stake duration in seconds.
+- `initialStakeDuration`: The stake duration, in seconds, of the validators that exist at network genesis.
 - `initialStakeDurationOffset`: The initial stake duration offset between stakers in seconds.
 - `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well)
 - `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one
