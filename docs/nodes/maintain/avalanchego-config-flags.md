@@ -256,11 +256,11 @@ This are the main properties in the JSON file:
 - `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
 - `startTime`: The time of the beginning of the blockchain, it must be a Unix timestamp and it can't be a time in the future.
 - `initialStakeDuration`: The stake duration, in seconds, of the validators that exist at network genesis.
-- `initialStakeDurationOffset`: The initial stake duration offset between stakers in seconds.
-- `initialStakedFunds`: A list of avax addresses to be used as the initial stake funds (Must be present in `allocations` as well)
-- `initialStakers`: A list of the initial stakers, it includes the rewardAddress, nodeID and the delegationFee for each one
-- `cChainGenesis`: Specify the chains that exist upon this network's creation
-- `message`: A fun quote
+- `initialStakeDurationOffset`: The offset, in seconds, between the start times of the validators that exist at genesis.
+- `initialStakedFunds`: A list of addresses that own the funds staked at genesis (each address must be present in `allocations` as well)
+- `initialStakers`: The validators that exist at genesis. Each element contains the rewardAddress, nodeID and the delegationFee of the validator.
+- `cChainGenesis`: The genesis info to be passed to the C-Chain.
+- `message`: A message to include in the genesis. Not required.
 
 For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
 
