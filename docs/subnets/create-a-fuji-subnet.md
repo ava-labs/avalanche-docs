@@ -207,7 +207,7 @@ the use of a ledger device is strongly recommended.
 
 1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses
 if you already have funds on a different address, or get it from the faucet at
-[https://faucet.avax.network](https://faucet.avax.network/) using your **C-Chain address**.
+[`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
 
 2. **Export** your key via the `avalanche key export` command, then paste the output when selecting
 "Private key" while accessing the [web wallet](https://wallet.avax.network). (Private Key is the

@@ -8,13 +8,13 @@ Avalanche-Docs uses a variety of linting and style checking programs including
   - [GitHub Action](https://github.com/errata-ai/vale-action)
 - [Markdownlint](https://github.com/DavidAnson/markdownlint)
   - Uses [Super-Linter](https://github.com/github/super-linter) as a GitHub Action. This pulls in a
-    few other linting tools such as [textlint](https://github.com/textlint/textlint)
+    few other linting tools.
 
 ## Config Files
 
 ### Vale Configs
 
-The overall config is [`.vale.ini`](.vale.ini). You can find the individual style 
+The overall config is [`.vale.ini`](.vale.ini). You can find the individual style
 in [`.github/styles`](.github/styles).
 
 ### Markdown Lint Configs
@@ -23,7 +23,7 @@ Look at [`.markdownlint.json`](.markdownlint.json).
 
 ## Adding a File to the CI for Style Checking
 
-Edit [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Add the file or folder to the `files` 
+Edit [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Add the file or folder to the `files`
 tag in the `Vale` task.
 
 ## Run Checkers Locally
@@ -74,13 +74,13 @@ To block a specific word from appearing in the repository, add the word to
 If you would like to enforce a specific product name such as `Avalanche-CLI` as opposed to
 `avalanche-cli` or `Avalanche CLI`, you create a new regular expression substitution pattern in
 either
-[.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml) 
+[.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml)
 or [.github/styles/custom/RejectForms.yml`](.github/styles/custom/RejectForms.yml).
 
 ### Adding an Exception to an Existing Rule
 
-If you' like to add an exception to a Vale rule, navigate to the rule in `.github/styles` and add an
-entry under `exceptions`. See 
+If you'd like to add an exception to a Vale rule, navigate to the rule in `.github/styles` and add an
+entry under `exceptions`. See
 [.github/styles/GoogleModified/Headings.yml](.github/styles/GoogleModified/Headings.yml) for an example.
 
 ### Ignoring Markdownlint Inline

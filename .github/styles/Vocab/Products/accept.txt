@@ -15,7 +15,6 @@ Ava Labs
 Avalanche-CLI
 AvalancheGo
 Avascan
-avax
 AVAX
 blockchain
 Blockchain
@@ -37,7 +36,6 @@ Config
 Coreth
 Crabada
 dapp
-dApp
 delegators
 deployer
 deployers
@@ -76,7 +74,6 @@ multisig
 multistep
 Nakamoto
 npm
-Ok
 OK
 parameterizable
 parameterization

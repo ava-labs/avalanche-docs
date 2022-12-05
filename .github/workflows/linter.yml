@@ -52,3 +52,4 @@ jobs:
           VALIDATE_JSCPD: false
           VALIDATE_YAML: false
           VALIDATE_GITLEAKS: false
+          VALIDATE_NATURAL_LANGUAGE: false
