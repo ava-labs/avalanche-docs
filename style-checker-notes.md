@@ -53,7 +53,8 @@ Run with `markdownlint <filename>`. There is also an extension to add it to
 
 ### ESLint
 
-Run `npx eslint <filename>`. You can use the `--fix` flag to fix many issues.
+You can install locally by running `yarn`. Run `npx eslint <filename>`. You can use the `--fix` flag
+to fix many issues.
 
 ## Resolving Flagged Issues
 
