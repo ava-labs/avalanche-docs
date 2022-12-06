@@ -2,33 +2,33 @@
 
 ## Rationale
 
-Subnet operations can be done under a permissioned multisig scheme,
-that is, a set of control addresses can be specified on Subnet creation,
-which is going to be the only ones that can sign a valid TX related to that
+For Subnet operations the user can specify a permissioned multisig scheme,
+that's, the user specifies a set of control addresses on Subnet creation,
+which are going to be the only ones that can sign a valid TX related to that
 SUBNET (for example: create blockchain, add Subnet validator).
 
 Furthermore, multisig threshold specifies how many of those control addresses
-are required to sign any such TX.
+to require to sign any such TX.
 
 The simplest case without multisig, is having 1 control
 key and threshold of 1, as in [this tutorial](./create-a-mainnet-subnet). In this case
-there is only one control address for the SUBNET operations, and it is going to always be the same.
+there is only one control address for the SUBNET operations, and it's going to always be the same.
 
 A more complex example is to have 2 control keys and a threshold of 2, do that every
-TX needs to always be signed by the same control keys (this also applies to the general
+TX needs always the same control keys as signers (this also applies to the general
 case of a threshold of N out of N control keys).
 
-For a more complex multisig example, and the one that is going to be used in this tutorial,
+For a more complex multisig example, and the one that to use in this tutorial,
 one can specify 5 specific control keys, and a threshold of 2,
-and in this case, for every TX, 2 out of the 5 control keys is going to be needed to sign the TX. 
+and in this case, every TX signature process needs 2 out of the 5 control keys.
 
-When creating a given TX, a selection of the specific control keys to use (of threshold length) should
-be made. Afterwards, the TX should be signed by each one of this preselected control keys subset.
+When creating a given TX, the user should select the specific control keys to use -of threshold length-.
+Afterwards, each one of this preselected control keys should sign the TX.
 
-For example, for the former case, 2 out of 5 control keys, the 5 control keys are defined in SUBNET creation,
-together with the enabling threshold. After that, a SUBNET op such as adding a SUBNET validator, first
-is going to be created by selecting which 2 of this 5 control addresses is going to be used for signing,
-and afterwards, the signature process can start, which needs to be fulfilled for those preselected addresses.
+For example, for the former case, 2 out of 5 control keys, in SUBNET creation the user defines the 5
+control keys together with the enabling threshold. After that, create a SUBNET op such as adding a SUBNET
+validator, by selecting which 2 of this 5 control addresses to use for signing,
+and afterwards, the signature process can start, which those preselected addresses need to fulfill.
 
 ## Contents
 
@@ -36,7 +36,7 @@ This article documents the following `Mainnet` operations:
 
 Deploy command related ones:
 
-- Specify a multisig set of control keys (5) and threshold (2) for the SUBNET
+- Specify a multisig set of control keys -5- and threshold -2- for the SUBNET
 - Sign and issue the Subnet creation TX using funded first ledger address for the fees
 - Specify Subnet of 2 control keys to use for blockchain creation
 - Sign the blockchain creation TX using funded first ledger address for the fees, also signing
@@ -49,12 +49,12 @@ Sign command related ones:
 
 ### Notice
 
-1. All operations is going to use ledger, as is required for `Mainnet`. Locally stored keys can be used
-   for multisig on `Fuji` (as ledger can also be used on `Fuji`), but this tutorial is going to not
-   focus on that.
-2. The ledger that is connected when creating the TXs (when doing the `deploy` command), is going to
-   be used to pay for the fees (2 AVAX), and as first control key of the 2 required.
-3. A different ledger is going to be needed for the second signature, which is going to pay no fees.
+1. Due to `Mainnet` requirements at CLI, all operations are going to use ledger. The user can specify
+   locally stored keys for multisig on `Fuji` (also the user can choose ledger on `Fuji`), but this
+   tutorial is going to not focus on that.
+2. The ledger connected when creating the TXs (when doing the `deploy` command), is going to
+   to pay for the fees (2 AVAX), and as first control key of the 2 required.
+3. The user needs a different ledger for the second signature, which is going to pay no fees.
 
 ## Prerequisites
 
@@ -67,16 +67,16 @@ If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanc
 
 ### Ledger Devices
 
-Two supported devices are needed to do the 2 of 5 signatures. One of them needs to be funded in order
+The user needs two supported devices to do the 2 of 5 signatures. Verify one of them has funds in order
 to pay for the TX fees.
 
-See [ledger requirements](./create-a-mainnet-subnet#ledger) for details on which devices are
-supported, how to get the devices addresses, how to fund a device.
+See [ledger requirements](./create-a-mainnet-subnet#ledger) for details on supported devices,
+how to get the devices addresses, how to fund a device.
 
-## Addresses to be Used on This Tutorial
+## Addresses Used on This Tutorial
 
 - Control key 0: `P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28`
-- Control key 1: `P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5` ledger 0 first address (funded)
+- Control key 1: `P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5` ledger 0 first address -funded-
 - Control key 2: `P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8`
 - Control key 3: `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af` ledger 1 first address
 - Control key 4: `P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g`
@@ -87,7 +87,7 @@ supported, how to get the devices addresses, how to fund a device.
 
 Connect ledger 0 device, unblock it, and run the Avalanche Ledger Application, as described in
 [How to use Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
-(up to and including point 4).
+-up to and including point 4-.
 Remember that Ledger 0 should have at least 2 AVAX to pay for the TX fees.
 
 When using CLI, it should recognize the ledger and use the associated address `P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5`
@@ -95,7 +95,7 @@ as the one to pay for the TX fees and to do the first signature of the TX.
 
 ### Subnet to Use
 
-See [this section](./create-a-fuji-subnet#create-an-evm-subnet) to create an EVM based SUBNET, to be
+See [this section](./create-a-fuji-subnet#create-an-evm-subnet) to create an EVM based SUBNET, 
 called testsubnet from now on.
 
 ### Specify Network, Control Keys and Threshold
@@ -124,20 +124,20 @@ Deploying [testsubnet] to Mainnet
 ```
 
 Ledger is automatically recognized as the signature mechanism on `Mainnet`, and so the CLI
-asks the user to authorize the ledger to provide extended public key information to it. This
-info is used by the tool to get the ledger addresses.
+asks the user to authorize the ledger to provide extended public key information to it. The tool
+uses this info to get the ledger addresses.
 
 On the ledger a `Provide Extended Public Key` window is going to be active. Navigate to the ledger `Accept`
 window by using the ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
-After that, the first `Mainnet` ledger address is shown.
+After that, CLI shows the first `Mainnet` ledger address.
 
 ```text
 Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ```
 
-Next the user is asked to specify the control keys.
+Next CLI asks the user to specify the control keys.
 
 ```text
 Configure which addresses may make changes to the subnet.
@@ -163,7 +163,7 @@ Select `Custom list` to provide one by one the desired 5 control addresses.
 
 Use the given menu to add each key, and select `Done` when finished.
 
-This output should be expected at this point:
+The output at this point:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -197,7 +197,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     5
 ```
 
-Note: if the control keys do not include the ledger one, signature is going to fail for SUBNET authorization
+Note: if the control keys don't include the ledger one, signature is going to fail for SUBNET authorization
 of chain creation TX, and deploy is going to fail, with the expected message
 
 ```text
@@ -205,11 +205,10 @@ Error: wallet does not contain subnet auth keys
 exit status 1
 ```
 
-### Specify Control Keys to be Used to Sign the Chain Creation TX
+### Specify Control Keys to Sign the Chain Creation TX
 
-After indicating 2 control keys are needed to sign any SUBNET TX, CLI asks the user
-to input the specific control keys to be used for the chain creation TX that is going to be
-generated and signed for deploy.
+After indicating to use 2 control keys to sign any SUBNET TX, CLI asks the user
+to input the specific control keys for the chain creation TX.
 
 ```text
 ? Choose a subnet auth key: 
@@ -223,7 +222,7 @@ generated and signed for deploy.
 Here, the user should select one by one the two ledger addresses: `P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5`
 and `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af`
 
-Note: if the currently connected ledger address is not included here, the operation is going to next
+Note: if the currently connected ledger address isn't included here, the operation is going to next
 fail with:
  
 ```text
@@ -235,12 +234,12 @@ Error: wallet does not contain subnet auth keys
 exit status 1
 ```
 
-This can happen either because the original specified control keys (previous step) do not contain the
-ledger address, or because the ledger address control key was not selected in the current step. In the
-given example, the ledger 0 address control key was not selected.
+This can happen either because the original specified control keys -previous step- don't contain the
+ledger address, or because the ledger address control key wasn't selected in the current step. In the
+given example, the ledger 0 address control key wasn't selected.
 
-Note 2: if by mistake ledger 1, that has no funds, is connected, and selected for chain creation, the
-operation is going to fail when trying to pay the fee for the SUBNET creation TX, with:
+Note 2: if by mistake the user connects the ledger 1, that has no funds, and selects it for chain creation,
+the operation is going to fail when trying to pay the fee for the SUBNET creation TX, with:
 
 ```text
 ✔ 2
@@ -279,13 +278,13 @@ Subnet has been created with ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q
 *** Please sign blockchain creation hash on the ledger device *** 
 ```
 
-After successful Subnet creation, the user is going to be asked to sign the blockchain creation  TX.
+After successful Subnet creation, CLI is going to ask the user to sign the blockchain creation  TX.
 
 On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-On success, Subnet deploy details is going to be provided. As only 1 address signed the chain creation
-TX, a file is going to be written to disk to save the TX so as to continue the signing process with
+On success, CLI is going to provide Subnet deploy details. As only 1 address signed the chain creation
+TX, CLI is going to write a file to disk to save the TX so as to continue the signing process with
 another command.
 
 <!-- markdownlint-disable MD013 -->
@@ -308,8 +307,8 @@ Path to export partially signed TX to:
 
 <!-- markdownlint-enable MD013 -->
 
-Enter name of file to write to disk, in this example, `partiallySigned.txt`. Should not exist on disk.
-CLI is going to ask until this condition is met.
+Enter name of file to write to disk, in this example, `partiallySigned.txt`. Shouldn't exist on disk.
+CLI is going to ask until meting this condition.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -336,16 +335,16 @@ to continue the signing process with `transaction sign` command.
 
 Connect ledger 1 device, unblock it, and run the Avalanche Ledger Application, as described in
 [How to use Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
-(up to and including point 4). Remember that Ledger 1 does not need to have funds, and is going to be
-used to provide Subnet auth only, not to pay fees.
+-up to and including point 4-. Remember that Ledger 1 doesn't need to have funds, and CLI is going to
+use it to provide Subnet auth only, not to pay fees.
 
 When using CLI, it should recognize the ledger and use the associated address `P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af`
 as the one to do the second signature of the TX.
 
 ### Issue the Command to Sign the Chain Creation TX
 
-Transaction in `partiallySigned.txt` is going to be recognized as `Mainnet` one, and so ledger is going
-to be used automatically for signing. In the `Fuji` case, the user is going to be prompted to choose
+CLI is going to recognize the transaction in `partiallySigned.txt` as `Mainnet` one, and is going to
+use the ledger automatically for signing. In the `Fuji` case, CLI is going to prompt the user to choose
 the signing mechanism.
 
 ```bash
@@ -362,7 +361,7 @@ Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 *** Please sign TX hash on the ledger device *** 
 ```
 
-Next, a new signing is going to be started for the create chain TX. If the ledger is not the correct
+Next, CLI is going to start a new signing process for the create chain TX. If the ledger isn't the correct
 one, the following error should appear instead:
 
 ```text
@@ -374,8 +373,9 @@ exit status 1
 On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-After that the TX is going to be recognized as having all required signatures. If the threshold were
-larger, the `transaction sign` command should be used as many times as needed with the different ledgers.
+After that CLI is going to recognize the TX as having all required signatures. If the threshold were
+larger, the user should execute the `transaction sign` command should as many times as needed with the
+different ledgers.
 
 ```text
 
@@ -389,7 +389,7 @@ Commit command:
   avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-Now, `partiallySigned.txt` contains a fully signed TX, ready to be deployed.
+Now, `partiallySigned.txt` contains a fully signed TX.
 
 ### Issue the Command to Commit the Chain Creation TX
 
@@ -397,7 +397,7 @@ Now, `partiallySigned.txt` contains a fully signed TX, ready to be deployed.
 avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-TX is going to be recognized as `Mainnet` one, and automatically deployed.
+CLI is going to recognize the TX as `Mainnet` one, and is going to automatically deploy it.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -430,7 +430,7 @@ appropriate multisig parameters in control keys and threshold.
 
 This example is going to use 5 control keys and threshold of two.
 
-Before starting, be sure that ledger 0 is connected, unblocked, and with Avalanche Ledger App running.
+Before starting, be sure to connect, unblock, and run Avalanche Ledger App on ledger 0.
 
 ```bash
 avalanche subnet addValidator testsubnet
@@ -445,9 +445,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-Then, similar to deploy, user is asked to select the 2 control keys to be used to sign the TX. Note
-there is no need to ask for the main set of control keys (the 5 given on deploy), or the threshold.
-That is already saved on chain for testsubnet.
+Then, similar to deploy, the command asks the user to select the 2 control keys needed to sign the TX.
+Note there is no need to ask for the main set of control keys, or the threshold.
+That's already saved on chain for testsubnet.
 
 ```text
 ✔ Mainnet
@@ -470,11 +470,11 @@ to need to have ledger 0 connected to pay for the fee (0.001 AVAX) and be the fi
 Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
 ```
 
-Lets skip the validation node/period prompt description, as it is already described
+Lets skip the validation node/period prompt description, as it's already described
 [here](./create-a-mainnet-subnet#add-a-avalidator). 
 
-Only note that start time for validator is not selected to be in one minute, to give more time to all
-the signing process to be finished.
+Only note that start time for validator isn't selected to be in one minute, to give more time to finish
+all the signing process.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -512,7 +512,7 @@ Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 *** Please sign add validator hash on the ledger device *** 
 ```
 
-After that, ledger 0 address is shown, and the user is asked to sign add validator TX on ledger.
+After that, the command shows ledger 0 address, and asks the user to sign add validator TX on ledger.
 
 ```text
 Partial TX created
@@ -522,7 +522,8 @@ Partial TX created
 Path to export partially signed TX to:
 ```
 
-As the case is multisig, TX is not fully signed, and a file is asked to write into, lets use partialAddValidatorTx.txt
+As the case is multisig, TX isn't fully signed, and the commands asks a file to write into, lets use
+partialAddValidatorTx.txt
 
 <!-- markdownlint-disable MD013 -->
 
@@ -542,14 +543,14 @@ Signing command:
 
 ## Sign and Commit the Add Validator TX with the Transaction Commands
 
-Process is pretty similar to signing of chain creation TX. So some details is going to be omitted now.
+Process is pretty similar to signing of chain creation TX. Going to omit some details now.
 
-First, be sure that ledger 1 is connected, unblocked, and with Avalanche Ledger App running.
+First, be sure to connect, unblock, and run Avalanche Ledger App on ledger 1.
 
 ### Issue the Command to Sign the add validator TX
 
-Transaction in `partialAddValidatorTx.txt` is going to be recognized as `Mainnet` one, and so ledger
-is going to be used automatically for signing.
+The command is going to recognize the transaction in `partialAddValidatorTx.txt` as `Mainnet` one, and
+is going to use the ledger automatically for signing.
 
 ```bash
 avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
@@ -565,12 +566,12 @@ Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 *** Please sign TX hash on the ledger device *** 
 ```
 
-Next, a new signing is going to be started for the create chain TX.
+Next, the command is going to start a new signing process for the create chain TX.
 
 On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-After that the TX is going to be recognized as having all required signatures.
+After that the command is going to recognize the TX as having all required signatures.
 
 ```text
 
@@ -584,7 +585,7 @@ Commit command:
   avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
-Now, `partialAddValidatorTx.txt` contains a fully signed TX, ready to be deployed.
+Now, `partialAddValidatorTx.txt` contains a fully signed TX.
 
 ### Issue the Command to Commit the add validator TX
 
@@ -592,7 +593,7 @@ Now, `partialAddValidatorTx.txt` contains a fully signed TX, ready to be deploye
 avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
-TX is going to be recognized as `Mainnet` one, and automatically deployed.
+The command is going to recognize TX as `Mainnet` one, and is going to automatically deploy it.
 
 ```text
 Transaction successful, transaction ID: K7XNSwcmgjYX7BEdtFB3hEwQc6YFKRq9g7hAUPhW4J5bjhEJG
