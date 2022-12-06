@@ -8,7 +8,7 @@ Avalanche-Docs uses a variety of linting and style checking programs including
   - [GitHub Action](https://github.com/errata-ai/vale-action)
 - [Markdownlint](https://github.com/DavidAnson/markdownlint)
   - Uses [Super-Linter](https://github.com/github/super-linter) as a GitHub Action. This pulls in a
-    few other linting tools but they are all disabled.
+    few other linting tools but they're all turned off.
 
 ## Config Files
 
