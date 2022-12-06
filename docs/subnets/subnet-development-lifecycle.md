@@ -18,9 +18,11 @@ of VMs to choose from:
 
 #### EVM-Based Subnets
 
-EVM-based Subnets are forks of the Avalanche C-Chain. They support Solidity smart contracts and
-standard [Ethereum APIs](/apis/avalanchego/apis/c-chain#ethereum-apis). Subnet-EVM is Ava Labs'
-implementation of an EVM-Based Subnet.
+EVM-based Subnets are forks of the Avalanche C-Chain. They support Solidity
+smart contracts and standard [Ethereum
+APIs](/apis/avalanchego/apis/c-chain#ethereum-apis).
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) is Ava Labs' implementation
+of an EVM-Based Subnet.
 
 Subnet-EVM is far and away the safest and most popular choice to build your Subnet with. It has the
 most mature developer tooling and receives regular updates by the Ava Labs team.
