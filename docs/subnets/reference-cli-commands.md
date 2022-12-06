@@ -322,6 +322,8 @@ avalanche subnet join [subnetName] [flags]
 ### Subnet List
 
 The `subnet list` command prints the names of all created Subnet configurations.
+Without any flags, it will print some general, static information about the Subnet.
+With the `--deployed` flag, information such as VMID, BlockchainID and SubnetID will be shown.
 
 **Usage:**
 
@@ -332,7 +334,8 @@ avalanche subnet list [flags]
 **Flags:**
 
 ```shell
--h, --help   help for list
+    --deployed   show additional deploy information
+-h, --help       help for list
 ```
 
 ### Subnet Publish
