@@ -69,3 +69,5 @@ exceptions:
   - RPC
   - NOT
   - TX
+  - DEX
+  - CLOB
