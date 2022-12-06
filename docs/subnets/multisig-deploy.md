@@ -141,7 +141,7 @@ Next CLI asks the user to specify the control keys.
 
 ```text
 Configure which addresses may make changes to the subnet.
-These addresses are known as your control keys. You is going to also
+These addresses are known as your control keys. You are going to also
 set how many control keys are required to make a subnet change (the threshold).
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? How would you like to set your control keys?: 
@@ -436,7 +436,7 @@ Before starting, be sure to connect, unblock, and run Avalanche Ledger App on le
 avalanche subnet addValidator testsubnet
 ```
 
-First is going to need to specify the network. Select `Mainnet`
+First specify the network. Select `Mainnet`
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
