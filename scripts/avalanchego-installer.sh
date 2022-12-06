@@ -236,7 +236,6 @@ fi
 echo "Preparing environment..."
 osType=$(getOsType) 
 if [ "$osType" = "Debian" ]; then
-  #sorry, don't know you.
   check_reqs_deb
 elif [ "$osType" = "RHEL" ]; then
   check_reqs_rhel
