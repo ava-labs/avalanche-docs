@@ -1,6 +1,6 @@
 # How to Create Your Own DAO with Avalanche
 
-## What is a DAO
+## What Is a DAO
 
 The DAO's are systems that help us to work with people around the world in a safe and clear way.  
 
@@ -8,7 +8,7 @@ Think of them like an internet-native business that's collectively owned and man
 
 There's no CEO who can authorize spending based on their own whims and no chance of a dodgy CFO manipulating the books. Everything is out in the open and the rules around spending are baked into the DAO via its code.  
 
-## How the DAO's work?
+## How the DAO's Work?
 
 The backbone of a DAO is in smart contracts. The smart contracts defines the rules of the organization.  
 
@@ -18,15 +18,15 @@ The vote is based in how many governance tokens have been deposited on the DAO.
 
 For example if you have a 100 of the governance tokens but you deposited only 20 tokens on the DAO contract only 20 tokens will be taken into account for you vote.
 
-## Let's start to build our DAO
+## Let's Start to Build Our DAO
 
 * **Tools We will use**  
   * [REMIX IDE](https://remix.ethereum.org/)
-  * [Metamask Wallet](https://metamask.io/)
+  * [MetaMask Wallet](https://metamask.io/)
 
-> We need to setup the FUJI Testnet on our Metamask. [`find here the rpc values`](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
+> We need to setup the Fuji Testnet on our MetaMask. [`find here the rpc values`](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
 
-### Step 1: Creating a new .sol file on REMIX
+### Step 1: Creating a New .sol File on REMIX
 
 On REMIX we click the new file icon and put some name, in my case my file name is `MyDAO.sol`
 
@@ -42,7 +42,7 @@ The first line tells you that the source code is licensed under the GPL version 
 
 ![first lines of code](assets/avalanche-dao-firstLines.png)
 
-### Step 2: Defining our DAO functions
+### Step 2: Defining Our DAO Functions
 
 Commonly the DAO's contract has four main functions:
 
@@ -52,10 +52,10 @@ Commonly the DAO's contract has four main functions:
 * Vote.
 
 We use AVAX our governance token.
-FUJI contract address: 0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70
-and we need import [IERC20](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol) template from [openzeppelin](https://openzeppelin.com/).  
+Fuji contract address: 0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70
+and we need import [IERC20](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol) template from [OpenZeppelin](https://openzeppelin.com/).
 
-### Step 3: Defining the proposal variables
+### Step 3: Defining the Proposal Variables
 
 For the proposal format we defined a group with custom properties, the properties for our proposal are:
 
@@ -69,7 +69,7 @@ For the proposal format we defined a group with custom properties, the propertie
 
 For the voting options and the proposal status we will use an `enums` types.  
 
-`Enums` can be used to create custom types with a finite set of 'constant values'. **[see more about enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
+`Enums` can be used to create custom types with a finite set of 'constant values'. **[see more about Enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
 
 ```solidity
 enum VotingOptions { Yes, No } 
@@ -91,7 +91,7 @@ for the other proposal properties we can use an `struct` type.
     }
 ```
 
-Until this step our Dao contract looks like this:
+Until this step our DAO contract looks like this:
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -272,23 +272,23 @@ Finally our DAO contract looks like this.
 
 ![contract](assets/avalanche-dao-SC.png)
 
-### Step 6: Deploy our DAO contract on FUJI
+### Step 6: Deploy Our DAO contract on Fuji
 
 Now we need compile our contract, I'm using the 0.8.0 version compiler, and click on the `Compile` button.
 
 ![compiler settings](assets/avalanche-dao-remix-compiler.png)
 
-In the environment section we choose the `Injected Web3` option, in account we chose an account from our metamask plugin in the FUJI network, make sure that your account have the necessary avax for the deploy and the minimum for create a proposal.
+In the environment section we choose the `Injected Web3` option, in account we chose an account from our MetaMask plugin in the Fuji network, make sure that your account have the necessary AVAX for the deploy and the minimum for create a proposal.
 [Here you can find the Faucet](https://faucet.avax.network/).  
-Click on the `Deploy` button and confirm the transaction in REMIX and Metamask and await for a few seconds.  
+Click on the `Deploy` button and confirm the transaction in REMIX and MetaMask and await for a few seconds.
 
 ![deploy](assets/avalanche-dao-deploy-smartContract.png)
 
 ![confirm](assets/avalanche-dao-confirm-deploy.png)
 
-![metamask](assets/avalanche-dao-metamask.png)
+![MetaMask](assets/avalanche-dao-metamask.png)
 
-If the contract is deployed successfully on FUJI we can see the succes transaction on the REMIX inspector.
+If the contract is deployed successfully on Fuji we can see the success transaction on the REMIX inspector.
 
 ![remix](assets/avalanche-dao-remix-Tx.png)
 

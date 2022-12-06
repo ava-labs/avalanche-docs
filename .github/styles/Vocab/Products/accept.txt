@@ -53,9 +53,11 @@ Dexalot
 Docusaurus
 dotenv
 ecrecover
+Enums
 EOAs
 ERC
 ERC721s
+ESLint
 Eteng
 Ethereum
 Ethers
@@ -142,6 +144,7 @@ Validator
 VM
 VMs
 WAGMI
+Webpack
 wei
 Wei
 yargs
