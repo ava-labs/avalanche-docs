@@ -3,7 +3,7 @@
 After trying out a Subnet on `Fuji` using stored keys, by following [this tutorial](./create-a-fuji-subnet),
 next step is to try it out on `Mainnet`.
 
-In this article, it is shown how to do the following on `Mainnet`.
+In this article, it's shown how to do the following on `Mainnet`.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
@@ -24,7 +24,7 @@ on how to run a node and become a validator.
 
 Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines),
 much like an object in an object-oriented language is an instance of a class.
-That is, the VM defines the behavior of the blockchain.
+That's, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains.
 Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
@@ -34,9 +34,9 @@ most other Ethereum client features.
 
 ### Mainnet
 
-For this tutorial, it is recommended to follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
+For this tutorial, it's recommended to follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
 
-Also it is worth pointing out that [you need at least 2000 AVAX to become a validator on Mainnet](../nodes/validate/staking.md#mainnet).
+Also it's worth pointing out that [you need at least 2000 AVAX to become a validator on Mainnet](../nodes/validate/staking.md#mainnet).
 
 To get the NodeID of this `Mainnet` node, call the following curl command [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
 
@@ -159,7 +159,7 @@ To deploy the new Subnet, run
 avalanche subnet deploy testsubnet
 ```
 
-Note: if the ledger is blocked, or the Avalanche Ledger App is not running, the command is going to
+Note: if the ledger is blocked, or the Avalanche Ledger App isn't running, the command is going to
 end with error.
 
 This is going to start a new prompt series.
@@ -213,7 +213,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom list
 ```
 
-For this tutorial, it is opt to use the first ledger address, so enter at `Use ledger address`. Only
+For this tutorial, it's opt to use the first ledger address, so enter at `Use ledger address`. Only
 this address is going to be able to add or remove validators, or create blockchains on the Subnet.
 
 ```text
@@ -221,7 +221,7 @@ Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Currently, besides indicating a list of addresses that is going to be control keys, usually the user
+Currently, besides indicating a list of addresses that's going to be control keys, usually the user
 is required to define the threshold of how many addresses are required for a change to be valid. In
 this case, as there is only one control key, the threshold is forced to 1 without asking to the user,
 so that address and only that address can authorize Subnet changes (auth keys for chain creation).
@@ -236,7 +236,7 @@ Next, a TX for creating the Subnet id is generated and the user is asked to sign
 On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-Note that if the ledger is not funded or does not have enough funds, the user is going to get an error
+Note that if the ledger isn't funded or does not have enough funds, the user is going to get an error
 message:
 
 ```text
@@ -281,7 +281,7 @@ window for the deployment is going to be shown:
 <!-- markdownlint-enable MD013 -->
 
 In this case, the ledger address is the control key, so there is going to be no control key authorization
-error, but in general, if the control key is specified manually and is not controlled by the ledger,
+error, but in general, if the control key is specified manually and isn't controlled by the ledger,
 an error is going to occur:
 
 ```text
@@ -341,7 +341,7 @@ Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3v
 
 Also, as `Mainnet` is being used here, the tool assumes that the first ledger address is going to be
 used as signing address.
-So, it is expected that the connected ledger has the Subnet control key as its first address.
+So, it's expected that the connected ledger has the Subnet control key as its first address.
 
 Now use the **NodeID** of the validator from the very beginning of this tutorial. For best results make
 sure the validator is running and synced.
@@ -372,7 +372,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Then specify when the validator is going to start validating. The time must be in the future. Custom
-is going to require to enter a specific date in 'YYYY-MM-DD HH:MM:SS' format. Follow the default this
+is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the default this
 time:
 
 ```text
@@ -389,7 +389,7 @@ weight is >20% of the Subnet, the Subnet may have down time.
 
 :::
 
-Finally, specify how long it is going to be validating:
+Finally, specify how long it's going to be validating:
 
 ```text
 ✔ Start in one minute
@@ -399,14 +399,14 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-If choosing `Custom` here, it is needed to enter a **duration**, which is a time span expressed in hours.
+If choosing `Custom` here, it's needed to enter a **duration**, which is a time span expressed in hours.
 For example, say `200 days = 24 \* 200 = 4800h`
 
 ```text
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
 ```
 
-The user is shown an actual date of when that is now:
+The user is shown an actual date of when that's now:
 
 ```text
 ? Your validator is going to finish staking by 2023-06-10 13:07:58:
@@ -520,7 +520,7 @@ going to just print the required config to the screen. What "Automatic" does is:
 
 ```text
 ✔ Automatic
-✔ Path to your existing config file (or where it is going to be generated): config.json
+✔ Path to your existing config file (or where it's going to be generated): config.json
 ```
 
 Provide a path to a config file. If this command were to be run on the box where your validator is running,
@@ -539,7 +539,7 @@ the directory where the plugin is installed. Make sure to provide the location f
 ```
 
 The tool doesn't know where exactly it's located so it requires the full path. With the path given,
-it is going to copy the VM binary to the provided location:
+it's going to copy the VM binary to the provided location:
 
 ```text
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
@@ -564,7 +564,7 @@ option, e.g.
 (using your binary location). The node has to be restarted for the changes to take effect.
 ```
 
-It is **required to restart the node**.
+It's **required to restart the node**.
 
 By choosing "Manual" instead, the tool is going to just print _instructions_. The user is going to have
 to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is
@@ -614,7 +614,7 @@ avalanche subnet export testsubnet
 ✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
 ```
 
-The file is in text format and it should not be tampered with. It can then be used to import the configuration
+The file is in text format and it shouldn't be tampered with. It can then be used to import the configuration
 on a different machine.
 
 ## Subnet Import
@@ -658,7 +658,7 @@ Unless your Subnet has been deployed on other nodes, you is going to not be able
 including the public API server `https://api.avax.network/`, to connect to MetaMask.
 
 If you want to open up this node for others to access your Subnet, you should set it up properly with
-`https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it is out of scope for this tutorial
+`https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it's out of scope for this tutorial
 on how to do that.
 
 :::
