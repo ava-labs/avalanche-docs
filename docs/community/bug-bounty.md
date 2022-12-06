@@ -1,3 +1,3 @@
 # Bug Bounty
 
-Avalanche's bug bounty program can be found on [HackenProof](https://hackenproof.com/avalanche/avalanche-protocol).
+[HackenProof](https://hackenproof.com/avalanche/avalanche-protocol) hosts Avalanche's bug bounty program.
