@@ -76,6 +76,7 @@ JavaScript
 json
 JSON
 keyName
+KYCed
 liveness
 lookups
 Mainnet
@@ -119,6 +120,7 @@ Relayers
 RPC
 RPCs
 Saglam
+Solana
 spoofable
 solc
 stakers
