@@ -4,19 +4,31 @@
 
 The DAO's are systems that help us to work with people around the world in a safe and clear way.  
 
-Think of them like an internet-native business that's collectively owned and managed by its members. They have built-in treasuries that no one has the authority to access without the approval of the group. Decisions are governed by proposals and voting to ensure everyone in the organization has a voice.
+Think of them like an internet-native business that's collectively owned and
+managed by its members. They have built-in treasuries that no one has the
+authority to access without the approval of the group. Decisions are governed by
+proposals and voting to ensure everyone in the organization has a voice.
 
-There's no CEO who can authorize spending based on their own whims and no chance of a dodgy CFO manipulating the books. Everything is out in the open and the rules around spending are baked into the DAO via its code.  
+There's no CEO who can authorize spending based on their own whims and no chance
+of a dodgy CFO manipulating the books. Everything is out in the open and the
+rules around spending are baked into the DAO via its code.  
 
 ## How the DAO's Work?
 
-The backbone of a DAO is in smart contracts. The smart contracts defines the rules of the organization.  
+The backbone of a DAO is in smart contracts. The smart contracts defines the
+rules of the organization.
 
-Generally the DAO consists of two main smart contracts: the ERC20 token that is a governance token, and the smart contract that have the rules for the DAO. So like a DAO's members you need to have some governance tokens and then deposit to the DAO contract, and then we can create a proposal if the proposal is accepted the other members in the DAO can start to vote.  
+Generally the DAO consists of two main smart contracts: the ERC20 token that is
+a governance token, and the smart contract that have the rules for the DAO. So
+like a DAO's members you need to have some governance tokens and then deposit to
+the DAO contract, and then we can create a proposal if the proposal is accepted
+the other members in the DAO can start to vote.  
 
 The vote is based in how many governance tokens have been deposited on the DAO.  
 
-For example if you have a 100 of the governance tokens but you deposited only 20 tokens on the DAO contract only 20 tokens will be taken into account for you vote.
+For example if you have a 100 of the governance tokens but you deposited only 20
+tokens on the DAO contract only 20 tokens will be taken into account for you
+vote.
 
 ## Let's Start to Build Our DAO
 
@@ -34,9 +46,12 @@ On REMIX we click the new file icon and put some name, in my case my file name i
 
 and we add the basic lines of code:
 
-The first line tells you that the source code is licensed under the GPL version 3.0. Machine-readable license specifiers are important in a setting where publishing the source code is the default.
+The first line tells you that the source code is licensed under the GPL version
+3.0. Machine-readable license specifiers are important in a setting where
+publishing the source code is the default.
 
-`pragma` Specifies that the source code is written for Solidity version 0.7.0 or a newer version of the language up to, but not including version 0.9.0.  
+`pragma` Specifies that the source code is written for Solidity version 0.7.0 or
+a newer version of the language up to, but not including version 0.9.0.  
 
 `contract MyDAO {...}` specifies the name and a new block of code for our contract.
 
@@ -53,7 +68,9 @@ Commonly the DAO's contract has four main functions:
 
 We use AVAX our governance token.
 Fuji contract address: 0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70
-and we need import [IERC20](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol) template from [OpenZeppelin](https://openzeppelin.com/).
+and we need import
+[IERC20](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol)
+template from [OpenZeppelin](https://openzeppelin.com/).
 
 ### Step 3: Defining the Proposal Variables
 
@@ -64,20 +81,25 @@ For the proposal format we defined a group with custom properties, the propertie
 * Name of the proposal.
 * Creation date, that allow us to set a period of time for allow the voting.
 * Voting options, in this case we will keep it simple(Yes / NO).  
-* Number of Votes for Yes and Votes for No this will allow us set an status for the proposal when number of votes for any option be greater than fifty percent.
+* Number of Votes for Yes and Votes for No this will allow us set an status for
+  the proposal when number of votes for any option be greater than fifty
+  percent.
 * Status for the Proposal this options will be Accepted, Rejected, Pending.
 
 For the voting options and the proposal status we will use an `enums` types.  
 
-`Enums` can be used to create custom types with a finite set of 'constant values'. **[see more about Enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
+`Enums` can be used to create custom types with a finite set of 'constant
+values'. **[see more about
+Enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
 
 ```solidity
 enum VotingOptions { Yes, No } 
 enum Status { Accepted, Rejected, Pending }
 ```  
 
-for the other proposal properties we can use an `struct` type.  
-`Structs` alow us to define a custom group of properties. **[see more about structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**  
+For the other proposal properties we can use an `struct` type.  
+`Structs` alow us to define a custom group of properties. **[see more about
+structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**  
 
 ```solidity
     struct Proposal {
@@ -117,7 +139,11 @@ contract MyDAO {
 }
 ```
 
-Now we need to store all the proposals created for our DAO, we need to be sure that someone does not vote more than once, also set a period of vote for the proposals and set a minimum number of governance tokens to create a new proposal, we can take the number of governance tokens are deposited like a shares for an shareholder and give a proportional weight to their vote.
+Now we need to store all the proposals created for our DAO, we need to be sure
+that someone does not vote more than once, also set a period of vote for the
+proposals and set a minimum number of governance tokens to create a new
+proposal, we can take the number of governance tokens are deposited like a
+shares for an shareholder and give a proportional weight to their vote.
 
 ```solidity
 // store all proposals
@@ -137,8 +163,11 @@ uint public nextProposalId;
 
 ### Step 4: Deposit and Withdraw function for the DAO
 
-We already have our necessary variables to create, save and vote a proposal in our DAO, now we need our user deposit his `AVAX` tokens to avoid that the same user can use the same amount of tokens for vote other option in the same proposal.
-To interact with AVAX as our token the governance we need to initialize the token address in the constructor.
+We already have our necessary variables to create, save and vote a proposal in
+our DAO, now we need our user deposit his `AVAX` tokens to avoid that the same
+user can use the same amount of tokens for vote other option in the same
+proposal. To interact with AVAX as our token the governance we need to
+initialize the token address in the constructor.
 
 ```solidity
 constructor() {
@@ -225,7 +254,8 @@ contract MyDAO {
 
 ### Step 5: Create a Proposal and Vote functions
 
-For our `createProposal` function we will add the condition that if the user does not have minimum 25 AVAX tokens He cannot create a new proposal.
+For our `createProposal` function we will add the condition that if the user
+does not have minimum 25 AVAX tokens He cannot create a new proposal.
 
 ```solidity
 function createProposal(string memory name) external {
@@ -245,8 +275,11 @@ function createProposal(string memory name) external {
 }
 ```
 
-For the `Vote` function we need to receive the id for the proposal and the vote choice, we will validate that the user has not voted already and the vote period is currently open.  
-Also we validate if the proposal has more than fifty percent of votes in one option we need to change the proposal status to Accepted or Rejected.
+For the `Vote` function we need to receive the id for the proposal and the vote
+choice, we will validate that the user has not voted already and the vote period
+is currently open.  
+Also we validate if the proposal has more than fifty percent of votes in one
+option we need to change the proposal status to Accepted or Rejected.
 
 ```solidity
 function vote(uint _proposalId, VotingOptions _vote) external {
@@ -278,7 +311,10 @@ Now we need compile our contract, I'm using the 0.8.0 version compiler, and clic
 
 ![compiler settings](assets/avalanche-dao-remix-compiler.png)
 
-In the environment section we choose the `Injected Web3` option, in account we chose an account from our MetaMask plugin in the Fuji network, make sure that your account have the necessary AVAX for the deploy and the minimum for create a proposal.
+In the environment section we choose the `Injected Web3` option, in account we
+chose an account from our MetaMask plugin in the Fuji network, make sure that
+your account have the necessary AVAX for the deploy and the minimum for create a
+proposal.
 [Here you can find the Faucet](https://faucet.avax.network/).  
 Click on the `Deploy` button and confirm the transaction in REMIX and MetaMask and await for a few seconds.
 
