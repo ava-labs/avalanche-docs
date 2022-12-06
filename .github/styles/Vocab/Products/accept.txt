@@ -58,6 +58,7 @@ ERC
 ERC721s
 Eteng
 Ethereum
+Ethers
 eVoting
 feeRecipient
 GitHub
@@ -116,6 +117,7 @@ Relayers
 RPC
 RPCs
 Saglam
+spoofable
 solc
 stakers
 stdout
@@ -132,6 +134,7 @@ superset
 Testnet
 textlint
 TXs
+UIs
 Unix
 untrusted
 validator
