@@ -43,7 +43,7 @@ using the preceding steps.
 
 ## Building from Source
 
-The source code is available in this [Github repo](https://github.com/ava-labs/avalanche-cli).
+The source code is available in this [GitHub repository](https://github.com/ava-labs/avalanche-cli).
 
 After you've cloned the repository, checkout the tag you'd like to run. You can compile the code by
 running `./scripts/build.sh` from the top level directory.

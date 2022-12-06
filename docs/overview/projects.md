@@ -2,7 +2,7 @@
 
 ## AvalancheGo
 
-[Link to github](https://github.com/ava-labs/avalanchego)
+[Link to GitHub](https://github.com/ava-labs/avalanchego)
 
 Go implementation of an Avalanche node.
 
@@ -13,7 +13,7 @@ Related docs
 
 ## Coreth
 
-[Link to github](https://github.com/ava-labs/coreth)
+[Link to GitHub](https://github.com/ava-labs/coreth)
 
 Coreth (from core Ethereum) is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Avalanche Contract Chain (C-Chain).
 
@@ -23,7 +23,7 @@ Related docs
 
 ## Subnet-EVM
 
-[Link to github](https://github.com/ava-labs/subnet-evm)
+[Link to GitHub](https://github.com/ava-labs/subnet-evm)
 
 Subnet-EVM is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
 
@@ -33,7 +33,7 @@ Related docs
 
 ## AvalancheJS
 
-[Link to github](https://github.com/ava-labs/avalanchejs)
+[Link to GitHub](https://github.com/ava-labs/avalanchejs)
 
 The Avalanche platform JavaScript library.
 
@@ -43,7 +43,7 @@ Related docs
 
 ## Avalanche Wallet
 
-[Link to github](https://github.com/ava-labs/avalanche-wallet)
+[Link to GitHub](https://github.com/ava-labs/avalanche-wallet)
 
 Related docs
 
@@ -51,7 +51,7 @@ Related docs
 
 ## Avalanche Network Runner
 
-[Link to github](https://github.com/ava-labs/avalanche-network-runner)
+[Link to GitHub](https://github.com/ava-labs/avalanche-network-runner)
 
 This is a tool to run and interact with a local Avalanche network.
 
@@ -61,6 +61,6 @@ Related docs
 
 ## Avalanche Developer Docs
 
-[Link to github](https://github.com/ava-labs/avalanche-docs)
+[Link to GitHub](https://github.com/ava-labs/avalanche-docs)
 
 Avalanche developer documentation and tutorials which is this site.

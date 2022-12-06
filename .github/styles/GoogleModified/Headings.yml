@@ -1,0 +1,44 @@
+extends: capitalization
+message: "'%s' should use title-case capitalization."
+link: "https://developers.google.com/style/capitalization#capitalization-in-titles-and-headings"
+level: error
+scope: heading
+match: $title
+indicators:
+  - ":"
+exceptions:
+  - Azure
+  - CLI
+  - Code
+  - Cosmos
+  - Docker
+  - Emmet
+  - gRPC
+  - I
+  - Kubernetes
+  - Linux
+  - macOS
+  - Marketplace
+  - MongoDB
+  - REPL
+  - Studio
+  - TypeScript
+  - URLs
+  - Visual
+  - VS
+  - Windows
+  - Avalanche
+  - Subnet
+  - Subnets
+  - EVM
+  - Subnet Creation Wizard
+  - VM
+  - ChainID
+  - AddValidator
+  - to
+  - with
+  - from
+  - up
+  - sayHello()
+  - setGreeting()
+  - inside
