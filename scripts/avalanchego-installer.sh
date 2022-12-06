@@ -87,7 +87,7 @@ remove_service_file () {
 }
 
 #helper function to check for presence of required commands, and install if missing
-check_reqs () {
+check_reqs_deb () {
   if ! command -v curl &> /dev/null
   then
       echo "curl could not be found, will install..."
@@ -104,6 +104,39 @@ check_reqs () {
       sudo apt-get install dnsutils -y
   fi
 }
+check_reqs_rhel () {
+  if ! command -v curl &> /dev/null
+  then
+      echo "curl could not be found, will install..."
+      sudo dnf install curl -y
+  fi
+  if ! command -v wget &> /dev/null
+  then
+      echo "wget could not be found, will install..."
+      sudo dnf install wget -y
+  fi
+  if ! command -v dig &> /dev/null
+  then
+      echo "dig could not be found, will install..."
+      sudo dnf install bind-utils -y
+  fi
+  if ! command -v semanage &> /dev/null
+  then
+      echo "semanage could not be found, will install..."
+      sudo dnf install policycoreutils-python-utils -y
+  fi
+  if ! command -v restorecon &> /dev/null
+  then
+      echo "restorecon could not be found, will install..."
+      sudo dnf install policycoreutils -y
+  fi
+}
+getOsType () {
+  which yum 1>/dev/null 2>&1 && { echo "RHEL"; return; }
+  which zypper 1>/dev/null 2>&1 && { echo "openSUSE"; return; }
+  which apt-get 1>/dev/null 2>&1 && { echo "Debian"; return; }
+}
+
 
 #helper function that prints usage
 usage () {
@@ -201,7 +234,17 @@ if [ "$#" != 0 ]; then
 fi
 
 echo "Preparing environment..."
-check_reqs
+osType=$(getOsType) 
+if [ "$osType" = "Debian" ]; then
+  check_reqs_deb
+elif [ "$osType" = "RHEL" ]; then
+  check_reqs_rhel
+else
+  #sorry, don't know you.
+  echo "Unsupported linux flavour/distribution: $osType"
+  echo "Exiting."
+  exit
+fi
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
 foundOS="$(uname)"                              #get OS
@@ -261,6 +304,12 @@ tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
 rm avalanchego-linux-*.tar.gz
 echo "Node files unpacked into $HOME/avalanche-node"
 echo
+# on RHEL based systems, selinux prevents systemd running execs from home-dir, lets change this
+if [ "$osType" = "RHEL" ]; then
+  # only way to make idempotent
+  sudo semanage fcontext -a -t bin_t "$HOME/avalanche-node/avalanchego" || sudo semanage fcontext -m -t bin_t "$HOME/avalanche-node/avalanchego"
+  sudo restorecon -Fv "$HOME/avalanche-node/avalanchego"
+fi
 if [ "$foundAvalancheGo" = "true" ]; then
   echo "Node upgraded, starting service..."
   sudo systemctl start avalanchego
