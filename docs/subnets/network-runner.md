@@ -542,7 +542,7 @@ with a Subnet. The process is very similar to the `subnet-evm` one, except that 
 We will also need the `subnet-cli` tool for this tutorial, check [this](#subnet-cli) for some
 context.
 
-The VM we are going to use here is the [blobvm](https://github.com/ava-labs/blobvm). This is a
+The VM we are going to use here is the [BlobVM](https://github.com/ava-labs/blobvm). This is a
 simple VM which enables content-addressable storage of arbitrary keys/values using any EIP-712
 compatible wallet.
 
@@ -605,7 +605,7 @@ find ${HOME}/go/src/github.com/ava-labs/avalanchego/build
 ```
 
 Every VM needs a genesis file in order to be deployed on Avalanche.
-For the blobvm, the file is very simple, and that repository contains a helper tool to create it:
+For the BlobVM, the file is very simple, and that repository contains a helper tool to create it:
 
 ```bash
 # generate the genesis for the custom VM

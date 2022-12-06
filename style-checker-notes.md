@@ -8,7 +8,7 @@ Avalanche-Docs uses a variety of linting and style checking programs including
   - [GitHub Action](https://github.com/errata-ai/vale-action)
 - [Markdownlint](https://github.com/DavidAnson/markdownlint)
   - Uses [Super-Linter](https://github.com/github/super-linter) as a GitHub Action. This pulls in a
-    few other linting tools.
+    few other linting tools but they're all turned off.
 
 ## Config Files
 
@@ -36,6 +36,9 @@ your docs, so please run the tools locally before committing to the repository.
 Local install [instructions](https://vale.sh/docs/vale-cli/installation/)
 
 Run the tool with `vale <filename>`. You can provide a file or a directory.
+
+The [`Vale` VS Code Extension](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-server)
+is quite useful for visualizing style errors in-line.
 
 ### Markdownlint
 

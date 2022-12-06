@@ -957,7 +957,7 @@ pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
 The mempool is a buffer of volatile memory that stores pending transactions. Transactions are stored
 in the mempool whenever a node learns about a new transaction.
 
-The mempool implementation for timestampvm-rs is very simple.
+The mempool implementation for `timestampvm-rs` is very simple.
 
 ```rust
  mempool: Arc::new(RwLock::new(VecDeque::with_capacity(100))),
