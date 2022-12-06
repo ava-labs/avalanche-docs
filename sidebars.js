@@ -308,6 +308,5 @@ const sidebars = {
     },
   ],
 };
->>>>>>> master
 
 module.exports = sidebars
