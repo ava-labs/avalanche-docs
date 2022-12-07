@@ -8,9 +8,13 @@
 
 ## v1.9.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.4))
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `20`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `20`.
 
-This version modifies the db format. The db format is compatible with 1.9.3, but not v1.9.2 or earlier. After running a node with v1.9.4 attempting to run a node with a version earlier than v1.9.3 may report a fatal error on startup.
+This version modifies the db format. The db format is compatible with 1.9.3, but
+not v1.9.2 or earlier. After running a node with v1.9.4 attempting to run a node
+with a version earlier than v1.9.3 may report a fatal error on startup.
 
 
 **PeerList Gossip Optimization**
