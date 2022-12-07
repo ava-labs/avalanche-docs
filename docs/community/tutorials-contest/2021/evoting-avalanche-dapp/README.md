@@ -1,15 +1,15 @@
-# Create a Voting dApp on Avalanche using ReactJS
+# Create a Voting Dapp on Avalanche Using ReactJS
 
 ## Introduction
 
 We will generate [ReactJS](https://reactjs.org) boilerplate code using
-`create-react-app`, which we will modify for our dApp frontend. React is a good
+`create-react-app`, which we will modify for our dapp frontend. React is a good
 choice for efficient, developer-friendly blockchain interactions. For the
 backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts
 will be deployed to the Avalanche blockchain using [Truffle
 Suite](https://www.trufflesuite.com).
 
-Truffle Suite is a toolkit for launching decentralized applications (dApps) on
+Truffle Suite is a toolkit for launching decentralized applications (dapps) on
 Ethereum Virtual Machine (EVM) compatible blockchains like Avalanche. With
 Truffle you can write and compile smart contracts, build artifacts, run
 migrations and interact with deployed contracts. This tutorial illustrates how
@@ -17,10 +17,10 @@ Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Prerequisites
 
-- Basic familarity with [NodeJS](https://nodejs.org/en) and
+- Basic familiarity with [NodeJS](https://nodejs.org/en) and
   [npm](https://www.npmjs.com/).
-- Basic familarity with [ReactJS](https://reactjs.org/).
-- Basic familarity with [Avalanche](https://avax.network) network,
+- Basic familiarity with [ReactJS](https://reactjs.org/).
+- Basic familiarity with [Avalanche](https://avax.network) network,
   [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and
   [Truffle](https://www.trufflesuite.com/truffle).
 
@@ -30,11 +30,11 @@ Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
   5.6 installed.
 - [Truffle](https://www.trufflesuite.com/truffle), which can be installed
   globally with `npm install -g truffle`
-- [Metamask](https://metamask.io) extension added to the browser.
+- [MetaMask](https://metamask.io) extension added to the browser.
 
-## Initializing the working directory
+## Initializing the Working Directory
 
-The client-side of our dApp is made using **ReactJS**. Smart contracts will be
+The client-side of our dapp is made using **ReactJS**. Smart contracts will be
 made using **Solidity** language and will be deployed on the **Avalanche**
 network with **Truffle Suite**. Therefore, we need to set up our working
 directory according to ReactJS and Truffle, to make the development process
@@ -50,7 +50,7 @@ located in C:\Users.
 cd ~
 ```
 
-### **Setting up the ReactJS project**
+### **Setting up the ReactJS Project**
 
 Create a new react app using npx. npx is a npm package runner (x probably stands
 for eXecute). The typical use is to download and run a package temporarily or
@@ -125,7 +125,7 @@ export default App;
 ```
 
 This `App` component has a constructor to declare and initialize the state
-properties. `web3` is an instance of the `Metamask` provider for interacting
+properties. `web3` is an instance of the `MetaMask` provider for interacting
 with the Avalanche network, `account` is a user address and `mainInstance` is
 the instance of our smart contract.
 
@@ -147,7 +147,7 @@ ReactDOM.render(
 
 React project setup is now complete.
 
-### **Setting up the Truffle project**
+### **Setting up the Truffle Project**
 
 Run the following command in the project root directory, to create a boilerplate for the Truffle project.
 
@@ -220,7 +220,7 @@ the Avalanche C-Chain. Here, you can see that we have used
 the project root directory to the `src` folder. This is because React cannot
 access files that are present outside the `src` folder.
 
-### **Get Avalanche credentials**
+### **Get Avalanche Credentials**
 
 For deploying smart contracts we need two things: A node connected to the
 Avalanche network and an account with few AVAX. Avalanche connected node through
@@ -231,7 +231,7 @@ the transactions on the network. So, visit [here](https://wallet.avax.network)
 and create an account. Save the mnemonic in a secure place (we would need it
 later). Instructions to add funds will be provided later in the tutorial.
 
-### **Add .env file**
+### **Add .env File**
 
 Now we need a **Avalanche** wallet, where we would keep our funds, required for
 all the transactions on the network. Visit the [Avalanche
@@ -262,22 +262,22 @@ npm start
 
 It might take few seconds, to show output as in the image below.
 
-![](./assets/evoting-dapp-00-localhost-react-server.png)
+![localhost react server](./assets/evoting-dapp-00-localhost-react-server.png)
 
-In a browser, visit the URL of our running dApp:
+In a browser, visit the URL of our running dapp:
 [http://localhost:3000](http://localhost:3000). If you followed the above steps,
 you would see the page as shown below.
 
-![](./assets/evoting-dapp-01-localhost-frontend.png)
+![localhost frontend](./assets/evoting-dapp-01-localhost-frontend.png)
 
-## **Create Election smart contract**
+## **Create Election Smart Contract**
 
 Create the file `Election.sol` (`.sol` stands for Solidity) inside of the
 `contracts` directory and use the code as given in this
 [file](./contracts/Election.sol).
 
 `Election` is a Solidity contract that lets us view the name and description,
-the candidates standing in an election, and vote for them. For this dApp, we
+the candidates standing in an election, and vote for them. For this dapp, we
 will be accessing the deployed Election contracts using their `address` and
 `ABI`. This Solidity code is what will be deployed to the blockchain, each time
 we create a new election.
@@ -370,7 +370,7 @@ function vote (uint _candidate) public {
 }
 ```
 
-## **Create MainContract smart contract**
+## **Create MainContract Smart Contract**
 
 Create the file `MainContract.sol` inside of the `contracts` directory and paste the following code:
 
@@ -392,7 +392,7 @@ contract MainContract {
 }
 ```
 
-`MainContract.sol` is the entry point of our dApp. To create a new election, we
+`MainContract.sol` is the entry point of our dapp. To create a new election, we
 need to call the `createElection()` function from this deployed contract. It
 will maintain the total number of election contracts deployed, their address on
 the network and will also help in deploying them. We also
@@ -429,7 +429,7 @@ contract to the caller. Then the address is stored in the `Elections` mapping.
 Once the election contract is deployed successfully, `electionId` is
 incremented.
 
-## **Create a file for migrating smart contracts**
+## **Create a File for Migrating Smart Contracts**
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`,
 and add the following block of code. This handles deploying the `MainContract`
@@ -474,11 +474,11 @@ metadata - the artifacts.
 > `ABI` refers to Application Binary Interface, which is a standard for
 > interacting with the smart contracts from outside the blockchain as well as
 > contract-to-contract interaction. Please refer to the Solidity's documentation
-> about ABI's
+> about ABIs
 > [here](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#:~:text=The%20Contract%20Application%20Binary%20Interface,contract%2Dto%2Dcontract%20interaction.&text=This%20specification%20does%20not%20address,known%20only%20at%20run%2Dtime)
 > to learn more.
 
-## **Fund the account and run migrations on the C-Chain**
+## **Fund the Account and Run Migrations on the C-Chain**
 
 When deploying smart contracts to the C-Chain, it will require some deployment
 cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us
@@ -486,7 +486,7 @@ in deploying on Fuji C-chain and deployment cost will be managed by the account
 whose mnemonic has been stored in the `.env` file. Therefore we need to fund the
 account.
 
-### **Fund your account**
+### **Fund Your Account**
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain
 i.e. Contract-Chain. This address can easily be found on the [Avalanche
@@ -610,7 +610,7 @@ The information and ABI of the deployed contract are present in the
 `src/build/contract` directory as `Election.json`. Information like contract
 address, network info etc. could be found here.
 
-## **Building the user interface**
+## **Building the User Interface**
 
 We have already set up our React project directory. The client-side files to
 interact with the Avalanche blockchain are present in the `src` directory.
@@ -713,7 +713,7 @@ Now we will make this component available by creating a file named
 `VoteModal.js` inside the `src` directory. Use the code as present in this
 [file](./frontend/VoteModal.js.md).
 
-### Integrating Components into App.js
+### Integrating Components Into App.js
 
 Now we need to update our `App.js` file with all the components that we have made so far.
 
@@ -735,7 +735,7 @@ import contractJson from "./build/contracts/MainContract.json";
 ```
 
 **Load components** - Inside the `<div>` tag of `return()` function in `App.js`,
-replace the sample text (`Avalanche evoting`) with the the code of the following
+replace the sample text (`Avalanche evoting`) with the code of the following
 components.
 
 ```javascript
@@ -804,10 +804,10 @@ components.
 Now go to the project root directory, i.e. `avalanche-voting` directory, and run
 the command `npm start`. The ReactJS server would start automatically. Visit
 [http://localhost:3000](http://localhost:3000) in a browser to interact with the
-dApp frontend.
+dapp frontend.
 
-Don't forget to set up Metamask with Fuji testnet and also fund the account with
-Fuji C-Chain test tokens to vote. In the Metamask extension, add a custom RPC by
+Don't forget to set up MetaMask with Fuji testnet and also fund the account with
+Fuji C-Chain test tokens to vote. In the MetaMask extension, add a custom RPC by
 clicking at the network dropdown in the centre of the extension. Fill in the
 details as shown below
 
@@ -821,24 +821,24 @@ details as shown below
 
 ## Conclusion
 
-You have successfully built a full-fledged e-voting dApp with advanced features
+You have successfully built a full-fledged e-voting dapp with advanced features
 like creating custom elections, voting in them and deployed the smart contract
 on the Fuji test network using Truffle Suite. Along with that, we have also
 built the client-side application using ReactJS for interacting with the
-network. From this tutorial, you have learned not only how to make make and
+network. From this tutorial, you have learned not only how to make and
 deploy smart contracts but also how to integrate ReactJS with the blockchain
 using Truffle Suite.
 
-![](./assets/evoting-dapp-03-evoting-demo.gif)
+![eVoting demo](./assets/evoting-dapp-03-evoting-demo.gif)
 
-## What's next?
+## What's Next?
 
-Now that we have built and deployed a voting dApp, we can make new elections
+Now that we have built and deployed a voting dapp, we can make new elections
 with a title and description, and vote on them separately. Some recommended
 features to add would be the ability to add start and end dates for an election,
 declaring the winner after the election has ended, or UI enhancements like modal
 windows and styled buttons.
 
-## About the author
+## About the Author
 
 This tutorial is created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan).
