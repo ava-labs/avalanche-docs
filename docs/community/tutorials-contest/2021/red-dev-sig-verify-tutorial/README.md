@@ -28,7 +28,7 @@ general—works.
 ## Audience
 
 To get the most out of this tutorial, you will need to have a basic
-understanding of Javascript, Node, Solidity, and how to develop dapps in
+understanding of JavaScript, Node, Solidity, and how to develop dapps in
 Avalanche. You should also know the basics of public key cryptography. Avalanche
 uses Elliptic Curve Cryptography (ECC) as do Bitcoin, Ethereum, and many others.
 The ECC algorithm used for digital signatures is called ECDSA (Elliptic Curve
@@ -106,14 +106,14 @@ function checkMetamaskStatus() {
 To verify the signature and retrieve the signer X-Chain address, you first need
 to extract cryptographic data from the message and signature in your webapp,
 which will then be passed to the dapp. (The example code uses a **Vue** webapp,
-but you could use any framework you like or just Vanilla Javascript.) These are:
+but you could use any framework you like or just Vanilla JavaScript.) These are:
 
 1. The hashed message
 2. The r, s, and v parameters of the signature
 3. The x and y coordinates of the public key and the 33-byte compressed public key
 
-We extract them using Javascript instead of in the dapp because the Solidity EC
-library needs them to be separated, and it is easier to do it in Javascript.
+We extract them using JavaScript instead of in the dapp because the Solidity EC
+library needs them to be separated, and it is easier to do it in JavaScript.
 There is no security risk in doing it here off-chain as we can verify in the
 dapp that they are indeed related to each other, returning a signature failure
 if they are not.
@@ -225,7 +225,7 @@ async function verify() {
 }
 ```
 
-## Recover the signer X-Chain address in dapp
+## Recover the Signer X-Chain Address in Dapp
 
 In the dapp, receive as a parameter the 33-byte compressed public key to recover the X-Chain Address.
 
@@ -301,7 +301,7 @@ Let's take a closer look at its supporting functions and key features.
 
 ### Bech32 Encoding
 
-We have ported Bech32 to Solidity from the [Bech32 Javascript
+We have ported Bech32 to Solidity from the [Bech32 JavaScript
 library](https://github.com/bitcoinjs/bech32). There are four functions,
 **polymod**, **prefixChk**, **encode** and **convert**, used to convert to
 Bech32 address.
