@@ -3,32 +3,61 @@
 
 ## Introduction
 
-In this tutorial we will be making a **Distributed File Manager** using the **IPFS** protocol for storing our files, **Avalanche** network for storing the file references of each address to their uploaded files and **ReactJS** for the frontend code. For compiling and deploying our smart contracts, we will be using **Truffle Suite**.
+In this tutorial we will be making a **Distributed File Manager** using the
+**IPFS** protocol for storing our files, **Avalanche** network for storing the
+file references of each address to their uploaded files and **ReactJS** for the
+frontend code. For compiling and deploying our smart contracts, we will be using
+**Truffle Suite**.
 
-For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications dApps on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with the [Avalanche](https://avax.network) network, which is an instance of the EVM.
+For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit
+for launching decentralized applications dApps on the EVM. With Truffle you can
+write and compile smart contracts, build artifacts, run migrations and interact
+with deployed contracts. This tutorial illustrates how Truffle can be used with
+the [Avalanche](https://avax.network) network, which is an instance of the EVM.
 
 
 ## Prerequisites
 
-* Basic familarity with [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
+* Basic familarity with [Git](https://git-scm.com/),
+  [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
 * Basic familarity with [ReactJS](https://reactjs.org/).
-* Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
+* Basic familarity with [Avalanche](https://avax.network) network,
+  [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and
+  [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-* [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
+* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >=
+  5.6 installed.
+* [Truffle](https://www.trufflesuite.com/truffle), which can be installed
+  globally with `npm install -g truffle`
 * [Metamask](https://metamask.io) extension added to the browser.
 
 ## Understanding the project
 
-From the title, **Distributed File Manager**, you have got an idea that it's about making a dApp that will allow us to upload and manage files in a so-called **distributed** fashion. But you might be wondering, that what is **IPFS** and how will our files be distributed!!! Nothing to worry about, just go through the text, and all your doubts will be resolved.
+From the title, **Distributed File Manager**, you have got an idea that it's
+about making a dApp that will allow us to upload and manage files in a so-called
+**distributed** fashion. But you might be wondering, that what is **IPFS** and
+how will our files be distributed!!! Nothing to worry about, just go through the
+text, and all your doubts will be resolved.
 
 ### **Decoding IPFS and how is it different?**
 
-**IPFS** is an acronym that stands for **I**nter**P**lanetary **F**ile **S**ystem. It is a communication protocol and network for storing and sharing data. Theoretically, it aims to make a file-sharing system that can communicate among the planets, someday. Check out [Awesome IPFS](https://awesome.ipfs.io/) to learn more about projects built on IPFS.
+**IPFS** is an acronym that stands for **I**nter**P**lanetary **F**ile
+**S**ystem. It is a communication protocol and network for storing and sharing
+data. Theoretically, it aims to make a file-sharing system that can communicate
+among the planets, someday. Check out [Awesome IPFS](https://awesome.ipfs.io/)
+to learn more about projects built on IPFS.
 
-Currently, we are dominated by the **client-server** model of communication which is following **HTTP** aka **Hypertext Transfer Protocol**. This means that, in between the communication between two devices, one has to be the server (which will serve or respond with data) and the other should be the client (which will receive or request data). The major problem with this client-server model is that the client would have to request data from the server, far away from it, even if the same data was previously received by its neighbour or was available somewhere closer. This would cause high latency (delay in receiving data) and low bandwidths (speed of data transfer).
+Currently, we are dominated by the **client-server** model of communication
+which is following **HTTP** aka **Hypertext Transfer Protocol**. This means
+that, in between the communication between two devices, one has to be the server
+(which will serve or respond with data) and the other should be the client
+(which will receive or request data). The major problem with this client-server
+model is that the client would have to request data from the server, far away
+from it, even if the same data was previously received by its neighbour or was
+available somewhere closer. This would cause high latency (delay in receiving
+data) and low bandwidths (speed of data transfer).
 
 ![](./assets/distributed-file-manager-00-server-vs-p2p.jpeg)
 
