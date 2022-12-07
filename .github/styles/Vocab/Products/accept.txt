@@ -20,6 +20,7 @@ Avascan
 AVAX
 Berkay
 bintools
+Blanco
 blockchain
 Blockchain
 blockchains
@@ -47,6 +48,7 @@ cryptocurrencies
 Daly
 DAO
 dapp
+Dapp
 delegators
 deployer
 deployers
@@ -67,7 +69,10 @@ Eteng
 Ethereum
 Ethers
 eVoting
+expectRevert
 feeRecipient
+gamification
+getters
 GitHub
 github
 Golang
@@ -96,12 +101,14 @@ Mintable
 multisig
 multistep
 Nakamoto
+navbar
 NFT
 NFTs
 Nimish
 npm
 Ofem
 OK
+onboarding
 parameterizable
 parameterization
 performant
@@ -130,6 +137,8 @@ Relayers
 RPC
 RPCs
 Saglam
+Sayan
+secondBuyer
 Solana
 spoofable
 solc
@@ -145,9 +154,12 @@ Subnets
 subsampling
 Subsampling
 superset
+testnet
 Testnet
 textlint
 TXs
+typechain
+TypeChain
 UIs
 Unix
 untrusted
@@ -157,6 +169,7 @@ VM
 VMs
 Vue
 WAGMI
+Walkthrough
 webapp
 Webpack
 wei

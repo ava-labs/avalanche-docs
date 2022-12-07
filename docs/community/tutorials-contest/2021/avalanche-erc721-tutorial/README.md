@@ -6,7 +6,7 @@ In this tutorial you will get familiar with [ERC721
 (NFT)](https://medium.com/crypto-currently/the-anatomy-of-erc721-e9db77abfc24)
 smart contracts and how to deploy these to the [Avalanche Fuji
 testnet](https://docs.avax.network/build/tutorials/platform/fuji-workflow) and
-also the [Avalanche mainnet
+also the [Avalanche Mainnet
 (C-Chain)](https://support.avax.network/en/articles/4058262-what-is-the-contract-chain-c-chain).
 The goal of this tutorial is to be as beginner friendly as possible. I will go
 through each line of code in order to give you a full understanding of what is
@@ -24,7 +24,7 @@ decentralized application. The plan is to showcase:
    Mocha.js library and Open Zeppelin's Test Helper assertion library achieving
    100% code coverage;
 5. How to deploy your smart contracts on the Avalanche Fuji testnet and on the
-   Avalanche mainnet;
+   Avalanche Mainnet;
 
 ## Development
 
@@ -44,7 +44,7 @@ to deploy to the networks.
   Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for
   running a local Avalanche network.
 
-### Setting up a Truffle project
+### Setting Up a Truffle Project
 
 1. Create a project directory and inside of it run the commands:
 
@@ -137,9 +137,9 @@ module.exports = {
 
 This file is the entrypoint of our Truffle project. As you can see, we specify
 two networks on which we would like to deploy our smart contracts after we are
-done with them, namely *fuji* and *mainnet*. We utilize the
+done with them, namely *Fuji* and *Mainnet*. We utilize the
 [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider)
-library, so that we provide a RPC to which we can connect to to deploy our
+library, so that we provide a RPC to which we can connect to in order to deploy our
 contracts as well as a mnemonic which will be used to sign the transaction to do
 that. As you can see, some of the variables are accessed via process.env. These
 are defined in a separate **.env** file in the root of our project and have the
@@ -217,7 +217,7 @@ detail after we have finished implementing and testing our contracts.
 
 Whenever you make changes to your smart contract you would need to run `npm run generate`.
 
-### Writing our first ERC721 contract
+### Writing Our First ERC721 Contract
 
 1. Inside the **contracts/** folder of your Truffle project we will create a new
    [**Collectible.sol**](./contracts/Collectible.sol) file and implement the
@@ -355,11 +355,11 @@ with the new information and return the token id.
 }
 ```
 
-### Creating our NFT Marketplace.sol contract
+### Creating Our NFT Marketplace.sol Contract
 
 1. Inside the **contracts/** folder, we create a new
 [**Marketplace.sol**](./contracts/Marketplace.sol) file again with the necessary
-functionality. This might look slighly more complicated but once again, I will
+functionality. This might look slightly more complicated but once again, I will
 go through each line of code, so that at the end you can make sense of the logic
 entirely.
 
@@ -556,7 +556,7 @@ information to it.
 }
 ```
 
-### Testing our smart contracts
+### Testing Our Smart Contracts
 
 Now that we have finished writing our smart contracts it is very important that
 we test them thoroughly for erroneous behaviour. As we know, once deployed on
@@ -650,7 +650,7 @@ getters. The value is stored in a variable and then this variable is compared to
 the expected name. If you jump to the **Collectible.sol** file you can see the
 expected name in the **constructor()**.
 
-3. In the second **describe()** block we test our **createCollectible()**
+4. In the second **describe()** block we test our **createCollectible()**
    function. For that we need to write individual tests for every statement that
    we make.
 
@@ -728,7 +728,7 @@ it('Give a new id to a newly created token', async () => {
 Then we simply compare the newTokenId to 1 and expect them to be equal, since
 our first NFT should have the token id 1.
 
-- Now we do not only exectute the **createCollectible()** function but also
+- Now we do not only execute the **createCollectible()** function but also
   change the state in our next **it()**:
 
 ```typescript
@@ -763,7 +763,7 @@ own *ItemMinted* event. We check for the correct name and the correct arguments.
   **it()** makes sure that the transaction reverts if we call the
   **createCollectible()** function with the same metadata parameter value.
 
-4. Now that we are done writing the test, in our console we simply run the command:
+5. Now that we are done writing the test, in our console we simply run the command:
 
 ```powershell
 npx truffle test
@@ -804,7 +804,7 @@ module.exports = { convertTokensToWei }
 ```
 
 We use this function, so that we do not have to write 18 zeroes after the AVAX
-amount that a buyer would pay for a NFT. In reality, transfering 5 AVAX means
+amount that a buyer would pay for a NFT. In reality, transferring 5 AVAX means
 that we transfer 5000000000000000000 as a value. In order to not have to write
 all those zeroes, we can simply call convertTokensToWei('5') and the function
 will add the zeroes for us.
@@ -825,10 +825,10 @@ before(async () => {
 In this case the creator address is the one who calls the function and therefore
 is the owner of the first NFT.
 
-4. Afterwards, we simply test every statement which we make inside the function
+3. Afterwards, we simply test every statement which we make inside the function
    just like we did for the **collectible.test.ts**.
-5. We do the same for the **cancelListing()** function.
-6. For the **buyItem()** function things are not that different. The interesting
+4. We do the same for the **cancelListing()** function.
+5. For the **buyItem()** function things are not that different. The interesting
    part is the final **it()** where we check the balances of the seller, buyer
    and creator after the second sale, since for the first one the seller is
    equal to the creator:
@@ -876,19 +876,19 @@ assert.equal(balanceOfBuyerAfterPurchase, toBN(balanceOfBuyerBeforePurchase).add
 assert.equal(balanceOfCreatorAfterPurchase, toBN(balanceOfCreatorBeforePurchase).add(toBN(convertTokensToWei('10')).mul(new BN('20')).div(new BN('100'))), 'The balance of the creator should increase by 20% of the sold amount.')
 ```
 
-4. Now that we are done writing the test, in our console we simply run the command:
+6. Now that we are done writing the test, in our console we simply run the command:
 
 ```powershell
 npx truffle test
 ```
 
-5. To check the test coverage we can run the command:
+7. To check the test coverage we can run the command:
 
 ```powershell
 truffle run coverage
 ```
 
-### Deploying our smart contracts
+### Deploying Our Smart Contracts
 
 1. Now that our contracts have passed the tests, let us have a look at the
    sub-dir **migrations/** folder which Truffle provided us in the beginning.
