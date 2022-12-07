@@ -94,7 +94,7 @@ npm install --save-dev @openzeppelin/test-helpers solidity-coverage
    **truffle-config.js** in the root of our project and paste the following
    lines of code in there:
 
-```javascript
+```JavaScript
 //we need this to be able to run our .ts tests
 require('ts-node/register')
 

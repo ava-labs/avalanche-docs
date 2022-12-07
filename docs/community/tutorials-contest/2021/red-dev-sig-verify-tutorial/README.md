@@ -1,8 +1,8 @@
-# Tutorial: Avalanche Signature Verification in a dApp
+# Tutorial: Avalanche Signature Verification in a dapp
 
 ## Introduction
 
-This tutorial will show you how to use an Avalanche C-Chain dApp to verify the
+This tutorial will show you how to use an Avalanche C-Chain dapp to verify the
 signature of a message like this that has been signed using the Avalanche
 Wallet.
 
@@ -11,10 +11,10 @@ Wallet.
 We at [red·dev](https://www.red.dev) needed to do this for our current software
 project under development, [RediYeti](https://www.rediyeti.com). We have a
 use-case where we need to verify ownership of an Avalanche X-Chain address
-before the dApp sends funds related to this address. To prevent fraud, the
-verification must take place inside of the dApp.
+before the dapp sends funds related to this address. To prevent fraud, the
+verification must take place inside of the dapp.
 
-If you need to implement the same kind of signature verification in your dApp,
+If you need to implement the same kind of signature verification in your dapp,
 you will find this tutorial useful. You may also find this tutorial useful if
 you would like to learn how Avalanche signatures work and how cryptography is
 implemented on the X-Chain and on the C-Chain.
@@ -28,7 +28,7 @@ general—works.
 ## Audience
 
 To get the most out of this tutorial, you will need to have a basic
-understanding of Javascript, Node, Solidity, and how to develop dApps in
+understanding of Javascript, Node, Solidity, and how to develop dapps in
 Avalanche. You should also know the basics of public key cryptography. Avalanche
 uses Elliptic Curve Cryptography (ECC) as do Bitcoin, Ethereum, and many others.
 The ECC algorithm used for digital signatures is called ECDSA (Elliptic Curve
@@ -50,17 +50,17 @@ signatures are indeed foundational to Avalanche.
 At the very highest level, here is an overview of the process we will take you
 through in this tutorial. First we use a simple webapp to gather the three
 inputs: signing address, message, and signature. We extract the cryptographic
-data from them that will be  passed into the dApp to verify the signature.
+data from them that will be  passed into the dapp to verify the signature.
 
-The dApp then verifies in two steps. First, it makes sure that all the values
+The dapp then verifies in two steps. First, it makes sure that all the values
 passed to it are provably related to each other. Then, assuming that they are,
 it uses the
 [elliptic-curve-solidity](https://github.com/tdrerup/elliptic-curve-solidity)
 library, which we have slightly modified to work with Avalanche, to verify the
 signature.
 
-The dApp returns its result to the webapp which displays it. Of course, in your
-dApp, you will want to take some more actions in the dApp based on the result,
+The dapp returns its result to the webapp which displays it. Of course, in your
+dapp, you will want to take some more actions in the dapp based on the result,
 depending on your needs.
 
 (**Note:** If you're already a Solidity coder, you might think that there is an
@@ -73,23 +73,23 @@ We have set up a [demo webpage here](https://rediyeti.com/avax-sig-verify-demo).
 
 ## Requirements
 
-Metamask needs to be installed on your browser, and you need to be connected to
+MetaMask needs to be installed on your browser, and you need to be connected to
 the Avalanche Fuji test network (for this tutorial). You can add a few lines of
-codes to check if your browser has Metamask installed, and if installed, then to
+codes to check if your browser has MetaMask installed, and if installed, then to
 which network you are connected. For instance:
 
 ```typescript
 function checkMetamaskStatus() {
     if((window as any).ethereum) {
         if((window as any).ethereum.chainId != '0xa869') {
-            result = "Failed: Not connected to Avalanche Fuji Testnet via Metamask."
+            result = "Failed: Not connected to Avalanche Fuji Testnet via MetaMask."
         }
         else {
             //call required function
         }
     }
     else {
-        result = "Failed: Metamask is not installed."
+        result = "Failed: MetaMask is not installed."
     }
 }
 ```
@@ -105,17 +105,17 @@ function checkMetamaskStatus() {
 
 To verify the signature and retrieve the signer X-Chain address, you first need
 to extract cryptographic data from the message and signature in your webapp,
-which will then be passed to the dApp. (The example code uses a **Vue** webapp,
+which will then be passed to the dapp. (The example code uses a **Vue** webapp,
 but you could use any framework you like or just Vanilla Javascript.) These are:
 
 1. The hashed message
 2. The r, s, and v parameters of the signature
 3. The x and y coordinates of the public key and the 33-byte compressed public key
 
-We extract them using Javascript instead of in the dApp because the Solidity EC
+We extract them using Javascript instead of in the dapp because the Solidity EC
 library needs them to be separated, and it is easier to do it in Javascript.
 There is no security risk in doing it here off-chain as we can verify in the
-dApp that they are indeed related to each other, returning a signature failure
+dapp that they are indeed related to each other, returning a signature failure
 if they are not.
 
 ### 1. Hash the message
@@ -201,12 +201,12 @@ function recover(msgHash: Buffer, sig: any) {
 }
 ```
 
-Here is the full code for verification, including the call to the dApp function
+Here is the full code for verification, including the call to the dapp function
 **recoverAddress** at the end, which we will cover next:
 
 ```typescript
 async function verify() {
-    //Create the provider and contract object to access the dApp functions
+    //Create the provider and contract object to access the dapp functions
     const provider: any = new ethers.providers.Web3Provider((window as any).ethereum)
     const elliptic: any = new ethers.Contract(contractAddress.Contract, ECArtifact.abi, provider)
     //Extract all the data needed for signature verification
@@ -219,15 +219,15 @@ async function verify() {
     for (var i=0; i<prefix.length; i++) {
         hrp[i] = prefix.charCodeAt(i)
     }
-    //Call recoverAddress function from dApp. xchain and msg are user inputs in webapp
+    //Call recoverAddress function from dapp. xchain and msg are user inputs in webapp
     const tx: string = await elliptic.recoverAddress(message.messageHash, sign.sigHex, publicKey.pubkCord, publicKey.pubkBuff, msg, xchain, prefix, hrp)
     result = tx 
 }
 ```
 
-## Recover the signer X-Chain address in dApp
+## Recover the signer X-Chain address in dapp
 
-In the dApp, receive as a parameter the 33-byte compressed public key to recover the X-Chain Address.
+In the dapp, receive as a parameter the 33-byte compressed public key to recover the X-Chain Address.
 
 Addresses on the X-Chain use the Bech32 standard with an Avalanche-specific
 prefix of **X-**. Then there are four parts to the Bech32 address scheme that
@@ -246,7 +246,7 @@ produce a 20-byte address.
 
 Next, this 20-byte value is converted to a **Bech32** address.
 
-The `recoverAddress` function is called in the dApp from the webapp.
+The `recoverAddress` function is called in the dapp from the webapp.
 
 **recoverAddress** takes the following parameters:
 
@@ -417,9 +417,9 @@ function validateSignature(bytes32 messageHash, uint[2] memory rs, uint[2] memor
 
 ### Finishing up
 
-After performing these tests, the dApp returns its decision whether the
+After performing these tests, the dapp returns its decision whether the
 signature is valid or not to the webapp, and the webapp is then responsible for
-showing the final output to the user. As we mentioned above, in your dApp, you
+showing the final output to the user. As we mentioned above, in your dapp, you
 will probably want to take further actions accordingly.
 
 ## Resources
