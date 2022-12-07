@@ -58,6 +58,8 @@ If you have questions, problems or suggestions, come [talk to us](https://chat.a
 
 ## Community Providers
 
+GetBlock (blockchain RPC provider) - Instant API Access to Avalanche - https://getblock.io/nodes/avax/
+
 :::warning Disclaimer
 
 Ava Labs offers no warranty/guarantee on the quality or uptime of these 3rd party RPC providers
