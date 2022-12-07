@@ -6,20 +6,41 @@ description: This tutorial will show you how to setup a Chainlink node with the 
 
 # Introduction
 
-This tutorial will show you how to setup a Chainlink node with the Avalanche Fuji Testnet and create dApp smart contracts to connect to the Chainlink node.
+This tutorial will show you how to setup a Chainlink node with the Avalanche
+Fuji Testnet and create dApp smart contracts to connect to the Chainlink node.
 
-We at [red·dev](https://www.red.dev) needed to do learn how to do this for our current software project under development, [RediYeti](https://www.rediyeti.com). In our case, we needed our dApp (on the C-Chain) to gather information from the Avalanche P-Chain, and because Avalanche does not allow this natively, we built a Chainlink adapter to do this job. 
+We at [red·dev](https://www.red.dev) needed to do learn how to do this for our
+current software project under development,
+[RediYeti](https://www.rediyeti.com). In our case, we needed our dApp (on the
+C-Chain) to gather information from the Avalanche P-Chain, and because Avalanche
+does not allow this natively, we built a Chainlink adapter to do this job. 
 
-You, however, can follow this same methodology to gather any real-world information that your dApp needs, by following this tutorial and just designing your Chainlink adapter to gather different information.
+You, however, can follow this same methodology to gather any real-world
+information that your dApp needs, by following this tutorial and just designing
+your Chainlink adapter to gather different information.
 
-In this tutorial, we describe each step of setting up the environment by hand.  However, to make your life easier after you learn how it works, we have included a set of Ansible scripts to complete this process automatically. (For more information on the devops tool **Ansible**, see the **Resources** section at the end of this tutorial.) Ansible creates a development server using a Vultr.com vps, and you can find the entire project [here](ansible-chainlink-avalanche-setup/README.md). 
+In this tutorial, we describe each step of setting up the environment by hand.
+However, to make your life easier after you learn how it works, we have included
+a set of Ansible scripts to complete this process automatically. (For more
+information on the devops tool **Ansible**, see the **Resources** section at the
+end of this tutorial.) Ansible creates a development server using a Vultr.com
+vps, and you can find the entire project
+[here](ansible-chainlink-avalanche-setup/README.md). 
 ## Audience
-To get the most out of this tutorial, you will need to have a basic understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write dApps. If you do not yet know about these topics, see the [**Resources**](#resources) section at the end for links to learn more.
+To get the most out of this tutorial, you will need to have a basic
+understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write
+dApps. If you do not yet know about these topics, see the
+[**Resources**](#resources) section at the end for links to learn more.
 
 
 ## Overview
 
-At the very highest level, here is an overview of the process we will take you through in this tutorial. First we are going to show you how to install the necessary software required to run the Chainlink node, and then we will will explain to you how to run the Chainlink node within the Docker container. After that, with the help of the Chainlink GUI, we can create a simple job which will be used in a smart contract to gather real-world data.
+At the very highest level, here is an overview of the process we will take you
+through in this tutorial. First we are going to show you how to install the
+necessary software required to run the Chainlink node, and then we will will
+explain to you how to run the Chainlink node within the Docker container. After
+that, with the help of the Chainlink GUI, we can create a simple job which will
+be used in a smart contract to gather real-world data.
 
 # Prerequisites
 
@@ -32,7 +53,9 @@ At the very highest level, here is an overview of the process we will take you t
 
 ## Install Docker-CE
 
-The first step is to install Docker-CE. Docker-CE (community edition) is a free version of Docker that you can use to spin up containers without having to pay for enterprise-level support.
+The first step is to install Docker-CE. Docker-CE (community edition) is a free
+version of Docker that you can use to spin up containers without having to pay
+for enterprise-level support.
 
 Open a terminal session and execute the command below:
 ```bash
@@ -51,7 +74,8 @@ $ docker -v
 
 ![docker-v](img/chainlink-tutorial-00-docker-v.png)
 
-The next step is to download and install the Go language (a.k.a. "golang") which is required for building AvalancheGo, later in this section.
+The next step is to download and install the Go language (a.k.a. "golang") which
+is required for building AvalancheGo, later in this section.
 
 ## Install Go
 
@@ -63,7 +87,9 @@ Extract go1.16.6.linux-amd64.tar.gz to /usr/local:
 ```
 $ tar -C /usr/local -xzf go1.16.6.linux-amd64.tar.gz
 ```
-Add /usr/local/go/bin to the PATH environment variable. You can do this by adding the following line to your $HOME/.profile or /etc/profile (for a system-wide installation):
+Add /usr/local/go/bin to the PATH environment variable. You can do this by
+adding the following line to your $HOME/.profile or /etc/profile (for a
+system-wide installation):
 
 ```
 export PATH=$PATH:/usr/local/go/bin
@@ -97,7 +123,9 @@ $ docker images
 ```
 ![docker-images](img/chainlink-tutorial-02-docker-images.png)
 
-The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx is the shortened commit of the Avalanche source it was built from. In our case it is 254b53da.
+The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx
+is the shortened commit of the Avalanche source it was built from. In our case
+it is 254b53da.
 
 
 # Setting up and running Chainlink node
@@ -111,7 +139,8 @@ The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx i
 ## Steps to run Chainlink node
 
 ### 1. Run AvalancheGo
-The first step is to run AvalancheGo within docker which will map the TCP ports 9650 and 9651 in the container to the same ports on the Docker host.
+The first step is to run AvalancheGo within docker which will map the TCP ports
+9650 and 9651 in the container to the same ports on the Docker host.
 
 Use the command below to run the AvalancheGo image within Docker:
 
@@ -122,7 +151,8 @@ $ docker run --name avalanchego-chainlink -d -p 9650:9650 -p 9651:9651 -v /root/
  * -d specifies detached mode
  * -p specifies the port number
  * -v specifies the docker host location to store the container volume data
- * /avalanchego/build/avalanchego --network-id=fuji is the command to start the avalanchego under fuji test network
+ * /avalanchego/build/avalanchego --network-id=fuji is the command to start the
+   avalanchego under fuji test network
   
 Verify that the AvalancheGo node is started and running:
 
@@ -151,7 +181,9 @@ $ curl -X POST --data '{
 
 The next step is to run PostgreSQL within a Docker container
 
-Use the command below to run PostgreSQL. The POSTGRES_PASSWORD and POSTGRES_USER are the environment variables used to set up the PostgreSQL superuser and its password:
+Use the command below to run PostgreSQL. The POSTGRES_PASSWORD and POSTGRES_USER
+are the environment variables used to set up the PostgreSQL superuser and its
+password:
 
 ```
 $ docker run --name pgchainlink -e POSTGRES_PASSWORD=chainlink -e POSTGRES_USER=chainlink -d -p 5432:5432 -v /root/postgres-data/:/var/lib/postgresql/data postgres
@@ -178,7 +210,8 @@ The final step is to run the Chainlink node within the Docker container. Before 
 1. Create a local directory to store Chainlink data
 2. Create a .env file with the environment variables used to access the container.
 3. Create a .api file with API email & password which is used to expose the API for GUI Interface
-4. Create a .password file which holds the wallet password and is used to unlock the keystore file generated by you
+4. Create a .password file which holds the wallet password and is used to unlock
+   the keystore file generated by you
 
 Create a directory to store the Chainlink data:
 
@@ -217,7 +250,8 @@ $ echo $PASSWORD > ~/.chainlink-avalanche/.password
 
 Don't forget to replace the $CHAINLINK_HOST, $HOST, $USERNAME and $PASSWORD with actual values.
 
-_**Note:** The password needs to be at least 12 characters and must contain three lowercase, uppercase, numbers, and symbols._
+_**Note:** The password needs to be at least 12 characters and must contain
+three lowercase, uppercase, numbers, and symbols._
 
 ---
 
@@ -238,11 +272,19 @@ This will list the Chainlink node container status:
 
 # Setup a Chainlink job
 
-Before we set up a job in the Chainlink node, we need to create an external adaptor which will gather the real-world data that interests us and provide this data to our dApp. For that, we have created a simple API based external adaptor written with NodeJS. [Click to download simple API external Adaptor](https://github.com/red-dev-inc/avalanche-chainlink-tutorial/tree/main/chainlink-external-adaptor). Please follow the README.md file to install and start the adaptor.
+Before we set up a job in the Chainlink node, we need to create an external
+adaptor which will gather the real-world data that interests us and provide this
+data to our dApp. For that, we have created a simple API based external adaptor
+written with NodeJS. [Click to download simple API external
+Adaptor](https://github.com/red-dev-inc/avalanche-chainlink-tutorial/tree/main/chainlink-external-adaptor).
+Please follow the README.md file to install and start the adaptor.
 
 ## Login to Chainlink GUI
 
-You can now connect to your Chainlink node's UI interface by navigating to http://localhost:6688. If using a VPS, you can create a SSH tunnel to your node for 6688:localhost:6688 to enable connectivity to the GUI. Typically this is done like this: 
+You can now connect to your Chainlink node's UI interface by navigating to
+http://localhost:6688. If using a VPS, you can create a SSH tunnel to your node
+for 6688:localhost:6688 to enable connectivity to the GUI. Typically this is
+done like this: 
 ```
 ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
@@ -252,7 +294,8 @@ Access http://localhost:6688 in your favorite browser, and this will return to t
 
 ## Create a new bridge
 
-First, create a new bridge which will point to the external adaptor listening address, which is in our case (http://<$HOST>:8081)
+First, create a new bridge which will point to the external adaptor listening
+address, which is in our case (http://<$HOST>:8081)
 
 ![chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
 
@@ -262,7 +305,11 @@ The next step is to create a new job in the Chainlink node.
 
 ### Using type: "web"
 
-Below is a code snippet for the job specification to test the job within the Chainlink GUI. This can be done by using the "type": "web". Please check the Chainlink official [documentation](https://docs.chain.link/docs/job-apis/) for more details. Later, in this section we also cover the "type": "runlog" which will be used to integrate Chainlink with on-chain contracts. 
+Below is a code snippet for the job specification to test the job within the
+Chainlink GUI. This can be done by using the "type": "web". Please check the
+Chainlink official [documentation](https://docs.chain.link/docs/job-apis/) for
+more details. Later, in this section we also cover the "type": "runlog" which
+will be used to integrate Chainlink with on-chain contracts. 
 
 ```
 {
@@ -284,7 +331,8 @@ Below is a code snippet for the job specification to test the job within the Cha
     ]
 }
 ```
-Now, in the jobs section, the newly created _Avalanche nodejs adapter test_ will be listed. Select that and click the Run button to test and see the result.
+Now, in the jobs section, the newly created _Avalanche nodejs adapter test_ will
+be listed. Select that and click the Run button to test and see the result.
 
 ![chainlink-job-run](img/chainlink-tutorial-09-chainlink-job-run.png)
 
@@ -294,7 +342,8 @@ Then, click on the Runs tab, and select the job id to see the result. It should 
 
 ### Using type: "runlog"
 
-The [RunLog](https://docs.chain.link/docs/initiators/) initiator is the easiest initiator to use when integrating Chainlink with on-chain contracts.
+The [RunLog](https://docs.chain.link/docs/initiators/) initiator is the easiest
+initiator to use when integrating Chainlink with on-chain contracts.
 ```
 {
   "name": "Avalanche nodejs adapter",
@@ -329,13 +378,21 @@ The [RunLog](https://docs.chain.link/docs/initiators/) initiator is the easiest 
 }
 ```
 
-* jsonparse, ethuint256 & ethtx are core adaptors and are executed synchronously. For more details, you will find documentation for each adapter's usage [here](https://docs.chain.link/docs/core-adapters/).
-* runlog - By adding the address parameter, you make the event filter of the RunLog initiator more restrictive, only listening for events from that address, instead of any address. By adding the requesters parameter, you only allow requests to come from an address within the array. Please have a look at this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how to get your oracle address.
+* jsonparse, ethuint256 & ethtx are core adaptors and are executed
+  synchronously. For more details, you will find documentation for each
+  adapter's usage [here](https://docs.chain.link/docs/core-adapters/).
+* runlog - By adding the address parameter, you make the event filter of the
+  RunLog initiator more restrictive, only listening for events from that
+  address, instead of any address. By adding the requesters parameter, you only
+  allow requests to come from an address within the array. Please have a look at
+  this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how
+  to get your oracle address.
 
 
 # Smart contracts
 
-This section will explain the smart contracts we have written for communicating with the Chainlink node through oracle address and job id.
+This section will explain the smart contracts we have written for communicating
+with the Chainlink node through oracle address and job id.
 
 We have used the solidity and compiler version 0.4.24 for this tutorial. For more details please refer to [link](https://remix-ide.readthedocs.io/en/latest/compile.html) on how to compile the solidity program.
 
@@ -348,11 +405,19 @@ There are 3 type of environments Remix can be plugged to:
 
 Both Injected Web3 and Web3 Provider require the use of an external tool.
 
-An external tool for Injected provider is Metamask. Some external tools used with Web3 provider are a Truffle Ganache-CLI, Hardhat node, or an Ethereum node itself.
+An external tool for Injected provider is Metamask. Some external tools used
+with Web3 provider are a Truffle Ganache-CLI, Hardhat node, or an Ethereum node
+itself.
 
-In this tutorial, we have used the Injected Web3 as environment and loaded the Metamask with Avalanche Fuji Testnet. Please have a look at this [**section**](####deployed-smart-contracts:) you can see our Avalanche Fuji Testnet Address has been choosen in the Account dropdown. For more details please refer to [link](https://remix-ide.readthedocs.io/en/latest/run.html) on how to run & deploy the smart contracts .
+In this tutorial, we have used the Injected Web3 as environment and loaded the
+Metamask with Avalanche Fuji Testnet. Please have a look at this
+[**section**](####deployed-smart-contracts:) you can see our Avalanche Fuji
+Testnet Address has been choosen in the Account dropdown. For more details
+please refer to [link](https://remix-ide.readthedocs.io/en/latest/run.html) on
+how to run & deploy the smart contracts .
 
-Below is the code snippet which you can copy and paste into the Remix IDE and then compile and deploy as suggested above.
+Below is the code snippet which you can copy and paste into the Remix IDE and
+then compile and deploy as suggested above.
 
 ```solidity
 pragma solidity 0.4.24;
@@ -413,20 +478,27 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 
 ![smartcontracts-deployed](img/chainlink-tutorial-11-smart-contract-deploy.png)
 
-Add tokens to the Avalanche Fuji Testnet so that you can transfer some LINKs to the deployed blockchain address to perform the transactions. Please refer to [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask) on how to add custom tokens. 
+Add tokens to the Avalanche Fuji Testnet so that you can transfer some LINKs to
+the deployed blockchain address to perform the transactions. Please refer to
+[link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask)
+on how to add custom tokens. 
 
-Use the Avalanche Faucet (https://linkfaucet.protofire.io/fuji) and send some LINK tokens to the Fuji Testnet wallet address.
+Use the Avalanche Faucet (https://linkfaucet.protofire.io/fuji) and send some
+LINK tokens to the Fuji Testnet wallet address.
 
 Then transfer LINKS to the deployed blockchain address to perform the transaction.
 
 ![smartContract-add-link](img/chainlink-tutorial-12-smart-contract-add-link.png)
 
-Now, call the requestCurrentAvaxSupply method on the deployed blockchain with params oracle_address & job id. 
+Now, call the requestCurrentAvaxSupply method on the deployed blockchain with
+params oracle_address & job id. 
 
 ---
 **NOTE**
 
-The oracle address should be _your own oracle address_. Please have a look at this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how to get your own oracle address.
+The oracle address should be _your own oracle address_. Please have a look at
+this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how to
+get your own oracle address.
 
 ---
 
@@ -445,11 +517,19 @@ Then, click the supply button on the deployed contract it will return the curren
 
 # Conclusion
 
-Having completed this tutorial, you are now no longer restricted to using only the oracles that Chainlink provides; now you can make your own!
+Having completed this tutorial, you are now no longer restricted to using only
+the oracles that Chainlink provides; now you can make your own!
 
-You know how to setup a Chainlink node with the Avalanche Fuji Testnet and create dApp smart contracts to connect to the Chainlink node. You can follow this methodology to gather any real-world information that your dApp needs just by following this tutorial and designing your Chainlink adapter to gather different information.
+You know how to setup a Chainlink node with the Avalanche Fuji Testnet and
+create dApp smart contracts to connect to the Chainlink node. You can follow
+this methodology to gather any real-world information that your dApp needs just
+by following this tutorial and designing your Chainlink adapter to gather
+different information.
 
-As a final word, remember that in this tutorial, we describe each step of setting up the environment by hand, but in order to make your life easier now that you know how it works, we have included a set of Ansible scripts to complete this process automatically.
+As a final word, remember that in this tutorial, we describe each step of
+setting up the environment by hand, but in order to make your life easier now
+that you know how it works, we have included a set of Ansible scripts to
+complete this process automatically.
 
 # Resources
 Here is a list of resources that can give you a detailed idea of what is mentioned in this tutorial.

@@ -381,7 +381,8 @@ Next, we have to push the value of the new bid into the bids array.
 bids.push(Bid(msg.sender,msg.value));
 ```
 
-Finally, if there is a previous bid, we have to refund the previous highest bid to the previous bidder. Also, we should emit a NewBid event.
+Finally, if there is a previous bid, we have to refund the previous highest bid
+to the previous bidder. Also, we should emit a NewBid event.
 
 ```solidity
 if(lastHighestBid != 0){ // if there is a bid
