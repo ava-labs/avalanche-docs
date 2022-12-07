@@ -12,14 +12,14 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 
 **This version modifies the db format. The db format is compatible with v1.9.3, but not v1.9.2 or earlier. After running a node with v1.9.4 attempting to run a node with a version earlier than v1.9.3 may report a fatal error on startup.**
 
-### PeerList Gossip Optimization
+**PeerList Gossip Optimization**
 
 - Added gossip tracking to the `peer` instance to only gossip new `IP`s to a connection
 - Added `PeerListAck` message to report which `TxID`s provided by the `PeerList` message were tracked
 - Added `TxID`s to the `PeerList` message to unique-ify nodeIDs across validation periods
 - Added `TxID` mappings to the gossip tracker
 
-### Validator Set Tracking
+**Validator Set Tracking**
 
 - Renamed `GetValidators` to `Get` on the `validators.Manager` interface
 - Removed `Set`, `AddWeight`, `RemoveWeight`, and `Contains` from the `validators.Manager` interface
@@ -35,7 +35,7 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added `BuildBlockWithContext` as an optional VM method to build blocks at a specific P-chain height
 - Added `VerifyWithContext` as an optional block method to verify blocks at a specific P-chain height
 
-### Uptime Tracking
+**Uptime Tracking**
 
 - Added ConnectedSubnet message handling to the chain handler
 - Added SubnetConnector interface and implemented it in the platformvm
@@ -43,7 +43,7 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added subnet uptimes to `platform.getCurrentValidators`
 - Added `subnetID` as an argument to `info.Uptime`
 
-### Fixes
+**Fixes**
 
 - Fixed incorrect context cancellation of escaped contexts from grpc servers
 - Fixed race condition between API initialization and shutdown
@@ -52,7 +52,7 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added race detection to the E2E tests
 - Added additional message and sender tests
 
-### Coreth
+**Coreth**
 
 - Improved header and logs caching using maximum accepted depth cache
 - Added config option to perform database inspection on startup
@@ -60,17 +60,17 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 - Added special case to allow transactions using Nick's Method to bypass API level replay protection
 - Added counter metrics for number of accepted/processed logs
 
-### APIs
+**APIs**
 
 - Added indices to the return values of `GetLastAccepted` and `GetContainerByID` on the `indexer` API client
 - Removed unnecessary locking from the `info` API
 
-### Chain Data
+**Chain Data**
 
 - Added `ChainDataDir` to the `snow.Context` to allow blockchains to canonically access disk outside avalanchego's database
 - Added `--chain-data-dir` as a CLI flag to specify the base directory for all `ChainDataDir`s
 
-### Miscellaneous
+**Miscellaneous**
 
 - Removed `Version` from the `peer.Network` interface
 - Removed `Pong` from the `peer.Network` interface
