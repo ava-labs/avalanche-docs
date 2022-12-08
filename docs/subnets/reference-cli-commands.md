@@ -1,6 +1,6 @@
 # Avalanche-CLI Commands
 
-Avalanche-CLI is a command line tool that gives developers access to
+Avalanche-CLI is a command-line tool that gives developers access to
 everything Avalanche. This release specializes in helping developers
 build and test Subnets.
 
@@ -208,18 +208,24 @@ avalanche subnet export [subnetName] [flags]
 
 ### Subnet Import
 
-The `subnet import` command imports a Subnet configuration from a file or a git repository.
+The `subnet import` command imports configurations into Avalanche-CLI.
 
-To import from a file, you can optionally provide the path as a command line argument.
+This command supports importing from a file created on another computer,
+or importing from Subnets running public networks
+(for example, created manually or with the deprecated Subnet-CLI)
+
+#### Import from a File
+
+To import from a file, you can optionally provide the path as a command-line argument.
 Alternatively, running the command without any arguments triggers an interactive wizard.
-To import from a repo, go through the wizard. By default, an imported Subnet doesn't
+To import from a repository, go through the wizard. By default, an imported Subnet doesn't
 overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
 flag.
 
 **Usage:**
 
 ```shell
-avalanche subnet import [subnetPath] [flags]
+avalanche subnet import file [subnetPath] [flags]
 ```
 
 **Flags:**
@@ -235,6 +241,43 @@ avalanche subnet import [subnetPath] [flags]
 ```
 
 <!-- markdownlint-enable MD013 -->
+
+#### Import from a Public Network 
+
+The `subnet import public` command will import a Subnet configuration from a running network.
+
+The genesis file should be available from the disk for this to work. 
+By default, an imported Subnet will not overwrite an existing Subnet with the same name. 
+To allow overwrites, provide the --force flag.
+
+**Usage:**
+
+```shell
+avalanche subnet import public [subnetPath] [flags]
+```
+
+**Flags:**
+
+<!-- markdownlint-disable MD013 -->
+
+```shell
+    --custom                     use a custom VM template
+    --evm                        import a subnet-evm
+-f, --force                      overwrite the existing configuration if one exists
+    --fuji fuji                  import from fuji (alias for `testnet`)
+    --genesis-file-path string   path to the genesis file
+-h, --help                       help for public
+    --mainnet mainnet            import from mainnet
+    --node-url string            [optional] URL of an already running subnet validator
+    --spacesvm                   use the SpacesVM as the base template
+    --subnet-id string           the subnet ID
+    --testnet testnet            import from testnet (alias for `fuji`)
+
+```
+
+<!-- markdownlint-enable MD013 -->
+
+
 
 ### Subnet Join
 
@@ -435,7 +478,7 @@ The `transaction` command suite provides all of the utilities required to sign m
 
 ### Transaction Commit
 
-The `transaction commit` command commits a transaction by submitting it to the p-chain.
+The `transaction commit` command commits a transaction by submitting it to the P-Chain.
 
 **Usage:**
 

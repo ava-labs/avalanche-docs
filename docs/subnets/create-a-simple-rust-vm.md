@@ -9,46 +9,62 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 
 ## Introduction
 
-The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and primitive types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs) using the Rust SDK. Each block in the TimestampVM's blockchain contains a monotonically increasing timestamp when the block was created and a 32-byte payload of data.
+The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and primitive
+types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM
+RS](https://github.com/ava-labs/timestampvm-rs) using the Rust SDK. Each block in the TimestampVM's
+blockchain contains a monotonically increasing timestamp when the block was created and a 32-byte
+payload of data.
 
 ## Prerequisites
 
-- Install the latest stable version of Rust using [rustup](https://www.rust-lang.org/tools/install).
+- Install the latest stable version of Rust using [`rustup`](https://www.rust-lang.org/tools/install).
 - Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
-  repository specifically the traits and helpers defined in the [subnet/rpc](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
-- For developers new to Rust please visit the free online book [The
-  Rust Programming Language](https://doc.rust-lang.org/book/).
+  repository specifically the traits and helpers defined in the
+  [`subnet/rpc`](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
+- For developers new to Rust please visit the free online book [The Rust Programming
+  Language](https://doc.rust-lang.org/book/).
 
-If you have experimented with our Golang example VMs you will find the Rust SDK
-fairly familiar. Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to VMs](./introduction-to-vm.md).
+If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
+Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to
+VMs](./introduction-to-vm.md).
 
 ## Components
 
-A VM defines how a blockchain should be built. A block is populated with a
-transaction which mutates the state of the blockchain when executed. By executing a series of blocks chronologically, anyone can verify and reconstruct the state of the blockchain at an arbitrary point in time.
+A VM defines how a blockchain should be built. A block is populated with a transaction which mutates
+the state of the blockchain when executed. By executing a series of blocks chronologically, anyone
+can verify and reconstruct the state of the blockchain at an arbitrary point in time.
 
-The TimestampVM RS repository has a few components to handle the lifecycle of tasks from a transaction being issued to a block being accepted across the network:
+The TimestampVM RS repository has a few components to handle the lifecycle of tasks from a
+transaction being issued to a block being accepted across the network:
 
 - **Mempool** - Stores pending transactions that haven't been finalized yet.
-- **Block** - Defines the block format, how to verify it, and how it should be accepted or rejected across the network
-- **Virtual Machine** - Application-level logic. Implements the VM trait needed to interact with Avalanche consensus and defines the blueprint for the blockchain.
+- **Block** - Defines the block format, how to verify it, and how it should be accepted or rejected
+  across the network
+- **Virtual Machine** - Application-level logic. Implements the VM trait needed to interact with
+  Avalanche consensus and defines the blueprint for the blockchain.
 - **Service** - Exposes APIs so users can interact with the VM.
 - **State** - Manages both in memory and persistent states.
 
 ## TimestampVM RS Implementation
 
-The TimestampVM RS implements the [snowman::block::ChainVM](https://github.com/ava-labs/avalanche-types-rs/blob/main/src/subnet/rpc/snowman/block.rs)
-trait. Below you will find additional documentation on the trait methods. To
-assist with a logical understanding of the expectations for these methods please see the code examples below.
+The TimestampVM RS implements the
+[snowman::block::ChainVM](https://github.com/ava-labs/avalanche-types-rs/blob/main/src/subnet/rpc/snowman/block.rs)
+trait. Below you will find additional documentation on the trait methods. To assist with a logical
+understanding of the expectations for these methods please see the code examples below.
 
 Additional Documentation
-- [ChainVM GoDoc](https://pkg.go.dev/github.com/ava-labs/avalanchego/snow/engine/snowman/block#ChainVm)
+
+- [ChainVM
+  GoDoc](https://pkg.go.dev/github.com/ava-labs/avalanchego/snow/engine/snowman/block#ChainVm)
 - [Avalanche Proto Docs](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM)
 - [Snowman VMs](https://github.com/ava-labs/avalanchego/tree/master/vms#snowman-vms)
 
-Now we know the traits (interfaces) our VM must implement and the libraries we can use to build a VM using the Rust SDK.
+Now we know the traits (interfaces) our VM must implement and the libraries we can use to build a VM
+using the Rust SDK.
 
-Let’s write our VM, which implements `snowman::block::ChainVM` and whose blocks implement `snowman::Block`. You can also follow the code in the [TimestampVM RS repository](https://github.com/ava-labs/timestampvm-rs).
+Let’s write our VM, which implements `snowman::block::ChainVM` and whose blocks implement
+`snowman::Block`. You can also follow the code in the [TimestampVM RS
+repository](https://github.com/ava-labs/timestampvm-rs).
 
 ### State
 
@@ -470,9 +486,10 @@ impl Block {
 }
 ```
 
-#### verify
+#### `verify`
 
-This method verifies that a block is valid and stores it in the memory. It is important to store the verified block in the memory and return them in the `vm.get_block()` method.
+This method verifies that a block is valid and stores it in the memory. It is important to store the
+verified block in the memory and return them in the `vm.get_block()` method.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn verify(&mut self) -> io::Result<()> {
@@ -533,7 +550,7 @@ pub async fn verify(&mut self) -> io::Result<()> {
 }
 ```
 
-#### accept
+#### `accept`
 
 Called by the consensus engine to indicate this block is accepted.
 
@@ -550,7 +567,7 @@ pub async fn accept(&mut self) -> io::Result<()> {
 }
 ```
 
-#### reject
+#### `reject`
 
 Called by the consensus engine to indicate the block is rejected.
 
@@ -602,7 +619,7 @@ impl subnet::rpc::consensus::snowman::Block for Block {
 
 These methods are convenience methods for blocks.
 
-#### init
+#### `init`
 
 Initializes a block from a bytes slice and status.
 
@@ -617,7 +634,7 @@ impl subnet::rpc::consensus::snowman::Initializer for Block {
 }
 ```
 
-#### set_status
+#### `set_status`
 
 Updates the status of this block.
 
@@ -664,7 +681,7 @@ pub struct VmState {
 }
 ```
 
-#### initialize
+#### `initialize`
 
 This method is called when a new instance of VM is initialized. Genesis block is created under this method.
 
@@ -731,9 +748,10 @@ async fn initialize(
 }
 ```
 
-#### create_handlers
+#### `create_handlers`
 
-Registers handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
+Registers handlers defined in `api::chain_handlers::Service`. See
+[below](create-a-simple-rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 /// Creates VM-specific handlers.
@@ -753,9 +771,10 @@ async fn create_handlers(
 }
 ```
 
-#### create_static_handlers
+#### `create_static_handlers`
 
-Registers handlers defined in `api::chain_handlers::Service`. See [below](create-a-simple-rust-vm.md#api) for more on APIs.
+Registers handlers defined in `api::chain_handlers::Service`. See
+[below](create-a-simple-rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn create_static_handlers(
@@ -774,7 +793,7 @@ async fn create_static_handlers(
 }
 ```
 
-#### build_block
+#### `build_block`
 
 Builds a new block from mempool data and returns it. This is primarily requested by the consensus engine.
 
@@ -817,9 +836,10 @@ async fn build_block(
 }
 ```
 
-#### notify_block_ready
+#### `notify_block_ready`
 
-Signals the consensus engine that a new block is ready to be created. After this is sent the concensus engine will call back to `vm.build_block`.
+Signals the consensus engine that a new block is ready to be created. After this is sent the
+consensus engine will call back to `vm.build_block`.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub async fn notify_block_ready(&self) {
@@ -837,7 +857,7 @@ pub async fn notify_block_ready(&self) {
 }
 ```
 
-#### get_block
+#### `get_block`
 
 Returns the block with the given block ID.
 
@@ -858,9 +878,10 @@ impl subnet::rpc::snowman::block::Getter for Vm {
 }
 ```
 
-#### propose_block
+#### `propose_block`
 
-Proposes arbitrary data to mempool and notifies that a block is ready for builds. Other VMs may optimize mempool with more complicated batching mechanisms.
+Proposes arbitrary data to mempool and notifies that a block is ready for builds. Other VMs may
+optimize mempool with more complicated batching mechanisms.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
@@ -887,7 +908,7 @@ pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
 }
 ```
 
-#### parse_block
+#### `parse_block`
 
 Parses a block from its byte representation.
 
@@ -918,9 +939,9 @@ impl subnet::rpc::snowman::block::Parser for Vm {
 }
 ```
 
-#### set_preference
+#### `set_preference`
 
-Sets the container preference of the Vm.
+Sets the container preference of the VM.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
@@ -933,9 +954,10 @@ pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
 
 ### Mempool
 
-The mempool is a buffer of volatile memory that stores pending transactions. Transactions are stored in the mempool whenever a node learns about a new transaction.
+The mempool is a buffer of volatile memory that stores pending transactions. Transactions are stored
+in the mempool whenever a node learns about a new transaction.
 
-The mempool implementation for timestampvm-rs is very simple.
+The mempool implementation for `timestampvm-rs` is very simple.
 
 ```rust
  mempool: Arc::new(RwLock::new(VecDeque::with_capacity(100))),
@@ -949,7 +971,9 @@ can have better control of element ordering (ex. pop_back(), pop_front()).
 
 :::note
 
-If this method is called, no other method will be called on this VM.  Each registered VM will have a single instance created to handle static APIs. This instance will be handled separately from instances created to service an instance of a chain.
+If this method is called, no other method will be called on this VM.  Each registered VM will have a
+single instance created to handle static APIs. This instance will be handled separately from
+instances created to service an instance of a chain.
 
 :::
 
@@ -1108,9 +1132,10 @@ impl Rpc for Service {
 }
 ```
 
-Below are examples of API calls, in which "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is the blockchain ID.
+Below are examples of API calls, in which "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is
+the blockchain ID.
 
-#### timestampvm.getBlock
+#### `timestampvm.getBlock`
 
 Given a valid block ID, returns a serialized block.
 
@@ -1126,9 +1151,9 @@ curl -X POST --data '{
 # {"jsonrpc":"2.0","result":{"block":{"data":"0x32596655705939524358","height":0,"parent_id":"11111111111111111111111111111111LpoYY","timestamp":0}},"id":1}
 ```
 
-#### timestampvm.proposeBlock
+#### `timestampvm.proposeBlock`
 
-Proposes arbitrary data for a new block to concensus.
+Proposes arbitrary data for a new block to consensus.
 
 ```sh
 # to propose data
@@ -1146,9 +1171,9 @@ curl -X POST --data '{
 # {"jsonrpc":"2.0","result":{"success":true},"id":1}
 ```
 
-#### timestampvm.lastAccepted
+#### `timestampvm.lastAccepted`
 
-Returns the Id of the last accepted block.
+Returns the ID of the last accepted block.
 
 ```sh
 curl -X POST --data '{
@@ -1164,7 +1189,8 @@ curl -X POST --data '{
 
 ### Plugin
 
-In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method,
+which serves our VM over gRPC so that AvalancheGo can call its methods.
 
 `main.rs`'s contents are:
 
@@ -1211,9 +1237,12 @@ async fn main() -> io::Result<()> {
 
 ### Installing a VM
 
-AvalancheGo searches for and registers VM plugins under the `plugins` directory of the [build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
+AvalancheGo searches for and registers VM plugins under the `plugins` directory of the [build
+directory](../nodes/maintain/avalanchego-config-flags#build-directory).
 
-To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory. Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+To install the virtual machine onto your node, you need to move the built virtual machine binary
+under this directory. Virtual machine executable names must be either a full virtual machine ID
+(encoded in CB58), or a VM alias.
 
 Copy the binary into the plugins directory.
 
@@ -1223,7 +1252,8 @@ cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 
 #### Node Is Not Running
 
-If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
+If your node isn't running yet, you can install all virtual machines under your `plugin` directory
+by starting the node.
 
 #### Node Is Already Running
 
@@ -1238,7 +1268,9 @@ curl -sX POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-Confirm the response of `loadVMs` contains the newly installed virtual machine `tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX`. You'll see this virtual machine as well as any others that weren't already installed previously in the response.
+Confirm the response of `loadVMs` contains the newly installed virtual machine
+`tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX`. You'll see this virtual machine as well as any
+others that weren't already installed previously in the response.
 
 ```json
 {
@@ -1256,13 +1288,18 @@ Confirm the response of `loadVMs` contains the newly installed virtual machine `
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm-rs` and `/ext/vm/timestamp-rs`. For more details about VM configs, see [here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm-rs` and
+`/ext/vm/timestamp-rs`. For more details about VM configs, see
+[here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm-rs` or `timestamp-rs` since those are registered aliases in previous step.
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
+AvalancheGo would also accept `timestampvm-rs` or `timestamp-rs` since those are registered aliases
+in previous step.
 
 ## Wrapping Up
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server written in Rust!
+That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp
+server written in Rust!
 
 In this tutorial, we learned:
 
