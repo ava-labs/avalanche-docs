@@ -16,6 +16,7 @@ Avalanche-CLI
 AvalancheGo
 Avascan
 AVAX
+blackhole
 blockchain
 Blockchain
 blockchains
@@ -29,6 +30,7 @@ ChainSafe
 CLIs
 codec
 Codec
+coinbase
 composability
 Composability
 config

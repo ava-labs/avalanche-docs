@@ -233,7 +233,7 @@ genesis file (under the `"config"` key):
 #### Fee Recipient Address
 
 With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
-need to update their EVM [chain config](#fee-recipient-address) with the following to specify where
+need to update their EVM [chain config](#avalanchego-chain-configs) with the following to specify where
 the fee should be sent to.
 
 ```json
@@ -652,13 +652,15 @@ interface IRewardManager is IAllowList {
 
 In addition to the `AllowList` interface, the `RewardManager` adds the following capabilities:
 
-- `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a user address. The address becomes the required coinbase address for the blocks that this mechanism is enabled on. Meaning that it will receive the fees collected from the transactions in the block. Receiving fees will not call any contract functions or fallback functions. It will simply send the fees to the address.
+- `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a user address. The address becomes the required coinbase address for the blocks that this mechanism is enabled on. Meaning that it will receive the fees collected from the transactions in the block. Receiving fees will not call any contract functions or fallback functions. It will simply send the
+  fees to the address.
 
-- `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient-1) for more information on how to specify the fee recipient address in the chain config.
+- `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient) for more information on how to specify the fee recipient address in the chain config.
 
 - `disableRewards` - disables block rewards and starts burning fees.
 
-- `currentRewardAddress` - returns the current reward address. This is the address to which fees are sent. It can include blackhole address (`0x010...0`) which means that fees are burned. It can also include a predefined hash (`0x0000000000000000000000000000000000000000`) denoting custom fee recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if custom fee recipients are allowed first.
+- `currentRewardAddress` - returns the current reward address. This is the address to which fees are sent. It can include blackhole address (`0x010...0`) which means that fees are burned. It can also include a predefined hash (`0x0000000000000000000000000000000000000000`) denoting custom fee recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if custom fee
+  recipients are allowed first.
 
 - `areFeeRecipientsAllowed` - returns true if custom fee recipients are allowed.
 
@@ -668,7 +670,8 @@ _Note: Reward addresses or fee recipient addresses are not required to be an adm
 
 #### Initial Configuration
 
-It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to change the fee reward mechanism. This can be useful for networks that require a one-time reward mechanism change without specifying any admin addresses. Without this initial configuration, the precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. To use the initial configuration, you need to specify the initial reward mechanism in `initialRewardConfig` field in your genesis or upgrade file.
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to enable the precompile without an admin address to change the fee reward mechanism. This can be useful for networks that require a one-time reward mechanism change without specifying any admin addresses. Without this initial configuration, the precompile will
+inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. To use the initial configuration, you need to specify the initial reward mechanism in `initialRewardConfig` field in your genesis or upgrade file.
 
 In order to allow custom fee recipients, you need to specify the `allowFeeRecipients` field in the `initialRewardConfig`:
 
@@ -707,7 +710,8 @@ In order to disable rewards and start burning fees, you need to leave all fields
 }
 ```
 
-However this is different than the default behavior of the precompile. If you don't specify the `initialRewardConfig` field, the precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. Example configuration for this case:
+However this is different than the default behavior of the precompile. If you don't specify the `initialRewardConfig` field, the precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees. Example
+configuration for this case:
 
 ```json
 {
@@ -720,7 +724,7 @@ However this is different than the default behavior of the precompile. If you do
 
 If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRewardConfig` field then an error will be returned and precompile won't be activated. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
 
-## Examples
+## Contract Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat
 project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
