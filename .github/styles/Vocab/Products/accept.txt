@@ -29,6 +29,7 @@ ChainSafe
 CLIs
 codec
 Codec
+coinbase
 composability
 Composability
 config

@@ -8,7 +8,8 @@
 
 ## Overview
 
-This repository contains the contents for our docs deployed [here](https://docs.avax.network).
+This repository contains the contents for the Avalanche Developer Documentations
+deployed at [https://docs.avax.network](https://docs.avax.network).
 
 The site is built using [Docusaurus 2](https://docusaurus.io/).
 
@@ -23,7 +24,9 @@ Here's some things you need to know to get started.
 [static/img](static/img) directory where a sub-dir is strongly recommended if there are multiple
 image files for a doc.
 - The left sidebar of the page is controlled by [sidebars.js](sidebars.js).
-- Style Guide can be found [here](style-guide.md).
+- Style Guide can be found [here](style-guide.md). In addition, this repository
+uses a series of style checking and formatting tools. See
+[style-checker-notes.md](style-checker-notes.md) for more details and how to fix errors.
 - Extensive docs for Docusaurus can be found [here](https://docusaurus.io/docs).
 
 ### Pull Request (PR)
@@ -60,11 +63,6 @@ contents hosting service.
 
 **Please make sure that you run this command to see if there is any error in building the package,**
 **and fix them before pushing your changes.**
-
-### Style
-
-This repository uses a series of style checking and formatting tools. 
-See [style-checker-notes.md](style-checker-notes.md) for more details.
 
 ## Search
 
