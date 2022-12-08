@@ -1,4 +1,4 @@
-# Deploy a Smart Contract on Your Subnet-EVM Using Remix and Metamask
+# Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask
 
 ## Introduction
 
@@ -10,17 +10,18 @@ This tutorial assumes that:
 
 ## Step 1: Setting up MetaMask
 
-#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
+### **EVM Subnet Settings:** [(EVM MetaMask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
 
 - **`Network Name`**: Custom Subnet-EVM
-- **`New RPC URL`**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
+- **`New RPC URL`**: <http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc> (Note: the port number should
+match your local setting which can be different from 9650.)
 - **`ChainID`**: Subnet-EVM ChainID
 - **`Symbol`**: Subnet-EVM Token Symbol
 - **`Explorer`**: N/A
 
 ![remix Subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
 
-You should see a balance of your Subnet's Native Token in Metamask.
+You should see a balance of your Subnet's Native Token in MetaMask.
 
 ![remix Subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
 
@@ -34,29 +35,33 @@ Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
 
 Create the smart contracts that we want to compile and deploy using Remix file explorer
 
-### Using Github
+### Using GitHub
 
 In Remix Home _Click_ the GitHub button.
 
 ![remix Subnet evm sc load panel](/img/remix-subnet-evm-sc-load-panel.png)
 
-Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup and _Click_ import.
+Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol)
+into the popup and _Click_ import.
 
 ![remix Subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
-For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 
 ![remix Subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
-Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure MetaMask is loaded).
+Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure
+MetaMask is loaded).
 
 ![remix Subnet evm sc web3](/img/remix-subnet-evm-sc-web3.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab.
+Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt;
+Navigate to Deploy Tab.
 
 ![remix Subnet evm sc compile](/img/remix-subnet-evm-sc-compile.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC721. Click "Deploy."
+Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC721.
+Click "Deploy."
 
 ![remix Subnet evm sc deploy](/img/remix-subnet-evm-sc-deploy.png)
 
@@ -74,10 +79,14 @@ Now, we can expand it by selecting it from the "Deployed Contracts" tab and test
 
 The contract ABI and Bytecode are available on the compiler tab.
 
-![remix Subnet evm sc abi](/img/remix-subnet-evm-sc-abi.png)
+![remix Subnet evm sc ABI](/img/remix-subnet-evm-sc-abi.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you
+can join our community at [Discord](https://chat.avalabs.org/)!
 
 ## Other Tools
 
-You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and
+RPC URL. For example you can deploy your contracts with
+[hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+by changing `url` and `chainId` in the `hardhat.config.ts`.
