@@ -471,7 +471,7 @@ The code for smart contract is everything within `contract FileManager { }`.
 
 **Basic structure about Files** - `File` is a struct that's a skeleton to store
 the details of each file. We are having three attributes of each file:
-`fileName`, `fileType` i.e. whether it is image, audio, video or an application
+`fileName`, `fileType` that is whether it is image, audio, video or an application
 and finally `cid`. Here, `files` is a mapping between the owner (address) of the
 files and the array of those `File` structures which they uploaded.
 
@@ -489,8 +489,8 @@ mapping(address => File[]) files;
 
 **Adding files** - `addFile()` function is used to add details of file to the
 array of `File` structures corresponding to each address. `files[msg.sender]`
-refers to the array of file structures, belonging to the caller of this function
-i.e. address `msg.sender`. Function's arguments are `_fileInfo[]` which is an
+refers to the array of file structures, belonging to the caller of this function,
+that is the address `msg.sender`. Function's arguments are `_fileInfo[]` which is an
 array of 2 parameters (file name and file type respectively) and the second
 argument is `cid` which is the content id for the uploaded file.
 
@@ -574,8 +574,8 @@ the `.env` file. Therefore we need to fund the account.
 
 ### **Fund Your Account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain
-i.e. Contract-Chain. This address can easily be found on the [Avalanche
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain, 
+the Contract-Chain. This address can easily be found on the [Avalanche
 Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains:
 X-Chain, P-Chain and C-Chain. The address of all these chains can be found by
 switching tabs at the bottom of the division, where there is a QR code. So,
@@ -586,8 +586,8 @@ input field. Refer to the below image, to identify the address section.
 ![avalanche c-chain address](./assets/distributed-file-manager-07-avalanche-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the
-> cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of
-> an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
+> cost of contract deployments. Here `nAVAX` refers nano-AVAX, that is a billionth of
+> an `AVAX`, or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
 > through faucet would give you enough `AVAX` to run multiple deployments and
 > transactions on the network.
 
@@ -802,7 +802,7 @@ npm install --save ipfs-http-client compressorjs rimble-ui --force
 ```
 
 > Rimble UI library comes with a peer dependency of `react@16.9.0` which is not
-> the latest version of React that we are using i.e. `react@17.0.2`. Running the
+> the latest version of React that we are using which is `react@17.0.2`. Running the
 > `npm install` command without the `--force` tag would cause an `unable to
 > resolve dependency tree` conflict. Thus, the `--force` tag is used to override
 > any type of conflicts and proceeds with the installation anyway. Another way
@@ -929,7 +929,7 @@ Your `App.js` would now look like this [file](./frontend/App.js.md)
 
 ## Starting the Application
 
-Now go to the project root directory of the project, i.e. `dfm-avalanche-react`
+Now go to the project root directory of the project, the `dfm-avalanche-react`
 directory, and run the command `npm start`. The ReactJS server would start
 automatically. Visit [http://localhost:3000](http://localhost:3000) to interact
 with the built dapp.

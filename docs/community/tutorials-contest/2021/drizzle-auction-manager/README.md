@@ -390,8 +390,8 @@ Therefore, we need to fund the account.
 
 ### **Fund Your Account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain
-i.e. Contract-Chain. This address can easily be found on the [Avalanche
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain, the
+Contract-Chain. This address can easily be found on the [Avalanche
 Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains:
 X-Chain, P-Chain, and C-Chain. The address of all these chains can be found by
 switching tabs at the bottom of the division, where there is a QR code. So,
@@ -402,8 +402,8 @@ input field. Refer to the below image, to identify the address section.
 ![wallet c-chain address](./assets/drizzle-auction-00-wallet-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the
-> cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of
-> an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
+> cost of contract deployments. Here `nAVAX` refers nano-AVAX, that is a billionth of
+> an `AVAX`, or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
 > through faucet would give you enough `AVAX` to run multiple deployments and
 > transactions on the network.
 
@@ -767,7 +767,7 @@ new Auctions, by submitting transactions on the network.
 
 ## Starting the Application
 
-Now go to the project root directory of the project, i.e. `drizzle-auction`
+Now go to the project root directory of the project, that is the `drizzle-auction`
 directory, and run the command `npm start`. The ReactJS server would start
 automatically. Visit [http://localhost:3000](http://localhost:3000) to interact
 with the built dapp.

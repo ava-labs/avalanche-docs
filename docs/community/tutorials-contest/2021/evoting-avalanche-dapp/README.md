@@ -358,7 +358,7 @@ function addCandidate (string memory _name) private {
 `candidateId` as an argument and increments the vote of the respective
 candidate. It requires two things, a voter should not have voted in the
 particular election by checking boolean across the `voters` mapping and
-`candidateId` should be a valid one, i.e. `0 <= candidateId < candiatesCount`.
+`candidateId` should be a valid one, that is `0 <= candidateId < candiatesCount`.
 
 ```solidity
 // Public vote function for voting a candidate
@@ -488,8 +488,8 @@ account.
 
 ### **Fund Your Account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain
-i.e. Contract-Chain. This address can easily be found on the [Avalanche
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain,
+the Contract-Chain. This address can easily be found on the [Avalanche
 Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains:
 X-Chain, P-Chain and C-Chain. The address of all these chains can be found by
 switching tabs at the bottom of the division, where there is a QR code. So,
@@ -497,10 +497,10 @@ switch to C-Chain, and copy the address. Now fund your account using the faucet
 link [here](https://faucet.avax.network/) and paste your C-Chain address in the
 input field. Refer to the below image, to identify the address section.
 
-![](./assets/evoting-dapp-02-wallet-c-chain-address.png)
+![wallet c-chain address](./assets/evoting-dapp-02-wallet-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the
-> cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of
+> cost of contract deployments. Here `nAVAX` refers nano-AVAX, which is a billionth of
 > an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
 > through faucet would give you enough `AVAX` to run multiple deployments and
 > transactions on the network.
@@ -793,7 +793,7 @@ components.
 > ```
 
 > Rimble UI library comes with a peer dependency of `react@16.9.0` which is not
-> the latest version of React that we are using i.e. `react@17.0.2`. Running the
+> the latest version of React that we are using which is `react@17.0.2`. Running the
 > `npm install` command without the `--force` tag would cause an `unable to
 > resolve dependency tree` conflict. Thus, the `--force` tag is used to override
 > any type of conflicts and proceeds with the installation anyway. Another way
@@ -801,7 +801,7 @@ components.
 > this would ignore all peer dependencies which we do not require, as the
 > conflict is only between `react` and `rimble-ui`.
 
-Now go to the project root directory, i.e. `avalanche-voting` directory, and run
+Now go to the project root directory, the `avalanche-voting` directory, and run
 the command `npm start`. The ReactJS server would start automatically. Visit
 [http://localhost:3000](http://localhost:3000) in a browser to interact with the
 dapp frontend.
