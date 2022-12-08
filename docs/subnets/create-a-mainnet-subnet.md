@@ -1,44 +1,58 @@
-# Create an EVM Subnet on Mainnet
+# Deploy a Permissioned Subnet on Mainnet
 
-After trying out a Subnet on `Fuji` using stored keys, by following [this tutorial](./create-a-fuji-subnet),
-next step is to try it out on `Mainnet`.
+:::warning
 
-In this article, it's shown how to do the following on `Mainnet`.
+Deploying a Subnet to Mainnet has many risks. Doing so safely requires a laser focus on security.
+This tutorial does its best to point out common pitfalls, but there may be other risks not discussed here.
+
+This tutorial is an educational resource and provides no guarantees that following it will result in
+a secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of
+the deployment process at the expense of security. These shortcuts are pointed out and are not
+recommended for a production deployment.
+
+:::
+
+After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your
+Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on
+Testnet](./create-a-fuji-subnet).
+
+This tutorial shows how to do the following on `Mainnet`.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
 - Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
 
-All IDs in this article are for illustration purposes. They can be different in your own run-through
-of this tutorial.
+:::note
+
+All IDs in this article are for illustration purposes only. They are guaranteed to be different in
+your own run-through of this tutorial.
+
+:::
 
 ## Prerequisites
 
-- 1+ nodes running and fully bootstrapped on `Mainnet`. Check out the section [Nodes](../nodes/README.md)
-on how to run a node and become a validator.
-- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
-- a funded ledger device
+- 5+ nodes running and [fully bootstrapped](../nodes/README.md) on `Mainnet`
+- [Avalanche-CLI is installed](install-avalanche-cli) on each validator node's box
+- A [Ledger](https://www.ledger.com/) device
+- You've [created a Subnet configuration](create-evm-subnet-config) and fully tested a [Fuji Testnet
+  Subnet deployment](./create-a-fuji-subnet)
 
-### Virtual Machine
+:::warning
 
-Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine (VM)](../subnets/README.md#virtual-machines),
-much like an object in an object-oriented language is an instance of a class.
-That's, the VM defines the behavior of the blockchain.
+Although only one validator is strictly required to run a Subnet, running with less than five
+validators is extremely dangerous and guarantees network downtime. Plan to support at least five
+validators in your production network.
 
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains.
-Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
+:::
 
-This chain implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as
-most other Ethereum client features.
+### Getting Your Mainnet NodeIDs
 
-### Mainnet
+You need to collect the NodeIDs for each of your validators. This tutorial uses these NodeIDs in
+several commands.
 
-For this tutorial, it's recommended to follow [Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#start-a-node-and-connect-to-avalanche).
-
-Also it's worth pointing out that [you need at least 2000 AVAX to become a validator on Mainnet](../nodes/validate/staking.md#mainnet).
-
-To get the NodeID of this `Mainnet` node, call the following curl command [info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid):
+To get the NodeID of a `Mainnet` node, call the
+[info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid) endpoint. For example:
 
 ```text
 curl -X POST --data '{
@@ -60,48 +74,34 @@ The response should look something like:
 }
 ```
 
-That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing.
-You are going to need this in a later section when calling [addValidator](#add-a-validator).
+In the sample response, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID. Note that the
+`NodeID-` prefix is part of the NodeID.
 
-:::info
+### Setting up Your Ledger
 
-It may take a while to bootstrap `Mainnet` from scratch. You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean)
-to shorten the time for bootstrapping.
+In the interest of security, all Avalanche-CLI `Mainnet` operations require the use of a connected
+Ledger device. You must unlock your Ledger and run the Avalanche App. See [How to Use
+Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
+for help getting set up.
 
-:::
-
-### Avalanche-CLI
-
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](create-a-local-subnet.md#installation)
-
-### Ledger
-
-To support safest operations, locally stored keys aren't enabled for `Mainnet` operations on CLI.
-
-All commands which issue a transaction to `Mainnet` require usage of a connected ledger device, unlocked,
-and with the Avalanche App running. See [How to use Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
--up to and including point 4-.
-
-Supported ledger devices: `Nano X`, `Nano S`, `Nano S Plus`.
+Avalanche-CLI supports the Ledger `Nano X`, `Nano S`, and `Nano S Plus`.
 
 Ledger devices support TX signing for any address inside a sequence automatically generated by the device.
 
-CLI is going to by default use the first address of such sequence, and for TX generation it needs to
-have funds to support the fee of the deploy or add validator transaction (for multisig cases, only one
-of the used ledger addresses is going to have funds to support the fee, while the others
-not).
+By default, Avalanche-CLI uses the first address of the derivation, and that address needs funds to
+issue the TXs to create the Subnet and add validators.
 
-To get the first `Mainnet` address of your -connected, unblocked, avalanche app running- ledger device,
-execute the `key list` command:
+To get the first `Mainnet` address of your ledger device, first make sure it is connected,
+unblocked, and running the Avalanche app. Then execute the `key list` command:
 
 ```bash
 avalanche key list --ledger 0 --mainnet
 ```
 
-The command first asks the user to authorize the ledger to give to the CLI extended public key information,
-needed to generate the address list.
+The command first asks the user to authorize the ledger to give the CLI extended public key
+information. Avalanche-CLI needs this information to generate the address list.
 
-An authorization request is a common message in all CLI ops involving ledger:
+An authorization request is a common message in all CLI operations that use Ledger:
 
 ```text
 *** Please provide extended public key on the ledger device ***
@@ -111,8 +111,6 @@ On the ledger a `Provide Extended Public Key` window is going to be active. Navi
 window by using the ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
-<!-- markdownlint-disable MD013 -->
-
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 |  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
@@ -121,46 +119,39 @@ right buttons.
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-<!-- markdownlint-enable MD013 -->
+The command prints the P-Chain address for `Mainnet`,
+`P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with
+at least 2.5 AVAX to cover TX fees. the TX fee for creating your Subnet costs 2 AVAX. Adding
+validators costs 0.001 AVAX each. For more details, see [Fees](../quickstart/transaction-fees))
 
-The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`
-which is the one needed for this tutorial. Also prints the balance of the account, which, as said, should
-be enough to pay for the TX fee (2 AVAX for deploy op, 0.001 AVAX for add Subnet validator op, see [Fees](../quickstart/transaction-fees))
+:::note
 
-Note you can use the `key list` command to get any ledger address in the sequence by changing the index
-parameter from `0` to the one desired, or to a list of them (for example: `2`, or `0,4,7`). Also you
-can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks with the
-`--local` parameter.
+You can use the `key list` command to get any ledger address in the derivation sequence by
+changing the index parameter from `0` to the one desired, or to a list of them (for example: `2`, or
+`0,4,7`). Also, you can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks
+with the `--local` parameter.
+
+:::
 
 #### Funding the Ledger
 
-A new ledger device has no funds on the address controlled by it. Send funds via transfer to its correspondent
-addresses if you already have funds on a different address.
+A new ledger device has no funds on the addresses it controls. You'll need to send funds to it by
+exporting them from the C-Chain to the P-Chain using [Avalanche's Web
+Wallet](https://wallet.avax.network).
 
-You need at least 2 AVAX for the deploy operation (Create Subnet + Create Blockchain, see [Fees](../quickstart/transaction-fees)).
-
-You need at least 0.001 AVAX for the add validator operation.
-
-## Create an EVM Subnet
-
-Creating a Subnet with `Avalanche-CLI` for `Mainnet` is the same way as creating a one for `Fuji`. 
-
-In fact, the `create` commands only creates a specification of your Subnet on the local file system.
-Afterwards the Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with
-the `create` command, then first deploying to a local network and successively to `Fuji` or `Mainnet`.
-
-See [this section](./create-a-fuji-subnet#create-an-evm-subnet)
+You can load the Ledger's C-Chain address in the web wallet or load in a different private key. You
+can transfer funds from the C-Chain to the P-Chain by clicking on the Cross Chain on the left side
+of the web wallet. See this
+[tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet-between-x-and-c-chain)
+for more instructions.
 
 ## Deploy the Subnet
 
-To deploy the new Subnet, run
+With your Ledger unlocked and running the Avalanche app, run
 
 ```bash
 avalanche subnet deploy testsubnet
 ```
-
-Note: if the ledger isn't unblocked, or the Avalanche Ledger App isn't running, the command is going
-to end with error.
 
 This is going to start a new prompt series.
 
@@ -174,7 +165,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys to `Mainnet` and hit enter.
 
-The user is then asked to authorize the ledger to provide extended public key information to CLI.
+The user is then asked to authorize the Ledger to provide extended public key information to the CLI.
 
 ```text
 ✔ Mainnet
@@ -182,38 +173,45 @@ Deploying [testsubnet] to Mainnet
 *** Please provide extended public key on the ledger device ***
 ```
 
-On the ledger a `Provide Extended Public Key` window is going to be active. Navigate to the ledger `Accept`
+This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
 window by using the ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
-After that, CLI shows the first `Mainnet` ledger address -used to fund the deploy-:
+After that, CLI shows the `Mainnet` ledger address used to fund the deployment:
 
 ```text
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-The deployment consists in running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet)
+The deployment requires running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet)
 and a [createBlockchain transaction](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain),
-and so this first ledger address must has funds to do the operation (funding described [here](#funding-the-ledger)).
+and so this first ledger address must have the funds to issue both operations.
 
-Also, this tutorial assumes that a node is up and running, fully bootstrapped on `Mainnet`, and runs
-run from the **same** box.
+This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
+control the Subnet. These addresses are known as `Control Keys`. The CLI can automatically set your
+Ledger's address as the sole control key or the user may specify a custom list.
 
-Subnets are currently permissioned only. Therefore, the process now requires the user to tell _which
-addresses can control the Subnet_. CLI prompts the user to use only the first ledger address (creation
-key), or a custom list of addresses.
+:::warning
+
+In production Subnets, you should always use multiple control keys running in a multisig
+configuration. This tutorial uses a single control key for illustrative purposes only.
+
+For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment
+Tutorial](./multisig-deploy).
+
+:::
 
 ```text
 Configure which addresses may make changes to the subnet.
 These addresses are known as your control keys. You are going to also
 set how many control keys are required to make a subnet change (the threshold).
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? How would you like to set your control keys?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How would you like to set your control keys?:
   ▸ Use ledger address
     Custom list
 ```
 
-For this tutorial, it's opt to use the first ledger address, so enter at `Use ledger address`. Only
+For this tutorial, opt to use the first ledger address, so enter at `Use ledger address`. Only
 this address is going to be able to add or remove validators, or create blockchains on the Subnet.
 
 ```text
@@ -221,44 +219,34 @@ Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Currently, besides indicating a list of addresses that's going to be control keys, usually CLI asks
-the user to define the threshold of how many addresses to require for a change to be valid. In
-this case, as there is only one control key, CLI forces the threshold to 1 without asking to the user,
-so that address and only that address can authorize Subnet changes -auth keys for chain creation-.
-You are going to see more about this on [multisig deploy tutorial](./multisig-deploy).
-
-Next, CLI generates a TX for creating the Subnet id and asks the user to sign it by using the ledger.
+Next, the CLI generates a TX for creating the SubnetID and asks the user to sign it by using the Ledger.
 
 ```text
-*** Please sign subnet creation hash on the ledger device *** 
+*** Please sign subnet creation hash on the ledger device ***
 ```
 
-On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
+This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-Note that if the ledger isn't funded or doesn't have enough funds, the user is going to get an error
-message:
+If the Ledger doesn't have enough funds, the user may see an error message:
 
 ```text
-*** Please sign subnet creation hash on the ledger device *** 
+*** Please sign subnet creation hash on the ledger device ***
 Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-For the success case, CLI is going to create the Subnet id, taking 1 AVAX from the ledger address,
-and is going to ask you to sign a chain creation TX.
+If successful, the CLI next asks you to sign a chain creation TX.
 
 ```text
 Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
-*** Please sign blockchain creation hash on the ledger device *** 
+*** Please sign blockchain creation hash on the ledger device ***
 ```
 
-On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
+This activates a `Sign Hash` window on the ledger. Navigate to the Ledger's `Accept` window by
 using the ledger's right button, and then authorize the request by pressing both left and right buttons.
 
-After that, CLI is going to create the blockchain, taking 1 AVAX from the ledger address, and a summary
-window for the deployment is going to appear:
-
-<!-- markdownlint-disable MD013 -->
+After that, CLI creates the blockchain within the Subnet, and a summary window for the deployment
+appears:
 
 ```text
 +--------------------+------------------------------------------------------------------------------------+
@@ -278,28 +266,7 @@ window for the deployment is going to appear:
 +--------------------+------------------------------------------------------------------------------------+
 ```
 
-<!-- markdownlint-enable MD013 -->
-
-In this case, the ledger address is the control key, so there is going to be no control key authorization
-error, but in general, if you specifies the control key manually and isn't controlled by the ledger,
-an error is going to occur:
-
-```text
-Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
-Error: wallet doesn't contain subnet auth keys
-exit status 1
-```
-
-You are going to see more about this on [multisig deploy tutorial](./multisig-deploy).
-
-Well done. You have just created your own Subnet with your own Subnet-EVM running on `Mainnet`.
-
-To get your new Subnet information, visit [Avalanche Explorer](https://subnets.avax.network/). The search
-works by P-Chain TX id, so in this example, enter `wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG`
-into the search box and you should see a confirmation on your shiny new blockchain TX.
-
-Also, you can ask for the Subnet id in the search `2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db`,
-to get information on the associated Subnet id TX.
+Well done. You have just created your own Subnet running on `Mainnet`. Now it's time to add your validators.
 
 ## Add a Validator
 
@@ -324,8 +291,8 @@ avalanche subnet addValidator testsubnet
 First choose `Mainnet` as the network to add the Subnet validator into.
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose a network to add validator to.: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to add validator to.:
   ▸ Fuji
     Mainnet
 ```
@@ -339,7 +306,7 @@ That address is going to also pay the add Subnet validator TX fee of 0.001 AVAX.
 Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Also, as using `Mainnet`, the tool is going to use the first ledger address 
+Also, as using `Mainnet`, the tool is going to use the first ledger address
 as signing address.
 So, it's expected that the connected ledger has the Subnet control key as its first address.
 
@@ -452,7 +419,7 @@ exit status 1
 If the ledger hasn't enough funds, the following error message is going to appear:
 
 ```text
-*** Please sign subnet creation hash on the ledger device *** 
+*** Please sign subnet creation hash on the ledger device ***
 Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 

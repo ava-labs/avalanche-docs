@@ -1,4 +1,4 @@
-# Create an EVM Subnet on Fuji Testnet
+# Deploy a Subnet on Testnet
 
 :::note
 
@@ -565,7 +565,7 @@ What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAA
 
 -this ID is intentionally modified-
 
-The next question requires a bit of thinking. A validator has a weight, which defines how often 
+The next question requires a bit of thinking. A validator has a weight, which defines how often
 consensus selects it for decision making. You should think ahead of how many validators you want
 initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without
 any validators yet is 20. The structure is a bit described at
@@ -585,9 +585,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ✔ What stake weight would you like to assign to the validator?: 30
 ```
 
-Then specify when the validator is going to start validating. The time must be in the future.
-Custom option is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Just take the default
-this time:
+Then specify when the validator is going to start validating. The time must be in the future. Custom
+option is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Just take the
+default this time:
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -649,7 +649,7 @@ This means the node is now a validator on the given Subnet on `Fuji`!
 
 ## Join a Subnet
 
-You might already have a running validator which you want to add to a specific Subnet. For this 
+You might already have a running validator which you want to add to a specific Subnet. For this
 run the `join` command.
 This is a bit of a special command. The `join` command is going to either just _print the required
 instructions_ for your already running node or is going to attempt at configuring a config file the

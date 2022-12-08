@@ -74,6 +74,7 @@ MetaMask
 mintable
 Mintable
 multisig
+Multisig
 multistep
 Nakamoto
 npm
@@ -82,6 +83,7 @@ parameterizable
 parameterization
 performant
 permissioned
+Permissioned
 permissionless
 precompile
 Precompile
