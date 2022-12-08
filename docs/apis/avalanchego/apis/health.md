@@ -7,17 +7,21 @@ description: This API can be used for measuring node health. Use Avalanche docs 
 
 This API can be used for measuring node health.
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+To get an HTTP status code response that indicates the node’s health, make a `GET` request to
+`/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth
+information about a node’s health, use the methods below.
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+This API set is for a specific node, it is unavailable on the [public
+server](../public-api-server.md).
 
 :::
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
+[here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -29,9 +33,10 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### health.health
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+The node runs a set of health checks every 30 seconds, including a health check for each chain. This
+method returns the last set of health check results.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 health.health() -> {
@@ -60,9 +65,10 @@ health.health() -> {
 - `contiguousFailures` is the number of times in a row this check failed.
 - `timeOfFirstFailure` is the time this check first failed.
 
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
+More information on these measurements can be found in the documentation for the
+[go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -72,7 +78,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+**Example Response:**
 
 In this example response, the C-Chain’s health check is failing.
 

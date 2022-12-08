@@ -12,7 +12,8 @@ This API set is for a specific node, it is unavailable on the [public server](..
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
+[here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -26,13 +27,13 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adminaliaschain).)
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -45,7 +46,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -61,13 +62,13 @@ curl -X POST --data '{
 
 Get the ID of the network this node is participating in.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getNetworkID() -> {networkID:int}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -77,7 +78,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -93,13 +94,13 @@ curl -X POST --data '{
 
 Get the name of the network this node is participating in.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -109,7 +110,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -125,7 +126,7 @@ curl -X POST --data '{
 
 Get the ID of this node.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getNodeID() -> {
@@ -140,7 +141,7 @@ info.getNodeID() -> {
 - `nodeID` is this node's ID
 - `nodePOP` is this node's BLS key and proof of possession
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -150,7 +151,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -170,13 +171,13 @@ curl -X POST --data '{
 
 Get the IP of this node.
 
-#### **Signature**
+**Signature:**
 
 ```text
 info.getNodeIP() -> {ip: string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -186,7 +187,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -202,7 +203,7 @@ curl -X POST --data '{
 
 Get the version of this node.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getNodeVersion() -> {
@@ -219,10 +220,11 @@ where:
 - `version` is this node's version
 - `databaseVersion` is the version of the database this node is using
 - `gitCommit` is the Git commit that this node was built from
-- `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this node runs
+- `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this
+  node runs
 - `rpcProtocolVersion` is the RPCChainVM protocol version
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -232,7 +234,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -256,7 +258,7 @@ curl -X POST --data '{
 
 Get the virtual machines installed on this node.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getVMs() -> {
@@ -264,7 +266,7 @@ info.getVMs() -> {
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -275,7 +277,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -298,7 +300,7 @@ curl -X POST --data '{
 
 Check whether a given chain is done bootstrapping
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
@@ -306,7 +308,7 @@ info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 
 `chain` is the ID or alias of a chain.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -319,7 +321,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -335,7 +337,7 @@ curl -X POST --data '{
 
 Get a description of peer connections.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.peers({
@@ -357,7 +359,9 @@ info.peers({
 }
 ```
 
-- `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+- `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If
+  this parameter is left empty, descriptions for all active connections will be returned. If the
+  node is not connected to a specified nodeID, it will be omitted from the response.
 - `ip` is the remote IP of the peer.
 - `publicIP` is the public IP of the peer.
 - `nodeID` is the prefixed Node ID of the peer.
@@ -368,7 +372,7 @@ info.peers({
 - `observedUptime` is this node's primary network uptime, observed by the peer.
 - `observedSubnetUptime` is a map of subnet IDs to this node's subnet uptimes, observed by the peer.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -381,7 +385,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -442,7 +446,7 @@ curl -X POST --data '{
 
 Get the fees of the network.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.getTxFee() ->
@@ -471,7 +475,7 @@ info.getTxFee() ->
 
 All fees are denominated in nAVAX.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -481,7 +485,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -505,7 +509,7 @@ curl -X POST --data '{
 
 Returns the network's observed uptime of this node.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 info.uptime({
@@ -520,10 +524,11 @@ info.uptime({
 - `subnetID` is the subnet to get the uptime of. If not provided, returns the uptime of the node on
   the primary network.
 
-- `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
+- `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime
+  requirement.
 - `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -533,7 +538,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {

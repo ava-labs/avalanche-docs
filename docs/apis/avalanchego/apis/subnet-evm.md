@@ -4,23 +4,28 @@ sidebar_position: 15
 
 # Subnet-EVM API
 
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) APIs are identical to [Coreth](https://github.com/ava-labs/coreth) APIs, except Avalanche Specific APIs starting with `avax`. Subnet-EVM also supports standart Ethereum APIs as well. For more information about Coreth APIs see [here](api/../c-chain.md).
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) APIs are identical to
+[Coreth](https://github.com/ava-labs/coreth) APIs, except Avalanche Specific APIs starting with
+`avax`. Subnet-EVM also supports standart Ethereum APIs as well. For more information about Coreth
+APIs see [here](api/../c-chain.md).
 
 Subnet-EVM has some additional APIs that are not available in Coreth.
 
 ## eth_feeConfig
 
-Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
+Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this
+API to check your activated fee config.
 
-**Signature**
+**Signature:**
 
 ```sh
 eth_feeConfig([blk BlkNrOrHash]) -> {feeConfig: json}
 ```
 
-- `blk` is the block number or hash at which to retrieve the fee config. Defaults to the latest block if omitted.
+- `blk` is the block number or hash at which to retrieve the fee config. Defaults to the latest
+  block if omitted.
 
-**Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -33,7 +38,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
 ```
 
-**Example Response**
+**Example Response:**
 
 ```json
 {
@@ -57,16 +62,18 @@ curl -X POST --data '{
 
 ## eth_getChainConfig
 
-`eth_getChainConfig` returns the Chain Config of the blockchain. This API is enabled by default with `internal-blockchain` namespace.
+`eth_getChainConfig` returns the Chain Config of the blockchain. This API is enabled by default with
+`internal-blockchain` namespace.
 
-This API exists on the C-Chain as well, but in addition to the normal Chain Config returned by the C-Chain `eth_getChainConfig` on subnet-evm additionally returns the upgrade config, which specifies network upgrades activated after the genesis.
-**Signature**
+This API exists on the C-Chain as well, but in addition to the normal Chain Config returned by the
+C-Chain `eth_getChainConfig` on subnet-evm additionally returns the upgrade config, which specifies
+network upgrades activated after the genesis. **Signature:**
 
 ```sh
 eth_getChainConfig({}) -> {chainConfig: json}
 ```
 
-**Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -77,7 +84,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
 ```
 
-**Example Response**
+**Example Response:**
 
 ```json
 {
@@ -142,17 +149,20 @@ curl -X POST --data '{
 
 ## eth_getActivatePrecompilesAt
 
-`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp. This API is enabled by default with `internal-blockchain` namespace.
+`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no
+timestamp is provided it returns the latest block timestamp. This API is enabled by default with
+`internal-blockchain` namespace.
 
-**Signature**
+**Signature:**
 
 ```sh
 eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
 ```
 
-- `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it shows precompiles activated at the latest block timestamp.
+- `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it
+  shows precompiles activated at the latest block timestamp.
 
-**Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -163,7 +173,7 @@ curl -X POST --data '{
 }'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
 ```
 
-**Example Response**
+**Example Response:**
 
 ```json
 {
