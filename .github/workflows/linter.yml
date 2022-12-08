@@ -50,4 +50,4 @@ jobs:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_MARKDOWN: true
-          DEFAULT_WORKSPACE: /
+          MARKDOWN_CONFIG_FILE: .markdownlint.json
