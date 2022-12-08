@@ -5,13 +5,17 @@ description: The IPC API allows users to create UNIX domain sockets for blockcha
 
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the
+blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside
+will be published to another.
 
-A node will only expose this API if it is started with [config flag](../../../nodes/maintain/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
+A node will only expose this API if it is started with [config
+flag](../../../nodes/maintain/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+This API set is for a specific node, it is unavailable on the [public
+server](../public-api-server.md).
 
 :::
 
@@ -30,7 +34,9 @@ Writes to the socket:
 
 ## IPC Socket URL Format
 
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
+The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>`
+is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while
+the decisions socket recives individual transactions.
 
 ## Format
 
@@ -46,7 +52,7 @@ This API uses the `json 2.0` RPC format.
 
 Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
@@ -56,7 +62,7 @@ ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisio
 - `consensusURL` is the path of the Unix domain socket the vertices are published to.
 - `decisionsURL` is the path of the Unix domain socket the transactions are published to.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -69,7 +75,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -86,7 +92,7 @@ curl -X POST --data '{
 
 Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 ipcs.unpublishBlockchain({blockchainID: string}) -> {}
@@ -94,7 +100,7 @@ ipcs.unpublishBlockchain({blockchainID: string}) -> {}
 
 - `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -107,7 +113,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {

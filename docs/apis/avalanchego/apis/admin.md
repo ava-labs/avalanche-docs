@@ -7,7 +7,8 @@ sidebar_position: 7
 This API can be used for measuring node health and debugging.
 
 :::info
-The Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [config flag `--api-admin-enabled=true`](../../../nodes/maintain/avalanchego-config-flags.md#--api-admin-enabled-boolean).
+The Admin API is disabled by default for security reasons. To run a node with the Admin API
+enabled, use [config flag `--api-admin-enabled=true`](../../../nodes/maintain/avalanchego-config-flags.md#--api-admin-enabled-boolean).
 
 This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
 
@@ -27,19 +28,21 @@ This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-cal
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still
+work. This change only affects this node; other nodes will not know about this alias.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {}
 ```
 
-- `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
+- `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the
+  endpoint after `/ext/`.
 - The API being aliased can now be called at `ext/alias`.
 - `alias` can be at most 512 characters.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -53,7 +56,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -69,7 +72,7 @@ Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to
 
 Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.aliasChain(
@@ -83,7 +86,7 @@ admin.aliasChain(
 - `chain` is the blockchain’s ID.
 - `alias` can now be used in place of the blockchain’s ID (in API endpoints, for example.)
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -97,7 +100,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -107,13 +110,16 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+Now, instead of interacting with the blockchain whose ID is
+`sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to
+`/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to
+`ext/bc/myBlockchainAlias`.
 
 ### admin.getChainAliases
 
 Returns the aliases of the chain
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.getChainAliases(
@@ -125,7 +131,7 @@ admin.getChainAliases(
 
 - `chain` is the blockchain’s ID.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -138,7 +144,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -158,7 +164,7 @@ curl -X POST --data '{
 
 Returns log and display levels of loggers.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.getLoggerLevel(
@@ -175,9 +181,10 @@ admin.getLoggerLevel(
     }
 ```
 
-- `loggerName` is the name of the logger to be returned. This is an optional argument. If not specified, it returns all possible loggers.
+- `loggerName` is the name of the logger to be returned. This is an optional argument. If not
+  specified, it returns all possible loggers.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -190,7 +197,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -209,9 +216,11 @@ curl -X POST --data '{
 
 ### admin.loadVMs
 
-Dynamically loads any virtual machines installed on the node as plugins. See [here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a virtual machine on a node.
+Dynamically loads any virtual machines installed on the node as plugins. See
+[here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a
+virtual machine on a node.
 
-#### Signature
+**Signature:**
 
 ```sh
 admin.loadVMs() -> {
@@ -222,7 +231,7 @@ admin.loadVMs() -> {
 
 - `failedVMs` is only included in the response if at least one virtual machine fails to be loaded.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -233,7 +242,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -254,13 +263,13 @@ curl -X POST --data '{
 
 Writes a profile of mutex statistics to `lock.profile`.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.lockProfile() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -271,7 +280,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -285,13 +294,13 @@ curl -X POST --data '{
 
 Writes a memory profile of the to `mem.profile`.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.memoryProfile() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -302,7 +311,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -316,7 +325,7 @@ curl -X POST --data '{
 
 Sets log and display levels of loggers.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.setLoggerLevel(
@@ -328,13 +337,14 @@ admin.setLoggerLevel(
 ) -> {}
 ```
 
-- `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
+- `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified,
+  it changes all possible loggers.
 - `logLevel` is the log level of written logs, can be omitted.
 - `displayLevel` is the log level of displayed logs, can be omitted.
 
 `logLevel` and `displayLevel` cannot be omited at the same time.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -349,7 +359,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -361,15 +371,16 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop,
+writes the profile to `cpu.profile`.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.startCPUProfiler() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -380,7 +391,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -394,13 +405,13 @@ curl -X POST --data '{
 
 Stop the CPU profile that was previously started.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.stopCPUProfiler() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -410,7 +421,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
