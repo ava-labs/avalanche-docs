@@ -352,6 +352,7 @@ info.peers({
         lastReceived: string,
         benched: string[],
         observedUptime: int,
+        observedSubnetUptime: map[string]int,
     }
 }
 ```
@@ -364,7 +365,8 @@ info.peers({
 - `lastSent` is the timestamp of last message sent to the peer.
 - `lastReceived` is the timestamp of last message received from the peer.
 - `benched` shows chain IDs that the peer is being benched.
-- `observedUptime` is the uptime of this node observed by the peer.
+- `observedUptime` is this node's primary network uptime, observed by the peer.
+- `observedSubnetUptime` is a map of subnet IDs to this node's subnet uptimes, observed by the peer.
 
 #### **Example Call**
 
@@ -392,31 +394,44 @@ curl -X POST --data '{
         "ip": "206.189.137.87:9651",
         "publicIP": "206.189.137.87:9651",
         "nodeID": "NodeID-8PYXX47kqLDe2wD4oPbvRRchcnSzMA4J4",
-        "version": "avalanche/0.5.0",
+        "version": "avalanche/1.9.4",
         "lastSent": "2020-06-01T15:23:02Z",
         "lastReceived": "2020-06-01T15:22:57Z",
         "benched": [],
-        "observedUptime": "99"
+        "observedUptime": "99",
+        "observedSubnetUptimes": {},
+        "trackedSubnets": [],
+        "benched": []
       },
       {
         "ip": "158.255.67.151:9651",
         "publicIP": "158.255.67.151:9651",
         "nodeID": "NodeID-C14fr1n8EYNKyDfYixJ3rxSAVqTY3a8BP",
-        "version": "avalanche/0.5.0",
+        "version": "avalanche/1.9.4",
         "lastSent": "2020-06-01T15:23:02Z",
         "lastReceived": "2020-06-01T15:22:34Z",
         "benched": [],
-        "observedUptime": "75"
+        "observedUptime": "75",
+        "observedSubnetUptimes": {
+          "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL": "100"
+        },
+        "trackedSubnets": [
+          "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL"
+        ],
+        "benched": []
       },
       {
         "ip": "83.42.13.44:9651",
         "publicIP": "83.42.13.44:9651",
         "nodeID": "NodeID-LPbcSMGJ4yocxYxvS2kBJ6umWeeFbctYZ",
-        "version": "avalanche/0.5.0",
+        "version": "avalanche/1.9.3",
         "lastSent": "2020-06-01T15:23:02Z",
         "lastReceived": "2020-06-01T15:22:55Z",
         "benched": [],
-        "observedUptime": "95"
+        "observedUptime": "95",
+        "observedSubnetUptimes": {},
+        "trackedSubnets": [],
+        "benched": []
       }
     ]
   }
@@ -493,12 +508,17 @@ Returns the network's observed uptime of this node.
 #### **Signature**
 
 ```sh
-info.uptime() ->
+info.uptime({
+    subnetID: string // optional
+}) ->
 {
     rewardingStakePercentage: float64,
     weightedAveragePercentage: float64
 }
 ```
+
+- `subnetID` is the subnet to get the uptime of. If not provided, returns the uptime of the node on
+  the primary network.
 
 - `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
 - `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
@@ -522,6 +542,32 @@ curl -X POST --data '{
   "result": {
     "rewardingStakePercentage": "100.0000",
     "weightedAveragePercentage": "99.0000"
+  }
+}
+```
+
+#### **Example Subnet Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.uptime",
+    "params" :{
+        "subnetID":"29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+#### **Example Subnet Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "rewardingStakePercentage": "74.0741",
+    "weightedAveragePercentage": "72.4074"
   }
 }
 ```

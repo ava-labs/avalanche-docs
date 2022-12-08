@@ -1021,7 +1021,7 @@ platform.getCurrentValidators({
   - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS Subnet.
   - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
   - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
-  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
+  - `uptime` is the % of time the queried node has reported the peer as online and validating the Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
   - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
@@ -1243,7 +1243,7 @@ platform.getPendingValidators({
         nodeID: string,
         delegationFee: string,
         connected: bool,
-        signer: { 
+        signer: {
             publicKey: string,
             proofOfPosession: string
         },
@@ -1268,7 +1268,7 @@ platform.getPendingValidators({
   - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
-  -  `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
+  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
   - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
