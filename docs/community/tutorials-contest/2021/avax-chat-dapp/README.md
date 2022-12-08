@@ -88,9 +88,9 @@ Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 
 ![MetaMask](./images/avax-chat-app-metamask.png)
 
-**FUJI Testnet Settings:**
+**Fuji Testnet Settings:**
 
-* **Network Name**: Avalanche FUJI C-Chain
+* **Network Name**: Avalanche Fuji C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `C-AVAX`

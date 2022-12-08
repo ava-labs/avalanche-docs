@@ -1,6 +1,6 @@
 # How to Mint Your Own ERC721 on Avalanche Using Open Zeppelin
 
-This tutorial teaches you to deploy your own ERC721 token on Avalanche FUJI C-chain testnet.
+This tutorial teaches you to deploy your own ERC721 token on Avalanche Fuji C-chain testnet.
 
 The steps to deploy on the mainnet are identical and the differences are mentioned in the tutorial.
 
@@ -13,7 +13,7 @@ The steps to deploy on the mainnet are identical and the differences are mention
   storage.](#getting-metadata-ready-to-be-uploaded-to-decentralized-storage)
   (IPFS in this tutorial)
 * [Writing code in Remix IDE](#writing-code-in-remix-ide)
-* [Compiling and Deploying to Avalanche FUJI C-Chain
+* [Compiling and Deploying to Avalanche Fuji C-Chain
   Testnet.](#compiling-and-deploying-to-avalanche-fuji-c-chain-testnet)
 * [Check the NFT on the explorer.](#check-the-nft-on-the-explorer)
 
@@ -187,7 +187,7 @@ I have attached the code for the NFT in the same repository.
           collection to withdraw the funds deposited by the NFT minters. 🤑
 
 
-### Compiling and Deploying to Avalanche FUJI C-Chain Testnet
+### Compiling and Deploying to Avalanche Fuji C-Chain Testnet
 
 Let's now compile the code to check if there are any errors. To compile the
 shortcut is Ctrl / Command + S or click the icon shown in the image below.
@@ -198,7 +198,7 @@ Make sure you have the correct compiler selected from the dropdown and click the
 
 ![compile-nft](images/minting-erc721-14-compile-nft.png)
 
-Once compiled we can now deploy the contract to the Avalanche FUJI C-Chain
+Once compiled we can now deploy the contract to the Avalanche Fuji C-Chain
 testnet. *The steps to deploy on the mainnet are the same.*
 
 Click the deploy button as shown in the image below.

@@ -198,7 +198,7 @@ the transactions on the network. So, visit [here](https://wallet.avax.network)
 and create an account. Save the mnemonic in a secure place (we would need it
 later). Instructions to add funds will be provided later in the tutorial.
 
-### **Add .env file**
+### **Add .env File**
 
 Now we need an **Avalanche** wallet, where we would keep our funds, required for
 all the transactions on the network. Visit the [Avalanche

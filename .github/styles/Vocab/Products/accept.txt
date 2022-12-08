@@ -103,7 +103,9 @@ Golang
 gwei
 Gwei
 Harpalsinh
+hdwallet
 HDWallet
+i.e.
 incentivized
 Infura
 ipfs
@@ -242,6 +244,7 @@ Vulr
 WAGMI
 Walkthrough
 web
+Web
 webapp
 Webapp
 Webpack
