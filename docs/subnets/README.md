@@ -10,7 +10,7 @@ By definition, all Subnet validators must also validate the Avalanche Primary Ne
 
 (Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
-Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Consensus.
+Subnets are independent, they specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security. They don’t share execution thread, storage[^1] or networking with other Subnets including the Primary Network, effectively allowing the network to scale up easily while enabling lower latency, higher transactions per second (TPS), and lower transaction costs provided by the Avalanche Consensus.
 
 ## Advantages
 
@@ -46,7 +46,7 @@ In a heterogeneous network of blockchains, some validators will not want to vali
 
 ## Validators
 
-Avalanche validators are incentivized by Subnet owners to validator their Subnet. The incentive can be customized by each Subnet. Validators needs to take consideration of security and resource concerns before joining a Subnet.
+Incentives are provided by Subnet owners in order to attract Avalanche validators to validate their Subnet, and this incentive can be customized by the Subnet. Validators must also take security and resource concerns into consideration when deciding whether to validate a given Subnet.
 
 ## Virtual Machines
 
@@ -54,7 +54,7 @@ A **Virtual Machine** (VM) defines the application-level logic of a blockchain. 
 
 When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same rule-set but is logically independent of other blockchains.
 
 ### Why Virtual Machines?
 
@@ -69,3 +69,5 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 ## Developing Your Own Subnet
 
 Please check out documents listed on the left panel to develop your own Subnets with customized virtual machines and blockchains.
+
+[^1]: Subnets do not share storage in logical level (keys/values) with other Subnets, but they share storage on disk level (LevelDB) and store their data into same database/folder in operating system.

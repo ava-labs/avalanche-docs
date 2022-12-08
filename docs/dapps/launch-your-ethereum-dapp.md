@@ -132,13 +132,13 @@ There is a [tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalan
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](../dapps/smart-contracts/using-truffle-with-the-avalanche-c-chain.md).
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](../dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md).
 
 ### Hardhat
 
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-For more information see [this doc](../dapps/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md).
+For more information see [this doc](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md).
 
 ## Avalanche Explorer
 
@@ -161,7 +161,7 @@ Smart contract verification provides transparency for users interacting with sma
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
-See [this](../dapps/smart-contracts/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Sourcify and Truffle.
+See [this](../dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify.md) for a detailed tutorial with Truffle.
 
 ## Contract Security Checks
 

@@ -20,3 +20,19 @@ jobs:
           node-version: ${{ env.node_version }}
       - run: yarn install --frozen-lockfile
       - run: yarn build
+
+  vale:
+    name: runner/vale
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: errata-ai/vale-action@reviewdog
+        with:
+          files: '["docs/overview","docs/subnets", "README.md", "style-checker-notes.md", "style-guide.md"]'
+          fail_on_error: true
+          reporter: github-pr-check
+          vale_flags: "--minAlertLevel=error"
+        env:
+          # Required, set by GitHub actions automatically:
+          # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

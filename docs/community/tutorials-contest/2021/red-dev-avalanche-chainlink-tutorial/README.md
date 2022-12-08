@@ -204,7 +204,7 @@ DATABASE_URL=postgresql://$USERNAME:$PASSWORD@$HOST:5432/chainlink?sslmode=disab
 Create a .api file to expose credentials for the API and GUI interfaces:
 ```
 $ echo "youremailaddress@yourcompany.com
-$PASSWORD" > ~/.chainlink-avalanche/.env
+$PASSWORD" > ~/.chainlink-avalanche/.api
 ```
 
 Create a .password file for wallet password:
