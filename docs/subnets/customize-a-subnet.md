@@ -683,7 +683,7 @@ In addition to the `AllowList` interface, the `RewardManager` adds the following
 - `disableRewards` - disables block rewards and starts burning fees.
 
 - `currentRewardAddress` - returns the current reward address. This is the address to which fees are
-  sent. It can include blackhole address (`0x010...0`) which means that fees are burned. It can also
+  sent. It can include black hole address (`0x010...0`) which means that fees are burned. It can also
   include a predefined hash (`0x0000000000000000000000000000000000000000`) denoting custom fee
   recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if
   custom fee recipients are allowed first.

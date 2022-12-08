@@ -16,7 +16,6 @@ Avalanche-CLI
 AvalancheGo
 Avascan
 AVAX
-blackhole
 blockchain
 Blockchain
 blockchains
