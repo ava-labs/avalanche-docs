@@ -126,6 +126,7 @@ Ofem
 OK
 onboarding
 O'Reilly
+Pangolin's
 parameterizable
 parameterization
 performant
@@ -176,6 +177,7 @@ subsampling
 Subsampling
 subtree
 superset
+Swapper's
 testnet
 Testnet
 textlint
@@ -183,6 +185,7 @@ Trufflesuite
 TXs
 typechain
 TypeChain
+typings
 UIs
 Unix
 untrusted
@@ -200,4 +203,5 @@ webapp
 Webpack
 wei
 Wei
+Whitepapers
 yargs
