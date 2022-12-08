@@ -522,7 +522,7 @@ In order to activate this feature, you will need to provide the `FeeConfigManage
 }
 ```
 
-The precompile implements the `FeeManager` interface which includes the same AllowList interface used by ContractNativeMinter, TxAllowList, etc. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `FeeManager` interface which includes the same `AllowList` interface used by ContractNativeMinter, TxAllowList, etc. For an example of the `AllowList` interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix). It can be also found in [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IFeeManager.sol):
 
@@ -566,7 +566,7 @@ interface IFeeManager is IAllowList {
 
 FeeConfigManager precompile uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
 
-In addition to the AllowList interface, the FeeConfigManager adds the following capabilities:
+In addition to the `AllowList` interface, the FeeConfigManager adds the following capabilities:
 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
@@ -606,7 +606,7 @@ information about precompile initial configurations see [Initial Precompile Conf
 
 ### Changing Fee Reward Mechanisms
 
-Fee reward mechanism can be configured with this stateful precompile contract called as `FeeRewardManager`. Configuration can include burning fees, sending fees to a predefined address, or enabling fees to be collected by block producers. This precompile can be configured as follows in the genesis file:
+Fee reward mechanism can be configured with this stateful precompile contract called as `RewardManager`. Configuration can include burning fees, sending fees to a predefined address, or enabling fees to be collected by block producers. This precompile can be configured as follows in the genesis file:
 
 ```json
 {
@@ -621,7 +621,7 @@ Fee reward mechanism can be configured with this stateful precompile contract ca
 
 `adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and `Enabled` are both eligible to change the current fee mechanism.
 
-The precompile implements the `RewardManager` interface which includes the `AllowList` interface. For an example of the AllowList interface, see the [TxAllowList](#allowlist-interface) above.
+The precompile implements the `RewardManager` interface which includes the `AllowList` interface. For an example of the `AllowList` interface, see the [TxAllowList](#allowlist-interface) above.
 
 The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact directly in Remix). It can be also found in [IRewardManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IRewardManager.sol):
 
@@ -648,9 +648,9 @@ interface IRewardManager is IAllowList {
 }
 ```
 
-RewardManager precompile uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
+`RewardManager` precompile uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
 
-In addition to the AllowList interface, the RewardManager adds the following capabilities:
+In addition to the `AllowList` interface, the `RewardManager` adds the following capabilities:
 
 - `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a user address. The address becomes the required coinbase address for the blocks that this mechanism is enabled on. Meaning that it will receive the fees collected from the transactions in the block. Receiving fees will not call any contract functions or fallback functions. It will simply send the fees to the address.
 
@@ -977,7 +977,7 @@ validators per second. You can override these defaults with the following config
 
 ### Fee Recipient
 
-This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [FeeRewardManager precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
+This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [RewardManager precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
 
 With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
 
@@ -989,6 +989,6 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 
 :::warning
 
-If `allowFeeRecipients` or FeeRewardManager precompile is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
