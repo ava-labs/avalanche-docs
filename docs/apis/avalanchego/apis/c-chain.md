@@ -84,7 +84,8 @@ services:
 - `txpool_`
 - `debug_` (note: this is turned off on the public api node.)
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API)
+You can interact with these services the same exact way you’d interact with Geth. See the
+[Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API)
 and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server)
 for a full description of this API.
 
