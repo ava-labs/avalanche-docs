@@ -4,7 +4,10 @@ sidebar_position: 3
 
 # Platform Chain (P-Chain) API
 
-This API allows clients to interact with the [P-Chain](../../../overview/getting-started/avalanche-platform.md#platform-chain-p-chain), which maintains Avalanche’s [validator](../../../nodes/validate/staking.md#validators) set and handles blockchain creation.
+This API allows clients to interact with the
+[P-Chain](../../../overview/getting-started/avalanche-platform.md#platform-chain-p-chain), which
+maintains Avalanche’s [validator](../../../nodes/validate/staking.md#validators) set and handles
+blockchain creation.
 
 ## Endpoint
 
@@ -26,19 +29,26 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Add a delegator to the Primary Network.
 
-A delegator stakes AVAX and specifies a validator (the delegatee) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators (weight) in proportion to the stake delegated to them.
+A delegator stakes AVAX and specifies a validator (the delegatee) to validate on their behalf. The
+delegatee has an increased probability of being sampled by other validators (weight) in proportion
+to the stake delegated to them.
 
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward (if any.) A transaction that delegates stake has no fee.
+The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s
+validation reward (if any.) A transaction that delegates stake has no fee.
 
-The delegation period must be a subset of the period that the delegatee validates the Primary Network.
+The delegation period must be a subset of the period that the delegatee validates the Primary
+Network.
 
 :::info
 
-Once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to us on [Discord.](https://chat.avalabs.org/)
+Once you issue the transaction to add a node as a delegator, there is no way to change the
+parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward
+address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to
+us on [Discord.](https://chat.avalabs.org/)
 
 :::
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.addDelegator(
@@ -65,13 +75,15 @@ platform.addDelegator(
 - `endTime` is the Unix time when the delegator stops delegating (and staked AVAX is returned).
 - `stakeAmount` is the amount of nAVAX the delegator is staking.
 - `rewardAddress` is the address the validator reward goes to, if there is one.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
 - `password` is `username`‘s password.
 - `txID` is the transaction ID
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -92,7 +104,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -111,19 +123,31 @@ curl -X POST --data '{
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
+Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently
+correct and responsive while validating, you receive a reward when end of staking period is reached.
+The validator’s probability of being sampled by other validators during consensus is in proportion
+to the amount of AVAX staked.
 
-The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward (if any.) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+The validator charges a fee to delegators; the former receives a percentage of the delegator’s
+validation reward (if any.) The minimum delegation fee is 2%. A transaction that adds a validator
+has no fee.
 
-The validation period must be between 2 weeks and 1 year for the Mainnet, and 24 hours and 1 year for Fuji Testnet.
+The validation period must be between 2 weeks and 1 year for the Mainnet, and 24 hours and 1 year
+for Fuji Testnet.
 
-There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
+There is a maximum total weight imposed on validators. This means that no validator will ever have
+more AVAX staked and delegated to it than this value.
+This value will initially be set to `min(5 * amount staked, 3M AVAX)`.
+The total value on a validator is 3 million AVAX.
 
-:::info
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to us on [Discord.](https://chat.avalabs.org/)
+:::
+Note that once you issue the transaction to add a node as a validator, there is no way to
+change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward
+address.** Please make sure you’re using the correct values. If you’re not sure, please reach out to
+us on [Discord.](https://chat.avalabs.org/)
 :::
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.addValidator(
@@ -148,19 +172,28 @@ platform.addValidator(
 
 - `nodeID` is the node ID of the validator being added.
 - `startTime` is the Unix time when the validator starts validating the Primary Network.
-- `endTime` is the Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
+- `endTime` is the Unix time when the validator stops validating the Primary Network (and staked
+  AVAX is returned).
 - `stakeAmount` is the amount of nAVAX the validator is staking.
 - `rewardAddress` is the address the validator reward will go to, if there is one.
-- `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
+  Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100,
+  inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this
+  validator, then when the delegation period is over, 1.2345% of the reward goes to the validator
+  and the rest goes to the delegator.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
 - `password` is `username`‘s password.
 - `txID` is the transaction ID
 
-#### **Example Call**
+**Example Call:**
 
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.)
+In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the
+future. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate`
+installed, do `brew install coreutils`.)
 
 ```sh
 curl -X POST --data '{
@@ -182,7 +215,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -197,13 +230,14 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+warning Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this Subnet.
+Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary
+Network for the entire duration they validate this Subnet.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.addSubnetValidator(
@@ -225,18 +259,29 @@ platform.addSubnetValidator(
 }
 ```
 
-- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate the Primary Network for the entire duration that it validates this Subnet.
+- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate
+  the Primary Network for the entire duration that it validates this Subnet.
 - `subnetID` is the ID of the Subnet we’re adding a validator to.
-- `startTime` is the unix time when the validator starts validating the Subnet. It must be at or after the time that the validator starts validating the Primary Network
-- `endTime` is the unix time when the validator stops validating the Subnet. It must be at or before the time that the validator stops validating the Primary Network.
-- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the cumulative weight of all validators in the Subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
-- `from` are the fund addresses that the user wants to use to pay for this operation. If omitted, use any of user's addresses as needed.
-- `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses) will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the user.
+- `startTime` is the unix time when the validator starts validating the Subnet. It must be at or
+  after the time that the validator starts validating the Primary Network
+- `endTime` is the unix time when the validator stops validating the Subnet. It must be at or before
+  the time that the validator stops validating the Primary Network.
+- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the
+  cumulative weight of all validators in the Subnet is 100, then this validator will be included in
+  about 1 in every 100 samples during consensus. The cumulative weight of all validators in the
+  Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the
+  Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's
+  weight can't be changed while it is validating, so take care to use an appropriate value.
+- `from` are the fund addresses that the user wants to use to pay for this operation. If omitted,
+  use any of user's addresses as needed.
+- `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses)
+  will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the
+  user.
 - `username` is the user that pays the transaction fee.
 - `password` is `username`‘s password.
 - `txID` is the transaction ID.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -257,7 +302,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -278,7 +323,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Create a new address controlled by the given user.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.createAddress({
@@ -287,7 +332,7 @@ platform.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -301,7 +346,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -319,9 +364,10 @@ curl -X POST --data '{
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
+Create a new blockchain. Currently only supports the creation of new instances of the AVM and the
+Timestamp VM.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.createBlockchain(
@@ -343,20 +389,29 @@ platform.createBlockchain(
 }
 ```
 
-- `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and can’t be the Primary Network.
-- `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
+- `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and
+  can’t be the Primary Network.
+- `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual
+  Machine.
 - `name` is a human-readable name for the new blockchain. Not necessarily unique.
-- `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-- `encoding` specifies the format to use for `genesisData`. Can only be `hex` when a value is provided. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-- `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
+- `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the
+  format specified by the `encoding` parameter.
+- `encoding` specifies the format to use for `genesisData`. Can only be `hex` when a value is
+  provided. Virtual Machines should have a static API method named `buildGenesis` that can be used
+  to generate `genesisData`
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- `username` is the user that pays the transaction fee. This user must have a sufficient number of
+  the subnet’s control keys.
 - `password` is `username`‘s password.
 - `txID` is the transaction ID.
 
-#### **Example Call**
+**Example Call:**
 
-In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
+In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came
+from calling `timestamp.buildGenesis`.
 
 ```sh
 curl -X POST --data '{
@@ -377,7 +432,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -400,7 +455,7 @@ Create a new Subnet.
 
 The Subnet’s ID is the same as this transaction’s ID.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.createSubnet(
@@ -419,13 +474,16 @@ platform.createSubnet(
 }
 ```
 
-- In order to add a validator to this Subnet, `threshold` signatures are required from the addresses in `controlKeys`
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- In order to add a validator to this Subnet, `threshold` signatures are required from the addresses
+  in `controlKeys`
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` is the user that pays the transaction fee.
 - `password` is `username`‘s password.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -446,7 +504,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -460,9 +518,11 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this transaction, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or C-Chain's [`avax.import`](c-chain.md#avaximport) with assetID `AVAX` to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this
+transaction, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or C-Chain's
+[`avax.import`](c-chain.md#avaximport) with assetID `AVAX` to complete the transfer.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.exportAVAX(
@@ -483,13 +543,15 @@ platform.exportAVAX(
 
 - `amount` is the amount of nAVAX to send.
 - `to` is the address on the X-Chain or C-Chain to send the AVAX to.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` is the user sending the AVAX and paying the transaction fee.
 - `password` is `username`‘s password.
 - `txID` is the ID of this transaction.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -507,7 +569,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -526,10 +588,10 @@ curl -X POST --data '{
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Get the private key that controls a given address.
-The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platformimportkey).
+Get the private key that controls a given address. The returned private key can be added to a user
+with [`platform.importKey`](p-chain.md#platformimportkey).
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.exportKey({
@@ -543,7 +605,7 @@ platform.exportKey({
 - `password` is `username`‘s password.
 - `privateKey` is the string representation of the private key that controls `address`.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -558,7 +620,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -574,7 +636,7 @@ curl -X POST --data '{
 
 Get the balance of AVAX controlled by a given address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getBalance({
@@ -598,7 +660,7 @@ platform.getBalance({
 - `lockedNotStakeables` is a map from assetID to the locked and not stakeable balance.
 - `utxoIDs` are the IDs of the UTXOs that reference `address`.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -611,7 +673,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -648,7 +710,7 @@ curl -X POST --data '{
 
 Get a block by its ID.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getBlock({
@@ -660,19 +722,19 @@ platform.getBlock({
 }
 ```
 
-**Request**
+**Request:**
 
 - `blockID` is the block ID. It should be in cb58 format.
 - `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
-**Response**
+**Response:**
 
 - `block` is the transaction encoded to `encoding`.
 - `encoding` is the `encoding`.
 
 #### Hex Example
 
-##### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -686,7 +748,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-##### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -701,7 +763,7 @@ curl -X POST --data '{
 
 #### JSON Example
 
-##### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -715,7 +777,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-##### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -781,7 +843,7 @@ curl -X POST --data '{
 
 Get all the blockchains that exist (excluding the P-Chain).
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getBlockchains() ->
@@ -801,7 +863,7 @@ platform.getBlockchains() ->
 - `subnetID` is the ID of the Subnet that validates this blockchain.
 - `vmID` is the ID of the Virtual Machine the blockchain runs.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -812,7 +874,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -871,7 +933,7 @@ curl -X POST --data '{
 
 Get the status of a blockchain.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getBlockchainStatus(
@@ -885,11 +947,13 @@ platform.getBlockchainStatus(
 
 - `Validating`: The blockchain is being validated by this node.
 - `Created`: The blockchain exists but isn’t being validated by this node.
-- `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
+- `Preferred`: The blockchain was proposed to be created and is likely to be created but the
+  transaction isn’t yet accepted.
 - `Syncing`: This node is participating in this blockchain as a non-validating node.
-- `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
+- `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The
+  proposal may be resubmitted.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -902,7 +966,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -916,9 +980,10 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is
+an upper bound because it does not account for burnt tokens, including transaction fees.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getCurrentSupply({
@@ -928,7 +993,7 @@ platform.getCurrentSupply({
 
 - `supply` is an upper bound on the number of tokens that exist.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -941,7 +1006,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -959,7 +1024,7 @@ The response in this example indicates that AVAX’s supply is at most 365.865 m
 
 List the current validators of the given Subnet.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getCurrentValidators({
@@ -1008,32 +1073,47 @@ platform.getCurrentValidators({
 }
 ```
 
-- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-- `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
+  validators of the Primary Network.
+- `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current
+  validators are returned. If a specified nodeID is not in the set of current validators, it will
+  not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS
+    Subnet.
   - `nodeID` is the validator’s node ID.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
-  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
-  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`. Specifies the owner of the potential reward earned from delegations. Omitted if `subnetID` is not a PoS Subnet.
-  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a PoS Subnet.
-  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Omitted if `subnetID` is not a PoS Subnet.
-  - `uptime` is the % of time the queried node has reported the peer as online. Omitted if `subnetID` is not a PoS Subnet.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS
+    Subnet.
+  - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and
+    array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted
+    if `subnetID` is not a PoS Subnet.
+  - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and
+    array of `addresses`. Specifies the owner of the potential reward earned from delegations.
+    Omitted if `subnetID` is not a PoS Subnet.
+  - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a
+    PoS Subnet.
+  - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to
+    them. Omitted if `subnetID` is not a PoS Subnet.
+  - `uptime` is the % of time the queried node has reported the peer as online and validating the
+    Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
-  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
-  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS Subnet.
+  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
+    have a BLS public key.
+  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS
+    Subnet.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
     - `endTime` is the Unix time when the delegator stops.
     - `stakeAmount` is the amount of nAVAX this delegator staked.
     - `nodeID` is the validating node’s node ID.
-    - `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
+    - `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of
+      `addresses`.
     - `potentialReward` is the potential reward earned from staking
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1044,7 +1124,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1097,7 +1177,7 @@ curl -X POST --data '{
 
 Returns the height of the last accepted block.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getHeight() ->
@@ -1106,7 +1186,7 @@ platform.getHeight() ->
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1117,7 +1197,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1133,7 +1213,7 @@ curl -X POST --data '{
 
 Returns the maximum amount of nAVAX staking to the named node during a particular time period.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getMaxStakeAmount(
@@ -1150,11 +1230,14 @@ platform.getMaxStakeAmount(
 ```
 
 - `subnetID` is a Buffer or cb58 string representing Subnet
-- `nodeID` is a string representing ID of the node whose stake amount is required during the given duration
-- `startTime` is a big number denoting start time of the duration during which stake amount of the node is required.
-- `endTime` is a big number denoting end time of the duration during which stake amount of the node is required.
+- `nodeID` is a string representing ID of the node whose stake amount is required during the given
+  duration
+- `startTime` is a big number denoting start time of the duration during which stake amount of the
+  node is required.
+- `endTime` is a big number denoting end time of the duration during which stake amount of the node
+  is required.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1170,7 +1253,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1184,9 +1267,10 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of tokens that can be delegated.
+Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of
+tokens that can be delegated.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getMinStake({
@@ -1198,7 +1282,7 @@ platform.getMinStake({
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1211,7 +1295,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1226,9 +1310,10 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
+List the validators in the pending validator set of the specified Subnet. Each validator is not
+currently validating the Subnet but will in the future.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getPendingValidators({
@@ -1243,7 +1328,7 @@ platform.getPendingValidators({
         nodeID: string,
         delegationFee: string,
         connected: bool,
-        signer: { 
+        signer: {
             publicKey: string,
             proofOfPosession: string
         },
@@ -1259,17 +1344,23 @@ platform.getPendingValidators({
 }
 ```
 
-- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-- `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
+- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
+  validators of the Primary Network.
+- `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending
+  validators are returned. If a specified nodeID is not in the set of pending validators, it will
+  not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
   - `startTime` is the Unix time when the validator starts validating the Subnet.
   - `endTime` is the Unix time when the validator stops validating the Subnet.
-  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS Subnet.
+  - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS
+    Subnet.
   - `nodeID` is the validator’s node ID.
   - `connected` if the node is connected and tracks the Subnet.
-  -  `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't have a BLS public key.
-  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS Subnet.
+  - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
+    have a BLS public key.
+  - `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is a PoS
+    Subnet.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
@@ -1277,7 +1368,7 @@ platform.getPendingValidators({
   - `stakeAmount` is the amount of tokens this delegator staked.
   - `nodeID` is the validating node’s node ID.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1288,7 +1379,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1321,9 +1412,10 @@ curl -X POST --data '{
 
 ### platform.getRewardUTXOs
 
-Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period ended.
+Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period
+ended.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getRewardUTXOs({
@@ -1339,9 +1431,10 @@ platform.getRewardUTXOs({
 - `txID` is the ID of the staking or delegating transaction
 - `numFetched` is the number of returned UTXOs
 - `utxos` is an array of encoded reward UTXOs
-- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is
+  provided.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1354,7 +1447,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1375,7 +1468,7 @@ curl -X POST --data '{
 
 Retrieve an assetID for a subnet’s staking asset.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getStakingAssetID({
@@ -1388,7 +1481,7 @@ platform.getStakingAssetID({
 - `subnetID` is the Subnet whose assetID is requested.
 - `assetID` is the assetID for a subnet’s staking asset.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1401,7 +1494,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1417,7 +1510,7 @@ curl -X POST --data '{
 
 Get info about the Subnets.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getSubnets({
@@ -1432,13 +1525,17 @@ platform.getSubnets({
 }
 ```
 
-- `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all Subnets.
+- `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all
+  Subnets.
 - `id` is the Subnet’s ID.
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be empty.
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the
+  Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be
+  empty.
 
-See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a Subnet.
+See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a
+Subnet.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1449,7 +1546,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1472,9 +1569,10 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
+Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking
+rewards.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getStake({
@@ -1492,7 +1590,7 @@ platform.getStake({
 - `stakedOutputs` are the string representation of staked outputs.
 - `encoding` specifies the format for the returned outputs.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1508,7 +1606,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1530,13 +1628,13 @@ curl -X POST --data '{
 
 Get the current P-Chain timestamp.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getTimestamp() -> {time: string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1548,7 +1646,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1564,7 +1662,7 @@ curl -X POST --data '{
 
 Get the total amount of tokens staked on the requested Subnet.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getTotalStake({
@@ -1577,7 +1675,7 @@ platform.getTotalStake({
 
 #### Primary Network Example
 
-##### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1591,7 +1689,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-##### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1606,7 +1704,7 @@ curl -X POST --data '{
 
 #### Subnet Example
 
-##### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1620,7 +1718,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-##### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1636,9 +1734,10 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either "hex" or "json". Defaults to "hex".
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either
+"hex" or "json". Defaults to "hex".
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getTx({
@@ -1650,9 +1749,7 @@ platform.getTx({
 }
 ```
 
-#### JSON Example
-
-##### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1666,7 +1763,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-##### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1722,9 +1819,10 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+Gets a transaction’s status by its ID. If the transaction was dropped, response will include a
+`reason` field with more information why the transaction was dropped.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getTxStatus({
@@ -1736,10 +1834,11 @@ platform.getTxStatus({
 
 - `Committed`: The transaction is (or will be) accepted by every node
 - `Processing`: The transaction is being voted on by this node
-- `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field for more information
+- `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field
+  for more information
 - `Unknown`: The transaction hasn’t been seen by this node
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1752,7 +1851,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1768,7 +1867,7 @@ curl -X POST --data '{
 
 Gets the UTXOs that reference a given set of addresses.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getUTXOs(
@@ -1796,15 +1895,21 @@ platform.getUTXOs(
 
 - `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
 - At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of
+  UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is provided.
+- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique
+  across multiple calls. That is, a UTXO may appear in the result of the first call, and then again
+  in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set
+  of the addresses may have changed between calls.
+- `encoding` specifies the format for the returned UTXOs. Can only be `hex` when a value is
+  provided.
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
+Suppose we want all UTXOs that reference at least one of
+`P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `P-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
 ```sh
 curl -X POST --data '{
@@ -1843,7 +1948,8 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not
+fetched. We call the method again, this time with `startIndex`:
 
 ```sh
 curl -X POST --data '{
@@ -1885,9 +1991,12 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to
+call this method again.
 
-Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an
+ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the
+atomic UTXOs:
 
 ```sh
 curl -X POST --data '{
@@ -1926,7 +2035,7 @@ This gives response:
 
 Get the validators and their weights of a Subnet or the Primary Network at a given P-Chain height.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.getValidatorsAt(
@@ -1938,9 +2047,10 @@ platform.getValidatorsAt(
 ```
 
 - `height` is the P-Chain height to get the validator set at.
-- `subnetID` is the Subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
+- `subnetID` is the Subnet ID to get the validator set of. If not given, gets validator set of the
+  Primary Network.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -1953,7 +2063,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1979,9 +2089,11 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method with assetID `AVAX` to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or
+C-Chain’s [`avax.export`](c-chain.md#avaxexport) method with assetID `AVAX` to initiate the
+transfer.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.importAVAX(
@@ -2000,14 +2112,17 @@ platform.importAVAX(
 }
 ```
 
-- `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s or C-Chain's `export`.
+- `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument
+  in the corresponding call to the X-Chain’s or C-Chain's `export`.
 - `sourceChain` is the chain the funds are coming from. Must be either `"X"` or `"C"`.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` is the user that controls from and change addresses.
 - `password` is `username`‘s password.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2024,7 +2139,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2045,7 +2160,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.importKey({
@@ -2055,9 +2170,10 @@ platform.importKey({
 }) -> {address: string}
 ```
 
-- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now
+  controls with the private key.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2072,7 +2188,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2088,7 +2204,7 @@ curl -X POST --data '{
 
 Issue a transaction to the Platform Chain.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.issueTx({
@@ -2098,10 +2214,11 @@ platform.issueTx({
 ```
 
 - `tx` is the byte representation of a transaction.
-- `encoding` specifies the encoding format for the transaction bytes. Can only be `hex` when a value is provided.
+- `encoding` specifies the encoding format for the transaction bytes. Can only be `hex` when a value
+  is provided.
 - `txID` is the transaction’s ID.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2115,7 +2232,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2135,7 +2252,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 List addresses controlled by the given user.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.listAddresses({
@@ -2144,7 +2261,7 @@ platform.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2158,7 +2275,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2174,7 +2291,7 @@ curl -X POST --data '{
 
 Sample validators from the specified Subnet.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.sampleValidators(
@@ -2192,7 +2309,7 @@ platform.sampleValidators(
 - `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
 - Each element of `validators` is the ID of a validator.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2205,7 +2322,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2224,7 +2341,7 @@ curl -X POST --data '{
 
 Get the Subnet that validates a given blockchain.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.validatedBy(
@@ -2237,7 +2354,7 @@ platform.validatedBy(
 - `blockchainID` is the blockchain’s ID.
 - `subnetID` is the ID of the Subnet that validates the blockchain.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2250,7 +2367,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -2266,7 +2383,7 @@ curl -X POST --data '{
 
 Get the IDs of the blockchains a Subnet validates.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 platform.validates(
@@ -2279,7 +2396,7 @@ platform.validates(
 - `subnetID` is the Subnet’s ID.
 - Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -2292,7 +2409,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
