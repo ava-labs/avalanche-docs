@@ -1,6 +1,6 @@
-## How to Use The Graph to Query Avalanche Data
+# How to Use The Graph to Query Avalanche Data
 
-### Table of Content
+## Table of Content
 
 * [Introduction](#introduction)
 * [What is The Graph](#what-is-the-graph)
@@ -13,7 +13,7 @@
 * [How to Deploy a Subgraph](#how-to-deploy-a-subgraph)
 * [Conclusion](#conclusion)
 
-### Introduction
+## Introduction
 
 The importance of data is nowadays encapsulated by the saying, “data is the new
 oil”. What this means is that properly harnessed data is now an invaluable part
@@ -41,7 +41,7 @@ strategy that enables efficient querying of Avalanche data in your Avalanche
 applications. By the end of this tutorial, you will be well vested with the
 knowledge required to create your own data-driven Avalanche applications.
 
-### What is The Graph
+## What Is the Graph
 
 The Graph is an open-source protocol for indexing and querying blockchain data.
 The main value proposition of The Graph is to enable anyone to create open APIs
@@ -89,31 +89,31 @@ With the hosted service, you do not need to run these nodes as they are managed
 for you. As a result, the hosted service is a great place to start using The
 Graph and all examples in this tutorial will use the hosted service.
 
-### The Graph and Open APIs
+## The Graph and Open APIs
 
 In this section of the tutorial, you will be shown the integral pieces of The
 Graph protocol, how they fit together and what a typical workflow looks like.
 
-![alt_text](images/pangolin-token-subgraph-image1.png "Schematic Diagram of The Graph Protocol")
+![Schematic Diagram of The Graph Protocol](images/pangolin-token-subgraph-image1.png "Schematic Diagram of The Graph Protocol")
 
 Source: [https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md](https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md)
 
-The schematic diagram above is an overview of a DApp using The Graph protocol
+The schematic diagram above is an overview of a dapp using The Graph protocol
 and it contains the components and typical workflow involved. At the center is
 the Graph Node which was talked about in the last section, it listens to events
 triggered by smart contracts on the blockchain that it indexes and records those
 events as data in a store through a predefined mapping (the
 [WASM](https://webassembly.org/) module) that transforms that data into the
-desired format. The Graph Node exposes a GraphQL API that the DApp can use to
+desired format. The Graph Node exposes a GraphQL API that the dapp can use to
 query data from the blockchain it wants to display in the frontend. When such
 queries are received, Graph Node retrieves the relevant data from the attached
-store and serves the requests. Note that transactions in the DApp are initiated
+store and serves the requests. Note that transactions in the dapp are initiated
 directly on the smart contracts on the blockchain and do not pass through Graph
 Node as there is no write capability. The Graph protocol is used to index and
 query historic data so it can be seen as having a read-only mechanism. However,
 as a  result of its architecture, caching, and storage, data is queried
 efficiently since relevant events were indexed earlier. This is a much better
-approach than having DApps query the blockchain directly to read historic data.
+approach than having dapps query the blockchain directly to read historic data.
 
 To better understand the workflow of The Graph protocol, it can be easier to
 think of it as being made up of three components, the Graph Node, the [Graph
@@ -127,7 +127,7 @@ provides a set of helper APIs for you to access the underlying store, blockchain
 data, smart contracts, IPFS files, cryptographic functions, etc. It can be
 thought of as providing a connector/mapping from one domain to the other. \
 The entry point of a subgraph project is the manifest file. It contains the
-general definitions of the subgraph such as the smart contract(s) being indexed,
+general definitions of the subgraph such as the smart contracts being indexed,
 the names of events of interest, the handler functions that are triggered on
 those events,  etc. Other important files that make up a subgraph project are
 the GraphQL schema file, the mappings file that contains code that dictates how
@@ -137,7 +137,7 @@ important thing to understand is that the Graph protocol exposes blockchain data
 via GraphQL APIs, and it does this through an internal mapping of that data to a
 local store.
 
-### GraphQL Introduction
+## GraphQL Introduction
 
 GraphQL is a query language for APIs and it solves some of the pain points
 associated with traditional APIs that use the
@@ -160,7 +160,7 @@ on the [features of GraphQL as relates to The
 Graph](https://thegraph.com/docs/developer/graphql-api). The Graph only supports
 the Query type, which as the name implies is used for querying (retrieving)
 data. Mutations represent actions that can change or update data and are not
-supported as DApp developers are expected to interact directly with the
+supported as dapp developers are expected to interact directly with the
 underlying blockchain through transactions. Subscriptions are used for
 maintaining an existing connection from a client to a GraphQL server and are not
 supported by The Graph.
@@ -261,7 +261,7 @@ queries, etc. please refer to [The Graph
 documentation](https://thegraph.com/docs/developer/graphql-api) for a full list
 of features.
 
-### What is Avalanche
+## What Is Avalanche
 
 Avalanche can best be described as a blockchain ecosystem and smart contracts
 platform that is built from the ground up to combat the notion that blockchains
@@ -277,7 +277,7 @@ the [Contract Chain
 (C-Chain)](https://docs.avax.network/build/apis/avalanchego/apis/c-chain). The
 Exchange Chain is used for creating and trading digital assets and relies on
 Avalanche Consensus Protocol, the Platform Chain is used for creating new
-[subnets](https://docs.avax.network/subnets) and custom blockchains. The
+[Subnets](https://docs.avax.network/subnets) and custom blockchains. The
 Contract Chain is an instance of the [Ethereum Virtual Machine
 (EVM)](https://ethereum.org/en/developers/docs/evm/) running on Avalanche. Both
 the Platform Chain and the Contract Chain use the [Snowman Consensus
@@ -294,11 +294,11 @@ in Avalanche, you can consult the official
 
 Below is a diagram that further illustrates the points discussed.
 
-![alt_text](images/pangolin-token-subgraph-image2.png "Avalanche Architecture")
+![Avalanche Architecture](images/pangolin-token-subgraph-image2.png "Avalanche Architecture")
 
 Source: [https://docs.avax.network/learn/platform-overview](https://docs.avax.network/learn/platform-overview)
 
-### The Graph and Avalanche
+## The Graph and Avalanche
 
 In line with The Graph’s vision of providing open access to the world’s data and
 Avalanche’s goal of being an open, programmable, smart contracts platform that
@@ -310,7 +310,7 @@ Graph protocol. This means that Web3 developers can now access Avalanche data
 through subgraphs and build data-intensive applications while also having access
 to data from other blockchains supported by The Graph protocol.
 
-### Interacting with Avalanche Data via the Graph: Pangolin Example
+## Interacting with Avalanche Data via the Graph: Pangolin Example
 
 In this section, you will learn how to query Avalanche data from an already
 deployed subgraph on The Graph’s [hosted
@@ -329,7 +329,7 @@ by various projects. The Pangolin exchange subgraph can be accessed
 [here](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground).
 Below is an image of the playground interface.
 
-![alt_text](images/pangolin-token-subgraph-image3.png "The Graph Playground")
+![The Graph Playground](images/pangolin-token-subgraph-image3.png "The Graph Playground")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground)
 
@@ -430,7 +430,7 @@ More data can be gotten from this particular entity by constructing queries that
 match the fields supported. These fields can be identified from the schema as
 shown in the image below.
 
-![alt_text](images/pangolin-token-subgraph-image4.png "Pangolin DEX Schema")
+![Pangolin DEX Schema](images/pangolin-token-subgraph-image4.png "Pangolin DEX Schema")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground)
 
@@ -485,7 +485,7 @@ client.query({
 
 For a full reference on how to use Apollo Client, kindly consult the official [documentation](https://www.apollographql.com/docs/react/).
 
-### How to Build a Subgraph
+## How to Build a Subgraph
 
 In the previous section, you were shown how to integrate an already deployed
 subgraph into your project. In the next two sections, you will go a step further
@@ -505,7 +505,7 @@ Follow the instructions below to begin the process.
 * You will be presented with a page containing instructions on the next steps.
   Do not worry about these as you will perform them in this section.
 
-![alt_text](images/pangolin-token-subgraph-image5.png "New Subgraph Instructions")
+![New Subgraph Instructions](images/pangolin-token-subgraph-image5.png "New Subgraph Instructions")
 
 The subgraph project you will build will be based on the governance token of the
 Pangolin exchange
@@ -535,7 +535,7 @@ You will be prompted in the terminal to answer some questions such as the
 subgraph name, the directory to create the subgraph, the blockchain network,
 etc. Do not forget to switch the network to Avalanche.
 
-![alt_text](images/pangolin-token-subgraph-image6.png "Subgraph Network")
+![Subgraph Network](images/pangolin-token-subgraph-image6.png "Subgraph Network")
 
 In a typical workflow where you are building your own smart contracts for
 Avalanche Contract Chain, you will supply your deployed smart contract address
@@ -557,13 +557,13 @@ address from the project’s documentation. For Pangolin token, you can find it
 [here](https://pangolin.exchange/tutorials/getting-started). Copy the Pangolin
 token ABI from the Contract Chain Explorer [code
 tab](https://snowtrace.io/address/0x60781C2586D68229fde47564546784ab3fACA982/contracts),
-save it in a file with the name Png.json and provide the file path to the Graph
+save it in a file with the name png.json and provide the file path to the Graph
 CLI when asked if you run into issues with automatic detection from the contract
-address. Provide the value Png for the contract name when prompted by the CLI.
+address. Provide the value png for the contract name when prompted by the CLI.
 The Graph CLI will generate a scaffolding containing several files and the
 supplied ABI. Below is what the generated file structure looks like.
 
-![alt_text](images/pangolin-token-subgraph-image7.png "File Structure")
+![File Structure](images/pangolin-token-subgraph-image7.png "File Structure")
 
 The `subgraph.yaml` file is the main entry point to your subgraph project, it contains the subgraph manifest.
 
@@ -692,7 +692,7 @@ it in the `startBlock` field under the `source` field in your `subgraph.yaml`
 file. For a full list of options for the subgraph manifest look at the official
 [documentation](https://thegraph.com/docs/developer/create-subgraph-hosted#the-subgraph-manifest).
 
-![alt_text](images/pangolin-token-subgraph-image8.png "Syncing Parameters")
+![Syncing Parameters](images/pangolin-token-subgraph-image8.png "Syncing Parameters")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/ofemeteng/pangolin-token](https://thegraph.com/legacy-explorer/subgraph/ofemeteng/pangolin-token)
 
@@ -743,9 +743,9 @@ The results return the first 3 transfer events from the subgraph as expected.
 }
 ```
 
-You can find the full code for the Pangolin Token subgraph in this [Github repository](https://github.com/ofemeteng/pangolin-token-subgraph).
+You can find the full code for the Pangolin Token subgraph in this [GitHub repository](https://github.com/ofemeteng/pangolin-token-subgraph).
 
-### Conclusion
+## Conclusion
 
 Congratulations on getting to the end of this tutorial. That was an extensive
 tour of The Graph and Avalanche ecosystems. In this tutorial, you were
