@@ -993,6 +993,7 @@ With `allowFeeRecipients` enabled, validators can specify their addresses to col
 
 :::warning
 
-If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, but a validator
+doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
