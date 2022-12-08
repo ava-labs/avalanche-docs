@@ -981,7 +981,8 @@ validators per second. You can override these defaults with the following config
 
 ### Fee Recipient
 
-This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [RewardManager precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
+This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [RewardManager
+precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
 
 With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
 
