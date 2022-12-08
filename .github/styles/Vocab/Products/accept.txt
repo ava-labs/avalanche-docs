@@ -26,6 +26,7 @@ Berkay
 Binance
 bintools
 Blanco
+blackhole
 blockchain
 Blockchain
 blockchains
@@ -43,6 +44,7 @@ cid
 CLIs
 codec
 Codec
+coinbase
 composability
 Composability
 Consensys

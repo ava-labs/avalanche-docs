@@ -259,7 +259,7 @@ Create a .api file to expose credentials for the API and GUI interfaces:
 
 ```bash
 $ echo "youremailaddress@yourcompany.com
-$PASSWORD" > ~/.chainlink-avalanche/.env
+$PASSWORD" > ~/.chainlink-avalanche/.api
 ```
 
 Create a .password file for wallet password:
