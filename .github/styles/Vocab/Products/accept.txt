@@ -90,6 +90,8 @@ eVoting
 expectRevert
 feeRecipient
 finney
+fuji
+Fuji
 gamification
 Ganache
 getOwner
@@ -220,6 +222,7 @@ typechain
 TypeChain
 typings
 UIs
+unicode
 Uniswap
 Unix
 unregister
@@ -227,6 +230,7 @@ untrusted
 userId
 url
 URL
+validateSignature
 validator
 Validator
 vps
@@ -239,6 +243,7 @@ WAGMI
 Walkthrough
 web
 webapp
+Webapp
 Webpack
 wei
 Wei

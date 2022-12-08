@@ -35,7 +35,7 @@ The ECC algorithm used for digital signatures is called ECDSA (Elliptic Curve
 Digital Signature Algorithm). If you do not yet know about these topics, see the
 **Resources** section at the end for links to learn more.
 
-## Why are digital signatures important?
+## Why Are Digital Signatures Important?
 
 A digital signature system allows you to generate your own private/public key
 pair. You can then use the private key to generate digital signatures which let
@@ -101,7 +101,7 @@ function checkMetamaskStatus() {
 3. Elliptic Curve library, which can be installed with `npm install elliptic`
 4. Ethers.js library, which can be installed with `npm install ethers`
 
-## Steps that need to be performed in the webapp
+## Steps that Need to Be Performed in the Webapp
 
 To verify the signature and retrieve the signer X-Chain address, you first need
 to extract cryptographic data from the message and signature in your webapp,
@@ -118,7 +118,7 @@ There is no security risk in doing it here off-chain as we can verify in the
 dapp that they are indeed related to each other, returning a signature failure
 if they are not.
 
-### 1. Hash the message
+### 1. Hash the Message
 
 First, you will need to hash the original message. Here is the standard way of
 hashing the message based on the Bitcoin Script format and Ethereum format:
@@ -181,7 +181,7 @@ function splitSig(signature: string) {
 },
 ```
 
-### 3. Recover the public key
+### 3. Recover the Public Key
 
 The public key can be recovered from the hashed message, r, s, and v parameters
 of the signature together with the help of Elliptic Curve JS library. You need
@@ -250,13 +250,13 @@ The `recoverAddress` function is called in the dapp from the webapp.
 
 **recoverAddress** takes the following parameters:
 
-* messageHash — the hashed message
-* rs — r and s value of the signature
-* publicKey — x and y coordinates of the public key
-* pubk — 33-byte compressed public key
-* xchain — X-Chain address
-* prefix — Prefix for Bech32 addressing scheme (avax or fuji)
-* hrp — Array of each unicode character in the prefix
+* messageHash&mdash;the hashed message
+* rs&mdash;r and s value of the signature
+* publicKey&mdash;x and y coordinates of the public key
+* pubk&mdash;33-byte compressed public key
+* xchain&mdash;X-Chain address
+* prefix&mdash;Prefix for Bech32 addressing scheme (avax or fuji)
+* hrp&mdash;Array of each unicode character in the prefix
 
 Then it performs the following steps:
 
@@ -376,16 +376,16 @@ function convert(uint[] memory data, uint inBits, uint outBits) public view retu
 }
 ```
 
-### Verify X-Chain address
+### Verify X-Chain Address
 
 It is a simple step, but it is very important to check to see if the extracted
 X-Chain address from the public key matches with the X-Chain address that was
 passed from the webapp. Otherwise, you may have a perfectly valid message
-signature but for a _different_ X-Chain address than the webapp requested. Only
+signature but for a *different* X-Chain address than the webapp requested. Only
 if they match can you proceed to verify the signature. Otherwise, return an
 error message.
 
-### Validate signature
+### Validate Signature
 
 For verifying the signature, we start with this [Solidity project on Elliptic Curve](https://github.com/tdrerup/elliptic-curve-solidity).
 
@@ -411,11 +411,11 @@ function validateSignature(bytes32 messageHash, uint[2] memory rs, uint[2] memor
 
 **validateSignature** takes the same first three parameters as **recoverAddress**:
 
-* messageHash — the hashed message
-* rs — r and s value of the signature
-* publicKey — x and y coordinates of the public key
+* messageHash&mdash;the hashed message
+* rs&mdash;r and s value of the signature
+* publicKey&mdash;x and y coordinates of the public key
 
-### Finishing up
+### Finishing Up
 
 After performing these tests, the dapp returns its decision whether the
 signature is valid or not to the webapp, and the webapp is then responsible for
