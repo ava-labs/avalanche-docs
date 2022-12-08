@@ -7,6 +7,7 @@ Algolia
 alloc
 Alloc
 ANR's
+Ansible
 API's
 APIs
 architecting
@@ -216,6 +217,7 @@ url
 URL
 validator
 Validator
+Vulr
 VM
 VMs
 Vue

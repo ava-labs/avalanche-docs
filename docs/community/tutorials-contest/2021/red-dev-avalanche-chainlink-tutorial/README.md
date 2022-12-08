@@ -4,7 +4,7 @@ description: This tutorial will show you how to setup a Chainlink node with the 
 
 # How to Configure and Use Your Own Chainlink Node And External Adapter In Your Avalanche dApp
 
-# Introduction
+## Introduction
 
 This tutorial will show you how to setup a Chainlink node with the Avalanche
 Fuji Testnet and create dApp smart contracts to connect to the Chainlink node.
@@ -26,12 +26,13 @@ information on the devops tool **Ansible**, see the **Resources** section at the
 end of this tutorial.) Ansible creates a development server using a Vultr.com
 vps, and you can find the entire project
 [here](ansible-chainlink-avalanche-setup/README.md). 
+
 ## Audience
+
 To get the most out of this tutorial, you will need to have a basic
 understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write
 dApps. If you do not yet know about these topics, see the
 [**Resources**](#resources) section at the end for links to learn more.
-
 
 ## Overview
 
@@ -42,7 +43,7 @@ explain to you how to run the Chainlink node within the Docker container. After
 that, with the help of the Chainlink GUI, we can create a simple job which will
 be used in a smart contract to gather real-world data.
 
-# Prerequisites
+## Prerequisites
 
 1. Ubuntu 20.04 or later
 2. [Docker-CE](https://docs.docker.com/get-docker/)
@@ -58,18 +59,22 @@ version of Docker that you can use to spin up containers without having to pay
 for enterprise-level support.
 
 Open a terminal session and execute the command below:
+
 ```bash
-$ curl -sSL https://get.docker.com/ | sh
+curl -sSL https://get.docker.com/ | sh
 ```
+
 To manage Docker as a non-root user, create a docker group and add your user to it.
+
 ```bash
-$ sudo groupadd docker
-$ sudo usermod -aG docker $USER
+sudo groupadd docker
+sudo usermod -aG docker $USER
 ```
+
 Verify that you've installed Docker by running the command below:
 
-```
-$ docker -v
+```bash
+docker -v
 ```
 
 ![docker-v](img/chainlink-tutorial-00-docker-v.png)
@@ -80,47 +85,54 @@ is required for building AvalancheGo, later in this section.
 ## Install Go
 
 Download the Go package. We have used version 1.16.6 for this tutorial:
+
+```bash
+wget https://storage.googleapis.com/golang/go1.16.6.linux-amd64.tar.gz
 ```
-$ wget https://storage.googleapis.com/golang/go1.16.6.linux-amd64.tar.gz
-```
+
 Extract go1.16.6.linux-amd64.tar.gz to /usr/local:
+
+```bash
+tar -C /usr/local -xzf go1.16.6.linux-amd64.tar.gz
 ```
-$ tar -C /usr/local -xzf go1.16.6.linux-amd64.tar.gz
-```
+
 Add /usr/local/go/bin to the PATH environment variable. You can do this by
 adding the following line to your $HOME/.profile or /etc/profile (for a
 system-wide installation):
 
-```
+```bash
 export PATH=$PATH:/usr/local/go/bin
 ```
+
 Verify that you've installed Go by running the command below:
 
+```bash
+go version
 ```
-$ go version
-```
+
 ![go-v](img/chainlink-tutorial-01-go-v.png)
 
-
-## Build the AvalancheGo image
+## Build the AvalancheGo Image
 
 Clone the AvalancheGo repository:
 
-```
-$ git clone https://github.com/ava-labs/avalanchego.git
+```bash
+git clone https://github.com/ava-labs/avalanchego.git
 ```
 
 Build the image into docker:
 
-```
-$ cd avalancghego
-$ ./scripts/build_image.sh
+```bash
+cd avalancghego
+./scripts/build_image.sh
 ```
 
 To check the build image run the command below:
+
+```bash
+docker images
 ```
-$ docker images
-```
+
 ![docker-images](img/chainlink-tutorial-02-docker-images.png)
 
 The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx
@@ -128,9 +140,10 @@ is the shortened commit of the Avalanche source it was built from. In our case
 it is 254b53da.
 
 
-# Setting up and running Chainlink node
+## Setting Up and Running Chainlink Node
 
-## Dependencies 
+### Dependencies 
+
 1. Docker CE
 2. Smartcontract/chainlink v0.10.3 
 3. AvalancheGo >= 1.4.5
@@ -139,42 +152,46 @@ it is 254b53da.
 ## Steps to run Chainlink node
 
 ### 1. Run AvalancheGo
+
 The first step is to run AvalancheGo within docker which will map the TCP ports
 9650 and 9651 in the container to the same ports on the Docker host.
 
 Use the command below to run the AvalancheGo image within Docker:
 
+```bash
+docker run --name avalanchego-chainlink -d -p 9650:9650 -p 9651:9651 -v /root/.avalanchego:/root/.avalanchego avaplatform/avalanchego:91599fea /avalanchego/build/avalanchego --network-id=fuji --http-host=
 ```
-$ docker run --name avalanchego-chainlink -d -p 9650:9650 -p 9651:9651 -v /root/.avalanchego:/root/.avalanchego avaplatform/avalanchego:91599fea /avalanchego/build/avalanchego --network-id=fuji --http-host=
-```
- * --name assign a name to the container
- * -d specifies detached mode
- * -p specifies the port number
- * -v specifies the docker host location to store the container volume data
- * /avalanchego/build/avalanchego --network-id=fuji is the command to start the
+
+* --name assign a name to the container
+* -d specifies detached mode
+* -p specifies the port number
+* -v specifies the docker host location to store the container volume data
+* /avalanchego/build/avalanchego --network-id=fuji is the command to start the
    avalanchego under fuji test network
   
 Verify that the AvalancheGo node is started and running:
 
+```bash
+docker ps
 ```
-$ docker ps
-```
+
 This will list the AvalancheGo container status:
 
 ![docker-go-ps](img/chainlink-tutorial-03-docker-go-ps.png)
 
 Also, you can check by requesting a CURL command and seeing if it returns JSON data, as it does here:
 
-```
-$ curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.isBootstrapped",
-    "params": {
-        "chain":"C"
-    }
+```bash
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     :1,
+  "method" :"info.isBootstrapped",
+  "params": {
+      "chain":"C"
+  }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
+
 ![curl](img/chainlink-tutorial-04-curl.png)
 
 ### 2. Run PostgreSQL
@@ -185,8 +202,8 @@ Use the command below to run PostgreSQL. The POSTGRES_PASSWORD and POSTGRES_USER
 are the environment variables used to set up the PostgreSQL superuser and its
 password:
 
-```
-$ docker run --name pgchainlink -e POSTGRES_PASSWORD=chainlink -e POSTGRES_USER=chainlink -d -p 5432:5432 -v /root/postgres-data/:/var/lib/postgresql/data postgres
+```bash
+docker run --name pgchainlink -e POSTGRES_PASSWORD=chainlink -e POSTGRES_USER=chainlink -d -p 5432:5432 -v /root/postgres-data/:/var/lib/postgresql/data postgres
 ```
 
 * -name assign name to the container
@@ -196,16 +213,19 @@ $ docker run --name pgchainlink -e POSTGRES_PASSWORD=chainlink -e POSTGRES_USER=
 
 To verify that PostgreSQL is running, use the command below:
 
+```bash
+docker ps
 ```
-$ docker ps
-```
+
 This will list the Postgres container status:
 
 ![docker-pg-ps](img/chainlink-tutorial-05-docker-pg-ps.png)
 
-### Run the Chainlink node
+### Run the Chainlink Node
 
-The final step is to run the Chainlink node within the Docker container. Before we start running it, we need to do some basic setup which is required for Chainlink node.
+The final step is to run the Chainlink node within the Docker container. Before
+we start running it, we need to do some basic setup which is required for
+Chainlink node.
 
 1. Create a local directory to store Chainlink data
 2. Create a .env file with the environment variables used to access the container.
@@ -215,12 +235,13 @@ The final step is to run the Chainlink node within the Docker container. Before 
 
 Create a directory to store the Chainlink data:
 
-```
-$ mkdir ~/.chainlink-avalanche
+```bash
+mkdir ~/.chainlink-avalanche
 ```
 
 Create a .env file to set the container's environment variables:
-```
+
+```bash
 $ echo "ROOT=/chainlink
 LOG_LEVEL=debug
 ETH_CHAIN_ID=43113
@@ -235,14 +256,16 @@ DATABASE_URL=postgresql://$USERNAME:$PASSWORD@$HOST:5432/chainlink?sslmode=disab
 ```
 
 Create a .api file to expose credentials for the API and GUI interfaces:
-```
+
+```bash
 $ echo "youremailaddress@yourcompany.com
 $PASSWORD" > ~/.chainlink-avalanche/.env
 ```
 
 Create a .password file for wallet password:
-```
-$ echo $PASSWORD > ~/.chainlink-avalanche/.password
+
+```bash
+echo $PASSWORD > ~/.chainlink-avalanche/.password
 ```
 
 ---
@@ -258,19 +281,22 @@ three lowercase, uppercase, numbers, and symbols._
 Finally, run the Chainlink node.
 
 Use the command below:
-```
-$ docker run -d --name chainlink-avalanche-node -p 6688:6688 -v ~/.chainlink-avalanche:/chainlink -it --env-file=/root/.chainlink-avalanche/.env smartcontract/chainlink:0.10.3 local n -p /chainlink/.password -a /chainlink/.api
+
+```bash
+docker run -d --name chainlink-avalanche-node -p 6688:6688 -v ~/.chainlink-avalanche:/chainlink -it --env-file=/root/.chainlink-avalanche/.env smartcontract/chainlink:0.10.3 local n -p /chainlink/.password -a /chainlink/.api
 ```
 
 To verify the chainlink node is running:
+
+```bash
+docker ps
 ```
-$ docker ps
-```
+
 This will list the Chainlink node container status:
 
 ![docker-ch-ps](img/chainlink-tutorial-06-docker-ch-ps.png)
 
-# Setup a Chainlink job
+## Setup a Chainlink Job
 
 Before we set up a job in the Chainlink node, we need to create an external
 adaptor which will gather the real-world data that interests us and provide this
