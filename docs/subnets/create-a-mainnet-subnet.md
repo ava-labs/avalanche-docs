@@ -3,12 +3,13 @@
 :::warning
 
 Deploying a Subnet to Mainnet has many risks. Doing so safely requires a laser focus on security.
-This tutorial does its best to point out common pitfalls, but there may be other risks not discussed here.
+This tutorial does its best to point out common pitfalls, but there may be other risks not discussed
+here.
 
-This tutorial is an educational resource and provides no guarantees that following it will result in
-a secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of
-the deployment process at the expense of security. These shortcuts are pointed out and are not
-recommended for a production deployment.
+This tutorial is an educational resource and provides no guarantees that following it results in a
+secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of
+the deployment process at the expense of security. The text highlights these shortcuts and they
+shouldn't be used for a production deployment.
 
 :::
 
@@ -158,9 +159,9 @@ This is going to start a new prompt series.
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to deploy on:
-  ▸ Local Network
+    Local Network
     Fuji
-    Mainnet
+  ▸ Mainnet
 ```
 
 This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys to `Mainnet` and hit enter.
@@ -280,38 +281,46 @@ a validator.
 
 :::
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet. Add one by running the `addValidator`
-command and adding the name of the Subnet. To be clear, this does _not start or run_ a validator, it
-only whitelists the node as a recognized validator on the Subnet.
+This new Subnet is cool, but it doesn't have any dedicated validators and can't process transactions
+yet.
+
+To add a validator to your Subnet, you must add the desired node's NodeID to the Subnet's validator
+allow list by issuing an `addValidator` transaction and instruct the node to start syncing the
+Subnet by updating its local configs. You need to repeat this process for every validator you
+add to the network.
+
+### Submit addValidator TX to Mainnet
+
+Start by running the `addValidator` command and adding the name of the Subnet. To be clear,
+this does _not start or run_ a validator, it only whitelists the node as a recognized validator on
+the Subnet.
 
 ```bash
 avalanche subnet addValidator testsubnet
 ```
 
-First choose `Mainnet` as the network to add the Subnet validator into.
+First choose `Mainnet` as the network to add the Subnet validator to.
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to add validator to.:
-  ▸ Fuji
-    Mainnet
+    Fuji
+  ▸ Mainnet
 ```
 
-As this operation involves a new [transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator),
-CLI needs some address to authorize the Subnet operation.
-As there is only one control key in the Subnet, CLI is going to use it for signing.
-That address is going to also pay the add Subnet validator TX fee of 0.001 AVAX.
+Because this operation issues a new
+[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), the CLI needs the
+control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
+the process looks slightly different if you use multiple controls keys. The address needs to pay a
+TX fee of 0.001 AVAX.
 
 ```text
 Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Also, as using `Mainnet`, the tool is going to use the first ledger address
-as signing address.
-So, it's expected that the connected ledger has the Subnet control key as its first address.
+### Set NodeID
 
-Now use the **NodeID** of the validator from the very beginning of this tutorial. For best results make
-sure the validator is running and synced.
+Now enter the [**NodeID**](#getting-your-mainnet-nodeids) of the validator.
 
 ```text
 Next, we need the NodeID of the validator you want to whitelist.
@@ -322,10 +331,19 @@ to query the NodeID from your node
 ✔ What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
 ```
 
--this ID is intentionally modified-
+Note, this ID is intentionally modified to prevent replication.
 
-Select 30 as the stake weight. The structure is a bit described at [addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator)
-under the `weight` section.
+### Set Stake Weight
+
+Select 30 as the stake weight. You can learn more about the stake weight parameter in
+[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
+`weight` section.
+
+:::warning
+
+The stake weight of all your validators should sum to at least 100.
+
+:::
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -338,9 +356,11 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ✔ What stake weight would you like to assign to the validator?: 30
 ```
 
-Then specify when the validator is going to start validating. The time must be in the future. Custom
-option is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the default
-this time:
+### Set Validation Start Time
+
+Next, specify when the validator is going to start validating. The time must be in the future. You
+can use the custom option to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the
+default this time:
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -354,7 +374,12 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 If the `join` command isn't successfully completed before this time elapses and the validator's stake
 weight is >20% of the Subnet, the Subnet may have down time.
 
+Production Subnets should ensure they have sufficient time to setup their validators **before**
+validation begins.
+
 :::
+
+### Set Validation Duration
 
 Finally, specify how long it's going to be validating:
 
@@ -366,14 +391,14 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-If choosing `Custom` here, it's needed to enter a **duration**, which is a time span expressed in hours.
+If you choose `Custom` here, you need to enter a **duration**, which is a time span expressed in hours.
 For example, say `200 days = 24 \* 200 = 4800h`
 
 ```text
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
 ```
 
-CLI shows the user an actual date of when that's now:
+The CLI shows the user an actual date of when that is:
 
 ```text
 ? Your validator is going to finish staking by 2023-06-10 13:07:58:
@@ -381,7 +406,11 @@ CLI shows the user an actual date of when that's now:
     No
 ```
 
-Confirm if correct. At this point the prompt series is complete and CLI attempts the transaction:
+Confirm if correct.
+
+### Issue the TX
+
+At this point the prompt series is complete and the CLI attempts the transaction:
 
 ```text
 NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
@@ -392,23 +421,23 @@ Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-Next CLI asks the user for ledger authorization:
+Next the CLI asks the user for ledger authorization:
 
 ```text
 *** Please provide extended public key on the ledger device ***
 ```
 
-On the ledger a `Provide Extended Public Key` window is going to be active. Navigate to the ledger `Accept`
+This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
 window by using the ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
-CLI is going to show the Ledger address:
+The CLI shows the Ledger address:
 
 ```text
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-At this point, if the ledger address isn't the control key for the Subnet, the user is going to get
+At this point, if the ledger address isn't the control key for the Subnet, the user receives
 an error:
 
 ```text
@@ -416,38 +445,41 @@ Error: wallet doesn't contain subnet auth keys
 exit status 1
 ```
 
-If the ledger hasn't enough funds, the following error message is going to appear:
+If the ledger doesn't have enough funds, the following error message appears:
 
 ```text
 *** Please sign subnet creation hash on the ledger device ***
 Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-Otherwise, bot the CLI and the ledger are going to request to sign the TX:
+Otherwise, both the CLI and the Ledger request to sign the TX:
 
 ```text
 *** Please sign add validator hash on the ledger device ***
 ```
 
-On the ledger a `Sign Hash` window is going to be active. Navigate to the ledger `Accept` window by
-using the ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger `Accept`
+window by using the ledger's right button, and then authorize the request by pressing both left and
+right buttons.
 
-This might take a couple of seconds, and is going to print, if successful:
+This might take a couple of seconds. After, it prints:
 
 ```text
 Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
 ```
 
-This means the node is now a validator on the given Subnet on `Mainnet`!
+This means the node is now a validator on the given Subnet on `Mainnet`! However, your work isn't
+complete. You **must** finish the [Join a Subnet](#join-a-subnet) section otherwise your Subnet
+risks downtime.
 
 You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
 
 ## Join a Subnet
 
 You might already have a running validator which you want to add to a specific Subnet. For this, run
-the `join` command.
-This is a bit of a special command. The `join` command is going to either just _print the required instructions_
-for your already running node or is going to attempt at configuring a config file the user provides.
+the `join` command. This is a bit of a special command. The `join` command is going to either just
+_print the required instructions_ for your already running node or is going to attempt at
+configuring a config file the user provides.
 
 ```bash
 avalanche subnet join testsubnet
