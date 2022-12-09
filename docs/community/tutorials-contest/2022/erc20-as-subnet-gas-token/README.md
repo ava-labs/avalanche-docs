@@ -546,7 +546,7 @@ many potential risks when running a bridge.
   - We only have one relayer application running. Computer that runs the relayer
     application might encounter an error, maybe an electricity outage or we
     might need to update and restart the relayer application itself. In that
-    case, our bridge would stop working for that timeframe and users would not
+    case, our bridge would stop working for that time frame and users would not
     be able to bridge their tokens.
 
 ### Suggestions

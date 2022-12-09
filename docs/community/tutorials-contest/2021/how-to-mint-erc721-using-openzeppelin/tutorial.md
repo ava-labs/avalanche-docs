@@ -166,7 +166,7 @@ I have attached the code for the NFT in the same repository.
           want the collection to have, replace <code>MN</code> with the symbol
           you want for the collection.
     * `Ownable` - ownable is used to have an access control mechanism.
-          Ownable provides utility functions to `getOwner`, setOwner and
+          Ownable provides utility functions to `getOwner`, `setOwner` and
           `renounceOwnership`.
   * Variables
     * `tokenCounter` - It is used to keep track of the tokenId to mint.
@@ -261,9 +261,9 @@ You can check the NFT on the explorer. My URL is below.
 The format is as follows.
 
 *Testnet* - 
-<https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers>
+`https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers`
 
-*Mainnet* - <https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers>
+*Mainnet* - `https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers`
 
 ### Conclusion
 

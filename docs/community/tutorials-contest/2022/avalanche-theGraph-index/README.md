@@ -197,11 +197,11 @@ To deploy the newly created Subnet locally, run the following command
 avalanche subnet deploy <SubnetName>
 ```
 
-![deploy](./images/10.png "deploy")
+![deploy 1](./images/10.png "deploy")
 
 When a Subnet is run locally, it starts a multi-node (5 node) Avalanche Network in the background.
 
-![deploy_f](./images/11.png "deploy_f")
+![deploy 2](./images/11.png "deploy_f")
 
 ### Configuring MetaMask
 
@@ -221,7 +221,7 @@ Lastly don't forget to stop the running local network
 avalanche network stop <snapshotName>
 ```
 
-![deploy_f](./images/12.png "deploy_f")
+![deploy 2](./images/12.png "deploy_f")
 
 ## Deploying Smart Contracts with Remix
 

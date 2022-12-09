@@ -515,7 +515,7 @@ The information and ABI of the deployed contract are present in the
 
 Our blockchain code, which will act as a backend for this application, is
 deployed on the chain and now we can code client-side for interacting with the
-contracts. We will be using Trufflesuite's **Drizzle** library for connecting
+contracts. We will be using Truffle Suite's **Drizzle** library for connecting
 our web app with blockchain. Drizzle makes the integration process very easy and
 scalable. It also provides a mechanism to **cache** a particular contract-call,
 so that, we can get a real-time update of the changes of data on the blockchain.

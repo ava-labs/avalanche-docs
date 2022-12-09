@@ -64,7 +64,6 @@ DAO
 dapp
 Dapp
 delegators
-deploy_f
 deployer
 Deployer
 deployers
@@ -102,7 +101,6 @@ Hardforks
 Harpalsinh
 hdwallet
 HDWallet
-i.e.
 incentivized
 Infura
 ipfs
@@ -157,7 +155,6 @@ permissioned
 permissionless
 png
 PNG
-postgres
 Postgres
 precompile
 Precompile
@@ -188,8 +185,6 @@ runlog
 RunLog
 Saglam
 Sayan
-setOwner
-snowtrace
 Snowtrace
 Solana
 spoofable

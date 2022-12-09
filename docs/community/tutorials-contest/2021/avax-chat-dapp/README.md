@@ -94,7 +94,7 @@ Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `C-AVAX`
-* **Explorer**: [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
+* **Explorer**: `https://testnet.snowtrace.io`
 
 Fund your address from the given [faucet](https://faucet.avax.network/).
 
