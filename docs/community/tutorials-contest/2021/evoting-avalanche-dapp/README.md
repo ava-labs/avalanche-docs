@@ -90,7 +90,8 @@ existing code with the following HTML :
 </html>
 ```
 
-Open the file `App.js` inside of the `src` directory and replace the existing code with the following code:
+Open the file `App.js` inside of the `src` directory and replace the existing
+code with the following code:
 
 ```javascript
 import React from "react";

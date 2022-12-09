@@ -3,9 +3,12 @@ ABIs
 addValidator
 AddValidator
 Agrawal
+aggresive
+Aggresive
 Algolia
 alloc
 Alloc
+alloweds
 ANR's
 Ansible
 API's
@@ -22,6 +25,7 @@ avalanchego
 AvalancheGo
 Avascan
 avax
+Avax
 AVAX
 Berkay
 Binance
@@ -32,8 +36,10 @@ blockchain
 Blockchain
 blockchains
 Blockchains
+blockNumber
 blockTimestamp
 bool
+bridgeAdmin
 Brunain
 BUIDLing
 calldata
@@ -41,6 +47,7 @@ CAPTCHA
 ChainBridge
 chainlink
 Chainlink
+chainlist
 ChainSafe
 cid
 CLIs
@@ -66,6 +73,7 @@ dapp
 Dapp
 delegators
 deployer
+Deployer
 deployers
 Deployers
 deserialize
@@ -102,6 +110,7 @@ github
 Golang
 gwei
 Gwei
+Hardforks
 Harpalsinh
 hdwallet
 HDWallet
@@ -117,6 +126,7 @@ JavaScript
 jpg
 json
 JSON
+Keccak
 keyName
 keystore
 KYCed
@@ -183,6 +193,7 @@ relayer
 Relayer
 relayers
 Relayers
+remix's
 renounceOwnership
 repo
 requesters
@@ -195,6 +206,7 @@ Saglam
 Sayan
 secondBuyer
 setOwner
+Snowtrace
 Solana
 spoofable
 solc
@@ -226,10 +238,12 @@ typings
 UIs
 unicode
 Uniswap
+unitconverter
 Unix
 unregister
 untrusted
 userId
+Utils
 url
 URL
 validateSignature
@@ -252,3 +266,4 @@ wei
 Wei
 Whitepapers
 yargs
+Yellowpaper
