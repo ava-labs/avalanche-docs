@@ -5,6 +5,7 @@ AddValidator
 Agrawal
 aggresive
 Aggresive
+Akanimoh
 Algolia
 alloc
 Alloc
@@ -72,6 +73,7 @@ DAO
 dapp
 Dapp
 delegators
+deploy_f
 deployer
 Deployer
 deployers
@@ -131,6 +133,7 @@ keyName
 keystore
 KYCed
 liveness
+lol
 lookups
 mainnet
 Mainnet
@@ -160,6 +163,7 @@ Ofem
 OK
 onboarding
 O'Reilly
+Osutuk
 ownable
 Ownable
 Pangolin's
@@ -172,6 +176,7 @@ permissionless
 png
 PNG
 polymod
+postgres
 Postgres
 precompile
 Precompile
@@ -196,6 +201,7 @@ Relayers
 remix's
 renounceOwnership
 repo
+Repo
 requesters
 Rimble
 RPC
@@ -241,6 +247,7 @@ Uniswap
 unitconverter
 Unix
 unregister
+unscalable
 untrusted
 userId
 Utils
