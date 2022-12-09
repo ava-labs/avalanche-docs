@@ -409,7 +409,7 @@ initiator to use when integrating Chainlink with on-chain contracts.
 }
 ```
 
-* jsonparse, ethuint256 & ethtx are core adaptors and are executed
+* jsonparse, ethuint256 & `ethtx` are core adaptors and are executed
   synchronously. For more details, you will find documentation for each
   adapter's usage [here](https://docs.chain.link/docs/core-adapters/).
 * runlog - By adding the address parameter, you make the event filter of the

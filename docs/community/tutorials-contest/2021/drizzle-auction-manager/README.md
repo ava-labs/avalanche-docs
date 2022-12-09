@@ -272,7 +272,7 @@ function isRegistered(address _publicAddress) public view returns (uint256[2] me
 ```
 
 This function takes the public address as its argument and returns an integer
-array with 2 elements - **isRegistered** at index **0** and **userId** at index
+array with 2 elements - `isRegistered` at index **0** and **userId** at index
 **1**. If **0th** index is 1 then the user exists and vice-versa. And ** 1st
 index** represents userId of the user. This function basically iterates over the
 mapping **users** to check if there is the required public address.
@@ -280,7 +280,7 @@ mapping **users** to check if there is the required public address.
 ### Auction Analytics
 
 We have created a mapping for storing analytics like latest bid, highest bid,
-lowest bid, etc. for each auction. This mapping will map **auctionId** to
+lowest bid, etc. for each auction. This mapping will map `auctionId` to
 **AuctionAnalytic** struct. Every time a new auction is created, we initialize
 its corresponding entry in the **AuctionAnalytics** map.
 
@@ -582,7 +582,7 @@ ReactDOM.render(
 ```
 
 Importing `Drizzle` from `@drizzle/store` module will help in instantiating the
-drizzle according to our drizzleOptions. The following line is responsible for
+drizzle according to our `drizzleOptions`. The following line is responsible for
 this action.
 
 ```javascript
@@ -668,7 +668,7 @@ const AuctionManager =  drizzle.contracts.AuctionManager.methods;
 ```
 
 `drizzle.contracts` is an object which contains instances of all the deployed
-contracts which are added to drizzle (in drizzleOptions or manually). We are
+contracts which are added to drizzle (in `drizzleOptions` or manually). We are
 simply storing all the **methods** of this contract instance, so that, whenever
 we want to call a function or public identifier from this contract, we can
 simply use `AuctionManager.method_name().call()`

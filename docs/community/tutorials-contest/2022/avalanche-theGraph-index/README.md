@@ -270,8 +270,6 @@ Please take note of the deployment address as we will be making use of it subseq
 
 ![deploy2](./images/25.png "deploy2")
 
-
-
 ## Indexing Our Subnet Using the Graph
 
 1. Installing Dependencies

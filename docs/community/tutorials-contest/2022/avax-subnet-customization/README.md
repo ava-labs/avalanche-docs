@@ -368,7 +368,7 @@ This value is set to `2` in C-Chain.
 The minimum base fee that can be used by a transaction. It also shows how much
 gas will it cost to do native token transfers. The value is in wei and set to
 `25000000000` in C-Chain. It corresponds to 25 nAvax (gwei). You can use
-[Snowtrace unitconverter](https://snowtrace.io/unitconverter) to convert between
+[Snowtrace `unitconverter`](https://snowtrace.io/unitconverter) to convert between
 units.
 
 #### `targetGas`
@@ -601,7 +601,7 @@ In our genesis file. The balance is set to `0xd3c21bcecceda1000000` which
 corresponds to `1000000000000000000000000` in decimal. You can also type in the
 balance in decimal. Notice that this number is in wei and it's equal to
 1,000,000 AVAX. You can use [Snowtrace
-unitconverter](https://snowtrace.io/unitconverter) to convert between units.
+`unitconverter`](https://snowtrace.io/unitconverter) to convert between units.
 
 ## Creating a Custom Genesis File
 
@@ -889,9 +889,9 @@ Here is how:
 ![change gas fee](.github/images/changegasfee.gif)
 
 If you're using the _Enhanced Gas Fee UI_ which is an experimental feature in
-metamask, you can set the gas fee to _Aggresive_ and that should work.
+metamask, you can set the gas fee to _Aggressive_ and that should work.
 
-![aggresive](.github/images/aggresive.gif)
+![aggressive](.github/images/aggressive.gif)
 
 After making a few transactions, metamask should start automatically adjusting
 the gas fee to the optimal value.

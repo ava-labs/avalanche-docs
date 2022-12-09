@@ -518,7 +518,7 @@ Things to check out;
     changed the structure, imports might fail.
   - You have your private keys inside the .env file and you have downloaded
     dotenv package by running `npm i dotenv`.
-  - Your Subnet has NativeMinter precompile with bridgeAdmin account as the
+  - Your Subnet has NativeMinter precompile with `bridgeAdmin` account as the
     admin.
   - You have created a contractAddresses.js file inside the variables folder. If
     you did not create this file, deploy.js would fail.

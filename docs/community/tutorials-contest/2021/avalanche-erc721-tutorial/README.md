@@ -587,7 +587,7 @@ often met cases.
     ```
 
     As you can see we import the **Collectible** contract and also an
-    **expectRevert** function that will help us with checking whether the functions
+    `expectRevert` function that will help us with checking whether the functions
     revert correctly upon false input. Afterwards, we define the scope of our test.
     Truffle uses the **contract()** function instead of Mocha's **describe()**
     function. The differences are minimal, so think of them as identical. If you are
@@ -853,8 +853,8 @@ only go through the differences:
 
     What we do here is that the new owner lists the item for 10 AVAX. He is denoted
     by the **buyer** address, since he has previously bought the NFT from the
-    creator. A **secondBuyer** purchases the item, so we check whether the
-    **secondBuyer** has at least 10 AVAX less, because we need to take into account
+    creator. A `secondBuyer` purchases the item, so we check whether the
+    `secondBuyer` has at least 10 AVAX less, because we need to take into account
     the gas paid:
 
     ```typescript

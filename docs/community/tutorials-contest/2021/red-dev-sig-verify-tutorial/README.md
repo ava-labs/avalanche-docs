@@ -154,8 +154,8 @@ the r, s, and v parameters from it. The signature is stored as a 65-byte buffer
 `[R || S || V]` where `V` is 0 or 1 to allow public key recoverability.
 
 Note, while decoding the signature, if the signature has been altered, the
-**cb58Decode** function may throw an error, so remember to catch the error.
-Also, don't forget to import **bintools** from AvalancheJS library first.
+`cb58Decode` function may throw an error, so remember to catch the error.
+Also, don't forget to import `bintools` from AvalancheJS library first.
 
 ```typescript
 function splitSig(signature: string) {
@@ -202,7 +202,7 @@ function recover(msgHash: Buffer, sig: any) {
 ```
 
 Here is the full code for verification, including the call to the dapp function
-**recoverAddress** at the end, which we will cover next:
+`recoverAddress` at the end, which we will cover next:
 
 ```typescript
 async function verify() {
@@ -248,7 +248,7 @@ Next, this 20-byte value is converted to a **Bech32** address.
 
 The `recoverAddress` function is called in the dapp from the webapp.
 
-**recoverAddress** takes the following parameters:
+`recoverAddress` takes the following parameters:
 
 * messageHash&mdash;the hashed message
 * rs&mdash;r and s value of the signature
@@ -267,7 +267,7 @@ Then it performs the following steps:
 4. If X-Chain Address matches then validates the signature.
 5. Returns the result.
 
-Here is the recoverAddress function that does all this:
+Here is the `recoverAddress` function that does all this:
 
 ```solidity
 function recoverAddress(bytes32 messageHash, uint[2] memory rs, uint[2] memory publicKey, bytes memory pubk, string memory xchain, string memory prefix, uint[] memory hrp) public view returns(string memory){
@@ -303,7 +303,7 @@ Let's take a closer look at its supporting functions and key features.
 
 We have ported Bech32 to Solidity from the [Bech32 JavaScript
 library](https://github.com/bitcoinjs/bech32). There are four functions,
-**polymod**, **prefixChk**, **encode** and **convert**, used to convert to
+`polymod`, `prefixChk`, **encode** and **convert**, used to convert to
 Bech32 address.
 
 ```solidity
@@ -409,7 +409,7 @@ The key function we need is **validateSignature**.
 function validateSignature(bytes32 messageHash, uint[2] memory rs, uint[2] memory publicKey) public view returns (bool)
 ```
 
-**validateSignature** takes the same first three parameters as **recoverAddress**:
+**validateSignature** takes the same first three parameters as `recoverAddress`:
 
 * messageHash&mdash;the hashed message
 * rs&mdash;r and s value of the signature
