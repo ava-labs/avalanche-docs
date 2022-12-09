@@ -447,8 +447,9 @@ ways to start the relayer application
    node ./relayer.js -1 <subnetBlockNumber>
    ```
 
-- When run with `node ./relayer.js <avaxBlockNumber>` or `node ./relayer.js -1
-  <subnetBlockNumber>` Relayer will look for events on either Avax or Subnet
+- When run with `node ./relayer.js <avaxBlockNumber>` 
+  or `node ./relayer.js -1 <subnetBlockNumber>` 
+  Relayer will look for events on either Avax or Subnet
   from the block number you provided and will iterate through the next 10 blocks
   for the event. "-1" as block number means do not process any old blocks for
   that chain. Therefore, `node ./relayer.js -1 <subnetBlockNumber>` will only

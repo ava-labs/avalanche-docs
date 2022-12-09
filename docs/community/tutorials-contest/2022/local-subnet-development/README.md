@@ -455,9 +455,8 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
     created a Subnet with the same name. To check if that is the case, you can
     run `avalanche subnet list` which would list the Subnets you have. If you
     have a Subnet with the same name, you can try to create with a different
-    name, delete the existing Subnet by running `avalanche subnet delete
-    <subnetName>` or overwrite the existing one by running `avalanche subnet
-    create <subnetName> --force`
+    name, delete the existing Subnet by running `avalanche subnet delete <subnetName>` 
+    or overwrite the existing one by running `avalanche subnet create <subnetName> --force`
 
 ### Step 3: Deploy the Subnet
 
