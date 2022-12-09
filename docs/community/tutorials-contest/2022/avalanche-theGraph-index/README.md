@@ -60,15 +60,15 @@ Ethereum and IPFS. Anyone can build and publish open subgraphs.
 
 1. NodeJS and Yarn
 
-First, install the LTS (long-term support) version of
-[NodeJS](https://nodejs.org/en). This is `18.x` at the time of writing. NodeJS
-bundles `npm`.
+    First, install the LTS (long-term support) version of
+    [NodeJS](https://nodejs.org/en). This is `18.x` at the time of writing. NodeJS
+    bundles `npm`.
 
-Next, install the [yarn](https://yarnpkg.com) package manager:
+    Next, install the [yarn](https://yarnpkg.com) package manager:
 
-```zsh
-npm install -g yarn
-```
+    ```zsh
+    npm install -g yarn
+    ```
 
 2. Git
 
@@ -276,101 +276,102 @@ Please take note of the deployment address as we will be making use of it subseq
 
 1. Installing Dependencies
 
-The most efficient way to make use of The Graph in indexing our Subnet is to
-host a local Graph Node. This is pretty straightforward to setup once you got
-requirements up and running. This tutorial is an extension of the
-[Graph-Node](https://github.com/graphprotocol/graph-node) GitHub repository.
+    The most efficient way to make use of The Graph in indexing our Subnet is to
+    host a local Graph Node. This is pretty straightforward to setup once you got
+    requirements up and running. This tutorial is an extension of the
+    [Graph-Node](https://github.com/graphprotocol/graph-node) GitHub repository.
 
-The following components are needed:
+    The following components are needed:
 
-* Interplanetary File System (IPFS) for hosting our files.
-  [Installation](https://docs.ipfs.io/install/) instructions.
-* PostgreSQL, a database management tool for keeping out data.
-  [Installation](https://www.postgresql.org/download/) instructions.
-* Rust, we will be building and compiling The Graph Node using the cargo package
-  manager. [Installation](https://www.rust-lang.org/en-US/install.html)
-  instructions.
+    * Interplanetary File System (IPFS) for hosting our files.
+      [Installation](https://docs.ipfs.io/install/) instructions.
+    * PostgreSQL, a database management tool for keeping out data.
+      [Installation](https://www.postgresql.org/download/) instructions.
+    * Rust, we will be building and compiling The Graph Node using the cargo package
+      manager. [Installation](https://www.rust-lang.org/en-US/install.html)
+      instructions.
 
 
-If the above installation instructions are followed correctly, you should have these tools up and running.
+    If the above installation instructions are followed correctly, you should
+    have these tools up and running.
 
-![ipfs](./images/26.png "ipfs")
+    ![ipfs](./images/26.png "ipfs")
 
-![ipfs2](./images/27.png "ipfs2")
+    ![ipfs2](./images/27.png "ipfs2")
 
 2. Deploying Resources
 
-After successfully installing IPFS, initialise the daemon by running
+    After successfully installing IPFS, initialise the daemon by running
 
-```zsh
-ipfs init
-```
+    ```zsh
+    ipfs init
+    ```
 
-![ipfs3](./images/28.png "ipfs3")
+    ![ipfs3](./images/28.png "ipfs3")
 
-Next run,
+    Next run,
 
-```zsh
-ipfs daemon
-```
+    ```zsh
+    ipfs daemon
+    ```
 
-![ipfs4](./images/29.png "ipfs4").
+    ![ipfs4](./images/29.png "ipfs4").
 
-Its now time to get our database all set-up.
+    Its now time to get our database all set-up.
 
-Run the following commands:
+    Run the following commands:
 
-```zsh
-initdb -D .postgres
-```
+    ```zsh
+    initdb -D .postgres
+    ```
 
-```zsh
-pg_ctl -D .postgres -l logfile start
-```
+    ```zsh
+    pg_ctl -D .postgres -l logfile start
+    ```
 
-```zsh
-createdb graph-node
-```
+    ```zsh
+    createdb graph-node
+    ```
 
 3. Configuring up the Graph Node
 
-Clone and build `The Graph` node folder
+    Clone and build `The Graph` node folder
 
-```zsh
-git clone https://github.com/graphprotocol/graph-node
-```
+    ```zsh
+    git clone https://github.com/graphprotocol/graph-node
+    ```
 
-Build the folder by running 
-```zsh
-cargo build
-```
+    Build the folder by running 
 
-If you have successfully installed Rust but `the command is not found`, you would
-need to setup some environmental variables. Running this command might help.
+    ```zsh
+    cargo build
+    ```
 
-```zsh
-source $HOME/.cargo/env
-```
+    If you have successfully installed Rust but `the command is not found`, you would
+    need to setup some environmental variables. Running this command might help.
 
-Once all dependencies are up and running, run the following command to kick start the node.
+    ```zsh
+    source $HOME/.cargo/env
+    ```
 
-```zsh
-cargo run -p graph-node --release -- \
---postgres-url postgresql://postgres:*fill-in-posgresql-username: :*fill-in-posgresql-password @localhost:5432/graph-node \ 
---ethereum-rpc fuji:http://127.0.0.1:9650/ext/bc/*fill-in-your-blockchain-id/rpc \
---ipfs 127.0.0.1:5001
-```
+    Once all dependencies are up and running, run the following command to kick start the node.
 
-Before running the above make sure you replace the following:
-*fill-in-posgresql-username ==> Your Database username. `Defaults to [Postgres]
-*fill-in-posgresql-password ==> Your Database password.
+    ```zsh
+    cargo run -p graph-node --release -- \
+    --postgres-url postgresql://postgres:*fill-in-posgresql-username: :*fill-in-posgresql-password @localhost:5432/graph-node \ 
+    --ethereum-rpc fuji:http://127.0.0.1:9650/ext/bc/*fill-in-your-blockchain-id/rpc \
+    --ipfs 127.0.0.1:5001
+    ```
 
-![node](./images/30.png "node")
+    Before running the above make sure you replace the following:
+    *fill-in-posgresql-username ==> Your Database username. `Defaults to [Postgres]
+    *fill-in-posgresql-password ==> Your Database password.
 
-If everything goes smoothly. You should get this.
+    ![node](./images/30.png "node")
 
-![success](./images/31.png "success")
+    If everything goes smoothly. You should get this.
 
+    ![success](./images/31.png "success")
 
 4. Deploying the subgraph
 

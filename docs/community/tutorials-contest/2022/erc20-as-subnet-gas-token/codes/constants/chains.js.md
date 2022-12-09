@@ -1,3 +1,5 @@
+# Chains.js
+
 ```javascript
 module.exports = {
    avax: {
@@ -10,11 +12,4 @@ module.exports = {
            "<your-subnet-rpc-url>",
    },
 };
-
-
-
-
-
-
-
 ```

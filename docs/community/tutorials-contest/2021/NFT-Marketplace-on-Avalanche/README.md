@@ -2,7 +2,7 @@
 
 Step by step tutorial to build your own NFT marketplace on Avalanche using Hardhat and React.
 
-# Table of Contents
+## Table of Contents
 
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
@@ -424,7 +424,8 @@ function placeBid() payable external returns(bool){
 
 ##### Cancel Auction
 
-This is a very simple function. If there are no bids and the auction is open, the auction creator should be able to cancel the auction.
+This is a very simple function. If there are no bids and the auction is open,
+the auction creator should be able to cancel the auction.
 
 ```solidity
 function cancelAuction() external returns(bool){ // Cancel the auction
@@ -563,7 +564,8 @@ _auctionIdCounter++; // increment the counter
 Auction auction = new Auction(msg.sender, _endTime, _minIncrement, _directBuyPrice, _startPrice, _nftAddress, _tokenId); // create the auction
 ```
 
-Finally, we will transfer the NFT token to the newly generated Auction contract and update our auctions map.
+Finally, we will transfer the NFT token to the newly generated Auction contract
+and update our auctions map.
 
 ```solidity
 IERC721 _nftToken = IERC721(_nftAddress); // get the nft token
@@ -660,7 +662,7 @@ Here is the complete code: [AuctionManager.sol](NFT-Marketplace-dApp/contracts/A
 
 That's all for the contracts!
 
-# AVAX Fuji Testnet
+## AVAX Fuji Testnet
 
 We are going to test the marketplace on AVAX Fuji Testnet. First, you need to
 add AVAX Fuji Testnet to MetaMask. Open MetaMask and view networks, then click
@@ -672,10 +674,10 @@ We will deploy our contracts on Fuji Testnet.
 Fuji Testnet Settings:
 
 - Network Name: Avalanche Fuji C-Chain
-- New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
+- New RPC URL: <https://api.avax-test.network/ext/bc/C/rpc>
 - ChainID: 43113
 - Symbol: AVAX
-- Explorer: https://testnet.snowtrace.io
+- Explorer: <https://testnet.snowtrace.io>
 
 Next, we will add the network configuration in hardhat config file
 [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not
@@ -698,7 +700,7 @@ networks:{
 Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Testnet Faucet
 ](https://faucet.avax.network/) to get some test AVAX for free.
 
-# Deploying the Contracts
+## Deploying the Contracts
 
 We need to deploy our `NFT` and `AuctionManager` contracts to the Fuji Testnet.
 We will use hardhat to deploy the contracts, [learn more about it
@@ -735,8 +737,8 @@ lines on your terminal to run the
 [`deploy.js`](NFT-Marketplace-dApp/scripts/deploy.js) script.
 
 ```shell
-$ npx hardhat compile  # Compiles the contracts
-$ npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script on fuji test network, "fuji" is specified inside the hardhat config file
+npx hardhat compile  # Compiles the contracts
+npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script on fuji test network, "fuji" is specified inside the hardhat config file
 ```
 
 Pretty simple! If this looks unfamiliar to you, you may want to take a look at [hardhat guides](https://hardhat.org/guides/deploying.html).
@@ -744,7 +746,7 @@ Pretty simple! If this looks unfamiliar to you, you may want to take a look at [
 Do not forget to note the addresses, as we will need them afterward to interact with the contracts.
 ![Deployed](images/nft-marketplace-deployed.png)
 
-# React App
+## React App
 
 Let's build an interface to interact with our marketplace. We are going to use `react` and `ether.js`.
 
@@ -1675,8 +1677,9 @@ Call this function when the `Withdraw Token` button is pressed.
 
 ![Auction Ended](images/nft-marketplace-auction-ended.png)
 
-After some time, the auction is finally over, and our bid is still the highest one. Let's withdraw our new NFT token.
-Note: It would be nice to hide the end time when the auction is not open.
+After some time, the auction is finally over, and our bid is still the highest
+one. Let's withdraw our new NFT token. Note: It would be nice to hide the end
+time when the auction is not open.
 
 Approving the transaction...
 
@@ -1688,7 +1691,8 @@ Refresh the page and we just got our new NFT!
 
 ### Withdraw Funds
 
-Simply call the `withdrawFunds` function of the Auction contract and show an alert when the transaction gets mined.
+Simply call the `withdrawFunds` function of the Auction contract and show an
+alert when the transaction gets mined.
 
 ```js
 async withdrawFunds() {
@@ -1910,7 +1914,7 @@ contract. You may want to take a look at
 [`IERC721Metadata`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#IERC721Metadata)
 to learn more about it.
 
-# Using with Other NFT Contracts
+## Using with Other NFT Contracts
 
 Selling another NFT instead of creating a contract is possible. As you may have
 noticed, we have only used the `approve` and `transferFrom` functions to
@@ -1973,8 +1977,8 @@ networks:{
 After that, run the deploy script just like when deploying to the test net.
 
 ```shell
-$ npx hardhat compile # Compiles the contracts
-$ npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Avalanche Mainnet, "mainnet" is specified inside the hardhat config file
+npx hardhat compile # Compiles the contracts
+npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Avalanche Mainnet, "mainnet" is specified inside the hardhat config file
 ```
 
 ## Conclusion

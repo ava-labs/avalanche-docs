@@ -316,14 +316,15 @@ done like this:
 ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 
-Access <http://localhost:6688> in your favorite browser, and this will return to the Chainlink login page:
+Access <http://localhost:6688> in your favorite browser, and this will return to
+the Chainlink login page:
 
 ![chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)
 
 ## Create a New Bridge
 
 First, create a new bridge which will point to the external adaptor listening
-address, which is in our case (http://<$HOST>:8081)
+address, which is in our case `http://<$HOST>:8081`
 
 ![chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
 

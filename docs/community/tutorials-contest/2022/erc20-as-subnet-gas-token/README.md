@@ -423,21 +423,21 @@ ways to start the relayer application
    node ./relayer.js
    ```
 
-- When run with `node ./relayer.js`. Relayer will subscribe to events from
-  recent blocks on Avax and Subnet. Therefore, it might not process an event
-  that is emitted 1000 blocks ago. If you want to start the relayer and make a
-  transaction, current way of running is what you are looking for.
+    - When run with `node ./relayer.js`. Relayer will subscribe to events from
+      recent blocks on Avax and Subnet. Therefore, it might not process an event
+      that is emitted 1000 blocks ago. If you want to start the relayer and make a
+      transaction, current way of running is what you are looking for.
 
 2. ```bash
    node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>
    ```
 
-- When run with `node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`.
-  Relayer will look for events on Avax and Subnet from the block number you
-  provided and will iterate through the next 10 blocks for the event. Therefore,
-  if you have a burn or lock event emitted 1000 blocks ago, you can process it
-  by giving the right blockNumber. If you want to start the relayer to process
-  an old burn or lock event, current way of running is what you are looking for.
+    - When run with `node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`.
+      Relayer will look for events on Avax and Subnet from the block number you
+      provided and will iterate through the next 10 blocks for the event. Therefore,
+      if you have a burn or lock event emitted 1000 blocks ago, you can process it
+      by giving the right blockNumber. If you want to start the relayer to process
+      an old burn or lock event, current way of running is what you are looking for.
 
 3. ```bash
    node ./relayer.js <avaxBlockNumber>

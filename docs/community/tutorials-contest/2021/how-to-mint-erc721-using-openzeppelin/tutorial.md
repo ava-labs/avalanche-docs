@@ -264,8 +264,7 @@ The format is as follows.
 *Testnet* - 
 <https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers>
 
-*Mainnet* - https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
-
+*Mainnet* - <https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers>
 
 ### Conclusion
 

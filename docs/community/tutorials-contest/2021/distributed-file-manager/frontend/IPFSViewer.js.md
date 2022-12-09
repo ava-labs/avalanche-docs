@@ -1,4 +1,6 @@
-```
+# IPFSViewer.js
+
+```js
 import React from "react";
 import App from "./App";
 import IPFSViewerCSS from "./IPFSViewerCSS.css";

@@ -546,7 +546,8 @@ await ethers.provider.send('hardhat_impersonateAccount', ['0xcOffeexxxxxxxxxxxxx
 const owner = await ethers.provider.getSigner('0xcOffeexxxxxxxxxxxxxxxxxxxxxxx')
 ```
 
-Meaning that we will `impersonate` the address `0xcOffeexxxxxxxxxxxxxxxxxxxxxxx`which is the `owner` of the
+Meaning that we will `impersonate` the address
+`0xcOffeexxxxxxxxxxxxxxxxxxxxxxx`which is the `owner` of the
 `IStakingRewardsILPV2` contract.
 
 We can then use the `admin` signer to interact with the contract, as wee see in the following section:
