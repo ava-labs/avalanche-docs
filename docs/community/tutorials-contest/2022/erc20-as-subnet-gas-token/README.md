@@ -336,7 +336,7 @@ the user. If you have used `--from avax` you will see the ERC20 balances of both
 user and the bridge contract.
 
 Balance value seen on the Subnet depends on how you have funded your address.
-But balance values on avax should look like the following:
+But balance values on AVAX should look like the following:
 
 ```text
 MERC20 balance of the user:  1000000.0
@@ -397,13 +397,13 @@ npx hardhat burnOrLock --from subnet --amount <Example value: 4>
 
 When you try to run the first script `... --from avax --amount 10` if the user
 has 10 ERC20 tokens it will work fine and you will see the updated balances as
-expected on avax network. User’s decremented by 10, bridge’s incremented by 10.
+expected on AVAX network. User’s decremented by 10, bridge’s incremented by 10.
 But you would not see that the user's native token balance on the Subnet is
 increased. Although there are bridge contracts, there is no relayer application
 to establish the communication in between them. Therefore, the user locked its
 tokens but its balance on the Subnet did not change. It is the same for the
 second script where the user burns tokens on Subnet but does not get any new
-tokens on avax c-chain. Be aware, if the user account does not have native token
+tokens on AVAX C-Chain. Be aware, if the user account does not have native token
 balance on the Subnet, the second script would throw an error.
 
 :::
@@ -473,14 +473,14 @@ chain communication.
 - Start the relayer
 - An already processed event appears on the console of the relayer therefore it does not get processed
 - Check the balances to make sure already processed event is not processed
-- Lock 20 ERC20 token from avax and see the updated balances of user and the bridge on avax
+- Lock 20 ERC20 token from AVAX and see the updated balances of user and the bridge on AVAX
 - Relayer observes the transaction and sends a transaction to mint native tokens on Subnet
-- Check the balances on both Subnet and avax. As expected our Subnet native
+- Check the balances on both Subnet and AVAX. As expected our Subnet native
   token balance increases by 20
 - Burn 5 native tokens from Subnet and see the updated balance of the user
 - Relayer observers the transaction and sends a transaction to release 5 ERC20
-  tokens on avax
-- Check balance on both Subnet and Avax. As expected our ERC20 balance increases
+  tokens on AVAX
+- Check balance on both Subnet and AVAX. As expected our ERC20 balance increases
   by 5 and bridge's decreases by 5
 
 #### Test Relayer for Old Events
@@ -489,7 +489,7 @@ chain communication.
 
 ##### What Happens on the Video?
 
-- Start by a lock transaction from avax with amount 40. As stated in the video
+- Start by a lock transaction from AVAX with amount 40. As stated in the video
   this transaction was sent when the relayer was not working. Therefore, it is
   not processed and it will not be processed when we start the relayer with
   `node relayer.js` because there has been many blocks after it
@@ -500,8 +500,8 @@ chain communication.
   considered new and therefore shown
 - Start the relayer with `node relayer.js <blockNumber>` to show that event will
   be processed and will be printed as "OLD: "
-- Check balances on both chains to confirm that old lock event on avax has been
-  processed by relayer and tokens have been minted on avax
+- Check balances on both chains to confirm that old lock event on AVAX has been
+  processed by relayer and tokens have been minted on AVAX
 
 ## Troubleshoot Common Issues
 
@@ -522,8 +522,8 @@ Things to check out;
     admin.
   - You have created a contractAddresses.js file inside the variables folder. If
     you did not create this file, deploy.js would fail.
-  - If you are trying to bridge from Subnet to avax, in other words trying to
-    burn from Subnet and release from avax, make sure that AvaxBridge has enough
+  - If you are trying to bridge from Subnet to AVAX, in other words trying to
+    burn from Subnet and release from AVAX, make sure that AvaxBridge has enough
     ERC20 tokens to release.
 
 ## Security and Maintenance
@@ -577,7 +577,7 @@ many potential risks when running a bridge.
 
 ## Conclusion
 
-Congratulations! You have created a bridge between avax C-chain and your Subnet
+Congratulations! You have created a bridge between AVAX C-Chain and your Subnet
 to use an ERC-20 token as a gas token.
 
 Things achieved:

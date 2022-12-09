@@ -420,7 +420,7 @@ object that is a reference to a contract deployed at `WAVAX_ADDRESS` and
 `PNG_ADDRESS`, with `IWAVAX` as ABI.
 
 Then we check the balance of the account we will use, and if the balance is too
-small for our taste, we deposit a bit of avax in it.
+small for our taste, we deposit a bit of AVAX in it.
 
 ```ts
     // We get an instance of the wavax contract

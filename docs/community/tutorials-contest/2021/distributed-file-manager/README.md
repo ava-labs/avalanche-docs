@@ -85,8 +85,8 @@ tutorial.
 
 Our application's client-side is made using **ReactJS**. Smart contracts will be
 made using the **Solidity** language and will be deployed on the **Avalanche**
-network with **Trufflesuite**. Therefore, we need to set up our working
-directory according to ReactJS and Trufflesuite, for making our development
+network with Truffle Suite. Therefore, we need to set up our working
+directory according to ReactJS and Truffle Suite, for making our development
 process smoother.
 
 Open a terminal and navigate to the directory where we will create the
@@ -355,7 +355,7 @@ consisting of five predefined tree levels:
 * **address\_index** - We can use all the 4 Billion child keys as our address,
   but this index would set the primary address for our wallet.
 
-Avalanche's wallets like **wallet.avax.network** use the path `m/44'/9000'/0'/0`
+Avalanche's wallets like <https://wallet.avax.network> use the path `m/44'/9000'/0'/0`
 for its key derivation, since the coin type of Avalanche is **52752**. The list
 of different crypto coins along with their type can be found
 [here](https://github.com/satoshilabs/slips/blob/master/slip-0044.md). The coin
@@ -960,7 +960,7 @@ in the centre of the extension. Fill in the details as shown in the below image.
 
 Congratulations! You have successfully built a Distributed File Manager by
 deploying the smart contract on **Avalanche** Fuji test network using
-**Trufflesuite** and connecting your client-side made with **ReactJS**. The most
+**Truffle Suite** and connecting your client-side made with **ReactJS**. The most
 interesting part is that we have used the **IPFS** protocol for uploading our
 files on the distributed network.
 

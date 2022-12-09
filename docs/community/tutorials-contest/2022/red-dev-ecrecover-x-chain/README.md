@@ -438,7 +438,7 @@ Chain ID: 99999
 Curreny Symbol: LEVM
 ```
 
-You can create a new metamask account by importing the private key
+You can create a new MetaMask account by importing the private key
 `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`, and then
 you can start working with this account.
 

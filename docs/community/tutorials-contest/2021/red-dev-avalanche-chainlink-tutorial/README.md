@@ -135,7 +135,7 @@ docker images
 
 ![docker-images](img/chainlink-tutorial-02-docker-images.png)
 
-The image should be tagged as avaplatform/avalanchego:COMMIT, where COMMIT
+The image should be tagged as `avaplatform/avalanchego:COMMIT`, where `COMMIT`
 is the shortened commit of the Avalanche source it was built from. In our case
 it is 254b53da.
 
@@ -145,7 +145,7 @@ it is 254b53da.
 ### Dependencies 
 
 1. Docker CE
-2. Smartcontract/chainlink v0.10.3 
+2. `Smartcontract/chainlink` v0.10.3 
 3. AvalancheGo >= 1.4.5
 4. PostgreSQL
 
@@ -166,8 +166,8 @@ docker run --name avalanchego-chainlink -d -p 9650:9650 -p 9651:9651 -v /root/.a
 * -d specifies detached mode
 * -p specifies the port number
 * -v specifies the docker host location to store the container volume data
-* /avalanchego/build/avalanchego --network-id=fuji is the command to start the
-   avalanchego under Fuji test network
+* `/avalanchego/build/avalanchego --network-id=fuji` is the command to start the
+   AvalancheGo under Fuji test network
   
 Verify that the AvalancheGo node is started and running:
 
@@ -286,7 +286,7 @@ Use the command below:
 docker run -d --name chainlink-avalanche-node -p 6688:6688 -v ~/.chainlink-avalanche:/chainlink -it --env-file=/root/.chainlink-avalanche/.env smartcontract/chainlink:0.10.3 local n -p /chainlink/.password -a /chainlink/.api
 ```
 
-To verify the chainlink node is running:
+To verify the Chainlink node is running:
 
 ```bash
 docker ps
@@ -319,14 +319,14 @@ ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 Access <http://localhost:6688> in your favorite browser, and this will return to
 the Chainlink login page:
 
-![chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)
+![Chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)
 
 ## Create a New Bridge
 
 First, create a new bridge which will point to the external adaptor listening
 address, which is in our case `http://<$HOST>:8081`
 
-![chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
+![Chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
 
 ## Create a New Job
 
@@ -364,11 +364,11 @@ will be used to integrate Chainlink with on-chain contracts.
 Now, in the jobs section, the newly created _Avalanche NodeJS adapter test_ will
 be listed. Select that and click the Run button to test and see the result.
 
-![chainlink-job-run](img/chainlink-tutorial-09-chainlink-job-run.png)
+![Chainlink-job-run](img/chainlink-tutorial-09-chainlink-job-run.png)
 
 Then, click on the Runs tab, and select the job id to see the result. It should be in _Completed_ status:
 
-![chainlink-job-result](img/chainlink-tutorial-10-chainlink-job-result.png)
+![Chainlink-job-result](img/chainlink-tutorial-10-chainlink-job-result.png)
 
 ### Using Type: "runlog"
 
@@ -540,7 +540,7 @@ get your own oracle address.
 
 ![smartContract-confirm-txn](img/chainlink-tutorial-13-smart-contract-confirm-txn.png)
 
-Now, you can check the Runs tab in chainlink GUI it will show that the job has triggered and completed:
+Now, you can check the Runs tab in Chainlink GUI it will show that the job has triggered and completed:
 
 ![Chainlink-runlog-status](img/chainlink-tutorial-14-chainlink-runlog-status.png)
 
@@ -574,7 +574,7 @@ Here is a list of resources that can give you a detailed idea of what is mention
 4. [Learn NodeJS and installation](https://nodejs.dev/learn)
 5. [Learn Modern JavaScript](https://javascript.info/intro)
 6. [Learn about Chainlink](https://docs.chain.link/docs)
-7. [This is a useful documentation from Chainlink to setup and run a local chainlink node](https://docs.chain.link/docs/running-a-chainlink-node)
+7. [This is a useful documentation from Chainlink to setup and run a local Chainlink node](https://docs.chain.link/docs/running-a-chainlink-node)
 8. [Here is a good YouTube video by Chainlink on how to running a local Chainlink node](https://www.youtube.com/watch?v=ZB3GLtQvgME)
 9. [Avalanche Testnet LINK Token details](https://docs.chain.link/docs/link-token-contracts)
 10. [AvalancheGo setup details](https://github.com/ava-labs/avalanchego)

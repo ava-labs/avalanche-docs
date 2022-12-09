@@ -20,7 +20,7 @@ platform. It targets three 15 broad use cases:
 
 * Building application-specific blockchains, spanning permissioned (private) and permissionless (public)
 deployments.
-* Building and launching highly scalable and decentralized applications (Dapps).
+* Building and launching highly scalable and decentralized applications (dapps).
 * Building arbitrarily complex digital assets with custom rules, covenants, and riders (smart assets).
 
 ## Avalanche Features 3 Built-in Blockchains 
@@ -207,7 +207,7 @@ When a Subnet is run locally, it starts a multi-node (5 node) Avalanche Network 
 
 To test the functionality of the just created Subnet, go ahead and add the
 configuration details to [MetaMask](https://metamask.io/). You can create a new
-metamask account by importing the private key
+MetaMask account by importing the private key
 `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` and start
 experiencing with this account.
 
@@ -256,10 +256,10 @@ compiler version and makes use of it to compile your contract.
 
 ![remix2](./images/24.png "remix2")
 
-`Always make sure to confirm the Environmet Chain ID is the same as that of your selected metamask account`.
+`Always make sure to confirm the Environmet Chain ID is the same as that of your selected MetaMask account`.
 
 With this all set go ahead and deploy your smart contract on your local Subnet
-by clicking the `deploy` button. Approve the metamask request and pay the
+by clicking the `deploy` button. Approve the MetaMask request and pay the
 necessary gas fees.
 
 If the deployment is successful, you should see something like this ===>

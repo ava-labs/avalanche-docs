@@ -121,7 +121,7 @@ use.
 #### Token Symbol
 
 Token symbol is the symbol of the native token used in the Subnet. For instance,
-on the C-Chain, the symbol is `AVAX` and on the Ethereum mainnet, the symbol is
+on the C-Chain, the symbol is `AVAX` and on the Ethereum Mainnet, the symbol is
 `ETH`. You can use any symbol you want.
 
 #### Gas Configuration
@@ -214,9 +214,9 @@ Chain ID:         1234
 Currency Symbol:  TEST
 ```
 
-You can use this configuration to add a new network to your metamask. Then you
+You can use this configuration to add a new network to your MetaMask. Then you
 can import the account to which the airdrop funds were sent to into your
-metamask by importing the private key.
+MetaMask by importing the private key.
 
 ![MetaMask network config](.github/images/metamask.png)
 
@@ -226,7 +226,7 @@ million tokens to the default address (do not use in production)` in the
 anyone can access the account. For that reason, it's not a good idea to use this
 in production.
 
-After importing the account on metamask, let's change the network to our Subnet.
+After importing the account on MetaMask, let's change the network to our Subnet.
 
 ![MetaMask account page](.github/images/metamask2.png)
 
@@ -870,7 +870,7 @@ Awesomeness! Great work!
 
 ### MetaMask Configuration
 
-Before going to the next step, make sure you've added the Subnet to metamask by
+Before going to the next step, make sure you've added the Subnet to MetaMask by
 following the same steps in the [`Deploying the Subnet`](#deploying-the-subnet)
 section. This time you don't need to import the account as you're already using
 your own account. When adding the network, I've set the currency symbol to
@@ -881,7 +881,7 @@ your own account. When adding the network, I've set the currency symbol to
 ### MetaMask Gas Configuration **! IMPORTANT**
 
 Because we've set the base fee to 60 nAvax, you may need to increase the `Max
-priority fee` when confirming the transaction on metamask popup. Otherwise the
+priority fee` when confirming the transaction on MetaMask popup. Otherwise the
 transaction may fail.
 
 Here is how:
@@ -889,11 +889,11 @@ Here is how:
 ![change gas fee](.github/images/changegasfee.gif)
 
 If you're using the _Enhanced Gas Fee UI_ which is an experimental feature in
-metamask, you can set the gas fee to _Aggressive_ and that should work.
+MetaMask, you can set the gas fee to _Aggressive_ and that should work.
 
 ![aggressive](.github/images/aggressive.gif)
 
-After making a few transactions, metamask should start automatically adjusting
+After making a few transactions, MetaMask should start automatically adjusting
 the gas fee to the optimal value.
 
 ### Deploying the Contract
@@ -991,7 +991,7 @@ Go to the deploy tab, choose injected web3 as environment - connect your wallet
 
 ![Deploy](.github/images/deploying.png)
 
-Confirm the transaction with your metamask wallet.
+Confirm the transaction with your MetaMask wallet.
 
 ![Deployed contracts](.github/images/game_deployed.png)
 
@@ -1020,7 +1020,7 @@ address of `Game` contract to set the `Game` contract as a minter.
 
 ![Set minter](.github/images/setenabled.png)
 
-Confirm the transaction with your metamask wallet. We can call this function
+Confirm the transaction with your MetaMask wallet. We can call this function
 because we've added our address as an admin in the `contractNativeMinterConfig`
 section.
 
@@ -1033,11 +1033,11 @@ In the deploy tab:
 - Set the value to 100 Ether or any other amount you want to play with.
 - Find `Game` contract under deployed contracts section in remix.
 - Call `play` function.
-- Confirm the transaction with your metamask wallet.
+- Confirm the transaction with your MetaMask wallet.
 
 ![play](.github/images/play.png)
 
-Then check your metamask wallet.
+Then check your MetaMask wallet.
 
 ![result](.github/images/lucky.png)
 

@@ -2,7 +2,7 @@
 
 This tutorial teaches you to deploy your own ERC721 token on Avalanche Fuji C-chain testnet.
 
-The steps to deploy on the mainnet are identical and the differences are mentioned in the tutorial.
+The steps to deploy on the Mainnet are identical and the differences are mentioned in the tutorial.
 
 ## Contents
 
@@ -196,10 +196,10 @@ shortcut is Ctrl / Command + S or click the icon shown in the image below.
 
 Make sure you have the correct compiler selected from the dropdown and click the "Compile" button.
 
-![compile-nft](images/minting-erc721-14-compile-nft.png)
+![compile-NFT](images/minting-erc721-14-compile-nft.png)
 
 Once compiled we can now deploy the contract to the Avalanche Fuji C-Chain
-testnet. *The steps to deploy on the mainnet are the same.*
+testnet. *The steps to deploy on the Mainnet are the same.*
 
 Click the deploy button as shown in the image below.
 
@@ -220,10 +220,10 @@ You should get a "Confirm Transaction" prompt, hit the "Confirm" button.
 
 You should get a MetaMask pop-up asking to confirm the transaction.
 
-![metamask-popup](images/minting-erc721-18-metamask-popup.png)
+![MetaMask-popup](images/minting-erc721-18-metamask-popup.png)
 
 Make sure you are on the correct network and hit the "Confirm" button. You
-should be able to see the contract deployment under progress in your metamask.
+should be able to see the contract deployment under progress in your MetaMask.
 
 ![contract-deployment-in-progress](images/minting-erc721-19-contract-deployment-in-progress.png)
 
@@ -250,14 +250,13 @@ hit the "Confirm" button.
 
 Hooray! We have now minted an NFT to ourselves! 🎉
 
-
 ### Check the NFT on the explorer
 
 You can check the NFT on the explorer. My URL is below.
 
 <https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers>
 
-![nft-on-explorer](images/minting-erc721-23-nft-on-explorer.png)
+![NFT-on-explorer](images/minting-erc721-23-nft-on-explorer.png)
 
 The format is as follows.
 

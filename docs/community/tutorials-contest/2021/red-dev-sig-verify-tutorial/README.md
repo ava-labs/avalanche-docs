@@ -233,7 +233,7 @@ Addresses on the X-Chain use the Bech32 standard with an Avalanche-specific
 prefix of **X-**. Then there are four parts to the Bech32 address scheme that
 follow.
 
-1. A human-readable part (HRP). On Avalanche mainnet this is **avax** and on Fuji testnet it is **fuji**.
+1. A human-readable part (HRP). On Avalanche Mainnet this is `avax` and on Fuji testnet it is `fuji`.
 2. The number **1**, which separates the HRP from the address and error correction code.
 3. A base-32 encoded string representing the 20 byte address.
 4. A 6-character base-32 encoded error correction code.
@@ -255,7 +255,7 @@ The `recoverAddress` function is called in the dapp from the webapp.
 * publicKey&mdash;x and y coordinates of the public key
 * pubk&mdash;33-byte compressed public key
 * xchain&mdash;X-Chain address
-* prefix&mdash;Prefix for Bech32 addressing scheme (avax or fuji)
+* prefix&mdash;Prefix for Bech32 addressing scheme (AVAX or Fuji)
 * hrp&mdash;Array of each unicode character in the prefix
 
 Then it performs the following steps:

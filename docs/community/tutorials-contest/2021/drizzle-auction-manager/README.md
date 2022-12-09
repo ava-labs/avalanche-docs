@@ -793,7 +793,7 @@ in the center of the extension. Fill in the details as shown in the below image.
 
 We have successfully built a dapp through which we can organize auctions, bid in
 them and declare results, with both frontend and smart contracts. We have used
-the Drizzle library from Trufflesuite for integrating our frontend with the
+the Drizzle library from Truffle Suite for integrating our frontend with the
 blockchain and to keep our data updated in real-time.
 
 ## Next Steps
