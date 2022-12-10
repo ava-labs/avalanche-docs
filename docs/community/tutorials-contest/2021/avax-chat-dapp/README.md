@@ -1,44 +1,62 @@
-# Create a chat dApp using Solidity and ReactJS
+# Create a Chat Dapp Using Solidity and ReactJS
 
 ## Introduction
 
-In this tutorial we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
+In this tutorial we will build a decentralized chat application on Avalanche's
+Fuji test-network from scratch. The dapp will allow users to connect with other
+people and chat with them. We will develop our smart contract using Solidity
+which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use
+UI developed using ReactJS. So, let us begin!
 
 ## Requirements
 
 * Basic familiarity with [ReactJS](https://reactjs.org/) and [Solidity](https://soliditylang.org/)
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
-* [Metamask extension](https://metamask.io/download.html) on your browser
+* [MetaMask extension](https://metamask.io/download.html) on your browser
 
-## Implementing the smart contract
+## Implementing the Smart Contract
 
-Our chat dApp needs the basic functionality allowing users to connect with and share messages with friends. To accomplish this, we will write the functions responsible for creating an account, adding friends and sending messages.
+Our chat dapp needs the basic functionality allowing users to connect with and
+share messages with friends. To accomplish this, we will write the functions
+responsible for creating an account, adding friends and sending messages.
 
-## Account creation
+## Account Creation
 
 We will define 3 functions :
 
-* The `checkUserExists(pubkey)` function is used to check if a user is registered with our application or not. It will help make sure duplicate users are not created and it will also be called from other functions to check their existence.
+* The `checkUserExists(pubkey)` function is used to check if a user is
+  registered with our application or not. It will help make sure duplicate users
+  are not created and it will also be called from other functions to check their
+  existence.
 
 * The `createAccount(username)` function registers a new user on the platform with the provided username.
 
 * The `getUsername(pubkey)` function will return the username of the given user if it exists.
 
-## Adding friends
+## Adding Friends
 
 Here also we will define 3 functions :
 
-* The `checkAlreadyFriends(pubkey1, pubkey2)` function checks whether two users are already friends with each other or not. This is needed to prevent duplicate channel between the same parties and will also be used to prevent a user from sending messages to other users unless they are friends.
+* The `checkAlreadyFriends(pubkey1, pubkey2)` function checks whether two users
+  are already friends with each other or not. This is needed to prevent
+  duplicate channel between the same parties and will also be used to prevent a
+  user from sending messages to other users unless they are friends.
 
-* The `addFriend(pubkey, name)` function mark the two users as friend if they both are registered on the platform and are already not friends with each other.
+* The `addFriend(pubkey, name)` function mark the two users as friend if they
+  both are registered on the platform and are already not friends with each
+  other.
 
 * The `getMyFriendList()` function will return an array of friends of the given user.
 
 ## Messaging
 
-The final part of the Solidity contract will enable the exchange of messages between users. We will divide the task into two functions `sendMessage()` and `readMessage()`.
+The final part of the Solidity contract will enable the exchange of messages
+between users. We will divide the task into two functions `sendMessage()` and
+`readMessage()`.
 
-* The `sendMessage()` function allows a user to send messages to another registered user (friend). This is done with `checkUserExists(pubkey)` and `checkAlreadyFriends(pubkey1, pubkey2)`.
+* The `sendMessage()` function allows a user to send messages to another
+  registered user (friend). This is done with `checkUserExists(pubkey)` and
+  `checkAlreadyFriends(pubkey1, pubkey2)`.
 
 * The `readMessage()` function returns the chat history that has happened between the two users so far.
 
@@ -46,37 +64,41 @@ The final part of the Solidity contract will enable the exchange of messages bet
 
 We will have three types of user-defined data :
 
-* `user` will have the properties `name` which stores the username, and `friendList` which is an array of other users.
+* `user` will have the properties `name` which stores the username, and
+  `friendList` which is an array of other users.
 
-* `friend` will have the properties `pubkey` which is the friends' public address, and `name` which the user would like to refer them as.
+* `friend` will have the properties `pubkey` which is the friends' public
+  address, and `name` which the user would like to refer them as.
 
-* `message` has three properties: `sender`, `timestamp` and `msg`, which is short for "message".
+* `message` has three properties: `sender`, `timestamp` and `msg`, which is short for "message."
 
 We would maintain 2 collections in our database:
 
 * `userList` where all the users on the platform are mapped with their public address.
 
-* `allMessages` stores the messages. As Solidity does not allow user-defined keys in a mapping, we can instead hash the public keys of the two users. This value can then be stored in the mapping.
+* `allMessages` stores the messages. As Solidity does not allow user-defined
+  keys in a mapping, we can instead hash the public keys of the two users. This
+  value can then be stored in the mapping.
 
-## Deploying the smart contract
+## Deploying the Smart Contract
 
-## Setting up Metamask
+## Setting up MetaMask
 
 Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 
-![Metamask](./images/avax-chat-app-metamask.png)
+![MetaMask](./images/avax-chat-app-metamask.png)
 
-**FUJI Testnet Settings:**
+**Fuji Testnet Settings:**
 
-* **Network Name**: Avalanche FUJI C-Chain
+* **Network Name**: Avalanche Fuji C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `C-AVAX`
-* **Explorer**: [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
+* **Explorer**: `https://testnet.snowtrace.io`
 
 Fund your address from the given [faucet](https://faucet.avax.network/).
 
-## Deploy using Remix
+## Deploy Using Remix
 
 Open [Remix](https://remix.ethereum.org/) -> Select Solidity
 
@@ -202,15 +224,23 @@ contract Database {
 }
 ```
 
-Navigate to the Solidity compiler Tab on the left side navigation bar and click the blue button to compile the `Database.sol` contract. Note down the `ABI` as it will be required in the next section.
+Navigate to the Solidity compiler Tab on the left side navigation bar and click
+the blue button to compile the `Database.sol` contract. Note down the `ABI` as
+it will be required in the next section.
 
-Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected Web3" (make sure Metamask is loaded) and click "Deploy" button.
+Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injected
+Web3" (make sure MetaMask is loaded) and click "Deploy" button.
 
-Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, Note down the `contract address`.
+Approve the transaction on MetaMask pop-up interface. Once our contract is
+deployed successfully, Note down the `contract address`.
 
-> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
+> An Application Binary Interface (ABI) is a JSON object which stores the
+> metadata about the methods of a contract like data type of input parameters,
+> return data type & property of the method like payable, view, pure etc. You
+> can learn more about the ABI from the [solidity
+> documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
 
-## Creating a frontend in React
+## Creating a Frontend in React
 
 Now, we are going to create a React app scaffold and set up the frontend of the application.
 
@@ -249,7 +279,7 @@ Open `index.html` file in the `public` directory, and paste the following HTML :
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <title>Chat dApp</title>
+    <title>Chat dapp</title>
 </head>
 
 <body>
@@ -259,14 +289,17 @@ Open `index.html` file in the `public` directory, and paste the following HTML :
 </html>
 ```
 
-Move out of the public directory and create a new directory `components` inside `src` directory, where we will be keeping all our React components, using the following command :
+Move out of the public directory and create a new directory `components` inside
+`src` directory, where we will be keeping all our React components, using the
+following command :
 
 ```bash
 mkdir ./src/components
 cd ./src/components
 ```
 
-Now let's create the component having the navbar of our dApp. Create a new file called `NavBar.jsx` and paste the following code :
+Now let's create the component having the navbar of our dapp. Create a new file
+called `NavBar.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -283,7 +316,7 @@ export function NavBar( props ){
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text> 
                     <Button style={{ display: props.showButton }} variant="success" onClick={ async () => { props.login(); }}>
-                        Connect to Metamask
+                        Connect to MetaMask
                     </Button>
                     <div style={{ display: props.showButton === "none" ? "block" : "none" }}>
                         Signed in as: 
@@ -298,7 +331,8 @@ export function NavBar( props ){
 }
 ```
 
-All the contacts will have a card with their name and public key. Create a new file called `ChatCard.jsx` and paste the following code :
+All the contacts will have a card with their name and public key. Create a new
+file called `ChatCard.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -320,7 +354,9 @@ export function ChatCard( props ){
 }
 ```
 
-Each message will be rendered by the Message component. This component will have the timestamp , senders' name and the message. Create a new file called `Message.jsx` and paste the following code :
+Each message will be rendered by the Message component. This component will have
+the timestamp , senders' name and the message. Create a new file called
+`Message.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -350,7 +386,9 @@ export function Message( props ){
 }
 ```
 
-To add a new contact we will make AddNewChat component. It will show a modal on clicking the NewChat button and ask for the contact details. Create a new file called `AddNewChat.jsx` and paste the following code :
+To add a new contact we will make AddNewChat component. It will show a modal on
+clicking the NewChat button and ask for the contact details. Create a new file
+called `AddNewChat.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -397,7 +435,8 @@ export function AddNewChat( props ){
 }
 ```
 
-Now lets create a new file called `Components.js` and export all the components together. Paste the following code :
+Now lets create a new file called `Components.js` and export all the components
+together. Paste the following code :
 
 ```javascript
 export { NavBar } from "./NavBar";
@@ -433,7 +472,7 @@ export function App( props ) {
     let provider;
     let signer;
 
-    // Login to Metamask and check the if the user exists else creates one
+    // Login to MetaMask and check the if the user exists else creates one
     async function login() {
         let res = await connectToMetamask();
         if( res === true ) {
@@ -459,11 +498,11 @@ export function App( props ) {
 				alert("CONTRACT_ADDRESS not set properly!");
 			}
         } else {
-            alert("Couldn't connect to Metamask");
+            alert("Couldn't connect to MetaMask");
         }    
     }
 
-    // Check if the Metamask connects 
+    // Check if the MetaMask connects 
     async function connectToMetamask() {
         try {
             await window.ethereum.enable();
@@ -625,7 +664,9 @@ export function App( props ) {
 }
 ```
 
-> **Note:** Write down the contract address obtained from `Implementing the smart contract` section in the variable called `CONTRACT_ADDRESS` on line 9 of `App.jsx`.
+> **Note:** Write down the contract address obtained from `Implementing the
+> smart contract` section in the variable called `CONTRACT_ADDRESS` on line 9 of
+> `App.jsx`.
 
 Open the `index.js` file inside the `src` directory and paste the following code :
 
@@ -795,7 +836,11 @@ export const abi = [
 ]
 ```
 
-> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
+> An Application Binary Interface (ABI) is a JSON object which stores the
+> metadata about the methods of a contract like data type of input parameters,
+> return data type & property of the method like payable, view, pure etc. You
+> can learn more about the ABI from the [solidity
+> documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
 
 Now its time to run our React app. Use the following command to start the React app.
 
@@ -816,28 +861,39 @@ Make sure your friend is also registered to the application while adding him as 
 
 ## Conclusion
 
-Congratulations! We have successfully developed a decentralized chat application which can be deployed on Avalanche. We also created a boilerplate React application to use as the frontend for our dApp. As a next step, You can improve the application by adding features like delete messages, block users, or create groups of friends. You can also optimize the gas cost by limiting the maximum number of messages stored.
+Congratulations! We have successfully developed a decentralized chat application
+which can be deployed on Avalanche. We also created a boilerplate React
+application to use as the frontend for our dapp. As a next step, You can improve
+the application by adding features like delete messages, block users, or create
+groups of friends. You can also optimize the gas cost by limiting the maximum
+number of messages stored.
 
 ## Troubleshooting
 
 ## Transaction Failure
 
-* Check if your account has sufficient balance at [fuji block-explorer](https://testnet.snowtrace.io/). You can fund your address from the given [faucet](https://faucet.avax.network/)
+* Check if your account has sufficient balance at [Fuji
+  block-explorer](https://testnet.snowtrace.io/). You can fund your address from
+  the given [faucet](https://faucet.avax.network/)
 
 ![Zero balance preview](./images/avax-chat-app-zero_balance.jpeg)
 
-* Make sure that you have selected the correct account on metamask if you have more than one account connected to the site.
+* Make sure that you have selected the correct account on MetaMask if you have
+  more than one account connected to the site.
 
 ![Multiple account preview](./images/avax-chat-app-multiple_accounts.jpeg)
 
-## Application crash
+## Application Crash
 
 ![Error](./images/avax-chat-app-error.png)
 Check if you have updated the `CONTRACT_ADDRESS` variable in `src/index.js` properly!
 
-## About the Author(s)
+## About the Authors
 
-The tutorial was created by [Nimish Agrawal](https://github.com/realnimish) & [Sayan Kar](https://github.com/SayanKar). You can also reach out to them on LinkedIn [@Nimish Agrawal](https://www.linkedin.com/in/realnimish) and [@Sayan Kar](https://www.linkedin.com/in/sayan-kar-).
+The tutorial was created by [Nimish Agrawal](https://github.com/realnimish) &
+[Sayan Kar](https://github.com/SayanKar). You can also reach out to them on
+LinkedIn [@Nimish Agrawal](https://www.linkedin.com/in/realnimish) and [@Sayan
+Kar](https://www.linkedin.com/in/sayan-kar-).
 
 ## References
 

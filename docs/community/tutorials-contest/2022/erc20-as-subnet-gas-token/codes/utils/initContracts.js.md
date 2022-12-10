@@ -1,3 +1,5 @@
+# InitContracts.js
+
 ```javascript
 const { ethers } = require("ethers");
 /* Get ABIs of the contracts directly from the artifact folder created by hardhat after each compilation */
