@@ -67,11 +67,13 @@ Daly
 DAO
 dapp
 Dapp
+delegatee
 delegators
 deployer
 Deployer
 deployers
 Deployers
+Deregister
 deserialize
 deserializing
 dev
@@ -101,6 +103,7 @@ gif
 GitHub
 github
 Golang
+Grafana
 gwei
 Gwei
 Hardforks
@@ -165,6 +168,7 @@ params
 performant
 permissioned
 permissionless
+plaintext
 png
 PNG
 Postgres
@@ -202,6 +206,7 @@ Snowtrace
 Solana
 spoofable
 solc
+stakeable
 stakers
 stdout
 stringified
@@ -222,6 +227,7 @@ Swapper's
 testnet
 Testnet
 textlint
+TXIDs
 TXs
 typechain
 TypeChain
@@ -233,6 +239,7 @@ Unix
 unregister
 unscalable
 untrusted
+uptimes
 userId
 utils
 Utils

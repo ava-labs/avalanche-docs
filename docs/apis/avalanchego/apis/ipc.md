@@ -5,7 +5,7 @@ description: The IPC API allows users to create UNIX domain sockets for blockcha
 
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the
+The IPC API allows users to create Unix domain sockets for blockchains to publish to. When the
 blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside
 will be published to another.
 
@@ -35,8 +35,8 @@ Writes to the socket:
 ## IPC Socket URL Format
 
 The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>`
-is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while
-the decisions socket recives individual transactions.
+is either `consensus` or `decisions`. The consensus socket receives vertices and blocks and while
+the decisions socket receives individual transactions.
 
 ## Format
 
@@ -48,7 +48,7 @@ This API uses the `json 2.0` RPC format.
 
 ## Methods
 
-### ipcs.publishBlockchain
+### `ipcs.publishBlockchain`
 
 Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
@@ -88,7 +88,7 @@ curl -X POST --data '{
 }
 ```
 
-### ipcs.unpublishBlockchain
+### `ipcs.unpublishBlockchain`
 
 Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
