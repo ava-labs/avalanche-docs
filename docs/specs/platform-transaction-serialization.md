@@ -6,6 +6,62 @@ This file is meant to be the single source of truth for how we serialize transac
 
 Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
+## Proof of Possession
+
+A BLS public key and a proof of possession of the key.
+
+### What Proof of Possession Contains
+
+- **PublicKey** is the 48 byte representation of the public key.
+- **Signature** is the 96 byte signature by the private key over its public key.
+
+
+### Proof of Possession Specification
+
+```text
++------------+----------+-------------------------+
+| public_key : [48]byte |                48 bytes |
++------------+----------+-------------------------+
+| signature  : [96]byte |                96 bytes |
++------------+----------+-------------------------+
+                        |               144 bytes |
+                        +-------------------------+
+```
+
+### Proof of Possession Specification
+
+```text
+message ProofOfPossesion {
+    bytes public_key = 1; // 48 bytes
+    bytes signature = 2;  // 96 bytes
+}
+```
+
+### Proof of Possession Example
+
+```text
+    // Public Key:
+    0x85, 0x02, 0x5b, 0xca, 0x6a, 0x30, 0x2d, 0xc6,
+    0x13, 0x38, 0xff, 0x49, 0xc8, 0xba, 0xa5, 0x72,
+    0xde, 0xd3, 0xe8, 0x6f, 0x37, 0x59, 0x30, 0x4c,
+    0x7f, 0x61, 0x8a, 0x2a, 0x25, 0x93, 0xc1, 0x87,
+    0xe0, 0x80, 0xa3, 0xcf, 0xde, 0xc9, 0x50, 0x40,
+    0x30, 0x9a, 0xd1, 0xf1, 0x58, 0x95, 0x30, 0x67,
+    // Signature:
+    0x8b, 0x1d, 0x61, 0x33, 0xd1, 0x7e, 0x34, 0x83,
+    0x22, 0x0a, 0xd9, 0x60, 0xb6, 0xfd, 0xe1, 0x1e,
+    0x4e, 0x12, 0x14, 0xa8, 0xce, 0x21, 0xef, 0x61,
+    0x62, 0x27, 0xe5, 0xd5, 0xee, 0xf0, 0x70, 0xd7,
+    0x50, 0x0e, 0x6f, 0x7d, 0x44, 0x52, 0xc5, 0xa7,
+    0x60, 0x62, 0x0c, 0xc0, 0x67, 0x95, 0xcb, 0xe2,
+    0x18, 0xe0, 0x72, 0xeb, 0xa7, 0x6d, 0x94, 0x78,
+    0x8d, 0x9d, 0x01, 0x17, 0x6c, 0xe4, 0xec, 0xad,
+    0xfb, 0x96, 0xb4, 0x7f, 0x94, 0x22, 0x81, 0x89,
+    0x4d, 0xdf, 0xad, 0xd1, 0xc1, 0x74, 0x3f, 0x7f,
+    0x54, 0x9f, 0x1d, 0x07, 0xd5, 0x9d, 0x55, 0x65,
+    0x59, 0x27, 0xf7, 0x2b, 0xc6, 0xbf, 0x7c, 0x12
+```
+
 ## Transferable Output
 
 Transferable outputs wrap an output with an asset ID.
@@ -688,7 +744,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
 - **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
-- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS public key of the validator and a proof of posession of the public key. If the [SubnetID] is not the primary network, this value is the empty signer.
+- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID 27 (`0x1B`) followed by a [Proof of Posession](#proof-of-possession). If the [SubnetID] is not the primary network, this value is the empty signer, whose byte representation is only the type ID 28 (`0x1C`).
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
 - **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
