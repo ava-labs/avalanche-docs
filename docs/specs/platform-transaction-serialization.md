@@ -635,15 +635,13 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 
 ## Unsigned Remove Subnet Validator Tx
 
-Removes a validator from a Subnet.
-
 ### What Unsigned Remove Subnet Validator Tx Contains
 
 An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
 
 - **`BaseTx`**
-- **`NodeID`** is 20 bytes which is the node ID of the validator.
-- **`SubnetID`** a 32-byte Subnet ID
+- **`NodeID`** is the 20 byte node ID of the validator.
+- **`SubnetID`** is the 32 byte Subnet ID that the validator is being removed from.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature which proves that the issuer has the right to remove the node from the Subnet. The array must be sorted low to high.
 
 ### Gantt Unsigned Remove Subnet Validator Tx Specification
@@ -652,13 +650,13 @@ An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`
 +---------------+----------------------+------------------------------------------------+
 | base_tx       : BaseTx               |                            size(base_tx) bytes |
 +---------------+----------------------+------------------------------------------------+
-| node_id       : string               |                                       20 bytes |
+| node_id       : [20]byte             |                                       20 bytes |
 +---------------+----------------------+------------------------------------------------+
 | subnet_id     : [32]byte             |                                       32 bytes |
 +---------------+----------------------+------------------------------------------------+
 | sig_indices   : SubnetAuth           |               4 bytes + len(sig_indices) bytes |
 +---------------+----------------------+------------------------------------------------+
-| 52 + len(sig_indices) + size(base_tx) bytes                                           |
+| 56 + len(sig_indices) + size(base_tx) bytes                                           |
 +---------------------------------------------------------------------------------------+
 ```
 
@@ -667,7 +665,7 @@ An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`, `SubnetID`
 ```text
 message RemoveSubnetValidatorTx {
     BaseTx base_tx = 1;         // size(base_tx)
-    string node_id = 2;        // 20 bytes
+    string node_id = 2;         // 20 bytes
     SubnetID subnet_id = 3;     // 32 bytes
     SubnetAuth subnet_auth = 4; // 04 bytes + len(sig_indices)
 }
@@ -685,12 +683,12 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`NodeID`** is the 20 byte node ID of the validator.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32-byte Subnet ID of the Subnet this validator is validating.
-- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS key for this validator. If the [SubnetID] is not the primary network, this value is the empty signer.
+- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
+- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the BLS public key of the validator and a proof of posession of the public key. If the [SubnetID] is not the primary network, this value is the empty signer.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
 - **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
@@ -706,9 +704,9 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`, `S
 +---------------+----------------------+------------------------------------------------+
 | subnet_id     : [32]byte             |                                       32 bytes |
 +---------------+----------------------+------------------------------------------------+
-| signer         : Signer              |                                        ? bytes |
+| signer        : Signer               |                                        ? bytes |
 +---------------+----------------------+------------------------------------------------+
-| stake_outs     : : []TransferOut     |                     4 + size(stake_outs) bytes |
+| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
 +---------------+----------------------+------------------------------------------------+
 | validator_rewards_owner : SECP256K1OutputOwners | size(validator_rewards_owner) bytes |
 +---------------+----------------------+------------------------------------------------+
@@ -748,11 +746,11 @@ An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`, `S
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`NodeID`** is the 20 byte node ID of the validator.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet ID of the Subnet this validator is validating.
+- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this delegation is on.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
 
@@ -792,6 +790,8 @@ message AddPermissionlessDelegatorTx {
 TODO
 
 ## Unsigned Transform Subnet Tx
+
+Transforms a permissioned subnet into a permissionless subnet. Must be signed by the subnet owner.
 
 ### What Unsigned Transform Subnet Tx Contains
 
@@ -846,41 +846,41 @@ An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`, `Ini
 ### Gantt Unsigned Transform Subnet Tx Specification
 
 ```text
-+----------------------+-------------+-----------------------------+
-| base_tx              : BaseTx      |         size(base_tx) bytes |
-+----------------------+-------------+-----------------------------+
-| subnet_id            : [32]byte    |                    32 bytes |
-+----------------------+-------------+-----------------------------+
-| asset_id             : [32]byte    |                    32 bytes |
-+----------------------+-------------+-----------------------------+
-| initial_supply       : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| maximum_supply       : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| min_consumption_rate : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| max_consumption_rate : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| min_validator_stake  : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| max_validator_stake  : long        |                     8 bytes |
-+----------------------+-------------+-----------------------------+
-| min_stake_duration   : short       |                     4 bytes |
-+----------------------+-------------+-----------------------------+
-| max_stake_duration   : short       |                     4 bytes |
-+----------------------+-------------+-----------------------------+
-| min_delegation_fee   : short       |                     4 bytes |
-+----------------------+-------------+-----------------------------+
-| min_delegator_stake  : short       |                     4 bytes |
-+----------------------+-------------+-----------------------------+
-| max_validator_weight_factor : byte |                      1 byte |
-+----------------------+-------------+-----------------------------+
-| uptime_requirement   : short       |                     4 bytes |
-+----------------------+-------------+-----------------------------+
-| subnet_auth          : SubnetAuth  | 4 bytes + len(sig_indices) bytes |
-+----------------------+-------------+-----------------------------+
-| 137 + size(base_tx) + len(sig_indices) bytes                     |
-+------------------------------------------------------------------+
++----------------------+------------------+----------------------------------+
+| base_tx              : BaseTx           |              size(base_tx) bytes |
++----------------------+------------------+----------------------------------+
+| subnet_id            : [32]byte         |                         32 bytes |
++----------------------+------------------+----------------------------------+
+| asset_id             : [32]byte         |                         32 bytes |
++----------------------+------------------+----------------------------------+
+| initial_supply       : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| maximum_supply       : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_consumption_rate : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| max_consumption_rate : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_validator_stake  : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| max_validator_stake  : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_stake_duration   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| max_stake_duration   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| min_delegation_fee   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| min_delegator_stake  : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| max_validator_weight_factor : byte      |                           1 byte |
++----------------------+------------------+----------------------------------+
+| uptime_requirement   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| subnet_auth          : SubnetAuth       | 4 bytes + len(sig_indices) bytes |
++----------------------+------------------+----------------------------------+
+| 137 + size(base_tx) + len(sig_indices) bytes                               |
++----------------------------------------------------------------------------+
 ```
 
 ### Proto Unsigned Transform Subnet Tx Specification
@@ -1064,8 +1064,8 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
 +---------------+-----------------------+-----------------------------------------+
 | rewards_owner : SECP256K1OutputOwners |               size(rewards_owner) bytes |
 +---------------+-----------------------+-----------------------------------------+
-                  | 44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
-                  +--------------------------------------------------------------+
+                |    44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
+                +-----------------------------------------------------------------+
 ```
 
 ### Proto Unsigned Add Delegator Tx Specification
