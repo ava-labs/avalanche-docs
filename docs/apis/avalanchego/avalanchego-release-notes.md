@@ -8,9 +8,13 @@
 
 ## v1.9.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.4))
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `20`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `20`.
 
-**This version modifies the db format. The db format is compatible with v1.9.3, but not v1.9.2 or earlier. After running a node with v1.9.4 attempting to run a node with a version earlier than v1.9.3 may report a fatal error on startup.**
+**This version modifies the db format. The db format is compatible with v1.9.3,
+but not v1.9.2 or earlier. After running a node with v1.9.4 attempting to run a
+node with a version earlier than v1.9.3 may report a fatal error on startup.**
 
 **PeerList Gossip Optimization**
 
@@ -162,7 +166,9 @@ optional, but encouraged. The supported plugin version is `19`.
 
 **Banff.2 - Additional BLS Support**
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `19`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `19`.
 
 **Coreth**
 
@@ -201,7 +207,9 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 
 **Banff.1 - VM2 Messaging**
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `18`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `18`.
 
 **Features**
 
@@ -243,7 +251,8 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 
 This upgrade adds support for creating Proof-of-Stake Subnets.
 
-This version is not backwards compatible. The changes in the upgrade go into effect at 12 PM EDT, October 18th 2022 on Mainnet.
+This version is not backwards compatible. The changes in the upgrade go into
+effect at 12 PM EDT, October 18th 2022 on Mainnet.
 
 **All Mainnet nodes should upgrade before 12 PM EDT, October 18th 2022.**
 
