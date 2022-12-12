@@ -20,7 +20,7 @@ node with a version earlier than v1.9.3 may report a fatal error on startup.**
 
 - Added gossip tracking to the `peer` instance to only gossip new `IP`s to a connection
 - Added `PeerListAck` message to report which `TxID`s provided by the `PeerList` message were tracked
-- Added `TxID`s to the `PeerList` message to unique-ify nodeIDs across validation periods
+- Added `TxID`s to the `PeerList` message to unique-ify NodeIDs across validation periods
 - Added `TxID` mappings to the gossip tracker
 
 **Validator Set Tracking**
@@ -73,7 +73,7 @@ node with a version earlier than v1.9.3 may report a fatal error on startup.**
 **Chain Data**
 
 - Added `ChainDataDir` to the `snow.Context` to allow blockchains to canonically
-  access disk outside avalanchego's database
+  access disk outside AvalancheGo's database
 - Added `--chain-data-dir` as a CLI flag to specify the base directory for all `ChainDataDir`s
 
 **Miscellaneous**
@@ -120,7 +120,7 @@ optional, but encouraged. The supported plugin version is `19`.
 
 - Added metric for number of processed and accepted transactions
 - Added wait for state sync goroutines to complete on shutdown
-- Increased go-ethereum dependency to v1.10.26
+- Increased `go-ethereum` dependency to v1.10.26
 - Increased soft cap on transaction size limits
 - Added back isForkIncompatible checks for all existing forks
 - Cleaned up Apricot Phase 6 code
@@ -148,7 +148,7 @@ optional, but encouraged. The supported plugin version is `19`.
 **Documentation**
 
 - Documented `Database.Put` invariant for `nil` and empty slices
-- Documented avalanchego's versioning scheme
+- Documented AvalancheGo's versioning scheme
 - Improved `vm.proto` docs
 
 **Miscellaneous**
@@ -175,7 +175,8 @@ optional, but encouraged. The supported plugin version is `19`.
 **Coreth**
 
 - Added trie clean cache journaling to disk to improve processing time after restart
-- Fixed regression where a snapshot could be marked as stale by the async acceptor during block processing
+- Fixed regression where a snapshot could be marked as stale by the asynchronous
+  acceptor during block processing
 - Added fine-grained block processing metrics
 
 **RPCChainVM**
@@ -184,19 +185,19 @@ optional, but encouraged. The supported plugin version is `19`.
 - Added `rpcProtocolVersion` to the output of `info.getNodeVersion`
 - Added `rpcchainvm` protocol version to the output of the `--version` flag
 - Added `version.RPCChainVMProtocolCompatibility` map to easily compare plugin
-  compatibility against avalanchego versions
+  compatibility against AvalancheGo versions
 
 **Builds**
 
 - Downgraded `ubuntu` release binaries from `jammy` to `focal`
-- Updated macos github runners to `macos-12`
+- Updated MacOS github runners to `macos-12`
 - Added workflow dispatch to build release binaries
 
 **BLS**
 
-- Added bls proof of possession to `platform.getCurrentValidators` and `platform.getPendingValidators`
-- Added bls public key to in-memory staker objects
-- Improved memory clearing of bls secret keys
+- Added BLS proof of possession to `platform.getCurrentValidators` and `platform.getPendingValidators`
+- Added BLS public key to in-memory staker objects
+- Improved memory clearing of BLS secret keys
 
 **Cleanup**
 
@@ -246,7 +247,7 @@ optional, but encouraged. The supported plugin version is `18`.
 - Converted safe math functions to use generics where possible
 - Added linting to prevent usage of `assert` in unit tests
 - Converted empty struct usage to `nil` for interface compliance checks
-- Added CODEOWNERs to own first rounds of PR review
+- Added `CODEOWNERs` to own first rounds of PR review
 
 ## V1.9.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0))
 
@@ -288,7 +289,7 @@ The supported plugin version is `17`.
 - Improved isolation and execution of the E2E tests
 - Updated the linked hashmap implementation to use generics
 
-## PRE_RELEASE v1.9.0-fuji-post-upgrade ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji-post-upgrade))
+## PRE_RELEASE v1.9.0-Fuji-post-upgrade ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji-post-upgrade))
 
 **Banff - Elastic Subnets - Fuji Post Upgrade Pre-release**
 
@@ -330,7 +331,7 @@ The supported plugin version is `16`.
 - Improved isolation and execution of the E2E tests
 - Updated the linked hashmap implementation to use generics
 
-## PRE_RELEASE v1.9.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji))
+## PRE_RELEASE v1.9.0-Fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0-fuji))
 
 **Banff - Elastic Subnets - Fuji Pre-release**
 
@@ -392,7 +393,7 @@ populated with a new key.
 
 **Networking**
 
-- Added P2P proto support to be activated in a future release
+- Added P2P Proto support to be activated in a future release
 - Fixed inbound bandwidth spike after leaving the validation set
 - Removed support for `ChitsV2` messages
 - Removed `ContainerID`s from `Put` and `PushQuery` messages
@@ -568,7 +569,7 @@ The supported plugin version is `16`.
 
 **Miscellaneous**
 
-- Removed reserved fields from proto files and renumbered the existing fields
+- Removed reserved fields from Proto files and renumbered the existing fields
 - Added generic dynamically resized ring buffer
 - Updated gRPC version to `v1.49.0` to fix non-deterministic errors reported in the `rpcchainvm`
 - Removed `--signature-verification-enabled` flag
@@ -581,7 +582,7 @@ The supported plugin version is `16`.
 **[Coreth](https://medium.com/avalancheavax/apricot-phase-6-native-asset-call-deprecation-a7b7a77b850a)**
 
 - Incorrectly deprecated Native Asset Call
-- Migrated to go-ethereum v1.10.23
+- Migrated to `go-ethereum` v1.10.23
 - Added API to fetch Chain Config
 
 ## V1.7.18 - Chapelco ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.18))
@@ -619,7 +620,7 @@ optional, but encouraged. The supported plugin version is `15`.
 - Updated local network genesis to use a newer start time
 - Updated minimum Golang version to go1.18.1
 - Removed support for RocksDB
-- Bumped go-ethereum version to v1.10.21
+- Bumped `go-ethereum` version to v1.10.21
 - Added various additional tests
 - Introduced additional database invariants for all database implementations
 - Added retries to windows CI installations
@@ -697,7 +698,7 @@ optional, but encouraged. The supported plugin version is `15`.
 
 **Coreth**
 
-- Bumped go-ethereum dependency to v1.10.20
+- Bumped `go-ethereum` dependency to v1.10.20
 - Updated API names used to enable services in `eth-api` config flag. Prior
   names are supported but deprecated, please update configurations
   [accordingly](../../nodes/maintain/chain-config-flags.md#c-chain-configs)
@@ -826,13 +827,13 @@ optional, but encouraged.
 
 **Networking**
 
-- Reduced default peerlist and accepted frontier gossipping
+- Reduced default PeerList and accepted frontier gossipping
 - Increased the default at-large outbound buffer size to 32 MiB
 
 **Metrics**
 
-- Added leveldb metrics
-- Added process and Golang metrics for the avalanchego binary
+- Added LevelDB metrics
+- Added process and Golang metrics for the AvalancheGo binary
 - Added available disk space health check
   - Ensured that the disk space will not be fully utilized by shutting down the
     node if there is a critically low amount of free space remaining
@@ -848,15 +849,15 @@ optional, but encouraged.
 **Cleanup**
 
 - Refactored the avm to utilize the external TXs package
-- Unified platformvm dropped tx handling
+- Unified platformvm dropped TX handling
 - Clarified snowman child block acceptance calls
 - Fixed small consensus typos
 - Reduced minor duplicated code in consensus
 - Moved the platformvm key factory out of the VM into the test file
 - Removed unused return values from the timeout manager
-- Removed weird json rpc private interface
+- Removed weird json RPC private interface
 - Standardized json imports
-- Added vm factory interface checks
+- Added VM factory interface checks
 
 ## V1.7.11 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11))
 
@@ -982,7 +983,7 @@ optional, but encouraged.
 **RPCChainVM**
 
 - Increased `buf` version to `v1.3.1`.
-- Migrated all proto definitions to a dedicated `/proto` folder.
+- Migrated all Proto definitions to a dedicated `/proto` folder.
 - Removed the dependency on the non-standard grpc broker to better support other language implementations.
 - Added grpc metrics.
 - Added grpc server health checks.
@@ -998,7 +999,7 @@ optional, but encouraged.
 
 - Added piping of Subnet logs to stdout.
 - Lazily initialized logs to avoid opening files that are never written to.
-- Added support for arbitrarily deleted log files while avalanchego is running.
+- Added support for arbitrarily deleted log files while AvalancheGo is running.
 - Removed redundant logging configs.
 
 **Miscellaneous**
@@ -1046,7 +1047,7 @@ optional, but encouraged.
 **Coreth**
 
 - Reduced log level of snapshot regeneration logs.
-- Enabled atomic tx replacement with higher gas fees.
+- Enabled atomic TX replacement with higher gas fees.
 - Parallelized trie index re-generation.
 
 **Miscellaneous**
@@ -1074,7 +1075,7 @@ optional, but encouraged.
 
 **Database**
 
-- Disabled seek compaction in leveldb by default.
+- Disabled seek compaction in LevelDB by default.
 
 **GRPC**
 
@@ -1132,14 +1133,14 @@ optional, but encouraged.
 
 - Increased `FeeHistory` maximum historical limit to improve MetaMask UI on the C-Chain.
 - Enabled chain state metrics.
-- Migrated go-ethereum v1.10.16 changes.
+- Migrated `go-ethereum` v1.10.16 changes.
 
 **Miscellaneous**
 
 - Added the ability to load new VM plugins dynamically.
 - Implemented X-chain + P-chain wallet that can be used to build and sign
   transactions. Without providing a full node private keys.
-- Integrated e2e testing to the repo to avoid maintaining multiple synced repos.
+- Integrated e2e testing to the repository to avoid maintaining multiple synced repositories.
 - Fixed `proposervm` height indexing check to correctly mark the indexer as repaired.
 - Introduced message throttling overrides to be used in future improvements to reliably send messages.
 - Introduced a cap on the client specified request deadline.
@@ -1264,7 +1265,7 @@ optional, but encouraged.
   minutes longer to startup the C-Chain for the first restart.
 - Fixed bug in base fee estimation API that impacted custom defined networks.
 - Decreased minimum transaction re-gossiping interval from 1s to 500ms.
-- Removed websocket handler from the static vm APIs.
+- Removed websocket handler from the static VM APIs.
 
 **Database**
 
@@ -1368,7 +1369,7 @@ otherwise they may experience loss of uptime.
 
 - Removed `--snow-epoch-first-transition` and `snow-epoch-duration` as command line arguments.
 
-## PRE_RELEASE v1.7.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0-fuji))
+## PRE_RELEASE v1.7.0-Fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0-fuji))
 
 **Please note that this release is unable to run Mainnet - and will display
 "Mainnet is not supported" if attempted to run with a Mainnet configuration.**
@@ -1415,7 +1416,7 @@ optional, but encouraged.
 **Bootstrapping**
 
 - Drop inbound messages to a chain if that chain is in the execution phase of bootstrapping.
-- Print beacon nodeIDs upon failure to connect to them.
+- Print beacon NodeIDs upon failure to connect to them.
 
 **Metrics**
 
@@ -1447,7 +1448,7 @@ optional, but encouraged.
 
 **Networking**
 
-- Updated peerlist gossiping to use the same mechanism as other gossip calls.
+- Updated PeerList gossiping to use the same mechanism as other gossip calls.
 - Added inbound message throttling based on recent bandwidth usage.
 
 **Metrics**
@@ -1518,8 +1519,8 @@ optional, but encouraged.
 
 **Coreth**
 
-- Applied callTracer fault handling fix.
-- Initialized multicoin functions in the runtime environment.
+- Applied `callTracer` fault handling fix.
+- Initialized `multicoin` functions in the runtime environment.
 
 **ProposerVM**
 
@@ -1595,8 +1596,8 @@ optional, but encouraged.
 - Refactored node startup and shutdown to avoid ungraceful shutdowns in the
   event that the node is started and then immediately stopped.
 - Fixed P-chain mempool to correctly track the number of allocated bytes.
-- Upgraded the C-chain to run geth 1.10.9.
-- Supported abigen for the C-chain.
+- Upgraded the C-chain to run Geth 1.10.9.
+- Supported Abigen for the C-chain.
 - Added support for pre-image support on the C-chain.
 - Added support for the fee history endpoint on the C-chain.
 - Refactored ID aliasing to better support GRPC tests.
@@ -1674,7 +1675,7 @@ Fix race condition during timeout manager startup.
 - Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../../nodes/maintain/avalanchego-config-flags.md))
 - Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
 
-## PRE_RELEASE v1.6.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji))
+## PRE_RELEASE v1.6.0-Fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji))
 
 **Please note that this release is unable to run Mainnet - and will display
 "Mainnet is not supported" if attempted to run with a Mainnet configuration.**
@@ -1718,7 +1719,7 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
   communicate with one another by sending consensus messages (`Put`,
   `PushQuery`, etc.). See `snow/engine/common/engine.go`.
 - Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
-- Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --&gt; `SendPut`).
+- Prepended method named in `common.Sender` with `Send` for clarity (for example `Put` --&gt; `SendPut`).
 
 **P-Chain**
 
@@ -1758,7 +1759,7 @@ see the expected update times in the v1.5.0 release.
 **Coreth**
 
 - Patched a [Geth security vulnerability](https://twitter.com/go_ethereum/status/1430067637996990464)
-- Patched a panic in the api backend.
+- Patched a panic in the API backend.
 
 **AVM**
 
@@ -1768,13 +1769,14 @@ see the expected update times in the v1.5.0 release.
 
 - Added additional logging around bubbling votes.
 
-## V1.5.1-eth_call ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
+## `V1.5.1-eth_call` ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
 
 This update is backwards compatible with
 [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please
 see the expected network upgrade times in the v1.5.0 release.
 
-This update is a hotfix for v1.5.1 that allows using eth_call without the externally owned account check.
+This update is a hotfix for v1.5.1 that allows using `eth_call` without the
+externally owned account check.
 
 ## V1.5.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1))
 
@@ -1834,7 +1836,7 @@ More info can be found [here](https://medium.com/avalancheavax/apricot-phase-thr
   lookups of transactions by address and asset.
 - Added `./avalanchego` as the default command in the docker image.
 - Used static dependency versions in the docker image.
-- Removed database migration support and deamon runner.
+- Removed database migration support and daemon runner.
 - Refactored node config parsing.
 - Optimized container gossiping sampling.
 - Added the ability to statically build the AvalancheGo and EVM binaries.
@@ -1861,7 +1863,7 @@ More info can be found [here](https://medium.com/avalancheavax/apricot-phase-thr
   - Added `indexTransactions`
   - Added `indexAllowIncomplete`
 
-## PRE_RELEASE v1.5.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji))
+## PRE_RELEASE v1.5.0-Fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji))
 
 **Please note that this release is unable to run Mainnet - and will display
 "this node version doesn't support Mainnet" if attempted to run with a Mainnet
@@ -1889,7 +1891,7 @@ will be published.
   lookups of transactions by address and asset.
 - Added `./avalanchego` as the default command in the docker image.
 - Used static dependency versions in the docker image.
-- Removed database migration support and deamon runner.
+- Removed database migration support and daemon runner.
 - Refactored node config parsing.
 - Optimized container gossiping sampling.
 - Added the ability to statically build the AvalancheGo and EVM binaries.
@@ -2068,7 +2070,7 @@ The patch includes performance improvements, monitoring improvements, and Subnet
 - Added various CLI parameters for tuning gossip parameters.
 - Enabled nodes to run using an ephemeral key pair, rather than one that is read from disk.
 - Removed incorrect spurious warning.
-- Moved CI tests to run in Github Actions rather than running in Travis.
+- Moved CI tests to run in GitHub Actions rather than running in Travis.
 - Removed special cases from the VM interface.
 
 **Added Command Line Arguments:**
@@ -2108,7 +2110,7 @@ migration.
 - Fixed the pre-migration node to correctly verify the P-chain block `SHraz7TtMfTQ5DX1rREhNZW1bi7PpPzAq7xoJAwrWNQrLhQcD`.
 - Fixed regression in `platformvm.GetBlockchains` to correctly return the primary Subnet blockchains.
 - Updated the grpc version to v1.37.
-- Optimized peerlist sampling.
+- Optimized PeerList sampling.
 - Added database benchmarks.
 - Reduced various repeated memory allocations.
 
@@ -2316,7 +2318,7 @@ testnet and 7 AM EDT, May 10th 2021 on Mainnet.
 
 :::
 
-The patch further reduces the size of gossiped peerlist messages and introduces several new flags:
+The patch further reduces the size of gossiped PeerList messages and introduces several new flags:
 
 - `network-peer-list-size` allows for tuning the number of peers gossiped in each `peerlist` message.
 - `network-peer-list-gossip-size` allows for tuning the number of peers to
@@ -2331,7 +2333,7 @@ The patch further reduces the size of gossiped peerlist messages and introduces 
 This update is backwards compatible with v1.4.0. Please see the expected update times in the v1.4.0 release.
 :::
 
-The patch reduces the size of gossiped peerlist messages and introduces a new
+The patch reduces the size of gossiped PeerList messages and introduces a new
 flag `--bootstrap-beacon-connection-timeout` that allows for the beacon
 connection timeout to be configured on startup.
 
@@ -2359,7 +2361,7 @@ testnet and 7 AM EDT, May 10th 2021 on Mainnet.
 
 **The primary components to this upgrade include:**
 
-- Updated Coreth to depend on v1.10.2 of go-ethereum.
+- Updated Coreth to depend on v1.10.2 of `go-ethereum`.
 - Applied the Ethereum Berlin upgrade. Specifically
   [EIP-2565](https://eips.ethereum.org/EIPS/eip-2565),
   [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718),
@@ -2374,8 +2376,8 @@ testnet and 7 AM EDT, May 10th 2021 on Mainnet.
 - Fixed a long standing bug where shutting down the node while a chain was
   bootstrapping could cause the chain to be shut down ungracefully.
 - Updated the plugin gRPC packages to paginate large requests to improve stability.
-- Added the ability to run avalanchego's main binary as a plugin.
-- Fixed a potential race condition in the leveldb corruption protection.
+- Added the ability to run AvalancheGo's main binary as a plugin.
+- Fixed a potential race condition in the LevelDB corruption protection.
 - Updated the automated build scripts to better support multiple architectures.
 
 **Added command line arguments:**
@@ -2403,7 +2405,7 @@ improvements. :::
   Phase 1`. This ensures that modifications to the `extra-data` block field can
   not result in modifications to the chain state during bootstrapping.
 - Changed the `Keystore` to ensure only encrypted values are sent over the IPC
-  between avalanchego and plugin processes.
+  between AvalancheGo and plugin processes.
 
 **Bug Fixes:**
 
@@ -2497,8 +2499,8 @@ includes stability and monitoring improvements.
 
 :::
 
-- Updated readme to correct storage requirements.
-- Added additional error handling to Avalanche Tx verification during bootstrapping.
+- Updated README to correct storage requirements.
+- Added additional error handling to Avalanche TX verification during bootstrapping.
 - Updated numerous metrics, including adding numerous new metrics relating to
   node health and database usage, removing unused and invalid metrics, and
   fixing some metric names.
@@ -2577,7 +2579,7 @@ Change Summary:
 - Fixed Ansible linting.
 - The added command line arguments mainly consist of configurations of health
   checks. Additionally, the modified network latency calculations changed the
-  name of some command line args.
+  name of some command line arguments.
 
 Added command line arguments:
 
