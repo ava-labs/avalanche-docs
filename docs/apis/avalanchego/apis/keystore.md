@@ -5,7 +5,7 @@ sidebar_position: 13
 # Keystore API
 
 :::warning
-Because the node operator has access to your plaintext password, you should only create a
+Because the node operator has access to your plain-text password, you should only create a
 keystore user on a node that you operate. If that node is breached, you could lose all your tokens.
 Keystore APIs are not recommended for use on Mainnet.
 :::

@@ -63,7 +63,7 @@
 - [Auth Interfaces](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/auth_interfaces.md)
 - [Avalanche](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/avalanche.md)
 - [AvalancheCore](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/avalanchecore.md)
-- [Common APIBase](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/common_apibase.md)
+- [Common API Base](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/common_apibase.md)
 - [Common AssetAmount](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/common_assetamount.md)
 - [Common Inputs](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/common_inputs.md)
 - [Common Interfaces](https://github.com/ava-labs/avalanchejs-docs/tree/main/modules/common_interfaces.md)

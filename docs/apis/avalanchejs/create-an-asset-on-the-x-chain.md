@@ -78,7 +78,7 @@ const symbol: string = "TEST"
 const denomination: number = 3
 ```
 
-## Set Up async/await
+## Set Up Async / Await
 
 The remaining code will be encapsulated by this `main` function so that we can
 use the `async` / `await` pattern.

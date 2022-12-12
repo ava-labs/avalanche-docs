@@ -119,7 +119,7 @@ optional, but encouraged. The supported plugin version is `19`.
 **Coreth**
 
 - Added metric for number of processed and accepted transactions
-- Added wait for state sync goroutines to complete on shutdown
+- Added wait for state sync go-routines to complete on shutdown
 - Increased `go-ethereum` dependency to v1.10.26
 - Increased soft cap on transaction size limits
 - Added back isForkIncompatible checks for all existing forks
@@ -611,7 +611,7 @@ optional, but encouraged. The supported plugin version is `15`.
 - Updated gas price estimation to limit lookback window based on block timestamps
 - Added metrics for processed/accepted gas
 - Simplified syntactic block verification
-- Ensured statedb errors during block processing are logged
+- Ensured `statedb` errors during block processing are logged
 - Removed deprecated gossiper/block building logic from pre-Apricot Phase 4
 - Added marshal function for duration to improve config output
 
@@ -827,7 +827,7 @@ optional, but encouraged.
 
 **Networking**
 
-- Reduced default PeerList and accepted frontier gossipping
+- Reduced default PeerList and accepted frontier gossiping
 - Increased the default at-large outbound buffer size to 32 MiB
 
 **Metrics**
@@ -922,7 +922,7 @@ impact restart time.**
   - By default, validators now send both pull queries and push queries upon
     inserting a container into consensus. Previously, nodes sent only push
     queries.
-- Added metrics to track the amount of over gossipping of `peerlist` messages
+- Added metrics to track the amount of over gossiping of `peerlist` messages
 - Added custom message queueing support to outbound `Peer` messages
 - Reused `Ping` messages to avoid needless memory allocations
 
@@ -1090,7 +1090,7 @@ optional, but encouraged.
 - Optimized FeeHistory API.
 - Added protection to prevent accidental corruption of archival node trie index.
 - Added capability to restore complete trie index on best effort basis.
-- Rounded up fastcache sizes to utilize all mmap'd memory in chunks of 64MB.
+- Rounded up fast-cache sizes to utilize all mmap'd memory in chunks of 64MB.
 
 **Configs**
 
@@ -1181,7 +1181,7 @@ optional, but encouraged.
 - Enabled cheap metrics by default.
 - Marked RPC call metrics as expensive.
 - Added Abigen support for native asset call precompile.
-- Fixed bug in BLOCKHASH opcode during traceBlock.
+- Fixed bug in BLOCKHASH opcode during `traceBlock`.
 - Fixed bug in handling updated chain config on startup.
 
 ## V1.7.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.4))
@@ -2139,7 +2139,7 @@ This patch:
 - Ignored non-database files and folders in the database directory. This should
   specifically fix errors reported on macOS with .DS_Store files.
 - Fixed the build-dir flag to be able to be specified via CLI without causing
-  the preupgrade node to error.
+  the pre-upgrade node to error.
 - Removed the plugin-dir flag that is no longer supported with the node-manager
   daemon. Typically not specifying the flag leads to the correct behavior.
   However, for complex installations the build-dir flag may be required.
