@@ -1,14 +1,29 @@
-# Generate a TxID using AvalancheJS
+# Generate a TxID Using AvalancheJS
 
 ## Introduction
 
-A transaction id, or TxID, is a string of numbers and letters which identifies a specific transaction on the blockchain. TxIDs are one of the most core components that developers interact with when working on a blockchain system. They're deterministic and can be generated using [AvalancheGo](../avalanchego/README.md) or [AvalancheJS](../avalanchejs/README.md).
+A transaction id, or TxID, is a string of numbers and letters which identifies a
+specific transaction on the blockchain. TxIDs are one of the most core
+components that developers interact with when working on a blockchain system.
+They're deterministic and can be generated using
+[AvalancheGo](../avalanchego/README.md) or
+[AvalancheJS](../avalanchejs/README.md).
 
-On the Avalanche network a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. [CB58](https://support.avax.network/en/articles/4587395-what-is-cb5) is a base58 encoding with a checksum. Below are the steps for deterministically generating a TxID using AvalancheJS.
+On the Avalanche network a TxID is a CB58 encoded string which is created by
+`sha256` hashing the transaction.
+[CB58](https://support.avax.network/en/articles/4587395-what-is-cb5) is a base58
+encoding with a checksum. Below are the steps for deterministically generating a
+TxID using AvalancheJS.
 
 ## Creating a Signed Transaction
 
-The script which we're using can be found in the AvalancheJS example scripts as [example/avm/baseTx-avax.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/baseTx-avax.ts). First, create a [BaseTx](../../specs/avm-transaction-serialization.md#what-base-tx-contains). We're omitting that part for the sake of brevity. Once you have a `BaseTx` then create an `UnsignedTx` and `sign` it. Lastly convert the `Tx` to a `Buffer` by calling `tx.toBuffer()`.
+The script which we're using can be found in the AvalancheJS example scripts as
+[example/avm/baseTx-AVAX.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/baseTx-avax.ts).
+First, create a
+[BaseTx](../../specs/avm-transaction-serialization.md#what-base-tx-contains).
+We're omitting that part for the sake of brevity. Once you have a `BaseTx` then
+create an `UnsignedTx` and `sign` it. Lastly convert the `Tx` to a `Buffer` by
+calling `tx.toBuffer()`.
 
 ```ts
 // Manually build BaseTx via steps in example/avm/baseTx-avax.ts
@@ -31,7 +46,9 @@ const sha256Hash: Buffer = Buffer.from(
 )
 ```
 
-As mentioned in the [Introduction](#introduction), a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. To create the TxID now CB58 encode the newly created `sha256` hash.
+As mentioned in the [Introduction](#introduction), a TxID is a CB58 encoded
+string which is created by `sha256` hashing the transaction. To create the TxID
+now CB58 encode the newly created `sha256` hash.
 
 ```ts
 // cb58 the sha256 hash
@@ -41,9 +58,10 @@ console.log(`Generated TxID: ${generatedTxID}`)
 
 The `generatedTxID` will be a CB58 encoded string similar to `eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX`.
 
-## Confirm TxID is Correct
+## Confirm TxID Is Correct
 
-To confirm that the `generatedTxID` is correct issue the `BaseTx` to AvalancheGo and compare the TxID which is returned with the recently created TxID.
+To confirm that the `generatedTxID` is correct issue the `BaseTx` to AvalancheGo
+and compare the TxID which is returned with the recently created TxID.
 
 ```ts
 // get the actual txID from the full node
@@ -57,4 +75,7 @@ Returned TXID: eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX
 
 ## Summary
 
-TxIDs are a core component of any blockchain system. They are used extensively in Avalanche when creating transactions, issuing new assets and even spinning up Subnets and validators. TxIDs are deterministically created by `sha256` hashing a `Buffer` of the transaction and then CB58 encoding the hash.
+TxIDs are a core component of any blockchain system. They are used extensively
+in Avalanche when creating transactions, issuing new assets and even spinning up
+Subnets and validators. TxIDs are deterministically created by `sha256` hashing
+a `Buffer` of the transaction and then CB58 encoding the hash.
