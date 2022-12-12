@@ -94,6 +94,8 @@ finney
 Fuji
 gamification
 Ganache
+Geth
+Geth's
 getters
 gif
 GitHub
