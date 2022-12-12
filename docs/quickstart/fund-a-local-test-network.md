@@ -11,9 +11,9 @@ We'll show you how to leverage a pre-funded private key to access funds on the X
 
 :::info This same private key,
 `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to
-sign txs locally using [AvalancheJS](../apis/avalanchejs/README.md). You don't
-need to import the key into the local keystore in order to access those funds.
-They are in the genesis vertex and block for each respective chain.
+sign transactions locally using [AvalancheJS](../apis/avalanchejs/README.md).
+You don't need to import the key into the local keystore in order to access
+those funds. They are in the genesis vertex and block for each respective chain.
 
 The port in this tutorial uses 9650. Depending on how you start your local
 network, it could be different. If you are using Avalanche Network Runner,
@@ -34,7 +34,9 @@ Keystore APIs are not recommended for use on Mainnet. :::
 This step can be skipped if you are only interesting in how to check the fund balance on X/P/C Chain.
 :::
 
-First run [`keystore.createUser`](../apis/avalanchego/apis/keystore.md#keystorecreateuser) to create a user in the local keystore.
+First run
+[`keystore.createUser`](../apis/avalanchego/apis/keystore.md#keystorecreateuser)
+to create a user in the local keystore.
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/keystore' \
@@ -68,7 +70,10 @@ check the balance to confirm that it worked.
 ### Import Key
 
 :::tip
-This step can be skipped if you are only interesting in how to check the fund balance on X Chain. It shows how to get the correct address.
+
+ßThis step can be skipped if you are only interesting in how to check the fund
+balance on X Chain. It shows how to get the correct address.
+
 :::
 
 Import `ewoq` into the [X-Chain via avm.importKey API](../apis/avalanchego/apis/x-chain.md#avmimportkey).
@@ -96,9 +101,10 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 }
 ```
 
-### Check X-chain Balance
+### Check X-Chain Balance
 
-Confirm the `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address now has a balance of 300m AVAX on the X-Chain.
+Confirm the `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address now has a
+balance of 300m AVAX on the X-Chain.
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
@@ -139,7 +145,7 @@ balance on C Chain. It just shows how to get the correct address.
 
 :::
 
-Import `ewoq` into the [C-Chain via avax.importKey API](../apis/avalanchego/apis/c-chain.md#avaximportkey).
+Import `ewoq` into the [C-Chain via `avax.importKey` API](../apis/avalanchego/apis/c-chain.md#avaximportkey).
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
@@ -191,9 +197,9 @@ curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 
 ### Integrate with MetaMask
 
-To see this account on Metamask, follow these steps:
+To see this account on MetaMask, follow these steps:
 
-- Set up Metamask by using the info below:
+- Set up MetaMask by using the info below:
 
   - **Network Name**: Avalanche Local C-Chain
   - **New RPC URL**: [http://127.0.0.1:9650/ext/bc/C/rpc](http://127.0.0.1:9650/ext/bc/C/rpc)
@@ -202,9 +208,9 @@ To see this account on Metamask, follow these steps:
 
 - Create a new account by importing this private key
   `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on
-  Metamask
+  MetaMask
 
-!["Metamask import account"](/img/Metamask-Import-Account.png)
+!["MetaMask import account"](/img/Metamask-Import-Account.png)
 
 - Now you can see the balance of this newly created account on `Avalanche Local`
 
