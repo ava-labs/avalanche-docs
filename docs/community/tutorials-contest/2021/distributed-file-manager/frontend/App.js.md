@@ -1,4 +1,6 @@
-```
+# App.js
+
+```js
 import React from 'react';
 import {GetWeb3, GetContract, GetAccount} from './BlockchainUtil';
 import IPFSUploader from './IPFSUploader';
