@@ -982,11 +982,11 @@ An unsigned add Subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`NodeID`** is the 20 byte node ID of the validator.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet id
+- **`SubnetID`** is the 32 byte Subnet ID to add the validator to.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
 
 ### Gantt Unsigned Add Subnet Validator Tx Specification
