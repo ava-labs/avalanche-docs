@@ -442,29 +442,29 @@ to `false`.
 
 ### Transaction Pool
 
-#### `local-txs-enabled` (boolean):
+#### `local-txs-enabled` (boolean)
 
 Enables local transaction handling (prioritizes transactions submitted through
 this node). Defaults to `false`.
 
-#### `allow-unprotected-txs` (boolean):
+#### `allow-unprotected-txs` (boolean)
 
 If `true`, the APIs will allow transactions that are not replay protected
 (EIP-155) to be issued through this node. Defaults to `false`.
 
-#### `remote-tx-gossip-only-enabled` (boolean):
+#### `remote-tx-gossip-only-enabled` (boolean)
 
 If `true`, the node will only gossip remote transactions to prevent transactions
 issued through this node from being broadcast to the network. Defaults to
 `false`.
 
-#### `tx-regossip-frequency` (duration):
+#### `tx-regossip-frequency` (duration)
 
 Amount of time that should elapse before we attempt to re-gossip a transaction
 that was already gossiped once. Defaults to `60000000000` nano seconds which is
 1 minute.
 
-#### `tx-regossip-max-size` (int):
+#### `tx-regossip-max-size` (int)
 
 Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
