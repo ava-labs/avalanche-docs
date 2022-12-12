@@ -77,7 +77,7 @@ call to the X-Chain vertex index.
 
 ## Methods
 
-### index.getLastAccepted
+### `index.getLastAccepted`
 
 Get the most recently accepted container.
 
@@ -137,7 +137,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getContainerByIndex
+### `index.getContainerByIndex`
 
 Get container by index. The first container accepted is at index 0, the second is at index 1, etc.
 
@@ -201,7 +201,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getContainerByID
+### `index.getContainerByID`
 
 Get container by ID.
 
@@ -265,7 +265,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getContainerRange
+### `index.getContainerRange`
 
 Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch`
 
@@ -336,7 +336,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getIndex
+### `index.getIndex`
 
 Get a container's index.
 
@@ -388,7 +388,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.isAccepted
+### `index.isAccepted`
 
 Returns true if the container is in this index.
 

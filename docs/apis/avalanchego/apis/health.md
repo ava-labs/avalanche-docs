@@ -31,7 +31,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
-### health.health
+### `health.health`
 
 The node runs a set of health checks every 30 seconds, including a health check for each chain. This
 method returns the last set of health check results.

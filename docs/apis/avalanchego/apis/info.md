@@ -23,7 +23,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
-### info.getBlockchainID
+### `info.getBlockchainID`
 
 Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adminaliaschain).)
 
@@ -58,7 +58,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNetworkID
+### `info.getNetworkID`
 
 Get the ID of the network this node is participating in.
 
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNetworkName
+### `info.getNetworkName`
 
 Get the name of the network this node is participating in.
 
@@ -122,7 +122,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeID
+### `info.getNodeID`
 
 Get the ID of this node.
 
@@ -167,7 +167,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeIP
+### `info.getNodeIP`
 
 Get the IP of this node.
 
@@ -199,7 +199,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeVersion
+### `info.getNodeVersion`
 
 Get the version of this node.
 
@@ -254,7 +254,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getVMs
+### `info.getVMs`
 
 Get the virtual machines installed on this node.
 
@@ -296,7 +296,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.isBootstrapped
+### `info.isBootstrapped`
 
 Check whether a given chain is done bootstrapping
 
@@ -333,7 +333,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.peers
+### `info.peers`
 
 Get a description of peer connections.
 
@@ -359,7 +359,7 @@ info.peers({
 }
 ```
 
-- `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If
+- `nodeIDs` is an optional parameter to specify what NodeID's descriptions should be returned. If
   this parameter is left empty, descriptions for all active connections will be returned. If the
   node is not connected to a specified nodeID, it will be omitted from the response.
 - `ip` is the remote IP of the peer.
@@ -442,7 +442,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.getTxFee
+### `info.getTxFee`
 
 Get the fees of the network.
 
@@ -505,7 +505,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.uptime
+### `info.uptime`
 
 Returns the network's observed uptime of this node.
 
