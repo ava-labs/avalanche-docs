@@ -15,6 +15,6 @@ sidebar_position: 1
 | The [**Health API**](health.md)                    | Allows clients to check a node’s health.                                                                                                            |
 | The [**Index API**](index-api.md)                  | Fetch transactions, vertex, or block by ID.                                                                                                         |
 | The [**Info API**](info.md)                        | Allows clients to examine basic information about a node.                                                                                           |
-| The [**IPC API**](ipc.md)                          | Allows users to create UNIX domain sockets for blockchains to publish to.                                                                           |
+| The [**IPC API**](ipc.md)                          | Allows users to create Unix domain sockets for blockchains to publish to.                                                                           |
 | The [**Keystore API**](keystore.md)                | Allows customers to use the embedded Keystore file of an Avalanche node.                                                                            |
 | The [**Metrics API**](metrics.md)                  | Allows clients to get statistics about a node’s health and performance.                                                                             |

@@ -27,6 +27,7 @@ Avascan
 Avax
 AVAX
 Berkay
+benchlist
 Binance
 Blanco
 blockchain
@@ -137,8 +138,10 @@ Mintable
 multicurrency
 multisig
 multistep
+mutex
 Nakamoto
 navbar
+namespace
 NBytes
 NPM
 NFT
@@ -192,6 +195,7 @@ runlog
 RunLog
 Saglam
 Sayan
+semanticdb
 Snowtrace
 Solana
 spoofable
