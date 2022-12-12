@@ -1,3 +1,5 @@
+# InitSigners.js
+
 ```javascript
 const { ethers } = require("ethers")
 const dotenv = require("dotenv")
@@ -35,13 +37,16 @@ module.exports = (providers) => {
 
 :::info
 
-As you see, we have used `process.env.<..._PRIVATE_KEY>`. Reason behind that is we do not want to expose our private keys inside our code. To install the related package run:
+As you see, we have used `process.env.<..._PRIVATE_KEY>`. Reason behind that is
+we do not want to expose our private keys inside our code. To install the
+related package run:
 
 ```bash
 npm i dotenv
 ```
 
-Then, at the root of the project create a file named `.env`. Afterwards put in the private keys of your accounts as follows:
+Then, at the root of the project create a file named `.env`. Afterwards put in
+the private keys of your accounts as follows:
 
 ```text
 BRIDGE_ADMIN_PRIVATE_KEY=<private-key-for-admin>
@@ -49,6 +54,7 @@ BRIDGE_USER_PRIVATE_KEY=<private-key-for-user>
 ```
 
 - Make sure that both accounts are funded on both chains so that they can send transactions.
-- Make sure that `.env` file is included in your `.gitignore` file so that you do not upload this file to git.
+- Make sure that `.env` file is included in your `.gitignore` file so that you
+  do not upload this file to git.
 
 :::
