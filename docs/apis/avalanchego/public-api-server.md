@@ -9,7 +9,7 @@ network without having to run a node themselves. The public API server is
 actually several [AvalancheGo](https://github.com/ava-labs/avalanchego) nodes
 behind a load balancer to ensure high availability and high request throughput.
 
-## Using the Public API nodes
+## Using the Public API Nodes
 
 The public API server is at `api.avax.network` for Avalanche Mainnet and
 `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API,
@@ -47,12 +47,12 @@ For a full list of available APIs see [here](./apis/README.md).
 The public API only supports C-Chain websocket API calls for API methods that
 don't exist on the C-Chain's HTTP API.
 
-For batched C-Chain requests on the public api node, the maximum number of items
+For batched C-Chain requests on the public API node, the maximum number of items
 is 40. We are working on to support a larger batch size.
 
 The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](../../nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
 
-## Sticky sessions
+## Sticky Sessions
 
 Requests to the public API server API are distributed by a load balancer to an
 individual node. As a result, consecutive requests may go to different nodes.
@@ -88,7 +88,9 @@ Provided for informational purposes only, without representation, warranty or
 guarantee of any kind. None of this is as an endorsement by the Avalanche
 Foundation Limited, Ava Labs, Inc. or any of their respective subsidiaries or
 affiliates, nor is any of this investment or financial advice. Please review
-this [Notice](https://assets.website-files.com/6059b554e81c705f9dd2dd32/60ec9590f189c16edaa086d4_Important%20Notice%20-%20avax.network.pdf) and conduct your own research to properly evaluate the risks and
-benefits of any project.
+this
+[Notice](https://assets.website-files.com/6059b554e81c705f9dd2dd32/60ec9590f189c16edaa086d4_Important%20Notice%20-%20avax.network.pdf)
+and conduct your own research to properly evaluate the risks and benefits of any
+project.
 
 :::

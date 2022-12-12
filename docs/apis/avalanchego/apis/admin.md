@@ -26,7 +26,7 @@ This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-cal
 
 ## Methods
 
-### admin.alias
+### `admin.alias`
 
 Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still
 work. This change only affects this node; other nodes will not know about this alias.
@@ -68,7 +68,7 @@ curl -X POST --data '{
 
 Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
 
-### admin.aliasChain
+### `admin.aliasChain`
 
 Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
 
@@ -115,7 +115,7 @@ Now, instead of interacting with the blockchain whose ID is
 `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to
 `ext/bc/myBlockchainAlias`.
 
-### admin.getChainAliases
+### `admin.getChainAliases`
 
 Returns the aliases of the chain
 
@@ -160,7 +160,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.getLoggerLevel
+### `admin.getLoggerLevel`
 
 Returns log and display levels of loggers.
 
@@ -214,7 +214,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.loadVMs
+### `admin.loadVMs`
 
 Dynamically loads any virtual machines installed on the node as plugins. See
 [here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a
@@ -259,7 +259,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+### `admin.lockProfile`
 
 Writes a profile of mutex statistics to `lock.profile`.
 
@@ -290,7 +290,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+### `admin.memoryProfile`
 
 Writes a memory profile of the to `mem.profile`.
 
@@ -321,7 +321,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.setLoggerLevel
+### `admin.setLoggerLevel`
 
 Sets log and display levels of loggers.
 
@@ -342,7 +342,7 @@ admin.setLoggerLevel(
 - `logLevel` is the log level of written logs, can be omitted.
 - `displayLevel` is the log level of displayed logs, can be omitted.
 
-`logLevel` and `displayLevel` cannot be omited at the same time.
+`logLevel` and `displayLevel` cannot be omitted at the same time.
 
 **Example Call:**
 
@@ -369,7 +369,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### `admin.startCPUProfiler`
 
 Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop,
 writes the profile to `cpu.profile`.
@@ -401,7 +401,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### `admin.stopCPUProfiler`
 
 Stop the CPU profile that was previously started.
 

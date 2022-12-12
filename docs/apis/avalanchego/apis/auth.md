@@ -7,7 +7,7 @@ sidebar_position: 8
 When you run a node, you can require that API calls have an authorization token attached. This API
 manages the creation and revocation of authorization tokens.
 
-An authorization token provides access to one or more API endpoints. This is is useful for
+An authorization token provides access to one or more API endpoints. This is useful for
 delegating access to a node’s APIs. Tokens expire after 12 hours.
 
 An authorization token is provided in the header of an API call. Specifically, the header
@@ -46,7 +46,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
-### auth.newToken
+### `auth.newToken`
 
 Creates a new authorization token that grants access to one or more API endpoints.
 
@@ -80,8 +80,8 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` (ie
-the X-Chain) and `/ext/info` (ie the [info API](info.md).)
+This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` 
+(that is the X-Chain) and `/ext/info` (that is the [info API](info.md).)
 
 **Example Response:**
 
@@ -110,7 +110,7 @@ curl -X POST --data '{
 -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps'
 ```
 
-### auth.revokeToken
+### `auth.revokeToken`
 
 Revoke a previously generated token. The given token will no longer grant access to any endpoint. If
 the token is invalid, does nothing.
@@ -153,7 +153,7 @@ curl -X POST --data '{
 }
 ```
 
-### auth.changePassword
+### `auth.changePassword`
 
 Change this node’s authorization token password. Any authorization tokens created under an old
 password will become invalid.

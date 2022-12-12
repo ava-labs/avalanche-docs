@@ -42,7 +42,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 :::info
-On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain
+On the [public API node](../public-api-server.md#supported-apis), it only supports C-Chain
 websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
@@ -82,7 +82,7 @@ services:
 - `eth_`
 - `personal_`
 - `txpool_`
-- `debug_` (note: this is turned off on the public api node.)
+- `debug_` (note: this is turned off on the public API node.)
 
 You can interact with these services the same exact way you’d interact with Geth. See the
 [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API)
@@ -91,12 +91,12 @@ for a full description of this API.
 
 :::info
 
-For batched requests on the [public api node](../public-api-server.md) , the maximum number of items
+For batched requests on the [public API node](../public-api-server.md) , the maximum number of items
 is 40. We are working on to support a larger batch size.
 
 :::
 
-### eth_getAssetBalance
+### `eth_getAssetBalance`
 
 In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the
 balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched
@@ -141,7 +141,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth_baseFee
+### `eth_baseFee`
 
 Get the base fee for the next block.
 
@@ -174,7 +174,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth_maxPriorityFeePerGas
+### `eth_maxPriorityFeePerGas`
 
 Get the priority fee needed to be included in a block.
 
@@ -210,7 +210,7 @@ curl -X POST --data '{
 For more information on dynamic fees see the [C-Chain section of the transaction fee
 documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
 
-### eth_getChainConfig
+### `eth_getChainConfig`
 
 `eth_getChainConfig` returns chain config. This API is enabled by default with `internal-eth`
 namespace.
@@ -275,7 +275,7 @@ To interact with other instances of the EVM AVAX endpoints:
 /ext/bc/blockchainID/avax
 ```
 
-### avax.getAtomicTx
+### `avax.getAtomicTx`
 
 Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned
 transaction. Can only be `hex` when a value is provided.
@@ -295,7 +295,7 @@ avax.getAtomicTx({
 
 **Request:**
 
-- `txID` is the transacion ID. It should be in cb58 format.
+- `txID` is the transaction ID. It should be in cb58 format.
 - `encoding` is the encoding format to use. Can only be `hex` when a value is provided.
 
 **Response:**
@@ -332,7 +332,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.export
+### `avax.export`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -358,7 +358,7 @@ avax.export({
 - `to` is the X-Chain or P-Chain address the asset is sent to.
 - `amount` is the amount of the asset to send.
 - `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
   suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
@@ -392,13 +392,13 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportAVAX
+### `avax.exportAVAX`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-**DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
+**DEPRECATED—instead use** [`avax.export`](c-chain.md#avaxexport).
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
 X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's
@@ -421,14 +421,14 @@ avax.exportAVAX({
 
 - `to` is X-Chain or P-Chain address the asset is sent to.
 - `amount` is the amount of the asset to send.
-- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
   suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
 
 **Response:**
 
-- `txID` is the txid of the completed ExportTx.
+- `txID` is the TXID of the completed ExportTx.
 
 **Example Call:**
 
@@ -460,7 +460,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportKey
+### `avax.exportKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -487,10 +487,10 @@ avax.exportKey({
 
 **Response:**
 
-- `privateKey` is the CB58 endcoded string representation of the private key that controls
+- `privateKey` is the CB58 encoded string representation of the private key that controls
   `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
 - `privateKeyHex` is the hex string representation of the private key that controls `address`. It
-  can be used to import an account into Metamask.
+  can be used to import an account into MetaMask.
 
 **Example Call:**
 
@@ -520,7 +520,7 @@ curl -X POST --data '{
 }}
 ```
 
-### avax.getUTXOs
+### `avax.getUTXOs`
 
 Gets the UTXOs that reference a given address.
 
@@ -554,7 +554,7 @@ avax.getUTXOs(
 - This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of
   UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique
+- When using pagination (that is when `startIndex` is provided), UTXOs are not guaranteed to be unique
   across multiple calls. That is, a UTXO may appear in the result of the first call, and then again
   in the second call.
 - When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set
@@ -605,7 +605,7 @@ This gives response:
 }
 ```
 
-### avax.import
+### `avax.import`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -670,13 +670,13 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importAVAX
+### `avax.importAVAX`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-**DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
+**DEPRECATED—instead use** [`avax.import`](c-chain.md#avaximport)
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
 called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s
@@ -736,7 +736,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importKey
+### `avax.importKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -789,7 +789,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.issueTx
+### `avax.issueTx`
 
 Send a signed transaction to the network. `encoding` specifies the format of the signed transaction.
 Can only be `hex` when a value is provided.
@@ -832,7 +832,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.getAtomicTxStatus
+### `avax.getAtomicTxStatus`
 
 Get the status of an atomic transaction sent to the network.
 
@@ -891,7 +891,7 @@ with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:
 /ext/bc/C/admin
 ```
 
-### admin.setLogLevel
+### `admin.setLogLevel`
 
 Sets the log level of the C-Chain.
 
@@ -926,7 +926,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### `admin.startCPUProfiler`
 
 Starts a CPU profile.
 
@@ -957,7 +957,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### `admin.stopCPUProfiler`
 
 Stops and writes a CPU profile.
 
@@ -988,7 +988,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+### `admin.memoryProfile`
 
 Runs and writes a memory profile.
 
@@ -1019,7 +1019,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+### `admin.lockProfile`
 
 Runs a mutex profile writing to the `coreth_performance_c` directory.
 
