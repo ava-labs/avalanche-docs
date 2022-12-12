@@ -3,7 +3,7 @@
 ## Introduction
 
 A transaction id, or TxID, is a string of numbers and letters which identifies a
-specific transaction on the blockchain. TxIDs are one of the most core
+specific transaction on the blockchain. TXIDs are one of the most core
 components that developers interact with when working on a blockchain system.
 They're deterministic and can be generated using
 [AvalancheGo](../avalanchego/README.md) or
@@ -75,7 +75,7 @@ Returned TXID: eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX
 
 ## Summary
 
-TxIDs are a core component of any blockchain system. They are used extensively
+TXIDs are a core component of any blockchain system. They are used extensively
 in Avalanche when creating transactions, issuing new assets and even spinning up
-Subnets and validators. TxIDs are deterministically created by `sha256` hashing
+Subnets and validators. TXIDs are deterministically created by `sha256` hashing
 a `Buffer` of the transaction and then CB58 encoding the hash.
