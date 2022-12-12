@@ -520,6 +520,8 @@ Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of `6
 
 ### Miscellaneous
 
+#### `airdrop` (string): Path to a json file that contains a list of addresses for a genesis airdrop. Each address will be airdropped `AirdropAmount` at genesis, and the hash of the airdrop file must match `AirdropHash`. `AirdropAmount` and `AirdropHash` are part of the genesis config. This option applies to `subnet-evm` only (not applicable to `coreth`).
+
 #### `skip-upgrade-check` (bool):
 
 If set to `true`, the chain will skip verifying that all expected network upgrades have taken place before the last accepted block on startup. This allows node operators to recover if their node has accepted blocks after a network upgrade with a version of the code prior to the upgrade. Defaults to `false`.
