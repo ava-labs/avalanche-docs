@@ -156,6 +156,7 @@ mmap'd
 multicurrency
 Multiput
 multisig
+Multisig
 multistep
 mutex
 Mythril
@@ -182,6 +183,7 @@ parameterization
 params
 performant
 permissioned
+Permissioned
 permissionless
 png
 PNG
@@ -233,7 +235,6 @@ subcommands
 subgraph
 Subgraph
 Subnet
-SUBNET
 Subnet-EVM
 Subnets
 subsampling
