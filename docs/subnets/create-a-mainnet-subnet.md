@@ -92,14 +92,14 @@ Ledger devices support TX signing for any address inside a sequence automaticall
 By default, Avalanche-CLI uses the first address of the derivation, and that address needs funds to
 issue the TXs to create the Subnet and add validators.
 
-To get the first `Mainnet` address of your ledger device, first make sure it is connected,
+To get the first `Mainnet` address of your Ledger device, first make sure it is connected,
 unblocked, and running the Avalanche app. Then execute the `key list` command:
 
 ```bash
 avalanche key list --ledger 0 --mainnet
 ```
 
-The command first asks the user to authorize the ledger to give the CLI extended public key
+The command first asks the user to authorize the Ledger to give the CLI extended public key
 information. Avalanche-CLI needs this information to generate the address list.
 
 An authorization request is a common message in all CLI operations that use Ledger:
@@ -108,8 +108,8 @@ An authorization request is a common message in all CLI operations that use Ledg
 *** Please provide extended public key on the ledger device ***
 ```
 
-On the ledger a `Provide Extended Public Key` window is going to be active. Navigate to the ledger `Accept`
-window by using the ledger's right button, and then authorize the request by pressing both left and
+On the Ledger a `Provide Extended Public Key` window is going to be active. Navigate to the Ledger `Accept`
+window by using the Ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
 ```text
@@ -127,7 +127,7 @@ validators costs 0.001 AVAX each. For more details, see [Fees](../quickstart/tra
 
 :::note
 
-You can use the `key list` command to get any ledger address in the derivation sequence by
+You can use the `key list` command to get any Ledger address in the derivation sequence by
 changing the index parameter from `0` to the one desired, or to a list of them (for example: `2`, or
 `0,4,7`). Also, you can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks
 with the `--local` parameter.
@@ -136,7 +136,7 @@ with the `--local` parameter.
 
 #### Funding the Ledger
 
-A new ledger device has no funds on the addresses it controls. You'll need to send funds to it by
+A new Ledger device has no funds on the addresses it controls. You'll need to send funds to it by
 exporting them from the C-Chain to the P-Chain using [Avalanche's Web
 Wallet](https://wallet.avax.network).
 
@@ -175,10 +175,10 @@ Deploying [testsubnet] to Mainnet
 ```
 
 This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the ledger's right button, and then authorize the request by pressing both left and
+window by using the Ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
-After that, CLI shows the `Mainnet` ledger address used to fund the deployment:
+After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
 
 ```text
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
@@ -186,7 +186,7 @@ Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 
 The deployment requires running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet)
 and a [createBlockchain transaction](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain),
-and so this first ledger address must have the funds to issue both operations.
+and so this first Ledger address must have the funds to issue both operations.
 
 This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
 control the Subnet. These addresses are known as `Control Keys`. The CLI can automatically set your
@@ -212,7 +212,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom list
 ```
 
-For this tutorial, opt to use the first ledger address, so enter at `Use ledger address`. Only
+For this tutorial, opt to use the first Ledger address, so enter at `Use ledger address`. Only
 this address is going to be able to add or remove validators, or create blockchains on the Subnet.
 
 ```text
@@ -227,7 +227,7 @@ Next, the CLI generates a TX for creating the SubnetID and asks the user to sign
 ```
 
 This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by
-using the ledger's right button, and then authorize the request by pressing both left and right buttons.
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 If the Ledger doesn't have enough funds, the user may see an error message:
 
@@ -243,8 +243,8 @@ Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr
 *** Please sign blockchain creation hash on the ledger device ***
 ```
 
-This activates a `Sign Hash` window on the ledger. Navigate to the Ledger's `Accept` window by
-using the ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 After that, CLI creates the blockchain within the Subnet, and a summary window for the deployment
 appears:
@@ -423,14 +423,14 @@ Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-Next the CLI asks the user for ledger authorization:
+Next the CLI asks the user for Ledger authorization:
 
 ```text
 *** Please provide extended public key on the ledger device ***
 ```
 
 This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the ledger's right button, and then authorize the request by pressing both left and
+window by using the Ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
 The CLI shows the Ledger address:
@@ -439,7 +439,7 @@ The CLI shows the Ledger address:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-At this point, if the ledger address isn't the control key for the Subnet, the user receives
+At this point, if the Ledger address isn't the control key for the Subnet, the user receives
 an error:
 
 ```text
@@ -447,7 +447,7 @@ Error: wallet doesn't contain subnet auth keys
 exit status 1
 ```
 
-If the ledger doesn't have enough funds, the following error message appears:
+If the Ledger doesn't have enough funds, the following error message appears:
 
 ```text
 *** Please sign subnet creation hash on the ledger device ***
@@ -461,7 +461,7 @@ Otherwise, both the CLI and the Ledger request to sign the TX:
 ```
 
 This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the ledger's right button, and then authorize the request by pressing both left and
+window by using the Ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
 This might take a couple of seconds. After, it prints:
