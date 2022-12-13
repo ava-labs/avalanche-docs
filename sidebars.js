@@ -116,8 +116,6 @@ const sidebars = {
         'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
         'subnets/create-a-mainnet-subnet',
-        'subnets/multisig-deploy',
-
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-custom-subnet',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
@@ -131,6 +129,7 @@ const sidebars = {
       items: [
         'subnets/create-evm-subnet-config',
         'subnets/create-a-local-subnet',
+        'subnets/multisig-deploy',
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
