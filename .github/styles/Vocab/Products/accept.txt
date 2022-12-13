@@ -159,6 +159,7 @@ multisig
 Multisig
 multistep
 mutex
+Mythril
 Nakamoto
 navbar
 namespace
@@ -194,6 +195,7 @@ Precompiles
 prefunded
 Prepended
 Proto
+proxying
 Ranjan
 React's
 reCAPTCHA
@@ -217,8 +219,10 @@ runlog
 RunLog
 Saglam
 Sayan
+scriptable
 Snowtrace
 Solana
+Sourcify
 spoofable
 solc
 stakeable
@@ -243,6 +247,8 @@ syncer
 testnet
 Testnet
 textlint
+toolchain
+Toolchains
 trie
 TXIDs
 TXs

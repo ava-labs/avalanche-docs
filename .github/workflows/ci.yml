@@ -30,6 +30,7 @@ jobs:
         with:
           files: '[
             "docs/apis", 
+            "docs/dapps", 
             "docs/community", 
             "docs/overview",
             "docs/subnets", 
