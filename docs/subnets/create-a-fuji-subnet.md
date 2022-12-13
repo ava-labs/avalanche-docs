@@ -1,4 +1,4 @@
-# Deploy a Subnet on Testnet
+# Deploy a Permissioned Subnet on Testnet
 
 :::note
 
@@ -416,6 +416,7 @@ go run main.go subnet list
 ```
 
 List deployed information:
+
 ```bash
 avalanche subnet list --deployed
 go run main.go subnet list --deployed
