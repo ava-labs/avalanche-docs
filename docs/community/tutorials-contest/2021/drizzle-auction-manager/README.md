@@ -5,51 +5,73 @@ Learn how to create an Avalanche-based auction bidding with a ReactJS frontend.
 
 # Introduction
 
-We will learn how to build smart contracts by making an auction bidding and deploy them on Avalanche and interact with them using ReactJS and Drizzle.
+We will learn how to build smart contracts by making an auction bidding and
+deploy them on Avalanche and interact with them using ReactJS and Drizzle.
 
-We are going to generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our auction bidding frontend. React is useful for the frontend due to its efficiency and user-friendly blockchain interaction. For the backend,  [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the Avalanche blockchain using [Truffle Suite](https://www.trufflesuite.com). 
+We are going to generate [ReactJS](https://reactjs.org) boilerplate code using
+`create-react-app`, which we will modify for our auction bidding frontend. React
+is useful for the frontend due to its efficiency and user-friendly blockchain
+interaction. For the backend,
+[Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be
+deployed to the Avalanche blockchain using [Truffle
+Suite](https://www.trufflesuite.com). 
 
 ## Prerequisites
 
-* Basic familarity with [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-* Basic familarity with [ReactJS](https://reactjs.org/), [React context APIs](https://reactjs.org/docs/context.html) and [Drizzle](https://www.trufflesuite.com/drizzle).
-* Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
+* Basic familiarity with [NodeJS](https://nodejs.org/en) and
+  [npm](https://www.npmjs.com/).
+* Basic familiarity with [ReactJS](https://reactjs.org/), [React context
+  APIs](https://reactjs.org/docs/context.html) and
+  [Drizzle](https://www.trufflesuite.com/drizzle).
+* Basic familiarity with [Avalanche](https://avax.network) network,
+  [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and
+  [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-* [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
-* [Metamask](https://metamask.io) extension added to the browser.
+* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >=
+  5.6 installed.
+* [Truffle](https://www.trufflesuite.com/truffle), which can be installed
+  globally with `npm install -g truffle`
+* [MetaMask](https://metamask.io) extension added to the browser.
 
-**Note: Do not download Metamask from an unofficial source**.
+**Note: Do not download MetaMask from an unofficial source**.
 
-# Initialize the project directory & install all dependencies
+# Initialize the Project Directory & Install All Dependencies
 
 The developer needs to set up a working directory according to ReactJS and Truffle.
 
-Follow the steps below to create the application. Open up the terminal and navigate to the directory where you would like to create this application.
-Now create a new directory with `mkdir <directory_name>` command. Change the current directory to this newly created directory using `cd <directory_name>`. For instance: if we name it `bid`, then
+Follow the steps below to create the application. Open up the terminal and
+navigate to the directory where you would like to create this application. Now
+create a new directory with `mkdir <directory_name>` command. Change the current
+directory to this newly created directory using `cd <directory_name>`. For
+instance: if we name it `bid`, then
 
 ```bash
 mkdir bid
 cd bid
 ```
 
-## Setup the ReactJS project
+## Setup the ReactJS Project
 
-Let us now create a new react app using _npx_ (npm package runner). The typical use is to download and run a package temporarily or for trials. Using _npx_ to execute the package binaries for `create-react-app` will generate a new React app scaffold in the specified directory.
+Let us now create a new react app using _npx_ (npm package runner). The typical
+use is to download and run a package temporarily or for trials. Using _npx_ to
+execute the package binaries for `create-react-app` will generate a new React
+app scaffold in the specified directory.
 
 ```bash
 npx create-react-app client
 ```
 
-Now change to the recent directory "client" using `cd client` command and install the required dependencies using
+Now change to the recent directory "client" using `cd client` command and
+install the required dependencies using
 
 ```bash
 npm install --save dotenv web3 @truffle/contract @truffle/hdwallet-provider @drizzle/store
 ```
 
-Open the file `index.js` inside the `src` directory and replace the existing code with the following code.
+Open the file `index.js` inside the `src` directory and replace the existing
+code with the following code.
 
 ```javascript
 import React from 'react';
@@ -71,7 +93,8 @@ ReactDOM.render(
 );
 ```
 
-Next step: Open up the `App.js` file present inside the `src` directory and replace the existing code with the following code mentioned below.
+Next step: Open up the `App.js` file present inside the `src` directory and
+replace the existing code with the following code mentioned below.
 
 ```javascript
 import Auction from "./Auction";
@@ -92,22 +115,35 @@ export default App;
 
 By doing the above steps, the ReactJS project setup is completed.
 
-## Setup the Truffle project
+## Setup the Truffle Project
 
 To create a boilerplate for the Truffle project execute the following command in the project root directory.
 
 ```bash
 truffle init
 ```
-Now, the initial project is being set up. Solidity code will be stored in the `contracts` directory. Deployment functions written in JavaScript will be stored in the `migrations` folder. By default, the `/build/contracts` folder contains information about the compiled and deployed contract, like the ABI, in JSON format. These meta-files are commonly referred to as `artifacts`.
+
+Now, the initial project is being set up. Solidity code will be stored in the
+`contracts` directory. Deployment functions written in JavaScript will be stored
+in the `migrations` folder. By default, the `/build/contracts` folder contains
+information about the compiled and deployed contract, like the ABI, in JSON
+format. These meta-files are commonly referred to as `artifacts`.
  
-`truffle-config.js` is another *config* file created by the `truffle init` command. This file carries a lot of information like how to deploy a contract, how to choose a network to deploy the following contract, and much more. Thus it became a priority to save this file for reference and we can create a copy of this file using the command mentioned below.
+`truffle-config.js` is another _config_ file created by the `truffle init`
+command. This file carries a lot of information like how to deploy a contract,
+how to choose a network to deploy the following contract, and much more. Thus it
+became a priority to save this file for reference and we can create a copy of
+this file using the command mentioned below.
 
 ```bash
 cp truffle-config.js truffle-config-default.js
 ```
 
-Now, the name of the copied file will be `truffle-config-default.js`. Consequently, we will update the `truffle-config.js` file, with the information needed to deploy the smart contract on the Fuji test network. This file helps us in connecting to the Avalanche node, and we will require an Avalanche wallet mnemonic for deploying the contract on the network.
+Now, the name of the copied file will be `truffle-config-default.js`.
+Consequently, we will update the `truffle-config.js` file, with the information
+needed to deploy the smart contract on the Fuji test network. This file helps us
+in connecting to the Avalanche node, and we will require an Avalanche wallet
+mnemonic for deploying the contract on the network.
 
 ```javascript
 require("dotenv").config();
@@ -144,41 +180,65 @@ module.exports = {
   }
 };
 ```
-Here we are setting the `gas` and `gasprice` to an appropriate value of the Avalanche C-chain. The developer may observe that `contract_build_directory` is being used to change the default location of `artifacts` from the project root directory to the `src` folder. Since React is unable to access the files present outside the `src` folder.
+
+Here we are setting the `gas` and `gasprice` to an appropriate value of the
+Avalanche C-chain. The developer may observe that `contract_build_directory` is
+being used to change the default location of `artifacts` from the project root
+directory to the `src` folder. Since React is unable to access the files present
+outside the `src` folder.
 
 ## Receive Avalanche Credentials
 
-For deploying smart contracts we need two things: A node connected to the Avalanche network and an account with few AVAX. Avalanche connected node through RPC (Remote Procedure Call) is provided for free by the Avalanche Networks.
+For deploying smart contracts we need two things: A node connected to the
+Avalanche network and an account with few AVAX. Avalanche connected node through
+RPC (Remote Procedure Call) is provided for free by the Avalanche Networks.
 
-Now we need an Avalanche wallet, where we would keep our funds, required for all the transactions on the network. So, visit [here](https://wallet.avax.network) and create an account. Save the mnemonic in a secure place (we would need it later). Instructions to add funds will be provided later in the tutorial.
+Now we need an Avalanche wallet, where we would keep our funds, required for all
+the transactions on the network. So, visit [here](https://wallet.avax.network)
+and create an account. Save the mnemonic in a secure place (we would need it
+later). Instructions to add funds will be provided later in the tutorial.
 
-### **Add .env file**
+### **Add .env File**
 
-Now we need an **Avalanche** wallet, where we would keep our funds, required for all the transactions on the network. Visit the [Avalanche Wallet](https://wallet.avax.network/) and create an account. While creating your account you will see your public address and mnemonic. This public address will be required to transfer funds. Save the **mnemonic** in a secure place, we will need it later. Instructions to add funds will be provided later in the tutorial.
+Now we need an **Avalanche** wallet, where we would keep our funds, required for
+all the transactions on the network. Visit the [Avalanche
+Wallet](https://wallet.avax.network/) and create an account. While creating your
+account you will see your public address and mnemonic. This public address will
+be required to transfer funds. Save the **mnemonic** in a secure place, we will
+need it later. Instructions to add funds will be provided later in the tutorial.
 
-Create a `.env` file in the project root folder. Please take a note that dot (.) is necessary for the `.env` file name. Now copy your Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes (" ").
+Create a `.env` file in the project root folder. Please take a note that dot (.)
+is necessary for the `.env` file name. Now copy your Avalanche wallet's mnemonic
+in the .env file as shown below. In the .env file, **MNEMONIC** should be
+enclosed within double-quotes (" ").
 
 ```bash
 MNEMONIC="<avalanche-wallet-mnemonic>"
 ```
 
-> Never share or commit your `.env` file. It contains your credentials like `mnemonics`. Therefore, it is advised to add `.env` to your `.gitignore` file.
+> Never share or commit your `.env` file. It contains your credentials like
+> `mnemonics`. Therefore, it is advised to add `.env` to your `.gitignore` file.
 
-Now, the project setup is completed, and run the command given below in the project root folder to check whether we are on the same page or not.
+Now, the project setup is completed, and run the command given below in the
+project root folder to check whether we are on the same page or not.
 
 ```bash
 npm start
 ```
 
-## Create Auction smart contract
+## Create Auction Smart Contract
 
-Create an `Auction.sol` (sol stands for solidity) file inside the contracts directory and use the code given in this [file](./contracts/Auction.sol).
+Create an `Auction.sol` (sol stands for solidity) file inside the contracts
+directory and use the code given in this [file](./contracts/Auction.sol).
 
-`Auction` is a solidity contract which enables us to view Auction details and correspondingly its minimum price. We will be accessing the deployed Auction contracts using their `address` and `ABI`. Each time when a new auction is created, the solidity code will be deployed to the blockchain.
+`Auction` is a solidity contract which enables us to view Auction details and
+correspondingly its minimum price. We will be accessing the deployed Auction
+contracts using their `address` and `ABI`. Each time when a new auction is
+created, the solidity code will be deployed to the blockchain.
 
-## Let's understand this contract in detail
+## Let's Understand this Contract in Detail
 
-### Users, bids, auctions and analytics
+### Users, Bids, Auctions and Analytics
 
 ```solidity
 // List of all auctions
@@ -189,9 +249,12 @@ mapping (uint => User) public users;
 mapping (uint => Bid[]) public bids;
 mapping (uint => AuctionAnalytics) public auctionAnalytics;
 ```
-The above block of code will declare public variables for storing user information, bids, auctions, and auction analytics. Have a look at the structures like User, Bid, etc of used in these variables.
 
-### Function to check registered user
+The above block of code will declare public variables for storing user
+information, bids, auctions, and auction analytics. Have a look at the
+structures like User, Bid, etc of used in these variables.
+
+### Function to Check Registered User
 
 ```solidity
 // Public function to check the registration of users (public address)
@@ -208,13 +271,20 @@ function isRegistered(address _publicAddress) public view returns (uint256[2] me
 }
 ```
 
-This function takes the public address as its argument and returns an integer array with 2 elements - **isRegistered** at index **0** and **userId** at index **1**. If **0th** index is 1 then the user exists and vice-versa. And ** 1st index** represents userId of the user. This function basically iterates over the mapping **users** to check if there is the required public address.
+This function takes the public address as its argument and returns an integer
+array with 2 elements - `isRegistered` at index **0** and **userId** at index
+**1**. If **0th** index is 1 then the user exists and vice-versa. And ** 1st
+index** represents userId of the user. This function basically iterates over the
+mapping **users** to check if there is the required public address.
 
-### Auction analytics
+### Auction Analytics
 
-We have created a mapping for storing analytics like latest bid, highest bid, lowest bid, etc. for each auction. This mapping will map **auctionId** to **AuctionAnalytic** struct. Every time a new auction is created, we initialize its corresponding entry in the **AuctionAnalytics** map.
+We have created a mapping for storing analytics like latest bid, highest bid,
+lowest bid, etc. for each auction. This mapping will map `auctionId` to
+**AuctionAnalytic** struct. Every time a new auction is created, we initialize
+its corresponding entry in the **AuctionAnalytics** map.
 
-### Updating auction analytics
+### Updating Auction Analytics
 
 ```solidity
 // Private function to update auction analytics after the new bids
@@ -229,11 +299,15 @@ function updateAucionAnalytics(uint _aId, uint _latestBid) private {
     }
 }
 ```
-Auction analytics needs to be updated every time there is a new bid. So, this function is called whenever a bid is created. It takes **auction id** and **latest bid amount** as its two arguments, and updates the analytics corresponding to the auction.
+
+Auction analytics needs to be updated every time there is a new bid. So, this
+function is called whenever a bid is created. It takes **auction id** and
+**latest bid amount** as its two arguments, and updates the analytics
+corresponding to the auction.
 
 The rest of the functions are self-explanatory but are well commented for the readers to understand.
 
-## Create Migration smart contracts
+## Create Migration Smart Contracts
 
 Create the file `Migration.sol` inside of the contracts directory and paste the following code:
 
@@ -258,11 +332,15 @@ contract Migrations {
   }
 }
 ```
-`Migration.sol` smart contract manages the deployment of other contracts that we want to migrate to the chain.
 
-## Create a file for migrating smart contracts
+`Migration.sol` smart contract manages the deployment of other contracts that we
+want to migrate to the chain.
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Auction` smart contract to the blockchain.
+## Create a File for Migrating Smart Contracts
+
+Create a new file in the `migrations` directory named `2_deploy_contracts.js`,
+and add the following block of code. This handles deploying the `Auction` smart
+contract to the blockchain.
 
 ```javascript
 const AuctionManager = artifacts.require("./AuctionManager.sol");
@@ -274,7 +352,9 @@ module.exports = function(deployer) {
 
 ## Compile Contracts with Truffle
 
-If we have altered the code within our Solidity source files or made new ones (like `Auction.sol`), we need to run `truffle compile` in the terminal, from inside the project root directory.
+If we have altered the code within our Solidity source files or made new ones
+(like `Auction.sol`), we need to run `truffle compile` in the terminal, from
+inside the project root directory.
 
 The expected output would look similar:
 
@@ -289,21 +369,43 @@ Compiling your contracts...
    - solc: 0.8.0+commit.c7dfd78e.Emscripten.clang
 ```
 
-The compiled smart contracts are written as JSON files in the /src/build/contracts directory. These are the stored ABI and other necessary metadata - the artifacts.
+The compiled smart contracts are written as JSON files in the
+/src/build/contracts directory. These are the stored ABI and other necessary
+metadata - the artifacts.
 
-> `ABI` refers to Application Binary Interface, which is a standard for interacting with the smart contracts from outside the blockchain as well as contract-to-contract interaction. Please refer to the Solidity's documentation about ABI's [here](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#:~:text=The%20Contract%20Application%20Binary%20Interface,contract%2Dto%2Dcontract%20interaction.&text=This%20specification%20does%20not%20address,known%20only%20at%20run%2Dtime) to learn more.
+> `ABI` refers to Application Binary Interface, which is a standard for
+> interacting with the smart contracts from outside the blockchain as well as
+> contract-to-contract interaction. Please refer to the Solidity's documentation
+> about ABIs
+> [here](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#:~:text=The%20Contract%20Application%20Binary%20Interface,contract%2Dto%2Dcontract%20interaction.&text=This%20specification%20does%20not%20address,known%20only%20at%20run%2Dtime)
+> to learn more.
 
-## **Fund the account and run migrations on the C-Chain**
+## **Fund the Account and Run Migrations on the C-Chain**
 
-During the deployment of the smart contract to the C-chain, deployment cost will be required. Already we have seen this inside `truffle-config.js` HDWallet Provider will help us in deploying on Fuji C-chain and deployment cost will be managed by the account whose mnemonic has been stored in the `.env` file. Therefore, we need to fund the account.
+During the deployment of the smart contract to the C-chain, deployment cost will
+be required. Already we have seen this inside `truffle-config.js` HDWallet
+Provider will help us in deploying on Fuji C-chain and deployment cost will be
+managed by the account whose mnemonic has been stored in the `.env` file.
+Therefore, we need to fund the account.
 
-### **Fund your account**
+### **Fund Your Account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain, and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain, the
+Contract-Chain. This address can easily be found on the [Avalanche
+Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains:
+X-Chain, P-Chain, and C-Chain. The address of all these chains can be found by
+switching tabs at the bottom of the division, where there is a QR code. So,
+switch to C-Chain, and copy the address. Now fund your account using the faucet
+link [here](https://faucet.avax.network/) and paste your C-Chain address in the
+input field. Refer to the below image, to identify the address section.
 
-![](./assets/drizzle-auction-00-wallet-c-chain-address.png)
+![wallet c-chain address](./assets/drizzle-auction-00-wallet-c-chain-address.png)
 
-> You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
+> You'll need to send at least `135422040` nAVAX to the account to cover the
+> cost of contract deployments. Here `nAVAX` refers nano-AVAX, that is a billionth of
+> an `AVAX`, or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding
+> through faucet would give you enough `AVAX` to run multiple deployments and
+> transactions on the network.
 
 ## Run Migration
 
@@ -312,11 +414,14 @@ All the required thing has been placed to run and now deploy the `Auction`.
 ```bash
 truffle migrate --network fuji
 ```
-The developer can deploy our contracts on a local network by executing Ganache (Truffle's local blockchain simulation) and using the command mentioned below
+
+The developer can deploy our contracts on a local network by executing Ganache
+(Truffle's local blockchain simulation) and using the command mentioned below
 
 ```bash
 truffle migrate --network development
 ```
+
 On successful execution of the above command, the developer may find the similar as mentioned below:
 
 
@@ -402,21 +507,40 @@ Error:  *** Deployment Unsuccessful***
    * Try:
       + Using an adequately funded account
 ```
-The information and ABI of the deployed contract are present in the `src/build/contracts` directory as Auction.json.
 
-## Building the user interface
+The information and ABI of the deployed contract are present in the
+`src/build/contracts` directory as Auction.json.
 
-Our blockchain code, which will act as a backend for this application, is deployed on the chain and now we can code client-side for interacting with the contracts. We will be using Trufflesuite's **Drizzle** library for connecting our web app with blockchain. Drizzle makes the integration process very easy and scalable. It also provides a mechanism to **cache** a particular contract-call, so that, we can get a real-time update of the changes of data on the blockchain.
+## Building the User Interface
 
-We will be using **React's context APIs** for facilitating our integration. Context APIs make the use of variables that are declared in the parent component very easy to access in the child components.
+Our blockchain code, which will act as a backend for this application, is
+deployed on the chain and now we can code client-side for interacting with the
+contracts. We will be using Truffle Suite's **Drizzle** library for connecting
+our web app with blockchain. Drizzle makes the integration process very easy and
+scalable. It also provides a mechanism to **cache** a particular contract-call,
+so that, we can get a real-time update of the changes of data on the blockchain.
 
-It is based upon the **Provider** and **Consumer** concepts. The **Provider** component contains the necessary logic and variables that need to be passed. Then this Provider component is wrapped around the components which want to access its variables. Every child component can access these variables. But in order to access it, we use **Consumer** API. This API will return the variables that are provided by the Provider component (only when called from its child). Look at the below codes for understanding it better.
+We will be using **React's context APIs** for facilitating our integration.
+Context APIs make the use of variables that are declared in the parent component
+very easy to access in the child components.
 
-In the `drizzleContext.js` file, **DrizzleProvider** is the provider component and **useDrizzleContext** is the consumer function. Look at the return statement of these functions. One is returning the Context Provider (provider) and the other the returning the values of the Context itself (consumer).
+It is based upon the **Provider** and **Consumer** concepts. The **Provider**
+component contains the necessary logic and variables that need to be passed.
+Then this Provider component is wrapped around the components which want to
+access its variables. Every child component can access these variables. But in
+order to access it, we use **Consumer** API. This API will return the variables
+that are provided by the Provider component (only when called from its child).
+Look at the below codes for understanding it better.
 
-## Drizzle Option component
+In the `drizzleContext.js` file, **DrizzleProvider** is the provider component
+and **useDrizzleContext** is the consumer function. Look at the return statement
+of these functions. One is returning the Context Provider (provider) and the
+other the returning the values of the Context itself (consumer).
 
-Create a file `drizzleOptions.js` inside the `drizzle-auction/client/src/` directory and paste the following code:
+## Drizzle Option Component
+
+Create a file `drizzleOptions.js` inside the `drizzle-auction/client/src/`
+directory and paste the following code:
 
 ```javascript
 import AuctionManager from "./build/contracts/AuctionManager.json";
@@ -427,11 +551,16 @@ const drizzleOptions = {
 
 export default drizzleOptions;
 ```
-The `drizzleOptions` constant contains the configuration like contracts we want to deploy, our custom web3 provider, smart contract events, etc. Here we just instantiating only the `AuctionManager` smart contract.
 
-## Index component
+The `drizzleOptions` constant contains the configuration like contracts we want
+to deploy, our custom web3 provider, smart contract events, etc. Here we just
+instantiating only the `AuctionManager` smart contract.
 
-Inside the file `index.js` of `src` directory, paste the following code mentioned below:
+## Index Component
+
+Inside the file `index.js` of `src` directory, paste the following code
+mentioned below:
+
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -451,15 +580,24 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-Importing `Drizzle` from `@drizzle/store` module will help in instantiating the drizzle according to our drizzleOptions. The following line is responsible for this action.
+
+Importing `Drizzle` from `@drizzle/store` module will help in instantiating the
+drizzle according to our `drizzleOptions`. The following line is responsible for
+this action.
+
 ```javascript
 const drizzle = new Drizzle(drizzleOptions);
 ```
-Then we wrap the `App` component inside the `DrizzleProvider`, so that, we can use extracted variables (see drizzleContext.js) inside App. We pass the `drizzle` object to the provider component because it will be required to extract other information from it.
+
+Then we wrap the `App` component inside the `DrizzleProvider`, so that, we can
+use extracted variables (see drizzleContext.js) inside App. We pass the
+`drizzle` object to the provider component because it will be required to
+extract other information from it.
 
 ## Drizzle Context
 
-Create a file `drizzleContext.js` inside the `drizzle-auction/client/src/` directory and paste the following code mentioned below:
+Create a file `drizzleContext.js` inside the `drizzle-auction/client/src/`
+directory and paste the following code mentioned below:
 
 ```javascript
 import React, { createContext, useContext, useState } from "react";
@@ -501,24 +639,45 @@ export function useDrizzleContext() {
   return context;
 }
 ```
-**DrizzleProvider** function takes **drizzle** as its argument and extracts other information like whether drizzle contracts are initialized or not, web3 info, account info, deployed contract's instance, etc. We need to **subscribe** to the drizzle's **store** for this information because these data are not fetched at once, and since we do not know when will we get these data, we subscribe to the store (where all data resides). Once the drizzle is initialized with contract data, we **unsubscribe** to store, so that, it will not re-render infinitely many times.
 
-### Drizzle state
+**DrizzleProvider** function takes **drizzle** as its argument and extracts
+other information like whether drizzle contracts are initialized or not, web3
+info, account info, deployed contract's instance, etc. We need to **subscribe**
+to the drizzle's **store** for this information because these data are not
+fetched at once, and since we do not know when will we get these data, we
+subscribe to the store (where all data resides). Once the drizzle is initialized
+with contract data, we **unsubscribe** to store, so that, it will not re-render
+infinitely many times.
+
+### Drizzle State
 
 ```javascript
 const drizzleState = drizzle.store.getState();
 ```
-This variable holds the state of the store which consists of data like web3 provider, account info, cached call information, etc. Cached calls are those contract calls for which we want real-time data from the blockchain. Whenever there is some change in our data on the blockchain, it gets notified in the drizzle state variable of the store.
+
+This variable holds the state of the store which consists of data like web3
+provider, account info, cached call information, etc. Cached calls are those
+contract calls for which we want real-time data from the blockchain. Whenever
+there is some change in our data on the blockchain, it gets notified in the
+drizzle state variable of the store.
 
 ### AuctionManager
 
 ```javascript
 const AuctionManager =  drizzle.contracts.AuctionManager.methods;
 ```
-`drizzle.contracts` is an object which contains instances of all the deployed contracts which are added to drizzle (in drizzleOptions or manually). We are simply storing all the **methods** of this contract instance, so that, whenever we want to call a function or public identifier from this contract, we can simply use `AuctionManager.method_name().call()`
 
-## App component
-Now open `App.js` inside the `drizzle-auction/client/src/` directory and paste the following code as mentioned below:
+`drizzle.contracts` is an object which contains instances of all the deployed
+contracts which are added to drizzle (in `drizzleOptions` or manually). We are
+simply storing all the **methods** of this contract instance, so that, whenever
+we want to call a function or public identifier from this contract, we can
+simply use `AuctionManager.method_name().call()`
+
+## App Component
+
+Now open `App.js` inside the `drizzle-auction/client/src/` directory and paste
+the following code as mentioned below:
+
 ```javascript
 import Auction from "./Auction";
 import { useDrizzleContext } from "./drizzleContext";
@@ -535,15 +694,27 @@ function App() {
 
 export default App;
 ```
-`drizzleVariables.initialized` would ensure that, `Loading...` state is visible until Drizzle is ready for interaction.
+
+`drizzleVariables.initialized` would ensure that, `Loading...` state is visible
+until Drizzle is ready for interaction.
 
 ## Auction Component
 
-Create a file `Auction.js` inside the `drizzle-auction/client/src/` directory. and paste the code given in this [file](./frontend/Auction.js.md). This component deals with the entry-point of our application, where all the data like `userInfo`, `AuctionLists`, `AuctionDetails` etc. get generated.
+Create a file `Auction.js` inside the `drizzle-auction/client/src/` directory.
+and paste the code given in this [file](./frontend/Auction.js.md). This
+component deals with the entry-point of our application, where all the data like
+`userInfo`, `AuctionLists`, `AuctionDetails` etc. get generated.
 
-In order to keep data fresh from the blockchain, Drizzle uses the caching mechanism. On our behalf Drizzle keeps track of every change on the blockchain. If there is any transaction involving our smart contracts, then it will notify our DApp.
+In order to keep data fresh from the blockchain, Drizzle uses the caching
+mechanism. On our behalf Drizzle keeps track of every change on the blockchain.
+If there is any transaction involving our smart contracts, then it will notify
+our dapp.
 
-We need to specifically define the calls which we want to monitor. Caching a particular method will provide cache keys (hash) to us. Each cached method is associated with a particular unique hash. Using this key, we can get live data from the blockchain, and the component will re-render anytime there is some new value associated with this call.
+We need to specifically define the calls which we want to monitor. Caching a
+particular method will provide cache keys (hash) to us. Each cached method is
+associated with a particular unique hash. Using this key, we can get live data
+from the blockchain, and the component will re-render anytime there is some new
+value associated with this call.
 
 For example, in the above code, we used the following cache keys
 
@@ -556,34 +727,56 @@ const [cacheKeys, setCacheKey] = useState({
     auctionAnalytics: [null]
 });
 ```
+
 Suppose we want to cache `isRegistered` method, then this can be done using 
+
 ```javascript
 const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0]);
 setCacheKey({
     isRegistered: _isRegistered
 })
 ```
-Once a method is cached, the Drizzle `store` would create a `key-value` pair representing hash-key and real-time data associated with this call. In the above program, this is data is accessed using the `subscriber` variable as follows
+
+Once a method is cached, the Drizzle `store` would create a `key-value` pair
+representing hash-key and real-time data associated with this call. In the above
+program, this is data is accessed using the `subscriber` variable as follows
+
 ```javascript
 const realTimeIsRegistered = subscriber?.isRegistered[cacheKeys?.isRegistered]?.value
 ```
-In this component, we made a simple object of cached call variables named `cacheCall`, which implements the above code snippet. The cached version of `isRegistered` can be accessed as `cacheCalls.isRegistered`.
+
+In this component, we made a simple object of cached call variables named
+`cacheCall`, which implements the above code snippet. The cached version of
+`isRegistered` can be accessed as `cacheCalls.isRegistered`.
 
 ## Auction List
 
-Create a file `Auctionlist.js` inside the `drizzle-auction/client/src/` directory and use the code as given in this [file](./frontend/AuctionList.js.md). This component deals with the management of the auction like creating a new bid, displaying the real-time auction analytics, etc. All these data are passed by its parent component i.e. `Auction.js` which manages the cache keys and calls.
+Create a file `Auctionlist.js` inside the `drizzle-auction/client/src/`
+directory and use the code as given in this
+[file](./frontend/AuctionList.js.md). This component deals with the management
+of the auction like creating a new bid, displaying the real-time auction
+analytics, etc. All these data are passed by its parent component i.e.
+`Auction.js` which manages the cache keys and calls.
 
-## Creating new Auctions
+## Creating New Auctions
 
-Create a file `CreateAuction.js` inside the `drizzle-auction/client/src/` directory and use the code as given in this [file](./frontend/CreateAuction.js.md). This component deals with creation of new Auctions, by submitting transactions on the network.
+Create a file `CreateAuction.js` inside the `drizzle-auction/client/src/`
+directory and use the code as given in this
+[file](./frontend/CreateAuction.js.md). This component deals with creation of
+new Auctions, by submitting transactions on the network.
 
-## Starting the application
+## Starting the Application
 
-Now go to the project root directory of the project, i.e. `drizzle-auction` directory, and run the command `npm start`. The ReactJS server would start automatically. Visit [http://localhost:3000](http://localhost:3000) to interact with the built dApp.
+Now go to the project root directory of the project, that is the `drizzle-auction`
+directory, and run the command `npm start`. The ReactJS server would start
+automatically. Visit [http://localhost:3000](http://localhost:3000) to interact
+with the built dapp.
 
-Don't forget to set up Metamask with Avalanche Fuji testnet and also fund the account with Avalanche test tokens to upload files.
+Don't forget to set up MetaMask with Avalanche Fuji testnet and also fund the
+account with Avalanche test tokens to upload files.
 
-In the Metamask extension, add a custom RPC by clicking at the network dropdown in the center of the extension. Fill in the details as shown in the below image.
+In the MetaMask extension, add a custom RPC by clicking at the network dropdown
+in the center of the extension. Fill in the details as shown in the below image.
 
 | Info | Value |
 | :--- | :--- |
@@ -594,16 +787,21 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 | Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
 
 
-![](./assets/drizzle-auction-01-demo-drizzle-auction.gif)
+![demo drizzle auction](./assets/drizzle-auction-01-demo-drizzle-auction.gif)
 
 ## Conclusion
 
-We have successfully built a dApp through which we can organize auctions, bid in them and declare results, with both frontend and smart contracts. We have used the Drizzle library from Trufflesuite for integrating our frontend with the blockchain and to keep our data updated in real-time.
+We have successfully built a dapp through which we can organize auctions, bid in
+them and declare results, with both frontend and smart contracts. We have used
+the Drizzle library from Truffle Suite for integrating our frontend with the
+blockchain and to keep our data updated in real-time.
 
 ## Next Steps
 
-Our dApp currently has very minimalistic designs. We can use Consensys' Rimble UI library for adding modals for each transaction, add links to drip Avalanche's test tokens etc. which can help users to navigate through our dApp.
+Our dapp currently has very minimalistic designs. We can use Consensys' Rimble
+UI library for adding modals for each transaction, add links to drip Avalanche's
+test tokens etc. which can help users to navigate through our dapp.
 
-## About the author
+## About the Author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan).

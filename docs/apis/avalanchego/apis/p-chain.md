@@ -21,7 +21,7 @@ This API uses the `json 2.0` RPC format.
 
 ## Methods
 
-### platform.addDelegator
+### `platform.addDelegator`
 
 :::warning
 
@@ -119,7 +119,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.addValidator
+### `platform.addValidator`
 
 :::warning
 
@@ -234,7 +234,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.addSubnetValidator
+### `platform.addSubnetValidator`
 
 :::warning
 
@@ -270,9 +270,9 @@ platform.addSubnetValidator(
 - `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate
   the Primary Network for the entire duration that it validates this Subnet.
 - `subnetID` is the ID of the Subnet we’re adding a validator to.
-- `startTime` is the unix time when the validator starts validating the Subnet. It must be at or
+- `startTime` is the Unix time when the validator starts validating the Subnet. It must be at or
   after the time that the validator starts validating the Primary Network
-- `endTime` is the unix time when the validator stops validating the Subnet. It must be at or before
+- `endTime` is the Unix time when the validator stops validating the Subnet. It must be at or before
   the time that the validator stops validating the Primary Network.
 - `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the
   cumulative weight of all validators in the Subnet is 100, then this validator will be included in
@@ -323,7 +323,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.createAddress
+### `platform.createAddress`
 
 :::warning
 
@@ -368,7 +368,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.createBlockchain
+### `platform.createBlockchain`
 
 :::warning
 
@@ -416,7 +416,7 @@ platform.createBlockchain(
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
   addresses controlled by the user.
 - `username` is the user that pays the transaction fee. This user must have a sufficient number of
-  the subnet’s control keys.
+  the Subnet's control keys.
 - `password` is `username`‘s password.
 - `txID` is the transaction ID.
 
@@ -457,7 +457,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.createSubnet
+### `platform.createSubnet`
 
 :::warning
 
@@ -530,7 +530,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.exportAVAX
+### `platform.exportAVAX`
 
 Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this
 transaction, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or C-Chain's
@@ -596,7 +596,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.exportKey
+### `platform.exportKey`
 
 :::warning
 
@@ -648,7 +648,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getBalance
+### `platform.getBalance`
 
 Get the balance of AVAX controlled by a given address.
 
@@ -722,7 +722,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getBlock
+### `platform.getBlock`
 
 Get a block by its ID.
 
@@ -855,7 +855,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getBlockchains
+### `platform.getBlockchains`
 
 Get all the blockchains that exist (excluding the P-Chain).
 
@@ -945,7 +945,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getBlockchainStatus
+### `platform.getBlockchainStatus`
 
 Get the status of a blockchain.
 
@@ -994,7 +994,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getCurrentSupply
+### `platform.getCurrentSupply`
 
 Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is
 an upper bound because it does not account for burnt tokens, including transaction fees.
@@ -1036,7 +1036,7 @@ curl -X POST --data '{
 
 The response in this example indicates that AVAX’s supply is at most 365.865 million.
 
-### platform.getCurrentValidators
+### `platform.getCurrentValidators`
 
 List the current validators of the given Subnet.
 
@@ -1091,7 +1091,7 @@ platform.getCurrentValidators({
 
 - `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
-- `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current
+- `nodeIDs` is a list of the NodeIDs of current validators to request. If omitted, all current
   validators are returned. If a specified nodeID is not in the set of current validators, it will
   not be included in the response.
 - `validators`:
@@ -1189,7 +1189,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getHeight
+### `platform.getHeight`
 
 Returns the height of the last accepted block.
 
@@ -1225,7 +1225,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getMaxStakeAmount
+### `platform.getMaxStakeAmount`
 
 Returns the maximum amount of nAVAX staking to the named node during a particular time period.
 
@@ -1281,7 +1281,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getMinStake
+### `platform.getMinStake`
 
 Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of
 tokens that can be delegated.
@@ -1324,7 +1324,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getPendingValidators
+### `platform.getPendingValidators`
 
 List the validators in the pending validator set of the specified Subnet. Each validator is not
 currently validating the Subnet but will in the future.
@@ -1362,7 +1362,7 @@ platform.getPendingValidators({
 
 - `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
-- `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending
+- `nodeIDs` is a list of the NodeIDs of pending validators to request. If omitted, all pending
   validators are returned. If a specified nodeID is not in the set of pending validators, it will
   not be included in the response.
 - `validators`:
@@ -1426,7 +1426,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getRewardUTXOs
+### `platform.getRewardUTXOs`
 
 Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period
 ended.
@@ -1480,9 +1480,9 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getStakingAssetID
+### `platform.getStakingAssetID`
 
-Retrieve an assetID for a subnet’s staking asset.
+Retrieve an assetID for a Subnet’s staking asset.
 
 **Signature:**
 
@@ -1495,7 +1495,7 @@ platform.getStakingAssetID({
 ```
 
 - `subnetID` is the Subnet whose assetID is requested.
-- `assetID` is the assetID for a subnet’s staking asset.
+- `assetID` is the assetID for a Subnet’s staking asset.
 
 **Example Call:**
 
@@ -1522,7 +1522,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getSubnets
+### `platform.getSubnets`
 
 Get info about the Subnets.
 
@@ -1583,7 +1583,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getStake
+### `platform.getStake`
 
 Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking
 rewards.
@@ -1640,7 +1640,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getTimestamp
+### `platform.getTimestamp`
 
 Get the current P-Chain timestamp.
 
@@ -1674,7 +1674,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getTotalStake
+### `platform.getTotalStake`
 
 Get the total amount of tokens staked on the requested Subnet.
 
@@ -1746,12 +1746,12 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getTx
+### `platform.getTx`
 
 Gets a transaction by its ID.
 
 Optional `encoding` parameter to specify the format for the returned transaction. Can be either
-"hex" or "json". Defaults to "hex".
+`hex` or `json`. Defaults to `hex`.
 
 **Signature:**
 
@@ -1833,7 +1833,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getTxStatus
+### `platform.getTxStatus`
 
 Gets a transaction’s status by its ID. If the transaction was dropped, response will include a
 `reason` field with more information why the transaction was dropped.
@@ -1879,7 +1879,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.getUTXOs
+### `platform.getUTXOs`
 
 Gets the UTXOs that reference a given set of addresses.
 
@@ -1914,7 +1914,7 @@ platform.getUTXOs(
 - This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of
   UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique
+- When using pagination (that is when `startIndex` is provided), UTXOs are not guaranteed to be unique
   across multiple calls. That is, a UTXO may appear in the result of the first call, and then again
   in the second call.
 - When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set
@@ -2011,7 +2011,7 @@ Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs
 call this method again.
 
 Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an
-ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the
+ImportTx. Then we need to call GetUTXOs with the `sourceChain` argument in order to retrieve the
 atomic UTXOs:
 
 ```sh
@@ -2047,7 +2047,7 @@ This gives response:
 }
 ```
 
-### platform.getValidatorsAt
+### `platform.getValidatorsAt`
 
 Get the validators and their weights of a Subnet or the Primary Network at a given P-Chain height.
 
@@ -2097,7 +2097,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.importAVAX
+### `platform.importAVAX`
 
 :::warning
 
@@ -2170,7 +2170,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.importKey
+### `platform.importKey`
 
 :::warning
 
@@ -2220,7 +2220,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.issueTx
+### `platform.issueTx`
 
 Issue a transaction to the Platform Chain.
 
@@ -2264,7 +2264,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.listAddresses
+### `platform.listAddresses`
 
 :::warning
 
@@ -2309,7 +2309,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.sampleValidators
+### `platform.sampleValidators`
 
 Sample validators from the specified Subnet.
 
@@ -2359,7 +2359,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.validatedBy
+### `platform.validatedBy`
 
 Get the Subnet that validates a given blockchain.
 
@@ -2401,7 +2401,7 @@ curl -X POST --data '{
 }
 ```
 
-### platform.validates
+### `platform.validates`
 
 Get the IDs of the blockchains a Subnet validates.
 

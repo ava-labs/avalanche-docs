@@ -1,3 +1,5 @@
+# hardhat.config.js
+
 ```typescript
 import { task } from "hardhat/config";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
