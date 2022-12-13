@@ -4,7 +4,7 @@ _This tutorial includes items from the truffle [quickstart docs](https://www.tru
 
 _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
 
-## Create a project
+## Create a Project
 
 Make sure you have truffle installed:
 
@@ -55,7 +55,7 @@ Create a `.env.json` file in your project's root directory:
 }
 ```
 
-_Get your snowtrace API key [here](https://snowtrace.io/myapikey)_
+_Get your Snowtrace API key [here](https://snowtrace.io/myapikey)_
 
 Configure your `truffle-config.js` file to the appropriate settings:
 
@@ -115,7 +115,7 @@ module.exports = {
 }
 ```
 
-_Network can be configured for mainnet deployment(see Alternatives)_
+_Network can be configured for Mainnet deployment(see Alternatives)_
 
 Run the following command:
 
@@ -137,28 +137,30 @@ Run the following command:
 npx truffle migrate --network fuji
 ```
 
-You should see the txn activity in your terminal
+You should see the TX activity in your terminal
 ![truffle-verify-txn1](/img/truffle-verify-txn1.png)
 
 ![truffle-verify-txn2](/img/truffle-verify-txn2.png)
 
 ![truffle-verify-txn3](/img/truffle-verify-txn3.png)
 
-## Truffle verify
+## Truffle Verify
 
 Truffle verify allows users to verify contracts from the CLI
 
 ### Fuji Testnet
 
-Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle verify [here](https://github.com/rkalis/truffle-plugin-verify)
+Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/)
+and read more about truffle verify
+[here](https://github.com/rkalis/truffle-plugin-verify)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 1. Run the following command:
 
-```zsh
-npx truffle run verify ConvertLib MetaCoin --network fuji
-```
+    ```zsh
+    npx truffle run verify ConvertLib MetaCoin --network fuji
+    ```
 
 2. Wait for the verification message from the CLI
    ![truffle-verify-message1](/img/truffle-verify-message1.png)
