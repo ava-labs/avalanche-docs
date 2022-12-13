@@ -289,6 +289,8 @@ allow list by issuing an `addValidator` transaction and instruct the node to sta
 Subnet by updating its local configs. You need to repeat this process for every validator you
 add to the network.
 
+You can run the `addValidator` transactions from the same box that deployed the Subnet.
+
 ### Submit addValidator TX to Mainnet
 
 Start by running the `addValidator` command and adding the name of the Subnet. To be clear,
@@ -398,7 +400,7 @@ For example, say `200 days = 24 \* 200 = 4800h`
 ✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
 ```
 
-The CLI shows the user an actual date of when that is:
+The CLI shows the user an actual date:
 
 ```text
 ? Your validator is going to finish staking by 2023-06-10 13:07:58:
@@ -474,32 +476,70 @@ risks downtime.
 
 You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
 
+## Subnet Export
+
+Because you need to setup multiple validators on multiple different machines, you need to export
+your Subnet's configuration and import it on each validator.
+
+```bash
+avalanche subnet export testsubnet
+✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+```
+
+The file is in text format and you shouldn't change it. You can use it to import the configuration
+on a different machine.
+
+## Subnet Import
+
+To import a VM configuration, move the file you exported in the previous section to your desired
+machine and issue the `import` command with the path to the file.
+
+```bash
+avalanche subnet import /tmp/testsubnet-export.dat
+Subnet imported successfully
+```
+
+After this the whole Subnet configuration should be available on the target machine:
+
+```text
+avalanche subnet list
++---------------+---------------+----------+-----------+----------+
+|    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
++---------------+---------------+----------+-----------+----------+
+| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
++---------------+---------------+----------+-----------+----------+
+```
+
 ## Join a Subnet
 
-You might already have a running validator which you want to add to a specific Subnet. For this, run
-the `join` command. This is a bit of a special command. The `join` command is going to either just
-_print the required instructions_ for your already running node or is going to attempt at
-configuring a config file the user provides.
+To configure your validator to sync a specific Subnet, run the `join` command. This is a bit of a
+special command. The `join` command is going to either just _print the required instructions_ for
+your already running node or is going to attempt to edit your config files automatically. If you are
+running the CLI on the same box as your validator, you should run the commands in automated
+mode. If you don't want to run Avalanche-CLI on the same box as your validator, use the manual
+commands.
 
 ```bash
 avalanche subnet join testsubnet
 ```
+
+### Select Mainnet
 
 First ask for network for which the validator is joining. Choose `Mainnet`:
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to validate on (this command only supports public networks):
-  ▸ Fuji
-    Mainnet
+    Fuji
+  ▸ Mainnet
 ```
 
-The [deploy the SUBNET](#deploy-the-subnet) section shows that a Subnet is permissioned via a
-set of keys. Therefore you can't add any node as validator to the Subnet. A holder of a control key
-_must_ call [SUBNET addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first
-to allow the node to validate the Subnet. So the tool allows the user now to verify if the node has
-already been permissioned -"whitelisted"- to be a validator for this Subnet (by calling an API in the
-background).
+### Check Validator List Status
+
+Because you deployed a permissioned Subnet, not just any primary network validator may validate the
+Subnet. The Subnet's control key holders must have first added the desired NodeID to the Subnet's
+validator list with the `addValidator` command described in the preceding section. Avalanche-CLI
+checks that your node is authorized to validate the target Subnet.
 
 ```text
 Would you like to check if your node is allowed to join this subnet?
@@ -507,15 +547,22 @@ If not, the subnet's control key holder must call avalanche subnet
 addValidator with your NodeID.
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Check whitelist?:
-    Yes
-  ▸ No
+  ▸ Yes
+    No
 ```
 
-The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
+If you followed the steps in [Add a Validator](#add-a-validator), everything should work as expected.
 
-There are now two choices possible: automatic and Manual configuration. As mentioned earlier, "Automatic"
-is going to attempt at editing a config file and setting up your plugin directory, while "Manual" is
-going to just print the required config to the screen. What "Automatic" does is:
+### Setup Node Automatically
+
+There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
+"Automatic" attempts to edit your config file and sets up your plugin directory, while "Manual" just
+prints the required config to the screen. To run in automatic mode, you must be running
+Avalanche-CLI on the same box as the validator node.
+
+Select automatic.
+
+#### Set Config File
 
 ```text
 ✔ Automatic
@@ -528,10 +575,11 @@ then you could point this to the actually used config file, for example
 just copy the file later. In any case, the tool is going to either try to edit the existing file specified
 by the given path, or create a new file. Again, set write permissions.
 
-Next, provide the plugin directory. The beginning of this tutorial describes VMs [Virtual Machine](#virtual-machine).
-Each VM runs its own plugin, therefore AvalancheGo needs to be able to access the correspondent plugin
-binary. As this is the `join` command, which doesn't know yet about the plugin, there is a need to provide
-the directory where the plugin resides. Make sure to provide the location for your case:
+#### Set Plugin Directory
+
+Next, provide the plugin directory. Each VM runs its own binary, called a plugin. Therefore, you
+need to copy your VM's plugin binary into AvalancheGo's plugin directory. This directory depends
+on your AvalancheGo install location.
 
 ```text
 ✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
@@ -551,7 +599,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     No
 ```
 
-Hitting `Yes` is going to attempt at writing the config file:
+Hitting `Yes` writes the necessary file:
 
 ```text
 ✔ Yes
@@ -563,11 +611,15 @@ option, e.g.
 (using your binary location). The node has to be restarted for the changes to take effect.
 ```
 
+#### Restart the Node
+
 It's **required to restart the node**.
 
-By choosing "Manual" instead, the tool is going to just print _instructions_. The user is going to have
-to follow these instructions and apply them to the node. Note that the IDs for the VM and Subnets is
-going to be different in your case.
+### Setup Node Manually
+
+By choosing "Manual" instead, the tool prints _instructions_. The user is going to have to follow
+these instructions and apply them to the node. Note that the IDs for the VM and Subnet are different
+for each Subnet deployment and you shouldn't copy them from this tutorial.
 
 ```text
 ✔ Manual
@@ -602,62 +654,9 @@ After you update your config, you are going to need to restart your node for the
 take effect.
 ```
 
-## Subnet Export
+## Going Live
 
-This tool is most useful on the machine where a validator is or is going to be running. In order to
-allow a VM to run on a different machine, you can export the configuration. Just provide a path to
-where to export the data:
+Once all of your validators have joined the network, you are ready to issue transactions to your Subnet.
 
-```bash
-avalanche subnet export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
-```
-
-The file is in text format and you shouldn't change it. You can use it to import the configuration
-on a different machine.
-
-## Subnet Import
-
-To import a VM specification exported in the previous section, just issue the `import` command with
-the path to the file after having copied the file over:
-
-```bash
-avalanche subnet import /tmp/testsubnet-export.dat
-Subnet imported successfully
-```
-
-After this the whole Subnet configuration should be available on the target machine:
-
-```text
-avalanche subnet list
-+---------------+---------------+----------+-----------+----------+
-|    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
-+---------------+---------------+----------+-----------+----------+
-| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
-+---------------+---------------+----------+-----------+----------+
-```
-
-## Appendix
-
-### Connect with MetaMask
-
-To connect MetaMask with your blockchain on the new Subnet running on your local computer, you can add
-a new network on MetaMask with the following values:
-
-```text
-- Network Name: testsubnet
-- RPC URL: http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc
-- ChainID: 3333
-- Symbol: TST
-```
-
-:::note
-
-Unless you deploy your Subnet on other nodes, you aren't going to be able to use other nodes,
-including the public API server `https://api.avax.network/`, to connect to MetaMask.
-
-If you want to open up this node for others to access your Subnet, you should set it up properly with
-`https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it's out of scope for this tutorial
-on how to do that.
-
-:::
+For the safety of your validators, you should setup dedicated API nodes to process transactions, but
+for test purposes, you can issue transactions directly to one of your validator's RPC interface.
