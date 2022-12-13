@@ -1,4 +1,6 @@
-```
+# App.js
+
+```js
 import React from "react";
 import { ethers } from "ethers";
 

@@ -24,7 +24,7 @@ blockchain running the AVM.
 
 ## Methods
 
-### avm.buildGenesis
+### `avm.buildGenesis`
 
 Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation
 of that state.
@@ -35,7 +35,7 @@ This call is made to the AVM’s static API endpoint:
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix (ie. X-) in calls to the static API endpoint
+Note: addresses should not include a chain prefix (that is `X-`) in calls to the static API endpoint
 because these prefixes refer to a specific chain.
 
 **Signature:**
@@ -51,7 +51,7 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are
+Encoding specifies the encoding format to use for arbitrary bytes, that is the genesis bytes that are
 returned. Can only be `hex` when a value is provided.
 
 `genesisData` has this form:
@@ -182,7 +182,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createAddress
+### `avm.createAddress`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -225,7 +225,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createFixedCapAsset
+### `avm.createFixedCapAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -313,7 +313,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mint
+### `avm.mint`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -383,7 +383,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createVariableCapAsset
+### `avm.createVariableCapAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -478,7 +478,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createNFTAsset
+### `avm.createNFTAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -560,7 +560,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mintNFT
+### `avm.mintNFT`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -635,7 +635,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.export
+### `avm.export`
 
 :::
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -708,7 +708,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportKey
+### `avm.exportKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -757,7 +757,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAllBalances
+### `avm.getAllBalances`
 
 Get the balances of all assets controlled by a given address.
 
@@ -806,7 +806,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAssetDescription
+### `avm.getAssetDescription`
 
 Get information about an asset.
 
@@ -857,7 +857,7 @@ curl -X POST --data '{
 }`
 ```
 
-### avm.getBalance
+### `avm.getBalance`
 
 Get the balance of an asset controlled by a given address.
 
@@ -905,7 +905,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAddressTxs
+### `avm.getAddressTxs`
 
 Returns all transactions that change the balance of the given address. A transaction is said to
 change an address's balance if either is true:
@@ -971,10 +971,10 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getTx
+### `avm.getTx`
 
 Returns the specified transaction. The `encoding` parameter sets the format of the returned
-transaction. Can be either `"hex"` or `"json"`. Defaults to "hex".
+transaction. Can be either `"hex"` or `"json"`. Defaults to `"hex"`.
 
 **Signature:**
 
@@ -1100,7 +1100,7 @@ Most outputs use the secp256k1 FX, look like this:
 The above output can be consumed after Unix time `locktime` by a transaction that has signatures
 from `threshold` of the addresses in `addresses`.
 
-### avm.getTxStatus
+### `avm.getTxStatus`
 
 Get the status of a transaction sent to the network.
 
@@ -1142,9 +1142,9 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getUTXOs
+### `avm.getUTXOs`
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve
+Gets the UTXOs that reference a given address. If `sourceChain` is specified, then it will retrieve
 the atomic UTXOs exported from that chain to the X Chain.
 
 **Signature:**
@@ -1272,7 +1272,7 @@ Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs
 call this method again.
 
 Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an
-ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the
+ImportTx. Then we need to call GetUTXOs with the `sourceChain` argument in order to retrieve the
 atomic UTXOs:
 
 ```sh
@@ -1309,7 +1309,7 @@ This gives response:
 }
 ```
 
-### avm.import
+### `avm.import`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1365,7 +1365,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importKey
+### `avm.importKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1413,7 +1413,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.issueTx
+### `avm.issueTx`
 
 Send a signed transaction to the network. `encoding` specifies the format of the signed transaction.
 Can only be `hex` when a value is provided.
@@ -1455,7 +1455,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.listAddresses
+### `avm.listAddresses`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1498,7 +1498,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.send
+### `avm.send`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1565,7 +1565,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendMultiple
+### `avm.sendMultiple`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1642,7 +1642,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendNFT
+### `avm.sendNFT`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1706,9 +1706,9 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.issueTx
+### `wallet.issueTx`
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies
+Send a signed transaction to the network and assume the TX will be accepted. `encoding` specifies
 the format of the signed transaction. Can only be `hex` when a value is provided.
 
 This call is made to the wallet API endpoint:
@@ -1752,13 +1752,13 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.send
+### `wallet.send`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls
+Send a quantity of an asset to an address and assume the TX will be accepted so that future calls
 can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
@@ -1824,14 +1824,14 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.sendMultiple
+### `wallet.sendMultiple`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
 Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of
-addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+addresses and assume the TX will be accepted so that future calls can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
 
@@ -1905,7 +1905,7 @@ curl -X POST --data '{
 }
 ```
 
-### events
+### Events
 
 Listen for transactions on a specified address.
 
@@ -1997,9 +1997,9 @@ func main() {
 
 | Command          | Description                  | Example                                                      | Arguments                                                                                                                          |
 | :--------------- | :--------------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| **NewSet**       | create a new address map set | {"newSet":{}}                                                |                                                                                                                                    |
-| **NewBloom**     | create a new bloom set.      | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
-| **AddAddresses** | add an address to the set    | {"addAddresses":{"addresses":\["X-fuji..."\]}}               | addresses - list of addresses to match                                                                                             |
+| **NewSet**       | create a new address map set | `{"newSet":{}}`                                                |                                                                                                                                    |
+| **NewBloom**     | create a new bloom set.      | `{"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}}` | `maxElements` - number of elements in filter must be &gt; 0 `collisionProb` - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set    | `{"addAddresses":{"addresses":\["X-fuji..."\]}}`               | addresses - list of addresses to match                                                                                             |
 
 Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**.
 **AddAddresses** can be called multiple times.

@@ -1,53 +1,95 @@
-# Tutorial: Avalanche Signature Verification in a dApp
+# Tutorial: Avalanche Signature Verification in a dapp
 
 ## Introduction
 
-This tutorial will show you how to use an Avalanche C-Chain dApp to verify the signature of a message like this that has been signed using the Avalanche Wallet.
+This tutorial will show you how to use an Avalanche C-Chain dapp to verify the
+signature of a message like this that has been signed using the Avalanche
+Wallet.
 
 ![WALLET MESSAGE PIC HERE](sig-verify-tutoria-00-walletsign.png)
 
-We at [red·dev](https://www.red.dev) needed to do this for our current software project under development, [RediYeti](https://www.rediyeti.com). We have a use-case where we need to verify ownership of an Avalanche X-Chain address before the dApp sends funds related to this address. To prevent fraud, the verification must take place inside of the dApp.
+We at [red·dev](https://www.red.dev) needed to do this for our current software
+project under development, [RediYeti](https://www.rediyeti.com). We have a
+use-case where we need to verify ownership of an Avalanche X-Chain address
+before the dapp sends funds related to this address. To prevent fraud, the
+verification must take place inside of the dapp.
 
-If you need to implement the same kind of signature verification in your dApp, you will find this tutorial useful. You may also find this tutorial useful if you would like to learn how Avalanche signatures work and how cryptography is implemented on the X-Chain and on the C-Chain.
+If you need to implement the same kind of signature verification in your dapp,
+you will find this tutorial useful. You may also find this tutorial useful if
+you would like to learn how Avalanche signatures work and how cryptography is
+implemented on the X-Chain and on the C-Chain.
 
-We have included code snippets throughout, and you can find the entire project [here](https://github.com/red-dev-inc/sig-verify-tutorial). Many steps are involved, but once you understand how they fit together, you will have a deeper understanding of how this aspect of Avalanche—and indeed cryptocurrencies in general—works.
+We have included code snippets throughout, and you can find the entire project
+[here](https://github.com/red-dev-inc/sig-verify-tutorial). Many steps are
+involved, but once you understand how they fit together, you will have a deeper
+understanding of how this aspect of Avalanche—and indeed cryptocurrencies in
+general—works.
 
 ## Audience
 
-To get the most out of this tutorial, you will need to have a basic understanding of Javascript, Node, Solidity, and how to develop dApps in Avalanche. You should also know the basics of public key cryptography. Avalanche uses Elliptic Curve Cryptography (ECC) as do Bitcoin, Ethereum, and many others. The ECC algorithm used for digital signatures is called ECDSA (Elliptic Curve Digital Signature Algorithm). If you do not yet know about these topics, see the **Resources** section at the end for links to learn more.
+To get the most out of this tutorial, you will need to have a basic
+understanding of JavaScript, Node, Solidity, and how to develop dapps in
+Avalanche. You should also know the basics of public key cryptography. Avalanche
+uses Elliptic Curve Cryptography (ECC) as do Bitcoin, Ethereum, and many others.
+The ECC algorithm used for digital signatures is called ECDSA (Elliptic Curve
+Digital Signature Algorithm). If you do not yet know about these topics, see the
+**Resources** section at the end for links to learn more.
 
-## Why are digital signatures important?
+## Why Are Digital Signatures Important?
 
-A digital signature system allows you to generate your own private/public key pair. You can then use the private key to generate digital signatures which let you prove that (1) you are the owner of the public key and (2) that the signed message has not been altered—both without having to reveal the private key. With cryptocurrencies, keeping your private key secret is what lets you hold onto your funds, and signing messages is how you transfer funds to others, so digital signatures are indeed foundational to Avalanche.
+A digital signature system allows you to generate your own private/public key
+pair. You can then use the private key to generate digital signatures which let
+you prove that (1) you are the owner of the public key and (2) that the signed
+message has not been altered—both without having to reveal the private key. With
+cryptocurrencies, keeping your private key secret is what lets you hold onto
+your funds, and signing messages is how you transfer funds to others, so digital
+signatures are indeed foundational to Avalanche.
 
 ## Overview
 
-At the very highest level, here is an overview of the process we will take you through in this tutorial. First we use a simple webapp to gather the three inputs: signing address, message, and signature. We extract the cryptographic data from them that will be  passed into the dApp to verify the signature.
+At the very highest level, here is an overview of the process we will take you
+through in this tutorial. First we use a simple webapp to gather the three
+inputs: signing address, message, and signature. We extract the cryptographic
+data from them that will be  passed into the dapp to verify the signature.
 
-The dApp then verifies in two steps. First, it makes sure that all the values passed to it are provably related to each other. Then, assuming that they are, it uses the [elliptic-curve-solidity](https://github.com/tdrerup/elliptic-curve-solidity) library, which we have slightly modified to work with Avalanche, to verify the signature.
+The dapp then verifies in two steps. First, it makes sure that all the values
+passed to it are provably related to each other. Then, assuming that they are,
+it uses the
+[elliptic-curve-solidity](https://github.com/tdrerup/elliptic-curve-solidity)
+library, which we have slightly modified to work with Avalanche, to verify the
+signature.
 
-The dApp returns its result to the webapp which displays it. Of course, in your dApp, you will want to take some more actions in the dApp based on the result, depending on your needs.
+The dapp returns its result to the webapp which displays it. Of course, in your
+dapp, you will want to take some more actions in the dapp based on the result,
+depending on your needs.
 
-(**Note:** If you're already a Solidity coder, you might think that there is an easier way to do this using the EVM's built-in function **ecrecover**. However, there is one small hitch that makes using **ecrecover** impossible: it uses a different hashing method. While Avalanche uses SHA-256 followed by ripemd160, the EVM uses Keccak-256.)
+(**Note:** If you're already a Solidity coder, you might think that there is an
+easier way to do this using the EVM's built-in function **ecrecover**. However,
+there is one small hitch that makes using **ecrecover** impossible: it uses a
+different hashing method. While Avalanche uses SHA-256 followed by ripemd160,
+the EVM uses Keccak-256.)
 
 We have set up a [demo webpage here](https://rediyeti.com/avax-sig-verify-demo).
 
 ## Requirements
 
-Metamask needs to be installed on your browser, and you need to be connected to the Avalanche Fuji test network (for this tutorial). You can add a few lines of codes to check if your browser has Metamask installed, and if installed, then to which network you are connected. For instance:
+MetaMask needs to be installed on your browser, and you need to be connected to
+the Avalanche Fuji test network (for this tutorial). You can add a few lines of
+codes to check if your browser has MetaMask installed, and if installed, then to
+which network you are connected. For instance:
 
 ```typescript
 function checkMetamaskStatus() {
     if((window as any).ethereum) {
         if((window as any).ethereum.chainId != '0xa869') {
-            result = "Failed: Not connected to Avalanche Fuji Testnet via Metamask."
+            result = "Failed: Not connected to Avalanche Fuji Testnet via MetaMask."
         }
         else {
             //call required function
         }
     }
     else {
-        result = "Failed: Metamask is not installed."
+        result = "Failed: MetaMask is not installed."
     }
 }
 ```
@@ -59,23 +101,34 @@ function checkMetamaskStatus() {
 3. Elliptic Curve library, which can be installed with `npm install elliptic`
 4. Ethers.js library, which can be installed with `npm install ethers`
 
-## Steps that need to be performed in the webapp
+## Steps that Need to Be Performed in the Webapp
 
-To verify the signature and retrieve the signer X-Chain address, you first need to extract cryptographic data from the message and signature in your webapp, which will then be passed to the dApp. (The example code uses a **Vue** webapp, but you could use any framework you like or just Vanilla Javascript.) These are:
+To verify the signature and retrieve the signer X-Chain address, you first need
+to extract cryptographic data from the message and signature in your webapp,
+which will then be passed to the dapp. (The example code uses a **Vue** webapp,
+but you could use any framework you like or just Vanilla JavaScript.) These are:
 
 1. The hashed message
 2. The r, s, and v parameters of the signature
 3. The x and y coordinates of the public key and the 33-byte compressed public key
 
-We extract them using Javascript instead of in the dApp because the Solidity EC library needs them to be separated, and it is easier to do it in Javascript. There is no security risk in doing it here off-chain as we can verify in the dApp that they are indeed related to each other, returning a signature failure if they are not.
+We extract them using JavaScript instead of in the dapp because the Solidity EC
+library needs them to be separated, and it is easier to do it in JavaScript.
+There is no security risk in doing it here off-chain as we can verify in the
+dapp that they are indeed related to each other, returning a signature failure
+if they are not.
 
-### 1. Hash the message
+### 1. Hash the Message
 
-First, you will need to hash the original message. Here is the standard way of hashing the message based on the Bitcoin Script format and Ethereum format:
+First, you will need to hash the original message. Here is the standard way of
+hashing the message based on the Bitcoin Script format and Ethereum format:
 
 ***sha256(length(prefix) + prefix + length(message) + message)***
 
-The prefix is a so-called "magic prefix" string `0x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an integer of the message size. After concatenating these together, hash the result with `sha256`. For example:
+The prefix is a so-called "magic prefix" string `0x1AAvalanche Signed
+Message:\n`, where `0x1A` is the length of the prefix text and `length(message)`
+is an integer of the message size. After concatenating these together, hash the
+result with `sha256`. For example:
 
 ```typescript
 function hashMessage(message: string) {
@@ -93,11 +146,16 @@ function hashMessage(message: string) {
 
 ### 2. Split the Signature
 
-Avalanche Wallet displays the signature in CB58 Encoded form, so first you will need to decode the signature from CB58.
+Avalanche Wallet displays the signature in CB58 Encoded form, so first you will
+need to decode the signature from CB58.
 
-Then, with the decoded signature, you can recover the public key by parsing out the r, s, and v parameters from it. The signature is stored as a 65-byte buffer `[R || S || V]` where `V` is 0 or 1 to allow public key recoverability.
+Then, with the decoded signature, you can recover the public key by parsing out
+the r, s, and v parameters from it. The signature is stored as a 65-byte buffer
+`[R || S || V]` where `V` is 0 or 1 to allow public key recoverability.
 
-Note, while decoding the signature, if the signature has been altered, the **cb58Decode** function may throw an error, so remember to catch the error. Also, don't forget to import **bintools** from AvalancheJS library first.
+Note, while decoding the signature, if the signature has been altered, the
+`cb58Decode` function may throw an error, so remember to catch the error.
+Also, don't forget to import `bintools` from AvalancheJS library first.
 
 ```typescript
 function splitSig(signature: string) {
@@ -123,9 +181,13 @@ function splitSig(signature: string) {
 },
 ```
 
-### 3. Recover the public key
+### 3. Recover the Public Key
 
-The public key can be recovered from the hashed message, r, s, and v parameters of the signature together with the help of Elliptic Curve JS library. You need to extract x and y coordinates of the public key to verify the signature as well as the 33-byte compressed public key to later recover the signer's X-Chain address.
+The public key can be recovered from the hashed message, r, s, and v parameters
+of the signature together with the help of Elliptic Curve JS library. You need
+to extract x and y coordinates of the public key to verify the signature as well
+as the 33-byte compressed public key to later recover the signer's X-Chain
+address.
 
 ```typescript
 function recover(msgHash: Buffer, sig: any) {
@@ -139,11 +201,12 @@ function recover(msgHash: Buffer, sig: any) {
 }
 ```
 
-Here is the full code for verification, including the call to the dApp function **recoverAddress** at the end, which we will cover next:
+Here is the full code for verification, including the call to the dapp function
+`recoverAddress` at the end, which we will cover next:
 
 ```typescript
 async function verify() {
-    //Create the provider and contract object to access the dApp functions
+    //Create the provider and contract object to access the dapp functions
     const provider: any = new ethers.providers.Web3Provider((window as any).ethereum)
     const elliptic: any = new ethers.Contract(contractAddress.Contract, ECArtifact.abi, provider)
     //Extract all the data needed for signature verification
@@ -156,48 +219,55 @@ async function verify() {
     for (var i=0; i<prefix.length; i++) {
         hrp[i] = prefix.charCodeAt(i)
     }
-    //Call recoverAddress function from dApp. xchain and msg are user inputs in webapp
+    //Call recoverAddress function from dapp. xchain and msg are user inputs in webapp
     const tx: string = await elliptic.recoverAddress(message.messageHash, sign.sigHex, publicKey.pubkCord, publicKey.pubkBuff, msg, xchain, prefix, hrp)
     result = tx 
 }
 ```
 
-## Recover the signer X-Chain address in dApp
+## Recover the Signer X-Chain Address in Dapp
 
-In the dApp, receive as a parameter the 33-byte compressed public key to recover the X-Chain Address.
+In the dapp, receive as a parameter the 33-byte compressed public key to recover the X-Chain Address.
 
-Addresses on the X-Chain use the Bech32 standard with an Avalanche-specific prefix of **X-**. Then there are four parts to the Bech32 address scheme that follow.
+Addresses on the X-Chain use the Bech32 standard with an Avalanche-specific
+prefix of **X-**. Then there are four parts to the Bech32 address scheme that
+follow.
 
-1. A human-readable part (HRP). On Avalanche mainnet this is **avax** and on Fuji testnet it is **fuji**.
+1. A human-readable part (HRP). On Avalanche Mainnet this is `avax` and on Fuji testnet it is `fuji`.
 2. The number **1**, which separates the HRP from the address and error correction code.
 3. A base-32 encoded string representing the 20 byte address.
 4. A 6-character base-32 encoded error correction code.
 
-Like Bitcoin, the addressing scheme of the Avalanche X-Chain relies on the **secp256k1** elliptic curve. Avalanche follows a similar approach as Bitcoin and hashes the ECDSA public key, so the 33-byte compressed public key is hashed with **sha256** first and then the result is hashed with **ripemd160** to produce a 20-byte address.
+Like Bitcoin, the addressing scheme of the Avalanche X-Chain relies on the
+**secp256k1** elliptic curve. Avalanche follows a similar approach as Bitcoin
+and hashes the ECDSA public key, so the 33-byte compressed public key is hashed
+with **sha256** first and then the result is hashed with **ripemd160** to
+produce a 20-byte address.
 
 Next, this 20-byte value is converted to a **Bech32** address.
 
-The `recoverAddress` function is called in the dApp from the webapp.
+The `recoverAddress` function is called in the dapp from the webapp.
 
-**recoverAddress** takes the following parameters:
+`recoverAddress` takes the following parameters:
 
-* messageHash — the hashed message
-* rs — r and s value of the signature
-* publicKey — x and y coordinates of the public key
-* pubk — 33-byte compressed public key
-* xchain — X-Chain address
-* prefix — Prefix for Bech32 addressing scheme (avax or fuji)
-* hrp — Array of each unicode character in the prefix
+* messageHash&mdash;the hashed message
+* rs&mdash;r and s value of the signature
+* publicKey&mdash;x and y coordinates of the public key
+* pubk&mdash;33-byte compressed public key
+* xchain&mdash;X-Chain address
+* prefix&mdash;Prefix for Bech32 addressing scheme (AVAX or Fuji)
+* hrp&mdash;Array of each unicode character in the prefix
 
 Then it performs the following steps:
 
 1. Gets the 20-byte address by hashing the 33-byte compressed public key with sha256 followed by ripemd160.
-2. Calls the Bech32 functions to convert the 20-byte address to Bech32 address (which is the unique part of the X-Chain address).
+2. Calls the Bech32 functions to convert the 20-byte address to Bech32 address
+   (which is the unique part of the X-Chain address).
 3. Verifies that the extracted X-Chain address matches with the X-Chain address from the webapp.
 4. If X-Chain Address matches then validates the signature.
 5. Returns the result.
 
-Here is the recoverAddress function that does all this:
+Here is the `recoverAddress` function that does all this:
 
 ```solidity
 function recoverAddress(bytes32 messageHash, uint[2] memory rs, uint[2] memory publicKey, bytes memory pubk, string memory xchain, string memory prefix, uint[] memory hrp) public view returns(string memory){
@@ -231,8 +301,10 @@ Let's take a closer look at its supporting functions and key features.
 
 ### Bech32 Encoding
 
-We have ported Bech32 to Solidity from the [Bech32 Javascript library](https://github.com/bitcoinjs/bech32).
-There are four functions, **polymod**, **prefixChk**, **encode** and **convert**, used to convert to Bech32 address.
+We have ported Bech32 to Solidity from the [Bech32 JavaScript
+library](https://github.com/bitcoinjs/bech32). There are four functions,
+`polymod`, `prefixChk`, **encode** and **convert**, used to convert to
+Bech32 address.
 
 ```solidity
 bytes constant CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
@@ -304,15 +376,23 @@ function convert(uint[] memory data, uint inBits, uint outBits) public view retu
 }
 ```
 
-### Verify X-Chain address
+### Verify X-Chain Address
 
-It is a simple step, but it is very important to check to see if the extracted X-Chain address from the public key matches with the X-Chain address that was passed from the webapp. Otherwise, you may have a perfectly valid message signature but for a _different_ X-Chain address than the webapp requested. Only if they match can you proceed to verify the signature. Otherwise, return an error message.
+It is a simple step, but it is very important to check to see if the extracted
+X-Chain address from the public key matches with the X-Chain address that was
+passed from the webapp. Otherwise, you may have a perfectly valid message
+signature but for a *different* X-Chain address than the webapp requested. Only
+if they match can you proceed to verify the signature. Otherwise, return an
+error message.
 
-### Validate signature
+### Validate Signature
 
 For verifying the signature, we start with this [Solidity project on Elliptic Curve](https://github.com/tdrerup/elliptic-curve-solidity).
 
-However, this project uses the **secp256r1** curve. As Avalanche uses **secp256k1** curve, we need to modify the constant values based on this curve. (**Note:** Since modifying cryptographic functions is risky, these are the only modifications we have made.) The constants now look like this:
+However, this project uses the **secp256r1** curve. As Avalanche uses
+**secp256k1** curve, we need to modify the constant values based on this curve.
+(**Note:** Since modifying cryptographic functions is risky, these are the only
+modifications we have made.) The constants now look like this:
 
 ```solidity
 uint constant a = 0;
@@ -329,21 +409,31 @@ The key function we need is **validateSignature**.
 function validateSignature(bytes32 messageHash, uint[2] memory rs, uint[2] memory publicKey) public view returns (bool)
 ```
 
-**validateSignature** takes the same first three parameters as **recoverAddress**:
+**validateSignature** takes the same first three parameters as `recoverAddress`:
 
-* messageHash — the hashed message
-* rs — r and s value of the signature
-* publicKey — x and y coordinates of the public key
+* messageHash&mdash;the hashed message
+* rs&mdash;r and s value of the signature
+* publicKey&mdash;x and y coordinates of the public key
 
-### Finishing up
+### Finishing Up
 
-After performing these tests, the dApp returns its decision whether the signature is valid or not to the webapp, and the webapp is then responsible for showing the final output to the user. As we mentioned above, in your dApp, you will probably want to take further actions accordingly.
+After performing these tests, the dapp returns its decision whether the
+signature is valid or not to the webapp, and the webapp is then responsible for
+showing the final output to the user. As we mentioned above, in your dapp, you
+will probably want to take further actions accordingly.
 
 ## Resources
 
-Here are some resources that can use to teach yourself the subjects you need in order to understand this tutorial.
+Here are some resources that can use to teach yourself the subjects you need in
+order to understand this tutorial.
 
 1. This is a useful documentation from Ava Labs on cryptographic primitives: <https://docs.avax.network/build/references/cryptographic-primitives>
-2. Here is a great YouTube video by Connor Daly of Ava Labs on how to use Hardhat to deploy and run your smart contract on Avalanche network: <https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s>
-3. If you want to learn more on how the private/public keys and the wallets work, you may enjoy going through this awesome tutorial by Greg Walker: <https://learnmeabitcoin.com/technical/>
-4. Andrea Corbellini has done great work explaining Elliptic Curve Cryptography in detail in her blog post: <https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/>
+2. Here is a great YouTube video by Connor Daly of Ava Labs on how to use
+   Hardhat to deploy and run your smart contract on Avalanche network:
+   <https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s>
+3. If you want to learn more on how the private/public keys and the wallets
+   work, you may enjoy going through this awesome tutorial by Greg Walker:
+   <https://learnmeabitcoin.com/technical/>
+4. Andrea Corbellini has done great work explaining Elliptic Curve Cryptography
+   in detail in her blog post:
+   <https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/>
