@@ -570,7 +570,7 @@ Also if you would like to have another tutorial on how to use X with Avalanche, 
 
 If you want to know more about avalanche, here's a bunch of links for you:
 
-[Website](https://avax.network/) | [Whitepapers](https://avalabs.org/whitepapers)
+[Website](https://avax.network/) | [White Papers](https://avalabs.org/whitepapers)
 | [Twitter](https://twitter.com/avalancheavax) | [Discord](https://chat.avalabs.org/)
 | [GitHub](https://github.com/ava-labs) | [Documentation](https://docs.avax.network/)
 | [Forum](https://forum.avax.network/) | [Avalanche-X](https://avalabs.org/avalanche-x)
