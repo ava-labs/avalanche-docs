@@ -39,7 +39,7 @@ npm install ethers avalanche dotenv
 ## Setting up Environment and Project
 
 To send a transaction we need to sign it using our private key. But private key
-should not be hardcoded in the code, rather must be fetched through some
+should not be hard coded in the code, rather must be fetched through some
 environment variables. Make a `.env` file in the root folder with the following
 content.
 

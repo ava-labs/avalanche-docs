@@ -340,8 +340,8 @@ required.
 ### Creating Transferable Output
 
 The `createOutput()` function will create and return the transferable output
-according to arguments amount, assetID, owner addresses, locktime, and
-threshold. Locktime represents the timestamp after which this output could be
+according to arguments amount, assetID, owner addresses, lock time, and
+threshold. Lock time represents the timestamp after which this output could be
 spent. Mostly this parameter will be 0.
 
 ```javascript
