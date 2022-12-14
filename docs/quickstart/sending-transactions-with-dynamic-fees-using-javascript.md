@@ -2,40 +2,55 @@
 description: This tutorial will help users to send transactions with dynamic fee settings to adjust their priority fee and max fee cap during high network activity using javascript.
 ---
 
-# Sending Transactions with Dynamic Fees using Javascript
+# Sending Transactions with Dynamic Fees using JavaScript
 
 ## Overview
 
-The objective of this document is to provide and explain sending transactions with dynamic fees using javascript. Make sure you have followed [the tutorial on adjusting the dynamic fees using MetaMask](./adjusting-gas-price-during-high-network-activity.md). There, we have explained the key concepts related to dynamic fees and EIP1559 type of transactions.
+The objective of this document is to provide and explain sending transactions
+with dynamic fees using JavaScript. Make sure you have followed [the tutorial on
+adjusting the dynamic fees using
+MetaMask](./adjusting-gas-price-during-high-network-activity.md). There, we have
+explained the key concepts related to dynamic fees and EIP1559 type of
+transactions.
 
 ## Prerequisites
 
-- Basic familiarity with [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+- Basic familiarity with [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - Basic familiarity with [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-- Basic familiarity with [the Avalanche C-Chain](../apis/avalanchego/apis/c-chain.md) network and [EVM compatibility](https://ethereum.org/en/developers/docs/evm/)
-- Basic understanding of [dynamic fee transactions](./adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts) transactions
+- Basic familiarity with [the Avalanche
+  C-Chain](../apis/avalanchego/apis/c-chain.md) network and [EVM
+  compatibility](https://ethereum.org/en/developers/docs/evm/)
+- Basic understanding of [dynamic fee
+  transactions](./adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts)
+  transactions
 
-## Installing dependencies
+## Installing Dependencies
 
 Open the terminal and install the following dependencies in a new folder.
 
-- ethers
+- Ethers
 - avalanche
 - dotenv
 
-```
+```zsh
 npm install ethers avalanche dotenv
 ```
 
 ## Setting up Environment and Project
 
-To send a transaction we need to sign it using our private key. But private key should not be hardcoded in the code, rather must be fetched through some environment variables. Make a `.env` file in the root folder with the following content.
+To send a transaction we need to sign it using our private key. But private key
+should not be hardcoded in the code, rather must be fetched through some
+environment variables. Make a `.env` file in the root folder with the following
+content.
 
 ```env
 PRIVATEKEY=<YOUR_PRIVATE_KEY>
 ```
 
-Now make a new file `app.js` in the root folder, which will be our main and only file with the `sendAvax()` function. Follow the rest of the tutorial by understanding and pasting the provided snippets sequentially in the `app.js` file.
+Now make a new file `app.js` in the root folder, which will be our main and only
+file with the `sendAvax()` function. Follow the rest of the tutorial by
+understanding and pasting the provided snippets sequentially in the `app.js`
+file.
 
 ## Importing Dependencies and Private Key
 
@@ -49,7 +64,10 @@ const privateKey = process.env.PRIVATEKEY
 
 ## Setting up HTTP Provider Connected with Fuji Network
 
-Using the HTTP provider, we will connect to one of the nodes on the Fuji network. Using this provider we will send the signed transaction to the network. You can also connect to mainnet using the URL - `https://api.avax.network/ext/bc/C/rpc`
+Using the HTTP provider, we will connect to one of the nodes on the Fuji
+network. Using this provider we will send the signed transaction to the network.
+You can also connect to Mainnet using the URL -
+`https://api.avax.network/ext/bc/C/rpc`
 
 ```javascript
 // For sending a signed transaction to the network
@@ -59,7 +77,9 @@ const HTTPSProvider = new ethers.providers.JsonRpcProvider(nodeURL)
 
 ## Setting up C-Chain APIs for Estimating Base and Priority Fees
 
-To estimate the max fee and max priority fee on the network, we will be using C-Chain APIs. We can use the C-Chain through an AvalancheJS instance connected to the network as shown below.
+To estimate the max fee and max priority fee on the network, we will be using
+C-Chain APIs. We can use the C-Chain through an AvalancheJS instance connected
+to the network as shown below.
 
 ```javascript
 // For estimating max fee and priority fee using CChain APIs
@@ -85,7 +105,10 @@ const address = wallet.address
 
 ## Function for Estimating Max Fee and Max Priority Fee
 
-The function `calcFeeData()` estimates the max fee and max priority fee per gas according to network activity using the C-Chain APIs. This function returns max fee and max priority fee per gas in units of `nAVAX` or `gwei` (1 AVAX = 10^9 gWei).
+The function `calcFeeData()` estimates the max fee and max priority fee per gas
+according to network activity using the C-Chain APIs. This function returns max
+fee and max priority fee per gas in units of `nAVAX` or `gwei` (1 AVAX = 10^9
+gwei).
 
 ```javascript
 // Function to estimate max fee and max priority fee
@@ -112,7 +135,8 @@ const calcFeeData = async (
 }
 ```
 
-Actual API returns base fee and priority fee in units of `wei` which is one-billionth of a billionth of `AVAX` (1 AVAX = 10^18 wei).
+Actual API returns base fee and priority fee in units of `wei` which is
+one-billionth of a billionth of `AVAX` (1 AVAX = 10^18 wei).
 
 ## Function to Create, Sign and Send Transaction
 
@@ -124,7 +148,13 @@ The function `sendAvax()` takes 4 arguments -
 - `maxPriorityFeePerGas` - Desired maximum priority fee per gas you want to pay in nAVAX
 - `nonce` - Used as a differentiator for more than 1 transaction with same signer
 
-The last 3 arguments are optional, and if `undefined` is passed, then it will use the `calcFeeData()` function to estimate them. Each transaction with the same data and parameters is differentiated by a nonce value. If there are more than 1 transactions with the same nonce signed by the same address, then only 1 of them with the highest effective priority fee will be accepted. `nonce` parameter should only be used when you are either re-issuing or cancelling a stuck transaction.
+The last 3 arguments are optional, and if `undefined` is passed, then it will
+use the `calcFeeData()` function to estimate them. Each transaction with the
+same data and parameters is differentiated by a nonce value. If there are more
+than 1 transactions with the same nonce signed by the same address, then only 1
+of them with the highest effective priority fee will be accepted. `nonce`
+parameter should only be used when you are either re-issuing or cancelling a
+stuck transaction.
 
 ```javascript
 // Function to send AVAX
@@ -175,20 +205,30 @@ const sendAvax = async (
 }
 ```
 
-This function calculates transaction hash from the signed transaction and logs on the console, the URL for transaction status on the Snowtrace explorer.
+This function calculates transaction hash from the signed transaction and logs
+on the console, the URL for transaction status on the Snowtrace explorer.
 
 ## Calling the `sendAVAX()` Function
 
-There are various ways to call this function. We may or may not pass the optional arguments like max fee and max priority fee. It is recommended to set the max fee as the maximum price per gas that you are willing to pay for a transaction, no matter how high or low the base fee will be, as at max you will only be charged the provided max fee, along with a small priority fee above the base fee.
+There are various ways to call this function. We may or may not pass the
+optional arguments like max fee and max priority fee. It is recommended to set
+the max fee as the maximum price per gas that you are willing to pay for a
+transaction, no matter how high or low the base fee will be, as at max you will
+only be charged the provided max fee, along with a small priority fee above the
+base fee.
 
-If you do not pass these arguments, then it will automatically estimate the max fee and priority fee from the network. For example, let's say, I want to pay 100 nAVAX per gas for a transaction and a small tip of 2 nAVAX, then we will call the following function.
+If you do not pass these arguments, then it will automatically estimate the max
+fee and priority fee from the network. For example, let's say, I want to pay 100
+nAVAX per gas for a transaction and a small tip of 2 nAVAX, then we will call
+the following function.
 
 ```javascript
 // setting max fee as 100 and priority fee as 2
 sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 2)
 ```
 
-**This function should not be used without a max fee per gas. As you will have to pay the estimated price, even if it is higher than your budget.**
+**This function should not be used without a max fee per gas. As you will have
+to pay the estimated price, even if it is higher than your budget.**
 
 There could be the following cases -
 
@@ -198,7 +238,9 @@ There could be the following cases -
 | 100           | **undefined**    | It will estimate the priority fee and use the provided max fee. If the estimated priority fee is more than the provided max fee, then it throws an error.                                                                                 |
 | **undefined** | **undefined**    | It will estimate the base fee and priority fee from the network, and will add both the values to calculate the max fee per gas. Again, you have to pay whatever will be estimated.                                                        |
 
-You will get the following output on the successful submission of the signed transactions. Using this URL you can view the status of your transaction on Snowtrace.
+You will get the following output on the successful submission of the signed
+transactions. Using this URL you can view the status of your transaction on
+Snowtrace.
 
 ```bash
 View transaction with nonce 25: https://testnet.snowtrace.io/tx/0xd5b92b85beaf283fbaeeefb95c9a17a6b346a05b6f9687f2d6e421aa79243b35
@@ -206,7 +248,17 @@ View transaction with nonce 25: https://testnet.snowtrace.io/tx/0xd5b92b85beaf28
 
 ## Reissuance of Stuck Transaction
 
-Sometimes during high network activity, all transactions couldn't make it to the latest blocks for a long time, due to relatively lower effective tip than the other transactions in the pool. We can either re-issue the same transaction with a higher priority fee or cancel the transaction. To re-issue the stuck transaction, you can send a new one with same amount and data but higher priority fee and same nonce value as the stuck transaction. The transaction with lower effective tip will automatically be rejected (due to same nonce), and you do not need to worry about it. You can also cancel the stuck transaction, by keeping the amount to 0, with a higher priority fee and same nonce. Let's say, the above transaction with a nonce value of 25 has stuck. You can then re-issue a new transaction with same nonce, but higher priority fee this time.
+Sometimes during high network activity, all transactions couldn't make it to the
+latest blocks for a long time, due to relatively lower effective tip than the
+other transactions in the pool. We can either re-issue the same transaction with
+a higher priority fee or cancel the transaction. To re-issue the stuck
+transaction, you can send a new one with same amount and data but higher
+priority fee and same nonce value as the stuck transaction. The transaction with
+lower effective tip will automatically be rejected (due to same nonce), and you
+do not need to worry about it. You can also cancel the stuck transaction, by
+keeping the amount to 0, with a higher priority fee and same nonce. Let's say,
+the above transaction with a nonce value of 25 has stuck. You can then re-issue
+a new transaction with same nonce, but higher priority fee this time.
 
 ```javascript
 // reissuing transaction with nonce 25
@@ -218,4 +270,9 @@ sendAvax("0", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25)
 
 ## Conclusion
 
-You have learned about creating, signing, and sending transactions with dynamic fee parameters to the C-Chain of Avalanche network using javascript. It also explained, how to re-issue or cancel a stuck transaction, by sending a transaction with the same nonce. This tutorial points out the recommended way for choosing max fee cap and max priority fee cap for transactions and can also work as a general guide for all the EVM-based chains.
+You have learned about creating, signing, and sending transactions with dynamic
+fee parameters to the C-Chain of Avalanche network using JavaScript. It also
+explained, how to re-issue or cancel a stuck transaction, by sending a
+transaction with the same nonce. This tutorial points out the recommended way
+for choosing max fee cap and max priority fee cap for transactions and can also
+work as a general guide for all the EVM-based chains.

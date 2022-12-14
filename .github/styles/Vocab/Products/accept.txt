@@ -117,6 +117,7 @@ Grafana
 gwei
 Gwei
 gzip
+hardcoded
 Hardforks
 Harpalsinh
 hashmap
@@ -148,6 +149,8 @@ KYCed
 LevelDB
 liveness
 lol
+locktime
+Locktime
 lookups
 Mainnet
 Manov
@@ -216,6 +219,7 @@ React's
 reCAPTCHA
 recoverability
 reenable
+Reissuance
 regossip
 Regossip
 regossipped
