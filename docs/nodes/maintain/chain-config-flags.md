@@ -139,11 +139,11 @@ your node. If this field is not set, then the default list will be:
 :::note
 
 The names used in this configuration flag have been updated in Coreth `v0.8.14`.
-The previous names containing `public-` and `private-` are deprecated.  While
+The previous names containing `public-` and `private-` are deprecated. While
 the current version continues to accept deprecated values, they may not be
 supported in future updates and updating to the new values is recommended.
 
-The mapping of deprecated values and their updated equivilant follows:
+The mapping of deprecated values and their updated equivalent follows:
 
 | Deprecated                         | Use instead            |
 | ---------------------------------- | ---------------------- |
@@ -412,7 +412,7 @@ The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and
 
 #### `rpc-tx-fee-cap` (int)
 
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for
+Global transaction fee (price \* `gaslimit`) cap (measured in AVAX) for
 send-transaction variants. Defaults to `100`.
 
 #### `api-max-duration` (duration)

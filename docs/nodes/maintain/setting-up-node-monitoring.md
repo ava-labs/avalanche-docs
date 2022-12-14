@@ -6,7 +6,8 @@ sidebar_position: 3
 
 ## Introduction
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+This tutorial will show how to set up infrastructure to monitor an instance of
+[AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
 - [Prometheus](https://prometheus.io/) to gather and store data
 - [node_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
@@ -20,17 +21,30 @@ Prerequisites:
 - Shell access to the machine running the node
 - Administrator privileges on the machine
 
-This tutorial assumes you have Ubuntu 20.04 running on your node. Other Linux flavors that use `systemd` for running services and `apt-get` for package management might work but have not been tested. Community member has reported it works on Debian 10, might work on other Debian releases as well.
+This tutorial assumes you have Ubuntu 20.04 running on your node. Other Linux
+flavors that use `systemd` for running services and `apt-get` for package
+management might work but have not been tested. Community member has reported it
+works on Debian 10, might work on other Debian releases as well.
 
 ### Caveat: Security
 
 :::danger
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
+
+The system as described here **should not** be opened to the public internet.
+Neither Prometheus nor Grafana as shown here is hardened against unauthorized
+access. Make sure that both of them are accessible only over a secured proxy,
+local network, or VPN. Setting that up is beyond the scope of this tutorial, but
+exercise caution. Bad security practices could lead to attackers gaining control
+over your node! It is your responsibility to follow proper security practices.
+
 :::
 
 ## Monitoring Installer Script
 
-In order to make node monitoring easier to install, we have made a script that does most of the work for you. To download and run the script, log into the machine the node runs on with a user that has administrator privileges and enter the following command:
+In order to make node monitoring easier to install, we have made a script that
+does most of the work for you. To download and run the script, log into the
+machine the node runs on with a user that has administrator privileges and enter
+the following command:
 
 ```bash
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/main/grafana/monitoring-installer.sh ;\
@@ -39,7 +53,9 @@ chmod 755 monitoring-installer.sh;
 
 This will download the script and make it executable.
 
-Script itself is run multiple times with different arguments, each installing a different tool or part of the environment. To make sure it downloaded and set up correctly, begin by running:
+Script itself is run multiple times with different arguments, each installing a
+different tool or part of the environment. To make sure it downloaded and set up
+correctly, begin by running:
 
 ```bash
 ./monitoring-installer.sh --help
@@ -89,7 +105,9 @@ prometheus.tar.gz                           100%[===============================
 ...
 ```
 
-You may be prompted to confirm additional package installs, do that if asked. Script run should end with instructions on how to check that Prometheus installed correctly. Let's do that, run:
+You may be prompted to confirm additional package installs, do that if asked.
+Script run should end with instructions on how to check that Prometheus
+installed correctly. Let's do that, run:
 
 ```bash
 sudo systemctl status prometheus
@@ -112,10 +130,17 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z ca
 Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
 
-Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
+Note the `active (running)` status (press `q` to exit). You can also check
+Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 :::warning
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect!
+
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or
+adjust the security settings to allow connections to port 9090 if the node is
+running on a cloud instance. For AWS, you can look it up
+[here](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df).
+If on public internet, make sure to only allow your IP to connect!
+
 :::
 
 If everything is ok, let's move on.
@@ -152,17 +177,26 @@ To make sure it’s running properly:
 sudo systemctl status grafana-server
 ```
 
-which should again show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` from your browser. Log in with username: admin, password: admin, and you will be prompted to set up a new, secure password. Do that.
+which should again show grafana as `active`. Grafana should now be available at
+`http://your-node-host-ip:3000/` from your browser. Log in with username: admin,
+password: admin, and you will be prompted to set up a new, secure password. Do
+that.
 
 :::warning
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjust the cloud instance settings to allow connections to port 3000. If on public internet, make sure to only allow your IP to connect!
+
+You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or
+adjust the cloud instance settings to allow connections to port 3000. If on
+public internet, make sure to only allow your IP to connect!
+
 :::
 
 Prometheus and Grafana are now installed, we're ready for the next step.
 
 ## Step 3: Set up node_exporter <a id="exporter"></a>
 
-In addition to metrics from AvalancheGo, let’s set up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node_exporter, a Prometheus plugin.
+In addition to metrics from AvalancheGo, let’s set up monitoring of the machine
+itself, so we can check CPU, memory, network and disk usage and be aware of any
+anomalies. For that, we will use `node_exporter`, a Prometheus plugin.
 
 Run the script to execute the third step:
 
@@ -172,7 +206,7 @@ Run the script to execute the third step:
 
 The output should look something like this:
 
-```text
+```bash
 AvalancheGo monitoring installer
 --------------------------------
 STEP 3: Installing node_exporter
@@ -192,16 +226,21 @@ Again, we check that the service is running correctly:
 sudo systemctl status node_exporter
 ```
 
-If the service is running, Prometheus, Grafana and node_exporter should all work together now. To check, in your browser visit Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+If the service is running, Prometheus, Grafana and node_exporter should all work
+together now. To check, in your browser visit Prometheus web interface on
+`http://your-node-host-ip:9090/targets`. You should see three targets enabled:
 
 - Prometheus
-- avalanchego
-- avalanchego-machine
+- AvalancheGo
+- `avalanchego-machine`
 
 Make sure that all of them have `State` as `UP`.
 
 :::info
-If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
+
+If you run your AvalancheGo node with TLS enabled on your API port, you will
+need to manually edit the `/etc/prometheus/prometheus.yml` file and change the
+`avalanchego` job to look like this:
 
 ```yaml
 - job_name: "avalanchego"
@@ -213,10 +252,14 @@ If you run your AvalancheGo node with TLS enabled on your API port, you will nee
     - targets: ["localhost:9650"]
 ```
 
-Mind the spacing (leading spaces too)! You will need admin privileges to do that (use `sudo`). Restart prometheus service afterwards with `sudo systemctl restart prometheus`.
+Mind the spacing (leading spaces too)! You will need admin privileges to do that
+(use `sudo`). Restart Prometheus service afterwards with `sudo systemctl restart
+prometheus`.
+
 :::
 
-All that's left to do now is to provision the datasource and install the actual dashboards that will show us the data.
+All that's left to do now is to provision the data source and install the actual
+dashboards that will show us the data.
 
 ## Step 4: Dashboards <a id="dashboards"></a>
 
@@ -242,7 +285,11 @@ Last-modified header missing -- time-stamps turned off.
 ...
 ```
 
-This will download the latest versions of the dashboards from GitHub and provision Grafana to load them, as well as defining Prometheus as a datasource. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
+This will download the latest versions of the dashboards from GitHub and
+provision Grafana to load them, as well as defining Prometheus as a data source.
+It may take up to 30 seconds for the dashboards to show up. In your browser, go
+to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche
+dashboards:
 
 ![Imported dashboards](/img/monitoring-01-dashboards.png)
 
@@ -250,25 +297,39 @@ Select 'Avalanche Main Dashboard' by clicking its title. It should load, and loo
 
 ![Main Dashboard](/img/monitoring-02-main-dashboard.png)
 
-Some graphs may take some time to populate fully, as they need a series of datapoints in order to render correctly.
+Some graphs may take some time to populate fully, as they need a series of
+data points in order to render correctly.
 
-You can bookmark the main dashboard as it shows the most important information about the node at a glance. Every dashboard has a link to all the others as the first row, so you can move between them easily.
+You can bookmark the main dashboard as it shows the most important information
+about the node at a glance. Every dashboard has a link to all the others as the
+first row, so you can move between them easily.
 
-## Step 5: Additional Dashboards (optional)
+## Step 5: Additional Dashboards (Optional)
 
-Step 4 installs the basic set of dashboards that make sense to have on any node. Step 5 is for installing additional dashboards that may not be useful for every installation.
+Step 4 installs the basic set of dashboards that make sense to have on any node.
+Step 5 is for installing additional dashboards that may not be useful for every
+installation.
 
-Currently, there is only one additional dashboard: Subnets. If your node is running any Subnets, you may want to add this as well. Do:
+Currently, there is only one additional dashboard: Subnets. If your node is
+running any Subnets, you may want to add this as well. Do:
 
 ```bash
 ./monitoring-installer.sh --5
 ```
 
-This will add the Subnets dashboard. It allows you to monitor operational data for any Subnet that is synced on the node. There is a Subnet switcher that allows you to switch between different Subnets. As there are many Subnets and not every node will have all of them, by default, it comes populated only with Spaces and Wagmi Subnets that exist on Fuji testnet:
+This will add the Subnets dashboard. It allows you to monitor operational data
+for any Subnet that is synced on the node. There is a Subnet switcher that
+allows you to switch between different Subnets. As there are many Subnets and
+not every node will have all of them, by default, it comes populated only with
+Spaces and WAGMI Subnets that exist on Fuji testnet:
 
 ![Subnets switcher](/img/monitoring-03-subnets.png)
 
-To configure the dashboard and add any Subnets that your node is syncing, you will need to edit the dashboard. Select the `dashboard settings` icon (image of a cog) in the upper right corner of the dashboard display and switch to `Variables` section and select the `subnet` variable. It should look something like this:
+To configure the dashboard and add any Subnets that your node is syncing, you
+will need to edit the dashboard. Select the `dashboard settings` icon (image of
+a cog) in the upper right corner of the dashboard display and switch to
+`Variables` section and select the `subnet` variable. It should look something
+like this:
 
 ![Variables screen](/img/monitoring-04-variables.png)
 
@@ -278,22 +339,33 @@ The variable format is:
 Subnet name:<BlockchainID>
 ```
 
-and the separator between entries is a comma. Entries for Spaces and Wagmi look like:
+and the separator between entries is a comma. Entries for Spaces and WAGMI look like:
 
 ```text
 Spaces (Fuji) : 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, WAGMI (Fuji) : 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
 ```
 
-After editing the values, press `Update` and then click `Save dashboard` button and confirm. Press the back arrow in the upper left corner to return to the dashboard. New values should now be selectable from the dropdown and data for the selected Subnet will be shown in the panels.
+After editing the values, press `Update` and then click `Save dashboard` button
+and confirm. Press the back arrow in the upper left corner to return to the
+dashboard. New values should now be selectable from the dropdown and data for
+the selected Subnet will be shown in the panels.
 
 ## Updating
 
-Available node metrics are updated constantly, new ones are added and obsolete removed, so it is good a practice to update the dashboards from time to time, especially if you notice any missing data in panels. Updating the dashboards is easy, just run the script with no arguments, and it will refresh the dashboards with the latest available versions. Allow up to 30s for dashboards to update in Grafana.
+Available node metrics are updated constantly, new ones are added and obsolete
+removed, so it is good a practice to update the dashboards from time to time,
+especially if you notice any missing data in panels. Updating the dashboards is
+easy, just run the script with no arguments, and it will refresh the dashboards
+with the latest available versions. Allow up to 30s for dashboards to update in
+Grafana.
 
 If you added the optional extra dashboards (step 5), they will be updated as well.
 
 ## Summary
 
-Using the script to install node monitoring is easy, and it gives you insight into how your node is behaving and what's going on under the hood. Also, pretty graphs!
+Using the script to install node monitoring is easy, and it gives you insight
+into how your node is behaving and what's going on under the hood. Also, pretty
+graphs!
 
-If you have feedback on this tutorial, problems with the script or following the steps, send us a message on [Discord](https://chat.avalabs.org).
+If you have feedback on this tutorial, problems with the script or following the
+steps, send us a message on [Discord](https://chat.avalabs.org).

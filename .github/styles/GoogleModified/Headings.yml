@@ -48,5 +48,6 @@ exceptions:
   - Windows
   - VM
   - uint
+  - uint64
   - unit
   - up
