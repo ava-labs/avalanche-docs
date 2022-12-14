@@ -86,6 +86,7 @@ Dexalot
 Docusaurus
 dotenv
 ecrecover
+Enablement
 Enums
 env
 EOAs
@@ -113,6 +114,8 @@ Grafana
 gwei
 Gwei
 gzip
+halflife
+Halflife
 Hardforks
 Harpalsinh
 hashmap
@@ -123,6 +126,7 @@ hotfix
 incentivized
 Infura
 inlined
+IPC's
 ipfs
 IPFS
 IPs
@@ -145,8 +149,10 @@ lookups
 Mainnet
 Manov
 Markdownlint
+MBs
 mempool
 Mempool
+merkle
 MetaMask
 Metodi
 minimalistic
@@ -173,6 +179,7 @@ npx
 Ofem
 OK
 onboarding
+onwards
 O'Reilly
 Osutuk
 ownable
@@ -192,8 +199,10 @@ precompile
 Precompile
 precompiles
 Precompiles
+preimages
 prefunded
 Prepended
+profiler
 Proto
 proxying
 Ranjan
@@ -220,11 +229,13 @@ RunLog
 Saglam
 Sayan
 scriptable
+securitization
 Snowtrace
 Solana
 Sourcify
 spoofable
 solc
+SSDs
 stakeable
 staker
 stakers
@@ -243,6 +254,7 @@ subtree
 sudo
 superset
 Swapper's
+sybil
 syncer
 testnet
 Testnet
@@ -255,6 +267,7 @@ TXs
 typechain
 TypeChain
 typings
+uint
 UIs
 unicode
 Uniswap

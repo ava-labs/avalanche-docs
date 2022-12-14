@@ -80,7 +80,7 @@ If set to `true`, this node will expose the Info API. Defaults to `true`. See
 
 #### `--api-ipcs-enabled` (boolean)
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
+If set to `true`, this node will expose the IPC's API. Defaults to `false`. See
 [here](../../apis/avalanchego/apis/ipc.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
@@ -198,7 +198,7 @@ in. `chain-config-dir`/`blockchainID`/config.json
 Full reference for all configuration options for specific chains can be found in
 a separate [chain config flags](chain-config-flags.md) document.
 
-Full reference for subnet-evm upgrade configuration can be found in a separate
+Full reference for `subnet-evm` upgrade configuration can be found in a separate
 [Customize a Subnet](../../subnets/customize-a-subnet.md) document.
 
 #### `--chain-config-dir` (string)
@@ -341,7 +341,7 @@ This are the main properties in the JSON file:
 - `initialStakedFunds`: A list of addresses that own the funds staked at genesis
   (each address must be present in `allocations` as well)
 - `initialStakers`: The validators that exist at genesis. Each element contains
-  the rewardAddress, nodeID and the delegationFee of the validator.
+  the `rewardAddress`, nodeID and the `delegationFee` of the validator.
 - `cChainGenesis`: The genesis info to be passed to the C-Chain.
 - `message`: A message to include in the genesis. Not required.
 
@@ -402,7 +402,7 @@ encoded. This must be specified when `--http-tls-enabled=true`.
 
 #### `--ipcs-chain-ids` (string)
 
-Comma separated list of chain ids to connect to (e.g.
+Comma separated list of chain ids to connect to (for example
 `11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
 There is no default value.
 
@@ -497,7 +497,7 @@ This might be useful for debugging, performance analysis, or monitoring.
 
 #### `--tracing-enabled` (boolean)
 
-If true, enable opentelemetry tracing. Defaults to `false`.
+If true, enable OpenTelemetry tracing. Defaults to `false`.
 
 #### `--tracing-endpoint` (string)
 
@@ -555,7 +555,7 @@ operation. Defaults to `9651`.
 
 #### `--staking-enabled` (boolean)
 
-Avalanche uses Proof of Stake (PoS) as Sybil resistance to make it prohibitively
+Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively
 expensive to attack the network. If false, sybil resistance is disabled and all
 peers will be sampled during consensus. Defaults to `true`. Note that this can
 not be specified on public networks (`Fuji` and `Mainnet`).
@@ -612,12 +612,12 @@ It is possible to provide parameters for Subnets. Parameters here apply to all
 chains in the specified Subnets. Parameters must be specified with a
 `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
 configs for Subnets specified in 
-[`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
+`--whitelisted-subnet` parameter.
 
 Full reference for all configuration options for a Subnet can be found in a
 separate [Subnet Configs](./subnet-configs) document.
 
-#### `--subnet-config-dir` (string)
+#### `--subnet-config-dir` (`string`)
 
 Specifies the directory that contains Subnet configs, as described above.
 Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly,
@@ -952,7 +952,7 @@ Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 #### `--health-check-frequency` (duration)
 
-Health check runs with this freqency. Defaults to `30s`.
+Health check runs with this frequency. Defaults to `30s`.
 
 #### `--health-check-averager-halflife` (duration)
 
@@ -1060,7 +1060,7 @@ These flags govern rate-limiting of inbound and outbound messages. For more
 information on rate-limiting and the flags below, see package `throttling` in
 AvalancheGo.
 
-#### CPU based
+#### CPU Based
 
 Rate-limiting based on how much CPU usage a peer causes.
 
@@ -1093,7 +1093,7 @@ to `1/3`.
 In the CPU rate-limiter, check at least this often whether the node's CPU usage
 has fallen to an acceptable level. Defaults to `5s`.
 
-#### Bandwidth based
+#### Bandwidth Based
 
 Rate-limiting based on the bandwidth a peer uses.
 
@@ -1107,7 +1107,7 @@ interface `throttling.BandwidthThrottler`. Defaults to `512`.
 Max inbound bandwidth a node can use at once. See interface
 `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
 
-#### Message size based
+#### Message Size Based
 
 Rate-limiting based on the total size, in bytes, of unprocessed messages.
 
@@ -1125,7 +1125,7 @@ Defaults to `33554432` (32 MiB).
 Maximum number of bytes a node can take from the at-large allocation of the
 inbound message throttler. Defaults to `2097152` (2 MiB).
 
-#### Message based
+#### Message Based
 
 Rate-limiting based on the number of unprocessed messages.
 
@@ -1219,7 +1219,7 @@ metrics change more slowly. Defaults to `15s`.
 
 #### `--system-tracker-cpu-halflife` (duration)
 
-Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics
+Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics
 change more slowly. Defaults to `15s`.
 
 #### `--system-tracker-disk-halflife` (duration)
@@ -1247,7 +1247,7 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 
 ### Virtual Machine (VM) Configs
 
-#### `--vm-aliases-file` (string)
+#### `--vm-aliases-file (string)`
 
 Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to
 `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if
