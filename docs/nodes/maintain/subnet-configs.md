@@ -5,9 +5,12 @@ decription: In this doc, learn how to run offline pruning on your node to reduce
 
 # Subnet Configs
 
-It is possible to provide parameters for a Subnet. Parameters here apply to all chains in the specified Subnet.
+It is possible to provide parameters for a Subnet. Parameters here apply to all
+chains in the specified Subnet.
 
-AvalancheGo looks for files specified with `{subnetID}.json` under `--subnet-config-dir` as documented [here](./avalanchego-config-flags.md#subnet-configs).
+AvalancheGo looks for files specified with `{subnetID}.json` under
+`--subnet-config-dir` as documented
+[here](./avalanchego-config-flags.md#subnet-configs).
 
 Here is an example of Subnet config file:
 
@@ -26,46 +29,69 @@ Here is an example of Subnet config file:
 
 ### Private Subnet
 
-#### `validatorOnly` (bool):
+#### `validatorOnly` (bool)
 
-If `true` this node does not expose Subnet blockchain contents to non-validators via P2P messages. Defaults to `false`.
+If `true` this node does not expose Subnet blockchain contents to non-validators
+via P2P messages. Defaults to `false`.
 
-Avalanche Subnets are public by default. It means that every node can sync and listen ongoing transactions/blocks in Subnets, even they're not validating the listened Subnet.
+Avalanche Subnets are public by default. It means that every node can sync and
+listen ongoing transactions/blocks in Subnets, even they're not validating the
+listened Subnet.
 
-Subnet validators can choose not to publish contents of blockchains via this configuration. If a node sets `validatorOnly` to true, the node exchanges messages only with this Subnet's validators. Other peers will not be able to learn contents of this Subnet from this node.
+Subnet validators can choose not to publish contents of blockchains via this
+configuration. If a node sets `validatorOnly` to true, the node exchanges
+messages only with this Subnet's validators. Other peers will not be able to
+learn contents of this Subnet from this node.
 
 :::tip
-This is a node-specific configuration. Every validator of this Subnet has to use this configuration in order to create a full private Subnet.
+
+This is a node-specific configuration. Every validator of this Subnet has to use
+this configuration in order to create a full private Subnet.
+
 :::
 
-#### `proposerMinBlockDelay` (time.Duration):
+#### `proposerMinBlockDelay` (duration)
 
 The minimum delay performed when building snowman++ blocks. Default is set to 1 second.
 
-As one of the ways to control network congestion, Snowman++ will only build a block `proposerMinBlockDelay` after the parent block's timestamp. Some high-performance custom VM may find this too strict. This flag allows tuning the frequency at which blocks are built.
+As one of the ways to control network congestion, Snowman++ will only build a
+block `proposerMinBlockDelay` after the parent block's timestamp. Some
+high-performance custom VM may find this too strict. This flag allows tuning the
+frequency at which blocks are built.
 
 ### Consensus Parameters
 
-Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a Subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](./avalanchego-config-flags.md#snow-parameters).
+Subnet configs supports loading new consensus parameters. JSON keys are
+different from their matching `CLI` keys. These parameters must be grouped under
+`consensusParameters` key. The consensus parameters of a Subnet default to the
+same values used for the Primary Network, which are given [CLI Snow
+Parameters](./avalanchego-config-flags.md#snow-parameters).
 
 | CLI Key                             | JSON Key                 |
 | :---------------------------------- | :----------------------- |
 | --snow-sample-size                  | k                        |
 | --snow-quorum-size                  | alpha                    |
-| --snow-virtuous-commit-threshold    | betaVirtuous             |
-| --snow-rogue-commit-threshold       | betaRogue                |
+| --snow-virtuous-commit-threshold    | `betaVirtuous`           |
+| --snow-rogue-commit-threshold       | `betaRogue`              |
 | --snow-concurrent-repolls           | concurrentRepolls        |
-| --snow-optimal-processing           | optimalProcessing        |
+| --snow-optimal-processing           | `optimalProcessing`      |
 | --snow-max-processing               | maxOutstandingItems      |
 | --snow-max-time-processing          | maxItemProcessingTime    |
 | --snow-mixed-query-num-push-vdr     | mixedQueryNumPushVdr     |
 | --snow-mixed-query-num-push-non-vdr | mixedQueryNumPushNondVdr |
-| --snow-avalanche-batch-size         | batchSize                |
-| --snow-avalanche-num-parents        | parentSize               |
+| --snow-avalanche-batch-size         | `batchSize`              |
+| --snow-avalanche-num-parents        | `parentSize`             |
 
 ### Gossip Configs
 
-It's possible to define different Gossip configurations for each Subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-non-validator-size` is `0`). You can change this for your Subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](./avalanchego-config-flags.md#gossiping).
+It's possible to define different Gossip configurations for each Subnet without
+changing values for Primary Network. For example in Primary Network transaction
+mempools are not gossiped to non-validators
+(`--consensus-app-gossip-non-validator-size` is `0`). You can change this for
+your Subnet and share mempool with non-validators as well. JSON keys of these
+parameters are different from their matching `CLI` keys. These parameters
+default to the same values used for the Primary Network. For more information
+see [CLI Gossip Configs](./avalanchego-config-flags.md#gossiping).
 
 | CLI Key                                                 | JSON Key                               |
 | :------------------------------------------------------ | :------------------------------------- |

@@ -35,7 +35,7 @@ create them manually if needed.
 The filename extension that these files should have, and the contents of these
 files, is VM-dependent. For example, some chains may expect `config.txt` while
 others expect `config.json`. If multiple files are provided with the same name
-but different extensions (e.g. `config.json` and `config.txt`) in the same
+but different extensions (for example `config.json` and `config.txt`) in the same
 sub-directory, AvalancheGo will exit with an error.
 
 For a given chain, AvalancheGo will follow the sequence below to look for its
@@ -138,12 +138,12 @@ your node. If this field is not set, then the default list will be:
 
 :::note
 
-The names used in this configuration flag have been updated in coreth `v0.8.14`.
-The previous names containing `public-` and `private-` are deprecated.  While
+The names used in this configuration flag have been updated in Coreth `v0.8.14`.
+The previous names containing `public-` and `private-` are deprecated. While
 the current version continues to accept deprecated values, they may not be
 supported in future updates and updating to the new values is recommended.
 
-The mapping of deprecated values and their updated equivilant follows:
+The mapping of deprecated values and their updated equivalent follows:
 
 | Deprecated                         | Use instead            |
 | ---------------------------------- | ---------------------- |
@@ -412,7 +412,7 @@ The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and
 
 #### `rpc-tx-fee-cap` (int)
 
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for
+Global transaction fee (price \* `gaslimit`) cap (measured in AVAX) for
 send-transaction variants. Defaults to `100`.
 
 #### `api-max-duration` (duration)
@@ -529,7 +529,7 @@ If `true`, enables preimages. Defaults to `false`.
 #### `offline-pruning-enabled` (boolean)
 
 If `true`, offline pruning will run on startup and block until it completes
-(approximately one hour on mainnet). This will reduce the size of the database
+(approximately one hour on Mainnet). This will reduce the size of the database
 by deleting old trie nodes. **While performing offline pruning, your node will
 not be able to process blocks and will be considered offline.** While ongoing,
 the pruning process consumes a small amount of additional disk space (for
@@ -548,7 +548,7 @@ run with this flag set to true and then set it to false on the subsequent run.
 This flag sets the size of the bloom filter to use in offline pruning
 (denominated in MB and defaulting to 512 MB). The bloom filter is kept in memory
 for efficient checks during pruning and is also written to disk to allow pruning
-to resume withou re-generating the bloom filter.
+to resume without re-generating the bloom filter.
 
 The active state is added to the bloom filter before iterating the DB to find
 trie nodes that can be safely deleted, any trie nodes not in the bloom filter
@@ -636,7 +636,7 @@ string (`""`).
 Size of trie cache used for providing state sync data to peers in MBs. Should be
 a multiple of `64`. Defaults to `64`.
 
-### Cache confiugration
+### Cache Configuration
 
 #### `trie-clean-cache` (int)
 

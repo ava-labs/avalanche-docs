@@ -32,6 +32,7 @@ jobs:
             "docs/apis", 
             "docs/dapps", 
             "docs/community", 
+            "docs/nodes", 
             "docs/overview",
             "docs/subnets", 
             "README.md", 
