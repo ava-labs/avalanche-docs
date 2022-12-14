@@ -1245,7 +1245,7 @@ GiB).
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
-### Virtual Machine (VM) Configs {#vm-configs}
+### Virtual Machine (VM) Configs
 
 #### `--vm-aliases-file` (string)
 
