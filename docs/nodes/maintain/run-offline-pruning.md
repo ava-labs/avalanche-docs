@@ -214,7 +214,8 @@ INFO [02-09|00:59:49] <X Chain> snow/engine/common/queue/jobs.go#171: executed 5
 INFO [02-09|01:00:07] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#406: bootstrapping fetched 1241 blocks. Executing state transitions...
 ```
 
-At this point, the node will go into bootstrapping and (once bootstrapping completes) resume consensus and operate as normal.
+At this point, the node will go into bootstrapping and (once bootstrapping
+completes) resume consensus and operate as normal.
 
 ## Disk Space Considerations
 
