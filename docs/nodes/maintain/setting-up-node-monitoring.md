@@ -10,7 +10,7 @@ This tutorial will show how to set up infrastructure to monitor an instance of
 [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
 - [Prometheus](https://prometheus.io/) to gather and store data
-- [node_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
+- [`node_exporter`](https://github.com/prometheus/node_exporter) to get information about the machine,
 - AvalancheGo’s [metrics API](../../apis/avalanchego/apis/metrics.md) to get information about the node
 - [Grafana](https://grafana.com/) to visualize data on a dashboard.
 - A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-monitoring/tree/main/grafana/dashboards)
@@ -143,7 +143,7 @@ If on public internet, make sure to only allow your IP to connect!
 
 :::
 
-If everything is ok, let's move on.
+If everything is OK, let's move on.
 
 ## Step 2: Install Grafana <a id="grafana"></a>
 
@@ -177,7 +177,7 @@ To make sure it’s running properly:
 sudo systemctl status grafana-server
 ```
 
-which should again show grafana as `active`. Grafana should now be available at
+which should again show Grafana as `active`. Grafana should now be available at
 `http://your-node-host-ip:3000/` from your browser. Log in with username: admin,
 password: admin, and you will be prompted to set up a new, secure password. Do
 that.
@@ -192,7 +192,7 @@ public internet, make sure to only allow your IP to connect!
 
 Prometheus and Grafana are now installed, we're ready for the next step.
 
-## Step 3: Set up node_exporter <a id="exporter"></a>
+## Step 3: Set up `node_exporter` <a id="exporter"></a>
 
 In addition to metrics from AvalancheGo, let’s set up monitoring of the machine
 itself, so we can check CPU, memory, network and disk usage and be aware of any
@@ -226,7 +226,7 @@ Again, we check that the service is running correctly:
 sudo systemctl status node_exporter
 ```
 
-If the service is running, Prometheus, Grafana and node_exporter should all work
+If the service is running, Prometheus, Grafana and `node_exporter` should all work
 together now. To check, in your browser visit Prometheus web interface on
 `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
 
