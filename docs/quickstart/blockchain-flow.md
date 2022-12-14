@@ -10,8 +10,8 @@ protocol. The C-Chain is used to create and interact with smart contracts and
 uses the Snowman consensus protocol. The P-Chain is used to coordinate
 validators and stake and also uses the Snowman consensus protocol. At the time
 of writing, the Avalanche network has ~1200 validators. A set of validators
-makes up a subnet. Subnets can validate 1 or more chains. It is a common
-misconception that 1 subnet = 1 chain and this is shown by the primary subnet of
+makes up a Subnet. Subnets can validate 1 or more chains. It is a common
+misconception that 1 Subnet = 1 chain and this is shown by the primary Subnet of
 Avalanche which is made up of the X-Chain, C-Chain, and P-Chain.
 
 A node in the Avalanche network can either be a validator or a non-validator. A
@@ -66,7 +66,7 @@ is shared across all chains. It implements functions from the `ExternalSender`
 interface. The two functions it implements are `Send` and `Gossip`. `Send` sends
 a message of type `OutboundMessage` to a specific set of nodes (specified by an
 array of `NodeIDs`). `Gossip` sends a message of type `OutboundMessage` to a
-random group of nodes in a subnet (can be a validator or a non-validator).
+random group of nodes in a Subnet (can be a validator or a non-validator).
 Gossiping is used to push transactions across the network. The networking
 protocol uses TLS to pass messages between peers.
 
@@ -97,14 +97,14 @@ The main function of [the
 `Handler`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/handler/handler.go)
 is to pass messages from the network to the consensus engine. It receives these
 messages from the `ChainRouter`. It passes messages by pushing them onto a sync
-or async queue (depends on message type). Messages are then popped from the
+or Async queue (depends on message type). Messages are then popped from the
 queue, parsed, and routed to the correct function in consensus engine. This can
 be one of the following.
 
 - **State sync message (sync queue)**
 - **Bootstrapping message (sync queue)**
 - **Consensus message (sync queue)**
-- **App message (async queue)**
+- **App message (Async queue)**
 
 ## Sender
 
