@@ -32,7 +32,7 @@ it receives back the AVAX tokens it staked. It may receive a reward for helping
 to secure the network. A validator only receives a [validation
 reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards)
 if it is sufficiently responsive and correct during the time it validates. Read
-the [Avalanche token whitepaper](https://www.avalabs.org/whitepapers) to learn
+the [Avalanche token white paper](https://www.avalabs.org/whitepapers) to learn
 more about AVAX and the mechanics of staking.
 
 :::caution

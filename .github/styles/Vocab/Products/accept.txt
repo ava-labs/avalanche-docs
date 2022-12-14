@@ -117,8 +117,6 @@ Grafana
 gwei
 Gwei
 gzip
-halflife
-Halflife
 Hardforks
 Harpalsinh
 hashmap
@@ -311,8 +309,6 @@ Webapp
 Webpack
 wei
 Wei
-whitepaper
-Whitepapers
 yargs
 Yellowpaper
 Zundel

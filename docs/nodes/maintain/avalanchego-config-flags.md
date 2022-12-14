@@ -5,6 +5,8 @@ description: This documents list all available configuration and flags for Avala
 
 # AvalancheGo Config and Flags
 
+<!-- markdownlint-disable MD001 -->
+
 You can specify the configuration of a node with the arguments below.
 
 ## Config File
@@ -956,7 +958,7 @@ Health check runs with this frequency. Defaults to `30s`.
 
 #### `--health-check-averager-halflife` (duration)
 
-Halflife of averagers used in health checks (to measure the rate of message
+Half life of averagers used in health checks (to measure the rate of message
 failures, for example.) Larger value --&gt; less volatile calculation of
 averages. Defaults to `10s`.
 
@@ -998,7 +1000,7 @@ than this value will be overridden with this value. Defaults to `10s`.
 
 #### `--network-timeout-halflife` (duration)
 
-Halflife used when calculating average network latency. Larger value --&gt; less
+Half life used when calculating average network latency. Larger value --&gt; less
 volatile network latency calculation. Defaults to `5m`.
 
 #### `--network-timeout-coefficient` (duration)
@@ -1066,7 +1068,7 @@ Rate-limiting based on how much CPU usage a peer causes.
 
 ##### `cpu-tracker-halflife` (duration)
 
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics
+Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
 change more slowly. Defaults to `15s`.
 
 ##### `throttler-inbound-cpu-validator-alloc` (float)
@@ -1214,17 +1216,17 @@ Defaults to `500ms`.
 
 #### `--system-tracker-processing-halflife` (duration)
 
-Halflife to use for the processing requests tracker. Larger halflife --> usage
+Half life to use for the processing requests tracker. Larger half life --> usage
 metrics change more slowly. Defaults to `15s`.
 
 #### `--system-tracker-cpu-halflife` (duration)
 
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics
+Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
 change more slowly. Defaults to `15s`.
 
 #### `--system-tracker-disk-halflife` (duration)
 
-Halflife to use for the disk tracker. Larger halflife --> disk usage metrics
+Half life to use for the disk tracker. Larger half life --> disk usage metrics
 change more slowly. Defaults to `1m`.
 
 #### `--system-tracker-disk-required-available-space` (uint)
