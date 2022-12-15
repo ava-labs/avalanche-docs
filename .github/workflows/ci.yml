@@ -29,18 +29,11 @@ jobs:
       - uses: errata-ai/vale-action@reviewdog
         with:
           files: '[
-            "docs/apis", 
-            "docs/community", 
-            "docs/dapps", 
-            "docs/nodes", 
-            "docs/overview",
-            "docs/quickstart",
-            "docs/specs", 
-            "docs/subnets", 
-            "README.md", 
-            "style-checker-notes.md", 
+            "docs/",
+            "README.md",
+            "style-checker-notes.md",
             "style-guide.md"
-          ]'
+            ]'
           fail_on_error: true
           reporter: github-pr-check
           vale_flags: "--minAlertLevel=error"
