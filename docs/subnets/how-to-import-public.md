@@ -15,13 +15,13 @@ but would now require `Avalanche-CLI` integration.
 For this How-To, we will import the `wagmi` Subnet from `Fuji`.
 
 
-## Requirements:
+## Requirements
 
 For the import to work properly: 
 
- * the *genesis* for the Subnet in question should be known and accessible as a file on disk.
+* the *genesis* for the Subnet in question should be known and accessible as a file on disk.
 
- * the Subnet's *ID* should be known, and needs to be supplied to the wizard when prompted
+* the Subnet's *ID* should be known, and needs to be supplied to the wizard when prompted
 
 
 ## Import the Subnet
@@ -88,9 +88,10 @@ Please provide an API URL of such a node so we can query its VM version (e.g. ht
 What is the ID of the subnet?: 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY
 ```
 
-The rest of the wizard is identical to the next section, except that there is no prompt for the VM version anymore.
+The rest of the wizard is identical to the next section, 
+except that there is no prompt for the VM version anymore.
 
-### Nodes are Not Yet Validating this Subnet, the Nodes API URL are Unknown, or Inaccessible (Firewalls):
+### Nodes are Not Yet Validating this Subnet, the Nodes API URL are Unknown, or Inaccessible (Firewalls)
 
 If we don't have a node's API URL at hand, or it is not reachable 
 from the machine running `Avalanche-CLI`, or maybe no nodes have even been deployed yet 
