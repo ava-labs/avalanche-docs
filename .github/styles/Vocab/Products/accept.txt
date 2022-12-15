@@ -106,6 +106,7 @@ finney
 Fuji
 gamification
 Ganache
+Gantt
 Geth
 Geth's
 getters
@@ -128,6 +129,7 @@ incentivized
 infeasibly
 Infura
 inlined
+ints
 IPC's
 ipfs
 IPFS
@@ -163,6 +165,7 @@ minimalistic
 mintable
 Mintable
 mmap'd
+Morty
 multicurrency
 Multiput
 multisig
@@ -207,6 +210,7 @@ precompiles
 Precompiles
 preimages
 prefunded
+prepended
 Prepended
 profiler
 Proto
@@ -270,6 +274,7 @@ toolchain
 Toolchains
 trie
 TXIDs
+TX
 TXs
 typechain
 TypeChain
@@ -283,6 +288,7 @@ Unix
 unregister
 unscalable
 untrusted
+untyped
 uptimes
 URIs
 url

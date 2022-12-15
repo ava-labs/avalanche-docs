@@ -35,6 +35,7 @@ jobs:
             "docs/nodes", 
             "docs/overview",
             "docs/quickstart",
+            "docs/specs", 
             "docs/subnets", 
             "README.md", 
             "style-checker-notes.md", 
