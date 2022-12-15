@@ -257,7 +257,6 @@ subcommands
 subgraph
 Subgraph
 Subnet
-SUBNET
 Subnet-EVM
 Subnets
 subsampling
