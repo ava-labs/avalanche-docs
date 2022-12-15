@@ -18,7 +18,7 @@ the purview of your team, and you have complete control over the timing of their
 change represents a **network upgrade** and needs to be carefully planned and executed.
 
 :::warning 
-NETWORK UPGRADES PERMANENTLY CHANGE THE RULES OF YOUR SUBNET.
+Network Upgrades Permanently Change the Rules of Your Subnet.
 
 Procedural mistakes or a botched upgrade can halt your Subnet or lead to data loss!
 
