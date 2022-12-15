@@ -1239,7 +1239,7 @@ contains common fields and operations.
 
 ## Unsigned BaseTx
 
-### What Base Tx Contains
+### What Base TX Contains
 
 A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
 
@@ -1264,7 +1264,7 @@ A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
   is invalid as this would result in a double spend.
 - **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
 
-### Gantt Base Tx Specification
+### Gantt Base TX Specification
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1284,7 +1284,7 @@ A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Proto Base TX Specification
 
 ```text
 message BaseTx {
@@ -1297,7 +1297,7 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Base TX Example
 
 Let’s make an base TX that uses the inputs and outputs from the previous examples:
 
@@ -1374,7 +1374,7 @@ Let’s make an base TX that uses the inputs and outputs from the previous examp
 
 ## Unsigned CreateAssetTx
 
-### What Unsigned Create Asset Tx Contains
+### What Unsigned Create Asset TX Contains
 
 An unsigned create asset TX contains a `BaseTx`, `Name`, `Symbol`,
 `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
@@ -1397,7 +1397,7 @@ An unsigned create asset TX contains a `BaseTx`, `Name`, `Symbol`,
   state](avm-transaction-serialization.md#initial-state) of those feature
   extensions.
 
-### Gantt Unsigned Create Asset Tx Specification
+### Gantt Unsigned Create Asset TX Specification
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1416,7 +1416,7 @@ An unsigned create asset TX contains a `BaseTx`, `Name`, `Symbol`,
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### Proto Unsigned Create Asset TX Specification
 
 ```text
 message CreateAssetTx {
@@ -1428,7 +1428,7 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### Unsigned Create Asset TX Example
 
 Let’s make an unsigned base TX that uses the inputs and outputs from the previous examples:
 
@@ -1512,14 +1512,14 @@ Let’s make an unsigned base TX that uses the inputs and outputs from the previ
 
 ## Unsigned OperationTx
 
-### What Unsigned Operation Tx Contains
+### What Unsigned Operation TX Contains
 
 An unsigned operation TX contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 - **`BaseTx`**
 - **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-op).
 
-### Gantt Unsigned Operation Tx Specification
+### Gantt Unsigned Operation TX Specification
 
 ```text
 +---------+------------------+-------------------------------------+
@@ -1531,7 +1531,7 @@ An unsigned operation TX contains a `BaseTx`, and `Ops`. The `TypeID` for this t
                              +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### Proto Unsigned Operation TX Specification
 
 ```text
 message OperationTx {
@@ -1540,7 +1540,7 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### Unsigned Operation TX Example
 
 Let’s make an unsigned operation TX that uses the inputs and outputs from the previous examples:
 
@@ -1616,7 +1616,7 @@ Let’s make an unsigned operation TX that uses the inputs and outputs from the 
 
 ## Unsigned ImportTx
 
-### What Unsigned Import Tx Contains
+### What Unsigned Import TX Contains
 
 An unsigned import TX contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
 
@@ -1624,7 +1624,7 @@ An unsigned import TX contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
 - **`SourceChain`** is a 32-byte source blockchain ID.
 - **`Ins`** is a variable length array of [Transferable Inputs](avm-transaction-serialization.md#transferable-input).
 
-### Gantt Unsigned Import Tx Specification
+### Gantt Unsigned Import TX Specification
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1638,7 +1638,7 @@ An unsigned import TX contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Proto Unsigned Import TX Specification
 
 ```text
 message ImportTx {
@@ -1648,7 +1648,7 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Unsigned Import TX Example
 
 Let’s make an unsigned import TX that uses the inputs from the previous examples:
 
@@ -1727,7 +1727,7 @@ Let’s make an unsigned import TX that uses the inputs from the previous exampl
 
 ## Unsigned ExportTx
 
-### What Unsigned Export Tx Contains
+### What Unsigned Export TX Contains
 
 An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
 `TypeID` for this type is `0x00000004`.
@@ -1735,7 +1735,7 @@ An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
 - **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
 - **`Outs`** is a variable length array of [Transferable Outputs](avm-transaction-serialization.md#transferable-output).
 
-### Gantt Unsigned Export Tx Specification
+### Gantt Unsigned Export TX Specification
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1749,7 +1749,7 @@ An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Proto Unsigned Export TX Specification
 
 ```text
 message ExportTx {
@@ -1759,7 +1759,7 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### Unsigned Export TX Example
 
 Let’s make an unsigned export TX that uses the outputs from the previous examples:
 

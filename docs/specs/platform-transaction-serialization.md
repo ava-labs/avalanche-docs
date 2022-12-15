@@ -412,7 +412,7 @@ and operations.
 
 ## Unsigned BaseTx
 
-### What Base Tx Contains
+### What Base TX Contains
 
 A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
 
@@ -435,7 +435,7 @@ A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
   this would result in a double spend.
 - **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
 
-### Gantt Base Tx Specification
+### Gantt Base TX Specification
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -455,7 +455,7 @@ A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Proto Base TX Specification
 
 ```text
 message BaseTx {
@@ -468,7 +468,7 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Base TX Example
 
 Let’s make a base TX that uses the inputs and outputs from the previous examples:
 
@@ -536,9 +536,9 @@ Let’s make a base TX that uses the inputs and outputs from the previous exampl
 ]
 ```
 
-## Unsigned Add Validator Tx
+## Unsigned Add Validator TX
 
-### What Unsigned Add Validator Tx Contains
+### What Unsigned Add Validator TX Contains
 
 An unsigned add validator TX contains a `BaseTx`, `Validator`, `Stake`,
 `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
@@ -556,7 +556,7 @@ An unsigned add validator TX contains a `BaseTx`, `Validator`, `Stake`,
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
 - **`Shares`** 10,000 times percentage of reward taken from delegators
 
-### Gantt Unsigned Add Validator Tx Specification
+### Gantt Unsigned Add Validator TX Specification
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -574,7 +574,7 @@ An unsigned add validator TX contains a `BaseTx`, `Validator`, `Stake`,
                   +--------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Validator Tx Specification
+### Proto Unsigned Add Validator TX Specification
 
 ```text
 message AddValidatorTx {
@@ -586,7 +586,7 @@ message AddValidatorTx {
 }
 ```
 
-### Unsigned Add Validator Tx Example
+### Unsigned Add Validator TX Example
 
 Let’s make an unsigned add validator TX that uses the inputs and outputs from the previous examples:
 
@@ -679,9 +679,9 @@ Let’s make an unsigned add validator TX that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## Unsigned Add Subnet Validator TX
 
-### What Unsigned Add Subnet Validator Tx Contains
+### What Unsigned Add Subnet Validator TX Contains
 
 An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
 `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
@@ -698,7 +698,7 @@ An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
   control signature to add a validator to a Subnet. The array must be sorted low
   to high.
 
-### Gantt Unsigned Add Subnet Validator Tx Specification
+### Gantt Unsigned Add Subnet Validator TX Specification
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -714,7 +714,7 @@ An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
                                    +---------------------------------------------+
 ```
 
-### Proto Unsigned Add Subnet Validator Tx Specification
+### Proto Unsigned Add Subnet Validator TX Specification
 
 ```text
 message AddSubnetValidatorTx {
@@ -725,7 +725,7 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### Unsigned Add Subnet Validator Tx Example
+### Unsigned Add Subnet Validator TX Example
 
 Let’s make an unsigned add Subnet validator TX that uses the inputs and outputs from the previous examples:
 
@@ -809,9 +809,9 @@ Let’s make an unsigned add Subnet validator TX that uses the inputs and output
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## Unsigned Add Delegator TX
 
-### What Unsigned Add Delegator Tx Contains
+### What Unsigned Add Delegator TX Contains
 
 An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and
 `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
@@ -829,7 +829,7 @@ An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and
     outputs are refunded to their respective addresses.
 - **`RewardsOwner`** An `SECP256K1OutputOwners`
 
-### Gantt Unsigned Add Delegator Tx Specification
+### Gantt Unsigned Add Delegator TX Specification
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -845,7 +845,7 @@ An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and
                   +--------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Delegator Tx Specification
+### Proto Unsigned Add Delegator TX Specification
 
 ```text
 message AddDelegatorTx {
@@ -856,7 +856,7 @@ message AddDelegatorTx {
 }
 ```
 
-### Unsigned Add Delegator Tx Example
+### Unsigned Add Delegator TX Example
 
 Let’s make an unsigned add delegator TX that uses the inputs and outputs from the previous examples:
 
@@ -942,9 +942,9 @@ Let’s make an unsigned add delegator TX that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Create Chain Tx
+## Unsigned Create Chain TX
 
-### What Unsigned Create Chain Tx Contains
+### What Unsigned Create Chain TX Contains
 
 An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`,
 `VMID`, `FxIDs`, `GenesisData` and `SubnetAuth`. The `TypeID` for this type is
@@ -958,7 +958,7 @@ An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`,
 - **`GenesisData`** Byte representation of genesis state of the new chain
 - **`SubnetAuth`** Authorizes this blockchain to be added to this Subnet
 
-### Gantt Unsigned Create Chain Tx Specification
+### Gantt Unsigned Create Chain TX Specification
 
 ```text
 +--------------+-------------+------------------------------------------+
@@ -981,7 +981,7 @@ An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`,
 +--------------+--------------------------------------------------------+
 ```
 
-### Proto Unsigned Create Chain Tx Specification
+### Proto Unsigned Create Chain TX Specification
 
 ```text
 message CreateChainTx {
@@ -995,7 +995,7 @@ message CreateChainTx {
 }
 ```
 
-### Unsigned Create Chain Tx Example
+### Unsigned Create Chain TX Example
 
 Let’s make an unsigned create chain TX that uses the inputs and outputs from the previous examples:
 
@@ -1101,16 +1101,16 @@ Let’s make an unsigned create chain TX that uses the inputs and outputs from t
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## Unsigned Create Subnet TX
 
-### What Unsigned Create Subnet Tx Contains
+### What Unsigned Create Subnet TX Contains
 
 An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
 
 - **`BaseTx`**
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### Gantt Unsigned Create Subnet Tx Specification
+### Gantt Unsigned Create Subnet TX Specification
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -1122,7 +1122,7 @@ An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### Proto Unsigned Create Subnet Tx Specification
+### Proto Unsigned Create Subnet TX Specification
 
 ```text
 message CreateSubnetTx {
@@ -1131,7 +1131,7 @@ message CreateSubnetTx {
 }
 ```
 
-### Unsigned Create Subnet Tx Example
+### Unsigned Create Subnet TX Example
 
 Let’s make an unsigned create Subnet TX that uses the inputs from the previous examples:
 
@@ -1188,9 +1188,9 @@ Let’s make an unsigned create Subnet TX that uses the inputs from the previous
 ]
 ```
 
-## Unsigned Import Tx
+## Unsigned Import TX
 
-### What Unsigned Import Tx Contains
+### What Unsigned Import TX Contains
 
 An unsigned import TX contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
 
@@ -1198,7 +1198,7 @@ An unsigned import TX contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
 - **`SourceChain`** is a 32-byte source blockchain ID.
 - **`Ins`** is a variable length array of Transferable Inputs.
 
-### Gantt Unsigned Import Tx Specification
+### Gantt Unsigned Import TX Specification
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -1212,7 +1212,7 @@ An unsigned import TX contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
                             +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Proto Unsigned Import TX Specification
 
 ```text
 message ImportTx {
@@ -1222,7 +1222,7 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Unsigned Import TX Example
 
 Let’s make an unsigned import TX that uses the inputs from the previous examples:
 
@@ -1284,9 +1284,9 @@ Let’s make an unsigned import TX that uses the inputs from the previous exampl
 ]
 ```
 
-## Unsigned Export Tx
+## Unsigned Export TX
 
-### What Unsigned Export Tx Contains
+### What Unsigned Export TX Contains
 
 An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
 `TypeID` for this type is `0x00000012`.
@@ -1294,7 +1294,7 @@ An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
 - **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
 - **`Outs`** is a variable length array of Transferable Outputs.
 
-### Gantt Unsigned Export Tx Specification
+### Gantt Unsigned Export TX Specification
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1308,7 +1308,7 @@ An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Proto Unsigned Export TX Specification
 
 ```text
 message ExportTx {
@@ -1318,7 +1318,7 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### Unsigned Export TX Example
 
 Let’s make an unsigned export TX that uses the outputs from the previous examples:
 
