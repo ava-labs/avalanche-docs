@@ -17,14 +17,16 @@ to alter the way Subnet runs, for various business or operational needs. These u
 the purview of your team, and you have complete control over the timing of their roll out. Any such
 change represents a **network upgrade** and needs to be carefully planned and executed.
 
-:::warning NETWORK UPGRADES PERMANENTLY CHANGE THE RULES OF YOUR SUBNET.
+:::warning 
+NETWORK UPGRADES PERMANENTLY CHANGE THE RULES OF YOUR SUBNET.
 
 Procedural mistakes or a botched upgrade can halt your Subnet or lead to data loss!
 
 When performing a Subnet upgrade, every single validator on the Subnet will need to perform the
 identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to
 every Subnet validator so that they have time to perform the upgrade prior to activation. Make sure
-you have direct line of communication to all your validators! :::
+you have direct line of communication to all your validators! 
+:::
 
 This tutorial will guide you through the process of doing various Subnet upgrades and changes. We
 will point out things to watch out for and precautions you need to be mindful about.
