@@ -1,6 +1,6 @@
 # How to Import a Subnet from a Public Network to `Avalanche-CLI`
 
-## What is the Context of this How-To?
+## What Is the Context of This How-To?
 
 The most probable reason why someone would want to do this, 
 is if they already deployed a Subnet with `subnet-cli` either to `Fuji` or `Mainnet`, 
@@ -12,7 +12,7 @@ Similarly, a Subnet might have been created "manually" by issuing transactions
 to node APIs (either a local node or public API nodes) with no help of any tool so far,
 but would now require `Avalanche-CLI` integration.
 
-For this How-To, we will import the `wagmi` subnet from `Fuji`.
+For this How-To, we will import the `wagmi` Subnet from `Fuji`.
 
 
 ## Requirements:
@@ -68,7 +68,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ No
 ```
 
-### Nodes are Already Validating this Subnet
+### Nodes are Already Validating This Subnet
 
 If they have been, it will attempt to query such a node for detailed data like the VM version. 
 This will allow to skip having to query github (or wherever the VM's repository is hosted) 
@@ -100,17 +100,17 @@ We can't know for sure what Subnet VM versions are the validators running though
 so we need to prompt later.
 So, we select `No` when the tool asks for deployed nodes:
 
-Thus, at this point the wizard requests the Subnet's ID. Without it it can not know 
+Thus, at this point the wizard requests the Subnet's ID, without which it can not know 
 what to import (remember the ID is different on different networks).
 
-From the [Testnet Subnet Explorer | https://subnets-test.avax.network/wagmi] 
+From the [Testnet Subnet Explorer](https://subnets-test.avax.network/wagmi)
 we gather that `wagmi`'s Subnet ID is `28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY`:
 
 ```shell
 ✔ What is the ID of the subnet?: 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY
 ```
 
-(notice the checkmark at line start, it signals that the ID is validated in its formar).
+(notice the checkmark at line start, it signals that the ID is validated in its formatting).
 
 If we hit `enter` now, the public APIs for the given network will be queried, and if successful, 
 the tool prints some information about the Subnet, and proceeds to ask about the Subnet's type:
