@@ -2,11 +2,18 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](../subnets/network-runner.md) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+Fuji is the Avalanche network's test network. You can use it to test your dapp
+or smart contract after you've developed it locally. (You can use [Avalanche
+Network Runner](../subnets/network-runner.md) to test things locally.) Fuji is
+typically on the same version as the Avalanche Mainnet, but sometimes it is
+running an unreleased version of AvalancheGo. In general, you can expect Fuji's
+behavior to be about the same as Avalanche Mainnet. Tools such as a explorers
+and wallets should work with the Fuji Testnet.
 
-In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
+In this tutorial, we’ll go through an example Fuji workflow to show how it can
+be used. We'll do the following:
 
-1. Set up Fuji network on Metamask (optional)
+1. Set up Fuji network on MetaMask (optional)
 2. Generate a 24 word english mnemonic via AvalancheJS
 3. Derive external C-Chain addresses via AvalancheJS
 4. Get AVAX from the Fuji faucet
@@ -14,9 +21,9 @@ In this tutorial, we’ll go through an example Fuji workflow to show how it can
 6. Examine the resulting transaction on the Avalanche Explorer
 7. Use a private key derived from a mnemonic to sign into the web wallet
 
-## Set up Fuji Network on Metamask (optional)
+## Set up Fuji Network on MetaMask (optional)
 
-- **Network Name**: Avalanche FUJI C-Chain
+- **Network Name**: Avalanche Fuji C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - **ChainID**: `43113`
 - **Symbol**: `AVAX`
@@ -24,9 +31,15 @@ In this tutorial, we’ll go through an example Fuji workflow to show how it can
 
 ## Generate a Mnemonic
 
-To begin, we'll create a mnemonic phrase with [AvalancheJS](../apis/avalanchejs/README.md). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portuguese, Chinese Simplified and Chinese Traditional.
+To begin, we'll create a mnemonic phrase with
+[AvalancheJS](../apis/avalanchejs/README.md). Mnemonics enable us to encode
+strong security into a human-readable phrase. AvalancheJS supports 10 languages
+including English, Japanese, Spanish, Italian, French, Korean, Czech,
+Portuguese, Chinese Simplified and Chinese Traditional.
 
-First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
+First, generate a 24 word english
+[BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant
+mnemonic via AvalancheJS.
 
 ```typescript
 import { Mnemonic } from "avalanche"
@@ -40,7 +53,9 @@ console.log(m)
 
 ## Derive Addresses
 
-After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) keypairs.
+After generating a mnemonic we can use AvalancheJS to derive
+[BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant
+hierarchical deterministic (HD) Keypairs.
 
 ```typescript
 import HDNode from "avalanche/dist/utils/hdnode"
@@ -79,9 +94,10 @@ console.log(cAddresses)
 // ]
 ```
 
-#### Generate private keys from a mnemonic
+### Generate Private Keys from a Mnemonic
 
-As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
+As long as you have the mnemonic phrase, you can re-generate your private keys
+and the addresses they control.
 
 For example, if you want to generate the private keys for the first 3 address in the C Chain keychain:
 
@@ -120,17 +136,24 @@ console.log({ cAddresses, privateKeys })
 
 ## Get a Drip from the Fuji Faucet
 
-We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the [Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji Testnet and have no monetary value.
+We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the
+[Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji
+Testnet and have no monetary value.
 
 ![Requesting AVAX](/img/faucet-fuji-wf-alt.png)
 
-The faucet will send some AVAX to the address and return a transaction ID (txID). This txID can be used with the Fuji Testnet Explorer to learn more about the transaction.
+The faucet will send some AVAX to the address and return a transaction ID
+(txID). This txID can be used with the Fuji Testnet Explorer to learn more about
+the transaction.
 
 ![Receiving AVAX](/img/faucet-fuji-wf-alt-receipt.png)
 
 ### Check the Transaction Details
 
-The txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, can be seen on the [Fuji Testnet Explorer](https://testnet.snowtrace.io/tx/0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e). Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
+The txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`,
+can be seen on the [Fuji Testnet
+Explorer](https://testnet.snowtrace.io/tx/0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e).
+Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
 
 ![Transaction details](/img/faucet-fuji-wf-alt-tx1.png)
 
@@ -162,7 +185,8 @@ main()
 
 ## Sending AVAX
 
-The faucet sent 2 AVAX to the first address we generated. Let's send AVAX from the 1st address to the 2nd address.
+The faucet sent 2 AVAX to the first address we generated. Let's send AVAX from
+the 1st address to the 2nd address.
 
 ```typescript
 // import ethers.js
@@ -197,7 +221,10 @@ wallet.sendTransaction(tx).then((txObj) => {
 
 ### Verify Success
 
-We can verify that the transaction, `0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, was successful using the Fuji Testnet Explorer. The transaction can be seen [here](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
+We can verify that the transaction,
+`0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, was
+successful using the Fuji Testnet Explorer. The transaction can be seen
+[here](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
 
 ![Transaction details](/img/fuji-wf-alt-tx-2.png)
 
@@ -225,9 +252,12 @@ const main = async (): Promise<any> => {
 main()
 ```
 
-### Sign into the Web Wallet
+### Sign Into the Web Wallet
 
-Lastly, we can [use the mnemonic to generate a private key](#generate-private-keys-from-a-mnemonic) to access the [Avalanche Web Wallet](https://wallet.avax.network). We'll see that it has the AVAX balance and that it derives the hexadecimal address from the private key.
+Lastly, we can [use the mnemonic to generate a private
+key](#generate-private-keys-from-a-mnemonic) to access the [Avalanche Web
+Wallet](https://wallet.avax.network). We'll see that it has the AVAX balance and
+that it derives the hexadecimal address from the private key.
 
 Use the private key to access the Web Wallet.
 
@@ -237,14 +267,20 @@ The balance is correct and the address is the 1st derived address.
 
 ![Web wallet balance](/img/fuji-wf-wallet-alt-info.png) ![3rd derived BIP44 address](/img/fuji-wf-alt-wallet-address.png)
 
-We can repeat this login process using the private keys from the remaining 2 addresses in the [script above](#generate-private-keys-from-a-mnemonic).
+We can repeat this login process using the private keys from the remaining 2
+addresses in the [script above](#generate-private-keys-from-a-mnemonic).
 
-![Wallet derived addresses](/img/fuji-wf-alt-wallet-address-2.png) ![Wallet derived addresses2](/img/fuji-wf-alt-wallet-address-3.png)  
+![Wallet derived addresses](/img/fuji-wf-alt-wallet-address-2.png) 
+![Wallet derived addresses2](/img/fuji-wf-alt-wallet-address-3.png)  
 ![Wallet derived addresses3](/img/fuji-wf-alt-wallet-addresses.png)
 
 ## Summary
 
-The Fuji Testnet plays a critical role in testing and QAing dapps, smart contracts and financial products before deploying to the Mainnet. Tooling like AvalancheJS, the public API, faucet, and explorer helps to ensure that your testing and QA environment is close to Mainnet so that you can be confident when you launch on Mainnet.
+The Fuji Testnet plays a critical role in testing dapps, smart
+contracts and financial products before deploying to the Mainnet. Tooling like
+AvalancheJS, the public API, faucet, and explorer helps to ensure that your
+testing and QA environment is close to Mainnet so that you can be confident when
+you launch on Mainnet.
 
 ## Resources
 
@@ -252,15 +288,20 @@ For additional and valuable resources please see below.
 
 ### Faucet
 
-The [Fuji Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain addresses to help you test. (This testnet Avax has no value.)
+The [Fuji Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain
+addresses to help you test. (This testnet Avax has no value.)
 
 ### Wallet
 
-The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure, non-custodial wallet for storing Avalanche assets. It supports Mainnet, Fuji and custom networks.
+The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure,
+non-custodial wallet for storing Avalanche assets. It supports Mainnet, Fuji and
+custom networks.
 
 ### Explorer
 
-The Avalanche Explorer allows you to explore the network on [Mainnet](https://explorer.avax.network) and [Fuji](https://explorer.avax-test.network).
+The Avalanche Explorer allows you to explore the network on
+[Mainnet](https://explorer.avax.network) and
+[Fuji](https://explorer.avax-test.network).
 
 ### Public API
 
@@ -268,4 +309,6 @@ See [here.](../apis/avalanchego/public-api-server.md)
 
 ### AvalancheJS Examples
 
-There are over [60 example AvalancheJS scripts](https://github.com/ava-labs/avalanchejs/tree/master/examples) which demonstrate how to assets and NFTs, send transactions, add validators and more.
+There are over [60 example AvalancheJS
+scripts](https://github.com/ava-labs/avalanchejs/tree/master/examples) which
+demonstrate how to assets and NFTs, send transactions, add validators and more.

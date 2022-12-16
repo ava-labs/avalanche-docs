@@ -1,10 +1,15 @@
 # AVM Transaction Format
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine (AVM). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+This file is meant to be the single source of truth for how we serialize
+transactions in the Avalanche Virtual Machine (AVM). This document uses the
+[primitive serialization](serialization-primitives.md) format for packing and
+[secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic
+user identification.
 
 ## Codec ID
 
-Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
+Some data is prepended with a codec ID (unt16) that denotes how the data should
+be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
 ## Transferable Output
 
@@ -15,7 +20,13 @@ Transferable outputs wrap an output with an asset ID.
 A transferable output contains an `AssetID` and an [`Output`](avm-transaction-serialization.md#outputs).
 
 - **`AssetID`** is a 32-byte array that defines which asset this output references.
-- **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). Outputs have four possible types: [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
+- **`Output`** is an output, as defined
+  [below](avm-transaction-serialization.md#outputs). Outputs have four possible
+  types:
+  [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output),
+  [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output),
+  [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output)
+  and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
 
 ### Gantt Transferable Output Specification
 
@@ -78,8 +89,10 @@ Transferable inputs describe a specific UTXO with a provided transfer input.
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-- **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-- **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
+- **`TxID`** is a 32-byte array that defines which transaction this input is
+  consuming an output from. Transaction IDs are calculated by taking sha256 of
+  the bytes of the signed transaction.
+- **`UTXOIndex`** is an int that defines which UTXO this input is consuming in the specified transaction.
 - **`AssetID`** is a 32-byte array that defines which asset this input references.
 - **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](avm-transaction-serialization.md#secp256k1-transfer-input)
 
@@ -149,14 +162,16 @@ Let’s make a transferable input:
 
 ## Transferable Op
 
-Transferable operations describe a set of UTXOs with a provided transfer operation. Only one Asset ID is able to be referenced per operation.
+Transferable operations describe a set of UTXOs with a provided transfer
+operation. Only one Asset ID is able to be referenced per operation.
 
 ### What Transferable Op Contains
 
 A transferable operation contains an `AssetID`, `UTXOIDs`, and a `TransferOp`.
 
 - **`AssetID`** is a 32-byte array that defines which asset this operation changes.
-- **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
+- **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be
+  sorted in lexicographical order.
 - **`TransferOp`** is a [transferable operation object](avm-transaction-serialization.md#operations).
 
 ### Gantt Transferable Op Specification
@@ -242,20 +257,30 @@ Let’s make a transferable operation:
 
 ## Outputs
 
-Outputs have four possible types: [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
+Outputs have four possible types:
+[`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output),
+[`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output),
+[`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and
+[`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
 
 ## SECP256K1 Mint Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is
+an output that is owned by a collection of addresses.
 
 ### What SECP256K1 Mint Output Contains
 
 A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
 
 - **`TypeID`** is the ID for this output type. It is `0x00000006`.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt SECP256K1 Mint Output Specification
 
@@ -328,7 +353,9 @@ Let’s make a SECP256K1 mint output with:
 
 ## SECP256K1 Transfer Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output
+allows for sending a quantity of an asset to a collection of addresses after a
+specified Unix time.
 
 ### What SECP256K1 Transfer Output Contains
 
@@ -336,9 +363,14 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
 
 - **`TypeID`** is the ID for this output type. It is `0x00000007`.
 - **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt SECP256K1 Transfer Output Specification
 
@@ -426,9 +458,14 @@ An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and 
 
 - **`TypeID`** is the ID for this output type. It is `0x0000000a`.
 - **`GroupID`** is an int that specifies the group this NFT is issued to.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt NFT Mint Output Specification
 
@@ -517,9 +554,14 @@ An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `T
 - **`TypeID`** is the ID for this output type. It is `0x0000000b`.
 - **`GroupID`** is an int that specifies the group this NFT was issued with.
 - **`Payload`** is an arbitrary string of bytes no long longer than 1024 bytes.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt NFT Transfer Output Specification
 
@@ -614,15 +656,21 @@ Inputs have one possible type: `SECP256K1TransferInput`.
 
 ## SECP256K1 Transfer Input
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input
+allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
 
 A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
 - **`TypeID`** is the ID for this input type. It is `0x00000005`.
-- **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-- **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+- **`Amount`** is a long that specifies the quantity that this input should be
+  consuming from the UTXO. Must be positive. Must be equal to the amount
+  specified in the UTXO.
+- **`AddressIndices`** is a list of unique ints that define the private keys
+  that are being used to spend the UTXO. Each UTXO has an array of addresses
+  that can spend the UTXO. Each int represents the index in this address array
+  that will sign this transaction. The array must be sorted low to high.
 
 ### Gantt SECP256K1 Transfer Input Specification
 
@@ -683,14 +731,21 @@ Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and
 
 ## SECP256K1 Mint Operation
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation
+consumes a SECP256K1 mint output, creates a new mint output and sends a transfer
+output to a new set of owners.
 
 ### What SECP256K1 Mint Operation Contains
 
 A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
 
 - **`TypeID`** is the ID for this output type. It is `0x00000008`.
-- **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the [UTXO](avm-transaction-serialization.md#utxo). Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+- **`AddressIndices`** is a list of unique ints that define the private keys
+  that are being used to spend the
+  [UTXO](avm-transaction-serialization.md#utxo). Each UTXO has an array of
+  addresses that can spend the UTXO. Each int represents the index in this
+  address array that will sign this transaction. The array must be sorted low to
+  high.
 - **`MintOutput`** is a [SECP256K1 Mint output](avm-transaction-serialization.md#secp256k1-mint-output).
 - **`TransferOutput`** is a [SECP256K1 Transfer output](avm-transaction-serialization.md#secp256k1-transfer-output).
 
@@ -782,10 +837,16 @@ An NFT mint operation consumes an NFT mint output and sends an unspent output to
 An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload`, and `Output` of addresses.
 
 - **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
-- **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+- **`AddressIndices`** is a list of unique ints that define the private keys
+  that are being used to spend the UTXO. Each UTXO has an array of addresses
+  that can spend the UTXO. Each int represents the index in this address array
+  that will sign this transaction. The array must be sorted low to high.
 - **`GroupID`** is an int that specifies the group this NFT is issued to.
 - **`Payload`** is an arbitrary string of bytes no longer than 1024 bytes.
-- **`Output`** is not a `TransferableOutput`, but rather is a locktime, threshold, and an array of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Output`** is not a `TransferableOutput`, but rather is a lock time,
+  threshold, and an array of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt NFT Mint Op Specification
 
@@ -891,8 +952,14 @@ An NFT transfer operation sends an unspent NFT transfer output to a new set of o
 An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `NFTTransferOutput`.
 
 - **`TypeID`** is the ID for this output type. It is `0x0000000d`.
-- **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-- **`NFTTransferOutput`** is the output of this operation and must be an [NFT Transfer Output](avm-transaction-serialization.md#nft-transfer-output). This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+- **`AddressIndices`** is a list of unique ints that define the private keys
+  that are being used to spend the UTXO. Each UTXO has an array of addresses
+  that can spend the UTXO. Each int represents the index in this address array
+  that will sign this transaction. The array must be sorted low to high.
+- **`NFTTransferOutput`** is the output of this operation and must be an [NFT
+  Transfer Output](avm-transaction-serialization.md#nft-transfer-output). This
+  output doesn’t have the **`TypeId`**, because the type is known by the context
+  of being in this operation.
 
 ### Gantt NFT Transfer Op Specification
 
@@ -999,14 +1066,19 @@ Let’s make an NFT transfer operation with:
 
 ## Initial State
 
-Initial state describes the initial state of an asset when it is created. It contains the ID of the feature extension that the asset uses, and a variable length array of outputs that denote the genesis UTXO set of the asset.
+Initial state describes the initial state of an asset when it is created. It
+contains the ID of the feature extension that the asset uses, and a variable
+length array of outputs that denote the genesis UTXO set of the asset.
 
 ### What Initial State Contains
 
 Initial state contains a `FxID` and an array of `Output`.
 
-- **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-- **`Outputs`** is a variable length array of [outputs](avm-transaction-serialization.md#outputs), as defined above.
+- **`FxID`** is an int that defines which feature extension this state is part
+  of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is
+  `0x00000001`.
+- **`Outputs`** is a variable length array of
+  [outputs](avm-transaction-serialization.md#outputs), as defined above.
 
 ### Gantt Initial State Specification
 
@@ -1064,16 +1136,20 @@ Let’s make an initial state:
 
 ## Credentials
 
-Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`.
+Each credential is paired with an Input or Operation. The order of the
+credentials match the order of the inputs or operations.
 
 ## SECP256K1 Credential
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential
+contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains
 
 - **`TypeID`** is the ID for this type. It is `0x00000009`.
-- **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+- **`Signatures`** is an array of 65-byte recoverable signatures. The order of
+  the signatures must match the input’s signature indices.
 
 ### Gantt SECP256K1 Credential Specification
 
@@ -1144,26 +1220,51 @@ Let’s make a payment input with:
 
 ## NFT Credential
 
-An NFT credential is the same as an [secp256k1 credential](avm-transaction-serialization.md#secp256k1-credential) with a different TypeID. The TypeID for an NFT credential is `0x0000000e`.
+An NFT credential is the same as an [secp256k1
+credential](avm-transaction-serialization.md#secp256k1-credential) with a
+different TypeID. The TypeID for an NFT credential is `0x0000000e`.
 
 ## Unsigned Transactions
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains), [`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains), [`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains), and [`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains). They all embed [`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), which contains common fields and operations.
+Unsigned transactions contain the full content of a transaction with only the
+signatures missing. Unsigned transactions have four possible types:
+[`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains),
+[`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains),
+[`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains),
+and
+[`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains).
+They all embed
+[`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), which
+contains common fields and operations.
 
 ## Unsigned BaseTx
 
-### What Base Tx Contains
+### What Base TX Contains
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
 
 - **`TypeID`** is the ID for this type. It is `0x00000000`.
-- **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-- **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-- **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-- **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+- **`NetworkID`** is an int that defines which network this transaction is meant
+  to be issued to. This value is meant to support transaction routing and is not
+  designed for replay attack prevention.
+- **`BlockchainID`** is a 32-byte array that defines which blockchain this
+  transaction was issued to. This is used for replay attack prevention for
+  transactions that could potentially be valid across network or blockchain.
+- **`Outputs`** is an array of [transferable output
+  objects](avm-transaction-serialization.md#transferable-output). Outputs must
+  be sorted lexicographically by their serialized representation. The total
+  quantity of the assets created in these outputs must be less than or equal to
+  the total quantity of each asset consumed in the inputs minus the transaction
+  fee.
+- **`Inputs`** is an array of [transferable input
+  objects](avm-transaction-serialization.md#transferable-input). Inputs must be
+  sorted and unique. Inputs are sorted first lexicographically by their
+  **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are
+  inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction
+  is invalid as this would result in a double spend.
 - **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
 
-### Gantt Base Tx Specification
+### Gantt Base TX Specification
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1183,7 +1284,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Proto Base TX Specification
 
 ```text
 message BaseTx {
@@ -1196,9 +1297,9 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Base TX Example
 
-Let’s make an base tx that uses the inputs and outputs from the previous examples:
+Let’s make an base TX that uses the inputs and outputs from the previous examples:
 
 - **`TypeID`**: `0`
 - **`NetworkID`**: `4`
@@ -1273,17 +1374,30 @@ Let’s make an base tx that uses the inputs and outputs from the previous examp
 
 ## Unsigned CreateAssetTx
 
-### What Unsigned Create Asset Tx Contains
+### What Unsigned Create Asset TX Contains
 
-An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
+An unsigned create asset TX contains a `BaseTx`, `Name`, `Symbol`,
+`Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
 
 - **`BaseTx`**
-- **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-- **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-- **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-- **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](avm-transaction-serialization.md#initial-state) of those feature extensions.
+- **`Name`** is a human readable string that defines the name of the asset this
+  transaction will create. The name is not guaranteed to be unique. The name
+  must consist of only printable ASCII characters and must be no longer than 128
+  characters.
+- **`Symbol`** is a human readable string that defines the symbol of the asset
+  this transaction will create. The symbol is not guaranteed to be unique. The
+  symbol must consist of only printable ASCII characters and must be no longer
+  than 4 characters.
+- **`Denomination`** is a byte that defines the divisibility of the asset this
+  transaction will create. For example, the AVAX token is divisible into
+  billionths. Therefore, the denomination of the AVAX token is 9. The
+  denomination must be no more than 32.
+- **`InitialStates`** is a variable length array that defines the feature
+  extensions this asset supports, and the [initial
+  state](avm-transaction-serialization.md#initial-state) of those feature
+  extensions.
 
-### Gantt Unsigned Create Asset Tx Specification
+### Gantt Unsigned Create Asset TX Specification
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1302,7 +1416,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### Proto Unsigned Create Asset TX Specification
 
 ```text
 message CreateAssetTx {
@@ -1314,9 +1428,9 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### Unsigned Create Asset TX Example
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned base TX that uses the inputs and outputs from the previous examples:
 
 - `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
 - `Name`: `Volatility Index`
@@ -1398,14 +1512,14 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 
 ## Unsigned OperationTx
 
-### What Unsigned Operation Tx Contains
+### What Unsigned Operation TX Contains
 
-An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
+An unsigned operation TX contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 - **`BaseTx`**
 - **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-op).
 
-### Gantt Unsigned Operation Tx Specification
+### Gantt Unsigned Operation TX Specification
 
 ```text
 +---------+------------------+-------------------------------------+
@@ -1417,7 +1531,7 @@ An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this t
                              +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### Proto Unsigned Operation TX Specification
 
 ```text
 message OperationTx {
@@ -1426,9 +1540,9 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### Unsigned Operation TX Example
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned operation TX that uses the inputs and outputs from the previous examples:
 
 - `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
 - **`Ops`**: \[`"Example Transferable Op as defined above"`\]
@@ -1502,15 +1616,15 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
 
 ## Unsigned ImportTx
 
-### What Unsigned Import Tx Contains
+### What Unsigned Import TX Contains
 
-An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
+An unsigned import TX contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
 
 - **`BaseTx`**
 - **`SourceChain`** is a 32-byte source blockchain ID.
 - **`Ins`** is a variable length array of [Transferable Inputs](avm-transaction-serialization.md#transferable-input).
 
-### Gantt Unsigned Import Tx Specification
+### Gantt Unsigned Import TX Specification
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1524,7 +1638,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Proto Unsigned Import TX Specification
 
 ```text
 message ImportTx {
@@ -1534,9 +1648,9 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Unsigned Import TX Example
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Let’s make an unsigned import TX that uses the inputs from the previous examples:
 
 - `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `3`
 - `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1613,14 +1727,15 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 
 ## Unsigned ExportTx
 
-### What Unsigned Export Tx Contains
+### What Unsigned Export TX Contains
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
+An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
+`TypeID` for this type is `0x00000004`.
 
 - **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
 - **`Outs`** is a variable length array of [Transferable Outputs](avm-transaction-serialization.md#transferable-output).
 
-### Gantt Unsigned Export Tx Specification
+### Gantt Unsigned Export TX Specification
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1634,7 +1749,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Proto Unsigned Export TX Specification
 
 ```text
 message ExportTx {
@@ -1644,9 +1759,9 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### Unsigned Export TX Example
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Let’s make an unsigned export TX that uses the outputs from the previous examples:
 
 - `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `4`
 - `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1730,7 +1845,9 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
 
 - **`CodecID`** The only current valid codec id is `00 00`.
 - **`UnsignedTx`** is an unsigned transaction, as described above.
-- **`Credentials`** is an array of [credentials](avm-transaction-serialization.md#credentials). Each credential will be paired with the input in the same index at this credential.
+- **`Credentials`** is an array of
+  [credentials](avm-transaction-serialization.md#credentials). Each credential
+  will be paired with the input in the same index at this credential.
 
 ### Gantt Signed Transaction Specification
 
@@ -1758,7 +1875,8 @@ message Tx {
 
 ### Signed Transaction Example
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous examples.
+Let’s make a signed transaction that uses the unsigned transaction and
+credentials from the previous examples.
 
 - **`CodecID`**: `0`
 - **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
@@ -1840,10 +1958,18 @@ A UTXO is a standalone representation of a transaction output.
 A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
 
 - **`CodecID`** The only valid `CodecID` is `00 00`
-- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-- **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-- **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-- **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above. Valid output types are [SECP Mint Output](avm-transaction-serialization.md#secp256k1-mint-output), [SECP Transfer Output](avm-transaction-serialization.md#secp256k1-transfer-output), [NFT Mint Output](avm-transaction-serialization.md#nft-mint-output), [NFT Transfer Output](avm-transaction-serialization.md#nft-transfer-output).
+- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by
+  taking sha256 of the bytes of the signed transaction.
+- **`UTXOIndex`** is an int that specifies which output in the transaction
+  specified by **`TxID`** that this UTXO was created by.
+- **`AssetID`** is a 32-byte array that defines which asset this UTXO
+  references.
+- **`Output`** is the output object that created this UTXO. The serialization of
+  Outputs was defined above. Valid output types are [SECP Mint
+  Output](avm-transaction-serialization.md#secp256k1-mint-output), [SECP
+  Transfer Output](avm-transaction-serialization.md#secp256k1-transfer-output),
+  [NFT Mint Output](avm-transaction-serialization.md#nft-mint-output), [NFT
+  Transfer Output](avm-transaction-serialization.md#nft-transfer-output).
 
 ### Gantt UTXO Specification
 
@@ -2056,18 +2182,46 @@ An asset to be issued in an instance of the AVM's Genesis
 
 ### What GenesisAsset Contains
 
-An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, `Memo`, `Name`, `Symbol`, `Denomination`, and `InitialStates`.
+An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`,
+`Outputs`, `Inputs`, `Memo`, `Name`, `Symbol`, `Denomination`, and
+`InitialStates`.
 
 - **`Alias`** is the alias for this asset.
-- **`NetworkID`** defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-- **`BlockchainID`** is the ID (32-byte array) that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-- **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-- **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+- **`NetworkID`** defines which network this transaction is meant to be issued
+  to. This value is meant to support transaction routing and is not designed for
+  replay attack prevention.
+- **`BlockchainID`** is the ID (32-byte array) that defines which blockchain
+  this transaction was issued to. This is used for replay attack prevention for
+  transactions that could potentially be valid across network or blockchain.
+- **`Outputs`** is an array of [transferable output
+  objects](avm-transaction-serialization.md#transferable-output). Outputs must
+  be sorted lexicographically by their serialized representation. The total
+  quantity of the assets created in these outputs must be less than or equal to
+  the total quantity of each asset consumed in the inputs minus the transaction
+  fee.
+- **`Inputs`** is an array of [transferable input
+  objects](avm-transaction-serialization.md#transferable-input). Inputs must be
+  sorted and unique. Inputs are sorted first lexicographically by their
+  **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are
+  inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction
+  is invalid as this would result in a double spend.
 - **`Memo`** is a memo field that contains arbitrary bytes, up to 256 bytes.
-- **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-- **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-- **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-- **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](avm-transaction-serialization.md#initial-state) of those feature extensions.
+- **`Name`** is a human readable string that defines the name of the asset this
+  transaction will create. The name is not guaranteed to be unique. The name
+  must consist of only printable ASCII characters and must be no longer than 128
+  characters.
+- **`Symbol`** is a human readable string that defines the symbol of the asset
+  this transaction will create. The symbol is not guaranteed to be unique. The
+  symbol must consist of only printable ASCII characters and must be no longer
+  than 4 characters.
+- **`Denomination`** is a byte that defines the divisibility of the asset this
+  transaction will create. For example, the AVAX token is divisible into
+  billionths. Therefore, the denomination of the AVAX token is 9. The
+  denomination must be no more than 32.
+- **`InitialStates`** is a variable length array that defines the feature
+  extensions this asset supports, and the [initial
+  state](avm-transaction-serialization.md#initial-state) of those feature
+  extensions.
 
 ### Gantt GenesisAsset Specification
 
@@ -2198,7 +2352,8 @@ A vertex is a collection of transactions. It's the DAG equivalent of a block in 
 
 ### What Vertex Contains
 
-A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TransactionSize`, `Transactions`, and `Restrictions`.
+A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`,
+`TransactionCount`, `TransactionSize`, `Transactions`, and `Restrictions`.
 
 - **`ChainID`** is the ID of the chain this vertex exists on.
 - **`Height`** is the maximum height of a parent vertex plus 1.
@@ -2207,7 +2362,8 @@ A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount
 - **`TransactionCount`** is the total number of transactions in this vertex.
 - **`TransactionSize`** is the total size of the transactions in this vertex.
 - **`Transactions`** are the transactions in this vertex.
-- **`Restrictions`** are IDs of transactions that must be accepted in the same epoch as this vertex or an earlier one.
+- **`Restrictions`** are IDs of transactions that must be accepted in the same
+  epoch as this vertex or an earlier one.
 
 ### Gantt Vertex Specification
 

@@ -5,23 +5,29 @@ sidebar_position: 5
 
 # Exchange Chain (X-Chain) API
 
-The [X-Chain](../../../overview/getting-started/avalanche-platform.md#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine (AVM). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+The [X-Chain](../../../overview/getting-started/avalanche-platform.md#exchange-chain-x-chain),
+Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual
+Machine (AVM). This API allows clients to create and trade assets on the X-Chain and other instances
+of the AVM.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
+[here](issuing-api-calls.md).
 
 ## Endpoints
 
 `/ext/bc/X` to interact with the X-Chain.
 
-`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
+`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a
+blockchain running the AVM.
 
 ## Methods
 
-### avm.buildGenesis
+### `avm.buildGenesis`
 
-Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation
+of that state.
 
 #### **Endpoint**
 
@@ -29,9 +35,10 @@ This call is made to the AVM’s static API endpoint:
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix (ie. X-) in calls to the static API endpoint because these prefixes refer to a specific chain.
+Note: addresses should not include a chain prefix (that is `X-`) in calls to the static API endpoint
+because these prefixes refer to a specific chain.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.buildGenesis({
@@ -44,7 +51,8 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can only be `hex` when a value is provided.
+Encoding specifies the encoding format to use for arbitrary bytes, that is the genesis bytes that are
+returned. Can only be `hex` when a value is provided.
 
 `genesisData` has this form:
 
@@ -98,7 +106,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -161,7 +169,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -174,7 +182,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createAddress
+### `avm.createAddress`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -182,7 +190,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Create a new address controlled by the given user.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.createAddress({
@@ -191,7 +199,7 @@ avm.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -205,7 +213,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -217,15 +225,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createFixedCapAsset
+### `avm.createFixedCapAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no
+more is ever created. The asset can be sent with `avm.send`.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.createFixedCapAsset({
@@ -248,15 +257,22 @@ avm.createFixedCapAsset({
 ```
 
 - `name` is a human-readable name for the asset. Not necessarily unique.
-- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-- `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique.
+  May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If
+  `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100
+  units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are
+  displayed as 1.00, etc. Defaults to 0.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` and `password` denote the user paying the transaction fee.
-- Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+- Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at
+  genesis.
 - `assetID` is the ID of the new asset.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -284,7 +300,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -297,15 +313,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mint
+### `avm.mint`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
+Mint units of a variable-cap asset created with
+[`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.mint({
@@ -324,13 +341,17 @@ avm.mint({
 ```
 
 - `amount` units of `assetID` will be created and controlled by address `to`.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it
+  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
+  of the minter sets.
 - `txID` is this transaction’s ID.
 - `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -349,7 +370,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -362,15 +383,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createVariableCapAsset
+### `avm.createVariableCapAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters
+can mint units of this asset using `avm.mint`.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.createVariableCapAsset({
@@ -393,16 +415,23 @@ avm.createVariableCapAsset({
 ```
 
 - `name` is a human-readable name for the asset. Not necessarily unique.
-- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique.
+  May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If
+  denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units
+  of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as
+  .100, etc.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters`
+  may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` pays the transaction fee.
 - `assetID` is the ID of the new asset.
 - `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -436,7 +465,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -449,15 +478,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createNFTAsset
+### `avm.createNFTAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint
+units of this asset using `avm.mintNFT`.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.createNFTAsset({
@@ -479,15 +509,19 @@ avm.createNFTAsset({
 ```
 
 - `name` is a human-readable name for the asset. Not necessarily unique.
-- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique.
+  May be omitted.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters`
+  may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - `username` pays the transaction fee.
 - `assetID` is the ID of the new asset.
 - `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -513,7 +547,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -526,15 +560,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mintNFT
+### `avm.mintNFT`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
+Mint non-fungible tokens which were created with
+[`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.mintNFT({
@@ -554,15 +589,21 @@ avm.mintNFT({
 ```
 
 - `assetID` is the assetID of the newly created NFT asset.
-- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the
+  `encoding` argument.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it
+  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
+  of the minter sets.
 - `txID` is this transaction’s ID.
 - `changeAddr` in the result is the address where any change was sent.
-- `encoding` is the encoding format to use for the payload argument. Can only be `hex` when a value is provided.
+- `encoding` is the encoding format to use for the payload argument. Can only be `hex` when a value
+  is provided.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -581,7 +622,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -594,17 +635,17 @@ curl -X POST --data '{
 }
 ```
 
-### avm.export
+### `avm.export`
 
-:::warning
+:::
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method,
-you must call the [C-Chain's `avax.import`](c-chain.md#avaximport) or the
-[P-Chain's `platform.importAVAX`](p-chain.md#platformimportavax) to complete the transfer.
+Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call
+the [C-Chain's `avax.import`](c-chain.md#avaximport) or the [P-Chain's
+`platform.importAVAX`](p-chain.md#platformimportavax) to complete the transfer.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.export({
@@ -625,15 +666,17 @@ avm.export({
 - `to` is the P-Chain or C-Chain address the asset is sent to.
 - `amount` is the amount of the asset to send.
 - `assetID` is the asset id of the asset which is sent. Use `AVAX` for AVAX exports.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - The asset is sent from addresses controlled by `username`
 - `password` is `username`‘s password.
 
 - `txID` is this transaction’s ID.
 - `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -652,7 +695,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -665,16 +708,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportKey
+### `avm.exportKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Get the private key that controls a given address.
-The returned private key can be added to a user with [`avm.importKey`](x-chain.md#avmimportkey).
+Get the private key that controls a given address. The returned private key can be added to a user
+with [`avm.importKey`](x-chain.md#avmimportkey).
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.exportKey({
@@ -687,7 +730,7 @@ avm.exportKey({
 - `username` must control `address`.
 - `privateKey` is the string representation of the private key that controls `address`.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -702,7 +745,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -714,11 +757,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAllBalances
+### `avm.getAllBalances`
 
 Get the balances of all assets controlled by a given address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getAllBalances({address:string}) -> {
@@ -729,7 +772,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -742,7 +785,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -763,11 +806,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAssetDescription
+### `avm.getAssetDescription`
 
 Get information about an asset.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getAssetDescription({assetID: string}) -> {
@@ -781,9 +824,12 @@ avm.getAssetDescription({assetID: string}) -> {
 - `assetID` is the id of the asset for which the information is requested.
 - `name` is the asset’s human-readable, not necessarily unique name.
 - `symbol` is the asset’s symbol.
-- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If
+  denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units
+  of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as
+  .100, etc.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -796,7 +842,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -811,11 +857,11 @@ curl -X POST --data '{
 }`
 ```
 
-### avm.getBalance
+### `avm.getBalance`
 
 Get the balance of an asset controlled by a given address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getBalance({
@@ -827,7 +873,7 @@ avm.getBalance({
 - `address` owner of the asset
 - `assetID` id of the asset for which the balance is requested
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -841,7 +887,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -859,9 +905,10 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAddressTxs
+### `avm.getAddressTxs`
 
-Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
+Returns all transactions that change the balance of the given address. A transaction is said to
+change an address's balance if either is true:
 
 - A UTXO that the transaction consumes was at least partially owned by the address.
 - A UTXO that the transaction produces is at least partially owned by the address.
@@ -870,7 +917,7 @@ Returns all transactions that change the balance of the given address. A transac
 Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
 :::
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getAddressTxs({
@@ -884,18 +931,19 @@ avm.getAddressTxs({
 }
 ```
 
-**Request parameters**
+**Request Parameters:**
 
 - `address`: The address for which we're fetching related transactions
-- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
+- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an
+  alias for an asset.
 - `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
 
-**Response parameters**
+**Response Parameter:**
 
 - `txIDs`: List of transaction IDs that affected the balance of this address.
 - `cursor`: Page number or offset. Use this in request to get the next page.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -910,7 +958,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -923,11 +971,12 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getTx
+### `avm.getTx`
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either `"hex"` or `"json"`. Defaults to "hex".
+Returns the specified transaction. The `encoding` parameter sets the format of the returned
+transaction. Can be either `"hex"` or `"json"`. Defaults to `"hex"`.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getTx({
@@ -939,7 +988,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -953,7 +1002,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1010,18 +1059,26 @@ curl -X POST --data '{
 
 Where:
 
-- `credentials` is a list of this transaction's credentials. Each credential proves that this transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a list of signatures.
+- `credentials` is a list of this transaction's credentials. Each credential proves that this
+  transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a
+  list of signatures.
 - `unsignedTx` is the non-signature portion of the transaction.
 - `networkID` is the ID of the network this transaction happened on. (Avalanche Mainnet is `1`.)
-- `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
-- Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to another chain.
-- Each element of `inputs` is an input of this transaction which has not been imported from another chain.
-- Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the blockchain ID that assets are being imported from, and the inputs that are being imported.
-- Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
+- `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet
+  X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
+- Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to
+  another chain.
+- Each element of `inputs` is an input of this transaction which has not been imported from another
+  chain.
+- Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the
+  blockchain ID that assets are being imported from, and the inputs that are being imported.
+- Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify
+  the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
 
 An output contains:
 
-- `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
+- `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is
+  `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
 - `fxID`: The ID of the FX this output uses.
 - `output`: The FX-specific contents of this output.
 
@@ -1040,13 +1097,14 @@ Most outputs use the secp256k1 FX, look like this:
 }
 ```
 
-The above output can be consumed after Unix time `locktime` by a transaction that has signatures from `threshold` of the addresses in `addresses`.
+The above output can be consumed after Unix time `locktime` by a transaction that has signatures
+from `threshold` of the addresses in `addresses`.
 
-### avm.getTxStatus
+### `avm.getTxStatus`
 
 Get the status of a transaction sent to the network.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getTxStatus({txID: string}) -> {status: string}
@@ -1059,7 +1117,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 - `Rejected`: The transaction will never be accepted by any node in the network
 - `Unknown`: The transaction hasn’t been seen by this node
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1072,7 +1130,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1084,11 +1142,12 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getUTXOs
+### `avm.getUTXOs`
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+Gets the UTXOs that reference a given address. If `sourceChain` is specified, then it will retrieve
+the atomic UTXOs exported from that chain to the X Chain.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.getUTXOs({
@@ -1114,15 +1173,20 @@ avm.getUTXOs({
 
 - `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
 - At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of
+  UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-- When using pagination (when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+- When using pagination (when `startIndex` is provided), UTXOs are not guaranteed to be unique
+  across multiple calls. That is, a UTXO may appear in the result of the first call, and then again
+  in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set
+  of the addresses may have changed between calls.
 - `encoding` sets the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
+Suppose we want all UTXOs that reference at least one of
+`X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
 ```sh
 curl -X POST --data '{
@@ -1161,7 +1225,8 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not
+fetched. We call the method again, this time with `startIndex`:
 
 ```sh
 curl -X POST --data '{
@@ -1203,9 +1268,12 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to
+call this method again.
 
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an
+ImportTx. Then we need to call GetUTXOs with the `sourceChain` argument in order to retrieve the
+atomic UTXOs:
 
 ```sh
 curl -X POST --data '{
@@ -1241,15 +1309,17 @@ This gives response:
 }
 ```
 
-### avm.import
+### `avm.import`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) or C-Chain’s [`avax.export`](c-chain.md#avaxexport) method to initiate the transfer.
+Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is
+called, you must call the P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) or
+C-Chain’s [`avax.export`](c-chain.md#avaxexport) method to initiate the transfer.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.import({
@@ -1260,12 +1330,14 @@ avm.import({
 }) -> {txID: string}
 ```
 
-- `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
+- `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the
+  corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
+- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds
+  from the C-Chain, use `"C"`.
 - `username` is the user that controls `to`.
 - `txID` is the ID of the newly created atomic transaction.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1281,7 +1353,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1293,7 +1365,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importKey
+### `avm.importKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1301,7 +1373,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.importKey({
@@ -1311,9 +1383,10 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now
+  controls with the private key.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1328,7 +1401,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1340,11 +1413,12 @@ curl -X POST --data '{
 }
 ```
 
-### avm.issueTx
+### `avm.issueTx`
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction.
+Can only be `hex` when a value is provided.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.issueTx({
@@ -1355,7 +1429,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1369,7 +1443,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1381,7 +1455,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.listAddresses
+### `avm.listAddresses`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1389,7 +1463,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 List addresses controlled by the given user.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.listAddresses({
@@ -1398,7 +1472,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1412,7 +1486,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1424,7 +1498,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.send
+### `avm.send`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1432,7 +1506,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Send a quantity of an asset to an address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.send({
@@ -1447,14 +1521,18 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the
+  smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
 - `to` is the X-Chain address the asset is sent to.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - You can attach a `memo`, whose length can be up to 256 bytes.
-- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to
+  hold at least the balance of the asset being sent.)
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1474,7 +1552,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1487,15 +1565,16 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendMultiple
+### `avm.sendMultiple`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned
+addresses.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.sendMultiple({
@@ -1514,11 +1593,14 @@ avm.sendMultiple({
 
 - `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
 - `memo` is an optional message, whose length can be up to 256 bytes.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to
+  hold at least the balance of the asset being sent.)
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1547,7 +1629,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1560,7 +1642,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendNFT
+### `avm.sendNFT`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1568,7 +1650,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Send a non-fungible token.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avm.sendNFT({
@@ -1583,12 +1665,16 @@ avm.sendNFT({
 ```
 
 - `assetID` is the asset ID of the NFT being sent.
-- `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
+- `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under
+  each NFT ID. You can issue multiple NFTs to each group.
 - `to` is the X-Chain address the NFT is sent to.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the NFT being sent.)
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is
+  sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to
+  hold at least the balance of the NFT being sent.)
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1607,7 +1693,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1620,15 +1706,16 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.issueTx
+### `wallet.issueTx`
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
+Send a signed transaction to the network and assume the TX will be accepted. `encoding` specifies
+the format of the signed transaction. Can only be `hex` when a value is provided.
 
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### Signature
+**Signature:**
 
 ```sh
 wallet.issueTx({
@@ -1639,7 +1726,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1653,7 +1740,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+**Example Response:**
 
 ```json
 {
@@ -1665,19 +1752,20 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.send
+### `wallet.send`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send a quantity of an asset to an address and assume the TX will be accepted so that future calls
+can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+**Signature:**
 
 ```sh
 wallet.send({
@@ -1692,14 +1780,18 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the
+  smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
 - `to` is the X-Chain address the asset is sent to.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - You can attach a `memo`, whose length can be up to 256 bytes.
-- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to
+  hold at least the balance of the asset being sent.)
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1719,7 +1811,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1732,19 +1824,20 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.sendMultiple
+### `wallet.sendMultiple`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of
+addresses and assume the TX will be accepted so that future calls can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+**Signature:**
 
 ```sh
 wallet.sendMultiple({
@@ -1762,12 +1855,15 @@ wallet.sendMultiple({
 ```
 
 - `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
 - You can attach a `memo`, whose length can be up to 256 bytes.
-- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to
+  hold at least the balance of the asset being sent.)
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -1796,7 +1892,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -1809,7 +1905,7 @@ curl -X POST --data '{
 }
 ```
 
-### events
+### Events
 
 Listen for transactions on a specified address.
 
@@ -1897,22 +1993,26 @@ func main() {
 }
 ```
 
-**Operations**
+**Operations:**
 
 | Command          | Description                  | Example                                                      | Arguments                                                                                                                          |
 | :--------------- | :--------------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| **NewSet**       | create a new address map set | {"newSet":{}}                                                |                                                                                                                                    |
-| **NewBloom**     | create a new bloom set.      | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
-| **AddAddresses** | add an address to the set    | {"addAddresses":{"addresses":\["X-fuji..."\]}}               | addresses - list of addresses to match                                                                                             |
+| **NewSet**       | create a new address map set | `{"newSet":{}}`                                                |                                                                                                                                    |
+| **NewBloom**     | create a new bloom set.      | `{"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}}` | `maxElements` - number of elements in filter must be &gt; 0 `collisionProb` - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set    | `{"addAddresses":{"addresses":\["X-fuji..."\]}}`               | addresses - list of addresses to match                                                                                             |
 
-Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
+Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**.
+**AddAddresses** can be called multiple times.
 
-**Set details**
+**Set details:**
 
-- **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
-- **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered. If the addresses is in the filter, you will be sent the transaction.
+- **NewSet** performs absolute address matches, if the address is in the set you will be sent the
+  transaction.
+- **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false
+  positives, but can allow a greater number of addresses to be filtered. If the addresses is in the
+  filter, you will be sent the transaction.
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}

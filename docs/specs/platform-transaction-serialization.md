@@ -1,10 +1,16 @@
 # Platform Transaction Format
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+This file is meant to be the single source of truth for how we serialize
+transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain`
+or `P-Chain`. This document uses the [primitive
+serialization](serialization-primitives.md) format for packing and
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic
+user identification.
 
 ## Codec ID
 
-Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
+Some data is prepended with a codec ID (unt16) that denotes how the data should
+be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
 ## Transferable Output
 
@@ -14,7 +20,8 @@ Transferable outputs wrap an output with an asset ID.
 
 A transferable output contains an `AssetID` and an `Output`.
 
-- **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
+- **`AssetID`** is a 32-byte array that defines which asset this output
+  references. The only valid `AssetID` is the AVAX `AssetID`.
 - **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
 
 ### Gantt Transferable Output Specification
@@ -77,7 +84,8 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
 - **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
 - **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-- **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
+- **`AssetID`** is a 32-byte array that defines which asset this input
+  references. The only valid `AssetID` is the AVAX `AssetID`.
 - **`Input`** is a transferable input object.
 
 ### Gantt Transferable Input Specification
@@ -150,7 +158,9 @@ Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwner
 
 ## SECP256K1 Transfer Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time. The only valid asset is AVAX.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output
+allows for sending a quantity of an asset to a collection of addresses after a
+specified Unix time. The only valid asset is AVAX.
 
 ### What SECP256K1 Transfer Output Contains
 
@@ -158,9 +168,14 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
 
 - **`TypeID`** is the ID for this output type. It is `0x00000007`.
 - **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt SECP256K1 Transfer Output Specification
 
@@ -234,16 +249,22 @@ Let’s make a secp256k1 transfer output with:
 
 ## SECP256K1 Output Owners Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will receive the staking rewards when the lock up period ends.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners
+output will receive the staking rewards when the lock up period ends.
 
 ### What SECP256K1 Output Owners Output Contains
 
 A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
 
 - **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt SECP256K1 Output Owners Output Specification
 
@@ -314,15 +335,21 @@ Inputs have one possible type: `SECP256K1TransferInput`.
 
 ## SECP256K1 Transfer Input
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input
+allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
 
 A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
 - **`TypeID`** is the ID for this output type. It is `0x00000005`.
-- **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-- **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+- **`Amount`** is a long that specifies the quantity that this input should be
+  consuming from the UTXO. Must be positive. Must be equal to the amount
+  specified in the UTXO.
+- **`AddressIndices`** is a list of unique ints that define the private keys are
+  being used to spend the UTXO. Each UTXO has an array of addresses that can
+  spend the UTXO. Each int represents the index in this address array that will
+  sign this transaction. The array must be sorted low to high.
 
 ### Gantt SECP256K1 Transfer Input Specification
 
@@ -377,22 +404,38 @@ Let’s make a payment input with:
 
 ## Unsigned Transactions
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
+Unsigned transactions contain the full content of a transaction with only the
+signatures missing. Unsigned transactions have six possible types:
+`AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`,
+`ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields
+and operations.
 
 ## Unsigned BaseTx
 
-### What Base Tx Contains
+### What Base TX Contains
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
 
 - **`TypeID`** is the ID for this type. It is `0x00000000`.
-- **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-- **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-- **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-- **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+- **`NetworkID`** is an int that defines which network this transaction is meant
+  to be issued to. This value is meant to support transaction routing and is not
+  designed for replay attack prevention.
+- **`BlockchainID`** is a 32-byte array that defines which blockchain this
+  transaction was issued to. This is used for replay attack prevention for
+  transactions that could potentially be valid across network or blockchain.
+- **`Outputs`** is an array of transferable output objects. Outputs must be
+  sorted lexicographically by their serialized representation. The total
+  quantity of the assets created in these outputs must be less than or equal to
+  the total quantity of each asset consumed in the inputs minus the transaction
+  fee.
+- **`Inputs`** is an array of transferable input objects. Inputs must be sorted
+  and unique. Inputs are sorted first lexicographically by their **`TxID`** and
+  then by the **`UTXOIndex`** from low to high. If there are inputs that have
+  the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as
+  this would result in a double spend.
 - **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
 
-### Gantt Base Tx Specification
+### Gantt Base TX Specification
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -412,7 +455,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Proto Base TX Specification
 
 ```text
 message BaseTx {
@@ -425,9 +468,9 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Base TX Example
 
-Let’s make a base tx that uses the inputs and outputs from the previous examples:
+Let’s make a base TX that uses the inputs and outputs from the previous examples:
 
 - **`TypeID`**: `0`
 - **`NetworkID`**: `12345`
@@ -493,11 +536,12 @@ Let’s make a base tx that uses the inputs and outputs from the previous exampl
 ]
 ```
 
-## Unsigned Add Validator Tx
+## Unsigned Add Validator TX
 
-### What Unsigned Add Validator Tx Contains
+### What Unsigned Add Validator TX Contains
 
-An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
+An unsigned add validator TX contains a `BaseTx`, `Validator`, `Stake`,
+`RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -506,11 +550,13 @@ An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `Rewards
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
 - **`Stake`** Stake has `LockedOuts`
-  - **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
+  - **`LockedOuts`** An array of Transferable Outputs that are locked for the
+    duration of the staking period. At the end of the staking period, these
+    outputs are refunded to their respective addresses.
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
 - **`Shares`** 10,000 times percentage of reward taken from delegators
 
-### Gantt Unsigned Add Validator Tx Specification
+### Gantt Unsigned Add Validator TX Specification
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -528,7 +574,7 @@ An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `Rewards
                   +--------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Validator Tx Specification
+### Proto Unsigned Add Validator TX Specification
 
 ```text
 message AddValidatorTx {
@@ -540,9 +586,9 @@ message AddValidatorTx {
 }
 ```
 
-### Unsigned Add Validator Tx Example
+### Unsigned Add Validator TX Example
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add validator TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -633,11 +679,12 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## Unsigned Add Subnet Validator TX
 
-### What Unsigned Add Subnet Validator Tx Contains
+### What Unsigned Add Subnet Validator TX Contains
 
-An unsigned add Subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
+`SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
@@ -646,9 +693,12 @@ An unsigned add Subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
 - **`SubnetID`** a 32 byte Subnet id
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
+  `SigIndices` is a list of unique ints that define the addresses signing the
+  control signature to add a validator to a Subnet. The array must be sorted low
+  to high.
 
-### Gantt Unsigned Add Subnet Validator Tx Specification
+### Gantt Unsigned Add Subnet Validator TX Specification
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -664,7 +714,7 @@ An unsigned add Subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
                                    +---------------------------------------------+
 ```
 
-### Proto Unsigned Add Subnet Validator Tx Specification
+### Proto Unsigned Add Subnet Validator TX Specification
 
 ```text
 message AddSubnetValidatorTx {
@@ -675,9 +725,9 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### Unsigned Add Subnet Validator Tx Example
+### Unsigned Add Subnet Validator TX Example
 
-Let’s make an unsigned add Subnet validator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add Subnet validator TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
 - **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -759,23 +809,27 @@ Let’s make an unsigned add Subnet validator tx that uses the inputs and output
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## Unsigned Add Delegator TX
 
-### What Unsigned Add Delegator Tx Contains
+### What Unsigned Add Delegator TX Contains
 
-An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
+An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and
+`RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
   - **`NodeID`** is 20 bytes which is the node ID of the delegatee.
   - **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  - **`EndTime`** is a long which is the Unix time when the delegator stops delegating (and staked AVAX is returned).
+  - **`EndTime`** is a long which is the Unix time when the delegator stops
+    delegating (and staked AVAX is returned).
   - **`Weight`** is a long which is the amount the delegator stakes
 - **`Stake`** Stake has `LockedOuts`
-  - **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
+  - **`LockedOuts`** An array of Transferable Outputs that are locked for the
+    duration of the staking period. At the end of the staking period, these
+    outputs are refunded to their respective addresses.
 - **`RewardsOwner`** An `SECP256K1OutputOwners`
 
-### Gantt Unsigned Add Delegator Tx Specification
+### Gantt Unsigned Add Delegator TX Specification
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -791,7 +845,7 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
                   +--------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Delegator Tx Specification
+### Proto Unsigned Add Delegator TX Specification
 
 ```text
 message AddDelegatorTx {
@@ -802,9 +856,9 @@ message AddDelegatorTx {
 }
 ```
 
-### Unsigned Add Delegator Tx Example
+### Unsigned Add Delegator TX Example
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add delegator TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
 - **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -888,11 +942,13 @@ Let’s make an unsigned add delegator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Create Chain Tx
+## Unsigned Create Chain TX
 
-### What Unsigned Create Chain Tx Contains
+### What Unsigned Create Chain TX Contains
 
-An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`, `FxIDs`, `GenesisData` and `SubnetAuth`. The `TypeID` for this type is `0x0000000f`.
+An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`,
+`VMID`, `FxIDs`, `GenesisData` and `SubnetAuth`. The `TypeID` for this type is
+`0x0000000f`.
 
 - **`BaseTx`**
 - **`SubnetID`** ID of the Subnet that validates this blockchain
@@ -902,7 +958,7 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 - **`GenesisData`** Byte representation of genesis state of the new chain
 - **`SubnetAuth`** Authorizes this blockchain to be added to this Subnet
 
-### Gantt Unsigned Create Chain Tx Specification
+### Gantt Unsigned Create Chain TX Specification
 
 ```text
 +--------------+-------------+------------------------------------------+
@@ -925,7 +981,7 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 +--------------+--------------------------------------------------------+
 ```
 
-### Proto Unsigned Create Chain Tx Specification
+### Proto Unsigned Create Chain TX Specification
 
 ```text
 message CreateChainTx {
@@ -939,9 +995,9 @@ message CreateChainTx {
 }
 ```
 
-### Unsigned Create Chain Tx Example
+### Unsigned Create Chain TX Example
 
-Let’s make an unsigned create chain tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned create chain TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0f"`
 - **`SubnetID`**: `24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1`
@@ -1045,16 +1101,16 @@ Let’s make an unsigned create chain tx that uses the inputs and outputs from t
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## Unsigned Create Subnet TX
 
-### What Unsigned Create Subnet Tx Contains
+### What Unsigned Create Subnet TX Contains
 
-An unsigned create Subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
 
 - **`BaseTx`**
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### Gantt Unsigned Create Subnet Tx Specification
+### Gantt Unsigned Create Subnet TX Specification
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -1066,7 +1122,7 @@ An unsigned create Subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### Proto Unsigned Create Subnet Tx Specification
+### Proto Unsigned Create Subnet TX Specification
 
 ```text
 message CreateSubnetTx {
@@ -1075,9 +1131,9 @@ message CreateSubnetTx {
 }
 ```
 
-### Unsigned Create Subnet Tx Example
+### Unsigned Create Subnet TX Example
 
-Let’s make an unsigned create Subnet tx that uses the inputs from the previous examples:
+Let’s make an unsigned create Subnet TX that uses the inputs from the previous examples:
 
 - **`BaseTx`**: "Example BaseTx as defined above but with TypeID set to 16"
 - **`RewardsOwner`**:
@@ -1132,17 +1188,17 @@ Let’s make an unsigned create Subnet tx that uses the inputs from the previous
 ]
 ```
 
-## Unsigned Import Tx
+## Unsigned Import TX
 
-### What Unsigned Import Tx Contains
+### What Unsigned Import TX Contains
 
-An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
+An unsigned import TX contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
 
 - **`BaseTx`**
 - **`SourceChain`** is a 32-byte source blockchain ID.
 - **`Ins`** is a variable length array of Transferable Inputs.
 
-### Gantt Unsigned Import Tx Specification
+### Gantt Unsigned Import TX Specification
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -1156,7 +1212,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
                             +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Proto Unsigned Import TX Specification
 
 ```text
 message ImportTx {
@@ -1166,9 +1222,9 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Unsigned Import TX Example
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Let’s make an unsigned import TX that uses the inputs from the previous examples:
 
 - **`BaseTx`**: "Example BaseTx as defined above with TypeID set to 17"
 - **`SourceChain`**:
@@ -1228,16 +1284,17 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 ]
 ```
 
-## Unsigned Export Tx
+## Unsigned Export TX
 
-### What Unsigned Export Tx Contains
+### What Unsigned Export TX Contains
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000012`.
+An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
+`TypeID` for this type is `0x00000012`.
 
 - **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
 - **`Outs`** is a variable length array of Transferable Outputs.
 
-### Gantt Unsigned Export Tx Specification
+### Gantt Unsigned Export TX Specification
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1251,7 +1308,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Proto Unsigned Export TX Specification
 
 ```text
 message ExportTx {
@@ -1261,9 +1318,9 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### Unsigned Export TX Example
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Let’s make an unsigned export TX that uses the outputs from the previous examples:
 
 - `BaseTx`: "Example BaseTx as defined above" with `TypeID` set to 18
 - `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1339,16 +1396,20 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 
 ## Credentials
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Credentials have one possible types: `SECP256K1Credential`. Each credential is
+paired with an Input or Operation. The order of the credentials match the order
+of the inputs or operations.
 
 ## SECP256K1 Credential
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential
+contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains
 
 - **`TypeID`** is the ID for this type. It is `0x00000009`.
-- **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+- **`Signatures`** is an array of 65-byte recoverable signatures. The order of
+  the signatures must match the input’s signature indices.
 
 ### Gantt SECP256K1 Credential Specification
 
@@ -1425,7 +1486,8 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
 
 - **`CodecID`** The only current valid codec id is `00 00`.
 - **`UnsignedTx`** is an unsigned transaction, as described above.
-- **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+- **`Credentials`** is an array of credentials. Each credential will be paired
+  with the input in the same index at this credential.
 
 ### Gantt Signed Transaction Specification
 
@@ -1535,10 +1597,14 @@ A UTXO is a standalone representation of a transaction output.
 A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
 
 - **`CodecID`** The only current valid codec id is `00 00`.
-- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-- **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-- **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-- **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by
+  taking sha256 of the bytes of the signed transaction.
+- **`UTXOIndex`** is an int that specifies which output in the transaction
+  specified by **`TxID`** that this utxo was created by.
+- **`AssetID`** is a 32-byte array that defines which asset this utxo
+  references.
+- **`Output`** is the output object that created this utxo. The serialization of
+  Outputs was defined above.
 
 #### Gantt UTXO Specification
 
@@ -1619,14 +1685,17 @@ Let’s make a UTXO from the signed transaction created above:
 
 ## StakeableLockIn
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its locktime has passed.
+A StakeableLockIn is a staked and locked input. The StakeableLockIn can only
+fund StakeableLockOuts with the same address until its lock time has passed.
 
 ### What StakeableLockIn Contains
 
 A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
 
 - **`TypeID`** is the ID for this output type. It is `0x00000015`.
-- **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
+- **`Locktime`** is a long that contains the Unix timestamp before which the
+  input can be consumed only to stake. The Unix timestamp is specific to the
+  second.
 - **`TransferableIn`** is a transferable input object.
 
 ### Gantt StakeableLockIn Specification
@@ -1693,14 +1762,16 @@ Let’s make a StakeableLockIn with:
 
 ## StakeableLockOut
 
-A StakeableLockOut is an output that is locked until its locktime, but can be staked in the meantime.
+A StakeableLockOut is an output that is locked until its lock time, but can be staked in the meantime.
 
 ### What StakeableLockOut Contains
 
 A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
 
 - **`TypeID`** is the ID for this output type. It is `0x00000016`.
-- **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
+- **`Locktime`** is a long that contains the Unix timestamp before which the
+  output can be consumed only to stake. The Unix timestamp is specific to the
+  second.
 - **`transferableout`**: "Example SECP256K1 Transfer Output as defined above"
 
 ### Gantt StakeableLockOut Specification
@@ -1764,10 +1835,14 @@ Let’s make a stakeablelockout with:
 
 ### What Subnet Auth Contains
 
-Specifies the addresses whose signatures will be provided to demonstrate that the owners of a Subnet approve something.
+Specifies the addresses whose signatures will be provided to demonstrate that
+the owners of a Subnet approve something.
 
 - **`TypeID`** is the ID for this type. It is `0x0000000a`.
-- **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a Subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
+- **`AddressIndices`** defines which addresses' signatures will be attached to
+  this transaction. AddressIndices[i] is the index in a Subnet owner list that
+  corresponds to the signature at index i in the signature list. Must be sorted
+  low to high and not have duplicates.
 
 ### Gantt Subnet Auth Specification
 
@@ -1899,9 +1974,14 @@ Where to send staking rewards when done validating
 A rewards owner contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
 
 - **`TypeID`** is the ID for this validator. It is `0x0000000b`.
-- **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+- **`Locktime`** is a long that contains the Unix timestamp that this output can
+  be spent after. The Unix timestamp is specific to the second.
+- **`Threshold`** is an int that names the number of unique signatures required
+  to spend the output. Must be less than or equal to the length of
+  **`Addresses`**. If **`Addresses`** is empty, must be 0.
+- **`Addresses`** is a list of unique addresses that correspond to the private
+  keys that can be used to spend this output. Addresses must be sorted
+  lexicographically.
 
 ### Gantt Rewards Owner Specification
 

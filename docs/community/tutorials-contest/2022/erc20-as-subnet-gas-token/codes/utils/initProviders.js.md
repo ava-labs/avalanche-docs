@@ -1,3 +1,5 @@
+# InitProviders.js
+
 ```javascript
 const { ethers } = require("ethers");
 const chains = require("../constants/chains");
@@ -10,11 +12,4 @@ module.exports = () => {
 	);
 	return { avax: avaxProvider, subnet: subnetProvider };
 };
-
-
-
-
-
-
-
 ```

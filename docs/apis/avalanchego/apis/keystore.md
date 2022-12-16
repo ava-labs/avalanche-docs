@@ -5,25 +5,35 @@ sidebar_position: 13
 # Keystore API
 
 :::warning
-Because the node operator has access to your plaintext password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
+Because the node operator has access to your plain-text password, you should only create a
+keystore user on a node that you operate. If that node is breached, you could lose all your tokens.
+Keystore APIs are not recommended for use on Mainnet.
 :::
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+Every node has a built-in keystore. Clients create users on the keystore, which act as identities to
+be used when interacting with blockchains. A keystore exists at the node level, so if you create a
+user on a node it exists _only_ on that node. However, users may be imported and exported using this
+API.
 
-For validation and cross-chain transfer on the Mainnet, you should issue transactions through [AvalancheJS](../../avalanchejs/README.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised. See following docs for details:
+For validation and cross-chain transfer on the Mainnet, you should issue transactions through
+[AvalancheJS](../../avalanchejs/README.md). That way control keys for your funds won't be stored on
+the node, which significantly lowers the risk should a computer running a node be compromised. See
+following docs for details:
 
 - [Transfer AVAX Tokens Between Chains](../../../quickstart/cross-chain-transfers.md)
 - [Add a Node to the Validator Set](../../../nodes/validate/add-a-validator.md)
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+This API set is for a specific node, it is unavailable on the [public
+server](../public-api-server.md).
 
 :::
 
 ## Format
 
-This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see
+[here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -37,7 +47,7 @@ This API uses the `json 2.0` API format. For more information on making JSON RPC
 
 Create a new user with the specified username and password.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 keystore.createUser(
@@ -49,9 +59,10 @@ keystore.createUser(
 ```
 
 - `username` and `password` can be at most 1024 characters.
-- Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
+- Your request will be rejected if `password` is too weak. `password` should be at least 8
+  characters and contain upper and lower case letters as well as numbers and symbols.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -65,7 +76,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -79,13 +90,13 @@ curl -X POST --data '{
 
 Delete a user.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 keystore.deleteUser({username: string, password:string}) -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -99,7 +110,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -111,9 +122,10 @@ curl -X POST --data '{
 
 ### keystore.exportUser
 
-Export a user. The user can be imported to another node with [`keystore.importUser`](keystore.md#keystoreimportuser). The user’s password remains encrypted.
+Export a user. The user can be imported to another node with
+[`keystore.importUser`](keystore.md#keystoreimportuser). The user’s password remains encrypted.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 keystore.exportUser(
@@ -128,9 +140,10 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is
+provided.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -144,7 +157,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -159,9 +172,10 @@ curl -X POST --data '{
 
 ### keystore.importUser
 
-Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+Import a user. `password` must match the user’s password. `username` doesn’t have to match the
+username `user` had when it was exported.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 keystore.importUser(
@@ -174,9 +188,10 @@ keystore.importUser(
 ) -> {}
 ```
 
-`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is
+provided.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -191,7 +206,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -205,13 +220,13 @@ curl -X POST --data '{
 
 List the users in this keystore.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 keystore.ListUsers() -> {users:[]string}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -221,7 +236,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {

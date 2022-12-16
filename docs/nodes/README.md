@@ -4,7 +4,8 @@ sidebar_position: 1
 
 # Nodes Overview
 
-This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+This section provides documents on how to build and maintain an AvalancheGo
+node, and then validate the Avalanche network using an AvalancheGo node.
 
 ## Build
 
@@ -12,9 +13,10 @@ This section provides documents on how to build and maintain an AvalancheGo node
 | :---------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------ |
 | [**Run an Avalanche Node Using Install Script**](./build/set-up-node-with-installer.md)                                             | How to install and run AvalancheGo          |
 | [**Run an Avalanche Node Manually**](./build/run-avalanche-node-manually.md)                                                        | How to install without the installer script |
-| [**Set Up an Avalanche Node with Amazon Web Services (AWS)**](./build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS              |
-| [**Set Up an Avalanche Node with Microsoft Azure**](./build/set-up-an-avalanche-node-with-microsoft-azure.md)                       | Create a node that runs on Microsoft Azure  |
-| [**Set Up an Avalanche Node with Google GCP**](./build/set-up-an-avalanche-node-with-google-cloud-platform.md)                      | Create a node that runs on Google GCP       |
+| [**Run an Avalanche Node with Amazon Web Services (AWS)**](./build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS              |
+| [**Run an Avalanche Node with Microsoft Azure**](./build/set-up-an-avalanche-node-with-microsoft-azure.md)                       | Create a node that runs on Microsoft Azure  |
+| [**Run an Avalanche Node with Google Cloud Platform**](./build/set-up-an-avalanche-node-with-google-cloud-platform.md)                      | Create a node that runs on Google GCP       |
+| [**Run an Avalanche Node with Alibaba Cloud**](./build/set-up-node-on-alibaba-cloud.md)     | Create a node that runs on Alibaba Cloud       |
 
 ## Maintain
 

@@ -2,44 +2,58 @@
 
 ## Introduction
 
-This article shows how to transfer AVAX tokens programmatically between any two chains (X/P/C chains) of the Primary Network.
+This article shows how to transfer AVAX tokens programmatically between any two
+chains (X/P/C chains) of the Primary Network.
 
-If you are looking for how to transfter AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
+If you are looking for how to transfer AVAX tokens using the web wallet, please check out [this article](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
 
 ## Prerequisites
 
 - You are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md).
 - You have completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md).
-- You are faimilar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
-- You have installed [ts-node](https://www.npmjs.com/package/ts-node#installation) so that you can follow examples in this tutorial.
+- You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
+- You have installed
+  [ts-node](https://www.npmjs.com/package/ts-node#installation) so that you can
+  follow examples in this tutorial.
 
 ## Getting Started
 
 To use AvalancheJS, you can clone the repo:
 
 ```zsh
-$ git clone https://github.com/ava-labs/avalanchejs.git
+git clone https://github.com/ava-labs/avalanchejs.git
 ```
 
 or add it to an existing project:
 
 ```zsh
-$ yarn add --dev avalanche
+yarn add --dev avalanche
 ```
 
 For this tutorial we will use `ts-node` to run the example scripts directly from an AvalancheJS directory.
 
-In order to send AVAX, you need to have some AVAX. You can use a pre-funded account on local network or get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy way to get to play around with Avalanche. After getting comfortable with your code, you can run the code on Mainnet after making necessary changes.
+In order to send AVAX, you need to have some AVAX. You can use a pre-funded
+account on local network or get testnet AVAX from the [Avalanche
+Faucet](https://faucet.avax.network), which is an easy way to get to play around
+with Avalanche. After getting comfortable with your code, you can run the code
+on Mainnet after making necessary changes.
 
-## Transferring AVAX using AvalancheJS
+## Transferring AVAX Using AvalancheJS
 
-The easiest way to transfer AVAX between chains is to use [AvalancheJS](https://github.com/ava-labs/AvalancheJS) which is a programmatic way to access and move AVAX.
+The easiest way to transfer AVAX between chains is to use
+[AvalancheJS](https://github.com/ava-labs/AvalancheJS) which is a programmatic
+way to access and move AVAX.
 
-AvalancheJS allows you to create and sign transactions locally which is why it is the recommended way to transfer AVAX between chains. We are moving away from using AvalancheGo's keystore because it requires you to keep your keys on a full node which makes them a target for malicious hackers.
+AvalancheJS allows you to create and sign transactions locally which is why it
+is the recommended way to transfer AVAX between chains. We are moving away from
+using AvalancheGo's keystore because it requires you to keep your keys on a full
+node which makes them a target for malicious hackers.
 
 ### Example Code
 
-Following files can be found under the [examples](https://github.com/ava-labs/avalanchejs/tree/master/examples) directory of the AvalancheJS project.
+Following files can be found under the
+[examples](https://github.com/ava-labs/avalanchejs/tree/master/examples)
+directory of the AvalancheJS project.
 
 | Transfer From >> To      | Export                                                                                                                                  | Import                                                                                                                                    |
 | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,19 +74,30 @@ AVM is for X-Chain, EVM for C-Chain, and PlatformVM for P-Chain.
 
 ### Transaction Fee
 
-Transaction fees are fixed on X-Chain and P-Chain, while dynamic on C-Chain, see [this article](./transaction-fees.md#fee-schedule) for details. When transfering tokens, please take fee into consideration in calculating total amount to be transferred.
+Transaction fees are fixed on X-Chain and P-Chain, while dynamic on C-Chain, see
+[this article](./transaction-fees.md#fee-schedule) for details. When transferring
+tokens, please take fee into consideration in calculating total amount to be
+transferred.
 
 ## Fuji Workflow
 
-This tutorial uses [**X-Chain <-> C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts) transfers as an example. Transferring between other chains are very similar.
+This tutorial uses [**X-Chain <->
+C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
+transfers as an example. Transferring between other chains are very similar.
 
 ### Transfer from the X-Chain to the C-Chain
 
-To transfer a specified amount token from X-Chain to C-Chain, the token needs to be first exported from the X-Chain to the atomic memory, from where it is then imported to C-Chain.
+To transfer a specified amount token from X-Chain to C-Chain, the token needs to
+be first exported from the X-Chain to the atomic memory, from where it is then
+imported to C-Chain.
 
 #### Export the Avax Token From X-Chain to C-Chain
 
-Select the [**`examples/avm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm) folder to view the AvalancheJS X-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts).
+Select the
+[**`examples/avm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)
+folder to view the AvalancheJS X-Chain examples. To export AVAX from the X-Chain
+to the C-Chain, select
+[`avm/buildExportTx-cchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts).
 
 ##### Private Key
 
@@ -99,7 +124,9 @@ const protocol: string = "http"
 const networkID: number = 5
 ```
 
-However, to connect directly to the [Avalanche Fuji Testnet API server](../apis/avalanchego/public-api-server.md), the following changes are needed:
+However, to connect directly to the [Avalanche Fuji Testnet API
+server](../apis/avalanchego/public-api-server.md), the following changes are
+needed:
 
 ```js
 const ip: string = "api.avax-test.network"
@@ -108,7 +135,9 @@ const protocol: string = "https"
 const networkID: number = 5
 ```
 
-Depending on the networkID passed in when instantiating Avalanche, the encoded addresses used will have a distinctive Human Readable Part(HRP) per each network.
+Depending on the networkID passed in when instantiating Avalanche, the encoded
+addresses used will have a distinctive Human Readable Part(HRP) per each
+network.
 
 _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
@@ -129,7 +158,9 @@ const balance: BN = new BN(getBalanceResponse.balance)
 const amount: BN = balance.sub(fee)
 ```
 
-To send a different amount, please replace the code above with the following. Below sets a new value of 0.01 AVAX (`10000000` GWEI). Value is set in GWEI format where `1,000,000,000` GWEI = 1 AVAX
+To send a different amount, please replace the code above with the following.
+Below sets a new value of 0.01 AVAX (`10000000` Gwei). Value is set in Gwei
+format where `1,000,000,000` Gwei = 1 AVAX
 
 ```js
 const value: BN = new BN("10000000")
@@ -143,7 +174,7 @@ Snowtrace provides a [unit converter](https://snowtrace.io/unitconverter) betwee
 Run the export script:
 
 ```sh
-$ ts-node examples/avm/buildExportTx-cchain-avax.ts
+ts-node examples/avm/buildExportTx-cchain-avax.ts
 ```
 
 This returns:
@@ -154,10 +185,13 @@ Success! TXID: 2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc
 
 #### Verify the Transaction
 
-You can now pass this txID `2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc` into [examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts), plus other similar network settings, then you can run
+You can now pass this txID `2uQvMcPZjmPXAyvz9cdKBphDDSmnxxx3vsUrxqpj3U92hsfQcc`
+into
+[examples/avm/getTx.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/getTx.ts),
+plus other similar network settings, then you can run
 
 ```zsh
-$ ts-node examples/avm/getTx.ts
+ts-node examples/avm/getTx.ts
 ```
 
 which returns:
@@ -188,11 +222,16 @@ which returns:
 
 #### Import the Avax Token From X-Chain to C-Chain
 
-Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To import AVAX to the C-Chain from the X-Chain, select [`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
+Select the
+[**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm)
+folder to view the AvalancheJS C-Chain examples. To import AVAX to the C-Chain
+from the X-Chain, select
+[`evm/buildImportTx-xchain.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildImportTx-xchain.ts)
 
 Copy the [network setting from above](#network-setting) into `evm/buildImportTx-xchain.ts`.
 
-Navigate to this part of the code and ensure that the `cHexAddress`(_Your C-Chain wallet address_) and `private key` are correct:
+Navigate to this part of the code and ensure that the `cHexAddress`(_Your
+C-Chain wallet address_) and `private key` are correct:
 
 ```ts
 const cHexAddress: string = "<YOUR-CCHAIN-WALLET-ADDRESS-HERE>"
@@ -202,7 +241,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 Run the import script:
 
 ```sh
-$ ts-node examples/evm/buildImportTx-xchain.ts
+ts-node examples/evm/buildImportTx-xchain.ts
 ```
 
 This returns:
@@ -221,13 +260,20 @@ To return the AVAX back to the X-Chain, you need to do the transfer in the oppos
 
 #### Export the Avax Token From C-Chain to X-Chain
 
-Select the [**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm) folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain to the C-Chain, select [`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts).
+Select the
+[**`examples/evm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/evm)
+folder to view the AvalancheJS C-Chain examples. To export AVAX from the X-Chain
+to the C-Chain, select
+[`evm/buildExportTx-xchain-avax.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/buildExportTx-xchain-avax.ts).
 
 Make necessary changes as above for private key and network settings.
 
-You can change the amount of AVAX to send by editing the _BN_ variable: `avaxAmount`. The sample code assigns this as `1e7` or `10000000` (0.01 AVAX)
+You can change the amount of AVAX to send by editing the _BN_ variable:
+`avaxAmount`. The sample code assigns this as `1e7` or `10000000` (0.01 AVAX)
 
-The fee here will only be for exporting the asset. The import fees will be deducted from the UTXOs present on the Exported Atomic Memory, a memory location where UTXOs stay after getting exported but before being imported.
+The fee here will only be for exporting the asset. The import fees will be
+deducted from the UTXOs present on the Exported Atomic Memory, a memory location
+where UTXOs stay after getting exported but before being imported.
 
 ```ts
 let avaxAmount: BN = new BN(1e7)
@@ -244,7 +290,9 @@ Success! TXID: UAez3DTv26qmhKKFDvmQTayaXTPAVahHenDKe6xnUMhJbKuxc
 
 #### Import the Avax Token From C-Chain to X-Chain
 
-Before we run the [example import script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts), we need to make some changes to the code:
+Before we run the [example import
+script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts),
+we need to make some changes to the code:
 
 1. Change the [Network Setting](#network-setting) to meet Fuji network requirements.
 2. Import your Private Key by following the steps listed [here](#private-key).
@@ -260,7 +308,11 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 The Fuji workflow above can be adapted to Mainnet with the following modifications:
 
 - The correct private key.
-- Network setting should be to a Mainnet node, either [a local node on Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](../apis/avalanchego/public-api-server.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
+- Network setting should be to a Mainnet node, either [a local node on
+  Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or
+  [Avalanche Mainnet API
+  server](../apis/avalanchego/public-api-server.md#using-the-public-api-nodes)
+  where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.
 - The correct receiving address.
@@ -269,11 +321,17 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner) to start a 5-node local network. Make sure that you get one of the port number by following [this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this tutorial, we will assume one of the ports is 30301.
+Follow [Create a Local Test
+Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner)
+to start a 5-node local network. Make sure that you get one of the port number
+by following
+[this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this
+tutorial, we will assume one of the ports is 30301.
 
 ### Locate the Example Code and Make Necessary Changes
 
-Most of the code are already set to run it on a local network. Do check the following values to make sure they are correct.
+Most of the code are already set to run it on a local network. Do check the
+following values to make sure they are correct.
 
 ```js
 const ip: string = "localhost"

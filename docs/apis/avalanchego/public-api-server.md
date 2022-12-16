@@ -85,7 +85,15 @@ If you have questions, problems, or suggestions, join the official [Avalanche Di
 
 :::warning Disclaimer
 
-Ava Labs offers no warranty/guarantee on the quality or uptime of these community RPC providers
+Provided for informational purposes only, without representation, warranty or
+guarantee of any kind. None of this is as an endorsement by the Avalanche
+Foundation Limited, Ava Labs, Inc. or any of their respective subsidiaries or
+affiliates, nor is any of this investment or financial advice. Please review
+this
+[Notice](https://assets.website-files.com/6059b554e81c705f9dd2dd32/60ec9590f189c16edaa086d4_Important%20Notice%20-%20avax.network.pdf)
+and conduct your own research to properly evaluate the risks and benefits of any
+project.
+
 :::
 
 ### ANKR

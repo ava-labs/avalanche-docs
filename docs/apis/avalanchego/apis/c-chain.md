@@ -6,7 +6,12 @@ sidebar_position: 4
 # Contract Chain (C-Chain) API
 
 :::info
-Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the [C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
+Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to
+Avalanche’s view of networkID and chainID and are purely internal to the
+[C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On
+Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and
+`43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and
+`eth_chainId` methods.
 
 :::
 
@@ -37,7 +42,8 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 :::info
-On the [public api node](../public-api-server.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
+On the [public API node](../public-api-server.md#supported-apis), it only supports C-Chain
+websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
 To interact with C-Chain via the websocket endpoint:
@@ -54,7 +60,8 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::tip
 
-On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that supports encryption, use `wss://`.
+On localhost, use `ws://`. When using the [Public API](../public-api-server.md) or another host that
+supports encryption, use `wss://`.
 :::
 
 To interact with other instances of the EVM via the websocket endpoint:
@@ -67,28 +74,35 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 ### Standard Ethereum APIs
 
-Avalanche offers an API interface identical to Geth's API except that it only supports the following services:
+Avalanche offers an API interface identical to Geth's API except that it only supports the following
+services:
 
 - `web3_`
 - `net_`
 - `eth_`
 - `personal_`
 - `txpool_`
-- `debug_` (note: this is turned off on the public api node.)
+- `debug_` (note: this is turned off on the public API node.)
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
+You can interact with these services the same exact way you’d interact with Geth. See the
+[Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API)
+and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server)
+for a full description of this API.
 
 :::info
 
-For batched requests on the [public api node](../public-api-server.md) , the maximum number of items is 40. We are working on to support a larger batch size.
+For batched requests on the [public API node](../public-api-server.md) , the maximum number of items
+is 40. We are working on to support a larger batch size.
 
 :::
 
-### eth_getAssetBalance
+### `eth_getAssetBalance`
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the
+balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched
+with `eth_getBalance`).
 
-**Signature**
+**Signature:**
 
 ```sh
 eth_getAssetBalance({
@@ -102,7 +116,7 @@ eth_getAssetBalance({
 - `blk` is the block number or hash at which to retrieve the balance
 - `assetID` id of the asset for which the balance is requested
 
-**Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -117,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
-**Example Response**
+**Example Response:**
 
 ```json
 {
@@ -127,11 +141,11 @@ curl -X POST --data '{
 }
 ```
 
-### eth_baseFee
+### `eth_baseFee`
 
 Get the base fee for the next block.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 eth_baseFee() -> {}
@@ -139,7 +153,7 @@ eth_baseFee() -> {}
 
 `result` is the hex value of the base fee for the next block.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -150,7 +164,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -160,11 +174,11 @@ curl -X POST --data '{
 }
 ```
 
-### eth_maxPriorityFeePerGas
+### `eth_maxPriorityFeePerGas`
 
 Get the priority fee needed to be included in a block.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 eth_maxPriorityFeePerGas() -> {}
@@ -172,7 +186,7 @@ eth_maxPriorityFeePerGas() -> {}
 
 `result` is hex value of the priority fee needed to be included in a block.
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -183,7 +197,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -193,19 +207,21 @@ curl -X POST --data '{
 }
 ```
 
-For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
+For more information on dynamic fees see the [C-Chain section of the transaction fee
+documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
 
-### eth_getChainConfig
+### `eth_getChainConfig`
 
-`eth_getChainConfig` returns chain config. This API is enabled by default with `internal-eth` namespace.
+`eth_getChainConfig` returns chain config. This API is enabled by default with `internal-eth`
+namespace.
 
-**Signature**
+**Signature:**
 
 ```sh
 eth_getChainConfig({}) -> {chainConfig: json}
 ```
 
-**Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -216,7 +232,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
-**Example Response**
+**Example Response:**
 
 ```json
 {
@@ -247,8 +263,6 @@ curl -X POST --data '{
 
 ## Avalanche Specific APIs
 
-### Endpoints
-
 To interact with the `avax` specific RPC calls on the C-Chain:
 
 ```sh
@@ -261,11 +275,12 @@ To interact with other instances of the EVM AVAX endpoints:
 /ext/bc/blockchainID/avax
 ```
 
-### avax.getAtomicTx
+### `avax.getAtomicTx`
 
-Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned transaction. Can only be `hex` when a value is provided.
+Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned
+transaction. Can only be `hex` when a value is provided.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.getAtomicTx({
@@ -278,18 +293,18 @@ avax.getAtomicTx({
 }
 ```
 
-**Request**
+**Request:**
 
-- `txID` is the transacion ID. It should be in cb58 format.
+- `txID` is the transaction ID. It should be in cb58 format.
 - `encoding` is the encoding format to use. Can only be `hex` when a value is provided.
 
-**Response**
+**Response:**
 
 - `tx` is the transaction encoded to `encoding`.
 - `encoding` is the `encoding`.
 - `blockHeight` is the height of the block which the transaction was included in.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -303,7 +318,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -317,15 +332,17 @@ curl -X POST --data '{
 }
 ```
 
-### avax.export
+### `avax.export`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
+Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
+X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's
+[`platform.import`](p-chain.md#platformimportavax).
 
-#### Signature
+**Signature:**
 
 ```sh
 avax.export({
@@ -341,11 +358,12 @@ avax.export({
 - `to` is the X-Chain or P-Chain address the asset is sent to.
 - `amount` is the amount of the asset to send.
 - `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
+  suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -362,7 +380,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -374,17 +392,20 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportAVAX
+### `avax.exportAVAX`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-**DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
+**DEPRECATED—instead use** [`avax.export`](c-chain.md#avaxexport).
 
-Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
+X-Chain's [`avm.import`](x-chain.md#avmimport) or P-Chain's
+[`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete
+the transfer.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.exportAVAX({
@@ -396,19 +417,20 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Request:**
 
 - `to` is X-Chain or P-Chain address the asset is sent to.
 - `amount` is the amount of the asset to send.
-- `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
+  suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
 
-**Response**
+**Response:**
 
-- `txID` is the txid of the completed ExportTx.
+- `txID` is the TXID of the completed ExportTx.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -426,7 +448,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -438,15 +460,16 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportKey
+### `avax.exportKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+Get the private key that controls a given address. The returned private key can be added to a user
+with `avax.importKey`.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.exportKey({
@@ -456,17 +479,20 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-**Request**
+**Request:**
 
 - `username` must control `address`.
-- `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+- `address` is the address for which you want to export the corresponding private key. It should be
+  in hex format.
 
-**Response**
+**Response:**
 
-- `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-- `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+- `privateKey` is the CB58 encoded string representation of the private key that controls
+  `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
+- `privateKeyHex` is the hex string representation of the private key that controls `address`. It
+  can be used to import an account into MetaMask.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -481,7 +507,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -494,11 +520,11 @@ curl -X POST --data '{
 }}
 ```
 
-### avax.getUTXOs
+### `avax.getUTXOs`
 
 Gets the UTXOs that reference a given address.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avax.getUTXOs(
@@ -525,15 +551,20 @@ avax.getUTXOs(
 
 - `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
 - At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of
+  UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 - If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-- When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+- When using pagination (that is when `startIndex` is provided), UTXOs are not guaranteed to be unique
+  across multiple calls. That is, a UTXO may appear in the result of the first call, and then again
+  in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set
+  of the addresses may have changed between calls.
 - `encoding` sets the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
 #### **Example**
 
-Suppose we want all UTXOs that reference at least one of `C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
+Suppose we want all UTXOs that reference at least one of
+`C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5`.
 
 ```sh
 curl -X POST --data '{
@@ -574,15 +605,17 @@ This gives response:
 }
 ```
 
-### avax.import
+### `avax.import`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this
+method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s
+[`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.import({
@@ -594,19 +627,22 @@ avax.import({
 }) -> {txID: string}
 ```
 
-**Request**
+**Request:**
 
-- `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the X-Chain's or P-Chain's `export`.
-- `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
-- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
+- `to` is the address the asset is sent to. This must be the same as the `to` argument in the
+  corresponding call to the X-Chain's or P-Chain's `export`.
+- `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds
+  from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
+  suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
 
-**Response**
+**Response:**
 
 - `txID` is the ID of the completed ImportTx.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -622,7 +658,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -634,17 +670,19 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importAVAX
+### `avax.importAVAX`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-**DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
+**DEPRECATED—instead use** [`avax.import`](c-chain.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
+called, you must call the X-Chain’s [`avm.export`](x-chain.md#avmexport) or P-Chain’s
+[`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.importAVAX({
@@ -656,19 +694,21 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Request:**
 
 - `to` is the address the AVAX is sent to. It should be in hex format.
-- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
-- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
+- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds
+  from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
+- `baseFee` is the base fee that should be used when creating the transaction. If omitted, a
+  suggested fee will be used.
 - `username` is the user that controls the address that transaction will be sent from.
 - `password` is `username`‘s password.
 
-**Response**
+**Response:**
 
 - `txID` is the ID of the completed ImportTx.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -684,7 +724,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -696,7 +736,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importKey
+### `avax.importKey`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -704,7 +744,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](./keyst
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### Signature
+**Signature:**
 
 ```go
 avax.importKey({
@@ -714,15 +754,15 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-**Request**
+**Request:**
 
 - Add `privateKey` to `username`'s set of private keys.
 
-**Response**
+**Response:**
 
 - `address` is the address `username` now controls with the private key. It will be in hex format.
 
-#### Example Call
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -737,7 +777,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+**Example Response:**
 
 ```json
 {
@@ -749,11 +789,12 @@ curl -X POST --data '{
 }
 ```
 
-### avax.issueTx
+### `avax.issueTx`
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction.
+Can only be `hex` when a value is provided.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avax.issueTx({
@@ -764,7 +805,7 @@ avax.issueTx({
 }
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -779,7 +820,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -791,11 +832,11 @@ curl -X POST --data '{
 }
 ```
 
-### avax.getAtomicTxStatus
+### `avax.getAtomicTxStatus`
 
 Get the status of an atomic transaction sent to the network.
 
-#### **Signature**
+**Signature:**
 
 ```sh
 avax.getAtomicTxStatus({txID: string}) -> {
@@ -806,12 +847,13 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 `status` is one of:
 
-- `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight` property
+- `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight`
+  property
 - `Processing`: The transaction is being voted on by this node
 - `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
 - `Unknown`: The transaction hasn’t been seen by this node
 
-#### **Example Call**
+**Example Call:**
 
 ```sh
 curl -X POST --data '{
@@ -824,7 +866,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -839,7 +881,9 @@ curl -X POST --data '{
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [C-Chain config flag `--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean) .
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean)
+.
 
 ### Endpoint
 
@@ -847,11 +891,11 @@ This API can be used for debugging. Note that the Admin API is disabled by defau
 /ext/bc/C/admin
 ```
 
-### admin.setLogLevel
+### `admin.setLogLevel`
 
 Sets the log level of the C-Chain.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.setLogLevel({level:string}) -> {}
@@ -859,7 +903,7 @@ admin.setLogLevel({level:string}) -> {}
 
 - `level` is the log level to be set.
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -872,7 +916,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -882,17 +926,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### `admin.startCPUProfiler`
 
 Starts a CPU profile.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.startCPUProfiler() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -903,7 +947,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -913,17 +957,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### `admin.stopCPUProfiler`
 
 Stops and writes a CPU profile.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.stopCPUProfiler() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -934,7 +978,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -944,17 +988,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+### `admin.memoryProfile`
 
 Runs and writes a memory profile.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.memoryProfile() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -965,7 +1009,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {
@@ -975,17 +1019,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+### `admin.lockProfile`
 
 Runs a mutex profile writing to the `coreth_performance_c` directory.
 
-#### **Signature**
+**Signature:**
 
 ```text
 admin.lockProfile() -> {}
 ```
 
-#### **Example Call**
+**Example Call:**
 
 ```bash
 curl -X POST --data '{
@@ -996,7 +1040,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
 
-#### **Example Response**
+**Example Response:**
 
 ```json
 {

@@ -31,17 +31,17 @@ const sidebars = {
         {
           type: 'link',
           label: 'Whitepapers',
-          href: 'https://www.avalabs.org/whitepapers',
-        },
-      ],
+          href: 'https://www.avalabs.org/whitepapers'
+        }
+      ]
     },
     'overview/projects',
     {
       type: 'link',
       label: 'Audits',
-      href: 'https://github.com/ava-labs/audits',
+      href: 'https://github.com/ava-labs/audits'
     },
-    'disclaimer'
+    'disclaimer',
   ],
 
   quickStart: [
@@ -56,7 +56,7 @@ const sidebars = {
     'quickstart/sending-transactions-with-dynamic-fees-using-javascript',
     'quickstart/tools-list',
     'quickstart/integrate-exchange-with-avalanche',
-    'quickstart/blockchain-flow',
+    'quickstart/blockchain-flow'
   ],
   dapps: [
     'dapps/launch-your-ethereum-dapp',
@@ -70,8 +70,8 @@ const sidebars = {
         'dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain',
         'dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain',
         'dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace',
-        'dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify',
-      ],
+        'dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify'
+      ]
     },
     {
       type: 'category',
@@ -80,8 +80,8 @@ const sidebars = {
       items: [
         'dapps/nfts/README',
         'dapps/nfts/intro-to-erc721s',
-        'dapps/nfts/preparing-nft-files',
-      ],
+        'dapps/nfts/preparing-nft-files'
+      ]
     },
     {
       type: 'category',
@@ -92,19 +92,20 @@ const sidebars = {
         'dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain',
         'dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask',
         'dapps/smart-contracts/verify-smart-contracts',
-        'dapps/smart-contracts/add-avalanche-programmatically',
-      ],
-    },
+        'dapps/smart-contracts/add-avalanche-programmatically'
+      ]
+    }
   ],
   subnets: [
     'subnets/README',
     {
       type: 'category',
-      label: 'Plan',
+      label: 'Are Subnets Right For You?',
       collapsed: false,
       items: [
-        'subnets/when-to-use-subnet-vs-c-chain'
-      ]
+        'subnets/when-to-use-subnet-vs-c-chain',
+        'subnets/subnet-development-lifecycle',
+      ],
     },
     {
       type: 'category',
@@ -114,9 +115,11 @@ const sidebars = {
         'subnets/install-avalanche-cli',
         'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
+        'subnets/create-a-mainnet-subnet',
         'subnets/deploy-a-smart-contract-on-your-evm',
+        'subnets/create-custom-subnet',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-        'subnets/create-a-fuji-subnet-subnet-cli'
+        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
@@ -126,11 +129,12 @@ const sidebars = {
       items: [
         'subnets/create-evm-subnet-config',
         'subnets/create-a-local-subnet',
+        'subnets/multisig-deploy',
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
-        'subnets/how-to-run-cli-with-docker',
-      ],
+        'subnets/how-to-run-cli-with-docker'
+      ]
     },
     {
       type: 'category',
@@ -142,7 +146,7 @@ const sidebars = {
         'subnets/introduction-to-vm',
         'subnets/create-a-vm-timestampvm',
         'subnets/create-a-vm-blobvm',
-        'subnets/create-a-simple-rust-vm'
+        'subnets/create-a-simple-rust-vm',
       ],
     },
     {
@@ -151,7 +155,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/deploying-subnets-on-prod',
-        'subnets/setup-dfk-node'
+        'subnets/setup-dfk-node',
       ],
     },
     {
@@ -160,8 +164,8 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/subnet-upgrade',
-        'subnets/case-study-wagmi-upgrade',
-      ],
+        'subnets/case-study-wagmi-upgrade'
+      ]
     },
     {
       type: 'category',
@@ -172,8 +176,8 @@ const sidebars = {
         'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
-        'subnets/deploy-a-gnosis-safe-on-your-evm',
-      ],
+        'subnets/deploy-a-gnosis-safe-on-your-evm'
+      ]
     },
     {
       type: 'category',
@@ -181,22 +185,22 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/spaces',
-        'subnets/wagmi',
-      ],
+        'subnets/wagmi'
+      ]
     },
     {
       type: 'category',
       label: 'Technical Reference',
       collapsed: false,
       items: [
-          'subnets/reference-cli-commands'
+        'subnets/reference-cli-commands',
       ],
     },
     {
       type: 'link',
       label: 'Subnet FAQ',
-      href: 'https://support.avax.network/en/articles/6158840-subnet-faq',
-    },
+      href: 'https://support.avax.network/en/articles/6158840-subnet-faq'
+    }
   ],
   apis: [
     {
@@ -211,14 +215,14 @@ const sidebars = {
           items: [
             {
               type: 'autogenerated',
-              dirName: 'apis/avalanchego/apis',
-            },
-          ],
+              dirName: 'apis/avalanchego/apis'
+            }
+          ]
         },
         'apis/avalanchego/public-api-server',
         'apis/avalanchego/postman-avalanche-collection',
         'apis/avalanchego/avalanchego-release-notes',
-        'apis/avalanchego/cb58-deprecation'
+        'apis/avalanchego/cb58-deprecation',
       ],
     },
     {
@@ -231,10 +235,10 @@ const sidebars = {
         'apis/avalanchejs/create-an-asset-on-the-x-chain',
         'apis/avalanchejs/manage-x-chain-keys',
         'apis/avalanchejs/send-an-asset-on-the-x-chain',
-        'apis/avalanchejs/generate-a-txid-using-avalanchejs',
-      ],
+        'apis/avalanchejs/generate-a-txid-using-avalanchejs'
+      ]
     },
-    'apis/metrics'
+    'apis/metrics',
   ],
   nodes: [
     'nodes/README',
@@ -245,9 +249,9 @@ const sidebars = {
       items: [
         {
           type: 'autogenerated',
-          dirName: 'nodes/build',
-        },
-      ],
+          dirName: 'nodes/build'
+        }
+      ]
     },
     {
       type: 'category',
@@ -257,7 +261,7 @@ const sidebars = {
         {
           type: 'autogenerated',
           dirName: 'nodes/maintain',
-        }
+        },
       ],
     },
     {
@@ -267,10 +271,10 @@ const sidebars = {
       items: [
         {
           type: 'autogenerated',
-          dirName: 'nodes/validate',
-        },
-      ],
-    },
+          dirName: 'nodes/validate'
+        }
+      ]
+    }
   ],
 
   specs: [
@@ -281,9 +285,8 @@ const sidebars = {
     'specs/serialization-primitives',
     'specs/platform-transaction-serialization',
     'specs/abigen',
-    'specs/banff-changes'
+    'specs/banff-changes',
   ],
-
 
   community: [
     'community/README',
@@ -291,7 +294,7 @@ const sidebars = {
     {
       type: 'link',
       label: 'Product Support',
-      href: 'https://support.avax.network/en/',
+      href: 'https://support.avax.network/en/'
     },
     {
       type: 'category',
@@ -300,10 +303,10 @@ const sidebars = {
       items: [
         'community/tutorials-contest/README',
         'community/tutorials-contest/2022',
-        'community/tutorials-contest/2021'
-      ]
+        'community/tutorials-contest/2021',
+      ],
     },
   ],
 };
 
-module.exports = sidebars;
+module.exports = sidebars

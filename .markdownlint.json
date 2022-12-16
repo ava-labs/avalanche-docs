@@ -1,7 +1,13 @@
 {
   "default": true,
-  "MD013": { "line_length": 100 },
-  "MD033": false,
   "no-hard-tabs": false,
-  "whitespace": false
+  "whitespace": false,
+  "MD013": {
+    "code_blocks": false,
+    "line_length": 100,
+    "tables": false
+  },
+  "MD024": false,
+  "MD033": false,
+  "MD036": false
 }

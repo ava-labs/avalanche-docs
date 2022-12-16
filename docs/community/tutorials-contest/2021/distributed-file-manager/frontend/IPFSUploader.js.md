@@ -1,4 +1,6 @@
-```
+# IPFSUploader.js
+
+```js
 import React from "react";
 import Compressor from "compressorjs";
 import { Loader } from "rimble-ui";

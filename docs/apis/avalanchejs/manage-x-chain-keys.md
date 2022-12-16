@@ -1,6 +1,9 @@
 # Manage X-Chain Keys
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the
+functions of the API, enabling them to sign using keys it's registered. The
+first step in this process is to create an instance of AvalancheJS connected to
+our Avalanche platform endpoint of choice.
 
 ```ts
 import { Avalanche, BinTools, Buffer, BN } from "avalanche"
@@ -27,11 +30,14 @@ The KeyChain is accessed through the X-Chain and can be referenced directly or t
 let myKeychain = xchain.keyChain()
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+This exposes the instance of the class AVMKeyChain which is created when the
+X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key
+pairs.
 
 ## Creating X-Chain Key Pairs
 
-The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
+The KeyChain has the ability to create new Keypairs for you and return the
+address associated with the key pair.
 
 ```ts
 let newAddress1 = myKeychain.makeKey() //returns a Buffer for the address
@@ -55,7 +61,9 @@ let newAddress2 = myKeychain.importKey(mypk) //returns a Buffer for the address
 
 ## Working with Keychains
 
-The X-Chain's KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+The X-Chain's KeyChain has standardized key management capabilities. The
+following functions are available on any KeyChain that implements this
+interface.
 
 ```text
 let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
@@ -66,7 +74,8 @@ let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 
 ## Working with Keypairs
 
-The X-Chain's KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+The X-Chain's keypair has standardized keypair functionality. The following
+operations are available on any keypair that implements this interface.
 
 ```ts
 let address = keypair.getAddress() //returns Buffer
@@ -90,9 +99,12 @@ let signerPubk = keypair.recover(message, signature)
 let isValid = keypair.verify(message, signature) //returns a boolean
 ```
 
-## Encode Bech32 Addresses {#encode-bech32-addresses}
+## Encode Bech32 Addresses
 
-The X-Chain and the P-Chain use Bech32 to encode addresses. Note, the C-Chain also uses Bech32 to encode addresses for importing and exporting assets however the EVM, in general, uses hex encoding for addresses. Ex: `0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf`.
+The X-Chain and the P-Chain use Bech32 to encode addresses. Note, the C-Chain
+also uses Bech32 to encode addresses for importing and exporting assets however
+the EVM, in general, uses hex encoding for addresses. Ex:
+`0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf`.
 
 Each Bech32 address is composed of the following components
 
@@ -101,14 +113,17 @@ Each Bech32 address is composed of the following components
 3. Base-32 encoded string for the data part of the address (the 20-byte address itself).
 4. A 6-character base-32 encoded error correction code using the BCH algorithm.
 
-For example the following Bech32 address, `X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
+For example the following Bech32 address,
+`X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
 
 1. HRP: `avax`
 2. Separator: `1`
 3. Address: `9rknw8l0grnfunjrzwxlxync6zrlu33y`
 4. Checksum: `2jxhrg`
 
-Depending on the `networkID` which is passed in when instantiating `Avalanche` the encoded addresses will have a distinctive HRP per each network. AvalancheJS also has address encoding for past networks `cascade`, `denali`, and `everest`.
+Depending on the `networkID` which is passed in when instantiating `Avalanche`
+the encoded addresses will have a distinctive HRP per each network. AvalancheJS
+also has address encoding for past networks `cascade`, `denali`, and `everest`.
 
 - 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
 - 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg

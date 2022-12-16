@@ -8,3 +8,4 @@ swap:
   "(?i)abi": ABI
   "(?i)abis": ABIs
   "(?i)repos?": repository
+  "(?i)blackholes?": black hole
