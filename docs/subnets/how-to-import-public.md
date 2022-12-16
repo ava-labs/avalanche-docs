@@ -6,6 +6,9 @@ The most probable reason why someone would want to do this,
 is if they already deployed a Subnet with `subnet-cli` either to `Fuji` or `Mainnet`, 
 and now would like to use `Avalanche-CLI` to manage the Subnet.  
 
+Refer to the [installation guide](./install-avalanche-cli.md) for instruction about installing
+`Avalanche-CLI`.
+
 `subnet-cli` is deprecated.
 
 Similarly, a Subnet might have been created "manually" by issuing transactions 
@@ -56,7 +59,7 @@ It will be checked if the file at the provided path exists
 (refer to check mark at the beginning of the line):
 
 ```shell
-✔ Provide the path to the genesis file: /tmp/subnetevm_█enesis.json
+✔ Provide the path to the genesis file: /tmp/subnetevm_genesis.json
 ```
 
 Subsequently, the wizard asks if nodes have already been deployed for this Subnet. 
