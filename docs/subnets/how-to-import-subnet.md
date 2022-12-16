@@ -1,4 +1,4 @@
-# How to Import a Subnet from a Public Network to `Avalanche-CLI`
+# How to Import a Subnet into Avalanche-CLI
 
 ## What Is the Context of This How-To?
 
