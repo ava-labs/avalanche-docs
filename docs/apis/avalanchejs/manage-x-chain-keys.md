@@ -74,8 +74,8 @@ let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 
 ## Working with Keypairs
 
-The X-Chain's KeyPair has standardized KeyPair functionality. The following
-operations are available on any KeyPair that implements this interface.
+The X-Chain's keypair has standardized keypair functionality. The following
+operations are available on any keypair that implements this interface.
 
 ```ts
 let address = keypair.getAddress() //returns Buffer

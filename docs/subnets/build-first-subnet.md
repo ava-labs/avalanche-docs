@@ -58,7 +58,7 @@ Select `SubnetEVM`.
 Choose a positive integer for your EVM-style ChainID.
 
 In production environments, this ChainID needs to be unique and not shared with any other chain.
-You can visit [ChainList](https://chainlist.org/) to verify that your selection is unique.
+You can visit [chainlist](https://chainlist.org/) to verify that your selection is unique.
 Because this is a development Subnet, feel free to pick any number. Stay away from well-known
 ChainIDs such as 1 (Ethereum) or 43114 (Avalanche C-Chain) as those may cause issues with other
 tools.
