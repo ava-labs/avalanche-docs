@@ -1,35 +1,36 @@
-# How to Import a Subnet from a Public Network to `Avalanche-CLI`
+# How to Import a Subnet from a Public Network to Avalanche-CLI
 
-## What Is the Context of This How-To?
+## What's the Context of This How-To?
 
 The most probable reason why someone would want to do this, 
-is if they already deployed a Subnet with `subnet-cli` either to `Fuji` or `Mainnet`, 
-and now would like to use `Avalanche-CLI` to manage the Subnet.  
+is if they already deployed a Subnet with Subnet-CLI either to Fuji or Mainnet, 
+and now would like to use Avalanche-CLI to manage the Subnet.  
 
 Refer to the [installation guide](./install-avalanche-cli.md) for instruction about installing
-`Avalanche-CLI`.
+Avalanche-CLI.
 
-`subnet-cli` is deprecated.
+Because Subnet-CLI is now deprecated, you can use this tutorial to migrate to Avalanche-CLI.
 
-Similarly, a Subnet might have been created "manually" by issuing transactions 
-to node APIs (either a local node or public API nodes) with no help of any tool so far,
-but would now require `Avalanche-CLI` integration.
 
-For this How-To, we will import the `wagmi` Subnet from `Fuji`.
+Similarly, you might have created a Subnet "manually" by issuing transactions 
+to node APIs, either a local node or public API nodes, with no help of any tool so far,
+but would now target Avalanche-CLI integration.
+
+For this How-To, you import the WAGMI Subnet from Fuji.
 
 
 ## Requirements
 
 For the import to work properly: 
 
-* the *genesis* for the Subnet in question should be known and accessible as a file on disk.
+* you should know the *genesis* for the Subnet in question, which should be accessible as a file on disk.
 
-* the Subnet's *ID* should be known, and needs to be supplied to the wizard when prompted
+* you should know the Subnet's *ID*, which you need to supply to the wizard when prompted
 
 
 ## Import the Subnet
 
-For these use cases, `Avalanche-CLI` now supports the `import public` command.
+For these use cases, Avalanche-CLI now supports the `import public` command.
 
 Start the import by issuing
 
@@ -37,9 +38,10 @@ Start the import by issuing
 avalanche subnet import public 
 ```
 
-The tool will prompt for the network from which to import. 
-The invariant assumption here is that the network is a public network 
-(in other words, importing from a local network is not supported).
+The tool prompts for the network from which to import. 
+The invariant assumption here is that the network is a public network,
+either the Fuji testnet or Mainnet.
+In other words, importing from a local network isn't supported.
 
 ```shell
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -48,15 +50,15 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Mainnet
 ```
 
-As stated earlier, we will import from `Fuji`, so select it. 
-As a next step, `Avalanche-CLI` asks for the path of the genesis file on disk:
+As stated earlier, this is from Fuji, so select it. 
+As a next step, Avalanche-CLI asks for the path of the genesis file on disk:
 
 ```shell
 ✗ Provide the path to the genesis file: /tmp/subnet_evm.genesis.json
 ```
 
-It will be checked if the file at the provided path exists 
-(refer to check mark at the beginning of the line):
+The wizard checks if the file at the provided path exists, 
+refer to check mark at the beginning of the line:
 
 ```shell
 ✔ Provide the path to the genesis file: /tmp/subnetevm_genesis.json
@@ -73,16 +75,17 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 ### Nodes are Already Validating This Subnet
 
-If they have been, it will attempt to query such a node for detailed data like the VM version. 
-This will allow to skip having to query github (or wherever the VM's repository is hosted) 
+If nodes already have been deployed, the wizard attempts to query such a node 
+for detailed data like the VM version. This allows the tool to skip 
+querying GitHub (or wherever the VM's repository is hosted) 
 for the VM's version, but rather we'll get the exact version which is actually running on the node.
 
-For this to work, an node API URL is requested from the user, which will be used for the query.
-This will require that the node's API IP and port are accessible from the machine running 
-`Avalanche-CLI`, or the node will obviously not be reachable, 
-and thus the query will timeout and fail, and the tool exit. 
+For this to work, a node API URL is requested from the user, which is used for the query.
+This requires that the node's API IP and port are accessible from the machine running 
+Avalanche-CLI, or the node is obviously not reachable, 
+and thus the query times out and fails, and the tool exits. 
 The node should also be validating the given Subnet for the import to be meaningful, 
-otherwise, the import will fail with missing information.
+otherwise, the import fails with missing information.
 
 If the query succeeded, the wizard jumps to prompt for the Subnet ID.
 
@@ -94,34 +97,34 @@ What is the ID of the subnet?: 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxi
 The rest of the wizard is identical to the next section, 
 except that there is no prompt for the VM version anymore.
 
-### Nodes are Not Yet Validating this Subnet, the Nodes API URL are Unknown, or Inaccessible (Firewalls)
+### Nodes Aren't Yet Validating this Subnet, the Nodes API URL are Unknown, or Inaccessible (Firewalls)
 
-If we don't have a node's API URL at hand, or it is not reachable 
-from the machine running `Avalanche-CLI`, or maybe no nodes have even been deployed yet 
-(only the `CreateSubnet` transaction has been issued, for example), we can query the public APIs. 
+If you don't have a node's API URL at hand, or it's not reachable 
+from the machine running Avalanche-CLI, or maybe no nodes have even been deployed yet because 
+only the `CreateSubnet` transaction has been issued, for example, you can query the public APIs. 
 
-We can't know for sure what Subnet VM versions are the validators running though, 
-so we need to prompt later.
-So, we select `No` when the tool asks for deployed nodes:
+You can't know for sure what Subnet VM versions the validators are running though, 
+therefore the tool has to prompt later.
+So, select `No` when the tool asks for deployed nodes:
 
-Thus, at this point the wizard requests the Subnet's ID, without which it can not know 
-what to import (remember the ID is different on different networks).
+Thus, at this point the wizard requests the Subnet's ID, without which it can't know 
+what to import. Remember the ID is different on different networks.
 
-From the [Testnet Subnet Explorer](https://subnets-test.avax.network/wagmi)
-we gather that `wagmi`'s Subnet ID is `28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY`:
+From the [Testnet Subnet Explorer](https://subnets-test.avax.network/WAGMI)
+you can see that WAGMI's Subnet ID is `28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY`:
 
 ```shell
 ✔ What is the ID of the subnet?: 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY
 ```
 
-(notice the checkmark at line start, it signals that the ID is validated in its formatting).
+Notice the checkmark at line start, it signals that there is ID format validation.
 
-If we hit `enter` now, the public APIs for the given network will be queried, and if successful, 
-the tool prints some information about the Subnet, and proceeds to ask about the Subnet's type:
+If you hit `enter` now, the tool queries the public APIs for the given network, and if successful, 
+it prints some information about the Subnet, and proceeds to ask about the Subnet's type:
 
 ```shell
 Getting information from the Fuji network...
-Retrieved information. BlockchainID: 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, Name: wagmi, VMID: srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
+Retrieved information. BlockchainID: 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, Name: WAGMI, VMID: srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? What's this VM's type?: 
   ▸ Subnet-EVM
@@ -129,15 +132,15 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-`Avalanche-CLI` needs to know the VM type, in order to hit its repository and check 
+Avalanche-CLI needs to know the VM type, to hit its repository and select 
 what VM versions are available. 
-This works automatically for Ava Labs VMs (like `Subnet-EVM` and `SpacesVM`). 
+This works automatically for Ava Labs VMs (like Subnet-EVM and SpacesVM). 
 
-`Custom` VMs are not supported yet at this point, but are next on the agenda.
+Custom VMs aren't supported yet at this point, but are next on the agenda.
 
-As we want to import `wagmi`, and we know that is a `Subnet-EVM` type, we select that.
+As the import is for WAGMI, and you know that it's a Subnet-EVM type, select that.
 
-The tool then queries the (github) repository for available releases, 
+The tool then queries the (GitHub) repository for available releases, 
 and prompts the user to pick the version she wants to use:
 
 ```shell
@@ -152,60 +155,26 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 There is only so much the tool can help here, the Subnet manager/administrator 
-should know what they want to use `Avalanche-CLI` for, how, 
-and why they are importing the Subnet. 
+should know what they want to use Avalanche-CLI for, how, 
+and why they're importing the Subnet. 
 
-It is crucial to understand that the correct versions are only known to the user. 
-The latest might be usually fine, but it can not just be assumed by the tool. 
-This is why it is indispensable that the user is prompted, and she is required to choose
-(unless above we selected to query an actual Subnet validator, not the public APIs.
-In such a scenario, this picking is skipped).
+It's crucial to understand that the correct versions are only known to the user. 
+The latest might be usually fine, but the tool can't make assumptions about it easily. 
+This is why it's indispensable that the wizard prompts the user, and the tool requires her to choose
+- unless you selected to query an actual Subnet validator, not the public APIs, in the preceding step.
+In such a scenario, the tool skips this picking.
 
 ```shell
 ✔ v0.4.5
-Subnet wagmi imported successfully
+Subnet WAGMI imported successfully
 ```
 
-The choice finalizes the wizard, which signals (hopefully) that the import succeeded. 
+The choice finalizes the wizard, which hopefully signals that the import succeeded. 
 If something went wrong, the error messages provide cause information.
-This means you can now use `Avalanche-CLI` to handle the imported Subnet in the accustomed way. 
-For example, the `wagmi` Subnet could be deployed locally.
+This means you can now use Avalanche-CLI to handle the imported Subnet in the accustomed way. 
+For example, you could deploy the WAGMI Subnet locally.
 
 
-### Flags
+For a complete description of options, flags, and the command, 
+visit the [command reference](./reference-cli-commands.md#subnet-import).
 
-Prompting steps can be skipped by providing flags to the command. 
-The `--help` option lists how to use them:
-
-```shell
-avalanche subnet import public --help
-The subnet import public command will import a subnet configuration from a running network.
-
-The genesis file should be available from the disk for this to work. 
-By default, an imported subnet will not overwrite an existing subnet with the same name. 
-To allow overwrites, provide the --force flag.
-
-Usage:
-  avalanche subnet import public [subnetPath] [flags]
-
-Flags:
-      --custom                     use a custom VM template
-      --evm                        import a subnet-evm
-  -f, --force                      overwrite the existing configuration if one exists
-      --fuji fuji                  import from fuji (alias for `testnet`)
-      --genesis-file-path string   path to the genesis file
-  -h, --help                       help for public
-      --mainnet mainnet            import from mainnet
-      --node-url string            [optional] URL of an already running subnet validator
-      --spacesvm                   use the SpacesVM as the base template
-      --subnet-id string           the subnet ID
-      --testnet testnet            import from testnet (alias for `fuji`)
-
-Global Flags:
-      --config string      config file (default is $HOME/.avalanche-cli.json)
-      --log-level string   log level for the application (default "ERROR")
-```
-
-For example, we can provide `--testnet` to skip the network prompt, 
-`--evm` to signal that the VM is of `Subnet-EVM` type, 
-or `--node-url` to directly provide a node's API endpoint.
