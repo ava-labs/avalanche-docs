@@ -58,9 +58,17 @@ If you have questions, problems or suggestions, come [talk to us](https://chat.a
 
 ## Community Providers
 
-GetBlock (blockchain RPC provider) - Instant API Access to Avalanche - https://getblock.io/nodes/avax/
-
 :::warning Disclaimer
 
 Ava Labs offers no warranty/guarantee on the quality or uptime of these 3rd party RPC providers
 :::
+
+### [GetBlock] (https://getblock.io/nodes/avax/) A Blockchain RPC provider - Instant API Access to Avalanche 
+
+Mainnet: 
+wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=
+https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=
+
+Testnet:
+wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=
+https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=
