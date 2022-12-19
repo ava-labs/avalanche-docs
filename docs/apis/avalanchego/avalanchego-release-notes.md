@@ -6,6 +6,18 @@
 
 :::
 
+## V1.9.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.6))
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `20`.**
+
+**Change 1**
+
+- Change Detail 1
+- Change Detail 2
+
+
 ## V1.9.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.4))
 
 This version is backwards compatible to
