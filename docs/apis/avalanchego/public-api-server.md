@@ -81,6 +81,50 @@ try using a community RPC provider.
 
 If you have questions, problems, or suggestions, join the official [Avalanche Discord](https://chat.avalabs.org/).
 
+## Subnets
+
+### Defi Kingdom (DFK)
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws`.
+
+### Swimmer Network
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/swimmer/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is ` https://subnets.avax.network/swimmer/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/swimmer/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/swimmer/testnet/ws`.
+
+### Dexalot
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/dexalot/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/dexalot/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/dexalot/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws`.
+
 ## Community Providers
 
 :::warning Disclaimer
@@ -129,10 +173,14 @@ Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 #### Mainnet 
 
-- Standard EVM API, the URL is `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
-- Websocket EVM API, the URL is `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+##### HTTP
 
-#### Testnet
+- For C-Chain API, the URL is  `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
 
-- Standard EVM API, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`
-- Websocket EVM API, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`
+Note: on Fuji Testnet, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
+
+##### Websockets
+
+- For C-Chain API, the URL is  `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+
+Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
