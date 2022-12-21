@@ -31,28 +31,28 @@ Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://
 
 Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
-## Supported APIs
+### Supported APIs
 
 The public API server supports all the API endpoints that make sense to be
 available on a public-facing service, including APIs for the
 [X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md),
 [C-Chain](./apis/c-chain.md), and full archival for the Primary Network.
-However, it does not support [Index APIs](./apis/index-api.md), which includes
+However, it doesn't support [Index APIs](./apis/index-api.md), which includes
 the X-Chain API's `getAddressTxs` method.
 
 For a full list of available APIs see [here](./apis/README.md).
 
-## Limitations
+### Limitations
 
-The public API only supports C-Chain websocket API calls for API methods that
+The public API only supports C-Chain WebSocket API calls for API methods that
 don't exist on the C-Chain's HTTP API.
 
 For batched C-Chain requests on the public API node, the maximum number of items
-is 40. We are working on to support a larger batch size.
+is 40. We're working on to support a larger batch size.
 
 The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](../../nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
 
-## Sticky Sessions
+### Sticky Sessions
 
 Requests to the public API server API are distributed by a load balancer to an
 individual node. As a result, consecutive requests may go to different nodes.
@@ -69,16 +69,61 @@ API, simply set the following in your code:
 avalanche.setRequestConfig("withCredentials", true)
 ```
 
-## Availability
+### Availability
 
 Usage of public API nodes is free and available to everyone without any
 authentication or authorization. Rate limiting is present, but many of the API
-calls are cached, and the rate limits are quite high. If your application is
-running up against the limits, please [contact us](https://chat.avalabs.org).
+calls are cached, and the rate limits are quite high. If your app is
+running up against the limits, please [contact us](https://chat.avalabs.org) or
+try using a community RPC provider.
 
-## Support
+### Support
 
-If you have questions, problems or suggestions, come [talk to us](https://chat.avalabs.org/).
+If you have questions, problems, or suggestions, join the official [Avalanche Discord](https://chat.avalabs.org/).
+
+## Subnets
+
+### DeFi Kingdom (DFK)
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws`.
+
+### Swimmer Network
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/swimmer/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is ` https://subnets.avax.network/swimmer/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/swimmer/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/swimmer/testnet/ws`.
+
+### Dexalot
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/dexalot/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/dexalot/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/dexalot/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws`.
 
 ## Community Providers
 
@@ -94,3 +139,57 @@ and conduct your own research to properly evaluate the risks and benefits of any
 project.
 
 :::
+
+### Infura
+
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network)
+currently only supports the C-Chain.
+
+#### HTTP
+
+- For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
+
+Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
+
+### ANKR
+
+#### Mainnet
+
+- Standard EVM API, the URL is `https://rpc.ankr.com/avalanche`.
+- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche-c`. On ANKR the C-Chain API doesn't 
+support standard EVM APIs. For that use the Standard EVM API.
+- For X-Chain API, the URL is `https://rpc.ankr.com/avalanche-x`.
+- For P-Chain API, the URL is `https://rpc.ankr.com/avalanche-p`.
+
+#### Testnet (Fuji)
+
+- Standard EVM API, the URL is `https://rpc.ankr.com/avalanche_fuji`.
+- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-c`. On ANKR the C-Chain API 
+doesn't support standard EVM APIs. For that use the Standard EVM API.
+- For X-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-x`.
+- For P-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-p`.
+
+Features:
+
+- Archive Data Included.
+- Automatic geo-routing across North America, Europe, and Asia.
+
+Note: soft limited to 1 million daily requests per IP or referring domain. Batch calls limited to 1000.
+
+Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
+
+### GetBlock 
+
+[GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
+
+#### HTTP
+
+- For C-Chain API, the URL is  `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+
+Note: on Fuji Testnet, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
+
+#### Websockets
+
+- For C-Chain API, the URL is  `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+
+Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
