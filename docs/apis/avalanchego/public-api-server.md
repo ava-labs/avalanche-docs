@@ -31,7 +31,7 @@ Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://
 
 Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
-## Supported APIs
+### Supported APIs
 
 The public API server supports all the API endpoints that make sense to be
 available on a public-facing service, including APIs for the
@@ -42,7 +42,7 @@ the X-Chain API's `getAddressTxs` method.
 
 For a full list of available APIs see [here](./apis/README.md).
 
-## Limitations
+### Limitations
 
 The public API only supports C-Chain WebSocket API calls for API methods that
 don't exist on the C-Chain's HTTP API.
@@ -52,7 +52,7 @@ is 40. We're working on to support a larger batch size.
 
 The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](../../nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
 
-## Sticky Sessions
+### Sticky Sessions
 
 Requests to the public API server API are distributed by a load balancer to an
 individual node. As a result, consecutive requests may go to different nodes.
@@ -69,7 +69,7 @@ API, simply set the following in your code:
 avalanche.setRequestConfig("withCredentials", true)
 ```
 
-## Availability
+### Availability
 
 Usage of public API nodes is free and available to everyone without any
 authentication or authorization. Rate limiting is present, but many of the API
@@ -77,7 +77,7 @@ calls are cached, and the rate limits are quite high. If your app is
 running up against the limits, please [contact us](https://chat.avalabs.org) or
 try using a community RPC provider.
 
-## Support
+### Support
 
 If you have questions, problems, or suggestions, join the official [Avalanche Discord](https://chat.avalabs.org/).
 
