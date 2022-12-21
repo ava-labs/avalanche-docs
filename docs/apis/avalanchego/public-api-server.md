@@ -140,6 +140,17 @@ project.
 
 :::
 
+### Infura
+
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network)
+currently only supports the C-Chain.
+
+#### HTTP
+
+- For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
+
+Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
+
 ### ANKR
 
 #### Mainnet
@@ -171,15 +182,13 @@ Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
 
-#### Mainnet 
-
-##### HTTP
+#### HTTP
 
 - For C-Chain API, the URL is  `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
 
 Note: on Fuji Testnet, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
 
-##### Websockets
+#### Websockets
 
 - For C-Chain API, the URL is  `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
 
