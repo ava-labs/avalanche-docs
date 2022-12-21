@@ -122,3 +122,17 @@ Features:
 Note: soft limited to 1 million daily requests per IP or referring domain. Batch calls limited to 1000.
 
 Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
+
+### GetBlock 
+
+[GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
+
+#### Mainnet 
+
+- Standard EVM API, the URL is `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+- Websocket EVM API, the URL is `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+
+#### Testnet
+
+- Standard EVM API, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`
+- Websocket EVM API, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`
