@@ -1,6 +1,6 @@
 # How to Import a Subnet into Avalanche-CLI
 
-## What Is the Context of This How-To?
+## Context
 
 The most probable reason why someone would want to do this, 
 is if they already deployed a Subnet with `subnet-cli` either to `Fuji` or `Mainnet`, 
