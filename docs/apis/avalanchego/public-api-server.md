@@ -196,7 +196,8 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### QuickNode
 
-[QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain, P-Chain, C-Chain, and Index API.
+[QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
+P-Chain, C-Chain, and Index API.
 
 #### HTTP
 
