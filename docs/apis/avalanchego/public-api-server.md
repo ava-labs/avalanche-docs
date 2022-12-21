@@ -83,7 +83,7 @@ If you have questions, problems, or suggestions, join the official [Avalanche Di
 
 ## Subnets
 
-### Defi Kingdom (DFK)
+### DeFi Kingdom (DFK)
 
 #### HTTP
 
