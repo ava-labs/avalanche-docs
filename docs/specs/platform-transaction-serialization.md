@@ -735,11 +735,11 @@ Let’s make an unsigned add validator TX that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Remove Subnet Validator Tx
+## Unsigned Remove Subnet Validator TX
 
-### What Unsigned Remove Subnet Validator Tx Contains
+### What Unsigned Remove Subnet Validator TX Contains
 
-An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`,
+An unsigned remove Subnet validator TX contains a `BaseTx`, `NodeID`,
 `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
 
 - **`BaseTx`**
@@ -750,7 +750,7 @@ An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`,
   control signature which proves that the issuer has the right to remove the
   node from the Subnet. The array must be sorted low to high.
 
-### Gantt Unsigned Remove Subnet Validator Tx Specification
+### Gantt Unsigned Remove Subnet Validator TX Specification
 
 ```text
 +---------------+----------------------+------------------------------------------------+
@@ -766,7 +766,7 @@ An unsigned remove Subnet validator tx contains a `BaseTx`, `NodeID`,
 +---------------------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Remove Subnet Validator Tx Specification
+### Proto Unsigned Remove Subnet Validator TX Specification
 
 ```text
 message RemoveSubnetValidatorTx {
@@ -777,17 +777,17 @@ message RemoveSubnetValidatorTx {
 }
 ```
 
-### Unsigned Remove Subnet Validator Tx Example
+### Unsigned Remove Subnet Validator TX Example
 
 TODO format
 
 0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a7000000000000000000000000e902a9a86640bfdb1cd0e36c0cc982b83e5765fa4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db0000000a0000000100000000
 
-## Unsigned Add Permissionless Validator Tx
+## Unsigned Add Permissionless Validator TX
 
-### What Unsigned Add Permissionless Validator Tx Contains
+### What Unsigned Add Permissionless Validator TX Contains
 
-An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`,
+An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
 `SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`,
 `DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is
 25 or `0x00000019`.
@@ -800,7 +800,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`,
   - **`Weight`** is a long which is the amount the validator stakes
 - **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID
-  27 (`0x1B`) followed by a [Proof of Posession](#proof-of-possession). If the
+  27 (`0x1B`) followed by a [Proof of Possession](#proof-of-possession). If the
   [SubnetID] is not the primary network, this value is the empty signer, whose
   byte representation is only the type ID 28 (`0x1C`).
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
@@ -810,7 +810,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`,
   delegators as a percentage, times 10,000 For example, if this validator has
   DelegationShares=300,000 then they take 30% of rewards from delegators.
 
-### Gantt Unsigned Add Permissionless Validator Tx Specification
+### Gantt Unsigned Add Permissionless Validator TX Specification
 
 ```text
 +---------------+----------------------+------------------------------------------------+
@@ -835,7 +835,7 @@ An unsigned add permissionless validator tx contains a `BaseTx`, `Validator`,
 +---------------------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Permissionless Validator Tx Specification
+### Proto Unsigned Add Permissionless Validator TX Specification
 
 ```text
 message AddPermissionlessValidatorTx {
@@ -850,17 +850,17 @@ message AddPermissionlessValidatorTx {
 }
 ```
 
-### Unsigned Add Permissionless Validator Tx Example
+### Unsigned Add Permissionless Validator TX Example
 
 TODO format
 
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a20000000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf00000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f520000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f44000004e20
 
-## Unsigned Add Permissionless Delegator Tx
+## Unsigned Add Permissionless Delegator TX
 
-### What Unsigned Add Permissionless Delegator Tx Contains
+### What Unsigned Add Permissionless Delegator TX Contains
 
-An unsigned add permissionless delegator tx contains a `BaseTx`, `Validator`,
+An unsigned add permissionless delegator TX contains a `BaseTx`, `Validator`,
 `SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type
 is 26 or `0x0000001a`.
 
@@ -874,7 +874,7 @@ is 26 or `0x0000001a`.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
 
-### Gantt Unsigned Add Permissionless Delegator Tx Specification
+### Gantt Unsigned Add Permissionless Delegator TX Specification
 
 ```text
 +---------------+----------------------+------------------------------------------------+
@@ -892,7 +892,7 @@ is 26 or `0x0000001a`.
 +---------------------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Add Permissionless Delegator Tx Specification
+### Proto Unsigned Add Permissionless Delegator TX Specification
 
 ```text
 message AddPermissionlessDelegatorTx {
@@ -905,19 +905,19 @@ message AddPermissionlessDelegatorTx {
 }
 ```
 
-### Unsigned Add Permissionless Delegator Tx Example
+### Unsigned Add Permissionless Delegator TX Example
 
 TODO format
 
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a20000000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf00000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
 
-## Unsigned Transform Subnet Tx
+## Unsigned Transform Subnet TX
 
-Transforms a permissioned subnet into a permissionless subnet. Must be signed by the subnet owner.
+Transforms a permissioned Subnet into a permissionless Subnet. Must be signed by the Subnet owner.
 
-### What Unsigned Transform Subnet Tx Contains
+### What Unsigned Transform Subnet TX Contains
 
-An unsigned transform Subnet tx contains a `BaseTx`, `SubnetID`, `AssetID`,
+An unsigned transform Subnet TX contains a `BaseTx`, `SubnetID`, `AssetID`,
 `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`,
 `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`,
 `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`,
@@ -942,7 +942,7 @@ for this type is 24 or `0x00000018`.
   validator's stake duration is equal to the minting period.
   - Restrictions
     - Must be >= [MinConsumptionRate]
-    - Must be <= [reward.PercentDenominator]
+    - Must be <= [`reward.PercentDenominator`]
 - **`MinValidatorStake`** is a long which the minimum amount of funds required to become a validator.
   - Restrictions
     - Must be > 0
@@ -962,7 +962,7 @@ for this type is 24 or `0x00000018`.
 - **`MinDelegationFee`** is a short is the minimum percentage a validator must
   charge a delegator for delegating.
   - Restrictions
-    - Must be <= [reward.PercentDenominator]
+    - Must be <= [`reward.PercentDenominator`]
 - **`MinDelegatorStake`** is a short which is the minimum amount of funds required to become a delegator.
   - Restrictions
     - Must be > 0
@@ -974,13 +974,13 @@ for this type is 24 or `0x00000018`.
 - **`UptimeRequirement`** is a short which is the minimum percentage a validator
   must be online and responsive to receive a reward.
   - Restrictions
-    - Must be <= [reward.PercentDenominator]
+    - Must be <= [`reward.PercentDenominator`]
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
   control signature to authorizes this transformation. The array must be sorted
   low to high.
 
-### Gantt Unsigned Transform Subnet Tx Specification
+### Gantt Unsigned Transform Subnet TX Specification
 
 ```text
 +----------------------+------------------+----------------------------------+
@@ -1020,7 +1020,7 @@ for this type is 24 or `0x00000018`.
 +----------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Transform Subnet Tx Specification
+### Proto Unsigned Transform Subnet TX Specification
 
 ```text
 message TransformSubnetTx {
@@ -1043,13 +1043,13 @@ message TransformSubnetTx {
 }
 ```
 
-### Unsigned Transform Subnet Tx Example
+### Unsigned Transform Subnet TX Example
 
 TODO format
 
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a70000000500000000000f42400000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada000000e8d4a51000000009184e72a0000000000000000001000000000000000a000000174876e800000001d1a94a20000001518001e1338000002710000000174876e80005000c35000000000a0000000100000000
 
-## Unsigned Add Subnet Validator Tx
+## Unsigned Add Subnet Validator TX
 
 ### What Unsigned Add Subnet Validator TX Contains
 
