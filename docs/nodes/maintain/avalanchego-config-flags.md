@@ -5,13 +5,17 @@ description: This documents list all available configuration and flags for Avala
 
 # AvalancheGo Config and Flags
 
+<!-- markdownlint-disable MD001 -->
+
 You can specify the configuration of a node with the arguments below.
 
 ## Config File
 
-#### `--config-file` (string):
+#### `--config-file` (string)
 
-Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file. This flag is ignored if `--config-file-content` is specified.
+Path to a JSON file that specifies this node's configuration. Command line
+arguments will override arguments set in the config file. This flag is ignored
+if `--config-file-content` is specified.
 
 Example JSON config file:
 
@@ -23,89 +27,121 @@ Example JSON config file:
 
 :::tip
 
-[Install Script](../build/set-up-node-with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you would need to create it manually if needed.
+[Install Script](../build/set-up-node-with-installer.md) creates the node config
+file at `~/.avalanchego/configs/node.json`. No default file is created if
+[AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you
+would need to create it manually if needed.
 
 :::
 
-#### `--config-file-content` (string):
+#### `--config-file-content` (string)
 
-As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
+As an alternative to `--config-file`, it allows specifying base64 encoded config
+content. Must be used in conjunction with `--config-file-content-type`.
 
-#### `--config-file-content-type` (string):
+#### `--config-file-content-type` (string)
 
-Specifies the format of the base64 encoded config content. JSON, TOML, YAML are among currently supported file format (see [here](https://github.com/spf13/viper#reading-config-files) for full list). Required if `--config-file-content` is set.
+Specifies the format of the base64 encoded config content. JSON, TOML, YAML are
+among currently supported file format (see
+[here](https://github.com/spf13/viper#reading-config-files) for full list).
+Required if `--config-file-content` is set.
 
 ## APIs
 
-#### `--api-admin-enabled` (boolean):
+#### `--api-admin-enabled` (boolean)
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../../apis/avalanchego/apis/admin.md) for more information.
+If set to `false`, this node will not expose the Admin API. Defaults to `false`.
+See [here](../../apis/avalanchego/apis/admin.md) for more information.
 
-#### `--api-auth-required` (boolean):
+#### `--api-auth-required` (boolean)
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../../apis/avalanchego/apis/auth.md) for more information.
+If set to `true`, API calls require an authorization token. Defaults to `false`.
+See [here](../../apis/avalanchego/apis/auth.md) for more information.
 
-#### `--api-auth-password` (string):
+#### `--api-auth-password` (string)
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../../apis/avalanchego/apis/auth.md) for more information.
+The password needed to create/revoke authorization tokens. If
+`--api-auth-required=true`, must be specified; otherwise ignored. See
+[here](../../apis/avalanchego/apis/auth.md) for more information.
 
-#### `--api-health-enabled` (boolean):
+#### `--api-health-enabled` (boolean)
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../../apis/avalanchego/apis/health.md) for more information.
+If set to `true`, this node will expose the Health API. Defaults to `true`. See
+[here](../../apis/avalanchego/apis/health.md) for more information.
 
-#### `--index-enabled` (boolean):
+#### `--index-enabled` (boolean)
 
-If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../../apis/avalanchego/apis/index-api.md) for more information.
+If `false`, this node will not enable the indexer and the Index API will not be
+available. Defaults to `false`. See
+[here](../../apis/avalanchego/apis/index-api.md) for more information.
 
-#### `--api-info-enabled` (boolean):
+#### `--api-info-enabled` (boolean)
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../../apis/avalanchego/apis/info.md) for more information.
+If set to `true`, this node will expose the Info API. Defaults to `true`. See
+[here](../../apis/avalanchego/apis/info.md) for more information.
 
-#### `--api-ipcs-enabled` (boolean):
+#### `--api-ipcs-enabled` (boolean)
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../../apis/avalanchego/apis/ipc.md) for more information.
+If set to `true`, this node will expose the IPC's API. Defaults to `false`. See
+[here](../../apis/avalanchego/apis/ipc.md) for more information.
 
-#### `--api-keystore-enabled` (boolean):
+#### `--api-keystore-enabled` (boolean)
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../../apis/avalanchego/apis/keystore.md) for more information.
+If set to `false`, this node will not expose the Keystore API. Defaults to
+`true`. See [here](../../apis/avalanchego/apis/keystore.md) for more
+information.
 
-#### `--api-metrics-enabled` (boolean):
+#### `--api-metrics-enabled` (boolean)
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../../apis/avalanchego/apis/metrics.md) for more information.
+If set to `false`, this node will not expose the Metrics API. Defaults to
+`true`. See [here](../../apis/avalanchego/apis/metrics.md) for more information.
 
-#### `--http-shutdown-wait` (duration):
+#### `--http-shutdown-wait` (duration)
 
-Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to 0.
+Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown.
+The `/health` endpoint will return unhealthy during this duration (if the Health
+API is enabled.) Defaults to 0.
 
-#### `--http-shutdown-timeout` (duration):
+#### `--http-shutdown-timeout` (duration)
 
-Maximum duration to wait for existing connections to complete during node shutdown. Defaults to `10s`.
+Maximum duration to wait for existing connections to complete during node
+shutdown. Defaults to `10s`.
 
 ## Assertions
 
-#### `--assertions-enabled` (boolean):
+#### `--assertions-enabled` (boolean)
 
-When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+When set to `true`, assertions will execute at runtime throughout the codebase.
+This is intended for use in debugging, as we may get a more specific error
+message. Defaults to `true`.
 
 ## Bootstrapping
 
-#### `--bootstrap-beacon-connection-timeout` (duration):
+#### `--bootstrap-beacon-connection-timeout` (duration)
 
 Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
 
-#### `--bootstrap-ids` (string):
+#### `--bootstrap-ids` (string)
 
-Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
+Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used
+to authenticate bootstrapping peers. An example setting of this field would be
+`--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
+The number of given IDs here must be same with number of given
+`--bootstrap-ips`. The default value depends on the network ID.
 
-#### `--bootstrap-ips` (string):
+#### `--bootstrap-ips` (string)
 
-Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
+Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses
+will be used to bootstrap the current Avalanche state. An example setting of
+this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number
+of given IPs here must be same with number of given `--bootstrap-ids`. The
+default value depends on the network ID.
 
-#### `--bootstrap-retry-enabled` (boolean):
+#### `--bootstrap-retry-enabled` (boolean)
 
 If true, will retry bootstrapping if it fails.
 
-#### `--bootstrap-retry-max-attempts` (uint):
+#### `--bootstrap-retry-max-attempts` (uint)
 
 Max number of times to retry bootstrapping after a failure.
 
@@ -119,42 +155,74 @@ This node reads at most this many containers from an incoming Ancestors message.
 
 ## State Syncing
 
-#### `--state-sync-ids` (string):
+#### `--state-sync-ids` (string)
 
-State sync IDs is a comma-separated list of validator IDs. The specified validators will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--state-sync-ips`. The default value is empty, which results in all validators being sampled.
+State sync IDs is a comma-separated list of validator IDs. The specified
+validators will be contacted to get and authenticate the starting point (state
+summary) for state sync. An example setting of this field would be
+`--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
+The number of given IDs here must be same with number of given
+`--state-sync-ips`. The default value is empty, which results in all validators
+being sampled.
 
-#### `--state-sync-ips` (string):
+#### `--state-sync-ips` (string)
 
-State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be the same with the number of given `--state-sync-ids`.
+State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses
+will be contacted to get and authenticate the starting point (state summary) for
+state sync. An example setting of this field would be
+`--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here
+must be the same with the number of given `--state-sync-ids`.
 
 ## Chain Configs
 
-Some blockchains allow the node operator to provide custom configurations for individual blockchains. These custom configurations are broken down into two categories: network upgrades and optional chain configurations. AvalancheGo reads in these configurations from the chain configuration directory and passes them into the VM on initialization.
+Some blockchains allow the node operator to provide custom configurations for
+individual blockchains. These custom configurations are broken down into two
+categories: network upgrades and optional chain configurations. AvalancheGo
+reads in these configurations from the chain configuration directory and passes
+them into the VM on initialization.
 
 :::note
 Please replace `chain-config-dir` and `blockchainID` with actual value.
 :::
 
-The network upgrades are passed in from the location: `chain-config-dir`/`blockchainID`/upgrade.json. After a blockchain has activated a network upgrade, the same upgrade configuration must always be passed in to ensure that the network upgrades activate at the correct time.
+The network upgrades are passed in from the location:
+`chain-config-dir`/`blockchainID`/upgrade.json. After a blockchain has activated
+a network upgrade, the same upgrade configuration must always be passed in to
+ensure that the network upgrades activate at the correct time.
 
-The chain configs are passed in from the location `chain-config-dir`/`blockchainID`/config.json. This configuration is used by the VM to handle optional configuration flags such as enabling/disabling APIs, updating log level, etc. The chain configuration is intended to provide optional configuration parameters and the VM will use default values if nothing is passed in.
-`chain-config-dir`/`blockchainID`/config.json
+The chain configs are passed in from the location
+`chain-config-dir`/`blockchainID`/config.json. This configuration is used by the
+VM to handle optional configuration flags such as enabling/disabling APIs,
+updating log level, etc. The chain configuration is intended to provide optional
+configuration parameters and the VM will use default values if nothing is passed
+in. `chain-config-dir`/`blockchainID`/config.json
 
-Full reference for all configuration options for specific chains can be found in a separate [chain config flags](chain-config-flags.md) document.
+Full reference for all configuration options for specific chains can be found in
+a separate [chain config flags](chain-config-flags.md) document.
 
-Full reference for subnet-evm upgrade configuration can be found in a separate [Customize a Subnet](../../subnets/customize-a-subnet.md) document.
+Full reference for `subnet-evm` upgrade configuration can be found in a separate
+[Customize a Subnet](../../subnets/customize-a-subnet.md) document.
 
-#### `--chain-config-dir` (string):
+#### `--chain-config-dir` (string)
 
-Specifies the directory that contains chain configs, as described [here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--chain-config-content` is specified.
+Specifies the directory that contains chain configs, as described
+[here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`.
+If this flag is not provided and the default directory does not exist,
+AvalancheGo will not exit since custom configs are optional. However, if the
+flag is set, the specified folder must exist, or AvalancheGo will exit with an
+error. This flag is ignored if `--chain-config-content` is specified.
 
-#### `--chain-config-content` (string):
+#### `--chain-config-content` (string)
 
-As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
+As an alternative to `--chain-config-dir`, chains custom configurations can be
+loaded altogether from command line via `--chain-config-content` flag. Content
+must be base64 encoded.
 
-#### `--chain-aliases-file` (string):
+#### `--chain-aliases-file` (string)
 
-Path to JSON file that defines aliases for Blockchain IDs. Defaults to `~/.avalanchego/configs/chains/aliases.json`. This flag is ignored if `--chain-aliases-file-content` is specified. Example content:
+Path to JSON file that defines aliases for Blockchain IDs. Defaults to
+`~/.avalanchego/configs/chains/aliases.json`. This flag is ignored if
+`--chain-aliases-file-content` is specified. Example content:
 
 ```json
 {
@@ -164,33 +232,44 @@ Path to JSON file that defines aliases for Blockchain IDs. Defaults to `~/.avala
 }
 ```
 
-The above example aliases the Blockchain whose ID is `"2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX"` to `"Swimmer"`. Chain aliases are added after adding primary network aliases and before any changes to the aliases via the admin API. This means that the first alias included for a Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the full blockchainID. The Primary Alias is used in all metrics and logs.
+The above example aliases the Blockchain whose ID is
+`"2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX"` to `"Swimmer"`. Chain
+aliases are added after adding primary network aliases and before any changes to
+the aliases via the admin API. This means that the first alias included for a
+Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the
+full blockchainID. The Primary Alias is used in all metrics and logs.
 
-`--chain-aliases-file-content` (string):
+`--chain-aliases-file-content` (string)
 
 As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded aliases for Blockchains.
 
 ## Database
 
-##### `--db-dir` (string, file path):
+##### `--db-dir` (string, file path)
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
 
-##### `--db-type` (string):
+##### `--db-type` (string)
 
-Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`. `memdb` is an in-memory, non-persisted database.
+Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`,
+`memdb`. `memdb` is an in-memory, non-persisted database.
 
-Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
+Note that when running with `leveldb`, the node can't read data that was
+persisted when running with `rocksdb`, and vice-versa.
 
-**Two important notes about RocksDB**: First, RocksDB does not work on all computers. Second, RocksDB is not built by default and is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`.
+**Two important notes about RocksDB**: First, RocksDB does not work on all
+computers. Second, RocksDB is not built by default and is not included in
+publicly released binaries. To build AvalancheGo with RocksDB, run `export
+ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this
+before you can use `--db-type=rocksdb`.
 
 ### Database Config
 
-#### `--db-config-file` (string):
+#### `--db-config-file` (string)
 
 Path to the database config file. Ignored if `--config-file-content` is specified.
 
-#### `--db-config-file-content` (string):
+#### `--db-config-file-content` (string)
 
 As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
 
@@ -246,63 +325,88 @@ Custom config is not yet supported for RocksDB.
 
 ## Genesis
 
-#### `--genesis` (string):
+#### `--genesis` (string)
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data.
+Path to a JSON file containing the genesis data to use. Ignored when running
+standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is
+specified. If not given, uses default genesis data.
 
 This are the main properties in the JSON file:
 
 - `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32].
 - `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
-- `startTime`: The time of the beginning of the blockchain, it must be a Unix timestamp and it can't be a time in the future.
+- `startTime`: The time of the beginning of the blockchain, it must be a Unix
+  timestamp and it can't be a time in the future.
 - `initialStakeDuration`: The stake duration, in seconds, of the validators that exist at network genesis.
-- `initialStakeDurationOffset`: The offset, in seconds, between the start times of the validators that exist at genesis.
-- `initialStakedFunds`: A list of addresses that own the funds staked at genesis (each address must be present in `allocations` as well)
-- `initialStakers`: The validators that exist at genesis. Each element contains the rewardAddress, nodeID and the delegationFee of the validator.
+- `initialStakeDurationOffset`: The offset, in seconds, between the start times
+  of the validators that exist at genesis.
+- `initialStakedFunds`: A list of addresses that own the funds staked at genesis
+  (each address must be present in `allocations` as well)
+- `initialStakers`: The validators that exist at genesis. Each element contains
+  the `rewardAddress`, nodeID and the `delegationFee` of the validator.
 - `cChainGenesis`: The genesis info to be passed to the C-Chain.
 - `message`: A message to include in the genesis. Not required.
 
 For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
 
-#### `--genesis-content` (string):
+#### `--genesis-content` (string)
 
 As an alternative to `--genesis`, it allows specifying base64 encoded genesis data to use.
 
 ## HTTP Server
 
-#### `--http-host` (string):
+#### `--http-host` (string)
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. You can also enter domain names as parameter.
+The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that
+by default, your node can only handle API calls made from the same machine. To
+allow API calls from other machines, use `--http-host=`. You can also enter
+domain names as parameter.
 
-#### `--http-port` (int):
+#### `--http-port` (int)
 
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
+Each node runs an HTTP server that provides the APIs for interacting with the
+node and the Avalanche network. This argument specifies the port that the HTTP
+server will listen on. The default value is `9650`.
 
-#### `--http-tls-cert-file` (string, file path):
+#### `--http-tls-cert-file` (string, file path)
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-cert-file-content` is specified.
+This argument specifies the location of the TLS certificate used by the node for
+the HTTPS server. This must be specified when `--http-tls-enabled=true`. There
+is no default value. This flag is ignored if `--http-tls-cert-file-content` is
+specified.
 
-#### `--http-tls-cert-file-content` (string):
+#### `--http-tls-cert-file-content` (string)
 
-As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. Note that full certificate content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
+As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded
+content of the TLS certificate used by the node for the HTTPS server. Note that
+full certificate content, with the leading and trailing header, must be base64
+encoded. This must be specified when `--http-tls-enabled=true`.
 
-#### `--http-tls-enabled` (boolean):
+#### `--http-tls-enabled` (boolean)
 
 If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
 
-#### `--http-tls-key-file` (string, file path):
+#### `--http-tls-key-file` (string, file path)
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-key-file-content` is specified.
+This argument specifies the location of the TLS private key used by the node for
+the HTTPS server. This must be specified when `--http-tls-enabled=true`. There
+is no default value. This flag is ignored if `--http-tls-key-file-content` is
+specified.
 
-#### `--http-tls-key-file-content` (string):
+#### `--http-tls-key-file-content` (string)
 
-As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. Note that full private key content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
+As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded
+content of the TLS private key used by the node for the HTTPS server. Note that
+full private key content, with the leading and trailing header, must be base64
+encoded. This must be specified when `--http-tls-enabled=true`.
 
 ## IPCS
 
 #### `--ipcs-chain-ids` (string)
 
-Comma separated list of chain ids to connect to (e.g. `11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`). There is no default value.
+Comma separated list of chain ids to connect to (for example
+`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
+There is no default value.
 
 #### `--ipcs-path` (string)
 
@@ -312,60 +416,72 @@ The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to
 
 #### `--fd-limit` (int)
 
-Attempts to raise the process file descriptor limit to at least this value and error if the value is above the system max. Linux default `32768`.
+Attempts to raise the process file descriptor limit to at least this value and
+error if the value is above the system max. Linux default `32768`.
 
 ## Logging
 
-#### `--log-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`):
+#### `--log-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
 
-The log level determines which events to log. There are 8 different levels, in order from highest priority to lowest.
+The log level determines which events to log. There are 8 different levels, in
+order from highest priority to lowest.
 
 - `fatal`: Fatal errors that are not recoverable.
 - `error`: Errors that the node encounters, these errors were able to be recovered.
 - `warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
 - `info`: Useful descriptions of node status updates.
-- `trace`: Traces container (block, vertex, transaction) job results. Useful for tracing container IDs and their outcomes.
-- `debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-- `verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `trace`: Traces container (block, vertex, transaction) job results. Useful for
+  tracing container IDs and their outcomes.
+- `debug`: Debug logging is useful when attempting to understand possible bugs
+  in the code. More information that would be typically desired for normal usage
+  will be displayed.
+- `verbo`: Tracks extensive amounts of information the node is processing. This
+  includes message contents and binary dumps of data for extremely low level
+  protocol analysis.
 - `off`: No logs have this level of logging. Turns off logging.
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `info`.
+When specifying a log level note that all logs with the specified priority or
+higher will be tracked. Defaults to `info`.
 
-#### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`):
+#### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
 
-The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
+The log level determines which events to display to the screen. If left blank,
+will default to the value provided to `--log-level`.
 
-#### `--log-format` (string, `{auto, plain, colors, json}`):
+#### `--log-format` (string, `{auto, plain, colors, json}`)
 
-The structure of log format. Defaults to `auto` which formats terminal-like logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
+The structure of log format. Defaults to `auto` which formats terminal-like
+logs, when the output is a terminal. Otherwise, should be one of `{auto, plain,
+colors, json}`
 
-#### `--log-dir` (string, file path):
+#### `--log-dir` (string, file path)
 
 Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
 
-#### `--log-disable-display-plugin-logs` (boolean):
+#### `--log-disable-display-plugin-logs` (boolean)
 
 Disables displaying plugin logs in stdout. Defaults to `false`.
 
-#### `--log-rotater-max-size` (uint):
+#### `--log-rotater-max-size` (uint)
 
 The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
 
-#### `--log-rotater-max-files` (uint):
+#### `--log-rotater-max-files` (uint)
 
 The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
 
-#### `--log-rotater-max-age` (uint):
+#### `--log-rotater-max-age` (uint)
 
-The maximum number of days to retain old log files based on the timestamp encoded in their filename. 0 means retain all old log files. Defaults to `0`.
+The maximum number of days to retain old log files based on the timestamp
+encoded in their filename. 0 means retain all old log files. Defaults to `0`.
 
-#### `--log-rotater-compress-enabled` (boolean):
+#### `--log-rotater-compress-enabled` (boolean)
 
 Enables the compression of rotated log files through gzip. Defaults to `false`.
 
 ## Network ID
 
-#### `--network-id` (string):
+#### `--network-id` (string)
 
 The identity of the network the node should connect to. Can be one of:
 
@@ -373,86 +489,113 @@ The identity of the network the node should connect to. Can be one of:
 - `--network-id=fuji` -&gt; Connect to the Fuji test-network.
 - `--network-id=testnet` -&gt; Connect to the current test-network. (Right now, this is Fuji.)
 - `--network-id=local` -&gt; Connect to a local test-network.
-- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID.
+  `id` must be in the range `[0, 2^32)`.
 
 ## OpenTelemetry
 
 AvalancheGo supports collecting and exporting [OpenTelemetry](https://opentelemetry.io/) traces.
 This might be useful for debugging, performance analysis, or monitoring.
 
-#### `--tracing-enabled` (boolean):
+#### `--tracing-enabled` (boolean)
 
-If true, enable opentelemetry tracing. Defaults to `false`.
+If true, enable OpenTelemetry tracing. Defaults to `false`.
 
-#### `--tracing-endpoint` (string):
+#### `--tracing-endpoint` (string)
 
 The endpoint to export trace data to. Defaults to `localhost:4317`.
 
-#### `--tracing-insecure` (string):
+#### `--tracing-insecure` (string)
 
 If true, don't use TLS when exporting trace data. Defaults to `true`.
 
-#### `--tracing-sample-rate` (float):
+#### `--tracing-sample-rate` (float)
 
 The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample.
 Defaults to `0.1`.
 
-#### `--tracing-exporter-type`(string):
+#### `--tracing-exporter-type`(string)
 
 Type of exporter to use for tracing. Options are [`grpc`,`http`]. Defaults to `grpc`.
 
 
 ## Public IP
 
-#### `--public-ip` (string):
+#### `--public-ip` (string)
 
-Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
+Validators must know their public facing IP addresses so they can let other
+nodes know how to connect to them. If this argument is not provided, the node
+will attempt to perform NAT traversal to get the node’s public IP. Should be set
+to `127.0.0.1` to create a local network. If not set, attempts to learn IP using
+NAT traversal.
 
-#### `--public-ip-resolution-frequency` (duration):
+#### `--public-ip-resolution-frequency` (duration)
 
-Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
+Frequency at which this node resolves/updates its public IP and renew NAT
+mappings, if applicable. Default to 5 minutes.
 
-#### `--public-ip-resolution-service` (string):
+#### `--public-ip-resolution-service` (string)
 
-Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`. When provided, the node will use that service to periodically resolve/update its public IP.
+Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`. When
+provided, the node will use that service to periodically resolve/update its
+public IP.
 
 ## Signature Verification
 
-#### `--signature-verification-enabled` (boolean):
+#### `--signature-verification-enabled` (boolean)
 
-Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+Enables signature verification. When set to `false`, signatures won’t be checked
+in VMs that allow signatures to be disabled. Defaults to `true`.
 
 ## Staking
 
-#### `--staking-port` (int):
+#### `--staking-port` (int)
 
-The port through which the network peers will connect to this node externally. Having this port accessible from the internet is required for correct node operation. Defaults to `9651`.
+The port through which the network peers will connect to this node externally.
+Having this port accessible from the internet is required for correct node
+operation. Defaults to `9651`.
 
-#### `--staking-enabled` (boolean):
+#### `--staking-enabled` (boolean)
 
-Avalanche uses Proof of Stake (PoS) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`. Note that this can not be specified on public networks (`Fuji` and `Mainnet`).
+Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively
+expensive to attack the network. If false, sybil resistance is disabled and all
+peers will be sampled during consensus. Defaults to `true`. Note that this can
+not be specified on public networks (`Fuji` and `Mainnet`).
 
 Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
 **You should not set this flag to false unless you understand what you are doing.**
 
-#### `--staking-tls-cert-file` (string, file path):
+#### `--staking-tls-cert-file` (string, file path)
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if `--staking-tls-cert-file-content` is specified.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes.
+This argument specifies the location of the TLS certificate used by the node. By
+default, the node expects the TLS certificate to be at
+`$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if
+`--staking-tls-cert-file-content` is specified.
 
-#### `--staking-tls-cert-file-content` (string):
+#### `--staking-tls-cert-file-content` (string)
 
-As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node. Note that full certificate content, with the leading and trailing header, must be base64 encoded.
+As an alternative to `--staking-tls-cert-file`, it allows specifying base64
+encoded content of the TLS certificate used by the node. Note that full
+certificate content, with the leading and trailing header, must be base64
+encoded.
 
-#### `--staking-tls-key-file` (string, file path):
+#### `--staking-tls-key-file` (string, file path)
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`. This flag is ignored if `--staking-tls-key-file-content` is specified.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes.
+This argument specifies the location of the TLS private key used by the node. By
+default, the node expects the TLS private key to be at
+`$HOME/.avalanchego/staking/staker.key`. This flag is ignored if
+`--staking-tls-key-file-content` is specified.
 
-#### `--staking-tls-key-file-content` (string):
+#### `--staking-tls-key-file-content` (string)
 
-As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
+As an alternative to `--staking-tls-key-file`, it allows specifying base64
+encoded content of the TLS private key used by the node. Note that full private
+key content, with the leading and trailing header, must be base64 encoded.
 
-#### `--staking-disabled-weight` (int):
+#### `--staking-disabled-weight` (int)
 
 Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
@@ -460,21 +603,34 @@ Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
 ### Whitelist
 
-#### `--whitelisted-subnets` (string):
+#### `--whitelisted-subnets` (string)
 
-Comma separated list of Subnet IDs that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
+Comma separated list of Subnet IDs that this node would validate if added to.
+Defaults to empty (will only validate the Primary Network).
 
 ### Subnet Configs
 
-It is possible to provide parameters for Subnets. Parameters here apply to all chains in the specified Subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Subnets specified in [`--whitelisted-subnet` parameter](#whitelisted-subnets-string).
+It is possible to provide parameters for Subnets. Parameters here apply to all
+chains in the specified Subnets. Parameters must be specified with a
+`{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
+configs for Subnets specified in 
+`--whitelisted-subnet` parameter.
 
-Full reference for all configuration options for a Subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
+Full reference for all configuration options for a Subnet can be found in a
+separate [Subnet Configs](./subnet-configs) document.
 
-#### `--subnet-config-dir` (string):
+#### `--subnet-config-dir` (`string`)
 
-Specifies the directory that contains Subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
+Specifies the directory that contains Subnet configs, as described above.
+Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly,
+the specified folder must exist, or AvalancheGo will exit with an error. This
+flag is ignored if `--subnet-config-content` is specified.
 
-Example: Let's say we have a Subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
+Example: Let's say we have a Subnet with ID
+`p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file
+under the default `subnet-config-dir` at
+`$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`.
+An example config file is:
 
 ```json
 {
@@ -493,7 +649,7 @@ By default, none of these directories and/or files exist. You would need to crea
 
 :::
 
-#### `--subnet-config-content` (string):
+#### `--subnet-config-content` (string)
 
 As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
 
@@ -509,61 +665,64 @@ The following options may affect the correctness of a node. Only power users sho
 
 ### Gossiping
 
-#### `--consensus-app-gossip-validator-size` (uint):
+#### `--consensus-app-gossip-validator-size` (uint)
 
 Number of validators to gossip an AppGossip message to. Defaults to `10`.
 
-#### `--consensus-app-gossip-non-validator-size` (uint):
+#### `--consensus-app-gossip-non-validator-size` (uint)
 
 Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
 
-#### `--consensus-app-gossip-peer-size` (uint):
+#### `--consensus-app-gossip-peer-size` (uint)
 
 Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
 
-#### `--consensus-accepted-frontier-gossip-validator-size` (uint):
+#### `--consensus-accepted-frontier-gossip-validator-size` (uint)
 
 Number of validators to gossip to when gossiping accepted frontier. Defaults to `0`.
 
-#### `--consensus-accepted-frontier-gossip-non-validator-size` (uint):
+#### `--consensus-accepted-frontier-gossip-non-validator-size` (uint)
 
 Number of non-validators to gossip to when gossiping accepted frontier. Defaults to `0`.
 
-#### `--consensus-accepted-frontier-gossip-peer-size` (uint):
+#### `--consensus-accepted-frontier-gossip-peer-size` (uint)
 
 Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
-#### `--consensus-on-accept-gossip-validator-size` (uint):
+#### `--consensus-on-accept-gossip-validator-size` (uint)
 
 Number of validators to gossip to each accepted container to. Defaults to `0`.
 
-#### `--consensus-on-accept-gossip-non-validator-size` (uint):
+#### `--consensus-on-accept-gossip-non-validator-size` (uint)
 
 Number of non-validators to gossip to each accepted container to. Defaults to `0`.
 
-#### `--consensus-on-accept-gossip-peer-size` (uint):
+#### `--consensus-on-accept-gossip-peer-size` (uint)
 
 Number of peers to gossip to each accepted container to. Defaults to `10`.
 
 ### Benchlist
 
-#### `--benchlist-duration` (duration):
+#### `--benchlist-duration` (duration)
 
-Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `15m`.
+Maximum amount of time a peer is benchlisted after surpassing
+`--benchlist-fail-threshold`. Defaults to `15m`.
 
-#### `--benchlist-fail-threshold` (int):
+#### `--benchlist-fail-threshold` (int)
 
-Number of consecutive failed queries to a node before benching it (assuming all queries to it will fail). Defaults to `10`.
+Number of consecutive failed queries to a node before benching it (assuming all
+queries to it will fail). Defaults to `10`.
 
-#### `--benchlist-min-failing-duration` (duration):
+#### `--benchlist-min-failing-duration` (duration)
 
 Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
 
 ### Build Directory
 
-#### `--build-dir` (string):
+#### `--build-dir` (string)
 
-Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of executed AvalancheGo binary. The structure of this directory must be as follows:
+Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of
+executed AvalancheGo binary. The structure of this directory must be as follows:
 
 ```text
 build-dir
@@ -579,315 +738,400 @@ Some of these parameters can only be set on a local or private network, not on F
 
 :::
 
-#### `--consensus-gossip-frequency` (duration):
+#### `--consensus-gossip-frequency` (duration)
 
 Time between gossiping accepted frontiers. Defaults to `10s`.
 
-#### `--consensus-shutdown-timeout` (duration):
+#### `--consensus-shutdown-timeout` (duration)
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
 
-#### `--create-asset-tx-fee` (int):
+#### `--create-asset-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new assets. Defaults to
+`10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local
+network.
 
-#### `--create-subnet-tx-fee` (int):
+#### `--create-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to
+`1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local
+network.
 
-#### `--create-blockchain-tx-fee` (int):
+#### `--create-blockchain-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new blockchains.
+Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be
+changed on a local network.
 
-#### `--min-delegator-stake` (int):
+#### `--min-delegator-stake` (int)
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
 
-Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net. This can only be changed on a local network.
+Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005
+AVAX) on Test Net. This can only be changed on a local network.
 
-#### `--min-delegation-fee` (int):
+#### `--min-delegation-fee` (int)
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet. This can only be changed on a local network.
+The minimum delegation fee that can be charged for delegation on the Primary
+Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults
+to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
-#### `--min-stake-duration` (duration):
+#### `--min-stake-duration` (duration)
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on a local network.
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can
+only be changed on a local network.
 
-#### `--min-validator-stake` (int):
+#### `--min-validator-stake` (int)
 
-The minimum stake, in nAVAX, required to validate the Primary Network. This can only be changed on a local network.
+The minimum stake, in nAVAX, required to validate the Primary Network. This can
+only be changed on a local network.
 
 Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
 
-#### `--max-stake-duration` (duration):
+#### `--max-stake-duration` (duration)
 
-The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet. This can only be changed on a local network.
+The maximum staking duration, in hours. Defaults to `8760h` (365 days) on
+Mainnet. This can only be changed on a local network.
 
-#### `--max-validator-stake` (int):
+#### `--max-validator-stake` (int)
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator. This can only be changed on a local network.
+The maximum stake, in nAVAX, that can be placed on a validator on the primary
+network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This
+includes stake provided by both the validator and by delegators to the
+validator. This can only be changed on a local network.
 
-#### `--stake-minting-period` (duration):
+#### `--stake-minting-period` (duration)
 
-Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days). This can only be changed on a local network.
+Consumption period of the staking function, in hours. The Default on Mainnet is
+`8760h` (365 days). This can only be changed on a local network.
 
-#### `--stake-max-consumption-rate` (uint):
+#### `--stake-max-consumption-rate` (uint)
 
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. This can only be changed on a local network.
+The maximum percentage of the consumption rate for the remaining token supply in
+the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is
+12% per years. This can only be changed on a local network.
 
-#### `--stake-min-consumption-rate` (uint):
+#### `--stake-min-consumption-rate` (uint)
 
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. This can only be changed on a local network.
+The minimum percentage of the consumption rate for the remaining token supply in
+the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is
+10% per years. This can only be changed on a local network.
 
-#### `--stake-supply-cap` (uint):
+#### `--stake-supply-cap` (uint)
 
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
+The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults
+to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
 
-#### `--tx-fee` (int):
+#### `--tx-fee` (int)
 
-The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction.
+The required amount of nAVAX to be burned for a transaction to be valid on the
+X-Chain, and for import/export transactions on the P-Chain. This parameter
+requires network agreement in its current form. Changing this value from the
+default should only be done on private networks or local network. Defaults to
+`1,000,000` nAVAX per transaction.
 
-#### `--uptime-requirement` (float):
+#### `--uptime-requirement` (float)
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.8`. This can only be changed on a local network.
+Fraction of time a validator must be online to receive rewards. Defaults to
+`0.8`. This can only be changed on a local network.
 
 ### Snow Parameters
 
-#### `--snow-avalanche-batch-size` (int):
+#### `--snow-avalanche-batch-size` (int)
 
-DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
+DAG implementations of Snow consensus define `b` as the number of transactions a
+vertex should include. Increasing `b` will, theoretically, increase throughput
+while increasing latency. The node will wait for at most 1 second to collect a
+batch, and will then issue the entire batch at once. The value must be at least
+`1`. Defaults to `30`.
 
-#### `--snow-avalanche-num-parents` (int):
+#### `--snow-avalanche-num-parents` (int)
 
-DAG implementations of Snow consensus define `p` as the number of parents a vertex should include. Increasing `p` will improve the amortization of network queries. However, by increasing the connectivity of the graph, the complexity of the graph traversals is increased. The value must be at least `2`. Defaults to `5`.
+DAG implementations of Snow consensus define `p` as the number of parents a
+vertex should include. Increasing `p` will improve the amortization of network
+queries. However, by increasing the connectivity of the graph, the complexity of
+the graph traversals is increased. The value must be at least `2`. Defaults to
+`5`.
 
-#### `--snow-concurrent-repolls` (int):
+#### `--snow-concurrent-repolls` (int)
 
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
+Snow consensus requires repolling transactions that are issued during low time
+of network usage. This parameter lets one define how aggressive the client will
+be in finalizing these pending transactions. This should only be changed after
+careful consideration of the tradeoffs of Snow consensus. The value must be at
+least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
 
-#### `--snow-sample-size` (int):
+#### `--snow-sample-size` (int)
 
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
+Snow consensus defines `k` as the number of validators that are sampled during
+each network poll. This parameter lets one define the `k` value used for
+consensus. This should only be changed after careful consideration of the
+tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
 
-#### `--snow-quorum-size` (int):
+#### `--snow-quorum-size` (int)
 
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `15`.
+Snow consensus defines `alpha` as the number of validators that must prefer a
+transaction during each network poll to increase the confidence in the
+transaction. This parameter lets us define the `alpha` value used for consensus.
+This should only be changed after careful consideration of the tradeoffs of Snow
+consensus. The value must be at greater than `k/2`. Defaults to `15`.
 
-#### `--snow-virtuous-commit-threshold` (int):
+#### `--snow-virtuous-commit-threshold` (int)
 
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
+Snow consensus defines `beta1` as the number of consecutive polls that a
+virtuous transaction must increase its confidence for it to be accepted. This
+parameter lets us define the `beta1` value used for consensus. This should only
+be changed after careful consideration of the tradeoffs of Snow consensus. The
+value must be at least `1`. Defaults to `15`.
 
-#### `--snow-rogue-commit-threshold` (int):
+#### `--snow-rogue-commit-threshold` (int)
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
+Snow consensus defines `beta2` as the number of consecutive polls that a rogue
+transaction must increase its confidence for it to be accepted. This parameter
+lets us define the `beta2` value used for consensus. This should only be changed
+after careful consideration of the tradeoffs of Snow consensus. The value must
+be at least `beta1`. Defaults to `20`.
 
-#### `snow-optimal-processing` (int):
+#### `snow-optimal-processing` (int)
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-#### `snow-max-processing` (int):
+#### `snow-max-processing` (int)
 
-Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
+Maximum number of processing items to be considered healthy. Reports unhealthy
+if more than this number of items are outstanding. The value must be at least
+`1`. Defaults to `1024`.
 
-#### `snow-max-time-processing` (duration):
+#### `snow-max-time-processing` (duration)
 
-Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
+Maximum amount of time an item should be processing and still be healthy.
+Reports unhealthy if there is an item processing for longer than this duration.
+The value must be greater than `0`. Defaults to `2m`.
 
-#### `snow-mixed-query-num-push-vdr` (uint):
+#### `snow-mixed-query-num-push-vdr` (uint)
 
-If this node is a validator, when a container is inserted into consensus, send a Push Query to this many validators and a Pull Query to the others. Must be <= k. Defaults to `10`.
+If this node is a validator, when a container is inserted into consensus, send a
+Push Query to this many validators and a Pull Query to the others. Must be <= k.
+Defaults to `10`.
 
-#### `snow-mixed-query-num-push-non-vdr` (uint):
+#### `snow-mixed-query-num-push-non-vdr` (uint)
 
-If this node is not a validator, when a container is inserted into consensus, send a Push Query to %s validators and a Pull Query to the others. Must be <= k. Defaults to `0`.
+If this node is not a validator, when a container is inserted into consensus,
+send a Push Query to %s validators and a Pull Query to the others. Must be <= k.
+Defaults to `0`.
 
 ### ProposerVM Parameters
 
-#### `proposervm-use-current-height` (bool):
+#### `proposervm-use-current-height` (bool)
 
 Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
 
 ### Continuous Profiling
 
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `--profile-continuous-enabled` is set.
+You can configure your node to continuously run memory/CPU profiles and save the
+most recent ones. Continuous memory/CPU profiling is enabled if
+`--profile-continuous-enabled` is set.
 
-#### `--profile-continuous-enabled` (boolean):
+#### `--profile-continuous-enabled` (boolean)
 
 Whether the app should continuously produce performance profiles. Defaults to the false (not enabled).
 
-#### `--profile-dir` (string):
+#### `--profile-dir` (string)
 
-If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+If profiling enabled, node continuously runs memory/CPU profiles and puts them
+at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
 
-#### `--profile-continuous-freq` (duration):
+#### `--profile-continuous-freq` (duration)
 
 How often a new CPU/memory profile is created. Defaults to `15m`.
 
-#### `--profile-continuous-max-files` (int):
+#### `--profile-continuous-max-files` (int)
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 ### Health
 
-#### `--health-check-frequency` (duration):
+#### `--health-check-frequency` (duration)
 
-Health check runs with this freqency. Defaults to `30s`.
+Health check runs with this frequency. Defaults to `30s`.
 
-#### `--health-check-averager-halflife` (duration):
+#### `--health-check-averager-halflife` (duration)
 
-Halflife of averagers used in health checks (to measure the rate of message failures, for example.) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+Half life of averagers used in health checks (to measure the rate of message
+failures, for example.) Larger value --&gt; less volatile calculation of
+averages. Defaults to `10s`.
 
 ### Network
 
-#### `--network-allow-private-ips` (bool):
+#### `--network-allow-private-ips` (bool)
 
 Allows the node to connect peers with private IPs. Defaults to `true`.
 
-#### `--network-compression-enabled` (bool):
+#### `--network-compression-enabled` (bool)
 
 If true, compress certain messages sent to peers to reduce bandwidth usage.
 
-#### `--network-initial-timeout` (duration):
+#### `--network-initial-timeout` (duration)
 
 Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
 
-#### `--network-initial-reconnect-delay` (duration):
+#### `--network-initial-reconnect-delay` (duration)
 
 Initial delay duration must be waited before attempting to reconnect a peer. Defaults to `1s`.
 
-#### `--network-max-reconnect-delay` (duration):
+#### `--network-max-reconnect-delay` (duration)
 
 Maximum delay duration must be waited before attempting to reconnect a peer. Defaults to `1h`.
 
-#### `--network-minimum-timeout` (duration):
+#### `--network-minimum-timeout` (duration)
 
 Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
 
-#### `--network-maximum-timeout` (duration):
+#### `--network-maximum-timeout` (duration)
 
 Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
 
-#### `--network-maximum-inbound-timeout` (duration):
+#### `--network-maximum-inbound-timeout` (duration)
 
-Maximum timeout value of an inbound message. Defines duration within which an incoming message must be fulfilled. Incoming messages containing deadline higher than this value will be overridden with this value. Defaults to `10s`.
+Maximum timeout value of an inbound message. Defines duration within which an
+incoming message must be fulfilled. Incoming messages containing deadline higher
+than this value will be overridden with this value. Defaults to `10s`.
 
-#### `--network-timeout-halflife` (duration):
+#### `--network-timeout-halflife` (duration)
 
-Halflife used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
+Half life used when calculating average network latency. Larger value --&gt; less
+volatile network latency calculation. Defaults to `5m`.
 
-#### `--network-timeout-coefficient` (duration):
+#### `--network-timeout-coefficient` (duration)
 
-Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
+Requests to peers will time out after \[`network-timeout-coefficient`\] \*
+\[average request latency\]. Defaults to `2`.
 
-#### `--network-read-handshake-timeout` (duration):
+#### `--network-read-handshake-timeout` (duration)
 
 Timeout value for reading handshake messages. Defaults to `15s`.
 
-#### `--network-ping-timeout` (duration):
+#### `--network-ping-timeout` (duration)
 
 Timeout value for Ping-Pong with a peer. Defaults to `30s`.
 
-#### `--network-ping-frequency` (duration):
+#### `--network-ping-frequency` (duration)
 
 Frequency of pinging other peers. Defaults to `22.5s`.
 
-#### `--network-health-min-conn-peers` (uint):
+#### `--network-health-min-conn-peers` (uint)
 
 Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
 
-#### `--network-health-max-time-since-msg-received` (duration):
+#### `--network-health-max-time-since-msg-received` (duration)
 
 Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
 
-#### `--network-health-max-time-since-no-requests` (duration):
+#### `--network-health-max-time-since-no-requests` (duration)
 
 Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
 
-#### `--network-health-max-portion-send-queue-full` (float):
+#### `--network-health-max-portion-send-queue-full` (float)
 
-Node will report unhealthy if its send queue is more than this portion full. Must be in \[0,1\]. Defaults to `0.9`.
+Node will report unhealthy if its send queue is more than this portion full.
+Must be in \[0,1\]. Defaults to `0.9`.
 
-#### `--network-health-max-send-fail-rate` (float):
+#### `--network-health-max-send-fail-rate` (float)
 
-Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
+Node will report unhealthy if more than this portion of message sends fail. Must
+be in \[0,1\]. Defaults to `0.25`.
 
-#### `--network-max-clock-difference` (duration):
+#### `--network-max-clock-difference` (duration)
 
 Max allowed clock difference value between this node and peers. Defaults to `1m`.
 
-#### `--network-require-validator-to-connect` (bool):
+#### `--network-require-validator-to-connect` (bool)
 
-If true, this node will only maintain a connection with another node if this node is a validator, the other node is a validator, or the other node is a beacon.
+If true, this node will only maintain a connection with another node if this
+node is a validator, the other node is a validator, or the other node is a
+beacon.
 
-#### `--outbound-connection-timeout` (duration):
+#### `--outbound-connection-timeout` (duration)
 
 Timeout while dialing a peer.
 
 ### Message Rate-Limiting
 
-These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
+These flags govern rate-limiting of inbound and outbound messages. For more
+information on rate-limiting and the flags below, see package `throttling` in
+AvalancheGo.
 
-#### CPU based
+#### CPU Based
 
 Rate-limiting based on how much CPU usage a peer causes.
 
-##### `cpu-tracker-halflife` (duration):
+##### `cpu-tracker-halflife` (duration)
 
-Halflife to use for the CPU tracker. Larger halflife --> CPU usage metrics change more slowly. Defaults to `15s`.
+Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
+change more slowly. Defaults to `15s`.
 
-##### `throttler-inbound-cpu-validator-alloc` (float):
+##### `throttler-inbound-cpu-validator-alloc` (float)
 
 Number of CPU allocated for use by validators. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
 
-##### `--throttler-inbound-cpu-at-large-alloc` (float):
+##### `--throttler-inbound-cpu-at-large-alloc` (float)
 
 Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
 See also `--throttler-inbound-cpu-node-max-at-large-portion`.
 
-##### `--throttler-inbound-cpu-node-max-at-large-portion` (float):
+##### `--throttler-inbound-cpu-node-max-at-large-portion` (float)
 
-The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by a given node.
-For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and `--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults to `1/3`.
+The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by
+a given node. For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and
+`--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can
+use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults
+to `1/3`.
 
-##### `throttler-inbound-cpu-max-recheck-delay` (duration):
+##### `throttler-inbound-cpu-max-recheck-delay` (duration)
 
-In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level. Defaults to `5s`.
+In the CPU rate-limiter, check at least this often whether the node's CPU usage
+has fallen to an acceptable level. Defaults to `5s`.
 
-#### Bandwidth based
+#### Bandwidth Based
 
 Rate-limiting based on the bandwidth a peer uses.
 
-##### `--throttler-inbound-bandwidth-refill-rate` (uint):
+##### `--throttler-inbound-bandwidth-refill-rate` (uint)
 
-Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
+Max average inbound bandwidth usage of a peer, in bytes per second. See
+interface `throttling.BandwidthThrottler`. Defaults to `512`.
 
-##### `--throttler-inbound-bandwidth-max-burst-size` (uint):
+##### `--throttler-inbound-bandwidth-max-burst-size` (uint)
 
-Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
+Max inbound bandwidth a node can use at once. See interface
+`throttling.BandwidthThrottler`. Defaults to `2 MiB`.
 
-#### Message size based
+#### Message Size Based
 
 Rate-limiting based on the total size, in bytes, of unprocessed messages.
 
-##### `--throttler-inbound-at-large-alloc-size` (uint):
+##### `--throttler-inbound-at-large-alloc-size` (uint)
 
 Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
 
-##### `--throttler-inbound-validator-alloc-size` (uint):
+##### `--throttler-inbound-validator-alloc-size` (uint)
 
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 MiB).
+Size, in bytes, of validator allocation in the inbound message throttler.
+Defaults to `33554432` (32 MiB).
 
-##### `--throttler-inbound-node-max-at-large-bytes` (uint):
+##### `--throttler-inbound-node-max-at-large-bytes` (uint)
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` (2 MiB).
+Maximum number of bytes a node can take from the at-large allocation of the
+inbound message throttler. Defaults to `2097152` (2 MiB).
 
-#### Message based
+#### Message Based
 
 Rate-limiting based on the number of unprocessed messages.
 
-##### `--throttler-inbound-node-max-processing-msgs` (uint):
+##### `--throttler-inbound-node-max-processing-msgs` (uint)
 
 Node will stop reading messages from a peer when it is processing this many messages from the peer.
 Will resume reading messages from the peer when it is processing less than this many messages.
@@ -897,97 +1141,119 @@ Defaults to `1024`.
 
 Rate-limiting for outbound messages.
 
-##### `--throttler-outbound-at-large-alloc-size` (uint):
+##### `--throttler-outbound-at-large-alloc-size` (uint)
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+Size, in bytes, of at-large allocation in the outbound message throttler.
+Defaults to `33554432` (32 MiB).
 
-##### `--throttler-outbound-validator-alloc-size` (uint):
+##### `--throttler-outbound-validator-alloc-size` (uint)
 
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+Size, in bytes, of validator allocation in the outbound message throttler.
+Defaults to `33554432` (32 MiB).
 
-##### `--throttler-outbound-node-max-at-large-bytes` (uint):
+##### `--throttler-outbound-node-max-at-large-bytes` (uint)
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
+Maximum number of bytes a node can take from the at-large allocation of the
+outbound message throttler. Defaults to `2097152` (2 MiB).
 
 ### Connection Rate-Limiting
 
-#### `--inbound-connection-throttling-cooldown` (duration):
+#### `--inbound-connection-throttling-cooldown` (duration)
 
-Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
+Node will upgrade an inbound connection from a given IP at most once within this
+duration. Defaults to `10s`. If 0 or negative, will not consider recency of last
+upgrade when deciding whether to upgrade.
 
-#### `--inbound-connection-throttling-max-conns-per-sec` (uint):
+#### `--inbound-connection-throttling-max-conns-per-sec` (uint)
 
 Node will accept at most this many inbound connections per second. Defaults to `512`.
 
-#### `--outbound-connection-throttling-rps` (uint):
+#### `--outbound-connection-throttling-rps` (uint)
 
 Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
 
 ### Peer List Gossiping
 
-Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-num-validator-ips` peers to `--network-peer-list-validator-gossip-size` validators and `--network-peer-list-non-validator-gossip-size` non-validators every `--network-peer-list-gossip-frequency`.
+Nodes gossip peers to each other so that each node can have an up-to-date peer
+list. A node gossips `--network-peer-list-num-validator-ips` peers to
+`--network-peer-list-validator-gossip-size` validators and
+`--network-peer-list-non-validator-gossip-size` non-validators every
+`--network-peer-list-gossip-frequency`.
 
-#### `--network-peer-list-gossip-frequency` (duration):
+#### `--network-peer-list-gossip-frequency` (duration)
 
 Defaults to `1m`.
 
-#### `--network-peer-list-num-validator-ips` (int):
+#### `--network-peer-list-num-validator-ips` (int)
 
 Defaults to `15`.
 
-#### `--network-peer-list-validator-gossip-size` (int):
+#### `--network-peer-list-validator-gossip-size` (int)
 
 Defaults to `20`.
 
-#### `--network-peer-list-non-validator-gossip-size` (int):
+#### `--network-peer-list-non-validator-gossip-size` (int)
 
 Defaults to `10`.
 
-#### ` --network-peer-read-buffer-size` (int):
+#### ` --network-peer-read-buffer-size` (int)
 
-Size of the buffer that peer messages are read into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+Size of the buffer that peer messages are read into (there is one buffer per
+peer), defaults to `8` KiB (8192 Bytes).
 
-#### `--network-peer-write-buffer-size` (int):
+#### `--network-peer-write-buffer-size` (int)
 
-Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+Size of the buffer that peer messages are written into (there is one buffer per
+peer), defaults to `8` KiB (8192 Bytes).
 
 ### Resource Usage Tracking
 
-#### `--system-tracker-frequency` (duration):
+#### `--system-tracker-frequency` (duration)
 
-Frequency to check the real system usage of tracked processes. More frequent checks --> usage metrics are more accurate, but more expensive to track. Defaults to `500ms`.
+Frequency to check the real system usage of tracked processes. More frequent
+checks --> usage metrics are more accurate, but more expensive to track.
+Defaults to `500ms`.
 
-#### `--system-tracker-processing-halflife` (duration):
+#### `--system-tracker-processing-halflife` (duration)
 
-Halflife to use for the processing requests tracker. Larger halflife --> usage metrics change more slowly. Defaults to `15s`.
+Half life to use for the processing requests tracker. Larger half life --> usage
+metrics change more slowly. Defaults to `15s`.
 
-#### `--system-tracker-cpu-halflife` (duration):
+#### `--system-tracker-cpu-halflife` (duration)
 
-Halflife to use for the CPU tracker. Larger halflife --> cpu usage metrics change more slowly. Defaults to `15s`.
+Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
+change more slowly. Defaults to `15s`.
 
-#### `--system-tracker-disk-halflife` (duration):
+#### `--system-tracker-disk-halflife` (duration)
 
-Halflife to use for the disk tracker. Larger halflife --> disk usage metrics change more slowly. Defaults to `1m`.
+Half life to use for the disk tracker. Larger half life --> disk usage metrics
+change more slowly. Defaults to `1m`.
 
-#### `--system-tracker-disk-required-available-space` (uint):
+#### `--system-tracker-disk-required-available-space` (uint)
 
-"Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
+"Minimum number of available bytes on disk, under which the node will shutdown.
+Defaults to `536870912` (512 MiB).
 
-#### `--system-tracker-disk-warning-threshold-available-space` (uint):
+#### `--system-tracker-disk-warning-threshold-available-space` (uint)
 
-Warning threshold for the number of available bytes on disk, under which the node will be considered unhealthy. Must be >= `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1 GiB).
+Warning threshold for the number of available bytes on disk, under which the
+node will be considered unhealthy. Must be >=
+`--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1
+GiB).
 
 ### Plugin Mode
 
-#### `--plugin-mode-enabled` (bool):
+#### `--plugin-mode-enabled` (bool)
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
-### Virtual Machine (VM) Configs {#vm-configs}
+### Virtual Machine (VM) Configs
 
-#### `--vm-aliases-file` (string):
+#### `--vm-aliases-file (string)`
 
-Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if `--vm-aliases-file-content` is specified. Example content:
+Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to
+`~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if
+`--vm-aliases-file-content` is specified. Example content:
 
 ```json
 {
@@ -998,8 +1264,11 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 }
 ```
 
-The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
+The above example aliases the VM whose ID is
+`"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and
+`"timerpc"`.
 
-`--vm-aliases-file-content` (string):
+`--vm-aliases-file-content` (string)
 
-As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
+As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded
+aliases for Virtual Machine IDs.

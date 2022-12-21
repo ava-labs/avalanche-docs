@@ -2,54 +2,110 @@
 
 ## Introduction
 
-An account on a chain that follows the UTXO model doesn't have a parameter like balance. All it has is a bunch of outputs that are resulted from previous transactions. Each output has some amount of asset associated with them. These outputs can have 1 or multiple owners. The owners are basically the account addresses that can consume this output.
+An account on a chain that follows the UTXO model doesn't have a parameter like
+balance. All it has is a bunch of outputs that are resulted from previous
+transactions. Each output has some amount of asset associated with them. These
+outputs can have 1 or multiple owners. The owners are basically the account
+addresses that can consume this output.
 
-The outputs are the result of a transaction that can be spent by the owner of that output. For example, an account has 3 outputs that it can spend, and hence are currently unspent. That is why we call them Unspent Transaction Outputs (UTXOs). So it is better to use the term unspent outputs rather than just outputs. Similarly, we add the amount in the UTXOs owned by an address to calculate its balance. Signing a transaction basically adds the signature of the UTXO owners included in the inputs.
+The outputs are the result of a transaction that can be spent by the owner of
+that output. For example, an account has 3 outputs that it can spend, and hence
+are currently unspent. That is why we call them Unspent Transaction Outputs
+(UTXOs). So it is better to use the term unspent outputs rather than just
+outputs. Similarly, we add the amount in the UTXOs owned by an address to
+calculate its balance. Signing a transaction basically adds the signature of the
+UTXO owners included in the inputs.
 
-If an account A wants to send 1.3 AVAX to account B, then it has to include all those unspent outputs in a transaction, that are owned by A and whose sum of amounts in those outputs is more than or equal to 1.3. These UTXOs will be included as inputs in a transaction. Account A also has to create outputs with amount 1.3 and the owner being the receiver (here B). There could be multiple outputs in the outputs array. This means, that using these UTXOs, we can create multiple outputs with different amounts to different addresses.
+If an account A wants to send 1.3 AVAX to account B, then it has to include all
+those unspent outputs in a transaction, that are owned by A and whose sum of
+amounts in those outputs is more than or equal to 1.3. These UTXOs will be
+included as inputs in a transaction. Account A also has to create outputs with
+amount 1.3 and the owner being the receiver (here B). There could be multiple
+outputs in the outputs array. This means, that using these UTXOs, we can create
+multiple outputs with different amounts to different addresses.
 
-Once the transaction is committed, the UTXOs in the inputs will be consumed and outputs will become new UTXOs for the receiver. If the inputs have more amount unlocked than being consumed by the outputs, then the excess amount will be burned as fees. Therefore, we should also create a change output which will be assigned to us, if there is an excess amount in the input. In the diagram given below, a total of 1.72 AVAX is getting unlocked in inputs, therefore we have also created a change output for the excess amount (0.41 AVAX) to the sender's address. The remaining amount after being consumed by the outputs like receiver's and change output, is burned as fees (0.01 AVAX).
+Once the transaction is committed, the UTXOs in the inputs will be consumed and
+outputs will become new UTXOs for the receiver. If the inputs have more amount
+unlocked than being consumed by the outputs, then the excess amount will be
+burned as fees. Therefore, we should also create a change output which will be
+assigned to us, if there is an excess amount in the input. In the diagram given
+below, a total of 1.72 AVAX is getting unlocked in inputs, therefore we have
+also created a change output for the excess amount (0.41 AVAX) to the sender's
+address. The remaining amount after being consumed by the outputs like
+receiver's and change output, is burned as fees (0.01 AVAX).
 
-![](/img/multisig-utxos-1.png)
+![multisig UTXOs 1](/img/multisig-utxos-1.png)
 
 ## Multi-Signature UTXOs
 
-UTXOs can be associated with multiple addresses. If there are multiple owners of a UTXO, then we must note the `threshold` value. We have to include signatures of a threshold number of UTXO owners with the unsigned transaction to consume UTXOs present in the inputs. The threshold value of a UTXO is set while issuing the transaction.
+UTXOs can be associated with multiple addresses. If there are multiple owners of
+a UTXO, then we must note the `threshold` value. We have to include signatures
+of a threshold number of UTXO owners with the unsigned transaction to consume
+UTXOs present in the inputs. The threshold value of a UTXO is set while issuing
+the transaction.
 
-We can use these multi-sig UTXOs as inputs for multiple purposes and not only for sending assets. For example, we can use them to create Subnets, add delegators, add validators, etc.
+We can use these multi-sig UTXOs as inputs for multiple purposes and not only
+for sending assets. For example, we can use them to create Subnets, add
+delegators, add validators, etc.
 
 ## Atomic Transactions
 
-On Avalanche, we can even create cross-chain outputs. This means that we can do a native cross-chain transfer of assets. These are made possible through **Atomic Transactions**. This is a 2-step process -
+On Avalanche, we can even create cross-chain outputs. This means that we can do
+a native cross-chain transfer of assets. These are made possible through
+**Atomic Transactions**. This is a 2-step process -
 
 - Export transaction on source chain
 - Import transactions on the destination chain
 
-Atomic transactions are similar to other transactions. We use UTXOs of the source chain as inputs and create outputs owned by destination chain addresses. When the export transactions are issued, the newly created UTXOs stay in the **Exported Atomic Memory**. These are neither on the source chain nor on the destination chain. These UTXOs can only be used as inputs by their owners on the destination chain while making import transactions. Using these UTXOs on the atomic memory, we can create multiple outputs with different amounts or addresses.
+Atomic transactions are similar to other transactions. We use UTXOs of the
+source chain as inputs and create outputs owned by destination chain addresses.
+When the export transactions are issued, the newly created UTXOs stay in the
+**Exported Atomic Memory**. These are neither on the source chain nor on the
+destination chain. These UTXOs can only be used as inputs by their owners on the
+destination chain while making import transactions. Using these UTXOs on the
+atomic memory, we can create multiple outputs with different amounts or
+addresses.
 
-![](/img/multisig-utxos-2.png)
+![multisig UTXOs 2](/img/multisig-utxos-2.png)
 
 ## UTXOs on C-Chain
 
-We can't use UTXOs on C-Chain to do regular transactions because C-Chain follows the account-based approach. In C-Chain, each address (account) is mapped with its balance, and the assets are transferred simply by adding and subtracting from this balance using the virtual machine.
+We can't use UTXOs on C-Chain to do regular transactions because C-Chain follows
+the account-based approach. In C-Chain, each address (account) is mapped with
+its balance, and the assets are transferred simply by adding and subtracting
+from this balance using the virtual machine.
 
-But we can export UTXOs with one or multiple owners to C-Chain and then import them by signing the transaction with the qualified spenders containing those UTXOs as inputs. The output on C-Chain can only have a single owner (a hexadecimal address). Similarly while exporting from C-Chain to other chains, we can have multiple owners for the output, but input will be signed only by the account whose balance is getting used.
+But we can export UTXOs with one or multiple owners to C-Chain and then import
+them by signing the transaction with the qualified spenders containing those
+UTXOs as inputs. The output on C-Chain can only have a single owner (a
+hexadecimal address). Similarly while exporting from C-Chain to other chains, we
+can have multiple owners for the output, but input will be signed only by the
+account whose balance is getting used.
 
-## Getting Hands-On Multi-Signature UTXOs
+## Getting Hands-on Multi-Signature UTXOs
 
-Next, we will make utility and other helpful functions, so that, we can use them to create multi-sig UTXOs and spend them with ease. These functions will extract common steps into a function so that we do not have to follow each step every time we are issuing a transaction.
+Next, we will make utility and other helpful functions, so that, we can use them
+to create multi-sig UTXOs and spend them with ease. These functions will extract
+common steps into a function so that we do not have to follow each step every
+time we are issuing a transaction.
 
-**You can either follow the steps below to get a better understanding of concepts and code or directly clone and test the examples from this [repo](https://github.com/rajranjan0608/multisignature-utxos).**
+**You can either follow the steps below to get a better understanding of
+concepts and code or directly clone and test the examples from this
+[repo](https://github.com/rajranjan0608/multisignature-utxos).**
 
 ## Setting Up Project
 
-Make a new directory `multisig` for keeping all the project codes and move there. First, let's install the required dependencies.
+Make a new directory `multisig` for keeping all the project codes and move
+there. First, let's install the required dependencies.
 
 ```bash
 npm install --save avalanche dotenv
 ```
 
-Now create a configuration file named `config.js` for storing all the pieces of information regarding the network and chain we are connecting to. Since we are making transactions on the Fuji network, its network ID is 5. You can change the configuration according to the network you are using.
+Now create a configuration file named `config.js` for storing all the pieces of
+information regarding the network and chain we are connecting to. Since we are
+making transactions on the Fuji network, its network ID is 5. You can change the
+configuration according to the network you are using.
 
 ```javascript
 require("dotenv").config()
@@ -64,7 +120,11 @@ module.exports = {
 }
 ```
 
-Create a `.env` file for storing sensitive information which we can't make public like the private keys or the mnemonic. Here are the sample private keys, which you should not use. You can create a new account on [Avalanche Wallet](https://wallet.avax.network/) and paste the mnemonic here for demonstration.
+Create a `.env` file for storing sensitive information which we can't make
+public like the private keys or the mnemonic. Here are the sample private keys,
+which you should not use. You can create a new account on [Avalanche
+Wallet](https://wallet.avax.network/) and paste the mnemonic here for
+demonstration.
 
 ```env
 PRIVATEKEYS=`[
@@ -76,7 +136,8 @@ MNEMONIC="mask stand appear..."
 
 ## Setting Up APIs and Keychains
 
-Create a file `importAPI.js` for importing and setting up all the necessary APIs, Keychains, addresses, etc. Now paste the following snippets into the file.
+Create a file `importAPI.js` for importing and setting up all the necessary
+APIs, Keychains, addresses, etc. Now paste the following snippets into the file.
 
 ### Importing Dependencies and Configurations
 
@@ -108,7 +169,9 @@ const bintools = BinTools.getInstance()
 
 ### Setup Avalanche APIs
 
-To make API calls to the Avalanche network and different blockchains like X-Chain, P-Chain and C-Chain, let's set up these by adding the following code snippet.
+To make API calls to the Avalanche network and different blockchains like
+X-Chain, P-Chain and C-Chain, let's set up these by adding the following code
+snippet.
 
 ```javascript
 // Avalanche instance
@@ -124,7 +187,9 @@ const evm = avalanche.CChain()
 
 ### Setup Keychains with Private Keys
 
-In order to sign transactions with our private keys, we will use the AvalancheJS keychain API. This will locally store our private keys and can be easily used for signing.
+In order to sign transactions with our private keys, we will use the AvalancheJS
+keychain API. This will locally store our private keys and can be easily used
+for signing.
 
 ```javascript
 // Keychain for signing transactions
@@ -141,7 +206,10 @@ function importPrivateKeys(privKey) {
 }
 ```
 
-We can either use mnemonics to derive private keys from it or simply use the bare private key for importing keys to the keychain. We can use the following function to get private keys from the mnemonic and address index which we want. For demo purposes, we will use addresses at index 0 and 1.
+We can either use mnemonics to derive private keys from it or simply use the
+bare private key for importing keys to the keychain. We can use the following
+function to get private keys from the mnemonic and address index which we want.
+For demo purposes, we will use addresses at index 0 and 1.
 
 ```javascript
 function getPrivateKey(mnemonic, activeIndex = 0) {
@@ -166,7 +234,9 @@ importPrivateKeys(getPrivateKey(mnemonic, 1))
 
 ### Setup Addresses and Chain IDs
 
-For creating transactions we might need addresses of different formats like `Buffer` or `Bech32` etc. And to make issue transactions on different chains we need their `chainID`. Paste the following snippet to achieve the same.
+For creating transactions we might need addresses of different formats like
+`Buffer` or `Bech32` etc. And to make issue transactions on different chains we
+need their `chainID`. Paste the following snippet to achieve the same.
 
 ```javascript
 // Buffer representation of addresses
@@ -212,15 +282,23 @@ We can use the above-exported variables and APIs from other files as required.
 
 ## Creating Utility Functions
 
-While creating multi-sig transactions, we have a few things in common, like creating inputs with the UTXOs, creating outputs, and adding signature indexes. So let's create a file named `utils.js` and paste the following snippets that we can call every time we want to do a repetitive task.
+While creating multi-sig transactions, we have a few things in common, like
+creating inputs with the UTXOs, creating outputs, and adding signature indexes.
+So let's create a file named `utils.js` and paste the following snippets that we
+can call every time we want to do a repetitive task.
 
 ### Getting Dependencies
 
-Inputs and outputs are an array of transferable input and transferable output. These contain transfer inputs and associated assetID which is being transferred. There are different types of transfer inputs/outputs for sending assets, minting assets, minting NFTs, etc.
+Inputs and outputs are an array of transferable input and transferable output.
+These contain transfer inputs and associated assetID which is being transferred.
+There are different types of transfer inputs/outputs for sending assets, minting
+assets, minting NFTs, etc.
 
 We will be using `SECPTransferInput/SECPTransferOutput` for sending our assets.
 
-But since we can't use UTXOs on C-Chain, we cannot directly import them either. Therefore we need to create a different type of input/output for them called `EVMInput/EVMOutput`.
+But since we can't use UTXOs on C-Chain, we cannot directly import them either.
+Therefore we need to create a different type of input/output for them called
+`EVMInput/EVMOutput`.
 
 ```javascript
 const { BN, chainIDs, web3 } = require("./importAPI")
@@ -253,11 +331,18 @@ const getTransferClass = (chainID) => {
 }
 ```
 
-Different chains have their own implementation of TransferInput/Output classes. Therefore we need to update the required modules according to the chain we issuing transactions on. To make it more modular, we created a `getTransferClass()` function, that will take `chainID` and import modules as required.
+Different chains have their own implementation of TransferInput/Output classes.
+Therefore we need to update the required modules according to the chain we
+issuing transactions on. To make it more modular, we created a
+`getTransferClass()` function, that will take `chainID` and import modules as
+required.
 
 ### Creating Transferable Output
 
-The `createOutput()` function will create and return the transferable output according to arguments amount, assetID, owner addresses, locktime, and threshold. Locktime represents the timestamp after which this output could be spent. Mostly this parameter will be 0.
+The `createOutput()` function will create and return the transferable output
+according to arguments amount, assetID, owner addresses, lock time, and
+threshold. Lock time represents the timestamp after which this output could be
+spent. Mostly this parameter will be 0.
 
 ```javascript
 const createOutput = (amount, assetID, addresses, locktime, threshold) => {
@@ -274,7 +359,12 @@ const createOutput = (amount, assetID, addresses, locktime, threshold) => {
 
 ### Creating Transferable Input
 
-The `createInput()` function will create and return transferable input. Input require arguments like amount in the UTXO, and arguments which identify that UTXO, like txID of the transaction which the UTXO was the output of, outputIndex (index of the output in that tx), and qualified signatures (output spenders which are present in our keychain) whose signature will be required while signing this transaction.
+The `createInput()` function will create and return transferable input. Input
+require arguments like amount in the UTXO, and arguments which identify that
+UTXO, like txID of the transaction which the UTXO was the output of, `outputIndex`
+(index of the output in that TX), and qualified signatures (output spenders
+which are present in our keychain) whose signature will be required while
+signing this transaction.
 
 ```javascript
 const createInput = (
@@ -298,9 +388,14 @@ const createInput = (
 
 ### Add Signature Indexes
 
-The `createSignatureIndexes()` function will add spender addresses along with an index for each address in the transfer input. While signing the unsigned transaction, these signature indexes will be used.
+The `createSignatureIndexes()` function will add spender addresses along with an
+index for each address in the transfer input. While signing the unsigned
+transaction, these signature indexes will be used.
 
-By adding signature indexes we are not signing the inputs but just adding a placeholder of the address at a particular index whose signature is required when we call the `.sign()` function on the unsigned transactions. Once the threshold spender addresses are added, it will exit.
+By adding signature indexes we are not signing the inputs but just adding a
+placeholder of the address at a particular index whose signature is required
+when we call the `.sign()` function on the unsigned transactions. Once the
+threshold spender addresses are added, it will exit.
 
 ```javascript
 const addSignatureIndexes = (addresses, threshold, input) => {
@@ -320,9 +415,14 @@ const addSignatureIndexes = (addresses, threshold, input) => {
 
 ### Create EVM Input
 
-As explained earlier, we do not have UTXOs on C-Chain. Therefore we cannot make regular inputs. The following function `createEVMInput()` will create the required input and add a signature index corresponding to the address specified in the input.
+As explained earlier, we do not have UTXOs on C-Chain. Therefore we cannot make
+regular inputs. The following function `createEVMInput()` will create the
+required input and add a signature index corresponding to the address specified
+in the input.
 
-EVM Inputs are required when we want to export assets from C-Chain. In the following function, `addresses` is the array of Buffer addresses but for `C-Chain Export Transactions`, a hex address is also appended at last.
+EVM Inputs are required when we want to export assets from C-Chain. In the
+following function, `addresses` is the array of Buffer addresses but for
+`C-Chain Export Transactions`, a hex address is also appended at last.
 
 ```javascript
 const createEVMInput = (amount, addresses, assetID, nonce) => {
@@ -364,16 +464,27 @@ const updateTransferClass = (chainID) => {
 
 ### Add UTXOs to Inputs
 
-We have `inputs` as an array of UTXOs that will be consumed in the transaction. The `updateInputs()` function will take UTXOs, `addresses` whose credentials we have for signing, `assetID` and `toBeUnlocked` i.e. amount we want to consume. `toBeUnlocked` contains everything we want to consume including transfer amount, fees, stake amount (if any), etc.
+We have `inputs` as an array of UTXOs that will be consumed in the transaction.
+The `updateInputs()` function will take UTXOs, `addresses` whose credentials we
+have for signing, `assetID` and `toBeUnlocked` that is amount we want to consume.
+`toBeUnlocked` contains everything we want to consume including transfer amount,
+fees, stake amount (if any), etc.
 
-We also have a special variable `C`, that will indicate the type of transaction which is associated with the C-Chain. This is required because -
+We also have a special variable `C`, that will indicate the type of transaction
+which is associated with the C-Chain. This is required because -
 
-- Export from C-Chain (C.export == true) - These types of transactions cannot have UTXOs as inputs and therefore `EVMInput` is created.
+- Export from C-Chain (C.export == true) - These types of transactions cannot
+  have UTXOs as inputs and therefore `EVMInput` is created.
 - Import to C-Chain (C.import == true) - The outputs imported on C-Chain from exported UTXOs are `EVMOutput`.
 
-It will create inputs with the passed UTXOs worth the `toBeUnlocked` amount. But if there is a UTXO that when included, will surpass the `toBeUnlocked` amount, then it will create a change output with the qualified spenders as their new owners with the surpassed amount.
+It will create inputs with the passed UTXOs worth the `toBeUnlocked` amount. But
+if there is a UTXO that when included, will surpass the `toBeUnlocked` amount,
+then it will create a change output with the qualified spenders as their new
+owners with the surpassed amount.
 
-This function will return the `inputs` array containing all the unlocked UTXOs, change transferable output, and the net balance included in these inputs. Now add the following function snippet.
+This function will return the `inputs` array containing all the unlocked UTXOs,
+change transferable output, and the net balance included in these inputs. Now
+add the following function snippet.
 
 ```javascript
 const updateInputs = async (
@@ -450,13 +561,18 @@ const updateInputs = async (
 }
 ```
 
-Only those UTXOs will be included whose output ID is `7` representing `SECPTransferOutput`. These outputs are used for transferring assets. Also, we are only including outputs containing `AVAX` assets. These conditions are checked in the following line -
+Only those UTXOs will be included whose output ID is `7` representing
+`SECPTransferOutput`. These outputs are used for transferring assets. Also, we
+are only including outputs containing `AVAX` assets. These conditions are
+checked in the following line -
 
 ```javascript
 if(output.getOutputID() === 7 && assetID.compare(utxo.getAssetID()) === 0 && netInputBalance < toBeUnlocked) {
 ```
 
-The following part in the above function creates the change output if the total included balance surpasses the required amount and the transaction is not a C-Chain export -
+The following part in the above function creates the change output if the total
+included balance surpasses the required amount and the transaction is not a
+C-Chain export -
 
 ```javascript
 netInputBalance = netInputBalance.add(utxoAmount)
@@ -493,7 +609,12 @@ All the utility functions are created.
 
 ## Create Inputs and Outputs
 
-Let's create a function that will return the array of sufficient UTXOs stuffed inside an array and necessary outputs like send output, multi-sig output, evm output, change output, etc. This function is basically a wrapper that orchestrates the utility and other functions to generate inputs and outputs from parameters like addresses, asset id, chain id, output arguments (to, threshold and amount), etc.
+Let's create a function that will return the array of sufficient UTXOs stuffed
+inside an array and necessary outputs like send output, multi-sig output, evm
+output, change output, etc. This function is basically a wrapper that
+orchestrates the utility and other functions to generate inputs and outputs from
+parameters like addresses, asset id, chain id, output arguments (to, threshold
+and amount), etc.
 
 Now make a new file `createInputsAndOutputs.js` and paste the following snippets of code inside it.
 
@@ -507,7 +628,10 @@ const { BN, avax, platform, evm, chainIDs, bintools } = require("./importAPI")
 const { createOutput, createEVMOutput, updateInputs } = require("./utils")
 ```
 
-`EVMInput` should be used as inputs while creating an export transaction from C-Chain and `EVMOutput` should be used as outputs while creating an import transaction on C-Chain. To make it easier to decide when to do what, let's make a function `checkChain()` that will return an object `C` (described earlier).
+`EVMInput` should be used as inputs while creating an export transaction from
+C-Chain and `EVMOutput` should be used as outputs while creating an import
+transaction on C-Chain. To make it easier to decide when to do what, let's make
+a function `checkChain()` that will return an object `C` (described earlier).
 
 ```javascript
 const checkChain = (chainID, ownerAddress) => {
@@ -526,7 +650,11 @@ const checkChain = (chainID, ownerAddress) => {
 }
 ```
 
-For getting UTXOs from an address, let's make another function `getUnspentOutputs()`. This function will fetch UTXOs from a given address and source chain. The `sourceChain` will be used to fetch exported UTXOs that are not yet imported. The exported outputs stay in the exported atomic memory. This parameter will only be used when we want to import assets.
+For getting UTXOs from an address, let's make another function
+`getUnspentOutputs()`. This function will fetch UTXOs from a given address and
+source chain. The `sourceChain` will be used to fetch exported UTXOs that are
+not yet imported. The exported outputs stay in the exported atomic memory. This
+parameter will only be used when we want to import assets.
 
 ```javascript
 // UTXOs for spending unspent outputs
@@ -545,7 +673,9 @@ const getUnspentOutputs = async (
 }
 ```
 
-Now for organizing inputs and outputs and adding required signature indexes (not signatures) for each unspent output, adding change output, etc, we will make a `createInputsAndOutputs()` function. Paste the following snippet next.
+Now for organizing inputs and outputs and adding required signature indexes (not
+signatures) for each unspent output, adding change output, etc, we will make a
+`createInputsAndOutputs()` function. Paste the following snippet next.
 
 ```javascript
 const createInputsAndOutputs = async (
@@ -611,7 +741,9 @@ const createInputsAndOutputs = async (
 }
 ```
 
-Output config is basically an array of all outputs that we want to create. This excludes the change output because it will be automatically created. It has the following structure.
+Output config is basically an array of all outputs that we want to create. This
+excludes the change output because it will be automatically created. It has the
+following structure.
 
 ```javascript
 // Regular outputs
@@ -630,7 +762,8 @@ Output config is basically an array of all outputs that we want to create. This 
 ]
 ```
 
-You will learn about these arguments and how we can actually pass this along with other arguments through the examples ahead.
+You will learn about these arguments and how we can actually pass this along
+with other arguments through the examples ahead.
 
 ### Exporting Functions
 
@@ -642,7 +775,9 @@ module.exports = {
 }
 ```
 
-We have created all the utility and helper functions. You can use this project structure to create different types of transactions like BaseTx, Export, Import, AddDelegator, etc. You should have the following files in your project now -
+We have created all the utility and helper functions. You can use this project
+structure to create different types of transactions like BaseTx, Export, Import,
+AddDelegator, etc. You should have the following files in your project now -
 
 - **.env** - Secret file storing data like mnemonic and private keys
 - **config.js** - Network information and parsed data from `.env`
@@ -655,19 +790,26 @@ Follow the next steps for **examples** and on how to use these functions.
 
 ## Examples
 
-Now let's look at the examples for executing these transactions. For example, we will create a separate `examples` folder. In order to run the example scripts, you must be in the root folder where all the environment variables and configurations are kept.
+Now let's look at the examples for executing these transactions. For example, we
+will create a separate `examples` folder. In order to run the example scripts,
+you must be in the root folder where all the environment variables and
+configurations are kept.
 
 ```bash
 node examples/send.js
 ```
 
-## Multi-Signature Base Tx on X-Chain
+## Multi-Signature Base TX on X-Chain
 
-Let's create a base transaction that converts a single-owner UTXO into a multi-sig UTXO. The final UTXO can be used by new owners of the unspent output by adding their signatures for each output. Create a new file `sendBaseTx.js` and paste the following snippets.
+Let's create a base transaction that converts a single-owner UTXO into a
+multi-sig UTXO. The final UTXO can be used by new owners of the unspent output
+by adding their signatures for each output. Create a new file `sendBaseTx.js`
+and paste the following snippets.
 
 ### Import Dependencies
 
-Import the necessary dependencies like `keyChains`, `addresses`, `utility` functions, `UnSignedTx` and `BaseTx` classes etc.
+Import the necessary dependencies like `keyChains`, `addresses`, `utility`
+functions, `UnSignedTx` and `BaseTx` classes etc.
 
 ```javascript
 const {
@@ -688,7 +830,7 @@ const { createInputsAndOutputs } = require("../createMultisig")
 
 ### Send BaseTx
 
-Now create the `sendBaseTx()` function to be called for sending base tx to the network.
+Now create the `sendBaseTx()` function to be called for sending base TX to the network.
 
 ```javascript
 async function sendBaseTx() {
@@ -731,7 +873,9 @@ async function sendBaseTx() {
 
 We have created the BaseTx with the following output configuration -
 
-- Multi-sig output of value 0.5 AVAX with threshold 2 and owners represented by `addresses.x`. The owners are basically an array of addresses in Buffer representation.
+- Multi-sig output of value 0.5 AVAX with threshold 2 and owners represented by
+  `addresses.x`. The owners are basically an array of addresses in Buffer
+  representation.
 - Single owner output of value 0.1 AVAX.
 
 ```javascript
@@ -751,21 +895,38 @@ let outputConfig = [
 
 Let's discuss the arguments of `createInputsAndOutputs()` in detail -
 
-- **assetID** - ID of the asset involved in transaction
-- **chainID** - ID of the chain on which this transaction will be issued
-- **addresses** - Addresses buffer array whose UTXO will be consumed
-- **addressStrings** - Addresses string array whose UTXO will be consumed
-- **outputConfig** - Array of output object containing amount, owners and threshold
-- **fee** - Fee for this transaction to be consumed in inputs
-- **sourceChain** - Chain from which UTXOs will be fetched. Will take `chainID` as default.
+- `assetID` - ID of the asset involved in transaction
+- `chainID` - ID of the chain on which this transaction will be issued
+- `addresses` - Addresses buffer array whose UTXO will be consumed
+- `addressStrings` - Addresses string array whose UTXO will be consumed
+- `outputConfig` - Array of output object containing amount, owners and threshold
+- `fee` - Fee for this transaction to be consumed in inputs
+- `sourceChain` - Chain from which UTXOs will be fetched. Will take `chainID` as default.
 
-In the above parameters, if `fee` is less than the fees actually required for that transaction, then there will be no surplus amount left by outputs over inputs because any surplus will be converted into a change output. This can cause transaction failure. So keep the fees in accordance with the transaction as mentioned [here](../quickstart/transaction-fees.md#fee-schedule).
+In the above parameters, if `fee` is less than the fees actually required for
+that transaction, then there will be no surplus amount left by outputs over
+inputs because any surplus will be converted into a change output. This can
+cause transaction failure. So keep the fees in accordance with the transaction
+as mentioned [here](../quickstart/transaction-fees.md#fee-schedule).
 
-Also, the `sourceChain` parameter is required for fetching exported UTXOs that do not exist yet on the destination chain. For non-export/import transactions, this parameter is not required.
+Also, the `sourceChain` parameter is required for fetching exported UTXOs that
+do not exist yet on the destination chain. For non-export/import transactions,
+this parameter is not required.
 
-The `createInputsAndOutputs()` function will return `inputs` and `outputs` required for any transaction. The last element of the outputs array would be change output. And the order of other outputs will be the same as that in the `outputConfig`. Signature indexes corresponding to their owners are already included in the inputs. We can create an unsigned base transaction using the `BaseTx` and `UnsignedTx` classes as shown above. The `.sign()` function basically adds the required signatures from the keychain at the place indicated by signature indexes.
+The `createInputsAndOutputs()` function will return `inputs` and `outputs`
+required for any transaction. The last element of the outputs array would be
+change output. And the order of other outputs will be the same as that in the
+`outputConfig`. Signature indexes corresponding to their owners are already
+included in the inputs. We can create an unsigned base transaction using the
+`BaseTx` and `UnsignedTx` classes as shown above. The `.sign()` function
+basically adds the required signatures from the keychain at the place indicated
+by signature indexes.
 
-Once the multi-sig UTXO is created, this UTXO can only be used if we have the threshold signers in our keychain. The util functions can be tweaked a little bit to create and return inputs with a part number of signers (<threshold). We can then partially sign the inputs and ask other owners to add signature index and sign.
+Once the multi-sig UTXO is created, this UTXO can only be used if we have the
+threshold signers in our keychain. The `util` functions can be tweaked a little
+bit to create and return inputs with a part number of signers (<threshold). We
+can then partially sign the inputs and ask other owners to add signature index
+and sign.
 
 Now call the `sendBaseTx()` function by adding this line
 
@@ -773,13 +934,16 @@ Now call the `sendBaseTx()` function by adding this line
 sendBaseTx()
 ```
 
-Run this file using `node examples/sendBaseTx.js`, see the txID in the output, and look for it in the Fuji explorer.
+Run this file using `node examples/sendBaseTx.js`, see the txID in the output,
+and look for it in the Fuji explorer.
 
-![](/img/multisig-utxos-3.jpeg)
+![multisig UTXOs 3](/img/multisig-utxos-3.jpeg)
 
 ## Export Multi-Sig UTXO From X to P-Chain
 
-Now we will look into exporting assets from the X to P chain. It will be similar to the BaseTx example, with few differences in output ordering and cross-chain owner addresses.
+Now we will look into exporting assets from the X to P chain. It will be similar
+to the BaseTx example, with few differences in output ordering and cross-chain
+owner addresses.
 
 Make a new file named `exportXP.js` and paste the following snippets.
 
@@ -806,9 +970,14 @@ const { createInputsAndOutputs } = require("../createMultisig")
 
 ### Send Export Transaction
 
-Most of the things will be very much similar in this function. You can have a look at `outputConfig`, which creates a multi-sig output for addresses on P-Chain. These addresses will be required for signing importTx on P-Chain.
+Most of the things will be very much similar in this function. You can have a
+look at `outputConfig`, which creates a multi-sig output for addresses on
+P-Chain. These addresses will be required for signing `importTx` on P-Chain.
 
-The `fee` here will only be for exporting the asset. The import fees will be deducted from the UTXOs present on the **Exported Atomic Memory**, a memory location where UTXOs lie after getting exported but before being imported. If there is only a single UTXO, then it will be deducted from it.
+The `fee` here will only be for exporting the asset. The import fees will be
+deducted from the UTXOs present on the **Exported Atomic Memory**, a memory
+location where UTXOs lie after getting exported but before being imported. If
+there is only a single UTXO, then it will be deducted from it.
 
 ```javascript
 async function exportXP() {
@@ -859,13 +1028,16 @@ async function exportXP() {
 }
 ```
 
-Another point to note is how inputs, outputs, and exportedOutputs are passed here.
+Another point to note is how inputs, outputs, and `exportedOutputs` are passed here.
 
 - Inputs are as usual passed for the `ins` parameter of the `ExportTx` class.
-- But only `outputs. at(-1)` representing change output (last element) is passed in place of the usual `outs` param.
-- The last param of this class is `exportedOuts`, representing the outputs that will be exported from this chain to `destinationChain` (2nd last param).
+- But only `outputs. at(-1)` representing change output (last element) is passed
+  in place of the usual `outs` parameter.
+- The last parameter of this class is `exportedOuts`, representing the outputs that
+  will be exported from this chain to `destinationChain` (2nd last parameter).
 
-All these inputs and outputs are array, and hence con contains multiple outputs or inputs. But you have to manage which output should be passed where.
+All these inputs and outputs are array, and hence con contains multiple outputs
+or inputs. But you have to manage which output should be passed where.
 
 Call the function by adding the below function call.
 
@@ -873,15 +1045,21 @@ Call the function by adding the below function call.
 exportXP()
 ```
 
-Run this file using `node examples/exportXP.js`, see the txID in the output, and look for it in the [Fuji explorer](https://explorer-xp.avax-test.network/blockchain/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm).
+Run this file using `node examples/exportXP.js`, see the txID in the output, and
+look for it in the [Fuji
+explorer](https://explorer-xp.avax-test.network/blockchain/2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm).
 
-![](/img/multisig-utxos-4.jpeg)
+![multisig UTXOs 4](/img/multisig-utxos-4.jpeg)
 
-In the above image, we are consuming UTXO with the amount `0.486...`, and generating outputs with the amount `0.382...` (change output) and `0.003` and `0.1` (exported output). The remaining `0.001` is burned as transaction fees.
+In the above image, we are consuming UTXO with the amount `0.486...`, and
+generating outputs with the amount `0.382...` (change output) and `0.003` and
+`0.1` (exported output). The remaining `0.001` is burned as transaction fees.
 
 ## Import Multi-Sig UTXO From X to P-Chain
 
-After exporting the UTXOs from the source chain, it stays in the exported atomic memory i.e. these are neither on the source chain nor on the destination chain. Paste the following snippets into a new file `importP.js`.
+After exporting the UTXOs from the source chain, it stays in the exported atomic
+memory that is these are neither on the source chain nor on the destination chain.
+Paste the following snippets into a new file `importP.js`.
 
 ### Import Dependencies
 
@@ -906,9 +1084,14 @@ const { createInputsAndOutputs } = require("../createMultisig")
 
 ### Send Import Transaction
 
-The `importP()` is a simple function that will use UTXOs on the exported atomic memory as its inputs and create an output on the P-Chain addresses. You can change the output config's owners and amount as per your need.
+The `importP()` is a simple function that will use UTXOs on the exported atomic
+memory as its inputs and create an output on the P-Chain addresses. You can
+change the output config's owners and amount as per your need.
 
-An important point to note here is that all UTXOs that are included in this `importTx` will be transferred to the destination chain. Even if the import amount is less than the amount in the UTXO, it will be sent to the qualified spender on the destination chain as a change output.
+An important point to note here is that all UTXOs that are included in this
+`importTx` will be transferred to the destination chain. Even if the import
+amount is less than the amount in the UTXO, it will be sent to the qualified
+spender on the destination chain as a change output.
 
 ```javascript
 async function importP() {
@@ -961,13 +1144,20 @@ async function importP() {
 }
 ```
 
-![](/img/multisig-utxos-5.jpeg)
+![multisig UTXOs 5](/img/multisig-utxos-5.jpeg)
 
-In the above image, we are consuming the above exported UTXOs with amounts `0.003` and `0.1`, and generating outputs with amount `0.092...` (change output imported on P-Chain) and 2 `0.005` imported outputs (1 multi-sig and 1 single-sig). The remaining `0.001` is burned as transaction fees.
+In the above image, we are consuming the above exported UTXOs with amounts
+`0.003` and `0.1`, and generating outputs with amount `0.092...` (change output
+imported on P-Chain) and 2 `0.005` imported outputs (1 multi-sig and 1
+single-sig). The remaining `0.001` is burned as transaction fees.
 
 ## Import Multi-Sig UTXO From X to C-Chain
 
-This transaction will also be similar to other atomic transactions, except for the `outputConfig` parameter. You can easily get the idea by looking at the code below. Before you can run this example, there must be exported outputs for the addresses you control on the C-Chain, otherwise, there will be no UTXO to consume.
+This transaction will also be similar to other atomic transactions, except for
+the `outputConfig` parameter. You can easily get the idea by looking at the code
+below. Before you can run this example, there must be exported outputs for the
+addresses you control on the C-Chain, otherwise, there will be no UTXO to
+consume.
 
 Here we are importing UTXOs that are exported from X-Chain.
 
@@ -1033,15 +1223,19 @@ async function importP() {
 importP()
 ```
 
-![](/img/multisig-utxos-6.png)
+![multisig UTXOs 6](/img/multisig-utxos-6.png)
 
 You can use [Avascan](https://testnet.avascan.info/) to view import and export transactions on C-Chain.
 
 ## Add Delegator Transaction
 
-Till now we have covered common transactions like BaseTx, Export, and Import Tx. Export and Import Tx will be similar in all the UTXO-based chains like X and P. But for Account-based chains, we have to deal with an account-balance system.
+Till now we have covered common transactions like BaseTx, Export, and Import TX.
+Export and Import TX will be similar in all the UTXO-based chains like X and P.
+But for Account-based chains, we have to deal with an account-balance system.
 
-Now let's try using the multi-sig UTXOs exported from X-Chain to P-Chain to issue an `addDelegator()` transaction. Create a file `addDelegatorTx.js` and paste the following snippets.
+Now let's try using the multi-sig UTXOs exported from X-Chain to P-Chain to
+issue an `addDelegator()` transaction. Create a file `addDelegatorTx.js` and
+paste the following snippets.
 
 ### Import Dependencies
 
@@ -1073,7 +1267,9 @@ const { createInputsAndOutputs } = require("../createMultisig")
 
 ### Sending AddDelegator Transaction
 
-Now we will create the `addDelegator()` function which will use the multi-sig UTXOs and create a signed `addDelegatorTx`, which when issued, will add the delegator to the specified node. Paste the following snippet next.
+Now we will create the `addDelegator()` function which will use the multi-sig
+UTXOs and create a signed `addDelegatorTx`, which when issued, will add the
+delegator to the specified node. Paste the following snippet next.
 
 ```javascript
 async function addDelegator() {
@@ -1130,7 +1326,9 @@ async function addDelegator() {
 }
 ```
 
-In the above transaction, the `outputs` param will be empty since we do not need to transfer any assets to the account. As you can see above we need to create another type of output, for indicating the reward for delegation.
+In the above transaction, the `outputs` parameter will be empty since we do not need
+to transfer any assets to the account. As you can see above we need to create
+another type of output, for indicating the reward for delegation.
 
 ```javascript
 const rewardOutputOwners = new SECPOwnerOutput(addresses.p, locktime, 2)
@@ -1143,6 +1341,7 @@ Call the function by adding the below function call.
 addDelegator()
 ```
 
-Run this file using `node examples/addDelegatorTx.js`, see the txID in the output, and look for it in the Fuji explorer.
+Run this file using `node examples/addDelegatorTx.js`, see the txID in the
+output, and look for it in the Fuji explorer.
 
-![](/img/multisig-utxos-7.jpeg)
+![multisig UTXOs 7](/img/multisig-utxos-7.jpeg)

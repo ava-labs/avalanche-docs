@@ -4,7 +4,8 @@ sidebar_position: 1
 
 # Nodes Overview
 
-This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+This section provides documents on how to build and maintain an AvalancheGo
+node, and then validate the Avalanche network using an AvalancheGo node.
 
 ## Build
 

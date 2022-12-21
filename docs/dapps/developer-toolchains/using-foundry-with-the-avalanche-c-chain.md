@@ -2,26 +2,39 @@
 
 ## Introduction
 
-This guide shows how to deploy and interact with smart contracts using foundry on on a local Avalanche Network and the [Fuji C-Chain](../../quickstart/fuji-workflow.md), which is an instance of the EVM.
+This guide shows how to deploy and interact with smart contracts using foundry
+on a local Avalanche Network and the [Fuji
+C-Chain](../../quickstart/fuji-workflow.md), which is an instance of the EVM.
 
-[Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract development toolchain written in Rust. It manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.
+[Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract
+development toolchain written in Rust. It manages your dependencies, compiles
+your project, runs tests, deploys, and lets you interact with the chain from the
+command-line.
 
 ## Recommended Knowledge
 
 - Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 - Basic understanding of the [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md)
-- performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
+- performed a cross-chain swap via this [this
+  tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
+  to get funds to your C-Chain address.
 
 ## Requirements
 
-- You have [installed Foundry](https://github.com/foundry-rs/foundry#installation). This installation includes the `forge` and `cast` binaries used in this walk-through.
+- You have [installed
+  Foundry](https://github.com/foundry-rs/foundry#installation). This
+  installation includes the `forge` and `cast` binaries used in this
+  walk-through.
 
 ### AvalancheGo and Avalanche Network Runner
 
-[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node implementation written in Go. 
+[AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node
+implementation written in Go. 
 
-[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly deploy local test networks. Together, you can deploy local test networks and run tests on them.
+[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly
+deploy local test networks. Together, you can deploy local test networks and run
+tests on them.
 
 Start a local five node Avalanche network:
 
@@ -31,7 +44,7 @@ cd /path/to/avalanche-network-runner
 ./go run examples/local/fivenodenetwork/main.go
 ```
 
-A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
+A five node Avalanche network is running on your machine. Network will run until you Ctrl + C to exit.
 
 ## Getting Started
 
@@ -39,7 +52,9 @@ This section will walk you through creating an [ERC721](https://eips.ethereum.or
 
 ### Clone Avalanche Smart Contract Quick Start
 
-Clone the [quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and install the necessary packages via `yarn`.
+Clone the [quickstart
+repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and
+install the necessary packages via `yarn`.
 
 ```zsh
 git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
@@ -47,11 +62,17 @@ cd avalanche-smart-contract-quickstart
 yarn
 ```
 
-In order to deploy contracts, you need to have some AVAX. You can get testnet AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy way to get to play around with Avalanche. After getting comfortable with your code, you can run it on Mainnet after making the necessary changes to your workflow.
+In order to deploy contracts, you need to have some AVAX. You can get testnet
+AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy
+way to get to play around with Avalanche. After getting comfortable with your
+code, you can run it on Mainnet after making the necessary changes to your
+workflow.
 
 ## Write Contracts
 
-We will use our example ERC721 smart contract, [`NFT.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3fbba0ac28f6420e9be5d2635d5f23693f80127a/contracts/NFT.sol) found in `./contracts` of our project.
+We will use our example ERC721 smart contract,
+[`NFT.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3fbba0ac28f6420e9be5d2635d5f23693f80127a/contracts/NFT.sol)
+found in `./contracts` of our project.
 
 ```ts
 //SPDX-License-Identifier: MIT
@@ -85,11 +106,22 @@ contract NFT is ERC721 {
 }
 ```
 
-Let's examine this implementation of an NFT as a Game Item. We start by importing to contracts from our node modules. We import Openzeppelin's open source implementation of the [ERC721 standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `awardItem` function which allows anyone to mint an NFT to a player's wallet address. This function increments the `currentTokenId` and makes use of the `_mint` function of our parent contract.
+Let's examine this implementation of an NFT as a Game Item. We start by
+importing to contracts from our node modules. We import OpenZeppelin's open
+source implementation of the [ERC721
+standard](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) which
+our NFT contract will inherit from. Our constructor takes the `_name` and
+`_symbol` arguments for our NFT and passes them on to the constructor of the
+parent ERC721 implementation. Lastly we implement the `awardItem` function which
+allows anyone to mint an NFT to a player's wallet address. This function
+increments the `currentTokenId` and makes use of the `_mint` function of our
+parent contract.
 
-## Compile & deploy with Forge
+## Compile & Deploy with Forge
 
-[Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a command-line tool that ships with Foundry. Forge tests, builds, and deploys your smart contracts.
+[Forge](https://book.getfoundry.sh/reference/forge/forge-build.html) is a
+command-line tool that ships with Foundry. Forge tests, builds, and deploys your
+smart contracts.
 
 To compile the NFT contract run:
 
@@ -97,7 +129,9 @@ To compile the NFT contract run:
 forge build
 ```
 
-By default the compiler output will be in the `out` directory. To deploy our compiled contract with Forge we have to set environment variables for the RPC endpoint and the private key we want to use to deploy.
+By default the compiler output will be in the `out` directory. To deploy our
+compiled contract with Forge we have to set environment variables for the RPC
+endpoint and the private key we want to use to deploy.
 
 Set your environment variables by running:
 
@@ -112,13 +146,19 @@ Since we are deploying to Fuji testnet, our `RPC_URL` export should be:
 export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 ```
 
-Once set, you can [deploy your NFT with Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) by running the command below while adding the values for `_name` and `_symbol`, the relevant [constructor arguments](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3ad93abf50fba65e3aab68f23382bcace73968be/contracts/NFT.sol#L13) of the NFT contract:
+Once set, you can [deploy your NFT with
+Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) by running
+the command below while adding the values for `_name` and `_symbol`, the
+relevant [constructor
+arguments](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3ad93abf50fba65e3aab68f23382bcace73968be/contracts/NFT.sol#L13)
+of the NFT contract:
 
 ```zsh
 forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args GameItem ITM
 ```
 
-Upon successful deployment, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
+Upon successful deployment, you will see the deploying wallet's address, the
+contract's address as well as the transaction hash printed to your terminal.
 
 Here's an example output from an NFT deployment.
 
@@ -134,9 +174,17 @@ _Note: Please store your `Deployed to` address for use in the next section._
 
 ## Using Cast to Interact with the Smart Contract
 
-We can call functions on our NFT contract with [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. In this scenario, we will mint a Game Item to a player's wallet using the [`awardItem` function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) in our smart contract.
+We can call functions on our NFT contract with
+[Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), Foundry's
+command-line tool for interacting with smart contracts, sending transactions,
+and getting chain data. In this scenario, we will mint a Game Item to a player's
+wallet using the [`awardItem`
+function](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17)
+in our smart contract.
 
-Mint an NFT from your contract by replacing `<NFT-CONTRACT-ADDRESS>` with your `Deployed to` address and `<NFT-RECIPIENT-ADDRESS>` with an address of your choice.
+Mint an NFT from your contract by replacing `<NFT-CONTRACT-ADDRESS>` with your
+`Deployed to` address and `<NFT-RECIPIENT-ADDRESS>` with an address of your
+choice.
 
 _Note: This section assumes that you have already set your RPC and private key env variables during deployment_
 
@@ -162,7 +210,8 @@ transactionIndex        0
 type                    2
 ```
 
-Well done! You just minted your first NFT from your contract. You can check the owner of `tokenId` 1 by running the `cast call` command below:
+Well done! You just minted your first NFT from your contract. You can check the
+owner of `tokenId` 1 by running the `cast call` command below:
 
 ```zsh
 cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <NFT-CONTRACT-ADDRESS> "ownerOf(uint256)" 1
@@ -176,7 +225,8 @@ The address you provided above should be returned as the owner.
 
 ## Mainnet Workflow
 
-The Fuji workflow above can be adapted to Mainnet with the following modifications to the environment variables:
+The Fuji workflow above can be adapted to Mainnet with the following
+modifications to the environment variables:
 
 ```zsh
 export RPC_URL=https://api.avax.network/ext/bc/C/rpc
@@ -207,11 +257,16 @@ export PRIVATE_KEY=56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8
 ```
 
 :::warning
-The example PRIVATE_KEY variable above provides a pre-funded account on Avalanche Network Runner and should be used for LOCAL DEVELOPMENT ONLY.
+
+The example PRIVATE_KEY variable above provides a pre-funded account on
+Avalanche Network Runner and should be used for LOCAL DEVELOPMENT ONLY.
+
 :::
 
 ## Summary
 
-Now you have the tools you need to launch a local Avalanche network, create a Foundry project, as well as create, compile, deploy and interact with Solidity contracts.
+Now you have the tools you need to launch a local Avalanche network, create a
+Foundry project, as well as create, compile, deploy and interact with Solidity
+contracts.
 
 Join our [Discord Server](https://chat.avax.network) to learn more and ask any questions you may have.

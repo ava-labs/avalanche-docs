@@ -25,7 +25,7 @@ Select `SubnetEVM`.
 ### Enter Your Subnet's ChainID
 
 Choose a unique positive integer for your EVM-style ChainID. Visit
-[ChainList](https://chainlist.org/) to verify that your selection is indeed unique.
+[chainlist](https://chainlist.org/) to verify that your selection is indeed unique.
 
 ### Token Symbol
 

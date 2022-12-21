@@ -40,18 +40,19 @@ avalanche subnet addValidator [subnetName] [flags]
 <!-- markdownlint-disable MD013 -->
 
 ```shell
-    --fuji fuji join on fuji (alias for `testnet`)
--h, --help help for addValidator
--k, --key string select the key to use [fuji deploy only]
--g, --ledger use ledger instead of key (always true on mainnet, defaults to false on fuji)
-    --mainnet mainnet join on mainnet
-    --nodeID string set the NodeID of the validator to add
-    --output-tx-path string file path of the add validator tx
-    --staking-period duration how long this validator will be staking
-    --start-time string UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
-    --subnet-auth-keys strings control keys that will be used to authenticate add validator tx
-    --testnet testnet join on testnet (alias for `fuji`)
-    --weight uint set the staking weight of the validator to add
+    --fuji fuji                  join on fuji (alias for `testnet`)
+-h, --help                       help for addValidator
+-k, --key string                 select the key to use [fuji deploy only]
+-g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings       use the given ledger addresses
+    --mainnet mainnet            join on mainnet
+    --nodeID string              set the NodeID of the validator to add
+    --output-tx-path string      file path of the add validator tx
+    --staking-period duration    how long this validator will be staking
+    --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+    --subnet-auth-keys strings   control keys that will be used to authenticate add validator tx
+    --testnet testnet            join on testnet (alias for `fuji`)
+    --weight uint                set the staking weight of the validator to add
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -71,9 +72,10 @@ avalanche subnet configure [subnetName] [flags]
 **Flags:**
 
 ```shell
-    --chain-config string    path to the chain configuration
--h, --help                   help for configure
-    --subnet-config string   path to the subnet configuration
+    --chain-config string            path to the chain configuration
+-h, --help                           help for configure
+    --per-node-chain-config string   path to per node chain configuration for local network
+    --subnet-config string           path to the subnet configuration
 ```
 
 ### Subnet Create
@@ -156,6 +158,7 @@ avalanche subnet deploy [subnetName] [flags]
 -h, --help                         help for deploy
 -k, --key string                   select the key to use [fuji deploy only]
 -g, --ledger                       use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings         use the given ledger addresses
 -l, --local                        deploy to a local network
 -m, --mainnet                      deploy to mainnet
     --output-tx-path string        file path of the blockchain creation tx
@@ -515,6 +518,7 @@ avalanche transaction sign [subnetName] [flags]
     --input-tx-filepath string   Path to the transaction file for signing
 -k, --key string                 select the key to use [fuji only]
 -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings       use the given ledger addresses
 ```
 
 <!-- markdownlint-enable MD013 -->

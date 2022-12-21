@@ -19,7 +19,7 @@ Apricot allows the following block types with the following content:
   - AddSubnetValidatorTx
   - RewardValidatorTx
   - AdvanceTimeTx
-- _Options Blocks_, i.e. _Commit Block_ and _Abort Block_ do not contain any transactions.
+- _Options Blocks_, that is _Commit Block_ and _Abort Block_ do not contain any transactions.
 
 Each block has a header containing:
 
@@ -46,7 +46,7 @@ Banff allows the following block types with the following content:
 
   - RewardValidatorTx
 
-- _Options blocks_, i.e. _Commit Block_ and _Abort Block_ do not contain any transactions.
+- _Options blocks_, that is _Commit Block_ and _Abort Block_ do not contain any transactions.
 
 Note that each block has an header containing:
 
@@ -56,8 +56,12 @@ Note that each block has an header containing:
 
 So the two main differences with respect to Apricot are:
 
-- _AddValidatorTx_, _AddDelegatorTx_, _AddSubnetValidatorTx_ are included into Standard Blocks rather than Proposal Blocks so that they don't need to be voted on (i.e. followed by a Commit/Abort Block).
-- New Transaction types: _RemoveSubnetValidatorTx_, _TransformSubnetTx_, _AddPermissionlessValidatorTx_, and _AddPermissionlessDelegatorTx_ have been added into Standard Blocks.
+- _AddValidatorTx_, _AddDelegatorTx_, _AddSubnetValidatorTx_ are included into
+  Standard Blocks rather than Proposal Blocks so that they don't need to be
+  voted on (that is followed by a Commit/Abort Block).
+- New Transaction types: _RemoveSubnetValidatorTx_, _TransformSubnetTx_,
+  _AddPermissionlessValidatorTx_, and _AddPermissionlessDelegatorTx_ have been
+  added into Standard Blocks.
 - Block timestamp is explicitly serialized into block header, to allow chain time update.
 
 ### New Transactions

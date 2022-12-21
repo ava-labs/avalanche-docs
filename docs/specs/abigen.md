@@ -1,12 +1,12 @@
 # Abigen
 
-Compile a solidity contract into golang to deploy and call contracts programmatically.
+Compile a solidity contract into Golang to deploy and call contracts programmatically.
 
 ## How to Build
 
 Download the solidity compiler from [solc-bin](https://github.com/ethereum/solc-bin).
 
-Copy the appropriate compiler into your current path. ~/bin/ is a common path in most linux distributions.
+Copy the appropriate compiler into your current path. ~/bin/ is a common path in most Linux distributions.
 
 ```shell
 # cp linux-amd64/solc-linux-amd64-v0.8.9+commit.e5eed63a ~/bin
@@ -20,7 +20,7 @@ solc, the solidity compiler commandline interface
 Version: 0.8.9+commit.e5eed63a.Linux.g++
 ```
 
-Build abigen.
+Build Abigen.
 
 ```shell
 # cd ~/go/src/github.com/ava-labs/avalanche
@@ -40,7 +40,8 @@ This will produce `counter.go` suitable to interact with contract.
 
 Setup the connection to `avalanchego`, then deploy, call, and fetch values from the contract.
 
-Abigen offers more features for complicated contracts, the following is provided as an example to get started using the basic contract
+Abigen offers more features for complicated contracts, the following is provided
+as an example to get started using the basic contract
 
 ```go
 package main

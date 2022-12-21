@@ -2,21 +2,36 @@
 
 ## Introduction
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching
+decentralized applications (dapps) on the EVM. With Truffle you can write and
+compile smart contracts, build artifacts, run migrations and interact with
+deployed contracts. This tutorial illustrates how Truffle can be used with
+Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md). You've also performed a cross-chain swap via this [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet) to get funds to your C-Chain address.
+You've completed [Run an Avalanche
+Node](../../nodes/build/run-avalanche-node-manually.md) and are familiar with
+[Avalanche's
+architecture](../../overview/getting-started/avalanche-platform.md). You've also
+performed a cross-chain swap via this [this
+tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
+to get funds to your C-Chain address.
 
 ## Dependencies
 
-- [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
+- [Avalanche Network
+  Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for
+  running a local Avalanche network. It's similar to Truffle's
+  [Ganache](https://www.trufflesuite.com/ganache).
 - [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 - Truffle, which you can install with `npm install -g truffle`
 
 ## Start up a Local Avalanche Network
 
-[Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) allows you to spin up private test network deployments. Start a local five node Avalanche network:
+[Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner)
+allows you to spin up private test network deployments. Start a local five node
+Avalanche network:
 
 ```text
 cd /path/to/avalanche-network-runner
@@ -24,7 +39,7 @@ cd /path/to/avalanche-network-runner
 ./go run examples/local/fivenodenetwork/main.go
 ```
 
-A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
+A five node Avalanche network is running on your machine. Network will run until you Ctrl + C to exit.
 
 ## Create Truffle Directory and Install Dependencies
 
@@ -42,19 +57,26 @@ Create and enter a new directory named `truffle`:
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM and [AvalancheJS](../../apis/avalanchejs/README.md) which is used for cross chain swaps.
+Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library
+through which we can talk to the EVM and
+[AvalancheJS](../../apis/avalanchejs/README.md) which is used for cross chain
+swaps.
 
 ```text
 npm install web3 avalanche -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM.
+Lastly, create a boilerplate truffle project:
 
 ```text
 truffle init
 ```
 
-The local development network pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+The local development network pre-funds some static addresses when created.
+We'll use
+[@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider)
+to use these pre-funded addresses as our accounts.
 
 ```text
 npm install @truffle/hdwallet-provider
@@ -107,7 +129,9 @@ module.exports = {
 }
 ```
 
-Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+Note that you can change the `protocol`, `ip` and `port` if you want to direct
+API calls to a different AvalancheGo node. Also note that we're setting the
+`gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
 ## Add Storage.sol
 
@@ -143,11 +167,15 @@ contract Storage {
 }
 ```
 
-`Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
+`Storage` is a solidity smart contract which lets us write a number to the
+blockchain via a `store` function and then read the number back from the
+blockchain via a `retrieve` function.
 
 ## Add New Migration
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
+Create a new file in the `migrations` directory named `2_deploy_contracts.js`,
+and add the following block of code. This handles deploying the `Storage` smart
+contract to the blockchain.
 
 ```javascript
 const Storage = artifacts.require("Storage")
@@ -177,9 +205,13 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Accounts on C-chain
+## Accounts on C-Chain
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations. We have added some pre-defined private keys as our accounts in the `truffle-config.json`. The first and default account should have some pre-funded AVAX.
+When deploying smart contracts to the C-Chain, truffle will default to the first
+available account provided by your C-Chain client as the `from` address used
+during migrations. We have added some pre-defined private keys as our accounts
+in the `truffle-config.json`. The first and default account should have some
+pre-funded AVAX.
 
 ### Truffle Accounts
 
@@ -191,7 +223,9 @@ To open the truffle console:
 truffle console --network development
 ```
 
-Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
+Note: If you see `Error: Invalid JSON RPC response: "API call rejected because
+chain is not done bootstrapping"`, you need to wait until network is
+bootstrapped and ready to use. It should not take too long.
 
 Inside truffle console:
 
@@ -225,7 +259,9 @@ Notice that `accounts[0]` (default account) has some balance, while `accounts[1]
 
 ### Scripting Account Funding
 
-There is a convenient script that funds the `accounts` list . You can find it [here](https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js). You can also download it using this command:
+There is a convenient script that funds the `accounts` list . You can find it
+[here](https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js).
+You can also download it using this command:
 
 ```text
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js
@@ -237,7 +273,8 @@ You can run the script with:
 truffle exec fund-cchain-addresses.js --network development
 ```
 
-Script will fund 1000 AVAX to each account in `accounts` list above. After succesfully running the script you can check balances with:
+Script will fund 1000 AVAX to each account in `accounts` list above. After
+successfully running the script you can check balances with:
 
 ```bash
 truffle(development)> await web3.eth.getBalance(accounts[0]);
@@ -248,11 +285,22 @@ truffle(development)> await web3.eth.getBalance(accounts[1]);
 
 ### Fund Your Account
 
-If you wish to fund accounts your own, follow the steps in this [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+If you wish to fund accounts your own, follow the steps in this
+[tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).
+You'll need to send at least `135422040` nAVAX to the account to cover the cost
+of contract deployments.
 
 ### Personal APIs
 
-Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. The Avalanche Network Runner currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](../../quickstart/create-a-local-test-network.md#manually) and [C-Chain Configs](../../nodes/maintain/chain-config-flags.md#c-chain-configs).
+Personal APIs interact with node’s accounts. `web3` has some functions that uses
+it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount`
+etc... However this API is disabled by default. It can be activated with
+`C-chain`/`Coreth` configs. The Avalanche Network Runner currently does not
+support activating this API. So if you want to use these features you need to
+run your own network manually with `internal-private-personal` API enabled via
+the `eth-apis` flag. See [Create a Local Test
+Network/Manually](../../quickstart/create-a-local-test-network.md#manually) and
+[C-Chain Configs](../../nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 ## Run Migrations
 
@@ -335,9 +383,10 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-## Interacting with your contract
+## Interacting with Your Contract
 
-Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
+Now the `Storage` contract has been deployed. Let's write a number to the
+blockchain and then read it back. Open the truffle console again:
 
 Get an instance of the deployed `Storage` contract:
 
@@ -353,7 +402,8 @@ undefined
 
 ### Writing a number to the blockchain
 
-Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
+Now that you have an instance of the `Storage` contract, call it's `store`
+method and pass in a number to write to the blockchain.
 
 ```javascript
 truffle(development) > instance.store(1234)
@@ -383,7 +433,7 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### Reading a Number From the Blockchain
 
 To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
 
@@ -411,4 +461,6 @@ You should see the number you stored.
 
 ## Summary
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+Now you have the tools you need to launch a local Avalanche network, create a
+truffle project, as well as create, compile, deploy and interact with Solidity
+contracts.
