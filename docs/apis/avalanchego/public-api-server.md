@@ -209,7 +209,7 @@ P-Chain, C-Chain, and Index API.
 
 ### Chainstack
 
-[Chainstack](https://chainstack.com/) supports the C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
+[Chainstack](https://chainstack.com/build-better-with-avalanche/) supports the C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
 
 Features:
 
