@@ -67,6 +67,7 @@ Coreth
 CPUs
 Crabada
 crypto
+Crypto
 cryptocurrencies
 cryptocurrency
 Ctrl

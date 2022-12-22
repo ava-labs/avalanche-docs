@@ -206,3 +206,44 @@ P-Chain, C-Chain, and Index API.
 #### Websockets
 
 - The URL is  `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
+
+### ChainStack
+
+[ChainStack](https://chainstack.com/build-better-with-avalanche/) supports the
+C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
+
+Features:
+
+- Globally distributed infrastructure for optimal performance.
+- Crypto payments natively.
+- 24/7 customer support.
+
+#### Mainnet
+
+##### HTTP
+
+- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
+- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
+
+##### Websockets
+
+Websockets are available for the C-chain and the X-chain.
+
+- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+
+#### Testnet (Fuji)
+
+##### HTTP
+
+- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
+- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
+
+##### Websockets
+
+Websockets are available for the C-chain and the X-chain.
+
+- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
