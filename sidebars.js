@@ -133,7 +133,8 @@ const sidebars = {
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
-        'subnets/how-to-run-cli-with-docker'
+        'subnets/how-to-run-cli-with-docker',
+        'subnets/how-to-import-subnet',
       ]
     },
     {
@@ -307,6 +308,6 @@ const sidebars = {
       ],
     },
   ],
-};
+}
 
 module.exports = sidebars
