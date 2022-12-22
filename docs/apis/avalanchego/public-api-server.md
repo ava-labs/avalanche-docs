@@ -223,7 +223,7 @@ Features:
 ##### HTTP
 
 - For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
 - For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
 
 ##### Websockets
@@ -238,7 +238,7 @@ Websockets are available for the C-chain and the X-chain.
 ##### HTTP
 
 - For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
 - For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
 
 ##### Websockets
