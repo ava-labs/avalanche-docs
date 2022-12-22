@@ -215,7 +215,7 @@ C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
 Features:
 
 - Globally distributed infrastructure for optimal performance.
-- crypto payments natively.
+- Crypto payments natively.
 - 24/7 customer support.
 
 #### Mainnet
