@@ -14,7 +14,7 @@ This version is backwards compatible to
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
 optional, but encouraged. The supported plugin version is `21`.
 
-### Subnet Messaging
+**Subnet Messaging**
 
 - Added Subnet message serialization format
 - Added Subnet message signing
@@ -25,19 +25,19 @@ optional, but encouraged. The supported plugin version is `21`.
 - Added Subnet message verification
 - Added `teleporter.AnycastID` to denote a Subnet message not intended for a specific chain
 
-### Fixes
+**Fixes**
 
 - Added re-gossip of updated validator IPs
 - Fixed `rpcchainvm.BatchedParseBlock` to correctly wrap returned blocks
 - Removed incorrect `uintptr` handling in the generic codec
 - Removed message latency tracking on messages being sent to itself
 
-### Coreth
+**Coreth**
 
 - Added support for `eth_call` over VM2VM messaging
 - Added config flags for TX pool behavior
 
-### Miscellaneous
+**Miscellaneous**
 
 - Added networking package README.md
 - Removed pagination of large db messages over gRPC
