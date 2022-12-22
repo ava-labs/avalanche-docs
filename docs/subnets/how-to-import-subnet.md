@@ -1,6 +1,6 @@
-# How to Import a Subnet from a Public Network to Avalanche-CLI
+# How to Import a Subnet into Avalanche-CLI
 
-## What's the Context of This How-To?
+## Context
 
 The most probable reason why someone would want to do this, 
 is if they already deployed a Subnet with Subnet-CLI either to Fuji or Mainnet, 

@@ -134,7 +134,7 @@ const sidebars = {
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
         'subnets/how-to-run-cli-with-docker',
-        'subnets/how-to-import-public',
+        'subnets/how-to-import-subnet',
       ]
     },
     {
@@ -308,6 +308,6 @@ const sidebars = {
       ],
     },
   ],
-};
+}
 
 module.exports = sidebars

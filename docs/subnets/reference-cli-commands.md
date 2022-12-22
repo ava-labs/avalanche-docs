@@ -72,9 +72,10 @@ avalanche subnet configure [subnetName] [flags]
 **Flags:**
 
 ```shell
-    --chain-config string    path to the chain configuration
--h, --help                   help for configure
-    --subnet-config string   path to the subnet configuration
+    --chain-config string            path to the chain configuration
+-h, --help                           help for configure
+    --per-node-chain-config string   path to per node chain configuration for local network
+    --subnet-config string           path to the subnet configuration
 ```
 
 ### Subnet Create
