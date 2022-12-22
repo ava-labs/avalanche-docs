@@ -6,19 +6,22 @@
 
 :::
 
-## [v1.9.5](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.5)
+## V1.9.5 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.5)
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `21`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `21`.
 
 ### Subnet Messaging
 
-- Added subnet message serialization format
-- Added subnet message signing
+- Added Subnet message serialization format
+- Added Subnet message signing
 - Replaced `bls.SecretKey` with a `teleporter.Signer` in the `snow.Context`
-- Moved `SNLookup` into the `validators.State` interface to support non-whitelisted chainID to subnetID lookups
+- Moved `SNLookup` into the `validators.State` interface to support
+  non-whitelisted chainID to subnetID lookups
 - Added support for non-whitelisted subnetIDs for fetching the validator set at a given height
-- Added subnet message verification
-- Added `teleporter.AnycastID` to denote a subnet message not intended for a specific chain
+- Added Subnet message verification
+- Added `teleporter.AnycastID` to denote a Subnet message not intended for a specific chain
 
 ### Fixes
 
@@ -29,8 +32,8 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 
 ### Coreth
 
-- Added support for eth_call over VM2VM messaging
-- Added config flags for tx pool behavior
+- Added support for `eth_call` over VM2VM messaging
+- Added config flags for TX pool behavior
 
 ### Miscellaneous
 
