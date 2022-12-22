@@ -211,6 +211,12 @@ P-Chain, C-Chain, and Index API.
 
 [Chainstack](https://chainstack.com/) supports the C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
 
+Features:
+
+- Globally distributed infrastructure for optimal performance.
+- Crypto payments natively.
+- 24/7 customer support.
+
 #### Mainnet
 
 ##### HTTP
