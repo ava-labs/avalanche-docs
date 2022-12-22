@@ -6,6 +6,49 @@
 
 :::
 
+## V1.9.5 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.5)
+
+**Banff.5 - Warp Messaging**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `21`.
+
+### Subnet Messaging
+
+- Added Subnet message serialization format
+- Added Subnet message signing
+- Replaced `bls.SecretKey` with a `teleporter.Signer` in the `snow.Context`
+- Moved `SNLookup` into the `validators.State` interface to support
+  non-whitelisted chainID to subnetID lookups
+- Added support for non-whitelisted subnetIDs for fetching the validator set at a given height
+- Added Subnet message verification
+- Added `teleporter.AnycastID` to denote a Subnet message not intended for a specific chain
+
+### Fixes
+
+- Added re-gossip of updated validator IPs
+- Fixed `rpcchainvm.BatchedParseBlock` to correctly wrap returned blocks
+- Removed incorrect `uintptr` handling in the generic codec
+- Removed message latency tracking on messages being sent to itself
+
+### Coreth
+
+- Added support for `eth_call` over VM2VM messaging
+- Added config flags for TX pool behavior
+
+### Miscellaneous
+
+- Added networking package README.md
+- Removed pagination of large db messages over gRPC
+- Added `Size` to the generic codec to reduce allocations
+- Added `UnpackLimitedBytes` and `UnpackLimitedStr` to the manual packer
+- Added SECURITY.md
+- Exposed proposer list from the `proposervm`'s `Windower` interface
+- Added health and bootstrapping client helpers that block until the node is healthy
+- Moved bit sets from the `ids` package to the `set` package
+- Added more wallet examples
+
 ## V1.9.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.4))
 
 This version is backwards compatible to
