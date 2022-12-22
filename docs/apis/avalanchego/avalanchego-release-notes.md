@@ -51,6 +51,8 @@ optional, but encouraged. The supported plugin version is `21`.
 
 ## V1.9.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.4))
 
+**Banff.4 - VM BLS Access**
+
 This version is backwards compatible to
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
 optional, but encouraged. The supported plugin version is `20`.
