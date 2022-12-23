@@ -779,9 +779,37 @@ message RemoveSubnetValidatorTx {
 
 ### Unsigned Remove Subnet Validator TX Example
 
-TODO format
-
 0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a7000000000000000000000000e902a9a86640bfdb1cd0e36c0cc982b83e5765fa4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db0000000a0000000100000000
+
+// Base Tx
+// CodecID
+00 00 
+// TypeID
+?
+// NetworkID
+00 00 00 01 
+// BlockchainID
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// Num xfer outs
+00 00 00 00 
+// Num xfer ins
+00 00 00 00 
+// Memo len
+00 00 00 00 
+
+// NodeID
+e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa 
+
+// SubnetID
+4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
+
+// SubnetAuth
+// SubnetAuth TypeID
+00 00 00 0a 
+// SigIndices length
+00 00 00 01 
+// SigIndices
+00 00 00 00
 
 ## Unsigned Add Permissionless Validator TX
 
@@ -852,9 +880,114 @@ message AddPermissionlessValidatorTx {
 
 ### Unsigned Add Permissionless Validator TX Example
 
-TODO format
-
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a20000000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf00000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f520000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f44000004e20
+
+// BaseTx
+// CodecID
+00 00 
+// TypeID
+?
+// NetworkID
+00 00 00 01 
+// BlockchainID
+e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa d5 f6 bb e6 ab dc ce 7b 5a e7 d7 c7 
+// Num xfer outs
+00 00 00 00 
+// Xfer ins
+// Num xfer ins
+00 00 00 01 
+// Xfer in 0
+// TxID
+4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
+// Utxo Index
+00 00 00 00 
+// AssetID
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// input
+// TypeID
+00 00 00 05 
+// Amount
+00 00 01 d1 a9 4a 20 00 
+// Num address indices
+00 00 00 01 
+// Address index 0
+00 00 00 00 
+// Memo len
+00 00 00 00 
+
+// Validator
+// NodeID
+5f a2 9e d4 35 69 03 da c2 36 47 13 c6 0f 57 d8 47 2c 7d da 
+// Start time
+00 00 00 00 63 97 61 6e 
+// End time
+00 00 00 00 63 be ee 6e 
+// Weight
+00 00 01 d1 a9 4a 20 00 
+
+// SubnetID
+f3 08 6d 7b fc 35 be 1c 68 db 66 4b a9 ce 61 a2 06 01 26 b0 d6 b4 bf b0 9f d7 a5 fb 76 78 ca da 
+
+// ?
+00 00 00 1c 
+
+// Signer
+// Pub key
+a5 af 17 9e 41 88 58 38 93 c2 b9 9e 1a 8b e2 7d 90 a9 21 3c fb ff 1d 75 b7 4f e2 bc 9f 3b 07 2c 2d ed 08 63 a9 d9 ac d9 03 3f 22 32 95 81 0e 42 
+// Sig
+92 38 e2 8d 3c 9b 7f 72 12 b6 3d 74 6b 2a e7 3a 54 fe 08 a3 de 61 b1 32 f2 f8 9e 9e ef f9 7d 4d 7c a3 a3 c8 89 86 aa 85 5c d3 62 96 fc fe 8f 02 16 2d 02 58 be 49 4d 26 7d 4c 57 98 bc 08 1a b6 02 de d9 0b 0f c1 6d 8a 03 5e 68 ff 52 94 79 4c b6 3f f1 ee 06 8f bf c2 b4 c8 cd 2d 08 eb f2 97 
+
+// Stake outs
+// Num stake outs 
+00 00 00 01 
+// AssetID
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// Output
+// typeID
+00 00 00 07 
+// Amount
+00 00 01 d1 a9 4a 20 00 
+// Locktime
+00 00 00 00 00 00 00 00 
+// Threshold
+00 00 00 01 
+// Num addrs
+00 00 00 01 
+// Addr 0
+33 ee ff c6 47 85 cf 9d 80 e7 73 1d 9f 31 f6 7b d0 3c 5c f0 
+
+// Validator rewards owner
+// TypeID
+00 00 00 0b 
+// Locktime
+00 00 00 00 00 00 00 00 
+// Threshold
+00 00 00 01 
+// Num addrs
+00 00 00 01 
+// Addr 0
+72 f3 eb 9a ea f8 28 30 11 ce 6e 43 7f de cd 65 ea ce 8f 52
+
+// Delegator rewards owner
+// TypeID
+00 00 00 0b 
+// Locktime
+00 00 00 00 00 00 00 00 
+// Threshold
+00 00 00 01 
+// Num addrs
+00 00 00 01 
+// Addr 0
+b2 b9 13 13 ac 48 7c 22 24 45 25 4e 26 cd 02 6d 21 f6 f4 40
+
+// Delegation shares
+00 00 4e 20
+
+- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  - **`Weight`** is a long which is the amount the validator stakes
 
 ## Unsigned Add Permissionless Delegator TX
 
@@ -907,9 +1040,86 @@ message AddPermissionlessDelegatorTx {
 
 ### Unsigned Add Permissionless Delegator TX Example
 
-TODO format
-
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a20000000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf00000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+
+// Base tx
+// CodecID
+00 00 
+// TypeID
+?
+// NetworkID
+00 00 00 01 
+// BlockchainID
+e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa d5 f6 bb e6 ab dc ce 7b 5a e7 d7 c7 
+// Num xfer outs
+00 00 00 00 
+// Num xfer ins
+00 00 00 01 
+// Xfer in 0
+// TxID
+4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
+// Utxo index
+00 00 00 00 
+// AssetID
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// Input
+// TypeID
+00 00 00 05 
+// Amount
+00 00 01 d1 a9 4a 20 00 
+// Num address indices
+00 00 00 01 
+// Address index 0
+00 00 00 00 
+// Memo len
+00 00 00 00 
+
+// Validator
+// NodeID
+5f a2 9e d4 35 69 03 da c2 36 47 13 c6 0f 57 d8 47 2c 7d da 
+// Start time
+00 00 00 00 63 97 61 97 
+// End time
+00 00 00 00 63 be ee 97 
+// Weight
+00 00 01 d1 a9 4a 20 00 
+
+// Subnet id
+f3 08 6d 7b fc 35 be 1c 68 db 66 4b a9 ce 61 a2 06 01 26 b0 d6 b4 bf b0 9f d7 a5 fb 76 78 ca da 
+
+// Signer
+?
+
+// Stake_outs
+// Num stake outs
+00 00 00 01 
+// Stake out 0
+// AssetID
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// TypeID
+00 00 00 07 
+// Amount
+00 00 01 d1 a9 4a 20 00 
+// Locktime
+00 00 00 00 00 00 00 00 
+// Threshold
+00 00 00 01 
+// Num addrs
+00 00 00 01 
+// Addr 0
+33 ee ff c6 47 85 cf 9d 80 e7 73 1d 9f 31 f6 7b d0 3c 5c f0 
+
+// Delegator_rewards_owner
+// TypeID
+00 00 00 0b 
+// Locktime
+00 00 00 00 00 00 00 00 
+// Threshold
+00 00 00 01 
+// Num addrs
+00 00 00 01 
+// Addr 0
+72 f3 eb 9a ea f8 28 30 11 ce 6e 43 7f de cd 65 ea ce 8f 52
 
 ## Unsigned Transform Subnet TX
 
@@ -1045,9 +1255,93 @@ message TransformSubnetTx {
 
 ### Unsigned Transform Subnet TX Example
 
-TODO format
-
 0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a70000000500000000000f42400000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada000000e8d4a51000000009184e72a0000000000000000001000000000000000a000000174876e800000001d1a94a20000001518001e1338000002710000000174876e80005000c35000000000a0000000100000000
+
+// BaseTx
+// Codec id
+00 00 
+// Type id 
+?
+// Network id 
+00 00 00 01 
+// Blockchain id 
+e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa d5 f6 bb e6 ab dc ce 7b 5a e7 d7 c7 
+
+// Num xfer outs 
+00 00 00 00 
+
+// Xfer ins
+// Num xfer ins
+00 00 00 01 
+// TxID
+4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
+// UTXOIndex
+00 00 00 00 
+// AssetID 
+3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
+// Input
+// TypeID 
+00 00 00 05 
+// Amount 
+00 00 00 00 00 0f 42 40 
+// Num AddressIndices 
+00 00 00 01 
+// AddressIndex 
+00 00 00 00 
+
+// Memo size 
+00 00 00 00 
+
+// SubnetID 
+5f a2 9e d4 35 69 03 da c2 36 47 13 c6 0f 57 d8 47 2c 7d da 4a 5e 08 d8 8a 88 ad 8e a7 1a ed 60 
+// AssetID 
+f3 08 6d 7b fc 35 be 1c 68 db 66 4b a9 ce 61 a2 06 01 26 b0 d6 b4 bf b0 9f d7 a5 fb 76 78 ca da 
+
+// ?
+00 00 00 e8 d4 a5 10 00 
+
+// Initial supply
+00 00 09 18 4e 72 a0 00 
+
+// Maximum supply
+00 00 00 00 00 00 00 01 
+
+// Min consumption rate
+00 00 00 00 00 00 00 0a 
+
+// Max consumption rate
+00 00 00 17 48 76 e8 00 
+
+// Min validator stake
+00 00 01 d1 a9 4a 20 00 
+
+// Max validator stake
+00 01 51 80 01 e1 33 80 
+
+// Min stake duration
+00 00 27 10 
+
+// Max stake duration
+00 00 00 17 
+
+// Min delegation fee
+48 76 e8 00 
+
+// Max validator weight factor
+05 
+
+// Uptime requirement
+00 0c 35 00 
+
+// SubnetAuth
+// SubnetAuth TypeID
+00 00 00 0a 
+// SigIndices length
+00 00 00 01 
+// SigIndices
+00 00 00 00
+
+Let’s make an unsigned transform Subnet TX that uses the inputs and outputs from the previous examples:
 
 ## Unsigned Add Subnet Validator TX
 
