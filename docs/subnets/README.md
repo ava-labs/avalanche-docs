@@ -113,7 +113,7 @@ and imposes restrictions on smart contract developers. Solidity and the other
 few languages for writing Ethereum smart contracts are unfamiliar to most
 programmers.
 
-Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized
+Avalanche Virtual Machines make it easy to define a blockchain-based decentralized
 application. Rather than new, limited languages like Solidity, developers can
 write VMs in Go (other languages will be supported in the future).
 
@@ -121,10 +121,12 @@ write VMs in Go (other languages will be supported in the future).
 
 The following VMs were built using Go
 
-- [SubnetEVM](https://github.com/ava-labs/subnet-evm/)
+- [Coreth](https://github.com/ava-labs/coreth)
+- [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
 - [SpacesVM](https://github.com/ava-labs/spacesvm)
 - [BlobVM](https://github.com/ava-labs/blobvm)
 - [TimestampVM](https://github.com/ava-labs/timestampvm)
+- [XSVM](https://github.com/ava-labs/xsvm)
 
 More info:
 
@@ -133,8 +135,8 @@ More info:
 
 The following VMs were built using Rust via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
 
-- [TimestampVM](https://github.com/ava-labs/timestampvm-rs)
-- [SpacesVM](https://github.com/ava-labs/spacesvm-rs)
+- [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
+- [SpacesVM RS](https://github.com/ava-labs/spacesvm-rs)
 - [BulletproofVM](https://github.com/usmaneth/BulletproofVM)
 
 More info:
