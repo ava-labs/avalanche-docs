@@ -777,35 +777,52 @@ message RemoveSubnetValidatorTx {
 
 ### Unsigned Remove Subnet Validator TX Example
 
-0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a7000000000000000000000000e902a9a86640bfdb1cd0e36c0cc982b83e5765fa4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db0000000a0000000100000000
+Let’s make an unsigned remove subnet validator TX that uses the inputs and
+outputs from the previous examples:
 
-// Base Tx
-// TypeID
-00 00 00 0a
-// NetworkID
-00 00 00 01 
-// BlockchainID
-3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
-// Num xfer outs
-00 00 00 00 
-// Num xfer ins
-00 00 00 00 
-// Memo len
-00 00 00 00 
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 17"`
+- **`NodeID`**: `0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa`
+- **`SubnetID`**: `0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db`
+- **`SubnetAuth`**: `0x0000000a0000000100000000`
 
-// NodeID
-e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa 
+```text
+[
+    BaseTx       <- 0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000000000000000000000
+    NodeID       <- 0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa
+    SubnetID     <- 0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db
+    SubnetAuth   <- 0x0000000a0000000100000000
+]
+=
+[
+    // BaseTx
+    0x00, 0x00, 0x00, 0x17, 0x00, 0x00, 0x30, 0x39, 
+    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
+    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
+    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
+    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
 
-// SubnetID
-4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
+    // NodeID
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa,
 
-// SubnetAuth
-// SubnetAuth TypeID
-00 00 00 0a 
-// SigIndices length
-00 00 00 01 
-// SigIndices
-00 00 00 00
+    // SubnetID
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb,
+
+    // SubnetAuth
+    // SubnetAuth TypeID
+    0x00, 0x00, 0x00, 0x0a,
+    // SigIndices length
+    0x00, 0x00, 0x00, 0x01,
+    // SigIndices
+    0x00, 0x00, 0x00, 0x00,
+]
+```
 
 ## Unsigned Add Permissionless Validator TX
 
@@ -878,7 +895,6 @@ message AddPermissionlessValidatorTx {
 
 Let’s make an unsigned add permissionless validator TX that uses the inputs and
 outputs from the previous examples:
-
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
 - **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000`
