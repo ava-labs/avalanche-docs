@@ -18,6 +18,17 @@ or logs.
 - Avalanche-CLI for <https://github.com/ava-labs/avalanche-cli>
 - Avalanche Network Runner for <https://github.com/ava-labs/avalanche-network-runner>
 
+### Virtual Machines
+
+- Coreth for <https://github.com/ava-labs/coreth>
+- Subnet-EVM for <https://github.com/ava-labs/subnet-evm>
+- SpacesVM <https://github.com/ava-labs/spacesvm>
+- BlobVM <https://github.com/ava-labs/blobvm>
+- TimestampVM <https://github.com/ava-labs/timestampvm>
+- XSVM <https://github.com/ava-labs/xsvm>
+- TimestampVM RS <https://github.com/ava-labs/timestampvm-rs>
+- SpacesVM RS <https://github.com/ava-labs/spacesvm-rs>
+
 ### Core
 
 - Core extension or Core browser extension
