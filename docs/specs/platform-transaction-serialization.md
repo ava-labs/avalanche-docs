@@ -656,8 +656,6 @@ Let’s make an unsigned add validator TX that uses the inputs and outputs from 
 - **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
 - **`Shares`**: `0x00000064`
 
-  0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
-
 ```text
 [
     BaseTx       <- 0x0000000c000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
@@ -785,7 +783,7 @@ message RemoveSubnetValidatorTx {
 // CodecID
 00 00 
 // TypeID
-?
+00000017
 // NetworkID
 00 00 00 01 
 // BlockchainID
@@ -1218,7 +1216,7 @@ for this type is 24 or `0x00000018`.
 +----------------------+------------------+----------------------------------+
 | min_delegation_fee   : short            |                          4 bytes |
 +----------------------+------------------+----------------------------------+
-| min_delegator_stake  : short            |                          4 bytes |
+| min_delegator_stake  : long             |                          8 bytes | 
 +----------------------+------------------+----------------------------------+
 | max_validator_weight_factor : byte      |                           1 byte |
 +----------------------+------------------+----------------------------------+
@@ -1226,7 +1224,7 @@ for this type is 24 or `0x00000018`.
 +----------------------+------------------+----------------------------------+
 | subnet_auth          : SubnetAuth       | 4 bytes + len(sig_indices) bytes |
 +----------------------+------------------+----------------------------------+
-| 137 + size(base_tx) + len(sig_indices) bytes                               |
+| 141 + size(base_tx) + len(sig_indices) bytes                               |
 +----------------------------------------------------------------------------+
 ```
 
@@ -1246,7 +1244,7 @@ message TransformSubnetTx {
     uint32 min_stake_duration = 10;  // 04 bytes
     uint32 max_stake_duration = 11;  // 04 bytes
     uint32 min_delegation_fee = 12;  // 04 bytes
-    uint32 min_delegator_stake = 13; // 04 bytes
+    uint32 min_delegator_stake = 13; // 08 bytes
     byte max_validator_weight_factor = 14; // 01 byte
     uint32 uptime_requirement = 15; // 04 bytes
     SubnetAuth subnet_auth = 16;    // 04 bytes + len(sig_indices)
@@ -1255,93 +1253,123 @@ message TransformSubnetTx {
 
 ### Unsigned Transform Subnet TX Example
 
-0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a70000000500000000000f42400000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada000000e8d4a51000000009184e72a0000000000000000001000000000000000a000000174876e800000001d1a94a20000001518001e1338000002710000000174876e80005000c35000000000a0000000100000000
-
-// BaseTx
-// Codec id
-00 00 
-// Type id 
-?
-// Network id 
-00 00 00 01 
-// Blockchain id 
-e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa d5 f6 bb e6 ab dc ce 7b 5a e7 d7 c7 
-
-// Num xfer outs 
-00 00 00 00 
-
-// Xfer ins
-// Num xfer ins
-00 00 00 01 
-// TxID
-4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
-// UTXOIndex
-00 00 00 00 
-// AssetID 
-3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
-// Input
-// TypeID 
-00 00 00 05 
-// Amount 
-00 00 00 00 00 0f 42 40 
-// Num AddressIndices 
-00 00 00 01 
-// AddressIndex 
-00 00 00 00 
-
-// Memo size 
-00 00 00 00 
-
-// SubnetID 
-5f a2 9e d4 35 69 03 da c2 36 47 13 c6 0f 57 d8 47 2c 7d da 4a 5e 08 d8 8a 88 ad 8e a7 1a ed 60 
-// AssetID 
-f3 08 6d 7b fc 35 be 1c 68 db 66 4b a9 ce 61 a2 06 01 26 b0 d6 b4 bf b0 9f d7 a5 fb 76 78 ca da 
-
-// ?
-00 00 00 e8 d4 a5 10 00 
-
-// Initial supply
-00 00 09 18 4e 72 a0 00 
-
-// Maximum supply
-00 00 00 00 00 00 00 01 
-
-// Min consumption rate
-00 00 00 00 00 00 00 0a 
-
-// Max consumption rate
-00 00 00 17 48 76 e8 00 
-
-// Min validator stake
-00 00 01 d1 a9 4a 20 00 
-
-// Max validator stake
-00 01 51 80 01 e1 33 80 
-
-// Min stake duration
-00 00 27 10 
-
-// Max stake duration
-00 00 00 17 
-
-// Min delegation fee
-48 76 e8 00 
-
-// Max validator weight factor
-05 
-
-// Uptime requirement
-00 0c 35 00 
-
-// SubnetAuth
-// SubnetAuth TypeID
-00 00 00 0a 
-// SigIndices length
-00 00 00 01 
-// SigIndices
-00 00 00 00
-
 Let’s make an unsigned transform Subnet TX that uses the inputs and outputs from the previous examples:
+
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 18"`
+- **`SubnetID`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60`
+- **`AssetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
+- **`InitialSupply`**: `0x000000e8d4a51000`
+- **`MaximumSupply`**: `0x000009184e72a000`
+- **`MinConsumptionRate`**: `0x0000000000000001`
+- **`MaxConsumptionRate`**: `0x000000000000000a`
+- **`MinValidatorStake`**: `0x000000174876e800`
+- **`MaxValidatorStake`**: `0x000001d1a94a2000`
+- **`MinStakeDuration`**: `0x00015180`
+- **`MaxStakeDuration`**: `0x01e13380`
+- **`MinDelegationFee`**: `0x00002710`
+- **`MinDelegatorStake`**: `0x000000174876e800`
+- **`MaxValidatorWeightFactor`**: `0x05`
+- **`UptimeRequirement`**: `0x000c3500`
+- **`SubnetAuth`**:
+  - **`TypeID`**: `0x0000000a`
+  - **`SigIndices`**: `0x00000000`
+
+```text
+[
+    BaseTx       <- 0x00000018000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
+    SubnetID     <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60
+    AssetID      <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
+    InitialSupply <- 0x000000e8d4a51000
+    MaximumSupply <- 0x000009184e72a000
+    MinConsumptionRate <- 0x0000000000000001
+    MaxConsumptionRate <- 0x000000000000000a
+    MinValidatorStake <- 0x000000174876e800
+    MaxValidatorStake <- 0x000001d1a94a2000
+    MinStakeDuration <- 0x00015180
+    MaxStakeDuration <- 0x01e13380
+    MinDelegationFee <- 0x00002710
+    MinDelegatorStake <- 0x000000174876e800
+    MaxValidatorWeightFactor <- 0x05
+    UptimeRequirement <- 0x000c3500
+    SubnetAuth   <- 0x0000000a0000000100000000
+]
+=
+[
+    // BaseTx:
+    0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x30, 0x39,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x01, 0x68, 0x70, 0xb7, 0xd6,
+    0x6a, 0xc3, 0x25, 0x40, 0x31, 0x13, 0x79, 0xe5,
+    0xb5, 0xdb, 0xad, 0x28, 0xec, 0x7e, 0xb8, 0xdd,
+    0xbf, 0xc8, 0xf4, 0xd6,
+    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
+    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
+    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
+    0x00, 0x00, 0x00, 0x01,
+    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
+    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
+    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
+    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
+    0x00, 0x00, 0x00, 0x01,
+    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
+    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
+    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
+    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
+    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
+    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    // SubnetID
+    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
+    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
+    0x47, 0x2c, 0x7d, 0xda, 0x4a, 0x5e, 0x08, 0xd8, 
+    0x8a, 0x88, 0xad, 0x8e, 0xa7, 0x1a, 0xed, 0x60,
+    // AssetID
+    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
+    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
+    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
+    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
+    // InitialSupply
+    0x00, 0x00, 0x00, 0xe8, 0xd4, 0xa5, 0x10, 0x00,
+    // MaximumSupply
+    0x00, 0x00, 0x09, 0x18, 0x4e, 0x72, 0xa0, 0x00,
+    // MinConsumptionRate
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    // MaxConsumptionRate
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0a,
+    // MinValidatorStake
+    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
+    // MaxValidatorStake
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00,
+    // MinStakeDuration
+    0x00, 0x01, 0x51, 0x80,
+    // MaxStakeDuration
+    0x01, 0xe1, 0x33, 0x80,
+    // MinDelegationFee
+    0x00, 0x00, 0x27, 0x10,
+    // MinDelegatorStake
+    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
+    // MaxValidatorWeightFactor
+    0x05,
+    // UptimeRequirement
+    0x00, 0x0c, 0x35, 0x00,
+    // SubnetAuth
+    // SubnetAuth TypeID
+    0x00, 0x00, 0x00, 0x0a,
+    // SigIndices length
+    0x00, 0x00, 0x00, 0x01,
+    // SigIndices
+    0x00, 0x00, 0x00, 0x00,
+
+]
+```
 
 ## Unsigned Add Subnet Validator TX
 
