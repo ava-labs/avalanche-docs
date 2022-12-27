@@ -13,10 +13,19 @@ or logs.
 ## Official Project/Product Names
 
 - AvalancheGo for <https://github.com/ava-labs/avalanchego>
-- Coreth for <https://github.com/ava-labs/coreth>
-- Subnet-EVM for <https://github.com/ava-labs/subnet-evm>
 - Avalanche-CLI for <https://github.com/ava-labs/avalanche-cli>
 - Avalanche Network Runner for <https://github.com/ava-labs/avalanche-network-runner>
+
+### Virtual Machines
+
+- Coreth for <https://github.com/ava-labs/coreth>
+- Subnet-EVM for <https://github.com/ava-labs/subnet-evm>
+- SpacesVM for <https://github.com/ava-labs/spacesvm>
+- BlobVM for <https://github.com/ava-labs/blobvm>
+- TimestampVM for <https://github.com/ava-labs/timestampvm>
+- XSVM for <https://github.com/ava-labs/xsvm>
+- TimestampVM RS for <https://github.com/ava-labs/timestampvm-rs>
+- SpacesVM RS for <https://github.com/ava-labs/spacesvm-rs>
 
 ### Core
 
