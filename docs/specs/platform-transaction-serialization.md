@@ -37,7 +37,7 @@ A BLS public key and a proof of possession of the key.
 ### Proof of Possession Specification
 
 ```text
-message ProofOfPossesion {
+message ProofOfPossession {
     bytes public_key = 1; // 48 bytes
     bytes signature = 2;  // 96 bytes
 }
