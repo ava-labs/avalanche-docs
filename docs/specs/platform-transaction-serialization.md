@@ -844,7 +844,7 @@ An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
 +---------------+----------------------+------------------------------------------------+
 | subnet_id     : [32]byte             |                                       32 bytes |
 +---------------+----------------------+------------------------------------------------+
-| signer        : Signer               |                                        ? bytes |
+| signer        : Signer               |                                      144 bytes |
 +---------------+----------------------+------------------------------------------------+
 | stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
 +---------------+----------------------+------------------------------------------------+
@@ -854,7 +854,7 @@ An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
 +---------------+----------------------+------------------------------------------------+
 | delegation_shares   : uint32         |                                        4 bytes |
 +---------------+----------------------+------------------------------------------------+
-| 84 + len(signer) + size(base_tx) + size(stake_outs) +                                 |
+| 232 + size(base_tx) + size(stake_outs) +                                              |
 | size(validator_rewards_owner) + size(delegator_rewards_owner) bytes                   |
 +---------------------------------------------------------------------------------------+
 ```
@@ -866,7 +866,7 @@ message AddPermissionlessValidatorTx {
     BaseTx base_tx = 1;         // size(base_tx)
     Validator validator = 2;    // 44 bytes
     SubnetID subnet_id = 3;     // 32 bytes
-    Signer signer = 4; // ? bytes
+    Signer signer = 4; // 148 bytes
     repeated TransferOut stake_outs = 5; // 4 bytes + size(stake_outs)
     SECP256K1OutputOwners validator_rewards_owner = 6; // size(validator_rewards_owner) bytes
     SECP256K1OutputOwners delegator_rewards_owner = 7; // size(delegator_rewards_owner) bytes
@@ -876,114 +876,150 @@ message AddPermissionlessValidatorTx {
 
 ### Unsigned Add Permissionless Validator TX Example
 
-0x000000000001e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a20000000000100000000000000005fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000f3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf00000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f520000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f44000004e20
+Let’s make an unsigned add permissionless validator TX that uses the inputs and
+outputs from the previous examples:
 
-// BaseTx
-// CodecID
-00 00 
-// TypeID
-?
-// NetworkID
-00 00 00 01 
-// BlockchainID
-e9 02 a9 a8 66 40 bf db 1c d0 e3 6c 0c c9 82 b8 3e 57 65 fa d5 f6 bb e6 ab dc ce 7b 5a e7 d7 c7 
-// Num xfer outs
-00 00 00 00 
-// Xfer ins
-// Num xfer ins
-00 00 00 01 
-// Xfer in 0
-// TxID
-4a 17 72 05 df 5c 29 92 9d 06 db 9d 94 1f 83 d5 ea 98 5d e3 02 01 5e 99 25 2d 16 46 9a 66 10 db 
-// Utxo Index
-00 00 00 00 
-// AssetID
-3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
-// input
-// TypeID
-00 00 00 05 
-// Amount
-00 00 01 d1 a9 4a 20 00 
-// Num address indices
-00 00 00 01 
-// Address index 0
-00 00 00 00 
-// Memo len
-00 00 00 00 
 
-// Validator
-// NodeID
-5f a2 9e d4 35 69 03 da c2 36 47 13 c6 0f 57 d8 47 2c 7d da 
-// Start time
-00 00 00 00 63 97 61 6e 
-// End time
-00 00 00 00 63 be ee 6e 
-// Weight
-00 00 01 d1 a9 4a 20 00 
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
+- **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000`
+- **`SubnetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
+- **`Signer`**: `0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297`
+- **`StakeOuts`**: `0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0`
+- **`ValidatorRewardsOwner`**: `0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52`
+- **`DelegatorRewardsOwner`**: `0x0000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f440`
+- **`DelegationShares`**: `0x00004e20`
 
-// SubnetID
-f3 08 6d 7b fc 35 be 1c 68 db 66 4b a9 ce 61 a2 06 01 26 b0 d6 b4 bf b0 9f d7 a5 fb 76 78 ca da 
+```text
+[
+    BaseTx       <- 0x0000001a00003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a2000000000010000000000000000
+    Validator    <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000
+    SubnetID     <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
+    Signer       <- 0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297
+    StakeOuts    <- 0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0
+    ValidatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+    DelegatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+    DelegationShares       <- 0x00004e20
+]
+=
+[
+    // BaseTx
+    0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x30, 0x39, 
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
+    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
+    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
+    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
+    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
+    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
+    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
 
-// ?
-00 00 00 1c 
+    // Validator
+    // NodeID
+    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
+    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
+    0x47, 0x2c, 0x7d, 0xda, 0x
+    // Start time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0x97, 0x61, 0x6e, 
+    // End time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0xbe, 0xee, 0x6e, 
+    // Weight
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
 
-// Signer
-// Pub key
-a5 af 17 9e 41 88 58 38 93 c2 b9 9e 1a 8b e2 7d 90 a9 21 3c fb ff 1d 75 b7 4f e2 bc 9f 3b 07 2c 2d ed 08 63 a9 d9 ac d9 03 3f 22 32 95 81 0e 42 
-// Sig
-92 38 e2 8d 3c 9b 7f 72 12 b6 3d 74 6b 2a e7 3a 54 fe 08 a3 de 61 b1 32 f2 f8 9e 9e ef f9 7d 4d 7c a3 a3 c8 89 86 aa 85 5c d3 62 96 fc fe 8f 02 16 2d 02 58 be 49 4d 26 7d 4c 57 98 bc 08 1a b6 02 de d9 0b 0f c1 6d 8a 03 5e 68 ff 52 94 79 4c b6 3f f1 ee 06 8f bf c2 b4 c8 cd 2d 08 eb f2 97 
+    // SubnetID
+    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
+    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
+    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
+    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
 
-// Stake outs
-// Num stake outs 
-00 00 00 01 
-// AssetID
-3d 0a d1 2b 8e e8 92 8e df 24 8c a9 1c a5 56 00 fb 38 3f 07 c3 2b ff 1d 6d ec 47 2b 25 cf 59 a7 
-// Output
-// typeID
-00 00 00 07 
-// Amount
-00 00 01 d1 a9 4a 20 00 
-// Locktime
-00 00 00 00 00 00 00 00 
-// Threshold
-00 00 00 01 
-// Num addrs
-00 00 00 01 
-// Addr 0
-33 ee ff c6 47 85 cf 9d 80 e7 73 1d 9f 31 f6 7b d0 3c 5c f0 
+    // Signer
+    // TypeID
+    0x00, 0x00, 0x00, 0x1c, 
+    // Pub key
+    0xa5, 0xaf, 0x17, 0x9e, 0x41, 0x88, 0x58, 0x38, 
+    0x93, 0xc2, 0xb9, 0x9e, 0x1a, 0x8b, 0xe2, 0x7d, 
+    0x90, 0xa9, 0x21, 0x3c, 0xfb, 0xff, 0x1d, 0x75, 
+    0xb7, 0x4f, 0xe2, 0xbc, 0x9f, 0x3b, 0x07, 0x2c, 
+    0x2d, 0xed, 0x08, 0x63, 0xa9, 0xd9, 0xac, 0xd9, 
+    0x03, 0x3f, 0x22, 0x32, 0x95, 0x81, 0x0e, 0x42, 
+    // Sig
+    0x92, 0x38, 0xe2, 0x8d, 0x3c, 0x9b, 0x7f, 0x72, 
+    0x12, 0xb6, 0x3d, 0x74, 0x6b, 0x2a, 0xe7, 0x3a,
+    0x54, 0xfe, 0x08, 0xa3, 0xde, 0x61, 0xb1, 0x32, 
+    0xf2, 0xf8, 0x9e, 0x9e, 0xef, 0xf9, 0x7d, 0x4d, 
+    0x7c, 0xa3, 0xa3, 0xc8, 0x89, 0x86, 0xaa, 0x85, 
+    0x5c, 0xd3, 0x62, 0x96, 0xfc, 0xfe, 0x8f, 0x02, 
+    0x16, 0x2d, 0x02, 0x58, 0xbe, 0x49, 0x4d, 0x26, 
+    0x7d, 0x4c, 0x57, 0x98, 0xbc, 0x08, 0x1a, 0xb6, 
+    0x02, 0xde, 0xd9, 0x0b, 0x0f, 0xc1, 0x6d, 0x8a, 
+    0x03, 0x5e, 0x68, 0xff, 0x52, 0x94, 0x79, 0x4c, 
+    0xb6, 0x3f, 0xf1, 0xee, 0x06, 0x8f, 0xbf, 0xc2, 
+    0xb4, 0xc8, 0xcd, 0x2d, 0x08, 0xeb, 0xf2, 0x97, 
 
-// Validator rewards owner
-// TypeID
-00 00 00 0b 
-// Locktime
-00 00 00 00 00 00 00 00 
-// Threshold
-00 00 00 01 
-// Num addrs
-00 00 00 01 
-// Addr 0
-72 f3 eb 9a ea f8 28 30 11 ce 6e 43 7f de cd 65 ea ce 8f 52
+    // Stake outs
+    // Num stake outs 
+    0x00, 0x00, 0x00, 0x01, 
+    // AssetID
+    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
+    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
+    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
+    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
+    // Output
+    // typeID
+    0x00, 0x00, 0x00, 0x07, 
+    // Amount
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x33, 0xee, 0xff, 0xc6, 0x47, 0x85, 0xcf, 0x9d, 
+    0x80, 0xe7, 0x73, 0x1d, 0x9f, 0x31, 0xf6, 0x7b, 
+    0xd0, 0x3c, 0x5c, 0xf0, 
 
-// Delegator rewards owner
-// TypeID
-00 00 00 0b 
-// Locktime
-00 00 00 00 00 00 00 00 
-// Threshold
-00 00 00 01 
-// Num addrs
-00 00 00 01 
-// Addr 0
-b2 b9 13 13 ac 48 7c 22 24 45 25 4e 26 cd 02 6d 21 f6 f4 40
+    // Validator rewards owner
+    // TypeID
+    0x00, 0x00, 0x00, 0x0b, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x72, 0xf3, 0xeb, 0x9a, 0xea, 0xf8, 0x28, 0x30, 
+    0x11, 0xce, 0x6e, 0x43, 0x7f, 0xde, 0xcd, 0x65, 
+    0xea, 0xce, 0x8f, 0x52,
 
-// Delegation shares
-00 00 4e 20
+    // Delegator rewards owner
+    // TypeID
+    0x00, 0x00, 0x00, 0x0b, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0xb2, 0xb9, 0x13, 0x13, 0xac, 0x48, 0x7c, 0x22, 
+    0x24, 0x45, 0x25, 0x4e, 0x26, 0xcd, 0x02, 0x6d, 
+    0x21, 0xf6, 0xf4, 0x40,
 
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
+    // Delegation shares
+    0x00, 0x00, 0x4e, 0x20,
+]
+```
 
 ## Unsigned Add Permissionless Delegator TX
 
