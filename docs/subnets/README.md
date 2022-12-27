@@ -117,7 +117,7 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized
 application. Rather than new, limited languages like Solidity, developers can
 write VMs in Go (other languages will be supported in the future).
 
-## Example Virtual Machines
+### Example Virtual Machines
 
 The following VMs were built using Go
 
