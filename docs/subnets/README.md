@@ -119,7 +119,7 @@ write VMs in Go (other languages will be supported in the future).
 
 ## Example Virtual Machines
 
-The following VMs were built using Golang
+The following VMs were built using Go
 
 - [SubnetEVM](https://github.com/ava-labs/subnet-evm/)
 - [SpacesVM](https://github.com/ava-labs/spacesvm)
@@ -131,7 +131,7 @@ More info:
 - [How to Build a Simple Golang VM](https://docs.avax.network/subnets/create-a-vm-timestampvm)
 - [How to Build a Complex Golang VM](https://docs.avax.network/subnets/create-a-vm-blobvm)
 
-The following VMs were built using Rustlang via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
+The following VMs were built using Rust via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
 
 - [TimestampVM](https://github.com/ava-labs/timestampvm-rs)
 - [SpacesVM](https://github.com/ava-labs/spacesvm-rs)
