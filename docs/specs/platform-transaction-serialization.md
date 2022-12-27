@@ -777,7 +777,7 @@ message RemoveSubnetValidatorTx {
 
 ### Unsigned Remove Subnet Validator TX Example
 
-Let’s make an unsigned remove subnet validator TX that uses the inputs and
+Let’s make an unsigned remove Subnet validator TX that uses the inputs and
 outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 17"`
