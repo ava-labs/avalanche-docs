@@ -202,6 +202,7 @@ performant
 permissioned
 Permissioned
 permissionless
+Permissionless
 png
 PNG
 Postgres

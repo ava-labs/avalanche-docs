@@ -12,6 +12,62 @@ user identification.
 Some data is prepended with a codec ID (unt16) that denotes how the data should
 be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
+## Proof of Possession
+
+A BLS public key and a proof of possession of the key.
+
+### What Proof of Possession Contains
+
+- **PublicKey** is the 48 byte representation of the public key.
+- **Signature** is the 96 byte signature by the private key over its public key.
+
+
+### Proof of Possession Specification
+
+```text
++------------+----------+-------------------------+
+| public_key : [48]byte |                48 bytes |
++------------+----------+-------------------------+
+| signature  : [96]byte |                96 bytes |
++------------+----------+-------------------------+
+                        |               144 bytes |
+                        +-------------------------+
+```
+
+### Proof of Possession Specification
+
+```text
+message ProofOfPossession {
+    bytes public_key = 1; // 48 bytes
+    bytes signature = 2;  // 96 bytes
+}
+```
+
+### Proof of Possession Example
+
+```text
+    // Public Key:
+    0x85, 0x02, 0x5b, 0xca, 0x6a, 0x30, 0x2d, 0xc6,
+    0x13, 0x38, 0xff, 0x49, 0xc8, 0xba, 0xa5, 0x72,
+    0xde, 0xd3, 0xe8, 0x6f, 0x37, 0x59, 0x30, 0x4c,
+    0x7f, 0x61, 0x8a, 0x2a, 0x25, 0x93, 0xc1, 0x87,
+    0xe0, 0x80, 0xa3, 0xcf, 0xde, 0xc9, 0x50, 0x40,
+    0x30, 0x9a, 0xd1, 0xf1, 0x58, 0x95, 0x30, 0x67,
+    // Signature:
+    0x8b, 0x1d, 0x61, 0x33, 0xd1, 0x7e, 0x34, 0x83,
+    0x22, 0x0a, 0xd9, 0x60, 0xb6, 0xfd, 0xe1, 0x1e,
+    0x4e, 0x12, 0x14, 0xa8, 0xce, 0x21, 0xef, 0x61,
+    0x62, 0x27, 0xe5, 0xd5, 0xee, 0xf0, 0x70, 0xd7,
+    0x50, 0x0e, 0x6f, 0x7d, 0x44, 0x52, 0xc5, 0xa7,
+    0x60, 0x62, 0x0c, 0xc0, 0x67, 0x95, 0xcb, 0xe2,
+    0x18, 0xe0, 0x72, 0xeb, 0xa7, 0x6d, 0x94, 0x78,
+    0x8d, 0x9d, 0x01, 0x17, 0x6c, 0xe4, 0xec, 0xad,
+    0xfb, 0x96, 0xb4, 0x7f, 0x94, 0x22, 0x81, 0x89,
+    0x4d, 0xdf, 0xad, 0xd1, 0xc1, 0x74, 0x3f, 0x7f,
+    0x54, 0x9f, 0x1d, 0x07, 0xd5, 0x9d, 0x55, 0x65,
+    0x59, 0x27, 0xf7, 0x2b, 0xc6, 0xbf, 0x7c, 0x12
+```
+
 ## Transferable Output
 
 Transferable outputs wrap an output with an asset ID.
@@ -600,8 +656,6 @@ Let’s make an unsigned add validator TX that uses the inputs and outputs from 
 - **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
 - **`Shares`**: `0x00000064`
 
-  0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
-
 ```text
 [
     BaseTx       <- 0x0000000c000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
@@ -679,6 +733,696 @@ Let’s make an unsigned add validator TX that uses the inputs and outputs from 
 ]
 ```
 
+## Unsigned Remove Subnet Validator TX
+
+### What Unsigned Remove Subnet Validator TX Contains
+
+An unsigned remove Subnet validator TX contains a `BaseTx`, `NodeID`,
+`SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
+
+- **`BaseTx`**
+- **`NodeID`** is the 20 byte node ID of the validator.
+- **`SubnetID`** is the 32 byte Subnet ID that the validator is being removed from.
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
+  `SigIndices` is a list of unique ints that define the addresses signing the
+  control signature which proves that the issuer has the right to remove the
+  node from the Subnet. The array must be sorted low to high.
+
+### Gantt Unsigned Remove Subnet Validator TX Specification
+
+```text
++---------------+----------------------+------------------------------------------------+
+| base_tx       : BaseTx               |                            size(base_tx) bytes |
++---------------+----------------------+------------------------------------------------+
+| node_id       : [20]byte             |                                       20 bytes |
++---------------+----------------------+------------------------------------------------+
+| subnet_id     : [32]byte             |                                       32 bytes |
++---------------+----------------------+------------------------------------------------+
+| sig_indices   : SubnetAuth           |               4 bytes + len(sig_indices) bytes |
++---------------+----------------------+------------------------------------------------+
+| 56 + len(sig_indices) + size(base_tx) bytes                                           |
++---------------------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Remove Subnet Validator TX Specification
+
+```text
+message RemoveSubnetValidatorTx {
+    BaseTx base_tx = 1;         // size(base_tx)
+    string node_id = 2;         // 20 bytes
+    SubnetID subnet_id = 3;     // 32 bytes
+    SubnetAuth subnet_auth = 4; // 04 bytes + len(sig_indices)
+}
+```
+
+### Unsigned Remove Subnet Validator TX Example
+
+Let’s make an unsigned remove Subnet validator TX that uses the inputs and
+outputs from the previous examples:
+
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 17"`
+- **`NodeID`**: `0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa`
+- **`SubnetID`**: `0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db`
+- **`SubnetAuth`**: `0x0000000a0000000100000000`
+
+```text
+[
+    BaseTx       <- 0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000000000000000000000
+    NodeID       <- 0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa
+    SubnetID     <- 0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db
+    SubnetAuth   <- 0x0000000a0000000100000000
+]
+=
+[
+    // BaseTx
+    0x00, 0x00, 0x00, 0x17, 0x00, 0x00, 0x30, 0x39, 
+    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
+    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
+    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
+    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
+    // NodeID
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa,
+    // SubnetID
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb,
+    // SubnetAuth
+    // SubnetAuth TypeID
+    0x00, 0x00, 0x00, 0x0a,
+    // SigIndices length
+    0x00, 0x00, 0x00, 0x01,
+    // SigIndices
+    0x00, 0x00, 0x00, 0x00,
+]
+```
+
+## Unsigned Add Permissionless Validator TX
+
+### What Unsigned Add Permissionless Validator TX Contains
+
+An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
+`SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`,
+`DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is
+25 or `0x00000019`.
+
+- **`BaseTx`**
+- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  - **`NodeID`** is the 20 byte node ID of the validator.
+  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  - **`Weight`** is a long which is the amount the validator stakes
+- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
+- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID
+  27 (`0x1B`) followed by a [Proof of Possession](#proof-of-possession). If the
+  [SubnetID] is not the primary network, this value is the empty signer, whose
+  byte representation is only the type ID 28 (`0x1C`).
+- **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
+- **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
+- **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
+- **`DelegationShares`** a short which is the fee this validator charges
+  delegators as a percentage, times 10,000 For example, if this validator has
+  DelegationShares=300,000 then they take 30% of rewards from delegators.
+
+### Gantt Unsigned Add Permissionless Validator TX Specification
+
+```text
++---------------+----------------------+------------------------------------------------+
+| base_tx       : BaseTx               |                            size(base_tx) bytes |
++---------------+----------------------+------------------------------------------------+
+| validator     : Validator            |                                       44 bytes |
++---------------+----------------------+------------------------------------------------+
+| subnet_id     : [32]byte             |                                       32 bytes |
++---------------+----------------------+------------------------------------------------+
+| signer        : Signer               |                                      144 bytes |
++---------------+----------------------+------------------------------------------------+
+| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
++---------------+----------------------+------------------------------------------------+
+| validator_rewards_owner : SECP256K1OutputOwners | size(validator_rewards_owner) bytes |
++---------------+----------------------+------------------------------------------------+
+| delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
++---------------+----------------------+------------------------------------------------+
+| delegation_shares   : uint32         |                                        4 bytes |
++---------------+----------------------+------------------------------------------------+
+| 232 + size(base_tx) + size(stake_outs) +                                              |
+| size(validator_rewards_owner) + size(delegator_rewards_owner) bytes                   |
++---------------------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Add Permissionless Validator TX Specification
+
+```text
+message AddPermissionlessValidatorTx {
+    BaseTx base_tx = 1;         // size(base_tx)
+    Validator validator = 2;    // 44 bytes
+    SubnetID subnet_id = 3;     // 32 bytes
+    Signer signer = 4; // 148 bytes
+    repeated TransferOut stake_outs = 5; // 4 bytes + size(stake_outs)
+    SECP256K1OutputOwners validator_rewards_owner = 6; // size(validator_rewards_owner) bytes
+    SECP256K1OutputOwners delegator_rewards_owner = 7; // size(delegator_rewards_owner) bytes
+    uint32 delegation_shares = 8; // 4 bytes
+}
+```
+
+### Unsigned Add Permissionless Validator TX Example
+
+Let’s make an unsigned add permissionless validator TX that uses the inputs and
+outputs from the previous examples:
+
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
+- **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000`
+- **`SubnetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
+- **`Signer`**: `0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297`
+- **`StakeOuts`**: `0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0`
+- **`ValidatorRewardsOwner`**: `0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52`
+- **`DelegatorRewardsOwner`**: `0x0000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f440`
+- **`DelegationShares`**: `0x00004e20`
+
+```text
+[
+    BaseTx       <- 0x0000001a00003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a2000000000010000000000000000
+    Validator    <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000
+    SubnetID     <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
+    Signer       <- 0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297
+    StakeOuts    <- 0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0
+    ValidatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+    DelegatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+    DelegationShares       <- 0x00004e20
+]
+=
+[
+    // BaseTx
+    0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x30, 0x39, 
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
+    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
+    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
+    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
+    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
+    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
+    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
+    // Validator
+    // NodeID
+    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
+    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
+    0x47, 0x2c, 0x7d, 0xda, 0x
+    // Start time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0x97, 0x61, 0x6e, 
+    // End time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0xbe, 0xee, 0x6e, 
+    // Weight
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    // SubnetID
+    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
+    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
+    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
+    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
+    // Signer
+    // TypeID
+    0x00, 0x00, 0x00, 0x1c, 
+    // Pub key
+    0xa5, 0xaf, 0x17, 0x9e, 0x41, 0x88, 0x58, 0x38, 
+    0x93, 0xc2, 0xb9, 0x9e, 0x1a, 0x8b, 0xe2, 0x7d, 
+    0x90, 0xa9, 0x21, 0x3c, 0xfb, 0xff, 0x1d, 0x75, 
+    0xb7, 0x4f, 0xe2, 0xbc, 0x9f, 0x3b, 0x07, 0x2c, 
+    0x2d, 0xed, 0x08, 0x63, 0xa9, 0xd9, 0xac, 0xd9, 
+    0x03, 0x3f, 0x22, 0x32, 0x95, 0x81, 0x0e, 0x42, 
+    // Sig
+    0x92, 0x38, 0xe2, 0x8d, 0x3c, 0x9b, 0x7f, 0x72, 
+    0x12, 0xb6, 0x3d, 0x74, 0x6b, 0x2a, 0xe7, 0x3a,
+    0x54, 0xfe, 0x08, 0xa3, 0xde, 0x61, 0xb1, 0x32, 
+    0xf2, 0xf8, 0x9e, 0x9e, 0xef, 0xf9, 0x7d, 0x4d, 
+    0x7c, 0xa3, 0xa3, 0xc8, 0x89, 0x86, 0xaa, 0x85, 
+    0x5c, 0xd3, 0x62, 0x96, 0xfc, 0xfe, 0x8f, 0x02, 
+    0x16, 0x2d, 0x02, 0x58, 0xbe, 0x49, 0x4d, 0x26, 
+    0x7d, 0x4c, 0x57, 0x98, 0xbc, 0x08, 0x1a, 0xb6, 
+    0x02, 0xde, 0xd9, 0x0b, 0x0f, 0xc1, 0x6d, 0x8a, 
+    0x03, 0x5e, 0x68, 0xff, 0x52, 0x94, 0x79, 0x4c, 
+    0xb6, 0x3f, 0xf1, 0xee, 0x06, 0x8f, 0xbf, 0xc2, 
+    0xb4, 0xc8, 0xcd, 0x2d, 0x08, 0xeb, 0xf2, 0x97, 
+    // Stake outs
+    // Num stake outs 
+    0x00, 0x00, 0x00, 0x01, 
+    // AssetID
+    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
+    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
+    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
+    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
+    // Output
+    // typeID
+    0x00, 0x00, 0x00, 0x07, 
+    // Amount
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x33, 0xee, 0xff, 0xc6, 0x47, 0x85, 0xcf, 0x9d, 
+    0x80, 0xe7, 0x73, 0x1d, 0x9f, 0x31, 0xf6, 0x7b, 
+    0xd0, 0x3c, 0x5c, 0xf0, 
+    // Validator rewards owner
+    // TypeID
+    0x00, 0x00, 0x00, 0x0b, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x72, 0xf3, 0xeb, 0x9a, 0xea, 0xf8, 0x28, 0x30, 
+    0x11, 0xce, 0x6e, 0x43, 0x7f, 0xde, 0xcd, 0x65, 
+    0xea, 0xce, 0x8f, 0x52,
+    // Delegator rewards owner
+    // TypeID
+    0x00, 0x00, 0x00, 0x0b, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0xb2, 0xb9, 0x13, 0x13, 0xac, 0x48, 0x7c, 0x22, 
+    0x24, 0x45, 0x25, 0x4e, 0x26, 0xcd, 0x02, 0x6d, 
+    0x21, 0xf6, 0xf4, 0x40,
+    // Delegation shares
+    0x00, 0x00, 0x4e, 0x20,
+]
+```
+
+## Unsigned Add Permissionless Delegator TX
+
+### What Unsigned Add Permissionless Delegator TX Contains
+
+An unsigned add permissionless delegator TX contains a `BaseTx`, `Validator`,
+`SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type
+is 26 or `0x0000001a`.
+
+- **`BaseTx`**
+- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  - **`NodeID`** is the 20 byte node ID of the validator.
+  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  - **`Weight`** is a long which is the amount the validator stakes
+- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this delegation is on.
+- **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
+- **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
+
+### Gantt Unsigned Add Permissionless Delegator TX Specification
+
+```text
++---------------+----------------------+------------------------------------------------+
+| base_tx       : BaseTx               |                            size(base_tx) bytes |
++---------------+----------------------+------------------------------------------------+
+| validator     : Validator            |                                       44 bytes |
++---------------+----------------------+------------------------------------------------+
+| subnet_id     : [32]byte             |                                       32 bytes |
++---------------+----------------------+------------------------------------------------+
+| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
++---------------+----------------------+------------------------------------------------+
+| delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
++---------------+----------------------+------------------------------------------------+
+| 80 + size(base_tx) + size(stake_outs) + size(delegator_rewards_owner) bytes           |
++---------------------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Add Permissionless Delegator TX Specification
+
+```text
+message AddPermissionlessDelegatorTx {
+    BaseTx base_tx = 1;         // size(base_tx)
+    Validator validator = 2;    // size(validator)
+    SubnetID subnet_id = 3;     // 32 bytes
+    repeated TransferOut stake_outs = 4; // 4 bytes + size(stake_outs)
+    SECP256K1OutputOwners delegator_rewards_owner = 5; // size(delegator_rewards_owner) bytes
+}
+```
+
+### Unsigned Add Permissionless Delegator TX Example
+
+Let’s make an unsigned add permissionless delegator TX that uses the inputs and
+outputs from the previous examples:
+
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
+- **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000`
+- **`SubnetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
+- **`StakeOuts`**: `0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0`
+- **`DelegatorRewardsOwner`**: `0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52`
+
+```text
+[
+    BaseTx       <- 0x0000001a00003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a2000000000010000000000000000
+    Validator    <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000
+    SubnetID     <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
+    StakeOuts    <- 0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0
+    DelegatorRewardsOwner <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
+]
+=
+[
+    // BaseTx
+    0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x30, 0x39, 
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
+    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
+    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
+    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
+    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
+    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
+    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
+    // Validator
+    // NodeID
+    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
+    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
+    0x47, 0x2c, 0x7d, 0xda, 
+    // Start time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0x97, 0x61, 0x97, 
+    // End time
+    0x00, 0x00, 0x00, 0x00, 0x63, 0xbe, 0xee, 0x97, 
+    // Weight
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    // Stake_outs
+    // Num stake outs
+    0x00, 0x00, 0x00, 0x01, 
+    // Stake out 0
+    // AssetID
+    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
+    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
+    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
+    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
+    // TypeID
+    0x00, 0x00, 0x00, 0x07, 
+    // Amount
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x33, 0xee, 0xff, 0xc6, 0x47, 0x85, 0xcf, 0x9d, 
+    0x80, 0xe7, 0x73, 0x1d, 0x9f, 0x31, 0xf6, 0x7b, 
+    0xd0, 0x3c, 0x5c, 0xf0, 
+    // Delegator_rewards_owner
+    // TypeID
+    0x00, 0x00, 0x00, 0x0b, 
+    // Locktime
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // Threshold
+    0x00, 0x00, 0x00, 0x01, 
+    // Num addrs
+    0x00, 0x00, 0x00, 0x01, 
+    // Addr 0
+    0x72, 0xf3, 0xeb, 0x9a, 0xea, 0xf8, 0x28, 0x30, 
+    0x11, 0xce, 0x6e, 0x43, 0x7f, 0xde, 0xcd, 0x65, 
+    0xea, 0xce, 0x8f, 0x52,
+]
+```
+
+## Unsigned Transform Subnet TX
+
+Transforms a permissioned Subnet into a permissionless Subnet. Must be signed by the Subnet owner.
+
+### What Unsigned Transform Subnet TX Contains
+
+An unsigned transform Subnet TX contains a `BaseTx`, `SubnetID`, `AssetID`,
+`InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`,
+`MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`,
+`MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`,
+`MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID`
+for this type is 24 or `0x00000018`.
+
+- **`BaseTx`**
+- **`SubnetID`** a 32-byte Subnet ID of the Subnet to transform.
+- **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Subnet.
+  - Restrictions
+    - Must not be the Empty ID
+    - Must not be the AVAX ID
+- **`InitialSupply`** is a long which is the amount to initially specify as the current supply.
+  - Restrictions
+    - Must be > 0
+- **`MaximumSupply`** is a long which is the amount to specify as the maximum token supply.
+  - Restrictions
+    - Must be >= [InitialSupply]
+- **`MinConsumptionRate`** is a long which is the rate to allocate funds if the
+  validator's stake duration is 0.
+- **`MaxConsumptionRate`** is a long which is the rate to allocate funds if the
+  validator's stake duration is equal to the minting period.
+  - Restrictions
+    - Must be >= [MinConsumptionRate]
+    - Must be <= [`reward.PercentDenominator`]
+- **`MinValidatorStake`** is a long which the minimum amount of funds required to become a validator.
+  - Restrictions
+    - Must be > 0
+    - Must be <= [InitialSupply]
+- **`MaxValidatorStake`** is a long which is the maximum amount of funds a
+  single validator can be allocated, including delegated funds.
+  - Restrictions:
+    - Must be >= [MinValidatorStake]
+    - Must be <= [MaximumSupply]
+- **`MinStakeDuration`** is a short which is the minimum number of seconds a staker can stake for.
+  - Restrictions
+    - Must be > 0
+- **`MaxStakeDuration`** is a short which is the maximum number of seconds a staker can stake for.
+  - Restrictions
+    - Must be >= [MinStakeDuration]
+    - Must be <= [GlobalMaxStakeDuration]
+- **`MinDelegationFee`** is a short is the minimum percentage a validator must
+  charge a delegator for delegating.
+  - Restrictions
+    - Must be <= [`reward.PercentDenominator`]
+- **`MinDelegatorStake`** is a short which is the minimum amount of funds required to become a delegator.
+  - Restrictions
+    - Must be > 0
+- **`MaxValidatorWeightFactor`** is a byte which is the factor which calculates
+  the maximum amount of delegation a validator can receive. Note: a value of 1
+  effectively disables delegation.
+  - Restrictions
+    - Must be > 0
+- **`UptimeRequirement`** is a short which is the minimum percentage a validator
+  must be online and responsive to receive a reward.
+  - Restrictions
+    - Must be <= [`reward.PercentDenominator`]
+- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
+  `SigIndices` is a list of unique ints that define the addresses signing the
+  control signature to authorizes this transformation. The array must be sorted
+  low to high.
+
+### Gantt Unsigned Transform Subnet TX Specification
+
+```text
++----------------------+------------------+----------------------------------+
+| base_tx              : BaseTx           |              size(base_tx) bytes |
++----------------------+------------------+----------------------------------+
+| subnet_id            : [32]byte         |                         32 bytes |
++----------------------+------------------+----------------------------------+
+| asset_id             : [32]byte         |                         32 bytes |
++----------------------+------------------+----------------------------------+
+| initial_supply       : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| maximum_supply       : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_consumption_rate : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| max_consumption_rate : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_validator_stake  : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| max_validator_stake  : long             |                          8 bytes |
++----------------------+------------------+----------------------------------+
+| min_stake_duration   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| max_stake_duration   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| min_delegation_fee   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| min_delegator_stake  : long             |                          8 bytes | 
++----------------------+------------------+----------------------------------+
+| max_validator_weight_factor : byte      |                           1 byte |
++----------------------+------------------+----------------------------------+
+| uptime_requirement   : short            |                          4 bytes |
++----------------------+------------------+----------------------------------+
+| subnet_auth          : SubnetAuth       | 4 bytes + len(sig_indices) bytes |
++----------------------+------------------+----------------------------------+
+| 141 + size(base_tx) + len(sig_indices) bytes                               |
++----------------------------------------------------------------------------+
+```
+
+### Proto Unsigned Transform Subnet TX Specification
+
+```text
+message TransformSubnetTx {
+    BaseTx base_tx = 1;              // size(base_tx)
+    SubnetID subnet_id = 2;          // 32 bytes
+    bytes asset_id = 3;              // 32 bytes
+    uint64 initial_supply = 4;       // 08 bytes
+    uint64 maximum_supply = 5;       // 08 bytes
+    uint64 min_consumption_rate = 6; // 08 bytes
+    uint64 max_consumption_rate = 7; // 08 bytes
+    uint64 min_validator_stake = 8;  // 08 bytes
+    uint64 max_validator_stake = 9;  // 08 bytes
+    uint32 min_stake_duration = 10;  // 04 bytes
+    uint32 max_stake_duration = 11;  // 04 bytes
+    uint32 min_delegation_fee = 12;  // 04 bytes
+    uint32 min_delegator_stake = 13; // 08 bytes
+    byte max_validator_weight_factor = 14; // 01 byte
+    uint32 uptime_requirement = 15; // 04 bytes
+    SubnetAuth subnet_auth = 16;    // 04 bytes + len(sig_indices)
+}
+```
+
+### Unsigned Transform Subnet TX Example
+
+Let’s make an unsigned transform Subnet TX that uses the inputs and outputs from the previous examples:
+
+- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 18"`
+- **`SubnetID`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60`
+- **`AssetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
+- **`InitialSupply`**: `0x000000e8d4a51000`
+- **`MaximumSupply`**: `0x000009184e72a000`
+- **`MinConsumptionRate`**: `0x0000000000000001`
+- **`MaxConsumptionRate`**: `0x000000000000000a`
+- **`MinValidatorStake`**: `0x000000174876e800`
+- **`MaxValidatorStake`**: `0x000001d1a94a2000`
+- **`MinStakeDuration`**: `0x00015180`
+- **`MaxStakeDuration`**: `0x01e13380`
+- **`MinDelegationFee`**: `0x00002710`
+- **`MinDelegatorStake`**: `0x000000174876e800`
+- **`MaxValidatorWeightFactor`**: `0x05`
+- **`UptimeRequirement`**: `0x000c3500`
+- **`SubnetAuth`**:
+  - **`TypeID`**: `0x0000000a`
+  - **`SigIndices`**: `0x00000000`
+
+```text
+[
+    BaseTx       <- 0000001800003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a70000000500000000000f4240000000010000000000000000
+    SubnetID     <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60
+    AssetID      <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
+    InitialSupply <- 0x000000e8d4a51000
+    MaximumSupply <- 0x000009184e72a000
+    MinConsumptionRate <- 0x0000000000000001
+    MaxConsumptionRate <- 0x000000000000000a
+    MinValidatorStake <- 0x000000174876e800
+    MaxValidatorStake <- 0x000001d1a94a2000
+    MinStakeDuration <- 0x00015180
+    MaxStakeDuration <- 0x01e13380
+    MinDelegationFee <- 0x00002710
+    MinDelegatorStake <- 0x000000174876e800
+    MaxValidatorWeightFactor <- 0x05
+    UptimeRequirement <- 0x000c3500
+    SubnetAuth   <- 0x0000000a0000000100000000
+]
+=
+[
+    // BaseTx:
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x30, 0x39, 
+    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
+    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
+    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
+    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
+    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
+    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
+    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
+    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
+    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
+    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
+    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
+    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x42, 0x40, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x5f, 0xa2, 0x9e, 0xd4, 
+    0x35, 0x69, 0x03, 0xda, 0xc2, 0x36, 0x47, 0x13, 
+    0xc6, 0x0f, 0x57, 0xd8, 0x47, 0x2c, 0x7d, 0xda, 
+    0x4a, 0x5e, 0x08, 0xd8, 0x8a, 0x88, 0xad, 0x8e, 
+    0xa7, 0x1a, 0xed, 0x60, 0xf3, 0x08, 0x6d, 0x7b, 
+    0xfc, 0x35, 0xbe, 0x1c, 0x68, 0xdb, 0x66, 0x4b, 
+    0xa9, 0xce, 0x61, 0xa2, 0x06, 0x01, 0x26, 0xb0, 
+    0xd6, 0xb4, 0xbf, 0xb0, 0x9f, 0xd7, 0xa5, 0xfb, 
+    0x76, 0x78, 0xca, 0xda, 0x00, 0x00, 0x00, 0xe8, 
+    0xd4, 0xa5, 0x10, 0x00, 0x00, 0x00, 0x09, 0x18, 
+    0x4e, 0x72, 0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x0a, 0x00, 0x00, 0x00, 0x17, 
+    0x48, 0x76, 0xe8, 0x00, 0x00, 0x00, 0x01, 0xd1, 
+    0xa9, 0x4a, 0x20, 0x00, 0x00, 0x01, 0x51, 0x80, 
+    0x01, 0xe1, 0x33, 0x80, 0x00, 0x00, 0x27, 0x10, 
+    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00, 
+    0x05, 0x00, 0x0c, 0x35, 0x00, 0x00, 0x00, 0x00, 
+    0x0a, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+    0x00,
+    // SubnetID
+    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
+    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
+    0x47, 0x2c, 0x7d, 0xda, 0x4a, 0x5e, 0x08, 0xd8, 
+    0x8a, 0x88, 0xad, 0x8e, 0xa7, 0x1a, 0xed, 0x60,
+    // AssetID
+    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
+    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
+    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
+    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
+    // InitialSupply
+    0x00, 0x00, 0x00, 0xe8, 0xd4, 0xa5, 0x10, 0x00,
+    // MaximumSupply
+    0x00, 0x00, 0x09, 0x18, 0x4e, 0x72, 0xa0, 0x00,
+    // MinConsumptionRate
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    // MaxConsumptionRate
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0a,
+    // MinValidatorStake
+    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
+    // MaxValidatorStake
+    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00,
+    // MinStakeDuration
+    0x00, 0x01, 0x51, 0x80,
+    // MaxStakeDuration
+    0x01, 0xe1, 0x33, 0x80,
+    // MinDelegationFee
+    0x00, 0x00, 0x27, 0x10,
+    // MinDelegatorStake
+    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
+    // MaxValidatorWeightFactor
+    0x05,
+    // UptimeRequirement
+    0x00, 0x0c, 0x35, 0x00,
+    // SubnetAuth
+    // SubnetAuth TypeID
+    0x00, 0x00, 0x00, 0x0a,
+    // SigIndices length
+    0x00, 0x00, 0x00, 0x01,
+    // SigIndices
+    0x00, 0x00, 0x00, 0x00,
+]
+```
+
 ## Unsigned Add Subnet Validator TX
 
 ### What Unsigned Add Subnet Validator TX Contains
@@ -688,11 +1432,11 @@ An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
 
 - **`BaseTx`**
 - **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
+  - **`NodeID`** is the 20 byte node ID of the validator.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** a 32 byte Subnet id
+- **`SubnetID`** is the 32 byte Subnet ID to add the validator to.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
   control signature to add a validator to a Subnet. The array must be sorted low
@@ -841,8 +1585,8 @@ An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and
 +---------------+-----------------------+-----------------------------------------+
 | rewards_owner : SECP256K1OutputOwners |               size(rewards_owner) bytes |
 +---------------+-----------------------+-----------------------------------------+
-                  | 44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
-                  +--------------------------------------------------------------+
+                |    44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
+                +-----------------------------------------------------------------+
 ```
 
 ### Proto Unsigned Add Delegator TX Specification
