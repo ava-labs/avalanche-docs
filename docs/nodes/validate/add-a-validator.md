@@ -83,7 +83,7 @@ and double-checked them, click `Confirm`. Make sure the staking period is at
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
 least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
 
-You should a success message, and your balance should be updated.
+You should see a success message, and your balance should be updated.
 
 Calling
 [`platform.getPendingValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators)
@@ -176,7 +176,7 @@ const networkID: number = 5
 
 Depending on the networkID passed in when instantiating an `Avalanche` object in
 the code, the encoded addresses used will have a distinctive Human Readable
-Part(HRP) per each network.
+Part(HRP) per network.
 
 _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
@@ -412,7 +412,7 @@ This example would create a keychain with 4 addresses:
   "P-fuji1qw7yt3fp43kuwsufff4vhezs2yl00slr09vmh5", // pAddressStrings[3]
 ```
 
-Now we can pass in each address according to it's slot in the `pAddressStrings` array:
+Now we can pass in each address according to its slot in the `pAddressStrings` array:
 
 ```ts
 const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
