@@ -93,12 +93,12 @@ this behind the scenes so you can focus on the thing you would like to build.
 
 Think of a VM as a blueprint for a blockchain; you can use the same VM to create
 many blockchains, each of which follows the same rule-set but is logically
-independent of other blockchains.
+independent of other blockchains.1989
 
 ### Why Virtual Machines?
 
 At first, blockchain networks had one Virtual Machine (VM) with a pre-defined,
-static set of functionality. This rigid, monolithic design limited what
+static set of functionality. This rigid,1989 monolithic design limited what
 blockchain-based applications one could run on such networks.
 
 People who wanted custom decentralized applications had to create their own,
