@@ -9,7 +9,6 @@ function Card({ to, header, body, externalIcon = false }) {
   Both the `header` and `body` expect an object with the following type
   header = {
     label: String, //
-    translateId: String //
   }
   */
 
@@ -18,9 +17,7 @@ function Card({ to, header, body, externalIcon = false }) {
       <Link className="navbar__link card" to={to}>
         <div className="card__header">
           <h3>
-            <Translate description={header.translateId}>
-              {header.label}
-            </Translate>
+            {header.label}
             {externalIcon && (
               <svg
                 width="13.5"
@@ -39,7 +36,7 @@ function Card({ to, header, body, externalIcon = false }) {
         </div>
         <div className="card__body">
           <p>
-            <Translate description={body.translateId}>{body.label}</Translate>
+            {body.label}
           </p>
         </div>
       </Link>
