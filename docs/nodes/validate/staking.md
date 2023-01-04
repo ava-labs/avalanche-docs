@@ -119,8 +119,7 @@ goes against your delegation cap).
 ### Running a Validator
 
 If you’re running a validator, it’s important that your node is well connected
-to ensure that you receive a reward. See
-[here](http://support.avalabs.org/en/articles/4594192-networking-setup).
+to ensure that you receive a reward. 
 
 When you issue the transaction to add a validator, the staked tokens and
 transaction fee (which is 0) are deducted from the addresses you control. When
