@@ -11,83 +11,85 @@ function Home() {
   return (
     <Layout title="Homepage" description="Avalanche Documentation">
       <main>
+        <br/>
+        <h1 align="center" style={{ fontWeight: '750' }}>Welcome to Avalanche Docs</h1>
         <section className={styles.features}>
           <div className="container">
             <div className="row cards__container">
               <Card
-                to="developers"
+                to="subnets/build-first-subnet"
                 header={{
-                  label: "⛏ Start Developing",
+                  label: "🚀 Launch Your First Subnet",
                   translateId: "start-building",
                 }}
                 body={{
                   label:
-                    "Get started building your decentralized app or marketplace with Solana.",
+                    "Start your Subnet development journey by creating a subnet in under five minutes",
                   translateId: "get-started-building",
                 }}
               />
 
               <Card
-                to="running-validator"
+                to="intro"
                 header={{
-                  label: "🎛 Run a Validator Node",
+                  label: "🔺 Learn about Avalanche",
                   translateId: "run-validator",
                 }}
                 body={{
                   label:
-                    "Validate transactions, secure the network, and earn rewards.",
+                    "Discover how Subnets and Avalanche Consensus are revolutionizing Web3",
                   translateId: "validate-transactions",
                 }}
               />
 
               <Card
-                to="https://spl.solana.com/token"
+                to="nodes"
                 header={{
-                  label: "🏛 Create an SPL Token",
+                  label: "😎 Become a validator",
                   translateId: "create-spl",
                 }}
                 body={{
                   label:
-                    "Launch your own SPL Token, Solana's equivalent of ERC-20.",
+                    "Join Avalanche's Proof-of-Stake protocol to help secure the network and earn rewards",
                   translateId: "erc-20",
                 }}
               />
 
               <Card
-                to="integrations/exchange"
+                to="apis/avalanchego"
                 header={{
-                  label: "🏦 Integrate an Exchange",
+                  label: "💻 View Avalanche APIs",
                   translateId: "integrate-exchange",
                 }}
                 body={{
                   label:
-                    "Follow our extensive integration guide to ensure a seamless user experience.",
+                    "Access low-level protocol interfaces to build your custom dapp",
                   translateId: "integration-guide",
                 }}
               />
 
               <Card
-                to="wallet-guide"
+                to="dapps/launch-your-ethereum-dapp"
                 header={{
-                  label: "📲 Manage a Wallet",
+                  label: "🛠️ Launch Your Dapp on Avalanche",
                   translateId: "manage-wallet",
                 }}
                 body={{
                   label:
-                    "Create a wallet, check your balance, and learn about wallet options.",
+                    "Learn everything you need to deploy an EVM-compatible smart contract",
                   translateId: "wallet-options",
                 }}
               />
 
               <Card
-                to="introduction"
+                to="https://core.app"
                 header={{
-                  label: "🤯 Learn How Solana Works",
+                  label: "🦉 Install Core",
                   translateId: "learn-how",
                 }}
                 body={{
                   label:
-                    "Get a high-level understanding of Solana's architecture.",
+                    "Access your portfolio with a wallet built specifically for subnets on Avalanche",
                   translateId: "high-level",
                 }}
               />
