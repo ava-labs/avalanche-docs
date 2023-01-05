@@ -74,3 +74,44 @@ html[data-theme='dark'] .DocSearch {
 .theme-back-to-top-button {
   display: none;
 }
+
+main {
+  margin: 1rem 0 5rem 0;
+}
+
+.container__spacer {
+  margin: 0em 1em 3em 1em;
+}
+
+.cards__container {
+  margin: 3em 0;
+}
+
+.cards__container .col {
+  margin-bottom: 1em;
+}
+
+.card {
+  padding: 1rem;
+  margin-top: 0rem;
+  animation: fadeInUp 400ms backwards;
+  animation-delay: 150ms;
+  transition-property: all;
+  transition-duration: 200ms;
+  align-items: start;
+  height: 100%;
+  box-shadow: 0 8px 15px 2px rgba(86, 91, 115, 0.1);
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translate(0px, -5px);
+}
+
+.card__header h3 {
+  color: #e84142;
+}
+
