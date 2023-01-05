@@ -135,6 +135,7 @@ const sidebars = {
         'subnets/how-to-delete-subnet',
         'subnets/how-to-run-cli-with-docker',
         'subnets/how-to-import-subnet',
+        'subnets/troubleshoot-deployments'
       ]
     },
     {
