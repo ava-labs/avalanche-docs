@@ -178,7 +178,7 @@ mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 git clone git@github.com:ava-labs/avalanchego.git
-go install github.com/ava-labs/avalanche-network-runner@latest
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 npm install -g solc
 npm install -g yarn
 ```

@@ -15,7 +15,8 @@ The fastest way to install the latest Avalanche-CLI binary is by running the ins
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-The binary installs inside the `~/bin` directory.
+The binary installs inside the `~/bin` directory. If the directory doesn't exist,
+it will be created.
 
 You can run all of the commands in this tutorial by calling `~/bin/avalanche`.
 
