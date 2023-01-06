@@ -16,7 +16,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 ```
 
 The binary installs inside the `~/bin` directory. If the directory doesn't exist,
-it will be be created.
+it will be created.
 
 You can run all of the commands in this tutorial by calling `~/bin/avalanche`.
 
