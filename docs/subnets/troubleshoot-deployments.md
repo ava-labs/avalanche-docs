@@ -62,7 +62,7 @@ Blockchain has been deployed. Wait until network acknowledges...
 ```
 
 This error has many possible causes, however you should be aware of the possibility of an RPC
-protocol version  mismatch.
+protocol version mismatch.
 
 AvalancheGo communicates with custom VMs over RPC using [gRPC](https://grpc.io/). gRPC defines a
 protocol specification shared by both AvalancheGo and the VM. Both components **must** be running
@@ -74,7 +74,7 @@ Your custom VM's RPC version is set by the version of AvalancheGo that you impor
 Avalanche-CLI creates local Avalalanche networks that run the latest AvalancheGo release.
 
 Here's an example with real numbers from the AvalancheGo compatibility page. If the latest
-AvalancheGo release is version v1.9.4, then Avalanche-CLI deploys a network with RPC version 21. For
+AvalancheGo release is version v1.9.4, then Avalanche-CLI deploys a network with RPC version 20. For
 your deploy to be successful, your VM must also have RPC version 20. Because only AvalancheGo
 version v1.9.4 supports RPC version 20, your VM **must** import AvalancheGo version v1.9.4. If the
 latest release were v1.9.3, your VM could safely import versions v1.9.2 or v1.9.3 because both
