@@ -25,15 +25,21 @@ allowing to locally test code before deploying to Mainnet or even public testnet
 <!-- markdownlint-disable MD013 -->
 
 ```bash
-curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s -- -b $GOPATH/bin
-
-cd $GOPATH/bin
-export PATH=$PWD:$PATH
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-`avalanche-network-runner` will be installed into `$GOPATH/bin`.
+The script installs the binary inside the `~/bin` directory.
+
+Please make sure that `~/bin` is in your `$PATH`:
+
+```shell
+export PATH=~/bin:$PATH
+```
+
+To add it to your path permanently, add an export command to your shell initialization script. If
+you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
 
 Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related
 to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's

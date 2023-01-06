@@ -17,22 +17,22 @@ The Avalanche Network Runner repository is hosted at [https://github.com/ava-lab
 
 That repository's README details the tool.
 
-Clone the repository with:
+To download a binary for the latest release, run:
 
-```bash
-git clone https://github.com/ava-labs/avalanche-network-runner.git
+```shell
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 ```
 
-There are also binary releases ready to use at [releases](https://github.com/ava-labs/avalanche-network-runner/releases). You can download and install it on to your computer.
+The script installs the binary inside the `~/bin` directory.
 
-To build from the source and install the binary locally (requires `golang` to be installed. Check the [requirements](https://github.com/ava-labs/avalanchego#installation) for the minimum version):
+Please make sure that `~/bin` is in your `$PATH`:
 
-```bash
-cd ${HOME}/go/src/github.com/ava-labs/avalanche-network-runner
-go install -v ./cmd/avalanche-network-runner
+```shell
+export PATH=~/bin:$PATH
 ```
 
-`avalanche-network-runner` will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your `$PATH`, otherwise, you may not be able to run commands below.
+To add it to your path permanently, add an export command to your shell initialization script. If
+you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
 
 Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.
 

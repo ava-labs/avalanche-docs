@@ -93,23 +93,14 @@ For the development purpose, we can use [**Avalanche Network Runner
 (ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this
 tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
-### Clone Avalanche Network Runner
-
-Now move to `subnet-evm-demo`, and clone the repository.
-
-```bash
-git clone https://github.com/ava-labs/avalanche-network-runner
-cd avalanche-network-runner
-```
-
 ### Install ANR Binary
 
-The following command will install the ANR binary inside `$GOPATH/bin`. Please make sure that you
-have the `$GOPATH/bin` path set in the `$PATH` environment variable, otherwise, you will not be able
+The following command will install the ANR binary inside `~/bin`. Please make sure that you
+have the `~/bin` path set in the `$PATH` environment variable, otherwise, you will not be able
 to run the binary unless you specify its location in each command.
 
-```bash
-go install -v ./cmd/avalanche-network-runner
+```shell
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 ```
 
 ### Start RPC Server
