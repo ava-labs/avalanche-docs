@@ -30,7 +30,8 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/m
 
 <!-- markdownlint-enable MD013 -->
 
-The script installs the binary inside the `~/bin` directory.
+The script installs the binary inside the `~/bin` directory. If the directory doesn't exist,
+it will be be created.
 
 Please make sure that `~/bin` is in your `$PATH`:
 
@@ -39,7 +40,7 @@ export PATH=~/bin:$PATH
 ```
 
 To add it to your path permanently, add an export command to your shell initialization script. If
-you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
+you run bash, use `.bashrc`. If you run zsh, use `.zshrc`.
 
 Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related
 to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's

@@ -12,7 +12,8 @@ To download a binary for the latest release, run:
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-The script installs the binary inside the `~/bin` directory.
+The script installs the binary inside the `~/bin` directory. If the directory doesn't exist,
+it will be be created.
 
 ## Adding Avalanche-CLI to Your PATH
 
@@ -24,7 +25,7 @@ export PATH=~/bin:$PATH
 ```
 
 To add it to your path permanently, add an export command to your shell initialization script. If
-you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
+you run bash, use `.bashrc`. If you run zsh, use `.zshrc`.
 
 For example:
 
