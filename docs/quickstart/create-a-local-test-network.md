@@ -34,7 +34,9 @@ export PATH=~/bin:$PATH
 To add it to your path permanently, add an export command to your shell initialization script. If
 you run Ubuntu, use `.bashrc`. Mac uses `.zshrc`.
 
-Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration file.
+Furthermore, `AVALANCHEGO_EXEC_PATH` should be set properly in all shells you run commands related to
+Avalanche Network Runner. We strongly recommend that you put the following in to your shell's configuration
+file.
 
 ```bash
 # replace execPath with the path to AvalancheGo on your machine
@@ -44,7 +46,8 @@ AVALANCHEGO_EXEC_PATH="${HOME}/go/src/github.com/ava-labs/avalanchego/build/aval
 
 Unless otherwise specified, file paths given below are relative to the root of this repository.
 
-When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which then waits for API calls and handles them.
+When running with the binary `avalanche-network-runner`, it runs a server process as an RPC server which
+then waits for API calls and handles them.
 Therefore we run one shell with the RPC server, and another one for issuing calls.
 
 ### Start the Server
@@ -56,15 +59,18 @@ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to be run in a separate terminal.
+Note that the above command will run until you stop it with `CTRL + C`. Further commands will have to
+be run in a separate terminal.
 
 The RPC server listens to two ports:
 
 - `port`: the main gRPC port (see [gRPC](https://grpc.io/)).
-- `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)), which allows for HTTP requests.
+- `grpc-gateway-port`: the gRPC gateway port (see [gRPC-gateway](https://grpc-ecosystem.github.io/grpc-gateway/)),
+which allows for HTTP requests.
 
-When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled code to issue calls.
-Alternatively, plain HTTP can be used to issue calls, without the need to use the binary. In this mode, the `grpc-gateway-port` should be queried.
+When using the binary to issue calls, the main port will be hit. In this mode, the binary executes compiled
+code to issue calls. Alternatively, plain HTTP can be used to issue calls, without the need to use the
+binary. In this mode, the `grpc-gateway-port` should be queried.
 
 Each of the examples below will show both modes, clarifying its usage.
 
@@ -115,7 +121,9 @@ avalanche-network-runner control health \
 --endpoint="0.0.0.0:8080"
 ```
 
-The response to this call is actually pretty large, as it contains the state of the whole cluster. At the very end of it there should be a text saying `healthy:true` (it would say `false` if it wasn't healthy).
+The response to this call is actually pretty large, as it contains the state of the whole cluster.
+At the very end of it there should be a text saying `healthy:true` (it would say `false` if it wasn't
+healthy).
 
 ```json
 {
@@ -216,15 +224,21 @@ Response
 }
 ```
 
-Now you have a 5-nodes network with HTTP ports (where API calls should be sent) `30301`, `31072`, `37730`, `40108` , and `64470`.
+Now you have a 5-nodes network with HTTP ports (where API calls should be sent) `30301`, `31072`, `37730`,
+`40108` , and `64470`.
 
-Please refer to the dedicated [Avalanche Network Runner documentation](../subnets/network-runner.md) for more information.
+Please refer to the dedicated [Avalanche Network Runner documentation](../subnets/network-runner.md)
+for more information.
 
 ## Manually
 
-The below commands assume you have [AvalancheGo](../nodes/build/run-avalanche-node-manually.md#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+The below commands assume you have [AvalancheGo](../nodes/build/run-avalanche-node-manually.md#download-avalanchego)
+installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator.
+The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`,
+etc.
 
-The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
+The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and
+`9658`.
 
 To start the network:
 
