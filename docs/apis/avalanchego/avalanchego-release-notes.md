@@ -6,6 +6,11 @@
 
 :::
 
+## V1.9.6 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.6)
+
+**Banff.5 - Warp Messaging**
+
+
 ## V1.9.5 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.5)
 
 **Banff.5 - Warp Messaging**
