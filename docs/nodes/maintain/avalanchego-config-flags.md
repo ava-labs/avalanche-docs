@@ -601,11 +601,11 @@ Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
 ## Subnets
 
-### Whitelist
+### Subnet Tracking
 
-#### `--whitelisted-subnets` (string)
+#### `--track-subnets` (string)
 
-Comma separated list of Subnet IDs that this node would validate if added to.
+Comma separated list of Subnet IDs that this node would track if added to.
 Defaults to empty (will only validate the Primary Network).
 
 ### Subnet Configs
@@ -614,7 +614,7 @@ It is possible to provide parameters for Subnets. Parameters here apply to all
 chains in the specified Subnets. Parameters must be specified with a
 `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
 configs for Subnets specified in 
-`--whitelisted-subnet` parameter.
+`--track-subnets` parameter.
 
 Full reference for all configuration options for a Subnet can be found in a
 separate [Subnet Configs](./subnet-configs) document.
