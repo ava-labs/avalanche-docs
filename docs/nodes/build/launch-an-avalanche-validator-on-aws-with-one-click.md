@@ -19,12 +19,12 @@ description: This tutorial will guide you through spinning up an Avalanche node 
         allowfullscreen>
 </iframe>
 
-## Deep Dive on the Avalanche Protocol Video
+## How to Launch an Avalanche Validator using AWS
 
-<iframe src="https://www.youtube.com/watch?v=McwrrTq-kTY"
+<iframe src="https://www.youtube.com/watch?v=4RPmgpbC_Cc"
         width="100%"
         height="480px"
-        title="Deep Dive on the Avalanche Protocol"
+        title="How to Launch an Avalanche Validator using AWS?"
         className="video-container"
         display="initial"
         position="relative"
@@ -154,7 +154,7 @@ Once the node is finished bootstrapping, the response will be:
 {
     "jsonrpc": "2.0",
     "result": {
-        "isBootstrapped": false
+        "isBootstrapped": true
     },
     "id": 1
 }
