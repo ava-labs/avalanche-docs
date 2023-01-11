@@ -116,16 +116,17 @@ command.
 ssh username@ip.address.of.ec2.instance
 ```
 
+## Node Configuration
+
+### Switch to Fuji Testnet
+
 By default the Avalanche Node available through the AWS Marketplace syncs the
-Mainnet. If this is what you are looking for, you can skip the step below to switch to Fuji testnet.
+Mainnet. If this is what you are looking for, you can skip this step.
 
 For this tutorial you want to sync and validate the Fuji Testnet. Now
 that you're `ssh`ed into the EC2 instance you can make the required changes to
 sync Fuji instead of Mainnet. 
 
-## Node Configuration
-
-### Switch to Fuji Testnet
 
 First, confirm that the node is syncing the Mainnet by running the `info.getNetworkID` command.
 
@@ -458,8 +459,8 @@ testnet and you will no longer see it in the response body for the
 ## Mainnet
 
 All of these steps can be applied to Mainnet. However, the minimum required Avax 
-token amounts to become a validator is 2000. For more information, please 
-read [this doc](../validate/staking.md#mainnet).
+token amounts to become a validator is 2000 on the Mainnet. For more information, 
+please read [this doc](../validate/staking.md#mainnet).
 
 
 ## Summary
