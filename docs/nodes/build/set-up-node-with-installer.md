@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Detailed instructions for running an Avalanche node using the install script.
 ---
 
 # Run an Avalanche Node Using the Install Script

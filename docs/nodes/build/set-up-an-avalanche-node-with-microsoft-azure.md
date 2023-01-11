@@ -1,6 +1,6 @@
 ---
+sidebar_position: 5
 description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here.
-sidebar_position: 4
 ---
 
 # Run an Avalanche Node with Microsoft Azure
