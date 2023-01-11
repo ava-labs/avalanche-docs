@@ -205,6 +205,39 @@ online or compiled and run locally. The Avalanche Web Wallet is a multi-faceted
 jewel and offers validation/delegation, cross-chain transfers, reward
 estimation, asset/key management, and more. 
 
+### Switching the Connected Network
+
+Check which network the wallet is connected to by looking at the top right of
+the screen. By default the Avalanche Web Wallet connects to Mainnet. 
+
+#### Connected to Mainnet
+
+<img src="/img/one-click-validator-node/network-mainnet.png" alt="Network -
+Mainnet" width="60%" />
+
+For the sake of this demo we want to connect the Wallet to the Fuji Testnet. At the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
+
+#### Selecting Fuji
+
+<img src="/img/one-click-validator-node/network-selecting-fuji.png" alt="Network - Selecting Fuji" 
+width="60%" />
+
+The wallet will display "Connecting..." while it is switching from Mainnet to Fuji.
+
+#### Connected to Fuji
+
+Once the wallet has connected to Fuji a popup will display "Connected to Fuji"
+
+<img src="/img/one-click-validator-node/connected-to-fuji.png" alt="Connected to Fuji" 
+width="80%" />
+
+#### Connected to Fuji
+
+<img src="/img/one-click-validator-node/network-fuji.png" alt="Network - Fuji"
+width="60%" />
+
+You can follow the same steps for switching back to Mainnet from Fuji and for adding custom networks.
+
 ### The Earn Tab
 
 To add a node as a Validator, first select the "Earn" tab in the left hand nav
@@ -343,5 +376,4 @@ Avalanche Validator node available as a one-click install from the AWS
 Marketplace developers and entrepreneurs can on-ramp into the Avalanche
 ecosystem in a matter of minutes. If you have any questions or want to follow up
 in any way please join our Discord server at <https://chat.avax.network>. For
-more developer resources please check out our [Developer
-Documentation](https://docs.avax.network).
+more developer resources please check out our [Developer Documentation](https://docs.avax.network).
