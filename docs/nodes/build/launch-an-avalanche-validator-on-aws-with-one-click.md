@@ -5,20 +5,6 @@ description: This tutorial will guide you through spinning up an Avalanche node 
 
 # Launch an Avalanche Validator on AWS with One Click
 
-## Avalanche Node and AWS Marketplace Video
-
-<iframe src="https://www.youtube.com/embed/f5wlq08FcOY"
-        width="100%"
-        height="480px"
-        title="Avalanche Node and AWS Marketplace"
-        className="video-container"
-        display="initial"
-        position="relative"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-</iframe>
-
 ## How to Launch an Avalanche Validator using AWS
 
 <iframe src="https://www.youtube.com/embed/4RPmgpbC_Cc"
@@ -44,8 +30,8 @@ for the scale of global finance, with near-instant transaction finality.
 With the intention of enabling developers and entrepreneurs to on-ramp into the
 Avalanche ecosystem with as little friction as possible, Ava Labs recently
 launched an offering to deploy an Avalanche Validator node via the AWS
-Marketplace. This tutorial will show the main steps required to get this node up
-and running and validating on the Avalanche Fuji testnet.
+Marketplace. This tutorial will show the main steps required to get this node
+running and validating on the Avalanche Fuji testnet.
 
 ## Product Overview
 
