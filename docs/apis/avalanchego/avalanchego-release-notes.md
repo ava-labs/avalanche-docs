@@ -10,33 +10,40 @@
 
 **Banff.6 - Dynamic State Syncing Support**
 
-This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is optional, but encouraged. The supported plugin version is `22`.
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `22`.
 
 **Consensus**
 
-- Added `StateSyncMode` to the return of `StateSummary#Accept` to support syncing chain state while tracking the chain as a light client
+- Added `StateSyncMode` to the return of `StateSummary#Accept` to support
+  syncing chain state while tracking the chain as a light client
 - Added `AcceptedFrontier` to `Chits` messages
-- Reduced unnecessary confidence resets during consensus by applying `AcceptedFrontier`s during `QueryFailed` handling
+- Reduced unnecessary confidence resets during consensus by applying
+  `AcceptedFrontier`s during `QueryFailed` handling
 - Added EngineType for consensus messages in the p2p message definitions
 - Updated `vertex.DAGVM` interface to support linearization
 
 **Configs**
 
 - Added `--plugin-dir` flag. The default value is `[DATADIR]/plugins`
-- Removed `--build-dir` flag. The location of the avalanchego binary is no longer considered when looking for the `plugins` directory. Subnet maintainers should ensure that their node is able to properly discover plugins, as the default location is likely changed. See `--plugin-dir`
+- Removed `--build-dir` flag. The location of the AvalancheGo binary is no
+  longer considered when looking for the `plugins` directory. Subnet maintainers
+  should ensure that their node is able to properly discover plugins, as the
+  default location is likely changed. See `--plugin-dir`
 - Changed the default value of `--api-keystore-enabled` to `false`
 - Added `--track-subnets` flag as a replacement of `--whitelisted-subnets`
 
 **Fixes**
 
 - Fixed NAT-PMP router discovery and port mapping
-- Fixed `--staking-enabled=false` setting to correctly start subnet chains and report healthy
+- Fixed `--staking-enabled=false` setting to correctly start Subnet chains and report healthy
 - Fixed message logging in the consensus handler
 
 **VMs**
 
 - Populated non-trivial logger in the `rpcchainvm` `Server`'s `snow.Context`
-- Updated `rpcchainvm` proto definitions to use enums
+- Updated `rpcchainvm` Proto definitions to use Enums
 - Added `Block` format and definition to the `AVM`
 - Removed `proposervm` height index reset
 
@@ -50,7 +57,7 @@ This version is backwards compatible to [v1.9.0](https://github.com/ava-labs/ava
 **Documentation**
 
 - Added wallet example to create `stakeable.LockOut` outputs
-- Improved ubuntu deb install instructions
+- Improved Ubuntu deb install instructions
 
 **Miscellaneous**
 
