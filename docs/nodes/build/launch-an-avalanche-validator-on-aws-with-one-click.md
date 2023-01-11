@@ -98,7 +98,7 @@ To make that happen click the "Launch" button
 
 ![launch successful](/img/one-click-validator-node/launch-successful.png)
 
-You now have an Avalanche Validator node deployed on an AWS EC2 instance! Copy
+You now have an Avalanche node deployed on an AWS EC2 instance! Copy
 the `AMI ID` and click on the `EC2 Console` link for the next step.
 
 ## EC2 Console
