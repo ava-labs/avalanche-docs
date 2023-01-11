@@ -200,7 +200,7 @@ use the [Avalanche Web Wallet](https://wallet.avax.network).
 ![Avalanche Web Wallet](/img/one-click-validator-node/web-wallet.png)
 
 The Avalanche Web Wallet is a web-based application with no middleware or any
-kind of server communication. It's written in Vue JS and can be either accessed
+kind of server communication. It can be either accessed
 online or compiled and run locally. The Avalanche Web Wallet is a multi-faceted
 jewel and offers validation/delegation, cross-chain transfers, reward
 estimation, asset/key management, and more. 
