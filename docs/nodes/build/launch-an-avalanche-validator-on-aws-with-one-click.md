@@ -117,8 +117,91 @@ command.
 ssh username@ip.address.of.ec2.instance
 ```
 
-Now that you are `ssh`ed into the EC2 instance you can run the
-`info.isBoostrapped` command to confirm if the Avalanche Validator node has
+By default the Avalanche Node available through the AWS Marketplace syncs the
+Mainnet. For this turorial you want to sync and validate the Fuji Testnet. Now
+that you're `ssh`ed into the EC2 instance you can make the required changes to
+sync Fuji instead of Mainnet. 
+
+## Node Configuration
+
+First, confirm that the node is syncing the Mainnet by running the `info.getNetworkID` command.
+
+### `info.getNetworkID` Request
+
+```zsh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNetworkID",
+    "params": {
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+### `info.getNetworkID` Response
+
+The returned `networkID` will be 1 which is the network ID for Mainnet.
+
+```zsh
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "networkID": "1"
+  },
+  "id": 1
+}
+```
+
+Now you want to edit `/etc/avalanchego/conf.json` and change the `"network-id"`
+property from `"mainnet"` to `"fuji"`. To see the contents of
+`/etc/avalanchego/conf.json` you can `cat` the file.
+
+```zsh
+cat /etc/avalanchego/conf.json
+{
+  "api-keystore-enabled": false,
+  "http-host": "0.0.0.0",
+  "log-dir": "/var/log/avalanchego",
+  "db-dir": "/data/avalanchego",
+  "api-admin-enabled": false,
+  "dynamic-public-ip": "opendns",
+  "network-id": "mainnet"
+}
+```
+
+Edit that `/etc/avalanchego/conf.json` with your favorite text editor and change the value of the 
+`"network-id"` property from `"mainnet"` to `"fuji"`. Once that's complete,
+save the file and restart the Avalanche node via `sudo systemctl restart avalanchego`. 
+You can then call the `info.getNetworkID` endpoint to confirm the
+change was successful.
+
+### `info.getNetworkID` Request
+
+```zsh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNetworkID",
+    "params": {
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+### `info.getNetworkID` Response
+
+The returned `networkID` will be 5 which is the network ID for Fuji.
+
+```zsh
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "networkID": "5"
+  },
+  "id": 1
+}
+```
+
+Next you run the `info.isBoostrapped` command to confirm if the Avalanche Validator node has
 finished bootstrapping.
 
 ### `info.isBootstrapped` Request
@@ -152,7 +235,7 @@ Once the node is finished bootstrapping, the response will be:
 for the node to sync the Avalanche Fuji testnet. When you are adding your node
 as a Validator on the Avalanche Mainnet you will want to wait for this response
 to return `true` so that you don't suffer from any downtime while validating.
-For this tutorial we're not going to wait for it to finish syncing as it's not
+For this tutorial you're not going to wait for it to finish syncing as it's not
 strictly necessary.
 
 ### `info.getNodeID` Request
@@ -194,7 +277,7 @@ the `nodeID` is `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 
 ## Add Node as Validator on Fuji via the Web Wallet
 
-For adding the new node as a Validator on the Fuji testnet's Primary Network we can
+For adding the new node as a Validator on the Fuji testnet's Primary Network you can
 use the [Avalanche Web Wallet](https://wallet.avax.network).
 
 ![Avalanche Web Wallet](/img/one-click-validator-node/web-wallet.png)
@@ -215,7 +298,7 @@ the screen. By default the Avalanche Web Wallet connects to Mainnet.
 <img src="/img/one-click-validator-node/network-mainnet.png" alt="Network -
 Mainnet" width="60%" />
 
-For the sake of this demo we want to connect the Wallet to the Fuji Testnet. At the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
+For the sake of this demo you want to connect the Wallet to the Fuji Testnet. At the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
 
 #### Selecting Fuji
 
