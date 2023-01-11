@@ -45,9 +45,8 @@ customer reviews. After reviewing this information you want to click the "Contin
 
 Once on the "Subscribe to this Software" page you will see a button which
 enables you to subscribe to this AWS Marketplace offering. In addition you'll
-see Terms of service including the seller's [End User License
-Agreement](https://awsmp-offer-legal-documents-prod-iad.s3.us-east-1.amazonaws.com/prod/arn%3Aaws%3Acatalog%3Aus-east-1%3A%3Aoffer/f2norleeteb3ui74y2aypa0r2/00be9c1c-b4bc-41fa-bef8-2c77d8b28639?X-Amz-Security-Token=FwoGZXIvYXdzEFkaDF2Wax%2F6GPKJo5NMfCKIAmGr6m4cdM0bZ9eenwTY9xri8lgWonpiIqABvO3tfAOTJhA%2B5m979V9JitosI3I%2BCb7A95OGiSet9UecTvkseLyQr%2FALfG78KY%2BmHn3wiO%2FKFapCeyvygxZNYtNOH6hIJivYQ4agK262tU707kHLDXwHFZR42BPSKZXpB6vtDxmD3yu%2BO6lwc3B0qqyRyDKyJlKwsiPIahdxO90HMvYQZx5OMWpM0ZqH2Htr%2B43UR8hHov9h2CJKVJ4L1PlQgbvlIyxCXBbyjEpiNL8BNy9K%2FzLip%2FAjoyBtl7FASvGikQ4WLwa4NcHHZzh1BoTcHNH2z6boRDgGVR0Rmwu4cshml2GxYoHPKeL77SiyyfmdBjJPQ8jPLez0%2B%2Fd41mp8JshMsIYXHuNFM%2B2hSazwrPcEWre8xA%2FxlL2IDx2Lm0n3LEjYmjqJc6NZFHcuXo2LLi9Kf0jvretBj3dHOADL2Y4oXA%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230111T072642Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=ASIASPPEMYX2LJWCIFGD%2F20230111%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=e441c3fd4a801666587b7cde4868f92025d265879f8a0955f4c7040b1f771f53)
-and the [AWS Privacy Notice](https://aws.amazon.com/privacy/). After reviewing
+see Terms of service including the seller's End User License
+Agreement and the [AWS Privacy Notice](https://aws.amazon.com/privacy/). After reviewing
 these you want to click on the "Continue to Configuration" button.
 
 ## Configure This Software
