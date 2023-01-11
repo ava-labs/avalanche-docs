@@ -601,6 +601,10 @@ Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
 ## Subnets
 
+### Whitelist
+#### `--whitelisted-subnets` (string)
+Deprecated
+
 ### Subnet Tracking
 
 #### `--track-subnets` (string)
