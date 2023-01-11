@@ -7,7 +7,7 @@ description: This tutorial will guide you through spinning up an Avalanche node 
 
 ## Avalanche Node and AWS Marketplace Video
 
-<iframe src="https://www.youtube.com/watch?v=f5wlq08FcOY"
+<iframe src="https://www.youtube.com/embed/f5wlq08FcOY"
         width="100%"
         height="480px"
         title="Avalanche Node and AWS Marketplace"
@@ -21,7 +21,7 @@ description: This tutorial will guide you through spinning up an Avalanche node 
 
 ## How to Launch an Avalanche Validator using AWS
 
-<iframe src="https://www.youtube.com/watch?v=4RPmgpbC_Cc"
+<iframe src="https://www.youtube.com/embed/4RPmgpbC_Cc"
         width="100%"
         height="480px"
         title="How to Launch an Avalanche Validator using AWS?"
