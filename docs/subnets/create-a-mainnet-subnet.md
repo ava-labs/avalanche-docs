@@ -99,19 +99,6 @@ unblocked, and running the Avalanche app. Then execute the `key list` command:
 avalanche key list --ledger 0 --mainnet
 ```
 
-The command first asks the user to authorize the Ledger to give the CLI extended public key
-information. Avalanche-CLI needs this information to generate the address list.
-
-An authorization request is a common message in all CLI operations that use Ledger:
-
-```text
-*** Please provide extended public key on the ledger device ***
-```
-
-On the Ledger a `Provide Extended Public Key` window is going to be active. Navigate to the Ledger `Accept`
-window by using the Ledger's right button, and then authorize the request by pressing both left and
-right buttons.
-
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 |  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
@@ -166,17 +153,10 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys to `Mainnet` and hit enter.
 
-The user is then asked to authorize the Ledger to provide extended public key information to the CLI.
-
 ```text
 ✔ Mainnet
 Deploying [testsubnet] to Mainnet
-*** Please provide extended public key on the ledger device ***
 ```
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the Ledger's right button, and then authorize the request by pressing both left and
-right buttons.
 
 After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
 
@@ -226,7 +206,7 @@ Next, the CLI generates a TX for creating the SubnetID and asks the user to sign
 *** Please sign subnet creation hash on the ledger device ***
 ```
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
 using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 If the Ledger doesn't have enough funds, the user may see an error message:
@@ -243,7 +223,7 @@ Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr
 *** Please sign blockchain creation hash on the ledger device ***
 ```
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
 using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 After that, CLI creates the blockchain within the Subnet, and a summary window for the deployment
@@ -423,16 +403,6 @@ Weight: 30
 Inputs complete, issuing transaction to add the provided validator information...
 ```
 
-Next the CLI asks the user for Ledger authorization:
-
-```text
-*** Please provide extended public key on the ledger device ***
-```
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the Ledger's right button, and then authorize the request by pressing both left and
-right buttons.
-
 The CLI shows the Ledger address:
 
 ```text
@@ -460,8 +430,8 @@ Otherwise, both the CLI and the Ledger request to sign the TX:
 *** Please sign add validator hash on the ledger device ***
 ```
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger `Accept`
-window by using the Ledger's right button, and then authorize the request by pressing both left and
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and
 right buttons.
 
 This might take a couple of seconds. After, it prints:
