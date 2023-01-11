@@ -194,7 +194,7 @@ the `nodeID` is `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 
 ## Add Node as Validator on Fuji via the Web Wallet
 
-For adding the new node as a Validator on the Mainnet's Primary Network we can
+For adding the new node as a Validator on the Fuji testnet's Primary Network we can
 use the [Avalanche Web Wallet](https://wallet.avax.network).
 
 ![Avalanche Web Wallet](/img/one-click-validator-node/web-wallet.png)
