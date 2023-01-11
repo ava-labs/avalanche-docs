@@ -117,15 +117,19 @@ ssh username@ip.address.of.ec2.instance
 ```
 
 By default the Avalanche Node available through the AWS Marketplace syncs the
-Mainnet. For this tutorial you want to sync and validate the Fuji Testnet. Now
+Mainnet. If this is what you are looking for, you can skip the step below to switch to Fuji testnet.
+
+For this tutorial you want to sync and validate the Fuji Testnet. Now
 that you're `ssh`ed into the EC2 instance you can make the required changes to
 sync Fuji instead of Mainnet. 
 
 ## Node Configuration
 
+### Switch to Fuji Testnet
+
 First, confirm that the node is syncing the Mainnet by running the `info.getNetworkID` command.
 
-### `info.getNetworkID` Request
+#### `info.getNetworkID` Request
 
 ```zsh
 curl -X POST --data '{
@@ -137,7 +141,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-### `info.getNetworkID` Response
+#### `info.getNetworkID` Response
 
 The returned `networkID` will be 1 which is the network ID for Mainnet.
 
@@ -174,7 +178,7 @@ save the file and restart the Avalanche node via `sudo systemctl restart avalanc
 You can then call the `info.getNetworkID` endpoint to confirm the
 change was successful.
 
-### `info.getNetworkID` Request
+#### `info.getNetworkID` Request
 
 ```zsh
 curl -X POST --data '{
@@ -186,7 +190,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-### `info.getNetworkID` Response
+#### `info.getNetworkID` Response
 
 The returned `networkID` will be 5 which is the network ID for Fuji.
 
@@ -449,6 +453,14 @@ After 5 minutes the node will officially start validating the Avalanche Fuji
 testnet and you will no longer see it in the response body for the
 `platform.getPendingValidators` endpoint. Now you will access it via the
 `platform.getCurrentValidators` endpoint.
+
+
+## Mainnet
+
+All of these steps can be applied to Mainnet. However, the minimum required Avax 
+token amounts to become a validator is 2000. For more information, please 
+read [this doc](../validate/staking.md#mainnet).
+
 
 ## Summary
 
