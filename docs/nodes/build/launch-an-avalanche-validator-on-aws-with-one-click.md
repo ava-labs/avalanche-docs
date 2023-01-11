@@ -118,7 +118,7 @@ ssh username@ip.address.of.ec2.instance
 ```
 
 By default the Avalanche Node available through the AWS Marketplace syncs the
-Mainnet. For this turorial you want to sync and validate the Fuji Testnet. Now
+Mainnet. For this tutorial you want to sync and validate the Fuji Testnet. Now
 that you're `ssh`ed into the EC2 instance you can make the required changes to
 sync Fuji instead of Mainnet. 
 
@@ -298,7 +298,8 @@ the screen. By default the Avalanche Web Wallet connects to Mainnet.
 <img src="/img/one-click-validator-node/network-mainnet.png" alt="Network -
 Mainnet" width="60%" />
 
-For the sake of this demo you want to connect the Wallet to the Fuji Testnet. At the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
+For the sake of this demo you want to connect the Wallet to the Fuji Testnet. At
+the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
 
 #### Selecting Fuji
 
