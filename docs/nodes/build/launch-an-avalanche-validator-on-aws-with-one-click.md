@@ -41,7 +41,7 @@ and enterprise blockchain deployments in one interoperable, highly scalable
 ecosystem. Avalanche is the first decentralized smart contracts platform built
 for the scale of global finance, with near-instant transaction finality.
 
-With the intention of enabling developers and entrepreneurs to onramp into the
+With the intention of enabling developers and entrepreneurs to on-ramp into the
 Avalanche ecosystem with as little friction as possible, Ava Labs recently
 launched an offering to deploy an Avalanche Validator node via the AWS
 Marketplace. This tutorial will show the main steps required to get this node up
@@ -55,7 +55,7 @@ There you'll find a high level product overview. This includes a product
 description, pricing information, usage instructions, support information and
 customer reviews. After reviewing this information you want to click the "Continue to Subscribe" button.
 
-## Subscribe to this Software
+## Subscribe to This Software
 
 Once on the "Subscribe to this Software" page you will see a button which
 enables you to subscribe to this AWS Marketplace offering. In addition you'll
@@ -64,7 +64,7 @@ Agreement](https://awsmp-offer-legal-documents-prod-iad.s3.us-east-1.amazonaws.c
 and the [AWS Privacy Notice](https://aws.amazon.com/privacy/). After reviewing
 these you want to click on the "Continue to Configuration" button.
 
-## Configure this Software
+## Configure This Software
 
 This page lets you choose a fulfillment option and software version to launch
 this software. No changes are needed as the default settings are sufficient.
@@ -74,14 +74,14 @@ node](https://github.com/ava-labs/avalanchego/releases), `v1.9.5 (Dec 22, 2022)`
 Also, the Region to deploy in can be left as `US East (N.  Virginia)`. On the right you'll 
 see the software and infrastructure pricing. Lastly, click the "Continue to Launch" button.
 
-## Launch this Software
+## Launch This Software
 
 Here you can review the launch configuration details and follow the instructions
 to launch the Avalanche Validator Node. The changes are very minor. Leave the
   action as "Launch from Website." The EC2 Instance Type should remain
 `c5.2xlarge`. The primary change you'll need to make is to choose a keypair
 which will enable you to `ssh` into the newly created EC2 instance to run `curl`
-commands on the Validator node. You can search for existing keypairs or you can
+commands on the Validator node. You can search for existing Keypairs or you can
 create a new keypair and download it to your local machine. If you create a new
 keypair you'll need to move the keypair to the appropriate location, change the
 permissions and add it to the OpenSSH authentication agent. For example, on
@@ -162,7 +162,7 @@ Once the node is finished bootstrapping, the response will be:
 
 **Note** that initially the response is `false`. This is because it takes time
 for the node to sync the Avalanche Fuji testnet. When you are adding your node
-as a Validator on the Avalanche mainnet you will want to wait for this response
+as a Validator on the Avalanche Mainnet you will want to wait for this response
 to return `true` so that you don't suffer from any downtime while validating.
 For this tutorial we're not going to wait for it to finish syncing as it's not
 strictly necessary.
@@ -220,11 +220,11 @@ estimation, asset/key management, and more.
 ### The Earn Tab
 
 To add a node as a Validator, first select the "Earn" tab in the left hand nav
-menu. Next click the "ADD VALIDATOR" button.
+menu. Next click the "Add Validator" button.
 
 ![Avalanche Web Wallet](/img/one-click-validator-node/earn-tab.png)
 
-### The `Earn / Validate` form
+### The `Earn / Validate` Form
 
 Let's look at the input values for the `Earn / Validate` form.
 
@@ -238,7 +238,7 @@ Let's look at the input values for the `Earn / Validate` form.
 - Delegation Fee: You will claim this % of the rewards from the delegators on your node.
 - Reward Address: A reward address is the destination address of the accumulated staking rewards.
 
-Fill the fields and confirm!  Carefully check the details, and click “Submit”!
+Fill the fields and confirm! Carefully check the details, and click "Submit"!
 
 ![Avalanche Web Wallet](/img/one-click-validator-node/validate-form.png)
 
@@ -254,7 +254,7 @@ has elapsed from the entire Validation period.
 
 ![Validator transaction](/img/one-click-validator-node/validation-tx.png)
 
-## Confirm that the Node is a Pending Validator on Fuij
+## Confirm That the Node is a Pending Validator on Fuji
 
 As a last step you can call the `platform.getPendingvalidators` endpoint to
 confirm that the Avalanche node which was recently spun up on AWS is no in the
@@ -317,8 +317,8 @@ curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
 ```
 
 This will filter the response by the `nodeIDs` array which will save you time by
-no longer requiring you to search through the entire resonse body for the
-nodeID(s).
+no longer requiring you to search through the entire response body for the
+NodeIDs.
 
 ```zsh
 {
@@ -342,7 +342,7 @@ nodeID(s).
 }
 ```
 
-After 5 minutes the node will officially start validting the Avalanche Fuji
+After 5 minutes the node will officially start validating the Avalanche Fuji
 testnet and you will no longer see it in the response body for the
 `platform.getPendingValidators` endpoint. Now you will access it via the
 `platform.getCurrentValidators` endpoint.
@@ -352,7 +352,7 @@ testnet and you will no longer see it in the response body for the
 Avalanche is the first decentralized smart contracts platform built for the
 scale of global finance, with near-instant transaction finality. Now with an
 Avalanche Validator node available as a one-click install from the AWS
-Marketplace developers and entreprenuers can  onramp into the Avalanche
+Marketplace developers and entreprenuers can on-ramp into the Avalanche
 ecosystem in a matter of minutes. If you have any questions or want to follow up
 in any way please join our Discord server at <https://chat.avax.network>. For
 more developer resources please check out our [Developer

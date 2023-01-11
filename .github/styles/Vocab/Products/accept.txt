@@ -162,6 +162,7 @@ merkle
 Merkle
 MetaMask
 Metodi
+middleware
 minimalistic
 mintable
 Mintable
