@@ -231,9 +231,8 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-**Note** that initially the response is `false`. This is because it takes time
-for the node to sync the Avalanche Fuji testnet. When you are adding your node
-as a Validator on the Avalanche Mainnet you will want to wait for this response
+**Note** that initially the response is `false` because the network is still syncing.  
+When you're adding your node as a Validator on the Avalanche Mainnet you'll want to wait for this response
 to return `true` so that you don't suffer from any downtime while validating.
 For this tutorial you're not going to wait for it to finish syncing as it's not
 strictly necessary.
