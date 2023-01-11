@@ -57,7 +57,7 @@ this software. No changes are needed as the default settings are sufficient.
 Leave the `Fulfillment Option` as `64-bit (x86) Amazon Machine Image (AMI)`. The
 software version is the latest build of [the AvalancheGo full
 node](https://github.com/ava-labs/avalanchego/releases), `v1.9.5 (Dec 22,
-2022)`, AKA `Banff.5`. This will always show the latest version.  Also, the
+2022)`, AKA `Banff.5`. This will always show the latest version. Also, the
 Region to deploy in can be left as `US East (N.  Virginia)`. On the right you'll
 see the software and infrastructure pricing. Lastly, click the "Continue to
 Launch" button.
