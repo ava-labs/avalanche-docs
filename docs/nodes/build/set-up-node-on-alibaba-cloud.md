@@ -1,5 +1,6 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
+description: Detailed instructions for running an Avalanche node with Alibaba Cloud
 ---
 
 # Run an Avalanche Node with Alibaba Cloud

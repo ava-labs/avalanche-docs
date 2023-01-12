@@ -47,16 +47,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 ```text
 Deploying [testsubnet] to Mainnet
-*** Please provide extended public key on the ledger device ***
 ```
 
-Ledger is automatically recognized as the signature mechanism on `Mainnet`, and so the CLI
-asks the user to authorize the Ledger to provide extended public key information to it. The tool
-uses this info to get the Ledger addresses.
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger's
-`Accept` window by using the Ledger's right button, and then authorize the request by pressing both
-left and right buttons.
+Ledger is automatically recognized as the signature mechanism on `Mainnet`.
 
 After that, the CLI shows the first `Mainnet` Ledger address.
 
@@ -199,8 +192,8 @@ The Subnet Deployment TX is ready for signing.
 *** Please sign subnet creation hash on the ledger device ***
 ```
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by using
-the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 ```text
 Subnet has been created with ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Now creating blockchain...
@@ -209,8 +202,8 @@ Subnet has been created with ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q
 
 After successful Subnet creation, the CLI asks the user to sign the blockchain creation TX.
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by using
-the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 On success, the CLI provides Subnet deploy details. As only one address signed the chain creation
 TX, the CLI writes a file to disk to save the TX to continue the signing process with another
@@ -266,12 +259,7 @@ You can start the signing process with the `transaction sign` command:
 
 ```bash
 avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
-*** Please provide extended public key on the ledger device ***
 ```
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger's
-`Accept` window by using the Ledger's right button, and then authorize the request by pressing both
-left and right buttons.
 
 ```text
 Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
@@ -287,8 +275,8 @@ Error: wallet does not contain subnet auth keys
 exit status 1
 ```
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by using
-the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 Repeat this processes until all required parties have signed the TX. You should see a message
 like this:
@@ -410,14 +398,7 @@ Start time: 2022-11-22 23:00:00
 End time: 2023-11-22 15:57:27
 Weight: 20
 Inputs complete, issuing transaction to add the provided validator information...
-*** Please provide extended public key on the ledger device ***
 ```
-
-Now the command ask the user to authorize the Ledger to provide public key.
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger's
-`Accept` window by using the Ledger's right button, and then authorize the request by pressing both
-left and right buttons.
 
 ```text
 Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
@@ -467,12 +448,7 @@ automatically. For `Fuji Testnet`, the CLI prompts the user to choose the signin
 
 ```bash
 avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
-*** Please provide extended public key on the ledger device ***
 ```
-
-This activates a `Provide Extended Public Key` window on the Ledger. Navigate to the Ledger's
-`Accept` window by using the Ledger's right button, and then authorize the request by pressing both
-left and right buttons.
 
 ```text
 Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
@@ -481,8 +457,8 @@ Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 
 Next, the command is going to start a new signing process for the Add Validator TX.
 
-This activates a `Sign Hash` window on the Ledger. Navigate to the Ledger's `Accept` window by using
-the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
 
 Repeat this processes until all required parties have signed the TX. You should see a message like this:
 
