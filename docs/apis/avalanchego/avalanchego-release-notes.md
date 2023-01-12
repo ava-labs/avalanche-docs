@@ -8,7 +8,7 @@
 
 ## V1.9.7 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.7)
 
-**Banff.7 - Subnet Validator Lookups**
+**Banff.7 - Subnet Validator Look-ups**
 
 This version is backwards compatible to 
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is 
