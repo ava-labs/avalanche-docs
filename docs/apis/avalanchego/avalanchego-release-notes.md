@@ -6,6 +6,19 @@
 
 :::
 
+## V1.9.7 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.7)
+
+**Banff.7 - Subnet Validator Lookups**
+
+This version is backwards compatible to 
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is 
+optional, but encouraged. The supported plugin version is `22`.
+
+**Fixes**
+
+- Fixed Subnet validator lookup regression
+
+
 ## V1.9.6 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.6)
 
 **Banff.6 - Dynamic State Syncing Support**
