@@ -149,6 +149,7 @@ keystore
 Keystore
 KYCed
 LevelDB
+linearization
 liveness
 lol
 lookups

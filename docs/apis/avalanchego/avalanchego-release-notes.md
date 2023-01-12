@@ -6,6 +6,82 @@
 
 :::
 
+## V1.9.7 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.7)
+
+**Banff.7 - Subnet Validator Look-ups**
+
+This version is backwards compatible to 
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is 
+optional, but encouraged. The supported plugin version is `22`.
+
+**Fixes**
+
+- Fixed Subnet validator lookup regression
+
+
+## V1.9.6 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.6)
+
+**Banff.6 - Dynamic State Syncing Support**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `22`.
+
+**Consensus**
+
+- Added `StateSyncMode` to the return of `StateSummary#Accept` to support
+  syncing chain state while tracking the chain as a light client
+- Added `AcceptedFrontier` to `Chits` messages
+- Reduced unnecessary confidence resets during consensus by applying
+  `AcceptedFrontier`s during `QueryFailed` handling
+- Added EngineType for consensus messages in the p2p message definitions
+- Updated `vertex.DAGVM` interface to support linearization
+
+**Configs**
+
+- Added `--plugin-dir` flag. The default value is `[DATADIR]/plugins`
+- Removed `--build-dir` flag. The location of the AvalancheGo binary is no
+  longer considered when looking for the `plugins` directory. Subnet maintainers
+  should ensure that their node is able to properly discover plugins, as the
+  default location is likely changed. See `--plugin-dir`
+- Changed the default value of `--api-keystore-enabled` to `false`
+- Added `--track-subnets` flag as a replacement of `--whitelisted-subnets`
+
+**Fixes**
+
+- Fixed NAT-PMP router discovery and port mapping
+- Fixed `--staking-enabled=false` setting to correctly start Subnet chains and report healthy
+- Fixed message logging in the consensus handler
+
+**VMs**
+
+- Populated non-trivial logger in the `rpcchainvm` `Server`'s `snow.Context`
+- Updated `rpcchainvm` Proto definitions to use Enums
+- Added `Block` format and definition to the `AVM`
+- Removed `proposervm` height index reset
+
+**Metrics**
+
+- Added `avalanche_network_peer_connected_duration_average` metric
+- Added `avalanche_api_calls_processing` metric
+- Added `avalanche_api_calls` metric
+- Added `avalanche_api_calls_duration` metric
+
+**Documentation**
+
+- Added wallet example to create `stakeable.LockOut` outputs
+- Improved Ubuntu deb install instructions
+
+**Miscellaneous**
+
+- Updated ledger-avalanche to v0.6.5
+- Added linter to ban the usage of `fmt.Errorf` without format directives
+- Added `List` to the `buffer#Deque` interface
+- Added `Index` to the `buffer#Deque` interface
+- Added `SetLevel` to the `Logger` interface
+- Updated `auth` API to use the new `jwt` standard
+
+
 ## V1.9.5 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.5)
 
 **Banff.5 - Warp Messaging**
