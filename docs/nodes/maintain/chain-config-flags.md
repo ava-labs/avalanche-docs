@@ -42,9 +42,9 @@ For a given chain, AvalancheGo will follow the sequence below to look for its
 config file, where all folder and file names are case sensitive:
 
 - First it looks for a config sub-directory whose name is the chain ID - If it
-  isn't found, it looks for a config sub-directory whose name is the chain's
-  primary alias - If it's not found, it looks for a config sub-directory whose
-  name is another alias for the chain
+isn't found, it looks for a config sub-directory whose name is the chain's
+primary alias - If it's not found, it looks for a config sub-directory whose
+name is another alias for the chain
 
 Alternatively, for some setups it might be more convenient to provide config
 entirely via the command line. For that, you can use AvalancheGo
@@ -494,11 +494,12 @@ If a node is ever run with `pruning-enabled` as `false` (archival mode), setting
 down. This is to protect against unintentional misconfigurations of an archival
 node.
 
-To override this and switch to pruning mode, in addition to `pruning-enabled: true`, `allow-missing-tries` should be set to `true` as well.
+To override this and switch to pruning mode, in addition to `pruning-enabled:
+true`, `allow-missing-tries` should be set to `true` as well.
 
 :::
 
-#### `populate-missing-tries` (\*uint64)
+#### `populate-missing-tries` (*uint64)
 
 If non-nil, sets the starting point for repopulating missing tries to
 re-generate archival merkle forest.
@@ -561,12 +562,6 @@ without thoughtful consideration.
 This flag must be set when offline pruning is enabled and sets the directory
 that offline pruning will use to write its bloom filter to disk. This directory
 should not be changed in between runs until offline pruning has completed.
-
-#### `tx-lookup-limit` (uint64)
-
-Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
-transaction lookup indices will be maintained for all blocks.
-Defaults to `0`.
 
 ### Snapshots
 
