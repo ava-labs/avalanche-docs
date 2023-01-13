@@ -563,6 +563,11 @@ This flag must be set when offline pruning is enabled and sets the directory
 that offline pruning will use to write its bloom filter to disk. This directory
 should not be changed in between runs until offline pruning has completed.
 
+#### `tx-lookup-limit` (uint64)
+
+Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
+transaction lookup indices will be maintained for all blocks. Defaults to `0`.
+
 ### Snapshots
 
 #### `snapshot-async` (boolean)
