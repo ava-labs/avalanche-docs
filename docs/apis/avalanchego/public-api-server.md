@@ -256,7 +256,7 @@ Features:
 
 - Free
 - Globally distributed infrastructure (our own bare metal)
-- Optimized for Speed and reliability - Check our page for stats
+- Optimized for speed and reliability - check our page for stats
 
 #### Mainnet
 
