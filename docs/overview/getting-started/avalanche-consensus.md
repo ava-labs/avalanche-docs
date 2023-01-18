@@ -44,7 +44,6 @@ acceptance of non-conflicting transactions and the rejection of conflicting tran
 It is guaranteed (with high probability based on system parameters) that if any honest validator
 accepts or rejects a transaction, all honest validators will accept or reject that transaction.
 
-
 ### Video
 
 <div align="center">
