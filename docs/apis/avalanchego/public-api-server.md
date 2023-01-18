@@ -250,7 +250,7 @@ Websockets are available for the C-chain and the X-chain.
 
 ### PublicNode
 
-[PublicNode](https://avalanche.publicnode.com) supports C-Chain
+[PublicNode](https://avalanche.publicnode.com) supports the C-Chain on the Mainnet.
 
 Features:
 
