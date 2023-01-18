@@ -19,15 +19,14 @@ Avalanche empowers developers to build Dapps in multiple languages through the V
 framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the
 implementation of their Dapp.
 
-Avalanche employs a novel consensus algorithm which allows it to have strong safety guarantees,
-quick finality, and high throughput, without compromising decentralization.
-
 The Avalanche protocol has relatively modest hardware requirements. The protocol is incredibly
 lightweight, and can run on easily accessible consumer-grade hardware.
 
-Avalanche is uses a proof-of-stake consensus model which is incredibly energy-efficient and
-sustainable, consuming the same amount of energy as 46 US households. The entire Avalanche network
-consumes only 0.0005% of the amount of energy consumed by Bitcoin.
+Avalanche employs a novel proof-of-stake consensus algorithm which offers strong safety guarantees,
+quick finality times, and high throughput, without compromising decentralization. Avalanche
+consensus is incredibly energy-efficient and sustainable, consuming the same amount of energy as 46
+US households. The entire Avalanche network consumes only 0.0005% of the amount of energy consumed
+by Bitcoin.
 
 ## AVAX
 
@@ -65,9 +64,7 @@ To learn more about VMs, click [here](/docs/subnets/introduction-to-vm.md).
 ### Subnets
 
 Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite
-amount of Dapps in its ecosystem.
-
-Interoperability between Subnets are supported through Avalanche Warp Messaging (AWM).
+amount of interoperable Dapps in its ecosystem.
 
 To learn more about Subnets, click [here](/docs/subnets/README.md).
 
