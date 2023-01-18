@@ -58,8 +58,7 @@ All Avalanche validators come out-of-the box three VMs:
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
   Assets.
 
-Validator operators are able to install additional VMs on their node to validate their corresponding
-blockchains.
+Validators are able to install additional VMs on their node to validate additional blockchains.
 
 To learn more about VMs, click [here](/docs/subnets/introduction-to-vm.md).
 
