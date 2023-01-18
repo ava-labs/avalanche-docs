@@ -6,11 +6,11 @@ slug: /intro
 
 ## Introduction
 
-Avalanche is an open-source platform for building decentralized applications (dApps) in one interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate the scale of global finance, with near-instant transaction finality.
+Avalanche is an open-source platform for building decentralized applications (Dapps) in one interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate the scale of global finance, with near-instant transaction finality.
 
-Avalanche empowers developers to join a rich ecosystem of interoperable and fault-tolerant blockchains known as subnets. Subnets allow developers to isolate and scale their applications, enabling customization for any use-case. Subnets can be permission-ed or permission-less, allowing subnet creators to build dApps that support arbitrary levels of privacy and compliance.
+Avalanche empowers developers to join a rich ecosystem of interoperable and fault-tolerant blockchains known as Subnets. Subnets allow developers to isolate and scale their applications, enabling customization for any use-case. Subnets can be permission-ed or permission-less, allowing Subnet creators to build Dapps that support arbitrary levels of privacy and compliance.
 
-Avalanche empowers developers to build dApps in any language through the Virtual Machine (VM) framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the implementation of their dApp.
+Avalanche empowers developers to build Dapps in any language through the Virtual Machine (VM) framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the implementation of their Dapp.
 
 Avalanche employs a novel consensus algorithm which allows it to have strong safety guarantees, quick finality, and high throughput, without compromising decentralization.
 
@@ -35,28 +35,28 @@ To learn more about consensus, click here.
 
 ### Virtual Machines
 
-Avalanche allows developers to build dApps through the Virtual Machine (VM) framework. VMs serve as blockchain blueprints, and define the behavior of a blockchain application. VMs are language agnostic, and are currently supported in multiple popular languages like Golang and Rust.
+Avalanche allows developers to build Dapps through the Virtual Machine (VM) framework. VMs serve as blockchain blueprints, and define the behavior of a blockchain application. VMs are language agnostic, and are currently supported in multiple popular languages like Golang and Rust.
 
 All Avalanche validators come out-of-the box three VMs:
 - Coreth: Defines the Contract Chain (C-Chain); supports smart contracts written in Solidity.
-- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and subnets.
+- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native Assets.
 
 Validator operators are able to install additional VMs on their node to validate their corresponding blockchains.
 
-To learn more about VMs, click [here](/docs/subnets/introduction-to-vm.md).
+To learn more about VMs, click [here](/docs/Subnets/introduction-to-vm.md).
 
 ### Subnets
 
-Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite amount of dApps in its ecosystem.
+Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite amount of Dapps in its ecosystem.
 
-Interoperability between subnets are supported through Avalanche Warp Messaging (AWM).
+Interoperability between Subnets are supported through Avalanche Warp Messaging (AWM).
 
-To learn more about subnets, click [here](/docs/subnets/README.md).
+To learn more about Subnets, click [here](/docs/Subnets/README.md).
 
 ### Smart Contracts
 
-Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine (EVM), or on their own isolated subnet using the Subnet-EVM.
+Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine (EVM), or on their own isolated Subnet using the Subnet-EVM.
 
 Developers can use their favorite Ethereum tools like Remix,
 MetaMask, Truffle, and more.
