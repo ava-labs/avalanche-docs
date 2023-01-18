@@ -255,7 +255,7 @@ Websockets are available for the C-chain and the X-chain.
 Features:
 
 - Free
-- Globally distributed infrastructure (our own bare metal)
+- Globally distributed infrastructure on Allnodes
 - Optimized for speed and reliability - check our page for stats
 
 #### Mainnet
