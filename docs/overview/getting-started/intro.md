@@ -6,101 +6,59 @@ slug: /intro
 
 ## Introduction
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized
-applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp)
-and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain)
-deployments in one interoperable, highly scalable ecosystem. Avalanche is the first decentralized
-smart contracts platform built for the scale of global finance, with near-instant transaction
-finality. Ethereum developers can quickly build on Avalanche as Solidity works out-of-the-box.
+Avalanche is an open-source platform for building decentralized applications (dApps) in one interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate the scale of global finance, with near-instant transaction finality.
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over
-time, people have come to a false understanding that blockchains have to be slow and not scalable.
-The Avalanche protocol employs a novel approach to consensus to achieve its strong safety
-guarantees, quick finality, and high-throughput without compromising decentralization.
+Avalanche empowers developers to join a rich ecosystem of interoperable and fault-tolerant blockchains known as subnets. Subnets allow developers to isolate and scale their applications, enabling customization for any use-case. Subnets can be permission-ed or permission-less, allowing subnet creators to build dApps that support arbitrary levels of privacy and compliance.
+
+Avalanche empowers developers to build dApps in any language through the Virtual Machine (VM) framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the implementation of their dApp.
+
+Avalanche employs a novel consensus algorithm which allows it to have strong safety guarantees, quick finality, and high throughput, without compromising decentralization.
+
+The Avalanche protocol has relatively modest hardware requirements. The protocol is incredibly lightweight, and can run on easily accessible consumer-grade hardware.
+
+Avalanche is uses a proof-of-stake consensus model which is incredibly energy-efficient and sustainable, consuming the same amount of energy as 46 US households. The entire Avalanche network consumes only 0.0005% of the amount of energy consumed by Bitcoin.
 
 ## AVAX
 
 AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for
-fees, secure the platform through staking, and provide a basic unit of account between the multiple
-Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+fees, secure the platform through staking, and provide a basic unit of account between the multiple Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
-## Avalanche Consensus Protocol
+## Features
 
-![Consensus Comparison](/img/Consensus-protocol-comparison.png)
+### Avalanche Consensus
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a
-[validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is
-determining whether a
-[transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
-accepted or rejected, it asks a small, random subset of validators whether they think the
-transaction should be accepted or rejected. If the queried validator thinks the transaction is
-invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that
-it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction
-should be accepted.
+Avalanche uses a revolutionary proof-of-stake consensus algorithm that is scalable, robust, and energy-efficient.
 
-If a sufficiently large portion (_alpha_ α) of the validators sampled reply that they think the
-transaction should be accepted, the validator prefers to accept the transaction. That is, when it is
-queried about the transaction in the future, it will reply that it thinks the transaction should be
-accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large
-portion of the validators replies that they think the transaction should be rejected.
+Avalanche consensus offers stronger security guarantees well-above the 51% standard of other networks.
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply the same
-way (accept or reject) for _beta_ β consecutive rounds.
+To learn more about consensus, click here.
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When
-conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
-positive feedback loop until all correct validators prefer that transaction. This leads to the
-acceptance of non-conflicting transactions and the rejection of conflicting transactions.
+### Virtual Machines
 
-![How Avalanche Consensus Works](/img/howavalancheconsensusworks.png)
+Avalanche allows developers to build dApps through the Virtual Machine (VM) framework. VMs serve as blockchain blueprints, and define the behavior of a blockchain application. VMs are language agnostic, and are currently supported in multiple popular languages like Golang and Rust.
 
-It is guaranteed (with high probability based on system parameters) that if any honest validator
-accepts or rejects a transaction, all honest validators will accept or reject that transaction.
+All Avalanche validators come out-of-the box three VMs:
+- Coreth: Defines the Contract Chain (C-Chain); supports smart contracts written in Solidity.
+- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and subnets.
+- Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native Assets.
 
-Learn more technical components of the Avalanche consensus protocol by reading the [white
-paper](https://arxiv.org/pdf/1906.08936.pdf).
+Validator operators are able to install additional VMs on their node to validate their corresponding blockchains.
 
-## Snowman Consensus Protocol
+To learn more about VMs, click [here](/docs/subnets/introduction-to-vm.md).
 
-Snowman is a chain-optimized consensus protocol-high-throughput, totally ordered, and great for
-smart contracts. Snowman is powered by the [Avalanche consensus
-protocol](./#avalanche-consensus-protocol). Both
-[P-Chain](overview/getting-started/avalanche-platform.md#platform-chain-p-chain) and
-[C-Chain](overview/getting-started/avalanche-platform.md#contract-chain-c-chain) implement the
-Snowman consensus protocol.
+### Subnets
 
-## Key Features
+Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite amount of dApps in its ecosystem.
 
-### Speed
+Interoperability between subnets are supported through Avalanche Warp Messaging (AWM).
 
-Uses a novel consensus protocol, developed by a team of Cornell computer scientists, and is able to
-permanently confirm transactions in under 1 second.
+To learn more about subnets, click [here](/docs/subnets/README.md).
 
-### Scalability
+### Smart Contracts
 
-Capable of 4,500 transactions per second-an order of magnitude greater than existing blockchains.
+Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine (EVM), or on their own isolated subnet using the Subnet-EVM.
 
-### Security
-
-Ensures stronger security guarantees well-above the 51% standard of other networks.
-
-### Flexibility
-
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
-
-### Sustainability
-
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
-
-### Smart Contract Support
-
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix,
+Developers can use their favorite Ethereum tools like Remix,
 MetaMask, Truffle, and more.
 
-### Private and Public Blockchains
-
-Create your own public or private blockchains.
-
-### Designed for Finance
-
-Native support for easily creating and trading digital smart assets with complex, custom rule-sets.
+To learn more about smart contract support, click [here](/docs/dapps/launch-your-ethereum-dapp.md).
