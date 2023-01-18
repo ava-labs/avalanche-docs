@@ -10,12 +10,12 @@ Avalanche is an open-source platform for building decentralized applications (Da
 interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate
 the scale of global finance, with near-instant transaction finality.
 
-Avalanche empowers developers to join a rich ecosystem of interoperable and fault-tolerant
-blockchains known as Subnets. Subnets allow developers to isolate and scale their applications,
-enabling customization for any use-case. Subnets can be permission-ed or permission-less, allowing
-Subnet creators to build Dapps that support arbitrary levels of privacy and compliance.
+Avalanche empowers developers to join a rich ecosystem of interoperable and blockchains known as
+Subnets. Subnets allow developers to isolate and scale their applications, enabling customization
+for any use-case. Subnets can be permission-ed or permission-less, allowing Subnet creators to build
+Dapps that support arbitrary levels of privacy and compliance.
 
-Avalanche empowers developers to build Dapps in any language through the Virtual Machine (VM)
+Avalanche empowers developers to build Dapps in multiple languages through the Virtual Machine (VM)
 framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the
 implementation of their Dapp.
 
@@ -40,12 +40,10 @@ Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
 ### Avalanche Consensus
 
 Avalanche uses a revolutionary proof-of-stake consensus algorithm that is scalable, robust, and
-energy-efficient.
+energy-efficient. Avalanche consensus offers stronger security guarantees well-above the 51%
+standard of other networks.
 
-Avalanche consensus offers stronger security guarantees well-above the 51% standard of other
-networks.
-
-To learn more about consensus, click here.
+To learn more about consensus, click [here](/docs/overview/getting-started/avalanche-consensus.md).
 
 ### Virtual Machines
 
@@ -63,7 +61,7 @@ All Avalanche validators come out-of-the box three VMs:
 Validator operators are able to install additional VMs on their node to validate their corresponding
 blockchains.
 
-To learn more about VMs, click [here](/docs/Subnets/introduction-to-vm.md).
+To learn more about VMs, click [here](/docs/subnets/introduction-to-vm.md).
 
 ### Subnets
 
@@ -72,7 +70,7 @@ amount of Dapps in its ecosystem.
 
 Interoperability between Subnets are supported through Avalanche Warp Messaging (AWM).
 
-To learn more about Subnets, click [here](/docs/Subnets/README.md).
+To learn more about Subnets, click [here](/docs/subnets/README.md).
 
 ### Smart Contracts
 
