@@ -33,6 +33,7 @@ create_service_file () {
 create_config_file () {
   rm -f node.json
   echo "{" >>node.json
+  echo "  \"plugin-dir\": \"$HOME/avalanche-node/plugins\",">>node.json
   if [ "$rpcOpt" = "any" ]; then
     echo "  \"http-host\": \"\",">>node.json
   fi
@@ -234,7 +235,7 @@ if [ "$#" != 0 ]; then
 fi
 
 echo "Preparing environment..."
-osType=$(getOsType) 
+osType=$(getOsType)
 if [ "$osType" = "Debian" ]; then
   check_reqs_deb
 elif [ "$osType" = "RHEL" ]; then
@@ -387,6 +388,15 @@ if [ "$archivalOpt" = "true" ]; then
   echo "Note that existing nodes need to bootstrap again to fill in the missing data."
   echo ""
 fi
+if [ "$stateOpt" = "?" ]; then
+  echo "Bootstrapping the C-Chain can be done by downloading and replaying the whole chain history, which can take"
+  echo "a lot of time (up to a week or more!), but populates the local database with complete state transitions."
+  echo "Alternatively, node can bootstrap using state sync, to fetch only the latest chain state, which is much faster."
+fi
+while [ "$stateOpt" != "on" ] && [ "$stateOpt" != "off" ]
+do
+  read -p "Do you want state sync bootstrapping to be turned on or off? [on, off]: " stateOpt
+done
 if [ "$stateOpt" = "on" ]; then
   echo "State sync will be enabled. Node will not replay the whole C-Chain transaction history,"
   echo "instead it will only download the current chain state."
@@ -421,6 +431,7 @@ echo
 echo "Your node should now be bootstrapping."
 echo "Node configuration file is $HOME/.avalanchego/configs/node.json"
 echo "C-Chain configuration file is $HOME/.avalanchego/configs/chains/C/config.json"
+echo "Plugin directory, for storing subnet VM binaries, is $HOME/avalanche-node/plugins"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"
