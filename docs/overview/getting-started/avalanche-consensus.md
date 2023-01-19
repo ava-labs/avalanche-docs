@@ -44,11 +44,7 @@ acceptance of non-conflicting transactions and the rejection of conflicting tran
 It is guaranteed (with high probability based on system parameters) that if any honest validator
 accepts or rejects a transaction, all honest validators will accept or reject that transaction.
 
-### Video
-
-<div align="center">
-    <b>Deep Dive on the Avalanche Protocol</b>
-</div>
+## Deep Dive Into Avalanche Consensus
 
 <iframe src="https://www.youtube.com/embed/ZUF9sIu-D_k"
         width="100%"
@@ -61,8 +57,6 @@ accepts or rejects a transaction, all honest validators will accept or reject th
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
 </iframe>
-
-## Deep Dive Into Avalanche Consensus
 
 ### Intuition
 
