@@ -302,6 +302,7 @@ wget -nv --show-progress $fileName
 echo "Unpacking node files..."
 mkdir -p $HOME/avalanche-node
 tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
+mkdir -p $HOME/avalanche-node/plugins
 rm avalanchego-linux-*.tar.gz
 echo "Node files unpacked into $HOME/avalanche-node"
 echo
