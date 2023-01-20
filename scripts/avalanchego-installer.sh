@@ -33,7 +33,6 @@ create_service_file () {
 create_config_file () {
   rm -f node.json
   echo "{" >>node.json
-  echo "  \"plugin-dir\": \"$HOME/avalanche-node/plugins\",">>node.json
   if [ "$rpcOpt" = "any" ]; then
     echo "  \"http-host\": \"\",">>node.json
   fi
@@ -302,7 +301,7 @@ wget -nv --show-progress $fileName
 echo "Unpacking node files..."
 mkdir -p $HOME/avalanche-node
 tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
-mkdir -p $HOME/avalanche-node/plugins
+mkdir -p $HOME/.avalanchego/plugins
 rm avalanchego-linux-*.tar.gz
 echo "Node files unpacked into $HOME/avalanche-node"
 echo
@@ -432,7 +431,7 @@ echo
 echo "Your node should now be bootstrapping."
 echo "Node configuration file is $HOME/.avalanchego/configs/node.json"
 echo "C-Chain configuration file is $HOME/.avalanchego/configs/chains/C/config.json"
-echo "Plugin directory, for storing subnet VM binaries, is $HOME/avalanche-node/plugins"
+echo "Plugin directory, for storing subnet VM binaries, is $HOME/.avalanchego/plugins"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"
