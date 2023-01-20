@@ -216,7 +216,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"info.isBootstrapped",
     "params": {
-        "chain":"X"
+        "chain":"P"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
