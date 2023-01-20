@@ -130,7 +130,7 @@ sync Fuji instead of Mainnet.
 
 First, confirm that the node is syncing the Mainnet by running the `info.getNetworkID` command.
 
-#### `info.getNetworkID` Request
+### `info.getNetworkID` Request
 
 ```zsh
 curl -X POST --data '{
@@ -142,7 +142,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### `info.getNetworkID` Response
+### `info.getNetworkID` Response
 
 The returned `networkID` will be 1 which is the network ID for Mainnet.
 
@@ -179,7 +179,7 @@ save the file and restart the Avalanche node via `sudo systemctl restart avalanc
 You can then call the `info.getNetworkID` endpoint to confirm the
 change was successful.
 
-#### `info.getNetworkID` Request
+### `info.getNetworkID` Request
 
 ```zsh
 curl -X POST --data '{
@@ -191,7 +191,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### `info.getNetworkID` Response
+### `info.getNetworkID` Response
 
 The returned `networkID` will be 5 which is the network ID for Fuji.
 
