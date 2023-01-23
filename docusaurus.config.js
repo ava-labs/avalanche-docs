@@ -11,8 +11,8 @@ const config = {
     locales: ["en"],
   },
 
-  title: 'Avalanche Docs',
-  tagline: 'Documentation and Tutorials for Avalanche',
+  title: 'Avalanche Dev Docs',
+  tagline: 'Create Without Limits',
   url: 'https://docs.avax.network',
   baseUrl: '/',
   onBrokenLinks: 'throw',
