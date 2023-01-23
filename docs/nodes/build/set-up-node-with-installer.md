@@ -180,11 +180,12 @@ Do you want the RPC port to be accessible to any or only local network interface
 `any` This setting allows you to send RPC requests to your node
 from a remote machine. 
 
-NOTE: If you choose to allow RPC requests on any network interface you will need 
+:::note NOTE: If you choose to allow RPC requests on any network interface you will need 
 to set up a firewall to only let through RPC requests from known IP addresses, 
 otherwise your node will be accessible to anyone and might be overwhelmed by 
 RPC calls from malicious actors! If you do not plan to use your node to send 
 RPC calls, enter `local` for increased node security.
+:::
 
 The script will then continue with system service creation and finish with starting the service:
 
