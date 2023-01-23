@@ -79,7 +79,7 @@ check the balance to confirm that it worked.
 
 :::tip
 
-ßThis step can be skipped if you are only interesting in how to check the fund
+This step can be skipped if you are only interesting in how to check the fund
 balance on X Chain. It shows how to get the correct address.
 
 :::
