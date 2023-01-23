@@ -10,29 +10,22 @@ Avalanche is an open-source platform for building decentralized applications (Da
 interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate
 the scale of global finance, with near-instant transaction finality.
 
-Avalanche empowers developers to join a rich ecosystem of interoperable and blockchains known as
-Subnets. Subnets allow developers to isolate and scale their applications, enabling customization
-for any use-case. Subnets can be permission-ed or permission-less, allowing Subnet creators to build
-Dapps that support arbitrary levels of privacy and compliance.
+Avalanche empowers developers to join a rich ecosystem of blockchains known as Subnets. Subnets
+are isolated clusters of the Avalanche network that allow any Dapp to run on its own dedicated set
+of nodes, enabling unmatched levels of isolation, fault-tolerance, privacy, and compliance. Each
+Dapp is isolated from other Dapps in the ecosystem, so increased usage on a single Dapp doesn't
+affect other Dapps in their own Subnets in Avalanche.
 
-Avalanche empowers developers to build Dapps in multiple languages through the Virtual Machine (VM)
-framework. VMs are language agnostic, and grant developers rich amounts of flexibility in the
-implementation of their Dapp.
-
-The Avalanche protocol has relatively modest hardware requirements. The protocol is incredibly
-lightweight, and can run on easily accessible consumer-grade hardware.
+In Avalanche, developers can create their Dapps by implementing them as a Virtual Machine (VM).
+EVM developers can build on Avalanche's implementation of the EVM straight out-of-the box, or build
+their own custom VM for advanced use cases. VMs are supported in multiple languages including Go
+and Rust, giving developers unparalleled amounts of flexibility in their implementation.
 
 Avalanche employs a novel proof-of-stake consensus algorithm which offers strong safety guarantees,
 quick finality times, and high throughput, without compromising decentralization. Avalanche
-consensus is incredibly energy-efficient and sustainable, consuming the same amount of energy as 46
-US households. The entire Avalanche network consumes only 0.0005% of the amount of energy consumed
-by Bitcoin.
-
-## AVAX
-
-AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for
-fees, secure the platform through staking, and provide a basic unit of account between the multiple
-Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+consensus is incredibly energy-efficient and sustainable and can run on easily accessible
+consumer-grade hardware, consuming the same amount of energy as 46 US households. The entire
+Avalanche network consumes only 0.0005% of the amount of energy consumed by Bitcoin.
 
 ## Features
 
