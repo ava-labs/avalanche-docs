@@ -267,10 +267,18 @@ contract, but cannot modify other roles.
 `AllowList` adds `adminAddresses` and `enabledAddresses` fields to precompile contract configurations.
 For instance fee manager precompile contract configuration looks like this:
 
+:::warning
+
+An invalid `blockTimestamp` results in the update failing. The `blockTimestamp` value should be set
+to a valid UNIX timestamp value which is in the _future_ relative to the _head of the chain_.
+If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
+
+:::
+ 
 ```json
 {
   "feeManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "adminAddresses": [<list of addresses>],
     "enabledAddresses": [<list of addresses>]
   }
@@ -315,7 +323,7 @@ Subnet, you can provide an `AllowList` configuration in your genesis or upgrade 
 ```json
 {
   "contractDeployerAllowListConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
@@ -363,7 +371,7 @@ field in your genesis or upgrade file:
 ```json
 {
   "contractDeployerAllowListConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
@@ -382,7 +390,7 @@ transactions on chain. Like the previous section, you can activate the precompil
 {
   "config": {
     "txAllowListConfig": {
-      "blockTimestamp": 0,
+      "blockTimestamp": 1684883935,
       "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   }
@@ -426,7 +434,7 @@ through a network upgrade. To use initial configuration, you need to specify add
 ```json
 {
   "txAllowListConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "enabledAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
@@ -444,7 +452,7 @@ can provide `nativeMinterConfig` in genesis:
 {
   "config": {
     "contractNativeMinterConfig": {
-      "blockTimestamp": 0,
+      "blockTimestamp": 1684883935,
       "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   }
@@ -493,7 +501,7 @@ file:
 ```json
 {
   "contractNativeMinterConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "initialMint": {
       "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": "1000000000000000000",
       "0x10037Fb06Ec4aB8c870a92AE3f00cD58e5D484b3": "0xde0b6b3a7640000"
@@ -516,7 +524,7 @@ In order to activate this feature, you will need to provide the `FeeConfigManage
 {
   "config": {
     "feeManagerConfig": {
-      "blockTimestamp": 0,
+      "blockTimestamp": 1684883935,
       "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   }
@@ -594,7 +602,7 @@ activation. To use the initial configuration, you need to specify the fee config
 ```json
 {
   "feeManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "initialFeeConfig": {
       "gasLimit": 20000000,
       "targetBlockRate": 2,
@@ -623,7 +631,7 @@ the genesis file:
 {
   "config": {
     "rewardManagerConfig": {
-      "blockTimestamp": 0,
+      "blockTimestamp": 1684883935,
       "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   }
@@ -714,7 +722,7 @@ In order to allow custom fee recipients, you need to specify the `allowFeeRecipi
 ```json
 {
   "rewardManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "initialRewardConfig": {
       "allowFeeRecipients": true
     }
@@ -728,7 +736,7 @@ In order to set an address to receive all transaction rewards, you need to speci
 ```json
 {
   "rewardManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "initialRewardConfig": {
       "rewardAddress": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
     }
@@ -742,7 +750,7 @@ In order to disable rewards and start burning fees, you need to leave all fields
 ```json
 {
   "rewardManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "initialRewardConfig": {}
   }
 }
@@ -758,7 +766,7 @@ configuration for this case:
 ```json
 {
   "rewardManagerConfig": {
-    "blockTimestamp": 0,
+    "blockTimestamp": 1684883935,
     "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
   }
 }
