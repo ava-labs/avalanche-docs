@@ -216,7 +216,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"info.isBootstrapped",
     "params": {
-        "chain":"X"
+        "chain":"P"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
@@ -455,6 +455,67 @@ testnet and you will no longer see it in the response body for the
 `platform.getPendingValidators` endpoint. Now you will access it via the
 `platform.getCurrentValidators` endpoint.
 
+### `platform.getCurrentValidators` Request
+
+```zsh
+curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc": "2.0",
+    "method": "platform.getCurrentValidators",
+    "params": {
+        "subnetID": "11111111111111111111111111111111LpoYY",
+        "nodeIDs": ["NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5"]
+    },
+    "id": 1
+}'
+```
+
+### `platform.getCurrentValidators` Response
+
+```zsh
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "validators": [
+      {
+        "txID": "2hy57Z7KiZ8L3w2KonJJE1fs5j4JDzVHLjEALAHaXPr6VMeDhk",
+        "startTime": "1673411918",
+        "endTime": "1675313170",
+        "stakeAmount": "1000000000",
+        "nodeID": "NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5",
+        "rewardOwner": {
+          "locktime": "0",
+          "threshold": "1",
+          "addresses": [
+            "P-fuji1tgj2c3k56enytw5d78rt0tsq3lzg8wnftffwk7"
+          ]
+        },
+        "validationRewardOwner": {
+          "locktime": "0",
+          "threshold": "1",
+          "addresses": [
+            "P-fuji1tgj2c3k56enytw5d78rt0tsq3lzg8wnftffwk7"
+          ]
+        },
+        "delegationRewardOwner": {
+          "locktime": "0",
+          "threshold": "1",
+          "addresses": [
+            "P-fuji1tgj2c3k56enytw5d78rt0tsq3lzg8wnftffwk7"
+          ]
+        },
+        "potentialReward": "5400963",
+        "delegationFee": "2.0000",
+        "uptime": "0.0000",
+        "connected": false,
+        "delegators": null
+      }
+    ]
+  },
+  "id": 1
+}
+```
 
 ## Mainnet
 

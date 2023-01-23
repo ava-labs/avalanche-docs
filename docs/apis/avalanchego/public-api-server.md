@@ -247,3 +247,19 @@ Websockets are available for the C-chain and the X-chain.
 
 - For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
 - For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+
+### PublicNode
+
+[PublicNode](https://avalanche.publicnode.com) supports the C-Chain on the Mainnet.
+
+Features:
+
+- Free
+- Globally distributed infrastructure on Allnodes
+- Optimized for speed and reliability - check our page for stats
+
+#### Mainnet
+
+##### HTTPS
+
+- For C-Chain API, the URL is `https://avalanche-evm.publicnode.com`
