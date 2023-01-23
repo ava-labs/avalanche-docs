@@ -270,7 +270,7 @@ For instance fee manager precompile contract configuration looks like this:
 :::warning
 
 An invalid `blockTimestamp` results in the update failing. The `blockTimestamp` value should be set
-to a valid UNIX timestamp value which is in the _future_ relative to the _head of the chain_.
+to a valid Unix timestamp value which is in the _future_ relative to the _head of the chain_.
 If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
 
 :::
