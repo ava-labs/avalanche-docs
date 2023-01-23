@@ -21,7 +21,7 @@ hardware with the following minimum specifications.
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
 - Network: sustained 5Mbps up/down bandwidth
 
-:::NOTE
+:::note
 
 HW requirements shall scale with the amount of AVAX staked on
 the node and/or network activity. Nodes with big stakes (100k+ AVAX) will need more powerful machines
@@ -184,7 +184,7 @@ Do you want the RPC port to be accessible to any or only local network interface
 `any` This setting allows you to send RPC requests to your node
 from a remote machine. 
 
-:::NOTE
+:::note
 
 If you choose to allow RPC requests on any network interface you will need 
 to set up a firewall to only let through RPC requests from known IP addresses, 
