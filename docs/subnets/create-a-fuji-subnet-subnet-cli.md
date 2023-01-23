@@ -19,7 +19,9 @@ In this article, we show how to do the following on Fuji Testnet.
 - Add the same node to the newly created Subnet.
 - Create a blockchain with the specified virtual machine.
 
-:::tip The same steps can be applied on Mainnet, see [here](./subnet-cli.md#network-selection) on
+:::tip 
+
+The same steps can be applied on Mainnet, see [here](./subnet-cli.md#network-selection) on
 how to switch to Mainnet when using `subnet-cli`. Furthermore, you should practice using Ledger by
 following [this](./subnet-cli.md#ledger-support) before deploying on Mainnet.
 
@@ -259,8 +261,12 @@ Example Node Arguments:
 --whitelisted-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
 ```
 
-:::tip `p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of SubnetID, please
-replace it with your correct SubnetID. :::
+:::tip 
+
+`p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz` is an example of SubnetID, please
+replace it with your correct SubnetID.
+
+:::
 
 ## Restart Node
 

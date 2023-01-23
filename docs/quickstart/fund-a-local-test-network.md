@@ -9,7 +9,9 @@ interacting with smart-contracts.
 
 We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain.
 
-:::info This same private key,
+:::info 
+
+This same private key,
 `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to
 sign transactions locally using [AvalancheJS](../apis/avalanchejs/README.md).
 You don't need to import the key into the local keystore in order to access
@@ -22,16 +24,22 @@ how to retrieve the port numbers.
 
 :::
 
-:::warning Keystore APIs are used in this tutorial, as warned in [Keystore
+:::warning 
+
+Keystore APIs are used in this tutorial, as warned in [Keystore
 API](../apis/avalanchego/apis/keystore.md), because the node operator has access
 to your plain-text password, you should only create a keystore user on a node
 that you operate. If that node is breached, you could lose all your tokens.
-Keystore APIs are not recommended for use on Mainnet. :::
+Keystore APIs are not recommended for use on Mainnet. 
+
+:::
 
 ## Create a User
 
 :::tip
+
 This step can be skipped if you are only interesting in how to check the fund balance on X/P/C Chain.
+
 :::
 
 First run
@@ -220,8 +228,12 @@ To see this account on MetaMask, follow these steps:
 
 ### Import Key
 
-:::tip This step can be skipped if you are only interesting in how to check the
-fund balance on P Chain. It just shows how to get the correct address. :::
+:::tip 
+
+This step can be skipped if you are only interesting in how to check the
+fund balance on P Chain. It just shows how to get the correct address. 
+
+:::
 
 Import `ewoq` into the [P-Chain via platform.importKey API](../apis/avalanchego/apis/p-chain.md#platformimportkey).
 
