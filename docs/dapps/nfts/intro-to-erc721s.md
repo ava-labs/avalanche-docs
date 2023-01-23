@@ -104,9 +104,9 @@ This automatically checks the `Ownable` button, which gives the `safeMint`
 function the `onlyOwner` modifier. This modifier indicates that only the owner
 of the smart contract will be able to successfully call the function.
 
-:::info
+:::note
 
-**Note:** This modifier should be removed when creating a smart contract for a
+This modifier should be removed when creating a smart contract for a
 public mint. Otherwise, users wouldn't be able to successfully mint the NFTs
 when calling the `safeMint` function. This tutorial only handles the owner’s
 wallet address, so it is being left in.
