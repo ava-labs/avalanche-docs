@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -52,12 +52,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/Avalanche-OG-Image.png?force-reload-1',
+      image: 'img/Avalanche-OG-Image-1.png?force-reload-1',
       metadata: [
-        {name: 'twitter:card', content: 'summary_large_image'},
-        {name: 'twitter:description', content: 'Avalanche is the fastest smart contracts platform in the blockchain industry, as measured by time-to-finality, and has the most validators securing its activity of any proof-of-stake protocol.'},
-        {name: 'twitter:title', content:'Developer Documentation and Tutorials for Avalanche'},
-        {name: 'keywords', content: 'Developer Documentation and Tutorials for Avalanche'}
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:description', content: 'The fastest, most reliable smart contracts platform in the world. Build anything you want, any way you want, on the eco-friendly blockchain designed for Web3 devs.' },
+        { name: 'twitter:title', content: 'Avalanche Dev Docs: Create Without Limits' },
+        { name: 'keywords', content: 'Avalanche Dev Docs: Create Without Limits' }
       ],
       navbar: {
         title: '',
@@ -77,44 +77,44 @@ const config = {
             position: 'left',
             sidebarId: 'quickStart',
             label: 'Quick Start',
-          },     
+          },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'dapps',
             label: 'DApps',
-          },  
+          },
 
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'subnets',
             label: 'Subnets',
-          }, 
+          },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'apis',
             label: 'APIs',
-          }, 
+          },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'nodes',
             label: 'Nodes',
-          }, 
+          },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'specs',
             label: 'Specs',
-          }, 
+          },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'community',
             label: 'Community',
-          }, 
+          },
           {
             type: 'localeDropdown',
             position: 'right',
@@ -167,7 +167,7 @@ const config = {
             ],
           },
           {
-            
+
           }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Ava Labs, Inc.`,
@@ -184,6 +184,6 @@ const config = {
         contextualSearch: true,
       },
     }),
-};
+}
 
-module.exports = config;
+module.exports = config
