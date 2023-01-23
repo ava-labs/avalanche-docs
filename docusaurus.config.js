@@ -52,7 +52,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/Avalanche-OG-Image-1.png?force-reload-1',
+      image: 'img/Avalanche-OG-Image.png?force-reload-1',
       metadata: [
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:description', content: 'The fastest, most reliable smart contracts platform in the world. Build anything you want, any way you want, on the eco-friendly blockchain designed for Web3 devs.' },
