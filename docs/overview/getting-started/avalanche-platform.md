@@ -14,7 +14,7 @@ of these 3 supported operation types is implemented in its own blockchain.
 
 These 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all validators
 in the Avalanche network and is referred to as the Primary Network. Each Avalanche validator
-validates:
+validates
 the [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain),
 the [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
 the [**Contract Chain (C-Chain**)](#contract-chain-c-chain).
@@ -27,8 +27,8 @@ Network by staking at least 2,000 AVAX.
 
 ## Contract Chain (C-Chain)
 
-The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM) allows for the
-creation and execution of Solidity smart contracts using the
+The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM) and allows for the
+creation and execution of smart contracts written in Solidity using the
 [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md).
 
 The C-Chain is an instance of the Coreth Virtual Machine.
@@ -46,8 +46,8 @@ The P-Chain is an instance of the Platform Virtual Machine.
 
 The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
 Assets**. A smart asset is a representation of a real-world resource (for example, equity, or a
-bond)with sets of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only
-be sent to US citizens." The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
+bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow" or "can
+only be sent to US citizens." The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
 creation and trade of Avalanche Native Assets.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
