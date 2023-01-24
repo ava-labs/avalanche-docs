@@ -4,39 +4,51 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 
 # Avalanche Platform
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), 
-[**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
-[**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are 
-[validated](../../nodes/validate/staking.md) and 
-secured by all Avalanche validators which is also referred as the Primary Network. The Primary 
-Network is a special [Subnet](../../subnets/README.md), and all members of all custom Subnets must
-also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche is a hetereogeneous network of blockchains. As opposed to homogeneous networks, where
+all applications reside in the same chain, heterogeneous networks allow separate chains to be
+created for different applications.
+
+Avalanche is an ecosystem that allows users to execute smart contracts, interact with validators and
+subnets, and exchange assets. Avalanche is designed to support application-specific chains, so each
+of these 3 supported operation types is implemented in its own blockchain.
+
+These 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all validators
+in the Avalanche network and is referred to as the Primary Network. Each Avalanche validator
+validates:
+the [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain),
+the [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
+the [**Contract Chain (C-Chain**)](#contract-chain-c-chain).
 
 ![Primary network](/img/primary-network.png)
 
+The Primary Network is a special [Subnet](../../subnets/README.md) that contains all validators
+(including validators of any custom Subnets). A node can become a validator for the Primary
+Network by staking at least 2,000 AVAX.
+
 ## Contract Chain (C-Chain)
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md).
+The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM) allows for the
+creation and execution of Solidity smart contracts using the
+[C-Chain’s API](../../apis/avalanchego/apis/c-chain.md).
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](./intro.md).
+The C-Chain is an instance of the Coreth Virtual Machine.
 
 ## Platform Chain (P-Chain)
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active
-Subnets, and enables the creation of new Subnets.
+The **P-Chain** is responsible for all validator and subnet-level operations.
+The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) supports the creation of new
+blockchains and subnets, the addition of validators to subnets, staking operations, and other
+platform-level operations.
 
-The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) allows clients to create Subnets, add validators
-to Subnets, and create blockchains.
+The P-Chain is an instance of the Platform Virtual Machine.
 
 ## Exchange Chain (X-Chain)
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a
-representation of a real-world resource (for example, equity, bonds) with a set of rules that 
-govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
+The **X-Chain** is responsible for operations on digital smart assets known as "Avalanche Native
+Assets". A smart asset is a representation of a real-world resource (for example, equity, or a bond)
+with sets of rules that govern its behavior, like"can’t be traded until tomorrow" or "can only be
+sent to US citizens."The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
+creation and trade of Avalanche Native Assets.
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, 
+One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
 you pay a fee denominated in AVAX.
-
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The 
-[X-Chain API](../../apis/avalanchego/apis/x-chain.md) allows clients to create and trade assets on 
-the X-Chain and other instances of the AVM.
