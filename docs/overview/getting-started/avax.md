@@ -1,14 +1,12 @@
-# AVAX
-
 # Overview
 
 AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to 
 pay for fees, secure the platform through staking, and provide a basic unit of account between the
 multiple Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
-## Utility
+# AVAX
 
-AVAX is a non-renewable resource (analagous to oil) that's used to power the Avalanche network. 
+AVAX is a non-renewable resource (analogous to oil) that's used to power the Avalanche network.
 AVAX is used for day-to-day operations in Avalanche such as staking and issuing transactions.
 
 AVAX represents the weight that each node has in network decisions. No single actor owns 
