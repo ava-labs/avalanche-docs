@@ -2516,9 +2516,13 @@ testnet and 7 AM EDT, May 10th 2021 on Mainnet.
 
 **Apricot Phase 1 - Patch 2**
 
-:::danger This update is backwards compatible. It is optional, but encouraged.
+:::danger 
+
+This update is backwards compatible. It is optional, but encouraged.
 The patch includes security improvements, bug fixes, and monitoring
-improvements. :::
+improvements. 
+
+:::
 
 **Security Improvements**
 

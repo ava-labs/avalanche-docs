@@ -13,8 +13,7 @@ installs](#unattended-installation).
 ## Before You Start
 
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity
-hardware with the following minimum specifications. Note that as network usage
-increases, hardware requirements may change.
+hardware with the following minimum specifications. 
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
@@ -22,9 +21,13 @@ increases, hardware requirements may change.
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
 - Network: sustained 5Mbps up/down bandwidth
 
-Please note that HW requirements shall scale with the amount of AVAX staked on
-the node. Nodes with big stakes (100k+ AVAX) will need more powerful machines
+:::note
+
+HW requirements shall scale with the amount of AVAX staked on
+the node and/or network activity. Nodes with big stakes (100k+ AVAX) will need more powerful machines
 than listed, and will use more bandwidth as well.
+
+:::
 
 This install script assumes:
 
@@ -177,14 +180,19 @@ be prompted:
 Do you want the RPC port to be accessible to any or only local network interface? [any, local]:
 ```
 
-If you're OK with sending RPC requests only from the node machine itself, enter
-`local` at the prompt. If you want to be able to send RPC requests to your node
-from a remote machine, enter `any`. Please note that if you choose to allow RPC
-requests on any network interface you will need to set up a firewall to only let
-through RPC requests from known IP addresses, otherwise your node will be
-accessible to anyone and might be overwhelmed by RPC calls from malicious
-actors! If you do not plan to use your node to send RPC calls, enter `local` for
-increased node security.
+`local` This setting only allows RPC requests from the node machine itself.
+`any` This setting allows you to send RPC requests to your node
+from a remote machine. 
+
+:::note
+
+If you choose to allow RPC requests on any network interface you will need 
+to set up a firewall to only let through RPC requests from known IP addresses, 
+otherwise your node will be accessible to anyone and might be overwhelmed by 
+RPC calls from malicious actors! If you do not plan to use your node to send 
+RPC calls, enter `local` for increased node security.
+
+:::
 
 The script will then continue with system service creation and finish with starting the service:
 
