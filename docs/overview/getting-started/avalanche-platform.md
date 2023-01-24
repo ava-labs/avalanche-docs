@@ -4,12 +4,12 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 
 # Avalanche Platform
 
-Avalanche is a hetereogeneous network of blockchains. As opposed to homogeneous networks, where
+Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
 created for different applications.
 
 Avalanche is an ecosystem that allows users to execute smart contracts, interact with validators and
-subnets, and exchange assets. Avalanche is designed to support application-specific chains, so each
+Subnets, and exchange assets. Avalanche is designed to support application-specific chains, so each
 of these 3 supported operation types is implemented in its own blockchain.
 
 These 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all validators
@@ -35,19 +35,19 @@ The C-Chain is an instance of the Coreth Virtual Machine.
 
 ## Platform Chain (P-Chain)
 
-The **P-Chain** is responsible for all validator and subnet-level operations.
+The **P-Chain** is responsible for all validator and Subnet-level operations.
 The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) supports the creation of new
-blockchains and subnets, the addition of validators to subnets, staking operations, and other
+blockchains and Subnets, the addition of validators to Subnets, staking operations, and other
 platform-level operations.
 
 The P-Chain is an instance of the Platform Virtual Machine.
 
 ## Exchange Chain (X-Chain)
 
-The **X-Chain** is responsible for operations on digital smart assets known as "Avalanche Native
-Assets". A smart asset is a representation of a real-world resource (for example, equity, or a bond)
-with sets of rules that govern its behavior, like"can’t be traded until tomorrow" or "can only be
-sent to US citizens."The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
+The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
+Assets**. A smart asset is a representation of a real-world resource (for example, equity, or a
+bond)with sets of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only
+be sent to US citizens." The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
 creation and trade of Avalanche Native Assets.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
