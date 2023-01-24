@@ -23,8 +23,7 @@ The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche
 ## Platform Chain (P-Chain)
 
 The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active
-Subnets, and enables the creation of new Subnets. The P-Chain implements 
-the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+Subnets, and enables the creation of new Subnets.
 
 The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) allows clients to create Subnets, add validators
 to Subnets, and create blockchains.
