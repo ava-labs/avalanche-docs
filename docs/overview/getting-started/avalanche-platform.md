@@ -52,3 +52,5 @@ creation and trade of Avalanche Native Assets.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
 you pay a fee denominated in AVAX.
+
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The
