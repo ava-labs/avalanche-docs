@@ -25,9 +25,9 @@ consensus is incredibly energy-efficient and sustainable and can run on easily a
 consumer-grade hardware, consuming the same amount of energy as 46 US households. The entire
 Avalanche network consumes only 0.0005% of the amount of energy consumed by Bitcoin.
 
-# Building on Avalanche
+## Building on Avalanche
 
-## Virtual Machines
+### Virtual Machines
 
 Avalanche allows developers to build Dapps through the Virtual Machine (VM) framework. VMs are 
 language agnostic and give developers unmatched levels of flexibility and customization in the
@@ -35,16 +35,16 @@ implementation of their applications.
 
 To learn more about VMs, click [here](/docs/overview/getting-started/virtual-machines.md).
 
-## Subnets
+### Subnets
 
 Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite
 amount of interoperable Dapps in its ecosystem.
 
 To learn more about Subnets, click [here](/docs/subnets/README.md).
 
-# Technology
+## Technology
 
-## Consensus
+### Consensus
 
 Avalanche uses a revolutionary proof-of-stake consensus algorithm that is scalable, robust, and
 energy-efficient. Avalanche consensus offers stronger security guarantees well-above the 51%
