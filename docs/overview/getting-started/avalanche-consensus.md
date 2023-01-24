@@ -123,7 +123,6 @@ Random changes in preference, caused by random sampling, cause a network prefere
 which begets more network preference for that choice until it becomes irreversible and then the
 nodes can decide.
 
-
 :::info
 
 For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow) 
