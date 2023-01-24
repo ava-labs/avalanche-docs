@@ -33,7 +33,7 @@ abstraction for application logic in form of VMs. VMs define a blueprint for how
 should behave, and Avalanche uses this blueprint to coordinate validators in the network to run 
 the application defined by the VM.
 
-VMs communicate with Avalanche over a langauge agnostic request-response protocol known as
+VMs communicate with Avalanche over a language agnostic request-response protocol known as
 [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to 
 open a world of endless possibilities to developers, as developers can implement their Dapps using 
 the languages, frameworks, and libraries of their choice. Solidity is supported through an EVM
