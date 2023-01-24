@@ -12,9 +12,9 @@ All Avalanche validators as members of the Avalanche primary network are require
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
   Assets.
 
-Validators are able to install additional VMs on their node to validate additional subnets in
+Validators are able to install additional VMs on their node to validate additional Subnets in
 the Avalanche ecosystem. In exchange, validators can receive staking rewards in the form of the
-subnets' native gas tokens.
+Subnets' native gas tokens.
 
 To learn more about Subnets, click [here](/docs/subnets/README.md).
 
