@@ -14,8 +14,8 @@ All Avalanche validators as members of the Avalanche primary network are require
   Assets.
 
 Validators are able to install additional VMs on their node to validate additional Subnets in
-the Avalanche ecosystem. In exchange, validators can receive staking rewards in the form of the
-Subnets' native gas tokens.
+the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of the Subnets'
+native gas tokens.
 
 To learn more about Subnets, click [here](/docs/subnets/README.md).
 
@@ -53,9 +53,9 @@ Truffle, and more.
 
 To learn more about smart contract support, click [here](/docs/dapps/launch-your-ethereum-dapp.md).
 
-### Examples
+## Examples
 
-#### Golang
+### Golang
 
 - [Coreth](https://github.com/ava-labs/coreth)
   - An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart
@@ -73,12 +73,12 @@ To learn more about smart contract support, click [here](/docs/dapps/launch-your
 - [XSVM](https://github.com/ava-labs/xsvm)
   - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-##### Tutorials
+#### Tutorials
 
 - [How to Build a Simple Golang VM](https://docs.avax.network/subnets/create-a-vm-timestampvm)
 - [How to Build a Complex Golang VM](https://docs.avax.network/subnets/create-a-vm-blobvm)
 
-#### Rust
+### Rust
 
 The following VMs were built using Rust via the [Avalanche Rust SDK](https://crates.io/crates/avalanche-types)
 
@@ -89,6 +89,6 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
 - [BulletproofVM](https://github.com/usmaneth/BulletproofVM)
   - Allows the execution of transactions on Avalanche using Bulletproof zero-knowledge proofs
 
-##### Tutorials
+#### Tutorials
 
 - [How to Build a Simple Rust VM](https://docs.avax.network/subnets/create-a-simple-rust-vm)
