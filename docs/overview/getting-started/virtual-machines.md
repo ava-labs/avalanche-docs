@@ -80,7 +80,7 @@ To learn more about smart contract support, click [here](/docs/dapps/launch-your
 
 #### Rust
 
-The following VMs were built using Rust via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
+The following VMs were built using Rust via the [Avalanche Rust SDK](https://crates.io/crates/avalanche-types)
 
 - [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
   - A Rust implementation of TimestampVM
