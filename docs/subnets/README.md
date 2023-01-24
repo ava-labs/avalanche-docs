@@ -95,54 +95,6 @@ Think of a VM as a blueprint for a blockchain; you can use the same VM to create
 many blockchains, each of which follows the same rule-set but is logically
 independent of other blockchains.
 
-### Why Virtual Machines?
-
-At first, blockchain networks had one Virtual Machine (VM) with a pre-defined,
-static set of functionality. This rigid, monolithic design limited what
-blockchain-based applications one could run on such networks.
-
-People who wanted custom decentralized applications had to create their own,
-entirely new blockchain network from scratch. Doing so required a great deal of
-time and effort, offered limited security, and generally resulted in a bespoke,
-fragile blockchain that never got off the ground.
-
-Ethereum made a step toward solving this problem with smart contracts.
-Developers didn’t need to worry about networking and consensus, but creating
-decentralized applications was still hard. The Ethereum VM has low performance
-and imposes restrictions on smart contract developers. Solidity and the other
-few languages for writing Ethereum smart contracts are unfamiliar to most
-programmers.
-
-Avalanche Virtual Machines make it easy to define a blockchain-based decentralized
-application. Rather than new, limited languages like Solidity, developers can
-write VMs in Go (other languages will be supported in the future).
-
-### Example Virtual Machines
-
-The following VMs were built using Go
-
-- [Coreth](https://github.com/ava-labs/coreth)
-- [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
-- [SpacesVM](https://github.com/ava-labs/spacesvm)
-- [BlobVM](https://github.com/ava-labs/blobvm)
-- [TimestampVM](https://github.com/ava-labs/timestampvm)
-- [XSVM](https://github.com/ava-labs/xsvm)
-
-More info:
-
-- [How to Build a Simple Golang VM](https://docs.avax.network/subnets/create-a-vm-timestampvm)
-- [How to Build a Complex Golang VM](https://docs.avax.network/subnets/create-a-vm-blobvm)
-
-The following VMs were built using Rust via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
-
-- [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
-- [SpacesVM RS](https://github.com/ava-labs/spacesvm-rs)
-- [BulletproofVM](https://github.com/usmaneth/BulletproofVM)
-
-More info:
-
-- [How to Build a Simple Rust VM](https://docs.avax.network/subnets/create-a-simple-rust-vm)
-
 ## Developing Your Own Subnet
 
 Please check out documents listed on the left panel to develop your own Subnets

@@ -1,11 +1,9 @@
-# Overview
+# Virtual Machines
 
 Avalanche allows developers to implement their Dapp in the language of their choice using the 
 Virtual Machine (VM) framework. VMs define blockchains, and serve as application-level blueprints 
 for how blockchains are created.
 
-The VM framework is language agnostic, and currently supports the implementation of Dapps in 
-popular languages like Solidity, Golang, and Rust.
 
 ## Validators
 
@@ -21,7 +19,7 @@ subnets' native gas tokens.
 
 To learn more about Subnets, click [here](/docs/subnets/README.md).
 
-## Virtual Machines
+## Building on Virtual Machines
 
 Previously, most blockchain ecosystems required developers to implement their applications in 
 the smart-contract language supported natively by the ecosystem. This causes pain for developers,
@@ -39,7 +37,9 @@ the application defined by the VM.
 VMs communicate with Avalanche over a langauge agnostic request-response protocol known as
 [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to 
 open a world of endless possibilities to developers, as developers can implement their Dapps using 
-the languages, frameworks, and libraries of their choice.
+the languages, frameworks, and libraries of their choice. Solidity is supported through an EVM
+compatible VM known as the Subnet-EVM, and custom VMs can be implemented in multiple popular
+languages like Golang and Rust.
 
 ## Solidity
 
@@ -52,3 +52,43 @@ Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix,
 Truffle, and more.
 
 To learn more about smart contract support, click [here](/docs/dapps/launch-your-ethereum-dapp.md).
+
+### Examples
+
+#### Golang
+
+- [Coreth](https://github.com/ava-labs/coreth)
+  - An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart
+  contracts.
+- [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
+  - An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart
+  contracts
+- [SpacesVM](https://github.com/ava-labs/spacesvm)
+  - An authenticated, hierarchical key-value store w/EIP-712 compatibility, state expiry, and
+  fee-based metering
+- [BlobVM](https://github.com/ava-labs/blobvm)
+  - A content-addressable key-value store w/EIP-712 compatibility and fee-based metering
+- [TimestampVM](https://github.com/ava-labs/timestampvm)
+  - A decentralized timestamp server
+- [XSVM](https://github.com/ava-labs/xsvm)
+  - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
+
+##### Tutorials
+
+- [How to Build a Simple Golang VM](https://docs.avax.network/subnets/create-a-vm-timestampvm)
+- [How to Build a Complex Golang VM](https://docs.avax.network/subnets/create-a-vm-blobvm)
+
+#### Rust
+
+The following VMs were built using Rust via the [Avalanche RustSDK](https://crates.io/crates/avalanche-types)
+
+- [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
+  - A Rust implementation of TimestampVM
+- [SpacesVM RS](https://github.com/ava-labs/spacesvm-rs)
+  - A Rust implementation of SpacesVM
+- [BulletproofVM](https://github.com/usmaneth/BulletproofVM)
+  - Allows the execution of transactions on Avalanche using Bulletproof zero-knowledge proofs
+
+##### Tutorials
+
+- [How to Build a Simple Rust VM](https://docs.avax.network/subnets/create-a-simple-rust-vm)
