@@ -6,6 +6,19 @@
 
 :::
 
+## V1.9.8 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.8)
+
+**Banff.8 - MerkleDB Alpha
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `22`.
+
+**Fixes**
+
+- Fix 1
+- Fix 2
+
 ## V1.9.7 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.7)
 
 **Banff.7 - Subnet Validator Look-ups**
