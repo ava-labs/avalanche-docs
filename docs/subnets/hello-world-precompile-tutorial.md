@@ -778,12 +778,43 @@ contract ExampleHelloWorld {
 
 Please note that this contract is simply a wrapper and is calling the precompile functions.
 
+### Building AvalnacheGo and Subnet-EVM
+
+Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary. Since this is a developer tutorial, we will assume that you're alright with building from source.
+
+First, refer to [AvalancheGo](https://github.com/ava-labs/avalanchego) to build from source. Be sure to set up your `$GOPATH` and build AvalancheGo within the expected directory: `$GOPATH/src/github.com/ava-labs/avalanchego`. Subnet-EVM's build script will assume that AvalancheGo creates a build directory here.
+
+After you've followed the instructions in the AvalancheGo README. You should be able to confirm that you've created an AvalancheGo binary in the right location with:
+
+```bash
+$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego --version
+```
+
+This should print something like the following (if you are running AvalancheGo v1.9.7):
+
+```
+avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
+```
+
+Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary with the build script:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
+./scripts/build.sh
+```
+
+This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default at the filepath:
+
+`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+
+The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
+
 ### Step 7: Add Precompile Solidity Tests
 
 #### Step 7.1: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
-copied and pasted into a new file called `ExampleHelloWorld.ts`:
+copied and pasted into a new file called `hello_world.ts`:
 
 ```js
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
@@ -830,17 +861,11 @@ Let's also make sure to run yarn in `./contract-examples`
 yarn
 ```
 
-Let's see if our test contract passes! We need to get a local network up and running. A local
-network will start up multiple blockchains. Blockchains are nothing but instances of VMs. So
- when we get the local network up and running, we will get the X, C, and P chains up (primary network)
- as well as another blockchain that follows the rules defined by the Subnet-EVM.
-
 #### Step 7.2: Add Genesis
 
-To spin up these blockchains, we actually need to create and modify the genesis to enable our
-HelloWorld precompile. This genesis defines some basic configs for the Subnet-EVM blockchain.
-Please and copy and paste the below code snippet (genesis) into `/tmp/subnet-evm-genesis.json`.
-Note this should not be in your repository, but rather in the `/tmp` directory.
+To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated, so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
+
+Note: it's important that this has the same name as the HardHat test file we created in Step 7.1.
 
 ```json
 {
@@ -923,9 +948,58 @@ type PrecompileUpgrade struct {
 
 <!-- markdownlint-enable MD013 -->
 
-#### Step 7.3: Launch Local Network
+#### Step 7.3: Declaring the HardHat E2E Test
 
-Now we can get the network up and running.
+Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
+
+At the bottom of the file you will see the following code commented out:
+
+```go
+	// TODO: can we refactor this so that it automagically checks to ensure each hardhat test file matches the name of a hardhat genesis file
+	// and then runs the hardhat tests for each one without forcing precompile developers to modify this file.
+	// ADD YOUR PRECOMPILE HERE
+	/*
+		ginkgo.It("your precompile", ginkgo.Label("precompile"), ginkgo.Label("your-precompile"), func() {
+			ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+			defer cancel()
+
+			// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
+			// and the test file in ./contract-examples/tests/{your_precompile}.ts
+			utils.ExecuteHardHatTestOnNewBlockchain(ctx, "your_precompile")
+		})
+	*/
+```
+
+You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`. The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used to find both the HardHat test file to execute and the genesis file, which is why you need to use the same name for both.
+
+After modifying the `It` node, it should look like the following (you can copy and paste this directly if you prefer):
+
+```go
+	ginkgo.It("hello world", ginkgo.Label("precompile"), ginkgo.Label("hello-world"), func() {
+		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+		defer cancel()
+
+		utils.ExecuteHardHatTestOnNewBlockchain(ctx, "hello_world")
+	})
+```
+
+Now that we've set up the new ginkgo test, you can run your new ginkgo test from the root of the Subnet-EVM directory with the command:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
+GINKGO_LABEL_FILTER=hello-world ./scripts/run_ginkgo.sh
+```
+
+You should be able to see the output of your HardHat test in the output like so:
+
+```
+TODO
+```
+
+### Step 8: Running a Local Network
+
+We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
+with the Hello World precompile activated.
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
 [this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche
@@ -939,26 +1013,7 @@ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-The next steps are to build the Subnet-EVM binary with all the latest precompile changes and the
-latest AvalancheGo Binary.
-
-In another terminal tab run this command in the root of the Subnet-EVM repository to get the latest local
-Subnet-EVM binary. This build script will place the binary in `AVALANCHEGO_PLUGIN_PATH` which we
-will define later:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/subnet-evm
-./scripts/build.sh
-```
-
-Leave the Subnet-EVM repository. Go to the AvalancheGo repository in whatever directory you keep
-repositories and run the command below to get the latest AvalancheGo binary. The following commands
-build and copy the binary to the `AVALANCHEGO_EXEC_PATH` which we will define later:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/avalanchego
-./scripts/build.sh
-```
+Since we already compiled AvalancheGo and Subnet-EVM in a previous step, we should have the AvalancheGo and Subnet-EVM binaries
 
 We can now set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest AvalancheGo binary
 we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the
@@ -991,107 +1046,6 @@ If the network startup is successful then you should see something like this:
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9654/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9656/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9658/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
-```
-
-#### Step 7.4: Modify Hardhat Config
-
-Sweet! Now we have blockchain RPCs that can be used to talk to the network!
-
-We also need to make sure `localRPC` points to the right value.
-
-Let's copy `local_rpc.example.json` which is located in `./contract-examples`:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/subnet-evm/contract-examples
-cp local_rpc.example.json local_rpc.json
-```
-
-Now in `local_rpc.json` we can modify the RPC URL to the one we just created. We can also set
-`chainId` to match the one in the genesis file. It should look something like this:
-
-```json
-{
-  "rpc": "http://127.0.0.1:9656/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU/rpc",
-  "chainId": 99999
-}
-```
-
-#### Step 7.5: Run Tests
-
-Going to `./contract-examples`, we can finally run our tests by running the command below:
-
-```bash
-npx hardhat test --network local
-```
-
-Great the `Hello World` tests passed! All the functions implemented in the precompile work as
-expected! Other precompile tests will fail as their precompiles are not enabled. We only enabled
-the `Hello World` precompile in the genesis!
-
-If your tests failed, please retrace your steps. Most likely the error is that the precompile was
-not enabled and some code is missing. Please also use the
-[official tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1)
-to double check your work as well.
-
-### Step 8: Create Genesis
-
-We can move our genesis file we created in the last step to `./tests/e2e/genesis/hello_world.json`:
-
-```bash
-cp /tmp/subnet-evm-genesis.json $GOPATH/src/github.com/ava-labs/subnet-evm/tests/e2e/genesis/hello_world.json
-```
-
-### Step 9: Add E2E Tests
-
-In `./tests/e2e/solidity/suites.go` we can now write our first e2e test! The below code snippet can
-be copied and pasted to add the new test:
-
-```go
-ginkgo.It("hello world", func() {
-		err := startSubnet("./tests/e2e/genesis/hello_world.json")
-		gomega.Expect(err).Should(gomega.BeNil())
-		running := runner.IsRunnerUp()
-		gomega.Expect(running).Should(gomega.BeTrue())
-		runHardhatTests("./test/ExampleHelloWorld.ts")
-		stopSubnet()
-		running = runner.IsRunnerUp()
-		gomega.Expect(running).Should(gomega.BeFalse())
-	})
-
-	// ADD YOUR PRECOMPILE HERE
-	/*
-			ginkgo.It("your precompile", ginkgo.Label("solidity-with-npx"), func() {
-			err := startSubnet("./tests/e2e/genesis/{your_precompile}.json")
-			gomega.Expect(err).Should(gomega.BeNil())
-			running := runner.IsRunnerUp(grpcEp)
-			gomega.Expect(running).Should(gomega.BeTrue())
-			runHardhatTests("./test/{YourPrecompileTest}.ts")
-			stopSubnet()
-			running = runner.IsRunnerUp(grpcEp)
-			gomega.Expect(running).Should(gomega.BeFalse())
-		})
-	*/
-```
-
-### Step 10: Run E2E Test
-
-We also need to modify the genesis in `./scripts/run.sh` to enable our precompile.
-Copy and paste the code snippet below and add it to the genesis located in `./scripts/run.sh`:
-
-```json
-"helloWorldConfig": {
-  "blockTimestamp": 0
-},
-```
-
-Kill any previous avalanche processes from the previous steps.
-Now we can run our script with some flags specified:
-
-```bash
-pkill avalanche
-
-cd $GOPATH/src/github.com/ava-labs/subnet-evm
-SKIP_NETWORK_RUNNER_START=true SKIP_NETWORK_RUNNER_SHUTDOWN=true ENABLE_SOLIDITY_TESTS=true scripts/run.sh
 ```
 
 ### Conclusion
