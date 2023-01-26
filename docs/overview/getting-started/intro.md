@@ -51,3 +51,4 @@ energy-efficient. Avalanche consensus offers stronger security guarantees well-a
 standard of other networks.
 
 To learn more about consensus, click [here](/docs/overview/getting-started/avalanche-consensus.md).
+
