@@ -778,16 +778,21 @@ contract ExampleHelloWorld {
 
 Please note that this contract is simply a wrapper and is calling the precompile functions.
 
-### Building AvalnacheGo and Subnet-EVM
+### Step 7: Building AvalancheGo and Subnet-EVM
 
-Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary. Since this is a developer tutorial, we will assume that you're alright with building from source.
+Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
 
-First, refer to [AvalancheGo](https://github.com/ava-labs/avalanchego) to build from source. Be sure to set up your `$GOPATH` and build AvalancheGo within the expected directory: `$GOPATH/src/github.com/ava-labs/avalanchego`. Subnet-EVM's build script will assume that AvalancheGo creates a build directory here.
-
-After you've followed the instructions in the AvalancheGo README. You should be able to confirm that you've created an AvalancheGo binary in the right location with:
+You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
 
 ```bash
-$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego --version
+cd $GOPATH/src/github.com/ava-labs/avalanchego
+./scripts/build.sh
+```
+
+Once you've built AvalancheGo, you can confirm that it was successful by printing the version:
+
+```bash
+./build/avalanchego --version
 ```
 
 This should print something like the following (if you are running AvalancheGo v1.9.7):
@@ -796,7 +801,7 @@ This should print something like the following (if you are running AvalancheGo v
 avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
 ```
 
-Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary with the build script:
+Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -809,9 +814,9 @@ This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugi
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
 
-### Step 7: Add Precompile Solidity Tests
+### Step 8: Add Precompile Solidity Tests
 
-#### Step 7.1: Add Hardhat Test
+#### Step 8.1: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
 copied and pasted into a new file called `hello_world.ts`:
@@ -861,11 +866,11 @@ Let's also make sure to run yarn in `./contract-examples`
 yarn
 ```
 
-#### Step 7.2: Add Genesis
+#### Step 8.2: Add Genesis
 
 To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated, so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
 
-Note: it's important that this has the same name as the HardHat test file we created in Step 7.1.
+Note: it's important that this has the same name as the HardHat test file we created in Step 8.1.
 
 ```json
 {
@@ -948,7 +953,7 @@ type PrecompileUpgrade struct {
 
 <!-- markdownlint-enable MD013 -->
 
-#### Step 7.3: Declaring the HardHat E2E Test
+#### Step 8.3: Declaring the HardHat E2E Test
 
 Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
 
@@ -959,7 +964,7 @@ At the bottom of the file you will see the following code commented out:
 	// and then runs the hardhat tests for each one without forcing precompile developers to modify this file.
 	// ADD YOUR PRECOMPILE HERE
 	/*
-		ginkgo.It("your precompile", ginkgo.Label("precompile"), ginkgo.Label("your-precompile"), func() {
+		ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
 			ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 			defer cancel()
 
@@ -975,7 +980,7 @@ You should copy and paste the ginkgo `It` node and update from `{your_precompile
 After modifying the `It` node, it should look like the following (you can copy and paste this directly if you prefer):
 
 ```go
-	ginkgo.It("hello world", ginkgo.Label("precompile"), ginkgo.Label("hello-world"), func() {
+	ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 		defer cancel()
 
@@ -983,7 +988,9 @@ After modifying the `It` node, it should look like the following (you can copy a
 	})
 ```
 
-Now that we've set up the new ginkgo test, you can run your new ginkgo test from the root of the Subnet-EVM directory with the command:
+Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the `GINKGO_LABEL_FILTER`. This enviroment variable is passed as a flag to ginkgo in `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
+
+To run ONLY the HelloWorld precompile test, run the command:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -996,7 +1003,7 @@ You should be able to see the output of your HardHat test in the output like so:
 TODO
 ```
 
-### Step 8: Running a Local Network
+### Step 9: Running a Local Network
 
 We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
@@ -1013,7 +1020,8 @@ avalanche-network-runner server \
 --grpc-gateway-port=":8081"
 ```
 
-Since we already compiled AvalancheGo and Subnet-EVM in a previous step, we should have the AvalancheGo and Subnet-EVM binaries
+Since we already compiled AvalancheGo and Subnet-EVM in a previous step, we should have the
+AvalancheGo and Subnet-EVM binaries ready to go.
 
 We can now set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest AvalancheGo binary
 we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the
@@ -1034,7 +1042,7 @@ avalanche-network-runner to spin up some nodes that run the latest version of Su
   --number-of-nodes=5 \
   --avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
   --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
-  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "/tmp/subnet-evm-genesis.json"}]'
+  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "/$GOPATH/src/github.com/ava-labs/subnet-evm/tests/precompile/genesis/hello_world.json"}]'
 ```
 
 We can look at the server terminal tab and see it booting up the local network.
