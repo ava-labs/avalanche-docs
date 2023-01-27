@@ -865,7 +865,7 @@ yarn
 
 #### Step 8.2: Add Genesis
 
-To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated,
+To run our HardHat test, we will need to create a Subnet that has the `Hello World` precompile activated,
 so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
 
 Note: it's important that this has the same name as the HardHat test file we created in Step 8.1.
