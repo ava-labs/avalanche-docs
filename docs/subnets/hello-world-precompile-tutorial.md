@@ -777,7 +777,8 @@ Please note that this contract is simply a wrapper and is calling the precompile
 
 Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
 
-You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
+You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
+the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -803,7 +804,8 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh
 ```
 
-This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default at the file path:
+This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default
+at the file path:
 
 `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
 
@@ -974,9 +976,11 @@ At the bottom of the file you will see the following code commented out:
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
 The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
-to find both the HardHat test file to execute and the genesis file, which is why you need to use the same name for both.
+to find both the HardHat test file to execute and the genesis file, which is why you need to use the
+same name for both.
 
-After modifying the `It` node, it should look like the following (you can copy and paste this directly if you prefer):
+After modifying the `It` node, it should look like the following (you can copy and paste this
+directly if you prefer):
 
 ```go
 	ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
@@ -987,9 +991,9 @@ After modifying the `It` node, it should look like the following (you can copy a
 	})
 ```
 
-Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the `GINKGO_LABEL_FILTER`.
-This enviroment variable is passed as a flag to ginkgo in `./scripts/run_ginkgo.sh` and restricts what tests will run
-to only the tests with a matching label.
+Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
+`GINKGO_LABEL_FILTER`. This enviroment variable is passed as a flag to ginkgo in
+`./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
 
 To run ONLY the HelloWorld precompile test, run the command:
 
@@ -1040,7 +1044,8 @@ INFO [01-27|10:34:06.003] AvalancheGo node is healthy
 [BeforeSuite] PASSED [15.002 seconds]
 ```
 
-After the `BeforeSuite` completes successfully, it will skip all but the `HelloWorld` labeled precompile test:
+After the `BeforeSuite` completes successfully, it will skip all but the `HelloWorld` labeled
+precompile test:
 
 ```bash
 S [SKIPPED]
