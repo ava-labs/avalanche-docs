@@ -1150,7 +1150,7 @@ with the Hello World precompile activated.
 
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
-[this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche
+[this link](./network-runner.md) for more information on Avalanche
 Network Runner, how to download it, and how to use it. The server will be on "listening" mode
 waiting for API calls.
 
