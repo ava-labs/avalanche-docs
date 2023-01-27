@@ -68,39 +68,3 @@ protocol](./#avalanche-consensus-protocol). Both
 [P-Chain](overview/getting-started/avalanche-platform.md#platform-chain-p-chain) and
 [C-Chain](overview/getting-started/avalanche-platform.md#contract-chain-c-chain) implement the
 Snowman consensus protocol.
-
-## Key Features
-
-### Speed
-
-Uses a novel consensus protocol, developed by a team of Cornell computer scientists, and is able to
-permanently confirm transactions in under 1 second.
-
-### Scalability
-
-Capable of 4,500 transactions per second-an order of magnitude greater than existing blockchains.
-
-### Security
-
-Ensures stronger security guarantees well-above the 51% standard of other networks.
-
-### Flexibility
-
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
-
-### Sustainability
-
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
-
-### Smart Contract Support
-
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix,
-MetaMask, Truffle, and more.
-
-### Private and Public Blockchains
-
-Create your own public or private blockchains.
-
-### Designed for Finance
-
-Native support for easily creating and trading digital smart assets with complex, custom rule-sets.
