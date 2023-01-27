@@ -885,7 +885,7 @@ yarn
 
 #### Step 8.2: Add Genesis
 
-To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated,
+To run our HardHat test, we will need to create a Subnet that has the `Hello World` precompile activated,
 so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
 
 Note: it's important that this has the same name as the HardHat test file we created in Step 8.1.
@@ -1175,7 +1175,7 @@ with the Hello World precompile activated.
 
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
-[this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche
+[this link](./network-runner.md) for more information on Avalanche
 Network Runner, how to download it, and how to use it. The server will be on "listening" mode
 waiting for API calls.
 
