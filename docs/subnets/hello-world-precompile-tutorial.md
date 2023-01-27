@@ -803,7 +803,7 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh
 ```
 
-This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default at the filepath:
+This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default at the file path:
 
 `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
 
