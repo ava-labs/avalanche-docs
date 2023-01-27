@@ -863,7 +863,8 @@ yarn
 
 #### Step 8.2: Add Genesis
 
-To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated, so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
+To run our HardHat test, we will need to create a Subnet that has the Hello World precompile activated,
+so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
 
 Note: it's important that this has the same name as the HardHat test file we created in Step 8.1.
 
@@ -950,7 +951,8 @@ type PrecompileUpgrade struct {
 
 #### Step 8.3: Declaring the HardHat E2E Test
 
-Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
+Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running
+the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
 
 At the bottom of the file you will see the following code commented out:
 
@@ -970,7 +972,9 @@ At the bottom of the file you will see the following code commented out:
 	*/
 ```
 
-You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`. The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used to find both the HardHat test file to execute and the genesis file, which is why you need to use the same name for both.
+You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
+The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+to find both the HardHat test file to execute and the genesis file, which is why you need to use the same name for both.
 
 After modifying the `It` node, it should look like the following (you can copy and paste this directly if you prefer):
 
@@ -983,7 +987,9 @@ After modifying the `It` node, it should look like the following (you can copy a
 	})
 ```
 
-Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the `GINKGO_LABEL_FILTER`. This enviroment variable is passed as a flag to ginkgo in `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
+Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the `GINKGO_LABEL_FILTER`.
+This enviroment variable is passed as a flag to ginkgo in `./scripts/run_ginkgo.sh` and restricts what tests will run
+to only the tests with a matching label.
 
 To run ONLY the HelloWorld precompile test, run the command:
 
