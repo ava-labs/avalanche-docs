@@ -1147,12 +1147,18 @@ Looks like the tests are passing!
 We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
 
+
+
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
 [this link](https://docs.avax.network/subnets/network-runner) for more information on Avalanche
 Network Runner, how to download it, and how to use it. The server will be on "listening" mode
 waiting for API calls.
 
+We will start the server from the Subnet-EVM directory, so that we can use a relative file path
+to the genesis json file:
+
 ```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
 avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
@@ -1181,7 +1187,7 @@ avalanche-network-runner to spin up some nodes that run the latest version of Su
   --number-of-nodes=5 \
   --avalanchego-path ${AVALANCHEGO_EXEC_PATH} \
   --plugin-dir ${AVALANCHEGO_PLUGIN_PATH} \
-  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/genesis/hello_world.json"}]'
+  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "./tests/precompile/genesis/hello_world.json"}]'
 ```
 
 We can look at the server terminal tab and see it booting up the local network.
