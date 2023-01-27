@@ -12,7 +12,7 @@ Avalanche empowers developers to join a rich ecosystem of blockchains known as S
 are isolated clusters of the Avalanche network that allow any Dapp to run on its own dedicated set
 of nodes, enabling unmatched levels of fault-tolerance and customization for any use-case. Each
 Subnet is isolated from other Subnets in the ecosystem, so increased usage on a single Subnet 
-doesn't affect other Subnets in Avalanche.
+doesn't affect other Subnets on Avalanche.
 
 In Avalanche, developers can create their Dapps by implementing them as a Virtual Machine (VM).
 EVM developers can build on Avalanche's implementation of the EVM straight out-of-the box, or build
