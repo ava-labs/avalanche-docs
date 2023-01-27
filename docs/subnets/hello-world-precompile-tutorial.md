@@ -797,6 +797,10 @@ This should print something like the following (if you are running AvalancheGo v
 avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
 ```
 
+This path will be used later as the environment variable `AVALANCHEGO_EXEC_PATH` in the network runner.
+
+Please note that the RPCChainVM version of AvalancheGo and Subnet-EVM must match.
+
 Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary:
 
 ```bash
@@ -808,6 +812,22 @@ This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugi
 at the file path:
 
 `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+
+To confirm that the Subnet-EVM binary is compatible with AvalancheGo, you can run the same version command
+and confirm the RPCChainVM version matches:
+
+```bash
+$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
+```
+
+This should give the output:
+
+```bash
+Subnet-EVM/v0.4.9@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
+```
+
+If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
+will not be able to talk to AvalancheGo and the blockchain will not start.
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
 
@@ -1142,6 +1162,11 @@ PASS
 
 Looks like the tests are passing!
 
+If your tests failed, please retrace your steps. Most likely the error is that the precompile was
+not enabled and some code is missing. Please also use the
+[official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/hello-world-tutorial-walkthrough)
+to double check your work as well.
+
 ### Step 9: Running a Local Network
 
 We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
@@ -1200,6 +1225,14 @@ If the network startup is successful then you should see something like this:
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9656/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9658/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 ```
+
+This shows the extension to the API server on AvalancheGo that is specific to the Subnet-EVM Blockchain instance.
+To interact with it, you will want to append the `/rpc` extension, which will supply the standard Ethereum API calls.
+For example, you can use the RPC URL:
+
+`http://127.0.0.1:9650/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU/rpc`
+
+to connect to the blockchain through MetaMask, HardHat, etc.
 
 ### Conclusion
 
