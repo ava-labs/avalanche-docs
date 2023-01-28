@@ -1226,7 +1226,7 @@ If the network startup is successful then you should see something like this:
 [blockchain RPC for "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"] "http://127.0.0.1:9658/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU"
 ```
 
-This shows the extension to the API server on AvalancheGo that is specific to the Subnet-EVM
+This shows the extension to the API server on AvalancheGo that's specific to the Subnet-EVM
 Blockchain instance. To interact with it, you will want to append the `/rpc` extension, which
 will supply the standard Ethereum API calls. For example, you can use the RPC URL:
 
