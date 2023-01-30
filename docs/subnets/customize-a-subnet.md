@@ -823,6 +823,15 @@ The content of the `upgrade.json` should be formatted according to the following
 }
 ```
 
+:::warning
+
+An invalid `blockTimestamp` in an upgrade file results the update failing. 
+The `blockTimestamp` value should be set to a valid Unix timestamp value which is 
+in the _future_ relative to the _head of the chain_.
+If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
+
+:::
+ 
 To disable a precompile, the following format should be used:
 
 <!-- markdownlint-disable MD013 -->

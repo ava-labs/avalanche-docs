@@ -212,7 +212,7 @@ Go back to the EC2 Dashboard and select `Running Instances`.
 
 Select the newly created EC2 instance. This opens a details panel with information about the instance.
 
-![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
+![Details about your new instance.](/img/ec2-description.png)
 
 Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
 
