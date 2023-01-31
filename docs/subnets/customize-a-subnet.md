@@ -480,6 +480,16 @@ Note that this uses `IAllowList` interface directly, meaning that it uses the sa
 interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information
 see [AllowList Solidity interface](#allowlist-interface).
 
+:::warning
+
+EVM does not prevent overflows when storing the address balance. Overflows in
+balance opcodes are handled by setting the
+balance to maximum. However the same won't apply for API calls. If you try to mint more than the
+maximum balance, API calls will return the overflowed hex-balance. This can break external
+tooling. Make sure the total supply of native coins is always less than 2^256-1.
+
+:::
+
 #### Initial Native Minter Configuration
 
 It's possible to enable this precompile with an initial configuration to activate its effect on
