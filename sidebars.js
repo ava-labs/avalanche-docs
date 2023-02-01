@@ -196,7 +196,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/reference-cli-commands',
-        'subnets/elastic-subnets-parameters'
+        'subnets/reference-elastic-subnets-parameters'
       ],
     },
     {
