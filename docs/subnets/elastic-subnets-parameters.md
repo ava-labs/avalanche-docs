@@ -1,4 +1,4 @@
-# Elastic Subnets Parameters Reference
+# Elastic Subnets Parameters
 
 All Avalanche Subnets are created permissioned; later they can be turned into elastic Subnets.
 
@@ -72,5 +72,8 @@ The maximum amount of asset in Subnet is $MaximumSupply$.
 The validator will receive a reward calculated as follows:
 
 $$
-Reward = \left(MaximumSupply - ExistingSupply \right) \times \frac{Staked Amount}{Existing Supply} \times \frac{Staking Duration}{Minting Period} \times \left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Stake Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Stake Duration}{Minting Period}  \right)
+\begin{aligned}
+&Reward = \left(MaximumSupply - ExistingSupply \right) \times \frac{Staked Amount}{Existing Supply} \times \frac{Staking Duration}{Minting Period} \times \\\
+&\left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Stake Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Stake Duration}{Minting Period}  \right)
+\end{aligned}
 $$
