@@ -51,6 +51,18 @@ Each chain has one or more index. To see if a C-Chain block is accepted, for exa
 call to the C-Chain block index. To see if an X-Chain vertex is accepted, for example, send an API
 call to the X-Chain vertex index.
 
+### C-Chain Blocks
+
+```text
+/ext/index/C/block
+```
+
+### P-Chain Blocks
+
+```text
+/ext/index/P/block
+```
+
 ### X-Chain Transactions
 
 ```text
@@ -63,29 +75,18 @@ call to the X-Chain vertex index.
 /ext/index/X/vtx
 ```
 
-### P-Chain Blocks
-
-```text
-/ext/index/P/block
-```
-
-### C-Chain Blocks
-
-```text
-/ext/index/C/block
-```
-
 ## Methods
 
-### `index.getLastAccepted`
+### `index.getContainerByID`
 
-Get the most recently accepted container.
+Get container by ID.
 
 **Signature:**
 
 ```sh
-index.getLastAccepted({
-  encoding:string
+index.getContainerByID({
+  id: string,
+  encoding: string
 }) -> {
   id: string,
   bytes: string,
@@ -97,6 +98,7 @@ index.getLastAccepted({
 
 **Request:**
 
+- `id` is the container's ID
 - `encoding` is `"hex"` only.
 
 **Response:**
@@ -105,6 +107,7 @@ index.getLastAccepted({
 - `bytes` is the byte representation of the container
 - `timestamp` is the time at which this node accepted the container
 - `encoding` is `"hex"` only.
+- `index` is how many containers were accepted in this index before this one
 
 **Example Call:**
 
@@ -113,9 +116,10 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "jsonrpc": "2.0",
-    "method": "index.getLastAccepted",
+    "method": "index.getContainerByID",
     "params": {
-        "encoding": "hex"
+        "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding":"hex"
     },
     "id": 1
 }'
@@ -201,75 +205,15 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### `index.getContainerByID`
-
-Get container by ID.
-
-**Signature:**
-
-```sh
-index.getContainerByID({
-  id: string,
-  encoding: string
-}) -> {
-  id: string,
-  bytes: string,
-  timestamp: string,
-  encoding: string,
-  index: string
-}
-```
-
-**Request:**
-
-- `id` is the container's ID
-- `encoding` is `"hex"` only.
-
-**Response:**
-
-- `id` is the container's ID
-- `bytes` is the byte representation of the container
-- `timestamp` is the time at which this node accepted the container
-- `encoding` is `"hex"` only.
-- `index` is how many containers were accepted in this index before this one
-
-**Example Call:**
-
-```sh
-curl --location --request POST 'localhost:9650/ext/index/X/tx' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc": "2.0",
-    "method": "index.getContainerByID",
-    "params": {
-        "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-        "encoding":"hex"
-    },
-    "id": 1
-}'
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-    "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
-    "timestamp": "2021-04-02T15:34:00.262979-07:00",
-    "encoding": "hex",
-    "index": "0"
-  }
-}
-```
-
 ### `index.getContainerRange`
 
-Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch`
+Returns the transactions at index [`startIndex`], [`startIndex+1`], ... , [`startIndex+n-1`]
 
-- 1\]. `numToFetch` must be in `[0,1024]`.
+- If [`n`] == 0, returns an empty response (i.e. null).
+- If [`startIndex`] > the last accepted index, returns an error (unless the above apply.)
+- If [`n`] > [`MaxFetchedByRange`], returns an error.
+- If we run out of transactions, returns the ones fetched before running out.
+- `numToFetch` must be in `[0,1024]`.
 
 **Signature:**
 
@@ -385,6 +329,66 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "index": "0"
   },
   "id": 1
+}
+```
+
+### `index.getLastAccepted`
+
+Get the most recently accepted container.
+
+**Signature:**
+
+```sh
+index.getLastAccepted({
+  encoding:string
+}) -> {
+  id: string,
+  bytes: string,
+  timestamp: string,
+  encoding: string,
+  index: string
+}
+```
+
+**Request:**
+
+- `encoding` is `"hex"` only.
+
+**Response:**
+
+- `id` is the container's ID
+- `bytes` is the byte representation of the container
+- `timestamp` is the time at which this node accepted the container
+- `encoding` is `"hex"` only.
+
+**Example Call:**
+
+```sh
+curl --location --request POST 'localhost:9650/ext/index/X/tx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc": "2.0",
+    "method": "index.getLastAccepted",
+    "params": {
+        "encoding": "hex"
+    },
+    "id": 1
+}'
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "id": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+    "bytes": "0x00000000000400003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429ccc5c5eb3b80000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429d069189e0000000000010000000000000000c85fc1980a77c5da78fe5486233fc09a769bb812bcb2cc548cf9495d046b3f1b00000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000007000003a352a38240000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c0000000100000009000000011cdb75d4e0b0aeaba2ebc1ef208373fedc1ebbb498f8385ad6fb537211d1523a70d903b884da77d963d56f163191295589329b5710113234934d0fd59c01676b00b63d2108",
+    "timestamp": "2021-04-02T15:34:00.262979-07:00",
+    "encoding": "hex",
+    "index": "0"
+  }
 }
 ```
 
