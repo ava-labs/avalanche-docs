@@ -42,7 +42,8 @@ Note: `PercentDenominator = 1_000_000` is the denominator used to calculate perc
 * `MaxStakeDuration` must be larger or equal to `MinStakeDuration`.
 * `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
 
-`MinDelegationFee uint32`: the minimum percentage a validator must charge a delegator for delegating. Constraints:
+`MinDelegationFee uint32`: the minimum percentage a validator must charge a
+delegator for delegating. Constraints:
 
 * `MinDelegationFee` must be smaller or equal to `PercentDenominator`.
 
@@ -50,11 +51,14 @@ Note: `PercentDenominator = 1_000_000` is the denominator used to calculate perc
 
 * `MinDelegatorStake` must be larger than zero.
 
-`MaxValidatorWeightFactor byte`: the factor which calculates the maximum amount of delegation a validator can receive. A value of 1 effectively disables delegation. Constraints:
+`MaxValidatorWeightFactor byte`: the factor which calculates the maximum amount
+of delegation a validator can receive. A value of 1 effectively disables
+delegation. Constraints:
 
 * `MaxValidatorWeightFactor` must be larger than zero.
 
-`UptimeRequirement uint32`: the minimum percentage a validator must be online and responsive to receive a reward. Constraints:
+`UptimeRequirement uint32`: the minimum percentage a validator must be online
+and responsive to receive a reward. Constraints:
 
 * `UptimeRequirement` must be <= `PercentDenominator`.
 
