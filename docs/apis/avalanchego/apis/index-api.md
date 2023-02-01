@@ -209,7 +209,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 Returns the transactions at index [`startIndex`], [`startIndex+1`], ... , [`startIndex+n-1`]
 
-- If [`n`] == 0, returns an empty response (i.e. null).
+- If [`n`] == 0, returns an empty response (for example: null).
 - If [`startIndex`] > the last accepted index, returns an error (unless the above apply.)
 - If [`n`] > [`MaxFetchedByRange`], returns an error.
 - If we run out of transactions, returns the ones fetched before running out.
