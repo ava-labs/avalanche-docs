@@ -1173,10 +1173,6 @@ This gives response:
 }
 ```
 
-<!--
-TODO: Add avm.getVertex
--->
-
 ### `avm.import`
 
 :::warning
