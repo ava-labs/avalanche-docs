@@ -71,9 +71,11 @@ Assume at the start of the staking period the amount of asset in Subnet is $Exis
 The maximum amount of asset in Subnet is $MaximumSupply$.
 The validator will receive a reward calculated as follows:
 
+<!-- markdownlint-disable MD013 -->
 $$
 \begin{aligned}
 &Reward = \left(MaximumSupply - ExistingSupply \right) \times \frac{Staked Amount}{Existing Supply} \times \frac{Staking Duration}{Minting Period} \times \\\
 &\left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Stake Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Stake Duration}{Minting Period}  \right)
 \end{aligned}
 $$
+<!-- markdownlint-enable MD013 -->
