@@ -656,7 +656,7 @@ Get the balance of AVAX controlled by a given address.
 
 ```sh
 platform.getBalance({
-    addresses: []string
+    address: string
 }) -> {
     balances: string -> int,
     unlockeds: string -> int,
@@ -669,7 +669,7 @@ platform.getBalance({
 }
 ```
 
-- `addresses` are the addresses to get the balance of.
+- `address` is the address to get the balance of.
 - `balances` is a map from assetID to the total balance.
 - `unlockeds` is a map from assetID to the unlocked balance.
 - `lockedStakeables` is a map from assetID to the locked stakeable balance.
