@@ -58,6 +58,23 @@ The following constraints apply:
 * `MaxConsumptionRate` must be larger or equal to `MinConsumptionRate`.
 * `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`[^1].
 
+### `MinValidatorStake`
+
+`MinValidatorStake` has type `uint64`. It's the minimum amount of funds required to become a validator.
+The following constraints apply:
+
+* `MinValidatorStake` must be larger than zero
+* `MinValidatorStake` must be smaller or equal to `InitialSupply`
+
+### `MaxValidatorStake`
+
+`MaxValidatorStake` has type `uint64`. It's the maximum amount of funds a single
+validator can be allocated, including delegated funds.
+The following constraints apply:
+
+* `MaxValidatorStake` must be larger or equal to `MinValidatorStake`
+* `MaxValidatorStake` must be smaller or equal to `MaximumSupply`
+
 ### `MinStakeDuration`
 
 `MinStakeDuration` has type `uint32` and it's the minimum number of seconds a staker can stake for.
@@ -149,11 +166,29 @@ The reward is:
 $$
 Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
 $$
-<!-- markdownlint-disable MD013 -->
+<!-- markdownlint-enable MD013 -->
 
 ## Delegators Weight Checks
 
-TODO
+There are bounds set of the maximum amount of delegators' stake that a validator can receive.
+
+The maximum weight $Max\;Weight$ a validator $Validator$ can have is:
+
+<!-- markdownlint-disable MD013 -->
+$$
+    Max\;Weight = \min(Validator.Weight \times MaxValidatorWeightFactor, MaxValidatorStake)
+$$
+<!-- markdownlint-enable MD013 -->
+
+where $MaxValidatorWeightFactor$ and $MaxValidatorStake$ are the Elastic Subnet
+Parameters described above.
+
+A delegator won't be added to a validator if the combination of their weights
+and all other validator's delegators' weight is larger than $Max\;Weight$. Note
+that this must be true at any point in time.
+
+Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $Max\;Weight = Validator.Weight$.
+
 
 [^1] Note that `PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
 
