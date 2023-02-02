@@ -43,7 +43,8 @@ optional, but encouraged. The supported plugin version is `22`.
 
 - Fixed `RemoveSubnetValidatorTx` weight diff corruption
 - Released network lock before attempting to close a peer connection
-- Fixed X-Chain last accepted block initialization to use the genesis block, not the stop vertex after linearization
+- Fixed X-Chain last accepted block initialization to use the genesis block,
+  not the stop vertex after linearization
 - Removed plugin directory handling from AMI generation
 - Removed copy of plugins directory from tar script
 
