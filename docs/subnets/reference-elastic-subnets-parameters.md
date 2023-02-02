@@ -24,15 +24,16 @@ The following constraints apply:
 
 ### `InitialSupply`
 
-`InitialSupply` has type `uint64` and it's the initial amount of `AssetID` in the Subnet.
-The following constraints apply:
+`InitialSupply` has type `uint64` and it's the initial amount of `AssetID`
+transferred in the Elastic Subnet upon its transformation. Such amount is
+available for distributing staking rewards. The following constraints apply:
 
 * `InitialSupply` must be larger than zero.
 
 ### `MaximumSupply`
 
 `MaximumSupply` has type `uint64` and it's the maximum amount of `AssetID` that
-Subnet can hold at any time. The following constraints apply:
+Subnet has available for staking and rewards at any time. The following constraints apply:
 
 * `MaximumSupply` must be larger or equal to `InitialSupply`.
 
