@@ -51,7 +51,7 @@ The following constraints apply:
 
 ### `MaxConsumptionRate`
 
-`MaxConsumptionRate` has type `uint64`. It is the maximal rate to allocate funds.
+`MaxConsumptionRate` has type `uint64`. It's the maximal rate to allocate funds.
 You can find more details about it in the Reward Formula section.
 The following constraints apply:
 
@@ -74,7 +74,7 @@ The following constraints apply:
 * `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
 
 `GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all Subnets.
-Its mainnet value is $365 \times 24 \times time.Hour$.
+Its Mainnet value is $365 \times 24 \times time.Hour$.
 
 ### `MinDelegationFee`
 
@@ -85,7 +85,7 @@ The following constraints apply:
 
 * `MinDelegationFee` must be smaller or equal to `PercentDenominator`.
 
-The `MinDelegationFee` rate applies to Primary Network as well. Its mainnet value is $2\%$.
+The `MinDelegationFee` rate applies to Primary Network as well. Its Mainnet value is $2\%$.
 
 ### `MinDelegatorStake`
 
@@ -115,19 +115,41 @@ The following constraints apply:
 
 ## Reward Formula
 
-Consider an Elastic Subnet validator which stakes $Amount$ `AssetID` for $Duration$ time.
-Assume that at the start of the staking period there is $Supply$ `AssetID` in the Subnet.
-$MaximumSupply$ `AssetID` is the maximum amount of Subnet asset specified.
-Then at the end of its staking period, the Elastic Subnet validator receives a reward calculated as follows:
+Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $Staking\:Period$ seconds[^2].
+
+Assume that at the start of the staking period there is a $Supply$ amount of `AssetID` in the Subnet.
+The maximum amount of Subnet asset is $MaximumSupply$ `AssetID`.
+
+Then at the end of its staking period, a responsive Elastic Subnet validator
+receives a reward calculated as follows:
 
 <!-- markdownlint-disable MD013 -->
 $$
-\begin{aligned}
-&Reward = \left(MaximumSupply - Supply \right) \times \frac{Amount}{Supply} \times \frac{Duration}{Minting Period} \times \\\
-&\left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Duration}{Minting Period}  \right)
-\end{aligned}
+Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveRate
+$$
+where
+$$
+EffectiveRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
 <!-- markdownlint-enable MD013 -->
+
+$Effective\:Period$ is a linear combination of of $MinConsumptionRate$ and
+$MaxConsumptionRate$.
+$MinConsumptionRate$ and $MaxConsumptionRate$ bound $Effective\:Period$ because 
+$$
+MinConsumptionRate \leq EffectiveRate \leq MaxConsumptionRate
+$$
+
+The larger $Staking\:Period$ is, the closer $Effective\:Period$ is to $MaxConsumptionRate$.
+
+A staker achieves the maximum reward for its stake if $Staking\:Period$ = $Minting Period$.
+The reward is:
+
+<!-- markdownlint-disable MD013 -->
+$$
+Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
+$$
+<!-- markdownlint-disable MD013 -->
 
 ## Delegators Weight Checks
 
@@ -139,9 +161,13 @@ It allows you to specify percentages up to 4 digital positions.
 To denominate your percentage in `PercentDenominator` just multiply it by `10_000`.
 For example:
 
-* `100%` is represented with `100 * 10_000 = 1_000_000`
-* `1%` is represented with `1* 10_000 = 10_000`
-* `0.02%` is represented with `0.002 * 10_000 = 200`
-* `0.0007%` is represented with `0.0007 * 10_000 = 7`
+* `100%` corresponds to `100 * 10_000 = 1_000_000`
+* `1%` corresponds to `1* 10_000 = 10_000`
+* `0.02%` corresponds to `0.002 * 10_000 = 200`
+* `0.0007%` corresponds to `0.0007 * 10_000 = 7`
 
-
+[^2] Note that $Staking\:Period$ is the staker's entire staking period, not just the
+staker's uptime, that is the aggregated time during which the staker has been
+responsive. The uptime comes into play only to decide whether a staker should be
+rewarded; to calculate the actual reward only the staking period duration is
+taken into account.
