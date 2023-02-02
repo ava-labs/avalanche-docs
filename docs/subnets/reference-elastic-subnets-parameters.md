@@ -91,13 +91,16 @@ The following constraints apply:
 * `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
 
 `GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all Subnets.
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 Its Mainnet value is $365 \times 24 \times time.Hour$.
-
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
 ### `MinDelegationFee`
 
 `MinDelegationFee` has type `uint32` and it's the minimum fee rate a delegator
 must pay to its validator for delegating. `MinDelegationFee` is a percentage; the
-actual fee is calculated multiplying the fee rate for the delegator's reward.
+actual fee is calculated multiplying the fee rate for the delegator reward.
 The following constraints apply:
 
 * `MinDelegationFee` must be smaller or equal to `PercentDenominator`.
@@ -141,6 +144,7 @@ Then at the end of its staking period, a responsive Elastic Subnet validator
 receives a reward calculated as follows:
 
 <!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 $$
 Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveRate
 $$
@@ -148,14 +152,20 @@ where
 $$
 EffectiveRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
+<!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-$Effective\:Period$ is a linear combination of of $MinConsumptionRate$ and
+$Effective\:Period$ is a linear combination of $MinConsumptionRate$ and
 $MaxConsumptionRate$.
 $MinConsumptionRate$ and $MaxConsumptionRate$ bound $Effective\:Period$ because 
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 $$
 MinConsumptionRate \leq EffectiveRate \leq MaxConsumptionRate
 $$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
 
 The larger $Staking\:Period$ is, the closer $Effective\:Period$ is to $MaxConsumptionRate$.
 
@@ -163,9 +173,11 @@ A staker achieves the maximum reward for its stake if $Staking\:Period$ = $Minti
 The reward is:
 
 <!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 $$
 Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
 $$
+<!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
 ## Delegators Weight Checks
@@ -175,9 +187,11 @@ There are bounds set of the maximum amount of delegators' stake that a validator
 The maximum weight $Max\;Weight$ a validator $Validator$ can have is:
 
 <!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 $$
     Max\;Weight = \min(Validator.Weight \times MaxValidatorWeightFactor, MaxValidatorStake)
 $$
+<!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
 where $MaxValidatorWeightFactor$ and $MaxValidatorStake$ are the Elastic Subnet
@@ -187,7 +201,9 @@ A delegator won't be added to a validator if the combination of their weights
 and all other validator's delegators' weight is larger than $Max\;Weight$. Note
 that this must be true at any point in time.
 
+<!-- vale off -->
 Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $Max\;Weight = Validator.Weight$.
+<!-- vale on -->
 
 
 [^1] Note that `PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
