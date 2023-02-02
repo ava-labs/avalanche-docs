@@ -1,81 +1,147 @@
 # Elastic Subnets Parameters
 
-All Avalanche Subnets are created permissioned; later they can be turned into elastic Subnets.
-
-In this reference we list the structural parameters defining Permissioned and Elastic Subnets.
-We also illustrate the constraints that these parameters must satisfy when we create or transform Subnets.
+Avalanche Permissioned Subnets turn into Elastic Subnet via the `TransformSubnetTx` transaction.
+`TransformSubnetTx` specifies a set of structural parameters for the Elastic Subnet.
+This reference describes these structural parameters and illustrates the constraints they must satisfy.
 
 ## Elastic Subnet Parameters
 
-Note: `PercentDenominator = 1_000_000` is the denominator used to calculate percentages
+### `Subnet`
 
-`Subnet ids.ID`: the Subnet ID. Constraints:
+`Subnet` has type `ids.ID` and it's the Subnet ID.
+`Subnet` is the ID of the `CreateSubnetTx` transaction that created the Subnet in the first place. 
+The following constraints apply:
 
 * `Subnet` must be different from `PrimaryNetworkID`.
 
-`AssetID ids.ID`: the asset to use when Staking on the Subnet. Constraints:
-  
-* `AssetID` must not be the Empty ID.
-* `AssetID` must not be AVAX ID.
+### `AssetID`
 
-`InitialSupply uint64`: the initial amount of Subnet assets. Constraints:
+`AssetID` has type `ids.ID` and it's the ID of the asset to use when staking on the Subnet.
+The following constraints apply:
+  
+* `AssetID` must not be the `Empty ID`.
+* `AssetID` must not be `AVAX ID`.
+
+`AVAX ID` is the Primary Network asset.
+
+### `InitialSupply`
+
+`InitialSupply` has type `uint64` and it's the initial amount of `AssetID` in the Subnet.
+The following constraints apply:
 
 * `InitialSupply` must be larger than zero.
 
-`MaximumSupply uint64`: the maximum amount of Subnet assets. Constraints:
+### `MaximumSupply`
+
+`MaximumSupply` has type `uint64` and it's the maximum amount `AssetID` that Subnet can hold at any time.
+The following constraints apply:
 
 * `MaximumSupply` must be larger or equal to `InitialSupply`.
 
-`MinConsumptionRate uint64`: the minimal rate to allocate funds. See Reward formula for details.
+A Subnet supply can vary in time. The constraint above only makes sure that Subnet
+supply and can become larger (and smaller) than `InitialSupply` at any time.
 
-`MaxConsumptionRate uint64`: the maximal rate to allocate funds. See Reward formula for details. Constraints:
+### `MinConsumptionRate`
+
+`MinConsumptionRate` has type `uint64` and it's the minimal rate to allocate funds.
+You can find more details about it in the Reward Formula section.
+The following constraints apply:
+
+* `MinConsumptionRate` is a non negative integer. Only its type constraints apply.
+
+### `MaxConsumptionRate`
+
+`MaxConsumptionRate` has type `uint64`. It is the maximal rate to allocate funds.
+You can find more details about it in the Reward Formula section.
+The following constraints apply:
 
 * `MaxConsumptionRate` must be larger or equal to `MinConsumptionRate`.
-* `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`.
+* `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`[^1].
 
-`MinStakeDuration uint32`: the minimum number of seconds a staker can stake for. Constraints:
+### `MinStakeDuration`
+
+`MinStakeDuration` has type `uint32` and it's the minimum number of seconds a staker can stake for.
+The following constraints apply:
 
 * `MinStakeDuration` must be larger than zero.
 
-`MaxStakeDuration uint32`: the maximum number of seconds a staker can stake for. Constraints:
+### `MaxStakeDuration`
+
+`MaxStakeDuration` has type `uint32` and it's the maximum number of seconds a staker can stake for.
+The following constraints apply:
 
 * `MaxStakeDuration` must be larger or equal to `MinStakeDuration`.
 * `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
 
-`MinDelegationFee uint32`: the minimum percentage a validator must charge a
-delegator for delegating. Constraints:
+`GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all Subnets.
+Its mainnet value is $365 \times 24 \times time.Hour$.
+
+### `MinDelegationFee`
+
+`MinDelegationFee` has type `uint32` and it's the minimum fee rate a delegator
+must pay to its validator for delegating. `MinDelegationFee` is a percentage; the
+actual fee is calculated multiplying the fee rate for the delegator's reward.
+The following constraints apply:
 
 * `MinDelegationFee` must be smaller or equal to `PercentDenominator`.
 
-`MinDelegatorStake uint64`: the minimum amount of funds required to become a delegator. Constraints:
+The `MinDelegationFee` rate applies to Primary Network as well. Its mainnet value is $2\%$.
+
+### `MinDelegatorStake`
+
+`MinDelegatorStake` has type `uint64` and it's the minimum amount of funds required to become a delegator.
+The following constraints apply:
 
 * `MinDelegatorStake` must be larger than zero.
 
-`MaxValidatorWeightFactor byte`: the factor which calculates the maximum amount
-of delegation a validator can receive. A value of 1 effectively disables
-delegation. Constraints:
+### `MaxValidatorWeightFactor`
+
+`MaxValidatorWeightFactor` has type `uint8` and it's the factor which calculates
+the maximum amount of delegation a validator can receive. A value of 1
+effectively disables delegation. You can find more details about it in the
+Delegators Weight Checks section.
+The following constraints apply:
 
 * `MaxValidatorWeightFactor` must be larger than zero.
 
-`UptimeRequirement uint32`: the minimum percentage a validator must be online
-and responsive to receive a reward. Constraints:
+### `UptimeRequirement`
 
-* `UptimeRequirement` must be <= `PercentDenominator`.
+`UptimeRequirement` has type `uint32` and it's the minimum percentage of its
+staking time that a validator must be online and responsive for to receive a
+reward.
+The following constraints apply:
 
-### Reward Formula
+* `UptimeRequirement` must be smaller or equal `PercentDenominator`.
 
-Consider an elastic Subnet validator which stakes $Staked Amount$ for $Staking Duration$ time.
+## Reward Formula
 
-Assume at the start of the staking period the amount of asset in Subnet is $Existing Supply$.
-
-The maximum amount of asset in Subnet is $MaximumSupply$.
-The validator will receive a reward calculated as follows:
+Consider an Elastic Subnet validator which stakes $Amount$ `AssetID` for $Duration$ time.
+Assume that at the start of the staking period there is $Supply$ `AssetID` in the Subnet.
+$MaximumSupply$ `AssetID` is the maximum amount of Subnet asset specified.
+Then at the end of its staking period, the Elastic Subnet validator receives a reward calculated as follows:
 
 <!-- markdownlint-disable MD013 -->
 $$
 \begin{aligned}
-&Reward = \left(MaximumSupply - ExistingSupply \right) \times \frac{Staked Amount}{Existing Supply} \times \frac{Staking Duration}{Minting Period} \times \\\
-&\left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Stake Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Stake Duration}{Minting Period}  \right)
+&Reward = \left(MaximumSupply - Supply \right) \times \frac{Amount}{Supply} \times \frac{Duration}{Minting Period} \times \\\
+&\left( \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Duration}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Duration}{Minting Period}  \right)
 \end{aligned}
 $$
 <!-- markdownlint-enable MD013 -->
+
+## Delegators Weight Checks
+
+TODO
+
+[^1] Note that `PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
+
+It allows you to specify percentages up to 4 digital positions.
+To denominate your percentage in `PercentDenominator` just multiply it by `10_000`.
+For example:
+
+* `100%` is represented with `100 * 10_000 = 1_000_000`
+* `1%` is represented with `1* 10_000 = 10_000`
+* `0.02%` is represented with `0.002 * 10_000 = 200`
+* `0.0007%` is represented with `0.0007 * 10_000 = 7`
+
+
