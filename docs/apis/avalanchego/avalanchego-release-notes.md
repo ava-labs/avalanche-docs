@@ -32,7 +32,7 @@ optional, but encouraged. The supported plugin version is `22`.
 **APIs**
 
 - Updated `platform.getCurrentValidators` to return `uptime` as a percentage
-- Updated `platform.get*Validators` to avoid iterating over the staker set when requesting specific nodeIDs
+- Updated `platform.get*Validators` to avoid iterating over the staker set when requesting specific NodeIDs
 - Cached staker data in `platform.get*Validators` to significantly reduce DB IO
 - Added `stakeAmount` and `weight` to all staker responses in P-chain APIs
 - Deprecated `stakeAmount` in staker responses from P-chain APIs
