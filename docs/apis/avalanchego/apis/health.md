@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 8
 description: This API can be used for measuring node health. Use Avalanche docs as a reference when testing node health. Helpful examples provided.
 ---
 

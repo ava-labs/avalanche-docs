@@ -275,63 +275,6 @@ To interact with other instances of the EVM AVAX endpoints:
 /ext/bc/blockchainID/avax
 ```
 
-### `avax.getAtomicTx`
-
-Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned
-transaction. Can only be `hex` when a value is provided.
-
-**Signature:**
-
-```go
-avax.getAtomicTx({
-    txID: string,
-    encoding: string, //optional
-}) -> {
-    tx: string,
-    encoding: string,
-    blockHeight: string
-}
-```
-
-**Request:**
-
-- `txID` is the transaction ID. It should be in cb58 format.
-- `encoding` is the encoding format to use. Can only be `hex` when a value is provided.
-
-**Response:**
-
-- `tx` is the transaction encoded to `encoding`.
-- `encoding` is the `encoding`.
-- `blockHeight` is the height of the block which the transaction was included in.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avax.getAtomicTx",
-    "params" :{
-        "txID":"2GD5SRYJQr2kw5jE73trBFiAgVQyrCaeg223TaTyJFYXf2kPty",
-        "encoding": "hex"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "tx": "0x000000000000000030399d0775f450604bd2fbc49ce0c5c1c6dfeb2dc2acb8c92c26eeae6e6df4502b19d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000018212d6807a0ec9c1b26321418fe7a548180b5be728ce53fe7e98ab5755ed316100000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000003a352a382400000000100000000000000018db97c7cece249c2b98bdc0226cc4c2a57bf52fc000003a3529edd17dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000010000000900000001ead19377f015422fbb8731204fcf6d6879dd05146c2d5b5594e2fea2cb420b2f40bd457b71e279e547790b28fe5482f278c76cf39b2dce5c2e6c53352fe6827d002cc7d20d",
-    "encoding": "hex",
-    "blockHeight": "1"
-  },
-  "id": 1
-}
-```
-
 ### `avax.export`
 
 :::warning
@@ -517,7 +460,111 @@ curl -X POST --data '{
         "privateKeyHex": "0xec381fb8d32168be4cf7f8d4ce9d8ca892d77ba574264f3665ad5edb89710157"
     },
     "id": 1
-}}
+}
+```
+
+### `avax.getAtomicTx`
+
+Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned
+transaction. Can only be `hex` when a value is provided.
+
+**Signature:**
+
+```go
+avax.getAtomicTx({
+    txID: string,
+    encoding: string, //optional
+}) -> {
+    tx: string,
+    encoding: string,
+    blockHeight: string
+}
+```
+
+**Request:**
+
+- `txID` is the transaction ID. It should be in cb58 format.
+- `encoding` is the encoding format to use. Can only be `hex` when a value is provided.
+
+**Response:**
+
+- `tx` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+- `blockHeight` is the height of the block which the transaction was included in.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTx",
+    "params" :{
+        "txID":"2GD5SRYJQr2kw5jE73trBFiAgVQyrCaeg223TaTyJFYXf2kPty",
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": "0x000000000000000030399d0775f450604bd2fbc49ce0c5c1c6dfeb2dc2acb8c92c26eeae6e6df4502b19d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000018212d6807a0ec9c1b26321418fe7a548180b5be728ce53fe7e98ab5755ed316100000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000003a352a382400000000100000000000000018db97c7cece249c2b98bdc0226cc4c2a57bf52fc000003a3529edd17dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000010000000900000001ead19377f015422fbb8731204fcf6d6879dd05146c2d5b5594e2fea2cb420b2f40bd457b71e279e547790b28fe5482f278c76cf39b2dce5c2e6c53352fe6827d002cc7d20d",
+    "encoding": "hex",
+    "blockHeight": "1"
+  },
+  "id": 1
+}
+```
+
+### `avax.getAtomicTxStatus`
+
+Get the status of an atomic transaction sent to the network.
+
+**Signature:**
+
+```sh
+avax.getAtomicTxStatus({txID: string}) -> {
+  status: string,
+  blockHeight: string // returned when status is Accepted
+}
+```
+
+`status` is one of:
+
+- `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight`
+  property
+- `Processing`: The transaction is being voted on by this node
+- `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
+- `Unknown`: The transaction hasn’t been seen by this node
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "Accepted",
+    "blockHeight": "1"
+  }
+}
 ```
 
 ### `avax.getUTXOs`
@@ -832,58 +879,10 @@ curl -X POST --data '{
 }
 ```
 
-### `avax.getAtomicTxStatus`
-
-Get the status of an atomic transaction sent to the network.
-
-**Signature:**
-
-```sh
-avax.getAtomicTxStatus({txID: string}) -> {
-  status: string,
-  blockHeight: string // returned when status is Accepted
-}
-```
-
-`status` is one of:
-
-- `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight`
-  property
-- `Processing`: The transaction is being voted on by this node
-- `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
-- `Unknown`: The transaction hasn’t been seen by this node
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avax.getAtomicTxStatus",
-    "params" :{
-        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "status": "Accepted",
-    "blockHeight": "1"
-  }
-}
-```
-
 ## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
-with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean)
-.
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](../../../nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean).
 
 ### Endpoint
 
