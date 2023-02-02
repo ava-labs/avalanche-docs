@@ -225,6 +225,10 @@ curl -X POST --data '{
 }
 ```
 
+<!-- 
+TODO: Add avm.createAsset  
+-->
+
 ### `avm.createFixedCapAsset`
 
 :::warning
@@ -313,42 +317,47 @@ curl -X POST --data '{
 }
 ```
 
-### `avm.mint`
+### `avm.createNFTAsset`
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
 
-Mint units of a variable-cap asset created with
-[`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint
+units of this asset using `avm.mintNFT`.
 
 **Signature:**
 
 ```sh
-avm.mint({
-    amount: int,
-    assetID: string,
-    to: string,
+avm.createNFTAsset({
+    name: string,
+    symbol: string,
+    minterSets: []{
+        minters: []string,
+        threshold: int
+    },
     from: []string, //optional
     changeAddr: string, //optional
     username: string,
     password: string
 }) ->
-{
-    txID: string,
+ {
+    assetID: string,
     changeAddr: string,
 }
 ```
 
-- `amount` units of `assetID` will be created and controlled by address `to`.
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique.
+  May be omitted.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters`
+  may together mint more of the asset by signing a minting transaction.
 - `from` are the addresses that you want to use for this operation. If omitted, uses any of your
   addresses as needed.
 - `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
   addresses controlled by the user.
-- `username` is the user that pays the transaction fee. `username` must hold keys giving it
-  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
-  of the minter sets.
-- `txID` is this transaction’s ID.
+- `username` pays the transaction fee.
+- `assetID` is the ID of the new asset.
 - `changeAddr` in the result is the address where any change was sent.
 
 **Example Call:**
@@ -357,13 +366,20 @@ avm.mint({
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
-    "method" :"avm.mint",
+    "method" :"avm.createNFTAsset",
     "params" :{
-        "amount":10000000,
-        "assetID":"i1EqsthjiFTxunrj8WD2xFSrQ5p2siEKQacmCCB5qBFVqfSL2",
-        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
-        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "name":"Coincert",
+        "symbol":"TIXX",
+        "minterSets":[
+            {
+                "minters":[
+                    "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+                ],
+                "threshold": 1
+            }
+        ],
+        "from": ["X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
         "password":"myPassword"
     }
@@ -375,11 +391,11 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "id": 1,
   "result": {
-    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "assetID": "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
     "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-  }
+  },
+  "id": 1
 }
 ```
 
@@ -478,163 +494,6 @@ curl -X POST --data '{
 }
 ```
 
-### `avm.createNFTAsset`
-
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
-
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint
-units of this asset using `avm.mintNFT`.
-
-**Signature:**
-
-```sh
-avm.createNFTAsset({
-    name: string,
-    symbol: string,
-    minterSets: []{
-        minters: []string,
-        threshold: int
-    },
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,
-    password: string
-}) ->
- {
-    assetID: string,
-    changeAddr: string,
-}
-```
-
-- `name` is a human-readable name for the asset. Not necessarily unique.
-- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique.
-  May be omitted.
-- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters`
-  may together mint more of the asset by signing a minting transaction.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
-  addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
-  addresses controlled by the user.
-- `username` pays the transaction fee.
-- `assetID` is the ID of the new asset.
-- `changeAddr` in the result is the address where any change was sent.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     : 1,
-    "method" :"avm.createNFTAsset",
-    "params" :{
-        "name":"Coincert",
-        "symbol":"TIXX",
-        "minterSets":[
-            {
-                "minters":[
-                    "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-                ],
-                "threshold": 1
-            }
-        ],
-        "from": ["X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"],
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "assetID": "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
-    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-  },
-  "id": 1
-}
-```
-
-### `avm.mintNFT`
-
-:::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-:::
-
-Mint non-fungible tokens which were created with
-[`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
-
-**Signature:**
-
-```sh
-avm.mintNFT({
-    assetID: string,
-    payload: string,
-    to: string,
-    encoding: string, //optional
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,
-    password: string
-}) ->
-{
-    txID: string,
-    changeAddr: string,
-}
-```
-
-- `assetID` is the assetID of the newly created NFT asset.
-- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the
-  `encoding` argument.
-- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
-  addresses as needed.
-- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
-  addresses controlled by the user.
-- `username` is the user that pays the transaction fee. `username` must hold keys giving it
-  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
-  of the minter sets.
-- `txID` is this transaction’s ID.
-- `changeAddr` in the result is the address where any change was sent.
-- `encoding` is the encoding format to use for the payload argument. Can only be `hex` when a value
-  is provided.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     : 1,
-    "method" :"avm.mintNFT",
-    "params" :{
-        "assetID":"2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
-        "payload":"0x415641204c61627338259aed",
-        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
-        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
-    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-  }
-}
-```
-
 ### `avm.export`
 
 :::
@@ -708,6 +567,10 @@ curl -X POST --data '{
 }
 ```
 
+<!-- 
+TODO: Add avm.exportAVAX
+-->
+
 ### `avm.exportKey`
 
 :::warning
@@ -754,6 +617,72 @@ curl -X POST --data '{
   "result": {
     "privateKey": "PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
   }
+}
+```
+
+### `avm.getAddressTxs`
+
+Returns all transactions that change the balance of the given address. A transaction is said to
+change an address's balance if either is true:
+
+- A UTXO that the transaction consumes was at least partially owned by the address.
+- A UTXO that the transaction produces is at least partially owned by the address.
+
+:::tip
+Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+:::
+
+**Signature:**
+
+```sh
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+**Request Parameters:**
+
+- `address`: The address for which we're fetching related transactions
+- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an
+  alias for an asset.
+- `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
+
+**Response Parameter:**
+
+- `txIDs`: List of transaction IDs that affected the balance of this address.
+- `cursor`: Page number or offset. Use this in request to get the next page.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "txIDs": ["SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"],
+    "cursor": "1"
+  },
+  "id": 1
 }
 ```
 
@@ -905,71 +834,6 @@ curl -X POST --data '{
 }
 ```
 
-### `avm.getAddressTxs`
-
-Returns all transactions that change the balance of the given address. A transaction is said to
-change an address's balance if either is true:
-
-- A UTXO that the transaction consumes was at least partially owned by the address.
-- A UTXO that the transaction produces is at least partially owned by the address.
-
-:::tip
-Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
-:::
-
-**Signature:**
-
-```sh
-avm.getAddressTxs({
-    address: string,
-    cursor: uint64,     // optional, leave empty to get the first page
-    assetID: string,
-    pageSize: uint64    // optional, defaults to 1024
-}) -> {
-    txIDs: []string,
-    cursor: uint64,
-}
-```
-
-**Request Parameters:**
-
-- `address`: The address for which we're fetching related transactions
-- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an
-  alias for an asset.
-- `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
-
-**Response Parameter:**
-
-- `txIDs`: List of transaction IDs that affected the balance of this address.
-- `cursor`: Page number or offset. Use this in request to get the next page.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-  "jsonrpc":"2.0",
-  "id"     : 1,
-  "method" :"avm.getAddressTxs",
-  "params" :{
-      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
-      "assetID":"AVAX",
-      "pageSize":20
-  }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "txIDs": ["SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"],
-    "cursor": "1"
-  },
-  "id": 1
-}
-```
 
 ### `avm.getTx`
 
@@ -1365,6 +1229,9 @@ curl -X POST --data '{
 }
 ```
 
+<!--
+TODO: Add avm.importAVAX
+-->
 ### `avm.importKey`
 
 :::warning
@@ -1495,6 +1362,152 @@ curl -X POST --data '{
     "addresses": ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
   },
   "id": 1
+}
+```
+
+### `avm.mint`
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
+Mint units of a variable-cap asset created with
+[`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
+
+**Signature:**
+
+```sh
+avm.mint({
+    amount: int,
+    assetID: string,
+    to: string,
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `amount` units of `assetID` will be created and controlled by address `to`.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it
+  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
+  of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.mint",
+    "params" :{
+        "amount":10000000,
+        "assetID":"i1EqsthjiFTxunrj8WD2xFSrQ5p2siEKQacmCCB5qBFVqfSL2",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+
+### `avm.mintNFT`
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+:::
+
+Mint non-fungible tokens which were created with
+[`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
+
+**Signature:**
+
+```sh
+avm.mintNFT({
+    assetID: string,
+    payload: string,
+    to: string,
+    encoding: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `assetID` is the assetID of the newly created NFT asset.
+- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the
+  `encoding` argument.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your
+  addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the
+  addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it
+  permission to mint more of this asset. That is, it must control at least _threshold_ keys for one
+  of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+- `encoding` is the encoding format to use for the payload argument. Can only be `hex` when a value
+  is provided.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.mintNFT",
+    "params" :{
+        "assetID":"2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
+        "payload":"0x415641204c61627338259aed",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
 }
 ```
 

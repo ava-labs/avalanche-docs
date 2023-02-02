@@ -119,6 +119,95 @@ curl -X POST --data '{
 }
 ```
 
+### `platform.addSubnetValidator`
+
+:::warning
+
+Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+
+:::
+
+Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary
+Network for the entire duration they validate this Subnet.
+
+**Signature:**
+
+```sh
+platform.addSubnetValidator(
+    {
+        nodeID: string,
+        subnetID: string,
+        startTime: int,
+        endTime: int,
+        weight: int,
+        from: []string, // optional
+        changeAddr: string, // optional
+        username: string,
+        password: string
+    }
+) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate
+  the Primary Network for the entire duration that it validates this Subnet.
+- `subnetID` is the ID of the Subnet we’re adding a validator to.
+- `startTime` is the Unix time when the validator starts validating the Subnet. It must be at or
+  after the time that the validator starts validating the Primary Network
+- `endTime` is the Unix time when the validator stops validating the Subnet. It must be at or before
+  the time that the validator stops validating the Primary Network.
+- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the
+  cumulative weight of all validators in the Subnet is 100, then this validator will be included in
+  about 1 in every 100 samples during consensus. The cumulative weight of all validators in the
+  Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the
+  Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's
+  weight can't be changed while it is validating, so take care to use an appropriate value.
+- `from` are the fund addresses that the user wants to use to pay for this operation. If omitted,
+  use any of user's addresses as needed.
+- `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses)
+  will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the
+  user.
+- `username` is the user that pays the transaction fee.
+- `password` is `username`‘s password.
+- `txID` is the transaction ID.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.addSubnetValidator",
+    "params": {
+        "nodeID":"NodeID-7xhw2mdxuds44j42tcb6u5579esbst3lg",
+        "subnetID":"zbfoww1ffkpvrfywpj1cvqrfnyesepdfc61hmu2n9jnghduel",
+        "startTime":1583524047,
+        "endTime":1604102399,
+        "weight":1,
+        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
+        "username":"myUsername",
+        "password":"myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm",
+    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
+  }
+}
+```
+
 ### `platform.addValidator`
 
 :::warning
@@ -231,95 +320,6 @@ curl -X POST --data '{
     "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
   },
   "id": 1
-}
-```
-
-### `platform.addSubnetValidator`
-
-:::warning
-
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
-
-:::
-
-Add a validator to a Subnet other than the Primary Network. The Validator must validate the Primary
-Network for the entire duration they validate this Subnet.
-
-**Signature:**
-
-```sh
-platform.addSubnetValidator(
-    {
-        nodeID: string,
-        subnetID: string,
-        startTime: int,
-        endTime: int,
-        weight: int,
-        from: []string, // optional
-        changeAddr: string, // optional
-        username: string,
-        password: string
-    }
-) ->
-{
-    txID: string,
-    changeAddr: string,
-}
-```
-
-- `nodeID` is the node ID of the validator being added to the Subnet. This validator must validate
-  the Primary Network for the entire duration that it validates this Subnet.
-- `subnetID` is the ID of the Subnet we’re adding a validator to.
-- `startTime` is the Unix time when the validator starts validating the Subnet. It must be at or
-  after the time that the validator starts validating the Primary Network
-- `endTime` is the Unix time when the validator stops validating the Subnet. It must be at or before
-  the time that the validator stops validating the Primary Network.
-- `weight` is the validator’s weight used for sampling. If the validator’s weight is 1 and the
-  cumulative weight of all validators in the Subnet is 100, then this validator will be included in
-  about 1 in every 100 samples during consensus. The cumulative weight of all validators in the
-  Subnet must be at least `snow-sample-size`. For example, if there is only one validator in the
-  Subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's
-  weight can't be changed while it is validating, so take care to use an appropriate value.
-- `from` are the fund addresses that the user wants to use to pay for this operation. If omitted,
-  use any of user's addresses as needed.
-- `changeAddr` is the address any change/left-over of the fund (specified by the `from` addresses)
-  will be sent to. If omitted, change/left-over is sent to one of the addresses controlled by the
-  user.
-- `username` is the user that pays the transaction fee.
-- `password` is `username`‘s password.
-- `txID` is the transaction ID.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.addSubnetValidator",
-    "params": {
-        "nodeID":"NodeID-7xhw2mdxuds44j42tcb6u5579esbst3lg",
-        "subnetID":"zbfoww1ffkpvrfywpj1cvqrfnyesepdfc61hmu2n9jnghduel",
-        "startTime":1583524047,
-        "endTime":1604102399,
-        "weight":1,
-        "from": ["P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"myUsername",
-        "password":"myPassword"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "txID": "2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm",
-    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-  }
 }
 ```
 
@@ -1480,6 +1480,63 @@ curl -X POST --data '{
 }
 ```
 
+### `platform.getStake`
+
+Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking
+rewards.
+
+**Signature:**
+
+```sh
+platform.getStake({
+    addresses: []string
+}) ->
+{
+    stakeds: string -> int,
+    stakedOutputs:  []string,
+    encoding: string
+}
+```
+
+- `addresses` are the addresses to get information about.
+- `stakeds` is a map from assetID to the amount staked by addresses provided.
+- `stakedOutputs` are the string representation of staked outputs.
+- `encoding` specifies the format for the returned outputs.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getStake",
+    "params": {
+        "addresses": [
+            "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
+        ]
+    },
+    "id": 1
+}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "stakeds": {
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
+    },
+    "stakedOutputs": [
+      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
+    ],
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
 ### `platform.getStakingAssetID`
 
 Retrieve an assetID for a Subnet’s staking asset.
@@ -1578,63 +1635,6 @@ curl -X POST --data '{
         "threshold": "2"
       }
     ]
-  },
-  "id": 1
-}
-```
-
-### `platform.getStake`
-
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking
-rewards.
-
-**Signature:**
-
-```sh
-platform.getStake({
-    addresses: []string
-}) ->
-{
-    stakeds: string -> int,
-    stakedOutputs:  []string,
-    encoding: string
-}
-```
-
-- `addresses` are the addresses to get information about.
-- `stakeds` is a map from assetID to the amount staked by addresses provided.
-- `stakedOutputs` are the string representation of staked outputs.
-- `encoding` specifies the format for the returned outputs.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getStake",
-    "params": {
-        "addresses": [
-            "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
-        ]
-    },
-    "id": 1
-}
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "stakeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
-    },
-    "stakedOutputs": [
-      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
-    ],
-    "encoding": "hex"
   },
   "id": 1
 }
