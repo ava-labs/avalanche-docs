@@ -1,5 +1,5 @@
 ---
-sidebar_position: 12
+sidebar_position: 11
 description: The IPC API allows users to create UNIX domain sockets for blockchains to publish to. Find out more information here.
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 10
 ---
 
 # Info API
@@ -22,6 +22,43 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 ```
 
 ## Methods
+
+### `info.isBootstrapped`
+
+Check whether a given chain is done bootstrapping
+
+**Signature:**
+
+```sh
+info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
+```
+
+`chain` is the ID or alias of a chain.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.isBootstrapped",
+    "params": {
+        "chain":"X"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "isBootstrapped": true
+  },
+  "id": 1
+}
+```
 
 ### `info.getBlockchainID`
 
@@ -254,6 +291,69 @@ curl -X POST --data '{
 }
 ```
 
+### `info.getTxFee`
+
+Get the fees of the network.
+
+**Signature:**
+
+```sh
+info.getTxFee() ->
+{
+    txFee: uint64,
+    createAssetTxFee: uint64,
+    createSubnetTxFee: uint64,
+    transformSubnetTxFee: uint64,
+    createBlockchainTxFee: uint64,
+    addPrimaryNetworkValidatorFee: uint64,
+    addPrimaryNetworkDelegatorFee: uint64,
+    addSubnetValidatorFee: uint64,
+    addSubnetDelegatorFee: uint64
+}
+```
+
+- `txFee` is the default fee for making transactions.
+- `createAssetTxFee` is the fee for creating a new asset.
+- `createSubnetTxFee` is the fee for creating a new Subnet.
+- `transformSubnetTxFee` is the fee for converting a PoA Subnet into a PoS Subnet.
+- `createBlockchainTxFee` is the fee for creating a new blockchain.
+- `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
+- `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
+- `addSubnetValidatorFee` is the fee for adding a new Subnet validator.
+- `addSubnetDelegatorFee` is the fee for adding a new Subnet delegator.
+
+All fees are denominated in nAVAX.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getTxFee"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txFee": "1000000",
+    "createAssetTxFee": "10000000",
+    "createSubnetTxFee": "1000000000",
+    "transformSubnetTxFee": "10000000000",
+    "createBlockchainTxFee": "1000000000",
+    "addPrimaryNetworkValidatorFee": "0",
+    "addPrimaryNetworkDelegatorFee": "0",
+    "addSubnetValidatorFee": "1000000",
+    "addSubnetDelegatorFee": "1000000"
+  }
+}
+```
+
 ### `info.getVMs`
 
 Get the virtual machines installed on this node.
@@ -291,43 +391,6 @@ curl -X POST --data '{
       "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": ["propertyfx"],
       "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": ["secp256k1fx"]
     }
-  },
-  "id": 1
-}
-```
-
-### `info.isBootstrapped`
-
-Check whether a given chain is done bootstrapping
-
-**Signature:**
-
-```sh
-info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
-```
-
-`chain` is the ID or alias of a chain.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.isBootstrapped",
-    "params": {
-        "chain":"X"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "isBootstrapped": true
   },
   "id": 1
 }
@@ -438,69 +501,6 @@ curl -X POST --data '{
         "benched": []
       }
     ]
-  }
-}
-```
-
-### `info.getTxFee`
-
-Get the fees of the network.
-
-**Signature:**
-
-```sh
-info.getTxFee() ->
-{
-    txFee: uint64,
-    createAssetTxFee: uint64,
-    createSubnetTxFee: uint64,
-    transformSubnetTxFee: uint64,
-    createBlockchainTxFee: uint64,
-    addPrimaryNetworkValidatorFee: uint64,
-    addPrimaryNetworkDelegatorFee: uint64,
-    addSubnetValidatorFee: uint64,
-    addSubnetDelegatorFee: uint64
-}
-```
-
-- `txFee` is the default fee for making transactions.
-- `createAssetTxFee` is the fee for creating a new asset.
-- `createSubnetTxFee` is the fee for creating a new Subnet.
-- `transformSubnetTxFee` is the fee for converting a PoA Subnet into a PoS Subnet.
-- `createBlockchainTxFee` is the fee for creating a new blockchain.
-- `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
-- `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
-- `addSubnetValidatorFee` is the fee for adding a new Subnet validator.
-- `addSubnetDelegatorFee` is the fee for adding a new Subnet delegator.
-
-All fees are denominated in nAVAX.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.getTxFee"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "txFee": "1000000",
-    "createAssetTxFee": "10000000",
-    "createSubnetTxFee": "1000000000",
-    "transformSubnetTxFee": "10000000000",
-    "createBlockchainTxFee": "1000000000",
-    "addPrimaryNetworkValidatorFee": "0",
-    "addPrimaryNetworkDelegatorFee": "0",
-    "addSubnetValidatorFee": "1000000",
-    "addSubnetDelegatorFee": "1000000"
   }
 }
 ```
