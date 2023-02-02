@@ -140,7 +140,7 @@ See [Notes on Percentages](#notes-on-percentages) section to understand `Percent
 
 ## Reward Formula
 
-Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $Staking\:Period$ seconds.
+Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $StakingPeriod$ seconds.
 
 Assume that at the start of the staking period there is a $Supply$ amount of `AssetID` in the Subnet.
 The maximum amount of Subnet asset is $MaximumSupply$ `AssetID`.
@@ -160,15 +160,15 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-Note that $Staking\:Period$ is the staker's entire staking period, not just the
+Note that $StakingPeriod$ is the staker's entire staking period, not just the
 staker's uptime, that is the aggregated time during which the staker has been
 responsive. The uptime comes into play only to decide whether a staker should be
 rewarded; to calculate the actual reward only the staking period duration is
 taken into account.
 
-$Effective\:Period$ is a linear combination of $MinConsumptionRate$ and
+$EffectivePeriod$ is a linear combination of $MinConsumptionRate$ and
 $MaxConsumptionRate$.
-$MinConsumptionRate$ and $MaxConsumptionRate$ bound $Effective\:Period$ because 
+$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectivePeriod$ because 
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
@@ -178,9 +178,9 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-The larger $Staking\:Period$ is, the closer $Effective\:Period$ is to $MaxConsumptionRate$.
+The larger $StakingPeriod$ is, the closer $EffectivePeriod$ is to $MaxConsumptionRate$.
 
-A staker achieves the maximum reward for its stake if $Staking\:Period$ = $Minting Period$.
+A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
 The reward is:
 
 <!-- markdownlint-disable MD013 -->
@@ -191,16 +191,19 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
+Note that the reward formula above is used in the Primary Network to calculate
+stakers reward. For reference, you can find Primary network parameters in [the section below](#primary-network-parameters-on-mainnet).
+
 ## Delegators Weight Checks
 
 There are bounds set of the maximum amount of delegators' stake that a validator can receive.
 
-The maximum weight $Max\;Weight$ a validator $Validator$ can have is:
+The maximum weight $MaxWeight$ a validator $Validator$ can have is:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
 $$
-    Max\;Weight = \min(Validator.Weight \times MaxValidatorWeightFactor, MaxValidatorStake)
+    MaxWeight = \min(Validator.Weight \times MaxValidatorWeightFactor, MaxValidatorStake)
 $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
@@ -209,11 +212,11 @@ where $MaxValidatorWeightFactor$ and $MaxValidatorStake$ are the Elastic Subnet
 Parameters described above.
 
 A delegator won't be added to a validator if the combination of their weights
-and all other validator's delegators' weight is larger than $Max\;Weight$. Note
+and all other validator's delegators' weight is larger than $MaxWeight$. Note
 that this must be true at any point in time.
 
 <!-- vale off -->
-Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $Max\;Weight = Validator.Weight$.
+Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $MaxWeight = Validator.Weight$.
 <!-- vale on -->
 
 ## Notes on Percentages
@@ -228,3 +231,25 @@ For example:
 * `1%` corresponds to `1* 10_000 = 10_000`
 * `0.02%` corresponds to `0.002 * 10_000 = 200`
 * `0.0007%` corresponds to `0.0007 * 10_000 = 7`
+
+## Primary Network Parameters on Mainnet
+
+An Elastic Subnet is free to pick any parameters affecting rewards, within the
+constraints specified above. For reference we list below Primary Network
+parameters on Mainnet:
+
+* `AssetID = Avax`
+* `InitialSupply = 240_000_000 Avax`
+* `MaximumSupply = 720_000_000 Avax`.
+* `MinConsumptionRate = 0.10 * reward.PercentDenominator`.
+* `MaxConsumptionRate = 0.12 * reward.PercentDenominator`.
+* `Minting Period = 365 * 24 * time.Hour`.
+* `MinValidatorStake = 2_000 Avax`.
+* `MaxValidatorStake = 3_000_000 Avax`.
+* `MinStakeDuration = 2 * 7 * 24 * time.Hour`.
+* `MaxStakeDuration = 365 * 24 * time.Hour`.
+* `MinDelegationFee = 20000`, that is `2%`.
+* `MinDelegatorStake = 25 Avax`.
+* `MaxValidatorWeightFactor = 5`. This is a platformVM parameter rather than a
+  genesis one, so it's shared across networks.
+* `UptimeRequirement = 0.8`, that is `80%`.
