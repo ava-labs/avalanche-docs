@@ -151,11 +151,11 @@ receives a reward calculated as follows:
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
 $$
-Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveRate
+Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
 $$
 where
 $$
-EffectiveRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
+EffectiveConsumptionRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
@@ -166,19 +166,19 @@ responsive. The uptime comes into play only to decide whether a staker should be
 rewarded; to calculate the actual reward only the staking period duration is
 taken into account.
 
-$EffectivePeriod$ is a linear combination of $MinConsumptionRate$ and
+$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and
 $MaxConsumptionRate$.
-$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectivePeriod$ because 
+$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
 $$
-MinConsumptionRate \leq EffectiveRate \leq MaxConsumptionRate
+MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate
 $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-The larger $StakingPeriod$ is, the closer $EffectivePeriod$ is to $MaxConsumptionRate$.
+The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
 
 A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
 The reward is:
