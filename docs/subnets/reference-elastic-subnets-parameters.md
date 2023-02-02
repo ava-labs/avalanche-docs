@@ -20,9 +20,7 @@ The following constraints apply:
 The following constraints apply:
   
 * `AssetID` must not be the `Empty ID`.
-* `AssetID` must not be `AVAX ID`.
-
-`AVAX ID` is the Primary Network asset.
+* `AssetID` must not be `AVAX ID`, the Primary Network asset.
 
 ### `InitialSupply`
 
@@ -33,8 +31,8 @@ The following constraints apply:
 
 ### `MaximumSupply`
 
-`MaximumSupply` has type `uint64` and it's the maximum amount `AssetID` that Subnet can hold at any time.
-The following constraints apply:
+`MaximumSupply` has type `uint64` and it's the maximum amount of `AssetID` that
+Subnet can hold at any time. The following constraints apply:
 
 * `MaximumSupply` must be larger or equal to `InitialSupply`.
 
@@ -44,19 +42,23 @@ supply and can become larger (and smaller) than `InitialSupply` at any time.
 ### `MinConsumptionRate`
 
 `MinConsumptionRate` has type `uint64` and it's the minimal rate to allocate funds.
-You can find more details about it in the Reward Formula section.
+You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
-* `MinConsumptionRate` is a non negative integer. Only its type constraints apply.
+* `MinConsumptionRate` must be smaller or equal to `PercentDenominator`.
+
+See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
 
 ### `MaxConsumptionRate`
 
 `MaxConsumptionRate` has type `uint64`. It's the maximal rate to allocate funds.
-You can find more details about it in the Reward Formula section.
+You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
 * `MaxConsumptionRate` must be larger or equal to `MinConsumptionRate`.
-* `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`[^1].
+* `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`.
+
+See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
 
 ### `MinValidatorStake`
 
@@ -119,7 +121,7 @@ The following constraints apply:
 `MaxValidatorWeightFactor` has type `uint8` and it's the factor which calculates
 the maximum amount of delegation a validator can receive. A value of 1
 effectively disables delegation. You can find more details about it in the
-Delegators Weight Checks section.
+[Delegators Weight Checks section](#delegators-weight-checks).
 The following constraints apply:
 
 * `MaxValidatorWeightFactor` must be larger than zero.
@@ -133,9 +135,12 @@ The following constraints apply:
 
 * `UptimeRequirement` must be smaller or equal `PercentDenominator`.
 
+See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
+
+
 ## Reward Formula
 
-Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $Staking\:Period$ seconds[^2].
+Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $Staking\:Period$ seconds.
 
 Assume that at the start of the staking period there is a $Supply$ amount of `AssetID` in the Subnet.
 The maximum amount of Subnet asset is $MaximumSupply$ `AssetID`.
@@ -154,6 +159,12 @@ EffectiveRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \f
 $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
+
+Note that $Staking\:Period$ is the staker's entire staking period, not just the
+staker's uptime, that is the aggregated time during which the staker has been
+responsive. The uptime comes into play only to decide whether a staker should be
+rewarded; to calculate the actual reward only the staking period duration is
+taken into account.
 
 $Effective\:Period$ is a linear combination of $MinConsumptionRate$ and
 $MaxConsumptionRate$.
@@ -205,8 +216,9 @@ that this must be true at any point in time.
 Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $Max\;Weight = Validator.Weight$.
 <!-- vale on -->
 
+## Notes on Percentages
 
-[^1] Note that `PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
+`PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
 
 It allows you to specify percentages up to 4 digital positions.
 To denominate your percentage in `PercentDenominator` just multiply it by `10_000`.
@@ -216,9 +228,3 @@ For example:
 * `1%` corresponds to `1* 10_000 = 10_000`
 * `0.02%` corresponds to `0.002 * 10_000 = 200`
 * `0.0007%` corresponds to `0.0007 * 10_000 = 7`
-
-[^2] Note that $Staking\:Period$ is the staker's entire staking period, not just the
-staker's uptime, that is the aggregated time during which the staker has been
-responsive. The uptime comes into play only to decide whether a staker should be
-rewarded; to calculate the actual reward only the staking period duration is
-taken into account.
