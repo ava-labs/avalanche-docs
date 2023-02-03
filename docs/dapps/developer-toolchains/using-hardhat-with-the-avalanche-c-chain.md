@@ -145,6 +145,30 @@ npx hardhat balances --network local
 Notice that the first account is already funded. This is because this address is
 pre-funded in the local network genesis file.
 
+### ERC20 Balances
+
+
+```js
+task("check-erc20-balance", "Prints out the ERC20 balance of your account").setAction(async function (taskArguments, hre) {
+  const genericErc20Abi = require("./erc20.abi.json");
+  const tokenContractAddress = "0x...";
+  const provider = ethers.getDefaultProvider("https://api.avax.network/ext/bc/C/rpc");
+  const contract = new ethers.Contract(tokenContractAddress, genericErc20Abi, provider);
+  const balance = await contract.balanceOf("0x...");
+  console.log(`Balance in wei: ${balance}`)
+});
+```
+
+This will return the result in wei. If you want to know the exact amount of
+token with its token name then you need to divide it with its decimal.
+`erc20.abi.json` can be [found here](./erc20.abi.json).
+
+
+The example uses the [C-Chain Public
+API](../../apis/avalanchego/public-api-server) for the provider. For a local
+Avalanche network use `http://127.0.0.1:9650/ext/bc/C/rpc` and for Fuji Testnet
+use `https://api.avax-test.network/ext/bc/C/rpc`.
+
 ## Hardhat Help
 
 Run `yarn hardhat` to list Hardhat's version, usage instructions, global options and available tasks.
