@@ -656,7 +656,7 @@ Get the balance of AVAX controlled by a given address.
 
 ```sh
 platform.getBalance({
-    address: string
+    addresses: []string
 }) -> {
     balances: string -> int,
     unlockeds: string -> int,
@@ -669,7 +669,7 @@ platform.getBalance({
 }
 ```
 
-- `address` is the address to get the balance of.
+- `addresses` are the addresses to get the balance of.
 - `balances` is a map from assetID to the total balance.
 - `unlockeds` is a map from assetID to the unlocked balance.
 - `lockedStakeables` is a map from assetID to the locked stakeable balance.
@@ -679,46 +679,50 @@ platform.getBalance({
 **Example Call:**
 
 ```sh
-curl -X POST --data '{
-  "jsonrpc":"2.0",
-  "id"     : 1,
-  "method" :"platform.getBalance",
-  "params" :{
-      "address":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
-  }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+curl --location --request POST 'http://127.0.0.1:9650/ext/bc/P' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"platform.getBalance",
+    "params" :{
+      "addresses":["P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"]
+    }
+}'
 ```
 
 **Example Response:**
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "result": {
-    "balances": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000"
+    "jsonrpc": "2.0",
+    "result": {
+        "balance": "30000000000000000",
+        "unlocked": "20000000000000000",
+        "lockedStakeable": "10000000000000000",
+        "lockedNotStakeable": "0",
+        "balances": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "30000000000000000"
+        },
+        "unlockeds": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "20000000000000000"
+        },
+        "lockedStakeables": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "10000000000000000"
+        },
+        "lockedNotStakeables": {},
+        "utxoIDs": [
+            {
+                "txID": "11111111111111111111111111111111LpoYY",
+                "outputIndex": 1
+            },
+            {
+                "txID": "11111111111111111111111111111111LpoYY",
+                "outputIndex": 0
+            }
+        ]
     },
-    "unlockeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
-    },
-    "lockedStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
-    },
-    "lockedNotStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0"
-    },
-    "utxoIDs": [
-      {
-        "txID": "11111111111111111111111111111111LpoYY",
-        "outputIndex": 1
-      },
-      {
-        "txID": "11111111111111111111111111111111LpoYY",
-        "outputIndex": 0
-      }
-    ]
-  },
-  "id": 1
+    "id": 1
 }
 ```
 
