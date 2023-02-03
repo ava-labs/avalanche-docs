@@ -679,16 +679,14 @@ platform.getBalance({
 **Example Call:**
 
 ```sh
-curl --location --request POST 'http://127.0.0.1:9650/ext/bc/P' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"platform.getBalance",
-    "params" :{
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"platform.getBalance",
+  "params" :{
       "addresses":["P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"]
-    }
-}'
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 **Example Response:**
