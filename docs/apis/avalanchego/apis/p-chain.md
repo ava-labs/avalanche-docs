@@ -684,7 +684,7 @@ curl -X POST --data '{
   "id"     : 1,
   "method" :"platform.getBalance",
   "params" :{
-      "address":"P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+      "addresses":["P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"]
   }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -693,32 +693,34 @@ curl -X POST --data '{
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "result": {
-    "balances": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "20000000000000000"
+    "jsonrpc": "2.0",
+    "result": {
+        "balance": "30000000000000000",
+        "unlocked": "20000000000000000",
+        "lockedStakeable": "10000000000000000",
+        "lockedNotStakeable": "0",
+        "balances": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "30000000000000000"
+        },
+        "unlockeds": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "20000000000000000"
+        },
+        "lockedStakeables": {
+            "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC": "10000000000000000"
+        },
+        "lockedNotStakeables": {},
+        "utxoIDs": [
+            {
+                "txID": "11111111111111111111111111111111LpoYY",
+                "outputIndex": 1
+            },
+            {
+                "txID": "11111111111111111111111111111111LpoYY",
+                "outputIndex": 0
+            }
+        ]
     },
-    "unlockeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
-    },
-    "lockedStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "10000000000000000"
-    },
-    "lockedNotStakeables": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "0"
-    },
-    "utxoIDs": [
-      {
-        "txID": "11111111111111111111111111111111LpoYY",
-        "outputIndex": 1
-      },
-      {
-        "txID": "11111111111111111111111111111111LpoYY",
-        "outputIndex": 0
-      }
-    ]
-  },
-  "id": 1
+    "id": 1
 }
 ```
 
