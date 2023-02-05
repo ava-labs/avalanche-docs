@@ -693,7 +693,7 @@ This is a bit of a special command. The `join` command is going to either just _
 instructions_ for your already running node or is going to attempt at configuring a config file the
 user provides.
 
-The summary of required steps is to first 
+The summary of required steps 
 
 1. Whitelist the Subnet on the node, which starts the bootstrapping allowing the
    node to catch up to the latest block 
