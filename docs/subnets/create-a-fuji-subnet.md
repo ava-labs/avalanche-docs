@@ -676,7 +676,7 @@ This means the node is now a validator on the given Subnet on `Fuji`!
 
 :::warning
 
-When adding multiple validators __DO NOT__ add the validators too quickly. Add
+When adding multiple validators **DO NOT** add the validators too quickly. Add
 validators one-by-one giving each the time to sync. When adding validators too quickly it
 effectively creates two networks because the validators have different stake
 weights.
