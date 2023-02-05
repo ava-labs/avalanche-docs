@@ -674,11 +674,30 @@ This means the node is now a validator on the given Subnet on `Fuji`!
 
 ## Join a Subnet
 
+:::warning
+
+When adding multiple validators __DO NOT__ add the validators too quickly. Add
+validators one-by-one giving each the time to sync. When adding validators too quickly it
+effectively creates two networks because the validators have different stake
+weights.
+
+Before adding the validator, Subnets should check the block number to identify
+the tip of the chain to make sure the block number synced up to the tip of the
+chain.
+
+:::
+
 You might already have a running validator which you want to add to a specific Subnet. For this
 run the `join` command.
 This is a bit of a special command. The `join` command is going to either just _print the required
 instructions_ for your already running node or is going to attempt at configuring a config file the
 user provides.
+
+The summary of required steps is to first 
+
+1. Whitelist the Subnet on the node, which starts the bootstrapping allowing the node to catch up to the latest block 
+2. (health check): Identify the block number to identify the tip of the chain before 
+3. dd the validators with suitable time between them to allow syncing
 
 First network selection:
 
