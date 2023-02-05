@@ -695,7 +695,8 @@ user provides.
 
 The summary of required steps is to first 
 
-1. Whitelist the Subnet on the node, which starts the bootstrapping allowing the node to catch up to the latest block 
+1. Whitelist the Subnet on the node, which starts the bootstrapping allowing the
+   node to catch up to the latest block 
 2. (health check): Identify the block number to identify the tip of the chain before 
 3. dd the validators with suitable time between them to allow syncing
 
