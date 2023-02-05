@@ -274,7 +274,7 @@ Let's go back to the root of the Subnet-EVM repository and run the PrecompileGen
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 
-go run ./cmd/precompilegen/main.go --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
+./scripts/create_precompile.sh --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
 ```
 
 <!-- markdownlint-enable MD013 -->
