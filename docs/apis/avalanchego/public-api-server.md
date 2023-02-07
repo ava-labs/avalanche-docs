@@ -178,6 +178,37 @@ Note: soft limited to 1 million daily requests per IP or referring domain. Batch
 
 Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
+### Blast
+
+[Blast](https://blastapi.io/public-api/avalanche) supports the
+C-Chain, X-Chain, and P-Chain.
+
+#### Mainnet
+
+##### HTTP
+
+- For C-Chain RPC Endpoint ETH, the URL is `https://ava-mainnet.public.blastapi.io/ext/bc/C/rpc`
+- For C-Chain RPC Endpoint AVAX, the URL is `https://ava-mainnet.public.blastapi.io/ext/bc/C/avax`
+- For X-Chain RPC Endpoint, the URL is `https://ava-mainnet.public.blastapi.io/ext/bc/X`
+- For P-Chain RPC Endpoint, the URL is `https://ava-mainnet.public.blastapi.io/ext/P`
+
+##### Websockets
+
+- For C-Chain WSS Endpoint, the URL is `wss://ava-mainnet.public.blastapi.io/ext/bc/C/ws`
+
+#### Testnet (Fuji)
+
+##### HTTP
+
+- For C-Chain RPC Endpoint ETH, the URL is `https://ava-testnet.public.blastapi.io/ext/bc/C/rpc`
+- For C-Chain RPC Endpoint AVAX, the URL is `https://ava-testnet.public.blastapi.io/ext/bc/C/avax`
+- For X-Chain RPC Endpoint, the URL is `https://ava-testnet.public.blastapi.io/ext/bc/X`
+- For P-Chain RPC Endpoint, the URL is `https://ava-testnet.public.blastapi.io/ext/P`
+
+##### Websockets
+
+- For C-Chain WSS Endpoint, the URL is `wss://ava-testnet.public.blastapi.io/ext/bc/C/ws`
+
 ### GetBlock 
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
