@@ -39,12 +39,12 @@ Subnet has available for staking and rewards at any time. The following constrai
 
 * `MaximumSupply` must be larger or equal to `InitialSupply`.
 
-A Subnet supply can vary in time. The constraint above only makes sure that Subnet
-supply and can become larger (and smaller) than `InitialSupply` at any time.
+A Subnet supply can vary in time but it should be no larger than the configured
+maximum at any point in time, including at Subnet creation.
 
 ### `MinConsumptionRate`
 
-`MinConsumptionRate` has type `uint64` and it's the minimal rate to allocate funds.
+`MinConsumptionRate` has type `uint64` and it's the minimal rate to allocate funds to validator rewards.
 You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
@@ -54,7 +54,7 @@ See [Notes on Percentages](#notes-on-percentages) section to understand `Percent
 
 ### `MaxConsumptionRate`
 
-`MaxConsumptionRate` has type `uint64`. It's the maximal rate to allocate funds.
+`MaxConsumptionRate` has type `uint64` and it's the maximal rate to allocate funds to validator rewards.
 You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
@@ -65,7 +65,7 @@ See [Notes on Percentages](#notes-on-percentages) section to understand `Percent
 
 ### `MinValidatorStake`
 
-`MinValidatorStake` has type `uint64`. It's the minimum amount of funds required to become a validator.
+`MinValidatorStake` has type `uint64` and it's the minimum amount of funds required to become a validator.
 The following constraints apply:
 
 * `MinValidatorStake` must be larger than zero
@@ -73,7 +73,7 @@ The following constraints apply:
 
 ### `MaxValidatorStake`
 
-`MaxValidatorStake` has type `uint64`. It's the maximum amount of funds a single
+`MaxValidatorStake` has type `uint64` and it's the maximum amount of funds a single
 validator can be allocated, including delegated funds.
 The following constraints apply:
 
