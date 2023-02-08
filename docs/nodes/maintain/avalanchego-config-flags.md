@@ -79,7 +79,7 @@ If set to `false`, this node will not expose the Info API. Defaults to `true`. S
 
 #### `--api-ipcs-enabled` (boolean)
 
-If set to `true`, this node will expose the IPC's API. Defaults to `false`. See
+If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
 [here](../../apis/avalanchego/apis/ipc.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
