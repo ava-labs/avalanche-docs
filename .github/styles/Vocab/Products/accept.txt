@@ -133,7 +133,7 @@ infeasibly
 Infura
 inlined
 ints
-IPC's
+IPCs
 ipfs
 IPFS
 IPs
