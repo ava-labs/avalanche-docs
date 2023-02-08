@@ -84,9 +84,8 @@ If set to `true`, this node will expose the IPC's API. Defaults to `false`. See
 
 #### `--api-keystore-enabled` (boolean)
 
-If set to `true`, this node will expose the Keystore API. Defaults to
-`false`. See [here](../../apis/avalanchego/apis/keystore.md) for more
-information.
+If set to `true`, this node will expose the Keystore API. Defaults to `false`.
+See [here](../../apis/avalanchego/apis/keystore.md) for more information.
 
 #### `--api-metrics-enabled` (boolean)
 
