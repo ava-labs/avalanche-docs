@@ -69,11 +69,10 @@ Hardhat uses `hardhat.config.js` as the configuration file. You can define
 tasks, networks, compilers and more in that file. For more information see
 [here](https://hardhat.org/config/).
 
-In our repository we use a pre-configured file
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-This file configures necessary network information to provide smooth interaction
-with Avalanche. There are also some pre-defined private keys for testing on a
-local test network.
+Here is an example pre-configured [hardhat.config.ts](./hardhat.config.ts). This
+file configures necessary network information to provide smooth interaction with
+Avalanche. There are also some pre-defined private keys for testing on a local
+test network.
 
 :::info
 
@@ -86,18 +85,10 @@ see how to retrieve the port numbers.
 
 ## Hardhat Tasks
 
-You can define custom hardhat tasks in
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-There are two tasks included as examples: `accounts` and `balances`. Both have
-scripts in
-[package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
+You can define custom hardhat tasks in [hardhat.config.ts](./hardhat.config.ts).
+There are two tasks included as examples: `accounts` and `balances`. 
 
-```javascript
-"accounts": "npx hardhat accounts",
-"balances": "npx hardhat balances"
-```
-
-`yarn accounts` prints the list of accounts. `yarn balances` prints the list of
+`npx hardhat accounts` prints the list of accounts. `npx hardhat balances` prints the list of
 AVAX account balances. As with other `yarn` scripts you can pass in a
 `--network` flag to hardhat tasks.
 
@@ -106,8 +97,6 @@ AVAX account balances. As with other `yarn` scripts you can pass in a
 Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
-$ yarn accounts --network local
-yarn run v1.22.4
 npx hardhat accounts --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 0x9632a79656af553F58738B0FB750320158495942
@@ -127,8 +116,6 @@ Prints a list of accounts and their corresponding AVAX balances on the local
 Avalanche Network Runner network.
 
 ```text
-$ yarn balances --network local
-yarn run v1.22.4
 npx hardhat balances --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC has balance 50000000000000000000000000
 0x9632a79656af553F58738B0FB750320158495942 has balance 0
