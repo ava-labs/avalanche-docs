@@ -25,9 +25,9 @@ A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is
 through rewards that are given to validators for completing their staking periods with good
 behavior.
 
-AVAX is minted according to the formula, where $R_j$ is the total number of tokens at year $j$,
-with $R_1 = 360M$, and $R_l$ representing the
-last year that the values of $\gamma, \lambda \in \R$ were changed; $c_j$ is the yet un-minted
+AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at 
+year $j$, with $R_1 = 360M$, and $R_l$ representing the last year that the values of
+$\gamma,\lambda \in \R$ were changed; $c_j$ is the yet un-minted
 supply of coins to reach $720M$ at year $j$ such that $c_j \leq 360M$; $u$ represents a staker,
 with $u.s_{amount}$ representing the total amount of stake that $u$ possesses, and $u.s_{time}$
 the length of staking for $u$.
@@ -35,8 +35,7 @@ the length of staking for $u$.
 $$
 \begin{align*}
 
-R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_
-{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
+R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
 
 \intertext{where}
 
