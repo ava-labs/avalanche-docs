@@ -19,11 +19,12 @@ EVM developers can build on Avalanche's implementation of the EVM straight out-o
 their own custom VM for advanced use cases. VMs are supported in multiple languages including Go
 and Rust, giving developers unparalleled amounts of flexibility in their implementation.
 
-Avalanche employs a novel proof-of-stake consensus algorithm which offers strong safety guarantees,
-quick finality times, and high throughput, without compromising decentralization. Avalanche is
-incredibly energy-efficient and sustainable and can run on easily accessible consumer-grade
-hardware, consuming the same amount of energy as 46 US households. The entire Avalanche network
-consumes only 0.0005% of the amount of energy consumed by Bitcoin.
+Avalanche employs a novel consensus algorithm which offers strong safety guarantees, quick finality
+times, and high throughput, without compromising decentralization. Avalanche uses proof-of-stake and
+is incredibly energy-efficient and sustainable compared to proof-of-work blockchains. Avalanche can
+run on easily accessible consumer-grade hardware, and consumes the same amount of energy as 46 US
+households. The entire Avalanche network consumes only 0.0005% of the amount of energy consumed by
+Bitcoin.
 
 ## Building on Avalanche
 
@@ -33,22 +34,21 @@ Avalanche allows developers to build Dapps through the Virtual Machine (VM) fram
 language agnostic and give developers unmatched levels of flexibility and customization in the
 implementation of their applications.
 
-To learn more about VMs, click [here](/docs/overview/getting-started/virtual-machines.md).
+To learn more about VMs, click [here](virtual-machines.md).
 
 ### Subnets
 
 Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite
 amount of interoperable Dapps in its ecosystem.
 
-To learn more about Subnets, click [here](/docs/subnets/README.md).
+To learn more about Subnets, click [here](../../subnets/README.md).
 
 ## Technology
 
 ### Consensus
 
-Avalanche uses a revolutionary proof-of-stake consensus algorithm that is scalable, robust, and
-energy-efficient. Avalanche consensus offers stronger security guarantees well-above the 51%
-standard of other networks.
+Avalanche uses a revolutionary consensus algorithm that is scalable, robust, and energy-efficient.
+Avalanche consensus offers stronger security guarantees well-above the 51% standard of other
+networks.
 
-To learn more about consensus, click [here](/docs/overview/getting-started/avalanche-consensus.md).
-
+To learn more about consensus, click [here](avalanche-consensus.md).

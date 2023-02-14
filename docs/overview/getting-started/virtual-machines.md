@@ -14,10 +14,10 @@ All Avalanche validators as members of the Avalanche primary network are require
   Assets.
 
 Validators are able to install additional VMs on their node to validate additional Subnets in
-the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of the Subnets'
-native gas tokens.
+the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward
+token configured by Subnets.
 
-To learn more about Subnets, click [here](/docs/subnets/README.md).
+To learn more about Subnets, click [here](../../subnets/README.md).
 
 ## Building on Virtual Machines
 
@@ -51,7 +51,7 @@ cases that require more customization.
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, MetaMask,
 Truffle, and more.
 
-To learn more about smart contract support, click [here](/docs/dapps/launch-your-ethereum-dapp.md).
+To learn more about smart contract support, click [here](../../dapps/launch-your-ethereum-dapp.md).
 
 ## Examples
 
@@ -75,8 +75,8 @@ To learn more about smart contract support, click [here](/docs/dapps/launch-your
 
 #### Tutorials
 
-- [How to Build a Simple Golang VM](https://docs.avax.network/subnets/create-a-vm-timestampvm)
-- [How to Build a Complex Golang VM](https://docs.avax.network/subnets/create-a-vm-blobvm)
+- [How to Build a Simple Golang VM](../../subnets/create-a-vm-timestampvm.md)
+- [How to Build a Complex Golang VM](../../subnets/create-a-vm-blobvm.md)
 
 ### Rust
 
@@ -91,4 +91,4 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
 
 #### Tutorials
 
-- [How to Build a Simple Rust VM](https://docs.avax.network/subnets/create-a-simple-rust-vm)
+- [How to Build a Simple Rust VM](../../subnets/create-a-simple-rust-vm.md)

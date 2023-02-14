@@ -28,7 +28,7 @@ end of their staking periods. The minting process offsets the process of burning
 network from falling in danger of grinding to a halt due to a lack of AVAX in circulation to power
 transactions.
 
-Avalanche does not take away any portion of a validator's already staked tokens(commonly known as
+Avalanche does not take away any portion of a validator's already staked tokens (commonly known as
 "slashing") for negligent/malicious staking periods, however this behavior is disincentivized as
 validators who attempt to do harm to the network would expend their node's computing resources
 for no reward.
