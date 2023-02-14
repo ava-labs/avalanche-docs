@@ -9,10 +9,10 @@ interoperable, highly scalable ecosystem. Avalanche is the first ecosystem desig
 the scale of global finance, with near-instant transaction finality.
 
 Avalanche empowers developers to join a rich ecosystem of blockchains known as Subnets. Subnets
-are isolated clusters of the Avalanche network that allow any Dapp to run on its own dedicated set
-of nodes, enabling unmatched levels of fault-tolerance and customization for any use-case. Each
-Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on a
-single Subnet doesn't affect other Subnets on Avalanche.
+are subsets of the Avalanche Primary Network that validate a set of blockchains. Each Subnet's
+failures and performance are isolated from other Subnets in the ecosystem, so increased usage on a
+single Subnet doesn't affect other Subnets. Subnets can be permissioned or permission-less, enabling
+arbitrary levels of customization for any use-case.
 
 Dapps run on Virtual Machines (VMs), which serve as definitions for blockchain applications.
 Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
