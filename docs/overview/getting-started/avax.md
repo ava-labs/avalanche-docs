@@ -33,15 +33,13 @@ with $u.s_{amount}$ representing the total amount of stake that $u$ possesses, a
 the length of staking for $u$.
 
 $$
-\begin{align*}
-
 R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
+$$
 
-\intertext{where}
+where,
 
+$$
 L = \left( \sum_{i=0}^{\infinity}{\frac{1}{\left( \gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
-
-\end{align*}
 $$
 
 The minting process offsets the process of burning, so there's never any danger of the network
