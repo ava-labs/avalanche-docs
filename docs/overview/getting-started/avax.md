@@ -49,7 +49,7 @@ The minting process offsets the process of burning, so there's never any danger 
 slowly grinding to a halt due to a lack of supply of AVAX to power it.
 
 A small portion of burnt transaction fees are used to reward validators at the end of their staking
-periods. Validators are rewarded for virtuous (e.g not attempting lie, steal, or oterwise
+periods. Validators are rewarded for virtuous (e.g not attempting lie, steal, or otherwise
 cause harm the Avalanche network) behavior by receiving validator rewards at the end of their
 staking periods. Avalanche does not take away any portion of a validator's already staked tokens
 (commonly known as "slashing") for negligent/malicious staking periods, however this behavior is
