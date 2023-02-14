@@ -4,9 +4,9 @@ Avalanche allows developers to implement their Dapp in the language of their cho
 Virtual Machine (VM) framework. VMs define blockchains, and serve as application-level blueprints 
 for how blockchains are created.
 
-Developers can implement VMs in any language, and use libaries and tech stacks that they're familiar
-with. Developers have fine control over the behavior of their blockchain, and can redefine the rules
-of a blockchain to fit any use-case they have.
+Developers can implement VMs in any language, and use libraries and tech stacks that they're
+familiar with. Developers have fine control over the behavior of their blockchain, and can redefine
+the rules of a blockchain to fit any use-case they have.
 
 ## Validators
 
