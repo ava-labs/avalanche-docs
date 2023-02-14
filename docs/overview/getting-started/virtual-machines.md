@@ -26,12 +26,13 @@ To learn more about Subnets, click [here](../../subnets/README.md).
 
 ## Building on Virtual Machines
 
-Previously, most blockchain ecosystems required developers to implement their applications in 
-the smart-contract language supported natively by the ecosystem.
+Most blockchain ecosystems require developers to implement their applications in the rulesets and
+technologies that are native to them. As an example, most ecosystems only support a single language
+native to them with which you can build your Dapp.
 
-Developers with advanced use cases that required more customization were forced to start from 
-scratch, and had to implement complex abstractions like networking, state storage, and consensus,
-before even being able to build their new application.
+Developers with advanced use-cases or who require higher levels of customization need to build their
+own blockchain from scratch, re-implement complex abstractions like networking and consensus, all
+before even being able to start working on their new application idea.
 
 Avalanche allows developers to choose the tools that work best for them, by providing an 
 abstraction for application logic in form of VMs. VMs define a blueprint for how a blockchain 
