@@ -165,7 +165,7 @@ see how to retrieve the port numbers.
 
 ## Hardhat Tasks
 
-You can define custom hardhat tasks in [hardhat.config.ts](./hardhat.config.ts).
+You can define custom hardhat tasks in `hardhat.config.ts`.
 There are two tasks included as examples: `accounts` and `balances`. 
 
 ```ts
