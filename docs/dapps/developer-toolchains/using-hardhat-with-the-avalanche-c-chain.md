@@ -69,11 +69,10 @@ Hardhat uses `hardhat.config.js` as the configuration file. You can define
 tasks, networks, compilers and more in that file. For more information see
 [here](https://hardhat.org/config/).
 
-In our repository we use a pre-configured file
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-This file configures necessary network information to provide smooth interaction
-with Avalanche. There are also some pre-defined private keys for testing on a
-local test network.
+Here is an example pre-configured [hardhat.config.ts](./hardhat.config.ts). This
+file configures necessary network information to provide smooth interaction with
+Avalanche. There are also some pre-defined private keys for testing on a local
+test network.
 
 :::info
 
@@ -86,18 +85,10 @@ see how to retrieve the port numbers.
 
 ## Hardhat Tasks
 
-You can define custom hardhat tasks in
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-There are two tasks included as examples: `accounts` and `balances`. Both have
-scripts in
-[package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
+You can define custom hardhat tasks in [hardhat.config.ts](./hardhat.config.ts).
+There are two tasks included as examples: `accounts` and `balances`. 
 
-```javascript
-"accounts": "npx hardhat accounts",
-"balances": "npx hardhat balances"
-```
-
-`yarn accounts` prints the list of accounts. `yarn balances` prints the list of
+`npx hardhat accounts` prints the list of accounts. `npx hardhat balances` prints the list of
 AVAX account balances. As with other `yarn` scripts you can pass in a
 `--network` flag to hardhat tasks.
 
@@ -106,8 +97,6 @@ AVAX account balances. As with other `yarn` scripts you can pass in a
 Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
-$ yarn accounts --network local
-yarn run v1.22.4
 npx hardhat accounts --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 0x9632a79656af553F58738B0FB750320158495942
@@ -127,8 +116,6 @@ Prints a list of accounts and their corresponding AVAX balances on the local
 Avalanche Network Runner network.
 
 ```text
-$ yarn balances --network local
-yarn run v1.22.4
 npx hardhat balances --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC has balance 50000000000000000000000000
 0x9632a79656af553F58738B0FB750320158495942 has balance 0
@@ -144,6 +131,30 @@ npx hardhat balances --network local
 
 Notice that the first account is already funded. This is because this address is
 pre-funded in the local network genesis file.
+
+### ERC20 Balances
+
+
+```js
+task("check-erc20-balance", "Prints out the ERC20 balance of your account").setAction(async function (taskArguments, hre) {
+  const genericErc20Abi = require("./erc20.abi.json");
+  const tokenContractAddress = "0x...";
+  const provider = ethers.getDefaultProvider("https://api.avax.network/ext/bc/C/rpc");
+  const contract = new ethers.Contract(tokenContractAddress, genericErc20Abi, provider);
+  const balance = await contract.balanceOf("0x...");
+  console.log(`Balance in wei: ${balance}`)
+});
+```
+
+This will return the result in wei. If you want to know the exact amount of
+token with its token name then you need to divide it with its decimal.
+`erc20.abi.json` can be [found here](./erc20.abi.json).
+
+
+The example uses the [C-Chain Public
+API](../../apis/avalanchego/public-api-server) for the provider. For a local
+Avalanche network use `http://127.0.0.1:9650/ext/bc/C/rpc` and for Fuji Testnet
+use `https://api.avax-test.network/ext/bc/C/rpc`.
 
 ## Hardhat Help
 
