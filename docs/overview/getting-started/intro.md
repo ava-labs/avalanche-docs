@@ -31,9 +31,10 @@ Bitcoin.
 
 ### Virtual Machines
 
-Avalanche allows developers to build Dapps through the Virtual Machine (VM) framework. VMs are 
-language agnostic and give developers unmatched levels of flexibility and customization in the
-implementation of their applications.
+Blockchains are defined using the Virtual Machine (VM) framework. VMs are language agnostic and give
+developers unmatched levels of flexibility and customization in the implementation of their
+applications. Developers can choose to build on existing VMs that provide EVM-compatibility, or
+build their own custom VMs in the languages and frameworks of their choice.
 
 To learn more about VMs, click [here](virtual-machines.md).
 

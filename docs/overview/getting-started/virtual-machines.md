@@ -4,14 +4,19 @@ Avalanche allows developers to implement their Dapp in the language of their cho
 Virtual Machine (VM) framework. VMs define blockchains, and serve as application-level blueprints 
 for how blockchains are created.
 
+Developers can implement VMs in any language, and use libaries and tech stacks that they're familiar
+with. Developers have fine control over the behavior of their blockchain, and can redefine the rules
+of a blockchain to fit any use-case they have.
+
 ## Validators
 
 All Avalanche validators as members of the Avalanche primary network are required to run three VMs:
 
-- Coreth: Defines the Contract Chain (C-Chain); supports smart contracts written in Solidity.
+- Coreth: Defines the Contract Chain (C-Chain); supports smart contract functionality and is
+- EVM-compatible.
 - Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
-  Assets.
+  Tokens.
 
 Validators are able to install additional VMs on their node to validate additional Subnets in
 the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward
@@ -22,8 +27,7 @@ To learn more about Subnets, click [here](../../subnets/README.md).
 ## Building on Virtual Machines
 
 Previously, most blockchain ecosystems required developers to implement their applications in 
-the smart-contract language supported natively by the ecosystem. This causes pain for developers,
-as developers need to learn new technology stacks specific to each ecosystem they develop in.
+the smart-contract language supported natively by the ecosystem.
 
 Developers with advanced use cases that required more customization were forced to start from 
 scratch, and had to implement complex abstractions like networking, state storage, and consensus,

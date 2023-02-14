@@ -43,7 +43,7 @@ The **X-Chain** is responsible for operations on digital smart assets known as *
 Assets**. A smart asset is a representation of a real-world resource (for example, equity, or a
 bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow" or "can
 only be sent to US citizens." The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the
-creation and trade of Avalanche Native Assets.
+creation and trade of Avalanche Native Tokens.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
 you pay a fee denominated in AVAX.
