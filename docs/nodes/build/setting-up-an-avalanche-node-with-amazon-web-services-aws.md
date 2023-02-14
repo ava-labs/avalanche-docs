@@ -73,15 +73,14 @@ right of the Security Groups panel.
 ![Select "Create security group."](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
 You'll need to specify what inbound traffic is allowed. Allow SSH traffic from
-your IP address so that you can log into your EC2 instance. (Each time your ISP
-changes your IP address, you will need to modify this rule. If your ISP changes
-regularly, you may allow SSH traffic from anywhere to avoid having to modify
-this rule frequently.) Allow TCP traffic on port 9651 so your node can
-communicate with other nodes on the network. Allow TCP traffic on port 9650 from
-your IP so you can make API calls to your node. **It's important that you only
-allow traffic on this port from your IP.** If you allow incoming traffic from
-anywhere, this could be used as an denial of service attack vector. Finally,
-allow all outbound traffic.
+your IP address so that you can log into your EC2 instance (each time your ISP
+changes your IP address, you will need to modify this rule). Allow TCP traffic on
+port 9651 so your node can communicate with other nodes on the network. Allow TCP
+traffic on port 9650 from your IP so you can make API calls to your node.
+**It's important that you only allow traffic on the SSH and API port from your IP.**
+If you allow incoming traffic from anywhere, this could be used to brute force entry to your
+node (SSH port) or used as a denial of service attack vector (API port). Finally, allow all
+outbound traffic.
 
 ![Your inbound and outbound rules should look like this.](/img/inbound-rules.png)
 
