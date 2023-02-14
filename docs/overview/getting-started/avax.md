@@ -58,7 +58,7 @@ L = \left(\sum_{i=0}^{\infty} \frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda} \r
 $$
 
 At genesis, $c_1 = 360M$. The values of $\gamma$ and $\lambda$ are governable, and if changed,
-the function is recomputed with the new value of $c_*$. We have that $\sum_{*}\rho(*) \lte 1$.
+the function is recomputed with the new value of $c_*$. We have that $\sum_{*}\rho(*) \le 1$.
 $\rho(*)$ is a linear function that can be computed as follows ($u.s_{time}$ is measured in weeks,
 and $u.s_{amount}$ is measured in AVAX tokens):
 
@@ -70,10 +70,10 @@ If the entire supply of tokens at year $j$ is staked for the maximum amount of s
 year, or 52 weeks), then $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. If, instead,
 every token is staked continuously for the minimal stake duration of two weeks, then
 $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Therefore, staking for the maximum
-amount of time incurs an additional $11.11%$ of tokens minted, incentivizing stakers to stake
+amount of time incurs an additional 11.11% of tokens minted, incentivizing stakers to stake
 for longer periods.
 
 Due to the capped-supply, the above function guarantees that regardless of the governance changes,
-AVAX will never exceed a total of $720M$ tokens, or $ \lim_{j \to \infty} R(j) = 720M $.
+AVAX will never exceed a total of $720M$ tokens, or $\lim_{j \to \infty} R(j) = 720M$.
 
 <!-- vale on -->
