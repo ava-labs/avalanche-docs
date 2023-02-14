@@ -11,13 +11,14 @@ the scale of global finance, with near-instant transaction finality.
 Avalanche empowers developers to join a rich ecosystem of blockchains known as Subnets. Subnets
 are isolated clusters of the Avalanche network that allow any Dapp to run on its own dedicated set
 of nodes, enabling unmatched levels of fault-tolerance and customization for any use-case. Each
-Subnet is isolated from other Subnets in the ecosystem, so increased usage on a single Subnet 
-doesn't affect other Subnets on Avalanche.
+Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on a
+single Subnet doesn't affect other Subnets on Avalanche.
 
-In Avalanche, developers can create their Dapps by implementing them as a Virtual Machine (VM).
-EVM developers can build on Avalanche's implementation of the EVM straight out-of-the box, or build
-their own custom VM for advanced use cases. VMs are supported in multiple languages including Go
-and Rust, giving developers unparalleled amounts of flexibility in their implementation.
+Dapps run on Virtual Machines (VMs), which serve as definitions for blockchain applications.
+Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
+build their own custom Virtual Machine (VM) for advanced use cases that require more flexibility
+or performance. VMs are supported in multiple languages including Go and Rust, giving developers
+unparalleled amounts of flexibility in their implementation.
 
 Avalanche employs a novel consensus algorithm which offers strong safety guarantees, quick finality
 times, and high throughput, without compromising decentralization. Avalanche uses proof-of-stake and

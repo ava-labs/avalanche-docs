@@ -8,28 +8,23 @@ Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous n
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
 created for different applications.
 
-Avalanche is an ecosystem that allows users to execute smart contracts, interact with validators and
-Subnets, and exchange assets. Avalanche is designed to support application-specific chains, so each
-of these 3 supported operation types is implemented in its own blockchain.
-
-These 3 blockchains are [validated](../../nodes/validate/staking.md) and secured by all validators
-in the Avalanche network and is referred to as the Primary Network. Each Avalanche validator
-validates
-the [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain),
-the [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
-the [**Contract Chain (C-Chain**)](#contract-chain-c-chain).
-
-![Primary network](/img/primary-network.png)
-
 The Primary Network is a special [Subnet](../../subnets/README.md) that contains all validators
 (including validators of any custom Subnets). A node can become a validator for the Primary
 Network by staking at least 2,000 AVAX.
 
+![Primary network](/img/primary-network.png)
+
+All validators as members of the Primary Network are required to validate and secure the
+following 3 blockchains:
+the [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain),
+the [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
+the [**Contract Chain (C-Chain**)](#contract-chain-c-chain).
+
 ## Contract Chain (C-Chain)
 
-The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM) and allows for the
-creation and execution of smart contracts written in Solidity using the
-[C-Chain’s API](../../apis/avalanchego/apis/c-chain.md).
+The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
+The [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md) supports Geth's API and supports the
+creation and execution of smart contracts written in Solidity.
 
 The C-Chain is an instance of the Coreth Virtual Machine.
 
@@ -53,4 +48,4 @@ creation and trade of Avalanche Native Assets.
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
 you pay a fee denominated in AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM).
