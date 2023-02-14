@@ -79,7 +79,7 @@ port 9651 so your node can communicate with other nodes on the network. Allow TC
 traffic on port 9650 from your IP so you can make API calls to your node.
 **It's important that you only allow traffic on the SSH and API port from your IP.**
 If you allow incoming traffic from anywhere, this could be used to brute force entry to your
-node (SSH port) or used as an denial of service attack vector (API port). Finally, allow all
+node (SSH port) or used as a denial of service attack vector (API port). Finally, allow all
 outbound traffic.
 
 ![Your inbound and outbound rules should look like this.](/img/inbound-rules.png)
