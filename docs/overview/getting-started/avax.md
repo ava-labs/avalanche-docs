@@ -26,6 +26,7 @@ through rewards that are given to validators for completing their staking period
 behavior.
 
 <!-- vale off -->
+
 AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at 
 year $j$, with $R_1 = 360M$, and $R_l$ representing the last year that the values of
 $\gamma,\lambda \in \R$ were changed; $c_j$ is the yet un-minted supply of coins to reach $720M$ at
@@ -34,15 +35,18 @@ total amount of stake that $u$ possesses, and $u.s_{time}$ the length of staking
 
 AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at:
 
+<!-- markdownlint-enable MD013 -->
 $$
 R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
 $$
+<!-- markdownlint-disable MD013 -->
 
 where,
 
 $$
 L = \left(\sum_{i=0}^{\infinity}{\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
 $$
+
 <!-- vale on -->
 
 The minting process offsets the process of burning, so there's never any danger of the network
