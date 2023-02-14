@@ -36,9 +36,11 @@ total amount of stake that $u$ possesses, and $u.s_{time}$ the length of staking
 AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at:
 
 <!-- markdownlint-enable MD013 -->
+
 $$
 R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
 $$
+
 <!-- markdownlint-disable MD013 -->
 
 where,
