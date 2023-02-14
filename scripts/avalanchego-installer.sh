@@ -370,6 +370,8 @@ echo "Your node accepts RPC calls on port 9650. If restricted to private, it wil
 echo "Only p2p port (9651 by default) NEEDS to be publicly accessible for correct node operation, RPC port is used for"
 echo "interaction with the node by the operator or applications and SHOULD NOT be freely accessible to the public."
 echo ""
+echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
+echo ""
 while [ "$rpcOpt" != "public" ] && [ "$rpcOpt" != "private" ]
 do
   read -p "Do you want the RPC port to be accessible to public or private (local) network interface? [public, private]: " rpcOpt
@@ -379,8 +381,6 @@ if [ "$rpcOpt" = "public" ]; then
   echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
   echo "RPC requests from known IP addresses!"
   echo ""
-  echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
-  echo ""
   confirm="ask"
   while [ "$confirm" != "yes" ] && [ "$confirm" != "no" ]
   do
@@ -388,9 +388,11 @@ if [ "$rpcOpt" = "public" ]; then
   done
   if [ "$confirm" != "yes" ]; then
     rpcOpt="private"
+  else
+    echo "RPC port will be accessible publicly. You must set up access controls!"
   fi
 fi
-if [ "$rpcOpt" = "local" ]; then
+if [ "$rpcOpt" = "private" ]; then
   echo "RPC port will be accessible only on local interface. RPC calls from remote machines will be blocked."
 fi
 echo ""
