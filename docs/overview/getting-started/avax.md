@@ -22,8 +22,16 @@ or permanently removed from circulating supply.
 ## Tokenomics
 
 A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is constantly minted
-through rewards that are given to validators for completing their staking periods with good
-behavior.
+as a reward to validators. Validators are rewarded for virtuous (e.g not attempting lie, steal, or
+otherwise cause harm the Avalanche network) behavior by receiving minted validator rewards at the
+end of their staking periods. The minting process offsets the process of burning and prevents the
+network from falling in danger of grinding to a halt due to a lack of AVAX in circulation to power
+transactions.
+
+Avalanche does not take away any portion of a validator's already staked tokens(commonly known as
+"slashing") for negligent/malicious staking periods, however this behavior is disincentivized as
+validators who attempt to do harm to the network would expend their node's computing resources
+for no reward.
 
 <!-- vale off -->
 
@@ -46,18 +54,7 @@ $$
 where,
 
 $$
-L = \left(\sum_{i=0}^{\infinity}{\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right)
+L = \left(\sum_{i=0}^{\infty} \frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda} \right)^i} \right)
 $$
 
 <!-- vale on -->
-
-The minting process offsets the process of burning, so there's never any danger of the network
-slowly grinding to a halt due to a lack of supply of AVAX to power it.
-
-A small portion of burnt transaction fees are used to reward validators at the end of their staking
-periods. Validators are rewarded for virtuous (e.g not attempting lie, steal, or otherwise
-cause harm the Avalanche network) behavior by receiving validator rewards at the end of their
-staking periods. Avalanche does not take away any portion of a validator's already staked tokens
-(commonly known as "slashing") for negligent/malicious staking periods, however this behavior is
-disincentivized as validators who attempt to do harm to the network would expend their node's
-computing resources for no reward.
