@@ -375,10 +375,10 @@ do
   read -p "Do you want the RPC port to be accessible to public or private (local) network interface? [public, private]: " rpcOpt
 done
 if [ "$rpcOpt" = "public" ]; then
-  echo "RPC port will be accessible on any interface. Make sure you configure the firewall to only let through RPC"
-  echo "requests from known IP addresses, otherwise your node might be overwhelmed by RPC calls from malicious actors!"
-  echo "It is up to you to provide this protection, node is not designed to defend against it."
-  echo "If firewall or other access control is not provided, your node will be open to denial of service attacks."
+  echo "If firewall or other form of access control is not provided, your node will be open to denial of service attacks."
+  echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
+  echo "RPC requests from known IP addresses!"
+  echo ""
   echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
   echo ""
   confirm="ask"
