@@ -26,7 +26,7 @@ To learn more about Subnets, click [here](../../subnets/README.md).
 
 ## Building on Virtual Machines
 
-Most blockchain ecosystems require developers to implement their applications in the rulesets and
+Most blockchain ecosystems require developers to implement their applications in the rule sets and
 technologies that are native to them. As an example, most ecosystems only support a single language
 native to them with which you can build your Dapp.
 
