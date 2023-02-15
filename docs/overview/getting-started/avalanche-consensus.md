@@ -4,7 +4,6 @@ description: Consensus is the task of getting a group of computers to come to an
 
 # Consensus
 
-## Avalanche Consensus
 
 Consensus is the task of getting a group of nodes to come to an agreement on a decision.
 Nodes can reach a consensus by following a set of steps called a consensus protocol. Avalanche
