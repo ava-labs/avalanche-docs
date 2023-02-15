@@ -27,11 +27,12 @@ should be accepted.
 If a sufficiently large portion (_alpha_ α) of the validators sampled reply that they think the
 transaction should be accepted, the validator prefers to accept the transaction. That is, when it is
 queried about the transaction in the future, it will reply that it thinks the transaction should be
-accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large
-portion of the validators replies that they think the transaction should be rejected.
+accepted. Similarly, the validator will change its preference to prefer another transaction if a
+sufficiently large portion of the validators replies that another conflicting transaction should be
+accepted instead.
 
 The validator repeats this sampling process until _alpha_ of the validators queried reply the same
-way (accept or reject) for _beta_ β consecutive rounds.
+way (having the same preferred transaction) for _beta_ β consecutive rounds.
 
 In the common case when a transaction has no conflicts, finalization happens very quickly. When
 conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
