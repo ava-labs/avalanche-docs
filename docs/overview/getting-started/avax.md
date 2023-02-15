@@ -51,7 +51,7 @@ $$
 
 <!-- markdownlint-enable MD013 -->
 
-where,
+where
 
 $$
 L = \left(\sum_{i=0}^{\infty} \frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda} \right)^i} \right)
