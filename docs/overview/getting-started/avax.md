@@ -22,7 +22,7 @@ or permanently removed from circulating supply.
 ## Tokenomics
 
 A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is constantly minted
-as a reward to validators. Validators are rewarded for virtuous (e.g not attempting lie, steal, or
+as a reward to validators. Validators are rewarded for virtuous (e.g not attempting to lie, steal, or
 otherwise cause harm the Avalanche network) behavior by receiving minted validator rewards at the
 end of their staking periods. The minting process offsets the process of burning and prevents the
 network from falling in danger of grinding to a halt due to a lack of AVAX in circulation to power
