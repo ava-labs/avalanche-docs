@@ -40,7 +40,7 @@ The P-Chain is an instance of the Platform Virtual Machine.
 ## Exchange Chain (X-Chain)
 
 The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
-Assets**. A smart asset is a representation of a real-world resource (for example, equity, or a
+Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a
 bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow."
 The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the creation and trade of
 Avalanche Native Tokens.

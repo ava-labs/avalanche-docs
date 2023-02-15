@@ -40,8 +40,8 @@ To learn more about VMs, click [here](virtual-machines.md).
 
 ### Subnets
 
-Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to handle an infinite
-amount of interoperable Dapps in its ecosystem.
+Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to create a massive amount
+of interoperable Dapps in its ecosystem.
 
 To learn more about Subnets, click [here](../../subnets/README.md).
 
