@@ -374,9 +374,10 @@ echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
 echo ""
 while [ "$rpcOpt" != "public" ] && [ "$rpcOpt" != "private" ]
 do
-  read -p "Do you want the RPC port to be accessible to public or private (local) network interface? [public, private]: " rpcOpt
+  read -p "RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]: " rpcOpt
 done
 if [ "$rpcOpt" = "public" ]; then
+  echo ""
   echo "If firewall or other form of access control is not provided, your node will be open to denial of service attacks."
   echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
   echo "RPC requests from known IP addresses!"
