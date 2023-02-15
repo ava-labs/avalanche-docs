@@ -6,9 +6,9 @@ multiple Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
 ## Utility
 
-AVAX is a capped-supply resource in the Avalanche ecosystem that's used to power the network.
-AVAX is used to secure the ecosystem through staking and for day-to-day operations like issuing
-transactions.
+AVAX is a capped-supply (up to 720M) resource in the Avalanche ecosystem that's used to power the
+network. AVAX is used to secure the ecosystem through staking and for day-to-day operations like
+issuing transactions.
 
 AVAX represents the weight that each node has in network decisions. No single actor owns
 the Avalanche Network, so each validator in the network is given a proportional weight in the
