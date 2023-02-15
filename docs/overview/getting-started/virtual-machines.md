@@ -13,7 +13,7 @@ the rules of a blockchain to fit any use-case they have.
 All Avalanche validators as members of the Avalanche primary network are required to run three VMs:
 
 - Coreth: Defines the Contract Chain (C-Chain); supports smart contract functionality and is
-- EVM-compatible.
+EVM-compatible.
 - Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
   Tokens.
