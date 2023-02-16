@@ -22,11 +22,10 @@ or permanently removed from circulating supply.
 ## Tokenomics
 
 A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is constantly minted
-as a reward to validators. Validators are rewarded for virtuous (e.g not attempting to lie, steal, or
-otherwise cause harm the Avalanche network) behavior by receiving minted validator rewards at the
-end of their staking periods. The minting process offsets the process of burning and prevents the
-network from falling in danger of grinding to a halt due to a lack of AVAX in circulation to power
-transactions.
+as a reward to validators. The protocol rewards validators for good behavior by minting them AVAX
+rewards at the end of their staking period. The minting process offsets the AVAX burned by
+transactions fees. While AVAX is still far away from its supply cap, it will almost always remain an
+inflationary asset.
 
 Avalanche does not take away any portion of a validator's already staked tokens (commonly known as
 "slashing") for negligent/malicious staking periods, however this behavior is disincentivized as
