@@ -50,29 +50,22 @@ list is not up-to-date, the node may mistakenly assume that some nodes are still
 validating while their validation period has expired already. This would open up
 the possibility to download faulty blocks from an source that is not secure (anymore).
 
-So every avalanche node must fully bootstrap the P-chain before moving on
-to the other Primary Network chains and other Subnets.
+**So every avalanche node must fully bootstrap the P-chain before moving on
+to the other Primary Network chains and other Subnets**.
 
-Validators and beacons availability is key to the bootstrapping process.
-Bootstrap process stalls until the node has created a secure connections to
-enough validators or beacons. Moreover if the node fails to reach beacons within
-a given time, the node will shut-down as no operation can be carried out
-securely.
+What about the P-chain? The P-chain can never have an up-to-date validators list
+before completing its bootstrap. To solve this chicken-and-egg situation the
+Avalanche Foundation maintains a trusted set of validators called beacons.
+Beacons Node-IDs and IP addresses are listed in [the AvalancheGo
+codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go). 
+Every node has the beacons list available from the start and reach them out as soon as they start. 
 
-As soon as validators are loaded from P-chain, node attempts to establish a connection with them (VERIFY)
-
-Bootstrap starts only if (3*bootstrapWeight+3)/4 of validators or beacons are connected!
-Alpha is bootstrapWeight/2 + 1. What is alpha used for in bootstrapping?
-
-
-From Joshua's notes
-
-``` txt
-    In Avalanche, nodes connect to an initial set of bootstrapper nodes known as **beacons** (this is user-configurable). Once connected to a set of beacons, a node is able to discover other nodes in the network. Over time, a node eventually discovers other peers in the network through `PeerList` messages it receives through:
-
-    - The handshake initiated between two peers when attempting to connect to a peer (see [Connecting](#connecting)).
-    - Periodic `PeerList` gossip messages that every peer sends to the peers it's connected to (see [Connected](#connected)).
-```
+Beacons and validators are the only trusted sources of information for chains
+content. Beacons and validators availability is key to the bootstrapping
+process so much that **bootstrap stalls until the node establishes secure
+connections to enough beacons or validators**. If the node fails to reach
+beacons within a given timeout, it shuts down as no operation can be
+carried out securely.
 
 ## A Chain Bootstrap Mechanics
 
