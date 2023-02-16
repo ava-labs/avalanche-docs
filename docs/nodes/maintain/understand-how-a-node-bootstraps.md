@@ -128,12 +128,17 @@ optimistically assuming the network issue will go away at some point.
 
 ### Containers Execution
 
-Once frontiers are retrieved containers are downloaded from the frontier
-down to genesis (if it's the first time bootstrap is carried out) or the
-latest accepted container available locally (if bootstrap has already run once).
-At first containers are downloaded and parsed to verify their sequence is correct but not executed.
-Once a node has all containers, they are executed upwards and VMs will update their state with containers content.
+Once we have one or multiple valid frontiers, our node will start downloading
+all parent containers. If it's the first time our node is running, it won't know
+any container and will try downloading all parent containers from the frontiers
+down to genesis (unless [state sync](#enters-state-sync) is enabled). If
+bootstrap had already run once, some containers will be available locally and our
+node will stop as soon as it finds a known one.
 
+Containers are first just downloaded and parsed. Once the chain or the DAG is
+complete, our node will execute them in order going upward from the oldest
+downloaded parent to the frontier. This allows the node to fully rebuild the
+chain state and to eventually be in sync with the rest of the network.
 
 ## Orchestrating Multiple Chains
 
