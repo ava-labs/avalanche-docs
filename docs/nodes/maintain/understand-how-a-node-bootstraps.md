@@ -147,7 +147,7 @@ chain state and to eventually be in sync with the rest of the network.
 
 ## When Does Bootstrapping Finish?
 
-So we have seen [the bootstrap mechanics](the-bootstrap-mechanics) for a single
+So we have seen [the bootstrap mechanics](#the-bootstrap-mechanics) for a single
 chain or DAG. However our node must bootstrap the three Primary Network chains
 as well as every Subnet it tracks, each with possibly multiple chains. So when
 these chains are bootstrapped? When does the whole node bootstrapping finish?
@@ -182,6 +182,6 @@ Then our node will be finally ready to validate the network.
 ## Enters State Sync
 
 The full node bootstrap is a lenghtly process and as time goes by, it gets
-longer and longer since 
+longer and longer since more and more containers are accepted.
 
 ## Forbidden Operations
