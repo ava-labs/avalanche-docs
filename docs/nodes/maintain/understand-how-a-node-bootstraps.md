@@ -1,11 +1,11 @@
 # Understand Nodes Bootstrapping
 
-Bootstrapping our node is the process of letting it *securely* download chain blocks
-or DAG vertexes so to recreate the chain full state locally.
+Bootstrapping our node is the process of letting it *securely* download chain
+blocks or DAG vertexes so to recreate the chain full state locally.
 
 Bootstrapping must guarantee that the local state of our node is in sync with
-other valid nodes state. In this way our node can verify incoming transactions and
-reach consensus with other nodes, collectively moving forward the chains.
+other valid nodes state. In this way our node can verify incoming transactions
+and reach consensus with other nodes, collectively moving forward the chains.
 
 Bootstrapping a node is a multi-step process which requires downloading both
 Primary Network chains and any Subnet chain the node explicitly tracks in a
@@ -27,9 +27,6 @@ these mechanisms without specifying the nature of the blockchain to bootstrap.
 
 Blocks and vertexes are just ordered lists of transactions and we refer them
 collectively as containers whenever needed.
-
-TODO: make sure to carefully use "node" and "validator" words, although in this
-specific context there is no much difference.
 
 ## It's About Validators (And Where To Find Them)
 
@@ -84,8 +81,8 @@ executed upwards. The frontier is the last accepted block for linear chains and
 the last accepted vertexes for DAGs. 
 
 Why can't we simply download blocks in order, from the genesis upward? The
-reason is again safety: if we downloaded containers upward we wouldn't have a way
-to readily verify whether they are legit or they are fed to our node by some
+reason is again safety: if we downloaded containers upward we wouldn't have a
+way to readily verify whether they are legit or they are fed to our node by some
 malicious peer. Instead by retrieving the frontier securely from a majority of
 honest nodes first, we can cheaply spot any made up container by simply looking
 at its ID and checking whether it duly connects with the valid frontier.
@@ -96,10 +93,10 @@ execution.
 ### Frontier Retrieval
 
 The current frontier is retrieved by polling chain validators or beacons.
-Avalanche bootstrapping is designed to be robust: the process must be able to
-s even if very slow validators are selected as information source. It also
-handles natively network issues; it better do since bootstrapping may take quite
-some time to complete.
+Avalanche bootstrapping is designed to be robust: the process must be able to s
+even if very slow validators are selected as information source. It also handles
+natively network issues; it better do since bootstrapping may take quite some
+time to complete.
 
 Here's the frontier retrieval steps.
 
@@ -128,8 +125,8 @@ be used for the next phase, container downloading.
 
 Note that at any point of these steps a network issue may occur, preventing our
 node to retrieve the frontiers or validate them. In such case bootstrap will
-restart by sampling new seeders and repeating the whole process,
-optimistically assuming the network issue will go away at some point.
+restart by sampling new seeders and repeating the whole process, optimistically
+assuming the network issue will go away at some point.
 
 ### Containers Execution
 
@@ -183,8 +180,8 @@ Then our node will be finally ready to validate the network.
 
 The full node bootstrap is a long process and as time goes by, it gets longer
 and longer since more and more containers are accepted. We mentioned above that
-our node needs to recreate the chain full state locally. Downloading and executing
-all containers is one way to get that full state But not the only one.
+our node needs to recreate the chain full state locally. Downloading and
+executing all containers is one way to get that full state But not the only one.
 
 Starting from [AvalancheGo version
 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), our node
