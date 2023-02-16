@@ -27,6 +27,16 @@ const sidebars = {
       items: [
         'overview/getting-started/intro',
         'overview/getting-started/avalanche-platform',
+        'overview/getting-started/avax',
+        'overview/getting-started/virtual-machines',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Technology',
+      collapsible: true,
+      collapsed: false,
+      items: [
         'overview/getting-started/avalanche-consensus',
         {
           type: 'link',

@@ -279,10 +279,8 @@ Exchange Chain is used for creating and trading digital assets and relies on
 Avalanche Consensus Protocol, the Platform Chain is used for creating new
 [Subnets](https://docs.avax.network/subnets) and custom blockchains. The
 Contract Chain is an instance of the [Ethereum Virtual Machine
-(EVM)](https://ethereum.org/en/developers/docs/evm/) running on Avalanche. Both
-the Platform Chain and the Contract Chain use the [Snowman Consensus
-Protocol](https://docs.avax.network/#snowman-consensus-protocol). Avalanche,
-therefore supports Ethereum tooling and
+(EVM)](https://ethereum.org/en/developers/docs/evm/) running on Avalanche.
+Avalanche, therefore supports Ethereum tooling and
 [Solidity](https://docs.soliditylang.org/en/v0.8.7/) as smart contracts built
 for Ethereum can be deployed on the Contract Chain with the added benefit of
 increased throughput. Decentralized applications can also be built natively for
