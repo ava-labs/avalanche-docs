@@ -186,7 +186,7 @@ and longer since more and more containers are accepted. We mentioned above that
 our node needs to recreate the chain full state locally. Downloading and executing
 all containers is one way to get that full state But not the only one.
 
-Starting from [Avalanchego version
+Starting from [AvalancheGo version
 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), our node
 can use state sync to drastically cut down C-chain bootstrapping time. Instead
 of executing all blocks, state sync uses cryptographic techniques to download
