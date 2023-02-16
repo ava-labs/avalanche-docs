@@ -11,7 +11,10 @@ Bootstrapping a node is a multi-step process which requires downloading both
 Primary Network chains and any Subnet chain the node explicitly tracks in a
 precise order.
 
-Here we try to describe these steps.
+In this document we introduce you to these steps, with an high level yet
+technical picture. We'll gloss over the most minute details; [our
+codebase](https://github.com/ava-labs/avalanchego) is open and available for the
+interested readers to dig in and learn about them.
 
 ## A Note On Linear Chains and DAGs
 
@@ -145,23 +148,36 @@ chain state and to eventually be in sync with the rest of the network.
 ## When Does Bootstrapping Finish?
 
 So we have seen [the bootstrap mechanics](the-bootstrap-mechanics) for a single
-chain or DAG. However Avalanche hosts multiple chains in the Primary Network as
-well as multiple subnets, each with possibly multiple chains. So when these
-chains are bootstrapped? When does the whole node bootstrapping finish?
+chain or DAG. However our node must bootstrap the three Primary Network chains
+as well as every Subnet it tracks, each with possibly multiple chains. So when
+these chains are bootstrapped? When does the whole node bootstrapping finish?
 
 We mentioned already that the P-chain will fully bootstrap first, before any
-other chain. Then the C-chain, X-chain and any other chain in explicitly tracked
-subnets will start bootstrapping. They will proceed in parallel, each connecting
-to their own validators.
+other chain and Subnet. Then the Primary Network C-chain and X-chain as well as
+any other chain in tracked Subnets will start bootstrapping. They will proceed
+in parallel, each connecting to their validators.
 
-Note that different chains may finish bootstrapping at different times. Also the
-node won't transition to normal operation mode, fully validating the network,
-until all the tracked chains have finish bootstrapping. This opens up the
-possibility that a specific chain, maybe longer then other or with more complex
-operations to execute blocks, hangs the other chains. What's worse, since other
-validators will carry on validating and adding new blocks or vertexes on top of
-retrieved frontiers, these chains may fall back with respect to the new, ever
-moving, current frontier.
+Our node declares a Subnet bootstrapped when all of its chains have completed
+bootstrap. This is true for both the Primary Network and other tracked Subnets.
+Note that different Subnets are independent in this regards: some Subnets may
+have transition into normal operations, validating new transactions and adding
+new containers on top of their frontier, while other Subnets are still
+bootstrapping.
+
+However within a single Subnet all chains must wait for the slowest of them to
+complete bootstrapping. So the chain with longest history or the most complex
+operations could effectively stall the other chains in the same subnet. What's
+worse, since the subnet validators will carry on accepting new transactions and
+adding new containers on top of retrieved frontiers, these chains may fall back
+with respect to the new, ever moving, current frontier.
+
+Our avalanche node mitigates this situation by restarting bootstrap for chains
+who are waiting for the whole subnet to finish bootstrapping. These chains will
+go again through the frontier retrieval and container downloading phases to
+reduce their distance from the ever moving current frontier till the slowest
+chain has done with its first bootstrap run.
+
+Then our node will be finally ready to validate the network.
 
 ## Enters State Sync
 
