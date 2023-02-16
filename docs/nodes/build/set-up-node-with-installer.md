@@ -180,8 +180,8 @@ be prompted:
 RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]:
 ```
 
-`private` This setting only allows RPC requests from the node machine itself.
-`public` This setting exposes the RPC port to all network interfaces. 
+- `private`: this setting only allows RPC requests from the node machine itself.
+- `public`: this setting exposes the RPC port to all network interfaces. 
 
 As this is a sensitive setting you will be asked to confirm if choosing
 `public`. Please read the following note carefully:
