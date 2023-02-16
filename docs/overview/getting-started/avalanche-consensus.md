@@ -18,21 +18,18 @@ Protocols in the Avalanche family operate through repeated sub-sampled voting. W
 [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is
 determining whether a
 [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
-accepted or rejected, it asks a small, random subset of validators whether they think the
-transaction should be accepted or rejected. If the queried validator thinks the transaction is
-invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that
-it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction
-should be accepted.
+accepted, it asks a small, random subset of validators on their preferences. Each queried validator
+replies with the transaction that it prefers, or thinks should be accepted. The transaction that is
+received from the reply might be the same transaction indicating agreement, or it might be another
+conflicting transaction.
 
-If a sufficiently large portion (_alpha_ α) of the validators sampled reply that they think the
-transaction should be accepted, the validator prefers to accept the transaction. That is, when it is
-queried about the transaction in the future, it will reply that it thinks the transaction should be
-accepted. Similarly, the validator will change its preference to prefer another transaction if a
-sufficiently large portion of the validators replies that another conflicting transaction should be
-accepted instead.
+If a sufficiently large portion (_alpha_ α) of the validators sampled reply with the same preferred
+transaction, the validator adopts the preferred transaction of that majority. That is, when it is
+queried about its preference in the future, it replies that it thinks this transaction the majority
+preferred should be accepted instead.
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply the same
-way (having the same preferred transaction) for _beta_ β consecutive rounds.
+The validator repeats this sampling process until _alpha_ of the validators queried reply with the
+same preference for _beta_ β consecutive rounds.
 
 In the common case when a transaction has no conflicts, finalization happens very quickly. When
 conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
