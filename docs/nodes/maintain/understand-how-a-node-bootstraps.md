@@ -183,22 +183,18 @@ Then our node will be finally ready to validate the network.
 
 The full node bootstrap is a long process and as time goes by, it gets longer
 and longer since more and more containers are accepted. We mentioned above that
-our node needs ecreate the chain full state locally. Downloading and executing
-all containers is one way to get that full state, but not the only one.
+our node needs to recreate the chain full state locally. Downloading and executing
+all containers is one way to get that full state But not the only one.
 
-From [Avalanchego version
+Starting from [Avalanchego version
 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), our node
 can use state sync to drastically cut down C-chain bootstrapping time. Instead
 of executing all blocks, state sync uses cryptographic techniques to download
 and verify just the state associated to the current frontier. State synced nodes
 cannot serve every C-chain block ever accepted but they can safely get the full
-C-chain state needed to validate.
+C-chain state needed to validate in a much smaller time.
 
 Note that state sync is currently available for the C-chain only. Both P-chain
-and X-chain will bootstrap by downloading all blocks. Also note that each
-Primary Network chain must still wait on other Primary Network chains to
-complete bootstrap or state sync before moving onto normal operating mode.
-
-
-
-## Forbidden Operations
+and X-chain bootstrap by downloading all blocks. Also note that each Primary
+Network chain must still wait on other Primary Network chains to complete
+bootstrap or state sync before moving onto normal operating mode.
