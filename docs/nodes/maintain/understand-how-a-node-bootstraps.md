@@ -84,7 +84,7 @@ executed upwards. The frontier is the last accepted block for linear chains and
 the last accepted vertexes for DAGs. 
 
 Why can't we simply download blocks in order, from the genesis upward? The
-reason is again safety: if we dowloaded containers upward we wouldn't have a way
+reason is again safety: if we downloaded containers upward we wouldn't have a way
 to readily verify whether they are legit or they are fed to our node by some
 malicious peer. Instead by retrieving the frontier securely from a majority of
 honest nodes first, we can cheaply spot any made up container by simply looking
@@ -97,7 +97,7 @@ execution.
 
 The current frontier is retrieved by polling chain validators or beacons.
 Avalanche bootstrapping is designed to be robust: the process must be able to
-progres even if very slow validators are selected as information source. It also
+s even if very slow validators are selected as information source. It also
 handles natively network issues; it better do since bootstrapping may take quite
 some time to complete.
 
@@ -128,7 +128,7 @@ be used for the next phase, container downloading.
 
 Note that at any point of these steps a network issue may occur, preventing our
 node to retrieve the frontiers or validate them. In such case bootstrap will
-restart by resampling some seeders and repeting the whole process,
+restart by sampling new seeders and repeating the whole process,
 optimistically assuming the network issue will go away at some point.
 
 ### Containers Execution
@@ -166,13 +166,13 @@ bootstrapping.
 
 However within a single Subnet all chains must wait for the slowest of them to
 complete bootstrapping. So the chain with longest history or the most complex
-operations could effectively stall the other chains in the same subnet. What's
-worse, since the subnet validators will carry on accepting new transactions and
+operations could effectively stall the other chains in the same Subnet. What's
+worse, since the Subnet validators will carry on accepting new transactions and
 adding new containers on top of retrieved frontiers, these chains may fall back
 with respect to the new, ever moving, current frontier.
 
 Our avalanche node mitigates this situation by restarting bootstrap for chains
-who are waiting for the whole subnet to finish bootstrapping. These chains will
+who are waiting for the whole Subnet to finish bootstrapping. These chains will
 go again through the frontier retrieval and container downloading phases to
 reduce their distance from the ever moving current frontier till the slowest
 chain has done with its first bootstrap run.
@@ -181,7 +181,7 @@ Then our node will be finally ready to validate the network.
 
 ## Enters State Sync
 
-The full node bootstrap is a lenghtly process and as time goes by, it gets
+The full node bootstrap is a long process and as time goes by, it gets
 longer and longer since more and more containers are accepted.
 
 ## Forbidden Operations
