@@ -1,14 +1,14 @@
 # Understand how a node bootstraps
 
-Bootstrapping our node is the process of let it *securely* download chain blocks
-or DAG vertexs so that full state is rebuilt locally.
+Bootstrapping our node is the process of letting it *securely* download chain blocks
+or DAG vertexs so to recreate the chain full state locally.
 
 Bootstrapping must guarantee that the local state of our node is in sync with
-other valid nodes state so that our node can verify incoming transactions and
+other valid nodes state. In this way our node can verify incoming transactions and
 reach consensus with other nodes, collectivelly moving forward the chains.
 
-Bootstrapping a node is a multi-step process which requires rebuilding both
-Primary Network chains and any subnet chain the node explicitly track in a
+Bootstrapping a node is a multi-step process which requires dowloading both
+Primary Network chains and any subnet chain the node explicitly tracks in a
 precise order.
 
 Here we try to describe these steps.
@@ -18,32 +18,40 @@ Here we try to describe these steps.
 Avalanche hosts both linear chains made up of blocks and DAGs containing
 vertexes.
 
-While consensus over a linear chain and DAGs is different, bootstrapping
+While consensus flows over a linear chain and DAGs are different, bootstrapping
 mechanisms are pretty similar. In fact so similar that we'll be able to describe
 these mechanisms without specifying the nature of the blockchain to bootstrap.
 
-Blocks and vertexes are containers for transactions and we refer them
+Blocks and vertexes are just ordered lists of transactions and we refer them
 collectivelly as containers whenever needed.
+
+TODO: make sure to carefully use "node" and "validator" words, althought in this
+specific context there is no much difference.
 
 ## It's about validators (and where to find them)
 
-Bootstrapping is all about downloading previously accepted containers *in the most secure manner*.
-What is the most reliable source of information in the Avalanche ecosystem? It's a *large enough* majority of validators!
-A bootstrapping node seek to download the chains from trusted validators and avoid malicious nodes that could feed us containers created ad-hoc. These containers would poison the node local state and p
+Bootstrapping is all about downloading previously accepted containers *in the
+most secure manner*. We don't want our node to trust a rogue source and download
+its blocks. These blocks would end up poisoning our node local state and making it
+impossible for the node to properly validate the network and reach consensus with
+other nodes.
 
-The P-chain registers validators and tracks them continously. Whenever any chain
-*other than the P-chain* has to bootstrap, the P-chain must be able to provide
+What is the most reliable source of information in the Avalanche ecosystem? It's
+a *large enough* majority of validators! So the first step of bootstrapping is
+finding enough validators to download containers from.
+
+The P-chain continuosly keeps track of validators. So whenever any chain
+*other than the P-chain* has to bootstrap, the P-chain should be able to provide
 an up-to-date list of validators for that subnet. The node can then reach these
-validators to securily download containers.
+validators out to securily download containers.
 
-This also explains why the P-chain must be fully bootstrapped before moving on
-to other chains and subnets. In fact it's only when the P-chain is up-to-date
-that we can access a reliable set of current validators. If the P-chain state is
-not up-to-date the node may mistakely assume that some nodes are still
-validating while their validation period has expired already and it would then
-open up the possibility to download faulty blocks from an non-validator.
+There is a caveat here: the validators list must be *up-to-date*. If the validator
+list is not up-to-date, the node may mistakely assume that some nodes are still
+validating while their validation period has expired already. This would open up
+the possibility to download faulty blocks from an source that is not secure (anymore).
 
-For the P-chain itself instead we won't have an updated list of validators available. Some validators may be already be available locally but 
+So every avalanche node must fully bootstrap the P-chain before moving on
+to the other Primary Network chains and other subnets.
 
 Validators and beacons availability is key to the bootstrapping process.
 Bootstrap process stalls until the node has created a secure connections to
@@ -58,7 +66,8 @@ Alpha is bootstrapWeight/2 + 1. What is alpha used for in bootstrapping?
 
 
 From Joshua's notes
-```
+
+``` txt
     In Avalanche, nodes connect to an initial set of bootstrapper nodes known as **beacons** (this is user-configurable). Once connected to a set of beacons, a node is able to discover other nodes in the network. Over time, a node eventually discovers other peers in the network through `PeerList` messages it receives through:
 
     - The handshake initiated between two peers when attempting to connect to a peer (see [Connecting](#connecting)).
