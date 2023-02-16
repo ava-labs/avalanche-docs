@@ -1,19 +1,19 @@
-# Understand how a node bootstraps
+# Understand Nodes Bootstrapping
 
 Bootstrapping our node is the process of letting it *securely* download chain blocks
-or DAG vertexs so to recreate the chain full state locally.
+or DAG vertexes so to recreate the chain full state locally.
 
 Bootstrapping must guarantee that the local state of our node is in sync with
 other valid nodes state. In this way our node can verify incoming transactions and
-reach consensus with other nodes, collectivelly moving forward the chains.
+reach consensus with other nodes, collectively moving forward the chains.
 
-Bootstrapping a node is a multi-step process which requires dowloading both
-Primary Network chains and any subnet chain the node explicitly tracks in a
+Bootstrapping a node is a multi-step process which requires downloading both
+Primary Network chains and any Subnet chain the node explicitly tracks in a
 precise order.
 
 Here we try to describe these steps.
 
-## A note on linear chains and DAGs
+## A Note On Linear Chains and DAGs
 
 Avalanche hosts both linear chains made up of blocks and DAGs containing
 vertexes.
@@ -23,12 +23,12 @@ mechanisms are pretty similar. In fact so similar that we'll be able to describe
 these mechanisms without specifying the nature of the blockchain to bootstrap.
 
 Blocks and vertexes are just ordered lists of transactions and we refer them
-collectivelly as containers whenever needed.
+collectively as containers whenever needed.
 
-TODO: make sure to carefully use "node" and "validator" words, althought in this
+TODO: make sure to carefully use "node" and "validator" words, although in this
 specific context there is no much difference.
 
-## It's about validators (and where to find them)
+## It's About Validators (And Where To Find Them)
 
 Bootstrapping is all about downloading previously accepted containers *in the
 most secure manner*. We don't want our node to trust a rogue source and download
@@ -40,24 +40,24 @@ What is the most reliable source of information in the Avalanche ecosystem? It's
 a *large enough* majority of validators! So the first step of bootstrapping is
 finding enough validators to download containers from.
 
-The P-chain continuosly keeps track of validators. So whenever any chain
+The P-chain continuously keeps track of validators. So whenever any chain
 *other than the P-chain* has to bootstrap, the P-chain should be able to provide
-an up-to-date list of validators for that subnet. The node can then reach these
-validators out to securily download containers.
+an up-to-date list of validators for that Subnet. The node can then reach these
+validators out to securely download containers.
 
 There is a caveat here: the validators list must be *up-to-date*. If the validator
-list is not up-to-date, the node may mistakely assume that some nodes are still
+list is not up-to-date, the node may mistakenly assume that some nodes are still
 validating while their validation period has expired already. This would open up
 the possibility to download faulty blocks from an source that is not secure (anymore).
 
 So every avalanche node must fully bootstrap the P-chain before moving on
-to the other Primary Network chains and other subnets.
+to the other Primary Network chains and other Subnets.
 
 Validators and beacons availability is key to the bootstrapping process.
 Bootstrap process stalls until the node has created a secure connections to
-enough vadalitors or beacons. Moreover if the node fails to reach beacons within
+enough validators or beacons. Moreover if the node fails to reach beacons within
 a given time, the node will shut-down as no operation can be carried out
-securily.
+securely.
 
 As soon as validators are loaded from P-chain, node attempts to establish a connection with them (VERIFY)
 
@@ -74,28 +74,28 @@ From Joshua's notes
     - Periodic `PeerList` gossip messages that every peer sends to the peers it's connected to (see [Connected](#connected)).
 ```
 
-## A chain bootstrap mechanics
+## A Chain Bootstrap Mechanics
 
 Avalanche chains are *not* bootstrapped from the genesis up to their frontier.
 Instead bootstrap happens in two phases we call frontier retrieval and block downloading.
 
-### Frontier retrieval
+### Frontier Retrieval
 
 The current frontier is retrieved by polling chain validators.
 
 
-### Block downloading
+### Block Downloading
 
 Once frontier is retrieved blocks are downloaded from peers from the frontier
 down to genesis (if it's the first time bootstrap is carried out) or the
 latest accepted block available locally (if bootstrap has already run once).
 
 
-## Orchestrating multiple chains bootstrapping
+## Orchestrating Multiple Chains
 
 
-## Moving to full node operativity
+## When Does Bootstrapping Finish?
 
-## Enters state syncing
+## Enters State Sync
 
-## Forbidden operations during bootstrap
+## Forbidden Operations
