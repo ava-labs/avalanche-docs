@@ -32,40 +32,41 @@ specific context there is no much difference.
 
 Bootstrapping is all about downloading previously accepted containers *in the
 most secure manner*. We don't want our node to trust a rogue source and download
-its blocks. These blocks would end up poisoning our node local state and making it
-impossible for the node to properly validate the network and reach consensus with
-other nodes.
+its blocks. These blocks would end up poisoning our node local state and making
+it impossible for the node to properly validate the network and reach consensus
+with other nodes.
 
 What is the most reliable source of information in the Avalanche ecosystem? It's
 a *large enough* majority of validators! So the first step of bootstrapping is
 finding enough validators to download containers from.
 
-The P-chain continuously keeps track of validators. So whenever any chain
-*other than the P-chain* has to bootstrap, the P-chain should be able to provide
-an up-to-date list of validators for that Subnet. The node can then reach these
+The P-chain continuously keeps track of validators. So whenever any chain *other
+than the P-chain* has to bootstrap, the P-chain should be able to provide an
+up-to-date list of validators for that Subnet. The node can then reach these
 validators out to securely download containers.
 
-There is a caveat here: the validators list must be *up-to-date*. If the validator
-list is not up-to-date, the node may mistakenly assume that some nodes are still
-validating while their validation period has expired already. This would open up
-the possibility to download faulty blocks from an source that is not secure (anymore).
+There is a caveat here: the validators list must be *up-to-date*. If the
+validator list is not up-to-date, the node may mistakenly assume that some nodes
+are still validating while their validation period has expired already. This
+would open up the possibility to download faulty blocks from an source that is
+not secure (anymore).
 
-**So every avalanche node must fully bootstrap the P-chain before moving on
-to the other Primary Network chains and other Subnets**.
+**So every avalanche node must fully bootstrap the P-chain before moving on to
+the other Primary Network chains and other Subnets**.
 
 What about the P-chain? The P-chain can never have an up-to-date validators list
 before completing its bootstrap. To solve this chicken-and-egg situation the
 Avalanche Foundation maintains a trusted set of validators called beacons.
 Beacons Node-IDs and IP addresses are listed in [the AvalancheGo
-codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go). 
-Every node has the beacons list available from the start and reach them out as soon as they start. 
+codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
+Every node has the beacons list available from the start and reach them out as
+soon as they start. 
 
 Beacons and validators are the only trusted sources of information for chains
-content. Beacons and validators availability is key to the bootstrapping
-process so much that **bootstrap stalls until the node establishes secure
-connections to enough beacons or validators**. If the node fails to reach
-beacons within a given timeout, it shuts down as no operation can be
-carried out securely.
+content. Beacons and validators availability is key to the bootstrapping process
+so much that **bootstrap stalls until the node establishes secure connections to
+enough beacons or validators**. If the node fails to reach beacons within a
+given timeout, it shuts down as no operation can be carried out securely.
 
 ## The Bootstrap Mechanics
 
@@ -86,7 +87,8 @@ malicious peer. Instead by retrieving the frontier securely from a majority of
 honest nodes first, we can cheaply spot any made up container by simply looking
 at its ID and checking whether it duly connects with the valid frontier.
 
-Let's now see the two bootstrap phases, the frontier retrieval and the container execution.
+Let's now see the two bootstrap phases, the frontier retrieval and the container
+execution.
 
 ### Frontier Retrieval
 
@@ -132,21 +134,38 @@ Once we have one or multiple valid frontiers, our node will start downloading
 all parent containers. If it's the first time our node is running, it won't know
 any container and will try downloading all parent containers from the frontiers
 down to genesis (unless [state sync](#enters-state-sync) is enabled). If
-bootstrap had already run once, some containers will be available locally and our
-node will stop as soon as it finds a known one.
+bootstrap had already run once, some containers will be available locally and
+our node will stop as soon as it finds a known one.
 
 Containers are first just downloaded and parsed. Once the chain or the DAG is
 complete, our node will execute them in order going upward from the oldest
 downloaded parent to the frontier. This allows the node to fully rebuild the
 chain state and to eventually be in sync with the rest of the network.
 
-## Orchestrating Multiple Chains
-
-We mentioned already that the P-chain will fully bootstrap at first.
-Then the C-chain, X-chain and any other chain in explicitly tracked subnets will be bootstrap in parallel.
-
 ## When Does Bootstrapping Finish?
 
+So we have seen [the bootstrap mechanics](the-bootstrap-mechanics) for a single
+chain or DAG. However Avalanche hosts multiple chains in the Primary Network as
+well as multiple subnets, each with possibly multiple chains. So when these
+chains are bootstrapped? When does the whole node bootstrapping finish?
+
+We mentioned already that the P-chain will fully bootstrap first, before any
+other chain. Then the C-chain, X-chain and any other chain in explicitly tracked
+subnets will start bootstrapping. They will proceed in parallel, each connecting
+to their own validators.
+
+Note that different chains may finish bootstrapping at different times. Also the
+node won't transition to normal operation mode, fully validating the network,
+until all the tracked chains have finish bootstrapping. This opens up the
+possibility that a specific chain, maybe longer then other or with more complex
+operations to execute blocks, hangs the other chains. What's worse, since other
+validators will carry on validating and adding new blocks or vertexes on top of
+retrieved frontiers, these chains may fall back with respect to the new, ever
+moving, current frontier.
+
 ## Enters State Sync
+
+The full node bootstrap is a lenghtly process and as time goes by, it gets
+longer and longer since 
 
 ## Forbidden Operations
