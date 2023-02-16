@@ -67,25 +67,78 @@ connections to enough beacons or validators**. If the node fails to reach
 beacons within a given timeout, it shuts down as no operation can be
 carried out securely.
 
-## A Chain Bootstrap Mechanics
+## The Bootstrap Mechanics
 
-Avalanche chains are *not* bootstrapped from the genesis up to their frontier.
-Instead bootstrap happens in two phases we call frontier retrieval and block downloading.
+Once we understand how to find and connect to validators and beacons, we can
+look at how the block download works.
+
+Let's start by dispelling a common belief: *Avalanche chains are not
+bootstrapped from the genesis up to their frontier*.
+
+Instead, blocks are downloaded from the frontier down to genesis and then
+executed upwards. The frontier is the last accepted block for linear chains and
+the last accepted vertexes for DAGs. 
+
+Why can't we simply download blocks in order, from the genesis upward? The
+reason is again safety: if we dowloaded containers upward we wouldn't have a way
+to readily verify whether they are legit or they are fed to our node by some
+malicious peer. Instead by retrieving the frontier securely from a majority of
+honest nodes first, we can cheaply spot any made up container by simply looking
+at its ID and checking whether it duly connects with the valid frontier.
+
+Let's now see the two bootstrap phases, the frontier retrieval and the container execution.
 
 ### Frontier Retrieval
 
-The current frontier is retrieved by polling chain validators.
+The current frontier is retrieved by polling chain validators or beacons.
+Avalanche bootstrapping is designed to be robust: the process must be able to
+progres even if very slow validators are selected as information source. It also
+handles natively network issues; it better do since bootstrapping may take quite
+some time to complete.
 
+Here's the frontier retrieval steps.
 
-### Block Downloading
+Bootstrap starts when our node has connected to a majority of validators or
+beacons. Validators are not really counted but weighted by their stake:
+bootstrap starts when our node is connected to at least $75\%$ of all validators
+or beacons stake.
 
-Once frontier is retrieved blocks are downloaded from peers from the frontier
+A subset of seeders is randomly sampled from validators or beacons. Seeders are
+the first peers reached out by our node to elicit their current frontier.
+Seeders are just a subset of network nodes; they may be slow and provide not
+very up-to-date frontier; they may be malicious and return fake container IDs.
+But they will give an initial set of candidate frontiers to work with.
+
+Once our node has received the candidate frontiers, it polls **every network
+validator** to vet the candidates. It sends its list of candidate frontiers
+asking whether every given validator knows about them. Then every validator will
+respond returning the subset of know candidates, whether they are close to the
+frontier it knows or pretty old containers. By returning even old containers the
+bootstrap process will proceed even starting from and out-of-date frontier.
+
+Frontier retrieval completes when at least one of the candidate frontier is
+supported by more than $50\%$ of all validators stake. There may be multiple
+containers being validated by a strict majority of network stake. They will all
+be used for the next phase, container downloading.
+
+Note that at any point of these steps a network issue may occur, preventing our
+node to retrieve the frontiers or validate them. In such case bootstrap will
+restart by resampling some seeders and repeting the whole process,
+optimistically assuming the network issue will go away at some point.
+
+### Containers Execution
+
+Once frontiers are retrieved containers are downloaded from the frontier
 down to genesis (if it's the first time bootstrap is carried out) or the
-latest accepted block available locally (if bootstrap has already run once).
+latest accepted container available locally (if bootstrap has already run once).
+At first containers are downloaded and parsed to verify their sequence is correct but not executed.
+Once a node has all containers, they are executed upwards and VMs will update their state with containers content.
 
 
 ## Orchestrating Multiple Chains
 
+We mentioned already that the P-chain will fully bootstrap at first.
+Then the C-chain, X-chain and any other chain in explicitly tracked subnets will be bootstrap in parallel.
 
 ## When Does Bootstrapping Finish?
 
