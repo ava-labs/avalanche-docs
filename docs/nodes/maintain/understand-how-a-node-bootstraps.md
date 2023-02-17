@@ -89,7 +89,7 @@ retrieving the frontier from a majority of honest nodes and then we download the
 parent containers from the frontier down to genesis, we can cheaply check that
 containers align correctly just by verifying at their IDs. Each Avalanche
 container carries the IDs of its parents (one block parent for linear chains,
-possibly multiple parents for DAGs) and IDs integrity can be guarateed by
+possibly multiple parents for DAGs) and IDs integrity can be guaranteed by
 cryptographic means.
 
 Let's now see the two bootstrap phases, the frontier retrieval and the container
