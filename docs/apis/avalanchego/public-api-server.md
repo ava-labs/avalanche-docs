@@ -208,6 +208,15 @@ Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 - For C-Chain WSS Endpoint, the URL is `wss://ava-testnet.public.blastapi.io/ext/bc/C/ws`
 
+### BlockSpaces
+
+[BlockSpaces](https://www.blockspaces.com/web3-infrastructure) supports the C-Chain.
+
+##### HTTP
+
+- For C-Chain RPC Endpoint AVAX, the URL is `https://web3endpoints.com/avax-mainnet`
+
+
 ### GetBlock 
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
