@@ -424,14 +424,14 @@ this:
 
 ```json
 {
-  "dynamic-public-ip": "opendns",
+  "public-ip-resolution-service": "opendns",
   "http-host": ""
 }
 ```
 
 Note that configuration file needs to be a properly formatted `JSON` file, so
 switches are formatted differently than for command line, so don't enter options
-like `--dynamic-public-ip=opendns` but as in the example above.
+like `--public-ip-resolution-service=opendns` but as in the example above.
 
 Script also creates an empty C-Chain config file, located at
 `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can
