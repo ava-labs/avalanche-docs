@@ -81,11 +81,16 @@ executed upwards. The frontier is the last accepted block for linear chains and
 the last accepted vertexes for DAGs. 
 
 Why can't we simply download blocks in order, from the genesis upward? The
-reason is again safety: if we downloaded containers upward we wouldn't have a
-way to readily verify whether they are legit or they are fed to our node by some
-malicious peer. Instead by retrieving the frontier securely from a majority of
-honest nodes first, we can cheaply spot any made up container by simply looking
-at its ID and checking whether it duly connects with the valid frontier.
+reason is efficiency: if we downloaded containers upward we would get the
+maximum safety we seek only by polling a majority of validators for every single
+container. That's a lot of network traffic for a single container, and we'd need
+to do that for all containers in the chain. Instead if we start by securely
+retrieving the frontier from a majority of honest nodes and then we download the
+parent containers from the frontier down to genesis, we can cheaply check that
+containers align correctly just by verifying at their IDs. Each Avalanche
+container carries the IDs of its parents (one block parent for linear chains,
+possibly multiple parents for DAGs) and IDs integrity can be guarateed by
+cryptographic means.
 
 Let's now see the two bootstrap phases, the frontier retrieval and the container
 execution.
