@@ -1,14 +1,14 @@
 # Understand Nodes Bootstrapping
 
 Bootstrapping our node is the process of letting it *securely* download chain
-blocks or DAG vertexes so to recreate the chain full state locally.
+blocks or DAG vertexes so to recreate the full chain state locally.
 
 Bootstrapping must guarantee that the local state of our node is in sync with
 other valid nodes state. In this way our node can verify incoming transactions
 and reach consensus with other nodes, collectively moving forward the chains.
 
 Bootstrapping a node is a multi-step process which requires downloading both
-Primary Network chains and any Subnet chain the node explicitly tracks in a
+Primary Network chains and chains of Subnet the node explicitly tracks in a
 precise order.
 
 In this document we introduce you to these steps, with an high level yet
@@ -41,14 +41,14 @@ a *large enough* majority of validators! So the first step of bootstrapping is
 finding enough validators to download containers from.
 
 The P-chain continuously keeps track of validators. So whenever any chain *other
-than the P-chain* has to bootstrap, the P-chain should be able to provide an
+than the P-chain* has to bootstrap, the P-chain will be able to provide an
 up-to-date list of validators for that Subnet. The node can then reach these
 validators out to securely download containers.
 
 There is a caveat here: the validators list must be *up-to-date*. If the
 validator list is not up-to-date, the node may mistakenly assume that some nodes
 are still validating while their validation period has expired already. This
-would open up the possibility to download faulty blocks from an source that is
+would open up the possibility to download faulty blocks from a source that is
 not secure (anymore).
 
 **So every avalanche node must fully bootstrap the P-chain before moving on to
@@ -59,8 +59,8 @@ before completing its bootstrap. To solve this chicken-and-egg situation the
 Avalanche Foundation maintains a trusted set of validators called beacons.
 Beacons Node-IDs and IP addresses are listed in [the AvalancheGo
 codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
-Every node has the beacons list available from the start and reach them out as
-soon as they start. 
+Every node has the beacons list available from the start and can reach them out
+as soon as it starts. 
 
 Beacons and validators are the only trusted sources of information for chains
 content. Beacons and validators availability is key to the bootstrapping process
@@ -93,10 +93,10 @@ execution.
 ### Frontier Retrieval
 
 The current frontier is retrieved by polling chain validators or beacons.
-Avalanche bootstrapping is designed to be robust: the process must be able to s
-even if very slow validators are selected as information source. It also handles
-natively network issues; it better do since bootstrapping may take quite some
-time to complete.
+Avalanche bootstrapping is designed to be robust: the process must be able to
+progress even if very slow validators are selected as information source. It
+also natively handles network issues; it needs to, since bootstrapping may take
+quite some time to complete and networks connections can be unreliable.
 
 Here's the frontier retrieval steps.
 
@@ -114,11 +114,11 @@ But they will give an initial set of candidate frontiers to work with.
 Once our node has received the candidate frontiers, it polls **every network
 validator** to vet the candidates. It sends its list of candidate frontiers
 asking whether every given validator knows about them. Then every validator will
-respond returning the subset of know candidates, whether they are close to the
+respond returning the subset of known candidates, whether they are close to the
 frontier it knows or pretty old containers. By returning even old containers the
 bootstrap process will proceed even starting from and out-of-date frontier.
 
-Frontier retrieval completes when at least one of the candidate frontier is
+Frontier retrieval completes when at least one of the candidate frontiers is
 supported by more than $50\%$ of all validators stake. There may be multiple
 containers being validated by a strict majority of network stake. They will all
 be used for the next phase, container downloading.
@@ -139,7 +139,7 @@ our node will stop as soon as it finds a known one.
 
 Containers are first just downloaded and parsed. Once the chain or the DAG is
 complete, our node will execute them in order going upward from the oldest
-downloaded parent to the frontier. This allows the node to fully rebuild the
+downloaded parent to the frontier. This allows the node to rebuild the full
 chain state and to eventually be in sync with the rest of the network.
 
 ## When Does Bootstrapping Finish?
@@ -147,7 +147,7 @@ chain state and to eventually be in sync with the rest of the network.
 So we have seen [the bootstrap mechanics](#the-bootstrap-mechanics) for a single
 chain or DAG. However our node must bootstrap the three Primary Network chains
 as well as every Subnet it tracks, each with possibly multiple chains. So when
-these chains are bootstrapped? When does the whole node bootstrapping finish?
+are these chains bootstrapped? When does the whole node bootstrapping finish?
 
 We mentioned already that the P-chain will fully bootstrap first, before any
 other chain and Subnet. Then the Primary Network C-chain and X-chain as well as
@@ -180,14 +180,14 @@ Then our node will be finally ready to validate the network.
 
 The full node bootstrap is a long process and as time goes by, it gets longer
 and longer since more and more containers are accepted. We mentioned above that
-our node needs to recreate the chain full state locally. Downloading and
+our node needs to build the full chain state locally. Downloading and
 executing all containers is one way to get that full state But not the only one.
 
 Starting from [AvalancheGo version
 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), our node
 can use state sync to drastically cut down C-chain bootstrapping time. Instead
 of executing all blocks, state sync uses cryptographic techniques to download
-and verify just the state associated to the current frontier. State synced nodes
+and verify just the state associated with the current frontier. State synced nodes
 cannot serve every C-chain block ever accepted but they can safely get the full
 C-chain state needed to validate in a much smaller time.
 
