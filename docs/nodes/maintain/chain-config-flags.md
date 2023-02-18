@@ -478,7 +478,7 @@ this node). Defaults to `false`.
 If `true`, the APIs will allow transactions that are not replay protected
 (EIP-155) to be issued through this node. Defaults to `false`.
 
-#### `allow-unprotected-tx-hashes` ([]txHash)
+#### `allow-unprotected-tx-hashes` ([]TxHash)
 
 Specifies an array of transaction hashes that should be allowed to bypass
 replay protection. This flag is intended for node operators that want to explicitly
@@ -611,19 +611,23 @@ Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
 
 #### `trie-clean-journal` (string)
 
-Directory to use to save the trie clean cache (must be populated to enable journaling the trie clean cache). Empty and disabled by default.
+Directory to use to save the trie clean cache (must be populated to enable
+journaling the trie clean cache). Empty and disabled by default.
 
 #### `trie-clean-rejournal` (duration)
 
-Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must be populated to enable journaling the trie clean cache).
+Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must
+be populated to enable journaling the trie clean cache).
 
 #### `acceptor-queue-limit` (int)
 
-Specifies the maximum number of blocks to queue during block acceptance before blocking on Accept. Defaults to `64`.
+Specifies the maximum number of blocks to queue during block acceptance before
+blocking on Accept. Defaults to `64`.
 
 #### `commit-interval` (int)
 
-Specifies the commit interval at which to persist the merkle trie to disk. Defaults to `4096`.
+Specifies the commit interval at which to persist the merkle trie to disk.
+Defaults to `4096`.
 
 #### `pruning-enabled` (boolean)
 
@@ -739,6 +743,7 @@ If set to `true`, the chain will skip verifying that all expected network
 upgrades have taken place before the last accepted block on startup. This allows
 node operators to recover if their node has accepted blocks after a network
 upgrade with a version of the code prior to the upgrade. Defaults to `false`.
+
 ## X-Chain Configs
 
 In order to specify a config for the X-Chain, a JSON config file should be
