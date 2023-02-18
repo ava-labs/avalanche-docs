@@ -207,21 +207,10 @@ If you got this far, you hopefully have a better idea of what is going on when
 your node bootstrap. We have skipped over the most minute details but you should
 still be able to answer to some of the FAQ we receive about bootstrapping.
 
-### How many blocks/vertexes are missing to complete bootstrap?
+### How Can I Get the ETA for Node Bootstrap?
 
-As we saw in [mechanics section](#the-bootstrap-mechanics), bootstrap does not
-simply download containers from the genesis upward. Instead containers are first
-downloaded from the current frontier downward and then verified and executed
-upward.
-
-Consensus engine can't really tell you how many containers are missing while
-downloading, but once it has download all the required containers, it can tell
-you how many container executions have been done, are missing and what is their
-ETA.
-
-### Is there a way to get the ETAs for node bootstrap?
-
-Logs provide information about both container downloading and their execution. Here is an example
+Logs provide information about both container downloading and their execution
+for each chain. Here is an example
 
 ```text
 [02-16|17:31:42.950] INFO <P Chain> bootstrap/bootstrapper.go:494 fetching blocks {"numFetchedBlocks": 5000, "numTotalBlocks": 101357, "eta": "2m52s"}
@@ -233,9 +222,9 @@ Logs provide information about both container downloading and their execution. H
 [02-16|17:37:52.468] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 52713, "numToExecute": 101357, "eta": "1m23s"}
 ```
 
-Similar logs are emitted for X and C chains.
+Similar logs are emitted for X and C chains and any chain in explicitly tracked Subnets.
 
-### Why Chain bootstrap ETA keeps on changing?
+### Why Chain Bootstrap ETA Keeps On Changing?
 
 As we saw in the [bootstrap completion
 section](#when-does-bootstrapping-finish), a Subnet like the Primary Network
