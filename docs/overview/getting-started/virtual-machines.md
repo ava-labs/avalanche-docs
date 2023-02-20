@@ -91,8 +91,6 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
   - A Rust implementation of TimestampVM
 - [SpacesVM RS](https://github.com/ava-labs/spacesvm-rs)
   - A Rust implementation of SpacesVM
-- [BulletproofVM](https://github.com/usmaneth/BulletproofVM)
-  - Allows the execution of transactions on Avalanche using Bulletproof zero-knowledge proofs
 
 #### Tutorials
 
