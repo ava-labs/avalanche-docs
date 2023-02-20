@@ -147,16 +147,16 @@ curl -X POST --data '{
 }
 ```
 
-## `eth_getActivatePrecompilesAt`
+## `eth_getActivePrecompilesAt`
 
-`eth_getActivatePrecompilesAt` returns activated precompiles at a specific timestamp. If no
+`eth_getActivePrecompilesAt` returns activated precompiles at a specific timestamp. If no
 timestamp is provided it returns the latest block timestamp. This API is enabled by default with
 `internal-blockchain` namespace.
 
 **Signature:**
 
 ```sh
-eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
+eth_getActivePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
 ```
 
 - `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it
@@ -167,7 +167,7 @@ eth_getActivatePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
 ```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "eth_getActivatePrecompilesAt",
+    "method": "eth_getActivePrecompilesAt",
     "params": [],
     "id": 1
 }'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
