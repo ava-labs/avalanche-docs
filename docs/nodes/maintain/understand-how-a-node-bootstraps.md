@@ -15,7 +15,7 @@ explicitly tracks.
 
 This document covers the high-level technical details of how bootstrapping
 works. This document glosses over some specifics, but the
-[avalanchego](https://github.com/ava-labs/avalanchego) codebase is open-source
+[AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source
 and is available for curious-minded readers to learn more.
 
 ## A Note On Linear Chains and DAGs
@@ -35,7 +35,7 @@ can be thought of as the same abstraction - containers.
 Bootstrapping is all about downloading all previously accepted containers
 *securely* so a node can have the latest correct state of the chain. A node
 can't arbitrarily trust any source - a malicious actor could provide malicious
-blocks, corrupting the boostrapping node's local state, and making it impossible
+blocks, corrupting the bootstrapping node's local state, and making it impossible
 for the node to correctly validate the network and reach consensus with other
 correct nodes.
 
@@ -75,7 +75,7 @@ the node establishes a sufficient amount of secure connections to validators**.
 If the node fails to reach a sufficient amount within a given period of time, it
 shuts down as no operation can be carried out safely.
 
-## Bootstrapping The Blockchain
+## Bootstrapping the Blockchain
 
 Once a node is able to discover and connect to validator and beacon nodes, it's
 able to start bootstrapping the blockchain by downloading the individual
@@ -117,7 +117,7 @@ bootstrapping may take quite some time to complete and network connections can
 be unreliable.
 
 Bootstrap starts when a node has connected to a sufficient majority of validator
-stake. A node is able to start bootsrapping when it has connected to at least
+stake. A node is able to start bootstrapping when it has connected to at least
 $75\%$ of total validator stake.
 
 A subset of seeders is randomly sampled from the validator set. Seeders are
@@ -140,7 +140,7 @@ frontiers may be supported by a majority of stake, after which point the next
 phase, container fetching starts.
 
 At any point in these steps a network issue may occur, preventing a node from
-retrieving or validating frontiers. If this occurs, bootstrap restarts by by
+retrieving or validating frontiers. If this occurs, bootstrap restarts by
 sampling a new set of seeders and repeating the bootstrapping process,
 optimistically assuming that the network issue will go away.
 
@@ -157,7 +157,7 @@ stop as soon as it finds a known one.
 A node first just fetches and parses containers. Once the chain is complete, the
 node will execute them in chronological order starting from the earliest
 downloaded container to the accepted frontier. This allows the node to rebuild
-the full chain state and to eventually be in sync with the rest of the jjetwork.
+the full chain state and to eventually be in sync with the rest of the network.
 
 ## When Does Bootstrapping Finish?
 
@@ -166,17 +166,17 @@ chain. However, a node must bootstrap the chains in the Primary Network as well
 as the chains in each Subnet it tracks. These leaves us with the questions -
 when are these chains bootstrapped? When is a node done bootstrapping?
 
-The P-chain is always the first to boostrap before any other chain. Once the
+The P-chain is always the first to bootstrap before any other chain. Once the
 P-Chain is bootstrapped, all other chains start bootstrapping in parallel,
 connecting to their own validators independently of one another.
 
 A node completes bootstrapping a Subnet once all of its corresponding chains
 have completed bootstrapping. Because the Primary Network is a special case of
-subnet that includes the entire network, this applies to it as well as any other
+Subnet that includes the entire network, this applies to it as well as any other
 manually tracked Subnets.
 
 Note that Subnets bootstrap independently of one another - so even if one Subnet
-is bootstrapped and is validating new transactions and adding new contaniers,
+is bootstrapped and is validating new transactions and adding new containers,
 other Subnets may still be bootstrapping in parallel.
 
 Within a single Subnet however, a Subnet is not done bootstrapping until the
