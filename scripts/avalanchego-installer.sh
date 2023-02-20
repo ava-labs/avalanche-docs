@@ -33,7 +33,7 @@ create_service_file () {
 create_config_file () {
   rm -f node.json
   echo "{" >>node.json
-  if [ "$rpcOpt" = "any" ]; then
+  if [ "$rpcOpt" = "public" ]; then
     echo "  \"http-host\": \"\",">>node.json
   fi
   if [ "$adminOpt" = "true" ]; then
@@ -141,7 +141,7 @@ getOsType () {
 #helper function that prints usage
 usage () {
   echo "Usage: $0 [--list | --help | --reinstall | --remove] [--version <tag>] [--ip dynamic|static|<IP>]"
-  echo "                     [--RPC local|all] [--archival] [--state-sync on|off] [--index] [--db-dir <path>]"
+  echo "                     [--RPC private|public] [--archival] [--state-sync on|off] [--index] [--db-dir <path>]"
   echo "Options:"
   echo "   --help            Shows this message"
   echo "   --list            Lists 10 newest versions available to install"
@@ -150,7 +150,7 @@ usage () {
   echo ""
   echo "   --version <tag>          Installs <tag> version, default is the latest"
   echo "   --ip dynamic|static|<IP> Uses dynamic, static (autodetect) or provided public IP, will ask if not provided"
-  echo "   --rpc local|any          Open RPC port (9650) to local or all network interfaces, will ask if not provided"
+  echo "   --rpc private|public     Open RPC port (9650) to private or public network interfaces, will ask if not provided"
   echo "   --archival               If provided, will disable state pruning, defaults to pruning enabled"
   echo "   --state-sync on|off      If provided explicitly turns C-Chain state sync on or off"
   echo "   --index                  If provided, will enable indexer and Index API, defaults to disabled"
@@ -366,16 +366,34 @@ else
   ipChoice="2"
 fi
 echo ""
-echo "Your node can accept RPC calls on port 9650. If restricted to local, it will be accessible only from this machine."
-while [ "$rpcOpt" != "any" ] && [ "$rpcOpt" != "local" ]
+echo "Your node accepts RPC calls on port 9650. If restricted to private, it will be accessible only from this machine."
+echo "Only p2p port (9651 by default) NEEDS to be publicly accessible for correct node operation, RPC port is used for"
+echo "interaction with the node by the operator or applications and SHOULD NOT be freely accessible to the public."
+echo ""
+echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
+echo ""
+while [ "$rpcOpt" != "public" ] && [ "$rpcOpt" != "private" ]
 do
-  read -p "Do you want the RPC port to be accessible to any or only local network interface? [any, local]: " rpcOpt
+  read -p "RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]: " rpcOpt
 done
-if [ "$rpcOpt" = "any" ]; then
-  echo "RPC port will be accessible on any interface. Make sure you configure the firewall to only let through RPC requests"
-  echo "from known IP addresses, otherwise your node might be overwhelmed by RPC calls from malicious actors!"
+if [ "$rpcOpt" = "public" ]; then
+  echo ""
+  echo "If firewall or other form of access control is not provided, your node will be open to denial of service attacks."
+  echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
+  echo "RPC requests from known IP addresses!"
+  echo ""
+  confirm="ask"
+  while [ "$confirm" != "yes" ] && [ "$confirm" != "no" ]
+  do
+    read -p "Are you sure you want to allow public access to the RPC port? [yes, no]: " confirm
+  done
+  if [ "$confirm" != "yes" ]; then
+    rpcOpt="private"
+  else
+    echo "RPC port will be accessible publicly. You must set up access controls!"
+  fi
 fi
-if [ "$rpcOpt" = "local" ]; then
+if [ "$rpcOpt" = "private" ]; then
   echo "RPC port will be accessible only on local interface. RPC calls from remote machines will be blocked."
 fi
 echo ""
