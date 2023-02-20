@@ -47,8 +47,9 @@ containers from.
 The P-Chain is responsible for all platform-level operations, including staking
 events that modify a Subnet's validator set. Whenever any chain (aside from the
 P-Chain itself) bootstraps, it requests an up-to-date validator set for that
-Subnet. Once the Subnet's current validator set is known, the node can securely
-download containers from these validators to bootstrap the chain.
+Subnet (Primary Network is a Subnet too). Once the Subnet's current validator
+set is known, the node can securely download containers from these validators to
+bootstrap the chain.
 
 There is a caveat here: the validator set must be *up-to-date*. If a
 bootstrapping node's validator set is stale, the node may incorrectly believe
