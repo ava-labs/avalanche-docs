@@ -1,4 +1,4 @@
-# Understanding Node Bootstrap
+# Node Bootstrapping
 
 Node Bootstrap is the process of how a node *securely* downloads linear chain
 blocks or DAG chain vertices to recreate the latest state of the chain locally.
@@ -30,7 +30,7 @@ described without specifying the nature of the blockchain being bootstrapped.
 Blocks and vertices at their core are simply ordered lists of transactions and
 can be thought of as the same abstraction - containers.
 
-## It's About Validators (And Where To Find Them)
+## Validators and Where to Find Them
 
 Bootstrapping is all about downloading all previously accepted containers
 *securely* so a node can have the latest correct state of the chain. A node
@@ -147,7 +147,7 @@ optimistically assuming that the network issue will go away.
 
 ### Containers Execution
 
-Once a node has at least one valid frontiers, our node will start downloading
+Once a node has at least one valid frontiers, it will start downloading
 parent containers for each frontier. If it's the first time the node is running,
 it won't know about any containers and will try fetching all parent containers
 recursively from the accepted frontier down to genesis (unless [state
