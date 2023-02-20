@@ -40,7 +40,7 @@ for the node to correctly validate the network and reach consensus with other
 correct nodes.
 
 What is the most reliable source of information in the Avalanche ecosystem? It's
-a *large enough*majority of validators! Therefore, the first step of
+a *large enough* majority of validators! Therefore, the first step of
 bootstrapping is finding a sufficient amount of validators to download
 containers from.
 
@@ -76,40 +76,46 @@ connections to beacons and validators**. If the node fails to reach a sufficient
 amount within a given period of time, it shuts down as no operation can be
 carried out safely.
 
-## The Bootstrap Mechanics
+## Bootstrapping The Blockchain
 
-Once we understand how to find and connect to validators and beacons, we can
-look at how the block download works.
+Once a node is able to discover and connect to validator and beacon nodes, it's
+able to start bootstrapping the blockchain by downloading the individual
+containers.
 
-Let's start by dispelling a common belief: *Avalanche chains are not
-bootstrapped from the genesis up to their frontier*.
+One common misconception is that Avalanche blockchains are bootstrapped by
+retrieving containers starting at genesis and working up to the currently
+accepted frontier.
 
-Instead, blocks are downloaded from the frontier down to genesis and then
-executed upwards. The frontier is the last accepted block for linear chains and
-the last accepted vertices for DAGs.
+Instead, containers are downloaded from the accepted frontier downwards to
+genesis, and then their corresponding state transitions the are executed upwards
+from genesis to the accepted frontier. The accepted frontier is the last
+accepted block for linear chains and the accepted vertices for DAGs.
 
-Why can't we simply download blocks in order, from the genesis upward? The
-reason is efficiency: if we downloaded containers upward we would get the
-maximum safety we seek only by polling a majority of validators for every single
-container. That's a lot of network traffic for a single container, and we'd need
-to do that for all containers in the chain. Instead if we start by securely
-retrieving the frontier from a majority of honest nodes and then we download the
-parent containers from the frontier down to genesis, we can cheaply check that
-containers align correctly just by verifying at their IDs. Each Avalanche
-container carries the IDs of its parents (one block parent for linear chains,
-possibly multiple parents for DAGs) and IDs integrity can be guaranteed by
-cryptographic means.
+Why can't nodes simply download blocks in chronological order, starting from
+genesis upwards? The reason is efficiency: if nodes downloaded containers
+upwards they would only get a safety guarantee by polling a majority of
+validators for every single container. That's a lot of network traffic for a
+single container, and a node would still need to do that for each container in
+the chain.
 
-Let's now see the two bootstrap phases, the frontier retrieval and the container
-execution.
+Instead if a node starts by securely retrieving the accepted frontier from
+a majority of honest nodes and then recursively fetches the parent containers
+from the accepted frontier down to genesis, it can cheaply check that containers
+are correct just by verifying at their IDs. Each Avalanche container has the IDs
+of its parents (one block parent for linear chains, possibly multiple parents
+for DAGs) and an ID's integrity can be guaranteed cryptographically.
+
+Let's dive deeper into the two bootstrap phases - frontier retrieval and
+container execution.
 
 ### Frontier Retrieval
 
-The current frontier is retrieved by polling chain validators or beacons.
-Avalanche bootstrapping is designed to be robust: the process must be able to
-progress even if very slow validators are selected as information source. It
-also natively handles network issues; it needs to, since bootstrapping may take
-quite some time to complete and networks connections can be unreliable.
+The current frontier is retrieved by requesting them from validator or beacon
+nodes. Avalanche bootstrap is designed to be robust - it must be able to make
+progress even in the presence of slow validators or network failures. This
+process needs to be fault-tolerant to these types of failures, since
+bootstrapping may take quite some time to complete and network connections can
+be unreliable.
 
 Here's the frontier retrieval steps.
 
