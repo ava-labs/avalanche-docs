@@ -1,72 +1,80 @@
-# Understand Nodes Bootstrapping
+# Understanding Node Bootstrap
 
-Bootstrapping our node is the process of letting it *securely* download chain
-blocks or DAG vertexes so to recreate the full chain state locally.
+Node Bootstrap is the process of how a node *securely* downloads linear chain
+blocks or DAG chain vertices to recreate the latest state of the chain locally.
 
-Bootstrapping must guarantee that the local state of our node is in sync with
-other valid nodes state. In this way our node can verify incoming transactions
-and reach consensus with other nodes, collectively moving forward the chains.
+Bootstrap must guarantee that the local state of a node is in sync with the
+state of other valid nodes. Once bootstrap is completed, a node has the latest
+state of the chain and can verify new incoming transactions and reach consensus
+with other nodes, collectively moving forward the chains.
 
-Bootstrapping a node is a multi-step process which requires downloading both
-Primary Network chains and chains of Subnet the node explicitly tracks in a
-precise order.
+Bootstrapping a node is a multi-step process which requires downloading the
+chains required by the Primary Network (i.e the C-Chain, P-Chain, and X-Chain),
+as well as the chains required by any additional Subnets that the node
+explicitly tracks.
 
-In this document we introduce you to these steps, with an high level yet
-technical picture. We'll gloss over the most minute details; [our
-codebase](https://github.com/ava-labs/avalanchego) is open and available for the
-interested readers to dig in and learn about them.
+This document covers the high-level technical details of how bootstrapping
+works. This document glosses over some specifics, but the
+[avalanchego](https://github.com/ava-labs/avalanchego) codebase is open-source
+and is available for curious-minded readers to learn more.
 
 ## A Note On Linear Chains and DAGs
 
-Avalanche hosts both linear chains made up of blocks and DAGs containing
-vertexes.
+Avalanche supports both linear chains made up of blocks and DAGs chains made up
+of vertices.
 
-While consensus flows over a linear chain and DAGs are different, bootstrapping
-mechanisms are pretty similar. In fact so similar that we'll be able to describe
-these mechanisms without specifying the nature of the blockchain to bootstrap.
+While consensus logic over linear chains and DAGs chains are different,
+bootstrap logic between the two are similar enough such that they can be
+described without specifying the nature of the blockchain being bootstrapped.
 
-Blocks and vertexes are just ordered lists of transactions and we refer them
-collectively as containers whenever needed.
+Blocks and vertices at their core are simply ordered lists of transactions and
+can be thought of as the same abstraction - containers.
 
 ## It's About Validators (And Where To Find Them)
 
-Bootstrapping is all about downloading previously accepted containers *in the
-most secure manner*. We don't want our node to trust a rogue source and download
-its blocks. These blocks would end up poisoning our node local state and making
-it impossible for the node to properly validate the network and reach consensus
-with other nodes.
+Bootstrapping is all about downloading all previously accepted containers
+*securely* so a node can have the latest correct state of the chain. A node
+can't arbitrarily trust any source - a malicious actor could provide malicious
+blocks, corrupting the boostrapping node's local state, and making it impossible
+for the node to correctly validate the network and reach consensus with other
+correct nodes.
 
 What is the most reliable source of information in the Avalanche ecosystem? It's
-a *large enough* majority of validators! So the first step of bootstrapping is
-finding enough validators to download containers from.
+a *large enough*majority of validators! Therefore, the first step of
+bootstrapping is finding a sufficient amount of validators to download
+containers from.
 
-The P-chain continuously keeps track of validators. So whenever any chain *other
-than the P-chain* has to bootstrap, the P-chain will be able to provide an
-up-to-date list of validators for that Subnet. The node can then reach these
-validators out to securely download containers.
+The P-Chain is responsible for all platform-level operations, including staking
+events that modify a Subnet's validator set. Whenever any chain (aside from the
+P-Chain itself) bootstraps, it requests an up-to-date validator set for that
+Subnet. Once the Subnet's current validator set is known, the node can securely
+download containers from these validators to bootstrap the chain.
 
-There is a caveat here: the validators list must be *up-to-date*. If the
-validator list is not up-to-date, the node may mistakenly assume that some nodes
-are still validating while their validation period has expired already. This
-would open up the possibility to download faulty blocks from a source that is
-not secure (anymore).
+There is a caveat here: the validator set must be *up-to-date*. If a
+bootstrapping node's validator set is stale, the node may incorrectly believe
+that some nodes are still validators when their validation period has already
+expired. A node might unknowingly end up requesting blocks from non-validators
+which respond with malicious blocks that aren't safe to download.
 
-**So every avalanche node must fully bootstrap the P-chain before moving on to
-the other Primary Network chains and other Subnets**.
+**For this reason, every Avalanche node must fully bootstrap the P-chain first
+before moving on to the other Primary Network chains and other Subnets to
+guarantee that their validator sets are up-to-date**.
 
-What about the P-chain? The P-chain can never have an up-to-date validators list
-before completing its bootstrap. To solve this chicken-and-egg situation the
-Avalanche Foundation maintains a trusted set of validators called beacons.
-Beacons Node-IDs and IP addresses are listed in [the AvalancheGo
-codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
+What about the P-chain? The P-chain can't ever have an up-to-date validator set
+before completing its bootstrap! To solve this chicken-and-egg situation the
+Avalanche Foundation maintains a trusted default set of validators called
+beacons (but users are free to configure their own). Beacon Node-IDs and IP
+addresses are listed in the
+[AvalancheGo codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
 Every node has the beacons list available from the start and can reach them out
-as soon as it starts. 
+as soon as it starts.
 
-Beacons and validators are the only trusted sources of information for chains
-content. Beacons and validators availability is key to the bootstrapping process
-so much that **bootstrap stalls until the node establishes secure connections to
-enough beacons or validators**. If the node fails to reach beacons within a
-given timeout, it shuts down as no operation can be carried out securely.
+Beacons and validators are the only sources of truth for a blockchain. Beacon
+and validator availability is so key to the bootstrapping process that
+**bootstrap blocks until the node establishes a sufficient amount of secure
+connections to beacons and validators**. If the node fails to reach a sufficient
+amount within a given period of time, it shuts down as no operation can be
+carried out safely.
 
 ## The Bootstrap Mechanics
 
@@ -78,7 +86,7 @@ bootstrapped from the genesis up to their frontier*.
 
 Instead, blocks are downloaded from the frontier down to genesis and then
 executed upwards. The frontier is the last accepted block for linear chains and
-the last accepted vertexes for DAGs. 
+the last accepted vertices for DAGs.
 
 Why can't we simply download blocks in order, from the genesis upward? The
 reason is efficiency: if we downloaded containers upward we would get the
