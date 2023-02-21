@@ -857,7 +857,7 @@ optional, but encouraged. The supported plugin version is `15`.
 
 - Refactored platformvm metrics handling
 - Refactored platformvm block creation
-- Introduced support to prevent empty nodeID use on the P-chain to be activated in a future upgrade
+- Introduced support to prevent empty `nodeID` use on the P-chain to be activated in a future upgrade
 
 **Coreth**
 
@@ -1321,7 +1321,7 @@ optional, but encouraged.
 
 **Networking**
 
-- Refactored the networking library to track potential peers by nodeID rather than IP.
+- Refactored the networking library to track potential peers by `nodeID` rather than IP.
 - Separated peer connections from the mesh network implementation to simplify testing.
 - Fixed duplicate `Connected` messages bug.
 - Supported establishing outbound connections with peers reporting different inbound and outbound IPs.
