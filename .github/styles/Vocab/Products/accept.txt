@@ -117,6 +117,7 @@ gif
 GitHub
 github
 Golang
+goroutines
 Grafana
 gwei
 Gwei
@@ -133,7 +134,7 @@ infeasibly
 Infura
 inlined
 ints
-IPC's
+IPCs
 ipfs
 IPFS
 IPs

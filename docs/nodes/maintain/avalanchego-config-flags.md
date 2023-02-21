@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 description: This documents list all available configuration and flags for AvalancheGo.
 ---
 
@@ -26,31 +26,28 @@ Example JSON config file:
 ```
 
 :::tip
-
 [Install Script](../build/set-up-node-with-installer.md) creates the node config
 file at `~/.avalanchego/configs/node.json`. No default file is created if
 [AvalancheGo is built from source](../build/run-avalanche-node-manually.md), you
 would need to create it manually if needed.
-
 :::
 
 #### `--config-file-content` (string)
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config
-content. Must be used in conjunction with `--config-file-content-type`.
+content.
 
 #### `--config-file-content-type` (string)
 
 Specifies the format of the base64 encoded config content. JSON, TOML, YAML are
 among currently supported file format (see
-[here](https://github.com/spf13/viper#reading-config-files) for full list).
-Required if `--config-file-content` is set.
+[here](https://github.com/spf13/viper#reading-config-files) for full list). Defaults to `JSON`.
 
 ## APIs
 
 #### `--api-admin-enabled` (boolean)
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`.
+If set to `true`, this node will expose the Admin API. Defaults to `false`.
 See [here](../../apis/avalanchego/apis/admin.md) for more information.
 
 #### `--api-auth-required` (boolean)
@@ -66,30 +63,29 @@ The password needed to create/revoke authorization tokens. If
 
 #### `--api-health-enabled` (boolean)
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See
+If set to `false`, this node will not expose the Health API. Defaults to `true`. See
 [here](../../apis/avalanchego/apis/health.md) for more information.
 
 #### `--index-enabled` (boolean)
 
-If `false`, this node will not enable the indexer and the Index API will not be
+If set to `true`, this node will enable the indexer and the Index API will be
 available. Defaults to `false`. See
 [here](../../apis/avalanchego/apis/index-api.md) for more information.
 
 #### `--api-info-enabled` (boolean)
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See
+If set to `false`, this node will not expose the Info API. Defaults to `true`. See
 [here](../../apis/avalanchego/apis/info.md) for more information.
 
 #### `--api-ipcs-enabled` (boolean)
 
-If set to `true`, this node will expose the IPC's API. Defaults to `false`. See
+If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
 [here](../../apis/avalanchego/apis/ipc.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
 
-If set to `false`, this node will not expose the Keystore API. Defaults to
-`true`. See [here](../../apis/avalanchego/apis/keystore.md) for more
-information.
+If set to `true`, this node will expose the Keystore API. Defaults to `false`.
+See [here](../../apis/avalanchego/apis/keystore.md) for more information.
 
 #### `--api-metrics-enabled` (boolean)
 
@@ -100,20 +96,12 @@ If set to `false`, this node will not expose the Metrics API. Defaults to
 
 Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown.
 The `/health` endpoint will return unhealthy during this duration (if the Health
-API is enabled.) Defaults to 0.
+API is enabled.) Defaults to `0s`.
 
 #### `--http-shutdown-timeout` (duration)
 
 Maximum duration to wait for existing connections to complete during node
 shutdown. Defaults to `10s`.
-
-## Assertions
-
-#### `--assertions-enabled` (boolean)
-
-When set to `true`, assertions will execute at runtime throughout the codebase.
-This is intended for use in debugging, as we may get a more specific error
-message. Defaults to `true`.
 
 ## Bootstrapping
 
@@ -131,7 +119,7 @@ The number of given IDs here must be same with number of given
 
 #### `--bootstrap-ips` (string)
 
-Bootstrap IPs is a comma-separated list of IPv4:port pairs. These IP Addresses
+Bootstrap IPs is a comma-separated list of IP:port pairs. These IP Addresses
 will be used to bootstrap the current Avalanche state. An example setting of
 this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number
 of given IPs here must be same with number of given `--bootstrap-ids`. The
@@ -139,19 +127,19 @@ default value depends on the network ID.
 
 #### `--bootstrap-retry-enabled` (boolean)
 
-If true, will retry bootstrapping if it fails.
+If set to `false`, will not retry bootstrapping if it fails. Defaults to `true`.
 
-#### `--bootstrap-retry-max-attempts` (uint)
+#### `--bootstrap-retry-warn-frequency` (uint)
 
-Max number of times to retry bootstrapping after a failure.
+Specifies how many times bootstrap should be retried before warning the operator. Defaults to `50`.
 
 #### `--bootstrap-ancestors-max-containers-sent` (uint)
 
-Max number of containers in an Ancestors message sent by this node. Defaults to `2000`.
+Max number of containers in an `Ancestors` message sent by this node. Defaults to `2000`.
 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
-This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+This node reads at most this many containers from an incoming `Ancestors` message. Defaults to `2000`.
 
 ## State Syncing
 
@@ -167,7 +155,7 @@ being sampled.
 
 #### `--state-sync-ips` (string)
 
-State sync IPs is a comma-separated list of IPv4:port pairs. These IP Addresses
+State sync IPs is a comma-separated list of IP:port pairs. These IP Addresses
 will be contacted to get and authenticate the starting point (state summary) for
 state sync. An example setting of this field would be
 `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here
@@ -182,23 +170,28 @@ reads in these configurations from the chain configuration directory and passes
 them into the VM on initialization.
 
 :::note
-Please replace `chain-config-dir` and `blockchainID` with actual value.
+Please replace `chain-config-dir` and `blockchainID` with their actual values.
 :::
 
-The network upgrades are passed in from the location:
-`chain-config-dir`/`blockchainID`/upgrade.json. After a blockchain has activated
-a network upgrade, the same upgrade configuration must always be passed in to
-ensure that the network upgrades activate at the correct time.
+Network upgrades are passed in from the location:
+`chain-config-dir`/`blockchainID`/`upgrade.*`.
+Upgrade files are typically json encoded and therefore named `upgrade.json`.
+However, the format of the file is VM dependent.
+After a blockchain has activated a network upgrade, the same upgrade
+configuration must always be passed in to ensure that the network upgrades
+activate at the correct time.
 
 The chain configs are passed in from the location
-`chain-config-dir`/`blockchainID`/config.json. This configuration is used by the
-VM to handle optional configuration flags such as enabling/disabling APIs,
-updating log level, etc. The chain configuration is intended to provide optional
-configuration parameters and the VM will use default values if nothing is passed
-in. `chain-config-dir`/`blockchainID`/config.json
+`chain-config-dir`/`blockchainID`/`config.*`.
+Upgrade files are typically json encoded and therefore named `upgrade.json`.
+However, the format of the file is VM dependent.
+This configuration is used by the VM to handle optional configuration flags such
+as enabling/disabling APIs, updating log level, etc.
+The chain configuration is intended to provide optional configuration parameters
+and the VM will use default values if nothing is passed in.
 
-Full reference for all configuration options for specific chains can be found in
-a separate [chain config flags](chain-config-flags.md) document.
+Full reference for all configuration options for some standard chains can be
+found in a separate [chain config flags](chain-config-flags.md) document.
 
 Full reference for `subnet-evm` upgrade configuration can be found in a separate
 [Customize a Subnet](../../subnets/customize-a-subnet.md) document.
@@ -241,7 +234,8 @@ full blockchainID. The Primary Alias is used in all metrics and logs.
 
 `--chain-aliases-file-content` (string)
 
-As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded aliases for Blockchains.
+As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded
+aliases for Blockchains.
 
 ## Database
 
@@ -251,17 +245,8 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 
 ##### `--db-type` (string)
 
-Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`,
-`memdb`. `memdb` is an in-memory, non-persisted database.
-
-Note that when running with `leveldb`, the node can't read data that was
-persisted when running with `rocksdb`, and vice-versa.
-
-**Two important notes about RocksDB**: First, RocksDB does not work on all
-computers. Second, RocksDB is not built by default and is not included in
-publicly released binaries. To build AvalancheGo with RocksDB, run `export
-ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this
-before you can use `--db-type=rocksdb`.
+Specifies the type of database to use. Must be one of `leveldb` or `memdb`.
+`memdb` is an in-memory, non-persisted database.
 
 ### Database Config
 
@@ -280,48 +265,122 @@ Any keys not given will receive the default value.
 
 ```go
 {
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
+	// BlockCacheCapacity defines the capacity of the 'sorted table' block caching.
+	// Use -1 for zero.
+	//
+	// The default value is 12MiB.
 	"blockCacheCapacity": int
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
+
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted table'
+	// block.
+	//
+	// The default value is 4KiB.
 	"blockSize": int
-	// CompactionExpandLimitFactor limits compaction size after expanded.  This
-	// will be multiplied by table size limit at compaction target level.
+
+	// CompactionExpandLimitFactor limits compaction size after expanded.
+	// This will be multiplied by table size limit at compaction target level.
+	//
+	// The default value is 25.
 	"compactionExpandLimitFactor": int
+
 	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
 	// that a single 'sorted table' generates.  This will be multiplied by
 	// table size limit at grandparent level.
+	//
+	// The default value is 10.
 	"compactionGPOverlapsFactor": int
+
 	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
 	// trigger compaction.
+	//
+	// The default value is 4.
 	"compactionL0Trigger": int
-	// CompactionSourceLimitFactor limits compaction source size. This doesn't
-	// apply to level-0.  This will be multiplied by table size limit at
-	// compaction target level.
+
+	// CompactionSourceLimitFactor limits compaction source size. This doesn't apply to
+	// level-0.
+	// This will be multiplied by table size limit at compaction target level.
+	//
+	// The default value is 1.
 	"compactionSourceLimitFactor": int
-	// CompactionTableSize limits size of 'sorted table' that compaction
-	// generates.  The limits for each level will be calculated as:
+
+	// CompactionTableSize limits size of 'sorted table' that compaction generates.
+	// The limits for each level will be calculated as:
 	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
-	// The multiplier for each level can also fine-tuned using
-	// CompactionTableSizeMultiplierPerLevel.
+	// The multiplier for each level can also fine-tuned using CompactionTableSizeMultiplierPerLevel.
+	//
+	// The default value is 2MiB.
 	"compactionTableSize": int
+
 	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	//
+	// The default value is 1.
 	"compactionTableSizeMultiplier": float
+
+	// CompactionTableSizeMultiplierPerLevel defines per-level multiplier for
+	// CompactionTableSize.
+	// Use zero to skip a level.
+	//
+	// The default value is nil.
 	"compactionTableSizeMultiplierPerLevel": []float
+
+	// CompactionTotalSize limits total size of 'sorted table' for each level.
+	// The limits for each level will be calculated as:
+	//   CompactionTotalSize * (CompactionTotalSizeMultiplier ^ Level)
+	// The multiplier for each level can also fine-tuned using
+	// CompactionTotalSizeMultiplierPerLevel.
+	//
+	// The default value is 10MiB.
+	"compactionTotalSize": int
+
 	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
-	"compactionTotalSizeMultiplier": float64
+	//
+	// The default value is 10.
+	"compactionTotalSizeMultiplier": float
+
+	// DisableSeeksCompaction allows disabling 'seeks triggered compaction'.
+	// The purpose of 'seeks triggered compaction' is to optimize database so
+	// that 'level seeks' can be minimized, however this might generate many
+	// small compaction which may not preferable.
+	//
+	// The default is true.
+	"disableSeeksCompaction": bool
+
 	// OpenFilesCacheCapacity defines the capacity of the open files caching.
+	// Use -1 for zero, this has same effect as specifying NoCacher to OpenFilesCacher.
+	//
+	// The default value is 1024.
 	"openFilesCacheCapacity": int
-	// There are two buffers of size WriteBuffer used.
+
+	// WriteBuffer defines maximum size of a 'memdb' before flushed to
+	// 'sorted table'. 'memdb' is an in-memory DB backed by an on-disk
+	// unsorted journal.
+	//
+	// LevelDB may held up to two 'memdb' at the same time.
+	//
+	// The default value is 6MiB.
 	"writeBuffer": int
+
+	// FilterBitsPerKey is the number of bits to add to the bloom filter per
+	// key.
+	//
+	// The default value is 10.
 	"filterBitsPerKey": int
+
+	// MaxManifestFileSize is the maximum size limit of the MANIFEST-****** file.
+	// When the MANIFEST-****** file grows beyond this size, LevelDB will create
+	// a new MANIFEST file.
+	//
+	// The default value is infinity.
+	"maxManifestFileSize": int
+
+	// MetricUpdateFrequency is the frequency to poll LevelDB metrics in
+	// nanoseconds.
+	// If <= 0, LevelDB metrics aren't polled.
+	//
+	// The default value is 10s.
+	"metricUpdateFrequency": int
 }
 ```
-
-#### RocksDB Config File
-
-Custom config is not yet supported for RocksDB.
 
 ## Genesis
 
@@ -331,9 +390,9 @@ Path to a JSON file containing the genesis data to use. Ignored when running
 standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is
 specified. If not given, uses default genesis data.
 
-This are the main properties in the JSON file:
+These are the main properties in the JSON file:
 
-- `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32].
+- `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32).
 - `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
 - `startTime`: The time of the beginning of the blockchain, it must be a Unix
   timestamp and it can't be a time in the future.
@@ -400,7 +459,7 @@ content of the TLS private key used by the node for the HTTPS server. Note that
 full private key content, with the leading and trailing header, must be base64
 encoded. This must be specified when `--http-tls-enabled=true`.
 
-## IPCS
+## IPCs
 
 #### `--ipcs-chain-ids` (string)
 
@@ -410,7 +469,7 @@ There is no default value.
 
 #### `--ipcs-path` (string)
 
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to /tmp.
+The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
 
 ## File Descriptor Limit
 
@@ -426,6 +485,7 @@ error if the value is above the system max. Linux default `32768`.
 The log level determines which events to log. There are 8 different levels, in
 order from highest priority to lowest.
 
+- `off`: No logs have this level of logging. Turns off logging.
 - `fatal`: Fatal errors that are not recoverable.
 - `error`: Errors that the node encounters, these errors were able to be recovered.
 - `warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
@@ -438,14 +498,13 @@ order from highest priority to lowest.
 - `verbo`: Tracks extensive amounts of information the node is processing. This
   includes message contents and binary dumps of data for extremely low level
   protocol analysis.
-- `off`: No logs have this level of logging. Turns off logging.
 
 When specifying a log level note that all logs with the specified priority or
 higher will be tracked. Defaults to `info`.
 
 #### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
 
-The log level determines which events to display to the screen. If left blank,
+The log level determines which events to display to stdout. If left blank,
 will default to the value provided to `--log-level`.
 
 #### `--log-format` (string, `{auto, plain, colors, json}`)
@@ -518,16 +577,21 @@ Defaults to `0.1`.
 
 Type of exporter to use for tracing. Options are [`grpc`,`http`]. Defaults to `grpc`.
 
-
 ## Public IP
+
+Validators must know one of their public facing IP addresses so they can enable
+other nodes to connect to them.
+
+By default, the node will attempt to perform NAT traversal to get the node's IP
+according to its router.
 
 #### `--public-ip` (string)
 
-Validators must know their public facing IP addresses so they can let other
-nodes know how to connect to them. If this argument is not provided, the node
-will attempt to perform NAT traversal to get the node’s public IP. Should be set
-to `127.0.0.1` to create a local network. If not set, attempts to learn IP using
-NAT traversal.
+If this argument is provided, the node assume this is its public IP.
+
+:::tip
+When running a local network it may be easiest to set this value to `127.0.0.1`.
+:::
 
 #### `--public-ip-resolution-frequency` (duration)
 
@@ -536,16 +600,8 @@ mappings, if applicable. Default to 5 minutes.
 
 #### `--public-ip-resolution-service` (string)
 
-Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`. When
-provided, the node will use that service to periodically resolve/update its
-public IP.
-
-## Signature Verification
-
-#### `--signature-verification-enabled` (boolean)
-
-Enables signature verification. When set to `false`, signatures won’t be checked
-in VMs that allow signatures to be disabled. Defaults to `true`.
+When provided, the node will use that service to periodically resolve/update its
+public IP. Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`.
 
 ## Staking
 
@@ -560,11 +616,15 @@ operation. Defaults to `9651`.
 Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively
 expensive to attack the network. If false, sybil resistance is disabled and all
 peers will be sampled during consensus. Defaults to `true`. Note that this can
-not be specified on public networks (`Fuji` and `Mainnet`).
+not be disabled on public networks (`Fuji` and `Mainnet`).
 
 Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
 **You should not set this flag to false unless you understand what you are doing.**
+
+#### `--staking-disabled-weight` (int)
+
+Weight to provide to each peer when staking is disabled. Defaults to `100`.
 
 #### `--staking-tls-cert-file` (string, file path)
 
@@ -595,19 +655,7 @@ As an alternative to `--staking-tls-key-file`, it allows specifying base64
 encoded content of the TLS private key used by the node. Note that full private
 key content, with the leading and trailing header, must be base64 encoded.
 
-#### `--staking-disabled-weight` (int)
-
-Weight to provide to each peer when staking is disabled. Defaults to `1`.
-
 ## Subnets
-
-### Whitelist
-
-#### `--whitelisted-subnets` (string)
-
-:::warning
-Deprecated. Use `--track-subnets` instead
-:::
 
 ### Subnet Tracking
 
@@ -652,9 +700,7 @@ An example config file is:
 ```
 
 :::tip
-
 By default, none of these directories and/or files exist. You would need to create them manually if needed.
-
 :::
 
 #### `--subnet-config-content` (string)
@@ -725,25 +771,10 @@ queries to it will fail). Defaults to `10`.
 
 Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
 
-### Build Directory
-
-#### `--build-dir` (string)
-
-Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of
-executed AvalancheGo binary. The structure of this directory must be as follows:
-
-```text
-build-dir
-|_avalanchego (note: this is the AvalancheGo binary, not a directory)
-|_plugins
-  |_evm
-```
-
 ### Consensus Parameters
 
 :::note
 Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
-
 :::
 
 #### `--consensus-gossip-frequency` (duration)
@@ -978,7 +1009,7 @@ Allows the node to connect peers with private IPs. Defaults to `true`.
 
 #### `--network-compression-enabled` (bool)
 
-If true, compress certain messages sent to peers to reduce bandwidth usage.
+If true, compress certain messages sent to peers to reduce bandwidth usage. Defaults to `true`.
 
 #### `--network-initial-timeout` (duration)
 

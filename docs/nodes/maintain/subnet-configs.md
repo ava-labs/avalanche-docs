@@ -1,6 +1,6 @@
 ---
-sidebar_position: 7
-decription: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
+sidebar_position: 6
+description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
 ---
 
 # Subnet Configs
@@ -47,6 +47,18 @@ learn contents of this Subnet from this node.
 
 This is a node-specific configuration. Every validator of this Subnet has to use
 this configuration in order to create a full private Subnet.
+
+:::
+
+#### `allowedNodes` (string list)
+
+If `validatorOnly=true` this allows explicitly specified NodeIDs to be allowed
+to sync the Subnet regardless of validator status. Defaults to be empty.
+
+:::tip
+
+This is a node-specific configuration. Every validator of this Subnet has to use
+this configuration in order to properly allow a node in the private Subnet.
 
 :::
 

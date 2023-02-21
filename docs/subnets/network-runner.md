@@ -347,7 +347,7 @@ See [here](../nodes/maintain/avalanchego-config-flags.md) for the reference of s
 runner needs to set its own in order to function properly: `--log-dir` `--db-dir`
 
 **Note**: The following Subnet parameters will be set from the global network configuration to this node:
-`--whitelisted-subnets`
+`--track-subnets`
 `--plugin-dir`
 
 #### Terminate the Cluster

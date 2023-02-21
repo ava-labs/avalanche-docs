@@ -1074,6 +1074,8 @@ platform.getCurrentValidators({
             publicKey: string,
             proofOfPosession: string
         },
+        delegatorCount: string,
+        delegatorWeight: string,
         delegators: []{
             txID: string,
             startTime: string,
@@ -1120,8 +1122,13 @@ platform.getCurrentValidators({
   - `connected` is if the node is connected and tracks the Subnet.
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
     have a BLS public key.
-  - `delegators` is the list of delegators to this validator. Omitted if `subnetID` is not a PoS
-    Subnet.
+  - `delegatorCount` is the number of delegators on this validator.
+    Omitted if `subnetID` is not a PoS Subnet.
+  - `delegatorWeight` is total weight of delegators on this validator.
+    Omitted if `subnetID` is not a PoS Subnet.
+  - `delegators` is the list of delegators to this validator.
+    Omitted if `subnetID` is not a PoS Subnet.
+    Omitted unless `nodeIDs` specifies a single NodeID.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
     - `endTime` is the Unix time when the delegator stops.
@@ -1137,7 +1144,9 @@ platform.getCurrentValidators({
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentValidators",
-    "params": {},
+    "params": {
+      "nodeIDs": ["NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"]
+    },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1169,6 +1178,8 @@ curl -X POST --data '{
         "delegationFee": "10.0000",
         "uptime": "0.0000",
         "connected": false,
+        "delegatorCount": "1",
+        "delegatorWeight": "25000000000",
         "delegators": [
           {
             "txID": "Bbai8nzGVcyn2VmeYcbS74zfjJLjDacGNVuzuvAQkHn1uWfoV",

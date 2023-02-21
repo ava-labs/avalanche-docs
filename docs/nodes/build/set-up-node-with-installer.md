@@ -177,12 +177,14 @@ with the platform and its chains (sending transactions, for example). You will
 be prompted:
 
 ```text
-Do you want the RPC port to be accessible to any or only local network interface? [any, local]:
+RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]:
 ```
 
-`local` This setting only allows RPC requests from the node machine itself.
-`any` This setting allows you to send RPC requests to your node
-from a remote machine. 
+- `private`: this setting only allows RPC requests from the node machine itself.
+- `public`: this setting exposes the RPC port to all network interfaces. 
+
+As this is a sensitive setting you will be asked to confirm if choosing
+`public`. Please read the following note carefully:
 
 :::note
 
@@ -190,11 +192,24 @@ If you choose to allow RPC requests on any network interface you will need
 to set up a firewall to only let through RPC requests from known IP addresses, 
 otherwise your node will be accessible to anyone and might be overwhelmed by 
 RPC calls from malicious actors! If you do not plan to use your node to send 
-RPC calls, enter `local` for increased node security.
+RPC calls remotely, enter `private`.
 
 :::
 
-The script will then continue with system service creation and finish with starting the service:
+The script will then prompt you to choose whether to enable state sync setting
+or not:
+
+```text
+Do you want state sync bootstrapping to be turned on or off? [on, off]:
+```
+
+Turning state sync on will greatly increase the speed of bootstrapping, but
+will sync only the current network state. If you intend to use your node for
+accessing historical data (archival node) you should select `off`. Otherwise,
+select `on`. Validators can be bootstrapped with state sync turned on.
+
+The script will then continue with system service creation and finish with
+starting the service:
 
 ```text
 Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service → /etc/systemd/system/avalanchego.service.
@@ -204,6 +219,7 @@ Done!
 Your node should now be bootstrapping.
 Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
 C-Chain configuration file is /home/ubuntu/.avalanchego/configs/chains/C/config.json
+Plugin directory, for storing subnet VM binaries, is /home/ubuntu/.avalanchego/plugins
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
 To follow the log use (ctrl-c to stop):
@@ -232,7 +248,7 @@ Main PID: 2142 (avalanchego)
 Tasks: 8 (limit: 4495)
 Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
-└─2142 /home/ubuntu/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=
+└─2142 /home/ubuntu/avalanche-node/avalanchego --public-ip-resolution-service=opendns --http-host=
 
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: initializing last accepted block as 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: initializing consensus engine
@@ -408,14 +424,14 @@ this:
 
 ```json
 {
-  "dynamic-public-ip": "opendns",
+  "public-ip-resolution-service": "opendns",
   "http-host": ""
 }
 ```
 
 Note that configuration file needs to be a properly formatted `JSON` file, so
 switches are formatted differently than for command line, so don't enter options
-like `--dynamic-public-ip=opendns` but as in the example above.
+like `--public-ip-resolution-service=opendns` but as in the example above.
 
 Script also creates an empty C-Chain config file, located at
 `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can

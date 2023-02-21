@@ -30,6 +30,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Chain Configs**](./maintain/chain-config-flags.md)                            | Chain specific configurations                               |
 | [**Subnet Configs**](./maintain/subnet-configs.md)                               | Subnet specific configurations                              |
 | [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md)             | C-Chain offline pruning                                     |
+| [**Node Bootstrap**](./maintain/node-bootstrap.md)             | Understand how a node bootstraps                                     |
 
 ## Validate
 
