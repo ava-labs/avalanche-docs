@@ -168,7 +168,7 @@ cat /etc/avalanchego/conf.json
   "log-dir": "/var/log/avalanchego",
   "db-dir": "/data/avalanchego",
   "api-admin-enabled": false,
-  "dynamic-public-ip": "opendns",
+  "public-ip-resolution-service": "opendns",
   "network-id": "mainnet"
 }
 ```

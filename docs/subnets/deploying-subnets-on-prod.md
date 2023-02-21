@@ -206,20 +206,20 @@ renew ones that expired and so on. Familiarize yourself with Subnet-CLI, you be 
 Running nodes as Subnet validators warrants some additional considerations, above those when running
 a regular node or a Primary Network-only validator.
 
-### Subnet Whitelisting
+### Joining a Subnet
 
 For a node to join a Subnet, there are two prerequisites:
 
 - Primary Network validation
-- Subnet whitelisting
+- Subnet tracking
 
 Primary Network validation means that a node cannot join a Subnet as a validator before becoming a
 validator on the Primary Network itself. So, after you add the node to the validator set on the
 Primary Network, node can join a Subnet. Of course, this is valid only for Subnet validators, if you
 need a non-validating Subnet node, then the node doesn't need to be a validator at all.
 
-To have a node start syncing the Subnet, you need to add the `--whitelisted-subnets` command line
-option, or `whitelisted-subnets` key to the node config file (found at
+To have a node start syncing the Subnet, you need to add the `--track-subnets` command line
+option, or `track-subnets` key to the node config file (found at
 `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync
 multiple Subnets, so you can add them as a comma-separated list of Subnet IDs.
 
@@ -227,13 +227,13 @@ An example of a node config syncing two Subnets:
 
 ```json
 {
-  "dynamic-public-ip": "opendns",
+  "public-ip-resolution-service": "opendns",
   "http-host": "",
-  "whitelisted-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY,Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk"
+  "track-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY,Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk"
 }
 ```
 
-But that is not all. Besides the whitelist containing the SubnetID, node also needs to have the
+But that is not all. Besides tracking the SubnetID, the node also needs to have the
 plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
 been through that on Testnet and Fuji, but for a refresher, you can refer to [this
 tutorial](create-a-fuji-subnet.md).
@@ -244,7 +244,7 @@ directory where the node binary is (for installer-script created nodes that woul
 
 ### Subnet Bootstrapping
 
-After you have added the whitelist and placed the VM binary in the correct directory, your node is
+After you have tracked the Subnet and placed the VM binary in the correct directory, your node is
 ready to start syncing with the Subnet. Restart the node and monitor the log output. You should
 notice something similar to:
 

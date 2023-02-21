@@ -6,6 +6,77 @@
 
 :::
 
+## V1.9.9 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.9)
+
+**Banff.9 - gRPC Plugin Protocol**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `23`.
+
+**Note: The `--whitelisted-subnets` flag was deprecated in `v1.9.6`. 
+This is the last release in which it will be supported. Use `--track-subnets` instead.**
+
+**Monitoring**
+
+- Added warning when the P2P server IP is private
+- Added warning when the HTTP server IP is potentially publicly reachable
+- Removed `merkledb.trieView#calculateIDs` tracing when no recalculation is needed
+
+**Databases**
+
+- Capped the number of goroutines that `merkledb.trieView#calculateIDsConcurrent` will create
+- Removed `nodb` package
+- Refactored `Batch` implementations to share common code
+- Added `Batch.Replay` invariant tests
+- Converted to use `require` in all `database` interface tests
+
+**Cryptography**
+
+- Moved the `secp256k1` implementations to a new `secp256k1` package out of the `crypto` package
+- Added `rfc6979` compliance tests to the `secp256k1` signing implementation
+- Removed unused cryptography implementations `ed25519`, `rsa`, and `rsapss`
+- Removed unnecessary cryptography interfaces `crypto.Factory`, `crypto.RecoverableFactory`,
+  `crypto.PublicKey`, and `crypto.PrivateKey`
+- Added verification when parsing `secp256k1` public keys to ensure usage of the compressed format
+
+**API**
+
+- Removed delegators from `platform.getCurrentValidators` unless a single `nodeID` is requested
+- Added `delegatorCount` and `delegatorWeight` to the validators returned by `platform.getCurrentValidators`
+
+**Documentation**
+
+- Improved documentation on the `block.WithVerifyContext` interface
+- Fixed `--public-ip` and `--public-ip-resolution-service` CLI flag descriptions
+- Updated `README.md` to explicitly reference `SECURITY.md`
+
+**Coreth**
+
+- Enabled state sync by default when syncing from an empty database
+- Increased block gas limit to 15M for `Cortina` Network Upgrade
+- Added back file tracer endpoint
+- Added back JS tracer
+
+**Miscellaneous**
+
+- Added `allowedNodes` to the Subnet config for `validatorOnly` Subnets
+- Removed the `hashicorp/go-plugin` dependency to improve plugin flexibility
+- Replaced specialized `bag` implementations with generic `bag` implementations
+- Added `mempool` package to the `avm`
+- Added `chain.State#IsProcessing` to simplify integration with `block.WithVerifyContext`
+- Added `StateSyncMinVersion` to `sync.ClientConfig`
+- Added validity checks for `InitialStakeDuration` in a custom network genesis
+- Removed unnecessary reflect call when marshalling an empty slice
+
+**Cleanup**
+
+- Renamed `teleporter` package to `warp`
+- Replaced `bool` flags in P-chain state diffs with an `enum`
+- Refactored Subnet configs to more closely align between the primary network and Subnets
+- Simplified the `utxo.Spender` interface
+- Removed unused field `common.Config#Validators`
+
 ## V1.9.8 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.8)
 
 **Banff.8 - PROXY Protocol**
@@ -786,7 +857,7 @@ optional, but encouraged. The supported plugin version is `15`.
 
 - Refactored platformvm metrics handling
 - Refactored platformvm block creation
-- Introduced support to prevent empty nodeID use on the P-chain to be activated in a future upgrade
+- Introduced support to prevent empty `nodeID` use on the P-chain to be activated in a future upgrade
 
 **Coreth**
 
@@ -1250,7 +1321,7 @@ optional, but encouraged.
 
 **Networking**
 
-- Refactored the networking library to track potential peers by nodeID rather than IP.
+- Refactored the networking library to track potential peers by `nodeID` rather than IP.
 - Separated peer connections from the mesh network implementation to simplify testing.
 - Fixed duplicate `Connected` messages bug.
 - Supported establishing outbound connections with peers reporting different inbound and outbound IPs.
