@@ -60,7 +60,7 @@ This is the last release in which it will be supported. Use `--track-subnets` in
 
 **Miscellaneous**
 
-- Added `allowedNodes` to the subnet config for `validatorOnly` subnets
+- Added `allowedNodes` to the Subnet config for `validatorOnly` Subnets
 - Removed the `hashicorp/go-plugin` dependency to improve plugin flexibility
 - Replaced specialized `bag` implementations with generic `bag` implementations
 - Added `mempool` package to the `avm`
@@ -73,7 +73,7 @@ This is the last release in which it will be supported. Use `--track-subnets` in
 
 - Renamed `teleporter` package to `warp`
 - Replaced `bool` flags in P-chain state diffs with an `enum`
-- Refactored subnet configs to more closely align between the primary network and subnets
+- Refactored Subnet configs to more closely align between the primary network and Subnets
 - Simplified the `utxo.Spender` interface
 - Removed unused field `common.Config#Validators`
 
