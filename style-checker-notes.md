@@ -102,6 +102,21 @@ code block), you can add this style of comment:
 Make sure to replace `MD013` with the
 [rule](https://github.com/DavidAnson/markdownlint#rules--aliases) you'd like to override.
 
+### Ignoring Vale Inline
+
+If you would like to turn off vale inline, you can add this style of comment:
+
+
+```text
+<!-- vale off -->
+
+This is some text
+
+more text here...
+
+<!-- vale on -->
+```
+
 ## Managing Line Length
 
 Please don't ignore line length violations by ignoring Markdownlint rule MD013. The only place it

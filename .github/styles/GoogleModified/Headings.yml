@@ -52,3 +52,4 @@ exceptions:
   - uint64
   - unit
   - up
+  - V1.5.1-eth_call
