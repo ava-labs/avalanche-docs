@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
 ---
 

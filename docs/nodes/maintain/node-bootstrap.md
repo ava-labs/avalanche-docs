@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Node Bootstrap
 
 Node Bootstrap is the process of how a node *securely* downloads linear chain
