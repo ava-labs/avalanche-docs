@@ -117,6 +117,7 @@ gif
 GitHub
 github
 Golang
+goroutines
 Grafana
 gwei
 Gwei
