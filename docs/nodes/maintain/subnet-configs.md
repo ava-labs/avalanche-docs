@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-decription: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
+description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
 ---
 
 # Subnet Configs
