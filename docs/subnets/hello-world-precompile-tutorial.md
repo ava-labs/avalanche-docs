@@ -524,9 +524,9 @@ it can run the precompile if the precompile is enabled.
 Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the
 precompile package that we need to modify. We should start with the reference imports code block.
 
-#### Step 3.1: Module file
+#### Step 3.1: Module File
 
-Module file contains fundemental information about the precompile. This includes the key for the
+Module file contains fundamental information about the precompile. This includes the key for the
 precompile, the address of the precompile and a configurator. This file is located at
 [`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go)
 
@@ -547,7 +547,7 @@ configuration as the last step. You should keep it as it is if you want to use A
 You can modify this function for your custom logic. You can circle back to this function later
 after you have finalized implementation of the precompile config.
 
-#### Step 3.2: Config file
+#### Step 3.2: Config File
 
 Config file contains the config for the precompile. This file is located at
 [`/precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
@@ -659,7 +659,7 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 }
 ```
 
-#### Step 3.4: Contract file
+#### Step 3.4: Contract File
 
 Contract file contains the functions of the precompile contract that will be called by the EVM. The
 file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
@@ -939,7 +939,7 @@ check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-
 We also need to add some contract tests to make sure our precompile is working correctly. Contract
 tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
 The test will cover all functionality of `sayHello()` and `setGreeting()`.
-Contract tests are defined in a standart structure that each test
+Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
 
 ```go
