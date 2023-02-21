@@ -2022,7 +2022,7 @@ see the expected update times in the v1.5.0 release.
 
 - Added additional logging around bubbling votes.
 
-## V1.5.1-eth_call ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
+## `V1.5.1-eth_call` ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
 
 This update is backwards compatible with
 [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please
