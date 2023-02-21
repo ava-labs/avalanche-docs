@@ -17,7 +17,7 @@ It is optional, but encouraged. The supported plugin version is `23`.
 **Note: The `--whitelisted-subnets` flag was deprecated in `v1.9.6`. 
 This is the last release in which it will be supported. Use `--track-subnets` instead.**
 
-### Monitoring
+**Monitoring**
 
 - Added warning when the P2P server IP is private
 - Added warning when the HTTP server IP is potentially publicly reachable
