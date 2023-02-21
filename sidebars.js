@@ -216,9 +216,11 @@ const sidebars = {
     }
   ],
   apis: [
+    'apis/README',
     {
       type: 'category',
       label: 'AvalancheGo',
+      collapsed: false,
       items: [
         'apis/avalanchego/README',
         {
