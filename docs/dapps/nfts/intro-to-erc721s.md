@@ -24,7 +24,9 @@ The following tools will be used during this tutorial:
 DISCLAIMER: This Solidity smart contract tutorial is for demonstration purposes
 only. Users should consider proper precautions, error handling, and safeguards
 for production use. No one at Ava Labs is responsible for your development, and
-you must take full responsibility for ensuring your code is secure. :::
+you must take full responsibility for ensuring your code is secure. 
+
+:::
 
 
 ## Preparing Your NFT Files

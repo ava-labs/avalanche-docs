@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 description: Reference for all available chain config options and flags.
 ---
 

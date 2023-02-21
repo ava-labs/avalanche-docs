@@ -26,4 +26,6 @@ possible to link your NodeID to your email.
 
 This tool is currently in BETA and validator alerts may erroneously be
 triggered, not triggered, or delayed. The best way to maximize the likelihood of
-earning staking rewards is to run redundant monitoring/alerting. :::
+earning staking rewards is to run redundant monitoring/alerting. 
+
+:::

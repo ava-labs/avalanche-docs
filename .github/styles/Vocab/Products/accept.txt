@@ -44,6 +44,7 @@ blockNumber
 blockTimestamp
 bool
 Brunain
+btree
 BUIDLing
 calldata
 CAPTCHA
@@ -132,7 +133,7 @@ infeasibly
 Infura
 inlined
 ints
-IPC's
+IPCs
 ipfs
 IPFS
 IPs
@@ -187,6 +188,8 @@ NPM
 NFT
 NFTs
 Nimish
+NodeID
+NodeIDs
 npm
 npx
 Ofem
@@ -221,6 +224,8 @@ profiler
 Proto
 proxying
 Ranjan
+RC
+RCs
 React's
 reCAPTCHA
 recoverability

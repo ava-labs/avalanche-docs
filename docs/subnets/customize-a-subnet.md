@@ -480,6 +480,16 @@ Note that this uses `IAllowList` interface directly, meaning that it uses the sa
 interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information
 see [AllowList Solidity interface](#allowlist-interface).
 
+:::warning
+
+EVM does not prevent overflows when storing the address balance. Overflows in
+balance opcodes are handled by setting the
+balance to maximum. However the same won't apply for API calls. If you try to mint more than the
+maximum balance, API calls will return the overflowed hex-balance. This can break external
+tooling. Make sure the total supply of native coins is always less than 2^256-1.
+
+:::
+
 #### Initial Native Minter Configuration
 
 It's possible to enable this precompile with an initial configuration to activate its effect on
@@ -813,6 +823,15 @@ The content of the `upgrade.json` should be formatted according to the following
 }
 ```
 
+:::warning
+
+An invalid `blockTimestamp` in an upgrade file results the update failing.
+The `blockTimestamp` value should be set to a valid Unix timestamp value which is
+in the _future_ relative to the _head of the chain_.
+If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
+
+:::
+
 To disable a precompile, the following format should be used:
 
 <!-- markdownlint-disable MD013 -->
@@ -908,7 +927,7 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 
 Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the
 activated precompiles at a timestamp with the
-[`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactivateprecompilesat)
+[`eth_getActivePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactiveprecompilesat)
 RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#eth_getchainconfig)
 RPC method will also return the configured upgrades in the response.
 
