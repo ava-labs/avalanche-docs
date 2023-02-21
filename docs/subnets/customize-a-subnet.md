@@ -825,13 +825,13 @@ The content of the `upgrade.json` should be formatted according to the following
 
 :::warning
 
-An invalid `blockTimestamp` in an upgrade file results the update failing. 
-The `blockTimestamp` value should be set to a valid Unix timestamp value which is 
+An invalid `blockTimestamp` in an upgrade file results the update failing.
+The `blockTimestamp` value should be set to a valid Unix timestamp value which is
 in the _future_ relative to the _head of the chain_.
 If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
 
 :::
- 
+
 To disable a precompile, the following format should be used:
 
 <!-- markdownlint-disable MD013 -->
@@ -927,7 +927,7 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 
 Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the
 activated precompiles at a timestamp with the
-[`eth_getActivatePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactivateprecompilesat)
+[`eth_getActivePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactiveprecompilesat)
 RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#eth_getchainconfig)
 RPC method will also return the configured upgrades in the response.
 
