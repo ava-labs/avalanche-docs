@@ -732,3 +732,10 @@ As mentioned above, if a Subnet's chain id is
 `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
 should be at
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+
+
+## FAQ
+
+- When using `getBlockNumber` it will return finalized blocks. To allow for queries
+for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries` 
+and set to true (by default it is set to `false`)
