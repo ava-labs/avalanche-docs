@@ -1,7 +1,8 @@
-# Node Bootstrapping
+# Node Bootstrap
 
 Node Bootstrap is the process of how a node *securely* downloads linear chain
-blocks or DAG chain vertices to recreate the latest state of the chain locally.
+blocks or DAG (Directed Acyclic Graphs) chain vertices to recreate the latest
+state of the chain locally.
 
 Bootstrap must guarantee that the local state of a node is in sync with the
 state of other valid nodes. Once bootstrap is completed, a node has the latest
@@ -9,8 +10,8 @@ state of the chain and can verify new incoming transactions and reach consensus
 with other nodes, collectively moving forward the chains.
 
 Bootstrapping a node is a multi-step process which requires downloading the
-chains required by the Primary Network (i.e the C-Chain, P-Chain, and X-Chain),
-as well as the chains required by any additional Subnets that the node
+chains required by the Primary Network (that is, the C-Chain, P-Chain, and
+X-Chain), as well as the chains required by any additional Subnets that the node
 explicitly tracks.
 
 This document covers the high-level technical details of how bootstrapping
@@ -39,8 +40,8 @@ blocks, corrupting the bootstrapping node's local state, and making it
 impossible for the node to correctly validate the network and reach consensus
 with other correct nodes.
 
-What is the most reliable source of information in the Avalanche ecosystem? It's
-a *large enough* majority of validators! Therefore, the first step of
+What's the most reliable source of information in the Avalanche ecosystem? It's
+a *large enough* majority of validators. Therefore, the first step of
 bootstrapping is finding a sufficient amount of validators to download
 containers from.
 
@@ -62,17 +63,17 @@ before moving on to the other Primary Network chains and other Subnets to
 guarantee that their validator sets are up-to-date**.
 
 What about the P-chain? The P-chain can't ever have an up-to-date validator set
-before completing its bootstrap! To solve this chicken-and-egg situation the
+before completing its bootstrap. To solve this chicken-and-egg situation the
 Avalanche Foundation maintains a trusted default set of validators called
 beacons (but users are free to configure their own). Beacon Node-IDs and IP
 addresses are listed in the [AvalancheGo
 codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
-Every node has the beacons list available from the start and can reach them out
+Every node has the beacon list available from the start and can reach out to them
 as soon as it starts.
 
 Validators are the only sources of truth for a blockchain. Validator
-availability is so key to the bootstrapping process that **bootstrap blocks
-until the node establishes a sufficient amount of secure connections to
+availability is so key to the bootstrapping process that **bootstrapping is
+blocked until the node establishes a sufficient amount of secure connections to
 validators**. If the node fails to reach a sufficient amount within a given
 period of time, it shuts down as no operation can be carried out safely.
 
@@ -98,7 +99,7 @@ validators for every single container. That's a lot of network traffic for a
 single container, and a node would still need to do that for each container in
 the chain.
 
-Instead if a node starts by securely retrieving the accepted frontier from a
+Instead, if a node starts by securely retrieving the accepted frontier from a
 majority of honest nodes and then recursively fetches the parent containers from
 the accepted frontier down to genesis, it can cheaply check that containers are
 correct just by verifying their IDs. Each Avalanche container has the IDs of its
@@ -121,20 +122,19 @@ Bootstrap starts when a node has connected to a sufficient majority of validator
 stake. A node is able to start bootstrapping when it has connected to at least
 $75\%$ of total validator stake.
 
-A subset of seeders is randomly sampled from the validator set. Seeders are the
-first set of peers that a node reaches out to when trying to figure out the
-current frontier. Seeders are just a subset of network nodes - they might be
-slow and provide a stale frontier, be malicious and return malicious container
-IDs, but they will always provide an initial set of candidate frontiers to work
-with.
+Seeders are the first set of peers that a node reaches out to when trying to
+figure out the current frontier. A subset of seeders is randomly sampled from
+the validator set. Seeders might be slow and provide a stale frontier, be
+malicious and return malicious container IDs, but they always provide an initial
+set of candidate frontiers to work with.
 
 Once a node has received the candidate frontiers form its seeders, it polls
 **every network validator** to vet the candidates frontiers. It sends the list
 of candidate frontiers it received from the seeders to each validator, asking
-whether or not they know about them. Each validator responds returning the
-subset of known candidates, regardless of how up-to-date or stale the containers
-are. Each validator returns containers irrespective of their age so that
-bootstrap works even in the presence of a stale frontier.
+whether or not they know about these frontiers. Each validator responds
+returning the subset of known candidates, regardless of how up-to-date or stale
+the containers are. Each validator returns containers irrespective of their age
+so that bootstrap works even in the presence of a stale frontier.
 
 Frontier retrieval is completed when at least one of the candidate frontiers is
 supported by at least $50\%$ of total validator stake. Multiple candidate
@@ -148,28 +148,28 @@ optimistically assuming that the network issue will go away.
 
 ### Containers Execution
 
-Once a node has at least one valid frontiers, it will start downloading
-parent containers for each frontier. If it's the first time the node is running,
-it won't know about any containers and will try fetching all parent containers
+Once a node has at least one valid frontiers, it starts downloading parent
+containers for each frontier. If it's the first time the node is running, it
+won't know about any containers and will try fetching all parent containers
 recursively from the accepted frontier down to genesis (unless [state
 sync](#enters-state-sync) is enabled). If bootstrap had already run previously,
-some containers will be already available locally and the node will stop as soon
-as it finds a known one.
+some containers are already available locally and the node will stop as soon as
+it finds a known one.
 
 A node first just fetches and parses containers. Once the chain is complete, the
-node will execute them in chronological order starting from the earliest
-downloaded container to the accepted frontier. This allows the node to rebuild
-the full chain state and to eventually be in sync with the rest of the network.
+node executes them in chronological order starting from the earliest downloaded
+container to the accepted frontier. This allows the node to rebuild the full
+chain state and to eventually be in sync with the rest of the network.
 
 ## When Does Bootstrapping Finish?
 
-We've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single
+You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single
 chain. However, a node must bootstrap the chains in the Primary Network as well
-as the chains in each Subnet it tracks. These leaves us with the questions -
+as the chains in each Subnet it tracks. This begs the questions -
 when are these chains bootstrapped? When is a node done bootstrapping?
 
 The P-chain is always the first to bootstrap before any other chain. Once the
-P-Chain is bootstrapped, all other chains start bootstrapping in parallel,
+P-Chain has finished, all other chains start bootstrapping in parallel,
 connecting to their own validators independently of one another.
 
 A node completes bootstrapping a Subnet once all of its corresponding chains
@@ -177,17 +177,17 @@ have completed bootstrapping. Because the Primary Network is a special case of
 Subnet that includes the entire network, this applies to it as well as any other
 manually tracked Subnets.
 
-Note that Subnets bootstrap independently of one another - so even if one Subnet
-is bootstrapped and is validating new transactions and adding new containers,
+Note that Subnets bootstrap is independently of one another - so even if one Subnet
+has bootstrapped and is validating new transactions and adding new containers,
 other Subnets may still be bootstrapping in parallel.
 
-Within a single Subnet however, a Subnet is not done bootstrapping until the
-last chain completes bootstrapping. It's possible for a single chain to
-effectively stall a node from finishing the bootstrap for a single Subnet, if it
-has a sufficiently long history or each operation is complex and time consuming.
-Even worse, other Subnet validators are continuously accepting new transactions
-and adding new containers on top of the previously known frontier, so a node
-that is slow to bootstrap can continuously fall behind the rest of the network.
+Within a single Subnet however, a Subnet isn't done bootstrapping until the last
+chain completes bootstrapping. It's possible for a single chain to effectively
+stall a node from finishing the bootstrap for a single Subnet, if it has a
+sufficiently long history or each operation is complex and time consuming. Even
+worse, other Subnet validators are continuously accepting new transactions and
+adding new containers on top of the previously known frontier, so a node that's
+slow to bootstrap can continuously fall behind the rest of the network.
 
 Nodes mitigate this by restarting bootstrap for any chains which is blocked
 waiting for the remaining Subnet chains to finish bootstrapping. These chains
@@ -197,7 +197,7 @@ chain has completed bootstrapping.
 
 Once this is complete, a node is finally ready to validate the network.
 
-## Enters State Sync
+## State Sync
 
 The full node bootstrap process is long, and gets longer and longer over time as
 more and more containers are accepted. Nodes need to bootstrap a chain by
@@ -209,9 +209,9 @@ Starting from [AvalancheGo version
 use state sync to drastically cut down bootstrapping time on the C-Chain.
 Instead of executing each block, state sync uses cryptographic techniques to
 download and verify just the state associated with the current frontier. State
-synced nodes cannot serve every C-chain block ever historically accepted, but
+synced nodes can't serve every C-chain block ever historically accepted, but
 they can safely retrieve the full C-chain state needed to validate in a much
-smaller time.
+shorter time.
 
 State sync is currently only available for the C-chain. The P-chain and X-chain
 currently bootstrap by downloading all blocks. Note that irrespective of the
@@ -221,9 +221,9 @@ normal operation.
 
 ## Conclusions and FAQ
 
-If you got this far, you've hopefully gotten a better idea of what is going on
-when your node bootstraps! Here's a few frequently asked questions we receive
-about bootstrapping.
+If you got this far, you've hopefully gotten a better idea of what's going on
+when your node bootstraps. Here's a few frequently asked questions about
+bootstrapping.
 
 ### How Can I Get the ETA for Node Bootstrap?
 
@@ -245,7 +245,7 @@ Subnets.
 
 ### Why Chain Bootstrap ETA Keeps On Changing?
 
-As we saw in the [bootstrap completion
+As you saw in the [bootstrap completion
 section](#when-does-bootstrapping-finish), a Subnet like the Primary Network
 completes once all of its chains finish bootstrapping. Some Subnet chains may
 have to wait for the slowest to finish. They'll restart bootstrapping in the
@@ -257,6 +257,6 @@ accepted frontier.
 AvalancheGo APIs are [explicitly
 disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379)
 during bootstrapping. The reason is that if the node has not fully rebuilt its
-Subnets state, it cannot provide accurate information about it. AvalancheGo APIs
-are activated once bootstrap completes and node transition into its normal
-operating mode, accepting and validating transactions.
+Subnets state, it can't provide accurate information. AvalancheGo APIs are
+activated once bootstrap completes and node transition into its normal operating
+mode, accepting and validating transactions.
