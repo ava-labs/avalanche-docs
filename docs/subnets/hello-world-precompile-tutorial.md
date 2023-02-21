@@ -1315,20 +1315,20 @@ Compiled precompile.test
 ld: warning: could not create compact unwind for _blst_sha256_block_data_order: does not use RBP or RSP based frame
 
 Compiled load.test
-Running Suite: subnet-evm precompile ginkgo test suite - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
+Running Suite: subnet-evm precompile ginkgo test suite - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm
 ===================================================================================================================
 Random Seed: 1674833631
 
 Will run 1 of 7 specs
 ------------------------------
 [BeforeSuite]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31
-  > Enter [BeforeSuite] TOP-LEVEL - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:33:51.001
-INFO [01-27|10:33:51.002] Starting AvalancheGo node                wd=/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31
+  > Enter [BeforeSuite] TOP-LEVEL - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:33:51.001
+INFO [01-27|10:33:51.002] Starting AvalancheGo node                wd=/Users/avalabs/go/src/github.com/ava-labs/subnet-evm
 INFO [01-27|10:33:51.002] Executing                                cmd="./scripts/run.sh "
 [streaming output] Using branch: hello-world-tutorial-walkthrough
 [streaming output] Creating data directory: /tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1
-[streaming output] Executing command: /Users/aaronbuchwald/go/src/github.com/ava-labs/avalanchego/build/avalanchego --data-dir=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1 --config-file=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1/config.json
+[streaming output] Executing command: /Users/avalabs/go/src/github.com/ava-labs/avalanchego/build/avalanchego --data-dir=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1 --config-file=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1/config.json
 [streaming output] [01-27|10:33:56.962] WARN process/process.go:92 UPnP or NAT-PMP router attach failed, you may not be listening publicly. Please confirm the settings in your router
 [streaming output] [01-27|10:33:56.965] INFO leveldb/db.go:203 creating leveldb {"config": {"blockCacheCapacity":12582912,"blockSize":0,"compactionExpandLimitFactor":0,"compactionGPOverlapsFactor":0,"compactionL0Trigger":0,"compactionSourceLimitFactor":0,"compactionTableSize":0,"compactionTableSizeMultiplier":0,"compactionTableSizeMultiplierPerLevel":null,"compactionTotalSize":0,"compactionTotalSizeMultiplier":0,"disableSeeksCompaction":true,"openFilesCacheCapacity":1024,"writeBuffer":6291456,"filterBitsPerKey":10,"maxManifestFileSize":9223372036854775807,"metricUpdateFrequency":10000000000}}
 [streaming output] [01-27|10:33:57.061] INFO node/node.go:224 initializing networking {"currentNodeIP": "10.56.134.240:9651"}
@@ -1339,7 +1339,7 @@ INFO [01-27|10:33:51.002] Executing                                cmd="./script
 [streaming output] [01-27|10:33:57.806] INFO <P Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "2cC67R6vPRSX4BCAY3ouAk9JKCCpAxjFxRVUQWfnEQF1BjQhqX"}
 [streaming output] [01-27|10:34:01.004] WARN health/health.go:85 failing readiness check {"reason": {"bootstrapped":{"error":"not yet run","timestamp":"0001-01-01T00:00:00Z","duration":0}}}
 INFO [01-27|10:34:06.003] AvalancheGo node is healthy
-  < Exit [BeforeSuite] TOP-LEVEL - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:34:06.003 (15.002s)
+  < Exit [BeforeSuite] TOP-LEVEL - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:34:06.003 (15.002s)
 [BeforeSuite] PASSED [15.002 seconds]
 ```
 
@@ -1349,41 +1349,41 @@ precompile test:
 ```bash
 S [SKIPPED]
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   contract native minter [Precompile, ContractNativeMinter]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:29
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:29
 ------------------------------
 S [SKIPPED]
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   tx allow list [Precompile, TxAllowList]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:36
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:36
 ------------------------------
 S [SKIPPED]
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   contract deployer allow list [Precompile, ContractDeployerAllowList]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:43
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:43
 ------------------------------
 S [SKIPPED]
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   fee manager [Precompile, FeeManager]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:50
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:50
 ------------------------------
 S [SKIPPED]
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   reward manager [Precompile, RewardManager]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:57
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:57
 ------------------------------
 [Precompiles]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
   hello world [Precompile, HelloWorld]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64
-  > Enter [It] hello world - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:06.004
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64
+  > Enter [It] hello world - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:06.004
 INFO [01-27|10:34:06.004] Executing HardHat tests on a new blockchain test=hello_world
-INFO [01-27|10:34:06.028] Reading genesis file                     filePath=./tests/precompile/genesis/hello_world.json wd=/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
+INFO [01-27|10:34:06.028] Reading genesis file                     filePath=./tests/precompile/genesis/hello_world.json wd=/Users/avalabs/go/src/github.com/ava-labs/subnet-evm
 INFO [01-27|10:34:06.029] Creating new subnet
 [streaming output] [01-27|10:34:06.059] INFO <P Chain> proposervm/pre_fork_block.go:223 built block {"blkID": "vByWDipDCUSwfKogQyZSBzHpfAAd3wsaLyzeZ7NkZ7HUefVbs", "innerBlkID": "2HQHayX2WwvNDoTQtVhTf4ZpaHs1Sm448wUh4DZMSDwfH7smKR", "height": 1, "parentTimestamp": "[08-15|00:00:00.000]", "blockTimestamp": "[01-27|10:34:06.000]"}
 INFO [01-27|10:34:06.158] Creating new Subnet-EVM blockchain       genesis="&{Config:{ChainID: 99999 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig: {\"gasLimit\":20000000,\"targetBlockRate\":2,\"minBaseFee\":1000000000,\"targetGas\":100000000,\"baseFeeChangeDenominator\":48,\"minBlockGasCost\":0,\"maxBlockGasCost\":10000000,\"blockGasCostStep\":500000}, AllowFeeRecipients: false, NetworkUpgrades: {\"subnetEVMTimestamp\":0}, PrecompileUpgrade: {\"helloWorldConfig\":{\"blockTimestamp\":0}}, UpgradeConfig: {}, Engine: Dummy Consensus Engine} Nonce:0 Timestamp:0 ExtraData:[0] GasLimit:20000000 Difficulty:+0 Mixhash:0x0000000000000000000000000000000000000000000000000000000000000000 Coinbase:0x0000000000000000000000000000000000000000 Alloc:map[0x0Fa8EA536Be85F32724D57A37758761B86416123:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]} 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]}] AirdropHash:0x0000000000000000000000000000000000000000000000000000000000000000 AirdropAmount:<nil> AirdropData:[] Number:0 GasUsed:0 ParentHash:0x0000000000000000000000000000000000000000000000000000000000000000 BaseFee:<nil>}"
@@ -1416,7 +1416,7 @@ Contract deployed to: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
   2 passing (4s)
 
 
-  < Exit [It] hello world - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:17.484 (11.48s)
+  < Exit [It] hello world - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:17.484 (11.48s)
 • [11.480 seconds]
 ------------------------------
 ```
@@ -1424,16 +1424,16 @@ Contract deployed to: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
 Finally, you will see the load test being skipped as well:
 
 ```bash
-Running Suite: subnet-evm small load simulator test suite - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
+Running Suite: subnet-evm small load simulator test suite - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm
 ======================================================================================================================
 Random Seed: 1674833658
 
 Will run 0 of 1 specs
 S [SKIPPED]
 [Load Simulator]
-/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/load/load_test.go:49
+/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/load/load_test.go:49
   basic subnet load test [load]
-  /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/load/load_test.go:50
+  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/load/load_test.go:50
 ------------------------------
 
 Ran 0 of 1 Specs in 0.000 seconds
