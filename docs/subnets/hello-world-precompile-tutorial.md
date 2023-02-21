@@ -34,7 +34,7 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
-A [precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/contracts.go#L53-L56)
+A [precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L53-L56)
 follows this interface:
 
 ```go
@@ -48,7 +48,7 @@ type PrecompiledContract interface {
 ```
 
 Here is an example of the
-[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/contracts.go#L238-L252)
+[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L238-L252)
 function.
 
 ```go
@@ -96,7 +96,7 @@ A stateful precompile builds on a precompile in that it adds state access. State
 not available in the default EVM, and are specific to Avalanche EVMs such as
 [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
-A stateful precompile follows this [interface](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/contract.go#L64-L67):
+A stateful precompile follows this [interface](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract.go#L64-L67):
 
 ```go
 // StatefulPrecompiledContract is the interface for executing a precompiled contract
@@ -118,6 +118,15 @@ provide access to the EVM state including the ability to modify balances and rea
 This way we can provide even more customization of the EVM through Stateful Precompiles than we can
 with the original precompile interface!
 
+### AllowList
+
+AllowList enables a precompile to enforce permissions on addresses. AllowList is not a contract itself,
+but it's a helper structure to provide control-mechanism to wrapping contracts.
+It provides a `AllowListConfig` to precompile so that it can take an initial configuration
+from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial we
+used `AllowList` to provide permission control to `HelloWorld` precompile.
+You can find more information about AllowList interface at [here](../subnets/customize-a-subnet.md#allowlist).
+
 ## Tutorial
 
 ### Overview
@@ -131,6 +140,14 @@ This is a brief overview of what this tutorial will cover.
 
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
+
+In this tutorial we used a branch based on SubnetEVM version `v0.4.9`. You can find the branch
+[here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/). The code in this
+branch is the same as SubnetEVM version `v0.4.9` except for the `precompile/` directory. The
+`precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
+precompile as an example to learn how to write a stateful precompile. The code in this branch can become
+outdated.
+You should always use the latest version of SubnetEVM when you develop your own precompile.
 
 ### Prerequisites
 
@@ -183,10 +200,12 @@ npm install -g solc
 npm install -g yarn
 ```
 
-### Official GitHub Tutorial
+### Complete Code
 
-Please also use the [official GitHub tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1)
-to double check your work as well.
+You can inspect the [Hello World Precompile tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1)
+for the complete code.
+
+For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
 ### Step 0: Generating the Precompile
 
@@ -217,13 +236,40 @@ Create a new file called `IHelloWorld.sol` and copy and paste the below code:
 // SPDX-License-Identifier: MIT
 
 pragma solidity >=0.8.0;
+import "./IAllowList.sol";
 
-interface IHelloWorld {
+interface IHelloWorld is IAllowList {
   // sayHello returns the stored greeting string
   function sayHello() external view returns (string calldata result);
 
   // setGreeting  stores the greeting string
   function setGreeting(string calldata response) external;
+}
+```
+
+This interface defines 2 functions, `sayHello()` and `setGreeting()`. The `sayHello()` function
+is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
+The `setGreeting()` function is a state-changer function, meaning it modifies the state of the precompile.
+
+`IAllowList` is an interface that we will use to restrict access to the precompile. It is defined in
+`./contract-examples/contracts/IAllowList.sol`:
+
+```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IAllowList {
+  // Set [addr] to have the admin role over the precompile contract.
+  function setAdmin(address addr) external;
+
+  // Set [addr] to be enabled on the precompile contract.
+  function setEnabled(address addr) external;
+
+  // Set [addr] to have no role for the precompile contract.
+  function setNone(address addr) external;
+
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
 }
 ```
 
@@ -242,19 +288,57 @@ This generates the ABI code and moves it to `./contract-examples/contracts` as `
 ```json
 [
   {
+    "inputs": [
+      { "internalType": "address", "name": "addr", "type": "address" }
+    ],
+    "name": "readAllowList",
+    "outputs": [
+      { "internalType": "uint256", "name": "role", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "sayHello",
     "outputs": [
       { "internalType": "string", "name": "result", "type": "string" }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "addr", "type": "address" }
+    ],
+    "name": "setAdmin",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "recipient", "type": "string" }
+      { "internalType": "address", "name": "addr", "type": "address" }
+    ],
+    "name": "setEnabled",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "response", "type": "string" }
     ],
     "name": "setGreeting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "addr", "type": "address" }
+    ],
+    "name": "setNone",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -262,189 +346,306 @@ This generates the ABI code and moves it to `./contract-examples/contracts` as `
 ]
 ```
 
+As you can see the ABI also contains the `IAllowList` interface functions. This is because the
+`IHelloWorld` interface inherits from the `IAllowList` interface.
+
 Note: The ABI must have named outputs in order to generate the precompile template.
 
 Now that we have an ABI for the precompile gen tool to interact with, we can run the following
-command to generate our HelloWorld precompile!
+command to generate our HelloWorld precompile files!
 
-Let's go back to the root of the Subnet-EVM repository and run the PrecompileGen script:
+Let's go back to the root of the Subnet-EVM repository and run the PrecompileGen script helper:
 
 <!-- markdownlint-disable MD013 -->
 
 ```bash
-cd $GOPATH/src/github.com/ava-labs/subnet-evm
+$ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 
-./scripts/generate_precompile.sh --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg precompile --out ./precompile/hello_world.go
+$ ./scripts/generate_precompile.sh --help
+
+Using branch: precompile-tutorial
+NAME:
+   precompilegen - subnet-evm precompile generator tool
+
+USAGE:
+   main [global options] command [command options] [arguments...]
+
+VERSION:
+   1.10.26-stable
+
+COMMANDS:
+   help, h  Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+
+    --abi value
+          Path to the contract ABI json to generate, - for STDIN
+
+    --out value
+          Output folder for the generated precompile files, - for STDOUT (default =
+          ./precompile/contracts/{pkg})
+
+    --pkg value
+          Go package name to generate the precompile into (default = {type})
+
+    --type value
+          Struct name for the precompile (default = {abi file name})
+
+   MISC
+
+    --help, -h                     (default: false)
+          show help
+
+    --version, -v                  (default: false)
+          print the version
+
+
+COPYRIGHT:
+   Copyright 2013-2022 The go-ethereum Authors
+```
+
+Precompile contracts reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
+template in the `./precompile/contracts/helloworld` directory, where `helloworld` is the name of the
+Go package we want to generate the precompile into.
+
+```bash
+./scripts/generate_precompile.sh --abi ./abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-This generates a precompile template that's mostly complete located at `./precompile/hello_world.go`.
-Let's fill out the rest!
+This generates a precompile template files `contract.go`, `contract.abi`, `config.go` and `module.go`
+located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
+directory. In those files there is a comment block that explains general guidelines for precompile
+development.
 
-The precompile gives us commented instructions on the first 25 lines of the autogenerated file. Let's
-look at the 10 steps and follow them step by step:
+In `./precompile/helloworld`, directory search `CUSTOM CODE STARTS HERE` to find places where
+we can/should modify the precompile.
+
+Let's fill out the rest!
 
 <!-- markdownlint-disable MD013 -->
 
 ```go
 /* General guidelines for precompile development:
-1- Read the comment and set a suitable contract address in precompile/params.go. E.g:
-	HelloWorldAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
-2- Set gas costs here
-3- It is recommended to only modify code in the highlighted areas marked with "CUSTOM CODE STARTS HERE". Modifying code outside of these areas should be done with caution and with a deep understanding of how these changes may impact the EVM.
-Typically, custom codes are required in only those areas.
-4- Add your upgradable config in params/precompile_config.go
-5- Add your precompile upgrade in params/config.go
-6- Add your solidity interface and test contract to contract-examples/contracts
-7- Write solidity tests for your precompile in contract-examples/test
-8- Create your genesis with your precompile enabled in tests/e2e/genesis/
-9- Create e2e test for your solidity test in tests/e2e/solidity/suites.go
-10- Run your e2e precompile Solidity tests with 'E2E=true ./scripts/run.sh'
+1- Set a suitable config key in generated module.go. E.g: "yourPrecompileConfig"
+2- Read the comment and set a suitable contract address in generated module.go. E.g:
+	ContractAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
+3- It is recommended to only modify code in the highlighted areas marked with "CUSTOM CODE STARTS HERE". Typically, custom codes are required in only those areas.
+Modifying code outside of these areas should be done with caution and with a deep understanding of how these changes may impact the EVM.
+4- Set gas costs in generated contract.go
+5- Force import your precompile package in precompile/registry/registry.go
+6- Add your config unit tests under generated package config_test.go
+7- Add your contract unit tests undertgenerated package contract_test.go
+8- Additionally you can add a full-fledged VM test for your precompile under plugin/vm/vm_test.go. See existing precompile tests for examples.
+9- Add your solidity interface and test contract to contract-examples/contracts
+10- Write solidity tests for your precompile in contract-examples/test
+11- Create your genesis with your precompile enabled in tests/e2e/genesis/
+12- Create e2e test for your solidity test in tests/e2e/solidity/suites.go
+13- Run your e2e precompile Solidity tests with 'E2E=true ./scripts/run.sh
 */
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-### Step 1: Set Contract Address
+### Step 1: Set Config Key
 
-In `./precompile/hello_world.go`, please search (`CTRL F`) `CUSTOM CODE STARTS HERE` to find the
-first area where we can modify the precompile.
+Let's jump to `helloworld/module.go` file first. This file contains the module definition for our
+precompile. We can see the `ConfigKey` is set to some default value of `helloWorldConfig`.
+This key should be unique to the precompile.
+This config key determines which JSON key to use when reading the precompile's config from the
+JSON upgrade/genesis file. In this case, the config key is `helloWorldConfig` and JSON config
+should look like:
 
-We can see our precompile address is set to some default value. We can cut the address from the var
-declaration block and remove it from the precompile.
+```json
+{
+  "helloWorldConfig": {
+    "blockTimestamp": 0
+		...
+  }
+}
+```
 
-![Singleton StatefulPrecompiledContract and signatures](./../../static/img/2022-09-01-22-46-00.png)
+### Step 2: Set Contract Address
 
-We can paste it in
-[`./precompile/params.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/params.go)
-and modify the default value to be the next user available stateful precompile address. For forks of
+We can see the `ContractAddress` is set to some default value.
+You should change that default value to a suitable address for your precompile.
+The address should be unique to the precompile. There is a registry of precompile addresses
+under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
+A list of addresses is specified in comments under this file.
+Modify the default value to be the next user available stateful precompile address. For forks of
 Subnet-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to
-Subnet-EVM in the future.
+Subnet-EVM in the future. You should pick an address that is not already taken,
+and write it down in `registry.go` as a comment for future reference.
 
 ```go
-ContractDeployerAllowListAddress = common.HexToAddress("0x0200000000000000000000000000000000000000")
-ContractNativeMinterAddress      = common.HexToAddress("0x0200000000000000000000000000000000000001")
-TxAllowListAddress               = common.HexToAddress("0x0200000000000000000000000000000000000002")
-FeeConfigManagerAddress          = common.HexToAddress("0x0200000000000000000000000000000000000003")
-HelloWorldAddress                = common.HexToAddress("0x0300000000000000000000000000000000000000")
+// This list is kept just for reference. The actual addresses defined in respective packages of precompiles.
+// Note: it is important that none of these addresses conflict with each other or any other precompiles
+// in core/vm/contracts.go.
+// The first stateful precompiles were added in coreth to support nativeAssetCall and nativeAssetBalance. New stateful precompiles
+// originating in coreth will continue at this prefix, so we reserve this range in subnet-evm so that they can be migrated into
+// subnet-evm without issue.
+// These start at the address: 0x0100000000000000000000000000000000000000 and will increment by 1.
+// Optional precompiles implemented in subnet-evm start at 0x0200000000000000000000000000000000000000 and will increment by 1
+// from here to reduce the risk of conflicts.
+// For forks of subnet-evm, users should start at 0x0300000000000000000000000000000000000000 to ensure
+// that their own modifications do not conflict with stateful precompiles that may be added to subnet-evm
+// in the future.
+// ContractDeployerAllowListAddress = common.HexToAddress("0x0200000000000000000000000000000000000000")
+// ContractNativeMinterAddress      = common.HexToAddress("0x0200000000000000000000000000000000000001")
+// TxAllowListAddress               = common.HexToAddress("0x0200000000000000000000000000000000000002")
+// FeeManagerAddress                = common.HexToAddress("0x0200000000000000000000000000000000000003")
+// RewardManagerAddress             = common.HexToAddress("0x0200000000000000000000000000000000000004")
+// HelloWorldAddress                = common.HexToAddress("0x0300000000000000000000000000000000000000")
 // ADD YOUR PRECOMPILE HERE
-// {YourPrecompile}Address       = common.HexToAddress("0x03000000000000000000000000000000000000??")
+// {YourPrecompile}Address          = common.HexToAddress("0x03000000000000000000000000000000000000??")
 ```
 
-We now have to add it to the slice of `UsedAddresses` as well.
+Don't forget to update the actual variable `ContractAddress` in [`module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go#L49)
+to the address you chose. It should look like:
 
 ```go
-UsedAddresses = []common.Address{
-		ContractDeployerAllowListAddress,
-		ContractNativeMinterAddress,
-		TxAllowListAddress,
-		FeeConfigManagerAddress,
-		HelloWorldAddress,
-		// ADD YOUR PRECOMPILE HERE
-		// YourPrecompileAddress
-	}
+// ContractAddress is the defined address of the precompile contract.
+// This should be unique across all precompile contracts.
+// See params/precompile_modules.go for registered precompile contracts and more information.
+var ContractAddress = common.HexToAddress("0x0300000000000000000000000000000000000000")
 ```
 
-Now when Subnet-EVM sees the `HelloWorldAddress` as input when executing
-[`CALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L222),
-[`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L401),
-[`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L362),
-[`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L311),
-it can [run the precompile](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/core/vm/evm.go#L271-L272)
-if the precompile is enabled.
-
-### Step 2: Set Gas Costs
-
-In [`precompile/params.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/precompile/params.go)
-we have `writeGasCostPerSlot` and `readGasCostPerSlot`.
-
-`writeGasCostPerSlot` is the cost of one write such as modifying a state storage slot.
-
-`readGasCostPerSlot` is the cost of reading a state storage slot.
-
-This should be in your gas cost estimations based on how many times the precompile function does a
-read or a write. For example, if the precompile modifies the state slot of its precompile address
-twice then the gas cost for that function would be `40_000`.
-
-```go
-// Gas costs for stateful precompiles
-const (
-	writeGasCostPerSlot = 20_000
-	readGasCostPerSlot  = 5_000
-)
-```
-
-Now going back to `./precompile/hello_world.go`, we can modify our precompile function gas costs.
-Please search (`CTRL F`) `SET A GAS COST HERE` to locate the default gas cost code.
-
-We will be getting and setting our greeting with `sayHello()` and `setGreeting()` in one slot
-respectively so we can define the gas costs as follows.
-
-```go
-	SayHelloGasCost    uint64 = readGasCostPerSlot
-	SetGreetingGasGost uint64 = writeGasCostPerSlot
-```
+Now when Subnet-EVM sees the `helloworld.ContractAddress` as input when executing
+[`CALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L284),
+[`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L355),
+[`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L396),
+[`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L445),
+it can run the precompile if the precompile is enabled.
 
 ### Step 3: Add Custom Code
 
 Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the
-precompile that we need to modify. We should start with the reference imports code block.
+precompile package that we need to modify. We should start with the reference imports code block.
 
-![Custom code starts here](./../../static/img/2022-09-01-22-48-26.png)
+#### Step 3.1: Module file
 
-We can remove all of these reference imports and the associated imports. We only include these in
-our template so that the file compiles on generation.
+Module file contains fundemental information about the precompile. This includes the key for the
+precompile, the address of the precompile and a configurator. This file is located at
+[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go)
 
-#### Step 3.1: Modify Equal()
+It defines the module for the precompile. The module is used to register the precompile to the
+precompile registry. The precompile registry is used to read configs and enable the precompile.
+Registration is done in `init()` function of the module file. `NewConfig()` is used to create a
+new instance for the precompile config. This will be used in custom Unmarshal/Marshal logic.
+You don't need to override these functions.
 
-Next we see this in `Equal()`. The below code snippet can be copied and pasted to overwrite the
-default `Equal()` code.
+##### Configure()
+
+Module file contains a `configurator` which implements `contract.Configurator` interface. This interface
+contains a `Configure()` function which is used to configure the precompile and set the initial
+state of the precompile. This function is called when the precompile is enabled. This typically used
+to read from given config in upgrade/genesis JSON and set the initial state of the
+precompile accordingly. This function also calls `AllowListConfig.Configure()` to invoke AllowList
+configuration as the last step. You should keep it as it is if you want to use AllowList.
+You can modify this function for your custom logic. You can circle back to this function later
+after you have finalized implementation of the precompile config.
+
+#### Step 3.2: Config file
+
+Config file contains the config for the precompile. This file is located at
+[`/precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
+This file contains `Config` struct which implements `precompileconfig.Config` interface.
+It has some embedded structs like `precompileconfig.Upgrade`. `Upgrade` is used to enable
+upgrades for the precompile. It contains the `BlockTimestamp` and `Disable` to enable/disable
+upgrades. `BlockTimestamp` is the timestamp of the block when the upgrade will be activated.
+`Disable` is used to disable the upgrade. If you use `AllowList` for the precompile, there is also
+`allowlist.AllowListConfig` embedded in the `Config` struct. `AllowListConfig` is used specify initial
+roles for specified addresses. If you have any custom fields in your precompile config, you can add them
+here. These custom fields will be read from upgrade/genesis JSON and set in the precompile config.
+
+```go
+// Config implements the StatefulPrecompileConfig
+// interface while adding in the HelloWorld specific precompile address.
+type Config struct {
+	allowlist.AllowListConfig
+	precompileconfig.Upgrade
+}
+```
+
+##### Verify()
+
+`Verify()` is called on startup and an error is treated as fatal. Generated code contains a call
+to `AllowListConfig.Verify()` to verify the `AllowListConfig`. You can leave that as is, and start
+adding your own custom verify code after that.
+
+We can leave this function as is right now because there is no invalid custom configuration for the `Config`.
+
+```go
+// Verify tries to verify Config and returns an error accordingly.
+func (c *Config) Verify() error {
+	// Verify AllowList first
+	if err := c.AllowListConfig.Verify(); err != nil {
+		return err
+	}
+
+	// CUSTOM CODE STARTS HERE
+	// Add your own custom verify code for Config here
+	// and return an error accordingly
+	return nil
+}
+```
+
+##### Equal()
+
+Next we see is `Equal()`. This function determines if two precompile configs are equal. This is used
+to determine if the precompile needs to be upgraded. There is some default code that is generated for
+checking `Upgrade` and `AllowListConfig` equality.
 
 <!-- markdownlint-disable MD013 -->
 
 ```go
-// Equal returns true if [s] is a [*HelloWorldConfig] and it has been configured identical to [c].
-func (c *HelloWorldConfig) Equal(s StatefulPrecompileConfig) bool {
+// Equal returns true if [s] is a [*Config] and it has been configured identical to [c].
+func (c *Config) Equal(s precompileconfig.Config) bool {
 	// typecast before comparison
-	other, ok := (s).(*HelloWorldConfig)
+	other, ok := (s).(*Config)
 	if !ok {
 		return false
 	}
 	// CUSTOM CODE STARTS HERE
-	// modify this boolean accordingly with your custom HelloWorldConfig, to check if [other] and the current [c] are equal
-	// if HelloWorldConfig contains only UpgradeableConfig  you can skip modifying it.
-	equals := c.UpgradeableConfig.Equal(&other.UpgradeableConfig)
+	// modify this boolean accordingly with your custom Config, to check if [other] and the current [c] are equal
+	// if Config contains only Upgrade  and AllowListConfig  you can skip modifying it.
+	equals := c.Upgrade.Equal(&other.Upgrade) && c.AllowListConfig.Equal(&other.AllowListConfig)
 	return equals
 }
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-We can leave this function as is since we check `UpgradeableConfig` for equality which is the only
-field that `HelloWorldConfig` struct has.
+We can leave this function as is since we check `Upgrade` and `AllowListConfig` for equality which are
+the only fields that `Config` struct has.
 
-```go
-// HelloWorldConfig implements the StatefulPrecompileConfig
-// interface while adding in the HelloWorld specific precompile address.
-type HelloWorldConfig struct {
-	UpgradeableConfig
-}
-```
+#### Step 3.3: Modify Configure()
 
-#### Step 3.2: Modify Configure()
-
-The next place we see the `CUSTOM CODE STARTS HERE` is in `Configure()`.
-Let's set it up. `Configure()` configures the `state` with the initial configuration at whatever
-`blockTimestamp` the precompile is enabled. In the HelloWorld example, we want to set up a default
+We can now circle back to `Configure()` in `module.go` as we finished implementing `Config` struct.
+This function configures the `state` with the
+initial configuration at`blockTimestamp` when the precompile is enabled.
+In the HelloWorld example, we want to set up a default
 key-value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The
 `StateDB` allows us to store a key-value mapping of 32 byte hashes. The below code snippet can be
 copied and pasted to overwrite the default `Configure()` code.
 
 ```go
-// Configure configures [state] with the initial configuration.
-func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContext) {
+const defaultGreeting = "Hello World!"
+
+// Configure configures [state] with the given [cfg] precompileconfig.
+// This function is called by the EVM once per precompile contract activation.
+// You can use this function to set up your precompile contract's initial state,
+// by using the [cfg] config and [state] stateDB.
+	// Configure configures [state] with the initial configuration.
+func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompileconfig.Config, state contract.StateDB, _ contract.BlockContext) error {
+	config, ok := cfg.(*Config)
+	if !ok {
+		return fmt.Errorf("incorrect config %T: %v", config, config)
+	}
+	// CUSTOM CODE STARTS HERE
+
 	// This will be called in the first block where HelloWorld stateful precompile is enabled.
 	// 1) If BlockTimestamp is nil, this will not be called
 	// 2) If BlockTimestamp is 0, this will be called while setting up the genesis block
@@ -452,25 +653,79 @@ func (c *HelloWorldConfig) Configure(_ ChainConfig, state StateDB, _ BlockContex
 	// whose timestamp is >= 1000
 	//
 	// Set the initial value under [common.BytesToHash([]byte("storageKey")] to "Hello World!"
-	res := common.LeftPadBytes([]byte("Hello World!"), common.HashLength)
-	state.SetState(HelloWorldAddress, common.BytesToHash([]byte("storageKey")), common.BytesToHash(res))
+	StoreGreeting(state, defaultGreeting)
+	// AllowList is activated for this precompile. Configuring allowlist addresses here.
+	return config.AllowListConfig.Configure(state, ContractAddress)
 }
 ```
 
-#### Step 3.3: Modify Verify()
+#### Step 3.4: Contract file
 
-We also see a `Verify()` function. `Verify()` is called on startup and an error is treated as fatal.
-We can leave this as is right now because there is no invalid configuration for the `HelloWorldConfig`.
-The below code snippet can be copied and pasted to overwrite the default `Verify()` code.
+Contract file contains the functions of the precompile contract that will be called by the EVM. The
+file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
+Since we use `IAllowList` interface there will be auto-generated code for `AllowList`
+functions like below:
 
 ```go
-// Verify tries to verify HelloWorldConfig and returns an error accordingly.
-func (c *HelloWorldConfig) Verify() error {
-	return nil
+// GetHelloWorldAllowListStatus returns the role of [address] for the HelloWorld list.
+func GetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address) allowlist.Role {
+	return allowlist.GetAllowListStatus(stateDB, ContractAddress, address)
+}
+
+// SetHelloWorldAllowListStatus sets the permissions of [address] to [role] for the
+// HelloWorld list. Assumes [role] has already been verified as valid.
+// This stores the [role] in the contract storage with address [ContractAddress]
+// and [address] hash. It means that any reusage of the [address] key for different value
+// conflicts with the same slot [role] is stored.
+// Precompile implementations must use a different key than [address] for their storage.
+func SetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address, role allowlist.Role) {
+	allowlist.SetAllowListRole(stateDB, ContractAddress, address, role)
 }
 ```
 
-#### Step 3.4: Modify sayHello()
+These will be helpful to use AllowList precompile helper in our functions.
+
+##### Packers and Unpackers
+
+There is also auto generated Packers and Unpackers for the ABI. These will be used in `sayHello` and
+`setGreeting` functions to comfort the ABI.
+These functions are auto-generated
+and will be used in necessary places accordingly.
+You don't need to worry about how to deal with them, but it's good to know what they are.
+
+Each input to a precompile contract function has it's own `Unpacker` function as follows:
+
+```go
+// UnpackSetGreetingInput attempts to unpack [input] into the string type argument
+// assumes that [input] does not include selector (omits first 4 func signature bytes)
+func UnpackSetGreetingInput(input []byte) (string, error) {
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input)
+	if err != nil {
+		return "", err
+	}
+	unpacked := *abi.ConvertType(res[0], new(string)).(*string)
+	return unpacked, nil
+}
+```
+
+The ABI is a binary format and the input to the precompile contract function is a
+byte array. The `Unpacker` function converts this input to a more easy to use format so that we can
+use it in our function.
+
+Similarly, there is a `Packer` function for each output of a precompile contract function as follows:
+
+```go
+// PackSayHelloOutput attempts to pack given result of type string
+// to conform the ABI outputs.
+func PackSayHelloOutput(result string) ([]byte, error) {
+	return HelloWorldABI.PackOutput("sayHello", result)
+}
+```
+
+This function converts the output of the function to a byte array that conforms to the ABI and can be
+returned to the EVM as a result.
+
+##### Modify sayHello()
 
 Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol`
 interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here.
@@ -479,18 +734,36 @@ is a simple getter function. In `Configure()` we set up a mapping with the key a
 the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
 The below code snippet can be copied and pasted to overwrite the default `sayHello` code.
 
+First we add a helper function to get the greeting value from the stateDB, this will be helpful
+when we test our contract.
+
+```go
+// GetGreeting returns the value of the storage key "storageKey" in the contract storage,
+// with leading zeroes trimmed.
+// This function is mostly used for tests.
+func GetGreeting(stateDB contract.StateDB) string {
+	// Get the value set at recipient
+	value := stateDB.GetState(ContractAddress, storageKeyHash)
+	return string(common.TrimLeftZeroes(value.Bytes()))
+}
+```
+
+Now we can modify the `sayHello` function to return the stored value.
+
 <!-- markdownlint-disable MD013 -->
 
 ```go
-func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-	if remainingGas, err = deductGas(suppliedGas, SayHelloGasCost); err != nil {
+func sayHello(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.deductGas(suppliedGas, SayHelloGasCost); err != nil {
 		return nil, 0, err
 	}
+	// CUSTOM CODE STARTS HERE
+
 	// Get the current state
 	currentState := accessibleState.GetStateDB()
 	// Get the value set at recipient
-	value := currentState.GetState(HelloWorldAddress, common.BytesToHash([]byte("storageKey")))
-	packedOutput, err := PackSayHelloOutput(string(common.TrimLeftZeroes(value.Bytes())))
+	value := GetGreeting(currentState)
+	packedOutput, err := PackSayHelloOutput(value)
 	if err != nil {
 		return nil, remainingGas, err
 	}
@@ -502,41 +775,70 @@ func sayHello(accessibleState PrecompileAccessibleState, caller common.Address, 
 
 <!-- markdownlint-enable MD013 -->
 
-#### Step 3.5: Modify setGreeting()
+##### Modify setGreeting()
 
 We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input`
-and we will set that as the value in the state mapping with the key as `storageKey`. The below code
-snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
+and we will set that as the value in the state mapping with the key as `storageKey`. It also checks
+if the VM running the precompile is in read-only mode. If it is, it returns an error.
+
+There is also a generated `AllowList` code in that function. This generated code checks if the caller
+address is eligible to perform this state-changing operation. If not, it returns an error.
+
+Let's add the helper function to set the greeting value in the stateDB, this will be helpful
+when we test our contract.
+
+```go
+// StoreGreeting sets the value of the storage key "storageKey" in the contract storage.
+func StoreGreeting(stateDB contract.StateDB, input string) {
+	inputPadded := common.LeftPadBytes([]byte(input), common.HashLength)
+	inputHash := common.BytesToHash(inputPadded)
+
+	stateDB.SetState(ContractAddress, storageKeyHash, inputHash)
+}
+```
+
+The below code snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
 
 <!-- markdownlint-disable MD013 -->
 
 ```go
-func setGreeting(accessibleState PrecompileAccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-	if remainingGas, err = deductGas(suppliedGas, SetGreetingGasCost); err != nil {
+func setGreeting(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SetGreetingGasCost); err != nil {
 		return nil, 0, err
 	}
 	if readOnly {
 		return nil, remainingGas, vmerrs.ErrWriteProtection
 	}
-	// Attempts to unpack [input] into the arguments to the SetGreetingInput.
+	// attempts to unpack [input] into the arguments to the SetGreetingInput.
 	// Assumes that [input] does not include selector
 	// You can use unpacked [inputStruct] variable in your code
-    inputStr, err := UnpackSetGreetingInput(input)
+	inputStruct, err := UnpackSetGreetingInput(input)
 	if err != nil {
 		return nil, remainingGas, err
 	}
 
-  	// CUSTOM CODE STARTS HERE
-  	// Check if the input string is longer than 32 bytes
-    if len(inputStr) > 32 {
-    	return nil, 0, errors.New("input string is longer than 32 bytes")
-    }
+	// Allow list is enabled and SetGreeting is a state-changer function.
+	// This part of the code restricts the function to be called only by enabled/admin addresses in the allow list.
+	// You can modify/delete this code if you don't want this function to be restricted by the allow list.
+	stateDB := accessibleState.GetStateDB()
+	// Verify that the caller is in the allow list and therefore has the right to call this function.
+	callerStatus := allowlist.GetAllowListStatus(stateDB, ContractAddress, caller)
+	if !callerStatus.IsEnabled() {
+		return nil, remainingGas, fmt.Errorf("%w: %s", ErrCannotSetGreeting, caller)
+	}
+	// allow list code ends here.
 
-  	// setGreeting is the execution function
-  	// "SetGreeting(name string)" and sets the storageKey
-  	// in the string returned by hello world
-  	res := common.LeftPadBytes([]byte(inputStr), common.HashLength)
-	accessibleState.GetStateDB().SetState(HelloWorldAddress, common.BytesToHash([]byte("storageKey")), common.BytesToHash(res))
+	// CUSTOM CODE STARTS HERE
+	// CUSTOM CODE STARTS HERE
+	// Check if the input string is longer than HashLength
+	if len(inputStruct) > common.HashLength {
+		return nil, 0, ErrInputExceedsLimit
+	}
+
+	// setGreeting is the execution function
+	// "SetGreeting(name string)" and sets the storageKey
+	// in the string returned by hello world
+	StoreGreeting(stateDB, inputStruct)
 
 	// This function does not return an output, leave this one as is
 	packedOutput := []byte{}
@@ -548,201 +850,148 @@ func setGreeting(accessibleState PrecompileAccessibleState, caller common.Addres
 
 <!-- markdownlint-enable MD013 -->
 
-### Step 4: Add Upgradable Config
+### Step 4: Set Gas Costs
 
-Let's now modify
-[`./params/precompile_config.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/params/precompile_config.go).
- We can search (`CTRL F`) for `ADD YOUR PRECOMPILE HERE`.
-
-This file helps set up stateful precompiles that can be activated as part of a network upgrade and
-related helper functions.
-
-Let's create our precompile key and name it `helloWorldKey`. Precompile keys are used to reference
-each of the possible stateful precompile types. The below code snippet can be copied and pasted to
-overwrite the default code.
+In [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20)
+we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`.
 
 ```go
+// Gas costs for stateful precompiles
 const (
-	contractDeployerAllowListKey precompileKey = iota + 1
-	contractNativeMinterKey
-	txAllowListKey
-	feeManagerKey
-	helloWorldKey
-	// ADD YOUR PRECOMPILE HERE
-	// {yourPrecompile}Key
+	WriteGasCostPerSlot = 20_000
+	ReadGasCostPerSlot  = 5_000
 )
 ```
 
-We should also add our precompile key to our `precompileKeys` slice. We use this slice to iterate
-over the keys and activate the precompiles. The below code snippet can be copied and pasted to
-overwrite the default code.
+`WriteGasCostPerSlot` is the cost of one write such as modifying a state storage slot.
 
-<!-- markdownlint-disable MD013 -->
+`ReadGasCostPerSlot` is the cost of reading a state storage slot.
+
+This should be in your gas cost estimations based on how many times the precompile function does a
+read or a write. For example, if the precompile modifies the state slot of its precompile address
+twice then the gas cost for that function would be `40_000`.
+
+On top of these gas costs, we also have to account for the gas costs of AllowList gas costs. These
+are the gas costs of reading and writing permissions for addresses in AllowList. These are defined
+under [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29).
+By default these are added to the default gas costs to the state-change functions (SetGreeting)
+of the precompile. Meaning that these functions will cost an additional `ReadAllowListGasCost` in order
+to read permissions from the storage. If you don't plan to read permissions from the storage then
+you can omit these.
+
+Now going back to `/precompile/helloworld/contract.go`, we can modify our precompile function gas costs.
+Please search (`CTRL F`) `SET A GAS COST HERE` to locate the default gas cost code.
 
 ```go
-// ADD YOUR PRECOMPILE HERE
-var precompileKeys = []precompileKey{contractDeployerAllowListKey, contractNativeMinterKey, txAllowListKey, feeManagerKey, helloWorldKey /* {yourPrecompile}Key */}
+SayHelloGasCost    uint64 = 0                                  // SET A GAS COST HERE
+SetGreetingGasCost uint64 = 0 + allowlist.ReadAllowListGasCost // SET A GAS COST HERE
 ```
 
-<!-- markdownlint-enable MD013 -->
-
-We should add our precompile to the `PrecompileUpgrade` struct. The `PrecompileUpgrade` is a helper
-struct embedded in `UpgradeConfig` and represents each of the possible stateful precompile types
-that can be activated or deactivated as part of a network upgrade. The below code snippet can be
-copied and pasted to overwrite the default code.
-
-<!-- markdownlint-disable MD013 -->
+We get and set our greeting with `sayHello()` and `setGreeting()` in one slot
+respectively so we can define the gas costs as follows. We also read permissions from the
+AllowList in `setGreeting()` so we keep `allowlist.ReadAllowListGasCost`.
 
 ```go
-type PrecompileUpgrade struct {
-	ContractDeployerAllowListConfig *precompile.ContractDeployerAllowListConfig `json:"contractDeployerAllowListConfig,omitempty"` // Config for the contract deployer allow list precompile
-	ContractNativeMinterConfig      *precompile.ContractNativeMinterConfig      `json:"contractNativeMinterConfig,omitempty"`      // Config for the native minter precompile
-	TxAllowListConfig               *precompile.TxAllowListConfig               `json:"txAllowListConfig,omitempty"`               // Config for the tx allow list precompile
-	FeeManagerConfig                *precompile.FeeConfigManagerConfig          `json:"feeManagerConfig,omitempty"`                // Config for the fee manager precompile
-	HelloWorldConfig                *precompile.HelloWorldConfig                `json:"helloWorldConfig,omitempty"`                // Config for the hello world precompile
+SayHelloGasCost    uint64 = contract.ReadGasCostPerSlot
+SetGreetingGasCost uint64 = contract.WriteGasCostPerSlot + allowlist.ReadAllowListGasCost
+```
+
+### Step 5: Register Precompile
+
+We should register our precompile in [`/precompile/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go)
+to be discovered by other packages.
+Our `Module` file contains an `init()` function that registers our precompile.
+`init()` is called when the package is imported.
+We should register our precompile in a common package so
+that it can be imported by other packages.
+
+```go
+// Force imports of each precompile to ensure each precompile's init function runs and registers itself
+// with the registry.
+import (
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/deployerallowlist"
+
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/nativeminter"
+
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/txallowlist"
+
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/feemanager"
+
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/rewardmanager"
+
+	_ "github.com/ava-labs/subnet-evm/precompile/contracts/helloworld"
 	// ADD YOUR PRECOMPILE HERE
-	// {YourPrecompile}Config  *precompile.{YourPrecompile}Config `json:"{yourPrecompile}Config,omitempty"`
+	// _ "github.com/ava-labs/subnet-evm/precompile/contracts/yourprecompile"
+)
+```
+
+### Step 6: Add Config Tests
+
+Let's add some unit tests to make sure our precompile is configured correctly. Config tests will
+be under `/precompile/contracts/helloworld/config_test.go`. There are mainly 2 functions we need
+to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
+checks if the precompile is equal to another precompile. You can check other `config_test.go` files
+in the `/precompile/contracts` directory for examples. For the `HelloWorld` precompile, you can
+check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go)
+
+### Step 6: Add Contract Tests
+
+We also need to add some contract tests to make sure our precompile is working correctly. Contract
+tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
+The test will cover all functionality of `sayHello()` and `setGreeting()`.
+Contract tests are defined in a standart structure that each test
+can customize to their needs. The test structure is as follows:
+
+```go
+// PrecompileTest is a test case for a precompile
+type PrecompileTest struct {
+	// Caller is the address of the precompile caller
+	Caller common.Address
+	// Input the raw input bytes to the precompile
+	Input []byte
+	// InputFn is a function that returns the raw input bytes to the precompile
+	// If specified, Input will be ignored.
+	InputFn func(t *testing.T) []byte
+	// SuppliedGas is the amount of gas supplied to the precompile
+	SuppliedGas uint64
+	// ReadOnly is whether the precompile should be called in read only
+	// mode. If true, the precompile should not modify the state.
+	ReadOnly bool
+	// Config is the config to use for the precompile
+	// It should be the same precompile config that is used in the
+	// precompile's configurator.
+	// If nil, Configure will not be called.
+	Config precompileconfig.Config
+	// BeforeHook is called before the precompile is called.
+	BeforeHook func(t *testing.T, state contract.StateDB)
+	// AfterHook is called after the precompile is called.
+	AfterHook func(t *testing.T, state contract.StateDB)
+	// ExpectedRes is the expected raw byte result returned by the precompile
+	ExpectedRes []byte
+	// ExpectedErr is the expected error returned by the precompile
+	ExpectedErr string
+	// BlockNumber is the block number to use for the precompile's block context
+	BlockNumber int64
 }
 ```
 
-<!-- markdownlint-enable MD013 -->
-
-In the `getByKey` function given a `precompileKey`, it returns the correct mapping of type
-`precompile.StatefulPrecompileConfig`. Here, we must set the `helloWorldKey` to map to the
-`helloWorldConfig`. The below code snippet can be copied and pasted to overwrite the default code.
-
-```go
-func (p *PrecompileUpgrade) getByKey(key precompileKey) (precompile.StatefulPrecompileConfig, bool) {
-	switch key {
-	case contractDeployerAllowListKey:
-		return p.ContractDeployerAllowListConfig, p.ContractDeployerAllowListConfig != nil
-	case contractNativeMinterKey:
-		return p.ContractNativeMinterConfig, p.ContractNativeMinterConfig != nil
-	case txAllowListKey:
-		return p.TxAllowListConfig, p.TxAllowListConfig != nil
-	case feeManagerKey:
-		return p.FeeManagerConfig, p.FeeManagerConfig != nil
-	case helloWorldKey:
-		return p.HelloWorldConfig, p.HelloWorldConfig != nil
-		// ADD YOUR PRECOMPILE HERE
-	/*
-		case {yourPrecompile}Key:
-		return p.{YourPrecompile}Config , p.{YourPrecompile}Config  != nil
-	*/
-	default:
-		panic(fmt.Sprintf("unknown upgrade key: %v", key))
-	}
-}
-```
-
-We should also define `GetHelloWorldConfig`. Given a `blockTimestamp`, we will return the
-`*precompile.HelloWorldConfig` if it is enabled. We use this function to check whether precompiles
-are enabled in `./params/config.go`. This function is also used to construct a `PrecompileUpgrade`
-struct in `GetActivePrecompiles()`. The below code snippet can be copied and pasted to overwrite
-the default code.
-
-<!-- markdownlint-disable MD013 -->
+Each test can populate the fields of the `PrecompileTest` struct to customize the test.
+This test uses a AllowList helper function
+`allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)`
+which can run all specified tests plus AllowList test suites. If you don't plan to use AllowList,
+you can directly run as follows:
 
 ```go
-// GetHelloWorldConfig returns the latest forked HelloWorldConfig
-// specified by [c] or nil if it was never enabled.
-func (c *ChainConfig) GetHelloWorldConfig(blockTimestamp *big.Int) *precompile.HelloWorldConfig {
-	if val := c.getActivePrecompileConfig(blockTimestamp, helloWorldKey, c.PrecompileUpgrades); val != nil {
-		return val.(*precompile.HelloWorldConfig)
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			test.Run(t, module, newStateDB(t))
+		})
 	}
-	return nil
-}
 ```
 
-<!-- markdownlint-enable MD013 -->
+You can check other `contract_test.go` files in the `/precompile/contracts`.
 
-Finally, we can add our precompile in `GetActivePrecompiles()`, which given a `blockTimestamp`
-returns a `PrecompileUpgrade` struct. This function is used in the Ethereum API and can give a user
-information about what precompiles are enabled at a certain block timestamp. For more information
-about our Ethereum API, check out this
-[link](https://docs.avax.network/apis/avalanchego/apis/subnet-evm). The below code snippet can be
-copied and pasted to overwrite the default code.
-
-<!-- markdownlint-disable MD013 -->
-
-```go
-func (c *ChainConfig) GetActivePrecompiles(blockTimestamp *big.Int) PrecompileUpgrade {
-	pu := PrecompileUpgrade{}
-	if config := c.GetContractDeployerAllowListConfig(blockTimestamp); config != nil && !config.Disable {
-		pu.ContractDeployerAllowListConfig = config
-	}
-	if config := c.GetContractNativeMinterConfig(blockTimestamp); config != nil && !config.Disable {
-		pu.ContractNativeMinterConfig = config
-	}
-	if config := c.GetTxAllowListConfig(blockTimestamp); config != nil && !config.Disable {
-		pu.TxAllowListConfig = config
-	}
-	if config := c.GetFeeConfigManagerConfig(blockTimestamp); config != nil && !config.Disable {
-		pu.FeeManagerConfig = config
-	}
-  	if config := c.GetHelloWorldConfig(blockTimestamp); config != nil && !config.Disable {
-		pu.HelloWorldConfig = config
-	}
-	// ADD YOUR PRECOMPILE HERE
-	// if config := c.{YourPrecompile}Config(blockTimestamp); config != nil && !config.Disable {
-	// 	pu.{YourPrecompile}Config = config
-	// }
-
-	return pu
-}
-```
-
-<!-- markdownlint-enable MD013 -->
-
-Done! All we had to do was follow the comments.
-
-### Step 5: Add Precompile Upgrade
-
-Let's add our precompile upgrade in `./params/config.go`. We can search (`CTRL F`) for
-`ADD YOUR PRECOMPILE HERE`. This file is used to set up blockchain settings.
-
-Let's add the bool to check if our precompile is enabled. We are adding this to the `Rules` struct.
-`Rules` gives information about the blockchain, the version, and precompile status to functions that
-don't have this information. The below code snippet can be copied and pasted to overwrite the default
-code:
-
-```go
-  IsContractNativeMinterEnabled      bool
-  IsTxAllowListEnabled               bool
-  IsFeeConfigManagerEnabled          bool
-  IsHelloWorldEnabled                bool
-  // ADD YOUR PRECOMPILE HERE
-  // Is{YourPrecompile}Enabled       bool
-```
-
-We can add `IsHelloWorld()` which checks if we are equal or greater than the fork `blockTimestamp`.
-We use this to check out whether the precompile is enabled. We defined `GetHelloWorldConfig()` in
-the last step. The below code snippet can be copied and pasted to overwrite the default code:
-
-```go
-// IsHelloWorld returns whether [blockTimestamp] is either equal to the HelloWorld
-// fork block timestamp or greater.
-func (c *ChainConfig) IsHelloWorld(blockTimestamp *big.Int) bool {
-	config := c.GetHelloWorldConfig(blockTimestamp)
-	return config != nil && !config.Disable
-}
-```
-
-We can now add it to the `AvalancheRules()` which creates and returns a new instance of `Rules`. The
-below code snippet can be copied and pasted to overwrite the default code:
-
-```go
-rules.IsContractNativeMinterEnabled = c.IsContractNativeMinter(blockTimestamp)
-rules.IsTxAllowListEnabled = c.IsTxAllowList(blockTimestamp)
-rules.IsFeeConfigManagerEnabled = c.IsFeeConfigManager(blockTimestamp)
-rules.IsHelloWorldEnabled = c.IsHelloWorld(blockTimestamp)
-// ADD YOUR PRECOMPILE HERE
-// rules.Is{YourPrecompile}Enabled = c.{IsYourPrecompile}(blockTimestamp)
-```
-
-Done!
-
-### Step 6: Add Test Contract
+### Step 7: Add Test Contract
 
 Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact
 with our precompile! We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
@@ -770,6 +1019,15 @@ contract ExampleHelloWorld {
   }
 }
 ```
+
+:::warning
+
+Hello World Precompile is a different contract than ExampleHelloWorld and has a different address.
+Since the precompile uses AllowList for a permissioned access,
+any call to the precompile including from ExampleHelloWorld will be denied unless
+the caller is added to the AllowList.
+
+:::
 
 Please note that this contract is simply a wrapper and is calling the precompile functions.
 
@@ -836,51 +1094,90 @@ The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH
 #### Step 8.1: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
-copied and pasted into a new file called `hello_world.ts`:
+copied and pasted into a new file called `hello_world.ts` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contract-examples/tests/hello_world.ts):
 
-```js
+```ts
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
-import { expect } from "chai"
-import { ethers } from "hardhat"
-import { Contract, ContractFactory } from "ethers"
+import { expect } from "chai";
+import { ethers } from "hardhat";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Contract, ContractFactory } from "ethers";
+
+// make sure this is always an admin for the precompile
+const adminAddress: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
+const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
 
 describe("ExampleHelloWorld", function () {
-  let helloWorldContract: Contract
+  let helloWorldContract: Contract;
+  let adminSigner: SignerWithAddress;
+  let adminSignerPrecompile: Contract;
 
   before(async function () {
     // Deploy Hello World Contract
     const ContractF: ContractFactory = await ethers.getContractFactory(
       "ExampleHelloWorld"
-    )
-    helloWorldContract = await ContractF.deploy()
-    await helloWorldContract.deployed()
-    const helloWorldContractAddress: string = helloWorldContract.address
-    console.log(`Contract deployed to: ${helloWorldContractAddress}`)
-  })
+    );
+    helloWorldContract = await ContractF.deploy();
+    await helloWorldContract.deployed();
+    const helloWorldContractAddress: string = helloWorldContract.address;
+    console.log(`Contract deployed to: ${helloWorldContractAddress}`);
+
+    adminSigner = await ethers.getSigner(adminAddress);
+    adminSignerPrecompile = await ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      adminSigner
+    );
+  });
 
   it("should getHello properly", async function () {
-    let result = await helloWorldContract.callStatic.getHello()
-    expect(result).to.equal("Hello World!")
-  })
+    let result = await helloWorldContract.callStatic.getHello();
+    expect(result).to.equal("Hello World!");
+  });
+
+  it("contract should not be able to set greeting without enabled", async function () {
+    const modifiedGreeting = "What's up";
+    let contractRole = await adminSignerPrecompile.readAllowList(
+      helloWorldContract.address
+    );
+    expect(contractRole).to.be.equal(0); // 0 = NONE
+    try {
+      let tx = await helloWorldContract.setGreeting(modifiedGreeting);
+      await tx.wait();
+    } catch (err) {
+      return;
+    }
+    expect.fail("should have errored");
+  });
+
+  it("should be add contract to enabled list", async function () {
+    let contractRole = await adminSignerPrecompile.readAllowList(
+      helloWorldContract.address
+    );
+    expect(contractRole).to.be.equal(0);
+
+    let enableTx = await adminSignerPrecompile.setEnabled(
+      helloWorldContract.address
+    );
+    await enableTx.wait();
+    contractRole = await adminSignerPrecompile.readAllowList(
+      helloWorldContract.address
+    );
+    expect(contractRole).to.be.equal(1); // 1 = ENABLED
+  });
 
   it("should setGreeting and getHello", async function () {
-    const modifiedGreeting = "What's up"
-    let tx = await helloWorldContract.setGreeting(modifiedGreeting)
-    await tx.wait()
+    const modifiedGreeting = "What's up";
+    let tx = await helloWorldContract.setGreeting(modifiedGreeting);
+    await tx.wait();
 
     expect(await helloWorldContract.callStatic.getHello()).to.be.equal(
       modifiedGreeting
-    )
-  })
-})
-```
-
-Let's also make sure to run yarn in `./contract-examples`
-
-```bash
-yarn
+    );
+  });
+});
 ```
 
 #### Step 8.2: Add Genesis
@@ -916,7 +1213,8 @@ Note: it's important that this has the same name as the HardHat test file we cre
       "blockGasCostStep": 500000
     },
     "helloWorldConfig": {
-      "blockTimestamp": 0
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
     }
   },
   "alloc": {
@@ -940,36 +1238,17 @@ Note: it's important that this has the same name as the HardHat test file we cre
 }
 ```
 
-Adding this to our genesis enables our HelloWorld precompile.
+Adding this to our genesis enables our HelloWorld precompile at the very first block (timestamp 0), with
+`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as the admin address.
 
 ```json
-"helloWorldConfig": {
-  "blockTimestamp": 0
-},
-```
-
-As a reminder, we defined `helloWorldConfig` in
-[`./params/precompile_config.go`](https://github.com/ava-labs/subnet-evm/blob/HelloWorldOfficialTutorial/params/precompile_config.go).
-By putting this in genesis, we enable our HelloWorld precompile at blockTimestamp 0.
-
-<!-- markdownlint-disable MD013 -->
-
-```go
-// PrecompileUpgrade is a helper struct embedded in UpgradeConfig, representing
-// each of the possible stateful precompile types that can be activated
-// as a network upgrade.
-type PrecompileUpgrade struct {
-	ContractDeployerAllowListConfig *precompile.ContractDeployerAllowListConfig `json:"contractDeployerAllowListConfig,omitempty"` // Config for the contract deployer allow list precompile
-	ContractNativeMinterConfig      *precompile.ContractNativeMinterConfig      `json:"contractNativeMinterConfig,omitempty"`      // Config for the native minter precompile
-	TxAllowListConfig               *precompile.TxAllowListConfig               `json:"txAllowListConfig,omitempty"`               // Config for the tx allow list precompile
-	FeeManagerConfig                *precompile.FeeConfigManagerConfig          `json:"feeManagerConfig,omitempty"`                // Config for the fee manager precompile
-	HelloWorldConfig                *precompile.HelloWorldConfig                `json:"helloWorldConfig,omitempty"`
-	// ADD YOUR PRECOMPILE HERE
-	// {YourPrecompile}Config  *precompile.{YourPrecompile}Config `json:"{yourPrecompile}Config,omitempty"`
+{
+  "helloWorldConfig": {
+    "blockTimestamp": 0,
+    "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+  }
 }
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 #### Step 8.3: Declaring the HardHat E2E Test
 
@@ -1025,7 +1304,7 @@ GINKGO_LABEL_FILTER=HelloWorld ./scripts/run_ginkgo.sh
 You will first see the node starting up in the `BeforeSuite` section of the precompile test:
 
 ```bash
-GINKGO_LABEL_FILTER=HelloWorld ./scripts/run_ginkgo.sh
+$ GINKGO_LABEL_FILTER=HelloWorld ./scripts/run_ginkgo.sh
 Using branch: hello-world-tutorial-walkthrough
 building precompile.test
 # github.com/ava-labs/subnet-evm/tests/precompile.test
@@ -1042,7 +1321,7 @@ Random Seed: 1674833631
 
 Will run 1 of 7 specs
 ------------------------------
-[BeforeSuite] 
+[BeforeSuite]
 /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31
   > Enter [BeforeSuite] TOP-LEVEL - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:33:51.001
 INFO [01-27|10:33:51.002] Starting AvalancheGo node                wd=/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
@@ -1059,7 +1338,7 @@ INFO [01-27|10:33:51.002] Executing                                cmd="./script
 [streaming output] [01-27|10:33:57.801] INFO server/server.go:270 adding route {"url": "/ext/bc/2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU", "endpoint": "/ws"}
 [streaming output] [01-27|10:33:57.806] INFO <P Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "2cC67R6vPRSX4BCAY3ouAk9JKCCpAxjFxRVUQWfnEQF1BjQhqX"}
 [streaming output] [01-27|10:34:01.004] WARN health/health.go:85 failing readiness check {"reason": {"bootstrapped":{"error":"not yet run","timestamp":"0001-01-01T00:00:00Z","duration":0}}}
-INFO [01-27|10:34:06.003] AvalancheGo node is healthy 
+INFO [01-27|10:34:06.003] AvalancheGo node is healthy
   < Exit [BeforeSuite] TOP-LEVEL - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:34:06.003 (15.002s)
 [BeforeSuite] PASSED [15.002 seconds]
 ```
@@ -1105,12 +1384,12 @@ S [SKIPPED]
   > Enter [It] hello world - /Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:06.004
 INFO [01-27|10:34:06.004] Executing HardHat tests on a new blockchain test=hello_world
 INFO [01-27|10:34:06.028] Reading genesis file                     filePath=./tests/precompile/genesis/hello_world.json wd=/Users/aaronbuchwald/go/src/github.com/ava-labs/subnet-evm
-INFO [01-27|10:34:06.029] Creating new subnet 
+INFO [01-27|10:34:06.029] Creating new subnet
 [streaming output] [01-27|10:34:06.059] INFO <P Chain> proposervm/pre_fork_block.go:223 built block {"blkID": "vByWDipDCUSwfKogQyZSBzHpfAAd3wsaLyzeZ7NkZ7HUefVbs", "innerBlkID": "2HQHayX2WwvNDoTQtVhTf4ZpaHs1Sm448wUh4DZMSDwfH7smKR", "height": 1, "parentTimestamp": "[08-15|00:00:00.000]", "blockTimestamp": "[01-27|10:34:06.000]"}
 INFO [01-27|10:34:06.158] Creating new Subnet-EVM blockchain       genesis="&{Config:{ChainID: 99999 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig: {\"gasLimit\":20000000,\"targetBlockRate\":2,\"minBaseFee\":1000000000,\"targetGas\":100000000,\"baseFeeChangeDenominator\":48,\"minBlockGasCost\":0,\"maxBlockGasCost\":10000000,\"blockGasCostStep\":500000}, AllowFeeRecipients: false, NetworkUpgrades: {\"subnetEVMTimestamp\":0}, PrecompileUpgrade: {\"helloWorldConfig\":{\"blockTimestamp\":0}}, UpgradeConfig: {}, Engine: Dummy Consensus Engine} Nonce:0 Timestamp:0 ExtraData:[0] GasLimit:20000000 Difficulty:+0 Mixhash:0x0000000000000000000000000000000000000000000000000000000000000000 Coinbase:0x0000000000000000000000000000000000000000 Alloc:map[0x0Fa8EA536Be85F32724D57A37758761B86416123:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]} 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]}] AirdropHash:0x0000000000000000000000000000000000000000000000000000000000000000 AirdropAmount:<nil> AirdropData:[] Number:0 GasUsed:0 ParentHash:0x0000000000000000000000000000000000000000000000000000000000000000 BaseFee:<nil>}"
 [streaming output] [01-27|10:34:07.017] INFO chains/manager.go:300 creating chain {"subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL", "chainID": "R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC", "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"}
 [streaming output] INFO [01-27|10:34:07.112] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:261: Initializing Subnet EVM VM Version=v0.4.9@a657d3bb5ee647d4a01b8f35e9134a1f01ba5f38 Config="{AirdropFile: SnowmanAPIEnabled:false AdminAPIEnabled:false AdminAPIDir: EnabledEthAPIs:[eth eth-filter net web3 internal-eth internal-blockchain internal-transaction] ContinuousProfilerDir: ContinuousProfilerFrequency:15m0s ContinuousProfilerMaxFiles:5 RPCGasCap:50000000 RPCTxFeeCap:100 TrieCleanCache:512 TrieCleanJournal: TrieCleanRejournal:0s TrieDirtyCache:256 TrieDirtyCommitTarget:20 SnapshotCache:256 Preimages:false SnapshotAsync:true SnapshotVerify:false Pruning:true AcceptorQueueLimit:64 CommitInterval:4096 AllowMissingTries:false PopulateMissingTries:<nil> PopulateMissingTriesParallelism:1024 MetricsExpensiveEnabled:true LocalTxsEnabled:false TxPoolJournal:transactions.rlp TxPoolRejournal:1h0m0s TxPoolPriceLimit:1 TxPoolPriceBump:10 TxPoolAccountSlots:16 TxPoolGlobalSlots:5120 TxPoolAccountQueue:64 TxPoolGlobalQueue:1024 APIMaxDuration:0s WSCPURefillRate:0s WSCPUMaxStored:0s MaxBlocksPerRequest:0 AllowUnfinalizedQueries:false AllowUnprotectedTxs:false AllowUnprotectedTxHashes:[0xfefb2da535e927b85fe68eb81cb2e4a5827c905f78381a01ef2322aa9b0aee8e] KeystoreDirectory: KeystoreExternalSigner: KeystoreInsecureUnlockAllowed:false RemoteGossipOnlyEnabled:false RegossipFrequency:1m0s RegossipMaxTxs:16 RegossipTxsPerAddress:1 PriorityRegossipFrequency:1s PriorityRegossipMaxTxs:32 PriorityRegossipTxsPerAddress:16 PriorityRegossipAddresses:[] LogLevel:info LogJSONFormat:false FeeRecipient: OfflinePruning:false OfflinePruningBloomFilterSize:512 OfflinePruningDataDirectory: MaxOutboundActiveRequests:16 MaxOutboundActiveCrossChainRequests:64 InspectDatabase:false StateSyncEnabled:false StateSyncSkipResume:false StateSyncServerTrieCache:64 StateSyncIDs: StateSyncCommitInterval:16384 StateSyncMinBlocks:300000 SkipUpgradeCheck:false SkipSubnetEVMUpgradeCheck:false AcceptedCacheSize:32 TxLookupLimit:0}"
-[streaming output] INFO [01-27|10:34:07.122] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/core/state/snapshot/snapshot.go:773: Rebuilding state snapshot 
+[streaming output] INFO [01-27|10:34:07.122] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/core/state/snapshot/snapshot.go:773: Rebuilding state snapshot
 [streaming output] [01-27|10:34:07.131] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> bootstrap/bootstrapper.go:122 starting bootstrapper
 [streaming output] [01-27|10:34:07.134] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "HkbbSAwXRE7CacDWMNdZjURbFCCUwL3TSeXLRVEK8L3SVD9Su"}
 INFO [01-27|10:34:09.064] Created subnet successfully              ChainURI=http://127.0.0.1:9650/ext/bc/R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC/rpc
@@ -1128,8 +1407,10 @@ Compilation finished successfully
 
   ExampleHelloWorld
 Contract deployed to: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
-    ✓ should getHello properly
-    ✓ should setGreeting and getHello (4103ms)
+  	✓ should getHello properly
+    ✓ contract should not be able to set greeting without enabled
+    ✓ should be add contract to enabled list (4071ms)
+    ✓ should setGreeting and getHello (4049ms)
 
 
   2 passing (4s)
@@ -1171,8 +1452,6 @@ to double check your work as well.
 
 We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
-
-
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
 [this link](./network-runner.md) for more information on Avalanche
