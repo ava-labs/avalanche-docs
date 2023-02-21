@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # APIs Overview
 
 This section provides documents on various APIs.
