@@ -152,7 +152,7 @@ Once a node has at least one valid frontiers, it starts downloading parent
 containers for each frontier. If it's the first time the node is running, it
 won't know about any containers and will try fetching all parent containers
 recursively from the accepted frontier down to genesis (unless [state
-sync](#enters-state-sync) is enabled). If bootstrap had already run previously,
+sync](#state-sync) is enabled). If bootstrap had already run previously,
 some containers are already available locally and the node will stop as soon as
 it finds a known one.
 
