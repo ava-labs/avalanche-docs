@@ -402,7 +402,7 @@ These are the main properties in the JSON file:
 - `initialStakedFunds`: A list of addresses that own the funds staked at genesis
   (each address must be present in `allocations` as well)
 - `initialStakers`: The validators that exist at genesis. Each element contains
-  the `rewardAddress`, nodeID and the `delegationFee` of the validator.
+  the `rewardAddress`, NodeID and the `delegationFee` of the validator.
 - `cChainGenesis`: The genesis info to be passed to the C-Chain.
 - `message`: A message to include in the genesis. Not required.
 

@@ -18,6 +18,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Run an Avalanche Node with Microsoft Azure**](./build/set-up-an-avalanche-node-with-microsoft-azure.md)                       | Create a node that runs on Microsoft Azure  |
 | [**Run an Avalanche Node with Google Cloud Platform**](./build/set-up-an-avalanche-node-with-google-cloud-platform.md)                      | Create a node that runs on Google GCP       |
 | [**Run an Avalanche Node with Alibaba Cloud**](./build/set-up-node-on-alibaba-cloud.md)     | Create a node that runs on Alibaba Cloud       |
+| [**Run an Avalanche Node with Tencent Cloud**](./build/set-up-node-on-tencent-cloud.md)     | Create a node that runs on Tencent Cloud       |
 
 ## Maintain
 
