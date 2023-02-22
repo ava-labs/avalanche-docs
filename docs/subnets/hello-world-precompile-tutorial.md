@@ -539,13 +539,13 @@ You don't need to override these functions.
 ##### Configure()
 
 Module file contains a `configurator` which implements `contract.Configurator` interface. This interface
-contains a `Configure()` function which is used to configure the precompile and set the initial
-state of the precompile. This function is called when the precompile is enabled. This typically used
-to read from given config in upgrade/genesis JSON and set the initial state of the
+includes a `Configure()` function used to configure the precompile and set the initial
+state of the precompile. This function is called when the precompile is enabled. This is typically used
+to read from a given config in upgrade/genesis JSON and sets the initial state of the
 precompile accordingly. This function also calls `AllowListConfig.Configure()` to invoke AllowList
 configuration as the last step. You should keep it as it is if you want to use AllowList.
 You can modify this function for your custom logic. You can circle back to this function later
-after you have finalized implementation of the precompile config.
+after you have finalized the implementation of the precompile config.
 
 #### Step 3.2: Config File
 
