@@ -141,7 +141,7 @@ This is a brief overview of what this tutorial will cover.
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
 
-In this tutorial we used a branch based on SubnetEVM version `v0.4.9`. You can find the branch
+In this tutorial, we used a branch based on SubnetEVM version `v0.4.9`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/). The code in this
 branch is the same as SubnetEVM version `v0.4.9` except for the `precompile/` directory. The
 `precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
