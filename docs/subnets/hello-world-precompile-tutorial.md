@@ -853,8 +853,9 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 
 In [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20)
 we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`. Setting gas costs is very important for these
-functions, and should be done carefully. If the gas costs are set too low, then these can be abusable and
-can cause DoS attacks. If the gas costs are set too high, then the contract will be too expensive
+functions, and should be done carefully. If the gas costs are set too low,
+then these can be abused and can cause DoS attacks.
+If the gas costs are set too high, then the contract will be too expensive
 to run. In order to provide a baseline for gas costs, we have set the following gas costs.
 
 ```go
