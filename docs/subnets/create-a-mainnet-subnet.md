@@ -607,15 +607,15 @@ avalanchego/build/plugins.
 If you start your node from the command line WITHOUT a config file (e.g. via command
 line or systemd script), add the following flag to your node's startup command:
 
---whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
-(if the node already has a whitelisted-subnets config, append the new value by
+--track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+(if the node already has a track-subnets config, append the new value by
 comma-separating it).
 
 For example:
-./build/avalanchego --network-id=Mainnet --whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+./build/avalanchego --network-id=Mainnet --track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 If you start the node via a JSON config file, add this to your config file:
-whitelisted-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+track-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 TIP: Try this command with the --avalanchego-config flag pointing to your config file,
 this tool is going to try to update the file automatically (make sure it can write to it).

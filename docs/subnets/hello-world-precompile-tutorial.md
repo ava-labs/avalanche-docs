@@ -120,12 +120,12 @@ with the original precompile interface!
 
 ### AllowList
 
-AllowList enables a precompile to enforce permissions on addresses. AllowList is not a contract itself,
-but it's a helper structure to provide control-mechanism to wrapping contracts.
-It provides a `AllowListConfig` to precompile so that it can take an initial configuration
-from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial we
-used `AllowList` to provide permission control to `HelloWorld` precompile.
-You can find more information about AllowList interface at [here](../subnets/customize-a-subnet.md#allowlist).
+The AllowList enables a precompile to enforce permissions on addresses. The AllowList is not a contract
+itself, but a helper structure to provide a control mechanism for wrapping contracts.
+It provides an `AllowListConfig` to the precompile so that it can take an initial configuration
+from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial, we
+used `AllowList` to provide permission control to the `HelloWorld` precompile.
+You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist).
 
 ## Tutorial
 
@@ -141,7 +141,7 @@ This is a brief overview of what this tutorial will cover.
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
 
-In this tutorial we used a branch based on SubnetEVM version `v0.4.10`. You can find the branch
+In this tutorial, we used a branch based on SubnetEVM version `v0.4.10`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/). The code in this
 branch is the same as SubnetEVM version `v0.4.10` except for the `precompile/` directory. The
 `precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
@@ -249,7 +249,7 @@ interface IHelloWorld is IAllowList {
 
 This interface defines 2 functions, `sayHello()` and `setGreeting()`. The `sayHello()` function
 is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
-The `setGreeting()` function is a state-changer function, meaning it modifies the state of the precompile.
+The `setGreeting()` function is a state changer function, meaning it modifies the state of the precompile.
 
 `IAllowList` is an interface that we will use to restrict access to the precompile. It is defined in
 `./contract-examples/contracts/IAllowList.sol`:
@@ -539,24 +539,24 @@ You don't need to override these functions.
 ##### Configure()
 
 Module file contains a `configurator` which implements `contract.Configurator` interface. This interface
-contains a `Configure()` function which is used to configure the precompile and set the initial
-state of the precompile. This function is called when the precompile is enabled. This typically used
-to read from given config in upgrade/genesis JSON and set the initial state of the
+includes a `Configure()` function used to configure the precompile and set the initial
+state of the precompile. This function is called when the precompile is enabled. This is typically used
+to read from a given config in upgrade/genesis JSON and sets the initial state of the
 precompile accordingly. This function also calls `AllowListConfig.Configure()` to invoke AllowList
 configuration as the last step. You should keep it as it is if you want to use AllowList.
 You can modify this function for your custom logic. You can circle back to this function later
-after you have finalized implementation of the precompile config.
+after you have finalized the implementation of the precompile config.
 
 #### Step 3.2: Config File
 
-Config file contains the config for the precompile. This file is located at
+The config file contains the config for the precompile. This file is located at
 [`/precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
-This file contains `Config` struct which implements `precompileconfig.Config` interface.
+This file contains the `Config` struct, which implements `precompileconfig.Config` interface.
 It has some embedded structs like `precompileconfig.Upgrade`. `Upgrade` is used to enable
 upgrades for the precompile. It contains the `BlockTimestamp` and `Disable` to enable/disable
 upgrades. `BlockTimestamp` is the timestamp of the block when the upgrade will be activated.
 `Disable` is used to disable the upgrade. If you use `AllowList` for the precompile, there is also
-`allowlist.AllowListConfig` embedded in the `Config` struct. `AllowListConfig` is used specify initial
+`allowlist.AllowListConfig` embedded in the `Config` struct. `AllowListConfig` is used to specify initial
 roles for specified addresses. If you have any custom fields in your precompile config, you can add them
 here. These custom fields will be read from upgrade/genesis JSON and set in the precompile config.
 
@@ -852,8 +852,8 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 ### Step 4: Set Gas Costs
 
 In [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20)
-we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`. Setting gas costs is very important for these functions,
-and should be done carefully. If the gas costs are set too low, then these can be abusable and
+we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`. Setting gas costs is very important for these
+functions, and should be done carefully. If the gas costs are set too low, then these can be abusable and
 can cause DoS attacks. If the gas costs are set too high, then the contract will be too expensive
 to run. In order to provide a baseline for gas costs, we have set the following gas costs.
 
@@ -979,10 +979,10 @@ type PrecompileTest struct {
 ```
 
 Each test can populate the fields of the `PrecompileTest` struct to customize the test.
-This test uses a AllowList helper function
+This test uses an AllowList helper function
 `allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)`
 which can run all specified tests plus AllowList test suites. If you don't plan to use AllowList,
-you can directly run as follows:
+you can directly run them as follows:
 
 ```go
 	for name, test := range tests {
