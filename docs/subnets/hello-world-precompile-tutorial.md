@@ -976,10 +976,10 @@ type PrecompileTest struct {
 ```
 
 Each test can populate the fields of the `PrecompileTest` struct to customize the test.
-This test uses a AllowList helper function
+This test uses an AllowList helper function
 `allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)`
 which can run all specified tests plus AllowList test suites. If you don't plan to use AllowList,
-you can directly run as follows:
+you can directly run them as follows:
 
 ```go
 	for name, test := range tests {
