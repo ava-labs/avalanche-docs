@@ -549,14 +549,14 @@ after you have finalized the implementation of the precompile config.
 
 #### Step 3.2: Config File
 
-Config file contains the config for the precompile. This file is located at
+The config file contains the config for the precompile. This file is located at
 [`/precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
-This file contains `Config` struct which implements `precompileconfig.Config` interface.
+This file contains the `Config` struct, which implements `precompileconfig.Config` interface.
 It has some embedded structs like `precompileconfig.Upgrade`. `Upgrade` is used to enable
 upgrades for the precompile. It contains the `BlockTimestamp` and `Disable` to enable/disable
 upgrades. `BlockTimestamp` is the timestamp of the block when the upgrade will be activated.
 `Disable` is used to disable the upgrade. If you use `AllowList` for the precompile, there is also
-`allowlist.AllowListConfig` embedded in the `Config` struct. `AllowListConfig` is used specify initial
+`allowlist.AllowListConfig` embedded in the `Config` struct. `AllowListConfig` is used to specify initial
 roles for specified addresses. If you have any custom fields in your precompile config, you can add them
 here. These custom fields will be read from upgrade/genesis JSON and set in the precompile config.
 
