@@ -141,9 +141,9 @@ This is a brief overview of what this tutorial will cover.
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
 
-In this tutorial we used a branch based on SubnetEVM version `v0.4.9`. You can find the branch
+In this tutorial we used a branch based on SubnetEVM version `v0.4.10`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/). The code in this
-branch is the same as SubnetEVM version `v0.4.9` except for the `precompile/` directory. The
+branch is the same as SubnetEVM version `v0.4.10` except for the `precompile/` directory. The
 `precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
 precompile as an example to learn how to write a stateful precompile. The code in this branch can become
 outdated.
@@ -202,7 +202,7 @@ npm install -g yarn
 
 ### Complete Code
 
-You can inspect the [Hello World Precompile tutorial](https://github.com/ava-labs/hello-world-official-precompile-tutorial/pull/1)
+You can inspect the [diffs between v0.4.10 and tutorial branch](https://github.com/ava-labs/subnet-evm/compare/v0.4.10...helloworld-official-tutorial-v2)
 for the complete code.
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
@@ -414,13 +414,13 @@ Go package we want to generate the precompile into.
 
 <!-- markdownlint-enable MD013 -->
 
-This generates a precompile template files `contract.go`, `contract.abi`, `config.go` and `module.go`
-located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
-directory. In those files there is a comment block that explains general guidelines for precompile
-development.
+This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`
+and `README.md` located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
+directory.`README.md` explains general guidelines for precompile development. You should carefully read
+this file before modifying the precompile template.
 
 In `./precompile/helloworld`, directory search `CUSTOM CODE STARTS HERE` to find places where
-we can/should modify the precompile.
+you can/should modify the precompile.
 
 Let's fill out the rest!
 
@@ -451,7 +451,7 @@ Modifying code outside of these areas should be done with caution and with a dee
 ### Step 1: Set Config Key
 
 Let's jump to `helloworld/module.go` file first. This file contains the module definition for our
-precompile. We can see the `ConfigKey` is set to some default value of `helloWorldConfig`.
+precompile. You can see the `ConfigKey` is set to some default value of `helloWorldConfig`.
 This key should be unique to the precompile.
 This config key determines which JSON key to use when reading the precompile's config from the
 JSON upgrade/genesis file. In this case, the config key is `helloWorldConfig` and JSON config
@@ -468,8 +468,8 @@ should look like:
 
 ### Step 2: Set Contract Address
 
-We can see the `ContractAddress` is set to some default value.
-You should change that default value to a suitable address for your precompile.
+You can see the `ContractAddress` is set to some default value.
+This should be changed to a suitable address for your precompile.
 The address should be unique to the precompile. There is a registry of precompile addresses
 under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
 A list of addresses is specified in comments under this file.
@@ -522,7 +522,7 @@ it can run the precompile if the precompile is enabled.
 ### Step 3: Add Custom Code
 
 Search (`CTRL F`) throughout the file with `CUSTOM CODE STARTS HERE` to find the areas in the
-precompile package that we need to modify. We should start with the reference imports code block.
+precompile package that you need to modify. You should start with the reference imports code block.
 
 #### Step 3.1: Module File
 
@@ -532,7 +532,7 @@ precompile, the address of the precompile and a configurator. This file is locat
 
 It defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
-Registration is done in `init()` function of the module file. `NewConfig()` is used to create a
+Registration is done in `init()` function of the module file. `MakeConfig()` is used to create a
 new instance for the precompile config. This will be used in custom Unmarshal/Marshal logic.
 You don't need to override these functions.
 
@@ -572,7 +572,7 @@ type Config struct {
 ##### Verify()
 
 `Verify()` is called on startup and an error is treated as fatal. Generated code contains a call
-to `AllowListConfig.Verify()` to verify the `AllowListConfig`. You can leave that as is, and start
+to `AllowListConfig.Verify()` to verify the `AllowListConfig`. You can leave that as is and start
 adding your own custom verify code after that.
 
 We can leave this function as is right now because there is no invalid custom configuration for the `Config`.
@@ -829,7 +829,6 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 	// allow list code ends here.
 
 	// CUSTOM CODE STARTS HERE
-	// CUSTOM CODE STARTS HERE
 	// Check if the input string is longer than HashLength
 	if len(inputStruct) > common.HashLength {
 		return nil, 0, ErrInputExceedsLimit
@@ -853,7 +852,10 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 ### Step 4: Set Gas Costs
 
 In [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20)
-we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`.
+we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`. Setting gas costs is very important for these functions,
+and should be done carefully. If the gas costs are set too low, then these can be abusable and
+can cause DoS attacks. If the gas costs are set too high, then the contract will be too expensive
+to run. In order to provide a baseline for gas costs, we have set the following gas costs.
 
 ```go
 // Gas costs for stateful precompiles
@@ -869,7 +871,8 @@ const (
 
 This should be in your gas cost estimations based on how many times the precompile function does a
 read or a write. For example, if the precompile modifies the state slot of its precompile address
-twice then the gas cost for that function would be `40_000`.
+twice then the gas cost for that function would be `40_000`. However if the precompile does additional
+operations and requires more computational power, then you should increase the gas costs accordingly.
 
 On top of these gas costs, we also have to account for the gas costs of AllowList gas costs. These
 are the gas costs of reading and writing permissions for addresses in AllowList. These are defined
@@ -1078,10 +1081,10 @@ and confirm the RPCChainVM version matches:
 $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
 ```
 
-This should give the output:
+This should give a similar output:
 
 ```bash
-Subnet-EVM/v0.4.9@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
+Subnet-EVM/v0.4.10@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
 ```
 
 If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
@@ -1388,7 +1391,7 @@ INFO [01-27|10:34:06.029] Creating new subnet
 [streaming output] [01-27|10:34:06.059] INFO <P Chain> proposervm/pre_fork_block.go:223 built block {"blkID": "vByWDipDCUSwfKogQyZSBzHpfAAd3wsaLyzeZ7NkZ7HUefVbs", "innerBlkID": "2HQHayX2WwvNDoTQtVhTf4ZpaHs1Sm448wUh4DZMSDwfH7smKR", "height": 1, "parentTimestamp": "[08-15|00:00:00.000]", "blockTimestamp": "[01-27|10:34:06.000]"}
 INFO [01-27|10:34:06.158] Creating new Subnet-EVM blockchain       genesis="&{Config:{ChainID: 99999 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig: {\"gasLimit\":20000000,\"targetBlockRate\":2,\"minBaseFee\":1000000000,\"targetGas\":100000000,\"baseFeeChangeDenominator\":48,\"minBlockGasCost\":0,\"maxBlockGasCost\":10000000,\"blockGasCostStep\":500000}, AllowFeeRecipients: false, NetworkUpgrades: {\"subnetEVMTimestamp\":0}, PrecompileUpgrade: {\"helloWorldConfig\":{\"blockTimestamp\":0}}, UpgradeConfig: {}, Engine: Dummy Consensus Engine} Nonce:0 Timestamp:0 ExtraData:[0] GasLimit:20000000 Difficulty:+0 Mixhash:0x0000000000000000000000000000000000000000000000000000000000000000 Coinbase:0x0000000000000000000000000000000000000000 Alloc:map[0x0Fa8EA536Be85F32724D57A37758761B86416123:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]} 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]}] AirdropHash:0x0000000000000000000000000000000000000000000000000000000000000000 AirdropAmount:<nil> AirdropData:[] Number:0 GasUsed:0 ParentHash:0x0000000000000000000000000000000000000000000000000000000000000000 BaseFee:<nil>}"
 [streaming output] [01-27|10:34:07.017] INFO chains/manager.go:300 creating chain {"subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL", "chainID": "R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC", "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"}
-[streaming output] INFO [01-27|10:34:07.112] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:261: Initializing Subnet EVM VM Version=v0.4.9@a657d3bb5ee647d4a01b8f35e9134a1f01ba5f38 Config="{AirdropFile: SnowmanAPIEnabled:false AdminAPIEnabled:false AdminAPIDir: EnabledEthAPIs:[eth eth-filter net web3 internal-eth internal-blockchain internal-transaction] ContinuousProfilerDir: ContinuousProfilerFrequency:15m0s ContinuousProfilerMaxFiles:5 RPCGasCap:50000000 RPCTxFeeCap:100 TrieCleanCache:512 TrieCleanJournal: TrieCleanRejournal:0s TrieDirtyCache:256 TrieDirtyCommitTarget:20 SnapshotCache:256 Preimages:false SnapshotAsync:true SnapshotVerify:false Pruning:true AcceptorQueueLimit:64 CommitInterval:4096 AllowMissingTries:false PopulateMissingTries:<nil> PopulateMissingTriesParallelism:1024 MetricsExpensiveEnabled:true LocalTxsEnabled:false TxPoolJournal:transactions.rlp TxPoolRejournal:1h0m0s TxPoolPriceLimit:1 TxPoolPriceBump:10 TxPoolAccountSlots:16 TxPoolGlobalSlots:5120 TxPoolAccountQueue:64 TxPoolGlobalQueue:1024 APIMaxDuration:0s WSCPURefillRate:0s WSCPUMaxStored:0s MaxBlocksPerRequest:0 AllowUnfinalizedQueries:false AllowUnprotectedTxs:false AllowUnprotectedTxHashes:[0xfefb2da535e927b85fe68eb81cb2e4a5827c905f78381a01ef2322aa9b0aee8e] KeystoreDirectory: KeystoreExternalSigner: KeystoreInsecureUnlockAllowed:false RemoteGossipOnlyEnabled:false RegossipFrequency:1m0s RegossipMaxTxs:16 RegossipTxsPerAddress:1 PriorityRegossipFrequency:1s PriorityRegossipMaxTxs:32 PriorityRegossipTxsPerAddress:16 PriorityRegossipAddresses:[] LogLevel:info LogJSONFormat:false FeeRecipient: OfflinePruning:false OfflinePruningBloomFilterSize:512 OfflinePruningDataDirectory: MaxOutboundActiveRequests:16 MaxOutboundActiveCrossChainRequests:64 InspectDatabase:false StateSyncEnabled:false StateSyncSkipResume:false StateSyncServerTrieCache:64 StateSyncIDs: StateSyncCommitInterval:16384 StateSyncMinBlocks:300000 SkipUpgradeCheck:false SkipSubnetEVMUpgradeCheck:false AcceptedCacheSize:32 TxLookupLimit:0}"
+[streaming output] INFO [01-27|10:34:07.112] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:261: Initializing Subnet EVM VM Version=v0.4.10@a657d3bb5ee647d4a01b8f35e9134a1f01ba5f38 Config="{AirdropFile: SnowmanAPIEnabled:false AdminAPIEnabled:false AdminAPIDir: EnabledEthAPIs:[eth eth-filter net web3 internal-eth internal-blockchain internal-transaction] ContinuousProfilerDir: ContinuousProfilerFrequency:15m0s ContinuousProfilerMaxFiles:5 RPCGasCap:50000000 RPCTxFeeCap:100 TrieCleanCache:512 TrieCleanJournal: TrieCleanRejournal:0s TrieDirtyCache:256 TrieDirtyCommitTarget:20 SnapshotCache:256 Preimages:false SnapshotAsync:true SnapshotVerify:false Pruning:true AcceptorQueueLimit:64 CommitInterval:4096 AllowMissingTries:false PopulateMissingTries:<nil> PopulateMissingTriesParallelism:1024 MetricsExpensiveEnabled:true LocalTxsEnabled:false TxPoolJournal:transactions.rlp TxPoolRejournal:1h0m0s TxPoolPriceLimit:1 TxPoolPriceBump:10 TxPoolAccountSlots:16 TxPoolGlobalSlots:5120 TxPoolAccountQueue:64 TxPoolGlobalQueue:1024 APIMaxDuration:0s WSCPURefillRate:0s WSCPUMaxStored:0s MaxBlocksPerRequest:0 AllowUnfinalizedQueries:false AllowUnprotectedTxs:false AllowUnprotectedTxHashes:[0xfefb2da535e927b85fe68eb81cb2e4a5827c905f78381a01ef2322aa9b0aee8e] KeystoreDirectory: KeystoreExternalSigner: KeystoreInsecureUnlockAllowed:false RemoteGossipOnlyEnabled:false RegossipFrequency:1m0s RegossipMaxTxs:16 RegossipTxsPerAddress:1 PriorityRegossipFrequency:1s PriorityRegossipMaxTxs:32 PriorityRegossipTxsPerAddress:16 PriorityRegossipAddresses:[] LogLevel:info LogJSONFormat:false FeeRecipient: OfflinePruning:false OfflinePruningBloomFilterSize:512 OfflinePruningDataDirectory: MaxOutboundActiveRequests:16 MaxOutboundActiveCrossChainRequests:64 InspectDatabase:false StateSyncEnabled:false StateSyncSkipResume:false StateSyncServerTrieCache:64 StateSyncIDs: StateSyncCommitInterval:16384 StateSyncMinBlocks:300000 SkipUpgradeCheck:false SkipSubnetEVMUpgradeCheck:false AcceptedCacheSize:32 TxLookupLimit:0}"
 [streaming output] INFO [01-27|10:34:07.122] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/core/state/snapshot/snapshot.go:773: Rebuilding state snapshot
 [streaming output] [01-27|10:34:07.131] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> bootstrap/bootstrapper.go:122 starting bootstrapper
 [streaming output] [01-27|10:34:07.134] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "HkbbSAwXRE7CacDWMNdZjURbFCCUwL3TSeXLRVEK8L3SVD9Su"}
