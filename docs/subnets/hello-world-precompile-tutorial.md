@@ -120,12 +120,12 @@ with the original precompile interface!
 
 ### AllowList
 
-AllowList enables a precompile to enforce permissions on addresses. AllowList is not a contract itself,
-but it's a helper structure to provide control-mechanism to wrapping contracts.
-It provides a `AllowListConfig` to precompile so that it can take an initial configuration
-from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial we
-used `AllowList` to provide permission control to `HelloWorld` precompile.
-You can find more information about AllowList interface at [here](../subnets/customize-a-subnet.md#allowlist).
+The AllowList enables a precompile to enforce permissions on addresses. The AllowList is not a contract itself,
+but a helper structure to provide a control mechanism for wrapping contracts.
+It provides an `AllowListConfig` to the precompile so that it can take an initial configuration
+from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial, we
+used `AllowList` to provide permission control to the `HelloWorld` precompile.
+You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist).
 
 ## Tutorial
 
