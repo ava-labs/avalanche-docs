@@ -249,7 +249,7 @@ interface IHelloWorld is IAllowList {
 
 This interface defines 2 functions, `sayHello()` and `setGreeting()`. The `sayHello()` function
 is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
-The `setGreeting()` function is a state-changer function, meaning it modifies the state of the precompile.
+The `setGreeting()` function is a state changer function, meaning it modifies the state of the precompile.
 
 `IAllowList` is an interface that we will use to restrict access to the precompile. It is defined in
 `./contract-examples/contracts/IAllowList.sol`:
