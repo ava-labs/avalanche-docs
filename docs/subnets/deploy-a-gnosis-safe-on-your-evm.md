@@ -24,8 +24,7 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 - [safe-contracts](https://github.com/safe-global/safe-contracts.git)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-- [avalanche-network-runner](../quickstart/create-a-local-test-network#avalanche-network-runner)
-  (Local Workflow)
+- [avalanche-network-runner](../subnets/network-runner.md) (Local Workflow)
 
 ## Custom Network Workflow
 

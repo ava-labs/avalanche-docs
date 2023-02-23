@@ -321,12 +321,12 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 ### Start the Local Network
 
-Follow [Create a Local Test
-Network](../quickstart/create-a-local-test-network.md#avalanche-network-runner)
+Follow
+[this](../subnets/network-runner.md#start-a-new-avalanche-network-with-five-nodes)
 to start a 5-node local network. Make sure that you get one of the port number
 by following
-[this](../quickstart/create-a-local-test-network.md#retrieve-all-nodes). In this
-tutorial, we will assume one of the ports is 30301.
+[this](..//subnets/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
+In this tutorial, we will assume one of the ports is 30301.
 
 ### Locate the Example Code and Make Necessary Changes
 

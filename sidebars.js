@@ -56,8 +56,6 @@ const sidebars = {
 
   quickStart: [
     'quickstart/README',
-    'quickstart/create-a-local-test-network',
-    'quickstart/fund-a-local-test-network',
     'quickstart/fuji-workflow',
     'quickstart/cross-chain-transfers',
     'quickstart/multisig-utxos-with-avalanchejs',
