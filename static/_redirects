@@ -92,8 +92,8 @@
 
 /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain/ /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
 /dapps/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain /dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain 301
-/dapps/smart-digital-assets/wallet-nft-studio/ <https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet> 301
-/dapps/smart-digital-assets/wallet-nft-studio <https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet> 301
+/dapps/smart-digital-assets/wallet-nft-studio/ https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet 301
+/dapps/smart-digital-assets/wallet-nft-studio https://support.avax.network/en/articles/6170046-how-to-create-nfts-with-the-avalanche-wallet 301
 /quickstart/references/abigen/ /specs/abigen 301
 /quickstart/references/abigen /specs/abigen 301
 /quickstart/references/avm-transaction-serialization/ /specs/avm-transaction-serialization 301
@@ -173,8 +173,8 @@
 
 # overview
 
-/learn/avalanche-bridge-faq <https://support.avax.network/en/collections/3073022-avalanche-bridge> 301
-/learn/avalanche-bridge-faq/ <https://support.avax.network/en/collections/3073022-avalanche-bridge> 301
+/learn/avalanche-bridge-faq https://support.avax.network/en/collections/3073022-avalanche-bridge 301
+/learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge 301
 /learn/getting-started/ / 301
 /learn/getting-started / 301
 /learn/platform-overview/ /overview/getting-started/avalanche-platform 301
@@ -204,8 +204,8 @@
 /build/tutorials/platform/subnets/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/subnets/setup-dfk-node/ /subnets/setup-dfk-node 301
 /build/tutorials/platform/subnets/setup-dfk-node /subnets/setup-dfk-node 301
-/build/tutorials/platform/subnets/subnet-faq/ <https://support.avax.network/en/articles/6158840-subnet-faq> 301
-/build/tutorials/platform/subnets/subnet-faq <https://support.avax.network/en/articles/6158840-subnet-faq> 301
+/build/tutorials/platform/subnets/subnet-faq/ https://support.avax.network/en/articles/6158840-subnet-faq 301
+/build/tutorials/platform/subnets/subnet-faq https://support.avax.network/en/articles/6158840-subnet-faq 301
 
 # nodes
 
@@ -339,8 +339,8 @@
 
 # 04/21/2022
 
-/learn/setup-your-ledger-nano-s-with-avalanche/ <https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche> 301
-/learn/setup-your-ledger-nano-s-with-avalanche <https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche> 301
+/learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
+/learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 
 # since the begining
 
