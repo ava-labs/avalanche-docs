@@ -932,7 +932,7 @@ import (
 ### Step 6: Add Config Tests
 
 Let's add some unit tests to make sure our precompile is configured correctly. Config tests will
-be under `/precompile/contracts/helloworld/config_test.go`. There are mainly 2 functions we need
+be under `/precompile/contracts/helloworld/config_test.go`. There are mainly two functions we need
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. You can check other `config_test.go` files
 in the `/precompile/contracts` directory for examples. For the `HelloWorld` precompile, you can
