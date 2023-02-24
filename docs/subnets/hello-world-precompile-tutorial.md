@@ -532,7 +532,7 @@ Module file contains fundamental information about the precompile. This includes
 precompile, the address of the precompile and a configurator. This file is located at
 [`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
 
-It defines the module for the precompile. The module is used to register the precompile to the
+This file defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
 Registration is done in `init()` function of the module file. `MakeConfig()` is used to create a
 new instance for the precompile config. This will be used in custom Unmarshal/Marshal logic.
@@ -640,7 +640,6 @@ const defaultGreeting = "Hello World!"
 // This function is called by the EVM once per precompile contract activation.
 // You can use this function to set up your precompile contract's initial state,
 // by using the [cfg] config and [state] stateDB.
-	// Configure configures [state] with the initial configuration.
 func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompileconfig.Config, state contract.StateDB, _ contract.BlockContext) error {
 	config, ok := cfg.(*Config)
 	if !ok {
@@ -940,7 +939,7 @@ checks if the precompile is equal to another precompile. You can check other `co
 in the `/precompile/contracts` directory for examples. For the `HelloWorld` precompile, you can
 check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go)
 
-### Step 6: Add Contract Tests
+### Step 7: Add Contract Tests
 
 We also need to add some contract tests to make sure our precompile is working correctly.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
@@ -996,7 +995,15 @@ you can directly run them as follows:
 	}
 ```
 
-### Step 7: Add Test Contract
+### Step 8 (Optional): VM Tests
+
+VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
+comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, e.g.
+changing blockchain rules, you should add a VM test. For example you can take a look at the
+TestRewardManagerPrecompileSetRewardAddress function in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm_test.go#L2675).
+For this Hello World example we don't modify any Subnet-EVM rules, so we don't need to add any VM tests.
+
+### Step 9: Add Test Contract
 
 Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact
 with our precompile! We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
@@ -1036,67 +1043,7 @@ the caller is added to the AllowList.
 
 Please note that this contract is simply a wrapper and is calling the precompile functions.
 
-### Step 7: Building AvalancheGo and Subnet-EVM
-
-Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
-
-You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
-the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/avalanchego
-./scripts/build.sh
-```
-
-Once you've built AvalancheGo, you can confirm that it was successful by printing the version:
-
-```bash
-./build/avalanchego --version
-```
-
-This should print something like the following (if you are running AvalancheGo v1.9.7):
-
-```bash
-avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
-```
-
-This path will be used later as the environment variable `AVALANCHEGO_EXEC_PATH` in the network runner.
-
-Please note that the RPCChainVM version of AvalancheGo and Subnet-EVM must match.
-
-Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/subnet-evm
-./scripts/build.sh
-```
-
-This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default
-at the file path:
-
-`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
-
-To confirm that the Subnet-EVM binary is compatible with AvalancheGo, you can run the same version command
-and confirm the RPCChainVM version matches:
-
-```bash
-$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
-```
-
-This should give a similar output:
-
-```bash
-Subnet-EVM/v0.4.10@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
-```
-
-If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
-will not be able to talk to AvalancheGo and the blockchain will not start.
-
-The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
-
-### Step 8: Add Precompile Solidity Tests
-
-#### Step 8.1: Add Hardhat Test
+### Step 10: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
 copied and pasted into a new file called `hello_world.ts` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contract-examples/test/hello_world.ts):
@@ -1185,7 +1132,7 @@ describe("ExampleHelloWorld", function () {
 });
 ```
 
-#### Step 8.2: Add Genesis
+### Step 11: Add Genesis
 
 To run our HardHat test, we will need to create a Subnet that has the `Hello World` precompile activated,
 so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
@@ -1255,7 +1202,7 @@ Adding this to our genesis enables our HelloWorld precompile at the very first b
 }
 ```
 
-#### Step 8.3: Declaring the HardHat E2E Test
+#### Step 12: Declaring the HardHat E2E Test
 
 Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running
 the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
@@ -1298,6 +1245,68 @@ directly if you prefer):
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
 `GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to ginkgo in
 `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
+
+### Step 13: Running E2E Tests
+
+#### Building AvalancheGo and Subnet-EVM
+
+Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
+
+You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
+the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/avalanchego
+./scripts/build.sh
+```
+
+Once you've built AvalancheGo, you can confirm that it was successful by printing the version:
+
+```bash
+./build/avalanchego --version
+```
+
+This should print something like the following (if you are running AvalancheGo v1.9.7):
+
+```bash
+avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
+```
+
+This path will be used later as the environment variable `AVALANCHEGO_EXEC_PATH` in the network runner.
+
+Please note that the RPCChainVM version of AvalancheGo and Subnet-EVM must match.
+
+Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/subnet-evm
+./scripts/build.sh
+```
+
+This will build the Subnet-EVM binary and place it in AvalancheGo's `build/plugins` directory by default
+at the file path:
+
+`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+
+To confirm that the Subnet-EVM binary is compatible with AvalancheGo, you can run the same version command
+and confirm the RPCChainVM version matches:
+
+```bash
+$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
+```
+
+This should give a similar output:
+
+```bash
+Subnet-EVM/v0.4.10@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
+```
+
+If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
+will not be able to talk to AvalancheGo and the blockchain will not start.
+
+The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
+
+#### Running Ginkgo Tests
 
 To run ONLY the HelloWorld precompile test, run the command:
 
@@ -1412,7 +1421,7 @@ Compilation finished successfully
 
   ExampleHelloWorld
 Contract deployed to: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
-  	✓ should getHello properly
+    ✓ should getHello properly
     ✓ contract should not be able to set greeting without enabled
     ✓ should be add contract to enabled list (4071ms)
     ✓ should setGreeting and getHello (4049ms)
@@ -1453,7 +1462,7 @@ not enabled and some code is missing. Please also use the
 [official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2)
 to double check your work as well.
 
-### Step 9: Running a Local Network
+### Running a Local Network
 
 We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
