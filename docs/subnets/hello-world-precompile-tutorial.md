@@ -416,7 +416,7 @@ Go package we want to generate the precompile into.
 
 This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`
 and `README.md` located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
-directory.`README.md` explains general guidelines for precompile development. You should carefully read
+directory. `README.md` explains general guidelines for precompile development. You should carefully read
 this file before modifying the precompile template.
 
 <!-- markdownlint-disable MD013 -->
@@ -530,7 +530,7 @@ precompile package that you need to modify. You should start with the reference 
 
 Module file contains fundamental information about the precompile. This includes the key for the
 precompile, the address of the precompile and a configurator. This file is located at
-[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go)
+[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
 
 It defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
@@ -1296,7 +1296,7 @@ directly if you prefer):
 ```
 
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
-`GINKGO_LABEL_FILTER`. This enviroment variable is passed as a flag to ginkgo in
+`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to ginkgo in
 `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
 
 To run ONLY the HelloWorld precompile test, run the command:
