@@ -125,7 +125,7 @@ itself, but a helper structure to provide a control mechanism for wrapping contr
 It provides an `AllowListConfig` to the precompile so that it can take an initial configuration
 from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial, we
 used `AllowList` to provide permission control to the `HelloWorld` precompile.
-You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist).
+You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist-interface).
 
 ## Tutorial
 
@@ -659,6 +659,8 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 	return config.AllowListConfig.Configure(state, ContractAddress)
 }
 ```
+
+#
 
 #### Step 3.4: Contract File
 
