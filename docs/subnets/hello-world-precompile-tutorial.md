@@ -1296,7 +1296,7 @@ directly if you prefer):
 ```
 
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
-`GINKGO_LABEL_FILTER`. This enviroment variable is passed as a flag to ginkgo in
+`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to ginkgo in
 `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
 
 To run ONLY the HelloWorld precompile test, run the command:
