@@ -419,32 +419,34 @@ and `README.md` located at [`./precompile/contracts/helloworld`](https://github.
 directory.`README.md` explains general guidelines for precompile development. You should carefully read
 this file before modifying the precompile template.
 
-In `./precompile/helloworld`, directory search `CUSTOM CODE STARTS HERE` to find places where
-you can/should modify the precompile.
-
-Let's fill out the rest!
-
 <!-- markdownlint-disable MD013 -->
 
-```go
-/* General guidelines for precompile development:
+```md
+There are some must-be-done changes waiting in the generated file. Each area requiring you to add your code is marked with CUSTOM CODE to make them easy to find and modify.
+Additionally there are other files you need to edit to activate your precompile.
+These areas are highlighted with comments "ADD YOUR PRECOMPILE HERE".
+For testing take a look at other precompile tests in contract_test.go and config_test.go in other precompile folders.
+See the tutorial in <https://docs.avax.network/subnets/hello-world-precompile-tutorial> for more information about precompile development.
+
+General guidelines for precompile development:
 1- Set a suitable config key in generated module.go. E.g: "yourPrecompileConfig"
 2- Read the comment and set a suitable contract address in generated module.go. E.g:
-	ContractAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
+ContractAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
 3- It is recommended to only modify code in the highlighted areas marked with "CUSTOM CODE STARTS HERE". Typically, custom codes are required in only those areas.
 Modifying code outside of these areas should be done with caution and with a deep understanding of how these changes may impact the EVM.
 4- Set gas costs in generated contract.go
 5- Force import your precompile package in precompile/registry/registry.go
 6- Add your config unit tests under generated package config_test.go
-7- Add your contract unit tests undertgenerated package contract_test.go
+7- Add your contract unit tests under generated package contract_test.go
 8- Additionally you can add a full-fledged VM test for your precompile under plugin/vm/vm_test.go. See existing precompile tests for examples.
 9- Add your solidity interface and test contract to contract-examples/contracts
 10- Write solidity tests for your precompile in contract-examples/test
-11- Create your genesis with your precompile enabled in tests/e2e/genesis/
-12- Create e2e test for your solidity test in tests/e2e/solidity/suites.go
-13- Run your e2e precompile Solidity tests with 'E2E=true ./scripts/run.sh
-*/
+11- Create your genesis with your precompile enabled in tests/precompile/genesis/
+12- Create e2e test for your solidity test in tests/precompile/solidity/suites.go
+13- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
 ```
+
+Let's follow these step and create our HelloWorld precompile!
 
 <!-- markdownlint-enable MD013 -->
 
@@ -561,8 +563,8 @@ roles for specified addresses. If you have any custom fields in your precompile 
 here. These custom fields will be read from upgrade/genesis JSON and set in the precompile config.
 
 ```go
-// Config implements the StatefulPrecompileConfig
-// interface while adding in the HelloWorld specific precompile address.
+// Config implements the precompileconfig.Config interface and
+// adds specific configuration for HelloWorld.
 type Config struct {
 	allowlist.AllowListConfig
 	precompileconfig.Upgrade
