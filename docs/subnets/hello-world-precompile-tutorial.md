@@ -939,7 +939,7 @@ be under `/precompile/contracts/helloworld/config_test.go`. There are mainly two
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. You can check other `config_test.go` files
 in the `/precompile/contracts` directory for examples. For the `HelloWorld` precompile, you can
-check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go)
+check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
 
 ### Step 7: Add Contract Tests
 
