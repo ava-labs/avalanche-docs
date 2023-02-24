@@ -13,7 +13,7 @@ re-implementing the same primitives in Solidity. The following precompiles are c
 ecrecover, sha256, blake2f, ripemd-160, Bn256Add, Bn256Mul, Bn256Pairing, the identity function, and
 modular exponentiation.
 
-We can see these [precompile](https://github.com/ethereum/go-ethereum/blob/master/core/vm/contracts.go#L81)
+We can see these [precompile](https://github.com/ethereum/go-ethereum/blob/v1.11.1/core/vm/contracts.go#L82)
 mappings from address to function here in the Ethereum VM:
 
 ```go
@@ -48,7 +48,7 @@ type PrecompiledContract interface {
 ```
 
 Here is an example of the
-[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L238-L252)
+[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L236-L249)
 function.
 
 ```go
@@ -96,7 +96,7 @@ A stateful precompile builds on a precompile in that it adds state access. State
 not available in the default EVM, and are specific to Avalanche EVMs such as
 [Coreth](https://github.com/ava-labs/coreth) and [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
-A stateful precompile follows this [interface](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract.go#L64-L67):
+A stateful precompile follows this [interface](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/interfaces.go#L17-L20):
 
 ```go
 // StatefulPrecompiledContract is the interface for executing a precompiled contract
@@ -142,7 +142,7 @@ Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software
 Build at your own risk.
 
 In this tutorial, we used a branch based on SubnetEVM version `v0.4.10`. You can find the branch
-[here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/). The code in this
+[here](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2). The code in this
 branch is the same as SubnetEVM version `v0.4.10` except for the `precompile/` directory. The
 `precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
 precompile as an example to learn how to write a stateful precompile. The code in this branch can become
@@ -202,7 +202,7 @@ npm install -g yarn
 
 ### Complete Code
 
-You can inspect the [diffs between v0.4.10 and tutorial branch](https://github.com/ava-labs/subnet-evm/compare/v0.4.10...helloworld-official-tutorial-v2)
+You can inspect the [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/535/files)
 for the complete code.
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
@@ -504,7 +504,7 @@ and write it down in `registry.go` as a comment for future reference.
 // {YourPrecompile}Address          = common.HexToAddress("0x03000000000000000000000000000000000000??")
 ```
 
-Don't forget to update the actual variable `ContractAddress` in [`module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go#L49)
+Don't forget to update the actual variable `ContractAddress` in [`module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go#L26)
 to the address you chose. It should look like:
 
 ```go
@@ -1099,7 +1099,7 @@ The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH
 #### Step 8.1: Add Hardhat Test
 
 We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
-copied and pasted into a new file called `hello_world.ts` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contract-examples/tests/hello_world.ts):
+copied and pasted into a new file called `hello_world.ts` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contract-examples/test/hello_world.ts):
 
 ```ts
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
@@ -1450,7 +1450,7 @@ Looks like the tests are passing!
 
 If your tests failed, please retrace your steps. Most likely the error is that the precompile was
 not enabled and some code is missing. Please also use the
-[official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/hello-world-tutorial-walkthrough)
+[official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2)
 to double check your work as well.
 
 ### Step 9: Running a Local Network
