@@ -424,7 +424,7 @@ info.peers({
 
 - `nodeIDs` is an optional parameter to specify what NodeID's descriptions should be returned. If
   this parameter is left empty, descriptions for all active connections will be returned. If the
-  node is not connected to a specified nodeID, it will be omitted from the response.
+  node is not connected to a specified NodeID, it will be omitted from the response.
 - `ip` is the remote IP of the peer.
 - `publicIP` is the public IP of the peer.
 - `nodeID` is the prefixed Node ID of the peer.

@@ -1096,7 +1096,7 @@ platform.getCurrentValidators({
 - `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
 - `nodeIDs` is a list of the NodeIDs of current validators to request. If omitted, all current
-  validators are returned. If a specified nodeID is not in the set of current validators, it will
+  validators are returned. If a specified NodeID is not in the set of current validators, it will
   not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
@@ -1376,7 +1376,7 @@ platform.getPendingValidators({
 - `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
 - `nodeIDs` is a list of the NodeIDs of pending validators to request. If omitted, all pending
-  validators are returned. If a specified nodeID is not in the set of pending validators, it will
+  validators are returned. If a specified NodeID is not in the set of pending validators, it will
   not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
