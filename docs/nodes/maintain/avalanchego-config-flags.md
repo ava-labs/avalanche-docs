@@ -1,4 +1,4 @@
----
+---owner can draw coins from contract at any time 
 sidebar_position: 4
 description: This documents list all available configuration and flags for AvalancheGo.
 ---
