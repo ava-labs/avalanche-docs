@@ -278,6 +278,7 @@ superset
 Swapper's
 sybil
 syncer
+Tencent
 testnet
 Testnet
 textlint

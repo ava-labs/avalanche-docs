@@ -243,7 +243,7 @@ strictly necessary.
 
 ### `info.getNodeID` Request
 
-Next, you want to get the nodeID which will be used to add the node as a
+Next, you want to get the NodeID which will be used to add the node as a
 Validator. To get the node's ID you call the `info.getNodeID` jsonrpc endpoint.
 
 ```zsh
@@ -357,7 +357,7 @@ transactions in the right column will update with the new `AddValidatorTx`
 pushed to the top of the list. Click the magnifying glass icon and a new browser
 tab will open with the details of the `AddValidatorTx`. It will show details
 such as the total value of AVAX transferred, any AVAX which were burned, the
-blockchainID, the blockID, the nodeID of the validator, and the total time which
+blockchainID, the blockID, the NodeID of the validator, and the total time which
 has elapsed from the entire Validation period.
 
 ![Validator transaction](/img/one-click-validator-node/validation-tx.png)
