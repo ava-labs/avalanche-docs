@@ -942,7 +942,8 @@ check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-
 
 ### Step 6: Add Contract Tests
 
-We also need to add some contract tests to make sure our precompile is working correctly. Contract
+We also need to add some contract tests to make sure our precompile is working correctly.
+You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
 tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
 The test will cover all functionality of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
@@ -994,8 +995,6 @@ you can directly run them as follows:
 		})
 	}
 ```
-
-You can check other `contract_test.go` files in the `/precompile/contracts`.
 
 ### Step 7: Add Test Contract
 
