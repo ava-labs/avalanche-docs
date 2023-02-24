@@ -416,7 +416,7 @@ Go package we want to generate the precompile into.
 
 This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`
 and `README.md` located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
-directory.`README.md` explains general guidelines for precompile development. You should carefully read
+directory. `README.md` explains general guidelines for precompile development. You should carefully read
 this file before modifying the precompile template.
 
 <!-- markdownlint-disable MD013 -->
