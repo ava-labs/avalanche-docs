@@ -1000,7 +1000,7 @@ you can directly run them as follows:
 ### Step 8 (Optional): VM Tests
 
 VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
-comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, e.g.
+comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, for example
 changing blockchain rules, you should add a VM test. For example you can take a look at the
 TestRewardManagerPrecompileSetRewardAddress function in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm_test.go#L2675).
 For this Hello World example we don't modify any Subnet-EVM rules, so we don't need to add any VM tests.
