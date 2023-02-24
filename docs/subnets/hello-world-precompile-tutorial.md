@@ -530,7 +530,7 @@ precompile package that you need to modify. You should start with the reference 
 
 Module file contains fundamental information about the precompile. This includes the key for the
 precompile, the address of the precompile and a configurator. This file is located at
-[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go)
+[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
 
 It defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
