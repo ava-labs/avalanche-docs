@@ -660,8 +660,6 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 }
 ```
 
-#
-
 #### Step 3.4: Contract File
 
 Contract file contains the functions of the precompile contract that will be called by the EVM. The
