@@ -1202,7 +1202,7 @@ Adding this to our genesis enables our HelloWorld precompile at the very first b
 }
 ```
 
-#### Step 12: Declaring the HardHat E2E Test
+### Step 12: Declaring the HardHat E2E Test
 
 Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running
 the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
