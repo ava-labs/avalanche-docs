@@ -471,11 +471,11 @@ We will keep the start time 5 minutes later than the current time. This `$(date 
 help to achieve the same. But you can put any timestamp in seconds there, given it is 20s later than
 the current time.
 
-## Whitelisting Subnet from the Node
+## Tracking a Subnet from the Node
 
 Subnet owners can add any node to their Subnet. That doesn't mean the nodes start validating their
 Subnet without any consent. If a node wants to validate the newly added Subnet, then it must restart
-its `avalanchego` binary with the new Subnet being whitelisted.
+its `avalanchego` binary with the new Subnet being tracked.
 
 ```bash
 avalanche-network-runner control restart-node \
@@ -483,7 +483,7 @@ avalanche-network-runner control restart-node \
 --endpoint="0.0.0.0:8080" \
 --node-name node1 \
 --avalanchego-path ${HOME}/subnet-evm-demo/avalanchego/build/avalanchego \
---whitelisted-subnets="<SUBNET_ID>"
+--track-subnets="<SUBNET_ID>"
 ```
 
 Once the node has restarted, it will again be re-assigned to a random API port. We have to update

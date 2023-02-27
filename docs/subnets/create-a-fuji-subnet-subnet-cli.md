@@ -235,12 +235,12 @@ Note: please remove `airdropHash` and `airdropAmount` fields if you want to star
 As part of the return of `subnet-cli wizard`, a `Subnet ID` value will be returned which will be
 needed in next step. See [here](./subnet-cli.md#subnet-cli-wizard) for more detailed logs.
 
-## Add New Subnet to Node Whitelist
+## Track New Subnet on Node
 
 During the execution of the `wizard` command, you will be prompted to add your new SubnetID to your
-node. This is done using the `whitelisted-subnets` config. You can provide the `whitelisted-subnets`
+node. This is done using the `track-subnets` config. You can provide the `track-subnets`
 argument by modifying your config file (reference
-[here](../nodes/maintain/avalanchego-config-flags.md#whitelist)) or providing an argument on
+[here](../nodes/maintain/avalanchego-config-flags.md#subnet-tracking)) or providing an argument on
 startup.
 
 Example Config File:
@@ -251,14 +251,14 @@ Example Config File:
   "health-check-frequency": "2s",
   "log-display-level": "INFO",
   "log-level": "INFO",
-  "whitelisted-subnets": "p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz"
+  "track-subnets": "p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz"
 }
 ```
 
 Example Node Arguments:
 
 ```bash
---whitelisted-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
+--track-subnets=p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz --network-id=fuji
 ```
 
 :::tip 
