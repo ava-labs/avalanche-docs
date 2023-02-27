@@ -60,7 +60,6 @@ specifically in `~/.avalanchego/staking/`. All we need to do to recreate the
 node on another machine is to run a new installation with those same two files.
 If these two files are removed from a node, which is restarted afterwards, they 
 will be recreated and a new node ID will be assigned.  
-new node ID will be assigned.
 
 :::caution
 
