@@ -1,13 +1,15 @@
 # How To Upgrade Your Subnet-EVM
 
 ## Upgrading a Subnet
+
 You can parametrize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
 To do this, create a `upgrade.json` file and place in the appropriate directory. 
 
 This page is a tutorial on how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
 
 
-[Upgrade a Subnet](https://docs.avax.network/subnets/subnet-upgrade) describes all the background information required regarding Subnet upgrades.
+[Upgrade a Subnet](https://docs.avax.network/subnets/subnet-upgrade) 
+describes all the background information required regarding Subnet upgrades.
 
 :::warning
 
@@ -17,12 +19,15 @@ Failing to do so can potentially grind your network to a halt.
 
 :::
 
-This tutorial assumes that you already [installed](https://docs.avax.network/subnets/install-avalanche-cli) Avalanche-CLI.
+This tutorial assumes that you already 
+[installed](https://docs.avax.network/subnets/install-avalanche-cli) Avalanche-CLI.
 It also uses `testSubnet` as a hypothetical Subnet name throughout.
 
 
 ## Generate the Upgrade File
-The [Network Upgrades: Enable/Disable Precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles) 
+
+The 
+[Precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles) 
 documentation describes what files the network upgrade requires, and where to place them.
 
 To generate a valid `upgrade.json` file, run:
@@ -32,13 +37,15 @@ avalanche subnet upgrade generate testSubnet
 ```
 
 If you didn't create `testSubnet` yet, you would see this result:
+
 ```shell
 avalanche subnet upgrade generate testSubnet
 The provided subnet name "testSubnet" does not exist
 ```
 
 Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. 
-If that's the case, please go ahead and [create](https://docs.avax.network/subnets/build-first-subnet) the Subnet first.
+If that's the case, please go ahead and 
+[create](https://docs.avax.network/subnets/build-first-subnet) the Subnet first.
 
 If the Subnet definition exists, the tool launches a wizard.
 It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
@@ -46,10 +53,15 @@ It may feel a bit redundant, but you first see some warnings, to draw focus to t
 ```shell
 avalanche subnet upgrade generate testSubnet       
 Performing a network upgrade requires coordinating the upgrade network-wide.
-A network upgrade changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest of the network.
+A network upgrade changes the rule set used to process and verify blocks, such that any node that 
+upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become 
+out of sync with the rest of the network.
 
-Any mistakes in configuring network upgrades or coordinating them on validators may cause the network to halt and recovering may be difficult.
-Please consult https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles for more information
+Any mistakes in configuring network upgrades or coordinating them on validators may cause the 
+network to halt and recovering may be difficult.
+Please consult 
+https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles 
+for more information
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Press [Enter] to continue, or abort by choosing 'no': 
   ▸ Yes
@@ -61,7 +73,8 @@ Go ahead and select `Yes` if you understood everything and you agree.
 You see a last note, before the actual configuration wizard starts:
 
 ```shell
-Avalanchego and this tool support configuring multiple precompiles. However, we suggest to only configure one per upgrade.
+Avalanchego and this tool support configuring multiple precompiles. 
+However, we suggest to only configure one per upgrade.
 
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Select the precompile to configure: 
@@ -71,12 +84,14 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Transaction Allow List
 ```
 
-Refer to [Precompiles](https://docs.avax.network/subnets/customize-a-subnet#precompiles) for a description of available precompiles
-and how to configure them. 
+Refer to [Precompiles](https://docs.avax.network/subnets/customize-a-subnet#precompiles) 
+for a description of available precompiles and how to configure them. 
 
-Make sure you understand Precompiles thoroughly and how to configure them before attempting to continue.
+Make sure you understand Precompiles thoroughly and how to configure them before 
+attempting to continue.
 
-For every precompile in the list, the wizard guides you to provide correct information, prompting relevant questions.
+For every precompile in the list, the wizard guides you to provide correct information, 
+prompting relevant questions.
 For the sake of this tutorial, select `Transaction Allow List`. 
 [Restricting Who Can Submit Transactions](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions) 
 describes what this precompile is about.
@@ -112,7 +127,8 @@ provide a valid timestamp, the `x` disappears:
 ✔ Enter the block activation UTC datetime in 'YYYY-MM-DD HH:MM:SS' format: 2023-03-31 14:00:00
 ```
 
-The timestamp must be in the **future**, so make sure you use such a timestamp should you be running this tutorial after `2023-03-31 14:00:00` ;-) .
+The timestamp must be in the **future**, so make sure you use such a 
+timestamp should you be running this tutorial after `2023-03-31 14:00:00` ;-) .
 It's your **local** timestamp, by the way.
 
 After you provided the valid timestamp, proceed with the precompile specific configurations:
@@ -125,10 +141,12 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     No
 ```
 
-The addresses added in this section allow to add other admins and/or add enabled addresses for transaction issuance.
+The addresses added in this section allow to add other admins and/or add enabled addresses 
+for transaction issuance.
 The addresses provided in this tutorial are fake.
 
-**However, make sure you have control of the addresses respectively know who has control over these addresses.
+**However, make sure you have control of the addresses respectively know who has 
+control over these addresses.
 You might prevent your Subnet to make any progress if not.**
 
 ```shell
@@ -143,6 +161,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 The prompting runs with a pattern used throughout the tool: 
+
 * Select an operation:
   * `Add`: adds a new address to the current list
   * `Delete`: removes an address from the current list
@@ -198,7 +217,8 @@ Add one such enabled address, these are addresses which can issue transactions:
 ✔ Add an address: 0x55554444333322221111eeeeaaaabbbbccccdddd█
 ```
 
-After you added this address, and selected `Done`, the tool asks if you want to add another precompile:
+After you added this address, and selected `Done`, the tool asks if you want to 
+add another precompile:
 
 ```shell
 ✔ Done
@@ -232,6 +252,7 @@ So at this point you can either:
 
 
 ## How To Upgrade a Local Network
+
 The normal use case for this operation is that:
 
 * You already created a Subnet
@@ -304,16 +325,20 @@ The next upgrade will go into effect 2023-03-31 09:00:00
 +-------+------------+-----------------------------------------------------------------------------------+
 ```
 
-There is only so much the tool can do here for you. It installed the upgrade bytes *as-is* as you configured resp. provided them to the tool.
-You should verify yourself that the upgrades were actually installed correctly, for example issuing some transactions - mind the timestamp!.
+There is only so much the tool can do here for you. 
+It installed the upgrade bytes *as-is* as you configured resp. provided them to the tool.
+You should verify yourself that the upgrades were actually installed correctly, 
+for example issuing some transactions - mind the timestamp!.
 
 
 ## Apply the Upgrade to a Public Node (Fuji or Mainnet)
 
-For this scenario to work, you should also have deployed the Subnet to the public network (Fuji or Mainnet) with this tool.
+For this scenario to work, you should also have deployed the Subnet 
+to the public network (Fuji or Mainnet) with this tool.
 Otherwise, the tool won't know the details of the Subnet, and won't be able to guide you.
 
-Assuming the Subnet has been already deployed to Fuji, when running the `apply` command, the tool notices the deployment:
+Assuming the Subnet has been already deployed to Fuji, when running the `apply` command, 
+the tool notices the deployment:
 
 ```shell
 avalanche subnet upgrade apply testSubnet  
@@ -333,11 +358,14 @@ which is running Avalanche-CLI.
 :::
 
 If this is the case, the tool tries to install the upgrade file at the expected destination.
-If you use default paths, it tries to install at `$HOME/.avalanchego/chains/`, creating the chain id directory, 
+If you use default paths, it tries to install at `$HOME/.avalanchego/chains/`, creating the 
+chain id directory, 
 so that the file finally ends up at `$HOME/.avalanchego/chains/<chain-id>/upgrade.json`.
 
-If you are *not* using default paths, you can configure the path by providing the flag `--avalanchego-chain-config-dir` to the tool.
+If you are *not* using default paths, you can configure the path by providing the 
+flag `--avalanchego-chain-config-dir` to the tool.
 For example:
+
 ```shell
 avalanche subnet upgrade apply testSubnet --avalanchego-chain-config-dir /path/to/your/chains
 ```
@@ -394,7 +422,8 @@ To install the upgrade file on your validator:
    *************************************************************************************************************
 ```
 
-The instructions also show the content of your current upgrade file, so you can just select that if you wish.
+The instructions also show the content of your current upgrade file, so you can just 
+select that if you wish.
 Or actually export the file.
 
 ## Export the Upgrade File
@@ -418,6 +447,7 @@ File written successfully.
 You can now take that file and copy it to validator nodes, see preceding instructions.
 
 ## Import the Upgrade File
+
 You or someone else might have generated the file elsewhere, or on another machine.
 And now you want to install it on the validator machine, using Avalanche-CLI.
 
@@ -430,6 +460,6 @@ Provide the path to the upgrade file to import: /tmp/testSubnet-upgrade.json
 
 An existing file would be overwritten.
 
-After you have imported the file, you can `apply` it either to a local network or to a locally running 
-validator. Follow the instructions for the appropriate use case.
+After you have imported the file, you can `apply` it either to a local network or to 
+a locally running validator. Follow the instructions for the appropriate use case.
 
