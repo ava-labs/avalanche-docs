@@ -1,33 +1,33 @@
-# How To Upgrade Your Subnet-EVM
+# How to Upgrade Your Subnet-EVM Precompile Configuration 
 
 ## Upgrading a Subnet
 
-You can parametrize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
-To do this, create a `upgrade.json` file and place in the appropriate directory. 
+You can customize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
+To do this, create a `upgrade.json` file and place it in the appropriate directory. 
 
-This page is a tutorial on how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
+This document describes how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
 
 
-[Upgrade a Subnet](https://docs.avax.network/subnets/subnet-upgrade) 
+The document [Upgrade a Subnet](./subnet-upgrade.md) 
 describes all the background information required regarding Subnet upgrades.
 
 :::warning
 
-It's very important that you read and understood the previously linked document. 
+It's very important that you have read and understood the previously linked document. 
 Failing to do so can potentially grind your network to a halt.
 
 
 :::
 
-This tutorial assumes that you already 
-[installed](https://docs.avax.network/subnets/install-avalanche-cli) Avalanche-CLI.
-It also uses `testSubnet` as a hypothetical Subnet name throughout.
+This tutorial assumes that you have already 
+[installed](./install-avalanche-cli.md) Avalanche-CLI.
+It assumes you have already created and deployed a Subnet called `testSubnet`. 
 
 
 ## Generate the Upgrade File
 
 The 
-[Precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles) 
+[Precompiles](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) 
 documentation describes what files the network upgrade requires, and where to place them.
 
 To generate a valid `upgrade.json` file, run:
@@ -45,7 +45,7 @@ The provided subnet name "testSubnet" does not exist
 
 Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. 
 If that's the case, please go ahead and 
-[create](https://docs.avax.network/subnets/build-first-subnet) the Subnet first.
+[create](./build-first-subnet.md) the Subnet first.
 
 If the Subnet definition exists, the tool launches a wizard.
 It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
@@ -68,7 +68,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     No
 ```
 
-Go ahead and select `Yes` if you understood everything and you agree.
+Go ahead and select `Yes` if you understand everything and you agree.
 
 You see a last note, before the actual configuration wizard starts:
 
@@ -84,16 +84,17 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Transaction Allow List
 ```
 
-Refer to [Precompiles](https://docs.avax.network/subnets/customize-a-subnet#precompiles) 
+Refer to [Precompiles](./customize-a-subnet.md#precompiles) 
 for a description of available precompiles and how to configure them. 
 
-Make sure you understand Precompiles thoroughly and how to configure them before 
+Make sure you understand precompiles thoroughly and how to configure them before 
 attempting to continue.
 
-For every precompile in the list, the wizard guides you to provide correct information, 
-prompting relevant questions.
+For every precompile in the list, the wizard guides you to provide correct information 
+by prompting relevant questions.
 For the sake of this tutorial, select `Transaction Allow List`. 
-[Restricting Who Can Submit Transactions](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions) 
+The document 
+[Restricting Who Can Submit](./customize-a-subnet.md#restricting-who-can-submit-transactions) 
 describes what this precompile is about.
 
 ```shell
@@ -111,9 +112,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 This is actually common to all precompiles: they require an 
 activation timestamp.
 If you think about it, it makes sense: you want a synchronized activation of your precompile.
-So think for a moment about to what you want to set the activation timestamp to.
-You can select one of the suggested times in the future, or you can select a custom one.\
-Select `Custom` here, and see the format required:
+So think for a moment about when you want to set the activation timestamp to.
+You can select one of the suggested times in the future, or you can pick a custom one.
+After picking `Custom`, it shows the following prompt:
 
 ```shell
 ✔ Custom
@@ -121,7 +122,9 @@ Select `Custom` here, and see the format required:
 ```
 
 The format is `YYYY-MM-DD HH:MM:SS`, therefore `2023-03-31 14:00:00` would be a valid timestamp.
-Notice the `✗` at the beginning of the line. The CLI tool does input validation, so if you 
+Notice that the timestamp is in UTC. 
+Please make sure you have converted the time from your timezone to UTC.
+Also notice the `✗` at the beginning of the line. The CLI tool does input validation, so if you 
 provide a valid timestamp, the `x` disappears:
 
 ```shell
@@ -130,7 +133,6 @@ provide a valid timestamp, the `x` disappears:
 
 The timestamp must be in the **future**, so make sure you use such a 
 timestamp should you be running this tutorial after `2023-03-31 14:00:00` ;-) .
-It's your **local** timestamp, by the way.
 
 After you provided the valid timestamp, proceed with the precompile specific configurations:
 
@@ -146,9 +148,12 @@ The addresses added in this section allow to add other admins and/or add enabled
 for transaction issuance.
 The addresses provided in this tutorial are fake.
 
-**However, make sure you have control of the addresses respectively know who has 
-control over these addresses.
-You might prevent your Subnet to make any progress if not.**
+:::caution
+
+However, make sure you or someone you trust have full control over the addresses.
+Otherwise, you might bring your Subnet to a halt.
+
+:::
 
 ```shell
 ✔ Yes
@@ -232,7 +237,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 If you needed to add another one, you would select `Yes` here. The wizard would guide you
 through the other available precompiles, excluding already configured ones.
 
-To not unnecessarily extend this tutorial, the assumption is you're done here.
+To avoid making this tutorial too long, the assumption is you're done here.
 Select `No`, which ends the wizard.
 
 This means you have successfully terminated the generation of the upgrade file,
@@ -241,15 +246,14 @@ often called upgrade bytes. The tool stores them internally.
 :::warning
 
 You shouldn't move files around manually.
-Use the `export` and `import` commands to get access to the files
-if not needed in the context of the tool
+Use the `export` and `import` commands to get access to the files.
 
 :::
 
 So at this point you can either:
 
 * Deploy your upgrade bytes locally
-* Export your upgrade bytes to a file, for installation on a validator running on another machine.
+* Export your upgrade bytes to a file, for installation on a validator running on another machine
 * Import a file into a different machine running Avalanche-CLI 
 
 
@@ -292,7 +296,7 @@ Global Flags:
       --log-level string   log level for the application (default "ERROR")
 ```
 
-Go ahead and [deploy](https://docs.avax.network/subnets/create-a-local-subnet) 
+Go ahead and [deploy](./create-a-local-subnet.md) 
 first your Subnet if that's your case.
 
 If you already had deployed the Subnet instead, you see something like this:
@@ -330,7 +334,7 @@ The next upgrade will go into effect 2023-03-31 09:00:00
 ```
 
 There is only so much the tool can do here for you. 
-It installed the upgrade bytes *as-is* as you configured resp. provided them to the tool.
+It installed the upgrade bytes *as-is* as you configured respectively provided them to the tool.
 You should verify yourself that the upgrades were actually installed correctly, 
 for example issuing some transactions - mind the timestamp!.
 
@@ -462,7 +466,7 @@ avalanche subnet upgrade import testSubnet
 Provide the path to the upgrade file to import: /tmp/testSubnet-upgrade.json
 ```
 
-An existing file would be overwritten.
+An existing file with the same path and filename would be overwritten.
 
 After you have imported the file, you can `apply` it either to a local network or to 
 a locally running validator. Follow the instructions for the appropriate use case.
