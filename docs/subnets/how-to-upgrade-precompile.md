@@ -145,8 +145,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     No
 ```
 
-The addresses added in this section allow to add other admins and/or add enabled addresses 
-for transaction issuance.
+This will enable the addresses added in this section to add other admins and/or 
+add enabled addresses for transaction issuance.
 The addresses provided in this tutorial are fake.
 
 :::caution
