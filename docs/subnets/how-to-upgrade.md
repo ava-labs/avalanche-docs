@@ -108,7 +108,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-This is actually common to all precompiles: they require an activation timestamp.
+This is actually common to all precompiles: they require an 
+activation timestamp.
 If you think about it, it makes sense: you want a synchronized activation of your precompile.
 So think for a moment about to what you want to set the activation timestamp to.
 You can select one of the suggested times in the future, or you can select a custom one.\
@@ -246,6 +247,7 @@ if not needed in the context of the tool
 :::
 
 So at this point you can either:
+
 * Deploy your upgrade bytes locally
 * Export your upgrade bytes to a file, for installation on a validator running on another machine.
 * Import a file into a different machine running Avalanche-CLI 
@@ -290,7 +292,8 @@ Global Flags:
       --log-level string   log level for the application (default "ERROR")
 ```
 
-Go ahead and [deploy](https://docs.avax.network/subnets/create-a-local-subnet) first your Subnet if that's your case.
+Go ahead and [deploy](https://docs.avax.network/subnets/create-a-local-subnet) 
+first your Subnet if that's your case.
 
 If you already had deployed the Subnet instead, you see something like this:
 
@@ -301,7 +304,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ Existing local deployment
 ```
 
-Select `Existing local deployment`. This installs the upgrade file on all nodes of your local network running in the background.
+Select `Existing local deployment`. This installs the upgrade file on all nodes of your local 
+network running in the background.
 
 Et voilà. This is the output shown if all went well:
 
