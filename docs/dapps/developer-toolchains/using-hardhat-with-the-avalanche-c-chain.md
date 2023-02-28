@@ -157,9 +157,7 @@ test network.
 :::info
 
 The port in this tutorial uses 9650. Depending on how you start your local
-network, it could be different. Please check
-[here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to
-see how to retrieve the port numbers.
+network, it could be different. 
 
 :::
 
@@ -276,7 +274,8 @@ git checkout master
 binaries](https://github.com/ava-labs/avalanchego/releases) rather than building
 from source.)
 
-Confirm you have Avalanche Network Runner installed by following the steps listed [here](../../quickstart/create-a-local-test-network.md#installation)
+Confirm you have Avalanche Network Runner installed by following the steps
+listed [here](../../subnets/network-runner.md)
 
 Start Avalanche Network Runner and run a script to start a new local network.
 
