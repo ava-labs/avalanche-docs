@@ -8,7 +8,7 @@ To do this, create a `upgrade.json` file and place it in the appropriate directo
 This document describes how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
 
 
-The document [Upgrade a Subnet](./subnet-upgrade) 
+The document [Upgrade a Subnet](./subnet-upgrade.md) 
 describes all the background information required regarding Subnet upgrades.
 
 :::warning
@@ -20,14 +20,14 @@ Failing to do so can potentially grind your network to a halt.
 :::
 
 This tutorial assumes that you have already 
-[installed](./install-avalanche-cli) Avalanche-CLI.
+[installed](./install-avalanche-cli.md) Avalanche-CLI.
 It assumes you have already created and deployed a Subnet called `testSubnet`. 
 
 
 ## Generate the Upgrade File
 
 The 
-[Precompiles](./customize-a-subnet#network-upgrades-enabledisable-precompiles) 
+[Precompiles](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) 
 documentation describes what files the network upgrade requires, and where to place them.
 
 To generate a valid `upgrade.json` file, run:
@@ -45,7 +45,7 @@ The provided subnet name "testSubnet" does not exist
 
 Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. 
 If that's the case, please go ahead and 
-[create](./build-first-subnet) the Subnet first.
+[create](./build-first-subnet.md) the Subnet first.
 
 If the Subnet definition exists, the tool launches a wizard.
 It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
@@ -84,7 +84,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Transaction Allow List
 ```
 
-Refer to [Precompiles](./customize-a-subnet#precompiles) 
+Refer to [Precompiles](./customize-a-subnet.md#precompiles) 
 for a description of available precompiles and how to configure them. 
 
 Make sure you understand precompiles thoroughly and how to configure them before 
@@ -95,7 +95,7 @@ by prompting relevant questions.
 For the sake of this tutorial, select `Transaction Allow List`. 
 The document 
 [Restricting Who Can Submit 
-Transactions](./customize-a-subnet#restricting-who-can-submit-transactions) 
+Transactions](./customize-a-subnet.md#restricting-who-can-submit-transactions) 
 describes what this precompile is about.
 
 ```shell
@@ -297,7 +297,7 @@ Global Flags:
       --log-level string   log level for the application (default "ERROR")
 ```
 
-Go ahead and [deploy](./create-a-local-subnet) 
+Go ahead and [deploy](./create-a-local-subnet.md) 
 first your Subnet if that's your case.
 
 If you already had deployed the Subnet instead, you see something like this:
