@@ -113,8 +113,9 @@ Next, select `Local Network`.
 This command boots a five node Avalanche network on your machine. It needs to download the latest
 versions of AvalancheGo and Subnet-EVM. The command may take a couple minutes to run.
 
-If you run `bash` on your shell and are running Avalanche-CLI on ARM64, you will require Rosetta 2 to be able to
-deploy Subnets locally. You can download Rosetta 2 using `softwareupdate --install-rosetta` .
+If you run `bash` on your shell and are running Avalanche-CLI on ARM64, you will require 
+Rosetta 2 to be able to deploy Subnets locally. You can download Rosetta 2 using 
+`softwareupdate --install-rosetta` .
 
 If all works as expected, the command output should look something like this:
 
