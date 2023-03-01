@@ -127,7 +127,6 @@ const sidebars = {
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-custom-subnet',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
@@ -183,7 +182,6 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/avalanche-subnet-faucet',
-        'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
         'subnets/deploy-a-gnosis-safe-on-your-evm'

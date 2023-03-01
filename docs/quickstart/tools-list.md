@@ -31,16 +31,6 @@ GitHub: [https://github.com/ava-labs/avalanche-cli](https://github.com/ava-labs/
 
 Document: [Create an EVM Subnet on a Local Network](../subnets/create-a-local-subnet.md)
 
-## Subnet CLI
-
-Subnet CLI is command-line interface to manage Avalanche Subnets. It is intended
-for provisioning testnet or Mainnet Subnets in production and allows for the use
-of Ledger device to store the controlling keys to the Subnet for increased
-operational security.
-
-GitHub: [https://github.com/ava-labs/subnet-cli](https://github.com/ava-labs/subnet-cli)
-
-Document: [Subnet CLI](../subnets/subnet-cli.md)
 
 ## Avalanche Network Runner (ANR)
 

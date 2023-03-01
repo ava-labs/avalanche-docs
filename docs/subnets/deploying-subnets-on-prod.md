@@ -133,10 +133,9 @@ which will impact your validator's uptime, thus staking rewards, and the stabili
 ## Subnet Deploy
 
 Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended
-tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
+tool to do that is [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
-Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.md). We will
-highlight the main steps below.
+Instructions for deployment by Avalanche-CLI can be found [here](./create-a-mainnet-subnet.md). 
 
 ### Ledger HW Wallet
 
@@ -162,44 +161,7 @@ to production you probably have it mapped out already.
 If you want to review, we have a description of the genesis file in our document on [customizing EVM
 Subnets](customize-a-subnet.md).
 
-### Subnet-CLI Wizard
 
-Creating a Subnet is a multistep process. You need to:
-
-- create a `VMID`
-- create the Subnet
-- create the blockchain in the Subnet
-- add validators to Subnet
-
-Fortunately, to minimize potential errors and streamline the process Subnet-CLi has a Wizard command
-that does most of the work for you and guides you through the process.
-
-Before running the wizard you will need to [create the
-`VMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the
-genesis `json` file.
-
-An example of wizard command-line could look like:
-
-<!-- markdownlint-disable MD013 -->
-
-```bash
-subnet-cli wizard \
---ledger \
---node-ids=NodeID-741aqvs6R4iuHDyd1qT1NrFTmsgu78dc4,NodeID-K7Y79oAmBntAcdkyY1CLxCim8QuqcZbBp,NodeID-C3EY6u4v7DDi6YEbYf1wmXdvkEFXYuXNW,NodeID-AiLGeqQfh9gZY3Y8wLMD15tuJtsJHq5Qi \
---vm-genesis-path=prod-genesis.json \
---vm-id=tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH \
---chain-name=prodSubnet
-```
-
-<!-- markdownlint-enable MD013 -->
-
-Please refer to the Subnet-CLI docs for [detailed instructions](subnet-cli.md#subnet-cli-wizard).
-
-If the wizard completes correctly your Subnet will now be created, deployed and available to see in
-[the Subnet explorer](https://subnets.avax.network/subnets). Congrats!
-
-You can also use Subnet-CLI to manage your Subnet after the initial deploy, to add new validators,
-renew ones that expired and so on. Familiarize yourself with Subnet-CLI, you be using it often!
 
 ## Validator Configuration
 
