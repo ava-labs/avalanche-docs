@@ -34,7 +34,8 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Updated the minimum Golang version to `v1.19.6`
 - Fixed `rpcchainvm` signal handling to only shutdown upon receipt of `SIGTERM`
 - Added `warp.Signature#NumSigners` for better cost tracking support
-- Added `snow.Context#PublicKey` to provide access to the local node's BLS public key inside the VM execution environment
+- Added `snow.Context#PublicKey` to provide access to the local node's BLS public
+  key inside the VM execution environment
 - Renamed Avalanche consensus metric prefix to `avalanche_{chainID}_avalanche`
 - Specified an explicit TCP `Linger` timeout of `15` seconds
 - Updated the `secp256k1` library to `v4.1.0`
