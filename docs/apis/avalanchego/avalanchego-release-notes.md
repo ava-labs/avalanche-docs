@@ -6,6 +6,49 @@
 
 :::
 
+## V1.9.10 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.10)
+
+**Banff.10 - Warp UX Improvements**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `24`.
+
+**Note: The `--whitelisted-subnets` flag was removed in `v1.9.10`. Use `--track-subnets` instead.**
+
+**MerkleDB**
+
+- Removed parent tracking from `merkledb.trieView`
+- Removed `base` caches from `merkledb.trieView`
+- Fixed error handling during `merkledb` intermediate node eviction
+- Replaced values larger than `32` bytes with a hash in the `merkledb` hash representation
+
+**AVM**
+
+- Refactored `avm` API tx creation into a standalone `Spender` implementation
+- Migrated UTXO interfaces from the `platformvm` into the `components` for use in the `avm`
+- Refactored `avm` `tx.SyntacticVerify` to expect the config rather than the fee fields
+
+**Miscellaneous**
+
+- Updated the minimum golang version to `v1.19.6`
+- Fixed `rpcchainvm` signal handling to only shutdown upon receipt of `SIGTERM`
+- Added `warp.Signature#NumSigners` for better cost tracking support
+- Added `snow.Context#PublicKey` to provide access to the local node's BLS public key inside the VM execution environment
+- Renamed Avalanche consensus metric prefix to `avalanche_{chainID}_avalanche`
+- Specified an explicit TCP `Linger` timeout of `15` seconds
+- Updated the `secp256k1` library to `v4.1.0`
+
+**Cleanup**
+
+- Removed support for the `--whitelisted-subnets` flag
+- Removed unnecessary abstractions from the `app` package
+- Removed `Factory` embedding from `platformvm.VM` and `avm.VM`
+- Removed `validator` package from the `platformvm`
+- Removed `timer.TimeoutManager`
+- Replaced `snow.Context` in `Factory.New` with `logging.Logger`
+- Renamed `set.Bits#Len` to `BitLen` and `set.Bits#HammingWeight` to `Len` to align with `set.Bits64`
+
 ## V1.9.9 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.9)
 
 **Banff.9 - gRPC Plugin Protocol**
@@ -14,7 +57,7 @@ This version is backwards compatible to
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
 It is optional, but encouraged. The supported plugin version is `23`.
 
-**Note: The `--whitelisted-subnets` flag was deprecated in `v1.9.6`. 
+**Note: The `--whitelisted-subnets` flag was deprecated in `v1.9.6`.
 This is the last release in which it will be supported. Use `--track-subnets` instead.**
 
 **Monitoring**
