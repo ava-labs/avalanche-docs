@@ -110,7 +110,7 @@ flags or even the `--config-file` flag as well, according to your need.
 ## Just Want the Commands? We Got You
 
 :::caution
-Run `go version`. **It should be 1.18.1 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.19.6 or above.** Run `echo $GOPATH`. **It should not be empty.**
 :::
 
 ```bash

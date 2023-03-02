@@ -2,8 +2,6 @@
 
 | Title                                                                                                                     | Description                                                              |
 | :------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
-| [**Create a Local Test Network**](create-a-local-test-network.md)                                                         | Create a local Avalanche test network.                                   |
-| [**Fund a Local Test Network**](fund-a-local-test-network.md)                                                             | Fund an address on a local Avalanche test network.                       |
 | [**Fuji Workflow**](fuji-workflow.md)                                                                                     | Avalanche Fuji Workflow.                                                 |
 | [**Transfers AVAX Tokens Between Chains**](cross-chain-transfers.md)                                                      | Send AVAX between Chains                                                 |
 | [**Multi Signature UTXOs with AvalancheJS**](multisig-utxos-with-avalanchejs.md)                                          | Learn about creating and issuing multi signature UTXOs with AvalancheJS  |

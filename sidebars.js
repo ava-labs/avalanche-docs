@@ -56,8 +56,6 @@ const sidebars = {
 
   quickStart: [
     'quickstart/README',
-    'quickstart/create-a-local-test-network',
-    'quickstart/fund-a-local-test-network',
     'quickstart/fuji-workflow',
     'quickstart/cross-chain-transfers',
     'quickstart/multisig-utxos-with-avalanchejs',
@@ -144,6 +142,7 @@ const sidebars = {
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
         'subnets/how-to-upgrade-subnet-vm',
+        'subnets/how-to-upgrade-precompile',
         'subnets/how-to-run-cli-with-docker',
         'subnets/how-to-import-subnet',
         'subnets/troubleshoot-deployments'
@@ -255,6 +254,7 @@ const sidebars = {
       ]
     },
     'apis/metrics',
+    'apis/glacier'
   ],
   nodes: [
     'nodes/README',

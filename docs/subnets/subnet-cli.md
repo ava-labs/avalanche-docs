@@ -62,8 +62,8 @@ a local node on Fuji Testnet, you can use the URI from your local node too.
 use the URI from your local node too.
 - For local network, please use `http://127.0.0.1:port` or `http://localhost:port` where port is the
 actual port number of local AvalancheGo. To create a 5-node local network, please follow
-[this](../quickstart/create-a-local-test-network.md#avalanche-network-runner) and get the
-[correct port number for use](../quickstart/create-a-local-test-network.md#retrieve-all-nodes).
+[this](../subnets/network-runner.md) and get the
+[correct port number for use](../subnets/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
 
 ### Ledger Support
 
