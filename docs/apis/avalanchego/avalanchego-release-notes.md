@@ -25,13 +25,13 @@ It is optional, but encouraged. The supported plugin version is `24`.
 
 **AVM**
 
-- Refactored `avm` API tx creation into a standalone `Spender` implementation
+- Refactored `avm` API TX creation into a standalone `Spender` implementation
 - Migrated UTXO interfaces from the `platformvm` into the `components` for use in the `avm`
 - Refactored `avm` `tx.SyntacticVerify` to expect the config rather than the fee fields
 
 **Miscellaneous**
 
-- Updated the minimum golang version to `v1.19.6`
+- Updated the minimum Golang version to `v1.19.6`
 - Fixed `rpcchainvm` signal handling to only shutdown upon receipt of `SIGTERM`
 - Added `warp.Signature#NumSigners` for better cost tracking support
 - Added `snow.Context#PublicKey` to provide access to the local node's BLS public key inside the VM execution environment
