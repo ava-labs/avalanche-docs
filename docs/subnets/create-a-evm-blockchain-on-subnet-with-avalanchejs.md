@@ -24,7 +24,7 @@ explaining Subnets, building custom VMs, and a lot more.
 
 ## Requirements
 
-- [Go](https://golang.org/doc/install) version >= 1.18.1
+- [Go](https://golang.org/doc/install) version >= 1.19.6
 - [NodeJS](https://nodejs.org/en) Node >= 10.16 and npm >= 5.6
 
 ## Project Structure
