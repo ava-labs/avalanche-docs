@@ -253,6 +253,7 @@ const sidebars = {
       ]
     },
     'apis/metrics',
+    'apis/glacier'
   ],
   nodes: [
     'nodes/README',
