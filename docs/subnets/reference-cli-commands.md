@@ -395,6 +395,7 @@ The `subnet vmid` command prints the VMID for the given Subnet.
 ```shell
 avalanche subnet vmid [subnetName] 
 ```
+
 ## Network
 
 The `network` command suite provides a collection of tools for managing local Subnet
