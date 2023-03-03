@@ -386,6 +386,15 @@ avalanche subnet stats [subnetName] [flags]
     --testnet testnet   print stats on testnet (alias for `fuji`)
 ```
 
+### Subnet VMID
+
+The `subnet vmid` command prints the VMID for the given Subnet.
+
+**Usage:**
+
+```shell
+avalanche subnet vmid [subnetName] 
+```
 ## Network
 
 The `network` command suite provides a collection of tools for managing local Subnet
