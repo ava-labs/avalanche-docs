@@ -146,8 +146,7 @@ Therefore, protecting that key is of the utmost operational importance. Which is
 recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and
 access that private key.
 
-Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because
-losing control of the managing would be catastrophic. General instruction on how to use a Ledger
+General instruction on how to use a Ledger
 device with Avalanche can be found
 [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
