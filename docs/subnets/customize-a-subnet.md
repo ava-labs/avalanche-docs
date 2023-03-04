@@ -161,7 +161,6 @@ Note: please remove `airdropHash` and `airdropAmount` fields if you want to star
 Here are a few examples on how a genesis file is used:
 
 - [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
-- [Subnet-CLI](./subnet-cli.md#subnet-cli-create-blockchain)
 
 ### Setting the Genesis Allocation
 

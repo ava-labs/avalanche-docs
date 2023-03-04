@@ -1230,8 +1230,7 @@ If no argument is given, the path defaults to a binary named with default VM ID:
 
 This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier
 for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array
-and encoded in CB58. See [this](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to
-create your own VM ID.
+and encoded in CB58. 
 
 ### VM Aliases
 
