@@ -22,7 +22,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
 
 **Ledger**
 
-- Added ledger tx parsing support
+- Added Ledger TX parsing support
 
 **MerkleDB**
 
