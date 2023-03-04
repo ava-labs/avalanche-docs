@@ -6,6 +6,30 @@
 
 :::
 
+## V1.9.11 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.11)
+
+**Banff.11 - Plugin Registration Regression**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `24`.
+
+**Plugins**
+
+- Removed error from `logging.NoLog#Write`
+- Added logging to the static VM factory usage
+- Fixed incorrect error being returned from `subprocess.Bootstrap`
+
+**Ledger**
+
+- Added ledger tx parsing support
+
+**MerkleDB**
+
+- Added explicit consistency guarantees when committing multiple `merkledb.trieView`s to disk at once
+- Removed reliance on premature root calculations for `merkledb.trieView` validity tracking
+- Updated `x/merkledb/README.md`
+
 ## V1.9.10 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.10)
 
 **Banff.10 - Warp UX Improvements**
