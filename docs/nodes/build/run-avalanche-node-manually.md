@@ -124,11 +124,14 @@ The binary, named `avalanchego`, is in `avalanchego/build`. If you've followed
 the instructions so far, this will be within your `$GOPATH` at:
 `$GOPATH/src/github.com/ava-labs/avalanchego/build`.
 
-To begin running AvalancheGo, run the following (hit Ctrl+C to stop your node):
+To begin running AvalancheGo, run the following:
 
 ```sh
 ./build/avalanchego
 ```
+
+To enable state sync use `state-sync-enabled`.
+To stop the node hit Ctrl+C.
 
 #### **Binary**
 
