@@ -13,7 +13,7 @@ developer docs](https://docs.gnosis-safe.io/).
 This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on
-  [Mainnet](../subnets/subnet-cli), [Fuji](../subnets/create-a-fuji-subnet) or a [Local
+  [Mainnet](../subnets/create-a-mainnet-subnet.md), [Fuji](../subnets/create-a-fuji-subnet) or a [Local
   network](../subnets/create-a-local-subnet).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis
