@@ -1061,3 +1061,69 @@ If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, 
 doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
+
+## Network Upgrades: State modification
+
+SubnetEVM allows the network operators to specify a modification to state that will take place
+at the beginning of the first block with a timestamp greater than or equal to the one specified
+in the configuration.
+
+The following three state modifications are supported:
+
+- `balanceChange`: adds a specified amount to the balance of a given account. This amount can be
+  specified as hex or decimal and must be positive.
+- `storage`: modifies the specified storage slots to the specified values. Keys and values must
+  be 32 bytes specified in hex, with a `0x` prefix.
+- `code`: modifies the code of a contract at the provided address to the specified code. The
+  code must *only* be the runtime portion of a code. 
+
+:::warning
+
+If modifying the code, note that *only* the runtime portion of the code should be provided
+in `upgrades.json`. Do not use the bytecode that would for deploying a new contract, as this
+includes the constructor code as well. Refer to your compiler's documentation for information
+on how to find the runtime portion of the contract you wish to modify.
+
+:::
+
+The state modification upgrade shown in the following `upgrades.json` performs the following
+operations at the first block after `March 8, 2023 1:30:00 AM GMT`:
+- Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
+- And adds `100` wei to the balance of the account at `0xFF00000000000000000000000000000000000000`,
+- Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xFF00000000000000000000000000000000000000`.
+
+```json
+{
+  "stateUpgrades": [
+    {
+      "blockTimestamp": 1678239000,
+      "accounts": {
+        "0x71562b71999873DB5b286dF957af199Ec94617F7": {
+          "code": "0xdeadbeef"
+        },
+        "0xFF00000000000000000000000000000000000000": {
+            "balanceChange": "0x64",
+            "storage": {
+              "0x0000000000000000000000000000000000000000000000000000000000001234": "0x0000000000000000000000000000000000000000000000000000000000006666"
+            }
+          }
+      }
+    }
+  ]
+}
+```
+
+:::warning
+
+This should only be used as a last resort alternative to forking subnet-evm and specifying
+the network upgrade in code.
+
+As use of a network upgrade to modify state is not part of the normal operation of the
+EVM. You should ensure the modifications do not invalidate any of the assumptions of 
+deployed contracts or cause incompatibilities with downstream infrastructure such as
+block explorers.
+
+:::
+
+The timestamps for upgrades set in `stateUpgrades` must be in increasing order.
+`stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
