@@ -1093,7 +1093,7 @@ The following three state modifications are supported:
   specified as hex or decimal and must be positive.
 - `storage`: modifies the specified storage slots to the specified values. Keys and values must
   be 32 bytes specified in hex, with a `0x` prefix.
-- `code`: modifies the code of a contract at the provided address to the specified code. The
+- `code`: modifies the code stored in the specified account. The
   code must _only_ be the runtime portion of a code. 
 
 :::warning
