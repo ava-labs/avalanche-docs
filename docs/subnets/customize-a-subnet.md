@@ -1068,6 +1068,9 @@ SubnetEVM allows the network operators to specify a modification to state that w
 at the beginning of the first block with a timestamp greater than or equal to the one specified
 in the configuration.
 
+The timestamps for upgrades in `stateUpgrades` must be in increasing order.
+`stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
+
 The following three state modifications are supported:
 
 - `balanceChange`: adds a specified amount to the balance of a given account. This amount can be
@@ -1118,12 +1121,9 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
 This should only be used as a last resort alternative to forking subnet-evm and specifying
 the network upgrade in code.
 
-As use of a network upgrade to modify state is not part of the normal operation of the
+Using a network upgrade to modify state is not part of normal operations of the
 EVM. You should ensure the modifications do not invalidate any of the assumptions of 
 deployed contracts or cause incompatibilities with downstream infrastructure such as
 block explorers.
 
 :::
-
-The timestamps for upgrades set in `stateUpgrades` must be in increasing order.
-`stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
