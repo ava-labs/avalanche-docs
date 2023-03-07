@@ -1118,7 +1118,7 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
 
 :::warning
 
-This should only be used as a last resort alternative to forking subnet-evm and specifying
+This should only be used as a last resort alternative to forking `subnet-evm` and specifying
 the network upgrade in code.
 
 Using a network upgrade to modify state is not part of normal operations of the
