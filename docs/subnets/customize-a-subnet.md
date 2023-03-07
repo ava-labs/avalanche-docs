@@ -1094,7 +1094,7 @@ The following three state modifications are supported:
 - `storage`: modifies the specified storage slots to the specified values. Keys and values must
   be 32 bytes specified in hex, with a `0x` prefix.
 - `code`: modifies the code stored in the specified account. The
-  code must _only_ be the runtime portion of a code. 
+  code must _only_ be the runtime portion of a code. The code must start with a `0x` prefix.
 
 :::warning
 
@@ -1109,8 +1109,8 @@ The `upgrades.json` file shown below describes a network upgrade that will make 
 state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM GMT`:
 
 - Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
-- And adds `100` wei to the balance of the account at `0xFF00000000000000000000000000000000000000`,
-- Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xFF00000000000000000000000000000000000000`.
+- And adds `100` wei to the balance of the account at `0xb794f5ea0ba39494ce839613fffba74279579268`,
+- Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xb794f5ea0ba39494ce839613fffba74279579268`.
 
 ```json
 {
@@ -1119,9 +1119,9 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
       "blockTimestamp": 1678239000,
       "accounts": {
         "0x71562b71999873DB5b286dF957af199Ec94617F7": {
-          "code": "0xdeadbeef"
+          "code": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80632e64cec114602d575b600080fd5b60336047565b604051603e91906067565b60405180910390f35b60008054905090565b6000819050919050565b6061816050565b82525050565b6000602082019050607a6000830184605a565b9291505056fea26469706673582212209421042a1fdabcfa2486fb80942da62c28e61fc8362a3f348c4a96a92bccc63c64736f6c63430008120033"
         },
-        "0xFF00000000000000000000000000000000000000": {
+        "0xb794f5ea0ba39494ce839613fffba74279579268": {
           "balanceChange": "0x64",
           "storage": {
             "0x0000000000000000000000000000000000000000000000000000000000001234": "0x0000000000000000000000000000000000000000000000000000000000006666"
