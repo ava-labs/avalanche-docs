@@ -1086,8 +1086,8 @@ on how to find the runtime portion of the contract you wish to modify.
 
 :::
 
-The state modification upgrade shown in the following `upgrades.json` performs the following
-operations at the first block after `March 8, 2023 1:30:00 AM GMT`:
+The `upgrades.json` file shown below describes a network upgrade that will make the following
+state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM GMT`:
 - Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
 - And adds `100` wei to the balance of the account at `0xFF00000000000000000000000000000000000000`,
 - Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xFF00000000000000000000000000000000000000`.
