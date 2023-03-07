@@ -1079,8 +1079,8 @@ The following three state modifications are supported:
 
 :::warning
 
-If modifying the code, note that *only* the runtime portion of the code should be provided
-in `upgrades.json`. Do not use the bytecode that would for deploying a new contract, as this
+If modifying the code, *only* the runtime portion of the bytecode should be provided in
+`upgrades.json`. Do not use the bytecode that would be used for deploying a new contract, as this
 includes the constructor code as well. Refer to your compiler's documentation for information
 on how to find the runtime portion of the contract you wish to modify.
 
