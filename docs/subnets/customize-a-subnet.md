@@ -1069,7 +1069,7 @@ at the beginning of the first block with a timestamp greater than or equal to th
 in the configuration.
 
 This provides a last resort path to updating non-upgradeable contracts via a network upgrade
-(e.g., to fix issues when you are running your own blockchain).
+(for example, to fix issues when you are running your own blockchain).
 
 :::warning
 
