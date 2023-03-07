@@ -1078,11 +1078,11 @@ The following three state modifications are supported:
 - `storage`: modifies the specified storage slots to the specified values. Keys and values must
   be 32 bytes specified in hex, with a `0x` prefix.
 - `code`: modifies the code of a contract at the provided address to the specified code. The
-  code must *only* be the runtime portion of a code. 
+  code must _only_ be the runtime portion of a code. 
 
 :::warning
 
-If modifying the code, *only* the runtime portion of the bytecode should be provided in
+If modifying the code, _only_ the runtime portion of the bytecode should be provided in
 `upgrades.json`. Do not use the bytecode that would be used for deploying a new contract, as this
 includes the constructor code as well. Refer to your compiler's documentation for information
 on how to find the runtime portion of the contract you wish to modify.
@@ -1091,6 +1091,7 @@ on how to find the runtime portion of the contract you wish to modify.
 
 The `upgrades.json` file shown below describes a network upgrade that will make the following
 state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM GMT`:
+
 - Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
 - And adds `100` wei to the balance of the account at `0xFF00000000000000000000000000000000000000`,
 - Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xFF00000000000000000000000000000000000000`.
