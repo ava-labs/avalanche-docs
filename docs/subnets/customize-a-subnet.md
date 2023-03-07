@@ -1068,6 +1068,22 @@ SubnetEVM allows the network operators to specify a modification to state that w
 at the beginning of the first block with a timestamp greater than or equal to the one specified
 in the configuration.
 
+This provides a last resort path to updating non-upgradeable contracts via a network upgrade
+(e.g., to fix issues when you are running your own blockchain).
+
+:::warning
+
+This should only be used as a last resort alternative to forking `subnet-evm` and specifying
+the network upgrade in code.
+
+Using a network upgrade to modify state is not part of normal operations of the
+EVM. You should ensure the modifications do not invalidate any of the assumptions of 
+deployed contracts or cause incompatibilities with downstream infrastructure such as
+block explorers.
+
+:::
+
+
 The timestamps for upgrades in `stateUpgrades` must be in increasing order.
 `stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
 
@@ -1117,14 +1133,3 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
 }
 ```
 
-:::warning
-
-This should only be used as a last resort alternative to forking `subnet-evm` and specifying
-the network upgrade in code.
-
-Using a network upgrade to modify state is not part of normal operations of the
-EVM. You should ensure the modifications do not invalidate any of the assumptions of 
-deployed contracts or cause incompatibilities with downstream infrastructure such as
-block explorers.
-
-:::
