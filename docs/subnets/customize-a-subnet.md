@@ -1064,7 +1064,7 @@ doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 ## Network Upgrades: State Modification
 
-SubnetEVM allows the network operators to specify a modification to state that will take place
+Subnet-EVM allows the network operators to specify a modification to state that will take place
 at the beginning of the first block with a timestamp greater than or equal to the one specified
 in the configuration.
 
