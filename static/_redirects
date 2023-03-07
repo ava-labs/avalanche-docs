@@ -1,3 +1,8 @@
+# 03/02/2023
+
+/subnets/subnet-cli https://github.com/ava-labs/subnet-cli
+/subnets/create-a-fuji-subnet-subnet-cli /subnets/create-a-fuji-subnet
+
 # 02/23/2023
 
 /quickstart/create-a-local-test-network /subnets/build-first-subnet

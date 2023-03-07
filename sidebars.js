@@ -127,7 +127,6 @@ const sidebars = {
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-custom-subnet',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
@@ -141,6 +140,7 @@ const sidebars = {
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
+        'subnets/how-to-upgrade-subnet-vm',
         'subnets/how-to-upgrade-precompile',
         'subnets/how-to-run-cli-with-docker',
         'subnets/how-to-import-subnet',
@@ -184,7 +184,6 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/avalanche-subnet-faucet',
-        'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
         'subnets/deploy-a-gnosis-safe-on-your-evm'
