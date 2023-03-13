@@ -95,7 +95,7 @@ experiment and build on Avalanche.
 
 #### **Source Code**
 
-First install Go 1.18.1 or later. Follow the instructions
+First install Go 1.19.6 or later. Follow the instructions
 [here](https://golang.org/doc/install). You can verify by running `go version`.
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces.

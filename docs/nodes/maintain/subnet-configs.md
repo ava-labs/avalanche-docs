@@ -50,6 +50,18 @@ this configuration in order to create a full private Subnet.
 
 :::
 
+#### `allowedNodes` (string list)
+
+If `validatorOnly=true` this allows explicitly specified NodeIDs to be allowed
+to sync the Subnet regardless of validator status. Defaults to be empty.
+
+:::tip
+
+This is a node-specific configuration. Every validator of this Subnet has to use
+this configuration in order to properly allow a node in the private Subnet.
+
+:::
+
 #### `proposerMinBlockDelay` (duration)
 
 The minimum delay performed when building snowman++ blocks. Default is set to 1 second.

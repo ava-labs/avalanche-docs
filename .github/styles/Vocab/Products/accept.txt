@@ -117,6 +117,7 @@ gif
 GitHub
 github
 Golang
+goroutines
 Grafana
 gwei
 Gwei
@@ -277,6 +278,7 @@ superset
 Swapper's
 sybil
 syncer
+Tencent
 testnet
 Testnet
 textlint

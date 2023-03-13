@@ -76,23 +76,44 @@ adversely affect your node operation.
 
 ### State Sync
 
-For example, as of [AvalancheGo v1.7.17
-(Verbier)](../../apis/avalanchego/avalanchego-release-notes.md#v1717---verbier-view-on-github),
-the default for [State Sync](#state-sync-enabled-boolean) is false. In order to
-enable it, you can add the following to `{chain-config-dir}/C/config.json`
+#### `state-sync-enabled` (boolean)
 
-```json
-{
-  "state-sync-enabled": true
-}
-```
+Set to `true` to start the chain with state sync enabled. The peer will
+download chain state from peers up to a recent block near tip, then proceed with
+normal bootstrapping.
 
-In order to make the new config take effect, `avalanchego` needs to be stopped
-and restarted.
+Defaults to perform state sync if starting a new node from scratch. However, if
+running with an existing database it will default to false and not perform state
+sync on subsequent runs.
 
-For this particular feature `State Sync` to work, you should rename/remove your
-current database, so that the node can be bootstrapped from scratch with
-state-sync enabled.
+Please note that if you need historical data, state sync isn't the right option.
+However, it is sufficient if you are just running a validator.
+
+#### `state-sync-skip-resume` (boolean)
+
+If set to `true`, the chain will not resume a previously started state sync
+operation that did not complete. Normally, the chain should be able to resume
+state syncing without any issue. Defaults to `false`.
+
+#### `state-sync-min-blocks` (int)
+
+Minimum number of blocks the chain should be ahead of the local node to prefer
+state syncing over bootstrapping. If the node's database is already close to the
+chain's tip, bootstrapping is more efficient. Defaults to `300000`.
+
+#### `state-sync-ids` (string)
+
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync
+data from. An example setting of this field would be
+`--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
+If not specified (or empty), peers are selected at random. Defaults to empty
+string (`""`).
+
+#### `state-sync-server-trie-cache` (int)
+
+Size of trie cache used for providing state sync data to peers in MBs. Should be
+a multiple of `64`. Defaults to `64`.
+
 
 ### Continuous Profiling
 
@@ -440,6 +461,11 @@ connection. Defaults to no maximum (`0`).
 Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults
 to `false`.
 
+#### `accepted-cache-size` `(int)
+
+Specifies the depth to keep accepted headers and accepted logs in the cache. This
+is particularly useful to improve the performance of `eth_getLogs` for recent logs.
+
 ### Transaction Pool
 
 #### `local-txs-enabled` (boolean)
@@ -451,6 +477,12 @@ this node). Defaults to `false`.
 
 If `true`, the APIs will allow transactions that are not replay protected
 (EIP-155) to be issued through this node. Defaults to `false`.
+
+#### `allow-unprotected-tx-hashes` ([]TxHash)
+
+Specifies an array of transaction hashes that should be allowed to bypass
+replay protection. This flag is intended for node operators that want to explicitly
+allow specific transactions to be issued through their API. Defaults to an empty list.
 
 #### `remote-tx-gossip-only-enabled` (boolean)
 
@@ -468,6 +500,42 @@ that was already gossiped once. Defaults to `60000000000` nano seconds which is
 
 Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
+#### `tx-pool-journal` (string)
+
+Specifies file path to a transaction journal to store local transactions that survive
+between node restarts.
+
+Defaults to empty string and being disabled. To enable transaction pool journaling,
+the user must specify a non-empty journal and enable local transactions via `local-txs-enabled`.
+
+#### `tx-pool-rejournal` (duration)
+
+Time interval to regenerate the local transaction journal. Defaults to 1 hour.
+
+#### `tx-pool-price-limit` (int)
+
+Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
+
+#### `tx-pool-price-bump` (int)
+
+Minimum price bump percentage to replace an already existing transaction (nonce).  Defaults to 10%.
+
+#### `tx-pool-account-slots` (int)
+
+Number of executable transaction slots guaranteed per account. Defaults to 16.
+
+#### `tx-pool-global-slots` (int)
+
+Maximum number of executable transaction slots for all accounts. Defaults to 5120.
+
+#### `tx-pool-account-queue` (int)
+
+Maximum number of non-executable transaction slots permitted per account. Defaults to 64.
+
+#### `tx-pool-global-queue` (int)
+
+Maximum number of non-executable transaction slots for all accounts. Defaults to 1024.
+
 ### Metrics
 
 #### `metrics-enabled` (boolean)
@@ -478,7 +546,88 @@ Enables metrics. Defaults to `false`.
 
 Enables expensive metrics. Defaults to `false`.
 
+### Snapshots
+
+#### `snapshot-async` (boolean)
+
+If `true`, allows snapshot generation to be executed asynchronously. Defaults to
+`true`.
+
+#### `snapshot-verification-enabled` (boolean)
+
+If `true`, verifies the complete snapshot after it has been generated. Defaults
+to `false`.
+
+### Logging
+
+#### `log-level` (string)
+
+Defines the log level for the chain. Must be one of `"trace"`, `"debug"`, `"info"`,
+`"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
+
+#### `log-json-format` (bool)
+
+If `true`, changes logs to JSON format. Defaults to `false`.
+
+### Keystore Settings
+
+#### `keystore-directory` (string)
+
+The directory that contains private keys. Can be given as a relative path. If
+empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty
+string (`""`).
+
+#### `keystore-external-signer` (string)
+
+Specifies an external URI for a clef-type signer. Defaults to the empty string
+(`""` as not enabled).
+
+#### `keystore-insecure-unlock-allowed` (bool)
+
+If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults
+to `false`.
+
 ### Database
+
+#### `trie-clean-cache` (int)
+
+Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`.
+Defaults to `512`.
+
+#### `trie-dirty-cache` (int)
+
+Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed
+this limit, they are written to disk. Defaults to `256`.
+
+#### `trie-dirty-commit-target` (int)
+
+Memory limit to target in the dirty cache before performing a commit (in MBs).
+Defaults to `20`.
+
+#### `snapshot-cache` (int)
+
+Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
+`64`. Defaults to `256`.
+
+#### `trie-clean-journal` (string)
+
+Directory to use to save the trie clean cache (must be populated to enable
+journaling the trie clean cache). Empty and disabled by default.
+
+#### `trie-clean-rejournal` (duration)
+
+Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must
+be populated to enable journaling the trie clean cache).
+
+#### `acceptor-queue-limit` (int)
+
+Specifies the maximum number of blocks to queue during block acceptance before
+blocking on Accept. Defaults to `64`.
+
+#### `commit-interval` (int)
+
+Specifies the commit interval at which to persist the merkle trie to disk.
+Defaults to `4096`.
 
 #### `pruning-enabled` (boolean)
 
@@ -568,100 +717,15 @@ should not be changed in between runs until offline pruning has completed.
 Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
 transaction lookup indices will be maintained for all blocks. Defaults to `0`.
 
-### Snapshots
+### VM Networking
 
-#### `snapshot-async` (boolean)
+#### `max-outbound-active-requests` (int)
 
-If `true`, allows snapshot generation to be executed asynchronously. Defaults to
-`true`.
+Specifies the maximum number of outbound VM2VM requests in flight at once. Defaults to `16`.
 
-#### `snapshot-verification-enabled` (boolean)
+#### `max-outbound-active-cross-chain-requests` (int)
 
-If `true`, verifies the complete snapshot after it has been generated. Defaults
-to `false`.
-
-### Log Level
-
-#### `log-level` (string)
-
-Defines the C-chain log level. Must be one of `"trace"`, `"debug"`, `"info"`,
-`"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
-
-### Keystore Settings
-
-#### `keystore-directory` (string)
-
-The directory that contains private keys. Can be given as a relative path. If
-empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty
-string (`""`).
-
-#### `keystore-external-signer` (string)
-
-Specifies an external URI for a clef-type signer. Defaults to the empty string
-(`""` as not enabled).
-
-#### `keystore-insecure-unlock-allowed` (bool)
-
-If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults
-to `false`.
-
-### State Sync Settings
-
-#### `state-sync-enabled` (boolean)
-
-Set to `true` to start the C-Chain with state sync enabled. The peer will
-download chain state from peers up to a recent block near tip, then proceed with
-normal bootstrapping. Defaults to `false`.
-
-Please note that if you need historical data, state sync isn't the right option.
-However, it is sufficient if you are just running a validator.
-
-#### `state-sync-skip-resume` (boolean)
-
-If set to `true`, the chain will not resume a previously started state sync
-operation that did not complete. Normally, the chain should be able to resume
-state syncing without any issue. Defaults to `false`.
-
-#### `state-sync-min-blocks` (int)
-
-Minimum number of blocks the chain should be ahead of the local node to prefer
-state syncing over bootstrapping. If the node's database is already close to the
-chain's tip, bootstrapping is more efficient. Defaults to `300000`.
-
-#### `state-sync-ids` (string)
-
-Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync
-data from. An example setting of this field would be
-`--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
-If not specified (or empty), peers are selected at random. Defaults to empty
-string (`""`).
-
-#### `state-sync-server-trie-cache` (int)
-
-Size of trie cache used for providing state sync data to peers in MBs. Should be
-a multiple of `64`. Defaults to `64`.
-
-### Cache Configuration
-
-#### `trie-clean-cache` (int)
-
-Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`.
-Defaults to `512`.
-
-#### `trie-dirty-cache` (int)
-
-Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed
-this limit, they are written to disk. Defaults to `256`.
-
-#### `trie-dirty-commit-target` (int)
-
-Memory limit to target in the dirty cache before performing a commit (in MBs).
-Defaults to `20`.
-
-#### `snapshot-cache` (int)
-
-Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
-`64`. Defaults to `256`.
+Specifies the maximum number of outbound cross-chain requests in flight at once. Defaults to `64`.
 
 ### Miscellaneous
 

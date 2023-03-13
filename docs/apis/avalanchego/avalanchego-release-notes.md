@@ -6,6 +6,145 @@
 
 :::
 
+## V1.9.11 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.11)
+
+**Banff.11 - Plugin Registration Regression**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `24`.
+
+**Plugins**
+
+- Removed error from `logging.NoLog#Write`
+- Added logging to the static VM factory usage
+- Fixed incorrect error being returned from `subprocess.Bootstrap`
+
+**Ledger**
+
+- Added Ledger TX parsing support
+
+**MerkleDB**
+
+- Added explicit consistency guarantees when committing multiple `merkledb.trieView`s to disk at once
+- Removed reliance on premature root calculations for `merkledb.trieView` validity tracking
+- Updated `x/merkledb/README.md`
+
+## V1.9.10 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.10)
+
+**Banff.10 - Warp UX Improvements**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `24`.
+
+**Note: The `--whitelisted-subnets` flag was removed in `v1.9.10`. Use `--track-subnets` instead.**
+
+**MerkleDB**
+
+- Removed parent tracking from `merkledb.trieView`
+- Removed `base` caches from `merkledb.trieView`
+- Fixed error handling during `merkledb` intermediate node eviction
+- Replaced values larger than `32` bytes with a hash in the `merkledb` hash representation
+
+**AVM**
+
+- Refactored `avm` API TX creation into a standalone `Spender` implementation
+- Migrated UTXO interfaces from the `platformvm` into the `components` for use in the `avm`
+- Refactored `avm` `tx.SyntacticVerify` to expect the config rather than the fee fields
+
+**Miscellaneous**
+
+- Updated the minimum Golang version to `v1.19.6`
+- Fixed `rpcchainvm` signal handling to only shutdown upon receipt of `SIGTERM`
+- Added `warp.Signature#NumSigners` for better cost tracking support
+- Added `snow.Context#PublicKey` to provide access to the local node's BLS public
+  key inside the VM execution environment
+- Renamed Avalanche consensus metric prefix to `avalanche_{chainID}_avalanche`
+- Specified an explicit TCP `Linger` timeout of `15` seconds
+- Updated the `secp256k1` library to `v4.1.0`
+
+**Cleanup**
+
+- Removed support for the `--whitelisted-subnets` flag
+- Removed unnecessary abstractions from the `app` package
+- Removed `Factory` embedding from `platformvm.VM` and `avm.VM`
+- Removed `validator` package from the `platformvm`
+- Removed `timer.TimeoutManager`
+- Replaced `snow.Context` in `Factory.New` with `logging.Logger`
+- Renamed `set.Bits#Len` to `BitLen` and `set.Bits#HammingWeight` to `Len` to align with `set.Bits64`
+
+## V1.9.9 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.9)
+
+**Banff.9 - gRPC Plugin Protocol**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `23`.
+
+**Note: The `--whitelisted-subnets` flag was deprecated in `v1.9.6`.
+This is the last release in which it will be supported. Use `--track-subnets` instead.**
+
+**Monitoring**
+
+- Added warning when the P2P server IP is private
+- Added warning when the HTTP server IP is potentially publicly reachable
+- Removed `merkledb.trieView#calculateIDs` tracing when no recalculation is needed
+
+**Databases**
+
+- Capped the number of goroutines that `merkledb.trieView#calculateIDsConcurrent` will create
+- Removed `nodb` package
+- Refactored `Batch` implementations to share common code
+- Added `Batch.Replay` invariant tests
+- Converted to use `require` in all `database` interface tests
+
+**Cryptography**
+
+- Moved the `secp256k1` implementations to a new `secp256k1` package out of the `crypto` package
+- Added `rfc6979` compliance tests to the `secp256k1` signing implementation
+- Removed unused cryptography implementations `ed25519`, `rsa`, and `rsapss`
+- Removed unnecessary cryptography interfaces `crypto.Factory`, `crypto.RecoverableFactory`,
+  `crypto.PublicKey`, and `crypto.PrivateKey`
+- Added verification when parsing `secp256k1` public keys to ensure usage of the compressed format
+
+**API**
+
+- Removed delegators from `platform.getCurrentValidators` unless a single `nodeID` is requested
+- Added `delegatorCount` and `delegatorWeight` to the validators returned by `platform.getCurrentValidators`
+
+**Documentation**
+
+- Improved documentation on the `block.WithVerifyContext` interface
+- Fixed `--public-ip` and `--public-ip-resolution-service` CLI flag descriptions
+- Updated `README.md` to explicitly reference `SECURITY.md`
+
+**Coreth**
+
+- Enabled state sync by default when syncing from an empty database
+- Increased block gas limit to 15M for `Cortina` Network Upgrade
+- Added back file tracer endpoint
+- Added back JS tracer
+
+**Miscellaneous**
+
+- Added `allowedNodes` to the Subnet config for `validatorOnly` Subnets
+- Removed the `hashicorp/go-plugin` dependency to improve plugin flexibility
+- Replaced specialized `bag` implementations with generic `bag` implementations
+- Added `mempool` package to the `avm`
+- Added `chain.State#IsProcessing` to simplify integration with `block.WithVerifyContext`
+- Added `StateSyncMinVersion` to `sync.ClientConfig`
+- Added validity checks for `InitialStakeDuration` in a custom network genesis
+- Removed unnecessary reflect call when marshalling an empty slice
+
+**Cleanup**
+
+- Renamed `teleporter` package to `warp`
+- Replaced `bool` flags in P-chain state diffs with an `enum`
+- Refactored Subnet configs to more closely align between the primary network and Subnets
+- Simplified the `utxo.Spender` interface
+- Removed unused field `common.Config#Validators`
+
 ## V1.9.8 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.8)
 
 **Banff.8 - PROXY Protocol**
@@ -786,7 +925,7 @@ optional, but encouraged. The supported plugin version is `15`.
 
 - Refactored platformvm metrics handling
 - Refactored platformvm block creation
-- Introduced support to prevent empty nodeID use on the P-chain to be activated in a future upgrade
+- Introduced support to prevent empty `nodeID` use on the P-chain to be activated in a future upgrade
 
 **Coreth**
 
@@ -1250,7 +1389,7 @@ optional, but encouraged.
 
 **Networking**
 
-- Refactored the networking library to track potential peers by nodeID rather than IP.
+- Refactored the networking library to track potential peers by `nodeID` rather than IP.
 - Separated peer connections from the mesh network implementation to simplify testing.
 - Fixed duplicate `Connected` messages bug.
 - Supported establishing outbound connections with peers reporting different inbound and outbound IPs.
@@ -1951,7 +2090,7 @@ see the expected update times in the v1.5.0 release.
 
 - Added additional logging around bubbling votes.
 
-## `V1.5.1-eth_call` ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
+## V1.5.1-eth_call ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
 
 This update is backwards compatible with
 [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please

@@ -161,7 +161,6 @@ Note: please remove `airdropHash` and `airdropAmount` fields if you want to star
 Here are a few examples on how a genesis file is used:
 
 - [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
-- [Subnet-CLI](./subnet-cli.md#subnet-cli-create-blockchain)
 
 ### Setting the Genesis Allocation
 
@@ -1062,3 +1061,75 @@ If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, 
 doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
 
 :::
+
+## Network Upgrades: State Upgrades
+
+Subnet-EVM allows the network operators to specify a modification to state that will take place
+at the beginning of the first block with a timestamp greater than or equal to the one specified
+in the configuration.
+
+This provides a last resort path to updating non-upgradeable contracts via a network upgrade
+(for example, to fix issues when you are running your own blockchain).
+
+:::warning
+
+This should only be used as a last resort alternative to forking `subnet-evm` and specifying
+the network upgrade in code.
+
+Using a network upgrade to modify state is not part of normal operations of the
+EVM. You should ensure the modifications do not invalidate any of the assumptions of 
+deployed contracts or cause incompatibilities with downstream infrastructure such as
+block explorers.
+
+:::
+
+
+The timestamps for upgrades in `stateUpgrades` must be in increasing order.
+`stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
+
+The following three state modifications are supported:
+
+- `balanceChange`: adds a specified amount to the balance of a given account. This amount can be
+  specified as hex or decimal and must be positive.
+- `storage`: modifies the specified storage slots to the specified values. Keys and values must
+  be 32 bytes specified in hex, with a `0x` prefix.
+- `code`: modifies the code stored in the specified account. The
+  code must _only_ be the runtime portion of a code. The code must start with a `0x` prefix.
+
+:::warning
+
+If modifying the code, _only_ the runtime portion of the bytecode should be provided in
+`upgrades.json`. Do not use the bytecode that would be used for deploying a new contract, as this
+includes the constructor code as well. Refer to your compiler's documentation for information
+on how to find the runtime portion of the contract you wish to modify.
+
+:::
+
+The `upgrades.json` file shown below describes a network upgrade that will make the following
+state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM GMT`:
+
+- Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
+- And adds `100` wei to the balance of the account at `0xb794f5ea0ba39494ce839613fffba74279579268`,
+- Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xb794f5ea0ba39494ce839613fffba74279579268`.
+
+```json
+{
+  "stateUpgrades": [
+    {
+      "blockTimestamp": 1678239000,
+      "accounts": {
+        "0x71562b71999873DB5b286dF957af199Ec94617F7": {
+          "code": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80632e64cec114602d575b600080fd5b60336047565b604051603e91906067565b60405180910390f35b60008054905090565b6000819050919050565b6061816050565b82525050565b6000602082019050607a6000830184605a565b9291505056fea26469706673582212209421042a1fdabcfa2486fb80942da62c28e61fc8362a3f348c4a96a92bccc63c64736f6c63430008120033"
+        },
+        "0xb794f5ea0ba39494ce839613fffba74279579268": {
+          "balanceChange": "0x64",
+          "storage": {
+            "0x0000000000000000000000000000000000000000000000000000000000001234": "0x0000000000000000000000000000000000000000000000000000000000006666"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
