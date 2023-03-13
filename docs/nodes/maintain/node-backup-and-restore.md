@@ -61,7 +61,6 @@ node on another machine is to run a new installation with those same two files.
 If these two files are removed from a node, which is restarted afterwards, they 
 will be recreated and a new node ID will be assigned.  
 
-
 :::caution
 
 If you have users defined in the keystore of your node, then you need to back up
@@ -95,7 +94,6 @@ Let's get the staker files off the machine running the node.
 #### From Local Node
 
 If you're running the node locally, on your desktop computer, just navigate to
-where the files are and copy them somewhere safe.
 
 On a default Linux installation, the path to them will be
 `/home/USERNAME/.avalanchego/staking/`, where `USERNAME` needs to be replaced
