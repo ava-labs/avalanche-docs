@@ -38,3 +38,10 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | [**What is Staking?**](./validate/staking.md)        | Explain the concept of staking                                                         |
 | [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../overview/getting-started/avalanche-platform.md) |
+
+
+## FAQ
+
+|                                                      |                                                                                        |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| [**Node FAQ**](./FAQ/Node-FAQ.md)        | Common questions and errors                                                       |
