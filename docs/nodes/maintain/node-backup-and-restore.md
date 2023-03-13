@@ -94,7 +94,7 @@ Let's get the staker files off the machine running the node.
 #### From Local Node
 
 If you're running the node locally, on your desktop computer, just navigate to
-where the files are and copy them somewhere else.
+where the files are and copy them somewhere safe.
 
 On a default Linux installation, the path to them will be
 `/home/USERNAME/.avalanchego/staking/`, where `USERNAME` needs to be replaced
