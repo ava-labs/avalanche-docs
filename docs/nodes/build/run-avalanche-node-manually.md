@@ -130,7 +130,6 @@ To begin running AvalancheGo, run the following:
 ./build/avalanchego
 ```
 
-To enable state sync use `state-sync-enabled`.
 To stop the node hit Ctrl+C.
 
 #### **Binary**
