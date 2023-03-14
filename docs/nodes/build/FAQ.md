@@ -1,6 +1,7 @@
 # Frequently Asked Questions
 
 #### Error: `WARN node/node.go:291 failed to connect to bootstrap nodes`
+
 This error can occur when the node doesn't have access to the Internet or if the NodeID 
 is already being used by a different node in the network. This can occur when an old instance
 is running and not terminated.
