@@ -26,9 +26,3 @@ or logs.
 - XSVM for <https://github.com/ava-labs/xsvm>
 - TimestampVM RS for <https://github.com/ava-labs/timestampvm-rs>
 - SpacesVM RS for <https://github.com/ava-labs/spacesvm-rs>
-
-### Core
-
-- Core extension or Core browser extension
-- Core mobile
-- Core web
