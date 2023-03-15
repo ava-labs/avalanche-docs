@@ -1,6 +1,8 @@
 # Frequently Asked Questions
 
-## If you experience any issues building your node, here are some common errors and possible solutions.
+## Introduction
+
+If you experience any issues building your node, here are some common errors and possible solutions.
 
 ### Error: `WARN node/node.go:291 failed to connect to bootstrap nodes`
 
