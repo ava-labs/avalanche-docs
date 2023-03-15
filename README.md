@@ -67,3 +67,5 @@ contents hosting service.
 ## Search
 
 Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
+
+test
