@@ -72,13 +72,13 @@ function Home() {
               />
 
               <Card
-                to="https://core.app"
+                to="https://github.com/ava-labs/hypersdk"
                 header={{
-                  label: "🦉 Install Core",
+                  label: "🛠️ HyperSDK",
                 }}
                 body={{
                   label:
-                    "Access your portfolio with a wallet built specifically for subnets on Avalanche",
+                    "Opinionated Framework for Building Hyper-Scalable Blockchains on Avalanche",
                 }}
               />
             </div>
