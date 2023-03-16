@@ -412,7 +412,7 @@ necessary instructions to upgrade your node manually.
 
 After you update your validator's configuration, you need to restart your validator manually. If you
 provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file
-at that path. Refer to [this doc](../nodes/maintain/chain-config-flags#subnet-chain-configs) for
+at that path. Refer to [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) for
 related documentation.
 
 **Usage:**
