@@ -250,7 +250,7 @@ avalanche subnet import file [subnetPath] [flags]
 The `subnet import public` command imports a Subnet configuration from a running network.
 
 The genesis file should be available from the disk for this to work. By default, an imported Subnet
-doesn't overwrite an existing Subnet with the same name. To allow overwrites, provide the --force
+doesn't overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
 flag.
 
 **Usage:**
@@ -411,10 +411,9 @@ manipulate your node's configuration automatically. Alternatively, the command c
 necessary instructions to upgrade your node manually.
 
 After you update your validator's configuration, you need to restart your validator manually. If you
-provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file at
-that path. Refer to
-<https://docs.avax.network/nodes/maintain/chain-config-flags#subnet-chain-configs> for related
-documentation.
+provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file
+at that path. Refer to [this doc](../nodes/maintain/chain-config-flags#subnet-chain-configs) for
+related documentation.
 
 **Usage:**
 
@@ -473,7 +472,7 @@ avalanche subnet upgrade generate [subnetName] [flags]
 
 ### Subnet Upgrade Import
 
-Import the upgrade bytes file into the local environment
+Import the upgrade bytes file into the local environment.
 
 **Usage:**
 
@@ -490,7 +489,7 @@ avalanche subnet upgrade import [subnetName] [flags]
 
 ### Subnet Upgrade Print
 
-Print the upgrade.json file content
+Print the upgrade.json file content.
 
 **Usage:**
 
