@@ -121,6 +121,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/install-avalanche-cli',
+        'subnets/subnet-checklist',
         'subnets/build-first-subnet',
         'subnets/create-a-fuji-subnet',
         'subnets/create-a-mainnet-subnet',
