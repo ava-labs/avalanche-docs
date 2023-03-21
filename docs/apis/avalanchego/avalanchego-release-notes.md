@@ -85,7 +85,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
 
 - Added support to specify `HTTP` server timeouts
   - `--http-read-timeout`
-  - `--http-read-header-timeout`  
+  - `--http-read-header-timeout`
   - `--http-write-timeout`
   - `--http-idle-timeout`
 
