@@ -14,7 +14,7 @@ This version is backwards compatible to
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
 It is optional, but encouraged. The supported plugin version is `24`.
 
-### Networking
+**Networking**
 
 - Removed linger setting on P2P connections
 - Improved error message when failing to calculate peer uptimes
@@ -22,7 +22,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Added context cancellation during dynamic IP updates
 - Reduced the maximum P2P reconnect delay from 1 hour to 1 minute
 
-### Consensus
+**Consensus**
 
 - Added support to switch from `Avalanche` consensus to `Snowman` consensus
 - Added support for routing consensus messages to either `Avalanche` or
@@ -33,7 +33,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Replaced `consensus` and `decision` dispatchers with `block`, `tx`, and `vertex` dispatchers
 - Removed `Avalanche` bootstrapping restarts during the switch to `Snowman` consensus
 
-### AVM
+**AVM**
 
 - Added `avm` block execution manager
 - Added `avm` block builder
@@ -48,18 +48,18 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Added `avm` transaction based metrics
 - Replaced error strings with error interfaces in the `avm` mempool
 
-### PlatformVM
+**PlatformVM**
 
 - Added logs when the local nodes stake amount changes
 - Moved `platformvm` `message` package into `components`
 - Replaced error strings with error interfaces in the `platformvm` mempool
 
-### Warp
+**Warp**
 
 - Added `ID` method to `warp.UnsignedMessage`
 - Improved `warp.Signature` verification error descriptions
 
-### Miscellaneous
+**Miscellaneous**
 
 - Improved `merkledb` locking to allow concurrent read access through `trieView`s
 - Fixed `Banff` transaction signing with ledger when using the wallet
@@ -67,7 +67,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Added non-blocking bounded queue
 - Converted the `x.Parser` helper to be a `block.Parser` interface from a `tx.Parser` interface
 
-### Cleanup
+**Cleanup**
 
 - Separated dockerhub image publishing from the kurtosis test workflow
 - Exported various errors to use in testing
@@ -76,12 +76,12 @@ It is optional, but encouraged. The supported plugin version is `24`.
 - Removed `usr/local/lib/avalanche` from deb packages
 - Standardized usage of `constants.UnitTestID`
 
-### Examples
+**Examples**
 
 - Added P-chain `RemoveSubnetValidatorTx` example using the wallet
 - Added X-chain `CreateAssetTx` example using the wallet
 
-### Configs
+**Configs**
 
 - Added support to specify `HTTP` server timeouts
   - `--http-read-timeout`
@@ -89,7 +89,7 @@ It is optional, but encouraged. The supported plugin version is `24`.
   - `--http-write-timeout`
   - `--http-idle-timeout`
 
-### APIs
+**APIs**
 
 - Added `avm` block APIs
   - `avm.getBlock`
