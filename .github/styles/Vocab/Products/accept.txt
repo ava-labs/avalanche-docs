@@ -66,6 +66,7 @@ Config
 Connor
 Corbellini
 Coreth
+Cortina
 CPUs
 Crabada
 crypto
@@ -89,6 +90,7 @@ deserialize
 deserializing
 dev
 Dexalot
+dockerhub
 Docusaurus
 dotenv
 ecrecover

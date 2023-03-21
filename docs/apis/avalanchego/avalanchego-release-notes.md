@@ -25,7 +25,8 @@ It is optional, but encouraged. The supported plugin version is `24`.
 ### Consensus
 
 - Added support to switch from `Avalanche` consensus to `Snowman` consensus
-- Added support for routing consensus messages to either `Avalanche` or `Snowman` consensus on the same chain
+- Added support for routing consensus messages to either `Avalanche` or
+  `Snowman` consensus on the same chain
 - Removed usage of deferred evaluation of the `handler.Consensus` in the `Avalanche` `OnFinished` callback
 - Dropped inbound `Avalanche` consensus messages after switching to `Snowman` consensus
 - Renamed the `Avalanche` VM metrics prefix from `avalanche_{chainID}_vm_` to `avalanche_{chainID}_vm_avalanche`
