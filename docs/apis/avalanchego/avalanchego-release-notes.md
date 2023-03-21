@@ -84,10 +84,10 @@ It is optional, but encouraged. The supported plugin version is `24`.
 **Configs**
 
 - Added support to specify `HTTP` server timeouts
-  - `--http-read-timeout`
-  - `--http-read-header-timeout`
-  - `--http-write-timeout`
-  - `--http-idle-timeout`
+  - `--http-read-timeout` - Maximum duration for reading the entire request, including the body. A zero or negative value means there will be no timeout.
+  - `--http-read-header-timeout` - Maximum duration to read request headers. The connection’s read deadline is reset after reading the headers. If %s is zero, the value of %s is used. If both are zero, there is no timeout.
+  - `--http-write-timeout` - Maximum duration before timing out writes of the response. It is reset whenever a new request’s header is read. A zero or negative value means there will be no timeout.
+  - `--http-idle-timeout` - Maximum duration to wait for the next request when keep-alives are enabled. If %s is zero, the value of %s is used. If both are zero, there is no timeout.
 
 **APIs**
 
