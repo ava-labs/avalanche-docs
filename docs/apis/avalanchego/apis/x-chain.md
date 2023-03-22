@@ -184,6 +184,12 @@ curl -X POST --data '{
 
 ### `avm.createAddress`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -230,6 +236,12 @@ TODO: Add avm.createAsset
 -->
 
 ### `avm.createFixedCapAsset`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -319,6 +331,12 @@ curl -X POST --data '{
 
 ### `avm.createNFTAsset`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -400,6 +418,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.createVariableCapAsset`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -496,6 +520,12 @@ curl -X POST --data '{
 
 ### `avm.export`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -573,6 +603,12 @@ TODO: Add avm.exportAVAX
 
 ### `avm.exportKey`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -621,6 +657,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.getAddressTxs`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 Returns all transactions that change the balance of the given address. A transaction is said to
 change an address's balance if either is true:
@@ -687,6 +729,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.getAllBalances`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 Get the balances of all assets controlled by a given address.
 
@@ -787,6 +835,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.getBalance`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 Get the balance of an asset controlled by a given address.
 
@@ -1175,6 +1229,12 @@ This gives response:
 
 ### `avm.import`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1233,6 +1293,12 @@ curl -X POST --data '{
 TODO: Add avm.importAVAX
 -->
 ### `avm.importKey`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1324,6 +1390,12 @@ curl -X POST --data '{
 
 ### `avm.listAddresses`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1366,6 +1438,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.mint`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1437,6 +1515,12 @@ curl -X POST --data '{
 
 
 ### `avm.mintNFT`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1513,6 +1597,12 @@ curl -X POST --data '{
 
 ### `avm.send`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1579,6 +1669,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.sendMultiple`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1657,6 +1753,12 @@ curl -X POST --data '{
 
 ### `avm.sendNFT`
 
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1728,6 +1830,12 @@ This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
+:::caution
+
+Endpoint deprecated as of **v1.9.12**.
+
+:::
+
 **Signature:**
 
 ```sh
@@ -1777,6 +1885,12 @@ can use the modified UTXO set.
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of **v1.9.12**.
+
+:::
 
 **Signature:**
 
@@ -1849,6 +1963,12 @@ addresses and assume the TX will be accepted so that future calls can use the mo
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of **v1.9.12**.
+
+:::
 
 **Signature:**
 
@@ -1925,6 +2045,13 @@ Listen for transactions on a specified address.
 This call is made to the events API endpoint:
 
 `/ext/bc/X/events`
+
+:::caution
+
+Endpoint deprecated as of **v1.9.12**.
+
+:::
+
 
 #### **Golang Example**
 

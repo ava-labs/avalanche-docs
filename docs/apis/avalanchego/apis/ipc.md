@@ -50,6 +50,13 @@ This API uses the `json 2.0` RPC format.
 
 ### `ipcs.publishBlockchain`
 
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
+
 Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
 **Signature:**
@@ -89,6 +96,12 @@ curl -X POST --data '{
 ```
 
 ### `ipcs.unpublishBlockchain`
+
+:::caution
+
+Deprecated as of **v1.9.12**.
+
+:::
 
 Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
