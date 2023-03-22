@@ -186,7 +186,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -239,7 +239,7 @@ TODO: Add avm.createAsset
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -333,7 +333,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -421,7 +421,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -522,7 +522,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -605,7 +605,7 @@ TODO: Add avm.exportAVAX
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -660,7 +660,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -732,7 +732,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -838,7 +838,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1231,7 +1231,7 @@ This gives response:
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1296,7 +1296,7 @@ TODO: Add avm.importAVAX
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1392,7 +1392,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1441,7 +1441,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1518,7 +1518,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1599,7 +1599,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1672,7 +1672,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1755,7 +1755,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of **v1.9.12**.
+Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1832,7 +1832,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of **v1.9.12**.
+Endpoint deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1888,7 +1888,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of **v1.9.12**.
+Endpoint deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -1966,7 +1966,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of **v1.9.12**.
+Endpoint deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -2048,7 +2048,7 @@ This call is made to the events API endpoint:
 
 :::caution
 
-Endpoint deprecated as of **v1.9.12**.
+Endpoint deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
