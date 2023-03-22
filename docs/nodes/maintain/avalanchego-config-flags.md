@@ -467,8 +467,8 @@ negative value means there will be no timeout.
 #### `--http-read-header-timeout` (string)
 
 Maximum duration to read request headers. The connection’s read deadline is
-reset after reading the headers. If %s is zero, the value of %s is used. If both
-are zero, there is no timeout.
+reset after reading the headers. If `--http-read-header-timeout` is zero, the
+value of `--http-read-timeout` is used. If both are zero, there is no timeout.
 
 #### `--http-write-timeout` (string)
 
@@ -479,7 +479,8 @@ timeout.
 #### `--http-idle-timeout` (string)
 
 Maximum duration to wait for the next request when keep-alives are enabled. If
-%s is zero, the value of %s is used. If both are zero, there is no timeout.
+`--http-idle-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero,
+there is no timeout.
 
 ## IPCs
 
