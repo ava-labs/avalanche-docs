@@ -47,7 +47,7 @@ This API uses the `json 2.0` API format. For more information on making JSON RPC
 
 :::caution
 
-Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -96,7 +96,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -136,7 +136,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -192,7 +192,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
@@ -244,7 +244,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](/docs/apis/avalanchego/avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
 
 :::
 
