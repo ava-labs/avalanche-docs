@@ -11,27 +11,36 @@ are new APIs that must be called to index all transactions.
 
 The transaction format on the X-Chain does not change in Cortina. This means that wallets that
 have already integrated with the X-Chain don’t need to change how they sign transactions.
-Additionally, there is no change to the format of the avm.issueTx or the avm.getTx API.
+Additionally, there is no change to the format of the [avm.issueTx](apis/x-chain.md#avmissuetx) 
+or the [avm.getTx](apis/x-chain.md#avmgettx) API.
 
-However, the *avm.getTxStatus* endpoint is now deprecated and its usage should be replaced with
-*avm.getTx* (which only returns accepted transactions for AvalancheGo >= v1.9.12). *avm.getTxStatus*
-will still work up to and after the Cortina activation if you wish to migrate after the network
-upgrade has occurred.
+However, the [avm.getTxStatus](apis/x-chain.md#avmgettxstatus) endpoint is now
+deprecated and its usage should be replaced with
+[avm.getTx](apis/x-chain.md#avmgettx) (which only returns accepted transactions
+for AvalancheGo >= v1.9.12). [avm.getTxStatus](apis/x-chain.md#avmgettxstatus)
+will still work up to and after the Cortina activation if you wish to migrate
+after the network upgrade has occurred.
 
 ## Vertex -> Block Indexing
 
-Before Cortina, indexing the X-Chain required polling the */ext/index/X/vtx* endpoint to fetch
-new vertices. During the Cortina activation, a “stop vertex” will be produced using a new codec
-version that will contain no transactions. This new vertex type will be the same format as
-previous vertices. To ensure historical data can still be accessed in Cortina, the
-*/ext/index/X/vtx* will remain accessible even though it will no longer be
-populated with chain data.
+Before Cortina, indexing the X-Chain required polling the
+[/ext/index/X/vtx](apis/index-api.md#x-chain-vertices) endpoint to fetch new
+vertices. During the Cortina activation, a “stop vertex” will be produced using
+a [new codec
+version](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/codec.go#L17-L18)
+that will contain no transactions. This new vertex type will be the [same
+format](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/stateless_vertex.go#L95-L102)
+as previous vertices. To ensure historical data can still be accessed in
+Cortina, the [/ext/index/X/vtx](apis/index-api.md#x-chain-vertices) will remain
+accessible even though it will no longer be populated with chain data.
 
-After Cortina activation, you will need to migrate to using the new *ext/index/X/block* endpoint
-(shares the same semantics as */ext/index/P/block*) to continue indexing X-Chain activity.
-Because X-Chain ordering is deterministic in Cortina, this means that X-Chain blocks across
-all heights will be consistent across all nodes and will include a timestamp. Here is an example of
-iterating over these blocks in Golang:
+After Cortina activation, you will need to migrate to using the new
+*ext/index/X/block* endpoint (shares the same semantics as
+[/ext/index/P/block](apis/index-api.md#p-chain-blocks)) to continue indexing
+X-Chain activity. Because X-Chain ordering is deterministic in Cortina, this
+means that X-Chain blocks across all heights will be consistent across all nodes
+and will include a timestamp. Here is an example of iterating over these blocks
+in Golang:
 
 ```golang
 package main
@@ -86,9 +95,10 @@ func main() {
 }
 ```
 
-After Cortina activation, it will also be possible to fetch X-Chain blocks directly without
-enabling the Index API. You can use the *avm.getBlock*, *avm.getBlockByHeight*, and
-*avm.getHeight* endpoints to do so. This, again, will be similar to the P-Chain semantics.
+After Cortina activation, it will also be possible to fetch X-Chain blocks
+directly without enabling the Index API. You can use the *avm.getBlock*,
+*avm.getBlockByHeight*, and *avm.getHeight* endpoints to do so. This, again,
+will be similar to the [P-Chain semantics](apis/p-chain.md#platformgetblock).
 
 ## Deprecated API Calls
 
