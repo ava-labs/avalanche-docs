@@ -3,9 +3,9 @@
 ## Overview
 
 This document summarizes all of the changes made to the X-Chain API to support
-Avalanche Cortina, which migrates the X-Chain to run Snowman++. In summary, the
-core transaction submission and confirmation flow is unchanged, however, there
-are new APIs that must be called to index all transactions.
+Avalanche Cortina (v1.10.0), which migrates the X-Chain to run Snowman++. 
+In summary, the core transaction submission and confirmation flow is unchanged, 
+however, there are new APIs that must be called to index all transactions.
 
 ## Transaction Broadcast and Confirmation
 
