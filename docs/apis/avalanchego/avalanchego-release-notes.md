@@ -6,6 +6,8 @@
 
 :::
 
+## V1.9.14 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.14)
+
 ## V1.9.12 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12)
 
 **Banff.12 - Cortina Preparations**
