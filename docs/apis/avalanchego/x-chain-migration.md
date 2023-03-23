@@ -14,7 +14,7 @@ have already integrated with the X-Chain don’t need to change how they sign tr
 Additionally, there is no change to the format of the avm.issueTx or the avm.getTx API.
 
 However, the *avm.getTxStatus* endpoint is now deprecated and its usage should be replaced with
-*avm.getTx* (which only returns accepted transactions for >=AvalancheGo@v1.9.12). *avm.getTxStatus*
+*avm.getTx* (which only returns accepted transactions for AvalancheGo >= v1.9.12). *avm.getTxStatus*
 will still work up to and after the Cortina activation if you wish to migrate after the network
 upgrade has occurred.
 
@@ -98,8 +98,13 @@ and Subnets. Integrators should make plans to migrate to tools and services that
 optimized for serving queries over Avalanche Network state and avoid keeping any keys on the node
 itself.
 
-**Note, this deprecation ONLY applies to APIs that AvalancheGo exposes over the HTTP port.
-Transaction types with similar names to these APIs are NOT being deprecated.**
+
+:::note
+
+This deprecation ONLY applies to APIs that AvalancheGo exposes over the HTTP port.
+Transaction types with similar names to these APIs are NOT being deprecated.
+
+:::
 
 <!-- vale off -->
 * ipcs
