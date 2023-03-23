@@ -1,12 +1,14 @@
 # X-Chain Migration Guide
 
 ## Overview
-This document summarizes all of the changes made to the X-Chain API to support Avalanche Cortina,
-which migrates the X-Chain to run Snowman++. In summary, the core transaction submission and
-confirmation flow is unchanged, however, there are new APIs that must be called to index all
-transactions.
+
+This document summarizes all of the changes made to the X-Chain API to support
+Avalanche Cortina, which migrates the X-Chain to run Snowman++. In summary, the
+core transaction submission and confirmation flow is unchanged, however, there
+are new APIs that must be called to index all transactions.
 
 ## Transaction Broadcast and Confirmation
+
 The transaction format on the X-Chain does not change in Cortina. This means that wallets that
 have already integrated with the X-Chain don’t need to change how they sign transactions.
 Additionally, there is no change to the format of the avm.issueTx or the avm.getTx API.
@@ -17,11 +19,12 @@ will still work up to and after the Cortina activation if you wish to migrate af
 upgrade has occurred.
 
 ## Vertex -> Block Indexing
+
 Before Cortina, indexing the X-Chain required polling the */ext/index/X/vtx* endpoint to fetch
 new vertices. During the Cortina activation, a “stop vertex” will be produced using a new codec
 version that will contain no transactions. This new vertex type will be the same format as
 previous vertices. To ensure historical data can still be accessed in Cortina, the
-*/ext/index/X/vtx* will remain accessible eventhough it will no longer be
+*/ext/index/X/vtx* will remain accessible even though it will no longer be
 populated with chain data.
 
 After Cortina activation, you will need to migrate to using the new *ext/index/X/block* endpoint
@@ -29,6 +32,7 @@ After Cortina activation, you will need to migrate to using the new *ext/index/X
 Because X-Chain ordering is deterministic in Cortina, this means that X-Chain blocks across
 all heights will be consistent across all nodes and will include a timestamp. Here is an example of
 iterating over these blocks in Golang:
+
 ```golang
 package main
 
@@ -87,6 +91,7 @@ enabling the Index API. You can use the *avm.getBlock*, *avm.getBlockByHeight*, 
 *avm.getHeight* endpoints to do so. This, again, will be similar to the P-Chain semantics.
 
 ## Deprecated API Calls
+
 This long-term deprecation effort will better align usage of AvalancheGo with its purpose, to be a
 minimal and efficient runtime that supports only what is required to validate the Primary Network
 and Subnets. Integrators should make plans to migrate to tools and services that are better
@@ -96,6 +101,7 @@ itself.
 **Note, this deprecation ONLY applies to APIs that AvalancheGo exposes over the HTTP port.
 Transaction types with similar names to these APIs are NOT being deprecated.**
 
+<!-- vale off -->
 * ipcs
   * ipcs.publishBlockchain
   * ipcs.unpublishBlockchain
@@ -148,3 +154,4 @@ Transaction types with similar names to these APIs are NOT being deprecated.**
   * platform.getStake
   * platform.getMaxStakeAmount
   * platform.getRewardUTXOs
+<!-- vale on -->

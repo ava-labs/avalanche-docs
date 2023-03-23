@@ -235,6 +235,7 @@ const sidebars = {
         'apis/avalanchego/public-api-server',
         'apis/avalanchego/postman-avalanche-collection',
         'apis/avalanchego/avalanchego-release-notes',
+        'apis/avalanchego/cortina-migration',
         'apis/avalanchego/cb58-deprecation',
       ],
     },
