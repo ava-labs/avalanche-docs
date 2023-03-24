@@ -6,6 +6,22 @@
 
 :::
 
+
+## V1.9.15 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.15)
+
+**Banff.15**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0).
+It is optional, but encouraged. The supported plugin version is `24`.
+
+- Fixed `x/merkledb.ChangeProof#getLargestKey` to correctly handle no changes
+- Added test for `avm/txs/executor.SemanticVerifier#verifyFxUsage` with multiple valid fxs
+- Fixed CPU + bandwidth performance regression during vertex processing
+- Added example usage of the `/ext/index/X/block` API
+- Reduced the default value of `--snow-optimal-processing` from `50` to `10`
+- Updated the year in the license header
+
 ## V1.9.14 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.14)
 
 ## V1.9.12 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12)
