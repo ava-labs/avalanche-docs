@@ -288,11 +288,12 @@ Websockets are available for the C-chain and the X-chain.
 
 ### PublicNode
 
-[PublicNode](https://avalanche.publicnode.com) supports the C-Chain on the Mainnet.
+[PublicNode by Allnodes](https://avalanche.publicnode.com) supports the C-Chain on the Mainnet.
 
 Features:
 
 - Free
+- Privacy oriented
 - Globally distributed infrastructure on Allnodes
 - Optimized for speed and reliability - check our page for stats
 
@@ -300,4 +301,4 @@ Features:
 
 ##### HTTPS
 
-- For C-Chain API, the URL is `https://avalanche-evm.publicnode.com`
+- For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
