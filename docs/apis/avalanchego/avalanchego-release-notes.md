@@ -38,6 +38,12 @@ It is optional, but encouraged. The supported plugin version is `24`.
 
 ## V1.9.14 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.14)
 
+**Banff.14**
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `24`.
+
 ## V1.9.12 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12)
 
 **Banff.12 - Cortina Preparations**
