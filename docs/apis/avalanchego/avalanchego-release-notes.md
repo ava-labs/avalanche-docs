@@ -6,6 +6,20 @@
 
 :::
 
+## V1.9.16 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.16)
+
+**Banff.16**
+
+
+This version is backwards compatible to
+[v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
+optional, but encouraged. The supported plugin version is `24`.
+
+- Removed unnecessary repoll after rejecting vertices
+- Improved snowstorm lookup error handling
+- Removed rejected vertices from the Avalanche frontier more aggressively
+- Reduced default health check values for processing decisions
+
 
 ## V1.9.15 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.15)
 
