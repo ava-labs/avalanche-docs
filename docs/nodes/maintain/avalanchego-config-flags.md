@@ -1304,10 +1304,6 @@ GiB).
 
 ### Plugins
 
-#### `--plugin-mode-enabled` (bool)
-
-If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
-
 #### `--plugin-dir` (string)
 
 Sets the directory for [VM plugins](../../subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
