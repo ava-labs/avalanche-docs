@@ -1308,6 +1308,10 @@ GiB).
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
+#### `--plugin-dir` (string)
+
+Sets the directory for [plugins](https://github.com/hashicorp/go-plugin). The default value is `[DATADIR]/plugins`.
+
 ### Virtual Machine (VM) Configs
 
 #### `--vm-aliases-file (string)`
