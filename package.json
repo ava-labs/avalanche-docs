@@ -21,7 +21,6 @@
     "@mdx-js/react": "1.6.22",
     "@svgr/webpack": "6.5.1",
     "clsx": "1.2.1",
-    "docusaurus": "^1.14.7",
     "eslint": "8.36.0",
     "file-loader": "6.2.0",
     "hast-util-is-element": "2.1.3",
