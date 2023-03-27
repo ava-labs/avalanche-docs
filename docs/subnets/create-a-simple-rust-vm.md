@@ -1237,8 +1237,7 @@ async fn main() -> io::Result<()> {
 
 ### Installing a VM
 
-AvalancheGo searches for and registers VM plugins under the `plugins` directory of the [build
-directory](../nodes/maintain/avalanchego-config-flags#build-directory).
+AvalancheGo searches for and registers VM plugins under the `plugins` [directory](../nodes/maintain/avalanchego-config-flags#--plugin-dir-string).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary
 under this directory. Virtual machine executable names must be either a full virtual machine ID
