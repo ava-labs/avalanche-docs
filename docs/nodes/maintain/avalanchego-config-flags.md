@@ -1303,11 +1303,11 @@ node will be considered unhealthy. Must be >=
 `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1
 GiB).
 
-### Plugin Mode
+### Plugins
 
-#### `--plugin-mode-enabled` (bool)
+#### `--plugin-dir` (string)
 
-If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
+Sets the directory for [VM plugins](../../subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
 
 ### Virtual Machine (VM) Configs
 
