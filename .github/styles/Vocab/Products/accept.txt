@@ -109,6 +109,7 @@ fastcache
 feeRecipient
 finney
 Fuji
+fxs
 gamification
 Ganache
 Gantt
