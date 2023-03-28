@@ -155,22 +155,22 @@ The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 If you built from source:
 
 ```sh
-./build/avalanchego
+./build/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
 ```
 
 If you are using the pre-built binaries on MacOS:
 
 ```sh
-./avalanchego-<VERSION>/build/avalanchego
+./avalanchego-<VERSION>/build/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
 ```
 
 If you are using the pre-built binaries on Linux:
 
 ```sh
-./avalanchego-<VERSION>-linux/avalanchego
+./avalanchego-<VERSION>-linux/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
 ```
 
-By default (without specifying any parameters), this node will connect to the
+By default (without specifying --network-id), this node will connect to the
 Mainnet which may take much longer time to finish bootstrapping. See
 [this](#connect-to-fuji-testnet) for connecting to Fuji Testnet.
 
