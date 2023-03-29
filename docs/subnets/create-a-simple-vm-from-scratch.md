@@ -81,7 +81,6 @@ _AvalancheGo starts/stops your process multiple times before launching the real 
   - You should gracefully stop your process.
   - Return : Empty
 
-
 ### Initialization Sequence
 
 - [VM.CreateStaticHandlers](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateStaticHandlers)
@@ -98,17 +97,17 @@ _AvalancheGo starts/stops your process multiple times before launching the real 
 - [VM.VerifyHeightIndex](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.VerifyHeightIndex)
   - Return : a 
 [VerifyHeightIndexResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VerifyHeightIndexResponse)
-  with the code ERROR_UNSPECIFIED to indicate that no error has occurred.
+  with the code `ERROR_UNSPECIFIED` to indicate that no error has occurred.
 - [VM.CreateHandlers](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateHandlers)
   - To serve json-RPC endpoint, `/ext/bc/subnetId/rpc` exposed by AvalancheGo 
   - See [json-RPC](#json-rpc) for more detail
   - Create a [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) server and get its url.
-  - Return : a CreateHandlersResponse containing a single item with the server's url. (or an empty
+  - Return : a `CreateHandlersResponse` containing a single item with the server's url. (or an empty
   array if not implementing the json-RPC endpoint)
 - [VM.StateSyncEnabled](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.StateSyncEnabled)
   - Return : true if you want to enable StateSync, false otherwise.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-    _If you had specified true in the StateSyncEnabled result_ 
+    _If you had specified true in the `StateSyncEnabled` result_ 
   - Param : a 
   [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) 
   with the `StateSyncing` value
@@ -117,7 +116,7 @@ _AvalancheGo starts/stops your process multiple times before launching the real 
   [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) 
   built from the genesis block.
 - [VM.GetOngoingStateSyncSummary](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.GetOngoingStateSyncSummary)
-    _If you had specified true in the StateSyncEnabled result_ 
+    _If you had specified `true` in the `StateSyncEnabled` result_ 
   - Return : a 
 [GetOngoingSyncStateSummaryResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.GetOngoingSyncStateSummaryResponse)
   built from the genesis block.
@@ -130,7 +129,7 @@ _AvalancheGo starts/stops your process multiple times before launching the real 
 [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) 
   built from the genesis block.
 - [VM.SetPreference](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetPreference)
-  - Param : SetPreferenceRequest containing the preferred block ID 
+  - Param : `SetPreferenceRequest` containing the preferred block ID 
   - Return : Empty
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
   - Param : a 
@@ -170,7 +169,7 @@ _on nodeX_
 - [`AppSender.SendAppGossip`](https://buf.build/ava-labs/avalanche/docs/main:appsender#appsender.AppSender.SendAppGossip)
 (_client_)
   - You must serialize your transaction data into a byte array and call the 
-  SendAppGossip to propagate the transaction.
+  `SendAppGossip` to propagate the transaction.
 
 
 AvalancheGo then propagates this to the other nodes.
@@ -195,7 +194,7 @@ _on nodeY_
 - _client_ 
 [`Messenger.Notify`](https://buf.build/ava-labs/avalanche/docs/main:messenger#messenger.Messenger.Notify)
   - You must issue a notify request to AvalancheGo by calling the method with the 
-  MESSAGE_BUILD_BLOCK value.
+  `MESSAGE_BUILD_BLOCK` value.
 
 _on nodeY_
 
