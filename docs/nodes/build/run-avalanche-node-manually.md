@@ -155,19 +155,19 @@ The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 If you built from source:
 
 ```sh
-./build/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
+./build/avalanchego
 ```
 
 If you are using the pre-built binaries on MacOS:
 
 ```sh
-./avalanchego-<VERSION>/build/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
+./avalanchego-<VERSION>/build/avalanchego
 ```
 
 If you are using the pre-built binaries on Linux:
 
 ```sh
-./avalanchego-<VERSION>-linux/avalanchego --public-ip=[YOUR NODE'S PUBLIC IP HERE]
+./avalanchego-<VERSION>-linux/avalanchego
 ```
 
 By default (without specifying --network-id), this node will connect to the
