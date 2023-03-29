@@ -40,9 +40,11 @@ collection](https://github.com/ava-labs/avalanche-postman-collection) to help us
 make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can
-receive and send TCP traffic on the staking port (`9651` by default) and that
-you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP
-HERE]`. Failing to do either of these may jeopardize your staking reward.
+receive and send TCP traffic on the staking port (`9651` by default) and your node
+has a public IP address(it's optional to set --public-ip=[YOUR NODE'S PUBLIC IP HERE]
+when executing the AvalancheGo binary, as by default, the node will attempt to perform
+NAT traversal to get the node's IP according to its router). Failing to do either of
+these may jeopardize your staking reward.
 
 ## Add a Validator with Avalanche Wallet
 
