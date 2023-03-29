@@ -45,6 +45,12 @@ This API uses the `json 2.0` API format. For more information on making JSON RPC
 
 ### keystore.createUser
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Create a new user with the specified username and password.
 
 **Signature:**
@@ -88,6 +94,12 @@ curl -X POST --data '{
 
 ### keystore.deleteUser
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Delete a user.
 
 **Signature:**
@@ -121,6 +133,12 @@ curl -X POST --data '{
 ```
 
 ### keystore.exportUser
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Export a user. The user can be imported to another node with
 [`keystore.importUser`](keystore.md#keystoreimportuser). The user’s password remains encrypted.
@@ -172,6 +190,12 @@ curl -X POST --data '{
 
 ### keystore.importUser
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Import a user. `password` must match the user’s password. `username` doesn’t have to match the
 username `user` had when it was exported.
 
@@ -217,6 +241,12 @@ curl -X POST --data '{
 ```
 
 ### keystore.listUsers
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 List the users in this keystore.
 

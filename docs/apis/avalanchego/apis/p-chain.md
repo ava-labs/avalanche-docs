@@ -23,6 +23,12 @@ This API uses the `json 2.0` RPC format.
 
 ### `platform.addDelegator`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -121,6 +127,12 @@ curl -X POST --data '{
 
 ### `platform.addSubnetValidator`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -209,6 +221,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.addValidator`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 
@@ -325,6 +343,12 @@ curl -X POST --data '{
 
 ### `platform.createAddress`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -369,6 +393,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.createBlockchain`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 
@@ -459,6 +489,12 @@ curl -X POST --data '{
 
 ### `platform.createSubnet`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -532,6 +568,12 @@ curl -X POST --data '{
 
 ### `platform.exportAVAX`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this
 transaction, you must call the X-Chain's [`avm.import`](x-chain.md#avmimport) or C-Chain's
 [`avax.import`](c-chain.md#avaximport) with assetID `AVAX` to complete the transfer.
@@ -598,6 +640,12 @@ curl -X POST --data '{
 
 ### `platform.exportKey`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -649,6 +697,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.getBalance`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Get the balance of AVAX controlled by a given address.
 
@@ -858,6 +912,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.getBlockchains`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Get all the blockchains that exist (excluding the P-Chain).
 
@@ -1240,6 +1300,12 @@ curl -X POST --data '{
 
 ### `platform.getMaxStakeAmount`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Returns the maximum amount of nAVAX staking to the named node during a particular time period.
 
 **Signature:**
@@ -1441,6 +1507,12 @@ curl -X POST --data '{
 
 ### `platform.getRewardUTXOs`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period
 ended.
 
@@ -1494,6 +1566,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.getStake`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking
 rewards.
@@ -1593,6 +1671,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.getSubnets`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Get info about the Subnets.
 
@@ -2112,6 +2196,12 @@ curl -X POST --data '{
 
 ### `platform.importAVAX`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -2184,6 +2274,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.importKey`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 
@@ -2278,6 +2374,12 @@ curl -X POST --data '{
 ```
 
 ### `platform.listAddresses`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 
