@@ -18,7 +18,7 @@ Coreth release.
 - Min Fee: 1 Gwei (4% of C-Chain)
 - Target Block Rate: 2s (Same as C-Chain)
 
-Genesis file of WAGMI can be found [here](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json).
+Genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/main/chains/11111/genesis.json).
 
 Everyone that has used the C-Chain more than twice (~970k addresses) has been airdropped 10 WGM
 tokens. With the current fee parameterization, this should be enough for hundreds of TXs.
