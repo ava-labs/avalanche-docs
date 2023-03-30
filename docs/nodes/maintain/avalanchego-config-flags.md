@@ -9,6 +9,13 @@ description: This documents list all available configuration and flags for Avala
 
 You can specify the configuration of a node with the arguments below.
 
+## Data Directory
+
+#### `--data-dir` (string)
+
+Sets the base data directory where default sub-directories will be placed unless otherwise specified.
+Defaults to `$HOME/.avalanchego`.
+
 ## Config File
 
 #### `--config-file` (string)
@@ -60,6 +67,12 @@ See [here](../../apis/avalanchego/apis/auth.md) for more information.
 The password needed to create/revoke authorization tokens. If
 `--api-auth-required=true`, must be specified; otherwise ignored. See
 [here](../../apis/avalanchego/apis/auth.md) for more information.
+
+#### `--api-auth-password-file` (string)
+
+Password file used to initially create/validate API authorization tokens.
+Ignored if `---api-auth-password` is specified.
+Leading and trailing whitespace is removed from the password. Can be changed via API call.
 
 #### `--api-health-enabled` (boolean)
 
@@ -141,6 +154,11 @@ Max number of containers in an `Ancestors` message sent by this node. Defaults t
 
 This node reads at most this many containers from an incoming `Ancestors` message. Defaults to `2000`.
 
+#### `--bootstrap-max-time-get-ancestors` (duration)
+
+Max Time to spend fetching a container and its ancestors when responding to a GetAncestors message.
+Defaults to `50ms`.
+
 ## State Syncing
 
 #### `--state-sync-ids` (string)
@@ -169,6 +187,15 @@ categories: network upgrades and optional chain configurations. AvalancheGo
 reads in these configurations from the chain configuration directory and passes
 them into the VM on initialization.
 
+#### `--chain-config-dir` (string)
+
+Specifies the directory that contains chain configs, as described
+[here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`.
+If this flag is not provided and the default directory does not exist,
+AvalancheGo will not exit since custom configs are optional. However, if the
+flag is set, the specified folder must exist, or AvalancheGo will exit with an
+error. This flag is ignored if `--chain-config-content` is specified.
+
 :::note
 Please replace `chain-config-dir` and `blockchainID` with their actual values.
 :::
@@ -196,15 +223,6 @@ found in a separate [chain config flags](chain-config-flags.md) document.
 Full reference for `subnet-evm` upgrade configuration can be found in a separate
 [Customize a Subnet](../../subnets/customize-a-subnet.md) document.
 
-#### `--chain-config-dir` (string)
-
-Specifies the directory that contains chain configs, as described
-[here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`.
-If this flag is not provided and the default directory does not exist,
-AvalancheGo will not exit since custom configs are optional. However, if the
-flag is set, the specified folder must exist, or AvalancheGo will exit with an
-error. This flag is ignored if `--chain-config-content` is specified.
-
 #### `--chain-config-content` (string)
 
 As an alternative to `--chain-config-dir`, chains custom configurations can be
@@ -219,9 +237,7 @@ Path to JSON file that defines aliases for Blockchain IDs. Defaults to
 
 ```json
 {
-  "2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX": [
-    "Swimmer"
-  ]
+  "2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX": ["Swimmer"]
 }
 ```
 
@@ -232,10 +248,14 @@ the aliases via the admin API. This means that the first alias included for a
 Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the
 full blockchainID. The Primary Alias is used in all metrics and logs.
 
-`--chain-aliases-file-content` (string)
+#### `--chain-aliases-file-content` (string)
 
 As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded
 aliases for Blockchains.
+
+#### `--chain-data-dir` (string)
+
+Chain specific data directory. Defaults to `$HOME/.avalanchego/chainData`.
 
 ## Database
 
@@ -482,6 +502,11 @@ Maximum duration to wait for the next request when keep-alives are enabled. If
 `--http-idle-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero,
 there is no timeout.
 
+#### `--http-allowed-origins` (string)
+
+Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Example:
+`"https://*.avax.network https://*.avax-test.network"`
+
 ## IPCs
 
 #### `--ipcs-chain-ids` (string)
@@ -533,8 +558,7 @@ will default to the value provided to `--log-level`.
 #### `--log-format` (string, `{auto, plain, colors, json}`)
 
 The structure of log format. Defaults to `auto` which formats terminal-like
-logs, when the output is a terminal. Otherwise, should be one of `{auto, plain,
-colors, json}`
+logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
 
 #### `--log-dir` (string, file path)
 
@@ -692,7 +716,7 @@ Defaults to empty (will only validate the Primary Network).
 It is possible to provide parameters for Subnets. Parameters here apply to all
 chains in the specified Subnets. Parameters must be specified with a
 `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
-configs for Subnets specified in 
+configs for Subnets specified in
 `--track-subnets` parameter.
 
 Full reference for all configuration options for a Subnet can be found in a
@@ -766,6 +790,10 @@ Number of non-validators to gossip to when gossiping accepted frontier. Defaults
 
 Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
+#### `--consensus-gossip-frequency` (duration)
+
+Time between gossiping accepted frontiers. Defaults to `10s`.
+
 #### `--consensus-on-accept-gossip-validator-size` (uint)
 
 Number of validators to gossip to each accepted container to. Defaults to `0`.
@@ -800,10 +828,6 @@ Minimum amount of time queries to a peer must be failing before the peer is benc
 Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
 :::
 
-#### `--consensus-gossip-frequency` (duration)
-
-Time between gossiping accepted frontiers. Defaults to `10s`.
-
 #### `--consensus-shutdown-timeout` (duration)
 
 Timeout before killing an unresponsive chain. Defaults to `5s`.
@@ -825,6 +849,31 @@ network.
 Transaction fee, in nAVAX, for transactions that create new blockchains.
 Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be
 changed on a local network.
+
+#### `--transform-subnet-tx-fee` (int)
+
+Transaction fee, in nAVAX, for transactions that transform subnets. Defaults to
+`1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+
+#### `--add-primary-network-validator-fee` (int)
+
+Transaction fee, in nAVAX, for transactions that add new primary network validators. Defaults to 0.
+This can only be changed on a local network.
+
+#### `--add-primary-network-delegator-fee` (int)
+
+Transaction fee, in nAVAX, for transactions that add new primary network delegators. Defaults to 0.
+This can only be changed on a local network.
+
+#### `--add-subnet-validator-fee` (int)
+
+Transaction fee, in nAVAX, for transactions that add new subnet validators.
+Defaults to `10000000` nAVAX (.01 AVAX).
+
+#### `--add-subnet-delegator-fee` (int)
+
+Transaction fee, in nAVAX, for transactions that add new subnet delegators.
+Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)
 
@@ -898,9 +947,13 @@ default should only be done on private networks or local network. Defaults to
 Fraction of time a validator must be online to receive rewards. Defaults to
 `0.8`. This can only be changed on a local network.
 
-### Snow Parameters
+#### `--uptime-metric-freq` (duration)
 
-#### `--snow-avalanche-batch-size` (int)
+Frequency of renewing this node's average uptime metric. Defaults to `30s`.
+
+#### Snow Parameters
+
+##### `--snow-avalanche-batch-size` (int)
 
 DAG implementations of Snow consensus define `b` as the number of transactions a
 vertex should include. Increasing `b` will, theoretically, increase throughput
@@ -908,7 +961,7 @@ while increasing latency. The node will wait for at most 1 second to collect a
 batch, and will then issue the entire batch at once. The value must be at least
 `1`. Defaults to `30`.
 
-#### `--snow-avalanche-num-parents` (int)
+##### `--snow-avalanche-num-parents` (int)
 
 DAG implementations of Snow consensus define `p` as the number of parents a
 vertex should include. Increasing `p` will improve the amortization of network
@@ -916,7 +969,7 @@ queries. However, by increasing the connectivity of the graph, the complexity of
 the graph traversals is increased. The value must be at least `2`. Defaults to
 `5`.
 
-#### `--snow-concurrent-repolls` (int)
+##### `--snow-concurrent-repolls` (int)
 
 Snow consensus requires repolling transactions that are issued during low time
 of network usage. This parameter lets one define how aggressive the client will
@@ -924,14 +977,14 @@ be in finalizing these pending transactions. This should only be changed after
 careful consideration of the tradeoffs of Snow consensus. The value must be at
 least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
 
-#### `--snow-sample-size` (int)
+##### `--snow-sample-size` (int)
 
 Snow consensus defines `k` as the number of validators that are sampled during
 each network poll. This parameter lets one define the `k` value used for
 consensus. This should only be changed after careful consideration of the
 tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
 
-#### `--snow-quorum-size` (int)
+##### `--snow-quorum-size` (int)
 
 Snow consensus defines `alpha` as the number of validators that must prefer a
 transaction during each network poll to increase the confidence in the
@@ -939,7 +992,7 @@ transaction. This parameter lets us define the `alpha` value used for consensus.
 This should only be changed after careful consideration of the tradeoffs of Snow
 consensus. The value must be at greater than `k/2`. Defaults to `15`.
 
-#### `--snow-virtuous-commit-threshold` (int)
+##### `--snow-virtuous-commit-threshold` (int)
 
 Snow consensus defines `beta1` as the number of consecutive polls that a
 virtuous transaction must increase its confidence for it to be accepted. This
@@ -947,7 +1000,7 @@ parameter lets us define the `beta1` value used for consensus. This should only
 be changed after careful consideration of the tradeoffs of Snow consensus. The
 value must be at least `1`. Defaults to `15`.
 
-#### `--snow-rogue-commit-threshold` (int)
+##### `--snow-rogue-commit-threshold` (int)
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue
 transaction must increase its confidence for it to be accepted. This parameter
@@ -955,29 +1008,29 @@ lets us define the `beta2` value used for consensus. This should only be changed
 after careful consideration of the tradeoffs of Snow consensus. The value must
 be at least `beta1`. Defaults to `20`.
 
-#### `snow-optimal-processing` (int)
+##### `snow-optimal-processing` (int)
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-#### `snow-max-processing` (int)
+##### `snow-max-processing` (int)
 
 Maximum number of processing items to be considered healthy. Reports unhealthy
 if more than this number of items are outstanding. The value must be at least
 `1`. Defaults to `1024`.
 
-#### `snow-max-time-processing` (duration)
+##### `snow-max-time-processing` (duration)
 
 Maximum amount of time an item should be processing and still be healthy.
 Reports unhealthy if there is an item processing for longer than this duration.
 The value must be greater than `0`. Defaults to `2m`.
 
-#### `snow-mixed-query-num-push-vdr` (uint)
+##### `snow-mixed-query-num-push-vdr` (uint)
 
 If this node is a validator, when a container is inserted into consensus, send a
 Push Query to this many validators and a Pull Query to the others. Must be <= k.
 Defaults to `10`.
 
-#### `snow-mixed-query-num-push-non-vdr` (uint)
+##### `snow-mixed-query-num-push-non-vdr` (uint)
 
 If this node is not a validator, when a container is inserted into consensus,
 send a Push Query to %s validators and a Pull Query to the others. Must be <= k.
@@ -1090,9 +1143,9 @@ Node will report unhealthy if connected to less than this many peers. Defaults t
 
 Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
 
-#### `--network-health-max-time-since-no-requests` (duration)
+#### `--network-health-max-time-since-msg-sent` (duration)
 
-Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+Network layer returns unhealthy if haven't sent a message for at least this much time. Defaults to `1m`.
 
 #### `--network-health-max-portion-send-queue-full` (float)
 
@@ -1104,6 +1157,10 @@ Must be in \[0,1\]. Defaults to `0.9`.
 Node will report unhealthy if more than this portion of message sends fail. Must
 be in \[0,1\]. Defaults to `0.25`.
 
+#### network-health-max-outstanding-request-duration` (duration)
+
+Node reports unhealthy if there has been a request outstanding for this duration. Defaults to `5m`.
+
 #### `--network-max-clock-difference` (duration)
 
 Max allowed clock difference value between this node and peers. Defaults to `1m`.
@@ -1114,9 +1171,17 @@ If true, this node will only maintain a connection with another node if this
 node is a validator, the other node is a validator, or the other node is a
 beacon.
 
+#### `--network-tcp-proxy-enabled` (bool)
+
+Require all P2P connections to be initiated with a TCP proxy header. Defaults to `false`.
+
+#### `--network-tcp-proxy-read-timeout` (duration)
+
+Maximum duration to wait for a TCP proxy header. Defaults to `3s`.
+
 #### `--outbound-connection-timeout` (duration)
 
-Timeout while dialing a peer.
+Timeout while dialing a peer. Defaults to `30s`.
 
 ### Message Rate-Limiting
 
@@ -1128,34 +1193,47 @@ AvalancheGo.
 
 Rate-limiting based on how much CPU usage a peer causes.
 
-##### `cpu-tracker-halflife` (duration)
-
-Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
-change more slowly. Defaults to `15s`.
-
 ##### `throttler-inbound-cpu-validator-alloc` (float)
 
 Number of CPU allocated for use by validators. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
 
-##### `--throttler-inbound-cpu-at-large-alloc` (float)
-
-Number of CPU allocated for use by any peer. Value should be in range (0, total core count].
-Defaults to half of the number of CPUs on the machine.
-See also `--throttler-inbound-cpu-node-max-at-large-portion`.
-
-##### `--throttler-inbound-cpu-node-max-at-large-portion` (float)
-
-The max portion of `--throttler-inbound-cpu-at-large-alloc` that can be used by
-a given node. For example, if `--throttler-inbound-cpu-at-large-alloc` is 3, and
-`--throttler-inbound-cpu-node-max-at-large-portion` is 0.333`, then one peer can
-use at most 1 CPU from the at-large CPU allocation. Must be in [0,1]. Defaults
-to `1/3`.
-
 ##### `throttler-inbound-cpu-max-recheck-delay` (duration)
 
 In the CPU rate-limiter, check at least this often whether the node's CPU usage
 has fallen to an acceptable level. Defaults to `5s`.
+
+##### `--throttler-inbound-disk-max-recheck-delay` (duration)
+
+In the disk-based network throttler, check at least this often whether the node's disk usage has
+fallen to an acceptable level. Defaults to `5s`.
+
+##### `--throttler-inbound-cpu-max-non-validator-usage` (float)
+
+Number of CPUs that if fully utilized, will rate limit all non-validators. Value should be in range
+[0, total core count].
+Defaults to %80 of the number of CPUs on the machine.
+
+##### `--throttler-inbound-cpu-max-non-validator-node-usage` (float)
+
+Maximum number of CPUs that a non-validator can utilize. Value should be in range [0, total core count].
+Defaults to the number of CPUs / 8.
+
+##### `--throttler-inbound-disk-validator-alloc` (float)
+
+Maximum number of disk reads/writes per second to allocate for use by validators. Must be > 0.
+Defaults to `1000 GiB/s`.
+
+##### `--throttler-inbound-disk-max-non-validator-usage` (float)
+
+Number of disk reads/writes per second that, if fully utilized, will rate limit all non-validators.
+Must be >= 0.
+Defaults to `1000 GiB/s`.
+
+##### `--throttler-inbound-disk-max-non-validator-node-usage` (float)
+
+Maximum number of disk reads/writes per second that a non-validator can utilize. Must be >= 0.
+Defaults to `1000 GiB/s`.
 
 #### Bandwidth Based
 
@@ -1237,26 +1315,32 @@ Node makes at most this many outgoing peer connection attempts per second. Defau
 ### Peer List Gossiping
 
 Nodes gossip peers to each other so that each node can have an up-to-date peer
-list. A node gossips `--network-peer-list-num-validator-ips` peers to
-`--network-peer-list-validator-gossip-size` validators and
-`--network-peer-list-non-validator-gossip-size` non-validators every
+list. A node gossips `--network-peer-list-num-validator-ips` validator IPs to
+`--network-peer-list-validator-gossip-size` validators,
+`--network-peer-list-non-validator-gossip-size` non-validators and
+`--network-peer-list-peers-gossip-size` peers every
 `--network-peer-list-gossip-frequency`.
-
-#### `--network-peer-list-gossip-frequency` (duration)
-
-Defaults to `1m`.
 
 #### `--network-peer-list-num-validator-ips` (int)
 
-Defaults to `15`.
+Number of validator IPs to gossip to other nodes Defaults to `15`.
 
 #### `--network-peer-list-validator-gossip-size` (int)
 
-Defaults to `20`.
+Number of validators that the node will gossip peerlist to. Defaults to `20`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int)
 
-Defaults to `10`.
+Number of non-validators that the node will gossip peerlist to. Defaults to `0`.
+
+#### `--network-peer-list-peers-gossip-size` (int)
+
+Number of total peers (including non-validator or validator) that the node will gossip peerlist to
+Defaults to `0`.
+
+#### `--network-peer-list-gossip-frequency` (duration)
+
+Frequency to gossip peers to other nodes. Defaults to `1m`.
 
 #### ` --network-peer-read-buffer-size` (int)
 
@@ -1269,6 +1353,10 @@ Size of the buffer that peer messages are written into (there is one buffer per
 peer), defaults to `8` KiB (8192 Bytes).
 
 ### Resource Usage Tracking
+
+#### `--meter-vm-enabled` (bool)
+
+Enable Meter VMs to track VM performance with more granularity. Defaults to `true`.
 
 #### `--system-tracker-frequency` (duration)
 
@@ -1334,3 +1422,21 @@ The above example aliases the VM whose ID is
 
 As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded
 aliases for Virtual Machine IDs.
+
+### Indexing
+
+#### `--index-allow-incomplete` (boolean)
+
+If true, allow running the node in such a way that could cause an index to miss transactions.
+Ignored if index is disabled. Defaults to `false`.
+
+### Router
+
+#### `--router-health-max-drop-rate` (float)
+
+Node reports unhealthy if the router drops more than this portion of messages. Defaults to `1`.
+
+#### `--router-health-max-outstanding-requests` (uint)
+
+Node reports unhealthy if there are more than this many outstanding consensus requests
+(Get, PullQuery, etc.) over all chains. Defaults to `1024`.
