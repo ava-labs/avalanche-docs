@@ -105,9 +105,9 @@ _AvalancheGo starts/stops your process multiple times before launching the real 
   - Return : a `CreateHandlersResponse` containing a single item with the server's url. (or an empty
   array if not implementing the json-RPC endpoint)
 - [VM.StateSyncEnabled](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.StateSyncEnabled)
-  - Return : true if you want to enable StateSync, false otherwise.
+  - Return : `true` if you want to enable StateSync, `false` otherwise.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-    _If you had specified true in the `StateSyncEnabled` result_ 
+    _If you had specified `true` in the `StateSyncEnabled` result_ 
   - Param : a 
   [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) 
   with the `StateSyncing` value
