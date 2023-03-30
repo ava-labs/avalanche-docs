@@ -852,7 +852,7 @@ changed on a local network.
 
 #### `--transform-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that transform subnets. Defaults to
+Transaction fee, in nAVAX, for transactions that transform Subnets. Defaults to
 `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--add-primary-network-validator-fee` (int)
@@ -867,12 +867,12 @@ This can only be changed on a local network.
 
 #### `--add-subnet-validator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new subnet validators.
+Transaction fee, in nAVAX, for transactions that add new Subnet validators.
 Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--add-subnet-delegator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new subnet delegators.
+Transaction fee, in nAVAX, for transactions that add new Subnet delegators.
 Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)
@@ -1327,15 +1327,15 @@ Number of validator IPs to gossip to other nodes Defaults to `15`.
 
 #### `--network-peer-list-validator-gossip-size` (int)
 
-Number of validators that the node will gossip peerlist to. Defaults to `20`.
+Number of validators that the node will gossip peer list to. Defaults to `20`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int)
 
-Number of non-validators that the node will gossip peerlist to. Defaults to `0`.
+Number of non-validators that the node will gossip peer list to. Defaults to `0`.
 
 #### `--network-peer-list-peers-gossip-size` (int)
 
-Number of total peers (including non-validator or validator) that the node will gossip peerlist to
+Number of total peers (including non-validator or validator) that the node will gossip peer list to
 Defaults to `0`.
 
 #### `--network-peer-list-gossip-frequency` (duration)
