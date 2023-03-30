@@ -171,7 +171,9 @@ Since we are deploying to Fuji testnet, our `RPC_URL` export should be:
 export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 ```
 
-If you would like to verify you contracts during the deployment process (fastest and easiest way), be sure to get a [SnowTrace API Key](https://docs.snowtrace.io/getting-started/viewing-api-usage-statistics). Add this as an environment variable:
+If you would like to verify you contracts during the deployment process (fastest and easiest way),
+get a [Snowtrace API Key](https://docs.snowtrace.io/getting-started/viewing-api-usage-statistics).
+Add this as an environment variable:
 
 ```zsh
 export ETHERSCAN_API_KEY=<YOUR-SNOWTRACE-API-KEY>
@@ -182,7 +184,7 @@ Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) by running
 the command below while adding the values for `_name` and `_symbol`, the
 relevant [constructor
 arguments](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3ad93abf50fba65e3aab68f23382bcace73968be/contracts/NFT.sol#L13)
-of the NFT contract. You can verify the contracts with SnowTrace by adding `--verify` before the `--constructor-args`:
+of the NFT contract. You can verify the contracts with Snowtrace by adding `--verify` before the `--constructor-args`:
 
 ```zsh
 forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --verify --constructor-args GameItem ITM
@@ -201,7 +203,8 @@ Deployed to: 0x52c84043cd9c865236f11d9fc9f56aa003c1f922
 Transaction hash: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32f533
 ```
 
-Upon successful verification, after your deployment you will see the contract verification status as `successfully verified`:
+Upon successful verification, after your deployment you will see the contract verification status as
+`successfully verified`:
 
 ```zsh
 Starting contract verification...
@@ -227,13 +230,16 @@ Contract successfully verified
 
 _Note: Please store your `Deployed to` address for use in the next sections._
 
-## Verifying after Deployment
+## Verifying After Deployment
 
-If you did not verify within the deployment process, you can still verify a deployed contract with foundry, using [`forge verify-contract`](https://book.getfoundry.sh/reference/forge/forge-verify-contract).
+If you did not verify within the deployment process, you can still verify a deployed contract with
+foundry, using [`forge verify-contract`](https://book.getfoundry.sh/reference/forge/forge-verify-contract).
 
-_Note: The foundry.toml and environment variables will have to be set like they were in the previous section_
+_Note: The foundry.toml and environment variables will have to be
+set like they were in the previous section_
 
-For example, if we were to verify the NFT contract we just deployed in the previous section it would look this:
+For example, if we were to verify the NFT contract we just
+deployed in the previous section it would look this:
 
 ```zsh
 forge verify-contract --chain-id 43113 --watch --constructor-args $(cast abi-encode "constructor(string,string)" "GameItem" "ITM") 0x8e982a4ef70430f8317b5652bd5c28f147fbf912 NFT
