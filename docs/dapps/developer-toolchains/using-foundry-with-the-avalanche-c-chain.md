@@ -133,7 +133,8 @@ forge init --no-git --no-commit --force
 ```
 
 The `foundry.toml` by default points to the folders it added.
-We will want to change this to make sure the `src` points to the `contracts` directory.
+We will want to change this to make sure the
+`src` points to the `contracts` directory.
 Change your `foundry.toml` to look like the following:
 
 ```zsh
@@ -156,8 +157,8 @@ To compile the NFT contract run:
 forge build
 ```
 
-By default, the contract artifacts will be in the `out` directory, as dictated in the `foundry.toml`. To deploy our
-compiled contract with Forge we have to set environment variables for the RPC
+By default, the contract artifacts will be in the `out` directory, as dictated in the `foundry.toml`.
+To deploy our compiled contract with Forge we have to set environment variables for the RPC
 endpoint and the private key we want to use to deploy.
 
 Set your environment variables by running:
