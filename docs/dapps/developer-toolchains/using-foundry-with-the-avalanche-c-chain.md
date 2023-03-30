@@ -157,7 +157,7 @@ To compile the NFT contract run:
 forge build
 ```
 
-By default, the contract artifacts will be in the `out` directory, as dictated in the `foundry.toml`.
+By default, the contract artifacts will be in the `out` directory, as specified in the `foundry.toml`.
 To deploy our compiled contract with Forge we have to set environment variables for the RPC
 endpoint and the private key we want to use to deploy.
 
