@@ -507,7 +507,9 @@ curl -X POST --data '{
 
 ### `info.uptime`
 
-Returns the network's observed uptime of this node.
+Returns the network's observed uptime of this node. 
+This is the only reliable source of data for your node's uptime. 
+Other sources may be using data gathered with incomplete (limited) information.
 
 **Signature:**
 

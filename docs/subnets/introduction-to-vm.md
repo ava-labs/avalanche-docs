@@ -58,7 +58,7 @@ VMs are supplied as binaries to a node running `AvalancheGo`. These binaries mus
 assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
 
 In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See
-[here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details.
+[here](../nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string) for more details.
 Multiple VMs can be installed in this location.
 
 Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC

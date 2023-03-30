@@ -459,6 +459,29 @@ content of the TLS private key used by the node for the HTTPS server. Note that
 full private key content, with the leading and trailing header, must be base64
 encoded. This must be specified when `--http-tls-enabled=true`.
 
+#### `--http-read-timeout` (string)
+
+Maximum duration for reading the entire request, including the body. A zero or
+negative value means there will be no timeout.
+
+#### `--http-read-header-timeout` (string)
+
+Maximum duration to read request headers. The connection’s read deadline is
+reset after reading the headers. If `--http-read-header-timeout` is zero, the
+value of `--http-read-timeout` is used. If both are zero, there is no timeout.
+
+#### `--http-write-timeout` (string)
+
+Maximum duration before timing out writes of the response. It is reset whenever
+a new request’s header is read. A zero or negative value means there will be no
+timeout.
+
+#### `--http-idle-timeout` (string)
+
+Maximum duration to wait for the next request when keep-alives are enabled. If
+`--http-idle-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero,
+there is no timeout.
+
 ## IPCs
 
 #### `--ipcs-chain-ids` (string)
@@ -1280,11 +1303,11 @@ node will be considered unhealthy. Must be >=
 `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1
 GiB).
 
-### Plugin Mode
+### Plugins
 
-#### `--plugin-mode-enabled` (bool)
+#### `--plugin-dir` (string)
 
-If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
+Sets the directory for [VM plugins](../../subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
 
 ### Virtual Machine (VM) Configs
 
