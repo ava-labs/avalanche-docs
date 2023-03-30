@@ -170,7 +170,7 @@ If you are using the pre-built binaries on Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-By default (without specifying any parameters), this node will connect to the
+By default (without specifying --network-id), this node will connect to the
 Mainnet which may take much longer time to finish bootstrapping. See
 [this](#connect-to-fuji-testnet) for connecting to Fuji Testnet.
 
