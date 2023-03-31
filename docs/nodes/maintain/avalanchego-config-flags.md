@@ -1008,29 +1008,29 @@ lets us define the `beta2` value used for consensus. This should only be changed
 after careful consideration of the tradeoffs of Snow consensus. The value must
 be at least `beta1`. Defaults to `20`.
 
-##### `snow-optimal-processing` (int)
+##### `--snow-optimal-processing` (int)
 
 Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
 
-##### `snow-max-processing` (int)
+##### `--snow-max-processing` (int)
 
 Maximum number of processing items to be considered healthy. Reports unhealthy
 if more than this number of items are outstanding. The value must be at least
 `1`. Defaults to `1024`.
 
-##### `snow-max-time-processing` (duration)
+##### `--snow-max-time-processing` (duration)
 
 Maximum amount of time an item should be processing and still be healthy.
 Reports unhealthy if there is an item processing for longer than this duration.
 The value must be greater than `0`. Defaults to `2m`.
 
-##### `snow-mixed-query-num-push-vdr` (uint)
+##### `--snow-mixed-query-num-push-vdr` (uint)
 
 If this node is a validator, when a container is inserted into consensus, send a
 Push Query to this many validators and a Pull Query to the others. Must be <= k.
 Defaults to `10`.
 
-##### `snow-mixed-query-num-push-non-vdr` (uint)
+##### `--snow-mixed-query-num-push-non-vdr` (uint)
 
 If this node is not a validator, when a container is inserted into consensus,
 send a Push Query to %s validators and a Pull Query to the others. Must be <= k.
@@ -1038,7 +1038,7 @@ Defaults to `0`.
 
 ### ProposerVM Parameters
 
-#### `proposervm-use-current-height` (bool)
+#### `--proposervm-use-current-height` (bool)
 
 Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
 
@@ -1157,7 +1157,7 @@ Must be in \[0,1\]. Defaults to `0.9`.
 Node will report unhealthy if more than this portion of message sends fail. Must
 be in \[0,1\]. Defaults to `0.25`.
 
-#### network-health-max-outstanding-request-duration` (duration)
+#### `--network-health-max-outstanding-request-duration` (duration)
 
 Node reports unhealthy if there has been a request outstanding for this duration. Defaults to `5m`.
 
@@ -1193,12 +1193,12 @@ AvalancheGo.
 
 Rate-limiting based on how much CPU usage a peer causes.
 
-##### `throttler-inbound-cpu-validator-alloc` (float)
+##### `--throttler-inbound-cpu-validator-alloc` (float)
 
 Number of CPU allocated for use by validators. Value should be in range (0, total core count].
 Defaults to half of the number of CPUs on the machine.
 
-##### `throttler-inbound-cpu-max-recheck-delay` (duration)
+##### `--throttler-inbound-cpu-max-recheck-delay` (duration)
 
 In the CPU rate-limiter, check at least this often whether the node's CPU usage
 has fallen to an acceptable level. Defaults to `5s`.
