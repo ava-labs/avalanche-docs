@@ -6,6 +6,26 @@
 
 :::
 
+## V1.10.0 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
+
+**Cortina Pre-release (v1.10.0-fuji)**
+
+Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.
+
+This upgrade:
+
+- Linearizes the X-chain 
+- Introduces delegation batching to the P-chain 
+- Increases the maximum block size on the C-chain.
+
+The changes in the upgrade go into effect at 11 AM EST, April 6th 2023 on the Fuji testnet. After Fuji is updated and verified, a mainnet compatible release will be published.
+
+All Fuji nodes should upgrade before 11 AM EST, April 6th 2023.
+
+The supported plugin version is `25.`
+
+:::
+
 ## V1.9.16 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.16)
 
 **Banff.16**
