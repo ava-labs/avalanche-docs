@@ -29,7 +29,6 @@ If you're using the installer script on your Fuji node, you'll need to run the f
 
 The supported plugin version is `25.`
 
-:::
 
 ## V1.9.16 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.16)
 
