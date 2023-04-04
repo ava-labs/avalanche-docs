@@ -28,7 +28,9 @@ All Fuji nodes should upgrade before 11 AM ET, April 6th 2023.
 If you're using the installer script on your Fuji node, you'll need to run 
 the following command to upgrade (marked as a pre-release for now):
 
-`./avalanchego-installer.sh --version v1.10.0-Fuji`
+```
+./avalanchego-installer.sh --version v1.10.0-Fuji
+```
 
 The supported plugin version is `25.`
 
