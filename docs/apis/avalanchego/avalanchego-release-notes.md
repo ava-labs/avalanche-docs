@@ -6,10 +6,36 @@
 
 :::
 
+## [Pre-Release] V1.10.0-Fuji [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
+
+**Cortina Pre-release (v1.10.0-Fuji)**
+
+Please note that this release is unable to run Mainnet - and will display:
+"Mainnet is not supported" if attempted to run with a Mainnet configuration.
+
+The [Cortina Upgrade](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6):
+
+- Linearizes the X-chain
+- Introduces delegation batching to the P-chain
+- Increases the maximum block size on the C-chain
+
+Cortina activates on Fuji at 11 AM ET, April 6th 2023 on the Fuji testnet. Cortina includes
+protocol optimizations that are not compatible with AvalancheGo versions < v1.10.0. If you
+run a node on Fuji, make sure to upgrade **before** the Fuji activation time. The supported plugin
+version is `25.`
+
+If you're using the installer script on your Fuji node, you'll need to run
+the following command to upgrade (marked as a pre-release for now):
+
+```bash
+./avalanchego-installer.sh --version v1.10.0-Fuji
+```
+
+After Fuji is updated and verified, a Mainnet compatible release will be published.
+
 ## V1.9.16 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.16)
 
 **Banff.16**
-
 
 This version is backwards compatible to
 [v1.9.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.0). It is
@@ -19,7 +45,6 @@ optional, but encouraged. The supported plugin version is `24`.
 - Improved snowstorm lookup error handling
 - Removed rejected vertices from the Avalanche frontier more aggressively
 - Reduced default health check values for processing decisions
-
 
 ## V1.9.15 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.15)
 
