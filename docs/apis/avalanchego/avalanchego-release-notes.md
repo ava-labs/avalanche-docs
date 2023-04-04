@@ -6,7 +6,7 @@
 
 :::
 
-## V1.10.0 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
+## PRE_RELEASE V1.10.0-Fuji [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
 
 **Cortina Pre-release (v1.10.0-fuji)**
 
