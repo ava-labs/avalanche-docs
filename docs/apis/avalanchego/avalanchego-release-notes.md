@@ -27,7 +27,7 @@ version is `25.`
 If you're using the installer script on your Fuji node, you'll need to run
 the following command to upgrade (marked as a pre-release for now):
 
-```
+```bash
 ./avalanchego-installer.sh --version v1.10.0-Fuji
 ```
 
