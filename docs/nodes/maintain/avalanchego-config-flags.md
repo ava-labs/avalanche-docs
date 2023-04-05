@@ -1083,9 +1083,15 @@ averages. Defaults to `10s`.
 
 Allows the node to connect peers with private IPs. Defaults to `true`.
 
-#### `--network-compression-enabled` (bool)
+#### `--network-compression-enabled` (bool):
 
-If true, compress certain messages sent to peers to reduce bandwidth usage. Defaults to `true`.
+If true, compress certain messages sent to peers to reduce bandwidth usage.
+This flag is deprecated as of v1.10.0. Use `--network-compression-type` instead.
+
+#### `--network-compression-type` (string):
+
+The type of compression to use when sending messages to peers. Defaults to `gzip`.
+Must be one of [`gzip`, `zstd`, `none`].
 
 #### `--network-initial-timeout` (duration)
 
