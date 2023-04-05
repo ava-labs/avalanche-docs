@@ -156,6 +156,7 @@ Keystore
 KYCed
 LevelDB
 linearization
+Linearizes
 liveness
 lol
 lookups

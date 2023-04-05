@@ -191,8 +191,8 @@ _on nodeY and nodeZ_
 
 Whenever your VM is ready to build a new block, it will initiate the block building process by 
 using the [Messenger](https://buf.build/ava-labs/avalanche/docs/main:messenger) service.
-Supposing that nodeY wants to build the block _you probably will implement some kind of background
-worker checking every second if there are any pending transactions_)_ :
+Supposing that nodeY wants to build the block. _you probably will implement some kind of background
+worker checking every second if there are any pending transactions_ :
 
 _on nodeY_
 
@@ -218,7 +218,6 @@ _on nodeY_
   - You must mark this block as the next preferred block.
   - Return : Empty
 
-
 _on nodeX and nodeZ_ 
 
 - [VM.ParseBlock](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.ParseBlock)
@@ -242,8 +241,48 @@ _on all nodes_
   - You must accept this block as your last final block.
   - Return : Empty
 
-_TODO_ Describe how conflicts are managed (two blocks are built at the exact same time) - 
-[VM.BlockReject](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockReject)
+#### Managing Conflicts
+
+Conflicts happen when two or more nodes propose the next block at the same time.
+AvalancheGo takes care of this and decides which block should be considered
+final, and which blocks should be rejected using Snowman consensus.
+On the VM side, all there is to do is implement the `VM.BlockAccept` and
+`VM.BlockReject` methods.
+
+_nodeX proposes block `0x123...`, nodeY proposes block `0x321...` and nodeZ
+proposes block `0x456`_
+
+There are three conflicting blocks (different hashes), and if we look at our VM's
+log files, we can see that AvalancheGo uses Snowman to decide which block must
+be accepted. 
+
+```log
+...
+... snowman/voter.go:58 filtering poll results ...
+... snowman/voter.go:65 finishing poll ...
+... snowman/voter.go:87 Snowman engine can't quiesce
+... 
+... snowman/voter.go:58 filtering poll results ...
+... snowman/voter.go:65 finishing poll ...
+... snowman/topological.go:600 accepting block
+...
+```
+
+Supposing that AvalancheGo accepts block `0x123...`. The following RPC methods
+are called on all nodes :
+
+- [VM.BlockAccept](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockAccept)
+  - Param : The block's ID (`0x123...`)
+  - You must accept this block as your last final block.
+  - Return : Empty
+- [VM.BlockReject](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockReject)
+  - Param : The block's ID (`0x321...`)
+  - You must mark this block as rejected.
+  - Return : Empty
+- [VM.BlockReject](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockReject)
+  - Param : The block's ID (`0x456...`)
+  - You must mark this block as rejected.
+  - Return : Empty
 
 ### json-RPC
 
