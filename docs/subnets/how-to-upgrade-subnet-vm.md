@@ -51,7 +51,7 @@ The next option asks you to select your new virtual machine.
     Update to a custom binary
 ```
 
-If you're using the Subnet-EVM or SpacesVM, you'll have the option to upgrade to the latest released
+If you're using the Subnet-EVM, you'll have the option to upgrade to the latest released
 version. You can also select a specific version or supply a custom binary. If your Subnet already
 uses a custom VM, you need to select another custom binary.
 

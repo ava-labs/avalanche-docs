@@ -84,7 +84,7 @@ The `subnet create` command builds a new genesis file to configure your Subnet.
 By default, the command runs an interactive wizard. It walks you through
 all the steps you need to create your first Subnet.
 
-The tool supports deploying Subnet-EVM, SpacesVM, and custom VMs. You
+The tool supports deploying Subnet-EVM and custom VMs. You
 can create a custom, user-generated genesis with a custom VM by providing
 the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
@@ -107,7 +107,6 @@ avalanche subnet create [subnetName] [flags]
     --genesis string      file path of genesis to use
 -h, --help                help for create
     --latest              use latest VM version, takes precedence over --vm-version
-    --spacesvm            use the SpacesVM as the base template
     --vm string           file path of custom vm to use
     --vm-version string   version of vm template to use
 ```
@@ -272,7 +271,6 @@ avalanche subnet import public [subnetPath] [flags]
 -h, --help                       help for public
     --mainnet mainnet            import from mainnet
     --node-url string            [optional] URL of an already running subnet validator
-    --spacesvm                   use the SpacesVM as the base template
     --subnet-id string           the subnet ID
     --testnet testnet            import from testnet (alias for `fuji`)
 
