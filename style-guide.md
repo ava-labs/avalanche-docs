@@ -20,7 +20,6 @@ or logs.
 
 - Coreth for <https://github.com/ava-labs/coreth>
 - Subnet-EVM for <https://github.com/ava-labs/subnet-evm>
-- BlobVM for <https://github.com/ava-labs/blobvm>
 - TimestampVM for <https://github.com/ava-labs/timestampvm>
 - XSVM for <https://github.com/ava-labs/xsvm>
 - TimestampVM RS for <https://github.com/ava-labs/timestampvm-rs>

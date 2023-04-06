@@ -86,7 +86,8 @@ on an object, whereas VM handlers can be thought of as static methods on a class
 
 The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be
 initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the
-VM. It's defined in the [`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go) file
+VM. It's defined in the 
+[`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go) file
 of the `timestampvm` repository.
 
 ```go
@@ -115,7 +116,8 @@ if err := vm.Initialize(
 );
 ```
 
-You can refer to the [implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75)) of
+You can refer to the
+[implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75)) of
 `vm.initialize` in the TimestampVM repository.
 
 ## Interfaces
