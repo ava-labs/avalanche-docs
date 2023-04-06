@@ -29,7 +29,7 @@ most mature developer tooling and receives regular updates by the Ava Labs team.
 
 #### Experimental Subnets
 
-Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the [TimestampVM Go](create-a-vm-timestampvm), [TimestampVMRust](create-a-simple-rust-vm), [BlobVM](create-a-vm-blobvm), and others. These VMs are demo software
+Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the [TimestampVM Go](create-a-vm-timestampvm), [TimestampVMRust](create-a-simple-rust-vm), and others. These VMs are demo software
 and aren't ready for production environments. Although they do receive periodic updates, the Ava
 Labs team hasn't audited their performance and security, internally or externally. However, these
 open source projects are intended to inspire the community, and provide novel capabilities not
