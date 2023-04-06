@@ -29,9 +29,7 @@ most mature developer tooling and receives regular updates by the Ava Labs team.
 
 #### Experimental Subnets
 
-Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the
-[SpacesVM](spaces), [TimestampVM Go](create-a-vm-timestampvm), [TimestampVM
-Rust](create-a-simple-rust-vm), [BlobVM](create-a-vm-blobvm), and others. These VMs are demo software
+Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the [TimestampVM Go](create-a-vm-timestampvm), [TimestampVMRust](create-a-simple-rust-vm), [BlobVM](create-a-vm-blobvm), and others. These VMs are demo software
 and aren't ready for production environments. Although they do receive periodic updates, the Ava
 Labs team hasn't audited their performance and security, internally or externally. However, these
 open source projects are intended to inspire the community, and provide novel capabilities not
@@ -43,7 +41,7 @@ get started.
 #### Custom Subnets
 
 Custom Subnets are an open-ended interface that allow developers to build any VM they can dream.
-These VMs may be a fork of an existing VM such as Subnet-EVM, SpacesVM, or even a
+These VMs may be a fork of an existing VM such as Subnet-EVM, or even a
 non-Avalanche-native VM such as Solana's virtual machine. Alternatively, you can build your VM
 entirely from scratch using almost any programming language. See [Introduction to
 VMs](introduction-to-vm) for advice on getting started.
