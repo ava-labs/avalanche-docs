@@ -128,7 +128,6 @@ Retrieved information. BlockchainID: 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What's this VM's type?:
   ▸ Subnet-EVM
-    SpacesVM
     Custom
 ```
 
