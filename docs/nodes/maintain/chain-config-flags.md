@@ -804,7 +804,7 @@ should be at
 for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries` 
 and set to true (by default it is set to `false`)
 
-- When deactivating offline pruning  `(pruning-enabled: false)`, this will not 
+- When deactivating offline pruning  `(pruning-enabled: false)` from previously enabled state, this will not 
 impact blocks whose state was already pruned. This will return missing trie 
 node errors, as the node can't lookup the state of a historical block if that 
 state was deleted.
