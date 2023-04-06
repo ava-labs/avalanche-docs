@@ -10,7 +10,6 @@ swap:
   "(?i)fuji": Fuji
   "(?i)avalanchego": AvalancheGo
   "(?i)mainnet": Mainnet
-  "(?i)spacesvm": SpacesVM
   "(?i)time[ -]?stamp[ -]?vm": TimestampVM
   "(?i)blob[ -]?vm": BlobVM
   "(?i)coreth": Coreth

@@ -133,7 +133,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Avalanche-CLI needs to know the VM type, to hit its repository and select
 what VM versions are available.
-This works automatically for Ava Labs VMs (like Subnet-EVM and SpacesVM).
+This works automatically for Ava Labs VMs (like Subnet-EVM).
 
 Custom VMs aren't supported yet at this point, but are next on the agenda.
 
