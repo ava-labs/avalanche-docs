@@ -127,7 +127,6 @@ Select `Custom` for your VM.
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose your VM:
     Subnet-EVM
-    SpacesVM
   ▸ Custom
 ```
 

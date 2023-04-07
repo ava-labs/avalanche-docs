@@ -68,11 +68,6 @@ To learn more about smart contract support, click [here](../../dapps/launch-your
 - [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
   - An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart
   contracts
-- [SpacesVM](https://github.com/ava-labs/spacesvm)
-  - An authenticated, hierarchical key-value store w/EIP-712 compatibility, state expiry, and
-  fee-based metering
-- [BlobVM](https://github.com/ava-labs/blobvm)
-  - A content-addressable key-value store w/EIP-712 compatibility and fee-based metering
 - [TimestampVM](https://github.com/ava-labs/timestampvm)
   - A decentralized timestamp server
 - [XSVM](https://github.com/ava-labs/xsvm)
@@ -81,7 +76,6 @@ To learn more about smart contract support, click [here](../../dapps/launch-your
 #### Tutorials
 
 - [How to Build a Simple Golang VM](../../subnets/create-a-vm-timestampvm.md)
-- [How to Build a Complex Golang VM](../../subnets/create-a-vm-blobvm.md)
 
 ### Rust
 
@@ -89,8 +83,6 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
 
 - [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
   - A Rust implementation of TimestampVM
-- [SpacesVM RS](https://github.com/ava-labs/spacesvm-rs)
-  - A Rust implementation of SpacesVM
 
 #### Tutorials
 
