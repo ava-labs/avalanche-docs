@@ -96,8 +96,8 @@ func main() {
 ```
 
 After Cortina activation, it will also be possible to fetch X-Chain blocks
-directly without enabling the Index API. You can use the *avm.getBlock*,
-*avm.getBlockByHeight*, and *avm.getHeight* endpoints to do so. This, again,
+directly without enabling the Index API. You can use the [avm.getBlock](././apis/x-chain.md#avmgetblock),
+[avm.getBlockByHeight](././apis/x-chain.md#avmgetblockbyheight), and [avm.getHeight](././apis/x-chain.md#avmgetheight) endpoints to do so. This, again,
 will be similar to the [P-Chain semantics](apis/p-chain.md#platformgetblock).
 
 ## Deprecated API Calls
