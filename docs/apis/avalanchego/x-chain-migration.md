@@ -170,3 +170,22 @@ Transaction types with similar names to these APIs are NOT being deprecated.
   * platform.getMaxStakeAmount
   * platform.getRewardUTXOs
 <!-- vale on -->
+
+## Cortina FAQ
+
+### Do I have to upgrade my node?
+
+If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date, your node will be marked as offline and other nodes will report your node as having lower uptime, which may jeopardize your staking rewards.
+
+### Is there any change in hardware requirements?
+
+No.
+
+### Will updating decrease my validator’s uptime?
+
+No. As a reminder, you can check your validator’s estimated uptime using the [`info.uptime` API call](././apis/info.md#infouptime).
+
+
+### I think something is wrong. What should I do?
+
+First, make sure that you’ve read the documentation thoroughly and checked the [FAQs](https://support.avax.network/en/). If you don’t see an answer to your question, go to our [Discord](https://discord.com/invite/RwXY7P6) server and search for your question. If it has not already been asked, please post it in the appropriate channel.
