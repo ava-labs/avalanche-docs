@@ -890,7 +890,7 @@ curl -X POST --data '{
 
 ### `avm.getBlock`
 
-Get a block by its ID.
+Returns the block with the given id.
 
 **Signature:**
 
@@ -942,6 +942,62 @@ curl -X POST --data '{
   "id": 1
 }
 ```
+
+### `avm.getBlockByHeight`
+
+Returns block at the given height.
+
+**Signature:**
+
+```sh
+avm.getBlockByHeight({
+    height: uint64
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}
+```
+
+**Request:**
+
+- `blockHeight` is the block height. It should be in `uint64` format.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
+
+**Response:**
+
+- `block` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getBlockByHeight”,
+    "params": {
+        “height”: “275686313486”,
+        "encoding": “hex”
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000002000000000642f6739d4efcdd07e4d4919a7fc2020b8a0f081dd64c262aaace5a6dad22be0b55fec0700000000004db9e100000001000000110000000100000000000000000000000000000000000000000000000000000000000000000000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000005c6ece390000000000000000000000000100000001930ab7bf5018bfc6f9435c8b15ba2fe1e619c0230000000000000000ed5f38341e436e5d46e2bb00b45d62ae97d1b050c64bc634ae10626739e35c4b00000001c6dda861341665c3b555b46227fb5e56dc0a870c5482809349f04b00348af2a80000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000005c6edd7b40000000010000000000000001000000090000000178688f4d5055bd8733801f9b52793da885bef424c90526c18e4dd97f7514bf6f0c3d2a0e9a5ea8b761bc41902eb4902c34ef034c4d18c3db7c83c64ffeadd93600731676de",
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
 ### `avm.getTx`
 
 Returns the specified transaction. The `encoding` parameter sets the format of the returned
