@@ -193,5 +193,7 @@ No. As a reminder, you can check your validator’s estimated uptime using the [
 
 First, make sure that you’ve read the documentation thoroughly and checked 
 the [FAQs](https://support.avax.network/en/). 
-If you don’t see an answer to your question, go to our [Discord](https://discord.com/invite/RwXY7P6) 
-server and search for your question. If it has not already been asked, please post it in the appropriate channel.
+If you don’t see an answer to your question, 
+go to our [Discord](https://discord.com/invite/RwXY7P6) 
+server and search for your question. 
+If it has not already been asked, please post it in the appropriate channel.
