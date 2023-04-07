@@ -195,7 +195,6 @@ const sidebars = {
       label: 'Examples',
       collapsed: false,
       items: [
-        'subnets/spaces',
         'subnets/wagmi'
       ]
     },
