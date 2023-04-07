@@ -97,7 +97,8 @@ func main() {
 
 After Cortina activation, it will also be possible to fetch X-Chain blocks
 directly without enabling the Index API. You can use the [avm.getBlock](././apis/x-chain.md#avmgetblock),
-[avm.getBlockByHeight](././apis/x-chain.md#avmgetblockbyheight), and [avm.getHeight](././apis/x-chain.md#avmgetheight) endpoints to do so. This, again,
+[avm.getBlockByHeight](././apis/x-chain.md#avmgetblockbyheight), and [avm.getHeight](././apis/x-chain.md#avmgetheight)
+endpoints to do so. This, again,
 will be similar to the [P-Chain semantics](apis/p-chain.md#platformgetblock).
 
 ## Deprecated API Calls
@@ -175,7 +176,8 @@ Transaction types with similar names to these APIs are NOT being deprecated.
 
 ### Do I have to upgrade my node?
 
-If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date, your node will be marked as offline and other nodes will report your node as having lower uptime, which may jeopardize your staking rewards.
+If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date, 
+your node will be marked as offline and other nodes will report your node as having lower uptime, which may jeopardize your staking rewards.
 
 ### Is there any change in hardware requirements?
 
@@ -188,4 +190,5 @@ No. As a reminder, you can check your validator’s estimated uptime using the [
 
 ### I think something is wrong. What should I do?
 
-First, make sure that you’ve read the documentation thoroughly and checked the [FAQs](https://support.avax.network/en/). If you don’t see an answer to your question, go to our [Discord](https://discord.com/invite/RwXY7P6) server and search for your question. If it has not already been asked, please post it in the appropriate channel.
+First, make sure that you’ve read the documentation thoroughly and checked the [FAQs](https://support.avax.network/en/). 
+If you don’t see an answer to your question, go to our [Discord](https://discord.com/invite/RwXY7P6) server and search for your question. If it has not already been asked, please post it in the appropriate channel.

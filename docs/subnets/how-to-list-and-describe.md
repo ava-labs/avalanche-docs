@@ -18,6 +18,7 @@ Example:
 ```
 
 To see detailed information about your deployed Subnets, add the `--deployed` flag:
+
 ```text
 > avalanche subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
