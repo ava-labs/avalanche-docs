@@ -998,6 +998,42 @@ curl -X POST --data '{
 }
 ```
 
+### `avm.getHeight`
+
+Returns the height of the last accepted block.
+
+**Signature:**
+
+```sh
+avm.getHeight() ->
+{
+    height: uint64,
+}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getHeight",
+    "params": {},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "height": "5094088"
+  },
+  "id": 1
+}
+```
+
 ### `avm.getTx`
 
 Returns the specified transaction. The `encoding` parameter sets the format of the returned
