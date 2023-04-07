@@ -174,22 +174,22 @@ Transaction types with similar names to these APIs are NOT being deprecated.
 
 ## Cortina FAQ
 
-### Do I have to upgrade my node?
+### Do I Have to Upgrade my Node?
 
 If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date, 
 your node will be marked as offline and other nodes will report your node as having lower uptime, 
 which may jeopardize your staking rewards.
 
-### Is there any change in hardware requirements?
+### Is There any Change in Hardware Requirements?
 
 No.
 
-### Will updating decrease my validator’s uptime?
+### Will Updating Decrease my Validator’s Uptime?
 
 No. As a reminder, you can check your validator’s estimated uptime using the [`info.uptime` API call](././apis/info.md#infouptime).
 
 
-### I think something is wrong. What should I do?
+### I Think Something Is Wrong. What Should I Do?
 
 First, make sure that you’ve read the documentation thoroughly and checked 
 the [FAQs](https://support.avax.network/en/). 
