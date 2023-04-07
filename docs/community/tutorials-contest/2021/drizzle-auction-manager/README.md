@@ -430,7 +430,7 @@ Starting migrations...
 ======================
 > Network name:    'fuji'
 > Network id:      1
-> Block gas limit: 15000000 (0x7a1200)
+> Block gas limit: 8000000 (0x7a1200)
 
 
 1_initial_migration.js
