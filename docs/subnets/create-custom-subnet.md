@@ -66,7 +66,7 @@ compatible with your custom VM.
     "config": {
         "chainId": 12345,
         "feeConfig": {
-            "gasLimit": 8000000,
+            "gasLimit": 15000000,
             "targetBlockRate": 2,
             "minBaseFee": 25000000000,
             "targetGas": 15000000,

@@ -277,7 +277,7 @@ Yes, the genesis file is in json format. The output should look like:
     "muirGlacierBlock": 0,
     "SubnetEVMTimestamp": 0,
     "feeConfig": {
-      "gasLimit": 8000000,
+      "gasLimit": 15000000,
       "targetBlockRate": 2,
       "minBaseFee": 25000000000,
       "targetGas": 15000000,
@@ -352,7 +352,7 @@ it to a block number in the future as the activation block number.
 
 The total amount of gas that can be used in a single block. Keep in mind that
 this impacts how much computation happens in one block. This is set to
-`8,000,000` in C-Chain. Also, the value represents the maximum amount of gas a
+`15,000,000` in C-Chain. Also, the value represents the maximum amount of gas a
 single transaction can use.
 
 #### `targetBlockRate`
@@ -534,8 +534,8 @@ Optional extra data that can be included in the genesis block. This is commonly 
 #### `gasLimit`
 
 The total amount of gas that can be used in a single block. It should be set to
-the same value as in [the fee config](#fee-config). The value `0x7a1200` is
-hexadecimal and it's equal to `8,000,000`.
+the same value as in [the fee config](#fee-config). The value `0xE4E1C0` is
+hexadecimal and it's equal to `15,000,000`.
 
 #### `difficulty`
 

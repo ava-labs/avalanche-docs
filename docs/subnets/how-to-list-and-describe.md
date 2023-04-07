@@ -79,7 +79,7 @@ Example:
 +--------------------------+-------------+
 |      GAS PARAMETER       |    VALUE    |
 +--------------------------+-------------+
-| GasLimit                 |     8000000 |
+| GasLimit                 |    15000000 |
 +--------------------------+-------------+
 | MinBaseFee               | 25000000000 |
 +--------------------------+-------------+
@@ -148,7 +148,7 @@ Example:
         "muirGlacierBlock": 0,
         "subnetEVMTimestamp": 0,
         "feeConfig": {
-            "gasLimit": 8000000,
+            "gasLimit": 15000000,
             "targetBlockRate": 2,
             "minBaseFee": 25000000000,
             "targetGas": 15000000,
@@ -173,7 +173,7 @@ Example:
     "nonce": "0x0",
     "timestamp": "0x0",
     "extraData": "0x",
-    "gasLimit": "0x7a1200",
+    "gasLimit": "0xE4E1C0",
     "difficulty": "0x0",
     "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "coinbase": "0x0000000000000000000000000000000000000000",

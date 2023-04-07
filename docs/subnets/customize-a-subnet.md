@@ -51,7 +51,7 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
     "muirGlacierBlock": 0,
     "subnetEVMTimestamp": 0,
     "feeConfig": {
-      "gasLimit": 8000000,
+      "gasLimit": 15000000,
       "minBaseFee": 25000000000,
       "targetGas": 15000000,
       "baseFeeChangeDenominator": 36,
