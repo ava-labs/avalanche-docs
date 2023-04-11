@@ -10,9 +10,7 @@ swap:
   "(?i)fuji": Fuji
   "(?i)avalanchego": AvalancheGo
   "(?i)mainnet": Mainnet
-  "(?i)spacesvm": SpacesVM
   "(?i)time[ -]?stamp[ -]?vm": TimestampVM
-  "(?i)blob[ -]?vm": BlobVM
   "(?i)coreth": Coreth
   "(?i)avalanche network runner": Avalanche Network Runner
   "(?i)subnet[ -]?cli": Subnet-CLI
