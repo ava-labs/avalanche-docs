@@ -35,22 +35,22 @@ the application, as it simplifies operation. You can download Postman from its
 up using your email address as then your workspace can be easily backed up and
 shared between web app and the app installed on your computer.
 
-![Download Postman](/img/postman_01_download.png)
+![Download Postman](/img/postman-1-download.png)
 
 After you installed the application, run it. It will prompt you to create an
 account or log in. Do so. Again, it is not necessary, but recommended.
 
 ### Collection Import
 
-Select `New workspace` from Workspaces tab and follow the prompts to crate a new
+Select `Create workspace` from Workspaces tab and follow the prompts to crate a new
 workspace. This will where the rest of the work will be done.
 
-![New workspace](/img/postman_02_workspace.png)
+![Create workspace](/img/postman-2-workspace.png)
 
-We're ready to import the collection. On the header of the Workspaces tab
-select `New` and switch to `Link` tab.
+We're ready to import the collection. On the top-left corner of the Workspaces tab
+select `Import` and switch to `Link` tab.
 
-![Import collection](/img/postman_03_import.png)
+![Import collection](/img/postman-3-import.png)
 
 There, in the URL input field paste the link to the collection:
 
@@ -62,12 +62,12 @@ Postman will recognize the format of the file content and offer to import the
 file as a collection. Complete the import. Now you will have Avalanche
 collection in your Workspace.
 
-![Collection content](/img/postman_04_collection.png)
+![Collection content](/img/postman-4-collection.png)
 
 ### Environment Import
 
-Next, we have to import the environment variables. Again, the header of the
-Workspaces tab select `New` and switch to `Link` tab. this time, paste the link
+Next, we have to import the environment variables. Again, on the top-left corner of the Workspaces tab
+select `Import` and switch to `Link` tab. This time, paste the link
 to the environment JSON:
 
 ```text
@@ -76,19 +76,18 @@ https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/E
 
 Postman will recognize the format of the file:
 
-![Environment import](/img/postman_05_environment.png)
+![Environment import](/img/postman-5-environment.png)
 
 Import it to your workspace. Now, we will need to edit that environment to suit
 the actual parameters of your particular installation. These are the parameters
 that differ from the defaults in the imported file.
 
-Click the eye icon next to the environment dropdown:
+Select the Environments tab, choose the Avalanche environment which was just added. You can directly edit any values here:
 
-![Environment content](/img/postman_06_variables.png)
+![Environment content](/img/postman-6-variables.png)
 
-Select the `Edit` button to change the defaults. As a minimum, you will need to
-change the IP address of your node, which is the value of the `host` variable.
-Change it to the IP of your node (change both the `initial` and `current`
+As a minimum, you will need to change the IP address of your node, which is the value of 
+the `host` variable. Change it to the IP of your node (change both the `initial` and `current`
 values). Also, if your node is not running on the same machine where you
 installed Postman, make sure your node is accepting the connections on the API
 port from the outside by checking the appropriate [command line
@@ -98,15 +97,15 @@ Now we sorted everything out, and we're ready to query the node.
 
 ## Making API Calls
 
-Open one of the API call groups, for example `Health`. Double-click `health` call:
+Open one of the API call groups, for example `Health`. Click `health` call:
 
-![API call](/img/postman_07_making_calls.png)
+![API call](/img/postman-7-making-calls.png)
 
-You will see that format of the call uses the `http`, `host` and `port`
-environment variables. Click `Send`. Request will be sent, and soon you will see
+You will see that format of the call uses the `baseURL` environment 
+variable. Click `Send`. Request will be sent, and soon you will see
 the response, in the `Body` tab in the `Response`:
 
-![Response](/img/postman_08_response.png)
+![Response](/img/postman-8-response.png)
 
 To see the actual call and the variables that are sent to the node, switch to
 `Body` tab in the API call tabs. There you can quickly change the variables to
