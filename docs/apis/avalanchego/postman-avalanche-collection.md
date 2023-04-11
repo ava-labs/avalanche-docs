@@ -82,7 +82,8 @@ Import it to your workspace. Now, we will need to edit that environment to suit
 the actual parameters of your particular installation. These are the parameters
 that differ from the defaults in the imported file.
 
-Select the Environments tab, choose the Avalanche environment which was just added. You can directly edit any values here:
+Select the Environments tab, choose the Avalanche environment which was just added. 
+You can directly edit any values here:
 
 ![Environment content](/img/postman-6-variables.png)
 
