@@ -46,7 +46,7 @@ curl -X POST --data '{
   "id": 1,
   "result": {
     "feeConfig": {
-      "gasLimit": 8000000,
+      "gasLimit": 15000000,
       "targetBlockRate": 2,
       "minBaseFee": 33000000000,
       "targetGas": 15000000,

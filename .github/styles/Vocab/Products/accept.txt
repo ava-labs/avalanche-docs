@@ -335,3 +335,4 @@ Wei
 yargs
 Yellowpaper
 Zundel
+unstaked
