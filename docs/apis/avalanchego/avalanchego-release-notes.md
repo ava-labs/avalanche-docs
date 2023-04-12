@@ -10,6 +10,8 @@
 
 **Cortina.1**
 
+<!-- vale off -->
+
 [This
 upgrade](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6)
 linearizes the X-chain, introduces delegation batching to the P-chain, and
@@ -58,6 +60,8 @@ The supported plugin version is `25`.
 - Adjust Logic In Merkle DB History
 - Fix Concurrency Bug In CommitToParent
 - Cleanup goroutines on health.Stop
+
+<!-- vale on -->
 
 ## [Pre-Release] V1.10.0-Fuji [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
 
