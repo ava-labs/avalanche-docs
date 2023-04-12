@@ -69,11 +69,19 @@ call to the X-Chain vertex index.
 /ext/index/X/tx
 ```
 
-### X-Chain Vertices
+### X-Chain Blocks
 
 ```text
-/ext/index/X/vtx
+/ext/index/X/block
 ```
+
+:::caution
+
+To ensure historical data can be accessed, the `/ext/index/X/vtx` is still accessible, 
+even though it is no longer populated with chain data since the Cortina activation. 
+If you are using `V1.10.0` or higher, you need to migrate to using the `/ext/index/X/block` endpoint.
+
+:::
 
 ## Methods
 
