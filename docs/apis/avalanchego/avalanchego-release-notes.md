@@ -6,6 +6,59 @@
 
 :::
 
+## V1.10.o [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
+
+**Cortina.1**
+
+[This
+upgrade](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6)
+linearizes the X-chain, introduces delegation batching to the P-chain, and
+increases the maximum block size on the C-chain.
+
+The changes in the upgrade go into effect at 11 AM ET, April 25th 2023 on Mainnet.
+
+**All Mainnet nodes should upgrade before 11 AM ET, April 25th 2023.**
+
+The supported plugin version is `25`.
+
+**What's Changed**
+
+- Add CODEOWNERS for the x/ package
+- Feature Spec Template
+- Standardize CI triggers
+- special case no sent/received message in network health check
+- Fix bug template
+- Replace flags usage with pflags
+- Fixed grammatical errors in README.md
+- Add tests for race conditions in merkledb
+- Add P-chain indexer API example
+- use require in snow/choices tests
+- use require in utils/wrappers tests
+- add support for tracking delegatee rewards to validator metadata
+- defer delegatee rewards until end of validator staking period
+- Initialize UptimeCalculator in TestPeer
+- Add Avalanche liveness health checks
+- Skip AMI generation with Fuji tags
+- Use maps.Equal in set.Equals
+- return accrued delegator rewards in GetCurrentValidators
+- Add zstd compression
+- implement txs.Visitor in X chain wallet
+- Parallelize gzip compression
+- Add zip bomb tests
+- Gossip Avalanche frontier after the linearization
+- Add fine grained metrics+logging for handling, processing
+- Persist stateless block in AVM state
+- Initialize FxID fields in GetBlock and GetBlockByHeight
+- Filterable Health Tags
+- increase health await timeout
+- Expose GetEngineManager from the chain Handler
+- Add BLS benchmarks
+- Encode codec version in merkledb
+- Expose consensus-app-concurrency
+- Adjust Logic In Merkle DB History
+- Fix Concurrency Bug In CommitToParent
+- Cleanup goroutines on health.Stop
+
 ## [Pre-Release] V1.10.0-Fuji [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0-fuji)
 
 **Cortina Pre-release (v1.10.0-Fuji)**
