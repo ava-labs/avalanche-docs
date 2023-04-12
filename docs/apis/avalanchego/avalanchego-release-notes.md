@@ -6,7 +6,7 @@
 
 :::
 
-## V1.10.o [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
+## V1.10.0 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
 
 **Cortina.1**
 
