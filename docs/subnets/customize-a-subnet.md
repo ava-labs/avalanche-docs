@@ -682,8 +682,8 @@ In addition to the `AllowList` interface, the `RewardManager` adds the following
 - `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a
   user address. The address becomes the required coinbase address for the blocks that this mechanism
   is enabled on. Meaning that it will receive the fees collected from the transactions in the block.
-  Receiving fees will not call any contract functions or fallback functions. It will simply send the
-  fees to the address.
+  Receiving fees will not call any contract functions or fallback functions. It will simply increase
+  the balance of the address by the amount of fees.
 
 - `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to
   claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient)
@@ -1077,12 +1077,11 @@ This should only be used as a last resort alternative to forking `subnet-evm` an
 the network upgrade in code.
 
 Using a network upgrade to modify state is not part of normal operations of the
-EVM. You should ensure the modifications do not invalidate any of the assumptions of 
+EVM. You should ensure the modifications do not invalidate any of the assumptions of
 deployed contracts or cause incompatibilities with downstream infrastructure such as
 block explorers.
 
 :::
-
 
 The timestamps for upgrades in `stateUpgrades` must be in increasing order.
 `stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
@@ -1132,4 +1131,3 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
   ]
 }
 ```
-
