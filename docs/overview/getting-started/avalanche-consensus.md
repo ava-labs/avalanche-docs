@@ -10,7 +10,7 @@ Nodes can reach a consensus by following a set of steps called a consensus proto
 is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high
 throughput. It is energy efficient and does not require special computer hardware. It performs well
 in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche
-consensus protocol. The white-paper is [here](https://www.avalabs.org/white-papers).
+consensus protocol. The white-paper is [here](https://www.avalabs.org/whitepapers).
 
 ![Consensus Comparison](/img/Consensus-protocol-comparison.png)
 

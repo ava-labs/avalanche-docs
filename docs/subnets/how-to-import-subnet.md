@@ -128,13 +128,12 @@ Retrieved information. BlockchainID: 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What's this VM's type?:
   ▸ Subnet-EVM
-    SpacesVM
     Custom
 ```
 
 Avalanche-CLI needs to know the VM type, to hit its repository and select
 what VM versions are available.
-This works automatically for Ava Labs VMs (like Subnet-EVM and SpacesVM).
+This works automatically for Ava Labs VMs (like Subnet-EVM).
 
 Custom VMs aren't supported yet at this point, but are next on the agenda.
 

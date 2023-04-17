@@ -156,6 +156,7 @@ Keystore
 KYCed
 LevelDB
 linearization
+Linearizes
 liveness
 lol
 lookups
@@ -334,3 +335,4 @@ Wei
 yargs
 Yellowpaper
 Zundel
+unstaked
