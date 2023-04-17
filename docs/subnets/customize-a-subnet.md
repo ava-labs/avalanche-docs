@@ -682,7 +682,8 @@ In addition to the `AllowList` interface, the `RewardManager` adds the following
 - `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a
   user address. The address becomes the required coinbase address for the blocks that this mechanism
   is enabled on. Meaning that it will receive the fees collected from the transactions in the block.
-  Receiving fees will not call any contract functions or fallback functions. It will simply increase the balance of the address by the amount of fees.
+  Receiving fees will not call any contract functions or fallback functions. It will simply increase
+  the balance of the address by the amount of fees.
 
 - `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to
   claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient)
