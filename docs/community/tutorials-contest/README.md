@@ -6,7 +6,7 @@
 | [**2021 Tutorial Contests**](2021.md) | List of winning tutorials in 2021 tutorial contest |
 
 
-:::note
+:::warning
 
 These tutorials are published as a snapshot when they were written. 
 For up-to-date information, please reach out to the owners of these 
