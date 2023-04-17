@@ -19,7 +19,7 @@ server](../public-api-server.md).
 The health checks that are run by the node are filterable. You can specify which health checks
 you want to see by using `tags` filters. Returned results will only include health checks that
 match the specified tags and global
-health checks like "network", "database" etc.
+health checks like `network`, `database` etc.
 When filtered, the returned results will not show the full node health,
 but only a subset of filtered health checks.
 This means the node can be still unhealthy in unfiltered checks, even if the returned results show that
@@ -54,7 +54,7 @@ curl --location --request GET 'http://localhost:9650/ext/health?tag=29uVeLPJB1eQ
 In this example returned results will contain global health checks and health checks that are
 related to subnetID `29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL`.
 
-**Note:** This filtering can show healthy results even if the node is unhealthy in other chains/subnets.
+**Note:** This filtering can show healthy results even if the node is unhealthy in other Chains/Subnets.
 
 In order to filter results by multiple tags, use multiple `tag` query parameters. For example, to
 filter health results by subnetID `29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL` and
@@ -194,7 +194,7 @@ In this example response, the C-Chain’s health check is failing.
 
 JSON RPC methods in Health API supports filtering by tags. In order to filter results use `tags`
 params in the
-request body. `tags` accepts a list of tags. Currenly only `subnetID`s are supported as tags.
+request body. `tags` accepts a list of tags. Currently only `subnetID`s are supported as tags.
 For example, to filter health results by subnetID `29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL`
 use the following request:
 
