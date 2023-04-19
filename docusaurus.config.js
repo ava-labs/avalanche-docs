@@ -45,10 +45,6 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'G-HGX2HKR5GK',
-          anonymizeIP: true,
-        },
       }),
     ],
   ],
@@ -200,4 +196,14 @@ const config = {
     }),
 }
 
-module.exports = config
+module.exports = {
+  plugins: [
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-HGX2HKR5GK',
+        anonymizeIP: true,
+      },
+    ],
+  ],
+};
