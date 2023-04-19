@@ -69,35 +69,123 @@ Hardhat uses `hardhat.config.js` as the configuration file. You can define
 tasks, networks, compilers and more in that file. For more information see
 [here](https://hardhat.org/config/).
 
-In our repository we use a pre-configured file
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-This file configures necessary network information to provide smooth interaction
-with Avalanche. There are also some pre-defined private keys for testing on a
-local test network.
+Here is an example pre-configured `hardhat.config.ts`. 
+
+```ts
+import { task } from "hardhat/config"
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
+import { BigNumber } from "ethers"
+import "@nomiclabs/hardhat-waffle"
+
+// When using the hardhat network, you may choose to fork Fuji or Avalanche Mainnet
+// This will allow you to debug contracts using the hardhat network while keeping the current network state
+// To enable forking, turn one of these booleans on, and then run your tasks/scripts using ``--network hardhat``
+// For more information go to the hardhat guide
+// https://hardhat.org/hardhat-network/
+// https://hardhat.org/guides/mainnet-forking.html
+const FORK_FUJI = false
+const FORK_MAINNET = false
+const forkingData = FORK_FUJI ? {
+  url: 'https://api.avax-test.network/ext/bc/C/rpc',
+} : FORK_MAINNET ? {
+  url: 'https://api.avax.network/ext/bc/C/rpc'
+} : undefined
+
+export default {
+  solidity: {
+    compilers: [
+      {
+        version: "0.5.16"
+      },
+      {
+        version: "0.6.2"
+      },
+      {
+        version: "0.6.4"
+      },
+      {
+        version: "0.7.0"
+      },
+      {
+        version: "0.8.0"
+      }
+    ]
+  },
+  networks: {
+    hardhat: {
+      gasPrice: 225000000000,
+      chainId: !forkingData ? 43112 : undefined, //Only specify a chainId if we are not forking
+      forking: forkingData
+    },
+    local: {
+      url: 'http://localhost:9650/ext/bc/C/rpc',
+      gasPrice: 225000000000,
+      chainId: 43112,
+      accounts: [
+        "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+        "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
+        "0x15614556be13730e9e8d6eacc1603143e7b96987429df8726384c2ec4502ef6e",
+        "0x31b571bf6894a248831ff937bb49f7754509fe93bbd2517c9c73c4144c0e97dc",
+        "0x6934bef917e01692b789da754a0eae31a8536eb465e7bff752ea291dad88c675",
+        "0xe700bdbdbc279b808b1ec45f8c2370e4616d3a02c336e68d85d4668e08f53cff",
+        "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
+        "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
+        "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
+        "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a"
+      ]
+    },
+    fuji: {
+      url: 'https://api.avax-test.network/ext/bc/C/rpc',
+      gasPrice: 225000000000,
+      chainId: 43113,
+      accounts: []
+    },
+    mainnet: {
+      url: 'https://api.avax.network/ext/bc/C/rpc',
+      gasPrice: 225000000000,
+      chainId: 43114,
+      accounts: []
+    }
+  }
+}
+```
+
+This configures necessary network information to provide smooth interaction with
+Avalanche. There are also some pre-defined private keys for testing on a local
+test network.
 
 :::info
 
 The port in this tutorial uses 9650. Depending on how you start your local
-network, it could be different. Please check
-[here](../../quickstart/create-a-local-test-network.md#retrieve-all-nodes) to
-see how to retrieve the port numbers.
+network, it could be different. 
 
 :::
 
 ## Hardhat Tasks
 
-You can define custom hardhat tasks in
-[hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts).
-There are two tasks included as examples: `accounts` and `balances`. Both have
-scripts in
-[package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
+You can define custom hardhat tasks in `hardhat.config.ts`.
+There are two tasks included as examples: `accounts` and `balances`. 
 
-```javascript
-"accounts": "npx hardhat accounts",
-"balances": "npx hardhat balances"
+```ts
+task("accounts", "Prints the list of accounts", async (args, hre): Promise<void> => {
+  const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
+  accounts.forEach((account: SignerWithAddress): void => {
+    console.log(account.address)
+  })
+})
+
+task("balances", "Prints the list of AVAX account balances", async (args, hre): Promise<void> => {
+  const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
+  for(const account of accounts){
+    const balance: BigNumber = await hre.ethers.provider.getBalance(
+      account.address
+    );
+    console.log(`${account.address} has balance ${balance.toString()}`);
+  }
+})
 ```
 
-`yarn accounts` prints the list of accounts. `yarn balances` prints the list of
+`npx hardhat accounts` prints the list of accounts. `npx hardhat balances` prints the list of
 AVAX account balances. As with other `yarn` scripts you can pass in a
 `--network` flag to hardhat tasks.
 
@@ -106,8 +194,6 @@ AVAX account balances. As with other `yarn` scripts you can pass in a
 Prints a list of accounts on the local Avalanche Network Runner network.
 
 ```text
-$ yarn accounts --network local
-yarn run v1.22.4
 npx hardhat accounts --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 0x9632a79656af553F58738B0FB750320158495942
@@ -127,8 +213,6 @@ Prints a list of accounts and their corresponding AVAX balances on the local
 Avalanche Network Runner network.
 
 ```text
-$ yarn balances --network local
-yarn run v1.22.4
 npx hardhat balances --network local
 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC has balance 50000000000000000000000000
 0x9632a79656af553F58738B0FB750320158495942 has balance 0
@@ -190,7 +274,8 @@ git checkout master
 binaries](https://github.com/ava-labs/avalanchego/releases) rather than building
 from source.)
 
-Confirm you have Avalanche Network Runner installed by following the steps listed [here](../../quickstart/create-a-local-test-network.md#installation)
+Confirm you have Avalanche Network Runner installed by following the steps
+listed [here](../../subnets/network-runner.md)
 
 Start Avalanche Network Runner and run a script to start a new local network.
 

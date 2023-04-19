@@ -58,7 +58,7 @@ VMs are supplied as binaries to a node running `AvalancheGo`. These binaries mus
 assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
 
 In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See
-[here](../nodes/maintain/avalanchego-config-flags.md#--build-dir-string) for more details.
+[here](../nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string) for more details.
 Multiple VMs can be installed in this location.
 
 Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC
@@ -86,8 +86,9 @@ on an object, whereas VM handlers can be thought of as static methods on a class
 
 The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be
 initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the
-VM. It's defined in the [`factory.go`](https://github.com/ava-labs/blobvm/blob/master/factory.go) file
-of the `blobvm` repository.
+VM. It's defined in the 
+[`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go) file
+of the `timestampvm` repository.
 
 ```go
 // Returning a new VM instance from VM's factory
@@ -100,7 +101,7 @@ Before a VM can run, AvalancheGo will initialize it by invoking its `Initialize`
 VM will bootstrap itself and sets up anything it requires before it starts running.
 
 This might involve setting up its database, mempool, genesis state, or anything else the VM requires
-to run. For more information, see the [third part](./create-a-vm-blobvm.md#initialize) of this series.
+to run.
 
 ```go
 if err := vm.Initialize(
@@ -115,8 +116,9 @@ if err := vm.Initialize(
 );
 ```
 
-You can refer to the [implementation](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L92) of
-`vm.initialize` in the BlobVM repository.
+You can refer to the
+[implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75)) of
+`vm.initialize` in the TimestampVM repository.
 
 ## Interfaces
 

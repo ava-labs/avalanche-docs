@@ -184,6 +184,12 @@ curl -X POST --data '{
 
 ### `avm.createAddress`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -230,6 +236,12 @@ TODO: Add avm.createAsset
 -->
 
 ### `avm.createFixedCapAsset`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -319,6 +331,12 @@ curl -X POST --data '{
 
 ### `avm.createNFTAsset`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -400,6 +418,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.createVariableCapAsset`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -496,6 +520,12 @@ curl -X POST --data '{
 
 ### `avm.export`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -573,6 +603,12 @@ TODO: Add avm.exportAVAX
 
 ### `avm.exportKey`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -621,6 +657,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.getAddressTxs`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Returns all transactions that change the balance of the given address. A transaction is said to
 change an address's balance if either is true:
@@ -687,6 +729,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.getAllBalances`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 Get the balances of all assets controlled by a given address.
 
@@ -788,6 +836,12 @@ curl -X POST --data '{
 
 ### `avm.getBalance`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 Get the balance of an asset controlled by a given address.
 
 **Signature:**
@@ -834,6 +888,151 @@ curl -X POST --data '{
 }
 ```
 
+### `avm.getBlock`
+
+Returns the block with the given id.
+
+**Signature:**
+
+```sh
+avm.getBlock({
+    blockID: string
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}
+```
+
+**Request:**
+
+- `blockID` is the block ID. It should be in cb58 format.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
+
+**Response:**
+
+- `block` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getBlock",
+    "params": {
+        "blockID": "tXJ4xwmR8soHE6DzRNMQPtiwQvuYsHn6eLLBzo2moDqBquqy6",
+        "encoding": "hex"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000002000000000641ad33ede17f652512193721df87994f783ec806bb5640c39ee73676caffcc3215e0651000000000049a80a000000010000000e0000000100000000000000000000000000000000000000000000000000000000000000000000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000002e1a2a3910000000000000000000000001000000015cf998275803a7277926912defdf177b2e97b0b400000001e0d825c5069a7336671dd27eaa5c7851d2cf449e7e1cdc469c5c9e5a953955950000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000008908223b680000000100000000000000005e45d02fcc9e585544008f1df7ae5c94bf7f0f2600000000641ad3b600000000642d48b60000005aedf802580000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000005aedf80258000000000000000000000001000000015cf998275803a7277926912defdf177b2e97b0b40000000b000000000000000000000001000000012892441ba9a160bcdc596dcd2cc3ad83c3493589000000010000000900000001adf2237a5fe2dfd906265e8e14274aa7a7b2ee60c66213110598ba34fb4824d74f7760321c0c8fb1e8d3c5e86909248e48a7ae02e641da5559351693a8a1939800286d4fa2",
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
+### `avm.getBlockByHeight`
+
+Returns block at the given height.
+
+**Signature:**
+
+```sh
+avm.getBlockByHeight({
+    height: uint64
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}
+```
+
+**Request:**
+
+- `blockHeight` is the block height. It should be in `uint64` format.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
+
+**Response:**
+
+- `block` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getBlockByHeight”,
+    "params": {
+        “height”: “275686313486”,
+        "encoding": “hex”
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000002000000000642f6739d4efcdd07e4d4919a7fc2020b8a0f081dd64c262aaace5a6dad22be0b55fec0700000000004db9e100000001000000110000000100000000000000000000000000000000000000000000000000000000000000000000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000005c6ece390000000000000000000000000100000001930ab7bf5018bfc6f9435c8b15ba2fe1e619c0230000000000000000ed5f38341e436e5d46e2bb00b45d62ae97d1b050c64bc634ae10626739e35c4b00000001c6dda861341665c3b555b46227fb5e56dc0a870c5482809349f04b00348af2a80000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000005c6edd7b40000000010000000000000001000000090000000178688f4d5055bd8733801f9b52793da885bef424c90526c18e4dd97f7514bf6f0c3d2a0e9a5ea8b761bc41902eb4902c34ef034c4d18c3db7c83c64ffeadd93600731676de",
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
+### `avm.getHeight`
+
+Returns the height of the last accepted block.
+
+**Signature:**
+
+```sh
+avm.getHeight() ->
+{
+    height: uint64,
+}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getHeight",
+    "params": {},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "height": "5094088"
+  },
+  "id": 1
+}
+```
 
 ### `avm.getTx`
 
@@ -1175,6 +1374,12 @@ This gives response:
 
 ### `avm.import`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1233,6 +1438,12 @@ curl -X POST --data '{
 TODO: Add avm.importAVAX
 -->
 ### `avm.importKey`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1324,6 +1535,12 @@ curl -X POST --data '{
 
 ### `avm.listAddresses`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1366,6 +1583,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.mint`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1437,6 +1660,12 @@ curl -X POST --data '{
 
 
 ### `avm.mintNFT`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1513,6 +1742,12 @@ curl -X POST --data '{
 
 ### `avm.send`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1579,6 +1814,12 @@ curl -X POST --data '{
 ```
 
 ### `avm.sendMultiple`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
@@ -1657,6 +1898,12 @@ curl -X POST --data '{
 
 ### `avm.sendNFT`
 
+:::caution
+
+Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 :::warning
 Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
 :::
@@ -1728,6 +1975,12 @@ This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 **Signature:**
 
 ```sh
@@ -1777,6 +2030,12 @@ can use the modified UTXO set.
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 **Signature:**
 
@@ -1849,6 +2108,12 @@ addresses and assume the TX will be accepted so that future calls can use the mo
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
 
 **Signature:**
 
@@ -1925,6 +2190,13 @@ Listen for transactions on a specified address.
 This call is made to the events API endpoint:
 
 `/ext/bc/X/events`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+
+:::
+
 
 #### **Golang Example**
 

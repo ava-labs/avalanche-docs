@@ -95,7 +95,7 @@ experiment and build on Avalanche.
 
 #### **Source Code**
 
-First install Go 1.18.1 or later. Follow the instructions
+First install Go 1.19.6 or later. Follow the instructions
 [here](https://golang.org/doc/install). You can verify by running `go version`.
 
 Set `$GOPATH` environment variable properly for Go to look for Go Workspaces.
@@ -170,7 +170,7 @@ If you are using the pre-built binaries on Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-By default (without specifying any parameters), this node will connect to the
+By default (without specifying --network-id), this node will connect to the
 Mainnet which may take much longer time to finish bootstrapping. See
 [this](#connect-to-fuji-testnet) for connecting to Fuji Testnet.
 

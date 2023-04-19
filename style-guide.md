@@ -20,15 +20,6 @@ or logs.
 
 - Coreth for <https://github.com/ava-labs/coreth>
 - Subnet-EVM for <https://github.com/ava-labs/subnet-evm>
-- SpacesVM for <https://github.com/ava-labs/spacesvm>
-- BlobVM for <https://github.com/ava-labs/blobvm>
 - TimestampVM for <https://github.com/ava-labs/timestampvm>
 - XSVM for <https://github.com/ava-labs/xsvm>
 - TimestampVM RS for <https://github.com/ava-labs/timestampvm-rs>
-- SpacesVM RS for <https://github.com/ava-labs/spacesvm-rs>
-
-### Core
-
-- Core extension or Core browser extension
-- Core mobile
-- Core web

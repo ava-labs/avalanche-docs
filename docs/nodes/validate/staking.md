@@ -236,3 +236,13 @@ the validator set, and then leaves. Then it joins and leaves again. The node's
 uptime during its first period in the validator set does not affect the uptime
 calculation in the second period, hence, has no impact on whether the node
 receives a staking reward for its second period in the validator set.
+
+### How Are Delegation Fees Distributed To Validators?
+
+If a validator is online for 80% of a delegation period, 
+they receive a % of the reward (the fee) earned by the delegator. 
+The P-Chain used to distribute this fee as a separate UTXO per delegation period. 
+After the 
+[Cortina Activation](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), 
+instead of sending a fee UTXO for each successful delegation period, 
+fees are now batched during a node’s entire validation period and are distributed when it is unstaked.

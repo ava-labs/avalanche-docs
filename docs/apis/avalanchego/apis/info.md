@@ -424,7 +424,7 @@ info.peers({
 
 - `nodeIDs` is an optional parameter to specify what NodeID's descriptions should be returned. If
   this parameter is left empty, descriptions for all active connections will be returned. If the
-  node is not connected to a specified nodeID, it will be omitted from the response.
+  node is not connected to a specified NodeID, it will be omitted from the response.
 - `ip` is the remote IP of the peer.
 - `publicIP` is the public IP of the peer.
 - `nodeID` is the prefixed Node ID of the peer.
@@ -507,7 +507,9 @@ curl -X POST --data '{
 
 ### `info.uptime`
 
-Returns the network's observed uptime of this node.
+Returns the network's observed uptime of this node. 
+This is the only reliable source of data for your node's uptime. 
+Other sources may be using data gathered with incomplete (limited) information.
 
 **Signature:**
 

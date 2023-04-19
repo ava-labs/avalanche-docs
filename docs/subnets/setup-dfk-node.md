@@ -8,14 +8,14 @@ other Subnet, where the corresponding part of the Subnet info should be replaced
 
 Following necessary steps are needed to run your node on the DFK Subnet:
 
-1. Build the AvalancheGo binary and create the plugin build directory
+1. Build the AvalancheGo binary
 2. Build the plugin binary for the DFK Subnet-EVM
-3. Whitelist the DFK Subnet
+3. Track the DFK Subnet
 4. Connect to the DFK Subnet!
 
 _Just want the commands? Jump to the [end](#just-want-the-commands-we-got-you)!_
 
-## Build `AvalancheGo` Binary and Create the Plugin Build Directory
+## Build `AvalancheGo` Binary
 
 First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
 You can follow [this comprehensive guide](../nodes/build/run-avalanche-node-manually.md) to complete
@@ -29,30 +29,29 @@ AvalancheGo directory (within your `$GOPATH`)._
 Next, you will clone the DFK Subnet-EVM repository:
 
 ```bash
-cd $GOPATH/src/github.com
-mkdir DeFiKingdoms
-cd DeFiKingdoms
+mkdir -p $GOPATH/src/github.com/ava-labs
+cd $GOPATH/src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
-Now that you are in the `DeFiKingdoms/subnet-evm` repository, you will build the binary and place it
-directly into the AvalancheGo `build/plugins` directory. To do this, you will pass in the desired
+Now that you are in the `ava-labs/subnet-evm` repository, you will build the binary and place it
+directly into the `plugins` directory. To do this, you will pass in the desired
 path to place the plugin binary. You will want to place this binary into the plugins directory of
-AvalancheGo, which was created when building AvalancheGo from source.
+AvalancheGo.
 
 ```bash
-./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
+./scripts/build.sh ~/.avalanchego/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 ```
 
 The long string `mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv` is the CB58 encoded VMID of the
 DFK Subnet-EVM. AvalancheGo will use the name of this file to determine what VMs are available to
 run from the `plugins` directory.
 
-## Whitelisting DFK Subnet and Restarting the Node
+## Tracking DFK Subnet and Restarting the Node
 
 AvalancheGo will only validate the primary network by default. In order to add the DFK Subnet, you
-will need to add the DFK Subnet ID to the set of whitelisted Subnets in the node's config file or
+will need to add the DFK Subnet ID to the set of tracked Subnets in the node's config file or
 pass it through the command-line options of the node. Once the node's config file has been updated,
 you will need to start the Avalanche node (restart if already running).
 
@@ -62,7 +61,7 @@ and will start validating once it has fully bootstrapped.
 
 ### Updating Config File
 
-You can skip this section if you want to pass whitelisted Subnets through command-line flags.
+You can skip this section if you want to track Subnets through command-line flags.
 
 You need to create a new config file or edit your existing one for your node. In this tutorial, you
 will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file
@@ -71,16 +70,16 @@ anywhere on your file system, you will just need to specify its location via the
 [this](../nodes/maintain/avalanchego-config-flags.md#config-file) for more info on configuration
 file and flags.
 
-You will need to add the DFK Subnet ID to the whitelisted Subnets section of the config file:
+You will need to add the DFK Subnet ID to the track Subnets section of the config file:
 
 ```json
 {
     <OTHER-CONFIGURATIONS>
-    "whitelisted-subnets": "Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ"
+    "track-subnets": "Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ"
 }
 ```
 
-Whitelisted Subnets is a comma separated list of Subnet IDs, so if you are validating more than one
+Track Subnets is a comma separated list of Subnet IDs, so if you are validating more than one
 Subnet, you can simply add a comma to the end of the list and append the DFK Subnet ID
 `Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ`.
 
@@ -100,31 +99,29 @@ the config file on the command line:
 ./build/avalanchego --config-file ~/.avalanchego/config.json
 ```
 
-If you want to pass the whitelisted Subnets through the command-line flag. You can append the other
+If you want to track the Subnets through the command-line flag. You can append the other
 flags or even the `--config-file` flag as well, according to your need.
 
 ```bash
-./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
+./build/avalanchego --track-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
 
 ## Just Want the Commands? We Got You
 
 :::caution
-Run `go version`. **It should be 1.18.1 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.19.6 or above.** Run `echo $GOPATH`. **It should not be empty.**
 :::
 
 ```bash
-cd $GOPATH
-mkdir -p src/github.com/ava-labs
-cd src/github.com/ava-labs
+mkdir -p $GOPATH/src/github.com/ava-labs
+cd $GOPATH/src/github.com/ava-labs
 git clone git@github.com:ava-labs/avalanchego.git
 cd avalanchego
 ./scripts/build.sh
-cd $GOPATH/src/github.com
-mkdir DeFiKingdoms
-cd DeFiKingdoms
+cd $GOPATH/src/github.com/ava-labs
 git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
-./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
-./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
+./scripts/build.sh ~/.avalanchego/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
+cd $GOPATH/src/github.com/ava-labs/avalanchego
+./build/avalanchego --track-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```

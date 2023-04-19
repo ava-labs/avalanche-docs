@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Node Backup and Restore
@@ -58,6 +58,8 @@ NodeID is defined by two files:
 In the default installation, they can be found in the working directory,
 specifically in `~/.avalanchego/staking/`. All we need to do to recreate the
 node on another machine is to run a new installation with those same two files.
+If these two files are removed from a node, which is restarted afterwards, they 
+will be recreated and a new node ID will be assigned.  
 
 :::caution
 

@@ -66,6 +66,7 @@ Config
 Connor
 Corbellini
 Coreth
+Cortina
 CPUs
 Crabada
 crypto
@@ -89,6 +90,7 @@ deserialize
 deserializing
 dev
 Dexalot
+dockerhub
 Docusaurus
 dotenv
 ecrecover
@@ -107,6 +109,7 @@ fastcache
 feeRecipient
 finney
 Fuji
+fxs
 gamification
 Ganache
 Gantt
@@ -117,6 +120,7 @@ gif
 GitHub
 github
 Golang
+goroutines
 Grafana
 gwei
 Gwei
@@ -152,6 +156,7 @@ Keystore
 KYCed
 LevelDB
 linearization
+Linearizes
 liveness
 lol
 lookups
@@ -277,6 +282,7 @@ superset
 Swapper's
 sybil
 syncer
+Tencent
 testnet
 Testnet
 textlint
@@ -329,3 +335,4 @@ Wei
 yargs
 Yellowpaper
 Zundel
+unstaked

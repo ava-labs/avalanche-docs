@@ -3,7 +3,6 @@
 :::note
 
 This document describes how to use the new Avalanche-CLI to deploy a Subnet on `Fuji`.
-If you are looking for the previous version using Subnet-CLI, please click [here](./create-a-fuji-subnet-subnet-cli.md).
 
 :::
 
@@ -359,7 +358,7 @@ avalanche subnet describe testsubnet
 +--------------------------+-------------+
 |      GAS PARAMETER       |    VALUE    |
 +--------------------------+-------------+
-| GasLimit                 |     8000000 |
+| GasLimit                 |     15000000 |
 +--------------------------+-------------+
 | MinBaseFee               | 25000000000 |
 +--------------------------+-------------+
@@ -786,15 +785,15 @@ avalanchego/build/plugins.
 If you start your node from the command line WITHOUT a config file (e.g. via command
 line or systemd script), add the following flag to your node's startup command:
 
---whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
-(if the node already has a whitelisted-subnets config, append the new value by
+--track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+(if the node already has a track-subnets config, append the new value by
 comma-separating it).
 
 For example:
-./build/avalanchego --network-id=Fuji --whitelisted-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+./build/avalanchego --network-id=Fuji --track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 If you start the node via a JSON config file, add this to your config file:
-whitelisted-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
+track-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
 TIP: Try this command with the --avalanchego-config flag pointing to your config file,
 this tool is going to try to update the file automatically (make sure it can write to it).

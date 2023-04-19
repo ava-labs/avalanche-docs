@@ -27,6 +27,16 @@ const sidebars = {
       items: [
         'overview/getting-started/intro',
         'overview/getting-started/avalanche-platform',
+        'overview/getting-started/avax',
+        'overview/getting-started/virtual-machines',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Technology',
+      collapsible: true,
+      collapsed: false,
+      items: [
         'overview/getting-started/avalanche-consensus',
         {
           type: 'link',
@@ -46,8 +56,6 @@ const sidebars = {
 
   quickStart: [
     'quickstart/README',
-    'quickstart/create-a-local-test-network',
-    'quickstart/fund-a-local-test-network',
     'quickstart/fuji-workflow',
     'quickstart/cross-chain-transfers',
     'quickstart/multisig-utxos-with-avalanchejs',
@@ -119,7 +127,6 @@ const sidebars = {
         'subnets/deploy-a-smart-contract-on-your-evm',
         'subnets/create-custom-subnet',
         'subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs',
-        'subnets/create-a-fuji-subnet-subnet-cli',
       ],
     },
     {
@@ -133,6 +140,8 @@ const sidebars = {
         'subnets/how-to-pause-and-resume-subnets',
         'subnets/how-to-list-and-describe',
         'subnets/how-to-delete-subnet',
+        'subnets/how-to-upgrade-subnet-vm',
+        'subnets/how-to-upgrade-precompile',
         'subnets/how-to-run-cli-with-docker',
         'subnets/how-to-import-subnet',
         'subnets/troubleshoot-deployments'
@@ -149,6 +158,7 @@ const sidebars = {
         'subnets/create-a-vm-timestampvm',
         'subnets/create-a-vm-blobvm',
         'subnets/create-a-simple-rust-vm',
+        'subnets/create-a-simple-vm-from-scratch',
         'subnets/cross-subnet-communication',
       ],
     },
@@ -176,7 +186,6 @@ const sidebars = {
       collapsed: false,
       items: [
         'subnets/avalanche-subnet-faucet',
-        'subnets/subnet-cli',
         'subnets/deploying-cross-chain-evm-bridge',
         'subnets/network-runner',
         'subnets/deploy-a-gnosis-safe-on-your-evm'
@@ -187,7 +196,6 @@ const sidebars = {
       label: 'Examples',
       collapsed: false,
       items: [
-        'subnets/spaces',
         'subnets/wagmi'
       ]
     },
@@ -207,9 +215,11 @@ const sidebars = {
     }
   ],
   apis: [
+    'apis/README',
     {
       type: 'category',
       label: 'AvalancheGo',
+      collapsed: false,
       items: [
         'apis/avalanchego/README',
         {
@@ -226,6 +236,7 @@ const sidebars = {
         'apis/avalanchego/public-api-server',
         'apis/avalanchego/postman-avalanche-collection',
         'apis/avalanchego/avalanchego-release-notes',
+        'apis/avalanchego/x-chain-migration',
         'apis/avalanchego/cb58-deprecation',
       ],
     },
@@ -243,6 +254,7 @@ const sidebars = {
       ]
     },
     'apis/metrics',
+    'apis/glacier'
   ],
   nodes: [
     'nodes/README',

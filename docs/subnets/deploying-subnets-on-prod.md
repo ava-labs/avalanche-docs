@@ -133,10 +133,9 @@ which will impact your validator's uptime, thus staking rewards, and the stabili
 ## Subnet Deploy
 
 Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended
-tool to do that is [Subnet-CLI](https://github.com/ava-labs/subnet-cli).
+tool to do that is [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
-Instructions for using the Subnet-CLI can be found [here](../subnets/subnet-cli.md). We will
-highlight the main steps below.
+Instructions for deployment by Avalanche-CLI can be found [here](./create-a-mainnet-subnet.md). 
 
 ### Ledger HW Wallet
 
@@ -147,8 +146,7 @@ Therefore, protecting that key is of the utmost operational importance. Which is
 recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and
 access that private key.
 
-Of course, Subnet-CLI supports the usage of a Ledger HW wallet. Take advantage of that because
-losing control of the managing would be catastrophic. General instruction on how to use a Ledger
+General instruction on how to use a Ledger
 device with Avalanche can be found
 [here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
 
@@ -162,64 +160,27 @@ to production you probably have it mapped out already.
 If you want to review, we have a description of the genesis file in our document on [customizing EVM
 Subnets](customize-a-subnet.md).
 
-### Subnet-CLI Wizard
 
-Creating a Subnet is a multistep process. You need to:
-
-- create a `VMID`
-- create the Subnet
-- create the blockchain in the Subnet
-- add validators to Subnet
-
-Fortunately, to minimize potential errors and streamline the process Subnet-CLi has a Wizard command
-that does most of the work for you and guides you through the process.
-
-Before running the wizard you will need to [create the
-`VMID`](subnet-cli.md#subnet-cli-create-vmid), have the validator NodeIDs ready, as well as the
-genesis `json` file.
-
-An example of wizard command-line could look like:
-
-<!-- markdownlint-disable MD013 -->
-
-```bash
-subnet-cli wizard \
---ledger \
---node-ids=NodeID-741aqvs6R4iuHDyd1qT1NrFTmsgu78dc4,NodeID-K7Y79oAmBntAcdkyY1CLxCim8QuqcZbBp,NodeID-C3EY6u4v7DDi6YEbYf1wmXdvkEFXYuXNW,NodeID-AiLGeqQfh9gZY3Y8wLMD15tuJtsJHq5Qi \
---vm-genesis-path=prod-genesis.json \
---vm-id=tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH \
---chain-name=prodSubnet
-```
-
-<!-- markdownlint-enable MD013 -->
-
-Please refer to the Subnet-CLI docs for [detailed instructions](subnet-cli.md#subnet-cli-wizard).
-
-If the wizard completes correctly your Subnet will now be created, deployed and available to see in
-[the Subnet explorer](https://subnets.avax.network/subnets). Congrats!
-
-You can also use Subnet-CLI to manage your Subnet after the initial deploy, to add new validators,
-renew ones that expired and so on. Familiarize yourself with Subnet-CLI, you be using it often!
 
 ## Validator Configuration
 
 Running nodes as Subnet validators warrants some additional considerations, above those when running
 a regular node or a Primary Network-only validator.
 
-### Subnet Whitelisting
+### Joining a Subnet
 
 For a node to join a Subnet, there are two prerequisites:
 
 - Primary Network validation
-- Subnet whitelisting
+- Subnet tracking
 
 Primary Network validation means that a node cannot join a Subnet as a validator before becoming a
 validator on the Primary Network itself. So, after you add the node to the validator set on the
 Primary Network, node can join a Subnet. Of course, this is valid only for Subnet validators, if you
 need a non-validating Subnet node, then the node doesn't need to be a validator at all.
 
-To have a node start syncing the Subnet, you need to add the `--whitelisted-subnets` command line
-option, or `whitelisted-subnets` key to the node config file (found at
+To have a node start syncing the Subnet, you need to add the `--track-subnets` command line
+option, or `track-subnets` key to the node config file (found at
 `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync
 multiple Subnets, so you can add them as a comma-separated list of Subnet IDs.
 
@@ -227,13 +188,13 @@ An example of a node config syncing two Subnets:
 
 ```json
 {
-  "dynamic-public-ip": "opendns",
+  "public-ip-resolution-service": "opendns",
   "http-host": "",
-  "whitelisted-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY,Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk"
+  "track-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY,Ai42MkKqk8yjXFCpoHXw7rdTWSHiKEMqh5h8gbxwjgkCUfkrk"
 }
 ```
 
-But that is not all. Besides the whitelist containing the SubnetID, node also needs to have the
+But that is not all. Besides tracking the SubnetID, the node also needs to have the
 plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
 been through that on Testnet and Fuji, but for a refresher, you can refer to [this
 tutorial](create-a-fuji-subnet.md).
@@ -244,7 +205,7 @@ directory where the node binary is (for installer-script created nodes that woul
 
 ### Subnet Bootstrapping
 
-After you have added the whitelist and placed the VM binary in the correct directory, your node is
+After you have tracked the Subnet and placed the VM binary in the correct directory, your node is
 ready to start syncing with the Subnet. Restart the node and monitor the log output. You should
 notice something similar to:
 

@@ -1230,8 +1230,7 @@ If no argument is given, the path defaults to a binary named with default VM ID:
 
 This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier
 for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array
-and encoded in CB58. See [this](./subnet-cli.md#subnet-cli-create-vmid) for more details on how to
-create your own VM ID.
+and encoded in CB58. 
 
 ### VM Aliases
 
@@ -1252,8 +1251,7 @@ JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
 
 ### Installing a VM
 
-AvalancheGo searches for and registers plugins under the `plugins` directory of the
-[build directory](../nodes/maintain/avalanchego-config-flags#build-directory).
+AvalancheGo searches for and registers plugins under the `plugins` [directory](../nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary
 under this directory. Virtual machine executable names must be either a full virtual machine ID

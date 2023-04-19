@@ -13,7 +13,7 @@ developer docs](https://docs.gnosis-safe.io/).
 This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on
-  [Mainnet](../subnets/subnet-cli), [Fuji](../subnets/create-a-fuji-subnet) or a [Local
+  [Mainnet](../subnets/create-a-mainnet-subnet.md), [Fuji](../subnets/create-a-fuji-subnet) or a [Local
   network](../subnets/create-a-local-subnet).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis
@@ -24,8 +24,7 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 - [safe-contracts](https://github.com/safe-global/safe-contracts.git)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-- [avalanche-network-runner](../quickstart/create-a-local-test-network#avalanche-network-runner)
-  (Local Workflow)
+- [avalanche-network-runner](../subnets/network-runner.md) (Local Workflow)
 
 ## Custom Network Workflow
 

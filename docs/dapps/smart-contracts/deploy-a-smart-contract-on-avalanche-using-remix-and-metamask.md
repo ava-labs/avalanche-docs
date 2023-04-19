@@ -72,7 +72,9 @@ Your address will receive test AVAX in a few seconds.
 
 ### Funding on Local Testnet
 
-On a local network, you can easily fund your addresses by following [this](../../quickstart/create-a-local-test-network.md#getting-avax).
+On a local network, you can easily fund your addresses by following
+[this](../../subnets/build-first-subnet.md#importing-the-test-private-key).
+
 
 ## Step 3: Connect MetaMask and Deploy a Smart Contract Using Remix
 

@@ -84,7 +84,7 @@ The `subnet create` command builds a new genesis file to configure your Subnet.
 By default, the command runs an interactive wizard. It walks you through
 all the steps you need to create your first Subnet.
 
-The tool supports deploying Subnet-EVM, SpacesVM, and custom VMs. You
+The tool supports deploying Subnet-EVM and custom VMs. You
 can create a custom, user-generated genesis with a custom VM by providing
 the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
@@ -107,7 +107,6 @@ avalanche subnet create [subnetName] [flags]
     --genesis string      file path of genesis to use
 -h, --help                help for create
     --latest              use latest VM version, takes precedence over --vm-version
-    --spacesvm            use the SpacesVM as the base template
     --vm string           file path of custom vm to use
     --vm-version string   version of vm template to use
 ```
@@ -245,13 +244,13 @@ avalanche subnet import file [subnetPath] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-#### Import from a Public Network 
+#### Import from a Public Network
 
-The `subnet import public` command will import a Subnet configuration from a running network.
+The `subnet import public` command imports a Subnet configuration from a running network.
 
-The genesis file should be available from the disk for this to work. 
-By default, an imported Subnet will not overwrite an existing Subnet with the same name. 
-To allow overwrites, provide the --force flag.
+The genesis file should be available from the disk for this to work. By default, an imported Subnet
+doesn't overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
+flag.
 
 **Usage:**
 
@@ -272,7 +271,6 @@ avalanche subnet import public [subnetPath] [flags]
 -h, --help                       help for public
     --mainnet mainnet            import from mainnet
     --node-url string            [optional] URL of an already running subnet validator
-    --spacesvm                   use the SpacesVM as the base template
     --subnet-id string           the subnet ID
     --testnet testnet            import from testnet (alias for `fuji`)
 
@@ -324,9 +322,9 @@ avalanche subnet join [subnetName] [flags]
 
 ### Subnet List
 
-The `subnet list` command prints the names of all created Subnet configurations.
-Without any flags, it will print some general, static information about the Subnet.
-With the `--deployed` flag, information such as VMID, BlockchainID and SubnetID will be shown.
+The `subnet list` command prints the names of all created Subnet configurations. Without any flags,
+it prints some general, static information about the Subnet. With the `--deployed` flag, the command
+shows additional information including the VMID, BlockchainID and SubnetID.
 
 **Usage:**
 
@@ -384,6 +382,144 @@ avalanche subnet stats [subnetName] [flags]
 -h, --help              help for stats
     --mainnet mainnet   print stats on mainnet
     --testnet testnet   print stats on testnet (alias for `fuji`)
+```
+
+### Subnet VMID
+
+The `subnet vmid` command prints the virtual machine ID (VMID) for the given Subnet.
+
+**Usage:**
+
+```shell
+avalanche subnet vmid [subnetName]
+```
+
+## Subnet Upgrade
+
+The `subnet upgrade` command suite provides a collection of tools for
+updating your developmental and deployed Subnets.
+
+### Subnet Upgrade Apply
+
+Apply generated upgrade bytes to running Subnet nodes to trigger a network upgrade.
+
+For public networks (Fuji Testnet or Mainnet), to complete this process, you must have access to the
+machine running your validator. If the CLI is running on the same machine as your validator, it can
+manipulate your node's configuration automatically. Alternatively, the command can print the
+necessary instructions to upgrade your node manually.
+
+After you update your validator's configuration, you need to restart your validator manually. If you
+provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file
+at that path. Refer to [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs) for
+related documentation.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade apply [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --avalanchego-chain-config-dir string   avalanchego's chain config file directory (default "/Users/connor/.avalanchego/chains")
+    --config                                create upgrade config for future subnet deployments (same as generate)
+    --force                                 If true, don't prompt for confirmation of timestamps in the past
+    --fuji fuji                             apply upgrade existing fuji deployment (alias for `testnet`)
+-h, --help                                  help for apply
+    --local local                           apply upgrade existing local deployment
+    --mainnet mainnet                       apply upgrade existing mainnet deployment
+    --print                                 if true, print the manual config without prompting (for public networks only)
+    --testnet testnet                       apply upgrade existing testnet deployment (alias for `fuji`)
+```
+
+### Subnet Upgrade Export
+
+Export the upgrade bytes file to a location of choice on disk.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade export [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --force                     If true, overwrite a possibly existing file without prompting
+-h, --help                      help for export
+    --upgrade-filepath string   Export upgrade bytes file to location of choice on disk
+```
+
+### Subnet Upgrade Generate
+
+The `subnet upgrade generate` command builds a new upgrade.json file to customize your Subnet. It
+guides the user through the process using an interactive wizard.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade generate [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+-h, --help   help for generate
+```
+
+### Subnet Upgrade Import
+
+Import the upgrade bytes file into the local environment.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade import [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+-h, --help                      help for import
+    --upgrade-filepath string   Import upgrade bytes file into local environment
+```
+
+### Subnet Upgrade Print
+
+Print the upgrade.json file content.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade print [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+-h, --help       help for list
+```
+
+### Subnet Upgrade VM
+
+The `subnet upgrade vm` command enables the user to upgrade their Subnet's VM binary. The command
+can upgrade both local Subnets and publicly deployed Subnets on Fuji and Mainnet.
+
+The command walks the user through an interactive wizard. The user can skip the wizard by providing
+command line flags.
+
+**Usage:**
+
+```shell
+avalanche subnet upgrade export [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --deployed   show additional deploy information
+-h, --help       help for list
 ```
 
 ## Network
