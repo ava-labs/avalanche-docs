@@ -247,7 +247,7 @@ After the
 instead of sending a fee UTXO for each successful delegation period, 
 fees are now batched during a node’s entire validation period and are distributed when it is unstaked.
 
-### Error: couldn't issue tx: validator would be over delegated
+### Error: Couldn't Issue TX: Validator Would Be Over Delegated
 
 This error occues whenever the delegator can not delegate to the named validator. 
 This can be caused by the following.
