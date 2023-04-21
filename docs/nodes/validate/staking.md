@@ -246,3 +246,12 @@ After the
 [Cortina Activation](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), 
 instead of sending a fee UTXO for each successful delegation period, 
 fees are now batched during a node’s entire validation period and are distributed when it is unstaked.
+
+### Error: couldn't issue tx: validator would be over delegated
+
+This error occues whenever the delegator can not delegate to the named validator. 
+This can be caused by the following.
+
+- The delegator's startTime is before the validator's startTime
+- The delegator's endTime is after the validator's endTime
+- The delegator's weight would result in the validator's total weight exceeding its maximum weight
