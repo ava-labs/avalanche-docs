@@ -249,7 +249,7 @@ fees are now batched during a node’s entire validation period and are distribu
 
 ### Error: Couldn't Issue TX: Validator Would Be Over Delegated
 
-This error occues whenever the delegator can not delegate to the named validator. 
+This error occurs whenever the delegator can not delegate to the named validator. 
 This can be caused by the following.
 
 - The delegator's startTime is before the validator's startTime
