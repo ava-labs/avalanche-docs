@@ -252,6 +252,6 @@ fees are now batched during a node’s entire validation period and are distribu
 This error occurs whenever the delegator can not delegate to the named validator. 
 This can be caused by the following.
 
-- The delegator's startTime is before the validator's startTime
-- The delegator's endTime is after the validator's endTime
-- The delegator's weight would result in the validator's total weight exceeding its maximum weight
+- The delegator `startTime` is before the validator `startTime`
+- The delegator `endTime` is after the validator `endTime`
+- The delegator weight would result in the validator total weight exceeding its maximum weight
