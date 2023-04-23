@@ -1,8 +1,8 @@
 # Cross-Subnet Communication
 
-Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows 
-[Virtual Machine (VM)](./README.md#virtual-machines) developers to utilize
-any-to-any communication between the validators of two Subnets. The content of the messages can contain arbitrary payloads. 
+Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows [Virtual Machine
+(VM)](./README.md#virtual-machines) developers to utilize any-to-any communication between the
+validators of two Subnets. The content of the messages can contain arbitrary payloads. 
 
 ## Use Cases 
 
@@ -49,12 +49,14 @@ want to provide for the transport.
 
 ### 4.) Verification of Messages in the Destination Subnet
 
-When a Subnet wants to process another Subnet's message, it will look up both BLS Public Keys and stake of the origin Subnet. The authenticity of the message can be verified using these public keys and the signature.
+When a Subnet wants to process another Subnet's message, it will look up both BLS Public Keys and
+stake of the origin Subnet. The authenticity of the message can be verified using these public keys
+and the signature.
 
 The combined weight of the validators that must be part of the BLS multi-signature to be considered
 valid can be set according to the individual requirements of each Subnet-to-Subnet communication.
 Subnet A may accept messages from Subnet B that are signed by at least 70% of stake. Messages from
-Subnet C are only accepted if they have been signed by validators that account for 90% of the stake. 
+Subnet C are only accepted if they have been signed by validators that account for 90% of the stake.
 
 Since all validators' public keys of the validators and their stake weights are recorded on the
 primary network's P-chain, they are readily accessible to any virtual machine run by the validators.
