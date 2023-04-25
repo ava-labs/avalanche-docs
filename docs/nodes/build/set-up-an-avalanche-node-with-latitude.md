@@ -24,7 +24,7 @@ For the instructions on creating an account and server with Lattitude.sh, please
 This tutorial assumes your local machine has a Unix-style terminal. If you're on Windows, you'll have
  to adapt some of the commands used here.
 
-## Configuring your server
+## Configuring Your Server
 
 ### Create a Latitude.sh Account
 
