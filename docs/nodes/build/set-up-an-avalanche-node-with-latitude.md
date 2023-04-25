@@ -17,20 +17,33 @@ To get started, you'll need:
 - A terminal with which to SSH into your Latitude.sh machine
 
 For the instructions on creating an account and server with Lattitude.sh, please reference their 
+<<<<<<< HEAD
 [Github tutorial](https://github.com/NottherealIllest/Latitude.sh-post/blob/main/avalanhe/avax-copy.md)
 , or visit [this page](https://www.latitude.sh/dashboard/signup) to signup and create your first project.
+=======
+[GitHub tutorial](https://github.com/NottherealIllest/Latitude.sh-post/blob/main/avalanhe/avax-copy.md)
+, or visit [this page](https://www.latitude.sh/dashboard/signup) to sign up and create your first project.
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 
 This tutorial assumes your local machine has a Unix-style terminal. If you're on Windows, you'll have
  to adapt some of the commands used here.
 
 ## Configuring your server
 
+<<<<<<< HEAD
 ### Create a Latitude.sh account
+=======
+### Create a Latitude.sh Account
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 
 At this point your account has been verified, and you have created a new project and deployed the
  server according to the instructions linked above.
 
+<<<<<<< HEAD
 ### Access your server & further steps
+=======
+### Access Your Server & Further Steps
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 
 All your Lattitude.sh credentials are available by clicking the `server` under your project, and can
  be used to access your Latitude.sh machine from your local machine using a terminal.
@@ -46,7 +59,11 @@ Your AvalancheGo node should now be running and in the process of bootstrapping,
  hours. To check if it's done, you can issue an API call using `curl`.
 The request is:
 
+<<<<<<< HEAD
 ```
+=======
+```sh
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -72,7 +89,11 @@ Once the node is finished bootstrapping, the response will be:
 You can continue on, even if AvalancheGo isn't done bootstrapping.
 In order to make your node a validator, you'll need its node ID. To get it, run:
 
+<<<<<<< HEAD
 ```bash
+=======
+```sh
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 curl -X POST --data '{
 "jsonrpc":"2.0",
 "id" :1,
@@ -94,7 +115,11 @@ AvalancheGo has other APIs, such as the [Health API](https://docs.avax.network/a
 
 Exit out of the SSH server by running:
 
+<<<<<<< HEAD
 ```bash
+=======
+```sh
+>>>>>>> 4db67499 (docs: added page for running a node with latitude)
 exit
 ```
 
