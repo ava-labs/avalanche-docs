@@ -19,7 +19,7 @@ The communication consists of the following four steps:
 
 ![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and Verification](/img/cross-subnet-communication.png)
 
-### 1.) Signing Messages on the Origin Subnet
+### Signing Messages on the Origin Subnet
 
 AWM is a low-level messaging protocol. Any type of data encoded in an array of bytes can be included
 in the message sent to another Subnet. AWM uses the [BLS signature
@@ -28,7 +28,7 @@ recipients to verify the authenticity of these messages. Therefore, every valida
 network holds a BLS key pair, consisting of a private key for signing messages and a public key that
 others can use to verify the signature.
 
-### 2.) Signature Aggregation on the Origin Subnet
+### Signature Aggregation on the Origin Subnet
 
 If the validator set of a Subnet is very large, this would result in the Subnet's validators sending
 many signatures between them. One of the powerful features of BLS is the ability to aggregate many
@@ -36,7 +36,7 @@ signatures of different signers in a single multi-signature. Therefore, validato
 now individually sign a message and these signatures are then aggregated into a short
 multi-signature that can be quickly verified.
 
-### 3.) Delivery of Messages to the Destination Subnet
+### Delivery of Messages to the Destination Subnet
 
 The messages do not pass through a central protocol or trusted entity, and there is no record of
 messages sent between Subnets on the primary network. This avoids a bottleneck in Subnet-to-Subnet
@@ -46,7 +46,7 @@ It is up to the Subnets and their users to determine how they want to transport 
 validators of the origin Subnet to the validators of the destination Subnet and what guarantees they
 want to provide for the transport.
 
-### 4.) Verification of Messages in the Destination Subnet
+### Verification of Messages in the Destination Subnet
 
 When a Subnet wants to process another Subnet's message, it will look up both BLS Public Keys and
 stake of the origin Subnet. The authenticity of the message can be verified using these public keys
