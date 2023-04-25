@@ -17,8 +17,7 @@ Use cases for AWM may include but is not limited to:
 
 The communication consists of the following four steps:
 
-![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and
-Verification](/img/cross-subnet-communication.png)
+![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and Verification](/img/cross-subnet-communication.png)
 
 ### 1.) Signing Messages on the Origin Subnet
 
