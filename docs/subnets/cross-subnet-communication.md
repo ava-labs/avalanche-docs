@@ -1,7 +1,8 @@
 # Cross-Subnet Communication
 
 Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows [Virtual Machine
-(VM)](./README.md#virtual-machines) developers to implement arbitrary communication protocols between any two Subnets.
+(VM)](./README.md#virtual-machines) developers to implement arbitrary communication protocols
+between any two Subnets.
 
 ## Use Cases 
 
@@ -16,7 +17,8 @@ Use cases for AWM may include but is not limited to:
 
 The communication consists of the following four steps:
 
-![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and Verification](/img/cross-subnet-communication.png)
+![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and
+Verification](/img/cross-subnet-communication.png)
 
 ### 1.) Signing Messages on the Origin Subnet
 
@@ -37,10 +39,9 @@ multi-signature that can be quickly verified.
 
 ### 3.) Delivery of Messages to the Destination Subnet
 
-Messages are delivered directly from the validators of one Subnet to the validators of the other
-Subnets. The messages do not pass through a central protocol or trusted entity, and there is no
-record of messages sent between Subnets on the primary network. This avoids a bottleneck in
-Subnet-to-Subnet communication, and non-public Subnets can communicate privately.
+The messages do not pass through a central protocol or trusted entity, and there is no record of
+messages sent between Subnets on the primary network. This avoids a bottleneck in Subnet-to-Subnet
+communication, and non-public Subnets can communicate privately.
 
 It is up to the Subnets and their users to determine how they want to transport data from the
 validators of the origin Subnet to the validators of the destination Subnet and what guarantees they
