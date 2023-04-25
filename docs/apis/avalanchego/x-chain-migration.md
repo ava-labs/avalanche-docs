@@ -34,6 +34,14 @@ as previous vertices. To ensure historical data can still be accessed in
 Cortina, the [/ext/index/X/vtx](apis/index-api.md#x-chain-vertices) will remain
 accessible even though it will no longer be populated with chain data.
 
+:::note
+
+The index for the X-chain tx and vtx endpoints will never increase 
+again. The index for the X-chain blocks will increase as new 
+blocks are added.
+
+:::
+
 After Cortina activation, you will need to migrate to using the new
 *ext/index/X/block* endpoint (shares the same semantics as
 [/ext/index/P/block](apis/index-api.md#p-chain-blocks)) to continue indexing
