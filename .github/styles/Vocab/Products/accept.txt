@@ -93,6 +93,7 @@ Dexalot
 dockerhub
 Docusaurus
 dotenv
+dotnet
 ecrecover
 Enablement
 Enums

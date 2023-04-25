@@ -159,6 +159,7 @@ const sidebars = {
         'subnets/create-a-vm-blobvm',
         'subnets/create-a-simple-rust-vm',
         'subnets/create-a-simple-vm-from-scratch',
+        'subnets/create-a-simple-vm-from-scratch-csharp',
       ],
     },
     {
