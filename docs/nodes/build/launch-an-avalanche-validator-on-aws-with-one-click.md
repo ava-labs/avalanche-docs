@@ -523,6 +523,24 @@ All of these steps can be applied to Mainnet. However, the minimum required Avax
 token amounts to become a validator is 2000 on the Mainnet. For more information, 
 please read [this doc](../validate/staking.md#mainnet).
 
+## Maintainance
+
+AWS one click is meant to be used in automated environments, not as an end-user solution. 
+You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
+* Avalanchego binary is at `/usr/local/bin/avalanchego`. 
+* Main node config is at `/etc/avalanchego/conf.json`. 
+* Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`. 
+* Database is at `/data/avalanchego`.
+* Logs are at `/var/log/avalanchego`.
+
+For a simple upgrade you would need to place the new binary at `/usr/local/bin/`.
+If you run a subnet, you would also need to place the VM binary into `/home/avalanche/.avalanchego/plugins`.
+
+You can also look at using 
+[this guide]( https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-tutorial-update-ami.html),
+but that won't address updating the Subnet, if you have one.
+
+
 
 ## Summary
 
