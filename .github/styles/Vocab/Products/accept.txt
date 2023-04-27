@@ -257,6 +257,7 @@ Saglam
 Sayan
 scriptable
 securitization
+Sharding
 Snowtrace
 Solana
 Sourcify
