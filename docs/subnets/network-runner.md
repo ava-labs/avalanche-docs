@@ -25,7 +25,7 @@ allowing to locally test code before deploying to Mainnet or even public testnet
 <!-- markdownlint-disable MD013 -->
 
 ```bash
-curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh
 ```
 
 <!-- markdownlint-enable MD013 -->
