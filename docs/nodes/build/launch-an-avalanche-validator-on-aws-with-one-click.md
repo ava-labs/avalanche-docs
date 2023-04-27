@@ -523,7 +523,7 @@ All of these steps can be applied to Mainnet. However, the minimum required Avax
 token amounts to become a validator is 2000 on the Mainnet. For more information, 
 please read [this doc](../validate/staking.md#mainnet).
 
-## Maintainance
+## Maintenance
 
 AWS one click is meant to be used in automated environments, not as an end-user solution. 
 You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
