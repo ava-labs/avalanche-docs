@@ -65,7 +65,7 @@ you'd like complete control, you can specify a custom genesis by providing a pat
 you'd like to use. This bypasses most of the wizard's prompts. Run with:
 
 ```shell
-avalanche subnet create <subnetName> --file <filepath>
+avalanche subnet create <subnetName> --genesis <filepath>
 ```
 
 ## Overwriting an Existing Subnet Config
