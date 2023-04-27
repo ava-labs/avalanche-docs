@@ -528,11 +528,11 @@ please read [this doc](../validate/staking.md#mainnet).
 AWS one click is meant to be used in automated environments, not as an end-user solution. 
 You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
 
-- AvalancheGo binary is at `/usr/local/bin/avalanchego`. 
-- Main node config is at `/etc/avalanchego/conf.json`. 
-- Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`. 
-- Database is at `/data/avalanchego`.
-- Logs are at `/var/log/avalanchego`.
+- AvalancheGo binary is at `/usr/local/bin/avalanchego`
+- Main node config is at `/etc/avalanchego/conf.json`
+- Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`
+- Database is at `/data/avalanchego`
+- Logs are at `/var/log/avalanchego`
 
 For a simple upgrade you would need to place the new binary at `/usr/local/bin/`.
 If you run a Subnet, you would also need to place the VM binary into `/home/avalanche/.avalanchego/plugins`.
