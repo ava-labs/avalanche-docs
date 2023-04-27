@@ -1,12 +1,5 @@
 # Deploy a Gnosis Safe on Your Subnet-EVM
 
-:::warning
-
-**This document is under maintenance.** For a step-by-step tutorial on how to deploy a Gnosis Safe, 
-please visit our **[GitHub](https://github.com/ava-labs/gnosis-subnet).**
-
-:::
-
 ## Introduction
 
 This article shows how to deploy and interact with a [Gnosis Safe](https://gnosis-safe.io/)
@@ -28,7 +21,7 @@ This tutorial assumes that:
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 
-- [safe-contracts](https://github.com/safe-global/safe-contracts.git)
+- [gnosis-Subnet](https://github.com/ava-labs/gnosis-subnet)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 - [avalanche-network-runner](../subnets/network-runner.md) (Local Workflow)
@@ -37,61 +30,33 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 
 ### Setup Network
 
-Set up the safe-contracts repository by running the following Commands:
+In order for the `gnosis-safe` repo to successfully deploy these contracts, ensure that you have `jq`
+and `yarn` installed. 
 
-```zsh
-git https://github.com/safe-global/safe-contracts.git
-cd safe-contracts
-yarn
-```
+On Ubuntu, run `sudo apt install jq`, `sudo apt install yarn`.
+On Linux, run `brew install jq`, `brew install yarn`. 
+ 
+Next, clone the library. Change `.env.example` to `.env` and set the variable,`MNEMONIC` to the seed
+phrase of the wallet you intend to deploy the contracts with. Set `ADDRESS` to the public key of the
+same wallet. Finally, set `NODE_URL` to the URL of your Subnet's RPC. 
 
-Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's _private key_.
-Here, we can also add our node's RPC endpoint as our `NODE_URL`.
+:::note 
+
+This address you choose must be funded as the transactions will include a gas fee. 
+
+:::
 
 Example:
 
 ```env
-PK="<YOUR-PRIVATE-KEY-HERE>"
-PK2=""
-INFURA_KEY=""
-# Used for custom network
-NODE_URL="<YOUR-SUBNET-NODE-RPC-URL-HERE>"
+export MNEMONIC="foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar"
+export ADDRESS="0xA028036b2aaAED2487654B2B042C2AA9FA5Ef6b8"
+export NODE_URL="https://api.avax-test.network/ext/bc/C/rpc"
 ```
-
-Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
-
-```ts
-networks: {
-  subnet: {
-    url: `${NODE_URL}`,
-    chainId: 99999,
-    gasPrice: "auto",
-    accounts: [`${PK}`, ],
-  },
-}
-```
-
-:::note 
-
-`chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct
-`chainId` when following this workflow. 
-
-:::
 
 ### Deploy the Safe Contracts
 
-At this point we have set up the Subnet and can make calls to the RPC endpoint. You can use the RPC
-URL value to define `NODE_URL` in your `.env` file. We can execute the workflow on a local or remote
-node as long as we have the [proper IP
-address](../apis/avalanchego/apis/issuing-api-calls#endpoints).
-
-Finally, deploy the contracts by running:
-
-```zsh
-yarn hardhat --network subnet deploy
-```
-
-This will deploy the Safe contracts to your Subnet-EVM!
+After setting up the `.env` file and installing `jq`, simply run `./deploy.sh`.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -108,6 +73,23 @@ deploying "GnosisSafeL2" (tx: 0x341ec664d3a5c2c98f1c3f5862651ba82e0c2d12875d69ad
 deploying "GnosisSafe" (tx: 0x10dcf8c5f53ae698c77d7f60d6756b4b24f2f8224e14e21658c421e158a84cd4)...: deployed at 0x789a5FDac2b37FCD290fb2924382297A6AE65860 with 5086960 gas
 ✨  Done in 26.90s.
 ```
+
+Not all contracts will deploy, but that is expected behavior. If you see this output, everything worked as expected:
+
+```
+Verification status for CompatibilityFallbackHandler: SUCCESS
+Verification status for CreateCall: SUCCESS
+Verification status for DefaultCallbackHandler: SUCCESS
+Verification status for GnosisSafe: SUCCESS
+Verification status for GnosisSafeL2: SUCCESS
+Verification status for GnosisSafeProxyFactory: SUCCESS
+Verification status for MultiSend: FAILURE
+Verification status for MultiSendCallOnly: SUCCESS
+Verification status for SignMessageLib: SUCCESS
+Verification status for SimulateTxAccessor: FAILURE
+```
+
+Deployment information, including contract addresses can be found in `safe-contracts/deployments/custom`.
 
 <!-- markdownlint-enable MD013 -->
 
