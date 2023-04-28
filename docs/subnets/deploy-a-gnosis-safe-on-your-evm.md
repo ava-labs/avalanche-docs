@@ -76,7 +76,7 @@ deploying "GnosisSafe" (tx: 0x10dcf8c5f53ae698c77d7f60d6756b4b24f2f8224e14e21658
 
 Not all contracts will deploy, but that is expected behavior. If you see this output, everything worked as expected:
 
-```
+```zsh
 Verification status for CompatibilityFallbackHandler: SUCCESS
 Verification status for CreateCall: SUCCESS
 Verification status for DefaultCallbackHandler: SUCCESS
