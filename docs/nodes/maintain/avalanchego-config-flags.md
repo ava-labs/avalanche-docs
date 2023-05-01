@@ -953,11 +953,11 @@ Frequency of renewing this node's average uptime metric. Defaults to `30s`.
 
 #### Snow Parameters
 
+##### `--snow-avalanche-batch-size` (int)
+
 :::caution
 Deprecated as of **v1.10.1**.
 :::
-
-##### `--snow-avalanche-batch-size` (int)
 
 DAG implementations of Snow consensus define `b` as the number of transactions a
 vertex should include. Increasing `b` will, theoretically, increase throughput
@@ -965,11 +965,11 @@ while increasing latency. The node will wait for at most 1 second to collect a
 batch, and will then issue the entire batch at once. The value must be at least
 `1`. Defaults to `30`.
 
+##### `--snow-avalanche-num-parents` (int)
+
 :::caution
 Deprecated as of **v1.10.1**.
 :::
-
-##### `--snow-avalanche-num-parents` (int)
 
 DAG implementations of Snow consensus define `p` as the number of parents a
 vertex should include. Increasing `p` will improve the amortization of network
