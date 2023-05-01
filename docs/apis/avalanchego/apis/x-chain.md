@@ -1149,7 +1149,6 @@ An output contains:
   `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
 - `fxID`: The ID of the FX this output uses.
 - `output`: The FX-specific contents of this output.
-- `id`: The transaction ID
 
 Most outputs use the secp256k1 FX, look like this:
 
