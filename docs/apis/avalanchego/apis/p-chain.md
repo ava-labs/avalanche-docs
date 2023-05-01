@@ -1869,7 +1869,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTx",
     "params": {
-        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
+        "txID":"28KVjSw5h3XKGuNpJXWY74EdnGq4TUWvCgEtJPymgQTvudiugb",
         "encoding": "json"
     },
     "id": 1
@@ -1880,85 +1880,85 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "tx": {
-            "unsignedTx": {
-                "networkID": 1,
-                "blockchainID": "11111111111111111111111111111111LpoYY",
-                "outputs": [],
-                "inputs": [
-                    {
-                        "txID": "NXNJHKeaJyjjWVSq341t6LGQP5UNz796o1crpHPByv1TKp9ZP",
-                        "outputIndex": 0,
-                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                        "input": {
-                            "amount": 20824279595,
-                            "signatureIndices": [
-                                0
-                            ]
-                        }
-                    },
-                    {
-                        "txID": "2ahK5SzD8iqi5KBqpKfxrnWtrEoVwQCqJsMoB9kvChCaHgAQC9",
-                        "outputIndex": 1,
-                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                        "input": {
-                            "amount": 28119890783,
-                            "signatureIndices": [
-                                0
-                            ]
-                        }
-                    }
-                ],
-                "memo": "0x",
-                "validator": {
-                    "nodeID": "NodeID-VT3YhgFaWEzy4Ap937qMeNEDscCammzG",
-                    "start": 1682945406,
-                    "end": 1684155006,
-                    "weight": 48944170378
-                },
-                "stake": [
-                    {
-                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                        "output": {
-                            "addresses": [
-                                "P-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
-                            ],
-                            "amount": 48944170378,
-                            "locktime": 0,
-                            "threshold": 1
-                        }
-                    }
-                ],
-                "rewardsOwner": {
-                    "addresses": [
-                        "P-avax19zfygxaf59stehzedhxjesads0p5jdvfeedal0"
-                    ],
-                    "locktime": 0,
-                    "threshold": 1
-                }
-            },
-            "credentials": [
-                {
-                    "signatures": [
-                        "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
-                    ]
-                },
-                {
-                    "signatures": [
-                        "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
-                    ]
-                }
-            ],
-            "id": "28KVjSw5h3XKGuNpJXWY74EdnGq4TUWvCgEtJPymgQTvudiugb"
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "networkID": 1,
+        "blockchainID": "11111111111111111111111111111111LpoYY",
+        "outputs": [],
+        "inputs": [
+          {
+            "txID": "NXNJHKeaJyjjWVSq341t6LGQP5UNz796o1crpHPByv1TKp9ZP",
+            "outputIndex": 0,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 20824279595,
+              "signatureIndices": [
+                0
+              ]
+            }
+          },
+          {
+            "txID": "2ahK5SzD8iqi5KBqpKfxrnWtrEoVwQCqJsMoB9kvChCaHgAQC9",
+            "outputIndex": 1,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 28119890783,
+              "signatureIndices": [
+                0
+              ]
+            }
+          }
+        ],
+        "memo": "0x",
+        "validator": {
+          "nodeID": "NodeID-VT3YhgFaWEzy4Ap937qMeNEDscCammzG",
+          "start": 1682945406,
+          "end": 1684155006,
+          "weight": 48944170378
         },
-        "encoding": "json"
+        "stake": [
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "P-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
+              ],
+              "amount": 48944170378,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
+        ],
+        "rewardsOwner": {
+          "addresses": [
+            "P-avax19zfygxaf59stehzedhxjesads0p5jdvfeedal0"
+          ],
+          "locktime": 0,
+          "threshold": 1
+        }
+      },
+      "credentials": [
+        {
+          "signatures": [
+            "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
+          ]
+        },
+        {
+          "signatures": [
+            "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
+          ]
+        }
+      ],
+      "id": "28KVjSw5h3XKGuNpJXWY74EdnGq4TUWvCgEtJPymgQTvudiugb"
     },
-    "id": 1
+    "encoding": "json"
+  },
+  "id": 1
 }
 ```
 
