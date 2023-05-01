@@ -123,8 +123,8 @@
 
 # 05/09/2022
 
-/overview/getting-started/avalanche-platform-overview/ /learn/avalanche/avalanche-platform 301
-/overview/getting-started/avalanche-platform-overview /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avalanche-platform-overview/ /overview/getting-started/avalanche-platform 301
+/overview/getting-started/avalanche-platform-overview /overview/getting-started/avalanche-platform 301
 /build/tutorials/tutorials-contest/red-dev-avalanche-chainlink-tutorial/ /community/tutorials-contest/red-dev-avalanche-chainlink-tutorial 301
 /build/tutorials/tutorials-contest/red-dev-avalanche-chainlink-tutorial /community/tutorials-contest/red-dev-avalanche-chainlink-tutorial 301
 /build/tutorials/tutorials-contest/tutorials-contest/pangolin-token-subgraph/ /community/tutorials-contest/pangolin-token-subgraph 301
@@ -182,10 +182,10 @@
 /learn/avalanche-bridge-faq/ https://support.avax.network/en/collections/3073022-avalanche-bridge 301
 /learn/getting-started/ / 301
 /learn/getting-started / 301
-/learn/platform-overview/ /learn/avalanche/avalanche-platform 301
-/learn/platform-overview /learn/avalanche/avalanche-platform 301
-/learn/platform-overview/avalanche-consensus/ /learn/avalanche/avalanche-consensus 301
-/learn/platform-overview/avalanche-consensus /learn/avalanche/avalanche-consensus 301
+/learn/platform-overview/ /overview/getting-started/avalanche-platform 301
+/learn/platform-overview /overview/getting-started/avalanche-platform 301
+/learn/platform-overview/avalanche-consensus/ /overview/getting-started/avalanche-consensus 301
+/learn/platform-overview/avalanche-consensus /overview/getting-started/avalanche-consensus 301
 
 # subnets
 
@@ -357,3 +357,11 @@
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
+
+# 05/01/2023
+/overview/getting-started/avalanche-platform /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avalanche-platform /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avalanche-platform /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avalanche-platform /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avalanche-consensus /learn/avalanche/avalanche-consensus 301
+/overview/getting-started/avalanche-consensus /learn/avalanche/avalanche-consensus 301

@@ -1,38 +1,55 @@
 ---
 slug: /intro
+sidebar_label: 🔺 What is Avalanche?
 ---
 
 # What is Avalanche?
 
-Avalanche is an open-source platform for building decentralized applications (Dapps) in one
-interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate
-the scale of global finance, with near-instant transaction finality.
+Avalanche is an open-source platform for building decentralized applications in one
+interoperable, decentralized, and highly-scalable ecosystem. Powered by a uniquely powerful consensus
+mechanism, Avalanche is the first ecosystem designed to accommodate the scale of global finance, with
+near-instant transaction finality. 
 
-Avalanche empowers developers to join a rich ecosystem of blockchains known as Subnets. Subnets
-are subsets of the Avalanche Primary Network that validate a set of blockchains. Each Subnet's
-failures and performance are isolated from other Subnets in the ecosystem, so increased usage on a
-single Subnet doesn't affect other Subnets. Subnets can be permissioned or permission-less, enabling
-arbitrary levels of customization for any use-case.
+## Why Choose Avalanche? {#why-choose-avalanche}
 
-Dapps run on Virtual Machines (VMs), which serve as definitions for blockchain applications.
-Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
-build their own custom Virtual Machine (VM) for advanced use cases that require more flexibility
-or performance. VMs are supported in multiple languages including Go and Rust, giving developers
-unparalleled amounts of flexibility in their implementation.
+### Blazingly Fast
 
-Avalanche employs a novel consensus algorithm which offers strong safety guarantees, quick finality
-times, and high throughput, without compromising decentralization. Avalanche uses proof-of-stake and
-is incredibly energy-efficient and sustainable compared to proof-of-work blockchains. Avalanche can
-run on easily accessible consumer-grade hardware, and consumes the same amount of energy as 46 US
-households. The entire Avalanche network consumes only 0.0005% of the amount of energy consumed by
-Bitcoin.
+- Avalanche employs the fastest consensus mechanism of any layer1 blockchain. The unique consensus
+mechanism enables quick finality and low latency: in less than 2 seconds, your transaction is
+effectively processed and verified.
+
+### Infinitely Scalable
+
+- Anywhere from 1,000 to 10,000 transactions are confirmed per second, virtually unimpacted by network
+traffic thanks to the resiliency of Avalanche consensus. 
+- Avalanche is incredibly energy-efficient and can run easily on consumer-grade hardware.
+The entire Avalanche network consumes the same amount of energy as 46 US households, equivalent to
+0.0005% of the amount of energy consumed by Bitcoin.
+
+### Elastic Composability
+
+- Developers who build on Avalanche can build application-specific blockchains with complex rulesets
+or build on existing private or public subnets in any language. 
+- Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
+build their own custom Virtual Machine (VM) for advanced use cases.
+
+### Advanced Security
+
+- Avalanche consensus offers stronger security guarantees well-above the 51% standard of other
+networks.
+- Permissionless and permissioned custom blockchains deployed as an Avalanche Subnets can include custom
+implementations designed to be compliant with legal and jurisdictional considerations.
+
+
+## ~~Make New pages for the below topics~~
+
 
 ## Building on Avalanche
 
 ### Virtual Machines
 
 Blockchains are defined using the Virtual Machine (VM) framework. VMs are language agnostic and give
-developers unmatched levels of flexibility and customization in the implementation of their
+developers unmatched levels of flexibility and customization in the deployment of their
 applications. Developers can choose to build on existing VMs that provide EVM-compatibility, or
 build their own custom VMs in the languages and frameworks of their choice.
 

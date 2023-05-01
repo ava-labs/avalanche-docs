@@ -11,6 +11,11 @@ with primary focus on EVM-based applications (for example, C-Chain,
 building an app on C-Chain versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help
 developers make more informed decisions.
 
+Subnets are subsets of the Avalanche Primary Network that validate a set of blockchains. Each Subnet's
+failures and performance are isolated from other Subnets in the ecosystem, so increased usage on a
+single Subnet doesn't affect other Subnets. Subnets can be permissioned or permission-less, enabling
+arbitrary levels of customization for any use-case.
+
 ## When to Use a Subnet
 
 There are many advantages to running your own Subnet. If you find one or more of these a good match
