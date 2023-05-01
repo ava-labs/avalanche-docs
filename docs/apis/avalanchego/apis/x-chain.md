@@ -951,7 +951,7 @@ Returns block at the given height.
 
 ```sh
 avm.getBlockByHeight({
-    height: uint64
+    height: string
     encoding: string // optional
 }) -> {
     block: string,
@@ -961,7 +961,7 @@ avm.getBlockByHeight({
 
 **Request:**
 
-- `blockHeight` is the block height. It should be in `uint64` format.
+- `blockHeight` is the block height. It should be in `string` format.
 - `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
 **Response:**
