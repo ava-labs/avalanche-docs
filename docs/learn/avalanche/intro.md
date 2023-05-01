@@ -2,7 +2,7 @@
 slug: /intro
 ---
 
-# Introduction
+# What is Avalanche?
 
 Avalanche is an open-source platform for building decentralized applications (Dapps) in one
 interoperable, highly scalable ecosystem. Avalanche is the first ecosystem designed to accommodate

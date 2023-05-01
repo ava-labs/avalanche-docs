@@ -15,7 +15,7 @@ command-line.
 
 - Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
-- Basic understanding of the [Avalanche's architecture](../../overview/getting-started/avalanche-platform.md)
+- Basic understanding of the [Avalanche's architecture](../../learn/avalanche/avalanche-platform.md)
 - performed a cross-chain swap via this [this
   tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
   to get funds to your C-Chain address.
