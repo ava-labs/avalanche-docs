@@ -1591,7 +1591,7 @@ platform.getStake({
 ```
 
 - `addresses` are the addresses to get information about.
-- `validatorsOnly` 
+- `validatorsOnly`  can be either `true` or `false`. If `true`, will skip checking delegators for stake.
 - `stakeds` is a map from assetID to the amount staked by addresses provided.
 - `stakedOutputs` are the string representation of staked outputs.
 - `encoding` specifies the format for the returned outputs.
@@ -1606,7 +1606,7 @@ curl -X POST --data '{
         "addresses": [
             "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
           ],
-        "validatorsOnly": false
+        "validatorsOnly": true
     },
     "id": 1
 }
