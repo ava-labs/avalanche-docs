@@ -890,8 +890,8 @@ to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration)
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can
-only be changed on a local network.
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on 
+a local network. This applies to both delegation and validation periods.
 
 #### `--min-validator-stake` (int)
 
