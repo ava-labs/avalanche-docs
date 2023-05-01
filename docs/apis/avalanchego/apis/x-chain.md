@@ -1171,6 +1171,10 @@ from `threshold` of the addresses in `addresses`.
 
 ### `avm.getTxStatus`
 
+:::caution 
+Deprecated as of **v1.10.0**.
+:::
+
 Get the status of a transaction sent to the network.
 
 **Signature:**
