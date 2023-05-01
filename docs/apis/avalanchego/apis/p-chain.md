@@ -1580,7 +1580,8 @@ rewards.
 
 ```sh
 platform.getStake({
-    addresses: []string
+    addresses: []string,
+    validatorsOnly: true or false
 }) ->
 {
     stakeds: string -> int,
@@ -1590,6 +1591,7 @@ platform.getStake({
 ```
 
 - `addresses` are the addresses to get information about.
+- `validatorsOnly` 
 - `stakeds` is a map from assetID to the amount staked by addresses provided.
 - `stakedOutputs` are the string representation of staked outputs.
 - `encoding` specifies the format for the returned outputs.
@@ -1603,7 +1605,8 @@ curl -X POST --data '{
     "params": {
         "addresses": [
             "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
-        ]
+          ],
+        "validatorsOnly": false
     },
     "id": 1
 }
@@ -1616,11 +1619,12 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
+    "staked": "6500000000000",
     "stakeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "6500000000000"
     },
     "stakedOutputs": [
-      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
+      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000005e96630e800000000000000000000000001000000011f1c933f38da6ba0ba46f8c1b0a7040a9a991a80dd338ed1"
     ],
     "encoding": "hex"
   },
