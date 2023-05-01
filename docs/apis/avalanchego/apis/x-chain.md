@@ -1059,7 +1059,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getTx",
     "params" :{
-        "txID":"KMcVWV1dJAuWQXfrJgNFFr9uPHqXELQNZoFWoosYVqQV5qGj5",
+        "txID":"2oJCbb8pfdxEHAf9A8CdN4Afj9VSR3xzyzNkf8tDv7aM1sfNFL",
         "encoding": "json"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
