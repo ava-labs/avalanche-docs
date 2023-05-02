@@ -937,7 +937,7 @@ be under `/precompile/contracts/helloworld/config_test.go`. There are mainly two
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. Generated `Verify` tests contain a valid case.
 You can add more invalid cases depending on your implementation. `Equal` tests generates some
-invalid cases to test different timestamps, types and allowlist cases.
+invalid cases to test different timestamps, types and AllowList cases.
 You can check other `config_test.go` files
 in the `/precompile/contracts` directory for more examples. For the `HelloWorld` precompile, you can
 check the generated code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
