@@ -34,7 +34,7 @@ var PrecompiledContractsBerlin = map[common.Address]PrecompiledContract{
 
 These precompile addresses start from `0x0000000000000000000000000000000000000001` and increment by 1.
 
-A [precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L53-L56)
+A [precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L54-L57)
 follows this interface:
 
 ```go
@@ -48,7 +48,7 @@ type PrecompiledContract interface {
 ```
 
 Here is an example of the
-[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L236-L249)
+[sha256 precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/contracts.go#L237-L250)
 function.
 
 ```go
@@ -141,10 +141,10 @@ This is a brief overview of what this tutorial will cover.
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
 
-In this tutorial, we used a branch based on Subnet-EVM version `v0.4.10`. You can find the branch
+In this tutorial, we used a branch based on Subnet-EVM version `v0.5.1`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2). The code in this
-branch is the same as Subnet-EVM version `v0.4.10` except for the `precompile/` directory. The
-`precompile/` directory contains the code for the `HelloWorld` precompile. We will be using this
+branch is the same as Subnet-EVM except for the `precompile/contracts/helloworld` directory. The
+directory contains the code for the `HelloWorld` precompile. We will be using this
 precompile as an example to learn how to write a stateful precompile. The code in this branch can become
 outdated.
 You should always use the latest version of Subnet-EVM when you develop your own precompile.
@@ -202,7 +202,7 @@ npm install -g yarn
 
 ### Complete Code
 
-You can inspect the [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/535/files)
+You can inspect the [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
 for the complete code.
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
@@ -383,7 +383,7 @@ GLOBAL OPTIONS:
 
     --out value
           Output folder for the generated precompile files, - for STDOUT (default =
-          ./precompile/contracts/{pkg})
+          ./precompile/contracts/{pkg}). Test files won't be generated if STDOUT is used
 
     --pkg value
           Go package name to generate the precompile into (default = {type})
@@ -409,7 +409,7 @@ template in the `./precompile/contracts/helloworld` directory, where `helloworld
 Go package we want to generate the precompile into.
 
 ```bash
-./scripts/generate_precompile.sh --abi ./abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
+./scripts/generate_precompile.sh --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg helloworld
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -932,19 +932,23 @@ import (
 
 ### Step 6: Add Config Tests
 
-Let's add some unit tests to make sure our precompile is configured correctly. Config tests will
+Precompile generation tool generates skeletons for unit tests as well. Generated config tests will
 be under `/precompile/contracts/helloworld/config_test.go`. There are mainly two functions we need
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
-checks if the precompile is equal to another precompile. You can check other `config_test.go` files
-in the `/precompile/contracts` directory for examples. For the `HelloWorld` precompile, you can
-check the code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
+checks if the precompile is equal to another precompile. Generated `Verify` tests contain a valid case.
+You can add more invalid cases depending on your implementation. `Equal` tests generates some
+invalid cases to test different timestamps, types and allowlist cases.
+You can check other `config_test.go` files
+in the `/precompile/contracts` directory for more examples. For the `HelloWorld` precompile, you can
+check the generated code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
 
 ### Step 7: Add Contract Tests
 
-We also need to add some contract tests to make sure our precompile is working correctly.
+The tool also generates contract tests to make sure our precompile is working correctly. Generated
+tests include cases to test allow list capabilities, gas costs, calling function in read only mode.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
 tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
-The test will cover all functionality of `sayHello()` and `setGreeting()`.
+We will also add more test to cover functionalities of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
 
