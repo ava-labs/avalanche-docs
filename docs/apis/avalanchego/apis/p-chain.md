@@ -1580,7 +1580,8 @@ rewards.
 
 ```sh
 platform.getStake({
-    addresses: []string
+    addresses: []string,
+    validatorsOnly: true or false
 }) ->
 {
     stakeds: string -> int,
@@ -1590,6 +1591,7 @@ platform.getStake({
 ```
 
 - `addresses` are the addresses to get information about.
+- `validatorsOnly`  can be either `true` or `false`. If `true`, will skip checking delegators for stake.
 - `stakeds` is a map from assetID to the amount staked by addresses provided.
 - `stakedOutputs` are the string representation of staked outputs.
 - `encoding` specifies the format for the returned outputs.
@@ -1603,7 +1605,8 @@ curl -X POST --data '{
     "params": {
         "addresses": [
             "P-avax1pmgmagjcljjzuz2ve339dx82khm7q8getlegte"
-        ]
+          ],
+        "validatorsOnly": true
     },
     "id": 1
 }
@@ -1616,11 +1619,12 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
+    "staked": "6500000000000",
     "stakeds": {
-      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "25000000000"
+      "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z": "6500000000000"
     },
     "stakedOutputs": [
-      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000000064198bf46000000000000000000000001000000010ed1bea258fca42e094ccc625698eab5f7e01d190f0f332d"
+      "0x000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff00000007000005e96630e800000000000000000000000001000000011f1c933f38da6ba0ba46f8c1b0a7040a9a991a80dd338ed1"
     ],
     "encoding": "hex"
   },
@@ -1869,7 +1873,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTx",
     "params": {
-        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
+        "txID":"28KVjSw5h3XKGuNpJXWY74EdnGq4TUWvCgEtJPymgQTvudiugb",
         "encoding": "json"
     },
     "id": 1
@@ -1884,45 +1888,77 @@ curl -X POST --data '{
   "result": {
     "tx": {
       "unsignedTx": {
-        "inputs": {
-          "networkID": 5,
-          "blockchainID": "11111111111111111111111111111111LpoYY",
-          "outputs": [],
-          "inputs": [
-            {
-              "txID": "2QYG5yR6YW55ixmBvR4zXLCZKV9we9bmSWHHiGppF4Ko17bTPn",
-              "outputIndex": 0,
-              "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
-              "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-              "input": {
-                "amount": 1998000000,
-                "signatureIndices": [0]
-              }
-            }
-          ],
-          "memo": "0x"
-        },
-        "destinationChain": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
-        "exportedOutputs": [
+        "networkID": 1,
+        "blockchainID": "11111111111111111111111111111111LpoYY",
+        "outputs": [],
+        "inputs": [
           {
-            "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+            "txID": "NXNJHKeaJyjjWVSq341t6LGQP5UNz796o1crpHPByv1TKp9ZP",
+            "outputIndex": 0,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 20824279595,
+              "signatureIndices": [
+                0
+              ]
+            }
+          },
+          {
+            "txID": "2ahK5SzD8iqi5KBqpKfxrnWtrEoVwQCqJsMoB9kvChCaHgAQC9",
+            "outputIndex": 1,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 28119890783,
+              "signatureIndices": [
+                0
+              ]
+            }
+          }
+        ],
+        "memo": "0x",
+        "validator": {
+          "nodeID": "NodeID-VT3YhgFaWEzy4Ap937qMeNEDscCammzG",
+          "start": 1682945406,
+          "end": 1684155006,
+          "weight": 48944170378
+        },
+        "stake": [
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
             "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
             "output": {
-              "addresses": ["P-fuji1yhem6kev6gkfsyse3m5z09e6qsuxujz0arpw8v"],
-              "amount": 1997000000,
+              "addresses": [
+                "P-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
+              ],
+              "amount": 48944170378,
               "locktime": 0,
               "threshold": 1
             }
           }
-        ]
+        ],
+        "rewardsOwner": {
+          "addresses": [
+            "P-avax19zfygxaf59stehzedhxjesads0p5jdvfeedal0"
+          ],
+          "locktime": 0,
+          "threshold": 1
+        }
       },
       "credentials": [
         {
           "signatures": [
-            "0xdbc03ebd7d06927baacf7aea85cdebd7e0b95cf5b57715a09981fd5a75dac2cb610636bf3657ba4ca47dad4beed2e7f0ec692e7f12f1bbc9f3c34fc5c18ae35d01"
+            "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
+          ]
+        },
+        {
+          "signatures": [
+            "0x6954e90b98437646fde0c1d54c12190fc23ae5e319c4d95dda56b53b4a23e43825251289cdc3728f1f1e0d48eac20e5c8f097baa9b49ea8a3cb6a41bb272d16601"
           ]
         }
-      ]
+      ],
+      "id": "28KVjSw5h3XKGuNpJXWY74EdnGq4TUWvCgEtJPymgQTvudiugb"
     },
     "encoding": "json"
   },
