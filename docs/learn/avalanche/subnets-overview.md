@@ -1,4 +1,8 @@
-# Subnets Overview
+---
+sidebar_label: Subnets
+---
+
+# What Is a Subnet?
 
 A **Subnet** is a sovereign network which defines its own rules regarding its
 membership and token economics. It is composed of a dynamic subset of Avalanche

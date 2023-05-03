@@ -9,9 +9,10 @@ In blockchain, this means that all the participants in a network have to agree o
 the shared ledger. This agreement is reached through a specific process, a consensus protocol,
 that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
-**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It combines features
-of both classical and Nakamoto consensus mechanisms to achieve high throughput, fast finality, and
-energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
+**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It
+combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput,
+fast finality, and energy efficiency. For the whitepaper, see
+[here](https://www.avalabs.org/whitepapers). 
 
 Key Features Include: 
 

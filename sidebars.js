@@ -28,17 +28,11 @@ const sidebars = {
         "learn/avalanche/intro",
         "learn/avalanche/avalanche-consensus",
         "learn/avalanche/avalanche-platform",
+        "learn/avalanche/subnets-overview",
         "learn/avalanche/virtual-machines",
         "learn/avalanche/avax",
       ],
     },
-    // {
-    //   type: "category",
-    //   label: "Technology",
-    //   collapsible: true,
-    //   collapsed: true,
-    //   items: [],
-    // },
     "learn/projects",
     {
       type: "link",
@@ -104,7 +98,6 @@ const sidebars = {
     },
   ],
   subnets: [
-    "subnets/README",
     {
       type: "category",
       label: "Are Subnets Right For You?",
