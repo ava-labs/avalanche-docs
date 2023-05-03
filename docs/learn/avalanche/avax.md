@@ -1,4 +1,7 @@
-# AVAX
+---
+sidebar_label: AVAX Token
+---
+# Our Token: AVAX
 
 AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to
 pay for fees, secure the platform through staking, and provide a basic unit of account between the

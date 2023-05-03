@@ -26,26 +26,25 @@ const sidebars = {
       collapsed: true,
       items: [
         "learn/avalanche/intro",
-        "learn/avalanche/avalanche-platform",
-        "learn/avalanche/avax",
-        "learn/avalanche/virtual-machines",
-      ],
-    },
-    {
-      type: "category",
-      label: "Technology",
-      collapsible: true,
-      collapsed: true,
-      items: [
         "learn/avalanche/avalanche-consensus",
-        {
-          type: "link",
-          label: "Whitepapers",
-          href: "https://www.avalabs.org/whitepapers",
-        },
+        "learn/avalanche/avalanche-platform",
+        "learn/avalanche/virtual-machines",
+        "learn/avalanche/avax",
       ],
     },
+    // {
+    //   type: "category",
+    //   label: "Technology",
+    //   collapsible: true,
+    //   collapsed: true,
+    //   items: [],
+    // },
     "learn/projects",
+    {
+      type: "link",
+      label: "Whitepapers",
+      href: "https://www.avalabs.org/whitepapers",
+    },
     {
       type: "link",
       label: "Audits",

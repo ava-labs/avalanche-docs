@@ -2,7 +2,7 @@
 description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here.
 ---
 
-# Avalanche Platform
+# The Primary Network
 
 Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
