@@ -113,9 +113,11 @@ cd avalanchego
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. You can find more about SSH and 
-how to use it [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process will not go through. 
+The repository cloning method used is SSH, which requires additional steps. 
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+Without a public SSH key, the cloning process 
+will not go through. 
 As an alternative, you can use the HTTPS method:
 
 `git clone https://github.com/ava-labs/avalanchego.git`
