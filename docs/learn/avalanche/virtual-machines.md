@@ -22,7 +22,7 @@ Validators are able to install additional VMs on their node to validate addition
 the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward
 token configured by Subnets.
 
-To learn more about Subnets, click [here](../../subnets/README.md).
+To learn more about Subnets, click [here](subnets-overview.md).
 
 ## Building on Virtual Machines
 

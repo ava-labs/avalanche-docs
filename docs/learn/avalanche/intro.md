@@ -21,7 +21,7 @@ effectively processed and verified.
 ### Infinitely Scalable
 
 - Anywhere from 1,000 to 10,000 transactions are confirmed per second, virtually unaffected by network
-traffic thanks to the resiliency of Avalanche consensus. 
+traffic thanks to the resiliency of Avalanche Consensus. 
 - Avalanche is incredibly energy-efficient and can run easily on consumer-grade hardware.
 The entire Avalanche network consumes the same amount of energy as 46 US households, equivalent to
 0.0005% of the amount of energy consumed by Bitcoin.
@@ -39,25 +39,3 @@ build their own custom Virtual Machine (VM) for advanced use cases.
 networks.
 - Permissionless and permissioned custom blockchains deployed as an Avalanche Subnets can include custom
 implementations designed to be compliant with legal and jurisdictional considerations.
-
-
-## ~~Make New pages for the below topics~~
-
-## Building on Avalanche
-
-### Virtual Machines
-
-Blockchains are defined using the Virtual Machine (VM) framework. VMs are language agnostic and give
-developers unmatched levels of flexibility and customization in the deployment of their
-applications. Developers can choose to build on existing VMs that provide EVM-compatibility, or
-build their own custom VMs in the languages and frameworks of their choice.
-
-To learn more about VMs, click [here](virtual-machines.md).
-
-### Subnets
-
-Subnets are Avalanche's solution to scaling, and allow Avalanche to scale to create a massive amount
-of interoperable Dapps in its ecosystem.
-
-To learn more about Subnets, click [here](../../subnets/README.md).
-

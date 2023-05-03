@@ -8,7 +8,7 @@ Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous n
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
 created for different applications.
 
-The Primary Network is a special [Subnet](../../subnets/README.md) that contains all validators
+The Primary Network is a special [Subnet](subnets-overview.md) that contains all validators
 (including validators of any custom Subnets). A node can become a validator for the Primary
 Network by staking at least 2,000 AVAX.
 
