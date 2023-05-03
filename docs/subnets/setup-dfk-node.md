@@ -35,6 +35,17 @@ git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
+:::info
+The repository cloning method used is SSH, which requires additional steps. 
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+Without a public SSH key, the cloning process 
+will not go through. 
+As an alternative, you can use the HTTPS method:
+
+`git clone https://github.com/ava-labs/subnet-evm.git`
+:::
+
 Now that you are in the `ava-labs/subnet-evm` repository, you will build the binary and place it
 directly into the `plugins` directory. To do this, you will pass in the desired
 path to place the plugin binary. You will want to place this binary into the plugins directory of
@@ -125,3 +136,16 @@ cd subnet-evm
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --track-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
+
+:::info
+The repository cloning method used is SSH, which requires additional steps. 
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+Without a public SSH key, the cloning process 
+will not go through. 
+As an alternative, you can use the HTTPS method:
+
+`git clone https://github.com/ava-labs/avalanchego.git`
+
+`git clone https://github.com/ava-labs/subnet-evm.git`
+:::
