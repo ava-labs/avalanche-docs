@@ -951,7 +951,7 @@ Returns block at the given height.
 
 ```sh
 avm.getBlockByHeight({
-    height: uint64
+    height: string
     encoding: string // optional
 }) -> {
     block: string,
@@ -961,7 +961,7 @@ avm.getBlockByHeight({
 
 **Request:**
 
-- `blockHeight` is the block height. It should be in `uint64` format.
+- `blockHeight` is the block height. It should be in `string` format.
 - `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
 **Response:**
@@ -1059,7 +1059,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getTx",
     "params" :{
-        "txID":"KMcVWV1dJAuWQXfrJgNFFr9uPHqXELQNZoFWoosYVqQV5qGj5",
+        "txID":"2oJCbb8pfdxEHAf9A8CdN4Afj9VSR3xzyzNkf8tDv7aM1sfNFL",
         "encoding": "json"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
@@ -1075,30 +1075,34 @@ curl -X POST --data '{
       "unsignedTx": {
         "networkID": 1,
         "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-        "outputs": [
+        "outputs": [],
+        "inputs": [
+          {
+            "txID": "2jbZUvi6nHy3Pgmk8xcMpSg5cW6epkPqdKkHSCweb4eRXtq4k9",
+            "outputIndex": 1,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 2570382395,
+              "signatureIndices": [
+                0
+              ]
+            }
+          }
+        ],
+        "memo": "0x",
+        "destinationChain": "11111111111111111111111111111111LpoYY",
+        "exportedOutputs": [
           {
             "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
             "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
             "output": {
-              "addresses": ["X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"],
-              "amount": 1530084210,
+              "addresses": [
+                "X-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
+              ],
+              "amount": 2569382395,
               "locktime": 0,
               "threshold": 1
-            }
-          }
-        ],
-        "inputs": [],
-        "memo": "0x",
-        "sourceChain": "11111111111111111111111111111111LpoYY",
-        "importedInputs": [
-          {
-            "txID": "28jfD1CViCz7CKawJBzmHCQRWtk6xwzcBjCVErH6dBo11JLvmw",
-            "outputIndex": 0,
-            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
-            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-            "input": {
-              "amount": 1531084210,
-              "signatureIndices": [0]
             }
           }
         ]
@@ -1108,11 +1112,12 @@ curl -X POST --data '{
           "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
           "credential": {
             "signatures": [
-              "0x447ea3c6725add24e240b3179f9cc28ab5410c48f822d32d12459861ca816765297dbfe07e1957e3b470d39e6f56f10269dd7f8c4e108857db874b2c4ba1a22401"
+              "0x46ebcbcfbee3ece1fd15015204045cf3cb77f42c48d0201fc150341f91f086f177cfca8894ca9b4a0c55d6950218e4ea8c01d5c4aefb85cd7264b47bd57d224400"
             ]
           }
         }
-      ]
+      ],
+      "id": "2oJCbb8pfdxEHAf9A8CdN4Afj9VSR3xzyzNkf8tDv7aM1sfNFL"
     },
     "encoding": "json"
   },
@@ -1164,6 +1169,10 @@ The above output can be consumed after Unix time `locktime` by a transaction tha
 from `threshold` of the addresses in `addresses`.
 
 ### `avm.getTxStatus`
+
+:::caution 
+Deprecated as of **v1.10.0**.
+:::
 
 Get the status of a transaction sent to the network.
 
