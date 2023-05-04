@@ -38,7 +38,7 @@ rules, and may require that its constituent validators have certain properties.
 
 Subnets can have their own token economics with their own native tokens and fee
 markets. They can launch their own blockchains with customized virtual machines.
-See [Customize a Subnet](../subnets/customize-a-subnet.md) for more details.
+See [Customize a Subnet](/docs/subnets/customize-a-subnet.md) for more details.
 
 ### Compliance
 
@@ -59,7 +59,7 @@ requirements do not apply to the Avalanche Primary Network.)
 Different blockchain-based applications may require validators to have certain
 properties. Suppose there is an application that requires large amounts of RAM
 or CPU power. A Subnet could require that validators meet certain [hardware
-requirements](../nodes/build/run-avalanche-node-manually.md#requirements) so
+requirements](/nodes/build/run-avalanche-node-manually.md#requirements) so
 that the application doesn’t suffer from low performance due to slow validators.
 
 ### Support for Private Blockchains
@@ -68,7 +68,7 @@ You can create a Subnet where only certain pre-defined validators may join and
 create a private Subnet where the contents of the blockchains would be visible
 only to those validators. This is ideal for organizations interested in keeping
 their information private. See
-[here](../nodes/maintain/subnet-configs.md#private-subnet) for more info.
+[here](/nodes/maintain/subnet-configs.md#private-subnet) for more info.
 
 ### Separation of Concerns
 

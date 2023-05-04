@@ -369,7 +369,8 @@ avalanche-network-runner control stop \
 
 ## Subnets
 
-For general Subnet documentation, please refer to [Subnets](../subnets). ANR can be a great helper
+For general Subnet documentation, please refer to [Subnets](/learn/avalanche/subnets-overview.md).
+ANR can be a great helper
 working with Subnets, and can be used to develop and test new Subnets before deploying them in
 public networks. However, for a smooth and guided experience, we recommend using
 [Avalanche-CLI](../subnets/create-a-local-subnet.md). These examples expect a basic understanding of
