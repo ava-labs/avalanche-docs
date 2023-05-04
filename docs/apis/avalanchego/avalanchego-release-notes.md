@@ -8,7 +8,12 @@
 
 :::info
 
-If you want to get notified whenever there is a new release, you can go to the 
+If you have an ID for an node, you can use the 
+[avalanche notify service](https://docs.avax.network/nodes/maintain/avalanche-notify) 
+to be notified about new releases.
+
+In addition, if you don't have a node ID, you can get release notifications from github.
+To do so, you can go to our
 [repository](https://github.com/ava-labs/avalanchego) and look on the top-right 
 corner for the **Watch** option. After you click on it, select **Custom**, 
 and then **Releases**. Press **Apply** and it is done.
