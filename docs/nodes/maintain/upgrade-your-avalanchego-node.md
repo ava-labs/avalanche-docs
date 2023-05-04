@@ -109,7 +109,7 @@ select the release you want (probably the latest one.)
 :::info
 
 If you have a node, you can subscribe to the
-[avalanche notify service](./avalanche-notify.md) 
+[avalanche notify service](./avalanche-notify.md) with your node ID
 to be notified about new releases.
 
 In addition, or if you don't have a node ID, you can get release notifications from github.
