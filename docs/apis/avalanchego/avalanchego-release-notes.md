@@ -9,7 +9,7 @@
 :::info
 
 If you have an ID for an node, you can use the 
-[avalanche notify service](https://docs.avax.network/nodes/maintain/avalanche-notify) 
+[avalanche notify service](/docs/nodes/maintain/avalanche-notify.md) 
 to be notified about new releases.
 
 In addition, if you don't have a node ID, you can get release notifications from github.
