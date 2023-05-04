@@ -3,6 +3,9 @@
 :::caution
 
 Please note that **AvalancheJS** is deprecated.
+[This](https://www.npmjs.com/package/@avalabs/avalanchejs) is the current **JavaScript Library**
+ for interfacing 
+with the Avalanche Platform.
 
 :::
 
