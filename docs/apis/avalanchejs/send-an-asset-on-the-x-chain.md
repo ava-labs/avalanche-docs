@@ -1,5 +1,11 @@
 # Send an Asset on the X-Chain
 
+:::caution
+
+Please not that **AvalancheJS** is deprecated.
+
+:::
+
 This example sends an asset in the X-Chain to a single recipient. The first step
 in this process is to create an instance of Avalanche connected to our Avalanche
 Platform endpoint of choice.

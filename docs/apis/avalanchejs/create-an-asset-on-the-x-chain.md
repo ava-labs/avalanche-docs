@@ -1,5 +1,11 @@
 # Create an Asset on the X-Chain
 
+:::caution
+
+Please not that **AvalancheJS** is deprecated.
+
+:::
+
 This example creates an asset on the X-Chain and publishes it to the Avalanche
 platform. The first step in this process is to create an instance of AvalancheJS
 connected to our Avalanche platform endpoint of choice. In this example we're

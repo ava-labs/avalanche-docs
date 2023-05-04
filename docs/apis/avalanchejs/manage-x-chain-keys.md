@@ -1,5 +1,11 @@
 # Manage X-Chain Keys
 
+:::caution
+
+Please not that **AvalancheJS** is deprecated.
+
+:::
+
 AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the
 functions of the API, enabling them to sign using keys it's registered. The
 first step in this process is to create an instance of AvalancheJS connected to

@@ -1,5 +1,11 @@
 # API
 
+:::caution
+
+Please not that **AvalancheJS** is deprecated.
+
+:::
+
 ## AvalancheJS - [V3.15.0](https://github.com/ava-labs/avalanchejs/releases/tag/v3.15.0)
 
 ### Modules

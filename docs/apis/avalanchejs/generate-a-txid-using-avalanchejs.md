@@ -1,5 +1,11 @@
 # Generate a TxID Using AvalancheJS
 
+:::caution
+
+Please not that **AvalancheJS** is deprecated.
+
+:::
+
 ## Introduction
 
 A transaction id, or TxID, is a string of numbers and letters which identifies a
