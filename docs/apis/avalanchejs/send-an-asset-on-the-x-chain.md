@@ -2,7 +2,7 @@
 
 :::caution
 
-Please not that **AvalancheJS** is deprecated.
+Please note that **AvalancheJS** is deprecated.
 
 :::
 
