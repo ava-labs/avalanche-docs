@@ -8,11 +8,10 @@
 
 :::info
 
-If you have an ID for an node, you can use the 
-[avalanche notify service](/docs/nodes/maintain/avalanche-notify.md) 
-to be notified about new releases.
+If you have a node, you can subscribe to the
+[avalanche notify service](/docs/nodes/maintain/avalanche-notify.md) with your node ID to be notified about new releases.
 
-In addition, if you don't have a node ID, you can get release notifications from github.
+In addition, or if you don't have a node ID, you can get release notifications from github.
 To do so, you can go to our
 [repository](https://github.com/ava-labs/avalanchego) and look on the top-right 
 corner for the **Watch** option. After you click on it, select **Custom**, 
