@@ -106,6 +106,20 @@ If you want to download a pre-built binary instead of building it yourself, go
 to our [releases page](https://github.com/ava-labs/avalanchego/releases), and
 select the release you want (probably the latest one.)
 
+:::info
+
+If you have a node, you can subscribe to the
+[avalanche notify service](./avalanche-notify.md) with your node ID
+to be notified about new releases.
+
+In addition, or if you don't have a node ID, you can get release notifications from github.
+To do so, you can go to our
+[repository](https://github.com/ava-labs/avalanchego) and look on the top-right 
+corner for the **Watch** option. After you click on it, select **Custom**, 
+and then **Releases**. Press **Apply** and it is done.
+
+:::
+
 Under `Assets`, select the appropriate file.
 
 For MacOS:  
