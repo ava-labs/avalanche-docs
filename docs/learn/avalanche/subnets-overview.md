@@ -36,7 +36,7 @@ provide their own security.
 - Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on
 one Subnet won't affect another.
 - Subnets can have their own token economics with their own native tokens, fee
-markets, and incentivizations determined by the Subnet deployer. 
+markets, and incentives determined by the Subnet deployer. 
 - One Subnet can host multiple blockchains with customized [virtual machines](virtual-machines.md).
 - They don’t share execution thread, storage[^1], or
 networking with any other Subnets, including the Primary Network.
@@ -47,7 +47,7 @@ networking with any other Subnets, including the Primary Network.
 developers to implement arbitrary communication protocols between any two Subnets.
 <!-- - would love a bullet about native bridges -->
 
-### Accomodate Application-Specific Requirements
+### Accommodate Application-Specific Requirements
 
 _Different blockchain-based applications may require validators to have certain
 properties such as large amounts of RAM or CPU power._ 
@@ -67,7 +67,7 @@ Some examples of requirements the creators of a Subnet may choose include:
 - Validators must pass a KYC/AML checks
 - Validators must hold a certain license
 
-### Control The Privacy Of On-Chain Data
+### Control The Privacy of On-Chain Data
 
 _Subnets are ideal for organizations interested in keeping their information private._
 
@@ -82,7 +82,7 @@ validate certain blockchains because they simply have no interest in those
 blockchains._
  
 - The Subnet model enables validators to concern themselves only with
-blockchain networks they choose to partcipate in. This greatly reduces the computational burden on validators.
+blockchain networks they choose to participate in. This greatly reduces the computational burden on validators.
 
 ## Develop Your Own Subnet
 
