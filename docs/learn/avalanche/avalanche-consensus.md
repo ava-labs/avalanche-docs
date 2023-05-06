@@ -36,6 +36,11 @@ determining whether a
 accepted, it asks a small, random subset of validators for their preference. Each queried validator
 replies with the transaction that it prefers, or thinks should be accepted.
 
+If a majority of the validators sampled reply with the same preferred
+transaction, this becomes the preferred choice of the group sampled, including the validator that asked.
+In the future, this validator and all those who have participated in at least one round of sampling
+will reply with the transaction preferred by the majority.
+
 :::note
 
 Consensus will never include a transaction that is determined to be **invalid**. For example, if you
@@ -43,11 +48,6 @@ were to submit a transaction to send 100 AVAX to a friend, but your wallet only 
 is considered **invalid** and will not participate in consensus. 
 
 :::
-
-If a majority of the validators sampled reply with the same preferred
-transaction, this becomes the preferred choice of the group sampled, including the validator that asked.
-In the future, this validator and all those who have participated in at least one round of sampling
-will reply with the transaction preferred by the majority.
 
 Overtime, more and more validators are queried, and the group in agreement grows larger and larger.
 

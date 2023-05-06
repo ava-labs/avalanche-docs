@@ -5,7 +5,7 @@ sidebar_label: AVAX Token
 
 AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to
 pay for fees, secure the platform through staking, and provide a basic unit of account between the
-multiple Subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+multiple Subnets created on Avalanche. 
 
 ## Utility
 
@@ -79,3 +79,9 @@ Due to the capped-supply, the above function guarantees that regardless of the g
 AVAX will never exceed a total of $720M$ tokens, or $\lim_{j \to \infty} R(j) = 720M$.
 
 <!-- vale on -->
+
+:::info
+
+- `1 nAVAX` is equal to `0.000000001 AVAX`.
+
+:::
