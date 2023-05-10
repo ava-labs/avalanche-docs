@@ -1,12 +1,5 @@
 # Deploy a Gnosis Safe on Your Subnet-EVM
 
-:::warning
-
-**This document is under maintenance.** For a step-by-step tutorial on how to deploy a Gnosis Safe, 
-please visit our **[GitHub](https://github.com/ava-labs/gnosis-subnet).**
-
-:::
-
 ## Introduction
 
 This article shows how to deploy and interact with a [Gnosis Safe](https://gnosis-safe.io/)
@@ -28,7 +21,7 @@ This tutorial assumes that:
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 
-- [safe-contracts](https://github.com/safe-global/safe-contracts.git)
+- [gnosis-Subnet](https://github.com/ava-labs/gnosis-subnet)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 - [avalanche-network-runner](../subnets/network-runner.md) (Local Workflow)
@@ -37,61 +30,33 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 
 ### Setup Network
 
-Set up the safe-contracts repository by running the following Commands:
+In order for the `gnosis-safe` repo to successfully deploy these contracts, ensure that you have `jq`
+and `yarn` installed. 
 
-```zsh
-git https://github.com/safe-global/safe-contracts.git
-cd safe-contracts
-yarn
-```
+On Ubuntu, run `sudo apt install jq`, `sudo apt install yarn`.
+On Linux, run `brew install jq`, `brew install yarn`. 
+ 
+Next, clone the library. Change `.env.example` to `.env` and set the variable,`MNEMONIC` to the seed
+phrase of the wallet you intend to deploy the contracts with. Set `ADDRESS` to the public key of the
+same wallet. Finally, set `NODE_URL` to the URL of your Subnet's RPC. 
 
-Next, change `.env.example` to `.env` and set the variable,`PK` to your wallet's _private key_.
-Here, we can also add our node's RPC endpoint as our `NODE_URL`.
+:::note 
+
+This address you choose must be funded as the transactions will include a gas fee. 
+
+:::
 
 Example:
 
 ```env
-PK="<YOUR-PRIVATE-KEY-HERE>"
-PK2=""
-INFURA_KEY=""
-# Used for custom network
-NODE_URL="<YOUR-SUBNET-NODE-RPC-URL-HERE>"
+export MNEMONIC="foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar"
+export ADDRESS="0xA028036b2aaAED2487654B2B042C2AA9FA5Ef6b8"
+export NODE_URL="https://api.avax-test.network/ext/bc/C/rpc"
 ```
-
-Next, add your Subnet Network parameters to [`hardhat.config.ts`](https://github.com/safe-global/safe-contracts/blob/main/hardhat.config.ts):
-
-```ts
-networks: {
-  subnet: {
-    url: `${NODE_URL}`,
-    chainId: 99999,
-    gasPrice: "auto",
-    accounts: [`${PK}`, ],
-  },
-}
-```
-
-:::note 
-
-`chainId` is set to 99999 for demonstration purposes only. Please be sure to use the correct
-`chainId` when following this workflow. 
-
-:::
 
 ### Deploy the Safe Contracts
 
-At this point we have set up the Subnet and can make calls to the RPC endpoint. You can use the RPC
-URL value to define `NODE_URL` in your `.env` file. We can execute the workflow on a local or remote
-node as long as we have the [proper IP
-address](../apis/avalanchego/apis/issuing-api-calls#endpoints).
-
-Finally, deploy the contracts by running:
-
-```zsh
-yarn hardhat --network subnet deploy
-```
-
-This will deploy the Safe contracts to your Subnet-EVM!
+After setting up the `.env` file and installing `jq`, simply run `./deploy.sh`.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -109,10 +74,28 @@ deploying "GnosisSafe" (tx: 0x10dcf8c5f53ae698c77d7f60d6756b4b24f2f8224e14e21658
 ✨  Done in 26.90s.
 ```
 
+Not all contracts will deploy, but that is expected behavior. If you see this output, everything worked as expected:
+
+```zsh
+Verification status for CompatibilityFallbackHandler: SUCCESS
+Verification status for CreateCall: SUCCESS
+Verification status for DefaultCallbackHandler: SUCCESS
+Verification status for GnosisSafe: SUCCESS
+Verification status for GnosisSafeL2: SUCCESS
+Verification status for GnosisSafeProxyFactory: SUCCESS
+Verification status for MultiSend: FAILURE
+Verification status for MultiSendCallOnly: SUCCESS
+Verification status for SignMessageLib: SUCCESS
+Verification status for SimulateTxAccessor: FAILURE
+```
+
+Deployment information, including contract addresses can be found in `safe-contracts/deployments/custom`.
+
 <!-- markdownlint-enable MD013 -->
 
 :::note
-Please record your GnosisSafeL2 and GnosisSafeProxyFactory addresses to complete this tutorial
+Please record your GnosisSafeL2 and GnosisSafeProxyFactory to be able to create a
+[Safe](https://github.com/5afe/safe-tasks#gnosis-safe-tasks) on your Subnet.
 :::
 
 The deployment of the contracts is using a [proxy
@@ -121,7 +104,7 @@ therefore the address is depending on the bytecode. If the address is the same t
 bytecode of the contract is also the same (assuming that the target chain follows the EVM
 specifications set in the Ethereum Yellow Paper).
 
-## Interacting with the Safe
+<!-- ## Interacting with the Safe
 
 The [safe-deployments](https://github.com/safe-global/safe-deployments) repository contains the ABI
 files for the different versions of the Safe that can be used with all common Ethereum tools to
@@ -227,13 +210,10 @@ examples directory and an address that you control to `params`.
 Next, we will call the `propose-multi` task to create a transaction based on the sample TX input
 json that adds an owner to the Safe.
 
-<!-- markdownlint-disable MD013 -->
-
 ```zsh
-yarn safe propose-multi --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 examples/add_owner.json --export example/addOwner.json
+yarn safe propose-multi --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
+examples/add_owner.json --export example/addOwner.json
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 This will create a new file, `addOwner.json`, in the examples directory.
 
@@ -264,13 +244,12 @@ Notice the `data` value has the parameters encoded as a single hexadecimal strin
 
 Now we can use the `--data` flag and pass in the `data` above as an argument for our proposal.
 
-<!-- markdownlint-disable MD013 -->
 
 ```zsh
-yarn safe propose --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002
+yarn safe propose --network subnet 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114 --to 0x1DE5B48F80eC78Bf74644EFdCbB5750Cb7B25114
+--data 0x0d582f1300000000000000000000000082ddaf3f1fcd3c18f5664cd7fb12bd8c38d5d4ba0000000000000000000000000000000000000000000000000000000000000002
 ```
 
-<!-- markdownlint-enable MD013 -->
 
 Output:
 
@@ -397,10 +376,10 @@ with) from our Safe to the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`.
 
 Let's ensure that our Safe has enough funds by using a simple curl request.
 
-<!-- markdownlint-disable MD013 -->
 
 ```zsh
-curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H
+"Content-Type: application/json" --data '
 {
   "jsonrpc": "2.0",
   "method": "eth_getBalance",
@@ -409,8 +388,6 @@ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dy
 }
 '
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 Output:
 
@@ -456,13 +433,10 @@ By default, Hardhat uses _account 0_ to sign transactions. Since we've imported 
 and added it to our _accounts_ parameter in `hardhat.config.ts` we can now specify which account we
 want to sign with by adding the flag `--signer-index` to our `sign-proposal` task
 
-<!-- markdownlint-disable MD013 -->
-
 ```zsh
-yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d --signer-index 1
+yarn safe sign-proposal 0x5134dc35909ff592c55a64c1a5947dd4844b1bca2a45df68ed9c3019133bf44d
+--signer-index 1
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 Output:
 
@@ -491,10 +465,9 @@ Now let's check the balances of the Safe and EOA addresses using curl.
 
 ##### Safe Balance(0)
 
-<!-- markdownlint-disable MD013 -->
-
 ```zsh
-curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H "Content-Type: application/json" --data '
+curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dyz54Wit/rpc -H
+"Content-Type: application/json" --data '
 {
   "jsonrpc": "2.0",
   "method": "eth_getBalance",
@@ -502,8 +475,6 @@ curl -X POST localhost:49435/ext/bc/2Ek1MWR7jiEJr3o9tuJAH79JkuERzKqQDcR2s6R2e5Dy
   "id": 1
 }
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 Output:
 
@@ -513,10 +484,9 @@ Output:
 
 ##### EOA Balance(1,000)
 
-<!-- markdownlint-disable MD013 -->
-
 ```zsh
-curl -X POST "http://127.0.0.1:17773/ext/bc/8ttPWTKt2FEs256fJkV2Yj5nJS1JPSfhN2ghAr8aboZWF2gXF/rpc" -H "Content-Type: application/json" --data '
+curl -X POST "http://127.0.0.1:17773/ext/bc/8ttPWTKt2FEs256fJkV2Yj5nJS1JPSfhN2ghAr8aboZWF2gXF/rpc"
+-H "Content-Type: application/json" --data '
 {
   "jsonrpc": "2.0",
   "method": "eth_getBalance",
@@ -524,8 +494,6 @@ curl -X POST "http://127.0.0.1:17773/ext/bc/8ttPWTKt2FEs256fJkV2Yj5nJS1JPSfhN2gh
   "id": 1
 }
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 Output
 
@@ -862,13 +830,10 @@ Notice that the `data` value consists of the calldata we will use to call the `u
 
 #### Create the Proposal
 
-<!-- markdownlint-disable MD013 -->
-
 ```zsh
-yarn safe propose --network subnet "<YOUR-SAFE-ADDRESS-HERE>" --to "<YOUR-PROXY-ADMIN-ADDRESS-HERE>" --data "<YOUR-TX-DATA-HERE>"
+yarn safe propose --network subnet "<YOUR-SAFE-ADDRESS-HERE>" --to "<YOUR-PROXY-ADMIN-ADDRESS-HERE>"
+--data "<YOUR-TX-DATA-HERE>"
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 ```zsh
 Running on subnet
@@ -1006,4 +971,4 @@ networks: {
 }
 ```
 
-Then run the deployment and interaction methods to follow the exercises in this tutorial.
+Then run the deployment and interaction methods to follow the exercises in this tutorial. -->

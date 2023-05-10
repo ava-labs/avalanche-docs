@@ -890,8 +890,8 @@ to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration)
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can
-only be changed on a local network.
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on 
+a local network. This applies to both delegation and validation periods.
 
 #### `--min-validator-stake` (int)
 
@@ -952,22 +952,6 @@ Fraction of time a validator must be online to receive rewards. Defaults to
 Frequency of renewing this node's average uptime metric. Defaults to `30s`.
 
 #### Snow Parameters
-
-##### `--snow-avalanche-batch-size` (int)
-
-DAG implementations of Snow consensus define `b` as the number of transactions a
-vertex should include. Increasing `b` will, theoretically, increase throughput
-while increasing latency. The node will wait for at most 1 second to collect a
-batch, and will then issue the entire batch at once. The value must be at least
-`1`. Defaults to `30`.
-
-##### `--snow-avalanche-num-parents` (int)
-
-DAG implementations of Snow consensus define `p` as the number of parents a
-vertex should include. Increasing `p` will improve the amortization of network
-queries. However, by increasing the connectivity of the graph, the complexity of
-the graph traversals is increased. The value must be at least `2`. Defaults to
-`5`.
 
 ##### `--snow-concurrent-repolls` (int)
 

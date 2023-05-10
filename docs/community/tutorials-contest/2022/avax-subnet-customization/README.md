@@ -838,9 +838,9 @@ avalanche subnet delete testSubnet
 Next, we will create a new Subnet using the genesis file.
 
 ```bash
-## avalanche subnet create <SubnetName> --file <filepath>
+## avalanche subnet create <SubnetName> --genesis <filepath>
 
-avalanche subnet create game --file ./genesis.json
+avalanche subnet create game --genesis ./genesis.json
 ## Use SubnetEVM
 
 > Using specified genesis
