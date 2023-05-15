@@ -745,7 +745,7 @@ interface with two functions `sayHello()` and `setGreeting()`. We finally get to
 If any contract calls these functions from the interface, the below function gets executed. This function
 is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and
 the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
-The below code snippet can be copied and pasted to overwrite the default `sayHello` code.
+The below code snippet can be copied and pasted to overwrite the default `setGreeting` code.
 
 First we add a helper function to get the greeting value from the stateDB, this will be helpful
 when we test our contract.
