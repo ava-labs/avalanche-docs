@@ -562,7 +562,9 @@ logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, 
 
 #### `--log-dir` (string, file path)
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`. 
+If you are running the node as a system service (ex. using the installer script) logs will also be 
+stored in `$HOME/var/log/syslog`.
 
 #### `--log-disable-display-plugin-logs` (boolean)
 

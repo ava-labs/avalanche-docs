@@ -165,7 +165,6 @@ Here are some recommended resources to learn the ins and outs of the EVM:
 - [Layout in Memory](https://docs.soliditylang.org/en/v0.8.10/internals/layout_in_memory.html)
 - [Layout of Call Data](https://docs.soliditylang.org/en/v0.8.10/internals/layout_in_calldata.html)
 - [Contract ABI Specification](https://docs.soliditylang.org/en/v0.8.10/abi-spec.html)
-- [Precompiles in Solidity](https://medium.com/@rbkhmrcr/precompiles-solidity-e5d29bd428c4)
 - [Customizing the EVM with Stateful Precompiles](https://medium.com/avalancheavax/customizing-the-evm-with-stateful-precompiles-f44a34f39efd)
 
 Please install the following before getting started.
@@ -201,11 +200,11 @@ npm install -g yarn
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
+The repository cloning method used is SSH, which requires additional steps.
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
+Without a public SSH key, the cloning process
+will not go through.
 As an alternative, you can use the HTTPS method:
 
 `git clone https://github.com/ava-labs/subnet-evm.git`
@@ -746,7 +745,7 @@ interface with two functions `sayHello()` and `setGreeting()`. We finally get to
 If any contract calls these functions from the interface, the below function gets executed. This function
 is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and
 the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
-The below code snippet can be copied and pasted to overwrite the default `sayHello` code.
+The below code snippet can be copied and pasted to overwrite the default `setGreeting` code.
 
 First we add a helper function to get the greeting value from the stateDB, this will be helpful
 when we test our contract.
