@@ -18,8 +18,7 @@ Key Features Include:
 
 - Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
 quickly confirmed and irreversible.
-- Scalability: Capable of a peak throughput of up to 20,000 transactions per second with a latency
-of less than half a second.
+- Scalability: Capable of high throughput with a latency of less than half a second.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
 is not computationally intensive nor expensive. 
 - Adaptive Security: Because the security level of the network adjusts depending on the number of Byzantine
