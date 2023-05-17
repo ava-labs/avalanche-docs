@@ -115,11 +115,11 @@ To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
 ```
 
 where `blockchainID` is the ID of the blockchain running the EVM. So for
-example, the RPC URL for the Swimmer Network (a Subnet that runs the Crabada
-game) running on a local node would be:
+example, the RPC URL for the DFK Network (a Subnet that runs the DeFi Kingdoms:Crystalvale game) 
+running on a local node would be:
 
 ```sh
-http://127.0.0.1/ext/bc/2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX/rpc
+http://127.0.0.1/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc
 ```
 
 Or for the WAGMI Subnet on the Fuji testnet:
