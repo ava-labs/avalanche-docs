@@ -1,3 +1,7 @@
+---
+sidebar_label: Subnets
+---
+
 # Subnets Overview
 
 A **Subnet** is a sovereign network which defines its own rules regarding its
@@ -55,7 +59,7 @@ requirements do not apply to the Avalanche Primary Network.)
 Different blockchain-based applications may require validators to have certain
 properties. Suppose there is an application that requires large amounts of RAM
 or CPU power. A Subnet could require that validators meet certain [hardware
-requirements](/nodes/build/run-avalanche-node-manually.md#requirements) so
+requirements](/docs/nodes/build/run-avalanche-node-manually.md#requirements) so
 that the application doesn’t suffer from low performance due to slow validators.
 
 ### Support for Private Blockchains
@@ -64,7 +68,7 @@ You can create a Subnet where only certain pre-defined validators may join and
 create a private Subnet where the contents of the blockchains would be visible
 only to those validators. This is ideal for organizations interested in keeping
 their information private. See
-[here](/nodes/maintain/subnet-configs.md#private-subnet) for more info.
+[here](/docs/nodes/maintain/subnet-configs.md#private-subnet) for more info.
 
 ### Separation of Concerns
 

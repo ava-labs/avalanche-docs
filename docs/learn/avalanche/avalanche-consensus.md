@@ -2,7 +2,7 @@
 description: Consensus is the task of getting a group of computers to come to an agreement on a decision. Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
 ---
 
-# Consensus
+# Avalanche Consensus
 
 
 Consensus is the task of getting a group of nodes to come to an agreement on a decision.

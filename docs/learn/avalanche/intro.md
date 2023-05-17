@@ -1,5 +1,6 @@
 ---
 slug: /intro
+sidebar_label: 🔺 What is Avalanche?
 ---
 
 # Introduction
