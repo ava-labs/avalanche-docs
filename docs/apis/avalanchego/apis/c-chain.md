@@ -8,7 +8,7 @@ sidebar_position: 4
 :::info
 Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to
 Avalanche’s view of networkID and chainID and are purely internal to the
-[C-Chain](../../../overview/getting-started/avalanche-platform.md#contract-chain-c-chain). On
+[C-Chain](../../../learn/avalanche/avalanche-platform.md#contract-chain-c-chain). On
 Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and
 `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and
 `eth_chainId` methods.

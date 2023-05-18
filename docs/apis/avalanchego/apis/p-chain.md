@@ -5,7 +5,7 @@ sidebar_position: 3
 # Platform Chain (P-Chain) API
 
 This API allows clients to interact with the
-[P-Chain](../../../overview/getting-started/avalanche-platform.md#platform-chain-p-chain), which
+[P-Chain](../../../learn/avalanche/avalanche-platform.md#platform-chain-p-chain), which
 maintains Avalanche’s [validator](../../../nodes/validate/staking.md#validators) set and handles
 blockchain creation.
 

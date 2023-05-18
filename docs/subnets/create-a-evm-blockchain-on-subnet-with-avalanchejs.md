@@ -19,8 +19,6 @@ Subnet blockchain, etc. In this tutorial, you will learn about creating your Sub
 **Ethereum Virtual Machine (EVM)** based blockchain on that Subnet through your Node.js application
 using **AvalancheJS**. AvalancheJS is a JavaScript library that allows you to issue commands to the
 Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc.
-On our [Subnet series of tutorials](../subnets/README.md), you can get various great articles
-explaining Subnets, building custom VMs, and a lot more.
 
 ## Requirements
 
