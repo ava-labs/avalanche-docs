@@ -9,7 +9,7 @@ If you are looking for how to transfer AVAX tokens using the web wallet, please 
 
 ## Prerequisites
 
-- You are familiar with [Avalanche's architecture](../overview/getting-started/avalanche-platform.md).
+- You are familiar with [Avalanche's architecture](../learn/avalanche/avalanche-platform.md).
 - You have completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md).
 - You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
 - You have installed

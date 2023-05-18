@@ -3,7 +3,7 @@
 ## Introduction
 
 This article shows how to deploy and interact with a [Gnosis Safe](https://gnosis-safe.io/)
-programmatically on any [Subnet-EVM](README.md).
+programmatically on any [Subnet-EVM](/learn/avalanche/subnets-overview.md).
 
 If you are looking for more information regarding the Gnosis Safe protocol, please check out [these
 developer docs](https://docs.gnosis-safe.io/).

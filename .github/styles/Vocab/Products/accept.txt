@@ -36,6 +36,7 @@ benchlist
 Benchlist
 Binance
 Blanco
+Blazingly
 blockchain
 Blockchain
 blockchains
@@ -250,6 +251,7 @@ requesters
 Rimble
 RPC
 RPCs
+ruleset
 runlog
 RunLog
 Saglam
@@ -333,6 +335,7 @@ Webapp
 Webpack
 wei
 Wei
+whitepaper
 yargs
 Yellowpaper
 Zundel

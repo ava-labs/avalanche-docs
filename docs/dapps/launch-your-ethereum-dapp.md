@@ -16,7 +16,7 @@ your dapp on Avalanche.
 ## Platform Basics
 
 Avalanche is a [network of
-networks](../overview/getting-started/avalanche-platform.md). It means that it
+networks](../learn/avalanche/avalanche-platform.md). It means that it
 is not a single chain running a single, uniform type of blocks. It contains
 multiple Subnets, each running one of more heterogeneous chains. But, to run an
 Ethereum dapp on a low-fee, fast network with instant finality, we don't need to
@@ -31,7 +31,7 @@ Ethereum VM, which runs Solidity smart contracts and manages data structures and
 blocks on the chain. As a result, you get a blockchain that can run all the
 Solidity smart contracts from Ethereum, but with much greater transaction
 bandwidth and instant finality that [Avalanche's revolutionary
-consensus](../overview/getting-started/avalanche-consensus.md) enables.
+consensus](../learn/avalanche/avalanche-consensus.md) enables.
 
 Coreth is loaded as a plugin into
 [AvalancheGo](https://github.com/ava-labs/avalanchego), the client node

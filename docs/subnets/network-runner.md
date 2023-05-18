@@ -9,9 +9,9 @@ nodes and emergent system properties. A lot of testing can't be addressed by uni
 a special kind of integration testing, where the code runs in interaction with other nodes,
 attempting to simulate real network scenarios.
 
-In the context of avalanche, **[Subnets](../subnets/README.md)** are a special focus which requires
-new tooling and support for playing, working and testing with this unique feature of the Avalanche
-ecosystem.
+In the context of Avalanche, **[Subnets](/docs/learn/avalanche/subnets-overview.md)** are a special
+focus which requires new tooling and support for playing, working and testing with this unique
+feature of the Avalanche ecosystem.
 
 The ANR aims at being a tool for developers and system integrators alike, offering functionality to
 run networks of AvalancheGo nodes with support for custom node, Subnet and network configurations,
@@ -368,7 +368,8 @@ avalanche-network-runner control stop \
 
 ## Subnets
 
-For general Subnet documentation, please refer to [Subnets](../subnets). ANR can be a great helper
+For general Subnet documentation, please refer to [Subnets](/learn/avalanche/subnets-overview.md).
+ANR can be a great helper
 working with Subnets, and can be used to develop and test new Subnets before deploying them in
 public networks. However, for a smooth and guided experience, we recommend using
 [Avalanche-CLI](../subnets/create-a-local-subnet.md). These examples expect a basic understanding of

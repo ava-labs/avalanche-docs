@@ -15,7 +15,9 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/coreth)
 
-Coreth (from core Ethereum) is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Avalanche Contract Chain (C-Chain).
+Coreth (from core Ethereum) is the 
+[Virtual Machine (VM)](/docs/learn/avalanche/subnets-overview.md#virtual-machines) 
+that defines the Avalanche Contract Chain (C-Chain).
 
 Related docs
 
@@ -25,11 +27,13 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/subnet-evm)
 
-Subnet-EVM is the [Virtual Machine (VM)](../subnets/README.md#virtual-machines) that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
+Subnet-EVM is the 
+[Virtual Machine (VM)](/docs/learn/avalanche/subnets-overview.md#virtual-machines) that defines the 
+Subnet Contract Chains. Subnet-EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
 
 Related docs
 
-- [Subnets](../subnets/README.md)
+- [Subnets](/docs/learn/avalanche/subnets-overview.md)
 
 ## AvalancheJS
 

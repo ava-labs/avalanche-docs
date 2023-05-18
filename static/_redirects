@@ -357,3 +357,9 @@
 /build/tutorials/platform/create-evm-blockchain /subnets/create-evm-blockchain 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge/ /subnets/deploying-cross-chain-evm-bridge 301
 /build/tutorials/platform/deploying-cross-chain-evm-bridge /subnets/deploying-cross-chain-evm-bridge 301
+
+# 05/01/2023
+/overview/getting-started/avalanche-platform /learn/avalanche/avalanche-platform 301
+/overview/getting-started/avax /learn/avalanche/avax 301
+/overview/getting-started/intro /learn/avalanche/intro 301
+/overview/getting-started/virtual-machines /learn/avalanche/virtual-machines 301

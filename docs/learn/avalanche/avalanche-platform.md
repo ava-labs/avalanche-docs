@@ -1,5 +1,6 @@
 ---
 description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here.
+sidebar_label: The Primary Network
 ---
 
 # Avalanche Platform
@@ -8,7 +9,7 @@ Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous n
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
 created for different applications.
 
-The Primary Network is a special [Subnet](../../subnets/README.md) that contains all validators
+The Primary Network is a special [Subnet](subnets-overview.md) that contains all validators
 (including validators of any custom Subnets). A node can become a validator for the Primary
 Network by staking at least 2,000 AVAX.
 
