@@ -120,9 +120,8 @@ and your project: deploying on a Subnet or deploying on the C-Chain.
 But, there is also a third way: deploy on C-Chain now, then move to your own Subnet later. If an
 application has relatively low transaction rate and no special circumstances that would make the
 C-Chain a non-starter, you can begin with C-Chain deployment to leverage existing technical
-infrastructure, and later expand to a Subnet (see [Crabada Swimmer Subnet
-migration](https://medium.com/@PlayCrabada/introducing-crabadas-subnet-on-the-avalanche-network-18cb310ddb8c)
-for an example). That way you can focus on working on the core of your project and once you have a
+infrastructure, and later expand to a Subnet. That way you can focus on working on the core of your 
+project and once you have a
 solid product/market fit and have gained enough traction that the C-Chain is constricting you, plan
 a move to your own Subnet.
 

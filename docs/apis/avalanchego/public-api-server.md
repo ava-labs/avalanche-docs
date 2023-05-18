@@ -97,20 +97,6 @@ Note: on Fuji Testnet, the URL is `https://subnets.avax.network/defi-kingdoms/df
 
 Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws`.
 
-### Swimmer Network
-
-#### HTTP
-
-- The URL is `https://subnets.avax.network/swimmer/mainnet/rpc`.
-
-Note: on Fuji Testnet, the URL is ` https://subnets.avax.network/swimmer/testnet/rpc`.
-
-#### Websockets
-
-- The URL is `wss://subnets.avax.network/swimmer/mainnet/ws`.
-
-Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/swimmer/testnet/ws`.
-
 ### Dexalot
 
 #### HTTP

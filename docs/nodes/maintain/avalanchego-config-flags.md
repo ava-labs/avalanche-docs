@@ -237,12 +237,12 @@ Path to JSON file that defines aliases for Blockchain IDs. Defaults to
 
 ```json
 {
-  "2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX": ["Swimmer"]
+  "q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi": ["DFK"]
 }
 ```
 
 The above example aliases the Blockchain whose ID is
-`"2K33xS9AyP9oCDiHYKVrHe7F54h2La5D8erpTChaAhdzeSu2RX"` to `"Swimmer"`. Chain
+`"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain
 aliases are added after adding primary network aliases and before any changes to
 the aliases via the admin API. This means that the first alias included for a
 Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the
