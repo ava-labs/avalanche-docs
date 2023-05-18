@@ -1178,7 +1178,7 @@ platform.getCurrentValidators({
   - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to
     them. Omitted if `subnetID` is not a PoS Subnet.
   - `uptime` is the % of time the queried node has reported the peer as online and validating the
-    Subnet.
+    Subnet. Omitted if `subnetID` is not a PoS Subnet.
   - `connected` is if the node is connected and tracks the Subnet.
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
     have a BLS public key.
