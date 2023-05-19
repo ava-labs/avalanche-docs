@@ -291,7 +291,7 @@ Features:
 
 ### OnFinality 
 
-[OnFinality](https://getblock.io/nodes/avax](https://onfinality.io/networks/avalanche) currently only supports the P-Chain.
+[OnFinality](https://onfinality.io/networks/avalanche) currently only supports the P-Chain.
 
 #### HTTP
 
