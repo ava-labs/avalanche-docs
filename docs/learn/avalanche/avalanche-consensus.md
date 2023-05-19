@@ -1,5 +1,5 @@
 ---
-description: Consensus is the task of getting a group of computers to come to an agreement on a decision. Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
+description: Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
 ---
 
 # Avalanche Consensus
@@ -9,8 +9,9 @@ In blockchain, this means that all the participants in a network have to agree o
 the shared ledger. This agreement is reached through a specific process, a consensus protocol,
 that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
-**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It combines features
-of both classical and Nakamoto consensus mechanisms to achieve high throughput, fast finality, and
+**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It
+combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput, 
+fast finality, and
 energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
 
 Key Features Include: 
@@ -21,8 +22,10 @@ quickly confirmed and irreversible.
 of less than half a second.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
 is not computationally intensive nor expensive. 
-- Adaptive Security: Because the security level of the network adjusts depending on the number of Byzantine
-nodes (bad actors), the network is more resilient to attacks. 
+- Adaptive Security: Avalanche consensus is designed to resist various attacks, including Sybil
+attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
+nature ensures that the consensus outcome converges to the desired state, even when the network
+is under attack. 
 
 ![Consensus Comparison](/img/Consensus-protocol-comparison.png)
 
