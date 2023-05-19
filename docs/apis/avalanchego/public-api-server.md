@@ -288,3 +288,22 @@ Features:
 ##### HTTPS
 
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
+
+### OnFinality 
+
+[OnFinality](https://getblock.io/nodes/avax](https://onfinality.io/networks/avalanche) currently only supports the P-Chain.
+
+#### HTTP
+
+- For P-Chain API, the URL is  `https://avalanche.api.onfinality.io/public/ext/bc/P`
+
+#### Websockets
+
+- For P-Chain API, the URL is  `https://avalanche.api.onfinality.io/public/ext/bc/P`
+
+Features:
+- Powerful API Analytics
+- Full Archive Node Access
+- Globally Distributed Infrastructure
+- Enhanced Performance
+
