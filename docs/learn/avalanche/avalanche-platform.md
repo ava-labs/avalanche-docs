@@ -3,33 +3,35 @@ description: Avalanche features 3 built-in blockchains which includes Exchange C
 sidebar_label: The Primary Network
 ---
 
-# Avalanche Platform
+# The Primary Network
 
 Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where
 all applications reside in the same chain, heterogeneous networks allow separate chains to be
 created for different applications.
 
-The Primary Network is a special [Subnet](subnets-overview.md) that contains all validators
-(including validators of any custom Subnets). A node can become a validator for the Primary
-Network by staking at least 2,000 AVAX.
+The Primary Network is a special [Subnet](subnets-overview.md) that runs three blockchains:
+
+- The Contract Chain [(C-Chain)](avalanche-platform.md#contract-chain-c-chain)
+- The Platform Chain [(P-Chain)](avalanche-platform.md#platform-chain-p-chain)
+- The Exchange Chain [(X-Chain)](avalanche-platform.md#exchange-chain-x-chain)
+
+A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
 
 ![Primary network](/img/primary-network.png)
 
-All validators as members of the Primary Network are required to validate and secure the
-following 3 blockchains:
-the [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain),
-the [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and
-the [**Contract Chain (C-Chain**)](#contract-chain-c-chain).
+## The Chains
 
-## Contract Chain (C-Chain)
+All validators of the Primary Network are required to validate and secure the following:
+
+### Contract Chain
 
 The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
 The [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md) supports Geth's API and supports the
-creation and execution of smart contracts written in Solidity.
+deployment and execution of smart contracts written in Solidity.
 
-The C-Chain is an instance of the Coreth Virtual Machine.
+The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machine.
 
-## Platform Chain (P-Chain)
+### Platform Chain 
 
 The **P-Chain** is responsible for all validator and Subnet-level operations.
 The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) supports the creation of new
@@ -38,7 +40,7 @@ platform-level operations.
 
 The P-Chain is an instance of the Platform Virtual Machine.
 
-## Exchange Chain (X-Chain)
+### Exchange Chain 
 
 The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
 Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a
