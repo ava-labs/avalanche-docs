@@ -80,6 +80,12 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
 }
 ```
 
+For an example of a `genesis.json` file used to test GoEthereum, see 
+[here](https://github.com/ethereum/go-ethereum/blob/master/cmd/devp2p/internal/ethtest/testdata/genesis.json).
+
+For a detailed description of the above fields, see 
+[here](https://medium.com/@brandonarvanaghi/explaining-the-genesis-block-in-ethereum-92f7d6b90c2f).
+
 ### Chain Config
 
 `chainID`: Denotes the ChainID of to be created chain. Must be picked carefully since a conflict with
