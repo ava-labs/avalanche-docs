@@ -4,42 +4,75 @@ description: Consensus is the task of getting a group of computers to come to an
 
 # Avalanche Consensus
 
+Consensus is the task of getting a group of computers (a.k.a. nodes) to come to an agreement on a decision.
+In blockchain, this means that all the participants in a network have to agree on the changes made to
+the shared ledger. This agreement is reached through a specific process, a consensus protocol,
+that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
-Consensus is the task of getting a group of nodes to come to an agreement on a decision.
-Nodes can reach a consensus by following a set of steps called a consensus protocol. Avalanche
-is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high
-throughput. It is energy efficient and does not require special computer hardware. It performs well
-in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche
-consensus protocol. The white-paper is [here](https://www.avalabs.org/whitepapers).
+**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It combines features
+of both classical and Nakamoto consensus mechanisms to achieve high throughput, fast finality, and
+energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
+
+Key Features Include: 
+
+- Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
+quickly confirmed and irreversible.
+- Scalability: Capable of a peak throughput of up to 20,000 transactions per second with a latency
+of less than half a second.
+- Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
+is not computationally intensive nor expensive. 
+- Adaptive Security: Because the security level of the network adjusts depending on the number of Byzantine
+nodes (bad actors), the network is more resilient to attacks. 
 
 ![Consensus Comparison](/img/Consensus-protocol-comparison.png)
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a
+## Conceptual Overview
+
+Consensus protocols in the Avalanche family operate through repeated sub-sampled voting. When a
 [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is
 determining whether a
 [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
-accepted, it asks a small, random subset of validators on their preferences. Each queried validator
-replies with the transaction that it prefers, or thinks should be accepted. The transaction that is
-received from the reply might be the same transaction indicating agreement, or it might be another
-conflicting transaction.
+accepted, it asks a small, random subset of validators for their preference. Each queried validator
+replies with the transaction that it prefers, or thinks should be accepted.
 
-If a sufficiently large portion (_alpha_ α) of the validators sampled reply with the same preferred
-transaction, the validator adopts the preferred transaction of that majority. That is, when it is
-queried about its preference in the future, it replies that it thinks this transaction the majority
-preferred should be accepted instead.
+:::note
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply with the
-same preference for _beta_ β consecutive rounds.
+Consensus will never include a transaction that is determined to be **invalid**. For example, if you
+were to submit a transaction to send 100 AVAX to a friend, but your wallet only has 2 AVAX, this transaction
+is considered **invalid** and will not participate in consensus. 
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When
+:::
+
+If a majority of the validators sampled reply with the same preferred
+transaction, this becomes the preferred choice of the group sampled, including the validator that asked.
+In the future, this validator and all those who have participated in at least one round of sampling
+will reply with the transaction preferred by the majority.
+
+Overtime, more and more validators are queried, and the group in agreement grows larger and larger.
+
+The validator repeats this sampling process until a sufficiently large portion of the validators
+queried reply with the same answer for a certain number of consecutive rounds.
+
+- The number of validators required to be considered "sufficiently large" is referred to as "α" (_alpha_).
+- The number of consecutive rounds required to reach consensus, a.k.a. the "Confidence Threshold,"
+is referred to as "β" (_beta_).
+
+When a transaction has no conflicts, finalization happens very quickly. When
 conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
 positive feedback loop until all correct validators prefer that transaction. This leads to the
 acceptance of non-conflicting transactions and the rejection of conflicting transactions.
 
 ![How Avalanche Consensus Works](/img/howavalancheconsensusworks.png)
 
-Avalanche Consensus guarantees (with high probability based on system parameters) that if any honest
-validator accepts a transaction, all honest validators will come to the same conclusion.
+Avalanche Consensus virtually guarantees that if any honest validator accepts a transaction,
+all honest validators will come to the same conclusion.
+
+:::info
+
+For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow) 
+from Ava Labs' Co-Founder Ted Yin. 
+
+:::
 
 ## Deep Dive Into Avalanche Consensus
 
@@ -120,13 +153,6 @@ Random changes in preference, caused by random sampling, cause a network prefere
 which begets more network preference for that choice until it becomes irreversible and then the
 nodes can decide.
 
-:::info
-
-For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow) 
-from Ava Labs' Co-Founder Ted Yin. 
-
-:::
-
 In our example, there is a binary choice between pizza or barbecue, but Snowball can be adapted to
 achieve consensus on decisions with many possible choices.
 
@@ -147,104 +173,6 @@ number of participants in the network, the number of consensus messages sent rem
 because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in
 the network.
 
-### DAGs (Directed Acyclic Graphs)
-
-Now let's introduce a data structure called a DAG or Directed Acyclic Graph. A DAG gives a **partial
-ordering** of decisions. For example, check out the DAG in this diagram:
-
-![Basic DAG](/img/cons-01-Frame16.png)
-
-**a** is before **b**. **b** is before **d**. **c** is before **e**. Transitively, we can say that
-**a** comes before **e**. However, since this is a partial ordering: for some elements, ordering is
-not defined. For example, both **b** and **c** are after **a** but there is no notion of whether
-**b** is before or after **c**.
-
-Two additional DAG related concepts are **ancestors** and **descendants**. Ancestors are any nodes
-in the DAG which you can draw a line up to. For example, the ancestors of **d** are **a**, **b**,
-and **c**. The ancestors of **e** are **a** and **c**. Descendants are the opposite of ancestors.
-The descendants of **a** are **b**, **c**, **d**, and **e**. The descendant of **b** is **d**.
-
-Both Bitcoin and Ethereum, for example, have a linear chain where every block has one parent and one
-child. Avalanche uses a DAG to store data rather than a linear chain. Each element of the DAG may
-have multiple parents. The parent-child relationship in the DAG does not imply an application-level
-dependency.
-
-In a consensus protocol, the name of the game is to prevent the inclusion of **conflicting
-transactions** into the DAG. Conflicts are application-defined. Different applications will have
-different notions about what it means for two transactions to conflict. For example, in a P2P
-payment system, transactions that consume the same UTXO ([Unspent Transaction
-Output](https://en.wikipedia.org/wiki/Unspent_transaction_output)) would conflict. In Avalanche
-every transaction belongs to a **conflict set** which consists of conflicting transactions. Only one
-transaction in a conflict set can be included in the DAG. Each node **prefers** one transaction in a
-conflict set.
-
-### Working Example
-
-Suppose we have an Avalanche network running with the following parameters. The sample size, _k_, is
-`4`. The quorum size, α, is `3`. The number of consecutive success, β, is `4`.
-
-![Working example 1](/img/cons-02-Consensus_Doc_txY.png)
-
-A node finds out about a new transaction **Y**. It queries the network based on the above
-parameters. It queries _k_ (`4`) validators and asks, "Do you prefer this transaction?" It gets back
-responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there
-is an α majority (quorum) of yes responses. Now the node updates its DAG.
-
-![Working example 2](/img/cons-03-Consensus_Doc_txY-6.png)
-
-If a node gets an α majority response for a transaction then you give that transaction a **chit**,
-which is a boolean that says, "When I queried the network about this transaction, an α majority said
-that they preferred it." In our example, transaction **Y** gets a chit.
-
-There is also a notion of **confidence**, which is the sum of a vertex's chit plus the sum of its
-descendants' chits. For example, transaction **V** has a chit. It also has three descendants which
-have a chit so its confidence is increased from `3` to `4`. Similarly, transactions **W** and **X**
-both have a chit and they both have a descendant with a chit, so they each have confidence `2`.
-Transaction **Y** has confidence `1`.
-
-**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction,
-or a descendant of the transaction, received a successful α majority query response. Previously,
-transaction **V** had `3` consecutive successes, itself and its two children, and now it has `4`
-consecutive successes with transaction **Y**. Similarly for transactions **W** and **X**.
-
-![Working example 3](/img/cons-04-Consensus_Doc_txY-2.png)
-
-In this example we the acceptance threshold, β, is `4`. Transaction **V** has `4` consecutive
-success so it's **accepted**. This node is sure that every other correct node will eventually accept
-this transaction.
-
-![Working example 4](/img/cons-05-Consensus_Doc_txY-3.png)
-
-Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It
-follows the same steps as before and sub-samples _k_ (`4`) validators and asks if they prefer
-transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that
-they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated
-accordingly.
-
-![Working example 5](/img/cons-06-Consensus_Doc_txY-4.png)
-
-Transactions **Y** and **Y'** are in a conflict set; only one of them can ultimately get accepted.
-Transaction **Y'** doesn't get a chit because it didn't get an α majority response. It has
-confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It
-has `0` consecutive successes because the previous query didn't get an α majority response.
-Transaction **W**'s consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
-
-When a node is asked whether it prefers a given transaction, it replies yes if that transaction has
-the highest confidence of any transaction in the transaction's conflict set. In this example,
-transaction **Y** has confidence `1` and transaction **Y'** has confidence `0` so the node prefer
-transaction **Y** to transaction **Y'**.
-
-![Working example 6](/img/cons-07-Consensus_Doc_txY-1.png)
-
-Now the node learns about a new transaction, **Z**, and it does the same thing as before. It queries
-_k_ nodes, gets back an α majority response, and updates the DAG.
-
-![Working example 7](/img/cons-08-Consensus_Doc_txY-5.png)
-
-Transaction **Z** gets a chit. It also has a confidence of `1` and `1` consecutive success. The
-processing ancestors are updated, too. No transactions have `4` consecutive successes so no
-ancestors are accepted.
-
 ### Vertices
 
 Everything discussed to this point is how Avalanche is described in [the Avalanche
@@ -253,8 +181,7 @@ The implementation of the Avalanche consensus protocol by Ava Labs (namely in Av
 optimizations for latency and throughput. The most important optimization is the use of
 **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its
 parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted
-on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very
-similar to how it's described above.
+on in groups rather than one by one.
 
 If a node receives a vote for a vertex, it counts as a vote for all the transactions in a vertex,
 and votes are applied transitively upward. A vertex is accepted when all the transactions which are
@@ -269,7 +196,7 @@ that a correct node accepts a transaction that another correct node rejects can 
 low by adjusting system parameters. In Nakamoto consensus protocol (as used in Bitcoin and Ethereum,
 for example), a block may be included in the chain but then be removed and not end up in the
 canonical chain. This means waiting an hour for transaction settlement. In Avalanche,
-acceptance/rejection are **final and irreversible** and take a few seconds.
+acceptance/rejection are **final and irreversible** and only take a few seconds.
 
 ### Optimizations
 
@@ -306,25 +233,22 @@ network is safe, and is live for virtuous transactions.
 
 ### Big Ideas
 
-Two big ideas in Avalanche are **subsampling** and **transitive voting**. Subsampling has low
+Two big ideas in Avalanche are **subsampling** and **transitive voting**. 
+
+Subsampling has low
 message overhead. It doesn't matter if there are twenty validators or two thousand validators; the
 number of consensus messages a node sends during a query remains constant.
 
-![Working example 8](/img/cons-09-Consensus_Doc_txY-7.png)
-
 Transitive voting, where a vote for a vertex is a vote for all its ancestors, helps with transaction
-throughput. Each vote is actually many votes in one. For example, in the above diagram, if a node
-gets a vote for vertex **D**, that implies a vote for all it's ancestors; a vote for **D** is also a
-vote for **A**, **B**, and **C**.
+throughput. Each vote is actually many votes in one.
 
 ### Loose Ends
 
 Transactions are created by users which call an API on the
 [AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such
 as [AvalancheJS](https://github.com/ava-labs/avalanchejs). Vertices are created when nodes batch
-incoming transactions together or when accepted transactions from a rejected vertex get reissued and
-added to the DAG. A vertex's parents are chosen from the virtuous frontier, which are the nodes at
-the tip of the DAG with no conflicts. It's important to build on virtuous vertices because if we
+incoming transactions together or when accepted transactions from a rejected vertex get reissued. 
+It's important to build on virtuous vertices because if we
 built on non-virtuous vertices there would be a higher chance that the node would get rejected which
 means there's a higher chance it's ancestors get rejected and we would make less progress.
 
