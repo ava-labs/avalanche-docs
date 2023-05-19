@@ -22,7 +22,7 @@ quickly confirmed and irreversible.
 of less than half a second.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
 is not computationally intensive nor expensive. 
-- Adaptive Security: Avalanche consensus is designed to resist various attacks, including Sybil
+- Adaptive Security: Avalanche consensus is designed to resist various attacks, including sybil
 attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
 nature ensures that the consensus outcome converges to the desired state, even when the network
 is under attack. 
