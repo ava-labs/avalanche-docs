@@ -52,7 +52,7 @@ funds to additional addresses.
 
 To add precompiles to customize your Subnet, select `Yes`.
 
-If you don't want to or you don't know what that means, select `No`.
+If you don't know what that means, select `No`.
 
 ### Wrapping Up
 
