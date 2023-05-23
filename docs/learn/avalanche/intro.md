@@ -14,7 +14,7 @@ near-instant transaction finality.
 
 ### Blazingly Fast
 
-- Avalanche employs the fastest consensus mechanism of any layer1 blockchain. The unique consensus
+- Avalanche employs the fastest consensus mechanism of any layer 1 blockchain. The unique consensus
 mechanism enables quick finality and low latency: in less than 2 seconds, your transaction is
 effectively processed and verified.
 
