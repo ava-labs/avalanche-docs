@@ -296,6 +296,11 @@ const sidebars = {
     "community/README",
     "community/bug-bounty",
     {
+      type: "link",
+      label: "Product Support",
+      href: "https://support.avax.network/en/",
+    },
+    {
       type: "category",
       label: "Tutorials Contest",
       collapsed: true,
