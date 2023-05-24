@@ -22,9 +22,9 @@ and then **Releases**. Press **Apply** and it is done.
 
 ## V1.10.2 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.2)
 
+<!-- vale off -->
 **Cortina.2 - Post-Linearization Cleanup**
 
-<!-- vale off -->
 This version is backwards compatible to [v1.10.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0). It is optional, but encouraged. The supported plugin version is `26`.
 
 ### APIs
@@ -104,9 +104,9 @@ This version is backwards compatible to [v1.10.0](https://github.com/ava-labs/av
 
 ## V1.10.1 [View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.1)
 
+<!-- vale off -->
 **Cortina.1 - DAG Engine Removal**
 
-<!-- vale off -->
 This version is backwards compatible to [v1.10.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0). It is optional, but encouraged. The supported plugin version is `26`.
 
 ### APIs
