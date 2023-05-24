@@ -18,7 +18,7 @@ Key Features Include:
 
 - Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
 quickly confirmed and irreversible.
-- Scalability: Capable of a peak throughput of up to 20,000 transactions per second with a latency
+- Scalability: Capable of a peak throughput of up to 50,000 transactions per second with a latency
 of less than half a second.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
 is not computationally intensive nor expensive. 
