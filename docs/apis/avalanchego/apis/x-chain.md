@@ -186,7 +186,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -239,7 +239,7 @@ TODO: Add avm.createAsset
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -333,7 +333,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -421,7 +421,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -522,7 +522,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -605,7 +605,7 @@ TODO: Add avm.exportAVAX
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -660,7 +660,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -732,7 +732,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -838,7 +838,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1385,7 +1385,7 @@ This gives response:
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1450,7 +1450,7 @@ TODO: Add avm.importAVAX
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1546,7 +1546,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1595,7 +1595,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1672,7 +1672,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1753,7 +1753,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1826,7 +1826,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1909,7 +1909,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -1986,7 +1986,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -2042,7 +2042,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -2120,7 +2120,7 @@ This call is made to the wallet API endpoint:
 
 :::caution
 
-Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
@@ -2202,7 +2202,7 @@ This call is made to the events API endpoint:
 
 :::caution
 
-Endpoint deprecated as of [**v1.9.12**](../avalanchego-release-notes.md#v1912-view-on-github).
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
 :::
 
