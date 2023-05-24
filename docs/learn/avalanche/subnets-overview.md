@@ -12,9 +12,9 @@ can host many blockchains.
 
 Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
 
-- The Platform Chain (P-Chain)
-- The Contract Chain (C-Chain)
-- The Exchange Chain (X-Chain)
+- The Platform Chain [(P-Chain)](avalanche-platform#platform-chain-p-chain)
+- The Contract Chain [(C-Chain)](avalanche-platform#contract-chain-c-chain)
+- The Exchange Chain [(X-Chain)](avalanche-platform#exchange-chain-x-chain)
 
 
 ![image](/img/subnet-validators.png)
@@ -45,7 +45,7 @@ networking with any other Subnets, including the Primary Network.
 
 - Avalanche Warp Messaging enables native cross-Subnet communication and allows Virtual Machine (VM)
 developers to implement arbitrary communication protocols between any two Subnets.
-<!-- - would love a bullet about native bridges -->
+
 
 ### Accommodate Application-Specific Requirements
 
@@ -86,7 +86,7 @@ blockchain networks they choose to participate in. This greatly reduces the comp
 
 ## Develop Your Own Subnet
 
-To get started, check out the tutorials in our [Subnets](http://localhost:3000/subnets/build-first-subnet)
+To get started, check out the tutorials in our [Subnets](/subnets/build-first-subnet)
 section.
 
 [^1]: Subnets do not share storage in logical level (keys/values) with other
