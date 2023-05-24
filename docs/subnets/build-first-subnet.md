@@ -168,6 +168,13 @@ interact with it.
 You can use the value provided by `Browser Extension connection details` to connect to your Subnet
 with MetaMask, Core, or any other wallet.
 
+:::note
+
+To allow API calls from other machines, use `--http-host=0.0.0.0` in the config.
+
+:::
+
+
 <!-- markdownlint-disable MD013 -->
 
 ```text

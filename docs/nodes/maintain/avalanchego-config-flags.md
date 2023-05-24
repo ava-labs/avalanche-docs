@@ -404,7 +404,7 @@ Any keys not given will receive the default value.
 
 ## Genesis
 
-#### `--genesis` (string)
+#### `--genesis-file` (string)
 
 Path to a JSON file containing the genesis data to use. Ignored when running
 standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is
@@ -428,9 +428,17 @@ These are the main properties in the JSON file:
 
 For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
 
+#### `--genesis` (string)
+
+This flag is deprecated as of v1.10.2. Use `--genesis-file` instead.
+
+#### `--genesis-file-content` (string)
+
+As an alternative to `--genesis-file`, it allows specifying base64 encoded genesis data to use.
+
 #### `--genesis-content` (string)
 
-As an alternative to `--genesis`, it allows specifying base64 encoded genesis data to use.
+This flag is deprecated as of v1.10.2. Use `--genesis-file-content` instead.
 
 ## HTTP Server
 
@@ -660,7 +668,7 @@ The port through which the network peers will connect to this node externally.
 Having this port accessible from the internet is required for correct node
 operation. Defaults to `9651`.
 
-#### `--staking-enabled` (boolean)
+#### `--sybil-protection-enabled` (boolean)
 
 Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively
 expensive to attack the network. If false, sybil resistance is disabled and all
@@ -671,9 +679,17 @@ Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
 **You should not set this flag to false unless you understand what you are doing.**
 
-#### `--staking-disabled-weight` (int)
+#### `--staking-enabled` (boolean)
+
+This flag is deprecated as of v1.10.2. Use `--sybil-protection-enabled` instead.
+
+#### `--sybil-protection-disabled-weight` (uint)
 
 Weight to provide to each peer when staking is disabled. Defaults to `100`.
+
+#### `--staking-disabled-weight` (uint)
+
+This flag is deprecated as of v1.10.2. Use `--sybil-protection-disabled-weight` instead.
 
 #### `--staking-tls-cert-file` (string, file path)
 
@@ -792,9 +808,13 @@ Number of non-validators to gossip to when gossiping accepted frontier. Defaults
 
 Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
-#### `--consensus-gossip-frequency` (duration)
+#### `--consensus-accepted-frontier-gossip-frequency` (duration)
 
 Time between gossiping accepted frontiers. Defaults to `10s`.
+
+#### `--consensus-gossip-frequency` (duration)
+
+This flag is deprecated as of v1.10.2. Use `--consensus-accepted-frontier-gossip-frequency` instead.
 
 #### `--consensus-on-accept-gossip-validator-size` (uint)
 
@@ -1171,9 +1191,13 @@ Require all P2P connections to be initiated with a TCP proxy header. Defaults to
 
 Maximum duration to wait for a TCP proxy header. Defaults to `3s`.
 
-#### `--outbound-connection-timeout` (duration)
+#### `--network-outbound-connection-timeout` (duration)
 
 Timeout while dialing a peer. Defaults to `30s`.
+
+#### `--outbound-connection-timeout` (duration)
+
+This flag is deprecated as of v1.10.2. Use `--network-outbound-connection-timeout` instead.
 
 ### Message Rate-Limiting
 
@@ -1290,19 +1314,32 @@ outbound message throttler. Defaults to `2097152` (2 MiB).
 
 ### Connection Rate-Limiting
 
-#### `--inbound-connection-throttling-cooldown` (duration)
+#### `--network-inbound-connection-throttling-cooldown` (duration)
 
 Node will upgrade an inbound connection from a given IP at most once within this
 duration. Defaults to `10s`. If 0 or negative, will not consider recency of last
 upgrade when deciding whether to upgrade.
 
-#### `--inbound-connection-throttling-max-conns-per-sec` (uint)
+#### `--inbound-connection-throttling-cooldown` (duration)
+
+This flag is deprecated as of v1.10.2. Use `--network-inbound-connection-throttling-cooldown` instead.
+
+#### `--network-inbound-connection-throttling-max-conns-per-sec` (uint)
 
 Node will accept at most this many inbound connections per second. Defaults to `512`.
 
-#### `--outbound-connection-throttling-rps` (uint)
+#### `--inbound-connection-throttling-max-conns-per-sec` (uint)
+
+This flag is deprecated as of v1.10.2. Use `--network-inbound-connection-throttling-max-conns-per-sec`
+instead.
+
+#### `--network-outbound-connection-throttling-rps` (uint)
 
 Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
+
+#### `--outbound-connection-throttling-rps` (uint)
+
+This flag is deprecated as of v1.10.2. Use `--network-outbound-connection-throttling-rps` instead.
 
 ### Peer List Gossiping
 
