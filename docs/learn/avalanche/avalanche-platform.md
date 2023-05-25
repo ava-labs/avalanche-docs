@@ -11,9 +11,9 @@ created for different applications.
 
 The Primary Network is a special [Subnet](subnets-overview.md) that runs three blockchains:
 
-- The Contract Chain [(C-Chain)](avalanche-platform.md#contract-chain-c-chain)
-- The Platform Chain [(P-Chain)](avalanche-platform.md#platform-chain-p-chain)
-- The Exchange Chain [(X-Chain)](avalanche-platform.md#exchange-chain-x-chain)
+- The [(C-Chain)](avalanche-platform.md#contract-chain-c-chain)
+- The [(P-Chain)](avalanche-platform.md#platform-chain-p-chain)
+- The [(X-Chain)](avalanche-platform.md#exchange-chain-x-chain)
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
 
@@ -23,7 +23,7 @@ A node can become a validator for the Primary Network by staking at least **2,00
 
 All validators of the Primary Network are required to validate and secure the following:
 
-### Contract Chain
+### C-Chain
 
 The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
 The [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md) supports Geth's API and supports the
@@ -31,7 +31,7 @@ deployment and execution of smart contracts written in Solidity.
 
 The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machine.
 
-### Platform Chain 
+### P-Chain 
 
 The **P-Chain** is responsible for all validator and Subnet-level operations.
 The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) supports the creation of new
@@ -40,7 +40,7 @@ platform-level operations.
 
 The P-Chain is an instance of the Platform Virtual Machine.
 
-### Exchange Chain 
+### X-Chain 
 
 The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
 Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a
