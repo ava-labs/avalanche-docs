@@ -5,7 +5,7 @@ the application-level logic of a blockchain. In technical terms, it specifies th
 state transition function, transactions, and the API through which users can interact with the
 blockchain. 
 
-You can use the same VM to create many blockchains, each of which follows the same rule-set but is systemically
+You can use the same VM to create many blockchains, each of which follows the same rule-set but is
 independent of all others.
 
 ## Why Run a VM on Avalanche?
@@ -24,18 +24,18 @@ the application.
 is familiar with. Developers have fine control over the behavior of their blockchain, and can redefine
 the rules of a blockchain to fit any use-case they have.
 
-- You don't need to concern yourself with lower-level logic
+- Developers don't need to concern yourself with lower-level logic
 like networking, consensus, and the structure of the blockchain; Avalanche does
 this behind the scenes so you can focus on building your Dapp, your ecosystem, and your community.
 
 
-## How They Work
+## How VMs Work
 
 VMs communicate with Avalanche over a language agnostic request-response protocol known as
 [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to 
-open a world of endless possibilities to developers, as developers can implement their Dapps using 
-the languages, frameworks, and libraries of their choice. Choose create your VM out-of-the-box with the
-[Subnet-EVM](/learn/projects#subnet-evm) in Solidity, or design a custom VM with languages
+open a world of endless possibilities, as developers can implement their Dapps using 
+the languages, frameworks, and libraries of their choice. To get started, create a VM out-of-the-box
+with the [Subnet-EVM](/learn/projects#subnet-evm) in Solidity, or design a custom VM with languages
 like Golang, Rust, and many more.
 
 ## Running a VM

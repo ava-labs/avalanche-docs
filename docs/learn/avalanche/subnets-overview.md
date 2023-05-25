@@ -22,15 +22,15 @@ Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running
 (Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
 :::info
-Every validator, regardless of Subnet involvement,
-**must** validate the Primary Network.
+Every validator in a Subnet
+**must** also validate the Primary Network.
 :::
 
 ## Advantages
 
 ### Independent Networks
 
-- Subnets specify their own execution logic, determine their
+- Subnets use virtual machines to specify their own execution logic, determine their
 own fee regime, maintain their own state, facilitate their own networking, and
 provide their own security. 
 - Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on
@@ -38,8 +38,6 @@ one Subnet won't affect another.
 - Subnets can have their own token economics with their own native tokens, fee
 markets, and incentives determined by the Subnet deployer. 
 - One Subnet can host multiple blockchains with customized [virtual machines](virtual-machines.md).
-- They don’t share execution thread, storage[^1], or
-networking with any other Subnets, including the Primary Network.
 
 ### Native Interoperability
 
@@ -63,9 +61,9 @@ mentioned above, a Subnet may require validators to meet a set of requirements._
 
 Some examples of requirements the creators of a Subnet may choose include:
 
-- Validators must be located in a given country
-- Validators must pass a KYC/AML checks
-- Validators must hold a certain license
+- Validators must be located in a given country.
+- Validators must pass a KYC/AML checks.
+- Validators must hold a certain license.
 
 ### Control The Privacy of On-Chain Data
 
@@ -89,6 +87,5 @@ blockchain networks they choose to participate in. This greatly reduces the comp
 To get started, check out the tutorials in our [Subnets](/subnets/build-first-subnet)
 section.
 
-[^1]: Subnets do not share storage in logical level (keys/values) with other
     Subnets, but they share storage on disk level (LevelDB) and store their data
     into same database/folder in operating system.
