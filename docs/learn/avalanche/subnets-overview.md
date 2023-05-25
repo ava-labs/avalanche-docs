@@ -8,7 +8,7 @@ A **Subnet** is a sovereign network which defines its own rules regarding its
 membership and token economics. It is composed of a dynamic subset of Avalanche
 validators working together to achieve consensus on the state of one or more
 blockchains. Each blockchain is validated by exactly one Subnet, while a Subnet
-can host many blockchains.
+can validate many blockchains.
 
 Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
 
