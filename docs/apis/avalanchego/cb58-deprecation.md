@@ -3,7 +3,7 @@
 ## Overview
 
 With [AvalancheGo v1.7.14
-release](./avalanchego-release-notes.md#v1714-view-on-github), we have published
+release](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.14), we have published
 changes to deprecate `cb58` encoding in favor of `hex` in the return of
 AvalancheGo API calls. This only impacted the encoding format for data with
 variable length representations (such as UTXOs, transactions, blocks, etc).
