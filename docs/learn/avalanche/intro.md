@@ -6,9 +6,9 @@ sidebar_label: 🔺 What is Avalanche?
 # What Is Avalanche?
 
 Avalanche is an open-source platform for building decentralized applications in one
-interoperable, decentralized, and highly scalable ecosystem. Powered by a uniquely powerful consensus
-mechanism, Avalanche is the first ecosystem designed to accommodate the scale of global finance, with
-near-instant transaction finality. 
+interoperable, decentralized, and highly scalable ecosystem. Powered by [a uniquely powerful consensus
+mechanism](/learn/avalanche/avalanche-consensus.md), Avalanche is the first ecosystem designed to
+accommodate the scale of global finance, with near-instant transaction finality. 
 
 ## Why Choose Avalanche?
 
@@ -20,22 +20,17 @@ effectively processed and verified.
 
 ### Built to Scale
 
-- Anywhere from 1,000 to 10,000 transactions are confirmed per second, virtually unaffected by network
-traffic thanks to the resiliency of Avalanche Consensus. 
+- Developers who build on Avalanche can build application-specific blockchains with complex rulesets
+or build on existing private or public Subnets in any language. 
 - Avalanche is incredibly energy-efficient and can run easily on consumer-grade hardware.
 The entire Avalanche network consumes the same amount of energy as 46 US households, equivalent to
 0.0005% of the amount of energy consumed by Bitcoin.
-
-### Elastic Composability
-
-- Developers who build on Avalanche can build application-specific blockchains with complex rulesets
-or build on existing private or public Subnets in any language. 
 - Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
 build their own custom Virtual Machine (VM) for advanced use cases.
 
 ### Advanced Security
 
-- Avalanche consensus offers stronger security guarantees well-above the 51% standard of other
-networks.
+- Avalanche consensus scales to thousands of concurrent validators without suffering performance
+degradation making it one of the most secure protocols for internet scaling systems. 
 - Permissionless and permissioned custom blockchains deployed as an Avalanche Subnets can include custom
-implementations designed to be compliant with legal and jurisdictional considerations.
+rulesets designed to be compliant with legal and jurisdictional considerations.
