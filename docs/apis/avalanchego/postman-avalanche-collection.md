@@ -13,7 +13,7 @@ API calls and see the responses in a nicely formatted, searchable form.
 
 We have made a Postman collection for Avalanche, that includes all the public
 API calls that are available on [AvalancheGo
-instance](./avalanchego-release-notes.md), allowing you to quickly issue
+instance](https://github.com/ava-labs/avalanchego/releases/), allowing you to quickly issue
 commands to your node and see the response, without having to copy and paste
 long and complicated `curl` commands.
 
