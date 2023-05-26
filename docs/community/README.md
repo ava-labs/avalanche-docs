@@ -7,7 +7,7 @@ collaborating to build a better future with everyone.
 
 - Find the community on [Discord](https://chat.avax.network/).
 - Engage with the [Telegram](https://t.me/avalancheavax) group and/or [Reddit](https://www.reddit.com/r/Avax/).
-- Follow Avalanche on [Twitter](https://twitter.com/avalancheavax).
+- Follow Avalanche on [Twitter](https://twitter.com/avax).
 - Check [Avalanche's Medium posts](https://medium.com/avalancheavax).
 - Watch Avalanche videos on [YouTube](https://youtube.com/avalancheavax).
 - Find code on [GitHub](https://github.com/ava-labs).
