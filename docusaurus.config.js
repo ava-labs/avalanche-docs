@@ -154,7 +154,7 @@ const config = {
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/avalancheavax",
+                href: "https://twitter.com/avax",
               },
               {
                 label: "Telegram",
