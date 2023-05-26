@@ -302,6 +302,7 @@ Features:
 - For P-Chain API, the URL is  `https://avalanche.api.onfinality.io/public/ext/bc/P`
 
 Features:
+
 - Powerful API Analytics
 - Full Archive Node Access
 - Globally Distributed Infrastructure
