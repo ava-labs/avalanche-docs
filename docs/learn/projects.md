@@ -67,4 +67,4 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-docs)
 
-Avalanche developer documentation and tutorials which is this site.
+Avalanche developer documentation and tutorials.

@@ -219,9 +219,13 @@ const sidebars = {
         },
         "apis/avalanchego/public-api-server",
         "apis/avalanchego/postman-avalanche-collection",
-        "apis/avalanchego/avalanchego-release-notes",
         "apis/avalanchego/x-chain-migration",
         "apis/avalanchego/cb58-deprecation",
+        {
+          type: "link",
+          label: "Release Notes",
+          href: "https://github.com/ava-labs/avalanchego/releases",
+        },
       ],
     },
     {

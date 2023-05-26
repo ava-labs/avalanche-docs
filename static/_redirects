@@ -368,3 +368,9 @@
 /overview/getting-started/avalanche-consensus /learn/avalanche/avalanche-consensus 301
 /subnets/README /learn/avalanche/subnets-overview 301
 /overview/projects /learn/projects 301
+/subnets /learn/avalanche/subnets-overview 301
+
+#05/24/2023
+/apis/avalanchego/avalanchego-release-notes#v1912-view-on-github https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12 301
+/apis/avalanchego/avalanchego-release-notes#v1714-view-on-github https://github.com/ava-labs/avalanchego/releases/tag/v1.7.14 301
+/apis/avalanchego/avalanchego-release-notes https://github.com/ava-labs/avalanchego/releases 301
