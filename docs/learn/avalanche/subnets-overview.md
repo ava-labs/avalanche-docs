@@ -87,5 +87,3 @@ blockchain networks they choose to participate in. This greatly reduces the comp
 To get started, check out the tutorials in our [Subnets](/subnets/build-first-subnet)
 section.
 
-    Subnets, but they share storage on disk level (LevelDB) and store their data
-    into same database/folder in operating system.
