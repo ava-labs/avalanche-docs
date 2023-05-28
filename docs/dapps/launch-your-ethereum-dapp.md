@@ -211,6 +211,10 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer
 tools and environments can be used to develop and deploy dapps for Avalanche's
 C-Chain.
 
+### thirdweb
+
+There is a [tutorial] for using thirdweb to deploy smart contracts on Avalanche. You can use thirdweb CLI to deploy any contract written in Hardhat or Forge to Avalanche network. thirdweb also has many pre-built contracts you can deploy to Avalanche network, with no coding required.
+
 ### Remix
 
 There is a
