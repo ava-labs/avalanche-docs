@@ -140,18 +140,38 @@ const sidebars = {
       ],
     },
     {
+    type: "category",
+    label: "Custom Subnet",
+    collapsed: true,
+    items: [  
+      "subnets/customize-a-subnet",
+      "subnets/cross-subnet-communication"
+    ]    
+    },
+    {
       type: "category",
-      label: "Customize",
+      label: "Custom Subnet-EVM chain",
       collapsed: true,
       items: [
-        "subnets/customize-a-subnet",
-        "subnets/hello-world-precompile-tutorial",
+
+        "subnets/customize-a-subnet-evm-chain",
+        "subnets/subnet-evm-genesis-file",
+        "subnets/subnet-evm-precompiles",
+        "subnets/subnet-evm-chain-configs",
+        "subnets/subnet-evm-network-upgrades",
+        "subnets/hello-world-precompile-tutorial"
+      ],
+    },
+    {
+      type: "category",
+      label: "Custom VM Chain",
+      collapsed: true,
+      items: [
         "subnets/introduction-to-vm",
         "subnets/create-a-vm-timestampvm",
         "subnets/create-a-vm-blobvm",
         "subnets/create-a-simple-rust-vm",
-        "subnets/create-a-simple-vm-from-scratch",
-        "subnets/cross-subnet-communication",
+        "subnets/create-a-simple-vm-from-scratch"
       ],
     },
     {
