@@ -100,7 +100,8 @@ amount of time elapsed since the previous block.
 If the block is produced at the target rate, the block gas cost will stay the same as the block gas
 cost for the parent block.
 
-If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for
+If it is produced faster,/slower, meaning there are many/few blocks being issued to the blockchain 
+the block gas cost will be increased/decreased by the step value for
 each second faster/slower than the target block rate accordingly.
 
 :::note
@@ -116,7 +117,11 @@ See section [Setting a Custom Fee Recipient](#setting-a-custom-fee-recipient)
 
 ### Alloc
 
-See section [Setting the Genesis Allocation](#setting-the-genesis-allocation)
+`alloc` defines addresses and their initial balances. This should be changed accordingly for each chain.
+If you don't provide any genesis allocation, you won't be able to interact with your new chain (all
+transactions require a fee to be paid from the sender's balance).
+
+See a detailes guide on how to customize this allocation [here](#setting-the-genesis-allocation).
 
 ### Header
 
@@ -125,21 +130,106 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
 header fields.
 
-### Genesis Examples
+#### `nonce`
 
-Another example of a genesis file can be found in the
-[networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json).
-Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
+Nonce is a number added to a hashed block in a blockchain that, when rehashed, 
+meets the difficulty level restrictions. It is commonly set to `0x0`.
 
-Here are a few examples on how a genesis file is used:
+#### `timestamp`
 
-- [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
+The timestamp of the creation of the genesis block. It is commonly set to `0x0`.
 
-### Setting the Genesis Allocation
+#### `extraData`
 
-Alloc defines addresses and their initial balances. This should be changed accordingly for each chain.
-If you don't provide any genesis allocation, you won't be able to interact with your new chain (all
-transactions require a fee to be paid from the sender's balance).
+Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
+
+#### `gasLimit`
+
+Sets the max amount of gas consumed per block. should be set to match the `gasLimit` set in the `feeConfig`
+
+#### `difficulty`
+
+The difficulty level applied during the nonce discovering of this block. 
+It is usually set to `0x0` for the genesis block.
+
+#### `mixHash`
+
+This is used together with `nonce`to determine if the block is valid. 
+Commonly set to `0x0000000000000000000000000000000000000000000000000000000000000000` for genesis block.
+
+#### `coinbase`
+
+This special transaction is the first transaction in a block and specifies the address to be 
+rewarded due to the generation of a new block. In the context of Avalanche, this coinbase address will
+receive all the transaction fees if a Reward Manager precompile mechanism is set.
+It is usually set to `0x0000000000000000000000000000000000000000` for the genesis block.
+
+#### `number`
+
+This is the number of the genesis block. It is usually set to `0x0`.
+
+#### `gasUsed`
+
+This is the amount of gas used by the genesis block. It is usually set to `0x0`.
+
+#### `parentHash`
+
+This is the Keccak 256-bit hash of the entire parent block’s header. 
+It is usually set to `0x0000000000000000000000000000000000000000000000000000000000000000` 
+for the genesis block.
+
+## Subnet-EVM Precompiles 
+
+Precompiles can be used to add specific functionallity to Subnet-EVM. This precompiled
+contracts can activated directly in the genesis file or as an Upgrade. 
+See [Precompiles](../subnets/subnet-evm-precompiles) for a detailed explanation on how to
+integrate them in the genesis file.
+
+
+## Setting a Custom Fee Recipient
+
+By default, all fees are burned (sent to the black hole address with `"allowFeeRecipients": false`).
+However, it is possible to enable block producers to set a fee recipient (who will get compensated
+for blocks they produce).
+
+There are 2 ways to anable this feature: 
+
+- [Precompile](../subnets/subnet-evm-precompiles#changing-fee-reward-mechanisms) 
+- Genesis
+
+To enable this in the genesis, you'll need to add the following to your
+genesis file (under the `"config"` key):
+
+```json
+{
+  "config": {
+    "allowFeeRecipients": true
+  }
+}
+```
+
+### Fee Recipient Address
+
+With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
+need to update their 
+[EVM chain config](../subnets/network-upgrades.md#avalanchego-chain-configs) 
+with the following to specify where the fee should be sent to.
+
+```json
+{
+  "feeRecipient": "<YOUR 0x-ADDRESS>"
+}
+```
+
+:::warning
+
+If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a
+"feeRecipient", the fees will be burned in blocks it produces.
+
+:::
+
+
+## Setting the Genesis Allocation
 
 The `alloc` field expects key-value pairs. Keys of each entry must be a valid `address`. The `balance`
 field in the value can be either a `hexadecimal` or `number` to indicate initial balance of the address.
@@ -185,45 +275,13 @@ token, that is 1 AVAX/1 WAGMI):
 
 <!-- markdownlint-enable MD013 -->
 
-### Setting a Custom Fee Recipient
+## Genesis Examples
 
-By default, all fees are burned (sent to the black hole address with `"allowFeeRecipients": false`).
-However, it is possible to enable block producers to set a fee recipient (who will get compensated
-for blocks they produce).
+Some examples of a genesis file can be found in the
+[networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json).
+Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
-To enable this feature, you'll need to add the following to your
-genesis file (under the `"config"` key):
+Here are a few examples on how a genesis file is used:
 
-```json
-{
-  "config": {
-    "allowFeeRecipients": true
-  }
-}
-```
-
-#### Fee Recipient Address
-
-With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
-need to update their 
-[EVM chain config](../subnets/network-upgrades.md#avalanchego-chain-configs) 
-with the following to specify where the fee should be sent to.
-
-```json
-{
-  "feeRecipient": "<YOUR 0x-ADDRESS>"
-}
-```
-
-:::warning
-
-If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a
-"feeRecipient", the fees will be burned in blocks it produces.
-
-:::
-
-_Note: this mechanism can be also activated as a precompile._
-_See 
-[Changing Fee Reward Mechanisms](../subnets/subnet-evm-precompiles#changing-fee-reward-mechanisms) 
-section for more details._
+- [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
 
