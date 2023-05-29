@@ -27,7 +27,7 @@ It assumes you have already created and deployed a Subnet called `testSubnet`.
 ## Generate the Upgrade File
 
 The 
-[Precompiles](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) 
+[Precompiles](./subnet-evm-network-upgrades.md) 
 documentation describes what files the network upgrade requires, and where to place them.
 
 To generate a valid `upgrade.json` file, run:

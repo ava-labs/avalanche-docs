@@ -121,7 +121,7 @@ See section [Setting a Custom Fee Recipient](#setting-a-custom-fee-recipient)
 If you don't provide any genesis allocation, you won't be able to interact with your new chain (all
 transactions require a fee to be paid from the sender's balance).
 
-See a detailes guide on how to customize this allocation [here](#setting-the-genesis-allocation).
+See a detailed guide on how to customize this allocation [here](#setting-the-genesis-allocation).
 
 ### Header
 
@@ -180,7 +180,7 @@ for the genesis block.
 
 ## Subnet-EVM Precompiles 
 
-Precompiles can be used to add specific functionallity to Subnet-EVM. This precompiled
+Precompiles can be used to add specific functionality to Subnet-EVM. This precompiled
 contracts can activated directly in the genesis file or as an Upgrade. 
 See [Precompiles](../subnets/subnet-evm-precompiles) for a detailed explanation on how to
 integrate them in the genesis file.
@@ -192,7 +192,7 @@ By default, all fees are burned (sent to the black hole address with `"allowFeeR
 However, it is possible to enable block producers to set a fee recipient (who will get compensated
 for blocks they produce).
 
-There are 2 ways to anable this feature: 
+There are 2 ways to enable this feature: 
 
 - [Precompile](../subnets/subnet-evm-precompiles#changing-fee-reward-mechanisms) 
 - Genesis
@@ -210,9 +210,9 @@ genesis file (under the `"config"` key):
 
 ### Fee Recipient Address
 
-With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
-need to update their 
-[EVM chain config](../subnets/network-upgrades.md#avalanchego-chain-configs) 
+With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. 
+They need to update their 
+[EVM chain config](../subnets/subnet-evm-network-upgrades.md#avalanchego-chain-configs) 
 with the following to specify where the fee should be sent to.
 
 ```json

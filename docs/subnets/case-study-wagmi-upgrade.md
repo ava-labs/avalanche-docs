@@ -39,7 +39,7 @@ see the initial configuration.
 ### Network Upgrades: Enable/Disable Precompiles
 
 Detailed description of how to do this can be found in [Customize a
-Subnet](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial. Here's a
+Subnet](./subnet-evm-network-upgrades.md) tutorial. Here's a
 summary:
 
 - Network Upgrade utilizes existing precompiles on the Subnet-EVM:

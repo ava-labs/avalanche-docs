@@ -8,5 +8,5 @@ customized by utilizing one or more of the following methods:
 
 - [Genesis](../subnets/subnet-evm-genesis-file)
 - [Precompile](../subnets/subnet-evm-precompiles)
-- [Network Upgrade Configs](../subnets/network-upgrades)
+- [Network Upgrade Configs](../subnets/subnet-evm-network-upgrades)
 - [Chain Configs](../subnets/subnet-evm-chain-configs)

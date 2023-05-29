@@ -1,5 +1,8 @@
 # Subnet-EVM Precompiles
 
+Subnet-EVM can provide custom functionalities with precompiled contracts. 
+These precompiled contracts can be activated through ChainConfig (in genesis or as an upgrade).
+
 Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled
 contracts can be activated through `ChainConfig` 
 (in [genesis](../subnets/subnet-evm-genesis-file.md) or as an [upgrade](../subnets/subnet-evm-network-upgrades.md#upgrade-enabledisable-precompiles)).
@@ -125,7 +128,7 @@ field in your genesis or upgrade file:
 ```
 
 This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further
-information about precompile initial configurations see [Initial Precompile Configurations](../subnets/network-upgrades#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](./subnet-evm-network-upgrades#initial-precompile-configurations).
 
 ### Restricting Who Can Submit Transactions
 
@@ -188,7 +191,7 @@ through a network upgrade. To use initial configuration, you need to specify add
 ```
 
 This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further
-information about precompile initial configurations see [Initial Precompile Configurations](../subnets/network-upgrades#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](../subnets/subnet-evm-network-upgrades#initial-precompile-configurations).
 
 ### Minting Native Coins
 
@@ -270,7 +273,7 @@ file:
 In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000
 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in
 string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information
-about precompile initial configurations see [Initial Precompile Configurations](../subnets/network-upgrades#initial-precompile-configurations).
+about precompile initial configurations see [Initial Precompile Configurations](../subnets/subnet-evm-network-upgrades#initial-precompile-configurations).
 
 ### Configuring Dynamic Fees
 
@@ -376,7 +379,7 @@ activation. To use the initial configuration, you need to specify the fee config
 ```
 
 This will set the fee config to the values specified in the `initialFeeConfig` field. For further
-information about precompile initial configurations see [Initial Precompile Configurations](../subnets/network-upgrades#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](../subnets/subnet-evm-network-upgrades#initial-precompile-configurations).
 
 ### Changing Fee Reward Mechanisms
 
@@ -536,7 +539,7 @@ configuration for this case:
 If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRewardConfig` field
 then an error will be returned and precompile won't be activated. For further information about
 precompile initial configurations 
-see [Initial Precompile Configurations](../subnets/network-upgrades#initial-precompile-configurations).
+see [Initial Precompile Configurations](../subnets/subnet-evm-network-upgrades#initial-precompile-configurations).
 
 ## Contract Examples
 

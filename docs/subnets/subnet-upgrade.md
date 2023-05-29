@@ -187,7 +187,7 @@ available precompiles allow you to:
 - Configure Dynamic Fees
 
 Please refer to [Customize a
-Subnet](customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for a detailed discussion
+Subnet](../subnets/subnet-evm-network-upgrades.md) for a detailed discussion
 of possible precompile upgrade parameters.
 
 ## Summary
