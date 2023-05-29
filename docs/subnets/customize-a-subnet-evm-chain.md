@@ -1,6 +1,6 @@
 # Customize a Subnet EVM Chain
 
-Each of the chains in a subnet can be further customized using chain specific
+Each of the chains in a Subnet can be further customized using chain specific
 configuration file. See [here](../nodes/maintain/chain-config-flags.md) for detailed explanation.
 
 A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
