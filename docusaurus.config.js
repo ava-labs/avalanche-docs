@@ -136,10 +136,6 @@ const config = {
             label: "Community",
           },
           {
-            type: "localeDropdown",
-            position: "right",
-          },
-          {
             href: "https://chat.avax.network/",
             className: "header-discord-link",
             position: "right",

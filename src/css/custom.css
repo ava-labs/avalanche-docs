@@ -194,3 +194,57 @@ html[data-theme='dark'] .header-github-link:before {
 html[data-theme='dark'] .header-discord-link:before {
   filter: invert(100%);
 }
+
+@media (max-width: 1220px) {
+  .col {
+    --ifm-col-width: 100%;
+    flex-basis: var(--ifm-col-width);
+    margin-left: 0;
+  }
+
+.footer {
+  --ifm-footer-padding-horizontal: 0
+}
+
+  .footer__link-separator {
+    display: none;
+  }
+
+  .footer__col {
+    margin-bottom: calc(var(--ifm-spacing-vertical) * 3);
+  }
+
+  .footer__link-item {
+    display: block;
+  }
+
+.hero {
+  padding-left: 0;
+  padding-right: 0
+}
+
+.navbar > .container,
+.navbar > .container-fluid {
+    padding: 0
+}
+
+.navbar__toggle {
+    display: inherit
+}
+
+.navbar__item {
+    display: none;
+}
+
+.navbar__search-input {
+      width: 9rem
+  }
+
+.pills--block {
+    flex-direction: column
+}
+
+.tabs--block {
+    flex-direction: column
+}
+}
