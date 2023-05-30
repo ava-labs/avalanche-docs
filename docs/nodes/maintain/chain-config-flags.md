@@ -631,8 +631,9 @@ Defaults to `4096`.
 
 #### `pruning-enabled` (boolean)
 
-If `true`, database pruning of obsolete historical data will be enabled. This
-flag should be set to `false` for nodes that need access to all data at
+If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount 
+of data written to disk, but does not delete any state that is written to the disk.
+This flag should be set to `false` for nodes that need access to all data at
 historical roots. Pruning will be done only for new data. Defaults to `false` in
 v1.4.9, and `true` in subsequent versions.
 
