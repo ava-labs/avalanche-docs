@@ -24,7 +24,18 @@ const config = {
   projectName: "avalanche-docs",
   trailingSlash: false,
 
-  scripts: ["scripts/intercom-app.js", "scripts/intercom-scripts.js"],
+  scripts: [
+    "scripts/intercom-app.js",
+    "scripts/intercom-scripts.js",
+    {
+      src: "https://widget.kapa.ai/kapa-widget.bundle.js",
+      "data-website-id": "84b0d351-622f-46b4-80c9-f1d9850e34b6",
+      "data-project-name": "AvaGPT",
+      "data-project-color": "#e84142",
+      "data-project-logo": "static/img/Avalanche_AVAX_RedWhite.png",
+      async: true,
+    },
+  ],
 
   presets: [
     [
