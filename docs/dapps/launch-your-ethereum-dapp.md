@@ -213,14 +213,17 @@ C-Chain.
 
 ### thirdweb
 
-There is a [tutorial] for using thirdweb to deploy smart contracts on Avalanche. You can use thirdweb CLI to deploy any contract written in Hardhat or Forge to Avalanche network. thirdweb also has many pre-built contracts you can deploy to Avalanche network, with no coding required.
+This [tutorial](docs/dapps/smart-contracts/using-thirdweb-with-avalanche.md) shows you how to 
+to deploy smart contracts on Avalanche using thirdweb. You can use the
+thirdweb CLI to deploy any contracts written with Hardhat or Forge to the Avalanche network. thirdweb
+also offers many pre-built contracts for easy deployment, no coding required.
 
 ### Remix
 
-There is a
+This
 [tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask
-for access to the Avalanche network.
+shows you how to use Remix to deploy smart contracts on Avalanche. It relies on MetaMask
+for signing transactions on the Avalanche network.
 
 ### Truffle
 
