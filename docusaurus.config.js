@@ -96,7 +96,7 @@ const config = {
             type: "docSidebar",
             position: "left",
             sidebarId: "quickStart",
-            label: "Quick Start",
+            label: "QuickStart",
           },
           {
             type: "docSidebar",
