@@ -90,7 +90,6 @@ const sidebars = {
       collapsed: true,
       items: [
         "dapps/smart-contracts/README",
-        "dapps/smart-contracts/using-thirdweb-with-avalanche",
         "dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain",
         "dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask",
         "dapps/smart-contracts/verify-smart-contracts",
