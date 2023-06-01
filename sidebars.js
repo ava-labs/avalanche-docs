@@ -150,10 +150,10 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Subnet-EVM Chain",
+      label: "Build A Subnet-EVM Chain",
       collapsed: true,
       items: [
-        "subnets/customize-a-subnet",
+        "subnets/customize-a-subnet-evm-chain",
         "subnets/subnet-evm-genesis",
         "subnets/subnet-evm-precompiles",
         "subnets/subnet-evm-avalanchego-config",
@@ -163,7 +163,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Customize a VM Chain",
+      label: "Build A VM Chain",
       collapsed: true,
       items: [
         "subnets/introduction-to-vm",
