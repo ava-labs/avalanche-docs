@@ -2,28 +2,21 @@
 Description: How to customize a Subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize Your Subnet
+# Subnet Configuration
 
-All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
+A Subnet is a network composed of a dynamic subset of Avalanche validators working together to 
+achieve consensus on the state of one or more blockchains.
 
-A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a
-special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific
-configuration file. See [here](../nodes/maintain/chain-config-flags.md) for detailed explanation.
-
-A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
-customized by utilizing one or more of the following methods:
-
-- [Genesis](subnet-evm-genesis)
-- [Precompile](subnet-evm-precompiles)
-- [Upgrade Configs](subnet-evm-upgrades)
-- [Chain Configs](subnet-evm-avalanchego-config)
-
-## Subnet Configs
-
-A Subnet can customized by setting parameters for the following:
+This sovereign networks can be customized by setting parameters for:
 
 - [Validator-only communication to create a private Subnet](../nodes/maintain/subnet-configs.md#validatoronly-bool)
 - [Consensus](../nodes/maintain/subnet-configs.md#consensus-parameters)
 - [Gossip](../nodes/maintain/subnet-configs.md#gossip-configs)
 
 See [here](../nodes/maintain/subnet-configs.md) for more info.
+
+Each of the Chains validated by a Subnet can be customize too. Refer to the following sections:
+
+- [Customize Subnet-EVM Chain](customize-a-subnet-evm-chain)
+- [Custom VM Chain](introduction-to-vm)
+
