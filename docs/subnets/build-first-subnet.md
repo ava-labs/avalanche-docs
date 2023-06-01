@@ -250,3 +250,10 @@ Once you've developed a stable Subnet you like, see
 closer to production.
 
 Good Subnetting!
+
+## FAQ
+
+**How is the Subnet ID determined upon creation?**
+
+The Subnet ID is the hash of the transaction that created the Subnet.
+
