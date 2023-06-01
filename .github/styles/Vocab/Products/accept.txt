@@ -289,7 +289,6 @@ Tencent
 testnet
 Testnet
 textlint
-thirdweb
 toolchain
 Toolchains
 trie
