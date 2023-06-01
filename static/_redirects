@@ -376,7 +376,7 @@
 /apis/avalanchego/avalanchego-release-notes https://github.com/ava-labs/avalanchego/releases 301
 
 # 05/31/2023
-docs/subnets/customize-a-subnet.md#avalanchego-chain-configs docs/subnets/subnet-evm-avalanchego-config.md 301
-docs/subnets/customize-a-subnet.md#genesis docs/subnets/subnet-evm-genesis.md 301
-docs/subnets/customize-a-subnet.md#precompiles docs/subnets/subnet-evm-precompiles.md 301
-docs/subnets/customize-a-subnet.md#network-upgrades-enabledisable-precompiles docs/subnets/subnet-evm-upgrades#network-upgrades-enabledisable-precompiles.md 301
+/subnets/customize-a-subnet.md#avalanchego-chain-configs docs/subnets/subnet-evm-avalanchego-config.md 301
+/subnets/customize-a-subnet.md#genesis docs/subnets/subnet-evm-genesis.md 301
+/subnets/customize-a-subnet.md#precompiles docs/subnets/subnet-evm-precompiles.md 301
+/subnets/customize-a-subnet.md#network-upgrades-enabledisable-precompiles docs/subnets/subnet-evm-upgrades#network-upgrades-enabledisable-precompiles.md 301
