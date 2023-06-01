@@ -2,7 +2,7 @@
 Description: How to customize a Subnet by utilizing Genesis, Precompile and Blockchain Configs.
 ---
 
-# Customize Your EVM-Powered Subnet
+# Customize Your Subnet
 
 All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
@@ -13,10 +13,10 @@ configuration file. See [here](../nodes/maintain/chain-config-flags.md) for deta
 A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
 customized by utilizing one or more of the following methods:
 
-- [Genesis](#genesis)
-- [Precompile](#precompiles)
-- [Upgrade Configs](#network-upgrades-enabledisable-precompiles)
-- [Chain Configs](#avalanchego-chain-configs)
+- [Genesis](subnet-evm-genesis)
+- [Precompile](subnet-evm-precompiles)
+- [Upgrade Configs](subnet-evm-upgrades)
+- [Chain Configs](subnet-evm-avalanchego-config)
 
 ## Subnet Configs
 

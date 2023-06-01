@@ -1,7 +1,9 @@
-## Precompiles
+# Precompiles
 
 Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled
 contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+
+## Interfaces
 
 ### AllowList Interface
 
@@ -116,7 +118,7 @@ field in your genesis or upgrade file:
 ```
 
 This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](subnet-evm-upgrades.md#initial-precompile-configurations).
 
 ### Restricting Who Can Submit Transactions
 
@@ -179,7 +181,7 @@ through a network upgrade. To use initial configuration, you need to specify add
 ```
 
 This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](subnet-evm-upgrades.md#initial-precompile-configurations).
 
 ### Minting Native Coins
 
@@ -261,7 +263,7 @@ file:
 In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000
 (equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in
 string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information
-about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+about precompile initial configurations see [Initial Precompile Configurations](subnet-evm-upgrades.md#initial-precompile-configurations).
 
 ### Configuring Dynamic Fees
 
@@ -334,8 +336,8 @@ In addition to the `AllowList` interface, the FeeConfigManager adds the followin
 
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
-- `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the
-  fee config parameters)
+- `setFeeConfig` - sets the dynamic fee config on chain (see [here](subnet-evm-genesis#fee-config) 
+for details on the fee config parameters)
 
 You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more
 information see [here](../apis/avalanchego/apis/subnet-evm.md#eth_feeconfig).
@@ -366,7 +368,7 @@ activation. To use the initial configuration, you need to specify the fee config
 ```
 
 This will set the fee config to the values specified in the `initialFeeConfig` field. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+information about precompile initial configurations see [Initial Precompile Configurations](subnet-evm-upgrades.md#initial-precompile-configurations).
 
 ### Changing Fee Reward Mechanisms
 
@@ -433,7 +435,7 @@ In addition to the `AllowList` interface, the `RewardManager` adds the following
   the balance of the address by the amount of fees.
 
 - `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to
-  claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient)
+  claim fees by specifying their own addresses in their chain configs. See [here](subnet-evm-avalanchego-config#fee-recipient)
   for more information on how to specify the fee recipient address in the chain config.
 
 - `disableRewards` - disables block rewards and starts burning fees.
@@ -522,8 +524,7 @@ configuration for this case:
 
 If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRewardConfig` field
 then an error will be returned and precompile won't be activated. For further information about
-precompile initial configurations see [Initial Precompile
-Configurations](#initial-precompile-configurations).
+precompile initial configurations see [Initial Precompile Configurations](subnet-evm-upgrades.md#initial-precompile-configurations).
 
 ## Contract Examples
 

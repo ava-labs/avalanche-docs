@@ -1,4 +1,4 @@
-## AvalancheGo Chain Configs
+# AvalancheGo Chain Configs
 
 As described in [this doc](../nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain
 of Subnets can have its own custom configuration. If a Subnet's ChainID is
@@ -9,7 +9,7 @@ For blockchains created by or forked from Subnet-EVM, most
 [C-Chain configs](../nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except
 [Avalanche Specific APIs](../nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
 
-### Priority Regossip
+## Priority Regossip
 
 A transaction is "regossiped" when the node does not find the transaction in
 a block after `priority-regossip-frequency` (defaults to `1m`). By default, up to 16 transactions
@@ -37,10 +37,12 @@ validators per second. You can override these defaults with the following config
 }
 ```
 
-### Fee Recipient
+## Fee Recipient
 
-This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [RewardManager
-precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
+This works together with 
+[`allowFeeRecipients`](subnet-evm-genesis.md#setting-a-custom-fee-recipient) and
+[RewardManager precompile](subnet-evm-precompiles.md#changing-fee-reward-mechanisms) 
+to specify where the fees should be sent to.
 
 With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
 

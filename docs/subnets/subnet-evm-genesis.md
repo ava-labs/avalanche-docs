@@ -1,7 +1,9 @@
-## Genesis
+# Genesis File
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and
 semantics of its genesis data.
+
+## Description 
 
 The default genesis Subnet-EVM provided below has some well defined parameters:
 
@@ -202,8 +204,8 @@ genesis file (under the `"config"` key):
 #### Fee Recipient Address
 
 With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
-need to update their EVM [chain config](#avalanchego-chain-configs) with the following to specify where
-the fee should be sent to.
+need to update their EVM [chain config](subnet-evm-avalanchego-config.md) with 
+the following to specify where the fee should be sent to.
 
 ```json
 {
@@ -219,4 +221,5 @@ If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn'
 :::
 
 _Note: this mechanism can be also activated as a precompile._
-_See [Changing Fee Reward Mechanisms](#changing-fee-reward-mechanisms) section for more details._
+_See [Changing Fee Reward Mechanisms](subnet-evm-precompiles.md#changing-fee-reward-mechanisms) 
+section for more details._

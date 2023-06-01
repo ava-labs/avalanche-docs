@@ -1,5 +1,6 @@
+# Network Upgrades 
 
-## Network Upgrades: Enable/Disable Precompiles
+## Enable/Disable Precompiles
 
 :::warning
 
@@ -19,7 +20,7 @@ Disabling a precompile disables calling the precompile and destructs its storage
 at a later timestamp with a new configuration if desired.
 
 These upgrades must be specified in a file named `upgrade.json` placed in the same directory where
-[`config.json`](#avalanchego-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
+[`config.json`](subnet-evm-avalanchego-config.md) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
 For example, `WAGMI Subnet` upgrade should be placed in
 `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
 
@@ -217,7 +218,7 @@ activate the precompile again with the new configuration.
 
 :::
 
-See every precompile initial configuration in their relevant `Initial Configuration` sections under [Precompiles](#precompiles).
+See every precompile initial configuration in their relevant `Initial Configuration` sections under [Precompiles](subnet-evm-precompiles.md).
 
 
 ## Network Upgrades: State Upgrades
