@@ -11,9 +11,9 @@ created for different applications.
 
 The Primary Network is a special [Subnet](subnets-overview.md) that runs three blockchains:
 
-- The Contract Chain [(C-Chain)](avalanche-platform.md#contract-chain-c-chain)
-- The Platform Chain [(P-Chain)](avalanche-platform.md#platform-chain-p-chain)
-- The Exchange Chain [(X-Chain)](avalanche-platform.md#exchange-chain-x-chain)
+- The Contract Chain [(C-Chain)](avalanche-platform.md#c-chain)
+- The Platform Chain [(P-Chain)](avalanche-platform.md#p-chain)
+- The Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
 
