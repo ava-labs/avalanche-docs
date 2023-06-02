@@ -163,7 +163,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Build A VM Chain",
+      label: "Build a VM Chain",
       collapsed: true,
       items: [
         "subnets/introduction-to-vm",
