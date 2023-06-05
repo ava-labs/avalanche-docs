@@ -32,9 +32,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
+          // sidebarPath: require.resolve("./sidebars.js"),
           routeBasePath: "/",
           editUrl: "https://github.com/ava-labs/avalanche-docs/edit/master/",
+          sidebarPath: "./sidebars.json",
           remarkPlugins: [math],
           rehypePlugins: [katex],
         },
