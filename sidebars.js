@@ -141,7 +141,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Customize your Subnet",
+      label: "Customize Your Subnet",
       collapsed: true,
       items: [
         "subnets/customize-a-subnet",
