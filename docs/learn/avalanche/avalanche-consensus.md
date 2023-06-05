@@ -21,7 +21,7 @@ quickly confirmed and irreversible.
 - Scalability: Capable of a peak throughput of up to 50,000 transactions per second with a latency
 of less than half a second.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
-is not computationally intensive nor expensive. 
+is neither computationally intensive nor expensive. 
 - Adaptive Security: Avalanche consensus is designed to resist various attacks, including sybil
 attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
 nature ensures that the consensus outcome converges to the desired state, even when the network
