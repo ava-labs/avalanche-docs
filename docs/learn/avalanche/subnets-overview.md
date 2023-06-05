@@ -12,9 +12,9 @@ can validate many blockchains.
 
 Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
 
-- The Platform Chain [(P-Chain)](avalanche-platform#platform-chain-p-chain)
-- The Contract Chain [(C-Chain)](avalanche-platform#contract-chain-c-chain)
-- The Exchange Chain [(X-Chain)](avalanche-platform#exchange-chain-x-chain)
+- The Platform Chain [(P-Chain)](avalanche-platform#p-chain)
+- The Contract Chain [(C-Chain)](avalanche-platform#c-chain)
+- The Exchange Chain [(X-Chain)](avalanche-platform#x-chain)
 
 
 ![image](/img/subnet-validators.png)
