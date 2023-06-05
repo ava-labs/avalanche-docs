@@ -1,5 +1,5 @@
 ---
-description: Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
+description: Avalanche is a consensus protocol that is scalable, robust, and decentralized.
 ---
 
 # Avalanche Consensus
@@ -9,7 +9,7 @@ In blockchain, this means that all the participants in a network have to agree o
 the shared ledger. This agreement is reached through a specific process, a consensus protocol,
 that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
-**Avalanche Consensus** is a new consensus protocol that is scalable, robust, and decentralized. It
+**Avalanche Consensus** is a consensus protocol that is scalable, robust, and decentralized. It
 combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput, 
 fast finality, and
 energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
@@ -18,8 +18,7 @@ Key Features Include:
 
 - Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
 quickly confirmed and irreversible.
-- Scalability: Capable of a peak throughput of up to 50,000 transactions per second with a latency
-of less than half a second.
+- Scalability: Avalanche consensus enables high network throughput while ensuring low latency.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
 is neither computationally intensive nor expensive. 
 - Adaptive Security: Avalanche consensus is designed to resist various attacks, including sybil
@@ -32,11 +31,12 @@ is under attack.
 ## Conceptual Overview
 
 Consensus protocols in the Avalanche family operate through repeated sub-sampled voting. When a
-[validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is
-determining whether a
+node is determining whether a
 [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
-accepted, it asks a small, random subset of validators for their preference. Each queried validator
-replies with the transaction that it prefers, or thinks should be accepted.
+accepted, it asks a small, random subset of 
+[validator nodes](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)
+for their preference. Each queried validator replies with the transaction that it prefers, or thinks
+should be accepted.
 
 :::note
 
@@ -46,17 +46,17 @@ is considered **invalid** and will not participate in consensus.
 
 :::
 
-If a majority of the validators sampled reply with the same preferred
-transaction, this becomes the preferred choice of the group sampled, including the validator that asked.
-In the future, this validator and all those who have participated in at least one round of sampling
+If a sufficient majority of the validators sampled reply with the same preferred
+transaction, this becomes the preferred choice of the validator that inquired. 
+
+In the future, this node and all those who have participated in at least one round of sampling
 will reply with the transaction preferred by the majority.
 
-Overtime, more and more validators are queried, and the group in agreement grows larger and larger.
 
 The validator repeats this sampling process until a sufficiently large portion of the validators
 queried reply with the same answer for a certain number of consecutive rounds.
 
-- The number of validators required to be considered "sufficiently large" is referred to as "α" (_alpha_).
+- The number of validators required to be considered a "sufficient majority" is referred to as "α" (_alpha_).
 - The number of consecutive rounds required to reach consensus, a.k.a. the "Confidence Threshold,"
 is referred to as "β" (_beta_).
 
@@ -72,8 +72,7 @@ all honest validators will come to the same conclusion.
 
 :::info
 
-For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow) 
-from Ava Labs' Co-Founder Ted Yin. 
+For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow).
 
 :::
 
@@ -176,21 +175,24 @@ number of participants in the network, the number of consensus messages sent rem
 because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in
 the network.
 
-### Vertices
-
 Everything discussed to this point is how Avalanche is described in [the Avalanche
 white-paper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf).
 The implementation of the Avalanche consensus protocol by Ava Labs (namely in AvalancheGo) has some
-optimizations for latency and throughput. The most important optimization is the use of
-**vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its
-parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted
-on in groups rather than one by one.
+optimizations for latency and throughput.
 
-If a node receives a vote for a vertex, it counts as a vote for all the transactions in a vertex,
-and votes are applied transitively upward. A vertex is accepted when all the transactions which are
-in it are accepted. If a vertex contains a rejected transaction then it is rejected and all of its
-descendants are rejected. If a vertex is rejected, any valid transactions are re-issued into a new
-vertex which is not the child of a rejected vertex. New vertices are appended to preferred vertices.
+### Blocks
+
+A block is a fundamental component that forms the structure of a blockchain. It serves as a container
+or data structure that holds a collection of transactions or other relevant information. Each block
+is cryptographically linked to the previous block, creating a chain of blocks, hence the term "blockchain."
+
+In addition to storing a reference of its parent, a block contains a set of transactions. These
+transactions can represent various types of information, such as financial transactions, smart 
+contract operations, or data storage requests.  
+
+If a node receives a vote for a block, it counts as a vote for all the transactions in a block.
+A block is accepted when all the transactions which are in it are accepted. If a block is rejected,
+any valid transactions are re-issued into a new block.
 
 ### Finality
 
@@ -203,17 +205,17 @@ acceptance/rejection are **final and irreversible** and only take a few seconds.
 
 ### Optimizations
 
-It's not efficient for nodes to just ask, "Do you prefer this vertex?" when they query validators.
-In Ava Labs' implementation, during a query a node asks, "Given that this vertex exists, which
-vertices do you prefer?" Instead of getting back a binary yes/no, the node receives the other node's
-preferred vertex set.
+It's not safe for nodes to just ask, "Do you prefer this block?" when they query validators.
+In Ava Labs' implementation, during a query a node asks, "Given that this block exists, which
+of these blocks do you prefer?" Instead of getting back a binary yes/no, the node receives the other
+node's preferred set of blocks.
 
-Nodes don't only query upon hearing of a new transaction. They repeatedly query until there are no
-virtuous vertices processing. A virtuous vertex is one that has no conflicts.
+Nodes don't only query upon hearing of a new block; They repeatedly query other nodes until there are
+no blocks processing.
 
-Nodes don't need to wait until they get all _k_ query responses before registering the outcome of a
-poll. If no transaction can get an α majority then there's no need to wait for the rest of the
-responses.
+Nodes may not need to wait until they get all _k_ query responses before registering the outcome of a
+poll. If no more blocks can get an α majority, then there's no need to wait for the rest of the
+responses. 
 
 ### Validators
 
@@ -242,28 +244,21 @@ Subsampling has low
 message overhead. It doesn't matter if there are twenty validators or two thousand validators; the
 number of consensus messages a node sends during a query remains constant.
 
-Transitive voting, where a vote for a vertex is a vote for all its ancestors, helps with transaction
+Transitive voting, where a vote for a block is a vote for all its ancestors, helps with transaction
 throughput. Each vote is actually many votes in one.
 
 ### Loose Ends
 
-Transactions are created by users which call an API on the
+Transactions are created by users which call an API on an
 [AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such
-as [AvalancheJS](https://github.com/ava-labs/avalanchejs). Vertices are created when nodes batch
-incoming transactions together or when accepted transactions from a rejected vertex get reissued. 
-It's important to build on virtuous vertices because if we
-built on non-virtuous vertices there would be a higher chance that the node would get rejected which
-means there's a higher chance it's ancestors get rejected and we would make less progress.
+as [AvalancheJS](https://github.com/ava-labs/avalanchejs).
 
 ### Other Observations
 
 Conflicting transactions are not guaranteed to be live. That's not really a problem because if you
 want your transaction to be live then you should not issue a conflicting transaction.
 
-Avalanche works for linear chains too. The protocol is largely the same as above, but each vertex
-has only one parent. This gives a total ordering of vertices. This is useful for certain
-applications where one needs to know if a transaction came before another transaction, such as with
-smart contracts. Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol
+Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol
 for linear chains.
 
 If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does
