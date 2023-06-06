@@ -339,6 +339,16 @@ Please take note of the deployment address as we will be making use of it subseq
     git clone https://github.com/graphprotocol/graph-node
     ```
 
+    :::info
+    The repository cloning method used is HTTPS, but SSH can be used too:
+
+    `git clone git@github.com:graphprotocol/graph-node.git`
+
+    You can find more about SSH and how to use it 
+    [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+    :::
+
+
     Build the folder by running 
 
     ```zsh
@@ -380,6 +390,15 @@ Clone the official subgraph repository and install all the dependencies
 ```zsh
 git clone https://github.com/graphprotocol/example-subgraph
 ```
+
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:graphprotocol/example-subgraph.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
 
 Next, generate the ABI typings
 
