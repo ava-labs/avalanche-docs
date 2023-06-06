@@ -120,6 +120,15 @@ Clone the AvalancheGo repository:
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 Build the image into docker:
 
 ```bash

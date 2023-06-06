@@ -117,6 +117,15 @@ To use AvalancheJS, you can clone the repo:
 git clone https://github.com/ava-labs/avalanchejs.git
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchejs.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 or add it to an existing project:
 
 ```zsh
