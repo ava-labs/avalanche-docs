@@ -2,10 +2,6 @@
   "learn": [
     {
       "type": "html",
-      "value": "<hr/>"
-    },
-    {
-      "type": "html",
       "value": "<span class='menu__link'><b><small> The Avalanche Protocol </small></b></span>"
     },
     "learn/avalanche/intro",
