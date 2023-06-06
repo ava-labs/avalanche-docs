@@ -67,7 +67,7 @@ acceptance of non-conflicting transactions and the rejection of conflicting tran
 
 ![How Avalanche Consensus Works](/img/howavalancheconsensusworks.png)
 
-Avalanche Consensus virtually guarantees that if any honest validator accepts a transaction,
+Avalanche Consensus guarantees that if any honest validator accepts a transaction,
 all honest validators will come to the same conclusion.
 
 :::info
