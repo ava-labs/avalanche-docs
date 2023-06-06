@@ -190,9 +190,7 @@ In addition to storing a reference of its parent, a block contains a set of tran
 transactions can represent various types of information, such as financial transactions, smart 
 contract operations, or data storage requests.  
 
-If a node receives a vote for a block, it counts as a vote for all the transactions in a block.
-A block is accepted when all the transactions which are in it are accepted. If a block is rejected,
-any valid transactions are re-issued into a new block.
+If a node receives a vote for a block, it also counts as a vote for all of the block's ancestors (its parent, the parents' parent, etc.).
 
 ### Finality
 
