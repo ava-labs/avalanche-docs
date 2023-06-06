@@ -206,7 +206,7 @@ acceptance/rejection are **final and irreversible** and only take a few seconds.
 It's not safe for nodes to just ask, "Do you prefer this block?" when they query validators.
 In Ava Labs' implementation, during a query a node asks, "Given that this block exists, which
 of these blocks do you prefer?" Instead of getting back a binary yes/no, the node receives the other
-node's preferred set of blocks.
+node's preferred block.
 
 Nodes don't only query upon hearing of a new block; They repeatedly query other nodes until there are
 no blocks processing.
