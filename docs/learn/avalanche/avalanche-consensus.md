@@ -49,16 +49,15 @@ is considered **invalid** and will not participate in consensus.
 If a sufficient majority of the validators sampled reply with the same preferred
 transaction, this becomes the preferred choice of the validator that inquired. 
 
-In the future, this node and all those who have participated in at least one round of sampling
-will reply with the transaction preferred by the majority.
+In the future, this node will reply with the transaction preferred by the majority.
 
-
-The validator repeats this sampling process until a sufficiently large portion of the validators
-queried reply with the same answer for a certain number of consecutive rounds.
+The node repeats this sampling process until the validators
+queried reply with the same answer for a sufficient number of consecutive rounds.
 
 - The number of validators required to be considered a "sufficient majority" is referred to as "α" (_alpha_).
 - The number of consecutive rounds required to reach consensus, a.k.a. the "Confidence Threshold,"
 is referred to as "β" (_beta_).
+- Both α and β are configurable.
 
 When a transaction has no conflicts, finalization happens very quickly. When
 conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
@@ -190,7 +189,8 @@ In addition to storing a reference of its parent, a block contains a set of tran
 transactions can represent various types of information, such as financial transactions, smart 
 contract operations, or data storage requests.  
 
-If a node receives a vote for a block, it also counts as a vote for all of the block's ancestors (its parent, the parents' parent, etc.).
+If a node receives a vote for a block, it also counts as a vote for all of the block's ancestors
+(its parent, the parents' parent, etc.).
 
 ### Finality
 
