@@ -208,7 +208,7 @@ In Ava Labs' implementation, during a query a node asks, "Given that this block 
 of these blocks do you prefer?" Instead of getting back a binary yes/no, the node receives the other
 node's preferred block.
 
-Nodes don't only query upon hearing of a new block; They repeatedly query other nodes until there are
+Nodes don't only query upon hearing of a new block; they repeatedly query other nodes until there are
 no blocks processing.
 
 Nodes may not need to wait until they get all _k_ query responses before registering the outcome of a
