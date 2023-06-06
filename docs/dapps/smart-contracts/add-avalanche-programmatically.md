@@ -28,7 +28,7 @@ yarn bootstrap
 :::info
 The repository cloning method used is HTTPS, but SSH can be used too:
 
-`git@github.com:ava-labs/avalanche-dapp-sdks.git`
+`git clone git@github.com:ava-labs/avalanche-dapp-sdks.git`
 
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
