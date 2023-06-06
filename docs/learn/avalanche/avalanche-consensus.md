@@ -238,9 +238,8 @@ network is safe, and is live for virtuous transactions.
 
 Two big ideas in Avalanche are **subsampling** and **transitive voting**. 
 
-Subsampling has low
-message overhead. It doesn't matter if there are twenty validators or two thousand validators; the
-number of consensus messages a node sends during a query remains constant.
+Subsampling has low message overhead. It doesn't matter if there are twenty validators or two
+thousand validators; the number of consensus messages a node sends during a query remains constant.
 
 Transitive voting, where a vote for a block is a vote for all its ancestors, helps with transaction
 throughput. Each vote is actually many votes in one.
@@ -260,8 +259,8 @@ Snowman is the name of Ava Labs' implementation of the Avalanche consensus proto
 for linear chains.
 
 If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does
-nothing if there is no work to be done. Avalanche is more sustainable than Proof-of-work where nodes
-need to constantly do work.
+nothing if there is no work to be done. This makes Avalanche more sustainable than Proof-of-work
+where nodes need to constantly do work.
 
 Avalanche has no leader. Any node can propose a transaction and any node that has staked AVAX can
 vote on every transaction, which makes the network more robust and decentralized.
