@@ -14,18 +14,16 @@ Instead of building a custom VM from scratch, this tutorial starts with forking 
 First off, clone the Subnet-EVM repository into a directory of your choosing.
 
 ```shell
-git clone git@github.com:ava-labs/subnet-evm.git
+git clone https://github.com/ava-labs/subnet-evm.git
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/subnet-evm.git`
+
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
-As an alternative, you can use the HTTPS method:
-
-`git clone https://github.com/ava-labs/subnet-evm.git`
 :::
 
 ### Modify Subnet-EVM

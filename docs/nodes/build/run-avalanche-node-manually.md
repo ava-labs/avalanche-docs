@@ -108,19 +108,17 @@ Download the AvalancheGo repository into your `$GOPATH`:
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
-git clone git@github.com:ava-labs/avalanchego.git
+git clone https://github.com/ava-labs/avalanchego.git
 cd avalanchego
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
-As an alternative, you can use the HTTPS method:
-
-`git clone https://github.com/ava-labs/avalanchego.git`
 :::
 
 Note: This checkouts to the master branch. For the latest stable version, checkout the latest tag.
