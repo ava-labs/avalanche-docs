@@ -31,19 +31,17 @@ Next, you will clone the DFK Subnet-EVM repository:
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
 cd $GOPATH/src/github.com/ava-labs
-git clone git@github.com:ava-labs/subnet-evm.git
+git clone https://github.com/ava-labs/subnet-evm.git
 cd subnet-evm
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/subnet-evm.git`
+
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
-As an alternative, you can use the HTTPS method:
-
-`git clone https://github.com/ava-labs/subnet-evm.git`
 :::
 
 Now that you are in the `ava-labs/subnet-evm` repository, you will build the binary and place it
@@ -126,11 +124,11 @@ Run `go version`. **It should be 1.19.6 or above.** Run `echo $GOPATH`. **It sho
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
 cd $GOPATH/src/github.com/ava-labs
-git clone git@github.com:ava-labs/avalanchego.git
+git clone https://github.com/ava-labs/avalanchego.git
 cd avalanchego
 ./scripts/build.sh
 cd $GOPATH/src/github.com/ava-labs
-git clone git@github.com:ava-labs/subnet-evm.git
+git clone https://github.com/ava-labs/subnet-evm.git
 cd subnet-evm
 ./scripts/build.sh ~/.avalanchego/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -138,14 +136,12 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
+`git clone git@github.com:ava-labs/subnet-evm.git`
+
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
-As an alternative, you can use the HTTPS method:
-
-`git clone https://github.com/ava-labs/avalanchego.git`
-
-`git clone https://github.com/ava-labs/subnet-evm.git`
 :::

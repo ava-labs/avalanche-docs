@@ -171,6 +171,15 @@ First clone our GitHub repo (you can skip this step if you’ve done this before
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 Then move to the AvalancheGo directory:
 
 ```zsh
