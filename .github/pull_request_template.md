@@ -1,3 +1,6 @@
+
+# Docs PR Template
+
 ## Why this should be merged
 
 <please give a thorough description of why these changes are necessary>
