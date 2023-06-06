@@ -212,7 +212,7 @@ Nodes don't only query upon hearing of a new block; they repeatedly query other 
 no blocks processing.
 
 Nodes may not need to wait until they get all _k_ query responses before registering the outcome of a
-poll. If no more blocks can get an α majority, then there's no need to wait for the rest of the
+poll. If a block has already received _alpha_ votes, then there's no need to wait for the rest of the
 responses. 
 
 ### Validators
