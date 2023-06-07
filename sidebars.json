@@ -5,7 +5,12 @@
       "value": "<span class='menu__link'><b><small> The Avalanche Protocol </small></b></span>"
     },
     "learn/avalanche/intro",
-    "learn/avalanche/avalanche-platform",
+    {
+      "type": "category",
+      "label": "Networks",
+      "collapsed": false,
+      "items": ["learn/avalanche/avalanche-platform", "learn/avalanche/fuji"]
+    },
     "learn/avalanche/avalanche-consensus",
     "learn/avalanche/avax",
     "learn/avalanche/subnets-overview",
