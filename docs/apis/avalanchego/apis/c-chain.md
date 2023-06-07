@@ -109,8 +109,8 @@ They use the same endpoint as standard Ethereum APIs:
 
 ### `eth_getAssetBalance`
 
-Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must 
-be fetched with `eth_getBalance`).
+Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, 
+which must be fetched with `eth_getBalance`).
 
 **Signature:**
 
