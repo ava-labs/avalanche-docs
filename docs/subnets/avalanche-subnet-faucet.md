@@ -101,6 +101,15 @@ Clone this repository at your preferred location.
 git clone https://github.com/ava-labs/avalanche-faucet
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanche-faucet.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 ### Client-Side Configurations
 
 We need to configure our application with the server API endpoints and CAPTCHA site keys. All the
