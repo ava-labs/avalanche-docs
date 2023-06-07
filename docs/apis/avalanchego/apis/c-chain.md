@@ -96,11 +96,21 @@ is 40. We are working on to support a larger batch size.
 
 :::
 
+### Avalanche - Ethereum APIs
+
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance`, `eth_baseFee`, 
+`eth_maxPriorityFeePerGas`, and `eth_getChainConfig`. 
+
+They use the same endpoint as standard Ethereum APIs:
+
+```sh
+/ext/bc/C/rpc
+```
+
 ### `eth_getAssetBalance`
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the
-balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched
-with `eth_getBalance`).
+Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must 
+be fetched with `eth_getBalance`).
 
 **Signature:**
 
