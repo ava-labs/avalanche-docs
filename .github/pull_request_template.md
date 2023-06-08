@@ -1,7 +1,5 @@
 
-# Docs PR Template 
-
-<please delete lines 1-4>
+# Docs PR Template
 
 ## Why this should be merged
 
