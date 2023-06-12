@@ -158,7 +158,10 @@ Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times
 $$
 where
 $$
-EffectiveConsumptionRate = \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
+EffectiveConsumptionRate = 
+$$
+$$
+\frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
