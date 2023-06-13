@@ -13,7 +13,7 @@ and wallets should work with the Fuji Testnet.
 In this tutorial, we’ll go through an example Fuji workflow to show how it can
 be used. We'll do the following:
 
-1. Set up Fuji network on MetaMask (optional)
+1. Set up Fuji network on Core (optional)
 2. Generate a 24 word english mnemonic via AvalancheJS
 3. Derive external C-Chain addresses via AvalancheJS
 4. Get AVAX from the Fuji faucet
@@ -21,13 +21,37 @@ be used. We'll do the following:
 6. Examine the resulting transaction on the Avalanche Explorer
 7. Use a private key derived from a mnemonic to sign into the web wallet
 
-## Set up Fuji Network on MetaMask (optional)
+## Set up Fuji Network on Core (optional)
 
-- **Network Name**: Avalanche Fuji C-Chain
+To access the Fuji test network, Testnet Mode needs to be enabled. 
+In order to do that, go to **Settings** and click on **Advanced**.
+
+<div style={{textAlign: 'center'}}>
+
+![Settings image 1](/img/c-chain-ERC20/settings1.png)
+
+</div>
+
+Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to
+Fuji Testnet. 
+
+<div style={{textAlign: 'center'}}>
+
+![Settings image 2](/img/c-chain-ERC20/settings2.png)
+
+</div>
+
+:::info
+
+If you are using other wallets, like MetaMask, you can add the Fuji Testnet using the following specs:
+
+- **Network Name**: Avalanche C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - **ChainID**: `43113`
-- **Symbol**: `AVAX`
-- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+- **Symbol**: AVAX
+- **Explorer**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
+
+:::
 
 ## Generate a Mnemonic
 
