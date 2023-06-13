@@ -45,7 +45,8 @@ while only ledger usage is enabled on Mainnet (see more on setting up your ledge
 
 To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to 
 provide the keys that control the Subnet defined during the subnet deployment process (more info on 
-keys in Fuji can be found [here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), 
+keys in Fuji can be found 
+[here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), 
 while more info on ledger signing in Mainnet can be found 
 [here](https://docs.avax.network/subnets/create-a-mainnet-subnet#deploy-the-subnet)). 
 
@@ -54,8 +55,8 @@ while more info on ledger signing in Mainnet can be found
 If all works as expected, you then have the option to automatically transform all existing 
 permissioned validators to permissionless validators. 
 
-You can also to skip automatic transformation at this point and choose to manually add permissionless 
-validators later.
+You can also to skip automatic transformation at this point and choose to manually add 
+permissionless validators later.
 
 You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and interact 
 with your Elastic Subnet.
@@ -75,8 +76,8 @@ skip this prompt by using `--nodeID` flag.
 
 You will then be prompted with the amount of the Subnet native token that you like to stake in the 
 validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. Note 
-that choosing to add the maximum validator stake amount (defined during Elastic Subnet transformation 
-step above) means that you effectively disable delegation in your validator.
+that choosing to add the maximum validator stake amount (defined during Elastic Subnet 
+transformation step above) means that you effectively disable delegation in your validator.
 
 Next, select when the validator will start validating and how long it will be validating for. You 
 can also bypass these prompts by using `--start-time` and `--staking-period` flags.
