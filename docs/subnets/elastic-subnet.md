@@ -15,7 +15,7 @@ elastic (or permissionless) Subnet.
 In the following commands, make sure to substitute the name of your Subnet configuration for
 `<subnetName>`.
 
-To transform your permissioned Subnet into an elastic Subnet (NOTE: this action is irreversible), run
+To transform your permissioned Subnet into an Elastic Subnet (NOTE: this action is irreversible), run
 
 `avalanche subnet elastic <subnetName>`
 
@@ -25,8 +25,8 @@ the `--local`, `--fuji`, or `--mainnet` flag.
 Provide the name and the symbol for the permissionless Subnet's native token. You can also bypass this prompt by providing
 the `--tokenName` and `--tokenSymbol` flags.
 
-Next, select the elastic Subnet config. You can choose to use the default values detailed [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters#primary-network-parameters-on-mainnet)
-or customize the elastic Subnet config. To bypass the prompt, you can use `--default` flag to use the default elastic subnet config.
+Next, select the Elastic Subnet config. You can choose to use the default values detailed [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters#primary-network-parameters-on-mainnet)
+or customize the Elastic Subnet config. To bypass the prompt, you can use `--default` flag to use the default Elastic Subnet config.
 
 The command may take a couple minutes to run.
 
@@ -36,7 +36,7 @@ Elastic Subnet transformation on public network requires private key loaded into
 
 Both stored key usage and ledger usage are enabled on Fuji (see more on creating keys [here](https://docs.avax.network/subnets/create-a-fuji-subnet#private-key)) while only ledger usage is enabled on Mainnet (see more on setting up your ledger [here](https://docs.avax.network/subnets/create-a-mainnet-subnet#setting-up-your-ledger)) .
 
-To transform a permissioned Subnet into elastic Subnet on public networks, users are required to provide the keys that control the Subnet defined during the subnet deployment process (more info on keys in Fuji can be found [here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), while more info on ledger signing in Mainnet can be found [here](https://docs.avax.network/subnets/create-a-mainnet-subnet#deploy-the-subnet)). 
+To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to provide the keys that control the Subnet defined during the subnet deployment process (more info on keys in Fuji can be found [here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), while more info on ledger signing in Mainnet can be found [here](https://docs.avax.network/subnets/create-a-mainnet-subnet#deploy-the-subnet)). 
 
 ### Results
 
@@ -44,21 +44,21 @@ If all works as expected, you then have the option to automatically transform al
 
 You can also to skip automatic transformation at this point and choose to manually add permissionless validators later.
 
-You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and interact with your elastic Subnet.
+You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and interact with your Elastic Subnet.
 
 ## Adding Permissionless Validators to Elastic Subnet
 
 If you are running this command on local network, you will need to first remove permissioned validators (by running `avalanche subnet removeValidator <subnetName>`)
-so that you can have a list of local nodes to choose from to be added as a permissionless validator in the elastic csubnet.
+so that you can have a list of local nodes to choose from to be added as a permissionless validator in the Elastic Subnet.
 
-To add permissionless validators to an elastic Subnet, run
+To add permissionless validators to an Elastic Subnet, run
 
 `avalanche subnet join <subnetName> --elastic`
 
 You will be prompted with which node you would like to add as a permissionless validator. You can skip this prompt by using `--nodeID` flag.
 
 You will then be prompted with the amount of the Subnet native token that you like to stake in the validator. Alternatively, you can bypass this prompt by providing
-the `--stake-amount` flag. Note that choosing to add the maximum validator stake amount (defined during elastic subnet transformation step above) means that you effectively disable delegation in your validator.
+the `--stake-amount` flag. Note that choosing to add the maximum validator stake amount (defined during Elastic Subnet transformation step above) means that you effectively disable delegation in your validator.
 
 Next, select when the validator will start validating and how long it will be validating for. You can also bypass these prompts by using `--start-time` and `--staking-period` flags.
 
