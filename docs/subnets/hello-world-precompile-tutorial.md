@@ -1539,7 +1539,7 @@ will supply the standard Ethereum API calls. For example, you can use the RPC UR
 
 `http://127.0.0.1:9650/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU/rpc`
 
-to connect to the blockchain through MetaMask, HardHat, etc.
+to connect to the blockchain through Core, MetaMask, HardHat, etc.
 
 ### Conclusion
 
