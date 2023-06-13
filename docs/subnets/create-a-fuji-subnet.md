@@ -839,10 +839,10 @@ avalanche subnet list
 
 ## Appendix
 
-### Connect with MetaMask
+### Connect with Core
 
-To connect MetaMask with your blockchain on the new Subnet running on your local computer, you can
-add a new network on MetaMask with the following values:
+To connect Core (or MetaMask) with your blockchain on the new Subnet running on your local computer, you can
+add a new network on your Core wallet with the following values:
 
 ```text
 - Network Name: testsubnet
@@ -854,7 +854,7 @@ add a new network on MetaMask with the following values:
 :::note
 
 Unless you deploy your Subnet on other nodes, you aren't going to be able to use other nodes,
-including the public API server `https://api.avax-test.network/`, to connect to MetaMask.
+including the public API server `https://api.avax-test.network/`, to connect to Core.
 
 If you want to open up this node for others to access your Subnet, you should set it up properly
 with `https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it's out of scope for
