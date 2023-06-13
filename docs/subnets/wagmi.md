@@ -45,6 +45,7 @@ that surfaces aggregated usage statistics about the Subnet.
 - Symbol: WGM
 - Explorer: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
 ```
+
 :::info
 
 It can be used with other wallets too, such as MetaMask.
