@@ -20,18 +20,19 @@ any smart contract to the chain and no requirement for a new language specific
 contract concept to interact. Let’s look at how to create an ERC-20 contract and
 deploy it to avalanche C-Chain.
 
-## Set up MetaMask
+## Set up Core
 
-The first thing we should set is a MetaMask wallet.
+The first thing we should do is to enable Testnet mode on Core. To do that, go to **Settings** and click on **Advanced**.
 
-![Image for post](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S)
+![Settings image 1](/img/c-chain-ERC20/settings1.png)
 
-Click to MetaMask icon on the browser and select the network drop-down menu.
-Here we should connect to C-Chain. Click to "Custom RPC".
+Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to Fuji Testnet. 
 
-![Image for post](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
+![Settings image 2](/img/c-chain-ERC20/settings2.png)
 
-Now, we need to set these boxes with correct values.
+:::info
+
+If you are using other wallets, like MetaMask, you can add the Fuji Testnet using the following specs:
 
 - **Network Name**: Avalanche C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
@@ -39,7 +40,9 @@ Now, we need to set these boxes with correct values.
 - **Symbol**: AVAX
 - **Explorer**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
 
-After setting up all the parameters correctly, we should see this page. For now, we have 0 AVAX.
+:::
+
+The setup is done. For now, we have 0 AVAX.
 
 ## Fund Your C-Chain Address
 
@@ -115,9 +118,9 @@ symbol will be `tst`. You can give it a and click to transact button.
 
 After clicking the button, a pop-up will show up and just confirm it.
 
-![Image for post](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
+![Core confirmation](/img/c-chain-ERC20/transaction-approval.png)
 
-And then another pop-up, a MetaMask confirmation, appears. Confirm it.
+And then another pop-up, a Core confirmation, appears. Confirm it.
 
 After confirming all these pop-ups we have deployed our token to avalanche
 C-Chain. So we can start to interact with it.
@@ -163,15 +166,19 @@ Click to arrow beside the mint method to read it.
 
 Enter your address and an amount in wei. For example, I will mint 1000 `tst` token so, I entered "1000000000000000000000"
 
-## Add Token to MetaMask
+## Add Token to Core
 
 Now we minted 1000 token to our contract, but you should not be able to see the
-tokens in your MetaMask wallet. In order to see our own token, we have to add
-it. On MetaMask, click to "Add Token" button and select "Custom Token" tab.
+tokens in your Core wallet. In order to see our own token, we have to add
+it. On Core, click on the Avalanche C-Chain, and then select Manage:
 
-Here enter the token address that you can see from explorer as I showed above.
-Copy and paste it here. Then click on the Next button, you should see 1000 token
-that you named in your MetaMask wallet. Also, you can send it to another account
-via either remix or MetaMask.
+![Add token 1](/img/c-chain-ERC20/add-token1.png)
 
-![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
+![Add token 2](/img/c-chain-ERC20/add-token2.png)
+
+Click on Add custom token. Here,enter the token address that you can see from the 
+explorer, as showed above. Copy and paste it here. Then click on the Add token button,
+you should see 1000 token that you named in your Core wallet. Also, 
+you can send it to another account via either remix or Core.
+
+![Add token 3](/img/c-chain-ERC20/add-token3.png)
