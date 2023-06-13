@@ -164,13 +164,13 @@ We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the
 [Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji
 Testnet and have no monetary value.
 
-![Requesting AVAX](/img/faucet-fuji-wf-alt.png)
+![Requesting AVAX](/img/fuji-workflow/faucet1.png)
 
 The faucet will send some AVAX to the address and return a transaction ID
 (txID). This txID can be used with the Fuji Testnet Explorer to learn more about
 the transaction.
 
-![Receiving AVAX](/img/faucet-fuji-wf-alt-receipt.png)
+![Receiving AVAX](/img/fuji-workflow/faucet2.png)
 
 ### Check the Transaction Details
 
