@@ -58,8 +58,8 @@ permissioned validators to permissionless validators.
 You can also to skip automatic transformation at this point and choose to manually add 
 permissionless validators later.
 
-You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and interact 
-with your Elastic Subnet.
+You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and 
+interact with your Elastic Subnet.
 
 ## Adding Permissionless Validators to Elastic Subnet
 
