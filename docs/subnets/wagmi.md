@@ -35,7 +35,7 @@ that surfaces aggregated usage statistics about the Subnet.
 - SubnetID: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
 - ChainID: [2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt](https://testnet.avascan.info/blockchain/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt)
 
-## Adding WAGMI to MetaMask
+## Adding WAGMI to Core
 
 ```text
 - Network Name: WAGMI
@@ -45,3 +45,8 @@ that surfaces aggregated usage statistics about the Subnet.
 - Symbol: WGM
 - Explorer: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
 ```
+:::info
+
+It can be used with other wallets too, such as MetaMask.
+
+:::
