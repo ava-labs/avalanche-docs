@@ -89,7 +89,7 @@ To add permissionless delegators, run
 `avalanche subnet addPermissionlessDelegator <subnetName>`
 
 You will be prompted with which Subnet validator you would like to delegate to. You can skip this 
-prompt by using `--nodeID` flag.F
+prompt by using `--nodeID` flag.
 
 You will then be prompted with the amount of the Subnet native token that you like to stake in the 
 validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. The 
