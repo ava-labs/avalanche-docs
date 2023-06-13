@@ -22,11 +22,13 @@ deploy it to avalanche C-Chain.
 
 ## Set up Core
 
-The first thing we should do is to enable Testnet mode on Core. To do that, go to **Settings** and click on **Advanced**.
+The first thing we should do is to enable Testnet mode on Core. To do that, go to **Settings** 
+and click on **Advanced**.
 
 ![Settings image 1](/img/c-chain-ERC20/settings1.png)
 
-Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to Fuji Testnet. 
+Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to
+Fuji Testnet. 
 
 ![Settings image 2](/img/c-chain-ERC20/settings2.png)
 
