@@ -8,8 +8,8 @@ elastic (or permissionless) Subnet.
 ## Prerequisites
 
 - [Avalanche-CLI installed](install-avalanche-cli)
-- You have deployed a permissioned Subnet on [local](create-a-local-subnet), on [Fuji]
-(create-a-fuji-subnet) or on [Mainnet](create-a-mainnet-subnet)
+- You have deployed a permissioned Subnet on [local](create-a-local-subnet), on 
+[Fuji](create-a-fuji-subnet) or on [Mainnet](create-a-mainnet-subnet)
 
 ## Transforming a Subnet into Elastic Subnet
 
@@ -44,7 +44,7 @@ while only ledger usage is enabled on Mainnet (see more on setting up your ledge
 [here](https://docs.avax.network/subnets/create-a-mainnet-subnet#setting-up-your-ledger)).
 
 To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to 
-provide the keys that control the Subnet defined during the subnet deployment process (more info on 
+provide the keys that control the Subnet defined during the Subnet deployment process (more info on 
 keys in Fuji can be found 
 [here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), 
 while more info on ledger signing in Mainnet can be found 
@@ -89,7 +89,7 @@ To add permissionless delegators, run
 `avalanche subnet addPermissionlessDelegator <subnetName>`
 
 You will be prompted with which Subnet validator you would like to delegate to. You can skip this 
-prompt by using `--nodeID` flag.
+prompt by using `--nodeID` flag.F
 
 You will then be prompted with the amount of the Subnet native token that you like to stake in the 
 validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. The 
