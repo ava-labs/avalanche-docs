@@ -63,6 +63,15 @@ cd avalanche-smart-contract-quickstart
 yarn
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanche-smart-contract-quickstart.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 In order to deploy contracts, you need to have some AVAX. You can get testnet
 AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy
 way to get to play around with Avalanche. After getting comfortable with your
