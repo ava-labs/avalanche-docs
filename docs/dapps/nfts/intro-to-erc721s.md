@@ -60,7 +60,7 @@ Fuji Testnet.
 
 :::info
 
-If you are using other wallets, like MetaMask, you can add the Fuji Testnet using the following specs:
+If you are using other wallets, like Core or MetaMask, you can add the Fuji Testnet using the following specs:
 
 - **Network Name**: Avalanche C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
