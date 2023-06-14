@@ -204,7 +204,7 @@ In the Accounts screen, select the `Imported` tab. Click on `Import private key`
 
 ![Import Account](/img/first-subnet/import1.png)
 
-Here, enter the priate key. Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
+Here, enter the private key. Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
 
 ![Enter private key](/img/first-subnet/import2.png)
 

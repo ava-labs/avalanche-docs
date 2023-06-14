@@ -134,7 +134,7 @@ fluctuating.
 
 1. Let's create a sample transaction on Avalanche Mainnet, in which we will be
    sending 0.1 AVAX to a receiver using Core. Four predefined gas settings can
-   be seen, which are Core's inbuilt gas estimation.To set a custom fee select 
+   be seen, which are Core's inbuilt gas estimation. To set a custom fee select 
    “Custom” and enter the gas amount to use. By clicking on the **Settings** icon,
    we can review gas fees and the amount which we want to send.
 

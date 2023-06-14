@@ -251,6 +251,6 @@ you see that your NFT was created!
 
 All of the above steps can be used on Mainnet except the following changes:
 
-- Make sure that you switch to the Avlanche C-Chain in Core.
+- Make sure that you switch to the Avalanche C-Chain in Core.
 - Make sure that you have AVAX tokens in your account to cover transaction costs.
 - You should use the Mainnet version of [Snowtrace Explorer](https://snowtrace.io/) to view transactions.
