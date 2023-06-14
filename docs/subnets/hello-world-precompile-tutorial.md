@@ -808,7 +808,7 @@ func StoreGreeting(stateDB contract.StateDB, input string) {
 }
 ```
 
-The below code snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
+The below code snippet can be copied and pasted to overwrite the default `setGreeting()` code.
 
 <!-- markdownlint-disable MD013 -->
 
