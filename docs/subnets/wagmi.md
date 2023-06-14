@@ -46,4 +46,8 @@ that surfaces aggregated usage statistics about the Subnet.
 - Explorer: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
 ```
 
+:::info
+
 This can be used with other wallets too, such as MetaMask.
+
+:::
