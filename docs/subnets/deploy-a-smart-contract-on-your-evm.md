@@ -87,8 +87,8 @@ The contract ABI and Bytecode are available on the compiler tab.
 
 ![remix Subnet evm sc ABI](/img/remix-subnet-evm-sc-abi.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you
-can join our community at [Discord](https://chat.avalabs.org/)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche 
+with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 ## Other Tools
 

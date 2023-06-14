@@ -841,8 +841,10 @@ avalanche subnet list
 
 ### Connect with Core
 
-To connect Core (or MetaMask) with your blockchain on the new Subnet running on your local computer, 
-you can add a new network on your Core wallet with the following values:
+To connect Core (or MetaMask) with your blockchain on the new 
+Subnet running on your local computer, 
+you can add a new network on your Core wallet 
+with the following values:
 
 ```text
 - Network Name: testsubnet

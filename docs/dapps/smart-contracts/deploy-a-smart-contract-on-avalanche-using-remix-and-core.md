@@ -35,7 +35,7 @@ To switch to the **Fuji test network**, go to Settings, select Advanced, and the
 
 </div>
 
-#### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
+**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
 
 - **Network Name**: Avalanche Local C-Chain
 - **New RPC URL**:
@@ -86,7 +86,8 @@ Select the Solidity compiler tab and compile the contract.
 
 ![Compile contract](/img/remix-core-guide/compile.png)
 
-Navigate to Deploy & Run transactions Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Provider (make sure Core is loaded).
+Navigate to Deploy & Run transactions Tab -&gt; Open the "ENVIRONMENT" drop-down and select 
+Injected Provider (make sure Core is loaded).
 
 ![Deploy and run transactions](/img/remix-core-guide/provider.png)
 
@@ -132,5 +133,4 @@ The contract ABI and Bytecode are available on the Solidity compiler tab.
 </div>
 
 If you had any difficulties following this tutorial or simply want to discuss
-Avalanche with us, you can join our community at
-[Discord](https://chat.avalabs.org/)!
+Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
