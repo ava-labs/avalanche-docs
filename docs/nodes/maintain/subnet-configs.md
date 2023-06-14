@@ -89,6 +89,8 @@ Parameters](./avalanchego-config-flags.md#snow-parameters).
 | --snow-optimal-processing           | `optimalProcessing`      |
 | --snow-max-processing               | maxOutstandingItems      |
 | --snow-max-time-processing          | maxItemProcessingTime    |
+| --snow-mixed-query-num-push-vdr     | mixedQueryNumPushVdr     |
+| --snow-mixed-query-num-push-non-vdr | mixedQueryNumPushNondVdr |
 | --snow-avalanche-batch-size         | `batchSize`              |
 | --snow-avalanche-num-parents        | `parentSize`             |
 
