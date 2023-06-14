@@ -1,4 +1,4 @@
-# Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask
+# Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core
 
 ## Introduction
 
@@ -8,9 +8,9 @@ This tutorial assumes that:
 - Your Node is currently validating your target Subnet
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
 
-## Step 1: Setting up MetaMask
+## Step 1: Setting up Core
 
-### **EVM Subnet Settings:** [(EVM MetaMask Tutorial)](./create-a-fuji-subnet.md#connect-with-metamask)
+### **EVM Subnet Settings:** [(EVM Core Tutorial)](./create-a-fuji-subnet.md#connect-with-core)
 
 - **`Network Name`**: Custom Subnet-EVM
 - **`New RPC URL`**: <http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc> (Note: the port number should
@@ -19,13 +19,15 @@ match your local setting which can be different from 9650.)
 - **`Symbol`**: Subnet-EVM Token Symbol
 - **`Explorer`**: N/A
 
-![remix Subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
+You should see a balance of your Subnet's Native Token in Core.
 
-You should see a balance of your Subnet's Native Token in MetaMask.
+<div style={{textAlign: 'center'}}>
 
-![remix Subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
+![balance](/img/evm-smart-contract/core-balance.png)
 
-## Step 2: Connect MetaMask and Deploy a Smart Contract
+</div>
+
+## Step 2: Connect Core and Deploy a Smart Contract
 
 ### Using Remix
 
@@ -51,7 +53,7 @@ For this example, we will deploy an ERC721 contract from the [Avalanche Smart Co
 ![remix Subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
 Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure
-MetaMask is loaded).
+Core is loaded).
 
 ![remix Subnet evm sc web3](/img/remix-subnet-evm-sc-web3.png)
 
@@ -60,14 +62,18 @@ Navigate to Deploy Tab.
 
 ![remix Subnet evm sc compile](/img/remix-subnet-evm-sc-compile.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC721.
+Now, the smart contract is compiled, Core is injected, and we are ready to deploy our ERC721.
 Click "Deploy."
 
 ![remix Subnet evm sc deploy](/img/remix-subnet-evm-sc-deploy.png)
 
-Confirm the transaction on the MetaMask pop up.
+Confirm the transaction on the Core pop up.
 
-![remix Subnet evm sc conf1](/img/remix-subnet-evm-sc-conf1.png)
+<div style={{textAlign: 'center'}}>
+
+![balance](/img/evm-smart-contract/approve.png)
+
+</div>
 
 Our contract is successfully deployed!
 
