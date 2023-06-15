@@ -8,7 +8,7 @@ Go implementation of an Avalanche node.
 
 Related docs
 
-- [AvalanacheGo](../apis/avalanchego/README.md)
+- [AvalancheGo](../apis/avalanchego/README.md)
 - [Nodes](../nodes/README.md)
 
 ## Coreth
@@ -29,11 +29,23 @@ Related docs
 
 Subnet-EVM is the 
 [Virtual Machine (VM)](/docs/learn/avalanche/subnets-overview.md#virtual-machines) that defines the 
-Subnet Contract Chains. Subnet-EVM is a simplified version of [Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
+Subnet Contract Chains. Subnet-EVM is a simplified version of 
+[Coreth VM (C-Chain)](https://github.com/ava-labs/coreth).
 
 Related docs
 
 - [Subnets](/docs/learn/avalanche/subnets-overview.md)
+
+## Avalanche-CLI
+
+[Link to GitHub](https://github.com/ava-labs/avalanche-cli)
+
+Avalanche CLI is a command line tool that gives developers access to everything Avalanche.
+This release specializes in helping developers develop and test Subnets.
+
+Related docs
+
+- [Avalanche-CLI](/subnets/install-avalanche-cli.md)
 
 ## AvalancheJS
 
