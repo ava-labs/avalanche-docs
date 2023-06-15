@@ -20,8 +20,8 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.png",
-  organizationName: "ava-labs", // Usually your GitHub org/user name.
-  projectName: "avalanche-docs", // Usually your repo name.
+  organizationName: "ava-labs",
+  projectName: "avalanche-docs",
   trailingSlash: false,
 
   scripts: ["scripts/intercom-app.js", "scripts/intercom-scripts.js"],
@@ -32,10 +32,9 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
           routeBasePath: "/",
-          // Please change this to your repo.
           editUrl: "https://github.com/ava-labs/avalanche-docs/edit/master/",
+          sidebarPath: "./sidebars.json",
           remarkPlugins: [math],
           rehypePlugins: [katex],
         },
@@ -97,7 +96,7 @@ const config = {
             type: "docSidebar",
             position: "left",
             sidebarId: "quickStart",
-            label: "Quick Start",
+            label: "QuickStart",
           },
           {
             type: "docSidebar",
@@ -140,6 +139,21 @@ const config = {
             type: "localeDropdown",
             position: "right",
           },
+          {
+            href: "https://chat.avax.network/",
+            className: "header-discord-link",
+            position: "right",
+          },
+          {
+            href: "https://twitter.com/AvaxDevelopers",
+            className: "header-twitter-link",
+            position: "right",
+          },
+          {
+            href: "https://github.com/ava-labs",
+            className: "header-github-link",
+            position: "right",
+          },
         ],
       },
       footer: {
@@ -154,7 +168,7 @@ const config = {
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/avalancheavax",
+                href: "https://twitter.com/avax",
               },
               {
                 label: "Telegram",

@@ -50,6 +50,15 @@ git clone https://github.com/ava-labs/avalanchego
 cd avalanchego
 ```
 
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
+
 ### Build Binary
 
 Running the below command will create an `avalanchego` binary inside the `build/` directory and will
@@ -68,6 +77,15 @@ Move to the `subnet-evm-demo` directory, and clone the repository.
 git clone https://github.com/ava-labs/subnet-evm
 cd subnet-evm
 ```
+
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/subnet-evm.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
 
 ### Build Binary and Copy it to AvalancheGo Plugins
 

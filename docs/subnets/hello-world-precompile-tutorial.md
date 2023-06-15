@@ -192,24 +192,22 @@ For easy copy paste, use the below commands:
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
-git clone git@github.com:ava-labs/subnet-evm.git
-git clone git@github.com:ava-labs/avalanchego.git
+git clone https://github.com/ava-labs/subnet-evm.git
+git clone https://github.com/ava-labs/avalanchego.git
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 npm install -g solc
 npm install -g yarn
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps.
-You can find more about SSH and how to use it
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
-Without a public SSH key, the cloning process
-will not go through.
-As an alternative, you can use the HTTPS method:
+The repository cloning method used is HTTPS, but SSH can be used too:
 
-`git clone https://github.com/ava-labs/subnet-evm.git`
+`git clone git@github.com:ava-labs/subnet-evm.git`
 
-`git clone https://github.com/ava-labs/avalanchego.git`
+`git clone git@github.com:ava-labs/avalanchego.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
 :::
 
 ### Complete Code
@@ -810,7 +808,7 @@ func StoreGreeting(stateDB contract.StateDB, input string) {
 }
 ```
 
-The below code snippet can be copied and pasted to overwrite the default `sayGreeting()` code.
+The below code snippet can be copied and pasted to overwrite the default `setGreeting()` code.
 
 <!-- markdownlint-disable MD013 -->
 
