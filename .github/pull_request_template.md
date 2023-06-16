@@ -19,6 +19,9 @@
 - [] ran `markdownlint /docs/file/path` on all changed `.md` files to ensure all linting rules pass
 - [] completed the above two checks and all additional rules outlined in `style-checker-notes.md` to
   ensure all checks pass
-- [] all files which were moved from their current directory to a new path have had their paths
+- [] if a doc was removed/deleted, the path to that doc must be redirected to a valid URL via the
+  `_redirects` file
+- [] all files that were moved from their current directory to a new path have had their paths
   redirected via the `_redirects` file
-- [] `sidebars.json` also reflects any changes mentioned in the previous bullet
+- [] `_redirects` were manually verified with the cloudflare preview link
+- [] `sidebars.json` reflects all changes made to file path
