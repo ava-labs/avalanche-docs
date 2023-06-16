@@ -141,13 +141,34 @@ This is a brief overview of what this tutorial will cover.
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
 
-In this tutorial, we used a branch based on Subnet-EVM version `v0.5.1`. You can find the branch
+In this tutorial, we used a branch based on Subnet-EVM version `v0.5.2`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2). The code in this
 branch is the same as Subnet-EVM except for the `precompile/contracts/helloworld` directory. The
 directory contains the code for the `HelloWorld` precompile. We will be using this
 precompile as an example to learn how to write a stateful precompile. The code in this branch can become
 outdated.
 You should always use the latest version of Subnet-EVM when you develop your own precompile.
+
+#### PrecompilEVM
+
+Subnet-EVM precompiles can be registered from an external repo.
+This allows developer to build their precompiles without maintaining a fork of Subnet-EVM.
+The precompiles are then registered in the Subnet-EVM at build time.
+
+The difference between using Subnet-EVM and PrecompilEVM is that with Subnet-EVM you can change EVM
+internals to interact with your precompiles.
+Such as changing fee structure, adding new opcodes, changing how to build a block, etc.
+With PrecompilEVM you can only add new stateful precompiles that can interact with the StateDB.
+Precompiles built with PrecompilEVM are still very powerful because it can directly access to the
+state and modify it.
+
+There is a template repo for how to build a precompile with this way called
+[PrecompilEVM](https://github.com/ava-labs/precompilevm). Both of Subnet-EVM and PrecompilEVM shares
+similar directory structure and common codes.
+Most of the tutorial still works same way
+for PrecompilEVM repo. There are some changes mentioned in steps to use PrecompilEVM repo.
+We followed same Hello World tutorial in PrecompilEVM repo.
+You can access the PrecompilEVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompilevm/pull/2)
 
 ### Prerequisites
 
@@ -181,55 +202,74 @@ As a few things will be installed into `$GOPATH/bin`, please make sure that `$GO
 Download the following prerequisites into your `$GOPATH`:
 
 - Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repository
+  - For PrecompilEVM, Clone the [PrecompilEVM](https://github.com/ava-labs/precompilevm) repository.
+    Alternatively you can use it as a template repo from Github.
 - Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
-- Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
-
-For easy copy paste, use the below commands:
+- Install [Node.js and NPM](https://nodejs.org/en/download)
+  For easy copy paste, use the below commands:
 
 ```shell
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
-git clone https://github.com/ava-labs/subnet-evm.git
-git clone https://github.com/ava-labs/avalanchego.git
-curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
-npm install -g solc
-npm install -g yarn
 ```
 
-:::info
-The repository cloning method used is HTTPS, but SSH can be used too:
+For Subnet-EVM:
 
-`git clone git@github.com:ava-labs/subnet-evm.git`
+```shell
+git clone git@github.com:ava-labs/subnet-evm.git
+```
 
-`git clone git@github.com:ava-labs/avalanchego.git`
+For PrecompilEVM:
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-:::
+```shell
+git clone git@github.com:ava-labs/precompilevm.git
+```
+
+Then run the following commands:
+
+```shell
+git clone git@github.com:ava-labs/avalanchego.git
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
+npm install -g solc
+```
 
 ### Complete Code
 
-You can inspect the [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
-for the complete code.
+You can inspect example pull request for the complete code.
+
+Subnet-EVM: [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
+
+PrecompilEVM: [Hello World Pull Request](https://github.com/ava-labs/precompilevm/pull/2/)
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
 ### Step 0: Generating the Precompile
 
-For the tutorial, we will be working in a new branch in Subnet-EVM:
+For the tutorial, we will be working in a new branch in Subnet-EVM/PrecompilEVM repo:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
+```
+
+or for PrecompilEVM:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompilevm
+```
+
+Then checkout to a new branch:
+
+```bash
 git checkout -b hello-world-stateful-precompile
 ```
 
-We will start off in this directory `./contract-examples/contracts`:
+We will start off in this directory `./contracts/`:
 
 ```bash
-cd contract-examples/contracts
+cd contracts/
 ```
 
 First we must create the Solidity interface that we want our precompile to implement. This will be
@@ -261,8 +301,7 @@ This interface defines 2 functions, `sayHello()` and `setGreeting()`. The `sayHe
 is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
 The `setGreeting()` function is a state changer function, meaning it modifies the state of the precompile.
 
-`IAllowList` is an interface that we will use to restrict access to the precompile. It is defined in
-`./contract-examples/contracts/IAllowList.sol`:
+`IAllowList` is an interface that we will use to restrict access to the precompile.
 
 ```sol
 //SPDX-License-Identifier: MIT
@@ -283,17 +322,39 @@ interface IAllowList {
 }
 ```
 
+`IAllowList` is defined in Subnet-EVM under `./contracts/contracts/interfaces/IAllowList.sol`.
+
+For PrecompilEVM these interfaces and other contracts
+can be accessible through `@avalabs/subnet-evm-contracts` package.
+This is already added to the `package.json` file.
+You can install it by running `npm install`.
+In order to import `IAllowList` interface, you can use the following import statement:
+
+```sol
+import "@avalabs/subnet-evm-contracts/interfaces/IAllowList.sol";
+```
+
+For an example in PrecompilEVM take a look at the file [here](https://github.com/ava-labs/precompilevm/blob/hello-world-example/contracts/contracts/interfaces/IHelloWorld.sol)
+
 Now we have an interface that our precompile can implement!
 Let's create an [ABI](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#contract-abi-specification)
 of our Solidity interface.
 
-In the same `./contract-examples/contracts` directory, let's run
+In the same directory, let's run:
 
 ```shell
-solcjs --abi IHelloWorld.sol && mv IHelloWorld_sol_IHelloWorld.abi IHelloWorld.abi
+solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 ```
 
-This generates the ABI code and moves it to `./contract-examples/contracts` as `IHelloWorld.abi`:
+This won't work with PrecompilEVM as we import contracts from `@avalabs/subnet-evm-contracts` package.
+In order to generate the ABI in PrecompilEVM we need to include the `node_modules` folder to find
+imported contracts with following command:
+
+```shell
+solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --include-path ./node_modules
+```
+
+This generates the ABI code under `./abis/IHelloWorld.abi`.
 
 ```json
 [
@@ -364,27 +425,33 @@ Note: The ABI must have named outputs in order to generate the precompile templa
 Now that we have an ABI for the precompile gen tool to interact with, we can run the following
 command to generate our HelloWorld precompile files!
 
-Let's go back to the root of the Subnet-EVM repository and run the PrecompileGen script helper:
+Let's go back to the root of the repository and run the PrecompileGen script helper:
 
 <!-- markdownlint-disable MD013 -->
 
+```shell
+cd ..
+```
+
+Both of these Subnet-EVM and PrecompilEVM have the same `generate_precompile.sh` script. The one in PrecompilEVM
+installs the script from Subnet-EVM and runs it.
+
 ```bash
-$ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 
 $ ./scripts/generate_precompile.sh --help
 
 Using branch: precompile-tutorial
 NAME:
-   precompilegen - subnet-evm precompile generator tool
+precompilegen - subnet-evm precompile generator tool
 
 USAGE:
-   main [global options] command [command options] [arguments...]
+main [global options] command [command options] [arguments...]
 
 VERSION:
-   1.10.26-stable
+1.10.26-stable
 
 COMMANDS:
-   help, h  Shows a list of commands or help for one command
+help, h Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
 
@@ -401,7 +468,7 @@ GLOBAL OPTIONS:
     --type value
           Struct name for the precompile (default = {abi file name})
 
-   MISC
+MISC
 
     --help, -h                     (default: false)
           show help
@@ -409,25 +476,31 @@ GLOBAL OPTIONS:
     --version, -v                  (default: false)
           print the version
 
-
 COPYRIGHT:
-   Copyright 2013-2022 The go-ethereum Authors
+Copyright 2013-2022 The go-ethereum Authors
+
 ```
 
-Precompile contracts reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
+In Subnet-EVM precompile implementations reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
 template in the `./precompile/contracts/helloworld` directory, where `helloworld` is the name of the
 Go package we want to generate the precompile into.
 
 ```bash
-./scripts/generate_precompile.sh --abi ./contract-examples/contracts/IHelloWorld.abi --type HelloWorld --pkg helloworld
+./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
+```
+
+For PrecompilEVM we don't need to put this under a deep directory structure. We can just generate the
+precompile template under its own directory via `--out ./helloworld` flag.
+
+```bash
+./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld --out ./helloworld
 ```
 
 <!-- markdownlint-enable MD013 -->
 
 This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`
-and `README.md` located at [`./precompile/contracts/helloworld`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld)
-directory. `README.md` explains general guidelines for precompile development. You should carefully read
-this file before modifying the precompile template.
+and `README.md` files. `README.md` explains general guidelines for precompile development.
+You should carefully read this file before modifying the precompile template.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -449,11 +522,12 @@ Modifying code outside of these areas should be done with caution and with a dee
 6- Add your config unit tests under generated package config_test.go
 7- Add your contract unit tests under generated package contract_test.go
 8- Additionally you can add a full-fledged VM test for your precompile under plugin/vm/vm_test.go. See existing precompile tests for examples.
-9- Add your solidity interface and test contract to contract-examples/contracts
-10- Write solidity tests for your precompile in contract-examples/test
-11- Create your genesis with your precompile enabled in tests/precompile/genesis/
-12- Create e2e test for your solidity test in tests/precompile/solidity/suites.go
-13- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
+9- Add your solidity interface and test contract to contracts/contracts
+10- Write solidity contract tests for your precompile in contracts/contracts/test/
+11- Write TypeScript DS-Test counterparts for your solidity tests in contracts/test/
+12- Create your genesis with your precompile enabled in tests/precompile/genesis/
+13- Create e2e test for your solidity test in tests/precompile/solidity/suites.go
+14- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
 ```
 
 Let's follow these step and create our HelloWorld precompile!
@@ -486,7 +560,7 @@ The address should be unique to the precompile. There is a registry of precompil
 under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
 A list of addresses is specified in comments under this file.
 Modify the default value to be the next user available stateful precompile address. For forks of
-Subnet-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
+Subnet-EVM or PrecompilEVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to
 Subnet-EVM in the future. You should pick an address that is not already taken,
 and write it down in `registry.go` as a comment for future reference.
@@ -540,7 +614,7 @@ precompile package that you need to modify. You should start with the reference 
 
 Module file contains fundamental information about the precompile. This includes the key for the
 precompile, the address of the precompile and a configurator. This file is located at
-[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
+[`/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
 
 This file defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
@@ -562,7 +636,7 @@ after you have finalized the implementation of the precompile config.
 #### Step 3.2: Config File
 
 The config file contains the config for the precompile. This file is located at
-[`/precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
+[`/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
 This file contains the `Config` struct, which implements `precompileconfig.Config` interface.
 It has some embedded structs like `precompileconfig.Upgrade`. `Upgrade` is used to enable
 upgrades for the precompile. It contains the `BlockTimestamp` and `Disable` to enable/disable
@@ -673,7 +747,7 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 #### Step 3.4: Contract File
 
 Contract file contains the functions of the precompile contract that will be called by the EVM. The
-file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
+file is located at [`/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
 Since we use `IAllowList` interface there will be auto-generated code for `AllowList`
 functions like below:
 
@@ -894,7 +968,7 @@ of the precompile. Meaning that these functions will cost an additional `ReadAll
 to read permissions from the storage. If you don't plan to read permissions from the storage then
 you can omit these.
 
-Now going back to `/precompile/helloworld/contract.go`, we can modify our precompile function gas costs.
+Now going back to `/helloworld/contract.go`, we can modify our precompile function gas costs.
 Please search (`CTRL F`) `SET A GAS COST HERE` to locate the default gas cost code.
 
 ```go
@@ -913,12 +987,16 @@ SetGreetingGasCost uint64 = contract.WriteGasCostPerSlot + allowlist.ReadAllowLi
 
 ### Step 5: Register Precompile
 
-We should register our precompile in [`/precompile/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go)
-to be discovered by other packages.
+We should register our precompile package to the Subnet-EVM to be discovered by other packages.
 Our `Module` file contains an `init()` function that registers our precompile.
 `init()` is called when the package is imported.
 We should register our precompile in a common package so
 that it can be imported by other packages.
+
+This can be done for Subnet-EVM under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go)
+
+For PrecompilEVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go)
+file that orchestrates this precompile registration.
 
 ```go
 // Force imports of each precompile to ensure each precompile's init function runs and registers itself
@@ -943,21 +1021,21 @@ import (
 ### Step 6: Add Config Tests
 
 Precompile generation tool generates skeletons for unit tests as well. Generated config tests will
-be under `/precompile/contracts/helloworld/config_test.go`. There are mainly two functions we need
+be under [`/helloworld/config_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
+There are mainly two functions we need
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. Generated `Verify` tests contain a valid case.
 You can add more invalid cases depending on your implementation. `Equal` tests generates some
 invalid cases to test different timestamps, types and AllowList cases.
-You can check other `config_test.go` files
-in the `/precompile/contracts` directory for more examples. For the `HelloWorld` precompile, you can
-check the generated code in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
+You can check other `config_test.go` files in the [`/precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/)
+directory for more examples.
 
 ### Step 7: Add Contract Tests
 
 The tool also generates contract tests to make sure our precompile is working correctly. Generated
 tests include cases to test allow list capabilities, gas costs, calling function in read only mode.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
-tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
+tests will be under [`/precompile/contracts/helloworld/contract_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
 We will also add more test to cover functionalities of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
@@ -1011,6 +1089,9 @@ you can directly run them as follows:
 
 ### Step 8 (Optional): VM Tests
 
+This is only applicable for direct Subnet-EVM forks as there test files are not directly exported in
+Golang. If you use PrecompilEVM you can skip this step.
+
 VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
 comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, for example
 changing blockchain rules, you should add a VM test. For example you can take a look at the
@@ -1019,8 +1100,11 @@ For this Hello World example we don't modify any Subnet-EVM rules, so we don't n
 
 ### Step 9: Add Test Contract
 
-Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact
-with our precompile! We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
+We can run Solidity test for our precompile. In order to do so, we add an example smart contract and
+a test contract.
+This example smart contract lets us interact
+with our precompile.
+We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
 doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on
 that contract, we will be redirected to the HelloWorld precompile address. The below code snippet
 can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
@@ -1033,10 +1117,11 @@ import "./IHelloWorld.sol";
 
 // ExampleHelloWorld shows how the HelloWorld precompile can be used in a smart contract.
 contract ExampleHelloWorld {
-  address constant HELLO_WORLD_ADDRESS = 0x0300000000000000000000000000000000000000;
+  address constant HELLO_WORLD_ADDRESS =
+    0x0300000000000000000000000000000000000000;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
 
-  function getHello() public view returns (string memory) {
+  function sayHello() public view returns (string memory) {
     return helloWorld.sayHello();
   }
 
@@ -1056,100 +1141,139 @@ the caller is added to the AllowList.
 :::
 
 Please note that this contract is simply a wrapper and is calling the precompile functions.
+The reason why we add another example smart contract is to have a simpler stateless tests.
 
-### Step 10: Add Hardhat Test
+For the test contract we write our test in `./contracts/test/ExampleHelloWorldTest.sol`.
 
-We can now write our hardhat test in `./contract-examples/test`. The below code snippet can be
-copied and pasted into a new file called `hello_world.ts` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contract-examples/test/hello_world.ts):
+```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "../ExampleHelloWorld.sol";
+import "../interfaces/IHelloWorld.sol";
+import "./AllowListTest.sol";
+
+contract ExampleHelloWorldTest is AllowListTest {
+  IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
+  function step_getDefaultHelloWorld() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    assertEq(example.sayHello(), "Hello World!");
+  }
+
+  function step_doesNotSetGreetingBeforeEnabled() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+
+    try example.setGreeting("testing") {
+      assertTrue(false, "setGreeting should fail");
+    } catch {}
+  }
+
+  function step_setAndGetGreeting() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    helloWorld.setEnabled(exampleAddress);
+    assertRole(
+      helloWorld.readAllowList(exampleAddress),
+      AllowList.Role.Enabled
+    );
+
+    string memory greeting = "testgreeting";
+    example.setGreeting(greeting);
+    assertEq(example.sayHello(), greeting);
+  }
+}
+```
+
+:::note
+
+For PrecompilEVM, you should import `AllowListTest` with following:
+
+```sol
+import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
+```
+
+:::
+
+### Step 10: Add DS-Test
+
+We can now trigger this test contract via `hardhat` tests. The test script uses Subnet-EVM's `test`
+framework test in `./contracts/test`.
+You can find more information about the test framework [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
+
+The test script looks like this:
 
 ```ts
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
-import { expect } from "chai";
 import { ethers } from "hardhat";
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { Contract, ContractFactory } from "ethers";
+import { test } from "./utils";
 
-// make sure this is always an admin for the precompile
-const adminAddress: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
+// make sure this is always an admin for hello world precompile
+const ADMIN_ADDRESS = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
 const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
 
-describe("ExampleHelloWorld", function () {
-  let helloWorldContract: Contract;
-  let adminSigner: SignerWithAddress;
-  let adminSignerPrecompile: Contract;
+describe("ExampleHelloWorldTest", function () {
+  this.timeout("30s");
 
-  before(async function () {
-    // Deploy Hello World Contract
-    const ContractF: ContractFactory = await ethers.getContractFactory(
-      "ExampleHelloWorld"
-    );
-    helloWorldContract = await ContractF.deploy();
-    await helloWorldContract.deployed();
-    const helloWorldContractAddress: string = helloWorldContract.address;
-    console.log(`Contract deployed to: ${helloWorldContractAddress}`);
-
-    adminSigner = await ethers.getSigner(adminAddress);
-    adminSignerPrecompile = await ethers.getContractAt(
+  beforeEach("Setup DS-Test contract", async function () {
+    const signer = await ethers.getSigner(ADMIN_ADDRESS);
+    const helloWorldPromise = ethers.getContractAt(
       "IHelloWorld",
       HELLO_WORLD_ADDRESS,
-      adminSigner
+      signer
     );
+
+    return ethers
+      .getContractFactory("ExampleHelloWorldTest", { signer })
+      .then((factory) => factory.deploy())
+      .then((contract) => {
+        this.testContract = contract;
+        return contract.deployed().then(() => contract);
+      })
+      .then(() => Promise.all([helloWorldPromise]))
+      .then(([helloWorld]) => helloWorld.setAdmin(this.testContract.address))
+      .then((tx) => tx.wait());
   });
 
-  it("should getHello properly", async function () {
-    let result = await helloWorldContract.callStatic.getHello();
-    expect(result).to.equal("Hello World!");
-  });
+  test("should gets default hello world", ["step_getDefaultHelloWorld"]);
 
-  it("contract should not be able to set greeting without enabled", async function () {
-    const modifiedGreeting = "What's up";
-    let contractRole = await adminSignerPrecompile.readAllowList(
-      helloWorldContract.address
-    );
-    expect(contractRole).to.be.equal(0); // 0 = NONE
-    try {
-      let tx = await helloWorldContract.setGreeting(modifiedGreeting);
-      await tx.wait();
-    } catch (err) {
-      return;
-    }
-    expect.fail("should have errored");
-  });
+  test(
+    "should not set greeting before enabled",
+    "step_doesNotSetGreetingBeforeEnabled"
+  );
 
-  it("should be add contract to enabled list", async function () {
-    let contractRole = await adminSignerPrecompile.readAllowList(
-      helloWorldContract.address
-    );
-    expect(contractRole).to.be.equal(0);
-
-    let enableTx = await adminSignerPrecompile.setEnabled(
-      helloWorldContract.address
-    );
-    await enableTx.wait();
-    contractRole = await adminSignerPrecompile.readAllowList(
-      helloWorldContract.address
-    );
-    expect(contractRole).to.be.equal(1); // 1 = ENABLED
-  });
-
-  it("should setGreeting and getHello", async function () {
-    const modifiedGreeting = "What's up";
-    let tx = await helloWorldContract.setGreeting(modifiedGreeting);
-    await tx.wait();
-
-    expect(await helloWorldContract.callStatic.getHello()).to.be.equal(
-      modifiedGreeting
-    );
-  });
+  test(
+    "should set and get greeting with enabled account",
+    "step_setAndGetGreeting"
+  );
 });
 ```
 
+::: note
+
+For PrecompilEVM, you should import `test` with following:
+
+```ts
+import { test } from "@avalabs/subnet-evm-contracts";
+```
+
+:::
+
 ### Step 11: Add Genesis
 
-To run our HardHat test, we will need to create a Subnet that has the `Hello World` precompile activated,
-so we will copy and paste the below genesis file into: `./tests/precompile/genesis/hello_world.json`.
+To run our e2e contract tests, we will need to create a Subnet that has the `Hello World`
+precompile activated,
+so we will copy and paste the below genesis file into: `/tests/precompile/genesis/hello_world.json`.
 
 Note: it's important that this has the same name as the HardHat test file we created in Step 8.1.
 
@@ -1219,7 +1343,7 @@ Adding this to our genesis enables our HelloWorld precompile at the very first b
 ### Step 12: Declaring the HardHat E2E Test
 
 Now that we have declared the HardHat test and corresponding `genesis.json` file. The last step to running
-the e2e test is to declare the new test in `./tests/precompile/solidity/suites.go`.
+the e2e test is to declare the new test in `/tests/precompile/solidity/suites.go`.
 
 At the bottom of the file you will see the following code commented out:
 
@@ -1233,14 +1357,22 @@ At the bottom of the file you will see the following code commented out:
 			defer cancel()
 
 			// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
-			// and the test file in ./contract-examples/tests/{your_precompile}.ts
-			utils.ExecuteHardHatTestOnNewBlockchain(ctx, "your_precompile")
+			// and the test file in ./contracts/tests/{your_precompile}.ts
+			// If you want to use a different test command and genesis path than the defaults, you can
+			// use the utils.RunTestCMD. See utils.RunDefaultHardhatTests for an example.
+			utils.RunDefaultHardhatTests(ctx, "your_precompile")
 		})
 	*/
 ```
 
+`utils.RunDefaultHardhatTests` will run the default Hardhat test command and use the default genesis
+path.
+If you want to use a different test command and genesis path than the defaults, you can use the
+`utils.CreateSubnet` and `utils.RunTestCMD`.
+See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
+
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+The string passed in to `utils.RunDefaultHardhatTests(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 
@@ -1252,7 +1384,7 @@ directly if you prefer):
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 		defer cancel()
 
-		utils.ExecuteHardHatTestOnNewBlockchain(ctx, "hello_world")
+		utils.RunDefaultHardhatTests(ctx, "hello_world")
 	})
 ```
 
@@ -1262,9 +1394,12 @@ Now that we've set up the new ginkgo test, we can run the ginkgo test that we wa
 
 ### Step 13: Running E2E Tests
 
-#### Building AvalancheGo and Subnet-EVM
+#### Building AvalancheGo and Subnet-EVM/PrecompilEVM
 
 Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
+
+PrecompilEVM repo has same scripts and the build process as Subnet-EVM. Following steps also apply to
+PrecompilEVM.
 
 You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
 the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
@@ -1320,12 +1455,29 @@ will not be able to talk to AvalancheGo and the blockchain will not start.
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
 
+::: note
+
+PrecompilEVM actually bundles Subnet-EVM and runs it under the hood in the [`plugins/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go#L24).
+
+:::
+
 #### Running Ginkgo Tests
 
 To run ONLY the HelloWorld precompile test, run the command:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
+```
+
+or for PrecompilEVM:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompilevm
+```
+
+use `GINKGO_LABEL_FILTER` env var to filter the test:
+
+```bash
 GINKGO_LABEL_FILTER=HelloWorld ./scripts/run_ginkgo.sh
 ```
 
@@ -1355,19 +1507,7 @@ Will run 1 of 7 specs
 INFO [01-27|10:33:51.002] Starting AvalancheGo node                wd=/Users/avalabs/go/src/github.com/ava-labs/subnet-evm
 INFO [01-27|10:33:51.002] Executing                                cmd="./scripts/run.sh "
 [streaming output] Using branch: hello-world-tutorial-walkthrough
-[streaming output] Creating data directory: /tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1
-[streaming output] Executing command: /Users/avalabs/go/src/github.com/ava-labs/avalanchego/build/avalanchego --data-dir=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1 --config-file=/tmp/subnet-evm-start-node/2023-01-27:10:33:51/node1/config.json
-[streaming output] [01-27|10:33:56.962] WARN process/process.go:92 UPnP or NAT-PMP router attach failed, you may not be listening publicly. Please confirm the settings in your router
-[streaming output] [01-27|10:33:56.965] INFO leveldb/db.go:203 creating leveldb {"config": {"blockCacheCapacity":12582912,"blockSize":0,"compactionExpandLimitFactor":0,"compactionGPOverlapsFactor":0,"compactionL0Trigger":0,"compactionSourceLimitFactor":0,"compactionTableSize":0,"compactionTableSizeMultiplier":0,"compactionTableSizeMultiplierPerLevel":null,"compactionTotalSize":0,"compactionTotalSizeMultiplier":0,"disableSeeksCompaction":true,"openFilesCacheCapacity":1024,"writeBuffer":6291456,"filterBitsPerKey":10,"maxManifestFileSize":9223372036854775807,"metricUpdateFrequency":10000000000}}
-[streaming output] [01-27|10:33:57.061] INFO node/node.go:224 initializing networking {"currentNodeIP": "10.56.134.240:9651"}
-[streaming output] [01-27|10:33:57.066] INFO server/server.go:309 adding route {"url": "/ext/vm/mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6", "endpoint": "/rpc"}
-[streaming output] [01-27|10:33:57.782] INFO <P Chain> platformvm/vm.go:228 initializing last accepted {"blkID": "2cC67R6vPRSX4BCAY3ouAk9JKCCpAxjFxRVUQWfnEQF1BjQhqX"}
-[streaming output] INFO [01-27|10:33:57.792] <C Chain> github.com/ava-labs/coreth/core/state/snapshot/wipe.go:133: Deleted state snapshot leftovers kind=accounts wiped=0 elapsed="26.846µs"
-[streaming output] [01-27|10:33:57.801] INFO server/server.go:270 adding route {"url": "/ext/bc/2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU", "endpoint": "/ws"}
-[streaming output] [01-27|10:33:57.806] INFO <P Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "2cC67R6vPRSX4BCAY3ouAk9JKCCpAxjFxRVUQWfnEQF1BjQhqX"}
-[streaming output] [01-27|10:34:01.004] WARN health/health.go:85 failing readiness check {"reason": {"bootstrapped":{"error":"not yet run","timestamp":"0001-01-01T00:00:00Z","duration":0}}}
-INFO [01-27|10:34:06.003] AvalancheGo node is healthy
-  < Exit [BeforeSuite] TOP-LEVEL - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/precompile_test.go:31 @ 01/27/23 10:34:06.003 (15.002s)
+...
 [BeforeSuite] PASSED [15.002 seconds]
 ```
 
@@ -1387,61 +1527,21 @@ S [SKIPPED]
   tx allow list [Precompile, TxAllowList]
   /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:36
 ------------------------------
-S [SKIPPED]
-[Precompiles]
-/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
-  contract deployer allow list [Precompile, ContractDeployerAllowList]
-  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:43
-------------------------------
-S [SKIPPED]
-[Precompiles]
-/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
-  fee manager [Precompile, FeeManager]
-  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:50
-------------------------------
-S [SKIPPED]
-[Precompiles]
-/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
-  reward manager [Precompile, RewardManager]
-  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:57
-------------------------------
-[Precompiles]
-/Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:26
-  hello world [Precompile, HelloWorld]
-  /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64
-  > Enter [It] hello world - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:06.004
-INFO [01-27|10:34:06.004] Executing HardHat tests on a new blockchain test=hello_world
-INFO [01-27|10:34:06.028] Reading genesis file                     filePath=./tests/precompile/genesis/hello_world.json wd=/Users/avalabs/go/src/github.com/ava-labs/subnet-evm
-INFO [01-27|10:34:06.029] Creating new subnet
-[streaming output] [01-27|10:34:06.059] INFO <P Chain> proposervm/pre_fork_block.go:223 built block {"blkID": "vByWDipDCUSwfKogQyZSBzHpfAAd3wsaLyzeZ7NkZ7HUefVbs", "innerBlkID": "2HQHayX2WwvNDoTQtVhTf4ZpaHs1Sm448wUh4DZMSDwfH7smKR", "height": 1, "parentTimestamp": "[08-15|00:00:00.000]", "blockTimestamp": "[01-27|10:34:06.000]"}
-INFO [01-27|10:34:06.158] Creating new Subnet-EVM blockchain       genesis="&{Config:{ChainID: 99999 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, FeeConfig: {\"gasLimit\":20000000,\"targetBlockRate\":2,\"minBaseFee\":1000000000,\"targetGas\":100000000,\"baseFeeChangeDenominator\":48,\"minBlockGasCost\":0,\"maxBlockGasCost\":10000000,\"blockGasCostStep\":500000}, AllowFeeRecipients: false, NetworkUpgrades: {\"subnetEVMTimestamp\":0}, PrecompileUpgrade: {\"helloWorldConfig\":{\"blockTimestamp\":0}}, UpgradeConfig: {}, Engine: Dummy Consensus Engine} Nonce:0 Timestamp:0 ExtraData:[0] GasLimit:20000000 Difficulty:+0 Mixhash:0x0000000000000000000000000000000000000000000000000000000000000000 Coinbase:0x0000000000000000000000000000000000000000 Alloc:map[0x0Fa8EA536Be85F32724D57A37758761B86416123:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]} 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC:{Code:[] Storage:map[] Balance:+100000000000000000000000000 Nonce:0 PrivateKey:[]}] AirdropHash:0x0000000000000000000000000000000000000000000000000000000000000000 AirdropAmount:<nil> AirdropData:[] Number:0 GasUsed:0 ParentHash:0x0000000000000000000000000000000000000000000000000000000000000000 BaseFee:<nil>}"
-[streaming output] [01-27|10:34:07.017] INFO chains/manager.go:300 creating chain {"subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL", "chainID": "R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC", "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"}
-[streaming output] INFO [01-27|10:34:07.112] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:261: Initializing Subnet EVM VM Version=v0.4.10@a657d3bb5ee647d4a01b8f35e9134a1f01ba5f38 Config="{AirdropFile: SnowmanAPIEnabled:false AdminAPIEnabled:false AdminAPIDir: EnabledEthAPIs:[eth eth-filter net web3 internal-eth internal-blockchain internal-transaction] ContinuousProfilerDir: ContinuousProfilerFrequency:15m0s ContinuousProfilerMaxFiles:5 RPCGasCap:50000000 RPCTxFeeCap:100 TrieCleanCache:512 TrieCleanJournal: TrieCleanRejournal:0s TrieDirtyCache:256 TrieDirtyCommitTarget:20 SnapshotCache:256 Preimages:false SnapshotAsync:true SnapshotVerify:false Pruning:true AcceptorQueueLimit:64 CommitInterval:4096 AllowMissingTries:false PopulateMissingTries:<nil> PopulateMissingTriesParallelism:1024 MetricsExpensiveEnabled:true LocalTxsEnabled:false TxPoolJournal:transactions.rlp TxPoolRejournal:1h0m0s TxPoolPriceLimit:1 TxPoolPriceBump:10 TxPoolAccountSlots:16 TxPoolGlobalSlots:5120 TxPoolAccountQueue:64 TxPoolGlobalQueue:1024 APIMaxDuration:0s WSCPURefillRate:0s WSCPUMaxStored:0s MaxBlocksPerRequest:0 AllowUnfinalizedQueries:false AllowUnprotectedTxs:false AllowUnprotectedTxHashes:[0xfefb2da535e927b85fe68eb81cb2e4a5827c905f78381a01ef2322aa9b0aee8e] KeystoreDirectory: KeystoreExternalSigner: KeystoreInsecureUnlockAllowed:false RemoteGossipOnlyEnabled:false RegossipFrequency:1m0s RegossipMaxTxs:16 RegossipTxsPerAddress:1 PriorityRegossipFrequency:1s PriorityRegossipMaxTxs:32 PriorityRegossipTxsPerAddress:16 PriorityRegossipAddresses:[] LogLevel:info LogJSONFormat:false FeeRecipient: OfflinePruning:false OfflinePruningBloomFilterSize:512 OfflinePruningDataDirectory: MaxOutboundActiveRequests:16 MaxOutboundActiveCrossChainRequests:64 InspectDatabase:false StateSyncEnabled:false StateSyncSkipResume:false StateSyncServerTrieCache:64 StateSyncIDs: StateSyncCommitInterval:16384 StateSyncMinBlocks:300000 SkipUpgradeCheck:false SkipSubnet-EVMUpgradeCheck:false AcceptedCacheSize:32 TxLookupLimit:0}"
-[streaming output] INFO [01-27|10:34:07.122] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/core/state/snapshot/snapshot.go:773: Rebuilding state snapshot
-[streaming output] [01-27|10:34:07.131] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> bootstrap/bootstrapper.go:122 starting bootstrapper
-[streaming output] [01-27|10:34:07.134] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> snowman/transitive.go:444 consensus starting {"lastAcceptedBlock": "HkbbSAwXRE7CacDWMNdZjURbFCCUwL3TSeXLRVEK8L3SVD9Su"}
-INFO [01-27|10:34:09.064] Created subnet successfully              ChainURI=http://127.0.0.1:9650/ext/bc/R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC/rpc
-INFO [01-27|10:34:09.064] Sleeping to wait for test ping           rpcURI=http://127.0.0.1:9650/ext/bc/R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC/rpc
-INFO [01-27|10:34:09.072] Running hardhat command                  cmd="/usr/local/bin/npx hardhat test ./test/hello_world.ts --network local"
-[streaming output] [01-27|10:34:13.311] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> proposervm/pre_fork_block.go:172 built block {"blkID": "2eD6Ntat4wmR1FfQBDqqS8NKbYTdrVyARSpTKr21Fbjr6DHEnx", "height": 1, "parentTimestamp": "[01-01|00:00:00.000]"}
-[streaming output] INFO [01-27|10:34:13.410] <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> github.com/ava-labs/subnet-evm/internal/ethapi/api.go:1819: Submitted transaction hash=0x22bbad5e1bd0882fa5b2ae3df70923f4803e9dd2454f48af92358f441f94add5 from=0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC nonce=1 recipient=0x52C84043CD9c865236f11d9Fc9F56aa003c1f922 value=0 type=0 gasFeeCap=1,000,000,000 gasTipCap=1,000,000,000 gasPrice=1,000,000,000
-[streaming output] [01-27|10:34:15.425] INFO <R537oVXfcfYtdUCSTHnr1DiBJCEtJEuDfRUehnG1LHBgxusTC Chain> proposervm/pre_fork_block.go:223 built block {"blkID": "2p4JTKpZz98vM4FGtxDM1ch97EJGmK54ozBim5MJkFpWxbMxeH", "innerBlkID": "s6jcHhZCrPiBjxhisZEY9NHPnX1ZZ2WRiy1WP3g64ZuayBiuL", "height": 2, "parentTimestamp": "[01-27|15:34:13.000]", "blockTimestamp": "[01-27|10:34:15.000]"}
-
+...
 Combined output:
 
 Compiling 2 files with 0.8.0
 Compilation finished successfully
 
 
-  ExampleHelloWorld
-Contract deployed to: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
-    ✓ should getHello properly
-    ✓ contract should not be able to set greeting without enabled
-    ✓ should be add contract to enabled list (4071ms)
-    ✓ should setGreeting and getHello (4049ms)
+  ExampleHelloWorldTest
+    ✓ should gets default hello world (4057ms)
+    ✓ should not set greeting before enabled (4067ms)
+    ✓ should set and get greeting with enabled account (4074ms)
 
 
-  2 passing (4s)
+
+  3 passing (33s)
 
 
   < Exit [It] hello world - /Users/avalabs/go/src/github.com/ava-labs/subnet-evm/tests/precompile/solidity/suites.go:64 @ 01/27/23 10:34:17.484 (11.48s)
@@ -1491,14 +1591,26 @@ to the genesis json file:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
+```
+
+For PrecompilEVM:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompilevm
+```
+
+Then run ANR:
+
+```bash
 avalanche-network-runner server \
 --log-level debug \
 --port=":8080" \
 --grpc-gateway-port=":8081"
+
 ```
 
-Since we already compiled AvalancheGo and Subnet-EVM in a previous step, we should have the
-AvalancheGo and Subnet-EVM binaries ready to go.
+Since we already compiled AvalancheGo and Subnet-EVM/PrecompilEVM in a previous step, we should have
+the AvalancheGo and Subnet-EVM binaries ready to go.
 
 We can now set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest AvalancheGo binary
 we have just built. `AVALANCHEGO_PLUGIN_PATH` points to the plugins path which should have the
@@ -1540,6 +1652,15 @@ will supply the standard Ethereum API calls. For example, you can use the RPC UR
 `http://127.0.0.1:9650/ext/bc/2jDWMrF9yKK8gZfJaaaSfACKeMasiNgHmuZip5mWxUfhKaYoEU/rpc`
 
 to connect to the blockchain through MetaMask, HardHat, etc.
+
+### Maintenance
+
+You should always keep your fork up to date with the latest changes in the official Subnet-EVM repo.
+If you have forked the Subnet-EVM repo, there could be conflicts and
+you may need to manually resolve them.
+
+If you used PrecompilEVM, you can update your repo by bumping Subnet-EVM versions in [`go.mod`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/go.mod#L7)
+and [`version.sh`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/scripts/versions.sh#L4)
 
 ### Conclusion
 
