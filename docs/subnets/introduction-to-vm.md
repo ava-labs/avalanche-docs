@@ -9,7 +9,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 - [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
 - [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
-A [Virtual Machine (VM)](/learn/avalanche/subnets-overview.md#virtual-machines) is a blueprint for a
+A [Virtual Machine (VM)](/learn/avalanche/virtual-machines) is a blueprint for a
 blockchain. Blockchains
 are instantiated from a VM, similar to how objects are instantiated from a class definition. VMs can
 define anything you want, but will generally define transactions that are executed and how blocks are
