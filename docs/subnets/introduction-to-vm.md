@@ -30,7 +30,7 @@ of the blockchain.
 ## Blockchain
 
 A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines
-application specific behavior and how blocks are and built and parsed to create the blockchain. VMs
+application specific behavior and how blocks are built and parsed to create the blockchain. VMs
 all run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the
 state of the blockchain. Here's a quick example of how VMs interact with consensus:
 
@@ -39,9 +39,9 @@ state of the blockchain. Here's a quick example of how VMs interact with consens
 3. The consensus engine will request the block from the VM
 4. The consensus engine will verify the returned block using the VM's implementation of `Verify()`
 5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly
-verified block
+   verified block
    - Every virtuous (well-behaved) node on the network will have the same preference for a particular
-   block
+     block
 6. Depending upon the consensus results, the engine will either accept or reject the block
    - What happens when a block is accepted or rejected is specific to the implementation of the VM
 
@@ -73,11 +73,11 @@ Users can interact with a blockchain and its VM through handlers exposed by the 
 VMs expose two types of handlers to serve responses for incoming requests:
 
 - **Blockchain Handlers** - Referred to as handlers, these expose APIs to interact with a blockchain
-instantiated by a VM. The API endpoint will be different for each chain. The endpoint for a handler
-is `/ext/bc/[chainID]`.
+  instantiated by a VM. The API endpoint will be different for each chain. The endpoint for a handler
+  is `/ext/bc/[chainID]`.
 - **VM Handlers** - Referred to as static handlers, these expose APIs to interact with the VM
-directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint
-for a static handler is `/ext/vm/[vmID]`.
+  directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint
+  for a static handler is `/ext/vm/[vmID]`.
 
 For any readers familiar with object-oriented programming, static and non-static handlers on a VM are
 analogous to static and non-static methods on a class. Blockchain handlers can be thought of as methods
@@ -87,7 +87,7 @@ on an object, whereas VM handlers can be thought of as static methods on a class
 
 The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be
 initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the
-VM. It's defined in the 
+VM. It's defined in the
 [`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go) file
 of the `timestampvm` repository.
 
