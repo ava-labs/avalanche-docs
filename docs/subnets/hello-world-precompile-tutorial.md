@@ -1259,7 +1259,7 @@ describe("ExampleHelloWorldTest", function () {
 });
 ```
 
-::: note
+:::note
 
 For PrecompilEVM, you should import `test` with following:
 
@@ -1398,8 +1398,10 @@ Now that we've set up the new ginkgo test, we can run the ginkgo test that we wa
 
 Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
 
-PrecompilEVM repo has same scripts and the build process as Subnet-EVM. Following steps also apply to
-PrecompilEVM.
+PrecompilEVM bundles Subnet-EVM and runs it under the hood in the [`plugins/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go#L24).
+Meaning that PrecompilEVM binary works the same way as Subnet-EVM binary.
+PrecompilEVM repo has also same scripts and the build process as Subnet-EVM.
+Following steps also apply to PrecompilEVM.
 
 You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
 the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
@@ -1454,12 +1456,6 @@ If the RPCChainVM Protocol version printed out does not match the one used in Av
 will not be able to talk to AvalancheGo and the blockchain will not start.
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
-
-::: note
-
-PrecompilEVM actually bundles Subnet-EVM and runs it under the hood in the [`plugins/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go#L24).
-
-:::
 
 #### Running Ginkgo Tests
 
