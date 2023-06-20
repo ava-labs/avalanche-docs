@@ -96,11 +96,21 @@ is 40. We are working on to support a larger batch size.
 
 :::
 
-### `eth_getAssetBalance`
+### Avalanche - Ethereum APIs
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the
-balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched
-with `eth_getBalance`).
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance`, `eth_baseFee`, 
+`eth_maxPriorityFeePerGas`, and `eth_getChainConfig`. 
+
+They use the same endpoint as standard Ethereum APIs:
+
+```sh
+/ext/bc/C/rpc
+```
+
+#### `eth_getAssetBalance`
+
+Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, 
+which must be fetched with `eth_getBalance`).
 
 **Signature:**
 
@@ -141,7 +151,7 @@ curl -X POST --data '{
 }
 ```
 
-### `eth_baseFee`
+#### `eth_baseFee`
 
 Get the base fee for the next block.
 
@@ -174,7 +184,7 @@ curl -X POST --data '{
 }
 ```
 
-### `eth_maxPriorityFeePerGas`
+#### `eth_maxPriorityFeePerGas`
 
 Get the priority fee needed to be included in a block.
 
@@ -210,7 +220,7 @@ curl -X POST --data '{
 For more information on dynamic fees see the [C-Chain section of the transaction fee
 documentation](../../../quickstart/transaction-fees.md#c-chain-fees).
 
-### `eth_getChainConfig`
+#### `eth_getChainConfig`
 
 `eth_getChainConfig` returns chain config. This API is enabled by default with `internal-eth`
 namespace.
