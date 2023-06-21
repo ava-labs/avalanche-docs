@@ -168,7 +168,7 @@ For Avalanche, these don't play any relevant role, so you should just leave them
 
 - `nonce` as `0x0`.
 - `mixHash` as `0x0000000000000000000000000000000000000000000000000000000000000000`.
-- `diffuculty` as `0x0.
+- `difficulty` as `0x0`.
 
 `timestamp`
 
