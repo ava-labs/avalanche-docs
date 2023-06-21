@@ -70,7 +70,7 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
   "nonce": "0x0",
   "timestamp": "0x0",
   "extraData": "0x00",
-  "gasLimit": "e4e1c0",
+  "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
   "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "coinbase": "0x0000000000000000000000000000000000000000",
@@ -98,8 +98,8 @@ times. Changing these may cause issues, so treat them carefully.
 #### Fee Config
 
 `gasLimit`: Sets the max amount of gas consumed per block. Keep in mind that this will limit how 
-much computation can be processed in a single block and therefore will set an upper limit for the 
-maximum amount of gas that a single transaction can use.
+much computation can be processed in a single block and therefore will set an upper limit for 
+the maximum amount of gas that a single transaction can use.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
