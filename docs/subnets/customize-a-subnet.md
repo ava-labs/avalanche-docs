@@ -103,7 +103,7 @@ maximum amount of gas that a single transaction can use.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing faster than this,means that more 
+producing a block every 2 seconds. If the network starts producing faster than this, means that more 
 blocks than expected are being issued to the network, so the base fees will
 increased accordingly.
 For C-chain this value is set to `2`.
