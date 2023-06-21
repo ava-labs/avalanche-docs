@@ -161,7 +161,7 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
 header fields.
 
-#### `nonce`, `mixHash` and `difficulty`
+`nonce`, `mixHash` and `difficulty`
 
 These are remnant parameters from Proof of Work systems.
 For Avalanche, these don't play any relevant role, so you should just leave them as: 
@@ -170,39 +170,39 @@ For Avalanche, these don't play any relevant role, so you should just leave them
 - `mixHash` as `0x0000000000000000000000000000000000000000000000000000000000000000`.
 - `diffuculty` as `0x0.
 
-#### `timestamp`
+`timestamp`
 
 The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
 
-#### `extraData`
+`extraData`
 
 Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
-#### `gasLimit`
+`gasLimit`
 
 The total amount of gas that can be used in a single block. It should be set to
 the same value as in the [fee config](#fee-config). The value `e4e1c0` is
 hexadecimal and is equal to `15,000,000`.
 
-#### `coinbase`
+`coinbase`
 
 Refers to a special transaction included in each block of the blockchain. It is the first 
 transaction within the block and serves as the mechanism through which the block 
 reward is generated. It is usually set
 to `0x0000000000000000000000000000000000000000` for the genesis block.
 
-#### `parentHash`
+`parentHash`
 
 This is the Keccak 256-bit hash of the entire parent block’s header. It is
 usually set to
 `0x0000000000000000000000000000000000000000000000000000000000000000` for the
 genesis block.
 
-#### `gasUsed`
+`gasUsed`
 
 This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-#### `number`
+`number`
 
 This is the number of the genesis block. It is usually set to `0x0`.
 
