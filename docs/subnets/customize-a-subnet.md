@@ -70,7 +70,7 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
   "nonce": "0x0",
   "timestamp": "0x0",
   "extraData": "0x00",
-  "gasLimit": "0x7A1200",
+  "gasLimit": "e4e1c0",
   "difficulty": "0x0",
   "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "coinbase": "0x0000000000000000000000000000000000000000",
@@ -97,11 +97,16 @@ times. Changing these may cause issues, so treat them carefully.
 
 #### Fee Config
 
-`gasLimit`: Sets the max amount of gas consumed per block.
+`gasLimit`: Sets the max amount of gas consumed per block. Keep in mind that this will limit how 
+much computation can be processed in a single block and therefore will set an upper limit for the 
+maximum amount of gas that a single transaction can use.
+For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing faster than this, base fees are
+producing a block every 2 seconds. If the network starts producing faster than this,means that more 
+blocks than expected are being issued to the network, so the base fees will
 increased accordingly.
+For C-chain this value is set to `2`.
 
 `minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets
 the minimum gas price for any transaction included in that block, this effectively sets a minimum gas
@@ -116,8 +121,12 @@ this, base fees are increased accordingly.
 `baseFeeChangeDenominator`: Divides the difference between actual and target utilization to determine
 how much to increase/decrease the base fee. A larger denominator indicates a slower changing, stickier
 base fee, while a lower denominator allows the base fee to adjust more quickly.
+For reference, the C-chain value is set to `36`. This value sets the
+base fee to increase or decrease by a factor of `1/36` of the parent block's
+base fee.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
+This value is set to `0` in C-Chain.
 
 `maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
 
@@ -151,6 +160,53 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 `number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be
 set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
 header fields.
+
+#### `nonce`, `mixHash` and `difficulty`
+
+These are remnant parameters from Proof of Work systems.
+For Avalanche, these don't play any relevant role, so you should just leave them as: 
+
+- `nonce` as `0x0`.
+- `mixHash` as `0x0000000000000000000000000000000000000000000000000000000000000000`.
+- `diffuculty` as `0x0.
+
+#### `timestamp`
+
+The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
+
+#### `extraData`
+
+Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
+
+#### `gasLimit`
+
+The total amount of gas that can be used in a single block. It should be set to
+the same value as in the [fee config](#fee-config). The value `e4e1c0` is
+hexadecimal and is equal to `15,000,000`.
+
+#### `coinbase`
+
+Refers to a special transaction included in each block of the blockchain. It is the first 
+transaction within the block and serves as the mechanism through which the block 
+reward is generated. It is usually set
+to `0x0000000000000000000000000000000000000000` for the genesis block.
+
+#### `parentHash`
+
+This is the Keccak 256-bit hash of the entire parent block’s header. It is
+usually set to
+`0x0000000000000000000000000000000000000000000000000000000000000000` for the
+genesis block.
+
+#### `gasUsed`
+
+This is the amount of gas used by the genesis block. It is usually set to `0x0`.
+
+#### `number`
+
+This is the number of the genesis block. It is usually set to `0x0`.
+
+
 
 ### Genesis Examples
 
