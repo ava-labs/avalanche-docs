@@ -279,7 +279,7 @@ For instance fee manager precompile contract configuration looks like this:
 `AllowList` configuration affects only the related precompile. For instance, the admin address in
 `feeManagerConfig` does not affect admin addresses in other activated precompiles.
 
-The `AllowList` solidity interface is defined as follows, and can be found in [IAlowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
+The `AllowList` solidity interface is defined as follows, and can be found in [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
