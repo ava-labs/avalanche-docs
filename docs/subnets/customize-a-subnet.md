@@ -164,11 +164,21 @@ header fields.
 `nonce`, `mixHash` and `difficulty`
 
 These are remnant parameters from Proof of Work systems.
-For Avalanche, these don't play any relevant role, so you should just leave them as: 
+For Avalanche, these don't play any relevant role, so you should just leave them as their 
+default values:
 
-- `nonce` as `0x0`.
-- `mixHash` as `0x0000000000000000000000000000000000000000000000000000000000000000`.
-- `difficulty` as `0x0`.
+`nonce` 
+
+The result of the mining process iteration is this value. It can be any value in 
+the genesis block. Default value is `0x0`.
+
+`mixHash` 
+The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
+cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
+
+`difficulty`
+
+The difficulty level applied during the nonce discovering process of this block. Default value is `0x0`.
 
 `timestamp`
 
@@ -204,9 +214,8 @@ This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
 `number`
 
-This is the number of the genesis block. It is usually set to `0x0`.
-
-
+This is the number of the genesis block. This required to be `0x0` for the genesis. 
+Otherwise it will error.
 
 ### Genesis Examples
 
