@@ -203,7 +203,7 @@ Download the following prerequisites into your `$GOPATH`:
 
 - Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repository
   - For PrecompilEVM, Clone the [PrecompilEVM](https://github.com/ava-labs/precompilevm) repository.
-    Alternatively you can use it as a template repo from Github.
+    Alternatively you can use it as a template repo from [github](https://github.com/ava-labs/precompile-evm/generate).
 - Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
