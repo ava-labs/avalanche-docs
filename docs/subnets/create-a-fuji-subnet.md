@@ -536,7 +536,8 @@ Endpoint for blockchain "2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh" wit
 
 Well done. You have just created your own Subnet with your own Subnet-EVM running on `Fuji`.
 
-To get your new Subnet information, visit [Avascan Testnet](https://testnet.avascan.info/). The
+To get your new Subnet information, visit the
+[Avalanche Subnet Explorer](https://subnets-test.avax.network/). The
 search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
 into the search box and you should see your shiny new blockchain information.
 
