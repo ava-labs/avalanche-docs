@@ -149,26 +149,26 @@ precompile as an example to learn how to write a stateful precompile. The code i
 outdated.
 You should always use the latest version of Subnet-EVM when you develop your own precompile.
 
-#### PrecompilEVM
+#### Precompile-EVM
 
 Subnet-EVM precompiles can be registered from an external repo.
 This allows developer to build their precompiles without maintaining a fork of Subnet-EVM.
 The precompiles are then registered in the Subnet-EVM at build time.
 
-The difference between using Subnet-EVM and PrecompilEVM is that with Subnet-EVM you can change EVM
+The difference between using Subnet-EVM and Precompile-EVM is that with Subnet-EVM you can change EVM
 internals to interact with your precompiles.
 Such as changing fee structure, adding new opcodes, changing how to build a block, etc.
-With PrecompilEVM you can only add new stateful precompiles that can interact with the StateDB.
-Precompiles built with PrecompilEVM are still very powerful because it can directly access to the
+With Precompile-EVM you can only add new stateful precompiles that can interact with the StateDB.
+Precompiles built with Precompile-EVM are still very powerful because it can directly access to the
 state and modify it.
 
 There is a template repo for how to build a precompile with this way called
-[PrecompilEVM](https://github.com/ava-labs/precompilevm). Both of Subnet-EVM and PrecompilEVM shares
+[Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both of Subnet-EVM and Precompile-EVM shares
 similar directory structure and common codes.
 Most of the tutorial still works same way
-for PrecompilEVM repo. There are some changes mentioned in steps to use PrecompilEVM repo.
-We followed same Hello World tutorial in PrecompilEVM repo.
-You can access the PrecompilEVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompilevm/pull/2)
+for Precompile-EVM repo. There are some changes mentioned in steps to use Precompile-EVM repo.
+We followed same Hello World tutorial in Precompile-EVM repo.
+You can access the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
 
 ### Prerequisites
 
@@ -202,7 +202,7 @@ As a few things will be installed into `$GOPATH/bin`, please make sure that `$GO
 Download the following prerequisites into your `$GOPATH`:
 
 - Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repository
-  - For PrecompilEVM, Clone the [PrecompilEVM](https://github.com/ava-labs/precompilevm) repository.
+  - For Precompile-EVM, Clone the [Precompile-EVM](https://github.com/ava-labs/precompile-evm) repository.
     Alternatively you can use it as a template repo from [github](https://github.com/ava-labs/precompile-evm/generate).
 - Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
@@ -222,10 +222,10 @@ For Subnet-EVM:
 git clone git@github.com:ava-labs/subnet-evm.git
 ```
 
-For PrecompilEVM:
+For Precompile-EVM:
 
 ```shell
-git clone git@github.com:ava-labs/precompilevm.git
+git clone git@github.com:ava-labs/precompile-evm.git
 ```
 
 Then run the following commands:
@@ -242,22 +242,22 @@ You can inspect example pull request for the complete code.
 
 Subnet-EVM: [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
 
-PrecompilEVM: [Hello World Pull Request](https://github.com/ava-labs/precompilevm/pull/2/)
+Precompile-EVM: [Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/2/)
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
 ### Step 0: Generating the Precompile
 
-For the tutorial, we will be working in a new branch in Subnet-EVM/PrecompilEVM repo:
+For the tutorial, we will be working in a new branch in Subnet-EVM/Precompile-EVM repo:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
-or for PrecompilEVM:
+or for Precompile-EVM:
 
 ```bash
-cd $GOPATH/src/github.com/ava-labs/precompilevm
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
 ```
 
 Then checkout to a new branch:
@@ -324,7 +324,7 @@ interface IAllowList {
 
 `IAllowList` is defined in Subnet-EVM under `./contracts/contracts/interfaces/IAllowList.sol`.
 
-For PrecompilEVM these interfaces and other contracts
+For Precompile-EVM these interfaces and other contracts
 can be accessible through `@avalabs/subnet-evm-contracts` package.
 This is already added to the `package.json` file.
 You can install it by running `npm install`.
@@ -334,7 +334,7 @@ In order to import `IAllowList` interface, you can use the following import stat
 import "@avalabs/subnet-evm-contracts/interfaces/IAllowList.sol";
 ```
 
-For an example in PrecompilEVM take a look at the file [here](https://github.com/ava-labs/precompilevm/blob/hello-world-example/contracts/contracts/interfaces/IHelloWorld.sol)
+For an example in Precompile-EVM take a look at the file [here](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/contracts/contracts/interfaces/IHelloWorld.sol)
 
 Now we have an interface that our precompile can implement!
 Let's create an [ABI](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#contract-abi-specification)
@@ -346,8 +346,8 @@ In the same directory, let's run:
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 ```
 
-This won't work with PrecompilEVM as we import contracts from `@avalabs/subnet-evm-contracts` package.
-In order to generate the ABI in PrecompilEVM we need to include the `node_modules` folder to find
+This won't work with Precompile-EVM as we import contracts from `@avalabs/subnet-evm-contracts` package.
+In order to generate the ABI in Precompile-EVM we need to include the `node_modules` folder to find
 imported contracts with following command:
 
 ```shell
@@ -433,7 +433,7 @@ Let's go back to the root of the repository and run the PrecompileGen script hel
 cd ..
 ```
 
-Both of these Subnet-EVM and PrecompilEVM have the same `generate_precompile.sh` script. The one in PrecompilEVM
+Both of these Subnet-EVM and Precompile-EVM have the same `generate_precompile.sh` script. The one in Precompile-EVM
 installs the script from Subnet-EVM and runs it.
 
 ```bash
@@ -489,7 +489,7 @@ Go package we want to generate the precompile into.
 ./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
 ```
 
-For PrecompilEVM we don't need to put this under a deep directory structure. We can just generate the
+For Precompile-EVM we don't need to put this under a deep directory structure. We can just generate the
 precompile template under its own directory via `--out ./helloworld` flag.
 
 ```bash
@@ -560,7 +560,7 @@ The address should be unique to the precompile. There is a registry of precompil
 under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
 A list of addresses is specified in comments under this file.
 Modify the default value to be the next user available stateful precompile address. For forks of
-Subnet-EVM or PrecompilEVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
+Subnet-EVM or Precompile-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to
 Subnet-EVM in the future. You should pick an address that is not already taken,
 and write it down in `registry.go` as a comment for future reference.
@@ -995,7 +995,7 @@ that it can be imported by other packages.
 
 This can be done for Subnet-EVM under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go)
 
-For PrecompilEVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go)
+For Precompile-EVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/plugin/main.go)
 file that orchestrates this precompile registration.
 
 ```go
@@ -1090,7 +1090,7 @@ you can directly run them as follows:
 ### Step 8 (Optional): VM Tests
 
 This is only applicable for direct Subnet-EVM forks as there test files are not directly exported in
-Golang. If you use PrecompilEVM you can skip this step.
+Golang. If you use Precompile-EVM you can skip this step.
 
 VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
 comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, for example
@@ -1195,7 +1195,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 :::note
 
-For PrecompilEVM, you should import `AllowListTest` with following:
+For Precompile-EVM, you should import `AllowListTest` with following:
 
 ```sol
 import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
@@ -1261,7 +1261,7 @@ describe("ExampleHelloWorldTest", function () {
 
 :::note
 
-For PrecompilEVM, you should import `test` with following:
+For Precompile-EVM, you should import `test` with following:
 
 ```ts
 import { test } from "@avalabs/subnet-evm-contracts";
@@ -1394,14 +1394,14 @@ Now that we've set up the new ginkgo test, we can run the ginkgo test that we wa
 
 ### Step 13: Running E2E Tests
 
-#### Building AvalancheGo and Subnet-EVM/PrecompilEVM
+#### Building AvalancheGo and Subnet-EVM/Precompile-EVM
 
 Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
 
-PrecompilEVM bundles Subnet-EVM and runs it under the hood in the [`plugins/main.go`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/plugin/main.go#L24).
-Meaning that PrecompilEVM binary works the same way as Subnet-EVM binary.
-PrecompilEVM repo has also same scripts and the build process as Subnet-EVM.
-Following steps also apply to PrecompilEVM.
+Precompile-EVM bundles Subnet-EVM and runs it under the hood in the [`plugins/main.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/plugin/main.go#L24).
+Meaning that Precompile-EVM binary works the same way as Subnet-EVM binary.
+Precompile-EVM repo has also same scripts and the build process as Subnet-EVM.
+Following steps also apply to Precompile-EVM.
 
 You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
 the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
@@ -1465,10 +1465,10 @@ To run ONLY the HelloWorld precompile test, run the command:
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
-or for PrecompilEVM:
+or for Precompile-EVM:
 
 ```bash
-cd $GOPATH/src/github.com/ava-labs/precompilevm
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
 ```
 
 use `GINKGO_LABEL_FILTER` env var to filter the test:
@@ -1589,10 +1589,10 @@ to the genesis json file:
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
-For PrecompilEVM:
+For Precompile-EVM:
 
 ```bash
-cd $GOPATH/src/github.com/ava-labs/precompilevm
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
 ```
 
 Then run ANR:
@@ -1605,7 +1605,7 @@ avalanche-network-runner server \
 
 ```
 
-Since we already compiled AvalancheGo and Subnet-EVM/PrecompilEVM in a previous step, we should have
+Since we already compiled AvalancheGo and Subnet-EVM/Precompile-EVM in a previous step, we should have
 the AvalancheGo and Subnet-EVM binaries ready to go.
 
 We can now set the following paths. `AVALANCHEGO_EXEC_PATH` points to the latest AvalancheGo binary
@@ -1655,8 +1655,8 @@ You should always keep your fork up to date with the latest changes in the offic
 If you have forked the Subnet-EVM repo, there could be conflicts and
 you may need to manually resolve them.
 
-If you used PrecompilEVM, you can update your repo by bumping Subnet-EVM versions in [`go.mod`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/go.mod#L7)
-and [`version.sh`](https://github.com/ava-labs/precompilevm/blob/hello-world-example/scripts/versions.sh#L4)
+If you used Precompile-EVM, you can update your repo by bumping Subnet-EVM versions in [`go.mod`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/go.mod#L7)
+and [`version.sh`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/scripts/versions.sh#L4)
 
 ### Conclusion
 
