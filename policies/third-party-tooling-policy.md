@@ -2,19 +2,18 @@
 
 ## Introduction
 
-At Ava Labs, we strive to provide developers with comprehensive and streamlined documentation for
-integrating their applications with the Avalanche Blockchain. As part of our commitment to clarity
-and simplicity, we have established a policy regarding the inclusion of third-party service 
-provider documentation in our developer resources. This policy ensures that our documentation 
-remains focused, up-to-date, and reliable, while also allowing us to acknowledge major 
-advancements and prominent adoptions within the web3 technology ecosystem.
+Ava Labs strives to provide developers with comprehensive and streamlined documentation for 
+integrating their applications with the Avalanche Blockchain. To ensure clarity and simplicity, we 
+have established a policy regarding the inclusion of third-party service provider documentation in 
+our developer resources. This policy maintains the focus, accuracy, and reliability of our 
+documentation while acknowledging major advancements and prominent adoptions within the web3 
+technology ecosystem.
 
 ## Policy Statement
 
-Effective immediately, our developer documentation will no longer accept requests to add 
+Effective immediately, the developer documentation will no longer accept requests to add 
 tutorials or extensive explanations on third-party/external technologies or services, unless 
-exceptional circumstances warrant their inclusion. This decision has been made to address several 
-key concerns:
+exceptional circumstances warrant their inclusion. This decision address several key concerns:
 
 ### 1. Clutter and Complexity
 
@@ -39,20 +38,19 @@ A coherent and consistent developer experience is crucial for fostering adoption
 confusion. Integrating numerous third-party technologies into our core documentation can lead to 
 inconsistencies in style, tone, and format. By maintaining a clear separation between Avalanche 
 integration materials and third-party technologies, we can provide developers with a cohesive 
-experience that is tailored specifically to Avalanche integration.
+experience tailored specifically to Avalanche integration.
 
 ## Exceptions
 
 While our general policy excludes third-party documentation from our core developer resources, we 
 recognize the importance of acknowledging major advancements and prominent adoptions within the 
 web3 technology ecosystem. In exceptional situations, when a third-party technology or service 
-demonstrates a majorly prominent adoption and is widely recognized as a de facto standard within 
+demonstrates a majorly prominent adoption and is widely recognized as a standard within 
 the industry, we may provide a dedicated page with a brief description or a link to the official 
 documentation or relevant resources for that technology.
 
-These exceptions will be evaluated on a case-by-case basis by our documentation team, taking into 
-consideration factors such as market share, community adoption, and overall impact on the 
-Avalanche ecosystem.
+Our documentation team evaluates these exceptions on a case-by-case basis, taking into consideration
+factors such as market share, community adoption, and overall impact on the Avalanche ecosystem.
 
 ## Conclusion
 
