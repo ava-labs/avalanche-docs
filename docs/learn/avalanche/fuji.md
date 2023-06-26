@@ -27,7 +27,7 @@ To receive testnet tokens, users can request funds from the
 ## Additional Considerations
 
 - Fuji Testnet has its own dedicated block explorer on [Snowtrace](https://testnet.snowtrace.io/). 
-- The Public API endpoint for Fuji is not the same as Mainnet. More info is avaliable in the
+- The Public API endpoint for Fuji is not the same as Mainnet. More info is available in the
 [Public API Server](/apis/avalanchego/public-api-server) 
 documentation.
 - While Fuji Network is a valuable resource, developers also
