@@ -196,10 +196,10 @@ hexadecimal and is equal to `15,000,000`.
 
 `coinbase`
 
-Refers to a special transaction included in each block of the blockchain. It is the first 
-transaction within the block and serves as the mechanism through which the block 
-reward is generated. It is usually set
-to `0x0000000000000000000000000000000000000000` for the genesis block.
+Refers to the address of the recipient of the block reward. This is included in the first 
+transaction of each block of the blockchain. It is usually set
+to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
+Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
 `parentHash`
 
