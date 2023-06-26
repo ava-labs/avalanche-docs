@@ -190,7 +190,7 @@ bootstrapping, it prints logs like this:
 ```text
 [09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
 [09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
-[09-09|17:01:51.628] INFO <X Chain> avalanche/transitive.go:334 consensus starting {"lenFrontier": 1}
+[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consensus starting {"lenFrontier": 1}
 ```
 
 To check if a given chain is done bootstrapping, in another terminal window call
