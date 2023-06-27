@@ -161,58 +161,40 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
 header fields.
 
-`nonce`, `mixHash` and `difficulty`
-
-These are remnant parameters from Proof of Work systems.
+`nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
 For Avalanche, these don't play any relevant role, so you should just leave them as their 
 default values:
 
-`nonce` 
-
-The result of the mining process iteration is this value. It can be any value in 
+`nonce`: The result of the mining process iteration is this value. It can be any value in 
 the genesis block. Default value is `0x0`.
 
-`mixHash` 
-The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
+`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
 cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-`difficulty`
-
-The difficulty level applied during the nonce discovering process of this block. Default value is `0x0`.
+`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
+Default value is `0x0`.
 
 `timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
 
-`extraData`
+`extraData`: Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
-Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
-
-`gasLimit`
-
-The total amount of gas that can be used in a single block. It should be set to
+`gasLimit`: The total amount of gas that can be used in a single block. It should be set to
 the same value as in the [fee config](#fee-config). The value `e4e1c0` is
 hexadecimal and is equal to `15,000,000`.
 
-`coinbase`
-
-Refers to the address of the block producers. This also means it represents the recipient of the 
-block reward. It is usually set
+`coinbase`: Refers to the address of the block producers. This also means it represents the 
+recipient of the block reward. It is usually set
 to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
 Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
-`parentHash`
-
-This is the Keccak 256-bit hash of the entire parent block’s header. It is
+`parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
 usually set to
 `0x0000000000000000000000000000000000000000000000000000000000000000` for the
 genesis block.
 
-`gasUsed`
+`gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-This is the amount of gas used by the genesis block. It is usually set to `0x0`.
-
-`number`
-
-This is the number of the genesis block. This required to be `0x0` for the genesis. 
+`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
 Otherwise it will error.
 
 ### Genesis Examples
