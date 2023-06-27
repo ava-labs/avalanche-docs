@@ -180,9 +180,7 @@ cryptographically mined, thus, from this aspect, is valid. Default value is `0x0
 
 The difficulty level applied during the nonce discovering process of this block. Default value is `0x0`.
 
-`timestamp`
-
-The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
+`timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
 
 `extraData`
 
