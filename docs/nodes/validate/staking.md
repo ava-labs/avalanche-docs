@@ -216,7 +216,7 @@ reward, it is sent to the address you specified when you delegated tokens.
 
 ### Is There a Tool to Check the Health of a Validator?
 
-Yes, just enter your node's ID in the Avalanche Stats 
+Yes, just enter your node's ID in the Avalanche Stats
 [Validator Health Dashboard](https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-Jp4dLMTHd6huttS1jZhqNnBN9ZMNmTmWC).
 
 ### How Is It Determined Whether a Validator Receives a Staking Reward?
