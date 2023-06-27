@@ -103,9 +103,9 @@ maximum gas usage allowed for a single transaction.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing faster than this, means that 
-more blocks than expected are being issued to the network, so the base fees will
-increased accordingly.
+producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
+indicates that more blocks than anticipated are being issued to the network, resulting in an 
+increase in base fees.
 For C-chain this value is set to `2`.
 
 `minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets
