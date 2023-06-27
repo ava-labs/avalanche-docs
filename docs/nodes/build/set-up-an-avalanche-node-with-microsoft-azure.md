@@ -6,7 +6,7 @@ description: Running a validator and staking with Avalanche provides extremely c
 # Run an Avalanche Node with Microsoft Azure
 
 :::caution
-This document was written by a community member, some information may be out of dated.
+This document was written by a community member, some information may be out of date.
 :::
 
 Running a validator and staking with Avalanche provides extremely competitive
