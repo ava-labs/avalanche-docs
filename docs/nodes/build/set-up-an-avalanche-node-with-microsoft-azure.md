@@ -39,11 +39,6 @@ with them to help towards running costs. You can use a calculator
 [here](https://vscout.io/) to see how much rewards you would earn when running a
 node, compared to delegating.
 
-I encourage everyone to run their own validators where possible, but for those
-that don’t meet the minimum staking requirements and want to delegate I am
-currently running a node which you can find
-[here](https://avascan.info/staking/validator/NodeID-MGrikMRTmooL1j7uawPHjaMS1cXkbewdb).
-
 In this article we will step through the process of configuring a node on
 Microsoft Azure. This tutorial assumes no prior experience with Microsoft Azure
 and will go through each step with as few assumptions possible.
