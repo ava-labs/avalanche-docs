@@ -97,9 +97,9 @@ times. Changing these may cause issues, so treat them carefully.
 
 #### Fee Config
 
-`gasLimit`: Sets the max amount of gas consumed per block. Keep in mind that this will limit how 
-much computation can be processed in a single block and therefore will set an upper limit for 
-the maximum amount of gas that a single transaction can use.
+`gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
+amount of computation that can be done in a single block, which in turn sets a limit on the 
+maximum gas usage allowed for a single transaction.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
