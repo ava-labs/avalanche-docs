@@ -4,9 +4,8 @@ sidebar_position: 8
 
 # Node Bootstrap
 
-Node Bootstrap is the process of how a node *securely* downloads linear chain
-blocks or DAG (Directed Acyclic Graphs) chain vertices to recreate the latest
-state of the chain locally.
+Node Bootstrap is the process where a node *securely* downloads linear chain
+blocks to recreate the latest state of the chain locally.
 
 Bootstrap must guarantee that the local state of a node is in sync with the
 state of other valid nodes. Once bootstrap is completed, a node has the latest
@@ -22,18 +21,6 @@ This document covers the high-level technical details of how bootstrapping
 works. This document glosses over some specifics, but the
 [AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source
 and is available for curious-minded readers to learn more.
-
-## A Note On Linear Chains and DAGs
-
-Avalanche supports both linear chains made up of blocks and DAGs chains made up
-of vertices.
-
-While consensus logic over linear chains and DAGs chains are different,
-bootstrap logic between the two are similar enough such that they can be
-described without specifying the nature of the blockchain being bootstrapped.
-
-Blocks and vertices at their core are simply ordered lists of transactions and
-can be thought of as the same abstraction - containers.
 
 ## Validators and Where to Find Them
 

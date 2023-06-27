@@ -136,6 +136,10 @@ and (max-width: 525px) {
   }
 }
 
+a.navbar__item.navbar__link.header-discord-link, a.navbar__item.navbar__link.header-twitter-link, a.navbar__item.navbar__link.header-github-link {
+  padding-left: 0;
+}
+
 /* twitter */
 .header-twitter-link:hover {
   opacity: 0.6;
