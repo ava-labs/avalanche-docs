@@ -196,7 +196,8 @@ hexadecimal and is equal to `15,000,000`.
 
 `coinbase`
 
-Refers to the address of the block producers. This also means it represents the recipient of the block reward. It is usually set
+Refers to the address of the block producers. This also means it represents the recipient of the 
+block reward. It is usually set
 to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
 Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
