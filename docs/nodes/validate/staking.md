@@ -85,6 +85,62 @@ On Fuji Testnet, all staking parameters are the same as those on Mainnet except 
 - The minimum amount of time one can stake funds for validation is 24 hours
 - The minimum amount of time one can stake funds for delegation is 24 hours
 
+## Reward Formula
+
+Consider a validator which stakes a $Stake$ amount of Avax for $StakingPeriod$ seconds.
+
+Assume that at the start of the staking period there is a $Supply$ amount of Avax in the Primary Network.
+The maximum amount of Avax is $MaximumSupply$ .
+
+Then at the end of its staking period, a responsive validator
+receives a reward calculated as follows:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
+$$
+where
+$$
+EffectiveConsumptionRate = 
+$$
+$$
+\frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+Note that $StakingPeriod$ is the staker's entire staking period, not just the
+staker's uptime, that is the aggregated time during which the staker has been
+responsive. The uptime comes into play only to decide whether a staker should be
+rewarded; to calculate the actual reward, only the staking period duration is
+taken into account.
+
+$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and
+$MaxConsumptionRate$.
+$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
+
+A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
+The reward is:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
 ## Validators
 
 **Validators** secure Avalanche, create new blocks/vertices, and process
