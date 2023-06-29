@@ -176,18 +176,11 @@ Set the `$GOPATH` environment variable properly for Go to look for Go Workspaces
 [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
 :::info
-
-An easy way to set GOPATH is using the commands:
-
-```bash
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-```
-
+An easy way to set GOPATH is using the command: `export GOPATH=$HOME/go`
 :::
 
 As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your
-`$PATH`, otherwise, you may get an error running the commands below.
+`$PATH`, otherwise, you may get an error running the commands below. To do that, run the command: `export PATH=$PATH:$GOROOT/bin:$GOPATH/bin`
 
 Download the following prerequisites into your `$GOPATH`:
 
@@ -555,13 +548,13 @@ precompile, the address of the precompile, and a configurator. This file is loca
 
 This file defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
-Registration is done in `init()` function of the module file. `MakeConfig()` is used to create a
+Registration is done in the `init()` function of the module file. `MakeConfig()` is used to create a
 new instance for the precompile config. This will be used in custom Unmarshal/Marshal logic.
 You don't need to override these functions.
 
 ##### Configure()
 
-Module file contains a `configurator` which implements `contract.Configurator` interface. This interface
+Module file contains a `configurator` which implements the `contract.Configurator` interface. This interface
 includes a `Configure()` function used to configure the precompile and set the initial
 state of the precompile. This function is called when the precompile is enabled. This is typically used
 to read from a given config in upgrade/genesis JSON and sets the initial state of the
@@ -709,7 +702,7 @@ These will be helpful to use AllowList precompile helper in our functions.
 
 ##### Packers and Unpackers
 
-There is also auto-generated Packers and Unpackers for the ABI. These will be used in `sayHello` and
+There are also auto-generated Packers and Unpackers for the ABI. These will be used in `sayHello` and
 `setGreeting` functions to comfort the ABI.
 These functions are auto-generated
 and will be used in necessary places accordingly.
@@ -966,10 +959,10 @@ check the generated code [here](https://github.com/ava-labs/subnet-evm/blob/hell
 ### Step 7: Add Contract Tests
 
 The tool also generates contract tests to make sure our precompile is working correctly. Generated
-tests include cases to test allow list capabilities, gas costs, calling function in read only mode.
+tests include cases to test allow list capabilities, gas costs, and calling functions in read-only mode.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
 tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
-We will also add more test to cover functionalities of `sayHello()` and `setGreeting()`.
+We will also add more tests to cover functionalities of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
 
@@ -1251,7 +1244,7 @@ At the bottom of the file you will see the following code commented out:
 ```
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+The string passed into `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 
@@ -1268,7 +1261,7 @@ directly if you prefer):
 ```
 
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
-`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to ginkgo in
+`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to Ginkgo in
 `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
 
 ### Step 13: Running E2E Tests
@@ -1495,7 +1488,7 @@ to double-check your work as well.
 
 ### Running a Local Network
 
-We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
+We made it! Everything works in our Ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
