@@ -16,7 +16,6 @@ Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running
 - The Contract Chain [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
 - The Exchange Chain [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
 
-
 ![image](/img/subnet-validators.png)
 
 (Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
@@ -25,6 +24,10 @@ Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running
 Every validator in a Subnet
 **must** also validate the Primary Network.
 :::
+
+Node operators that validate a Subnet with multiple chains do not need to run multiple machines for 
+validation. For example, the Primary Network is a Subnet with three coexisting chains, all of which 
+can be validated by a single node, or a single machine.
 
 ## Advantages
 
@@ -62,7 +65,7 @@ mentioned above, a Subnet may require validators to meet a set of requirements._
 Some examples of requirements the creators of a Subnet may choose include:
 
 - Validators must be located in a given country.
-- Validators must pass a KYC/AML checks.
+- Validators must pass KYC/AML checks.
 - Validators must hold a certain license.
 
 ### Control The Privacy of On-Chain Data
