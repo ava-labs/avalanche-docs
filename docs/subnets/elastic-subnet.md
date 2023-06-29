@@ -1,4 +1,4 @@
-# How to Create an Elastic Subnet 
+# How to Transform a Subnet into Elastic Subnet
 
 Elastic Subnets are permissionless Subnets. More information can be found [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters).
 
@@ -11,7 +11,7 @@ elastic (or permissionless) Subnet.
 - You have deployed a permissioned Subnet on [local](create-a-local-subnet), on 
 [Fuji](create-a-fuji-subnet) or on [Mainnet](create-a-mainnet-subnet)
 
-## Transforming a Subnet into Elastic Subnet
+## Getting Started
 
 In the following commands, make sure to substitute the name of your Subnet configuration for
 `<subnetName>`.
