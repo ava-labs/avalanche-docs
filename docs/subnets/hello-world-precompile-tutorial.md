@@ -180,7 +180,8 @@ An easy way to set GOPATH is using the command: `export GOPATH=$HOME/go`
 :::
 
 As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your
-`$PATH`, otherwise, you may get an error running the commands below. To do that, run the command: `export PATH=$PATH:$GOROOT/bin:$GOPATH/bin`
+`$PATH`, otherwise, you may get an error running the commands below.
+To do that, run the command: `export PATH=$PATH:$GOROOT/bin:$GOPATH/bin`
 
 Download the following prerequisites into your `$GOPATH`:
 
@@ -1478,7 +1479,8 @@ Looks like the tests are passing!
 :::note
 
 If your tests failed, please retrace your steps. Most likely the error is that the precompile was
-not enabled and some code is missing. Try running `npm install` in the contracts directory to ensure that hardhat and other packages are installed.
+not enabled and some code is missing.
+Try running `npm install` in the contracts directory to ensure that hardhat and other packages are installed.
 
 You may also use the
 [official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2)
