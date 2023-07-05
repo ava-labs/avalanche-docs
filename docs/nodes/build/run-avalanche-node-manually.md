@@ -108,19 +108,17 @@ Download the AvalancheGo repository into your `$GOPATH`:
 cd $GOPATH
 mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
-git clone git@github.com:ava-labs/avalanchego.git
+git clone https://github.com/ava-labs/avalanchego.git
 cd avalanchego
 ```
 
 :::info
-The repository cloning method used is SSH, which requires additional steps. 
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanchego.git`
+
 You can find more about SSH and how to use it 
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-Without a public SSH key, the cloning process 
-will not go through. 
-As an alternative, you can use the HTTPS method:
-
-`git clone https://github.com/ava-labs/avalanchego.git`
 :::
 
 Note: This checkouts to the master branch. For the latest stable version, checkout the latest tag.
@@ -192,7 +190,7 @@ bootstrapping, it prints logs like this:
 ```text
 [09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
 [09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
-[09-09|17:01:51.628] INFO <X Chain> avalanche/transitive.go:334 consensus starting {"lenFrontier": 1}
+[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consensus starting {"lenFrontier": 1}
 ```
 
 To check if a given chain is done bootstrapping, in another terminal window call

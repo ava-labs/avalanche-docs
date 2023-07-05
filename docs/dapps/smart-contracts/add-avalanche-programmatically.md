@@ -20,10 +20,19 @@ an example of how to connect via @web3-react/core to the Core extension
 specifically.
 
 ```sh
-git clone git@github.com:ava-labs/avalanche-dapp-sdks.git
+git clone https://github.com/ava-labs/avalanche-dapp-sdks.git
 cd avalanche-dapp-sdks
 yarn bootstrap
 ```
+
+:::info
+The repository cloning method used is HTTPS, but SSH can be used too:
+
+`git clone git@github.com:ava-labs/avalanche-dapp-sdks.git`
+
+You can find more about SSH and how to use it 
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+:::
 
 Then check out [this sample project under `packages/avalanche-connector-example`](https://github.com/ava-labs/avalanche-dapp-sdks/tree/alpha-release/packages/avalanche-connector-example#readme)
 

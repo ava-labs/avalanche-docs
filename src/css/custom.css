@@ -136,6 +136,10 @@ and (max-width: 525px) {
   }
 }
 
+a.navbar__item.navbar__link.header-discord-link, a.navbar__item.navbar__link.header-twitter-link, a.navbar__item.navbar__link.header-github-link {
+  padding-left: 0;
+}
+
 /* twitter */
 .header-twitter-link:hover {
   opacity: 0.6;
@@ -193,4 +197,25 @@ html[data-theme='dark'] .header-github-link:before {
 
 html[data-theme='dark'] .header-discord-link:before {
   filter: invert(100%);
+}
+
+hr {
+  height: 1px;
+  border-radius: 0;
+  margin: 3.5em 0;
+}
+
+li hr {
+  height: 4px;
+  margin: 0.2em auto;
+  width: 90%;
+  border-width: 0;
+}
+
+[data-theme='light'] li hr {
+  background-color: #f8f8f8;
+}
+
+[data-theme='dark'] li hr {
+  background-color: #333;
 }

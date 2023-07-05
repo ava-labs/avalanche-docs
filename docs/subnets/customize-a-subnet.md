@@ -70,7 +70,7 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
   "nonce": "0x0",
   "timestamp": "0x0",
   "extraData": "0x00",
-  "gasLimit": "0x7A1200",
+  "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
   "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "coinbase": "0x0000000000000000000000000000000000000000",
@@ -97,11 +97,16 @@ times. Changing these may cause issues, so treat them carefully.
 
 #### Fee Config
 
-`gasLimit`: Sets the max amount of gas consumed per block.
+`gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
+amount of computation that can be done in a single block, which in turn sets a limit on the 
+maximum gas usage allowed for a single transaction.
+For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing faster than this, base fees are
-increased accordingly.
+producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
+indicates that more blocks than anticipated are being issued to the network, resulting in an 
+increase in base fees.
+For C-chain this value is set to `2`.
 
 `minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets
 the minimum gas price for any transaction included in that block, this effectively sets a minimum gas
@@ -116,8 +121,12 @@ this, base fees are increased accordingly.
 `baseFeeChangeDenominator`: Divides the difference between actual and target utilization to determine
 how much to increase/decrease the base fee. A larger denominator indicates a slower changing, stickier
 base fee, while a lower denominator allows the base fee to adjust more quickly.
+For reference, the C-chain value is set to `36`. This value sets the
+base fee to increase or decrease by a factor of `1/36` of the parent block's
+base fee.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
+This value is set to `0` in C-Chain.
 
 `maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
 
@@ -151,6 +160,42 @@ The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash
 `number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be
 set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
 header fields.
+
+`nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
+For Avalanche, these don't play any relevant role, so you should just leave them as their 
+default values:
+
+`nonce`: The result of the mining process iteration is this value. It can be any value in 
+the genesis block. Default value is `0x0`.
+
+`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
+cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
+
+`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
+Default value is `0x0`.
+
+`timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
+
+`extraData`: Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
+
+`gasLimit`: The total amount of gas that can be used in a single block. It should be set to
+the same value as in the [fee config](#fee-config). The value `e4e1c0` is
+hexadecimal and is equal to `15,000,000`.
+
+`coinbase`: Refers to the address of the block producers. This also means it represents the 
+recipient of the block reward. It is usually set
+to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
+Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
+
+`parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
+usually set to
+`0x0000000000000000000000000000000000000000000000000000000000000000` for the
+genesis block.
+
+`gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
+
+`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
+Otherwise it will error.
 
 ### Genesis Examples
 
@@ -279,7 +324,7 @@ For instance fee manager precompile contract configuration looks like this:
 `AllowList` configuration affects only the related precompile. For instance, the admin address in
 `feeManagerConfig` does not affect admin addresses in other activated precompiles.
 
-The `AllowList` solidity interface is defined as follows, and can be found in [IAlowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
+The `AllowList` solidity interface is defined as follows, and can be found in [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
