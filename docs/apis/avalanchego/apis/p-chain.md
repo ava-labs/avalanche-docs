@@ -1673,6 +1673,13 @@ curl -X POST --data '{
   "id": 1
 }
 ```
+:::note
+
+The AssetID for AVAX differs depending on the network you are on. 
+Mainnet (FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z)
+Testnet (U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK) 
+
+:::
 
 ### `platform.getSubnets`
 
