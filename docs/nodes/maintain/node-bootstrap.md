@@ -202,13 +202,21 @@ Instead of executing each block, state sync uses cryptographic techniques to
 download and verify just the state associated with the current frontier. State
 synced nodes can't serve every C-chain block ever historically accepted, but
 they can safely retrieve the full C-chain state needed to validate in a much
-shorter time.
+shorter time. State sync will fetch the previous 256 blocks prior to support the previous block 
+hash operation code.
 
 State sync is currently only available for the C-chain. The P-chain and X-chain
 currently bootstrap by downloading all blocks. Note that irrespective of the
 bootstrap method used (including state sync), each chain is still blocked on all
 other chains in its Subnet completing their bootstrap before continuing into
 normal operation.
+
+:::note
+
+There are no configs to state sync an archival node. If you need all the historical state then
+ you must not use state sync and setup the config of the node for an archival node.
+
+:::
 
 ## Conclusions and FAQ
 
