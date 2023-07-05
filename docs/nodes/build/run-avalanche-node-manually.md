@@ -38,8 +38,14 @@ change.
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1 TiB
+- Storage: 1 TiB SSD
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
+
+:::caution
+Please do not try running a node on an HDD, as it will not work. 
+HDD has poor and random read/write latencies, therefore bootstrapping
+is all random too.
+:::
 
 ### Networking
 
