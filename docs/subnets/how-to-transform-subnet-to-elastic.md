@@ -1,4 +1,4 @@
-# How to Transform a Subnet into Elastic Subnet
+# How to Transform a Subnet into an Elastic Subnet
 
 Elastic Subnets are permissionless Subnets. More information can be found [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters).
 

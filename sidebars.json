@@ -111,6 +111,7 @@
       "label": "How to Use Avalanche-CLI",
       "collapsed": true,
       "items": [
+        "subnets/reference-cli-commands",
         "subnets/create-evm-subnet-config",
         "subnets/create-a-local-subnet",
         "subnets/multisig-deploy",
@@ -138,12 +139,6 @@
         "subnets/create-a-simple-vm-from-scratch",
         "subnets/cross-subnet-communication"
       ]
-    },
-    {
-      "type": "category",
-      "label": "Elastic Subnets",
-      "collapsed": true,
-      "items": ["subnets/elastic-subnet"]
     },
     {
       "type": "category",
@@ -176,11 +171,11 @@
     },
     {
       "type": "category",
-      "label": "Technical Reference",
+      "label": "Elastic Subnets",
       "collapsed": true,
       "items": [
-        "subnets/reference-cli-commands",
-        "subnets/reference-elastic-subnets-parameters"
+        "subnets/reference-elastic-subnets-parameters",
+        "subnets/how-to-transform-subnet-to-elastic"
       ]
     },
     {
