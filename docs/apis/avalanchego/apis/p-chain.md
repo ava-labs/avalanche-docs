@@ -1673,6 +1673,7 @@ curl -X POST --data '{
   "id": 1
 }
 ```
+
 :::note
 
 The AssetID for AVAX differs depending on the network you are on. 
