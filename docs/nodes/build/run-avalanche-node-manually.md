@@ -42,9 +42,7 @@ change.
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
 
 :::caution
-Please do not try running a node on an HDD, as it will not work. 
-HDD has poor and random read/write latencies, therefore bootstrapping
-is all random too.
+Please do not try running a node on an HDD, as you may get poor and random read/write latencies, therefore reducing performance and reliability.
 :::
 
 ### Networking
