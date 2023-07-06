@@ -38,8 +38,15 @@ change.
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1 TiB
+- Storage: 1 TiB SSD
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
+
+:::caution
+
+Please do not try running a node on an HDD, as you may get poor and random 
+read/write latencies, therefore reducing performance and reliability.
+
+:::
 
 ### Networking
 
@@ -155,7 +162,7 @@ For Linux on PCs or cloud providers: Download: `avalanchego-linux-amd64-<VERSION
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
+For Linux on Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 

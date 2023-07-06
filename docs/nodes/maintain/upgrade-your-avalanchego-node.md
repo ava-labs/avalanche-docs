@@ -132,7 +132,7 @@ Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
+For Linux on Arm64-based computers:  
 Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.

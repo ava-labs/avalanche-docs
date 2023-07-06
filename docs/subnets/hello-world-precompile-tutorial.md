@@ -86,9 +86,9 @@ Precompiles are a shortcut to execute a function implemented by the EVM itself, 
 contract. A precompile is associated with a fixed address defined in the EVM. There is no byte code
 associated with that address.
 
-When a precompile is called, the EVM checks if the input address is a precompile address and if so it
-executes the precompile. Otherwise it loads the smart contract at the input address and runs it on the
-the EVM interpreter with the specified input data.
+When a precompile is called, the EVM checks if the input address is a precompile address, and if so it
+executes the precompile. Otherwise, it loads the smart contract at the input address and runs it on the
+EVM interpreter with the specified input data.
 
 ### Stateful Precompiled Contracts
 
@@ -190,14 +190,19 @@ Here are some recommended resources to learn the ins and outs of the EVM:
 
 Please install the following before getting started.
 
-First install the latest version of Go. Follow the instructions [here](https://go.dev/doc/install).
+First, install the latest version of Go. Follow the instructions [here](https://go.dev/doc/install).
 You can verify by running `go version`.
 
-Set `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read
+Set the `$GOPATH` environment variable properly for Go to look for Go Workspaces. Please read
 [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
+:::info
+An easy way to set GOPATH is using the command: `export GOPATH=$HOME/go`
+:::
+
 As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your
-`$PATH`, otherwise, you may get error running the commands below.
+`$PATH`, otherwise, you may get an error running the commands below.
+To do that, run the command: `export PATH=$PATH:$GOROOT/bin:$GOPATH/bin`
 
 Download the following prerequisites into your `$GOPATH`:
 
@@ -272,7 +277,7 @@ We will start off in this directory `./contracts/`:
 cd contracts/
 ```
 
-First we must create the Solidity interface that we want our precompile to implement. This will be
+First, we must create the Solidity interface that we want our precompile to implement. This will be
 the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These
 two functions will demonstrate the getting and setting respectively of a value stored in the
 precompile's state space.
@@ -530,7 +535,7 @@ Modifying code outside of these areas should be done with caution and with a dee
 14- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
 ```
 
-Let's follow these step and create our HelloWorld precompile!
+Let's follow these steps and create our HelloWorld precompile!
 
 <!-- markdownlint-enable MD013 -->
 
@@ -540,8 +545,8 @@ Let's jump to `helloworld/module.go` file first. This file contains the module d
 precompile. You can see the `ConfigKey` is set to some default value of `helloWorldConfig`.
 This key should be unique to the precompile.
 This config key determines which JSON key to use when reading the precompile's config from the
-JSON upgrade/genesis file. In this case, the config key is `helloWorldConfig` and JSON config
-should look like:
+JSON upgrade/genesis file. In this case, the config key is `helloWorldConfig` and the JSON config
+should look like this:
 
 ```json
 {
@@ -558,7 +563,7 @@ You can see the `ContractAddress` is set to some default value.
 This should be changed to a suitable address for your precompile.
 The address should be unique to the precompile. There is a registry of precompile addresses
 under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
-A list of addresses is specified in comments under this file.
+A list of addresses is specified in the comments under this file.
 Modify the default value to be the next user available stateful precompile address. For forks of
 Subnet-EVM or Precompile-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to
@@ -589,7 +594,7 @@ and write it down in `registry.go` as a comment for future reference.
 ```
 
 Don't forget to update the actual variable `ContractAddress` in [`module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go#L26)
-to the address you chose. It should look like:
+to the address you chose. It should look like this:
 
 ```go
 // ContractAddress is the defined address of the precompile contract.
@@ -612,19 +617,19 @@ precompile package that you need to modify. You should start with the reference 
 
 #### Step 3.1: Module File
 
-Module file contains fundamental information about the precompile. This includes the key for the
-precompile, the address of the precompile and a configurator. This file is located at
-[`/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
+The module file contains fundamental information about the precompile. This includes the key for the
+precompile, the address of the precompile, and a configurator. This file is located at
+[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
 
 This file defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
-Registration is done in `init()` function of the module file. `MakeConfig()` is used to create a
+Registration is done in the `init()` function of the module file. `MakeConfig()` is used to create a
 new instance for the precompile config. This will be used in custom Unmarshal/Marshal logic.
 You don't need to override these functions.
 
 ##### Configure()
 
-Module file contains a `configurator` which implements `contract.Configurator` interface. This interface
+Module file contains a `configurator` which implements the `contract.Configurator` interface. This interface
 includes a `Configure()` function used to configure the precompile and set the initial
 state of the precompile. This function is called when the precompile is enabled. This is typically used
 to read from a given config in upgrade/genesis JSON and sets the initial state of the
@@ -680,7 +685,7 @@ func (c *Config) Verify() error {
 
 ##### Equal()
 
-Next we see is `Equal()`. This function determines if two precompile configs are equal. This is used
+Next, we see is `Equal()`. This function determines if two precompile configs are equal. This is used
 to determine if the precompile needs to be upgraded. There is some default code that is generated for
 checking `Upgrade` and `AllowListConfig` equality.
 
@@ -714,7 +719,7 @@ This function configures the `state` with the
 initial configuration at`blockTimestamp` when the precompile is enabled.
 In the HelloWorld example, we want to set up a default
 key-value mapping in the state where the key is `storageKey` and the value is `Hello World!`. The
-`StateDB` allows us to store a key-value mapping of 32 byte hashes. The below code snippet can be
+`StateDB` allows us to store a key-value mapping of 32-byte hashes. The below code snippet can be
 copied and pasted to overwrite the default `Configure()` code.
 
 ```go
@@ -746,8 +751,8 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 
 #### Step 3.4: Contract File
 
-Contract file contains the functions of the precompile contract that will be called by the EVM. The
-file is located at [`/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
+The contract file contains the functions of the precompile contract that will be called by the EVM. The
+file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
 Since we use `IAllowList` interface there will be auto-generated code for `AllowList`
 functions like below:
 
@@ -772,7 +777,7 @@ These will be helpful to use AllowList precompile helper in our functions.
 
 ##### Packers and Unpackers
 
-There is also auto generated Packers and Unpackers for the ABI. These will be used in `sayHello` and
+There are also auto-generated Packers and Unpackers for the ABI. These will be used in `sayHello` and
 `setGreeting` functions to comfort the ABI.
 These functions are auto-generated
 and will be used in necessary places accordingly.
@@ -794,7 +799,7 @@ func UnpackSetGreetingInput(input []byte) (string, error) {
 ```
 
 The ABI is a binary format and the input to the precompile contract function is a
-byte array. The `Unpacker` function converts this input to a more easy to use format so that we can
+byte array. The `Unpacker` function converts this input to a more easy-to-use format so that we can
 use it in our function.
 
 Similarly, there is a `Packer` function for each output of a precompile contract function as follows:
@@ -812,14 +817,14 @@ returned to the EVM as a result.
 
 ##### Modify sayHello()
 
-Next place to modify is in our `sayHello()` function. In a previous step we created the `IHelloWorld.sol`
+The next place to modify is in our `sayHello()` function. In a previous step, we created the `IHelloWorld.sol`
 interface with two functions `sayHello()` and `setGreeting()`. We finally get to implement them here.
 If any contract calls these functions from the interface, the below function gets executed. This function
 is a simple getter function. In `Configure()` we set up a mapping with the key as `storageKey` and
 the value as `Hello World!` In this function, we will be returning whatever value is at `storageKey`.
 The below code snippet can be copied and pasted to overwrite the default `setGreeting` code.
 
-First we add a helper function to get the greeting value from the stateDB, this will be helpful
+First, we add a helper function to get the greeting value from the stateDB, this will be helpful
 when we test our contract.
 
 ```go
@@ -957,13 +962,13 @@ const (
 
 This should be in your gas cost estimations based on how many times the precompile function does a
 read or a write. For example, if the precompile modifies the state slot of its precompile address
-twice then the gas cost for that function would be `40_000`. However if the precompile does additional
+twice then the gas cost for that function would be `40_000`. However, if the precompile does additional
 operations and requires more computational power, then you should increase the gas costs accordingly.
 
 On top of these gas costs, we also have to account for the gas costs of AllowList gas costs. These
 are the gas costs of reading and writing permissions for addresses in AllowList. These are defined
 under [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29).
-By default these are added to the default gas costs to the state-change functions (SetGreeting)
+By default, these are added to the default gas costs of the state-change functions (SetGreeting)
 of the precompile. Meaning that these functions will cost an additional `ReadAllowListGasCost` in order
 to read permissions from the storage. If you don't plan to read permissions from the storage then
 you can omit these.
@@ -1025,18 +1030,19 @@ be under [`/helloworld/config_test.go`](https://github.com/ava-labs/subnet-evm/b
 There are mainly two functions we need
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. Generated `Verify` tests contain a valid case.
-You can add more invalid cases depending on your implementation. `Equal` tests generates some
-invalid cases to test different timestamps, types and AllowList cases.
-You can check other `config_test.go` files in the [`/precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/)
-directory for more examples.
+You can add more invalid cases depending on your implementation. `Equal` tests generate some
+invalid cases to test different timestamps, types, and AllowList cases.
+You can check other `config_test.go` files
+in the `/precompile/contracts` directory for more examples. For the `HelloWorld` precompile, you can
+check the generated code [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
 
 ### Step 7: Add Contract Tests
 
 The tool also generates contract tests to make sure our precompile is working correctly. Generated
-tests include cases to test allow list capabilities, gas costs, calling function in read only mode.
+tests include cases to test allow list capabilities, gas costs, and calling functions in read-only mode.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
-tests will be under [`/precompile/contracts/helloworld/contract_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
-We will also add more test to cover functionalities of `sayHello()` and `setGreeting()`.
+tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
+We will also add more tests to cover functionalities of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
 
@@ -1094,18 +1100,15 @@ Golang. If you use Precompile-EVM you can skip this step.
 
 VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
 comprehensive tests that we can run. If your precompile modifies how the Subnet-EVM works, for example
-changing blockchain rules, you should add a VM test. For example you can take a look at the
+changing blockchain rules, you should add a VM test. For example, you can take a look at the
 TestRewardManagerPrecompileSetRewardAddress function in [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm_test.go#L2675).
-For this Hello World example we don't modify any Subnet-EVM rules, so we don't need to add any VM tests.
+For this Hello World example, we don't modify any Subnet-EVM rules, so we don't need to add any VM tests.
 
 ### Step 9: Add Test Contract
 
-We can run Solidity test for our precompile. In order to do so, we add an example smart contract and
-a test contract.
-This example smart contract lets us interact
-with our precompile.
-We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
-doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on
+Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact
+with our precompile! We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
+doing so, `helloWorld` is now a contract of type `IHelloWorld`, and when we call any functions on
 that contract, we will be redirected to the HelloWorld precompile address. The below code snippet
 can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
 
@@ -1372,7 +1375,7 @@ If you want to use a different test command and genesis path than the defaults, 
 See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed in to `utils.RunDefaultHardhatTests(ctx, "your_precompile")` will be used
+The string passed into `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 
@@ -1389,7 +1392,7 @@ directly if you prefer):
 ```
 
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
-`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to ginkgo in
+`GINKGO_LABEL_FILTER`. This environment variable is passed as a flag to Ginkgo in
 `./scripts/run_ginkgo.sh` and restricts what tests will run to only the tests with a matching label.
 
 ### Step 13: Running E2E Tests
@@ -1446,7 +1449,7 @@ and confirm the RPCChainVM version matches:
 $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
 ```
 
-This should give a similar output:
+This should give similar output:
 
 ```bash
 Subnet-EVM/v0.4.10@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
@@ -1567,23 +1570,30 @@ PASS
 
 Looks like the tests are passing!
 
+:::note
+
 If your tests failed, please retrace your steps. Most likely the error is that the precompile was
-not enabled and some code is missing. Please also use the
+not enabled and some code is missing.
+Try running `npm install` in the contracts directory to ensure that hardhat and other packages are installed.
+
+You may also use the
 [official tutorial implementation](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2)
-to double check your work as well.
+to double-check your work as well.
+
+:::
 
 ### Running a Local Network
 
-We made it! Everything works in our ginkgo tests, and now we want to spin up a local network
+We made it! Everything works in our Ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
 [this link](./network-runner.md) for more information on Avalanche
-Network Runner, how to download it, and how to use it. The server will be on "listening" mode
+Network Runner, how to download it, and how to use it. The server will be in "listening" mode
 waiting for API calls.
 
-We will start the server from the Subnet-EVM directory, so that we can use a relative file path
-to the genesis json file:
+We will start the server from the Subnet-EVM directory so that we can use a relative file path
+to the genesis JSON file:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
