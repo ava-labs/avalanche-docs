@@ -265,7 +265,7 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 
 ##### `--db-type` (string)
 
-Specifies the type of database to use. Must be one of `Leveldb` or `memdb`.
+Specifies the type of database to use. Must be one of `LevelDB` or `memdb`.
 `memdb` is an in-memory, non-persisted database.
 
 :::note
