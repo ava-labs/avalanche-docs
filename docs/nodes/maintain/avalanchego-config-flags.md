@@ -525,6 +525,13 @@ there is no timeout.
 Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Example:
 `"https://*.avax.network https://*.avax-test.network"`
 
+#### `--http-allowed-hosts` (string)
+
+List of acceptable host names in API requests. Provide the wildcard (`'*'`) to accept
+requests from all hosts. API requests where the `Host` field is empty or an IP address
+will always be accepted. An API call whose HTTP `Host` field isn't acceptable will 
+receive a 403 error code. Defaults to `localhost`.
+
 ## IPCs
 
 #### `--ipcs-chain-ids` (string)
