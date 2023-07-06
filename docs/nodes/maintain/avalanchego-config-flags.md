@@ -268,6 +268,16 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 Specifies the type of database to use. Must be one of `leveldb` or `memdb`.
 `memdb` is an in-memory, non-persisted database.
 
+:::note
+
+Memdb stores everything in memory. So if you have a 900 GiB leveldb instance, then using memdb 
+you’d need 900 GiB of RAM.
+Memdb is useful for fast one-off testing, not for running an actual node (on fuji or mainnet).
+Also note that memdb doesn’t persist after restart. So any time you restart the node it would 
+start syncing from scratch.
+
+:::
+
 ### Database Config
 
 #### `--db-config-file` (string)
