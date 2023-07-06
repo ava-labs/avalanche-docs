@@ -112,6 +112,20 @@ They use the same endpoint as standard Ethereum APIs:
 Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, 
 which must be fetched with `eth_getBalance`).
 
+:::note
+
+The AssetID for AVAX differs depending on the network you are on. 
+
+Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
+
+Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
+
+For finding the `assetID` of other assets, please note that
+`avax.getUTXOs` and `avax.getAtomicTx` return the `assetID` in 
+their output.
+
+:::
+
 **Signature:**
 
 ```sh

@@ -806,6 +806,19 @@ avm.getAssetDescription({assetID: string}) -> {
   of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as
   .100, etc.
 
+:::note
+
+The AssetID for AVAX differs depending on the network you are on. 
+
+Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
+
+Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
+
+For finding the `assetID` of other assets, this [info] might be useful.
+Also, `avm.getUTXOs` returns the `assetID` in its output.
+
+:::
+
 **Example Call:**
 
 ```sh
