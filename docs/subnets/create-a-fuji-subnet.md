@@ -544,7 +544,7 @@ into the search box and you should see your shiny new blockchain information.
 ## Join a Subnet
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet. We are now going to add 
-a validator to the subnet.
+a validator to the Subnet.
 
 :::info
 
@@ -556,10 +556,10 @@ become a validator.
 
 :::
 
-To add a node as a validator to a subnet, run the `join` command along with the subnet name:
+To add a node as a validator to a Subnet, run the `join` command along with the Subnet name:
 
 Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of 
-the subnet must approve your node to be a validator afterwards by calling `addValidator` as 
+the Subnet must approve your node to be a validator afterwards by calling `addValidator` as 
 described in the next section.
 
 When you `join` command, you are first prompted with the network selection:
@@ -587,7 +587,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
 
-As mentioned earlier, If the node has not been whitelisted, a holder of the subnet control key 
+As mentioned earlier, If the node has not been whitelisted, a holder of the Subnet control key 
 _must_ call
 [Subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) defined in 
 the next section in order to allow the node to validate the Subnet.
