@@ -1,5 +1,8 @@
 # Stateful Precompile Generation Tutorial
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In this tutorial, we are going to walk through how we can generate a stateful precompile from scratch.
 Before we start, let's brush up on what a precompile is, what a stateful precompile is, and why this
 is extremely useful.
@@ -124,7 +127,29 @@ The AllowList enables a precompile to enforce permissions on addresses. The Allo
 itself, but a helper structure to provide a control mechanism for wrapping contracts.
 It provides an `AllowListConfig` to the precompile so that it can take an initial configuration
 from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial, we
-used `AllowList` to provide permission control to the `HelloWorld` precompile.
+used `IAllowList` interface to provide permission control to the `HelloWorld` precompile.
+`IAllowList` is defined in Subnet-EVM under [`./contracts/contracts/interfaces/IAllowList.sol`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol).
+The interface is as follows:
+
+```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IAllowList {
+  // Set [addr] to have the admin role over the precompile contract.
+  function setAdmin(address addr) external;
+
+  // Set [addr] to be enabled on the precompile contract.
+  function setEnabled(address addr) external;
+
+  // Set [addr] to have no role for the precompile contract.
+  function setNone(address addr) external;
+
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
+}
+```
+
 You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist-interface).
 
 ## Tutorial
@@ -166,7 +191,7 @@ There is a template repo for how to build a precompile with this way called
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both of Subnet-EVM and Precompile-EVM shares
 similar directory structure and common codes.
 Most of the tutorial still works same way
-for Precompile-EVM repo. There are some changes mentioned in steps to use Precompile-EVM repo.
+for Precompile-EVM repo. Some steps are separated for Subnet-EVM and Precompile-EVM with tabs.
 We followed same Hello World tutorial in Precompile-EVM repo.
 You can access the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
 
@@ -206,9 +231,7 @@ To do that, run the command: `export PATH=$PATH:$GOROOT/bin:$GOPATH/bin`
 
 Download the following prerequisites into your `$GOPATH`:
 
-- Git Clone the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) repository
-  - For Precompile-EVM, Clone the [Precompile-EVM](https://github.com/ava-labs/precompile-evm) repository.
-    Alternatively you can use it as a template repo from [github](https://github.com/ava-labs/precompile-evm/generate).
+- Git Clone the repository (Subnet-EVM or Precompile-EVM)
 - Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
 - Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
@@ -221,17 +244,31 @@ mkdir -p src/github.com/ava-labs
 cd src/github.com/ava-labs
 ```
 
-For Subnet-EVM:
+Clone the repository:
+
+<Tabs
+defaultvalue="subnet-evm" groupId="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
 ```shell
 git clone git@github.com:ava-labs/subnet-evm.git
 ```
 
-For Precompile-EVM:
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
 
 ```shell
 git clone git@github.com:ava-labs/precompile-evm.git
 ```
+
+Alternatively you can use it as a template repo from [github](https://github.com/ava-labs/precompile-evm/generate).
+
+</TabItem>
+</Tabs>
 
 Then run the following commands:
 
@@ -245,24 +282,48 @@ npm install -g solc
 
 You can inspect example pull request for the complete code.
 
-Subnet-EVM: [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
+<Tabs
+defaultvalue="subnet-evm" groupId="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
-Precompile-EVM: [Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/12/)
+[Subnet-EVM Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
+
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+
+[Precompile-EVM Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/12/)
+
+</TabItem>
+</Tabs>
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
 ### Step 0: Generating the Precompile
 
-For the tutorial, we will be working in a new branch in Subnet-EVM/Precompile-EVM repo:
+First, we must create the Solidity interface that we want our precompile to implement. This will be
+the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These
+two functions will demonstrate the getting and setting respectively of a value stored in the
+precompile's state space. The `sayHello()` function
+is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
+The `setGreeting()` function is a state changer function, meaning it modifies the state of the precompile.
+The `HelloWorld` interface inherits `IAllowList` interface to use the allow list functionality.
+
+For the tutorial, we will be working in a new branch in Subnet-EVM/Precompile-EVM repo.
+
+<Tabs
+defaultvalue="subnet-evm" groupId="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
-```
-
-or for Precompile-EVM:
-
-```bash
-cd $GOPATH/src/github.com/ava-labs/precompile-evm
 ```
 
 Then checkout to a new branch:
@@ -276,11 +337,6 @@ We will start off in this directory `./contracts/`:
 ```bash
 cd contracts/
 ```
-
-First, we must create the Solidity interface that we want our precompile to implement. This will be
-the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These
-two functions will demonstrate the getting and setting respectively of a value stored in the
-precompile's state space.
 
 Create a new file called `IHelloWorld.sol` and copy and paste the below code:
 
@@ -302,45 +358,6 @@ interface IHelloWorld is IAllowList {
 }
 ```
 
-This interface defines 2 functions, `sayHello()` and `setGreeting()`. The `sayHello()` function
-is a `view` function, meaning it does not modify the state of the precompile and returns a string result.
-The `setGreeting()` function is a state changer function, meaning it modifies the state of the precompile.
-
-`IAllowList` is an interface that we will use to restrict access to the precompile.
-
-```sol
-//SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-interface IAllowList {
-  // Set [addr] to have the admin role over the precompile contract.
-  function setAdmin(address addr) external;
-
-  // Set [addr] to be enabled on the precompile contract.
-  function setEnabled(address addr) external;
-
-  // Set [addr] to have no role for the precompile contract.
-  function setNone(address addr) external;
-
-  // Read the status of [addr].
-  function readAllowList(address addr) external view returns (uint256 role);
-}
-```
-
-`IAllowList` is defined in Subnet-EVM under `./contracts/contracts/interfaces/IAllowList.sol`.
-
-For Precompile-EVM these interfaces and other contracts
-can be accessible through `@avalabs/subnet-evm-contracts` package.
-This is already added to the `package.json` file.
-You can install it by running `npm install`.
-In order to import `IAllowList` interface, you can use the following import statement:
-
-```sol
-import "@avalabs/subnet-evm-contracts/interfaces/IAllowList.sol";
-```
-
-For an example in Precompile-EVM take a look at the file [here](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/contracts/contracts/interfaces/IHelloWorld.sol)
-
 Now we have an interface that our precompile can implement!
 Let's create an [ABI](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#contract-abi-specification)
 of our Solidity interface.
@@ -351,7 +368,57 @@ In the same directory, let's run:
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 ```
 
-This won't work with Precompile-EVM as we import contracts from `@avalabs/subnet-evm-contracts` package.
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
+```
+
+Then checkout to a new branch:
+
+```bash
+git checkout -b hello-world-stateful-precompile
+```
+
+We will start off in this directory `./contracts/`:
+
+```bash
+cd contracts/
+```
+
+For Precompile-EVM interfaces and other contracts in Subnet-EVM
+can be accessible through `@avalabs/subnet-evm-contracts` package.
+This is already added to the `package.json` file.
+You can install it by running `npm install`.
+In order to import `IAllowList` interface, you can use the following import statement:
+
+```sol
+import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
+```
+
+The full file looks like this:
+
+```sol
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
+
+interface IHelloWorld is IAllowList {
+  // sayHello returns the stored greeting string
+  function sayHello() external view returns (string calldata result);
+
+  // setGreeting stores the greeting string
+  function setGreeting(string calldata response) external;
+}
+```
+
+Now we have an interface that our precompile can implement!
+Let's create an [ABI](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#contract-abi-specification)
+of our Solidity interface.
+
+In Precompile-EVM we import contracts from `@avalabs/subnet-evm-contracts` package.
 In order to generate the ABI in Precompile-EVM we need to include the `node_modules` folder to find
 imported contracts with following flags:
 
@@ -372,6 +439,9 @@ imported contracts with following flags:
 ```shell
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --include-path ./node_modules
 ```
+
+</TabItem>
+</Tabs>
 
 This generates the ABI code under `./abis/IHelloWorld.abi`.
 
@@ -500,6 +570,16 @@ Copyright 2013-2022 The go-ethereum Authors
 
 ```
 
+Now let's generate the precompile template files!
+
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
+
 In Subnet-EVM precompile implementations reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
 template in the `./precompile/contracts/helloworld` directory, where `helloworld` is the name of the
 Go package we want to generate the precompile into.
@@ -508,12 +588,18 @@ Go package we want to generate the precompile into.
 ./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
 ```
 
-For Precompile-EVM we don't need to put this under a deep directory structure. We can just generate the
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+
+For Precompile-EVM we don't need to put files under a deep directory structure. We can just generate the
 precompile template under its own directory via `--out ./helloworld` flag.
 
 ```bash
 ./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld --out ./helloworld
 ```
+
+</TabItem>
+</Tabs>
 
 <!-- markdownlint-enable MD013 -->
 
@@ -573,7 +659,7 @@ should look like this:
 
 ### Step 2: Set Contract Address
 
-You can see the `ContractAddress` is set to some default value.
+In the `helloworld/module.go` you can see the `ContractAddress` is set to some default value.
 This should be changed to a suitable address for your precompile.
 The address should be unique to the precompile. There is a registry of precompile addresses
 under [`precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
@@ -581,8 +667,7 @@ A list of addresses is specified in the comments under this file.
 Modify the default value to be the next user available stateful precompile address. For forks of
 Subnet-EVM or Precompile-EVM, users should start at `0x0300000000000000000000000000000000000000` to ensure
 that their own modifications do not conflict with stateful precompiles that may be added to
-Subnet-EVM in the future. You should pick an address that is not already taken,
-and write it down in `registry.go` as a comment for future reference.
+Subnet-EVM in the future. You should pick an address that is not already taken.
 
 ```go
 // This list is kept just for reference. The actual addresses defined in respective packages of precompiles.
@@ -1023,10 +1108,16 @@ Our `Module` file contains an `init()` function that registers our precompile.
 We should register our precompile in a common package so
 that it can be imported by other packages.
 
-This can be done for Subnet-EVM under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go)
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
-For Precompile-EVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/plugin/main.go)
-file that orchestrates this precompile registration.
+For Subnet-EVM we have a precompile registry under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
+This registry force-imports precompiles from other packages, e.g:
 
 ```go
 // Force imports of each precompile to ensure each precompile's init function runs and registers itself
@@ -1047,6 +1138,40 @@ import (
 	// _ "github.com/ava-labs/subnet-evm/precompile/contracts/yourprecompile"
 )
 ```
+
+The registry itself also force-imported by the [`/plugin/evm/vm.go](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm.go#L50).
+This ensures that the registry is imported and the precompiles are registered.
+
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+
+For Precompile-EVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/plugin/main.go)
+file in Precompile-EVM that orchestrates this precompile registration.
+
+```go
+// (c) 2019-2023, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
+package main
+
+import (
+	"fmt"
+
+	"github.com/ava-labs/avalanchego/version"
+	"github.com/ava-labs/subnet-evm/plugin/evm"
+	"github.com/ava-labs/subnet-evm/plugin/runner"
+
+	// Each precompile generated by the precompilegen tool has a self-registering init function
+	// that registers the precompile with the subnet-evm. Importing the precompile package here
+	// will cause the precompile to be registered with the subnet-evm.
+	_ "github.com/ava-labs/precompile-evm/helloworld"
+	// ADD YOUR PRECOMPILE HERE
+	//_ "github.com/ava-labs/precompile-evm/{yourprecompilepkg}"
+)
+```
+
+</TabItem>
+</Tabs>
 
 ### Step 6: Add Config Tests
 
@@ -1125,7 +1250,7 @@ you can directly run them as follows:
 
 ### Step 8 (Optional): VM Tests
 
-This is only applicable for direct Subnet-EVM forks as there test files are not directly exported in
+This is only applicable for direct Subnet-EVM forks as test files are not directly exported in
 Golang. If you use Precompile-EVM you can skip this step.
 
 VM tests are tests that run the precompile by calling it through the Subnet-EVM. These are the most
@@ -1178,6 +1303,14 @@ The reason why we add another example smart contract is to have a simpler statel
 
 For the test contract we write our test in `./contracts/test/ExampleHelloWorldTest.sol`.
 
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
+
 ```sol
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -1226,21 +1359,74 @@ contract ExampleHelloWorldTest is AllowListTest {
 }
 ```
 
-:::note
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
 
-For Precompile-EVM, you should import `AllowListTest` with following:
+For Precompile-EVM, you should import `AllowListTest` with `@avalabs/subnet-evm-contracts` NPM package:
 
 ```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "../ExampleHelloWorld.sol";
+import "../interfaces/IHelloWorld.sol";
 import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
+
+contract ExampleHelloWorldTest is AllowListTest {
+  IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
+  function step_getDefaultHelloWorld() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    assertEq(example.sayHello(), "Hello World!");
+  }
+
+  function step_doesNotSetGreetingBeforeEnabled() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+
+    try example.setGreeting("testing") {
+      assertTrue(false, "setGreeting should fail");
+    } catch {}
+  }
+
+  function step_setAndGetGreeting() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    helloWorld.setEnabled(exampleAddress);
+    assertRole(
+      helloWorld.readAllowList(exampleAddress),
+      AllowList.Role.Enabled
+    );
+
+    string memory greeting = "testgreeting";
+    example.setGreeting(greeting);
+    assertEq(example.sayHello(), greeting);
+  }
+}
 ```
 
-:::
+</TabItem>
+</Tabs>
 
 ### Step 10: Add DS-Test
 
 We can now trigger this test contract via `hardhat` tests. The test script uses Subnet-EVM's `test`
 framework test in `./contracts/test`.
 You can find more information about the test framework [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
 The test script looks like this:
 
@@ -1292,15 +1478,60 @@ describe("ExampleHelloWorldTest", function () {
 });
 ```
 
-:::note
-
-For Precompile-EVM, you should import `test` with following:
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+The test script looks like this:
 
 ```ts
+// (c) 2019-2022, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
+import { ethers } from "hardhat";
 import { test } from "@avalabs/subnet-evm-contracts";
+
+// make sure this is always an admin for hello world precompile
+const ADMIN_ADDRESS = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
+const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
+
+describe("ExampleHelloWorldTest", function () {
+  this.timeout("30s");
+
+  beforeEach("Setup DS-Test contract", async function () {
+    const signer = await ethers.getSigner(ADMIN_ADDRESS);
+    const helloWorldPromise = ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      signer
+    );
+
+    return ethers
+      .getContractFactory("ExampleHelloWorldTest", { signer })
+      .then((factory) => factory.deploy())
+      .then((contract) => {
+        this.testContract = contract;
+        return contract.deployed().then(() => contract);
+      })
+      .then(() => Promise.all([helloWorldPromise]))
+      .then(([helloWorld]) => helloWorld.setAdmin(this.testContract.address))
+      .then((tx) => tx.wait());
+  });
+
+  test("should gets default hello world", ["step_getDefaultHelloWorld"]);
+
+  test(
+    "should not set greeting before enabled",
+    "step_doesNotSetGreetingBeforeEnabled"
+  );
+
+  test(
+    "should set and get greeting with enabled account",
+    "step_setAndGetGreeting"
+  );
+});
 ```
 
-:::
+</TabItem>
+</Tabs>
 
 ### Step 11: Add Genesis
 
@@ -1460,7 +1691,15 @@ This path will be used later as the environment variable `AVALANCHEGO_EXEC_PATH`
 
 Please note that the RPCChainVM version of AvalancheGo and Subnet-EVM must match.
 
-Once we've built AvalancheGo, we can navigate back to the Subnet-EVM repo and build the Subnet-EVM binary:
+Once we've built AvalancheGo, we can navigate back to the repo and build the binary:
+
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -1482,11 +1721,43 @@ $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu
 This should give similar output:
 
 ```bash
-Subnet-EVM/v0.4.10@a584fcad593885b6c095f42adaff6b53d51aedb8 [AvalancheGo=v1.9.7, rpcchainvm=22]
+Subnet-EVM/v0.5.2@9a1c5482c83c32b29630ff171cb20ccc889d760e [AvalancheGo=v1.10.2, rpcchainvm=26]
 ```
+
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
+./scripts/build.sh
+```
+
+This will build the Precompile-EVM binary and place it in AvalancheGo's `build/plugins` directory by
+default at the file path:
+
+`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+
+To confirm that the Precompıle-EVM binary is compatible with AvalancheGo,
+you can run the same version command
+and confirm the RPCChainVM version matches:
+
+```bash
+$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --version
+```
+
+This should give similar output:
+
+```bash
+Precompile-EVM/v0.0.0 Subnet-EVM/v0.5.2 [AvalancheGo=v1.10.2, rpcchainvm=26]
+```
+
+</TabItem>
+</Tabs>
 
 If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
 will not be able to talk to AvalancheGo and the blockchain will not start.
+You can find the compatibility table
+for AvalancheGo and Subnet-EVM [here](https://github.com/ava-labs/subnet-evm#avalanchego-compatibility).
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
 
@@ -1494,15 +1765,27 @@ The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH
 
 To run ONLY the HelloWorld precompile test, run the command:
 
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
+
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
-or for Precompile-EVM:
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
 ```
+
+</TabItem>
+</Tabs>
 
 use `GINKGO_LABEL_FILTER` env var to filter the test:
 
@@ -1625,15 +1908,22 @@ waiting for API calls.
 We will start the server from the Subnet-EVM directory so that we can use a relative file path
 to the genesis JSON file:
 
-```bash
+<Tabs
+defaultValue="subnet-evm"
+values={[
+{label: 'Subnet-EVM', value: 'subnet-evm'},
+{label: 'Precompile-EVM', value: 'precompile-evm'},
+]}>
+<TabItem value="subnet-evm" groupId="subnet-evm">
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
-```
 
-For Precompile-EVM:
+</TabItem>
+<TabItem value="precompile-evm" groupId="precompile-evm">
 
-```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
-```
+
+</TabItem>
+</Tabs>
 
 Then run ANR:
 
