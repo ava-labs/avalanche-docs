@@ -13,8 +13,8 @@ In this article, it's shown how to do the following on `Fuji` Testnet.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
-- Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
+- Add a node as a validator to the Subnet.
 
 All IDs in this article are for illustration purposes. They can be different in your own
 run-through of this tutorial.
