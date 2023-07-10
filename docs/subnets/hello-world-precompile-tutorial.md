@@ -271,6 +271,7 @@ Alternatively you can use it as a template repo from [github](https://github.com
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 Then run the following commands:
@@ -304,6 +305,7 @@ values={[
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
@@ -451,6 +453,7 @@ solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --incl
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 This generates the ABI code under `./abis/IHelloWorld.abi`.
@@ -612,6 +615,7 @@ precompile template under its own directory via `--out ./helloworld` flag.
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 <!-- markdownlint-enable MD013 -->
@@ -1191,6 +1195,7 @@ import (
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 ### Step 6: Add Config Tests
@@ -1439,6 +1444,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 ### Step 10: Add DS-Test
@@ -1561,6 +1567,7 @@ describe("ExampleHelloWorldTest", function () {
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 ### Step 11: Add Genesis
@@ -1785,6 +1792,7 @@ Precompile-EVM/v0.0.0 Subnet-EVM/v0.5.2 [AvalancheGo=v1.10.2, rpcchainvm=26]
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
@@ -1821,6 +1829,7 @@ cd $GOPATH/src/github.com/ava-labs/precompile-evm
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 use `GINKGO_LABEL_FILTER` env var to filter the test:
@@ -1967,6 +1976,7 @@ cd $GOPATH/src/github.com/ava-labs/precompile-evm
 
 </TabItem>
 </Tabs>
+
 <!-- vale on -->
 
 Then run ANR:
