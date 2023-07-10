@@ -247,7 +247,7 @@ You can inspect example pull request for the complete code.
 
 Subnet-EVM: [Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
 
-Precompile-EVM: [Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/2/)
+Precompile-EVM: [Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/12/)
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
@@ -353,7 +353,21 @@ solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 
 This won't work with Precompile-EVM as we import contracts from `@avalabs/subnet-evm-contracts` package.
 In order to generate the ABI in Precompile-EVM we need to include the `node_modules` folder to find
-imported contracts with following command:
+imported contracts with following flags:
+
+- `--abi`
+  - ABI specification of the contracts.
+- `--base-path path`
+  - Use the given path as the root of the source tree instead of the root of the filesystem.
+- `--include-path path`
+  - Make an additional source directory available to the default import callback. Use this option if
+    you want to import contracts whose location is not fixed in relation to your main source tree, e.g.
+    third-party libraries installed using a package manager. Can be used multiple times.
+    Can only be used if base path has a non-empty value.
+- `--output-dir path`
+  - If given, creates one file per output component and contract/file at the specified directory.
+- `--overwrite`
+  - Overwrite existing files (used together with `--output-dir`).
 
 ```shell
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --include-path ./node_modules
@@ -593,8 +607,8 @@ and write it down in `registry.go` as a comment for future reference.
 // {YourPrecompile}Address          = common.HexToAddress("0x03000000000000000000000000000000000000??")
 ```
 
-Don't forget to update the actual variable `ContractAddress` in [`module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go#L26)
-to the address you chose. It should look like this:
+Don't forget to update the actual variable `ContractAddress` in `module.go` to the address you chose.
+It should look like this:
 
 ```go
 // ContractAddress is the defined address of the precompile contract.
@@ -619,7 +633,10 @@ precompile package that you need to modify. You should start with the reference 
 
 The module file contains fundamental information about the precompile. This includes the key for the
 precompile, the address of the precompile, and a configurator. This file is located at
-[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go).
+[`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go)
+for Subnet-EVM and
+[./helloworld/module.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/module.go)
+for Precompile-EVM.
 
 This file defines the module for the precompile. The module is used to register the precompile to the
 precompile registry. The precompile registry is used to read configs and enable the precompile.
@@ -641,7 +658,10 @@ after you have finalized the implementation of the precompile config.
 #### Step 3.2: Config File
 
 The config file contains the config for the precompile. This file is located at
-[`/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go).
+[`./precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go)
+for Subnet-EVM and
+[./helloworld/config.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/config.go)
+for Precompile-EVM.
 This file contains the `Config` struct, which implements `precompileconfig.Config` interface.
 It has some embedded structs like `precompileconfig.Upgrade`. `Upgrade` is used to enable
 upgrades for the precompile. It contains the `BlockTimestamp` and `Disable` to enable/disable
@@ -752,7 +772,10 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 #### Step 3.4: Contract File
 
 The contract file contains the functions of the precompile contract that will be called by the EVM. The
-file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go).
+file is located at [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go)
+for Subnet-EVM and
+[./helloworld/contract.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/contract.go)
+for Precompile-EVM.
 Since we use `IAllowList` interface there will be auto-generated code for `AllowList`
 functions like below:
 
@@ -941,12 +964,14 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 
 ### Step 4: Set Gas Costs
 
-In [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20)
-we have `WriteGasCostPerSlot` and `ReadGasCostPerSlot`. Setting gas costs is very important for these
-functions, and should be done carefully. If the gas costs are set too low,
-then these can be abused and can cause DoS attacks.
+Setting gas costs for functions is very important and should be done carefully.
+If the gas costs are set too low,
+then functions can be abused and can cause DoS attacks.
 If the gas costs are set too high, then the contract will be too expensive
-to run. In order to provide a baseline for gas costs, we have set the following gas costs.
+to run.
+Subnet-EVM has some predefined gas costs for write and read operations
+in [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20).
+In order to provide a baseline for gas costs, we have set the following gas costs.
 
 ```go
 // Gas costs for stateful precompiles
@@ -967,13 +992,13 @@ operations and requires more computational power, then you should increase the g
 
 On top of these gas costs, we also have to account for the gas costs of AllowList gas costs. These
 are the gas costs of reading and writing permissions for addresses in AllowList. These are defined
-under [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29).
+under Subnet-EVM's [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29).
 By default, these are added to the default gas costs of the state-change functions (SetGreeting)
 of the precompile. Meaning that these functions will cost an additional `ReadAllowListGasCost` in order
 to read permissions from the storage. If you don't plan to read permissions from the storage then
 you can omit these.
 
-Now going back to `/helloworld/contract.go`, we can modify our precompile function gas costs.
+Now going back to our `/helloworld/contract.go`, we can modify our precompile function gas costs.
 Please search (`CTRL F`) `SET A GAS COST HERE` to locate the default gas cost code.
 
 ```go
@@ -1026,23 +1051,28 @@ import (
 ### Step 6: Add Config Tests
 
 Precompile generation tool generates skeletons for unit tests as well. Generated config tests will
-be under [`/helloworld/config_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
+be under [`./precompile/contracts/helloworld/config_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go)
+for Subnet-EVM and [`./helloworld/config_test.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/config_test.go)
+for Precompile-EVM.
 There are mainly two functions we need
 to test: `Verify` and `Equal`. `Verify` checks if the precompile is configured correctly. `Equal`
 checks if the precompile is equal to another precompile. Generated `Verify` tests contain a valid case.
 You can add more invalid cases depending on your implementation. `Equal` tests generate some
 invalid cases to test different timestamps, types, and AllowList cases.
-You can check other `config_test.go` files
-in the `/precompile/contracts` directory for more examples. For the `HelloWorld` precompile, you can
-check the generated code [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config_test.go).
+You can check each `config_test.go` files for other precompiles
+under the Subnet-EVM's [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/)
+directory for more examples.
 
 ### Step 7: Add Contract Tests
 
 The tool also generates contract tests to make sure our precompile is working correctly. Generated
 tests include cases to test allow list capabilities, gas costs, and calling functions in read-only mode.
 You can check other `contract_test.go` files in the `/precompile/contracts`. Hello World contract
-tests will be under `/precompile/contracts/helloworld/contract_test.go` [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go).
-We will also add more tests to cover functionalities of `sayHello()` and `setGreeting()`.
+tests will be under [`./precompile/contracts/helloworld/contract_test.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract_test.go)
+for Subnet-EVM and
+[`./helloworld/contract_test.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/contract_test.go)
+for Precompile-EVM.
+We will also add more test to cover functionalities of `sayHello()` and `setGreeting()`.
 Contract tests are defined in a standard structure that each test
 can customize to their needs. The test structure is as follows:
 
@@ -1106,9 +1136,9 @@ For this Hello World example, we don't modify any Subnet-EVM rules, so we don't 
 
 ### Step 9: Add Test Contract
 
-Let's add our test contract to `./contract-examples/contracts`. This smart contract lets us interact
+Let's add our test contract to `./contracts/contracts`. This smart contract lets us interact
 with our precompile! We cast the `HelloWorld` precompile address to the `IHelloWorld`interface. In
-doing so, `helloWorld` is now a contract of type `IHelloWorld`, and when we call any functions on
+doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call any functions on
 that contract, we will be redirected to the HelloWorld precompile address. The below code snippet
 can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
 
@@ -1375,7 +1405,7 @@ If you want to use a different test command and genesis path than the defaults, 
 See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed into `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 
