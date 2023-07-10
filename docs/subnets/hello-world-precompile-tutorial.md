@@ -246,6 +246,8 @@ cd src/github.com/ava-labs
 
 Clone the repository:
 
+<!-- vale off -->
+
 <Tabs
 defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
 values={[
@@ -269,6 +271,7 @@ Alternatively you can use it as a template repo from [github](https://github.com
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 Then run the following commands:
 
@@ -281,6 +284,8 @@ npm install -g solc
 ### Complete Code
 
 You can inspect example pull request for the complete code.
+
+<!-- vale off -->
 
 <Tabs
 defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
@@ -299,6 +304,7 @@ values={[
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
 
@@ -313,6 +319,8 @@ The `setGreeting()` function is a state changer function, meaning it modifies th
 The `HelloWorld` interface inherits `IAllowList` interface to use the allow list functionality.
 
 For the tutorial, we will be working in a new branch in Subnet-EVM/Precompile-EVM repo.
+
+<!-- vale off -->
 
 <Tabs
 defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
@@ -443,6 +451,7 @@ solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --incl
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 This generates the ABI code under `./abis/IHelloWorld.abi`.
 
@@ -573,6 +582,8 @@ Copyright 2013-2022 The go-ethereum Authors
 
 Now let's generate the precompile template files!
 
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -601,6 +612,7 @@ precompile template under its own directory via `--out ./helloworld` flag.
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 <!-- markdownlint-enable MD013 -->
 
@@ -1109,6 +1121,8 @@ Our `Module` file contains an `init()` function that registers our precompile.
 We should register our precompile in a common package so
 that it can be imported by other packages.
 
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -1140,8 +1154,12 @@ import (
 )
 ```
 
+<!-- vale off -->
+
 The registry itself also force-imported by the [`/plugin/evm/vm.go](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm.go#L50).
 This ensures that the registry is imported and the precompiles are registered.
+
+<!-- vale on -->
 
 </TabItem>
 <TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
@@ -1173,6 +1191,7 @@ import (
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 ### Step 6: Add Config Tests
 
@@ -1304,6 +1323,9 @@ The reason why we add another example smart contract is to have a simpler statel
 
 For the test contract we write our test in `./contracts/test/ExampleHelloWorldTest.sol`.
 
+<!-- vale off -->
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -1311,6 +1333,8 @@ values={[
 {label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
 ]}>
 <TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+
+<!-- vale on -->
 
 ```sol
 //SPDX-License-Identifier: MIT
@@ -1415,12 +1439,16 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 ### Step 10: Add DS-Test
 
 We can now trigger this test contract via `hardhat` tests. The test script uses Subnet-EVM's `test`
 framework test in `./contracts/test`.
 You can find more information about the test framework [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
+
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -1533,6 +1561,7 @@ describe("ExampleHelloWorldTest", function () {
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 ### Step 11: Add Genesis
 
@@ -1694,6 +1723,8 @@ Please note that the RPCChainVM version of AvalancheGo and Subnet-EVM must match
 
 Once we've built AvalancheGo, we can navigate back to the repo and build the binary:
 
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -1754,6 +1785,7 @@ Precompile-EVM/v0.0.0 Subnet-EVM/v0.5.2 [AvalancheGo=v1.10.2, rpcchainvm=26]
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 If the RPCChainVM Protocol version printed out does not match the one used in AvalancheGo then Subnet-EVM
 will not be able to talk to AvalancheGo and the blockchain will not start.
@@ -1765,6 +1797,8 @@ The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH
 #### Running Ginkgo Tests
 
 To run ONLY the HelloWorld precompile test, run the command:
+
+<!-- vale off -->
 
 <Tabs
 defaultValue="subnet-evm-tab"
@@ -1787,6 +1821,7 @@ cd $GOPATH/src/github.com/ava-labs/precompile-evm
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 use `GINKGO_LABEL_FILTER` env var to filter the test:
 
@@ -1909,6 +1944,8 @@ waiting for API calls.
 We will start the server from the Subnet-EVM directory so that we can use a relative file path
 to the genesis JSON file:
 
+<!-- vale off -->
+
 <Tabs
 defaultValue="subnet-evm-tab"
 values={[
@@ -1930,6 +1967,7 @@ cd $GOPATH/src/github.com/ava-labs/precompile-evm
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 Then run ANR:
 
