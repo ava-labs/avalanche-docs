@@ -428,7 +428,8 @@ imported contracts with following flags:
   - Use the given path as the root of the source tree instead of the root of the filesystem.
 - `--include-path path`
   - Make an additional source directory available to the default import callback. Use this option if
-    you want to import contracts whose location is not fixed in relation to your main source tree, e.g.
+    you want to import contracts whose location is not fixed in relation to your main source tree;
+    for example
     third-party libraries installed using a package manager. Can be used multiple times.
     Can only be used if base path has a non-empty value.
 - `--output-dir path`
@@ -1117,7 +1118,7 @@ values={[
 <TabItem value="subnet-evm" groupId="subnet-evm">
 
 For Subnet-EVM we have a precompile registry under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
-This registry force-imports precompiles from other packages, e.g:
+This registry force-imports precompiles from other packages, for example:
 
 ```go
 // Force imports of each precompile to ensure each precompile's init function runs and registers itself
