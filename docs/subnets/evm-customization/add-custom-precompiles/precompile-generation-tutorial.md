@@ -1548,7 +1548,7 @@ Now that we've set up the new ginkgo test, we can run the ginkgo test that we wa
 
 ## Step 13: Running E2E Tests
 
-#### Building AvalancheGo and Subnet-EVM/Precompile-EVM
+### Building AvalancheGo and Subnet-EVM/Precompile-EVM
 
 Before we start testing, we will need to build the AvalancheGo binary and the custom Subnet-EVM binary.
 
