@@ -127,16 +127,53 @@
     },
     {
       "type": "category",
-      "label": "Customize",
+      "label": "Virtual Machines",
       "collapsed": true,
       "items": [
-        "subnets/customize-a-subnet",
-        "subnets/hello-world-precompile-tutorial",
+        "learn/avalanche/virtual-machines",
         "subnets/introduction-to-vm",
-        "subnets/create-a-vm-timestampvm",
-        "subnets/create-a-vm-blobvm",
-        "subnets/create-a-simple-rust-vm",
-        "subnets/create-a-simple-vm-from-scratch",
+        {
+          "type": "category",
+          "label": "Customize the EVM",
+          "collapsed": false,
+          "items": [
+            "subnets/evm-customization/geth-coreth-subnetevm-precopmpileevm", 
+            "subnets/evm-customization/precompiles",
+            "subnets/evm-customization/stateful-precompiles",
+            "subnets/evm-customization/restrict-access-to-precompiles",
+            {
+              "type": "category",
+              "label": "Configure the EVM",
+              "collapsed": false,
+              "items": [
+                "subnets/customize-a-subnet"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Add custom Precompiles",
+              "collapsed": false,
+              "items": [
+                "subnets/evm-customization/add-custom-precompiles/custom-precompiles",
+                "subnets/evm-customization/add-custom-precompiles/unpacker-packer",
+                "subnets/evm-customization/add-custom-precompiles/access-state",
+                "subnets/evm-customization/add-custom-precompiles/precompile-generation-tutorial"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Create new VMs",
+          "collapsed": false,
+          "items": [
+            "subnets/create-a-vm-timestampvm",
+            "subnets/create-a-vm-blobvm",
+            "subnets/create-a-simple-rust-vm",
+            "subnets/create-a-simple-vm-from-scratch"
+          ]
+        },
+        
         "subnets/cross-subnet-communication"
       ]
     },
