@@ -285,28 +285,6 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ Mainnet
 ```
 
-### Check Validator List Status
-
-Next, you will be asked if you want to verify if your node has already been permissioned
--"whitelisted"- to be a validator for this Subnet:
-
-```bash
-Would you like to check if your node is allowed to join this subnet?
-If not, the subnet's control key holder must call avalanche subnet
-addValidator with your NodeID.
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Check whitelist?:
-    Yes
-  ▸ No
-```
-
-The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
-
-As mentioned earlier, If the node has not been whitelisted, a holder of the Subnet control key
-_must_ call
-[Subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) defined in
-the next section in order to allow the node to validate the Subnet.
-
 ### Setup Node Automatically
 
 There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
@@ -413,10 +391,13 @@ take effect.
 
 :::warning
 
-If the `join` command isn't successfully completed before `addValidator` is completed and the
-validator's stake weight is >20% of the Subnet total, the Subnet may have down time.
+If the `join` command isn't successfully completed before `addValidator` is completed, the Subnet
+may experience degraded performance.
 
 :::
+
+Now that the node has joined your subnet, if you are a holder of the Subnet control key, you
+need to call `addValidator` to grant the node permission to be a validator in your Subnet.
 
 To whitelist a node as a recognized validator on the Subnet, run:
 
