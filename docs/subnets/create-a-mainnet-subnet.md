@@ -396,7 +396,7 @@ may experience degraded performance.
 
 :::
 
-Now that the node has joined your subnet, if you are a holder of the Subnet control key, you
+Now that the node has joined your Subnet, if you are a holder of the Subnet control key, you
 need to call `addValidator` to grant the node permission to be a validator in your Subnet.
 
 To whitelist a node as a recognized validator on the Subnet, run:
