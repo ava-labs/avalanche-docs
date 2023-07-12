@@ -392,12 +392,12 @@ take effect.
 :::warning
 
 If the `join` command isn't successfully completed before `addValidator` is completed, the Subnet
-may experience degraded performance.
+could experience degraded performance or even halt.
 
 :::
 
-Now that the node has joined your Subnet, if you are a holder of the Subnet control key, you
-need to call `addValidator` to grant the node permission to be a validator in your Subnet.
+Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to
+grant the node permission to be a validator in your Subnet.
 
 To whitelist a node as a recognized validator on the Subnet, run:
 
