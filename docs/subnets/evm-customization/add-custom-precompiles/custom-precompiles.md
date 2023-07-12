@@ -17,7 +17,7 @@ executed quickly and efficiently.
 
 ## Security
 
-By incorporating a function as a precompile, it is possible to leverage libaries that have been
+By incorporating a function as a precompile, it is possible to leverage libraries that have been
 thoroughly reviewed and audited. This can reduce the risk of bugs and vulnerabilities, contributing
 to the overall security.
 
@@ -26,7 +26,7 @@ mathematical operation used in various cryptographic functions.
 
 ## Access to Go Libraries
 
-Since precompiles are implemented in Go, we can utilize existing Go Libraries. Go has a rich
+Since precompiles are implemented in Go, we can utilize existing Go libraries. Go has a rich
 ecosystem of Libraries. Accessing these avoids the need for reimplementation, which takes effort and
 poses the risks of introducing bugs in the process of translating from Go to Solidity.
 

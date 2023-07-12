@@ -19,8 +19,8 @@ make it easy to launch customized EVM-based blockchains on a Subnet. It differs 
 following ways:
 
 - Configurable fees and gas limits were added in genesis 
-- Avalanche hardforks were merged into the single "Subnet EVM" hardfork
-- Atomic Txs and Shared Memory were removed 
+- Avalanche hard forks were merged into the single "Subnet EVM" hard fork
+- Atomic TXs and Shared Memory were removed 
 - Multicoin Contract and State were removed
 
 ## Precompile-EVM
