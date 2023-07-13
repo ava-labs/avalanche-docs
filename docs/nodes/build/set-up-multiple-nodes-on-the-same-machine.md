@@ -13,18 +13,19 @@ You should have `avalanchego` running on your machine already. You will need to 
 
 Open up your terminal, create a directory for the nodes and navigate to it.
 
-```zsh
+```bash
 mkdir avalanche-nodes && cd avalanche-nodes
 ```
+
 Create sub-directories for the number of nodes you want to run. In this tutorial, we will run two nodes:
 
-```zsh
+```bash
 mkdir node1 && mkdir node2
 ```
 
 Navigate to node1 and create the configuration file:
 
-```zsh
+```bash
 cd node1 && touch config-node1.json
 ```
 
@@ -32,7 +33,7 @@ Configure the file according to your requirements. Here is an example of the bas
 
 ```js
 {
-    "network-id": "local",
+    "network-id": "fuji",
     "http-port": 9652,
     "db-dir": "./db-node1",
     "log-dir": "./logs-node1"
@@ -41,7 +42,7 @@ Configure the file according to your requirements. Here is an example of the bas
 
 Save the configuration, then navigate to the node2 directory and create a configuration file as well.
 
-```zsh
+```bash
 cd ../node2 && touch config-node2.json
 ```
 
@@ -64,13 +65,13 @@ Save the configuration file.
 
 Open up a new terminal window and navigate to node1. Run the following command to start the node:
 
-```zsh
+```bash
 <path to avalanchego> --config-file=config-node1.json
 ```
 
 Open up another terminal window and navigate to node2. Run the following command to start node2:
 
-```zsh
+```bash
 <path to avalanchego> --config-file=config-node2.json
 ```
 
