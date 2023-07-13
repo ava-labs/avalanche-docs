@@ -19,6 +19,8 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Run an Avalanche Node with Google Cloud Platform**](./build/set-up-an-avalanche-node-with-google-cloud-platform.md)                      | Create a node that runs on Google GCP       |
 | [**Run an Avalanche Node with Alibaba Cloud**](./build/set-up-node-on-alibaba-cloud.md)     | Create a node that runs on Alibaba Cloud       |
 | [**Run an Avalanche Node with Tencent Cloud**](./build/set-up-node-on-tencent-cloud.md)     | Create a node that runs on Tencent Cloud       |
+| [**Run an Avalanche Node with Latitude.sh**](./build/set-up-an-avalanche-node-with-latitude.md)     | Create a node that runs on Latitude       |
+| [**Run multiple nodes on the same machine**](./build/set-up-multiple-nodes-on-the-same-machine.md)     | How to run multiple nodes on the same machine       |
 | [**Frequently Asked Questions**](./build/FAQ.md)     | Learn about common errors when building your node.       |
 
 ## Maintain
