@@ -288,3 +288,22 @@ Features:
 ##### HTTPS
 
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
+
+### Chainbase
+
+[Chainbase](https://chainbase.com/) currently supports the C-Chain.
+
+#### HTTP
+
+- For C-Chain API, the URL is  `https://avalanche-mainnet.s.chainbase.online/v1/API_KEY/ext/bc/C/rpc`
+- For Fuji Testnet, the URL is `https://avalanche-testnet.s.chainbase.online/v1/API_KEY/ext/bc/C/rpc`
+
+##### Websockets
+
+- For C-Chain API, the URL is  `wss://avalanche-mainnet.s.chainbase.online/v1/API_KEY/ext/bc/C/rpc`
+- For Fuji Testnet, the URL is `wss://avalanche-testnet.s.chainbase.online/v1/API_KEY/ext/bc/C/rpc`
+
+Features:
+
+- Free
+- [Data Cloud API](https://docs.chainbase.com/reference/data-cloud-sql) provided
