@@ -52,5 +52,5 @@ interface IAllowList {
 }
 ```
 
-readAllowList(addr) will return a uint256 with a value of 0, 1, or 2, corresponding to the roles
+`readAllowList(addr)` will return a `uint256` with a value of 0, 1, or 2, corresponding to the roles
 None, Enabled, and Admin respectively.
