@@ -30,8 +30,8 @@ feeManagerConfig does not affect admin addresses in other activated precompiles.
 
 ## Interacting with the AllowList from Solidity
 
-The AllowList solidity interface is defined below. AllowList is not an actual contract but just an
-interface. It's not callable by itself. This is used by other precompiles.
+The AllowList solidity interface is defined below. AllowList is not an actual precompiled contract but just an
+helper interface. It's not callable by itself. This is used by other precompiles.
 
 ```solidity
 //SPDX-License-Identifier: MIT
