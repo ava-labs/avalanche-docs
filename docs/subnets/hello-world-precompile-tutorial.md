@@ -176,7 +176,8 @@ Set the `$GOPATH` environment variable properly for Go to look for Go Workspaces
 [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
 :::info
-An easy way to set GOPATH is using the command: `export GOPATH=$HOME/go`
+See [here](https://github.com/golang/go/wiki/SettingGOPATH) for instructions on setting the 
+GOPATH based on system configurations.
 :::
 
 As a few things will be installed into `$GOPATH/bin`, please make sure that `$GOPATH/bin` is in your
