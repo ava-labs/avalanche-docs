@@ -163,8 +163,10 @@ This is a brief overview of what this tutorial will cover.
 - Implement the precompile functions in Golang
 - Write and run tests
 
+:::caution
 Stateful precompiles are [alpha software](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha).
 Build at your own risk.
+:::
 
 In this tutorial, we used a branch based on Subnet-EVM version `v0.5.2`. You can find the branch
 [here](https://github.com/ava-labs/subnet-evm/tree/helloworld-official-tutorial-v2). The code in this
