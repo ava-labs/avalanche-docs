@@ -20,7 +20,7 @@
     "@docusaurus/theme-search-algolia": "2.4.1",
     "@mdx-js/react": "1.6.22",
     "@svgr/webpack": "8.0.1",
-    "clsx": "1.2.1",
+    "clsx": "2.0.0",
     "eslint": "8.44.0",
     "file-loader": "6.2.0",
     "hast-util-is-element": "2.1.3",
