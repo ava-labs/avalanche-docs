@@ -561,8 +561,8 @@ Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRB
 ```
 
 This means the node is now a validator on the given Subnet on `Mainnet`! However, your work isn't
-complete. You **must** finish the [Join a Subnet](#join-a-subnet) section otherwise your Subnet
-risks downtime.
+complete. You **must** finish the [Request to Join a Subnet as a Validator](#request-to-join-a-subnet-as-a-validator)
+section otherwise your Subnet risks downtime.
 
 You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
 
