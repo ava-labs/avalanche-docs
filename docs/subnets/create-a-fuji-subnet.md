@@ -541,7 +541,7 @@ To get your new Subnet information, visit the
 search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
 into the search box and you should see your shiny new blockchain information.
 
-## Join a Subnet
+## Request to Join a Subnet as a Validator
 
 This new Subnet is cool - but it doesn't have any dedicated validators yet. We are now going to add 
 a validator to the Subnet.
