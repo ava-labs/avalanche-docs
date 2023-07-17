@@ -190,8 +190,6 @@ state and modify it.
 There is a template repo for how to build a precompile with this way called
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both of Subnet-EVM and Precompile-EVM shares
 similar directory structure and common codes.
-Most of the tutorial still works same way
-for Precompile-EVM repo. Some steps are separated for Subnet-EVM and Precompile-EVM with tabs.
 We followed same Hello World tutorial in Precompile-EVM repo.
 You can access the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
 
