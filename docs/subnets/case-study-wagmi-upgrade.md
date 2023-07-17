@@ -171,7 +171,6 @@ that is done, `Custom (11111) network` is shown:
 
 Good, we're talking to WAGMI Subnet. Next we need to load the contracts into Remix. Using 'load from
 GitHub' option from the Remix home screen we load two contracts:
-cp
 
 - [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
 - and
