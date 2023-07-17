@@ -1,46 +1,42 @@
-# How to Transfer funds between different ledgers, or addresses of the same ledger
+# How to Transfer funds between ledgers
 
 Ocassionaly, there is a need to move funds between different ledgers, or different addresses owned
 by the same ledger.
 
 A case for the former is for a subnet control ledger to spend all funds in previous operations, and, 
-as a subnet control ledger can not be changed, there is a need to transfer to it for another funded account.
+as a subnet control ledger can't be changed, there is a need to transfer to it for another funded account.
 
-A case for the later is related eg to ledger funding using web wallet tranfers, which sometimes fund a ledger
-address associated to an index different from zero. As CLI by default uses ledger index 0, sometimes a
-movement of the funds is prefered for the CLI to work with default settings.
+A case for the later is related for example to ledger funding using web wallet tranfers, which sometimes transfer to a ledger
+address associated with an index different to zero. As the CLI by default uses ledger index 0, sometimes a
+movement of the funds to that index is prefered for the CLI to work with the default settings.
 
-As transfers between P-Chain addresses are not currently supported in wallets, CLI has added this
+As direct transfers between P-Chain addresses are not currently supported in wallets, CLI has added this
 command to enable them.
 
-Internally it consists on a series of import/export operations involving also the X-Chain, and so the 
-fee for this operation is 4 times the fee for a typical import operations, that is, 0.004 AVAX. Check [this](https://docs.avax.network/quickstart/transaction-fees) for fees information.
-
+Internally the operation consists on a series of import/export operations involving the X-Chain also, and so the 
+fee for this operation is 4 times the fee for a typical import operations, that is, 0.004 AVAX.
+See [fees information](https://docs.avax.network/quickstart/transaction-fees)
 
 :::note
 
-The `key transfer` command also can be applied to stored keys managed by CLI. That is, it enables
-moving funds from one stored key to another, and from ledger to a stoger key or the other way.
+The `key transfer` command can also be applied to the stored keys managed by the CLI. It enables
+moving funds from one stored key to another, and from a ledger to a stoger key or the other way.
 
-Anyway, this tutorial will focus on the most expected use case of ledger funding requirement.
-
+Anyway, this tutorial will focus on the most expected user case of transfering between ledger accounts.
 
 ## Prerequisites
 
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 - Multiple Ledger devices [configured for Avalanche](./create-a-mainnet-subnet#setting-up-your-ledger)
 
-## Send all funds from one ledger to another
+## Example: Sending all funds from one ledger to another
 
-Let's cover all cases with the following one:
-
-- source address is ledger A, index 2 (say web wallet funds for that ledger appear at that index)
-- target address is ledger B, index 0 (expected by CLI in standard ops)
-- funds on ledger A index 2 are 4.5 AVAX
+- Source address will be ledger A, index 2 (the web wallet shows 4.5 AVAX for this ledger)
+- Target address will be ledger B, index 0 (the web wallet shows 0 AVAX for this ledger)
 
 ### Decide on which index of ledger A to use
 
-A check may be needed to find out which index is being used by the web wallet. Say web wallet
+A check is needed to find out which index is being used by the web wallet. Say that the web wallet
 shows 4.5 AVAX available on p-chain address P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0
 
 With the ledger A connected and the avalache app running, execute:
@@ -49,7 +45,7 @@ With the ledger A connected and the avalache app running, execute:
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
 ```
 
-To see p-chain addresses and balances for the first 6 indices in the ledger derivated owner addresses
+To see p-chain addresses and balances for the first 6 indices in the ledger derivated owner addresses.
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
@@ -69,53 +65,52 @@ To see p-chain addresses and balances for the first 6 indices in the ledger deri
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-Other indices can be explored by changing the `ledger` param value.
-
-As can be noticed, the addresses `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` indeed has 4.5 AVAX and is
+As can be noticed, the address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` indeed has 4.5 AVAX and is
 associated to index 2 of the ledger A.
 
 :::note
 
-A ledger manages an infinite amount of addresses derivated from a main private key, that is way 
-in certain ocasions there is a need to specify which address or which index of a ledger are we
-operating with.
+A ledger manages an infinite amount of addresses derivated from a main private key, and due to this,
+in certain ocasions there is a need to specify which address or which index of the ledger are we
+operating against.
 
-### Decide on which index of ledger B to use
+### Decide which index of ledger B to use and find out the associated address
 
-In this case the user already decided that. He wants to use index 0 of ledger B, the one expected by
-default by the CLI to contain funds. Let's say ledger B is a control ledger for the user subnet.
+In this case the user wants to use index 0, the one CLI by default expects to contain funds.
 
-In this case the user can also connect ledger B and check the first addreses. Say:
+For the transfer cmd, it is also needed to know the target p-chain address. Let's get it.
+
+With the ledger B connected and the avalache app running, execute:
+
+```bash
+avalanche key list --mainnet --ledger 0
+```
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 |  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 | ledger | index 0 | P-Chain (Bech32 format) | P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm |       0 | Mainnet |
-+        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 1 |                         | P-avax18e9qsm30du590lhkwydhmkfwhcc9999gvxcaez |       0 | Mainnet |
-+        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 2 |                         | P-avax1unkkjstggvdty5gtnfhc0mgnl7qxa52z2d4c9y |       0 | Mainnet |
-+        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 3 |                         | P-avax1ek7n0zky3py7prxcrgnmh44y3wm6lc7r7x5r8e |       0 | Mainnet |
-+        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 4 |                         | P-avax1rsz6nt6qht5ep37qjk7ht0u9h30mgfhehsmqea |       0 | Mainnet |
-+        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 5 |                         | P-avax17u5wm4tfex7xr27xlwejm28pyk84tj0jzp42zz |       0 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-So, target address of ledger B is `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`, and has no funds.
+Target address to be used is `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`, containing 0 funds.
 
 ### Execute the sending part of the transfer operation
 
-A P-Chain to P-chain transfer is a two-part operation. First part starts the process, move the money outs of the source account into a X-Chain account owner by the receptor. It needs to be signed by the sending ledger.
+A P-Chain to P-chain transfer is a two-part operation. There is no need for the two parts to be executed on the same
+machine, only for them to have some common params. For each part, the appropiate ledger (either source or target) must
+be connected to the machine executing it.
 
-For this part on, the specific amount to send needs to be calculated in order to also contemplate for the fees.
-The sending ledger is the one that pays all the fees in this transfer. As such, the amount to be received 
-by ledger B is going to be 4.496, that is, the current 4.5 after paying fees.
+First part starts the process, and moves the money out of the
+source account into a X-Chain account owner by the receptor. It needs to be signed by the sending ledger.
 
-That amount, 4.496, is the one that needs to be specified to the `key transfer` command.
+The amount to be specified as input to the cmd is the amount to be received on the target address.
+
+As in this example we want to send all the balance of 4.5, we need to consider a fee payment of 
+0.004, and so tell the cmd to transfer 4.496.
+
+Take into account that the sending ledger is the one that will pays all the fees.
 
 Let's start it:
 
@@ -156,13 +151,13 @@ Next, the ledger index is asked for. Input `2`:
 ✗ Ledger index to use: 2
 ```
 
-Next, the amount to send is asked for. 4.496 as explained before:
+Next, the amount to be sent is asked for:
 
 ```text
 ✗ Amount to send (AVAX units): 4.496
 ```
 
-The, the receiver address is required. Fill in with `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`:
+The, the target address is required:
 
 ```text
 ✗ Receiver address: P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
@@ -218,7 +213,7 @@ Next, the step of the transfer must be specified. Receive in this case:
   ▸ Receive
 ```
 
-Then, select Ledger (B in this case) as the key source that will sign the receiver operations.
+Then, select Ledger as the key source that will sign the receiver operations.
 
 ```text
 ? Which key source should be used to  for the receiver address?:
@@ -232,7 +227,7 @@ Next, the ledger index is asked for. Input `0`:
 ✗ Ledger index to use: 0
 ```
 
-Next, the amount to receive is asked for. 4.496 as explained before:
+Next, the amount to receive is asked for:
 
 ```text
 ✗ Amount to send (AVAX units): 4.496
@@ -258,9 +253,9 @@ Issuing ExportTx X -> P
 Issuing ImportTx X -> P
 ```
 
-### Verifying results of the transfer operation using `key list`
+### Verifying Results of the Transfer Operation using `key list`
 
-First check on ledger A side. Put ledger A and open avalanche app:
+First check on ledger A side. Connect ledger A and open the avalanche app:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
@@ -286,7 +281,7 @@ With result:
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-Next, check on ledger B side. Connect ledger B and open avalanche app:
+Next, check on ledger B side. Connect ledger B and open the avalanche app:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
@@ -312,22 +307,22 @@ With result:
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-### Recovery steps
+### Recovery Steps
 
-As a multi step operation, the receiving part of the transfer can have intermediate errors, due eg to
+As a multi step operation, the receiving part of the transfer can have intermediate errors, due for example to
 temporal network connections on the client side.
 
-CLI will take the error an provide the user with a recovery message of the kind:
+The CLI will capture errors an provide the user with a recovery message of the kind:
 
 ```
 ERROR: restart from this step by using the same command with extra arguments: --receive-recovery-step 1
 ```
 
-In this case, the receiving operation should be started the same way, but with the extra suggested param:
+If this happen, the receiving operation should be started the same way, choosing the same options, but adding the extra suggested parameter:
 
 ```bash
 avalanche key transfer --receive-recovery-step 1
 ```
 
-Then, the user should choose the same options, and CLI will resume where it left off.
+Then, the CLI will resume where it left off.
 
