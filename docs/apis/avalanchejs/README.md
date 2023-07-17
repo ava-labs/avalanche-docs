@@ -117,6 +117,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 - avalanche: Our JavaScript module.
 - bn.js: A big number module use by AvalancheJS.
 - buffer: A Buffer library.
+- BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
 ## Run scripts
 
