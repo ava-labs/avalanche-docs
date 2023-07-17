@@ -188,8 +188,8 @@ Precompiles built with Precompile-EVM are still very powerful because it can dir
 state and modify it.
 
 There is a template repo for how to build a precompile with this way called
-[Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both of Subnet-EVM and Precompile-EVM shares
-similar directory structure and common codes.
+[Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both Subnet-EVM and Precompile-EVM share
+similar directory structures and common codes.
 We followed same Hello World tutorial in Precompile-EVM repo.
 You can access the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
 
