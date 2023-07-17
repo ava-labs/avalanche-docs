@@ -21,8 +21,8 @@ This tutorial shows how to do the following on `Mainnet`.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
-- Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
+- Add a node as a validator to the Subnet.
 
 :::note
 
@@ -249,7 +249,10 @@ appears:
 
 Well done. You have just created your own Subnet running on `Mainnet`. Now it's time to add your validators.
 
-## Add a Validator
+## Request to Join a Subnet as a Validator
+
+The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
+To request permission to validate a Subnet, the following steps are required:
 
 :::info
 
@@ -261,241 +264,19 @@ a validator.
 
 :::
 
-This new Subnet is cool, but it doesn't have any dedicated validators and can't process transactions
-yet.
-
-To add a validator to your Subnet, you must add the desired node's NodeID to the Subnet's validator
-allow list by issuing an `addValidator` transaction and instruct the node to start syncing the
-Subnet by updating its local configs. You need to repeat this process for every validator you
-add to the network.
-
-You can run the `addValidator` transactions from the same box that deployed the Subnet.
-
-### Submit addValidator TX to Mainnet
-
-Start by running the `addValidator` command and adding the name of the Subnet. To be clear,
-this does _not start or run_ a validator, it only whitelists the node as a recognized validator on
-the Subnet.
-
-```bash
-avalanche subnet addValidator testsubnet
-```
-
-First choose `Mainnet` as the network to add the Subnet validator to.
-
-```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to add validator to.:
-    Fuji
-  ▸ Mainnet
-```
-
-Because this operation issues a new
-[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), the CLI needs the
-control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
-the process looks slightly different if you use multiple controls keys. The address needs to pay a
-TX fee of 0.001 AVAX.
-
-```text
-Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
-```
-
-### Set NodeID
-
-Now enter the [**NodeID**](#getting-your-mainnet-nodeids) of the validator.
-
-```text
-Next, we need the NodeID of the validator you want to whitelist.
-
-Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how
-to query the NodeID from your node
-(Edit host IP address and port to match your deployment, if needed).
-✔ What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
-```
-
-Note, this ID is intentionally modified to prevent replication.
-
-### Set Stake Weight
-
-Select 30 as the stake weight. You can learn more about the stake weight parameter in
-[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
-`weight` section.
-
-:::warning
-
-The stake weight of all your validators should sum to at least 100.
-
-:::
-
-```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? What stake weight would you like to assign to the validator?:
-    Default (20)
-  ▸ Custom
-```
-
-```text
-✔ What stake weight would you like to assign to the validator?: 30
-```
-
-### Set Validation Start Time
-
-Next, specify when the validator is going to start validating. The time must be in the future. You
-can use the custom option to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the
-default this time:
-
-```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Start time:
-  ▸ Start in one minute
-    Custom
-```
-
-:::warning
-
-If the `join` command isn't successfully completed before this time elapses and the validator's stake
-weight is >20% of the Subnet, the Subnet may have down time.
-
-Production Subnets should ensure they have sufficient time to setup their validators **before**
-validation begins.
-
-:::
-
-### Set Validation Duration
-
-Finally, specify how long it's going to be validating:
-
-```text
-✔ Start in one minute
-Use the arrow keys to navigate: ↓ ↑ → ←
-? How long should your validator validate for?:
-  ▸ Until primary network validator expires
-    Custom
-```
-
-If you choose `Custom` here, you need to enter a **duration**, which is a time span expressed in hours.
-For example, say `200 days = 24 \* 200 = 4800h`
-
-```text
-✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
-```
-
-The CLI shows the user an actual date:
-
-```text
-? Your validator is going to finish staking by 2023-06-10 13:07:58:
-  ▸ Yes
-    No
-```
-
-Confirm if correct.
-
-### Issue the TX
-
-At this point the prompt series is complete and the CLI attempts the transaction:
-
-```text
-NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
-Network: Mainnet
-Start time: 2022-11-22 13:07:58
-End time: 2023-06-10 13:07:58
-Weight: 30
-Inputs complete, issuing transaction to add the provided validator information...
-```
-
-The CLI shows the Ledger address:
-
-```text
-Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
-```
-
-At this point, if the Ledger address isn't the control key for the Subnet, the user receives
-an error:
-
-```text
-Error: wallet doesn't contain subnet auth keys
-exit status 1
-```
-
-If the Ledger doesn't have enough funds, the following error message appears:
-
-```text
-*** Please sign subnet creation hash on the ledger device ***
-Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
-```
-
-Otherwise, both the CLI and the Ledger request to sign the TX:
-
-```text
-*** Please sign add validator hash on the ledger device ***
-```
-
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and
-right buttons.
-
-This might take a couple of seconds. After, it prints:
-
-```text
-Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
-```
-
-This means the node is now a validator on the given Subnet on `Mainnet`! However, your work isn't
-complete. You **must** finish the [Join a Subnet](#join-a-subnet) section otherwise your Subnet
-risks downtime.
-
-You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
-
-## Subnet Export
-
-Because you need to setup multiple validators on multiple different machines, you need to export
-your Subnet's configuration and import it on each validator.
-
-```bash
-avalanche subnet export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
-```
-
-The file is in text format and you shouldn't change it. You can use it to import the configuration
-on a different machine.
-
-## Subnet Import
-
-To import a VM configuration, move the file you exported in the previous section to your desired
-machine and issue the `import` command with the path to the file.
-
-```bash
-avalanche subnet import /tmp/testsubnet-export.dat
-Subnet imported successfully
-```
-
-After this the whole Subnet configuration should be available on the target machine:
-
-```text
-avalanche subnet list
-+---------------+---------------+----------+-----------+----------+
-|    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
-+---------------+---------------+----------+-----------+----------+
-| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
-+---------------+---------------+----------+-----------+----------+
-```
-
-## Join a Subnet
-
-To configure your validator to sync a specific Subnet, run the `join` command. This is a bit of a
-special command. The `join` command is going to either just _print the required instructions_ for
-your already running node or is going to attempt to edit your config files automatically. If you are
-running the CLI on the same box as your validator, you should run the commands in automated
-mode. If you don't want to run Avalanche-CLI on the same box as your validator, use the manual
-commands.
+First, request permission to validate by running the `join` command along with the Subnet name:
 
 ```bash
 avalanche subnet join testsubnet
 ```
 
+Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of
+the Subnet must approve your node to be a validator afterwards by calling `addValidator` as
+described in the next section.
+
 ### Select Mainnet
 
-First ask for network for which the validator is joining. Choose `Mainnet`:
+When you `join` command, you are first prompted with the network selection. Choose `Mainnet`:
 
 ```text
 Use the arrow keys to navigate: ↓ ↑ → ←
@@ -504,31 +285,13 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ Mainnet
 ```
 
-### Check Validator List Status
-
-Because you deployed a permissioned Subnet, not just any primary network validator may validate the
-Subnet. The Subnet's control key holders must have first added the desired NodeID to the Subnet's
-validator list with the `addValidator` command described in the preceding section. Avalanche-CLI
-checks that your node is authorized to validate the target Subnet.
-
-```text
-Would you like to check if your node is allowed to join this subnet?
-If not, the subnet's control key holder must call avalanche subnet
-addValidator with your NodeID.
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Check whitelist?:
-  ▸ Yes
-    No
-```
-
-If you followed the steps in [Add a Validator](#add-a-validator), everything should work as expected.
-
 ### Setup Node Automatically
 
 There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
 "Automatic" attempts to edit your config file and sets up your plugin directory, while "Manual" just
-prints the required config to the screen. To run in automatic mode, you must be running
-Avalanche-CLI on the same box as the validator node.
+prints the required config to the screen. If you are running the CLI on the same box as your 
+validator, you should run the commands in automated mode. If you don't want to run Avalanche-CLI 
+on the same box as your validator, use the manual commands.
 
 Select automatic.
 
@@ -622,6 +385,219 @@ this tool is going to try to update the file automatically (make sure it can wri
 
 After you update your config, you are going to need to restart your node for the changes to
 take effect.
+```
+
+## Add a Validator
+
+:::warning
+
+If the `join` command isn't successfully completed before `addValidator` is completed, the Subnet
+could experience degraded performance or even halt.
+
+:::
+
+Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to
+grant the node permission to be a validator in your Subnet.
+
+To whitelist a node as a recognized validator on the Subnet, run:
+
+```bash
+avalanche subnet addValidator testsubnet
+```
+
+You need to repeat this process for every validator you add to the network.
+
+You can run the `addValidator` transactions from the same box that deployed the Subnet.
+
+### Submit addValidator TX to Mainnet
+
+First choose `Mainnet` as the network to add the Subnet validator to.
+
+```text
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to add validator to.:
+    Fuji
+  ▸ Mainnet
+```
+
+Because this operation issues a new
+[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), the CLI needs the
+control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
+the process looks slightly different if you use multiple controls keys. The address needs to pay a
+TX fee of 0.001 AVAX.
+
+```text
+Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+```
+
+### Set NodeID
+
+Now enter the [**NodeID**](#getting-your-mainnet-nodeids) of the validator.
+
+```text
+Next, we need the NodeID of the validator you want to whitelist.
+
+Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how
+to query the NodeID from your node
+(Edit host IP address and port to match your deployment, if needed).
+✔ What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
+```
+
+Note, this ID is intentionally modified to prevent replication.
+
+### Set Stake Weight
+
+Select 30 as the stake weight. You can learn more about the stake weight parameter in
+[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
+`weight` section.
+
+:::warning
+
+The stake weight of all your validators should sum to at least 100.
+
+:::
+
+```text
+Use the arrow keys to navigate: ↓ ↑ → ←
+? What stake weight would you like to assign to the validator?:
+    Default (20)
+  ▸ Custom
+```
+
+```text
+✔ What stake weight would you like to assign to the validator?: 30
+```
+
+### Set Validation Start Time
+
+Next, specify when the validator is going to start validating. The time must be in the future. You
+can use the custom option to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the
+default this time:
+
+```text
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Start time:
+  ▸ Start in one minute
+    Custom
+```
+
+### Set Validation Duration
+
+Finally, specify how long it's going to be validating:
+
+```text
+✔ Start in one minute
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How long should your validator validate for?:
+  ▸ Until primary network validator expires
+    Custom
+```
+
+If you choose `Custom` here, you need to enter a **duration**, which is a time span expressed in hours.
+For example, say `200 days = 24 \* 200 = 4800h`
+
+```text
+✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
+```
+
+The CLI shows the user an actual date:
+
+```text
+? Your validator is going to finish staking by 2023-06-10 13:07:58:
+  ▸ Yes
+    No
+```
+
+Confirm if correct.
+
+### Issue the TX
+
+At this point the prompt series is complete and the CLI attempts the transaction:
+
+```text
+NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+Network: Mainnet
+Start time: 2022-11-22 13:07:58
+End time: 2023-06-10 13:07:58
+Weight: 30
+Inputs complete, issuing transaction to add the provided validator information...
+```
+
+The CLI shows the Ledger address:
+
+```text
+Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
+```
+
+At this point, if the Ledger address isn't the control key for the Subnet, the user receives
+an error:
+
+```text
+Error: wallet doesn't contain subnet auth keys
+exit status 1
+```
+
+If the Ledger doesn't have enough funds, the following error message appears:
+
+```text
+*** Please sign subnet creation hash on the ledger device ***
+Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
+```
+
+Otherwise, both the CLI and the Ledger request to sign the TX:
+
+```text
+*** Please sign add validator hash on the ledger device ***
+```
+
+This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
+using the Ledger's right button, and then authorize the request by pressing both left and
+right buttons.
+
+This might take a couple of seconds. After, it prints:
+
+```text
+Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
+```
+
+This means the node is now a validator on the given Subnet on `Mainnet`! However, your work isn't
+complete. You **must** finish the [Request to Join a Subnet as a Validator](#request-to-join-a-subnet-as-a-validator)
+section otherwise your Subnet risks downtime.
+
+You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
+
+## Subnet Export
+
+Because you need to setup multiple validators on multiple different machines, you need to export
+your Subnet's configuration and import it on each validator.
+
+```bash
+avalanche subnet export testsubnet
+✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+```
+
+The file is in text format and you shouldn't change it. You can use it to import the configuration
+on a different machine.
+
+## Subnet Import
+
+To import a VM configuration, move the file you exported in the previous section to your desired
+machine and issue the `import` command with the path to the file.
+
+```bash
+avalanche subnet import /tmp/testsubnet-export.dat
+Subnet imported successfully
+```
+
+After this the whole Subnet configuration should be available on the target machine:
+
+```text
+avalanche subnet list
++---------------+---------------+----------+-----------+----------+
+|    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
++---------------+---------------+----------+-----------+----------+
+| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
++---------------+---------------+----------+-----------+----------+
 ```
 
 ## Going Live
