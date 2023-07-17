@@ -871,7 +871,7 @@ avalanche key list [flags]
 
 ### Key Transfer
 
-The `key transfer` command allows to transfer funds between stored keys or ledger addrs.
+The `key transfer` command allows to transfer funds between stored keys or ledger addresses.
 
 **Usage:**
 
