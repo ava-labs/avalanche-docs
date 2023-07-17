@@ -249,10 +249,10 @@ appears:
 
 Well done. You have just created your own Subnet running on `Mainnet`. Now it's time to add your validators.
 
-## Join a Subnet
+## Request to Join a Subnet as a Validator
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet. We are now going to add
-a validator to the Subnet.
+The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
+To request permission to validate a Subnet, the following steps are required:
 
 :::info
 
