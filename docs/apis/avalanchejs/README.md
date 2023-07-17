@@ -90,7 +90,7 @@ project as a pure JavaScript implementation of Avalanche.
 
 ![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
 
-## Use AvalancheJS in projects
+## Use AvalancheJS in Projects
 
 The AvalancheJS library can be imported into your existing Node.js project as follows:
 
@@ -119,9 +119,9 @@ The above lines import the libraries used in the tutorials. The libraries includ
 - buffer: A Buffer library.
 - BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
-## Run scripts
+## Run Scripts
 
-### Typescript file (.ts) 
+### TypeScript File (.ts) 
 **Via NPM**
 * Install typescript:
 
@@ -140,7 +140,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 
     `ts-node script-name.ts`
 
-### Javascript file (.js)
+### JavaScript File (.js)
 As Node.js is already installed per [requirements](/#Requirements),
 simply run the script:
 
