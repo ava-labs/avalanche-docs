@@ -556,7 +556,7 @@ become a validator.
 
 :::
 
-To add a node as a validator to a Subnet, run the `join` command along with the Subnet name:
+First, request permission to validate by running the `join` command along with the Subnet name:
 
 ```bash
 avalanche subnet join testsubnet
