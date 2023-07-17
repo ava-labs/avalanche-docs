@@ -620,7 +620,10 @@ interface IFeeManager is IAllowList {
     );
 
   // Get the last block number changed the fee config from the contract storage
-  function getFeeConfigLastChangedAt() external view returns (uint256 blockNumber);
+  function getFeeConfigLastChangedAt()
+    external
+    view
+    returns (uint256 blockNumber);
 }
 ```
 
@@ -825,8 +828,9 @@ Configurations](#initial-precompile-configurations).
 
 ## Contract Examples
 
-Subnet-EVM contains example contracts for precompiles under `/contract-examples`. It's a hardhat
-project with tests, tasks. For more information see [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contract-examples#subnet-evm-contracts).
+Subnet-EVM contains example contracts for precompiles under `/contracts`. It's a hardhat
+project with tests and tasks. For more information see 
+[contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
 
 ## Network Upgrades: Enable/Disable Precompiles
 
