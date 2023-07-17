@@ -1,3 +1,7 @@
+---
+description: Learn how to create a stateful precompile for Subnet-EVM from scratch.
+---
+
 # Stateful Precompile Generation Tutorial
 
 import Tabs from '@theme/Tabs';
@@ -221,7 +225,7 @@ Set the `$GOPATH` environment variable properly for Go to look for Go Workspaces
 [this](https://go.dev/doc/gopath_code) for details. You can verify by running `echo $GOPATH`.
 
 :::info
-See [here](https://github.com/golang/go/wiki/SettingGOPATH) for instructions on setting the 
+See [here](https://github.com/golang/go/wiki/SettingGOPATH) for instructions on setting the
 GOPATH based on system configurations.
 :::
 
@@ -248,20 +252,15 @@ Clone the repository:
 
 <!-- vale off -->
 
-<Tabs
-defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```shell
 git clone git@github.com:ava-labs/subnet-evm.git
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM" >
 
 ```shell
 git clone git@github.com:ava-labs/precompile-evm.git
@@ -288,18 +287,13 @@ You can inspect example pull request for the complete code.
 
 <!-- vale off -->
 
-<Tabs
-defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 [Subnet-EVM Hello World Pull Request](https://github.com/ava-labs/subnet-evm/pull/565/)
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 [Precompile-EVM Hello World Pull Request](https://github.com/ava-labs/precompile-evm/pull/12/)
 
@@ -324,13 +318,8 @@ For the tutorial, we will be working in a new branch in Subnet-EVM/Precompile-EV
 
 <!-- vale off -->
 
-<Tabs
-defaultvalue="subnet-evm-tab" groupId="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -379,7 +368,7 @@ solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
@@ -587,13 +576,8 @@ Now let's generate the precompile template files!
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 In Subnet-EVM precompile implementations reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
 template in the `./precompile/contracts/helloworld` directory, where `helloworld` is the name of the
@@ -604,7 +588,7 @@ Go package we want to generate the precompile into.
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 For Precompile-EVM we don't need to put files under a deep directory structure. We can just generate the
 precompile template under its own directory via `--out ./helloworld` flag.
@@ -1127,13 +1111,9 @@ that it can be imported by other packages.
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 For Subnet-EVM we have a precompile registry under [`/precompile/registry/registry.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/registry/registry.go).
 This registry force-imports precompiles from other packages, for example:
@@ -1166,7 +1146,7 @@ This ensures that the registry is imported and the precompiles are registered.
 <!-- vale on -->
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 For Precompile-EVM there is a [`plugin/main.go`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/plugin/main.go)
 file in Precompile-EVM that orchestrates this precompile registration.
@@ -1331,13 +1311,9 @@ For the test contract we write our test in `./contracts/test/ExampleHelloWorldTe
 <!-- vale off -->
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 <!-- vale on -->
 
@@ -1390,7 +1366,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 For Precompile-EVM, you should import `AllowListTest` with `@avalabs/subnet-evm-contracts` NPM package:
 
@@ -1455,13 +1431,9 @@ You can find more information about the test framework [here](https://github.com
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 The test script looks like this:
 
@@ -1514,7 +1486,7 @@ describe("ExampleHelloWorldTest", function () {
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 The test script looks like this:
 
 ```ts
@@ -1732,13 +1704,9 @@ Once we've built AvalancheGo, we can navigate back to the repo and build the bin
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -1764,7 +1732,7 @@ Subnet-EVM/v0.5.2@9a1c5482c83c32b29630ff171cb20ccc889d760e [AvalancheGo=v1.10.2,
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
@@ -1808,20 +1776,16 @@ To run ONLY the HelloWorld precompile test, run the command:
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM">
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
@@ -1955,20 +1919,15 @@ to the genesis JSON file:
 
 <!-- vale off -->
 
-<Tabs
-defaultValue="subnet-evm-tab"
-values={[
-{label: 'subnet-evm-tab', value: 'subnet-evm-tab'},
-{label: 'precompile-evm-tab', value: 'precompile-evm-tab'},
-]}>
-<TabItem value="subnet-evm-tab" groupId="subnet-evm-tab" >
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
 </TabItem>
-<TabItem value="precompile-evm-tab" groupId="precompile-evm-tab" >
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
