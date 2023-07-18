@@ -163,7 +163,7 @@ To execute the script, we use:
 
 It ran successfully, providing the following output:
 
-```
+```zsh
 lavinia@Lavinias-MacBook-Pro avalanchejs % ts-node examples/avm/getTx.ts
 {
   unsignedTx: {
