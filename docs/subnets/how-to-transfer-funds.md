@@ -22,6 +22,7 @@ information about fees [here](https://docs.avax.network/quickstart/transaction-f
 The `key transfer` command can also be applied to the stored keys managed by the CLI. It enables
 moving funds from one stored key to another, and from a ledger to a stored key or the other way.
 
+:::
 Anyway, this tutorial focus on the most expected user case of transferring between ledger accounts.
 
 ## Prerequisites
