@@ -1,16 +1,19 @@
 ---
-description: To enable direct transfers between ledger P-Chain addresses,
-use the Avalanche-CLI command `avalanche key transfer`.
+description: To enable direct transfers between ledger P-Chain addresses, use the Avalanche-CLI command `avalanche key transfer`.
 sidebar_label: Directly Transfer Funds
 ---
+
 # How to Use Avalanche-CLI to Transfer P-Chain Funds
+
 It is sometimes necessary to transfer funds between different ledgers, or between
 different accounts or addresses in our ledger. This could be due to various reasons:
+
 1. Moving funds to a Subnet control ledger from another funded account
 because the Subnet control ledger cannot be changed.
 2. Transferring funds to a ledger address with a different index, which is
 sometimes required for the command-line tool (CLI) to work with default
 settings.
+
 To enable direct transfers between P-Chain addresses, use the command
 `avalanche key transfer`. This operation involves a series of import/export
 actions with the P-Chain and X-Chain. The fee for this operation is four times the typical
