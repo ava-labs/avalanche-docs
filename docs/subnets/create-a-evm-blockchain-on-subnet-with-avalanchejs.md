@@ -204,7 +204,7 @@ following dependencies.
 - yargs
 
 ```bash
-npm install --save avalanche dotenv yargs
+npm install --save @avalabs/avalanchejs dotenv yargs
 ```
 
 ### Configuration and Other Details
