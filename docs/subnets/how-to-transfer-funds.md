@@ -78,7 +78,7 @@ A ledger manages an infinite amount of addresses derived from a main private key
 in certain operations there is a need to specify which address or which index of the ledger is the user
 operating against.
 
-### Decide which Index of Ledger B to Use and Find Out the Associated Address
+### Determine Receiver Address Index
 
 In this case the user wants to use index 0, the one CLI by default expects to contain funds.
 
