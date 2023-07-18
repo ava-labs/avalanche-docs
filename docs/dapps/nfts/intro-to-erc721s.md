@@ -14,8 +14,8 @@ The following tools will be used during this tutorial:
 - [OpenZeppelin’s Wizard](https://wizard.openzeppelin.com/): to create the ERC-721 smart contract.
 - [Remix IDE](https://remix-project.org/): To edit the code and deploy it to Fuji.
 - [Avalanche Testnet Faucet](https://faucet.avax.network/): To fund the deployment.
-- [MetaMask browser
-  Extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn):
+- [Core browser
+  Extension](https://chrome.google.com/webstore/detail/core-crypto-wallet-nft-ex/agoakfejjabomempkjlepdflaleeobhb):
   To process transactions related to funding and deploying the smart contract.
 - [Snowtrace Testnet Explorer](https://testnet.snowtrace.io/): To view the deployed smart contract.
 
@@ -44,20 +44,40 @@ Once the image and metadata files are ready, we can prepare to deploy a smart co
 
 ## Preparing Your Environment
 
-### MetaMask Extension
+### Core Extension
 
-You'll need the MetaMask Extension installed on whatever browser you're using to
+You'll need the Core Extension installed on whatever browser you're using to
 be able to fund the deployment of the smart contract. If you've not done so
-already, download MetaMask and [add the Fuji network to
-MetaMask](../launch-your-ethereum-dapp.md#fuji-testnet-settings). Create or
-import a Fuji account as necessary.
+already, download Core and enable Testnet Mode.
+To do that, go to **Settings** and click on **Advanced**.
+
+![Settings image 1](/img/c-chain-ERC20/settings1.png)
+
+Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to
+Fuji Testnet. 
+
+![Settings image 2](/img/c-chain-ERC20/settings2.png)
+
+:::info
+
+If you are using other wallets, like Core or MetaMask, you can add the Fuji 
+Testnet using the following specs:
+
+- **Network Name**: Avalanche C-Chain
+- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+- **ChainID**: `43113`
+- **Symbol**: AVAX
+- **Explorer**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
+
+:::
+
 
 ### Getting Testnet Funds
 
 Because we're deploying on the Fuji Network, you'll need to get AVAX on the Fuji
 network. If you visit the [Avalanche Faucet](https://faucet.avax.network/), you
 can request up to 2 Fuji AVAX per day. Please enter the C Chain address of the
-account linked to your MetaMask in the previous step.
+account linked to your Core wallet in the previous step.
 
 ![Avalanche Faucet](intro-to-erc721s/1-faucet.png)
 
@@ -159,26 +179,28 @@ web3`.
 
 ![Remix Web3](intro-to-erc721s/8-provider.png)
 
-This should prompt you to connect with your MetaMask account. Once connected,
+This should prompt you to connect with your Core account. Once connected,
 you can verify the correct connection by checking that the Account number
-matches your MetaMask address.
+matches your Core address.
 
-![Remix MetaMask](intro-to-erc721s/9-metamask.png)
+![Remix account](intro-to-erc721s/9-account1.png)
+
+![Core account](intro-to-erc721s/10-account2.png)
 
 Now click on the `Contract` drop-down and select the contract you created and
 compiled. It should show up with the name you gave it in the Open Zeppelin
 Wizard.
 
-![Remix Contract](intro-to-erc721s/10-contract.png)
+![Remix Contract](intro-to-erc721s/11-contract.png)
 
-Now, click deploy. This will open MetaMask and ask you to confirm the transaction. Click `Confirm`.
+Now, click deploy. This will open Core and ask you to confirm the transaction. Click `Confirm`.
 
-![MetaMask Accept](intro-to-erc721s/11-accept.png)
+![Core Accept](intro-to-erc721s/12-approval.png)
 
 It may take a second, but once completed, your newly deployed contract will
 appear underneath the `Transactions Recorded` field.
 
-![Remix Record](intro-to-erc721s/12-transaction-record.png)
+![Remix Record](intro-to-erc721s/13-transaction-record.png)
 
 Copy your contract’s address and open the [Snowtrace Testnet
 Explorer](https://testnet.snowtrace.io/). Paste your contract address in the
@@ -189,7 +211,7 @@ Snowtrace](https://testnet.snowtrace.io/address/0xa03e85f4411e37cbaff635975bf38c
 The first transaction you see should be the contract deployment you just did in
 the Remix IDE.
 
-![Snowtrace](intro-to-erc721s/13-snowtrace.png)
+![Snowtrace](intro-to-erc721s/14-snowtrace.png)
 
 ## Minting an NFT
 
@@ -197,41 +219,39 @@ Now that you've deployed the contract, you can mint the NFT. Go back to the
 Remix IDE tab and click on your contract to expand its information. A list of
 functions will appear that you can interact with.
 
-![Remix Functions](intro-to-erc721s/14-functions.png)
+![Remix Functions](intro-to-erc721s/15-functions.png)
 
 The only function you're interested in is the `safeMint` function. Click the
 drop-down arrow for the function to expand the address field.
 
-![Remix safe mint](intro-to-erc721s/15-safemint.png)
+![Remix safe mint](intro-to-erc721s/16-safemint.png)
 
-Now, copy your MetaMask address and paste it into this address field. This will
+Now, copy your Core address and paste it into this address field. This will
 send the NFT to your address when the mint function is called. After, hit
 `transact`.
 
-This will reopen MetaMask and ask you to verify the transaction. Click `Confirm` to mint your NFT.
-
-![Confirm Mint](intro-to-erc721s/16-confirm-mint.png)
+This will reopen Core and ask you to verify the transaction. Click `Confirm` to mint your NFT.
 
 Once the transaction has been confirmed, you'll see a green checkmark in the
 terminal at the bottom of the Remix IDE.
 
-![Remix Confirm Mint](intro-to-erc721s/17-remix-confirm.png)
+![Remix Confirm Mint](intro-to-erc721s/18-remix-confirm.png)
 
 Head back to the Snowtrace Testnet explorer page for your contract and refresh
 it. You should now see a second transaction, your call to `safeMint`.
 
-![Snowtrace Mint](intro-to-erc721s/18-snowtrace-mint.png)
+![Snowtrace Mint](intro-to-erc721s/19-snowtrace-mint.png)
 
 By clicking on the [TX
 Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd696eb8cde6f28347f6f99a2c9),
 you see that your NFT was created!
 
-![Snowtrace Transaction](intro-to-erc721s/19-snowtrace-txn.png)
+![Snowtrace Transaction](intro-to-erc721s/20-snowtrace-txn.png)
 
 ## Mainnet
 
 All of the above steps can be used on Mainnet except the following changes:
 
-- Make sure that you [connect to the Mainnet with MetaMask](../launch-your-ethereum-dapp.md#avalanche-mainnet-settings).
+- Make sure that you switch to the Avalanche C-Chain in Core.
 - Make sure that you have AVAX tokens in your account to cover transaction costs.
 - You should use the Mainnet version of [Snowtrace Explorer](https://snowtrace.io/) to view transactions.

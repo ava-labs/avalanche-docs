@@ -13,8 +13,8 @@ In this article, it's shown how to do the following on `Fuji` Testnet.
 
 - Create a Subnet.
 - Deploy a virtual machine based on Subnet-EVM.
-- Add a node as a validator to the Subnet.
 - Join a node to the newly created Subnet.
+- Add a node as a validator to the Subnet.
 
 All IDs in this article are for illustration purposes. They can be different in your own
 run-through of this tutorial.
@@ -541,176 +541,41 @@ To get your new Subnet information, visit the
 search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh`
 into the search box and you should see your shiny new blockchain information.
 
-## Add a Validator
+## Request to Join a Subnet as a Validator
+
+The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
+To request permission to validate a Subnet, the following steps are required:
 
 :::info
 
-Adding a validator on a Subnet requires that the node is already a validator on the primary network,
-which means that your node has **fully bootstrapped**.
+Before a node can be a validator on a Subnet, the node is required to already be a validator on the
+primary network, which means that your node has **fully bootstrapped**.
 
 See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to
 become a validator.
 
 :::
 
-This new Subnet is cool - but it doesn't have any dedicated validators yet. Add one by running
-the `addValidator` command and adding the name of the Subnet. To be clear, this does _not start or
-run_ a validator, it only whitelists the node as a recognized validator on the Subnet.
-
-```bash
-avalanche subnet addValidator testsubnet
-```
-
-As this operation involves a new
-[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), it's needed to tell the
-tool which private key to use:
-
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Which private key should be used to issue the transaction?:
-    test
-  ▸ mytestkey
-```
-
-Choose `Fuji`:
-
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to deploy on. This command only supports Fuji currently.:
-  ▸ Fuji
-    Mainnet
-```
-
-Now use the **NodeID** of the new validator from the very beginning of this tutorial. For best
-results make sure the validator is running and synced.
-
-```bash
-What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAAAAAAAAAAAAAAAAAQGjPhUy
-```
-
--this ID is intentionally modified-
-
-The next question requires a bit of thinking. A validator has a weight, which defines how often
-consensus selects it for decision making. You should think ahead of how many validators you want
-initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without
-any validators yet is 20. The structure is a bit described at
-[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
-`weight` section.
-
-Just select 30 for this one:
-
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? What stake weight would you like to assign to the validator?:
-    Default (20)
-  ▸ Custom
-```
-
-```bash
-✔ What stake weight would you like to assign to the validator?: 30
-```
-
-Then specify when the validator is going to start validating. The time must be in the future. Custom
-option is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Just take the
-default this time:
-
-```bash
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Start time:
-  ▸ Start in one minute
-    Custom
-```
-
-:::warning
-
-If the `join` command isn't successfully completed before this time elapses and the validator's stake
-weight is >20% of the Subnet, the Subnet may have down time.
-
-:::
-
-Finally, specify how long it's going to be validating:
-
-```bash
-✔ Start in one minute
-Use the arrow keys to navigate: ↓ ↑ → ←
-? How long should your validator validate for?:
-  ▸ Until primary network validator expires
-    Custom
-```
-
-If choosing `Custom` here, the user must enter a **duration**, which is a time span expressed in
-hours. For example, could say `200 days = 24 \* 200 = 4800 hours`
-
-```bash
-✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
-```
-
-CLI shows an actual date of when that's now:
-
-```bash
-? Your validator is going to finish staking by 2023-02-13 12:26:55:
-  ▸ Yes
-    No
-```
-
-Confirm if correct. At this point the prompt series is complete and CLI attempts the transaction:
-
-```bash
-NodeID: NodeID-BFa1padLXBj7VHa2JYvYGzcTBPQGjPhUy
-Network: Fuji
-Start time: 2022-07-28 12:26:55
-End time: 2023-02-13 12:26:55
-Weight: 30
-Inputs complete, issuing transaction to add the provided validator information...
-```
-
-This might take a couple of seconds, and if successful, it's going to print:
-
-```bash
-Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
-```
-
-This means the node is now a validator on the given Subnet on `Fuji`!
-
-## Join a Subnet
-
-You might already have a running validator which you want to add to a specific Subnet. For this
-run the `join` command.
-This is a bit of a special command. The `join` command is going to either just _print the required
-instructions_ for your already running node or is going to attempt at configuring a config file the
-user provides.
-
-First network selection:
+First, request permission to validate by running the `join` command along with the Subnet name:
 
 ```bash
 avalanche subnet join testsubnet
+```
+
+Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of 
+the Subnet must approve your node to be a validator afterwards by calling `addValidator` as 
+described in the next section.
+
+When you call the `join` command, you are first prompted with the network selection:
+
+```bash
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Choose a network to validate on (this command only supports public networks):
   ▸ Fuji
     Mainnet
 ```
 
-The [Deploy the Subnet](#deploy-the-subnet) section shows that a Subnet is permissioned
-via a set of keys. Therefore not any node is suitable as validator to the Subnet. A holder of a control
-key _must_ call
-[Subnet addValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) first in order
-to allow the node to validate the Subnet. So the tool allows the user now to verify if the node has
-already been permissioned -"whitelisted"- to be a validator for this Subnet -by calling an API in
-the background-.
-
-```bash
-Would you like to check if your node is allowed to join this subnet?
-If not, the subnet's control key holder must call avalanche subnet
-addValidator with your NodeID.
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Check whitelist?:
-    Yes
-  ▸ No
-```
-
-The default is `Yes` but just choose `No` here to speed up things, assuming the node is already whitelisted.
-
-There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
+Next, there are two setup choices: Automatic and Manual configurations. As mentioned earlier,
 "Automatic" is going to attempt at editing a config file and setting up your plugin directory, while
 "Manual" is going to just print the required config to the screen. See what "Automatic" does:
 
@@ -803,6 +668,128 @@ After you update your config, you are going to need to restart your node for the
 take effect.
 ```
 
+## Add a Validator
+
+:::warning
+
+If the `join` command isn't successfully completed before `addValidator` is completed, the Subnet
+could experience degraded performance or even halt.
+
+:::
+
+Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to 
+grant the node permission to be a validator in your Subnet.
+
+To whitelist a node as a recognized validator on the Subnet, run:
+
+```bash
+avalanche subnet addValidator testsubnet
+```
+
+As this operation involves a new
+[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), you will need to specify
+which private key to use:
+
+```bash
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which private key should be used to issue the transaction?:
+    test
+  ▸ mytestkey
+```
+
+Choose `Fuji`:
+
+```bash
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to deploy on. This command only supports Fuji currently.:
+  ▸ Fuji
+    Mainnet
+```
+
+Now use the **NodeID** of the new validator defined at the beginning of this tutorial. For best
+results make sure the validator is running and synced.
+
+```bash
+What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAAAAAAAAAAAAAAAAAQGjPhUy
+```
+
+-this ID is intentionally modified-
+
+The next question requires a bit of thinking. A validator has a weight, which defines how often
+consensus selects it for decision making. You should think ahead of how many validators you want
+initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without
+any validators yet is 20. The structure is a bit described at
+[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
+`weight` section.
+
+Just select 30 for this one:
+
+```bash
+Use the arrow keys to navigate: ↓ ↑ → ←
+? What stake weight would you like to assign to the validator?:
+    Default (20)
+  ▸ Custom
+```
+
+```bash
+✔ What stake weight would you like to assign to the validator?: 30
+```
+
+Then specify when the validator is going to start validating. The time must be in the future. Custom
+option is going to require to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Just take the
+default this time:
+
+```bash
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Start time:
+  ▸ Start in one minute
+    Custom
+```
+
+Finally, specify how long it's going to be validating:
+
+```bash
+✔ Start in one minute
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How long should your validator validate for?:
+  ▸ Until primary network validator expires
+    Custom
+```
+
+If choosing `Custom` here, the user must enter a **duration**, which is a time span expressed in
+hours. For example, could say `200 days = 24 \* 200 = 4800 hours`
+
+```bash
+✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
+```
+
+CLI shows an actual date of when that's now:
+
+```bash
+? Your validator is going to finish staking by 2023-02-13 12:26:55:
+  ▸ Yes
+    No
+```
+
+Confirm if correct. At this point the prompt series is complete and CLI attempts the transaction:
+
+```bash
+NodeID: NodeID-BFa1padLXBj7VHa2JYvYGzcTBPQGjPhUy
+Network: Fuji
+Start time: 2022-07-28 12:26:55
+End time: 2023-02-13 12:26:55
+Weight: 30
+Inputs complete, issuing transaction to add the provided validator information...
+```
+
+This might take a couple of seconds, and if successful, it's going to print:
+
+```bash
+Transaction successful, transaction ID :EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
+```
+
+This means the node is now a validator on the given Subnet on `Fuji`!
+
 ## Subnet Export
 
 This tool is most useful on the machine where a validator is or is going to be running. In order to
@@ -840,10 +827,12 @@ avalanche subnet list
 
 ## Appendix
 
-### Connect with MetaMask
+### Connect with Core
 
-To connect MetaMask with your blockchain on the new Subnet running on your local computer, you can
-add a new network on MetaMask with the following values:
+To connect Core (or MetaMask) with your blockchain on the new 
+Subnet running on your local computer, 
+you can add a new network on your Core wallet 
+with the following values:
 
 ```text
 - Network Name: testsubnet
@@ -855,7 +844,7 @@ add a new network on MetaMask with the following values:
 :::note
 
 Unless you deploy your Subnet on other nodes, you aren't going to be able to use other nodes,
-including the public API server `https://api.avax-test.network/`, to connect to MetaMask.
+including the public API server `https://api.avax-test.network/`, to connect to Core.
 
 If you want to open up this node for others to access your Subnet, you should set it up properly
 with `https//node-ip-address` instead of `http://127.0.0.1:9650`, however, it's out of scope for

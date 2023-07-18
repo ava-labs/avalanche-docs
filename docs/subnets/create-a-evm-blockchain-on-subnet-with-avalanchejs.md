@@ -349,7 +349,7 @@ Put your Ethereum derived hexadecimal address (without `0x`) like what you have 
 address will receive the associated balance. Make sure to put your controlled address here, as
 without this you cannot distribute tokens to users for interacting with your chain (tokens are
 required for paying fees for the transactions). For development purposes, you can create a new
-address on MetaMask and use that here.
+address on Core and use that here.
 
 ```json
 "chainId": 11111
@@ -620,11 +620,11 @@ node createBlockchain.js \
 Creating a new chain will take few seconds. You can also view the logs on the Avalanche Network
 Runner tab of the terminal.
 
-## Interacting with the New Blockchain with MetaMask
+## Interacting with the New Blockchain with Core
 
 We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added
 a validator to this Subnet, for validating different chains. Now it's time to interact with the new
 chain. You can follow this
 [part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn,
-how you can set up your MetaMask to interact with this chain. You can send tokens, create smart
+how you can set up your Core to interact with this chain. You can send tokens, create smart
 contracts, and do everything that you can do on C-Chain.

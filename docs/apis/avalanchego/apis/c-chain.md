@@ -17,7 +17,7 @@ Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet,
 
 ## Deploying a Smart Contract
 
-[Deploy a Smart Contract on Avalanche Using Remix and MetaMask](../../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+[Deploy a Smart Contract on Avalanche Using Remix and Core](../../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
 
 ## Ethereum APIs
 
@@ -457,7 +457,7 @@ avax.exportKey({
 - `privateKey` is the CB58 encoded string representation of the private key that controls
   `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
 - `privateKeyHex` is the hex string representation of the private key that controls `address`. It
-  can be used to import an account into MetaMask.
+  can be used to import an account into Core or other wallets, like MetaMask.
 
 **Example Call:**
 
