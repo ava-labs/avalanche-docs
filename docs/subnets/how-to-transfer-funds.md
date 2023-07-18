@@ -50,7 +50,8 @@ After confirming with a web wallet that 4.5 AVAX is available on p-chain address
 With the avalanche app running, execute:
 
 ```bash
-avalanche key list --mainnet --ledger 0,1,2,3,4,5```
+avalanche key list --mainnet --ledger 0,1,2,3,4,5
+```
 
 To see p-chain addresses and balances for the first 6 indices in the ledger derived owner addresses.
 
@@ -69,7 +70,8 @@ To see p-chain addresses and balances for the first 6 indices in the ledger deri
 |        | index 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
 |        | index 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
-+--------+---------+-------------------------+-----------------------------------------------+---------+---------+```
++--------+---------+-------------------------+-----------------------------------------------+---------+---------+
+```
 
 The address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` has 4.5 AVAX and
 is associated to index 2 of ledger A.
