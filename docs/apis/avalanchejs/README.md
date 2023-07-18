@@ -128,21 +128,21 @@ The above lines import the libraries used in the tutorials. The libraries includ
 
 Install typescript:
 
-    npm install typescript
+`npm install typescript`
 
 Run the script:
 
-    ts-node script-name.ts
+`ts-node script-name.ts`
 
 **Via YARN**
 
 Install typescript:
 
-    yarn add typescript
+`yarn add typescript`
 
 Run the script:
 
-    ts-node script-name.ts
+`ts-node script-name.ts`
 
 ### JavaScript File
 
