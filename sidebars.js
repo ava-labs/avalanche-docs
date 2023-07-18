@@ -136,7 +136,6 @@ const sidebars = {
         "subnets/how-to-upgrade-precompile",
         "subnets/how-to-run-cli-with-docker",
         "subnets/how-to-import-subnet",
-        "subnets/how-to-transfer-funds",
         "subnets/troubleshoot-deployments",
       ],
     },
