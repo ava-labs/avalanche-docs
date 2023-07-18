@@ -89,7 +89,8 @@ This will generate a pure JavaScript library and place it in a folder named
 "web" in the project root. The "avalanchejs" file can then be dropped into any
 project as a pure JavaScript implementation of Avalanche.
 
-
+![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
+ 
 ## Use AvalancheJS in Projects
 
 The AvalancheJS library can be imported into your existing Node.js project as follows:
