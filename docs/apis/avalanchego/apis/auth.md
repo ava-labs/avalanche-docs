@@ -25,7 +25,7 @@ you must also specify the file to read the Auth API's password from, with argume
 tokens.
 
 :::info
-If you run your node with `--api-auth-required` then some tools like MetaMask may not be
+If you run your node with `--api-auth-required` then some tools like Core or MetaMask may not be
 able to make API calls to your node because they don’t have an auth token.
 
 This API set is for a specific node, it is unavailable on the [public

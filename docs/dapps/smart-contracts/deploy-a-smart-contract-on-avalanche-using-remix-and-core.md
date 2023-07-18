@@ -1,8 +1,8 @@
 ---
-decription: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and MetaMask.
+decription: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and Core.
 ---
 
-# Deploy a Smart Contract on Avalanche Using Remix and MetaMask
+# Deploy a Smart Contract on Avalanche Using Remix and Core
 
 ## Introduction
 
@@ -19,29 +19,23 @@ DApps and the user experience.
 
 Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
 
-## Step 1: Setting up MetaMask
+## Step 1: Setting up Core
 
-Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
+If you don't already have a Core wallet, follow this 
+[guide](https://support.avax.network/en/articles/6100129-core-extension-how-do-i-create-a-new-wallet)
+to create a new wallet. 
 
-![MetaMask network dropdown](</img/image(60).png>)
+If you want to use the **Avalanche C-Chain**, it can be selected from the networks list.
 
-### Avalanche Mainnet Settings
+To switch to the **Fuji test network**, go to Settings, select Advanced, and then turn Testnet Mode on.
 
-- **Network Name**: Avalanche Mainnet C-Chain
-- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-- **ChainID**: `43114`
-- **Symbol**: `AVAX`
-- **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
+<div style={{textAlign: 'center'}}>
 
-#### **Fuji Testnet Settings:**
+![testnet](/img/remix-core-guide/testnet.png)
 
-- **Network Name**: Avalanche Fuji C-Chain
-- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-- **ChainID**: `43113`
-- **Symbol**: `AVAX`
-- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+</div>
 
-#### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
+**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
 
 - **Network Name**: Avalanche Local C-Chain
 - **New RPC URL**:
@@ -76,49 +70,68 @@ On a local network, you can easily fund your addresses by following
 [this](../../subnets/build-first-subnet.md#importing-the-test-private-key).
 
 
-## Step 3: Connect MetaMask and Deploy a Smart Contract Using Remix
+## Step 3: Connect Core and Deploy a Smart Contract Using Remix
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
 
-![remix file explorer](/img/remix-file-explorer.png)
+![Remix file explorer](/img/remix-core-guide/remix.png)
 
 Load or create the smart contracts that we want to compile and deploy using Remix file explorer.
 
-For this example, we will deploy an ERC20 contract from [OpenZeppelin](https://openzeppelin.com/contracts).
+For this example, we will deploy a simple Hello World contract from [here](https://blog.chain.link/how-to-create-a-hello-world-smart-contract-with-solidity/).
 
-![ERC20 Contract](/img/erc20-contract.png)
+![Hello world contract](/img/remix-core-guide/contract.png)
 
-Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select
-Injected Web3 (make sure MetaMask is loaded)
+Select the Solidity compiler tab and compile the contract.
 
-![Deploy and run transactions](/img/deploy-and-run-transactions.png)
+![Compile contract](/img/remix-core-guide/compile.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected
-contract -&gt; Navigate to Deploy Tab
+Navigate to Deploy & Run transactions Tab -&gt; Open the "ENVIRONMENT" drop-down and select 
+Injected Provider (make sure Core is loaded).
 
-![Solidity compiler](/img/solidity-compiler.png)
+![Deploy and run transactions](/img/remix-core-guide/provider.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to
-deploy our ERC20. Click "Deploy."
+A pop up will ask which wallet to use. Select Core.
 
-![Deploy erc20](/img/deploy-erc20.png)
+<div style={{textAlign: 'center'}}>
 
-Confirm the transaction on the MetaMask pop up.
+![Choose wallet](/img/remix-core-guide/wallet.png)
 
-![Confirm ERC20](/img/confirm-erc20.png)
+</div>
+
+Now, the smart contract is compiled, Core is injected, and we are ready to
+deploy our Hello world contract. Click "Deploy."
+
+![Deploy hello world](/img/remix-core-guide/deploy.png)
+
+Confirm the transaction on the Core pop up.
+
+<div style={{textAlign: 'center'}}>
+
+![Confirm TX](/img/remix-core-guide/approve.png)
+
+</div>
 
 Our contract is successfully deployed!
 
-![Published metadata](/img/published-metadata.png)
+![Deployed contract](/img/remix-core-guide/deployed.png)
 
 Now, we can expand it by selecting it from the "Deployed Contracts" tab and test it out.
 
-![Interact with contract](/img/interact-with-contract.png)
+<div style={{textAlign: 'center'}}>
 
-The contract ABI and Bytecode are available on the compiler tab.
+![Interact with contract](/img/remix-core-guide/interact.png)
 
-![ABI bytecode](/img/abi-bytecode.png)
+</div>
+
+The contract ABI and Bytecode are available on the Solidity compiler tab.
+
+<div style={{textAlign: 'center'}}>
+
+![ABI and bytecode](/img/remix-core-guide/ABI-bytecode.png)
+
+</div>
 
 If you had any difficulties following this tutorial or simply want to discuss
-Avalanche with us, you can join our community at
-[Discord](https://chat.avalabs.org/)!
+Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
+

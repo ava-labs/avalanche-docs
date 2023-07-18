@@ -482,14 +482,14 @@ steps, to collect your first test coins.
 Go to <https://faucet.avax.network>. You will see various network parameters like network name, faucet
 balance, drop amount, drop limit, faucet address, etc.
 
-![faucet 1](/img/faucet-1.jpeg)
+![faucet 1](/img/faucet/faucet1.png)
 
 ### Select Network
 
 You can use the dropdown to select the network of your choice and get some free coins (each network
 may have a different drop amount).
 
-![faucet 2](/img/faucet-2.png)
+![faucet 2](/img/faucet/faucet2.png)
 
 ### Put Address and Request Coins
 
@@ -497,14 +497,14 @@ Put your wallet address where you want to get a drop, and click the **Request** 
 second, you will get a **transaction hash** for the processed transaction. The hash would be a
 hyperlink to Subnet's explorer. You can see the transaction status, by clicking on that hyperlink.
 
-![faucet 3](/img/faucet-3.png)
+![faucet 3](/img/faucet/faucet3.png)
 
 ### More Interactions
 
 This is not just it. Using the buttons shown below, you can go to the Subnet explorer or add the
-Subnet to your browser wallet extensions like MetaMask with a single click.
+Subnet to your browser wallet extensions like Core or MetaMask with a single click.
 
-![faucet 4](/img/faucet-4.png)
+![faucet 4](/img/faucet/faucet4.png)
 
 ### Probable Errors and Troubleshooting
 

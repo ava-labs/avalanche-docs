@@ -214,8 +214,8 @@ C-Chain.
 ### Remix
 
 There is a
-[tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask
+[tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
+for using Remix to deploy smart contracts on Avalanche. It relies on Core
 for access to the Avalanche network.
 
 ### Truffle

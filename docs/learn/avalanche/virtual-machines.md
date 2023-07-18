@@ -61,7 +61,7 @@ developers have the option of deploying their smart contracts on the C-Chain's i
 Ethereum Virtual Machine ([Coreth](/learn/projects#coreth)), or on their own Subnet using the
 [Subnet-EVM](/learn/projects#subnet-evm) for advanced use cases that require more customization.
 
-Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, MetaMask,
+Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
 Truffle, and more.
 
 To learn more about smart contract support, click [here](../../dapps/launch-your-ethereum-dapp.md).

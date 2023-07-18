@@ -111,7 +111,7 @@ prioritize transaction A since it pays a higher effective tip.
 If your transaction is failing and giving an error - `transaction underpriced`,
 then the max fee cap of your transaction must be less than the minimum base
 price that the network supports (as of now, it's 25 nAVAX or Gwei). Although the
-base fee is automatically estimated in wallets like MetaMask, you can try
+base fee is automatically estimated in wallets like Core or MetaMask, you can try
 increasing the max fee cap in the wallet.
 
 During a period of heavy congestion on the network, all submitted transactions
@@ -124,7 +124,7 @@ cap may be below the current base fee that the network is charging. In this
 case, you need to increase the max fee cap of your transaction above the current
 base fee for it to be included in the block.
 
-These fee adjustments can be made through wallets like MetaMask.
+These fee adjustments can be made through wallets like Core or MetaMask.
 
 ## Adjusting Gas Fees Before Submitting the Transaction
 
@@ -133,69 +133,60 @@ there is heavy congestion on the network, and the base fees are frequently
 fluctuating.
 
 1. Let's create a sample transaction on Avalanche Mainnet, in which we will be
-   sending 0.1 AVAX to a receiver using the MetaMask. By clicking **Next** we
-   can review gas fees and the amount which we want to send.
+   sending 0.1 AVAX to a receiver using Core. Four predefined gas settings can
+   be seen, which are Core's inbuilt gas estimation. To set a custom fee select 
+   “Custom” and enter the gas amount to use. By clicking on the **Settings** icon,
+   we can review gas fees and the amount which we want to send.
 
-    ![dynamic fees adjustment 1](/img/dynamic-fees-adjustment-1.png)
+   <div style={{textAlign: 'center'}}>
 
-2. On the review page, you can see the estimated priority and max fee for this
-   transaction. Now click on **EDIT**, to adjust these fees according to network
-   requirements.
+    ![dynamic fees adjustment 1](/img/adjust-gas-fees/adjust-gas1.png)
 
-    ![dynamic fees adjustment 2](/img/dynamic-fees-adjustment-2.png)
+    </div>
 
-3. On this page, you can edit the priority fee (gas tip cap) and max fee (max
-   fee cap) using the advanced options or you can use the MetaMask's inbuilt gas
-   estimation. You can estimate the max fee as shown on
-   [Snowtrace](https://snowtrace.io/gastracker) which represents the average max
+2. On this page, you can edit the priority fee (Max Priority Fee) and base fee (Max
+   base fee). You can estimate the max fee as shown on
+   [Snowtrace](https://snowtrace.io/gastracker), which represents the average max
    fee over the last 3 seconds. For more detailed statistics, you can have a
    look [here](https://stats.avax.network/dashboard/c-chain-activity/).
 
-    ![dynamic fees adjustment 3](/img/dynamic-fees-adjustment-3.png)
+    <div style={{textAlign: 'center'}}>
 
-4. If the network activity is high, you have to edit the priority and max fees
+    ![dynamic fees adjustment 2](/img/adjust-gas-fees/adjust-gas2.png)
+
+    </div>
+
+3. If the network activity is high, you have to edit the priority and max fees
    accordingly, as given on Snowtrace. Consider the example below, where the
-   average max fee is 30 Gwei (nAVAX).
+   average max fee is 26 Gwei (nAVAX).
 
-    ![dynamic fees adjustment 4](/img/dynamic-fees-adjustment-4.png)
+    ![dynamic fees adjustment 3](/img/adjust-gas-fees/adjust-gas3.png)
 
-5. It is recommended to set the max fee cap as the maximum price that you are
+4. It is recommended to set the max fee cap as the maximum price that you are
    willing to pay for a transaction, no matter how high or low the base fee will
    be, as you will only be charged the minimum of base fee and the max fee cap,
-   along with a small priority fee above the base fee. Apart from that, MetaMask
-   will indicate you whether you are paying extra price than required, so you
-   should not have to worry about getting overcharged. Now let's edit the max
-   fee to 40 Gwei. This would ensure that our transaction would not fail until
+   along with a small priority fee above the base fee. Now let's edit the max
+   fee to 35 Gwei. This would ensure that our transaction would not fail until
    the base fee would exceed this amount. We can set a priority fee to anything
-   between 0 and 40 Gwei. More the priority fee faster will be the transaction.
-   For this example, let's set this to 2 Gwei. However you can always rely on
-   MetaMask's automatic estimate instead of opting for advanced options. Now,
-   save and confirm the transaction.
+   between 0 and 35 Gwei. The higher the priority fee, the faster the transaction
+   will be. For this example, let's set this to 2 Gwei. Now, save and send the 
+   transaction.
 
-    ![dynamic fees adjustment 5](/img/dynamic-fees-adjustment-5.png)
+   <div style={{textAlign: 'center'}}>
 
-6. After submitting the transaction, even if the base fee has decreased, you
+    ![dynamic fees adjustment 4](/img/adjust-gas-fees/adjust-gas4.png)
+
+   </div>
+
+5. After submitting the transaction, even if the base fee has decreased, you
    will only pay 2 Gwei above that fee as a priority fee. If this fee is one of
    the highest among the pending transactions, then it will be confirmed
    rapidly. We can see the confirmation of the transaction below.
 
-![dynamic fees adjustment 6](/img/dynamic-fees-adjustment-6.png)
+   <div style={{textAlign: 'center'}}>
 
-| Transaction | Max Fee Cap | Gas tip cap | Base price | Effective tip | Total price |
-| ----------- | ----------- | ----------- | ---------- | ------------- | ----------- |
-| 1           | 40 Gwei     | 2 Gwei      | 25 Gwei    | 2 Gwei        | 27 Gwei     |
+    ![dynamic fees adjustment 5](/img/adjust-gas-fees/adjust-gas5.png)
 
-## Speeding Up the Pending Transaction
+   </div>
 
-If your transaction is on hold for a very long time, you can speed up through
-MetaMask. As shown in the below image, click on the **Speed Up** button, to edit
-your priority and max fee. By default, the new transaction has slightly more
-priority and max fee (say 10% more than the previous), but you can edit as per
-your convenience.
-
-![dynamic fees adjustment 7](/img/dynamic-fees-adjustment-7.png)
-
-You can look at Snowtrace's gas tracker to get an estimate about the average
-base fee, which is currently getting accepted. If the max fee of the network is
-much higher than your transaction, then set the max fee cap to match that of the
-network.
+    ![dynamic fees adjustment 6](/img/adjust-gas-fees/adjust-gas6.png)
