@@ -40,14 +40,17 @@ This tutorial focuses on transferring funds between ledger accounts.
 
 ### Determine Sender Address Index
 
-It is needed to find out which index is being used by the web wallet. Say that the web wallet
-shows 4.5 AVAX available on p-chain address P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0
 
-With the ledger A connected and the avalache app running, execute:
+A ledger can manage an infinite amount of addresses derived from a main private key. Due to this,
+many operations require an address index the user wishes to use in an operation
+
+After confirming with a web wallet that 4.5 AVAX is available on p-chain address 
+`P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0`, connect ledger A.
+
+With the avalanche app running, execute:
 
 ```bash
-avalanche key list --mainnet --ledger 0,1,2,3,4,5
-```
+avalanche key list --mainnet --ledger 0,1,2,3,4,5```
 
 To see p-chain addresses and balances for the first 6 indices in the ledger derived owner addresses.
 
@@ -66,17 +69,10 @@ To see p-chain addresses and balances for the first 6 indices in the ledger deri
 |        | index 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
 |        | index 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
-+--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-```
++--------+---------+-------------------------+-----------------------------------------------+---------+---------+```
 
-As can be noticed, the address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` indeed has 4.5 AVAX and
-is associated to index 2 of the ledger A.
-
-:::note
-
-A ledger manages an infinite amount of addresses derived from a main private key, and due to this,
-in certain operations there is a need to specify which address or which index of the ledger is the user
-operating against.
+The address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` has 4.5 AVAX and
+is associated to index 2 of ledger A.
 
 ### Determine Receiver Address Index
 
