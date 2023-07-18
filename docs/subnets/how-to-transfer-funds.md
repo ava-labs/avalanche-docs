@@ -1,23 +1,21 @@
-# How to Transfer Funds Between Ledgers
-
-Occasionally, there is a need to move funds between different ledgers, or different addresses owned
-by the same ledger.
-
-A case for the former is for a Subnet control ledger to spend all funds in previous operations,
-and, as a Subnet control ledger can't be changed, there is a need to transfer to it for another
-funded account.
-
-A case for the later is related for example to ledger funding using web wallet transfers, which
-sometimes transfer to a ledger address associated with an index different to zero. As the CLI by
-default uses ledger index 0, sometimes a movement of the funds to that index is preferred for the
-CLI to work with the default settings.
-
-As direct transfers between P-Chain addresses are not currently supported in wallets, CLI has added this
-command to enable them.
-
-Internally the operation consists on a series of import/export operations involving the X-Chain also,
-and so the fee for this operation is 4 times the fee for a typical import operations, that is, 0.004
-AVAX. See [fees information](https://docs.avax.network/quickstart/transaction-fees)
+---
+description: To enable direct transfers between ledger P-Chain addresses,
+use the Avalanche-CLI command `avalanche key transfer`.
+sidebar_label: Directly Transfer Funds
+---
+# How to Use Avalanche-CLI to Transfer P-Chain Funds
+It is sometimes necessary to transfer funds between different ledgers, or between
+different accounts or addresses in our ledger. This could be due to various reasons:
+1. Moving funds to a Subnet control ledger from another funded account
+because the Subnet control ledger cannot be changed.
+2. Transferring funds to a ledger address with a different index, which is
+sometimes required for the command-line tool (CLI) to work with default
+settings.
+To enable direct transfers between P-Chain addresses, use the command
+`avalanche key transfer`. This operation involves a series of import/export
+actions with the P-Chain and X-Chain. The fee for this operation is four times the typical
+import operation fee, which comes out to 0.004 AVAX. You can find more
+information about fees [here](https://docs.avax.network/quickstart/transaction-fees).
 
 :::note
 
