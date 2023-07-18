@@ -38,7 +38,7 @@ This tutorial focuses on transferring funds between ledger accounts.
 - Source address: ledger A, index 2 (the web wallet shows 4.5 AVAX for this ledger)
 - Target address: ledger B, index 0 (the web wallet shows 0 AVAX for this ledger)
 
-### Determine the Address Index
+### Determine Sender Address Index
 
 It is needed to find out which index is being used by the web wallet. Say that the web wallet
 shows 4.5 AVAX available on p-chain address P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0
