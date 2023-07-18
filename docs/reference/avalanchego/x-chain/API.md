@@ -1,5 +1,5 @@
 ---
-id: x-chain-api
+id: api
 title: X-Chain API Reference
 tags:
   - X-Chain

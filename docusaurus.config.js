@@ -136,6 +136,12 @@ const config = {
             label: "Community",
           },
           {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "reference",
+            label: "Reference",
+          },
+          {
             type: "localeDropdown",
             position: "right",
           },
