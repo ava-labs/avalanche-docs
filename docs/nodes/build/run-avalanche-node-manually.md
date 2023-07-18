@@ -38,8 +38,15 @@ change.
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
-- Storage: 1 TiB
+- Storage: 1 TiB SSD
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
+
+:::caution
+
+Please do not try running a node on an HDD, as you may get poor and random 
+read/write latencies, therefore reducing performance and reliability.
+
+:::
 
 ### Networking
 
@@ -155,7 +162,7 @@ For Linux on PCs or cloud providers: Download: `avalanchego-linux-amd64-<VERSION
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
+For Linux on Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
@@ -190,7 +197,7 @@ bootstrapping, it prints logs like this:
 ```text
 [09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
 [09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
-[09-09|17:01:51.628] INFO <X Chain> avalanche/transitive.go:334 consensus starting {"lenFrontier": 1}
+[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consensus starting {"lenFrontier": 1}
 ```
 
 To check if a given chain is done bootstrapping, in another terminal window call

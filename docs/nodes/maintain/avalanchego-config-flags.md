@@ -265,8 +265,18 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 
 ##### `--db-type` (string)
 
-Specifies the type of database to use. Must be one of `leveldb` or `memdb`.
+Specifies the type of database to use. Must be one of `LevelDB` or `memdb`.
 `memdb` is an in-memory, non-persisted database.
+
+:::note
+
+`memdb` stores everything in memory. So if you have a 900 GiB LevelDB instance, then using `memdb` 
+you’d need 900 GiB of RAM.
+`memdb` is useful for fast one-off testing, not for running an actual node (on Fuji or Mainnet).
+Also note that `memdb` doesn’t persist after restart. So any time you restart the node it would 
+start syncing from scratch.
+
+:::
 
 ### Database Config
 
@@ -514,6 +524,13 @@ there is no timeout.
 
 Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Example:
 `"https://*.avax.network https://*.avax-test.network"`
+
+#### `--http-allowed-hosts` (string)
+
+List of acceptable host names in API requests. Provide the wildcard (`'*'`) to accept
+requests from all hosts. API requests where the `Host` field is empty or an IP address
+will always be accepted. An API call whose HTTP `Host` field isn't acceptable will 
+receive a 403 error code. Defaults to `localhost`.
 
 ## IPCs
 
@@ -1029,18 +1046,6 @@ if more than this number of items are outstanding. The value must be at least
 Maximum amount of time an item should be processing and still be healthy.
 Reports unhealthy if there is an item processing for longer than this duration.
 The value must be greater than `0`. Defaults to `2m`.
-
-##### `--snow-mixed-query-num-push-vdr` (uint)
-
-If this node is a validator, when a container is inserted into consensus, send a
-Push Query to this many validators and a Pull Query to the others. Must be <= k.
-Defaults to `10`.
-
-##### `--snow-mixed-query-num-push-non-vdr` (uint)
-
-If this node is not a validator, when a container is inserted into consensus,
-send a Push Query to %s validators and a Pull Query to the others. Must be <= k.
-Defaults to `0`.
 
 ### ProposerVM Parameters
 
