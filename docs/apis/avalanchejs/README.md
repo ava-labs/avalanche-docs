@@ -47,7 +47,7 @@ AvalancheJS requires Node.js version 14.18.0 or higher to compile.
 
 ## Installation
 
-### Using the npm package
+### Using the NPM Package
 Add AvalancheJS to your project via `npm` or `yarn`. 
 
 For installing via `npm`:
@@ -68,7 +68,7 @@ instead.
 
 :::
 
-### Build from repository
+### Build from Repository
 
 You can also pull the repo down directly and build it from scratch.
 
@@ -121,7 +121,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 
 ## Run Scripts
 
-### TypeScript File (.ts) 
+### TypeScript File
 **Via NPM**
 * Install typescript:
 
@@ -140,7 +140,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 
     `ts-node script-name.ts`
 
-### JavaScript File (.js)
+### JavaScript File
 As Node.js is already installed per [requirements](/#Requirements),
 simply run the script:
 
