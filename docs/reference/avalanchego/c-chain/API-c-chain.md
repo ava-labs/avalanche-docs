@@ -1,12 +1,10 @@
 ---
 id: api
-tags:
-  - C-Chain
-  - Contract Chain
+tags: [C-Chain, Contract Chain]
 description: This page is an overview of the C-Chain API associated with AvalancheGo. 
+sidebar_label: API 
 ---
-
-# Contract Chain (C-Chain) API
+# Contract Chain API
 
 :::info
 Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to
@@ -15,12 +13,7 @@ Avalanche’s view of networkID and chainID and are purely internal to the
 Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and
 `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and
 `eth_chainId` methods.
-
 :::
-
-## Deploying a Smart Contract
-
-[Deploy a Smart Contract on Avalanche Using Remix and Core](../../../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
 
 ## Ethereum APIs
 
