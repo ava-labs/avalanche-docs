@@ -1,8 +1,9 @@
 ---
 id: api
-tags: [C-Chain, Contract Chain]
+tags: [C-Chain, Contract Chain, AvalancheGo APIs]
 description: This page is an overview of the C-Chain API associated with AvalancheGo. 
 sidebar_label: API 
+pagination_label: C-Chain API
 ---
 # Contract Chain API
 

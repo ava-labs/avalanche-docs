@@ -1,8 +1,9 @@
 ---
 id: admin-api
-tags: [Admin API]
+tags: [AvalancheGo APIs]
 description: This page is an overview of the Admin API associated with AvalancheGo. 
 sidebar_label: Admin API
+pagination_label: Admin API
 ---
 
 # Admin API

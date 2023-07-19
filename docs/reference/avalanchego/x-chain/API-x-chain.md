@@ -1,8 +1,9 @@
 ---
 id: api
-tags: [X-Chain]
+tags: [X-Chain, AvalancheGo APIs]
 description: This page is an overview of the Exchange Chain (X-Chain) API associated with AvalancheGo. 
-sidebar_label: API 
+sidebar_label: API
+pagination_label: X-Chain API 
 ---
 # X-Chain API
 

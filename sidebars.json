@@ -299,6 +299,7 @@
   ],
 
   "reference": [
+    "reference/avalanchego/README",
     {
       "type": "html",
       "value": "<hr/>"
@@ -307,7 +308,6 @@
       "type": "html",
       "value": "<span class='menu__item'><b><medium> AvalancheGo </medium></b></span>"
     },
-    "reference/avalanchego/README",
     {
       "type": "category",
       "label": "P-Chain",
@@ -352,6 +352,26 @@
         }
       ]
     },
-    "reference/avalanchego/admin-api"
+    "reference/avalanchego/admin-api",
+    "reference/avalanchego/auth-api",
+    "reference/avalanchego/health-api",
+    "reference/avalanchego/index-api",
+    "reference/avalanchego/info-api",
+    "reference/avalanchego/ipc-api",
+    "reference/avalanchego/keystore-api",
+    "reference/avalanchego/metrics-api",
+    {
+      "type": "link",
+      "label": "Release Notes",
+      "href": "https://github.com/ava-labs/avalanchego/releases"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Standards </medium></b></span>"
+    }
   ]
 }
