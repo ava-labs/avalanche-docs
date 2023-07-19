@@ -1,9 +1,10 @@
 ---
 id: banff
 tags: [Standards]
-description: This document specifies the changes in Avalanche “Banff”, which was released in AvalancheGo v1.9.x.
+description: This document specifies the changes in Avalanche Banff, which was released in AvalancheGo v1.10.0.
 sidebar_label: Banff Changes
 pagination_label: Banff Changes
+sidebar_position: 3
 ---
 
 # Banff Changes

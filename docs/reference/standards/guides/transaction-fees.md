@@ -4,6 +4,7 @@ tags: [Standards]
 description: In order to prevent spam, transactions require the payment of a transaction fee.
 sidebar_label: Transaction Fees
 pagination_label: Avalanche Transaction Fees
+sidebar_position: 1
 ---
 
 # Avalanche Transaction Fee

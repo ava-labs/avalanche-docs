@@ -4,6 +4,7 @@ tags: [Standards]
 description: This guide explains how to make calls to APIs exposed by Avalanche nodes.
 sidebar_label: API Calls
 pagination_label: Issuing API Calls
+sidebar_position: 0
 ---
 
 # Issuing API Calls

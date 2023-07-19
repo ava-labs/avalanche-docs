@@ -4,6 +4,7 @@ tags: [Standards]
 description: This document summarizes all of the changes made to the X-Chain API to support Avalanche Cortina (v1.10.0).
 sidebar_label: X-Chain Migration
 pagination_label: X-Chain Migration Guide - Avalanche Cortina
+sidebar_position: 2
 ---
 
 # X-Chain Migration Guide
