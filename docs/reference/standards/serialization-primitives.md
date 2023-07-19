@@ -1,3 +1,11 @@
+---
+id: serialization
+tags: [Standards]
+description:  This document describes how primitive types are encoded on the Avalanche platform. 
+sidebar_label: Serialization
+pagination_label: Serialization Primitives
+---
+
 # Serialization Primitives
 
 Avalanche uses a simple, uniform, and elegant representation for all internal data. This document 
