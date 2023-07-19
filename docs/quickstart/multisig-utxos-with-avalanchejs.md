@@ -907,7 +907,7 @@ In the above parameters, if `fee` is less than the fees actually required for
 that transaction, then there will be no surplus amount left by outputs over
 inputs because any surplus will be converted into a change output. This can
 cause transaction failure. So keep the fees in accordance with the transaction
-as mentioned [here](../quickstart/transaction-fees.md#fee-schedule).
+as mentioned [here](/reference/standards/guides/txn-fees#fee-schedule).
 
 Also, the `sourceChain` parameter is required for fetching exported UTXOs that
 do not exist yet on the destination chain. For non-export/import transactions,

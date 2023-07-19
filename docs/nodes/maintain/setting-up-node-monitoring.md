@@ -11,7 +11,7 @@ This tutorial will show how to set up infrastructure to monitor an instance of
 
 - [Prometheus](https://prometheus.io/) to gather and store data
 - [`node_exporter`](https://github.com/prometheus/node_exporter) to get information about the machine,
-- AvalancheGo’s [metrics API](../../apis/avalanchego/apis/metrics.md) to get information about the node
+- AvalancheGo’s [Metrics API](/reference/avalanchego/metrics-api) to get information about the node
 - [Grafana](https://grafana.com/) to visualize data on a dashboard.
 - A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-monitoring/tree/main/grafana/dashboards)
 

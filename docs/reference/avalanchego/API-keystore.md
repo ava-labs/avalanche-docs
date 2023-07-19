@@ -21,24 +21,24 @@ user on a node it exists _only_ on that node. However, users may be imported and
 API.
 
 For validation and cross-chain transfer on the Mainnet, you should issue transactions through
-[AvalancheJS](../../avalanchejs/README.md). That way control keys for your funds won't be stored on
+[AvalancheJS](/apis/avalanchejs). That way control keys for your funds won't be stored on
 the node, which significantly lowers the risk should a computer running a node be compromised. See
 following docs for details:
 
-- [Transfer AVAX Tokens Between Chains](../../../quickstart/cross-chain-transfers.md)
-- [Add a Node to the Validator Set](../../../nodes/validate/add-a-validator.md)
+- [Transfer AVAX Tokens Between Chains](/quickstart/cross-chain-transfers)
+- [Add a Node to the Validator Set](/nodes/validate/add-a-validator)
 
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](../public-api-server.md).
+server](/apis/avalanchego/public-api-server).
 
 :::
 
 ## Format
 
 This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see
-[here](issuing-api-calls.md).
+[here](/reference/standards/guides/issue-api-call).
 
 ## Endpoint
 
@@ -146,7 +146,8 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 Export a user. The user can be imported to another node with
-[`keystore.importUser`](keystore.md#keystoreimportuser). The user’s password remains encrypted.
+[`keystore.importUser`](/reference/avalanchego/keystore-api#keystoreimportuser). The user’s password
+remains encrypted.
 
 **Signature:**
 

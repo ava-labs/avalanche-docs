@@ -19,7 +19,7 @@ An authorization token is provided in the header of an API call. Specifically, t
 the token).
 
 This API is only reachable if the node is started with [config
-flag](../../../nodes/maintain/avalanchego-config-flags.md)`--api-auth-required`. If the node is
+flag](/nodes/maintain/avalanchego-config-flags)`--api-auth-required`. If the node is
 started without this CLI, API calls do not require authorization tokens, so this API is not
 reachable. This API never requires an authorization token to be reached.
 
@@ -33,14 +33,14 @@ If you run your node with `--api-auth-required` then some tools like Core or Met
 able to make API calls to your node because they don’t have an auth token.
 
 This API set is for a specific node, it is unavailable on the [public
-server](../public-api-server.md).
+server](/apis/avalanchego/public-api-server).
 
 :::
 
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here.](issuing-api-calls.md)
+[here.](/reference/standards/guides/issue-api-call)
 
 ## Endpoint
 
@@ -85,7 +85,7 @@ curl -X POST --data '{
 ```
 
 This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` 
-(that is the X-Chain) and `/ext/info` (that is the [info API](info.md).)
+(that is the X-Chain) and `/ext/info` (that is the [info API](/reference/avalanchego/info-api).)
 
 **Example Response:**
 
@@ -102,7 +102,7 @@ This call will generate an authorization token that allows access to API endpoin
 This authorization token should be included in API calls by giving header `Authorization` value
 `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](info.md#infopeers) with this token:
+For example, to call [`info.peers`](/reference/avalanchego/info-api#infopeers) with this token:
 
 ```sh
 curl -X POST --data '{

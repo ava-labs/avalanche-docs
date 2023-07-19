@@ -84,7 +84,7 @@ AVM is for X-Chain, EVM for C-Chain, and PlatformVM for P-Chain.
 ### Transaction Fee
 
 Transaction fees are fixed on X-Chain and P-Chain, while dynamic on C-Chain, see
-[this article](./transaction-fees.md#fee-schedule) for details. When transferring
+[this article](/reference/standards/guides/txn-fees#fee-schedule) for details. When transferring
 tokens, please take fee into consideration in calculating total amount to be
 transferred.
 
@@ -134,7 +134,7 @@ const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API
-server](../apis/avalanchego/public-api-server.md), the following changes are
+server](/apis/avalanchego/public-api-server), the following changes are
 needed:
 
 ```js
@@ -320,7 +320,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 - Network setting should be to a Mainnet node, either [a local node on
   Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
-  server](../apis/avalanchego/public-api-server.md#using-the-public-api-nodes)
+  server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.

@@ -83,7 +83,7 @@ default since AvalancheGo v1.4.10. To disable pruning, include
 
 Interacting with the C-Chain is identical to interacting with
 [`go-ethereum`](https://geth.ethereum.org/). You can find the reference material
-for C-Chain API [here](../apis/avalanchego/apis/c-chain.md).
+for C-Chain API [here](/reference/avalanchego/c-chain/api).
 
 Please note that `personal_` namespace is turned off by default. To turn it on,
 you need to pass the appropriate command line switch to your node, like in the
@@ -115,7 +115,7 @@ can be found in the linked repository.
 Avalanche C-Chain transactions are identical to standard EVM transactions with 2 exceptions:
 
 - They must be signed with Avalanche’s ChainID (43114).
-- The detailed dynamic gas fee can be found [here](../quickstart/transaction-fees.md#c-chain-fees).
+- The detailed dynamic gas fee can be found [here](/reference/standards/guides/txn-fees#c-chain-fees).
 
 For development purposes, Avalanche supports all the popular tooling for
 Ethereum, so developers familiar with Ethereum and Solidity can feel right at

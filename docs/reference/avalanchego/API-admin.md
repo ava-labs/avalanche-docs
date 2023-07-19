@@ -12,15 +12,15 @@ This API can be used for measuring node health and debugging.
 
 :::info
 The Admin API is disabled by default for security reasons. To run a node with the Admin API
-enabled, use [config flag `--api-admin-enabled=true`](../../../nodes/maintain/avalanchego-config-flags.md#--api-admin-enabled-boolean).
+enabled, use [config flag `--api-admin-enabled=true`](/nodes/maintain/avalanchego-config-flags#--api-admin-enabled-boolean).
 
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+This API set is for a specific node, it is unavailable on the [public server](/apis/avalanchego/public-api-server).
 
 :::
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For details, see [here](issuing-api-calls.md).
+This API uses the `json 2.0` RPC format. For details, see [here](/reference/standards/guides/issue-api-call).
 
 ## Endpoint
 
@@ -228,7 +228,7 @@ curl -X POST --data '{
 ### `admin.loadVMs`
 
 Dynamically loads any virtual machines installed on the node as plugins. See
-[here](../../../subnets/introduction-to-vm.md#load-a-vm) for more information on how to install a
+[here](/subnets/introduction-to-vm#load-a-vm) for more information on how to install a
 virtual machine on a node.
 
 **Signature:**

@@ -15,7 +15,7 @@ of the AVM.
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](issuing-api-calls.md).
+[here](/reference/standards/guides/issue-api-call).
 
 ## Endpoints
 
@@ -193,7 +193,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Create a new address controlled by the given user.
@@ -246,7 +246,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no
@@ -340,7 +340,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint
@@ -428,7 +428,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters
@@ -529,12 +529,12 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call
-the [C-Chain's `avax.import`](c-chain.md#avaximport) or the [P-Chain's
-`platform.importAVAX`](p-chain.md#platformimportavax) to complete the transfer.
+the [C-Chain's `avax.import`](/reference/avalanchego/c-chain/api#avaximport) or the [P-Chain's
+`platform.importAVAX`](/reference/avalanchego/p-chain/api#platformimportavax) to complete the transfer.
 
 **Signature:**
 
@@ -612,11 +612,11 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Get the private key that controls a given address. The returned private key can be added to a user
-with [`avm.importKey`](x-chain.md#avmimportkey).
+with [`avm.importKey`](/reference/avalanchego/x-chain/api#avmimportkey).
 
 **Signature:**
 
@@ -1405,12 +1405,12 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is
-called, you must call the P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) or
-C-Chain’s [`avax.export`](c-chain.md#avaxexport) method to initiate the transfer.
+called, you must call the P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax)
+or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api#avaxexport) method to initiate the transfer.
 
 **Signature:**
 
@@ -1470,7 +1470,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Give a user control over an address by providing the private key that controls the address.
@@ -1566,7 +1566,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 List addresses controlled by the given user.
@@ -1615,11 +1615,11 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Mint units of a variable-cap asset created with
-[`avm.createVariableCapAsset`](x-chain.md#avmcreatevariablecapasset).
+[`avm.createVariableCapAsset`](/reference/avalanchego/x-chain/api#avmcreatevariablecapasset).
 
 **Signature:**
 
@@ -1692,11 +1692,11 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Mint non-fungible tokens which were created with
-[`avm.createNFTAsset`](x-chain.md#avmcreatenftasset).
+[`avm.createNFTAsset`](/reference/avalanchego/x-chain/api#avmcreatenftasset).
 
 **Signature:**
 
@@ -1773,7 +1773,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Send a quantity of an asset to an address.
@@ -1846,7 +1846,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned
@@ -1929,7 +1929,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Send a non-fungible token.
@@ -2045,7 +2045,7 @@ curl -X POST --data '{
 ### `wallet.send`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Send a quantity of an asset to an address and assume the TX will be accepted so that future calls
@@ -2123,7 +2123,7 @@ curl -X POST --data '{
 ### `wallet.sendMultiple`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](./keystore.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
 :::
 
 Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of

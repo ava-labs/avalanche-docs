@@ -14,7 +14,7 @@ behind a load balancer to ensure high availability and high request throughput.
 The public API server is at `api.avax.network` for Avalanche Mainnet and
 `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API,
 just append the relevant API endpoint, as documented
-[here](./apis/issuing-api-calls.md). Namely, use the following end points for
+[here](/reference/standards/guides/issue-api-call). Namely, use the following end points for
 each chain respectively:
 
 ### HTTP
@@ -35,12 +35,12 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 The public API server supports all the API endpoints that make sense to be
 available on a public-facing service, including APIs for the
-[X-Chain](./apis/x-chain.md), [P-Chain](./apis/p-chain.md),
-[C-Chain](./apis/c-chain.md), and full archival for the Primary Network.
-However, it doesn't support [Index APIs](./apis/index-api.md), which includes
+[X-Chain](/reference/avalanchego/x-chain/api), [P-Chain](/reference/avalanchego/p-chain/api),
+[C-Chain](/reference/avalanchego/c-chain/api), and full archival for the Primary Network.
+However, it doesn't support [Index APIs](/reference/avalanchego/index-api), which includes
 the X-Chain API's `getAddressTxs` method.
 
-For a full list of available APIs see [here](./apis/README.md).
+For a full list of available APIs see [here](/reference).
 
 ### Limitations
 

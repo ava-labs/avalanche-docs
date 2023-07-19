@@ -11,13 +11,13 @@ pagination_label: Info API
 This API can be used to access basic information about the node.
 
 :::info
-This API set is for a specific node, it is unavailable on the [public server](../public-api-server.md).
+This API set is for a specific node, it is unavailable on the [public server](/apis/avalanchego/public-api-server).
 :::
 
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](issuing-api-calls.md).
+[here](/reference/standards/guides/issue-api-call).
 
 ## Endpoint
 
@@ -66,7 +66,7 @@ curl -X POST --data '{
 
 ### `info.getBlockchainID`
 
-Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adminaliaschain).)
+Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](/reference/avalanchego/admin-api#adminaliaschain).)
 
 **Signature:**
 

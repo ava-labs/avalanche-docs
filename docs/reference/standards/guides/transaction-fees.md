@@ -79,14 +79,14 @@ and the priority fee are burned. For legacy transactions, which only specify a
 single gas price, the gas price serves as both the gas fee cap and the gas tip
 cap.
 
-Use the [`eth_baseFee`](../apis/avalanchego/apis/c-chain.md#eth_basefee) API
+Use the [`eth_baseFee`](/reference/avalanchego/c-chain/api#eth_basefee) API
 method to estimate the base fee for the next block. If more blocks are produced
 in between the time that you construct your transaction and it is included in a
 block, the base fee could be different from the base fee estimated by the API
 call, so it is important to treat this value as an estimate.
 
 Next, use
-[eth_maxPriorityFeePerGas](../apis/avalanchego/apis/c-chain.md#eth_maxpriorityfeepergas)
+[eth_maxPriorityFeePerGas](/reference/avalanchego/c-chain/api#eth_maxpriorityfeepergas)
 API call to estimate the priority fee needed to be included in a block. This API
 call will look at the most recent blocks and see what tips have been paid by
 recent transactions in order to be included in the block.
@@ -100,16 +100,16 @@ quickly as possible vs. minimizing the price paid per unit of gas.
 #### Base Fee
 
 The base fee can go as low as 25 nAVAX (Gwei) and has no upper bound. You can
-use the [`eth_baseFee`](../apis/avalanchego/apis/c-chain.md#eth_basefee) and
-[eth_maxPriorityFeePerGas](../apis/avalanchego/apis/c-chain.md#eth_maxpriorityfeepergas)
+use the [`eth_baseFee`](/reference/avalanchego/c-chain/api#eth_basefee) and
+[eth_maxPriorityFeePerGas](/reference/avalanchego/c-chain/api#eth_maxpriorityfeepergas)
 API methods, or [Snowtrace's C-Chain Gas
 Tracker](https://snowtrace.io/gastracker), to estimate the gas price to use in
 your transactions.
 
 #### Further Readings
 
-- [Adjusting Gas Price During High Network Activity](../quickstart/adjusting-gas-price-during-high-network-activity.md)
-- [Sending Transactions with Dynamic Fees using JavaScript](../quickstart/sending-transactions-with-dynamic-fees-using-javascript.md)
+- [Adjusting Gas Price During High Network Activity](/quickstart/adjusting-gas-price-during-high-network-activity)
+- [Sending Transactions with Dynamic Fees using JavaScript](/quickstart/sending-transactions-with-dynamic-fees-using-javascript)
 
 ### Atomic Transaction Fees
 

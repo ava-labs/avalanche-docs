@@ -13,12 +13,12 @@ blockchain accepts a vertex/block it will publish it to a socket and the decisio
 will be published to another.
 
 A node will only expose this API if it is started with [config
-flag](../../../nodes/maintain/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
+flag](/nodes/maintain/avalanchego-config-flags) `api-ipcs-enabled=true`.
 
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](../public-api-server.md).
+server](/apis/avalanchego/public-api-server).
 
 :::
 

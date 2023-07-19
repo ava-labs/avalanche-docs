@@ -8,7 +8,7 @@ Go implementation of an Avalanche node.
 
 Related docs
 
-- [AvalancheGo](../apis/avalanchego/README.md)
+- [AvalancheGo](/reference)
 - [Nodes](../nodes/README.md)
 
 ## Coreth
@@ -21,7 +21,7 @@ that defines the Avalanche Contract Chain (C-Chain).
 
 Related docs
 
-- [C-Chain APIs](../apis/avalanchego/apis/c-chain.md)
+- [C-Chain APIs](/reference/avalanchego/c-chain/api)
 
 ## Subnet-EVM
 

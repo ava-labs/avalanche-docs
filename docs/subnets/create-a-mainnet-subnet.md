@@ -53,7 +53,7 @@ You need to collect the NodeIDs for each of your validators. This tutorial uses 
 several commands.
 
 To get the NodeID of a `Mainnet` node, call the
-[info.getNodeID](../apis/avalanchego/apis/info.md#infogetnodeid) endpoint. For example:
+[info.getNodeID](/reference/avalanchego/info-api#infogetnodeid) endpoint. For example:
 
 ```text
 curl -X POST --data '{
@@ -110,7 +110,7 @@ avalanche key list --ledger 0 --mainnet
 The command prints the P-Chain address for `Mainnet`,
 `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with
 at least 2.5 AVAX to cover TX fees. the TX fee for creating your Subnet costs 2 AVAX. Adding
-validators costs 0.001 AVAX each. For more details, see [Fees](../quickstart/transaction-fees))
+validators costs 0.001 AVAX each. For more details, see [Fees](/reference/standards/guides/txn-fees)
 
 :::note
 
@@ -164,8 +164,8 @@ After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-The deployment requires running a [createSubnet transaction](../apis/avalanchego/apis/p-chain.md#platformcreatesubnet)
-and a [createBlockchain transaction](../apis/avalanchego/apis/p-chain.md#platformcreateblockchain),
+The deployment requires running a [createSubnet transaction](/reference/avalanchego/p-chain/api#platformcreatesubnet)
+and a [createBlockchain transaction](/reference/avalanchego/p-chain/api#platformcreateblockchain),
 and so this first Ledger address must have the funds to issue both operations.
 
 This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
@@ -421,7 +421,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Because this operation issues a new
-[transaction](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator), the CLI needs the
+[transaction](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator), the CLI needs the
 control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
 the process looks slightly different if you use multiple controls keys. The address needs to pay a
 TX fee of 0.001 AVAX.
@@ -448,7 +448,7 @@ Note, this ID is intentionally modified to prevent replication.
 ### Set Stake Weight
 
 Select 30 as the stake weight. You can learn more about the stake weight parameter in
-[addSubnetValidator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) under the
+[addSubnetValidator](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator) under the
 `weight` section.
 
 :::warning

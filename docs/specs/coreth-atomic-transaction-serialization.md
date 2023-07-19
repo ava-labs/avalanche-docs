@@ -2,8 +2,8 @@
 
 This page is meant to be the single source of truth for how we serialize atomic
 transactions in `Coreth`. This document uses the [primitive
-serialization](serialization-primitives.md) format for packing and
-[secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine)
+serialization](/reference/standards/serialization) format for packing and
+[secp256k1](/reference/standards/cryptography#cryptography-in-the-avalanche-virtual-machine)
 for cryptographic user identification.
 
 ## Codec ID
@@ -175,7 +175,7 @@ Let's make a transferable input:
 ## SECP256K1 Transfer Input
 
 A
-[secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-machine)
+[secp256k1](/reference/standards/cryptography#cryptography-in-the-avalanche-virtual-machine)
 transfer input allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
@@ -386,7 +386,7 @@ Let's make a transferable output:
 ## SECP256K1 Transfer Output
 
 A
-[secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine)
+[secp256k1](/reference/standards/cryptography#cryptography-in-the-avalanche-virtual-machine)
 transfer output allows for sending a quantity of an asset to a collection of
 addresses after a specified Unix time.
 
@@ -704,7 +704,7 @@ inputs.
 ## SECP256K1 Credential
 
 A
-[secp256k1](./cryptographic-primitives#cryptography-in-the-avalanche-virtual-machine)
+[secp256k1](/reference/standards/cryptography#cryptography-in-the-avalanche-virtual-machine)
 credential contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains

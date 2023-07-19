@@ -64,7 +64,7 @@ responsive 100% of the time.**
 You can call API method `info.uptime` on your node to learn its weighted uptime
 and what percentage of the network currently thinks your node has an uptime high
 enough to receive a staking reward. See
-[here.](../../apis/avalanchego/apis/info.md#infouptime) You can get another
+[here.](/reference/avalanchego/info-api#infouptime) You can get another
 opinion on your node's uptime from Avalanche's [Validator Health
 dashboard](https://stats.avax.network/dashboard/validator-health-check/). If
 your reported uptime is not close to 100%, there may be something wrong with

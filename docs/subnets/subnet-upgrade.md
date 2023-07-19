@@ -39,7 +39,7 @@ transactions. Each validator on a Subnet is assigned a certain `weight`, which i
 representing the significance of the node in consensus decisions. On the Primary Network, weight is
 equal to the amount of AVAX staked on the node. On Subnets, weight is currently assigned by the
 Subnet owners when they issue the transaction [adding a
-validator](../apis/avalanchego/apis/p-chain.md#platformaddsubnetvalidator) to the Subnet.
+validator](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator) to the Subnet.
 
 Subnets can operate normally only if validators representing 80% or more of the cumulative validator
 weight is connected. If the amount of connected stake falls close to or below 80%, Subnet
@@ -78,9 +78,9 @@ For a general guide on upgrading AvalancheGo check out [this
 tutorial](../nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
 keeping in mind the previous section, make sure to stagger node upgrades and start a new upgrade
 only once the previous node has successfully upgraded. Use the [Health
-API](../apis/avalanchego/apis/health.md#healthhealth) to check that `healthy` value in the response
+API](/reference/avalanchego/health-api#healthhealth) to check that `healthy` value in the response
 is `true` on the upgraded node, and on other Subnet validators check that
-[platform.getCurrentValidators()](../apis/avalanchego/apis/p-chain.md#platformgetcurrentvalidators)
+[platform.getCurrentValidators()](/reference/avalanchego/p-chain/api#platformgetcurrentvalidators)
 has `true` in `connected` attribute for the upgraded node's `nodeID`. Once those two conditions are
 satisfied, node is confirmed to be online and validating the Subnet and you can start upgrading
 another node.

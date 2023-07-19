@@ -37,7 +37,6 @@
     "quickstart/fuji-workflow",
     "quickstart/cross-chain-transfers",
     "quickstart/multisig-utxos-with-avalanchejs",
-    "quickstart/transaction-fees",
     "quickstart/adjusting-gas-price-during-high-network-activity",
     "quickstart/sending-transactions-with-dynamic-fees-using-javascript",
     "quickstart/tools-list",

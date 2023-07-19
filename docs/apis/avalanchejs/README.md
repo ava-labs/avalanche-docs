@@ -23,9 +23,9 @@ We built AvalancheJS with ease of use in mind. With this library, any JavaScript
 developer is able to interact with a node on the Avalanche Platform who has
 enabled their API endpoints for the developer’s consumption. We keep the library
 up-to-date with the latest changes in the Avalanche Platform Specification found
-in the [Platform Chain Specification](../avalanchego/apis/p-chain.md), [Exchange
-Chain (X-Chain) Specification](../avalanchego/apis/x-chain.md), [Contract Chain
-(C-Chain) Specification](../avalanchego/apis/c-chain.md).
+in the [Platform Chain Specification](/reference/avalanchego/p-chain/api), [Exchange
+Chain (X-Chain) Specification](/reference/avalanchego/x-chain/api), [Contract Chain
+(C-Chain) Specification](/reference/avalanchego/c-chain/api).
 
 Using AvalancheJS, developers can:
 

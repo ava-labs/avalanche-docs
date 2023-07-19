@@ -28,7 +28,7 @@ where
 - `node-ip` is the IP address of the node the call is to.
 - `http-port` is the port the node listens on for HTTP calls. This is specified
   by [command-line
-  argument](../../../nodes/maintain/avalanchego-config-flags.md#http-server)
+  argument](/nodes/maintain/avalanchego-config-flags#http-server)
   `http-port` (default value `9650`).
 
 For example, if you're making RPC calls on the local node, the base URL might look like this: `127.0.0.1:9650`.
@@ -157,10 +157,10 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::info 
 
-When using the [Public API](../public-api-server.md) or another host
+When using the [Public API](/apis/avalanchego/public-api-server) or another host
 that supports HTTPS, use `https://` or `wss://` instead of `http://` or `ws://`.
 
-Also, note that the [public API](../public-api-server.md#supported-apis) only
+Also, note that the [public API](/apis/avalanchego/public-api-server#supported-apis) only
 supports C-Chain websocket API calls for API methods that don't exist on the
 C-Chain's HTTP API. 
 
@@ -173,7 +173,7 @@ Most of the built-in APIs use the [JSON RPC
 and responses. Such APIs include the Platform API and the X-Chain API.
 
 Suppose we want to call the `getTxStatus` method of the [X-Chain
-API](x-chain.md). The X-Chain API documentation tells us that the endpoint for
+API](/reference/avalanchego/x-chain/api). The X-Chain API documentation tells us that the endpoint for
 this API is `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:
@@ -182,7 +182,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](x-chain.md#avmgettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](/reference/avalanchego/x-chain/api#avmgettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 

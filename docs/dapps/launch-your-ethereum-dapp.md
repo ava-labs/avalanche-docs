@@ -42,7 +42,7 @@ just quicker and cheaper. Let's find out how.
 
 ## Accessing Avalanche C-Chain
 
-C-Chain exposes the [same API](../apis/avalanchego/apis/c-chain.md) as
+C-Chain exposes the [same API](/reference/avalanchego/c-chain/api) as
 `go-ethereum`, so you can use all the familiar APIs that are available on Ethereum
 for interaction with the platform.
 
@@ -98,7 +98,7 @@ for the Mainnet and
 [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 for the testnet.
 
-For more information, see [documentation](../apis/avalanchego/public-api-server.md).
+For more information, see [documentation](/apis/avalanchego/public-api-server).
 
 However, public API does not expose all the APIs that are available on the node,
 as some of them would not make sense on a publicly accessible service, and some
