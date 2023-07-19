@@ -5,7 +5,7 @@ The first step of learning Subnet development is learning to use [Avalanche-CLI]
 The best way to get started is by jumping in and deploying your first Subnet.
 
 This tutorial walks you through the process of using Avalanche-CLI for the first time by creating a Subnet,
-deploying it to the local network, and connecting to it with MetaMask.
+deploying it to the local network, and connecting to it with Core.
 
 ## Installation
 
@@ -166,7 +166,7 @@ interact with it.
 ## Interacting with Your Subnet
 
 You can use the value provided by `Browser Extension connection details` to connect to your Subnet
-with MetaMask, Core, or any other wallet.
+with Core, MetaMask, or any other wallet.
 
 :::note
 
@@ -188,7 +188,7 @@ Currency Symbol:  TUTORIAL
 
 <!-- markdownlint-enable MD013 -->
 
-This tutorial uses MetaMask.
+This tutorial uses Core.
 
 ### Importing the Test Private Key
 
@@ -198,43 +198,43 @@ Only use it on development networks that only you have access to. If you send pr
 this address, attackers may steal them instantly.
 :::
 
-First, you need to import your airdrop private key into MetaMask. Do this by clicking the profile
-bubble in the top right corner and select `Import account`.
+First, you need to import your airdrop private key into Core. 
 
-![Import MetaMask Account](/img/metamask-import.png)
+In the Accounts screen, select the `Imported` tab. Click on `Import private key`.
 
-Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
+![Import Account](/img/first-subnet/import1.png)
 
-![Import Account Private Key](/img/metamask-import-2.png)
+Here, enter the private key. Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
 
-Next, rename the MetaMask account to prevent confusion. Switch to the new account and click the
-three dot menu in the top right corner. Select `Account details`. Click the edit icon next to the
-account's name. Rename the account `DO NOT USE -- Public test key` to prevent confusion with any
+![Enter private key](/img/first-subnet/import2.png)
+
+Next, rename the Core account to prevent confusion. On the `Imported` tab, click on the pen icon
+next to your account. Rename the account `DO NOT USE -- Public test key` to prevent confusion with any
 personal wallets.
 
-![Rename Account](/img/metamask-import-3.png)
+![Rename Account](/img/first-subnet/import3.png)
 
-Click the checkmark to confirm the change.
+![Rename Account](/img/first-subnet/import4.png)
 
 ### Connect to the Subnet
 
-Next, you need to add your Subnet to MetaMask's networks.
+Next, you need to add your Subnet to Core's networks.
 
-Click the profile bubble in the top right corner and select `Settings`. Next, click `Networks`. Finally,
-click `Add network`.
+In the Core Extension click, `See All Networks` and then select the
+ ` + ` icon in the top right.
 
-![MetaMask Add Network](/img/metamask-network.png)
+![Add network](/img/first-subnet/network1.png)
 
-At the bottom of the next page, select `Add a network manually`. Enter your Subnet's details,
-found in the output of your `avalanche subnet deploy` [command](#deploying-subnets-locally), into
-the form and click `Save`.
+Enter your Subnet's details, found in the output of your `avalanche subnet deploy` 
+[command](#deploying-subnets-locally), into the form and click `Save`.
 
-![Add Subnet Network Details](/img/metamask-network-2.png)
+![Add network 2](/img/first-subnet/network2.png)
 
-If all worked as expected, your balance should read 1 million tokens. Your Subnet is ready for
-action. You might want to try to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](deploy-a-smart-contract-on-your-evm).
+If all worked as expected, your balance should read 1 million tokens. 
+Your Subnet is ready for action. You might want to try to 
+[Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core](deploy-a-smart-contract-on-your-evm).
 
-![Subnet in MetaMask](/img/subnet-in-metamask.png)
+![Subnet in Core](/img/first-subnet/subnet-in-core.png)
 
 ## Next Steps
 

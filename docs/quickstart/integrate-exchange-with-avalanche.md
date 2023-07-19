@@ -122,7 +122,7 @@ Ethereum, so developers familiar with Ethereum and Solidity can feel right at
 home. We have tutorials and repositories for several popular development
 environments:
 
-- [MetaMask and Remix](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+- [Core and Remix](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
 - [Truffle](../dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md)
 - [Hardhat](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
 

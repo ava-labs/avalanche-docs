@@ -52,10 +52,9 @@ chain.
 
 These are the requirement to follow this tutorial -
 
-- Add [WAGMI](./wagmi.md#adding-wagmi-to-metamask) and
-[Fuji](../quickstart/fuji-workflow.md#set-up-fuji-network-on-metamask-optional) chain on the MetaMask
-network
-- Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
+- Set up [WAGMI](./wagmi.md#adding-wagmi-to-core) and
+[Fuji](../quickstart/fuji-workflow.md#set-up-fuji-network-on-core-optional) on Core
+- Import `wWGM` token (asset) on the WAGMI network (Core). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 - `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 - `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax.network/)
 - Wrapped `WGM` tokens on the WAGMI chain. Send a few `WGM` coins to the `wWGM` token address (see
