@@ -578,8 +578,9 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this
-transaction, you must call the X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport) or C-Chain's
-[`avax.import`](/reference/avalanchego/c-chain/api#avaximport) with assetID `AVAX` to complete the transfer.
+transaction, you must call the X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport)
+or C-Chain's [`avax.import`](/reference/avalanchego/c-chain/api#avaximport) with assetID `AVAX` to 
+complete the transfer.
 
 **Signature:**
 

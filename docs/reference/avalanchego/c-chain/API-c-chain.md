@@ -57,8 +57,8 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::tip
 
-On localhost, use `ws://`. When using the [Public API](/apis/avalanchego/public-api-server) or another host that
-supports encryption, use `wss://`.
+On localhost, use `ws://`. When using the [Public API](/apis/avalanchego/public-api-server) or another
+host that supports encryption, use `wss://`.
 :::
 
 To interact with other instances of the EVM via the websocket endpoint:
@@ -366,8 +366,8 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
 X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api#platformimportavax) with assetID `AVAX` on the X-Chain to complete
-the transfer.
+[`platform.import`](/reference/avalanchego/p-chain/api#platformimportavax) with assetID `AVAX` on 
+the X-Chain to complete the transfer.
 
 **Signature:**
 
@@ -680,8 +680,9 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 :::
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this
-method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport) or P-Chain’s
-[`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with assetID `AVAX` to initiate the transfer.
+method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport)
+or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with 
+assetID `AVAX` to initiate the transfer.
 
 **Signature:**
 
@@ -748,7 +749,8 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
 called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport) or P-Chain’s
-[`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with assetID `AVAX` to initiate the transfer.
+[`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with assetID `AVAX` 
+to initiate the transfer.
 
 **Signature:**
 
