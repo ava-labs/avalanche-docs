@@ -1,6 +1,6 @@
 ---
 id: api
-tags: [Subnet-EVM, AvalancheGo APIs]
+tags: [Subnet-EVM]
 description: This page is an overview of the Subnet-EVM API associated with AvalancheGo.
 sidebar_label: API 
 pagination_label: Subnet-EVM API
