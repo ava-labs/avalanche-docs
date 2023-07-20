@@ -17,9 +17,7 @@ The ANR aims at being a tool for developers and system integrators alike, offeri
 run networks of AvalancheGo nodes with support for custom node, Subnet and network configurations,
 allowing to locally test code before deploying to Mainnet or even public testnets like `fuji`.
 
-You can also use the Avalanche Network Runner Postman collection.
-https://github.com/ava-labs/avalanche-network-runner-postman-collection 
-
+You can also use the [Avalanche Network Runner Postman collection](https://github.com/ava-labs/avalanche-network-runner-postman-collection).
 
 **Note that this tool is not for running production nodes, and that because it is being heavily**
 **developed right now, documentation might differ slightly from the actual code.**
