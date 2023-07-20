@@ -19,6 +19,7 @@ pagination_label: API Reference Quick Links
 | [**IPC API**](/reference/avalanchego/ipc-api)      | IPC API Reference |
 | [**Keystore API**](/reference/avalanchego/keystore-api)      | Keystore API Reference |
 | [**Metrics API**](/reference/avalanchego/metrics-api)      | Metrics API Reference |
+| [**Subnet-EVM API**](/reference/avalanchego/metrics-api)      | Subnet-EVM API Reference |
 
 | Transaction Formats      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
