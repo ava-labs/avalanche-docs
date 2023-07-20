@@ -787,7 +787,8 @@ message SECP256K1MintOperation {
 
 ### SECP256K1 Mint Operation Example
 
-Let’s make a [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint operation with:
+Let’s make a [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint
+operation with:
 
 - **`TypeId`**: `8`
 - **`AddressIndices`**:
