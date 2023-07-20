@@ -1409,7 +1409,8 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is
 called, you must call the P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax)
-or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate the transfer.
+or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate 
+the transfer.
 
 **Signature:**
 

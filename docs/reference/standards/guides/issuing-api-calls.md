@@ -172,8 +172,8 @@ Most of the built-in APIs use the [JSON RPC
 and responses. Such APIs include the Platform API and the X-Chain API.
 
 Suppose we want to call the `getTxStatus` method of the [X-Chain
-API](/reference/avalanchego/x-chain/api.md). The X-Chain API documentation tells us that the endpoint for
-this API is `/ext/bc/X`.
+API](/reference/avalanchego/x-chain/api.md). The X-Chain API documentation tells us that the 
+endpoint for this API is `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:
 

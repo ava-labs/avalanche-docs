@@ -366,8 +366,8 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
 X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax) with assetID `AVAX` on 
-the X-Chain to complete the transfer.
+[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax) with assetID `AVAX` 
+on the X-Chain to complete the transfer.
 
 **Signature:**
 
@@ -748,9 +748,9 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 **DEPRECATED—instead use** [`avax.import`](/reference/avalanchego/c-chain/api.md#avaximport)
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
-called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport) or P-Chain’s
-[`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with assetID `AVAX` 
-to initiate the transfer.
+called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport) 
+or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with 
+assetID `AVAX` to initiate the transfer.
 
 **Signature:**
 

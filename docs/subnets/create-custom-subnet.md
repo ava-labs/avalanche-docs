@@ -228,8 +228,8 @@ You can use the `RPC URL` to connect to and interact with your Subnet.
 
 You can verify that your Subnet has deployed correctly by querying the local node to see what
 Subnets it's running. You need to use the
-[`getNodeVersion`](/reference/avalanchego/info-api.md#infogetnodeversion) endpoint. Try running this curl
-command:
+[`getNodeVersion`](/reference/avalanchego/info-api.md#infogetnodeversion) endpoint. Try running this
+curl command:
 
 ```shell
 curl --location --request POST 'http://127.0.0.1:9650/ext/info' \
