@@ -49,7 +49,7 @@ NodeID is a unique identifier that differentiates your node from all the other
 peers on the network. It's a string formatted like
 `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical
 background of how the NodeID is constructed
-[here](/reference/standards/cryptography#tls-addresses). In essence,
+[here](/reference/standards/cryptographic-primitives#tls-addresses). In essence,
 NodeID is defined by two files:
 
 - `staker.crt`

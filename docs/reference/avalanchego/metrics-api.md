@@ -1,5 +1,4 @@
 ---
-id: metrics-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the Metrics API associated with AvalancheGo.
 sidebar_label: Metrics API

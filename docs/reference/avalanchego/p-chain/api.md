@@ -1,5 +1,4 @@
 ---
-id: api
 tags: [P-Chain, Platform Chain, AvalancheGo APIs]
 description: This page is an overview of the P-Chain API associated with AvalancheGo.
 sidebar_label: API 

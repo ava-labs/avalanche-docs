@@ -1,5 +1,4 @@
 ---
-id: issue-api-call
 tags: [Standards]
 description: This guide explains how to make calls to APIs exposed by Avalanche nodes.
 sidebar_label: API Calls

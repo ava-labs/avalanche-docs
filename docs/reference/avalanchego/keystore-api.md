@@ -1,5 +1,4 @@
 ---
-id: keystore-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the Keystore API associated with AvalancheGo.
 sidebar_label: Keystore API
@@ -38,7 +37,7 @@ server](/apis/avalanchego/public-api-server).
 ## Format
 
 This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see
-[here](/reference/standards/guides/issue-api-call).
+[here](/reference/standards/guides/issuing-api-calls).
 
 ## Endpoint
 

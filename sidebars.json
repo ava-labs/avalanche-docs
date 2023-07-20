@@ -350,9 +350,9 @@
       "type": "html",
       "value": "<span class='menu__item'><b><medium> Standards </medium></b></span>"
     },
-    "reference/standards/network-protocol",
-    "reference/standards/cryptography",
-    "reference/standards/serialization",
+    "reference/standards/avalanche-network-protocol",
+    "reference/standards/cryptographic-primitives",
+    "reference/standards/serialization-primitives",
     {
       "type": "category",
       "label": "📖 Guides",

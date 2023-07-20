@@ -1,5 +1,4 @@
 ---
-id: ipc-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the IPC API associated with AvalancheGo.
 sidebar_label: IPC API

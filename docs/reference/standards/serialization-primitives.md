@@ -1,5 +1,4 @@
 ---
-id: serialization
 tags: [Standards]
 description:  This document describes how primitive types are encoded on the Avalanche platform. 
 sidebar_label: Serialization

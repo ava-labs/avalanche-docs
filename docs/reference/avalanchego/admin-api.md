@@ -1,5 +1,4 @@
 ---
-id: admin-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the Admin API associated with AvalancheGo. 
 sidebar_label: Admin API
@@ -20,7 +19,7 @@ This API set is for a specific node, it is unavailable on the [public server](/a
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For details, see [here](/reference/standards/guides/issue-api-call).
+This API uses the `json 2.0` RPC format. For details, see [here](/reference/standards/guides/issuing-api-calls).
 
 ## Endpoint
 

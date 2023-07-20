@@ -1,5 +1,4 @@
 ---
-id: txn-fees
 tags: [Standards]
 description: In order to prevent spam, transactions require the payment of a transaction fee.
 sidebar_label: Transaction Fees

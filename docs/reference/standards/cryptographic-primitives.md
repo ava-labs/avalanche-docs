@@ -1,5 +1,4 @@
 ---
-id: cryptography
 tags: [Standards]
 description: This file summarizes the type and kind of cryptography used by Avalanche at the network and blockchain layers.
 sidebar_label: Cryptography
@@ -151,7 +150,7 @@ sign(sha256(length(prefix) + prefix + length(message) + message))
 
 The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A`
 is the length of the prefix text and `length(message)` is an
-[integer](/reference/standards/serialization#integer) of the message size.
+[integer](/reference/standards/serialization-primitives#integer) of the message size.
 
 ### Gantt Pre-Image Specification
 

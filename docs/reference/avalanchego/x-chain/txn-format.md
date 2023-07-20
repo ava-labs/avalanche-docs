@@ -1,5 +1,4 @@
 ---
-id: txn-format
 tags: [X-Chain, Transaction Format]
 description: This page is an overview of the AVM transaction format associated with AvalancheGo X-Chain API. 
 sidebar_label: Transaction Format
@@ -10,8 +9,8 @@ pagination_label: X-Chain Transaction Format
 
 This file is meant to be the single source of truth for how we serialize
 transactions in the Avalanche Virtual Machine (AVM). This document uses the
-[primitive serialization](/reference/standards/serialization) format for packing and
-[secp256k1](/reference/standards/cryptography#secp256k1-addresses) for cryptographic
+[primitive serialization](/reference/standards/serialization-primitives) format for packing and
+[secp256k1](/reference/standards/cryptographic-primitives#secp256k1-addresses) for cryptographic
 user identification.
 
 ## Codec ID
@@ -273,7 +272,7 @@ Outputs have four possible types:
 
 ## SECP256K1 Mint Output
 
-A [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) mint output is
+A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint output is
 an output that is owned by a collection of addresses.
 
 ### What SECP256K1 Mint Output Contains
@@ -361,7 +360,7 @@ Let’s make a SECP256K1 mint output with:
 
 ## SECP256K1 Transfer Output
 
-A [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) transfer output
+A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) transfer output
 allows for sending a quantity of an asset to a collection of addresses after a
 specified Unix time.
 
@@ -664,7 +663,7 @@ Inputs have one possible type: `SECP256K1TransferInput`.
 
 ## SECP256K1 Transfer Input
 
-A [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) transfer input
+A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) transfer input
 allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
@@ -739,7 +738,7 @@ Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and
 
 ## SECP256K1 Mint Operation
 
-A [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) mint operation
+A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint operation
 consumes a SECP256K1 mint output, creates a new mint output and sends a transfer
 output to a new set of owners.
 
@@ -788,7 +787,7 @@ message SECP256K1MintOperation {
 
 ### SECP256K1 Mint Operation Example
 
-Let’s make a [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) mint operation with:
+Let’s make a [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint operation with:
 
 - **`TypeId`**: `8`
 - **`AddressIndices`**:
@@ -1150,7 +1149,7 @@ credentials match the order of the inputs or operations.
 
 ## SECP256K1 Credential
 
-A [secp256k1](/reference/standards/cryptography#secp-256-k1-addresses) credential
+A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) credential
 contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains

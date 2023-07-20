@@ -383,7 +383,7 @@
 /apis /reference 301
 /apis/avalanchego /reference 301
 /apis/avalanchego/apis /reference 301
-/apis/avalanchego/apis/issuing-api-calls /reference/standards/guides/issue-api-call 301
+/apis/avalanchego/apis/issuing-api-calls /reference/standards/guides/issuing-api-calls 301
 /apis/avalanchego/apis/p-chain /reference/avalanchego/p-chain/api 301
 /apis/avalanchego/apis/c-chain /reference/avalanchego/c-chain/api 301
 /apis/avalanchego/apis/x-chain /reference/avalanchego/x-chain/api 301
@@ -397,11 +397,11 @@
 /apis/avalanchego/apis/metrics /reference/avalanchego/metrics-api 301
 /apis/avalanchego/apis/subnet-evm /reference/subnet-evm/api 301
 /apis/avalanchego/x-chain-migration /reference/standards/guides/x-chain-migration 301
-/apis/avalanchego/cb58-deprecation /reference/standards/network-protocol 301
+/apis/avalanchego/cb58-deprecation /reference/standards/avalanche-network-protocol 301
 /specs/avm-transaction-serialization /reference/avalanchego/x-chain/txn-format 301
 /specs/coreth-atomic-transaction-serialization /reference/avalanchego/c-chain/txn-format 301
-/specs/cryptographic-primitives /reference/standards/cryptography 301
-/specs/network-protocol /reference/standards/network-protocol 301
-/specs/serialization-primitives /reference/standards/serialization 301
+/specs/cryptographic-primitives reference/standards/cryptographic-primitives 301
+/specs/network-protocol /reference/standards/avalanche-network-protocol 301
+/specs/serialization-primitives /reference/standards/serialization-primitives 301
 /specs/platform-transaction-serialization /reference/avalanchego/p-chain/txn-format 301
-/specs/banff-changes /reference/standards/guides/banff 301
+/specs/banff-changes /reference/standards/guides/banff-changes 301

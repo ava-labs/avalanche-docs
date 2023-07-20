@@ -29,15 +29,15 @@ pagination_label: API Reference Quick Links
 
 | Avalanche Standards      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Avalanche Network Protocol**](/reference/standards/network-protocol)      | Defines core communication format between Avalanche nodes |
-| [**Cryptography**](/reference/standards/cryptography)      | Cryptography used by Avalanche at the network and blockchain layers |
-| [**Serialization**](/reference/standards/serialization)      | How primitive types are encoded on the Avalanche platform |
+| [**Avalanche Network Protocol**](/reference/standards/avalanche-network-protocol)      | Defines core communication format between Avalanche nodes |
+| [**Cryptography**](/reference/standards/cryptographic-primitives)      | Cryptography used by Avalanche at the network and blockchain layers |
+| [**Serialization**](/reference/standards/serialization-primitives)      | How primitive types are encoded on the Avalanche platform |
 
 | Development Guides      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Issuing API Calls**](/reference/standards/guides/issue-api-call)      | How to make calls to APIs exposed by Avalanche nodes |
+| [**Issuing API Calls**](/reference/standards/guides/issuing-api-calls)      | How to make calls to APIs exposed by Avalanche nodes |
 | [**Transaction Fees**](/reference/standards/guides/txn-fees)      | How transaction fees are determined on Avalanche |
 | [**X-Chain Migration**](/reference/standards/guides/x-chain-migration)      | Summarizes all of the changes made to the X-Chain API to support Avalanche Cortina |
-| [**Banff Changes**](/reference/standards/guides/banff)      | Summary of the changes in Avalanche Banff Release |
+| [**Banff Changes**](/reference/standards/guides/banff-changes)      | Summary of the changes in Avalanche Banff Release |
 
 

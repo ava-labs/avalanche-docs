@@ -14,7 +14,7 @@ behind a load balancer to ensure high availability and high request throughput.
 The public API server is at `api.avax.network` for Avalanche Mainnet and
 `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API,
 just append the relevant API endpoint, as documented
-[here](/reference/standards/guides/issue-api-call). Namely, use the following end points for
+[here](/reference/standards/guides/issuing-api-calls). Namely, use the following end points for
 each chain respectively:
 
 ### HTTP

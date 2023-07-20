@@ -1,5 +1,4 @@
 ---
-id: auth-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the Auth API associated with AvalancheGo. 
 sidebar_label: Auth API
@@ -40,7 +39,7 @@ server](/apis/avalanchego/public-api-server).
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here.](/reference/standards/guides/issue-api-call)
+[here.](/reference/standards/guides/issuing-api-calls)
 
 ## Endpoint
 

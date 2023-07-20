@@ -1,5 +1,4 @@
 ---
-id: info-api
 tags: [AvalancheGo APIs]
 description: This page is an overview of the Info API associated with AvalancheGo.
 sidebar_label: Info API
@@ -17,7 +16,7 @@ This API set is for a specific node, it is unavailable on the [public server](/a
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](/reference/standards/guides/issue-api-call).
+[here](/reference/standards/guides/issuing-api-calls).
 
 ## Endpoint
 
