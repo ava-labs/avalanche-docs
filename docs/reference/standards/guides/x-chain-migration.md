@@ -19,27 +19,27 @@ however, there are new APIs that must be called to index all transactions.
 
 The transaction format on the X-Chain does not change in Cortina. This means that wallets that
 have already integrated with the X-Chain don’t need to change how they sign transactions.
-Additionally, there is no change to the format of the [avm.issueTx](/reference/avalanchego/x-chain/api#avmissuetx)
-or the [avm.getTx](/reference/avalanchego/x-chain/api#avmgettx) API.
+Additionally, there is no change to the format of the [avm.issueTx](/reference/avalanchego/x-chain/api.md#avmissuetx)
+or the [avm.getTx](/reference/avalanchego/x-chain/api.md#avmgettx) API.
 
-However, the [avm.getTxStatus](/reference/avalanchego/x-chain/api#avmgettxstatus) endpoint is now
+However, the [avm.getTxStatus](/reference/avalanchego/x-chain/api.md#avmgettxstatus) endpoint is now
 deprecated and its usage should be replaced with
-[avm.getTx](/reference/avalanchego/x-chain/api#avmgettx) (which only returns accepted transactions
-for AvalancheGo >= v1.9.12). [avm.getTxStatus](/reference/avalanchego/x-chain/api#avmgettxstatus)
+[avm.getTx](/reference/avalanchego/x-chain/api.md#avmgettx) (which only returns accepted transactions
+for AvalancheGo >= v1.9.12). [avm.getTxStatus](/reference/avalanchego/x-chain/api.md#avmgettxstatus)
 will still work up to and after the Cortina activation if you wish to migrate
 after the network upgrade has occurred.
 
 ## Vertex -> Block Indexing
 
 Before Cortina, indexing the X-Chain required polling the
-[/ext/index/X/vtx](/reference/avalanchego/index-api#x-chain-vertices) endpoint to fetch new
+[/ext/index/X/vtx](/reference/avalanchego/index-api.md#x-chain-vertices) endpoint to fetch new
 vertices. During the Cortina activation, a “stop vertex” will be produced using
 a [new codec
 version](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/codec.go#L17-L18)
 that will contain no transactions. This new vertex type will be the [same
 format](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/stateless_vertex.go#L95-L102)
 as previous vertices. To ensure historical data can still be accessed in
-Cortina, the [/ext/index/X/vtx](/reference/avalanchego/index-api#x-chain-vertices) will remain
+Cortina, the [/ext/index/X/vtx](/reference/avalanchego/index-api.md#x-chain-vertices) will remain
 accessible even though it will no longer be populated with chain data.
 
 :::note
@@ -52,7 +52,7 @@ blocks are added.
 
 After Cortina activation, you will need to migrate to using the new
 *ext/index/X/block* endpoint (shares the same semantics as
-[/ext/index/P/block](/reference/avalanchego/index-api#p-chain-blocks)) to continue indexing
+[/ext/index/P/block](/reference/avalanchego/index-api.md#p-chain-blocks)) to continue indexing
 X-Chain activity. Because X-Chain ordering is deterministic in Cortina, this
 means that X-Chain blocks across all heights will be consistent across all nodes
 and will include a timestamp. Here is an example of iterating over these blocks
@@ -112,10 +112,10 @@ func main() {
 ```
 
 After Cortina activation, it will also be possible to fetch X-Chain blocks
-directly without enabling the Index API. You can use the [avm.getBlock](/reference/avalanchego/x-chain/api#avmgetblock),
-[avm.getBlockByHeight](/reference/avalanchego/x-chain/api#avmgetblockbyheight), and [avm.getHeight](/reference/avalanchego/x-chain/api#avmgetheight)
+directly without enabling the Index API. You can use the [avm.getBlock](/reference/avalanchego/x-chain/api.md#avmgetblock),
+[avm.getBlockByHeight](/reference/avalanchego/x-chain/api.md#avmgetblockbyheight), and [avm.getHeight](/reference/avalanchego/x-chain/api.md#avmgetheight)
 endpoints to do so. This, again,
-will be similar to the [P-Chain semantics](/reference/avalanchego/p-chain/api#platformgetblock).
+will be similar to the [P-Chain semantics](/reference/avalanchego/p-chain/api.md#platformgetblock).
 
 ## Deprecated API Calls
 
@@ -202,7 +202,7 @@ No.
 
 ### Will Updating Decrease my Validator’s Uptime?
 
-No. As a reminder, you can check your validator’s estimated uptime using the [`info.uptime` API call](/reference/avalanchego/info-api#infouptime).
+No. As a reminder, you can check your validator’s estimated uptime using the [`info.uptime` API call](/reference/avalanchego/info-api.md#infouptime).
 
 
 ### I Think Something Is Wrong. What Should I Do?

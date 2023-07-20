@@ -21,7 +21,7 @@ that defines the Avalanche Contract Chain (C-Chain).
 
 Related docs
 
-- [C-Chain APIs](/reference/avalanchego/c-chain/api)
+- [C-Chain APIs](/reference/avalanchego/c-chain/api.md)
 
 ## Subnet-EVM
 

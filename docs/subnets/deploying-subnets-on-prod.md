@@ -237,7 +237,7 @@ of the validators, it will start validating any transactions that get posted to 
 ### Monitoring
 
 If you want to inspect the process of Subnet syncing, you can use the RPC call to check for the
-[blockchain status](/reference/avalanchego/p-chain/api#platformgetblockchainstatus).
+[blockchain status](/reference/avalanchego/p-chain/api.md#platformgetblockchainstatus).
 
 For a more in-depth look into Subnet operation, check out the blockchain log. By default, the log
 can be found in `~/.avalanchego/logs/ChainID.log` where you replace the `ChainID` with the actual ID

@@ -37,7 +37,7 @@ server](/apis/avalanchego/public-api-server).
 ## Format
 
 This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see
-[here](/reference/standards/guides/issuing-api-calls).
+[here](/reference/standards/guides/issuing-api-calls.md).
 
 ## Endpoint
 
@@ -145,7 +145,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 Export a user. The user can be imported to another node with
-[`keystore.importUser`](/reference/avalanchego/keystore-api#keystoreimportuser). The user’s password
+[`keystore.importUser`](/reference/avalanchego/keystore-api.md#keystoreimportuser). The user’s password
 remains encrypted.
 
 **Signature:**

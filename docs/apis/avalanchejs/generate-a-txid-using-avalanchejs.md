@@ -20,7 +20,7 @@ TxID using AvalancheJS.
 The script which we're using can be found in the AvalancheJS example scripts as
 [example/avm/baseTx-AVAX.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/baseTx-avax.ts).
 First, create a
-[BaseTx](/reference/avalanchego/x-chain/txn-format#what-base-tx-contains).
+[BaseTx](/reference/avalanchego/x-chain/txn-format.md#what-base-tx-contains).
 We're omitting that part for the sake of brevity. Once you have a `BaseTx` then
 create an `UnsignedTx` and `sign` it. Lastly convert the `Tx` to a `Buffer` by
 calling `tx.toBuffer()`.

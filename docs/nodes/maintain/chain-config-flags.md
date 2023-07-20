@@ -775,7 +775,7 @@ The parameters are as follows:
 Enables AVM transaction indexing if set to `true`. Default value is `false`.
 When set to `true`, AVM transactions are indexed against the `address` and
 `assetID` involved. This data is available via `avm.getAddressTxs`
-[API](/reference/avalanchego/x-chain/api#avmgetaddresstxs).
+[API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
 
 :::note
 If `index-transactions` is set to true, it must always be set to true

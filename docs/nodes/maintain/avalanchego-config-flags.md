@@ -55,18 +55,18 @@ among currently supported file format (see
 #### `--api-admin-enabled` (boolean)
 
 If set to `true`, this node will expose the Admin API. Defaults to `false`.
-See [here](/reference/avalanchego/admin-api) for more information.
+See [here](/reference/avalanchego/admin-api.md) for more information.
 
 #### `--api-auth-required` (boolean)
 
 If set to `true`, API calls require an authorization token. Defaults to `false`.
-See [here](/reference/avalanchego/auth-api) for more information.
+See [here](/reference/avalanchego/auth-api.md) for more information.
 
 #### `--api-auth-password` (string)
 
 The password needed to create/revoke authorization tokens. If
 `--api-auth-required=true`, must be specified; otherwise ignored. See
-[here](/reference/avalanchego/auth-api) for more information.
+[here](/reference/avalanchego/auth-api.md) for more information.
 
 #### `--api-auth-password-file` (string)
 
@@ -77,33 +77,33 @@ Leading and trailing whitespace is removed from the password. Can be changed via
 #### `--api-health-enabled` (boolean)
 
 If set to `false`, this node will not expose the Health API. Defaults to `true`. See
-[here](/reference/avalanchego/health-api) for more information.
+[here](/reference/avalanchego/health-api.md) for more information.
 
 #### `--index-enabled` (boolean)
 
 If set to `true`, this node will enable the indexer and the Index API will be
 available. Defaults to `false`. See
-[here](/reference/avalanchego/index-api) for more information.
+[here](/reference/avalanchego/index-api.md) for more information.
 
 #### `--api-info-enabled` (boolean)
 
 If set to `false`, this node will not expose the Info API. Defaults to `true`. See
-[here](/reference/avalanchego/info-api) for more information.
+[here](/reference/avalanchego/info-api.md) for more information.
 
 #### `--api-ipcs-enabled` (boolean)
 
 If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
-[here](/reference/avalanchego/ipc-api) for more information.
+[here](/reference/avalanchego/ipc-api.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
 
 If set to `true`, this node will expose the Keystore API. Defaults to `false`.
-See [here](/reference/avalanchego/keystore-api) for more information.
+See [here](/reference/avalanchego/keystore-api.md) for more information.
 
 #### `--api-metrics-enabled` (boolean)
 
 If set to `false`, this node will not expose the Metrics API. Defaults to
-`true`. See [here](/reference/avalanchego/metrics-api) for more information.
+`true`. See [here](/reference/avalanchego/metrics-api.md) for more information.
 
 #### `--http-shutdown-wait` (duration)
 

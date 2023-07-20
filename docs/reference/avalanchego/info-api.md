@@ -16,7 +16,7 @@ This API set is for a specific node, it is unavailable on the [public server](/a
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](/reference/standards/guides/issuing-api-calls).
+[here](/reference/standards/guides/issuing-api-calls.md).
 
 ## Endpoint
 
@@ -65,7 +65,7 @@ curl -X POST --data '{
 
 ### `info.getBlockchainID`
 
-Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](/reference/avalanchego/admin-api#adminaliaschain).)
+Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](/reference/avalanchego/admin-api.md#adminaliaschain).)
 
 **Signature:**
 

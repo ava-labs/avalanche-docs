@@ -19,7 +19,7 @@ This API set is for a specific node, it is unavailable on the [public server](/a
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For details, see [here](/reference/standards/guides/issuing-api-calls).
+This API uses the `json 2.0` RPC format. For details, see [here](/reference/standards/guides/issuing-api-calls.md).
 
 ## Endpoint
 

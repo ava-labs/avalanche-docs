@@ -53,7 +53,7 @@ You need to collect the NodeIDs for each of your validators. This tutorial uses 
 several commands.
 
 To get the NodeID of a `Mainnet` node, call the
-[info.getNodeID](/reference/avalanchego/info-api#infogetnodeid) endpoint. For example:
+[info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) endpoint. For example:
 
 ```text
 curl -X POST --data '{
@@ -164,8 +164,8 @@ After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-The deployment requires running a [createSubnet transaction](/reference/avalanchego/p-chain/api#platformcreatesubnet)
-and a [createBlockchain transaction](/reference/avalanchego/p-chain/api#platformcreateblockchain),
+The deployment requires running a [createSubnet transaction](/reference/avalanchego/p-chain/api.md#platformcreatesubnet)
+and a [createBlockchain transaction](/reference/avalanchego/p-chain/api.md#platformcreateblockchain),
 and so this first Ledger address must have the funds to issue both operations.
 
 This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
@@ -421,7 +421,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Because this operation issues a new
-[transaction](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator), the CLI needs the
+[transaction](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator), the CLI needs the
 control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
 the process looks slightly different if you use multiple controls keys. The address needs to pay a
 TX fee of 0.001 AVAX.
@@ -448,7 +448,7 @@ Note, this ID is intentionally modified to prevent replication.
 ### Set Stake Weight
 
 Select 30 as the stake weight. You can learn more about the stake weight parameter in
-[addSubnetValidator](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator) under the
+[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
 `weight` section.
 
 :::warning

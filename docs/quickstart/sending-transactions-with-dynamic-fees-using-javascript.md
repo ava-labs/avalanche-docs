@@ -18,7 +18,7 @@ transactions.
 - Basic familiarity with [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - Basic familiarity with [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
 - Basic familiarity with [the Avalanche
-  C-Chain](/reference/avalanchego/c-chain/api) network and [EVM
+  C-Chain](/reference/avalanchego/c-chain/api.md) network and [EVM
   compatibility](https://ethereum.org/en/developers/docs/evm/)
 - Basic understanding of [dynamic fee
   transactions](./adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts)

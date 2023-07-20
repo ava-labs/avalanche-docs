@@ -33,7 +33,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -137,7 +137,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -232,7 +232,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -353,7 +353,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -404,7 +404,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -499,7 +499,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -577,8 +577,8 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 :::
 
 Send AVAX from an address on the P-Chain to an address on the X-Chain or C-Chain. After issuing this
-transaction, you must call the X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport)
-or C-Chain's [`avax.import`](/reference/avalanchego/c-chain/api#avaximport) with assetID `AVAX` to 
+transaction, you must call the X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport)
+or C-Chain's [`avax.import`](/reference/avalanchego/c-chain/api.md#avaximport) with assetID `AVAX` to 
 complete the transfer.
 
 **Signature:**
@@ -651,12 +651,12 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
 Get the private key that controls a given address. The returned private key can be added to a user
-with [`platform.importKey`](/reference/avalanchego/p-chain/api#platformimportkey).
+with [`platform.importKey`](/reference/avalanchego/p-chain/api.md#platformimportkey).
 
 **Signature:**
 
@@ -2253,14 +2253,14 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
 Complete a transfer of AVAX from the X-Chain, or C-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport)
-or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api#avaxexport) method with assetID `AVAX`
+Before this method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport)
+or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method with assetID `AVAX`
 to initiate the transfer.
 
 **Signature:**
@@ -2332,7 +2332,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 
@@ -2432,7 +2432,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::warning
 
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 
 :::
 

@@ -50,7 +50,7 @@ Also it's worth pointing out that
 [it only needs 1 AVAX to become a validator on the Fuji Testnet](../nodes/validate/staking.md#fuji-testnet)
 and you can get the test token from the [faucet](https://faucet.avax.network/).
 
-To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api#infogetnodeid):
+To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
 
 ```text
 curl -X POST --data '{
@@ -450,7 +450,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 This tutorial is about deploying to `Fuji`, so navigate with the arrow keys to `Fuji` and hit enter.
 The user is then asked to provide which private key to use for the deployment. The deployment basically
 consists in running a
-[createSubnet transaction](/reference/avalanchego/p-chain/api#platformcreatesubnet). Therefore the
+[createSubnet transaction](/reference/avalanchego/p-chain/api.md#platformcreatesubnet). Therefore the
 key needs to have funds.
 
 Also, this tutorial assumes that a node is up running, fully bootstrapped on `Fuji`, and runs
@@ -687,7 +687,7 @@ avalanche subnet addValidator testsubnet
 ```
 
 As this operation involves a new
-[transaction](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator), you will need to specify
+[transaction](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator), you will need to specify
 which private key to use:
 
 ```bash
@@ -719,7 +719,7 @@ The next question requires a bit of thinking. A validator has a weight, which de
 consensus selects it for decision making. You should think ahead of how many validators you want
 initially to identify a good value here. The range is 1 to 100, but the minimum for a Subnet without
 any validators yet is 20. The structure is a bit described at
-[addSubnetValidator](/reference/avalanchego/p-chain/api#platformaddsubnetvalidator) under the
+[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
 `weight` section.
 
 Just select 30 for this one:

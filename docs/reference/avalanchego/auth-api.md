@@ -39,7 +39,7 @@ server](/apis/avalanchego/public-api-server).
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here.](/reference/standards/guides/issuing-api-calls)
+[here.](/reference/standards/guides/issuing-api-calls.md)
 
 ## Endpoint
 
@@ -84,7 +84,7 @@ curl -X POST --data '{
 ```
 
 This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` 
-(that is the X-Chain) and `/ext/info` (that is the [info API](/reference/avalanchego/info-api).)
+(that is the X-Chain) and `/ext/info` (that is the [info API](/reference/avalanchego/info-api.md).)
 
 **Example Response:**
 
@@ -101,7 +101,7 @@ This call will generate an authorization token that allows access to API endpoin
 This authorization token should be included in API calls by giving header `Authorization` value
 `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](/reference/avalanchego/info-api#infopeers) with this token:
+For example, to call [`info.peers`](/reference/avalanchego/info-api.md#infopeers) with this token:
 
 ```sh
 curl -X POST --data '{

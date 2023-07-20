@@ -83,7 +83,7 @@ default since AvalancheGo v1.4.10. To disable pruning, include
 
 Interacting with the C-Chain is identical to interacting with
 [`go-ethereum`](https://geth.ethereum.org/). You can find the reference material
-for C-Chain API [here](/reference/avalanchego/c-chain/api).
+for C-Chain API [here](/reference/avalanchego/c-chain/api.md).
 
 Please note that `personal_` namespace is turned off by default. To turn it on,
 you need to pass the appropriate command line switch to your node, like in the

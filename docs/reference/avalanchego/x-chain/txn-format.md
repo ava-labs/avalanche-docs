@@ -9,8 +9,8 @@ pagination_label: X-Chain Transaction Format
 
 This file is meant to be the single source of truth for how we serialize
 transactions in the Avalanche Virtual Machine (AVM). This document uses the
-[primitive serialization](/reference/standards/serialization-primitives) format for packing and
-[secp256k1](/reference/standards/cryptographic-primitives#secp256k1-addresses) for cryptographic
+[primitive serialization](/reference/standards/serialization-primitives.md) format for packing and
+[secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) for cryptographic
 user identification.
 
 ## Codec ID
@@ -24,16 +24,16 @@ Transferable outputs wrap an output with an asset ID.
 
 ### What Transferable Output Contains
 
-A transferable output contains an `AssetID` and an [`Output`](/reference/avalanchego/x-chain/txn-format#outputs).
+A transferable output contains an `AssetID` and an [`Output`](/reference/avalanchego/x-chain/txn-format.md#outputs).
 
 - **`AssetID`** is a 32-byte array that defines which asset this output references.
 - **`Output`** is an output, as defined
-  [below](/reference/avalanchego/x-chain/txn-format#outputs). Outputs have four possible
+  [below](/reference/avalanchego/x-chain/txn-format.md#outputs). Outputs have four possible
   types:
-  [`SECP256K1TransferOutput`](/reference/avalanchego/x-chain/txn-format#secp256k1-transfer-output),
-  [`SECP256K1MintOutput`](/reference/avalanchego/x-chain/txn-format#secp256k1-mint-output),
-  [`NFTTransferOutput`](/reference/avalanchego/x-chain/txn-format#nft-transfer-output)
-  and [`NFTMintOutput`](/reference/avalanchego/x-chain/txn-format#nft-mint-output).
+  [`SECP256K1TransferOutput`](/reference/avalanchego/x-chain/txn-format.md#secp256k1-transfer-output),
+  [`SECP256K1MintOutput`](/reference/avalanchego/x-chain/txn-format.md#secp256k1-mint-output),
+  [`NFTTransferOutput`](/reference/avalanchego/x-chain/txn-format.md#nft-transfer-output)
+  and [`NFTMintOutput`](/reference/avalanchego/x-chain/txn-format.md#nft-mint-output).
 
 ### Gantt Transferable Output Specification
 
@@ -101,7 +101,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
   the bytes of the signed transaction.
 - **`UTXOIndex`** is an int that defines which UTXO this input is consuming in the specified transaction.
 - **`AssetID`** is a 32-byte array that defines which asset this input references.
-- **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](/reference/avalanchego/x-chain/txn-format#secp256k1-transfer-input)
+- **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](/reference/avalanchego/x-chain/txn-format.md#secp256k1-transfer-input)
 
 ### Gantt Transferable Input Specification
 
@@ -179,7 +179,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and a `TransferOp`.
 - **`AssetID`** is a 32-byte array that defines which asset this operation changes.
 - **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be
   sorted in lexicographical order.
-- **`TransferOp`** is a [transferable operation object](/reference/avalanchego/x-chain/txn-format#operations).
+- **`TransferOp`** is a [transferable operation object](/reference/avalanchego/x-chain/txn-format.md#operations).
 
 ### Gantt Transferable Op Specification
 
@@ -265,14 +265,14 @@ Let’s make a transferable operation:
 ## Outputs
 
 Outputs have four possible types:
-[`SECP256K1TransferOutput`](/reference/avalanchego/x-chain/txn-format#secp256k1-transfer-output),
-[`SECP256K1MintOutput`](/reference/avalanchego/x-chain/txn-format#secp256k1-mint-output),
-[`NFTTransferOutput`](/reference/avalanchego/x-chain/txn-format#nft-transfer-output) and
-[`NFTMintOutput`](/reference/avalanchego/x-chain/txn-format#nft-mint-output).
+[`SECP256K1TransferOutput`](/reference/avalanchego/x-chain/txn-format.md#secp256k1-transfer-output),
+[`SECP256K1MintOutput`](/reference/avalanchego/x-chain/txn-format.md#secp256k1-mint-output),
+[`NFTTransferOutput`](/reference/avalanchego/x-chain/txn-format.md#nft-transfer-output) and
+[`NFTMintOutput`](/reference/avalanchego/x-chain/txn-format.md#nft-mint-output).
 
 ## SECP256K1 Mint Output
 
-A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint output is
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) mint output is
 an output that is owned by a collection of addresses.
 
 ### What SECP256K1 Mint Output Contains
@@ -360,7 +360,7 @@ Let’s make a SECP256K1 mint output with:
 
 ## SECP256K1 Transfer Output
 
-A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) transfer output
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer output
 allows for sending a quantity of an asset to a collection of addresses after a
 specified Unix time.
 
@@ -663,7 +663,7 @@ Inputs have one possible type: `SECP256K1TransferInput`.
 
 ## SECP256K1 Transfer Input
 
-A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) transfer input
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer input
 allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
@@ -738,7 +738,7 @@ Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and
 
 ## SECP256K1 Mint Operation
 
-A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint operation
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) mint operation
 consumes a SECP256K1 mint output, creates a new mint output and sends a transfer
 output to a new set of owners.
 
@@ -749,12 +749,12 @@ A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, 
 - **`TypeID`** is the ID for this output type. It is `0x00000008`.
 - **`AddressIndices`** is a list of unique ints that define the private keys
   that are being used to spend the
-  [UTXO](/reference/avalanchego/x-chain/txn-format#utxo). Each UTXO has an array of
+  [UTXO](/reference/avalanchego/x-chain/txn-format.md#utxo). Each UTXO has an array of
   addresses that can spend the UTXO. Each int represents the index in this
   address array that will sign this transaction. The array must be sorted low to
   high.
-- **`MintOutput`** is a [SECP256K1 Mint output](/reference/avalanchego/x-chain/txn-format#secp256k1-mint-output).
-- **`TransferOutput`** is a [SECP256K1 Transfer output](/reference/avalanchego/x-chain/txn-format#secp256k1-transfer-output).
+- **`MintOutput`** is a [SECP256K1 Mint output](/reference/avalanchego/x-chain/txn-format.md#secp256k1-mint-output).
+- **`TransferOutput`** is a [SECP256K1 Transfer output](/reference/avalanchego/x-chain/txn-format.md#secp256k1-transfer-output).
 
 ### Gantt SECP256K1 Mint Operation Specification
 
@@ -787,7 +787,7 @@ message SECP256K1MintOperation {
 
 ### SECP256K1 Mint Operation Example
 
-Let’s make a [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) mint
+Let’s make a [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) mint
 operation with:
 
 - **`TypeId`**: `8`
@@ -965,7 +965,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
   that can spend the UTXO. Each int represents the index in this address array
   that will sign this transaction. The array must be sorted low to high.
 - **`NFTTransferOutput`** is the output of this operation and must be an [NFT
-  Transfer Output](/reference/avalanchego/x-chain/txn-format#nft-transfer-output). This
+  Transfer Output](/reference/avalanchego/x-chain/txn-format.md#nft-transfer-output). This
   output doesn’t have the **`TypeId`**, because the type is known by the context
   of being in this operation.
 
@@ -1086,7 +1086,7 @@ Initial state contains a `FxID` and an array of `Output`.
   of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is
   `0x00000001`.
 - **`Outputs`** is a variable length array of
-  [outputs](/reference/avalanchego/x-chain/txn-format#outputs), as defined above.
+  [outputs](/reference/avalanchego/x-chain/txn-format.md#outputs), as defined above.
 
 ### Gantt Initial State Specification
 
@@ -1150,7 +1150,7 @@ credentials match the order of the inputs or operations.
 
 ## SECP256K1 Credential
 
-A [secp256k1](/reference/standards/cryptographic-primitives#secp-256-k1-addresses) credential
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) credential
 contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains
@@ -1229,20 +1229,20 @@ Let’s make a payment input with:
 ## NFT Credential
 
 An NFT credential is the same as an [secp256k1
-credential](/reference/avalanchego/x-chain/txn-format#secp256k1-credential) with a
+credential](/reference/avalanchego/x-chain/txn-format.md#secp256k1-credential) with a
 different TypeID. The TypeID for an NFT credential is `0x0000000e`.
 
 ## Unsigned Transactions
 
 Unsigned transactions contain the full content of a transaction with only the
 signatures missing. Unsigned transactions have four possible types:
-[`CreateAssetTx`](/reference/avalanchego/x-chain/txn-format#what-unsigned-create-asset-tx-contains),
-[`OperationTx`](/reference/avalanchego/x-chain/txn-format#what-unsigned-operation-tx-contains),
-[`ImportTx`](/reference/avalanchego/x-chain/txn-format#what-unsigned-import-tx-contains),
+[`CreateAssetTx`](/reference/avalanchego/x-chain/txn-format.md#what-unsigned-create-asset-tx-contains),
+[`OperationTx`](/reference/avalanchego/x-chain/txn-format.md#what-unsigned-operation-tx-contains),
+[`ImportTx`](/reference/avalanchego/x-chain/txn-format.md#what-unsigned-import-tx-contains),
 and
-[`ExportTx`](/reference/avalanchego/x-chain/txn-format#what-unsigned-export-tx-contains).
+[`ExportTx`](/reference/avalanchego/x-chain/txn-format.md#what-unsigned-export-tx-contains).
 They all embed
-[`BaseTx`](/reference/avalanchego/x-chain/txn-format#what-base-tx-contains), which
+[`BaseTx`](/reference/avalanchego/x-chain/txn-format.md#what-base-tx-contains), which
 contains common fields and operations.
 
 ## Unsigned BaseTx
@@ -1259,13 +1259,13 @@ A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
   transaction was issued to. This is used for replay attack prevention for
   transactions that could potentially be valid across network or blockchain.
 - **`Outputs`** is an array of [transferable output
-  objects](/reference/avalanchego/x-chain/txn-format#transferable-output). Outputs must
+  objects](/reference/avalanchego/x-chain/txn-format.md#transferable-output). Outputs must
   be sorted lexicographically by their serialized representation. The total
   quantity of the assets created in these outputs must be less than or equal to
   the total quantity of each asset consumed in the inputs minus the transaction
   fee.
 - **`Inputs`** is an array of [transferable input
-  objects](/reference/avalanchego/x-chain/txn-format#transferable-input). Inputs must be
+  objects](/reference/avalanchego/x-chain/txn-format.md#transferable-input). Inputs must be
   sorted and unique. Inputs are sorted first lexicographically by their
   **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are
   inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction
@@ -1402,7 +1402,7 @@ An unsigned create asset TX contains a `BaseTx`, `Name`, `Symbol`,
   denomination must be no more than 32.
 - **`InitialStates`** is a variable length array that defines the feature
   extensions this asset supports, and the [initial
-  state](/reference/avalanchego/x-chain/txn-format#initial-state) of those feature
+  state](/reference/avalanchego/x-chain/txn-format.md#initial-state) of those feature
   extensions.
 
 ### Gantt Unsigned Create Asset TX Specification
@@ -1525,7 +1525,7 @@ Let’s make an unsigned base TX that uses the inputs and outputs from the previ
 An unsigned operation TX contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 - **`BaseTx`**
-- **`Ops`** is a variable-length array of [Transferable Ops](/reference/avalanchego/x-chain/txn-format#transferable-op).
+- **`Ops`** is a variable-length array of [Transferable Ops](/reference/avalanchego/x-chain/txn-format.md#transferable-op).
 
 ### Gantt Unsigned Operation TX Specification
 
@@ -1630,7 +1630,7 @@ An unsigned import TX contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
 
 - **`BaseTx`**
 - **`SourceChain`** is a 32-byte source blockchain ID.
-- **`Ins`** is a variable length array of [Transferable Inputs](/reference/avalanchego/x-chain/txn-format#transferable-input).
+- **`Ins`** is a variable length array of [Transferable Inputs](/reference/avalanchego/x-chain/txn-format.md#transferable-input).
 
 ### Gantt Unsigned Import TX Specification
 
@@ -1741,7 +1741,7 @@ An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The
 `TypeID` for this type is `0x00000004`.
 
 - **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-- **`Outs`** is a variable length array of [Transferable Outputs](/reference/avalanchego/x-chain/txn-format#transferable-output).
+- **`Outs`** is a variable length array of [Transferable Outputs](/reference/avalanchego/x-chain/txn-format.md#transferable-output).
 
 ### Gantt Unsigned Export TX Specification
 
@@ -1845,7 +1845,7 @@ Let’s make an unsigned export TX that uses the outputs from the previous examp
 
 ## Signed Transaction
 
-A signed transaction is an unsigned transaction with the addition of an array of [credentials](/reference/avalanchego/x-chain/txn-format#credentials).
+A signed transaction is an unsigned transaction with the addition of an array of [credentials](/reference/avalanchego/x-chain/txn-format.md#credentials).
 
 ### What Signed Transaction Contains
 
@@ -1854,7 +1854,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
 - **`CodecID`** The only current valid codec id is `00 00`.
 - **`UnsignedTx`** is an unsigned transaction, as described above.
 - **`Credentials`** is an array of
-  [credentials](/reference/avalanchego/x-chain/txn-format#credentials). Each credential
+  [credentials](/reference/avalanchego/x-chain/txn-format.md#credentials). Each credential
   will be paired with the input in the same index at this credential.
 
 ### Gantt Signed Transaction Specification
@@ -1974,10 +1974,10 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
   references.
 - **`Output`** is the output object that created this UTXO. The serialization of
   Outputs was defined above. Valid output types are [SECP Mint
-  Output](/reference/avalanchego/x-chain/txn-format#secp256k1-mint-output), [SECP
-  Transfer Output](/reference/avalanchego/x-chain/txn-format#secp256k1-transfer-output),
-  [NFT Mint Output](/reference/avalanchego/x-chain/txn-format#nft-mint-output), [NFT
-  Transfer Output](/reference/avalanchego/x-chain/txn-format#nft-transfer-output).
+  Output](/reference/avalanchego/x-chain/txn-format.md#secp256k1-mint-output), [SECP
+  Transfer Output](/reference/avalanchego/x-chain/txn-format.md#secp256k1-transfer-output),
+  [NFT Mint Output](/reference/avalanchego/x-chain/txn-format.md#nft-mint-output), [NFT
+  Transfer Output](/reference/avalanchego/x-chain/txn-format.md#nft-transfer-output).
 
 ### Gantt UTXO Specification
 
@@ -2202,13 +2202,13 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`,
   this transaction was issued to. This is used for replay attack prevention for
   transactions that could potentially be valid across network or blockchain.
 - **`Outputs`** is an array of [transferable output
-  objects](/reference/avalanchego/x-chain/txn-format#transferable-output). Outputs must
+  objects](/reference/avalanchego/x-chain/txn-format.md#transferable-output). Outputs must
   be sorted lexicographically by their serialized representation. The total
   quantity of the assets created in these outputs must be less than or equal to
   the total quantity of each asset consumed in the inputs minus the transaction
   fee.
 - **`Inputs`** is an array of [transferable input
-  objects](/reference/avalanchego/x-chain/txn-format#transferable-input). Inputs must be
+  objects](/reference/avalanchego/x-chain/txn-format.md#transferable-input). Inputs must be
   sorted and unique. Inputs are sorted first lexicographically by their
   **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are
   inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction
@@ -2228,7 +2228,7 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`,
   denomination must be no more than 32.
 - **`InitialStates`** is a variable length array that defines the feature
   extensions this asset supports, and the [initial
-  state](/reference/avalanchego/x-chain/txn-format#initial-state) of those feature
+  state](/reference/avalanchego/x-chain/txn-format.md#initial-state) of those feature
   extensions.
 
 ### Gantt GenesisAsset Specification

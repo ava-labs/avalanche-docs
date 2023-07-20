@@ -42,7 +42,7 @@ just quicker and cheaper. Let's find out how.
 
 ## Accessing Avalanche C-Chain
 
-C-Chain exposes the [same API](/reference/avalanchego/c-chain/api) as
+C-Chain exposes the [same API](/reference/avalanchego/c-chain/api.md) as
 `go-ethereum`, so you can use all the familiar APIs that are available on Ethereum
 for interaction with the platform.
 

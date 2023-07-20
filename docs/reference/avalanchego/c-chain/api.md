@@ -299,12 +299,12 @@ To interact with other instances of the EVM AVAX endpoints:
 ### `avax.export`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
 Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
-X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api#platformimportavax).
+X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) or P-Chain's
+[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax).
 
 **Signature:**
 
@@ -359,14 +359,14 @@ curl -X POST --data '{
 ### `avax.exportAVAX`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-**DEPRECATED—instead use** [`avax.export`](/reference/avalanchego/c-chain/api#avaxexport).
+**DEPRECATED—instead use** [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport).
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
-X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api#platformimportavax) with assetID `AVAX` on 
+X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) or P-Chain's
+[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax) with assetID `AVAX` on 
 the X-Chain to complete the transfer.
 
 **Signature:**
@@ -427,7 +427,7 @@ curl -X POST --data '{
 ### `avax.exportKey`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
 Get the private key that controls a given address. The returned private key can be added to a user
@@ -676,12 +676,12 @@ This gives response:
 ### `avax.import`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this
-method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport)
-or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with 
+method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport)
+or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with 
 assetID `AVAX` to initiate the transfer.
 
 **Signature:**
@@ -742,14 +742,14 @@ curl -X POST --data '{
 ### `avax.importAVAX`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-**DEPRECATED—instead use** [`avax.import`](/reference/avalanchego/c-chain/api#avaximport)
+**DEPRECATED—instead use** [`avax.import`](/reference/avalanchego/c-chain/api.md#avaximport)
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
-called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api#avmexport) or P-Chain’s
-[`platform.exportAVAX`](/reference/avalanchego/p-chain/api#platformexportavax) with assetID `AVAX` 
+called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport) or P-Chain’s
+[`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with assetID `AVAX` 
 to initiate the transfer.
 
 **Signature:**
@@ -809,7 +809,7 @@ curl -X POST --data '{
 ### `avax.importKey`
 
 :::warning
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
 Give a user control over an address by providing the private key that controls the address.

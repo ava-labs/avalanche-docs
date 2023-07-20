@@ -201,7 +201,7 @@ bootstrapping, it prints logs like this:
 ```
 
 To check if a given chain is done bootstrapping, in another terminal window call
-[`info.isBootstrapped`](/reference/avalanchego/info-api#infoisbootstrapped)
+[`info.isBootstrapped`](/reference/avalanchego/info-api.md#infoisbootstrapped)
 by copying and pasting the following command:
 
 ```sh
