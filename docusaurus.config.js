@@ -136,6 +136,18 @@ const config = {
             label: "Community",
           },
           {
+            type: "dropdown",
+            position: "left",
+            label: "Build",
+            items: [
+              {
+                type: "docSidebar",
+                label: "DApps",
+                sidebarId: "dapps-v2",
+              },
+            ],
+          },
+          {
             type: "docSidebar",
             position: "left",
             sidebarId: "reference",
