@@ -1,7 +1,7 @@
 # Elastic Subnets Parameters
 
 Avalanche Permissioned Subnets can be turned into Elastic Subnets via the
-[`TransformSubnetTx`](../specs/banff-changes.md#transformsubnettx) transaction.
+[`TransformSubnetTx`](/reference/standards/guides/banff-changes.md#transformsubnettx) transaction.
 `TransformSubnetTx` specifies a set of structural parameters for the Elastic Subnet.
 This reference describes these structural parameters and
 illustrates the constraints they must satisfy.

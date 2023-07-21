@@ -246,16 +246,7 @@
     }
   ],
 
-  "specs": [
-    "specs/avm-transaction-serialization",
-    "specs/coreth-atomic-transaction-serialization",
-    "specs/cryptographic-primitives",
-    "specs/network-protocol",
-    "specs/serialization-primitives",
-    "specs/platform-transaction-serialization",
-    "specs/abigen",
-    "specs/banff-changes"
-  ],
+  "specs": ["specs/abigen"],
 
   "community": [
     "community/README",
