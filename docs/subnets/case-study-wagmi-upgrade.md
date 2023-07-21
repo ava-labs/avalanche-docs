@@ -33,7 +33,7 @@ into an official Coreth release.
 - Target Block Rate: 2s (Same as C-Chain)
 
 You can check out the [Genesis file of WAGMI
-Subnet](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json) to
+Subnet](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json) to
 see the initial configuration.
 
 ### Network Upgrades: Enable/Disable Precompiles
