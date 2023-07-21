@@ -1,3 +1,10 @@
+---
+tags: [Standards]
+description: This file summarizes the type and kind of cryptography used by Avalanche at the network and blockchain layers.
+sidebar_label: Cryptography
+pagination_label: Cryptographic Primitives
+---
+
 # Cryptographic Primitives
 
 Avalanche uses a variety of cryptographic primitives for its different

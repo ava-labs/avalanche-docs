@@ -1,13 +1,15 @@
 ---
-sidebar_position: 14
+tags: [Subnet-EVM]
+description: This page is an overview of the Subnet-EVM API associated with AvalancheGo.
+sidebar_label: API 
+pagination_label: Subnet-EVM API
 ---
-
 # Subnet-EVM API
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) APIs are identical to
 [Coreth](https://github.com/ava-labs/coreth) APIs, except Avalanche Specific APIs starting with
 `avax`. Subnet-EVM also supports standard Ethereum APIs as well. For more information about Coreth
-APIs see [here](api/../c-chain.md).
+APIs see [here](/reference/avalanchego/c-chain/api.md).
 
 Subnet-EVM has some additional APIs that are not available in Coreth.
 

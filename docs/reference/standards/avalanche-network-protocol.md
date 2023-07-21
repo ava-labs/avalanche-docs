@@ -1,4 +1,11 @@
-# Network Protocol
+---
+tags: [Standards]
+description: Avalanche network defines the core communication format between Avalanche nodes.
+sidebar_label: Network Protocol
+pagination_label: Avalanche Network Protocol
+---
+
+# Avalanche Network Protocol
 
 Avalanche network defines the core communication format between Avalanche nodes.
 It uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for

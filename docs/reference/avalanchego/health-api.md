@@ -1,6 +1,8 @@
 ---
-sidebar_position: 8
-description: This API can be used for measuring node health. Use Avalanche docs as a reference when testing node health. Helpful examples provided.
+tags: [AvalancheGo APIs]
+description: This page is an overview of the Health API associated with AvalancheGo. This API can be used for measuring node health.
+sidebar_label: Health API
+pagination_label: Health API
 ---
 
 # Health API
@@ -10,7 +12,7 @@ This API can be used for measuring node health.
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](../public-api-server.md).
+server](/apis/avalanchego/public-api-server).
 
 :::
 
@@ -77,7 +79,7 @@ Returned results will contain checks for both subnetIDs and global health checks
 ### Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](issuing-api-calls.md).
+[here](/reference/standards/guides/issuing-api-calls.md).
 
 ### Endpoint
 

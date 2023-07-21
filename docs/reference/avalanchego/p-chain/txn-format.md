@@ -1,4 +1,11 @@
-# Platform Transaction Format
+---
+tags: [P-Chain, Platform Chain, Transaction Format]
+description: This page is an overview of the transaction format associated with AvalancheGo P-Chain API. 
+sidebar_label: Transaction Format
+pagination_label: P-Chain Transaction Format
+---
+
+# P-Chain Transaction Format
 
 This file is meant to be the single source of truth for how we serialize
 transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain`

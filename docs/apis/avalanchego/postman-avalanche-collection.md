@@ -122,7 +122,7 @@ health or liveness of your node.
 ## Contributing
 
 We're hoping to continuously keep this collection up-to-date with the [Avalanche
-APIs](./apis/README.md), and also add [data
+APIs](/reference), and also add [data
 visualizations](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data).
 If you're able to help improve the Avalanche Postman Collection in any way,
 first create a feature branch by branching off of `master`, next make the

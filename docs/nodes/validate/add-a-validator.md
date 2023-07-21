@@ -52,7 +52,7 @@ First, we show you how to add your node as a validator by using [Avalanche Walle
 
 ### Retrieve the Node ID
 
-Get your node’s ID by calling [`info.getNodeID`](../../apis/avalanchego/apis/info.md#infogetnodeid):
+Get your node’s ID by calling [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
 
 ```sh
 curl -X POST --data '{
@@ -88,7 +88,7 @@ least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
 You should see a success message, and your balance should be updated.
 
 Calling
-[`platform.getPendingValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetpendingvalidators)
+[`platform.getPendingValidators`](/reference/avalanchego/p-chain/api.md#platformgetpendingvalidators)
 verifies that your transaction was accepted. Note that this API call should be
 made before your node's validation start time, otherwise, the return will not
 include your node's id as it is no longer pending.
@@ -100,7 +100,7 @@ earn, as well as its start time, end time, and the percentage of its validation
 period that has passed.
 
 You can also call
-[`platform.getCurrentValidators`](../../apis/avalanchego/apis/p-chain.md#platformgetcurrentvalidators)
+[`platform.getCurrentValidators`](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
 to check that your node's id is included in the response.
 
 That’s it!
@@ -175,7 +175,7 @@ const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API
-server](../../apis/avalanchego/public-api-server.md), the following changes are
+server](/apis/avalanchego/public-api-server), the following changes are
 needed:
 
 ```js
@@ -210,7 +210,7 @@ const delegationFee: number = 10
 
 This is the node ID of the validator being added. See [above
 section](#retrieve-the-node-id) on how to retrieve the node id by using API
-[`info.getNodeID`](../../apis/avalanchego/apis/info.md#infogetnodeid).
+[`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid).
 
 #### Staking Period
 
@@ -452,7 +452,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 - Network setting should be to a Mainnet node, either [a local node on
   Mainnet](../../nodes/maintain/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
-  server](../../apis/avalanchego/public-api-server.md#using-the-public-api-nodes)
+  server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1` based on [this](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to stake.

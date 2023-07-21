@@ -1,4 +1,11 @@
-# Coreth Atomic Transaction Format
+---
+tags: [C-Chain, Contract Chain, Transaction Format]
+description: This page is an overview of the Coreth atomic transaction format associated with AvalancheGo C-Chain API. 
+sidebar_label: Transaction Format
+pagination_label: C-Chain Transaction Format
+---
+
+# C-Chain Transaction Format
 
 This page is meant to be the single source of truth for how we serialize atomic
 transactions in `Coreth`. This document uses the [primitive

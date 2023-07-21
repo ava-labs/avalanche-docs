@@ -319,7 +319,7 @@ Copy your node ID for later. Your node ID is not a secret, so you can just paste
 it into a text editor.
 
 AvalancheGo has other APIs, such as the [Health
-API](../../apis/avalanchego/apis/health.md), that may be used to interact with
+API](/reference/avalanchego/health-api.md), that may be used to interact with
 the node. Some APIs are disabled by default. To enable such APIs, modify the
 ExecStart section of `/etc/systemd/system/avalanchego.service` (created during
 the installation process) to include flags that enable these endpoints. Don't

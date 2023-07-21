@@ -1,4 +1,11 @@
-# AVM Transaction Format
+---
+tags: [X-Chain, Transaction Format]
+description: This page is an overview of the AVM transaction format associated with AvalancheGo X-Chain API. 
+sidebar_label: Transaction Format
+pagination_label: X-Chain Transaction Format 
+---
+
+# X-Chain Transaction Format
 
 This file is meant to be the single source of truth for how we serialize
 transactions in the Avalanche Virtual Machine (AVM). This document uses the

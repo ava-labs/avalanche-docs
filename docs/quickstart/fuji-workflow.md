@@ -327,9 +327,9 @@ The Avalanche Explorer allows you to explore the network on
 [Mainnet](https://explorer.avax.network) and
 [Fuji](https://explorer.avax-test.network).
 
-### Public API
+### Public API Server
 
-See [here.](../apis/avalanchego/public-api-server.md)
+See [here.](/apis/avalanchego/public-api-server)
 
 ### AvalancheJS Examples
 

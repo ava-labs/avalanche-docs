@@ -46,7 +46,7 @@ transaction is willing to pay.
 With the introduction of dynamic fees, legacy style transactions that only have
 a single `gas price` parameter can lead to both delayed transactions and
 overpaying for transactions. Dynamic fee transactions are the solution! For more
-info, read [this](../quickstart/transaction-fees.md#dynamic-fee-transactions).
+info, read [this](/reference/standards/guides/txn-fees#dynamic-fee-transactions).
 
 For the dynamic fee algorithm, when a block is produced or verified, we look
 over the past 10s to see how much gas has been consumed within that window (with

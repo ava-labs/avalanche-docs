@@ -87,7 +87,7 @@ other chains can cause issues. One suggestion is to check with [chainlist.org](h
 to avoid ID collision, reserve and publish your ChainID properly.
 
 You can use `eth_getChainConfig` RPC call to get the current chain config. See
-[here](../apis/avalanchego/apis/subnet-evm.md#ethgetchainconfig) for more info.
+[here](/reference/subnet-evm/api#ethgetchainconfig) for more info.
 
 #### Hard Forks
 
@@ -639,7 +639,7 @@ In addition to the `AllowList` interface, the FeeConfigManager adds the followin
   fee config parameters)
 
 You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more
-information see [here](../apis/avalanchego/apis/subnet-evm.md#eth_feeconfig).
+information see [here](/reference/subnet-evm/api#eth_feeconfig).
 
 #### Initial Fee Config Configuration
 
@@ -975,8 +975,8 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 
 Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the
 activated precompiles at a timestamp with the
-[`eth_getActivePrecompilesAt`](../apis/avalanchego/apis/subnet-evm.md#eth_getactiveprecompilesat)
-RPC method. The [`eth_getChainConfig`](../apis/avalanchego/apis/subnet-evm.md#eth_getchainconfig)
+[`eth_getActivePrecompilesAt`](/reference/subnet-evm/api#eth_getactiveprecompilesat)
+RPC method. The [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig)
 RPC method will also return the configured upgrades in the response.
 
 That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!

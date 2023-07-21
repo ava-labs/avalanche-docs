@@ -352,7 +352,7 @@ configuration. But the script also enables various advanced options to be
 configured, via the command line prompts. Following is a list of advanced
 options and their usage:
 
-- `admin` - [Admin API](../../apis/avalanchego/apis/admin.md) will be enabled
+- `admin` - [Admin API](/reference/avalanchego/admin-api.md) will be enabled
 - `archival` - disables database pruning and preserves the complete transaction history
 - `state-sync` - if `on` state-sync for the C-Chain is used, if `off` it will
   use regular transaction replay to bootstrap; state-sync is much faster, but
@@ -360,7 +360,7 @@ options and their usage:
 - `db-dir` - use to provide the full path to the location where the database
   will be stored
 - `fuji` - node will connect to Fuji testnet instead of the Mainnet
-- `index` - [Index API](../../apis/avalanchego/apis/index-api.md) will be
+- `index` - [Index API](/reference/avalanchego/index-api.md) will be
   enabled
 - `ip` - use `dynamic`, `static` arguments, of enter a desired IP directly to be
   used as the public IP node will advertise to the network
@@ -535,7 +535,7 @@ If you're on a residential network (dynamic IP), don't forget to set up port
 forwarding. If you're on a cloud service provider, you're good to go.
 
 Now you can [interact with your
-node](../../apis/avalanchego/apis/issuing-api-calls.md), [stake your
+node](/reference/standards/guides/issuing-api-calls.md), [stake your
 tokens](../validate/staking.md), or level up your installation by setting up
 [node monitoring](../maintain/setting-up-node-monitoring.md) to get a better
 insight into what your node is doing. Also, you might want to use our [Postman

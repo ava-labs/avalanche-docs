@@ -219,3 +219,7 @@ li hr {
 [data-theme='dark'] li hr {
   background-color: #333;
 }
+
+span.menu__item {
+  padding-left: 7px;
+}

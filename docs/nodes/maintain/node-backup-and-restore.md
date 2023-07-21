@@ -49,7 +49,7 @@ NodeID is a unique identifier that differentiates your node from all the other
 peers on the network. It's a string formatted like
 `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical
 background of how the NodeID is constructed
-[here](../../specs/cryptographic-primitives.md#tls-addresses). In essence,
+[here](/reference/standards/cryptographic-primitives.md#tls-addresses). In essence,
 NodeID is defined by two files:
 
 - `staker.crt`
@@ -65,7 +65,7 @@ will be recreated and a new node ID will be assigned.
 
 If you have users defined in the keystore of your node, then you need to back up
 and restore those as well. [Keystore
-API](../../apis/avalanchego/apis/keystore.md) has methods that can be used to
+API](/reference/avalanchego/keystore-api.md) has methods that can be used to
 export and import user keys. Note that Keystore API is used by developers only
 and not intended for use in production nodes. If you don't know what a keystore
 API is and have not used it, you don't need to worry about it.
@@ -191,7 +191,7 @@ sudo systemctl start avalanchego
 ```
 
 You can now check that the node is restored with the correct NodeID by issuing
-the [getNodeID](../../apis/avalanchego/apis/info.md#infogetnodeid) API call in
+the [getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) API call in
 the same console you ran the previous command:
 
 ```text

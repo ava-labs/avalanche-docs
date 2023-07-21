@@ -1,8 +1,15 @@
+---
+tags: [Standards]
+description:  This document describes how primitive types are encoded on the Avalanche platform. 
+sidebar_label: Serialization
+pagination_label: Serialization Primitives
+---
+
 # Serialization Primitives
 
 Avalanche uses a simple, uniform, and elegant representation for all internal data. This document 
-describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms 
-of these basic primitive types.
+describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in 
+terms of these basic primitive types.
 
 ## Byte
 
@@ -58,7 +65,8 @@ Results in:
 
 ## IP Addresses
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload
+as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
 
 IPv4 example:
 
@@ -110,7 +118,8 @@ Results in:
 
 ## Variable Length Array
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+The length of the array is prefixed in Integer format, followed by the packing of the array contents
+in Fixed Length Array format.
 
 Byte array example:
 
@@ -132,7 +141,8 @@ Results in:
 
 ## String
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+A String is packed similarly to a variable-length byte array. However, the length prefix is a short
+rather than an int. Strings are encoded in UTF-8 format.
 
 Example:
 

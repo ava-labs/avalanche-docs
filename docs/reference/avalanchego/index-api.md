@@ -1,5 +1,8 @@
 ---
-sidebar_position: 9
+tags: [AvalancheGo APIs]
+description: This page is an overview of the Index API associated with AvalancheGo.
+sidebar_label: Index API
+pagination_label: Index API
 ---
 
 # Index API
@@ -7,7 +10,7 @@ sidebar_position: 9
 AvalancheGo can be configured to run with an indexer. That is, it saves (indexes) every container (a
 block, vertex or transaction) it accepts on the X-Chain, P-Chain and C-Chain. To run AvalancheGo
 with indexing enabled, set command line flag
-[--index-enabled](../../../nodes/maintain/avalanchego-config-flags.md#apis) to true. **AvalancheGo
+[--index-enabled](/nodes/maintain/avalanchego-config-flags#apis) to true. **AvalancheGo
 will only index containers that are accepted when running with `--index-enabled` set to true.** To
 ensure your node has a complete index, run a node with a fresh database and `--index-enabled` set to
 true. The node will accept every block, vertex and transaction in the network history during
@@ -43,7 +46,7 @@ make calls to the Index API.
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
-[here](issuing-api-calls.md).
+[here](/reference/standards/guides/issuing-api-calls.md).
 
 ## Endpoints
 
