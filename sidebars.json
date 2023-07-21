@@ -268,7 +268,9 @@
     }
   ],
 
-  "dapps-v2": ["build/dapp/README"],
+  "build-dapp": ["build/dapp/README"],
+  "build-subnet": ["build/subnet/README"],
+  "build-vm": ["build/vm/README"],
 
   "reference": [
     "reference/README",

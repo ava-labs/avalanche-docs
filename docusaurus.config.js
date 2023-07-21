@@ -143,7 +143,17 @@ const config = {
               {
                 type: "docSidebar",
                 label: "DApps",
-                sidebarId: "dapps-v2",
+                sidebarId: "build-dapp",
+              },
+              {
+                type: "docSidebar",
+                label: "Subnets",
+                sidebarId: "build-subnet",
+              },
+              {
+                type: "docSidebar",
+                label: "Virtual Machines",
+                sidebarId: "build-vm",
               },
             ],
           },
