@@ -1,4 +1,11 @@
-# Abigen
+---
+tags: [Build, DApps]
+description: This tutorial demonstrates the process of deploying a cross-chain bridge between two EVM chains. Build at your own risk.
+sidebar_label: Interact with Golang App
+pagination_label: Interact with a Solidity Smart Contract from a Go Application
+sidebar_position: 2
+---
+# Interact with a Solidity Smart Contract from a Golang Application
 
 `abigen` is a tool provided by the Go Ethereum (Geth) client that generates Go bindings for 
 Solidity smart contracts. Developers would need to use abigen when they want to interact with a 

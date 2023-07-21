@@ -3,7 +3,7 @@ tags: [Build, Subnets]
 description: This how-to guide focuses on taking an already created Subnet configuration and deploying it to a local Avalanche network.
 sidebar_label: On a Local Network 
 pagination_label: Customize your EVM-Powered Subnet
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # How to Deploy a Subnet on a Local Network

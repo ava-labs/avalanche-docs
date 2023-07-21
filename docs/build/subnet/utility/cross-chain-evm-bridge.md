@@ -1,4 +1,12 @@
-# Deploying Cross-Chain EVM <-> EVM Bridge
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates the process of deploying a cross-chain bridge between two EVM chains. Build at your own risk.
+sidebar_label: Add a Cross-Chain Bridge
+pagination_label: Deploying Cross-Chain EVM Bridge
+sidebar_position: 2
+---
+
+# Deploying a Cross-Chain EVM Bridge
 
 :::warning
 

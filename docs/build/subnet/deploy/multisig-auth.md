@@ -1,4 +1,12 @@
-# How to Deploy a Subnet with Multisig Authorization
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates how to deploy a permissioned Subnet on Avalanche Mainnet.
+sidebar_label: With Multisig Authorization
+pagination_label: Deploy a Subnet with Multisig Authorization
+sidebar_position: 4
+---
+
+# Deploy a Subnet with Multisig Authorization
 
 Subnet creators can control critical Subnet operations with a N of M multisig. This multisig must be
 setup at deployment time and can't be edited afterward. Multisigs can are available on both the Fuji
@@ -22,7 +30,7 @@ for setting up your multisig.
 - Multiple Ledger devices [configured for Avalanche](./create-a-mainnet-subnet#setting-up-your-ledger)
 - A Subnet configuration ready to deploy to either Fuji Testnet or Mainnet
 
-## Deploy a Subnet with a Multisig
+## Getting Started
 
 When issuing the transactions to create the Subnet, you need to sign the TXs with multiple keys
 from the multisig.

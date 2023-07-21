@@ -1,7 +1,15 @@
-# Avalanche Subnet Faucet
+---
+tags: [Build, Subnets]
+description: Deploy a custom testnet faucet for your Subnet with features like multiple chain support, custom rate-limiting, CAPTCHA verification, and concurrent transaction handling.
+sidebar_label: Add a Testnet Faucet
+pagination_label: Avalanche Subnet Faucet
+sidebar_position: 1
+---
 
-Right now there are thousands of networks and chains in the blockchain space, each with its
-capabilities and use-cases. And each network requires native coins to do any transaction on them,
+# Enable Testnet Capabilities on a Subnet with Avalanche Subnet Faucet
+
+There are thousands of networks and chains in the blockchain space, each with its
+capabilities and use-cases. Each network requires native coins to do any transaction on them,
 which can have a monetary value as well. These coins can be collected through centralized exchanges,
 token sales, etc in exchange for some monetary assets like USD.
 

@@ -414,3 +414,15 @@
 /subnets/create-a-mainnet-subnet /build/subnet/mainnet-subnet 301
 /subnets/create-a-local-subnet /build/subnet/local-subnet 301
 /subnets/when-to-use-subnet-vs-c-chain /build/subnet/c-chain-vs-subnet 301
+/subnets/multisig-deploy /build/subnet/deploy/multisig-auth 301
+/subnets/create-evm-subnet-config /build/subnet/hello-subnet#create-your-subnet-configuration 301
+/subnets/deploying-subnets-on-prod /build/subnet/deploy/on-prod-infra 301
+/subnets/create-custom-subnet /build/subnet/deploy/custom-vm-subnet 301
+/subnets/troubleshoot-deployments /build/subnet/info/troubleshoot-subnet 301
+/subnets/wagmi /build/subnet/info/wagmi 301
+/subnets/deploy-a-smart-contract-on-your-evm /build/subnet/utility/deploy-smart-contract-to-subnet 301
+/subnets/avalanche-subnet-faucet /build/subnet/utility/avalanche-subnet-faucet 301
+/subnets/deploying-cross-chain-evm-bridge /build/subnet/utility/cross-chain-evm-bridge 301
+
+#  07/21/2023 - Docs Revamp - Build/DApps Tab
+/specs/abigen /build/dapp/smart-contracts/abigen 301

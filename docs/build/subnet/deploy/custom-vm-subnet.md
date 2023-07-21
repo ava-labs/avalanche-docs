@@ -1,7 +1,15 @@
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates the process of creating a Subnet with a custom virtual machine and deploying it locally.
+sidebar_label: With a Custom Virtual Machine
+pagination_label: Deploy a Subnet with Multisig Authorization
+sidebar_position: 5
+---
+
 # Create a Subnet with a Custom Virtual Machine
 
-Avalanche-CLI is capable of doing much than just deploying prebuilt EVM Subnets. This tutorial walks
-you through the process of creating a Subnet with a custom virtual machine and deploying it locally.
+This tutorial walks through the process of creating a Subnet with a custom virtual machine and 
+deploying it locally.
 Although the tutorial uses a fork of Subnet-EVM as an example, you can extend its lessons to support
 any custom VM binary.
 

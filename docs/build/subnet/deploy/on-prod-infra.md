@@ -1,3 +1,10 @@
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates how to deploy a Subnet to production environment.
+sidebar_label: On Production Infrastructure
+pagination_label: Deploy Subnets on Production Infrastructure
+sidebar_position: 3
+---
 # Deploy Subnets on Production Infrastructure
 
 ## Introduction

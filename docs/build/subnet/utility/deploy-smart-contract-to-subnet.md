@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates the process of deploying a smart contract to an EVM-based Subnet.
+sidebar_label: Deploy a Smart Contract
+pagination_label: Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core
+sidebar_position: 0
+---
+
 # Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core
 
 ## Introduction

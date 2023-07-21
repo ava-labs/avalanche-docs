@@ -119,12 +119,6 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "specs",
-            label: "Specs",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
             sidebarId: "community",
             label: "Community",
           },

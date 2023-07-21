@@ -1,13 +1,16 @@
 ---
-sidebar_position: 7
+tags: [Build, Subnets]
+description: The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet C-Chain and will is used to experiment with release candidates before included in an official Coreth release.
+sidebar_label: "Case Study: WAGMI Subnet"
+pagination_label: "Case Study: WAGMI Subnet"
+sidebar_position: 0
 ---
+# Case Study: WAGMI Subnet
 
-# WAGMI Subnet Demo
-
-The WAGMI ("We're All Going to Make It") Subnet Demo is a high throughput testbed for EVM (Ethereum
-Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet
-C-Chain and will be used to experiment with release candidates before they make it into an official
-Coreth release.
+The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum
+Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than
+Fuji/Mainnet C-Chain and will is used to experiment with release candidates before included
+in an official Coreth release.
 
 ## Network Parameters
 
@@ -19,9 +22,6 @@ Coreth release.
 - Target Block Rate: 2s (Same as C-Chain)
 
 Genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/main/chains/11111/genesis.json).
-
-Everyone that has used the C-Chain more than twice (~970k addresses) has been airdropped 10 WGM
-tokens. With the current fee parameterization, this should be enough for hundreds of TXs.
 
 This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a
 production VM (Coreth). Many underestimate how useful the isolation of Subnets is for performing
