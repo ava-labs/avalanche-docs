@@ -129,7 +129,7 @@ You can find more about SSH and how to use it
 or add it to an existing project:
 
 ```zsh
-yarn add avalanche
+yarn add @avalabs/avalanchejs
 ```
 
 For this tutorial we will use [`ts-node`](https://www.npmjs.com/package/ts-node)
