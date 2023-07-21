@@ -285,9 +285,9 @@ module.exports = {
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics
 of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can
-also find it inside the `networks/11111/` folder of the `subnet-evm` repository or simply copy and paste
-the following data inside the `genesis.json` file of the project folder. (Note that fields
-`airdropHash` and `airdropAmount` have been removed.)
+also find it inside the `chains/11111/` folder of the [public-chain-assets](https://github.com/ava-labs/public-chain-assets)
+repository or simply copy and paste the following data inside the `genesis.json` file of the project
+folder. (Note that fields `airdropHash` and `airdropAmount` have been removed.)
 
 ```json
 {

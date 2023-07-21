@@ -21,7 +21,7 @@ in an official Coreth release.
 - Min Fee: 1 Gwei (4% of C-Chain)
 - Target Block Rate: 2s (Same as C-Chain)
 
-Genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/main/chains/11111/genesis.json).
+The genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
 
 This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a
 production VM (Coreth). Many underestimate how useful the isolation of Subnets is for performing

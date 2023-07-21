@@ -203,7 +203,7 @@ Otherwise it will error.
 ### Genesis Examples
 
 Another example of a genesis file can be found in the
-[networks folder](https://github.com/ava-labs/subnet-evm/blob/master/networks/testnet/11111/genesis.json).
+[networks folder](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
 Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
 
 Here are a few examples on how a genesis file is used:
