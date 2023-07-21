@@ -405,3 +405,12 @@
 /specs/serialization-primitives /reference/standards/serialization-primitives 301
 /specs/platform-transaction-serialization /reference/avalanchego/p-chain/txn-format 301
 /specs/banff-changes /reference/standards/guides/banff-changes 301
+
+#  07/21/2023 - Docs Revamp - Build/Subnets Tab
+/subnets/customize-a-subnet /build/subnet/upgrade/customize-a-subnet 301
+/subnets/subnet-development-lifecycle /build/subnet/getting-started 301
+/subnets/build-first-subnet /build/subnet/hello-subnet 301
+/subnets/create-a-fuji-subnet /build/subnet/fuji-testnet-subnet 301
+/subnets/create-a-mainnet-subnet /build/subnet/mainnet-subnet 301
+/subnets/create-a-local-subnet /build/subnet/local-subnet 301
+/subnets/when-to-use-subnet-vs-c-chain /build/subnet/c-chain-vs-subnet 301

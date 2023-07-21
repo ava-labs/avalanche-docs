@@ -1,3 +1,10 @@
+---
+tags: [Build, Subnets]
+description: Planning a successful Subnet deployment starts by determining your application's needs.
+sidebar_label: Getting Started
+pagination_label: What's the Subnet Development Lifecycle?
+---
+
 # What's the Subnet Development Lifecycle?
 
 As you begin your Subnet journey, it's useful to look at the lifecycle of taking a Subnet from idea
@@ -5,7 +12,7 @@ to production.
 
 ## Figure Out Your Needs
 
-The first step of planning your Subnet is determining your applications needs. What features do you
+The first step of planning your Subnet is determining your application's needs. What features do you
 need that the Avalanche C-Chain doesn't provide? Perhaps you want your own gas token or only want
 to allow access to KYCed customers. [When to Build on a Subnet vs. on the C-Chain](./when-to-use-subnet-vs-c-chain.md)
 can help you make the decision.

@@ -104,13 +104,6 @@ const config = {
             sidebarId: "dapps",
             label: "DApps",
           },
-
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "subnets",
-            label: "Subnets",
-          },
           {
             type: "docSidebar",
             position: "left",

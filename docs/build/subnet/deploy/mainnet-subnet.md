@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates how to deploy a permissioned Subnet on Avalanche Mainnet.
+sidebar_label: On Avalanche Mainnet
+pagination_label: Deploy a Permissioned Subnet on Mainnet
+sidebar_position: 3
+---
+
 # Deploy a Permissioned Subnet on Mainnet
 
 :::warning

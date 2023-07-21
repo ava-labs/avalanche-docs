@@ -1,4 +1,12 @@
-# Deploy a Permissioned Subnet on Testnet
+---
+tags: [Build, Subnets]
+description: This tutorial demonstrates how to deploy a permissioned Subnet on Fuji Testnet.
+sidebar_label: On Fuji Testnet 
+pagination_label: Deploy a Permissioned Subnet on Fuji Testnet
+sidebar_position: 2
+---
+
+# Deploy a Permissioned Subnet on Fuji Testnet
 
 :::note
 

@@ -81,108 +81,7 @@
       ]
     }
   ],
-  "subnets": [
-    {
-      "type": "category",
-      "label": "Are Subnets Right For You?",
-      "collapsed": true,
-      "items": [
-        "subnets/when-to-use-subnet-vs-c-chain",
-        "subnets/subnet-development-lifecycle"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Build Your First Subnet",
-      "collapsed": true,
-      "items": [
-        "subnets/install-avalanche-cli",
-        "subnets/build-first-subnet",
-        "subnets/create-a-fuji-subnet",
-        "subnets/create-a-mainnet-subnet",
-        "subnets/deploy-a-smart-contract-on-your-evm",
-        "subnets/create-custom-subnet",
-        "subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "How to Use Avalanche-CLI",
-      "collapsed": true,
-      "items": [
-        "subnets/reference-cli-commands",
-        "subnets/create-evm-subnet-config",
-        "subnets/create-a-local-subnet",
-        "subnets/multisig-deploy",
-        "subnets/how-to-pause-and-resume-subnets",
-        "subnets/how-to-list-and-describe",
-        "subnets/how-to-delete-subnet",
-        "subnets/how-to-upgrade-subnet-vm",
-        "subnets/how-to-upgrade-precompile",
-        "subnets/how-to-run-cli-with-docker",
-        "subnets/how-to-import-subnet",
-        "subnets/troubleshoot-deployments"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Customize",
-      "collapsed": true,
-      "items": [
-        "subnets/customize-a-subnet",
-        "subnets/hello-world-precompile-tutorial",
-        "subnets/introduction-to-vm",
-        "subnets/create-a-vm-timestampvm",
-        "subnets/create-a-vm-blobvm",
-        "subnets/create-a-simple-rust-vm",
-        "subnets/create-a-simple-vm-from-scratch",
-        "subnets/cross-subnet-communication"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Deploy",
-      "collapsed": true,
-      "items": ["subnets/deploying-subnets-on-prod", "subnets/setup-dfk-node"]
-    },
-    {
-      "type": "category",
-      "label": "Upgrade",
-      "collapsed": true,
-      "items": ["subnets/subnet-upgrade", "subnets/case-study-wagmi-upgrade"]
-    },
-    {
-      "type": "category",
-      "label": "Tools",
-      "collapsed": true,
-      "items": [
-        "subnets/avalanche-subnet-faucet",
-        "subnets/deploying-cross-chain-evm-bridge",
-        "subnets/network-runner",
-        "subnets/deploy-a-gnosis-safe-on-your-evm"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Examples",
-      "collapsed": true,
-      "items": ["subnets/wagmi"]
-    },
-    {
-      "type": "category",
-      "label": "Elastic Subnets",
-      "collapsed": true,
-      "items": [
-        "subnets/reference-elastic-subnets-parameters",
-        "subnets/how-to-transform-subnet-to-elastic"
-      ]
-    },
-    {
-      "type": "link",
-      "label": "Subnet FAQ",
-      "href": "https://support.avax.network/en/articles/6158840-subnet-faq"
-    }
-  ],
+
   "apis": [
     {
       "type": "category",
@@ -271,6 +170,9 @@
   "build-dapp": ["build/dapp/README"],
   "build-subnet": [
     "build/subnet/README",
+    "build/subnet/getting-started",
+    "build/subnet/c-chain-vs-subnet",
+    "build/subnet/hello-subnet",
     {
       "type": "html",
       "value": "<hr/>"

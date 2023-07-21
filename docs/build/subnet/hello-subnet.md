@@ -1,11 +1,16 @@
+---
+tags: [Build, Subnets]
+description: This tutorial walks you through the process of using Avalanche-CLI to create a Subnet, deploy it to a local network, and connect to it with Core wallet.
+sidebar_label: Build Your First Subnet
+pagination_label: Build Your First Subnet
+---
+
 # Build Your First Subnet
 
+This tutorial walks you through the process of using Avalanche-CLI to create a Subnet,
+deploy it to a local network, and connect to it with Core wallet.
+
 The first step of learning Subnet development is learning to use [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
-
-The best way to get started is by jumping in and deploying your first Subnet.
-
-This tutorial walks you through the process of using Avalanche-CLI for the first time by creating a Subnet,
-deploying it to the local network, and connecting to it with Core.
 
 ## Installation
 

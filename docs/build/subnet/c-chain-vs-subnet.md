@@ -1,15 +1,17 @@
+---
+tags: [Build, Subnets]
+description: In this article, we discuss often-overlooked differentiating characteristics of Subnets, with a primary focus on EVM-based applications, to help developers determine the best place to launch their application.
+sidebar_label: C-Chain or Subnet?
+pagination_label: When to Build on a Subnet vs. on the C-Chain
+---
+
 # When to Build on a Subnet vs. on the C-Chain
 
-A Subnet is a subset of Avalanche Primary Network validators agreeing to run the same [Virtual
-Machines (VM)](/docs/learn/avalanche/subnets-overview.md#virtual-machines) with its own rules. Subnet
-enables extra dimensions of reliability, efficiency, and data sovereignty. It provides the ability
-to create custom blockchains for different use cases, while isolating high-traffic applications from
-congesting activity on the Primary Network. But such flexibility comes with its own set of
-tradeoffs. In this article, we discuss often-overlooked differentiating characteristics of Subnet,
-with primary focus on EVM-based applications (for example, C-Chain,
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm)). The goal is to identify pros and cons of
-building an app on C-Chain versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help
-developers make more informed decisions.
+In this article, we discuss often-overlooked differentiating characteristics of Subnets,
+with a primary focus on EVM-based applications. The goal is to identify the pros and cons of
+building an app on [C-Chain](/learn/avalanche/avalanche-platform#c-chain) 
+versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help developers make more 
+informed decisions.
 
 ## When to Use a Subnet
 
