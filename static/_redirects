@@ -446,5 +446,8 @@
 /subnets/create-a-simple-vm-from-scratch /build/vm/create/any-lang-vm 301
 /subnets/hello-world-precompile-tutorial /build/vm/evm/hello-world-precompile-tutorial 301
 
-#  07/21/2023 - Docs Revamp - Deprecated Pages
+# Docs Revamp - Learn Tab
+/subnets/cross-subnet-communication /learn/avalanche/awm 301
+
+#  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

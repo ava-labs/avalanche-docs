@@ -15,6 +15,7 @@
     "learn/avalanche/avax",
     "learn/avalanche/subnets-overview",
     "learn/avalanche/virtual-machines",
+    "learn/avalanche/awm",
     {
       "type": "html",
       "value": "<hr/>"
