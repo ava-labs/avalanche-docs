@@ -1,14 +1,12 @@
+---
+tags: [Build, Virtual Machines]
+description: Learn how to build a complex virtual machine on Avalanche using Golang. 
+sidebar_label: Complex Golang VM
+pagination_label: Build a Complex Golang VM
+sidebar_position: 2
+---
+
 # How to Build a Complex Golang VM
-
-This is part of a series of tutorials for building a Virtual Machine (VM):
-
-- [Introduction to Virtual Machines](./introduction-to-vm.md)
-- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
-- How to Build a Complex Golang VM (this article)
-- [How to Build a Simple Rust VM](/subnets/create-a-simple-rust-vm.md)
-
-
-## Introduction
 
 In this tutorial, we'll walk through how to build a virtual machine by referencing
 [the BlobVM](https://github.com/ava-labs/blobvm). The BlobVM is a virtual machine that can be used
@@ -18,13 +16,6 @@ A blob (shorthand for "binary large object") is an arbitrary piece of data. Blob
 pair by breaking it apart into multiple chunks stored with their hashes as their keys in the blockchain.
 A root key-value pair has references to these chunks for lookups. By default, the maximum chunk size
 is set to 200 KiB.
-
-## Prerequisites
-
-Make sure you have followed the previous tutorials in this series:
-
-- [Introduction to Virtual Machines](./introduction-to-vm.md)
-- [How to Build a Simple VM](./create-a-vm-timestampvm.md)
 
 ## Components
 

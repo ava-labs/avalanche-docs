@@ -1,5 +1,9 @@
 # Deploy a Gnosis Safe on Your Subnet-EVM
 
+:::warning
+This document has been deprecated and may contain incorrect/obsolete information.
+:::
+
 ## Introduction
 
 This article shows how to deploy and interact with a [Gnosis Safe](https://gnosis-safe.io/)

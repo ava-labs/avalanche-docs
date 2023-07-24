@@ -437,3 +437,14 @@
 
 #  07/21/2023 - Docs Revamp - Build/DApps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301
+
+#  07/21/2023 - Docs Revamp - Build/VMs Tab
+/subnets/introduction-to-vm /build/vm/intro 301
+/subnets/create-a-simple-rust-vm /build/vm/create/rust-vm 301
+/subnets/create-a-vm-blobvm /build/vm/create/golang-vm-complex 301
+/subnets/create-a-vm-timestampvm /build/vm/create/golang-vm-simple 301
+/subnets/create-a-simple-vm-from-scratch /build/vm/create/any-lang-vm 301
+/subnets/hello-world-precompile-tutorial /build/vm/evm/hello-world-precompile-tutorial 301
+
+#  07/21/2023 - Docs Revamp - Deprecated Pages
+/subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

@@ -1,13 +1,12 @@
+---
+tags: [Build, Virtual Machines]
+description: Learn how to build a simple virtual machine  on Avalanche using Golang. 
+sidebar_label: Simple Golang VM
+pagination_label: Build a Simple Golang VM
+sidebar_position: 1
+---
+
 # How to Build a Simple Golang VM
-
-This is part of a series of tutorials for building a Virtual Machine (VM):
-
-- [Introduction to VMs](./introduction-to-vm.md)
-- How to Build a Simple Golang VM (this article)
-- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
-- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
-
-## Introduction
 
 In this tutorial, we’ll create a very simple VM called the
 [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's
@@ -20,13 +19,6 @@ future that the manuscript exists today. You can add a block to the blockchain w
 payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today
 by showing that the block has the hash of your manuscript in its payload (this follows from the fact
 that finding the pre-image of a hash is impossible).
-
-## Prerequisites
-
-Make sure you're familiar with the previous tutorial in this series, which dives into what virtual
-machines are.
-
-- [Introduction to VMs](./introduction-to-vm.md)
 
 ## TimestampVM Implementation
 

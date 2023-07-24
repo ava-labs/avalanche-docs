@@ -1,5 +1,9 @@
 ---
+tags: [Build, Virtual Machines]
 description: Learn how to create a stateful precompile for Subnet-EVM from scratch.
+sidebar_label: Generate a Stateful Precompile
+pagination_label: Generate a Stateful Precompile
+sidebar_position: 0
 ---
 
 # Stateful Precompile Generation Tutorial

@@ -1,11 +1,12 @@
+---
+tags: [Build, Virtual Machines]
+description: Learn how to build a simple virtual machine on Avalanche using Rust. 
+sidebar_label: Rust VM
+pagination_label: Build a Rust VM
+sidebar_position: 3
+---
+
 # How to Build a Simple Rust VM
-
-This is part of a series of tutorials for building a Virtual Machine (VM):
-
-- [Introduction to VMs](./introduction-to-vm.md)
-- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
-- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
-- How to Build a Simple Rust VM (this article)
 
 ## Introduction
 
@@ -26,7 +27,7 @@ payload of data.
 
 If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
 Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to
-VMs](./introduction-to-vm.md).
+VMs](/build/vm/intro.md).
 
 ## Components
 

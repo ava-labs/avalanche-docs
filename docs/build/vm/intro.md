@@ -1,13 +1,13 @@
-# Introduction to VMs
+---
+tags: [Build, Virtual Machines]
+description: A Virtual Machine is a blueprint for a blockchain. VMs can define anything you want, but will generally define transactions that are executed and how blocks are created.
+sidebar_label: Introduction to VMs
+pagination_label: Introduction to Virtual Machines
+---
+
+# Introduction to Virtual Machines
 
 ## Overview
-
-This is part of a series of tutorials for building a Virtual Machine (VM):
-
-- Introduction to VMs (this article)
-- [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
-- [How to Build a Complex Golang VM](./create-a-vm-blobvm.md)
-- [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
 
 A [Virtual Machine (VM)](/learn/avalanche/virtual-machines) is a blueprint for a
 blockchain. Blockchains

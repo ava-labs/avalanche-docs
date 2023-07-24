@@ -1,14 +1,12 @@
+---
+tags: [Build, Virtual Machines]
+description: This is a language-agnostic high-level documentation explaining the basics of how to get started at implementing your own virtual machine from scratch.
+sidebar_label: Simple VM in Any Language
+pagination_label: Build a Simple VM From Scratch
+sidebar_position: 0
+---
+
 # How to Build a Simple VM From Scratch
-
-This is part of a series of tutorials for building a Virtual Machine (VM):
-
-- [Introduction to VMs](/subnets/introduction-to-vm.md)
-- [How to Build a Simple Golang VM](/subnets/create-a-vm-timestampvm.md)
-- [How to Build a Complex Golang VM](/subnets/create-a-vm-blobvm.md)
-- [How to Build a Simple Rust VM](/subnets/create-a-simple-rust-vm.md)
-- How to Build a Simple VM From Scratch (this article)
-
-## Introduction
 
 This is a language-agnostic high-level documentation explaining the basics of how to get started
 at implementing your own virtual machine from scratch.
