@@ -81,7 +81,7 @@ git --version
 This tutorial is created to serve as a guide to help developers setup an
 Avalanche Subnet and Index them using GraphQL. We are going to learn how to run
 a local network using the
-[Avalanche-cli](https://github.com/ava-labs/avalanche-cli) and deploy a basic
+[Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) and deploy a basic
 smart contract using [Remix](https://remix.ethereum.org/). Then Lastly we will
 be indexing our Subnet using [The Graph](https://thegraph.com/). This guide is
 an extension of the [Official Avalanche
@@ -92,12 +92,12 @@ Based. Commands may vary for other operating systems.
 
 In summary, we will be discussing the following:
 
-1. Running an EVM Subnet on the Local Network using the Avalanche-cli
+1. Running an EVM Subnet on the Local Network using the Avalanche-CLI
 2. Deploying smart contracts with Remix
 3. Indexing our Subnet using The Graph
 
 
-## Running an EVM Subnet on the Local Network Using the Avalanche-Cli
+## Running an EVM Subnet on the Local Network Using the Avalanche-CLI
 
 We will be creating an EVM on our local machine to give us a basic feel on how a
 Subnet functions. The [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli)
@@ -130,7 +130,7 @@ This makes the `avalanche` command available globally. For more information
 about
 [environment-variables](https://apple.stackexchange.com/questions/106778/how-do-i-set-environment-variables-on-os-x)
 and
-[avalanche-cli-commands](/build/subnet/info/subnet-cli-commands.md)
+[Avalanche-CLI commands](/build/subnet/info/subnet-cli-commands.md)
 visit the respective links.
 
 ### Initialising a Default Subnet
