@@ -14,7 +14,7 @@ local Avalanche network.
 ## Prerequisites
 
 - [Avalanche-CLI installed](/subnets/install-avalanche-cli.md)
-- You have [created a Subnet configuration](/build/subnet/hello-subnet#create-your-subnet-configuration.md)
+- You have [created a Subnet configuration](/build/subnet/hello-subnet#create-your-subnet-configuration)
 
 ## Deploying Subnets Locally
 
