@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: This reference describes the structural parameters of an Elastic (Permissionless) Subnet and illustrates the constraints they must satisfy.
+sidebar_label: Parameters
+pagination_label: Elastic Subnets Parameters
+sidebar_position: 1
+---
+
 # Elastic Subnets Parameters
 
 Avalanche Permissioned Subnets can be turned into Elastic Subnets via the

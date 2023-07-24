@@ -426,6 +426,9 @@
 /subnets/how-to-delete-subnet /build/subnet/maintain/delete-subnet 301
 /subnets/how-to-list-and-describe /build/subnet/maintain/view-subnets 301
 /subnets/how-to-pause-and-resume-subnets /build/subnet/maintain/pause-resume-subnet 301
+/subnets/how-to-transform-subnet-to-elastic /build/subnet/elastic/transform-to-elastic-subnet 301
+/subnets/reference-elastic-subnets-parameters /build/subnet/elastic/elastic-parameters 301
+
 
 #  07/21/2023 - Docs Revamp - Build/DApps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301

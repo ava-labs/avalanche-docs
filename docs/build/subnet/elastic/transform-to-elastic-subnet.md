@@ -1,8 +1,16 @@
-# How to Transform a Subnet into an Elastic Subnet
+---
+tags: [Build, Subnets]
+description: This how-to guide focuses on taking an already created permissioned Subnet and transforming it to an elastic (or permissionless) Subnet.
+sidebar_label: Make Subnet Permissionless
+pagination_label: Transform a Permissioned Subnet into an Elastic Subnet
+sidebar_position: 0
+---
+
+# How to Transform a Permissioned Subnet into an Elastic Subnet
 
 Elastic Subnets are permissionless Subnets. More information can be found [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters).
 
-This how-to guide focuses on taking an already created permissioned Subnet and transforming it to a
+This how-to guide focuses on taking an already created permissioned Subnet and transforming it to an
 elastic (or permissionless) Subnet.
 
 ## Prerequisites
