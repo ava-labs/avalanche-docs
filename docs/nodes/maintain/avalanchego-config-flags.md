@@ -1429,7 +1429,7 @@ GiB).
 
 #### `--plugin-dir` (string)
 
-Sets the directory for [VM plugins](/subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
+Sets the directory for [VM plugins](/build/vm/intro.md). The default value is `$HOME/.avalanchego/plugins`.
 
 ### Virtual Machine (VM) Configs
 

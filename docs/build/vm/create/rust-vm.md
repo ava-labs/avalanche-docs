@@ -752,7 +752,7 @@ async fn initialize(
 #### `create_handlers`
 
 Registers handlers defined in `api::chain_handlers::Service`. See
-[below](/subnets/create-a-simple-rust-vm.md#api) for more on APIs.
+[below](/build/vm/create/rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 /// Creates VM-specific handlers.
@@ -775,7 +775,7 @@ async fn create_handlers(
 #### `create_static_handlers`
 
 Registers handlers defined in `api::chain_handlers::Service`. See
-[below](/subnets/create-a-simple-rust-vm.md#api) for more on APIs.
+[below](/build/vm/create/rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn create_static_handlers(
@@ -1238,7 +1238,7 @@ async fn main() -> io::Result<()> {
 
 ### Installing a VM
 
-AvalancheGo searches for and registers VM plugins under the `plugins` [directory](../nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string).
+AvalancheGo searches for and registers VM plugins under the `plugins` [directory](/nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary
 under this directory. Virtual machine executable names must be either a full virtual machine ID
@@ -1290,7 +1290,7 @@ others that weren't already installed previously in the response.
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm-rs` and
 `/ext/vm/timestamp-rs`. For more details about VM configs, see
-[here](../nodes/maintain/avalanchego-config-flags.md#vm-configs).
+[here](/nodes/maintain/avalanchego-config-flags.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
 AvalancheGo would also accept `timestampvm-rs` or `timestamp-rs` since those are registered aliases
