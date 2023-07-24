@@ -18,7 +18,7 @@ _Just want the commands? Jump to the [end](#just-want-the-commands-we-got-you)!_
 ## Build `AvalancheGo` Binary
 
 First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
-You can follow [this comprehensive guide](../nodes/build/run-avalanche-node-manually.md) to complete
+You can follow [this comprehensive guide](/nodes/build/run-avalanche-node-manually.md) to complete
 this step. For this tutorial, we recommend compiling from source instead of using the `AvalancheGo Installer`.
 
 ## Build `subnet-evm` Binary
@@ -76,7 +76,7 @@ You need to create a new config file or edit your existing one for your node. In
 will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file
 anywhere on your file system, you will just need to specify its location via the flag
 `--config-file=<file path>` when you start your node. See
-[this](../nodes/maintain/avalanchego-config-flags.md#config-file) for more info on configuration
+[this](/nodes/maintain/avalanchego-config-flags.md#config-file) for more info on configuration
 file and flags.
 
 You will need to add the DFK Subnet ID to the track Subnets section of the config file:

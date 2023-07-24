@@ -14,7 +14,7 @@ This document describes how to use the new Avalanche-CLI to deploy a Subnet on `
 
 :::
 
-After trying out a Subnet on a local box by following [this tutorial](./create-a-local-subnet.md),
+After trying out a Subnet on a local box by following [this tutorial](/build/subnet/deploy/local-subnet.md),
 next step is to try it out on `Fuji` Testnet.
 
 In this article, it's shown how to do the following on `Fuji` Testnet.
@@ -30,7 +30,7 @@ run-through of this tutorial.
 ## Prerequisites
 
 - 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section
-[Nodes](../nodes/README.md) on how to run a node and become a validator.
+[Nodes](/nodes/README.md) on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
@@ -49,13 +49,13 @@ most other Ethereum client features.
 ## Fuji Testnet
 
 For this tutorial, it's recommended that you follow
-[Run an Avalanche Node Manually](../nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)
+[Run an Avalanche Node Manually](/nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)
 and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
 Also it's worth pointing out that
-[it only needs 1 AVAX to become a validator on the Fuji Testnet](../nodes/validate/staking.md#fuji-testnet)
+[it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/staking.md#fuji-testnet)
 and you can get the test token from the [faucet](https://faucet.avax.network/).
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
@@ -86,14 +86,14 @@ The user is going to need this ID in the later section when calling [addValidato
 :::info
 
 With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch.
-You can use [State-Sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean)
+You can use [State-Sync](/nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean)
 to shorten the time for bootstrapping.
 
 :::
 
 ## Avalanche-CLI
 
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](create-a-local-subnet.md#installation)
+If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/build/subnet/deploy/local-subnet.md#installation)
 
 ### Private Key
 
@@ -115,7 +115,7 @@ deploy one, as `Mainnet` operations requires ledger usage, while for `Fuji` it's
 You should only use the private key created for this tutorial for testing operations on `Fuji` or
 other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file
 system. Whoever gets access to that key is going to have access to all funds secured by that
-private key. To deploy to `Mainnet`, follow [this tutorial](./create-a-mainnet-subnet).
+private key. To deploy to `Mainnet`, follow [this tutorial](/build/subnet/deploy/mainnet-subnet.md).
 
 :::
 
@@ -230,8 +230,9 @@ After following these 3 steps, your test key should now have a balance on the P-
 ## Create an EVM Subnet
 
 Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a
-[local network](./create-a-local-subnet#create-a-custom-subnet-configuration). In fact, the `create`
-commands only creates a specification of your Subnet on the local file system. Afterwards the
+[local network](/build/subnet/deploy/local-subnet.md#create-a-custom-subnet-configuration). In fact,
+the `create` commands only creates a specification of your Subnet on the local file system. 
+Afterwards the
 Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the
 `create` command, then first deploying to a local network and successively to `Fuji` - and
 eventually to `Mainnet`.
@@ -302,7 +303,7 @@ You can accept the default -again, NOT for production-, or customize your airdro
 case the wizard would continue. Assume the default here.
 
 The final question is asking for precompiles. Precompiles are powerful customizations of your EVM.
-Read about them at [precompiles](./customize-a-subnet#precompiles).
+Read about them at [precompiles](/build/subnet/upgrade/customize-a-subnet.md#precompiles).
 
 ```bash
 ✔ Airdrop 1 million tokens to the default address (do not use in production)
@@ -559,7 +560,7 @@ To request permission to validate a Subnet, the following steps are required:
 Before a node can be a validator on a Subnet, the node is required to already be a validator on the
 primary network, which means that your node has **fully bootstrapped**.
 
-See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to
+See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to
 become a validator.
 
 :::

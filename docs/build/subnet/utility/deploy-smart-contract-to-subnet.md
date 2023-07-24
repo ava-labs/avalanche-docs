@@ -12,13 +12,14 @@ sidebar_position: 0
 
 This tutorial assumes that:
 
-- [An Subnet and EVM blockchain](./create-a-fuji-subnet.md) has been created
+- [An Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
 - Your Node is currently validating your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](./customize-a-subnet.md#genesis)).
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your 
+[Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 ## Step 1: Setting up Core
 
-### **EVM Subnet Settings:** [(EVM Core Tutorial)](./create-a-fuji-subnet.md#connect-with-core)
+### **EVM Subnet Settings:** [(EVM Core Tutorial)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
 - **`Network Name`**: Custom Subnet-EVM
 - **`New RPC URL`**: <http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc> (Note: the port number should
@@ -102,5 +103,5 @@ with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and
 RPC URL. For example you can deploy your contracts with
-[hardhat quick start guide](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+[hardhat quick start guide](/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
 by changing `url` and `chainId` in the `hardhat.config.ts`.

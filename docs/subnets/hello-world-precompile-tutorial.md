@@ -154,7 +154,7 @@ interface IAllowList {
 }
 ```
 
-You can find more information about the AllowList interface [here](../subnets/customize-a-subnet.md#allowlist-interface).
+You can find more information about the AllowList interface [here](/build/subnet/upgrade/customize-a-subnet.md#allowlist-interface).
 
 ## Tutorial
 

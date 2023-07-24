@@ -23,13 +23,13 @@ If you want to build your node form source or include it in a docker image,
 reference the [AvalancheGo GitHub
 repository](https://github.com/ava-labs/avalanchego). To quickly get up and
 running, you can use the [node installation
-script](../nodes/build/set-up-node-with-installer.md) that automates installing
+script](/nodes/build/set-up-node-with-installer.md) that automates installing
 and updating AvalancheGo node as a `systemd` service on Linux, using prebuilt
 binaries.
 
 ### Configuring an Avalanche Node
 
-All configuration options and their default values are described [here](../nodes/maintain/avalanchego-config-flags.md).
+All configuration options and their default values are described [here](/nodes/maintain/avalanchego-config-flags.md).
 
 You can supply configuration options on the command line, or use a config file,
 which can be easier to work with when supplying many options. You can specify
@@ -39,7 +39,7 @@ a JSON file whose keys and values are option names and values.
 Individual chains, including the C-Chain, have their own configuration options
 which are separate from the node-level options. These can also be specified in a
 config file. For more details, see
-[here](../nodes/maintain/chain-config-flags.md#c-chain-configs).
+[here](/nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 The C-Chain config file should be at
 `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo
@@ -123,8 +123,8 @@ home. We have tutorials and repositories for several popular development
 environments:
 
 - [Core and Remix](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
-- [Truffle](../dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md)
-- [Hardhat](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+- [Truffle](/dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md)
+- [Hardhat](/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
 
 ## Ingesting On-Chain Data
 

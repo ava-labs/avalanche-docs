@@ -10,7 +10,7 @@ If you are looking for how to transfer AVAX tokens using the web wallet, please 
 ## Prerequisites
 
 - You are familiar with [Avalanche's architecture](../learn/avalanche/avalanche-platform.md).
-- You have completed [Run an Avalanche Node](../nodes/build/run-avalanche-node-manually.md).
+- You have completed [Run an Avalanche Node](/nodes/build/run-avalanche-node-manually.md).
 - You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
 - You have installed
   [ts-node](https://www.npmjs.com/package/ts-node#installation) so that you can
@@ -124,7 +124,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 
 ##### Network Setting
 
-The following settings work when using a local node started with [`--network-id=fuji`](../nodes/maintain/avalanchego-config-flags.md#network-id):
+The following settings work when using a local node started with [`--network-id=fuji`](/nodes/maintain/avalanchego-config-flags.md#network-id):
 
 ```js
 const ip: string = "localhost"
@@ -318,7 +318,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](../nodes/maintain/avalanchego-config-flags.md#network-id) or
+  Mainnet](/nodes/maintain/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
   server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
@@ -331,10 +331,10 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 ### Start the Local Network
 
 Follow
-[this](../subnets/network-runner.md#start-a-new-avalanche-network-with-five-nodes)
+[this](/subnets/network-runner.md#start-a-new-avalanche-network-with-five-nodes)
 to start a 5-node local network. Make sure that you get one of the port number
 by following
-[this](../subnets/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
+[this](/subnets/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
 In this tutorial, we will assume one of the ports is 30301.
 
 ### Locate the Example Code and Make Necessary Changes

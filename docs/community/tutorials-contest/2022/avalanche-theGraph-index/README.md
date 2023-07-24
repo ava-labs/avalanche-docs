@@ -85,7 +85,7 @@ a local network using the
 smart contract using [Remix](https://remix.ethereum.org/). Then Lastly we will
 be indexing our Subnet using [The Graph](https://thegraph.com/). This guide is
 an extension of the [Official Avalanche
-Documentation](https://docs.avax.network/subnets/create-a-local-subnet).
+Documentation](/build/subnet/deploy/local-subnet.md).
 
 Please note that all command line inputs and sample codes are MacOs and Linux
 Based. Commands may vary for other operating systems.
@@ -130,7 +130,7 @@ This makes the `avalanche` command available globally. For more information
 about
 [environment-variables](https://apple.stackexchange.com/questions/106778/how-do-i-set-environment-variables-on-os-x)
 and
-[avalanche-cli-commands](https://docs.avax.network/subnets/create-a-local-subnet#quickstart)
+[avalanche-cli-commands](/build/subnet/info/subnet-cli-commands.md)
 visit the respective links.
 
 ### Initialising a Default Subnet

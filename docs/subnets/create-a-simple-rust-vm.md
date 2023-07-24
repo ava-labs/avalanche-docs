@@ -751,7 +751,7 @@ async fn initialize(
 #### `create_handlers`
 
 Registers handlers defined in `api::chain_handlers::Service`. See
-[below](create-a-simple-rust-vm.md#api) for more on APIs.
+[below](/subnets/create-a-simple-rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 /// Creates VM-specific handlers.
@@ -774,7 +774,7 @@ async fn create_handlers(
 #### `create_static_handlers`
 
 Registers handlers defined in `api::chain_handlers::Service`. See
-[below](create-a-simple-rust-vm.md#api) for more on APIs.
+[below](/subnets/create-a-simple-rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn create_static_handlers(

@@ -91,8 +91,9 @@ versions support RPC version 19.
 If your VM has an RPC version mismatch, you have two options. First, you can update the version of
 AvalancheGo you use in your VM. This is the correct long-term approach. However, there is a
 short-term workaround. Avalanche-CLI supports deploying older versions of AvalancheGo by using the
-`--avalanchego-version` flag. Both the [`subnet deploy`](reference-cli-commands#subnet-deploy) and
-[`network start`](reference-cli-commands#network-start) commands support setting the AvalancheGo
+`--avalanchego-version` flag. Both the [`subnet deploy`](/build/subnet/info/subnet-cli-commands.md#subnet-deploy)
+and [`network start`](/build/subnet/info/subnet-cli-commands.md#network-start) commands support
+setting the AvalancheGo
 version explicitly. Although it's very important to keep your version of AvalancheGo up-to-date,
 this workaround helps you avoid broken builds in the short term. However, you need to upgrade
 to the latest AvalancheGo version when deploying publicly to the Fuji Testnet or Mainnet.

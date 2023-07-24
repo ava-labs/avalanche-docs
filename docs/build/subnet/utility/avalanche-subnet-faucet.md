@@ -19,7 +19,7 @@ do not have any monetary value, and thus can be obtained freely through faucets.
 
 These testnets are often the testbeds for any new native feature of the network itself, or any dapp
 or [Subnet](https://www.avax.network/subnets) that is going live on the main network (Mainnet). For
-example, [Fuji](../quickstart/fuji-workflow) network is the Testnet for Avalanche's Mainnet.
+example, [Fuji](/quickstart/fuji-workflow) network is the Testnet for Avalanche's Mainnet.
 
 Besides Fuji Testnet, [Avalanche Faucet](https://faucet.avax.network/) can be used to get free coins
 on these testnets Subnets like -

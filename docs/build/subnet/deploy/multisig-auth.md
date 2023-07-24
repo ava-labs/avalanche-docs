@@ -25,9 +25,9 @@ for setting up your multisig.
 ## Prerequisites
 
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
-- Familiarity with process of [Deploying a Subnet on Testnet](create-a-fuji-subnet) and [Deploying a
-  Permissioned Subnet on Mainnet](create-a-mainnet-subnet)
-- Multiple Ledger devices [configured for Avalanche](./create-a-mainnet-subnet#setting-up-your-ledger)
+- Familiarity with process of [Deploying a Subnet on Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
+ and [Deploying a Permissioned Subnet on Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+- Multiple Ledger devices [configured for Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
 - A Subnet configuration ready to deploy to either Fuji Testnet or Mainnet
 
 ## Getting Started
@@ -377,8 +377,8 @@ Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887c
 
 ### Finish Assembling the TX
 
-Take a look at [Add a Validator](./create-a-mainnet-subnet#add-a-validator) for additional help
-issuing this transaction.
+Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for 
+additional help issuing this transaction.
 
 :::note
 

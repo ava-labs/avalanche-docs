@@ -35,7 +35,7 @@ If you add it to your path, you should be able to call the program anywhere with
 To add it to your path permanently, add an export command to your shell initialization script
 (ex: .bashrc or .zshrc).
 
-For more detailed installation instructions, see [Avalanche-CLI Installation](install-avalanche-cli)
+For more detailed installation instructions, see [Avalanche-CLI Installation](/subnets/install-avalanche-cli.md)
 
 ## Create Your Subnet Configuration
 
@@ -237,7 +237,7 @@ Enter your Subnet's details, found in the output of your `avalanche subnet deplo
 
 If all worked as expected, your balance should read 1 million tokens. 
 Your Subnet is ready for action. You might want to try to 
-[Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core](deploy-a-smart-contract-on-your-evm).
+[Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core](/build/subnet/utility/deploy-smart-contract-to-subnet.md).
 
 ![Subnet in Core](/img/first-subnet/subnet-in-core.png)
 
@@ -251,8 +251,8 @@ with [Remix](https://remix.ethereum.org/), [Hardhat](https://hardhat.org/), or
 Subnet by addingprecompiles or adjusting the airdrop.
 
 Once you've developed a stable Subnet you like, see
-[Create an EVM Subnet on Fuji Testnet](./create-a-fuji-subnet.md) to take your Subnet one step
-closer to production.
+[Create an EVM Subnet on Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md) to take your 
+Subnet one step closer to production.
 
 Good Subnetting!
 

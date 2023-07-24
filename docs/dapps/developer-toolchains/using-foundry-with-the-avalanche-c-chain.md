@@ -4,7 +4,7 @@
 
 This guide shows how to deploy and interact with smart contracts using foundry
 on a local Avalanche Network and the [Fuji
-C-Chain](../../quickstart/fuji-workflow.md), which is an instance of the EVM.
+C-Chain](/quickstart/fuji-workflow.md), which is an instance of the EVM.
 
 [Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract
 development toolchain written in Rust. It manages your dependencies, compiles
@@ -33,7 +33,7 @@ command-line.
 [AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node
 implementation written in Go.
 
-[Avalanche Network Runner](../../subnets/network-runner.md) is a tool to quickly
+[Avalanche Network Runner](/subnets/network-runner.md) is a tool to quickly
 deploy local test networks. Together, you can deploy local test networks and run
 tests on them.
 
@@ -346,7 +346,7 @@ export PRIVATE_KEY=<YOUR-PRIVATE-KEY>
 
 The Fuji workflow above can be adapted to a Local Network by doing following:
 
-In a new terminal navigate to your [Avalanche Network Runner](../../subnets/network-runner.md) directory.
+In a new terminal navigate to your [Avalanche Network Runner](/subnets/network-runner.md) directory.
 
 ```zsh
 cd /path/to/Avalanche-Network-Runner

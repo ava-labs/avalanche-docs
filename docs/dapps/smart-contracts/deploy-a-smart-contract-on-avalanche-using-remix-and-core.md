@@ -35,7 +35,7 @@ To switch to the **Fuji test network**, go to Settings, select Advanced, and the
 
 </div>
 
-**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../subnets/network-runner.md)
+**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](/subnets/network-runner.md)
 
 - **Network Name**: Avalanche Local C-Chain
 - **New RPC URL**:
@@ -67,7 +67,7 @@ Your address will receive test AVAX in a few seconds.
 ### Funding on Local Testnet
 
 On a local network, you can easily fund your addresses by following
-[this](../../subnets/build-first-subnet.md#importing-the-test-private-key).
+[this](/build/subnet/hello-subnet.md#importing-the-test-private-key).
 
 
 ## Step 3: Connect Core and Deploy a Smart Contract Using Remix

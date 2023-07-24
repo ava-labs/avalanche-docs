@@ -113,12 +113,12 @@ can run your own node and access the network that way. Running your own node
 also avoids potential issues with public API congestion and rate-limiting.
 
 For development and experimental purposes,
-[here](../nodes/build/run-avalanche-node-manually.md) is a tutorial that shows
+[here](/nodes/build/run-avalanche-node-manually.md) is a tutorial that shows
 how to download, build, and install AvalancheGo. Simpler solution is to use the
 prebuilt binary, available on
 [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to
 run a node on a Linux machine, you can use the [installer
-script](../nodes/build/set-up-node-with-installer.md) to install the node as a
+script](/nodes/build/set-up-node-with-installer.md) to install the node as a
 `systemd` service. Script also handles node upgrading. If you want to run a node
 in a docker container, there are [build
 scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the
@@ -127,13 +127,13 @@ AvalancheGo repo for various Docker configs.
 ### Node Configuration
 
 Node configuration options are explained
-[here](../nodes/maintain/avalanchego-config-flags.md). But unless you have
+[here](/nodes/maintain/avalanchego-config-flags.md). But unless you have
 specific needs, you can mostly leave the main node config options at their
 default values.
 
 On the other hand, you will most likely need to adjust C-Chain configuration to
 suit your intended use. You can look up complete configuration options for
-C-Chain [here](../nodes/maintain/chain-config-flags.md#c-chain-configs) as well
+C-Chain [here](/nodes/maintain/chain-config-flags.md#c-chain-configs) as well
 as the default configuration. Note that only the options that are different from
 their default values need to be included in the config file.
 
@@ -195,7 +195,7 @@ APIs as well as default EVM APIs:
 }
 ```
 
-Default config values for the C-Chain can be seen [here](../nodes/maintain/chain-config-flags.md#c-chain-configs).
+Default config values for the C-Chain can be seen [here](/nodes/maintain/chain-config-flags.md#c-chain-configs).
 
 ### Running a Local Test Network
 
@@ -203,7 +203,7 @@ If you need a private test network to test your dapp, [Avalanche Network
 Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client
 for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-For more information, see [documentation](../subnets/network-runner.md).
+For more information, see [documentation](/subnets/network-runner.md).
 
 ## Developing and Deploying Contracts
 
@@ -228,7 +228,7 @@ Hardhat is the newest development and testing environment for Solidity smart
 contracts, and the one our developers use the most. Due to its superb testing
 support, it is the recommended way of developing for Avalanche.
 
-For more information see [this doc](../dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md).
+For more information see [this doc](/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md).
 
 ## Avalanche Explorer
 

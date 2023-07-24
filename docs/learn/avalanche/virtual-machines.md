@@ -79,7 +79,7 @@ To learn more about smart contract support, click [here](../../dapps/launch-your
 - [XSVM](https://github.com/ava-labs/xsvm)
   - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-See here for a tutorial on [How to Build a Simple Golang VM](../../subnets/create-a-vm-timestampvm.md)
+See here for a tutorial on [How to Build a Simple Golang VM](/subnets/create-a-vm-timestampvm.md)
 
 ### Rust
 
@@ -88,4 +88,4 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
 - [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
   - A Rust implementation of TimestampVM
 
-See here for a tutorial on [How to Build a Simple Rust VM](../../subnets/create-a-simple-rust-vm.md)
+See here for a tutorial on [How to Build a Simple Rust VM](/subnets/create-a-simple-rust-vm.md)

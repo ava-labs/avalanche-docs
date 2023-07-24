@@ -221,7 +221,7 @@ Full reference for all configuration options for some standard chains can be
 found in a separate [chain config flags](chain-config-flags.md) document.
 
 Full reference for `subnet-evm` upgrade configuration can be found in a separate
-[Customize a Subnet](../../subnets/customize-a-subnet.md) document.
+[Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md) document.
 
 #### `--chain-config-content` (string)
 
@@ -1429,7 +1429,7 @@ GiB).
 
 #### `--plugin-dir` (string)
 
-Sets the directory for [VM plugins](../../subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
+Sets the directory for [VM plugins](/subnets/introduction-to-vm.md). The default value is `$HOME/.avalanchego/plugins`.
 
 ### Virtual Machine (VM) Configs
 

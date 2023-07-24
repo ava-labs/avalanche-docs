@@ -74,7 +74,7 @@ Upgrade complete. Ready to restart the network.
 
 If you are running multiple Subnets concurrently, you may need to update multiple Subnets to restart
 the network. All of your deployed must be using the same RPC Protocol version. You can see more
-details about this [here](troubleshoot-deployments#incompatible-rpc-version-for-custom-vm).
+details about this [here](/build/subnet/info/troubleshoot-subnet.md#incompatible-rpc-version-for-custom-vm).
 
 :::
 

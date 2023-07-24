@@ -15,9 +15,9 @@ elastic (or permissionless) Subnet.
 
 ## Prerequisites
 
-- [Avalanche-CLI installed](install-avalanche-cli)
-- You have deployed a permissioned Subnet on [local](create-a-local-subnet), on 
-[Fuji](create-a-fuji-subnet) or on [Mainnet](create-a-mainnet-subnet)
+- [Avalanche-CLI installed](/subnets/install-avalanche-cli.md)
+- You have deployed a permissioned Subnet on [local](/build/subnet/deploy/local-subnet.md), on 
+[Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) or on [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 
 ## Getting Started
 
@@ -47,16 +47,16 @@ Elastic Subnet transformation on public network requires private key loaded into
 connected ledger device.
 
 Both stored key usage and ledger usage are enabled on Fuji (see more on creating keys 
-[here](https://docs.avax.network/subnets/create-a-fuji-subnet#private-key)) 
+[here](https://docs.avax.network/subnets//build/subnet/deploy/fuji-testnet-subnet.md#private-key)) 
 while only ledger usage is enabled on Mainnet (see more on setting up your ledger 
-[here](https://docs.avax.network/subnets/create-a-mainnet-subnet#setting-up-your-ledger)).
+[here](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)).
 
 To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to 
 provide the keys that control the Subnet defined during the Subnet deployment process (more info on 
 keys in Fuji can be found 
-[here](https://docs.avax.network/subnets/create-a-fuji-subnet#deploy-the-subnet), 
+[here](https://docs.avax.network/subnets//build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
 while more info on ledger signing in Mainnet can be found 
-[here](https://docs.avax.network/subnets/create-a-mainnet-subnet#deploy-the-subnet)). 
+[here](/build/subnet/deploy/mainnet-subnet.md#deploy-the-subnet)). 
 
 ### Results
 

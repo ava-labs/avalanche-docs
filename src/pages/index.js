@@ -19,7 +19,7 @@ function Home() {
           <div className="container">
             <div className="row cards__container">
               <Card
-                to="subnets/build-first-subnet"
+                to="/build/subnet/hello-subnet"
                 header={{
                   label: "🚀 Launch Your First Subnet",
                 }}

@@ -74,8 +74,8 @@ feature to perform network upgrades by just using a few lines of JSON in a confi
 ### Network Upgrades: Enable/Disable Precompiles
 
 Detailed description of how to do this can be found in [Customize a
-Subnet](./customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial. Here's a
-summary:
+Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial.
+Here's a summary:
 
 - Network Upgrade utilizes existing precompiles on the Subnet-EVM:
   - ContractDeployerAllowList, for restricting smart contract deployers
@@ -85,7 +85,7 @@ summary:
 - Each of these precompiles can be individually enabled or disabled at a given timestamp as a
   network upgrade, or any of the parameters governing its behavior changed.
 - These upgrades must be specified in a file named `upgrade.json` placed in the same directory where
-  [`config.json`](customize-a-subnet#avalanchego-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
+  [`config.json`](/build/subnet/upgrade/customize-a-subnet.md#avalanchego-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
 
 ### Preparation
 
@@ -134,7 +134,7 @@ The content of the `upgrade.json` is:
 }
 ```
 
-Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](./customize-a-subnet.md#configuring-dynamic-fees).
+Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees).
 
 With the above `upgrade.json`, we intend to change the `adminAddresses` at timestamp `1660658400`:
 
@@ -183,7 +183,7 @@ set manager address and making calls on the precompiled contract.
 We will use [Remix](https://remix.ethereum.org) online Solidity IDE and the [Core Browser
 Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
 Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add
-WAGMI](./wagmi.md#adding-wagmi-to-metamask) yourself.
+WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) yourself.
 
 First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 

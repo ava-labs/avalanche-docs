@@ -13,18 +13,18 @@ developer docs](https://docs.gnosis-safe.io/).
 This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on
-  [Mainnet](../subnets/create-a-mainnet-subnet.md), [Fuji](../subnets/create-a-fuji-subnet) or a [Local
-  network](../subnets/create-a-local-subnet).
+  [Mainnet](/build/subnet/deploy/mainnet-subnet.md), [Fuji](/build/subnet/deploy/fuji-testnet-subnet.md)
+  or a [Local network](/build/subnet/deploy/local-subnet.md).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis
-  File](./customize-a-subnet.md#genesis)).
+  File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 
 - [gnosis-Subnet](https://github.com/ava-labs/gnosis-subnet)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-- [avalanche-network-runner](../subnets/network-runner.md) (Local Workflow)
+- [avalanche-network-runner](/subnets/network-runner.md) (Local Workflow)
 
 ## Custom Network Workflow
 
@@ -326,7 +326,7 @@ to an EOA. This part of the tutorial requires that your Safe holds at least 1000
 can send assets to your Safe the same way you would send AVAX using
 [MetaMask](https://metamask.zendesk.com/hc/en-us/articles/360015488931-How-to-send-tokens-from-your-MetaMask-wallet).
 To add your Subnet to MetaMask, [please read this
-excerpt](../subnets/create-a-fuji-subnet#connect-with-metamask).
+excerpt](/subnets/create-a-fuji-subnet#connect-with-metamask).
 
 Just as before, we will sign and submit the transaction hash. This example uses two signers due to
 an increased `threshold` from our previous Safe transaction.
@@ -948,9 +948,9 @@ We have successfully done the following:
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](../subnets/create-a-local-subnet.md) to start a local
+Follow [Create a Local Test Network](/build/subnet/deploy/local-subnet.md) to start a local
 Subnet-EVM. Make sure that you get one of the port numbers by following running the command:
-[`avalanche network status`](../subnets/create-a-local-subnet#checking-network-status). In this
+[`avalanche network status`](/build/subnet/deploy/local-subnet.md#checking-network-status). In this
 tutorial, we will assume one of the ports is 49435.
 
 ### Locate the Hardhat Network Configuration and Make Necessary Changes

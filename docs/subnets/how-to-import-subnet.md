@@ -6,7 +6,7 @@ The most probable reason why someone would want to do this,
 is if they already deployed a Subnet with Subnet-CLI either to Fuji or Mainnet,
 and now would like to use Avalanche-CLI to manage the Subnet.
 
-Refer to the [installation guide](./install-avalanche-cli.md) for instruction about installing
+Refer to the [installation guide](/subnets/install-avalanche-cli.md) for instruction about installing
 Avalanche-CLI.
 
 Because Subnet-CLI is now deprecated, you can use this tutorial to migrate to Avalanche-CLI.
@@ -176,5 +176,5 @@ For example, you could deploy the WAGMI Subnet locally.
 
 
 For a complete description of options, flags, and the command,
-visit the [command reference](./reference-cli-commands.md#subnet-import).
+visit the [command reference](/build/subnet/info/subnet-cli-commands.md#subnet-import).
 

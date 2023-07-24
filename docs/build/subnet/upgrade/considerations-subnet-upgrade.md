@@ -61,7 +61,7 @@ cumulative weight is connected and working at all times.
 
 It is mandatory that the cumulative weight of all validators in the Subnet must be at least
 the value of
-[`snow-sample-size`](../nodes/maintain/avalanchego-config-flags.md#snow-sample-size-int) (default
+[`snow-sample-size`](/nodes/maintain/avalanchego-config-flags.md#snow-sample-size-int) (default
 20). For example, if there is only one validator in the Subnet, its weight must be at least
 `snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20.
 Recall that a validator's weight can't be changed while it is validating, so take care to use an
@@ -83,7 +83,7 @@ That's why having a node upgrade strategy is absolutely vital, and you should al
 latest AvalancheGo client immediately when it is made available.
 
 For a general guide on upgrading AvalancheGo check out [this
-tutorial](../nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
+tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
 keeping in mind the previous section, make sure to stagger node upgrades and start a new upgrade
 only once the previous node has successfully upgraded. Use the [Health
 API](/reference/avalanchego/health-api.md#healthhealth) to check that `healthy` value in the response
@@ -195,7 +195,8 @@ available precompiles allow you to:
 - Configure Dynamic Fees
 
 Please refer to [Customize a
-Subnet](customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for a detailed discussion
+Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for 
+a detailed discussion
 of possible precompile upgrade parameters.
 
 ## Summary

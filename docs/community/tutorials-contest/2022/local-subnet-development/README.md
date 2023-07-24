@@ -129,7 +129,7 @@ Example walk through:
 - `How would you like to distribute the funds`: Airdrop 1 million tokens to the default address
 - `Advanced: Would you like to add a custom precompile to modify the EVM?`: No
 
-You have successfully created the genesis file for your Subnet. You can read more about genesis [here](https://docs.avax.network/subnets/customize-a-subnet#genesis).
+You have successfully created the genesis file for your Subnet. You can read more about genesis [here](/build/subnet/upgrade/customize-a-subnet.md#genesis).
 
 To see details about the Subnet, run:
 
@@ -219,7 +219,7 @@ This tutorial will cover interacting with the Subnet through
 
 First, we will be adding our Subnet to [MetaMask](https://metamask.io/). To add
 the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and
-MetaMask](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask)
+MetaMask](/build/subnet/utility/deploy-smart-contract-to-subnet.md#step-1-setting-up-metamask)
 you should replace the values with your Subnet values that are printed out after
 you have created it. If your balance is zero after you add Subnet to the
 MetaMask, refer to [Access Funded Accounts](#access-funded-accounts).
@@ -295,17 +295,17 @@ is optional and helpful only if you are trying to extend your Subnet with
 precompiles.
 
 To checkout current precompiles provided by Ava Labs refer to
-[this](https://docs.avax.network/subnets/customize-a-subnet#precompiles). There
+[this](/build/subnet/upgrade/customize-a-subnet.md#precompiles). There
 are 3 precompiles shared by Ava Labs at the time this documentation is written.
 
 - [Contract Deployer Allow
-  List](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers):
+  List](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers):
   restricts the addresses who can deploy contracts
 - [Transaction Allow
-  List](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions):
+  List](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions):
   restricts the addresses who can send transactions
 - [Native
-  Minter](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins):
+  Minter](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins):
   allows given addresses to mint native token
 
 This tutorial will show how to interact with them using Remix.
@@ -427,7 +427,7 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
   to airdrop `1` whole token, as in one ether, you would enter the value
   `1000000000`.
 - `Precompiles`: You can learn what precompiles are by referring to
-  [this](https://docs.avax.network/subnets/customize-a-subnet#precompiles).
+  [this](/build/subnet/upgrade/customize-a-subnet.md#precompiles).
 
 ## Troubleshoot Common Issues
 
@@ -485,10 +485,10 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 
 ### Step 5: Interact with Precompiles (Optional)
 
-- Common issues are troubleshooted at the official avalanche docs, to check them out refer to [this](https://docs.avax.network/subnets/customize-a-subnet#precompiles).
-  - For `Contract Deployer Allow List`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers).
-  - For `Transaction Allow List`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions).
-  - For `Native Minter`, refer to [this](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins).
+- Common issues are troubleshooted at the official avalanche docs, to check them out refer to [this](/build/subnet/upgrade/customize-a-subnet.md#precompiles).
+  - For `Contract Deployer Allow List`, refer to [this](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers).
+  - For `Transaction Allow List`, refer to [this](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions).
+  - For `Native Minter`, refer to [this](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
 
 ## Conclusion
 

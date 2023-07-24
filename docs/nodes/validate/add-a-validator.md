@@ -165,7 +165,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 
 #### Network Setting
 
-The following settings work when using a local node started with [`--network-id=fuji`](../../nodes/maintain/avalanchego-config-flags.md#network-id):
+The following settings work when using a local node started with [`--network-id=fuji`](/nodes/maintain/avalanchego-config-flags.md#network-id):
 
 ```js
 const ip: string = "localhost"
@@ -450,7 +450,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](../../nodes/maintain/avalanchego-config-flags.md#network-id) or
+  Mainnet](/nodes/maintain/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
   server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.

@@ -14,7 +14,7 @@ to production.
 
 The first step of planning your Subnet is determining your application's needs. What features do you
 need that the Avalanche C-Chain doesn't provide? Perhaps you want your own gas token or only want
-to allow access to KYCed customers. [When to Build on a Subnet vs. on the C-Chain](./when-to-use-subnet-vs-c-chain.md)
+to allow access to KYCed customers. [When to Build on a Subnet vs. on the C-Chain](/build/subnet/c-chain-vs-subnet.md)
 can help you make the decision.
 
 ### Decide What Type of Subnet You Want
@@ -37,8 +37,8 @@ most mature developer tooling and receives regular updates by the Ava Labs team.
 #### Experimental Subnets
 
 Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the 
-[TimestampVM Go](create-a-vm-timestampvm), 
-[TimestampVMRust](create-a-simple-rust-vm), and others. These VMs are demo software
+[TimestampVM Go](/subnets/create-a-vm-timestampvm.md), 
+[TimestampVMRust](/subnets/create-a-simple-rust-vm.md), and others. These VMs are demo software
 and aren't ready for production environments. Although they do receive periodic updates, the Ava
 Labs team hasn't audited their performance and security, internally or externally. However, these
 open source projects are intended to inspire the community, and provide novel capabilities not
@@ -53,7 +53,7 @@ Custom Subnets are an open-ended interface that allow developers to build any VM
 These VMs may be a fork of an existing VM such as Subnet-EVM, or even a
 non-Avalanche-native VM such as Solana's virtual machine. Alternatively, you can build your VM
 entirely from scratch using almost any programming language. See [Introduction to
-VMs](introduction-to-vm) for advice on getting started.
+VMs](/subnets/introduction-to-vm.md) for advice on getting started.
 
 ### Determine Tokenomics
 
@@ -69,7 +69,7 @@ After you've selected your VM, you may want to customize it. This may mean airdr
 your team in the genesis, setting how gas fees rates on your network, or changing the
 behavior of your VM via precompiles. These customizations are hard to get right on paper and usually
 require some trial and error to determine correctly. See [Customize Your EVM-Powered
-Subnet](customize-a-subnet) for instructions on configuring Subnet-EVM.
+Subnet](/build/subnet/upgrade/customize-a-subnet.md) for instructions on configuring Subnet-EVM.
 
 ## Learn Avalanche-CLI
 
@@ -77,7 +77,7 @@ Now that you've specified your Subnet requirements, the next step is learning Av
 
 Avalanche-CLI is the best tool for rapidly prototyping Subnets and deploying them to production. You
 can use it throughout the entire Subnet development lifecycle. To get started, take a look at [Build
-Your First Subnet](build-first-subnet).
+Your First Subnet](/build/subnet/hello-subnet.md).
 
 ### Deploy Your Subnet Locally
 

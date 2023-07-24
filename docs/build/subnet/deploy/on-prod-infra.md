@@ -9,8 +9,10 @@ sidebar_position: 3
 
 ## Introduction
 
-After architecting your Subnet environment on the [local machine](create-a-local-subnet.md), proving
-the design and testing it out on [the Fuji Testnet](create-a-fuji-subnet.md), eventually you will
+After architecting your Subnet environment on the [local machine](/build/subnet/deploy/local-subnet.md),
+proving
+the design and testing it out on [the Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md),
+eventually you will
 need to deploy your Subnet to production environment. Running a Subnet in production is much more
 involved than local and Testnet deploys, as your Subnet will have to take care of real world usage,
 maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose
@@ -26,7 +28,7 @@ intuition for the type of questions you will need to consider.
 
 Avalanche nodes are essential elements for running your Subnet in production. At a minimum, your
 Subnet will need validator nodes, potentially also nodes that act as RPC servers, indexers or
-explorers. Running a node is basically running an instance of [AvalancheGo](../nodes/README.md) on a
+explorers. Running a node is basically running an instance of [AvalancheGo](/nodes/README.md) on a
 server.
 
 ### Server OS
@@ -70,7 +72,7 @@ accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
 When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that
 will take care of node setup and configuration, we recommend using the [installer
-script](../nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of
+script](/nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of
 the setup process for you, set up the node as a system service and will enable easy node upgrades.
 
 #### Cloud Providers
@@ -78,9 +80,9 @@ the setup process for you, set up the node as a system service and will enable e
 There are a number of different cloud providers. We have documents that show how to set up a node on
 the most popular ones:
 
-- [Amazon Web Services](../nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-- [Azure](../nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
-- [Google Cloud Platform](../nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
+- [Amazon Web Services](/nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
+- [Azure](/nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
+- [Google Cloud Platform](/nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
 
 There is a whole range of other cloud providers that may offer lower prices or better deals for your
 particular needs, so it makes sense to shop around.
@@ -117,7 +119,7 @@ week, but there are ways to shorten that process, depending on your circumstance
 #### State Sync
 
 If the nodes you will be running as validators don't need to have the full transaction history, then
-you can use [state sync](../nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With
+you can use [state sync](/nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With
 this flag enabled, instead of replaying the whole history to get to the current state, nodes simply
 download only the current state from other network peers, shortening the bootstrap process from
 multiple days to a couple of hours. If the nodes will be used for Subnet validation exclusively, you
@@ -130,10 +132,10 @@ impact on the speed of bootstrapping.
 Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical
 across nodes, and as such can safely be copied from one node to another. Just make sure to that the
 node is not running during the copy process, as that can result in a corrupted database. Database
-copy procedure is explained in detail [here](../nodes/maintain/node-backup-and-restore.md#database).
+copy procedure is explained in detail [here](/nodes/maintain/node-backup-and-restore.md#database).
 
 Please make sure you don't reuse any node's NodeID by accident, especially don't restore another
-node's ID, see [here](../nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node
+node's ID, see [here](/nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node
 must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly,
 which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.
 
@@ -142,7 +144,7 @@ which will impact your validator's uptime, thus staking rewards, and the stabili
 Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended
 tool to do that is [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
-Instructions for deployment by Avalanche-CLI can be found [here](./create-a-mainnet-subnet.md). 
+Instructions for deployment by Avalanche-CLI can be found [here](/build/subnet/deploy/mainnet-subnet.md).
 
 ### Ledger HW Wallet
 
@@ -165,7 +167,7 @@ in the genesis file is beyond the scope of this document, and if you're ready to
 to production you probably have it mapped out already.
 
 If you want to review, we have a description of the genesis file in our document on [customizing EVM
-Subnets](customize-a-subnet.md).
+Subnets](/build/subnet/upgrade/customize-a-subnet.md).
 
 
 
@@ -204,7 +206,7 @@ An example of a node config syncing two Subnets:
 But that is not all. Besides tracking the SubnetID, the node also needs to have the
 plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
 been through that on Testnet and Fuji, but for a refresher, you can refer to [this
-tutorial](create-a-fuji-subnet.md).
+tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins`
 directory where the node binary is (for installer-script created nodes that would be
@@ -253,7 +255,7 @@ of the blockchain in your Subnet.
 For an even more thorough (and pretty!) insight into how the node and the Subnet is behaving, you
 can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node
 operation, as well as a dedicated dashboard for Subnet data. Check out the
-[tutorial](../nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
+[tutorial](/nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
 
 ### Managing Validation
 

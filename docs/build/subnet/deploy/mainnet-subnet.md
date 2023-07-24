@@ -23,7 +23,7 @@ shouldn't be used for a production deployment.
 
 After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your
 Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on
-Testnet](./create-a-fuji-subnet).
+Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 This tutorial shows how to do the following on `Mainnet`.
 
@@ -41,11 +41,12 @@ your own run-through of this tutorial.
 
 ## Prerequisites
 
-- 5+ nodes running and [fully bootstrapped](../nodes/README.md) on `Mainnet`
-- [Avalanche-CLI is installed](install-avalanche-cli) on each validator node's box
+- 5+ nodes running and [fully bootstrapped](/nodes/README.md) on `Mainnet`
+- [Avalanche-CLI is installed](/subnets/install-avalanche-cli.md) on each validator node's box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created a Subnet configuration](create-evm-subnet-config) and fully tested a [Fuji Testnet
-  Subnet deployment](./create-a-fuji-subnet)
+- You've [created a Subnet configuration](/build/subnet/hello-subnet#create-your-subnet-configuration.md)
+and fully tested a [Fuji Testnet
+  Subnet deployment](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
@@ -186,7 +187,7 @@ In production Subnets, you should always use multiple control keys running in a 
 configuration. This tutorial uses a single control key for illustrative purposes only.
 
 For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment
-Tutorial](./multisig-deploy).
+Tutorial](/build/subnet/deploy/multisig-auth.md).
 
 :::
 
@@ -267,7 +268,7 @@ To request permission to validate a Subnet, the following steps are required:
 Adding a validator on a Subnet requires that the node is already a validator on the primary network,
 which means that your node has **fully bootstrapped**.
 
-See [here](../nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to become
+See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to become
 a validator.
 
 :::
