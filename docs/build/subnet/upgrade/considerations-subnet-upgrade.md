@@ -1,4 +1,12 @@
-# Upgrade a Subnet
+---
+tags: [Build, Subnets]
+description: This tutorial will guide you through the process of doing various Subnet upgrades and changes including what to watch out for and suggested precautions.
+sidebar_label: Considerations
+pagination_label: Key Considerations When Upgrading a Subnet
+sidebar_position: 0
+---
+
+# Key Considerations When Upgrading a Subnet
 
 In the course of Subnet operation, you will inevitably need to upgrade or change some part of the
 software stack that is running your Subnet. If nothing else, you will have to upgrade the

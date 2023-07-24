@@ -3,7 +3,7 @@ tags: [Build, Subnets]
 description: A reference for tips to resolve common issues while deploying Subnets on Avalanche.
 sidebar_label: Troubleshooting
 pagination_label: Troubleshooting Subnet Deployments
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Troubleshooting Subnet Deployments

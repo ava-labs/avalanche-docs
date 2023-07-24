@@ -3,6 +3,7 @@ tags: [Build, Subnets]
 description: How to customize a Subnet by utilizing Genesis, Precompile, and Blockchain Configs.
 sidebar_label: Customize a Subnet 
 pagination_label: Customize your EVM-Powered Subnet
+sidebar_position: 1
 ---
 
 # Customize Your EVM-Powered Subnet

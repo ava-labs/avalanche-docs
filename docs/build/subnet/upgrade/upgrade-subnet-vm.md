@@ -1,7 +1,14 @@
+---
+tags: [Build, Subnets]
+description: This how-to guide explains how to upgrade a deployed Subnet's Virtual Machine.
+sidebar_label: Subnet Virtual Machine 
+pagination_label: Upgrade a Subnet's Virtual Machine
+sidebar_position: 2
+---
+
 # How to Upgrade a Subnet's Virtual Machine
 
-This how-to guide explains how to upgrade a locally deployed Subnet. Upgrading Fuji and Mainnet
-Subnets is currently not supported.
+This how-to guide explains how to upgrade an already-deployed Subnet.
 
 ## Upgrading a Local VM
 

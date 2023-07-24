@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: You can customize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
+sidebar_label: Subnet Precompile Config
+pagination_label: Upgrade Your Subnet-EVM Precompile Configuration 
+sidebar_position: 3
+---
+
 # How to Upgrade Your Subnet-EVM Precompile Configuration 
 
 ## Upgrading a Subnet
