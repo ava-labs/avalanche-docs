@@ -181,6 +181,10 @@
     }
   ],
   "build-subnet": [
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> 🔺 Avalanche Subnets </medium></b></span>"
+    },
     "build/subnet/README",
     "build/subnet/getting-started",
     "build/subnet/c-chain-vs-subnet",
@@ -214,6 +218,10 @@
       "value": "<hr/>"
     },
     {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Manage Subnets </medium></b></span>"
+    },
+    {
       "type": "category",
       "label": "Maintain",
       "collapsed": true,
@@ -225,10 +233,6 @@
       ]
     },
     {
-      "type": "html",
-      "value": "<hr/>"
-    },
-    {
       "type": "category",
       "label": "Add Utility",
       "collapsed": true,
@@ -238,10 +242,6 @@
           "dirName": "build/subnet/utility"
         }
       ]
-    },
-    {
-      "type": "html",
-      "value": "<hr/>"
     },
     {
       "type": "category",
