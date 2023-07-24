@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: Gracefully pause and resume a local subnet while preserving state.
+sidebar_label: Pause and Resume
+pagination_label: Pause and Resume Local Subnets
+sidebar_position: 1
+---
+
 # How to Pause and Resume Local Subnets
 
 If you've deployed a Subnet locally, you can preserve and restore the state of your deployed Subnets.

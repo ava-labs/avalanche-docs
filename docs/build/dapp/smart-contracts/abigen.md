@@ -9,7 +9,7 @@ sidebar_position: 2
 
 `abigen` is a tool provided by the Go Ethereum (Geth) client that generates Go bindings for 
 Solidity smart contracts. Developers would need to use abigen when they want to interact with a 
-smart contract written in Solidity from a Go programming language application. It enables developers 
+smart contract written in Solidity from a Go programming language application. It enables developers
 to easily call functions and access data from Solidity contracts in a Go application. This tutorial 
 demonstrates how to compile a solidity contract into Golang to deploy and call contracts 
 programmatically.

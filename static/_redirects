@@ -423,6 +423,9 @@
 /subnets/deploy-a-smart-contract-on-your-evm /build/subnet/utility/deploy-smart-contract-to-subnet 301
 /subnets/avalanche-subnet-faucet /build/subnet/utility/avalanche-subnet-faucet 301
 /subnets/deploying-cross-chain-evm-bridge /build/subnet/utility/cross-chain-evm-bridge 301
+/subnets/how-to-delete-subnet /build/subnet/maintain/delete-subnet 301
+/subnets/how-to-list-and-describe /build/subnet/maintain/view-subnets 301
+/subnets/how-to-pause-and-resume-subnets /build/subnet/maintain/pause-resume-subnet 301
 
 #  07/21/2023 - Docs Revamp - Build/DApps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301

@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: You can list the Subnets you've created with `avalanche subnet list`.
+sidebar_label: View Subnets
+pagination_label: View Your Created Subnets
+sidebar_position: 0
+---
+
 # How to View Your Created Subnets
 
 ## List Subnet Configurations

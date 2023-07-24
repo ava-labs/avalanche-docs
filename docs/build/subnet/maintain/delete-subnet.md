@@ -1,3 +1,11 @@
+---
+tags: [Build, Subnets]
+description: To delete a created Subnet configuration, run `avalanche subnet delete <subnetName>`.
+sidebar_label: Delete a Subnet
+pagination_label: How to Delete a Subnet
+sidebar_position: 2
+---
+
 # How to Delete a Subnet
 
 ## Deleting a Subnet Configuration
