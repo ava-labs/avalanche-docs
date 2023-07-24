@@ -1,6 +1,6 @@
 ---
 tags: [Build, Virtual Machines]
-description: Learn how to build a simple virtual machine  on Avalanche using Golang. 
+description: Learn how to build a simple virtual machine on Avalanche using Golang. 
 sidebar_label: Simple Golang VM
 pagination_label: Build a Simple Golang VM
 sidebar_position: 1

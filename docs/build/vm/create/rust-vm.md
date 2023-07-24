@@ -1,6 +1,6 @@
 ---
 tags: [Build, Virtual Machines]
-description: Learn how to build a simple virtual machine on Avalanche using Rust. 
+description: Learn how to develop virtual machines on Avalanche using Rust. 
 sidebar_label: Rust VM
 pagination_label: Build a Rust VM
 sidebar_position: 3
