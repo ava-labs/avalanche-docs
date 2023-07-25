@@ -1,3 +1,11 @@
+---
+tags: [Build, DApps]
+description: ERC-721 tokens are one of the most fundamental and essential concepts in Ethereum. This same token standard is adopted in the Avalanche ecosystem.
+sidebar_label: Prep NFT Files
+pagination_label: Preparing NFT Files for an ERC721 Smart Contract
+sidebar_postion: 1
+---
+
 # Preparing NFT Files for an ERC721 Smart Contract
 
 The first step of setting up an NFT smart contract is having your NFT files

@@ -93,30 +93,6 @@ const config = {
             label: "Learn",
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "quickStart",
-            label: "QuickStart",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "apis",
-            label: "APIs",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "nodes",
-            label: "Nodes",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "community",
-            label: "Community",
-          },
-          {
             type: "dropdown",
             position: "left",
             label: "Build",
@@ -141,8 +117,26 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
+            sidebarId: "tooling",
+            label: "Tooling",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "nodes",
+            label: "Nodes",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
             sidebarId: "reference",
             label: "Reference",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "community",
+            label: "Community",
           },
           {
             type: "localeDropdown",

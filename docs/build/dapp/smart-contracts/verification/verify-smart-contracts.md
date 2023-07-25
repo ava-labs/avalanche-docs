@@ -1,3 +1,11 @@
+---
+tags: [Build, DApps]
+description: This tutorial walks through verifying a smart contract on the Snowtrace block explorer.
+sidebar_label: on Snowtrace
+pagination_label: Verify Smart Contracts on the C-Chain Explorer
+sidebar_position: 0
+---
+
 # Verify Smart Contracts on the C-Chain Explorer
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it.

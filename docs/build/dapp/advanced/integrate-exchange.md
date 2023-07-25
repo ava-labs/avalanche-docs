@@ -1,3 +1,11 @@
+---
+tags: [Build, DApps]
+description: The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. 
+sidebar_label: Exchange Integration
+pagination_label: C-Chain Exchange Integration
+sidebar_position: 3
+---
+
 # C-Chain Exchange Integration
 
 ## Overview

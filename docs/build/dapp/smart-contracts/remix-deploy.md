@@ -1,5 +1,8 @@
 ---
-decription: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and Core.
+tags: [Build, DApps]
+description: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and Core.
+sidebar_label: Deploy with Remix IDE
+pagination_label: Deploy a Smart Contract on Avalanche Using Remix and Core
 ---
 
 # Deploy a Smart Contract on Avalanche Using Remix and Core

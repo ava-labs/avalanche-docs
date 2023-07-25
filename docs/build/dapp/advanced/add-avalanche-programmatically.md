@@ -1,3 +1,11 @@
+---
+tags: [Build, DApps]
+description: This document shows how to integrate Avalanche Network with your Dapp, either by Core or MetaMask.
+sidebar_label: Add Network Programmatically
+pagination_label: Add Avalanche Network Programmatically
+sidebar_position: 2
+---
+
 # Add Avalanche Network Programmatically
 
 This document shows how to integrate Avalanche Network with your Dapp, either by Core or MetaMask.
@@ -42,7 +50,7 @@ npm start
 ```
 
 If everything works as expected, you should be able to load
-"http://localhost:3000/" on your browser, click on the "Connect Avalanche"
+"<http://localhost:3000/>" on your browser, click on the "Connect Avalanche"
 button on the page as below:
 
 ![connect core](/img/connect-core.jpeg)

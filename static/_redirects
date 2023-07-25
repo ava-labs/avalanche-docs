@@ -438,12 +438,24 @@
 
 #  07/21/2023 - Docs Revamp - Build/DApps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301
-/dapps/launch-your-ethereum-dapp /build/dapp/getting-started 301
+/dapps/launch-your-ethereum-dapp /build/dapp/launch-dapp 301
+/quickstart/fuji-workflow /build/dapp/fuji-workflow 301
 /dapps/developer-toolchains/using-foundry-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
 /dapps/developer-toolchains/using-hardhat-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
 /dapps/developer-toolchains/using-truffle-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
 /dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace /build/dapp/smart-contracts/verification/verify-hardhat 301
 /dapps/developer-toolchains/verify-smart-contract-with-truffle-verify /build/dapp/smart-contracts/verification/verify-truffle 301
+/dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain /build/dapp/smart-contracts/erc-20 301
+/dapps/smart-contracts/verify-smart-contracts /build/dapp/smart-contracts/verification/verify-smart-contracts 301
+/dapps/smart-contracts/add-avalanche-programmatically /build/dapp/advanced/add-avalanche-programmatically 301
+/quickstart/integrate-exchange-with-avalanche /build/dapp/advanced/integrate-exchange 301
+/quickstart/sending-transactions-with-dynamic-fees-using-javascript /build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript 301
+/quickstart/adjusting-gas-price-during-high-network-activity /build/dapp/advanced/adjusting-gas-price-during-high-network-activity 301
+/dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core /build/dapp/smart-contracts/remix-deploy 301
+/dapps/smart-contracts/ /build/dapp/smart-contracts/erc-20 301
+/dapps/nfts/ /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/intro-to-erc721s /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/preparing-nft-files /build/dapp/smart-contracts/nfts/preparing-nft-files 301
 
 #  07/21/2023 - Docs Revamp - Build/VMs Tab
 /subnets/introduction-to-vm /build/vm/intro 301
