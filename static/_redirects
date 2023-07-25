@@ -407,6 +407,7 @@
 /specs/banff-changes /reference/standards/guides/banff-changes 301
 
 #  07/21/2023 - Docs Revamp - Build/Subnets Tab
+/build /build/subnet 301
 /subnets/subnet-development-lifecycle /build/subnet/getting-started 301
 /subnets/build-first-subnet /build/subnet/hello-subnet 301
 /subnets/create-a-fuji-subnet /build/subnet/deploy/fuji-testnet-subnet 301

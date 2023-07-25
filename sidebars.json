@@ -44,44 +44,6 @@
     "quickstart/integrate-exchange-with-avalanche",
     "quickstart/blockchain-flow"
   ],
-  "dapps": [
-    "dapps/launch-your-ethereum-dapp",
-    {
-      "type": "category",
-      "label": "Developer Toolchains",
-      "collapsed": true,
-      "items": [
-        "dapps/developer-toolchains/README",
-        "dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace",
-        "dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Non Fungible Tokens (NFTs)",
-      "collapsed": true,
-      "items": [
-        "dapps/nfts/README",
-        "dapps/nfts/intro-to-erc721s",
-        "dapps/nfts/preparing-nft-files"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Smart Contract",
-      "collapsed": true,
-      "items": [
-        "dapps/smart-contracts/README",
-        "dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain",
-        "dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core",
-        "dapps/smart-contracts/verify-smart-contracts",
-        "dapps/smart-contracts/add-avalanche-programmatically"
-      ]
-    }
-  ],
 
   "apis": [
     {

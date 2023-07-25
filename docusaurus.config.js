@@ -101,12 +101,6 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "dapps",
-            label: "DApps",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
             sidebarId: "apis",
             label: "APIs",
           },
