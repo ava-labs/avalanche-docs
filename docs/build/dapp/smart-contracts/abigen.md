@@ -1,9 +1,8 @@
 ---
 tags: [Build, DApps]
 description: This tutorial demonstrates the process of deploying a cross-chain bridge between two EVM chains. Build at your own risk.
-sidebar_label: Interact with Golang App
+sidebar_label: Interact From a Golang App
 pagination_label: Interact with a Solidity Smart Contract from a Go Application
-sidebar_position: 2
 ---
 # Interact with a Solidity Smart Contract from a Golang Application
 

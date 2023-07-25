@@ -1,8 +1,11 @@
 ---
-description: The purpose of this document is to help you with launching your existing Ethereum dapp on Avalanche, get the basics of Avalanche Platform and how it works.
+tags: [Build, DApps]
+description: Launching any new or existing Solidity decentralized app on Avalanche C-Chain fosters the same developer experience as Ethereum, but benefits from the security, speed, and interoperability of the Avalanche Network.
+sidebar_label: Getting Started
+pagination_label: Launch a Solidity DApp on Avalanche
 ---
 
-# Launch Your Ethereum Dapp on Avalanche
+# Launch a Solidity DApp on Avalanche
 
 ## Overview
 
@@ -16,13 +19,8 @@ your dapp on Avalanche.
 ## Platform Basics
 
 Avalanche is a [network of
-networks](../learn/avalanche/avalanche-platform.md). It means that it
-is not a single chain running a single, uniform type of blocks. It contains
-multiple Subnets, each running one of more heterogeneous chains. But, to run an
-Ethereum dapp on a low-fee, fast network with instant finality, we don't need to
-concern ourselves with that right now. Using the link above you can find out
-more if you wish, but all you need to know right now is that one of the chains
-running on Avalanche Primary Network is the C-Chain (contract chain).
+networks](learn/avalanche/avalanche-platform.md). One of the chains
+running on Avalanche Primary Network is an EVM fork called the C-Chain (contract chain).
 
 C-Chain runs a fork of [`go-ethereum`](https://geth.ethereum.org/docs/rpc/server)
 called [`coreth`](https://github.com/ava-labs/coreth) that has the networking and
@@ -31,13 +29,13 @@ Ethereum VM, which runs Solidity smart contracts and manages data structures and
 blocks on the chain. As a result, you get a blockchain that can run all the
 Solidity smart contracts from Ethereum, but with much greater transaction
 bandwidth and instant finality that [Avalanche's revolutionary
-consensus](../learn/avalanche/avalanche-consensus.md) enables.
+consensus](learn/avalanche/avalanche-consensus.md) enables.
 
 Coreth is loaded as a plugin into
 [AvalancheGo](https://github.com/ava-labs/avalanchego), the client node
 application used to run Avalanche network.
 
-As far as your dapp is concerned, it will be running the same as on Ethereum,
+Any Dapp deployed to Avalanche C-Chain will be running the same as on Ethereum,
 just quicker and cheaper. Let's find out how.
 
 ## Accessing Avalanche C-Chain
@@ -57,7 +55,7 @@ bridges, and NFTs in one seamless, high-performance browser experience. Putting
 in another way, Core is more than a wallet. It is a curated web3 operating
 system combining Wallet, Explorer, Bridge, Subnets, dApps, and more.
 
-In your application's web interface, follow [this to add Avalanche programmatically](../dapps/smart-contracts/add-avalanche-programmatically.md#core).
+In your application's web interface, follow [this to add Avalanche programmatically](/dapps/smart-contracts/add-avalanche-programmatically.md#core).
 
 ### Through MetaMask
 
@@ -81,11 +79,9 @@ Avalanche is as follows.
 - **Symbol**: `AVAX`
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-In your application's web interface, you can [add Avalanche
-programmatically](../dapps/smart-contracts/add-avalanche-programmatically.md#metamask)
-so your users don't have to enter the network data manually. To see the adding
-custom network flow in action, check out [Pangolin
-DEX](https://app.pangolin.exchange/).
+In your application's web interface, you can 
+[add Avalanche programmatically](/dapps/smart-contracts/add-avalanche-programmatically.md#metamask)
+so your users don't have to enter the network data manually.
 
 ### Using the Public API Nodes
 
@@ -214,13 +210,13 @@ C-Chain.
 ### Remix
 
 There is a
-[tutorial](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
+[tutorial](dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
 for using Remix to deploy smart contracts on Avalanche. It relies on Core
 for access to the Avalanche network.
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](../dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md).
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md).
 
 ### Hardhat
 
@@ -266,7 +262,7 @@ signal that your users can trust your contracts, and it is strongly recommended
 for all production contracts.
 
 See
-[this](../dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify.md)
+[this](dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify.md)
 for a detailed tutorial with Truffle.
 
 ## Contract Security Checks

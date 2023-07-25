@@ -1,6 +1,14 @@
+---
+tags: [Build, DApps]
+description: This tutorial walks through verifying a smart contract on a block explorer using Hardhat after deploying it to Avalance C-Chain.
+sidebar_label: Using Hardhat
+pagination_label: Verifying Smart Contracts Using Hardhat and Snowtrace
+---
+
 # Verifying Smart Contracts Using Hardhat and Snowtrace
 
-This tutorial assumes that the contract was deployed using Hardhat and that all Hardhat dependencies are properly installed.
+This tutorial assumes that the contract was deployed using Hardhat and that all Hardhat dependencies
+are properly installed.
 
 After deploying a smart contract one can verify the smart contract on Snowtrace in three steps:
 
@@ -43,9 +51,11 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
    <br></br>
 
 5. Copy and paste the code from the flattened contract into the appropriate box
-6. **If optimization was used when compiling the contract, make sure to select “Yes” in the dropdown menu labeled “Optimization”**
+6. If optimization was used when compiling the contract, make sure to select “Yes” in the dropdown
+menu labeled “Optimization”
 
-   1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number of runs
+   1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number 
+   of runs
       ![snowtraceHH-3](/img/snowtraceHH-3.png)
 
    <br></br>
@@ -53,11 +63,13 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
 7. Select Verify and Publish
    1. If successful, all Contracts with the same bytecode will be verified
    2. If unsuccessful, read the error messages provided and make the appropriate changes
-      1. Ensure to check that the compiler version and optimizer runs are the same as when you compiled the contract prior to deployment
+      1. Ensure to check that the compiler version and optimizer runs are the same as when you 
+      compiled  the contract prior to deployment
 
 ## Verifying with Hardhat-Verify
 
-This part of the tutorial assumes that the contract was deployed using Hardhat and that all Hardhat dependencies are properly installed to include `'@nomiclabs/hardhat-etherscan'`.
+This part of the tutorial assumes that the contract was deployed using Hardhat and that all Hardhat 
+dependencies are properly installed to include `'@nomiclabs/hardhat-etherscan'`.
 
 You will need to create a `.env.json` with your _Wallet Seed Phrase_ and _Snowtrace API key_
 
@@ -235,7 +247,8 @@ npx hardhat run scripts/5-verifyNFT.ts --network fuji
 
 <br></br>
 
-Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your _Constructor Arguments_
+Verifying via terminal will not allow you to pass an array as an argument, however, you can do this 
+when verifying via script by including the array in your _Constructor Arguments_
 
 Example: (see LN13 `_custodians`, LN 30 `_custodians`)
 

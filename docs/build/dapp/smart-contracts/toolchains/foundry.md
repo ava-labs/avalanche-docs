@@ -1,10 +1,17 @@
+---
+tags: [Build, DApps]
+description: This guide shows how to deploy and interact with smart contracts using foundry on a local Avalanche Network and the Fuji C-Chain.
+sidebar_label: Foundry
+pagination_label: Using Foundry with the Avalanche C-Chain
+sidebar_position: 2
+---
+
 # Using Foundry with the Avalanche C-Chain
 
 ## Introduction
 
 This guide shows how to deploy and interact with smart contracts using foundry
-on a local Avalanche Network and the [Fuji
-C-Chain](/quickstart/fuji-workflow.md), which is an instance of the EVM.
+on a local Avalanche Network and the Fuji C-Chain.
 
 [Foundry toolchain](https://github.com/foundry-rs/foundry) is a smart contract
 development toolchain written in Rust. It manages your dependencies, compiles
@@ -15,7 +22,7 @@ command-line.
 
 - Basic understanding of [Solidity](https://docs.soliditylang.org) and Avalanche.
 - You are familiar with [Avalanche Smart Contract Quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
-- Basic understanding of the [Avalanche's architecture](../../learn/avalanche/avalanche-platform.md)
+- Basic understanding of the [Avalanche's architecture](/learn/avalanche/avalanche-platform.md)
 - performed a cross-chain swap via this [this
   tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
   to get funds to your C-Chain address.

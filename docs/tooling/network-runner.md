@@ -1,3 +1,10 @@
+---
+tags: [Build, Tooling, DApps]
+description: The Avalanche Network Runner (ANR) allows a user to define, create and interact with a network of Avalanche nodes. It can be used for development and testing.
+sidebar_label: Avalanche Network Runner
+pagination_label: Avalanche Network Runner
+---
+
 # Avalanche Network Runner
 
 The Avalanche Network Runner **(ANR)** allows a user to define, create and interact with a network

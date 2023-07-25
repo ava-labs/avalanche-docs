@@ -438,6 +438,12 @@
 
 #  07/21/2023 - Docs Revamp - Build/DApps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301
+/dapps/launch-your-ethereum-dapp /build/dapp/getting-started 301
+/dapps/developer-toolchains/using-foundry-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+/dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace /build/dapp/smart-contracts/verification/verify-hardhat 301
+/dapps/developer-toolchains/verify-smart-contract-with-truffle-verify /build/dapp/smart-contracts/verification/verify-truffle 301
 
 #  07/21/2023 - Docs Revamp - Build/VMs Tab
 /subnets/introduction-to-vm /build/vm/intro 301
@@ -449,6 +455,9 @@
 
 # Docs Revamp - Learn Tab
 /subnets/cross-subnet-communication /learn/avalanche/awm 301
+
+# Docs Revamp - Tooling Tab
+/subnets/network-runner /tooling/network-runner 301
 
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
