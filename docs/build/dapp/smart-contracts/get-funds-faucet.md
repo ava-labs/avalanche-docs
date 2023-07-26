@@ -1,7 +1,7 @@
 ---
 tags: [Build, DApps]
 description: This tutorial focuses on how to get a "drip" of AVAX from the Fuji testnet faucet.
-sidebar_label: Get Test Funds
+sidebar_label: 💰 Get Test Funds
 pagination_label: Get Test Funds from the Fuji Testnet Faucet
 ---
 

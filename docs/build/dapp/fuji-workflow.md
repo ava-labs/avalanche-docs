@@ -1,3 +1,10 @@
+---
+tags: [Build, DApps]
+description: An end-to-end walkthrough of necessary development activities for a bare-bones decentralized application.
+sidebar_label: Fuji Workflow
+pagination_label: Fuji Workflow
+---
+
 # Fuji Workflow
 
 ## Introduction
