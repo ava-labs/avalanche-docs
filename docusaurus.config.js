@@ -99,7 +99,7 @@ const config = {
             items: [
               {
                 type: "docSidebar",
-                label: "DApps",
+                label: "Dapps",
                 sidebarId: "build-dapp",
               },
               {
