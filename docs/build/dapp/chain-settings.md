@@ -26,4 +26,4 @@ pagination_label: Avalanche C-Chain Settings
 ## Add Network to Wallet in One Click
 
 To easily add a network to your browser wallet of choice, visit 
-[Chainlist](https://chainlist.org/?search=Avalanche&testnets=true) and connect your wallet.
+[chainlist](https://chainlist.org/?search=Avalanche&testnets=true) and connect your wallet.

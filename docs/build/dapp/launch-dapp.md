@@ -5,7 +5,7 @@ sidebar_label: Launch an Ethereum DApp
 pagination_label: Launch a Ethereum DApp on Avalanche
 ---
 
-# Launch an Ethereum DApp on Avalanche
+# Launch an Ethereum Dapp on Avalanche
 
 ## Overview
 

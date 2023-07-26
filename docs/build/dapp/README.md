@@ -26,4 +26,4 @@ pagination_label: DApps Quick Links
 | End-to-End Walkthroughs     |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Fuji Workflow**](/build/dapp/fuji-workflow.md) | Walkthrough of necessary development activities for a bare-bones decentralized application |
-| [**Launch an Ethereum DApp**](/build/dapp/launch-dapp.md) | Launch any new or existing Solidity dapp on Avalanche C-Chain the same as Ethereum, while benefiting from the security, speed, and interoperability of the Avalanche Network|
+| [**Launch an Ethereum Dapp**](/build/dapp/launch-dapp.md) | Launch any new or existing Solidity dapp on Avalanche C-Chain the same as Ethereum, while benefiting from the security, speed, and interoperability of the Avalanche Network|
