@@ -9,7 +9,7 @@ If you are looking for how to transfer AVAX tokens using the web wallet, please 
 
 ## Prerequisites
 
-- You are familiar with [Avalanche's architecture](../learn/avalanche/avalanche-platform.md).
+- You are familiar with [Avalanche's architecture](/learn/avalanche/avalanche-platform.md).
 - You have completed [Run an Avalanche Node](/nodes/build/run-avalanche-node-manually.md).
 - You are familiar with [AvalancheJS](https://github.com/ava-labs/AvalancheJS).
 - You have installed
@@ -156,7 +156,7 @@ For Fuji Testnet, 5 is the correct value to use.
 const networkID: number = 5
 ```
 
-To learn more about encoded addresses, click [here](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+To learn more about encoded addresses, click [here](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
 **Set the Correct Amount To Send:**
 
@@ -322,7 +322,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
   [Avalanche Mainnet API
   server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.
 - The correct receiving address.
 
@@ -331,10 +331,10 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 ### Start the Local Network
 
 Follow
-[this](/subnets/network-runner.md#start-a-new-avalanche-network-with-five-nodes)
+[this](/tooling/network-runner.md#start-a-new-avalanche-network-with-five-nodes)
 to start a 5-node local network. Make sure that you get one of the port number
 by following
-[this](/subnets/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
+[this](/tooling/network-runner.md#get-api-endpoints-of-all-nodes-in-the-cluster).
 In this tutorial, we will assume one of the ports is 30301.
 
 ### Locate the Example Code and Make Necessary Changes

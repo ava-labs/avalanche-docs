@@ -32,7 +32,7 @@ npm install -g yarn
 
 [AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node
 implementation written in Go. [Avalanche Network
-Runner](/subnets/network-runner.md) is a tool to quickly deploy local test
+Runner](/tooling/network-runner.md) is a tool to quickly deploy local test
 networks. Together, you can deploy local test networks and run tests on them.
 
 ### Solidity and Avalanche
@@ -253,7 +253,7 @@ token with its token name then you need to divide it with its decimal.
 
 
 The example uses the [C-Chain Public
-API](../../apis/avalanchego/public-api-server) for the provider. For a local
+API](/apis/avalanchego/public-api-server) for the provider. For a local
 Avalanche network use `http://127.0.0.1:9650/ext/bc/C/rpc` and for Fuji Testnet
 use `https://api.avax-test.network/ext/bc/C/rpc`.
 
@@ -279,7 +279,7 @@ binaries](https://github.com/ava-labs/avalanchego/releases) rather than building
 from source.)
 
 Confirm you have Avalanche Network Runner installed by following the steps
-listed [here](/subnets/network-runner.md)
+listed [here](/tooling/network-runner.md)
 
 Start Avalanche Network Runner and run a script to start a new local network.
 

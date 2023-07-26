@@ -33,7 +33,7 @@ bridges, and NFTs in one seamless, high-performance browser experience. Putting
 in another way, Core is more than a wallet. It is a curated web3 operating
 system combining Wallet, Explorer, Bridge, Subnets, dApps, and more.
 
-In your application's web interface, follow [this to add Avalanche programmatically](/dapps/smart-contracts/add-avalanche-programmatically.md#core).
+In your application's web interface, follow [this to add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#core).
 
 ### Through MetaMask
 
@@ -58,7 +58,7 @@ Avalanche is as follows.
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 In your application's web interface, you can 
-[add Avalanche programmatically](/dapps/smart-contracts/add-avalanche-programmatically.md#metamask)
+[add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#metamask)
 so your users don't have to enter the network data manually.
 
 ### Using the Public API Nodes
@@ -177,7 +177,7 @@ If you need a private test network to test your dapp, [Avalanche Network
 Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client
 for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-For more information, see [documentation](/subnets/network-runner.md).
+For more information, see [documentation](/tooling/network-runner.md).
 
 ## Developing and Deploying Contracts
 
@@ -188,13 +188,13 @@ C-Chain.
 ### Remix
 
 There is a
-[tutorial](dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
+[tutorial](/build/dapp/smart-contracts/remix-deploy.md)
 for using Remix to deploy smart contracts on Avalanche. It relies on Core
 for access to the Avalanche network.
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md).
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/build/dapp/smart-contracts/toolchains/truffle.md).
 
 ### Hardhat
 
@@ -202,7 +202,7 @@ Hardhat is the newest development and testing environment for Solidity smart
 contracts, and the one our developers use the most. Due to its superb testing
 support, it is the recommended way of developing for Avalanche.
 
-For more information see [this doc](/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md).
+For more information see [this doc](/build/dapp/smart-contracts/toolchains/hardhat.md).
 
 ## Avalanche Explorer
 
@@ -240,7 +240,7 @@ signal that your users can trust your contracts, and it is strongly recommended
 for all production contracts.
 
 See
-[this](dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify.md)
+[this](/build/dapp/smart-contracts/verification/verify-truffle.md)
 for a detailed tutorial with Truffle.
 
 ## Contract Security Checks

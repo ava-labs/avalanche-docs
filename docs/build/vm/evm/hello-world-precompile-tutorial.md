@@ -241,7 +241,7 @@ Download the following prerequisites into your `$GOPATH`:
 
 - Git Clone the repository (Subnet-EVM or Precompile-EVM)
 - Git Clone [AvalancheGo](https://github.com/ava-labs/avalanchego) repository
-- Install [Avalanche Network Runner](https://docs.avax.network/subnets/network-runner)
+- Install [Avalanche Network Runner](/tooling/network-runner.md)
 - Install [solc](https://github.com/ethereum/solc-js#usage-on-the-command-line)
 - Install [Node.js and NPM](https://nodejs.org/en/download)
   For easy copy paste, use the below commands:
@@ -1914,7 +1914,7 @@ We made it! Everything works in our Ginkgo tests, and now we want to spin up a l
 with the Hello World precompile activated.
 
 Start the server in a terminal in a new tab using avalanche-network-runner. Please check out
-[this link](/subnets/network-runner.md) for more information on Avalanche
+[this link](/tooling/network-runner.md) for more information on Avalanche
 Network Runner, how to download it, and how to use it. The server will be in "listening" mode
 waiting for API calls.
 

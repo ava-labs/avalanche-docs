@@ -28,7 +28,7 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 - [gnosis-Subnet](https://github.com/ava-labs/gnosis-subnet)
 - [safe-tasks](https://github.com/5afe/safe-tasks.git)
 - [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
-- [avalanche-network-runner](/subnets/network-runner.md) (Local Workflow)
+- [avalanche-network-runner](/tooling/network-runner.md) (Local Workflow)
 
 ## Custom Network Workflow
 

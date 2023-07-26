@@ -4,7 +4,7 @@
 
 Fuji is the Avalanche network's test network. You can use it to test your dapp
 or smart contract after you've developed it locally. (You can use [Avalanche
-Network Runner](/subnets/network-runner.md) to test things locally.) Fuji is
+Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is
 typically on the same version as the Avalanche Mainnet, but sometimes it is
 running an unreleased version of AvalancheGo. In general, you can expect Fuji's
 behavior to be about the same as Avalanche Mainnet. Tools such as a explorers
@@ -56,7 +56,7 @@ If you are using other wallets, like MetaMask, you can add the Fuji Testnet usin
 ## Generate a Mnemonic
 
 To begin, we'll create a mnemonic phrase with
-[AvalancheJS](../apis/avalanchejs/README.md). Mnemonics enable us to encode
+[AvalancheJS](/apis/avalanchejs/README.md). Mnemonics enable us to encode
 strong security into a human-readable phrase. AvalancheJS supports 10 languages
 including English, Japanese, Spanish, Italian, French, Korean, Czech,
 Portuguese, Chinese Simplified and Chinese Traditional.

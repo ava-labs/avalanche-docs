@@ -42,7 +42,7 @@ before you're ready to deploy on permanent infrastructure (testnet or Mainnet).
 
 GitHub: [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
 
-Document: [Avalanche Network Runner](/subnets/network-runner.md)
+Document: [Avalanche Network Runner](/tooling/network-runner.md)
 
 ## Avalanche Plugin Manager (APM)
 

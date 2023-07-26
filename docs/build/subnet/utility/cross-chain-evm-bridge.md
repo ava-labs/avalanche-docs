@@ -18,7 +18,7 @@ You must take the full responsibility to ensure your bridge's security.
 ## Introduction
 
 In this tutorial, we will be building a bridge between **[WAGMI](/build/subnet/info/wagmi.md)** and
-**[Fuji](/quickstart/fuji-workflow.md)**. This bridge will help us to transfer native **WGM** coin
+**[Fuji](/build/dapp/fuji-workflow.md)**. This bridge will help us to transfer native **WGM** coin
 wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you
 can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 
@@ -61,7 +61,7 @@ chain.
 These are the requirement to follow this tutorial -
 
 - Set up [WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-core) and
-[Fuji](/quickstart/fuji-workflow.md#set-up-fuji-network-on-core-optional) on Core
+[Fuji](/build/dapp/fuji-workflow.md#set-up-fuji-network-on-core-optional) on Core
 - Import `wWGM` token (asset) on the WAGMI network (Core). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 - `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 - `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax.network/)

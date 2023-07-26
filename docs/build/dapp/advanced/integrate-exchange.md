@@ -130,9 +130,9 @@ Ethereum, so developers familiar with Ethereum and Solidity can feel right at
 home. We have tutorials and repositories for several popular development
 environments:
 
-- [Core and Remix](../dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core.md)
-- [Truffle](/dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain.md)
-- [Hardhat](/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain.md)
+- [Core and Remix](/build/dapp/smart-contracts/remix-deploy.md)
+- [Truffle](/build/dapp/smart-contracts/toolchains/truffle.md)
+- [Hardhat](/build/dapp/smart-contracts/toolchains/hardhat.md)
 
 ## Ingesting On-Chain Data
 
@@ -157,7 +157,7 @@ standard `go-ethereum` Ethereum client does not compute block hashes correctly
 [ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)
 header field in Avalanche C-Chain blocks, which is used move AVAX between chains
 (X-Chain and P-Chain). You can read more about our multi-chain abstraction
-[here](../learn/avalanche/avalanche-platform.md) (out of scope for a
+[here](/learn/avalanche/avalanche-platform.md) (out of scope for a
 normal C-Chain integration).
 
 If you plan on reading JSON responses directly or use web3.js (doesn't recompute

@@ -13,7 +13,7 @@ sidebar_position: 1
 The objective of this document is to provide and explain sending transactions
 with dynamic fees using JavaScript. Make sure you have followed [the tutorial on
 adjusting the dynamic fees using
-MetaMask](./adjusting-gas-price-during-high-network-activity.md). There, we have
+MetaMask](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md). There, we have
 explained the key concepts related to dynamic fees and EIP1559 type of
 transactions.
 
@@ -25,7 +25,7 @@ transactions.
   C-Chain](/reference/avalanchego/c-chain/api.md) network and [EVM
   compatibility](https://ethereum.org/en/developers/docs/evm/)
 - Basic understanding of [dynamic fee
-  transactions](./adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts)
+  transactions](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts)
   transactions
 
 ## Installing Dependencies

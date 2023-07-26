@@ -106,7 +106,7 @@ location as the argument.
 ## Setting up Local Avalanche Network
 
 For the development purpose, we can use [**Avalanche Network Runner
-(ANR)**](/subnets/network-runner.md). It helps us in simulating the actual network. For this
+(ANR)**](/tooling/network-runner.md). It helps us in simulating the actual network. For this
 tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 ### Install ANR Binary

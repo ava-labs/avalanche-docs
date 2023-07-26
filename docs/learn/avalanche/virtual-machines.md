@@ -64,7 +64,7 @@ Ethereum Virtual Machine ([Coreth](/learn/projects#coreth)), or on their own Sub
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
 Truffle, and more.
 
-To learn more about smart contract support, click [here](../../dapps/launch-your-ethereum-dapp.md).
+To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
 
 ### Golang
 

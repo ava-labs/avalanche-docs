@@ -32,7 +32,8 @@ Pinata once your images are organized and named correctly.
 
 NOTE: Some projects start file names with `0`, and others with `1`. That choice
 will need to be consistent with the smart contract code. To be consistent with
-[this ERC-721 tutorial](intro-to-erc721s.md), we'll name this file `0`.
+[this ERC-721 tutorial](/build/dapp/smart-contracts/nfts/deploy-collection.md), we'll name this file
+ `0`.
 
 :::
 
@@ -150,4 +151,4 @@ needed. For example, my URL is
 `https://gateway.pinata.cloud/ipfs/QmYdWxbiwsfsYcW1CYQPgYujAc9FMLPG3fgFcxFskbSsFa`.
 
 Now that the image and metadata files are ready, we can prepare to deploy a
-smart contract by following this [ERC-721 tutorial](intro-to-erc721s.md).
+smart contract by following this [ERC-721 tutorial](/build/dapp/smart-contracts/nfts/deploy-collection.md).

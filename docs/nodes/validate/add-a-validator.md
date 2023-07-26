@@ -9,7 +9,7 @@ sidebar_position: 3
 The [Primary
 Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network)
 is inherent to the Avalanche platform and validates Avalanche’s [built-in
-blockchains](../../learn/avalanche/avalanche-platform.md). In this
+blockchains](/learn/avalanche/avalanche-platform.md). In this
 tutorial, we’ll add a node to the Primary Network on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes
@@ -33,8 +33,8 @@ our [Discord](https://chat.avalabs.org/) to ask questions.
 You've completed [Run an Avalanche
 Node](../build/run-avalanche-node-manually.md) and are familiar with
 [Avalanche's
-architecture](../../learn/avalanche/avalanche-platform.md). In this
-tutorial, we use [AvalancheJS](../../apis/avalanchejs/README.md) and
+architecture](/learn/avalanche/avalanche-platform.md). In this
+tutorial, we use [AvalancheJS](/apis/avalanchejs/README.md) and
 [Avalanche’s Postman
 collection](https://github.com/ava-labs/avalanche-postman-collection) to help us
 make API calls.
@@ -107,7 +107,7 @@ That’s it!
 
 ## Add a Validator with AvalancheJS
 
-We can also add a node to the validator set using [AvalancheJS](../../apis/avalanchejs/README.md).
+We can also add a node to the validator set using [AvalancheJS](/apis/avalanchejs/README.md).
 
 ### Install AvalancheJS
 
@@ -193,7 +193,7 @@ _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
 For Fuji Testnet, 5 is the correct value to use.
 
-To learn more about encoded addresses, click [here](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+To learn more about encoded addresses, click [here](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 
 #### Settings for Validation
 
@@ -454,5 +454,5 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
   [Avalanche Mainnet API
   server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](../../apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to stake.

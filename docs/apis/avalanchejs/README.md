@@ -1,7 +1,7 @@
 # AvalancheJS Overview
 
 AvalancheJS is a JavaScript Library for interfacing with the
-[Avalanche](../../learn/avalanche/intro.md) platform. It is built using
+[Avalanche](/learn/avalanche/intro.md) platform. It is built using
 TypeScript and intended to support both browser and Node.js. The AvalancheJS
 library allows one to issue commands to the Avalanche node APIs.
 

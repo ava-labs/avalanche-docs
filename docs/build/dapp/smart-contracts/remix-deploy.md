@@ -38,7 +38,7 @@ To switch to the **Fuji test network**, go to Settings, select Advanced, and the
 
 </div>
 
-**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](/subnets/network-runner.md)
+**Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](/tooling/network-runner.md)
 
 - **Network Name**: Avalanche Local C-Chain
 - **New RPC URL**:

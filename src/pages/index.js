@@ -63,7 +63,7 @@ function Home() {
               />
 
               <Card
-                to="dapps/launch-your-ethereum-dapp"
+                to="/build/dapp/launch-dapp"
                 header={{
                   label: "🛠️ Launch Your Dapp on Avalanche",
                 }}

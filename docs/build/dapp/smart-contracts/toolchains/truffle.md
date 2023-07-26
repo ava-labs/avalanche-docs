@@ -21,7 +21,7 @@ Avalanche's C-Chain, which is an instance of the EVM.
 You've completed [Run an Avalanche
 Node](/nodes/build/run-avalanche-node-manually.md) and are familiar with
 [Avalanche's
-architecture](../../learn/avalanche/avalanche-platform.md). You've also
+architecture](/learn/avalanche/avalanche-platform.md). You've also
 performed a cross-chain swap via this [this
 tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
 to get funds to your C-Chain address.
@@ -67,7 +67,7 @@ mkdir truffle; cd truffle
 
 Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library
 through which we can talk to the EVM and
-[AvalancheJS](../../apis/avalanchejs/README.md) which is used for cross chain
+[AvalancheJS](/apis/avalanchejs/README.md) which is used for cross chain
 swaps.
 
 ```text

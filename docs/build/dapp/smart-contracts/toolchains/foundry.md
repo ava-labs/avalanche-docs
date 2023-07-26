@@ -40,7 +40,7 @@ command-line.
 [AvalancheGo](https://github.com/ava-labs/avalanchego) is an Avalanche node
 implementation written in Go.
 
-[Avalanche Network Runner](/subnets/network-runner.md) is a tool to quickly
+[Avalanche Network Runner](/tooling/network-runner.md) is a tool to quickly
 deploy local test networks. Together, you can deploy local test networks and run
 tests on them.
 
@@ -353,7 +353,7 @@ export PRIVATE_KEY=<YOUR-PRIVATE-KEY>
 
 The Fuji workflow above can be adapted to a Local Network by doing following:
 
-In a new terminal navigate to your [Avalanche Network Runner](/subnets/network-runner.md) directory.
+In a new terminal navigate to your [Avalanche Network Runner](/tooling/network-runner.md) directory.
 
 ```zsh
 cd /path/to/Avalanche-Network-Runner
