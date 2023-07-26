@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: An end-to-end walkthrough of necessary development activities for a bare-bones decentralized application.
 sidebar_label: Fuji Workflow
 pagination_label: Fuji Workflow
@@ -320,7 +320,7 @@ For additional and valuable resources please see below.
 ### Faucet
 
 The [Fuji Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain
-addresses to help you test. (This testnet Avax has no value.)
+addresses to help you test. (This testnet AVAX has no value.)
 
 ### Wallet
 

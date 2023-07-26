@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial will help users to adjust their priority fee and max fee cap during high network activity and take advantage of the benefits of dynamic fee transactions.
 sidebar_label: Manually Adjust Gas Price
 pagination_label: Adjusting Gas Price During High Network Activity

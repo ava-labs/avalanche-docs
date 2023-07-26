@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: ERC-20 tokens are the most fundamental and essential concept in Ethereum. This same token standard is adopted in the Avalanche ecosystem.
 sidebar_label: Create an ERC-20 Token
 pagination_label: Create an ERC-20 Token Using Solidity

@@ -18,7 +18,7 @@ You must take the full responsibility to ensure your bridge's security.
 ## Introduction
 
 In this tutorial, we will be building a bridge between **[WAGMI](/build/subnet/info/wagmi.md)** and
-**[Fuji](/build/dapp/fuji-workflow.md)**. This bridge will help us to transfer native **WGM** coin
+**[Fuji](/learn/avalanche/fuji.md)**. This bridge will help us to transfer native **WGM** coin
 wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you
 can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 

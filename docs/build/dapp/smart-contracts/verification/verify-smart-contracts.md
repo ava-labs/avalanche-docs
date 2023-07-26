@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial walks through verifying a smart contract on the Snowtrace block explorer.
 sidebar_label: on Snowtrace
 pagination_label: Verify Smart Contracts on the C-Chain Explorer

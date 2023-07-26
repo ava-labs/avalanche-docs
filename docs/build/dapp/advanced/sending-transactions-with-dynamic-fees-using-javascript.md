@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial will help users to send transactions with dynamic fee settings to adjust their priority fee and max fee cap during high network activity using javascript.
 sidebar_label: Dynamic Gas Fees
 pagination_label: Sending Transactions with Dynamic Fees using JavaScript

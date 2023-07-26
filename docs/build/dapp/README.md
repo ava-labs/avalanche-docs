@@ -1,11 +1,11 @@
 ---
 tags: [Build, Decentralized Applications]
-description: DApps 
+description: Dapps 
 sidebar_label: 🔗 Quick Links
-pagination_label: DApps Quick Links
+pagination_label: Dapps Quick Links
 ---
 
-# 🔗 DApps Quick Links
+# 🔗 Dapps Quick Links
 
 | Smart Contract Development       |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial walks through verifying a smart contract on a block explorer using Truffle after deploying it to Avalance C-Chain.
 sidebar_label: Using Truffle
 pagination_label: Verifying Smart Contracts with Truffle Verify

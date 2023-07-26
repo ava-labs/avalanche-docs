@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial demonstrates how to compile a solidity contract into Golang to deploy and call contracts programmatically.
 sidebar_label: Interact From a Golang App
 pagination_label: Interact with a Solidity Smart Contract from a Go Application

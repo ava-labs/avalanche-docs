@@ -12,7 +12,7 @@ sidebar_position: 0
 
 This tutorial assumes that:
 
-- [An Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
+- [A Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
 - Your Node is currently validating your target Subnet
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your 
 [Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).

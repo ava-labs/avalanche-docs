@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial walks through verifying a smart contract on a block explorer using Hardhat after deploying it to Avalance C-Chain.
 sidebar_label: Using Hardhat
 pagination_label: Verifying Smart Contracts Using Hardhat and Snowtrace

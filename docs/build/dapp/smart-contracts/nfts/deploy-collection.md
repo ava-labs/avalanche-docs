@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial will walkthrough deploying a basic ERC-721 (NFT) smart contract on the Avalanche Network. This is a beginner friendly tutorial; No previous development experience necessary.
 sidebar_label: Deploy an ERC-721
 pagination_label: Deploy an ERC-721 NFT Collection on Avalanche 

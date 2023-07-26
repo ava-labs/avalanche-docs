@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This tutorial focuses on how to get a "drip" of AVAX from the Fuji testnet faucet.
 sidebar_label: 💰 Get Test Funds
 pagination_label: Get Test Funds from the Fuji Testnet Faucet
@@ -8,7 +8,7 @@ pagination_label: Get Test Funds from the Fuji Testnet Faucet
 # Get Test Funds from the Fuji Testnet Faucet
 
 The [Fuji Testnet Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain
-addresses to help you test. (This testnet Avax has no value.)
+addresses to help you test. (This testnet AVAX has no value.)
 
 We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the
 [Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji

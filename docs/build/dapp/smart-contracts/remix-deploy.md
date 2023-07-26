@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and Core.
 sidebar_label: Deploy with Remix IDE
 pagination_label: Deploy a Smart Contract on Avalanche Using Remix and Core
@@ -9,8 +9,6 @@ pagination_label: Deploy a Smart Contract on Avalanche Using Remix and Core
 
 ## Introduction
 
-![Primary Network](</img/image(21).png>)
-
 Avalanche's Primary Network is a Subnet that has three chains: P-Chain, X-Chain,
 and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered
 by Avalanche’s Snowman consensus protocol. The [C-Chain
@@ -18,9 +16,9 @@ RPC](/reference/avalanchego/c-chain/api.md) can do anything a typical Ethereum
 client can by using the Ethereum-standard RPC calls. The immediate benefits of
 using the C-Chain rather than Ethereum are all of the benefits of using
 Avalanche. These properties that could considerably improve the performance of
-DApps and the user experience.
+Dapps and the user experience.
 
-Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
+Today, we will deploy and test a smart contract on Avalanche using Remix and Core Wallet.
 
 ## Step 1: Setting up Core
 
@@ -53,7 +51,7 @@ To switch to the **Fuji test network**, go to Settings, select Advanced, and the
 
 ### **Using Avalanche Wallet**
 
-On the main net, you can use the [Avalanche
+On the Mainnet, you can use the [Avalanche
 Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your
 C-Chain address. The process is simple, as explained in this
 [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet).

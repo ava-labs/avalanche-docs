@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This guide shows how to deploy and interact with smart contracts using foundry on a local Avalanche Network and the Fuji C-Chain.
 sidebar_label: Foundry
 pagination_label: Using Foundry with the Avalanche C-Chain

@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: The goal of this guide is to lay out best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain using Hardhat.
 sidebar_label: Hardhat
 pagination_label: Using Hardhat with the Avalanche C-Chain

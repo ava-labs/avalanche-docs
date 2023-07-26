@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: Avalanche C-Chain is a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality from Avalanche's revolutionary consensus mechanism.
 sidebar_label: What to Expect
 pagination_label: Building on the C-Chain

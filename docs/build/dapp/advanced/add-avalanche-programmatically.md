@@ -1,5 +1,5 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: This document shows how to integrate Avalanche Network with your Dapp, either by Core or MetaMask.
 sidebar_label: Add Network Programmatically
 pagination_label: Add Avalanche Network Programmatically
@@ -13,7 +13,7 @@ This document shows how to integrate Avalanche Network with your Dapp, either by
 ## Core
 
 Powered by Avalanche,
-[Core](https://medium.com/avalancheavax/ava-labs-releases-core-an-all-in-one-web3-operating-system-for-avalanche-a844eb822887)
+[Core](https://core.app/en/)
 is an all-in-one operating system bringing together Avalanche apps, Subnets,
 bridges, and NFTs in one seamless, high-performance browser experience. Putting
 in another way, Core is more than a wallet. It is a curated web3 operating

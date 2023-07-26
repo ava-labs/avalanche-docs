@@ -8,7 +8,7 @@ sidebar_position: 0
 
 # How to Transform a Permissioned Subnet into an Elastic Subnet
 
-Elastic Subnets are permissionless Subnets. More information can be found [here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters).
+Elastic Subnets are permissionless Subnets. More information can be found [here](/build/subnet/elastic/elastic-parameters.md).
 
 This how-to guide focuses on taking an already created permissioned Subnet and transforming it to an
 elastic (or permissionless) Subnet.
@@ -35,7 +35,7 @@ Provide the name and the symbol for the permissionless Subnet's native token. Yo
 this prompt by providing the `--tokenName` and `--tokenSymbol` flags.
 
 Next, select the Elastic Subnet config. You can choose to use the default values detailed 
-[here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters#primary-network-parameters-on-mainnet)
+[here](/build/subnet/elastic/elastic-parameters.md#primary-network-parameters-on-mainnet)
 or customize the Elastic Subnet config. To bypass the prompt, you can use `--default` flag to use 
 the default Elastic Subnet config.
 
@@ -47,14 +47,14 @@ Elastic Subnet transformation on public network requires private key loaded into
 connected ledger device.
 
 Both stored key usage and ledger usage are enabled on Fuji (see more on creating keys 
-[here](https://docs.avax.network/subnets//build/subnet/deploy/fuji-testnet-subnet.md#private-key)) 
+[here](/build/subnet/deploy/fuji-testnet-subnet.md#private-key)) 
 while only ledger usage is enabled on Mainnet (see more on setting up your ledger 
 [here](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)).
 
 To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to 
 provide the keys that control the Subnet defined during the Subnet deployment process (more info on 
 keys in Fuji can be found 
-[here](https://docs.avax.network/subnets//build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
+[here](/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
 while more info on ledger signing in Mainnet can be found 
 [here](/build/subnet/deploy/mainnet-subnet.md#deploy-the-subnet)). 
 
@@ -102,7 +102,7 @@ prompt by using `--nodeID` flag.
 You will then be prompted with the amount of the Subnet native token that you like to stake in the 
 validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. The 
 amount that can be delegated to a validator is detailed 
-[here](https://docs.avax.network/subnets/reference-elastic-subnets-parameters#delegators-weight-checks).
+[here](/build/subnet/elastic/elastic-parameters.md#delegators-weight-checks).
 
 Next, select when you want to start delegating and how long you want to delegate for. You can also 
 bypass these prompts by using `--start-time` and `--staking-period` flags.

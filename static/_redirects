@@ -436,7 +436,7 @@
 /subnets/reference-cli-commands /build/subnet/info/subnet-cli-commands 301
 
 
-#  07/21/2023 - Docs Revamp - Build/DApps Tab
+#  07/21/2023 - Docs Revamp - Build/Dapps Tab
 /specs/abigen /build/dapp/smart-contracts/abigen 301
 /dapps/launch-your-ethereum-dapp /build/dapp/launch-dapp 301
 /quickstart/fuji-workflow /build/dapp/fuji-workflow 301

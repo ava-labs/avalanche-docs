@@ -1,8 +1,8 @@
 ---
-tags: [Build, DApps]
+tags: [Build, Dapps]
 description: Launching any new or existing Solidity decentralized app on Avalanche C-Chain fosters the same developer experience as Ethereum, but benefits from the security, speed, and interoperability of the Avalanche Network.
-sidebar_label: Launch an Ethereum DApp
-pagination_label: Launch a Ethereum DApp on Avalanche
+sidebar_label: Launch an Ethereum Dapp
+pagination_label: Launch a Ethereum Dapp on Avalanche
 ---
 
 # Launch an Ethereum Dapp on Avalanche
