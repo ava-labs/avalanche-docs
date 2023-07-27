@@ -1,6 +1,9 @@
 ---
-sidebar_position: 6
-description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
+tags: [Nodes]
+description: Reference for all available Subnet config options and flags.
+sidebar_label: Subnet Configs
+pagination_label: Subnet Configs
+sidebar_position: 2
 ---
 
 # Subnet Configs

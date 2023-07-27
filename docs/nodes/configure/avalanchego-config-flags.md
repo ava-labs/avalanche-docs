@@ -1,9 +1,12 @@
 ---
-sidebar_position: 4
+tags: [Nodes]
 description: This documents list all available configuration and flags for AvalancheGo.
+sidebar_label: AvalancheGo Configs + Flags
+pagination_label: AvalancheGo Configs and Flags
+sidebar_position: 0
 ---
 
-# AvalancheGo Config and Flags
+# AvalancheGo Configs and Flags
 
 <!-- markdownlint-disable MD001 -->
 

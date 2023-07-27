@@ -473,6 +473,9 @@
 
 # Docs Revamp - Nodes Tab
 /nodes/validate/staking /nodes/validate/what-is-staking 301
+/nodes/maintain/avalanchego-config-flags /nodes/configure/avalanchego-config-flags 301
+/nodes/maintain/chain-config-flags /nodes/configure/chain-config-flags 301
+/nodes/maintain/subnet-configs /nodes/configure/subnet-configs 301
 
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

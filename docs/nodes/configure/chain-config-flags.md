@@ -1,6 +1,9 @@
 ---
-sidebar_position: 5
+tags: [Nodes]
 description: Reference for all available chain config options and flags.
+sidebar_label: Chain Configs
+pagination_label: Chain Configs
+sidebar_position: 1
 ---
 
 # Chain Configs
