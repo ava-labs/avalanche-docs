@@ -39,4 +39,4 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 |                                                      |                                                                                        |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | [**What is Staking?**](./validate/staking.md)        | Explain the concept of staking                                                         |
-| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](../learn/avalanche/avalanche-platform.md) |
+| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](/learn/avalanche/avalanche-platform.md) |

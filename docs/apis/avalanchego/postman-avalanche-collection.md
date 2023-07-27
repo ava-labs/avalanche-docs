@@ -92,7 +92,7 @@ the `host` variable. Change it to the IP of your node (change both the `initial`
 values). Also, if your node is not running on the same machine where you
 installed Postman, make sure your node is accepting the connections on the API
 port from the outside by checking the appropriate [command line
-option](../../nodes/maintain/avalanchego-config-flags.md#http-server).
+option](/nodes/maintain/avalanchego-config-flags.md#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 

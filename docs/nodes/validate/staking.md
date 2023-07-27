@@ -20,7 +20,7 @@ scarce resource. This makes it infeasibly expensive for an attacker to gain
 enough influence over the network to compromise its security. In proof-of-work
 systems, the scarce resource is computing power. On Avalanche, the scarce
 resource is the native token,
-[AVAX](../../learn/avalanche/intro.md#avax). For a node to
+[AVAX](/learn/avalanche/intro.md#avax). For a node to
 [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)
 a blockchain on Avalanche, it must stake AVAX.
 

@@ -9,7 +9,7 @@ Go implementation of an Avalanche node.
 Related docs
 
 - [AvalancheGo](/reference)
-- [Nodes](../nodes/README.md)
+- [Nodes](/nodes/README.md)
 
 ## Coreth
 
@@ -55,7 +55,7 @@ The Avalanche platform JavaScript library.
 
 Related docs
 
-- [AvalancheJS](../apis/avalanchejs/README.md)
+- [AvalancheJS](/apis/avalanchejs/README.md)
 
 ## Avalanche Wallet
 
@@ -73,7 +73,7 @@ This is a tool to run and interact with a local Avalanche network.
 
 Related docs
 
-- [Avalanche Network Runner](../subnets/network-runner.md)
+- [Avalanche Network Runner](/tooling/network-runner.md)
 
 ## Avalanche Developer Docs
 

@@ -107,8 +107,8 @@ your transactions.
 
 #### Further Readings
 
-- [Adjusting Gas Price During High Network Activity](/quickstart/adjusting-gas-price-during-high-network-activity)
-- [Sending Transactions with Dynamic Fees using JavaScript](/quickstart/sending-transactions-with-dynamic-fees-using-javascript)
+- [Adjusting Gas Price During High Network Activity](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md)
+- [Sending Transactions with Dynamic Fees using JavaScript](/build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript.md)
 
 ### Atomic Transaction Fees
 

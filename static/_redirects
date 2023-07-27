@@ -405,3 +405,71 @@
 /specs/serialization-primitives /reference/standards/serialization-primitives 301
 /specs/platform-transaction-serialization /reference/avalanchego/p-chain/txn-format 301
 /specs/banff-changes /reference/standards/guides/banff-changes 301
+
+#  07/21/2023 - Docs Revamp - Build/Subnets Tab
+/build /build/subnet 301
+/subnets/subnet-development-lifecycle /build/subnet/getting-started 301
+/subnets/build-first-subnet /build/subnet/hello-subnet 301
+/subnets/create-a-fuji-subnet /build/subnet/deploy/fuji-testnet-subnet 301
+/subnets/create-a-mainnet-subnet /build/subnet/deploy/mainnet-subnet 301
+/subnets/create-a-local-subnet /build/subnet/deploy/local-subnet 301
+/subnets/when-to-use-subnet-vs-c-chain /build/subnet/c-chain-vs-subnet 301
+/subnets/multisig-deploy /build/subnet/deploy/multisig-auth 301
+/subnets/create-evm-subnet-config /build/subnet/hello-subnet#create-your-subnet-configuration 301
+/subnets/deploying-subnets-on-prod /build/subnet/deploy/on-prod-infra 301
+/subnets/create-custom-subnet /build/subnet/deploy/custom-vm-subnet 301
+/subnets/deploy-a-smart-contract-on-your-evm /build/subnet/utility/deploy-smart-contract-to-subnet 301
+/subnets/avalanche-subnet-faucet /build/subnet/utility/avalanche-subnet-faucet 301
+/subnets/deploying-cross-chain-evm-bridge /build/subnet/utility/cross-chain-evm-bridge 301
+/subnets/how-to-delete-subnet /build/subnet/maintain/delete-subnet 301
+/subnets/how-to-list-and-describe /build/subnet/maintain/view-subnets 301
+/subnets/how-to-pause-and-resume-subnets /build/subnet/maintain/pause-resume-subnet 301
+/subnets/how-to-transform-subnet-to-elastic /build/subnet/elastic/transform-to-elastic-subnet 301
+/subnets/reference-elastic-subnets-parameters /build/subnet/elastic/elastic-parameters 301
+/subnets/customize-a-subnet /build/subnet/upgrade/customize-a-subnet 301
+/subnets/how-to-upgrade-precompile /build/subnet/upgrade/upgrade-precompile 301
+/subnets/how-to-upgrade-subnet-vm /build/subnet/upgrade/upgrade-subnet-vm 301
+/subnets/subnet-upgrade /build/subnet/upgrade/considerations-subnet-upgrade 301
+/subnets/troubleshoot-deployments /build/subnet/info/troubleshoot-subnet 301
+/subnets/case-study-wagmi-upgrade /build/subnet/info/wagmi 301
+/subnets/wagmi /build/subnet/info/wagmi 301
+/subnets/reference-cli-commands /build/subnet/info/subnet-cli-commands 301
+
+
+#  07/21/2023 - Docs Revamp - Build/Dapps Tab
+/specs/abigen /build/dapp/smart-contracts/abigen 301
+/dapps/launch-your-ethereum-dapp /build/dapp/launch-dapp 301
+/quickstart/fuji-workflow /build/dapp/fuji-workflow 301
+/dapps/developer-toolchains/using-foundry-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+/dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace /build/dapp/smart-contracts/verification/verify-hardhat 301
+/dapps/developer-toolchains/verify-smart-contract-with-truffle-verify /build/dapp/smart-contracts/verification/verify-truffle 301
+/dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain /build/dapp/smart-contracts/erc-20 301
+/dapps/smart-contracts/verify-smart-contracts /build/dapp/smart-contracts/verification/verify-smart-contracts 301
+/dapps/smart-contracts/add-avalanche-programmatically /build/dapp/advanced/add-avalanche-programmatically 301
+/quickstart/integrate-exchange-with-avalanche /build/dapp/advanced/integrate-exchange 301
+/quickstart/sending-transactions-with-dynamic-fees-using-javascript /build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript 301
+/quickstart/adjusting-gas-price-during-high-network-activity /build/dapp/advanced/adjusting-gas-price-during-high-network-activity 301
+/dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core /build/dapp/smart-contracts/remix-deploy 301
+/dapps/smart-contracts/ /build/dapp/smart-contracts/erc-20 301
+/dapps/nfts/ /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/intro-to-erc721s /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/preparing-nft-files /build/dapp/smart-contracts/nfts/preparing-nft-files 301
+
+#  07/21/2023 - Docs Revamp - Build/VMs Tab
+/subnets/introduction-to-vm /build/vm/intro 301
+/subnets/create-a-simple-rust-vm /build/vm/create/rust-vm 301
+/subnets/create-a-vm-blobvm /build/vm/create/golang-vm-complex 301
+/subnets/create-a-vm-timestampvm /build/vm/create/golang-vm-simple 301
+/subnets/create-a-simple-vm-from-scratch /build/vm/create/any-lang-vm 301
+/subnets/hello-world-precompile-tutorial /build/vm/evm/hello-world-precompile-tutorial 301
+
+# Docs Revamp - Learn Tab
+/subnets/cross-subnet-communication /learn/avalanche/awm 301
+
+# Docs Revamp - Tooling Tab
+/subnets/network-runner /tooling/network-runner 301
+
+#  Docs Revamp - Deprecated Pages
+/subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

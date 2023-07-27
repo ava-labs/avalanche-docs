@@ -14,7 +14,7 @@ also makes upgrading or reinstalling the nodes easy.
 
 GitHub: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
 
-Document: [Run an Avalanche Node Using the Install Script](../nodes/build/set-up-node-with-installer.md)
+Document: [Run an Avalanche Node Using the Install Script](/nodes/build/set-up-node-with-installer.md)
 
 If you want to run a node in a more complex environment, like in a docker or
 Kubernetes container, or as a part of an installation orchestrated using a tool
@@ -29,7 +29,7 @@ development, so check back for new versions with expanded functionality.
 
 GitHub: [https://github.com/ava-labs/avalanche-cli](https://github.com/ava-labs/avalanche-cli)
 
-Document: [Create an EVM Subnet on a Local Network](../subnets/create-a-local-subnet.md)
+Document: [Create an EVM Subnet on a Local Network](/build/subnet/deploy/local-subnet.md)
 
 
 ## Avalanche Network Runner (ANR)
@@ -42,7 +42,7 @@ before you're ready to deploy on permanent infrastructure (testnet or Mainnet).
 
 GitHub: [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
 
-Document: [Avalanche Network Runner](../subnets/network-runner.md)
+Document: [Avalanche Network Runner](/tooling/network-runner.md)
 
 ## Avalanche Plugin Manager (APM)
 

@@ -87,6 +87,6 @@ blockchain networks they choose to participate in. This greatly reduces the comp
 
 ## Develop Your Own Subnet
 
-To get started, check out the tutorials in our [Subnets](/subnets/build-first-subnet)
+To get started, check out the tutorials in our [Subnets](/build/subnet/hello-subnet.md)
 section.
 

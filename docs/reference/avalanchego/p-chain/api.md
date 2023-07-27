@@ -7,8 +7,8 @@ pagination_label: P-Chain Transaction Format
 # Platform Chain API
 
 This API allows clients to interact with the
-[P-Chain](../../../learn/avalanche/avalanche-platform.md#platform-chain-p-chain), which
-maintains Avalanche’s [validator](../../../nodes/validate/staking.md#validators) set and handles
+[P-Chain](/learn/avalanche/avalanche-platform.md#platform-chain-p-chain), which
+maintains Avalanche’s [validator](/nodes/validate/staking.md#validators) set and handles
 blockchain creation.
 
 ## Endpoint
@@ -1719,7 +1719,7 @@ platform.getSubnets({
   Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be
   empty.
 
-See [here](../../../nodes/validate/add-a-validator.md) for information on adding a validator to a
+See [here](/nodes/validate/add-a-validator.md) for information on adding a validator to a
 Subnet.
 
 **Example Call:**

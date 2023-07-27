@@ -63,7 +63,7 @@ You can find more about SSH and how to use it
 
 Running the below command will create an `avalanchego` binary inside the `build/` directory and will
 install the Coreth `evm` binary inside the `build/plugins` directory. For more information on
-running a node, please refer [this](../nodes/build/run-avalanche-node-manually.md).
+running a node, please refer [this](/nodes/build/run-avalanche-node-manually.md).
 
 ```bash
 ./scripts/build.sh
@@ -106,7 +106,7 @@ location as the argument.
 ## Setting up Local Avalanche Network
 
 For the development purpose, we can use [**Avalanche Network Runner
-(ANR)**](../subnets/network-runner.md). It helps us in simulating the actual network. For this
+(ANR)**](/tooling/network-runner.md). It helps us in simulating the actual network. For this
 tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 ### Install ANR Binary
@@ -285,9 +285,9 @@ module.exports = {
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics
 of its genesis data. We will be using the default genesis data provided by `subnet-evm`. You can
-also find it inside the `networks/11111/` folder of the `subnet-evm` repository or simply copy and paste
-the following data inside the `genesis.json` file of the project folder. (Note that fields
-`airdropHash` and `airdropAmount` have been removed.)
+also find it inside the `chains/11111/` folder of the [public-chain-assets](https://github.com/ava-labs/public-chain-assets)
+repository or simply copy and paste the following data inside the `genesis.json` file of the project
+folder. (Note that fields `airdropHash` and `airdropAmount` have been removed.)
 
 ```json
 {
@@ -356,7 +356,7 @@ address on Core and use that here.
 ```
 
 Put a unique number as ChainID for your chain. Conflicting ChainIDs can cause problems. You can
-read more about all of these parameters [here](../subnets/customize-a-subnet.md#genesis).
+read more about all of these parameters [here](/build/subnet/upgrade/customize-a-subnet.md#genesis).
 
 ## Creating Subnet
 
@@ -625,6 +625,6 @@ Runner tab of the terminal.
 We have created the new Subnet, deployed a new blockchain using the `subnet-evm`, and finally added
 a validator to this Subnet, for validating different chains. Now it's time to interact with the new
 chain. You can follow this
-[part](../subnets/create-a-fuji-subnet.md#interact-with-the-new-blockchain) in our docs, to learn,
-how you can set up your Core to interact with this chain. You can send tokens, create smart
+[part](/build/subnet/deploy/fuji-testnet-subnet.md#interact-with-the-new-blockchain) in our docs, to
+learn, how you can set up your Core to interact with this chain. You can send tokens, create smart
 contracts, and do everything that you can do on C-Chain.

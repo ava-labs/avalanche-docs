@@ -21,14 +21,14 @@ DISCLAIMER: The bridge implementation in this tutorial is a proof of concept and
 ## Prerequisites
 
 - Basic knowledge of
-  [Precompiles](https://docs.avax.network/subnets/customize-a-subnet#precompiles).
+  [Precompiles](/build/subnet/upgrade/customize-a-subnet.md#precompiles).
   - We will be using
-    [NativeMinter](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
+    [NativeMinter](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
     precompile on our Subnet. Familiarity with precompiles and knowledge of
     NativeMinter precompile will be assumed.
 - Having an up and running Subnet which uses NativeMinter precompile.
   - In this tutorial we will be using a local Subnet. Refer to
-    [this](https://docs.avax.network/subnets/create-a-local-subnet), to deploy
+    [this](/build/subnet/deploy/local-subnet.md), to deploy
     your local Subnet.
 - Basic knowledge of [Hardhat](https://hardhat.org/).
   - We will be writing our code in a Hardhat development environment. We will

@@ -50,7 +50,7 @@ don't exist on the C-Chain's HTTP API.
 For batched C-Chain requests on the public API node, the maximum number of items
 is 40. We're working on to support a larger batch size.
 
-The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](../../nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
+The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/maintain/chain-config-flags.md#api-max-blocks-per-request-int).
 
 ### Sticky Sessions
 

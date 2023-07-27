@@ -22,7 +22,7 @@ explore the platform without any risk. These testnet tokens have no value in the
 only meant for experimentation purposes within the Fuji test network. 
 
 To receive testnet tokens, users can request funds from the
-[Avalanche Faucet](/subnets/avalanche-subnet-faucet.md#using-the-faucet). 
+[Avalanche Faucet](/build/subnet/utility/avalanche-subnet-faucet.md#using-the-faucet). 
 
 ## Additional Considerations
 
