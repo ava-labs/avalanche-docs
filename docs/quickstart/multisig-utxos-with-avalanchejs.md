@@ -99,7 +99,7 @@ Make a new directory `multisig` for keeping all the project codes and move
 there. First, let's install the required dependencies.
 
 ```bash
-npm install --save avalanche dotenv
+npm install --save @avalabs/avalanchejs dotenv
 ```
 
 Now create a configuration file named `config.js` for storing all the pieces of
