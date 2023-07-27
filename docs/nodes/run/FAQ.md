@@ -1,4 +1,12 @@
-# Frequently Asked Questions
+---
+tags: [Nodes]
+description: If you experience any issues building your node, here are some common errors and possible solutions.
+sidebar_label: Common Errors
+pagination_label: Common Errors While Building a Node
+sidebar_position: 5
+---
+
+# Common Errors While Building a Node
 
 ## Introduction
 

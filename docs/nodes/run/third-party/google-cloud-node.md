@@ -1,12 +1,15 @@
 ---
-sidebar_position: 6
-description: GCP Validator Provisioning
+tags: [Nodes]
+description: Launch an Avalanche Node on Google Cloud Platform.
+sidebar_label: Google Cloud
+pagination_label: Run an Avalanche Node with Google Cloud Platform
+sidebar_position: 3
 ---
 
 # Run an Avalanche Node with Google Cloud Platform
 
 :::caution
-This document was written by a community member, some information may be out of dated.
+This document was written by a community member, some information may be outdated.
 :::
 
 ## Introduction
@@ -15,11 +18,10 @@ Google's Cloud Platform (GCP) is a scalable, trusted and reliable hosting
 platform. Google operates a significant amount of it's own global networking
 infrastructure. It's [fiber
 network](https://cloud.google.com/blog/products/networking/google-cloud-networking-in-depth-cloud-cdn)
-is **huge** and it can provide highly stable and consistent global connectivity.
-In this article we will leverage GCP to deploy a node on which Avalanche can
+can provide highly stable and consistent global connectivity.
+In this article, we will leverage GCP to deploy a node on which Avalanche can
 installed via [terraform](https://www.terraform.io/). Leveraging `terraform` may
-seem like overkill, but speaking as someone who has managed extremely large
-compute estates for over a decade I believe it will set you apart as an operator
+seem like overkill, it should set you apart as an operator
 and administrator as it will enable you greater flexibility and provide the
 basis on which you can easily build further automation.
 

@@ -1,6 +1,9 @@
 ---
-sidebar_position: 9
+tags: [Nodes]
 description: Detailed instructions for running an Avalanche node with Latitude.sh
+sidebar_label: Latitude
+pagination_label: Run an Avalanche Node with Latitude.sh
+sidebar_position: 3
 ---
 
 # Run an Avalanche Node with Latitude.sh

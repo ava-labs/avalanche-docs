@@ -1,6 +1,9 @@
 ---
-sidebar_position: 4
+tags: [Nodes]
 description: This tutorial will guide you through spinning up an Avalanche node via the one-click validator node through the AWS Marketplace. This includes subscribing to the software, launching it on EC2, connecting to the node over ssh, calling curl commands, adding the node as a validator on the Fuji network using the Avalanche Web wallet, and confirming the node is a pending validator.
+sidebar_label: AWS Marketplace
+pagination_label: Run an Avalanche Node with Amazon Web Services with one click
+sidebar_position: 1
 ---
 
 # Launch an Avalanche Validator on AWS with One Click
@@ -18,14 +21,6 @@ description: This tutorial will guide you through spinning up an Avalanche node 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
 </iframe>
-
-
-## Introduction
-
-Avalanche is an open-source platform for launching decentralized applications
-and enterprise blockchain deployments in one interoperable, highly scalable
-ecosystem. Avalanche is the first decentralized smart contracts platform built
-for the scale of global finance, with near-instant transaction finality.
 
 With the intention of enabling developers and entrepreneurs to on-ramp into the
 Avalanche ecosystem with as little friction as possible, Ava Labs recently

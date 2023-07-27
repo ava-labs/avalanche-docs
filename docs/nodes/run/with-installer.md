@@ -1,6 +1,9 @@
 ---
-sidebar_position: 1
+tags: [Nodes]
 description: Detailed instructions for running an Avalanche node using the install script.
+sidebar_label: Using the Install Script
+pagination_label: Run an Avalanche Node Using the Install Script
+sidebar_position: 1
 ---
 
 # Run an Avalanche Node Using the Install Script

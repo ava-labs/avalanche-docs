@@ -476,6 +476,17 @@
 /nodes/maintain/avalanchego-config-flags /nodes/configure/avalanchego-config-flags 301
 /nodes/maintain/chain-config-flags /nodes/configure/chain-config-flags 301
 /nodes/maintain/subnet-configs /nodes/configure/subnet-configs 301
+/nodes/build/run-avalanche-node-manually /nodes/run/node-manually 301
+/nodes/subnets/setup-dfk-node /nodes/run/subnet-node 301
+/nodes/build/set-up-an-avalanche-node-with-google-cloud-platform /nodes/run/third-party/google-cloud-node 301
+/nodes/build/set-up-an-avalanche-node-with-latitude /nodes/run/third-party/latitude-node 301
+/nodes/build/set-up-an-avalanche-node-with-microsoft-azure /nodes/run/third-party/microsoft-azure-node 301
+/nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws /nodes/run/third-party/aws-node 301
+/nodes/build/launch-an-avalanche-validator-on-aws-with-one-click /nodes/run/third-party/aws-marketplace-one-click 301
+/nodes/build/set-up-node-on-alibaba-cloud /nodes/run/third-party/aws-node/alibaba-cloud-node 301
+/nodes/build/set-up-node-on-tencent-cloud /nodes/run/third-party/aws-node/tencent-cloud-node 301
+/nodes/build/set-up-node-with-installer /nodes/run/with-installer 301
+/nodes/build/FAQ /nodes/run/FAQ 301
 
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

@@ -1,6 +1,9 @@
 ---
-sidebar_position: 5
-description: Running a validator and staking with Avalanche provides extremely competitive rewards of between 9% and 11% depending on the length you stake for. Find out more info here.
+tags: [Nodes]
+description: Running a validator and staking with Avalanche using Microsoft Azure infrastructure provides extremely competitive rewards. Find out more info here.
+sidebar_label: Microsoft Azure
+pagination_label: Run an Avalanche Node with Microsoft Azure
+sidebar_position: 2
 ---
 
 # Run an Avalanche Node with Microsoft Azure
@@ -33,7 +36,7 @@ is able to scale to millions of validators participating in consensus at once,
 offering unparalleled decentralisation.
 
 Currently the minimum amount required to stake to become a validator is 2,000
-AVAX (which can be reduced over time as price increases). Alternatively,
+AVAX. Alternatively,
 validators can also charge a small fee to enable users to delegate their stake
 with them to help towards running costs. You can use a calculator
 [here](https://vscout.io/) to see how much rewards you would earn when running a

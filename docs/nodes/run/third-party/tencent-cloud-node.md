@@ -1,6 +1,9 @@
 ---
-sidebar_position: 8
+tags: [Nodes]
 description: Detailed instructions for running an Avalanche node with Tencent Cloud
+sidebar_label: Tencent Cloud
+pagination_label: Run an Avalanche Node with Tencent Cloud
+sidebar_position: 5
 ---
 
 # Run an Avalanche Node with Tencent Cloud

@@ -1,6 +1,9 @@
 ---
-sidebar_position: 7
+tags: [Nodes]
 description: Detailed instructions for running an Avalanche node with Alibaba Cloud
+sidebar_label: Alibaba Cloud
+pagination_label: Run an Avalanche Node with Alibaba Cloud
+sidebar_position: 5
 ---
 
 # Run an Avalanche Node with Alibaba Cloud
