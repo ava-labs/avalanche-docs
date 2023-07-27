@@ -471,5 +471,8 @@
 # Docs Revamp - Tooling Tab
 /subnets/network-runner /tooling/network-runner 301
 
+# Docs Revamp - Nodes Tab
+/nodes/validate/staking /nodes/validate/what-is-staking 301
+
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301

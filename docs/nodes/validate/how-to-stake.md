@@ -1,28 +1,12 @@
 ---
-sidebar_position: 1
-description: Learn how to stake on Avalanche by validating or delegating
+tags: [Nodes]
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: How to Stake
+pagination_label: How to Stake AVAX
+sidebar_position: 2
 ---
 
-# What Is Staking?
-
-Staking is the process of locking up tokens to support a network while receiving
-a reward in return (rewards can be increased network utility, monetary
-compensation, etc.). The concept of staking was [first formally
-introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf)
-by Sunny King and Scott Nadal of Peercoin.
-
-## How Does Proof-of-Stake Work?
-
-To resist [sybil
-attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack),
-a decentralized network must require that network influence is paid with a
-scarce resource. This makes it infeasibly expensive for an attacker to gain
-enough influence over the network to compromise its security. In proof-of-work
-systems, the scarce resource is computing power. On Avalanche, the scarce
-resource is the native token,
-[AVAX](/learn/avalanche/intro.md#avax). For a node to
-[validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)
-a blockchain on Avalanche, it must stake AVAX.
+# How to Stake on Avalanche
 
 ## Staking Parameters on Avalanche
 
@@ -84,62 +68,6 @@ On Fuji Testnet, all staking parameters are the same as those on Mainnet except 
 - The minimum amount that a delegator must delegate is 1 AVAX
 - The minimum amount of time one can stake funds for validation is 24 hours
 - The minimum amount of time one can stake funds for delegation is 24 hours
-
-## Reward Formula
-
-Consider a validator which stakes a $Stake$ amount of Avax for $StakingPeriod$ seconds.
-
-Assume that at the start of the staking period there is a $Supply$ amount of Avax in the Primary Network.
-The maximum amount of Avax is $MaximumSupply$ .
-
-Then at the end of its staking period, a responsive validator
-receives a reward calculated as follows:
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
-$$
-where
-$$
-EffectiveConsumptionRate = 
-$$
-$$
-\frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
-
-Note that $StakingPeriod$ is the staker's entire staking period, not just the
-staker's uptime, that is the aggregated time during which the staker has been
-responsive. The uptime comes into play only to decide whether a staker should be
-rewarded; to calculate the actual reward, only the staking period duration is
-taken into account.
-
-$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and
-$MaxConsumptionRate$.
-$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
-
-The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
-
-A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
-The reward is:
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
 
 ## Validators
 
@@ -229,6 +157,64 @@ should be in "cold" addresses whose private key is not on any computer.
 
 Follow this [tutorial](../maintain/setting-up-node-monitoring.md) to learn how
 to monitor your node's uptime, general health, etc.
+
+### Reward Formula
+
+Consider a validator which stakes a $Stake$ amount of Avax for $StakingPeriod$ seconds.
+
+Assume that at the start of the staking period there is a $Supply$ amount of Avax in the Primary Network.
+The maximum amount of Avax is $MaximumSupply$ .
+
+Then at the end of its staking period, a responsive validator
+receives a reward calculated as follows:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
+$$
+where
+$$
+EffectiveConsumptionRate = 
+$$
+$$
+\frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+Note that $StakingPeriod$ is the staker's entire staking period, not just the
+staker's uptime, that is the aggregated time during which the staker has been
+responsive. The uptime comes into play only to decide whether a staker should be
+rewarded; to calculate the actual reward, only the staking period duration is
+taken into account.
+
+$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and
+$MaxConsumptionRate$.
+$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
+
+A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
+The reward is:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+
 
 ## Delegators
 

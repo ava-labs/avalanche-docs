@@ -1,8 +1,11 @@
 ---
-sidebar_position: 1
+tags: [Nodes]
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: 🔗 Quick Links
+pagination_label: 🔗 Nodes Quick Links
 ---
 
-# Nodes Overview
+# 🔗 Nodes Quick Links
 
 This section provides documents on how to build and maintain an AvalancheGo
 node, and then validate the Avalanche network using an AvalancheGo node.

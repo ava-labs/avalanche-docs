@@ -1,4 +1,8 @@
 ---
+tags: [Nodes]
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: Node ➡️ Validator
+pagination_label: Add a Node to the Validator Set
 sidebar_position: 3
 ---
 
@@ -7,9 +11,9 @@ sidebar_position: 3
 ## Introduction
 
 The [Primary
-Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network)
-is inherent to the Avalanche platform and validates Avalanche’s [built-in
-blockchains](/learn/avalanche/avalanche-platform.md). In this
+Network](/learn/avalanche/avalanche-platform.md)
+is inherent to the Avalanche platform and validates Avalanche’s built-in
+blockchains. In this
 tutorial, we’ll add a node to the Primary Network on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes
