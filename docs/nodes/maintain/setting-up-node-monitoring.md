@@ -1,12 +1,16 @@
 ---
-sidebar_position: 3
+tags: [Nodes]
+description: This tutorial demonstrates how to set up infrastructure to monitor an instance of AvalancheGo.
+sidebar_label: Monitoring
+pagination_label: Monitor an Avalanche Node
+sidebar_position: 2
 ---
 
 # Monitor an Avalanche Node
 
 ## Introduction
 
-This tutorial will show how to set up infrastructure to monitor an instance of
+This tutorial demostrates how to set up infrastructure to monitor an instance of
 [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
 - [Prometheus](https://prometheus.io/) to gather and store data

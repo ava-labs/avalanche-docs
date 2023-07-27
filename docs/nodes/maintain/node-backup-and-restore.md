@@ -1,4 +1,8 @@
 ---
+tags: [Nodes]
+description: Should your machine ever have a failure due to either hardware or software issues, it's best to be prepared for such a situation by making a backup.
+sidebar_label: Backup and Restore
+pagination_label: Node Backup and Restore
 sidebar_position: 1
 ---
 

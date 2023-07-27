@@ -1,5 +1,9 @@
 ---
-sidebar_position: 2
+tags: [Nodes]
+description: This tutorial demonstrates how to set up infrastructure to monitor an instance of AvalancheGo.
+sidebar_label: Upgrade
+pagination_label: Upgrade Your AvalancheGo Node
+sidebar_position: 3
 ---
 
 # Upgrade Your AvalancheGo Node

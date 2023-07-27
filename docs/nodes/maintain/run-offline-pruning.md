@@ -1,6 +1,9 @@
 ---
-sidebar_position: 7
+tags: [Nodes]
 description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
+sidebar_label: Reduce Disk Usage
+pagination_label: "Reduce a Node's Disk Space: Run C-Chain Offline Pruning"
+sidebar_position: 4
 ---
 
 # Run C-Chain Offline Pruning
