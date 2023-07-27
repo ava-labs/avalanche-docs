@@ -1,6 +1,6 @@
 ---
 tags: [Nodes]
-description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+description: This section provides documents on how to stake AVAX on the Avalanche Network. 
 sidebar_label: How to Stake
 pagination_label: How to Stake AVAX
 sidebar_position: 2

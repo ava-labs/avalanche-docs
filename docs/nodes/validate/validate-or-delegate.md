@@ -1,6 +1,6 @@
 ---
 tags: [Nodes]
-description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+description: This section details the difference between staking and delegating on Avalanche.
 sidebar_label: Validate vs. Delegate
 pagination_label: Validate vs. Delegate
 sidebar_position: 1
