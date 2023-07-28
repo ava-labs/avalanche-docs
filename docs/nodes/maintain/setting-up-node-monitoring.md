@@ -10,7 +10,7 @@ sidebar_position: 2
 
 ## Introduction
 
-This tutorial demostrates how to set up infrastructure to monitor an instance of
+This tutorial demonstrates how to set up infrastructure to monitor an instance of
 [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
 - [Prometheus](https://prometheus.io/) to gather and store data

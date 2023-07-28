@@ -23,7 +23,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Google Cloud Platform**](/nodes/run/third-party/google-cloud-node.md)                      | Create a node that runs on Google GCP       |
 | [**Alibaba Cloud**](/nodes/run/third-party/alibaba-cloud-node.md)     | Create a node that runs on Alibaba Cloud       |
 | [**Tencent Cloud**](/nodes/run/third-party/tencent-cloud-node.md)     | Create a node that runs on Tencent Cloud       |
-| [**Latitude**](/nodes/run/third-party/latitude-node.md)     | Create a node that runs on Tencent Cloud       |
+| [**Latitude**](/nodes/run/third-party/latitude-node.md)     | Create a node that runs on Latitude.sh      |
 
 
 |    Configure                                                                         |                                                             |
@@ -36,7 +36,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 |    Validate                                                  |                                                                                        |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | [**What is Staking?**](/nodes/validate/what-is-staking.md)        | Explains the concept of staking                                                         |
-| [**Key Differences Between Validation and Delegration**](/nodes/validate/validate-or-delegate.md)        | This section details the difference between staking and delegating on Avalanche                                                      |
+| [**Key Differences Between Validation and Delegation**](/nodes/validate/validate-or-delegate.md)        | This section details the difference between staking and delegating on Avalanche                                                      |
 | [**How to Stake AVAX**](/nodes/validate/how-to-stake.md)        | This section provides documents on how to stake AVAX on the Avalanche Network
 | [**Add a Node as a Validator**](nodes/validate/add-a-validator.md) | Add a node as a validator to the [Primary Network](/learn/avalanche/avalanche-platform.md) |
 
