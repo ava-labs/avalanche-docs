@@ -433,7 +433,6 @@
 /subnets/troubleshoot-deployments /build/subnet/info/troubleshoot-subnet 301
 /subnets/case-study-wagmi-upgrade /build/subnet/info/wagmi 301
 /subnets/wagmi /build/subnet/info/wagmi 301
-/subnets/reference-cli-commands /build/subnet/info/subnet-cli-commands 301
 
 
 #  07/21/2023 - Docs Revamp - Build/Dapps Tab
@@ -470,6 +469,7 @@
 
 # Docs Revamp - Tooling Tab
 /subnets/network-runner /tooling/network-runner 301
+/subnets/reference-cli-commands /tooling/avalanche-cli 301
 
 # Docs Revamp - Nodes Tab
 /nodes/validate/staking /nodes/validate/what-is-staking 301
