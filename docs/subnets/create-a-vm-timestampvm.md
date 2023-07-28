@@ -1232,6 +1232,12 @@ This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encode
 for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array
 and encoded in CB58. 
 
+:::note The name of the VM binary is also its static ID and should not be changed manually.
+Changing the name of the VM binary will result in AvalancheGo failing to start the VM.
+To reference a VM by another name, define a VM alias as described below.
+
+:::
+
 ### VM Aliases
 
 Each VM has a predefined, static ID. For instance, the default ID of the TimestampVM is:
