@@ -176,5 +176,5 @@ For example, you could deploy the WAGMI Subnet locally.
 
 
 For a complete description of options, flags, and the command,
-visit the [command reference](/build/subnet/info/subnet-cli-commands.md#subnet-import).
+visit the [command reference](/tooling/avalanche-cli.md#subnet-import).
 

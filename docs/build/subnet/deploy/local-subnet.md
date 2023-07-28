@@ -84,7 +84,7 @@ Currency Symbol:  TUTORIAL
 You can use the deployment details to connect to and interact with your Subnet.
 
 To manage the newly deployed local Avalanche network, see
-[the `avalanche network` command tree](/build/subnet/info/subnet-cli-commands.md#network).
+[the `avalanche network` command tree](/tooling/avalanche-cli.md#network).
 
 ### Deploying Multiple Subnets
 

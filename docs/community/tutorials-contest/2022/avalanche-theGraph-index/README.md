@@ -130,7 +130,7 @@ This makes the `avalanche` command available globally. For more information
 about
 [environment-variables](https://apple.stackexchange.com/questions/106778/how-do-i-set-environment-variables-on-os-x)
 and
-[Avalanche-CLI commands](/build/subnet/info/subnet-cli-commands.md)
+[Avalanche-CLI commands](/tooling/avalanche-cli.md)
 visit the respective links.
 
 ### Initialising a Default Subnet

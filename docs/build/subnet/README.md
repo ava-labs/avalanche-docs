@@ -48,6 +48,6 @@ for a broad overview.
 
 | More      |  |
 | :------------------------------------------------- |
-| [**Avalanche-CLI Subnet Commands**](build/subnet/info/subnet-cli-commands.md) |  
+| [**Avalanche-CLI Subnet Commands**](/tooling/avalanche-cli.md) |  
 | [**Case Study: WAGMI Subnet**](build/subnet/info/wagmi.md) |  
 | [**Troubleshooting Deployments**](build/subnet/info/troubleshoot-subnet.md) |  
