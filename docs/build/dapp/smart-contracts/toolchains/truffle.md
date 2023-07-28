@@ -19,7 +19,7 @@ Avalanche's C-Chain, which is an instance of the EVM.
 ## Requirements
 
 You've completed [Run an Avalanche
-Node](/nodes/build/run-avalanche-node-manually.md) and are familiar with
+Node](/nodes/run/node-manually.md) and are familiar with
 [Avalanche's
 architecture](/learn/avalanche/avalanche-platform.md). You've also
 performed a cross-chain swap via this [this
@@ -307,7 +307,7 @@ etc... However this API is disabled by default. It can be activated with
 support activating this API. So if you want to use these features you need to
 run your own network manually with `internal-private-personal` API enabled via
 the `eth-apis` flag. See and
-[C-Chain Configs](/nodes/maintain/chain-config-flags.md#c-chain-configs).
+[C-Chain Configs](/nodes/configure/chain-config-flags.md#c-chain-configs).
 
 ## Run Migrations
 

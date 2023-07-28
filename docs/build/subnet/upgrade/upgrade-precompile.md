@@ -431,12 +431,12 @@ To install the upgrade file on your validator:
     ]
 }
 
-   *************************************************************************************************************
-   * Upgrades are tricky. The syntactic correctness of the upgrade file is important.                          *
-   * The sequence of upgrades must be strictly observed.                                                       *
-   * Make sure you understand https://docs.avax.network/nodes/maintain/chain-config-flags#subnet-chain-configs *
-   * before applying upgrades manually.                                                                        *
-   *************************************************************************************************************
+   ******************************************************************************************************************
+   * Upgrades are tricky. The syntactic correctness of the upgrade file is important.                               *
+   * The sequence of upgrades must be strictly observed.                                                            *
+   * Make sure you understand https://docs.avax.network/nodes/configure/chain-config-flags.md#subnet-chain-configs  *
+   * before applying upgrades manually.                                                                             *
+   ******************************************************************************************************************
 ```
 
 The instructions also show the content of your current upgrade file, so you can just 

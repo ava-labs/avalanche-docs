@@ -35,7 +35,7 @@ our [Discord](https://chat.avalabs.org/) to ask questions.
 ## Requirements
 
 You've completed [Run an Avalanche
-Node](../build/run-avalanche-node-manually.md) and are familiar with
+Node](/nodes/run/node-manually.md) and are familiar with
 [Avalanche's
 architecture](/learn/avalanche/avalanche-platform.md). In this
 tutorial, we use [AvalancheJS](/apis/avalanchejs/README.md) and
@@ -84,7 +84,7 @@ Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose
 `Add Validator` under the `Validate` section.
 
 Fill out the staking parameters. They are explained in more detail in [this
-doc](../validate/staking.md). When you’ve filled in all the staking parameters
+doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters
 and double-checked them, click `Confirm`. Make sure the staking period is at
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
 least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
@@ -169,7 +169,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 
 #### Network Setting
 
-The following settings work when using a local node started with [`--network-id=fuji`](/nodes/maintain/avalanchego-config-flags.md#network-id):
+The following settings work when using a local node started with [`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
 
 ```js
 const ip: string = "localhost"
@@ -454,7 +454,7 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](/nodes/maintain/avalanchego-config-flags.md#network-id) or
+  Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
   server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.

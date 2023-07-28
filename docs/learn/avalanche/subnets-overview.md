@@ -54,7 +54,7 @@ _Different blockchain-based applications may require validators to have certain
 properties such as large amounts of RAM or CPU power._ 
 
 - A Subnet could require that validators
-meet certain [hardware requirements](/nodes/build/run-avalanche-node-manually.md#requirements) so
+meet certain [hardware requirements](/nodes/run/node-manually.md#requirements) so
 that the application doesn’t suffer from low performance due to slow validators.
 
 ### Launch a Network Designed With Compliance In Mind
@@ -74,7 +74,7 @@ _Subnets are ideal for organizations interested in keeping their information pri
 
 - Institutions conscious of their stakeholders' privacy can create a private Subnet where the
 contents of the blockchains would be visible only to a set of pre-approved validators. 
-Define this at creation with a [single parameter](/nodes/maintain/subnet-configs.md#private-subnet).
+Define this at creation with a [single parameter](/nodes/configure/subnet-configs.md#private-subnet).
 
 ### Validator Sovereignty
 

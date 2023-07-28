@@ -12,7 +12,7 @@ All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a
 special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific
-configuration file. See [here](/nodes/maintain/chain-config-flags.md) for detailed explanation.
+configuration file. See [here](/nodes/configure/chain-config-flags.md) for detailed explanation.
 
 A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
 customized by utilizing one or more of the following methods:
@@ -26,11 +26,11 @@ customized by utilizing one or more of the following methods:
 
 A Subnet can customized by setting parameters for the following:
 
-- [Validator-only communication to create a private Subnet](/nodes/maintain/subnet-configs.md#validatoronly-bool)
-- [Consensus](/nodes/maintain/subnet-configs.md#consensus-parameters)
-- [Gossip](/nodes/maintain/subnet-configs.md#gossip-configs)
+- [Validator-only communication to create a private Subnet](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Consensus](/nodes/configure/subnet-configs.md#consensus-parameters)
+- [Gossip](/nodes/configure/subnet-configs.md#gossip-configs)
 
-See [here](/nodes/maintain/subnet-configs.md) for more info.
+See [here](/nodes/configure/subnet-configs.md) for more info.
 
 ## Genesis
 
@@ -1058,14 +1058,14 @@ See every precompile initial configuration in their relevant `Initial Configurat
 
 ## AvalancheGo Chain Configs
 
-As described in [this doc](/nodes/maintain/chain-config-flags.md#subnet-chain-configs), each blockchain
+As described in [this doc](/nodes/configure/chain-config-flags.md#subnet-chain-configs), each blockchain
 of Subnets can have its own custom configuration. If a Subnet's ChainID is
 `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 For blockchains created by or forked from Subnet-EVM, most
-[C-Chain configs](/nodes/maintain/chain-config-flags.md#c-chain-configs) are applicable except
-[Avalanche Specific APIs](/nodes/maintain/chain-config-flags.md#enabling-avalanche-specific-apis).
+[C-Chain configs](/nodes/configure/chain-config-flags.md#c-chain-configs) are applicable except
+[Avalanche Specific APIs](/nodes/configure/chain-config-flags.md#enabling-avalanche-specific-apis).
 
 ### Priority Regossip
 
@@ -1075,7 +1075,7 @@ a block after `priority-regossip-frequency` (defaults to `1m`). By default, up t
 
 Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of
 important addresses (like bridge relayers). To do so, you'll need to update your
-[chain config](/nodes/maintain/chain-config-flags.md#subnet-chain-configs) with the following:
+[chain config](/nodes/configure/chain-config-flags.md#subnet-chain-configs) with the following:
 
 ```json
 {

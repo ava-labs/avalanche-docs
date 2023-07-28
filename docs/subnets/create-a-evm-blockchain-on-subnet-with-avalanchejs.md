@@ -63,7 +63,7 @@ You can find more about SSH and how to use it
 
 Running the below command will create an `avalanchego` binary inside the `build/` directory and will
 install the Coreth `evm` binary inside the `build/plugins` directory. For more information on
-running a node, please refer [this](/nodes/build/run-avalanche-node-manually.md).
+running a node, please refer [this](/nodes/run/node-manually.md).
 
 ```bash
 ./scripts/build.sh

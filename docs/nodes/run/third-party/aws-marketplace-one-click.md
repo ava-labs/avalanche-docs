@@ -515,8 +515,8 @@ curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
 ## Mainnet
 
 All of these steps can be applied to Mainnet. However, the minimum required Avax 
-token amounts to become a validator is 2000 on the Mainnet. For more information, 
-please read [this doc](../validate/staking.md#mainnet).
+token amounts to become a validator is 2,000 on the Mainnet. For more information, 
+please read [this doc](/nodes/validate/how-to-stake.md#validators).
 
 ## Maintenance
 

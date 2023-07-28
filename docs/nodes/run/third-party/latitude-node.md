@@ -43,7 +43,7 @@ You will need to install the `avalanche node installer script` directly in the s
 :::
 
 After gaining access, we’ll need to set up our Avalanche node. To do this, follow the instructions
-here to install and run your node [Set Up Avalanche Node With Installer](https://docs.avax.network/nodes/build/set-up-node-with-installer).
+here to install and run your node [Set Up Avalanche Node With Installer](/nodes/run/with-installer).
 
 Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few
 hours. To check if it's done, you can issue an API call using `curl`.

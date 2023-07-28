@@ -13,7 +13,7 @@ chains in the specified Subnet.
 
 AvalancheGo looks for files specified with `{subnetID}.json` under
 `--subnet-config-dir` as documented
-[here](./avalanchego-config-flags.md#subnet-configs).
+[here](/nodes/configure/avalanchego-config-flags.md#subnet-configs).
 
 Here is an example of Subnet config file:
 
@@ -80,7 +80,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are
 different from their matching `CLI` keys. These parameters must be grouped under
 `consensusParameters` key. The consensus parameters of a Subnet default to the
 same values used for the Primary Network, which are given [CLI Snow
-Parameters](./avalanchego-config-flags.md#snow-parameters).
+Parameters](/nodes/configure/avalanchego-config-flags.md#snow-parameters).
 
 | CLI Key                             | JSON Key                 |
 | :---------------------------------- | :----------------------- |
@@ -104,7 +104,7 @@ mempools are not gossiped to non-validators
 your Subnet and share mempool with non-validators as well. JSON keys of these
 parameters are different from their matching `CLI` keys. These parameters
 default to the same values used for the Primary Network. For more information
-see [CLI Gossip Configs](./avalanchego-config-flags.md#gossiping).
+see [CLI Gossip Configs](/nodes/configure/avalanchego-config-flags.md#gossiping).
 
 | CLI Key                                                 | JSON Key                               |
 | :------------------------------------------------------ | :------------------------------------- |

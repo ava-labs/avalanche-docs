@@ -118,8 +118,8 @@ the machine. You can use account password, but the secure and recommended way is
 to use the SSH keys. The procedure for acquiring and setting up SSH keys is
 highly dependent on your cloud provider and machine configuration. You can refer
 to our [Amazon Web
-Services](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-and [Microsoft Azure](../build/set-up-an-avalanche-node-with-microsoft-azure.md)
+Services](/nodes/run/third-party/aws-node.md)
+and [Microsoft Azure](/nodes/run/third-party/microsoft-azure-node.md)
 setup guides for those providers. Other providers will have similar procedures.
 
 When you have means of remote login into the machine, you can copy the files
@@ -148,7 +148,7 @@ To restore your node from a backup, we need to do the reverse: restore
 node.
 
 First, we need to do the usual
-[installation](../build/set-up-node-with-installer.md) of the node. This will
+[installation](/nodes/run/with-installer.md) of the node. This will
 create a new NodeID, which we need to replace. When the node is installed
 correctly, log into the machine where the node is running and stop it:
 
@@ -262,7 +262,7 @@ _This tutorial assumes you have already completed "Database Backup" and have
 a backup at ~/avalanche_db_backup.zip._
 
 First, we need to do the usual
-[installation](../build/set-up-node-with-installer.md) of the node. When the
+[installation](/nodes/run/with-installer.md) of the node. When the
 node is installed correctly, log into the machine where the node is running and
 stop it:
 

@@ -10,7 +10,7 @@ pagination_label: C-Chain API
 :::info
 Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to
 Avalanche’s view of networkID and chainID and are purely internal to the
-[C-Chain](/learn/avalanche/avalanche-platform.md#contract-chain-c-chain). On
+[C-Chain](/learn/avalanche/avalanche-platform.md#c-chain). On
 Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and
 `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and
 `eth_chainId` methods.
@@ -905,7 +905,7 @@ curl -X POST --data '{
 ## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
-with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean).
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/configure/chain-config-flags.md#coreth-admin-api-enabled-boolean).
 
 ### Endpoint
 

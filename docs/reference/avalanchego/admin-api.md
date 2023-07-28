@@ -11,7 +11,7 @@ This API can be used for measuring node health and debugging.
 
 :::info
 The Admin API is disabled by default for security reasons. To run a node with the Admin API
-enabled, use [config flag `--api-admin-enabled=true`](/nodes/maintain/avalanchego-config-flags#--api-admin-enabled-boolean).
+enabled, use [config flag `--api-admin-enabled=true`](/nodes/configure/avalanchego-config-flags.md#--api-admin-enabled-boolean).
 
 This API set is for a specific node, it is unavailable on the [public server](/apis/avalanchego/public-api-server).
 
@@ -75,7 +75,7 @@ Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to
 
 Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
 
-:::note Aliasing a chain can also be done via the [Node API](https://docs.avax.network/nodes/maintain/avalanchego-config-flags#--chain-aliases-file-string).
+:::note Aliasing a chain can also be done via the [Node API](https://docs.avax.network/nodes/configure/avalanchego-config-flags.md#--chain-aliases-file-string).
 Note that the alias is set for each chain on each node individually. In a multi-node Subnet, the
 same alias should be configured on each node to use an alias across a Subnet successfully. Setting
 an alias for a chain on one node does not register that alias with other nodes automatically.

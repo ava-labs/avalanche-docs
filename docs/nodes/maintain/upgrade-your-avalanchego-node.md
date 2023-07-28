@@ -30,7 +30,7 @@ node, you should back up those too.
 ## Node Installed Using the Installer Script
 
 If you installed your node using the [installer
-script](../build/set-up-node-with-installer.md), to upgrade your node, just run
+script](/nodes/run/with-installer.md), to upgrade your node, just run
 the installer script again.
 
 ```text

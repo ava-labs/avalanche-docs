@@ -82,7 +82,7 @@ identity and state it had before. That being said, for your node's security,
 back up `staker.crt` and `staker.key` files, found in
 `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those
 files to recreate your node on a different computer if you ever need to. Check
-out this [tutorial](../maintain/node-backup-and-restore.md) for backup and
+out this [tutorial](/nodes/maintain/node-backup-and-restore.md) for backup and
 restore procedure.
 
 ### Networking Considerations
@@ -370,7 +370,7 @@ options and their usage:
 - `rpc` - use `any` or `local` argument to select any or local network interface
   to be used to listen for RPC calls
 - `version` - install a specific node version, instead of the latest. See
-  [here](set-up-node-with-installer.md#using-a-previous-version) for usage.
+  [here](/nodes/run/with-installer.md#using-a-previous-version) for usage.
 
 Please note that configuring `index` and `archival` options on an existing node
 will require a fresh bootstrap to recreate the database.
@@ -422,7 +422,7 @@ To reinstall the node using node version 1.7.10 and use specific IP and local RP
 File that configures node operation is `~/.avalanchego/configs/node.json`. You
 can edit it to add or change configuration options. The documentation of
 configuration options can be found
-[here](../maintain/avalanchego-config-flags.md). Configuration may look like
+[here](/nodes/configure/avalanchego-config-flags.md). Configuration may look like
 this:
 
 ```json
@@ -439,7 +439,7 @@ like `--public-ip-resolution-service=opendns` but as in the example above.
 Script also creates an empty C-Chain config file, located at
 `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can
 configure the C-Chain, as described in detail
-[here](../maintain/chain-config-flags.md).
+[here](/nodes/configure/chain-config-flags.md).
 
 ## Using a Previous Version
 
@@ -539,14 +539,14 @@ forwarding. If you're on a cloud service provider, you're good to go.
 
 Now you can [interact with your
 node](/reference/standards/guides/issuing-api-calls.md), [stake your
-tokens](../validate/staking.md), or level up your installation by setting up
-[node monitoring](../maintain/setting-up-node-monitoring.md) to get a better
+tokens](/nodes/validate/what-is-staking.md), or level up your installation by setting up
+[node monitoring](/nodes/maintain/setting-up-node-monitoring.md) to get a better
 insight into what your node is doing. Also, you might want to use our [Postman
 Collection](/apis/avalanchego/postman-avalanche-collection.md) to more
 easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back
-up](../maintain/node-backup-and-restore.md) important files in case you ever
+up](/nodes/maintain/node-backup-and-restore.md) important files in case you ever
 need to restore your node to a different machine.
 
 If you have any questions, or need help, feel free to contact us on our

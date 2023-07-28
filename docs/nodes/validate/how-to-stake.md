@@ -155,7 +155,7 @@ should be in "cold" addresses whose private key is not on any computer.
 
 #### Monitoring
 
-Follow this [tutorial](../maintain/setting-up-node-monitoring.md) to learn how
+Follow this [tutorial](/nodes/maintain/setting-up-node-monitoring.md) to learn how
 to monitor your node's uptime, general health, etc.
 
 ### Reward Formula

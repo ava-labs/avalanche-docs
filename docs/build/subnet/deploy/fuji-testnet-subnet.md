@@ -49,13 +49,13 @@ most other Ethereum client features.
 ## Fuji Testnet
 
 For this tutorial, it's recommended that you follow
-[Run an Avalanche Node Manually](/nodes/build/run-avalanche-node-manually.md#connect-to-fuji-testnet)
+[Run an Avalanche Node Manually](/nodes/run/node-manually.md#connect-to-fuji-testnet)
 and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
 Also it's worth pointing out that
-[it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/staking.md#fuji-testnet)
+[it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md#fuji-testnet)
 and you can get the test token from the [faucet](https://faucet.avax.network/).
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
@@ -86,7 +86,7 @@ The user is going to need this ID in the later section when calling [addValidato
 :::info
 
 With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch.
-You can use [State-Sync](/nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean)
+You can use [State-Sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean)
 to shorten the time for bootstrapping.
 
 :::

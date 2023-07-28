@@ -350,7 +350,7 @@ It's also possible to provide individual node config parameters:
 ```
 
 `--node-config` allows to specify specific AvalancheGo config parameters to the new node.
-See [here](/nodes/maintain/avalanchego-config-flags.md) for the reference of supported flags.
+See [here](/nodes/configure/avalanchego-config-flags.md) for the reference of supported flags.
 
 **Note**: The following parameters will be _ignored_ if set in `--node-config`, because the network
 runner needs to set its own in order to function properly: `--log-dir` `--db-dir`

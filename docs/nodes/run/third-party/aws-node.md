@@ -268,7 +268,7 @@ ssh ubuntu@PUBLICIP
 
 You're logged into the EC2 instance again. Now we’ll need to set up our
 Avalanche node. To do this, follow the [Set Up Avalanche Node With
-Installer](../build/set-up-node-with-installer.md) tutorial which automates the
+Installer](/nodes/run/with-installer.md) tutorial which automates the
 installation process. You will need the `PUBLICIP` we set up earlier.
 
 Your AvalancheGo node should now be running and in the process of bootstrapping,
@@ -384,7 +384,7 @@ If you need to increase the volume size, follow these instructions from AWS:
 
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We
 recommend setting up [node monitoring
-](../maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also
+](/nodes/maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also
 recommend setting up AWS billing alerts so you're not surprised when the bill
 arrives. If you have feedback on this tutorial, or anything else, send us a
 message on [Discord](https://chat.avalabs.org).

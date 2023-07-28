@@ -14,7 +14,7 @@ corresponding chains on initialization.
 
 AvalancheGo looks for these files in the directory specified by
 `--chain-config-dir` AvalancheGo flag, as documented
-[here](avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value
+[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value
 defaults to `$HOME/.avalanchego/configs/chains`. This directory can have
 sub-directories whose names are chain IDs or chain aliases. Each sub-directory
 contains the configuration for the chain specified in the directory name. Each
@@ -52,7 +52,7 @@ name is another alias for the chain
 Alternatively, for some setups it might be more convenient to provide config
 entirely via the command line. For that, you can use AvalancheGo
 `--chain-config-content` flag, as documented
-[here](avalanchego-config-flags.md#--chain-config-content-string).
+[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
 
 It is not required to provide these custom configurations. If they are not
 provided, a VM-specific default config will be used. And the values of these
@@ -687,7 +687,7 @@ by deleting old trie nodes. **While performing offline pruning, your node will
 not be able to process blocks and will be considered offline.** While ongoing,
 the pruning process consumes a small amount of additional disk space (for
 deletion markers and the bloom filter). For more information see
-[here.](../maintain/run-offline-pruning.md#disk-space-considerations)
+[here.](/nodes/maintain/run-offline-pruning.md#disk-space-considerations)
 
 Since offline pruning deletes old state data, this should not be run on nodes
 that need to support archival API requests.
