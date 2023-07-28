@@ -41,7 +41,7 @@ function Home() {
               />
 
               <Card
-                to="nodes"
+                to="/nodes/validate/add-a-validator"
                 header={{
                   label: "😎 Become a Validator",
                 }}
