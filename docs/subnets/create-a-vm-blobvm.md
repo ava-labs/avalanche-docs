@@ -6,6 +6,7 @@ This is part of a series of tutorials for building a Virtual Machine (VM):
 - [How to Build a Simple Golang VM](./create-a-vm-timestampvm.md)
 - How to Build a Complex Golang VM (this article)
 - [How to Build a Simple Rust VM](./create-a-simple-rust-vm.md)
+- [How to Build a Simple VM From Scratch](./create-a-simple-vm-from-scratch.md)
 
 
 ## Introduction
