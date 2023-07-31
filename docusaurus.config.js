@@ -117,14 +117,14 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "tooling",
-            label: "Tooling",
+            sidebarId: "nodes",
+            label: "Nodes",
           },
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "nodes",
-            label: "Nodes",
+            sidebarId: "tooling",
+            label: "Tooling",
           },
           {
             type: "docSidebar",
