@@ -12,7 +12,7 @@ instance](https://github.com/ava-labs/avalanchego/releases/), including environm
 allowing developers to quickly issue commands to your node and see the response, without having to 
 copy and paste long and complicated `curl` commands.
 
-[Link to Github](https://github.com/ava-labs/avalanche-postman-collection/)
+[Link to GitHub](https://github.com/ava-labs/avalanche-postman-collection/)
 
 ## What Is Postman?
 

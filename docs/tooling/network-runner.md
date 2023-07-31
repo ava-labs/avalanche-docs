@@ -10,7 +10,7 @@ pagination_label: Avalanche Network Runner
 The Avalanche Network Runner **(ANR)** allows a user to define, create and interact with a network
 of Avalanche nodes. It can be used for development and testing.
 
-[Link to Github](https://github.com/ava-labs/avalanche-network-runner)
+[Link to GitHub](https://github.com/ava-labs/avalanche-network-runner)
 
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on
 the functionality of a node, but needs to consider the dynamics of the network, the interaction of
