@@ -1,11 +1,11 @@
 ---
-tags: [Build, Subnets, Tooling]
-description: A reference for tips to resolve common issues while deploying Subnets on Avalanche.
-pagination_label: Avalanche-CLI 
-sidebar_position: 0
+tags: [Tooling, Avalanche CLI]
+description: Avalanche CLI is a command-line tool that gives developers access to everything Avalanche. This release specializes in helping developers build and test Subnets. 
+pagination_label: Avalanche CLI
+sidebar_postion: 0
 ---
 
-# Avalanche-CLI 
+# Avalanche CLI 
 
 Avalanche-CLI is a command-line tool that gives developers access to
 everything Avalanche. This release specializes in helping developers

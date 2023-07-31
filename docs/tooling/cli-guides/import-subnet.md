@@ -1,22 +1,22 @@
-# How to Import a Subnet into Avalanche-CLI
+---
+tags: [Tooling, Avalanche CLI]
+description: This guide demonstrates the process of importing a Subnet to the Avalanche CLI to enable better management of the Subnet's configuration. This how-to uses the WAGMI Subnet deployed on Fuji Testnet as the example Subnet. 
+pagination_label: Avalanche CLI
+sidebar_label: Import a Subnet
+sidebar_position: 2
+---
+
+# How to Import a Subnet into Avalanche CLI
 
 ## Context
 
-The most probable reason why someone would want to do this,
-is if they already deployed a Subnet with Subnet-CLI either to Fuji or Mainnet,
-and now would like to use Avalanche-CLI to manage the Subnet.
+In previous instances, Subnets might have been manually created through transaction issuance to node
+APIs, whether it was done using a local node or public API nodes. However, the current focus is on 
+integrating Avalanche-CLI. 
 
-Refer to the [installation guide](/subnets/install-avalanche-cli.md) for instruction about installing
-Avalanche-CLI.
-
-Because Subnet-CLI is now deprecated, you can use this tutorial to migrate to Avalanche-CLI.
-
-
-Similarly, you might have created a Subnet "manually" by issuing transactions
-to node APIs, either a local node or public API nodes, with no help of any tool so far,
-but would now target Avalanche-CLI integration.
-
-For this How-To, you import the WAGMI Subnet from Fuji.
+To achieve this integration, this guide demonstrates the process 
+of importing a Subnet to the Avalanche CLI to enable better management of the Subnet's configuration.
+This how-to uses the WAGMI Subnet deployed on Fuji Testnet as the example Subnet.
 
 
 ## Requirements
