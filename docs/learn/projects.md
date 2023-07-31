@@ -40,12 +40,12 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-cli)
 
-Avalanche CLI is a command line tool that gives developers access to everything Avalanche.
+Avalanche-CLI is a command line tool that gives developers access to everything Avalanche.
 This release specializes in helping developers develop and test Subnets.
 
 Related docs
 
-- [Avalanche-CLI](/subnets/install-avalanche-cli.md)
+- [Avalanche-CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
 ## AvalancheJS
 
@@ -55,7 +55,7 @@ The Avalanche platform JavaScript library.
 
 Related docs
 
-- [AvalancheJS](/apis/avalanchejs/README.md)
+- [AvalancheJS](/tooling/avalanchejs-overview.md)
 
 ## Avalanche Wallet
 

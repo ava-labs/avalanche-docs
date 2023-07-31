@@ -72,7 +72,7 @@ accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
 When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that
 will take care of node setup and configuration, we recommend using the [installer
-script](/nodes/build/set-up-node-with-installer.md) to set up the nodes. It will abstract most of
+script](/nodes/run/with-installer.md) to set up the nodes. It will abstract most of
 the setup process for you, set up the node as a system service and will enable easy node upgrades.
 
 #### Cloud Providers
@@ -80,9 +80,9 @@ the setup process for you, set up the node as a system service and will enable e
 There are a number of different cloud providers. We have documents that show how to set up a node on
 the most popular ones:
 
-- [Amazon Web Services](/nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-- [Azure](/nodes/build/set-up-an-avalanche-node-with-microsoft-azure.md)
-- [Google Cloud Platform](/nodes/build/set-up-an-avalanche-node-with-google-cloud-platform.md)
+- [Amazon Web Services](/nodes/run/third-party/aws-node.md)
+- [Azure](/nodes/run/third-party/microsoft-azure-node.md)
+- [Google Cloud Platform](/nodes/run/third-party/google-cloud-node.md)
 
 There is a whole range of other cloud providers that may offer lower prices or better deals for your
 particular needs, so it makes sense to shop around.
@@ -119,7 +119,7 @@ week, but there are ways to shorten that process, depending on your circumstance
 #### State Sync
 
 If the nodes you will be running as validators don't need to have the full transaction history, then
-you can use [state sync](/nodes/maintain/chain-config-flags.md#state-sync-enabled-boolean). With
+you can use [state sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). With
 this flag enabled, instead of replaying the whole history to get to the current state, nodes simply
 download only the current state from other network peers, shortening the bootstrap process from
 multiple days to a couple of hours. If the nodes will be used for Subnet validation exclusively, you

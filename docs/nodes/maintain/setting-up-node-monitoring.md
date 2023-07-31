@@ -1,12 +1,16 @@
 ---
-sidebar_position: 3
+tags: [Nodes]
+description: This tutorial demonstrates how to set up infrastructure to monitor an instance of AvalancheGo.
+sidebar_label: Monitoring
+pagination_label: Monitor an Avalanche Node
+sidebar_position: 2
 ---
 
 # Monitor an Avalanche Node
 
 ## Introduction
 
-This tutorial will show how to set up infrastructure to monitor an instance of
+This tutorial demonstrates how to set up infrastructure to monitor an instance of
 [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
 - [Prometheus](https://prometheus.io/) to gather and store data
@@ -138,7 +142,7 @@ Prometheus web interface, available on `http://your-node-host-ip:9090/`
 You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or
 adjust the security settings to allow connections to port 9090 if the node is
 running on a cloud instance. For AWS, you can look it up
-[here](../build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df).
+[here](/nodes/run/third-party/aws-node.md#f8df).
 If on public internet, make sure to only allow your IP to connect!
 
 :::

@@ -1244,7 +1244,7 @@ JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
 
 ### Installing a VM
 
-AvalancheGo searches for and registers plugins under the `plugins` [directory](/nodes/maintain/avalanchego-config-flags.md#--plugin-dir-string).
+AvalancheGo searches for and registers plugins under the `plugins` [directory](/nodes/configure/avalanchego-config-flags.md#--plugin-dir-string).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary
 under this directory. Virtual machine executable names must be either a full virtual machine ID
@@ -1296,7 +1296,7 @@ others that weren't already installed previously in the response.
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
 `/ext/vm/timestamp`. For more details about VM configs, see
-[here](/nodes/maintain/avalanchego-config-flags.md#vm-configs).
+[here](/nodes/configure/avalanchego-config-flags.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
 AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in

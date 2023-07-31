@@ -1,4 +1,8 @@
 ---
+tags: [Nodes]
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: Node ➡️ Validator
+pagination_label: Add a Node to the Validator Set
 sidebar_position: 3
 ---
 
@@ -7,9 +11,9 @@ sidebar_position: 3
 ## Introduction
 
 The [Primary
-Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network)
-is inherent to the Avalanche platform and validates Avalanche’s [built-in
-blockchains](/learn/avalanche/avalanche-platform.md). In this
+Network](/learn/avalanche/avalanche-platform.md)
+is inherent to the Avalanche platform and validates Avalanche’s built-in
+blockchains. In this
 tutorial, we’ll add a node to the Primary Network on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes
@@ -31,12 +35,12 @@ our [Discord](https://chat.avalabs.org/) to ask questions.
 ## Requirements
 
 You've completed [Run an Avalanche
-Node](../build/run-avalanche-node-manually.md) and are familiar with
+Node](/nodes/run/node-manually.md) and are familiar with
 [Avalanche's
 architecture](/learn/avalanche/avalanche-platform.md). In this
-tutorial, we use [AvalancheJS](/apis/avalanchejs/README.md) and
+tutorial, we use [AvalancheJS](/tooling/avalanchejs-overview.md) and
 [Avalanche’s Postman
-collection](https://github.com/ava-labs/avalanche-postman-collection) to help us
+collection](/tooling/avalanchego-postman-collection.md) to help us
 make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can
@@ -80,7 +84,7 @@ Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose
 `Add Validator` under the `Validate` section.
 
 Fill out the staking parameters. They are explained in more detail in [this
-doc](../validate/staking.md). When you’ve filled in all the staking parameters
+doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters
 and double-checked them, click `Confirm`. Make sure the staking period is at
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
 least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
@@ -107,7 +111,7 @@ That’s it!
 
 ## Add a Validator with AvalancheJS
 
-We can also add a node to the validator set using [AvalancheJS](/apis/avalanchejs/README.md).
+We can also add a node to the validator set using [AvalancheJS](/tooling/avalanchejs-overview.md).
 
 ### Install AvalancheJS
 
@@ -165,7 +169,7 @@ const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
 
 #### Network Setting
 
-The following settings work when using a local node started with [`--network-id=fuji`](/nodes/maintain/avalanchego-config-flags.md#network-id):
+The following settings work when using a local node started with [`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
 
 ```js
 const ip: string = "localhost"
@@ -175,7 +179,7 @@ const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API
-server](/apis/avalanchego/public-api-server), the following changes are
+server](/tooling/rpc-providers.md), the following changes are
 needed:
 
 ```js
@@ -193,7 +197,7 @@ _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
 For Fuji Testnet, 5 is the correct value to use.
 
-To learn more about encoded addresses, click [here](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+To learn more about encoded addresses, click [here](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 
 #### Settings for Validation
 
@@ -450,9 +454,9 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 
 - The correct private key.
 - Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](/nodes/maintain/avalanchego-config-flags.md#network-id) or
+  Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
-  server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
+  server](/tooling/rpc-providers.md#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to stake.

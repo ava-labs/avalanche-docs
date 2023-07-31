@@ -35,7 +35,7 @@ If you add it to your path, you should be able to call the program anywhere with
 To add it to your path permanently, add an export command to your shell initialization script
 (ex: .bashrc or .zshrc).
 
-For more detailed installation instructions, see [Avalanche-CLI Installation](/subnets/install-avalanche-cli.md)
+For more detailed installation instructions, see [Avalanche-CLI Installation](/tooling/cli-guides/install-avalanche-cli.md)
 
 ## Create Your Subnet Configuration
 

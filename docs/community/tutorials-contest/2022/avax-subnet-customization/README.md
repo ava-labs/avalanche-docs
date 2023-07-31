@@ -31,13 +31,13 @@ You need to have [MetaMask](https://metamask.io/) extension installed on your br
 
 #### Avalanche-Cli
 
-Create a folder for Avalanche CLI.
+Create a folder for Avalanche-CLI.
 
 ```bash
 mkdir -p ~/avalanche
 ```
 
-Go to that directory and download the Avalanche CLI.
+Go to that directory and download the Avalanche-CLI.
 
 ```bash
 cd ~/avalanche
@@ -186,7 +186,7 @@ Congrats! You just created a Subnet! 👏🎉
 ### Deploying the Subnet
 
 This is the most fun part. We will deploy the Subnet that we just created, and
-it's so easy to do, thanks to Avalanche CLI!
+it's so easy to do, thanks to Avalanche-CLI!
 
 ```bash
 avalanche subnet deploy testSubnet

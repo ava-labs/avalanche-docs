@@ -61,7 +61,7 @@ In your application's web interface, you can
 [add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#metamask)
 so your users don't have to enter the network data manually.
 
-### Using the Public API Nodes
+### Using the Public API Nodes or RPC Endpoints
 
 Instead of proxying network operations through MetaMask, you can use the public
 API, which consists of a number of AvalancheGo nodes behind a load balancer.
@@ -72,7 +72,7 @@ for the Mainnet and
 [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 for the testnet.
 
-For more information, see [documentation](/apis/avalanchego/public-api-server).
+For more information, see [documentation](/tooling/rpc-providers.md).
 
 However, public API does not expose all the APIs that are available on the node,
 as some of them would not make sense on a publicly accessible service, and some
@@ -87,12 +87,12 @@ can run your own node and access the network that way. Running your own node
 also avoids potential issues with public API congestion and rate-limiting.
 
 For development and experimental purposes,
-[here](/nodes/build/run-avalanche-node-manually.md) is a tutorial that shows
+[here](/nodes/run/node-manually.md) is a tutorial that shows
 how to download, build, and install AvalancheGo. Simpler solution is to use the
 prebuilt binary, available on
 [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to
 run a node on a Linux machine, you can use the [installer
-script](/nodes/build/set-up-node-with-installer.md) to install the node as a
+script](/nodes/run/with-installer.md) to install the node as a
 `systemd` service. Script also handles node upgrading. If you want to run a node
 in a docker container, there are [build
 scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the
@@ -101,13 +101,13 @@ AvalancheGo repo for various Docker configs.
 ### Node Configuration
 
 Node configuration options are explained
-[here](/nodes/maintain/avalanchego-config-flags.md). But unless you have
+[here](/nodes/configure/avalanchego-config-flags.md). But unless you have
 specific needs, you can mostly leave the main node config options at their
 default values.
 
 On the other hand, you will most likely need to adjust C-Chain configuration to
 suit your intended use. You can look up complete configuration options for
-C-Chain [here](/nodes/maintain/chain-config-flags.md#c-chain-configs) as well
+C-Chain [here](/nodes/configure/chain-config-flags.md#c-chain-configs) as well
 as the default configuration. Note that only the options that are different from
 their default values need to be included in the config file.
 
@@ -169,7 +169,7 @@ APIs as well as default EVM APIs:
 }
 ```
 
-Default config values for the C-Chain can be seen [here](/nodes/maintain/chain-config-flags.md#c-chain-configs).
+Default config values for the C-Chain can be seen [here](/nodes/configure/chain-config-flags.md#c-chain-configs).
 
 ### Running a Local Test Network
 

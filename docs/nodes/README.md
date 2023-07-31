@@ -1,42 +1,50 @@
 ---
-sidebar_position: 1
+tags: [Nodes]
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: 🔗 Quick Links
+pagination_label: 🔗 Nodes Quick Links
 ---
 
-# Nodes Overview
+# 🔗 Nodes Quick Links
 
 This section provides documents on how to build and maintain an AvalancheGo
 node, and then validate the Avalanche network using an AvalancheGo node.
 
-## Build
+|   Run a Node   |                                             |
+| :------------------------------------------------------- | :------------------------------------------ |
+| [**Manually**](/nodes/run/node-manually.md)      | Compile an Avalanche node from source and run it manually |
+| [**Using the Install Script**](/nodes/run/with-installer.md)     | How to install and run AvalancheGo with the installer script    |
+| [**Run a Subnet Node**](/nodes/run/subnet-node.md) | How to run a Subnet node              |
+| [**Common Errors**](nodes/run/FAQ.md)     | Learn about common errors when building your node       |
+|   **Using a Third-Party Cloud Service**   |                                             |
+| [**Amazon Web Services**](/nodes/run/third-party/aws-node.md) | Create a node that runs on AWS              |
+| [**AWS Marketplace: One Click Deployment**](nodes/run/third-party/aws-marketplace-one-click.md) | Deploy a node that runs on AWS via a one-click install              |
+| [**Microsoft Azure**](/nodes/run/third-party/microsoft-azure-node.md)                       | Create a node that runs on Microsoft Azure  |
+| [**Google Cloud Platform**](/nodes/run/third-party/google-cloud-node.md)                      | Create a node that runs on Google GCP       |
+| [**Alibaba Cloud**](/nodes/run/third-party/alibaba-cloud-node.md)     | Create a node that runs on Alibaba Cloud       |
+| [**Tencent Cloud**](/nodes/run/third-party/tencent-cloud-node.md)     | Create a node that runs on Tencent Cloud       |
+| [**Latitude**](/nodes/run/third-party/latitude-node.md)     | Create a node that runs on Latitude.sh      |
 
-|                                                                                                                                     |                                             |
-| :---------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------ |
-| [**Run an Avalanche Node Using Install Script**](./build/set-up-node-with-installer.md)                                             | How to install and run AvalancheGo          |
-| [**Run an Avalanche Node Manually**](./build/run-avalanche-node-manually.md)                                                        | How to install without the installer script |
-| [**Run an Avalanche Node with Amazon Web Services (AWS)**](./build/setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS              |
-| [**Launch an Avalanche Validator on AWS with One Click**](./build/launch-an-avalanche-validator-on-aws-with-one-click.md) | Deploy a node that runs on AWS via a one-click install              |
-| [**Run an Avalanche Node with Microsoft Azure**](./build/set-up-an-avalanche-node-with-microsoft-azure.md)                       | Create a node that runs on Microsoft Azure  |
-| [**Run an Avalanche Node with Google Cloud Platform**](./build/set-up-an-avalanche-node-with-google-cloud-platform.md)                      | Create a node that runs on Google GCP       |
-| [**Run an Avalanche Node with Alibaba Cloud**](./build/set-up-node-on-alibaba-cloud.md)     | Create a node that runs on Alibaba Cloud       |
-| [**Run an Avalanche Node with Tencent Cloud**](./build/set-up-node-on-tencent-cloud.md)     | Create a node that runs on Tencent Cloud       |
-| [**Frequently Asked Questions**](./build/FAQ.md)     | Learn about common errors when building your node.       |
 
-## Maintain
-
-|                                                                                  |                                                             |
+|    Configure                                                                         |                                                             |
 | :------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| [**Node Backup and Restore**](./maintain/node-backup-and-restore.md)             | Back up important files to be able to restore your node     |
-| [**Upgrade Your AvalancheGo Node**](./maintain/upgrade-your-avalanchego-node.md) | Upgrade your Avalanche node                                 |
-| [**Monitor an Avalanche Node**](./maintain/setting-up-node-monitoring.md)        | Set up infrastructure to monitor an instance of AvalancheGo |
-| [**AvalancheGo Config and Flags**](./maintain/avalanchego-config-flags.md)       | Configuration and flags for an Avalanche node               |
-| [**Chain Configs**](./maintain/chain-config-flags.md)                            | Chain specific configurations                               |
-| [**Subnet Configs**](./maintain/subnet-configs.md)                               | Subnet specific configurations                              |
-| [**Run C-Chain Offline Pruning**](./maintain/run-offline-pruning.md)             | C-Chain offline pruning                                     |
-| [**Node Bootstrap**](./maintain/node-bootstrap.md)             | Understand how a node bootstraps                                     |
+| [**AvalancheGo Configs and Flags**](/nodes/configure/avalanchego-config-flags.md) | This documents list all available configuration and flags for AvalancheGo    |
+| [**Chain Configs and Flags**](/nodes/configure/chain-config-flags.md)             | Reference for all available chain config options and flags    |
+| [**Subnet Configs**](/nodes/configure/subnet-configs.md)             | Reference for all available Subnet config options and flags   |
 
-## Validate
 
-|                                                      |                                                                                        |
+|    Validate                                                  |                                                                                        |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------- |
-| [**What is Staking?**](./validate/staking.md)        | Explain the concept of staking                                                         |
-| [**Add a Validator**](./validate/add-a-validator.md) | Add a node to the [Primary Network](/learn/avalanche/avalanche-platform.md) |
+| [**What is Staking?**](/nodes/validate/what-is-staking.md)        | Explains the concept of staking                                                         |
+| [**Key Differences Between Validation and Delegation**](/nodes/validate/validate-or-delegate.md)        | This section details the difference between staking and delegating on Avalanche                                                      |
+| [**How to Stake AVAX**](/nodes/validate/how-to-stake.md)        | This section provides documents on how to stake AVAX on the Avalanche Network
+| [**Add a Node as a Validator**](nodes/validate/add-a-validator.md) | Add a node as a validator to the [Primary Network](/learn/avalanche/avalanche-platform.md) |
+
+|    Maintain                                                                         |                                                             |
+| :------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| [**Node Bootstrapping: What to Expect**](/nodes/maintain/node-bootstrap.md)     | Understand how a node bootstraps                                     |
+| [**Node Backup and Restore**](/nodes/maintain/node-backup-and-restore.md)             | Back up important files to be able to restore your node     |
+| [**Monitor an Avalanche Node**](/nodes/maintain/setting-up-node-monitoring.md)        | Set up infrastructure to monitor an instance of AvalancheGo |
+| [**Upgrade Your AvalancheGo Node**](/nodes/maintain/upgrade-your-avalanchego-node.md) | How to upgrade your Avalanche node                                 |
+| [**Reduce Disk Usage by running C-Chain Offline Pruning**](/nodes/maintain/run-offline-pruning.md)          | How to reduce the disk space used by AvalancheGo                                     |
+| [**Enroll A Node in Avalanche Notify**](/nodes/maintain/avalanche-notify.md)       | To receive email alerts if a validator becomes unresponsive or out-of-date, sign up with the Avalanche Notify tool                       |

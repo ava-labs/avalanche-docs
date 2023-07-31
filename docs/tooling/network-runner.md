@@ -10,6 +10,8 @@ pagination_label: Avalanche Network Runner
 The Avalanche Network Runner **(ANR)** allows a user to define, create and interact with a network
 of Avalanche nodes. It can be used for development and testing.
 
+[Link to GitHub](https://github.com/ava-labs/avalanche-network-runner)
+
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on
 the functionality of a node, but needs to consider the dynamics of the network, the interaction of
 nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs
@@ -350,7 +352,7 @@ It's also possible to provide individual node config parameters:
 ```
 
 `--node-config` allows to specify specific AvalancheGo config parameters to the new node.
-See [here](/nodes/maintain/avalanchego-config-flags.md) for the reference of supported flags.
+See [here](/nodes/configure/avalanchego-config-flags.md) for the reference of supported flags.
 
 **Note**: The following parameters will be _ignored_ if set in `--node-config`, because the network
 runner needs to set its own in order to function properly: `--log-dir` `--db-dir`

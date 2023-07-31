@@ -63,7 +63,7 @@ If you are using other wallets, like MetaMask, you can add the Fuji Testnet usin
 ## Generate a Mnemonic
 
 To begin, we'll create a mnemonic phrase with
-[AvalancheJS](/apis/avalanchejs/README.md). Mnemonics enable us to encode
+[AvalancheJS](/tooling/avalanchejs-overview.md). Mnemonics enable us to encode
 strong security into a human-readable phrase. AvalancheJS supports 10 languages
 including English, Japanese, Spanish, Italian, French, Korean, Czech,
 Portuguese, Chinese Simplified and Chinese Traditional.
@@ -334,9 +334,9 @@ The Avalanche Explorer allows you to explore the network on
 [Mainnet](https://explorer.avax.network) and
 [Fuji](https://explorer.avax-test.network).
 
-### Public API Server
+### RPC Endpoints - Public API Server
 
-See [here.](/apis/avalanchego/public-api-server)
+See [here.](/tooling/rpc-providers.md)
 
 ### AvalancheJS Examples
 

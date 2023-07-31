@@ -10,7 +10,7 @@ pagination_label: C-Chain API
 :::info
 Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to
 Avalanche’s view of networkID and chainID and are purely internal to the
-[C-Chain](/learn/avalanche/avalanche-platform.md#contract-chain-c-chain). On
+[C-Chain](/learn/avalanche/avalanche-platform.md#c-chain). On
 Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and
 `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and
 `eth_chainId` methods.
@@ -39,7 +39,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 :::info
-On the [public API node](/apis/avalanchego/public-api-server#supported-apis), it only supports C-Chain
+On the [public API node](/tooling/rpc-providers.md#supported-apis), it only supports C-Chain
 websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 :::
 
@@ -57,7 +57,7 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::tip
 
-On localhost, use `ws://`. When using the [Public API](/apis/avalanchego/public-api-server) or another
+On localhost, use `ws://`. When using the [Public API](/tooling/rpc-providers.md) or another
 host that supports encryption, use `wss://`.
 :::
 
@@ -88,7 +88,7 @@ for a full description of this API.
 
 :::info
 
-For batched requests on the [public API node](/apis/avalanchego/public-api-server) , the maximum 
+For batched requests on the [public API node](/tooling/rpc-providers.md) , the maximum 
 number of items is 40. We are working on to support a larger batch size.
 
 :::
@@ -905,7 +905,7 @@ curl -X POST --data '{
 ## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
-with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/maintain/chain-config-flags.md#coreth-admin-api-enabled-boolean).
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/configure/chain-config-flags.md#coreth-admin-api-enabled-boolean).
 
 ### Endpoint
 

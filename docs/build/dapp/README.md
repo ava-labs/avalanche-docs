@@ -13,7 +13,7 @@ pagination_label: Dapps Quick Links
 | [**Deploy with Remix IDE**](/build/dapp/smart-contracts/remix-deploy.md)   | Learn how to deploy and test a smart contract on Avalanche using Remix and Core |
 | [**Create an ERC-20 Token**](/build/dapp/smart-contracts/erc-20.md)      |  Create a mintable ERC-20 token |
 | [**Deploy an NFT Collection**](/build/dapp/smart-contracts/nfts/deploy-collection.md)      |  Walkthrough deploying a basic ERC-721 (NFT) smart contract on the Avalanche Network |
-| [**Developer Toolchains**](/build/dapp/smart-contracts/toolchains/hardhat.md)      |  Create a mintable ERC-20 token |
+| [**Developer Toolchains**](/build/dapp/smart-contracts/toolchains/hardhat.md)      |  Best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain using common Toolchains like Hardhat and Foundry. |
 | [**Call a Smart Contract with Golang**](/build/dapp/smart-contracts/abigen.md)      |  Compile a solidity contract into Golang to deploy and call contracts programmatically |
 
 | Advanced Tutorials      |   |

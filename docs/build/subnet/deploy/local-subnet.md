@@ -13,7 +13,7 @@ local Avalanche network.
 
 ## Prerequisites
 
-- [Avalanche-CLI installed](/subnets/install-avalanche-cli.md)
+- [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
 - You have [created a Subnet configuration](/build/subnet/hello-subnet#create-your-subnet-configuration)
 
 ## Deploying Subnets Locally
@@ -84,7 +84,7 @@ Currency Symbol:  TUTORIAL
 You can use the deployment details to connect to and interact with your Subnet.
 
 To manage the newly deployed local Avalanche network, see
-[the `avalanche network` command tree](/build/subnet/info/subnet-cli-commands.md#network).
+[the `avalanche network` command tree](/tooling/avalanche-cli.md#network).
 
 ### Deploying Multiple Subnets
 

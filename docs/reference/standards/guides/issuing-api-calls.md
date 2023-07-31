@@ -27,7 +27,7 @@ where
 - `node-ip` is the IP address of the node the call is to.
 - `http-port` is the port the node listens on for HTTP calls. This is specified
   by [command-line
-  argument](/nodes/maintain/avalanchego-config-flags#http-server)
+  argument](/nodes/configure/avalanchego-config-flags.md#http-server)
   `http-port` (default value `9650`).
 
 For example, if you're making RPC calls on the local node, the base URL might look like this: `127.0.0.1:9650`.
@@ -36,7 +36,7 @@ If you're making RPC calls to remote nodes, then the instead of `127.0.0.1` you
 should use the public IP of the server where the node is. Note that by default
 the node will only accept API calls on the local interface, so you will need to
 set up the
-[`http-host`](/nodes/maintain/chain-config-flags.md#--http-host-string)
+[`http-host`](/nodes/configure/chain-config-flags.md#--http-host-string)
 config flag on the node. Also, you will need to make sure the firewall and/or
 security policy allows access to the `http-port` from the internet.
 
@@ -156,10 +156,10 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::info 
 
-When using the [Public API](/apis/avalanchego/public-api-server) or another host
+When using the [Public API](/tooling/rpc-providers.md) or another host
 that supports HTTPS, use `https://` or `wss://` instead of `http://` or `ws://`.
 
-Also, note that the [public API](/apis/avalanchego/public-api-server#supported-apis) only
+Also, note that the [public API](/tooling/rpc-providers.md#supported-apis) only
 supports C-Chain websocket API calls for API methods that don't exist on the
 C-Chain's HTTP API. 
 

@@ -18,7 +18,7 @@ An authorization token is provided in the header of an API call. Specifically, t
 the token).
 
 This API is only reachable if the node is started with [config
-flag](/nodes/maintain/avalanchego-config-flags)`--api-auth-required`. If the node is
+flag](/nodes/configure/avalanchego-config-flags.md)`--api-auth-required`. If the node is
 started without this CLI, API calls do not require authorization tokens, so this API is not
 reachable. This API never requires an authorization token to be reached.
 
@@ -32,7 +32,7 @@ If you run your node with `--api-auth-required` then some tools like Core or Met
 able to make API calls to your node because they don’t have an auth token.
 
 This API set is for a specific node, it is unavailable on the [public
-server](/apis/avalanchego/public-api-server).
+server](/tooling/rpc-providers.md).
 
 :::
 

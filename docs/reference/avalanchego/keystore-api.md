@@ -20,17 +20,17 @@ user on a node it exists _only_ on that node. However, users may be imported and
 API.
 
 For validation and cross-chain transfer on the Mainnet, you should issue transactions through
-[AvalancheJS](/apis/avalanchejs). That way control keys for your funds won't be stored on
+[AvalancheJS](/tooling/avalanchejs-overview). That way control keys for your funds won't be stored on
 the node, which significantly lowers the risk should a computer running a node be compromised. See
 following docs for details:
 
-- [Transfer AVAX Tokens Between Chains](/quickstart/cross-chain-transfers)
+- [Transfer AVAX Tokens Between Chains](/tooling/avalanchejs-guides/cross-chain-transfers)
 - [Add a Node to the Validator Set](/nodes/validate/add-a-validator)
 
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](/apis/avalanchego/public-api-server).
+server](/tooling/rpc-providers.md).
 
 :::
 

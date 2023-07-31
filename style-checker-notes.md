@@ -75,7 +75,7 @@ To block a specific word from appearing in the repository, add the word to
 ### Enforcing a Specific Spelling
 
 If you would like to enforce a specific product name such as `Avalanche-CLI` as opposed to
-`avalanche-cli` or `Avalanche CLI`, you create a new regular expression substitution pattern in
+`avalanche-cli` or `Avalanche-CLI`, you create a new regular expression substitution pattern in
 either
 [.github/styles/custom/ProductCapitalization.yml](.github/styles/custom/ProductCapitalization.yml)
 or [.github/styles/custom/RejectForms.yml`](.github/styles/custom/RejectForms.yml).

@@ -433,7 +433,6 @@
 /subnets/troubleshoot-deployments /build/subnet/info/troubleshoot-subnet 301
 /subnets/case-study-wagmi-upgrade /build/subnet/info/wagmi 301
 /subnets/wagmi /build/subnet/info/wagmi 301
-/subnets/reference-cli-commands /build/subnet/info/subnet-cli-commands 301
 
 
 #  07/21/2023 - Docs Revamp - Build/Dapps Tab
@@ -467,9 +466,47 @@
 
 # Docs Revamp - Learn Tab
 /subnets/cross-subnet-communication /learn/avalanche/awm 301
+/quickstart /learn/intro 301
+/quickstart/README /learn/intro 301
 
 # Docs Revamp - Tooling Tab
+/quickstart/tools-list docs/tooling 301
 /subnets/network-runner /tooling/network-runner 301
+/subnets/reference-cli-commands /tooling/avalanche-cli 301
+/apis/glacier /tooling/glacier 301
+/apis/metrics /tooling/metrics 301
+/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection  301
+/apis/avalanchego/public-api-server /tooling/rpc-providers 301
+/apis/avalanchejs/api /tooling/avalanchejs-api 301
+/apis/avalanchejs/create-an-asset-on-the-x-chain /tooling/avalanchejs-guides/create-an-asset-on-the-x-chain 301
+/apis/avalanchejs/generate-a-txid-using-avalanchejs /tooling/avalanchejs-guides/generate-a-txid-using-avalanchejs 301
+/apis/avalanchejs/manage-x-chain-keys /tooling/avalanchejs-guides/manage-x-chain-keys 301
+/apis/avalanchejs/README /tooling/avalanchejs-overview 301
+/apis/avalanchejs/ /tooling/avalanchejs-overview 301
+/apis/avalanchejs/send-an-asset-on-the-x-chain /tooling/avalanchejs-guides/send-an-asset-on-the-x-chain 301
+/quickstart/cross-chain-transfers /tooling/avalanchejs-guides/cross-chain-transfers 301
+/quickstart/multisig-utxos-with-avalanchejs /tooling/avalanchejs-guides/multisig-utxos-with-avalanchejs 301
+/subnets/how-to-import-subnet /tooling/cli-guides/import-subnet 301
+/subnets/how-to-run-cli-with-docker /tooling/cli-guides/run-with-docker 301
+/subnets/install-avalanche-cli /tooling/cli-guides/install-avalanche-cli 301
+
+# Docs Revamp - Nodes Tab
+/nodes/validate/staking /nodes/validate/what-is-staking 301
+/nodes/maintain/avalanchego-config-flags /nodes/configure/avalanchego-config-flags 301
+/nodes/maintain/chain-config-flags /nodes/configure/chain-config-flags 301
+/nodes/maintain/subnet-configs /nodes/configure/subnet-configs 301
+/nodes/build/run-avalanche-node-manually /nodes/run/node-manually 301
+/nodes/subnets/setup-dfk-node /nodes/run/subnet-node 301
+/nodes/build/set-up-an-avalanche-node-with-google-cloud-platform /nodes/run/third-party/google-cloud-node 301
+/nodes/build/set-up-an-avalanche-node-with-latitude /nodes/run/third-party/latitude-node 301
+/nodes/build/set-up-an-avalanche-node-with-microsoft-azure /nodes/run/third-party/microsoft-azure-node 301
+/nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws /nodes/run/third-party/aws-node 301
+/nodes/build/launch-an-avalanche-validator-on-aws-with-one-click /nodes/run/third-party/aws-marketplace-one-click 301
+/nodes/build/set-up-node-on-alibaba-cloud /nodes/run/third-party/aws-node/alibaba-cloud-node 301
+/nodes/build/set-up-node-on-tencent-cloud /nodes/run/third-party/aws-node/tencent-cloud-node 301
+/nodes/build/set-up-node-with-installer /nodes/run/with-installer 301
+/nodes/build/FAQ /nodes/run/FAQ 301
 
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
+/subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301
