@@ -6,18 +6,20 @@ pagination_label: AvalancheGo Install Script
 
 # AvalancheGo Postman Collection
 
+We have made a Postman collection for Avalanche, that includes all the public
+API calls that are available on [AvalancheGo
+instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
+allowing developers to quickly issue commands to your node and see the response, without having to copy 
+and paste long and complicated `curl` commands.
+
+[Link to Github](https://github.com/ava-labs/avalanche-postman-collection/)
+
 ## What Is Postman?
 
 Postman is a free tool used by developers to quickly and easily send REST, SOAP,
 and GraphQL requests and test APIs. It is available as both an online tool and
 an application for Linux, MacOS and Windows. Postman allows you to quickly issue
 API calls and see the responses in a nicely formatted, searchable form.
-
-We have made a Postman collection for Avalanche, that includes all the public
-API calls that are available on [AvalancheGo
-instance](https://github.com/ava-labs/avalanchego/releases/), allowing you to quickly issue
-commands to your node and see the response, without having to copy and paste
-long and complicated `curl` commands.
 
 Along with the API collection, there is also the example Avalanche environment
 for Postman, that defines common variables such as IP address of the node, your

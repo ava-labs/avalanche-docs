@@ -1,6 +1,6 @@
 ---
 tags: [Tooling, RPC Providers, AvalancheGo APIs]
-description: There are multiple RPC providers from which you can choose from. These providers will work as intermediaries to help you interact with the Avalanche network. You'll experience different latency levels depending on the provider's configurations. You can potentially use multiple providers for redundancy and balancing.
+description: There are multiple RPC providers which will work as intermediaries to help you interact with the Avalanche network. You'll experience different latency levels depending on the provider's configurations. You can potentially use multiple providers for redundancy and balancing.
 ---
 
 # 🔌 RPC Providers
