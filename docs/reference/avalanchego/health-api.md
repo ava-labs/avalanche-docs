@@ -12,7 +12,7 @@ This API can be used for measuring node health.
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](/apis/avalanchego/public-api-server).
+server](/tooling/rpc-providers.md).
 
 :::
 

@@ -28,7 +28,7 @@ Failing to do so can potentially grind your network to a halt.
 :::
 
 This tutorial assumes that you have already 
-[installed](/subnets/install-avalanche-cli.md) Avalanche-CLI.
+[installed](/tooling/cli-guides/install-avalanche-cli.md) Avalanche-CLI.
 It assumes you have already created and deployed a Subnet called `testSubnet`. 
 
 

@@ -10,7 +10,7 @@ sidebar_position: 0
 ## Generate a Mnemonic
 
 To begin, we'll create a mnemonic phrase with
-[AvalancheJS](/apis/avalanchejs/README.md). Mnemonics enable us to encode
+[AvalancheJS](/tooling/avalanchejs-overview.md). Mnemonics enable us to encode
 strong security into a human-readable phrase. AvalancheJS supports 10 languages
 including English, Japanese, Spanish, Italian, French, Korean, Czech,
 Portuguese, Chinese Simplified and Chinese Traditional.

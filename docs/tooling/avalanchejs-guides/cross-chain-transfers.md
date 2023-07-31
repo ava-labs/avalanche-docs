@@ -141,7 +141,7 @@ const networkID: number = 5
 ```
 
 However, to connect directly to the [Avalanche Fuji Testnet API
-server](/apis/avalanchego/public-api-server), the following changes are
+server](/tooling/rpc-providers.md), the following changes are
 needed:
 
 ```js
@@ -163,7 +163,7 @@ For Fuji Testnet, 5 is the correct value to use.
 const networkID: number = 5
 ```
 
-To learn more about encoded addresses, click [here](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+To learn more about encoded addresses, click [here](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 
 **Set the Correct Amount To Send:**
 
@@ -327,9 +327,9 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
 - Network setting should be to a Mainnet node, either [a local node on
   Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API
-  server](/apis/avalanchego/public-api-server#using-the-public-api-nodes)
+  server](/tooling/rpc-providers.md#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](/apis/avalanchejs/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.
 - The correct receiving address.
 

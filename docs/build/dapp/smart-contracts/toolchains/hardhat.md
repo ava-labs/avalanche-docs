@@ -253,7 +253,7 @@ token with its token name then you need to divide it with its decimal.
 
 
 The example uses the [C-Chain Public
-API](/apis/avalanchego/public-api-server) for the provider. For a local
+API](/reference/avalanchego/c-chain/api#endpoints) for the provider. For a local
 Avalanche network use `http://127.0.0.1:9650/ext/bc/C/rpc` and for Fuji Testnet
 use `https://api.avax-test.network/ext/bc/C/rpc`.
 

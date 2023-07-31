@@ -11,7 +11,7 @@ The API allows clients to get statistics about a node’s health and performance
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public server](/apis/avalanchego/public-api-server).
+This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
 
 :::
 

@@ -156,10 +156,10 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 
 :::info 
 
-When using the [Public API](/apis/avalanchego/public-api-server) or another host
+When using the [Public API](/tooling/rpc-providers.md) or another host
 that supports HTTPS, use `https://` or `wss://` instead of `http://` or `ws://`.
 
-Also, note that the [public API](/apis/avalanchego/public-api-server#supported-apis) only
+Also, note that the [public API](/tooling/rpc-providers.md#supported-apis) only
 supports C-Chain websocket API calls for API methods that don't exist on the
 C-Chain's HTTP API. 
 

@@ -61,7 +61,7 @@ In your application's web interface, you can
 [add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#metamask)
 so your users don't have to enter the network data manually.
 
-### Using the Public API Nodes
+### Using the Public API Nodes or RPC Endpoints
 
 Instead of proxying network operations through MetaMask, you can use the public
 API, which consists of a number of AvalancheGo nodes behind a load balancer.
@@ -72,7 +72,7 @@ for the Mainnet and
 [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 for the testnet.
 
-For more information, see [documentation](/apis/avalanchego/public-api-server).
+For more information, see [documentation](/tooling/rpc-providers.md).
 
 However, public API does not expose all the APIs that are available on the node,
 as some of them would not make sense on a publicly accessible service, and some

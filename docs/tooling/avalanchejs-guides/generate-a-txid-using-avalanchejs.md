@@ -14,7 +14,7 @@ specific transaction on the blockchain. TXIDs are one of the most core
 components that developers interact with when working on a blockchain system.
 They're deterministic and can be generated using
 [AvalancheGo](/reference) or
-[AvalancheJS](../avalanchejs/README.md).
+[AvalancheJS](/tooling/avalanchejs-overview.md).
 
 On the Avalanche network a TxID is a CB58 encoded string which is created by
 `sha256` hashing the transaction.

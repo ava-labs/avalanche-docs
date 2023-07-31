@@ -70,7 +70,7 @@ processing. To work around this, you can use 'sticky sessions', as documented
 [here](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials).
 This allows consecutive API calls to be routed to the same node.
 
-If you're using [AvalancheJS](../avalanchejs/README.md) to access the public
+If you're using [AvalancheJS](/tooling/avalanchejs-overview.md) to access the public
 API, simply set the following in your code:
 
 ```javascript

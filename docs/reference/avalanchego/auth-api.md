@@ -32,7 +32,7 @@ If you run your node with `--api-auth-required` then some tools like Core or Met
 able to make API calls to your node because they don’t have an auth token.
 
 This API set is for a specific node, it is unavailable on the [public
-server](/apis/avalanchego/public-api-server).
+server](/tooling/rpc-providers.md).
 
 :::
 

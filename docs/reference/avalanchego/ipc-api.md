@@ -17,7 +17,7 @@ flag](/nodes/configure/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
 :::info
 
 This API set is for a specific node, it is unavailable on the [public
-server](/apis/avalanchego/public-api-server).
+server](/tooling/rpc-providers.md).
 
 :::
 

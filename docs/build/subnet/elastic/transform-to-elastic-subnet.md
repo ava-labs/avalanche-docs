@@ -15,7 +15,7 @@ elastic (or permissionless) Subnet.
 
 ## Prerequisites
 
-- [Avalanche-CLI installed](/subnets/install-avalanche-cli.md)
+- [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
 - You have deployed a permissioned Subnet on [local](/build/subnet/deploy/local-subnet.md), on 
 [Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) or on [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 

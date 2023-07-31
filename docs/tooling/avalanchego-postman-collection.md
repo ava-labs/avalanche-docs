@@ -9,8 +9,8 @@ pagination_label: AvalancheGo Install Script
 We have made a Postman collection for Avalanche, that includes all the public
 API calls that are available on [AvalancheGo
 instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
-allowing developers to quickly issue commands to your node and see the response, without having to copy 
-and paste long and complicated `curl` commands.
+allowing developers to quickly issue commands to your node and see the response, without having to 
+copy and paste long and complicated `curl` commands.
 
 [Link to Github](https://github.com/ava-labs/avalanche-postman-collection/)
 

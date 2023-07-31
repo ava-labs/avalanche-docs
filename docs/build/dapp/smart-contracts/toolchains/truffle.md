@@ -67,7 +67,7 @@ mkdir truffle; cd truffle
 
 Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library
 through which we can talk to the EVM and
-[AvalancheJS](/apis/avalanchejs/README.md) which is used for cross chain
+[AvalancheJS](/tooling/avalanchejs-overview.md) which is used for cross chain
 swaps.
 
 ```text
