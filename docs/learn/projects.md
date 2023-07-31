@@ -40,7 +40,7 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-cli)
 
-Avalanche CLI is a command line tool that gives developers access to everything Avalanche.
+Avalanche-CLI is a command line tool that gives developers access to everything Avalanche.
 This release specializes in helping developers develop and test Subnets.
 
 Related docs

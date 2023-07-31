@@ -1,8 +1,8 @@
 ---
-tags: [Tooling, Avalanche CLI]
-description: This guide demonstrates how to install Avalanche CLI. 
-pagination_label: Install Avalanche CLI
-sidebar_label: Install Avalanche CLI
+tags: [Tooling, Avalanche-CLI]
+description: This guide demonstrates how to install Avalanche-CLI. 
+pagination_label: Install Avalanche-CLI
+sidebar_label: Install Avalanche-CLI
 sidebar_position: 0
 ---
 
