@@ -1,15 +1,23 @@
 ---
-description: There is a public API server that allows developers to access the Avalanche platform without having to run a node themselves.
+tags: [Tooling, RPC Providers, AvalancheGo APIs]
+description: There are multiple RPC providers from which you can choose from. These providers will work as intermediaries to help you interact with the Avalanche network. You'll experience different latency levels depending on the provider's configurations. You can potentially use multiple providers for redundancy and balancing.
 ---
 
-# Public API Server
+# 🔌 RPC Providers
+
+There are multiple RPC providers from which you can choose from. These providers will work as 
+intermediaries to help you interact with the Avalanche network. You'll experience different latency
+levels depending on the provider's configurations. You can potentially use multiple providers for 
+redundancy and balancing.
+
+## Mainnet RPC - Public API Server
 
 There is a public API server that allows developers to access the Avalanche
 network without having to run a node themselves. The public API server is
 actually several [AvalancheGo](https://github.com/ava-labs/avalanchego) nodes
 behind a load balancer to ensure high availability and high request throughput.
 
-## Using the Public API Nodes
+### Using the Public API Nodes
 
 The public API server is at `api.avax.network` for Avalanche Mainnet and
 `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API,
@@ -17,7 +25,7 @@ just append the relevant API endpoint, as documented
 [here](/reference/standards/guides/issuing-api-calls.md). Namely, use the following end points for
 each chain respectively:
 
-### HTTP
+#### HTTP
 
 - For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
 - For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
@@ -25,13 +33,13 @@ each chain respectively:
 
 Note: on Fuji Testnet, use `https://api.avax-test.network/` instead of `https://api.avax.network/`.
 
-### WebSocket
+#### WebSocket
 
 - For C-Chain API, the URL is `wss://api.avax.network/ext/bc/C/ws`.
 
 Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
-### Supported APIs
+#### Supported APIs
 
 The public API server supports all the API endpoints that make sense to be
 available on a public-facing service, including APIs for the
@@ -42,7 +50,7 @@ the X-Chain API's `getAddressTxs` method.
 
 For a full list of available APIs see [here](/reference).
 
-### Limitations
+#### Limitations
 
 The public API only supports C-Chain WebSocket API calls for API methods that
 don't exist on the C-Chain's HTTP API.
@@ -52,7 +60,7 @@ is 40. We're working on to support a larger batch size.
 
 The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/configure/chain-config-flags.md#api-max-blocks-per-request-int).
 
-### Sticky Sessions
+#### Sticky Sessions
 
 Requests to the public API server API are distributed by a load balancer to an
 individual node. As a result, consecutive requests may go to different nodes.
@@ -69,7 +77,7 @@ API, simply set the following in your code:
 avalanche.setRequestConfig("withCredentials", true)
 ```
 
-### Availability
+#### Availability
 
 Usage of public API nodes is free and available to everyone without any
 authentication or authorization. Rate limiting is present, but many of the API
@@ -77,11 +85,11 @@ calls are cached, and the rate limits are quite high. If your app is
 running up against the limits, please [contact us](https://chat.avalabs.org) or
 try using a community RPC provider.
 
-### Support
+#### Support
 
 If you have questions, problems, or suggestions, join the official [Avalanche Discord](https://chat.avalabs.org/).
 
-## Subnets
+## Subnets RPC - Public API Servers 
 
 ### DeFi Kingdom (DFK)
 
@@ -113,7 +121,7 @@ Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws
 
 ## Community Providers
 
-:::warning Disclaimer
+:::info Disclaimer
 
 Provided for informational purposes only, without representation, warranty or
 guarantee of any kind. None of this is as an endorsement by the Avalanche

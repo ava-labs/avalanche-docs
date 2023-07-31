@@ -1,8 +1,10 @@
 ---
-description: Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs.
+tags: [Tooling, AvalancheGo APIs]
+description: The AvalancheGo Postman collection includes all the public API calls that are available on AvalancheGo instance, allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
+pagination_label: AvalancheGo Install Script
 ---
 
-# Postman Collection
+# AvalancheGo Postman Collection
 
 ## What Is Postman?
 

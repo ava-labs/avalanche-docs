@@ -1,4 +1,9 @@
-# Avalanche Plugin Manager (APM)
+---
+tags: [Tooling]
+description: Avalanche Plugin Manager is a command-line tool to manage virtual machines binaries on existing AvalancheGo instances. It enables to add/remove nodes to Subnets, upgrade the VM plugin binaries as new versions get released to the plugin repository.
+pagination_label: Avalanche Plugin Manager
+---
+# Avalanche Plugin Manager
 
 Avalanche Plugin Manager (**APM**) is a command-line tool to manage virtual
 machines binaries on existing AvalancheGo instances. It enables to add/remove

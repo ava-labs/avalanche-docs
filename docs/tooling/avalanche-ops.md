@@ -1,8 +1,13 @@
+---
+tags: [Tooling]
+description: Avalanche Ops is a suite of commands that enables you to launch and configure network infrastructure (virtual machines or cloud instances) and installs Avalanche nodes from scratch allowing for various configuration requirements. It provisions all resources required to run a node or network with recommended setups (configurable). This tool is intended for quickly creating, testing and iterating over various Avalanche network infrastructure configurations for testing and simulation purposes. Use this to play with various setups and reproduce potential problems and issues with possible configurations.
+pagination_label: Avalanche Ops
+---
 # Avalanche Ops
 
-A single command to launch and configure network infrastructure (virtual
-machines or cloud instances) and installs Avalanche nodes from scratch allowing
-for various configuration requirements. Provisions all resources required to run
+Avalanche Ops is a suite of commands that enables you to launch and configure network infrastructure
+(virtual machines or cloud instances) and installs Avalanche nodes from scratch allowing
+for various configuration requirements. It provisions all resources required to run
 a node or network with recommended setups (configurable). This tool is intended
 for quickly creating, testing and iterating over various Avalanche network
 infrastructure configurations for testing and simulation purposes. Use this to

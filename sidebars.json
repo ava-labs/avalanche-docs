@@ -390,21 +390,25 @@
     },
     "tooling/glacier",
     "tooling/metrics",
-    "tooling/json-rpc",
-    "tooling/avalanche-plugin-manager",
-    "tooling/avalanchego-installer",
-    "tooling/avalanche-ops",
-    "tooling/network-runner",
-    "tooling/avalanchego-postman-collection",
-    {
-      "type": "html",
-      "value": "<hr/>"
-    },
     {
       "type": "link",
       "label": "HyperSDK",
       "href": "https://github.com/ava-labs/hypersdk#readme"
-    }
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/avalanchego-installer",
+    "tooling/network-runner",
+    "tooling/avalanche-plugin-manager",
+    "tooling/avalanche-ops",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/rpc-providers",
+    "tooling/avalanchego-postman-collection"
   ],
 
   "reference": [

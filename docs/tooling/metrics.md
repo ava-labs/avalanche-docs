@@ -1,3 +1,8 @@
-# Avalanche Metrics API
+---
+tags: [Tooling, Metrics API]
+description: Power your analytics with Avalanche Metrics API such as Subnet usage, staking operations, and more.
+---
+# Metrics API
 
-Power your analytics with Avalanche Metrics API such as Subnet usage, staking operations, and more. See [here for details](https://metrics.avax.network/).
+Power your analytics with Avalanche Metrics API such as Subnet usage, staking operations, and more. 
+See [https://metrics.avax.network/](https://metrics.avax.network/) for the API documentation.
