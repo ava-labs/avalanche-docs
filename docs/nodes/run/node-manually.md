@@ -1,6 +1,6 @@
 ---
 tags: [Nodes]
-description: The quickest way to learn about Avalanche is to run a node and interact with the network. This tutorial demonstrates how to install and run an Avalanche node, and connect to the Avalanche Network.
+description: The quickest way to learn about Avalanche is to run a node and interact with the network. This tutorial demonstrates how to install and run an Avalanche node, and connect to the Avalanche Network by compiling a node from source and running it manually.
 sidebar_label: Manually
 pagination_label: Run an Avalanche Node Manually
 sidebar_position: 0

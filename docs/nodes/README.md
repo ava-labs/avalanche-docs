@@ -12,10 +12,10 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 
 |   Run a Node   |                                             |
 | :------------------------------------------------------- | :------------------------------------------ |
-| [**Manually**](/nodes/run/node-manually.md)      | How to install without the installer script |
+| [**Manually**](/nodes/run/node-manually.md)      | Compile an Avalanche node from source and run it manually |
 | [**Using the Install Script**](/nodes/run/with-installer.md)     | How to install and run AvalancheGo with the installer script    |
-| [**Run a Subnet Node**](/nodes/run/subnet-node.md) | Create a node that runs on AWS              |
-| [**Common Errors**](nodes/run/FAQ.md)     | Learn about common errors when building your node.       |
+| [**Run a Subnet Node**](/nodes/run/subnet-node.md) | How to run a Subnet node              |
+| [**Common Errors**](nodes/run/FAQ.md)     | Learn about common errors when building your node       |
 |   **Using a Third-Party Cloud Service**   |                                             |
 | [**Amazon Web Services**](/nodes/run/third-party/aws-node.md) | Create a node that runs on AWS              |
 | [**AWS Marketplace: One Click Deployment**](nodes/run/third-party/aws-marketplace-one-click.md) | Deploy a node that runs on AWS via a one-click install              |
