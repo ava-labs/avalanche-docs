@@ -1,5 +1,5 @@
 ---
-tags: [Tooling, Avalanche JS]
+tags: [Tooling, AvalancheJS]
 description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
 pagination_label: Create an Asset on the X-Chain
 sidebar_label: Create X-Chain Asset
