@@ -289,7 +289,7 @@
     },
     {
       "type": "ref",
-      "label": "📎 Avalanche-CLI - Subnets",
+      "label": "📎 Avalanche-CLI: Subnets",
       "id": "tooling/avalanche-cli"
     },
     {
@@ -341,6 +341,11 @@
     {
       "type": "html",
       "value": "<hr/>"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Manage VM Binaries",
+      "id": "tooling/avalanche-plugin-manager"
     },
     {
       "type": "link",
@@ -403,12 +408,8 @@
     "tooling/network-runner",
     "tooling/avalanche-plugin-manager",
     "tooling/avalanche-ops",
-    {
-      "type": "html",
-      "value": "<hr/>"
-    },
-    "tooling/rpc-providers",
-    "tooling/avalanchego-postman-collection"
+    "tooling/avalanchego-postman-collection",
+    "tooling/rpc-providers"
   ],
 
   "reference": [
@@ -497,6 +498,25 @@
           "dirName": "reference/standards/guides"
         }
       ]
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "ref",
+      "label": "🔌 RPC Providers",
+      "id": "tooling/rpc-providers"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Postman Collection",
+      "id": "tooling/avalanchego-postman-collection"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Install Script",
+      "id": "tooling/avalanchego-installer"
     }
   ]
 }
