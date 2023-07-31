@@ -405,6 +405,7 @@
 /specs/serialization-primitives /reference/standards/serialization-primitives 301
 /specs/platform-transaction-serialization /reference/avalanchego/p-chain/txn-format 301
 /specs/banff-changes /reference/standards/guides/banff-changes 301
+/quickstart/blockchain-flow /reference/standards/guides/blockchain-flow 301
 
 #  07/21/2023 - Docs Revamp - Build/Subnets Tab
 /build /build/subnet 301
