@@ -486,7 +486,6 @@
 /apis/avalanchejs/send-an-asset-on-the-x-chain /tooling/avalanchejs-guides/send-an-asset-on-the-x-chain 301
 /quickstart/cross-chain-transfers /tooling/avalanchejs-guides/cross-chain-transfers 301
 /quickstart/multisig-utxos-with-avalanchejs /tooling/avalanchejs-guides/multisig-utxos-with-avalanchejs 301
-/subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /tooling/avalanchejs-guides/create-a-evm-blockchain-on-subnet-with-avalanchejs 301
 /subnets/how-to-import-subnet /tooling/cli-guides/import-subnet 301
 /subnets/how-to-run-cli-with-docker /tooling/cli-guides/run-with-docker 301
 /subnets/install-avalanche-cli /tooling/cli-guides/install-avalanche-cli 301
@@ -510,3 +509,4 @@
 
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
+/subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301

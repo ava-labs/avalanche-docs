@@ -1,3 +1,10 @@
+---
+tags: [Tooling, Avalanche JS]
+description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+pagination_label: Transfer AVAX Tokens Between Chains
+sidebar_label: Send Tokens Between Chains
+sidebar_position: 2
+---
 # Transfer AVAX Tokens Between Chains
 
 ## Introduction

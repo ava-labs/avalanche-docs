@@ -1,7 +1,7 @@
 ---
 tags: [Tooling, Avalanche CLI]
 description: This guide demonstrates the process of importing a Subnet to the Avalanche CLI to enable better management of the Subnet's configuration. This how-to uses the WAGMI Subnet deployed on Fuji Testnet as the example Subnet. 
-pagination_label: Avalanche CLI
+pagination_label: How to Import a Subnet into Avalanche CLI
 sidebar_label: Import a Subnet
 sidebar_position: 2
 ---
