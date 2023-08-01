@@ -64,7 +64,7 @@ Ethereum Virtual Machine ([Coreth](/learn/projects#coreth)), or on their own Sub
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
 Truffle, and more.
 
-To learn more about smart contract support, click [here](../../dapps/launch-your-ethereum-dapp.md).
+To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
 
 ### Golang
 
@@ -79,7 +79,7 @@ To learn more about smart contract support, click [here](../../dapps/launch-your
 - [XSVM](https://github.com/ava-labs/xsvm)
   - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-See here for a tutorial on [How to Build a Simple Golang VM](../../subnets/create-a-vm-timestampvm.md)
+See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
 
 ### Rust
 
@@ -88,4 +88,4 @@ The following VMs were built using Rust via the [Avalanche Rust SDK](https://cra
 - [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
   - A Rust implementation of TimestampVM
 
-See here for a tutorial on [How to Build a Simple Rust VM](../../subnets/create-a-simple-rust-vm.md)
+See here for a tutorial on [How to Build a Simple Rust VM](/build/vm/create/rust-vm.md)
