@@ -11,7 +11,7 @@ sidebar_position: 3
 It is sometimes necessary to transfer funds between P-Chain wallets. This could be because:
 
 1. You need to send funds to your Subnet control key. It can end having no balance due to
-fee payments, and you need it to be funded to support subnet operations.
+fee payments, and you need it to be funded to support Subnet operations.
 2. You need to move funds from one Ledger address index to another. Sometimes a transfer
 to a ledger can be made to an address other than the one used by default by the CLI.
 
