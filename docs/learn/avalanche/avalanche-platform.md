@@ -30,7 +30,7 @@ All validators of the Primary Network are required to validate and secure the fo
 ### C-Chain
 
 The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
-The [C-Chain’s API](../../apis/avalanchego/apis/c-chain.md) supports Geth's API and supports the
+The [C-Chain’s API](/reference/avalanchego/c-chain/api.md) supports Geth's API and supports the
 deployment and execution of smart contracts written in Solidity.
 
 The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machine.
@@ -38,7 +38,7 @@ The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machi
 ### P-Chain 
 
 The **P-Chain** is responsible for all validator and Subnet-level operations.
-The [P-Chain API](../../apis/avalanchego/apis/p-chain.md) supports the creation of new
+The [P-Chain API](/reference/avalanchego/p-chain/api.md) supports the creation of new
 blockchains and Subnets, the addition of validators to Subnets, staking operations, and other
 platform-level operations.
 
@@ -49,7 +49,7 @@ The P-Chain is an instance of the Platform Virtual Machine.
 The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
 Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a
 bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow."
-The [X-Chain API](../../apis/avalanchego/apis/x-chain.md) supports the creation and trade of
+The [X-Chain API](/reference/avalanchego/x-chain/api.md) supports the creation and trade of
 Avalanche Native Tokens.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,

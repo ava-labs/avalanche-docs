@@ -1,5 +1,9 @@
 ---
-sidebar_position: 8
+tags: [Nodes]
+description: Node Bootstrap is the process where a node *securely* downloads linear chain blocks to recreate the latest state of the chain locally. Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
+sidebar_label: "Bootstrapping: What to Expect"
+pagination_label: What to Expect While Bootstrapping
+sidebar_position: 0
 ---
 
 # Node Bootstrap
