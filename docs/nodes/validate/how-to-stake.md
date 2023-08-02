@@ -253,7 +253,8 @@ When you issue the transaction to delegate tokens, the staked tokens and
 transaction fee are deducted from the addresses you control. When you are done
 delegating, the staked tokens are returned to your address. If you earned a
 reward, it is sent to the address you specified when you delegated tokens. 
-Rewards are sent to delegators right after the delegation ends with the return of staked tokens, and before the validation period of the node 
+Rewards are sent to delegators right after the delegation ends with the 
+return of staked tokens, and before the validation period of the node 
 they're delegating to is complete.
 
 ## FAQ
