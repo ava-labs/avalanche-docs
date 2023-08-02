@@ -1,18 +1,14 @@
 ---
 description: To enable direct transfers between ledger P-Chain addresses, use the Avalanche-CLI command `avalanche key transfer`.
-sidebar_label: Directly Transfer Funds
+sidebar_label: How to Transfer P-Chain Funds
 ---
 
 # How to Use Avalanche-CLI to Transfer P-Chain Funds
 
-It is sometimes necessary to transfer funds between different ledgers, or between
-different accounts or addresses in our ledger. This could be due to various reasons:
+It is sometimes necessary to transfer funds between P-Chain wallets. This could be because:
 
-1. Moving funds to a Subnet control ledger from another funded account
-because the Subnet control ledger cannot be changed.
-2. Transferring funds to a ledger address with a different index, which is
-sometimes required for the command-line tool (CLI) to work with default
-settings.
+1. You need to send funds to your Subnet control key.
+2. You need to move funds from one Ledger address index to another
 
 To enable direct transfers between P-Chain addresses, use the command
 `avalanche key transfer`. This operation involves a series of import/export
@@ -26,7 +22,7 @@ The `key transfer` command can also be applied to the stored keys managed by the
 moving funds from one stored key to another, and from a ledger to a stored key or the other way.
 
 :::
-This tutorial focuses on transferring funds between ledger accounts.
+This how-to guide focuses on transferring funds between ledger accounts.
 
 ## Prerequisites
 
@@ -41,8 +37,8 @@ This tutorial focuses on transferring funds between ledger accounts.
 ### Determine Sender Address Index
 
 
-A ledger can manage an infinite amount of addresses derived from a main private key. Due to this,
-many operations require an address index the user wishes to use in an operation
+A ledger can manage an infinite amount of addresses derived from a main private key. Because of this,
+many operations require the user to specify an address index.
 
 After confirming with a web wallet that 4.5 AVAX is available on p-chain address 
 `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0`, connect ledger A.
@@ -74,7 +70,7 @@ To see p-chain addresses and balances for the first 6 indices in the ledger deri
 ```
 
 The address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` has 4.5 AVAX and
-is associated to index 2 of ledger A.
+is associated with index 2 of ledger A.
 
 ### Determine Receiver Address Index
 
@@ -99,21 +95,18 @@ avalanche key list --mainnet --ledger 0
 
 Target address to be used is `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`, containing 0 funds.
 
-### Execute the Sending Part of the Transfer Operation
+### Send the Transfer
 
 A P-Chain to P-chain transfer is a two-part operation. There is no need for the two parts to be executed
 on the same machine, only for them to have some common params. For each part, the appropriate ledger
 (either source or target) must be connected to the machine executing it.
 
-First part starts the process, and moves the money out of the
-source account into a X-Chain account owner by the receptor. It needs to be signed by the sending ledger.
+The first step moves the money out of the
+source account into a X-Chain account owner by the receiver. It needs to be signed by the sending ledger.
 
-The amount to be specified as input to the command is the amount to be received on the target address.
+Enter the amount of AVAX to send to the recipient. This amount does not include fees.
 
-As in this example the users wants to send all the balance of 4.5, so he needs to consider a fee payment
-of 0.004, and tell the command to transfer 4.496.
-
-Take into account that the sending ledger is the one that is going to pay all the fees.
+Note that the sending ledger pays all the fees.
 
 Then start the command:
 
@@ -185,10 +178,10 @@ After this, the first part is completed:
 Issuing ExportTx P -> X
 ```
 
-### Execute the Receiving Part of the Transfer Operation
+### Receive the Transfer
 
-This part of the operation, to be signed by ledger B, is going to take the funds from a X account owned
-by B, and move them to the expected P-Chain address.
+In this step, Ledger B signs the transaction to receive the funds. It imports the funds on the X-Chain
+before exporting them back to the desired P-Chain address.
 
 Connect ledger B and execute avalanche app.
 
