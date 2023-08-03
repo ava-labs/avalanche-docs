@@ -33,7 +33,7 @@ This how-to guide focuses on transferring funds between ledger accounts.
 
 ## Prerequisites
 
-- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
+- [`Avalanche-CLI`](/tooling/cli-guides/install-avalanche-cli) installed
 - Multiple Ledger devices [configured for Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
 
 ## Example: Sending All Funds From One Ledger to Another
