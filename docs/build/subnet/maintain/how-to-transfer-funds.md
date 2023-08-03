@@ -8,12 +8,14 @@ sidebar_position: 3
 
 # How to Use Avalanche-CLI to Transfer P-Chain Funds
 
-It is sometimes necessary to transfer funds between P-Chain wallets. This could be because:
+Transferring funds between P-Chain wallets becomes necessary in certain situations:
 
-1. You need to send funds to your Subnet control key. It can end having no balance due to
-fee payments, and you need it to be funded to support Subnet operations.
-2. You need to move funds from one Ledger address index to another. Sometimes a transfer
-to a ledger can be made to an address other than the one used by default by the CLI.
+1. Funds need to be sent to the Subnet control key, which might have a zero balance 
+due to fee payments. The Subnet control key requires funding to ensure proper 
+support for Subnet operations.
+2. Funds need to be moved from one Ledger address index to another. 
+Occasionally, a transfer made to a ledger can be made to an address different
+from the default one used by the CLI.
 
 To enable direct transfers between P-Chain addresses, use the command
 `avalanche key transfer`. This operation involves a series of import/export
