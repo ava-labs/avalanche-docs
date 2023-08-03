@@ -8,8 +8,8 @@ Go implementation of an Avalanche node.
 
 Related docs
 
-- [AvalancheGo](../apis/avalanchego/README.md)
-- [Nodes](../nodes/README.md)
+- [AvalancheGo](/reference)
+- [Nodes](/nodes/README.md)
 
 ## Coreth
 
@@ -21,7 +21,7 @@ that defines the Avalanche Contract Chain (C-Chain).
 
 Related docs
 
-- [C-Chain APIs](../apis/avalanchego/apis/c-chain.md)
+- [C-Chain APIs](/reference/avalanchego/c-chain/api.md)
 
 ## Subnet-EVM
 
@@ -40,12 +40,12 @@ Related docs
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-cli)
 
-Avalanche CLI is a command line tool that gives developers access to everything Avalanche.
+Avalanche-CLI is a command line tool that gives developers access to everything Avalanche.
 This release specializes in helping developers develop and test Subnets.
 
 Related docs
 
-- [Avalanche-CLI](/subnets/install-avalanche-cli.md)
+- [Avalanche-CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
 ## AvalancheJS
 
@@ -55,7 +55,7 @@ The Avalanche platform JavaScript library.
 
 Related docs
 
-- [AvalancheJS](../apis/avalanchejs/README.md)
+- [AvalancheJS](/tooling/avalanchejs-overview.md)
 
 ## Avalanche Wallet
 
@@ -73,7 +73,7 @@ This is a tool to run and interact with a local Avalanche network.
 
 Related docs
 
-- [Avalanche Network Runner](../subnets/network-runner.md)
+- [Avalanche Network Runner](/tooling/network-runner.md)
 
 ## Avalanche Developer Docs
 

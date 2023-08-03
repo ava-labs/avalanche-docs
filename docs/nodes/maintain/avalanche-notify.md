@@ -1,5 +1,9 @@
 ---
-sidebar_position: 9
+tags: [Nodes]
+description: Avalanche Notify is an active monitoring system that checks a validator's responsiveness each minute. To receive email alerts if a validator becomes unresponsive or out-of-date, sign up with the Avalanche Notify tool.
+sidebar_label: Enroll in Avalanche Notify
+pagination_label: Enroll in Avalanche Notify
+sidebar_position: 5
 ---
 
 # Avalanche Notify

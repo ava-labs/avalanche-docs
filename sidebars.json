@@ -2,7 +2,7 @@
   "learn": [
     {
       "type": "html",
-      "value": "<span class='menu__link'><b><small> The Avalanche Protocol </small></b></span>"
+      "value": "<span class='menu__item'><b><medium> The Avalanche Protocol </medium></b></span>"
     },
     "learn/avalanche/intro",
     {
@@ -15,6 +15,7 @@
     "learn/avalanche/avax",
     "learn/avalanche/subnets-overview",
     "learn/avalanche/virtual-machines",
+    "learn/avalanche/awm",
     {
       "type": "html",
       "value": "<hr/>"
@@ -32,250 +33,73 @@
     },
     "disclaimer"
   ],
-  "quickStart": [
-    "quickstart/README",
-    "quickstart/fuji-workflow",
-    "quickstart/cross-chain-transfers",
-    "quickstart/multisig-utxos-with-avalanchejs",
-    "quickstart/transaction-fees",
-    "quickstart/adjusting-gas-price-during-high-network-activity",
-    "quickstart/sending-transactions-with-dynamic-fees-using-javascript",
-    "quickstart/tools-list",
-    "quickstart/integrate-exchange-with-avalanche",
-    "quickstart/blockchain-flow"
-  ],
-  "dapps": [
-    "dapps/launch-your-ethereum-dapp",
-    {
-      "type": "category",
-      "label": "Developer Toolchains",
-      "collapsed": true,
-      "items": [
-        "dapps/developer-toolchains/README",
-        "dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain",
-        "dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace",
-        "dapps/developer-toolchains/verify-smart-contracts-with-truffle-verify"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Non Fungible Tokens (NFTs)",
-      "collapsed": true,
-      "items": [
-        "dapps/nfts/README",
-        "dapps/nfts/intro-to-erc721s",
-        "dapps/nfts/preparing-nft-files"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Smart Contract",
-      "collapsed": true,
-      "items": [
-        "dapps/smart-contracts/README",
-        "dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain",
-        "dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core",
-        "dapps/smart-contracts/verify-smart-contracts",
-        "dapps/smart-contracts/add-avalanche-programmatically"
-      ]
-    }
-  ],
-  "subnets": [
-    {
-      "type": "category",
-      "label": "Are Subnets Right For You?",
-      "collapsed": true,
-      "items": [
-        "subnets/when-to-use-subnet-vs-c-chain",
-        "subnets/subnet-development-lifecycle"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Build Your First Subnet",
-      "collapsed": true,
-      "items": [
-        "subnets/install-avalanche-cli",
-        "subnets/build-first-subnet",
-        "subnets/create-a-fuji-subnet",
-        "subnets/create-a-mainnet-subnet",
-        "subnets/deploy-a-smart-contract-on-your-evm",
-        "subnets/create-custom-subnet",
-        "subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "How to Use Avalanche-CLI",
-      "collapsed": true,
-      "items": [
-        "subnets/reference-cli-commands",
-        "subnets/create-evm-subnet-config",
-        "subnets/create-a-local-subnet",
-        "subnets/multisig-deploy",
-        "subnets/how-to-pause-and-resume-subnets",
-        "subnets/how-to-list-and-describe",
-        "subnets/how-to-delete-subnet",
-        "subnets/how-to-upgrade-subnet-vm",
-        "subnets/how-to-upgrade-precompile",
-        "subnets/how-to-run-cli-with-docker",
-        "subnets/how-to-import-subnet",
-        "subnets/troubleshoot-deployments"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Customize",
-      "collapsed": true,
-      "items": [
-        "subnets/customize-a-subnet",
-        "subnets/hello-world-precompile-tutorial",
-        "subnets/introduction-to-vm",
-        "subnets/create-a-vm-timestampvm",
-        "subnets/create-a-vm-blobvm",
-        "subnets/create-a-simple-rust-vm",
-        "subnets/create-a-simple-vm-from-scratch",
-        "subnets/cross-subnet-communication"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Deploy",
-      "collapsed": true,
-      "items": ["subnets/deploying-subnets-on-prod", "subnets/setup-dfk-node"]
-    },
-    {
-      "type": "category",
-      "label": "Upgrade",
-      "collapsed": true,
-      "items": ["subnets/subnet-upgrade", "subnets/case-study-wagmi-upgrade"]
-    },
-    {
-      "type": "category",
-      "label": "Tools",
-      "collapsed": true,
-      "items": [
-        "subnets/avalanche-subnet-faucet",
-        "subnets/deploying-cross-chain-evm-bridge",
-        "subnets/network-runner",
-        "subnets/deploy-a-gnosis-safe-on-your-evm"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Examples",
-      "collapsed": true,
-      "items": ["subnets/wagmi"]
-    },
-    {
-      "type": "category",
-      "label": "Elastic Subnets",
-      "collapsed": true,
-      "items": [
-        "subnets/reference-elastic-subnets-parameters",
-        "subnets/how-to-transform-subnet-to-elastic"
-      ]
-    },
-    {
-      "type": "link",
-      "label": "Subnet FAQ",
-      "href": "https://support.avax.network/en/articles/6158840-subnet-faq"
-    }
-  ],
-  "apis": [
-    "apis/README",
-    {
-      "type": "category",
-      "label": "AvalancheGo",
-      "collapsed": true,
-      "items": [
-        "apis/avalanchego/README",
-        {
-          "type": "category",
-          "label": "APIs",
-          "collapsed": true,
-          "items": [
-            {
-              "type": "autogenerated",
-              "dirName": "apis/avalanchego/apis"
-            }
-          ]
-        },
-        "apis/avalanchego/public-api-server",
-        "apis/avalanchego/postman-avalanche-collection",
-        "apis/avalanchego/x-chain-migration",
-        "apis/avalanchego/cb58-deprecation",
-        {
-          "type": "link",
-          "label": "Release Notes",
-          "href": "https://github.com/ava-labs/avalanchego/releases"
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "AvalancheJS",
-      "collapsed": true,
-      "items": [
-        "apis/avalanchejs/README",
-        "apis/avalanchejs/api",
-        "apis/avalanchejs/create-an-asset-on-the-x-chain",
-        "apis/avalanchejs/manage-x-chain-keys",
-        "apis/avalanchejs/send-an-asset-on-the-x-chain",
-        "apis/avalanchejs/generate-a-txid-using-avalanchejs"
-      ]
-    },
-    "apis/metrics",
-    "apis/glacier"
-  ],
-  "nodes": [
-    "nodes/README",
-    {
-      "type": "category",
-      "label": "Build",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "autogenerated",
-          "dirName": "nodes/build"
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Maintain",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "autogenerated",
-          "dirName": "nodes/maintain"
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Validate",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "autogenerated",
-          "dirName": "nodes/validate"
-        }
-      ]
-    }
-  ],
 
-  "specs": [
-    "specs/avm-transaction-serialization",
-    "specs/coreth-atomic-transaction-serialization",
-    "specs/cryptographic-primitives",
-    "specs/network-protocol",
-    "specs/serialization-primitives",
-    "specs/platform-transaction-serialization",
-    "specs/abigen",
-    "specs/banff-changes"
+  "nodes": [
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> 🔺 Nodes </medium></b></span>"
+    },
+    "nodes/README",
+    "nodes/system-requirements",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Run a Node </medium></b></span>"
+    },
+    "nodes/run/node-manually",
+    "nodes/run/with-installer",
+    "nodes/run/subnet-node",
+    {
+      "type": "category",
+      "label": "on Third-Party Services",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "nodes/run/third-party"
+        }
+      ]
+    },
+    "nodes/run/FAQ",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Configure </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "nodes/configure"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Validate </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "nodes/validate"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Maintain </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "nodes/maintain"
+    }
   ],
 
   "community": [
@@ -295,6 +119,404 @@
         "community/tutorials-contest/2022",
         "community/tutorials-contest/2021"
       ]
+    }
+  ],
+
+  "build-dapp": [
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> 🔺 Decentralized Apps </medium></b></span>"
+    },
+    "build/dapp/README",
+    "build/dapp/c-chain-evm",
+    "build/dapp/chain-settings",
+    "build/dapp/explorers",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Development Networks </medium></b></span>"
+    },
+    "tooling/network-runner",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Smart Contract Development </medium></b></span>"
+    },
+    "build/dapp/smart-contracts/get-funds-faucet",
+    "build/dapp/smart-contracts/remix-deploy",
+    "build/dapp/smart-contracts/erc-20",
+    {
+      "type": "category",
+      "label": "Deploy NFT Collection",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/dapp/smart-contracts/nfts"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Verify a Contract",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/dapp/smart-contracts/verification"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Toolchains",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/dapp/smart-contracts/toolchains"
+        }
+      ]
+    },
+    "build/dapp/smart-contracts/abigen",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Advanced Tutorials </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/dapp/advanced"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> End-to-End Walkthroughs </medium></b></span>"
+    },
+    "build/dapp/fuji-workflow",
+    "build/dapp/launch-dapp"
+  ],
+
+  "build-subnet": [
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> 🔺 Avalanche Subnets </medium></b></span>"
+    },
+    "build/subnet/README",
+    "build/subnet/getting-started",
+    "build/subnet/c-chain-vs-subnet",
+    "build/subnet/hello-subnet",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Deploy a Subnet </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/subnet/deploy"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Elastic Subnets </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/subnet/elastic"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Manage Subnets </medium></b></span>"
+    },
+    {
+      "type": "category",
+      "label": "Maintain",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/subnet/maintain"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Add Utility",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/subnet/utility"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Upgrade",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "build/subnet/upgrade"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Avalanche-CLI: Subnets",
+      "id": "tooling/avalanche-cli"
+    },
+    {
+      "type": "ref",
+      "id": "nodes/run/subnet-node"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/subnet/info"
+    },
+    {
+      "type": "link",
+      "label": "❓FAQ",
+      "href": "https://support.avax.network/en/articles/6158840-subnet-faq"
+    }
+  ],
+
+  "build-vm": [
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> 🔺 Virtual Machines </medium></b></span>"
+    },
+    "build/vm/README",
+    "build/vm/intro",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Create a VM </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/vm/create"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> EVM Customization </medium></b></span>"
+    },
+    {
+      "type": "autogenerated",
+      "dirName": "build/vm/evm"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Manage VM Binaries",
+      "id": "tooling/avalanche-plugin-manager"
+    },
+    {
+      "type": "link",
+      "label": "HyperSDK",
+      "href": "https://github.com/ava-labs/hypersdk#readme"
+    }
+  ],
+
+  "tooling": [
+    "tooling/README",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/avalanche-cli",
+    {
+      "type": "category",
+      "label": "Guides",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "tooling/cli-guides"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/avalanchejs-overview",
+    "tooling/avalanchejs-api",
+    {
+      "type": "category",
+      "label": "Guides",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "tooling/avalanchejs-guides"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/glacier",
+    "tooling/metrics",
+    {
+      "type": "link",
+      "label": "HyperSDK",
+      "href": "https://github.com/ava-labs/hypersdk#readme"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    "tooling/avalanchego-installer",
+    "tooling/network-runner",
+    "tooling/avalanche-plugin-manager",
+    "tooling/avalanche-ops",
+    "tooling/avalanchego-postman-collection",
+    "tooling/rpc-providers"
+  ],
+
+  "reference": [
+    "reference/README",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> AvalancheGo </medium></b></span>"
+    },
+    {
+      "type": "category",
+      "label": "P-Chain",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "reference/avalanchego/p-chain"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "C-Chain",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "reference/avalanchego/c-chain"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "X-Chain",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "reference/avalanchego/x-chain"
+        }
+      ]
+    },
+    "reference/avalanchego/admin-api",
+    "reference/avalanchego/auth-api",
+    "reference/avalanchego/health-api",
+    "reference/avalanchego/index-api",
+    "reference/avalanchego/info-api",
+    "reference/avalanchego/ipc-api",
+    "reference/avalanchego/keystore-api",
+    "reference/avalanchego/metrics-api",
+    {
+      "type": "link",
+      "label": "Release Notes",
+      "href": "https://github.com/ava-labs/avalanchego/releases"
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Subnet-EVM </medium></b></span>"
+    },
+    "reference/subnet-evm/api",
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "html",
+      "value": "<span class='menu__item'><b><medium> Standards </medium></b></span>"
+    },
+    "reference/standards/avalanche-network-protocol",
+    "reference/standards/cryptographic-primitives",
+    "reference/standards/serialization-primitives",
+    {
+      "type": "category",
+      "label": "📖 Guides",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "reference/standards/guides"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "<hr/>"
+    },
+    {
+      "type": "ref",
+      "label": "🔌 RPC Providers",
+      "id": "tooling/rpc-providers"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Postman Collection",
+      "id": "tooling/avalanchego-postman-collection"
+    },
+    {
+      "type": "ref",
+      "label": "📎 Install Script",
+      "id": "tooling/avalanchego-installer"
     }
   ]
 }
