@@ -21,7 +21,7 @@ To enable direct transfers between P-Chain addresses, use the command
 `avalanche key transfer`. This operation involves a series of import/export
 actions with the P-Chain and X-Chain. The fee for this operation is four times the typical
 import operation fee, which comes out to 0.004 AVAX. You can find more
-information about fees [here](https://docs.avax.network/quickstart/transaction-fees).
+information about fees [here](/reference/standards/guides/txn-fees).
 
 :::note
 
