@@ -273,10 +273,10 @@ Specifies the type of database to use. Must be one of `LevelDB` or `memdb`.
 
 :::note
 
-`memdb` stores everything in memory. So if you have a 900 GiB LevelDB instance, then using `memdb` 
+`memdb` stores everything in memory. So if you have a 900 GiB LevelDB instance, then using `memdb`
 you’d need 900 GiB of RAM.
 `memdb` is useful for fast one-off testing, not for running an actual node (on Fuji or Mainnet).
-Also note that `memdb` doesn’t persist after restart. So any time you restart the node it would 
+Also note that `memdb` doesn’t persist after restart. So any time you restart the node it would
 start syncing from scratch.
 
 :::
@@ -441,17 +441,9 @@ These are the main properties in the JSON file:
 
 For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
 
-#### `--genesis` (string)
-
-This flag is deprecated as of v1.10.2. Use `--genesis-file` instead.
-
 #### `--genesis-file-content` (string)
 
 As an alternative to `--genesis-file`, it allows specifying base64 encoded genesis data to use.
-
-#### `--genesis-content` (string)
-
-This flag is deprecated as of v1.10.2. Use `--genesis-file-content` instead.
 
 ## HTTP Server
 
@@ -532,7 +524,7 @@ Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Exa
 
 List of acceptable host names in API requests. Provide the wildcard (`'*'`) to accept
 requests from all hosts. API requests where the `Host` field is empty or an IP address
-will always be accepted. An API call whose HTTP `Host` field isn't acceptable will 
+will always be accepted. An API call whose HTTP `Host` field isn't acceptable will
 receive a 403 error code. Defaults to `localhost`.
 
 ## IPCs
@@ -590,8 +582,8 @@ logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, 
 
 #### `--log-dir` (string, file path)
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`. 
-If you are running the node as a system service (ex. using the installer script) logs will also be 
+Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+If you are running the node as a system service (ex. using the installer script) logs will also be
 stored in `$HOME/var/log/syslog`.
 
 #### `--log-disable-display-plugin-logs` (boolean)
@@ -699,17 +691,9 @@ Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
 **You should not set this flag to false unless you understand what you are doing.**
 
-#### `--staking-enabled` (boolean)
-
-This flag is deprecated as of v1.10.2. Use `--sybil-protection-enabled` instead.
-
 #### `--sybil-protection-disabled-weight` (uint)
 
 Weight to provide to each peer when staking is disabled. Defaults to `100`.
-
-#### `--staking-disabled-weight` (uint)
-
-This flag is deprecated as of v1.10.2. Use `--sybil-protection-disabled-weight` instead.
 
 #### `--staking-tls-cert-file` (string, file path)
 
@@ -832,10 +816,6 @@ Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
 
 Time between gossiping accepted frontiers. Defaults to `10s`.
 
-#### `--consensus-gossip-frequency` (duration)
-
-This flag is deprecated as of v1.10.2. Use `--consensus-accepted-frontier-gossip-frequency` instead.
-
 #### `--consensus-on-accept-gossip-validator-size` (uint)
 
 Number of validators to gossip to each accepted container to. Defaults to `0`.
@@ -932,7 +912,7 @@ to `20000` (2%) on Mainnet. This can only be changed on a local network.
 
 #### `--min-stake-duration` (duration)
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on 
+Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on
 a local network. This applies to both delegation and validation periods.
 
 #### `--min-validator-stake` (int)
@@ -1097,11 +1077,6 @@ averages. Defaults to `10s`.
 
 Allows the node to connect peers with private IPs. Defaults to `true`.
 
-#### `--network-compression-enabled` (bool)
-
-If true, compress certain messages sent to peers to reduce bandwidth usage.
-This flag is deprecated as of v1.10.0. Use `--network-compression-type` instead.
-
 #### `--network-compression-type` (string)
 
 The type of compression to use when sending messages to peers. Defaults to `gzip`.
@@ -1202,10 +1177,6 @@ Maximum duration to wait for a TCP proxy header. Defaults to `3s`.
 #### `--network-outbound-connection-timeout` (duration)
 
 Timeout while dialing a peer. Defaults to `30s`.
-
-#### `--outbound-connection-timeout` (duration)
-
-This flag is deprecated as of v1.10.2. Use `--network-outbound-connection-timeout` instead.
 
 ### Message Rate-Limiting
 
@@ -1328,26 +1299,13 @@ Node will upgrade an inbound connection from a given IP at most once within this
 duration. Defaults to `10s`. If 0 or negative, will not consider recency of last
 upgrade when deciding whether to upgrade.
 
-#### `--inbound-connection-throttling-cooldown` (duration)
-
-This flag is deprecated as of v1.10.2. Use `--network-inbound-connection-throttling-cooldown` instead.
-
 #### `--network-inbound-connection-throttling-max-conns-per-sec` (uint)
 
 Node will accept at most this many inbound connections per second. Defaults to `512`.
 
-#### `--inbound-connection-throttling-max-conns-per-sec` (uint)
-
-This flag is deprecated as of v1.10.2. Use `--network-inbound-connection-throttling-max-conns-per-sec`
-instead.
-
 #### `--network-outbound-connection-throttling-rps` (uint)
 
 Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
-
-#### `--outbound-connection-throttling-rps` (uint)
-
-This flag is deprecated as of v1.10.2. Use `--network-outbound-connection-throttling-rps` instead.
 
 ### Peer List Gossiping
 
