@@ -93,29 +93,26 @@ const config = {
             label: "Learn",
           },
           {
-            type: "docSidebar",
+            type: "dropdown",
             position: "left",
-            sidebarId: "quickStart",
-            label: "QuickStart",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "dapps",
-            label: "DApps",
-          },
-
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "subnets",
-            label: "Subnets",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "apis",
-            label: "APIs",
+            label: "Build",
+            items: [
+              {
+                type: "docSidebar",
+                label: "Dapps",
+                sidebarId: "build-dapp",
+              },
+              {
+                type: "docSidebar",
+                label: "Subnets",
+                sidebarId: "build-subnet",
+              },
+              {
+                type: "docSidebar",
+                label: "Virtual Machines",
+                sidebarId: "build-vm",
+              },
+            ],
           },
           {
             type: "docSidebar",
@@ -126,8 +123,14 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "specs",
-            label: "Specs",
+            sidebarId: "tooling",
+            label: "Tooling",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
+            sidebarId: "reference",
+            label: "Reference",
           },
           {
             type: "docSidebar",

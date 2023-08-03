@@ -31,13 +31,13 @@ You need to have [MetaMask](https://metamask.io/) extension installed on your br
 
 #### Avalanche-Cli
 
-Create a folder for Avalanche CLI.
+Create a folder for Avalanche-CLI.
 
 ```bash
 mkdir -p ~/avalanche
 ```
 
-Go to that directory and download the Avalanche CLI.
+Go to that directory and download the Avalanche-CLI.
 
 ```bash
 cd ~/avalanche
@@ -186,7 +186,7 @@ Congrats! You just created a Subnet! 👏🎉
 ### Deploying the Subnet
 
 This is the most fun part. We will deploy the Subnet that we just created, and
-it's so easy to do, thanks to Avalanche CLI!
+it's so easy to do, thanks to Avalanche-CLI!
 
 ```bash
 avalanche subnet deploy testSubnet
@@ -237,7 +237,7 @@ the network.
 ## Understanding the Genesis File
 
 Before starting, I'd like to acknowledge that this section is very similar to
-[AVAX docs - Customize a Subnet](https://docs.avax.network/subnets/customize-a-subnet). 
+[AVAX docs - Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md). 
 However, I've made some changes to make it more comprehensive and easier to understand.
 
 Subnet wizard is an awesome tool to customize your Subnet and might be a good starting point for you.
@@ -434,7 +434,7 @@ This configuration allows validators to specify a fee recipient.
 
 Use the following configuration to enable validators to receive fees. [You can
 find more information from the Avalanche
-docs.](https://docs.avax.network/subnets/customize-a-subnet#setting-a-custom-fee-recipient)
+docs.](/build/subnet/upgrade/customize-a-subnet.md#setting-a-custom-fee-recipient)
 
 ```json
 {
@@ -471,7 +471,7 @@ Admin addresses can deploy new contracts and add new Admin and Deployer
 addresses. Precompiled contract is deployed to
 `0x0200000000000000000000000000000000000000`. [You can find more information
 from the Avalanche
-docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-smart-contract-deployers)
+docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers)
 
 #### `contractNativeMinterConfig`
 
@@ -491,7 +491,7 @@ If you'd like to use a smart contract to mint native tokens, you can set the
 Admin addresses can add new Admin and Minter addresses. Precompiled contract is
 deployed to `0x0200000000000000000000000000000000000001`. [You can find more
 information from the Avalanche
-docs.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
+docs.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
 
 #### `txAllowListConfig`
 
@@ -511,7 +511,7 @@ properties:
 Admin addresses can add new Admin and Allowed addresses. Precompiled contract is
 deployed to `0x0200000000000000000000000000000000000002`. [You can find more
 information from the Avalanche
-docs.](https://docs.avax.network/subnets/customize-a-subnet#restricting-who-can-submit-transactions)
+docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
 
 ### Genesis Block
 
@@ -911,7 +911,7 @@ Next, create a folder and under that folder, create two files with the following
 #### NativeMinterInterface.sol
 
 This is the `ContractNativeMinter` interface. We know the contract is deployed at `0x0200000000000000000000000000000000000001`.
-[See more about it here.](https://docs.avax.network/subnets/customize-a-subnet#minting-native-coins)
+[See more about it here.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
 
 ```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
