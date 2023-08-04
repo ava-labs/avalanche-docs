@@ -85,7 +85,7 @@ accepted frontier.
 Instead, containers are downloaded from the accepted frontier downwards to
 genesis, and then their corresponding state transitions are executed upwards
 from genesis to the accepted frontier. The accepted frontier is the last
-accepted block for linear chains and the accepted vertices for DAGs.
+accepted block for linear chains.
 
 Why can't nodes simply download blocks in chronological order, starting from
 genesis upwards? The reason is efficiency: if nodes downloaded containers
@@ -98,7 +98,7 @@ Instead, if a node starts by securely retrieving the accepted frontier from a
 majority of honest nodes and then recursively fetches the parent containers from
 the accepted frontier down to genesis, it can cheaply check that containers are
 correct just by verifying their IDs. Each Avalanche container has the IDs of its
-parents (one block parent for linear chains, possibly multiple parents for DAGs)
+parents (one block parent for linear chains)
 and an ID's integrity can be guaranteed cryptographically.
 
 Let's dive deeper into the two bootstrap phases - frontier retrieval and
