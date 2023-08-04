@@ -13,8 +13,11 @@ Transferring funds between P-Chain wallets becomes necessary in certain situatio
 1. Funds need to be sent to the Subnet control key, which might have a zero balance 
 due to fee payments. The Subnet control key requires funding to ensure proper 
 support for Subnet operations.
-2. Funds need to be moved from one Ledger address index to another. 
-Occasionally, a transfer made to a ledger can be made to an address different
+2. Funds need to be moved from one Ledger address index to another. A Ledger manages an
+infinite sequence of addresses all derived from a master private key and
+can sign for any of those addresses. Each one is referred to by an index, or the associated 
+address. Avalanche-CLI usually expects to use index 0, but sometimes, the funds are in a 
+different index. Occasionally, a transfer made to a ledger can be made to an address different
 from the default one used by the CLI.
 
 To enable direct transfers between P-Chain addresses, use the command
