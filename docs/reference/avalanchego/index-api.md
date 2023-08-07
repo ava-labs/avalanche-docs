@@ -25,9 +25,6 @@ bootstrapping, other nodes may have accepted the container much earlier. Every c
 during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it
 was first accepted by the network.
 
-Note that for DAGs (including the X-Chain), nodes may accept vertices and transactions in a
-different order from one another.
-
 If `--index-enabled` is changed to `false` from `true`, AvalancheGo won't start as doing so would
 cause a previously complete index to become incomplete, unless the user explicitly says to do so
 with `--index-allow-incomplete`. This protects you from accidentally running with indexing disabled,
