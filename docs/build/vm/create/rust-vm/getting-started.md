@@ -6,7 +6,7 @@ pagination_label: Getting Started
 sidebar_position: 0
 ---
 
-# Getting Started with Building a Rust VM!
+# Getting Started with Building a Rust VM
 
 The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and primitive
 types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM

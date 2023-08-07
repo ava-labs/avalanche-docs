@@ -511,3 +511,7 @@
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
 /subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301
+
+
+# 08/07/2023 - Rust VM
+/build/vm/create/rust-vm /build/vm/create/rust-vm/getting-started 301
