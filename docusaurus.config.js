@@ -160,53 +160,11 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Discord",
-                href: "https://chat.avax.network",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/avax",
-              },
-              {
-                label: "Telegram",
-                href: "https://t.me/avalancheavax",
-              },
-              {
-                label: "Medium",
-                href: "https://medium.com/avalancheavax",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "YouTube",
-                href: "https://youtube.com/avalancheavax",
-              },
-              {
-                label: "Ecosystem",
-                href: "https://ecosystem.avax.network",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/ava-labs/avalanche-docs",
-              },
-              {
-                label: "Terms of Use",
-                href: "https://www.avax.network/terms-of-use",
-              },
-            ],
-          },
-          {},
-        ],
+        links: [],
         copyright: `Copyright © ${new Date().getFullYear()} Ava Labs, Inc.`,
+        logo: {
+          src: "/img/Avalanche_Horizontal_Red.svg",
+        },
       },
       prism: {
         theme: lightCodeTheme,

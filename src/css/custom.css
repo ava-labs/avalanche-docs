@@ -223,3 +223,16 @@ li hr {
 span.menu__item {
   padding-left: 7px;
 }
+
+/* Custom Footer */
+
+.footer {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
