@@ -1,9 +1,7 @@
 import React from "react";
-import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./home.module.css";
 import Card from "../../components/Card";
-import { Typography } from "@avalabs/k2-components";
 
 export function Home() {
   const context = useDocusaurusContext();

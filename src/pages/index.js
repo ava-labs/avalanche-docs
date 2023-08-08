@@ -5,10 +5,8 @@ import { ThemeProvider, lightTheme } from "@avalabs/k2-components";
 
 export default function App() {
   return (
-    <ThemeProvider theme={lightTheme}>
-      <Layout title="Homepage" description="Avalanche Dev Docs">
-        <Home />
-      </Layout>
-    </ThemeProvider>
+    <Layout title="Homepage" description="Avalanche Dev Docs">
+      <Home />
+    </Layout>
   );
 }
