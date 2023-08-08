@@ -9,7 +9,15 @@ import { merge } from "lodash-es";
  * @type {Theme}
  */
 const customTheme = {
-  palette: {},
+  palette: {
+    secondary: {
+      lighter: "#f29091",
+      light: "#eb5b5c",
+      main: "#e84142",
+      dark: "#e52728",
+      contrastText: COLORS.white,
+    },
+  },
 };
 
 /**
