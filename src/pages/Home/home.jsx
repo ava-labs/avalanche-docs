@@ -42,10 +42,10 @@ export function Home() {
       <Typography variant="h3" textAlign="center" sx={{ my: 8 }}>
         Welcome to Avalanche Dev Docs
       </Typography>
-      <Container maxWidth="lg" component="section">
+      <Container maxWidth="lg" component="section" sx={{ pb: 8 }}>
         <Grid2 container spacing={2}>
           {cardsData.map((cardData) => (
-            <Grid2 xs={1} md={2} lg={4}>
+            <Grid2 xs={12} md={6} lg={4}>
               <HomeCard {...cardData} />
             </Grid2>
           ))}
