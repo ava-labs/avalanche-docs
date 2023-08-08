@@ -24,9 +24,7 @@ function Footer() {
     <footer className="footer footer--dark">
       <div className="container container-fluid">
         <div className="footer-grid">
-          <div style={{ backgroundColor: "lightblue", height: "200px" }}>
-            1fr
-          </div>
+          <div style={{ backgroundColor: "lightblue", height: "200px" }}></div>
           <div style={{ backgroundColor: "lightpink", height: "200px" }}>
             2fr
           </div>
@@ -39,6 +37,11 @@ function Footer() {
             Ava Labs, Inc.{" "}
           </a>
           <span className="mx-10">|</span> All rights reserved
+        </div>
+        <div className="footer-logo-container">
+          <div></div>
+          <img class="menu-item" src="/img/Avalanche_Horizontal_Red.svg"></img>
+          <div></div>
         </div>
       </div>
     </footer>
