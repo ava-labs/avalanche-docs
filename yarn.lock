@@ -2789,6 +2789,18 @@
   resolved "https://registry.yarnpkg.com/@types/katex/-/katex-0.11.1.tgz#34de04477dcf79e2ef6c8d23b41a3d81f9ebeaf5"
   integrity sha512-DUlIj2nk0YnJdlWgsFuVKcX27MLW0KbKmGVoUHmFr+74FYYNUDAaj9ZqTADvsbE8rfxuVmSFc7KczYn5Y09ozg==
 
+"@types/lodash-es@4.17.8":
+  version "4.17.8"
+  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.8.tgz#cfffd0969507830c22da18dbb20d2ca126fdaa8b"
+  integrity sha512-euY3XQcZmIzSy7YH5+Unb3b2X12Wtk54YWINBvvGQ5SmMvwb11JQskGsfkH/5HXK77Kr8GF0wkVDIxzAisWtog==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.196"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.196.tgz#a7c3d6fc52d8d71328b764e28e080b4169ec7a95"
+  integrity sha512-22y3o88f4a94mKljsZcanlNWPzO0uBsBdzLAngf2tp533LzZcQzb6+eZPJ+vCTt+bqF2XnvT9gejTLsAcJAJyQ==
+
 "@types/mdast@^3.0.0":
   version "3.0.10"
   resolved "https://registry.npmjs.org/@types/mdast/-/mdast-3.0.10.tgz"

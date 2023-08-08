@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash-es": "4.17.8",
     "eslint-config-google": "0.14.0"
   }
 }

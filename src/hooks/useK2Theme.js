@@ -4,6 +4,8 @@ import {
   Theme,
 } from "@avalabs/k2-components";
 import { merge } from "lodash-es";
+import { useColorMode } from "@docusaurus/theme-common";
+import React from "react";
 
 /**
  * @type {Theme}
@@ -15,7 +17,7 @@ const customTheme = {
       light: "#eb5b5c",
       main: "#e84142",
       dark: "#e52728",
-      contrastText: COLORS.white,
+      contrastText: "#FFF",
     },
   },
 };
@@ -37,14 +39,15 @@ const customDarkTheme = {};
  * @returns {{theme: Theme}}
  */
 export const useK2Theme = () => {
-  const { isDarkTheme } = useColorMode();
+  const { colorMode } = useColorMode();
 
-  const theme = useMemo(() => {
+  const theme = React.useMemo(() => {
     // recursively deep merge themes
-    return isDarkTheme
+    return colorMode === "dark"
       ? merge(k2DarkTheme, customTheme, customDarkTheme)
       : merge(k2LightTheme, customTheme, customLightTheme);
-  }, [isDarkTheme]);
+  }, [colorMode]);
+  console.log("theme", theme);
 
   return { theme };
 };
