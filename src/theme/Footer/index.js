@@ -4,9 +4,10 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import React from "react";
+import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import React from "react";
 
 function Footer() {
   const { footer } = useThemeConfig();
@@ -24,9 +25,23 @@ function Footer() {
     <footer className="footer footer--dark">
       <div className="container container-fluid">
         <div className="footer-grid">
-          <div style={{ backgroundColor: "lightblue", height: "200px" }}></div>
-          <div style={{ backgroundColor: "lightpink", height: "200px" }}>
-            2fr
+          <div className="footer-col"></div>
+          <div className="footer-col">
+            <div
+              className="row"
+              style={{ backgroundColor: "lightpink", height: "100px" }}
+            >
+              <ul className="list-reset flex flex-wrap -mx-20">
+                <a
+                  className="header-twitter-link"
+                  href="https://twitter.com/AvaxDevelopers"
+                ></a>
+              </ul>
+            </div>
+            <div
+              className="row"
+              style={{ backgroundColor: "lightpink", height: "100px" }}
+            ></div>
           </div>
         </div>
       </div>
