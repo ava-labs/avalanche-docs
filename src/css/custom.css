@@ -255,12 +255,10 @@ span.menu__item {
 
 .footer-row {
   display: flex;
-  justify-content: center;
 }
 
 .footer-social {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-right: 40px;
   color: white;
   height: 28px;
   width: 28px;
@@ -269,4 +267,34 @@ span.menu__item {
 .footer-social:hover {
   color: var(--ifm-color-primary);
   transition: color 0.15s, color 0.15s;
+}
+
+.footer-heading {
+  font-weight: "800";
+  font-size: large;
+  margin-bottom: 2px;
+}
+
+.footer-list {
+  font-weight: "600";
+  font-size: small;
+  color: white;
+}
+
+.footer-list:hover {
+  color: var(--ifm-color-primary);
+  transition: color 0.15s, color 0.15s;
+  text-decoration: none;
+}
+
+.footer-main-list {
+  margin-left: 20px;
+  color: white ;
+  margin-bottom: -10px;
+}
+
+.footer-main-list:hover {
+  color: var(--ifm-color-primary);
+  transition: color 0.15s, color 0.15s;
+  text-decoration: none;
 }
