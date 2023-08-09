@@ -25,23 +25,69 @@ function Footer() {
     <footer className="footer footer--dark">
       <div className="container container-fluid">
         <div className="footer-grid">
-          <div className="footer-col"></div>
-          <div className="footer-col">
+          <div
+            className="footer-col"
+            style={{
+              backgroundColor: "lightblue",
+
+              marginRight: "20px",
+            }}
+          ></div>
+          <div className="footer-col" style={{ backgroundColor: "lightblue" }}>
             <div
-              className="row"
-              style={{ backgroundColor: "lightpink", height: "100px" }}
+              className="footer-row"
+              style={{
+                backgroundColor: "lightpink",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <ul className="list-reset flex flex-wrap -mx-20">
+              <div className="footer-social">
                 <a
                   className="header-twitter-link"
                   href="https://twitter.com/AvaxDevelopers"
                 ></a>
-              </ul>
+              </div>
+              <div className="footer-social">
+                <a
+                  className="header-discord-link"
+                  href="https://chat.avax.network/"
+                ></a>
+              </div>
+              <div className="footer-social">
+                <a
+                  className="header-github-link"
+                  href="https://github.com/ava-labs"
+                ></a>
+              </div>
+              <div className="footer-social">
+                <a
+                  className="header-twitter-link"
+                  href="https://twitter.com/AvaxDevelopers"
+                ></a>
+              </div>
+              <div className="footer-social">
+                <a
+                  className="header-discord-link"
+                  href="https://chat.avax.network/"
+                ></a>
+              </div>
+              <div className="footer-social">
+                <a
+                  className="header-github-link"
+                  href="https://github.com/ava-labs"
+                ></a>
+              </div>
             </div>
             <div
-              className="row"
-              style={{ backgroundColor: "lightpink", height: "100px" }}
+              className="footer-row"
+              style={{ backgroundColor: "lightyellow" }}
             ></div>
+            <div className="footer-row" style={{ backgroundColor: "blue" }}>
+              <p>hello</p>
+              <p>hello</p>
+              <p>hello</p>
+            </div>
           </div>
         </div>
       </div>
