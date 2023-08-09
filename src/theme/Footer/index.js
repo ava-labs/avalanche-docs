@@ -8,6 +8,16 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import {
+  BsYoutube,
+  BsGithub,
+  BsTwitter,
+  BsDiscord,
+  BsTelegram,
+  BsFacebook,
+  BsLinkedin,
+  BsReddit,
+} from "react-icons/bs";
 
 function Footer() {
   const { footer } = useThemeConfig();
@@ -23,70 +33,49 @@ function Footer() {
 
   return (
     <footer className="footer footer--dark">
-      <div className="container container-fluid">
-        <div className="footer-grid">
-          <div
-            className="footer-col"
-            style={{
-              backgroundColor: "lightblue",
-
-              marginRight: "20px",
-            }}
-          ></div>
-          <div className="footer-col" style={{ backgroundColor: "lightblue" }}>
-            <div
-              className="footer-row"
-              style={{
-                backgroundColor: "lightpink",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div className="footer-social">
-                <a
-                  className="header-twitter-link"
-                  href="https://twitter.com/AvaxDevelopers"
-                ></a>
-              </div>
-              <div className="footer-social">
-                <a
-                  className="header-discord-link"
-                  href="https://chat.avax.network/"
-                ></a>
-              </div>
-              <div className="footer-social">
-                <a
-                  className="header-github-link"
-                  href="https://github.com/ava-labs"
-                ></a>
-              </div>
-              <div className="footer-social">
-                <a
-                  className="header-twitter-link"
-                  href="https://twitter.com/AvaxDevelopers"
-                ></a>
-              </div>
-              <div className="footer-social">
-                <a
-                  className="header-discord-link"
-                  href="https://chat.avax.network/"
-                ></a>
-              </div>
-              <div className="footer-social">
-                <a
-                  className="header-github-link"
-                  href="https://github.com/ava-labs"
-                ></a>
-              </div>
+      <div className="container container--fluid"></div>
+      <div class="row">
+        <div class="col col--4">
+          <div class="col-demo" style={{ backgroundColor: "lightpink" }}>
+            col--3
+          </div>
+        </div>
+        <div class="col col--7 col--offset-1">
+          <div className="footer-row">
+            <a href="https://t.me/+KDajA4iToKY2ZjBk">
+              <BsTelegram className="footer-social"></BsTelegram>
+            </a>
+            <a href="https://chat.avax.network/">
+              <BsDiscord className="footer-social"></BsDiscord>
+            </a>
+            <a href="https://github.com/ava-labs">
+              <BsGithub className="footer-social"></BsGithub>
+            </a>
+            <a href="https://twitter.com/AvaxDevelopers">
+              <BsTwitter className="footer-social"></BsTwitter>
+            </a>
+            <a href="https://www.reddit.com/r/Avax/">
+              <BsReddit className="footer-social"></BsReddit>
+            </a>
+            <a href="https://www.youtube.com/@Avalancheavax">
+              <BsYoutube className="footer-social"></BsYoutube>
+            </a>
+            <a href="https://www.linkedin.com/company/avalancheavax">
+              <BsLinkedin className="footer-social"></BsLinkedin>
+            </a>
+            <a href="https://www.facebook.com/avalancheavax">
+              <BsFacebook className="footer-social"></BsFacebook>
+            </a>
+          </div>
+          <div className="row" style={{ backgroundColor: "lightpink" }}>
+            <div class="col">
+              <div class="col-demo">col</div>
             </div>
-            <div
-              className="footer-row"
-              style={{ backgroundColor: "lightyellow" }}
-            ></div>
-            <div className="footer-row" style={{ backgroundColor: "blue" }}>
-              <p>hello</p>
-              <p>hello</p>
-              <p>hello</p>
+            <div class="col">
+              <div class="col-demo">col</div>
+            </div>
+            <div class="col">
+              <div class="col-demo">col</div>
             </div>
           </div>
         </div>

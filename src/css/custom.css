@@ -254,13 +254,19 @@ span.menu__item {
 }
 
 .footer-row {
-  height: 50px;
-  border: 5px;
-  display: grid;
+  display: flex;
   justify-content: center;
 }
 
 .footer-social {
   margin-left: 20px;
   margin-right: 20px;
+  color: white;
+  height: 28px;
+  width: 28px;
+}
+
+.footer-social:hover {
+  color: var(--ifm-color-primary);
+  transition: color 0.15s, color 0.15s;
 }
