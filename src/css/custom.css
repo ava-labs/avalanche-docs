@@ -274,6 +274,7 @@ span.menu__item {
   font-weight: "800";
   font-size: large;
   margin-bottom: 2px;
+  color: var(--ifm-color-primary)
 }
 
 .footer-list {
@@ -289,7 +290,7 @@ span.menu__item {
 }
 
 .footer-main-list {
-  margin-left: 40px;
+  padding-left: 16px ;
   color: white ;
   margin-bottom: -10px;
 }
@@ -311,5 +312,8 @@ and (max-width: 996px) {
   }
   .footer-list {
     margin-left: 40px;
+  }
+  .footer-main-list {
+    margin-left: 24px;
   }
 }
