@@ -73,8 +73,8 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 
 Please note that you will have to wait until the node has finished bootstrapping before the node 
 can be a Primary Network or Subnet Validator. To check whether the node has finished bootstrapping, 
-run `avalanche node status --bootstrapped`. Once the node is finished bootstrapping, the response 
-will be:
+run `avalanche node status <clusterName> --bootstrapped`. Once the node is finished bootstrapping, 
+the response will be:
 
 ```text
 {
