@@ -31,7 +31,7 @@ To sync with a Subnet, run:
 avalanche node sync <clusterName> --subnet <subnetName>
 ```
 
-All the nodes in cluster `clusterName` will now be syncing to subnet `subnetName`
+All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`
 
 Wait until node is successfully `Syncing` with the Subnet before running the next commands. 
 
@@ -113,13 +113,13 @@ weight that you are assigning the validator. You can learn more about the stake 
 `weight` section.
 
 Next, enter the start time for the node to start validating the Subnet and when you want the node 
-to validate the Subnet until. 
+to validate the Subnet until. n
 
 Once all input is completed, you will another transaction ID indicating that the node is now a 
 Subnet Validator. 
 
 Once the start time that you chose for the node to be a Subnet Validator has elapsed, verify that 
-the node is a subnet validator by running `avalanche node status <clusterName> 
+the node is a Subnet validator by running `avalanche node status <clusterName> 
 --subnet <subnetName>`. 
 
 You should see:
