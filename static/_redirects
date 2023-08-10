@@ -511,3 +511,5 @@
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
 /subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301
+/community/README https://www.avax.network/ 301
+/community/bug-bounty https://hackenproof.com/avalanche/avalanche-protocol 301
