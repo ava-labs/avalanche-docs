@@ -12,6 +12,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 ## Prerequisites
 
 Before we begin, you will need to:
+
 - Create an AWS account and have an AWS `credentials` file in home directory, More info can be
   found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
@@ -42,6 +43,7 @@ Avalanche-CLI
 
 Currently, we have set the following specs of the AWS cloud server to a fixed value, but we are
 planning to implement customization feature in the near future:
+
 - Cloud Region: `us-east-2`
 - OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
 - Instance Type: `c5.2xlarge`
@@ -59,6 +61,7 @@ as the public IP that the node can be reached at.
 Avalanche-CLI also outputs the command that you can use to ssh into the cloud server node.
 
 By the end of successful run of `create` command, Avalanche-CLI would have:
+
 - Installed Avalanche Go in cloud server
 - Installed Avalanche CLI in cloud server
 - Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory.
