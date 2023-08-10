@@ -127,7 +127,7 @@ function Footer() {
                 <a href="https://shop.avax.network/">
                   <div className="footer-list">Merch</div>
                 </a>
-                <a href="https://docs.avax.network/community/tutorials-contest">
+                <a href="/deprecated/tutorials-contest">
                   <div className="footer-list">Tutorials Contest</div>
                 </a>
               </div>
