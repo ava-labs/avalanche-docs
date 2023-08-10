@@ -64,7 +64,7 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 - Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory.
   Back up this private key file as you will not be able to ssh into the cloud server node without it
 - Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
-  you can back up your node. More info about node backup can be found [here](./node-backup-and-restore.md)
+  you can back up your node. More info about node backup can be found [here](/node/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
 
