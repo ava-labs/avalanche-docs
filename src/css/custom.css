@@ -241,10 +241,11 @@ span.menu__item {
   margin-top: 10px;
 }
 
-.footer-logo-container {
+.footer-logo-row {
   display: grid;
   grid-template-columns:2fr 1fr 2fr;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .footer-col {
@@ -283,12 +284,12 @@ span.menu__item {
 
 .footer-list:hover {
   color: var(--ifm-color-primary);
-  transition: color 0.15s, color 0.15s;
+  transition: color 0.15s;
   text-decoration: none;
 }
 
 .footer-main-list {
-  margin-left: 20px;
+  margin-left: 40px;
   color: white ;
   margin-bottom: -10px;
 }
@@ -297,4 +298,18 @@ span.menu__item {
   color: var(--ifm-color-primary);
   transition: color 0.15s, color 0.15s;
   text-decoration: none;
+}
+
+@media screen
+and (max-width: 996px) {
+  .footer-social {
+    display: none;
+  }
+  .footer-heading {
+    margin-top: 10px;
+    margin-left: 40px;
+  }
+  .footer-list {
+    margin-left: 40px;
+  }
 }

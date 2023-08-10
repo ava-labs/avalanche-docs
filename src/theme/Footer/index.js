@@ -35,7 +35,7 @@ function Footer() {
     <footer className="footer footer--dark">
       <div className="container container--fluid"></div>
       <div class="row">
-        <div class="col col--4">
+        <div class="col md:w-1/4">
           <div className="footer-row">
             <Link
               className="footer-main-list"
@@ -66,7 +66,7 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <div class="col col--7 col--offset-1">
+        <div class="col md:w-3/4 mt-50 md:mt-0">
           <div className="footer-row">
             <a href="https://t.me/+KDajA4iToKY2ZjBk">
               <BsTelegram className="footer-social"></BsTelegram>
@@ -93,7 +93,7 @@ function Footer() {
               <BsFacebook className="footer-social"></BsFacebook>
             </a>
           </div>
-          <div className="row" style={{ marginTop: "10px" }}>
+          <div className="row" style={{ marginTop: "10px", maxWidth: "500px" }}>
             <div class="col" style={{}}>
               <h4 className="footer-heading">Developers</h4>
               <a href="https://forum.avax.network/">
@@ -134,17 +134,16 @@ function Footer() {
         </div>
       </div>
       <div className="footer__bottom text--center">
-        <div className="footer__copyright">
+        <img
+          class="menu-item"
+          src="/img/Avalanche_Horizontal_Red.svg"
+          style={{ maxWidth: "250px", margin: "2px" }}
+        ></img>
+        <div className="footer__copyright" style={{ fontSize: "x-small" }}>
           Copyright © {new Date().getFullYear()}{" "}
-          <a href="https://avax.network" className="hover:text-yellow">
+          <a href="https://avax.network" className="hover">
             Ava Labs, Inc.
-          </a>{" "}
-          <span className="mx-10">|</span> All rights reserved
-        </div>
-        <div className="footer-logo-container">
-          <div></div>
-          <img class="menu-item" src="/img/Avalanche_Horizontal_Red.svg"></img>
-          <div></div>
+          </a>
         </div>
       </div>
     </footer>
