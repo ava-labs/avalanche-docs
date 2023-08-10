@@ -3,6 +3,12 @@
 This page will guide you to start your own Avalanche Validator through Avalanche-CLI with only 
 1 command!
 
+:::warning
+
+ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
+
+:::
+
 ## Prerequisites
 
 Before we begin, you will need to: 
@@ -33,6 +39,13 @@ Ava Labs is not responsible for the cost incurred from starting up Avalanche val
 Avalanche-CLI
 
 :::
+
+Currently, we have set the following specs of the AWS cloud server to a fixed value, but we are 
+planning to implement customization feature in the near future: 
+- Cloud Region: `us-east-2`
+- OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
+- Instance Type: `c5.2xlarge`
+- Storage: `1 TB`
 
 The command will ask which Avalanche Go version that you would like to install in the cloud server. 
 You can choose `default` (which will install the latest available Avalanche Go version) or you can
