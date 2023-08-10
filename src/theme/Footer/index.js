@@ -18,6 +18,7 @@ import {
   BsLinkedin,
   BsReddit,
 } from "react-icons/bs";
+import { FaGraduationCap } from "react-icons/fa";
 
 function Footer() {
   const { footer } = useThemeConfig();
@@ -49,7 +50,10 @@ function Footer() {
                 className="footer-main-list"
                 href="https://academy.avax.com/?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=footer"
               >
-                <h3>Academy</h3>
+                <h3>
+                  Academy{" "}
+                  <FaGraduationCap className="footer-academy-cap"></FaGraduationCap>
+                </h3>
               </Link>
             </div>
             <div className="footer-row">
@@ -99,14 +103,14 @@ function Footer() {
             >
               <div class="col" style={{}}>
                 <h4 className="footer-heading">Developers</h4>
+                <a href="https://forum.avax.network/">
+                  <div className="footer-list">Forum</div>
+                </a>
                 <a href="https://stats.avax.network/dashboard/overview/">
                   <div className="footer-list">Network Stats</div>
                 </a>
                 <a href="https://www.youtube.com/playlist?list=PLRHl-ulWK4-GTJhSLF9omG2x_qn7E1O7n">
                   <div className="footer-list">Video Tutorials</div>
-                </a>
-                <a href="https://forum.avax.network/">
-                  <div className="footer-list">Forum</div>
                 </a>
                 <a href="https://hackenproof.com/avalanche/avalanche-protocol">
                   <div className="footer-list">Bug Bounty</div>
@@ -114,14 +118,17 @@ function Footer() {
               </div>
               <div class="col">
                 <h4 className="footer-heading">Community</h4>
-                <a href="https://medium.com/avalancheavax">
+                <a href="https://medium.com/@avaxdevelopers">
                   <div className="footer-list">Medium</div>
                 </a>
-                <a href="https://docs.avax.network/community/tutorials-contest">
-                  <div className="footer-list">Tutorials Contest</div>
+                <a href="https://www.avax.network/blog">
+                  <div className="footer-list">Blog</div>
                 </a>
                 <a href="https://shop.avax.network/">
                   <div className="footer-list">Merch</div>
+                </a>
+                <a href="https://docs.avax.network/community/tutorials-contest">
+                  <div className="footer-list">Tutorials Contest</div>
                 </a>
               </div>
               <div class="col">
@@ -150,7 +157,7 @@ function Footer() {
           ></img>
           <div className="footer__copyright" style={{ fontSize: "x-small" }}>
             Copyright © {new Date().getFullYear()}{" "}
-            <a href="https://avax.network" className="hover">
+            <a href="https://www.avax.network/terms-of-use" className="hover">
               Ava Labs, Inc.
             </a>
           </div>

@@ -301,6 +301,10 @@ span.menu__item {
   text-decoration: none;
 }
 
+.footer-academy-cap {
+  padding-top: 3px;
+}
+
 @media screen
 and (max-width: 996px) {
   .footer-social {
