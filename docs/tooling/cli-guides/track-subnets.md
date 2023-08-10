@@ -14,8 +14,8 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
-- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName> --bootstrapped` to check 
-bootstrap status)
+- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName> --bootstrapped`
+to check bootstrap status)
 - Deployed Subnet on Fuji in local machine
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network 
 and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
@@ -35,8 +35,8 @@ All the nodes in cluster `clusterName` will now be syncing to subnet `subnetName
 
 Wait until node is successfully `Syncing` with the Subnet before running the next commands. 
 
-To check sync status, run `avalanche node status <clusterName> --subnet <subnetName>`. Once the node is finished 
-syncing, the response will be:
+To check sync status, run `avalanche node status <clusterName> --subnet <subnetName>`. Once the 
+node is finished syncing, the response will be:
 
 ```text
 {
