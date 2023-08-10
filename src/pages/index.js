@@ -11,7 +11,6 @@ function Home() {
   return (
     <Layout title="Homepage" description="Avalanche Dev Docs">
       <main className={styles.main}>
-        {/* <main> */}
         <br />
         <h1
           align="center"

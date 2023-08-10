@@ -202,6 +202,9 @@ span.menu__item {
 }
 
 /* Custom Footer */
+.theme-doc-sidebar-menu{
+  font-size: 13px;
+}
 
 .footer {
   display: 'flex';
