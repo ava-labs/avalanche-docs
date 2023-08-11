@@ -10,9 +10,16 @@ function Home() {
 
   return (
     <Layout title="Homepage" description="Avalanche Dev Docs">
-      <main>
+      <main className={styles.main}>
         <br />
-        <h1 align="center" style={{ fontWeight: "750" }}>
+        <h1
+          align="center"
+          style={{
+            fontWeight: "700",
+            marginBottom: "0px",
+            fontSize: "x-large",
+          }}
+        >
           Welcome to Avalanche Dev Docs
         </h1>
         <section className={styles.features}>
