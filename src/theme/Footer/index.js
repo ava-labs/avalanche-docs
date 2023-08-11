@@ -149,13 +149,11 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="footer__bottom text--center" style={{ margin: "5px" }}>
-          <img
-            class="menu-item"
-            src="/img/Avalanche_Horizontal_Red.svg"
-            style={{ maxWidth: "250px" }}
-          ></img>
-          <div className="footer__copyright" style={{ fontSize: "x-small" }}>
+        <div className="footer__bottom text--center">
+          <div
+            className="footer__copyright"
+            style={{ fontSize: "small", padding: "15px" }}
+          >
             Copyright © {new Date().getFullYear()}{" "}
             <a href="https://www.avax.network/terms-of-use" className="hover">
               Ava Labs, Inc.

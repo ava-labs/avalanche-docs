@@ -202,14 +202,14 @@ span.menu__item {
 }
 
 /* Custom Footer */
-.theme-doc-sidebar-menu{
+.theme-doc-sidebar-menu {
   font-size: 13px;
 }
 
 .footer {
-  display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-grid {
@@ -251,14 +251,14 @@ span.menu__item {
 }
 
 .footer-heading {
-  font-weight: "800";
+  font-weight: 800;
   font-size: large;
   margin-bottom: 2px;
   color: var(--ifm-color-primary)
 }
 
 .footer-list {
-  font-weight: "600";
+  font-weight: 600;
   font-size: small;
   color: white;
 }
