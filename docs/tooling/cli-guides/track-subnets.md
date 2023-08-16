@@ -76,7 +76,7 @@ More info regarding minimum staking amount in different networks can be found [h
 
 ```text
  What stake weight would you like to assign to the validator?: 
-  ▸ Default (1 AVAX)
+  ▸ Default (1.00 AVAX)
     Custom
 ```
 
