@@ -36,8 +36,8 @@ You can find more about SSH and how to use it
 
 ### Modify and Build Subnet-EVM
 
-To prove you're running your custom binary and not the stock Subnet-EVM included with Avalanche-CLI, you need
-to modify the Subnet-EVM binary by making a minor change.
+To prove you're running your custom binary and not the stock Subnet-EVM included with
+Avalanche-CLI, you need to modify the Subnet-EVM binary by making a minor change.
 
 Navigate to the directory you cloned Subnet-EVM into and generate a new commit:
 
