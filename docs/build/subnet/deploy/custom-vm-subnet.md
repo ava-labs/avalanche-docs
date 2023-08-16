@@ -265,7 +265,7 @@ The command returns a list of all the VMs your local node is currently running a
 
 Your results may be slightly different, but you can see that in addition to the X-Chain's
 `avm`, the C-Chain's `evm`, and the P-Chain's `platform` VM, the node is running the custom VM with
-commit `c0fe6506a40da466285f37dd0d3c044f494cce32`. 
+commit `c0fe6506a40da466285f37dd0d3c044f494cce32`.
 
 ### Check a Balance
 
@@ -283,8 +283,8 @@ curl --location --request POST 'http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc'
     "method": "eth_getBalance",
     "params": [
         "0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc",
-        "latest"                                     
-    ],          
+        "latest"
+    ],
     "id": 1
 }'
 ```
