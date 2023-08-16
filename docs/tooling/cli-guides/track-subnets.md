@@ -88,12 +88,16 @@ Next, choose how long the node will be validating for:
     Custom
 ```
 
-We have set the start time for the node to be a Primary Network Validator to be in 1 minute.
+We have set the start time for the node to be a Primary Network Validator to be in 20 seconds.
 
 Once all the inputs are completed you will see a transaction ID indicating that the node is now
 a Primary Network Validator.
 
-Next, we will wait for 1 minute for the node to officially start as a Primary Network Validator. 
+Note: if you see an error indicating that the transaction is not committed, run 
+`avalanche node sync <clusterName> --subnet <subnetName>` again as it could be due to the validator
+start time having elapsed.
+
+Next, we will wait for 20 seconds for the node to officially start as a Primary Network Validator. 
 
 We will then proceed with adding the node as a Subnet Validator. Similar to adding the node as a 
 Primary Network Validator, the wizard will ask you for how you would like to pay for the transaction
