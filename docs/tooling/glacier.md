@@ -6,7 +6,7 @@ description: The Glacier API is a performant API that allows web3 developers to 
 
 The Glacier API is a performant API that allows web3 developers to more easily
 access the indexed blockchain data they need to build powerful applications on
-top of Avalanche's primary and Subnets as well as Ethereum.
+top of Avalanche's primary network and Subnets as well as Ethereum.
 
 If you'd like increased rate limits for accessing the Glacier API, please 
 visit [AvaCloud portal](https://app.avacloud.io/).
