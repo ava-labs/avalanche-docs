@@ -182,6 +182,12 @@ state sync. An example setting of this field would be
 `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here
 must be the same with the number of given `--state-sync-ids`.
 
+## Partial Sync Primary Network
+
+#### `--partial-sync-primary-network` (string)
+
+Partial sync enables non-validators to optionally sync only the P-chain on the primary network.
+
 ## Chain Configs
 
 Some blockchains allow the node operator to provide custom configurations for
