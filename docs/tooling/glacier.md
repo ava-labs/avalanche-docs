@@ -9,7 +9,7 @@ access the indexed blockchain data they need to build powerful applications on
 top of Avalanche's primary network and Subnets as well as Ethereum.
 
 If you'd like increased rate limits for accessing the Glacier API, please 
-visit [AvaCloud portal](https://app.avacloud.io/).
+visit [AvaCloud portal](https://avacloud.io/).
 
 ## Benefits
 
