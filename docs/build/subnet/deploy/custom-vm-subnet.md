@@ -147,8 +147,7 @@ Enter the path to the genesis file you created in this [step](#create-a-custom-g
 ### Enter the Path to Your VM Binary
 
 Next, enter the path to your VM binary. This should be the path to the `custom_evm.bin` you
-created [previously](#modify-and-build-subnet-evm)
-).
+created [previously](#modify-and-build-subnet-evm).
 
 ```shell
 ✔ Enter path to vm binary: ./custom_vm.bin
