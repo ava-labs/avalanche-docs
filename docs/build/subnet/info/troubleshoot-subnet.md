@@ -102,3 +102,20 @@ to the latest AvalancheGo version when deploying publicly to the Fuji Testnet or
 Updates to AvalancheGo's RPC version are **not** tied to its semantic version scheme. Minor AvalancheGo
 version bumps may include a breaking RPC version bump.
 :::
+
+## Fix for MacBook Air M1/M2 — ‘Bad CPU type in executable’ Error
+
+When running `avalanche subnet deploy` via the Avalanche-CLI, the terminal may throw an error that
+contains the following: 
+
+```
+zsh: bad CPU type in executable:
+/Users/user.name/Downloads/build/avalanchego
+```
+
+This is because some Macs lack support for x86 binaries. Running the following command should fix
+this issue:
+
+`/usr/sbin/softwareupdate --install-rosetta`
+
+
