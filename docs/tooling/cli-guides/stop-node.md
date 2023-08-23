@@ -1,4 +1,4 @@
-# Stop cloud server nodes
+# Stop Cloud Server Nodes
 
 This page will guide you to stop a cloud server node set up by Avalanche-CLI
 
@@ -8,7 +8,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 :::
 
-## Stopping a node
+## Stopping A Node
 
 To stop all nodes in a cluster, run:
 
