@@ -1,4 +1,4 @@
-# Be a Subnet validator 
+# Be a Primary Network validator 
 
 This page will guide you on how to have your node validate Primary Network! Currently, we are only 
 supporting validating on Fuji network with Mainnet support coming in the near future!
