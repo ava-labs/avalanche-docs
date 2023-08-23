@@ -44,15 +44,25 @@ Avalanche-CLI
 Currently, we have set the following specs of the AWS cloud server to a fixed value, but we are
 planning to implement customization feature in the near future:
 
-- Cloud Region: `us-east-2`
 - OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
 - Instance Type: `c5.2xlarge`
 - Storage: `1 TB`
 
-The command will ask which Avalanche Go version that you would like to install in the cloud server.
-You can choose `default` (which will install the latest available Avalanche Go version) or you can
-enter the name of a deployed Subnet in your local machine that you plan to be validated by this
-node (we will get the latest Avalanche Go version that is still compatible with the deployed
+The command will first ask which region you want to set up your cloud server in: 
+
+```text
+ Which AWS region do you want to set up your node in?: 
+  ▸ us-east-1
+    us-east-2
+    us-west-1
+    us-west-2
+    Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+```
+
+The command will then ask which Avalanche Go version that you would like to install in the cloud 
+server. You can choose `default` (which will install the latest available Avalanche Go version) or 
+you can enter the name of a deployed Subnet in your local machine that you plan to be validated by 
+this node (we will get the latest Avalanche Go version that is still compatible with the deployed
 Subnet's RPC version)
 
 Once the command has successfully completed, Avalanche-CLI outputs the cloud server node ID as well
@@ -73,7 +83,7 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 
 Please note that you will have to wait until the node has finished bootstrapping before the node 
 can be a Primary Network or Subnet Validator. To check whether the node has finished bootstrapping, 
-run `avalanche node status <clusterName> --bootstrapped`. Once the node is finished bootstrapping, 
+run `avalanche node status <clusterName>`. Once the node is finished bootstrapping, 
 the response will be:
 
 ```text

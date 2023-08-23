@@ -14,8 +14,8 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
-- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName> --bootstrapped`
-to check bootstrap status)
+- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName>` to check 
+bootstrap status)
 - Deployed Subnet on Fuji in local machine
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network 
 and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
@@ -55,7 +55,7 @@ Once the node has synced, we can now have the node be a Subnet Validator.
 To be a Subnet Validator, run:
 
 ```shell
-avalanche node join <clusterName> --subnet <subnetName>
+avalanche node validate subnet <clusterName> --subnet <subnetName>
 ```
 
 If the node is not yet a Primary Network Validator, we will first add it as a Primary Network 
@@ -94,8 +94,8 @@ Once all the inputs are completed you will see a transaction ID indicating that 
 a Primary Network Validator.
 
 Note: if you see an error indicating that the transaction is not committed, run 
-`avalanche node sync <clusterName> --subnet <subnetName>` again as it could be due to the validator
-start time having elapsed.
+`avalanche node validate subnet <clusterName> --subnet <subnetName>` again as it could be due to 
+the validator start time having elapsed.
 
 Next, we will wait for 20 seconds for the node to officially start as a Primary Network Validator. 
 
@@ -117,7 +117,7 @@ weight that you are assigning the validator. You can learn more about the stake 
 `weight` section.
 
 Next, enter the start time for the node to start validating the Subnet and when you want the node 
-to validate the Subnet until. n
+to validate the Subnet until. 
 
 Once all input is completed, you will another transaction ID indicating that the node is now a 
 Subnet Validator. 
