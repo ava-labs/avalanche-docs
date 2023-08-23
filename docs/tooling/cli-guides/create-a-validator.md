@@ -59,6 +59,9 @@ The command will first ask which region you want to set up your cloud server in:
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
+Note: There is a limit to how many Elastic IPs an AWS account can have at a region (currently it is 
+5). If you need to create more than 5 cloud servers, please use different AWS regions.
+
 The command will then ask which Avalanche Go version that you would like to install in the cloud 
 server. You can choose `default` (which will install the latest available Avalanche Go version) or 
 you can enter the name of a deployed Subnet in your local machine that you plan to be validated by 
