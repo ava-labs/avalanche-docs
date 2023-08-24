@@ -239,7 +239,8 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-Note that this formula is the same as the reward formula at the top of this section because $EffectiveConsumptionRate$ = $MaxConsumptionRate$.
+Note that this formula is the same as the reward formula at the top of this section
+because $EffectiveConsumptionRate$ = $MaxConsumptionRate$.
 
 The reward formula above is used in the Primary Network to calculate
 stakers reward. For reference, you can find Primary network parameters in [the section below](#primary-network-parameters-on-mainnet).
