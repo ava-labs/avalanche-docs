@@ -52,7 +52,9 @@ maximum at any point in time, including at Subnet creation.
 
 ### `MinConsumptionRate`
 
-`MinConsumptionRate` has type `uint64` and it's the minimal rate a validator can earn if the `UptimeRequirement` is satisfied. If `StakingPeriod` == `MinStakeDuration`, the validator will earn the `MinConsumptionRate`.
+`MinConsumptionRate` has type `uint64` and it's the minimal rate a validator can earn if the
+`UptimeRequirement` is satisfied. If `StakingPeriod` == `MinStakeDuration`, the
+validator will earn the `MinConsumptionRate`.
 You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
@@ -62,7 +64,9 @@ See [Notes on Percentages](#notes-on-percentages) section to understand `Percent
 
 ### `MaxConsumptionRate`
 
-`MaxConsumptionRate` has type `uint64` and it's the maximal rate a validator can earn if the `UptimeRequirement` is satisfied. If `StakingPeriod` == `MaxStakeDuration` == `MintingPeriod`, the validator will earn the `MaxConsumptionRate`.
+`MaxConsumptionRate` has type `uint64` and it's the maximal rate a validator can earn if the
+`UptimeRequirement` is satisfied. If `StakingPeriod` == `MaxStakeDuration` == `MintingPeriod`, the
+validator will earn the `MaxConsumptionRate`.
 You can find more details about it in the [Reward Formula section](#reward-formula).
 The following constraints apply:
 
@@ -103,7 +107,8 @@ The following constraints apply:
 - `MaxStakeDuration` must be larger or equal to `MinStakeDuration`.
 - `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
 
-`GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all Subnets.
+`GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all
+Subnets.
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
