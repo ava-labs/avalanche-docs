@@ -3,6 +3,8 @@
 This page will guide you to start your own Avalanche Validator through Avalanche-CLI with only
 1 command!
 
+Currently, we are only supporting Fuji network with Mainnet support coming in the near future!
+
 :::warning
 
 ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
