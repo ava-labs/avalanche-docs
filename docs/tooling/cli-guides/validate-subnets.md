@@ -28,7 +28,7 @@ Before the node can be a Subnet Validator, the node needs to first sync with the
 To sync with a Subnet, run:
 
 ```shell
-avalanche node sync <clusterName> --subnet <subnetName>
+avalanche node sync <clusterName> <subnetName>
 ```
 
 All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`
@@ -55,7 +55,7 @@ Once the node has synced, we can now have the node be a Subnet Validator.
 To be a Subnet Validator, run:
 
 ```shell
-avalanche node validate subnet <clusterName> --subnet <subnetName>
+avalanche node validate subnet <clusterName> <subnetName>
 ```
 
 If the node is not yet a Primary Network Validator, we will first add it as a Primary Network 
@@ -94,7 +94,7 @@ Once all the inputs are completed you will see a transaction ID indicating that 
 a Primary Network Validator.
 
 Note: if you see an error indicating that the transaction is not committed, run 
-`avalanche node validate subnet <clusterName> --subnet <subnetName>` again as it could be due to 
+`avalanche node validate subnet <clusterName> <subnetName>` again as it could be due to 
 the validator start time having elapsed.
 
 Next, we will wait for 20 seconds for the node to officially start as a Primary Network Validator. 
