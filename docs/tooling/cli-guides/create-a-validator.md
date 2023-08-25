@@ -16,7 +16,7 @@ Before we begin, you will need to:
 - Create an AWS account and have an AWS `credentials` file in home directory, More info can be
   found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- Install [Ansible](https://crunchify.com/how-to-install-ansible-on-macos/)
+- Install [Ansible](https://adamtheautomator.com/install-ansible/)
 
 Currently, we are only supporting AWS cloud service, but we plan to add more cloud services in the
 near future.
