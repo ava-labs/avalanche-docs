@@ -1,4 +1,4 @@
-# Start a validator with 1-command
+# Start A Validator With 1-Command
 
 This page will guide you to start your own Avalanche Validator through Avalanche-CLI with only
 1 command!
