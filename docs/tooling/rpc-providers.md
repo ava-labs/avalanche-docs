@@ -210,6 +210,27 @@ Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 - For C-Chain RPC Endpoint AVAX, the URL is `https://web3endpoints.com/avax-mainnet`
 
+  
+### DRPC
+
+[DRPC](https://drpc.org/) supports the C-Chain.
+
+
+#### Mainnet
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche.drpc.org`
+
+#### Testnet (Fuji)
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-fuji.drpc.org`
+
+  Features:
+
+- Decentralized RPC nodes
+- Node balancing
+- Unlimited compute units per month on the free tier
+- On free-tier is available Websockets
+
 ### GetBlock 
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
