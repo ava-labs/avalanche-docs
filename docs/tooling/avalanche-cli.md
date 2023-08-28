@@ -834,7 +834,7 @@ If the command is run before the nodes are Primary Network validators, the comma
 make the nodes Primary Network validators before making them Subnet validators. 
 If The command is run before the nodes are bootstrapped on the Primary Network, the command
 will fail. 
-You can check the bootstrap status by calling avalanche node status `<clusterName>`
+You can check the bootstrap status by calling `avalanche node status <clusterName>`.
 If The command is run before the nodes are synced to the Subnet, the command will fail.
 You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <subnetName>`.
 
