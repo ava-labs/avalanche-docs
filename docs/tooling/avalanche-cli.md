@@ -788,7 +788,7 @@ You can check the Subnet bootstrap status by calling avalanche `node status <clu
 The `node validate` command suite provides a collection of commands for nodes to join
 the Primary Network and Subnets as validators.
 If any of the commands is run before the nodes are bootstrapped on the Primary Network, the command 
-will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`
+will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`.
 
 ### Node Validate Primary
 
