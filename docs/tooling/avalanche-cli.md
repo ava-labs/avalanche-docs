@@ -669,7 +669,7 @@ status by running `avalanche node status`.
 
 The created node will be part of group of validators called `<clusterName>`
 and users can call node commands with `<clusterName>` so that the command
-will apply to all nodes in the cluster
+will apply to all nodes in the cluster.
 
 **Usage:**
 
