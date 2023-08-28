@@ -32,7 +32,7 @@ and Subnet Validator transactions. Instructions on how to fund stored key on Fuj
 
 Before the node can be a Subnet Validator, the node needs to first sync with the Subnet. 
 
-To sync with a Subnet, run:
+To have all nodes in cluster `clusterName` sync with Subnet `subnetName`, run:
 
 ```shell
 avalanche node sync <clusterName> <subnetName>
@@ -95,8 +95,6 @@ Next, choose how long the node will be validating for:
     Custom
 ```
 
-We have set the start time for the node to be a Primary Network Validator to be in 20 seconds.
-
 Once all the inputs are completed you will see a transaction ID indicating that the node is now
 a Primary Network Validator.
 
@@ -118,16 +116,16 @@ Once that is completed, you will be asked what stake you would like to assign th
     Custom
 ```
 
-Note that for this part, you are not staking actual AVAX in the validator. This is arbitrary 
-weight that you are assigning the validator. You can learn more about the stake weight parameter in
+Note that for this part, you are not staking actual AVAX in the validator. This is an arbitrary 
+weight that you are assigning to the validator. You can learn more about the stake weight parameter in
 [addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
 `weight` section.
 
 Next, enter the start time for the node to start validating the Subnet and when you want the node 
 to validate the Subnet until. 
 
-Once all input is completed, you will another transaction ID indicating that the node is now a 
-Subnet Validator. 
+Once all input is completed, you will another transaction ID indicating that the node is now 
+scheduled to be a Subnet Validator. 
 
 Once the start time that you chose for the node to be a Subnet Validator has elapsed, verify that 
 the node is a Subnet validator by running `avalanche node status <clusterName> 

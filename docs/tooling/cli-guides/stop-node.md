@@ -41,5 +41,5 @@ Avalanche-CLI.
 
 :::
 
-Once completed, the EC2 instance set up on AWS would have stopped and the Elastic IP associated 
-with it would also have been released.
+Once completed, the EC2 instance set up on AWS would have been stopped and the Elastic IP 
+associated with it would have been released.

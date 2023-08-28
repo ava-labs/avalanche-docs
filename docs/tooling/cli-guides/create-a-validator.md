@@ -53,8 +53,8 @@ services via Avalanche-CLI.
 
 :::
 
-Currently, we have set the following specs of the AWS cloud server to a fixed value, but we are
-planning to implement customization feature in the near future:
+Currently, we have set the following specs of the AWS cloud server to a fixed value, but we plan to 
+enable customization in the near future:
 
 - OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
 - Instance Type: `c5.2xlarge`
@@ -71,14 +71,13 @@ The command will first ask which region you want to set up your cloud server in:
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
-Note: There is a limit to how many Elastic IPs an AWS account can have at a region (currently it is 
-5). If you need to create more than 5 cloud servers, please use different AWS regions.
+Note: AWS accounts have a limit of 5 Elastics IPs per region. If you need to create more than 5 
+cloud servers, you will need to use multiple AWS regions.
 
-The command will then ask which Avalanche Go version that you would like to install in the cloud 
-server. You can choose `default` (which will install the latest available Avalanche Go version) or 
-you can enter the name of a deployed Subnet in your local machine that you plan to be validated by 
-this node (we will get the latest Avalanche Go version that is still compatible with the deployed
-Subnet's RPC version)
+The command will then ask which Avalanche Go version you would like to install in the cloud server. 
+You can choose `default` (which will install the latest version) or you can enter the name of a 
+Subnet created with CLI that you plan to be validated by this node (we will get the latest version 
+that is compatible with the deployed Subnet's RPC version).
 
 Once the command has successfully completed, Avalanche-CLI outputs the cloud server node ID as well
 as the public IP that the node can be reached at.
@@ -95,7 +94,7 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
-## Check bootstrap status
+## Check Bootstrap Status
 
 Please note that you will have to wait until the node has finished bootstrapping before the node 
 can be a Primary Network or Subnet Validator. To check whether the node has finished bootstrapping, 

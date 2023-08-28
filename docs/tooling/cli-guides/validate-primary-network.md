@@ -32,7 +32,7 @@ Instructions on how to fund stored key on Fuji can be found [here](/build/subnet
 Once the node is bootstrapped to Primary Network, we can now have the node be a Primary Network 
 Validator.
 
-To be a Primary Network Validator, run:
+To have all nodes in cluster `clusterName` be Primary Network Validators, run:
 
 ```shell
 avalanche node validate primary <clusterName> 
