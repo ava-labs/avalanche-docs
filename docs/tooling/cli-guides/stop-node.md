@@ -1,6 +1,13 @@
-# Stop Cloud Server Nodes
+---
+tags: [Tooling, Avalanche-CLI]
+description: This page provides instructions for halting a cloud server node established by Avalanche-CLI.
+pagination_label: Stop Nodes Originally Created with Avalanche-CLI
+sidebar_label: Stop a Node
+sidebar_position: 6
+---
+# Stop Nodes Originally Created with Avalanche-CLI
 
-This page will guide you to stop a cloud server node set up by Avalanche-CLI
+This page provides instructions for halting a cloud server node established by Avalanche-CLI.
 
 :::warning
 
