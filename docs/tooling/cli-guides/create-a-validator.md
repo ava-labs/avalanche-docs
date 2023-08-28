@@ -1,4 +1,12 @@
-# Start a Validator with 1-command
+---
+tags: [Tooling, Avalanche-CLI]
+description: This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI command.
+pagination_label: Run an Avalanche Validator with One Avalanche-CLI Command
+sidebar_label: Run a Validator 
+sidebar_position: 3
+---
+
+# Run an Avalanche Validator with One Avalanche-CLI Command 
 
 This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI 
 command.
