@@ -665,7 +665,7 @@ walks you through all the steps you need to set up a validator.
 Once this command is completed, you will have to wait for the validator
 to finish bootstrapping on the primary network before running further
 commands on it, for example validating a Subnet. You can check the bootstrapping
-status by running avalanche node status 
+status by running `avalanche node status`. 
 
 The created node will be part of group of validators called `<clusterName>`
 and users can call node commands with `<clusterName>` so that the command
