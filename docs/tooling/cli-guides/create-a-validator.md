@@ -23,7 +23,7 @@ Before we begin, you will need to:
 Currently, we are only supporting AWS cloud service, but we plan to add more cloud services in the
 near future.
 
-## Starting a Validator
+## Start the Validator
 
 To start an Avalanche validator, run:
 
