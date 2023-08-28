@@ -25,8 +25,8 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to:
 
-- Create an AWS account and have an AWS `credentials` file in home directory, More info can be
-  found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
+- Create an AWS account and have an AWS `credentials` file in home directory with [default] profile 
+set. More info can be found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - Install [Ansible](https://adamtheautomator.com/install-ansible/)
 
@@ -48,8 +48,8 @@ cluster `clusterName` will apply to all nodes in the cluster.
 
 Please note that running a validator on AWS will incur costs.
 
-Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud services 
-via Avalanche-CLI.
+Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud 
+services via Avalanche-CLI.
 
 :::
 
@@ -95,6 +95,7 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
+## Check bootstrap status
 
 Please note that you will have to wait until the node has finished bootstrapping before the node 
 can be a Primary Network or Subnet Validator. To check whether the node has finished bootstrapping, 

@@ -21,9 +21,9 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
-- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName>` to check 
+- A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>` to check 
 bootstrap status)
-- Deployed Subnet on Fuji in local machine
+- Deployed a Subnet on Fuji through CLI as described [here](/build/subnet/deploy/fuji-testnet-subnet)
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network 
 and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
 [here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key)
@@ -68,8 +68,8 @@ avalanche node validate subnet <clusterName> <subnetName>
 If the node is not yet a Primary Network Validator, we will first add it as a Primary Network 
 Validator. 
 
-The wizard will ask us how we want to pay for the Add Primary Network transaction fee. 
-We are going to choose `Use stored key` for Fuji:
+The wizard will ask us how we want to pay for the transaction fees. 
+Choose `Use stored key` for Fuji:
 
 ```text
  Which key source should be used to pay transaction fees?:

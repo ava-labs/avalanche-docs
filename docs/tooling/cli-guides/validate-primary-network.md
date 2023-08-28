@@ -21,11 +21,11 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
-- Node is bootstrapped to Primary Network (run `avalanche node status <clusterName>`to check 
-bootstrap status)
-- Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network 
-and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
-[here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key).
+- A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>`to check 
+bootstrap status as described[here](/docs/tooling/cli-guides/create-a-validator.md#check-bootstrap-status)
+)
+- Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network. 
+Instructions on how to fund stored key on Fuji can be found [here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key).
 
 ## Be a Primary Network Validator
 
@@ -38,10 +38,10 @@ To be a Primary Network Validator, run:
 avalanche node validate primary <clusterName> 
 ```
 
-We have set the start time for the node to be a Primary Network Validator to be in 20 seconds.
+The node will start validating the Primary Network 20 seconds after the command is run.
 
-The wizard will ask us how we want to pay for the Add Primary Network transaction fee. 
-We are going to choose `Use stored key` for Fuji:
+The wizard will ask us how we want to pay for the transaction fee. 
+Choose `Use stored key` for Fuji:
 
 ```text
  Which key source should be used to pay transaction fees?:
