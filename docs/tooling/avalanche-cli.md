@@ -691,7 +691,7 @@ will apply to all nodes in the cluster
 
 :::
 
-The `node list` command lists all clusters together with their nodes.
+The `node list` command lists all clusters with their nodes.
 
 **Usage:**
 
