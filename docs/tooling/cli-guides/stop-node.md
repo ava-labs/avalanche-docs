@@ -27,7 +27,7 @@ directory (which are used to back up your node). More info about node backup can
 
 :::note
 
-Please note that a stopped on AWS can still incur cost (such as storage fees).
+Please note that a stopped node on AWS can still incur cost (such as storage fees).
 
 Ava Labs is not responsible for the cost incurred from stopping Avalanche node through
 Avalanche-CLI
