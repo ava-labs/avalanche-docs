@@ -18,7 +18,7 @@ Before we begin, you will need to have:
 bootstrap status)
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network 
 and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
-[here](https://docs.avax.network/build/subnet/deploy/fuji-testnet-subnet#funding-the-key)
+[here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key).
 
 ## Be a Primary Network Validator
 
