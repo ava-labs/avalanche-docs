@@ -836,7 +836,7 @@ If The command is run before the nodes are bootstrapped on the Primary Network, 
 will fail. 
 You can check the bootstrap status by calling avalanche node status `<clusterName>`
 If The command is run before the nodes are synced to the Subnet, the command will fail.
-You can check the Subnet sync status by calling avalanche node status `<clusterName> --subnet <subnetName>`
+You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <subnetName>`.
 
 **Usage:**
 
