@@ -1088,7 +1088,7 @@ Allows the node to connect peers with private IPs. Defaults to `true`.
 The type of compression to use when sending messages to peers. Defaults to `gzip`.
 Must be one of [`gzip`, `zstd`, `none`].
 
-Nodes can handle inbound gzip compressed messages but by default send zstd compressed messages.
+Nodes can handle inbound `gzip` compressed messages but by default send `zstd` compressed messages.
 
 #### `--network-initial-timeout` (duration)
 
