@@ -1,7 +1,14 @@
-# Be a Subnet validator 
+---
+tags: [Tooling, Avalanche-CLI]
+description: This page demonstrates how to configure a node to validate an Avalanche Subnet. Validation via Avalanche-CLI is currently only supported on Fuji.
+pagination_label: Configure a Node to Validate a Subnet with Avalanche-CLI 
+sidebar_label: Validate a Subnet
+sidebar_position: 5
+---
+# Configure a Node to Validate a Subnet with Avalanche-CLI 
 
-This page will guide you on how to have your node validate a Subnet! Currently, we are only 
-supporting validating on Fuji network with Mainnet support coming in the near future!
+This page demonstrates how to configure a node to validate an Avalanche Subnet. 
+Validation via Avalanche-CLI is currently only supported on Fuji.
 
 :::warning
 
