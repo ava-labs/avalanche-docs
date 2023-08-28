@@ -38,7 +38,7 @@ cluster `clusterName` will apply to all nodes in the cluster.
 
 :::note
 
-Please note that running a validator on AWS will incur cost.
+Please note that running a validator on AWS will incur costs.
 
 Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud services 
 via Avalanche-CLI.
