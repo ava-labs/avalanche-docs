@@ -31,7 +31,7 @@ To sync with a Subnet, run:
 avalanche node sync <clusterName> <subnetName>
 ```
 
-All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`
+All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`.
 
 Wait until node is successfully `Syncing` with the Subnet before running the next commands. 
 
