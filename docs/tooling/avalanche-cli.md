@@ -644,7 +644,7 @@ avalanche subnet upgrade export [subnetName] [flags]
 ## Node
 
 The `node` command suite provides a collection of tools for creating and maintaining 
-validators on Avalanche Network.
+validators on the Avalanche Network.
 
 To get started, use the node create command wizard to walk through the
 configuration to make your node a primary validator on Avalanche public network. You can use the 
