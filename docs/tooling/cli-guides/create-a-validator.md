@@ -1,7 +1,7 @@
 # Start a Validator with 1-command
 
-This page will guide you to start your own Avalanche Validator through Avalanche-CLI with only
-1 command!
+This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI 
+command.
 
 Currently, we are only supporting Fuji network with Mainnet support coming in the near future!
 
