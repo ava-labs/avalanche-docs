@@ -715,7 +715,7 @@ The `node list` command lists all clusters with their nodes.
 
 The `node status` command gets the bootstrap status of all nodes in a cluster on
 the Primary Network. 
-To get the bootstrap status of a node with a Subnet, use `--subnet` flag
+To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 
 **Usage:**
 
