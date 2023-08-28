@@ -72,7 +72,7 @@ We are going to choose `Use stored key` for Fuji:
 
 Once you have selected the key to pay with, choose how many AVAX you would like to stake in the 
 validator. Default is the minimum amount of AVAX that can be staked in a Fuji Network Validator.
-More info regarding minimum staking amount in different networks can be found [here](https://docs.avax.network/nodes/validate/how-to-stake#fuji-testnet)
+More info regarding minimum staking amount in different networks can be found [here](/nodes/validate/how-to-stake.md#fuji-testnet).
 
 ```text
  What stake weight would you like to assign to the validator?: 
