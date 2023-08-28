@@ -22,8 +22,8 @@ Before we begin, you will need to:
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - Install [Ansible](https://adamtheautomator.com/install-ansible/)
 
-Currently, we are only supporting AWS cloud service, but we plan to add more cloud services in the
-near future.
+Currently, we are only support AWS cloud services, but we plan to add support for more cloud 
+services in the near future.
 
 ## Start the Validator
 
