@@ -3,7 +3,9 @@
 This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI 
 command.
 
-Currently, we are only supporting Fuji network with Mainnet support coming in the near future!
+:::info
+Currently, only Fuji network is supported.
+:::
 
 :::warning
 
