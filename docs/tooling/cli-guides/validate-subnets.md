@@ -121,8 +121,7 @@ weight that you are assigning to the validator. You can learn more about the sta
 [addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
 `weight` section.
 
-Next, enter the start time for the node to start validating the Subnet and when you want the node 
-to validate the Subnet until. 
+Next, enter the start and end time for the node to validate the Subnet.
 
 Once all input is completed, you will another transaction ID indicating that the node is now 
 scheduled to be a Subnet Validator. 
