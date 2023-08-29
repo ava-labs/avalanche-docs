@@ -260,9 +260,9 @@ P-Chain, C-Chain, and Index API.
 
 - The URL is  `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
 
-### ChainStack
+### Chainstack
 
-[ChainStack](https://chainstack.com/build-better-with-avalanche/) supports the
+[Chainstack](https://chainstack.com/build-better-with-avalanche/) supports the
 C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
 
 Features:
@@ -275,16 +275,16 @@ Features:
 
 ##### HTTP
 
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
-- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
+- For C-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
+- For X-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
+- For P-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
 
 ##### Websockets
 
 Websockets are available for the C-chain and the X-chain.
 
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+- For C-Chain API, the regional elastic node URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`, and the global elastic node URL is `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
+- For X-Chain API, the regional elastic node URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`, and the global elastic node URL is `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
 
 #### Testnet (Fuji)
 
@@ -298,8 +298,8 @@ Websockets are available for the C-chain and the X-chain.
 
 Websockets are available for the C-chain and the X-chain.
 
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+- For C-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
+- For X-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
 
 ### PublicNode by Allnodes
 
