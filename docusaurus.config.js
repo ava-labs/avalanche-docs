@@ -105,29 +105,26 @@ const config = {
             label: "Learn",
           },
           {
-            type: "docSidebar",
+            type: "dropdown",
             position: "left",
-            sidebarId: "quickStart",
-            label: "QuickStart",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "dapps",
-            label: "DApps",
-          },
-
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "subnets",
-            label: "Subnets",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "apis",
-            label: "APIs",
+            label: "Build",
+            items: [
+              {
+                type: "docSidebar",
+                label: "Dapps",
+                sidebarId: "build-dapp",
+              },
+              {
+                type: "docSidebar",
+                label: "Subnets",
+                sidebarId: "build-subnet",
+              },
+              {
+                type: "docSidebar",
+                label: "Virtual Machines",
+                sidebarId: "build-vm",
+              },
+            ],
           },
           {
             type: "docSidebar",
@@ -138,14 +135,14 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "specs",
-            label: "Specs",
+            sidebarId: "tooling",
+            label: "Tooling",
           },
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "community",
-            label: "Community",
+            sidebarId: "reference",
+            label: "Reference",
           },
           {
             type: "localeDropdown",
@@ -157,11 +154,6 @@ const config = {
             position: "right",
           },
           {
-            href: "https://twitter.com/AvaxDevelopers",
-            className: "header-twitter-link",
-            position: "right",
-          },
-          {
             href: "https://github.com/ava-labs",
             className: "header-github-link",
             position: "right",
@@ -169,53 +161,11 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Discord",
-                href: "https://chat.avax.network",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/avax",
-              },
-              {
-                label: "Telegram",
-                href: "https://t.me/avalancheavax",
-              },
-              {
-                label: "Medium",
-                href: "https://medium.com/avalancheavax",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "YouTube",
-                href: "https://youtube.com/avalancheavax",
-              },
-              {
-                label: "Ecosystem",
-                href: "https://ecosystem.avax.network",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/ava-labs/avalanche-docs",
-              },
-              {
-                label: "Terms of Use",
-                href: "https://www.avax.network/terms-of-use",
-              },
-            ],
-          },
-          {},
-        ],
+        links: [],
         copyright: `Copyright © ${new Date().getFullYear()} Ava Labs, Inc.`,
+        logo: {
+          src: "/img/Avalanche_Horizontal_Red.svg",
+        },
       },
       prism: {
         theme: lightCodeTheme,

@@ -1,12 +1,15 @@
 ---
-sidebar_position: 8
+tags: [Nodes]
+description: Node Bootstrap is the process where a node *securely* downloads linear chain blocks to recreate the latest state of the chain locally. Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
+sidebar_label: "Bootstrapping: What to Expect"
+pagination_label: What to Expect While Bootstrapping
+sidebar_position: 0
 ---
 
 # Node Bootstrap
 
-Node Bootstrap is the process of how a node *securely* downloads linear chain
-blocks or DAG (Directed Acyclic Graphs) chain vertices to recreate the latest
-state of the chain locally.
+Node Bootstrap is the process where a node *securely* downloads linear chain
+blocks to recreate the latest state of the chain locally.
 
 Bootstrap must guarantee that the local state of a node is in sync with the
 state of other valid nodes. Once bootstrap is completed, a node has the latest
@@ -22,18 +25,6 @@ This document covers the high-level technical details of how bootstrapping
 works. This document glosses over some specifics, but the
 [AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source
 and is available for curious-minded readers to learn more.
-
-## A Note On Linear Chains and DAGs
-
-Avalanche supports both linear chains made up of blocks and DAGs chains made up
-of vertices.
-
-While consensus logic over linear chains and DAGs chains are different,
-bootstrap logic between the two are similar enough such that they can be
-described without specifying the nature of the blockchain being bootstrapped.
-
-Blocks and vertices at their core are simply ordered lists of transactions and
-can be thought of as the same abstraction - containers.
 
 ## Validators and Where to Find Them
 
@@ -94,7 +85,7 @@ accepted frontier.
 Instead, containers are downloaded from the accepted frontier downwards to
 genesis, and then their corresponding state transitions are executed upwards
 from genesis to the accepted frontier. The accepted frontier is the last
-accepted block for linear chains and the accepted vertices for DAGs.
+accepted block for linear chains.
 
 Why can't nodes simply download blocks in chronological order, starting from
 genesis upwards? The reason is efficiency: if nodes downloaded containers
@@ -107,7 +98,7 @@ Instead, if a node starts by securely retrieving the accepted frontier from a
 majority of honest nodes and then recursively fetches the parent containers from
 the accepted frontier down to genesis, it can cheaply check that containers are
 correct just by verifying their IDs. Each Avalanche container has the IDs of its
-parents (one block parent for linear chains, possibly multiple parents for DAGs)
+parents (one block parent for linear chains)
 and an ID's integrity can be guaranteed cryptographically.
 
 Let's dive deeper into the two bootstrap phases - frontier retrieval and
@@ -215,13 +206,21 @@ Instead of executing each block, state sync uses cryptographic techniques to
 download and verify just the state associated with the current frontier. State
 synced nodes can't serve every C-chain block ever historically accepted, but
 they can safely retrieve the full C-chain state needed to validate in a much
-shorter time.
+shorter time. State sync will fetch the previous 256 blocks prior to support the previous block 
+hash operation code.
 
 State sync is currently only available for the C-chain. The P-chain and X-chain
 currently bootstrap by downloading all blocks. Note that irrespective of the
 bootstrap method used (including state sync), each chain is still blocked on all
 other chains in its Subnet completing their bootstrap before continuing into
 normal operation.
+
+:::note
+
+There are no configs to state sync an archival node. If you need all the historical state then
+ you must not use state sync and setup the config of the node for an archival node.
+
+:::
 
 ## Conclusions and FAQ
 

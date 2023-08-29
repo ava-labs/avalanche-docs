@@ -370,7 +370,165 @@
 /overview/projects /learn/projects 301
 /subnets /learn/avalanche/subnets-overview 301
 
-#05/24/2023
+# 05/24/2023
 /apis/avalanchego/avalanchego-release-notes#v1912-view-on-github https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12 301
 /apis/avalanchego/avalanchego-release-notes#v1714-view-on-github https://github.com/ava-labs/avalanchego/releases/tag/v1.7.14 301
 /apis/avalanchego/avalanchego-release-notes https://github.com/ava-labs/avalanchego/releases 301
+
+# 06/14/2023
+/dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask /dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core 301
+
+# 07/19/2023 - Docs Revamp - Reference Tab
+/quickstart/transaction-fees /reference/standards/guides/txn-fees 301
+/apis /reference 301
+/apis/avalanchego /reference 301
+/apis/avalanchego/apis /reference 301
+/apis/avalanchego/apis/issuing-api-calls /reference/standards/guides/issuing-api-calls 301
+/apis/avalanchego/apis/p-chain /reference/avalanchego/p-chain/api 301
+/apis/avalanchego/apis/c-chain /reference/avalanchego/c-chain/api 301
+/apis/avalanchego/apis/x-chain /reference/avalanchego/x-chain/api 301
+/apis/avalanchego/apis/admin /reference/avalanchego/admin-api 301
+/apis/avalanchego/apis/auth /reference/avalanchego/auth-api 301
+/apis/avalanchego/apis/health /reference/avalanchego/health-api 301
+/apis/avalanchego/apis/index-api /reference/avalanchego/index-api 301
+/apis/avalanchego/apis/info /reference/avalanchego/info-api 301
+/apis/avalanchego/apis/ipc /reference/avalanchego/ipc-api 301
+/apis/avalanchego/apis/keystore /reference/avalanchego/keystore-api 301
+/apis/avalanchego/apis/metrics /reference/avalanchego/metrics-api 301
+/apis/avalanchego/apis/subnet-evm /reference/subnet-evm/api 301
+/apis/avalanchego/x-chain-migration /reference/standards/guides/x-chain-migration 301
+/apis/avalanchego/cb58-deprecation /reference/standards/avalanche-network-protocol 301
+/specs/avm-transaction-serialization /reference/avalanchego/x-chain/txn-format 301
+/specs/coreth-atomic-transaction-serialization /reference/avalanchego/c-chain/txn-format 301
+/specs/cryptographic-primitives reference/standards/cryptographic-primitives 301
+/specs/network-protocol /reference/standards/avalanche-network-protocol 301
+/specs/serialization-primitives /reference/standards/serialization-primitives 301
+/specs/platform-transaction-serialization /reference/avalanchego/p-chain/txn-format 301
+/specs/banff-changes /reference/standards/guides/banff-changes 301
+/quickstart/blockchain-flow /reference/standards/guides/blockchain-flow 301
+
+#  07/21/2023 - Docs Revamp - Build/Subnets Tab
+/build /build/subnet 301
+/subnets/subnet-development-lifecycle /build/subnet/getting-started 301
+/subnets/build-first-subnet /build/subnet/hello-subnet 301
+/subnets/create-a-fuji-subnet /build/subnet/deploy/fuji-testnet-subnet 301
+/subnets/create-a-mainnet-subnet /build/subnet/deploy/mainnet-subnet 301
+/subnets/create-a-local-subnet /build/subnet/deploy/local-subnet 301
+/subnets/when-to-use-subnet-vs-c-chain /build/subnet/c-chain-vs-subnet 301
+/subnets/multisig-deploy /build/subnet/deploy/multisig-auth 301
+/subnets/create-evm-subnet-config /build/subnet/hello-subnet#create-your-subnet-configuration 301
+/subnets/deploying-subnets-on-prod /build/subnet/deploy/on-prod-infra 301
+/subnets/create-custom-subnet /build/subnet/deploy/custom-vm-subnet 301
+/subnets/deploy-a-smart-contract-on-your-evm /build/subnet/utility/deploy-smart-contract-to-subnet 301
+/subnets/avalanche-subnet-faucet /build/subnet/utility/avalanche-subnet-faucet 301
+/subnets/deploying-cross-chain-evm-bridge /build/subnet/utility/cross-chain-evm-bridge 301
+/subnets/how-to-delete-subnet /build/subnet/maintain/delete-subnet 301
+/subnets/how-to-list-and-describe /build/subnet/maintain/view-subnets 301
+/subnets/how-to-pause-and-resume-subnets /build/subnet/maintain/pause-resume-subnet 301
+/subnets/how-to-transform-subnet-to-elastic /build/subnet/elastic/transform-to-elastic-subnet 301
+/subnets/reference-elastic-subnets-parameters /build/subnet/elastic/elastic-parameters 301
+/subnets/customize-a-subnet /build/subnet/upgrade/customize-a-subnet 301
+/subnets/how-to-upgrade-precompile /build/subnet/upgrade/upgrade-precompile 301
+/subnets/how-to-upgrade-subnet-vm /build/subnet/upgrade/upgrade-subnet-vm 301
+/subnets/subnet-upgrade /build/subnet/upgrade/considerations-subnet-upgrade 301
+/subnets/troubleshoot-deployments /build/subnet/info/troubleshoot-subnet 301
+/subnets/case-study-wagmi-upgrade /build/subnet/info/wagmi 301
+/subnets/wagmi /build/subnet/info/wagmi 301
+
+
+#  07/21/2023 - Docs Revamp - Build/Dapps Tab
+/specs/abigen /build/dapp/smart-contracts/abigen 301
+/dapps/launch-your-ethereum-dapp /build/dapp/launch-dapp 301
+/quickstart/fuji-workflow /build/dapp/fuji-workflow 301
+/dapps/developer-toolchains/using-foundry-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+/dapps/developer-toolchains/verify-smart-contract-using-hardhat-and-snowtrace /build/dapp/smart-contracts/verification/verify-hardhat 301
+/dapps/developer-toolchains/verify-smart-contract-with-truffle-verify /build/dapp/smart-contracts/verification/verify-truffle 301
+/dapps/smart-contracts/create-erc-20-token-on-avalanche-c-chain /build/dapp/smart-contracts/erc-20 301
+/dapps/smart-contracts/verify-smart-contracts /build/dapp/smart-contracts/verification/verify-smart-contracts 301
+/dapps/smart-contracts/add-avalanche-programmatically /build/dapp/advanced/add-avalanche-programmatically 301
+/quickstart/integrate-exchange-with-avalanche /build/dapp/advanced/integrate-exchange 301
+/quickstart/sending-transactions-with-dynamic-fees-using-javascript /build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript 301
+/quickstart/adjusting-gas-price-during-high-network-activity /build/dapp/advanced/adjusting-gas-price-during-high-network-activity 301
+/dapps/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-core /build/dapp/smart-contracts/remix-deploy 301
+/dapps/smart-contracts/ /build/dapp/smart-contracts/erc-20 301
+/dapps/nfts/ /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/intro-to-erc721s /build/dapp/smart-contracts/nfts/deploy-collection 301
+/dapps/nfts/preparing-nft-files /build/dapp/smart-contracts/nfts/preparing-nft-files 301
+
+#  07/21/2023 - Docs Revamp - Build/VMs Tab
+/subnets/introduction-to-vm /build/vm/intro 301
+/subnets/create-a-simple-rust-vm /build/vm/create/rust-vm 301
+/subnets/create-a-vm-blobvm /build/vm/create/golang-vm-complex 301
+/subnets/create-a-vm-timestampvm /build/vm/create/golang-vm-simple 301
+/subnets/create-a-simple-vm-from-scratch /build/vm/create/any-lang-vm 301
+/subnets/hello-world-precompile-tutorial /build/vm/evm/hello-world-precompile-tutorial 301
+
+# Docs Revamp - Learn Tab
+/subnets/cross-subnet-communication /learn/avalanche/awm 301
+/quickstart /learn/intro 301
+/quickstart/README /learn/intro 301
+
+# Docs Revamp - Tooling Tab
+/quickstart/tools-list docs/tooling 301
+/subnets/network-runner /tooling/network-runner 301
+/subnets/reference-cli-commands /tooling/avalanche-cli 301
+/apis/glacier /tooling/glacier 301
+/apis/metrics /tooling/metrics 301
+/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection  301
+/apis/avalanchego/public-api-server /tooling/rpc-providers 301
+/apis/avalanchejs/api /tooling/avalanchejs-api 301
+/apis/avalanchejs/create-an-asset-on-the-x-chain /tooling/avalanchejs-guides/create-an-asset-on-the-x-chain 301
+/apis/avalanchejs/generate-a-txid-using-avalanchejs /tooling/avalanchejs-guides/generate-a-txid-using-avalanchejs 301
+/apis/avalanchejs/manage-x-chain-keys /tooling/avalanchejs-guides/manage-x-chain-keys 301
+/apis/avalanchejs/README /tooling/avalanchejs-overview 301
+/apis/avalanchejs/ /tooling/avalanchejs-overview 301
+/apis/avalanchejs/send-an-asset-on-the-x-chain /tooling/avalanchejs-guides/send-an-asset-on-the-x-chain 301
+/quickstart/cross-chain-transfers /tooling/avalanchejs-guides/cross-chain-transfers 301
+/quickstart/multisig-utxos-with-avalanchejs /tooling/avalanchejs-guides/multisig-utxos-with-avalanchejs 301
+/subnets/how-to-import-subnet /tooling/cli-guides/import-subnet 301
+/subnets/how-to-run-cli-with-docker /tooling/cli-guides/run-with-docker 301
+/subnets/install-avalanche-cli /tooling/cli-guides/install-avalanche-cli 301
+
+# Docs Revamp - Nodes Tab
+/nodes/validate/staking /nodes/validate/what-is-staking 301
+/nodes/maintain/avalanchego-config-flags /nodes/configure/avalanchego-config-flags 301
+/nodes/maintain/chain-config-flags /nodes/configure/chain-config-flags 301
+/nodes/maintain/subnet-configs /nodes/configure/subnet-configs 301
+/nodes/build/run-avalanche-node-manually /nodes/run/node-manually 301
+/nodes/subnets/setup-dfk-node /nodes/run/subnet-node 301
+/nodes/build/set-up-an-avalanche-node-with-google-cloud-platform /nodes/run/third-party/google-cloud-node 301
+/nodes/build/set-up-an-avalanche-node-with-latitude /nodes/run/third-party/latitude-node 301
+/nodes/build/set-up-an-avalanche-node-with-microsoft-azure /nodes/run/third-party/microsoft-azure-node 301
+/nodes/build/setting-up-an-avalanche-node-with-amazon-web-services-aws /nodes/run/third-party/aws-node 301
+/nodes/build/launch-an-avalanche-validator-on-aws-with-one-click /nodes/run/third-party/aws-marketplace-one-click 301
+/nodes/build/set-up-node-on-alibaba-cloud /nodes/run/third-party/aws-node/alibaba-cloud-node 301
+/nodes/build/set-up-node-on-tencent-cloud /nodes/run/third-party/aws-node/tencent-cloud-node 301
+/nodes/build/set-up-node-with-installer /nodes/run/with-installer 301
+/nodes/build/FAQ /nodes/run/FAQ 301
+
+#  Docs Revamp - Deprecated Pages
+/subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
+/subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301
+/community/README https://www.avax.network/ 301
+/community/bug-bounty https://hackenproof.com/avalanche/avalanche-protocol 301
+/community/tutorials-contest /deprecated/tutorials-contest 301
+/community/tutorials-contest/2021 /deprecated/tutorials-contest/2021 301
+/community/tutorials-contest/2022 /deprecated/tutorials-contest/2022 301
+/community/tutorials-contest/2022/avax-subnet-customization /deprecated/tutorials-contest/2022/avax-subnet-customization 301
+/community/tutorials-contest/2022/local-subnet-development /deprecated/tutorials-contest/2022/local-subnet-development 301
+/community/tutorials-contest/2022/erc20-as-subnet-gas-token /deprecated/tutorials-contest/2022/erc20-as-subnet-gas-token 301
+/community/tutorials-contest/2022/avalanche-theGraph-index /deprecated/tutorials-contest/2022/avalanche-theGraph-index 301
+/community/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial /deprecated/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial 301
+/community/tutorials-contest/2021/pangolin-token-subgraph /deprecated/tutorials-contest/2021/pangolin-token-subgraph 301
+/community/tutorials-contest/2021/hardhat-fork /deprecated/tutorials-contest/2021/hardhat-fork 301
+/community/tutorials-contest/2021/red-dev-sig-verify-tutorial /deprecated/tutorials-contest/2021/red-dev-sig-verify-tutorial 301
+/community/tutorials-contest/2021/evoting-avalanche-dapp /deprecated/tutorials-contest/2021/evoting-avalanche-dapp 301
+/community/tutorials-contest/2021/avalanche-DAO /deprecated/tutorials-contest/2021/avalanche-DAO 301
+/community/tutorials-contest/2021/NFT-Marketplace-on-Avalanche /deprecated/tutorials-contest/2021/NFT-Marketplace-on-Avalanche 301
+/community/tutorials-contest/2021/avalanche-erc721-tutorial /deprecated/tutorials-contest/2021/avalanche-erc721-tutorial 301
+/community/tutorials-contest/2021/how-to-mint-erc721-using-openzeppelin/tutorial /deprecated/tutorials-contest/2021/how-to-mint-erc721-using-openzeppelin/tutorial 301
+/community/tutorials-contest/2021/avax-chat-dapp /deprecated/tutorials-contest/2021/avax-chat-dapp 301
+/community/tutorials-contest/2021/drizzle-auction-manager /deprecated/tutorials-contest/2021/drizzle-auction-manager 301
+/community/tutorials-contest/2021/distributed-file-manager /deprecated/tutorials-contest/2021/distributed-file-manager 301

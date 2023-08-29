@@ -1,23 +1,32 @@
-import React from "react"
-import Layout from "@theme/Layout"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import styles from "./index.module.css"
-import Card from "../components/Card"
+import React from "react";
+import Layout from "@theme/Layout";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import styles from "./index.module.css";
+import Card from "../components/Card";
 
 function Home() {
-  const context = useDocusaurusContext()
-  const { siteConfig = {} } = context
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
 
   return (
     <Layout title="Homepage" description="Avalanche Dev Docs">
-      <main>
+      <main className={styles.main}>
         <br />
-        <h1 align="center" style={{ fontWeight: '750' }}>Welcome to Avalanche Dev Docs</h1>
+        <h1
+          align="center"
+          style={{
+            fontWeight: "700",
+            marginBottom: "0px",
+            fontSize: "x-large",
+          }}
+        >
+          Welcome to Avalanche Dev Docs
+        </h1>
         <section className={styles.features}>
           <div className="container">
             <div className="row cards__container">
               <Card
-                to="subnets/build-first-subnet"
+                to="/build/subnet/hello-subnet"
                 header={{
                   label: "🚀 Launch Your First Subnet",
                 }}
@@ -39,7 +48,7 @@ function Home() {
               />
 
               <Card
-                to="nodes"
+                to="/nodes/validate/add-a-validator"
                 header={{
                   label: "😎 Become a Validator",
                 }}
@@ -50,7 +59,7 @@ function Home() {
               />
 
               <Card
-                to="apis/avalanchego"
+                to="reference"
                 header={{
                   label: "💻 View Avalanche APIs",
                 }}
@@ -61,7 +70,7 @@ function Home() {
               />
 
               <Card
-                to="dapps/launch-your-ethereum-dapp"
+                to="/build/dapp/launch-dapp"
                 header={{
                   label: "🛠️ Launch Your Dapp on Avalanche",
                 }}
@@ -86,7 +95,7 @@ function Home() {
         </section>
       </main>
     </Layout>
-  )
+  );
 }
 
-export default Home
+export default Home;
