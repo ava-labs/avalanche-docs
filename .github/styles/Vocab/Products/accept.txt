@@ -53,6 +53,7 @@ ChainBridge
 Chainlink
 chainlist
 ChainSafe
+Chainstack
 Chapelco
 cid
 CLIs
