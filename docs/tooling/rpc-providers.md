@@ -275,9 +275,18 @@ Features:
 
 ##### HTTP
 
-- For C-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
-- For X-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
-- For P-Chain API, the regional elastic node URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`, and the global elastic node URL is `https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
+- For C-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`, 
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
+- For X-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`, 
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
+- For P-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/P`,
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
 
 ##### Websockets
 
