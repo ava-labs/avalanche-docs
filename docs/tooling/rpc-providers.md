@@ -292,8 +292,14 @@ and the global elastic node URL is
 
 Websockets are available for the C-chain and the X-chain.
 
-- For C-Chain API, the regional elastic node URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`, and the global elastic node URL is `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
-- For X-Chain API, the regional elastic node URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`, and the global elastic node URL is `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
+- For C-Chain API, the regional elastic node URL is 
+`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`, 
+and the global elastic node URL is 
+`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
+- For X-Chain API, the regional elastic node URL is 
+`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`, 
+and the global elastic node URL is 
+`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
 
 #### Testnet (Fuji)
 
