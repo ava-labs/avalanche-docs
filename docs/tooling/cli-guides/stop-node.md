@@ -27,7 +27,7 @@ avalanche node stop <clusterName>
 
 ALPHA WARNING: This command will delete all files associated with the cloud servers in the cluster. 
 This includes the downloaded `staker.crt` and `staker.key` files in your local `.avalanche-cli` 
-directory (which are used to back up your node). More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
+directory (which are used to back up your node). More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md).
 
 :::
 
