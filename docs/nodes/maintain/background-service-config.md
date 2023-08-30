@@ -50,7 +50,8 @@ StartLimitInterval=120s
 StartLimitBurst=5
 WorkingDirectory=/Your/Path/To/avalanchego
 ExecStart=/Your/Path/To/avalanchego/./avalanchego \  
-   --network-id=fuji 
+   --network-id=fuji \
+   --api-metrics-enabled=true 
 
 [Install]
 WantedBy=multi-user.target
