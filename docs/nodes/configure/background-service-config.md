@@ -57,7 +57,7 @@ sudo systemctl daemon-reload
 
 ### 2) Mainnet Config
 
-Run this command in your terminal to create the avalanchego.service file 
+Run this command in your terminal to create the `avalanchego.service` file 
 ```
 $ sudo nano /etc/systemd/system/avalanchego.service
 ```
