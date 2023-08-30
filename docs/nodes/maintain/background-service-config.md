@@ -3,7 +3,7 @@ tags: [Nodes]
 description: This page demonstrates how to set up a `avalanchego.service` file to enable a manually deployed validator node to run in the background of a server instead of in the terminal directly.
 sidebar_label: Run as a Background Service
 pagination_label: Run an Avalanche Node as a Background Service
-sidebar_position: 3
+sidebar_position: 6
 ---
 # Run an Avalanche Node as a Background Service
 
