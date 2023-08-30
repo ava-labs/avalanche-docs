@@ -5,6 +5,7 @@ sidebar_label: Background Service Node Config
 pagination_label: AvalancheGo Configs
 sidebar_position: 3
 ---
+# Run an Avalanche Node as a Background Service
 
 ## Prerequisites
 
