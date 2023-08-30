@@ -11,7 +11,7 @@ sidebar_position: 3
 
 - AvalancheGo installed
 
-## Steps to run the node in the background service
+## Steps
 ### 1) Fuji Testnet Config
 
 Run this command in your terminal to create the `avalanchego.service` file 
