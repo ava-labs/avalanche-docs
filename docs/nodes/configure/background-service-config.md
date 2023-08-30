@@ -82,7 +82,7 @@ ExecStart=/Your/Path/To/avalanchego/./avalanchego
 [Install]
 WantedBy=multi-user.target
 ```
-Press **CTRL + X** then **Y** then **ENTER** to save and exit.
+Press **Ctrl + X** then **Y** then **Enter** to save and exit.
 
 Now, run:
 ```
