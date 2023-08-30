@@ -85,7 +85,8 @@ TimeoutStartSec=10s
 StartLimitInterval=120s
 StartLimitBurst=5
 WorkingDirectory=/Your/Path/To/avalanchego
-ExecStart=/Your/Path/To/avalanchego/./avalanchego 
+ExecStart=/Your/Path/To/avalanchego/./avalanchego \
+   --api-metrics-enabled=true
 
 [Install]
 WantedBy=multi-user.target
