@@ -7,6 +7,9 @@ sidebar_position: 3
 ---
 # Run an Avalanche Node as a Background Service
 
+## Overview 
+
+This page demonstrates how to set up a `avalanchego.service` file to enable a manually deployed validator node to run in the background of a server instead of in the terminal directly. 
 ## Prerequisites
 
 - AvalancheGo installed
