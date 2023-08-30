@@ -88,7 +88,7 @@ Now, run:
 ```
 sudo systemctl daemon-reload
 ```
-## Start the node
+## Start The Node
 
 This command makes your node start automatically in case of a reboot, run it:
 ```
