@@ -61,7 +61,7 @@ Run this command in your terminal to create the avalanchego.service file
 ```
 $ sudo nano /etc/systemd/system/avalanchego.service
 ```
-Paste the following configuration into the avalanchego.service file
+Paste the following configuration into the `avalanchego.service` file
 ```
 [Unit]
 Description=Avalanche Node service
