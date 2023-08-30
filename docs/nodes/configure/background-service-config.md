@@ -13,7 +13,7 @@ sidebar_position: 3
 ## Steps to run the node in the background service
 ### 1) Fuji Testnet Config
 
-Run this command in your terminal to create the avalanchego.service file 
+Run this command in your terminal to create the `avalanchego.service` file 
 ```
 $ sudo nano /etc/systemd/system/avalanchego.service
 ```
