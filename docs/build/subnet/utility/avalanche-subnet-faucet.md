@@ -26,7 +26,8 @@ on these testnets Subnets like -
 
 - [WAGMI Testnet](https://faucet.avax.network?subnet=wagmi)
 - [DeFI Kingdoms Testnet](https://faucet.avax.network?subnet=dfk)
-- [Dexalot Testnet](https://faucet.avax.network?subnet=dexalot) and many more.
+- [Dexalot Testnet](https://faucet.avax.network?subnet=dexalot)
+- [Beam Testnet](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) and many more.
 
 You can use this [repository](https://github.com/ava-labs/avalanche-faucet) to deploy your faucet or
 just make a PR with the
