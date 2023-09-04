@@ -91,6 +91,20 @@ If you have questions, problems, or suggestions, join the official [Avalanche Di
 
 ## Subnets RPC - Public API Servers 
 
+### Beam
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/beam/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/beam/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/beam/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/beam/testnet/ws`.
+
 ### DeFi Kingdom (DFK)
 
 #### HTTP
