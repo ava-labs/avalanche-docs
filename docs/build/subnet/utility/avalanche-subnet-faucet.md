@@ -24,9 +24,8 @@ example, [Fuji](learn/avalanche/fuji.md) network is the Testnet for Avalanche's 
 Besides Fuji Testnet, [Avalanche Faucet](https://faucet.avax.network/) can be used to get free coins
 on these testnets Subnets like -
 
-- [WAGMI Testnet](https://faucet.avax.network?subnet=wagmi)
-- [DeFI Kingdoms Testnet](https://faucet.avax.network?subnet=dfk)
-- [Dexalot Testnet](https://faucet.avax.network?subnet=dexalot)
+- [WAGMI Testnet](https://core.app/tools/testnet-faucet/?subnet=wagmi)
+- [DeFI Kingdoms Testnet](https://core.app/tools/testnet-faucet/?subnet=dfk)
 - [Beam Testnet](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) and many more.
 
 You can use this [repository](https://github.com/ava-labs/avalanche-faucet) to deploy your faucet or
