@@ -30,13 +30,6 @@ repository. Simply:
 and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/Bce7BoK">
-  <a href="//imgur.com/a/Bce7BoK">
-    Quick edits in docusaurus
-  </a>
-</blockquote>
-<script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
 ### New Content or Extensive Changes
 
 To propose new docs or large edits to our existing pages, follow the steps accordingly:
