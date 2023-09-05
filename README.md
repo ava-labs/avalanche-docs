@@ -106,7 +106,7 @@ Search is powered by Algolia and the config file is located
 
 _The information I am requesting is related to a specific project, i.e. AvalancheGo, AvalancheNetworkRunner, etc.:_
 
-- Please raise an **Missing Docs Issue** in the GitHub repository of that project and
+- Please raise a **Missing Docs Issue** in the GitHub repository of that project and
 thoroughly detail your request. Include references to any existing pages relevant to your
 request.
 
