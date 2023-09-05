@@ -30,7 +30,7 @@ repository. Simply:
 and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
 
-![Imgur](https://i.imgur.com/GGh57AU.gif)
+![](https://github.com/ava-labs/avalanche-docs/blob/master/static/img/quick-edit-readme.gif)
 
 ### New Content or Extensive Changes
 
