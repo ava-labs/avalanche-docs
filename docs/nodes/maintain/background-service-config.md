@@ -69,7 +69,7 @@ Now, run:
 sudo systemctl daemon-reload
 ```
 
-### 2) Mainnet Config
+### Mainnet Config
 
 Run this command in your terminal to create the `avalanchego.service` file
 
