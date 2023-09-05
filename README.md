@@ -30,6 +30,8 @@ repository. Simply:
 and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
 
+![](https://i.imgur.com/GGh57AU.gifv)
+
 ### New Content or Extensive Changes
 
 To propose new docs or large edits to our existing pages, follow the steps accordingly:
