@@ -5,7 +5,7 @@ sidebar_label: 🔺 What is Avalanche?
 
 # What Is Avalanche?
 
-Avalnache is an open-source platform for building decentralized applications in one
+Avalanche is an open-source platform for building decentralized applications in one
 interoperable, decentralized, and highly scalable ecosystem. Powered by [a uniquely powerful consensus
 mechanism](/learn/avalanche/avalanche-consensus.md), Avalanche is the first ecosystem designed to
 accommodate the scale of global finance, with near-instant transaction finality. 
