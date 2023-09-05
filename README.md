@@ -30,6 +30,10 @@ repository. Simply:
 and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
 
+<div align="center">
+  <img src="static/img/quick-edit-readme.gif">
+</div>
+
 ### New Content or Extensive Changes
 
 To propose new docs or large edits to our existing pages, follow the steps accordingly:
