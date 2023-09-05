@@ -119,7 +119,7 @@ If urgent, please create a new ticket in the
 dashboard.
 
 _Erroneous or missing information on documentation unrelated to a specific project needs
-editing_
+editing:_
 
 - If you understand the issue enough to provide a correction, follow the steps
 [here](https://github.com/ava-labs/avalanche-docs#quick-fixes).
