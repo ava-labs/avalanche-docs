@@ -31,7 +31,7 @@ and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
 
 <div align="center">
-  <img src="https://imgur.com/gallery/Bce7BoK">
+  <img src="https://imgur.com/gallery/Bce7BoK.gif">
 </div>
 
 ### New Content or Extensive Changes
