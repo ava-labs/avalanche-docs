@@ -231,9 +231,11 @@ to find out how to add your node as a validator using the web wallet.
 
 You can use `Ctrl + C` to kill the node.
 
+::: info
 To be able to make API calls to your node from other machines, when starting up
 the node include argument `--http-host=` (for example `./build/avalanchego
 --http-host=`)
+:::
 
 #### Connect to Fuji Testnet
 
