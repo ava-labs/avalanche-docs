@@ -388,6 +388,7 @@
     },
     "tooling/glacier",
     "tooling/metrics",
+    "tooling/parsiq",
     {
       "type": "link",
       "label": "HyperSDK",

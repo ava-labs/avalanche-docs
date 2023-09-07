@@ -13,6 +13,7 @@ pagination_label: Tooling Quick Links
 | [**🔌 RPC Providers**](/tooling/rpc-providers.md)      | List of RPC endpoints available for the Avalanche Network |  |
 | [**Glacier API**](/tooling/glacier.md)      | Avalanche's performant API that allows web3 developers to more easily access indexed blockchain data | [API](https://glacier-api.avax.network/api#/) |
 | [**Metrics API**](/tooling/metrics.md)      | Power your analytics with metrics such as Subnet usage, staking operations, and more | [API](https://metrics.avax.network/) |
+| [**PARSIQ API & SDK**](/tooling/parsiq.md)      | PARSIQ is a reliable blockchain data indexer, helping developers to seamlessly access and process Web3 data - both raw and custom. | [API](https://www.parsiq.net/) |
 | [**Hyper SDK**](https://github.com/ava-labs/hypersdk#readme)      | Opinionated framework for building hyper-scalable blockchains on Avalanche | [GitHub](https://github.com/ava-labs/hypersdk#readme) |
 | [**AvalancheGo Installer Script**](/tooling/avalanchego-installer.md)      | A shell (bash) script that installs AvalancheGo on any Linux computer | [GitHub](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh#readme) |
 | [**Avalanche Network Runner**](/tooling/network-runner.md)      | ANR allows a user to define, create and interact with a network of Avalanche nodes | [GitHub](https://github.com/ava-labs/avalanche-network-runner) |
