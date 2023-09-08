@@ -21,7 +21,7 @@ change.
 :::caution
 
 Nodes which choose to use a HDD may get poor and random 
-read/write latencies, therefore reducing performance and reliability. A SSD is strongly suggested.
+read/write latencies, therefore reducing performance and reliability. An SSD is strongly suggested.
 
 :::
 
