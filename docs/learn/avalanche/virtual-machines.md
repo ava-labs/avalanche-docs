@@ -1,5 +1,6 @@
 ---
 tags: [Virtual Machines, Subnet-EVM]
+description: Virtual Machine is a virtual environment inside blockchain networks that executes smart contracts and transactions according to predetermined rules and protocols.
 keywords: [docs, avalanche, virtual machines, subnets, Subnet EVM]
 sidebar_label: Virtual Machines
 ---
