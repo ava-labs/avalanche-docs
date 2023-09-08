@@ -1,4 +1,5 @@
 ---
+keywords: [docs, avalanche, subnets, sovereign blockchains, interoperability]
 sidebar_label: Subnets
 ---
 

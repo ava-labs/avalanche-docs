@@ -1,3 +1,9 @@
+---
+tags: [Virtual Machines, Subnet-EVM]
+keywords: [docs, avalanche, virtual machines, subnets, Subnet EVM]
+sidebar_label: Virtual Machines
+---
+
 # Virtual Machines
 
 In a nutshell, a **Virtual Machine** (VM) is the blueprint for a blockchain, meaning it defines

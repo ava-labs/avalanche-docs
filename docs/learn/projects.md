@@ -1,3 +1,9 @@
+---
+keywords: [docs, avalanche, AvalancheGO, avalanche CLI, Core Ethereum, Subnet EVM]
+sidebar_label: Projects
+---
+
+
 # Projects
 
 ## AvalancheGo

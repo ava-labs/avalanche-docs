@@ -1,5 +1,7 @@
 ---
-description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here.
+tags: [Primary Network, P-Chain, X-Chain, C-Chain]
+description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). More info here.
+keywords: [docs, avalanche, primary network, c-chain, x-chain, p-chain]
 sidebar_label: The Primary Network
 ---
 
