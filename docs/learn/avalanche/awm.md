@@ -1,7 +1,7 @@
 ---
-tags: [Avalanche Warp Messaging, cross-subnet communication]
+tags: [Avalanche Warp Messaging, Cross-Subnet Communication]
 description: AWM allows seamless communication between different subnetworks on Avalanche, enabling developers to establish custom communication protocols.
-keywords: [docs, avalanche, avalanche warp messaging, awm, cross-subnet communication]
+keywords: [docs, documentation, avalanche, avalanche warp messaging, awm, cross-subnet communication, cross-chain, ]
 sidebar_label: Avalanche Warp Messaging
 ---
 

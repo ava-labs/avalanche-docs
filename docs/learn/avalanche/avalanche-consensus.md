@@ -1,7 +1,7 @@
 ---
-tags: [consensus, snowball, protocol]
-description: Avalanche Conesensus is a consensus protocol that is scalable, robust, and decentralized.
-keywords: [avalanche consensus, snowball, scaling blockchains, nakamoto consensus]
+tags: [Avalanche Consensus, Avalanche Protocol]
+description: Avalanche Consensus is a consensus protocol that is scalable, robust, and decentralized.
+keywords: [avalanche consensus, snowman consensus, scaling blockchains, nakamoto consensus]
 sidebar_label: Avalanche Consensus
 ---
 
