@@ -26,7 +26,7 @@ hardware with the following minimum specifications.
 
 :::caution
 
-Please do not try running a node on an HDD, as you may get poor and random 
+Using an HDD may result in poor and random 
 read/write latencies, therefore reducing performance and reliability.
 
 :::
