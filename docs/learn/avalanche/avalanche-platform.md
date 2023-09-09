@@ -35,7 +35,8 @@ The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
 The [C-Chain’s API](/reference/avalanchego/c-chain/api.md) supports Geth's API and supports the
 deployment and execution of smart contracts written in Solidity.
 
-The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machine.
+The C-Chain is an instance of the 
+[Coreth](https://github.com/ava-labs/coreth) Virtual Machine.
 
 ### P-Chain 
 
