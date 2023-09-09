@@ -42,7 +42,7 @@ VMs communicate with Avalanche over a language agnostic request-response protoco
 [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to 
 open a world of endless possibilities, as developers can implement their Dapps using 
 the languages, frameworks, and libraries of their choice. To get started, create a VM out-of-the-box
-with the [Subnet-EVM](/learn/projects#subnet-evm) in Solidity, or design a custom VM with languages
+with the [Subnet-EVM](/build/subnet/c-chain-vs-subnet.md) in Solidity, or design a custom VM with languages
 like Golang, Rust, and many more.
 
 ## Running a VM
@@ -55,7 +55,7 @@ EVM-compatible.
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
   Tokens.
 
-All three can easily be run on any computer with [AvalancheGo](/learn/projects#avalanchego).
+All three can easily be run on any computer with [AvalancheGo](/nodes.md).
 
 Validators can install additional VMs on their node to validate additional
 [Subnets](subnets-overview.md) in the Avalanche ecosystem. In exchange, validators receive
@@ -65,8 +65,9 @@ staking rewards in the form of a reward token determined by the Subnets.
 
 Avalanche natively supports the execution of Ethereum smart contracts written in solidity. Ethereum
 developers have the option of deploying their smart contracts on the C-Chain's implementation of the
-Ethereum Virtual Machine ([Coreth](/learn/projects#coreth)), or on their own Subnet using the
-[Subnet-EVM](/learn/projects#subnet-evm) for advanced use cases that require more customization.
+Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)),
+or on their own Subnet using the
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
 
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
 Truffle, and more.
