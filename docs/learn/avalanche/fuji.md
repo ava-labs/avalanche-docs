@@ -1,5 +1,7 @@
 ---
-description: Fuji testnet is the official Avalanche testnet. 
+tags: [Fuji Testnet]
+description: Fuji Testnet is the official testnet for the Avalanche ecosystem.
+keywords: [docs, fuji, testnet, build on avalanche]
 sidebar_label: Fuji Testnet
 ---
 
