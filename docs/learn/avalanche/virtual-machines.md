@@ -55,7 +55,7 @@ EVM-compatible.
 - Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
   Tokens.
 
-All three can easily be run on any computer with [AvalancheGo](/nodes.md).
+All three can easily be run on any computer with [AvalancheGo](/nodes).
 
 Validators can install additional VMs on their node to validate additional
 [Subnets](subnets-overview.md) in the Avalanche ecosystem. In exchange, validators receive
