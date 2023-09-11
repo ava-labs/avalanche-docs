@@ -102,6 +102,7 @@ section of the Subnet Explorer.
 - [Fuji Testnet](https://subnets-test.avax.network/wagmi)
 
 </p></details>
+<!-- markdownlint-disable MD029 -->
 
 ### 3. Specify the Plugin with a Config.json
 
@@ -140,3 +141,4 @@ For example:
 ```
 
 </p></details>
+<!-- markdownlint-enable MD029 -->
