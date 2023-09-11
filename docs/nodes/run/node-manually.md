@@ -101,6 +101,10 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --network-id=fuji
 ```
 
+:::info
+To kill the node, press `Ctrl + C`. 
+:::
+
 ## Run with a Pre-Built Binary
 
 To download a pre-built binary instead of building from source, go
@@ -264,10 +268,6 @@ you are still experiencing issues please contact us on
 
 Learn more about bootstrapping [here](/nodes/maintain/node-bootstrap).
 
-## Important Commands
-
-- You can use `Ctrl + C` to kill the node.
-
 ## Going Further
 
 Your Avalanche node will perform consensus on its own, but it is not yet a
@@ -278,3 +278,5 @@ to take it a step further.
 
 Also check out the [Maintain](/nodes/maintain/node-bootstrap.md) section to learn about how
 to maintain and customize your node to fit your needs.
+
+To track a Subnet with your node, head to the [Subnet Node](/nodes/run/subnet-node.md) tutorial.
