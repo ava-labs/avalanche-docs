@@ -169,5 +169,8 @@ XXX.XX.XX.XXX:9650/ext/bc/<BlockchainID>/rpc
 if run on a cloud provider. The “X”s should be replaced with the public 
 IP of your EC2 instance. 
 
-Because each node is also tracking the Primary Network, those [RPC endpoints](nodes/run/node-manually.md#rpc)
-are available as well.
+For more information on the requests available at these endpoints, please see the 
+[Subnet-EVM API Reference](/reference/subnet-evm/api.md) documentation.
+
+Because each node is also tracking the Primary Network, those 
+[RPC endpoints](nodes/run/node-manually.md#rpc) are available as well.
