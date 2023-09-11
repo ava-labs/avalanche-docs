@@ -1,9 +1,10 @@
 ---
-tags: [Nodes]
+tags: [Nodes, AvalancheGo]
 description: The quickest way to learn about Avalanche is to run a node and interact with the network. This tutorial demonstrates how to install and run an Avalanche node, and connect to the Avalanche Network by compiling a node from source and running it manually.
 sidebar_label: Manually
 pagination_label: Run an Avalanche Node Manually
 sidebar_position: 0
+keywords: [avalanche node, run a node, rpc, rpc node, track mainnet, avalanche mainnet, build from source, binary, avalanchego, blockchain node]
 ---
 
 # Run an Avalanche Node Manually
