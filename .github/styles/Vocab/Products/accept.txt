@@ -115,6 +115,7 @@ fxs
 gamification
 Ganache
 Gantt
+gcc
 Geth
 Geth's
 getters
@@ -122,6 +123,7 @@ gif
 GitHub
 github
 Golang
+GOPATH
 goroutines
 Grafana
 gwei
