@@ -48,6 +48,7 @@ change.
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
 ``` 
+<!-- markdownlint-disable MD029 -->
 
 5. Clone AvalancheGo
 
@@ -102,7 +103,8 @@ section of the Subnet Explorer.
 - [Fuji Testnet](https://subnets-test.avax.network/wagmi)
 
 </p></details>
-<!-- markdownlint-disable MD029 -->
+
+
 
 ### 3. Specify the Plugin with a Config.json
 
@@ -115,7 +117,9 @@ cd ~/.avalanchego
 echo '{"track-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY"}' > config.json
 ```
 
-### 4. Run the Node
+<!-- markdownlint-enable MD029 -->
+
+## Run the Node
 
 Run AvalancheGo with the `—config-file` flag to start your node and ensure it tracks the Subnets
 included in the configuration file.
@@ -141,4 +145,29 @@ For example:
 ```
 
 </p></details>
-<!-- markdownlint-enable MD029 -->
+
+You should now see terminal filled with logs and information to suggest the node is properly running
+and has began bootstrapping to the network.
+
+## Bootstrapping and RPC Details
+
+It may take a few hours for the node to fully [bootstrap](/nodes/run/node-manually.md#bootstrapping)
+to the Avalanche Primary Network and tracked Subnets. 
+
+When finished bootstrapping, the endpoint will be: 
+
+```bash
+localhost:9650/ext/bc/<BlockchainID>/rpc 
+```
+
+if run locally, or
+
+```bash
+XXX.XX.XX.XXX:9650/ext/bc/<BlockchainID>/rpc
+```
+
+if run on a cloud provider. The “X”s should be replaced with the public 
+IP of your EC2 instance. 
+
+Because each node is also tracking the Primary Network, those [RPC endpoints](nodes/run/node-manually.md#rpc)
+are available as well.
