@@ -269,6 +269,30 @@ you are still experiencing issues please contact us on
 
 Learn more about bootstrapping [here](/nodes/maintain/node-bootstrap).
 
+## RPC
+
+When finished bootstrapping, the X, P, and C-Chain RPC endpoints will be: 
+
+```bash
+localhost:9650/ext/bc/P
+localhost:9650/ext/bc/X
+localhost:9650/ext/bc/C/rpc
+```
+
+if run locally, or
+
+```bash
+XXX.XX.XX.XXX:9650/ext/bc/P
+XXX.XX.XX.XXX:9650/ext/bc/X
+XXX.XX.XX.XXX:9650/ext/bc/C/rpc
+```
+
+if run on a cloud provider. The “XXX.XX.XX.XXX" should be replaced with the public 
+IP of your EC2 instance. 
+
+For more information on the requests available at these endpoints, please see the
+[AvalancheGo API Reference](/reference) documentation.
+
 ## Going Further
 
 Your Avalanche node will perform consensus on its own, but it is not yet a
