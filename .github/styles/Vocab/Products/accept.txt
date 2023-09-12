@@ -104,6 +104,7 @@ ERC
 ERC721s
 ESLint
 Eteng
+ethereum
 Ethereum
 Ethers
 eVoting
