@@ -19,9 +19,8 @@ payload of data.
 ## Prerequisites
 
 - Install the latest stable version of Rust using [`rustup`](https://www.rust-lang.org/tools/install).
-- Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
-  repository specifically the traits and helpers defined in the
-  [`subnet/rpc`](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
+- Bookmark and review the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) GitHub
+  repository, specifically the subnet traits and helpers defined in the `avalanche-types` crate
 - For developers new to Rust please visit the free online book [The Rust Programming
   Language](https://doc.rust-lang.org/book/).
 
