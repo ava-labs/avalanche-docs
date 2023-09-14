@@ -1,13 +1,13 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to configure a node to validate the Avalanche Primary Network. Validation via Avalanche-CLI is currently only supported on Fuji.
-pagination_label: Configure a Node to Validate the Primary Network with Avalanche-CLI 
+description: This page demonstrates how to configure nodes to validate the Avalanche Primary Network. Validation via Avalanche-CLI is currently only supported on Fuji.
+pagination_label: Configure Nodes to Validate the Primary Network with Avalanche-CLI 
 sidebar_label: Validate the Primary Network
 sidebar_position: 4
 ---
-# Configure a Node to Validate the Primary Network with Avalanche-CLI 
+# Configure Nodes to Validate the Primary Network with Avalanche-CLI 
 
-This page demonstrates how to configure a node to validate the Primary Network. 
+This page demonstrates how to configure nodes to validate the Primary Network. 
 Validation via Avalanche-CLI is currently only supported on Fuji.
 
 :::warning
@@ -29,8 +29,8 @@ Instructions on how to fund stored key on Fuji can be found [here](/build/subnet
 
 ## Be a Primary Network Validator
 
-Once the node is bootstrapped to Primary Network, we can now have the node be a Primary Network 
-Validator.
+Once all nodes in a cluster are bootstrapped to Primary Network, we can now have the nodes be 
+Primary Network Validators.
 
 To have all nodes in cluster `clusterName` be Primary Network Validators, run:
 
@@ -38,7 +38,7 @@ To have all nodes in cluster `clusterName` be Primary Network Validators, run:
 avalanche node validate primary <clusterName> 
 ```
 
-The node will start validating the Primary Network 20 seconds after the command is run.
+The nodes will start validating the Primary Network 20 seconds after the command is run.
 
 The wizard will ask us how we want to pay for the transaction fee. 
 Choose `Use stored key` for Fuji:
@@ -67,5 +67,5 @@ Next, choose how long the node will be validating for:
     Custom
 ```
 
-Once all the inputs are completed you will see a transaction ID indicating that the node will be
-a Primary Network Validator once the start time has elapsed.
+Once all the inputs are completed you will see transaction IDs indicating that all the nodes in the
+cluster will be Primary Network Validators once the start time has elapsed.

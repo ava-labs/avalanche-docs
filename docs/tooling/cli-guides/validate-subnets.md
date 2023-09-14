@@ -1,13 +1,13 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to configure a node to validate an Avalanche Subnet. Validation via Avalanche-CLI is currently only supported on Fuji.
-pagination_label: Configure a Node to Validate a Subnet with Avalanche-CLI 
+description: This page demonstrates how to configure nodes to validate an Avalanche Subnet. Validation via Avalanche-CLI is currently only supported on Fuji.
+pagination_label: Configure Nodes to Validate a Subnet with Avalanche-CLI 
 sidebar_label: Validate a Subnet
 sidebar_position: 5
 ---
 # Configure a Node to Validate a Subnet with Avalanche-CLI 
 
-This page demonstrates how to configure a node to validate an Avalanche Subnet. 
+This page demonstrates how to configure nodes to validate an Avalanche Subnet. 
 Validation via Avalanche-CLI is currently only supported on Fuji.
 
 :::warning
@@ -30,7 +30,7 @@ and Subnet Validator transactions. Instructions on how to fund stored key on Fuj
 
 ## Sync with Subnet
 
-Before the node can be a Subnet Validator, the node needs to first sync with the Subnet. 
+Before the nodes can be Subnet Validators, the nodes need to first sync with the Subnet. 
 
 To have all nodes in cluster `clusterName` sync with Subnet `subnetName`, run:
 
@@ -40,33 +40,27 @@ avalanche node sync <clusterName> <subnetName>
 
 All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`.
 
-Wait until node is successfully `Syncing` with the Subnet before running the next commands. 
+Wait until nodes are successfully `Syncing` with the Subnet before running the next commands. 
 
 To check sync status, run `avalanche node status <clusterName> --subnet <subnetName>`. Once the 
 node is finished syncing, the response will be:
 
 ```text
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "status": "Syncing"
-    },
-    "id": 1
-}
+All nodes in cluster `clusterName` are synced to Subnet `subnetName`
 ``` 
 
 ## Be a Subnet Validator
 
-Once the node has synced, we can now have the node be a Subnet Validator.
+Once the nodes have synced, we can now have the nodes be Subnet Validators.
 
-To be a Subnet Validator, run:
+To have the nodes be Subnet Validators, run:
 
 ```shell
 avalanche node validate subnet <clusterName> <subnetName>
 ```
 
-If the node is not yet a Primary Network Validator, we will first add it as a Primary Network 
-Validator. 
+If any of the nodes is not yet a Primary Network Validator, we will first add it as a Primary 
+Network Validator. 
 
 The wizard will ask us how we want to pay for the transaction fees. 
 Choose `Use stored key` for Fuji:
@@ -117,8 +111,8 @@ Once that is completed, you will be asked what stake you would like to assign th
 ```
 
 Note that for this part, you are not staking actual AVAX in the validator. This is an arbitrary 
-weight that you are assigning to the validator. You can learn more about the stake weight parameter in
-[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
+weight that you are assigning to the validator. You can learn more about the stake weight parameter 
+in [addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
 `weight` section.
 
 Next, enter the start and end time for the node to validate the Subnet.
@@ -133,11 +127,5 @@ the node is a Subnet validator by running `avalanche node status <clusterName>
 You should see:
 
 ```text
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "status": "Validating"
-    },
-    "id": 1
-}
+All nodes in cluster `clusterName` are validators to Subnet `subnetName`
 ``` 

@@ -1,14 +1,14 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI command.
-pagination_label: Run an Avalanche Validator with One Avalanche-CLI Command
-sidebar_label: Run a Validator 
+description: This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI command.
+pagination_label: Run Avalanche Validators with One Avalanche-CLI Command
+sidebar_label: Run Validators 
 sidebar_position: 3
 ---
 
 # Run an Avalanche Validator with One Avalanche-CLI Command 
 
-This page demonstrates how to deploy an Avalanche validator using just one Avalanche-CLI 
+This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI 
 command.
 
 :::info
@@ -35,13 +35,13 @@ services in the near future.
 
 ## Start the Validator
 
-To start an Avalanche validator, run:
+To start Avalanche validators, run:
 
 ```shell
 avalanche node create <clusterName>
 ```
 
-The created node will be part of cluster `clusterName` and all avalanche node commands applied to
+The created node(s) will be part of cluster `clusterName` and all avalanche node commands applied to
 cluster `clusterName` will apply to all nodes in the cluster.
 
 :::note
@@ -60,7 +60,7 @@ enable customization in the near future:
 - Instance Type: `c5.2xlarge`
 - Storage: `1 TB`
 
-The command will first ask which region you want to set up your cloud server in: 
+The command will ask which region you want to set up your cloud server in: 
 
 ```text
  Which AWS region do you want to set up your node in?: 
@@ -71,18 +71,15 @@ The command will first ask which region you want to set up your cloud server in:
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
-Note: AWS accounts have a limit of 5 Elastics IPs per region. If you need to create more than 5 
-cloud servers, you will need to use multiple AWS regions.
-
 The command will then ask which Avalanche Go version you would like to install in the cloud server. 
 You can choose `default` (which will install the latest version) or you can enter the name of a 
 Subnet created with CLI that you plan to be validated by this node (we will get the latest version 
 that is compatible with the deployed Subnet's RPC version).
 
-Once the command has successfully completed, Avalanche-CLI outputs the cloud server node ID as well
-as the public IP that the node can be reached at.
+Once the command has successfully completed, Avalanche-CLI outputs all the created cloud server 
+node IDs as well as the public IP that each node can be reached at.
 
-Avalanche-CLI also outputs the command that you can use to ssh into the cloud server node.
+Avalanche-CLI also outputs the command that you can use to ssh into each cloud server node.
 
 By the end of successful run of `create` command, Avalanche-CLI would have:
 
@@ -96,17 +93,6 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 
 ## Check Bootstrap Status
 
-Please note that you will have to wait until the node has finished bootstrapping before the node 
-can be a Primary Network or Subnet Validator. To check whether the node has finished bootstrapping, 
-run `avalanche node status <clusterName>`. Once the node is finished bootstrapping, 
-the response will be:
-
-```text
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "isBootstrapped": true
-    },
-    "id": 1
-}
-```
+Please note that you will have to wait until the node(s) have finished bootstrapping before the 
+node(s) can be Primary Network or Subnet Validator(s). To check whether all the nodes in a cluster
+have finished bootstrapping, run `avalanche node status <clusterName>`.

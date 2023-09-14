@@ -1,13 +1,13 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page provides instructions for halting a cloud server node established by Avalanche-CLI.
+description: This page provides instructions for halting cloud server nodes established by Avalanche-CLI.
 pagination_label: Stop Nodes Originally Created with Avalanche-CLI
 sidebar_label: Stop a Node
 sidebar_position: 6
 ---
 # Stop Nodes Originally Created with Avalanche-CLI
 
-This page provides instructions for halting a cloud server node established by Avalanche-CLI.
+This page provides instructions for halting cloud server nodes established by Avalanche-CLI.
 
 :::warning
 
@@ -41,5 +41,5 @@ Avalanche-CLI.
 
 :::
 
-Once completed, the EC2 instance set up on AWS would have been stopped and the Elastic IP 
+Once completed, the EC2 instance(s) set up on AWS would have been stopped and the Elastic IP(s)  
 associated with it would have been released.
