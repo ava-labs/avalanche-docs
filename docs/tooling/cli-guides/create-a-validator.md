@@ -41,7 +41,7 @@ To start Avalanche validators, run:
 avalanche node create <clusterName>
 ```
 
-The created node(s) will be part of cluster `clusterName` and all avalanche node commands applied to
+The created nodes will be part of cluster `clusterName` and all avalanche node commands applied to
 cluster `clusterName` will apply to all nodes in the cluster.
 
 :::note
