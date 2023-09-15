@@ -105,7 +105,7 @@ function Home() {
             fontSize: "x-large",
           }}
         >
-          Learn Avalanche with Academy
+          Learn with Avalanche Academy
         </h1>
         <section className={styles.features}>
           <div className="container">
