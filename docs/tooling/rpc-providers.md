@@ -346,3 +346,28 @@ Features:
 ##### HTTPS
 
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
+
+### NOWNodes
+
+[NOWNodes](https://nownodes.io/nodes/avalanche-avax) supports the X-Chain, P-Chain, C-Chain, and Blockbook.
+
+Features:
+
+- Free START plan
+- Privacy oriented (non custodial, no KYC)
+- Dedicated access with no limits by request
+- Technical guides 
+
+#### Mainnet
+
+#### RPC
+
+- The URL is  `https://avalanche.nownodes.io/your api key`
+  
+#### Blockbook
+
+- The URL is  `https://avax-blockbook.nownodes.io/your request/your api key`
+
+#### Support
+
+If you have questions, problems, or suggestions, join the official [NOWNodes Telegram](https://t.me/nownodes).
