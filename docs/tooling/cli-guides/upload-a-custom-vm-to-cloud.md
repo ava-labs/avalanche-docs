@@ -34,11 +34,12 @@ services in the near future.
 
 ### Source Code
 
-We will be uploading a modified version of the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm) example of HyperSDK. 
+We will be uploading a modified version of the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
+example of HyperSDK. 
 
 The following setting will be used:
 
-- Repo url: https://github.com/ava-labs/hypersdk/
+- Repo url: `https://github.com/ava-labs/hypersdk/`
 - Branch Name: `testBranch`
 - Build Script: examples/tokenvm/scripts/build.sh
 
@@ -199,7 +200,7 @@ avalanche subnet create <subnetName>
 
 Choose custom
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Choose your VM: 
     Subnet-EVM
@@ -208,13 +209,13 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Provide path to genesis:
 
-```
+```text
 ✗ Enter path to custom genesis: <genesisPath>
 ```
 
 Provide path to binary:
 
-```
+```text
 ✗ Enter path to vm binary: <vmBinaryPath>
 Successfully created subnet configuration
 ```
@@ -231,7 +232,7 @@ avalanche subnet deploy <subnetName>
 
 Choose Fuji:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Choose a network to deploy on: 
     Local Network
@@ -241,7 +242,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Choose to use stored key:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Which key source should be used to pay transaction fees?: 
   ▸ Use stored key
@@ -250,7 +251,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Choose `<keyName>` as the key to use to pay fees:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Which stored key should be used to pay transaction fees?: 
   ▸ <keyName>
@@ -258,7 +259,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Use the given fee-paying key as the control key for the Subnet:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? How would you like to set your control keys?: 
   ▸ Use fee-paying key
@@ -268,7 +269,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 The Subnet + blockchain should now be created:
 
-```
+```text
 Your Subnet's control keys: [P-fuji1dlwux652lkflgz79g3nsphjzvl6t35xhmunfk1]
 Your subnet auth keys for chain creation: [P-fuji1dlwux652lkflgz79g3nsphjzvl6t35xhmunfk1]
 Subnet has been created with ID: RU72cWmBmcXber6ZBPT7R5scFFuVSoFRudcS3vayf3L535ZE3
@@ -298,7 +299,7 @@ avalanche subnet configure subnetName
 
 Choose node-config.json to the AvalancheGo flags:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Which configuration file would you like to provide?: 
   ▸ node-config.json
@@ -309,20 +310,20 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Provide the path to the avago config file:
 
-```
+```text
 ✗ Enter the path to your configuration file: <avagoFlagsConfPath>
 ```
 
 Choose no:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Would you like to provide the chain.json file as well?: 
   ▸ No
     Yes
 ```
 
-```
+```text
 File ~/.avalanche-cli/subnets/subnetName/node-config.json successfully written
 ```
 
@@ -334,7 +335,7 @@ avalanche subnet configure subnetName
 
 Choose chain.json to the AvalancheGo flags:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Which configuration file would you like to provide?: 
     node-config.json
@@ -345,20 +346,20 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Provide the path to the blockchain config file:
 
-```
+```text
 ✗ Enter the path to your configuration file: <chainConfPath>
 ```
 
 Choose no:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Would you like to provide the subnet.json file as well?: 
   ▸ No
     Yes
 ```
 
-```
+```text
 File ~/.avalanche-cli/subnets/subnetName/chain.json successfully written
 ```
 
@@ -370,7 +371,7 @@ avalanche subnet configure subnetName
 
 Choose `subnet.json` to the AvalancheGo flags:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Which configuration file would you like to provide?: 
     node-config.json
@@ -381,20 +382,20 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 Provide the path to the Subnet config file:
 
-```
+```text
 ✗ Enter the path to your configuration file: <subnetConfPath>
 ```
 
 Choose no:
 
-```
+```text
 Use the arrow keys to navigate: ↓ ↑ → ← 
 ? Would you like to provide the chain.json file as well?: 
   ▸ No
     Yes
 ```
 
-```
+```text
 File ~/.avalanche-cli/subnets/subnetName/subnet.json successfully written
 ```
 
@@ -406,7 +407,7 @@ avalanche subnet upgrade import subnetName
 
 Provide the path to the network upgrades file:
 
-```
+```text
 ✗ Provide the path to the upgrade file to import: <networkUpgradesConf>
 ```
 
@@ -421,7 +422,7 @@ and compiling the custom VM.
 avalanche node sync clusterName subnetName
 ```
 
-```
+```text
 Checking if node(s) in cluster newCluster are bootstrapped to Primary Network ...
 Checking compatibility of avalanche go version in cluster newCluster with Subnet EVM RPC of subnet subnetName ...
 Installing Custom VM build environment on the EC2 instance(s) ...
@@ -448,24 +449,23 @@ Custom VM source code repository, branch and build script not defined for subnet
 
 Fill the source code repo url:
 
-```
+```text
 ✗ Source code repository URL: https://github.com/ava-labs/hypersdk/
 ```
 
 Fill in the branch:
 
-```
+```text
 ✗ Branch: testBranch
 ```
 
 Finally set the build script:
 
-```
+```text
 ✗ Build script: examples/tokenvm/scripts/build.sh
 ```
 
-```
-
+```text
 PLAY [aws-node] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
@@ -503,8 +503,4 @@ Your full customized VM is ready to go!
 You can also take advantage of `avalanche node update subnet <subnetName>` to reinstall the binary
 when the branch is updated, and change the config files by previously using the 
 `avalanche subnet configure` and `avalanche subnet upgrade import` commands above.
-
-
-
-
 
