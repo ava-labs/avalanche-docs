@@ -798,8 +798,8 @@ You can check the status after update by calling `avalanche node status`
 :::
 
 The `node update subnet` command updates all nodes in a cluster with latest Subnet configuration and
-You can check the updated Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet
-<subnetName>`
+You can check the updated Subnet bootstrap status by calling avalanche
+`node status <clusterName> --subnet <subnetName>`
 
 **Usage:**
 

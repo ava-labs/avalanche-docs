@@ -192,7 +192,7 @@ AvalancheGo flags configuration `<avagoFlagsConfPath>`:
 
 ## Create the CLI Subnet
 
-Let's create a CLI Subnet called <subnetName>, with custom VM binary and genesis.
+Let's create a CLI Subnet called `<subnetName>`, with custom VM binary and genesis.
 
 ```shell
 avalanche subnet create <subnetName>
@@ -413,9 +413,9 @@ Provide the path to the network upgrades file:
 
 ## Upload the Custom VM to your Cloud Nodes
 
-Assume your cloud validators belong to the cluster <clusterName>
+Assume your cloud validators belong to the cluster `<clusterName>`
 
-Let's tell the validators to start tracking the Subnet subnetName, while uploading
+Let's tell the validators to start tracking the Subnet `<subnetName>`, while uploading
 and compiling the custom VM.
 
 ```shell
