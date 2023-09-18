@@ -6,7 +6,7 @@ sidebar_label: Upload a Custom VM into Cloud
 sidebar_position: 7
 ---
 
-# Upload a Custom VM into Cloud using Avalanche-CLI
+# Upload a Custom VM into Cloud Using Avalanche-CLI
 
 This page demonstrates how to upload a Custom VM into Cloud-Based Validators using Avalanche-CLI
 
@@ -24,31 +24,31 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as as described [here](/docs/tooling/cli-guides/create-a-validator.md)
+- Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
 - Developed/Customized a VM, as described [here](https://docs.avax.network/build/vm).
 
 Currently, we are only support AWS cloud services, but we plan to add support for more cloud 
 services in the near future.
 
-## Example VM to be used in this tutorial
+## Example VM to be Used in This Tutorial
 
-### Source code
+### Source Code
 
 We will be uploading a modified version of the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm) example of HyperSDK. 
 
 The following setting will be used:
 
-- Repo Url: https://github.com/ava-labs/hypersdk/
-- Branch Name: testBranch
+- Repo url: https://github.com/ava-labs/hypersdk/
+- Branch Name: `testBranch`
 - Build Script: examples/tokenvm/scripts/build.sh
 
 :::note
 
-CLI needs a public repo url in order to be able to download and install the custom vm on cloud.
+CLI needs a public repo url in order to be able to download and install the custom VM on cloud.
 
-### Local build stage
+### Local Build Stage
 
-A binary locally compiled is needed to firt set the CLI subnet. You can create it by locally
+A binary locally compiled is needed to first set the CLI Subnet. You can create it by locally
 cloning HyperSDK, changing to the desired branch and then executing the build script. Eg:
 
 ```bash
@@ -58,10 +58,10 @@ git checkout testBranch
 ./examples/tokenvm/scripts/build.sh <vmBinaryPath>
 ```
 
-### Blockchain configuration files
+### Blockchain Configuration Files
 
 CLI supports uploading the full set of configuration files for a blockchain. The following examples
-uses all, but the user can decide to provide a subnet, or even none.
+uses all, but the user can decide to provide a Subnet, or even none.
 
 Genesis `<genesisPath>`:
 
@@ -148,7 +148,7 @@ Avalanche Subnet configuration `<subnetConfPath>`:
 }
 ```
 
-Network upgrade configuration `<networkUpgradeConfPath>`:
+Network upgrades configuration `<networkUpgradeConfPath>`:
 
 ```json
 {
@@ -189,9 +189,9 @@ AvalancheGo flags configuration `<avagoFlagsConfPath>`:
 }
 ```
 
-## Create the CLI subnet
+## Create the CLI Subnet
 
-Let's create a CLI subnet called <subnetName>, with custom vm binary and genesis.
+Let's create a CLI Subnet called <subnetName>, with custom VM binary and genesis.
 
 ```shell
 avalanche subnet create <subnetName>
@@ -219,11 +219,11 @@ Provide path to binary:
 Successfully created subnet configuration
 ```
 
-## Deploy the CLI subnet to Fuji
+## Deploy the CLI Subnet to Fuji
 
-This step is going to create the subnet and the blockchain inside Fuji. It 
-requires you to set up a key to be able to pay the fuji Fees. Let's assume
-you have a key `keyName` with enought funds.
+This step is going to create the Subnet and the blockchain inside Fuji. It 
+requires you to set up a key to be able to pay the Fuji Fees. Let's assume
+you have a key `keyName` with enough funds.
 
 ```shell
 avalanche subnet deploy <subnetName>
@@ -256,7 +256,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ <keyName>
 ```
 
-Use the given fee-paying key as the control key for the subnet:
+Use the given fee-paying key as the control key for the Subnet:
 
 ```
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -266,7 +266,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom list
 ```
 
-The subnet + blockchain should now be created:
+The Subnet + blockchain should now be created:
 
 ```
 Your Subnet's control keys: [P-fuji1dlwux652lkflgz79g3nsphjzvl6t35xhmunfk1]
@@ -288,15 +288,15 @@ Now creating blockchain...
 +--------------------+----------------------------------------------------+
 ```
 
-## Set the remanent config files
+## Set the Remanent Config Files
 
-### Avalanchego flags
+### AvalancheGo Flags
 
 ```shell
 avalanche subnet configure subnetName
 ```
 
-Choose node-config.json to the avalanchego flags:
+Choose node-config.json to the AvalancheGo flags:
 
 ```
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -332,7 +332,7 @@ File ~/.avalanche-cli/subnets/subnetName/node-config.json successfully written
 avalanche subnet configure subnetName
 ```
 
-Choose chain.json to the avalanchego flags:
+Choose chain.json to the AvalancheGo flags:
 
 ```
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -368,7 +368,7 @@ File ~/.avalanche-cli/subnets/subnetName/chain.json successfully written
 avalanche subnet configure subnetName
 ```
 
-Choose subnet.json to the avalanchego flags:
+Choose `subnet.json` to the AvalancheGo flags:
 
 ```
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -379,7 +379,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     per-node-chain.json
 ```
 
-Provide the path to the subnet config file:
+Provide the path to the Subnet config file:
 
 ```
 ✗ Enter the path to your configuration file: <subnetConfPath>
@@ -398,7 +398,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 File ~/.avalanche-cli/subnets/subnetName/subnet.json successfully written
 ```
 
-### Network upgrade
+### Network Upgrades
 
 ```shell
 avalanche subnet upgrade import subnetName
@@ -410,12 +410,12 @@ Provide the path to the network upgrades file:
 ✗ Provide the path to the upgrade file to import: <networkUpgradesConf>
 ```
 
-## Upload the custom vm to your cloud nodes
+## Upload the Custom VM to your Cloud Nodes
 
 Assume your cloud validators belong to the cluster <clusterName>
 
-Let's tell the validators to start tracking the subnet subnetName, while uploading
-and compiling the custom vm.
+Let's tell the validators to start tracking the Subnet subnetName, while uploading
+and compiling the custom VM.
 
 ```shell
 avalanche node sync clusterName subnetName
@@ -502,7 +502,7 @@ Your full customized VM is ready to go!
 
 You can also take advantage of `avalanche node update subnet <subnetName>` to reinstall the binary
 when the branch is updated, and change the config files by previously using the 
-`avalanche subnet configure` and `avalanche subnet upgrade import` commans above.
+`avalanche subnet configure` and `avalanche subnet upgrade import` commands above.
 
 
 
