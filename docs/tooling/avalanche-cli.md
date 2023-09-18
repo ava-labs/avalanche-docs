@@ -654,7 +654,7 @@ rest of the commands to maintain your node and make your node a Subnet Validator
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -687,7 +687,7 @@ will apply to all nodes in the cluster.
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -709,7 +709,7 @@ The `node list` command lists all clusters with their nodes.
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -734,7 +734,7 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -758,7 +758,7 @@ Note that a stopped node may still incur cloud server storage fees.
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -777,11 +777,47 @@ You can check the Subnet bootstrap status by calling avalanche `node status <clu
   -h, --help   help for sync
 ```
 
+### Node Update
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node update` command suite provides a collection of commands for nodes to update
+their AvalancheGo version or VM version/config.
+You can check the status after update by calling `avalanche node status`
+
+### Node Update Subnet
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node update subnet` command updates all nodes in a cluster with latest Subnet configuration and
+You can check the updated Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet
+<subnetName>`
+
+**Usage:**
+
+```shell
+  avalanche node update subnet [clusterName] [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for subnet
+```
+
 ### Node Validate
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -794,7 +830,7 @@ will fail. You can check the bootstrap status by calling `avalanche node status 
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
@@ -825,7 +861,7 @@ Network.
 
 :::warning
 
-(ALPHA Warning) This command is currently in experimental mode. 
+(ALPHA Warning) This command is currently in experimental mode.
 
 :::
 
