@@ -366,8 +366,8 @@ Features:
   
 #### Blockbook
 
-- The URL is  `https://avax-blockbook.nownodes.io/your request/your api key`
-
+- The URL is  `https://avax-blockbook.nownodes.io/your request`
+  
 #### Support
 
 If you have questions, problems, or suggestions, join the official [NOWNodes Telegram](https://t.me/nownodes).
