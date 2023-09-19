@@ -104,6 +104,7 @@ ERC
 ERC721s
 ESLint
 Eteng
+ethereum
 Ethereum
 Ethers
 eVoting
@@ -115,6 +116,7 @@ fxs
 gamification
 Ganache
 Gantt
+gcc
 Geth
 Geth's
 getters
@@ -122,6 +124,7 @@ gif
 GitHub
 github
 Golang
+GOPATH
 goroutines
 Grafana
 gwei
@@ -197,6 +200,7 @@ NFTs
 Nimish
 NodeID
 NodeIDs
+NOWNodes
 npm
 npx
 Ofem

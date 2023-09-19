@@ -24,6 +24,13 @@ hardware with the following minimum specifications.
 - OS: Ubuntu 20.04 or MacOS &gt;= 12
 - Network: sustained 5Mbps up/down bandwidth
 
+:::caution
+
+Using an HDD may result in poor and random 
+read/write latencies, therefore reducing performance and reliability.
+
+:::
+
 :::note
 
 HW requirements shall scale with the amount of AVAX staked on

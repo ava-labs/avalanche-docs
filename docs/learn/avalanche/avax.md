@@ -1,6 +1,10 @@
 ---
+tags: [Avax, Tokenomics]
+description: AVAX is the limited-supply token of the Avalanche network, used to cover fees, enhance security via staking, and facilitate transactions across its various Subnets.
+keywords: [documentation, avalanche, avax token, tokenomics, avax utility]
 sidebar_label: AVAX Token
 ---
+
 # AVAX
 
 AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to
