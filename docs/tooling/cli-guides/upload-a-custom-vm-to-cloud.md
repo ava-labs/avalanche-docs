@@ -62,7 +62,7 @@ where `<vmBinaryPath>` is the full path of the script's output binary (for examp
 
 ### Genesis File
 
-The following contents will server as the chain genesis. They were generated using
+The following contents will serve as the chain genesis. They were generated using
 `token-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh).
 
 Save then into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.json`):
