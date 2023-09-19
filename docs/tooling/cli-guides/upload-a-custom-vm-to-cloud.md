@@ -65,7 +65,7 @@ where `<vmBinaryPath>` is the full path of the script's output binary (for examp
 The following contents will serve as the chain genesis. They were generated using
 `token-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh).
 
-Save then into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.json`):
+Save it into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.json`):
 
 ```json
 {
@@ -223,8 +223,15 @@ Now creating blockchain...
 
 ## Set the Config Files
 
-CLI supports uploading the full set of configuration files for a blockchain. The following example
-uses all of them, but the user can decide to provide a subset of those.
+CLI supports uploading the full set of configuration files for a blockchain:
+
+- Genesis File
+- Blockchain Config
+- Subnet Config
+- Network Upgrades
+- AvalancheGo Config
+
+The following example uses all of them, but the user can decide to provide a subset of those.
 
 ### AvalancheGo Flags
 
