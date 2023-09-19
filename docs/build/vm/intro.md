@@ -67,10 +67,16 @@ calls. This functionality is enabled by **RPCChainVM**, a special VM which wraps
 implementations and bridges the VM and AvalancheGo, establishing a standardized communication 
 protocol between them.
 
-During VM creation, handshake messages are exchanged via RPCChainVM between AvalancheGo and the 
-VM installation. Ensure matching RPCChainVM protocol versions to avoid 
+:::info
+
+During VM creation, handshake messages are exchanged via **RPCChainVM** between AvalancheGo and the 
+VM installation. Ensure matching **RPCChainVM** protocol versions to avoid 
 [errors](https://github.com/ava-labs/avalanchego/pull/2021), by updating your VM or using a 
-different version of AvalancheGo. Note that some VMs may not support the latest protocol version.
+[different version of AvalancheGo](https://github.com/ava-labs/AvalancheGo/releases).
+
+Note that some VMs may not support the latest protocol version.
+
+:::
 
 ### API Handlers
 
