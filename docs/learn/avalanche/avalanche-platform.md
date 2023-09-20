@@ -18,7 +18,8 @@ The Primary Network is a special [Subnet](subnets-overview.md) that runs three b
 - The Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
 
 :::note
-Avalanche Mainnet is comprised of the Primary Network and all deployed Subnets.
+[Avalanche Mainnet](/learn/avalanche/mainnet.md) is comprised of the Primary Network
+and all deployed Subnets.
 :::
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
