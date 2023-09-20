@@ -94,6 +94,58 @@ function Home() {
           </div>
         </section>
       </main>
+
+      <main className={styles.main}>
+        <br />
+        <h1
+          align="center"
+          style={{
+            fontWeight: "700",
+            marginBottom: "0px",
+            fontSize: "x-large",
+          }}
+        >
+          Learn with Avalanche Academy
+        </h1>
+        <section className={styles.features}>
+          <div className="container">
+            <div className="row cards__container">
+              <Card
+                to="https://academy.avax.network/course/avalanche-fundamentals?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=learn-avalanche"
+                header={{
+                  label: "🔺 Avalanche Fundamentals",
+                }}
+                body={{
+                  label:
+                    "Beginner-friendly course to get a high level overview of Avalanche Consensus, Subnets, and VM",
+                }}
+              />
+
+              <Card
+                to="https://academy.avax.network/course/subnet-architecture?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=learn-avalanche"
+                header={{
+                  label: "🌐 Subnet Architecture",
+                }}
+                body={{
+                  label:
+                    "Explore Avalanche's Subnet Architecture designed for Scalability and Enterprise Adoption",
+                }}
+              />
+
+              <Card
+                to="https://academy.avax.network/course/customize-evm?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=learn-avalanche"
+                header={{
+                  label: "🛠️ Customize the EVM",
+                }}
+                body={{
+                  label:
+                    "Learn to Customize Ethereum Virtual Machine and Launch Your Personalized Blockchain on Avalanche",
+                }}
+              />
+            </div>
+          </div>
+        </section>
+      </main>
     </Layout>
   );
 }
