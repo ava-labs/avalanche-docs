@@ -419,7 +419,7 @@ Provide the path to the network upgrades file:
 
 ## Deploy Our Custom VM
 
-To deploy out Custom VM, run:
+To deploy our Custom VM, run:
 
 ```shell
 avalanche node sync <clusterName> <subnetName>
