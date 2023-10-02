@@ -320,9 +320,9 @@ Features:
 
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
 
-### 1RPC, by Automata Network
+### 1RPC
 
-[1RPC](https://1rpc.io) supports the C-Chain, X-Chain, and P-Chain.
+[1RPC](https://1rpc.io), by Automata Network supports the C-Chain, X-Chain, and P-Chain.
 
 Features:
 
