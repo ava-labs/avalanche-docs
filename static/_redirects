@@ -533,5 +533,11 @@
 /community/tutorials-contest/2021/drizzle-auction-manager /deprecated/tutorials-contest/2021/drizzle-auction-manager 301
 /community/tutorials-contest/2021/distributed-file-manager /deprecated/tutorials-contest/2021/distributed-file-manager 301
 
-#Learn - Metadata
+# Learn - Metadata
 /learn/projects /tooling 301
+
+# 10/02/23
+/dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+
