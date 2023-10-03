@@ -101,9 +101,9 @@ AvalancheGo, Subnet-EVM and Precompile-EVM tools.
 
 | RPC Version | AvalancheGo          | Subnet-EVM        | Precompile-EVM     |
 |-------------|----------------------|-------------------|--------------------|
-|    26       | v1.10.0 - v1.10.4    |  v0.5.1 - v0.5.2  |  v0.1.0 -  v0.1.0  |
-|    27       | v1.10.5 - v1.10.8    |  v0.5.3           |  v0.1.2            |
-|    28       | v1.10.9 - v1.10.11   |  v0.5.4 - v0.5.6  |  v0.1.3 - v0.1.3   |
+|    26       | v1.10.0-v1.10.4    |  v0.5.1-v0.5.2  |  v0.1.0-v0.1.0  |
+|    27       | v1.10.5-v1.10.8    |  v0.5.3         |  v0.1.2          |
+|    28       | v1.10.9-v1.10.11   |  v0.5.4-v0.5.6  |  v0.1.3-v0.1.3   |
 
 You can view the full RPC compatibility broken down by release version for each tool here: 
 
@@ -119,7 +119,7 @@ Updates to AvalancheGo's RPC version are **not** tied to its semantic version sc
 version bumps may include a breaking RPC version bump.
 :::
 
-## Fix for MacBook Air M1/M2 — ‘Bad CPU type in executable’ Error
+## Fix for MacBook Air M1/M2: ‘Bad CPU type in executable’ Error
 
 When running `avalanche subnet deploy` via the Avalanche-CLI, the terminal may throw an error that
 contains the following: 
