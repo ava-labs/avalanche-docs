@@ -124,7 +124,7 @@ version bumps may include a breaking RPC version bump.
 When running `avalanche subnet deploy` via the Avalanche-CLI, the terminal may throw an error that
 contains the following: 
 
-```
+``` zsh
 zsh: bad CPU type in executable:
 /Users/user.name/Downloads/build/avalanchego
 ```
