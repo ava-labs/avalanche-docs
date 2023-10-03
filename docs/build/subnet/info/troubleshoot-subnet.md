@@ -74,19 +74,16 @@ protocol version mismatch.
 
 AvalancheGo communicates with custom VMs over RPC using [gRPC](https://grpc.io/). gRPC defines a
 protocol specification shared by both AvalancheGo and the VM. Both components **must** be running
-the same RPC version for VM deployment to work. You can view [AvalancheGo's RPC compatibility broken
-down by release
-version](https://github.com/ava-labs/avalanchego/blob/master/version/compatibility.json).
+the same RPC version for VM deployment to work.
 
 Your custom VM's RPC version is set by the version of AvalancheGo that you import. By default,
 Avalanche-CLI creates local Avalalanche networks that run the latest AvalancheGo release.
 
 Here's an example with real numbers from the AvalancheGo compatibility page. If the latest
-AvalancheGo release is version v1.9.4, then Avalanche-CLI deploys a network with RPC version 20. For
-your deploy to be successful, your VM must also have RPC version 20. Because only AvalancheGo
-version v1.9.4 supports RPC version 20, your VM **must** import AvalancheGo version v1.9.4. If the
-latest release were v1.9.3, your VM could safely import versions v1.9.2 or v1.9.3 because both
-versions support RPC version 19.
+AvalancheGo release is version v1.10.11, then Avalanche-CLI deploys a network with RPC version 28. For
+your deploy to be successful, your VM must also have RPC version 28. Because only AvalancheGo
+versions v1.10.9, v1.10.10 and v1.10.11 supports RPC version 28, 
+your VM **must** import one of those versions.
 
 If your VM has an RPC version mismatch, you have two options. First, you can update the version of
 AvalancheGo you use in your VM. This is the correct long-term approach. However, there is a
@@ -97,6 +94,25 @@ setting the AvalancheGo
 version explicitly. Although it's very important to keep your version of AvalancheGo up-to-date,
 this workaround helps you avoid broken builds in the short term. However, you need to upgrade
 to the latest AvalancheGo version when deploying publicly to the Fuji Testnet or Mainnet.
+
+Similar version matching is required in different tools on the ecosystem. Here is a compatibility 
+table showing which RPC Version implements the more recent releases of 
+AvalancheGo, Subnet-EVM and Precompile-EVM tools.
+
+| RPC Version | AvalancheGo          | Subnet-EVM        | Precompile-EVM     |
+|-------------|----------------------|-------------------|--------------------|
+|    26       | v1.10.0 - v1.10.4    |  v0.5.1 - v0.5.2  |  v0.1.0 -  v0.1.0  |
+|    27       | v1.10.5 - v1.10.8    |  v0.5.3           |  v0.1.2            |
+|    28       | v1.10.9 - v1.10.11   |  v0.5.4 - v0.5.6  |  v0.1.3 - v0.1.3   |
+
+You can view the full RPC compatibility broken down by release version for each tool here: 
+
+[AvalancheGo](https://github.com/ava-labs/avalanchego/blob/master/version/compatibility.json).
+
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm/blob/master/compatibility.json).
+
+[Precompile-EVM](https://github.com/ava-labs/precompile-evm/blob/main/compatibility.json).
+
 
 :::note
 Updates to AvalancheGo's RPC version are **not** tied to its semantic version scheme. Minor AvalancheGo
