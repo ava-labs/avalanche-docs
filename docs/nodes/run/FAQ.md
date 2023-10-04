@@ -30,9 +30,8 @@ This error occurs when the RPCChainVM protocol version used by Subnet-EVM is inc
 the protocol version of AvalancheGo. Make sure both are using compatible versions. You can 
 follow the table provided below to check the Subnet-EVM versions compatible with each AvalancheGo release:
 
-| RPCChainVM | Subnet-EVM | AvalancheGo |
-| :--------: | :-------: | :-------: |
-| 25 | v0.5.0 | v1.10.0 |
-| 26 | v0.5.1-v0.5.2 | v1.10.1-v1.10.4 |
-| 27 | v0.5.3 | v1.10.5-v1.10.6 |
-| **28** | v0.5.4-**v0.5.6 (latest)**    | v1.10.9-**v1.10.10(latest)** |
+| RPCChainVM | AvalancheGo | Subnet-EVM | Precompile-EVM | HyperSDK |
+| :--------: | :-------: | :-------: | :-------: | :-------: |
+| 26 | v1.10.1-v1.10.4 | v0.5.1-v0.5.2 | v0.1.0-v0.1.1 | v0.0.6-v0.0.9 |
+| 27 | v1.10.5-v1.10.6 | v0.5.3 | v0.1.2 | v0.0.10 |
+| **28** | v1.10.9-**v1.10.10(latest)** | v0.5.4-**v0.5.6 (latest)** | v0.1.3-**v0.1.4 (latest)** | v0.0.13-**v0.0.14 (latest)** |
