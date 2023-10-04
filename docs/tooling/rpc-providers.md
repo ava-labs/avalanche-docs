@@ -286,7 +286,7 @@ P-Chain, C-Chain, and Index API.
 
 ### Stackup
 
-[Stackup](https://www.stackup.sh) currently supports the Avalanche C Chain on Mainnet and Fuji Testnet.
+[Stackup](https://www.stackup.sh) currently supports the Avalanche C-Chain on Mainnet and Fuji Testnet.
 
 Features:
 
@@ -295,6 +295,7 @@ Features:
 - ERC-4337 bundlers and paymasters
 
 #### HTTP
+
 - The URL is `https://api.stackup.sh/v1/node/YOUR-API-KEY`
 
 ### NOWNodes
