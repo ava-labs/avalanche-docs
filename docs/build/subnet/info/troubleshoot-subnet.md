@@ -81,7 +81,8 @@ Avalanche-CLI creates local Avalalanche networks that run the latest AvalancheGo
 
 ### Example
 
-_Here's an example with real numbers from the AvalancheGo compatibility page_: 
+_Here's an example with real numbers from the AvalancheGo compatibility page_:
+
 - If the latest AvalancheGo release is version v1.10.11, then Avalanche-CLI deploys a network with
 RPC version 28.
 - For your deploy to be successful, your VM must also have RPC version 28. Because only
