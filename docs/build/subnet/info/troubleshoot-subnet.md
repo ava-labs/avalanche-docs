@@ -89,7 +89,10 @@ RPC version 28.
 AvalancheGo versions v1.10.9, v1.10.10 and v1.10.11 supports RPC version 28, 
 your VM **must** import one of those versions.
 
-### Fix an RPC protocol Mismatch
+### Error: `RPCChainVM protocol version mismatch between AvalancheGo and Virtual Machine plugin`
+
+This error occurs when the RPCChainVM protocol version used by VMs like Subnet-EVM
+are incompatible with the protocol version of AvalancheGo.
 
 If your VM has an RPC version mismatch, you have two options: 
 
@@ -110,14 +113,14 @@ Fuji Testnet or Avalanche Mainnet.
 ### More Information
 
 Similar version matching is required in different tools on the ecosystem. Here is a compatibility 
-table showing which RPC Version implements the more recent releases of 
-AvalancheGo, Subnet-EVM and Precompile-EVM tools.
+table showing which RPCChainVM Version implements the more recent releases of 
+AvalancheGo, Subnet-EVM, Precompile-EVM and HyperSDK.
 
-| RPC Version | AvalancheGo          | Subnet-EVM        | Precompile-EVM     |
-|-------------|----------------------|-------------------|--------------------|
-|    26       | v1.10.0-v1.10.4    |  v0.5.1-v0.5.2  |  v0.1.0-v0.1.0  |
-|    27       | v1.10.5-v1.10.8    |  v0.5.3         |  v0.1.2          |
-|    28       | v1.10.9-v1.10.11   |  v0.5.4-v0.5.6  |  v0.1.3-v0.1.3   |
+| RPCChainVM | AvalancheGo | Subnet-EVM | Precompile-EVM | HyperSDK |
+| :--------: | :-------: | :-------: | :-------: | :-------: |
+| 26 | v1.10.1-v1.10.4 | v0.5.1-v0.5.2 | v0.1.0-v0.1.1 | v0.0.6-v0.0.9 |
+| 27 | v1.10.5-v1.10.8 | v0.5.3 | v0.1.2 | v0.0.10-v0.0.12 |
+| **28** | v1.10.9-**v1.10.11(latest)** | v0.5.4-**v0.5.6 (latest)** | v0.1.3-**v0.1.4 (latest)** | v0.0.13-**v0.0.14 (latest)** |
 
 You can view the full RPC compatibility broken down by release version for each tool here: 
 
