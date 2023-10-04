@@ -6,7 +6,7 @@ sidebar_position: 4
 ---
 import ReactPlayer from 'react-player'
 
-# Data visualization
+# Data Visualization
 
 ## API calls with Data Visualization
 
@@ -60,11 +60,11 @@ different color.
 
 ![Data Visualization Feature](/img/postman/postman-25-visualization-feature.png)
 
-* Hexdecimal to decimal conversions.
+* Hexadecimal to decimal conversions.
 
 ![Data Visualization Feature](/img/postman/postman-26-visualization-feature.png)
 
-* Native token amounts shown as AVAX and/or GWEI and WEI.
+* Native token amounts shown as AVAX and/or GWei and Wei.
 
 ![Data Visualization Feature](/img/postman/postman-27-visualization-feature.png)
 
@@ -78,7 +78,7 @@ of gas was used our of the `gasLimit`.
 
 ![Data Visualization Feature](/img/postman/postman-29-visualization-feature.png)
 
-* Convert the output for atomic transactions from hexadecimal to user redeable.
+* Convert the output for atomic transactions from hexadecimal to user readable.
 
 :::info
 Please note that this only works for C-Chain Mainnet, not Fuji.
