@@ -320,6 +320,23 @@ Features:
 
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
 
+### 1RPC
+
+[1RPC](https://1rpc.io), by Automata Network supports the C-Chain, X-Chain, and P-Chain.
+
+Features:
+
+- Free to use
+- First RPC relay to be attested on-chain
+- Eradicate metadata exposure and leakage
+- Zero tracking
+
+#### Mainnet RPC
+
+- For C-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/c`
+- For X-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/x`
+- For P-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/p`
+
 ## Subnets RPC - Public API Servers 
 
 ### Beam
@@ -363,4 +380,3 @@ Note: on Fuji Testnet, the URL is `https://subnets.avax.network/dexalot/testnet/
 - The URL is `wss://subnets.avax.network/dexalot/mainnet/ws`.
 
 Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws`.
-
