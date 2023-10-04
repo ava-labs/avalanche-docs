@@ -89,7 +89,9 @@ RPC version 28.
 AvalancheGo versions v1.10.9, v1.10.10 and v1.10.11 supports RPC version 28, 
 your VM **must** import one of those versions.
 
-### Error: `RPCChainVM protocol version mismatch between AvalancheGo and Virtual Machine plugin`
+### Solution
+
+Error: `RPCChainVM protocol version mismatch between AvalancheGo and Virtual Machine plugin`
 
 This error occurs when the RPCChainVM protocol version used by VMs like Subnet-EVM
 are incompatible with the protocol version of AvalancheGo.
