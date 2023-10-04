@@ -33,5 +33,5 @@ follow the table provided below to check the Subnet-EVM versions compatible with
 | RPCChainVM | AvalancheGo | Subnet-EVM | Precompile-EVM | HyperSDK |
 | :--------: | :-------: | :-------: | :-------: | :-------: |
 | 26 | v1.10.1-v1.10.4 | v0.5.1-v0.5.2 | v0.1.0-v0.1.1 | v0.0.6-v0.0.9 |
-| 27 | v1.10.5-v1.10.6 | v0.5.3 | v0.1.2 | v0.0.10 |
-| **28** | v1.10.9-**v1.10.10(latest)** | v0.5.4-**v0.5.6 (latest)** | v0.1.3-**v0.1.4 (latest)** | v0.0.13-**v0.0.14 (latest)** |
+| 27 | v1.10.5-v1.10.8 | v0.5.3 | v0.1.2 | v0.0.10-v0.0.12 |
+| **28** | v1.10.9-**v1.10.11(latest)** | v0.5.4-**v0.5.6 (latest)** | v0.1.3-**v0.1.4 (latest)** | v0.0.13-**v0.0.14 (latest)** |
