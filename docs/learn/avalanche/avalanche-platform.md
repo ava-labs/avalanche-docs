@@ -1,5 +1,7 @@
 ---
-description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain).  More info here.
+tags: [Primary Network, P-Chain, X-Chain, C-Chain, Platform Chain, Contract Chain]
+description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). More info here.
+keywords: [docs, documentation, avalanche, primary network, c-chain, x-chain, p-chain, platform chain, contract chain]
 sidebar_label: The Primary Network
 ---
 
@@ -16,7 +18,8 @@ The Primary Network is a special [Subnet](subnets-overview.md) that runs three b
 - The Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
 
 :::note
-Avalanche Mainnet is comprised of the Primary Network and all deployed Subnets.
+[Avalanche Mainnet](/learn/avalanche/mainnet.md) is comprised of the Primary Network
+and all deployed Subnets.
 :::
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
@@ -33,7 +36,8 @@ The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
 The [C-Chain’s API](/reference/avalanchego/c-chain/api.md) supports Geth's API and supports the
 deployment and execution of smart contracts written in Solidity.
 
-The C-Chain is an instance of the [Coreth](/learn/projects#coreth) Virtual Machine.
+The C-Chain is an instance of the 
+[Coreth](https://github.com/ava-labs/coreth) Virtual Machine.
 
 ### P-Chain 
 

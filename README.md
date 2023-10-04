@@ -16,17 +16,52 @@ The site is built using [Docusaurus 2](https://docusaurus.io/).
 ## Contributing
 
 Contributing to the docs site is a great way to get involved with the Avalanche dev community!
-Here's some things you need to know to get started.
+Here's how to get started: 
 
-### Contents
+### Quick Fixes
 
-- All the doc text are located in the [docs](docs) directory; image files are put under
-[static/img](static/img) directory where a sub-dir is strongly recommended if there are multiple
-image files for a doc.
-- The left sidebar of the page is controlled by [sidebars.js](sidebars.js).
-- Style Guide can be found [here](style-guide.md). In addition, this repository
-uses a series of style checking and formatting tools. See
+For small typos or corrections, it is easy to contribute without the need to clone/fork the
+repository. Simply:
+
+- Scroll to the bottom of the page and hit "Edit this page"
+- Make changes to the page directly in Github's GUI
+- Hit "Commit changes ..."
+- Edit the `commit message` to describe the change in 4 or less words,
+and include any extra details in the description
+- Hit "Sign off and commit changes" to raise a PR with your proposed changes
+
+![](https://github.com/ava-labs/avalanche-docs/blob/master/static/img/quick-edit-readme.gif)
+
+### New Content or Extensive Changes
+
+To propose new docs or large edits to our existing pages, follow the steps accordingly:
+
+- **Ava Labs Github Organization Members:** Clone the repo
+`git clone https://github.com/ava-labs/avalanche-docs.git`
+- **External Contributors:** Fork the repo via GitHub's GUI
+- Checkout to a new branch `git checkout -b <your-name/branch-name>`
+- Make changes on your branch
+- `git add .`
+- **`yarn build` to ensure the build passes**
+- `git push`
+- Head to [GitHub](https://github.com/ava-labs/avalanche-docs)
+and open a new pull request
+
+### Structure and Syntax
+
+- Docs are located in the [docs](docs) directory. A document's path corresponds
+with it's domain extension. For example: the guide showing how to
+[Run an Avalanche Node Manually](https://docs.avax.network/nodes/run/node-manually)
+is located in this repository at `docs/nodes/run/node-manually`, and is hosted at
+[https://docs.avax.network/nodes/run/node-manually](https://docs.avax.network/nodes/run/node-manually).
+- The left sidebar of the page is controlled primarily by
+[sidebars.json](sidebars.json), where sub-sections are sometimes ordered by their
+[`sidebar_position` metadata field](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_position).
+- Our style guide can be found [here](style-guide.md).
+- This repository uses a series of style checking, linting, and formatting tools. See
 [style-checker-notes.md](style-checker-notes.md) for more details and how to fix errors.
+- All image files should be included under
+[static/img/<corresponding-sub-drectory>](static/img).
 - Extensive docs for Docusaurus can be found [here](https://docusaurus.io/docs).
 
 ### Pull Request (PR)
@@ -66,4 +101,28 @@ contents hosting service.
 
 ## Search
 
-Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
+Search is powered by Algolia and the config file is located
+[here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json).
+
+## New or Missing Content Requests
+
+_The information I am requesting is related to a specific project, i.e. AvalancheGo, AvalancheNetworkRunner, etc.:_
+
+- Please raise a **Missing Docs Issue** in the GitHub repository of that project and
+thoroughly detail your request. Include references to any existing pages relevant to your
+request.
+
+_The information I am requesting is explanatory in nature and does not currently exist:_
+
+- Please open a new [Issue](https://github.com/ava-labs/avalanche-docs/issues/new/choose)
+in this repository and thoroughly detail your request according to the issue template.
+If urgent, please create a new ticket in the
+[Dev Docs Improvement Proposals](https://github.com/orgs/ava-labs/projects/15/views/1)
+dashboard.
+
+_Erroneous or missing information on documentation unrelated to a specific project needs
+editing:_
+
+- If you understand the issue enough to provide a correction, follow the steps
+[here](https://github.com/ava-labs/avalanche-docs#quick-fixes).
+- If not, raise an [Issue](https://github.com/ava-labs/avalanche-docs/issues/new/choose).

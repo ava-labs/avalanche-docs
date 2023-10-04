@@ -13,14 +13,22 @@
 
 <please give a thorough description of how to view the changes and how they were tested>
 
-## Workflow checks
+## To prevent any errors while building
 
-- [] ran `vale /docs/file/path` on all changed `.md` files to ensure all grammar rules pass
-- [] ran `markdownlint /docs/file/path` on all changed `.md` files to ensure all linting rules pass
-- [] completed the above two checks and all additional rules outlined in `style-checker-notes.md` to
+- [] run `vale /docs/file/path` on all changed `.md` files to ensure all grammar rules pass
+- [] run `markdownlint /docs/file/path` on all changed `.md` files to ensure all linting rules pass
+- [] complete the above two checks and all additional rules outlined in `style-checker-notes.md` to
   ensure all checks pass
-- [] if a doc was removed/deleted, the path to that doc must be redirected to a valid URL via the
+
+### If a document was removed/deleted
+
+- [] the path to that doc must be redirected to a valid URL via the
   `_redirects` file
+- [] `_redirects` were manually verified with the cloudflare preview link
+- [] `sidebars.json` reflects all changes made to file path
+
+### If a document was moved
+
 - [] all files that were moved from their current directory to a new path have had their paths
   redirected via the `_redirects` file
 - [] `_redirects` were manually verified with the cloudflare preview link

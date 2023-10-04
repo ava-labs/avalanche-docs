@@ -19,11 +19,18 @@ payload of data.
 ## Prerequisites
 
 - Install the latest stable version of Rust using [`rustup`](https://www.rust-lang.org/tools/install).
-- Bookmark and review the [avalanche-types](https://github.com/ava-labs/avalanche-types-rs) GitHub
-  repository specifically the traits and helpers defined in the
-  [`subnet/rpc`](https://github.com/ava-labs/avalanche-types-rs/tree/main/src/subnet/rpc) mod.
+- Bookmark and review the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) GitHub
+  repository, specifically the Subnet traits and helpers defined in the `avalanche-types` crate
 - For developers new to Rust please visit the free online book [The Rust Programming
   Language](https://doc.rust-lang.org/book/).
+  
+  :::note
+  The example VMs in these tutorials are based on
+  [avalanche-types-rs](https://github.com/ava-labs/avalanche-types-rs), a predecessor of
+  the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) repository that is now the
+  accepted standard. Directory locations will vary.
+  :::
+  
 
 If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
 Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to

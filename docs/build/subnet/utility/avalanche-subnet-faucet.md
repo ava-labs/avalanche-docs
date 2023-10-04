@@ -21,12 +21,13 @@ These testnets are often the testbeds for any new native feature of the network 
 or [Subnet](learn/avalanche/subnets-overview.md) that is going live on the main network (Mainnet). For
 example, [Fuji](learn/avalanche/fuji.md) network is the Testnet for Avalanche's Mainnet.
 
-Besides Fuji Testnet, [Avalanche Faucet](https://faucet.avax.network/) can be used to get free coins
-on these testnets Subnets like -
+Besides Fuji Testnet, the
+[Avalanche Faucet](https://core.app/tools/testnet-faucet/?subnet=c&token=c) 
+can be used to get free test tokens on testnet Subnets like: 
 
-- [WAGMI Testnet](https://faucet.avax.network?subnet=wagmi)
-- [DeFI Kingdoms Testnet](https://faucet.avax.network?subnet=dfk)
-- [Dexalot Testnet](https://faucet.avax.network?subnet=dexalot) and many more.
+- [WAGMI Testnet](https://core.app/tools/testnet-faucet/?subnet=wagmi)
+- [DeFI Kingdoms Testnet](https://core.app/tools/testnet-faucet/?subnet=dfk)
+- [Beam Testnet](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) and many more.
 
 You can use this [repository](https://github.com/ava-labs/avalanche-faucet) to deploy your faucet or
 just make a PR with the
