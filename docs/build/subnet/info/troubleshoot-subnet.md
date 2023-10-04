@@ -69,31 +69,44 @@ Blockchain has been deployed. Wait until network acknowledges...
 ......Error: failed to query network health: rpc error: code = DeadlineExceeded desc = context deadline exceeded
 ```
 
-This error has many possible causes, however you should be aware of the possibility of an RPC
-protocol version mismatch.
+This error has many possible causes, but a common cause is usually due to **an RPC
+protocol version mismatch.**
 
 AvalancheGo communicates with custom VMs over RPC using [gRPC](https://grpc.io/). gRPC defines a
-protocol specification shared by both AvalancheGo and the VM. Both components **must** be running
-the same RPC version for VM deployment to work.
+protocol specification shared by both AvalancheGo and the VM. **Both components must be running
+the same RPC version for VM deployment to work.**
 
 Your custom VM's RPC version is set by the version of AvalancheGo that you import. By default,
 Avalanche-CLI creates local Avalalanche networks that run the latest AvalancheGo release.
 
-Here's an example with real numbers from the AvalancheGo compatibility page. If the latest
-AvalancheGo release is version v1.10.11, then Avalanche-CLI deploys a network with RPC version 28. For
-your deploy to be successful, your VM must also have RPC version 28. Because only AvalancheGo
-versions v1.10.9, v1.10.10 and v1.10.11 supports RPC version 28, 
+### Example
+
+_Here's an example with real numbers from the AvalancheGo compatibility page_: 
+- If the latest AvalancheGo release is version v1.10.11, then Avalanche-CLI deploys a network with
+RPC version 28.
+- For your deploy to be successful, your VM must also have RPC version 28. Because only
+AvalancheGo versions v1.10.9, v1.10.10 and v1.10.11 supports RPC version 28, 
 your VM **must** import one of those versions.
 
-If your VM has an RPC version mismatch, you have two options. First, you can update the version of
-AvalancheGo you use in your VM. This is the correct long-term approach. However, there is a
-short-term workaround. Avalanche-CLI supports deploying older versions of AvalancheGo by using the
+### Fix an RPC protocol Mismatch
+
+If your VM has an RPC version mismatch, you have two options: 
+
+1. Update the version of AvalancheGo you use in your VM. This is the correct long-term approach.
+2. Use Avalanche-CLI to deploy an older version of AvalancheGo by using the
 `--avalanchego-version` flag. Both the [`subnet deploy`](/tooling/avalanche-cli.md#subnet-deploy)
 and [`network start`](/tooling/avalanche-cli.md#network-start) commands support
-setting the AvalancheGo 
-version explicitly. Although it's very important to keep your version of AvalancheGo up-to-date,
-this workaround helps you avoid broken builds in the short term. However, you need to upgrade
-to the latest AvalancheGo version when deploying publicly to the Fuji Testnet or Mainnet.
+setting the AvalancheGo version explicitly.
+
+Although it's very important to keep your version of AvalancheGo up-to-date,
+this workaround helps you avoid broken builds in the short term. 
+
+:::warn
+You must upgrade to the latest AvalancheGo version when deploying publicly to 
+Fuji Testnet or Avalanche Mainnet.
+:::
+
+### More Information
 
 Similar version matching is required in different tools on the ecosystem. Here is a compatibility 
 table showing which RPC Version implements the more recent releases of 
