@@ -26,9 +26,10 @@ misconfiguration (wrong public IP, closed p2p port 9651).
 
 ### Error: `RPCChainVM protocol version mismatch between AvalancheGo and Virtual Machine plugin`
 
-This error occurs when the RPCChainVM protocol version used by VMs like Subnet-EVM or Precompile-EVM are incompatible with
-the protocol version of AvalancheGo. Make sure both are using compatible versions. You can 
-follow the table provided below to check the Subnet-EVM versions compatible with each AvalancheGo release:
+This error occurs when the RPCChainVM protocol version used by VMs like Subnet-EVM
+are incompatible with the protocol version of AvalancheGo. Make sure both are using compatible
+versions. You can follow the table provided below to check the Subnet-EVM versions compatible
+with each AvalancheGo release:
 
 | RPCChainVM | AvalancheGo | Subnet-EVM | Precompile-EVM | HyperSDK |
 | :--------: | :-------: | :-------: | :-------: | :-------: |
