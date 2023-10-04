@@ -102,7 +102,7 @@ setting the AvalancheGo version explicitly.
 Although it's very important to keep your version of AvalancheGo up-to-date,
 this workaround helps you avoid broken builds in the short term. 
 
-:::warn
+:::caution
 You must upgrade to the latest AvalancheGo version when deploying publicly to 
 Fuji Testnet or Avalanche Mainnet.
 :::
