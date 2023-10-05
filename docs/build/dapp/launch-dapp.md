@@ -192,9 +192,9 @@ There is a
 for using Remix to deploy smart contracts on Avalanche. It relies on Core
 for access to the Avalanche network.
 
-### Truffle
+### thirdweb
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/build/dapp/smart-contracts/toolchains/truffle.md).
+You can also use thirdweb to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/build/dapp/smart-contracts/toolchains/thirdweb.md).
 
 ### Hardhat
 
@@ -240,8 +240,8 @@ signal that your users can trust your contracts, and it is strongly recommended
 for all production contracts.
 
 See
-[this](/build/dapp/smart-contracts/verification/verify-truffle.md)
-for a detailed tutorial with Truffle.
+[this](/build/dapp/smart-contracts/verification/verify-hardhat.md)
+for a detailed tutorial with Hardhat.
 
 ## Contract Security Checks
 
