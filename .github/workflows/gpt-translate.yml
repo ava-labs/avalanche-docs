@@ -1,5 +1,5 @@
 # .github/workflows/gpt-translate.yml
-name: GPT Translate
+name: Ava Docs Translate
 
 on:
   issue_comment:
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3        
 
-      - name: Run GPT Translate
+      - name: Run Ava Docs Translate
         if: |
           contains(github.event.comment.body, '/gt')
-        uses: 3ru/gpt-translate@master
+        uses: meaghanfitzgerald/ava-docs-translate@master
         with:
           apikey: ${{ secrets.OPENAI_API_KEY }}
