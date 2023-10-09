@@ -1,41 +1,70 @@
-pragma solidity ^0.7.0;
+# Getting Started with Create React App
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-contract NFT is ERC721 {
-  
-  uint _tokenCounter;
-  mapping (uint => uint) public itemValue;
-  uint maxValue = 10000; // Max value of an item
+## Available Scripts
 
-  constructor() ERC721("Super NFT", "SPRNFT") {}
+In the project directory, you can run:
 
-  /**
-    Returns an random number
-  */
-  function random() private view returns (uint) { 
-        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, block.number)));
-  }
+### `npm start`
 
-  function myItems() external view returns (uint[] memory items) {
-    // Returns an array of items that the user owns
-    items = new uint[](balanceOf(msg.sender));
-    uint _counter = 0;
-    for(uint i = 1; i < _tokenCounter; i++) { // i = 1 because the token counter is increased before the id is assigned
-      if(ownerOf(i) == msg.sender) { // if the user owns the item
-        items[_counter] = i; // add the item to the array
-        _counter++; // increase the counter
-      }
-    }
-    return items;
-  }
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-  function getItem() payable public returns (uint256) {
-    require(msg.value == 0.5 ether); // 0.5 AVAX is the cost of an item
-    uint256 newItemId = _tokenCounter; // Get the current counter value
-    _tokenCounter++; // Increase the counter
-    _mint(msg.sender, newItemId); // Mint the new item to the player
-    itemValue[newItemId] = random() % maxValue; // Set the item value to a random number modulus used to make sure that the value isn't bigger than maxValue
-    return newItemId; // Return the new item id
-  }
-}
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` Fails to Minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
