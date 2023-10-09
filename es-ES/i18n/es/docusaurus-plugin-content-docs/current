@@ -1,27 +1,39 @@
-# INativeMinter.sol
+# HardhatConfigAfterBalance.js
 
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
+```javascript
+require("@nomicfoundation/hardhat-toolbox")
+/* Import task from hardhat config */
+const { task } = require("hardhat/config")
 
-// SPDX-License-Identifier: MIT
+/* Import deploy function */
+require("./scripts/deploy")
+/* Import balance function */
+require("./scripts/balance")
 
-pragma solidity >=0.8.0;
+/* Create deploy task */
+task(
+  "deploy",
+  "Deploy bridges on both networks and deploy AvaxToken, also update the admins"
+).setAction(async (taskArgs, hre) => {
+  await deploy().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
+})
 
-interface NativeMinterInterface {
-    // Set [addr] to have the admin role over the minter list
-    function setAdmin(address addr) external;
+/* Create balance task  */
+task("balance", "Get token balance from a network")
+  /* Add `from` parameter indication the used network which is either avax or subnet */
+  .addParam("from", "Network to get balance from")
+  .setAction(async (taskArgs, hre) => {
+    await balance(taskArgs.from).catch((error) => {
+      console.error(error)
+      process.exitCode = 1
+    })
+  })
 
-    // Set [addr] to be enabled on the minter list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the minter list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-
-    // Mint [amount] number of native coins and send to [addr]
-    function mintNativeCoin(address addr, uint256 amount) external;
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.9",
 }
 ```
