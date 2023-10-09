@@ -3,10 +3,13 @@ tags: [Build, Dapps]
 description: Launching any new or existing Solidity decentralized app on Avalanche C-Chain fosters the same developer experience as Ethereum, but benefits from the security, speed, and interoperability of the Avalanche Network.
 sidebar_label: Truffle
 pagination_label: Using Truffle with the Avalanche C-Chain
-sidebar_position: 1
 ---
 
 # Using Truffle with the Avalanche C-Chain
+
+:::warning
+This document has been deprecated and is no longer maintained. It may contain incorrect/obsolete information.
+:::
 
 ## Introduction
 
