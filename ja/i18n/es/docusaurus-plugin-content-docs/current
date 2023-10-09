@@ -1,63 +1,63 @@
 ---
 tags:
-  - Primary Network
-  - P-Chain
-  - X-Chain
-  - C-Chain
-  - Platform Chain
-  - Contract Chain
-description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). More info here.
+  - Avax
+  - Tokenomics
+description: AVAX is the limited-supply token of the Avalanche network, used to cover fees, enhance security via staking, and facilitate transactions across its various Subnets.
 keywords:
-  - docs
   - documentation
   - avalanche
-  - primary network
-  - c-chain
-  - x-chain
-  - p-chain
-  - platform chain
-  - contract chain
-sidebar_label: The Primary Network
+  - avax token
+  - tokenomics
+  - avax utility
+sidebar_label: AVAX Token
 ---
 
-# The Primary Network
+# AVAX
 
-Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where all applications reside in the same chain, heterogeneous networks allow separate chains to be created for different applications.
+AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the multiple Subnets created on Avalanche.
 
-The Primary Network is a special [Subnet](subnets-overview.md) that runs three blockchains:
+:::info
 
-- The Contract Chain [(C-Chain)](avalanche-platform.md#c-chain)
-- The Platform Chain [(P-Chain)](avalanche-platform.md#p-chain)
-- The Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
+- `1 nAVAX` is equal to `0.000000001 AVAX`.
 
-:::note
-[Avalanche Mainnet](/learn/avalanche/mainnet.md) is comprised of the Primary Network and all deployed Subnets.
 :::
 
-A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
+## Utility
 
-![Primary network](/img/primary-network.png)
+AVAX is a capped-supply (up to 720M) resource in the Avalanche ecosystem that's used to power the network. AVAX is used to secure the ecosystem through staking and for day-to-day operations like issuing transactions.
 
-## The Chains
+AVAX represents the weight that each node has in network decisions. No single actor owns the Avalanche Network, so each validator in the network is given a proportional weight in the network's decisions corresponding to the proportion of total stake that they own through proof of stake (PoS).
 
-All validators of the Primary Network are required to validate and secure the following:
+Any entity trying to execute a transaction on Avalanche pays a corresponding fee (commonly known as "gas") to run it on the network. The fees used to execute a transaction on Avalanche is burned, or permanently removed from circulating supply.
 
-### C-Chain
+## Tokenomics
 
-The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM). The [C-Chain’s API](/reference/avalanchego/c-chain/api.md) supports Geth's API and supports the deployment and execution of smart contracts written in Solidity.
+A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is constantly minted as a reward to validators. The protocol rewards validators for good behavior by minting them AVAX rewards at the end of their staking period. The minting process offsets the AVAX burned by transactions fees. While AVAX is still far away from its supply cap, it will almost always remain an inflationary asset.
 
-The C-Chain is an instance of the [Coreth](https://github.com/ava-labs/coreth) Virtual Machine.
+Avalanche does not take away any portion of a validator's already staked tokens (commonly known as "slashing") for negligent/malicious staking periods, however this behavior is disincentivized as validators who attempt to do harm to the network would expend their node's computing resources for no reward.
 
-### P-Chain
+<!-- vale off -->
 
-The **P-Chain** is responsible for all validator and Subnet-level operations. The [P-Chain API](/reference/avalanchego/p-chain/api.md) supports the creation of new blockchains and Subnets, the addition of validators to Subnets, staking operations, and other platform-level operations.
+AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at year $j$, with $R_1 = 360M$, and $R_l$ representing the last year that the values of $\gamma,\lambda \in \R$ were changed; $c_j$ is the yet un-minted supply of coins to reach $720M$ at year $j$ such that $c_j \leq 360M$; $u$ represents a staker, with $u.s_{amount}$ representing the total amount of stake that $u$ possesses, and $u.s_{time}$ the length of staking for $u$.
 
-The P-Chain is an instance of the Platform Virtual Machine.
+AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at:
 
-### X-Chain
+<!-- markdownlint-disable MD013 -->
 
-The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow." The [X-Chain API](/reference/avalanchego/x-chain/api.md) supports the creation and trade of Avalanche Native Tokens.
+$$ R_j = R_l + \sum_{\forall u} \rho(u.s_{amount}, u.s_{time}) \times \frac{c_j}{L} \times \left( \sum_{i=0}^{j}\frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda}\right)^i} \right) $$
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
+<!-- markdownlint-enable MD013 -->
 
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM).
+where
+
+$$ L = \left(\sum_{i=0}^{\infty} \frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda} \right)^i} \right) $$
+
+At genesis, $c_1 = 360M$. The values of $\gamma$ and $\lambda$ are governable, and if changed, the function is recomputed with the new value of $c_*$. We have that $\sum_{*}\rho(*) \le 1$. $\rho(*)$ is a linear function that can be computed as follows ($u.s_{time}$ is measured in weeks, and $u.s_{amount}$ is measured in AVAX tokens):
+
+$$ \rho(u.s_{amount}, u.s_{time}) = (0.002 \times u.s_{time} + 0.896) \times \frac{u.s_{amount}}{R_j} $$
+
+If the entire supply of tokens at year $j$ is staked for the maximum amount of staking time (one year, or 52 weeks), then $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. If, instead, every token is staked continuously for the minimal stake duration of two weeks, then $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Therefore, staking for the maximum amount of time incurs an additional 11.11% of tokens minted, incentivizing stakers to stake for longer periods.
+
+Due to the capped-supply, the above function guarantees that regardless of the governance changes, AVAX will never exceed a total of $720M$ tokens, or $\lim_{j \to \infty} R(j) = 720M$.
+
+<!-- vale on -->
