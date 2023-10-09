@@ -1,7 +1,7 @@
 - 
 ---
   name: Provision a typical reddev developement server
-  hosts: tag_dev_unprovisioned:tag_dev_provisioned_failure
+  hosts: localhost
   user: root
   vars_prompt:
     - 
@@ -127,18 +127,3 @@
           systemd:
             state: started
             name: docker-compose@rd
-        - 
-          name: Mark host as provisioned
-          delegate_to: localhost
-          vultr_server:
-            name: "{{ inventory_hostname }}"
-            api_account: reddev
-            tag: dev-provisioned
-      rescue:
-        - 
-          name: Mark server as failed to provision
-          delegate_to: localhost
-          vultr_server:
-            name: "{{ inventory_hostname }}"
-            api_account: reddev
-            tag: dev-provisioned-failure
