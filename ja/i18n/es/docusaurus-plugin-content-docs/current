@@ -1,155 +1,111 @@
-# CreateElection.js
+# VoteModal.js
 
 ``` jsx
-import React, { Component } from "react";
-import App from "./App";
+import React, { useState } from "react";
+import { Box, Flex, Modal, Button, Text, Card, Radio, Field, Loader } from "rimble-ui";
 
-class CreateElection extends Component {
-  constructor(props) {
-    super(props);
+// Data like election and candidate details will be passed in the props by ActiveElections.js (parent)
+function VoteModal(props) {
+  // These are React Hooks and are used only for UX like opening and closing of Voting Modal and loaders
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, isLoading] = useState(false);
 
-    this.onChangeElectionName = this.onChangeElectionName.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  // This Hook will be used to maintain the selected candidate ID by a voter
+  const [cid, changeCid] = useState(0);
 
-    // These state variables would maintain inputs of the form
-    this.state = {
-      electionname: "",
-      description: "",
-      candidates: [],
-    };
-  }
-
-  // To store App.js instance
-  app = null;
-
-  // Connect application with Metamask and create smart-contract's instance
-  async init() {
-    this.app = new App();
-    await this.app.init();
-  }
-
-  componentDidMount() {
-    this.init();
-  }
-
-  onChangeElectionName(e) {
-    this.setState({
-      electionname: e.target.value,
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value,
-    });
-  }
-
-  // Function to be called when the form is submitted
-  async onSubmit(e) {
+  const closeModal = (e) => {
     e.preventDefault();
+    setIsOpen(false);
+  };
 
-    // Structuring Election details from the form before submitting transaction to the smart-contract
-    const electionDetails = {
-      electionname: this.state.electionname,
-      description: this.state.description,
-      candidateObjects: document.getElementsByName("candidate").values(),
-      candidates: [],
-    };
+  const openModal = (e) => {
+    e.preventDefault();
+    setIsOpen(true);
+  };
 
-    let i = 0;
+  const onRadioChange = (e) => {
+    changeCid(e.target.value);
+  };
 
-    for (let value of electionDetails.candidateObjects) {
-      electionDetails.candidates[i] = value.value;
-      i++;
-    }
+  // vote() function would be used to transact a vote
+  const vote = async (eid) => {
+    isLoading(true);
+    await props.election.contractInstance.methods.vote(cid).send({ from: props.election.account });
+    isLoading(false);
+  };
 
-    // Making transaction to the MainContract instance, for creating a new election
-    await this.app.mainInstance.createElection(
-      [electionDetails.electionname, electionDetails.description],
-      electionDetails.candidates,
-      { from: this.app.account[0] }
+  let candid = [],
+    candidVote = [];
+  for (let i = 0; i < props.candidates.length; i++) {
+    let candidDetail = props.candidates[i][1] + " (" + props.candidates[i][2] + ")";
+
+    candid.push(
+      <Radio
+        name="candidate"
+        key={i}
+        label={candidDetail}
+        my={2}
+        value={props.candidates[i][0]}
+        onChange={onRadioChange}
+      />
     );
 
-    window.location = "/active";
+    candidVote.push(props.candidates[i][2]);
   }
 
-  render() {
-    return (
-      <div className="container card">
-        <h3>Create New Election</h3>
+  return (
+    // This is a rimble-ui builtin modal for triggering vote() function
+    <Box className="App" p={0}>
+      <Box>
+        <Button onClick={openModal}>Vote</Button>
 
-        {/* New Election Form */}
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              placeholder="Enter election name"
-              onChange={this.onChangeElectionName}
+        <Modal isOpen={isOpen}>
+          <Card width={"420px"} p={0}>
+            {/* Close icon to close the modal */}
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              position={"absolute"}
+              top={0}
+              right={0}
+              mt={3}
+              mr={3}
+              onClick={closeModal}
             />
-          </div>
 
-          <div className="form-group">
-            <label>Description</label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              placeholder="Describe your Election here"
-              onChange={this.onChangeDescription}
-            ></textarea>
-          </div>
+            {/* List of candidates with their vote count */}
+            <Box p={4} mb={3}>
+              <h3>{props.election.electionName}</h3>
+              <Field label="Choose candidate from below">{candid}</Field>
+            </Box>
 
-          <table>
-            <tr>
-              <td id="1" className="form-group">
-                <label>Candidate 1</label>
-                <td>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Candidate Name"
-                    name="candidate"
-                  />
-                </td>
-
-                <br />
-                <label>Candidate 2</label>
-                <td>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Candidate Name"
-                    name="candidate"
-                  />
-                </td>
-              </td>
-            </tr>
-          </table>
-
-          <br />
-
-          <div>
-            <button
-              className="btn btn-success grid-item"
-              style={{ width: 100 }}
-              type="submit"
+            {/* Vote button to cast a vote */}
+            <Flex
+              px={4}
+              py={3}
+              borderTop={1}
+              borderColor={"#E8E8E8"}
+              justifyContent={"flex-end"}
             >
-              Submit
-            </button>
-          </div>
-
-          <br />
-        </form>
-      </div>
-    );
-  }
+              {loading ? (
+                <Loader size="40px" />
+              ) : (
+                <Button.Outline
+                  onClick={() => {
+                    vote(props.election.electionId);
+                  }}
+                >
+                  Vote
+                </Button.Outline>
+              )}
+            </Flex>
+          </Card>
+        </Modal>
+      </Box>
+    </Box>
+  );
 }
 
-export default CreateElection;
+export default VoteModal;
 ```
