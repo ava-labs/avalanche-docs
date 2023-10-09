@@ -1,6 +1,26 @@
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt!
-}
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - 
+    kind: ethereum/contract
+    name: Png
+    network: avalanche
+    source:
+      address: "0x60781C2586D68229fde47564546784ab3fACA982"
+      abi: Png
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - 
+          name: Png
+          file: Png/abis/Png.json
+      eventHandlers:
+        - 
+          event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: Png/Png.wasm
