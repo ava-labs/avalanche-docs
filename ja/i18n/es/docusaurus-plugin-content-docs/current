@@ -1,127 +1,92 @@
-# Auction.js
+# AuctionList.js
 
-``` jsx
-import React, { useState, useEffect } from "react";
+```js
+import React, { useState } from "react";
 import { useDrizzleContext } from './drizzleContext';
-import FetchAuctions from './AuctionList';
-import CreateAuction from './CreateAuction';
 
-function Auction() {
-    // Importing drizzle variables from drizzle context
+function FetchAuctions({cacheCalls, userInfo}) {
     const { drizzleVariables } = useDrizzleContext();
-    const { AuctionManager, subscriber, accounts } = drizzleVariables;
+    const { AuctionManager, accounts } = drizzleVariables;
 
-    // Setting up cache keys corresponding to cache calls
-    const [cacheKeys, setCacheKey] = useState({
-        uId: null,
-        aId: null,
-        showAuctions: null,
-        isRegistered: null,
-        auctionAnalytics: [null]
-    });
-    const [auctionAnalyticsCacheKey, setAuctionAnalyticsCacheKey] = useState(null);
+    const [bidPrices, setBidPrices] = useState(new Map([]))
 
-    // Setting up cache calls for requried functions
-    const cacheCalls = {
-        isRegistered: subscriber?.isRegistered[cacheKeys?.isRegistered]?.value,
-        user: subscriber?.users[cacheKeys?.uId]?.value,
-        aId: subscriber?.aId[cacheKeys?.aId]?.value,
-        showAuctions: subscriber?.showAuctions[cacheKeys?.showAuctions]?.value,
-        auctionAnalytics: []
+    const createBid = async (id, bidPrice) => {
+        await AuctionManager?.createBid(id, bidPrice).send({from: accounts[0]});
+        clearBidPriceInput(id);
     }
 
-    for(let i = 0; i < cacheCalls.aId; i++) {
-        cacheCalls.auctionAnalytics.push(subscriber?.auctionAnalytics[auctionAnalyticsCacheKey[i]]?.value)
+    const submitNewBid = (event, id) => {
+        event.preventDefault();
+        createBid(id, bidPrices.get(id));
     }
 
-    const [isRegistered, setIsRegistered] = useState(false);
-    const [userInfo, setUserInfo] = useState({
-        id: null,
-        name: null
-    });
+    const handleBidPriceChange = (event, id) => {
+        let _bidPrices = bidPrices;
+        _bidPrices.set(id, event.target.value);
+        setBidPrices(_bidPrices)
+    }
 
-    // Initializing cache keys
-    useEffect(() => {
-        const _auctionCacheKey = AuctionManager?.showAuctions?.cacheCall()
-        const _aIdCacheKey = AuctionManager?.aId?.cacheCall()
-        const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0])
-        setCacheKey({
-            ...cacheKeys,
-            showAuctions: _auctionCacheKey,
-            aId: _aIdCacheKey,
-            isRegistered: _isRegistered
-        })
-    }, []);
+    const clearBidPriceInput = (id) => {
+        let _bidPrices = bidPrices;
+        _bidPrices[id] = "";
+        setBidPrices(_bidPrices)
+    }
 
-    useEffect(() => {
-        let _auctionAnalyticsCacheKey = [];
+    const getAuctionAnalytics = () => {
+        let auctionAnalytics = [];
         for(let i = 0; i < cacheCalls.aId; i++) {
-            _auctionAnalyticsCacheKey.push(AuctionManager?.auctionAnalytics?.cacheCall(i))
+            auctionAnalytics.push(cacheCalls.auctionAnalytics[i]);
         }
-        setAuctionAnalyticsCacheKey(_auctionAnalyticsCacheKey)
-    }, [cacheCalls.aId])
-
-    useEffect(() => {
-        if(cacheCalls.isRegistered !== undefined && cacheCalls.isRegistered[0] == 1) {
-            setIsRegistered(true);
-            (async () => {
-                const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call()
-                setUserInfo({
-                    id: userInfo.userId,
-                    name: userInfo.name
-                })
-            })();
-        } else {
-            setIsRegistered(false)
-        }
-    }, [cacheCalls.isRegistered]);
-
-    const createUser = async (name) => {
-        await AuctionManager?.createUser(name)?.send({from: accounts[0]})
+        return auctionAnalytics;
     }
 
-    const [userName, setUserName] = useState("");
-
-    const handleUserNameChange = (event) => {
-        setUserName(event.target.value)
-    }
-
-    const submitLogin = event => {
-        event.preventDefault()
-        createUser(userName)
-    }
-
-    const UserInfo = () => {
-        return (
-            <div>
-                <label style={{color: "red"}}>ID: </label> {userInfo.id}
-                <label style={{marginLeft: "50px", color: "green"}}>Name: </label> {userInfo.name} <br/><br/>
-            </div>
-        )
-    }
-
+    const allAuctions = cacheCalls.showAuctions;
+    const auctionAnalytics = getAuctionAnalytics();
     return (
-        <div>
-            <h1>Auctions</h1>
+        <table border="1" style={{maxWidth: "800px", width: "90%"}}>
+            <tr>
+                <td>Auction ID</td>
+                <td>Auction Details</td>
+                <td>Minimum Price</td>
+                <td>Bid</td>
+            </tr>
             {
-                isRegistered
-                ? 
-                <>
-                    <UserInfo/>
-                    <FetchAuctions cacheCalls={cacheCalls} userInfo={userInfo}/> <br/><br/>
-                    <CreateAuction/>
-                </>
-                : 
-                <form onSubmit={submitLogin}>
-                    <font color="red" font="2">This address is not yet registered!</font><br/><br/>
-                    <label>Address: </label><input disabled value={accounts[0]}/><br/><br/>
-                    <label>Name: </label><input key="1" value={userName} required onChange={handleUserNameChange} placeholder="Enter your name"/><br/><br/>
-                    <input type="submit" value="Register" />
-                </form>              
+                allAuctions !== undefined && allAuctions.map((auction, index) => (
+                    <tr>
+                        <td>
+                            {auction.auctionId}
+                        </td>
+                        <td>
+                            <b>{auction.name} <font size="2" color="green">{auction.userId == userInfo.id && "(created by you)"}</font></b><br/>
+                            <font size="2">{auction.description}</font><br/>
+                            <tr>
+                                <td>Total Bids</td>
+                                <td>Latest Bid</td>
+                                <td>Highest Bid</td>
+                                <td>Lowest Bid</td>
+                            </tr>
+                            <tr>
+                                <td>{auctionAnalytics[index]?.auctionBidId}</td>
+                                <td>₹{auctionAnalytics[index]?.latestBid}</td>
+                                <td>₹{auctionAnalytics[index]?.highestBid}</td>
+                                <td>₹{auctionAnalytics[index]?.auctionBidId == 0 ? 0 : auctionAnalytics[index]?.lowestBid}</td>
+                            </tr>
+                        </td>
+                        <td>
+                            ₹{auction.msp}
+                        </td>
+                        <td>
+                            <form onSubmit={(event) => submitNewBid(event, auction.auctionId)} style={{margin: "10px"}}>
+                                <input required type="number" min={auction.msp} onChange={(event) => handleBidPriceChange(event, auction.auctionId)} placeholder="Enter your bid price"/><br/><br/>
+                                <input type="submit" value="Make Bid"/><br/><br/>
+                            </form>
+                        </td>
+                    </tr>
+                ))
             }
-        </div>
+        </table>
     )
 }
 
-export default Auction;
+export default FetchAuctions;
 ```
