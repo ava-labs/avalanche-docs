@@ -1,215 +1,105 @@
 ---
 tags:
   - Standards
-description: This guide explains how to make calls to APIs exposed by Avalanche nodes.
-sidebar_label: API Calls
-pagination_label: Issuing API Calls
-sidebar_position: 0
+description: In order to prevent spam, transactions require the payment of a transaction fee.
+sidebar_label: Transaction Fees
+pagination_label: Avalanche Transaction Fees
+sidebar_position: 1
 ---
 
-# Issuing API Calls
+# Avalanche Transaction Fee
 
-This guide explains how to make calls to APIs exposed by Avalanche nodes.
+In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in AVAX. **The transaction fee is burned (destroyed forever).**
 
-## Endpoints
+When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
 
-An API call is made to an endpoint, which is a URL, made up of the base URI which is the address and the port of the node, and the path the particular endpoint the API call is on.
+## Fee Schedule
 
-### Base URL
+Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
-The base of the URL is always:
+```text
++----------+----------------------+-------------------------+
+| Chain    : Transaction Type     |  Transaction Fee (AVAX) |
++----------+----------------------+-------------------------+
+| P        : Create Subnet        |                       1 |
++----------+----------------------+-------------------------+
+| P        : Create Blockchain    |                       1 |
++----------+----------------------+-------------------------+
+| P        : Add Validator        |                       0 |
++----------+----------------------+-------------------------+
+| P        : Add Subnet Validator |                   0.001 |
++----------+----------------------+-------------------------+
+| P        : Add Subnet Delegator |                   0.001 |
++----------+----------------------+-------------------------+
+| P        : Add Delegator        |                       0 |
++----------+----------------------+-------------------------+
+| P        : Import AVAX          |                   0.001 |
++----------+----------------------+-------------------------+
+| P        : Export AVAX          |                   0.001 |
++----------+----------------------+-------------------------+
+| X        : Send                 |                   0.001 |
++----------+----------------------+-------------------------+
+| X        : Create Asset         |                    0.01 |
++----------+----------------------+-------------------------+
+| X        : Mint Asset           |                   0.001 |
++----------+----------------------+-------------------------+
+| X        : Import AVAX          |                   0.001 |
++----------+----------------------+-------------------------+
+| X        : Export AVAX          |                   0.001 |
++----------+----------------------+-------------------------+
+| C        : Simple send          |            >= 0.001575* |
++----------+----------------------+-------------------------+
 
-`[node-ip]:[http-port]`
-
-where
-
-- `node-ip` is the IP address of the node the call is to.
-- `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](/nodes/configure/avalanchego-config-flags.md#http-server) `http-port` (default value `9650`).
-
-For example, if you're making RPC calls on the local node, the base URL might look like this: `127.0.0.1:9650`.
-
-If you're making RPC calls to remote nodes, then the instead of `127.0.0.1` you should use the public IP of the server where the node is. Note that by default the node will only accept API calls on the local interface, so you will need to set up the [`http-host`](/nodes/configure/chain-config-flags.md#--http-host-string) config flag on the node. Also, you will need to make sure the firewall and/or security policy allows access to the `http-port` from the internet.
-
-:::caution
-
-When setting up RPC access to a node, make sure you don't leave the `http-port` accessible to everyone! There are malicious actors that scan for nodes that have unrestricted access to their RPC port and then use those nodes for spamming them with resource-intensive queries which can knock the node offline. Only allow access to your node's RPC port from known IP addresses!
-
-:::
-
-### Endpoint Path
-
-Each API’s documentation specifies what endpoint path a user should make calls to in order to access the API’s methods.
-
-In general, they are formatted like:
-
-```sh
-/ext/[api-name]
+(*) C-Chain gas price varies. See below.
 ```
 
-So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the Subnet chain RPCs. We'll go over those in detail in the next section.
+## C-Chain Fees
 
-So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
+The Avalanche C-Chain uses an algorithm to determine the "base fee" for a transaction. The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target.
 
-```sh
-http://127.0.0.1:9650/ext/info
+### Dynamic Fee Transactions
+
+Transaction fees for non-atomic transactions are based on Ethereum's EIP-1559 style Dynamic Fee Transactions, which consists of a gas fee cap and a gas tip cap.
+
+The fee cap specifies the maximum price the transaction is willing to pay per unit of gas. The tip cap (also called the priority fee) specifies the maximum amount above the base fee that the transaction is willing to pay per unit of gas. Therefore, the effective gas price paid by a transaction will be `min(gasFeeCap, baseFee + gasTipCap)`. Unlike in Ethereum, where the priority fee is paid to the miner that produces the block, in Avalanche both the base fee and the priority fee are burned. For legacy transactions, which only specify a single gas price, the gas price serves as both the gas fee cap and the gas tip cap.
+
+Use the [`eth_baseFee`](/reference/avalanchego/c-chain/api.md#eth_basefee) API method to estimate the base fee for the next block. If more blocks are produced in between the time that you construct your transaction and it is included in a block, the base fee could be different from the base fee estimated by the API call, so it is important to treat this value as an estimate.
+
+Next, use [eth_maxPriorityFeePerGas](/reference/avalanchego/c-chain/api.md#eth_maxpriorityfeepergas) API call to estimate the priority fee needed to be included in a block. This API call will look at the most recent blocks and see what tips have been paid by recent transactions in order to be included in the block.
+
+Transactions are ordered by the priority fee, then the timestamp (oldest first).
+
+Based off of this information, you can specify the `gasFeeCap` and `gasTipCap` to your liking based on how you prioritize getting your transaction included as quickly as possible vs. minimizing the price paid per unit of gas.
+
+#### Base Fee
+
+The base fee can go as low as 25 nAVAX (Gwei) and has no upper bound. You can use the [`eth_baseFee`](/reference/avalanchego/c-chain/api.md#eth_basefee) and [eth_maxPriorityFeePerGas](/reference/avalanchego/c-chain/api.md#eth_maxpriorityfeepergas) API methods, or [Snowtrace's C-Chain Gas Tracker](https://snowtrace.io/gastracker), to estimate the gas price to use in your transactions.
+
+#### Further Readings
+
+- [Adjusting Gas Price During High Network Activity](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md)
+- [Sending Transactions with Dynamic Fees using JavaScript](/build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript.md)
+
+### Atomic Transaction Fees
+
+C-Chain atomic transactions (that is imports and exports from/to other chains) charge dynamic fees based on the amount of gas used by the transaction and the base fee of the block that includes the atomic transaction.
+
+Gas Used:
+
+```text
++---------------------+-------+
+| Item                : Gas   |
++---------------------+-------+
+| Unsigned Tx Byte    : 1     |
++---------------------+-------+
+| Signature           : 1000  |
++---------------------+-------+
+| Per Atomic Tx       : 10000 |
++---------------------+-------+
 ```
 
-## Primary Network and Subnet RPC calls
+Therefore, the gas used by an atomic transaction is `1 * len(unsignedTxBytes) +
+1,000 * numSignatures + 10,000`
 
-Besides the APIs that are local to the node, like Admin or Metrics APIs, nodes also expose endpoints for talking to particular chains that are either part of the Primary Network (the X, P and C chains), or part of any Subnets the node might be syncing or validating.
-
-In general, chain endpoints are formatted as:
-
-```sh
-ext/bc/[blockchainID]
-```
-
-### Primary Network Endpoints
-
-The Primary Network consists of three chains: X, P and C chain. As those chains are present on every node, there are also convenient aliases defined that can be used instead of the full blockchainIDs. So, the endpoints look like:
-
-```sh
-ext/bc/X
-ext/bc/P
-ext/bc/C
-```
-
-### C-Chain and Subnet-EVM Endpoints
-
-C-Chain and many Subnets run a version of the EthereumVM (EVM). EVM exposes its own endpoints, which are also accessible on the node: JSON-RPC, and Websocket.
-
-#### JSON-RPC EVM Endpoints
-
-To interact with C-Chain EVM via the JSON-RPC use the endpoint:
-
-```sh
-/ext/bc/C/rpc
-```
-
-To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
-
-```sh
-/ext/bc/[blockchainID]/rpc
-```
-
-where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the DFK Network (a Subnet that runs the DeFi Kingdoms:Crystalvale game) running on a local node would be:
-
-```sh
-http://127.0.0.1/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc
-```
-
-Or for the WAGMI Subnet on the Fuji testnet:
-
-```sh
-http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
-```
-
-#### Websocket EVM Endpoints
-
-To interact with C-Chain via the websocket endpoint, use:
-
-```sh
-/ext/bc/C/ws
-```
-
-To interact with other instances of the EVM via the websocket endpoint:
-
-```sh
-/ext/bc/blockchainID/ws
-```
-
-where `blockchainID` is the ID of the blockchain running the EVM. For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
-
-```sh
-ws://127.0.0.1:9650/ext/bc/C/ws
-```
-
-:::info
-
-When using the [Public API](/tooling/rpc-providers.md) or another host that supports HTTPS, use `https://` or `wss://` instead of `http://` or `ws://`.
-
-Also, note that the [public API](/tooling/rpc-providers.md#supported-apis) only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
-
-:::
-
-## Making a JSON RPC Request
-
-Most of the built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
-
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](/reference/avalanchego/x-chain/api.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
-
-That means that the endpoint we send our API call to is:
-
-`[node-ip]:[http-port]/ext/bc/X`
-
-The X-Chain API documentation tells us that the signature of `getTxStatus` is:
-
-[`avm.getTxStatus`](/reference/avalanchego/x-chain/api.md#avmgettxstatus)`(txID:bytes) -> (status:string)`
-
-where:
-
-- Argument `txID` is the ID of the transaction we’re getting the status of.
-- Returned value `status` is the status of the transaction in question.
-
-To call this method, then:
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :4,
-    "method" :"avm.getTxStatus",
-    "params" :{
-        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-- `jsonrpc` specifies the version of the JSON RPC protocol. (In practice is always 2.0)
-- `method` specifies the service (`avm`) and method (`getTxStatus`) that we want to invoke.
-- `params` specifies the arguments to the method.
-- `id` is the ID of this request. Request IDs should be unique.
-
-That’s it!
-
-### JSON RPC Success Response
-
-If the call is successful, the response will look like this:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "Status": "Accepted"
-  },
-  "id": 1
-}
-```
-
-- `id` is the ID of the request that this response corresponds to.
-- `result` is the returned values of `getTxStatus`.
-
-### JSON RPC Error Response
-
-If the API method invoked returns an error then the response will have a field `error` in place of `result`. Additionally, there is an extra field, `data`, which holds additional information about the error that occurred.
-
-Such a response would look like:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "error": {
-        "code": -32600,
-        "message": "[Some error message here]",
-        "data": [Object with additional information about the error]
-    },
-    "id": 1
-}
-```
-
-## Other API Formats
-
-Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
-
-## Sending and Receiving Bytes
-
-Unless otherwise noted, when bytes are sent in an API call/response, they are in hex representation. However, Transaction IDs (TXIDs), ChainIDs, and subnetIDs are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum.
+The TX fee additionally takes the base fee into account. Due to the fact that atomic transactions use units denominated in 9 decimal places, the base fee must be converted to 9 decimal places before calculating the actual fee paid by the transaction. Therefore, the actual fee is: `gasUsed * baseFee (converted to 9
+decimals)`.
