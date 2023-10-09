@@ -2,110 +2,202 @@
 tags:
   - Build
   - Subnets
-description: Gracefully pause and resume a local subnet while preserving state.
-sidebar_label: Pause and Resume
-pagination_label: Pause and Resume Local Subnets
-sidebar_position: 1
+description: You can list the Subnets you've created with `avalanche subnet list`.
+sidebar_label: View Subnets
+pagination_label: View Your Created Subnets
+sidebar_position: 0
 ---
 
-# How to Pause and Resume Local Subnets
+# How to View Your Created Subnets
 
-If you've deployed a Subnet locally, you can preserve and restore the state of your deployed Subnets.
+## List Subnet Configurations
 
-## Stopping the Local Network
+You can list the Subnets you've created with
 
-To gracefully stop a running local network while preserving state, run
+`avalanche subnet list`
 
-```shell
-avalanche network stop
-```
-
-When restarted, all of your deployed Subnets resume where they left off.
+Example:
 
 ```text
-> avalanche network stop
-Network stopped successfully.
+> avalanche subnet list
++-------------+-------------+----------+---------------------------------------------------+------------+-----------+
+|   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
++-------------+-------------+----------+---------------------------------------------------+------------+-----------+
+| test        | test        |     5234 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
++-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
-### Resuming the Local Network
-
-To resume a stopped network, run
-
-```shell
-avalanche network start
-```
-
-The network resumes with the same state it paused with.
-
-<!-- markdownlint-disable MD013 -->
+To see detailed information about your deployed Subnets, add the `--deployed` flag:
 
 ```text
-> avalanche network start
-Starting previously deployed and stopped snapshot
-Booting Network. Wait until healthy...
-...............
-Network ready to use. Local network node endpoints:
-+-------+----------+------------------------------------------------------------------------------------+
-| NODE  |    VM    |                                        URL                                         |
-+-------+----------+------------------------------------------------------------------------------------+
-| node5 | mySubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node1 | mySubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node2 | mySubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node3 | mySubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node4 | mySubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
+> avalanche subnet list --deployed
++-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
+|   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
++-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
+| test        | test        | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
++             +             +                                                   +               +-----------------------------------------------------------------+---------+
+|             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
++-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 ```
 
-<!-- markdownlint-enable MD013 -->
 
-## Checking Network Status
 
-If you'd like to determine whether or not a local Avalanche network is running on your machine, run
+## Describe Subnet Configurations
 
-```shell
-avalanche network status
-```
+To see the details of a specific configuration, run
 
-### Example Call
+`avalanche subnet describe <subnetName>`
 
-If the local network is running, the command prints something like
+Example:
 
 ```text
-Requesting network status...
-Network is Up. Network information:
-==================================================================================================
-Healthy: true
-Custom VMs healthy: true
-Number of nodes: 5
-Number of custom VMs: 1
-======================================== Node information ========================================
-node5 has ID NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 and endpoint http://127.0.0.1:9658:
-node1 has ID NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg and endpoint http://127.0.0.1:9650:
-node2 has ID NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ and endpoint http://127.0.0.1:9652:
-node3 has ID NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN and endpoint http://127.0.0.1:9654:
-node4 has ID NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu and endpoint http://127.0.0.1:9656:
-==================================== Custom VM information =======================================
-Endpoint at node4 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node5 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node1 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node2 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node3 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+> avalanche subnet describe firstsubnet
+
+ _____       _        _ _
+|  __ \     | |      (_) |
+| |  | | ___| |_ __ _ _| |___
+| |  | |/ _ \ __/ _  | | / __|
+| |__| |  __/ || (_| | | \__ \
+|_____/ \___|\__\__,_|_|_|___/
++----------------------------+----------------------------------------------------+
+|         PARAMETER          |                       VALUE                        |
++----------------------------+----------------------------------------------------+
+| Subnet Name                | firstsubnet                                        |
++----------------------------+----------------------------------------------------+
+| ChainID                    | 12345                                              |
++----------------------------+----------------------------------------------------+
+| Token Name                 | FSN                                                |
++----------------------------+----------------------------------------------------+
+| VM ID                      | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu  |
++----------------------------+----------------------------------------------------+
+| Fuji SubnetID              | XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt  |
++----------------------------+----------------------------------------------------+
+| Fuji BlockchainID          | 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR  |
++----------------------------+----------------------------------------------------+
+| Local Network SubnetID     | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk |
++----------------------------+----------------------------------------------------+
+| Local Network BlockchainID | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
++----------------------------+----------------------------------------------------+
+
+  _____              _____             __ _
+ / ____|            / ____|           / _(_)
+| |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
+| | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
+| |__| | (_| \__ \ | |___| (_) | | | | | | | (_| |
+ \_____|\__,_|___/  \_____\___/|_| |_|_| |_|\__, |
+                                             __/ |
+                                            |___/
++--------------------------+-------------+
+|      GAS PARAMETER       |    VALUE    |
++--------------------------+-------------+
+| GasLimit                 |    15000000 |
++--------------------------+-------------+
+| MinBaseFee               | 25000000000 |
++--------------------------+-------------+
+| TargetGas                |    15000000 |
++--------------------------+-------------+
+| BaseFeeChangeDenominator |          36 |
++--------------------------+-------------+
+| MinBlockGasCost          |           0 |
++--------------------------+-------------+
+| MaxBlockGasCost          |     1000000 |
++--------------------------+-------------+
+| TargetBlockRate          |           2 |
++--------------------------+-------------+
+| BlockGasCostStep         |      200000 |
++--------------------------+-------------+
+
+          _         _
+    /\   (_)       | |
+   /  \   _ _ __ __| |_ __ ___  _ __
+  / /\ \ | | '__/ _  | '__/ _ \| '_ \
+ / ____ \| | | | (_| | | | (_) | |_) |
+/_/    \_\_|_|  \__,_|_|  \___/| .__/
+                               | |
+                               |_|
++--------------------------------------------+------------------------+---------------------------+
+|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
++--------------------------------------------+------------------------+---------------------------+
+| 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
++--------------------------------------------+------------------------+---------------------------+
+
+
+  _____                                    _ _
+ |  __ \                                  (_) |
+ | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
+ |  ___/ '__/ _ \/ __/ _ \| '_   _ \| '_ \| | |/ _ \/ __|
+ | |   | | |  __/ (_| (_) | | | | | | |_) | | |  __/\__ \
+ |_|   |_|  \___|\___\___/|_| |_| |_| .__/|_|_|\___||___/
+                                    | |
+                                    |_|
+
+No precompiles set
 ```
 
-If the network isn't running, the command instead prints
+### Viewing a Genesis File
+
+If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command:
+
+`avalanche subnet describe <subnetName> --genesis`
+
+Example:
 
 ```text
-Requesting network status...
-No local network running
-```
-
-or
-
-```text
-Requesting network status...
-Error: timed out trying to contact backend controller, it is most probably not running
+> avalanche subnet describe firstsubnet --genesis
+{
+    "config": {
+        "chainId": 12345,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "petersburgBlock": 0,
+        "istanbulBlock": 0,
+        "muirGlacierBlock": 0,
+        "subnetEVMTimestamp": 0,
+        "feeConfig": {
+            "gasLimit": 15000000,
+            "targetBlockRate": 2,
+            "minBaseFee": 25000000000,
+            "targetGas": 15000000,
+            "baseFeeChangeDenominator": 36,
+            "minBlockGasCost": 0,
+            "maxBlockGasCost": 1000000,
+            "blockGasCostStep": 200000
+        },
+        "contractDeployerAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "contractNativeMinterConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        },
+        "txAllowListConfig": {
+            "blockTimestamp": null,
+            "adminAddresses": null
+        }
+    },
+    "nonce": "0x0",
+    "timestamp": "0x0",
+    "extraData": "0x",
+    "gasLimit": "0xE4E1C0",
+    "difficulty": "0x0",
+    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "alloc": {
+        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
+            "balance": "0xd3c21bcecceda1000000"
+        }
+    },
+    "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "airdropAmount": null,
+    "number": "0x0",
+    "gasUsed": "0x0",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "baseFeePerGas": null
+}
 ```
