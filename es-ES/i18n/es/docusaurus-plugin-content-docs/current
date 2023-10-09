@@ -1,80 +1,78 @@
 ---
 tags:
-  - Subnet
-description: A Subnet is a dynamic set of validators working together to achieve consensus on the state of a set of blockchain networks.
+  - Virtual Machines
+  - Subnet-EVM
+description: Virtual Machine is a virtual environment inside blockchain networks that executes smart contracts and transactions according to predetermined rules and protocols.
 keywords:
   - docs
   - avalanche
+  - virtual machines
   - subnets
-  - sovereign blockchains
-  - interoperability
-sidebar_label: Subnets
+  - Subnet EVM
+sidebar_label: Virtual Machines
 ---
 
-# What Is a Subnet?
+# Virtual Machines
 
-A **Subnet** is a sovereign network which defines its own rules regarding its membership and token economics. It is composed of a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet, while a Subnet can validate many blockchains.
+In a nutshell, a **Virtual Machine** (VM) is the blueprint for a blockchain, meaning it defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain.
 
-Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
+You can use the same VM to create many blockchains, each of which follows the same rule-set but is independent of all others.
 
-- The Platform Chain [(P-Chain)](/learn/avalanche/avalanche-platform#p-chain)
-- The Contract Chain [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
-- The Exchange Chain [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
+## Why Run a VM on Avalanche?
 
-![image](/img/subnet-validators.png)
+_Developers with advanced use-cases for utilizing distributed ledger technology are often forced to build their own blockchain from scratch, re-implement complex abstractions like networking and consensus, all before even being able to start working on their new application._
 
-(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+**With Avalanche,**
 
-:::info
-Every validator in a Subnet **must** also validate the Primary Network.
-:::
+- Developers can create a VM that defines how their blockchain should behave, and use this blueprint to coordinate validators in the network to run the application.
 
-Node operators that validate a Subnet with multiple chains do not need to run multiple machines for validation. For example, the Primary Network is a Subnet with three coexisting chains, all of which can be validated by a single node, or a single machine.
+- VMs can be written in any language, and use libraries and tech stacks that its creator is familiar with. Developers have fine control over the behavior of their blockchain, and can redefine the rules of a blockchain to fit any use-case they have.
 
-## Advantages
-
-### Independent Networks
-
-- Subnets use virtual machines to specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security.
-- Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on one Subnet won't affect another.
-- Subnets can have their own token economics with their own native tokens, fee markets, and incentives determined by the Subnet deployer.
-- One Subnet can host multiple blockchains with customized [virtual machines](virtual-machines.md).
-
-### Native Interoperability
-
-- Avalanche Warp Messaging enables native cross-Subnet communication and allows Virtual Machine (VM) developers to implement arbitrary communication protocols between any two Subnets.
+- Developers don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain; Avalanche does this behind the scenes so you can focus on building your Dapp, your ecosystem, and your community.
 
 
-### Accommodate Application-Specific Requirements
+## How VMs Work
 
-_Different blockchain-based applications may require validators to have certain properties such as large amounts of RAM or CPU power._
+VMs communicate with Avalanche over a language agnostic request-response protocol known as [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to open a world of endless possibilities, as developers can implement their Dapps using the languages, frameworks, and libraries of their choice. To get started, create a VM out-of-the-box with the [Subnet-EVM](/build/subnet/c-chain-vs-subnet.md) in Solidity, or design a custom VM with languages like Golang, Rust, and many more.
 
-- A Subnet could require that validators meet certain [hardware requirements](/nodes/run/node-manually.md#requirements) so that the application doesn’t suffer from low performance due to slow validators.
+## Running a VM
 
-### Launch a Network Designed With Compliance In Mind
+All Avalanche validators as members of the Avalanche Primary Network are required to run three VMs:
 
-_Avalanche’s Subnet architecture makes regulatory compliance manageable. As mentioned above, a Subnet may require validators to meet a set of requirements._
+- Coreth: Defines the Contract Chain (C-Chain); supports smart contract functionality and is EVM-compatible.
+- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
+- Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native Tokens.
 
-Some examples of requirements the creators of a Subnet may choose include:
+All three can easily be run on any computer with [AvalancheGo](/nodes).
 
-- Validators must be located in a given country.
-- Validators must pass KYC/AML checks.
-- Validators must hold a certain license.
+Validators can install additional VMs on their node to validate additional [Subnets](subnets-overview.md) in the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward token determined by the Subnets.
 
-### Control The Privacy of On-Chain Data
+### Solidity
 
-_Subnets are ideal for organizations interested in keeping their information private._
+Avalanche natively supports the execution of Ethereum smart contracts written in solidity. Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)), or on their own Subnet using the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
 
-- Institutions conscious of their stakeholders' privacy can create a private Subnet where the contents of the blockchains would be visible only to a set of pre-approved validators. Define this at creation with a [single parameter](/nodes/configure/subnet-configs.md#private-subnet).
+Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask, Truffle, and more.
 
-### Validator Sovereignty
+To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
 
-_In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains._
+### Golang
 
-- The Subnet model enables validators to concern themselves only with blockchain networks they choose to participate in. This greatly reduces the computational burden on validators.
+- [Coreth](https://github.com/ava-labs/coreth)
+  - An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart contracts.
+- [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
+  - An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart contracts
+- [TimestampVM](https://github.com/ava-labs/timestampvm)
+  - A decentralized timestamp server
+- [XSVM](https://github.com/ava-labs/xsvm)
+  - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-## Develop Your Own Subnet
+See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
 
-Subnets on Avalanche are deployed by default with [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm), a fork of go-ethereum. It implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as most other Ethereum client functionality.
+### Rust
 
-To get started, check out the tutorials in our [Subnets](/build/subnet/hello-subnet.md) section.
+The following VMs were built using Rust via the [Avalanche Rust SDK](https://crates.io/crates/avalanche-types)
+
+- [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
+  - A Rust implementation of TimestampVM
+
+See here for a tutorial on [How to Build a Simple Rust VM](/build/vm/create/rust-vm.md)
