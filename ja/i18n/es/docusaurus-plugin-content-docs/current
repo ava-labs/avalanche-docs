@@ -1,18 +1,27 @@
-# AvaxToken.sol
+# INativeMinter.sol
 
 ```solidity
+// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+pragma solidity >=0.8.0;
 
-// A standard ERC20 token with maxSupply of 1 million
-contract AvaxToken is ERC20 {
-    uint public MAX_SUPPLY = 1000000 ether;
+interface NativeMinterInterface {
+    // Set [addr] to have the admin role over the minter list
+    function setAdmin(address addr) external;
 
-    // maxSupply is sent to the creator of the token
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
-        _mint(msg.sender, MAX_SUPPLY);
-    }
+    // Set [addr] to be enabled on the minter list
+    function setEnabled(address addr) external;
+
+    // Set [addr] to have no role over the minter list
+    function setNone(address addr) external;
+
+    // Read the status of [addr]
+    function readAllowList(address addr) external view returns (uint256);
+
+    // Mint [amount] number of native coins and send to [addr]
+    function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
