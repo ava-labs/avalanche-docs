@@ -541,3 +541,6 @@
 /dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
 /dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
 
+# 10/05/23
+/build/dapp/smart-contracts/toolchains/truffle /deprecated/truffle 301
+/build/dapp/smart-contracts/verification/verify-truffle /deprecated/verify-truffle 301

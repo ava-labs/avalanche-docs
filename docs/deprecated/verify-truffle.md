@@ -7,6 +7,10 @@ pagination_label: Verifying Smart Contracts with Truffle Verify
 
 # Verifying Smart Contracts with Truffle Verify
 
+:::warning
+This document has been deprecated and is no longer maintained. It may contain incorrect/obsolete information.
+:::
+
 _This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
 
 _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
