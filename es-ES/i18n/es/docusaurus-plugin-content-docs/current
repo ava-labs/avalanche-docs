@@ -1,173 +1,86 @@
 ---
 tags:
   - Tooling
-  - AvalancheJS
-description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
-pagination_label: AvalancheJS
-sidebar_label: AvalancheJS
-sidebar_position: 0
+  - Avalanche-CLI
+description: This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI command.
+pagination_label: Run Avalanche Validators with One Avalanche-CLI Command
+sidebar_label: Run Validators
+sidebar_position: 3
 ---
 
-# AvalancheJS Overview
+# Run an Avalanche Validator with One Avalanche-CLI Command
 
-AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](/learn/avalanche/intro.md) platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI command.
 
-The APIs currently supported by default are:
+:::info
+Currently, only Fuji network is supported.
+:::
 
-- Admin API
-- Auth API
-- AVM API (X-Chain)
-- EVM API (C-Chain)
-- Health API
-- Index API
-- Info API
-- Keystore API
-- Metrics API
-- PlatformVM API
-- Socket API
+:::warning
 
-We built AvalancheJS with ease of use in mind. With this library, any JavaScript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the Avalanche Platform Specification found in the [Platform Chain Specification](/reference/avalanchego/p-chain/api.md), [Exchange Chain (X-Chain) Specification](/reference/avalanchego/x-chain/api.md), [Contract Chain (C-Chain) Specification](/reference/avalanchego/c-chain/api.md).
-
-Using AvalancheJS, developers can:
-
-- Locally manage private keys
-- Retrieve balances on addresses
-- Get UTXOs for addresses
-- Build and sign transactions
-- Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
-- Create a Subnetwork
-- Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
-- Add a Validator to the Primary network
-- Add a Delegator to the Primary network
-- Administer a local node
-- Retrieve Avalanche network information from a node
-
-## Requirements
-
-AvalancheJS requires Node.js version 14.18.0 or higher to compile.
-
-## Installation
-
-### Using the NPM Package
-
-Add AvalancheJS to your project via `npm` or `yarn`.
-
-For installing via `npm`:
-
-`npm install --save @avalabs/avalanchejs`
-
-For installing via `yarn`:
-
-`yarn add @avalabs/avalanchejs`
-
-:::caution
-
-Please note that [this](https://www.npmjs.com/package/avalanche) npm package is deprecated. Make sure to always use [@avalabs/avalanchejs](https://www.npmjs.com/package/@avalabs/avalanchejs) instead.
+ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
 
 :::
 
-### Build from Repository
+## Prerequisites
 
-You can also pull the repo down directly and build it from scratch.
+Before we begin, you will need to:
 
-Clone the AvalancheJS repository:
+- Create an AWS account and have an AWS `credentials` file in home directory with [default] profile set. More info can be found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
+- Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- Install [Ansible](https://adamtheautomator.com/install-ansible/)
 
-`git clone https://github.com/ava-labs/avalanchejs.git`
+Currently, we are only support AWS cloud services, but we plan to add support for more cloud services in the near future.
 
-Then build it:
+## Start the Validator
 
-`npm run build`
+To start Avalanche validators, run:
 
-or
-
-`yarn build`
-
-This will generate a pure JavaScript library and place it in a folder named "web" in the project root. The "avalanchejs" file can then be dropped into any project as a pure JavaScript implementation of Avalanche.
-
-![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
-
-## Use AvalancheJS in Projects
-
-The AvalancheJS library can be imported into your existing Node.js project as follows:
-
-```ts
-const avalanche = require("avalanche")
+```shell
+avalanche node create <clusterName>
 ```
 
-Or into your TypeScript project like this:
+The created nodes will be part of cluster `clusterName` and all avalanche node commands applied to cluster `clusterName` will apply to all nodes in the cluster.
 
-```ts
-import { Avalanche } from "avalanche"
+:::note
+
+Please note that running a validator on AWS will incur costs.
+
+Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud services via Avalanche-CLI.
+
+:::
+
+Currently, we have set the following specs of the AWS cloud server to a fixed value, but we plan to enable customization in the near future:
+
+- OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
+- Instance Type: `c5.2xlarge`
+- Storage: `1 TB`
+
+The command will ask which region you want to set up your cloud server in:
+
+```text
+ Which AWS region do you want to set up your node in?: 
+  ▸ us-east-1
+    us-east-2
+    us-west-1
+    us-west-2
+    Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
-## Importing Essentials
+The command will then ask which Avalanche Go version you would like to install in the cloud server. You can choose `default` (which will install the latest version) or you can enter the name of a Subnet created with CLI that you plan to be validated by this node (we will get the latest version that is compatible with the deployed Subnet's RPC version).
 
-```ts
-import { Avalanche, BinTools, Buffer, BN } from "avalanche"
+Once the command has successfully completed, Avalanche-CLI outputs all the created cloud server node IDs as well as the public IP that each node can be reached at.
 
-let bintools = BinTools.getInstance()
-```
+Avalanche-CLI also outputs the command that you can use to ssh into each cloud server node.
 
-The above lines import the libraries used in the tutorials. The libraries include:
+By the end of successful run of `create` command, Avalanche-CLI would have:
 
-- avalanche: Our JavaScript module.
-- bn.js: A big number module use by AvalancheJS.
-- buffer: A Buffer library.
-- BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
+- Installed Avalanche Go in cloud server
+- Installed Avalanche CLI in cloud server
+- Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory. Back up this private key file as you will not be able to ssh into the cloud server node without it
+- Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
+- Started the process of bootstrapping your new Avalanche node to the Primary Network
 
-## Run Scripts
+## Check Bootstrap Status
 
-### TypeScript File
-
-**Via NPM**
-
-Install typescript:
-
-`npm install typescript`
-
-Run the script:
-
-`ts-node script-name.ts`
-
-**Via YARN**
-
-Install typescript:
-
-`yarn add typescript`
-
-Run the script:
-
-`ts-node script-name.ts`
-
-### JavaScript File
-
-As Node.js is already installed per [requirements](/#Requirements), simply run the script:
-
-`node script-name.js`
-
-### Example
-
-Let's say that the AvalancheJS repository was cloned. There are a lot of useful scripts in `Examples`. Suppose the one we want to run is AVM's `getTx`, which has the path `examples/avm/getTX.ts`.
-
-To execute the script, we use:
-
-`ts-node examples/avm/getTx.ts`
-
-It ran successfully, providing the following output:
-
-```zsh
-lavinia@Lavinias-MacBook-Pro avalanchejs % ts-node examples/avm/getTx.ts
-{
-  unsignedTx: {
-    networkID: 1,
-    blockchainID: '11111111111111111111111111111111LpoYY',
-    outputs: [ [Object] ],
-    inputs: [ [Object] ],
-    memo: '0x',
-    destinationChain: '2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM',
-    exportedOutputs: [ [Object] ]
-  },
-  credentials: [ { signatures: [Array] } ],
-  id: 'MTyhpMPU69qLPJL59dwfYbxpWNzp8bfsHyvy9B4DkzN2kWSQ5'
-}
-```
+Please note that you will have to wait until the nodes have finished bootstrapping before the nodes can be Primary Network or Subnet Validators. To check whether all the nodes in a cluster have finished bootstrapping, run `avalanche node status <clusterName>`.
