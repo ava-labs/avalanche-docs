@@ -1,210 +1,52 @@
 ---
+title: '🔺 Avalanche Subnets'
 tags:
   - Build
-  - Dapps
-description: This tutorial walks through verifying a smart contract on a block explorer using Truffle after deploying it to Avalance C-Chain.
-sidebar_label: Using Truffle
-pagination_label: Verifying Smart Contracts with Truffle Verify
+  - Subnets
+description: Subnets
+sidebar_label: '🔗 Quick Links'
+pagination_label: Subnets Overview
 ---
 
-# Verifying Smart Contracts with Truffle Verify
+Avalanche Subnets are a subset of Avalanche Primary Network validators agreeing to run the same [Virtual Machines (VM)](/docs/learn/avalanche/subnets-overview.md#virtual-machines). Subnets enable extra dimensions of reliability, efficiency, and data sovereignty. See [here](/learn/avalanche/subnets-overview.md) for a broad overview.
 
-_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
+## 🔗 Subnets Quick Links
 
-_Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
+| Introduction to Subnets                                      |                                                                                                               |
+|:------------------------------------------------------------ |:------------------------------------------------------------------------------------------------------------- |
+| [**Getting Started**](/build/subnet/getting-started.md)      | Planning a successful Subnet deployment starts by determining your application's needs                        |
+| [**C-Chain or Subnet?**](/build/subnet/c-chain-vs-subnet.md) | Help developers determine the best place to launch their application                                          |
+| [**Build Your First Subnet**](/build/subnet/hello-subnet.md) | How to use Avalanche-CLI to create a Subnet, deploy it to a local network, and connect to it with Core wallet |
 
-## Create a Project
+| Deploy a Subnet                                                                |  |
+|:------------------------------------------------------------------------------ |  |
+| [**On a Local Network**](/build/subnet/deploy/local-subnet.md)                 |  |
+| [**On Fuji Testnet**](/build/subnet/deploy/fuji-testnet-subnet.md)             |  |
+| [**On Avalanche Mainnet**](/build/subnet/deploy/mainnet-subnet.md)             |  |
+| [**On Production Infrastructure**](/build/subnet/deploy/on-prod-infra.md)      |  |
+| [**With Multisignature Authorization**](/build/subnet/deploy/multisig-auth.md) |  |
+| [**With a Custom Virtual Machine**](/build/subnet/deploy/custom-vm-subnet.md)  |  |
 
-Make sure you have truffle installed:
+| Elastic Subnets                                                                                                    |  |
+|:------------------------------------------------------------------------------------------------------------------ |  |
+| [**Transform a Permissioned Subnet into an Elastic Subnet**](/build/subnet/elastic/transform-to-elastic-subnet.md) |  |
+| [**Elastic Subnet Parameters**](/build/subnet/elastic/elastic-parameters.md)                                       |  |
 
-```zsh
-npm install -g truffle
-```
+| Manage Subnets                                                                                         |  |
+|:------------------------------------------------------------------------------------------------------ |  |
+| [**View Your Created Subnets**](/build/subnet/maintain/view-subnets.md)                                |  |
+| [**Pause and Resume Local Subnets**](/build/subnet/maintain/pause-resume-subnet.md)                    |  |
+| [**Delete a Subnet**](/build/subnet/maintain/delete-subnet.md)                                         |  |
+| [**Deploy a Smart Contract on Your Subnet**](/build/subnet/utility/deploy-smart-contract-to-subnet.md) |  |
+| [**Add a Testnet Faucet**](/build/subnet/utility/avalanche-subnet-faucet.md)                           |  |
+| [**Deploy a Cross-Chain Bridge**](/build/subnet/utility/cross-chain-evm-bridge.md)                     |  |
+| [**Considerations When Upgrading a Subnet**](/build/subnet/upgrade/considerations-subnet-upgrade.md)   |  |
+| [**Customize Your EVM-Powered Subnet**](/build/subnet/upgrade/customize-a-subnet.md)                   |  |
+| [**Upgrade a Subnet's Virtual Machine**](/build/subnet/upgrade/upgrade-subnet-vm.md)                   |  |
+| [**Upgrade a Subnet-EVM Precompile Configuration**](/build/subnet/upgrade/upgrade-precompile.md)       |  |
 
-Create a new directory for your Truffle project:
-
-```zsh
-mkdir MetaCoin
-cd MetaCoin
-```
-
-Download ("unbox") the MetaCoin box:
-
-```zsh
-truffle unbox metacoin
-```
-
-Once this operation is completed, you'll now have a project structure with the following items:
-
-- `contracts/`: Directory for Solidity contracts
-- `migrations/`: Directory for scriptable deployment files
-- `test/`: Directory for test files for testing your application and contracts
-- `truffle.js`: Truffle configuration file
-
-## Compiling
-
-Before we compile our smart contract, we must set up our environment
-
-Run the following commands:
-
-```zsh
-npm init -y
-```
-
-```zsh
-yarn add @truffle/hdwallet-provider yarn add -D truffle-plugin-verify
-```
-
-Create a `.env.json` file in your project's root directory:
-
-```json
-{
-  "mnemonic": "your-wallet-seed-phrase",
-  "snowtraceApiKey": "your-snowtrace-api-key"
-}
-```
-
-_Get your Snowtrace API key [here](https://snowtrace.io/myapikey)_
-
-Configure your `truffle-config.js` file to the appropriate settings:
-
-```js
-/**
- * Use this file to configure your truffle project. It's seeded with some
- * common settings for different networks and features like migrations,
- * compilation and testing. Uncomment the ones you need or modify
- * them to suit your project as necessary.
- *
- * More information about configuration can be found at:
- *
- * trufflesuite.com/docs/advanced/configuration
- *
- * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
- * to sign your transactions before they're sent to a remote public node. Infura accounts
- * are available for free at: infura.io/register.
- *
- * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
- * public/private key pairs. If you're publishing your code to GitHub make sure you load this
- * phrase from a file you've .gitignored so it doesn't accidentally become public.
- *
- */
-
-const HDWalletProvider = require("@truffle/hdwallet-provider")
-
-//
-const { snowtraceApiKey, mnemonic } = require("./.env.json")
-
-module.exports = {
-  /**
-   * Networks define how you connect to your ethereum client and let you set the
-   * defaults web3 uses to send transactions. If you don't specify one truffle
-   * will spin up a development blockchain for you on port 9545 when you
-   * run `develop` or `test`. You can ask a truffle command to use a specific
-   * network from the command line, e.g
-   *
-   * $ truffle test --network <network-name>
-   */
-
-  plugins: ["truffle-plugin-verify"],
-  api_keys: {
-    snowtrace: snowtraceApiKey,
-  },
-  networks: {
-    fuji: {
-      provider: () =>
-        new HDWalletProvider(
-          mnemonic,
-          `https://api.avax-test.network/ext/bc/C/rpc`
-        ),
-      network_id: 1,
-      timeoutBlocks: 200,
-      confirmations: 5,
-    },
-  },
-}
-```
-
-_Network can be configured for Mainnet deployment(see Alternatives)_
-
-Run the following command:
-
-```zsh
-truffle compile
-```
-
-Once this operation is completed, your `./build/contracts` folder should contain the following items:
-
-- `ConvertLib.json`
-- `MetaCoin.json`
-- `Migrations.json`
-
-## Migrate
-
-Run the following command:
-
-```zsh
-npx truffle migrate --network fuji
-```
-
-You should see the TX activity in your terminal ![truffle-verify-txn1](/img/truffle-verify-txn1.png)
-
-![truffle-verify-txn2](/img/truffle-verify-txn2.png)
-
-![truffle-verify-txn3](/img/truffle-verify-txn3.png)
-
-## Truffle Verify
-
-Truffle verify allows users to verify contracts from the CLI
-
-### Fuji Testnet
-
-Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle verify [here](https://github.com/rkalis/truffle-plugin-verify)
-
-If you have issues, contact us on [Discord](https://chat.avalabs.org)
-
-1. Run the following command:
-
-    ```zsh
-    npx truffle run verify ConvertLib MetaCoin --network fuji
-    ```
-
-2. Wait for the verification message from the CLI ![truffle-verify-message1](/img/truffle-verify-message1.png)
-
-3. View the verified contract ![truffle-verify-view-contract](/img/truffle-verify-view-contract.png)
-
-### Mainnet
-
-Configure your `truffle-config.js` file to the appropriate settings:
-
-```js
-module.exports = {
-...
-   plugins: [
-    'truffle-plugin-verify'
-  ],
-  api_keys: {
-    snowtrace: snowtraceApiKey
-  },
-  networks: {
-
-    mainnet: {
-        provider: () => new HDWalletProvider(mnemonic, `https://api.avax.network/ext/bc/C/rpc`),
-        network_id: 1,
-        timeoutBlocks: 200,
-        confirmations: 5
-    }
-  }
-};
-```
-
-Run the following commands:
-
-```zsh
-truffle migrate --network mainnet
-```
-
-```zsh
-truffle verify CovertLib MetaCoin --network mainnet
-```
-
-Thanks for reading 🔺
+| More                                                                        |  |
+|:--------------------------------------------------------------------------- |  |
+| [**Avalanche-CLI Subnet Commands**](/tooling/avalanche-cli.md)              |  |
+| [**Case Study: WAGMI Subnet**](build/subnet/info/wagmi.md)                  |  |
+| [**Troubleshooting Deployments**](build/subnet/info/troubleshoot-subnet.md) |  |  
