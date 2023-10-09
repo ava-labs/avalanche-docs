@@ -1,4 +1,4 @@
-# Avalanche - Creating a Genesis File for Your Subnet
+# How to Use a ERC-20 C-chain Token as the Gas Fee Token
 
 :::warning
 
@@ -8,906 +8,465 @@ These tutorials were published as a snapshot of when they were written, and may 
 
 ## Introduction
 
-Hi there! In this tutorial, we will be learning how to create a custom genesis file for your Subnet.
+Purpose of this tutorial is to use a ERC-20 C-chain token as the gas fee token on a Subnet by deploying a bridge. We will not be using a bridge provider, instead we will be implementing our own bridge to truly understand how bridges work and how to modify them to our needs. Bridge we will be implementing is a [trusted](#trusted-and-trustless-bridges) bridge and it uses [lock-mint](#lock-mint-and-burn-release-mechanisms) mechanism to transfer assets from C-chain to Subnet and [burn-release](#lock-mint-and-burn-release-mechanisms) mechanism from Subnet to C-chain.
 
-We will start by deploying a very simple Subnet using [the Subnet wizard](https://github.com/ava-labs/avalanche-cli). Then we will learn about the genesis file and how to customize it for our needs.
+:::caution
 
-Next, we will create a simple game!
+DISCLAIMER: The bridge implementation in this tutorial is a proof of concept and is not production ready.
 
-We will create and deploy a new Subnet using our custom genesis file for the game. Finally, we will be deploying the Game contract to the Subnet.
+:::
 
-The Game contract has a simple function called `play` that accepts `LUCK` tokens (native currency of our Subnet) and the contract will either lock the tokens or **mint** 2x the amount of tokens to the player. Yes, it's going to mint native tokens.
+## Prerequisites
 
-At the end of the tutorial, you will _hopefully_ have a solid understanding of how to customize the genesis file of your Subnet.
+- Basic knowledge of [Precompiles](/build/subnet/upgrade/customize-a-subnet.md#precompiles).
+  - We will be using [NativeMinter](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins) precompile on our Subnet. Familiarity with precompiles and knowledge of NativeMinter precompile will be assumed.
+- Having an up and running Subnet which uses NativeMinter precompile.
+  - In this tutorial we will be using a local Subnet. Refer to [this](/build/subnet/deploy/local-subnet.md), to deploy your local Subnet.
+- Basic knowledge of [Hardhat](https://hardhat.org/).
+  - We will be writing our code in a Hardhat development environment. We will write custom scripts to automate our job and add those scripts as tasks to hardhat.
+- General knowledge of [EthersJS](https://docs.ethers.io/v5/).
+  - We will be interacting with both the Avalanche Fuji chain and our Subnet using EthersJS. We will be initializing providers, signers, contracts and interacting with contracts using EthersJS.
+- General knowledge of [Solidity](https://docs.soliditylang.org/en/v0.8.7/).
+  - We will be writing our own Bridge and Token contracts using Solidity.
 
-I hope you enjoy this tutorial!
+## General Concepts
 
-### Prerequisites
+Before writing any code, we should understand how bridges work and what type of bridges exist to better understand what we are actually doing. Reading Ethereum's official documentation about [bridges](https://ethereum.org/en/bridges/) is highly recommended.
 
-#### MetaMask
+### High Level Overview of Our Bridge Design
 
-You need to have [MetaMask](https://metamask.io/) extension installed on your browser.
+- A ERC-20 token on the C-chain and a native gas token on our Subnet that is mintable, using NativeMinter precompile.
+- Bridge contracts on both chains with custom behaviors for ERC-20 and NativeMinter precompile.
+- An off-chain relayer which is an application that listens to events on both chains. On these events, it sends transactions to other chain's bridge contract. For more detail refer to [Relayer](#relayer) part.
 
-#### Avalanche-Cli
+### Trusted and Trustless Bridges
 
-Create a folder for Avalanche-CLI.
+In short, bridges allow cross-chain transfers and there are 2 main types of bridges; Trusted and Trustless. Trusted bridges depend on an entity and have trust assumptions. Trustless bridges do not require trust assumptions to external entities but only to blockchain itself. To get more details refer to Ethereum's official documentation about [bridges](https://ethereum.org/en/bridges/).
 
-```bash
-mkdir -p ~/avalanche
-```
+### Lock-Mint and Burn-Release Mechanisms
 
-Go to that directory and download the Avalanche-CLI.
+Reason we have chosen these mechanisms is because our ERC-20 token might not be mintable and we are sure that our Subnet's gas token is mintable.
 
-```bash
-cd ~/avalanche
-curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+#### How Lock-Mint Works
 
-> ava-labs/avalanche-cli info checking GitHub for latest tag
-> ava-labs/avalanche-cli info found version: 0.1.3 for linux/amd64
-> ava-labs/avalanche-cli info installed ./bin/avalanche
-```
+- User deposits tokens to the bridge contract, effectively locking it.
+- Relayer detects the transfer event and sends a transaction to the bridge contract that is on the other chain.
+- Bridge contract on the other chain mints the token and sends it to the given address.
 
-Go to the directory where you just downloaded the CLI and add it to your PATH. So you can run the CLI from anywhere.
+We are using the Lock-Mint mechanism when we bridge our token from C-chain to Subnet.
 
-```bash
-cd ./bin/avalanche
-export PATH=$PWD:$PATH
-```
+#### How Burn-Release Works
 
-We're ready to deploy our first Subnet.
+- User deposits tokens to the bridge contract, and the bridge contract sends them to the 0 address, effectively burning it.
+- Relayer detects the transfer event and sends a transaction to the bridge contract that is on the other chain.
+- Bridge contract on the other chain sends the token to the given address, effectively releasing it.
 
-## Creating and Deploying a Simple Subnet
+We are using the Burn-Release mechanism when we bridge our token from Subnet to C-chain.
 
-### What Is a Subnet?
+:::caution
 
-> A Subnet, or Subnetwork, is a dynamic subset of Avalanche Primary Network validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet. A Subnet can have and validate many blockchains. A validator may be a member of many Subnets.
-> 
-> Subnets are independent and don’t share execution thread, storage or networking with other Subnets or the Primary Network, effectively allowing the network to scale up easily. They share the benefits provided by the Avalanche Protocol such as low cost and fast to finality.
-> 
-> A Subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+If bridge contract does not have enough tokens, it can not release them. Therefore, make sure that bridge is sufficiently funded to release intended amount. This was not a concern for lock-mint mechanism because bridge could always mint.
 
-[Here is a great introduction to Subnets by Avalanche](https://docs.avax.network/subnets)
+:::
 
-#### Subnets
+### Building Blocks of Our Bridge
 
-Subnets is a great technology! It's still advancing and a bit complicated. There is almost no tooling for Subnets and it's a bit difficult to work with them.
+#### Relayer
 
-Avalanche has changed that! The Avalanche team has developed an amazing tool to make this process a breeze. Now you can deploy your own production-ready Subnet with just a few commands. The tool will guide you through configuring your Subnet and deploying it!
+Relayer is an off-chain application that listens for events on both chains. Upon events it sends transactions to other chain's bridge contracts. It has the private key of the bridge contracts' admin account allowing it to mint or release tokens.
 
-#### Genesis File
+#### Contracts
 
-The genesis file is a file that contains the initial configuration of the Subnet. Avalanche will generate a genesis file for you based on some parameters you provide. On the other hand, you can also create your own genesis file! This will allow you to have more control over the configuration of your Subnet.
+We will have bridge contracts on both chains. Users will send transactions to these contracts when they want to burn or lock their token on the respective chain. When a burn or lock happens these contracts emit an event for the relayer to observe. When the relayer observes the event on one chain, it will call bridge contract on the other chain with either mint or release function.
 
-### Creating a Simple Subnet
+## Requirements
 
-For this time, let's take the easy way out and use the CLI to deploy a Subnet to see how things work.
+- [NodeJS](https://nodejs.org/en/) >= 16.0.0 must be installed.
+- [npm](https://www.npmjs.com/) >= 8.15.0 must be installed.
+- [Hardhat](https://hardhat.org/) >= 2.10.1 must be installed.
 
-```bash
-avalanche subnet create testSubnet
-```
+## Getting Started
 
-This command will run the wizard to create a Subnet.
+## Initialize the Project
 
-There are six steps in the wizard:
+Let's start by initializing our workspace with [Hardhat](https://hardhat.org/).
 
-#### Choose Your VM
-
-Choose SubnetEVM here
-
-#### Chain Id
-
-Chain id is a unique identifier for the network. This value must be unique so check [chainlist](https://chainlist.org/) to see if the chain id is already in use.
-
-#### Token Symbol
-
-Token symbol is the symbol of the native token used in the Subnet. For instance, on the C-Chain, the symbol is `AVAX` and on the Ethereum Mainnet, the symbol is `ETH`. You can use any symbol you want.
-
-#### Gas Configuration
-
-This step will define the gas configuration of your network. You can choose a preset fee configuration or create your own. Keep in mind that more transaction throughput means more disk usage.
-
-We will go with C-Chain default fees.
+To initialize project, run:
 
 ```bash
-> Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
+npx hardhat init
 ```
 
-#### Airdropping Native Tokens
+Select `Create a JavaScript project` and walk through creating the project.
 
-This step will define how you want to distribute the funds in your Subnet. You can choose the addresses and amounts you want to distribute. Let's go with the simplest case.
+## Create Contracts
+
+Delete `Lock.sol` file
+
+To use OpenZeppelin contracts in our contracts, run:
 
 ```bash
-How would you like to distribute funds?
-> Airdrop 1 million tokens to the default address (do not use in production)
+npm i @openzeppelin/contracts
 ```
 
-#### Adding a Custom Precompile to Modify the Evm
+### Create Token Contracts
+
+Create a `Token` folder inside `contracts` folder
+
+#### AVAX Token
+
+Create `AvaxToken.sol` file inside `Token` folder
+
+[AvaxToken.sol](./codes/contracts/Token/AvaxToken.sol.md)
+
+#### Native Minter Interface
+
+Create `INativeMinter.sol` file inside `Token` folder
+
+[INativeMinter.sol](./codes/contracts/Token/INativeMinter.sol.md)
+
+### Create Bridge Contracts
+
+Create a `Bridge` folder inside `contracts` folder
+
+#### AVAX Bridge
+
+Create `AvaxBridge.sol` file inside `Bridge` folder
+
+[AvaxBridge.sol](./codes/contracts/Bridge/AvaxBridge.sol.md)
+
+#### Subnet Bridge
+
+Create `SubnetBridge.sol` file inside `Bridge` folder
+
+[SubnetBridge.sol](./codes/contracts/Bridge/SubnetBridge.sol.md)
+
+### Compile Contracts
+
+To make sure there are no problems with contracts, run:
 
 ```bash
-? Advanced: Would you like to add a custom precompile to modify the EVM?:
-  ▸ No
-    Yes
-    Go back to previous step
+npx hardhat compile
 ```
 
-Here you can set up a custom precompile to unlock some useful functions.
+## Interact with Contracts
 
-##### Native Minting
+### Constants
 
-This precompile allows admins to permit designated contracts to mint the native token on your Subnet. We will discuss this in more detail in the [`contractNativeMinterConfig`](#contractnativeminterconfig) section.
+First we will create a `constants` folder at the root of the project to store some general values.
 
-###### Configure Contract Deployment Whitelist
+Inside `constants` folder create; `chains.js` and `nativeMinterAddress.js`.
 
-This precompile restricts who has the ability to deploy contracts on your Subnet. We will discuss this in more detail in the [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig) section.
+[chains.js](./codes/constants/chains.js.md)
 
-###### Configure Transaction Allow List
+[nativeMinterAddress.js](./codes/constants/nativeMinterAddress.js.md)
 
-This precompile restricts who has the ability to make transactions on your Subnet. We will discuss this in more detail in the [`txAllowListConfig`](#txallowlistconfig) section.
+### Variables
 
-However, we are not gonna do any of these yet. Choose `No` and proceed.
+Secondly we will create a `variables` folder at the root of the project to store some updated values such as contract addresses.
+
+Inside the `variables` folder create `contractAddresses.js` but do not put anything in it. This file will be auto generated whenever we deploy some contracts.
+
+### Utils
+
+Then we will create a `utils` folder at the root of the project to define some general use functions.
+
+Inside `utils` folder create; `initProviders.js`, `initSigners.js` and `initContracts.js`
+
+[initProviders.js](./codes/utils/initProviders.js.md)
+
+[initSigners.js](./codes/utils/initSigners.js.md)
+
+[initContracts.js](./codes/utils/initContracts.js.md)
+
+### Scripts
+
+We could directly create the off-chain relayer but it would be too hard to test it. Therefore, we are creating these helper scripts to quickly interact with contracts and test if relayer works as expected.
+
+We are using [Hardhat Tasks](https://hardhat.org/guides/create-task) to run our scripts in this tutorial. We will be writing the script, updating the `hardhat.config.js` to add our new script as a hardhat task.
+
+#### Deploy Script
+
+##### Write Deploy Script
+
+Create `deploy.js` file inside `scripts` folder
+
+[deploy.js](./codes/scripts/deploy.js.md)
+
+:::warning
+
+Make sure that BRIDGE_ADMIN has an admin role for NativeMinter. So that it can allow SubnetBridge contract to mint native token.
+
+:::
+
+##### Update hardhat.config.js File
+
+To add `deploy` script as a hardhat task add following code inside `hardhat.config.js`
+
+```javascript
+/* Import task from hardhat config */
+const { task } = require("hardhat/config");
+...
+/* Import deploy function */
+require("./scripts/deploy");
+...
+/* Create deploy task */
+task(
+    "deploy",
+    "Deploy bridges on both networks and deploy AvaxToken, also update the admins"
+).setAction(async (taskArgs, hre) => {
+    await deploy().catch((error) => {
+        console.error(error);
+        process.exitCode = 1;
+    });
+});
+...
+```
+
+Example [hardhat.config.js](./codes/hardhatConfigAfterDeploy.js.md) file after adding the deploy task.
+
+##### Run Deploy Script
+
+To run our deploy script, run:
 
 ```bash
-> Successfully created genesis
+npx hardhat deploy
 ```
 
-Congrats! You just created a Subnet! 👏🎉
+After running the script you should see deployed contract addresses on the command line and see that `variables/contractAddresses.js` file is updated.
 
-### Deploying the Subnet
+#### Balance Script
 
-This is the most fun part. We will deploy the Subnet that we just created, and it's so easy to do, thanks to Avalanche-CLI!
+##### Write Balance Script
+
+Create `balance.js` file inside `scripts` folder
+
+[balance.js](./codes/scripts/balance.js.md)
+
+##### Update hardhat.config.js File
+
+To add `balance` script as a hardhat task add the following code inside `hardhat.config.js`
+
+```javascript
+/* Import task from hardhat config if you did not already */
+const { task } = require("hardhat/config");
+...
+/* Import balance function */
+require("./scripts/balance");
+...
+/* Create balance task  */
+task("balance", "Get token balance from a network")
+    /* Add `from` parameter indication the used network which is either avax or subnet */
+    .addParam("from", "Network to get balance from")
+    .setAction(async (taskArgs, hre) => {
+        await balance(taskArgs.from).catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+        });
+    });
+...
+```
+
+Example [hardhat.config.js](./codes/hardhatConfigAfterBalance.js.md) file after adding the balance task.
+
+##### Run Balance Script
+
+To run our balance script, run:
 
 ```bash
-avalanche subnet deploy testSubnet
-
-> ? Choose a network to deploy on:
-  ▸ Local Network
-    Fuji
-    Mainnet
+npx hardhat balance --from avax
 ```
 
-We will deploy the Subnet on a local network so choose `Local Network` here.
-
-This process will install AvalancheGo (if not already installed) and start the network. This will take a couple of minutes so, this is a good time to refresh your coffee ☕
-
-After this process is complete, you will see the MetaMask connection details in the terminal.
+or
 
 ```bash
-MetaMask connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:34249/ext/bc/8MiXurGFiuUfx3JzT4jXHVavgxDaBM4HSWotsGoeQMqRzcWWF/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     testSubnet
-Chain ID:         1234
-Currency Symbol:  TEST
+npx hardhat balance --from subnet
 ```
 
-You can use this configuration to add a new network to your MetaMask. Then you can import the account to which the airdrop funds were sent to into your MetaMask by importing the private key.
+After running the script you should see balances printed out in the command line. If you have used `--from subnet` you will only see the native token balance of the user. If you have used `--from avax` you will see the ERC20 balances of both user and the bridge contract.
 
-![MetaMask network config](.github/images/metamask.png)
+Balance value seen on the Subnet depends on how you have funded your address. But balance values on AVAX should look like the following:
 
-Notice that you will see the same private key if you've chosen `Airdrop 1
-million tokens to the default address (do not use in production)` in the [airdrop step](#airdropping-native-tokens). Thus, the private key is exposed and anyone can access the account. For that reason, it's not a good idea to use this in production.
+```text
+MERC20 balance of the user:  1000000.0
+MERC20 balance of the bridge:  0.0
+```
 
-After importing the account on MetaMask, let's change the network to our Subnet.
+#### BurnOrLock Script
 
-![MetaMask account page](.github/images/metamask2.png)
+##### Write BurnOrLock Script
 
-How awesome is that? `TEST` is the native token of our Subnet and it's airdropped to our address. You can now deploy smart contracts and interact with the network.
+Create `burnOrLock.js` file inside `scripts` folder
 
-## Understanding the Genesis File
+[burnOrLock.js](./codes/scripts/burnOrLock.js.md)
 
-Before starting, I'd like to acknowledge that this section is very similar to [AVAX docs - Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md). However, I've made some changes to make it more comprehensive and easier to understand.
+##### Update hardhat.config.js File
 
-Subnet wizard is an awesome tool to customize your Subnet and might be a good starting point for you.
+To add `burnOrLock` script as a hardhat task add the following code inside `hardhat.config.js`
 
-We have mentioned the [genesis file](#genesis-file) above. The wizard generates this file for you but you can also create **your own genesis file!** This will allow you to customize the network more easily and in depth.
+```javascript
+/* Import task from hardhat config */
+const { task } = require("hardhat/config");
+...
+/* Import burnOrLock function */
+require("./scripts/burnOrLock");
+...
+/* Create burnOrRelease task  */
+task("burnOrLock", "Burn or lock token from a network")
+    /* Add `from` parameter indication the used network which is either avax or subnet */
+    .addParam("from", "Network to burn or lock from")
+    /* Add `amount` parameter indication the amount to burn or lock */
+    .addParam("amount", "Amount to burn or lock")
+    .setAction(async (taskArgs, hre) => {
+        await burnOrLock(taskArgs.from, taskArgs.amount).catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+        });
+    });
+...
+```
 
-Let's take a look at the genesis file of our Subnet which the wizard created for us.
+Example [hardhat.config.js](./codes/hardhatConfigAfterBurnOrLock.js.md) file after adding all tasks.
+
+##### Run BurnOrRelease Script
+
+To run burnOrRelease script, run:
 
 ```bash
-## use your Subnet name instead of testSubnet
-cat ~/.avalanche-cli/testSubnet_genesis.json
+npx hardhat burnOrLock --from avax --amount <amount-of-token-to-burn-or-lock-in-ether>
 ```
 
-To access the genesis file, you can also use:
+or
 
 ```bash
-avalanche subnet describe testSubnet --genesis
+npx hardhat burnOrLock --from subnet --amount <Example value: 4>
 ```
 
-Yes, the genesis file is in json format. The output should look like:
-
-```json
-{
-  "config": {
-    "chainId": 1234,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "SubnetEVMTimestamp": 0,
-    "feeConfig": {
-      "gasLimit": 8000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 25000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "contractDeployerAllowListConfig": {
-      "blockTimestamp": null,
-      "adminAddresses": null
-    },
-    "contractNativeMinterConfig": {
-      "blockTimestamp": null,
-      "adminAddresses": null
-    },
-    "txAllowListConfig": {
-      "blockTimestamp": null,
-      "adminAddresses": null
-    }
-  },
-  "nonce": "0x0",
-  "timestamp": "0x0",
-  "extraData": "0x",
-  "gasLimit": "0x7a1200",
-  "difficulty": "0x0",
-  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "0x0000000000000000000000000000000000000000",
-  "alloc": {
-    "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
-      "balance": "0xd3c21bcecceda1000000"
-    }
-  },
-  "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "airdropAmount": null,
-  "number": "0x0",
-  "gasUsed": "0x0",
-  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "baseFeePerGas": null
-}
-```
+:::caution
 
-Pretty scary, right? But it's not that bad as it seems. The genesis file is a json file that contains the configuration of the Subnet and the block header of the genesis block, which is the first block in the network.
+When you try to run the first script `... --from avax --amount 10` if the user has 10 ERC20 tokens it will work fine and you will see the updated balances as expected on AVAX network. User’s decremented by 10, bridge’s incremented by 10. But you would not see that the user's native token balance on the Subnet is increased. Although there are bridge contracts, there is no relayer application to establish the communication in between them. Therefore, the user locked its tokens but its balance on the Subnet did not change. It is the same for the second script where the user burns tokens on Subnet but does not get any new tokens on AVAX C-Chain. Be aware, if the user account does not have native token balance on the Subnet, the second script would throw an error.
 
-Let's dive into the genesis file a little bit more.
+:::
 
-### Config
+## Create the Relayer Application
 
-#### `chainId`
+Create a `relayer.js` file at root folder of the project.
 
-The chain ID of the Subnet. We've set this to 1234 [when we created the Subnet](#chain-id).
+[relayer.js](./codes/relayer.js.md)
 
-#### Hardforks
+### Running the Relayer
 
-`eip150Block`, `eip150Hash`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`, `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `SubnetEVMTimestamp`
+As you can also see from the comments of the relayer file. There are different ways to start the relayer application
 
-These are the blocks where the network has been adopted to the new protocol release. [Here is the full list](https://github.com/ethereum/execution-specs#ethereum-protocol-releases).
+1. ```bash node ./relayer.js
+   ```
 
-When there is a new protocol release, to activate that protocol on your Subnet, you can add the configuration for the new protocol to the genesis file and point it to a block number in the future as the activation block number.
+    - When run with `node ./relayer.js`. Relayer will subscribe to events from
+      recent blocks on Avax and Subnet. Therefore, it might not process an event
+      that is emitted 1000 blocks ago. If you want to start the relayer and make a
+      transaction, current way of running is what you are looking for.
 
-### Fee Config
+2. ```bash
+   node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>
+   ```
 
-#### `gasLimit`
+    - When run with `node ./relayer.js <avaxBlockNumber> <subnetBlockNumber>`. Relayer will look for events on Avax and Subnet from the block number you provided and will iterate through the next 10 blocks for the event. Therefore, if you have a burn or lock event emitted 1000 blocks ago, you can process it by giving the right blockNumber. If you want to start the relayer to process an old burn or lock event, current way of running is what you are looking for.
 
-The total amount of gas that can be used in a single block. Keep in mind that this impacts how much computation happens in one block. This is set to `8,000,000` in C-Chain. Also, the value represents the maximum amount of gas a single transaction can use.
+3. ```bash node ./relayer.js <avaxBlockNumber>
+   ```
 
-#### `targetBlockRate`
+4. ```bash
+   node ./relayer.js -1 <subnetBlockNumber>
+   ```
 
-The network aims to produce a new block in `targetBlockRate` seconds. This value is in **seconds**. If the network starts producing faster than this, [base fees are increased accordingly](#blockgascoststep). Otherwise, if the network starts producing slower than this, [base fees are decreased accordingly](#blockgascoststep). This value is set to `2` in C-Chain.
+- When run with `node ./relayer.js <avaxBlockNumber>` or `node ./relayer.js -1 <subnetBlockNumber>` Relayer will look for events on either Avax or Subnet from the block number you provided and will iterate through the next 10 blocks for the event. "-1" as block number means do not process any old blocks for that chain. Therefore, `node ./relayer.js -1 <subnetBlockNumber>` will only process events for the Subnet. If you want to start the relayer to process an old burn or lock event just on one chain, current way of running is what you are looking for
 
-#### `minBaseFee`
+### Testing the Relayer
 
-The minimum base fee that can be used by a transaction. It also shows how much gas will it cost to do native token transfers. The value is in wei and set to `25000000000` in C-Chain. It corresponds to 25 nAvax (gwei). You can use [Snowtrace `unitconverter`](https://snowtrace.io/unitconverter) to convert between units.
+#### Test Relayer
 
-#### `targetGas`
+In this video on the left terminal I am using our custom scripts to interact with chains and on the right terminal I am using our relay to create the cross chain communication.
 
-The targeted amount of gas (including block gas cost) to consume within a rolling 10s window.
+![Test relayer with scripts](./assets/2.gif)
 
-#### `baseFeeChangeDenominator`
+##### What Happens on the Video?
 
-The base fee can change over time. If the parent block used **more** gas than its target, the base fee should **increase**. Otherwise, if the parent block used **less** gas than its target, the base fee should **decrease**.
+- Check balances on both chains
+- Start the relayer
+- An already processed event appears on the console of the relayer therefore it does not get processed
+- Check the balances to make sure already processed event is not processed
+- Lock 20 ERC20 token from AVAX and see the updated balances of user and the bridge on AVAX
+- Relayer observes the transaction and sends a transaction to mint native tokens on Subnet
+- Check the balances on both Subnet and AVAX. As expected our Subnet native token balance increases by 20
+- Burn 5 native tokens from Subnet and see the updated balance of the user
+- Relayer observers the transaction and sends a transaction to release 5 ERC20 tokens on AVAX
+- Check balance on both Subnet and AVAX. As expected our ERC20 balance increases by 5 and bridge's decreases by 5
 
-Here are the calculations:
+#### Test Relayer for Old Events
 
-If the parent block used **more** gas than its target:  
-`baseFee = max(1, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
+![Test relayer for old events](./assets/1.gif)
 
-If the parent block used **less** gas than its target:  
-`baseFee = max(0, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
+##### What Happens on the Video?
 
-The `baseFeeChangeDenominator` is set to `36` in C-Chain. This value sets the base fee to increase or decrease by a factor of `1/36` of the parent block's base fee.
+- Start by a lock transaction from AVAX with amount 40. As stated in the video this transaction was sent when the relayer was not working. Therefore, it is not processed and it will not be processed when we start the relayer with `node relayer.js` because there has been many blocks after it
+- Check balances on both chains
+- Start the relayer with `node relayer.js` to show that the event is not getting processed. Printed events are events that happened on the Subnet. Since there are no blocks building on my local Subnet other than my own, my old burns are considered new and therefore shown
+- Start the relayer with `node relayer.js <blockNumber>` to show that event will be processed and will be printed as "OLD: "
+- Check balances on both chains to confirm that old lock event on AVAX has been processed by relayer and tokens have been minted on AVAX
 
-Setting this value to a larger value means that the base fee will change more gradually. Setting it to a smaller value will make the base fee change more rapidly.
+## Troubleshoot Common Issues
 
-For further information, see [eip1559](https://eips.ethereum.org/EIPS/eip-1559)
+Things to check out;
 
-#### `minBlockGasCost`
+- Error while compiling contracts
+  - You have run `npm i @openzeppelin/contracts`.
+- Error while running scripts
+  - Both accounts on both chains have some native token so that they can send transactions.
+  - Folder structures and file names are as suggested. In our scripts we access the contract ABIs and bytecodes directly from the files that are created by hardhat. Those files are created according to your file structure and if you changed the structure, imports might fail.
+  - You have your private keys inside the .env file and you have downloaded dotenv package by running `npm i dotenv`.
+  - Your Subnet has NativeMinter precompile with `bridgeAdmin` account as the admin.
+  - You have created a contractAddresses.js file inside the variables folder. If you did not create this file, deploy.js would fail.
+  - If you are trying to bridge from Subnet to AVAX, in other words trying to burn from Subnet and release from AVAX, make sure that AvaxBridge has enough ERC20 tokens to release.
 
-Minimum gas cost a block should cover. This value is set to `0` in C-Chain.
+## Security and Maintenance
 
-#### `maxBlockGasCost`
+### Overview
 
-Maximum gas cost a block should cover. This value is set to `1,000,000` in C-Chain.
+Our bridge implementation is a naive one. It should give the reader a deep understanding of how bridges work rather than be used in production. There are many potential risks when running a bridge.
 
-> `minBlockGasCost` and `maxBlockGasCost` bounds the gas cost of a block.
+### Problems
 
-#### `blockGasCostStep`
-
-This value determines the block gas change rate depending on the [`targetBlockRate`](#targetblockrate). If the parent block is produced at the `targetBlockRate`, the block gas cost will stay the same. If the parent block is produced at a **slower** rate, the block gas cost will **decrease**. If the parent block is produced at a **faster** rate, the block gas cost will **increase**. The amount of change is determined by the following formula:
-
-```js
-(blockGasCostStep) * (targetBlockRate - parent block production time)
-```
-
-For example, if the `targetBlockRate` is set to 2 seconds, `blockGasCostStep` is set to `10` and the parent block was produced in 5 seconds. The block gas cost will decrease by 30: `10 * (2 - 5) = -30`
-
-This value is set to `200000` in C-Chain.
-
-### Validator Fee Recipient
-
-This configuration allows validators to specify a fee recipient.
-
-Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#setting-a-custom-fee-recipient)
-
-```json
-{
-  "config": {
-    "allowFeeRecipients": true
-  }
-}
-```
-
-### Precompiles
-
-You can enable some precompiled contracts in the genesis file. These contracts provide God mode functionalities and are very useful for some cases. If you'd not like to use them, you can disable them by setting the config fields to null or by simply removing them from the genesis file.
-
-#### `contractDeployerAllowListConfig`
-
-This configuration allows you specify which addresses are authorized to deploy contracts. You can also customize this [in the last step of the Subnet wizard](#configure-contract-deployment-whitelist). If you'd like to restrict the contract deployer to a specific list of addresses, you can set the `contractDeployerAllowListConfig` to a JSON object with the following properties:
-
-```json
-"contractDeployerAllowListConfig": {
-  "blockTimestamp": 0,
-  "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC","0x0000...", "... and more"]
-}
-```
-
-Admin addresses can deploy new contracts and add new Admin and Deployer addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000000`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers)
-
-#### `contractNativeMinterConfig`
-
-This configuration lets you use a smart contract to mint native tokens in your Subnet. This is useful if you want to use your own token minting system.
-
-If you'd like to use a smart contract to mint native tokens, you can set the `contractNativeMinterConfig` to a JSON object with the following properties:
-
-```json
-"contractDeployerAllowListConfig": {
-  "blockTimestamp": 0,
-  "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC","0x0000...", "... and more"]
-}
-```
-
-Admin addresses can add new Admin and Minter addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
-
-#### `txAllowListConfig`
-
-This configures allows you to specify which addresses are authorized to make transactions. It's especially useful if you're building a private network. If you'd like to restrict the transaction sender to a specific list of addresses, you can set the `txAllowListConfig` to a JSON object with the following properties:
-
-```json
-"txAllowListConfig": {
-  "blockTimestamp": 0,
-  "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC","0x0000...", "... and more"]
-}
-```
-
-Admin addresses can add new Admin and Allowed addresses. Precompiled contract is deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
-
-### Genesis Block
-
-This configuration is used to define the genesis block header. You generally don't need to change these. (except the `gasLimit` field)
-
-#### `nonce`
-
-The result of the mining process iteration is this value. It can be any value in the genesis block, which is commonly set to `0x0`.
-
-#### `timestamp`
-
-The timestamp of the creation of the genesis block.
-
-#### `extraData`
-
-Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
-
-#### `gasLimit`
-
-The total amount of gas that can be used in a single block. It should be set to the same value as in [the fee config](#fee-config). The value `0x7a1200` is hexadecimal and it's equal to `8,000,000`.
-
-#### `difficulty`
-
-The difficulty level applied during the nonce discovering of this block. It is usually set to `0x0` for the genesis block.
-
-#### `mixHash`
-
-[Quotation from Explanation of genesis file](#resources)
-
-> The combination of nonce and `mixHash` must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
-
-This isn't so important for the genesis block. You can set it to `0x0000000000000000000000000000000000000000000000000000000000000000`.
-
-#### `coinbase`
-
-This is the address of the miner who mined the genesis block. It is usually set to `0x0000000000000000000000000000000000000000` for the genesis block.
-
-#### `parentHash`
-
-This is the Keccak 256-bit hash of the entire parent block’s header. It is usually set to `0x0000000000000000000000000000000000000000000000000000000000000000` for the genesis block.
-
-#### `gasUsed`
-
-This is the amount of gas used by the genesis block. It is usually set to `0x0`.
-
-#### `number`
-
-This is the number of the genesis block. It is usually set to `0x0`.
-
-#### `airdropHash` `baseFeePerGas` `airdropAmount`
-
-You can remove or leave these fields as they are. I'd recommend removing them. I'm not sure what they do.
-
-### Native Token Allocation
-
-We've done this part of the configuration [using the wizard](#airdropping-native-tokens). It's pretty straightforward. You can set the `alloc` to a JSON object with the following properties:
-
-```json
-{
-  "address_without_0x": {
-    "balance": "balance"
-  }
-}
-```
-
-Two important things to notice here:
-
-- The `address_without_0x` is the address of the account that will receive the tokens. Must **NOT** include the `0x` prefix.
-- Balance is the amount of tokens that will be allocated **in wei** to the account.
-
-In our genesis file. The balance is set to `0xd3c21bcecceda1000000` which corresponds to `1000000000000000000000000` in decimal. You can also type in the balance in decimal. Notice that this number is in wei and it's equal to 1,000,000 AVAX. You can use [Snowtrace `unitconverter`](https://snowtrace.io/unitconverter) to convert between units.
-
-## Creating a Custom Genesis File
-
-We learned a lot! Now we can create our genesis file!
-
-I'd like to create a Subnet where people can earn native tokens by playing a simple game.
-
-The network doesn't need to be very fast. I'll set the transaction fees high because the game will mint native tokens to players so we should be burning some of them to help inflation.
-
-To get started, create a new file named `genesis.json` and fill it with the following content:
-
-```json
-{
-  "config": {
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "SubnetEVMTimestamp": 0
-  },
-  "alloc": {},
-  "nonce": "0x0",
-  "timestamp": "0x0",
-  "extraData": "0x00",
-  "gasLimit": "change me",
-  "difficulty": "0x0",
-  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "0x0000000000000000000000000000000000000000",
-  "number": "0x0",
-  "gasUsed": "0x0",
-  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-}
-```
-
-This is a boilerplate genesis file. We are going to fill in the fields that we need.
-
-### Setting the Chain Id
-
-The first thing to do is to pick a unique [chain id](#chainid) for our Subnet. We can check [chainlist](https://chainlist.org/) to find a chain id that is not used. I'll go with `321123` because it looks good.
-
-```json
-{
-  "config": {
-    "chainId": 321123
-  }
-}
-```
-
-### Configuring Fees and Gas
-
-I have an old computer so I want my Subnet to be - slow. So, I'll set the `gasLimit` to `5,000,000`, the `targetBlockRate` to 5 seconds and the `targetGas` to `10000000`.
-
-Then I'll set the `minBaseFee` to 60 nAvax (gwei) which is `60000000000` wei to make sure that the transaction fees are high enough to help the network.
-
-I'll set the `baseFeeChangeDenominator` to `50` because I don't want the base fee to change to be rapidly changing. Then I'll set the `minBlockGasCost` to `0`, `maxBlockGasCost` to `5000000` and the `blockGasCostStep` to `100000` as I don't want the block gas cost to change too quickly.
-
-The final configuration looks like:
-
-```json
-{
-  "config": {
-    "feeConfig": {
-      "gasLimit": 5000000,
-      "targetBlockRate": 5,
-      "minBaseFee": 60000000000,
-      "targetGas": 10000000,
-      "baseFeeChangeDenominator": 50,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 5000000,
-      "blockGasCostStep": 10000
-    }
-  }
-}
-```
-
-Almost forgot! We should also update the `gasLimit` in the genesis block header.
-
-```json
-{
-  "config": {
-    ...
-  },
-  "gasLimit": "5000000"
-}
-```
-
-### Allocating Native Tokens
-
-Let's allocate some native tokens for our address. You should use your own address here. `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b` is my address.
-
-```json
-{
-  "alloc": {
-    "0000000b9af48743ef1188f3F20c9b8B90F52a5b": {
-      "balance": "0x3635C9ADC5DEA00000"
-    }
-  }
-}
-```
-
-I'm being generous and allocating only 1000 tokens for myself. 1000 tokens corresponds to `1000000000000000000000` in wei and that's `0x3635C9ADC5DEA00000` in hexadecimal. Keep in mind that you can also write this in decimal. I'm going to use the hexadecimal notation here because it looks better. You can use [Decimal to Hexadecimal converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to convert between units.
-
-### Minting Native Tokens
-
-We will use [`contractNativeMinterConfig`](#contractnativeminterconfig) to mint native tokens in the game.
-
-We will add our address as an Admin so we can add new Minter and Admin addresses in the future.
-
-**Use your own address** instead of `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b`.
-
-```json
-{
-  "config": {
-    "contractNativeMinterConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
-    }
-  }
-}
-```
-
-### Restricting Contract Deployers
-
-We will deploy the contracts and players will use those contracts to play the game. So we don't need other people to deploy the contracts. We can restrict the smart contract deployers by using [`contractDeployerAllowListConfig`](#contractdeployerallowlistconfig).
-
-We will add our address as an Admin so we can add new Deployer and Admin addresses in the future.
-
-**Use your own address** instead of `0x0000000b9af48743ef1188f3F20c9b8B90F52a5b`.
-
-```json
-{
-  "config": {
-    "contractDeployerAllowListConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
-    }
-  }
-}
-```
-
-Now we're done! The final config looks like:
-
-```json
-{
-  "config": {
-    "chainId": 321123,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "SubnetEVMTimestamp": 0,
-    "feeConfig": {
-      "gasLimit": 5000000,
-      "targetBlockRate": 5,
-      "minBaseFee": 60000000000,
-      "targetGas": 10000000,
-      "baseFeeChangeDenominator": 50,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 5000000,
-      "blockGasCostStep": 10000
-    },
-    "contractDeployerAllowListConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
-    },
-    "contractNativeMinterConfig": {
-      "blockTimestamp": 0,
-      "adminAddresses": ["0x0000000b9af48743ef1188f3F20c9b8B90F52a5b"]
-    }
-  },
-  "alloc": {
-    "0000000b9af48743ef1188f3F20c9b8B90F52a5b": {
-      "balance": "0x3635C9ADC5DEA00000"
-    }
-  },
-  "nonce": "0x0",
-  "timestamp": "0x0",
-  "extraData": "0x00",
-  "gasLimit": "5000000",
-  "difficulty": "0x0",
-  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "0x0000000000000000000000000000000000000000",
-  "number": "0x0",
-  "gasUsed": "0x0",
-  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-}
-```
-
-## Creating and Deploying the Subnet Using the Custom Genesis File
-
-We will use `genesis.json` to create a new Subnet. This part is pretty simple.
-
-Let's first delete the old Subnet that we created using the wizard.
-
-```bash
-avalanche subnet delete testSubnet
-
-> Deleted Subnet
-```
-
-Next, we will create a new Subnet using the genesis file.
-
-```bash
-## avalanche subnet create <SubnetName> --genesis <filepath>
-
-avalanche subnet create game --genesis ./genesis.json
-## Use SubnetEVM
-
-> Using specified genesis
-> ✔ SubnetEVM
-> Successfully created genesis
-```
-
-Now let's deploy it!
-
-```bash
-## avalanche subnet deploy <SubnetName>
-avalanche subnet deploy game
-
-## choose local network as deployment target
-
-> MetaMask connection details (any node URL from above works):
-> RPC URL:          http://127.0.0.1:27200/ext/bc/HGwbjkQsvrqy2mncMWsA2YnrSWEybVmLcZJwz7nb5gNVvcPoi/rpc
-> Funded address:   0x0000000b9af48743ef1188f3F20c9b8B90F52a5b with 1000
-> Network name:     game
-> Chain ID:         321123
-> Currency Symbol:  TEST
-```
-
-Awesomeness! Great work!
-
-## Deploying the Game Contract
-
-### MetaMask Configuration
-
-Before going to the next step, make sure you've added the Subnet to MetaMask by following the same steps in the [`Deploying the Subnet`](#deploying-the-subnet) section. This time you don't need to import the account as you're already using your own account. When adding the network, I've set the currency symbol to `LUCK`.
-
-![MetaMask account look](.github/images/metamask3.png)
-
-### MetaMask Gas Configuration **! IMPORTANT**
-
-Because we've set the base fee to 60 nAvax, you may need to increase the `Max
-priority fee` when confirming the transaction on MetaMask popup. Otherwise the transaction may fail.
-
-Here is how:
-
-![change gas fee](.github/images/changegasfee.gif)
-
-If you're using the _Enhanced Gas Fee UI_ which is an experimental feature in MetaMask, you can set the gas fee to _Aggressive_ and that should work.
-
-![aggressive](.github/images/aggressive.gif)
-
-After making a few transactions, MetaMask should start automatically adjusting the gas fee to the optimal value.
-
-### Deploying the Contract
-
-We will use [remix](https://remix.ethereum.org/) to deploy the game contract on the Subnet.
-
-Go to the website and create a blank workspace.
-
-![workspace creation](.github/images/workspaceremix.gif)
-
-Next, create a folder and under that folder, create two files with the following contents:
-
-![new folder](.github/images/newfolder.png)
-
-#### NativeMinterInterface.sol
-
-This is the `ContractNativeMinter` interface. We know the contract is deployed at `0x0200000000000000000000000000000000000001`. [See more about it here.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
-
-```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
-// SPDX-License-Identifier: MIT
-
-pragma solidity >=0.8.0;
-
-interface NativeMinterInterface {
-    // Set [addr] to have the admin role over the minter list
-    function setAdmin(address addr) external;
-
-    // Set [addr] to be enabled on the minter list
-    function setEnabled(address addr) external;
-
-    // Set [addr] to have no role over the minter list
-    function setNone(address addr) external;
-
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
-
-    // Mint [amount] number of native coins and send to [addr]
-    function mintNativeCoin(address addr, uint256 amount) external;
-}
-```
-
-#### Game.sol
-
-A simple contract I made for the sake of this tutorial.
-
-Basically, the player calls the `play` function with sending some `LUCK` tokens. The function generates a random number and by 50% chance, the player gets 2x the amount of tokens; otherwise, the tokens are stuck in the contract.
-
-```solidity
-pragma solidity ^0.8.7;
-import "./NativeMinterInterface.sol";
-
-contract Game {
-
-    // native minter is deployed at 0x0200000000000000000000000000000000000001
-    NativeMinterInterface minter = NativeMinterInterface(0x0200000000000000000000000000000000000001);
-
-    function random() internal view returns (uint) {
-        // never use this random number generation in a real project
-        // it's deterministic and easily hackable.
-        return uint(keccak256(abi.encodePacked(block.timestamp)));
-    }
-
-    function play() external payable {
-        uint256 randomNumber = random();
-
-        if(randomNumber % 2 == 0){
-            minter.mintNativeCoin(
-                msg.sender,
-                msg.value * 2
-            );
-        }
-    }
-}
-```
-
-When you're done, it should look like this:
-
-![files](.github/images/files.png)
-
-#### Compiling and Deploying
-
-After creating the files, we should compile `Game.sol`.
-
-![Compile](.github/images/compiling.png)
-
-Go to the deploy tab, choose injected web3 as environment - connect your wallet
-
-- then choose Game in the contract dropdown. Then click the deploy button.
-
-![Deploy](.github/images/deploying.png)
-
-Confirm the transaction with your MetaMask wallet.
-
-![Deployed contracts](.github/images/game_deployed.png)
-
-Yay! We deployed a smart contract in our Subnet! That sounds fantastic!
-
-### Setting Game Contract as a Minter
-
-We're admin in [`contractNativeMinterConfig`](#contractnativeminterconfig). Which means we can add new Minters to the network using `NativeMinterInterface`.
-
-We already created `NativeMinterInterface.sol`
-
-Go to remix and compile `NativeMinterInterface.sol` by following the same steps as `Game.sol`.
-
-Go to the deploy tab in remix, and choose NativeMinterInterface in the contract dropdown. Then type in the address `0x0200000000000000000000000000000000000001` to `Load contract from Address` then click `At Address`
-
-![Interface steps](.github/images/interface.png)
-
-After clicking the button, you should see the `NATIVEMINTERINTERFACE AT 0X02..` under the `Deployed Contracts` section.
-
-We will call the `setEnabled` function of `NativeMinter` contract with the address of `Game` contract to set the `Game` contract as a minter.
-
-![Set minter](.github/images/setenabled.png)
-
-Confirm the transaction with your MetaMask wallet. We can call this function because we've added our address as an admin in the `contractNativeMinterConfig` section.
-
-Now the `Game.sol` contract is a minter and can mint native tokens!
-
-### Play the Game
-
-In the deploy tab:
-
-- Set the value to 100 Ether or any other amount you want to play with.
-- Find `Game` contract under deployed contracts section in remix.
-- Call `play` function.
-- Confirm the transaction with your MetaMask wallet.
-
-![play](.github/images/play.png)
-
-Then check your MetaMask wallet.
-
-![result](.github/images/lucky.png)
-
-I first played with 10 and then 100 tokens. Seems like it's my lucky day! I already earned 110 LUCK tokens. As you can see, our smart contract **can mint native tokens!**
-
-**Let's go all in!**
-
-![out of luck](.github/images/outofluck.png)
-
-I'm out of **luck**!
-
-As an admin in `NativeMinter` contract, I can mint native tokens as well! Let's mint ourselves 1000 LUCK tokens.
-
-![minting native tokens](.github/images/mintingtomyself.png)
-
-And my luck is back!
-
-![luck back](.github/images/luckisback.png)
+- Bridge Operator Has so Much Power
+  - Our bridge uses only one admin account to handle bridge funds. If that one private key gets hacked, hacker could easily steal all the funds.
+- Smart Contracts
+  - Contracts used in this tutorial are not audited.
+- Relayer Application
+  - There might be some bugs inside our relayer application.
+  - We only have one relayer application running. Computer that runs the relayer application might encounter an error, maybe an electricity outage or we might need to update and restart the relayer application itself. In that case, our bridge would stop working for that time frame and users would not be able to bridge their tokens.
+
+### Suggestions
+
+- More Bridge Operators
+  - Rather than trusting on a single account, we might use a multi-sig wallet. For example, it could be a 4 of 5 multi-sig wallet. Allowing us to confirm transactions with 5 accounts and on 4 confirmation it would allow for execution. In that case, we would have a multi-sig smart contract and that contract would be the admin of the bridges. There will be 5 different relayer applications running with 5 different accounts' private keys. Each of them would send transactions to the multi-sig smart contract. When 4 of them sends the transaction, smart contract would execute the mint or release function on the bridge contract. This approach would increases both the security and ease of maintenance of our bridge. Because of this approach, when one computer that runs the relayer application has to have a maintenance or have an electricity outage bridge would function normally. But, just because we have more bridge operators our bridge is not fully secure.
+- Auditing Smart Contracts
+  - Smart Contracts should be audited. But, do not forget audited does not mean it is bug free.
+- Testing Relayer Application
+  - Relayer application should be audited and tested as well.
+  - If we decide to use a multi-sig wallet we have to update our relayer application to call relevant functions on the multi-sig contract rather than directly calling bridge contracts.
 
 ## Conclusion
 
-This is the end of the tutorial. I hope you've enjoyed it as much as I've enjoyed writing it. Subnets are literally amazing and I'm very excited for the future of this technology.
+Congratulations! You have created a bridge between AVAX C-Chain and your Subnet to use an ERC-20 token as a gas token.
 
-You now have the ability to create your own Subnet and customize it to your needs. Go play with the parameters, try something new, and enjoy!
+Things achieved:
 
-Please feel free to create an issue if you have any questions!
+- Understood general design of bridges.
+- Implemented bridge contracts.
+- Used NativeMinter precompile.
+- Created a relayer application to communicate with both chains.
+- Tested relayer to make sure communication between chains are established.
+- Used ERC-20 token as the gas token on the Subnet.
 
-Thanks for reading :heart:
+## References
 
-### Resources
-
-- [AVAX Docs](https://docs.avax.network/subnets)
-- [Explanation of genesis file](https://gist.github.com/0mkara/b953cc2585b18ee098cd#file-genesis-md)
+- [Further Readings](https://github.com/securing/SCSVS/blob/prerelease/SCSVSv2/2.0/0x200-Components/0x206-C6-Bridge.md)
