@@ -3,105 +3,181 @@ tags:
   - Tooling
   - AvalancheJS
 description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
-pagination_label: Manual Creation of Public-Private Key Pairs using AvalancheJS
-sidebar_label: Generate Key Pair
-sidebar_position: 0
+pagination_label: Manage X-Chain Keys
+sidebar_label: Manage X-Chain Keys
+sidebar_position: 6
 ---
 
-# Manual Creation of Public-Private Key Pairs using AvalancheJS
+# Manage X-Chain Keys
 
-## Generate a Mnemonic
+AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
 
-To begin, we'll create a mnemonic phrase with [AvalancheJS](/tooling/avalanchejs-overview.md). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portuguese, Chinese Simplified and Chinese Traditional.
+```ts
+import { Avalanche, BinTools, Buffer, BN } from "avalanche"
 
-First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
+let bintools = BinTools.getInstance()
 
-```typescript
-import { Mnemonic } from "avalanche"
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const strength: number = 256
-const wordlist = mnemonic.getWordlists("english") as string[]
-const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
-console.log(m)
-// "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
+let myNetworkID = 12345 //default is 1, we want to override that for our local network
+let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU" // The X-Chain blockchainID on this network
+let ava = new avalanche.Avalanche(
+  "localhost",
+  9650,
+  "http",
+  myNetworkID,
+  myBlockchainID
+)
+let xchain = ava.XChain() //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Derive Addresses
+## Accessing the Keychain
 
-After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) Keypairs.
+The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
 
-```typescript
-import HDNode from "avalanche/dist/utils/hdnode"
-import { Avalanche, Mnemonic, Buffer } from "avalanche"
-import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm"
-import { ethers } from "ethers"
-
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
-
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const m: string =
-  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
-const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
-const hdnode: HDNode = new HDNode(seed)
-
-const keyChain: KeyChain = cchain.newKeyChain()
-
-const cAddresses: string[] = []
-
-for (let i: number = 0; i <= 2; i++) {
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  cAddresses.push(cchainAddress)
-}
-console.log(cAddresses)
-// [
-//   '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
-//   '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
-//   '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
-// ]
+```ts
+let myKeychain = xchain.keyChain()
 ```
 
-## Generate Private Keys from a Mnemonic
+This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
 
-As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
+## Creating X-Chain Key Pairs
 
-For example, if you want to generate the private keys for the first 3 address in the C Chain keychain:
+The KeyChain has the ability to create new Keypairs for you and return the address associated with the key pair.
 
-- [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://testnet.snowtrace.io/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559)
-- [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C)
-- [0xa14dFb7d8593c44a47A07298eCEA774557036ff3](https://testnet.snowtrace.io/address/0xa14dFb7d8593c44a47A07298eCEA774557036ff3)
+```ts
+let newAddress1 = myKeychain.makeKey() //returns a Buffer for the address
+```
 
-you might update the example script above to the following:
+You may also import your existing private key into the KeyChain using either a Buffer…
 
-```typescript
-const cAddresses: string[] = []
-const privateKeys: string[] = []
-for (let i: number = 0; i <= 2; i++) {
-  // Deriving the _i_th external BIP44 C-Chain address
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  // Converting the BIP44 addresses to hexadecimal addresses
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  privateKeys.push(child.privateKey.toString("hex"))
-  cAddresses.push(cchainAddress)
+```ts
+let mypk = bintools.avaDeserialize(
+  "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+) //returns a Buffer
+let newAddress2 = myKeychain.importKey(mypk) //returns a Buffer for the address
+```
+
+… or an Avalanche serialized string works, too:
+
+```ts
+let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+let newAddress2 = myKeychain.importKey(mypk) //returns a Buffer for the address
+```
+
+## Working with Keychains
+
+The X-Chain's KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+
+```text
+let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
+let addressStrings = myKeychain.getAddressStrings(); //returns an array of strings for the addresses
+let exists = myKeychain.hasKey(newAddress1); //returns true if the address is managed
+let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
+```
+
+## Working with Keypairs
+
+The X-Chain's keypair has standardized keypair functionality. The following operations are available on any keypair that implements this interface.
+
+```ts
+let address = keypair.getAddress() //returns Buffer
+let addressString = keypair.getAddressString() //returns string
+
+let pubk = keypair.getPublicKey() //returns Buffer
+let pubkstr = keypair.getPublicKeyString() //returns a CB58 encoded string
+
+let privk = keypair.getPrivateKey() //returns Buffer
+let privkstr = keypair.getPrivateKeyString() //returns a CB58 encoded string
+
+keypair.generateKey() //creates a new random KeyPair
+
+let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"
+let successul = keypair.importKey(mypk) //returns boolean if private key imported successfully
+
+let message = Buffer.from("Wubalubadubdub")
+let signature = keypair.sign(message) //returns a Buffer with the signature
+
+let signerPubk = keypair.recover(message, signature)
+let isValid = keypair.verify(message, signature) //returns a boolean
+```
+
+## Encode Bech32 Addresses
+
+The X-Chain and the P-Chain use Bech32 to encode addresses. Note, the C-Chain also uses Bech32 to encode addresses for importing and exporting assets however the EVM, in general, uses hex encoding for addresses. Ex: `0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf`.
+
+Each Bech32 address is composed of the following components
+
+1. A Human-Readable Part (HRP).
+2. The number `1` is a separator (the last digit `1` seen is considered the separator).
+3. Base-32 encoded string for the data part of the address (the 20-byte address itself).
+4. A 6-character base-32 encoded error correction code using the BCH algorithm.
+
+For example the following Bech32 address, `X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
+
+1. HRP: `avax`
+2. Separator: `1`
+3. Address: `9rknw8l0grnfunjrzwxlxync6zrlu33y`
+4. Checksum: `2jxhrg`
+
+Depending on the `networkID` which is passed in when instantiating `Avalanche` the encoded addresses will have a distinctive HRP per each network. AvalancheJS also has address encoding for past networks `cascade`, `denali`, and `everest`.
+
+- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+
+Here's the mapping of `networkID` to bech32 HRP.
+
+```ts
+export const NetworkIDToHRP = {
+  0: "custom",
+  1: "avax",
+  2: "cascade",
+  3: "denali",
+  4: "everest",
+  5: "fuji",
+  1337: "custom",
+  12345: "local",
 }
-console.log({ cAddresses, privateKeys })
-// {
-//   cAddresses: [
-//     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
-//     '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
-//     '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
-//   ],
-//   privateKeys: [
-//     'cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc',
-//     'b85479b26bc8fbada4737e90ab2133204f2fa2a9ea33c1e0de4452cbf8fa3be4',
-//     'c72e18ea0f9aa5457396e3bf810e9de8df0177c8e4e5bf83a85f871512d645a9'
-//   ]
-// }
+```
+
+Change the HRP of the bech32 address by passing in a different networkID when instantiating `Avalanche`.
+
+```ts
+// mainnet
+const networkID = 1
+const avalanche = new Avalanche(undefined, undefined, undefined, networkID)
+
+// [ 'X-avax1j2j0vzttatv73gr7j4tnd7rp4el3ngcyjy0pre' ]
+// [ 'X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg' ]
+```
+
+```ts
+// fuji
+const networkID = 5
+const avalanche = new Avalanche(undefined, undefined, undefined, networkID)
+
+// [ 'X-fuji1j2j0vzttatv73gr7j4tnd7rp4el3ngcy7kt70x' ]
+// [ 'X-fuji19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h' ]
+```
+
+```ts
+// custom
+const networkID = 1337 // also networkID = 0
+const avalanche = new Avalanche(undefined, undefined, undefined, networkID)
+
+// [ 'X-custom1j2j0vzttatv73gr7j4tnd7rp4el3ngcyp7amyv' ]
+// [ 'X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya' ]
+```
+
+```ts
+// mainnet
+const networkID = 12345
+const avalanche = new Avalanche(undefined, undefined, undefined, networkID)
+
+// [ 'X-local1j2j0vzttatv73gr7j4tnd7rp4el3ngcythj8q3' ]
+// [ 'X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq' ]
 ```
