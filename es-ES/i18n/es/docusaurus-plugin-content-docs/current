@@ -1,1156 +1,639 @@
 ---
 tags:
   - Nodes
-description: This documents list all available configuration and flags for AvalancheGo.
-sidebar_label: AvalancheGo Configs + Flags
-pagination_label: AvalancheGo Configs and Flags
-sidebar_position: 0
+description: Reference for all available chain config options and flags.
+sidebar_label: Chain Configs
+pagination_label: Chain Configs
+sidebar_position: 1
 ---
 
-# AvalancheGo Configs and Flags
+# Chain Configs
 
-<!-- markdownlint-disable MD001 -->
+Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
-You can specify the configuration of a node with the arguments below.
+AvalancheGo looks for these files in the directory specified by `--chain-config-dir` AvalancheGo flag, as documented [here](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value defaults to `$HOME/.avalanchego/configs/chains`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
 
-## Data Directory
-
-#### `--data-dir` (string)
-
-Sets the base data directory where default sub-directories will be placed unless otherwise specified. Defaults to `$HOME/.avalanchego`.
-
-## Config File
-
-#### `--config-file` (string)
-
-Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file. This flag is ignored if `--config-file-content` is specified.
-
-Example JSON config file:
-
-```json
-{
-  "log-level": "debug"
-}
-```
+This also applies to Subnets, for example, if a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 :::tip
-[Install Script](/nodes/run/with-installer.md) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if [AvalancheGo is built from source](/nodes/run/node-manually.md), you would need to create it manually if needed.
-:::
 
-#### `--config-file-content` (string)
-
-As an alternative to `--config-file`, it allows specifying base64 encoded config content.
-
-#### `--config-file-content-type` (string)
-
-Specifies the format of the base64 encoded config content. JSON, TOML, YAML are among currently supported file format (see [here](https://github.com/spf13/viper#reading-config-files) for full list). Defaults to `JSON`.
-
-## APIs
-
-#### `--api-admin-enabled` (boolean)
-
-If set to `true`, this node will expose the Admin API. Defaults to `false`. See [here](/reference/avalanchego/admin-api.md) for more information.
-
-#### `--api-auth-required` (boolean)
-
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](/reference/avalanchego/auth-api.md) for more information.
-
-#### `--api-auth-password` (string)
-
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](/reference/avalanchego/auth-api.md) for more information.
-
-#### `--api-auth-password-file` (string)
-
-Password file used to initially create/validate API authorization tokens. Ignored if `---api-auth-password` is specified. Leading and trailing whitespace is removed from the password. Can be changed via API call.
-
-#### `--api-health-enabled` (boolean)
-
-If set to `false`, this node will not expose the Health API. Defaults to `true`. See [here](/reference/avalanchego/health-api.md) for more information.
-
-#### `--index-enabled` (boolean)
-
-If set to `true`, this node will enable the indexer and the Index API will be available. Defaults to `false`. See [here](/reference/avalanchego/index-api.md) for more information.
-
-#### `--api-info-enabled` (boolean)
-
-If set to `false`, this node will not expose the Info API. Defaults to `true`. See [here](/reference/avalanchego/info-api.md) for more information.
-
-#### `--api-ipcs-enabled` (boolean)
-
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](/reference/avalanchego/ipc-api.md) for more information.
-
-#### `--api-keystore-enabled` (boolean)
-
-If set to `true`, this node will expose the Keystore API. Defaults to `false`. See [here](/reference/avalanchego/keystore-api.md) for more information.
-
-#### `--api-metrics-enabled` (boolean)
-
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](/reference/avalanchego/metrics-api.md) for more information.
-
-#### `--http-shutdown-wait` (duration)
-
-Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to `0s`.
-
-#### `--http-shutdown-timeout` (duration)
-
-Maximum duration to wait for existing connections to complete during node shutdown. Defaults to `10s`.
-
-## Bootstrapping
-
-#### `--bootstrap-beacon-connection-timeout` (duration)
-
-Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
-
-#### `--bootstrap-ids` (string)
-
-Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--bootstrap-ips`. The default value depends on the network ID.
-
-#### `--bootstrap-ips` (string)
-
-Bootstrap IPs is a comma-separated list of IP:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be same with number of given `--bootstrap-ids`. The default value depends on the network ID.
-
-#### `--bootstrap-retry-enabled` (boolean)
-
-If set to `false`, will not retry bootstrapping if it fails. Defaults to `true`.
-
-#### `--bootstrap-retry-warn-frequency` (uint)
-
-Specifies how many times bootstrap should be retried before warning the operator. Defaults to `50`.
-
-#### `--bootstrap-ancestors-max-containers-sent` (uint)
-
-Max number of containers in an `Ancestors` message sent by this node. Defaults to `2000`.
-
-#### `--bootstrap-ancestors-max-containers-received` (unit)
-
-This node reads at most this many containers from an incoming `Ancestors` message. Defaults to `2000`.
-
-#### `--bootstrap-max-time-get-ancestors` (duration)
-
-Max Time to spend fetching a container and its ancestors when responding to a GetAncestors message. Defaults to `50ms`.
-
-## State Syncing
-
-#### `--state-sync-ids` (string)
-
-State sync IDs is a comma-separated list of validator IDs. The specified validators will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The number of given IDs here must be same with number of given `--state-sync-ips`. The default value is empty, which results in all validators being sampled.
-
-#### `--state-sync-ips` (string)
-
-State sync IPs is a comma-separated list of IP:port pairs. These IP Addresses will be contacted to get and authenticate the starting point (state summary) for state sync. An example setting of this field would be `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here must be the same with the number of given `--state-sync-ids`.
-
-## Partial Sync Primary Network
-
-#### `--partial-sync-primary-network` (string)
-
-Partial sync enables non-validators to optionally sync only the P-chain on the primary network.
-
-## Chain Configs
-
-Some blockchains allow the node operator to provide custom configurations for individual blockchains. These custom configurations are broken down into two categories: network upgrades and optional chain configurations. AvalancheGo reads in these configurations from the chain configuration directory and passes them into the VM on initialization.
-
-#### `--chain-config-dir` (string)
-
-Specifies the directory that contains chain configs, as described [here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--chain-config-content` is specified.
-
-:::note
-Please replace `chain-config-dir` and `blockchainID` with their actual values.
-:::
-
-Network upgrades are passed in from the location: `chain-config-dir`/`blockchainID`/`upgrade.*`. Upgrade files are typically json encoded and therefore named `upgrade.json`. However, the format of the file is VM dependent. After a blockchain has activated a network upgrade, the same upgrade configuration must always be passed in to ensure that the network upgrades activate at the correct time.
-
-The chain configs are passed in from the location `chain-config-dir`/`blockchainID`/`config.*`. Upgrade files are typically json encoded and therefore named `upgrade.json`. However, the format of the file is VM dependent. This configuration is used by the VM to handle optional configuration flags such as enabling/disabling APIs, updating log level, etc. The chain configuration is intended to provide optional configuration parameters and the VM will use default values if nothing is passed in.
-
-Full reference for all configuration options for some standard chains can be found in a separate [chain config flags](chain-config-flags.md) document.
-
-Full reference for `subnet-evm` upgrade configuration can be found in a separate [Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md) document.
-
-#### `--chain-config-content` (string)
-
-As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
-
-#### `--chain-aliases-file` (string)
-
-Path to JSON file that defines aliases for Blockchain IDs. Defaults to `~/.avalanchego/configs/chains/aliases.json`. This flag is ignored if `--chain-aliases-file-content` is specified. Example content:
-
-```json
-{
-  "q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi": ["DFK"]
-}
-```
-
-The above example aliases the Blockchain whose ID is `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain aliases are added after adding primary network aliases and before any changes to the aliases via the admin API. This means that the first alias included for a Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the full blockchainID. The Primary Alias is used in all metrics and logs.
-
-#### `--chain-aliases-file-content` (string)
-
-As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded aliases for Blockchains.
-
-#### `--chain-data-dir` (string)
-
-Chain specific data directory. Defaults to `$HOME/.avalanchego/chainData`.
-
-## Database
-
-##### `--db-dir` (string, file path)
-
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
-
-##### `--db-type` (string)
-
-Specifies the type of database to use. Must be one of `LevelDB` or `memdb`. `memdb` is an in-memory, non-persisted database.
-
-:::note
-
-`memdb` stores everything in memory. So if you have a 900 GiB LevelDB instance, then using `memdb` you’d need 900 GiB of RAM. `memdb` is useful for fast one-off testing, not for running an actual node (on Fuji or Mainnet). Also note that `memdb` doesn’t persist after restart. So any time you restart the node it would start syncing from scratch.
-
-:::
-
-### Database Config
-
-#### `--db-config-file` (string)
-
-Path to the database config file. Ignored if `--config-file-content` is specified.
-
-#### `--db-config-file-content` (string)
-
-As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
-
-#### LevelDB Config
-
-A LevelDB config file must be JSON and may have these keys. Any keys not given will receive the default value.
-
-```go
-{
-    // BlockCacheCapacity defines the capacity of the 'sorted table' block caching.
-    // Use -1 for zero.
-    //
-    // The default value is 12MiB.
-    "blockCacheCapacity": int
-
-    // BlockSize is the minimum uncompressed size in bytes of each 'sorted table'
-    // block.
-    //
-    // The default value is 4KiB.
-    "blockSize": int
-
-    // CompactionExpandLimitFactor limits compaction size after expanded.
-    // This will be multiplied by table size limit at compaction target level.
-    //
-    // The default value is 25.
-    "compactionExpandLimitFactor": int
-
-    // CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
-    // that a single 'sorted table' generates.  This will be multiplied by
-    // table size limit at grandparent level.
-    //
-    // The default value is 10.
-    "compactionGPOverlapsFactor": int
-
-    // CompactionL0Trigger defines number of 'sorted table' at level-0 that will
-    // trigger compaction.
-    //
-    // The default value is 4.
-    "compactionL0Trigger": int
-
-    // CompactionSourceLimitFactor limits compaction source size. This doesn't apply to
-    // level-0.
-    // This will be multiplied by table size limit at compaction target level.
-    //
-    // The default value is 1.
-    "compactionSourceLimitFactor": int
-
-    // CompactionTableSize limits size of 'sorted table' that compaction generates.
-    // The limits for each level will be calculated as:
-    //   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
-    // The multiplier for each level can also fine-tuned using CompactionTableSizeMultiplierPerLevel.
-    //
-    // The default value is 2MiB.
-    "compactionTableSize": int
-
-    // CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
-    //
-    // The default value is 1.
-    "compactionTableSizeMultiplier": float
-
-    // CompactionTableSizeMultiplierPerLevel defines per-level multiplier for
-    // CompactionTableSize.
-    // Use zero to skip a level.
-    //
-    // The default value is nil.
-    "compactionTableSizeMultiplierPerLevel": []float
-
-    // CompactionTotalSize limits total size of 'sorted table' for each level.
-    // The limits for each level will be calculated as:
-    //   CompactionTotalSize * (CompactionTotalSizeMultiplier ^ Level)
-    // The multiplier for each level can also fine-tuned using
-    // CompactionTotalSizeMultiplierPerLevel.
-    //
-    // The default value is 10MiB.
-    "compactionTotalSize": int
-
-    // CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
-    //
-    // The default value is 10.
-    "compactionTotalSizeMultiplier": float
-
-    // DisableSeeksCompaction allows disabling 'seeks triggered compaction'.
-    // The purpose of 'seeks triggered compaction' is to optimize database so
-    // that 'level seeks' can be minimized, however this might generate many
-    // small compaction which may not preferable.
-    //
-    // The default is true.
-    "disableSeeksCompaction": bool
-
-    // OpenFilesCacheCapacity defines the capacity of the open files caching.
-    // Use -1 for zero, this has same effect as specifying NoCacher to OpenFilesCacher.
-    //
-    // The default value is 1024.
-    "openFilesCacheCapacity": int
-
-    // WriteBuffer defines maximum size of a 'memdb' before flushed to
-    // 'sorted table'. 'memdb' is an in-memory DB backed by an on-disk
-    // unsorted journal.
-    //
-    // LevelDB may held up to two 'memdb' at the same time.
-    //
-    // The default value is 6MiB.
-    "writeBuffer": int
-
-    // FilterBitsPerKey is the number of bits to add to the bloom filter per
-    // key.
-    //
-    // The default value is 10.
-    "filterBitsPerKey": int
-
-    // MaxManifestFileSize is the maximum size limit of the MANIFEST-****** file.
-    // When the MANIFEST-****** file grows beyond this size, LevelDB will create
-    // a new MANIFEST file.
-    //
-    // The default value is infinity.
-    "maxManifestFileSize": int
-
-    // MetricUpdateFrequency is the frequency to poll LevelDB metrics in
-    // nanoseconds.
-    // If <= 0, LevelDB metrics aren't polled.
-    //
-    // The default value is 10s.
-    "metricUpdateFrequency": int
-}
-```
-
-## Genesis
-
-#### `--genesis-file` (string)
-
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data.
-
-These are the main properties in the JSON file:
-
-- `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32).
-- `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
-- `startTime`: The time of the beginning of the blockchain, it must be a Unix timestamp and it can't be a time in the future.
-- `initialStakeDuration`: The stake duration, in seconds, of the validators that exist at network genesis.
-- `initialStakeDurationOffset`: The offset, in seconds, between the start times of the validators that exist at genesis.
-- `initialStakedFunds`: A list of addresses that own the funds staked at genesis (each address must be present in `allocations` as well)
-- `initialStakers`: The validators that exist at genesis. Each element contains the `rewardAddress`, NodeID and the `delegationFee` of the validator.
-- `cChainGenesis`: The genesis info to be passed to the C-Chain.
-- `message`: A message to include in the genesis. Not required.
-
-For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
-
-#### `--genesis-file-content` (string)
-
-As an alternative to `--genesis-file`, it allows specifying base64 encoded genesis data to use.
-
-## HTTP Server
-
-#### `--http-host` (string)
-
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. You can also enter domain names as parameter.
-
-#### `--http-port` (int)
-
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
-
-#### `--http-tls-cert-file` (string, file path)
-
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-cert-file-content` is specified.
-
-#### `--http-tls-cert-file-content` (string)
-
-As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. Note that full certificate content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
-
-#### `--http-tls-enabled` (boolean)
-
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
-
-#### `--http-tls-key-file` (string, file path)
-
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-key-file-content` is specified.
-
-#### `--http-tls-key-file-content` (string)
-
-As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. Note that full private key content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
-
-#### `--http-read-timeout` (string)
-
-Maximum duration for reading the entire request, including the body. A zero or negative value means there will be no timeout.
-
-#### `--http-read-header-timeout` (string)
-
-Maximum duration to read request headers. The connection’s read deadline is reset after reading the headers. If `--http-read-header-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero, there is no timeout.
-
-#### `--http-write-timeout` (string)
-
-Maximum duration before timing out writes of the response. It is reset whenever a new request’s header is read. A zero or negative value means there will be no timeout.
-
-#### `--http-idle-timeout` (string)
-
-Maximum duration to wait for the next request when keep-alives are enabled. If `--http-idle-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero, there is no timeout.
-
-#### `--http-allowed-origins` (string)
-
-Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Example: `"https://*.avax.network https://*.avax-test.network"`
-
-#### `--http-allowed-hosts` (string)
-
-List of acceptable host names in API requests. Provide the wildcard (`'*'`) to accept requests from all hosts. API requests where the `Host` field is empty or an IP address will always be accepted. An API call whose HTTP `Host` field isn't acceptable will receive a 403 error code. Defaults to `localhost`.
-
-## IPCs
-
-#### `--ipcs-chain-ids` (string)
-
-Comma separated list of chain ids to connect to (for example `11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`). There is no default value.
-
-#### `--ipcs-path` (string)
-
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
-
-## File Descriptor Limit
-
-#### `--fd-limit` (int)
-
-Attempts to raise the process file descriptor limit to at least this value and error if the value is above the system max. Linux default `32768`.
-
-## Logging
-
-#### `--log-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
-
-The log level determines which events to log. There are 8 different levels, in order from highest priority to lowest.
-
-- `off`: No logs have this level of logging. Turns off logging.
-- `fatal`: Fatal errors that are not recoverable.
-- `error`: Errors that the node encounters, these errors were able to be recovered.
-- `warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-- `info`: Useful descriptions of node status updates.
-- `trace`: Traces container (block, vertex, transaction) job results. Useful for tracing container IDs and their outcomes.
-- `debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-- `verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
-
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `info`.
-
-#### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
-
-The log level determines which events to display to stdout. If left blank, will default to the value provided to `--log-level`.
-
-#### `--log-format` (string, `{auto, plain, colors, json}`)
-
-The structure of log format. Defaults to `auto` which formats terminal-like logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
-
-#### `--log-dir` (string, file path)
-
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`. If you are running the node as a system service (ex. using the installer script) logs will also be stored in `$HOME/var/log/syslog`.
-
-#### `--log-disable-display-plugin-logs` (boolean)
-
-Disables displaying plugin logs in stdout. Defaults to `false`.
-
-#### `--log-rotater-max-size` (uint)
-
-The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
-
-#### `--log-rotater-max-files` (uint)
-
-The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
-
-#### `--log-rotater-max-age` (uint)
-
-The maximum number of days to retain old log files based on the timestamp encoded in their filename. 0 means retain all old log files. Defaults to `0`.
-
-#### `--log-rotater-compress-enabled` (boolean)
-
-Enables the compression of rotated log files through gzip. Defaults to `false`.
-
-## Network ID
-
-#### `--network-id` (string)
-
-The identity of the network the node should connect to. Can be one of:
-
-- `--network-id=mainnet` -&gt; Connect to Mainnet (default).
-- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-- `--network-id=testnet` -&gt; Connect to the current test-network. (Right now, this is Fuji.)
-- `--network-id=local` -&gt; Connect to a local test-network.
-- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
-
-## OpenTelemetry
-
-AvalancheGo supports collecting and exporting [OpenTelemetry](https://opentelemetry.io/) traces. This might be useful for debugging, performance analysis, or monitoring.
-
-#### `--tracing-enabled` (boolean)
-
-If true, enable OpenTelemetry tracing. Defaults to `false`.
-
-#### `--tracing-endpoint` (string)
-
-The endpoint to export trace data to. Defaults to `localhost:4317`.
-
-#### `--tracing-insecure` (string)
-
-If true, don't use TLS when exporting trace data. Defaults to `true`.
-
-#### `--tracing-sample-rate` (float)
-
-The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample. Defaults to `0.1`.
-
-#### `--tracing-exporter-type`(string)
-
-Type of exporter to use for tracing. Options are [`grpc`,`http`]. Defaults to `grpc`.
-
-## Public IP
-
-Validators must know one of their public facing IP addresses so they can enable other nodes to connect to them.
-
-By default, the node will attempt to perform NAT traversal to get the node's IP according to its router.
-
-#### `--public-ip` (string)
-
-If this argument is provided, the node assume this is its public IP.
-
-:::tip
-When running a local network it may be easiest to set this value to `127.0.0.1`.
-:::
-
-#### `--public-ip-resolution-frequency` (duration)
-
-Frequency at which this node resolves/updates its public IP and renew NAT mappings, if applicable. Default to 5 minutes.
-
-#### `--public-ip-resolution-service` (string)
-
-When provided, the node will use that service to periodically resolve/update its public IP. Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`.
-
-## Staking
-
-#### `--staking-port` (int)
-
-The port through which the network peers will connect to this node externally. Having this port accessible from the internet is required for correct node operation. Defaults to `9651`.
-
-#### `--sybil-protection-enabled` (boolean)
-
-Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`. Note that this can not be disabled on public networks (`Fuji` and `Mainnet`).
-
-Setting this flag to `false` **does not** mean "this node is not a validator." It means that this node will sample all nodes, not just validators. **You should not set this flag to false unless you understand what you are doing.**
-
-#### `--sybil-protection-disabled-weight` (uint)
-
-Weight to provide to each peer when staking is disabled. Defaults to `100`.
-
-#### `--staking-tls-cert-file` (string, file path)
-
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if `--staking-tls-cert-file-content` is specified.
-
-#### `--staking-tls-cert-file-content` (string)
-
-As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node. Note that full certificate content, with the leading and trailing header, must be base64 encoded.
-
-#### `--staking-tls-key-file` (string, file path)
-
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`. This flag is ignored if `--staking-tls-key-file-content` is specified.
-
-#### `--staking-tls-key-file-content` (string)
-
-As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
-
-## Subnets
-
-### Subnet Tracking
-
-#### `--track-subnets` (string)
-
-Comma separated list of Subnet IDs that this node would track if added to. Defaults to empty (will only validate the Primary Network).
-
-### Subnet Configs
-
-It is possible to provide parameters for Subnets. Parameters here apply to all chains in the specified Subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Subnets specified in `--track-subnets` parameter.
-
-Full reference for all configuration options for a Subnet can be found in a separate [Subnet Configs](./subnet-configs) document.
-
-#### `--subnet-config-dir` (`string`)
-
-Specifies the directory that contains Subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
-
-Example: Let's say we have a Subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
-
-```json
-{
-  "validatorOnly": false,
-  "consensusParameters": {
-    "k": 25,
-    "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
-}
-```
-
-:::tip
 By default, none of these directories and/or files exist. You would need to create them manually if needed.
+
 :::
 
-#### `--subnet-config-content` (string)
+The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (for example `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
+For a given chain, AvalancheGo will follow the sequence below to look for its config file, where all folder and file names are case sensitive:
 
-## Version
+- First it looks for a config sub-directory whose name is the chain ID - If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias - If it's not found, it looks for a config sub-directory whose name is another alias for the chain
 
-#### `--version` (boolean)
+Alternatively, for some setups it might be more convenient to provide config entirely via the command line. For that, you can use AvalancheGo `--chain-config-content` flag, as documented [here](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
 
-If this is `true`, print the version and quit. Defaults to `false`.
+It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used. And the values of these default config are printed when the node starts.
 
-## Advanced Options
+## C-Chain Configs
 
-The following options may affect the correctness of a node. Only power users should change these.
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json`. This file does not exist by default.
 
-### Gossiping
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` should be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
 
-#### `--consensus-app-gossip-validator-size` (uint)
+The C-Chain config is printed out in the log when a node starts. Default values for each config flag are specified below.
 
-Number of validators to gossip an AppGossip message to. Defaults to `10`.
+Default values are overridden only if specified in the given config file. It is recommended to only provide values which are different from the default, as that makes the config more resilient to future default changes. Otherwise, if defaults change, your node will remain with the old values, which might adversely affect your node operation.
 
-#### `--consensus-app-gossip-non-validator-size` (uint)
+### State Sync
 
-Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
+#### `state-sync-enabled` (boolean)
 
-#### `--consensus-app-gossip-peer-size` (uint)
+Set to `true` to start the chain with state sync enabled. The peer will download chain state from peers up to a recent block near tip, then proceed with normal bootstrapping.
 
-Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
+Defaults to perform state sync if starting a new node from scratch. However, if running with an existing database it will default to false and not perform state sync on subsequent runs.
 
-#### `--consensus-accepted-frontier-gossip-validator-size` (uint)
+Please note that if you need historical data, state sync isn't the right option. However, it is sufficient if you are just running a validator.
 
-Number of validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+#### `state-sync-skip-resume` (boolean)
 
-#### `--consensus-accepted-frontier-gossip-non-validator-size` (uint)
+If set to `true`, the chain will not resume a previously started state sync operation that did not complete. Normally, the chain should be able to resume state syncing without any issue. Defaults to `false`.
 
-Number of non-validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+#### `state-sync-min-blocks` (int)
 
-#### `--consensus-accepted-frontier-gossip-peer-size` (uint)
+Minimum number of blocks the chain should be ahead of the local node to prefer state syncing over bootstrapping. If the node's database is already close to the chain's tip, bootstrapping is more efficient. Defaults to `300000`.
 
-Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
+#### `state-sync-ids` (string)
 
-#### `--consensus-accepted-frontier-gossip-frequency` (duration)
+Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync data from. An example setting of this field would be `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. If not specified (or empty), peers are selected at random. Defaults to empty string (`""`).
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+#### `state-sync-server-trie-cache` (int)
 
-#### `--consensus-on-accept-gossip-validator-size` (uint)
+Size of trie cache used for providing state sync data to peers in MBs. Should be a multiple of `64`. Defaults to `64`.
 
-Number of validators to gossip to each accepted container to. Defaults to `0`.
-
-#### `--consensus-on-accept-gossip-non-validator-size` (uint)
-
-Number of non-validators to gossip to each accepted container to. Defaults to `0`.
-
-#### `--consensus-on-accept-gossip-peer-size` (uint)
-
-Number of peers to gossip to each accepted container to. Defaults to `10`.
-
-### Benchlist
-
-#### `--benchlist-duration` (duration)
-
-Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `15m`.
-
-#### `--benchlist-fail-threshold` (int)
-
-Number of consecutive failed queries to a node before benching it (assuming all queries to it will fail). Defaults to `10`.
-
-#### `--benchlist-min-failing-duration` (duration)
-
-Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
-
-### Consensus Parameters
-
-:::note
-Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
-:::
-
-#### `--consensus-shutdown-timeout` (duration)
-
-Timeout before killing an unresponsive chain. Defaults to `5s`.
-
-#### `--create-asset-tx-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
-
-#### `--create-subnet-tx-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
-
-#### `--create-blockchain-tx-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
-
-#### `--transform-subnet-tx-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that transform Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
-
-#### `--add-primary-network-validator-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that add new primary network validators. Defaults to 0. This can only be changed on a local network.
-
-#### `--add-primary-network-delegator-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that add new primary network delegators. Defaults to 0. This can only be changed on a local network.
-
-#### `--add-subnet-validator-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that add new Subnet validators. Defaults to `10000000` nAVAX (.01 AVAX).
-
-#### `--add-subnet-delegator-fee` (int)
-
-Transaction fee, in nAVAX, for transactions that add new Subnet delegators. Defaults to `10000000` nAVAX (.01 AVAX).
-
-#### `--min-delegator-stake` (int)
-
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
-
-Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net. This can only be changed on a local network.
-
-#### `--min-delegation-fee` (int)
-
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` (2%) on Mainnet. This can only be changed on a local network.
-
-#### `--min-stake-duration` (duration)
-
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on a local network. This applies to both delegation and validation periods.
-
-#### `--min-validator-stake` (int)
-
-The minimum stake, in nAVAX, required to validate the Primary Network. This can only be changed on a local network.
-
-Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
-
-#### `--max-stake-duration` (duration)
-
-The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet. This can only be changed on a local network.
-
-#### `--max-validator-stake` (int)
-
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator. This can only be changed on a local network.
-
-#### `--stake-minting-period` (duration)
-
-Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days). This can only be changed on a local network.
-
-#### `--stake-max-consumption-rate` (uint)
-
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. This can only be changed on a local network.
-
-#### `--stake-min-consumption-rate` (uint)
-
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. This can only be changed on a local network.
-
-#### `--stake-supply-cap` (uint)
-
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
-
-#### `--tx-fee` (int)
-
-The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks or local network. Defaults to `1,000,000` nAVAX per transaction.
-
-#### `--uptime-requirement` (float)
-
-Fraction of time a validator must be online to receive rewards. Defaults to `0.8`. This can only be changed on a local network.
-
-#### `--uptime-metric-freq` (duration)
-
-Frequency of renewing this node's average uptime metric. Defaults to `30s`.
-
-#### Snow Parameters
-
-##### `--snow-concurrent-repolls` (int)
-
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
-
-##### `--snow-sample-size` (int)
-
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
-
-##### `--snow-quorum-size` (int)
-
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `15`.
-
-##### `--snow-virtuous-commit-threshold` (int)
-
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
-
-##### `--snow-rogue-commit-threshold` (int)
-
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `20`.
-
-##### `--snow-optimal-processing` (int)
-
-Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
-
-##### `--snow-max-processing` (int)
-
-Maximum number of processing items to be considered healthy. Reports unhealthy if more than this number of items are outstanding. The value must be at least `1`. Defaults to `1024`.
-
-##### `--snow-max-time-processing` (duration)
-
-Maximum amount of time an item should be processing and still be healthy. Reports unhealthy if there is an item processing for longer than this duration. The value must be greater than `0`. Defaults to `2m`.
-
-### ProposerVM Parameters
-
-#### `--proposervm-use-current-height` (bool)
-
-Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
 
 ### Continuous Profiling
 
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `--profile-continuous-enabled` is set.
+#### `continuous-profiler-dir` (string)
 
-#### `--profile-continuous-enabled` (boolean)
+Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to `""`. If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
 
-Whether the app should continuously produce performance profiles. Defaults to the false (not enabled).
+#### `continuous-profiler-frequency` (duration)
 
-#### `--profile-dir` (string)
+Specifies the frequency to run the continuous profiler. Defaults `900000000000` nano seconds which is 15 minutes.
 
-If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+#### `continuous-profiler-max-files` (int)
 
-#### `--profile-continuous-freq` (duration)
+Specifies the maximum number of profiles to keep before removing the oldest. Defaults to `5`.
 
-How often a new CPU/memory profile is created. Defaults to `15m`.
+### Enabling Avalanche Specific APIs
 
-#### `--profile-continuous-max-files` (int)
+#### `snowman-api-enabled` (boolean)
 
-Maximum number of CPU/memory profiles files to keep. Defaults to 5.
+Enables the Snowman API. Defaults to `false`.
 
-### Health
+#### `coreth-admin-api-enabled` (boolean)
 
-#### `--health-check-frequency` (duration)
+Enables the Admin API. Defaults to `false`.
 
-Health check runs with this frequency. Defaults to `30s`.
+#### `coreth-admin-api-dir` (string)
 
-#### `--health-check-averager-halflife` (duration)
+Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to `""`.
 
-Half life of averagers used in health checks (to measure the rate of message failures, for example.) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+### Enabling EVM APIs
 
-### Network
+#### `eth-apis` ([]string)
 
-#### `--network-allow-private-ips` (bool)
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
-Allows the node to connect peers with private IPs. Defaults to `true`.
+:::note
 
-#### `--network-compression-type` (string)
+The names used in this configuration flag have been updated in Coreth `v0.8.14`. The previous names containing `public-` and `private-` are deprecated. While the current version continues to accept deprecated values, they may not be supported in future updates and updating to the new values is recommended.
 
-The type of compression to use when sending messages to peers. Defaults to `gzip`. Must be one of [`gzip`, `zstd`, `none`].
+The mapping of deprecated values and their updated equivalent follows:
 
-Nodes can handle inbound `gzip` compressed messages but by default send `zstd` compressed messages.
+| Deprecated                         | Use instead            |
+| ---------------------------------- | ---------------------- |
+| `public-eth`                       | `eth`                  |
+| `public-eth-filter`                | `eth-filter`           |
+| `private-admin`                    | `admin`                |
+| `private-debug`                    | `debug`                |
+| `public-debug`                     | `debug`                |
+| `internal-public-eth`              | `internal-eth`         |
+| `internal-public-blockchain`       | `internal-blockchain`  |
+| `internal-public-transaction-pool` | `internal-transaction` |
+| `internal-public-tx-pool`          | `internal-tx-pool`     |
+| `internal-public-debug`            | `internal-debug`       |
+| `internal-private-debug`           | `internal-debug`       |
+| `internal-public-account`          | `internal-account`     |
+| `internal-private-personal`        | `internal-personal`    |
 
-#### `--network-initial-timeout` (duration)
+:::
 
-Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
+:::note
 
-#### `--network-initial-reconnect-delay` (duration)
+If you populate this field, it will override the defaults so you must include every service you wish to enable.
 
-Initial delay duration must be waited before attempting to reconnect a peer. Defaults to `1s`.
+:::
 
-#### `--network-max-reconnect-delay` (duration)
+#### `eth`
 
-Maximum delay duration must be waited before attempting to reconnect a peer. Defaults to `1h`.
+The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth`.
 
-#### `--network-minimum-timeout` (duration)
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
-Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
+`eth_coinbase` `eth_etherbase`
 
-#### `--network-maximum-timeout` (duration)
+#### `eth-filter`
 
-Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
+The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `eth-filter`.
 
-#### `--network-maximum-inbound-timeout` (duration)
+Enables the public filter API for the `eth_*` namespace. Defaults to `true`.
 
-Maximum timeout value of an inbound message. Defines duration within which an incoming message must be fulfilled. Incoming messages containing deadline higher than this value will be overridden with this value. Defaults to `10s`.
+Adds the following RPC calls (see [here](https://eth.wiki/json-rpc/API) for complete documentation):
 
-#### `--network-timeout-halflife` (duration)
+- `eth_newPendingTransactionFilter`
+- `eth_newPendingTransactions`
+- `eth_newAcceptedTransactions`
+- `eth_newBlockFilter`
+- `eth_newHeads`
+- `eth_logs`
+- `eth_newFilter`
+- `eth_getLogs`
+- `eth_uninstallFilter`
+- `eth_getFilterLogs`
+- `eth_getFilterChanges`
 
-Half life used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
+#### `admin`
 
-#### `--network-timeout-coefficient` (duration)
+The API name `private-admin` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `admin`.
 
-Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
+Adds the following RPC calls to the `admin_*` namespace. Defaults to `false`.
 
-#### `--network-read-handshake-timeout` (duration)
+- `admin_importChain`
+- `admin_exportChain`
 
-Timeout value for reading handshake messages. Defaults to `15s`.
+#### `debug`
 
-#### `--network-ping-timeout` (duration)
+The API names `private-debug` and `public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `debug`.
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
-Timeout value for Ping-Pong with a peer. Defaults to `30s`.
+- `debug_dumpBlock`
+- `debug_accountRange`
+- `debug_preimage`
+- `debug_getBadBlocks`
+- `debug_storageRangeAt`
+- `debug_getModifiedAccountsByNumber`
+- `debug_getModifiedAccountsByHash`
+- `debug_getAccessibleState`
 
-#### `--network-ping-frequency` (duration)
+#### `net`
 
-Frequency of pinging other peers. Defaults to `22.5s`.
+Adds the following RPC calls to the `net_*` namespace. Defaults to `true`.
 
-#### `--network-health-min-conn-peers` (uint)
+- `net_listening`
+- `net_peerCount`
+- `net_version`
 
-Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
 
-#### `--network-health-max-time-since-msg-received` (duration)
+#### `debug-tracer`
 
-Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
-#### `--network-health-max-time-since-msg-sent` (duration)
+- `debug_traceChain`
+- `debug_traceBlockByNumber`
+- `debug_traceBlockByHash`
+- `debug_traceBlock`
+- `debug_traceBadBlock`
+- `debug_intermediateRoots`
+- `debug_traceTransaction`
+- `debug_traceCall`
 
-Network layer returns unhealthy if haven't sent a message for at least this much time. Defaults to `1m`.
+#### `web3`
 
-#### `--network-health-max-portion-send-queue-full` (float)
+Adds the following RPC calls to the `web3_*` namespace. Defaults to `true`.
 
-Node will report unhealthy if its send queue is more than this portion full. Must be in \[0,1\]. Defaults to `0.9`.
+- `web3_clientVersion`
+- `web3_sha3`
 
-#### `--network-health-max-send-fail-rate` (float)
+#### `internal-eth`
+
+The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-eth`.
 
-Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
-#### `--network-health-max-outstanding-request-duration` (duration)
+- `eth_gasPrice`
+- `eth_baseFee`
+- `eth_maxPriorityFeePerGas`
+- `eth_feeHistory`
 
-Node reports unhealthy if there has been a request outstanding for this duration. Defaults to `5m`.
+#### `internal-blockchain`
 
-#### `--network-max-clock-difference` (duration)
+The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-blockchain`.
 
-Max allowed clock difference value between this node and peers. Defaults to `1m`.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
-#### `--network-require-validator-to-connect` (bool)
+- `eth_chainId`
+- `eth_blockNumber`
+- `eth_getBalance`
+- `eth_getAssetBalance`
+- `eth_getProof`
+- `eth_getHeaderByNumber`
+- `eth_getHeaderByHash`
+- `eth_getBlockByNumber`
+- `eth_getBlockByHash`
+- `eth_getUncleBlockByNumberAndIndex`
+- `eth_getUncleBlockByBlockHashAndIndex`
+- `eth_getUncleCountByBlockNumber`
+- `eth_getUncleCountByBlockHash`
+- `eth_getCode`
+- `eth_getStorageAt`
+- `eth_call`
+- `eth_estimateGas`
+- `eth_createAccessList`
 
-If true, this node will only maintain a connection with another node if this node is a validator, the other node is a validator, or the other node is a beacon.
+#### `internal-transaction`
 
-#### `--network-tcp-proxy-enabled` (bool)
+The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-transaction`.
 
-Require all P2P connections to be initiated with a TCP proxy header. Defaults to `false`.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
-#### `--network-tcp-proxy-read-timeout` (duration)
+- `eth_getBlockTransactionCountByNumber`
+- `eth_getBlockTransactionCountByHash`
+- `eth_getTransactionByBlockNumberAndIndex`
+- `eth_getTransactionByBlockHashAndIndex`
+- `eth_getRawTransactionByBlockNumberAndIndex`
+- `eth_getRawTransactionByBlockHashAndIndex`
+- `eth_getTransactionCount`
+- `eth_getTransactionByHash`
+- `eth_getRawTransactionByHash`
+- `eth_getTransactionReceipt`
+- `eth_sendTransaction`
+- `eth_fillTransaction`
+- `eth_sendRawTransaction`
+- `eth_sign`
+- `eth_signTransaction`
+- `eth_pendingTransactions`
+- `eth_resend`
 
-Maximum duration to wait for a TCP proxy header. Defaults to `3s`.
+#### `internal-tx-pool`
 
-#### `--network-outbound-connection-timeout` (duration)
+The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-tx-pool`.
 
-Timeout while dialing a peer. Defaults to `30s`.
+Adds the following RPC calls to the `txpool_*` namespace. Defaults to `false`.
 
-### Message Rate-Limiting
+- `txpool_content`
+- `txpool_contentFrom`
+- `txpool_status`
+- `txpool_inspect`
 
-These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
+#### `internal-debug`
 
-#### CPU Based
+The API names `internal-private-debug` and `internal-public-debug` are deprecated as of v1.7.15, and the APIs previously under these names have been migrated to `internal-debug`.
 
-Rate-limiting based on how much CPU usage a peer causes.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
-##### `--throttler-inbound-cpu-validator-alloc` (float)
+- `debug_getHeaderRlp`
+- `debug_getBlockRlp`
+- `debug_printBlock`
+- `debug_chaindbProperty`
+- `debug_chaindbCompact`
 
-Number of CPU allocated for use by validators. Value should be in range (0, total core count]. Defaults to half of the number of CPUs on the machine.
+#### `debug-handler`
 
-##### `--throttler-inbound-cpu-max-recheck-delay` (duration)
+Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
-In the CPU rate-limiter, check at least this often whether the node's CPU usage has fallen to an acceptable level. Defaults to `5s`.
+- `debug_verbosity`
+- `debug_vmodule`
+- `debug_backtraceAt`
+- `debug_memStats`
+- `debug_gcStats`
+- `debug_blockProfile`
+- `debug_setBlockProfileRate`
+- `debug_writeBlockProfile`
+- `debug_mutexProfile`
+- `debug_setMutexProfileFraction`
+- `debug_writeMutexProfile`
+- `debug_writeMemProfile`
+- `debug_stacks`
+- `debug_freeOSMemory`
+- `debug_setGCPercent`
 
-##### `--throttler-inbound-disk-max-recheck-delay` (duration)
+#### `internal-account`
 
-In the disk-based network throttler, check at least this often whether the node's disk usage has fallen to an acceptable level. Defaults to `5s`.
+The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-account`.
 
-##### `--throttler-inbound-cpu-max-non-validator-usage` (float)
+Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
-Number of CPUs that if fully utilized, will rate limit all non-validators. Value should be in range [0, total core count]. Defaults to %80 of the number of CPUs on the machine.
+- `eth_accounts`
 
-##### `--throttler-inbound-cpu-max-non-validator-node-usage` (float)
+#### `internal-personal`
 
-Maximum number of CPUs that a non-validator can utilize. Value should be in range [0, total core count]. Defaults to the number of CPUs / 8.
+The API name `internal-private-personal` is deprecated as of v1.7.15, and the APIs previously under this name have been migrated to `internal-personal`.
 
-##### `--throttler-inbound-disk-validator-alloc` (float)
+Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
 
-Maximum number of disk reads/writes per second to allocate for use by validators. Must be > 0. Defaults to `1000 GiB/s`.
+- `personal_listAccounts`
+- `personal_listWallets`
+- `personal_openWallet`
+- `personal_deriveAccount`
+- `personal_newAccount`
+- `personal_importRawKey`
+- `personal_unlockAccount`
+- `personal_lockAccount`
+- `personal_sendTransaction`
+- `personal_signTransaction`
+- `personal_sign`
+- `personal_ecRecover`
+- `personal_signAndSendTransaction`
+- `personal_initializeWallet`
+- `personal_unpair`
 
-##### `--throttler-inbound-disk-max-non-validator-usage` (float)
+### API Configuration
 
-Number of disk reads/writes per second that, if fully utilized, will rate limit all non-validators. Must be >= 0. Defaults to `1000 GiB/s`.
+#### `rpc-gas-cap` (int)
 
-##### `--throttler-inbound-disk-max-non-validator-node-usage` (float)
+The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `eth_call`). Defaults to `50,000,000`.
 
-Maximum number of disk reads/writes per second that a non-validator can utilize. Must be >= 0. Defaults to `1000 GiB/s`.
+#### `rpc-tx-fee-cap` (int)
 
-#### Bandwidth Based
+Global transaction fee (price \* `gaslimit`) cap (measured in AVAX) for send-transaction variants. Defaults to `100`.
 
-Rate-limiting based on the bandwidth a peer uses.
+#### `api-max-duration` (duration)
 
-##### `--throttler-inbound-bandwidth-refill-rate` (uint)
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to `0` (no maximum).
 
-Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
+#### `api-max-blocks-per-request` (int)
 
-##### `--throttler-inbound-bandwidth-max-burst-size` (uint)
+Maximum number of blocks to serve per `getLogs` request. Defaults to `0` (no maximum).
 
-Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
+#### `ws-cpu-refill-rate` (duration)
 
-#### Message Size Based
+The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (`0`).
 
-Rate-limiting based on the total size, in bytes, of unprocessed messages.
+#### `ws-cpu-max-stored` (duration)
 
-##### `--throttler-inbound-at-large-alloc-size` (uint)
+Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (`0`).
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
+#### `allow-unfinalized-queries` (boolean)
 
-##### `--throttler-inbound-validator-alloc-size` (uint)
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to `false`.
 
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 MiB).
+#### `accepted-cache-size` `(int)
 
-##### `--throttler-inbound-node-max-at-large-bytes` (uint)
+Specifies the depth to keep accepted headers and accepted logs in the cache. This is particularly useful to improve the performance of `eth_getLogs` for recent logs.
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` (2 MiB).
+### Transaction Pool
 
-#### Message Based
+#### `local-txs-enabled` (boolean)
 
-Rate-limiting based on the number of unprocessed messages.
+Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to `false`.
 
-##### `--throttler-inbound-node-max-processing-msgs` (uint)
+#### `allow-unprotected-txs` (boolean)
 
-Node will stop reading messages from a peer when it is processing this many messages from the peer. Will resume reading messages from the peer when it is processing less than this many messages. Defaults to `1024`.
+If `true`, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to `false`.
 
-#### Outbound
+#### `allow-unprotected-tx-hashes` ([]TxHash)
 
-Rate-limiting for outbound messages.
+Specifies an array of transaction hashes that should be allowed to bypass replay protection. This flag is intended for node operators that want to explicitly allow specific transactions to be issued through their API. Defaults to an empty list.
 
-##### `--throttler-outbound-at-large-alloc-size` (uint)
+#### `remote-tx-gossip-only-enabled` (boolean)
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+If `true`, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to `false`.
 
-##### `--throttler-outbound-validator-alloc-size` (uint)
+#### `tx-regossip-frequency` (duration)
 
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 MiB).
+Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to `60000000000` nano seconds which is 1 minute.
 
-##### `--throttler-outbound-node-max-at-large-bytes` (uint)
+#### `tx-regossip-max-size` (int)
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
+Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
-### Connection Rate-Limiting
+#### `tx-pool-journal` (string)
 
-#### `--network-inbound-connection-throttling-cooldown` (duration)
+Specifies file path to a transaction journal to store local transactions that survive between node restarts.
 
-Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
+Defaults to empty string and being disabled. To enable transaction pool journaling, the user must specify a non-empty journal and enable local transactions via `local-txs-enabled`.
 
-#### `--network-inbound-connection-throttling-max-conns-per-sec` (uint)
+#### `tx-pool-rejournal` (duration)
 
-Node will accept at most this many inbound connections per second. Defaults to `512`.
+Time interval to regenerate the local transaction journal. Defaults to 1 hour.
 
-#### `--network-outbound-connection-throttling-rps` (uint)
+#### `tx-pool-price-limit` (int)
 
-Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
+Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
 
-### Peer List Gossiping
+#### `tx-pool-price-bump` (int)
 
-Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-num-validator-ips` validator IPs to `--network-peer-list-validator-gossip-size` validators, `--network-peer-list-non-validator-gossip-size` non-validators and `--network-peer-list-peers-gossip-size` peers every `--network-peer-list-gossip-frequency`.
+Minimum price bump percentage to replace an already existing transaction (nonce).  Defaults to 10%.
 
-#### `--network-peer-list-num-validator-ips` (int)
+#### `tx-pool-account-slots` (int)
 
-Number of validator IPs to gossip to other nodes Defaults to `15`.
+Number of executable transaction slots guaranteed per account. Defaults to 16.
 
-#### `--network-peer-list-validator-gossip-size` (int)
+#### `tx-pool-global-slots` (int)
 
-Number of validators that the node will gossip peer list to. Defaults to `20`.
+Maximum number of executable transaction slots for all accounts. Defaults to 5120.
 
-#### `--network-peer-list-non-validator-gossip-size` (int)
+#### `tx-pool-account-queue` (int)
 
-Number of non-validators that the node will gossip peer list to. Defaults to `0`.
+Maximum number of non-executable transaction slots permitted per account. Defaults to 64.
 
-#### `--network-peer-list-peers-gossip-size` (int)
+#### `tx-pool-global-queue` (int)
 
-Number of total peers (including non-validator or validator) that the node will gossip peer list to Defaults to `0`.
+Maximum number of non-executable transaction slots for all accounts. Defaults to 1024.
 
-#### `--network-peer-list-gossip-frequency` (duration)
+### Metrics
 
-Frequency to gossip peers to other nodes. Defaults to `1m`.
+#### `metrics-enabled` (boolean)
 
-#### `--network-peer-read-buffer-size` (int)
+Enables metrics. Defaults to `false`.
 
-Size of the buffer that peer messages are read into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+#### `metrics-expensive-enabled` (boolean)
 
-#### `--network-peer-write-buffer-size` (int)
+Enables expensive metrics. Defaults to `false`.
 
-Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+### Snapshots
 
-### Resource Usage Tracking
+#### `snapshot-async` (boolean)
 
-#### `--meter-vm-enabled` (bool)
+If `true`, allows snapshot generation to be executed asynchronously. Defaults to `true`.
 
-Enable Meter VMs to track VM performance with more granularity. Defaults to `true`.
+#### `snapshot-verification-enabled` (boolean)
 
-#### `--system-tracker-frequency` (duration)
+If `true`, verifies the complete snapshot after it has been generated. Defaults to `false`.
 
-Frequency to check the real system usage of tracked processes. More frequent checks --> usage metrics are more accurate, but more expensive to track. Defaults to `500ms`.
+### Logging
 
-#### `--system-tracker-processing-halflife` (duration)
+#### `log-level` (string)
 
-Half life to use for the processing requests tracker. Larger half life --> usage metrics change more slowly. Defaults to `15s`.
+Defines the log level for the chain. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
 
-#### `--system-tracker-cpu-halflife` (duration)
+#### `log-json-format` (bool)
 
-Half life to use for the CPU tracker. Larger half life --> CPU usage metrics change more slowly. Defaults to `15s`.
+If `true`, changes logs to JSON format. Defaults to `false`.
 
-#### `--system-tracker-disk-halflife` (duration)
+### Keystore Settings
 
-Half life to use for the disk tracker. Larger half life --> disk usage metrics change more slowly. Defaults to `1m`.
+#### `keystore-directory` (string)
 
-#### `--system-tracker-disk-required-available-space` (uint)
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty string (`""`).
 
-"Minimum number of available bytes on disk, under which the node will shutdown. Defaults to `536870912` (512 MiB).
+#### `keystore-external-signer` (string)
 
-#### `--system-tracker-disk-warning-threshold-available-space` (uint)
+Specifies an external URI for a clef-type signer. Defaults to the empty string (`""` as not enabled).
 
-Warning threshold for the number of available bytes on disk, under which the node will be considered unhealthy. Must be >= `--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1 GiB).
+#### `keystore-insecure-unlock-allowed` (bool)
 
-### Plugins
+If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults to `false`.
 
-#### `--plugin-dir` (string)
+### Database
 
-Sets the directory for [VM plugins](/build/vm/intro.md). The default value is `$HOME/.avalanchego/plugins`.
+#### `trie-clean-cache` (int)
 
-### Virtual Machine (VM) Configs
+Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`. Defaults to `512`.
 
-#### `--vm-aliases-file (string)`
+#### `trie-dirty-cache` (int)
 
-Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if `--vm-aliases-file-content` is specified. Example content:
+Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed this limit, they are written to disk. Defaults to `256`.
+
+#### `trie-dirty-commit-target` (int)
+
+Memory limit to target in the dirty cache before performing a commit (in MBs). Defaults to `20`.
+
+#### `snapshot-cache` (int)
+
+Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of `64`. Defaults to `256`.
+
+#### `trie-clean-journal` (string)
+
+Directory to use to save the trie clean cache (must be populated to enable journaling the trie clean cache). Empty and disabled by default.
+
+#### `trie-clean-rejournal` (duration)
+
+Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must be populated to enable journaling the trie clean cache).
+
+#### `acceptor-queue-limit` (int)
+
+Specifies the maximum number of blocks to queue during block acceptance before blocking on Accept. Defaults to `64`.
+
+#### `commit-interval` (int)
+
+Specifies the commit interval at which to persist the merkle trie to disk. Defaults to `4096`.
+
+#### `pruning-enabled` (boolean)
+
+If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount of data written to disk, but does not delete any state that is written to the disk previously. This flag should be set to `false` for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+:::note
+
+If a node is ever run with `pruning-enabled` as `false` (archival mode), setting `pruning-enabled` to `true` will result in a warning and the node will shut down. This is to protect against unintentional misconfigurations of an archival node.
+
+To override this and switch to pruning mode, in addition to `pruning-enabled:
+true`, `allow-missing-tries` should be set to `true` as well.
+
+:::
+
+#### `populate-missing-tries` (*uint64)
+
+If non-nil, sets the starting point for repopulating missing tries to re-generate archival merkle forest.
+
+To restore an archival merkle forest that has been corrupted (missing trie nodes for a section of the blockchain), specify the starting point of the last block on disk, where the full trie was available at that block to re-process blocks from that height onwards and re-generate the archival merkle forest on startup. This flag should be used once to re-generate the archival merkle forest and should be removed from the config after completion. This flag will cause the node to delay starting up while it re-processes old blocks.
+
+#### `populate-missing-tries-parallelism` (int)
+
+Number of concurrent readers to use when re-populating missing tries on startup. Defaults to 1024.
+
+#### `allow-missing-tries` (boolean)
+
+If `true`, allows a node that was once configured as archival to switch to pruning mode. Defaults to `false`.
+
+#### `preimages-enabled` (boolean)
+
+If `true`, enables preimages. Defaults to `false`.
+
+#### `offline-pruning-enabled` (boolean)
+
+If `true`, offline pruning will run on startup and block until it completes (approximately one hour on Mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.** While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](/nodes/maintain/run-offline-pruning.md#disk-space-considerations)
+
+Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
+
+This is meant to be run manually, so after running with this flag once, it must be toggled back to false before running the node again. Therefore, you should run with this flag set to true and then set it to false on the subsequent run.
+
+#### `offline-pruning-bloom-filter-size` (int)
+
+This flag sets the size of the bloom filter to use in offline pruning (denominated in MB and defaulting to 512 MB). The bloom filter is kept in memory for efficient checks during pruning and is also written to disk to allow pruning to resume without re-generating the bloom filter.
+
+The active state is added to the bloom filter before iterating the DB to find trie nodes that can be safely deleted, any trie nodes not in the bloom filter are considered safe for deletion. The size of the bloom filter may impact its false positive rate, which can impact the results of offline pruning. This is an advanced parameter that has been tuned to 512 MB and should not be changed without thoughtful consideration.
+
+#### `offline-pruning-data-directory` (string)
+
+This flag must be set when offline pruning is enabled and sets the directory that offline pruning will use to write its bloom filter to disk. This directory should not be changed in between runs until offline pruning has completed.
+
+#### `tx-lookup-limit` (uint64)
+
+Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0, transaction lookup indices will be maintained for all blocks. Defaults to `0`.
+
+### VM Networking
+
+#### `max-outbound-active-requests` (int)
+
+Specifies the maximum number of outbound VM2VM requests in flight at once. Defaults to `16`.
+
+#### `max-outbound-active-cross-chain-requests` (int)
+
+Specifies the maximum number of outbound cross-chain requests in flight at once. Defaults to `64`.
+
+### Miscellaneous
+
+#### `airdrop` (string)
+
+Path to a json file that contains a list of addresses for a genesis airdrop. Each address will be airdropped `AirdropAmount` at genesis, and the hash of the airdrop file must match `AirdropHash`. `AirdropAmount` and `AirdropHash` are part of the genesis config. This option applies to `subnet-evm` only (not applicable to `coreth`).
+
+#### `skip-upgrade-check` (bool)
+
+If set to `true`, the chain will skip verifying that all expected network upgrades have taken place before the last accepted block on startup. This allows node operators to recover if their node has accepted blocks after a network upgrade with a version of the code prior to the upgrade. Defaults to `false`.
+
+## X-Chain Configs
+
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json`.
+
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
+
+This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
 
 ```json
 {
-  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
-    "timestampvm",
-    "timerpc"
-  ]
+  "index-transactions": false,
+  "index-allow-incomplete": false
 }
 ```
 
-The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
+Default values are overridden only if explicitly specified in the config.
 
-`--vm-aliases-file-content` (string)
+The parameters are as follows:
 
-As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
+**Transaction Indexing**
 
-### Indexing
+### `index-transactions` (boolean)
 
-#### `--index-allow-incomplete` (boolean)
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
 
-If true, allow running the node in such a way that could cause an index to miss transactions. Ignored if index is disabled. Defaults to `false`.
+:::note
+If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
+:::
 
-### Router
+### `index-allow-incomplete` (boolean)
 
-#### `--router-health-max-drop-rate` (float)
+Allows incomplete indices. Default value is `false`.
 
-Node reports unhealthy if the router drops more than this portion of messages. Defaults to `1`.
+This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 
-#### `--router-health-max-outstanding-requests` (uint)
+## Subnet Chain Configs
 
-Node reports unhealthy if there are more than this many outstanding consensus requests (Get, PullQuery, etc.) over all chains. Defaults to `1024`.
+As mentioned above, if a Subnet's chain id is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain should be at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+
+
+## FAQ
+
+- When using `getBlockNumber` it will return finalized blocks. To allow for queries for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries` and set to true (by default it is set to `false`)
+
+- When deactivating offline pruning  `(pruning-enabled: false)` from previously enabled state, this will not impact blocks whose state was already pruned. This will return missing trie node errors, as the node can't lookup the state of a historical block if that state was deleted.
