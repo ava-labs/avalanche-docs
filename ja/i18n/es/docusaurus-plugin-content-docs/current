@@ -1,367 +1,185 @@
 ---
 tags:
   - Nodes
-description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
-sidebar_label: Node ➡️ Validator
-pagination_label: Add a Node to the Validator Set
-sidebar_position: 3
+description: This section provides documents on how to stake AVAX on the Avalanche Network.
+sidebar_label: How to Stake
+pagination_label: How to Stake AVAX
+sidebar_position: 2
 ---
 
-# Add a Node to the Validator Set
+# How to Stake on Avalanche
 
-## Introduction
+## Staking Parameters on Avalanche
 
-The [Primary Network](/learn/avalanche/avalanche-platform.md) is inherent to the Avalanche platform and validates Avalanche’s built-in blockchains. In this tutorial, we’ll add a node to the Primary Network on Avalanche.
+When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token white paper](https://www.avalabs.org/whitepapers) to learn more about AVAX and the mechanics of staking.
 
-The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which Subnets, which blockchains exist, and which Subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
+:::caution
+
+Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
+
+:::
+
+### Mainnet
+
+- The minimum amount that a validator must stake is 2,000 AVAX
+- The minimum amount that a delegator must delegate is 25 AVAX
+- The minimum amount of time one can stake funds for validation is 2 weeks
+- The maximum amount of time one can stake funds for validation is 1 year
+- The minimum amount of time one can stake funds for delegation is 2 weeks
+- The maximum amount of time one can stake funds for delegation is 1 year
+- The minimum delegation fee rate is 2%
+- The maximum weight of a validator (their own stake + stake delegated to them) is the minimum of 3 million AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total (not per delegator)
+
+A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
+
+You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to receive a staking reward. See [here.](/reference/avalanchego/info-api.md#infouptime) You can get another opinion on your node's uptime from Avalanche's [Validator Health dashboard](https://stats.avax.network/dashboard/validator-health-check/). If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward. If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue. Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your node's true uptime.
+
+### Fuji Testnet
+
+On Fuji Testnet, all staking parameters are the same as those on Mainnet except the following ones:
+
+- The minimum amount that a validator must stake is 1 AVAX
+- The minimum amount that a delegator must delegate is 1 AVAX
+- The minimum amount of time one can stake funds for validation is 24 hours
+- The minimum amount of time one can stake funds for delegation is 24 hours
+
+## Validators
+
+**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+
+When you add a node to the validator set, you specify:
+
+- Your node’s ID
+- When you want to start and stop validating
+- How many AVAX you are staking
+- The address to send any rewards to
+- Your delegation fee rate (see below)
+
+:::info
+The minimum amount that a validator must stake is 2,000 AVAX.
+:::
 
 :::warning
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, feel free to join our [Discord](https://chat.avalabs.org/) to ask questions.
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 
 :::
 
-## Requirements
+### Running a Validator
 
-You've completed [Run an Avalanche Node](/nodes/run/node-manually.md) and are familiar with [Avalanche's architecture](/learn/avalanche/avalanche-platform.md). In this tutorial, we use [AvalancheJS](/tooling/avalanchejs-overview.md) and [Avalanche’s Postman collection](/tooling/avalanchego-postman-collection.md) to help us make API calls.
+If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward.
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and your node has a public IP address(it's optional to set --public-ip=[YOUR NODE'S PUBLIC IP HERE] when executing the AvalancheGo binary, as by default, the node will attempt to perform NAT traversal to get the node's IP according to its router). Failing to do either of these may jeopardize your staking reward.
+When you issue the transaction to add a validator, the staked tokens and transaction fee (which is 0) are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
 
-## Add a Validator with Avalanche Wallet
+#### Allow API Calls
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+To make API calls to your node from remote machines, allow traffic on the API port (`9650` by default), and run your node with argument `--http-host=`
 
-### Retrieve the Node ID
+You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines (for example, your personal computer.)
 
-Get your node’s ID by calling [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
+#### Why Is My Uptime Low?
 
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.getNodeID"
-}' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
-```
+Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (that is the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to receive a staking reward.
 
-The response has your node’s ID:
+You can also see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
 
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
-  },
-  "id": 1
-}
-```
+If your node's uptime is low, make sure you're setting config option `--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP traffic on port 9651.
 
-### Add as a Validator
+#### Secret Management
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator` under the `Validate` section.
+The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file (and `staker.crt`) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
 
-Fill out the staking parameters. They are explained in more detail in [this doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
+You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in "cold" addresses whose private key is not on any computer.
 
-You should see a success message, and your balance should be updated.
+#### Monitoring
 
-Calling [`platform.getPendingValidators`](/reference/avalanchego/p-chain/api.md#platformgetpendingvalidators) verifies that your transaction was accepted. Note that this API call should be made before your node's validation start time, otherwise, the return will not include your node's id as it is no longer pending.
+Follow this [tutorial](/nodes/maintain/setting-up-node-monitoring.md) to learn how to monitor your node's uptime, general health, etc.
 
-Go back to the `Earn` tab, and click `Estimated Rewards`.
+### Reward Formula
 
-Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+Consider a validator which stakes a $Stake$ amount of Avax for $StakingPeriod$ seconds.
 
-You can also call [`platform.getCurrentValidators`](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators) to check that your node's id is included in the response.
+Assume that at the start of the staking period there is a $Supply$ amount of Avax in the Primary Network. The maximum amount of Avax is $MaximumSupply$ .
 
-That’s it!
+Then at the end of its staking period, a responsive validator receives a reward calculated as follows:
 
-## Add a Validator with AvalancheJS
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$ Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate $$ where $$ EffectiveConsumptionRate = $$ $$ \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period} $$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
 
-We can also add a node to the validator set using [AvalancheJS](/tooling/avalanchejs-overview.md).
+Note that $StakingPeriod$ is the staker's entire staking period, not just the staker's uptime, that is the aggregated time during which the staker has been responsive. The uptime comes into play only to decide whether a staker should be rewarded; to calculate the actual reward, only the staking period duration is taken into account.
 
-### Install AvalancheJS
+$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and $MaxConsumptionRate$. $MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
 
-To use AvalancheJS, you can clone the repo:
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$ MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate $$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
 
-```zsh
-git clone https://github.com/ava-labs/avalanchejs.git
-```
+The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
+
+A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$. The reward is:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$ Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator} $$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+
+
+## Delegators
+
+A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
+
+When you delegate stake to a validator, you specify:
+
+- The ID of the node you’re delegating to
+- When you want to start/stop delegating stake (must be while the validator is validating)
+- How many AVAX you are staking
+- The address to send any rewards to
 
 :::info
-The repository cloning method used is HTTPS, but SSH can be used too:
-
-`git clone git@github.com:ava-labs/avalanchejs.git`
-
-You can find more about SSH and how to use it [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
+The minimum amount that a delegator must delegate is 25 AVAX.
 :::
 
-or add it to an existing project:
+:::warning
 
-```zsh
-yarn add @avalabs/avalanchejs
-```
-
-For this tutorial we will use [`ts-node`](https://www.npmjs.com/package/ts-node) to run the example scripts directly from an AvalancheJS directory.
-
-### Fuji Workflow
-
-In this section, we will use Fuji Testnet to show how to add a node to the validator set.
-
-Open your AvalancheJS directory and select the [**`examples/platformvm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/platformvm) folder to view the source code for the examples scripts.
-
-We will use the [**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts) script to add a validator. To learn more about the `buildAddValidatorTx` API, please click [here](https://github.com/ava-labs/avalanchejs-docs/blob/main/classes/api_platformvm.platformvmapi.md#buildaddvalidatortx).
-
-#### Private Key
-
-Locate this line in the file
-
-```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-```
-
-and replace this with a private key that you control. You can use [this code to generate a new key](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
-
-```js
-const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
-```
-
-#### Network Setting
-
-The following settings work when using a local node started with [`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
-
-```js
-const ip: string = "localhost"
-const port: number = 9650
-const protocol: string = "http"
-const networkID: number = 5
-```
-
-However, to connect directly to the [Avalanche Fuji Testnet API server](/tooling/rpc-providers.md), the following changes are needed:
-
-```js
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-```
-
-Depending on the networkID passed in when instantiating an `Avalanche` object in the code, the encoded addresses used will have a distinctive Human Readable Part(HRP) per network.
-
-_Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
-
-For Fuji Testnet, 5 is the correct value to use.
-
-To learn more about encoded addresses, click [here](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
-
-#### Settings for Validation
-
-Next we need to specify the node's validation period and delegation fee.
-
-```ts
-const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
-const delegationFee: number = 10
-```
-
-#### Node ID
-
-This is the node ID of the validator being added. See [above section](#retrieve-the-node-id) on how to retrieve the node id by using API [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid).
-
-#### Staking Period
-
-`startTime` and `endTime` are required to specify the time of starting/leaving validation. The minimum duration that one can validate the Primary Network is 2 weeks, and the maximum duration is one year. One can start a new validation on the Primary Network after finishing one, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
-
-The sample code uses `const startTime: BN = UnixNow().add(new BN(60 * 1))` and `const endTime: BN = startTime.add(new BN(26300000))` to compute the Unix time 1 minute and 304 days in the future (at the time when this article was written) to use as the values of `startTime` and `endTime`, respectively.
-
-:::tip
-
-You can create your own Unix timestamp [here](https://www.unixtimestamp.com/) or by using the `UnixNow()` method
+Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network).
 
 :::
 
-To create your own start times, please follow the steps below:
+### Delegator Rewards
 
-Locate this line in the file
+If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward specified by the validator’s delegation fee rate.
 
-```ts
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
-```
+When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens. Rewards are sent to delegators right after the delegation ends with the return of staked tokens, and before the validation period of the node they're delegating to is complete.
 
-Change `startTime` and `endTime` to new `BN` values, for example:
+## FAQ
 
-```ts
-const startTime: BN = new BN(1654656829) // Wed Jun 08 2022 02:53:49 GMT+0000
-const endTime: BN = new BN(1662602029) // Thu Sep 08 2022 01:53:49 GMT+0000
-```
+### Is There a Tool to Check the Health of a Validator?
 
-#### Delegation Fee Rate
+Yes, just enter your node's ID in the Avalanche Stats [Validator Health Dashboard](https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-Jp4dLMTHd6huttS1jZhqNnBN9ZMNmTmWC).
 
-Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `10` and someone delegates to this validator, then when the delegation period is over, 10% of the reward goes to the validator and the rest goes to the delegator, if this node meets the validation reward requirements.
+### How Is It Determined Whether a Validator Receives a Staking Reward?
 
-#### Stake Amount
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator calculates that the leaving node was responsive for more than the required uptime (currently 80%), the validator will vote for the leaving node to receive a staking reward. Otherwise, the validator will vote that the leaving node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the leaving node receives a reward or not.
 
-Set the proper staking amount in calling `pchain.buildAddValidatorTx` by replacing `stakeAmount.minValidatorStake` with a number in the unit of gwei, for example, `BN(1e12)` which is 10,000 AVAX.
+Each validator only votes "yes" or "no." It does not share its data such as the leaving node's uptime.
 
-#### Addresses
+Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again. The node's uptime during its first period in the validator set does not affect the uptime calculation in the second period, hence, has no impact on whether the node receives a staking reward for its second period in the validator set.
 
-By default, the example uses the variable `pAddressStrings` to define `toAddresses`, `fromAddresses`, `changeAddresses` and `rewardAddresses`:
+### How Are Delegation Fees Distributed To Validators?
 
-```js
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
-```
+If a validator is online for 80% of a delegation period, they receive a % of the reward (the fee) earned by the delegator. The P-Chain used to distribute this fee as a separate UTXO per delegation period. After the [Cortina Activation](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), instead of sending a fee UTXO for each successful delegation period, fees are now batched during a node’s entire validation period and are distributed when it is unstaked.
 
-This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
+### Error: Couldn't Issue TX: Validator Would Be Over Delegated
 
-No change is needed in the addresses for the default action. For customization, please refer to [this section](#customizing-addresses).
+This error occurs whenever the delegator can not delegate to the named validator. This can be caused by the following.
 
-#### Execute the Code
-
-Now that we have made all of the necessary changes to the example script, it's time to add a validator to the Fuji Network.
-
-Run the command:
-
-```zsh
-ts-node examples/platformvm/buildAddValidatorTx.ts
-```
-
-The response has the transaction ID.
-
-```zsh
-Success! TXID: 2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra
-```
-
-We can check the transaction’s status by running the example script: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts) following the steps below:
-
-1. Ensure that your [network settings](#network-setting) are correct before running the script.
-
-2. Locate this line in the file
-
-```js
-const main = async (): Promise<any> => {
-  const txID: string = "x1NLb9JaHkKTXvSRReVSsFwQ38mY7bfD1Ky1BPv721VhrpuSE"
-  ...
-  }
-```
-
-and replace it with the _buildAddValidator_ TXID
-
-```js
-const main = async (): Promise<any> => {
- const txID: string = "2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra"
- ...
- }
-```
-
-Run the command:
-
-```sh
-ts-node examples/platformvm/getTxStatus.ts
-```
-
-This returns:
-
-```sh
-{ status: 'Committed' }
-```
-
-The status should be `Committed`, meaning the transaction was successful.
-
-We can see if the node is now in the pending validator set for the Fuji network by using the example:[`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Just change the [network settings](#network-setting) to meet Fuji requirements and then run the script:
-
-```sh
-ts-node examples/platformvm/getPendingValidators.ts
-```
-
-The response should include the node we just added:
-
-```json
-{
-  "validators": [
-    {
-      "nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
-      "startTime": "1654656829",
-      "endtime": "1662602029",
-      "stakeAmount": "1000000000"
-    }
-  ],
-  "delegators": []
-}
-```
-
-When the time reaches `1654656829` (Wed Jun 08 2022 02:53:49 GMT+0000), this node will start validating the Primary Network. When it reaches `1662602029` (Thu Sep 08 2022 01:53:49 GMT+0000), this node will stop validating the Primary Network. The staked AVAX and the rewards, if any, will be returned to `pAddressStrings`.
-
-#### Customizing Addresses
-
-There are 4 addresses which are needed when calling `pchain.buildAddValidatorTx`. Only 2 of them can be changed: `toAddresses` and `rewardAddresses`. For backward-compatibility reasons, `fromAddresses` and `changeAddresses` are just placeholders and are ignored.
-
-`toAddresses`
-
-An array of addresses who receive the staked tokens at the end of the staking period.
-
-`rewardAddresses`
-
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddresses`. The original stake will be sent back to the addresses defined in `toAddresses`.
-
-A validator’s stake is never slashed, regardless of their behavior they will always receive their stake back when they’re done validating.
-
-Locate this part of the code
-
-```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
-```
-
-and replace `privKey` with private keys that you control. To generate a new keypair, we can use the [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) example script along with [Fuji Network Settings](#network-setting).
-
-```ts
-let privKey: string =
-  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s"
-pKeychain.importKey(privKey)
-priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91"
-pKeychain.importKey(privKey)
-
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
-```
-
-This example would create a keychain with 4 addresses:
-
-```ts
-  "P-fuji1jx644d9y00y5q4hz8cq4wr75a2erne2y4e32xc", // pAddressStrings[0]
-  "P-fuji1wchdgdp94j8tszlpsp56qvgkvdn20svpmnm8qk", // pAddressStrings[1]
-  "P-fuji1f36kkpy6yzd7ayrywxvvprns7qlrcu3hwqdya8", // pAddressStrings[2]
-  "P-fuji1qw7yt3fp43kuwsufff4vhezs2yl00slr09vmh5", // pAddressStrings[3]
-```
-
-Now we can pass in each address according to its slot in the `pAddressStrings` array:
-
-```ts
-const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-  utxoSet,
-  [pAddressStrings[0], pAddressStrings[1]], // toAddresses, one or more addresses
-  [pAddressStrings[0]], // fromAddresses, required for backward-compatibility
-  [pAddressStrings[0]], // changeAddresses, required for backward-compatibility
-  nodeID,
-  startTime,
-  endTime,
-  stakeAmount.minValidatorStake,
-  [pAddressStrings[2], pAddressStrings[3]], //rewardAddresses, one or more addresses
-  delegationFee,
-  locktime,
-  threshold,
-  memo,
-  asOf
-)
-```
-
-### Mainnet Workflow
-
-The Fuji workflow above can be adapted to Mainnet with the following modifications:
-
-- The correct private key.
-- Network setting should be to a Mainnet node, either [a local node on Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or [Avalanche Mainnet API server](/tooling/rpc-providers.md#using-the-public-api-nodes) where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
-- Set the correct amount to stake.
+- The delegator `startTime` is before the validator `startTime`
+- The delegator `endTime` is after the validator `endTime`
+- The delegator weight would result in the validator total weight exceeding its maximum weight
