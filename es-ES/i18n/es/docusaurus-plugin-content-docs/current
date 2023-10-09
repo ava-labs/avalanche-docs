@@ -3,109 +3,171 @@ tags:
   - Tooling
   - AvalancheJS
 description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
-pagination_label: Send an Asset on the X-Chain
-sidebar_label: Send X-Chain Asset
-sidebar_position: 5
+pagination_label: AvalancheJS
+sidebar_label: AvalancheJS
+sidebar_position: 0
 ---
 
-# Send an Asset on the X-Chain
+# AvalancheJS Overview
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](/learn/avalanche/intro.md) platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+
+The APIs currently supported by default are:
+
+- Admin API
+- Auth API
+- AVM API (X-Chain)
+- EVM API (C-Chain)
+- Health API
+- Index API
+- Info API
+- Keystore API
+- Metrics API
+- PlatformVM API
+- Socket API
+
+We built AvalancheJS with ease of use in mind. With this library, any JavaScript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the Avalanche Platform Specification found in the [Platform Chain Specification](/reference/avalanchego/p-chain/api.md), [Exchange Chain (X-Chain) Specification](/reference/avalanchego/x-chain/api.md), [Contract Chain (C-Chain) Specification](/reference/avalanchego/c-chain/api.md).
+
+Using AvalancheJS, developers can:
+
+- Locally manage private keys
+- Retrieve balances on addresses
+- Get UTXOs for addresses
+- Build and sign transactions
+- Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
+- Create a Subnetwork
+- Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
+- Add a Validator to the Primary network
+- Add a Delegator to the Primary network
+- Administer a local node
+- Retrieve Avalanche network information from a node
+
+## Requirements
+
+AvalancheJS requires Node.js version 14.18.0 or higher to compile.
+
+## Installation
+
+### Using the NPM Package
+
+Add AvalancheJS to your project via `npm` or `yarn`.
+
+For installing via `npm`:
+
+`npm install --save @avalabs/avalanchejs`
+
+For installing via `yarn`:
+
+`yarn add @avalabs/avalanchejs`
+
+:::caution
+
+Please note that [this](https://www.npmjs.com/package/avalanche) npm package is deprecated. Make sure to always use [@avalabs/avalanchejs](https://www.npmjs.com/package/@avalabs/avalanchejs) instead.
+
+:::
+
+### Build from Repository
+
+You can also pull the repo down directly and build it from scratch.
+
+Clone the AvalancheJS repository:
+
+`git clone https://github.com/ava-labs/avalanchejs.git`
+
+Then build it:
+
+`npm run build`
+
+or
+
+`yarn build`
+
+This will generate a pure JavaScript library and place it in a folder named "web" in the project root. The "avalanchejs" file can then be dropped into any project as a pure JavaScript implementation of Avalanche.
+
+![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
+
+## Use AvalancheJS in Projects
+
+The AvalancheJS library can be imported into your existing Node.js project as follows:
+
+```ts
+const avalanche = require("avalanche")
+```
+
+Or into your TypeScript project like this:
+
+```ts
+import { Avalanche } from "avalanche"
+```
+
+## Importing Essentials
 
 ```ts
 import { Avalanche, BinTools, Buffer, BN } from "avalanche"
 
-let myNetworkID = 1 //default is 3, we want to override that for our local network
-let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM" // The X-Chain blockchainID on this network
-let avax = new avalanche.Avalanche(
-  "localhost",
-  9650,
-  "http",
-  myNetworkID,
-  myBlockchainID
-)
-let xchain = avax.XChain() //returns a reference to the X-Chain used by AvalancheJS
+let bintools = BinTools.getInstance()
 ```
 
-We’re also assuming that the keystore contains a list of addresses used in this transaction.
+The above lines import the libraries used in the tutorials. The libraries include:
 
-## Getting the UTXO Set
+- avalanche: Our JavaScript module.
+- bn.js: A big number module use by AvalancheJS.
+- buffer: A Buffer library.
+- BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
-The X-Chain stores all available balances in a data store called Unspent Transaction Outputs (UTXOs). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times (a timestamp after which the output can be spent) and thresholds (how many signers are required to spend the output).
+## Run Scripts
 
-For the case of this example, we’re going to create a simple transaction that spends an amount of available coins and sends it to a single address without any restrictions. The management of the UTXOs will mostly be abstracted away.
+### TypeScript File
 
-However, we do need to get the UTXO Set for the addresses we’re managing.
+**Via NPM**
 
-```ts
-let myAddresses = xchain.keyChain().getAddresses() //returns an array of addresses the KeyChain manages
-let addressStrings = xchain.keyChain().getAddressStrings() //returns an array of addresses the KeyChain manages as strings
-let utxos = (await xchain.getUTXOs(myAddresses)).utxos
-```
+Install typescript:
 
-## Spending the UTXOs
+`npm install typescript`
 
-The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
+Run the script:
 
-```ts
-let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6" //avaSerialized string
-let mybalance = utxos.getBalance(myAddresses, assetid) //returns 400 as a BN
-```
+`ts-node script-name.ts`
 
-We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
+**Via YARN**
 
-```ts
-let sendAmount = new BN(100) //amounts are in BN format
-let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk" // address format is Bech32
+Install typescript:
 
-//The below returns a UnsignedTx
-//Parameters sent are (in order of appearance):
-//   * The UTXO Set
-//   * The amount being sent as a BN
-//   * An array of addresses to send the funds
-//   * An array of addresses sending the funds
-//   * An array of addresses any leftover funds are sent
-//   * The AssetID of the funds being sent
-let unsignedTx = await xchain.buildBaseTx(
-  utxos,
-  sendAmount,
-  [friendsAddress],
-  addressStrings,
-  addressStrings,
-  assetid
-)
-let signedTx = unsignedTx.sign(myKeychain)
-let txid = await xchain.issueTx(signedTx)
-```
+`yarn add typescript`
 
-And the transaction is sent!
+Run the script:
 
-## Get the Status of the Transaction
+`ts-node script-name.ts`
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
+### JavaScript File
 
-```ts
-// returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
-let status = await xchain.getTxStatus(txid)
-```
+As Node.js is already installed per [requirements](/#Requirements), simply run the script:
 
-The statuses can be one of `Accepted`, `Processing`, `Unknown`, and `Rejected`
+`node script-name.js`
 
-- "Accepted" indicates that the transaction has been accepted as valid by the network and executed
-- "Processing" indicates that the transaction is being voted on.
-- "Unknown" indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-- "Rejected" indicates the node knows about the transaction, but it conflicted with an accepted transaction
+### Example
 
-## Check the Results
+Let's say that the AvalancheJS repository was cloned. There are a lot of useful scripts in `Examples`. Suppose the one we want to run is AVM's `getTx`, which has the path `examples/avm/getTX.ts`.
 
-The transaction finally came back as `Accepted`, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+To execute the script, we use:
 
-_Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
+`ts-node examples/avm/getTx.ts`
 
-```ts
-let updatedUTXOs = await xchain.getUTXOs()
-let newBalance = updatedUTXOs.getBalance(myAddresses, assetid)
-if (newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()) {
-  throw Error("heyyy these should equal!")
+It ran successfully, providing the following output:
+
+```zsh
+lavinia@Lavinias-MacBook-Pro avalanchejs % ts-node examples/avm/getTx.ts
+{
+  unsignedTx: {
+    networkID: 1,
+    blockchainID: '11111111111111111111111111111111LpoYY',
+    outputs: [ [Object] ],
+    inputs: [ [Object] ],
+    memo: '0x',
+    destinationChain: '2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM',
+    exportedOutputs: [ [Object] ]
+  },
+  credentials: [ { signatures: [Array] } ],
+  id: 'MTyhpMPU69qLPJL59dwfYbxpWNzp8bfsHyvy9B4DkzN2kWSQ5'
 }
 ```
