@@ -1,64 +1,110 @@
-# App.js
+# IPFSUploader.js
 
 ```js
-import React from 'react';
-import {GetWeb3, GetContract, GetAccount} from './BlockchainUtil';
-import IPFSUploader from './IPFSUploader';
-import IPFSViewer from './IPFSViewer';
+import React from "react";
+import Compressor from "compressorjs";
+import { Loader } from "rimble-ui";
 
-import contractJson from './build/contracts/FileManager.json';
+const { create } = require("ipfs-http-client");
+const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 
-class App extends React.Component {
+class IPFSUploader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      web3: null,
-      account: null,
-      contract: null
+      buffer: null,
+      fileName: null,
+      fileType: null,
+      cid: null,
+      account: this.props.state.account,
+      loading: false,
+      loadingReason: "",
+    };
+  }
+
+  captureFile = (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    let type = file.type.split("/");
+
+    if (type[0] === "image") {
+      new Compressor(file, {
+        quality: 0.2,
+        success: (compressedResult) => {
+          const reader = new window.FileReader();
+          reader.readAsArrayBuffer(compressedResult);
+          reader.onloadend = () => {
+            this.setState({
+              buffer: Buffer(reader.result),
+              fileName: file.name,
+              fileType: file.type,
+            });
+          };
+        },
+      });
+    } else {
+      const reader = new window.FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = () => {
+        this.setState({
+          buffer: Buffer(reader.result),
+          fileName: file.name,
+          fileType: file.type,
+        });
+      };
     }
-  }
+  };
 
-  componentDidMount() {
-    this.init();
-  }
+  onSubmit = async (event) => {
+    event.preventDefault();
 
-  async init() {
-    //1. Load web3
-    const Web3 = new GetWeb3();
-    this.web3 = await Web3.getWeb3();
-    this.setState({web3: this.web3});
+    this.setState({ loading: true, loadingReason: "Uploading to IPFS" });
+    const { cid } = await ipfs.add(this.state.buffer);
+    this.setState({ cid: cid.string, loadingReason: "Waiting for approval" });
 
-    //2. Load Account
-    const Account = new GetAccount();
-    this.account = await Account.getAccount(this.web3);
-    this.setState({account: this.account[0]});
+    try {
+      await this.props.state.contract.addFile(
+        [this.state.fileName, this.state.fileType],
+        this.state.cid,
+        { from: this.props.state.account, gas: 20000000 }
+      );
+    } catch (e) {
+      console.log("Transaction failed");
+    }
 
-    //3. Load Contract
-    const Contract = new GetContract();
-    this.contract = await Contract.getContract(this.web3, contractJson);
-    this.setState({contract: this.contract});
-
-    console.log("App contract: ", this.contract);
-  }
+    this.setState({ loading: false });
+  };
 
   render() {
     return (
       <div>
-        {/* 5. Navbar */}
-        <nav className="navbar navbar-dark shadow" style={{backgroundColor: "#1b2021", height: "60px", color: "white"}}>
-            <b>Distributed File Manager</b>
-            <span style={{float: "right"}}>{this.state.account}</span>
-        </nav>
+        <center style={{ margin: "50px auto" }}>
+          <form onSubmit={this.onSubmit}>
+            <input
+              className="text-light bg-dark"
+              type="file"
+              onChange={this.captureFile}
+            />
+            <br />
+            <br />
 
-        {/* 6. IPFS Viewer com  ponent */}
-        <IPFSViewer state = {this.state} />
-
-        {/* 7. IPFS Uploader component */}
-        <IPFSUploader state = {this.state} />
+            {this.state.loading ? (
+              <center>
+                <Loader size="40px" color="white" />
+                <br />
+                <font size="2" color="white" style={{ marginTop: "-10px" }}>
+                  {this.state.loadingReason}
+                </font>
+              </center>
+            ) : (
+              <input className="btn btn-dark" type="submit" />
+            )}
+          </form>
+        </center>
       </div>
-    )
+    );
   }
 }
 
-export default App;
+export default IPFSUploader;
 ```
