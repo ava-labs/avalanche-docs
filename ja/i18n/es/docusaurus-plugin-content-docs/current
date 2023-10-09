@@ -1,16 +1,24 @@
 ---
 tags:
   - AvalancheGo APIs
-description: This page is an overview of the IPC API associated with AvalancheGo.
-sidebar_label: IPC API
-pagination_label: IPC API
+description: This page is an overview of the Keystore API associated with AvalancheGo.
+sidebar_label: Keystore API
+pagination_label: Keystore API
 ---
 
-# IPC API
 
-The IPC API allows users to create Unix domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+# Keystore API
 
-A node will only expose this API if it is started with [config flag](/nodes/configure/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
+:::warning
+Because the node operator has access to your plain-text password, you should only create a keystore user on a node that you operate. If that node is breached, you could lose all your tokens. Keystore APIs are not recommended for use on Mainnet.
+:::
+
+Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+
+For validation and cross-chain transfer on the Mainnet, you should issue transactions through [AvalancheJS](/tooling/avalanchejs-overview). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised. See following docs for details:
+
+- [Transfer AVAX Tokens Between Chains](/tooling/avalanchejs-guides/cross-chain-transfers)
+- [Add a Node to the Validator Set](/nodes/validate/add-a-validator)
 
 :::info
 
@@ -18,35 +26,19 @@ This API set is for a specific node, it is unavailable on the [public server](/t
 
 :::
 
-## IPC Message Format
-
-Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.
-
-Example:
-
-```text
-Sending:
-    [0x41, 0x76, 0x61, 0x78]
-Writes to the socket:
-    [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x41, 0x76, 0x61, 0x78]
-```
-
-## IPC Socket URL Format
-
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives vertices and blocks and while the decisions socket receives individual transactions.
-
 ## Format
 
-This API uses the `json 2.0` RPC format.
+This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](/reference/standards/guides/issuing-api-calls.md).
 
 ## Endpoint
 
-`/ext/ipcs`
+```text
+/ext/keystore
+```
 
 ## Methods
 
-### `ipcs.publishBlockchain`
-
+### keystore.createUser
 
 :::caution
 
@@ -54,29 +46,34 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::
 
-Register a blockchain so it publishes accepted vertices to a Unix domain socket.
+Create a new user with the specified username and password.
 
 **Signature:**
 
 ```sh
-ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
+keystore.createUser(
+    {
+        username:string,
+        password:string
+    }
+) -> {}
 ```
 
-- `blockchainID` is the blockchain that will publish accepted vertices.
-- `consensusURL` is the path of the Unix domain socket the vertices are published to.
-- `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+- `username` and `password` can be at most 1024 characters.
+- Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
 
 **Example Call:**
 
 ```sh
 curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "ipcs.publishBlockchain",
-    "params":{
-        "blockchainID":"11111111111111111111111111111111LpoYY"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"keystore.createUser",
+    "params" :{
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
 **Example Response:**
@@ -84,15 +81,12 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "result": {
-    "decisionsURL": "/tmp/1-11111111111111111111111111111111LpoYY-consensus",
-    "consensusURL": "/tmp/1-11111111111111111111111111111111LpoYY-decisions"
-  },
-  "id": 1
+  "id": 1,
+  "result": {}
 }
 ```
 
-### `ipcs.unpublishBlockchain`
+### keystore.deleteUser
 
 :::caution
 
@@ -100,27 +94,26 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 :::
 
-Deregister a blockchain so that it no longer publishes to a Unix domain socket.
+Delete a user.
 
 **Signature:**
 
 ```sh
-ipcs.unpublishBlockchain({blockchainID: string}) -> {}
+keystore.deleteUser({username: string, password:string}) -> {}
 ```
-
-- `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
 
 **Example Call:**
 
 ```sh
 curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "ipcs.unpublishBlockchain",
-    "params":{
-        "blockchainID":"11111111111111111111111111111111LpoYY"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"keystore.deleteUser",
+    "params" : {
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
 **Example Response:**
@@ -128,7 +121,149 @@ curl -X POST --data '{
 ```json
 {
   "jsonrpc": "2.0",
-  "result": {},
-  "id": 1
+  "id": 1,
+  "result": {}
+}
+```
+
+### keystore.exportUser
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+Export a user. The user can be imported to another node with [`keystore.importUser`](/reference/avalanchego/keystore-api.md#keystoreimportuser). The user’s password remains encrypted.
+
+**Signature:**
+
+```sh
+keystore.exportUser(
+    {
+        username:string,
+        password:string,
+        encoding:string //optional
+    }
+) -> {
+    user:string,
+    encoding:string
+}
+```
+
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"keystore.exportUser",
+    "params" :{
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "user": "7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc00000000",
+    "encoding": "hex"
+  }
+}
+```
+
+### keystore.importUser
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+
+**Signature:**
+
+```sh
+keystore.importUser(
+    {
+        username:string,
+        password:string,
+        user:string,
+        encoding:string //optional
+    }
+) -> {}
+```
+
+`encoding` specifies the format of the string encoding user data. Can only be `hex` when a value is provided.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"keystore.importUser",
+    "params" :{
+        "username":"myUsername",
+        "password":"myPassword",
+        "user"    :"0x7655a29df6fc2747b0874e1148b423b954a25fcdb1f170d0ec8eb196430f7001942ce55b02a83b1faf50a674b1e55bfc000000008cf2d869"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {}
+}
+```
+
+### keystore.listUsers
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+List the users in this keystore.
+
+**Signature:**
+
+```sh
+keystore.ListUsers() -> {users:[]string}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"keystore.listUsers"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "users": ["myUsername"]
+  }
 }
 ```
