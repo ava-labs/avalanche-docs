@@ -1,34 +1,16 @@
 ---
 tags:
   - Nodes
-description: This section details the difference between staking and delegating on Avalanche.
-sidebar_label: Validate vs. Delegate
-pagination_label: Validate vs. Delegate
-sidebar_position: 1
+description: Staking is an essential part of proof-of-stake (PoS) consensus mechanisms used by many blockchain networks, including Avalanche.
+sidebar_label: What Is Staking?
+pagination_label: What Is Staking?
+sidebar_position: 0
 ---
 
-# The Differences Between Validation and Delegation on Avalanche
+# What Is Staking?
 
-## Validation
+Staking is the process where users lock up their tokens to support a blockchain network and, in return, receive rewards. It is an essential part of proof-of-stake (PoS) consensus mechanisms used by many blockchain networks, including Avalanche. PoS systems require participants to stake a certain amount of tokens as collateral to participate in the network and validate transactions.
 
-Validation in the context of staking refers to the act of running a node on the blockchain network to validate transactions and secure the network.
+## How Does Proof-of-Stake Work?
 
-- **Stake Requirement:** To become a validator on the Avalanche network, one must stake a minimum amount of 2,000 AVAX tokens on the Mainnet (1 AVAX on the Fuji Testnet).
-- **Process:** Validators participate in achieving consensus by repeatedly sampling other validators. The probability of being sampled is proportional to the validator's stake, meaning the more tokens a validator stakes, the more influential they are in the consensus process.
-- **Rewards:** Validators are eligible to receive rewards for their efforts in securing the network. To receive rewards, a validator must be online and responsive for more than 80% of their validation period.
-
-## Delegation
-
-Delegation allows token holders who do not wish to run their own validator node to still participate in staking by "delegating" their tokens to an existing validator node.
-
-- **Stake Requirement:** To delegate on the Avalanche network, a minimum of 25 AVAX tokens is required on the Mainnet (1 AVAX on the Fuji Testnet).
-- **Process:** Delegators choose a specific validator node to delegate their tokens to, trusting that the validator will behave correctly and help secure the network on their behalf.
-- **Rewards:** Delegators are also eligible to receive rewards for their stake. The validator they delegate to shares a portion of the reward with them, according to the validator's delegation fee rate.
-
-## Key Differences
-
-- **Responsibilities:** Validators actively run a node, validate transactions, and actively participate in securing the network. Delegators, on the other hand, do not run a node themselves but entrust their tokens to a validator to participate on their behalf.
-- **Stake Requirement:** Validators have a higher minimum stake requirement compared to delegators, as they take on more responsibility in the network.
-- **Rewards Distribution:** Validators receive rewards directly for their validation efforts. Delegators receive rewards indirectly through the validator they delegate to, sharing a portion of the validator's reward.
-
-In summary, validation involves actively participating in securing the network by running a node, while delegation allows token holders to participate passively by trusting their stake to a chosen validator. Both validators and delegators can earn rewards, but validators have higher stakes and more direct involvement in the Avalanche network.
+To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. On Avalanche, the scarce resource is the native token, [AVAX](/learn/avalanche/intro.md#avax). For a node to validate a blockchain on Avalanche, it must stake AVAX.
