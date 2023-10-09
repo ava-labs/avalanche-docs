@@ -2,286 +2,130 @@
 tags:
   - Build
   - Dapps
-description: This tutorial walks through verifying a smart contract on a block explorer using Hardhat after deploying it to Avalance C-Chain.
-sidebar_label: Using Hardhat
-pagination_label: Verifying Smart Contracts Using Hardhat and Snowtrace
+description: This tutorial walks through verifying a smart contract on the Snowtrace block explorer.
+sidebar_label: on Snowtrace
+pagination_label: Verify Smart Contracts on the C-Chain Explorer
+sidebar_position: 0
 ---
 
-# Verifying Smart Contracts Using Hardhat and Snowtrace
+# Verify Smart Contracts on the C-Chain Explorer
 
-This tutorial assumes that the contract was deployed using Hardhat and that all Hardhat dependencies are properly installed.
+The C-Chain Explorer supports verifying smart contracts, allowing users to review it.
 
-After deploying a smart contract one can verify the smart contract on Snowtrace in three steps:
+The Mainnet C-Chain Explorer is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here.](https://testnet.snowtrace.io/)
 
-1. Flatten the Smart Contract
-2. Clean up the flattened contract
-3. Verify using the Snowtrace GUI
+If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
-## Flatten a Smart Contract using Hardhat
+## Steps
 
-To flatten the contract run the command: `npx hardhat flatten <path-to-contract> >> <flat-contract-name>.sol`
+Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
-## Clean up the flattened Smart Contract
+![verify and publish](/img/verify-and-publish1.png)
 
-Some clean-up may be necessary to get the code to compile properly in the Snowtrace Contract Verifier
+Click _Verify & Publish_ to enter the smart contract verification page.
 
-- Remove all but the top SPDX license.
+![SRC](/img/verify-src.png)
 
-  - If the contract uses multiple SPDX licenses, use both licenses by adding AND: `SPDX-License-Identifier: MIT AND BSD-3-Clause`
+[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
-## Verify the Smart Contract using Snowtrace
+![libraries](/img/verify-libraries.png)
 
-1. Search for the contract in Snowtrace
-2. Click on the contract tab
+The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online ABI encoder](https://abi.hashex.org/).
 
-   1. If the contract is unverified you will see something similar to the image below ![snowtraceHH-1](/img/snowtraceHH-1.png)
+## Requirements
 
-   <br></br>
+- **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
+- Contracts must be flattened.
+  - Includes will not work.
+- Contracts should be compile-able in [Remix](https://remix.ethereum.org).
+  - A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs. This might cause validation issues.
+- The C-Chain Explorer **only** validates [solc JavaScript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
 
-3. Click Verify and Publish
-4. On the next screen in the dropdown menus select the following
+## Libraries
 
-   1. **Solidity (Single file)**
-   2. **The compiler version you used to compile the deployed contract**
-   3. The open-source license type (select none if applicable) ![snowtraceHH-2](/img/snowtraceHH-2.png)
-
-   <br></br>
-
-5. Copy and paste the code from the flattened contract into the appropriate box
-6. If optimization was used when compiling the contract, make sure to select “Yes” in the dropdown menu labeled “Optimization”
-
-   1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number of runs ![snowtraceHH-3](/img/snowtraceHH-3.png)
-
-   <br></br>
-
-7. Select Verify and Publish
-   1. If successful, all Contracts with the same bytecode will be verified
-   2. If unsuccessful, read the error messages provided and make the appropriate changes
-      1. Ensure to check that the compiler version and optimizer runs are the same as when you compiled  the contract prior to deployment
-
-## Verifying with Hardhat-Verify
-
-This part of the tutorial assumes that the contract was deployed using Hardhat and that all Hardhat dependencies are properly installed to include `'@nomiclabs/hardhat-etherscan'`.
-
-You will need to create a `.env.json` with your _Wallet Seed Phrase_ and _Snowtrace API key_
-
-You will need to obtain an _API key_ [here](https://snowtrace.io/myapikey)
-
-Example `.env.json`:
+The compile bytecode will identify if there are external libraries. If you released with Remix, you will also see multiple transactions created.
 
 ```json
 {
-  "MNEMONIC": "your-wallet-seed-phrase",
-  "APIKEY": "your-snowtrace-api-key"
+  "linkReferences": {
+    "contracts/Storage.sol": {
+      "MathUtils": [
+        {
+          "length": 20,
+          "start": 3203
+        }
+        ...
+      ]
+    }
+  },
+  "object": "....",
+  ...
 }
 ```
 
-<br></br>
+This requires you to add external libraries in order to verify the code.
 
-Below is a sample `hardhat.config.ts` used for deployment and verification (See LN 45: `etherscan`)
+A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies (that is you might need to prune the Solidity code to exclude anything but the necessary classes).
 
-```typescript
-import { task } from "hardhat/config"
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
-import { BigNumber } from "ethers"
-import "@typechain/hardhat"
-import "@nomiclabs/hardhat-ethers"
-import "@nomiclabs/hardhat-waffle"
-import "hardhat-gas-reporter"
-import "@nomiclabs/hardhat-etherscan"
-import { MNEMONIC, APIKEY } from "./.env.json"
+You can also see references in the byte code in the form `__$75f20d36....$__`. The keccak256 hash is generated from the library name.
 
-// When using the hardhat network, you may choose to fork Fuji or Avalanche Mainnet
-// This will allow you to debug contracts using the hardhat network while keeping the current network state
-// To enable forking, turn one of these booleans on, and then run your tasks/scripts using ``--network hardhat``
-// For more information go to the hardhat guide
-// https://hardhat.org/hardhat-network/
-// https://hardhat.org/guides/mainnet-forking.html
-const FORK_FUJI = false
-const FORK_MAINNET = false
-const forkingData = FORK_FUJI
-  ? {
-      url: "https://api.avax-test.network/ext/bc/C/rpc",
-    }
-  : FORK_MAINNET
-  ? {
-      url: "https://api.avax.network/ext/bc/C/rpc",
-    }
-  : undefined
+Example [online converter](https://emn178.github.io/online-tools/keccak_256.html): `contracts/Storage.sol:MathUtils` =&gt; `75f20d361629befd780a5bd3159f017ee0f8283bdb6da80805f83e829337fd12`
 
-task(
-  "accounts",
-  "Prints the list of accounts",
-  async (args, hre): Promise<void> => {
-    const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
-    accounts.forEach((account: SignerWithAddress): void => {
-      console.log(account.address)
-    })
+## Examples
+
+- [SwapFlashLoan](https://testnet.snowtrace.io/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
+
+SwapFlashLoan uses swaputils and mathutils:
+
+- [SwapUtils](https://testnet.snowtrace.io/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
+
+SwapUtils requires mathutils:
+
+- [MathUtils](https://testnet.snowtrace.io/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
+
+## Caveats
+
+### SPDX License Required
+
+An SPDX must be provided.
+
+```javascript
+// SPDX-License-Identifier: ...
+```
+
+### `keccak256` Strings Processed
+
+The C-Chain Explorer interprets all keccak256(...) strings, even those in comments. This can cause issues with constructor arguments.
+
+```javascript
+/// keccak256("1");
+keccak256("2")
+```
+
+This could cause automatic constructor verification failures. If you receive errors about constructor arguments they can be provided in ABI hex encoded form on the contract verification page.
+
+### Solidity Constructors
+
+Constructors and inherited constructors can cause problems verifying the constructor arguments.
+
+example:
+
+```javascript
+abstract contract Parent {
+  constructor () {
+    address msgSender = ...;
+    emit Something(address(0), msgSender);
   }
-)
-
-task(
-  "balances",
-  "Prints the list of AVAX account balances",
-  async (args, hre): Promise<void> => {
-    const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
-    for (const account of accounts) {
-      const balance: BigNumber = await hre.ethers.provider.getBalance(
-        account.address
-      )
-      console.log(`${account.address} has balance ${balance.toString()}`)
-    }
+}
+contract Main is Parent {
+  constructor (
+          string memory _name,
+          address deposit,
+          uint fee
+  ) {
+    ...
   }
-)
-export default {
-  etherscan: {
-    // Your API key for Snowtrace
-    // Obtain one at https://snowtrace.io/
-    apiKey: APIKEY,
-  },
-
-  solidity: {
-    compilers: [
-      {
-        version: "0.8.0",
-      },
-      {
-        version: "0.8.10",
-      },
-    ],
-  },
-  networks: {
-    hardhat: {
-      gasPrice: 225000000000,
-      chainId: 43114, //Only specify a chainId if we are not forking
-      // forking: {
-      //   url: 'https://api.avax.network/ext/bc/C/rpc',
-      // },
-    },
-    fuji: {
-      url: "https://api.avax-test.network/ext/bc/C/rpc",
-      gasPrice: 225000000000,
-      chainId: 43113,
-      accounts: { mnemonic: MNEMONIC },
-    },
-    mainnet: {
-      url: "https://api.avax.network/ext/bc/C/rpc",
-      gasPrice: 225000000000,
-      chainId: 43114,
-      accounts: { mnemonic: MNEMONIC },
-    },
-  },
 }
 ```
 
-<br></br>
-
-Once the contract is deployed, verify with hardhat verify by running the following:
-
-```zsh
-npx hardhat verify <contract address> <arguments> --network <network>
-```
-
-<br></br>
-
-Example:
-
-```zsh
-npx hardhat verify 0x3972c87769886C4f1Ff3a8b52bc57738E82192D5 MockNFT Mock ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY 100 --network fuji
-```
-
-<br></br>
-
-You can also verify contracts programmatically via script
-
-Example:
-
-```typescript
-import console from "console"
-const hre = require("hardhat")
-
-// Define the NFT
-const name = "MockNFT"
-const symbol = "Mock"
-const _metadataUri = "ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY"
-const _maxTokens = "100"
-
-async function main() {
-  await hre.run("verify:verify", {
-    address: "0x3972c87769886C4f1Ff3a8b52bc57738E82192D5",
-    constructorArguments: [name, symbol, _metadataUri, _maxTokens],
-  })
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
-```
-
-<br></br>
-
-First create your script, then execute it via hardhat by running the following:
-
-```zsh
-npx hardhat run scripts/<scriptname.ts> --network <network>
-```
-
-<br></br>
-
-Example:
-
-```zsh
-npx hardhat run scripts/5-verifyNFT.ts --network fuji
-```
-
-<br></br>
-
-Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your _Constructor Arguments_
-
-Example: (see LN13 `_custodians`, LN 30 `_custodians`)
-
-```typescript
-import console from "console"
-const hre = require("hardhat")
-
-// Define the NFT
-const name = "MockNFT"
-const symbol = "Mock"
-const _metadataUri =
-  "ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Example"
-const _royaltyRecipient = "0xcd3b766ccdd6ae721141f452c550ca635964ce71"
-const _royaltyValue = "50000000000000000"
-const _custodians = [
-  "0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199",
-  "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-  "0xdd2fd4581271e230360230f9337d5c0430bf44c0",
-]
-const _saleLength = "172800"
-const _claimAddress = "0xcd3b766ccdd6ae721141f452c550ca635964ce71"
-
-async function main() {
-  await hre.run("verify:verify", {
-    address: "0x08bf160B8e56899723f2E6F9780535241F145470",
-    constructorArguments: [
-      name,
-      symbol,
-      _metadataUri,
-      _royaltyRecipient,
-      _royaltyValue,
-      _custodians,
-      _saleLength,
-      _claimAddress,
-    ],
-  })
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
-```
+If you receive errors about constructor arguments they can be provided in ABI hex encoded form on the contract verification page.
