@@ -1,92 +1,64 @@
-# AuctionList.js
+# CreateAuction.js
 
 ```js
 import React, { useState } from "react";
 import { useDrizzleContext } from './drizzleContext';
 
-function FetchAuctions({cacheCalls, userInfo}) {
+function CreateAuction() {
+    // Importing drizzle variables from drizzle context
     const { drizzleVariables } = useDrizzleContext();
     const { AuctionManager, accounts } = drizzleVariables;
 
-    const [bidPrices, setBidPrices] = useState(new Map([]))
-
-    const createBid = async (id, bidPrice) => {
-        await AuctionManager?.createBid(id, bidPrice).send({from: accounts[0]});
-        clearBidPriceInput(id);
+    const createAuction = async ({title, description, msp}) => {
+        await AuctionManager?.createAuction(title, description, msp)?.send({from: accounts[0]});
+        setAuctionDetails({
+            title: "",
+            description: "",
+            msp: ""
+        })
     }
 
-    const submitNewBid = (event, id) => {
+    const [auctionDetails, setAuctionDetails] = useState({
+        title: "",
+        description: "",
+        msp: ""
+    });
+
+    const handleAuctionTitleChange = (event) => {
+        setAuctionDetails({
+            ...auctionDetails,
+            title: event.target.value
+        });
+    }
+
+    const handleAuctionDescriptionChange = (event) => {
+        setAuctionDetails({
+            ...auctionDetails,
+            description: event.target.value
+        });
+    }
+
+    const handleAuctionMspChange = (event) => {
+        setAuctionDetails({
+            ...auctionDetails,
+            msp: event.target.value
+        });
+    }
+
+    const submitNewAuction = (event) => {
         event.preventDefault();
-        createBid(id, bidPrices.get(id));
+        createAuction(auctionDetails);
     }
 
-    const handleBidPriceChange = (event, id) => {
-        let _bidPrices = bidPrices;
-        _bidPrices.set(id, event.target.value);
-        setBidPrices(_bidPrices)
-    }
-
-    const clearBidPriceInput = (id) => {
-        let _bidPrices = bidPrices;
-        _bidPrices[id] = "";
-        setBidPrices(_bidPrices)
-    }
-
-    const getAuctionAnalytics = () => {
-        let auctionAnalytics = [];
-        for(let i = 0; i < cacheCalls.aId; i++) {
-            auctionAnalytics.push(cacheCalls.auctionAnalytics[i]);
-        }
-        return auctionAnalytics;
-    }
-
-    const allAuctions = cacheCalls.showAuctions;
-    const auctionAnalytics = getAuctionAnalytics();
     return (
-        <table border="1" style={{maxWidth: "800px", width: "90%"}}>
-            <tr>
-                <td>Auction ID</td>
-                <td>Auction Details</td>
-                <td>Minimum Price</td>
-                <td>Bid</td>
-            </tr>
-            {
-                allAuctions !== undefined && allAuctions.map((auction, index) => (
-                    <tr>
-                        <td>
-                            {auction.auctionId}
-                        </td>
-                        <td>
-                            <b>{auction.name} <font size="2" color="green">{auction.userId == userInfo.id && "(created by you)"}</font></b><br/>
-                            <font size="2">{auction.description}</font><br/>
-                            <tr>
-                                <td>Total Bids</td>
-                                <td>Latest Bid</td>
-                                <td>Highest Bid</td>
-                                <td>Lowest Bid</td>
-                            </tr>
-                            <tr>
-                                <td>{auctionAnalytics[index]?.auctionBidId}</td>
-                                <td>₹{auctionAnalytics[index]?.latestBid}</td>
-                                <td>₹{auctionAnalytics[index]?.highestBid}</td>
-                                <td>₹{auctionAnalytics[index]?.auctionBidId == 0 ? 0 : auctionAnalytics[index]?.lowestBid}</td>
-                            </tr>
-                        </td>
-                        <td>
-                            ₹{auction.msp}
-                        </td>
-                        <td>
-                            <form onSubmit={(event) => submitNewBid(event, auction.auctionId)} style={{margin: "10px"}}>
-                                <input required type="number" min={auction.msp} onChange={(event) => handleBidPriceChange(event, auction.auctionId)} placeholder="Enter your bid price"/><br/><br/>
-                                <input type="submit" value="Make Bid"/><br/><br/>
-                            </form>
-                        </td>
-                    </tr>
-                ))
-            }
-        </table>
+        <form onSubmit={submitNewAuction} style={{border: "1px black solid", maxWidth: "400px", padding: "10px"}}>
+            <label>Title: </label><br/><input value={auctionDetails.title} onChange={handleAuctionTitleChange}/><br/><br/>
+            <label>Description: </label><br/><textarea rows="4" value={auctionDetails.description} onChange={handleAuctionDescriptionChange}/><br/><br/>
+            <label>MSP: </label><br/><input value={auctionDetails.msp} onChange={handleAuctionMspChange}/><br/><br/>
+            <input type="submit" value="Create Auction" />
+        </form>
     )
 }
 
-export default FetchAuctions;
+export default CreateAuction;
 ```
