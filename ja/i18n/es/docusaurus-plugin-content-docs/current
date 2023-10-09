@@ -1,2696 +1,2229 @@
 ---
 tags:
-  - P-Chain
-  - Platform Chain
-  - Transaction Format
-description: This page is an overview of the transaction format associated with AvalancheGo P-Chain API.
-sidebar_label: Transaction Format
-pagination_label: P-Chain Transaction Format
+  - X-Chain
+  - AvalancheGo APIs
+description: This page is an overview of the Exchange Chain (X-Chain) API associated with AvalancheGo.
+sidebar_label: API
+pagination_label: X-Chain API
 ---
 
-# P-Chain Transaction Format
+# X-Chain API
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for packing and [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+The [X-Chain](/learn/avalanche/avalanche-platform.md#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine (AVM). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
-## Codec ID
+## Format
 
-Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](/reference/standards/guides/issuing-api-calls.md).
 
-## Proof of Possession
+## Endpoints
 
-A BLS public key and a proof of possession of the key.
+`/ext/bc/X` to interact with the X-Chain.
 
-### What Proof of Possession Contains
+`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
 
-- **PublicKey** is the 48 byte representation of the public key.
-- **Signature** is the 96 byte signature by the private key over its public key.
+## Methods
 
+### `avm.buildGenesis`
 
-### Proof of Possession Specification
+Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
 
-```text
-+------------+----------+-------------------------+
-| public_key : [48]byte |                48 bytes |
-+------------+----------+-------------------------+
-| signature  : [96]byte |                96 bytes |
-+------------+----------+-------------------------+
-                        |               144 bytes |
-                        +-------------------------+
-```
+#### **Endpoint**
 
-### Proof of Possession Specification
+This call is made to the AVM’s static API endpoint:
 
-```text
-message ProofOfPossession {
-    bytes public_key = 1; // 48 bytes
-    bytes signature = 2;  // 96 bytes
+`/ext/vm/avm`
+
+Note: addresses should not include a chain prefix (that is `X-`) in calls to the static API endpoint because these prefixes refer to a specific chain.
+
+**Signature:**
+
+```sh
+avm.buildGenesis({
+    networkID: int,
+    genesisData: JSON,
+    encoding: string, //optional
+}) -> {
+    bytes: string,
+    encoding: string,
 }
 ```
 
-### Proof of Possession Example
+Encoding specifies the encoding format to use for arbitrary bytes, that is the genesis bytes that are returned. Can only be `hex` when a value is provided.
 
-```text
-    // Public Key:
-    0x85, 0x02, 0x5b, 0xca, 0x6a, 0x30, 0x2d, 0xc6,
-    0x13, 0x38, 0xff, 0x49, 0xc8, 0xba, 0xa5, 0x72,
-    0xde, 0xd3, 0xe8, 0x6f, 0x37, 0x59, 0x30, 0x4c,
-    0x7f, 0x61, 0x8a, 0x2a, 0x25, 0x93, 0xc1, 0x87,
-    0xe0, 0x80, 0xa3, 0xcf, 0xde, 0xc9, 0x50, 0x40,
-    0x30, 0x9a, 0xd1, 0xf1, 0x58, 0x95, 0x30, 0x67,
-    // Signature:
-    0x8b, 0x1d, 0x61, 0x33, 0xd1, 0x7e, 0x34, 0x83,
-    0x22, 0x0a, 0xd9, 0x60, 0xb6, 0xfd, 0xe1, 0x1e,
-    0x4e, 0x12, 0x14, 0xa8, 0xce, 0x21, 0xef, 0x61,
-    0x62, 0x27, 0xe5, 0xd5, 0xee, 0xf0, 0x70, 0xd7,
-    0x50, 0x0e, 0x6f, 0x7d, 0x44, 0x52, 0xc5, 0xa7,
-    0x60, 0x62, 0x0c, 0xc0, 0x67, 0x95, 0xcb, 0xe2,
-    0x18, 0xe0, 0x72, 0xeb, 0xa7, 0x6d, 0x94, 0x78,
-    0x8d, 0x9d, 0x01, 0x17, 0x6c, 0xe4, 0xec, 0xad,
-    0xfb, 0x96, 0xb4, 0x7f, 0x94, 0x22, 0x81, 0x89,
-    0x4d, 0xdf, 0xad, 0xd1, 0xc1, 0x74, 0x3f, 0x7f,
-    0x54, 0x9f, 0x1d, 0x07, 0xd5, 0x9d, 0x55, 0x65,
-    0x59, 0x27, 0xf7, 0x2b, 0xc6, 0xbf, 0x7c, 0x12
-```
+`genesisData` has this form:
 
-## Transferable Output
-
-Transferable outputs wrap an output with an asset ID.
-
-### What Transferable Output Contains
-
-A transferable output contains an `AssetID` and an `Output`.
-
-- **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-- **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
-
-### Gantt Transferable Output Specification
-
-```text
-+----------+----------+-------------------------+
-| asset_id : [32]byte |                32 bytes |
-+----------+----------+-------------------------+
-| output   : Output   |      size(output) bytes |
-+----------+----------+-------------------------+
-                      | 32 + size(output) bytes |
-                      +-------------------------+
-```
-
-### Proto Transferable Output Specification
-
-```text
-message TransferableOutput {
-    bytes asset_id = 1; // 32 bytes
-    Output output = 2;  // size(output)
+```json
+{
+"genesisData" :
+    {
+        "assetAlias1": {               // Each object defines an asset
+            "name": "human readable name",
+            "symbol":"AVAL",           // Symbol is between 0 and 4 characters
+            "initialState": {
+                "fixedCap" : [         // Choose the asset type.
+                    {                  // Can be "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
+                        "amount":1000, // At genesis, address A has
+                        "address":"A"  // 1000 units of asset
+                    },
+                    {
+                        "amount":5000, // At genesis, address B has
+                        "address":"B"  // 1000 units of asset
+                    },
+                    ...                // Can have many initial holders
+                ]
+            }
+        },
+        "assetAliasCanBeAnythingUnique": { // Asset alias can be used in place of assetID in calls
+            "name": "human readable name", // names need not be unique
+            "symbol": "AVAL",              // symbols need not be unique
+            "initialState": {
+                "variableCap" : [          // No units of the asset exist at genesis
+                    {
+                        "minters": [       // The signature of A or B can mint more of
+                            "A",           // the asset.
+                            "B"
+                        ],
+                        "threshold":1
+                    },
+                    {
+                        "minters": [       // The signatures of 2 of A, B and C can mint
+                            "A",           // more of the asset
+                            "B",
+                            "C"
+                        ],
+                        "threshold":2
+                    },
+                    ...                    // Can have many minter sets
+                ]
+            }
+        },
+        ...                                // Can list more assets
+    }
 }
 ```
 
-### Transferable Output Example
+**Example Call:**
 
-Let’s make a transferable output:
-
-- `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-- `Output: "Example SECP256K1 Transfer Output from below"`
-
-```text
-[
-    AssetID <- 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a,
-    Output  <- 0x0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c,
-]
-=
-[
-    // assetID:
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    // output:
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-]
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id"     : 1,
+    "method" : "avm.buildGenesis",
+    "params" : {
+        "networkId": 16,
+        "genesisData": {
+            "asset1": {
+                "name": "myFixedCapAsset",
+                "symbol":"MFCA",
+                "initialState": {
+                    "fixedCap" : [
+                        {
+                            "amount":100000,
+                            "address": "avax13ery2kvdrkd2nkquvs892gl8hg7mq4a6ufnrn6"
+                        },
+                        {
+                            "amount":100000,
+                            "address": "avax1rvks3vpe4cm9yc0rrk8d5855nd6yxxutfc2h2r"
+                        },
+                        {
+                            "amount":50000,
+                            "address": "avax1ntj922dj4crc4pre4e0xt3dyj0t5rsw9uw0tus"
+                        },
+                        {
+                            "amount":50000,
+                            "address": "avax1yk0xzmqyyaxn26sqceuky2tc2fh2q327vcwvda"
+                        }
+                    ]
+                }
+            },
+            "asset2": {
+                "name": "myVarCapAsset",
+                "symbol":"MVCA",
+                "initialState": {
+                    "variableCap" : [
+                        {
+                            "minters": [
+                                "avax1kcfg6avc94ct3qh2mtdg47thsk8nrflnrgwjqr",
+                                "avax14e2s22wxvf3c7309txxpqs0qe9tjwwtk0dme8e"
+                            ],
+                            "threshold":1
+                        },
+                        {
+                            "minters": [
+                                "avax1y8pveyn82gjyqr7kqzp72pqym6xlch9gt5grck",
+                                "avax1c5cmm0gem70rd8dcnpel63apzfnfxye9kd4wwe",
+                                "avax12euam2lwtwa8apvfdl700ckhg86euag2hlhmyw"
+                            ],
+                            "threshold":2
+                        }
+                    ]
+                }
+            }
+        },
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-## Transferable Input
+**Example Response:**
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
-
-### What Transferable Input Contains
-
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
-
-- **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-- **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-- **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
-- **`Input`** is a transferable input object.
-
-### Gantt Transferable Input Specification
-
-```text
-+------------+----------+------------------------+
-| tx_id      : [32]byte |               32 bytes |
-+------------+----------+------------------------+
-| utxo_index : int      |               04 bytes |
-+------------+----------+------------------------+
-| asset_id   : [32]byte |               32 bytes |
-+------------+----------+------------------------+
-| input      : Input    |      size(input) bytes |
-+------------+----------+------------------------+
-                        | 68 + size(input) bytes |
-                        +------------------------+
-```
-
-### Proto Transferable Input Specification
-
-```text
-message TransferableInput {
-    bytes tx_id = 1;       // 32 bytes
-    uint32 utxo_index = 2; // 04 bytes
-    bytes asset_id = 3;    // 32 bytes
-    Input input = 4;       // size(input)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "bytes": "0x0000000000010006617373657431000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6d794669786564436170417373657400044d464341000000000100000000000000010000000700000000000186a10000000000000000000000010000000152b219bc1b9ab0a9f2e3f9216e4460bd5db8d153bfa57c3c",
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### Transferable Input Example
+### `avm.createAddress`
 
-Let’s make a transferable input:
+:::caution
 
-- **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
-- **`UTXOIndex`**: `0`
-- **`AssetID`**: `0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-- **`Input`**: `"Example SECP256K1 Transfer Input from below"`
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
-```text
-[
-    TxID      <- 0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15
-    UTXOIndex <- 0x00000001
-    AssetID   <- 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a
-    Input     <- 0x0000000500000000ee6b28000000000100000000
-]
-=
-[
-    // txID:
-    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
-    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
-    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
-    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
-    // utxoIndex:
-    0x00, 0x00, 0x00, 0x01,
-    // assetID:
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    // input:
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00
-]
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Create a new address controlled by the given user.
+
+**Signature:**
+
+```sh
+avm.createAddress({
+    username: string,
+    password: string
+}) -> {address: string}
 ```
 
-## Outputs
+**Example Call:**
 
-Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwners`.
-
-## SECP256K1 Transfer Output
-
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified Unix time. The only valid asset is AVAX.
-
-### What SECP256K1 Transfer Output Contains
-
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
-
-- **`TypeID`** is the ID for this output type. It is `0x00000007`.
-- **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-- **`Locktime`** is a long that contains the Unix timestamp that this output can be spent after. The Unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
-
-### Gantt SECP256K1 Transfer Output Specification
-
-```text
-+-----------+------------+--------------------------------+
-| type_id   : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| amount    : long       |                        8 bytes |
-+-----------+------------+--------------------------------+
-| locktime  : long       |                        8 bytes |
-+-----------+------------+--------------------------------+
-| threshold : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
-+-----------+------------+--------------------------------+
-                         | 28 + 20 * len(addresses) bytes |
-                         +--------------------------------+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.createAddress",
+    "params": {
+        "username": "myUsername",
+        "password": "myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Proto SECP256K1 Transfer Output Specification
+**Example Response:**
 
-```text
-message SECP256K1TransferOutput {
-    uint32 type_id = 1;           // 04 bytes
-    uint64 amount = 2;            // 08 bytes
-    uint64 locktime = 3;          // 08 bytes
-    uint32 threshold = 4;         // 04 bytes
-    repeated bytes addresses = 5; // 04 bytes + 20 bytes * len(addresses)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+  },
+  "id": 1
 }
 ```
 
-### SECP256K1 Transfer Output Example
 
-Let’s make a secp256k1 transfer output with:
+<!-- 
+TODO: Add avm.createAsset  
+-->
 
-- **`TypeID`**: 7
-- **`Amount`**: 3999000000
-- **`Locktime`**: 0
-- **`Threshold`**: 1
-- **`Addresses`**:
-  - 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+### `avm.createFixedCapAsset`
 
-```text
-[
-    TypeID    <- 0x00000007
-    Amount    <- 0x00000000ee5be5c0
-    Locktime  <- 0x0000000000000000
-    Threshold <- 0x00000001
-    Addresses <- [
-        0xda2bee01be82ecc00c34f361eda8eb30fb5a715c,
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+
+**Signature:**
+
+```sh
+avm.createFixedCapAsset({
+    name: string,
+    symbol: string,
+    denomination: int, //optional
+    initialHolders: []{
+        address: string,
+        amount: int
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    assetID: string,
+    changeAddr: string
+}
+```
+
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` and `password` denote the user paying the transaction fee.
+- Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+- `assetID` is the ID of the new asset.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.createFixedCapAsset",
+    "params" :{
+        "name": "myFixedCapAsset",
+        "symbol":"MFCA",
+        "initialHolders": [
+            {
+                "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                "amount": 10000
+            },
+            {
+                "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                "amount":50000
+            }
+        ],
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "assetID": "ZiKfqRXCZgHLgZ4rxGU9Qbycdzuq5DRY4tdSNS9ku8kcNxNLD",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `avm.createNFTAsset`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+
+**Signature:**
+
+```sh
+avm.createNFTAsset({
+    name: string,
+    symbol: string,
+    minterSets: []{
+        minters: []string,
+        threshold: int
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+ {
+    assetID: string,
+    changeAddr: string,
+}
+```
+
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` pays the transaction fee.
+- `assetID` is the ID of the new asset.
+- `changeAddr` in the result is the address where any change was sent.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.createNFTAsset",
+    "params" :{
+        "name":"Coincert",
+        "symbol":"TIXX",
+        "minterSets":[
+            {
+                "minters":[
+                    "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+                ],
+                "threshold": 1
+            }
+        ],
+        "from": ["X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "assetID": "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
+}
+```
+
+### `avm.createVariableCapAsset`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+
+**Signature:**
+
+```sh
+avm.createVariableCapAsset({
+    name: string,
+    symbol: string,
+    denomination: int, //optional
+    minterSets: []{
+        minters: []string,
+        threshold: int
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    assetID: string,
+    changeAddr: string,
+}
+```
+
+- `name` is a human-readable name for the asset. Not necessarily unique.
+- `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+- `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` pays the transaction fee.
+- `assetID` is the ID of the new asset.
+- `changeAddr` in the result is the address where any change was sent.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.createVariableCapAsset",
+    "params" :{
+        "name":"myVariableCapAsset",
+        "symbol":"MFCA",
+        "minterSets":[
+            {
+                "minters":[
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+                ],
+                "threshold": 1
+            },
+            {
+                "minters": [
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                    "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+                ],
+                "threshold": 2
+            }
+        ],
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "assetID": "2QbZFE7J4MAny9iXHUwq8Pz8SpFhWk3maCw4SkinVPv6wPmAbK",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `avm.export`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::  
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call the [C-Chain's `avax.import`](/reference/avalanchego/c-chain/api.md#avaximport) or the [P-Chain's `platform.importAVAX`](/reference/avalanchego/p-chain/api.md#platformimportavax) to complete the transfer.
+
+**Signature:**
+
+```sh
+avm.export({
+    to: string,
+    amount: int,
+    assetID: string,
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string,
+}) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `to` is the P-Chain or C-Chain address the asset is sent to.
+- `amount` is the amount of the asset to send.
+- `assetID` is the asset id of the asset which is sent. Use `AVAX` for AVAX exports.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by `username`
+- `password` is `username`‘s password.
+
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.export",
+    "params" :{
+        "to":"C-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "amount": 10,
+        "assetID": "AVAX",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2Eu16yNaepP57XrrJgjKGpiEDandpiGWW8xbUm6wcTYny3fejj",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
+}
+```
+
+
+<!-- 
+TODO: Add avm.exportAVAX
+-->
+
+### `avm.exportKey`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Get the private key that controls a given address. The returned private key can be added to a user with [`avm.importKey`](/reference/avalanchego/x-chain/api.md#avmimportkey).
+
+**Signature:**
+
+```sh
+avm.exportKey({
+    username: string,
+    password: string,
+    address: string
+}) -> {privateKey: string}
+```
+
+- `username` must control `address`.
+- `privateKey` is the string representation of the private key that controls `address`.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.exportKey",
+    "params" :{
+        "username":"myUsername",
+        "password":"myPassword",
+        "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "privateKey": "PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+  }
+}
+```
+
+### `avm.getAddressTxs`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
+
+- A UTXO that the transaction consumes was at least partially owned by the address.
+- A UTXO that the transaction produces is at least partially owned by the address.
+
+:::tip
+Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+:::
+
+**Signature:**
+
+```sh
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+**Request Parameters:**
+
+- `address`: The address for which we're fetching related transactions
+- `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
+- `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
+
+**Response Parameter:**
+
+- `txIDs`: List of transaction IDs that affected the balance of this address.
+- `cursor`: Page number or offset. Use this in request to get the next page.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "txIDs": ["SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"],
+    "cursor": "1"
+  },
+  "id": 1
+}
+```
+
+### `avm.getAllBalances`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+Get the balances of all assets controlled by a given address.
+
+**Signature:**
+
+```sh
+avm.getAllBalances({address:string}) -> {
+    balances: []{
+        asset: string,
+        balance: int
+    }
+}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.getAllBalances",
+    "params" :{
+        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7hapvdyht"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "balances": [
+      {
+        "asset": "AVAX",
+        "balance": "102"
+      },
+      {
+        "asset": "2sdnziCz37Jov3QSNMXcFRGFJ1tgauaj6L7qfk7yUcRPfQMC79",
+        "balance": "10000"
+      }
     ]
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x07,
-    // amount:
-    0x00, 0x00, 0x00, 0x00, 0xee, 0x5b, 0xe5, 0xc0,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // threshold:
-    0x00, 0x00, 0x00, 0x01,
-    // number of addresses:
-    0x00, 0x00, 0x00, 0x01,
-    // addrs[0]:
-    0xda, 0x2b, 0xee, 0x01, 0xbe, 0x82, 0xec, 0xc0,
-    0x0c, 0x34, 0xf3, 0x61, 0xed, 0xa8, 0xeb, 0x30,
-    0xfb, 0x5a, 0x71, 0x5c,
-]
-```
-
-## SECP256K1 Output Owners Output
-
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) output owners output will receive the staking rewards when the lock up period ends.
-
-### What SECP256K1 Output Owners Output Contains
-
-A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
-
-- **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-- **`Locktime`** is a long that contains the Unix timestamp that this output can be spent after. The Unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
-
-### Gantt SECP256K1 Output Owners Output Specification
-
-```text
-+-----------+------------+--------------------------------+
-| type_id   : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| locktime  : long       |                        8 bytes |
-+-----------+------------+--------------------------------+
-| threshold : int        |                        4 bytes |
-+-----------+------------+--------------------------------+
-| addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
-+-----------+------------+--------------------------------+
-                         | 20 + 20 * len(addresses) bytes |
-                         +--------------------------------+
-```
-
-### Proto SECP256K1 Output Owners Output Specification
-
-```text
-message SECP256K1OutputOwnersOutput {
-    uint32 type_id = 1;           // 04 bytes
-    uint64 locktime = 2;          // 08 bytes
-    uint32 threshold = 3;         // 04 bytes
-    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+  },
+  "id": 1
 }
 ```
 
-### SECP256K1 Output Owners Output Example
+### `avm.getAssetDescription`
 
-Let’s make a secp256k1 output owners output with:
+Get information about an asset.
 
-- **`TypeID`**: 11
-- **`Locktime`**: 0
-- **`Threshold`**: 1
-- **`Addresses`**:
-  - 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+**Signature:**
 
-```text
-[
-    TypeID    <- 0x0000000b
-    Locktime  <- 0x0000000000000000
-    Threshold <- 0x00000001
-    Addresses <- [
-        0xda2bee01be82ecc00c34f361eda8eb30fb5a715c,
+```sh
+avm.getAssetDescription({assetID: string}) -> {
+    assetId: string,
+    name: string,
+    symbol: string,
+    denomination: int
+}
+```
+
+- `assetID` is the id of the asset for which the information is requested.
+- `name` is the asset’s human-readable, not necessarily unique name.
+- `symbol` is the asset’s symbol.
+- `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+
+:::note
+
+The AssetID for AVAX differs depending on the network you are on.
+
+Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
+
+Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
+
+For finding the `assetID` of other assets, this [info] might be useful. Also, `avm.getUTXOs` returns the `assetID` in its output.
+
+:::
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getAssetDescription",
+    "params" :{
+        "assetID" :"FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+        "name": "Avalanche",
+        "symbol": "AVAX",
+        "denomination": "9"
+    },
+    "id": 1
+}`
+```
+
+### `avm.getBalance`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+Get the balance of an asset controlled by a given address.
+
+**Signature:**
+
+```sh
+avm.getBalance({
+    address: string,
+    assetID: string
+}) -> {balance: int}
+```
+
+- `address` owner of the asset
+- `assetID` id of the asset for which the balance is requested
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getBalance",
+  "params" :{
+      "address":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+      "assetID": "2pYGetDWyKdHxpFxh2LHeoLNCH6H5vxxCxHQtFnnFaYxLsqtHC"
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "balance": "299999999999900",
+    "utxoIDs": [
+      {
+        "txID": "WPQdyLNqHfiEKp4zcCpayRHYDVYuh1hqs9c1RqgZXS4VPgdvo",
+        "outputIndex": 1
+      }
     ]
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x0b,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // threshold:
-    0x00, 0x00, 0x00, 0x01,
-    // number of addresses:
-    0x00, 0x00, 0x00, 0x01,
-    // addrs[0]:
-    0xda, 0x2b, 0xee, 0x01, 0xbe, 0x82, 0xec, 0xc0,
-    0x0c, 0x34, 0xf3, 0x61, 0xed, 0xa8, 0xeb, 0x30,
-    0xfb, 0x5a, 0x71, 0x5c,
-]
-```
-
-## Inputs
-
-Inputs have one possible type: `SECP256K1TransferInput`.
-
-## SECP256K1 Transfer Input
-
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
-
-### What SECP256K1 Transfer Input Contains
-
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
-
-- **`TypeID`** is the ID for this output type. It is `0x00000005`.
-- **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-- **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-
-### Gantt SECP256K1 Transfer Input Specification
-
-```text
-+-------------------------+-------------------------------------+
-| type_id         : int   |                             4 bytes |
-+-----------------+-------+-------------------------------------+
-| amount          : long  |                             8 bytes |
-+-----------------+-------+-------------------------------------+
-| address_indices : []int |  4 + 4 * len(address_indices) bytes |
-+-----------------+-------+-------------------------------------+
-                          | 16 + 4 * len(address_indices) bytes |
-                          +-------------------------------------+
-```
-
-**Proto SECP256K1 Transfer Input Specification**
-
-```text
-message SECP256K1TransferInput {
-    uint32 type_id = 1;                  // 04 bytes
-    uint64 amount = 2;                   // 08 bytes
-    repeated uint32 address_indices = 3; // 04 bytes + 4 bytes * len(address_indices)
+  }
 }
 ```
 
-### SECP256K1 Transfer Input Example
+### `avm.getBlock`
 
-Let’s make a payment input with:
+Returns the block with the given id.
 
-- **`TypeID`**: 5
-- **`Amount`**: 4000000000
-- **`AddressIndices`**: \[0\]
+**Signature:**
 
-```text
-[
-    TypeID         <- 0x00000005
-    Amount         <- 0x00000000ee6b2800,
-    AddressIndices <- [0x00000000]
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x05,
-    // amount:
-    0x00, 0x00, 0x00, 0x00, 0xee, 0x6b, 0x28, 0x00,
-    // length:
-    0x00, 0x00, 0x00, 0x01,
-    // address_indices[0]
-    0x00, 0x00, 0x00, 0x00
-]
-```
-
-## Unsigned Transactions
-
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
-
-## Unsigned BaseTx
-
-### What Base TX Contains
-
-A base TX contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
-
-- **`TypeID`** is the ID for this type. It is `0x00000000`.
-- **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-- **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-- **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-- **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-- **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
-
-### Gantt Base TX Specification
-
-```text
-+---------------+----------------------+-----------------------------------------+
-| type_id       : int                  |                                 4 bytes |
-+---------------+----------------------+-----------------------------------------+
-| network_id    : int                  |                                 4 bytes |
-+---------------+----------------------+-----------------------------------------+
-| blockchain_id : [32]byte             |                                32 bytes |
-+---------------+----------------------+-----------------------------------------+
-| outputs       : []TransferableOutput |                 4 + size(outputs) bytes |
-+---------------+----------------------+-----------------------------------------+
-| inputs        : []TransferableInput  |                  4 + size(inputs) bytes |
-+---------------+----------------------+-----------------------------------------+
-| memo          : [256]byte            |                    4 + size(memo) bytes |
-+---------------+----------------------+-----------------------------------------+
-                          | 52 + size(outputs) + size(inputs) + size(memo) bytes |
-                          +------------------------------------------------------+
-```
-
-### Proto Base TX Specification
-
-```text
-message BaseTx {
-    uint32 type_id = 1;          // 04 bytes
-    uint32 network_id = 2;       // 04 bytes
-    bytes blockchain_id = 3;     // 32 bytes
-    repeated Output outputs = 4; // 04 bytes + size(outs)
-    repeated Input inputs = 5;   // 04 bytes + size(ins)
-    bytes memo = 6;              // 04 bytes + size(memo)
+```sh
+avm.getBlock({
+    blockID: string
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
 }
 ```
 
-### Base TX Example
+**Request:**
 
-Let’s make a base TX that uses the inputs and outputs from the previous examples:
+- `blockID` is the block ID. It should be in cb58 format.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
-- **`TypeID`**: `0`
-- **`NetworkID`**: `12345`
-- **`BlockchainID`**: `0x000000000000000000000000000000000000000000000000000000000000000`
-- **`Outputs`**:
-  - `"Example Transferable Output as defined above"`
-- **`Inputs`**:
-  - `"Example Transferable Input as defined above"`
+**Response:**
 
-```text
-[
-    TypeID       <- 0x00000000
-    NetworkID    <- 0x00003039
-    BlockchainID <- 0x000000000000000000000000000000000000000000000000000000000000000
-    Outputs      <- [
-        0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
-    ]
-    Inputs       <- [
-        0xdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    ]
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x00,
-    // networkID:
-    0x00, 0x00, 0x30, 0x39,
-    // blockchainID:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // number of outputs:
-    0x00, 0x00, 0x00, 0x01,
-    // transferable output:
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-    // number of inputs:
-    0x00, 0x00, 0x00, 0x01,
-    // transferable input:
-    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
-    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
-    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
-    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-    // Memo length:
-    0x00, 0x00, 0x00, 0x00,
-]
+- `block` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getBlock",
+    "params": {
+        "blockID": "tXJ4xwmR8soHE6DzRNMQPtiwQvuYsHn6eLLBzo2moDqBquqy6",
+        "encoding": "hex"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## Unsigned Add Validator TX
+**Example Response:**
 
-### What Unsigned Add Validator TX Contains
-
-An unsigned add validator TX contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
-
-- **`BaseTx`**
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
-- **`Stake`** Stake has `LockedOuts`
-  - **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-- **`RewardsOwner`** A `SECP256K1OutputOwners`
-- **`Shares`** 10,000 times percentage of reward taken from delegators
-
-### Gantt Unsigned Add Validator TX Specification
-
-```text
-+---------------+-----------------------+-----------------------------------------+
-| base_tx       : BaseTx                |                     size(base_tx) bytes |
-+---------------+-----------------------+-----------------------------------------+
-| validator     : Validator             |                                44 bytes |
-+---------------+-----------------------+-----------------------------------------+
-| stake         : Stake                 |                  size(LockedOuts) bytes |
-+---------------+-----------------------+-----------------------------------------+
-| rewards_owner : SECP256K1OutputOwners |               size(rewards_owner) bytes |
-+---------------+-----------------------+-----------------------------------------+
-| shares        : Shares                |                                 4 bytes |
-+---------------+-----------------------+-----------------------------------------+
-                  | 48 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
-                  +--------------------------------------------------------------+
-```
-
-### Proto Unsigned Add Validator TX Specification
-
-```text
-message AddValidatorTx {
-    BaseTx base_tx = 1;                      // size(base_tx)
-    Validator validator = 2;                 // 44 bytes
-    Stake stake = 3;                         // size(LockedOuts)
-    SECP256K1OutputOwners rewards_owner = 4; // size(rewards_owner)
-    uint32 shares = 5;                       // 04 bytes
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000002000000000641ad33ede17f652512193721df87994f783ec806bb5640c39ee73676caffcc3215e0651000000000049a80a000000010000000e0000000100000000000000000000000000000000000000000000000000000000000000000000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000002e1a2a3910000000000000000000000001000000015cf998275803a7277926912defdf177b2e97b0b400000001e0d825c5069a7336671dd27eaa5c7851d2cf449e7e1cdc469c5c9e5a953955950000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000008908223b680000000100000000000000005e45d02fcc9e585544008f1df7ae5c94bf7f0f2600000000641ad3b600000000642d48b60000005aedf802580000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000005aedf80258000000000000000000000001000000015cf998275803a7277926912defdf177b2e97b0b40000000b000000000000000000000001000000012892441ba9a160bcdc596dcd2cc3ad83c3493589000000010000000900000001adf2237a5fe2dfd906265e8e14274aa7a7b2ee60c66213110598ba34fb4824d74f7760321c0c8fb1e8d3c5e86909248e48a7ae02e641da5559351693a8a1939800286d4fa2",
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### Unsigned Add Validator TX Example
+### `avm.getBlockByHeight`
 
-Let’s make an unsigned add validator TX that uses the inputs and outputs from the previous examples:
+Returns block at the given height.
 
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
-- **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-- **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
-- **`Shares`**: `0x00000064`
+**Signature:**
 
-```text
-[
-    BaseTx       <- 0x0000000c000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    NodeID       <- 0xe9094f73698002fd52c90819b457b9fbc866ab80
-    StarTime     <- 0x000000005f21f31d
-    EndTime      <- 0x000000005f497dc6
-    Weight       <- 0x000000000000d431
-    Stake        <- 0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c
-    RewardsOwner <- 0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
-    Shares       <- 0x00000064
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x0c, 0x00, 0x00, 0x30, 0x39,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x01, 0x68, 0x70, 0xb7, 0xd6,
-    0x6a, 0xc3, 0x25, 0x40, 0x31, 0x13, 0x79, 0xe5,
-    0xb5, 0xdb, 0xad, 0x28, 0xec, 0x7e, 0xb8, 0xdd,
-    0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-    0x00, 0x00, 0x00, 0x01,
-    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
-    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
-    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
-    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    // Node ID
-    0xe9, 0x09, 0x4f, 0x73, 0x69, 0x80, 0x02, 0xfd,
-    0x52, 0xc9, 0x08, 0x19, 0xb4, 0x57, 0xb9, 0xfb,
-    0xc8, 0x66, 0xab, 0x80,
-    // StartTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x21, 0xf3, 0x1d,
-    // EndTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x49, 0x7d, 0xc6,
-    // Weight
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // Stake
-    0x00, 0x00, 0x00, 0x01, 0x39, 0xc3, 0x3a, 0x49,
-    0x9c, 0xe4, 0xc3, 0x3a, 0x3b, 0x09, 0xcd, 0xd2,
-    0xcf, 0xa0, 0x1a, 0xe7, 0x0d, 0xbf, 0x2d, 0x18,
-    0xb2, 0xd7, 0xd1, 0x68, 0x52, 0x44, 0x40, 0xe5,
-    0x5d, 0x55, 0x00, 0x88, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
-    0x3c, 0xb7, 0xd3, 0x84, 0x2e, 0x8c, 0xee, 0x6a,
-    0x0e, 0xbd, 0x09, 0xf1, 0xfe, 0x88, 0x4f, 0x68,
-    0x61, 0xe1, 0xb2, 0x9c,
-    // RewardsOwner
-    0x00, 0x00, 0x00, 0x0b, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-    // Shares
-    0x00, 0x00, 0x00, 0x64,
-]
-```
-
-## Unsigned Remove Subnet Validator TX
-
-### What Unsigned Remove Subnet Validator TX Contains
-
-An unsigned remove Subnet validator TX contains a `BaseTx`, `NodeID`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
-
-- **`BaseTx`**
-- **`NodeID`** is the 20 byte node ID of the validator.
-- **`SubnetID`** is the 32 byte Subnet ID that the validator is being removed from.
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature which proves that the issuer has the right to remove the node from the Subnet. The array must be sorted low to high.
-
-### Gantt Unsigned Remove Subnet Validator TX Specification
-
-```text
-+---------------+----------------------+------------------------------------------------+
-| base_tx       : BaseTx               |                            size(base_tx) bytes |
-+---------------+----------------------+------------------------------------------------+
-| node_id       : [20]byte             |                                       20 bytes |
-+---------------+----------------------+------------------------------------------------+
-| subnet_id     : [32]byte             |                                       32 bytes |
-+---------------+----------------------+------------------------------------------------+
-| sig_indices   : SubnetAuth           |               4 bytes + len(sig_indices) bytes |
-+---------------+----------------------+------------------------------------------------+
-| 56 + len(sig_indices) + size(base_tx) bytes                                           |
-+---------------------------------------------------------------------------------------+
-```
-
-### Proto Unsigned Remove Subnet Validator TX Specification
-
-```text
-message RemoveSubnetValidatorTx {
-    BaseTx base_tx = 1;         // size(base_tx)
-    string node_id = 2;         // 20 bytes
-    SubnetID subnet_id = 3;     // 32 bytes
-    SubnetAuth subnet_auth = 4; // 04 bytes + len(sig_indices)
+```sh
+avm.getBlockByHeight({
+    height: string
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
 }
 ```
 
-### Unsigned Remove Subnet Validator TX Example
+**Request:**
 
-Let’s make an unsigned remove Subnet validator TX that uses the inputs and outputs from the previous examples:
+- `blockHeight` is the block height. It should be in `string` format.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
 
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 17"`
-- **`NodeID`**: `0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa`
-- **`SubnetID`**: `0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db`
-- **`SubnetAuth`**: `0x0000000a0000000100000000`
+**Response:**
 
-```text
-[
-    BaseTx       <- 0x0000000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000000000000000000000
-    NodeID       <- 0xe902a9a86640bfdb1cd0e36c0cc982b83e5765fa
-    SubnetID     <- 0x4a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db
-    SubnetAuth   <- 0x0000000a0000000100000000
-]
-=
-[
-    // BaseTx
-    0x00, 0x00, 0x00, 0x17, 0x00, 0x00, 0x30, 0x39, 
-    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
-    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
-    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
-    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00,
-    // NodeID
-    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
-    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
-    0x3e, 0x57, 0x65, 0xfa,
-    // SubnetID
-    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
-    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
-    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
-    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb,
-    // SubnetAuth
-    // SubnetAuth TypeID
-    0x00, 0x00, 0x00, 0x0a,
-    // SigIndices length
-    0x00, 0x00, 0x00, 0x01,
-    // SigIndices
-    0x00, 0x00, 0x00, 0x00,
-]
+- `block` is the transaction encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getBlockByHeight”,
+    "params": {
+        “height”: “275686313486”,
+        "encoding": “hex”
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## Unsigned Add Permissionless Validator TX
+**Example Response:**
 
-### What Unsigned Add Permissionless Validator TX Contains
-
-An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`, `SubnetID`, `Signer`, `StakeOuts`, `ValidatorRewardsOwner`, `DelegatorRewardsOwner`, and `DelegationShares`. The `TypeID` for this type is 25 or `0x00000019`.
-
-- **`BaseTx`**
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is the 20 byte node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
-- **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID 27 (`0x1B`) followed by a [Proof of Possession](#proof-of-possession). If the [SubnetID] is not the primary network, this value is the empty signer, whose byte representation is only the type ID 28 (`0x1C`).
-- **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
-- **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
-- **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
-- **`DelegationShares`** a short which is the fee this validator charges delegators as a percentage, times 10,000 For example, if this validator has DelegationShares=300,000 then they take 30% of rewards from delegators.
-
-### Gantt Unsigned Add Permissionless Validator TX Specification
-
-```text
-+---------------+----------------------+------------------------------------------------+
-| base_tx       : BaseTx               |                            size(base_tx) bytes |
-+---------------+----------------------+------------------------------------------------+
-| validator     : Validator            |                                       44 bytes |
-+---------------+----------------------+------------------------------------------------+
-| subnet_id     : [32]byte             |                                       32 bytes |
-+---------------+----------------------+------------------------------------------------+
-| signer        : Signer               |                                      144 bytes |
-+---------------+----------------------+------------------------------------------------+
-| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
-+---------------+----------------------+------------------------------------------------+
-| validator_rewards_owner : SECP256K1OutputOwners | size(validator_rewards_owner) bytes |
-+---------------+----------------------+------------------------------------------------+
-| delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
-+---------------+----------------------+------------------------------------------------+
-| delegation_shares   : uint32         |                                        4 bytes |
-+---------------+----------------------+------------------------------------------------+
-| 232 + size(base_tx) + size(stake_outs) +                                              |
-| size(validator_rewards_owner) + size(delegator_rewards_owner) bytes                   |
-+---------------------------------------------------------------------------------------+
-```
-
-### Proto Unsigned Add Permissionless Validator TX Specification
-
-```text
-message AddPermissionlessValidatorTx {
-    BaseTx base_tx = 1;         // size(base_tx)
-    Validator validator = 2;    // 44 bytes
-    SubnetID subnet_id = 3;     // 32 bytes
-    Signer signer = 4; // 148 bytes
-    repeated TransferOut stake_outs = 5; // 4 bytes + size(stake_outs)
-    SECP256K1OutputOwners validator_rewards_owner = 6; // size(validator_rewards_owner) bytes
-    SECP256K1OutputOwners delegator_rewards_owner = 7; // size(delegator_rewards_owner) bytes
-    uint32 delegation_shares = 8; // 4 bytes
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000002000000000642f6739d4efcdd07e4d4919a7fc2020b8a0f081dd64c262aaace5a6dad22be0b55fec0700000000004db9e100000001000000110000000100000000000000000000000000000000000000000000000000000000000000000000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000005c6ece390000000000000000000000000100000001930ab7bf5018bfc6f9435c8b15ba2fe1e619c0230000000000000000ed5f38341e436e5d46e2bb00b45d62ae97d1b050c64bc634ae10626739e35c4b00000001c6dda861341665c3b555b46227fb5e56dc0a870c5482809349f04b00348af2a80000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000005c6edd7b40000000010000000000000001000000090000000178688f4d5055bd8733801f9b52793da885bef424c90526c18e4dd97f7514bf6f0c3d2a0e9a5ea8b761bc41902eb4902c34ef034c4d18c3db7c83c64ffeadd93600731676de",
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### Unsigned Add Permissionless Validator TX Example
+### `avm.getHeight`
 
-Let’s make an unsigned add permissionless validator TX that uses the inputs and outputs from the previous examples:
+Returns the height of the last accepted block.
 
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
-- **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000`
-- **`SubnetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
-- **`Signer`**: `0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297`
-- **`StakeOuts`**: `0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0`
-- **`ValidatorRewardsOwner`**: `0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52`
-- **`DelegatorRewardsOwner`**: `0x0000000b00000000000000000000000100000001b2b91313ac487c222445254e26cd026d21f6f440`
-- **`DelegationShares`**: `0x00004e20`
+**Signature:**
 
-```text
-[
-    BaseTx       <- 0x0000001a00003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a2000000000010000000000000000
-    Validator    <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda000000006397616e0000000063beee6e000001d1a94a2000
-    SubnetID     <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
-    Signer       <- 0x0000001ca5af179e4188583893c2b99e1a8be27d90a9213cfbff1d75b74fe2bc9f3b072c2ded0863a9d9acd9033f223295810e429238e28d3c9b7f7212b63d746b2ae73a54fe08a3de61b132f2f89e9eeff97d4d7ca3a3c88986aa855cd36296fcfe8f02162d0258be494d267d4c5798bc081ab602ded90b0fc16d8a035e68ff5294794cb63ff1ee068fbfc2b4c8cd2d08ebf297
-    StakeOuts    <- 0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0
-    ValidatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
-    DelegatorRewardsOwner  <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
-    DelegationShares       <- 0x00004e20
-]
-=
-[
-    // BaseTx
-    0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x30, 0x39, 
-    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
-    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
-    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
-    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
-    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
-    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
-    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
-    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
-    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
-    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
-    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
-    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
-    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00,
-    // Validator
-    // NodeID
-    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
-    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
-    0x47, 0x2c, 0x7d, 0xda, 0x
-    // Start time
-    0x00, 0x00, 0x00, 0x00, 0x63, 0x97, 0x61, 0x6e, 
-    // End time
-    0x00, 0x00, 0x00, 0x00, 0x63, 0xbe, 0xee, 0x6e, 
-    // Weight
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    // SubnetID
-    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
-    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
-    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
-    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
-    // Signer
-    // TypeID
-    0x00, 0x00, 0x00, 0x1c, 
-    // Pub key
-    0xa5, 0xaf, 0x17, 0x9e, 0x41, 0x88, 0x58, 0x38, 
-    0x93, 0xc2, 0xb9, 0x9e, 0x1a, 0x8b, 0xe2, 0x7d, 
-    0x90, 0xa9, 0x21, 0x3c, 0xfb, 0xff, 0x1d, 0x75, 
-    0xb7, 0x4f, 0xe2, 0xbc, 0x9f, 0x3b, 0x07, 0x2c, 
-    0x2d, 0xed, 0x08, 0x63, 0xa9, 0xd9, 0xac, 0xd9, 
-    0x03, 0x3f, 0x22, 0x32, 0x95, 0x81, 0x0e, 0x42, 
-    // Sig
-    0x92, 0x38, 0xe2, 0x8d, 0x3c, 0x9b, 0x7f, 0x72, 
-    0x12, 0xb6, 0x3d, 0x74, 0x6b, 0x2a, 0xe7, 0x3a,
-    0x54, 0xfe, 0x08, 0xa3, 0xde, 0x61, 0xb1, 0x32, 
-    0xf2, 0xf8, 0x9e, 0x9e, 0xef, 0xf9, 0x7d, 0x4d, 
-    0x7c, 0xa3, 0xa3, 0xc8, 0x89, 0x86, 0xaa, 0x85, 
-    0x5c, 0xd3, 0x62, 0x96, 0xfc, 0xfe, 0x8f, 0x02, 
-    0x16, 0x2d, 0x02, 0x58, 0xbe, 0x49, 0x4d, 0x26, 
-    0x7d, 0x4c, 0x57, 0x98, 0xbc, 0x08, 0x1a, 0xb6, 
-    0x02, 0xde, 0xd9, 0x0b, 0x0f, 0xc1, 0x6d, 0x8a, 
-    0x03, 0x5e, 0x68, 0xff, 0x52, 0x94, 0x79, 0x4c, 
-    0xb6, 0x3f, 0xf1, 0xee, 0x06, 0x8f, 0xbf, 0xc2, 
-    0xb4, 0xc8, 0xcd, 0x2d, 0x08, 0xeb, 0xf2, 0x97, 
-    // Stake outs
-    // Num stake outs 
-    0x00, 0x00, 0x00, 0x01, 
-    // AssetID
-    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
-    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
-    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
-    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
-    // Output
-    // typeID
-    0x00, 0x00, 0x00, 0x07, 
-    // Amount
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    // Locktime
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    // Threshold
-    0x00, 0x00, 0x00, 0x01, 
-    // Num addrs
-    0x00, 0x00, 0x00, 0x01, 
-    // Addr 0
-    0x33, 0xee, 0xff, 0xc6, 0x47, 0x85, 0xcf, 0x9d, 
-    0x80, 0xe7, 0x73, 0x1d, 0x9f, 0x31, 0xf6, 0x7b, 
-    0xd0, 0x3c, 0x5c, 0xf0, 
-    // Validator rewards owner
-    // TypeID
-    0x00, 0x00, 0x00, 0x0b, 
-    // Locktime
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    // Threshold
-    0x00, 0x00, 0x00, 0x01, 
-    // Num addrs
-    0x00, 0x00, 0x00, 0x01, 
-    // Addr 0
-    0x72, 0xf3, 0xeb, 0x9a, 0xea, 0xf8, 0x28, 0x30, 
-    0x11, 0xce, 0x6e, 0x43, 0x7f, 0xde, 0xcd, 0x65, 
-    0xea, 0xce, 0x8f, 0x52,
-    // Delegator rewards owner
-    // TypeID
-    0x00, 0x00, 0x00, 0x0b, 
-    // Locktime
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    // Threshold
-    0x00, 0x00, 0x00, 0x01, 
-    // Num addrs
-    0x00, 0x00, 0x00, 0x01, 
-    // Addr 0
-    0xb2, 0xb9, 0x13, 0x13, 0xac, 0x48, 0x7c, 0x22, 
-    0x24, 0x45, 0x25, 0x4e, 0x26, 0xcd, 0x02, 0x6d, 
-    0x21, 0xf6, 0xf4, 0x40,
-    // Delegation shares
-    0x00, 0x00, 0x4e, 0x20,
-]
-```
-
-## Unsigned Add Permissionless Delegator TX
-
-### What Unsigned Add Permissionless Delegator TX Contains
-
-An unsigned add permissionless delegator TX contains a `BaseTx`, `Validator`, `SubnetID`, `StakeOuts`, and `DelegatorRewardsOwner`. The `TypeID` for this type is 26 or `0x0000001a`.
-
-- **`BaseTx`**
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is the 20 byte node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this delegation is on.
-- **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
-- **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
-
-### Gantt Unsigned Add Permissionless Delegator TX Specification
-
-```text
-+---------------+----------------------+------------------------------------------------+
-| base_tx       : BaseTx               |                            size(base_tx) bytes |
-+---------------+----------------------+------------------------------------------------+
-| validator     : Validator            |                                       44 bytes |
-+---------------+----------------------+------------------------------------------------+
-| subnet_id     : [32]byte             |                                       32 bytes |
-+---------------+----------------------+------------------------------------------------+
-| stake_outs    : []TransferOut        |                     4 + size(stake_outs) bytes |
-+---------------+----------------------+------------------------------------------------+
-| delegator_rewards_owner : SECP256K1OutputOwners | size(delegator_rewards_owner) bytes |
-+---------------+----------------------+------------------------------------------------+
-| 80 + size(base_tx) + size(stake_outs) + size(delegator_rewards_owner) bytes           |
-+---------------------------------------------------------------------------------------+
-```
-
-### Proto Unsigned Add Permissionless Delegator TX Specification
-
-```text
-message AddPermissionlessDelegatorTx {
-    BaseTx base_tx = 1;         // size(base_tx)
-    Validator validator = 2;    // size(validator)
-    SubnetID subnet_id = 3;     // 32 bytes
-    repeated TransferOut stake_outs = 4; // 4 bytes + size(stake_outs)
-    SECP256K1OutputOwners delegator_rewards_owner = 5; // size(delegator_rewards_owner) bytes
+```sh
+avm.getHeight() ->
+{
+    height: uint64,
 }
 ```
 
-### Unsigned Add Permissionless Delegator TX Example
+**Example Call:**
 
-Let’s make an unsigned add permissionless delegator TX that uses the inputs and outputs from the previous examples:
-
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 1a"`
-- **`Validator`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000`
-- **`SubnetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
-- **`StakeOuts`**: `0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0`
-- **`DelegatorRewardsOwner`**: `0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52`
-
-```text
-[
-    BaseTx       <- 0x0000001a00003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000005000001d1a94a2000000000010000000000000000
-    Validator    <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda00000000639761970000000063beee97000001d1a94a2000
-    SubnetID     <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
-    StakeOuts    <- 0x000000013d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a700000007000001d1a94a20000000000000000000000000010000000133eeffc64785cf9d80e7731d9f31f67bd03c5cf0
-    DelegatorRewardsOwner <- 0x0000000b0000000000000000000000010000000172f3eb9aeaf8283011ce6e437fdecd65eace8f52
-]
-=
-[
-    // BaseTx
-    0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x30, 0x39, 
-    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
-    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
-    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
-    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
-    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
-    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
-    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
-    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
-    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
-    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
-    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
-    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
-    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00,
-    // Validator
-    // NodeID
-    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
-    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
-    0x47, 0x2c, 0x7d, 0xda, 
-    // Start time
-    0x00, 0x00, 0x00, 0x00, 0x63, 0x97, 0x61, 0x97, 
-    // End time
-    0x00, 0x00, 0x00, 0x00, 0x63, 0xbe, 0xee, 0x97, 
-    // Weight
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    // Stake_outs
-    // Num stake outs
-    0x00, 0x00, 0x00, 0x01, 
-    // Stake out 0
-    // AssetID
-    0x3d, 0x0a, 0xd1, 0x2b, 0x8e, 0xe8, 0x92, 0x8e, 
-    0xdf, 0x24, 0x8c, 0xa9, 0x1c, 0xa5, 0x56, 0x00, 
-    0xfb, 0x38, 0x3f, 0x07, 0xc3, 0x2b, 0xff, 0x1d, 
-    0x6d, 0xec, 0x47, 0x2b, 0x25, 0xcf, 0x59, 0xa7, 
-    // TypeID
-    0x00, 0x00, 0x00, 0x07, 
-    // Amount
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00, 
-    // Locktime
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    // Threshold
-    0x00, 0x00, 0x00, 0x01, 
-    // Num addrs
-    0x00, 0x00, 0x00, 0x01, 
-    // Addr 0
-    0x33, 0xee, 0xff, 0xc6, 0x47, 0x85, 0xcf, 0x9d, 
-    0x80, 0xe7, 0x73, 0x1d, 0x9f, 0x31, 0xf6, 0x7b, 
-    0xd0, 0x3c, 0x5c, 0xf0, 
-    // Delegator_rewards_owner
-    // TypeID
-    0x00, 0x00, 0x00, 0x0b, 
-    // Locktime
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    // Threshold
-    0x00, 0x00, 0x00, 0x01, 
-    // Num addrs
-    0x00, 0x00, 0x00, 0x01, 
-    // Addr 0
-    0x72, 0xf3, 0xeb, 0x9a, 0xea, 0xf8, 0x28, 0x30, 
-    0x11, 0xce, 0x6e, 0x43, 0x7f, 0xde, 0xcd, 0x65, 
-    0xea, 0xce, 0x8f, 0x52,
-]
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.getHeight",
+    "params": {},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## Unsigned Transform Subnet TX
+**Example Response:**
 
-Transforms a permissioned Subnet into a permissionless Subnet. Must be signed by the Subnet owner.
-
-### What Unsigned Transform Subnet TX Contains
-
-An unsigned transform Subnet TX contains a `BaseTx`, `SubnetID`, `AssetID`, `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`, `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`, `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`, `MaxValidatorWeightFactor`, `UptimeRequirement`, and `SubnetAuth`. The `TypeID` for this type is 24 or `0x00000018`.
-
-- **`BaseTx`**
-- **`SubnetID`** a 32-byte Subnet ID of the Subnet to transform.
-- **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Subnet.
-  - Restrictions
-    - Must not be the Empty ID
-    - Must not be the AVAX ID
-- **`InitialSupply`** is a long which is the amount to initially specify as the current supply.
-  - Restrictions
-    - Must be > 0
-- **`MaximumSupply`** is a long which is the amount to specify as the maximum token supply.
-  - Restrictions
-    - Must be >= [InitialSupply]
-- **`MinConsumptionRate`** is a long which is the rate to allocate funds if the validator's stake duration is 0.
-- **`MaxConsumptionRate`** is a long which is the rate to allocate funds if the validator's stake duration is equal to the minting period.
-  - Restrictions
-    - Must be >= [MinConsumptionRate]
-    - Must be <= [`reward.PercentDenominator`]
-- **`MinValidatorStake`** is a long which the minimum amount of funds required to become a validator.
-  - Restrictions
-    - Must be > 0
-    - Must be <= [InitialSupply]
-- **`MaxValidatorStake`** is a long which is the maximum amount of funds a single validator can be allocated, including delegated funds.
-  - Restrictions:
-    - Must be >= [MinValidatorStake]
-    - Must be <= [MaximumSupply]
-- **`MinStakeDuration`** is a short which is the minimum number of seconds a staker can stake for.
-  - Restrictions
-    - Must be > 0
-- **`MaxStakeDuration`** is a short which is the maximum number of seconds a staker can stake for.
-  - Restrictions
-    - Must be >= [MinStakeDuration]
-    - Must be <= [GlobalMaxStakeDuration]
-- **`MinDelegationFee`** is a short is the minimum percentage a validator must charge a delegator for delegating.
-  - Restrictions
-    - Must be <= [`reward.PercentDenominator`]
-- **`MinDelegatorStake`** is a short which is the minimum amount of funds required to become a delegator.
-  - Restrictions
-    - Must be > 0
-- **`MaxValidatorWeightFactor`** is a byte which is the factor which calculates the maximum amount of delegation a validator can receive. Note: a value of 1 effectively disables delegation.
-  - Restrictions
-    - Must be > 0
-- **`UptimeRequirement`** is a short which is the minimum percentage a validator must be online and responsive to receive a reward.
-  - Restrictions
-    - Must be <= [`reward.PercentDenominator`]
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to authorizes this transformation. The array must be sorted low to high.
-
-### Gantt Unsigned Transform Subnet TX Specification
-
-```text
-+----------------------+------------------+----------------------------------+
-| base_tx              : BaseTx           |              size(base_tx) bytes |
-+----------------------+------------------+----------------------------------+
-| subnet_id            : [32]byte         |                         32 bytes |
-+----------------------+------------------+----------------------------------+
-| asset_id             : [32]byte         |                         32 bytes |
-+----------------------+------------------+----------------------------------+
-| initial_supply       : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| maximum_supply       : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| min_consumption_rate : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| max_consumption_rate : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| min_validator_stake  : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| max_validator_stake  : long             |                          8 bytes |
-+----------------------+------------------+----------------------------------+
-| min_stake_duration   : short            |                          4 bytes |
-+----------------------+------------------+----------------------------------+
-| max_stake_duration   : short            |                          4 bytes |
-+----------------------+------------------+----------------------------------+
-| min_delegation_fee   : short            |                          4 bytes |
-+----------------------+------------------+----------------------------------+
-| min_delegator_stake  : long             |                          8 bytes | 
-+----------------------+------------------+----------------------------------+
-| max_validator_weight_factor : byte      |                           1 byte |
-+----------------------+------------------+----------------------------------+
-| uptime_requirement   : short            |                          4 bytes |
-+----------------------+------------------+----------------------------------+
-| subnet_auth          : SubnetAuth       | 4 bytes + len(sig_indices) bytes |
-+----------------------+------------------+----------------------------------+
-| 141 + size(base_tx) + len(sig_indices) bytes                               |
-+----------------------------------------------------------------------------+
-```
-
-### Proto Unsigned Transform Subnet TX Specification
-
-```text
-message TransformSubnetTx {
-    BaseTx base_tx = 1;              // size(base_tx)
-    SubnetID subnet_id = 2;          // 32 bytes
-    bytes asset_id = 3;              // 32 bytes
-    uint64 initial_supply = 4;       // 08 bytes
-    uint64 maximum_supply = 5;       // 08 bytes
-    uint64 min_consumption_rate = 6; // 08 bytes
-    uint64 max_consumption_rate = 7; // 08 bytes
-    uint64 min_validator_stake = 8;  // 08 bytes
-    uint64 max_validator_stake = 9;  // 08 bytes
-    uint32 min_stake_duration = 10;  // 04 bytes
-    uint32 max_stake_duration = 11;  // 04 bytes
-    uint32 min_delegation_fee = 12;  // 04 bytes
-    uint32 min_delegator_stake = 13; // 08 bytes
-    byte max_validator_weight_factor = 14; // 01 byte
-    uint32 uptime_requirement = 15; // 04 bytes
-    SubnetAuth subnet_auth = 16;    // 04 bytes + len(sig_indices)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "height": "5094088"
+  },
+  "id": 1
 }
 ```
 
-### Unsigned Transform Subnet TX Example
+### `avm.getTx`
 
-Let’s make an unsigned transform Subnet TX that uses the inputs and outputs from the previous examples:
+Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either `"hex"` or `"json"`. Defaults to `"hex"`.
 
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 18"`
-- **`SubnetID`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60`
-- **`AssetID`**: `0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada`
-- **`InitialSupply`**: `0x000000e8d4a51000`
-- **`MaximumSupply`**: `0x000009184e72a000`
-- **`MinConsumptionRate`**: `0x0000000000000001`
-- **`MaxConsumptionRate`**: `0x000000000000000a`
-- **`MinValidatorStake`**: `0x000000174876e800`
-- **`MaxValidatorStake`**: `0x000001d1a94a2000`
-- **`MinStakeDuration`**: `0x00015180`
-- **`MaxStakeDuration`**: `0x01e13380`
-- **`MinDelegationFee`**: `0x00002710`
-- **`MinDelegatorStake`**: `0x000000174876e800`
-- **`MaxValidatorWeightFactor`**: `0x05`
-- **`UptimeRequirement`**: `0x000c3500`
-- **`SubnetAuth`**:
-  - **`TypeID`**: `0x0000000a`
-  - **`SigIndices`**: `0x00000000`
+**Signature:**
 
-```text
-[
-    BaseTx       <- 0000001800003039e902a9a86640bfdb1cd0e36c0cc982b83e5765fad5f6bbe6abdcce7b5ae7d7c700000000000000014a177205df5c29929d06db9d941f83d5ea985de302015e99252d16469a6610db000000003d0ad12b8ee8928edf248ca91ca55600fb383f07c32bff1d6dec472b25cf59a70000000500000000000f4240000000010000000000000000
-    SubnetID     <- 0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60
-    AssetID      <- 0xf3086d7bfc35be1c68db664ba9ce61a2060126b0d6b4bfb09fd7a5fb7678cada
-    InitialSupply <- 0x000000e8d4a51000
-    MaximumSupply <- 0x000009184e72a000
-    MinConsumptionRate <- 0x0000000000000001
-    MaxConsumptionRate <- 0x000000000000000a
-    MinValidatorStake <- 0x000000174876e800
-    MaxValidatorStake <- 0x000001d1a94a2000
-    MinStakeDuration <- 0x00015180
-    MaxStakeDuration <- 0x01e13380
-    MinDelegationFee <- 0x00002710
-    MinDelegatorStake <- 0x000000174876e800
-    MaxValidatorWeightFactor <- 0x05
-    UptimeRequirement <- 0x000c3500
-    SubnetAuth   <- 0x0000000a0000000100000000
-]
-=
-[
-    // BaseTx:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x30, 0x39, 
-    0xe9, 0x02, 0xa9, 0xa8, 0x66, 0x40, 0xbf, 0xdb, 
-    0x1c, 0xd0, 0xe3, 0x6c, 0x0c, 0xc9, 0x82, 0xb8, 
-    0x3e, 0x57, 0x65, 0xfa, 0xd5, 0xf6, 0xbb, 0xe6, 
-    0xab, 0xdc, 0xce, 0x7b, 0x5a, 0xe7, 0xd7, 0xc7, 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
-    0x4a, 0x17, 0x72, 0x05, 0xdf, 0x5c, 0x29, 0x92, 
-    0x9d, 0x06, 0xdb, 0x9d, 0x94, 0x1f, 0x83, 0xd5, 
-    0xea, 0x98, 0x5d, 0xe3, 0x02, 0x01, 0x5e, 0x99, 
-    0x25, 0x2d, 0x16, 0x46, 0x9a, 0x66, 0x10, 0xdb, 
-    0x00, 0x00, 0x00, 0x00, 0x3d, 0x0a, 0xd1, 0x2b, 
-    0x8e, 0xe8, 0x92, 0x8e, 0xdf, 0x24, 0x8c, 0xa9, 
-    0x1c, 0xa5, 0x56, 0x00, 0xfb, 0x38, 0x3f, 0x07, 
-    0xc3, 0x2b, 0xff, 0x1d, 0x6d, 0xec, 0x47, 0x2b, 
-    0x25, 0xcf, 0x59, 0xa7, 0x00, 0x00, 0x00, 0x05, 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x42, 0x40, 
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0xa2, 0x9e, 0xd4, 
-    0x35, 0x69, 0x03, 0xda, 0xc2, 0x36, 0x47, 0x13, 
-    0xc6, 0x0f, 0x57, 0xd8, 0x47, 0x2c, 0x7d, 0xda, 
-    0x4a, 0x5e, 0x08, 0xd8, 0x8a, 0x88, 0xad, 0x8e, 
-    0xa7, 0x1a, 0xed, 0x60, 0xf3, 0x08, 0x6d, 0x7b, 
-    0xfc, 0x35, 0xbe, 0x1c, 0x68, 0xdb, 0x66, 0x4b, 
-    0xa9, 0xce, 0x61, 0xa2, 0x06, 0x01, 0x26, 0xb0, 
-    0xd6, 0xb4, 0xbf, 0xb0, 0x9f, 0xd7, 0xa5, 0xfb, 
-    0x76, 0x78, 0xca, 0xda, 0x00, 0x00, 0x00, 0xe8, 
-    0xd4, 0xa5, 0x10, 0x00, 0x00, 0x00, 0x09, 0x18, 
-    0x4e, 0x72, 0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x0a, 0x00, 0x00, 0x00, 0x17, 
-    0x48, 0x76, 0xe8, 0x00, 0x00, 0x00, 0x01, 0xd1, 
-    0xa9, 0x4a, 0x20, 0x00, 0x00, 0x01, 0x51, 0x80, 
-    0x01, 0xe1, 0x33, 0x80, 0x00, 0x00, 0x27, 0x10, 
-    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00, 
-    0x05, 0x00, 0x0c, 0x35, 0x00, 0x00, 0x00, 0x00, 
-    0x0a, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
-    0x00,
-    // SubnetID
-    0x5f, 0xa2, 0x9e, 0xd4, 0x35, 0x69, 0x03, 0xda, 
-    0xc2, 0x36, 0x47, 0x13, 0xc6, 0x0f, 0x57, 0xd8, 
-    0x47, 0x2c, 0x7d, 0xda, 0x4a, 0x5e, 0x08, 0xd8, 
-    0x8a, 0x88, 0xad, 0x8e, 0xa7, 0x1a, 0xed, 0x60,
-    // AssetID
-    0xf3, 0x08, 0x6d, 0x7b, 0xfc, 0x35, 0xbe, 0x1c, 
-    0x68, 0xdb, 0x66, 0x4b, 0xa9, 0xce, 0x61, 0xa2, 
-    0x06, 0x01, 0x26, 0xb0, 0xd6, 0xb4, 0xbf, 0xb0, 
-    0x9f, 0xd7, 0xa5, 0xfb, 0x76, 0x78, 0xca, 0xda,
-    // InitialSupply
-    0x00, 0x00, 0x00, 0xe8, 0xd4, 0xa5, 0x10, 0x00,
-    // MaximumSupply
-    0x00, 0x00, 0x09, 0x18, 0x4e, 0x72, 0xa0, 0x00,
-    // MinConsumptionRate
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    // MaxConsumptionRate
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0a,
-    // MinValidatorStake
-    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
-    // MaxValidatorStake
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00,
-    // MinStakeDuration
-    0x00, 0x01, 0x51, 0x80,
-    // MaxStakeDuration
-    0x01, 0xe1, 0x33, 0x80,
-    // MinDelegationFee
-    0x00, 0x00, 0x27, 0x10,
-    // MinDelegatorStake
-    0x00, 0x00, 0x00, 0x17, 0x48, 0x76, 0xe8, 0x00,
-    // MaxValidatorWeightFactor
-    0x05,
-    // UptimeRequirement
-    0x00, 0x0c, 0x35, 0x00,
-    // SubnetAuth
-    // SubnetAuth TypeID
-    0x00, 0x00, 0x00, 0x0a,
-    // SigIndices length
-    0x00, 0x00, 0x00, 0x01,
-    // SigIndices
-    0x00, 0x00, 0x00, 0x00,
-]
-```
-
-## Unsigned Add Subnet Validator TX
-
-### What Unsigned Add Subnet Validator TX Contains
-
-An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
-
-- **`BaseTx`**
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is the 20 byte node ID of the validator.
-  - **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  - **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID to add the validator to.
-- **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a Subnet. The array must be sorted low to high.
-
-### Gantt Unsigned Add Subnet Validator TX Specification
-
-```text
-+---------------+----------------------+-----------------------------------------+
-| base_tx       : BaseTx               |                     size(base_tx) bytes |
-+---------------+----------------------+-----------------------------------------+
-| validator     : Validator            |                                44 bytes |
-+---------------+----------------------+-----------------------------------------+
-| subnet_id     : [32]byte             |                                32 bytes |
-+---------------+----------------------+-----------------------------------------+
-| subnet_auth   : SubnetAuth           |        4 bytes + len(sig_indices) bytes |
-+---------------+----------------------+-----------------------------------------+
-                                   | 80 + len(sig_indices) + size(base_tx) bytes |
-                                   +---------------------------------------------+
-```
-
-### Proto Unsigned Add Subnet Validator TX Specification
-
-```text
-message AddSubnetValidatorTx {
-    BaseTx base_tx = 1;         // size(base_tx)
-    Validator validator = 2;    // size(validator)
-    SubnetID subnet_id = 3;     // 32 bytes
-    SubnetAuth subnet_auth = 4; // 04 bytes + len(sig_indices)
+```sh
+avm.getTx({
+    txID: string,
+    encoding: string, //optional
+}) -> {
+    tx: string,
+    encoding: string,
 }
 ```
 
-### Unsigned Add Subnet Validator TX Example
+**Example Call:**
 
-Let’s make an unsigned add Subnet validator TX that uses the inputs and outputs from the previous examples:
-
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
-- **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-- **`StarTime`**: `0x000000005f21f31d`
-- **`EndTime`**: `0x000000005f497dc6`
-- **`Weight`**: `0x000000000000d431`
-- **`SubnetID`**: `0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb`
-- **`SubnetAuth`**:
-  - **`TypeID`**: `0x0000000a`
-  - **`SigIndices`**: `0x00000000`
-
-```text
-[
-    BaseTx       <- 0x0000000d000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    NodeID       <- 0xe9094f73698002fd52c90819b457b9fbc866ab80
-    StarTime     <- 0x000000005f21f31d
-    EndTime      <- 0x000000005f497dc6
-    Weight       <- 0x000000000000d431
-    SubnetID     <- 0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb
-    SubnetAuth TypeID   <- 0x0000000a
-    SubnetAuth   <- 0x00000000
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x0d,
-    0x00, 0x00, 0x30, 0x39,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-    0x00, 0x00, 0x00, 0x01,
-    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
-    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
-    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
-    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    // Node ID
-    0xe9, 0x09, 0x4f, 0x73, 0x69, 0x80, 0x02, 0xfd,
-    0x52, 0xc9, 0x08, 0x19, 0xb4, 0x57, 0xb9, 0xfb,
-    0xc8, 0x66, 0xab, 0x80,
-    // StartTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x21, 0xf3, 0x1d,
-    // EndTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x49, 0x7d, 0xc6,
-    // Weight
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // SubnetID
-    0x58, 0xb1, 0x09, 0x28, 0x71, 0xdb, 0x85, 0xbc,
-    0x75, 0x27, 0x42, 0x05, 0x4e, 0x2e, 0x8b, 0xe0,
-    0xad, 0xf8, 0x16, 0x6e, 0xc1, 0xf0, 0xf0, 0x76,
-    0x9f, 0x47, 0x79, 0xf1, 0x4c, 0x71, 0xd7, 0xeb,
-    // SubnetAuth
-    // SubnetAuth TypeID
-    0x00, 0x00, 0x00, 0x0a,
-    // SigIndices length
-    0x00, 0x00, 0x00, 0x01,
-    // SigIndices
-    0x00, 0x00, 0x00, 0x00,
-]
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getTx",
+    "params" :{
+        "txID":"2oJCbb8pfdxEHAf9A8CdN4Afj9VSR3xzyzNkf8tDv7aM1sfNFL",
+        "encoding": "json"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## Unsigned Add Delegator TX
+**Example Response:**
 
-### What Unsigned Add Delegator TX Contains
-
-An unsigned add delegator TX contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
-
-- **`BaseTx`**
-- **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  - **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-  - **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  - **`EndTime`** is a long which is the Unix time when the delegator stops delegating (and staked AVAX is returned).
-  - **`Weight`** is a long which is the amount the delegator stakes
-- **`Stake`** Stake has `LockedOuts`
-  - **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-- **`RewardsOwner`** An `SECP256K1OutputOwners`
-
-### Gantt Unsigned Add Delegator TX Specification
-
-```text
-+---------------+-----------------------+-----------------------------------------+
-| base_tx       : BaseTx                |                     size(base_tx) bytes |
-+---------------+-----------------------+-----------------------------------------+
-| validator     : Validator             |                                44 bytes |
-+---------------+-----------------------+-----------------------------------------+
-| stake         : Stake                 |                  size(LockedOuts) bytes |
-+---------------+-----------------------+-----------------------------------------+
-| rewards_owner : SECP256K1OutputOwners |               size(rewards_owner) bytes |
-+---------------+-----------------------+-----------------------------------------+
-                |    44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
-                +-----------------------------------------------------------------+
-```
-
-### Proto Unsigned Add Delegator TX Specification
-
-```text
-message AddDelegatorTx {
-    BaseTx base_tx = 1;                      // size(base_tx)
-    Validator validator = 2;                 // 44 bytes
-    Stake stake = 3;                         // size(LockedOuts)
-    SECP256K1OutputOwners rewards_owner = 4; // size(rewards_owner)
-}
-```
-
-### Unsigned Add Delegator TX Example
-
-Let’s make an unsigned add delegator TX that uses the inputs and outputs from the previous examples:
-
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
-- **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-- **`StarTime`**: `0x000000005f21f31d`
-- **`EndTime`**: `0x000000005f497dc6`
-- **`Weight`**: `0x000000000000d431`
-- **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-- **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
-
-```text
-[
-    BaseTx       <- 0x0000000e000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    NodeID       <- 0xe9094f73698002fd52c90819b457b9fbc866ab80
-    StarTime     <- 0x000000005f21f31d
-    EndTime      <- 0x000000005f497dc6
-    Weight       <- 0x000000000000d431
-    Stake        <- 0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c
-    RewardsOwner <- 0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x0e, 0x00, 0x00, 0x30, 0x39,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x5b, 0xe5, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-    0x00, 0x00, 0x00, 0x01,
-    0xdf, 0xaf, 0xbd, 0xf5, 0xc8, 0x1f, 0x63, 0x5c,
-    0x92, 0x57, 0x82, 0x4f, 0xf2, 0x1c, 0x8e, 0x3e,
-    0x6f, 0x7b, 0x63, 0x2a, 0xc3, 0x06, 0xe1, 0x14,
-    0x46, 0xee, 0x54, 0x0d, 0x34, 0x71, 0x1a, 0x15,
-    0x00, 0x00, 0x00, 0x01,
-    0x68, 0x70, 0xb7, 0xd6, 0x6a, 0xc3, 0x25, 0x40,
-    0x31, 0x13, 0x79, 0xe5, 0xb5, 0xdb, 0xad, 0x28,
-    0xec, 0x7e, 0xb8, 0xdd, 0xbf, 0xc8, 0xf4, 0xd6,
-    0x72, 0x99, 0xeb, 0xb4, 0x84, 0x75, 0x90, 0x7a,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    // Node ID
-    0xe9, 0x09, 0x4f, 0x73, 0x69, 0x80, 0x02, 0xfd,
-    0x52, 0xc9, 0x08, 0x19, 0xb4, 0x57, 0xb9, 0xfb,
-    0xc8, 0x66, 0xab, 0x80,
-    // StartTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x21, 0xf3, 0x1d,
-    // EndTime
-    0x00, 0x00, 0x00, 0x00, 0x5f, 0x49, 0x7d, 0xc6,
-    // Weight
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // Stake
-    0x00, 0x00, 0x00, 0x01, 0x39, 0xc3, 0x3a, 0x49,
-    0x9c, 0xe4, 0xc3, 0x3a, 0x3b, 0x09, 0xcd, 0xd2,
-    0xcf, 0xa0, 0x1a, 0xe7, 0x0d, 0xbf, 0x2d, 0x18,
-    0xb2, 0xd7, 0xd1, 0x68, 0x52, 0x44, 0x40, 0xe5,
-    0x5d, 0x55, 0x00, 0x88, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x01, 0xd1, 0xa9, 0x4a, 0x20, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
-    0x3c, 0xb7, 0xd3, 0x84, 0x2e, 0x8c, 0xee, 0x6a,
-    0x0e, 0xbd, 0x09, 0xf1, 0xfe, 0x88, 0x4f, 0x68,
-    0x61, 0xe1, 0xb2, 0x9c,
-    // RewardsOwner
-    0x00, 0x00, 0x00, 0x0b, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c,
-]
-```
-
-## Unsigned Create Chain TX
-
-### What Unsigned Create Chain TX Contains
-
-An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`, `FxIDs`, `GenesisData` and `SubnetAuth`. The `TypeID` for this type is `0x0000000f`.
-
-- **`BaseTx`**
-- **`SubnetID`** ID of the Subnet that validates this blockchain
-- **`ChainName`** A human readable name for the chain; need not be unique
-- **`VMID`** ID of the VM running on the new chain
-- **`FxIDs`** IDs of the feature extensions running on the new chain
-- **`GenesisData`** Byte representation of genesis state of the new chain
-- **`SubnetAuth`** Authorizes this blockchain to be added to this Subnet
-
-### Gantt Unsigned Create Chain TX Specification
-
-```text
-+--------------+-------------+------------------------------------------+
-| base_tx      : BaseTx      |                      size(base_tx) bytes |
-+--------------+-------------+------------------------------------------+
-| subnet_id    : SubnetID    |                                 32 bytes |
-+--------------+-------------+------------------------------------------+
-| chain_name   : ChainName   |                2 + len(chain_name) bytes |
-+--------------+-------------+------------------------------------------+
-| vm_id        : VMID        |                                 32 bytes |
-+--------------+-------------+------------------------------------------+
-| fx_ids       : FxIDs       |                   4 + size(fx_ids) bytes |
-+--------------+-------------+------------------------------------------+
-| genesis_data : GenesisData |             4 + size(genesis_data) bytes |
-+--------------+-------------+------------------------------------------+
-| subnet_auth  : SubnetAuth  |                  size(subnet_auth) bytes |
-+--------------+-------------+------------------------------------------+
-               | 74 + size(base_tx) + size(chain_name) + size(fx_ids) + |
-               |           size(genesis_data) + size(subnet_auth) bytes |
-+--------------+--------------------------------------------------------+
-```
-
-### Proto Unsigned Create Chain TX Specification
-
-```text
-message CreateChainTx {
-    BaseTx base_tx = 1;               // size(base_tx)
-    SubnetID subnet_id = 2;           // 32 bytes
-    ChainName chain_name = 3;         // 2 + len(chain_name) bytes
-    VMID vm_id = 4;                   // 32 bytes
-    FxIDs fx_ids = 5;                 // 4 + size(fx_ids) bytes
-    GenesisData genesis_data = 6      // 4 + size(genesis_data) bytes
-    SubnetAuth subnet_auth = 7;       // size(subnet_auth) bytes
-}
-```
-
-### Unsigned Create Chain TX Example
-
-Let’s make an unsigned create chain TX that uses the inputs and outputs from the previous examples:
-
-- **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0f"`
-- **`SubnetID`**: `24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1`
-- **`ChainName`**: `EPIC AVM`
-- **`VMID`**: `avm`
-- **`FxIDs`**: [`secp256k1fx`]
-- **`GenesisData`**: `11111DdZMhYXUZiFV9FNpfpTSQroysXhzWicG954YAKfkrk3bCEzLVY7gun1eAmAwMiQzVhtGpdR6dnPVcfhBE7brzkJ1r4wzi3dgA8G9Jwc4WpZ6Uh4Dr9aTdw7sFA5cpvCAVBsx6Xf3CB82jwH1gjPZ3WQnnCSKr2reoLtam6TfyYRra5xxXSkZcUm6BaJMW4fKzNP58uyExajPYKZvT5LrQ7MPJ9Fp7ebmYSzXg7YYauNARj`
-- **`SubnetAuth`**: `0x0000000a0000000100000000`
-
-```text
-[
-    BaseTx       <- 0x0000000f000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    SubnetID     <- 0x8c86d07cd60218661863e0116552dccd5bd84c564bd29d7181dbddd5ec616104
-    ChainName    <- 0x455049432041564d
-    VMID         <- 0x61766d0000000000000000000000000000000000000000000000000000000000
-    FxIDs        <- 0x736563703235366b316678000000000000000000000000000000000000000000
-    GenesisData  <- 0x000000000001000e4173736574416c6961735465737400000539000000000000000000000000000000000000000000000000000000000000000000000000000000000000001b66726f6d20736e6f77666c616b6520746f206176616c616e636865000a54657374204173736574000454455354000000000100000000000000010000000700000000000001fb000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c
-    SubnetAuth   <- 0x0000000a0000000100000000
-]
-=
-[
-  // base tx
-  0x00, 0x00, 0x00, 0x0f,
-  0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-  0x39, 0xc3, 0x3a, 0x49, 0x9c, 0xe4, 0xc3, 0x3a,
-  0x3b, 0x09, 0xcd, 0xd2, 0xcf, 0xa0, 0x1a, 0xe7,
-  0x0d, 0xbf, 0x2d, 0x18, 0xb2, 0xd7, 0xd1, 0x68,
-  0x52, 0x44, 0x40, 0xe5, 0x5d, 0x55, 0x00, 0x88,
-  0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x12, 0x30,
-  0x9c, 0xd5, 0xfd, 0xc0, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-  0x00, 0x00, 0x00, 0x01, 0x3c, 0xb7, 0xd3, 0x84,
-  0x2e, 0x8c, 0xee, 0x6a, 0x0e, 0xbd, 0x09, 0xf1,
-  0xfe, 0x88, 0x4f, 0x68, 0x61, 0xe1, 0xb2, 0x9c,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  // end base tx
-
-  // Subnet id
-  0x8c, 0x86, 0xd0, 0x7c, 0xd6, 0x02, 0x18, 0x66,
-  0x18, 0x63, 0xe0, 0x11, 0x65, 0x52, 0xdc, 0xcd,
-  0x5b, 0xd8, 0x4c, 0x56, 0x4b, 0xd2, 0x9d, 0x71,
-  0x81, 0xdb, 0xdd, 0xd5, 0xec, 0x61, 0x61, 0x04,
-
-  // chain name length
-  0x00, 0x08,
-
-  // chain name
-  0x45, 0x50, 0x49, 0x43, 0x20, 0x41, 0x56, 0x4d,
-
-  // vm id
-  0x61, 0x76, 0x6d, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-
-  // fxids
-  // num fxids
-  0x00, 0x00, 0x00, 0x01,
-  // fxid
-  0x73, 0x65, 0x63, 0x70, 0x32, 0x35, 0x36, 0x6b,
-  0x31, 0x66, 0x78, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-
-  // genesis data len
-  0x00, 0x00, 0x00, 0xb0,
-  // genesis data
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x0e,
-  0x41, 0x73, 0x73, 0x65, 0x74, 0x41, 0x6c, 0x69,
-  0x61, 0x73, 0x54, 0x65, 0x73, 0x74, 0x00, 0x00,
-  0x05, 0x39, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x1b, 0x66, 0x72,
-  0x6f, 0x6d, 0x20, 0x73, 0x6e, 0x6f, 0x77, 0x66,
-  0x6c, 0x61, 0x6b, 0x65, 0x20, 0x74, 0x6f, 0x20,
-  0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x68,
-  0x65, 0x00, 0x0a, 0x54, 0x65, 0x73, 0x74, 0x20,
-  0x41, 0x73, 0x73, 0x65, 0x74, 0x00, 0x04, 0x54,
-  0x45, 0x53, 0x54, 0x00, 0x00, 0x00, 0x00, 0x01,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-  0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x01, 0xfb, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-  0x00, 0x00, 0x00, 0x01, 0x3c, 0xb7, 0xd3, 0x84,
-  0x2e, 0x8c, 0xee, 0x6a, 0x0e, 0xbd, 0x09, 0xf1,
-  0xfe, 0x88, 0x4f, 0x68, 0x61, 0xe1, 0xb2, 0x9c,
-
-  // type id (Subnet Auth)
-  0x00, 0x00, 0x00, 0x0a,
-  // num address indices
-  0x00, 0x00, 0x00, 0x01,
-  // address index
-  0x00, 0x00, 0x00, 0x00,
-]
-```
-
-## Unsigned Create Subnet TX
-
-### What Unsigned Create Subnet TX Contains
-
-An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
-
-- **`BaseTx`**
-- **`RewardsOwner`** A `SECP256K1OutputOwners`
-
-### Gantt Unsigned Create Subnet TX Specification
-
-```text
-+-----------------+-----------------------|---------------------------------+
-| base_tx         : BaseTx                |             size(base_tx) bytes |
-+-----------------+-----------------------+--------------------------------+
-| rewards_owner   : SECP256K1OutputOwners |       size(rewards_owner) bytes |
-+-----------------+-----------------------+---------------------------------+
-                                | size(rewards_owner) + size(base_tx) bytes |
-                                +-------------------------------------------+
-```
-
-### Proto Unsigned Create Subnet TX Specification
-
-```text
-message CreateSubnetTx {
-    BaseTx base_tx = 1;                      // size(base_tx)
-    SECP256K1OutputOwners rewards_owner = 2; // size(rewards_owner)
-}
-```
-
-### Unsigned Create Subnet TX Example
-
-Let’s make an unsigned create Subnet TX that uses the inputs from the previous examples:
-
-- **`BaseTx`**: "Example BaseTx as defined above but with TypeID set to 16"
-- **`RewardsOwner`**:
-  - **`TypeId`**: 11
-  - **`Locktime`**: 0
-  - **`Threshold`**: 1
-  - **`Addresses`**: \[ 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c \]
-
-```text
-[
-    BaseTx        <- 0x00000010000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    RewardsOwner <-
-        TypeID    <- 0x0000000b
-        Locktime  <- 0x0000000000000000
-        Threshold <- 0x00000001
-        Addresses <- [
-            0xda2bee01be82ecc00c34f361eda8eb30fb5a715c,
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "networkID": 1,
+        "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+        "outputs": [],
+        "inputs": [
+          {
+            "txID": "2jbZUvi6nHy3Pgmk8xcMpSg5cW6epkPqdKkHSCweb4eRXtq4k9",
+            "outputIndex": 1,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 2570382395,
+              "signatureIndices": [
+                0
+              ]
+            }
+          }
+        ],
+        "memo": "0x",
+        "destinationChain": "11111111111111111111111111111111LpoYY",
+        "exportedOutputs": [
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "X-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
+              ],
+              "amount": 2569382395,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
         ]
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x10,
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x39, 0xc3, 0x3a, 0x49, 0x9c, 0xe4, 0xc3, 0x3a,
-    0x3b, 0x09, 0xcd, 0xd2, 0xcf, 0xa0, 0x1a, 0xe7,
-    0x0d, 0xbf, 0x2d, 0x18, 0xb2, 0xd7, 0xd1, 0x68,
-    0x52, 0x44, 0x40, 0xe5, 0x5d, 0x55, 0x00, 0x88,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x12, 0x30,
-    0x9c, 0xd5, 0xfd, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0x3c, 0xb7, 0xd3, 0x84,
-    0x2e, 0x8c, 0xee, 0x6a, 0x0e, 0xbd, 0x09, 0xf1,
-    0xfe, 0x88, 0x4f, 0x68, 0x61, 0xe1, 0xb2, 0x9c,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // RewardsOwner type id
-    0x00, 0x00, 0x00, 0x0b,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // threshold:
-    0x00, 0x00, 0x00, 0x01,
-    // number of addresses:
-    0x00, 0x00, 0x00, 0x01,
-    // addrs[0]:
-    0xda, 0x2b, 0xee, 0x01,
-    0xbe, 0x82, 0xec, 0xc0, 0x0c, 0x34, 0xf3, 0x61,
-    0xed, 0xa8, 0xeb, 0x30, 0xfb, 0x5a, 0x71, 0x5c
-]
-```
-
-## Unsigned Import TX
-
-### What Unsigned Import TX Contains
-
-An unsigned import TX contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
-
-- **`BaseTx`**
-- **`SourceChain`** is a 32-byte source blockchain ID.
-- **`Ins`** is a variable length array of Transferable Inputs.
-
-### Gantt Unsigned Import TX Specification
-
-```text
-+-----------------+--------------|---------------------------------+
-| base_tx         : BaseTx       |             size(base_tx) bytes |
-+-----------------+--------------+---------------------------------+
-| source_chain    : [32]byte     |                        32 bytes |
-+-----------------+--------------+---------------------------------+
-| ins             : []TransferIn |             4 + size(ins) bytes |
-+-----------------+--------------+---------------------------------+
-                            | 36 + size(ins) + size(base_tx) bytes |
-                            +--------------------------------------+
-```
-
-### Proto Unsigned Import TX Specification
-
-```text
-message ImportTx {
-    BaseTx base_tx = 1;          // size(base_tx)
-    bytes source_chain = 2;      // 32 bytes
-    repeated TransferIn ins = 3; // 4 bytes + size(ins)
+      },
+      "credentials": [
+        {
+          "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+          "credential": {
+            "signatures": [
+              "0x46ebcbcfbee3ece1fd15015204045cf3cb77f42c48d0201fc150341f91f086f177cfca8894ca9b4a0c55d6950218e4ea8c01d5c4aefb85cd7264b47bd57d224400"
+            ]
+          }
+        }
+      ],
+      "id": "2oJCbb8pfdxEHAf9A8CdN4Afj9VSR3xzyzNkf8tDv7aM1sfNFL"
+    },
+    "encoding": "json"
+  },
+  "id": 1
 }
 ```
 
-### Unsigned Import TX Example
+Where:
 
-Let’s make an unsigned import TX that uses the inputs from the previous examples:
+- `credentials` is a list of this transaction's credentials. Each credential proves that this transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a list of signatures.
+- `unsignedTx` is the non-signature portion of the transaction.
+- `networkID` is the ID of the network this transaction happened on. (Avalanche Mainnet is `1`.)
+- `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
+- Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to another chain.
+- Each element of `inputs` is an input of this transaction which has not been imported from another chain.
+- Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the blockchain ID that assets are being imported from, and the inputs that are being imported.
+- Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
 
-- **`BaseTx`**: "Example BaseTx as defined above with TypeID set to 17"
-- **`SourceChain`**:
-- **`Ins`**: "Example SECP256K1 Transfer Input as defined above"
+An output contains:
 
-```text
-[
-    BaseTx        <- 0x00000011000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    SourceChain   <- 0x787cd3243c002e9bf5bbbaea8a42a16c1a19cc105047c66996807cbf16acee10
-    Ins <- [
-            // input:
-    ]
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x11,
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x39, 0xc3, 0x3a, 0x49, 0x9c, 0xe4, 0xc3, 0x3a,
-    0x3b, 0x09, 0xcd, 0xd2, 0xcf, 0xa0, 0x1a, 0xe7,
-    0x0d, 0xbf, 0x2d, 0x18, 0xb2, 0xd7, 0xd1, 0x68,
-    0x52, 0x44, 0x40, 0xe5, 0x5d, 0x55, 0x00, 0x88,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x12, 0x30,
-    0x9c, 0xd5, 0xfd, 0xc0, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x01, 0x3c, 0xb7, 0xd3, 0x84,
-    0x2e, 0x8c, 0xee, 0x6a, 0x0e, 0xbd, 0x09, 0xf1,
-    0xfe, 0x88, 0x4f, 0x68, 0x61, 0xe1, 0xb2, 0x9c,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // sourceChain
-    0x78, 0x7c, 0xd3, 0x24, 0x3c, 0x00, 0x2e, 0x9b,
-    0xf5, 0xbb, 0xba, 0xea, 0x8a, 0x42, 0xa1, 0x6c,
-    0x1a, 0x19, 0xcc, 0x10, 0x50, 0x47, 0xc6, 0x69,
-    0x96, 0x80, 0x7c, 0xbf, 0x16, 0xac, 0xee, 0x10,
-    // input count:
-    0x00, 0x00, 0x00, 0x01,
-    // txID:
-    0xf1, 0xe1, 0xd1, 0xc1, 0xb1, 0xa1, 0x91, 0x81,
-    0x71, 0x61, 0x51, 0x41, 0x31, 0x21, 0x11, 0x01,
-    0xf0, 0xe0, 0xd0, 0xc0, 0xb0, 0xa0, 0x90, 0x80,
-    0x70, 0x60, 0x50, 0x40, 0x30, 0x20, 0x10, 0x00,
-    // utxoIndex:
-    0x00, 0x00, 0x00, 0x05,
-    // assetID:
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    // input:
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0xee, 0x6b, 0x28, 0x00, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-]
-```
+- `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
+- `fxID`: The ID of the FX this output uses.
+- `output`: The FX-specific contents of this output.
 
-## Unsigned Export TX
+Most outputs use the secp256k1 FX, look like this:
 
-### What Unsigned Export TX Contains
-
-An unsigned export TX contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000012`.
-
-- **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-- **`Outs`** is a variable length array of Transferable Outputs.
-
-### Gantt Unsigned Export TX Specification
-
-```text
-+-------------------+---------------+--------------------------------------+
-| base_tx           : BaseTx        |                  size(base_tx) bytes |
-+-------------------+---------------+--------------------------------------+
-| destination_chain : [32]byte      |                             32 bytes |
-+-------------------+---------------+--------------------------------------+
-| outs              : []TransferOut |                 4 + size(outs) bytes |
-+-------------------+---------------+--------------------------------------+
-                          | 36 + size(outs) + size(base_tx) bytes |
-                          +---------------------------------------+
-```
-
-### Proto Unsigned Export TX Specification
-
-```text
-message ExportTx {
-    BaseTx base_tx = 1;            // size(base_tx)
-    bytes destination_chain = 2;   // 32 bytes
-    repeated TransferOut outs = 3; // 4 bytes + size(outs)
+```json
+{
+  "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+  "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+  "output": {
+    "addresses": ["X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"],
+    "amount": 1530084210,
+    "locktime": 0,
+    "threshold": 1
+  }
 }
 ```
 
-### Unsigned Export TX Example
+The above output can be consumed after Unix time `locktime` by a transaction that has signatures from `threshold` of the addresses in `addresses`.
 
-Let’s make an unsigned export TX that uses the outputs from the previous examples:
+### `avm.getTxStatus`
 
-- `BaseTx`: "Example BaseTx as defined above" with `TypeID` set to 18
-- `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-- `Outs`: "Example SECP256K1 Transfer Output as defined above"
+:::caution 
+Deprecated as of **v1.10.0**.
+:::
 
-```text
-[
-    BaseTx           <- 0x00000012000030390000000000000000000000000000000000000000000000000000000000000006870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000700000000ee5be5c000000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715cdfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15000000016870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a0000000500000000ee6b28000000000100000000
-    DestinationChain <- 0x0000000000000000000000000000000000000000000000000000000000000000
-    Outs <- [
-        000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859,
-    ]
-]
-=
-[
-    // base tx:
-    0x00, 0x00, 0x00, 0x12
-    0x00, 0x00, 0x00, 0x04, 0xff, 0xff, 0xff, 0xff,
-    0xee, 0xee, 0xee, 0xee, 0xdd, 0xdd, 0xdd, 0xdd,
-    0xcc, 0xcc, 0xcc, 0xcc, 0xbb, 0xbb, 0xbb, 0xbb,
-    0xaa, 0xaa, 0xaa, 0xaa, 0x99, 0x99, 0x99, 0x99,
-    0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
-    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
-    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
-    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
-    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
-    0x43, 0xab, 0x08, 0x59, 0x00, 0x00, 0x00, 0x01,
-    0xf1, 0xe1, 0xd1, 0xc1, 0xb1, 0xa1, 0x91, 0x81,
-    0x71, 0x61, 0x51, 0x41, 0x31, 0x21, 0x11, 0x01,
-    0xf0, 0xe0, 0xd0, 0xc0, 0xb0, 0xa0, 0x90, 0x80,
-    0x70, 0x60, 0x50, 0x40, 0x30, 0x20, 0x10, 0x00,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x01, 0x02, 0x03,
-    0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
-    0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
-    0x1c, 0x1d, 0x1e, 0x1f, 0x00, 0x00, 0x00, 0x05,
-    0x00, 0x00, 0x00, 0x00, 0x07, 0x5b, 0xcd, 0x15,
-    0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x04,
-    0x00, 0x01, 0x02, 0x03
-    // destination_chain:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // outs[] count:
-    0x00, 0x00, 0x00, 0x01,
-    // assetID:
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    // output:
-    0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
-    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
-    0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
-    0x6d, 0x55, 0xa9, 0x55, 0xc3, 0x34, 0x41, 0x28,
-    0xe0, 0x60, 0x12, 0x8e, 0xde, 0x35, 0x23, 0xa2,
-    0x4a, 0x46, 0x1c, 0x89, 0x43, 0xab, 0x08, 0x59,
-]
+Get the status of a transaction sent to the network.
+
+**Signature:**
+
+```sh
+avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-## Credentials
+`status` is one of:
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+- `Accepted`: The transaction is (or will be) accepted by every node
+- `Processing`: The transaction is being voted on by this node
+- `Rejected`: The transaction will never be accepted by any node in the network
+- `Unknown`: The transaction hasn’t been seen by this node
 
-## SECP256K1 Credential
+**Example Call:**
 
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
-
-### What SECP256K1 Credential Contains
-
-- **`TypeID`** is the ID for this type. It is `0x00000009`.
-- **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
-
-### Gantt SECP256K1 Credential Specification
-
-```text
-+------------------------------+---------------------------------+
-| type_id         : int        |                         4 bytes |
-+-----------------+------------+---------------------------------+
-| signatures      : [][65]byte |  4 + 65 * len(signatures) bytes |
-+-----------------+------------+---------------------------------+
-                               |  8 + 65 * len(signatures) bytes |
-                               +---------------------------------+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Proto SECP256K1 Credential Specification
+**Example Response:**
 
-```text
-message SECP256K1Credential {
-    uint32 TypeID = 1;             // 4 bytes
-    repeated bytes signatures = 2; // 4 bytes + 65 bytes * len(signatures)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "Accepted"
+  }
 }
 ```
 
-### SECP256K1 Credential Example
+### `avm.getUTXOs`
 
-Let’s make a payment input with:
+Gets the UTXOs that reference a given address. If `sourceChain` is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
 
-- **`signatures`**:
-- `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
-- `0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
+**Signature:**
 
-```text
-[
-    Signatures <- [
-        0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00,
-        0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00,
-    ]
-]
-=
-[
-    // Type ID
-    0x00, 0x00, 0x00, 0x09,
-    // length:
-    0x00, 0x00, 0x00, 0x02,
-    // sig[0]
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1e, 0x1d, 0x1f,
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
-    0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2e, 0x2d, 0x2f,
-    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
-    0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
-    0x00,
-    // sig[1]
-    0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
-    0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f,
-    0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
-    0x58, 0x59, 0x5a, 0x5b, 0x5c, 0x5e, 0x5d, 0x5f,
-    0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67,
-    0x68, 0x69, 0x6a, 0x6b, 0x6c, 0x6e, 0x6d, 0x6f,
-    0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77,
-    0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f,
-    0x00,
-]
-```
-
-## Signed Transaction
-
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
-
-### What Signed Transaction Contains
-
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
-
-- **`CodecID`** The only current valid codec id is `00 00`.
-- **`UnsignedTx`** is an unsigned transaction, as described above.
-- **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
-
-### Gantt Signed Transaction Specification
-
-```text
-+---------------------+--------------+------------------------------------------------+
-| codec_id            : uint16       |                                        2 bytes |
-+---------------------+--------------+------------------------------------------------+
-| unsigned_tx         : UnsignedTx   |                        size(unsigned_tx) bytes |
-+---------------------+--------------+------------------------------------------------+
-| credentials         : []Credential |                    4 + size(credentials) bytes |
-+---------------------+--------------+------------------------------------------------+
-                                     | 6 + size(unsigned_tx) + len(credentials) bytes |
-                                     +------------------------------------------------+
-```
-
-### Proto Signed Transaction Specification
-
-```text
-message Tx {
-    uint32 codec_id = 1;                 // 2 bytes
-    UnsignedTx unsigned_tx = 2;          // size(unsigned_tx)
-    repeated Credential credentials = 3; // 4 bytes + size(credentials)
+```sh
+avm.getUTXOs({
+    addresses: []string,
+    limit: int, //optional
+    startIndex: { //optional
+        address: string,
+        utxo: string
+    },
+    sourceChain: string, //optional
+    encoding: string //optional
+}) -> {
+    numFetched: int,
+    utxos: []string,
+    endIndex: {
+        address: string,
+        utxo: string
+    },
+    sourceChain: string, //optional
+    encoding: string
 }
 ```
 
-### Signed Transaction Example
+- `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
+- At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
+- This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+- If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
+- When using pagination (when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+- When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+- `encoding` sets the format for the returned UTXOs. Can only be `hex` when a value is provided.
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+#### **Example**
 
-- **`CodecID`**: `0`
-- **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
-- **`Credentials`** `0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
+Suppose we want all UTXOs that reference at least one of `X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5` and `X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6`.
 
-```text
-[
-    CodecID     <- 0x0000
-    UnsignedTx  <- 0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203
-    Credentials <- [
-        0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00,
-    ]
-]
-=
-[
-    // Codec ID
-    0x00, 0x00,
-    // unsigned transaction:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x03,
-    0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee,
-    0xdd, 0xdd, 0xdd, 0xdd, 0xcc, 0xcc, 0xcc, 0xcc,
-    0xbb, 0xbb, 0xbb, 0xbb, 0xaa, 0xaa, 0xaa, 0xaa,
-    0x99, 0x99, 0x99, 0x99, 0x88, 0x88, 0x88, 0x88,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03,
-    0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
-    0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
-    0x1c, 0x1d, 0x1e, 0x1f, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
-    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
-    0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
-    0x6d, 0x55, 0xa9, 0x55, 0xc3, 0x34, 0x41, 0x28,
-    0xe0, 0x60, 0x12, 0x8e, 0xde, 0x35, 0x23, 0xa2,
-    0x4a, 0x46, 0x1c, 0x89, 0x43, 0xab, 0x08, 0x59,
-    0x00, 0x00, 0x00, 0x01, 0xf1, 0xe1, 0xd1, 0xc1,
-    0xb1, 0xa1, 0x91, 0x81, 0x71, 0x61, 0x51, 0x41,
-    0x31, 0x21, 0x11, 0x01, 0xf0, 0xe0, 0xd0, 0xc0,
-    0xb0, 0xa0, 0x90, 0x80, 0x70, 0x60, 0x50, 0x40,
-    0x30, 0x20, 0x10, 0x00, 0x00, 0x00, 0x00, 0x05,
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0x07, 0x5b, 0xcd, 0x15, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x00, 0x04, 0x00, 0x01, 0x02, 0x03
-    // number of credentials:
-    0x00, 0x00, 0x00, 0x01,
-    // credential[0]:
-    0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1e, 0x1d, 0x1f,
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
-    0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2e, 0x2d, 0x2f,
-    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
-    0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
-    0x00, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46,
-    0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e,
-    0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56,
-    0x57, 0x58, 0x59, 0x5a, 0x5b, 0x5c, 0x5e, 0x5d,
-    0x5f, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66,
-    0x67, 0x68, 0x69, 0x6a, 0x6b, 0x6c, 0x6e, 0x6d,
-    0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76,
-    0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e,
-    0x7f, 0x00,
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getUTXOs",
+    "params" :{
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
+        "limit":5,
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## UTXO
+This gives response:
 
-A UTXO is a standalone representation of a transaction output.
-
-### What UTXO Contains
-
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
-
-- **`CodecID`** The only current valid codec id is `00 00`.
-- **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-- **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-- **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-- **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
-
-#### Gantt UTXO Specification
-
-```text
-+--------------+----------+-------------------------+
-| codec_id     : uint16   |                 2 bytes |
-+--------------+----------+-------------------------+
-| tx_id        : [32]byte |                32 bytes |
-+--------------+----------+-------------------------+
-| output_index : int      |                 4 bytes |
-+--------------+----------+-------------------------+
-| asset_id     : [32]byte |                32 bytes |
-+--------------+----------+-------------------------+
-| output       : Output   |      size(output) bytes |
-+--------------+----------+-------------------------+
-                          | 70 + size(output) bytes |
-                          +-------------------------+
-```
-
-### Proto UTXO Specification
-
-```text
-message Utxo {
-    uint32 codec_id = 1;     // 02 bytes
-    bytes tx_id = 2;         // 32 bytes
-    uint32 output_index = 3; // 04 bytes
-    bytes asset_id = 4;      // 32 bytes
-    Output output = 5;       // size(output)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "5",
+    "utxos": [
+      "0x0000a195046108a85e60f7a864bb567745a37f50c6af282103e47cc62f036cee404700000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c1f01765",
+      "0x0000ae8b1b94444eed8de9a81b1222f00f1b4133330add23d8ac288bffa98b85271100000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216473d042a",
+      "0x0000731ce04b1feefa9f4291d869adc30a33463f315491e164d89be7d6d2d7890cfc00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21600dd3047",
+      "0x0000b462030cc4734f24c0bc224cf0d16ee452ea6b67615517caffead123ab4fbf1500000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216c71b387e",
+      "0x000054f6826c39bc957c0c6d44b70f961a994898999179cc32d21eb09c1908d7167b00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f2166290e79d"
+    ],
+    "endIndex": {
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+      "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
+    },
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### UTXO Example
+Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
 
-Let’s make a UTXO from the signed transaction created above:
-
-- **`CodecID`**: `0`
-- **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-- **`UTXOIndex`**: 0x00000000
-- **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-- **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
-
-```text
-[
-    CodecID   <- 0x0000
-    TxID      <- 0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7
-    UTXOIndex <- 0x00000000
-    AssetID   <- 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
-    Output    <- 0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
-]
-=
-[
-    // Codec ID:
-    0x00, 0x00,
-    // txID:
-    0xf9, 0x66, 0x75, 0x0f, 0x43, 0x88, 0x67, 0xc3,
-    0xc9, 0x82, 0x8d, 0xdc, 0xdb, 0xe6, 0x60, 0xe2,
-    0x1c, 0xcd, 0xbb, 0x36, 0xa9, 0x27, 0x69, 0x58,
-    0xf0, 0x11, 0xba, 0x47, 0x2f, 0x75, 0xd4, 0xe7,
-    // utxo index:
-    0x00, 0x00, 0x00, 0x00,
-    // assetID:
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    // output:
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x02, 0x00, 0x01, 0x02, 0x03,
-    0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
-    0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
-    0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
-    0x24, 0x25, 0x26, 0x27,
-]
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :2,
+    "method" :"avm.getUTXOs",
+    "params" :{
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "limit":5,
+        "startIndex": {
+            "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+            "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
+        },
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## StakeableLockIn
+This gives response:
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its lock time has passed.
-
-### What StakeableLockIn Contains
-
-A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
-
-- **`TypeID`** is the ID for this output type. It is `0x00000015`.
-- **`Locktime`** is a long that contains the Unix timestamp before which the input can be consumed only to stake. The Unix timestamp is specific to the second.
-- **`TransferableIn`** is a transferable input object.
-
-### Gantt StakeableLockIn Specification
-
-```text
-+-----------------+-------------------+--------------------------------+
-| type_id         : int               |                        4 bytes |
-+-----------------+-------------------+--------------------------------+
-| locktime        : long              |                        8 bytes |
-+-----------------+-------------------+--------------------------------+
-| transferable_in : TransferableInput |          size(transferable_in) |
-+-----------------+-------------------+--------------------------------+
-                                    | 12 + size(transferable_in) bytes |
-                                    +----------------------------------+
-```
-
-### Proto StakeableLockIn Specification
-
-```text
-message StakeableLockIn {
-    uint32 type_id = 1;                    // 04 bytes
-    uint64 locktime = 2;                   // 08 bytes
-    TransferableInput transferable_in = 3; // size(transferable_in)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "4",
+    "utxos": [
+      "0x000020e182dd51ee4dcd31909fddd75bb3438d9431f8e4efce86a88a684f5c7fa09300000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21662861d59",
+      "0x0000a71ba36c475c18eb65dc90f6e85c4fd4a462d51c5de3ac2cbddf47db4d99284e00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f21665f6f83f",
+      "0x0000925424f61cb13e0fbdecc66e1270de68de9667b85baa3fdc84741d048daa69fa00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216afecf76a",
+      "0x000082f30327514f819da6009fad92b5dba24d27db01e29ad7541aa8e6b6b554615c00000000345aa98e8a990f4101e2268fab4c4e1f731c8dfbcffa3a77978686e6390d624f000000070000000000000001000000000000000000000001000000018ba98dabaebcd83056799841cfbc567d8b10f216779c2d59"
+    ],
+    "endIndex": {
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+      "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
+    },
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### StakeableLockIn Example
+Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
 
-Let’s make a StakeableLockIn with:
+Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the `sourceChain` argument in order to retrieve the atomic UTXOs:
 
-- **`TypeID`**: 21
-- **`Locktime`**: 54321
-- **`TransferableIn`**: "Example SECP256K1 Transfer Input as defined above"
-
-```text
-[
-    TypeID    <- 0x00000015
-    Locktime  <- 0x000000000000d431
-    TransferableIn <- [
-        f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000100000000,
-    ]
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x15,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // transferable_in
-    0xf1, 0xe1, 0xd1, 0xc1, 0xb1, 0xa1, 0x91, 0x81,
-    0x71, 0x61, 0x51, 0x41, 0x31, 0x21, 0x11, 0x01,
-    0xf0, 0xe0, 0xd0, 0xc0, 0xb0, 0xa0, 0x90, 0x80,
-    0x70, 0x60, 0x50, 0x40, 0x30, 0x20, 0x10, 0x00,
-    0x00, 0x00, 0x00, 0x05,
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
-    0x07, 0x5b, 0xcd, 0x15, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00,
-]
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getUTXOs",
+    "params" :{
+        "addresses":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5", "X-avax1d09qn852zcy03sfc9hay2llmn9hsgnw4tp3dv6"],
+        "limit":5,
+        "sourceChain": "P",
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-## StakeableLockOut
+This gives response:
 
-A StakeableLockOut is an output that is locked until its lock time, but can be staked in the meantime.
-
-### What StakeableLockOut Contains
-
-A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
-
-- **`TypeID`** is the ID for this output type. It is `0x00000016`.
-- **`Locktime`** is a long that contains the Unix timestamp before which the output can be consumed only to stake. The Unix timestamp is specific to the second.
-- **`transferableout`**: "Example SECP256K1 Transfer Output as defined above"
-
-### Gantt StakeableLockOut Specification
-
-```text
-+------------------+--------------------+--------------------------------+
-| type_id          : int                |                        4 bytes |
-+------------------+--------------------+--------------------------------+
-| locktime         : long               |                        8 bytes |
-+------------------+--------------------+--------------------------------+
-| transferable_out : TransferableOutput |         size(transferable_out) |
-+------------------+--------------------+--------------------------------+
-                                     | 12 + size(transferable_out) bytes |
-                                     +-----------------------------------+
-```
-
-### Proto StakeableLockOut Specification
-
-```text
-message StakeableLockOut {
-    uint32 type_id = 1;                      // 04 bytes
-    uint64 locktime = 2;                     // 08 bytes
-    TransferableOutput transferable_out = 3; // size(transferable_out)
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "numFetched": "1",
+    "utxos": [
+      "0x00001f989ffaf18a18a59bdfbf209342aa61c6a62a67e8639d02bb3c8ddab315c6fa0000000039c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d550088000000070011c304cd7eb5c0000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c83497819"
+    ],
+    "endIndex": {
+      "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+      "utxo": "2Sz2XwRYqUHwPeiKoRnZ6ht88YqzAF1SQjMYZQQaB5wBFkAqST"
+    },
+    "encoding": "hex"
+  },
+  "id": 1
 }
 ```
 
-### StakeableLockOut Example
+### `avm.import`
 
-Let’s make a stakeablelockout with:
+:::caution
 
-- **`TypeID`**: 22
-- **`Locktime`**: 54321
-- **`TransferableOutput`**: `"Example SECP256K1 Transfer Output from above"`
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
-```text
-[
-    TypeID              <- 0x00000016
-    Locktime            <- 0x000000000000d431
-    TransferableOutput  <- 0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859,
-]
-=
-[
-    // type_id:
-    0x00, 0x00, 0x00, 0x16,
-    // locktime:
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-    // transferable_out
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
-    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
-    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
-    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
-    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
-    0x43, 0xab, 0x08, 0x59,
-]
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate the transfer.
+
+**Signature:**
+
+```sh
+avm.import({
+    to: string,
+    sourceChain: string,
+    username: string,
+    password: string,
+}) -> {txID: string}
 ```
 
-## Subnet Auth
+- `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
+- `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
+- `username` is the user that controls `to`.
+- `txID` is the ID of the newly created atomic transaction.
 
-### What Subnet Auth Contains
+**Example Call:**
 
-Specifies the addresses whose signatures will be provided to demonstrate that the owners of a Subnet approve something.
-
-- **`TypeID`** is the ID for this type. It is `0x0000000a`.
-- **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a Subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
-
-### Gantt Subnet Auth Specification
-
-```text
-+-----------------+------------------+-------------------------------------+
-| type_id         : int              |                             4 bytes |
-+-----------------+------------------+-------------------------------------+
-| address_indices : []int            |    4 + 4*len(address_indices) bytes |
-+-----------------+------------------+-------------------------------------+
-                  |                       8 + 4*len(address_indices) bytes |
-+-----------------+--------------------------------------------------------+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.import",
+    "params" :{
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "sourceChain":"C",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Proto Subnet Auth Specification
+**Example Response:**
 
-```text
-message SubnetAuth {
-    uint32 type_id = 1;                          // 04 bytes
-    repeated AddressIndex address_indices = 2;   // 04 + 4*len(address_indices) bytes
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "2gXpf4jFoMAWQ3rxBfavgFfSdLkL2eFUYprKsUQuEdB5H6Jo1H"
+  },
+  "id": 1
 }
 ```
 
-### Subnet Auth Example
 
-Let’s make a Subnet auth:
+<!--
+TODO: Add avm.importAVAX
+-->
+### `avm.importKey`
 
-- **`TypeID`**: `10`
-- **`AddressIndices`**: [`0`]
+:::caution
 
-```text
-[
-    TypeID                <- 0x0000000a
-    AddressIndices        <-  [
-       0x00000000
-    ]
-]
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
 
-=
-[
-  // type id
-  0x00, 0x00, 00x0, 0x0a,
+:::
 
-  // num address indices
-  0x00, 0x00, 0x00, 0x01,
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
 
-  // address index 1
-  0x00, 0x00, 0x00, 0x00
-]
+Give a user control over an address by providing the private key that controls the address.
+
+**Signature:**
+
+```sh
+avm.importKey({
+    username: string,
+    password: string,
+    privateKey: string
+}) -> {address: string}
 ```
 
-## Validator
+- Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
 
-A validator verifies transactions on a blockchain.
+**Example Call:**
 
-### What Validator Contains
-
-A validator contains `NodeID`, `Start`, `End`, and `Wght`
-
-- **`NodeID`** is the ID of the validator
-- **`Start`** Unix time this validator starts validating
-- **`End`** Unix time this validator stops validating
-- **`Wght`** Weight of this validator used when sampling
-
-### Gantt Validator Specification
-
-```text
-+------------------+----------+
-| node_id : string | 20 bytes |
-+------------------+----------+
-| start   : uint64 | 8 bytes  |
-+------------------+----------+
-| end     : uint64 | 8 bytes  |
-+------------------+----------+
-| wght    : uint64 | 8 bytes  |
-+------------------+----------+
-|                  | 44 bytes |
-+------------------+----------+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.importKey",
+    "params" :{
+        "username":"myUsername",
+        "password":"myPassword",
+        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Proto Validator Specification
+**Example Response:**
 
-```text
-message Validator {
-    string node_id = 1;        // 20 bytes
-    uint64 start = 2;          // 08 bytes
-    uint64 end = 3;            // 08 bytes
-    uint64 wght = 4;           // 08 bytes
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "address": "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"
+  }
 }
 ```
 
-### Validator Example
+### `avm.issueTx`
 
-Let’s make a validator:
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
 
-- **`NodeID`**: `"NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu"`
-- **`Start`**: `1643068824`
-- **`End`**: `1644364767`
-- **`Wght`**: `20`
+**Signature:**
 
-```text
-[
-    NodeID  <- 0xaa18d3991cf637aa6c162f5e95cf163f69cd8291
-    Start   <- 0x61ef3d98
-    End     <- 0x620303df
-    Wght    <- 0x14
-]
-
-=
-[
-  // node id
-  0xaa, 0x18, 0xd3, 0x99, 0x1c, 0xf6, 0x37,
-  0xaa, 0x6c, 0x16, 0x2f, 0x5e, 0x95, 0xcf,
-  0x16, 0x3f, 0x69, 0xcd, 0x82, 0x91,
-  // start
-  0x61, 0xef, 0x3d, 0x98,
-  // end
-  0x62, 0x03, 0x03, 0xdf,
-  // wght
-  0x14,
-]
-```
-
-## Rewards Owner
-
-Where to send staking rewards when done validating
-
-### What Rewards Owner Contains
-
-A rewards owner contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
-
-- **`TypeID`** is the ID for this validator. It is `0x0000000b`.
-- **`Locktime`** is a long that contains the Unix timestamp that this output can be spent after. The Unix timestamp is specific to the second.
-- **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-- **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
-
-### Gantt Rewards Owner Specification
-
-```text
-+------------------------+-------------------------------+
-| type_id   : int        | 4 bytes                       |
-+------------------------+-------------------------------+
-| locktime  : long       | 8 bytes                       |
-+------------------------+-------------------------------+
-| threshold : int        | 4 bytes                       |
-+------------------------+-------------------------------+
-| addresses : [][20]byte | 4 + 20 * len(addresses) bytes |
-+------------------------+-------------------------------+
-|                        | 40 bytes                      |
-+------------------------+-------------------------------+
-```
-
-### Proto Rewards Owner Specification
-
-```text
-message RewardsOwner {
-    string type_id = 1;           // 4 bytes
-    uint64 locktime = 2;          // 08 bytes
-    uint32 threshold = 3;         // 04 bytes
-    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+```sh
+avm.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
 }
 ```
 
-### Rewards Owner Example
+**Example Call:**
 
-Let’s make a rewards owner:
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.issueTx",
+    "params" :{
+        "tx":"0x00000009de31b4d8b22991d51aa6aa1fc733f23a851a8c9400000000000186a0000000005f041280000000005f9ca900000030390000000000000001fceda8f90fcb5d30614b99d79fc4baa29307762668f16eb0259a57c2d3b78c875c86ec2045792d4df2d926c40f829196e0bb97ee697af71f5b0a966dabff749634c8b729855e937715b0e44303fd1014daedc752006011b730",
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
 
-- **`TypeID`**: `11`
-- **`Locktime`**: `54321`
-- **`Threshold`**: `1`
-- **`Addresses`**:
-- `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-- `0xc3344128e060128ede3523a24a461c8943ab0859`
+**Example Response:**
 
-```text
-[
-    TypeID  <- 0x0000000b
-    Locktime  <- 0x000000000000d431
-    Threshold <- 0x00000001
-    Addresses <- [
-        0x51025c61fbcfc078f69334f834be6dd26d55a955,
-        0xc3344128e060128ede3523a24a461c8943ab0859,
-    ]
-]
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+  }
+}
+```
 
-=
-[
-  // type id
-  0x00, 0x00, 0x00, 0x0b,
-  // locktime
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
-  // threshold:
-  0x00, 0x00, 0x00, 0x01,
-  // number of addresses:
-  0x00, 0x00, 0x00, 0x02,
-  // addrs[0]:
-  0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
-  0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
-  0x6d, 0x55, 0xa9, 0x55,
-  // addrs[1]:
-  0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
-  0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
-  0x43, 0xab, 0x08, 0x59,
-]
+### `avm.listAddresses`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+List addresses controlled by the given user.
+
+**Signature:**
+
+```sh
+avm.listAddresses({
+    username: string,
+    password: string
+}) -> {addresses: []string}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.listAddresses",
+    "params": {
+        "username":"myUsername",
+        "password":"myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "addresses": ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"]
+  },
+  "id": 1
+}
+```
+
+### `avm.mint`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](/reference/avalanchego/x-chain/api.md#avmcreatevariablecapasset).
+
+**Signature:**
+
+```sh
+avm.mint({
+    amount: int,
+    assetID: string,
+    to: string,
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `amount` units of `assetID` will be created and controlled by address `to`.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.mint",
+    "params" :{
+        "amount":10000000,
+        "assetID":"i1EqsthjiFTxunrj8WD2xFSrQ5p2siEKQacmCCB5qBFVqfSL2",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+
+### `avm.mintNFT`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](/reference/avalanchego/x-chain/api.md#avmcreatenftasset).
+
+**Signature:**
+
+```sh
+avm.mintNFT({
+    assetID: string,
+    payload: string,
+    to: string,
+    encoding: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    txID: string,
+    changeAddr: string,
+}
+```
+
+- `assetID` is the assetID of the newly created NFT asset.
+- `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+- `txID` is this transaction’s ID.
+- `changeAddr` in the result is the address where any change was sent.
+- `encoding` is the encoding format to use for the payload argument. Can only be `hex` when a value is provided.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.mintNFT",
+    "params" :{
+        "assetID":"2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
+        "payload":"0x415641204c61627338259aed",
+        "to":"X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from":["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2oGdPdfw2qcNUHeqjw8sU2hPVrFyNUTgn6A8HenDra7oLCDtja",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `avm.send`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Send a quantity of an asset to an address.
+
+**Signature:**
+
+```sh
+avm.send({
+    amount: int,
+    assetID: string,
+    to: string,
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- `to` is the X-Chain address the asset is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.send",
+    "params" :{
+        "assetID"   : "AVAX",
+        "amount"    : 10000,
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "memo"      : "hi, mom!",
+        "username"  : "userThatControlsAtLeast10000OfThisAsset",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `avm.sendMultiple`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+
+**Signature:**
+
+```sh
+avm.sendMultiple({
+    outputs: []{
+      assetID: string,
+      amount: int,
+      to: string
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    memo: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+- `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+- `memo` is an optional message, whose length can be up to 256 bytes.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.sendMultiple",
+    "params" :{
+        "outputs": [
+            {
+                "assetID" : "AVAX",
+                "to"      : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                "amount"  : 1000000000
+            },
+            {
+                "assetID" : "26aqSTpZuWDAVtRmo44fjCx4zW6PDEx3zy9Qtp2ts1MuMFn9FB",
+                "to"      : "X-avax18knvhxx8uhc0mwlgrfyzjcm2wrd6e60w37xrjq",
+                "amount"  : 10
+            }
+        ],
+        "memo"      : "hi, mom!",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username"  : "username",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `avm.sendNFT`
+
+:::caution
+
+Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Send a non-fungible token.
+
+**Signature:**
+
+```sh
+avm.sendNFT({
+    assetID: string,
+    groupID: number,
+    to: string,
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string}
+```
+
+- `assetID` is the asset ID of the NFT being sent.
+- `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
+- `to` is the X-Chain address the NFT is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the NFT being sent.)
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.sendNFT",
+    "params" :{
+        "assetID"   : "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
+        "groupID"   : 0,
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username"  : "myUsername",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "DoR2UtG1Trd3Q8gWXVevNxD666Q3DPqSFmBSMPQ9dWTV8Qtuy",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  },
+  "id": 1
+}
+```
+
+### `wallet.issueTx`
+
+Send a signed transaction to the network and assume the TX will be accepted. `encoding` specifies the format of the signed transaction. Can only be `hex` when a value is provided.
+
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+**Signature:**
+
+```sh
+wallet.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"wallet.issueTx",
+    "params" :{
+        "tx":"0x00000009de31b4d8b22991d51aa6aa1fc733f23a851a8c9400000000000186a0000000005f041280000000005f9ca900000030390000000000000001fceda8f90fcb5d30614b99d79fc4baa29307762668f16eb0259a57c2d3b78c875c86ec2045792d4df2d926c40f829196e0bb97ee697af71f5b0a966dabff749634c8b729855e937715b0e44303fd1014daedc752006011b730",
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+  }
+}
+```
+
+### `wallet.send`
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Send a quantity of an asset to an address and assume the TX will be accepted so that future calls can use the modified UTXO set.
+
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+**Signature:**
+
+```sh
+wallet.send({
+    amount: int,
+    assetID: string,
+    to: string,
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+- Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX (one billionth of 1 AVAX.)
+- `to` is the X-Chain address the asset is sent to.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"wallet.send",
+    "params" :{
+        "assetID"   : "AVAX",
+        "amount"    : 10000,
+        "to"        : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+        "memo"      : "hi, mom!",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username"  : "userThatControlsAtLeast10000OfThisAsset",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### `wallet.sendMultiple`
+
+:::warning
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
+:::
+
+Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the TX will be accepted so that future calls can use the modified UTXO set.
+
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+**Signature:**
+
+```sh
+wallet.sendMultiple({
+    outputs: []{
+      assetID: string,
+      amount: int,
+      to: string
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    memo: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+- `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+- `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+- `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+- You can attach a `memo`, whose length can be up to 256 bytes.
+- The asset is sent from addresses controlled by user `username`. (Of course, that user will need to hold at least the balance of the asset being sent.)
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"wallet.sendMultiple",
+    "params" :{
+        "outputs": [
+            {
+                "assetID" : "AVAX",
+                "to"      : "X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5",
+                "amount"  : 1000000000
+            },
+            {
+                "assetID" : "26aqSTpZuWDAVtRmo44fjCx4zW6PDEx3zy9Qtp2ts1MuMFn9FB",
+                "to"      : "X-avax18knvhxx8uhc0mwlgrfyzjcm2wrd6e60w37xrjq",
+                "amount"  : 10
+            }
+        ],
+        "memo"      : "hi, mom!",
+        "from"      : ["X-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5ukulre5"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username"  : "username",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txID": "2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+  }
+}
+```
+
+### Events
+
+Listen for transactions on a specified address.
+
+This call is made to the events API endpoint:
+
+`/ext/bc/X/events`
+
+:::caution
+
+Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+
+:::
+
+
+#### **Golang Example**
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "log"
+    "net"
+    "net/http"
+    "sync"
+
+    "github.com/ava-labs/avalanchego/api"
+    "github.com/ava-labs/avalanchego/pubsub"
+    "github.com/gorilla/websocket"
+)
+
+func main() {
+    dialer := websocket.Dialer{
+        NetDial: func(netw, addr string) (net.Conn, error) {
+            return net.Dial(netw, addr)
+        },
+    }
+
+    httpHeader := http.Header{}
+    conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup := &sync.WaitGroup{}
+    waitGroup.Add(1)
+
+    readMsg := func() {
+        defer waitGroup.Done()
+
+        for {
+            mt, msg, err := conn.ReadMessage()
+            if err != nil {
+                log.Println(err)
+                return
+            }
+            switch mt {
+            case websocket.TextMessage:
+                log.Println(string(msg))
+            default:
+                log.Println(mt, string(msg))
+            }
+        }
+    }
+
+    go readMsg()
+
+    cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+    cmdmsg, err := json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    var addresses []string
+    addresses = append(addresses, " X-fuji....")
+    cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+    cmdmsg, err = json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup.Wait()
+}
+```
+
+**Operations:**
+
+| Command          | Description                  | Example                                                        | Arguments                                                                                                                                                |
+|:---------------- |:---------------------------- |:-------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **NewSet**       | create a new address map set | `{"newSet":{}}`                                                |                                                                                                                                                          |
+| **NewBloom**     | create a new bloom set.      | `{"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}}` | `maxElements` - number of elements in filter must be &gt; 0 `collisionProb` - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set    | `{"addAddresses":{"addresses":\["X-fuji..."\]}}`             | addresses - list of addresses to match                                                                                                                   |
+
+Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
+
+**Set details:**
+
+- **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
+- **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered. If the addresses is in the filter, you will be sent the transaction.
+
+**Example Response:**
+
+```json
+2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
