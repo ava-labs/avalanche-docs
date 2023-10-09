@@ -1,18 +1,17 @@
 ---
 tags:
   - Tooling
-description: Avalanche Plugin Manager is a command-line tool to manage virtual machines binaries on existing AvalancheGo instances. It enables to add/remove nodes to Subnets, upgrade the VM plugin binaries as new versions get released to the plugin repository.
-pagination_label: Avalanche Plugin Manager
+  - AvalancheGo APIs
+description: AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on any Linux computer. This script sets up full, running node in a matter of minutes with minimal user input required. This is convenient if you want to run the node as a service on a standalone Linux installation, for example to set up a (Subnet) validator, use the node as a private RPC server and similar uses. It also makes upgrading or reinstalling the nodes easy.
+pagination_label: AvalancheGo Install Script
 ---
 
-# Avalanche Plugin Manager
+# AvalancheGo Installer
 
-Avalanche Plugin Manager (**APM**) is a command-line tool to manage virtual machines binaries on existing AvalancheGo instances. It enables to add/remove nodes to Subnets, upgrade the VM plugin binaries as new versions get released to the plugin repository.
+AvalancheGo Installer is a shell (bash) script that installs AvalancheGo on any Linux computer. This script sets up full, running node in a matter of minutes with minimal user input required. This is convenient if you want to run the node as a service on a standalone Linux installation, for example to set up a (Subnet) validator, use the node as a private RPC server and similar uses. It also makes upgrading or reinstalling the nodes easy.
 
-GitHub: [https://github.com/ava-labs/apm](https://github.com/ava-labs/apm)
+GitHub: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
 
-## `avalanche-plugins-core`
+How-to: [Run an Avalanche Node Using the Install Script](/nodes/run/with-installer.md)
 
-`avalanche-plugins-core` is plugin repository that ships with the `apm`. A plugin repository consists of a set of virtual machine and Subnet definitions that the `apm` consumes to allow users to quickly and easily download and manage VM binaries.
-
-GitHub: [https://github.com/ava-labs/avalanche-plugins-core](https://github.com/ava-labs/avalanche-plugins-core)
+If you want to run a node in a more complex environment, like in a docker or Kubernetes container, or as a part of an installation orchestrated using a tool like Terraform, this installer probably won't fit your purposes. See here for how to run AvalancheGo in a [Docker container](/tooling/cli-guides/run-with-docker.md).
