@@ -1,190 +1,22 @@
 ---
+title: '🔗 Tooling Quick Links'
 tags:
-  - Subnet-EVM
-description: This page is an overview of the Subnet-EVM API associated with AvalancheGo.
-sidebar_label: API
-pagination_label: Subnet-EVM API
----
+  - Tooling
+description: The Avalanche Ecosystem includes a multitude of tooling, maintenance, testing services, including a wide range of helpful resources and utilities for developers building on the platform. These tools are designed to streamline development, improve integration, and maximize the potential of decentralized applications and custom blockchains in the Avalanche ecosystem.
+sidebar_label: '🔗 Quick Links'
+pagination_label: Tooling Quick Links
+--- 
 
-# Subnet-EVM API
-
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) APIs are identical to [Coreth](/reference/avalanchego/c-chain/api.md) C-Chain APIs, except Avalanche Specific APIs starting with `avax`. Subnet-EVM also supports standard Ethereum APIs as well. For more information about Coreth APIs see [GitHub](https://github.com/ava-labs/coreth).
-
-Subnet-EVM has some additional APIs that are not available in Coreth.
-
-## `eth_feeConfig`
-
-Subnet-EVM comes with an API request for getting fee config at a specific block. You can use this API to check your activated fee config.
-
-**Signature:**
-
-```sh
-eth_feeConfig([blk BlkNrOrHash]) -> {feeConfig: json}
-```
-
-- `blk` is the block number or hash at which to retrieve the fee config. Defaults to the latest block if omitted.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_feeConfig",
-    "params": [
-        "latest"
-    ],
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "feeConfig": {
-      "gasLimit": 15000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 33000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "lastChangedAt": 0
-  }
-}
-```
-
-## `eth_getChainConfig`
-
-`eth_getChainConfig` returns the Chain Config of the blockchain. This API is enabled by default with `internal-blockchain` namespace.
-
-This API exists on the C-Chain as well, but in addition to the normal Chain Config returned by the C-Chain `eth_getChainConfig` on `subnet-evm` additionally returns the upgrade config, which specifies network upgrades activated after the genesis. **Signature:**
-
-```sh
-eth_getChainConfig({}) -> {chainConfig: json}
-```
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"eth_getChainConfig",
-    "params" :[]
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "chainId": 43214,
-    "feeConfig": {
-      "gasLimit": 8000000,
-      "targetBlockRate": 2,
-      "minBaseFee": 33000000000,
-      "targetGas": 15000000,
-      "baseFeeChangeDenominator": 36,
-      "minBlockGasCost": 0,
-      "maxBlockGasCost": 1000000,
-      "blockGasCostStep": 200000
-    },
-    "allowFeeRecipients": true,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
-    "contractDeployerAllowListConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "contractNativeMinterConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "feeManagerConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "upgrades": {
-      "precompileUpgrades": [
-        {
-          "feeManagerConfig": {
-            "adminAddresses": null,
-            "blockTimestamp": 1661541259,
-            "disable": true
-          }
-        },
-        {
-          "feeManagerConfig": {
-            "adminAddresses": null,
-            "blockTimestamp": 1661541269
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-## `eth_getActivePrecompilesAt`
-
-`eth_getActivePrecompilesAt` returns activated precompiles at a specific timestamp. If no timestamp is provided it returns the latest block timestamp. This API is enabled by default with `internal-blockchain` namespace.
-
-**Signature:**
-
-```sh
-eth_getActivePrecompilesAt([timestamp uint]) -> {precompiles: []Precompile}
-```
-
-- `timestamp` specifies the timestamp to show the precompiles active at this time. If omitted it shows precompiles activated at the latest block timestamp.
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_getActivePrecompilesAt",
-    "params": [],
-    "id": 1
-}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "contractDeployerAllowListConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "contractNativeMinterConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    },
-    "feeManagerConfig": {
-      "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-      "blockTimestamp": 0
-    }
-  }
-}
-```
+| Tool                                                                             | Description                                                                                                                                                  | Links                                                                                                    |
+|:-------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------ |:-------------------------------------------------------------------------------------------------------- |
+| [**Avalanche-CLI**](/tooling/avalanche-cli.md)                                   | Command-line tool that gives developers access to everything Avalanche                                                                                       | [GitHub](https://github.com/ava-labs/avalanche-cli)                                                      |
+| [**AvalancheJS**](/tooling/avalanchejs-overview.md)                              | JavaScript Library for interfacing with the Avalanche platform                                                                                               | [GitHub](https://github.com/ava-labs/avalanchejs)                                                        |
+| [**🔌 RPC Providers**](/tooling/rpc-providers.md)                                 | List of RPC endpoints available for the Avalanche Network                                                                                                    |                                                                                                          |
+| [**Glacier API**](/tooling/glacier.md)                                           | Avalanche's performant API that allows web3 developers to more easily access indexed blockchain data                                                         | [API](https://glacier-api.avax.network/api#/)                                                            |
+| [**Metrics API**](/tooling/metrics.md)                                           | Power your analytics with metrics such as Subnet usage, staking operations, and more                                                                         | [API](https://metrics.avax.network/)                                                                     |
+| [**Hyper SDK**](https://github.com/ava-labs/hypersdk#readme)                     | Opinionated framework for building hyper-scalable blockchains on Avalanche                                                                                   | [GitHub](https://github.com/ava-labs/hypersdk#readme)                                                    |
+| [**AvalancheGo Installer Script**](/tooling/avalanchego-installer.md)            | A shell (bash) script that installs AvalancheGo on any Linux computer                                                                                        | [GitHub](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh#readme) |
+| [**Avalanche Network Runner**](/tooling/network-runner.md)                       | ANR allows a user to define, create and interact with a network of Avalanche nodes                                                                           | [GitHub](https://github.com/ava-labs/avalanche-network-runner)                                           |
+| [**Avalanche Plugin Manager**](/tooling/avalanche-plugin-manager.md)             | Command-line tool to manage virtual machines binaries on existing AvalancheGo instance                                                                       | [GitHub](https://github.com/ava-labs/apm)                                                                |
+| [**Avalanche Ops**](/tooling/avalanche-ops.md)                                   | A tool intended for quickly creating, testing and iterating over various Avalanche network infrastructure configurations for testing and simulation purposes | [GitHub](https://github.com/ava-labs/avalanche-ops)                                                      |
+| [**AvalancheGo Postman Collection**](/tooling/avalanchego-postman-collection.md) | All the public API calls that are available on AvalancheGo, including environment variables, wrapped up into a collection that can be imported to Postman    | [GitHub](https://github.com/ava-labs/avalanche-postman-collection/)                                      |
