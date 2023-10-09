@@ -18,3 +18,4 @@ jobs:
         uses: meaghanfitzgerald/ava-docs-translate@v0.1.3
         with:
           apikey: ${{ secrets.OPENAI_API_KEY }}
+          prompt: 'While the following keywords must be left in English: ["Avalanche", "Fuji", "Faucet", "Warp Messaging"] please translate the following into naturalistic {targetLanguage}'
