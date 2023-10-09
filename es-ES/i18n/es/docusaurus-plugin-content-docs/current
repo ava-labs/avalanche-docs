@@ -1,31 +1,34 @@
 ---
+slug: /intro
 tags:
-  - Fuji Testnet
-description: Fuji Testnet is the official testnet for the Avalanche ecosystem.
+  - Avalanche
+description: Avalanche is an open-source platform for building dApps in an interoperable, decentralized, and highly scalable ecosystem.
 keywords:
   - docs
-  - fuji
-  - testnet
+  - avalanche
+  - scalability
   - build on avalanche
-sidebar_label: Fuji Testnet
+  - dApps
+sidebar_label: '🔺 What is Avalanche?'
 ---
 
-# Fuji Testnet
+# What Is Avalanche?
 
-The Fuji Testnet serves as the official testnet for the Avalanche ecosystem.
+Avalanche is an open-source platform for building decentralized applications in one interoperable, decentralized, and highly scalable ecosystem. Powered by [a uniquely powerful consensus mechanism](/learn/avalanche/avalanche-consensus.md), Avalanche is the first ecosystem designed to accommodate the scale of global finance, with near-instant transaction finality.
 
-Fuji's infrastructure imitates Avalanche Mainnet. It's comprised of a [Primary Network](/learn/avalanche/avalanche-platform.md) formed by instances of X, P, and C-Chain, as well as many test Subnets.
+## Why Choose Avalanche?
 
-## Why Use Fuji Over Mainnet?
+### Blazingly Fast
 
-Fuji provides users with a platform to simulate the conditions found in the Mainnet environment. It enables developers to deploy demo Smart Contracts, allowing them to test and refine their applications before deploying them on the [Primary Network](/learn/avalanche/avalanche-platform.md).
+- Avalanche employs the fastest consensus mechanism of any layer 1 blockchain. The unique consensus mechanism enables quick finality and low latency: in less than 2 seconds, your transaction is effectively processed and verified.
 
-Users interested in experimenting with Avalanche can receive free testnet AVAX, allowing them to explore the platform without any risk. These testnet tokens have no value in the real world and are only meant for experimentation purposes within the Fuji test network.
+### Built to Scale
 
-To receive testnet tokens, users can request funds from the [Avalanche Faucet](/build/dapp/smart-contracts/get-funds-faucet.md).
+- Developers who build on Avalanche can build application-specific blockchains with complex rulesets or build on existing private or public Subnets in any language.
+- Avalanche is incredibly energy-efficient and can run easily on consumer-grade hardware. The entire Avalanche network consumes the same amount of energy as 46 US households, equivalent to 0.0005% of the amount of energy consumed by Bitcoin.
+- Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or build their own custom Virtual Machine (VM) for advanced use cases.
 
-## Additional Considerations
+### Advanced Security
 
-- Fuji Testnet has its own dedicated [block explorer](https://subnets-test.avax.network/).
-- The Public API endpoint for Fuji is not the same as Mainnet. More info is available in the [Public API Server](/tooling/rpc-providers.md) documentation.
-- While Fuji Network is a valuable resource, developers also have the option to explore [Avalanche Network Runner](https://docs.avax.network/quickstart/tools-list#avalanche-network-runner-anr) as an alternative means of locally testing their projects, ensuring comprehensive evaluation and fine-tuning before interacting with the wider network. 
+- Avalanche consensus scales to thousands of concurrent validators without suffering performance degradation making it one of the most secure protocols for internet scaling systems.
+- Permissionless and permissioned custom blockchains deployed as an Avalanche Subnets can include custom rulesets designed to be compliant with legal and jurisdictional considerations.
