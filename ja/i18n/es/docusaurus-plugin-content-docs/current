@@ -1,8 +1,35 @@
----
-plugin: vultr
-api_account: reddev
-user: root
-keyed_groups:
-  - 
-    prefix: tag
-    key: tag
+- 
+  name: Create a typical reddev developement server
+  hosts: localhost
+  vars_prompt:
+    - 
+      name: instance_name
+      prompt: Instance name
+      private: no
+    - 
+      name: default_ssh_key
+      prompt: Vultr name of default ssh key
+      private: no
+    - 
+      name: firewall_name
+      prompt: Firewall Group
+      private: no
+  tasks:
+    - 
+      debug:
+        var: hostvars
+    - 
+      name: Create vultr server
+      vultr_server:
+        name: "{{ instance_name }}"
+        api_account: reddev
+        os: Ubuntu 20.10 x64
+        plan: 8192 MB RAM,160 GB SSD,4.00 TB BW
+        tag: dev-unprovisioned
+        ssh_keys:
+          - "{{ default_ssh_key}}"
+        region: New Jersey
+        firewall_group: "{{ firewall_name }}"
+        state: present
+    - 
+      meta: refresh_inventory
