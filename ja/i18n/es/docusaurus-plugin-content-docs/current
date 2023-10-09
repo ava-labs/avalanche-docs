@@ -1,17 +1,26 @@
-// Import the Transfer event class generated from the Png ABI
-import { Transfer as TransferEvent } from "../generated/Png/Png"; // Import the Transfer entity type generated from the GraphQL schema
-
-import { Transfer } from "../generated/schema"; // Transfer event handler
-
-export function handleTransfer(event: TransferEvent): void {
-  // Create a Transfer entity, using the hexadecimal string representation
-  // of the transaction hash as the entity ID
-  let id = event.transaction.hash.toHex();
-  let transfer = new Transfer(id); // Set properties on the entity, using the event parameters
-
-  transfer.from = event.params.from;
-  transfer.to = event.params.to;
-  transfer.amount = event.params.amount; // Save the entity to the store
-
-  transfer.save();
-}
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - 
+    kind: ethereum/contract
+    name: Png
+    network: avalanche
+    source:
+      address: "0x60781C2586D68229fde47564546784ab3fACA982"
+      abi: Png
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - 
+          name: Png
+          file: ./abis/Png.json
+      eventHandlers:
+        - 
+          event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
