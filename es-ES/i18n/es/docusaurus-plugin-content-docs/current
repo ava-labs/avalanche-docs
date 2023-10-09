@@ -2,29 +2,16 @@
 tags:
   - Build
   - Dapps
-description: Launching any new or existing Solidity decentralized app on Avalanche C-Chain fosters the same developer experience as Ethereum, but benefits from the security, speed, and interoperability of the Avalanche Network. Get connected with Avalanche C-Chain Settings
-sidebar_label: '⛓️ Chain Settings'
-pagination_label: Avalanche C-Chain Settings
+description: These Avalanche Block Explorers allow you to query historical Mainnet, testnet, and Subnet block data.
+sidebar_label: Block Explorers
+pagination_label: Avalanche Block Explorer
 ---
 
-# Avalanche C-Chain Settings
+# Avalanche Block Explorer
 
-## **Avalanche Mainnet Settings**
+The Avalanche Subnet Explorer allows you to query historical Mainnet or testnet block data, including any Subnets in production on either network. Avalanche Subnet Explorer is an analytics tool that enables people to search the Subnets and blockchains for transactions, addresses, and other platform activities.
 
-- **Network Name**: Avalanche Mainnet C-Chain
-- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-- **ChainID**: `43114`
-- **Symbol**: `AVAX`
-- **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
-
-## **Fuji Testnet Settings**
-
-- **Network Name**: Avalanche Fuji C-Chain
-- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-- **ChainID**: `43113`
-- **Symbol**: `AVAX`
-- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
-
-## Add Network to Wallet in One Click
-
-To easily add a network to your browser wallet of choice, visit [chainlist](https://chainlist.org/?search=Avalanche&testnets=true) and connect your wallet.
+| Links                                                    |  |
+|:-------------------------------------------------------- |  |
+| [**Avalanche Mainnet**](https://subnets.avax.network/) 🌐 |  |
+| [**Fuji Testnet**](https://subnets-test.avax.network/) 🧪 |  | 
