@@ -2,202 +2,124 @@
 tags:
   - Build
   - Subnets
-description: You can list the Subnets you've created with `avalanche subnet list`.
-sidebar_label: View Subnets
-pagination_label: View Your Created Subnets
+description: This tutorial will guide you through the process of doing various Subnet upgrades and changes including what to watch out for and suggested precautions.
+sidebar_label: Considerations
+pagination_label: Key Considerations When Upgrading a Subnet
 sidebar_position: 0
 ---
 
-# How to View Your Created Subnets
+# Key Considerations When Upgrading a Subnet
 
-## List Subnet Configurations
+In the course of Subnet operation, you will inevitably need to upgrade or change some part of the software stack that is running your Subnet. If nothing else, you will have to upgrade the AvalancheGo node client. Same goes for the VM plugin binary that is used to run the blockchain on your Subnet, which is most likely the [Subnet-EVM](https://github.com/ava-labs/subnet-evm), the Subnet implementation of the Ethereum virtual machine.
 
-You can list the Subnets you've created with
+Node and VM upgrades usually don't change the way your Subnet functions, instead they keep your Subnet in sync with the rest of the network, bringing security, performance and feature upgrades. Most upgrades are optional, but all of them are recommended, and you should make optional upgrades part of your routine Subnet maintenance. Some upgrades will be mandatory, and those will be clearly communicated as such ahead of time, you need to pay special attention to those.
 
-`avalanche subnet list`
+Besides the upgrades due to new releases, you also may want to change the configuration of the VM, to alter the way Subnet runs, for various business or operational needs. These upgrades are solely the purview of your team, and you have complete control over the timing of their roll out. Any such change represents a **network upgrade** and needs to be carefully planned and executed.
 
-Example:
+:::warning 
+Network Upgrades Permanently Change the Rules of Your Subnet.
 
-```text
-> avalanche subnet list
-+-------------+-------------+----------+---------------------------------------------------+------------+-----------+
-|   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
-+-------------+-------------+----------+---------------------------------------------------+------------+-----------+
-| test        | test        |     5234 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
-+-------------+-------------+----------+---------------------------------------------------+------------+-----------+
+Procedural mistakes or a botched upgrade can halt your Subnet or lead to data loss!
+
+When performing a Subnet upgrade, every single validator on the Subnet will need to perform the identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to every Subnet validator so that they have time to perform the upgrade prior to activation. Make sure you have direct line of communication to all your validators!
+:::
+
+This tutorial will guide you through the process of doing various Subnet upgrades and changes. We will point out things to watch out for and precautions you need to be mindful about.
+
+## General Upgrade Considerations
+
+When operating a Subnet, you should always keep in mind that Proof of Stake networks like Avalanche can only make progress if sufficient amount of validating nodes are connected and processing transactions. Each validator on a Subnet is assigned a certain `weight`, which is a numerical value representing the significance of the node in consensus decisions. On the Primary Network, weight is equal to the amount of AVAX staked on the node. On Subnets, weight is currently assigned by the Subnet owners when they issue the transaction [adding a validator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) to the Subnet.
+
+Subnets can operate normally only if validators representing 80% or more of the cumulative validator weight is connected. If the amount of connected stake falls close to or below 80%, Subnet performance (time to finality) will suffer, and ultimately the Subnet will halt (stop processing transactions).
+
+You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working at all times.
+
+:::info
+
+It is mandatory that the cumulative weight of all validators in the Subnet must be at least the value of [`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#snow-sample-size-int) (default 20). For example, if there is only one validator in the Subnet, its weight must be at least `snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20. Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
+
+:::
+
+## Upgrading Subnet Validator Nodes
+
+AvalancheGo, the node client that is running the Avalanche validators is under constant and rapid development. New versions come out often (roughly every two weeks), bringing added capabilities, performance improvements or security fixes. Updates are usually optional, but from time to time (much less frequently than regular updates) there will be an update that includes a mandatory network upgrade. Those upgrades are **MANDATORY** for every node running the Subnet. Any node that does not perform the update before the activation timestamp will immediately stop working when the upgrade activates.
+
+That's why having a node upgrade strategy is absolutely vital, and you should always update to the latest AvalancheGo client immediately when it is made available.
+
+For a general guide on upgrading AvalancheGo check out [this tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and keeping in mind the previous section, make sure to stagger node upgrades and start a new upgrade only once the previous node has successfully upgraded. Use the [Health API](/reference/avalanchego/health-api.md#healthhealth) to check that `healthy` value in the response is `true` on the upgraded node, and on other Subnet validators check that [platform.getCurrentValidators()](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators) has `true` in `connected` attribute for the upgraded node's `nodeID`. Once those two conditions are satisfied, node is confirmed to be online and validating the Subnet and you can start upgrading another node.
+
+Continue the upgrade cycle until all the Subnet nodes are upgraded.
+
+## Upgrading Subnet VM Plugin Binaries
+
+Besides the AvalancheGo client itself, new versions get released for the VM binaries that run the blockchains on the Subnet. On most Subnets, that is the [Subnet-EVM](https://github.com/ava-labs/subnet-evm), so this tutorial will go through the steps for updating the `subnet-evm` binary. The update process will be similar for updating any VM plugin binary.
+
+All the considerations for doing staggered node upgrades as discussed in previous section are valid for VM upgrades as well.
+
+In the future, VM upgrades will be handled by the [Avalanche-CLI tool](https://github.com/ava-labs/avalanche-cli), but for now we need to do it manually.
+
+Go to the [releases page](https://github.com/ava-labs/subnet-evm/releases) of the Subnet-EVM repository. Locate the latest version, and copy link that corresponds to the OS and architecture of the machine the node is running on (`darwin` = Mac, `amd64` = Intel/AMD processor, `arm64` = Arm processor). Log into the machine where the node is running and download the archive, using `wget` and the link to the archive, like this:
+
+```bash
+wget https://github.com/ava-labs/subnet-evm/releases/download/v0.2.9/subnet-evm_0.2.9_linux_amd64.tar.gz
 ```
 
-To see detailed information about your deployed Subnets, add the `--deployed` flag:
+This will download the archive to the machine. Unpack it like this (use the correct filename, of course):
 
-```text
-> avalanche subnet list --deployed
-+-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-|   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
-+-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-| test        | test        | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
-+             +             +                                                   +               +-----------------------------------------------------------------+---------+
-|             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
-+-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
+```bash
+tar xvf subnet-evm_0.2.9_linux_amd64.tar.gz
 ```
 
+This will unpack and place the contents of the archive in the current directory, file `subnet-evm` is the plugin binary. You need to stop the node now (if the node is running as a service, use `sudo
+systemctl stop avalanchego` command). You need to place that file into the plugins directory where the AvalancheGo binary is located. If the node is installed using the install script, the path will be `~/avalanche-node/plugins` Instead of the `subnet-evm` filename, VM binary needs to be named as the VM ID of the chain on the Subnet. For example, for the [WAGMI Subnet](https://subnets-test.avax.network/wagmi) that VM ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. So, the command to copy the new plugin binary would look like:
 
-
-## Describe Subnet Configurations
-
-To see the details of a specific configuration, run
-
-`avalanche subnet describe <subnetName>`
-
-Example:
-
-```text
-> avalanche subnet describe firstsubnet
-
- _____       _        _ _
-|  __ \     | |      (_) |
-| |  | | ___| |_ __ _ _| |___
-| |  | |/ _ \ __/ _  | | / __|
-| |__| |  __/ || (_| | | \__ \
-|_____/ \___|\__\__,_|_|_|___/
-+----------------------------+----------------------------------------------------+
-|         PARAMETER          |                       VALUE                        |
-+----------------------------+----------------------------------------------------+
-| Subnet Name                | firstsubnet                                        |
-+----------------------------+----------------------------------------------------+
-| ChainID                    | 12345                                              |
-+----------------------------+----------------------------------------------------+
-| Token Name                 | FSN                                                |
-+----------------------------+----------------------------------------------------+
-| VM ID                      | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu  |
-+----------------------------+----------------------------------------------------+
-| Fuji SubnetID              | XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt  |
-+----------------------------+----------------------------------------------------+
-| Fuji BlockchainID          | 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR  |
-+----------------------------+----------------------------------------------------+
-| Local Network SubnetID     | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk |
-+----------------------------+----------------------------------------------------+
-| Local Network BlockchainID | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
-+----------------------------+----------------------------------------------------+
-
-  _____              _____             __ _
- / ____|            / ____|           / _(_)
-| |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
-| | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
-| |__| | (_| \__ \ | |___| (_) | | | | | | | (_| |
- \_____|\__,_|___/  \_____\___/|_| |_|_| |_|\__, |
-                                             __/ |
-                                            |___/
-+--------------------------+-------------+
-|      GAS PARAMETER       |    VALUE    |
-+--------------------------+-------------+
-| GasLimit                 |    15000000 |
-+--------------------------+-------------+
-| MinBaseFee               | 25000000000 |
-+--------------------------+-------------+
-| TargetGas                |    15000000 |
-+--------------------------+-------------+
-| BaseFeeChangeDenominator |          36 |
-+--------------------------+-------------+
-| MinBlockGasCost          |           0 |
-+--------------------------+-------------+
-| MaxBlockGasCost          |     1000000 |
-+--------------------------+-------------+
-| TargetBlockRate          |           2 |
-+--------------------------+-------------+
-| BlockGasCostStep         |      200000 |
-+--------------------------+-------------+
-
-          _         _
-    /\   (_)       | |
-   /  \   _ _ __ __| |_ __ ___  _ __
-  / /\ \ | | '__/ _  | '__/ _ \| '_ \
- / ____ \| | | | (_| | | | (_) | |_) |
-/_/    \_\_|_|  \__,_|_|  \___/| .__/
-                               | |
-                               |_|
-+--------------------------------------------+------------------------+---------------------------+
-|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
-+--------------------------------------------+------------------------+---------------------------+
-| 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
-+--------------------------------------------+------------------------+---------------------------+
-
-
-  _____                                    _ _
- |  __ \                                  (_) |
- | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
- |  ___/ '__/ _ \/ __/ _ \| '_   _ \| '_ \| | |/ _ \/ __|
- | |   | | |  __/ (_| (_) | | | | | | |_) | | |  __/\__ \
- |_|   |_|  \___|\___\___/|_| |_| |_| .__/|_|_|\___||___/
-                                    | |
-                                    |_|
-
-No precompiles set
+```bash
+cp subnet-evm ~/avalanche-node/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-### Viewing a Genesis File
+:::warning
+Make sure you use the correct VM ID, otherwise, your VM will not get updated and your Subnet may halt.
+:::
 
-If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command:
+After you do that, you can start the node back up (if running as service do `sudo systemctl start
+avalanchego`). You can monitor the log output on the node to check that everything is OK, or you can use the [info.getNodeVersion()](https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeversion) API to check the versions. Example output would look like:
 
-`avalanche subnet describe <subnetName> --genesis`
-
-Example:
-
-```text
-> avalanche subnet describe firstsubnet --genesis
+```json
 {
-    "config": {
-        "chainId": 12345,
-        "homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-        "eip155Block": 0,
-        "eip158Block": 0,
-        "byzantiumBlock": 0,
-        "constantinopleBlock": 0,
-        "petersburgBlock": 0,
-        "istanbulBlock": 0,
-        "muirGlacierBlock": 0,
-        "subnetEVMTimestamp": 0,
-        "feeConfig": {
-            "gasLimit": 15000000,
-            "targetBlockRate": 2,
-            "minBaseFee": 25000000000,
-            "targetGas": 15000000,
-            "baseFeeChangeDenominator": 36,
-            "minBlockGasCost": 0,
-            "maxBlockGasCost": 1000000,
-            "blockGasCostStep": 200000
-        },
-        "contractDeployerAllowListConfig": {
-            "blockTimestamp": null,
-            "adminAddresses": null
-        },
-        "contractNativeMinterConfig": {
-            "blockTimestamp": null,
-            "adminAddresses": null
-        },
-        "txAllowListConfig": {
-            "blockTimestamp": null,
-            "adminAddresses": null
-        }
-    },
-    "nonce": "0x0",
-    "timestamp": "0x0",
-    "extraData": "0x",
-    "gasLimit": "0xE4E1C0",
-    "difficulty": "0x0",
-    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "coinbase": "0x0000000000000000000000000000000000000000",
-    "alloc": {
-        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
-            "balance": "0xd3c21bcecceda1000000"
-        }
-    },
-    "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "airdropAmount": null,
-    "number": "0x0",
-    "gasUsed": "0x0",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "baseFeePerGas": null
+  "jsonrpc": "2.0",
+  "result": {
+    "version": "avalanche/1.7.18",
+    "databaseVersion": "v1.4.5",
+    "gitCommit": "b6d5827f1a87e26da649f932ad649a4ea0e429c4",
+    "vmVersions": {
+      "avm": "v1.7.18",
+      "evm": "v0.8.15",
+      "platform": "v1.7.18",
+      "sqja3uK17MJxfC7AN8nGadBw9JK5BcrsNwNynsqP5Gih8M5Bm": "v0.0.7",
+      "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy": "v0.2.9"
+    }
+  },
+  "id": 1
 }
 ```
+
+Note that entry next to the VM ID we upgraded correctly says `v0.2.9`. You have successfully upgraded the VM!
+
+Refer to the previous section on how to make sure node is healthy and connected before moving on to upgrading the next Subnet validator.
+
+If you don't get the expected result, you can stop the `AvalancheGo`, examine and follow closely step-by-step of the above. You are free to remove files under `~/avalanche-node/plugins`, however, you should keep in mind that removing files is to remove an existing VM binary. You must put the correct VM plugin in place before you restart AvalancheGo.
+
+## Network Upgrades
+
+Sometimes you need to do a network upgrade to change the configured rules in the genesis under which the Chain operates. In regular EVM, network upgrades are a pretty involved process that includes deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can consist of enabling/disabling particular precompiles, or changing their parameters. Currently available precompiles allow you to:
+
+- Restrict Smart Contract Deployers
+- Restrict Who Can Submit Transactions
+- Mint Native Coins
+- Configure Dynamic Fees
+
+Please refer to [Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for a detailed discussion of possible precompile upgrade parameters.
+
+## Summary
+
+Vital part of Subnet maintenance is performing timely upgrades at all levels of the software stack running your Subnet. We hope this tutorial will give you enough information and context to allow you to do those upgrades with confidence and ease. If you have additional questions or any issues, please reach out to us on [Discord](https://chat.avalabs.org).
