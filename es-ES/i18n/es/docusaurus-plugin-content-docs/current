@@ -1,249 +1,63 @@
----
-tags:
-  - Standards
-description: This document specifies the changes in Avalanche Banff, which was released in AvalancheGo v1.10.0.
-sidebar_label: Banff Changes
-pagination_label: Banff Changes
-sidebar_position: 3
----
+# Flow of a Single Blockchain
 
-# Banff Changes
+![Blockchain Flow](../../../../static/img/blockchain-flow.png)
 
-This document specifies the changes in Avalanche “Banff”, which was released in AvalancheGo v1.9.x.
+## Intro
 
-## Block Changes
+The Avalanche network consists of 3 built-in blockchains: X-Chain, C-Chain, and P-Chain. The X-Chain is used to manage assets and uses the Avalanche consensus protocol. The C-Chain is used to create and interact with smart contracts and uses the Snowman consensus protocol. The P-Chain is used to coordinate validators and stake and also uses the Snowman consensus protocol. At the time of writing, the Avalanche network has ~1200 validators. A set of validators makes up a Subnet. Subnets can validate 1 or more chains. It is a common misconception that 1 Subnet = 1 chain and this is shown by the primary Subnet of Avalanche which is made up of the X-Chain, C-Chain, and P-Chain.
 
-### Apricot
+A node in the Avalanche network can either be a validator or a non-validator. A validator stakes AVAX tokens and participates in consensus to earn rewards. A non-validator does not participate in consensus or have any AVAX staked but can be used as an API server. Both validators and non-validators need to have their own copy of the chain and need to know the current state of the network. At the time of writing, there are ~1200 validators and ~1800 non-validators.
 
-Apricot allows the following block types with the following content:
+Each blockchain on Avalanche has several components: the virtual machine, database, consensus engine, sender, and handler. These components help the chain run smoothly. Blockchains also interact with the P2P layer and the chain router to send and receive messages.
 
-- _Standard Blocks_ may contain multiple transactions of the following types:
-  - CreateChainTx
-  - CreateSubnetTx
-  - ImportTx
-  - ExportTx
-- _Proposal Blocks_ may contain a single transaction of the following types:
-  - AddValidatorTx
-  - AddDelegatorTx
-  - AddSubnetValidatorTx
-  - RewardValidatorTx
-  - AdvanceTimeTx
-- _Options Blocks_, that is _Commit Block_ and _Abort Block_ do not contain any transactions.
+## Peer-to-Peer (P2P)
 
-Each block has a header containing:
+### Outbound Messages
 
-- ParentID
-- Height
+[The `OutboundMsgBuilder` interface](https://github.com/ava-labs/avalanchego/blob/master/message/outbound_msg_builder.go) specifies methods that build messages of type `OutboundMessage`. Nodes communicate to other nodes by sending `OutboundMessage` messages.
 
-### Banff
+All messaging functions in `OutboundMsgBuilder` can be categorized as follows:
 
-Banff allows the following block types with the following content:
+- **Handshake**
+  - Nodes need to be on a certain version before they can be accepted into the network.
+- **State Sync**
+  - A new node can ask other nodes for the current state of the network. It only syncs the required state for a specific block.
+- **Bootstrapping**
+  - Nodes can ask other nodes for blocks to build their own copy of the chain. A node can fetch all blocks from the locally last accepted block to the current last accepted block in the network.
+- **Consensus**
+  - Once a node is up to tip they can participate in consensus! During consensus, a node conducts a poll to several different small random samples of the validator set. They can communicate decisions on whether or not they have accepted/rejected a block.
+- **App**
+  - VMs communicate application-specific messages to other nodes through app messages. A common example is mempool gossiping.
 
-- _Standard Blocks_ may contain multiple transactions of the following types:
-  - CreateChainTx
-  - CreateSubnetTx
-  - ImportTx
-  - ExportTx
-  - AddValidatorTx
-  - AddDelegatorTx
-  - AddSubnetValidatorTx
-  - _RemoveSubnetValidatorTx_
-  - _TransformSubnetTx_
-  - _AddPermissionlessValidatorTx_
-  - _AddPermissionlessDelegatorTx_
-- _Proposal Blocks_ may contain a single transaction of the following types:
+Currently, AvalancheGo implements its own message serialization to communicate. In the future, AvalancheGo will use protocol buffers to communicate.
 
-  - RewardValidatorTx
+### Network
 
-- _Options blocks_, that is _Commit Block_ and _Abort Block_ do not contain any transactions.
+[The networking interface](https://github.com/ava-labs/avalanchego/blob/master/network/network.go) is shared across all chains. It implements functions from the `ExternalSender` interface. The two functions it implements are `Send` and `Gossip`. `Send` sends a message of type `OutboundMessage` to a specific set of nodes (specified by an array of `NodeIDs`). `Gossip` sends a message of type `OutboundMessage` to a random group of nodes in a Subnet (can be a validator or a non-validator). Gossiping is used to push transactions across the network. The networking protocol uses TLS to pass messages between peers.
 
-Note that each block has an header containing:
+Along with sending and gossiping, the networking library is also responsible for making connections and maintaining connections. Any node, either a validator or non-validator, will attempt to connect to the primary network.
 
-- ParentID
-- Height
-- _Time_
+## Router
 
-So the two main differences with respect to Apricot are:
+[The `ChainRouter`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/router/chain_router.go) routes all incoming messages to its respective blockchain using `ChainID`. It does this by pushing all the messages onto the respective Chain handler’s queue. The `ChainRouter` references all existing chains on the network such as the X-chain, C-chain, P-chain and possibly any other chain. The `ChainRouter` handles timeouts as well. When sending messages on the P2P layer, timeouts are registered on the sender and cleared on the `ChainRouter` side when a response is received. If no response is received, then it triggers a timeout. Because timeouts are handled on the `ChainRouter` side, the handler is reliable. Timeouts are triggered when peers do not respond and the `ChainRouter` will still notify the handler of failure cases. The timeout manager within `ChainRouter` is also adaptive. If the network is experiencing long latencies, timeouts will then be adjusted as well.
 
-- _AddValidatorTx_, _AddDelegatorTx_, _AddSubnetValidatorTx_ are included into Standard Blocks rather than Proposal Blocks so that they don't need to be voted on (that is followed by a Commit/Abort Block).
-- New Transaction types: _RemoveSubnetValidatorTx_, _TransformSubnetTx_, _AddPermissionlessValidatorTx_, and _AddPermissionlessDelegatorTx_ have been added into Standard Blocks.
-- Block timestamp is explicitly serialized into block header, to allow chain time update.
+## Handler
 
-### New Transactions
+The main function of [the `Handler`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/handler/handler.go) is to pass messages from the network to the consensus engine. It receives these messages from the `ChainRouter`. It passes messages by pushing them onto a sync or Async queue (depends on message type). Messages are then popped from the queue, parsed, and routed to the correct function in consensus engine. This can be one of the following.
 
-#### RemoveSubnetValidatorTx
+- **State sync message (sync queue)**
+- **Bootstrapping message (sync queue)**
+- **Consensus message (sync queue)**
+- **App message (Async queue)**
 
-```go
-type RemoveSubnetValidatorTx struct {
-    BaseTx `serialize:"true"`
-    // The node to remove from the subnet.
-    NodeID ids.NodeID `serialize:"true" json:"nodeID"`
-    // The subnet to remove the node from.
-    Subnet ids.ID `serialize:"true" json:"subnet"`
-    // Proves that the issuer has the right to remove the node from the subnet.
-    SubnetAuth verify.Verifiable `serialize:"true" json:"subnetAuthorization"`
-}
-```
+## Sender
 
-#### TransformSubnetTx
+The main role of [the `sender`](https://github.com/ava-labs/avalanchego/blob/master/snow/networking/sender/sender.go) is to build and send outbound messages. It is actually a very thin wrapper around the normal networking code. The main difference here is that sender registers timeouts and tells the router to expect a response message. The timer starts on the sender side. If there is no response, sender will send a failed response to the router. If a node is repeatedly unresponsive, that node will get benched and the sender will immediately start marking those messages as failed. If a sufficient amount of network deems the node benched, it might not get rewards (as a validator).
 
-```go
-type TransformSubnetTx struct {
-    // Metadata, inputs and outputs
-    BaseTx `serialize:"true"`
-    // ID of the Subnet to transform
-    // Restrictions:
-    // - Must not be the Primary Network ID
-    Subnet ids.ID `serialize:"true" json:"subnetID"`
-    // Asset to use when staking on the Subnet
-    // Restrictions:
-    // - Must not be the Empty ID
-    // - Must not be the AVAX ID
-    AssetID ids.ID `serialize:"true" json:"assetID"`
-    // Amount to initially specify as the current supply
-    // Restrictions:
-    // - Must be > 0
-    InitialSupply uint64 `serialize:"true" json:"initialSupply"`
-    // Amount to specify as the maximum token supply
-    // Restrictions:
-    // - Must be >= [InitialSupply]
-    MaximumSupply uint64 `serialize:"true" json:"maximumSupply"`
-    // MinConsumptionRate is the rate to allocate funds if the validator's stake
-    // duration is 0
-    MinConsumptionRate uint64 `serialize:"true" json:"minConsumptionRate"`
-    // MaxConsumptionRate is the rate to allocate funds if the validator's stake
-    // duration is equal to the minting period
-    // Restrictions:
-    // - Must be >= [MinConsumptionRate]
-    // - Must be <= [reward.PercentDenominator]
-    MaxConsumptionRate uint64 `serialize:"true" json:"maxConsumptionRate"`
-    // MinValidatorStake is the minimum amount of funds required to become a
-    // validator.
-    // Restrictions:
-    // - Must be > 0
-    // - Must be <= [InitialSupply]
-    MinValidatorStake uint64 `serialize:"true" json:"minValidatorStake"`
-    // MaxValidatorStake is the maximum amount of funds a single validator can
-    // be allocated, including delegated funds.
-    // Restrictions:
-    // - Must be >= [MinValidatorStake]
-    // - Must be <= [MaximumSupply]
-    MaxValidatorStake uint64 `serialize:"true" json:"maxValidatorStake"`
-    // MinStakeDuration is the minimum number of seconds a staker can stake for.
-    // Restrictions:
-    // - Must be > 0
-    MinStakeDuration uint32 `serialize:"true" json:"minStakeDuration"`
-    // MaxStakeDuration is the maximum number of seconds a staker can stake for.
-    // Restrictions:
-    // - Must be >= [MinStakeDuration]
-    // - Must be <= [GlobalMaxStakeDuration]
-    MaxStakeDuration uint32 `serialize:"true" json:"maxStakeDuration"`
-    // MinDelegationFee is the minimum percentage a validator must charge a
-    // delegator for delegating.
-    // Restrictions:
-    // - Must be <= [reward.PercentDenominator]
-    MinDelegationFee uint32 `serialize:"true" json:"minDelegationFee"`
-    // MinDelegatorStake is the minimum amount of funds required to become a
-    // delegator.
-    // Restrictions:
-    // - Must be > 0
-    MinDelegatorStake uint64 `serialize:"true" json:"minDelegatorStake"`
-    // MaxValidatorWeightFactor is the factor which calculates the maximum
-    // amount of delegation a validator can receive.
-    // Note: a value of 1 effectively disables delegation.
-    // Restrictions:
-    // - Must be > 0
-    MaxValidatorWeightFactor byte `serialize:"true" json:"maxValidatorWeightFactor"`
-    // UptimeRequirement is the minimum percentage a validator must be online
-    // and responsive to receive a reward.
-    // Restrictions:
-    // - Must be <= [reward.PercentDenominator]
-    UptimeRequirement uint32 `serialize:"true" json:"uptimeRequirement"`
-    // Authorizes this transformation
-    SubnetAuth verify.Verifiable `serialize:"true" json:"subnetAuthorization"`
-}
-```
+## Consensus Engine
 
-#### AddPermissionlessValidatorTx
+Consensus is defined as getting a group of distributed systems to agree on an outcome. In the case of the Avalanche network, consensus is achieved when validators are in agreement with the state of the blockchain. The novel consensus algorithm is documented in the [white paper](https://assets.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). There are two main consensus algorithms: Avalanche and [Snowman](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/consensus.go). The engine is responsible for adding proposing a new block to consensus, repeatedly polling the network for decisions (accept/reject), and communicating that decision to the `Sender`.
 
-```go
-type AddPermissionlessValidatorTx struct {
-    // Metadata, inputs and outputs
-    BaseTx `serialize:"true"`
-    // Describes the validator
-    Validator validator.Validator `serialize:"true" json:"validator"`
-    // ID of the subnet this validator is validating
-    Subnet ids.ID `serialize:"true" json:"subnet"`
-    // Where to send staked tokens when done validating
-    StakeOuts []*avax.TransferableOutput `serialize:"true" json:"stake"`
-    // Where to send validation rewards when done validating
-    ValidatorRewardsOwner fx.Owner `serialize:"true" json:"validationRewardsOwner"`
-    // Where to send delegation rewards when done validating
-    DelegatorRewardsOwner fx.Owner `serialize:"true" json:"delegationRewardsOwner"`
-    // Fee this validator charges delegators as a percentage, times 10,000
-    // For example, if this validator has DelegationShares=300,000 then they
-    // take 30% of rewards from delegators
-    DelegationShares uint32 `serialize:"true" json:"shares"`
-}
-```
+## Blockchain Creation
 
-#### AddPermissionlessDelegatorTx
-
-```go
-type AddPermissionlessDelegatorTx struct {
-    // Metadata, inputs and outputs
-    BaseTx `serialize:"true"`
-    // Describes the validator
-    Validator validator.Validator `serialize:"true" json:"validator"`
-    // ID of the subnet this validator is validating
-    Subnet ids.ID `serialize:"true" json:"subnet"`
-    // Where to send staked tokens when done validating
-    Stake []*avax.TransferableOutput `serialize:"true" json:"stake"`
-    // Where to send staking rewards when done validating
-    RewardsOwner fx.Owner `serialize:"true" json:"rewardsOwner"`
-}
-```
-
-#### New TypeIDs
-
-```go
-ApricotProposalBlock = 0
-ApricotAbortBlock = 1
-ApricotCommitBlock = 2
-ApricotStandardBlock = 3
-ApricotAtomicBlock = 4
-
-secp256k1fx.TransferInput = 5
-secp256k1fx.MintOutput = 6
-secp256k1fx.TransferOutput = 7
-secp256k1fx.MintOperation = 8
-secp256k1fx.Credential = 9
-secp256k1fx.Input = 10
-secp256k1fx.OutputOwners = 11
-
-AddValidatorTx = 12
-AddSubnetValidatorTx = 13
-AddDelegatorTx = 14
-CreateChainTx = 15
-CreateSubnetTx = 16
-ImportTx = 17
-ExportTx = 18
-AdvanceTimeTx = 19
-RewardValidatorTx = 20
-
-stakeable.LockIn = 21
-stakeable.LockOut = 22
-
-RemoveSubnetValidatorTx = 23
-TransformSubnetTx = 24
-AddPermissionlessValidatorTx = 25
-AddPermissionlessDelegatorTx = 26
-
-EmptyProofOfPossession = 27
-BLSProofOfPossession   = 28
-
-BanffProposalBlock = 29
-BanffAbortBlock = 30
-BanffCommitBlock = 31
-BanffStandardBlock = 32
-```
+[The `Manager`](https://github.com/ava-labs/avalanchego/blob/master/chains/manager.go) is what kick-starts everything in regards to blockchain creation, starting with the P-Chain. Once the P-Chain finishes bootstrapping, it will kickstart C-Chain and X-Chain and any other chains. The `Manager`’s job is not done yet, if a create-chain transaction is seen by a validator, a whole new process to create a chain will be started by the `Manager`. This can happen dynamically, long after the 3 chains in the Primary Network have been created and bootstrapped.
