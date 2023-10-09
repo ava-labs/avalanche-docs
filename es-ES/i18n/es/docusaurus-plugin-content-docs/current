@@ -1,101 +1,127 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.0;
+# Auction.js
 
-contract AuctionManager {
-  uint public uId = 0;
-  uint public aId = 0;
+``` jsx
+import React, { useState, useEffect } from "react";
+import { useDrizzleContext } from './drizzleContext';
+import FetchAuctions from './AuctionList';
+import CreateAuction from './CreateAuction';
 
-  // Structure to store user information
-  struct User {
-    uint userId;
-    string name;
-    address publicAddress;
-  }
+function Auction() {
+    // Importing drizzle variables from drizzle context
+    const { drizzleVariables } = useDrizzleContext();
+    const { AuctionManager, subscriber, accounts } = drizzleVariables;
 
-  // Structure to store bid information
-  struct Bid {
-    uint userId;
-    uint bidPrice;
-  }
+    // Setting up cache keys corresponding to cache calls
+    const [cacheKeys, setCacheKey] = useState({
+        uId: null,
+        aId: null,
+        showAuctions: null,
+        isRegistered: null,
+        auctionAnalytics: [null]
+    });
+    const [auctionAnalyticsCacheKey, setAuctionAnalyticsCacheKey] = useState(null);
 
-  // Structure to store auction information
-  struct Auction {
-    uint auctionId;
-    uint userId;
-    string name;
-    string description;
-    uint msp;
-    uint auctionBidId;
-  }
-
-  // Structure to store real time analytics of each auction
-  struct AuctionAnalytics {
-    uint auctionId;
-    uint auctionBidId;
-    uint latestBid;
-    uint lowestBid;
-    uint highestBid;
-  }
-
-  // List of all auctions
-  Auction[] public auctions;
-
-  // Mapping for storing user info, bids and auction analytics
-  mapping (uint => User) public users;
-  mapping (uint => Bid[]) public bids;
-  mapping (uint => AuctionAnalytics) public auctionAnalytics;
-
-  // Public function to check the registration of users (public address)
-  function isRegistered(address _publicAddress) public view returns (uint256[2] memory) {
-    uint256[2] memory result = [uint256(0), uint256(0)];
-    for(uint i = 0; i < uId; i++) {
-      if(_publicAddress == users[i].publicAddress) {
-        result[0] = 1;
-        result[1] = i;
-        return result;
-      }
+    // Setting up cache calls for requried functions
+    const cacheCalls = {
+        isRegistered: subscriber?.isRegistered[cacheKeys?.isRegistered]?.value,
+        user: subscriber?.users[cacheKeys?.uId]?.value,
+        aId: subscriber?.aId[cacheKeys?.aId]?.value,
+        showAuctions: subscriber?.showAuctions[cacheKeys?.showAuctions]?.value,
+        auctionAnalytics: []
     }
-    return result;
-  }
 
-  // Creating new users
-  function createUser(string memory _name) public {
-    require((isRegistered(msg.sender))[0] == 0, "User already registered!");
-    users[uId] = User(uId, _name, msg.sender);
-    uId++;
-  }
-
-  // Creating new auctions
-  function createAuction(string memory _name, string memory _description, uint _msp) public {
-    require((isRegistered(msg.sender))[0] == 1, "User not registered!");
-    uint MAX_UINT = 2 ** 256 - 1;
-    auctions.push(Auction(aId, isRegistered(msg.sender)[1], _name, _description, _msp, 0));
-    auctionAnalytics[aId] = AuctionAnalytics(aId, 0, 0, MAX_UINT, 0);
-    aId++;
-  }
-
-  // Private function to update auction analytics after the new bids
-  function updateAucionAnalytics(uint _aId, uint _latestBid) private {
-    auctionAnalytics[_aId].latestBid = _latestBid;
-    auctionAnalytics[_aId].auctionBidId = auctions[_aId].auctionBidId;
-    if(_latestBid < auctionAnalytics[_aId].lowestBid) {
-      auctionAnalytics[_aId].lowestBid = _latestBid;
+    for(let i = 0; i < cacheCalls.aId; i++) {
+        cacheCalls.auctionAnalytics.push(subscriber?.auctionAnalytics[auctionAnalyticsCacheKey[i]]?.value)
     }
-    if(_latestBid > auctionAnalytics[_aId].highestBid) {
-      auctionAnalytics[_aId].highestBid = _latestBid;
+
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [userInfo, setUserInfo] = useState({
+        id: null,
+        name: null
+    });
+
+    // Initializing cache keys
+    useEffect(() => {
+        const _auctionCacheKey = AuctionManager?.showAuctions?.cacheCall()
+        const _aIdCacheKey = AuctionManager?.aId?.cacheCall()
+        const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0])
+        setCacheKey({
+            ...cacheKeys,
+            showAuctions: _auctionCacheKey,
+            aId: _aIdCacheKey,
+            isRegistered: _isRegistered
+        })
+    }, []);
+
+    useEffect(() => {
+        let _auctionAnalyticsCacheKey = [];
+        for(let i = 0; i < cacheCalls.aId; i++) {
+            _auctionAnalyticsCacheKey.push(AuctionManager?.auctionAnalytics?.cacheCall(i))
+        }
+        setAuctionAnalyticsCacheKey(_auctionAnalyticsCacheKey)
+    }, [cacheCalls.aId])
+
+    useEffect(() => {
+        if(cacheCalls.isRegistered !== undefined && cacheCalls.isRegistered[0] == 1) {
+            setIsRegistered(true);
+            (async () => {
+                const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call()
+                setUserInfo({
+                    id: userInfo.userId,
+                    name: userInfo.name
+                })
+            })();
+        } else {
+            setIsRegistered(false)
+        }
+    }, [cacheCalls.isRegistered]);
+
+    const createUser = async (name) => {
+        await AuctionManager?.createUser(name)?.send({from: accounts[0]})
     }
-  }
 
-  // Creating new bids
-  function createBid(uint _aId, uint _bidPrice) public {
-    require((isRegistered(msg.sender))[0] == 1, "User not registered!");
-    bids[_aId].push(Bid((isRegistered(msg.sender))[1], _bidPrice));
-    auctions[_aId].auctionBidId++;
-    updateAucionAnalytics(_aId, _bidPrice);
-  }
+    const [userName, setUserName] = useState("");
 
-  // Return list of all auctions
-  function showAuctions() public view returns (Auction[] memory) {
-    return auctions;
-  }
+    const handleUserNameChange = (event) => {
+        setUserName(event.target.value)
+    }
+
+    const submitLogin = event => {
+        event.preventDefault()
+        createUser(userName)
+    }
+
+    const UserInfo = () => {
+        return (
+            <div>
+                <label style={{color: "red"}}>ID: </label> {userInfo.id}
+                <label style={{marginLeft: "50px", color: "green"}}>Name: </label> {userInfo.name} <br/><br/>
+            </div>
+        )
+    }
+
+    return (
+        <div>
+            <h1>Auctions</h1>
+            {
+                isRegistered
+                ? 
+                <>
+                    <UserInfo/>
+                    <FetchAuctions cacheCalls={cacheCalls} userInfo={userInfo}/> <br/><br/>
+                    <CreateAuction/>
+                </>
+                : 
+                <form onSubmit={submitLogin}>
+                    <font color="red" font="2">This address is not yet registered!</font><br/><br/>
+                    <label>Address: </label><input disabled value={accounts[0]}/><br/><br/>
+                    <label>Name: </label><input key="1" value={userName} required onChange={handleUserNameChange} placeholder="Enter your name"/><br/><br/>
+                    <input type="submit" value="Register" />
+                </form>              
+            }
+        </div>
+    )
 }
+
+export default Auction;
+```
