@@ -1,447 +1,139 @@
 ---
 tags:
   - Standards
-description: Avalanche network defines the core communication format between Avalanche nodes.
-sidebar_label: Network Protocol
-pagination_label: Avalanche Network Protocol
+description: This file summarizes the type and kind of cryptography used by Avalanche at the network and blockchain layers.
+sidebar_label: Cryptography
+pagination_label: Cryptographic Primitives
 ---
 
-# Avalanche Network Protocol
+# Cryptographic Primitives
 
-Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for payload packing.
+Avalanche uses a variety of cryptographic primitives for its different functions. This file summarizes the type and kind of cryptography used at the network and blockchain layers.
 
-`"Containers"` are mentioned extensively in the description. A Container is simply a generic term for blocks.
+## Cryptography in the Network Layer
 
-## GetVersion
+Avalanche uses Transport Layer Security, TLS, to protect node-to-node communications from eavesdroppers. TLS combines the practicality of public-key cryptography with the efficiency of symmetric-key cryptography. This has resulted in TLS becoming the standard for internet communication. Whereas most classical consensus protocols employ public-key cryptography to prove receipt of messages to third parties, the novel Snow\* consensus family does not require such proofs. This enables Avalanche to employ TLS in authenticating stakers and eliminates the need for costly public-key cryptography for signing network messages.
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+### TLS Certificates
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+Avalanche does not rely on any centralized third-parties, and in particular, it does not use certificates issued by third-party authenticators. All certificates used within the network layer to identify endpoints are self-signed, thus creating a self-sovereign identity layer. No third parties are ever involved.
 
-### What GetVersion Contains
+### TLS Addresses
 
-The payload of a `GetVersion` message is empty.
+To avoid posting the full TLS certificate to the Platform chain, the certificate is first hashed. For consistency, Avalanche employs the same hashing mechanism for the TLS certificates as is used in Bitcoin. Namely, the DER representation of the certificate is hashed with sha256, and the result is then hashed with ripemd160 to yield a 20-byte identifier for stakers.
 
-```text
-[]
-```
+This 20-byte identifier is represented by "NodeID-" followed by the data’s [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
 
-### How GetVersion Is Handled
+## Cryptography in the Avalanche Virtual Machine
 
-A node receiving a `GetVersion` message must respond with a `Version` message containing the current time and node version.
+The Avalanche virtual machine uses elliptic curve cryptography, specifically `secp256k1`, for its signatures on the blockchain.
 
-### When GetVersion Is Sent
+This 32-byte identifier is represented by "PrivateKey-" followed by the data’s [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
 
-`GetVersion` is sent when a node is connected to another node, but has not yet received a `Version` message. It may, however, be re-sent at any time.
+### Secp256k1 Addresses
 
-## Version
+Avalanche is not prescriptive about addressing schemes, choosing to instead leave addressing up to each blockchain.
 
-`Version` ensures that the nodes we are connected to are running compatible versions of Avalanche, and at least loosely agree on the current time.
+The addressing scheme of the X-Chain and the P-Chain relies on secp256k1. Avalanche follows a similar approach as Bitcoin and hashes the ECDSA public key. The 33-byte compressed representation of the public key is hashed with sha256 **once**. The result is then hashed with ripemd160 to yield a 20-byte address.
 
-The OpCode used by `Version` messages is: `0x01`.
+Avalanche uses the convention `chainID-address` to specify which chain an address exists on. `chainID` may be replaced with an alias of the chain. When transmitting information through external applications, the CB58 convention is required.
 
-### What Version Contains
+### Bech32
 
-`Version` contains the node’s current time in Unix time format in number of milliseconds since the beginning of the epoch in January 1, 1970, as well as a version string describing the version of the code that the node is running.
+Addresses on the X-Chain and P-Chain use the [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) standard outlined in [BIP 0173](https://en.bitcoin.it/wiki/BIP_0173). There are four parts to a Bech32 address scheme. In order of appearance:
 
-Content:
+- A human-readable part (HRP). On Mainnet this is `avax`.
+- The number `1`, which separates the HRP from the address and error correction code.
+- A base-32 encoded string representing the 20 byte address.
+- A 6-character base-32 encoded error correction code.
 
-```text
-[
-    Long   <- Unix Timestamp (Seconds)
-    String <- Version String
-]
-```
+Additionally, an Avalanche address is prefixed with the alias of the chain it exists on, followed by a dash. For example, X-Chain addresses are prefixed with `X-`.
 
-### How Version Is Handled
-
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
-
-### When Version Is Sent
-
-`Version` is sent in response to a `GetVersion` message.
-
-### Version Example
-
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
+The following regular expression matches addresses on the X-Chain, P-Chain and C-Chain for Mainnet, Fuji and localhost. Note that all valid Avalanche addresses will match this regular expression, but some strings that are not valid Avalanche addresses may match this regular expression.
 
 ```text
-[
-    Long   <- 1226793600 = 0x00000000491f6280
-    String <- "avalanche/0.0.1"
-]
-=
-[
-    0x00, 0x00, 0x00, 0x00, 0x49, 0x1f, 0x62, 0x80,
-    0x00, 0x0f, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e,
-    0x63, 0x68, 0x65, 0x2f, 0x30, 0x2e, 0x30, 0x2e,
-    0x31,
-]
+^([XPC]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$
 ```
 
-## GetPeers
+Read more about Avalanche's [addressing scheme](https://support.avalabs.org/en/articles/4596397-what-is-an-address).
 
-### Overview
+### Secp256k1 Recoverable Signatures
 
-`GetPeers` requests that a `Peers` message be sent as a response.
+Recoverable signatures are stored as the 65-byte **`[R || S || V]`** where **`V`** is 0 or 1 to allow quick public key recoverability. **`S`** must be in the lower half of the possible range to prevent signature malleability. Before signing a message, the message is hashed using sha256.
 
-The OpCode used by `GetPeers` messages is: `0x02`.
+### Secp256k1 Example
 
-### What GetPeers Contains
+Suppose Rick and Morty are setting up a secure communication channel. Morty creates a new public-private key pair.
 
-The payload of a `GetPeers` message is empty.
+Private Key: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070`
+
+Public Key (33-byte compressed): `0x02b33c917f2f6103448d7feb42614037d05928433cb25e78f01a825aa829bb3c27`
+
+Because of Rick’s infinite wisdom, he doesn’t trust himself with carrying around Morty’s public key, so he only asks for Morty’s address. Morty follows the instructions, SHA256’s his public key, and then ripemd160’s that result to produce an address.
+
+SHA256(Public Key): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045bffa7b0d2f`
+
+Address: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
+
+Morty is quite confused because a public key should be safe to be public knowledge. Rick belches and explains that hashing the public key protects the private key owner from potential future security flaws in elliptic curve cryptography. In the event cryptography is broken and a private key can be derived from a public key, users can transfer their funds to an address that has never signed a transaction before, preventing their funds from being compromised by an attacker. This enables coin owners to be protected while the cryptography is upgraded across the clients.
+
+Later, once Morty has learned more about Rick’s backstory, Morty attempts to send Rick a message. Morty knows that Rick will only read the message if he can verify it was from him, so he signs the message with his private key.
+
+Message: `0x68656c702049276d207472617070656420696e206120636f6d7075746572`
+
+Message Hash: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e4b7da`
+
+Message Signature: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
+
+Morty was never seen again.
+
+## Signed Messages
+
+A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
 
 ```text
-[]
+sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-### How GetPeers Is Handled
+The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](/reference/standards/serialization-primitives.md#integer) of the message size.
 
-A node receiving `GetPeers` request must respond with a `Peers` message containing the IP addresses of its connected, staking nodes.
-
-### When GetPeers Is Sent
-
-A node sends `GetPeers` messages upon startup to discover the participants in the network. It may also periodically send `GetPeers` messages in order to discover new nodes as they arrive in the network.
-
-## Peers
-
-### Overview
-
-`Peers` message contains a list of peers, represented as IP Addresses. Note that an IP Address contains both the IP and the port number, and supports both IPv4 and IPv6 format.
-
-The OpCode used by `Peers` messages is: `0x03`.
-
-### What Peers Contains
-
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
-
-Content:
+### Gantt Pre-Image Specification
 
 ```text
-[
-    Variable Length IP Address Array
-]
++---------------+-----------+------------------------------+
+| prefix        : [26]byte  |                     26 bytes |
++---------------+-----------+------------------------------+
+| messageLength : int       |                      4 bytes |
++---------------+-----------+------------------------------+
+| message       : []byte    |          size(message) bytes |
++---------------+-----------+------------------------------+
+                            |       26 + 4 + size(message) |
+                            +------------------------------+
 ```
 
-### How Peers Is Handled
+### Example
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the message to its own list of neighbors, and forge connections to any new nodes.
-
-### When Peers Is Sent
-
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
-
-### Peers Example
-
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
+As an example we will sign the message "Through consensus to the stars"
 
 ```text
-[
-    Variable Length IP Address Array <- ["127.0.0.1:9650", "[2001:0db8:ac10:fe01::]:12345"]
-]
-=
-[
-    0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff,
-    0x7f, 0x00, 0x00, 0x01, 0x25, 0xb2, 0x20, 0x01,
-    0x0d, 0xb8, 0xac, 0x10, 0xfe, 0x01, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
-]
+// prefix size: 26 bytes
+0x1a
+// prefix: Avalanche Signed Message:\n
+0x41 0x76 0x61 0x6c 0x61 0x6e 0x63 0x68 0x65 0x20 0x53 0x69 0x67 0x6e 0x65 0x64 0x20 0x4d 0x65 0x73 0x73 0x61 0x67 0x65 0x3a 0x0a
+// msg size: 30 bytes
+0x00 0x00 0x00 0x1e
+// msg: Through consensus to the stars
+54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
 ```
 
-## Get
+After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
 
-### Overview
+![Sign message](/img/sign-message.png)
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+## Cryptography in Ethereum Virtual Machine
 
-The OpCode used by `Get` messages is: `0x04`.
+Avalanche nodes support the full Ethereum Virtual Machine (EVM) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
 
-### What Get Contains
+## Cryptography in Other Virtual Machines
 
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
-
-**`ContainerID`** is the identifier of the requested container.
-
-```text
-[
-    Length 32 Byte Array <- SubnetID
-    UInt                 <- RequestID
-    Length 32 Byte Array <- ContainerID
-]
-```
-
-### How Get Is Handled
-
-The node should reply with a `Put` message with the same `SubnetID`, `RequestID`, and `ContainerID` along with the `Container` with the specified identifier. Under correct situations, a node should only be asked for a container that it has. Therefore, if the node does not have the specified container, the `Get` message can safely be dropped.
-
-### When Get Is Sent
-
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
-
-### Get Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x21, 0x22, 0x23, 0x24,
-    0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c,
-    0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34,
-    0x35, 0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c,
-    0x3d, 0x3e, 0x3f, 0x40,
-]
-```
-
-## Put
-
-### Overview
-
-A `Put` message provides a requested container to a node.
-
-The OpCode used by `Put` messages is: `0x05`.
-
-### What Put Contains
-
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message is sending.
-
-**`Container`** is the bytes of the container this message is sending.
-
-```text
-[
-    Length 32 Byte Array       <- SubnetID
-    UInt                       <- RequestID
-    Length 32 Byte Array       <- ContainerID
-    Variable Length Byte Array <- Container
-]
-```
-
-### How Put Is Handled
-
-The node should attempt to add the container to consensus.
-
-### When Put Is Sent
-
-A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
-
-### Put Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-    Container   <- 0x2122232425
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f, 0x00, 0x00, 0x00, 0x05,
-    0x21, 0x22, 0x23, 0x24, 0x25,
-]
-```
-
-## PushQuery
-
-### Overview
-
-A `PushQuery` message requests the preferred `containerIDs` from the node after the specified `ContainerID` has been added to consensus. If the `ContainerID` is not known, the `Container` is optimistically provided.
-
-The OpCode used by `PushQuery` messages is: `0x06`.
-
-### What PushQuery Contains
-
-A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
-
-**`Container`** is the bytes of the container with identifier `ContainerID`.
-
-```text
-[
-    Length 32 Byte Array       <- SubnetID
-    UInt                       <- RequestID
-    Length 32 Byte Array       <- ContainerID
-    Variable Length Byte Array <- Container
-]
-```
-
-### How PushQuery Is Handled
-
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preferences of the node.
-
-### When PushQuery Is Sent
-
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for "awhile."
-
-### PushQuery Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-    Container   <- 0x2122232425
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f, 0x00, 0x00, 0x00, 0x05,
-    0x21, 0x22, 0x23, 0x24, 0x25,
-]
-```
-
-## PullQuery
-
-### Overview
-
-A `PullQuery` message requests the preferred `containerIDs` from the node after the specified `ContainerID` has been added to consensus.
-
-The OpCode used by `PullQuery` messages is: `0x07`.
-
-### What PullQuery Contains
-
-A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
-
-```text
-[
-    Length 32 Byte Array <- SubnetID
-    UInt                 <- RequestID
-    Length 32 Byte Array <- ContainerID
-]
-```
-
-### How PullQuery Is Handled
-
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preferences of the node.
-
-### When PullQuery Is Sent
-
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for "awhile."
-
-### PullQuery Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f,
-]
-```
-
-## Chits
-
-### Overview
-
-A `Chits` message provides a requested set of preferred containers to a node.
-
-The OpCode used by `Chits` messages is: `0x08`.
-
-### What Chits Contains
-
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`Preferences`** is the list of `containerIDs` that fully describe the node’s preferences.
-
-```text
-[
-    Length 32 Byte Array                         <- SubnetID
-    UInt                                         <- RequestID
-    Variable Length (Length 32 Byte Array) Array <- Preferences
-]
-```
-
-### How Chits Is Handled
-
-The node should attempt to add any referenced containers to consensus. If the referenced containers can’t be added, the node can ignore the missing containers and apply the remaining chits to the poll. Once a poll is completed, container confidences should be updated appropriately.
-
-### When Chits Is Sent
-
-A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
-
-### Chits Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    Preferences <- [
-        0x2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40,
-        0x4142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f60,
-    ]
-]
-=
-[
-        0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-        0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-        0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-        0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-        0x00, 0x00, 0xa8, 0x66, 0x00, 0x00, 0x00, 0x02,
-        0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
-        0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30,
-        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38,
-        0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0x40,
-        0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48,
-        0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50,
-        0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58,
-        0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x60,
-]
-```
+Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
