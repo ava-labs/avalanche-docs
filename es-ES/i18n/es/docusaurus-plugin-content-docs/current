@@ -1,78 +1,50 @@
 ---
 tags:
-  - Virtual Machines
-  - Subnet-EVM
-description: Virtual Machine is a virtual environment inside blockchain networks that executes smart contracts and transactions according to predetermined rules and protocols.
-keywords:
-  - docs
-  - avalanche
-  - virtual machines
-  - subnets
-  - Subnet EVM
-sidebar_label: Virtual Machines
+  - Nodes
+description: This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
+sidebar_label: '🔗 Quick Links'
+pagination_label: '🔗 Nodes Quick Links'
 ---
 
-# Virtual Machines
+# 🔗 Nodes Quick Links
 
-In a nutshell, a **Virtual Machine** (VM) is the blueprint for a blockchain, meaning it defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain.
+This section provides documents on how to build and maintain an AvalancheGo node, and then validate the Avalanche network using an AvalancheGo node.
 
-You can use the same VM to create many blockchains, each of which follows the same rule-set but is independent of all others.
+| Run a Node                                                                                      |                                                              |
+|:----------------------------------------------------------------------------------------------- |:------------------------------------------------------------ |
+| [**Manually**](/nodes/run/node-manually.md)                                                     | Compile an Avalanche node from source and run it manually    |
+| [**Using the Install Script**](/nodes/run/with-installer.md)                                    | How to install and run AvalancheGo with the installer script |
+| [**Run a Subnet Node**](/nodes/run/subnet-node.md)                                              | How to run a Subnet node                                     |
+| [**Common Errors**](nodes/run/FAQ.md)                                                           | Learn about common errors when building your node            |
+| **Using a Third-Party Cloud Service**                                                           |                                                              |
+| [**Amazon Web Services**](/nodes/run/third-party/aws-node.md)                                   | Create a node that runs on AWS                               |
+| [**AWS Marketplace: One Click Deployment**](nodes/run/third-party/aws-marketplace-one-click.md) | Deploy a node that runs on AWS via a one-click install       |
+| [**Microsoft Azure**](/nodes/run/third-party/microsoft-azure-node.md)                           | Create a node that runs on Microsoft Azure                   |
+| [**Google Cloud Platform**](/nodes/run/third-party/google-cloud-node.md)                        | Create a node that runs on Google GCP                        |
+| [**Alibaba Cloud**](/nodes/run/third-party/alibaba-cloud-node.md)                               | Create a node that runs on Alibaba Cloud                     |
+| [**Tencent Cloud**](/nodes/run/third-party/tencent-cloud-node.md)                               | Create a node that runs on Tencent Cloud                     |
+| [**Latitude**](/nodes/run/third-party/latitude-node.md)                                         | Create a node that runs on Latitude.sh                       |
 
-## Why Run a VM on Avalanche?
 
-_Developers with advanced use-cases for utilizing distributed ledger technology are often forced to build their own blockchain from scratch, re-implement complex abstractions like networking and consensus, all before even being able to start working on their new application._
-
-**With Avalanche,**
-
-- Developers can create a VM that defines how their blockchain should behave, and use this blueprint to coordinate validators in the network to run the application.
-
-- VMs can be written in any language, and use libraries and tech stacks that its creator is familiar with. Developers have fine control over the behavior of their blockchain, and can redefine the rules of a blockchain to fit any use-case they have.
-
-- Developers don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain; Avalanche does this behind the scenes so you can focus on building your Dapp, your ecosystem, and your community.
+| Configure                                                                         |                                                                           |
+|:--------------------------------------------------------------------------------- |:------------------------------------------------------------------------- |
+| [**AvalancheGo Configs and Flags**](/nodes/configure/avalanchego-config-flags.md) | This documents list all available configuration and flags for AvalancheGo |
+| [**Chain Configs and Flags**](/nodes/configure/chain-config-flags.md)             | Reference for all available chain config options and flags                |
+| [**Subnet Configs**](/nodes/configure/subnet-configs.md)                          | Reference for all available Subnet config options and flags               |
 
 
-## How VMs Work
+| Validate                                                                                         |                                                                                            |
+|:------------------------------------------------------------------------------------------------ |:------------------------------------------------------------------------------------------ |
+| [**What is Staking?**](/nodes/validate/what-is-staking.md)                                       | Explains the concept of staking                                                            |
+| [**Key Differences Between Validation and Delegation**](/nodes/validate/validate-or-delegate.md) | This section details the difference between staking and delegating on Avalanche            |
+| [**How to Stake AVAX**](/nodes/validate/how-to-stake.md)                                         | This section provides documents on how to stake AVAX on the Avalanche Network              |
+| [**Add a Node as a Validator**](nodes/validate/add-a-validator.md)                               | Add a node as a validator to the [Primary Network](/learn/avalanche/avalanche-platform.md) |
 
-VMs communicate with Avalanche over a language agnostic request-response protocol known as [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to open a world of endless possibilities, as developers can implement their Dapps using the languages, frameworks, and libraries of their choice. To get started, create a VM out-of-the-box with the [Subnet-EVM](/build/subnet/c-chain-vs-subnet.md) in Solidity, or design a custom VM with languages like Golang, Rust, and many more.
-
-## Running a VM
-
-All Avalanche validators as members of the Avalanche Primary Network are required to run three VMs:
-
-- Coreth: Defines the Contract Chain (C-Chain); supports smart contract functionality and is EVM-compatible.
-- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
-- Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native Tokens.
-
-All three can easily be run on any computer with [AvalancheGo](/nodes).
-
-Validators can install additional VMs on their node to validate additional [Subnets](subnets-overview.md) in the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward token determined by the Subnets.
-
-### Solidity
-
-Avalanche natively supports the execution of Ethereum smart contracts written in solidity. Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)), or on their own Subnet using the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
-
-Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask, Truffle, and more.
-
-To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
-
-### Golang
-
-- [Coreth](https://github.com/ava-labs/coreth)
-  - An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart contracts.
-- [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
-  - An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart contracts
-- [TimestampVM](https://github.com/ava-labs/timestampvm)
-  - A decentralized timestamp server
-- [XSVM](https://github.com/ava-labs/xsvm)
-  - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
-
-See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
-
-### Rust
-
-The following VMs were built using Rust via the [Avalanche Rust SDK](https://crates.io/crates/avalanche-types)
-
-- [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
-  - A Rust implementation of TimestampVM
-
-See here for a tutorial on [How to Build a Simple Rust VM](/build/vm/create/rust-vm.md)
+| Maintain                                                                                           |                                                                                                                    |
+|:-------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------ |
+| [**Node Bootstrapping: What to Expect**](/nodes/maintain/node-bootstrap.md)                        | Understand how a node bootstraps                                                                                   |
+| [**Node Backup and Restore**](/nodes/maintain/node-backup-and-restore.md)                          | Back up important files to be able to restore your node                                                            |
+| [**Monitor an Avalanche Node**](/nodes/maintain/setting-up-node-monitoring.md)                     | Set up infrastructure to monitor an instance of AvalancheGo                                                        |
+| [**Upgrade Your AvalancheGo Node**](/nodes/maintain/upgrade-your-avalanchego-node.md)              | How to upgrade your Avalanche node                                                                                 |
+| [**Reduce Disk Usage by running C-Chain Offline Pruning**](/nodes/maintain/run-offline-pruning.md) | How to reduce the disk space used by AvalancheGo                                                                   |
+| [**Enroll A Node in Avalanche Notify**](/nodes/maintain/avalanche-notify.md)                       | To receive email alerts if a validator becomes unresponsive or out-of-date, sign up with the Avalanche Notify tool |
