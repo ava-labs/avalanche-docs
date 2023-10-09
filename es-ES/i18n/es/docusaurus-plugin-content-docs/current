@@ -3,68 +3,105 @@ tags:
   - Tooling
   - AvalancheJS
 description: AvalancheJS is a JavaScript Library for interfacing with the Avalanche platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
-pagination_label: Generate a Transaction ID Using AvalancheJS
-sidebar_label: Generate a Transaction ID
-sidebar_position: 1
+pagination_label: Manual Creation of Public-Private Key Pairs using AvalancheJS
+sidebar_label: Generate Key Pair
+sidebar_position: 0
 ---
 
-# Generate a Transaction ID Using AvalancheJS
+# Manual Creation of Public-Private Key Pairs using AvalancheJS
 
-## Introduction
+## Generate a Mnemonic
 
-A transaction id, or TxID, is a string of numbers and letters which identifies a specific transaction on the blockchain. TXIDs are one of the most core components that developers interact with when working on a blockchain system. They're deterministic and can be generated using [AvalancheGo](/reference) or [AvalancheJS](/tooling/avalanchejs-overview.md).
+To begin, we'll create a mnemonic phrase with [AvalancheJS](/tooling/avalanchejs-overview.md). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portuguese, Chinese Simplified and Chinese Traditional.
 
-On the Avalanche network a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. [CB58](https://support.avax.network/en/articles/4587395-what-is-cb5) is a base58 encoding with a checksum. Below are the steps for deterministically generating a TxID using AvalancheJS.
+First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
 
-## Creating a Signed Transaction
-
-The script which we're using can be found in the AvalancheJS example scripts as [example/avm/baseTx-AVAX.ts](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/baseTx-avax.ts). First, create a [BaseTx](/reference/avalanchego/x-chain/txn-format.md#what-base-tx-contains). We're omitting that part for the sake of brevity. Once you have a `BaseTx` then create an `UnsignedTx` and `sign` it. Lastly convert the `Tx` to a `Buffer` by calling `tx.toBuffer()`.
-
-```ts
-// Manually build BaseTx via steps in example/avm/baseTx-avax.ts
-// Create an UnsignedTx with the BaseTx
-const unsignedTx: UnsignedTx = new UnsignedTx(baseTx)
-// Sign the UnsignedTx to create a Tx
-const tx: Tx = unsignedTx.sign(xKeychain)
-// Convert the Tx to a Buffer
-const txBuf: Buffer = tx.toBuffer()
+```typescript
+import { Mnemonic } from "avalanche"
+const mnemonic: Mnemonic = Mnemonic.getInstance()
+const strength: number = 256
+const wordlist = mnemonic.getWordlists("english") as string[]
+const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
+console.log(m)
+// "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
 ```
 
-## Generate the TxID
+## Derive Addresses
 
-Next, create a `sha256` hash of the `Buffer` from the previous step.
+After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) Keypairs.
 
-```ts
-// Create sha256 hash of the Tx Buffer
-const sha256Hash: Buffer = Buffer.from(
-  createHash("sha256").update(txBuf).digest().buffer
-)
+```typescript
+import HDNode from "avalanche/dist/utils/hdnode"
+import { Avalanche, Mnemonic, Buffer } from "avalanche"
+import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm"
+import { ethers } from "ethers"
+
+const ip: string = "api.avax-test.network"
+const port: number = 443
+const protocol: string = "https"
+const networkID: number = 5
+const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
+const cchain: EVMAPI = avalanche.CChain()
+
+const mnemonic: Mnemonic = Mnemonic.getInstance()
+const m: string =
+  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
+const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
+const hdnode: HDNode = new HDNode(seed)
+
+const keyChain: KeyChain = cchain.newKeyChain()
+
+const cAddresses: string[] = []
+
+for (let i: number = 0; i <= 2; i++) {
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
+  keyChain.importKey(child.privateKey)
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
+  cAddresses.push(cchainAddress)
+}
+console.log(cAddresses)
+// [
+//   '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
+//   '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
+//   '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
+// ]
 ```
 
-As mentioned in the [Introduction](#introduction), a TxID is a CB58 encoded string which is created by `sha256` hashing the transaction. To create the TxID now CB58 encode the newly created `sha256` hash.
+## Generate Private Keys from a Mnemonic
 
-```ts
-// cb58 the sha256 hash
-const generatedTxID: string = bintools.cb58Encode(sha256Hash)
-console.log(`Generated TxID: ${generatedTxID}`)
+As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
+
+For example, if you want to generate the private keys for the first 3 address in the C Chain keychain:
+
+- [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://testnet.snowtrace.io/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559)
+- [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C)
+- [0xa14dFb7d8593c44a47A07298eCEA774557036ff3](https://testnet.snowtrace.io/address/0xa14dFb7d8593c44a47A07298eCEA774557036ff3)
+
+you might update the example script above to the following:
+
+```typescript
+const cAddresses: string[] = []
+const privateKeys: string[] = []
+for (let i: number = 0; i <= 2; i++) {
+  // Deriving the _i_th external BIP44 C-Chain address
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
+  keyChain.importKey(child.privateKey)
+  // Converting the BIP44 addresses to hexadecimal addresses
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
+  privateKeys.push(child.privateKey.toString("hex"))
+  cAddresses.push(cchainAddress)
+}
+console.log({ cAddresses, privateKeys })
+// {
+//   cAddresses: [
+//     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
+//     '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
+//     '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
+//   ],
+//   privateKeys: [
+//     'cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc',
+//     'b85479b26bc8fbada4737e90ab2133204f2fa2a9ea33c1e0de4452cbf8fa3be4',
+//     'c72e18ea0f9aa5457396e3bf810e9de8df0177c8e4e5bf83a85f871512d645a9'
+//   ]
+// }
 ```
-
-The `generatedTxID` will be a CB58 encoded string similar to `eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX`.
-
-## Confirm TxID Is Correct
-
-To confirm that the `generatedTxID` is correct issue the `BaseTx` to AvalancheGo and compare the TxID which is returned with the recently created TxID.
-
-```ts
-// get the actual txID from the full node
-const actualTxID: string = await xchain.issueTx(tx)
-console.log(`Success! TxID: ${actualTxID}`)
-
-// Note the generated TxID and the returned TxID match
-Generated TXID: eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX
-Returned TXID: eLXEKFFMgGmK7ZLokCFjppdBfGy5hDuRqh5uJVyXXPaRErpAX
-```
-
-## Summary
-
-TXIDs are a core component of any blockchain system. They are used extensively in Avalanche when creating transactions, issuing new assets and even spinning up Subnets and validators. TXIDs are deterministically created by `sha256` hashing a `Buffer` of the transaction and then CB58 encoding the hash.
