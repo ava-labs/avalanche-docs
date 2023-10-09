@@ -1,126 +1,192 @@
 ---
 tags:
   - Nodes
-description: Node Bootstrap is the process where a node *securely* downloads linear chain blocks to recreate the latest state of the chain locally. Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
-sidebar_label: "Bootstrapping: What to Expect"
-pagination_label: What to Expect While Bootstrapping
-sidebar_position: 0
+description: In this doc, learn how to run offline pruning on your node to reduce its disk usage.
+sidebar_label: Reduce Disk Usage
+pagination_label: "Reduce a Node's Disk Space: Run C-Chain Offline Pruning"
+sidebar_position: 4
 ---
 
-# Node Bootstrap
+# Run C-Chain Offline Pruning
 
-Node Bootstrap is the process where a node *securely* downloads linear chain blocks to recreate the latest state of the chain locally.
+## Introduction
 
-Bootstrap must guarantee that the local state of a node is in sync with the state of other valid nodes. Once bootstrap is completed, a node has the latest state of the chain and can verify new incoming transactions and reach consensus with other nodes, collectively moving forward the chains.
+Offline Pruning is ported from `go-ethereum` to reduce the amount of disk space taken up by the TrieDB (storage for the Merkle Forest).
 
-Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
+Offline pruning creates a bloom filter and adds all trie nodes in the active state to the bloom filter to mark the data as protected. This ensures that any part of the active state will not be removed during offline pruning.
 
-This document covers the high-level technical details of how bootstrapping works. This document glosses over some specifics, but the [AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source and is available for curious-minded readers to learn more.
+After generating the bloom filter, offline pruning iterates over the database and searches for trie nodes that are safe to be removed from disk.
 
-## Validators and Where to Find Them
+A bloom filter is a probabilistic data structure that reports whether an item is definitely not in a set or possibly in a set. Therefore, for each key we iterate, we check if it is in the bloom filter. If the key is definitely not in the bloom filter, then it is not in the active state and we can safely delete it. If the key is possibly in the set, then we skip over it to ensure we do not delete any active state.
 
-Bootstrapping is all about downloading all previously accepted containers *securely* so a node can have the latest correct state of the chain. A node can't arbitrarily trust any source - a malicious actor could provide malicious blocks, corrupting the bootstrapping node's local state, and making it impossible for the node to correctly validate the network and reach consensus with other correct nodes.
+During iteration, the underlying database (LevelDB) writes deletion markers, causing a temporary increase in disk usage.
 
-What's the most reliable source of information in the Avalanche ecosystem? It's a *large enough* majority of validators. Therefore, the first step of bootstrapping is finding a sufficient amount of validators to download containers from.
+After iterating over the database and deleting any old trie nodes that it can, offline pruning then runs compaction to minimize the DB size after the potentially large number of delete operations.
 
-The P-Chain is responsible for all platform-level operations, including staking events that modify a Subnet's validator set. Whenever any chain (aside from the P-Chain itself) bootstraps, it requests an up-to-date validator set for that Subnet (Primary Network is a Subnet too). Once the Subnet's current validator set is known, the node can securely download containers from these validators to bootstrap the chain.
+## Finding the C-Chain Config File
 
-There is a caveat here: the validator set must be *up-to-date*. If a bootstrapping node's validator set is stale, the node may incorrectly believe that some nodes are still validators when their validation period has already expired. A node might unknowingly end up requesting blocks from non-validators which respond with malicious blocks that aren't safe to download.
+In order to enable offline pruning, you need to update the C-Chain config file to include the parameters `offline-pruning-enabled` and `offline-pruning-data-directory`.
 
-**For this reason, every Avalanche node must fully bootstrap the P-chain first before moving on to the other Primary Network chains and other Subnets to guarantee that their validator sets are up-to-date**.
+The default location of the C-Chain config file is `~/.avalanchego/configs/chains/C/config.json`. **Please note that by default, this file does not exist. You would need to create it manually.** You can update the directory for chain configs by passing in the directory of your choice via the CLI argument: `chain-config-dir`. See [this](/nodes/configure/chain-config-flags.md) for more info. For example, if you start your node with:
 
-What about the P-chain? The P-chain can't ever have an up-to-date validator set before completing its bootstrap. To solve this chicken-and-egg situation the Avalanche Foundation maintains a trusted default set of validators called beacons (but users are free to configure their own). Beacon Node-IDs and IP addresses are listed in the [AvalancheGo codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json). Every node has the beacon list available from the start and can reach out to them as soon as it starts.
-
-Validators are the only sources of truth for a blockchain. Validator availability is so key to the bootstrapping process that **bootstrapping is blocked until the node establishes a sufficient amount of secure connections to validators**. If the node fails to reach a sufficient amount within a given period of time, it shuts down as no operation can be carried out safely.
-
-## Bootstrapping the Blockchain
-
-Once a node is able to discover and connect to validator and beacon nodes, it's able to start bootstrapping the blockchain by downloading the individual containers.
-
-One common misconception is that Avalanche blockchains are bootstrapped by retrieving containers starting at genesis and working up to the currently accepted frontier.
-
-Instead, containers are downloaded from the accepted frontier downwards to genesis, and then their corresponding state transitions are executed upwards from genesis to the accepted frontier. The accepted frontier is the last accepted block for linear chains.
-
-Why can't nodes simply download blocks in chronological order, starting from genesis upwards? The reason is efficiency: if nodes downloaded containers upwards they would only get a safety guarantee by polling a majority of validators for every single container. That's a lot of network traffic for a single container, and a node would still need to do that for each container in the chain.
-
-Instead, if a node starts by securely retrieving the accepted frontier from a majority of honest nodes and then recursively fetches the parent containers from the accepted frontier down to genesis, it can cheaply check that containers are correct just by verifying their IDs. Each Avalanche container has the IDs of its parents (one block parent for linear chains) and an ID's integrity can be guaranteed cryptographically.
-
-Let's dive deeper into the two bootstrap phases - frontier retrieval and container execution.
-
-### Frontier Retrieval
-
-The current frontier is retrieved by requesting them from validator or beacon nodes. Avalanche bootstrap is designed to be robust - it must be able to make progress even in the presence of slow validators or network failures. This process needs to be fault-tolerant to these types of failures, since bootstrapping may take quite some time to complete and network connections can be unreliable.
-
-Bootstrap starts when a node has connected to a sufficient majority of validator stake. A node is able to start bootstrapping when it has connected to at least $75\%$ of total validator stake.
-
-Seeders are the first set of peers that a node reaches out to when trying to figure out the current frontier. A subset of seeders is randomly sampled from the validator set. Seeders might be slow and provide a stale frontier, be malicious and return malicious container IDs, but they always provide an initial set of candidate frontiers to work with.
-
-Once a node has received the candidate frontiers form its seeders, it polls **every network validator** to vet the candidates frontiers. It sends the list of candidate frontiers it received from the seeders to each validator, asking whether or not they know about these frontiers. Each validator responds returning the subset of known candidates, regardless of how up-to-date or stale the containers are. Each validator returns containers irrespective of their age so that bootstrap works even in the presence of a stale frontier.
-
-Frontier retrieval is completed when at least one of the candidate frontiers is supported by at least $50\%$ of total validator stake. Multiple candidate frontiers may be supported by a majority of stake, after which point the next phase, container fetching starts.
-
-At any point in these steps a network issue may occur, preventing a node from retrieving or validating frontiers. If this occurs, bootstrap restarts by sampling a new set of seeders and repeating the bootstrapping process, optimistically assuming that the network issue will go away.
-
-### Containers Execution
-
-Once a node has at least one valid frontiers, it starts downloading parent containers for each frontier. If it's the first time the node is running, it won't know about any containers and will try fetching all parent containers recursively from the accepted frontier down to genesis (unless [state sync](#state-sync) is enabled). If bootstrap had already run previously, some containers are already available locally and the node will stop as soon as it finds a known one.
-
-A node first just fetches and parses containers. Once the chain is complete, the node executes them in chronological order starting from the earliest downloaded container to the accepted frontier. This allows the node to rebuild the full chain state and to eventually be in sync with the rest of the network.
-
-## When Does Bootstrapping Finish?
-
-You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single chain. However, a node must bootstrap the chains in the Primary Network as well as the chains in each Subnet it tracks. This begs the questions - when are these chains bootstrapped? When is a node done bootstrapping?
-
-The P-chain is always the first to bootstrap before any other chain. Once the P-Chain has finished, all other chains start bootstrapping in parallel, connecting to their own validators independently of one another.
-
-A node completes bootstrapping a Subnet once all of its corresponding chains have completed bootstrapping. Because the Primary Network is a special case of Subnet that includes the entire network, this applies to it as well as any other manually tracked Subnets.
-
-Note that Subnets bootstrap is independently of one another - so even if one Subnet has bootstrapped and is validating new transactions and adding new containers, other Subnets may still be bootstrapping in parallel.
-
-Within a single Subnet however, a Subnet isn't done bootstrapping until the last chain completes bootstrapping. It's possible for a single chain to effectively stall a node from finishing the bootstrap for a single Subnet, if it has a sufficiently long history or each operation is complex and time consuming. Even worse, other Subnet validators are continuously accepting new transactions and adding new containers on top of the previously known frontier, so a node that's slow to bootstrap can continuously fall behind the rest of the network.
-
-Nodes mitigate this by restarting bootstrap for any chains which is blocked waiting for the remaining Subnet chains to finish bootstrapping. These chains repeat the frontier retrieval and container downloading phases to stay up-to-date with the Subnet's ever moving current frontier until the slowest chain has completed bootstrapping.
-
-Once this is complete, a node is finally ready to validate the network.
-
-## State Sync
-
-The full node bootstrap process is long, and gets longer and longer over time as more and more containers are accepted. Nodes need to bootstrap a chain by reconstructing the full chain state locally - but downloading and executing each container isn't the only way to do this.
-
-Starting from [AvalancheGo version 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), nodes can use state sync to drastically cut down bootstrapping time on the C-Chain. Instead of executing each block, state sync uses cryptographic techniques to download and verify just the state associated with the current frontier. State synced nodes can't serve every C-chain block ever historically accepted, but they can safely retrieve the full C-chain state needed to validate in a much shorter time. State sync will fetch the previous 256 blocks prior to support the previous block hash operation code.
-
-State sync is currently only available for the C-chain. The P-chain and X-chain currently bootstrap by downloading all blocks. Note that irrespective of the bootstrap method used (including state sync), each chain is still blocked on all other chains in its Subnet completing their bootstrap before continuing into normal operation.
-
-:::note
-
-There are no configs to state sync an archival node. If you need all the historical state then you must not use state sync and setup the config of the node for an archival node.
-
-:::
-
-## Conclusions and FAQ
-
-If you got this far, you've hopefully gotten a better idea of what's going on when your node bootstraps. Here's a few frequently asked questions about bootstrapping.
-
-### How Can I Get the ETA for Node Bootstrap?
-
-Logs provide information about both container downloading and their execution for each chain. Here is an example
-
-```text
-[02-16|17:31:42.950] INFO <P Chain> bootstrap/bootstrapper.go:494 fetching blocks {"numFetchedBlocks": 5000, "numTotalBlocks": 101357, "eta": "2m52s"}
-[02-16|17:31:58.110] INFO <P Chain> bootstrap/bootstrapper.go:494 fetching blocks {"numFetchedBlocks": 10000, "numTotalBlocks": 101357, "eta": "3m40s"}
-[02-16|17:32:04.554] INFO <P Chain> bootstrap/bootstrapper.go:494 fetching blocks {"numFetchedBlocks": 15000, "numTotalBlocks": 101357, "eta": "2m56s"}
-...
-[02-16|17:36:52.404] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 17881, "numToExecute": 101357, "eta": "2m20s"}
-[02-16|17:37:22.467] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 35009, "numToExecute": 101357, "eta": "1m54s"}
-[02-16|17:37:52.468] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 52713, "numToExecute": 101357, "eta": "1m23s"}
+```zsh
+./build/avalanchego --chain-config-dir=/home/ubuntu/chain-configs
 ```
 
-Similar logs are emitted for X and C chains and any chain in explicitly tracked Subnets.
+The chain config directory will be updated to `/home/ubuntu/chain-configs` and the corresponding C-Chain config file will be: `/home/ubuntu/chain-configs/C/config.json`.
 
-### Why Chain Bootstrap ETA Keeps On Changing?
+## Running Offline Pruning
 
-As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish), a Subnet like the Primary Network completes once all of its chains finish bootstrapping. Some Subnet chains may have to wait for the slowest to finish. They'll restart bootstrapping in the meantime, to make sure they won't fall back too much with respect to the network accepted frontier.
+In order to enable offline pruning, update the C-Chain config file to include the following parameters:
 
-### Why Are AvalancheGo APIs Disabled During Bootstrapping?
+```json
+{
+  "offline-pruning-enabled": true,
+  "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
+}
+```
 
-AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379) during bootstrapping. The reason is that if the node has not fully rebuilt its Subnets state, it can't provide accurate information. AvalancheGo APIs are activated once bootstrap completes and node transition into its normal operating mode, accepting and validating transactions.
+This will set `/home/ubuntu/offline-pruning` as the directory to be used by the offline pruner. Offline pruning will store the bloom filter in this location, so you must ensure that the path exists.
+
+Now that the C-Chain config file has been updated, you can start your node with the command (no CLI arguments are necessary if using the default chain config directory):
+
+```zsh
+./build/avalanchego
+```
+
+Once AvalancheGo starts the C-Chain, you can expect to see update logs from the offline pruner:
+
+```zsh
+INFO [02-09|00:20:15.625] Iterating state snapshot                 accounts=297,231 slots=6,669,708 elapsed=16.001s eta=1m29.03s
+INFO [02-09|00:20:23.626] Iterating state snapshot                 accounts=401,907 slots=10,698,094 elapsed=24.001s eta=1m32.522s
+INFO [02-09|00:20:31.626] Iterating state snapshot                 accounts=606,544 slots=13,891,948 elapsed=32.002s eta=1m10.927s
+INFO [02-09|00:20:39.626] Iterating state snapshot                 accounts=760,948 slots=18,025,523 elapsed=40.002s eta=1m2.603s
+INFO [02-09|00:20:47.626] Iterating state snapshot                 accounts=886,583 slots=21,769,199 elapsed=48.002s eta=1m8.834s
+INFO [02-09|00:20:55.626] Iterating state snapshot                 accounts=1,046,295 slots=26,120,100 elapsed=56.002s eta=57.401s
+INFO [02-09|00:21:03.626] Iterating state snapshot                 accounts=1,229,257 slots=30,241,391 elapsed=1m4.002s eta=47.674s
+INFO [02-09|00:21:11.626] Iterating state snapshot                 accounts=1,344,091 slots=34,128,835 elapsed=1m12.002s eta=45.185s
+INFO [02-09|00:21:19.626] Iterating state snapshot                 accounts=1,538,009 slots=37,791,218 elapsed=1m20.002s eta=34.59s
+INFO [02-09|00:21:27.627] Iterating state snapshot                 accounts=1,729,564 slots=41,694,303 elapsed=1m28.002s eta=25.006s
+INFO [02-09|00:21:35.627] Iterating state snapshot                 accounts=1,847,617 slots=45,646,011 elapsed=1m36.003s eta=20.052s
+INFO [02-09|00:21:43.627] Iterating state snapshot                 accounts=1,950,875 slots=48,832,722 elapsed=1m44.003s eta=9.299s
+INFO [02-09|00:21:47.342] Iterated snapshot                        accounts=1,950,875 slots=49,667,870 elapsed=1m47.718s
+INFO [02-09|00:21:47.351] Writing state bloom to disk              name=/home/ubuntu/offline-pruning/statebloom.0xd6fca36db4b60b34330377040ef6566f6033ed8464731cbb06dc35c8401fa38e.bf.gz
+INFO [02-09|00:23:04.421] State bloom filter committed             name=/home/ubuntu/offline-pruning/statebloom.0xd6fca36db4b60b34330377040ef6566f6033ed8464731cbb06dc35c8401fa38e.bf.gz
+```
+
+The bloom filter should be populated and committed to disk after about 5 minutes. At this point, if the node shuts down, it will resume the offline pruning session when it restarts (note: this operation cannot be cancelled).
+
+In order to ensure that users do not mistakenly leave offline pruning enabled for the long term (which could result in an hour of downtime on each restart), we have added a manual protection which requires that after an offline pruning session, the node must be started with offline pruning disabled at least once before it will start with offline pruning enabled again. Therefore, once the bloom filter has been committed to disk, you should update the C-Chain config file to include the following parameters:
+
+```json
+{
+  "offline-pruning-enabled": false,
+  "offline-pruning-data-directory": "/home/ubuntu/offline-pruning"
+}
+```
+
+It is important to keep the same data directory in the config file, so that the node knows where to look for the bloom filter on a restart if offline pruning has not finished.
+
+Now if your node restarts, it will be marked as having correctly disabled offline pruning after the run and be allowed to resume normal operation once offline pruning has finished running.
+
+You will see progress logs throughout the offline pruning run which will indicate the session's progress:
+
+```zsh
+INFO [02-09|00:31:51.920] Pruning state data                       nodes=40,116,759 size=10.08GiB  elapsed=8m47.499s eta=12m50.961s
+INFO [02-09|00:31:59.921] Pruning state data                       nodes=41,659,059 size=10.47GiB  elapsed=8m55.499s eta=12m13.822s
+INFO [02-09|00:32:07.921] Pruning state data                       nodes=41,687,047 size=10.48GiB  elapsed=9m3.499s  eta=12m23.915s
+INFO [02-09|00:32:15.921] Pruning state data                       nodes=41,715,823 size=10.48GiB  elapsed=9m11.499s eta=12m33.965s
+INFO [02-09|00:32:23.921] Pruning state data                       nodes=41,744,167 size=10.49GiB  elapsed=9m19.500s eta=12m44.004s
+INFO [02-09|00:32:31.921] Pruning state data                       nodes=41,772,613 size=10.50GiB  elapsed=9m27.500s eta=12m54.01s
+INFO [02-09|00:32:39.921] Pruning state data                       nodes=41,801,267 size=10.50GiB  elapsed=9m35.500s eta=13m3.992s
+INFO [02-09|00:32:47.922] Pruning state data                       nodes=41,829,714 size=10.51GiB  elapsed=9m43.500s eta=13m13.951s
+INFO [02-09|00:32:55.922] Pruning state data                       nodes=41,858,400 size=10.52GiB  elapsed=9m51.501s eta=13m23.885s
+INFO [02-09|00:33:03.923] Pruning state data                       nodes=41,887,131 size=10.53GiB  elapsed=9m59.501s eta=13m33.79s
+INFO [02-09|00:33:11.923] Pruning state data                       nodes=41,915,583 size=10.53GiB  elapsed=10m7.502s eta=13m43.678s
+INFO [02-09|00:33:19.924] Pruning state data                       nodes=41,943,891 size=10.54GiB  elapsed=10m15.502s eta=13m53.551s
+INFO [02-09|00:33:27.924] Pruning state data                       nodes=41,972,281 size=10.55GiB  elapsed=10m23.502s eta=14m3.389s
+INFO [02-09|00:33:35.924] Pruning state data                       nodes=42,001,414 size=10.55GiB  elapsed=10m31.503s eta=14m13.192s
+INFO [02-09|00:33:43.925] Pruning state data                       nodes=42,029,987 size=10.56GiB  elapsed=10m39.504s eta=14m22.976s
+INFO [02-09|00:33:51.925] Pruning state data                       nodes=42,777,042 size=10.75GiB  elapsed=10m47.504s eta=14m7.245s
+INFO [02-09|00:34:00.950] Pruning state data                       nodes=42,865,413 size=10.77GiB  elapsed=10m56.529s eta=14m15.927s
+INFO [02-09|00:34:08.956] Pruning state data                       nodes=42,918,719 size=10.79GiB  elapsed=11m4.534s  eta=14m24.453s
+INFO [02-09|00:34:22.816] Pruning state data                       nodes=42,952,925 size=10.79GiB  elapsed=11m18.394s eta=14m41.243s
+INFO [02-09|00:34:30.818] Pruning state data                       nodes=42,998,715 size=10.81GiB  elapsed=11m26.397s eta=14m49.961s
+INFO [02-09|00:34:38.828] Pruning state data                       nodes=43,046,476 size=10.82GiB  elapsed=11m34.407s eta=14m58.572s
+INFO [02-09|00:34:46.893] Pruning state data                       nodes=43,107,656 size=10.83GiB  elapsed=11m42.472s eta=15m6.729s
+INFO [02-09|00:34:55.038] Pruning state data                       nodes=43,168,834 size=10.85GiB  elapsed=11m50.616s eta=15m14.934s
+INFO [02-09|00:35:03.039] Pruning state data                       nodes=43,446,900 size=10.92GiB  elapsed=11m58.618s eta=15m14.705s
+```
+
+When the node completes, it will emit the following log and resume normal operation:
+
+```zsh
+INFO [02-09|00:42:16.009] Pruning state data                       nodes=93,649,812 size=23.53GiB  elapsed=19m11.588s eta=1m2.658s
+INFO [02-09|00:42:24.009] Pruning state data                       nodes=95,045,956 size=23.89GiB  elapsed=19m19.588s eta=45.149s
+INFO [02-09|00:42:32.009] Pruning state data                       nodes=96,429,410 size=24.23GiB  elapsed=19m27.588s eta=28.041s
+INFO [02-09|00:42:40.009] Pruning state data                       nodes=97,811,804 size=24.58GiB  elapsed=19m35.588s eta=11.204s
+INFO [02-09|00:42:45.359] Pruned state data                        nodes=98,744,430 size=24.82GiB  elapsed=19m40.938s
+INFO [02-09|00:42:45.360] Compacting database                      range=0x00-0x10 elapsed="2.157µs"
+INFO [02-09|00:43:12.311] Compacting database                      range=0x10-0x20 elapsed=26.951s
+INFO [02-09|00:43:38.763] Compacting database                      range=0x20-0x30 elapsed=53.402s
+INFO [02-09|00:44:04.847] Compacting database                      range=0x30-0x40 elapsed=1m19.486s
+INFO [02-09|00:44:31.194] Compacting database                      range=0x40-0x50 elapsed=1m45.834s
+INFO [02-09|00:45:31.580] Compacting database                      range=0x50-0x60 elapsed=2m46.220s
+INFO [02-09|00:45:58.465] Compacting database                      range=0x60-0x70 elapsed=3m13.104s
+INFO [02-09|00:51:17.593] Compacting database                      range=0x70-0x80 elapsed=8m32.233s
+INFO [02-09|00:56:19.679] Compacting database                      range=0x80-0x90 elapsed=13m34.319s
+INFO [02-09|00:56:46.011] Compacting database                      range=0x90-0xa0 elapsed=14m0.651s
+INFO [02-09|00:57:12.370] Compacting database                      range=0xa0-0xb0 elapsed=14m27.010s
+INFO [02-09|00:57:38.600] Compacting database                      range=0xb0-0xc0 elapsed=14m53.239s
+INFO [02-09|00:58:06.311] Compacting database                      range=0xc0-0xd0 elapsed=15m20.951s
+INFO [02-09|00:58:35.484] Compacting database                      range=0xd0-0xe0 elapsed=15m50.123s
+INFO [02-09|00:59:05.449] Compacting database                      range=0xe0-0xf0 elapsed=16m20.089s
+INFO [02-09|00:59:34.365] Compacting database                      range=0xf0-     elapsed=16m49.005s
+INFO [02-09|00:59:34.367] Database compaction finished             elapsed=16m49.006s
+INFO [02-09|00:59:34.367] State pruning successful                 pruned=24.82GiB elapsed=39m34.749s
+INFO [02-09|00:59:34.367] Completed offline pruning. Re-initializing blockchain.
+INFO [02-09|00:59:34.387] Loaded most recent local header          number=10,671,401 hash=b52d0a..7bd166 age=40m29s
+INFO [02-09|00:59:34.387] Loaded most recent local full block      number=10,671,401 hash=b52d0a..7bd166 age=40m29s
+INFO [02-09|00:59:34.387] Initializing snapshots                   async=true
+DEBUG[02-09|00:59:34.390] Reinjecting stale transactions           count=0
+INFO [02-09|00:59:34.395] Transaction pool price threshold updated price=470,000,000,000
+INFO [02-09|00:59:34.396] Transaction pool price threshold updated price=225,000,000,000
+INFO [02-09|00:59:34.396] Transaction pool price threshold updated price=0
+INFO [02-09|00:59:34.396] lastAccepted = 0xb52d0a1302e4055b487c3a0243106b5e13a915c6e178da9f8491cebf017bd166
+INFO [02-09|00:59:34] <C Chain> snow/engine/snowman/transitive.go#67: initializing consensus engine
+INFO [02-09|00:59:34] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#220: Starting bootstrap...
+INFO [02-09|00:59:34] chains/manager.go#246: creating chain:
+    ID: 2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM
+    VMID:jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq
+INFO [02-09|00:59:34.425] Enabled APIs: eth, eth-filter, net, web3, internal-eth, internal-blockchain, internal-transaction, avax
+DEBUG[02-09|00:59:34.425] Allowed origin(s) for WS RPC interface [*]
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/avax
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/rpc
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/ws
+INFO [02-09|00:59:34] <X Chain> vms/avm/vm.go#437: Fee payments are using Asset with Alias: AVAX, AssetID: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
+INFO [02-09|00:59:34] <X Chain> vms/avm/vm.go#229: address transaction indexing is disabled
+INFO [02-09|00:59:34] <X Chain> snow/engine/avalanche/transitive.go#71: initializing consensus engine
+INFO [02-09|00:59:34] <X Chain> snow/engine/avalanche/bootstrap/bootstrapper.go#258: Starting bootstrap...
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM
+INFO [02-09|00:59:34] <P Chain> snow/engine/snowman/bootstrap/bootstrapper.go#445: waiting for the remaining chains in this subnet to finish syncing
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM/wallet
+INFO [02-09|00:59:34] api/server/server.go#203: adding route /ext/bc/2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM/events
+INFO [02-09|00:59:34] <P Chain> snow/engine/common/bootstrapper.go#235: Bootstrapping started syncing with 1 vertices in the accepted frontier
+INFO [02-09|00:59:46] <X Chain> snow/engine/common/bootstrapper.go#235: Bootstrapping started syncing with 2 vertices in the accepted frontier
+INFO [02-09|00:59:49] <C Chain> snow/engine/common/bootstrapper.go#235: Bootstrapping started syncing with 1 vertices in the accepted frontier
+INFO [02-09|00:59:49] <X Chain> snow/engine/avalanche/bootstrap/bootstrapper.go#473: bootstrapping fetched 55 vertices. Executing transaction state transitions...
+INFO [02-09|00:59:49] <X Chain> snow/engine/common/queue/jobs.go#171: executed 55 operations
+INFO [02-09|00:59:49] <X Chain> snow/engine/avalanche/bootstrap/bootstrapper.go#484: executing vertex state transitions...
+INFO [02-09|00:59:49] <X Chain> snow/engine/common/queue/jobs.go#171: executed 55 operations
+INFO [02-09|01:00:07] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#406: bootstrapping fetched 1241 blocks. Executing state transitions...
+```
+
+At this point, the node will go into bootstrapping and (once bootstrapping completes) resume consensus and operate as normal.
+
+## Disk Space Considerations
+
+To ensure the node does not enter an inconsistent state, the bloom filter used for pruning is persisted to `offline-pruning-data-directory` for the duration of the operation. This directory should have `offline-pruning-bloom-filter-size` available in disk space (default 512 MB).
+
+The underlying database (LevelDB) uses deletion markers (tombstones) to identify newly deleted keys. These markers are temporarily persisted to disk until they are removed during a process known as compaction. This will lead to an increase in disk usage during pruning. If your node runs out of disk space during pruning, you may safely restart the pruning operation. This may succeed as restarting the node triggers compaction.
+
+If restarting the pruning operation does not succeed, additional disk space should be provisioned.
