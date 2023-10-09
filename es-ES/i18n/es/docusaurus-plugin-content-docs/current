@@ -2,301 +2,202 @@
 tags:
   - Build
   - Dapps
-description: An end-to-end walkthrough of necessary development activities for a bare-bones decentralized application.
-sidebar_label: Fuji Workflow
-pagination_label: Fuji Workflow
+description: Launching any new or existing Solidity decentralized app on Avalanche C-Chain fosters the same developer experience as Ethereum, but benefits from the security, speed, and interoperability of the Avalanche Network.
+sidebar_label: Launch an Ethereum Dapp
+pagination_label: Launch a Ethereum Dapp on Avalanche
 ---
 
-# Fuji Workflow
+# Launch an Ethereum Dapp on Avalanche
 
-## Introduction
+## Overview
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+The purpose of this document is to help you with launching your existing dapp on Avalanche. It contains a series of resources designed to help you get the basics of Avalanche Platform and how it works, show how to connect to the network, how to use your existing tools and environments in developing and deploying on Avalanche, as well as some common pitfalls you need to consider when running your dapp on Avalanche.
 
-In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
+## Accessing Avalanche C-Chain
 
-1. Set up Fuji network on Core (optional)
-2. Generate a 24 word english mnemonic via AvalancheJS
-3. Derive external C-Chain addresses via AvalancheJS
-4. Get AVAX from the Fuji faucet
-5. Send AVAX via ethersJS
-6. Examine the resulting transaction on the Avalanche Explorer
-7. Use a private key derived from a mnemonic to sign into the web wallet
+C-Chain exposes the [same API](/reference/avalanchego/c-chain/api.md) as `go-ethereum`, so you can use all the familiar APIs that are available on Ethereum for interaction with the platform.
 
-## Set up Fuji Network on Core (optional)
+There are multiple ways of working with the C-Chain.
 
-To access the Fuji test network, Testnet Mode needs to be enabled. In order to do that, go to **Settings** and click on **Advanced**.
+### Through Core
 
-<div style={{textAlign: 'center'}}>
+Powered by Avalanche, [Core](https://medium.com/avalancheavax/ava-labs-releases-core-an-all-in-one-web3-operating-system-for-avalanche-a844eb822887) is an all-in-one operating system bringing together Avalanche apps, Subnets, bridges, and NFTs in one seamless, high-performance browser experience. Putting in another way, Core is more than a wallet. It is a curated web3 operating system combining Wallet, Explorer, Bridge, Subnets, dApps, and more.
 
-![Settings image 1](/img/c-chain-ERC20/settings1.png)
+In your application's web interface, follow [this to add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#core).
 
-</div>
+### Through MetaMask
 
-Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to Fuji Testnet. 
+You can access C-Chain through MetaMask, by defining a custom network. Go to MetaMask, log in, click the network dropdown, and select 'Custom RPC'. Data for Avalanche is as follows.
 
-<div style={{textAlign: 'center'}}>
+#### **Avalanche Mainnet Settings:**
 
-![Settings image 2](/img/c-chain-ERC20/settings2.png)
+- **Network Name**: Avalanche Mainnet C-Chain
+- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+- **ChainID**: `43114`
+- **Symbol**: `AVAX`
+- **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
-</div>
+#### **Fuji Testnet Settings:**
 
-:::info
-
-If you are using other wallets, like MetaMask, you can add the Fuji Testnet using the following specs:
-
-- **Network Name**: Avalanche C-Chain
+- **Network Name**: Avalanche Fuji C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - **ChainID**: `43113`
-- **Symbol**: AVAX
-- **Explorer**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
+- **Symbol**: `AVAX`
+- **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+
+In your application's web interface, you can [add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#metamask) so your users don't have to enter the network data manually.
+
+### Using the Public API Nodes or RPC Endpoints
+
+Instead of proxying network operations through MetaMask, you can use the public API, which consists of a number of AvalancheGo nodes behind a load balancer.
+
+The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the Mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
+
+For more information, see [documentation](/tooling/rpc-providers.md).
+
+However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.
+
+## Running Your Own Node
+
+If you don't want your dapp to depend on a centralized service you don't control, or have specific needs that cannot be met through the public API, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
+
+For development and experimental purposes, [here](/nodes/run/node-manually.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to run a node on a Linux machine, you can use the [installer script](/nodes/run/with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
+
+### Node Configuration
+
+Node configuration options are explained [here](/nodes/configure/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
+
+On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](/nodes/configure/chain-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
+
+By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/chains/C/config.json`. We will go over how to adjust the config to cover some common use cases in the following sections.
+
+#### Running an Archival Node
+
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which is enabled by default to conserve disk space. To preserve full historical state, include `"pruning-enabled": false` in the C-Chain config file.
+
+:::note
+
+After changing the flag to disable the database pruning, you will need to run the bootstrap process again, as the node will not backfill any already pruned and missing data.
+
+To re-bootstrap the node, stop it, delete the database (by default stored in `~/.avalanchego/db/`) and start the node again.
 
 :::
 
-## Generate a Mnemonic
+#### Running a Node in Debug Mode
 
-To begin, we'll create a mnemonic phrase with [AvalancheJS](/tooling/avalanchejs-overview.md). Mnemonics enable us to encode strong security into a human-readable phrase. AvalancheJS supports 10 languages including English, Japanese, Spanish, Italian, French, Korean, Czech, Portuguese, Chinese Simplified and Chinese Traditional.
+By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `debug`, `debug-tracer`, and `internal-debug` APIs.
 
-First, generate a 24 word english [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant mnemonic via AvalancheJS.
+:::note
 
-```typescript
-import { Mnemonic } from "avalanche"
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const strength: number = 256
-const wordlist = mnemonic.getWordlists("english") as string[]
-const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
-console.log(m)
-// "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
-```
+Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
 
-## Derive Addresses
+:::
 
-After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) Keypairs.
+#### Example C-Chain Config File
 
-```typescript
-import HDNode from "avalanche/dist/utils/hdnode"
-import { Avalanche, Mnemonic, Buffer } from "avalanche"
-import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm"
-import { ethers } from "ethers"
+An example C-Chain config file that includes the archival mode, enables debug APIs as well as default EVM APIs:
 
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
-
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const m: string =
-  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
-const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
-const hdnode: HDNode = new HDNode(seed)
-
-const keyChain: KeyChain = cchain.newKeyChain()
-
-const cAddresses: string[] = []
-
-for (let i: number = 0; i <= 2; i++) {
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  cAddresses.push(cchainAddress)
+```json
+{
+  "eth-apis": [
+    "eth",
+    "eth-filter",
+    "net",
+    "web3",
+    "internal-eth",
+    "internal-blockchain",
+    "internal-transaction",
+    "debug-tracer"
+  ],
+  "pruning-enabled": false
 }
-console.log(cAddresses)
-// [
-//   '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
-//   '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
-//   '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
-// ]
 ```
 
-### Generate Private Keys from a Mnemonic
+Default config values for the C-Chain can be seen [here](/nodes/configure/chain-config-flags.md#c-chain-configs).
 
-As long as you have the mnemonic phrase, you can re-generate your private keys and the addresses they control.
+### Running a Local Test Network
 
-For example, if you want to generate the private keys for the first 3 address in the C Chain keychain:
+If you need a private test network to test your dapp, [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-- [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://testnet.snowtrace.io/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559)
-- [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C)
-- [0xa14dFb7d8593c44a47A07298eCEA774557036ff3](https://testnet.snowtrace.io/address/0xa14dFb7d8593c44a47A07298eCEA774557036ff3)
+For more information, see [documentation](/tooling/network-runner.md).
 
-you might update the example script above to the following:
+## Developing and Deploying Contracts
 
-```typescript
-const cAddresses: string[] = []
-const privateKeys: string[] = []
-for (let i: number = 0; i <= 2; i++) {
-  // Deriving the _i_th external BIP44 C-Chain address
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  // Converting the BIP44 addresses to hexadecimal addresses
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  privateKeys.push(child.privateKey.toString("hex"))
-  cAddresses.push(cchainAddress)
-}
-console.log({ cAddresses, privateKeys })
-// {
-//   cAddresses: [
-//     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
-//     '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
-//     '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
-//   ],
-//   privateKeys: [
-//     'cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc',
-//     'b85479b26bc8fbada4737e90ab2133204f2fa2a9ea33c1e0de4452cbf8fa3be4',
-//     'c72e18ea0f9aa5457396e3bf810e9de8df0177c8e4e5bf83a85f871512d645a9'
-//   ]
-// }
-```
+Being an Ethereum-compatible blockchain, all of the usual Ethereum developer tools and environments can be used to develop and deploy dapps for Avalanche's C-Chain.
 
-## Get a Drip from the Fuji Faucet
+### Remix
 
-We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the [Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji Testnet and have no monetary value.
+There is a [tutorial](/build/dapp/smart-contracts/remix-deploy.md) for using Remix to deploy smart contracts on Avalanche. It relies on Core for access to the Avalanche network.
 
-![Requesting AVAX](/img/fuji-workflow/faucet1.png)
+### Truffle
 
-The faucet will send some AVAX to the address and return a transaction ID (txID). This txID can be used with the Fuji Testnet Explorer to learn more about the transaction.
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/build/dapp/smart-contracts/toolchains/truffle.md).
 
-![Receiving AVAX](/img/fuji-workflow/faucet2.png)
+### Hardhat
 
-### Check the Transaction Details
+Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-The txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, can be seen on the [Fuji Testnet Explorer](https://testnet.snowtrace.io/tx/0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e). Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
+For more information see [this doc](/build/dapp/smart-contracts/toolchains/hardhat.md).
 
-![Transaction details](/img/faucet-fuji-wf-alt-tx1.png)
+## Avalanche Explorer
 
-### Get the Balance
+An essential part of the smart contract development environment is the explorer, which indexes and serves blockchain data. Mainnet C-Chain explorer is available at [https://snowtrace.io/](https://snowtrace.io/) and testnet explorer at [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/). Besides the web interface, it also exposes the standard [Ethereum JSON RPC API](https://eth.wiki/json-rpc/API).
 
-We can also use the Fuji Explorer to get the balance for the 1st address—[0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
+## Avalanche Faucet
 
-![1st derived address balance](/img/faucet-fuji-wf-alt-balance.png)
+For development purposes, you will need test tokens. Avalanche has a [Faucet](https://faucet.avax.network/) that drips test tokens to the address of your choice. Paste your C-Chain address there.
 
-Alternatively, we can use [ethersJS](https://docs.ethers.io/v5/) to get the balance.
+If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 
-```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559"
+## Contract Verification
 
-const main = async (): Promise<any> => {
-  provider.getBalance(address).then((balance) => {
-    // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
-    // balance: 2 AVAX
-  })
-}
+Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://snowtrace.io/). The procedure is simple:
 
-main()
-```
+- navigate to your published contract address on the explorer
+- on the `code` tab select `verify & publish`
+- copy and paste the flattened source code and enter all the build parameters exactly as they are on the published contract
+- click `verify & publish`
 
-## Sending AVAX
+If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
-The faucet sent 2 AVAX to the first address we generated. Let's send AVAX from the 1st address to the 2nd address.
+See [this](/build/dapp/smart-contracts/verification/verify-truffle.md) for a detailed tutorial with Truffle.
 
-```typescript
-// import ethers.js
-import { ethers } from "ethers"
-// network: using the Fuji testnet
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-// provider: establish and RPC connection to the network
-const provider = new ethers.providers.JsonRpcProvider(network)
+## Contract Security Checks
 
-// Sender private key:
-// corresponding address 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
-let privateKey =
-  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc"
-// Create a wallet instance
-let wallet = new ethers.Wallet(privateKey, provider)
-// Receiver Address
-let receiverAddress = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
-// AVAX amount to send
-let amountInAvax = "0.01"
-// Create a transaction object
-let tx = {
-  to: receiverAddress,
-  // Convert currency unit from ether to wei
-  value: ethers.utils.parseEther(amountInAvax),
-}
-// Send a transaction
-wallet.sendTransaction(tx).then((txObj) => {
-  console.log(`"tx, https://testnet.snowtrace.io/tx/${txObj.hash}`)
-  // A transaction result can be checked in a snowtrace with a transaction link which can be obtained here.
-})
-```
+Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
 
-### Verify Success
+Most popular are:
 
-We can verify that the transaction, `0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, was successful using the Fuji Testnet Explorer. The transaction can be seen [here](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
+- [Slither](https://github.com/crytic/slither), here's a [tutorial](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/)
+- [MythX](https://mythx.io/)
+- [Mythril](https://github.com/ConsenSys/mythril)
 
-![Transaction details](/img/fuji-wf-alt-tx-2.png)
+We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
 
-#### Get the Balance
+## Gotchas and Things to Look out For
 
-We can also use the Fuji Explorer to get the balance for the 2nd address—[0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C).
+Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There are some differences you need to be aware of, otherwise, you may create subtle bugs or inconsistencies in how your dapps behave.
 
-Alternatively, we can use ethersJS to get the balance.
+Here are the main differences you should be aware of.
 
-```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
+### Measuring Time
 
-const main = async (): Promise<any> => {
-  provider.getBalance(address).then((balance) => {
-    // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
-    // balance: 0.02 AVAX
-  })
-}
+Avalanche does not use the same mechanism to measure time as Ethereum which uses consistent block times. Instead, Avalanche supports asynchronous block issuance, block production targets a rate of every 2 seconds. If there is sufficient demand, a block can be produced earlier. If there is no demand, a block will not be produced until there are transactions for the network to process.
 
-main()
-```
+Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
-### Sign Into the Web Wallet
+Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing and to be within 30 seconds of the real time.
 
-Lastly, we can [use the mnemonic to generate a private key](#generate-private-keys-from-a-mnemonic) to access the [Avalanche Web Wallet](https://wallet.avax.network). We'll see that it has the AVAX balance and that it derives the hexadecimal address from the private key.
+### Finality
 
-Use the private key to access the Web Wallet.
+On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped, or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final.
 
-![Access the wallet](/img/fuji-wf-alt-enter-key.png)
+### Using `eth_newFilter` and Related Calls with the Public API
 
-The balance is correct and the address is the 1st derived address.
+If you're using the [`eth_newFilter`](https://eth.wiki/json-rpc/API#eth_newfilter) API method on the public API server, it may not behave as you expect because the public API is actually several nodes behind a load balancer. If you make an `eth_newFilter` call, subsequent calls to [`eth_getFilterChanges`](https://eth.wiki/json-rpc/API#eth_getfilterchanges) may not end up on the same node as the first call, and you will end up with undefined results.
 
-![Web wallet balance](/img/fuji-wf-wallet-alt-info.png) ![3rd derived BIP44 address](/img/fuji-wf-alt-wallet-address.png)
+If you need the log filtering functionality, you should use a websocket connection, which ensures that your client is always talking to the same node behind the load balancer. Alternatively, you can use [`eth_getLogs`](https://eth.wiki/json-rpc/API#eth_getlogs), or run your own node and make API calls to it.
 
-We can repeat this login process using the private keys from the remaining 2 addresses in the [script above](#generate-private-keys-from-a-mnemonic).
+## Support
 
-![Wallet derived addresses](/img/fuji-wf-alt-wallet-address-2.png) ![Wallet derived addresses2](/img/fuji-wf-alt-wallet-address-3.png)  
-![Wallet derived addresses3](/img/fuji-wf-alt-wallet-addresses.png)
-
-## Summary
-
-The Fuji Testnet plays a critical role in testing dapps, smart contracts and financial products before deploying to the Mainnet. Tooling like AvalancheJS, the public API, faucet, and explorer helps to ensure that your testing and QA environment is close to Mainnet so that you can be confident when you launch on Mainnet.
-
-## Resources
-
-For additional and valuable resources please see below.
-
-### Faucet
-
-The [Fuji Faucet](https://faucet.avax.network) sends AVAX to X-Chain or C-Chain addresses to help you test. (This testnet AVAX has no value.)
-
-### Wallet
-
-The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure, non-custodial wallet for storing Avalanche assets. It supports Mainnet, Fuji and custom networks.
-
-### Explorer
-
-The Avalanche Explorer allows you to explore the network on [Mainnet](https://explorer.avax.network) and [Fuji](https://explorer.avax-test.network).
-
-### RPC Endpoints - Public API Server
-
-See [here.](/tooling/rpc-providers.md)
-
-### AvalancheJS Examples
-
-There are over [60 example AvalancheJS scripts](https://github.com/ava-labs/avalanchejs/tree/master/examples) which demonstrate how to assets and NFTs, send transactions, add validators and more.
+Using this tutorial you should be able to quickly get up to speed on Avalanche, deploy, and test your dapps. If you have questions, problems, or just want to chat with us, you can reach us on our public [Discord](https://chat.avalabs.org/) server. We'd love to hear from you and find out what you're building on Avalanche!
