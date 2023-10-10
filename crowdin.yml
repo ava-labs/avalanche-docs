@@ -1,0 +1,5 @@
+files:
+  - source: /docs/
+    translation: i18n/es/docusaurus-plugin-content-docs/current/
+  - source: /docs/
+    translation: i18n/ja/docusaurus-plugin-content-docs/current/

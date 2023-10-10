@@ -55,6 +55,7 @@ total amount of stake that $u$ possesses, and $u.s_{time}$ the length of staking
 
 AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at:
 
+
 <!-- markdownlint-disable MD013 -->
 
 $$
