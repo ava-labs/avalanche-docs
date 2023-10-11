@@ -84,7 +84,6 @@ For a great visualization, check out [this demo](https://tedyin.com/archive/snow
         width="100%"
         height="480px"
         title="Deep Dive on the Avalanche Protocol"
-
         className="video-container"
         display="initial"
         position="relative"

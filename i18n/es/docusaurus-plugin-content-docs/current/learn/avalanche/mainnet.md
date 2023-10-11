@@ -16,4 +16,4 @@ A _network of networks_, Avalanche Mainnet includes the
 formed by the X, P, and C-Chain, as well as all in-production 
 [Subnets](/learn/avalanche/subnets-overview.md). These Subnets are independent blockchain sub-networks
 that can be tailored to specific application use cases, use their own consensus mechanisms, define
-their own token economics, and be run by different [virtual machines](docs/learn/avalanche/virtual-machines.md).
+their own token economics, and be run by different [virtual machines](/learn/avalanche/virtual-machines.md).
