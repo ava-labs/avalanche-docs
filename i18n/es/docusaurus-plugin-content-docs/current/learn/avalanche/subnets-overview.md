@@ -1,74 +1,98 @@
 ---
-tags: [Subred]
-description: Una Subred es un conjunto dinámico de validadores que trabajan juntos para lograr consenso sobre el estado de un conjunto de redes blockchain.
-keywords: [documentación, avalanche, subredes, blockchains soberanas, interoperabilidad]
-sidebar_label: Subredes
+tags: [Subnet]
+description: A Subnet is a dynamic set of validators working together to achieve consensus on the state of a set of blockchain networks.
+keywords: [docs, avalanche, subnets, sovereign blockchains, interoperability]
+sidebar_label: Subnets
 ---
 
-# ¿Qué es una Subred?
+# What Is a Subnet?
 
-Una **Subred** es una red soberana que define sus propias reglas con respecto a su membresía y economía de tokens. Está compuesta por un subconjunto dinámico de validadores de Avalanche que trabajan juntos para lograr consenso sobre el estado de una o más blockchains. Cada blockchain es validada por exactamente una Subred, mientras que una Subred puede validar muchas blockchains.
+A **Subnet** is a sovereign network which defines its own rules regarding its
+membership and token economics. It is composed of a dynamic subset of Avalanche
+validators working together to achieve consensus on the state of one or more
+blockchains. Each blockchain is validated by exactly one Subnet, while a Subnet
+can validate many blockchains.
 
-La [Red Primaria](avalanche-platform.md) de Avalanche es una Subred especial que ejecuta tres blockchains:
+Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
 
-- La Cadena de Plataforma [(P-Chain)](/learn/avalanche/avalanche-platform#p-chain)
-- La Cadena de Contratos [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
-- La Cadena de Intercambio [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
+- The Platform Chain [(P-Chain)](/learn/avalanche/avalanche-platform#p-chain)
+- The Contract Chain [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
+- The Exchange Chain [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
 
 ![image](/img/subnet-validators.png)
 
-(Imagen adoptada de [este artículo](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
 :::info
-Cada validador en una Subred
-**debe** validar también la Red Primaria.
+Every validator in a Subnet
+**must** also validate the Primary Network.
 :::
 
-Los operadores de nodos que validan una Subred con múltiples blockchains no necesitan ejecutar múltiples máquinas para la validación. Por ejemplo, la Red Primaria es una Subred con tres blockchains coexistentes, todos los cuales pueden ser validados por un solo nodo o una sola máquina.
+Node operators that validate a Subnet with multiple chains do not need to run multiple machines for 
+validation. For example, the Primary Network is a Subnet with three coexisting chains, all of which 
+can be validated by a single node, or a single machine.
 
-## Ventajas
+## Advantages
 
-### Redes Independientes
+### Independent Networks
 
-- Las Subredes utilizan máquinas virtuales para especificar su propia lógica de ejecución, determinar su propio régimen de tarifas, mantener su propio estado, facilitar su propia interconexión y proporcionar su propia seguridad.
-- El rendimiento de cada Subred está aislado de otras Subredes en el ecosistema, por lo que el aumento de uso en una Subred no afectará a otra.
-- Las Subredes pueden tener su propia economía de tokens con sus propios tokens nativos, mercados de tarifas e incentivos determinados por el desplegador de la Subred.
-- Una Subred puede alojar múltiples blockchains con [máquinas virtuales](virtual-machines.md) personalizadas.
+- Subnets use virtual machines to specify their own execution logic, determine their
+own fee regime, maintain their own state, facilitate their own networking, and
+provide their own security. 
+- Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on
+one Subnet won't affect another.
+- Subnets can have their own token economics with their own native tokens, fee
+markets, and incentives determined by the Subnet deployer. 
+- One Subnet can host multiple blockchains with customized [virtual machines](virtual-machines.md).
 
-### Interoperabilidad Nativa
+### Native Interoperability
 
-- Avalanche Warp Messaging permite la comunicación nativa entre Subredes y permite a los desarrolladores de Máquinas Virtuales (VM) implementar protocolos de comunicación arbitrarios entre cualquier par de Subredes.
+- Avalanche Warp Messaging enables native cross-Subnet communication and allows Virtual Machine (VM)
+developers to implement arbitrary communication protocols between any two Subnets.
 
-### Adaptarse a Requisitos Específicos de Aplicación
 
-_Las diferentes aplicaciones basadas en blockchain pueden requerir que los validadores tengan ciertas propiedades, como grandes cantidades de RAM o potencia de CPU._
+### Accommodate Application-Specific Requirements
 
-- Una Subred podría requerir que los validadores cumplan con ciertos [requisitos de hardware](/nodes/run/node-manually.md#requirements) para que la aplicación no sufra un bajo rendimiento debido a validadores lentos.
+_Different blockchain-based applications may require validators to have certain
+properties such as large amounts of RAM or CPU power._ 
 
-### Lanzar una Red Diseñada teniendo en cuenta la Cumplimiento Normativo
+- A Subnet could require that validators
+meet certain [hardware requirements](/nodes/run/node-manually.md#requirements) so
+that the application doesn’t suffer from low performance due to slow validators.
 
-_La arquitectura de Subred de Avalanche facilita el cumplimiento normativo. Como se mencionó anteriormente, una Subred puede requerir que los validadores cumplan con un conjunto de requisitos._
+### Launch a Network Designed With Compliance In Mind
 
-Algunos ejemplos de requisitos que los creadores de una Subred pueden elegir incluyen:
+_Avalanche’s Subnet architecture makes regulatory compliance manageable. As
+mentioned above, a Subnet may require validators to meet a set of requirements._
 
-- Los validadores deben estar ubicados en un país determinado.
-- Los validadores deben pasar controles KYC/AML.
-- Los validadores deben tener una licencia específica.
+Some examples of requirements the creators of a Subnet may choose include:
 
-### Controlar la Privacidad de los Datos en la Cadena
+- Validators must be located in a given country.
+- Validators must pass KYC/AML checks.
+- Validators must hold a certain license.
 
-_Las Subredes son ideales para organizaciones interesadas en mantener su información privada._
+### Control The Privacy of On-Chain Data
 
-- Las instituciones conscientes de la privacidad de sus partes interesadas pueden crear una Subred privada donde el contenido de las blockchains solo sea visible para un conjunto de validadores preaprobados. Esto se define en la creación con un [parámetro único](/nodes/configure/subnet-configs.md#private-subnet).
+_Subnets are ideal for organizations interested in keeping their information private._
 
-### Soberanía del Validador
+- Institutions conscious of their stakeholders' privacy can create a private Subnet where the
+contents of the blockchains would be visible only to a set of pre-approved validators. 
+Define this at creation with a [single parameter](/nodes/configure/subnet-configs.md#private-subnet).
 
-_En una red heterogénea de blockchains, algunos validadores no querrán validar ciertas blockchains porque simplemente no tienen interés en esas blockchains._
+### Validator Sovereignty
 
-- El modelo de Subred permite a los validadores preocuparse solo por las redes blockchain en las que eligen participar. Esto reduce en gran medida la carga computacional de los validadores.
+_In a heterogeneous network of blockchains, some validators will not want to
+validate certain blockchains because they simply have no interest in those
+blockchains._
+ 
+- The Subnet model enables validators to concern themselves only with
+blockchain networks they choose to participate in. This greatly reduces the computational burden on validators.
 
-## Desarrolla tu propia Subred
+## Develop Your Own Subnet
 
-Las Subredes en Avalanche se implementan por defecto con [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm), un fork de go-ethereum. Implementa la Máquina Virtual Ethereum y admite contratos inteligentes en Solidity, así como la mayoría de las demás funcionalidades de los clientes Ethereum.
+Subnets on Avalanche are deployed by default with [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm),
+a fork of go-ethereum. It implements the Ethereum Virtual Machine and supports Solidity smart 
+contracts as well as most other Ethereum client functionality.
 
-Para comenzar, consulta los tutoriales en nuestra sección de [Subredes](/build/subnet/hello-subnet.md).
+To get started, check out the tutorials in our [Subnets](/build/subnet/hello-subnet.md)
+section.

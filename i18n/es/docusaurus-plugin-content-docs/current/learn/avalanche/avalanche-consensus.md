@@ -1,63 +1,89 @@
 ---
-tags: [Consenso Avalanche, Protocolo Avalanche]
-description: El Consenso Avalanche es un protocolo de consenso escalable, robusto y descentralizado.
-keywords: [consenso avalanche, consenso snowman, escalando blockchains, consenso nakamoto]
-sidebar_label: Consenso Avalanche
+tags: [Avalanche Consensus, Avalanche Protocol]
+description: Avalanche Consensus is a consensus protocol that is scalable, robust, and decentralized.
+keywords: [avalanche consensus, snowman consensus, scaling blockchains, nakamoto consensus]
+sidebar_label: Avalanche Consensus
 ---
 
-# Consenso Avalanche
+# Avalanche Consensus
 
-El consenso es la tarea de lograr que un grupo de computadoras (también conocidas como nodos) lleguen a un acuerdo sobre una decisión. En blockchain, esto significa que todos los participantes de una red deben estar de acuerdo en los cambios realizados en el libro mayor compartido. Este acuerdo se alcanza a través de un proceso específico, un protocolo de consenso, que garantiza que todos vean la misma información y que la información sea precisa y confiable.
+Consensus is the task of getting a group of computers (a.k.a. nodes) to come to an agreement on a decision.
+In blockchain, this means that all the participants in a network have to agree on the changes made to
+the shared ledger. This agreement is reached through a specific process, a consensus protocol,
+that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
-**El Consenso Avalanche** es un protocolo de consenso escalable, robusto y descentralizado. Combina características de los mecanismos de consenso clásicos y Nakamoto para lograr un alto rendimiento, finalización rápida y eficiencia energética. Para ver el documento técnico, consulta [aquí](https://www.avalabs.org/whitepapers).
+**Avalanche Consensus** is a consensus protocol that is scalable, robust, and decentralized. It
+combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput, 
+fast finality, and
+energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
 
-Las características clave incluyen:
+Key Features Include: 
 
-- Velocidad: el consenso Avalanche proporciona finalización inmutable en fracciones de segundo, asegurando que las transacciones se confirmen rápidamente e sean irreversibles.
-- Escalabilidad: el consenso Avalanche permite un alto rendimiento de la red al tiempo que garantiza una baja latencia.
-- Eficiencia energética: a diferencia de otros protocolos de consenso populares, la participación en el consenso Avalanche no es intensiva en términos de recursos computacionales ni costosa.
-- Seguridad adaptable: el consenso Avalanche está diseñado para resistir varios ataques, incluidos los ataques Sybil, los ataques de denegación de servicio distribuido (DDoS) y los ataques de colusión. Su naturaleza probabilística garantiza que el resultado del consenso converja hacia el estado deseado, incluso cuando la red está bajo ataque.
+- Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
+quickly confirmed and irreversible.
+- Scalability: Avalanche consensus enables high network throughput while ensuring low latency.
+- Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
+is neither computationally intensive nor expensive. 
+- Adaptive Security: Avalanche consensus is designed to resist various attacks, including sybil
+attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
+nature ensures that the consensus outcome converges to the desired state, even when the network
+is under attack. 
 
-![Comparación de Consensos](/img/Consensus-protocol-comparison.png)
+![Consensus Comparison](/img/Consensus-protocol-comparison.png)
 
-## Descripción general conceptual
+## Conceptual Overview
 
-Los protocolos de consenso en la familia Avalanche operan a través de votaciones submuestreadas repetidas. Cuando un nodo determina si se debe aceptar una [transacción](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction), le pregunta a un pequeño subconjunto aleatorio de nodos validadores su preferencia. Cada validador consultado responde con la transacción que prefiere o cree que se debe aceptar.
+Consensus protocols in the Avalanche family operate through repeated sub-sampled voting. When a
+node is determining whether a
+[transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
+accepted, it asks a small, random subset of 
+[validator nodes](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)
+for their preference. Each queried validator replies with the transaction that it prefers, or thinks
+should be accepted.
 
 :::note
 
-El consenso nunca incluirá una transacción que se determine como **inválida**. Por ejemplo, si envías una transacción para enviar 100 AVAX a un amigo, pero tu billetera solo tiene 2 AVAX, esta transacción se considera **inválida** y no participará en el consenso.
+Consensus will never include a transaction that is determined to be **invalid**. For example, if you
+were to submit a transaction to send 100 AVAX to a friend, but your wallet only has 2 AVAX, this transaction
+is considered **invalid** and will not participate in consensus. 
 
 :::
 
-Si una mayoría suficiente de los validadores consultados responde con la misma transacción preferida, esta se convierte en la opción preferida del validador que realizó la consulta.
+If a sufficient majority of the validators sampled reply with the same preferred
+transaction, this becomes the preferred choice of the validator that inquired. 
 
-En el futuro, este nodo responderá con la transacción preferida por la mayoría.
+In the future, this node will reply with the transaction preferred by the majority.
 
-El nodo repite este proceso de muestreo hasta que los validadores consultados respondan con la misma respuesta durante un número suficiente de rondas consecutivas.
+The node repeats this sampling process until the validators
+queried reply with the same answer for a sufficient number of consecutive rounds.
 
-- El número de validadores requeridos para considerarse una "mayoría suficiente" se denomina "α" (_alfa_).
-- El número de rondas consecutivas requeridas para alcanzar el consenso, también conocido como "umbral de confianza", se denomina "β" (_beta_).
-- Tanto α como β son configurables.
+- The number of validators required to be considered a "sufficient majority" is referred to as "α" (_alpha_).
+- The number of consecutive rounds required to reach consensus, a.k.a. the "Confidence Threshold,"
+is referred to as "β" (_beta_).
+- Both α and β are configurable.
 
-Cuando una transacción no tiene conflictos, la finalización ocurre muy rápidamente. Cuando existen conflictos, los validadores honestos se agrupan rápidamente alrededor de las transacciones en conflicto, entrando en un ciclo de retroalimentación positiva hasta que todos los validadores correctos prefieren esa transacción. Esto lleva a la aceptación de transacciones no conflictivas y al rechazo de transacciones en conflicto.
+When a transaction has no conflicts, finalization happens very quickly. When
+conflicts exist, honest validators quickly cluster around conflicting transactions, entering a
+positive feedback loop until all correct validators prefer that transaction. This leads to the
+acceptance of non-conflicting transactions and the rejection of conflicting transactions.
 
-![Cómo funciona el Consenso Avalanche](/img/howavalancheconsensusworks.png)
+![How Avalanche Consensus Works](/img/howavalancheconsensusworks.png)
 
-El Consenso Avalanche garantiza que si algún validador honesto acepta una transacción, todos los validadores honestos llegarán a la misma conclusión.
+Avalanche Consensus guarantees that if any honest validator accepts a transaction,
+all honest validators will come to the same conclusion.
 
 :::info
 
-Para una excelente visualización, consulta [esta demostración](https://tedyin.com/archive/snow-bft-demo/#/snow).
+For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow).
 
 :::
 
-## Profundizando en el Consenso Avalanche
+## Deep Dive Into Avalanche Consensus
 
 <iframe src="https://www.youtube.com/embed/ZUF9sIu-D_k"
         width="100%"
         height="480px"
-        title="Profundizando en el Protocolo Avalanche"
+        title="Deep Dive on the Avalanche Protocol"
         className="video-container"
         display="initial"
         position="relative"
@@ -66,120 +92,202 @@ Para una excelente visualización, consulta [esta demostración](https://tedyin.
         allowfullscreen>
 </iframe>
 
-### Intuición
+### Intuition
 
-Primero, desarrollemos cierta intuición sobre el protocolo. Imagina una habitación llena de personas tratando de ponerse de acuerdo sobre qué comer para el almuerzo. Supongamos que es una elección binaria entre pizza y barbacoa. Algunas personas pueden preferir inicialmente la pizza, mientras que otras pueden preferir inicialmente la barbacoa. Sin embargo, el objetivo de todos es lograr un **consenso**.
+First, let's develop some intuition about the protocol. Imagine a room full of people trying to
+agree on what to get for lunch. Suppose it's a binary choice between pizza and barbecue. Some people
+might initially prefer pizza while others initially prefer barbecue. Ultimately, though, everyone's
+goal is to achieve **consensus**.
 
-Cada persona le pregunta a un subconjunto aleatorio de personas en la habitación cuál es su preferencia para el almuerzo. Si más de la mitad dice pizza, la persona piensa: "Ok, parece que las cosas se inclinan hacia la pizza. Ahora prefiero la pizza". Es decir, adoptan la _preferencia_ de la mayoría. De manera similar, si la mayoría dice barbacoa, la persona adopta la barbacoa como su preferencia.
+Everyone asks a random subset of the people in the room what their lunch preference is. If more than
+half say pizza, the person thinks, "OK, looks like things are leaning toward pizza. I prefer pizza
+now." That is, they adopt the _preference_ of the majority. Similarly, if a majority say barbecue,
+the person adopts barbecue as their preference.
 
-Todos repiten este proceso. En cada ronda, cada vez más personas tienen la misma preferencia. Esto se debe a que cuantas más personas prefieran una opción, más probable es que alguien reciba una respuesta mayoritaria y adopte esa opción como su preferencia. Después de suficientes rondas, llegan a un consenso y deciden una opción que todos prefieren.
+Everyone repeats this process. Each round, more and more people have the same preference. This is
+because the more people that prefer an option, the more likely someone is to receive a majority
+reply and adopt that option as their preference. After enough rounds, they reach consensus and
+decide on one option, which everyone prefers.
 
 ### Snowball
 
-La intuición anterior describe el Algoritmo Snowball, que es un componente fundamental del consenso Avalanche. Veamos el algoritmo Snowball.
+The intuition above outlines the Snowball Algorithm, which is a building block of Avalanche
+consensus. Let's review the Snowball algorithm.
 
-#### Parámetros
+#### Parameters
 
-- _n_: número de participantes
-- _k_ (tamaño de la muestra): entre 1 y _n_
-- α (tamaño del quórum): entre 1 y _k_
-- β (umbral de decisión): &gt;= 1
+- _n_: number of participants
+- _k_ (sample size): between 1 and _n_
+- α (quorum size): between 1 and _k_
+- β (decision threshold): &gt;= 1
 
-#### Algoritmo
+#### Algorithm
 
 ```text
-preferencia := pizza
-éxitosConsecutivos := 0
-mientras no se haya decidido:
-  preguntar a k personas aleatorias su preferencia
-  si >= α dan la misma respuesta:
-    preferencia := respuesta con >= α
-    si preferencia == preferencia anterior:
-      éxitosConsecutivos++
-    sino:
-      éxitosConsecutivos = 1
-  sino:
-    éxitosConsecutivos = 0
-  si éxitosConsecutivos > β:
-    decidir(preferencia)
+preference := pizza
+consecutiveSuccesses := 0
+while not decided:
+  ask k random people their preference
+  if >= α give the same response:
+    preference := response with >= α
+    if preference == old preference:
+      consecutiveSuccesses++
+    else:
+      consecutiveSuccesses = 1
+  else:
+    consecutiveSuccesses = 0
+  if consecutiveSuccesses > β:
+    decide(preference)
 ```
 
-#### Explicación del algoritmo
+#### Algorithm Explained
 
-Cada persona tiene una preferencia inicial por pizza o barbacoa. Hasta que alguien haya _decidido_, consulta a _k_ personas (el tamaño de la muestra) y les pregunta cuál es su preferencia. Si α o más personas dan la misma respuesta, esa respuesta se adopta como la nueva preferencia. α se llama el _tamaño del quórum_. Si la nueva preferencia es la misma que la preferencia anterior, se incrementa el contador `éxitosConsecutivos`. Si la nueva preferencia es diferente a la preferencia anterior, el contador `éxitosConsecutivos` se establece en `1`. Si ninguna respuesta obtiene un quórum (una mayoría α de la misma respuesta), el contador `éxitosConsecutivos` se establece en `0`.
+Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query
+_k_ people (the sample size) and ask them what they prefer. If α or more people give the same
+response, that response is adopted as the new preference. α is called the _quorum size_. If the new
+preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If
+the new preference is different then the old preference, the `consecutiveSuccesses` counter is set
+to `1`. If no response gets a quorum (an α majority of the same response) then the
+`consecutiveSuccesses` counter is set to `0`.
 
-Todos repiten esto hasta que obtengan un quórum para la misma respuesta β veces seguidas. Si una persona decide pizza, entonces todas las demás personas que sigan el protocolo eventualmente también decidirán pizza.
+Everyone repeats this until they get a quorum for the same response β times in a row. If one person
+decides pizza, then every other person following the protocol will eventually also decide on pizza.
 
-Los cambios aleatorios en la preferencia, causados por el muestreo aleatorio, generan una preferencia de red por una opción, lo que genera más preferencia de red por esa opción hasta que se vuelve irreversible y luego los nodos pueden decidir.
+Random changes in preference, caused by random sampling, cause a network preference for one choice,
+which begets more network preference for that choice until it becomes irreversible and then the
+nodes can decide.
 
-En nuestro ejemplo, hay una elección binaria entre pizza o barbacoa, pero Snowball se puede adaptar para lograr consenso en decisiones con muchas opciones posibles.
+In our example, there is a binary choice between pizza or barbecue, but Snowball can be adapted to
+achieve consensus on decisions with many possible choices.
 
-Los umbrales de seguridad y liveness son parametrizables. A medida que aumenta el tamaño del quórum, α, el umbral de seguridad aumenta y el umbral de liveness disminuye. Esto significa que la red puede tolerar más nodos bizantinos (incorrectos y maliciosos) y seguir siendo segura, es decir, todos los nodos eventualmente estarán de acuerdo en si algo es aceptado o rechazado. El umbral de liveness es el número de participantes maliciosos que se pueden tolerar antes de que el protocolo no pueda avanzar.
+The liveness and safety thresholds are parameterizable. As the quorum size, α, increases, the safety
+threshold increases, and the liveness threshold decreases. This means the network can tolerate more
+byzantine (deliberately incorrect, malicious) nodes and remain safe, meaning all nodes will
+eventually agree whether something is accepted or rejected. The liveness threshold is the number of
+malicious participants that can be tolerated before the protocol is unable to make progress.
 
-Estos valores, que son constantes, son bastante pequeños en la red Avalanche. El tamaño de la muestra, _k_, es `20`. Por lo tanto, cuando un nodo pregunta a un grupo de nodos su opinión, solo consulta a `20` nodos de toda la red, incluso si hay miles de nodos en la red. El tamaño del quórum, α, es `14`. Por lo tanto, si `14` o más nodos dan la misma respuesta, esa respuesta se adopta como la preferencia del nodo que realizó la consulta. El umbral de decisión, β, es `20`. Un nodo decide sobre una opción después de recibir `20` respuestas consecutivas con quórum (mayoría α).
+These values, which are constants, are quite small on the Avalanche Network. The sample size, _k_,
+is `20`. So when a node asks a group of nodes their opinion, it only queries `20` nodes out of the
+whole network. The quorum size, α, is `14`. So if `14` or more nodes give the same response, that
+response is adopted as the querying node's preference. The decision threshold, β, is `20`. A node
+decides on choice after receiving `20` consecutive quorum (α majority) responses.
 
-Snowball es muy escalable a medida que aumenta el número de nodos en la red, _n_. Independientemente del número de participantes en la red, el número de mensajes de consenso enviados sigue siendo el mismo porque en una consulta dada, un nodo solo consulta a `20` nodos, incluso si hay miles de nodos en la red.
+Snowball is very scalable as the number of nodes on the network, _n_, increases. Regardless of the
+number of participants in the network, the number of consensus messages sent remains the same
+because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in
+the network.
 
-Todo lo discutido hasta este punto es cómo se describe Avalanche en [el documento técnico de Avalanche](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). La implementación del protocolo de consenso Avalanche por Ava Labs (específicamente en AvalancheGo) tiene algunas optimizaciones para la latencia y el rendimiento.
+Everything discussed to this point is how Avalanche is described in [the Avalanche
+white-paper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf).
+The implementation of the Avalanche consensus protocol by Ava Labs (namely in AvalancheGo) has some
+optimizations for latency and throughput.
 
-### Bloques
+### Blocks
 
-Un bloque es un componente fundamental que forma la estructura de una cadena de bloques. Sirve como un contenedor o estructura de datos que contiene una colección de transacciones u otra información relevante. Cada bloque está enlazado criptográficamente al bloque anterior, creando una cadena de bloques, de ahí el término "blockchain" (cadena de bloques).
+A block is a fundamental component that forms the structure of a blockchain. It serves as a container
+or data structure that holds a collection of transactions or other relevant information. Each block
+is cryptographically linked to the previous block, creating a chain of blocks, hence the term "blockchain."
 
-Además de almacenar una referencia a su bloque padre, un bloque contiene un conjunto de transacciones. Estas transacciones pueden representar varios tipos de información, como transacciones financieras, operaciones de contratos inteligentes o solicitudes de almacenamiento de datos.
+In addition to storing a reference of its parent, a block contains a set of transactions. These
+transactions can represent various types of information, such as financial transactions, smart 
+contract operations, or data storage requests.  
 
-Si un nodo recibe un voto por un bloque, también cuenta como un voto por todos los ancestros del bloque (su bloque padre, el bloque padre del bloque padre, etc.).
+If a node receives a vote for a block, it also counts as a vote for all of the block's ancestors
+(its parent, the parents' parent, etc.).
 
-### Finalidad
+### Finality
 
-El consenso Avalanche es probabilísticamente seguro hasta un umbral de seguridad. Es decir, la probabilidad de que un nodo correcto acepte una transacción que otro nodo correcto rechace puede hacerse arbitrariamente baja ajustando los parámetros del sistema. En el protocolo de consenso Nakamoto (como se utiliza en Bitcoin y Ethereum, por ejemplo), un bloque puede incluirse en la cadena pero luego ser eliminado y no terminar en la cadena canónica. Esto significa esperar una hora para la liquidación de la transacción. En Avalanche, la aceptación/rechazo es **final e irreversible** y solo toma unos segundos.
+Avalanche consensus is probabilistically safe up to a safety threshold. That is, the probability
+that a correct node accepts a transaction that another correct node rejects can be made arbitrarily
+low by adjusting system parameters. In Nakamoto consensus protocol (as used in Bitcoin and Ethereum,
+for example), a block may be included in the chain but then be removed and not end up in the
+canonical chain. This means waiting an hour for transaction settlement. In Avalanche,
+acceptance/rejection are **final and irreversible** and only take a few seconds.
 
-### Optimizaciones
+### Optimizations
 
-No es seguro que los nodos simplemente pregunten: "¿Prefieres este bloque?" cuando consultan a los validadores. En la implementación de Ava Labs, durante una consulta, un nodo pregunta: "Dado que este bloque existe, ¿qué bloque prefieres?" En lugar de recibir un sí/no binario, el nodo recibe el bloque preferido del otro nodo.
+It's not safe for nodes to just ask, "Do you prefer this block?" when they query validators.
+In Ava Labs' implementation, during a query a node asks, "Given that this block exists, which
+block do you prefer?" Instead of getting back a binary yes/no, the node receives the other
+node's preferred block.
 
-Los nodos no solo consultan cuando escuchan de un nuevo bloque; consultan repetidamente a otros nodos hasta que no haya bloques en proceso.
+Nodes don't only query upon hearing of a new block; they repeatedly query other nodes until there are
+no blocks processing.
 
-Es posible que los nodos no necesiten esperar hasta recibir todas las respuestas de la consulta antes de registrar el resultado de una votación. Si un bloque ya ha recibido _alpha_ votos, entonces no es necesario esperar el resto de las respuestas.
+Nodes may not need to wait until they get all _k_ query responses before registering the outcome of a
+poll. If a block has already received _alpha_ votes, then there's no need to wait for the rest of the
+responses. 
 
-### Validadores
+### Validators
 
-Si fuera gratuito convertirse en un validador en la red Avalanche, eso sería problemático porque un actor malicioso podría iniciar muchos nodos que se consultarían con mucha frecuencia. El actor malicioso podría hacer que el nodo se comporte mal y cause un fallo de seguridad o liveness. Los validadores, los nodos que se consultan como parte del consenso, tienen influencia sobre la red. Deben pagar por esa influencia con un valor del mundo real para evitar este tipo de manipulación de votos. Esta idea de usar un valor del mundo real para comprar influencia sobre la red se llama Prueba de Participación.
+If it were free to become a validator on the Avalanche network, that would be problematic because a
+malicious actor could start many, many nodes which would get queried very frequently. The malicious
+actor could make the node act badly and cause a safety or liveness failure. The validators, the
+nodes which are queried as part of consensus, have influence over the network. They have to pay for
+that influence with real-world value in order to prevent this kind of ballot stuffing. This idea of
+using real-world value to buy influence over the network is called Proof of Stake.
 
-Para convertirse en un validador, un nodo debe **vincular** (apostar) algo valioso (**AVAX**). Cuanto más AVAX vincule un nodo, más frecuentemente será consultado por otros nodos. Cuando un nodo muestrea la red, no es uniformemente aleatorio. En cambio, está ponderado por la cantidad de apuesta. Los nodos tienen incentivos para ser validadores porque reciben una recompensa si, mientras validan, son suficientemente correctos y receptivos.
+To become a validator, a node must **bond** (stake) something valuable (**AVAX**). The more AVAX a
+node bonds, the more often that node is queried by other nodes. When a node samples the network it's
+not uniformly random. Rather, it's weighted by stake amount. Nodes are incentivized to be validators
+because they get a reward if, while they validate, they're sufficiently correct and responsive.
 
-Avalanche no tiene penalizaciones. Si un nodo no se comporta bien mientras valida, como dar respuestas incorrectas o tal vez no responder en absoluto, su apuesta se devuelve en su totalidad, pero sin recompensa. Si una parte suficiente del AVAX vinculado está en manos de nodos correctos, entonces la red es segura y está viva para transacciones virtuosas.
+Avalanche doesn't have slashing. If a node doesn't behave well while validating, such as giving
+incorrect responses or perhaps not responding at all, its stake is still returned in whole, but with
+no reward. As long as a sufficient portion of the bonded AVAX is held by correct nodes, then the
+network is safe, and is live for virtuous transactions.
 
-### Grandes ideas
+### Big Ideas
 
-Dos grandes ideas en Avalanche son el **submuestreo** y el **voto transitorio**.
+Two big ideas in Avalanche are **subsampling** and **transitive voting**. 
 
-El submuestreo tiene un bajo costo de mensajes. No importa si hay veinte validadores o dos mil validadores; el número de mensajes de consenso que un nodo envía durante una consulta sigue siendo constante.
+Subsampling has low message overhead. It doesn't matter if there are twenty validators or two
+thousand validators; the number of consensus messages a node sends during a query remains constant.
 
-El voto transitorio, donde un voto por un bloque es un voto por todos sus ancestros, ayuda con el rendimiento de las transacciones. Cada voto es en realidad muchos votos en uno.
+Transitive voting, where a vote for a block is a vote for all its ancestors, helps with transaction
+throughput. Each vote is actually many votes in one.
 
-### Cabos sueltos
+### Loose Ends
 
-Las transacciones son creadas por los usuarios que llaman a una API en un nodo completo de AvalancheGo o las crean utilizando una biblioteca como AvalancheJS.
+Transactions are created by users which call an API on an
+[AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such
+as [AvalancheJS](https://github.com/ava-labs/avalanchejs).
 
-### Otras observaciones
+### Other Observations
 
-No se garantiza que las transacciones en conflicto estén vivas. Eso no es realmente un problema porque si deseas que tu transacción esté viva, no debes emitir una transacción en conflicto.
+Conflicting transactions are not guaranteed to be live. That's not really a problem because if you
+want your transaction to be live then you should not issue a conflicting transaction.
 
-Snowman es el nombre de la implementación de Ava Labs del protocolo de consenso Avalanche para cadenas lineales.
+Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol
+for linear chains.
 
-Si no hay transacciones sin decidir, el protocolo de consenso Avalanche se _quiesce_. Es decir, no hace nada si no hay trabajo por hacer. Esto hace que Avalanche sea más sostenible que la Prueba de Trabajo, donde los nodos deben hacer trabajo constantemente.
+If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does
+nothing if there is no work to be done. This makes Avalanche more sustainable than Proof-of-work
+where nodes need to constantly do work.
 
-Avalanche no tiene líder. Cualquier nodo puede proponer una transacción y cualquier nodo que haya apostado AVAX puede votar en cada transacción, lo que hace que la red sea más robusta y descentralizada.
+Avalanche has no leader. Any node can propose a transaction and any node that has staked AVAX can
+vote on every transaction, which makes the network more robust and decentralized.
 
-## ¿Por qué nos importa?
+## Why Do We Care?
 
-Avalanche es un motor de consenso general. No importa qué tipo de aplicación se coloque encima de él. El protocolo permite el desacoplamiento de la capa de aplicación de la capa de consenso. Si estás construyendo una dapp en Avalanche, solo necesitas definir algunas cosas, como cómo se definen los conflictos y qué hay en una transacción. No necesitas preocuparte por cómo los nodos llegan a un acuerdo. El protocolo de consenso es una caja negra a la que le pones algo y te devuelve si es aceptado o rechazado.
+Avalanche is a general consensus engine. It doesn't matter what type of application is put on top of
+it. The protocol allows the decoupling of the application layer from the consensus layer. If you're
+building a dapp on Avalanche then you just need to define a few things, like how conflicts are
+defined and what is in a transaction. You don't need to worry about how nodes come to an agreement.
+The consensus protocol is a black box that put something into it and it comes back as accepted or
+rejected.
 
-Avalanche se puede utilizar para todo tipo de aplicaciones, no solo para redes de pago P2P. La Red Primaria de Avalanche tiene una instancia de la Máquina Virtual Ethereum, que es compatible con las dapps y herramientas de desarrollo existentes de Ethereum. El protocolo de consenso de Ethereum se ha reemplazado por el consenso Avalanche para permitir una latencia de bloque más baja y un mayor rendimiento.
+Avalanche can be used for all kinds of applications, not just P2P payment networks. Avalanche's
+Primary Network has an instance of the Ethereum Virtual Machine, which is backward compatible with
+existing Ethereum Dapps and dev tooling. The Ethereum consensus protocol has been replaced with
+Avalanche consensus to enable lower block latency and higher throughput.
 
-Avalanche tiene un rendimiento muy alto. Puede procesar miles de transacciones por segundo con una latencia de aceptación de uno a dos segundos.
+Avalanche is very performant. It can process thousands of transactions per second with one to two
+second acceptance latency.
 
-## Resumen
+## Summary
 
-El consenso Avalanche es un avance radical en los sistemas distribuidos. Representa un salto tan grande como los protocolos de consenso clásicos y Nakamoto que lo precedieron. Ahora que tienes una mejor comprensión de cómo funciona, consulta otras documentaciones para construir dapps y instrumentos financieros innovadores en Avalanche.
+Avalanche consensus is a radical breakthrough in distributed systems. It represents as large a leap
+forward as the classical and Nakamoto consensus protocols that came before it. Now that you have a
+better understanding of how it works, check out other documentations for building game-changing
+Dapps and financial instruments on Avalanche.

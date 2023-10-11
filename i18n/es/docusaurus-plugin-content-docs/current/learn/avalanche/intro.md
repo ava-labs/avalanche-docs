@@ -1,28 +1,39 @@
 ---
 slug: /intro
 tags: [Avalanche]
-description: Avalanche es una plataforma de código abierto para construir dApps en un ecosistema interoperable, descentralizado y altamente escalable.
-keywords: [documentación, avalanche, escalabilidad, construir en avalanche, dApps]
-sidebar_label: 🔺 ¿Qué es Avalanche?
+description: Avalanche is an open-source platform for building dApps in an interoperable, decentralized, and highly scalable ecosystem.
+keywords: [docs, avalanche, scalability, build on avalanche, dApps]
+sidebar_label: 🔺 What is Avalanche?
 ---
 
-# ¿Qué es Avalanche?
+# What Is Avalanche?
 
-Avalanche es una plataforma de código abierto para construir aplicaciones descentralizadas en un ecosistema interoperable, descentralizado y altamente escalable. Impulsado por [un mecanismo de consenso único y poderoso](/learn/avalanche/avalanche-consensus.md), Avalanche es el primer ecosistema diseñado para adaptarse a la escala de las finanzas globales, con una finalidad de transacción casi instantánea.
+Avalanche is an open-source platform for building decentralized applications in one
+interoperable, decentralized, and highly scalable ecosystem. Powered by [a uniquely powerful consensus
+mechanism](/learn/avalanche/avalanche-consensus.md), Avalanche is the first ecosystem designed to
+accommodate the scale of global finance, with near-instant transaction finality. 
 
-## ¿Por qué elegir Avalanche?
+## Why Choose Avalanche?
 
-### Increíblemente rápido
+### Blazingly Fast
 
-- Avalanche utiliza el mecanismo de consenso más rápido de cualquier blockchain de capa 1. Este mecanismo de consenso único permite una finalidad rápida y una baja latencia: en menos de 2 segundos, tu transacción se procesa y verifica de manera efectiva.
+- Avalanche employs the fastest consensus mechanism of any layer 1 blockchain. The unique consensus
+mechanism enables quick finality and low latency: in less than 2 seconds, your transaction is
+effectively processed and verified.
 
-### Diseñado para escalar
+### Built to Scale
 
-- Los desarrolladores que construyen en Avalanche pueden crear blockchains específicos de la aplicación con conjuntos de reglas complejas o construir en Subredes privadas o públicas existentes en cualquier lenguaje.
-- Avalanche es increíblemente eficiente en términos de energía y puede funcionar fácilmente en hardware de consumo. Toda la red de Avalanche consume la misma cantidad de energía que 46 hogares en Estados Unidos, equivalente al 0.0005% de la cantidad de energía consumida por Bitcoin.
-- Los desarrolladores de Solidity pueden construir sobre la implementación de Avalanche del EVM directamente, o construir su propia Máquina Virtual (VM) personalizada para casos de uso avanzados.
+- Developers who build on Avalanche can build application-specific blockchains with complex rulesets
+or build on existing private or public Subnets in any language. 
+- Avalanche is incredibly energy-efficient and can run easily on consumer-grade hardware.
+The entire Avalanche network consumes the same amount of energy as 46 US households, equivalent to
+0.0005% of the amount of energy consumed by Bitcoin.
+- Solidity developers can build on Avalanche's implementation of the EVM straight out-of-the box, or
+build their own custom Virtual Machine (VM) for advanced use cases.
 
-### Seguridad avanzada
+### Advanced Security
 
-- El consenso de Avalanche escala a miles de validadores concurrentes sin sufrir degradación del rendimiento, lo que lo convierte en uno de los protocolos más seguros para sistemas de escalamiento de internet.
-- Las blockchains personalizadas sin permisos y con permisos desplegadas como Subredes de Avalanche pueden incluir conjuntos de reglas personalizadas diseñadas para cumplir con consideraciones legales y jurisdiccionales.
+- Avalanche consensus scales to thousands of concurrent validators without suffering performance
+degradation making it one of the most secure protocols for internet scaling systems. 
+- Permissionless and permissioned custom blockchains deployed as an Avalanche Subnets can include custom
+rulesets designed to be compliant with legal and jurisdictional considerations.

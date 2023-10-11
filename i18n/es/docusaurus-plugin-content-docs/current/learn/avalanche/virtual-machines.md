@@ -1,63 +1,99 @@
-# Máquinas Virtuales
+---
+tags: [Virtual Machines, Subnet-EVM]
+description: Virtual Machine is a virtual environment inside blockchain networks that executes smart contracts and transactions according to predetermined rules and protocols.
+keywords: [docs, avalanche, virtual machines, subnets, Subnet EVM]
+sidebar_label: Virtual Machines
+---
 
-En pocas palabras, una **Máquina Virtual** (VM, por sus siglas en inglés) es el modelo de una cadena de bloques, lo que significa que define la lógica a nivel de aplicación de una cadena de bloques. En términos técnicos, especifica el estado de la cadena de bloques, la función de transición de estado, las transacciones y la API a través de la cual los usuarios pueden interactuar con la cadena de bloques.
+# Virtual Machines
 
-Puedes usar la misma VM para crear muchas cadenas de bloques, cada una de las cuales sigue el mismo conjunto de reglas pero es independiente de las demás.
+In a nutshell, a **Virtual Machine** (VM) is the blueprint for a blockchain, meaning it defines
+the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state,
+state transition function, transactions, and the API through which users can interact with the
+blockchain. 
 
-## ¿Por qué ejecutar una VM en Avalanche?
+You can use the same VM to create many blockchains, each of which follows the same rule-set but is
+independent of all others.
 
-_Los desarrolladores con casos de uso avanzados para utilizar la tecnología de contabilidad distribuida a menudo se ven obligados a construir su propia cadena de bloques desde cero, volver a implementar abstracciones complejas como la red y el consenso, todo antes de poder comenzar a trabajar en su nueva aplicación._
+## Why Run a VM on Avalanche?
 
-**Con Avalanche,**
+_Developers with advanced use-cases for utilizing distributed ledger technology are often forced to build
+their own blockchain from scratch, re-implement complex abstractions like networking and consensus,
+all before even being able to start working on their new application._
 
-- Los desarrolladores pueden crear una VM que define cómo debería comportarse su cadena de bloques y utilizar este modelo para coordinar a los validadores en la red para ejecutar la aplicación.
+**With Avalanche,**
 
-- Las VM pueden estar escritas en cualquier lenguaje y utilizar bibliotecas y pilas tecnológicas con las que su creador esté familiarizado. Los desarrolladores tienen un control preciso sobre el comportamiento de su cadena de bloques y pueden redefinir las reglas de una cadena de bloques para adaptarse a cualquier caso de uso que tengan.
+- Developers can create a VM that defines how their blockchain 
+should behave, and use this blueprint to coordinate validators in the network to run 
+the application. 
 
-- Los desarrolladores no necesitan preocuparse por la lógica de nivel inferior, como la red, el consenso y la estructura de la cadena de bloques; Avalanche se encarga de esto en segundo plano para que puedas centrarte en construir tu Dapp, tu ecosistema y tu comunidad.
+- VMs can be written in any language, and use libraries and tech stacks that its creator
+is familiar with. Developers have fine control over the behavior of their blockchain, and can redefine
+the rules of a blockchain to fit any use-case they have.
 
-## Cómo funcionan las VM
+- Developers don't need to concern yourself with lower-level logic
+like networking, consensus, and the structure of the blockchain; Avalanche does
+this behind the scenes so you can focus on building your Dapp, your ecosystem, and your community.
 
-Las VM se comunican con Avalanche a través de un protocolo de solicitud-respuesta agnóstico del lenguaje conocido como [RPC](https://es.wikipedia.org/wiki/Llamada_a_procedimiento_remoto). Esto permite que el marco de la VM abra un mundo de posibilidades infinitas, ya que los desarrolladores pueden implementar sus Dapps utilizando los lenguajes, marcos y bibliotecas de su elección. Para comenzar, crea una VM lista para usar con el [Subnet-EVM](/build/subnet/c-chain-vs-subnet.md) en Solidity, o diseña una VM personalizada con lenguajes como Golang, Rust y muchos más.
 
-## Ejecución de una VM
+## How VMs Work
 
-Todos los validadores de Avalanche como miembros de la Red Primaria de Avalanche deben ejecutar tres VM:
+VMs communicate with Avalanche over a language agnostic request-response protocol known as
+[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to 
+open a world of endless possibilities, as developers can implement their Dapps using 
+the languages, frameworks, and libraries of their choice. To get started, create a VM out-of-the-box
+with the [Subnet-EVM](/build/subnet/c-chain-vs-subnet.md) in Solidity, or design a custom VM with languages
+like Golang, Rust, and many more.
 
-- Coreth: Define la Cadena de Contratos (C-Chain); admite funcionalidad de contratos inteligentes y es compatible con EVM.
-- Platform VM: Define la Cadena de Plataforma (P-Chain); admite operaciones de participación y Subnets.
-- Avalanche VM: Define la Cadena de Intercambio (X-Chain); admite operaciones en Tokens Nativos de Avalanche.
+## Running a VM
 
-Los tres se pueden ejecutar fácilmente en cualquier computadora con [AvalancheGo](/nodes).
+All Avalanche validators as members of the Avalanche Primary Network are required to run three VMs:
 
-Los validadores pueden instalar VM adicionales en su nodo para validar Subnets adicionales en el ecosistema de Avalanche. A cambio, los validadores reciben recompensas de participación en forma de un token de recompensa determinado por los Subnets.
+- Coreth: Defines the Contract Chain (C-Chain); supports smart contract functionality and is
+EVM-compatible.
+- Platform VM: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
+- Avalanche VM: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native
+  Tokens.
+
+All three can easily be run on any computer with [AvalancheGo](/nodes).
+
+Validators can install additional VMs on their node to validate additional
+[Subnets](subnets-overview.md) in the Avalanche ecosystem. In exchange, validators receive
+staking rewards in the form of a reward token determined by the Subnets.
 
 ### Solidity
 
-Avalanche admite nativamente la ejecución de contratos inteligentes de Ethereum escritos en Solidity. Los desarrolladores de Ethereum tienen la opción de implementar sus contratos inteligentes en la implementación de la C-Chain de la EVM ([Coreth](https://github.com/ava-labs/coreth)) o en su propio Subnet utilizando el [Subnet-EVM](https://github.com/ava-labs/subnet-evm) para casos de uso avanzados que requieren más personalización.
+Avalanche natively supports the execution of Ethereum smart contracts written in solidity. Ethereum
+developers have the option of deploying their smart contracts on the C-Chain's implementation of the
+Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)),
+or on their own Subnet using the
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
 
-Tanto la C-Chain como el Subnet-EVM son compatibles con herramientas de Ethereum como Remix, Core, MetaMask, Truffle y más.
+Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
+Truffle, and more.
 
-Para obtener más información sobre el soporte de contratos inteligentes, haz clic [aquí](build/dapp/launch-dapp.md).
+To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
 
 ### Golang
 
 - [Coreth](https://github.com/ava-labs/coreth)
-  - Una implementación de la EVM que impulsa la C-Chain de Avalanche y admite contratos inteligentes en Solidity.
+  - An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart
+  contracts.
 - [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
-  - Una implementación de la EVM que se puede implementar en un Subnet personalizado para admitir contratos inteligentes en Solidity.
+  - An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart
+  contracts
 - [TimestampVM](https://github.com/ava-labs/timestampvm)
-  - Un servidor de marca de tiempo descentralizado.
+  - A decentralized timestamp server
 - [XSVM](https://github.com/ava-labs/xsvm)
-  - Un ejemplo de Warp Messaging de Avalanche que implementa transferencias de activos entre Subnets.
+  - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-Consulta aquí un tutorial sobre [Cómo construir una VM simple en Golang](/build/vm/create/golang-vm-simple.md).
+See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
 
 ### Rust
 
-Las siguientes VM se construyeron utilizando Rust a través del [Avalanche Rust SDK](https://crates.io/crates/avalanche-types):
+The following VMs were built using Rust via the [Avalanche Rust SDK](https://crates.io/crates/avalanche-types)
 
 - [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs)
-  - Una implementación en Rust de TimestampVM.
+  - A Rust implementation of TimestampVM
 
-Consulta aquí un tutorial sobre [Cómo construir una VM simple en Rust](/build/vm/create/rust-vm.md).
+See here for a tutorial on [How to Build a Simple Rust VM](/build/vm/create/rust-vm.md)

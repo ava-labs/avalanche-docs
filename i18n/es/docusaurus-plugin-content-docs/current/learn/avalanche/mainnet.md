@@ -1,19 +1,19 @@
 ---
-tags: [Red Principal, Subredes]
-description: Avalanche Mainnet es la versión final y lista para producción de la cadena de bloques donde los usuarios pueden interactuar con la red y realizar transacciones con activos del mundo real.
-keywords: [documentación, mainnet, red principal, activos del mundo real, construir en avalanche]
+tags: [Primary Network, Subnets]
+description: Avalanche Mainnet is the final and production-ready version of the blockchain where users can interact with the network and transact with real world assets.
+keywords: [docs, mainnet, primary network, real world assets, build on avalanche]
 sidebar_label: Mainnet
 ---
 
 # Avalanche Mainnet
 
-El Avalanche Mainnet se refiere a la red principal de la cadena de bloques Avalanche donde ocurren transacciones reales
-y ejecuciones de contratos inteligentes. Es la versión final y lista para producción de la
-cadena de bloques donde los usuarios pueden interactuar con la red y realizar transacciones con activos del mundo real.
+The Avalanche Mainnet refers to the main network of the Avalanche blockchain where real transactions
+and smart contract executions occur. It is the final and production-ready version of the
+blockchain where users can interact with the network and transact with real world assets.
 
-Una _red de redes_, el Avalanche Mainnet incluye la
-[Red Principal](/learn/avalanche/avalanche-platform.md)
-formada por las cadenas X, P y C, así como todas las
-[Subredes](/learn/avalanche/subnets-overview.md) en producción. Estas Subredes son subredes independientes de la cadena de bloques
-que se pueden adaptar a casos de uso de aplicaciones específicas, utilizan sus propios mecanismos de consenso, definen
-su propia economía de tokens y pueden ser ejecutadas por diferentes [máquinas virtuales](docs/learn/avalanche/virtual-machines.md).
+A _network of networks_, Avalanche Mainnet includes the 
+[Primary Network](/learn/avalanche/avalanche-platform.md)
+formed by the X, P, and C-Chain, as well as all in-production 
+[Subnets](/learn/avalanche/subnets-overview.md). These Subnets are independent blockchain sub-networks
+that can be tailored to specific application use cases, use their own consensus mechanisms, define
+their own token economics, and be run by different [virtual machines](/learn/avalanche/virtual-machines.md).

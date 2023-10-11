@@ -1,48 +1,62 @@
 ---
-tags: [Red Principal, P-Chain, X-Chain, C-Chain, Red de Plataforma, Red de Contratos]
-description: Avalanche cuenta con 3 blockchains integradas que incluyen la Exchange Chain (X-Chain), la Platform Chain (P-Chain) y la Contract Chain (C-Chain). Más información aquí.
-keywords: [documentación, avalanche, red principal, c-chain, x-chain, p-chain, red de plataforma, red de contratos]
-sidebar_label: La Red Principal
+tags: [Primary Network, P-Chain, X-Chain, C-Chain, Platform Chain, Contract Chain]
+description: Avalanche features 3 built-in blockchains which includes Exchange Chain (X-Chain), Platform Chain (P-Chain), and Contract Chain (C-Chain). More info here.
+keywords: [docs, documentation, avalanche, primary network, c-chain, x-chain, p-chain, platform chain, contract chain]
+sidebar_label: The Primary Network
 ---
 
-# La Red Principal
+# The Primary Network
 
-Avalanche es una red heterogénea de blockchains. A diferencia de las redes homogéneas, donde todas las aplicaciones residen en la misma cadena, las redes heterogéneas permiten crear cadenas separadas para diferentes aplicaciones.
+Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where
+all applications reside in the same chain, heterogeneous networks allow separate chains to be
+created for different applications.
 
-La Red Principal es una [Subred](subnets-overview.md) especial que ejecuta tres blockchains:
+The Primary Network is a special [Subnet](subnets-overview.md) that runs three blockchains:
 
-- La Contract Chain [(C-Chain)](avalanche-platform.md#c-chain)
-- La Platform Chain [(P-Chain)](avalanche-platform.md#p-chain)
-- La Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
+- The Contract Chain [(C-Chain)](avalanche-platform.md#c-chain)
+- The Platform Chain [(P-Chain)](avalanche-platform.md#p-chain)
+- The Exchange Chain [(X-Chain)](avalanche-platform.md#x-chain)
 
 :::note
-La [Avalanche Mainnet](/learn/avalanche/mainnet.md) está compuesta por la Red Principal y todas las Subredes desplegadas.
+[Avalanche Mainnet](/learn/avalanche/mainnet.md) is comprised of the Primary Network
+and all deployed Subnets.
 :::
 
-Un nodo puede convertirse en un validador de la Red Principal apostando al menos **2,000 AVAX**.
+A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
 
-![Red principal](/img/primary-network.png)
+![Primary network](/img/primary-network.png)
 
-## Las Cadenas
+## The Chains
 
-Todos los validadores de la Red Principal están obligados a validar y asegurar lo siguiente:
+All validators of the Primary Network are required to validate and secure the following:
 
 ### C-Chain
 
-La **C-Chain** es una implementación de la Máquina Virtual Ethereum (EVM). La [API de la C-Chain](/reference/avalanchego/c-chain/api.md) admite la API de Geth y permite el despliegue y la ejecución de contratos inteligentes escritos en Solidity.
+The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM).
+The [C-Chain’s API](/reference/avalanchego/c-chain/api.md) supports Geth's API and supports the
+deployment and execution of smart contracts written in Solidity.
 
-La C-Chain es una instancia de la Máquina Virtual Coreth.
+The C-Chain is an instance of the 
+[Coreth](https://github.com/ava-labs/coreth) Virtual Machine.
 
-### P-Chain
+### P-Chain 
 
-La **P-Chain** es responsable de todas las operaciones a nivel de validador y Subred. La [API de la P-Chain](/reference/avalanchego/p-chain/api.md) admite la creación de nuevas blockchains y Subredes, la adición de validadores a las Subredes, operaciones de apuesta y otras operaciones a nivel de plataforma.
+The **P-Chain** is responsible for all validator and Subnet-level operations.
+The [P-Chain API](/reference/avalanchego/p-chain/api.md) supports the creation of new
+blockchains and Subnets, the addition of validators to Subnets, staking operations, and other
+platform-level operations.
 
-La P-Chain es una instancia de la Máquina Virtual de Plataforma.
+The P-Chain is an instance of the Platform Virtual Machine.
 
-### X-Chain
+### X-Chain 
 
-La **X-Chain** es responsable de las operaciones en activos digitales inteligentes conocidos como **Tokens Nativos de Avalanche**. Un activo inteligente es una representación de un recurso del mundo real (por ejemplo, acciones o bonos) con conjuntos de reglas que rigen su comportamiento, como "no se puede negociar hasta mañana". La [API de la X-Chain](/reference/avalanchego/x-chain/api.md) admite la creación y el intercambio de Tokens Nativos de Avalanche.
+The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native
+Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a
+bond) with sets of rules that govern its behavior, like "can’t be traded until tomorrow."
+The [X-Chain API](/reference/avalanchego/x-chain/api.md) supports the creation and trade of
+Avalanche Native Tokens.
 
-Uno de los activos negociados en la X-Chain es AVAX. Cuando emites una transacción a una blockchain en Avalanche, pagas una tarifa denominada en AVAX.
+One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche,
+you pay a fee denominated in AVAX.
 
-La X-Chain es una instancia de la Máquina Virtual Avalanche (AVM).
+The X-Chain is an instance of the Avalanche Virtual Machine (AVM).
