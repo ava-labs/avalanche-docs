@@ -3,19 +3,43 @@ name: Ava Docs Translate
 
 on:
   issue_comment:
-    types: [ created ]
+    types: [created]
 
 jobs:
   gpt_translate:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3        
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Run Ava Docs Translate
-        if: |
-          contains(github.event.comment.body, '/gt')
+        if: contains(github.event.comment.body, '/gt')
         uses: meaghanfitzgerald/ava-docs-translate@v0.1.31
         with:
           apikey: ${{ secrets.OPENAI_API_KEY }}
-          prompt: 'Use the following step-by-step instructions to respond to user inputs. You will be translating text from the Avalanche Blockchain Developer Documentation website, and therefore it is imperative that you preserve the vocabulary and technicality of this documentation. First, read the whole page and work out your own translation. Then compare the words to the translated text, and determine if any of the key words have been translated by mistake. If they have, follow Step 3. Step 1 - The user will provide you with text from a markdown file. Identify any mention of the key words in the following list: ["Fuji","Avalanche", "Faucet", "Warp Messaging", "Subnet", "Primary Network", "Teleporter", "Validator", "Network Runner", "X-Chain", "C-Chain", "P-Chain", "Staking"]. For example, "Fuji's infrastructure imitates Avalanche Mainnet. It's comprised of a Primary Network formed by instances of X, P, and C-Chain, as well as many test Subnets." will be translated into Japanese as, "Fujiのインフラストラクチャは、Avalancheメインネットを模倣しています。これは、X、P、およびC-Chainのインスタンスによって形成されるPrimary Networkと、多くのテストSubnetで構成されています。" "A Subnet is a sovereign network," will be translated into Japanese as, "Subnetは主権を持つネットワークです。" For example, "For a node to validate a blockchain on Avalanche, it must stake AVAX. A Subnet is a sovereign network, independent of the Primary Network." will be translated into Spanish as, "Para que un nodo valide una blockchain en Avalanche, debe hacer staking de AVAX. Una Subnet es una red soberana, independiente de la Primary Network." After Step 1, follow Step 2. Step 2 - After the key words have been identified, leave all mentions of those words in English, and translate the text from Step 1 into the target Language. Step 3 - If any of the key words have been translated into the target language, translate only those words back to English. Please translate the following text into naturalistic {targetLanguage}.'
+          prompt: >
+            'Use the following step-by-step instructions to respond to user inputs.
+            You will be translating text from the Avalanche Blockchain Developer Documentation website,
+            and therefore it is imperative that you preserve the vocabulary and technicality of this documentation.
+            First, read the whole page and work out your own translation. Then compare the words to the translated text,
+            and determine if any of the key words have been translated by mistake. If they have, follow Step 3.
+
+            Step 1 - The user will provide you with text from a markdown file. Identify any mention of the key words
+            in the following list: ["Fuji","Avalanche", "Faucet", "Warp Messaging", "Subnet", "Primary Network",
+            "Teleporter", "Validator", "Network Runner", "X-Chain", "C-Chain", "P-Chain", "Staking"].
+            For example, "Fuji's infrastructure imitates Avalanche Mainnet. It's comprised of a Primary Network
+            formed by instances of X, P, and C-Chain, as well as many test Subnets." will be translated into Japanese as,
+            "Fujiのインフラストラクチャは、Avalancheメインネットを模倣しています。これは、X、P、およびC-Chainのインスタンスによって形成されるPrimary Networkと、
+            多くのテストSubnetで構成されています。" "A Subnet is a sovereign network," will be translated into Japanese as,
+            "Subnetは主権を持つネットワークです." For example, "For a node to validate a blockchain on Avalanche,
+            it must stake AVAX. A Subnet is a sovereign network, independent of the Primary Network." will be translated
+            into Spanish as, "Para que un nodo valide una blockchain en Avalanche, debe hacer staking de AVAX.
+            Una Subnet es una red soberana, independiente de la Primary Network."
+            After Step 1, follow Step 2.
+
+            Step 2 - After the key words have been identified, leave all mentions of those words in English,
+            and translate the text from Step 1 into the target Language.
+
+            Step 3 - If any of the key words have been translated into the target language,
+            translate only those words back to English. Please translate the following text into naturalistic {targetLanguage}.'
