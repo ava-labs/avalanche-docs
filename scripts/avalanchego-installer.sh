@@ -132,9 +132,15 @@ check_reqs_rhel () {
   fi
 }
 getOsType () {
+foundOS="$(uname)"                              #get OS
+if [ "$foundOS" = "Linux" ]; then
   which yum 1>/dev/null 2>&1 && { echo "RHEL"; return; }
   which zypper 1>/dev/null 2>&1 && { echo "openSUSE"; return; }
   which apt-get 1>/dev/null 2>&1 && { echo "Debian"; return; }
+else
+  echo "$foundOS";
+  return;
+fi
 }
 
 
@@ -241,19 +247,12 @@ elif [ "$osType" = "RHEL" ]; then
   check_reqs_rhel
 else
   #sorry, don't know you.
-  echo "Unsupported linux flavour/distribution: $osType"
+  echo "Unsupported OS or linux distribution found: $osType"
   echo "Exiting."
   exit
 fi
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
-foundOS="$(uname)"                              #get OS
-if [ "$foundOS" != "Linux" ]; then
-  #sorry, don't know you.
-  echo "Unsupported operating system: $foundOS!"
-  echo "Exiting."
-  exit
-fi
 if [ "$foundArch" = "aarch64" ]; then
   getArch="arm64"                               #we're running on arm arch (probably RasPi)
   echo "Found arm64 architecture..."
