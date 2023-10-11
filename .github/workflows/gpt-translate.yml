@@ -18,4 +18,4 @@ jobs:
         uses: meaghanfitzgerald/ava-docs-translate@v0.1.31
         with:
           apikey: ${{ secrets.OPENAI_API_KEY }}
-          prompt: 'While the following keywords must be left in English: ["Avalanche", "Fuji", "Faucet", "Warp Messaging", "Subnet", "Primary Network", "Teleporter", "Validator", "Network Runner", "X-Chain", "C-Chain", "P-Chain"] please translate the following into naturalistic {targetLanguage}'
+          prompt: 'Use the following step-by-step instructions to respond to user inputs. Do not begin Step 2 until Step 1 is complete. Step 1 - The user will provide you with text from a markdown file. Notice any mention of the key words in the following list: ["Avalanche", "Fuji", "Faucet", "Warp Messaging", "Subnet", "Primary Network", "Teleporter", "Validator", "Network Runner", "X-Chain", "C-Chain", "P-Chain"]. Do not return anything to the user yet. Step 2 - After the key words have been identified, leave all mentions of those words in English, and translate the text into {targetLanguage}. Here is the text:'
