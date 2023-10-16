@@ -271,6 +271,23 @@ currently only supports the C-Chain.
 
 Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
 
+### Moralis
+
+[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-chain.
+
+#### Mainnet
+
+- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances, transfers, sales and more
+- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances, transfers, prices, burns, mints and more
+- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances, transaction history, net worth and more
+- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks, transactions, logs and events
+- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about any on-chain event
+
+Features:
+
+- Free plan available
+- Supports all major EVM networks
+
 ### QuickNode
 
 [QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
