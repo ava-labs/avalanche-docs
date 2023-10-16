@@ -273,7 +273,7 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 
 ### Moralis
 
-[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-chain.
+[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-Chain.
 
 #### Mainnet
 
