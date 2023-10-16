@@ -262,8 +262,7 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### Infura
 
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network)
-currently only supports the C-Chain.
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently only supports the C-Chain.
 
 #### HTTP
 
