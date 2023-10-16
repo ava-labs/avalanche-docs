@@ -5,7 +5,7 @@ sidebar_label: Preparing Your Environment
 sidebar_position: 0
 ---
 
-# Setting Up Your Environment and Network for AvalancheGo
+# Run an Avalanche Node Using the Install Script
 
 We have a shell (bash) script that installs AvalancheGo on your computer. This
 script sets up full, running node in a matter of minutes with minimal user input
