@@ -277,9 +277,9 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 
 Features:
 
- - Generous free tier
- - Globally distributed infrastructure in 3+ geographic regions
- - Decentralized and Centralized API's
+- Generous free tier
+- Globally distributed infrastructure in 3+ geographic regions
+- Decentralized and Centralized API's
 
 #### HTTP
 
