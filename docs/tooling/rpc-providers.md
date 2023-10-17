@@ -276,6 +276,7 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 [Nodies](https://nodies.app) supports the C, X, P, and DFK Subnet chains.
 
 Features:
+
  - Generous free tier
  - Globally distributed infrastructure in 3+ geographic regions
  - Decentralized and Centralized API's
