@@ -182,6 +182,7 @@ minimalistic
 mintable
 Mintable
 mmap'd
+Moralis
 Morty
 multicurrency
 Multiput
