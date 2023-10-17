@@ -70,7 +70,7 @@ or on their own Subnet using the
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
 
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask,
-Truffle, and more.
+thirdweb, and more.
 
 To learn more about smart contract support, click [here](build/dapp/launch-dapp.md).
 

@@ -131,7 +131,7 @@ home. We have tutorials and repositories for several popular development
 environments:
 
 - [Core and Remix](/build/dapp/smart-contracts/remix-deploy.md)
-- [Truffle](/build/dapp/smart-contracts/toolchains/truffle.md)
+- [thirdweb](/build/dapp/smart-contracts/toolchains/thirdweb.md)
 - [Hardhat](/build/dapp/smart-contracts/toolchains/hardhat.md)
 
 ## Ingesting On-Chain Data

@@ -284,6 +284,20 @@ P-Chain, C-Chain, and Index API.
 
 - The URL is  `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
 
+### Stackup
+
+[Stackup](https://www.stackup.sh) currently supports the Avalanche C-Chain on Mainnet and Fuji Testnet.
+
+Features:
+
+- Free
+- Account abstraction RPC endpoints
+- ERC-4337 bundlers and paymasters
+
+#### HTTP
+
+- The URL is `https://api.stackup.sh/v1/node/YOUR-API-KEY`
+
 ### NOWNodes
 
 [NOWNodes](https://nownodes.io/nodes/avalanche-avax) supports the X-Chain, P-Chain, C-Chain, and Blockbook.

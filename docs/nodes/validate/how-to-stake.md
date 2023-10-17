@@ -71,7 +71,7 @@ On Fuji Testnet, all staking parameters are the same as those on Mainnet except 
 
 ## Validators
 
-**Validators** secure Avalanche, create new blocks/vertices, and process
+**Validators** secure Avalanche, create new blocks, and process
 transactions. To achieve consensus, validators repeatedly sample each other. The
 probability that a given validator is sampled is proportional to its stake.
 
