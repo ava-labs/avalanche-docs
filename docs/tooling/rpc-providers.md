@@ -262,7 +262,8 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### Infura
 
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently only supports the C-Chain.
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently
+only supports the C-Chain.
 
 #### HTTP
 
@@ -276,11 +277,16 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 
 #### Mainnet
 
-- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances, transfers, sales and more
-- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances, transfers, prices, burns, mints and more
-- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances, transaction history, net worth and more
-- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks, transactions, logs and events
-- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about any on-chain event
+- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances,
+transfers, sales and more
+- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances,
+transfers, prices, burns, mints and more
+- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances,
+transaction history, net worth and more
+- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks,
+transactions, logs and events
+- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about
+any on-chain event
 
 Features:
 
