@@ -271,6 +271,24 @@ currently only supports the C-Chain.
 
 Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
 
+### Nodies
+
+[Nodies](https://nodies.app) supports the C, X, P, and DFK Subnet chains.
+
+Features:
+
+- Generous free tier
+- Globally distributed infrastructure in 3+ geographic regions
+- Decentralized and Centralized API's
+
+#### HTTP
+
+- For `C-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
+- For `X-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
+- For `P-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
+- For `DFK-Subnet`, the URL is
+`https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
+
 ### QuickNode
 
 [QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
