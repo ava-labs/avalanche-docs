@@ -286,7 +286,9 @@ Features:
 - For `C-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
 - For `X-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
 - For `P-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
-- For `DFK-Subnet`, the URL is `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
+- For `DFK-Subnet`, the URL is
+`https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
+
 ### QuickNode
 
 [QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
