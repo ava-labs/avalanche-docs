@@ -24,7 +24,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
+- Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator-aws.md)
 - Created a Custom VM, as described [here](/docs/build/vm/intro.md).
 - Set up a key to be able to pay for the Fuji Fees, as described [here](/docs/build/subnet/deploy/fuji-testnet-subnet.md).
 
