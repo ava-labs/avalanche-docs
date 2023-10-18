@@ -81,10 +81,33 @@ Es posible que no necesites editar las tarifas de gas en días normales. Esto so
 
     ![dynamic fees adjustment 1](/img/adjust-gas-fees/adjust-gas1.png)
 
+    </div>
+
 2. En esta página, puedes editar la tarifa de prioridad (Tarifa máxima de prioridad) y la tarifa base (Tarifa máxima base). Puedes estimar la tarifa máxima como se muestra en [Snowtrace](https://snowtrace.io/gastracker), que representa la tarifa máxima promedio en los últimos 3 segundos. Para estadísticas más detalladas, puedes echar un vistazo [aquí](https://stats.avax.network/dashboard/c-chain-activity/).
 
+    <div style={{textAlign: 'center'}}>
+
+    ![dynamic fees adjustment 2](/img/adjust-gas-fees/adjust-gas2.png)
+
+    </div>
+
 3. Si la actividad de la red es alta, debes editar las tarifas de prioridad y máximas en consecuencia, según lo indicado en Snowtrace. Considera el ejemplo a continuación, donde la tarifa máxima promedio es de 26 Gwei (nAVAX).
+![dynamic fees adjustment 3](/img/adjust-gas-fees/adjust-gas3.png)
 
 4. Se recomienda establecer el límite de la tarifa máxima como el precio máximo que estás dispuesto a pagar por una transacción, sin importar cuán alta o baja sea la tarifa base, ya que solo se te cobrará el mínimo entre la tarifa base y el límite de la tarifa máxima, junto con una pequeña tarifa de prioridad por encima de la tarifa base. Ahora, editemos la tarifa máxima a 35 Gwei. Esto aseguraría que nuestra transacción no falle hasta que la tarifa base supere esta cantidad. Podemos establecer una tarifa de prioridad en cualquier valor entre 0 y 35 Gwei. Cuanto más alta sea la tarifa de prioridad, más rápida será la transacción. Para este ejemplo, establezcamos esto en 2 Gwei. Ahora, guarda y envía la transacción.
 
+    <div style={{textAlign: 'center'}}>
+
+    ![dynamic fees adjustment 4](/img/adjust-gas-fees/adjust-gas4.png)
+    
+    </div>
+
 5. Después de enviar la transacción, incluso si la tarifa base ha disminuido, solo pagarás 2 Gwei por encima de esa tarifa como tarifa de prioridad. Si esta tarifa es una de las más altas entre las transacciones pendientes, entonces se confirmará rápidamente. Podemos ver la confirmación de la transacción a continuación.
+
+    <div style={{textAlign: 'center'}}>
+
+    ![dynamic fees adjustment 5](/img/adjust-gas-fees/adjust-gas5.png)
+    
+    </div>
+
+    ![dynamic fees adjustment 6](/img/adjust-gas-fees/adjust-gas6.png)

@@ -4,6 +4,7 @@
   "whitespace": false,
   "MD013": {
     "code_blocks": false,
+    "line_length": 30000,
     "tables": false
   },
   "MD024": false,
