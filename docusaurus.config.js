@@ -237,6 +237,11 @@ const config = {
               },
               {
                 type: "docSidebar",
+                label: "Cross Chain",
+                sidebarId: "build-cross-chain",
+              },
+              {
+                type: "docSidebar",
                 label: "Virtual Machines",
                 sidebarId: "build-vm",
               },
