@@ -1,60 +1,39 @@
 ---
-tags: [Avax, Tokenomics]
-description: AVAX is the limited-supply token of the Avalanche network, used to cover fees, enhance security via staking, and facilitate transactions across its various Subnets.
-keywords: [documentation, avalanche, avax token, tokenomics, avax utility]
-sidebar_label: AVAX Token
+etiquetas: [Avax, Tokenomics]
+descripción: AVAX es el token de suministro limitado de la red Avalanche, utilizado para cubrir tarifas, mejorar la seguridad a través del staking y facilitar transacciones en sus diversas Subnets.
+palabras clave: [documentación, avalanche, token avax, tokenomics, utilidad avax]
+sidebar_label: Token AVAX
 ---
 
 # AVAX
 
-AVAX is the native utility token of Avalanche. It’s a hard-capped, scarce asset that is used to
-pay for fees, secure the platform through staking, and provide a basic unit of account between the
-multiple Subnets created on Avalanche. 
+AVAX es el token de utilidad nativo de Avalanche. Es un activo de suministro limitado y escaso que se utiliza para pagar tarifas, asegurar la plataforma a través del staking y proporcionar una unidad básica de cuenta entre las múltiples Subnets creadas en Avalanche.
 
 :::info
 
-- `1 nAVAX` is equal to `0.000000001 AVAX`.
+- `1 nAVAX` es igual a `0.000000001 AVAX`.
 
 :::
 
-## Utility
+## Utilidad
 
-AVAX is a capped-supply (up to 720M) resource in the Avalanche ecosystem that's used to power the
-network. AVAX is used to secure the ecosystem through staking and for day-to-day operations like
-issuing transactions.
+AVAX es un recurso de suministro limitado (hasta 720M) en el ecosistema Avalanche que se utiliza para alimentar la red. AVAX se utiliza para asegurar el ecosistema a través del staking y para operaciones diarias como emitir transacciones.
 
-AVAX represents the weight that each node has in network decisions. No single actor owns
-the Avalanche Network, so each validator in the network is given a proportional weight in the
-network's decisions corresponding to the proportion of total stake that they own through proof
-of stake (PoS).
+AVAX representa el peso que cada nodo tiene en las decisiones de la red. Ningún actor único es dueño de la Red Avalanche, por lo que cada validador en la red recibe un peso proporcional en las decisiones de la red correspondiente a la proporción de la participación total que poseen a través de la prueba de participación (PoS).
 
-Any entity trying to execute a transaction on Avalanche pays a corresponding fee (commonly known as
-"gas") to run it on the network. The fees used to execute a transaction on Avalanche is burned,
-or permanently removed from circulating supply.
+Cualquier entidad que intente ejecutar una transacción en Avalanche paga una tarifa correspondiente (comúnmente conocida como "gas") para ejecutarla en la red. Las tarifas utilizadas para ejecutar una transacción en Avalanche se queman, es decir, se eliminan permanentemente del suministro en circulación.
 
 ## Tokenomics
 
-A fixed amount of 360M AVAX was minted at genesis, but a small amount of AVAX is constantly minted
-as a reward to validators. The protocol rewards validators for good behavior by minting them AVAX
-rewards at the end of their staking period. The minting process offsets the AVAX burned by
-transactions fees. While AVAX is still far away from its supply cap, it will almost always remain an
-inflationary asset.
+Se acuñó una cantidad fija de 360M de AVAX en el génesis, pero una pequeña cantidad de AVAX se acuña constantemente como recompensa para los validadores. El protocolo recompensa a los validadores por un buen comportamiento acuñándoles recompensas de AVAX al final de su período de staking. El proceso de acuñación compensa el AVAX quemado por las tarifas de transacción. Aunque AVAX todavía está lejos de alcanzar su límite de suministro, casi siempre seguirá siendo un activo inflacionario.
 
-Avalanche does not take away any portion of a validator's already staked tokens (commonly known as
-"slashing") for negligent/malicious staking periods, however this behavior is disincentivized as
-validators who attempt to do harm to the network would expend their node's computing resources
-for no reward.
+Avalanche no elimina ninguna parte de los tokens ya apostados de un validador (comúnmente conocido como "slashing") por períodos de staking negligentes/maliciosos, sin embargo, este comportamiento está desincentivado ya que los validadores que intentan hacer daño a la red gastarían los recursos de cómputo de su nodo sin ninguna recompensa.
 
 <!-- vale off -->
 
-AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at 
-year $j$, with $R_1 = 360M$, and $R_l$ representing the last year that the values of
-$\gamma,\lambda \in \R$ were changed; $c_j$ is the yet un-minted supply of coins to reach $720M$ at
-year $j$ such that $c_j \leq 360M$; $u$ represents a staker, with $u.s_{amount}$ representing the
-total amount of stake that $u$ possesses, and $u.s_{time}$ the length of staking for $u$.
+AVAX se acuña de acuerdo con la siguiente fórmula, donde $R_j$ es el número total de tokens en el año $j$, con $R_1 = 360M$, y $R_l$ representa el último año en que se cambiaron los valores de $\gamma,\lambda \in \R$; $c_j$ es el suministro de monedas aún no acuñadas para alcanzar $720M$ en el año $j$, de modo que $c_j \leq 360M$; $u$ representa un staker, con $u.s_{amount}$ que representa la cantidad total de stake que $u$ posee, y $u.s_{time}$ la duración del staking para $u$.
 
-AVAX is minted according to the following formula, where $R_j$ is the total number of tokens at:
-
+AVAX se acuña de acuerdo con la siguiente fórmula, donde $R_j$ es el número total de tokens en:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -64,29 +43,20 @@ $$
 
 <!-- markdownlint-enable MD013 -->
 
-where
+donde
 
 $$
 L = \left(\sum_{i=0}^{\infty} \frac{1}{\left(\gamma + \frac{1}{1 + i^\lambda} \right)^i} \right)
 $$
 
-At genesis, $c_1 = 360M$. The values of $\gamma$ and $\lambda$ are governable, and if changed,
-the function is recomputed with the new value of $c_*$. We have that $\sum_{*}\rho(*) \le 1$.
-$\rho(*)$ is a linear function that can be computed as follows ($u.s_{time}$ is measured in weeks,
-and $u.s_{amount}$ is measured in AVAX tokens):
+En el génesis, $c_1 = 360M$. Los valores de $\gamma$ y $\lambda$ son gobernables y, si se cambian, la función se recalcula con el nuevo valor de $c_*$. Tenemos que $\sum_{*}\rho(*) \le 1$. $\rho(*)$ es una función lineal que se puede calcular de la siguiente manera (el tiempo de $u.s_{time}$ se mide en semanas y la cantidad de $u.s_{amount}$ se mide en tokens AVAX):
 
 $$
 \rho(u.s_{amount}, u.s_{time}) = (0.002 \times u.s_{time} + 0.896) \times \frac{u.s_{amount}}{R_j}
 $$
 
-If the entire supply of tokens at year $j$ is staked for the maximum amount of staking time (one
-year, or 52 weeks), then $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. If, instead,
-every token is staked continuously for the minimal stake duration of two weeks, then
-$\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Therefore, staking for the maximum
-amount of time incurs an additional 11.11% of tokens minted, incentivizing stakers to stake
-for longer periods.
+Si todo el suministro de tokens en el año $j$ se apuesta durante el máximo tiempo de staking (un año, o 52 semanas), entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. Si, en cambio, cada token se apuesta continuamente durante la duración mínima de stake de dos semanas, entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Por lo tanto, el staking durante el máximo tiempo de duración incurre en una cantidad adicional del 11.11% de tokens acuñados, incentivando a los stakers a apostar por períodos más largos.
 
-Due to the capped-supply, the above function guarantees that regardless of the governance changes,
-AVAX will never exceed a total of $720M$ tokens, or $\lim_{j \to \infty} R(j) = 720M$.
+Debido al suministro limitado, la función anterior garantiza que, independientemente de los cambios de gobernanza, AVAX nunca excederá un total de $720M$ tokens, o $\lim_{j \to \infty} R(j) = 720M$.
 
 <!-- vale on -->

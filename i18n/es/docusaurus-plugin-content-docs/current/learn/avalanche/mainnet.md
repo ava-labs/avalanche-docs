@@ -1,19 +1,19 @@
 ---
-tags: [Primary Network, Subnets]
-description: Avalanche Mainnet is the final and production-ready version of the blockchain where users can interact with the network and transact with real world assets.
-keywords: [docs, mainnet, primary network, real world assets, build on avalanche]
+etiquetas: [Red Primaria, Subredes]
+descripción: Avalanche Mainnet es la versión final y lista para producción de la blockchain donde los usuarios pueden interactuar con la red y realizar transacciones con activos del mundo real.
+palabras clave: [documentación, mainnet, red primaria, activos del mundo real, construir en avalanche]
 sidebar_label: Mainnet
 ---
 
 # Avalanche Mainnet
 
-The Avalanche Mainnet refers to the main network of the Avalanche blockchain where real transactions
-and smart contract executions occur. It is the final and production-ready version of the
-blockchain where users can interact with the network and transact with real world assets.
+La Avalanche Mainnet se refiere a la red principal de la blockchain Avalanche donde ocurren transacciones reales
+y ejecuciones de contratos inteligentes. Es la versión final y lista para producción de la
+blockchain donde los usuarios pueden interactuar con la red y transaccionar con activos del mundo real.
 
-A _network of networks_, Avalanche Mainnet includes the 
-[Primary Network](/learn/avalanche/avalanche-platform.md)
-formed by the X, P, and C-Chain, as well as all in-production 
-[Subnets](/learn/avalanche/subnets-overview.md). These Subnets are independent blockchain sub-networks
-that can be tailored to specific application use cases, use their own consensus mechanisms, define
-their own token economics, and be run by different [virtual machines](/learn/avalanche/virtual-machines.md).
+Una _red de redes_, la Avalanche Mainnet incluye la
+[Red Primaria](/learn/avalanche/avalanche-platform.md)
+formada por las cadenas X, P y C, así como todas las Subredes
+[en producción](/learn/avalanche/subnets-overview.md). Estas Subredes son subredes de blockchain independientes
+que pueden adaptarse a casos de uso de aplicaciones específicas, utilizar sus propios mecanismos de consenso, definir
+su propia economía de tokens y ser ejecutadas por diferentes [máquinas virtuales](/learn/avalanche/virtual-machines.md).

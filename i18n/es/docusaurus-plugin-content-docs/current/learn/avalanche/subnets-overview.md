@@ -1,98 +1,74 @@
 ---
-tags: [Subnet]
-description: A Subnet is a dynamic set of validators working together to achieve consensus on the state of a set of blockchain networks.
-keywords: [docs, avalanche, subnets, sovereign blockchains, interoperability]
+etiquetas: [Subnet]
+descripción: Una Subnet es un conjunto dinámico de validadores que trabajan juntos para lograr consenso sobre el estado de un conjunto de redes blockchain.
+palabras clave: [documentación, avalanche, subnets, blockchains soberanas, interoperabilidad]
 sidebar_label: Subnets
 ---
 
-# What Is a Subnet?
+# ¿Qué es una Subnet?
 
-A **Subnet** is a sovereign network which defines its own rules regarding its
-membership and token economics. It is composed of a dynamic subset of Avalanche
-validators working together to achieve consensus on the state of one or more
-blockchains. Each blockchain is validated by exactly one Subnet, while a Subnet
-can validate many blockchains.
+Una **Subnet** es una red soberana que define sus propias reglas con respecto a su membresía y economía de tokens. Está compuesta por un subconjunto dinámico de validadores Avalanche que trabajan juntos para lograr consenso sobre el estado de una o más blockchains. Cada blockchain es validada por exactamente una Subnet, mientras que una Subnet puede validar muchas blockchains.
 
-Avalanche's [Primary Network](avalanche-platform.md) is a special Subnet running three blockchains:
+La [Red Primaria](avalanche-platform.md) de Avalanche es una Subnet especial que ejecuta tres blockchains:
 
-- The Platform Chain [(P-Chain)](/learn/avalanche/avalanche-platform#p-chain)
-- The Contract Chain [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
-- The Exchange Chain [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
+- La Cadena de Plataforma [(P-Chain)](/learn/avalanche/avalanche-platform#p-chain)
+- La Cadena de Contratos [(C-Chain)](/learn/avalanche/avalanche-platform#c-chain)
+- La Cadena de Intercambio [(X-Chain)](/learn/avalanche/avalanche-platform#x-chain)
 
-![image](/img/subnet-validators.png)
+![imagen](/img/subnet-validators.png)
 
-(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+(Imagen adoptada de [este artículo](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
 
 :::info
-Every validator in a Subnet
-**must** also validate the Primary Network.
+Cada validador en una Subnet
+**debe** validar también la Red Primaria.
 :::
 
-Node operators that validate a Subnet with multiple chains do not need to run multiple machines for 
-validation. For example, the Primary Network is a Subnet with three coexisting chains, all of which 
-can be validated by a single node, or a single machine.
+Los operadores de nodos que validan una Subnet con múltiples blockchains no necesitan ejecutar múltiples máquinas para validación. Por ejemplo, la Red Primaria es una Subnet con tres blockchains coexistentes, todas las cuales pueden ser validadas por un solo nodo o una sola máquina.
 
-## Advantages
+## Ventajas
 
-### Independent Networks
+### Redes Independientes
 
-- Subnets use virtual machines to specify their own execution logic, determine their
-own fee regime, maintain their own state, facilitate their own networking, and
-provide their own security. 
-- Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on
-one Subnet won't affect another.
-- Subnets can have their own token economics with their own native tokens, fee
-markets, and incentives determined by the Subnet deployer. 
-- One Subnet can host multiple blockchains with customized [virtual machines](virtual-machines.md).
+- Las Subnets utilizan máquinas virtuales para especificar su propia lógica de ejecución, determinar su régimen de tarifas, mantener su propio estado, facilitar su propia red y proporcionar su propia seguridad.
+- El rendimiento de cada Subnet está aislado de otras Subnets en el ecosistema, por lo que un aumento en el uso en una Subnet no afectará a otra.
+- Las Subnets pueden tener su propia economía de tokens con sus propios tokens nativos, mercados de tarifas e incentivos determinados por el desplegador de la Subnet.
+- Una Subnet puede alojar múltiples blockchains con [máquinas virtuales](virtual-machines.md) personalizadas.
 
-### Native Interoperability
+### Interoperabilidad Nativa
 
-- Avalanche Warp Messaging enables native cross-Subnet communication and allows Virtual Machine (VM)
-developers to implement arbitrary communication protocols between any two Subnets.
+- Avalanche Warp Messaging permite la comunicación nativa entre Subnets y permite a los desarrolladores de Máquinas Virtuales (VM) implementar protocolos de comunicación arbitrarios entre cualquier par de Subnets.
 
+### Acomodar Requisitos Específicos de Aplicación
 
-### Accommodate Application-Specific Requirements
+_Las diferentes aplicaciones basadas en blockchain pueden requerir que los validadores tengan ciertas propiedades como grandes cantidades de RAM o poder de CPU._
 
-_Different blockchain-based applications may require validators to have certain
-properties such as large amounts of RAM or CPU power._ 
+- Una Subnet podría requerir que los validadores cumplan con ciertos [requisitos de hardware](/nodes/run/node-manually.md#requirements) para que la aplicación no sufra un rendimiento bajo debido a validadores lentos.
 
-- A Subnet could require that validators
-meet certain [hardware requirements](/nodes/run/node-manually.md#requirements) so
-that the application doesn’t suffer from low performance due to slow validators.
+### Lanzar una Red Diseñada con Cumplimiento en Mente
 
-### Launch a Network Designed With Compliance In Mind
+_La arquitectura de Subnet de Avalanche hace que el cumplimiento regulatorio sea manejable. Como se mencionó anteriormente, una Subnet puede requerir que los validadores cumplan con un conjunto de requisitos._
 
-_Avalanche’s Subnet architecture makes regulatory compliance manageable. As
-mentioned above, a Subnet may require validators to meet a set of requirements._
+Algunos ejemplos de requisitos que los creadores de una Subnet pueden elegir incluir son:
 
-Some examples of requirements the creators of a Subnet may choose include:
+- Los validadores deben ubicarse en un país determinado.
+- Los validadores deben pasar controles KYC/AML.
+- Los validadores deben tener una licencia específica.
 
-- Validators must be located in a given country.
-- Validators must pass KYC/AML checks.
-- Validators must hold a certain license.
+### Controlar la Privacidad de los Datos en la Cadena
 
-### Control The Privacy of On-Chain Data
+_Las Subnets son ideales para organizaciones interesadas en mantener su información privada._
 
-_Subnets are ideal for organizations interested in keeping their information private._
+- Las instituciones conscientes de la privacidad de sus partes interesadas pueden crear una Subnet privada donde el contenido de las blockchains sea visible solo para un conjunto de validadores preaprobados. Esto se define en la creación con un [parámetro único](/nodes/configure/subnet-configs.md#private-subnet).
 
-- Institutions conscious of their stakeholders' privacy can create a private Subnet where the
-contents of the blockchains would be visible only to a set of pre-approved validators. 
-Define this at creation with a [single parameter](/nodes/configure/subnet-configs.md#private-subnet).
+### Soberanía del Validador
 
-### Validator Sovereignty
+_En una red heterogénea de blockchains, algunos validadores no querrán validar ciertas blockchains porque simplemente no tienen interés en esas blockchains._
 
-_In a heterogeneous network of blockchains, some validators will not want to
-validate certain blockchains because they simply have no interest in those
-blockchains._
- 
-- The Subnet model enables validators to concern themselves only with
-blockchain networks they choose to participate in. This greatly reduces the computational burden on validators.
+- El modelo de Subnet permite a los validadores preocuparse solo por las redes blockchain en las que eligen participar. Esto reduce en gran medida la carga computacional en los validadores.
 
-## Develop Your Own Subnet
+## Desarrolla tu propia Subnet
 
-Subnets on Avalanche are deployed by default with [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm),
-a fork of go-ethereum. It implements the Ethereum Virtual Machine and supports Solidity smart 
-contracts as well as most other Ethereum client functionality.
+Las Subnets en Avalanche se despliegan por defecto con [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm), un fork de go-ethereum. Implementa la Máquina Virtual Ethereum y soporta contratos inteligentes en Solidity, así como la mayoría de las demás funcionalidades de los clientes Ethereum.
 
-To get started, check out the tutorials in our [Subnets](/build/subnet/hello-subnet.md)
-section.
+Para empezar, echa un vistazo a los tutoriales en nuestra sección de [Subnets](/build/subnet/hello-subnet.md).

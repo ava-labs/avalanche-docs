@@ -1,78 +1,50 @@
 ---
-tags: [Avalanche Warp Messaging, Cross-Subnet Communication]
-description: AWM allows seamless communication between different subnetworks on Avalanche, enabling developers to establish custom communication protocols.
-keywords: [docs, documentation, avalanche, avalanche warp messaging, awm, cross-subnet communication, cross-chain, ]
+etiquetas: [Avalanche Warp Messaging, Comunicación entre subredes]
+descripción: AWM permite una comunicación fluida entre diferentes subredes en Avalanche, permitiendo a los desarrolladores establecer protocolos de comunicación personalizados.
+palabras clave: [docs, documentación, avalanche, avalanche warp messaging, awm, comunicación entre subredes, cross-chain]
 sidebar_label: Avalanche Warp Messaging
 ---
 
 # Avalanche Warp Messaging
 
-Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows [Virtual Machine
-(VM)](/learn/avalanche/subnets-overview.md#virtual-machines) developers to implement arbitrary
-communication protocols
-between any two Subnets.
+Avalanche Warp Messaging (AWM) permite la comunicación nativa entre subredes y permite a los desarrolladores de Máquinas Virtuales (VM) implementar protocolos de comunicación arbitrarios entre cualquier par de subredes.
 
-## Use Cases 
+## Casos de Uso
 
-Use cases for AWM may include but is not limited to:
+Los casos de uso para AWM pueden incluir, pero no se limitan a:
 
-- Oracle Networks: Connecting a Subnet to an oracle network is a costly process. AWM makes it easy
-  for oracle networks to broadcast their data from their origin chain to other Subnets.
-- Token transfers between Subnets 
-- State Sharding between multiple Subnets
+- Redes de Oráculos: Conectar una subred a una red de oráculos es un proceso costoso. AWM facilita que las redes de oráculos transmitan sus datos desde su cadena de origen a otras subredes.
+- Transferencias de tokens entre subredes
+- Shardización de estado entre múltiples subredes
 
-## Elements of Cross-Subnet Communication
+## Elementos de la Comunicación entre Subredes
 
-The communication consists of the following four steps:
+La comunicación consta de los siguientes cuatro pasos:
 
-![image showing four steps of cross-Subnet communication: Signing, aggregation, Delivery and Verification](/img/cross-subnet-communication.png)
+![imagen que muestra los cuatro pasos de la comunicación entre subredes: Firma, agregación, entrega y verificación](/img/cross-subnet-communication.png)
 
-### Signing Messages on the Origin Subnet
+### Firma de Mensajes en la Subred de Origen
 
-AWM is a low-level messaging protocol. Any type of data encoded in an array of bytes can be included
-in the message sent to another Subnet. AWM uses the [BLS signature
-scheme](https://crypto.stanford.edu/~dabo/pubs/papers/BLSmultisig.html), which allows message
-recipients to verify the authenticity of these messages. Therefore, every validator on the Avalanche
-network holds a BLS key pair, consisting of a private key for signing messages and a public key that
-others can use to verify the signature.
+AWM es un protocolo de mensajería de bajo nivel. Cualquier tipo de datos codificados en un arreglo de bytes puede incluirse en el mensaje enviado a otra subred. AWM utiliza el esquema de firma BLS, que permite a los destinatarios del mensaje verificar la autenticidad de estos mensajes. Por lo tanto, cada validador en la red Avalanche tiene un par de claves BLS, que consiste en una clave privada para firmar mensajes y una clave pública que otros pueden usar para verificar la firma.
 
-### Signature Aggregation on the Origin Subnet
+### Agregación de Firmas en la Subred de Origen
 
-If the validator set of a Subnet is very large, this would result in the Subnet's validators sending
-many signatures between them. One of the powerful features of BLS is the ability to aggregate many
-signatures of different signers in a single multi-signature. Therefore, validators of one Subnet can
-now individually sign a message and these signatures are then aggregated into a short
-multi-signature that can be quickly verified.
+Si el conjunto de validadores de una subred es muy grande, esto resultaría en que los validadores de la subred envíen muchas firmas entre ellos. Una de las características poderosas de BLS es la capacidad de agregar muchas firmas de diferentes firmantes en una sola firma múltiple. Por lo tanto, los validadores de una subred ahora pueden firmar individualmente un mensaje y estas firmas se agregan en una firma múltiple corta que se puede verificar rápidamente.
 
-### Delivery of Messages to the Destination Subnet
+### Entrega de Mensajes a la Subred de Destino
 
-The messages do not pass through a central protocol or trusted entity, and there is no record of
-messages sent between Subnets on the primary network. This avoids a bottleneck in Subnet-to-Subnet
-communication, and non-public Subnets can communicate privately.
+Los mensajes no pasan a través de un protocolo central o una entidad de confianza, y no hay registro de los mensajes enviados entre subredes en la red primaria. Esto evita un cuello de botella en la comunicación de subred a subred, y las subredes no públicas pueden comunicarse de forma privada.
 
-It is up to the Subnets and their users to determine how they want to transport data from the
-validators of the origin Subnet to the validators of the destination Subnet and what guarantees they
-want to provide for the transport.
+Depende de las subredes y sus usuarios determinar cómo quieren transportar los datos desde los validadores de la subred de origen a los validadores de la subred de destino y qué garantías quieren proporcionar para el transporte.
 
-### Verification of Messages in the Destination Subnet
+### Verificación de Mensajes en la Subred de Destino
 
-When a Subnet wants to process another Subnet's message, it will look up both BLS Public Keys and
-stake of the origin Subnet. The authenticity of the message can be verified using these public keys
-and the signature.
+Cuando una subred quiere procesar el mensaje de otra subred, buscará tanto las Claves Públicas BLS como la participación de la subred de origen. La autenticidad del mensaje se puede verificar utilizando estas claves públicas y la firma.
 
-The combined weight of the validators that must be part of the BLS multi-signature to be considered
-valid can be set according to the individual requirements of each Subnet-to-Subnet communication.
-Subnet A may accept messages from Subnet B that are signed by at least 70% of stake. Messages from
-Subnet C are only accepted if they have been signed by validators that account for 90% of the stake.
+El peso combinado de los validadores que deben formar parte de la firma múltiple BLS para considerarse válida se puede establecer de acuerdo con los requisitos individuales de cada comunicación de subred a subred. La subred A puede aceptar mensajes de la subred B que estén firmados por al menos el 70% de la participación. Los mensajes de la subred C solo se aceptan si han sido firmados por validadores que representan el 90% de la participación.
 
-Since all validators' public keys of the validators and their stake weights are recorded on the
-primary network's P-chain, they are readily accessible to any virtual machine run by the validators.
-Therefore, the Subnets do not need to communicate with each other about changes in their respective
-sets of validators, but can simply rely on the latest information on the P-Chain. Therefore, AWM
-introduces no additional trust assumption other than that the validators of the origin Subnet are
-participating honestly.
+Dado que todas las claves públicas de los validadores y sus pesos de participación se registran en la cadena P de la red primaria, son fácilmente accesibles para cualquier máquina virtual ejecutada por los validadores. Por lo tanto, las subredes no necesitan comunicarse entre sí sobre cambios en sus respectivos conjuntos de validadores, sino que pueden confiar simplemente en la información más reciente en la Cadena P. Por lo tanto, AWM no introduce ninguna suposición de confianza adicional aparte de que los validadores de la subred de origen están participando honestamente.
 
-## Reference Implementation
+## Implementación de Referencia
 
-A Proof-of-Concept VM called [XSVM](https://github.com/ava-labs/xsvm) was created to demonstrate the
-power of AWM. XSVM enables simple AWM transfers between any two Subnets if run out-of-the-box.
+Se creó una VM de prueba de concepto llamada [XSVM](https://github.com/ava-labs/xsvm) para demostrar el poder de AWM. XSVM permite transferencias simples de AWM entre cualquier par de subredes si se ejecuta tal como está.
