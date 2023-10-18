@@ -13,19 +13,19 @@ a Solidity smart contract. It provides a mechanism to asynchronously invoke smar
 on other EVM blockchains within Avalanche. Teleporter provides a handful of useful features on top 
 of AWM, such as specifying relayer incentives for message delivery, replay protection, message
 delivery and execution retries, and a standard interface for sending and receiving messages within
-a dapp deployed across multiple subnets.
+a dapp deployed across multiple Subnets.
 
 It's important to understand the distinction between Avalanche Warp Messaging and Teleporter. AWM 
-allows subnets to communicate with each other via authenticated messages by providing signing and 
-verification primitives in Avalanchego. These are used by the blockchain VMs to sign outgoing 
+allows Subnets to communicate with each other via authenticated messages by providing signing and 
+verification primitives in AvalancheGo. These are used by the blockchain VMs to sign outgoing 
 messages and verify incoming messages.
 
 The Teleporter protocol, on the other hand, is implemented at the smart contract level, and is a 
 user-friendly interface to AWM, aimed at dapp developers. All of the message signing and 
 verification is abstracted away from developers. Instead, developers simply call 
 `sendCrossChainMessage` on the `TeleporterMessenger` contract to send a message invoking a smart 
-contract on another subnet, and implement the `ITeleporterReceiver` interface to receive messages 
-on the destination subnet. Teleporter handles all of the message signing and verification, as well 
+contract on another Subnet, and implement the `ITeleporterReceiver` interface to receive messages 
+on the destination Subnet. Teleporter handles all of the message signing and verification, as well 
 as the message delivery and execution.
 
 :::note
