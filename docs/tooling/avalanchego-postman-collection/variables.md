@@ -8,24 +8,38 @@ sidebar_position: 3
 # Variables
 
 ## Variable Types
-Variables at different scopes are supported by Postman, as it follows:
-* **Global variables :** A global variable can be used with every collection. Basically, it allows user to access data 
-between collections. 
-* **Collection variables:** They are available for a certain collection and are independent of an environment.
-* **Environment variables:** An environment allows you to use a set of variables, which are called environment variables.
-Every collection can use an environment at a time, but the same environment can be used with multiple collections.
-This type of variables make the most sense to use with the Avalanche Postman collection,
+
+Variables at different scopes are supported by Postman,
+as it follows:
+
+* **Global variables :** A global variable can be used with every collection. Basically,
+it allows user to access data between collections. 
+
+* **Collection variables:** They are available for a certain collection
+ and are independent of an environment.
+
+* **Environment variables:** An environment allows you to use a set of variables,
+which are called environment variables.
+Every collection can use an environment at a time,
+but the same environment can be used with multiple collections.
+This type of variables make the most sense to use with
+the Avalanche Postman collection,
 therefore an environment file with preset variables is provided
+
 * **Data variables:** Provided by external CSV and JSON files.
-* **Local variables:** Temporary variables that can be used in a script. For example,
-returned block number from querying a transaction can be a local variable. It exists
-only for that request, and it will change when fetching data for another transaction
+
+* **Local variables:** Temporary variables that can be used in a script. 
+For example, the returned block number from querying a transaction
+can be a local variable. It exists only for that request,
+and it will change when fetching data for another transaction
 hash.
 
 ![Variables Scope](/img/postman/postman-9-variables.png)
 
 There are two types of variables:
+
 * **Default type :** Every variable is automatically assigned this type when created.
+
 * **Secret type:** Masks variable's value. It is used to store sensitive data. 
 
 :::info
