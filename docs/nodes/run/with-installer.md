@@ -549,7 +549,7 @@ node](/reference/standards/guides/issuing-api-calls.md), [stake your
 tokens](/nodes/validate/what-is-staking.md), or level up your installation by setting up
 [node monitoring](/nodes/maintain/setting-up-node-monitoring.md) to get a better
 insight into what your node is doing. Also, you might want to use our [Postman
-Collection](/tooling/avalanchego-postman-collection.md) to more
+Collection](/tooling/avalanchego-postman-collection/setup.md) to more
 easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back
