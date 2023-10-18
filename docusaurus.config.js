@@ -18,7 +18,7 @@ const config = {
       // "fr",
       // "hi",
       // "it",
-      "ja",
+      // "ja",
       // "ko",
       // "ru",
       // "tu",
