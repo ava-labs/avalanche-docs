@@ -56,7 +56,7 @@ Below are examples on how to set the transaction hash as variable of each scope.
 
 ![Variables Scope](/img/postman/postman-10-set-global-var.png)
 
-2. Select the Globals tab
+2. Select the tab
 
 ![Variables Scope](/img/postman/postman-11-set-global-var.png)
 
