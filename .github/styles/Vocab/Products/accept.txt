@@ -298,6 +298,7 @@ superset
 Swapper's
 sybil
 syncer
+Teleporter
 Tencent
 testnet
 Testnet
