@@ -4,9 +4,10 @@ description: The AvalancheGo Postman collection includes all the public API call
 pagination_label: AvalancheGo Install Script
 sidebar_position: 4
 ---
-import ReactPlayer from 'react-player'
 
 # Data Visualization
+
+import ReactPlayer from 'react-player'
 
 ## API calls with Data Visualization
 
@@ -130,5 +131,4 @@ width="1000px" height="600px"/>
 
 ### `eth_getBalance`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
-width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' width="1000px" height="600px"/>

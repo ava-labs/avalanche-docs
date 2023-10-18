@@ -4,9 +4,10 @@ description: The AvalancheGo Postman collection includes all the public API call
 pagination_label: AvalancheGo Install Script
 sidebar_position: 2
 ---
-import ReactPlayer from 'react-player'
 
 # Making API Calls
+
+import ReactPlayer from 'react-player'
 
 ## How to Make an API Call
 

@@ -101,26 +101,11 @@ option](/nodes/configure/avalanchego-config-flags.md#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 
-## Making API Calls
-
-Open one of the API call groups, for example `Health`. Click `health` call:
-
-![API call](/img/postman/postman-7-making-calls.png)
-
-You will see that format of the call uses the `baseURL` environment 
-variable. Click `Send`. Request will be sent, and soon you will see
-the response, in the `Body` tab in the `Response`:
-
-![Response](/img/postman/postman-8-response.png)
-
-To see the actual call and the variables that are sent to the node, switch to
-`Body` tab in the API call tabs. There you can quickly change the variables to
-see the response to different queries.
-
 ## Conclusion
 
-If you completed the tutorial, you are now able to quickly issue API calls to
-your node without messing with the curl commands in the terminal. This allows
+If you completed the tutorial, you are now able to quickly
+[issue API calls](/tooling/avalanchego-postman-collection/making-api-calls.md) 
+to your node without messing with the curl commands in the terminal. This allows
 you to quickly see the state of your node, track changes or double-check the
 health or liveness of your node.
 
