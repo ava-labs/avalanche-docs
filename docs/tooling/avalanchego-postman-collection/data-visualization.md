@@ -110,20 +110,25 @@ Learn how to make an API call with Postman with the help of this guide.
 
 ### `eth_getTransactionByHash`
 
-<ReactPlayer playing controls url='/img/postman/postman-33-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-33-visualize-response-example.mov'
+width="1000px" height="600px"/>
 
 ### `avm.getBlock`
 
-<ReactPlayer playing controls url='/img/postman/postman-34-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-34-visualize-response-example.mov' 
+width="1000px" height="600px"/>
 
 ### `platform.getCurrentValidators`
 
-<ReactPlayer playing controls url='/img/postman/postman-35-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-35-visualize-response-example.mov' 
+width="1000px" height="600px"/>
 
 ### `avax.getAtomicTx`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
+width="1000px" height="600px"/>
 
 ### `eth_getBalance`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
+width="1000px" height="600px"/>
