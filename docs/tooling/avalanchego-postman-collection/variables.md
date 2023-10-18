@@ -18,7 +18,7 @@ This type of variables make the most sense to use with the Avalanche Postman col
 therefore an environment file with preset variables is provided
 * **Data variables:** Provided by external CSV and JSON files.
 * **Local variables:** Temporary variables that can be used in a script. For example,
-returned block number from quering a transaction can be a local variable. It exists
+returned block number from querying a transaction can be a local variable. It exists
 only for that request, and it will change when fetching data for another transaction
 hash.
 
@@ -52,53 +52,53 @@ Below are examples on how to set the transaction hash as variable of each scope.
 
 ### Set a Global Variable
 
-#### 1. Go to Environments
+1. Go to Environments
 
 ![Variables Scope](/img/postman/postman-10-set-global-var.png)
 
-#### 2. Select Globals
+2. Select Globals
 
 ![Variables Scope](/img/postman/postman-11-set-global-var.png)
 
-#### 3. Click on the Add a new variable area
+3. Click on the Add a new variable area
 
 ![Variables Scope](/img/postman/postman-12-set-global-var.png)
 
-#### 4. Add the variable name and value. Make sure to use quotes.
+4. Add the variable name and value. Make sure to use quotes.
 
 ![Variables Scope](/img/postman/postman-13-set-global-var.png)
 
-#### 5. Click Save
+5. Click Save
 
 ![Variables Scope](/img/postman/postman-14-set-global-var.png)
 
-#### 6. Now it can be used on any call from any collection
+6. Now it can be used on any call from any collection
 
 
 
 ### Set a Collection Variable
 
-#### 1. Click on the three dots next to the Avalanche collection and select Edit
+1. Click on the three dots next to the Avalanche collection and select Edit
 
 ![Variables Scope](/img/postman/postman-15-set-collection-var.png)
 
-#### 2. Go to the Variables tab
+2. Go to the Variables tab
 
 ![Variables Scope](/img/postman/postman-16-set-collection-var.png)
 
-#### 3. Click on the Add a new variable area
+3. Click on the Add a new variable area
 
 ![Variables Scope](/img/postman/postman-17-set-collection-var.png)
 
-#### 4. Add the variable name and value. Make sure to use quotes.
+4. Add the variable name and value. Make sure to use quotes.
 
 ![Variables Scope](/img/postman/postman-18-set-collection-var.png)
 
-#### 5. Click Save
+5. Click Save
 
 ![Variables Scope](/img/postman/postman-19-set-collection-var.png)
 
-#### 6. Now it can be used on any call from this collection
+6. Now it can be used on any call from this collection
 
 
 
@@ -106,28 +106,28 @@ Below are examples on how to set the transaction hash as variable of each scope.
 
 ### Set an Environment Variable
 
-#### 1. Go to Environments
+1. Go to Environments
 
 ![Variables Scope](/img/postman/postman-10-set-global-var.png)
 
 
-#### 2. Select an environment. In this case, it is Example-Avalanche-Environment.
+2. Select an environment. In this case, it is Example-Avalanche-Environment.
 
 ![Variables Scope](/img/postman/postman-20-set-env-var.png)
 
-#### 3. Scroll down until you find the Add a new variable area and click on it.
+3. Scroll down until you find the Add a new variable area and click on it.
 
 ![Variables Scope](/img/postman/postman-21-set-env-var.png)
 
-#### 4. Add the variable name and value. Make sure to use quotes.
+4. Add the variable name and value. Make sure to use quotes.
 
 ![Variables Scope](/img/postman/postman-22-set-env-var.png)
 
-#### 5. Click Save.
+5. Click Save.
 
 ![Variables Scope](/img/postman/postman-23-set-env-var.png)
 
-#### 6. The variable is available now for any call collection that uses this environment.
+6. The variable is available now for any call collection that uses this environment.
 
 
 ### Set a Data Variable

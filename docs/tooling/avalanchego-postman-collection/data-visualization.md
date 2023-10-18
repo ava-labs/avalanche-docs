@@ -64,7 +64,7 @@ different color.
 
 ![Data Visualization Feature](/img/postman/postman-26-visualization-feature.png)
 
-* Native token amounts shown as AVAX and/or GWei and Wei.
+* Native token amounts shown as AVAX and/or gwei and wei.
 
 ![Data Visualization Feature](/img/postman/postman-27-visualization-feature.png)
 

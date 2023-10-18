@@ -6,7 +6,7 @@ sidebar_position: 2
 ---
 import ReactPlayer from 'react-player'
 
-# Making API calls
+# Making API Calls
 
 ## How to Make an API Call
 
@@ -60,7 +60,7 @@ Fetching data about an X-Chain block using `avm.getBlock`.
 
 ### P-Chain Public API Call
 
-Getting the curent P-Chain height using `platform.getHeight`.
+Getting the current P-Chain height using `platform.getHeight`.
 
 <ReactPlayer playing controls url='/img/postman/postman-41-api-call-example.mov' width="1000px" height="600px"/>
 

@@ -5,7 +5,7 @@ pagination_label: AvalancheGo Install Script
 sidebar_position: 1
 ---
 
-# Setting Up Postman
+# Setting up Postman
 
 We have made a Postman collection for Avalanche, that includes all the public
 API calls that are available on [AvalancheGo
