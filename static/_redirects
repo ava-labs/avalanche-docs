@@ -347,7 +347,7 @@
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 
-# since the begining
+# since the beginning
 
 /learn / 301
 /learn/ / 301
@@ -532,3 +532,15 @@
 /community/tutorials-contest/2021/avax-chat-dapp /deprecated/tutorials-contest/2021/avax-chat-dapp 301
 /community/tutorials-contest/2021/drizzle-auction-manager /deprecated/tutorials-contest/2021/drizzle-auction-manager 301
 /community/tutorials-contest/2021/distributed-file-manager /deprecated/tutorials-contest/2021/distributed-file-manager 301
+
+# Learn - Metadata
+/learn/projects /tooling 301
+
+# 10/02/23
+/dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+
+# 10/05/23
+/build/dapp/smart-contracts/toolchains/truffle /deprecated/truffle 301
+/build/dapp/smart-contracts/verification/verify-truffle /deprecated/verify-truffle 301

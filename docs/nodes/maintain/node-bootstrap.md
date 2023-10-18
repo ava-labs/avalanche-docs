@@ -62,7 +62,7 @@ before completing its bootstrap. To solve this chicken-and-egg situation the
 Avalanche Foundation maintains a trusted default set of validators called
 beacons (but users are free to configure their own). Beacon Node-IDs and IP
 addresses are listed in the [AvalancheGo
-codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/beacons.go).
+codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json).
 Every node has the beacon list available from the start and can reach out to them
 as soon as it starts.
 

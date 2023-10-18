@@ -30,8 +30,8 @@ of the blockchain.
 ## Blockchain
 
 A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines
-application specific behavior and how blocks are built and parsed to create the blockchain. VMs
-all run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the
+application specific behavior and how blocks are built and parsed to create the blockchain. All VMs
+run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the
 state of the blockchain. Here's a quick example of how VMs interact with consensus:
 
 1. A node wants to update the blockchain's state
@@ -63,8 +63,20 @@ In order to install a VM, its binary must be installed in the `AvalancheGo` plug
 Multiple VMs can be installed in this location.
 
 Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC
-calls. This is functionality is enabled by `rpcchainvm`, a special VM that wraps around other VM
-implementations so that they can communicate back and forth with the AvalancheGo.
+calls. This functionality is enabled by **RPCChainVM**, a special VM which wraps around other VM
+implementations and bridges the VM and AvalancheGo, establishing a standardized communication 
+protocol between them.
+
+:::info
+
+During VM creation, handshake messages are exchanged via **RPCChainVM** between AvalancheGo and the 
+VM installation. Ensure matching **RPCChainVM** protocol versions to avoid 
+errors, by updating your VM or using a 
+[different version of AvalancheGo](https://github.com/ava-labs/AvalancheGo/releases).
+
+Note that some VMs may not support the latest protocol version.
+
+:::
 
 ### API Handlers
 
@@ -118,7 +130,7 @@ if err := vm.Initialize(
 ```
 
 You can refer to the
-[implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75)) of
+[implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75) of
 `vm.initialize` in the TimestampVM repository.
 
 ## Interfaces

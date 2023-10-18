@@ -46,7 +46,7 @@ the _client_ interfaces exposed by AvalancheGo.
 ## Starting Process 
 
 Your VM is started by AvalancheGo launching your binary. Your binary is started as a sub-process
-of AvalancheGo. While launching your binary, avalanche's go passes an environment variable
+of AvalancheGo. While launching your binary, AvalancheGo passes an environment variable
 `AVALANCHE_VM_RUNTIME_ENGINE_ADDR` containing an url. We must use this url to initialize a
 `vm.Runtime` client. 
 
@@ -55,7 +55,6 @@ Your VM, after having started a grpc server implementing the VM interface must c
 with the following parameters.
 
 - `protocolVersion` : It must match the `supported plugin version` of the 
-
 [AvalancheGo release](https://github.com/ava-labs/AvalancheGo/releases) you are using. 
 It is always part of the release notes.
 

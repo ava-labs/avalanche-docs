@@ -1,4 +1,7 @@
 ---
+tags: [Subnet]
+description: A Subnet is a dynamic set of validators working together to achieve consensus on the state of a set of blockchain networks.
+keywords: [docs, avalanche, subnets, sovereign blockchains, interoperability]
 sidebar_label: Subnets
 ---
 
@@ -87,6 +90,9 @@ blockchain networks they choose to participate in. This greatly reduces the comp
 
 ## Develop Your Own Subnet
 
+Subnets on Avalanche are deployed by default with [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm),
+a fork of go-ethereum. It implements the Ethereum Virtual Machine and supports Solidity smart 
+contracts as well as most other Ethereum client functionality.
+
 To get started, check out the tutorials in our [Subnets](/build/subnet/hello-subnet.md)
 section.
-

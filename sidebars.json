@@ -5,11 +5,12 @@
       "value": "<span class='menu__item'><b><medium> The Avalanche Protocol </medium></b></span>"
     },
     "learn/avalanche/intro",
+    "learn/avalanche/avalanche-platform",
     {
       "type": "category",
       "label": "Networks",
       "collapsed": false,
-      "items": ["learn/avalanche/avalanche-platform", "learn/avalanche/fuji"]
+      "items": ["learn/avalanche/mainnet", "learn/avalanche/fuji"]
     },
     "learn/avalanche/avalanche-consensus",
     "learn/avalanche/avax",
@@ -20,7 +21,6 @@
       "type": "html",
       "value": "<hr/>"
     },
-    "learn/projects",
     {
       "type": "link",
       "label": "Whitepapers",

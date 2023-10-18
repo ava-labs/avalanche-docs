@@ -20,8 +20,8 @@ change.
 
 :::caution
 
-Please do not try running a node on an HDD, as you may get poor and random 
-read/write latencies, therefore reducing performance and reliability.
+Nodes which choose to use a HDD may get poor and random 
+read/write latencies, therefore reducing performance and reliability. An SSD is strongly suggested.
 
 :::
 
