@@ -262,14 +262,54 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### Infura
 
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network)
-currently only supports the C-Chain.
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently
+only supports the C-Chain.
 
 #### HTTP
 
 - For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
 
 Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
+
+### Moralis
+
+[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-Chain.
+
+#### Mainnet
+
+- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances,
+transfers, sales and more
+- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances,
+transfers, prices, burns, mints and more
+- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances,
+transaction history, net worth and more
+- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks,
+transactions, logs and events
+- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about
+any on-chain event
+
+Features:
+
+- Free plan available
+- Supports all major EVM networks
+
+### Nodies
+
+[Nodies](https://nodies.app) supports the C, X, P, and DFK Subnet chains.
+
+Features:
+
+- Generous free tier
+- Globally distributed infrastructure in 3+ geographic regions
+- Decentralized and Centralized API's
+
+#### HTTP
+
+- For `C-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
+- For `X-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
+- For `P-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
+- For `DFK-Subnet`, the URL is
+`https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
 
 ### QuickNode
 
