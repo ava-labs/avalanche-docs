@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Planificar una implementación exitosa de Subredes comienza por determinar las necesidades de tu aplicación.
+tags: [Construir, Subredes]
+description: Planificar una implementación exitosa de Subredes comienza por determinar las necesidades de tu aplicación.
 sidebar_label: Empezando
 pagination_label: ¿Cuál es el ciclo de vida del desarrollo de Subredes?
 ---

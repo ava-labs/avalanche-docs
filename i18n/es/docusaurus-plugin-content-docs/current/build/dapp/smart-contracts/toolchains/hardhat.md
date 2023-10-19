@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: El objetivo de esta guía es establecer las mejores prácticas en cuanto a la escritura, prueba e implementación de contratos inteligentes en la C-Chain de Avalanche utilizando Hardhat.
+tags: [Construir, Dapps]
+description: El objetivo de esta guía es establecer las mejores prácticas en cuanto a la escritura, prueba e implementación de contratos inteligentes en la C-Chain de Avalanche utilizando Hardhat.
 sidebar_label: Hardhat
 pagination_label: Usando Hardhat con la C-Chain de Avalanche
 sidebar_position: 0
@@ -73,10 +73,10 @@ tareas, redes, compiladores y más en ese archivo. Para más información, consu
 Aquí tienes un ejemplo de `hardhat.config.ts` preconfigurado.
 
 ```ts
-import { task } from "hardhat/config"
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
-import { BigNumber } from "ethers"
-import "@nomiclabs/hardhat-waffle"
+import { task } from "hardhat/config";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { BigNumber } from "ethers";
+import "@nomiclabs/hardhat-waffle";
 
 // Al usar la red hardhat, puedes elegir bifurcar Fuji o Avalanche Mainnet
 // Esto te permitirá depurar contratos usando la red hardhat mientras mantienes el estado de la red actual
@@ -84,42 +84,46 @@ import "@nomiclabs/hardhat-waffle"
 // Para más información, consulta la guía de hardhat
 // https://hardhat.org/hardhat-network/
 // https://hardhat.org/guides/mainnet-forking.html
-const FORK_FUJI = false
-const FORK_MAINNET = false
-const forkingData = FORK_FUJI ? {
-  url: 'https://api.avax-test.network/ext/bc/C/rpc',
-} : FORK_MAINNET ? {
-  url: 'https://api.avax.network/ext/bc/C/rpc'
-} : undefined
+const FORK_FUJI = false;
+const FORK_MAINNET = false;
+const forkingData = FORK_FUJI
+  ? {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+    }
+  : FORK_MAINNET
+  ? {
+      url: "https://api.avax.network/ext/bc/C/rpc",
+    }
+  : undefined;
 
 export default {
   solidity: {
     compilers: [
       {
-        version: "0.5.16"
+        version: "0.5.16",
       },
       {
-        version: "0.6.2"
+        version: "0.6.2",
       },
       {
-        version: "0.6.4"
+        version: "0.6.4",
       },
       {
-        version: "0.7.0"
+        version: "0.7.0",
       },
       {
-        version: "0.8.0"
-      }
-    ]
+        version: "0.8.0",
+      },
+    ],
   },
   networks: {
     hardhat: {
       gasPrice: 225000000000,
       chainId: !forkingData ? 43112 : undefined, //Solo especifica un chainId si no estamos bifurcando
-      forking: forkingData
+      forking: forkingData,
     },
     local: {
-      url: 'http://localhost:9650/ext/bc/C/rpc',
+      url: "http://localhost:9650/ext/bc/C/rpc",
       gasPrice: 225000000000,
       chainId: 43112,
       accounts: [
@@ -132,23 +136,23 @@ export default {
         "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
         "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
         "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
-        "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a"
-      ]
+        "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
+      ],
     },
     fuji: {
-      url: 'https://api.avax-test.network/ext/bc/C/rpc',
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
       gasPrice: 225000000000,
       chainId: 43113,
-      accounts: []
+      accounts: [],
     },
     mainnet: {
-      url: 'https://api.avax.network/ext/bc/C/rpc',
+      url: "https://api.avax.network/ext/bc/C/rpc",
       gasPrice: 225000000000,
       chainId: 43114,
-      accounts: []
-    }
-  }
-}
+      accounts: [],
+    },
+  },
+};
 ```
 
 Esta configuración proporciona la información de red necesaria para una interacción fluida con Avalanche. También hay algunas claves privadas predefinidas para pruebas en una red de prueba local.
@@ -165,22 +169,30 @@ Puedes definir tareas personalizadas de hardhat en `hardhat.config.ts`.
 Hay dos tareas incluidas como ejemplos: `accounts` y `balances`.
 
 ```ts
-task("accounts", "Imprime la lista de cuentas", async (args, hre): Promise<void> => {
-  const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
-  accounts.forEach((account: SignerWithAddress): void => {
-    console.log(account.address)
-  })
-})
-
-task("balances", "Imprime la lista de saldos de cuentas AVAX", async (args, hre): Promise<void> => {
-  const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
-  for(const account of accounts){
-    const balance: BigNumber = await hre.ethers.provider.getBalance(
-      account.address
-    );
-    console.log(`${account.address} tiene un saldo de ${balance.toString()}`);
+task(
+  "accounts",
+  "Imprime la lista de cuentas",
+  async (args, hre): Promise<void> => {
+    const accounts: SignerWithAddress[] = await hre.ethers.getSigners();
+    accounts.forEach((account: SignerWithAddress): void => {
+      console.log(account.address);
+    });
   }
-})
+);
+
+task(
+  "balances",
+  "Imprime la lista de saldos de cuentas AVAX",
+  async (args, hre): Promise<void> => {
+    const accounts: SignerWithAddress[] = await hre.ethers.getSigners();
+    for (const account of accounts) {
+      const balance: BigNumber = await hre.ethers.provider.getBalance(
+        account.address
+      );
+      console.log(`${account.address} tiene un saldo de ${balance.toString()}`);
+    }
+  }
+);
 ```
 
 `npx hardhat accounts` imprime la lista de cuentas. `npx hardhat balances` imprime la lista de saldos de cuentas AVAX. Al igual que con otros scripts de `yarn`, puedes pasar una bandera `--network` a las tareas de hardhat.
@@ -226,14 +238,22 @@ Observa que la primera cuenta ya está financiada. Esto se debe a que esta direc
 ### Saldos de ERC20
 
 ```js
-task("check-erc20-balance", "Imprime el saldo ERC20 de tu cuenta").setAction(async function (taskArguments, hre) {
-  const genericErc20Abi = require("./erc20.abi.json");
-  const tokenContractAddress = "0x...";
-  const provider = ethers.getDefaultProvider("https://api.avax.network/ext/bc/C/rpc");
-  const contract = new ethers.Contract(tokenContractAddress, genericErc20Abi, provider);
-  const balance = await contract.balanceOf("0x...");
-  console.log(`Saldo en wei: ${balance}`)
-});
+task("check-erc20-balance", "Imprime el saldo ERC20 de tu cuenta").setAction(
+  async function (taskArguments, hre) {
+    const genericErc20Abi = require("./erc20.abi.json");
+    const tokenContractAddress = "0x...";
+    const provider = ethers.getDefaultProvider(
+      "https://api.avax.network/ext/bc/C/rpc"
+    );
+    const contract = new ethers.Contract(
+      tokenContractAddress,
+      genericErc20Abi,
+      provider
+    );
+    const balance = await contract.balanceOf("0x...");
+    console.log(`Saldo en wei: ${balance}`);
+  }
+);
 ```
 
 Esto devolverá el resultado en wei. Si quieres saber la cantidad exacta de tokens con su nombre de token, entonces necesitas dividirlo por su decimal. `erc20.abi.json` se puede encontrar [aquí](./erc20.abi.json).

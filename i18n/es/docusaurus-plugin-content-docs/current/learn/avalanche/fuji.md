@@ -1,6 +1,6 @@
 ---
-etiquetas: [Fuji Testnet]
-descripción: Fuji Testnet es la red de pruebas oficial para el ecosistema Avalanche.
+tags: [Fuji Testnet]
+description: Fuji Testnet es la red de pruebas oficial para el ecosistema Avalanche.
 palabras clave: [docs, fuji, testnet, construir en avalanche]
 sidebar_label: Fuji Testnet
 ---
@@ -15,7 +15,7 @@ así como muchas Subnets de prueba.
 
 ## ¿Por qué usar Fuji en lugar de Mainnet?
 
-Fuji proporciona a los usuarios una plataforma para simular las condiciones encontradas en el entorno Mainnet. 
+Fuji proporciona a los usuarios una plataforma para simular las condiciones encontradas en el entorno Mainnet.
 Permite a los desarrolladores desplegar Smart Contracts de demostración, permitiéndoles probar y refinar sus aplicaciones
 antes de desplegarlas en la [Red Primaria](/learn/avalanche/avalanche-platform.md).
 
@@ -30,8 +30,8 @@ Para recibir tokens de testnet, los usuarios pueden solicitar fondos desde el
 
 - La Fuji Testnet tiene su propio [explorador de bloques](https://subnets-test.avax.network/).
 - El punto final de la API pública para Fuji no es el mismo que para Mainnet. Más información está disponible en la
-documentación del [Servidor de API Pública](/tooling/rpc-providers.md).
+  documentación del [Servidor de API Pública](/tooling/rpc-providers.md).
 - Aunque la Red Fuji es un recurso valioso, los desarrolladores también tienen la opción de explorar
-[Avalanche Network Runner](https://docs.avax.network/quickstart/tools-list#avalanche-network-runner-anr)
-como un medio alternativo para probar localmente sus proyectos, asegurando una evaluación completa y
-ajustes finos antes de interactuar con la red más amplia.
+  [Avalanche Network Runner](https://docs.avax.network/quickstart/tools-list#avalanche-network-runner-anr)
+  como un medio alternativo para probar localmente sus proyectos, asegurando una evaluación completa y
+  ajustes finos antes de interactuar con la red más amplia.

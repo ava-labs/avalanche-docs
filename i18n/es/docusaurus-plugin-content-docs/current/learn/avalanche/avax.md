@@ -1,7 +1,8 @@
 ---
-etiquetas: [Avax, Tokenomics]
-descripción: AVAX es el token de suministro limitado de la red Avalanche, utilizado para cubrir tarifas, mejorar la seguridad a través del staking y facilitar transacciones en sus diversas Subnets.
-palabras clave: [documentación, avalanche, token avax, tokenomics, utilidad avax]
+tags: [Avax, Tokenomics]
+description: AVAX es el token de suministro limitado de la red Avalanche, utilizado para cubrir tarifas, mejorar la seguridad a través del staking y facilitar transacciones en sus diversas Subnets.
+palabras clave:
+  [documentación, avalanche, token avax, tokenomics, utilidad avax]
 sidebar_label: Token AVAX
 ---
 

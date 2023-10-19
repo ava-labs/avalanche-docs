@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Pausar y reanudar de manera elegante una subred local mientras se preserva el estado.
+tags: [Construir, Subredes]
+description: Pausar y reanudar de manera elegante una subred local mientras se preserva el estado.
 sidebar_label: Pausar y Reanudar
 pagination_label: Pausar y Reanudar Subredes Locales
 sidebar_position: 1

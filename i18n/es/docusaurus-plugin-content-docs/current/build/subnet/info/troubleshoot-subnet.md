@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Una referencia para consejos para resolver problemas comunes al implementar Subredes en Avalanche.
+tags: [Construir, Subredes]
+description: Una referencia para consejos para resolver problemas comunes al implementar Subredes en Avalanche.
 sidebar_label: Solución de problemas
 pagination_label: Solución de problemas en implementaciones de Subredes
 sidebar_position: 2
@@ -81,13 +81,13 @@ Avalanche-CLI crea redes Avalalanche locales que ejecutan la última versión de
 
 ### Ejemplo
 
-Aquí tienes un ejemplo con números reales de la página de compatibilidad de AvalancheGo_:
+Aquí tienes un ejemplo con números reales de la página de compatibilidad de AvalancheGo\_:
 
 - Si la última versión de AvalancheGo es la versión v1.10.11, entonces Avalanche-CLI implementa una red con
-versión de RPC 28.
+  versión de RPC 28.
 - Para que tu implementación sea exitosa, tu VM también debe tener la versión de RPC 28. Debido a que solo
-las versiones de AvalancheGo v1.10.9, v1.10.10 y v1.10.11 admiten la versión de RPC 28,
-tu VM **debe** importar una de esas versiones.
+  las versiones de AvalancheGo v1.10.9, v1.10.10 y v1.10.11 admiten la versión de RPC 28,
+  tu VM **debe** importar una de esas versiones.
 
 ### Solución
 
@@ -100,9 +100,9 @@ Si tu VM tiene una incompatibilidad de versión de RPC, tienes dos opciones:
 
 1. Actualiza la versión de AvalancheGo que usas en tu VM. Este es el enfoque correcto a largo plazo.
 2. Utiliza Avalanche-CLI para implementar una versión anterior de AvalancheGo utilizando la bandera
-`--avalanchego-version`. Tanto los comandos [`subnet deploy`](/tooling/avalanche-cli.md#subnet-deploy)
-como [`network start`](/tooling/avalanche-cli.md#network-start) admiten
-establecer explícitamente la versión de AvalancheGo.
+   `--avalanchego-version`. Tanto los comandos [`subnet deploy`](/tooling/avalanche-cli.md#subnet-deploy)
+   como [`network start`](/tooling/avalanche-cli.md#network-start) admiten
+   establecer explícitamente la versión de AvalancheGo.
 
 Aunque es muy importante mantener tu versión de AvalancheGo actualizada,
 esta solución alternativa te ayuda a evitar compilaciones rotas a corto plazo.
@@ -118,11 +118,11 @@ Se requiere una coincidencia de versiones similar en diferentes herramientas del
 que muestra qué versión de RPCChainVM implementa las versiones más recientes de
 AvalancheGo, Subnet-EVM, Precompile-EVM e HyperSDK.
 
-| RPCChainVM | AvalancheGo | Subnet-EVM | Precompile-EVM | HyperSDK |
-| :--------: | :-------: | :-------: | :-------: | :-------: |
-| 26 | v1.10.1-v1.10.4 | v0.5.1-v0.5.2 | v0.1.0-v0.1.1 | v0.0.6-v0.0.9 |
-| 27 | v1.10.5-v1.10.8 | v0.5.3 | v0.1.2 | v0.0.10-v0.0.12 |
-| **28** | v1.10.9-**v1.10.11(última)** | v0.5.4-**v0.5.6 (última)** | v0.1.3-**v0.1.4 (última)** | v0.0.13-**v0.0.14 (última)** |
+| RPCChainVM |         AvalancheGo          |         Subnet-EVM         |       Precompile-EVM       |           HyperSDK           |
+| :--------: | :--------------------------: | :------------------------: | :------------------------: | :--------------------------: |
+|     26     |       v1.10.1-v1.10.4        |       v0.5.1-v0.5.2        |       v0.1.0-v0.1.1        |        v0.0.6-v0.0.9         |
+|     27     |       v1.10.5-v1.10.8        |           v0.5.3           |           v0.1.2           |       v0.0.10-v0.0.12        |
+|   **28**   | v1.10.9-**v1.10.11(última)** | v0.5.4-**v0.5.6 (última)** | v0.1.3-**v0.1.4 (última)** | v0.0.13-**v0.0.14 (última)** |
 
 Puedes ver la compatibilidad completa de RPC desglosada por versión de lanzamiento para cada herramienta aquí:
 
@@ -131,7 +131,6 @@ Puedes ver la compatibilidad completa de RPC desglosada por versión de lanzamie
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm/blob/master/compatibility.json).
 
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm/blob/main/compatibility.json).
-
 
 :::note
 Las actualizaciones de la versión de RPC de AvalancheGo **no** están vinculadas a su esquema de versión semántica. Las versiones menores de AvalancheGo
@@ -143,7 +142,7 @@ pueden incluir un aumento de versión de RPC que rompe la compatibilidad.
 Cuando ejecutas `avalanche subnet deploy` a través de Avalanche-CLI, la terminal puede arrojar un error que
 contiene lo siguiente:
 
-``` zsh
+```zsh
 zsh: bad CPU type in executable:
 /Users/user.name/Downloads/build/avalanchego
 ```
@@ -152,5 +151,3 @@ Esto se debe a que algunas Mac no tienen soporte para binarios x86. Ejecutar el 
 este problema:
 
 `/usr/sbin/softwareupdate --install-rosetta`
-
-

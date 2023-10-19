@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Para eliminar una configuración de Subred creada, ejecuta `avalanche subnet delete <nombreSubred>`.
+tags: [Construir, Subredes]
+description: Para eliminar una configuración de Subred creada, ejecuta `avalanche subnet delete <nombreSubred>`.
 sidebar_label: Eliminar una Subred
 pagination_label: Cómo Eliminar una Subred
 sidebar_position: 2

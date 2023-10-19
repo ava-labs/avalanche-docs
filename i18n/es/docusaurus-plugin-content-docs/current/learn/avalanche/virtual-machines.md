@@ -1,7 +1,8 @@
 ---
-etiquetas: [Máquinas Virtuales, Subnet-EVM]
-descripción: Una Máquina Virtual es un entorno virtual dentro de las redes blockchain que ejecuta contratos inteligentes y transacciones de acuerdo con reglas y protocolos preestablecidos.
-palabras clave: [documentación, avalanche, máquinas virtuales, subnets, Subnet EVM]
+tags: [Máquinas Virtuales, Subnet-EVM]
+description: Una Máquina Virtual es un entorno virtual dentro de las redes blockchain que ejecuta contratos inteligentes y transacciones de acuerdo con reglas y protocolos preestablecidos.
+palabras clave:
+  [documentación, avalanche, máquinas virtuales, subnets, Subnet EVM]
 sidebar_label: Máquinas Virtuales
 ---
 

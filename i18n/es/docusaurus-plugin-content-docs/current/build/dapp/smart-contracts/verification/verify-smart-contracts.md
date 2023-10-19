@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Este tutorial explica cómo verificar un contrato inteligente en el explorador de bloques Snowtrace.
+tags: [Construir, Dapps]
+description: Este tutorial explica cómo verificar un contrato inteligente en el explorador de bloques Snowtrace.
 sidebar_label: en Snowtrace
 pagination_label: Verificar contratos inteligentes en el explorador de la cadena C
 sidebar_position: 0
@@ -111,7 +111,7 @@ comentarios. Esto puede causar problemas con los argumentos del constructor.
 
 ```javascript
 /// keccak256("1");
-keccak256("2")
+keccak256("2");
 ```
 
 Esto podría causar fallos automáticos en la verificación del constructor. Si recibes

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Avalanche C-Chain es una blockchain que puede ejecutar todos los contratos inteligentes de Solidity de Ethereum, pero con una capacidad de transacción mucho mayor y finalidad instantánea gracias al mecanismo de consenso revolucionario de Avalanche.
+tags: [Construir, Dapps]
+description: Avalanche C-Chain es una blockchain que puede ejecutar todos los contratos inteligentes de Solidity de Ethereum, pero con una capacidad de transacción mucho mayor y finalidad instantánea gracias al mecanismo de consenso revolucionario de Avalanche.
 sidebar_label: Qué esperar
 pagination_label: Construyendo en la C-Chain
 ---

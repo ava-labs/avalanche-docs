@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+tags: [Construir, Subredes]
+description: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
 sidebar_label: Con autorización multisig
 pagination_label: Implementar una Subred con autorización multisig
 sidebar_position: 4

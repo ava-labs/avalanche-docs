@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial demuestra el proceso de implementar un contrato inteligente en una Subred basada en EVM.
+tags: [Construir, Subredes]
+description: Este tutorial demuestra el proceso de implementar un contrato inteligente en una Subred basada en EVM.
 sidebar_label: Implementar un Contrato Inteligente
 pagination_label: Implementar un Contrato Inteligente en tu Subred-EVM Usando Remix y Core
 sidebar_position: 0
@@ -15,7 +15,7 @@ Este tutorial asume que:
 - Se ha creado una Subred y blockchain EVM (/build/subnet/deploy/fuji-testnet-subnet.md)
 - Tu Nodo está validando actualmente tu Subred objetivo
 - Tu billetera tiene un saldo del Token Nativo de la Subred (Especificado bajo _alloc_ en tu
-[Archivo Génesis](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
+  [Archivo Génesis](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 ## Paso 1: Configurar Core
 
@@ -23,7 +23,7 @@ Este tutorial asume que:
 
 - **`Nombre de Red`**: Subred-EVM Personalizada
 - **`Nueva URL RPC`**: <http://DirecciónIPNodo:9650/ext/bc/IDBlockchain/rpc> (Nota: el número de puerto debe
-coincidir con tu configuración local, que puede ser diferente de 9650.)
+  coincidir con tu configuración local, que puede ser diferente de 9650.)
 - **`ChainID`**: ID de Cadena de la Subred-EVM
 - **`Símbolo`**: Símbolo del Token de la Subred-EVM
 - **`Explorador`**: N/A

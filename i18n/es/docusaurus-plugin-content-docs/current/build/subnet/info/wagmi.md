@@ -1,10 +1,11 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
+tags: [Construir, Subredes]
+description: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
 sidebar_label: "Estudio de caso: Subred WAGMI"
 pagination_label: "Subred WAGMI"
 sidebar_position: 1
 ---
+
 # Subred WAGMI
 
 La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
@@ -194,7 +195,7 @@ usar el método `getFeeConfig` para verificar la configuración de tarifas actua
 
 Una vez que tengamos la nueva configuración deseada para las tarifas en la Subnet, podemos usar `setFeeConfig`
 para cambiar los parámetros. ¡Esta acción **solo** puede ser realizada por el propietario
-`0x6f0f6DA1852857d7789f68a28bba866671f3880D` como la `adminAddress` especificada en el [`upgrade.json` anterior](#deploying-upgradejson).
+`0x6f0f6DA1852857d7789f68a28bba866671f3880D` como la `adminAddress` especificada en el [`upgrade.json` anterior](#desplegando-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 

@@ -10,8 +10,8 @@ sidebar_position: 3
 
 ## Introducción
 
-Después de arquitectar tu entorno de Subred en la [máquina local](/construir/subred/deploy/local-subnet.md),
-demostrando el diseño y probándolo en [la Testnet Fuji](/construir/subred/deploy/fuji-testnet-subnet.md),
+Después de arquitectar tu entorno de Subred en la [máquina local](/build/subnet/deploy/local-subnet.md),
+demostrando el diseño y probándolo en [la Testnet Fuji](/build/subnet/deploy/fuji-testnet-subnet.md),
 eventualmente necesitarás implementar tu Subred en un entorno de producción. Ejecutar una Subred en producción es mucho más
 complicado que las implementaciones locales y en Testnet, ya que tu Subred tendrá que cuidar el uso del mundo real,
 manteniendo el tiempo de actividad, las actualizaciones y todo eso en un entorno potencialmente adversarial. El propósito
@@ -27,7 +27,7 @@ intuición para el tipo de preguntas que necesitarás considerar.
 
 Los nodos Avalanche son elementos esenciales para ejecutar tu Subred en producción. Como mínimo, tu
 Subred necesitará nodos validadores, potencialmente también nodos que actúen como servidores RPC, indexadores o
-exploradores. Ejecutar un nodo es básicamente ejecutar una instancia de [AvalancheGo](/nodos/README.md) en un
+exploradores. Ejecutar un nodo es básicamente ejecutar una instancia de [AvalancheGo](/nodes/README.md) en un
 servidor.
 
 ### Sistema Operativo del Servidor
@@ -70,7 +70,7 @@ manejar un par de miles de conexiones TCP persistentes y que el ancho de banda d
 acomodar al menos 5 Mbps de tráfico de red constante de subida y bajada.
 
 Al instalar el nodo AvalancheGo en las máquinas, a menos que tengas un personal de DevOps dedicado que
-se encargará de la configuración y la configuración del nodo, recomendamos usar el [script de instalación](/nodos/run/with-installer.md)
+se encargará de la configuración y la configuración del nodo, recomendamos usar el [script de instalación](/nodes/run/with-installer.md)
 para configurar los nodos. Abstraerá la mayor parte del
 proceso de configuración para ti, configurará el nodo como un servicio del sistema y permitirá actualizaciones fáciles del nodo.
 
@@ -79,9 +79,9 @@ proceso de configuración para ti, configurará el nodo como un servicio del sis
 Hay varios proveedores de servicios en la nube diferentes. Tenemos documentos que muestran cómo configurar un nodo en
 los más populares:
 
-- [Amazon Web Services](/nodos/run/third-party/aws-node.md)
-- [Azure](/nodos/run/third-party/microsoft-azure-node.md)
-- [Google Cloud Platform](/nodos/run/third-party/google-cloud-node.md)
+- [Amazon Web Services](/nodes/run/third-party/aws-node.md)
+- [Azure](/nodes/run/third-party/microsoft-azure-node.md)
+- [Google Cloud Platform](/nodes/run/third-party/google-cloud-node.md)
 
 Hay una amplia gama de otros proveedores de servicios en la nube que pueden ofrecer precios más bajos o mejores ofertas para tus
 necesidades particulares, por lo que tiene sentido buscar opciones.
@@ -118,7 +118,7 @@ semana, pero hay formas de acortar ese proceso, dependiendo de tus circunstancia
 #### Sincronización de Estado
 
 Si los nodos que ejecutarás como validadores no necesitan tener todo el historial de transacciones, entonces
-puedes usar [sincronización de estado](/nodos/configure/chain-config-flags.md#state-sync-enabled-boolean). Con
+puedes usar [sincronización de estado](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). Con
 esta bandera habilitada, en lugar de reproducir toda la historia para llegar al estado actual, los nodos simplemente
 descargan solo el estado actual de otros pares de la red, acortando el proceso de inicio desde
 varios días a un par de horas. Si los nodos se utilizarán exclusivamente para validación de Subred, puedes
@@ -130,10 +130,10 @@ en la velocidad de inicio.
 
 Una buena manera de reducir los tiempos de inicio en múltiples nodos es la copia de la base de datos. La base de datos es idéntica
 en todos los nodos y, como tal, se puede copiar de manera segura de un nodo a otro. Solo asegúrate de que el
-nodo no esté en funcionamiento durante el proceso de copia, ya que eso puede resultar en una base de datos corrupta. El procedimiento de copia de la base de datos se explica en detalle [aquí](/nodos/maintain/node-backup-and-restore.md#database).
+nodo no esté en funcionamiento durante el proceso de copia, ya que eso puede resultar en una base de datos corrupta. El procedimiento de copia de la base de datos se explica en detalle [aquí](/nodes/maintain/node-backup-and-restore.md#database).
 
 Asegúrate de no reutilizar accidentalmente el NodeID de ningún nodo, especialmente no restaures el ID de otro
-nodo, consulta [aquí](/nodos/maintain/node-backup-and-restore.md#nodeid) para más detalles. Cada nodo
+nodo, consulta [aquí](/nodes/maintain/node-backup-and-restore.md#nodeid) para más detalles. Cada nodo
 de
 
 Las instrucciones generales sobre cómo usar un dispositivo Ledger con Avalanche se pueden encontrar aquí.

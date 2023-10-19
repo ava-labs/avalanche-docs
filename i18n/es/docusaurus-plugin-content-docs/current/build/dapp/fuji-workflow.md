@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
+tags: [Construir, Dapps]
+description: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
 sidebar_label: Flujo de trabajo de Fuji
 pagination_label: Flujo de trabajo de Fuji
 ---
@@ -71,12 +71,12 @@ Primero, genera una mnemónica de 24 palabras en inglés
 a través de AvalancheJS.
 
 ```typescript
-import { Mnemonic } from "avalanche"
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const strength: number = 256
-const wordlist = mnemonic.getWordlists("english") as string[]
-const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
-console.log(m)
+import { Mnemonic } from "avalanche";
+const mnemonic: Mnemonic = Mnemonic.getInstance();
+const strength: number = 256;
+const wordlist = mnemonic.getWordlists("english") as string[];
+const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist);
+console.log(m);
 // "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
 ```
 
@@ -87,35 +87,35 @@ pares de claves jerárquicas deterministas (HD) compatibles con
 [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki).
 
 ```typescript
-import HDNode from "avalanche/dist/utils/hdnode"
-import { Avalanche, Mnemonic, Buffer } from "avalanche"
-import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm"
-import { ethers } from "ethers"
+import HDNode from "avalanche/dist/utils/hdnode";
+import { Avalanche, Mnemonic, Buffer } from "avalanche";
+import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm";
+import { ethers } from "ethers";
 
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
+const ip: string = "api.avax-test.network";
+const port: number = 443;
+const protocol: string = "https";
+const networkID: number = 5;
+const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID);
+const cchain: EVMAPI = avalanche.CChain();
 
-const mnemonic: Mnemonic = Mnemonic.getInstance()
+const mnemonic: Mnemonic = Mnemonic.getInstance();
 const m: string =
-  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
-const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
-const hdnode: HDNode = new HDNode(seed)
+  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder";
+const seed: Buffer = mnemonic.mnemonicToSeedSync(m);
+const hdnode: HDNode = new HDNode(seed);
 
-const keyChain: KeyChain = cchain.newKeyChain()
+const keyChain: KeyChain = cchain.newKeyChain();
 
-const cAddresses: string[] = []
+const cAddresses: string[] = [];
 
 for (let i: number = 0; i <= 2; i++) {
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  cAddresses.push(cchainAddress)
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
+  keyChain.importKey(child.privateKey);
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey);
+  cAddresses.push(cchainAddress);
 }
-console.log(cAddresses)
+console.log(cAddresses);
 // [
 //   '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
 //   '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
@@ -137,18 +137,18 @@ Por ejemplo, si quieres generar las claves privadas para las primeras 3 direccio
 podrías actualizar el script de ejemplo anterior al siguiente:
 
 ```typescript
-const cAddresses: string[] = []
-const privateKeys: string[] = []
+const cAddresses: string[] = [];
+const privateKeys: string[] = [];
 for (let i: number = 0; i <= 2; i++) {
   // Derivando la dirección _i_-ésima de la cadena C-Chain BIP44 externa
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
+  keyChain.importKey(child.privateKey);
   // Convirtiendo las direcciones BIP44 a direcciones hexadecimales
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  privateKeys.push(child.privateKey.toString("hex"))
-  cAddresses.push(cchainAddress)
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey);
+  privateKeys.push(child.privateKey.toString("hex"));
+  cAddresses.push(cchainAddress);
 }
-console.log({ cAddresses, privateKeys })
+console.log({ cAddresses, privateKeys });
 // {
 //   cAddresses: [
 //     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
@@ -195,21 +195,21 @@ También podemos usar el Fuji Explorer para obtener el saldo de la primera direc
 Alternativamente, podemos usar [ethersJS](https://docs.ethers.io/v5/) para obtener el saldo.
 
 ```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559"
+const ethers = require("ethers");
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
+const provider = ethers.getDefaultProvider(network);
+const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
     // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInAvax} AVAX`);
     // balance: 2 AVAX
-  })
-}
+  });
+};
 
-main()
+main();
 ```
 
 ## Enviando AVAX
@@ -219,33 +219,33 @@ la primera dirección a la segunda dirección.
 
 ```typescript
 // importar ethers.js
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 // red: usando la red de prueba Fuji
-const red = "https://api.avax-test.network/ext/bc/C/rpc"
+const red = "https://api.avax-test.network/ext/bc/C/rpc";
 // proveedor: establecer una conexión RPC con la red
-const proveedor = new ethers.providers.JsonRpcProvider(red)
+const proveedor = new ethers.providers.JsonRpcProvider(red);
 
 // Clave privada del remitente:
 // dirección correspondiente 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
 let clavePrivada =
-  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc"
+  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc";
 // Crear una instancia de billetera
-let billetera = new ethers.Wallet(clavePrivada, proveedor)
+let billetera = new ethers.Wallet(clavePrivada, proveedor);
 // Dirección del receptor
-let direccionReceptor = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
+let direccionReceptor = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 // Cantidad de AVAX a enviar
-let cantidadEnAvax = "0.01"
+let cantidadEnAvax = "0.01";
 // Crear un objeto de transacción
 let tx = {
   to: direccionReceptor,
   // Convertir la unidad de moneda de ether a wei
   value: ethers.utils.parseEther(cantidadEnAvax),
-}
+};
 // Enviar una transacción
 billetera.sendTransaction(tx).then((objTx) => {
-  console.log(`"tx, https://testnet.snowtrace.io/tx/${objTx.hash}`)
+  console.log(`"tx, https://testnet.snowtrace.io/tx/${objTx.hash}`);
   // Un resultado de transacción se puede verificar en un snowtrace con un enlace de transacción que se puede obtener aquí.
-})
+});
 ```
 
 ### Verificar el Éxito
@@ -264,21 +264,21 @@ También podemos usar el Fuji Explorer para obtener el saldo de la segunda direc
 Alternativamente, podemos usar ethersJS para obtener el saldo.
 
 ```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
+const ethers = require("ethers");
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
+const provider = ethers.getDefaultProvider(network);
+const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
     // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInAvax} AVAX`);
     // balance: 0.02 AVAX
-  })
-}
+  });
+};
 
-main()
+main();
 ```
 
 ### Iniciar sesión en la billetera web
@@ -295,7 +295,7 @@ El saldo es correcto y la dirección es la primera dirección derivada.
 
 Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el script anterior.
 
-![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png) 
+![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  
 ![Direcciones derivadas de la billetera3](/img/fuji-wf-alt-wallet-addresses.png)
 

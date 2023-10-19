@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Implementa un grifo de testnet personalizado para tu Subred con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
+tags: [Construir, Subredes]
+description: Implementa un grifo de testnet personalizado para tu Subred con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
 sidebar_label: Agregar un Grifo de Testnet
 pagination_label: Grifo de Subred Avalanche
 sidebar_position: 1
@@ -15,8 +15,8 @@ Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación a
 Estas testnets suelen ser los bancos de pruebas para cualquier nueva característica nativa de la propia red, o cualquier dapp o [Subred](learn/avalanche/subnets-overview.md) que va a vivir en la red principal (Mainnet). Por ejemplo, la red [Fuji](learn/avalanche/fuji.md) es la Testnet para la Mainnet de Avalanche.
 
 Además de la Testnet Fuji, el
-[Grifo Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c) 
-se puede utilizar para obtener tokens de prueba gratuitos en Subredes de testnet como: 
+[Grifo Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
+se puede utilizar para obtener tokens de prueba gratuitos en Subredes de testnet como:
 
 - [Testnet WAGMI](https://core.app/tools/testnet-faucet/?subnet=wagmi)
 - [Testnet DeFI Kingdoms](https://core.app/tools/testnet-faucet/?subnet=dfk)
@@ -318,8 +318,8 @@ Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para f
 Comenta o elimina estas 2 líneas del archivo `server.ts`
 
 ```javascript
-new RateLimiter(app, [GLOBAL_RL])
-new RateLimiter(app, evmchains)
+new RateLimiter(app, [GLOBAL_RL]);
+new RateLimiter(app, evmchains);
 ```
 
 ### Desactivando la verificación CAPTCHA

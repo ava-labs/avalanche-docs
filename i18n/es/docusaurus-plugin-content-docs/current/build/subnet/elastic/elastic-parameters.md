@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Esta referencia describe los parámetros estructurales de una Subred Elástica (sin permisos) e ilustra las restricciones que deben cumplir.
+tags: [Construir, Subredes]
+description: Esta referencia describe los parámetros estructurales de una Subred Elástica (sin permisos) e ilustra las restricciones que deben cumplir.
 sidebar_label: Parámetros
 pagination_label: Parámetros de las Subredes Elásticas
 sidebar_position: 1
@@ -199,8 +199,6 @@ $$
 \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
 
-
-
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
@@ -238,7 +236,7 @@ $$
 
 Ten en cuenta que esta fórmula es la misma que la fórmula de recompensa en la parte superior de esta sección porque $EffectiveConsumptionRate$ = $MaxConsumptionRate$.
 
-La fórmula de recompensa anterior se utiliza en la Red Primaria para calcular la recompensa de los stakers. Para referencia, puedes encontrar los parámetros de la red primaria en [la sección a continuación](#primary-network-parameters-on-mainnet).
+La fórmula de recompensa anterior se utiliza en la Red Primaria para calcular la recompensa de los stakers. Para referencia, puedes encontrar los parámetros de la red primaria en [la sección a continuación](#parámetros-de-la-red-primaria-en-mainnet).
 
 ## Verificaciones de peso de los delegadores
 

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
+tags: [Construir, Subredes]
+description: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
 sidebar_label: Construye tu primera Subred
 pagination_label: Construye tu primera Subred
 ---
@@ -118,8 +118,8 @@ A continuación, selecciona `Red Local`.
 Este comando inicia una red Avalanche de cinco nodos en tu máquina. Necesita descargar las últimas
 versiones de AvalancheGo y Subnet-EVM. El comando puede tardar unos minutos en ejecutarse.
 
-Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac, 
-necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando 
+Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac,
+necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando
 `softwareupdate --install-rosetta` .
 
 Si todo funciona como se espera, la salida del comando debería verse algo así:
@@ -240,3 +240,4 @@ Subnet un paso más cerca de la producción.
 **¿Cómo se determina la ID de la Subnet al crearla?**
 
 La ID de la Subnet es el hash de la transacción que creó la Subnet.
+```

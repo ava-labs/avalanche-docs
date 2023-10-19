@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Esta guía de cómo hacer se centra en tomar una Subred con permisos ya creada y transformarla en una Subred elástica (o sin permisos).
+tags: [Construir, Subredes]
+description: Esta guía de cómo hacer se centra en tomar una Subred con permisos ya creada y transformarla en una Subred elástica (o sin permisos).
 sidebar_label: Hacer Subred sin Permisos
 pagination_label: Transformar una Subred con Permisos en una Subred Elástica
 sidebar_position: 0
@@ -17,7 +17,7 @@ Subred elástica (o sin permisos).
 
 - [Avalanche-CLI instalado](/tooling/cli-guides/install-avalanche-cli.md)
 - Has desplegado una Subred con permisos en [local](/build/subnet/deploy/local-subnet.md), en
-[Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) o en [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+  [Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) o en [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 
 ## Empezando
 

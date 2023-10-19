@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Este tutorial explica cómo verificar un contrato inteligente en un explorador de bloques usando Truffle después de desplegarlo en Avalanche C-Chain.
+tags: [Construir, Dapps]
+description: Este tutorial explica cómo verificar un contrato inteligente en un explorador de bloques usando Truffle después de desplegarlo en Avalanche C-Chain.
 sidebar_label: Usando Truffle
 pagination_label: Verificando Contratos Inteligentes con Truffle Verify
 ---
@@ -87,10 +87,10 @@ Configura tu archivo `truffle-config.js` con la configuración adecuada:
  *
  */
 
-const HDWalletProvider = require("@truffle/hdwallet-provider")
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 //
-const { snowtraceApiKey, mnemonic } = require("./.env.json")
+const { snowtraceApiKey, mnemonic } = require("./.env.json");
 
 module.exports = {
   /**
@@ -119,7 +119,7 @@ module.exports = {
       confirmations: 5,
     },
   },
-}
+};
 ```
 
 _La red se puede configurar para el despliegue en Mainnet (ver Alternativas)_
@@ -165,9 +165,9 @@ Si tienes problemas, contáctanos en [Discord](https://chat.avalabs.org)
 
 1. Ejecuta el siguiente comando:
 
-    ```zsh
-    npx truffle run verify ConvertLib MetaCoin --network fuji
-    ```
+   ```zsh
+   npx truffle run verify ConvertLib MetaCoin --network fuji
+   ```
 
 2. Espera el mensaje de verificación desde la CLI
    ![truffle-verify-message1](/img/truffle-verify-message1.png)

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Esta guía muestra cómo implementar e interactuar con contratos inteligentes utilizando Foundry en una Red Avalanche local y la C-Chain Fuji.
+tags: [Construir, Dapps]
+description: Esta guía muestra cómo implementar e interactuar con contratos inteligentes utilizando Foundry en una Red Avalanche local y la C-Chain Fuji.
 sidebar_label: Foundry
 pagination_label: Usando Foundry con la Avalanche C-Chain
 sidebar_position: 2

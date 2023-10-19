@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Esta guía explica cómo actualizar una Máquina Virtual de una Subred desplegada.
+tags: [Construir, Subredes]
+description: Esta guía explica cómo actualizar una Máquina Virtual de una Subred desplegada.
 sidebar_label: Máquina Virtual de la Subred
 pagination_label: Actualizar la Máquina Virtual de una Subred
 sidebar_position: 2

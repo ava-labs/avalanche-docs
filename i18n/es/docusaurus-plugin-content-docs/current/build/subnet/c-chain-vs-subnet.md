@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: En este artículo, discutimos características diferenciadoras a menudo pasadas por alto de las Subredes, con un enfoque principal en aplicaciones basadas en EVM, para ayudar a los desarrolladores a determinar el mejor lugar para lanzar su aplicación.
+tags: [Construir, Subredes]
+description: En este artículo, discutimos características diferenciadoras a menudo pasadas por alto de las Subredes, con un enfoque principal en aplicaciones basadas en EVM, para ayudar a los desarrolladores a determinar el mejor lugar para lanzar su aplicación.
 sidebar_label: ¿C-Chain o Subred?
 pagination_label: Cuándo construir en una Subred vs. en la C-Chain
 ---

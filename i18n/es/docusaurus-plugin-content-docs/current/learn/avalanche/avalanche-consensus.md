@@ -1,7 +1,13 @@
 ---
-etiquetas: [Consenso Avalanche, Protocolo Avalanche]
-descripción: El Consenso Avalanche es un protocolo de consenso que es escalable, robusto y descentralizado.
-palabras clave: [consenso avalanche, consenso snowman, escalando blockchains, consenso nakamoto]
+tags: [Consenso Avalanche, Protocolo Avalanche]
+description: El Consenso Avalanche es un protocolo de consenso que es escalable, robusto y descentralizado.
+palabras clave:
+  [
+    consenso avalanche,
+    consenso snowman,
+    escalando blockchains,
+    consenso nakamoto,
+  ]
 sidebar_label: Consenso Avalanche
 ---
 
@@ -19,13 +25,13 @@ eficiencia energética. Para ver el whitepaper, vea [aquí](https://www.avalabs.
 Las características clave incluyen:
 
 - Velocidad: el consenso Avalanche proporciona finalidad inmutable en fracciones de segundo, asegurando que las transacciones sean
-confirmadas rápidamente e irreversibles.
+  confirmadas rápidamente e irreversibles.
 - Escalabilidad: el consenso Avalanche permite un alto rendimiento de la red al tiempo que garantiza baja latencia.
 - Eficiencia energética: a diferencia de otros protocolos de consenso populares, la participación en el consenso Avalanche
-no es intensiva en computación ni costosa.
+  no es intensiva en computación ni costosa.
 - Seguridad adaptativa: el consenso Avalanche está diseñado para resistir varios ataques, incluidos ataques sybil,
-ataques de denegación de servicio distribuido (DDoS) y ataques de colusión. Su naturaleza probabilística asegura que el resultado del consenso converja al estado deseado, incluso cuando la red
-está bajo ataque.
+  ataques de denegación de servicio distribuido (DDoS) y ataques de colusión. Su naturaleza probabilística asegura que el resultado del consenso converja al estado deseado, incluso cuando la red
+  está bajo ataque.
 
 ![Comparación de Consensos](/img/Consensus-protocol-comparison.png)
 
@@ -57,7 +63,7 @@ consultados respondan con la misma respuesta durante un número suficiente de ro
 
 - El número de validadores requeridos para ser considerados una "mayoría suficiente" se denomina "α" (_alfa_).
 - El número de rondas consecutivas requeridas para alcanzar el consenso, también conocido como "Umbral de Confianza",
-se denomina "β" (_beta_).
+  se denomina "β" (_beta_).
 - Tanto α como β son configurables.
 
 Cuando una transacción no tiene conflictos, la finalización ocurre muy rápidamente. Cuando

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Lanzar cualquier aplicación descentralizada en Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche. Conéctate con la configuración de Avalanche C-Chain.
+tags: [Construir, Dapps]
+description: Lanzar cualquier aplicación descentralizada en Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche. Conéctate con la configuración de Avalanche C-Chain.
 sidebar_label: ⛓️ Configuración de la Cadena C-Chain de Avalanche
 pagination_label: Configuración de la Cadena C-Chain de Avalanche
 ---
@@ -25,5 +25,5 @@ pagination_label: Configuración de la Cadena C-Chain de Avalanche
 
 ## Agregar la Red a la Billetera en un Clic
 
-Para agregar fácilmente una red a tu billetera de navegador de elección, visita 
+Para agregar fácilmente una red a tu billetera de navegador de elección, visita
 [chainlist](https://chainlist.org/?search=Avalanche&testnets=true) y conecta tu billetera.

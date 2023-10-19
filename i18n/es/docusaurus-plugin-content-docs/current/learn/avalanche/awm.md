@@ -1,7 +1,16 @@
 ---
-etiquetas: [Avalanche Warp Messaging, Comunicación entre subredes]
-descripción: AWM permite una comunicación fluida entre diferentes subredes en Avalanche, permitiendo a los desarrolladores establecer protocolos de comunicación personalizados.
-palabras clave: [docs, documentación, avalanche, avalanche warp messaging, awm, comunicación entre subredes, cross-chain]
+tags: [Avalanche Warp Messaging, Comunicación entre subredes]
+description: AWM permite una comunicación fluida entre diferentes subredes en Avalanche, permitiendo a los desarrolladores establecer protocolos de comunicación personalizados.
+palabras clave:
+  [
+    docs,
+    documentación,
+    avalanche,
+    avalanche warp messaging,
+    awm,
+    comunicación entre subredes,
+    cross-chain,
+  ]
 sidebar_label: Avalanche Warp Messaging
 ---
 

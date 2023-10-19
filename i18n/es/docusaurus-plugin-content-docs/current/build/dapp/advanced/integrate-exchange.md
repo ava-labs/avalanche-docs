@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: El objetivo de este documento es proporcionar una breve descripción de cómo integrarse con la C-Chain Avalanche compatible con EVM. 
+tags: [Construir, Dapps]
+description: El objetivo de este documento es proporcionar una breve descripción de cómo integrarse con la C-Chain Avalanche compatible con EVM.
 sidebar_label: Integración de intercambio
 pagination_label: Integración de intercambio en C-Chain
 sidebar_position: 3

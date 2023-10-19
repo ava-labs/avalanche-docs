@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Puedes listar las Subredes que has creado con `avalanche subnet list`.
+tags: [Construir, Subredes]
+description: Puedes listar las Subredes que has creado con `avalanche subnet list`.
 sidebar_label: Ver Subredes
 pagination_label: Ver tus Subredes Creadas
 sidebar_position: 0
@@ -38,8 +38,6 @@ Para ver información detallada sobre tus Subredes desplegadas, agrega la bander
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 ```
 
-
-
 ## Describir Configuraciones de Subredes
 
 Para ver los detalles de una configuración específica, ejecuta
@@ -48,7 +46,7 @@ Para ver los detalles de una configuración específica, ejecuta
 
 Ejemplo:
 
-```text
+````text
 > avalanche subnet describe firstsubnet
 
  _____       _        _ _
@@ -189,4 +187,4 @@ No se han establecido precompilaciones.
     "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "baseFeePerGas": null
 }
-```
+````

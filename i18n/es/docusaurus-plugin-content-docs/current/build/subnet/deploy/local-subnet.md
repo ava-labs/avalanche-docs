@@ -13,8 +13,8 @@ red Avalanche local.
 
 ## Requisitos previos
 
-- [Avalanche-CLI instalado](/herramientas/guias-de-cli/instalar-avalanche-cli.md)
-- Has [creado una configuración de Subred](/construir/subred/hola-subred#crea-tu-configuracion-de-subred)
+- [Avalanche-CLI instalado](/tooling/cli-guides/install-avalanche-cli.md)
+- Has [creado una configuración de Subred](/build/subnet/hello-subnet#create-your-subnet-configuration)
 
 ## Desplegando Subredes localmente
 
@@ -84,7 +84,7 @@ Símbolo de moneda:  TUTORIAL
 Puedes usar los detalles del despliegue para conectarte e interactuar con tu Subred.
 
 Para gestionar la red Avalanche local recién desplegada, consulta
-[el árbol de comandos `avalanche network`](/herramientas/avalanche-cli.md#red).
+[el árbol de comandos `avalanche network`](/tooling/avalanche-cli.md#network).
 
 ### Desplegando Múltiples Subredes
 

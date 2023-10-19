@@ -1,7 +1,14 @@
 ---
-etiquetas: [Red Primaria, Subredes]
-descripción: Avalanche Mainnet es la versión final y lista para producción de la blockchain donde los usuarios pueden interactuar con la red y realizar transacciones con activos del mundo real.
-palabras clave: [documentación, mainnet, red primaria, activos del mundo real, construir en avalanche]
+tags: [Red Primaria, Subredes]
+description: Avalanche Mainnet es la versión final y lista para producción de la blockchain donde los usuarios pueden interactuar con la red y realizar transacciones con activos del mundo real.
+palabras clave:
+  [
+    documentación,
+    mainnet,
+    red primaria,
+    activos del mundo real,
+    construir en avalanche,
+  ]
 sidebar_label: Mainnet
 ---
 
