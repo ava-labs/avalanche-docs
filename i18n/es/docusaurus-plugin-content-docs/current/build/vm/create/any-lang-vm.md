@@ -1,305 +1,249 @@
 ---
-tags: [Build, Virtual Machines]
-description: This is a language-agnostic high-level documentation explaining the basics of how to get started at implementing your own virtual machine from scratch.
-sidebar_label: Simple VM in Any Language
-pagination_label: Build a Simple VM From Scratch
+etiquetas: [Construir, Máquinas Virtuales]
+descripción: Esta es una documentación de alto nivel, independiente del lenguaje, que explica los conceptos básicos de cómo empezar a implementar tu propia máquina virtual desde cero.
+sidebar_label: VM Simple en Cualquier Lenguaje
+pagination_label: Construir una VM Simple desde Cero
 sidebar_position: 0
 ---
 
-# How to Build a Simple VM From Scratch
+# Cómo Construir una VM Simple desde Cero
 
-This is a language-agnostic high-level documentation explaining the basics of how to get started
-at implementing your own virtual machine from scratch.
+Esta es una documentación de alto nivel, independiente del lenguaje, que explica los conceptos básicos de cómo empezar
+a implementar tu propia máquina virtual desde cero.
 
-Avalanche virtual machines are grpc servers implementing Avalanche's 
-[Proto interfaces](https://buf.build/ava-labs/avalanche). This means that it can be done in 
-[any language that has a grpc implementation](https://grpc.io/docs/languages/).
+Las máquinas virtuales Avalanche son servidores grpc que implementan las interfaces Proto de Avalanche's
+[Proto interfaces](https://buf.build/ava-labs/avalanche). Esto significa que se puede hacer en
+[cualquier lenguaje que tenga una implementación grpc](https://grpc.io/docs/languages/).
 
-## Minimal Implementation
+## Implementación Mínima
 
-To get the process started, at the minimum, you will to implement the following interfaces : 
+Para empezar el proceso, como mínimo, tendrás que implementar las siguientes interfaces:
 
-- [`vm.Runtime`](https://buf.build/ava-labs/avalanche/docs/main:vm.runtime) (Client)
-- [`vm.VM`](https://buf.build/ava-labs/avalanche/docs/main:vm) (Server)
+- [`vm.Runtime`](https://buf.build/ava-labs/avalanche/docs/main:vm.runtime) (Cliente)
+- [`vm.VM`](https://buf.build/ava-labs/avalanche/docs/main:vm) (Servidor)
 
-To build a blockchain taking advantage of AvalancheGo's consensus to build blocks, you will need
-to implement :
+Para construir una blockchain aprovechando el consenso de AvalancheGo para construir bloques, necesitarás
+implementar:
 
-- [AppSender](https://buf.build/ava-labs/avalanche/docs/main:appsender) (Client)
-- [Messenger](https://buf.build/ava-labs/avalanche/docs/main:messenger) (Client)
+- [AppSender](https://buf.build/ava-labs/avalanche/docs/main:appsender) (Cliente)
+- [Messenger](https://buf.build/ava-labs/avalanche/docs/main:messenger) (Cliente)
 
-To have a json-RPC endpoint, `/ext/bc/subnetId/rpc` exposed by AvalancheGo, you will need 
-to implement : 
+Para tener un punto final json-RPC, `/ext/bc/subnetId/rpc`, expuesto por AvalancheGo, necesitarás
+implementar:
 
-- [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) (Server)
+- [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) (Servidor)
 
-You can and should use a tool like `buf` to generate the (Client/Server) code from the interfaces
-as stated in the [Avalanche module](https://buf.build/ava-labs/avalanche)'s page.
+Puedes y debes usar una herramienta como `buf` para generar el código (Cliente/Servidor) a partir de las interfaces
+como se indica en la página del módulo [Avalanche](https://buf.build/ava-labs/avalanche).
 
-
-:::note
-There are _server_ and _client_ interfaces to implement.
-AvalancheGo calls the _server_ interfaces exposed by your VM and your VM calls 
-the _client_ interfaces exposed by AvalancheGo.
+:::nota
+Hay interfaces de _servidor_ y de _cliente_ que implementar.
+AvalancheGo llama a las interfaces de _servidor_ expuestas por tu VM y tu VM llama a las interfaces de _cliente_ expuestas por AvalancheGo.
 :::
 
-## Starting Process 
+## Proceso de Inicio
 
-Your VM is started by AvalancheGo launching your binary. Your binary is started as a sub-process
-of AvalancheGo. While launching your binary, AvalancheGo passes an environment variable
-`AVALANCHE_VM_RUNTIME_ENGINE_ADDR` containing an url. We must use this url to initialize a
-`vm.Runtime` client. 
+Tu VM se inicia cuando AvalancheGo lanza tu binario. Tu binario se inicia como un subproceso
+de AvalancheGo. Al lanzar tu binario, AvalancheGo pasa una variable de entorno
+`AVALANCHE_VM_RUNTIME_ENGINE_ADDR` que contiene una URL. Debemos usar esta URL para inicializar un
+cliente `vm.Runtime`.
 
-Your VM, after having started a grpc server implementing the VM interface must call the 
+Tu VM, después de haber iniciado un servidor grpc que implementa la interfaz de la VM, debe llamar a
 [`vm.Runtime.InitializeRequest`](https://buf.build/ava-labs/avalanche/docs/main:vm.runtime#vm.runtime.InitializeRequest)
-with the following parameters.
+con los siguientes parámetros.
 
-- `protocolVersion` : It must match the `supported plugin version` of the 
-[AvalancheGo release](https://github.com/ava-labs/AvalancheGo/releases) you are using. 
-It is always part of the release notes.
+- `protocolVersion`: Debe coincidir con la `versión del plugin soportada` de la
+  [versión de AvalancheGo](https://github.com/ava-labs/AvalancheGo/releases) que estás usando.
+  Siempre está en las notas de la versión.
 
-- `addr` : It is your grpc server's address. It must be in the following format
-  `host:port` (example `localhost:12345`)
+- `addr`: Es la dirección de tu servidor grpc. Debe estar en el siguiente formato
+  `host:puerto` (ejemplo `localhost:12345`)
 
-## VM Initialization
+## Inicialización de la VM
 
-The service methods are described in the same order as they are called.
-You will need to implement these methods in your server.
+Los métodos de servicio se describen en el mismo orden en que se llaman.
+Necesitarás implementar estos métodos en tu servidor.
 
-### Pre-Initialization Sequence
+### Secuencia de Pre-Inicialización
 
-_AvalancheGo starts/stops your process multiple times before launching the real initialization_ 
+_AvalancheGo inicia/detiene tu proceso varias veces antes de lanzar la inicialización real_
 
-- [VM.Version](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Version) 
-  - Return : your VM's version.
-- [VM.CreateStaticHandler](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateStaticHandlers) 
-  - Return : an empty array - (Not absolutely required). 
+- [VM.Version](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Version)
+  - Retorno: la versión de tu VM.
+- [VM.CreateStaticHandler](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateStaticHandlers)
+  - Retorno: un arreglo vacío - (No absolutamente necesario).
 - [VM.Shutdown](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Shutdown)
-  - You should gracefully stop your process.
-  - Return : Empty
+  - Debes detener tu proceso de forma adecuada.
+  - Retorno: Vacío
 
-### Initialization Sequence
+### Secuencia de Inicialización
 
 - [VM.CreateStaticHandlers](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateStaticHandlers)
-  - Return an empty array - (Not absolutely required). 
+  - Devuelve un arreglo vacío - (No es absolutamente necesario).
 - [VM.Initialize](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Initialize)
-  - Param : an 
-  [InitializeRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.InitializeRequest).
-  - You must use this data to initialize your VM.
-  - You should add the genesis block to your blockchain and set it as the last accepted block.
-  - Return : an 
-  [InitializeResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.InitializeResponse) 
-  containing data about the genesis extracted from the `genesis_bytes` that was sent in the 
-  request.
+  - Parámetro: una [InitializeRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.InitializeRequest).
+  - Debes usar estos datos para inicializar tu VM.
+  - Debes agregar el bloque génesis a tu blockchain y establecerlo como el último bloque aceptado.
+  - Devolución: una [InitializeResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.InitializeResponse) que contiene datos sobre el génesis extraídos de los `genesis_bytes` que se enviaron en la solicitud.
 - [VM.VerifyHeightIndex](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.VerifyHeightIndex)
-  - Return : a 
-[VerifyHeightIndexResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VerifyHeightIndexResponse)
-  with the code `ERROR_UNSPECIFIED` to indicate that no error has occurred.
+  - Devolución: una [VerifyHeightIndexResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VerifyHeightIndexResponse) con el código `ERROR_UNSPECIFIED` para indicar que no ha ocurrido ningún error.
 - [VM.CreateHandlers](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.CreateHandlers)
-  - To serve json-RPC endpoint, `/ext/bc/subnetId/rpc` exposed by AvalancheGo 
-  - See [json-RPC](#json-rpc) for more detail
-  - Create a [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) server and get its url.
-  - Return : a `CreateHandlersResponse` containing a single item with the server's url. (or an empty
-  array if not implementing the json-RPC endpoint)
+  - Para servir el punto final json-RPC, `/ext/bc/subnetId/rpc` expuesto por AvalancheGo.
+  - Ver [json-RPC](#json-rpc) para más detalles.
+  - Crea un servidor [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) y obtén su URL.
+  - Devolución: una `CreateHandlersResponse` que contiene un solo elemento con la URL del servidor (o un arreglo vacío si no se implementa el punto final json-RPC).
 - [VM.StateSyncEnabled](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.StateSyncEnabled)
-  - Return : `true` if you want to enable StateSync, `false` otherwise.
+  - Devolución: `true` si quieres habilitar StateSync, `false` en caso contrario.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-    _If you had specified `true` in the `StateSyncEnabled` result_ 
-  - Param : a 
-  [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) 
-  with the `StateSyncing` value
-  - Set your blockchain's state to `StateSyncing`
-  - Return : a 
-  [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) 
-  built from the genesis block.
+    _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
+  - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `StateSyncing`.
+  - Establece el estado de tu blockchain a `StateSyncing`.
+  - Devolución: una [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) construida a partir del bloque génesis.
 - [VM.GetOngoingSyncStateSummary](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.GetOngoingSyncStateSummary)
-    _If you had specified `true` in the `StateSyncEnabled` result_ 
-  - Return : a 
-[GetOngoingSyncStateSummaryResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.GetOngoingSyncStateSummaryResponse)
-  built from the genesis block.
+    _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
+  - Devolución: una [GetOngoingSyncStateSummaryResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.GetOngoingSyncStateSummaryResponse) construida a partir del bloque génesis.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-  - Param : a 
-[SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) 
-  with the `Bootstrapping` value
-  - Set your blockchain's state to `Bootstrapping`
-  - Return : a 
-[SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) 
-  built from the genesis block.
+  - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `Bootstrapping`.
+  - Establece el estado de tu blockchain a `Bootstrapping`.
+  - Devolución: una [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) construida a partir del bloque génesis.
 - [VM.SetPreference](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetPreference)
-  - Param : `SetPreferenceRequest` containing the preferred block ID 
-  - Return : Empty
+  - Parámetro: `SetPreferenceRequest` que contiene el ID de bloque preferido.
+  - Devolución: Vacío.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-  - Param : a 
-[SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) 
-  with the `NormalOp` value
-  - Set your blockchain's state to `NormalOp`
-  - Return : a 
-[SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) 
-  built from the genesis block.
+  - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `NormalOp`.
+  - Establece el estado de tu blockchain a `NormalOp`.
+  - Devolución: una [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) construida a partir del bloque génesis.
 - [VM.Connected](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Connected) 
-(for every other node validating this Subnet in the network)
-  - Param : a 
-[ConnectedRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ConnectedRequest) 
-  with the NodeID and the version of AvalancheGo.
-  - Return : Empty
+(para cada otro nodo que valida esta Subnet en la red)
+  - Parámetro: una [ConnectedRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ConnectedRequest) con el NodeID y la versión de AvalancheGo.
+  - Devolución: Vacío.
 - [VM.Health](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Health) 
-  - Param : Empty
-  - Return : a
-    [HealthResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.HealthResponse)
-    with an empty `details` property.
+  - Parámetro: Vacío.
+  - Devolución: una [HealthResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.HealthResponse) con una propiedad `details` vacía.
 - [VM.ParseBlock](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.ParseBlock)
-  - Param : A byte array containing a Block (the genesis block in this case)
-  - Return : a 
-[ParseBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ParseBlockResponse) 
-  built from the last accepted block.
+  - Parámetro: Un arreglo de bytes que contiene un Bloque (el bloque génesis en este caso).
+  - Devolución: una [ParseBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ParseBlockResponse) construida a partir del último bloque aceptado.
 
-At this point, your VM is fully started and initialized.
+En este punto, tu VM está completamente iniciada e inicializada.
 
-### Building Blocks
+### Construyendo Bloques
 
-#### Transaction Gossiping Sequence
+#### Secuencia de Gossiping de Transacciones
 
-When your VM receives transactions (for example using the [json-RPC](#json-rpc) endpoints), 
-it can gossip them to the other nodes by using the 
-[AppSender](https://buf.build/ava-labs/avalanche/docs/main:appsender) service.
+Cuando tu VM recibe transacciones (por ejemplo, usando los puntos finales json-RPC), puede hacer gossip de ellas a los otros nodos usando el servicio [AppSender](https://buf.build/ava-labs/avalanche/docs/main:appsender).
 
-Supposing we have a 3 nodes network with nodeX, nodeY, nodeZ
+Supongamos que tenemos una red de 3 nodos con nodeX, nodeY, nodeZ.
 
-NodeX has received a new transaction on it's json-RPC endpoint : 
-_on nodeX_
+NodeX ha recibido una nueva transacción en su punto final json-RPC: 
+_en nodeX_
 
 - [`AppSender.SendAppGossip`](https://buf.build/ava-labs/avalanche/docs/main:appsender#appsender.AppSender.SendAppGossip)
-(_client_)
-  - You must serialize your transaction data into a byte array and call the 
-  `SendAppGossip` to propagate the transaction.
+(cliente)
+  - Debes serializar los datos de tu transacción en un arreglo de bytes y llamar al método `SendAppGossip` para propagar la transacción.
 
+AvalancheGo luego propaga esto a los otros nodos.
 
-AvalancheGo then propagates this to the other nodes.
-
-_on nodeY and nodeZ_
+_en nodeY y nodeZ_
 
 - [VM.AppGossip](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.AppGossip)
-  - Param : A byte array containing your transaction data, and the NodeID of the node which sent
-  the gossip message.
-  - You must deserialize the transaction and store it for the next block.
-  - Return : Empty
+  - Parámetro: Un arreglo de bytes que contiene los datos de tu transacción y el NodeID del nodo que envió el mensaje de gossip.
+  - Debes deserializar la transacción y almacenarla para el próximo bloque.
+  - Devolución: Vacío
 
-#### Block Building Sequence
+#### Secuencia de Construcción de Bloques
 
-Whenever your VM is ready to build a new block, it will initiate the block building process by 
-using the [Messenger](https://buf.build/ava-labs/avalanche/docs/main:messenger) service.
-Supposing that nodeY wants to build the block. _you probably will implement some kind of background
-worker checking every second if there are any pending transactions_ :
+Cuando tu VM está lista para construir un nuevo bloque, iniciará el proceso de construcción de bloques usando el servicio [Messenger](https://buf.build/ava-labs/avalanche/docs/main:messenger).
+Supongamos que nodeY quiere construir el bloque. _probablemente implementarás algún tipo de trabajador en segundo plano que verifica cada segundo si hay transacciones pendientes_:
 
-_on nodeY_
+_en nodeY_
 
-- _client_ 
+- _cliente_ 
 [`Messenger.Notify`](https://buf.build/ava-labs/avalanche/docs/main:messenger#messenger.Messenger.Notify)
-  - You must issue a notify request to AvalancheGo by calling the method with the 
-  `MESSAGE_BUILD_BLOCK` value.
+  - Debes enviar una solicitud de notificación a AvalancheGo llamando al método con el valor `MESSAGE_BUILD_BLOCK`.
 
-_on nodeY_
+_en nodeY_
 
 - [VM.BuildBlock](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BuildBlock)
-  - Param : Empty
-  - You must build a block with your pending transactions. Serialize it to a byte array.
-  - Store this block in memory as a "pending blocks"
-  - Return : a 
-  [BuildBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.BuildBlockResponse) 
-  from the newly built block and it's associated data (`id`, `parent_id`, `height`, `timestamp`).
+  - Parámetro: Vacío
+  - Debes construir un bloque con tus transacciones pendientes. Sérialo a un arreglo de bytes.
+  - Almacena este bloque en memoria como "bloques pendientes".
+  - Retorno: una [BuildBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.BuildBlockResponse) del bloque recién construido y sus datos asociados (`id`, `parent_id`, `height`, `timestamp`).
 - [VM.BlockVerify](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockVerify)
-  - Param : The byte array containing the block data  
-  - Return : the block's timestamp
+  - Parámetro: El arreglo de bytes que contiene los datos del bloque
+  - Retorno: la marca de tiempo del bloque
 - [VM.SetPreference](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetPreference)
-  - Param : The block's ID
-  - You must mark this block as the next preferred block.
-  - Return : Empty
+  - Parámetro: La ID del bloque
+  - Debes marcar este bloque como el siguiente bloque preferido.
+  - Retorno: Vacío
 
-_on nodeX and nodeZ_ 
+_en el nodoX y el nodoZ_
 
 - [VM.ParseBlock](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.ParseBlock)
-  - Param : A byte array containing a the newly built block's data
-  - Store this block in memory as a "pending blocks"
-  - Return : a 
-  [ParseBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ParseBlockResponse) 
-  built from the last accepted block.
+  - Parámetro: Un arreglo de bytes que contiene los datos del bloque recién construido
+  - Almacena este bloque en memoria como "bloques pendientes".
+  - Retorno: una [ParseBlockResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ParseBlockResponse) construida a partir del último bloque aceptado.
 - [VM.BlockVerify](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockVerify)
-  - Param : The byte array containing the block data  
-  - Return : the block's timestamp
+  - Parámetro: El arreglo de bytes que contiene los datos del bloque
+  - Retorno: la marca de tiempo del bloque
 - [VM.SetPreference](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetPreference)
-  - Param : The block's ID
-  - You must mark this block as the next preferred block.
-  - Return : Empty
+  - Parámetro: La ID del bloque
+  - Debes marcar este bloque como el siguiente bloque preferido.
+  - Retorno: Vacío
 
-_on all nodes_
+_en todos los nodos_
 
 - [VM.BlockAccept](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockAccept)
-  - Param : The block's ID
-  - You must accept this block as your last final block.
-  - Return : Empty
+  - Parámetro: La ID del bloque
+  - Debes aceptar este bloque como tu último bloque final.
+  - Retorno: Vacío
 
-#### Managing Conflicts
+#### Manejando Conflictos
 
-Conflicts happen when two or more nodes propose the next block at the same time.
-AvalancheGo takes care of this and decides which block should be considered
-final, and which blocks should be rejected using Snowman consensus.
-On the VM side, all there is to do is implement the `VM.BlockAccept` and
-`VM.BlockReject` methods.
+Los conflictos ocurren cuando dos o más nodos proponen el siguiente bloque al mismo tiempo.
+AvalancheGo se encarga de esto y decide qué bloque debe considerarse final, y qué bloques deben ser rechazados usando el consenso Snowman.
+En el lado de la VM, todo lo que hay que hacer es implementar los métodos `VM.BlockAccept` y `VM.BlockReject`.
 
-_nodeX proposes block `0x123...`, nodeY proposes block `0x321...` and nodeZ
-proposes block `0x456`_
+_el nodoX propone el bloque `0x123...`, el nodoY propone el bloque `0x321...` y el nodoZ propone el bloque `0x456`_
 
-There are three conflicting blocks (different hashes), and if we look at our VM's
-log files, we can see that AvalancheGo uses Snowman to decide which block must
-be accepted. 
+Hay tres bloques en conflicto (hashes diferentes), y si miramos los archivos de registro de nuestra VM, podemos ver que AvalancheGo usa Snowman para decidir qué bloque debe ser aceptado.
 
 ```log
 ...
-... snowman/voter.go:58 filtering poll results ...
-... snowman/voter.go:65 finishing poll ...
-... snowman/voter.go:87 Snowman engine can't quiesce
+... snowman/voter.go:58 filtrando resultados de la votación ...
+... snowman/voter.go:65 finalizando votación ...
+... snowman/voter.go:87 el motor Snowman no puede quedar en reposo
 ... 
-... snowman/voter.go:58 filtering poll results ...
-... snowman/voter.go:65 finishing poll ...
-... snowman/topological.go:600 accepting block
+... snowman/voter.go:58 filtrando resultados de la votación ...
+... snowman/voter.go:65 finalizando votación ...
+... snowman/topological.go:600 aceptando bloque
 ...
 ```
 
-Supposing that AvalancheGo accepts block `0x123...`. The following RPC methods
-are called on all nodes :
+Suponiendo que AvalancheGo acepta el bloque `0x123...`. Los siguientes métodos RPC se llaman en todos los nodos:
 
 - [VM.BlockAccept](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockAccept)
-  - Param : The block's ID (`0x123...`)
-  - You must accept this block as your last final block.
-  - Return : Empty
+  - Parámetro: La ID del bloque (`0x123...`)
+  - Debes aceptar este bloque como tu último bloque final.
+  - Retorno: Vacío
 - [VM.BlockReject](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockReject)
-  - Param : The block's ID (`0x321...`)
-  - You must mark this block as rejected.
-  - Return : Empty
+  - Parámetro: La ID del bloque (`0x321...`)
+  - Debes marcar este bloque como rechazado.
+  - Retorno: Vacío
 - [VM.BlockReject](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.BlockReject)
-  - Param : The block's ID (`0x456...`)
-  - You must mark this block as rejected.
-  - Return : Empty
+  - Parámetro: La ID del bloque (`0x456...`)
+  - Debes marcar este bloque como rechazado.
+  - Retorno: Vacío
 
 ### json-RPC
 
-To enable your json-RPC endpoint, you must implement the HandleSimple method of the 
-[`Http`](https://buf.build/ava-labs/avalanche/docs/main:http) interface. 
+Para habilitar tu punto de conexión json-RPC, debes implementar el método HandleSimple de la interfaz [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http).
 
 - [`Http.HandleSimple`](https://buf.build/ava-labs/avalanche/docs/main:http#http.HTTP.HandleSimple)
-  - Param : a 
-  [HandleSimpleHTTPRequest](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPRequest)
-  containing the original request's method, url, headers, and body.
-  - Analyze, deserialize and handle the request 
+  - Parámetro: un [HandleSimpleHTTPRequest](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPRequest) que contiene el método, la URL, las cabeceras y el cuerpo de la solicitud original.
+  - Analiza, deserializa y maneja la solicitud
     
-    _for example, if the request represents a transaction, we must deserialize it, check the 
-    signature, store it and gossip it to the other nodes using the 
-    [messenger client](#block-building-sequence))_
-  - Return the 
-  [HandleSimpleHTTPResponse](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPResponse)
-  response that will be sent back to the original sender.
+    _por ejemplo, si la solicitud representa una transacción, debemos deserializarla, verificar la firma, almacenarla y difundirla a los otros nodos usando el cliente de mensajería (ver [secuencia de construcción de bloques](#secuencia-de-construcción-de-bloques))_
+  - Retorna la respuesta [HandleSimpleHTTPResponse](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPResponse) que se enviará de vuelta al remitente original.
 
-This server is registered with AvalancheGo during the 
-[initialization process](#initialization-sequence) when the `VM.CreateHandlers` method is called.
-You must simply respond with the server's url in the `CreateHandlersResponse`
-result.
+Este servidor se registra con AvalancheGo durante el proceso de inicialización cuando se llama al método `VM.CreateHandlers`.
+Simplemente debes responder con la URL del servidor en el resultado `CreateHandlersResponse`.

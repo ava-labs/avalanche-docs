@@ -1,81 +1,82 @@
 ---
-tags: [Build, Virtual Machines]
-description: Learn how to build a simple virtual machine on Avalanche using Golang.
-sidebar_label: Simple Golang VM
-pagination_label: Build a Simple Golang VM
+tags: [Construir, Máquinas Virtuales]
+description: Aprende cómo construir una máquina virtual simple en Avalanche usando Golang.
+sidebar_label: VM Golang Simple
+pagination_label: Construir una VM Golang Simple
 sidebar_position: 1
 ---
 
-# How to Build a Simple Golang VM
+# Cómo Construir una VM Golang Simple
 
-In this tutorial, we’ll create a very simple VM called the
-[TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the TimestampVM's
-blockchain contains a strictly increasing timestamp when the block was created and a 32-byte payload
-of data.
+En este tutorial, crearemos una VM muy simple llamada la
+[TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Cada bloque en la blockchain de la
+TimestampVM contiene una marca de tiempo estrictamente creciente cuando se creó el bloque y una carga
+de datos de 32 bytes.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the
-block was created. Suppose you have a book manuscript, and you want to be able to prove in the
-future that the manuscript exists today. You can add a block to the blockchain where the block’s
-payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today
-by showing that the block has the hash of your manuscript in its payload (this follows from the fact
-that finding the pre-image of a hash is impossible).
+Un servidor así es útil porque se puede usar para probar que un dato existía en el momento en que se
+creó el bloque. Supongamos que tienes un manuscrito de un libro y quieres poder probar en el
+futuro que el manuscrito existe hoy en día. Puedes agregar un bloque a la blockchain donde la carga
+del bloque es un hash de tu manuscrito. En el futuro, puedes probar que el manuscrito existía hoy
+mostrando que el bloque tiene el hash de tu manuscrito en su carga (esto se sigue del hecho de que
+encontrar la pre-imagen de un hash es imposible).
 
-## TimestampVM Implementation
+## Implementación de la TimestampVM
 
-Now we know the interface our VM must implement and the libraries we can use to build a VM.
+Ahora sabemos la interfaz que nuestra VM debe implementar y las bibliotecas que podemos usar para
+construir una VM.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You
-can also follow the code in the [TimestampVM
-repository](https://github.com/ava-labs/timestampvm/tree/main).
+Escribamos nuestra VM, que implementa `block.ChainVM` y cuyos bloques implementan `snowman.Block`. También
+puedes seguir el código en el [repositorio de la TimestampVM
+](https://github.com/ava-labs/timestampvm/tree/main).
 
 ### Codec
 
-`Codec` is required to encode/decode the block into byte representation. TimestampVM uses the
-default codec and manager.
+`Codec` es necesario para codificar/decodificar el bloque en representación de bytes. La TimestampVM
+utiliza el codec y el gestor por defecto.
 
 ```go title="/timestampvm/codec.go"
 const (
-	// CodecVersion is the current default codec version
+	// CodecVersion es la versión de codec por defecto actual
 	CodecVersion = 0
 )
 
-// Codecs do serialization and deserialization
+// Codecs hacen la serialización y deserialización
 var (
 	Codec codec.Manager
 )
 
 func init() {
-	// Create default codec and manager
+	// Crear codec y gestor por defecto
 	c := linearcodec.NewDefault()
 	Codec = codec.NewDefaultManager()
 
-	// Register codec to manager with CodecVersion
+	// Registrar codec en el gestor con CodecVersion
 	if err := Codec.RegisterCodec(CodecVersion, c); err != nil {
 		panic(err)
 	}
 }
 ```
 
-### State
+### Estado
 
-The `State` interface defines the database layer and connections. Each VM should define their own
-database methods. `State` embeds the `BlockState` which defines block-related state operations.
+La interfaz `State` define la capa de base de datos y las conexiones. Cada VM debe definir sus propios
+métodos de base de datos. `State` incrusta el `BlockState` que define las operaciones de estado relacionadas con los bloques.
 
 ```go title="/timestampvm/state.go"
 var (
-	// These are prefixes for db keys.
-	// It's important to set different prefixes for each separate database objects.
+	// Estos son prefijos para las claves de la base de datos.
+	// Es importante establecer prefijos diferentes para cada objeto de base de datos separado.
 	singletonStatePrefix = []byte("singleton")
 	blockStatePrefix     = []byte("block")
 
 	_ State = &state{}
 )
 
-// State is a wrapper around avax.SingleTonState and BlockState
-// State also exposes a few methods needed for managing database commits and close.
+// State es un envoltorio alrededor de avax.SingleTonState y BlockState
+// State también expone algunos métodos necesarios para gestionar las confirmaciones de la base de datos y el cierre.
 type State interface {
-	// SingletonState is defined in avalanchego,
-	// it is used to understand if db is initialized already.
+	// SingletonState está definido en avalanchego,
+	// se utiliza para entender si la base de datos está inicializada o no.
 	avax.SingletonState
 	BlockState
 
@@ -91,15 +92,15 @@ type state struct {
 }
 
 func NewState(db database.Database, vm *VM) State {
-	// create a new baseDB
+	// crear una nueva base de datos baseDB
 	baseDB := versiondb.New(db)
 
-	// create a prefixed "blockDB" from baseDB
+	// crear un "blockDB" prefijado a partir de baseDB
 	blockDB := prefixdb.New(blockStatePrefix, baseDB)
-	// create a prefixed "singletonDB" from baseDB
+	// crear un "singletonDB" prefijado a partir de baseDB
 	singletonDB := prefixdb.New(singletonStatePrefix, baseDB)
 
-	// return state with created sub state components
+	// devolver el estado con los componentes de estado subcreados
 	return &state{
 		BlockState:     NewBlockState(blockDB, vm),
 		SingletonState: avax.NewSingletonState(singletonDB),
@@ -107,20 +108,20 @@ func NewState(db database.Database, vm *VM) State {
 	}
 }
 
-// Commit commits pending operations to baseDB
+// Commit confirma las operaciones pendientes en baseDB
 func (s *state) Commit() error {
 	return s.baseDB.Commit()
 }
 
-// Close closes the underlying base database
+// Close cierra la base de datos base subyacente
 func (s *state) Close() error {
 	return s.baseDB.Close()
 }
 ```
 
-#### Block State
+#### Estado de Bloque
 
-This interface and implementation provides storage functions to VM to store and retrieve blocks.
+Esta interfaz e implementación proporciona funciones de almacenamiento a la VM para almacenar y recuperar bloques.
 
 ```go title="/timestampvm/block_state.go"
 const (
@@ -128,16 +129,16 @@ const (
 )
 
 const (
-	// maximum block capacity of the cache
+	// capacidad máxima de bloque de la caché
 	blockCacheSize = 8192
 )
 
-// persists lastAccepted block IDs with this key
+// persiste los IDs de bloque lastAccepted con esta clave
 var lastAcceptedKey = []byte{lastAcceptedByte}
 
 var _ BlockState = &blockState{}
 
-// BlockState defines methods to manage state with Blocks and LastAcceptedIDs.
+// BlockState define métodos para gestionar el estado con Bloques e IDs LastAccepted.
 type BlockState interface {
 	GetBlock(blkID ids.ID) (*Block, error)
 	PutBlock(blk *Block) error
@@ -146,25 +147,25 @@ type BlockState interface {
 	SetLastAccepted(ids.ID) error
 }
 
-// blockState implements BlocksState interface with database and cache.
+// blockState implementa la interfaz BlocksState con base de datos y caché.
 type blockState struct {
-	// cache to store blocks
+	// caché para almacenar bloques
 	blkCache cache.Cacher
-	// block database
+	// base de datos de bloques
 	blockDB      database.Database
 	lastAccepted ids.ID
 
-	// vm reference
+	// referencia a la VM
 	vm *VM
 }
 
-// blkWrapper wraps the actual blk bytes and status to persist them together
+// blkWrapper envuelve los bytes de blk reales y el estado para persistirlos juntos
 type blkWrapper struct {
 	Blk    []byte         `serialize:"true"`
 	Status choices.Status `serialize:"true"`
 }
 
-// NewBlockState returns BlockState with a new cache and given db
+// NewBlockState devuelve BlockState con una nueva caché y la base de datos dada
 func NewBlockState(db database.Database, vm *VM) BlockState {
 	return &blockState{
 		blkCache: &cache.LRU{Size: blockCacheSize},
@@ -173,186 +174,129 @@ func NewBlockState(db database.Database, vm *VM) BlockState {
 	}
 }
 
-// GetBlock gets Block from either cache or database
+// GetBlock obtiene el Bloque tanto de la caché como de la base de datos
 func (s *blockState) GetBlock(blkID ids.ID) (*Block, error) {
-	// Check if cache has this blkID
+	// Comprobar si la caché tiene este blkID
 	if blkIntf, cached := s.blkCache.Get(blkID); cached {
-		// there is a key but value is nil, so return an error
+		// hay una clave pero el valor es nulo, así que devuelve un error
 		if blkIntf == nil {
 			return nil, database.ErrNotFound
 		}
-		// We found it return the block in cache
+		// Lo encontramos, devuelve el bloque en la caché
 		return blkIntf.(*Block), nil
 	}
 
-	// get block bytes from db with the blkID key
+	// obtener los bytes del bloque de la base de datos con la clave blkID
 	wrappedBytes, err := s.blockDB.Get(blkID[:])
 	if err != nil {
-		// we could not find it in the db, let's cache this blkID with nil value
-		// so next time we try to fetch the same key we can return error
-		// without hitting the database
+		// no pudimos encontrarlo en la base de datos, vamos a cachear este blkID con valor nulo
+		// así que la próxima vez que intentemos buscar la misma clave podemos devolver un error
+		// sin acceder a la base de datos
 		if err == database.ErrNotFound {
 			s.blkCache.Put(blkID, nil)
 		}
-		// could not find the block, return error
+		// no se pudo encontrar el bloque, devuelve el error
 		return nil, err
 	}
 
-	// first decode/unmarshal the block wrapper so we can have status and block bytes
+	// primero decodificar/deserializar el envoltorio de bloque para que podamos tener el estado y los bytes del bloque
 	blkw := blkWrapper{}
 	if _, err := Codec.Unmarshal(wrappedBytes, &blkw); err != nil {
 		return nil, err
 	}
 
-	// now decode/unmarshal the actual block bytes to block
+	// ahora decodificar/deserializar los bytes reales del bloque al bloque
 	blk := &Block{}
 	if _, err := Codec.Unmarshal(blkw.Blk, blk); err != nil {
 		return nil, err
 	}
 
-	// initialize block with block bytes, status and vm
+	// inicializar el bloque con los bytes del bloque, el estado y la vm
 	blk.Initialize(blkw.Blk, blkw.Status, s.vm)
 
-	// put block into cache
+	// poner el bloque en la caché
 	s.blkCache.Put(blkID, blk)
 
 	return blk, nil
 }
 
-// PutBlock puts block into both database and cache
+// PutBlock pone el bloque tanto en la base de datos como en la caché
 func (s *blockState) PutBlock(blk *Block) error {
-	// create block wrapper with block bytes and status
+	// crear un envoltorio de bloque con los bytes del bloque y el estado
 	blkw := blkWrapper{
 		Blk:    blk.Bytes(),
 		Status: blk.Status(),
 	}
 
-	// encode block wrapper to its byte representation
-	wrappedBytes, err := Codec.Marshal(CodecVersion, &blkw)
-	if err != nil {
-		return err
-	}
 
-	blkID := blk.ID()
-	// put actual block to cache, so we can directly fetch it from cache
-	s.blkCache.Put(blkID, blk)
-
-	// put wrapped block bytes into database
-	return s.blockDB.Put(blkID[:], wrappedBytes)
-}
-
-// DeleteBlock deletes block from both cache and database
-func (s *blockState) DeleteBlock(blkID ids.ID) error {
-	s.blkCache.Put(blkID, nil)
-	return s.blockDB.Delete(blkID[:])
-}
-
-// GetLastAccepted returns last accepted block ID
-func (s *blockState) GetLastAccepted() (ids.ID, error) {
-	// check if we already have lastAccepted ID in state memory
-	if s.lastAccepted != ids.Empty {
-		return s.lastAccepted, nil
-	}
-
-	// get lastAccepted bytes from database with the fixed lastAcceptedKey
-	lastAcceptedBytes, err := s.blockDB.Get(lastAcceptedKey)
-	if err != nil {
-		return ids.ID{}, err
-	}
-	// parse bytes to ID
-	lastAccepted, err := ids.ToID(lastAcceptedBytes)
-	if err != nil {
-		return ids.ID{}, err
-	}
-	// put lastAccepted ID into memory
-	s.lastAccepted = lastAccepted
-	return lastAccepted, nil
-}
-
-// SetLastAccepted persists lastAccepted ID into both cache and database
-func (s *blockState) SetLastAccepted(lastAccepted ids.ID) error {
-	// if the ID in memory and the given memory are same don't do anything
-	if s.lastAccepted == lastAccepted {
-		return nil
-	}
-	// put lastAccepted ID to memory
-	s.lastAccepted = lastAccepted
-	// persist lastAccepted ID to database with fixed lastAcceptedKey
-	return s.blockDB.Put(lastAcceptedKey, lastAccepted[:])
-}
-```
 
 ### Block
 
-Let’s look at our block implementation.
+Vamos a ver nuestra implementación de bloque.
 
-The type declaration is:
-
-<!-- markdownlint-disable MD013 -->
+La declaración de tipo es:
 
 ```go title="/timestampvm/block.go"
-// Block is a block on the chain.
-// Each block contains:
+// Block es un bloque en la cadena.
+// Cada bloque contiene:
 // 1) ParentID
-// 2) Height
-// 3) Timestamp
-// 4) A piece of data (a string)
+// 2) Altura
+// 3) Marca de tiempo
+// 4) Un trozo de datos (una cadena)
 type Block struct {
-	PrntID ids.ID        `serialize:"true" json:"parentID"`  // parent's ID
-	Hght   uint64        `serialize:"true" json:"height"`    // This block's height. The genesis block is at height 0.
-	Tmstmp int64         `serialize:"true" json:"timestamp"` // Time this block was proposed at
-	Dt     [dataLen]byte `serialize:"true" json:"data"`      // Arbitrary data
+	PrntID ids.ID        `serialize:"true" json:"parentID"`  // ID del padre
+	Hght   uint64        `serialize:"true" json:"height"`    // Altura de este bloque. El bloque génesis está en altura 0.
+	Tmstmp int64         `serialize:"true" json:"timestamp"` // Tiempo en que se propuso este bloque
+	Dt     [dataLen]byte `serialize:"true" json:"data"`      // Datos arbitrarios
 
-	id     ids.ID         // hold this block's ID
-	bytes  []byte         // this block's encoded bytes
-	status choices.Status // block's status
-	vm     *VM            // the underlying VM reference, mostly used for state
+	id     ids.ID         // guardar el ID de este bloque
+	bytes  []byte         // bytes codificados de este bloque
+	status choices.Status // estado del bloque
+	vm     *VM            // referencia a la VM subyacente, principalmente utilizada para el estado
 }
 ```
 
-<!-- markdownlint-enable MD013 -->
-
-The `serialize:"true"` tag indicates that the field should be included in the byte representation of
-the block used when persisting the block or sending it to other nodes.
+La etiqueta `serialize:"true"` indica que el campo debe incluirse en la representación de bytes del bloque
+utilizada al persistir el bloque o enviarlo a otros nodos.
 
 #### Verify
 
-This method verifies that a block is valid and stores it in the memory. It is important to store the
-verified block in the memory and return them in the `vm.GetBlock` method.
+Este método verifica que un bloque sea válido y lo almacena en la memoria. Es importante almacenar los
+bloques verificados en la memoria y devolverlos en el método `vm.GetBlock`.
 
 ```go title="/timestampvm/block.go"
-// Verify returns nil iff this block is valid.
-// To be valid, it must be that:
-// b.parent.Timestamp < b.Timestamp <= [local time] + 1 hour
+// Verify devuelve nil si y solo si este bloque es válido.
+// Para ser válido, debe ser que:
+// b.parent.Timestamp < b.Timestamp <= [hora local] + 1 hora
 func (b *Block) Verify() error {
-	// Get [b]'s parent
+	// Obtener el padre de [b]
 	parentID := b.Parent()
 	parent, err := b.vm.getBlock(parentID)
 	if err != nil {
 		return errDatabaseGet
 	}
 
-	// Ensure [b]'s height comes right after its parent's height
+	// Asegurarse de que la altura de [b] venga justo después de la altura de su padre
 	if expectedHeight := parent.Height() + 1; expectedHeight != b.Hght {
 		return fmt.Errorf(
-			"expected block to have height %d, but found %d",
+			"se esperaba que el bloque tuviera altura %d, pero se encontró %d",
 			expectedHeight,
 			b.Hght,
 		)
 	}
 
-	// Ensure [b]'s timestamp is after its parent's timestamp.
+	// Asegurarse de que la marca de tiempo de [b] sea posterior a la marca de tiempo de su padre.
 	if b.Timestamp().Unix() < parent.Timestamp().Unix() {
 		return errTimestampTooEarly
 	}
 
-	// Ensure [b]'s timestamp is not more than an hour
-	// ahead of this node's time
+	// Asegurarse de que la marca de tiempo de [b] no sea más de una hora
+	// adelante del tiempo de este nodo
 	if b.Timestamp().Unix() >= time.Now().Add(time.Hour).Unix() {
 		return errTimestampTooLate
 	}
 
-	// Put that block to verified blocks in memory
+	// Colocar ese bloque en bloques verificados en memoria
 	b.vm.verifiedBlocks[b.ID()] = b
 
 	return nil
@@ -361,586 +305,583 @@ func (b *Block) Verify() error {
 
 #### Accept
 
-`Accept` is called by the consensus to indicate this block is accepted.
+`Accept` es llamado por el consenso para indicar que este bloque es aceptado.
 
 ```go title="/timestampvm/block.go"
-// Accept sets this block's status to Accepted and sets lastAccepted to this
-// block's ID and saves this info to b.vm.DB
+// Accept establece el estado de este bloque como Aceptado y establece lastAccepted en el ID de este
+// bloque y guarda esta información en b.vm.DB
 func (b *Block) Accept() error {
-	b.SetStatus(choices.Accepted) // Change state of this block
+	b.SetStatus(choices.Accepted) // Cambiar estado de este bloque
 	blkID := b.ID()
 
-	// Persist data
+	// Persistir datos
 	if err := b.vm.state.PutBlock(b); err != nil {
 		return err
 	}
 
-	// Set last accepted ID to this block ID
+	// Establecer el último ID aceptado en el ID de este bloque
 	if err := b.vm.state.SetLastAccepted(blkID); err != nil {
 		return err
 	}
 
-	// Delete this block from verified blocks as it's accepted
+	// Eliminar este bloque de los bloques verificados ya que es aceptado
 	delete(b.vm.verifiedBlocks, b.ID())
 
-	// Commit changes to database
+	// Confirmar cambios en la base de datos
 	return b.vm.state.Commit()
 }
 ```
 
 #### Reject
 
-`Reject` is called by the consensus to indicate this block is rejected.
+`Reject` es llamado por el consenso para indicar que este bloque es rechazado.
 
 ```go title="/timestampvm/block.go"
-// Reject sets this block's status to Rejected and saves the status in state
-// Recall that b.vm.DB.Commit() must be called to persist to the DB
+// Reject establece el estado de este bloque como Rechazado y guarda el estado en la base de datos
+// Recuerde que se debe llamar a b.vm.DB.Commit() para persistir en la base de datos
 func (b *Block) Reject() error {
-	b.SetStatus(choices.Rejected) // Change state of this block
+	b.SetStatus(choices.Rejected) // Cambiar estado de este bloque
 	if err := b.vm.state.PutBlock(b); err != nil {
 		return err
 	}
-	// Delete this block from verified blocks as it's rejected
+	// Eliminar este bloque de los bloques verificados ya que es rechazado
 	delete(b.vm.verifiedBlocks, b.ID())
-	// Commit changes to database
+	// Confirmar cambios en la base de datos
 	return b.vm.state.Commit()
 }
 ```
 
-#### Block Field Methods
+#### Métodos de Campo del Bloque
 
-These methods are required by the `snowman.Block` interface.
+Estos métodos son requeridos por la interfaz `snowman.Block`.
 
 ```go title="/timestampvm/block.go"
-// ID returns the ID of this block
+// ID devuelve el ID de este bloque
 func (b *Block) ID() ids.ID { return b.id }
 
-// ParentID returns [b]'s parent's ID
+// ParentID devuelve el ID del padre de [b]
 func (b *Block) Parent() ids.ID { return b.PrntID }
 
-// Height returns this block's height. The genesis block has height 0.
+// Height devuelve la altura de este bloque. El bloque génesis tiene altura 0.
 func (b *Block) Height() uint64 { return b.Hght }
 
-// Timestamp returns this block's time. The genesis block has time 0.
+// Timestamp devuelve el tiempo de este bloque. El bloque génesis tiene tiempo 0.
 func (b *Block) Timestamp() time.Time { return time.Unix(b.Tmstmp, 0) }
 
-// Status returns the status of this block
+// Status devuelve el estado de este bloque
 func (b *Block) Status() choices.Status { return b.status }
 
-// Bytes returns the byte repr. of this block
+// Bytes devuelve la representación de bytes de este bloque
 func (b *Block) Bytes() []byte { return b.bytes }
 ```
 
-#### Helper Functions
+#### Funciones Auxiliares
 
-These methods are convenience methods for blocks, they're not a part of the block interface.
-
-```go
-// Initialize sets [b.bytes] to [bytes], [b.id] to hash([b.bytes]),
-// [b.status] to [status] and [b.vm] to [vm]
-func (b *Block) Initialize(bytes []byte, status choices.Status, vm *VM) {
-	b.bytes = bytes
-	b.id = hashing.ComputeHash256Array(b.bytes)
-	b.status = status
-	b.vm = vm
-}
-
-// SetStatus sets the status of this block
-func (b *Block) SetStatus(status choices.Status) { b.status = status }
-```
-
-### Virtual Machine
-
-Now, let’s look at our timestamp VM implementation, which implements the `block.ChainVM` interface.
-
-The declaration is:
+Estos métodos son métodos de conveniencia para los bloques, no son parte de la interfaz del bloque.
 
 ```go title="/timestampvm/vm.go"
-// This Virtual Machine defines a blockchain that acts as a timestamp server
-// Each block contains data (a payload) and the timestamp when it was created
-
-const (
-  dataLen = 32
-	Name    = "timestampvm"
-)
-
-// VM implements the snowman.VM interface
-// Each block in this chain contains a Unix timestamp
-// and a piece of data (a string)
-type VM struct {
-	// The context of this vm
-	ctx       *snow.Context
-	dbManager manager.Manager
-
-	// State of this VM
-	state State
-
-	// ID of the preferred block
-	preferred ids.ID
-
-	// channel to send messages to the consensus engine
-	toEngine chan<- common.Message
-
-	// Proposed pieces of data that haven't been put into a block and proposed yet
-	mempool [][dataLen]byte
-
-	// Block ID --> Block
-	// Each element is a block that passed verification but
-	// hasn't yet been accepted/rejected
-	verifiedBlocks map[ids.ID]*Block
-}
-```
-
-#### Initialize
-
-This method is called when a new instance of VM is initialized. Genesis block is created under this method.
-
-```go title="/timestampvm/vm.go"
-// Initialize this vm
-// [ctx] is this vm's context
-// [dbManager] is the manager of this vm's database
-// [toEngine] is used to notify the consensus engine that new blocks are
-//   ready to be added to consensus
-// The data in the genesis block is [genesisData]
-func (vm *VM) Initialize(
-	ctx *snow.Context,
-	dbManager manager.Manager,
-	genesisData []byte,
-	upgradeData []byte,
-	configData []byte,
-	toEngine chan<- common.Message,
-	_ []*common.Fx,
-	_ common.AppSender,
-) error {
-	version, err := vm.Version()
-	if err != nil {
-		log.Error("error initializing Timestamp VM: %v", err)
-		return err
-	}
-	log.Info("Initializing Timestamp VM", "Version", version)
-
-	vm.dbManager = dbManager
-	vm.ctx = ctx
-	vm.toEngine = toEngine
-	vm.verifiedBlocks = make(map[ids.ID]*Block)
-
-	// Create new state
-	vm.state = NewState(vm.dbManager.Current().Database, vm)
-
-	// Initialize genesis
-	if err := vm.initGenesis(genesisData); err != nil {
-		return err
-	}
-
-	// Get last accepted
-	lastAccepted, err := vm.state.GetLastAccepted()
-	if err != nil {
-		return err
-	}
-
-	ctx.Log.Info("initializing last accepted block as %s", lastAccepted)
-
-	// Build off the most recently accepted block
-	return vm.SetPreference(lastAccepted)
-}
-```
-
-##### `initGenesis`
-
-`initGenesis` is a helper method which initializes the genesis block from given bytes and puts into
-the state.
-
-```go title="/timestampvm/vm.go"
-// Initializes Genesis if required
-func (vm *VM) initGenesis(genesisData []byte) error {
-	stateInitialized, err := vm.state.IsInitialized()
-	if err != nil {
-		return err
-	}
-
-	// if state is already initialized, skip init genesis.
-	if stateInitialized {
-		return nil
-	}
-
-	if len(genesisData) > dataLen {
-		return errBadGenesisBytes
-	}
-
-	// genesisData is a byte slice but each block contains an byte array
-	// Take the first [dataLen] bytes from genesisData and put them in an array
-	var genesisDataArr [dataLen]byte
-	copy(genesisDataArr[:], genesisData)
-
-	// Create the genesis block
-	// Timestamp of genesis block is 0. It has no parent.
-	genesisBlock, err := vm.NewBlock(ids.Empty, 0, genesisDataArr, time.Unix(0, 0))
-	if err != nil {
-		log.Error("error while creating genesis block: %v", err)
-		return err
-	}
-
-	// Put genesis block to state
-	if err := vm.state.PutBlock(genesisBlock); err != nil {
-		log.Error("error while saving genesis block: %v", err)
-		return err
-	}
-
-	// Accept the genesis block
-	// Sets [vm.lastAccepted] and [vm.preferred]
-	if err := genesisBlock.Accept(); err != nil {
-		return fmt.Errorf("error accepting genesis block: %w", err)
-	}
-
-	// Mark this vm's state as initialized, so we can skip initGenesis in further restarts
-	if err := vm.state.SetInitialized(); err != nil {
-		return fmt.Errorf("error while setting db to initialized: %w", err)
-	}
-
-	// Flush VM's database to underlying db
-	return vm.state.Commit()
-}
-```
-
-#### CreateHandlers
-
-Registered handlers defined in `Service`. See [below](/build/vm/create/golang-vm-simple.md#api) for
-more on APIs.
-
-```go title="/timestampvm/vm.go"
-// CreateHandlers returns a map where:
-// Keys: The path extension for this blockchain's API (empty in this case)
-// Values: The handler for the API
-// In this case, our blockchain has only one API, which we name timestamp,
-// and it has no path extension, so the API endpoint:
-// [Node IP]/ext/bc/[this blockchain's ID]
-// See API section in documentation for more information
-func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
-	server := rpc.NewServer()
-	server.RegisterCodec(json.NewCodec(), "application/json")
-	server.RegisterCodec(json.NewCodec(), "application/json;charset=UTF-8")
-    // Name is "timestampvm"
-	if err := server.RegisterService(&Service{vm: vm}, Name); err != nil {
-		return nil, err
-	}
-
-	return map[string]*common.HTTPHandler{
-		"": {
-			Handler: server,
-		},
-	}, nil
-}
-```
-
-#### CreateStaticHandlers
-
-Registers static handlers defined in `StaticService`. See
-[below](/build/vm/create/golang-vm-simple.md#static-api) for more on static APIs.
-
-```go title="/timestampvm/vm.go"
-// CreateStaticHandlers returns a map where:
-// Keys: The path extension for this VM's static API
-// Values: The handler for that static API
-func (vm *VM) CreateStaticHandlers() (map[string]*common.HTTPHandler, error) {
-	server := rpc.NewServer()
-	server.RegisterCodec(json.NewCodec(), "application/json")
-	server.RegisterCodec(json.NewCodec(), "application/json;charset=UTF-8")
-	if err := server.RegisterService(&StaticService{}, Name); err != nil {
-		return nil, err
-	}
-
-	return map[string]*common.HTTPHandler{
-		"": {
-			LockOptions: common.NoLock,
-			Handler:     server,
-		},
-	}, nil
-}
-```
-
-#### BuildBock
-
-`BuildBlock` builds a new block and returns it. This is mainly requested by the consensus engine.
-
-```go title="/timestampvm/vm.go"
-// BuildBlock returns a block that this vm wants to add to consensus
+// BuildBlock builds a new block and returns it
+// The new block contains the data from the mempool
+// and has the preferred block as its parent
 func (vm *VM) BuildBlock() (snowman.Block, error) {
-	if len(vm.mempool) == 0 { // There is no block to be built
-		return nil, errNoPendingBlocks
+	// Get the preferred block
+	preferred, err := vm.state.GetBlock(vm.preferred)
+	if err != nil {
+		return nil, err
 	}
 
-	// Get the value to put in the new block
-	value := vm.mempool[0]
+	// Get the timestamp for the new block
+	timestamp := vm.ctx.Time().Unix()
+
+	// Get the data from the mempool
+	data := vm.mempool[0]
+
+	// Create a new block with the preferred block as its parent
+	block, err := vm.NewBlock(preferred.ID(), timestamp, data, vm.ctx.Time())
+	if err != nil {
+		return nil, err
+	}
+
+	// Remove the data from the mempool
 	vm.mempool = vm.mempool[1:]
 
-	// Notify consensus engine that there are more pending data for blocks
-	// (if that is the case) when done building this block
-	if len(vm.mempool) > 0 {
-		defer vm.NotifyBlockReady()
-	}
-
-	// Gets Preferred Block
-	preferredBlock, err := vm.getBlock(vm.preferred)
-	if err != nil {
-		return nil, fmt.Errorf("couldn't get preferred block: %w", err)
-	}
-	preferredHeight := preferredBlock.Height()
-
-	// Build the block with preferred height
-	newBlock, err := vm.NewBlock(vm.preferred, preferredHeight+1, value, time.Now())
-	if err != nil {
-		return nil, fmt.Errorf("couldn't build block: %w", err)
-	}
-
-	// Verifies block
-	if err := newBlock.Verify(); err != nil {
-		return nil, err
-	}
-	return newBlock, nil
-}
-```
-
-#### NotifyBlockReady
-
-`NotifyBlockReady` is a helper method that can send messages to the consensus engine through
-`toEngine` channel.
-
-```go title="/timestampvm/vm.go"
-// NotifyBlockReady tells the consensus engine that a new block
-// is ready to be created
-func (vm *VM) NotifyBlockReady() {
-	select {
-	case vm.toEngine <- common.PendingTxs:
-	default:
-		vm.ctx.Log.Debug("dropping message to consensus engine")
-	}
-}
-```
-
-#### GetBlock
-
-`GetBlock` returns the block with the given block ID.
-
-```go title="/timestampvm/vm.go"
-// GetBlock implements the snowman.ChainVM interface
-func (vm *VM) GetBlock(blkID ids.ID) (snowman.Block, error) { return vm.getBlock(blkID) }
-
-func (vm *VM) getBlock(blkID ids.ID) (*Block, error) {
-	// If block is in memory, return it.
-	if blk, exists := vm.verifiedBlocks[blkID]; exists {
-		return blk, nil
-	}
-
-	return vm.state.GetBlock(blkID)
-}
-```
-
-#### `proposeBlock`
-
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain
-that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`,
-which we’ll see later.
-
-```go title="/timestampvm/vm.go"
-// proposeBlock appends [data] to [p.mempool].
-// Then it notifies the consensus engine
-// that a new block is ready to be added to consensus
-// (namely, a block with data [data])
-func (vm *VM) proposeBlock(data [dataLen]byte) {
-    vm.mempool = append(vm.mempool, data)
-    vm.NotifyBlockReady()
+	return block, nil
 }
 ```
 
 #### ParseBlock
 
-Parse a block from its byte representation.
+`ParseBlock` parses a block from its byte representation and returns it.
 
 ```go title="/timestampvm/vm.go"
-// ParseBlock parses [bytes] to a snowman.Block
-// This function is used by the vm's state to unmarshal blocks saved in state
-// and by the consensus layer when it receives the byte representation of a block
-// from another node
+// ParseBlock takes a byte representation of a block and returns the block
 func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
-	// A new empty block
 	block := &Block{}
-
-	// Unmarshal the byte repr. of the block into our empty block
-	_, err := Codec.Unmarshal(bytes, block)
-	if err != nil {
+	if err := block.Unmarshal(bytes); err != nil {
 		return nil, err
 	}
-
-	// Initialize the block
-	block.Initialize(bytes, choices.Processing, vm)
-
-	if blk, err := vm.getBlock(block.ID()); err == nil {
-		// If we have seen this block before, return it with the most up-to-date
-		// info
-		return blk, nil
-	}
-
-	// Return the block
 	return block, nil
 }
 ```
 
-#### NewBlock
+#### GetBlock
 
-`NewBlock` creates a new block with given block parameters.
-
-<!-- markdownlint-disable MD013 -->
+`GetBlock` retrieves a block by its ID.
 
 ```go title="/timestampvm/vm.go"
-// NewBlock returns a new Block where:
-// - the block's parent is [parentID]
-// - the block's data is [data]
-// - the block's timestamp is [timestamp]
-func (vm *VM) NewBlock(parentID ids.ID, height uint64, data [dataLen]byte, timestamp time.Time) (*Block, error) {
-	block := &Block{
-		PrntID: parentID,
-		Hght:   height,
-		Tmstmp: timestamp.Unix(),
-		Dt:     data,
-	}
-
-	// Get the byte representation of the block
-	blockBytes, err := Codec.Marshal(CodecVersion, block)
-	if err != nil {
-		return nil, err
-	}
-
-	// Initialize the block by providing it with its byte representation
-	// and a reference to this VM
-	block.Initialize(blockBytes, choices.Processing, vm)
-	return block, nil
+// GetBlock retrieves a block by its ID
+func (vm *VM) GetBlock(id ids.ID) (snowman.Block, error) {
+	return vm.state.GetBlock(id)
 }
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 #### SetPreference
 
-`SetPreference` implements the `block.ChainVM`. It sets the preferred block ID.
+`SetPreference` sets the preferred block.
 
 ```go title="/timestampvm/vm.go"
-// SetPreference sets the block with ID [ID] as the preferred block
+// SetPreference sets the preferred block
 func (vm *VM) SetPreference(id ids.ID) error {
 	vm.preferred = id
 	return nil
 }
 ```
 
-#### Other Functions
+#### LastAccepted
 
-These functions needs to be implemented for `block.ChainVM`. Most of them are just blank functions
-returning `nil`.
-
-<!-- markdownlint-disable MD013 -->
+`LastAccepted` returns the ID of the last accepted block.
 
 ```go title="/timestampvm/vm.go"
-// Bootstrapped marks this VM as bootstrapped
-func (vm *VM) Bootstrapped() error { return nil }
-
-// Bootstrapping marks this VM as bootstrapping
-func (vm *VM) Bootstrapping() error { return nil }
-
-// Returns this VM's version
-func (vm *VM) Version() (string, error) {
-	return Version.String(), nil
+// LastAccepted returns the ID of the last accepted block
+func (vm *VM) LastAccepted() (ids.ID, error) {
+	return vm.state.GetLastAccepted()
 }
-
-func (vm *VM) Connected(id ids.ShortID, nodeVersion version.Application) error {
-	return nil // noop
-}
-
-func (vm *VM) Disconnected(id ids.ShortID) error {
-	return nil // noop
-}
-
-// This VM doesn't (currently) have any app-specific messages
-func (vm *VM) AppGossip(nodeID ids.ShortID, msg []byte) error {
-	return nil
-}
-
-// This VM doesn't (currently) have any app-specific messages
-func (vm *VM) AppRequest(nodeID ids.ShortID, requestID uint32, time time.Time, request []byte) error {
-	return nil
-}
-
-// This VM doesn't (currently) have any app-specific messages
-func (vm *VM) AppResponse(nodeID ids.ShortID, requestID uint32, response []byte) error {
-	return nil
-}
-
-// This VM doesn't (currently) have any app-specific messages
-func (vm *VM) AppRequestFailed(nodeID ids.ShortID, requestID uint32) error {
-	return nil
-}
-
-// Health implements the common.VM interface
-func (vm *VM) HealthCheck() (interface{}, error) { return nil, nil }
 ```
 
-<!-- markdownlint-enable MD013 -->
+#### Bootstrapping
 
-### Factory
+`Bootstrapping` returns true if the VM is currently bootstrapping.
 
-VMs should implement the `Factory` interface. `New` method in the interface returns a new VM instance.
+```go title="/timestampvm/vm.go"
+// Bootstrapping returns true if the VM is currently bootstrapping
+func (vm *VM) Bootstrapping() bool {
+	return false
+}
+```
+
+#### Bootstrapped
+
+`Bootstrapped` returns true if the VM has finished bootstrapping.
+
+```go title="/timestampvm/vm.go"
+// Bootstrapped returns true if the VM has finished bootstrapping
+func (vm *VM) Bootstrapped() bool {
+	return true
+}
+```
+
+#### Shutdown
+
+`Shutdown` shuts down the VM.
+
+```go title="/timestampvm/vm.go"
+// Shutdown shuts down the VM
+func (vm *VM) Shutdown() error {
+	return nil
+}
+```
+
+#### NotifyBlockReady
+
+`NotifyBlockReady` notifies the consensus engine that a new block is ready to be added to consensus.
+
+```go title="/timestampvm/vm.go"
+// NotifyBlockReady notifies the consensus engine that a new block is ready to be added to consensus
+func (vm *VM) NotifyBlockReady() {
+	vm.toEngine <- common.PendingTxs
+}
+```
+
+#### NotifyBlockReady
+
+`NotifyBlockReady` notifies the consensus engine that a new block is ready to be added to consensus.
+
+```go title="/timestampvm/vm.go"
+// NotifyBlockReady notifies the consensus engine that a new block is ready to be added to consensus
+func (vm *VM) NotifyBlockReady() {
+	vm.toEngine <- common.PendingTxs
+}
+```
+
+#### GetTimestamp
+
+`GetTimestamp` returns the timestamp of a block.
+
+```go title="/timestampvm/vm.go"
+// GetTimestamp returns the timestamp of a block
+func (vm *VM) GetTimestamp(block snowman.Block) (int64, error) {
+	timestampBlock, ok := block.(*Block)
+	if !ok {
+		return 0, fmt.Errorf("block is not a timestamp block")
+	}
+	return timestampBlock.Timestamp(), nil
+}
+```
+
+#### GetBlockData
+
+`GetBlockData` returns the data of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockData returns the data of a block
+func (vm *VM) GetBlockData(block snowman.Block) ([]byte, error) {
+	dataBlock, ok := block.(*Block)
+	if !ok {
+		return nil, fmt.Errorf("block is not a data block")
+	}
+	return dataBlock.Data(), nil
+}
+```
+
+#### GetBlockStatus
+
+`GetBlockStatus` returns the status of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockStatus returns the status of a block
+func (vm *VM) GetBlockStatus(block snowman.Block) (choices.Status, error) {
+	statusBlock, ok := block.(*Block)
+	if !ok {
+		return choices.Unknown, fmt.Errorf("block is not a status block")
+	}
+	return statusBlock.Status(), nil
+}
+```
+
+#### GetBlockVM
+
+`GetBlockVM` returns the VM of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockVM returns the VM of a block
+func (vm *VM) GetBlockVM(block snowman.Block) (snowman.VM, error) {
+	return vm, nil
+}
+```
+
+#### GetBlockBytes
+
+`GetBlockBytes` returns the byte representation of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockBytes returns the byte representation of a block
+func (vm *VM) GetBlockBytes(block snowman.Block) ([]byte, error) {
+	return block.Marshal()
+}
+```
+
+#### GetBlockID
+
+`GetBlockID` returns the ID of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockID returns the ID of a block
+func (vm *VM) GetBlockID(block snowman.Block) (ids.ID, error) {
+	return block.ID(), nil
+}
+```
+
+#### GetBlockParentID
+
+`GetBlockParentID` returns the parent ID of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockParentID returns the parent ID of a block
+func (vm *VM) GetBlockParentID(block snowman.Block) (ids.ID, error) {
+	return block.ParentID(), nil
+}
+```
+
+#### GetBlockHeight
+
+`GetBlockHeight` returns the height of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockHeight returns the height of a block
+func (vm *VM) GetBlockHeight(block snowman.Block) (int64, error) {
+	return block.Height(), nil
+}
+```
+
+#### GetBlockTxs
+
+`GetBlockTxs` returns the transactions of a block.
+
+```go title="/timestampvm/vm.go"
+// GetBlockTxs returns the transactions of a block
+func (vm *VM) GetBlockTxs(block snowman.Block) ([]snowman.Tx, error) {
+	return nil, nil
+}
+```
+
+#### GetBlockTx
+
+`GetBlockTx` returns a transaction from a block by its ID.
+
+```go title="/timestampvm/vm.go"
+// GetBlockTx returns a transaction from a block by its ID
+func (vm *VM) GetBlockTx(block snowman.Block, txID ids.ID) (snowman.Tx, error) {
+	return nil, nil
+}
+```
+
+#### GetTxStatus
+
+`GetTxStatus` returns the status of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxStatus returns the status of a transaction
+func (vm *VM) GetTxStatus(tx snowman.Tx) (choices.Status, error) {
+	return choices.Unknown, nil
+}
+```
+
+#### GetTxBytes
+
+`GetTxBytes` returns the byte representation of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxBytes returns the byte representation of a transaction
+func (vm *VM) GetTxBytes(tx snowman.Tx) ([]byte, error) {
+	return nil, nil
+}
+```
+
+#### GetTxID
+
+`GetTxID` returns the ID of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxID returns the ID of a transaction
+func (vm *VM) GetTxID(tx snowman.Tx) (ids.ID, error) {
+	return tx.ID(), nil
+}
+```
+
+#### GetTxTimestamp
+
+`GetTxTimestamp` returns the timestamp of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxTimestamp returns the timestamp of a transaction
+func (vm *VM) GetTxTimestamp(tx snowman.Tx) (int64, error) {
+	return 0, nil
+}
+```
+
+#### GetTxBlockID
+
+`GetTxBlockID` returns the ID of the block containing a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxBlockID returns the ID of the block containing a transaction
+func (vm *VM) GetTxBlockID(tx snowman.Tx) (ids.ID, error) {
+	return ids.Empty, nil
+}
+```
+
+#### GetTxBlockHeight
+
+`GetTxBlockHeight` returns the height of the block containing a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxBlockHeight returns the height of the block containing a transaction
+func (vm *VM) GetTxBlockHeight(tx snowman.Tx) (int64, error) {
+	return 0, nil
+}
+```
+
+#### GetTxBlockIndex
+
+`GetTxBlockIndex` returns the index of a transaction in its block.
+
+```go title="/timestampvm/vm.go"
+// GetTxBlockIndex returns the index of a transaction in its block
+func (vm *VM) GetTxBlockIndex(tx snowman.Tx) (int64, error) {
+	return 0, nil
+}
+```
+
+#### GetTxInputs
+
+`GetTxInputs` returns the inputs of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxInputs returns the inputs of a transaction
+func (vm *VM) GetTxInputs(tx snowman.Tx) ([]snowman.Input, error) {
+	return nil, nil
+}
+```
+
+#### GetTxOutputs
+
+`GetTxOutputs` returns the outputs of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxOutputs returns the outputs of a transaction
+func (vm *VM) GetTxOutputs(tx snowman.Tx) ([]snowman.Output, error) {
+	return nil, nil
+}
+```
+
+#### GetTxInputUTXOs
+
+`GetTxInputUTXOs` returns the UTXOs spent by the inputs of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxInputUTXOs returns the UTXOs spent by the inputs of a transaction
+func (vm *VM) GetTxInputUTXOs(tx snowman.Tx) ([]ids.ID, error) {
+	return nil, nil
+}
+```
+
+#### GetTxOutputUTXOs
+
+`GetTxOutputUTXOs` returns the UTXOs created by the outputs of a transaction.
+
+```go title="/timestampvm/vm.go"
+// GetTxOutputUTXOs returns the UTXOs created by the outputs of a transaction
+func (vm *VM) GetTxOutputUTXOs(tx snowman.Tx) ([]ids.ID, error) {
+	return nil, nil
+}
+```
+
+#### GetUTXO
+
+`GetUTXO` retrieves a UTXO by its ID.
+
+```go title="/timestampvm/vm.go"
+// GetUTXO retrieves a UTXO by
 
 ```go title="/timestampvm/factory.go"
-var _ vms.Factory = &Factory{}
+package timestampvm
+
+import (
+	"fmt"
+
+	"github.com/ava-labs/avalanchego/vms"
+	"github.com/ava-labs/avalanchego/vms/components/verify"
+)
 
 // Factory ...
 type Factory struct{}
 
 // New ...
-func (f *Factory) New(*snow.Context) (interface{}, error) { return &VM{}, nil }
+func (f *Factory) New(*snow.Context) (interface{}, error) {
+	return &VM{}, nil
+}
+
+// Codec ...
+func (f *Factory) Codec() (codec codec.Manager) {
+	return &verify.Codec{}
+}
+
+// Initialize ...
+func (f *Factory) Initialize(*snow.Context, *snow.Parameters, interface{}) error {
+	return nil
+}
+
+// Version ...
+func (f *Factory) Version() (string, error) {
+	return Version.String(), nil
+}
+
+// CreateStatic ...
+func (f *Factory) CreateStatic(ctx *snow.Context, db database.Database) (interface{}, error) {
+	vm := &VM{}
+	err := vm.Initialize(ctx, db)
+	return vm, err
+}
+
+// Create ...
+func (f *Factory) Create(ctx *snow.Context, db database.Database) (interface{}, error) {
+	vm := &VM{}
+	err := vm.Initialize(ctx, db)
+	return vm, err
+}
+
+// Bootstrapping ...
+func (f *Factory) Bootstrapping() error { return nil }
+
+// Bootstrapped ...
+func (f *Factory) Bootstrapped() error { return nil }
+
+// Shutdown ...
+func (f *Factory) Shutdown() error { return nil }
+
+// Notify ...
+func (f *Factory) Notify(msg common.Message) error {
+	return fmt.Errorf("dropping message %s", msg)
+}
 ```
 
-### Static API
+#### Codec
 
-A VM may have a static API, which allows clients to call methods that do not query or update the
-state of a particular blockchain, but rather apply to the VM as a whole. This is analogous to static
-methods in computer programming. AvalancheGo uses [Gorilla’s RPC
-library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
+`Codec` returns the codec manager for the VM.
 
-`StaticService` implements the static API for our VM.
+```go title="/timestampvm/factory.go"
+// Codec ...
+func (f *Factory) Codec() (codec codec.Manager) {
+	return &verify.Codec{}
+}
+```
+
+// Fábrica ...
+type Fábrica struct{}
+
+// Nuevo ...
+func (f *Fábrica) Nuevo(*snow.Context) (interface{}, error) { return &VM{}, nil }
+```
+
+### API Estática
+
+Una VM puede tener una API estática, que permite a los clientes llamar a métodos que no consultan ni actualizan el estado de una blockchain en particular, sino que se aplican a la VM en su conjunto. Esto es análogo a los métodos estáticos en la programación de computadoras. AvalancheGo utiliza la biblioteca de RPC de [Gorilla](https://www.gorillatoolkit.org/pkg/rpc) para implementar APIs HTTP.
+
+`StaticService` implementa la API estática para nuestra VM.
 
 ```go title="/timestampvm/static_service.go"
-// StaticService defines the static API for the timestamp vm
+// StaticService define la API estática para la vm de timestamp
 type StaticService struct{}
 ```
 
 #### Encode
 
-For each API method, there is:
+Para cada método de la API, hay:
 
-- A struct that defines the method’s arguments
-- A struct that defines the method’s return values
-- A method that implements the API method, and is parameterized on the above 2 structs
+- Una estructura que define los argumentos del método
+- Una estructura que define los valores de retorno del método
+- Un método que implementa el método de la API, y está parametrizado en las 2 estructuras anteriores
 
-This API method encodes a string to its byte representation using a given encoding scheme. It can be
-used to encode data that is then put in a block and proposed as the next block for this chain.
+Este método de la API codifica una cadena a su representación en bytes utilizando un esquema de codificación dado. Se puede utilizar para codificar datos que luego se colocan en un bloque y se proponen como el siguiente bloque para esta cadena.
 
 ```go title="/timestampvm/static_service.go"
-// EncodeArgs are arguments for Encode
+// EncodeArgs son los argumentos para Encode
 type EncodeArgs struct {
     Data     string              `json:"data"`
     Encoding formatting.Encoding `json:"encoding"`
     Length   int32               `json:"length"`
 }
 
-// EncodeReply is the reply from Encoder
+// EncodeReply es la respuesta de Encoder
 type EncodeReply struct {
     Bytes    string              `json:"bytes"`
     Encoding formatting.Encoding `json:"encoding"`
 }
 
-// Encoder returns the encoded data
+// Encoder devuelve los datos codificados
 func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *EncodeReply) error {
     if len(args.Data) == 0 {
-        return fmt.Errorf("argument Data cannot be empty")
+        return fmt.Errorf("el argumento Data no puede estar vacío")
     }
     var argBytes []byte
     if args.Length > 0 {
@@ -952,7 +893,7 @@ func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *Encode
 
     bytes, err := formatting.EncodeWithChecksum(args.Encoding, argBytes)
     if err != nil {
-        return fmt.Errorf("couldn't encode data as string: %s", err)
+        return fmt.Errorf("no se pudo codificar los datos como cadena: %s", err)
     }
     reply.Bytes = bytes
     reply.Encoding = args.Encoding
@@ -962,26 +903,26 @@ func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *Encode
 
 #### Decode
 
-This API method is the inverse of `Encode`.
+Este método de la API es el inverso de `Encode`.
 
 ```go title="/timestampvm/static_service.go"
-// DecoderArgs are arguments for Decode
+// DecoderArgs son los argumentos para Decode
 type DecoderArgs struct {
     Bytes    string              `json:"bytes"`
     Encoding formatting.Encoding `json:"encoding"`
 }
 
-// DecoderReply is the reply from Decoder
+// DecoderReply es la respuesta de Decoder
 type DecoderReply struct {
     Data     string              `json:"data"`
     Encoding formatting.Encoding `json:"encoding"`
 }
 
-// Decoder returns the Decoded data
+// Decoder devuelve los datos decodificados
 func (ss *StaticService) Decode(_ *http.Request, args *DecoderArgs, reply *DecoderReply) error {
     bytes, err := formatting.Decode(args.Encoding, args.Bytes)
     if err != nil {
-        return fmt.Errorf("couldn't Decode data as string: %s", err)
+        return fmt.Errorf("no se pudo decodificar los datos como cadena: %s", err)
     }
     reply.Data = string(bytes)
     reply.Encoding = args.Encoding
@@ -991,26 +932,24 @@ func (ss *StaticService) Decode(_ *http.Request, args *DecoderArgs, reply *Decod
 
 ### API
 
-A VM may also have a non-static HTTP API, which allows clients to query and update the blockchain's state.
+Una VM también puede tener una API HTTP no estática, que permite a los clientes consultar y actualizar el estado de la blockchain.
 
-`Service`'s declaration is:
+La declaración de `Service` es:
 
 ```go title="/timestampvm/service.go"
-// Service is the API service for this VM
+// Service es el servicio de API para esta VM
 type Service struct{ vm *VM }
 ```
 
-Note that this struct has a reference to the VM, so it can query and update state.
+Tenga en cuenta que esta estructura tiene una referencia a la VM, por lo que puede consultar y actualizar el estado.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a
-client to propose the next block of this blockchain. The blockchain ID in the endpoint changes,
-since every blockchain has an unique ID.
+La API de esta VM tiene dos métodos. Uno permite a un cliente obtener un bloque por su ID. El otro permite a un cliente proponer el siguiente bloque de esta blockchain. El ID de la blockchain en el endpoint cambia, ya que cada blockchain tiene un ID único.
 
 #### `timestampvm.getBlock`
 
-Get a block by its ID. If no ID is provided, get the latest block.
+Obtener un bloque por su ID. Si no se proporciona ningún ID, obtener el último bloque.
 
-##### `getBlock` Signature
+##### Firma de `getBlock`
 
 ```sh
 timestampvm.getBlock({id: string}) ->
@@ -1022,12 +961,12 @@ timestampvm.getBlock({id: string}) ->
     }
 ```
 
-- `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-- `data` is the base 58 (with checksum) representation of the block’s 32 byte payload
-- `timestamp` is the Unix timestamp when this block was created
-- `parentID` is the block’s parent
+- `id` es el ID del bloque que se está recuperando. Si se omite de los argumentos, obtiene el último bloque
+- `data` es la representación en base 58 (con checksum) de la carga útil de 32 bytes del bloque
+- `timestamp` es la marca de tiempo Unix cuando se creó este bloque
+- `parentID` es el padre del bloque
 
-##### `getBlock` Example Call
+##### Ejemplo de llamada a `getBlock`
 
 ```bash
 curl -X POST --data '{
@@ -1040,7 +979,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-##### `getBlock` Example Response
+##### Ejemplo de respuesta de `getBlock`
 
 ```json
 {
@@ -1055,221 +994,59 @@ curl -X POST --data '{
 }
 ```
 
-##### `getBlock` Implementation
+##### Implementación de `getBlock`
 
 ```go title="/timestampvm/service.go"
-// GetBlockArgs are the arguments to GetBlock
+// GetBlockArgs son los argumentos para GetBlock
 type GetBlockArgs struct {
-	// ID of the block we're getting.
-	// If left blank, gets the latest block
+	// ID del bloque que estamos obteniendo.
+	// Si se deja en blanco, obtiene el último bloque
 	ID *ids.ID `json:"id"`
 }
 
-// GetBlockReply is the reply from GetBlock
+// GetBlockReply es la respuesta de GetBlock
 type GetBlockReply struct {
-	Timestamp json.Uint64 `json:"timestamp"` // Timestamp of most recent block
-	Data      string      `json:"data"`      // Data in the most recent block. Base 58 repr. of 5 bytes.
-	ID        ids.ID      `json:"id"`        // String repr. of ID of the most recent block
-	ParentID  ids.ID      `json:"parentID"`  // String repr. of ID of the most recent block's parent
+	Timestamp json.Uint64 `json:"timestamp"` // Marca de tiempo del bloque más reciente
+	Data      string      `json:"data"`      // Datos en el bloque más reciente. Representación en base 58 de 5 bytes.
+	ID        ids.ID      `json:"id"`        // Representación en cadena del ID del bloque más reciente
+	ParentID  ids.ID      `json:"parentID"`  // Representación en cadena del ID del padre del bloque más reciente
 }
 
-// GetBlock gets the block whose ID is [args.ID]
-// If [args.ID] is empty, get the latest block
-func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockReply) error {
-	// If an ID is given, parse its string representation to an ids.ID
-	// If no ID is given, ID becomes the ID of last accepted block
-	var (
-		id  ids.ID
-		err error
-	)
+If your node is already running, you can install the virtual machine by following these steps:
 
-	if args.ID == nil {
-		id, err = s.vm.state.GetLastAccepted()
-		if err != nil {
-			return errCannotGetLastAccepted
-		}
-	} else {
-		id = *args.ID
-	}
+1. Copy the binary into the plugins directory on the running node.
 
-	// Get the block from the database
-	block, err := s.vm.getBlock(id)
-	if err != nil {
-		return errNoSuchBlock
-	}
+   ```bash
+   docker cp <path to your binary> <container ID>:/avalanchego/build/plugins/
+   ```
 
-	// Fill out the response with the block's data
-	reply.ID = block.ID()
-	reply.Timestamp = json.Uint64(block.Timestamp().Unix())
-	reply.ParentID = block.Parent()
-	data := block.Data()
-	reply.Data, err = formatting.EncodeWithChecksum(formatting.CB58, data[:])
+2. Use the `avm` command to install the virtual machine.
 
-	return err
-}
-```
+   ```bash
+   docker exec -it <container ID> /avalanchego/build/avalanchego install plugin --plugin-name <VM ID or alias>
+   ```
 
-#### `timestampvm.proposeBlock`
+   For example, if the VM ID is `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`, you can run:
 
-Propose the next block on this blockchain.
+   ```bash
+   docker exec -it <container ID> /avalanchego/build/avalanchego install plugin --plugin-name tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
+   ```
 
-##### `proposeBlock` Signature
+   If you have defined a VM alias, you can use the alias instead of the VM ID.
 
-```sh
-timestampvm.proposeBlock({data: string}) -> {success: bool}
-```
+   ```bash
+   docker exec -it <container ID> /avalanchego/build/avalanchego install plugin --plugin-name timestampvm
+   ```
 
-- `data` is the base 58 (with checksum) representation of the proposed block’s 32 byte payload.
+3. Restart the node for the changes to take effect.
 
-##### `proposeBlock` Example Call
+   ```bash
+   docker restart <container ID>
+   ```
 
-```bash
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "timestampvm.proposeBlock",
-    "params":{
-        "data":"SkB92YpWm4Q2iPnLGCuDPZPgUQMxajqQQuz91oi3xD984f8r"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
-```
+The virtual machine should now be installed and ready to use on your Avalanche node.
 
-###### `proposeBlock` Example Response
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "Success": true
-  },
-  "id": 1
-}
-```
-
-##### `proposeBlock` Implementation
-
-<!-- markdownlint-disable MD013 -->
-
-```go title="/timestampvm/service.go"
-// ProposeBlockArgs are the arguments to ProposeValue
-type ProposeBlockArgs struct {
-    // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
-    Data string
-}
-
-// ProposeBlockReply is the reply from function ProposeBlock
-type ProposeBlockReply struct{
-    // True if the operation was successful
-    Success bool
-}
-
-// ProposeBlock is an API method to propose a new block whose data is [args].Data.
-// [args].Data must be a string repr. of a 32 byte array
-func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *ProposeBlockReply) error {
-	bytes, err := formatting.Decode(formatting.CB58, args.Data)
-	if err != nil || len(bytes) != dataLen {
-		return errBadData
-	}
-
-	var data [dataLen]byte         // The data as an array of bytes
-	copy(data[:], bytes[:dataLen]) // Copy the bytes in dataSlice to data
-
-	s.vm.proposeBlock(data)
-	reply.Success = true
-	return nil
-}
-```
-
-<!-- markdownlint-enable MD013 -->
-
-### Plugin
-
-In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method,
-which serves our VM over gRPC so that AvalancheGo can call its methods.
-
-`main.go`'s contents are:
-
-```go title="/main/main.go"
-func main() {
-    log.Root().SetHandler(log.LvlFilterHandler(log.LvlDebug, log.StreamHandler(os.Stderr, log.TerminalFormat())))
-    plugin.Serve(&plugin.ServeConfig{
-        HandshakeConfig: rpcchainvm.Handshake,
-        Plugins: map[string]plugin.Plugin{
-            "vm": rpcchainvm.New(&timestampvm.VM{}),
-        },
-
-        // A non-nil value here enables gRPC serving for this plugin...
-        GRPCServer: plugin.DefaultGRPCServer,
-    })
-}
-```
-
-Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
-
-### Executable Binary
-
-This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.1/scripts/build.sh)
-that builds an executable of this VM (when invoked, it runs the `main` method from above.)
-
-The path to the executable, as well as its name, can be provided to the build script via arguments.
-For example:
-
-```text
-./scripts/build.sh ../avalanchego/build/plugins timestampvm
-```
-
-If no argument is given, the path defaults to a binary named with default VM ID:
-`$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
-
-This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier
-for the VM. For the timestampvm, this is the string "timestamp" zero-extended in a 32 byte array
-and encoded in CB58.
-
-### VM Aliases
-
-Each VM has a predefined, static ID. For instance, the default ID of the TimestampVM is:
-`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
-
-It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a
-JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
-
-:::warning
-The name of the VM binary is also its static ID and should not be changed manually.
-Changing the name of the VM binary will result in AvalancheGo failing to start the VM.
-To reference a VM by another name, define a VM alias as described below.
-:::
-
-```json
-{
-  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
-    "timestampvm",
-    "timestamp"
-  ]
-}
-```
-
-### Installing a VM
-
-AvalancheGo searches for and registers plugins under the `plugins` [directory](/nodes/configure/avalanchego-config-flags.md#--plugin-dir-string).
-
-To install the virtual machine onto your node, you need to move the built virtual machine binary
-under this directory. Virtual machine executable names must be either a full virtual machine ID
-(encoded in CB58), or a VM alias.
-
-Copy the binary into the plugins directory.
-
-```bash
-cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
-```
-
-#### Node Is Not Running
-
-If your node isn't running yet, you can install all virtual machines under your `plugin` directory
-by starting the node.
-
-#### Node Is Already Running
-
-Load the binary with the `loadVMs` API.
+Carga el binario con la API `loadVMs`.
 
 ```bash
 curl -sX POST --data '{
@@ -1280,9 +1057,9 @@ curl -sX POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-Confirm the response of `loadVMs` contains the newly installed virtual machine
-`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any
-others that weren't already installed previously in the response.
+Confirma que la respuesta de `loadVMs` contiene la máquina virtual recién instalada
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. Verás esta máquina virtual, así como cualquier
+otra que no estuviera instalada previamente, en la respuesta.
 
 ```json
 {
@@ -1300,21 +1077,21 @@ others that weren't already installed previously in the response.
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
-`/ext/vm/timestamp`. For more details about VM configs, see
-[here](/nodes/configure/avalanchego-config-flags.md#vm-configs).
+Ahora, la API estática de esta VM se puede acceder en los endpoints `/ext/vm/timestampvm` y
+`/ext/vm/timestamp`. Para obtener más detalles sobre las configuraciones de la VM, consulta
+[aquí](/nodes/configure/avalanchego-config-flags.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
-AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in
-previous step.
+En este tutorial, usamos el ID de la VM como nombre ejecutable para simplificar el proceso. Sin embargo,
+AvalancheGo también aceptaría `timestampvm` o `timestamp` ya que esos son alias registrados en el
+paso anterior.
 
-## Wrapping Up
+## Conclusión
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
+¡Eso es todo! Esa es toda la implementación de una VM que define un servidor de tiempo basado en blockchain.
 
-In this tutorial, we learned:
+En este tutorial, aprendimos:
 
-- The `block.ChainVM` interface, which all VMs that define a linear chain must implement
-- The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
-- The `rpcchainvm` type, which allows blockchains to run in their own processes.
-- An actual implementation of `block.ChainVM` and `snowman.Block`.
+- La interfaz `block.ChainVM`, que todas las VMs que definen una cadena lineal deben implementar
+- La interfaz `snowman.Block`, que todos los bloques que son parte de una cadena lineal deben implementar
+- El tipo `rpcchainvm`, que permite que las blockchains se ejecuten en sus propios procesos.
+- Una implementación real de `block.ChainVM` y `snowman.Block`.
