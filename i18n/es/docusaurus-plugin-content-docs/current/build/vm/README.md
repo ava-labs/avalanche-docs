@@ -1,23 +1,21 @@
 ---
-title: 🔺 Virtual Machines
-tags: [Build, Virtual Machines]
-description: Virtual Machines 
-sidebar_label: 🔗 Quick Links
-pagination_label: Virtual Machines Quick Links
+título: 🔺 Máquinas Virtuales
+etiquetas: [Construir, Máquinas Virtuales]
+descripción: Máquinas Virtuales
+sidebar_label: 🔗 Enlaces Rápidos
+pagination_label: Enlaces Rápidos de Máquinas Virtuales
 ---
 
-A [Virtual Machine (VM)](/learn/avalanche/virtual-machines) is a blueprint for a
-blockchain. VMs can define anything you want, but will generally define transactions that are 
-executed and how blocks are created.
+Una [Máquina Virtual (VM)](/learn/avalanche/virtual-machines) es un plano para una blockchain. Las VM pueden definir cualquier cosa, pero generalmente definen transacciones que se ejecutan y cómo se crean los bloques.
 
-## 🔗 Virtual Machines Quick Links
+## 🔗 Enlaces Rápidos de Máquinas Virtuales
 
-| Title      | Description |
+| Título      | Descripción |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Introduction to VMs**](/build/vm/intro.md) | Introductory document to Virtual Machine Development, including some simple tutorials. This document is a Prerequisite for most of the other virtual machine tutorials. |
-| [**Create a VM in Any Language**](/build/vm/create/any-lang-vm.md)  | A language-agnostic, high-level doc explaining the basics of how to get started at implementing your own virtual machine from scratch.|
-| [**Create a Simple VM in Golang**](/build/vm/create/golang-vm-simple.md)      | Learn how to build a simple virtual machine  on Avalanche using Golang. |
-| [**Create a Complex VM in Golang**](/build/vm/create/golang-vm-complex.md)      | Learn how to build a complex virtual machine on Avalanche using Golang. |
-| [**Create a Rust VM**](/build/vm/create/rust-vm.md)      | Learn how to develop virtual machines on Avalanche using Rust. |
-| [**Generate a Stateful Precompile**](/build/vm/evm/hello-world-precompile-tutorial.md)      | Create a stateful precompiles for Subnet-EVM from scratch. |
-| [**HyperSDK**](https://github.com/ava-labs/hypersdk#readme)      | An opinionated framework for building hyper-scalable blockchains on Avalanche. This is an external link to HyperSDK's GitHub documentation and repository.|
+| [**Introducción a las VM**](/build/vm/intro.md) | Documento introductorio al desarrollo de Máquinas Virtuales, incluyendo algunos tutoriales simples. Este documento es un requisito previo para la mayoría de los otros tutoriales de máquinas virtuales. |
+| [**Crear una VM en Cualquier Lenguaje**](/build/vm/create/any-lang-vm.md)  | Un documento agnóstico al lenguaje, de alto nivel, que explica los conceptos básicos de cómo empezar a implementar tu propia máquina virtual desde cero.|
+| [**Crear una VM Simple en Golang**](/build/vm/create/golang-vm-simple.md)      | Aprende cómo construir una máquina virtual simple en Avalanche usando Golang. |
+| [**Crear una VM Compleja en Golang**](/build/vm/create/golang-vm-complex.md)      | Aprende cómo construir una máquina virtual compleja en Avalanche usando Golang. |
+| [**Crear una VM en Rust**](/build/vm/create/rust-vm.md)      | Aprende cómo desarrollar máquinas virtuales en Avalanche usando Rust. |
+| [**Generar un Precompilado Estatal**](/build/vm/evm/hello-world-precompile-tutorial.md)      | Crea precompilados estatales para Subnet-EVM desde cero. |
+| [**HyperSDK**](https://github.com/ava-labs/hypersdk#readme)      | Un marco de trabajo opinado para construir blockchains hiperescalables en Avalanche. Este es un enlace externo a la documentación y repositorio de GitHub de HyperSDK.|

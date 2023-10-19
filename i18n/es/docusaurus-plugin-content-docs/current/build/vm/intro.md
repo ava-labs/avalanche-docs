@@ -1,120 +1,90 @@
 ---
-tags: [Build, Virtual Machines]
-description: A Virtual Machine is a blueprint for a blockchain. VMs can define anything you want, but will generally define transactions that are executed and how blocks are created.
-sidebar_label: Introduction to VMs
-pagination_label: Introduction to Virtual Machines
+etiquetas: [Construir, Máquinas Virtuales]
+descripción: Una Máquina Virtual es un plano para una blockchain. Las VM pueden definir cualquier cosa que desees, pero generalmente definirán transacciones que se ejecutan y cómo se crean los bloques.
+sidebar_label: Introducción a las VM
+pagination_label: Introducción a las Máquinas Virtuales
 ---
 
-# Introduction to Virtual Machines
+# Introducción a las Máquinas Virtuales
 
-## Overview
+## Resumen
 
-A [Virtual Machine (VM)](/learn/avalanche/virtual-machines) is a blueprint for a
-blockchain. Blockchains
-are instantiated from a VM, similar to how objects are instantiated from a class definition. VMs can
-define anything you want, but will generally define transactions that are executed and how blocks are
-created.
+Una [Máquina Virtual (VM)](/learn/avalanche/virtual-machines) es un plano para una blockchain. Las blockchains se instancian a partir de una VM, similar a cómo se instancian los objetos a partir de una definición de clase. Las VM pueden definir cualquier cosa que desees, pero generalmente definen transacciones que se ejecutan y cómo se crean los bloques.
 
-## Blocks and State
+## Bloques y Estado
 
-Virtual Machines deal with blocks and state. The functionality provided by VMs is to:
+Las Máquinas Virtuales trabajan con bloques y estado. La funcionalidad proporcionada por las VM es:
 
-- Define the representation of a blockchain's state
-- Represent the operations in that state
-- Apply the operations in that state
+- Definir la representación del estado de una blockchain
+- Representar las operaciones en ese estado
+- Aplicar las operaciones en ese estado
 
-Each block in the blockchain contains a set of state transitions. Each block is applied in order
-from the blockchain's initial genesis block to its last accepted block to reach the latest state
-of the blockchain.
+Cada bloque en la blockchain contiene un conjunto de transiciones de estado. Cada bloque se aplica en orden desde el bloque génesis inicial de la blockchain hasta su último bloque aceptado para alcanzar el estado más reciente de la blockchain.
 
 ## Blockchain
 
-A blockchain relies on two major components: The **Consensus Engine** and the **VM**. The VM defines
-application specific behavior and how blocks are built and parsed to create the blockchain. All VMs
-run on top of the Avalanche Consensus Engine, which allows nodes in the network to agree on the
-state of the blockchain. Here's a quick example of how VMs interact with consensus:
+Una blockchain se basa en dos componentes principales: el **Motor de Consenso** y la **VM**. La VM define el comportamiento específico de la aplicación y cómo se construyen y se analizan los bloques para crear la blockchain. Todas las VM se ejecutan sobre el Motor de Consenso Avalanche, que permite que los nodos en la red acuerden el estado de la blockchain. Aquí tienes un rápido ejemplo de cómo las VM interactúan con el consenso:
 
-1. A node wants to update the blockchain's state
-2. The node's VM will notify the consensus engine that it wants to update the state
-3. The consensus engine will request the block from the VM
-4. The consensus engine will verify the returned block using the VM's implementation of `Verify()`
-5. The consensus engine will get the network to reach consensus on whether to accept or reject the newly
-   verified block
-   - Every virtuous (well-behaved) node on the network will have the same preference for a particular
-     block
-6. Depending upon the consensus results, the engine will either accept or reject the block
-   - What happens when a block is accepted or rejected is specific to the implementation of the VM
+1. Un nodo quiere actualizar el estado de la blockchain
+2. La VM del nodo notificará al motor de consenso que quiere actualizar el estado
+3. El motor de consenso solicitará el bloque a la VM
+4. El motor de consenso verificará el bloque devuelto usando la implementación de `Verify()` de la VM
+5. El motor de consenso hará que la red alcance consenso sobre si aceptar o rechazar el bloque recién verificado
+   - Cada nodo virtuoso (bien comportado) en la red tendrá la misma preferencia por un bloque en particular
+6. Dependiendo de los resultados del consenso, el motor aceptará o rechazará el bloque
+   - Lo que sucede cuando se acepta o se rechaza un bloque es específico de la implementación de la VM
 
-AvalancheGo provides the consensus engine for every blockchain on the Avalanche Network. The consensus
-engine relies on the VM interface to handle building, parsing, and storing blocks as well as verifying
-and executing on behalf of the consensus engine.
+AvalancheGo proporciona el motor de consenso para cada blockchain en la Red Avalanche. El motor de consenso se basa en la interfaz de la VM para manejar la construcción, el análisis y el almacenamiento de bloques, así como para verificar y ejecutar en nombre del motor de consenso.
 
-This decoupling between the application and consensus layer allows developers to build their
-applications quickly by implementing virtual machines, without having to worry about the consensus
-layer managed by Avalanche which deals with how nodes agree on whether or not to accept a block.
+Esta desvinculación entre la aplicación y la capa de consenso permite a los desarrolladores construir sus aplicaciones rápidamente mediante la implementación de máquinas virtuales, sin tener que preocuparse por la capa de consenso gestionada por Avalanche, que se ocupa de cómo los nodos acuerdan si aceptar o no un bloque.
 
-## Installing a VM
+## Instalación de una VM
 
-VMs are supplied as binaries to a node running `AvalancheGo`. These binaries must be named the VM's
-assigned **VMID**. A VMID is a 32-byte hash encoded in CB58 that is generated when you build your VM.
+Las VM se suministran como binarios a un nodo que ejecuta `AvalancheGo`. Estos binarios deben tener el nombre del **VMID** asignado a la VM. Un VMID es un hash de 32 bytes codificado en CB58 que se genera cuando construyes tu VM.
 
-In order to install a VM, its binary must be installed in the `AvalancheGo` plugin path. See
-[here](/nodes/configure/avalanchego-config-flags.md#--plugin-dir-string) for more details.
-Multiple VMs can be installed in this location.
+Para instalar una VM, su binario debe ser instalado en la ruta de plugins de `AvalancheGo`. Consulta
+[aquí](/nodes/configure/avalanchego-config-flags.md#--plugin-dir-string) para más detalles.
+Se pueden instalar varias VM en esta ubicación.
 
-Each VM runs as a separate process from AvalancheGo and communicates with `AvalancheGo` using gRPC
-calls. This functionality is enabled by **RPCChainVM**, a special VM which wraps around other VM
-implementations and bridges the VM and AvalancheGo, establishing a standardized communication 
-protocol between them.
+Cada VM se ejecuta como un proceso separado de AvalancheGo y se comunica con `AvalancheGo` mediante llamadas gRPC. Esta funcionalidad está habilitada por **RPCChainVM**, una VM especial que envuelve otras implementaciones de VM y conecta la VM y AvalancheGo, estableciendo un protocolo de comunicación estandarizado entre ellos.
 
 :::info
 
-During VM creation, handshake messages are exchanged via **RPCChainVM** between AvalancheGo and the 
-VM installation. Ensure matching **RPCChainVM** protocol versions to avoid 
-errors, by updating your VM or using a 
-[different version of AvalancheGo](https://github.com/ava-labs/AvalancheGo/releases).
+Durante la creación de la VM, se intercambian mensajes de handshake a través de **RPCChainVM** entre AvalancheGo y la instalación de la VM. Asegúrate de que las versiones de protocolo de **RPCChainVM** coincidan para evitar errores, actualizando tu VM o utilizando una
+[versión diferente de AvalancheGo](https://github.com/ava-labs/AvalancheGo/releases).
 
-Note that some VMs may not support the latest protocol version.
+Ten en cuenta que algunas VM pueden no ser compatibles con la última versión del protocolo.
 
 :::
 
-### API Handlers
+### Manipuladores de API
 
-Users can interact with a blockchain and its VM through handlers exposed by the VM's API.
+Los usuarios pueden interactuar con una blockchain y su VM a través de manipuladores expuestos por la API de la VM.
 
-VMs expose two types of handlers to serve responses for incoming requests:
+Las VM exponen dos tipos de manipuladores para servir respuestas a solicitudes entrantes:
 
-- **Blockchain Handlers** - Referred to as handlers, these expose APIs to interact with a blockchain
-  instantiated by a VM. The API endpoint will be different for each chain. The endpoint for a handler
-  is `/ext/bc/[chainID]`.
-- **VM Handlers** - Referred to as static handlers, these expose APIs to interact with the VM
-  directly. One example API would be to parse genesis data to instantiate a new blockchain. The endpoint
-  for a static handler is `/ext/vm/[vmID]`.
+- **Manipuladores de Blockchain** - También conocidos como manipuladores, estos exponen APIs para interactuar con una blockchain instanciada por una VM. El punto final de la API será diferente para cada cadena. El punto final para un manipulador es `/ext/bc/[chainID]`.
+- **Manipuladores de VM** - También conocidos como manipuladores estáticos, estos exponen APIs para interactuar con la VM directamente. Un ejemplo de API sería analizar datos de génesis para instanciar una nueva blockchain. El punto final para un manipulador estático es `/ext/vm/[vmID]`.
 
-For any readers familiar with object-oriented programming, static and non-static handlers on a VM are
-analogous to static and non-static methods on a class. Blockchain handlers can be thought of as methods
-on an object, whereas VM handlers can be thought of as static methods on a class.
+Para cualquier lector familiarizado con la programación orientada a objetos, los manipuladores estáticos y no estáticos en una VM son análogos a los métodos estáticos y no estáticos en una clase. Los manipuladores de blockchain se pueden pensar como métodos en un objeto, mientras que los manipuladores de VM se pueden pensar como métodos estáticos en una clase.
 
-### Instantiate a VM
+### Instanciar una VM
 
-The `vm.Factory` interface is implemented to create new VM instances from which a blockchain can be
-initialized. The factory's `New` method shown below provides `AvalancheGo` with an instance of the
-VM. It's defined in the
-[`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go) file
-of the `timestampvm` repository.
+La interfaz `vm.Factory` se implementa para crear nuevas instancias de VM a partir de las cuales se puede inicializar una blockchain. El método `New` de la fábrica que se muestra a continuación proporciona a `AvalancheGo` una instancia de la VM. Está definido en el archivo
+[`factory.go`](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/factory.go)
+del repositorio `timestampvm`.
 
 ```go
-// Returning a new VM instance from VM's factory
+// Devuelve una nueva instancia de VM desde la fábrica de la VM
 func (f *Factory) New(*snow.Context) (interface{}, error) { return &vm.VM{}, nil }
 ```
 
-### Initializing a VM to Create a Blockchain
+### Inicializar una VM para crear una Blockchain
 
-Before a VM can run, AvalancheGo will initialize it by invoking its `Initialize` method. Here, the
-VM will bootstrap itself and sets up anything it requires before it starts running.
+Antes de que una VM pueda ejecutarse, AvalancheGo la inicializará invocando su método `Initialize`. Aquí, la
+VM se inicializará y se configurará todo lo que requiera antes de empezar a ejecutarse.
 
-This might involve setting up its database, mempool, genesis state, or anything else the VM requires
-to run.
+Esto puede implicar configurar su base de datos, mempool, estado de génesis o cualquier otra cosa que la VM requiera para ejecutarse.
 
 ```go
 if err := vm.Initialize(
@@ -129,116 +99,113 @@ if err := vm.Initialize(
 );
 ```
 
-You can refer to the
-[implementation](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75) of
-`vm.initialize` in the TimestampVM repository.
+Puedes consultar la
+[implementación](https://github.com/ava-labs/timestampvm/blob/main/timestampvm/vm.go#L75) de
+`vm.initialize` en el repositorio de TimestampVM.
 
 ## Interfaces
 
-Every VM should implement the following interfaces:
+Cada VM debe implementar las siguientes interfaces:
 
 ### `block.ChainVM`
 
-To reach a consensus on linear blockchains, Avalanche uses the Snowman consensus engine. To be
-compatible with Snowman, a VM must implement the `block.ChainVM` interface.
+Para alcanzar un consenso en blockchains lineales, Avalanche utiliza el motor de consenso Snowman. Para ser
+compatible con Snowman, una VM debe implementar la interfaz `block.ChainVM`.
 
-For more information, see [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+Para más información, consulta [aquí](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 ```go title="/snow/engine/snowman/block/vm.go"
-// ChainVM defines the required functionality of a Snowman VM.
+// ChainVM define la funcionalidad requerida de una VM Snowman.
 //
-// A Snowman VM is responsible for defining the representation of the state,
-// the representation of operations in that state, the application of operations
-// on that state, and the creation of the operations. Consensus will decide on
-// if the operation is executed and the order operations are executed.
+// Una VM Snowman es responsable de definir la representación del estado,
+// la representación de las operaciones en ese estado, la aplicación de las operaciones
+// en ese estado, y la creación de las operaciones. El consenso decidirá si
+// la operación se ejecuta y el orden en que se ejecutan las operaciones.
 //
-// For example, suppose we have a VM that tracks an increasing number that
-// is agreed upon by the network.
-// The state is a single number.
-// The operation is setting the number to a new, larger value.
-// Applying the operation will save to the database the new value.
-// The VM can attempt to issue a new number, of larger value, at any time.
-// Consensus will ensure the network agrees on the number at every block height.
+// Por ejemplo, supongamos que tenemos una VM que realiza un seguimiento de un número creciente que
+// es acordado por la red.
+// El estado es un solo número.
+// La operación es establecer el número en un nuevo valor, más grande.
+// Aplicar la operación guardará en la base de datos el nuevo valor.
+// La VM puede intentar emitir un nuevo número, de valor más grande, en cualquier momento.
+// El consenso se asegurará de que la red esté de acuerdo en el número en cada altura de bloque.
 type ChainVM interface {
 	common.VM
 	Getter
 	Parser
 
-	// Attempt to create a new block from data contained in the VM.
+	// Intenta crear un nuevo bloque a partir de los datos contenidos en la VM.
 	//
-	// If the VM doesn't want to issue a new block, an error should be
-	// returned.
+	// Si la VM no quiere emitir un nuevo bloque, se debe devolver un error.
 	BuildBlock() (snowman.Block, error)
 
-	// Notify the VM of the currently preferred block.
+	// Notifica a la VM del bloque actualmente preferido.
 	//
-	// This should always be a block that has no children known to consensus.
+	// Este bloque siempre debe ser un bloque que no tiene hijos conocidos por el consenso.
 	SetPreference(ids.ID) error
 
-	// LastAccepted returns the ID of the last accepted block.
+	// LastAccepted devuelve la ID del último bloque aceptado.
 	//
-	// If no blocks have been accepted by consensus yet, it is assumed there is
-	// a definitionally accepted block, the Genesis block, that will be
-	// returned.
+	// Si aún no se han aceptado bloques por consenso, se asume que hay un bloque aceptado por definición, el bloque Génesis, que se devolverá.
 	LastAccepted() (ids.ID, error)
 }
 
-// Getter defines the functionality for fetching a block by its ID.
+
+
+// Getter define la funcionalidad para obtener un bloque por su ID.
 type Getter interface {
-	// Attempt to load a block.
+	// Intenta cargar un bloque.
 	//
-	// If the block does not exist, an error should be returned.
+	// Si el bloque no existe, se debe devolver un error.
 	//
 	GetBlock(ids.ID) (snowman.Block, error)
 }
 
-// Parser defines the functionality for fetching a block by its bytes.
+// Parser define la funcionalidad para obtener un bloque por sus bytes.
 type Parser interface {
-	// Attempt to create a block from a stream of bytes.
+	// Intenta crear un bloque a partir de una secuencia de bytes.
 	//
-	// The block should be represented by the full byte array, without extra
-	// bytes.
+	// El bloque debe estar representado por el arreglo completo de bytes, sin bytes adicionales.
 	ParseBlock([]byte) (snowman.Block, error)
 }
 ```
 
 ### `common.VM`
 
-`common.VM` is a type that every `VM` must implement.
+`common.VM` es un tipo que cada `VM` debe implementar.
 
-For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go).
+Para obtener más información, puedes ver el archivo completo [aquí](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/common/vm.go).
 
 ```go title="/snow/engine/common/vm.go"
-// VM describes the interface that all consensus VMs must implement
+// VM describe la interfaz que todas las VM de consenso deben implementar
 type VM interface {
-    // Contains handlers for VM-to-VM specific messages
+    // Contiene controladores para mensajes específicos de VM a VM
 	AppHandler
 
-	// Returns nil if the VM is healthy.
-	// Periodically called and reported via the node's Health API.
+	// Devuelve nil si la VM está saludable.
+	// Se llama periódicamente y se informa a través de la API de salud del nodo.
 	health.Checkable
 
-	// Connector represents a handler that is called on connection connect/disconnect
+	// Connector representa un controlador que se llama en conexión conectar/desconectar
 	validators.Connector
 
-	// Initialize this VM.
-	// [ctx]: Metadata about this VM.
-	//     [ctx.networkID]: The ID of the network this VM's chain is running on.
-	//     [ctx.chainID]: The unique ID of the chain this VM is running on.
-	//     [ctx.Log]: Used to log messages
-	//     [ctx.NodeID]: The unique staker ID of this node.
-	//     [ctx.Lock]: A Read/Write lock shared by this VM and the consensus
-	//                 engine that manages this VM. The write lock is held
-	//                 whenever code in the consensus engine calls the VM.
-	// [dbManager]: The manager of the database this VM will persist data to.
-	// [genesisBytes]: The byte-encoding of the genesis information of this
-	//                 VM. The VM uses it to initialize its state. For
-	//                 example, if this VM were an account-based payments
-	//                 system, `genesisBytes` would probably contain a genesis
-	//                 transaction that gives coins to some accounts, and this
-	//                 transaction would be in the genesis block.
-	// [toEngine]: The channel used to send messages to the consensus engine.
-	// [fxs]: Feature extensions that attach to this VM.
+	// Inicializa esta VM.
+	// [ctx]: Metadatos sobre esta VM.
+	//     [ctx.networkID]: La ID de la red en la que se está ejecutando la cadena de esta VM.
+	//     [ctx.chainID]: La ID única de la cadena en la que se está ejecutando esta VM.
+	//     [ctx.Log]: Se utiliza para registrar mensajes.
+	//     [ctx.NodeID]: La ID única del staker de este nodo.
+	//     [ctx.Lock]: Un candado de lectura/escritura compartido por esta VM y el motor de consenso
+	//                 que gestiona esta VM. El candado de escritura se mantiene
+	//                 siempre que el código en el motor de consenso llame a la VM.
+	// [dbManager]: El administrador de la base de datos en la que esta VM persistirá los datos.
+	// [genesisBytes]: La codificación de bytes de la información de génesis de esta
+	//                 VM. La VM lo usa para inicializar su estado. Por
+	//                 ejemplo, si esta VM fuera un sistema de pagos basado en cuentas,
+	//                 `genesisBytes` probablemente contendría una transacción de génesis que da monedas a algunas cuentas, y esta
+	//                 transacción estaría en el bloque génesis.
+	// [toEngine]: El canal utilizado para enviar mensajes al motor de consenso.
+	// [fxs]: Extensiones de características que se adjuntan a esta VM.
 	Initialize(
 		ctx *snow.Context,
 		dbManager manager.Manager,
@@ -250,127 +217,121 @@ type VM interface {
 		appSender AppSender,
 	) error
 
-	// Bootstrapping is called when the node is starting to bootstrap this chain.
+	// Bootstrapping se llama cuando el nodo está empezando a arrancar esta cadena.
 	Bootstrapping() error
 
-	// Bootstrapped is called when the node is done bootstrapping this chain.
+	// Bootstrapped se llama cuando el nodo ha terminado de arrancar esta cadena.
 	Bootstrapped() error
 
-	// Shutdown is called when the node is shutting down.
+	// Shutdown se llama cuando el nodo se está apagando.
 	Shutdown() error
 
-	// Version returns the version of the VM this node is running.
+	// Version devuelve la versión de la VM que está ejecutando este nodo.
 	Version() (string, error)
 
-	// Creates the HTTP handlers for custom VM network calls.
+	// Crea los controladores HTTP para llamadas de red personalizadas de la VM.
 	//
-	// This exposes handlers that the outside world can use to communicate with
-	// a static reference to the VM. Each handler has the path:
-	// [Address of node]/ext/VM/[VM ID]/[extension]
+	// Esto expone controladores que el mundo exterior puede usar para comunicarse con
+	// una referencia estática a la VM. Cada controlador tiene la ruta:
+	// [Dirección del nodo]/ext/VM/[ID de la VM]/[extensión]
 	//
-	// Returns a mapping from [extension]s to HTTP handlers.
+	// Devuelve un mapeo de [extension]s a controladores HTTP.
 	//
-	// Each extension can specify how locking is managed for convenience.
+	// Cada extensión puede especificar cómo se gestiona el bloqueo para mayor comodidad.
 	//
-	// For example, it might make sense to have an extension for creating
-	// genesis bytes this VM can interpret.
+	// Por ejemplo, podría tener una extensión para crear
+	// bytes de génesis que esta VM puede interpretar.
 	CreateStaticHandlers() (map[string]*HTTPHandler, error)
 
-	// Creates the HTTP handlers for custom chain network calls.
+	// Crea los controladores HTTP para llamadas de red personalizadas de la cadena.
 	//
-	// This exposes handlers that the outside world can use to communicate with
-	// the chain. Each handler has the path:
-	// [Address of node]/ext/bc/[chain ID]/[extension]
+	// Esto expone controladores que el mundo exterior puede usar para comunicarse con
+	// la cadena. Cada controlador tiene la ruta:
+	// [Dirección del nodo]/ext/bc/[ID de la cadena]/[extensión]
 	//
-	// Returns a mapping from [extension]s to HTTP handlers.
+	// Devuelve un mapeo de [extension]s a controladores HTTP.
 	//
-	// Each extension can specify how locking is managed for convenience.
+	// Cada extensión puede especificar cómo se gestiona el bloqueo para mayor comodidad.
 	//
-	// For example, if this VM implements an account-based payments system,
-	// it have an extension called `accounts`, where clients could get
-	// information about their accounts.
+	// Por ejemplo, si esta VM implementa un sistema de pagos basado en cuentas,
+	// podría tener una extensión llamada `cuentas`, donde los clientes podrían obtener
+	// información sobre sus cuentas.
 	CreateHandlers() (map[string]*HTTPHandler, error)
 }
 ```
 
 ### `snowman.Block`
 
-The `snowman.Block` interface It define the functionality a block must implement to be a block in a
-linear Snowman chain.
+La interfaz `snowman.Block` define la funcionalidad que un bloque debe implementar para ser un bloque en una cadena lineal Snowman.
 
-For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go).
+Para obtener más información, puedes ver el archivo completo [aquí](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go).
 
 ```go title="/snow/consensus/snowman/block.go"
-// Block is a possible decision that dictates the next canonical block.
+// Block es una posible decisión que dicta el próximo bloque canónico.
 //
-// Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
-// order. Specifically, if Verify is called, then the parent has already been
-// verified. If Accept is called, then the parent has already been accepted. If
-// Reject is called, the parent has already been accepted or rejected.
+// Se garantiza que los bloques se verifican, aceptan y rechazan en orden topológico.
+// Específicamente, si se llama a Verify, entonces el padre ya ha sido verificado. Si
+// se llama a Accept, entonces el padre ya ha sido aceptado. Si
+// se llama a Reject, el padre ya ha sido aceptado o rechazado.
 //
-// If the status of the block is Unknown, ID is assumed to be able to be called.
-// If the status of the block is Accepted or Rejected; Parent, Verify, Accept,
-// and Reject will never be called.
+// Si el estado del bloque es Desconocido, se asume que se puede llamar a ID.
+// Si el estado del bloque es Aceptado o Rechazado; Nunca se llamará a Parent, Verify, Accept
+// y Reject.
 type Block interface {
     choices.Decidable
 
-    // Parent returns the ID of this block's parent.
+    // Parent devuelve la ID del padre de este bloque.
     Parent() ids.ID
 
-    // Verify that the state transition this block would make if accepted is
-    // valid. If the state transition is invalid, a non-nil error should be
-    // returned.
+    // Verifica que la transición de estado que este bloque haría si se acepta sea válida.
+    // Si la transición de estado es inválida, se debe devolver un error no nulo.
     //
-    // It is guaranteed that the Parent has been successfully verified.
+    // Se garantiza que el Padre se ha verificado correctamente.
     Verify() error
 
-    // Bytes returns the binary representation of this block.
+    // Bytes devuelve la representación binaria de este bloque.
     //
-    // This is used for sending blocks to peers. The bytes should be able to be
-    // parsed into the same block on another node.
+    // Esto se utiliza para enviar bloques a los pares. Los bytes deben poder ser
+    // analizados en el mismo bloque en otro nodo.
     Bytes() []byte
 
-    // Height returns the height of this block in the chain.
+    // Height devuelve la altura de este bloque en la cadena.
     Height() uint64
 }
 ```
 
 ### `choices.Decidable`
 
-This interface is a superset of every decidable object, such as transactions, blocks, and vertices.
+Esta interfaz es un superset de cada objeto decidible, como transacciones, bloques y vértices.
 
-For more information, you can see the full file [here](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go).
+Para obtener más información, puedes ver el archivo completo [aquí](https://github.com/ava-labs/avalanchego/blob/master/snow/choices/decidable.go).
 
 ```go title="/snow/choices/decidable.go"
-// Decidable represents element that can be decided.
+// Decidable representa un elemento que puede ser decidido.
 //
-// Decidable objects are typically thought of as either transactions, blocks, or
-// vertices.
+// Los objetos decidibles suelen ser pensados como transacciones, bloques o
+// vértices.
 type Decidable interface {
-	// ID returns a unique ID for this element.
+	// ID devuelve una ID única para este elemento.
 	//
-	// Typically, this is implemented by using a cryptographic hash of a
-	// binary representation of this element. An element should return the same
-	// IDs upon repeated calls.
+	// Típicamente, esto se implementa usando un hash criptográfico de una
+	// representación binaria de este elemento. Un elemento debe devolver las mismas
+	// IDs en llamadas repetidas.
 	ID() ids.ID
 
-	// Accept this element.
+	// Acepta este elemento.
 	//
-	// This element will be accepted by every correct node in the network.
+	// Este elemento será aceptado por cada nodo correcto en la red.
 	Accept() error
 
-	// Reject this element.
+	// Rechaza este elemento.
 	//
-	// This element will not be accepted by any correct node in the network.
+	// Este elemento no será aceptado por ningún nodo correcto en la red.
 	Reject() error
 
-	// Status returns this element's current status.
-	//
-	// If Accept has been called on an element with this ID, Accepted should be
-	// returned. Similarly, if Reject has been called on an element with this
-	// ID, Rejected should be returned. If the contents of this element are
-	// unknown, then Unknown should be returned. Otherwise, Processing should be
-	// returned.
-	Status() Status
-}
-```
+
+
+// Status devuelve el estado actual de este elemento.
+//
+// Si se ha llamado a Accept en un elemento con este ID, se debe devolver Accepted. De manera similar, si se ha llamado a Reject en un elemento con este ID, se debe devolver Rejected. Si el contenido de este elemento es desconocido, entonces se debe devolver Unknown. De lo contrario, se debe devolver Processing.
+Status() Status
