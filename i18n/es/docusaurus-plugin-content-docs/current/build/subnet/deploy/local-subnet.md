@@ -1,107 +1,107 @@
 ---
-tags: [Build, Subnets]
-description: This how-to guide focuses on taking an already created Subnet configuration and deploying it to a local Avalanche network.
-sidebar_label: On a Local Network 
-pagination_label: Customize your EVM-Powered Subnet
+tags: [Construir, Subredes]
+description: Esta guía de cómo hacerlo se centra en tomar una configuración de Subred ya creada y desplegarla en una red Avalanche local.
+sidebar_label: En una Red Local
+pagination_label: Personaliza tu Subred impulsada por EVM
 sidebar_position: 0
 ---
 
-# How to Deploy a Subnet on a Local Network
+# Cómo desplegar una Subred en una Red Local
 
-This how-to guide focuses on taking an already created Subnet configuration and deploying it to a
-local Avalanche network.
+Esta guía de cómo hacerlo se centra en tomar una configuración de Subred ya creada y desplegarla en una
+red Avalanche local.
 
-## Prerequisites
+## Requisitos previos
 
-- [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
-- You have [created a Subnet configuration](/build/subnet/hello-subnet#create-your-subnet-configuration)
+- [Avalanche-CLI instalado](/herramientas/guias-de-cli/instalar-avalanche-cli.md)
+- Has [creado una configuración de Subred](/construir/subred/hola-subred#crea-tu-configuracion-de-subred)
 
-## Deploying Subnets Locally
+## Desplegando Subredes localmente
 
-In the following commands, make sure to substitute the name of your Subnet configuration for
-`<subnetName>`.
+En los siguientes comandos, asegúrate de sustituir el nombre de tu configuración de Subred por
+`<nombreSubred>`.
 
-To deploy your Subnet, run
+Para desplegar tu Subred, ejecuta
 
-`avalanche subnet deploy <subnetName>`
+`avalanche subnet deploy <nombreSubred>`
 
-and select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing
-the `--local` flag. For example:
+y selecciona `Red Local` para desplegarla. Alternativamente, puedes omitir esta solicitud proporcionando
+la bandera `--local`. Por ejemplo:
 
-`avalanche subnet deploy <subnetName> --local`
+`avalanche subnet deploy <nombreSubred> --local`
 
-The command may take a couple minutes to run.
+El comando puede tardar unos minutos en ejecutarse.
 
-Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on Mac, you will 
-require Rosetta 2 to be able to deploy Subnets locally. You can download Rosetta 2 using 
-`softwareupdate --install-rosetta` .
+Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac, 
+necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando 
+`softwareupdate --install-rosetta`.
 
-### Results
+### Resultados
 
-If all works as expected, the command output should look something like this:
+Si todo funciona como se espera, la salida del comando debería verse algo así:
 
 <!-- markdownlint-disable MD013 -->
 
 ```text
-> avalanche subnet deploy mySubnet
-✔ Local Network
-Deploying [mySubnet] to Local Network
-Installing subnet-evm-v0.4.3...
-subnet-evm-v0.4.3 installation successful
-Backend controller started, pid: 93928, output at: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
-Installing avalanchego-v1.9.3...
-avalanchego-v1.9.3 installation successful
-VMs ready.
-Starting network...
+> avalanche subnet deploy miSubred
+✔ Red Local
+Desplegando [miSubred] en Red Local
+Instalando subnet-evm-v0.4.3...
+Instalación exitosa de subnet-evm-v0.4.3
+Controlador de backend iniciado, pid: 93928, salida en: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
+Instalando avalanchego-v1.9.3...
+Instalación exitosa de avalanchego-v1.9.3
+VMs listas.
+Iniciando red...
 ..................
-Blockchain has been deployed. Wait until network acknowledges...
+La blockchain ha sido desplegada. Espera hasta que la red lo reconozca...
 ......
-Network ready to use. Local network node endpoints:
+Red lista para usar. Puntos finales del nodo de red local:
 +-------+----------+------------------------------------------------------------------------------------+
-| NODE  |    VM    |                                        URL                                         |
+| NODO  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| node2 | mySubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo2 | miSubred | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node3 | mySubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo3 | miSubred | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node4 | mySubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo4 | miSubred | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node5 | mySubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo5 | miSubred | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node1 | mySubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo1 | miSubred | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     mySubnet
-Chain ID:         54325
-Currency Symbol:  TUTORIAL
+Detalles de conexión de la Extensión del Navegador (cualquier URL de nodo de arriba funciona):
+URL RPC:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Dirección financiada:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC con 1000000 (10^18) - clave privada: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Nombre de red:     miSubred
+ID de cadena:         54325
+Símbolo de moneda:  TUTORIAL
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-You can use the deployment details to connect to and interact with your Subnet.
+Puedes usar los detalles del despliegue para conectarte e interactuar con tu Subred.
 
-To manage the newly deployed local Avalanche network, see
-[the `avalanche network` command tree](/tooling/avalanche-cli.md#network).
+Para gestionar la red Avalanche local recién desplegada, consulta
+[el árbol de comandos `avalanche network`](/herramientas/avalanche-cli.md#red).
 
-### Deploying Multiple Subnets
+### Desplegando Múltiples Subredes
 
-You may deploy multiple Subnets concurrently, but you can't deploy the same Subnet multiple times
-without resetting all deployed Subnet state.
+Puedes desplegar múltiples Subredes simultáneamente, pero no puedes desplegar la misma Subred varias veces
+sin restablecer todo el estado de la Subred desplegada.
 
-## Redeploying the Subnet
+## Redesplegando la Subred
 
-To redeploy the Subnet, you first need to wipe the Subnet state. This permanently deletes all data
-from all locally deployed Subnets. To do so, run
+Para redesplegar la Subred, primero necesitas borrar el estado de la Subred. Esto borra permanentemente todos los datos
+de todas las Subredes desplegadas localmente. Para hacerlo, ejecuta
 
 ```shell
 avalanche network clean
 ```
 
-You are now free to redeploy your Subnet with
+Ahora estás libre de redeployar tu Subred con
 
 ```shell
-avalanche subnet deploy <subnetName> --local
+avalanche subnet deploy <nombreSubred> --local
 ```

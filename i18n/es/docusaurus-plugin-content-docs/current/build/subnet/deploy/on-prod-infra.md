@@ -1,199 +1,164 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial demonstrates how to deploy a Subnet to production environment.
-sidebar_label: On Production Infrastructure
-pagination_label: Deploy Subnets on Production Infrastructure
+tags: [Construir, Subredes]
+description: Este tutorial demuestra cómo implementar una Subred en un entorno de producción.
+sidebar_label: En Infraestructura de Producción
+pagination_label: Implementar Subredes en Infraestructura de Producción
 sidebar_position: 3
 ---
-# Deploy Subnets on Production Infrastructure
+# Implementar Subredes en Infraestructura de Producción
 
-## Introduction
+## Introducción
 
-After architecting your Subnet environment on the [local machine](/build/subnet/deploy/local-subnet.md),
-proving
-the design and testing it out on [the Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md),
-eventually you will
-need to deploy your Subnet to production environment. Running a Subnet in production is much more
-involved than local and Testnet deploys, as your Subnet will have to take care of real world usage,
-maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose
-of this document is to point out a set of general considerations and propose potential solutions to
-them.
+Después de arquitectar tu entorno de Subred en la [máquina local](/construir/subred/deploy/local-subnet.md),
+demostrando el diseño y probándolo en [la Testnet Fuji](/construir/subred/deploy/fuji-testnet-subnet.md),
+eventualmente necesitarás implementar tu Subred en un entorno de producción. Ejecutar una Subred en producción es mucho más
+complicado que las implementaciones locales y en Testnet, ya que tu Subred tendrá que cuidar el uso del mundo real,
+manteniendo el tiempo de actividad, las actualizaciones y todo eso en un entorno potencialmente adversarial. El propósito
+de este documento es señalar un conjunto de consideraciones generales y proponer soluciones potenciales a
+ellas.
 
-The architecture of the environment your particular Subnet will use will be greatly influenced by
-the type of load and activity your Subnet is designed to support so your solution will most likely
-differ from what we propose here. Still, it might be useful to follow along, to build up the
-intuition for the type of questions you will need to consider.
+La arquitectura del entorno que tu Subred particular usará estará muy influenciada por
+el tipo de carga y actividad que tu Subred está diseñada para soportar, por lo que tu solución probablemente será
+diferente a lo que proponemos aquí. Aún así, podría ser útil seguir adelante, para construir la
+intuición para el tipo de preguntas que necesitarás considerar.
 
-## Node Setup
+## Configuración de Nodos
 
-Avalanche nodes are essential elements for running your Subnet in production. At a minimum, your
-Subnet will need validator nodes, potentially also nodes that act as RPC servers, indexers or
-explorers. Running a node is basically running an instance of [AvalancheGo](/nodes/README.md) on a
-server.
+Los nodos Avalanche son elementos esenciales para ejecutar tu Subred en producción. Como mínimo, tu
+Subred necesitará nodos validadores, potencialmente también nodos que actúen como servidores RPC, indexadores o
+exploradores. Ejecutar un nodo es básicamente ejecutar una instancia de [AvalancheGo](/nodos/README.md) en un
+servidor.
 
-### Server OS
+### Sistema Operativo del Servidor
 
-Although AvalancheGo can run on a macOS or a Windows computer, we strongly recommend running nodes
-on computers running Linux as they are designed specifically for server loads and all the tools and
-utilities needed for administering a server are native to Linux.
+Aunque AvalancheGo puede ejecutarse en una computadora macOS o Windows, recomendamos encarecidamente ejecutar nodos
+en computadoras que ejecuten Linux, ya que están diseñadas específicamente para cargas de servidor y todas las herramientas y
+utilidades necesarias para administrar un servidor son nativas de Linux.
 
-### Hardware Specification
+### Especificación de Hardware
 
-For running AvalancheGo as a validator on the Primary Network the recommended configuration is as follows:
+Para ejecutar AvalancheGo como un validador en la Red Primaria, la configuración recomendada es la siguiente:
 
-- CPU: Equivalent of 8 AWS vCPU
+- CPU: Equivalente a 8 vCPU de AWS
 - RAM: 16 GiB
-- Storage: 1 TiB with at least 3000 IOPS
-- OS: Ubuntu 20.04
-- Network: Reliable IPv4 or IPv6 network connection, with an open public port
+- Almacenamiento: 1 TiB con al menos 3000 IOPS
+- SO: Ubuntu 20.04
+- Red: Conexión de red confiable IPv4 o IPv6, con un puerto público abierto
 
-That is the configuration sufficient for running a Primary Network node. Any resource requirements
-for your Subnet come on top of this, so you should not go below this configuration, but may need to
-step up the specification if you expect your Subnet to handle a significant amount of transactions.
+Esa es la configuración suficiente para ejecutar un nodo de Red Primaria. Cualquier requisito de recursos
+para tu Subred se suman a esto, por lo que no debes ir por debajo de esta configuración, pero es posible que necesites
+aumentar la especificación si esperas que tu Subred maneje una cantidad significativa de transacciones.
 
-Be sure to set up monitoring of resource consumption for your nodes because resource exhaustion may
-cause your node to slow down or even halt, which may severely impact your Subnet negatively.
+Asegúrate de configurar el monitoreo del consumo de recursos para tus nodos porque el agotamiento de recursos puede
+causar que tu nodo se ralentice o incluso se detenga, lo que puede afectar severamente tu Subred negativamente.
 
-### Server Location
+### Ubicación del Servidor
 
-You can run a node on a physical computer that you own and run, or on a cloud instance. Although
-running on your own HW may seem like a good idea, unless you have a sizeable DevOps 24/7 staff we
-recommend using cloud service providers as they generally provide reliable computing resources that
-you can count on to be properly maintained and monitored.
+Puedes ejecutar un nodo en una computadora física que poseas y ejecutes, o en una instancia en la nube. Aunque
+ejecutar en tu propio hardware puede parecer una buena idea, a menos que tengas un personal de DevOps de tamaño considerable las 24/7,
+recomendamos usar proveedores de servicios en la nube, ya que generalmente proporcionan recursos informáticos confiables en los que
+puedes confiar para que se mantengan y monitoreen adecuadamente.
 
-#### Local Servers
+#### Servidores Locales
 
-If you plan on running nodes on your own hardware, make sure they satisfy the minimum HW
-specification as outlined earlier. Pay close attention to proper networking setup, making sure the
-p2p port (9651) is accessible and public IP properly configured on the node. Make sure the node is
-connected to the network physically (not over Wi-Fi), and that the router is powerful enough to
-handle a couple of thousands of persistent TCP connections and that network bandwidth can
-accommodate at least 5Mbps of steady upstream and downstream network traffic.
+Si planeas ejecutar nodos en tu propio hardware, asegúrate de que cumplan con la especificación mínima de hardware
+como se describe anteriormente. Presta mucha atención a la configuración de red adecuada, asegurándote de que el
+puerto p2p (9651) sea accesible y la IP pública esté configurada correctamente en el nodo. Asegúrate de que el nodo esté
+conectado a la red físicamente (no a través de Wi-Fi), y que el enrutador sea lo suficientemente potente como para
+manejar un par de miles de conexiones TCP persistentes y que el ancho de banda de la red pueda
+acomodar al menos 5 Mbps de tráfico de red constante de subida y bajada.
 
-When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that
-will take care of node setup and configuration, we recommend using the [installer
-script](/nodes/run/with-installer.md) to set up the nodes. It will abstract most of
-the setup process for you, set up the node as a system service and will enable easy node upgrades.
+Al instalar el nodo AvalancheGo en las máquinas, a menos que tengas un personal de DevOps dedicado que
+se encargará de la configuración y la configuración del nodo, recomendamos usar el [script de instalación](/nodos/run/with-installer.md)
+para configurar los nodos. Abstraerá la mayor parte del
+proceso de configuración para ti, configurará el nodo como un servicio del sistema y permitirá actualizaciones fáciles del nodo.
 
-#### Cloud Providers
+#### Proveedores de la Nube
 
-There are a number of different cloud providers. We have documents that show how to set up a node on
-the most popular ones:
+Hay varios proveedores de servicios en la nube diferentes. Tenemos documentos que muestran cómo configurar un nodo en
+los más populares:
 
-- [Amazon Web Services](/nodes/run/third-party/aws-node.md)
-- [Azure](/nodes/run/third-party/microsoft-azure-node.md)
-- [Google Cloud Platform](/nodes/run/third-party/google-cloud-node.md)
+- [Amazon Web Services](/nodos/run/third-party/aws-node.md)
+- [Azure](/nodos/run/third-party/microsoft-azure-node.md)
+- [Google Cloud Platform](/nodos/run/third-party/google-cloud-node.md)
 
-There is a whole range of other cloud providers that may offer lower prices or better deals for your
-particular needs, so it makes sense to shop around.
+Hay una amplia gama de otros proveedores de servicios en la nube que pueden ofrecer precios más bajos o mejores ofertas para tus
+necesidades particulares, por lo que tiene sentido buscar opciones.
 
-Once you decide on a provider (or providers), if they offer instances in multiple data centers, it
-makes sense to spread the nodes geographically since that provides a better resilience and stability
-against outages.
+Una vez que decidas un proveedor (o proveedores), si ofrecen instancias en múltiples centros de datos, tiene
+sentido distribuir los nodos geográficamente, ya que eso proporciona una mejor resistencia y estabilidad
+contra cortes de energía.
 
-### Number of Validators
+### Número de Validadores
 
-Number of validators on a Subnet is a crucial decision you need to make. For stability and
-decentralization, you should strive to have as many validators as possible.
+El número de validadores en una Subred es una decisión crucial que debes tomar. Por estabilidad y
+descentralización, debes esforzarte por tener tantos validadores como sea posible.
 
-For stability reasons our recommendation is to have **at least** 5 full validators on your Subnet.
-If you have less than 5 validators your Subnet liveness will be at risk whenever a single validator
-goes offline, and if you have less than 4 even one offline node will halt your Subnet.
+Por razones de estabilidad, nuestra recomendación es tener **al menos** 5 validadores completos en tu Subred.
+Si tienes menos de 5 validadores, la vida útil de tu Subred estará en riesgo cada vez que un solo validador
+se desconecte, y si tienes menos de 4, incluso un nodo desconectado detendrá tu Subred.
 
-You should be aware that 5 is the minimum we recommend. But, from a decentralization standpoint
-having more validators is always better as it increases the stability of your Subnet and makes it
-more resilient to both technical failures and adversarial action. In a nutshell: run as many Subnet
-validators as you can.
+Debes ser consciente de que 5 es el mínimo que recomendamos. Pero, desde un punto de vista de descentralización,
+tener más validadores siempre es mejor ya que aumenta la estabilidad de tu Subred y la hace
+más resistente tanto a fallas técnicas como a acciones adversariales. En resumen: ejecuta tantos validadores de Subred
+como puedas.
 
-Considering that at times you will have to take nodes offline, for routine maintenance (at least for
-node upgrades which happen with some regularity) or unscheduled outages and failures you need to be
-able to routinely handle at least one node being offline without your Subnet performance degrading.
+Teniendo en cuenta que a veces tendrás que sacar nodos de línea, para mantenimiento de rutina (al menos para
+actualizaciones de nodos que ocurren con cierta regularidad) o interrupciones y fallas no programadas, debes ser
+capaz de manejar rutinariamente al menos un nodo fuera de línea sin que el rendimiento de tu Subred se degrade.
 
-### Node Bootstrap
+### Inicio de Nodos
 
-Once you set up the server and install AvalancheGo on them, nodes will need to bootstrap (sync with
-the network). This is a lengthy process, as the nodes need to catch up and replay all the network
-activity since the genesis up to the present moment. Full bootstrap on a node can take more than a
-week, but there are ways to shorten that process, depending on your circumstances.
+Una vez que configures el servidor e instales AvalancheGo en ellos, los nodos necesitarán iniciar (sincronizarse con
+la red). Este es un proceso largo, ya que los nodos necesitan ponerse al día y reproducir toda la actividad de la red
+desde el génesis hasta el momento presente. La sincronización completa en un nodo puede llevar más de una
+semana, pero hay formas de acortar ese proceso, dependiendo de tus circunstancias.
 
-#### State Sync
+#### Sincronización de Estado
 
-If the nodes you will be running as validators don't need to have the full transaction history, then
-you can use [state sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). With
-this flag enabled, instead of replaying the whole history to get to the current state, nodes simply
-download only the current state from other network peers, shortening the bootstrap process from
-multiple days to a couple of hours. If the nodes will be used for Subnet validation exclusively, you
-can use the state sync without any issues. Currently, state sync is only available for the C-Chain,
-but since the bulk of the transactions on the platform happen there it still has a significant
-impact on the speed of bootstrapping.
+Si los nodos que ejecutarás como validadores no necesitan tener todo el historial de transacciones, entonces
+puedes usar [sincronización de estado](/nodos/configure/chain-config-flags.md#state-sync-enabled-boolean). Con
+esta bandera habilitada, en lugar de reproducir toda la historia para llegar al estado actual, los nodos simplemente
+descargan solo el estado actual de otros pares de la red, acortando el proceso de inicio desde
+varios días a un par de horas. Si los nodos se utilizarán exclusivamente para validación de Subred, puedes
+usar la sincronización de estado sin ningún problema. Actualmente, la sincronización de estado solo está disponible para la C-Chain,
+pero dado que la mayor parte de las transacciones en la plataforma ocurren allí, aún tiene un impacto significativo
+en la velocidad de inicio.
 
-#### Database Copy
+#### Copia de la Base de Datos
 
-Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical
-across nodes, and as such can safely be copied from one node to another. Just make sure to that the
-node is not running during the copy process, as that can result in a corrupted database. Database
-copy procedure is explained in detail [here](/nodes/maintain/node-backup-and-restore.md#database).
+Una buena manera de reducir los tiempos de inicio en múltiples nodos es la copia de la base de datos. La base de datos es idéntica
+en todos los nodos y, como tal, se puede copiar de manera segura de un nodo a otro. Solo asegúrate de que el
+nodo no esté en funcionamiento durante el proceso de copia, ya que eso puede resultar en una base de datos corrupta. El procedimiento de copia de la base de datos se explica en detalle [aquí](/nodos/maintain/node-backup-and-restore.md#database).
 
-Please make sure you don't reuse any node's NodeID by accident, especially don't restore another
-node's ID, see [here](/nodes/maintain/node-backup-and-restore.md#nodeid) for details. Each node
-must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly,
-which will impact your validator's uptime, thus staking rewards, and the stability of your Subnet.
+Asegúrate de no reutilizar accidentalmente el NodeID de ningún nodo, especialmente no restaures el ID de otro
+nodo, consulta [aquí](/nodos/maintain/node-backup-and-restore.md#nodeid) para más detalles. Cada nodo
+de
 
-## Subnet Deploy
+Las instrucciones generales sobre cómo usar un dispositivo Ledger con Avalanche se pueden encontrar aquí.
 
-Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended
-tool to do that is [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
+### Archivo de génesis
 
-Instructions for deployment by Avalanche-CLI can be found [here](/build/subnet/deploy/mainnet-subnet.md).
+La estructura que define los parámetros más importantes en una Subnet se encuentra en el archivo de génesis, que es un archivo legible por humanos en formato `json`. Describir el contenido y las opciones disponibles en el archivo de génesis está más allá del alcance de este documento, y si estás listo para implementar tu Subnet en producción, probablemente ya lo tengas planificado.
 
-### Ledger HW Wallet
+Si quieres revisarlo, tenemos una descripción del archivo de génesis en nuestro documento sobre [personalización de Subnets EVM](/build/subnet/upgrade/customize-a-subnet.md).
 
-When creating the Subnet, you will be required to have a private key that will control the
-administrative functions of the Subnet (adding validators, managing the configuration). Needless to
-say, whoever has this private key has complete control over the Subnet and the way it runs.
-Therefore, protecting that key is of the utmost operational importance. Which is why we strongly
-recommend using a hardware wallet such as a [Ledger HW Wallet](https://www.ledger.com/) to store and
-access that private key.
+## Configuración del validador
 
-General instruction on how to use a Ledger
-device with Avalanche can be found
-[here](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche).
+Ejecutar nodos como validadores de una Subnet requiere algunas consideraciones adicionales, por encima de las que se tienen en cuenta al ejecutar un nodo regular o un validador de la Red Primaria solamente.
 
-### Genesis File
+### Unirse a una Subnet
 
-The structure that defines the most important parameters in a Subnet is found in the genesis file,
-which is a `json` formatted, human-readable file. Describing the contents and the options available
-in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet
-to production you probably have it mapped out already.
+Para que un nodo se una a una Subnet, hay dos requisitos previos:
 
-If you want to review, we have a description of the genesis file in our document on [customizing EVM
-Subnets](/build/subnet/upgrade/customize-a-subnet.md).
+- Validación en la Red Primaria
+- Seguimiento de la Subnet
 
+La validación en la Red Primaria significa que un nodo no puede unirse a una Subnet como validador antes de convertirse en un validador en la Red Primaria misma. Entonces, después de agregar el nodo al conjunto de validadores en la Red Primaria, el nodo puede unirse a una Subnet. Por supuesto, esto es válido solo para validadores de Subnet, si necesitas un nodo de Subnet que no valide, entonces el nodo no necesita ser un validador en absoluto.
 
+Para que un nodo comience a sincronizar la Subnet, debes agregar la opción de línea de comando `--track-subnets` o la clave `track-subnets` al archivo de configuración del nodo (que se encuentra en `.avalanchego/configs/node.json` para nodos creados con el script de instalación). Un solo nodo puede sincronizar múltiples Subnets, por lo que puedes agregarlas como una lista separada por comas de los ID de Subnet.
 
-## Validator Configuration
-
-Running nodes as Subnet validators warrants some additional considerations, above those when running
-a regular node or a Primary Network-only validator.
-
-### Joining a Subnet
-
-For a node to join a Subnet, there are two prerequisites:
-
-- Primary Network validation
-- Subnet tracking
-
-Primary Network validation means that a node cannot join a Subnet as a validator before becoming a
-validator on the Primary Network itself. So, after you add the node to the validator set on the
-Primary Network, node can join a Subnet. Of course, this is valid only for Subnet validators, if you
-need a non-validating Subnet node, then the node doesn't need to be a validator at all.
-
-To have a node start syncing the Subnet, you need to add the `--track-subnets` command line
-option, or `track-subnets` key to the node config file (found at
-`.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync
-multiple Subnets, so you can add them as a comma-separated list of Subnet IDs.
-
-An example of a node config syncing two Subnets:
+Un ejemplo de una configuración de nodo que sincroniza dos Subnets:
 
 ```json
 {
@@ -203,20 +168,13 @@ An example of a node config syncing two Subnets:
 }
 ```
 
-But that is not all. Besides tracking the SubnetID, the node also needs to have the
-plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
-been through that on Testnet and Fuji, but for a refresher, you can refer to [this
-tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
+Pero eso no es todo. Además de rastrear el ID de la Subnet, el nodo también necesita tener el plugin que contiene la instancia de la VM en la que se ejecutará la cadena de bloques en la Subnet. Es probable que ya hayas pasado por eso en Testnet y Fuji, pero como recordatorio, puedes consultar [este tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
 
-So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins`
-directory where the node binary is (for installer-script created nodes that would be
-`~/avalanche-node/plugins/`).
+Entonces, nombra al binario del plugin de la VM como el `VMID` de la cadena de la Subnet y colócalo en el directorio `plugins` donde se encuentra el binario del nodo (para nodos creados con el script de instalación, eso sería `~/avalanche-node/plugins/`).
 
-### Subnet Bootstrapping
+### Arranque de la Subnet
 
-After you have tracked the Subnet and placed the VM binary in the correct directory, your node is
-ready to start syncing with the Subnet. Restart the node and monitor the log output. You should
-notice something similar to:
+Después de haber rastreado la Subnet y colocado el binario de la VM en el directorio correcto, tu nodo está listo para comenzar a sincronizarse con la Subnet. Reinicia el nodo y monitorea la salida del registro. Deberías notar algo similar a esto:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -228,9 +186,7 @@ Jul 30 18:26:31 node-fuji avalanchego[1728308]:     VMID:srEXiWaHuhNyGwPUi444Tu4
 
 <!-- markdownlint-enable MD013 -->
 
-That means the node has detected the Subnet, and is attempting to initialize it and start
-bootstrapping the Subnet. It might take some time (if there are already transactions on the Subnet),
-and eventually it will finish the bootstrap with a message like:
+Eso significa que el nodo ha detectado la Subnet y está intentando inicializarla y comenzar a arrancar la Subnet. Puede llevar algún tiempo (si ya hay transacciones en la Subnet), y eventualmente terminará el arranque con un mensaje como este:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -240,50 +196,28 @@ Jul 30 18:27:21 node-fuji avalanchego[1728308]: [07-30|18:27:21.055] INFO <2ebCn
 
 <!-- markdownlint-enable MD013 -->
 
-That means the node has successfully bootstrapped the Subnet and is now in sync. If the node is one
-of the validators, it will start validating any transactions that get posted to the Subnet.
+Eso significa que el nodo ha arrancado correctamente la Subnet y ahora está sincronizado. Si el nodo es uno de los validadores, comenzará a validar cualquier transacción que se publique en la Subnet.
 
-### Monitoring
+### Monitoreo
 
-If you want to inspect the process of Subnet syncing, you can use the RPC call to check for the
-[blockchain status](/reference/avalanchego/p-chain/api.md#platformgetblockchainstatus).
+Si quieres inspeccionar el proceso de sincronización de la Subnet, puedes usar la llamada RPC para verificar el [estado de la cadena de bloques](/reference/avalanchego/p-chain/api.md#platformgetblockchainstatus).
 
-For a more in-depth look into Subnet operation, check out the blockchain log. By default, the log
-can be found in `~/.avalanchego/logs/ChainID.log` where you replace the `ChainID` with the actual ID
-of the blockchain in your Subnet.
+Para obtener una visión más profunda del funcionamiento de la Subnet, consulta el registro de la cadena de bloques. Por defecto, el registro se puede encontrar en `~/.avalanchego/logs/ChainID.log` donde reemplazas `ChainID` por el ID real de la cadena de bloques en tu Subnet.
 
-For an even more thorough (and pretty!) insight into how the node and the Subnet is behaving, you
-can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node
-operation, as well as a dedicated dashboard for Subnet data. Check out the
-[tutorial](/nodes/maintain/setting-up-node-monitoring.md) for information on how to set it up.
+Para obtener una visión aún más completa (¡y bonita!) de cómo se comporta el nodo y la Subnet, puedes instalar el sistema de monitoreo Prometheus+Grafana con los paneles personalizados para la operación regular del nodo, así como un panel dedicado para los datos de la Subnet. Consulta el [tutorial](/nodes/maintain/setting-up-node-monitoring.md) para obtener información sobre cómo configurarlo.
 
-### Managing Validation
+### Gestión de la validación
 
-On Avalanche all validations are limited in time and can range from two weeks up to one year.
-Furthermore, Subnet validations are always a subset of the Primary Network validation period (must
-be shorter or the same). That means that periodically your validators will expire and you will need
-to submit a new validation transaction for both the Primary Network and your Subnet.
+En Avalanche, todas las validaciones están limitadas en el tiempo y pueden variar desde dos semanas hasta un año. Además, las validaciones de Subnet siempre son un subconjunto del período de validación de la Red Primaria (deben ser más cortas o iguales). Eso significa que periódicamente tus validadores expirarán y necesitarás enviar una nueva transacción de validación tanto para la Red Primaria como para tu Subnet.
 
-Unless managed properly and in a timely manner, that can be disruptive for your Subnet (if all
-validators expire at the same time your Subnet will halt). To avoid that, keep notes on when a
-particular validation is set to expire and be ready to renew it as soon as possible. Also, when
-initially setting up the nodes, make sure to stagger the validator expiry so they don't all expire
-on the same date. Setting end dates at least a day apart is a good practice, as well as setting
-reminders for each expiry.
+A menos que se administre adecuadamente y de manera oportuna, eso puede ser disruptivo para tu Subnet (si todos los validadores expiran al mismo tiempo, tu Subnet se detendrá). Para evitar eso, toma notas de cuándo está programada una validación en particular y prepárate para renovarla lo antes posible. Además, al configurar inicialmente los nodos, asegúrate de escalonar la expiración de los validadores para que no todos expiren en la misma fecha. Establecer fechas de finalización con al menos un día de diferencia es una buena práctica, así como establecer recordatorios para cada vencimiento.
 
-## Conclusion
+## Conclusión
 
-Hopefully, by reading this document you have a better picture of the requirements and considerations
-you need to make when deploying your Subnet to production and you are now better prepared to launch
-your Subnet successfully.
+Esperamos que al leer este documento tengas una mejor imagen de los requisitos y consideraciones que debes tener en cuenta al implementar tu Subnet en producción y que ahora estés mejor preparado para lanzar tu Subnet con éxito.
 
-Keep in mind, running a Subnet in production is not a one-and-done kind of situation, it is in fact
-running a fleet of servers 24/7. And as with any real time service, you should have a robust
-logging, monitoring and alerting systems to constantly check the nodes and Subnet health and alert
-you if anything out of the ordinary happens.
+Ten en cuenta que ejecutar una Subnet en producción no es una situación de "hacerlo una vez y listo", de hecho, es ejecutar una flota de servidores 24/7. Y como con cualquier servicio en tiempo real, deberías tener sistemas de registro, monitoreo y alerta robustos para verificar constantemente la salud de los nodos y la Subnet y alertarte si algo fuera de lo común sucede.
 
-If you have any questions, doubts or would like to chat, please check out our [Discord
-server](https://chat.avax.network/), where we host a dedicated `#subnet-chat` channel dedicated to
-talking about all things Subnet.
+Si tienes alguna pregunta, duda o quieres chatear, por favor visita nuestro [servidor de Discord](https://chat.avax.network/), donde tenemos un canal dedicado `#subnet-chat` para hablar sobre todo lo relacionado con Subnets.
 
-We hope to see you there!
+¡Esperamos verte allí!

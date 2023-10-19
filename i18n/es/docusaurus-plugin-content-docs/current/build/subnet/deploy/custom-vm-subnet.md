@@ -1,71 +1,71 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial demonstrates the process of creating a Subnet with a custom virtual machine and deploying it locally.
-sidebar_label: With a Custom Virtual Machine
-pagination_label: Deploy a Subnet with Multisig Authorization
+tags: [Construir, Subredes]
+description: Este tutorial demuestra el proceso de crear una Subred con una máquina virtual personalizada y desplegarla localmente.
+sidebar_label: Con una Máquina Virtual Personalizada
+pagination_label: Desplegar una Subred con Autorización Multifirma
 sidebar_position: 5
 ---
 
-# Create a Subnet with a Custom Virtual Machine
+# Crear una Subred con una Máquina Virtual Personalizada
 
-This tutorial walks through the process of creating a Subnet with a custom virtual machine and 
-deploying it locally.
-Although the tutorial uses a fork of Subnet-EVM as an example, you can extend its lessons to support
-any custom VM binary.
+Este tutorial guía a través del proceso de crear una Subred con una máquina virtual personalizada y
+desplegarla localmente.
+Aunque el tutorial utiliza un fork de Subnet-EVM como ejemplo, puedes extender sus lecciones para soportar
+cualquier binario de VM personalizado.
 
-## Fork Subnet-EVM
+## Hacer un Fork de Subnet-EVM
 
-Instead of building a custom VM from scratch, this tutorial starts with forking Subnet-EVM.
+En lugar de construir una VM personalizada desde cero, este tutorial comienza haciendo un fork de Subnet-EVM.
 
-### Clone Subnet-EVM
+### Clonar Subnet-EVM
 
-First off, clone the Subnet-EVM repository into a directory of your choosing.
+En primer lugar, clona el repositorio de Subnet-EVM en un directorio de tu elección.
 
 ```shell
 git clone https://github.com/ava-labs/subnet-evm.git
 ```
 
 :::info
-The repository cloning method used is HTTPS, but SSH can be used too:
+El método de clonación del repositorio utilizado es HTTPS, pero también se puede usar SSH:
 
 `git clone git@github.com:ava-labs/subnet-evm.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+Puedes encontrar más información sobre SSH y cómo usarlo
+[aquí](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
-### Modify and Build Subnet-EVM
+### Modificar y Construir Subnet-EVM
 
-To prove you're running your custom binary and not the stock Subnet-EVM included with
-Avalanche-CLI, you need to modify the Subnet-EVM binary by making a minor change.
+Para demostrar que estás ejecutando tu binario personalizado y no el Subnet-EVM de stock incluido con
+Avalanche-CLI, necesitas modificar el binario de Subnet-EVM haciendo un cambio menor.
 
-Navigate to the directory you cloned Subnet-EVM into and generate a new commit:
+Navega al directorio en el que clonaste Subnet-EVM y genera un nuevo commit:
 
 ```shell
-git commit -a --allow-empty -m "custom vm commit"
+git commit -a --allow-empty -m "commit de vm personalizada"
 ```
 
-Take note of the new commit hash:
+Toma nota del nuevo hash de commit:
 
 ```shell
 git rev-parse HEAD
 c0fe6506a40da466285f37dd0d3c044f494cce32
 ```
 
-In this case, `c0fe6506a40da466285f37dd0d3c044f494cce32`.
+En este caso, `c0fe6506a40da466285f37dd0d3c044f494cce32`.
 
-Now build your custom binary by running
+Ahora construye tu binario personalizado ejecutando
 
 ```shell
 ./scripts/build.sh custom_vm.bin
 ```
 
-This command builds the binary and saves it at `./custom_vm.bin`.
+Este comando construye el binario y lo guarda en `./custom_vm.bin`.
 
-### Create a Custom Genesis
+### Crear un Génesis Personalizado
 
-To start a VM, you need to provide a genesis file. Here is a basic Subnet-EVM genesis that's
-compatible with your custom VM.
+Para iniciar una VM, necesitas proporcionar un archivo de génesis. Aquí tienes un génesis básico de Subnet-EVM que es
+compatible con tu VM personalizada.
 
 ```json
 {
@@ -114,92 +114,94 @@ compatible with your custom VM.
 }
 ```
 
-Open a text editor and copy the preceding text into a file called `custom_genesis.json`.
+Abre un editor de texto y copia el texto anterior en un archivo llamado `custom_genesis.json`.
 
-## Create the Subnet Configuration
+## Crear la Configuración de la Subred
 
-Now that you have your binary, it's time to create the Subnet configuration. This tutorial uses
-`myCustomSubnet` as it Subnet name. Invoke the Subnet Creation Wizard with this command:
+Ahora que tienes tu binario, es hora de crear la configuración de la Subred. Este tutorial utiliza
+`myCustomSubnet` como nombre de la Subred. Invoca el Asistente de Creación de Subred con este comando:
 
 ```shell
 avalanche subnet create myCustomSubnet
 ```
 
-### Choose Your VM
+### Elige tu VM
 
-Select `Custom` for your VM.
+Selecciona `Personalizada` para tu VM.
 
 ```shell
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose your VM:
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige tu VM:
     Subnet-EVM
-  ▸ Custom
+  ▸ Personalizada
 ```
 
-### Enter the Path to Your Genesis
+### Ingresa la Ruta a tu Génesis
 
-Enter the path to the genesis file you created in this [step](#create-a-custom-genesis).
+Ingresa la ruta al archivo de génesis que creaste en este [paso](#crear-un-génesis-personalizado).
 
 ```shell
-✔ Enter path to custom genesis: ./custom_genesis.json
+✔ Ingresa la ruta al génesis personalizado: ./custom_genesis.json
 ```
 
-### Enter the Path to Your VM Binary
+### Ingresa la Ruta a tu Binario de VM
 
-Next, enter the path to your VM binary. This should be the path to the `custom_evm.bin` you
-created [previously](#modify-and-build-subnet-evm).
+A continuación, ingresa la ruta a tu binario de VM. Esta debería ser la ruta al `custom_evm.bin` que
+creaste [anteriormente](#modificar-y-construir-subnet-evm).
 
 ```shell
-✔ Enter path to vm binary: ./custom_vm.bin
+✔ Ingresa la ruta al binario de vm: ./custom_vm.bin
 ```
 
-### Wrapping Up
+### Finalizando
 
-If all worked successfully, the command prints `Successfully created Subnet configuration`.
+Si todo funcionó correctamente, el comando imprime `Configuración de Subred creada exitosamente`.
 
-Now it's time to deploy it.
+Ahora es hora de desplegarla.
 
-## Deploy the Subnet Locally
+## Desplegar la Subred Localmente
 
-To deploy your Subnet, run
+Para desplegar tu Subred, ejecuta
 
 `avalanche subnet deploy myCustomSubnet`
 
-Make sure to substitute the name of your Subnet if you used a different one than `myCustomSubnet`.
+Asegúrate de sustituir el nombre de tu Subred si usaste uno diferente a `myCustomSubnet`.
 
-Next, select `Local Network`.
+A continuación, selecciona `Red Local`.
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to deploy on:
-  ▸ Local Network
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una red para desplegar en:
+  ▸ Red Local
     Fuji
     Mainnet
 ```
 
-This command boots a five node Avalanche network on your machine. It needs to download the latest
-versions of AvalancheGo and Subnet-EVM. The command may take a couple minutes to run.
+Este comando inicia una red Avalanche de cinco nodos en tu máquina. Necesita descargar las últimas
+versiones de AvalancheGo y Subnet-EVM. El comando puede tardar unos minutos en ejecutarse.
 
-If all works as expected, the command output should look something like this:
+Si todo funciona como se espera, la salida del comando debería verse algo así:
 
 <!-- markdownlint-disable MD013 -->
 
 ```text
 > avalanche subnet deploy myCustomSubnet
-✔ Local Network
-Deploying [myCustomSubnet] to Local Network
-Backend controller started, pid: 26110, output at: /home/fm/.avalanche-cli/runs/server_20230816_131014/avalanche-cli-backend.log
-Installing avalanchego-v1.10.8...
-avalanchego-v1.10.8 installation successful
-Node log path: /home/fm/.avalanche-cli/runs/network_20230816_131608/node<i>/logs
-Starting network...
-VMs ready.
+✔ Red Local
+Desplegando [myCustomSubnet] en Red Local
+Controlador de backend iniciado, pid: 26110, salida en: /home/fm/.avalanche-cli/runs/server_20230816_131014/avalanche-cli-backend.log
+Instalando avalanchego-v1.10.8...
+Instalación exitosa de avalanchego-v1.10.8
+Ruta de registro del nodo: /home/fm/.avalanche-cli/runs/network_20230816_131608/node<i>/logs
+Iniciando red...
+VMs listas.
 
-Blockchain has been deployed. Wait until network acknowledges...
+La blockchain ha sido desplegada. Espera hasta que la red lo reconozca...
 
-Network ready to use. Local network node endpoints:
+
+
+Red de lista para usar. Puntos finales de los nodos de la red local:
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| NODE  |       VM       |                                        URL                                         |                    ALIAS URL                    |
+| NODO  |       VM       |                                        URL                                         |                    ALIAS URL                    |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
 | node1 | myCustomSubnet | http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
@@ -212,22 +214,20 @@ Network ready to use. Local network node endpoints:
 | node5 | myCustomSubnet | http://127.0.0.1:9658/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9658/ext/bc/myCustomSubnet/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
 
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc
+Detalles de conexión de la extensión del navegador (cualquier URL de nodo de arriba funciona):
+URL RPC:          http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc
 ```
 
-<!-- markdownlint-enable MD013 -->
+Puedes usar la `URL RPC` para conectarte e interactuar con tu Subred.
 
-You can use the `RPC URL` to connect to and interact with your Subnet.
+## Interactúa con tu Subred
 
-## Interact with Your Subnet
+### Verifica la Versión
 
-### Check the Version
-
-You can verify that your Subnet has deployed correctly by querying the local node to see what
-Subnets it's running. You need to use the
-[`getNodeVersion`](/reference/avalanchego/info-api.md#infogetnodeversion) endpoint. Try running this
-curl command:
+Puedes verificar que tu Subred se haya desplegado correctamente consultando al nodo local para ver qué
+Subredes está ejecutando. Necesitas usar el endpoint
+[`getNodeVersion`](/reference/avalanchego/info-api.md#infogetnodeversion). Intenta ejecutar este
+comando curl:
 
 ```shell
 curl --location --request POST 'http://127.0.0.1:9650/ext/info' \
@@ -241,7 +241,7 @@ curl --location --request POST 'http://127.0.0.1:9650/ext/info' \
 }'
 ```
 
-The command returns a list of all the VMs your local node is currently running along with their versions.
+El comando devuelve una lista de todas las VM que tu nodo local está ejecutando junto con sus versiones.
 
 ```json
 {
@@ -262,15 +262,15 @@ The command returns a list of all the VMs your local node is currently running a
 }
 ```
 
-Your results may be slightly different, but you can see that in addition to the X-Chain's
-`avm`, the C-Chain's `evm`, and the P-Chain's `platform` VM, the node is running the custom VM with
-commit `c0fe6506a40da466285f37dd0d3c044f494cce32`.
+Tus resultados pueden ser ligeramente diferentes, pero puedes ver que además de la VM de la Cadena-X
+`avm`, la VM de la Cadena-C `evm` y la VM de la Cadena-P `platform`, el nodo está ejecutando la VM
+personalizada con el commit `c0fe6506a40da466285f37dd0d3c044f494cce32`.
 
-### Check a Balance
+### Verifica un Saldo
 
-If you used the default genesis, your custom VM has a prefunded address. You can verify its balance
-with a curl command. Make sure to substitute the command's URL with the `RPC URL` from your
-deployment output.
+Si usaste el génesis predeterminado, tu VM personalizada tiene una dirección prefinanciada. Puedes verificar su saldo
+con un comando curl. Asegúrate de sustituir la URL del comando con la `URL RPC` de tu
+salida de despliegue.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -290,7 +290,7 @@ curl --location --request POST 'http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc'
 
 <!-- markdownlint-enable MD013 -->
 
-The command should return
+El comando debería devolver
 
 ```json
 {
@@ -300,11 +300,11 @@ The command should return
 }
 ```
 
-The balance is hex encoded, so this means the address has a balance of 1 million tokens.
+El saldo está codificado en hexadecimal, así que esto significa que la dirección tiene un saldo de 1 millón de tokens.
 
-Note, this command doesn't work on all custom VMs, only VMs that implement the EVM's
-`eth_getBalance` interface.
+Ten en cuenta que este comando no funciona en todas las VM personalizadas, solo en las VM que implementan la
+interfaz `eth_getBalance` de la EVM.
 
-## Next Steps
+## Siguientes Pasos
 
-You've now unlocked the ability to deploy custom VMs. Go build something cool!
+Ahora has desbloqueado la capacidad de desplegar VMs personalizadas. ¡Ve y construye algo genial!

@@ -1,69 +1,68 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial demonstrates how to deploy a permissioned Subnet on Avalanche Mainnet.
-sidebar_label: On Avalanche Mainnet
-pagination_label: Deploy a Permissioned Subnet on Mainnet
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+sidebar_label: En la Mainnet de Avalanche
+pagination_label: Implementar una Subred con permisos en Mainnet
 sidebar_position: 2
 ---
 
-# Deploy a Permissioned Subnet on Mainnet
+# Implementar una Subred con permisos en Mainnet
 
 :::warning
 
-Deploying a Subnet to Mainnet has many risks. Doing so safely requires a laser focus on security.
-This tutorial does its best to point out common pitfalls, but there may be other risks not discussed
-here.
+Implementar una Subred en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
+láser en seguridad. Este tutorial hace todo lo posible por señalar peligros comunes, pero puede haber
+otros riesgos no discutidos aquí.
 
-This tutorial is an educational resource and provides no guarantees that following it results in a
-secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of
-the deployment process at the expense of security. The text highlights these shortcuts and they
-shouldn't be used for a production deployment.
+Este tutorial es un recurso educativo y no ofrece garantías de que seguirlo resulte en una
+implementación segura. Además, este tutorial toma algunos atajos que ayudan a comprender el proceso de
+implementación a expensas de la seguridad. El texto resalta estos atajos y no deben usarse para una
+implementación en producción.
 
 :::
 
-After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your
-Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on
+Después de gestionar con éxito una implementación de Subred en la `Fuji Testnet`, estás listo para
+implementar tu Subred en Mainnet. Si no lo has hecho, primero [implementa una Subred en
 Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
-This tutorial shows how to do the following on `Mainnet`.
+Este tutorial muestra cómo hacer lo siguiente en `Mainnet`.
 
-- Create a Subnet.
-- Deploy a virtual machine based on Subnet-EVM.
-- Join a node to the newly created Subnet.
-- Add a node as a validator to the Subnet.
+- Crear una Subred.
+- Implementar una máquina virtual basada en Subnet-EVM.
+- Unir un nodo a la Subred recién creada.
+- Agregar un nodo como validador a la Subred.
 
 :::note
 
-All IDs in this article are for illustration purposes only. They are guaranteed to be different in
-your own run-through of this tutorial.
+Todos los ID en este artículo son solo con fines ilustrativos. Se garantiza que serán diferentes en
+tu propia ejecución de este tutorial.
 
 :::
 
-## Prerequisites
+## Requisitos previos
 
-- 5+ nodes running and [fully bootstrapped](/nodes/README.md) on `Mainnet`
-- [Avalanche-CLI is installed](/tooling/cli-guides/install-avalanche-cli.md) on each validator node's
- box
-- A [Ledger](https://www.ledger.com/) device
-- You've [created a Subnet configuration](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-and fully tested a [Fuji Testnet
-  Subnet deployment](/build/subnet/deploy/fuji-testnet-subnet.md)
+- 5+ nodos en ejecución y [totalmente arrancados](/nodes/README.md) en `Mainnet`
+- [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en cada nodo validador
+- Un dispositivo [Ledger](https://www.ledger.com/)
+- Has [creado una configuración de Subred](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
+y probado completamente una implementación de Subred en [Fuji Testnet
+  ](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
-Although only one validator is strictly required to run a Subnet, running with less than five
-validators is extremely dangerous and guarantees network downtime. Plan to support at least five
-validators in your production network.
+Aunque solo se requiere estrictamente un validador para ejecutar una Subred, ejecutarla con menos de
+cinco validadores es extremadamente peligroso y garantiza un tiempo de inactividad de la red. Planea
+soportar al menos cinco validadores en tu red de producción.
 
 :::
 
-### Getting Your Mainnet NodeIDs
+### Obtener tus NodeIDs de Mainnet
 
-You need to collect the NodeIDs for each of your validators. This tutorial uses these NodeIDs in
-several commands.
+Necesitas recopilar los NodeIDs de cada uno de tus validadores. Este tutorial utiliza estos NodeIDs en
+varios comandos.
 
-To get the NodeID of a `Mainnet` node, call the
-[info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) endpoint. For example:
+Para obtener el NodeID de un nodo `Mainnet`, llama al endpoint
+[info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid). Por ejemplo:
 
 ```text
 curl -X POST --data '{
@@ -73,7 +72,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response should look something like:
+La respuesta debería verse algo así:
 
 ```json
 {
@@ -85,25 +84,26 @@ The response should look something like:
 }
 ```
 
-In the sample response, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID. Note that the
-`NodeID-` prefix is part of the NodeID.
+En la respuesta de ejemplo, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID. Ten en cuenta que el
+prefijo `NodeID-` es parte del NodeID.
 
-### Setting up Your Ledger
+### Configurar tu Ledger
 
-In the interest of security, all Avalanche-CLI `Mainnet` operations require the use of a connected
-Ledger device. You must unlock your Ledger and run the Avalanche App. See [How to Use
-Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
-for help getting set up.
+En interés de la seguridad, todas las operaciones Avalanche-CLI en `Mainnet` requieren el uso de un
+dispositivo Ledger conectado. Debes desbloquear tu Ledger y ejecutar la aplicación Avalanche. Consulta
+[Cómo usar Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
+para obtener ayuda para configurarlo.
 
-Avalanche-CLI supports the Ledger `Nano X`, `Nano S`, and `Nano S Plus`.
+Avalanche-CLI admite los dispositivos Ledger `Nano X`, `Nano S` y `Nano S Plus`.
 
-Ledger devices support TX signing for any address inside a sequence automatically generated by the device.
+Los dispositivos Ledger admiten la firma de TX para cualquier dirección dentro de una secuencia
+generada automáticamente por el dispositivo.
 
-By default, Avalanche-CLI uses the first address of the derivation, and that address needs funds to
-issue the TXs to create the Subnet and add validators.
+De forma predeterminada, Avalanche-CLI utiliza la primera dirección de la derivación, y esa dirección
+necesita fondos para emitir las TX para crear la Subred y agregar validadores.
 
-To get the first `Mainnet` address of your Ledger device, first make sure it is connected,
-unblocked, and running the Avalanche app. Then execute the `key list` command:
+Para obtener la primera dirección `Mainnet` de tu dispositivo Ledger, primero asegúrate de que esté
+conectado, desbloqueado y ejecutando la aplicación Avalanche. Luego ejecuta el comando `key list`:
 
 ```bash
 avalanche key list --ledger 0 --mainnet
@@ -117,489 +117,466 @@ avalanche key list --ledger 0 --mainnet
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-The command prints the P-Chain address for `Mainnet`,
-`P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with
-at least 2.5 AVAX to cover TX fees. the TX fee for creating your Subnet costs 2 AVAX. Adding
-validators costs 0.001 AVAX each. For more details, see [Fees](/reference/standards/guides/txn-fees)
+El comando imprime la dirección de la P-Chain para `Mainnet`,
+`P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, y su saldo. Debes financiar esta dirección con al
+menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subred cuesta 2 AVAX. Agregar
+validadores cuesta 0.001 AVAX cada uno. Para más detalles, consulta [Tarifas](/reference/standards/guides/txn-fees)
 
 :::note
 
-You can use the `key list` command to get any Ledger address in the derivation sequence by
-changing the index parameter from `0` to the one desired, or to a list of them (for example: `2`, or
-`0,4,7`). Also, you can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks
-with the `--local` parameter.
+Puedes usar el comando `key list` para obtener cualquier dirección de Ledger en la secuencia de
+derivación cambiando el parámetro de índice de `0` al deseado, o a una lista de ellos (por ejemplo: `2`,
+o `0,4,7`). Además, puedes solicitar direcciones en `Fuji` con el parámetro `--fuji`, y redes locales
+con el parámetro `--local`.
 
 :::
 
-#### Funding the Ledger
+#### Financiar el Ledger
 
-A new Ledger device has no funds on the addresses it controls. You'll need to send funds to it by
-exporting them from the C-Chain to the P-Chain using [Avalanche's Web
-Wallet](https://wallet.avax.network).
+Un nuevo dispositivo Ledger no tiene fondos en las direcciones que controla. Debes enviar fondos a él
+exportándolos de la C-Chain a la P-Chain usando la [Billetera Web de
+Avalanche](https://wallet.avax.network).
 
-You can load the Ledger's C-Chain address in the web wallet or load in a different private key. You
-can transfer funds from the C-Chain to the P-Chain by clicking on the Cross Chain on the left side
-of the web wallet. See this
+Puedes cargar la dirección de la C-Chain del Ledger en la billetera web o cargar una clave privada
+diferente. Puedes transferir fondos de la C-Chain a la P-Chain haciendo clic en Cross Chain en el lado
+izquierdo de la billetera web. Consulta este
 [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet-between-x-and-c-chain)
-for more instructions.
+para obtener más instrucciones.
 
-## Deploy the Subnet
+## Implementar la Subred
 
-With your Ledger unlocked and running the Avalanche app, run
+Con tu Ledger desbloqueado y ejecutando la aplicación Avalanche, ejecuta
 
 ```bash
 avalanche subnet deploy testsubnet
 ```
 
-This is going to start a new prompt series.
+Esto va a iniciar una nueva serie de comandos.
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to deploy on:
-    Local Network
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? Elije una red para implementar en:
+    Red Local
     Fuji
   ▸ Mainnet
 ```
 
-This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys to `Mainnet` and hit enter.
+Este tutorial trata sobre la implementación en `Mainnet`, así que navega con las teclas de flecha hasta
+`Mainnet` y presiona enter.
 
 ```text
 ✔ Mainnet
-Deploying [testsubnet] to Mainnet
+Implementando [testsubnet] en Mainnet
 ```
 
-After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
+Después de eso, la CLI muestra la dirección del Ledger `Mainnet` utilizada para financiar la implementación:
 
 ```text
-Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
+Dirección del Ledger: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-The deployment requires running a [createSubnet transaction](/reference/avalanchego/p-chain/api.md#platformcreatesubnet)
-and a [createBlockchain transaction](/reference/avalanchego/p-chain/api.md#platformcreateblockchain),
-and so this first Ledger address must have the funds to issue both operations.
+La implementación requiere ejecutar una transacción [createSubnet](/reference/avalanchego/p-chain/api.md#platformcreatesubnet)
+y una transacción [createBlockchain](/reference/avalanchego/p-chain/api.md#platformcreateblockchain),
+por lo que esta primera dirección del libro mayor debe tener los fondos para emitir ambas operaciones.
 
-This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
-control the Subnet. These addresses are known as `Control Keys`. The CLI can automatically set your
-Ledger's address as the sole control key or the user may specify a custom list.
+Este tutorial crea una Subnet con permisos. Como tal, debes especificar qué direcciones de la P-Chain pueden
+controlar la Subnet. Estas direcciones se conocen como `Control Keys`. La CLI puede configurar automáticamente
+la dirección de tu Ledger como la única clave de control o el usuario puede especificar una lista personalizada.
 
 :::warning
 
-In production Subnets, you should always use multiple control keys running in a multisig
-configuration. This tutorial uses a single control key for illustrative purposes only.
+En Subnets de producción, siempre debes usar múltiples claves de control que se ejecuten en una configuración de multisig.
+Este tutorial utiliza una sola clave de control únicamente con fines ilustrativos.
 
-For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment
-Tutorial](/build/subnet/deploy/multisig-auth.md).
+Para obtener instrucciones sobre cómo controlar tu Subnet con un multisig, consulta el [Tutorial de Implementación de Multisig](/build/subnet/deploy/multisig-auth.md).
 
 :::
 
 ```text
-Configure which addresses may make changes to the subnet.
-These addresses are known as your control keys. You are going to also
-set how many control keys are required to make a subnet change (the threshold).
-Use the arrow keys to navigate: ↓ ↑ → ←
-? How would you like to set your control keys?:
-  ▸ Use ledger address
-    Custom list
+Configura qué direcciones pueden realizar cambios en la subnet.
+Estas direcciones se conocen como tus claves de control. También vas a
+establecer cuántas claves de control se requieren para hacer un cambio en la subnet (el umbral).
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Cómo te gustaría configurar tus claves de control?:
+  ▸ Usar dirección del ledger
+    Lista personalizada
 ```
 
-For this tutorial, opt to use the first Ledger address, so enter at `Use ledger address`. Only
-this address is going to be able to add or remove validators, or create blockchains on the Subnet.
+Para este tutorial, opta por usar la primera dirección del Ledger, así que ingresa en `Usar dirección del ledger`. Solo
+esta dirección podrá agregar o eliminar validadores, o crear blockchains en la Subnet.
 
 ```text
-Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
-Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Tus claves de control de la Subnet: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Tus claves de autenticación de la subnet para la creación de la cadena: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-Next, the CLI generates a TX for creating the SubnetID and asks the user to sign it by using the Ledger.
+A continuación, la CLI genera una TX para crear la SubnetID y le pide al usuario que la firme usando el Ledger.
 
 ```text
-*** Please sign subnet creation hash on the ledger device ***
+*** Por favor, firma el hash de creación de la subnet en el dispositivo Ledger ***
 ```
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger,
+y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-If the Ledger doesn't have enough funds, the user may see an error message:
+Si el Ledger no tiene suficientes fondos, es posible que el usuario vea un mensaje de error:
 
 ```text
-*** Please sign subnet creation hash on the ledger device ***
-Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
+*** Por favor, firma el hash de creación de la subnet en el dispositivo Ledger ***
+Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000000 unidades más del activo "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-If successful, the CLI next asks you to sign a chain creation TX.
+Si tiene éxito, la CLI te pide que firmes una TX de creación de cadena.
 
 ```text
-Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
-*** Please sign blockchain creation hash on the ledger device ***
+La Subnet ha sido creada con ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Ahora creando la blockchain...
+*** Por favor, firma el hash de creación de la blockchain en el dispositivo Ledger ***
 ```
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger,
+y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-After that, CLI creates the blockchain within the Subnet, and a summary window for the deployment
-appears:
+Después de eso, la CLI crea la blockchain dentro de la Subnet, y aparece una ventana de resumen para la implementación.
 
 ```text
 +--------------------+------------------------------------------------------------------------------------+
-| DEPLOYMENT RESULTS |                                                                                    |
+| RESULTADOS DEPLOYMENT |                                                                                    |
 +--------------------+------------------------------------------------------------------------------------+
-| Chain Name         | testsubnet                                                                         |
+| Nombre de la Cadena | testsubnet                                                                         |
 +--------------------+------------------------------------------------------------------------------------+
-| Subnet ID          | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
+| ID de la Subnet     | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
 +--------------------+------------------------------------------------------------------------------------+
-| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                  |
+| ID de la VM         | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                  |
 +--------------------+------------------------------------------------------------------------------------+
-| Blockchain ID      | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
+| ID de la Blockchain | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
 +--------------------+------------------------------------------------------------------------------------+
-| RPC URL            | http://127.0.0.1:9650/ext/bc/wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG/rpc |
+| URL RPC             | http://127.0.0.1:9650/ext/bc/wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG/rpc |
 +--------------------+------------------------------------------------------------------------------------+
-| P-Chain TXID       | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
+| TXID de la P-Chain  | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
 +--------------------+------------------------------------------------------------------------------------+
 ```
 
-Well done. You have just created your own Subnet running on `Mainnet`. Now it's time to add your validators.
+Bien hecho. Acabas de crear tu propia Subnet ejecutándose en `Mainnet`. Ahora es hora de agregar tus validadores.
 
-## Request to Join a Subnet as a Validator
+## Solicitud para unirse a una Subnet como validador
 
-The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
-To request permission to validate a Subnet, the following steps are required:
+La nueva Subnet creada en los pasos anteriores aún no tiene ningún validador dedicado.
+Para solicitar permiso para validar una Subnet, se requieren los siguientes pasos:
 
 :::info
 
-Adding a validator on a Subnet requires that the node is already a validator on the primary network,
-which means that your node has **fully bootstrapped**.
+Agregar un validador en una Subnet requiere que el nodo ya sea un validador en la red primaria,
+lo que significa que tu nodo se ha **iniciado completamente**.
 
-See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to become
-a validator.
+Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) cómo convertirte
+en un validador.
 
 :::
 
-First, request permission to validate by running the `join` command along with the Subnet name:
+Primero, solicita permiso para validar ejecutando el comando `join` junto con el nombre de la Subnet:
 
 ```bash
 avalanche subnet join testsubnet
 ```
 
-Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of
-the Subnet must approve your node to be a validator afterwards by calling `addValidator` as
-described in the next section.
+Nota: ¡Ejecutar el comando `join` no garantiza que tu nodo sea un validador de la Subnet! El propietario de
+la Subnet debe aprobar que tu nodo sea un validador llamando a `addValidator` como se describe en la siguiente sección.
 
-### Select Mainnet
+### Seleccionar Mainnet
 
-When you `join` command, you are first prompted with the network selection. Choose `Mainnet`:
+Cuando ejecutas el comando `join`, primero se te solicita la selección de la red. Elige `Mainnet`:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to validate on (this command only supports public networks):
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una red en la que validar (este comando solo admite redes públicas):
     Fuji
   ▸ Mainnet
 ```
 
-### Setup Node Automatically
+### Configurar el Nodo Automáticamente
 
-There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
-"Automatic" attempts to edit your config file and sets up your plugin directory, while "Manual" just
-prints the required config to the screen. If you are running the CLI on the same box as your 
-validator, you should run the commands in automated mode. If you don't want to run Avalanche-CLI 
-on the same box as your validator, use the manual commands.
+Ahora hay dos opciones posibles: configuración automática y manual. Como se mencionó anteriormente,
+"Automático" intenta editar tu archivo de configuración y configura tu directorio de complementos, mientras que "Manual" solo
+imprime la configuración requerida en la pantalla. Si estás ejecutando la CLI en la misma máquina que tu
+validador, debes ejecutar los comandos en modo automatizado. Si no quieres ejecutar Avalanche-CLI
+en la misma máquina que tu validador, usa los comandos manuales.
 
-Select automatic.
+Selecciona automático.
 
-#### Set Config File
+#### Configurar Archivo de Configuración
 
 ```text
-✔ Automatic
-✔ Path to your existing config file (or where it's going to be generated): config.json
+✔ Automático
+✔ Ruta a tu archivo de configuración existente (o donde se va a generar): config.json
 ```
 
-Provide a path to a config file. If this command runs on the box where your validator is running,
-then you could point this to the actually used config file, for example
-`/etc/avalanchego/config.json` - just make sure the tool has **write** access to the file. Or you could
-just copy the file later. In any case, the tool is going to either try to edit the existing file specified
-by the given path, or create a new file. Again, set write permissions.
 
-#### Set Plugin Directory
 
-Next, provide the plugin directory. Each VM runs its own binary, called a plugin. Therefore, you
-need to copy your VM's plugin binary into AvalancheGo's plugin directory. This directory depends
-on your AvalancheGo install location.
+Proporcione la ruta a un archivo de configuración. Si este comando se ejecuta en la máquina donde se está ejecutando su validador, podría apuntar esto al archivo de configuración realmente utilizado, por ejemplo, `/etc/avalanchego/config.json` - solo asegúrese de que la herramienta tenga acceso de **escritura** al archivo. O podría simplemente copiar el archivo más tarde. En cualquier caso, la herramienta va a intentar editar el archivo existente especificado por la ruta dada, o crear un nuevo archivo. Nuevamente, establezca permisos de escritura.
+
+#### Establecer Directorio de Plugins
+
+A continuación, proporcione el directorio de plugins. Cada VM ejecuta su propio binario, llamado plugin. Por lo tanto, necesita copiar el binario de plugin de su VM en el directorio de plugins de AvalancheGo. Este directorio depende de la ubicación de instalación de AvalancheGo.
 
 ```text
-✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
+✔ Ruta a su directorio de plugins de avalanchego (probablemente avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins
 ```
 
-The tool doesn't know where exactly it's located so it requires the full path. With the path given,
-it's going to copy the VM binary to the provided location:
+La herramienta no sabe exactamente dónde se encuentra, por lo que requiere la ruta completa. Con la ruta dada, va a copiar el binario de la VM a la ubicación proporcionada:
 
 ```text
-✔ Path to your avalanchego plugin dir (likely avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
-VM binary written to /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
-This is going to edit your existing config file. This edit is nondestructive,
-but it's always good to have a backup.
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Proceed?:
-  ▸ Yes
+✔ Ruta a su directorio de plugins de avalanchego (probablemente avalanchego/build/plugins): /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins█
+Binario de VM escrito en /home/user/go/src/github.com/ava-labs/avalanchego/build/plugins/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
+Esto va a editar su archivo de configuración existente. Esta edición no es destructiva, pero siempre es bueno tener una copia de seguridad.
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Continuar?:
+  ▸ Sí
     No
 ```
 
-Hitting `Yes` writes the necessary file:
+Al presionar `Sí`, se escribe el archivo necesario:
 
 ```text
-✔ Yes
-The config file has been edited. To use it, make sure to start the node with the '--config-file'
-option, e.g.
+✔ Sí
+El archivo de configuración ha sido editado. Para usarlo, asegúrese de iniciar el nodo con la opción '--config-file', por ejemplo.
 
 ./build/avalanchego --config-file config.json
 
-(using your binary location). The node has to be restarted for the changes to take effect.
+(usando su ubicación binaria). El nodo debe reiniciarse para que los cambios surtan efecto.
 ```
 
-#### Restart the Node
+#### Reiniciar el Nodo
 
-It's **required to restart the node**.
+Es **necesario reiniciar el nodo**.
 
-### Setup Node Manually
+### Configurar el Nodo Manualmente
 
-By choosing "Manual" instead, the tool prints _instructions_. The user is going to have to follow
-these instructions and apply them to the node. Note that the IDs for the VM and Subnet are different
-for each Subnet deployment and you shouldn't copy them from this tutorial.
+Al elegir "Manual" en su lugar, la herramienta imprime _instrucciones_. El usuario va a tener que seguir estas instrucciones y aplicarlas al nodo. Tenga en cuenta que las ID de la VM y la Subnet son diferentes para cada implementación de Subnet y no debe copiarlas de este tutorial.
 
 ```text
 ✔ Manual
 
-To setup your node, you must do two things:
+Para configurar su nodo, debe hacer dos cosas:
 
-1. Add your VM binary to your node's plugin directory
-2. Update your node config to start validating the subnet
+1. Agregar su binario de VM al directorio de plugins de su nodo
+2. Actualizar la configuración de su nodo para comenzar a validar la Subnet
 
-To add the VM to your plugin directory, copy or scp from /tmp/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
+Para agregar la VM a su directorio de plugins, copie o scp desde /tmp/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 
-If you installed avalanchego manually, your plugin directory is likely
+Si instaló avalanchego manualmente, su directorio de plugins es probablemente
 avalanchego/build/plugins.
 
-If you start your node from the command line WITHOUT a config file (e.g. via command
-line or systemd script), add the following flag to your node's startup command:
+Si inicia su nodo desde la línea de comandos SIN un archivo de configuración (por ejemplo, a través de un script de línea de comandos o systemd), agregue la siguiente bandera al comando de inicio de su nodo:
 
 --track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
-(if the node already has a track-subnets config, append the new value by
-comma-separating it).
+(si el nodo ya tiene una configuración de track-subnets, agregue el nuevo valor separado por comas).
 
-For example:
+Por ejemplo:
 ./build/avalanchego --network-id=Mainnet --track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
-If you start the node via a JSON config file, add this to your config file:
+Si inicia el nodo a través de un archivo de configuración JSON, agregue esto a su archivo de configuración:
 track-subnets: 2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 
-TIP: Try this command with the --avalanchego-config flag pointing to your config file,
-this tool is going to try to update the file automatically (make sure it can write to it).
+CONSEJO: Pruebe este comando con la bandera --avalanchego-config apuntando a su archivo de configuración, esta herramienta va a intentar actualizar el archivo automáticamente (asegúrese de que pueda escribir en él).
 
-After you update your config, you are going to need to restart your node for the changes to
-take effect.
+Después de actualizar su configuración, va a necesitar reiniciar su nodo para que los cambios surtan efecto.
 ```
 
-## Add a Validator
+## Agregar un Validador
 
 :::warning
 
-If the `join` command isn't successfully completed before `addValidator` is completed, the Subnet
-could experience degraded performance or even halt.
+Si el comando `join` no se completa con éxito antes de que se complete `addValidator`, la Subnet podría experimentar un rendimiento degradado o incluso detenerse.
 
 :::
 
-Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to
-grant the node permission to be a validator in your Subnet.
+Ahora que el nodo se ha unido a la Subnet, un titular de la clave de control de la Subnet debe llamar a `addValidator` para otorgar al nodo permiso para ser un validador en su Subnet.
 
-To whitelist a node as a recognized validator on the Subnet, run:
+Para incluir en la lista blanca a un nodo como un validador reconocido en la Subnet, ejecute:
 
 ```bash
 avalanche subnet addValidator testsubnet
 ```
 
-You need to repeat this process for every validator you add to the network.
+Debe repetir este proceso para cada validador que agregue a la red.
 
-You can run the `addValidator` transactions from the same box that deployed the Subnet.
+Puede ejecutar las transacciones `addValidator` desde la misma máquina que implementó la Subnet.
 
-### Submit addValidator TX to Mainnet
+### Enviar TX de addValidator a Mainnet
 
-First choose `Mainnet` as the network to add the Subnet validator to.
+Primero elija `Mainnet` como la red a la que agregar el validador de la Subnet.
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to add validator to.:
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? Elija una red a la que agregar el validador.:
     Fuji
   ▸ Mainnet
 ```
 
-Because this operation issues a new
-[transaction](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator), the CLI needs the
-control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
-the process looks slightly different if you use multiple controls keys. The address needs to pay a
-TX fee of 0.001 AVAX.
+Debido a que esta operación emite una nueva
+[transacción](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator), la CLI necesita las
+claves de control para firmar la operación. Debido a que este tutorial solo usa una clave de control en la Subnet, el proceso se ve ligeramente diferente si se usan múltiples claves de control. La dirección necesita pagar una tarifa de TX de 0.001 AVAX.
 
 ```text
-Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Sus claves de autenticación de la Subnet para la creación de la TX de addValidator: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
-### Set NodeID
+### Establecer NodeID
 
-Now enter the [**NodeID**](#getting-your-mainnet-nodeids) of the validator.
+Ahora ingrese el [**NodeID**](#obtener-sus-nodeids-de-mainnet) del validador.
 
 ```text
-Next, we need the NodeID of the validator you want to whitelist.
+A continuación, necesitamos el NodeID del validador que desea incluir en la lista blanca.
 
-Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how
-to query the NodeID from your node
-(Edit host IP address and port to match your deployment, if needed).
-✔ What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
+Consulte https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid para obtener instrucciones sobre cómo consultar el NodeID desde su nodo
+(Edite la dirección IP del host y el puerto para que coincidan con su implementación, si es necesario).
+✔ ¿Cuál es el NodeID del validador que desea incluir en la lista blanca?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
 ```
 
-Note, this ID is intentionally modified to prevent replication.
+Tenga en cuenta que esta ID está modificada intencionalmente para evitar la replicación.
 
-### Set Stake Weight
+### Establecer Peso de Stake
 
-Select 30 as the stake weight. You can learn more about the stake weight parameter in
-[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
-`weight` section.
+Seleccione 30 como peso de stake. Puede obtener más información sobre el parámetro de peso de stake en
+[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) en la sección
+`weight`.
 
 :::warning
 
-The stake weight of all your validators should sum to at least 100.
+El peso de stake de todos sus validadores debe sumar al menos 100.
 
 :::
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? What stake weight would you like to assign to the validator?:
-    Default (20)
-  ▸ Custom
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Qué peso de stake le gustaría asignar al validador?:
+    Predeterminado (20)
+  ▸ Personalizado
 ```
 
 ```text
-✔ What stake weight would you like to assign to the validator?: 30
+✔ ¿Qué peso de stake le gustaría asignar al validador?: 30
 ```
 
-### Set Validation Start Time
+### Establecer Hora de Inicio de Validación
 
-Next, specify when the validator is going to start validating. The time must be in the future. You
-can use the custom option to enter a specific date in `YYYY-MM-DD HH:MM:SS` format. Follow the
-default this time:
+A continuación, especifique cuándo va a comenzar la validación del validador. El tiempo debe estar en el futuro. Puede usar la opción personalizada para ingresar una fecha específica en formato `AAAA-MM-DD HH:MM:SS`. Siga el valor predeterminado esta vez:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Start time:
-  ▸ Start in one minute
-    Custom
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? Hora de inicio:
+  ▸ Comenzar en un minuto
+    Personalizado
 ```
 
-### Set Validation Duration
+### Establecer Duración de Validación
 
-Finally, specify how long it's going to be validating:
+Finalmente, especifique cuánto tiempo va a estar validando:
 
 ```text
-✔ Start in one minute
-Use the arrow keys to navigate: ↓ ↑ → ←
-? How long should your validator validate for?:
-  ▸ Until primary network validator expires
-    Custom
+✔ Comenzar en un minuto
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Cuánto tiempo debe validar su validador?:
+  ▸ Hasta que expire el validador de la red primaria
+    Personalizado
 ```
 
-If you choose `Custom` here, you need to enter a **duration**, which is a time span expressed in hours.
-For example, say `200 days = 24 \* 200 = 4800h`
+Si elige `Personalizado` aquí, debe ingresar una **duración**, que es un período de tiempo expresado en horas. Por ejemplo, digamos `200 días = 24 * 200 = 4800h`.
 
 ```text
-✔ How long should this validator be validating? Enter a duration, e.g. 8760h: 4800h
+✔ ¿Cuánto tiempo debe estar validando este validador? Ingresa una duración, por ejemplo, 8760h: 4800h
 ```
 
-The CLI shows the user an actual date:
+La CLI muestra al usuario una fecha actual:
 
 ```text
-? Your validator is going to finish staking by 2023-06-10 13:07:58:
-  ▸ Yes
+? Tu validador terminará de hacer stake para el 2023-06-10 13:07:58:
+  ▸ Sí
     No
 ```
 
-Confirm if correct.
+Confirma si es correcto.
 
-### Issue the TX
+### Emitir la TX
 
-At this point the prompt series is complete and the CLI attempts the transaction:
+En este punto, la serie de preguntas está completa y la CLI intenta la transacción:
 
 ```text
 NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
-Network: Mainnet
-Start time: 2022-11-22 13:07:58
-End time: 2023-06-10 13:07:58
-Weight: 30
-Inputs complete, issuing transaction to add the provided validator information...
+Red: Mainnet
+Hora de inicio: 2022-11-22 13:07:58
+Hora de finalización: 2023-06-10 13:07:58
+Peso: 30
+Entradas completas, emitiendo transacción para agregar la información del validador proporcionada...
 ```
 
-The CLI shows the Ledger address:
+La CLI muestra la dirección del Ledger:
 
 ```text
-Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
+Dirección del Ledger: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-At this point, if the Ledger address isn't the control key for the Subnet, the user receives
-an error:
+En este punto, si la dirección del Ledger no es la clave de control para la Subnet, el usuario recibe
+un error:
 
 ```text
-Error: wallet doesn't contain subnet auth keys
-exit status 1
+Error: la billetera no contiene claves de autenticación de la Subnet
+estado de salida 1
 ```
 
-If the Ledger doesn't have enough funds, the following error message appears:
+Si el Ledger no tiene suficientes fondos, aparece el siguiente mensaje de error:
 
 ```text
-*** Please sign subnet creation hash on the ledger device ***
-Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
+*** Por favor, firma el hash de creación de la Subnet en el dispositivo Ledger ***
+Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000 unidades más del activo "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
-Otherwise, both the CLI and the Ledger request to sign the TX:
+De lo contrario, tanto la CLI como el Ledger solicitan firmar la TX:
 
 ```text
-*** Please sign add validator hash on the ledger device ***
+*** Por favor, firma el hash de añadir validador en el dispositivo Ledger ***
 ```
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and
-right buttons.
+Esto activa una ventana de `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger
+usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y
+derecho.
 
-This might take a couple of seconds. After, it prints:
+Esto puede tomar unos segundos. Después, imprime:
 
 ```text
-Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
+Transacción exitosa, ID de transacción: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
 ```
 
-This means the node is now a validator on the given Subnet on `Mainnet`! However, your work isn't
-complete. You **must** finish the [Request to Join a Subnet as a Validator](#request-to-join-a-subnet-as-a-validator)
-section otherwise your Subnet risks downtime.
+¡Esto significa que el nodo ahora es un validador en la Subnet dada en `Mainnet`! Sin embargo, tu trabajo no está
+completo. **Debes** terminar la sección [Solicitud para unirse a una Subnet como validador](#solicitud-para-unirse-a-una-subnet-como-validador)
+de lo contrario, tu Subnet corre el riesgo de tiempo de inactividad.
 
-You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
+Puedes obtener información de la identificación de la TX en la P-Chain en [Avalanche Explorer](https://subnets.avax.network/)
 
-## Subnet Export
+## Exportar Subnet
 
-Because you need to setup multiple validators on multiple different machines, you need to export
-your Subnet's configuration and import it on each validator.
+Debido a que necesitas configurar múltiples validadores en múltiples máquinas diferentes, necesitas exportar
+la configuración de tu Subnet e importarla en cada validador.
 
 ```bash
 avalanche subnet export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+✔ Ingresa la ruta del archivo para escribir los datos de exportación: /tmp/testsubnet-export.dat
 ```
 
-The file is in text format and you shouldn't change it. You can use it to import the configuration
-on a different machine.
+El archivo está en formato de texto y no debes cambiarlo. Puedes usarlo para importar la configuración
+en una máquina diferente.
 
-## Subnet Import
+## Importar Subnet
 
-To import a VM configuration, move the file you exported in the previous section to your desired
-machine and issue the `import` command with the path to the file.
+Para importar una configuración de VM, mueve el archivo que exportaste en la sección anterior a tu máquina
+deseada y emite el comando `import` con la ruta al archivo.
 
 ```bash
 avalanche subnet import /tmp/testsubnet-export.dat
-Subnet imported successfully
+Subnet importada exitosamente
 ```
 
-After this the whole Subnet configuration should be available on the target machine:
+Después de esto, toda la configuración de la Subnet debería estar disponible en la máquina de destino:
 
 ```text
 avalanche subnet list
@@ -610,9 +587,9 @@ avalanche subnet list
 +---------------+---------------+----------+-----------+----------+
 ```
 
-## Going Live
+## Ponerse en marcha
 
-Once all of your validators have joined the network, you are ready to issue transactions to your Subnet.
+Una vez que todos tus validadores se hayan unido a la red, estás listo para emitir transacciones a tu Subnet.
 
-For the safety of your validators, you should setup dedicated API nodes to process transactions, but
-for test purposes, you can issue transactions directly to one of your validator's RPC interface.
+Para la seguridad de tus validadores, deberías configurar nodos API dedicados para procesar transacciones, pero
+para fines de prueba, puedes emitir transacciones directamente a la interfaz RPC de uno de tus validadores.

@@ -1,136 +1,131 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial demonstrates how to deploy a permissioned Subnet on Avalanche Mainnet.
-sidebar_label: With Multisig Authorization
-pagination_label: Deploy a Subnet with Multisig Authorization
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+sidebar_label: Con autorización multisig
+pagination_label: Implementar una Subred con autorización multisig
 sidebar_position: 4
 ---
 
-# Deploy a Subnet with Multisig Authorization
+# Implementar una Subred con autorización multisig
 
-Subnet creators can control critical Subnet operations with a N of M multisig. This multisig must be
-setup at deployment time and can't be edited afterward. Multisigs can are available on both the Fuji
-Testnet and Mainnet.
+Los creadores de Subredes pueden controlar operaciones críticas de la Subred con una multisig de N de M. Esta multisig debe configurarse en el momento de la implementación y no se puede editar posteriormente. Las multisigs están disponibles tanto en la Testnet Fuji como en la Mainnet.
 
-To setup your multisig, you need to know the P-Chain address of each key holder and what you
-want your signing threshold to be.
+Para configurar tu multisig, necesitas conocer la dirección de la cadena P de cada titular de clave y cuál es tu umbral de firma.
 
 :::note
 
-Avalanche-CLI requires Ledgers for Mainnet deployments. This how-to guide assumes the use of Ledgers
-for setting up your multisig.
+Avalanche-CLI requiere Ledgers para implementaciones en Mainnet. Esta guía asume el uso de Ledgers para configurar tu multisig.
 
 :::
 
-## Prerequisites
+## Requisitos previos
 
-- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
-- Familiarity with process of [Deploying a Subnet on Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
- and [Deploying a Permissioned Subnet on Mainnet](/build/subnet/deploy/mainnet-subnet.md)
-- Multiple Ledger devices [configured for Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
-- A Subnet configuration ready to deploy to either Fuji Testnet or Mainnet
+- [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) instalado
+- Familiaridad con el proceso de [Implementar una Subred en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
+ y [Implementar una Subred con permisos en Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+- Múltiples dispositivos Ledger [configurados para Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
+- Una configuración de Subred lista para implementar en la Testnet Fuji o en la Mainnet
 
-## Getting Started
+## Empezando
 
-When issuing the transactions to create the Subnet, you need to sign the TXs with multiple keys
-from the multisig.
+Cuando emites las transacciones para crear la Subred, necesitas firmar las TXs con múltiples claves de la multisig.
 
-### Specify Network
+### Especificar la red
 
-Start the Subnet deployment with
+Inicia la implementación de la Subred con
 
 ```bash
 avalanche subnet deploy testsubnet
 ```
 
-First step is to specify `Fuji` or `Mainnet` as the network:
+El primer paso es especificar `Fuji` o `Mainnet` como la red:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to deploy on:
-    Local Network
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una red en la que implementar:
+    Red Local
     Fuji
   ▸ Mainnet
 ```
 
 ```text
-Deploying [testsubnet] to Mainnet
+Implementando [testsubnet] en Mainnet
 ```
 
-Ledger is automatically recognized as the signature mechanism on `Mainnet`.
+Ledger se reconoce automáticamente como el mecanismo de firma en `Mainnet`.
 
-After that, the CLI shows the first `Mainnet` Ledger address.
+Después de eso, la CLI muestra la primera dirección de Ledger `Mainnet`.
 
 ```text
-Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+Dirección de Ledger: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ```
 
-### Set Control Keys
+### Establecer claves de control
 
-Next the CLI asks the user to specify the control keys. This is where you setup your multisig.
+A continuación, la CLI le pide al usuario que especifique las claves de control. Aquí es donde configuras tu multisig.
 
 ```text
-Configure which addresses may make changes to the subnet.
-These addresses are known as your control keys. You are going to also
-set how many control keys are required to make a subnet change (the threshold).
-Use the arrow keys to navigate: ↓ ↑ → ←
-? How would you like to set your control keys?:
-  ▸ Use ledger address
-    Custom list
+Configura qué direcciones pueden realizar cambios en la Subred.
+Estas direcciones se conocen como tus claves de control. También vas a
+establecer cuántas claves de control se requieren para hacer un cambio en la Subred (el umbral).
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Cómo te gustaría establecer tus claves de control?:
+  ▸ Usar dirección de Ledger
+    Lista personalizada
 ```
 
-Select `Custom list` and add every address that you'd like to be a key holder on the multisig.
+Selecciona `Lista personalizada` y agrega cada dirección que desees que sea un titular de clave en la multisig.
 
 ```text
-✔ Custom list
-? Enter control keys:
-  ▸ Add
-    Delete
-    Preview
-    More Info
-↓   Done
+✔ Lista personalizada
+? Ingresa las claves de control:
+  ▸ Agregar
+    Eliminar
+    Vista previa
+    Más información
+↓   Hecho
 ```
 
-Use the given menu to add each key, and select `Done` when finished.
+Usa el menú dado para agregar cada clave y selecciona `Hecho` cuando hayas terminado.
 
-The output at this point should look something like:
+La salida en este punto debería verse algo como esto:
 
 ```text
-✔ Custom list
-✔ Add
-Enter P-Chain address (Example: P-...): P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
-✔ Add
-Enter P-Chain address (Example: P-...): P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
-✔ Add
-Enter P-Chain address (Example: P-...): P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
-✔ Add
-Enter P-Chain address (Example: P-...): P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-✔ Add
-Enter P-Chain address (Example: P-...): P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-✔ Done
-Your Subnet's control keys: [P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28 P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+✔ Lista personalizada
+✔ Agregar
+Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
+✔ Agregar
+Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+✔ Agregar
+Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
+✔ Agregar
+Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+✔ Agregar
+Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
+✔ Hecho
+Tus claves de control de la Subred: [P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28 P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
 ```
 
 :::note
 
-When deploying a Subnet with Ledger's, you must include the Ledger's default address determined in
-[Specify Network](#specify-network) for the deployment to succeed. You may see an error like
+Cuando implementas una Subred con Ledgers, debes incluir la dirección predeterminada del Ledger determinada en
+[Especificar la red](#especificar-la-red) para que la implementación tenga éxito. Puedes ver un error como
 
 ```text
-Error: wallet does not contain subnet auth keys
-exit status 1
+Error: la billetera no contiene claves de autorización de la Subred
+estado de salida 1
 ```
 
 :::
 
-### Set Threshold
+### Establecer umbral
 
-Next, specify the threshold. In your N of M multisig, your threshold is N, and M is the number
-of control keys you added in the previous step.
+A continuación, especifica el umbral. En tu multisig de N de M, tu umbral es N, y M es el número
+de claves de control que agregaste en el paso anterior.
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Select required number of control key signatures to make a subnet change:
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Selecciona el número requerido de firmas de clave de control para hacer un cambio en la Subred:
   ▸ 1
     2
     3
@@ -138,13 +133,13 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     5
 ```
 
-### Specify Control Keys to Sign the Chain Creation TX
+### Especificar las claves de control para firmar la TX de creación de la cadena
 
-You now need N of your key holders to sign the Subnet deployment transaction. You must select which
-addresses you want to sign the TX.
+Ahora necesitas que N de tus titulares de clave firmen la transacción de implementación de la Subred. Debes seleccionar qué
+direcciones quieres que firmen la TX.
 
 ```text
-? Choose a subnet auth key:
+? Elige una clave de autorización de la Subred:
   ▸ P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
     P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
@@ -152,215 +147,211 @@ addresses you want to sign the TX.
     P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
 ```
 
-A successful control key selection looks like:
+Una selección exitosa de la clave de control se ve así:
 
 ```text
 ✔ 2
 ✔ P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-Your subnet auth keys for chain creation: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af]
-*** Please sign subnet creation hash on the ledger device ***
+Tus claves de autorización de la Subred para la creación de la cadena: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af]
+*** Por favor, firma el hash de creación de la Subred en el dispositivo Ledger ***
 ```
 
-#### Potential Errors
+#### Errores potenciales
 
-If the currently connected Ledger address isn't included in your TX signing group, the operation
-fails with:
+Si la dirección de Ledger conectada actualmente no está incluida en tu grupo de firmantes de TX, la operación
+falla con:
 
 ```text
 ✔ 2
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 ✔ P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-Your subnet auth keys for chain creation: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
-Error: wallet does not contain subnet auth keys
-exit status 1
+Tus claves de autorización de subred para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+Error: la billetera no contiene claves de autorización de subred
+estado de salida 1
 ```
 
-This can happen either because the original specified control keys -previous step- don't contain the
-Ledger address, or because the Ledger address control key wasn't selected in the current step.
+Esto puede suceder porque las claves de control especificadas originalmente -paso anterior- no contienen la dirección de Ledger, o porque la clave de control de la dirección de Ledger no fue seleccionada en el paso actual.
 
-If the user has the correct address but doesn't have sufficient balance to pay for the TX, the
-operation fails with:
+Si el usuario tiene la dirección correcta pero no tiene suficiente saldo para pagar la TX, la operación falla con:
 
 ```text
 ✔ 2
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 ✔ P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-Your subnet auth keys for chain creation: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
-*** Please sign subnet creation hash on the ledger device ***
-Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "rgNLkDPpANwqg3pHC4o9aGJmf2YU4GgTVUMRKAdnKodihkqgr"
-exit status 1
+Tus claves de autorización de subred para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+*** Por favor firma el hash de creación de subred en el dispositivo Ledger ***
+Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000000 unidades más del activo "rgNLkDPpANwqg3pHC4o9aGJmf2YU4GgTVUMRKAdnKodihkqgr"
+estado de salida 1
 ```
 
-### Sign Subnet Deployment TX with the First Address
+### Firma de la TX de despliegue de subred con la primera dirección
 
-The Subnet Deployment TX is ready for signing.
+La TX de despliegue de subred está lista para ser firmada.
 
 ```text
-*** Please sign subnet creation hash on the ledger device ***
+*** Por favor firma el hash de creación de subred en el dispositivo Ledger ***
 ```
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana de "Por favor revisa" en el Ledger. Navega a la ventana de "APROBAR" del Ledger
+usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
 ```text
-Subnet has been created with ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Now creating blockchain...
-*** Please sign blockchain creation hash on the ledger device ***
+La subred ha sido creada con ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Ahora creando la cadena de bloques...
+*** Por favor firma el hash de creación de blockchain en el dispositivo Ledger ***
 ```
 
-After successful Subnet creation, the CLI asks the user to sign the blockchain creation TX.
+Después de crear exitosamente la subred, la CLI le pide al usuario que firme la TX de creación de la cadena de bloques.
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana de "Por favor revisa" en el Ledger. Navega a la ventana de "APROBAR" del Ledger
+usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-On success, the CLI provides Subnet deploy details. As only one address signed the chain creation
-TX, the CLI writes a file to disk to save the TX to continue the signing process with another
-command.
+En caso de éxito, la CLI proporciona los detalles del despliegue de la subred. Como solo una dirección firmó la creación de la cadena,
+la CLI escribe un archivo en disco para guardar la TX y continuar el proceso de firma con otro comando.
 
 ```text
 +--------------------+----------------------------------------------------+
-| DEPLOYMENT RESULTS |                                                    |
+| RESULTADOS DEPLOYMENT |                                                    |
 +--------------------+----------------------------------------------------+
-| Chain Name         | testsubnet                                         |
+| Nombre de la cadena | testsubnet                                         |
 +--------------------+----------------------------------------------------+
-| Subnet ID          | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew |
+| ID de la subred    | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew |
 +--------------------+----------------------------------------------------+
-| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii  |
+| ID de la VM        | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii  |
 +--------------------+----------------------------------------------------+
 
-1 of 2 required Blockchain Creation signatures have been signed. Saving TX to disk to enable remaining signing.
+Se han firmado 1 de las 2 firmas de creación de la cadena requeridas. Guardando la TX en disco para habilitar la firma restante.
 
-Path to export partially signed TX to:
+Ruta para exportar la TX parcialmente firmada:
 ```
 
-Enter the name of file to write to disk, such as `partiallySigned.txt`. This file shouldn't exist already.
-
+Ingresa el nombre del archivo para escribir en disco, como `partiallySigned.txt`. Este archivo no debe existir previamente.
 
 ```text
-Path to export partially signed TX to: partiallySigned.txt
+Ruta para exportar la TX parcialmente firmada: partiallySigned.txt
 
-Addresses remaining to sign the tx
+Direcciones restantes para firmar la TX
   P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 
-Connect a ledger with one of the remaining addresses or choose a stored key and run the signing command, or send "partiallySigned.txt" to another user for signing.
+Conecta un Ledger con una de las direcciones restantes o elige una clave almacenada y ejecuta el comando de firma, o envía "partiallySigned.txt" a otro usuario para que lo firme.
 
-Signing command:
+Comando de firma:
   avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-## Gather Remaining Signatures and Issue the Subnet Deployment TX
+## Reunir las firmas restantes y emitir la TX de despliegue de subred
 
-So far, one address has signed the Subnet deployment TX, but you need N signatures. Your Subnet has
-not been fully deployed yet. To get the remaining signatures, you may connect a different Ledger to
-the same computer you've been working on. Alternatively, you may send the `partiallySigned.txt` file
-to other users to sign themselves.
+Hasta ahora, una dirección ha firmado la TX de despliegue de subred, pero necesitas N firmas. Tu subred no ha sido
+desplegada completamente aún. Para obtener las firmas restantes, puedes conectar un Ledger diferente al mismo
+ordenador en el que has estado trabajando. Alternativamente, puedes enviar el archivo `partiallySigned.txt`
+a otros usuarios para que lo firmen ellos mismos.
 
-The remainder of this section assumes that you are working on a machine with access to both the
-remaining keys and the `partiallySigned.txt` file.
+El resto de esta sección asume que estás trabajando en una máquina con acceso tanto a las claves restantes como al
+archivo `partiallySigned.txt`.
 
-### Issue the Command to Sign the Chain Creation TX
+### Emitir el comando para firmar la TX de creación de cadena
 
-Avalanche-CLI can detect the deployment network automatically. For `Mainnet` TXs, it uses your
-Ledger automatically. For `Fuji Testnet`, the CLI prompts the user to choose the signing mechanism.
+Avalanche-CLI puede detectar automáticamente la red de despliegue. Para TXs de `Mainnet`, utiliza tu
+Ledger automáticamente. Para `Fuji Testnet`, la CLI solicita al usuario que elija el mecanismo de firma.
 
-You can start the signing process with the `transaction sign` command:
+Puedes iniciar el proceso de firma con el comando `transaction sign`:
 
 ```bash
 avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
 ```text
-Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-*** Please sign TX hash on the ledger device ***
+Dirección del Ledger: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+*** Por favor firma el hash de la TX en el dispositivo Ledger ***
 ```
 
-Next, the CLI starts a new signing process for the Subnet deployment TX. If the Ledger isn't the correct
-one, the following error should appear instead:
+A continuación, la CLI inicia un nuevo proceso de firma para la TX de despliegue de subred. Si el Ledger no es el correcto,
+debería aparecer el siguiente error en su lugar:
 
 ```text
-Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
-Error: wallet does not contain subnet auth keys
-exit status 1
+Dirección del Ledger: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+Error: la billetera no contiene claves de autorización de subred
+estado de salida 1
 ```
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana de "Por favor revisa" en el Ledger. Navega a la ventana de "APROBAR" del Ledger
+usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-Repeat this processes until all required parties have signed the TX. You should see a message
-like this:
+Repite este proceso hasta que todas las partes requeridas hayan firmado la TX. Deberías ver un mensaje
+como este:
 
 ```text
-All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
+Se han firmado todas las 2 firmas de TX requeridas. Guardando la TX en disco para habilitar el commit.
 
-Overwritting partiallySigned.txt
+Sobrescribiendo partiallySigned.txt
 
-Tx is fully signed, and ready to be committed
+La TX está completamente firmada y lista para ser commitida.
 
-Commit command:
+Comando de commit:
   avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-Now, `partiallySigned.txt` contains a fully signed TX.
+Ahora, `partiallySigned.txt` contiene una TX completamente firmada.
 
-### Commit the Subnet Deployment TX
+### Commitir la TX de despliegue de subred
 
-To run submit the fully signed TX, run
+Para enviar la TX completamente firmada, ejecuta
 
 ```bash
 avalanche transaction commit testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-The CLI recognizes the deployment network automatically and submits the TX appropriately.
+La CLI reconoce automáticamente la red de despliegue y envía la TX apropiadamente.
 
 ```text
 +--------------------+-------------------------------------------------------------------------------------+
-| DEPLOYMENT RESULTS |                                                                                     |
+| RESULTADOS DEPLOYMENT |                                                                                     |
 +--------------------+-------------------------------------------------------------------------------------+
-| Chain Name         | testsubnet                                                                          |
+| Nombre de la Cadena | testsubnet                                                                          |
 +--------------------+-------------------------------------------------------------------------------------+
-| Subnet ID          | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew                                  |
+| ID de la Subred     | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew                                  |
 +--------------------+-------------------------------------------------------------------------------------+
-| VM ID              | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                   |
+| ID de la VM         | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                   |
 +--------------------+-------------------------------------------------------------------------------------+
-| Blockchain ID      | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
+| ID de la Blockchain | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
 +--------------------+-------------------------------------------------------------------------------------+
-| RPC URL            | http://127.0.0.1:9650/ext/bc/2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj/rpc |
+| URL RPC             | http://127.0.0.1:9650/ext/bc/2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj/rpc |
 +--------------------+-------------------------------------------------------------------------------------+
-| P-Chain TXID       | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
+| TXID de la P-Chain  | 2fx9EF61C964cWBu55vcz9b7gH9LFBkPwoj49JTSHA6Soqqzoj                                  |
 +--------------------+-------------------------------------------------------------------------------------+
 ```
 
-Your Subnet successfully deployed with a multisig.
+Tu Subred se desplegó exitosamente con una multisig.
 
-## Add Validators Using the Multisig
+## Agregar Validadores Usando la Multisig
 
-The `addValidator` command also requires use of the multisig. Before starting, make sure to connect,
-unlock, and run the Avalanche Ledger app.
+El comando `addValidator` también requiere el uso de la multisig. Antes de comenzar, asegúrate de conectar,
+desbloquear y ejecutar la aplicación Avalanche Ledger.
 
 ```bash
 avalanche subnet addValidator testsubnet
 ```
 
-### Select Network
+### Seleccionar Red
 
-First specify the network. Select either `Fuji` or `Mainnet`
+Primero especifica la red. Selecciona ya sea `Fuji` o `Mainnet`
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a network to add validator to.:
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una red para agregar el validador a.:
   ▸ Fuji
     Mainnet
 ```
 
-### Choose Signing Keys
+### Elegir Claves de Firma
 
-Then, similar to the `deploy` command, the command asks the user to select the N control keys needed
-to sign the TX.
+Luego, similar al comando `deploy`, el comando le pide al usuario que seleccione las N claves de control necesarias
+para firmar la TX.
 
 ```text
 ✔ Mainnet
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Choose a subnet auth key:
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una clave de autenticación de subred:
   ▸ P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
     P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
@@ -372,131 +363,127 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ✔ Mainnet
 ✔ P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
+Tus claves de autenticación de subred para la creación de la TX de agregar validador: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
 ```
 
-### Finish Assembling the TX
+### Terminar de Ensamblar la TX
 
-Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for 
-additional help issuing this transaction.
+Echa un vistazo a [Agregar un Validador](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) para
+ayuda adicional para emitir esta transacción.
 
 :::note
 
-If setting up a multisig, don't select your validator start time to be in one minute. Finishing the
-signing process takes significantly longer when using a multisig.
+Si estás configurando una multisig, no selecciones que el tiempo de inicio de tu validador sea en un minuto. Terminar el
+proceso de firma lleva significativamente más tiempo cuando se usa una multisig.
 
 :::
 
 
 ```text
-Next, we need the NodeID of the validator you want to whitelist.
+A continuación, necesitamos el NodeID del validador que quieres agregar a la lista blanca.
 
-Check https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid for instructions about how to query the NodeID from your node
-(Edit host IP address and port to match your deployment, if needed).
-What is the NodeID of the validator you'd like to whitelist?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
-✔ Default (20)
-When should your validator start validating?
-If you validator is not ready by this time, subnet downtime can occur.
-✔ Custom
-When should the validator start validating? Enter a UTC datetime in 'YYYY-MM-DD HH:MM:SS' format: 2022-11-22 23:00:00
-✔ Until primary network validator expires
+Consulta https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid para obtener instrucciones sobre cómo consultar el NodeID desde tu nodo
+(Edita la dirección IP del host y el puerto para que coincida con tu despliegue, si es necesario).
+¿Cuál es el NodeID del validador que te gustaría agregar a la lista blanca?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+✔ Predeterminado (20)
+¿Cuándo debería comenzar tu validador a validar?
+Si tu validador no está listo en este momento, puede haber tiempo de inactividad de la subred.
+✔ Personalizado
+¿Cuándo debería comenzar el validador a validar? Ingresa una fecha y hora UTC en formato 'AAAA-MM-DD HH:MM:SS': 2022-11-22 23:00:00
+✔ Hasta que expire el validador de la red primaria
 NodeID: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
-Network: Local Network
-Start time: 2022-11-22 23:00:00
-End time: 2023-11-22 15:57:27
-Weight: 20
-Inputs complete, issuing transaction to add the provided validator information...
+Red: Red Local
+Hora de inicio: 2022-11-22 23:00:00
+Hora de finalización: 2023-11-22 15:57:27
+Peso: 20
+Entradas completas, emitiendo transacción para agregar la información del validador proporcionado...
 ```
 
 ```text
-Ledger address: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
-*** Please sign add validator hash on the ledger device ***
+Dirección del Ledger: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
+*** Por favor firma el hash de agregar validador en el dispositivo Ledger ***
 ```
 
-After that, the command shows the connected Ledger's address, and asks the user to sign the TX with
-the Ledger.
+Después de eso, el comando muestra la dirección del Ledger conectado y le pide al usuario que firme la TX con
+el Ledger.
 
 ```text
-Partial TX created
+TX parcial creada
 
-1 of 2 required Add Validator signatures have been signed. Saving TX to disk to enable remaining signing.
+Se ha firmado 1 de las 2 firmas de Agregar Validador requeridas. Guardando la TX en disco para habilitar la firma restante.
 
-Path to export partially signed TX to:
+Ruta para exportar la TX parcialmente firmada:
 ```
 
-Because you've setup a multisig, TX isn't fully signed, and the commands asks a file to write into. Use
-something like `partialAddValidatorTx.txt`.
+Debido a que has configurado una multisig, la TX no está completamente firmada, y el comando pregunta por un archivo en el que escribir. Usa
+algo como `partialAddValidatorTx.txt`.
 
 ```text
-Path to export partially signed TX to: partialAddValidatorTx.txt
+Ruta para exportar la TX parcialmente firmada: partialAddValidatorTx.txt
 
-Addresses remaining to sign the tx
+Direcciones restantes para firmar la tx
   P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 
-Connect a Ledger with one of the remaining addresses or choose a stored key and run the signing command, or send "partialAddValidatorTx.txt" to another user for signing.
+Conecta un Ledger con una de las direcciones restantes o elige una clave almacenada y ejecuta el comando de firma, o envía "partialAddValidatorTx.txt" a otro usuario para que lo firme.
 
-Signing command:
+Comando de firma:
   avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
-## Sign and Commit the Add Validator TX
+## Firmar y Confirmar la TX de Agregar Validador
 
-The process is very similar to signing of Subnet Deployment TX. So far, one address has signed the
-TX, but you need N signatures. To get the remaining signatures, you may connect a different Ledger
-to the same computer you've been working on. Alternatively, you may send the
-`partialAddValidatorTx.txt` file to other users to sign themselves.
+El proceso es muy similar a la firma de la TX de Despliegue de Subred. Hasta ahora, una dirección ha firmado la
+TX, pero necesitas N firmas. Para obtener las firmas restantes, puedes conectar un Ledger diferente
+a la misma computadora en la que has estado trabajando. Alternativamente, puedes enviar el archivo
+`partialAddValidatorTx.txt` a otros usuarios para que lo firmen ellos mismos.
 
-The remainder of this section assumes that you are working on a machine with access to both the
-remaining keys and the `partialAddValidatorTx.txt` file.
+El resto de esta sección asume que estás trabajando en una máquina con acceso tanto a las teclas restantes como al archivo `partialAddValidatorTx.txt`.
 
-### Issue the Command to Sign the Add Validator TX
+### Emitir el comando para firmar la TX de agregar validador
 
-Avalanche-CLI can detect the deployment network automatically. For `Mainnet` TXs, it uses your Ledger
-automatically. For `Fuji Testnet`, the CLI prompts the user to choose the signing mechanism.
+Avalanche-CLI puede detectar automáticamente la red de implementación. Para TX de `Mainnet`, utiliza tu Ledger automáticamente. Para `Fuji Testnet`, la CLI solicita al usuario que elija el mecanismo de firma.
 
 ```bash
 avalanche transaction sign testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
 ```text
-Ledger address: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-*** Please sign TX hash on the ledger device ***
+Dirección del Ledger: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
+*** Por favor, firma el hash de la TX en el dispositivo Ledger ***
 ```
 
-Next, the command is going to start a new signing process for the Add Validator TX.
+A continuación, el comando va a iniciar un nuevo proceso de firma para la TX de agregar validador.
 
-This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by
-using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
+Esto activa una ventana de `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-Repeat this processes until all required parties have signed the TX. You should see a message like this:
+Repite este proceso hasta que todas las partes requeridas hayan firmado la TX. Deberías ver un mensaje como este:
 
 ```text
 
-All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
+Se han firmado todas las 2 firmas de TX requeridas. Guardando la TX en disco para habilitar la confirmación.
 
-Overwritting partialAddValidatorTx.txt
+Sobrescribiendo partialAddValidatorTx.txt
 
-Tx is fully signed, and ready to be committed
+La TX está completamente firmada y lista para ser confirmada.
 
-Commit command:
+Comando de confirmación:
   avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
-Now, `partialAddValidatorTx.txt` contains a fully signed TX.
+Ahora, `partialAddValidatorTx.txt` contiene una TX completamente firmada.
 
-### Issue the Command to Commit the add validator TX
+### Emitir el comando para confirmar la TX de agregar validador
 
-To run submit the fully signed TX, run
+Para ejecutar la TX completamente firmada, ejecuta
 
 ```bash
 avalanche transaction commit testsubnet --input-tx-filepath partialAddValidatorTx.txt
 ```
 
-The CLI recognizes the deployment network automatically and submits the TX appropriately.
+La CLI reconoce automáticamente la red de implementación y envía la TX adecuadamente.
 
 ```text
-Transaction successful, transaction ID: K7XNSwcmgjYX7BEdtFB3hEwQc6YFKRq9g7hAUPhW4J5bjhEJG
+Transacción exitosa, ID de transacción: K7XNSwcmgjYX7BEdtFB3hEwQc6YFKRq9g7hAUPhW4J5bjhEJG
 ```
 
-You've successfully added the validator to the Subnet.
-
+Has agregado exitosamente el validador a la Subnet.
