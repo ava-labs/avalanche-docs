@@ -1,34 +1,34 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial demonstrates the process of deploying a smart contract to an EVM-based Subnet.
-sidebar_label: Deploy a Smart Contract
-pagination_label: Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial demuestra el proceso de implementar un contrato inteligente en una Subred basada en EVM.
+sidebar_label: Implementar un Contrato Inteligente
+pagination_label: Implementar un Contrato Inteligente en tu Subred-EVM Usando Remix y Core
 sidebar_position: 0
 ---
 
-# Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core
+# Implementar un Contrato Inteligente en tu Subred-EVM Usando Remix y Core
 
-## Introduction
+## Introducción
 
-This tutorial assumes that:
+Este tutorial asume que:
 
-- [A Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
-- Your Node is currently validating your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your 
-[Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
+- Se ha creado una Subred y blockchain EVM (/build/subnet/deploy/fuji-testnet-subnet.md)
+- Tu Nodo está validando actualmente tu Subred objetivo
+- Tu billetera tiene un saldo del Token Nativo de la Subred (Especificado bajo _alloc_ en tu
+[Archivo Génesis](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
-## Step 1: Setting up Core
+## Paso 1: Configurar Core
 
-### **EVM Subnet Settings:** [(EVM Core Tutorial)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
+### **Configuraciones de la Subred EVM:** [(Tutorial de Core EVM)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
-- **`Network Name`**: Custom Subnet-EVM
-- **`New RPC URL`**: <http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc> (Note: the port number should
-match your local setting which can be different from 9650.)
-- **`ChainID`**: Subnet-EVM ChainID
-- **`Symbol`**: Subnet-EVM Token Symbol
-- **`Explorer`**: N/A
+- **`Nombre de Red`**: Subred-EVM Personalizada
+- **`Nueva URL RPC`**: <http://DirecciónIPNodo:9650/ext/bc/IDBlockchain/rpc> (Nota: el número de puerto debe
+coincidir con tu configuración local, que puede ser diferente de 9650.)
+- **`ChainID`**: ID de Cadena de la Subred-EVM
+- **`Símbolo`**: Símbolo del Token de la Subred-EVM
+- **`Explorador`**: N/A
 
-You should see a balance of your Subnet's Native Token in Core.
+Deberías ver un saldo del Token Nativo de tu Subred en Core.
 
 <div style={{textAlign: 'center'}}>
 
@@ -36,47 +36,47 @@ You should see a balance of your Subnet's Native Token in Core.
 
 </div>
 
-## Step 2: Connect Core and Deploy a Smart Contract
+## Paso 2: Conectar Core e Implementar un Contrato Inteligente
 
-### Using Remix
+### Usando Remix
 
-Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
+Abre [Remix](https://remix.ethereum.org/) -&gt; Selecciona Solidity.
 
 ![remix Subnet evm sc home](/img/remix-subnet-evm-sc-home.png)
 
-Create the smart contracts that we want to compile and deploy using Remix file explorer
+Crea los contratos inteligentes que queremos compilar e implementar usando el explorador de archivos de Remix.
 
-### Using GitHub
+### Usando GitHub
 
-In Remix Home _Click_ the GitHub button.
+En la página de Inicio de Remix, _Haz clic_ en el botón de GitHub.
 
 ![remix Subnet evm sc load panel](/img/remix-subnet-evm-sc-load-panel.png)
 
-Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol)
-into the popup and _Click_ import.
+Pega el [enlace al Contrato Inteligente](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol)
+en el cuadro emergente y _Haz clic_ en importar.
 
 ![remix Subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
-For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+Para este ejemplo, implementaremos un contrato ERC721 del [Repositorio de Inicio Rápido de Contratos Inteligentes de Avalanche](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 
 ![remix Subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
-Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure
-Core is loaded).
+Navega a la pestaña de Implementación -&gt; Abre el desplegable "ENVIRONMENT" y selecciona Injected Web3 (asegúrate de que
+Core esté cargado).
 
 ![remix Subnet evm sc web3](/img/remix-subnet-evm-sc-web3.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt;
-Navigate to Deploy Tab.
+Una vez que hemos inyectado el web3-&gt; Vuelve al compilador y compila el contrato seleccionado -&gt;
+Navega a la pestaña de Implementación.
 
 ![remix Subnet evm sc compile](/img/remix-subnet-evm-sc-compile.png)
 
-Now, the smart contract is compiled, Core is injected, and we are ready to deploy our ERC721.
-Click "Deploy."
+Ahora, el contrato inteligente está compilado, Core está inyectado y estamos listos para implementar nuestro ERC721.
+Haz clic en "Deploy".
 
 ![remix Subnet evm sc deploy](/img/remix-subnet-evm-sc-deploy.png)
 
-Confirm the transaction on the Core pop up.
+Confirma la transacción en el pop-up de Core.
 
 <div style={{textAlign: 'center'}}>
 
@@ -84,24 +84,24 @@ Confirm the transaction on the Core pop up.
 
 </div>
 
-Our contract is successfully deployed!
+¡Nuestro contrato se ha implementado con éxito!
 
 ![remix Subnet evm sc deployed](/img/remix-subnet-evm-sc-deployed.png)
 
-Now, we can expand it by selecting it from the "Deployed Contracts" tab and test it out.
+Ahora, podemos expandirlo seleccionándolo de la pestaña "Deployed Contracts" y probarlo.
 
 ![remix Subnet evm sc end](/img/remix-subnet-evm-sc-end.png)
 
-The contract ABI and Bytecode are available on the compiler tab.
+La ABI y el Bytecode del contrato están disponibles en la pestaña del compilador.
 
 ![remix Subnet evm sc ABI](/img/remix-subnet-evm-sc-abi.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche 
-with us, you can join our community at [Discord](https://chat.avalabs.org/)!
+Si tuviste alguna dificultad siguiendo este tutorial o simplemente quieres discutir Avalanche
+con nosotros, ¡puedes unirte a nuestra comunidad en [Discord](https://chat.avalabs.org/)!
 
-## Other Tools
+## Otras Herramientas
 
-You can use Subnet-EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and
-RPC URL. For example you can deploy your contracts with
-[hardhat quick start guide](/build/dapp/smart-contracts/toolchains/hardhat.md)
-by changing `url` and `chainId` in the `hardhat.config.ts`.
+Puedes usar Subred-EVM de la misma manera que usas herramientas de C-Chain y EVM. Las únicas diferencias son `chainID` y
+la URL RPC. Por ejemplo, puedes implementar tus contratos con
+[guía de inicio rápido de hardhat](/build/dapp/smart-contracts/toolchains/hardhat.md)
+cambiando `url` y `chainId` en el `hardhat.config.ts`.

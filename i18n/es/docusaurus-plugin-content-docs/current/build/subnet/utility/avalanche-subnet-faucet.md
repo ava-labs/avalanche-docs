@@ -1,57 +1,43 @@
 ---
-tags: [Build, Subnets]
-description: Deploy a custom testnet faucet for your Subnet with features like multiple chain support, custom rate-limiting, CAPTCHA verification, and concurrent transaction handling.
-sidebar_label: Add a Testnet Faucet
-pagination_label: Avalanche Subnet Faucet
+etiquetas: [Construir, Subredes]
+descripción: Implementa un grifo de testnet personalizado para tu Subred con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
+sidebar_label: Agregar un Grifo de Testnet
+pagination_label: Grifo de Subred Avalanche
 sidebar_position: 1
 ---
 
-# Enable Testnet Capabilities on a Subnet with Avalanche Subnet Faucet
+# Habilitar Capacidades de Testnet en una Subred con el Grifo de Subred Avalanche
 
-There are thousands of networks and chains in the blockchain space, each with its
-capabilities and use-cases. Each network requires native coins to do any transaction on them,
-which can have a monetary value as well. These coins can be collected through centralized exchanges,
-token sales, etc in exchange for some monetary assets like USD.
+Hay miles de redes y cadenas en el espacio de la blockchain, cada una con sus propias capacidades y casos de uso. Cada red requiere monedas nativas para realizar cualquier transacción en ellas, las cuales también pueden tener un valor monetario. Estas monedas se pueden recolectar a través de intercambios centralizados, ventas de tokens, etc., a cambio de algunos activos monetarios como USD.
 
-But we cannot risk our funds on the network or on any applications hosted on that network, without
-testing them first. So, these networks often have test networks or testnets, where the native coins
-do not have any monetary value, and thus can be obtained freely through faucets.
+Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación alojada en esa red, sin probarlos primero. Por lo tanto, estas redes a menudo tienen redes de prueba o testnets, donde las monedas nativas no tienen ningún valor monetario y, por lo tanto, se pueden obtener libremente a través de grifos.
 
-These testnets are often the testbeds for any new native feature of the network itself, or any dapp
-or [Subnet](learn/avalanche/subnets-overview.md) that is going live on the main network (Mainnet). For
-example, [Fuji](learn/avalanche/fuji.md) network is the Testnet for Avalanche's Mainnet.
+Estas testnets suelen ser los bancos de pruebas para cualquier nueva característica nativa de la propia red, o cualquier dapp o [Subred](learn/avalanche/subnets-overview.md) que va a vivir en la red principal (Mainnet). Por ejemplo, la red [Fuji](learn/avalanche/fuji.md) es la Testnet para la Mainnet de Avalanche.
 
-Besides Fuji Testnet, the
-[Avalanche Faucet](https://core.app/tools/testnet-faucet/?subnet=c&token=c) 
-can be used to get free test tokens on testnet Subnets like: 
+Además de la Testnet Fuji, el
+[Grifo Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c) 
+se puede utilizar para obtener tokens de prueba gratuitos en Subredes de testnet como: 
 
-- [WAGMI Testnet](https://core.app/tools/testnet-faucet/?subnet=wagmi)
-- [DeFI Kingdoms Testnet](https://core.app/tools/testnet-faucet/?subnet=dfk)
-- [Beam Testnet](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) and many more.
+- [Testnet WAGMI](https://core.app/tools/testnet-faucet/?subnet=wagmi)
+- [Testnet DeFI Kingdoms](https://core.app/tools/testnet-faucet/?subnet=dfk)
+- [Testnet Beam](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) y muchos más.
 
-You can use this [repository](https://github.com/ava-labs/avalanche-faucet) to deploy your faucet or
-just make a PR with the
-[configurations](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) of the Subnet.
-This faucet comes with many features like multiple chain support, custom rate-limiting per Subnet,
-CAPTCHA verification, and concurrent transaction handling.
+Puedes usar este [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio grifo o simplemente hacer un PR con las
+[configuraciones](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) de la Subred.
+Este grifo viene con muchas características como soporte para múltiples cadenas, limitación de velocidad personalizada por Subred, verificación CAPTCHA y manejo de transacciones concurrentes.
 
-## Summary
+## Resumen
 
-A [Faucet](https://faucet.avax.network/) powered by Avalanche for Fuji Network and other Subnets.
-You can -
+Un [Grifo](https://faucet.avax.network/) alimentado por Avalanche para la Red Fuji y otras Subredes.
+Puedes -
 
-- Request test coins for the supported Subnets
-- Integrate your EVM Subnet with the faucet by making a PR with the [chain
-  configurations](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
-- Fork the [repository](https://github.com/ava-labs/avalanche-faucet) to deploy your faucet for any
-  EVM chain
+- Solicitar monedas de prueba para las Subredes soportadas
+- Integrar tu Subred EVM con el grifo haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
+- Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio grifo para cualquier cadena EVM
 
-## Adding a New Subnet
+## Agregar una Nueva Subred
 
-You can also integrate a new Subnet on the live [faucet](https://faucet.avax.network) with just a
-few lines of configuration parameters. All you have to do is make a PR on the [Avalanche
-Faucet](https://github.com/ava-labs/avalanche-faucet) git repository with the Subnet's information.
-The following parameters are required.
+También puedes integrar una nueva Subred en el [grifo](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subred. Los siguientes parámetros son requeridos.
 
 ```json
 {
@@ -72,59 +58,52 @@ The following parameters are required.
 }
 ```
 
-- `ID` - Each Subnet chain should have a unique and relatable ID.
-- `NAME` - Name of the Subnet chain that will appear on the site.
-- `RPC` - A valid RPC URL for accessing the chain.
-- `CHAINID` - ChainID of the chain
-- `EXPLORER` - Base URL of standard explorer's site.
-- `IMAGE` - URL of the icon of the chain that will be shown in the dropdown.
-- `MAX_PRIORITY_FEE` - Maximum tip per faucet drop in **wei** or **10<sup>-18</sup>** unit (for
-  EIP1559 supported chains)
-- `MAX_FEE` - Maximum fee that can be paid for a faucet drop in **wei** or **10<sup>-18</sup>**
-  unit
-- `DRIP_AMOUNT` - Amount of coins to send per request in **gwei** or **10<sup>-9</sup>** unit
-- `RECALIBRATE` _(optional)_ - Number of seconds after which the nonce and balance will
-  recalibrate
-- `RATELIMIT` - Number of times (MAX_LIMIT) to allow per user within the WINDOW_SIZE (in minutes)
+- `ID` - Cada cadena de Subred debe tener un ID único y relacionable.
+- `NAME` - Nombre de la cadena de Subred que aparecerá en el sitio.
+- `RPC` - Una URL RPC válida para acceder a la cadena.
+- `CHAINID` - ChainID de la cadena
+- `EXPLORER` - URL base del sitio del explorador estándar.
+- `IMAGE` - URL del icono de la cadena que se mostrará en el menú desplegable.
+- `MAX_PRIORITY_FEE` - Propina máxima por caída de grifo en **wei** o en unidad **10<sup>-18</sup>** (para cadenas compatibles con EIP1559)
+- `MAX_FEE` - Tarifa máxima que se puede pagar por una caída de grifo en **wei** o en unidad **10<sup>-18</sup>**
+- `DRIP_AMOUNT` - Cantidad de monedas a enviar por solicitud en **gwei** o en unidad **10<sup>-9</sup>**
+- `RECALIBRATE` _(opcional)_ - Número de segundos después de los cuales el nonce y el saldo se recalibrarán
+- `RATELIMIT` - Número de veces (MAX_LIMIT) permitidas por usuario dentro del WINDOW_SIZE (en minutos)
 
-Add the configuration in the array of `evmchains` inside the
-[config.json](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) file and make a
-PR.
+Agrega la configuración en el arreglo de `evmchains` dentro del archivo
+[config.json](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) y haz un PR.
 
-## Building and Deploying a Faucet
+## Construcción e Implementación de un Grifo
 
-You can also deploy and build your faucet by using the [Avalanche
-Faucet](https://github.com/ava-labs/avalanche-faucet) repository.
+También puedes implementar y construir tu propio grifo utilizando el repositorio [Avalanche
+Faucet](https://github.com/ava-labs/avalanche-faucet).
 
-### Requirements
+### Requisitos
 
-- [Node](https://nodejs.org/en) >= 17.0 and [npm](https://www.npmjs.com/) >= 8.0
-- [Google's reCAPTCHA](https://www.google.com/recaptcha/intro/v3.html) v3 keys
+- [Node](https://nodejs.org/en) >= 17.0 y [npm](https://www.npmjs.com/) >= 8.0
+- Claves de [reCAPTCHA](https://www.google.com/recaptcha/intro/v3.html) v3 de Google
 - [Docker](https://www.docker.com/get-started/)
 
-### Installation
+### Instalación
 
-Clone this repository at your preferred location.
+Clona este repositorio en tu ubicación preferida.
 
 ```bash
 git clone https://github.com/ava-labs/avalanche-faucet
 ```
 
 :::info
-The repository cloning method used is HTTPS, but SSH can be used too:
+El método de clonación del repositorio utilizado es HTTPS, pero también se puede usar SSH:
 
 `git clone git@github.com:ava-labs/avalanche-faucet.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+Puedes encontrar más información sobre SSH y cómo usarlo
+[aquí](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
-### Client-Side Configurations
+### Configuraciones del Lado del Cliente
 
-We need to configure our application with the server API endpoints and CAPTCHA site keys. All the
-client-side configurations are there in the `client/src/config.json` file. Since there are no
-secrets on the client-side, we do not need any environment variables. Update the config files
-according to your need.
+Necesitamos configurar nuestra aplicación con los puntos finales de la API del servidor y las claves del sitio CAPTCHA. Todas las configuraciones del lado del cliente están en el archivo `client/src/config.json`. Dado que no hay secretos en el lado del cliente, no necesitamos ninguna variable de entorno. Actualiza los archivos de configuración según tus necesidades.
 
 ```json
 {
@@ -139,49 +118,37 @@ according to your need.
 }
 ```
 
-Put the Google's reCAPTCHA site-key without which the faucet client can't send the necessary CAPTCHA
-response to the server. This key is not a secret and could be public.
+Coloca la clave del sitio reCAPTCHA de Google sin la cual el cliente del grifo no puede enviar la respuesta CAPTCHA necesaria al servidor. Esta clave no es un secreto y podría ser pública.
 
-In the above file, there are 2 base endpoints for the faucet server `apiBaseEndpointProduction` and
+En el archivo anterior, hay 2 puntos finales base para el servidor del grifo `apiBaseEndpointProduction` y
 `apiBaseEndpointDevelopment`.
 
-In production mode, the client-side will be served as static content over the server's endpoint, and
-hence we do not have to provide the server's IP address or domain.
+En modo de producción, el lado del cliente se servirá como contenido estático a través del punto final del servidor, y por lo tanto no tenemos que proporcionar la dirección IP o el dominio del servidor.
 
-The URL path should be valid, where the server's APIs are hosted. If the endpoints for API have a
-leading `/v1/api` and the server is running on localhost at port 3000, then you should use
-`http://localhost:3000/v1/api` or `/v1/api/` depending on whether it is production or development.
+La ruta de la URL debe ser válida, donde se alojan las API del servidor. Si los puntos finales de la API tienen un `/v1/api` al principio y el servidor se está ejecutando en localhost en el puerto 3000, entonces debes usar `http://localhost:3000/v1/api` o `/v1/api/` dependiendo de si es producción o desarrollo.
 
-### Server-Side Configurations
+### Configuraciones del lado del servidor
 
-On the server-side, we need to configure 2 files - `.env` for secret keys and `config.json` for
-chain and API rate limiting configurations.
+En el lado del servidor, necesitamos configurar 2 archivos: `.env` para claves secretas y `config.json` para configuraciones de cadena y límites de tasa de API.
 
-#### Setup Environment Variables
+#### Configurar variables de entorno
 
-Setup the environment variable with your private key and reCAPTCHA secret. Make a `.env` file in
-your preferred location with the following credentials, as this file will not be committed to the
-repository. The faucet server can handle multiple EVM chains, and therefore requires private keys
-for addresses with funds on each of the chains.
+Configura la variable de entorno con tu clave privada y el secreto de reCAPTCHA. Crea un archivo `.env` en tu ubicación preferida con las siguientes credenciales, ya que este archivo no se enviará al repositorio. El servidor de la llave puede manejar múltiples cadenas EVM y, por lo tanto, requiere claves privadas para direcciones con fondos en cada una de las cadenas.
 
-If you have funds on the same address on every chain, then you can specify them with the single
-variable`PK`. But if you have funds on different addresses on different chains, then you can provide
-each of the private keys against the ID of the chain, as shown below.
+Si tienes fondos en la misma dirección en cada cadena, entonces puedes especificarlos con la variable única `PK`. Pero si tienes fondos en direcciones diferentes en diferentes cadenas, entonces puedes proporcionar cada una de las claves privadas contra el ID de la cadena, como se muestra a continuación.
 
 ```env
-C="C chain private key"
-WAGMI="Wagmi chain private key"
-PK="Sender Private Key with Funds in it"
-CAPTCHA_SECRET="Google reCAPTCHA Secret"
+C="Clave privada de la cadena C"
+WAGMI="Clave privada de la cadena WAGMI"
+PK="Clave privada del remitente con fondos en ella"
+CAPTCHA_SECRET="Secreto de reCAPTCHA de Google"
 ```
 
-`PK` will act as a fallback private key, in case, the key for any chain is not provided.
+`PK` actuará como una clave privada de respaldo, en caso de que no se proporcione la clave para ninguna cadena.
 
-#### Setup EVM Chain Configurations
+#### Configurar Configuraciones de Cadena EVM
 
-You can create a faucet server for any EVM chain by making changes in the `config.json` file. Add
-your chain configuration as shown below in the `evmchains` object. Configuration for Fuji's C-Chain
-and WAGMI chain is shown below for example.
+Puedes crear un servidor de llaves para cualquier cadena EVM haciendo cambios en el archivo `config.json`. Agrega tu configuración de cadena como se muestra a continuación en el objeto `evmchains`. A continuación se muestra un ejemplo de configuración para la cadena C de Fuji y la cadena WAGMI.
 
 ```json
 "evmchains": [
@@ -221,67 +188,59 @@ and WAGMI chain is shown below for example.
 ]
 ```
 
-In the above configuration drip amount is in `nAVAX` or `gwei`, whereas fees are in `wei`. For
-example, with the above configurations, the faucet will send `1 AVAX` with maximum fees per gas
-being `100 nAVAX` and priority fee as `2 nAVAX`.
+En la configuración anterior, la cantidad de goteo está en `nAVAX` o `gwei`, mientras que las tarifas están en `wei`. Por ejemplo, con las configuraciones anteriores, la llave enviará `1 AVAX` con tarifas máximas por gas de `100 nAVAX` y tarifa de prioridad de `2 nAVAX`.
 
-The rate limiter for C-Chain will only accept 1 request in 60 minutes for a particular API and 2
-requests in 60 minutes for the WAGMI chain. Though it will skip any failed requests so that users
-can request tokens again, even if there is some internal error in the application. On the other
-hand, the global rate limiter will allow 15 requests per minute on every API. This time failed
-requests will also get counted so that no one can abuse the APIs.
+El limitador de tasa para la cadena C solo aceptará 1 solicitud en 60 minutos para una API en particular y 2 solicitudes en 60 minutos para la cadena WAGMI. Aunque omitirá cualquier solicitud fallida para que los usuarios puedan solicitar tokens nuevamente, incluso si hay algún error interno en la aplicación. Por otro lado, el limitador de tasa global permitirá 15 solicitudes por minuto en cada API. Esta vez, las solicitudes fallidas también se contarán para que nadie pueda abusar de las API.
 
-### API Endpoints
+### Puntos finales de la API
 
-This server will expose the following APIs
+Este servidor expondrá las siguientes API
 
-#### Health API
+#### API de salud
 
-The `/health` API will always return a response with a `200` status code. This endpoint can be used
-to know the health of the server.
+La API `/health` siempre devolverá una respuesta con un código de estado `200`. Este punto final se puede usar para conocer la salud del servidor.
 
 ```bash
 curl http://localhost:8000/health
 ```
 
-Response
+Respuesta
 
 ```bash
-Server healthy
+Servidor saludable
 ```
 
-#### Get Faucet Address
+#### Obtener dirección de la llave
 
-This API will be used for fetching the faucet address.
+Esta API se utilizará para obtener la dirección de la llave.
 
 ```bash
 curl http://localhost:8000/api/faucetAddress?chain=C
 ```
 
-It will give the following response
+Dará la siguiente respuesta
 
 ```bash
 0x3EA53fA26b41885cB9149B62f0b7c0BAf76C78D4
 ```
 
-#### Get Faucet Balance
+#### Obtener saldo de la llave
 
-This API will be used for fetching the faucet address.
+Esta API se utilizará para obtener el saldo de la llave.
 
 ```bash
 curl http://localhost:8000/api/getBalance?chain=C
 ```
 
-It will give the following response
+Dará la siguiente respuesta
 
 ```bash
 14282900936
 ```
 
-#### Send Token
+#### Enviar token
 
-This API endpoint will handle token requests from users. It will return the transaction hash as a
-receipt of the faucet drip.
+Este punto final de la API manejará las solicitudes de tokens de los usuarios. Devolverá el hash de transacción como un recibo del goteo de la llave.
 
 ```bash
 curl -d '{
@@ -290,23 +249,18 @@ curl -d '{
 }' -H 'Content-Type: application/json' http://localhost:8000/api/sendToken
 ```
 
-Send token API requires a CAPTCHA response token that is generated using the CAPTCHA site key on the
-client-side. Since we can't generate and pass this token while making a curl request, we have to
-disable the CAPTCHA verification for testing purposes. You can find the steps to disable it in the
-next sections. The response is shown below
+La API de envío de tokens requiere un token de respuesta de reCAPTCHA que se genera utilizando la clave del sitio reCAPTCHA en el lado del cliente. Dado que no podemos generar y pasar este token mientras hacemos una solicitud de curl, tenemos que desactivar la verificación de reCAPTCHA con fines de prueba. Puedes encontrar los pasos para desactivarlo en las secciones siguientes. La respuesta se muestra a continuación
 
 ```bash
 {
-    "message": "Transaction successful on Avalanche C Chain!",
+    "message": "¡Transacción exitosa en Avalanche C Chain!",
     "txHash": "0x3d1f1c3facf59c5cd7d6937b3b727d047a1e664f52834daf20b0555e89fc8317"
 }
 ```
 
-### Rate Limiters (Important)
+### Limitadores de tasa (Importante)
 
-The rate limiters are applied on the global (all endpoints) as well as on the `/api/sendToken` API.
-These can be configured from the `config.json` file. Rate limiting parameters for chains are passed
-in the chain configuration as shown above.
+Los limitadores de tasa se aplican de forma global (a todos los puntos finales) y en la API `/api/sendToken`. Estos se pueden configurar desde el archivo `config.json`. Los parámetros de limitación de tasa para las cadenas se pasan en la configuración de la cadena como se muestra arriba.
 
 ```json
 "GLOBAL_RL": {
@@ -321,40 +275,25 @@ in the chain configuration as shown above.
 }
 ```
 
-There could be multiple proxies between the server and the client. The server will see the IP
-address of the adjacent proxy connected with the server, and this may not be the client's actual IP.
+Podría haber varios proxies entre el servidor y el cliente. El servidor verá la dirección IP del proxy adyacente conectado con el servidor, y esto puede no ser la IP real del cliente.
 
-The IPs of all the proxies that the request has hopped through are stuffed inside the header
-**x-forwarded-for** array. But the proxies in between can easily manipulate these headers to bypass
-rate limiters. So, we cannot trust all the proxies and hence all the IPs inside the header.
+Las direcciones IP de todos los proxies a través de los cuales ha pasado la solicitud están almacenadas dentro del arreglo de encabezados **x-forwarded-for**. Pero los proxies intermedios pueden manipular fácilmente estos encabezados para evadir los limitadores de velocidad. Por lo tanto, no podemos confiar en todos los proxies y, por lo tanto, en todas las direcciones IP dentro del encabezado.
 
-The proxies that are set up by the owner of the server (reverse-proxies) are the trusted proxies on
-which we can rely and know that they have stuffed the actual IP of the callers in between. Any
-proxy that is not set up by the server, should be considered an untrusted proxy. So, we can jump to
-the IP address added by the last proxy that we trust. The number of jumps that we want can be
-configured in the `config.json` file inside the `GLOBAL_RL` object.
+Los proxies que son configurados por el propietario del servidor (reverse-proxies) son los proxies confiables en los que podemos confiar y saber que han agregado la IP real de los llamantes en el medio. Cualquier proxy que no sea configurado por el servidor, debe considerarse un proxy no confiable. Por lo tanto, podemos saltar a la dirección IP agregada por el último proxy en el que confiamos. El número de saltos que queremos puede configurarse en el archivo `config.json` dentro del objeto `GLOBAL_RL`.
 
 ![faucet 5](/img/faucet-5.png)
 
-#### Clients Behind Same Proxy
+#### Clientes detrás del mismo proxy
 
-Consider the below diagram. The server is set up with 2 reverse proxies. If the client is behind
-proxies, then we cannot get the client's actual IP, and instead will consider the proxy's IP as the
-client's IP. And if some other client is behind the same proxy, then those clients will be
-considered as a single entity and might get rate-limited faster.
+Considera el siguiente diagrama. El servidor está configurado con 2 reverse proxies. Si el cliente está detrás de proxies, entonces no podemos obtener la IP real del cliente y, en su lugar, consideraremos la IP del proxy como la IP del cliente. Y si algún otro cliente está detrás del mismo proxy, entonces esos clientes serán considerados como una sola entidad y podrían ser limitados más rápidamente.
 
 ![faucet 6](/img/faucet-6.png)
 
-Therefore it is advised to the users, to avoid using any proxy for accessing applications that have
-critical rate limits, like this faucet.
+Por lo tanto, se recomienda a los usuarios evitar el uso de cualquier proxy para acceder a aplicaciones que tengan límites de velocidad críticos, como esta faucet.
 
-#### Wrong Number of Reverse Proxies
+#### Número incorrecto de reverse proxies
 
-So, if you want to deploy this faucet, and have some reverse proxies in between, then you should
-configure this inside the `GLOBAL_RL` key of the `config.json` file. If this is not configured
-properly, then the users might get rate-limited very frequently, since the server-side proxy's IP
-addresses are being viewed as the client's IP. You can verify this in the code
-[here](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
+Entonces, si quieres implementar esta faucet y tienes algunos reverse proxies en el medio, entonces debes configurarlo dentro de la clave `GLOBAL_RL` del archivo `config.json`. Si esto no está configurado correctamente, es posible que los usuarios sean limitados con mucha frecuencia, ya que las direcciones IP del proxy del lado del servidor se están viendo como la IP del cliente. Puedes verificar esto en el código [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
 
 ```json
 "GLOBAL_RL": {
@@ -366,189 +305,143 @@ addresses are being viewed as the client's IP. You can verify this in the code
 
 ![faucet 7](/img/faucet-7.png)
 
-It is also quite common to have Cloudflare as the last reverse proxy or the exposed server.
-Cloudflare provides a header **cf-connecting-ip** which is the IP of the client that requested the
-faucet and hence Cloudflare. We are using this as default.
+También es bastante común tener a Cloudflare como el último reverse proxy o el servidor expuesto. Cloudflare proporciona un encabezado **cf-connecting-ip** que es la IP del cliente que solicitó la faucet y, por lo tanto, Cloudflare. Estamos usando esto como valor predeterminado.
 
-### CAPTCHA Verification
+### Verificación CAPTCHA
 
-CAPTCHA is required to prove the user is a human and not a bot. For this purpose, we will use
-[Google's reCAPTCHA](https://www.google.com/recaptcha/intro/v3.html). The server-side will require
-`CAPTCHA_SECRET` that should not be exposed. You can set the threshold score to pass the CAPTCHA
-test by the users
-[here](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
+CAPTCHA es necesario para demostrar que el usuario es humano y no un bot. Para este propósito, utilizaremos [reCAPTCHA de Google](https://www.google.com/recaptcha/intro/v3.html). El lado del servidor requerirá `CAPTCHA_SECRET` que no debe ser expuesto. Puedes configurar el puntaje umbral para pasar la prueba CAPTCHA por parte de los usuarios [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
 
-You can disable these CAPTCHA verifications and rate limiters for testing the purpose, by tweaking
-in the `server.ts` file.
+Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para fines de prueba, ajustando el archivo `server.ts`.
 
-### Disabling Rate Limiters
+### Desactivando los limitadores de velocidad
 
-Comment or remove these 2 lines from the `server.ts` file
+Comenta o elimina estas 2 líneas del archivo `server.ts`
 
 ```javascript
 new RateLimiter(app, [GLOBAL_RL])
 new RateLimiter(app, evmchains)
 ```
 
-### Disabling CAPTCHA Verification
+### Desactivando la verificación CAPTCHA
 
-Remove the `captcha.middleware` from `sendToken` API.
+Elimina el middleware `captcha.middleware` de la API `sendToken`.
 
-### Starting the Faucet
+### Iniciando la Faucet
 
-Follow the below commands to start your local faucet.
+Sigue los siguientes comandos para iniciar tu faucet local.
 
-#### Installing Dependencies
+#### Instalando Dependencias
 
-This will concurrently install dependencies for both client and server.
+Esto instalará concurrentemente las dependencias tanto para el cliente como para el servidor.
 
 ```bash
 npm install
 ```
 
-If ports have a default configuration, then the client will start at port 3000 and the server will
-start at port 8000 while in development mode.
+Si los puertos tienen una configuración predeterminada, entonces el cliente se iniciará en el puerto 3000 y el servidor se iniciará en el puerto 8000 mientras esté en modo de desarrollo.
 
-#### Starting in Development Mode
+#### Iniciando en Modo de Desarrollo
 
-This will concurrently start the server and client in development mode.
+Esto iniciará concurrentemente el servidor y el cliente en modo de desarrollo.
 
 ```bash
 npm run dev
 ```
 
-#### Building for Production
+#### Construyendo para Producción
 
-The following command will build server and client at `build/` and `build/client` directories.
+El siguiente comando construirá el servidor y el cliente en los directorios `build/` y `build/client`.
 
 ```bash
 npm run build
 ```
 
-#### Starting in Production Mode
+#### Iniciando en Modo de Producción
 
-This command should only be run after successfully building the client and server-side code.
+Este comando solo debe ejecutarse después de construir correctamente el código del cliente y del servidor.
 
 ```bash
 npm start
 ```
 
-### Setting up with Docker
+### Configuración con Docker
 
-Follow the steps to run this application in a Docker container.
+Sigue los pasos para ejecutar esta aplicación en un contenedor Docker.
 
-#### Build Docker Image
+#### Construir la Imagen de Docker
 
-Docker images can be served as the built versions of our application, that can be used to deploy on
-Docker container.
+Las imágenes de Docker pueden servir como las versiones construidas de nuestra aplicación, que se pueden usar para implementar en un contenedor Docker.
 
 ```bash
 docker build . -t faucet-image
 ```
 
-#### Starting Application inside Docker Container
+#### Iniciando la Aplicación dentro del Contenedor Docker
 
-Now we can create any number of containers using the above `faucet` image. We also have to supply
-the `.env` file or the environment variables with the secret keys to create the container. Once the
-container is created, these variables and configurations will be persisted and can be easily started
-or stopped with a single command.
+Ahora podemos crear cualquier número de contenedores usando la imagen `faucet` anterior. También tenemos que suministrar el archivo `.env` o las variables de entorno con las claves secretas para crear el contenedor. Una vez que se crea el contenedor, estas variables y configuraciones se mantendrán y se pueden iniciar o detener fácilmente con un solo comando.
 
 ```bash
 docker run -p 3000:8000 --name faucet-container --env-file ../.env faucet-image
 ```
 
-The server will run on port 8000, and our Docker will also expose this port for the outer world to
-interact. We have exposed this port in the `Dockerfile`. But we cannot directly interact with the
-container port, so we had to bind this container port to our host port. For the host port, we have
-chosen 3000. This flag `-p 3000:8000` achieves the same.
+El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior interactúe. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos elegido el 3000. Esta bandera `-p 3000:8000` logra lo mismo.
 
-This will start our faucet application in a Docker container at port 3000 (port 8000 on the
-container). You can interact with the application by visiting <http://localhost:3000> in your browser.
+Esto iniciará nuestra aplicación de faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el contenedor). Puedes interactuar con la aplicación visitando <http://localhost:3000> en tu navegador.
 
-#### Stopping the Container
+#### Deteniendo el Contenedor
 
-You can easily stop the container using the following command
+Puedes detener fácilmente el contenedor usando el siguiente comando
 
 ```bash
 docker stop faucet-container
 ```
 
-#### Restarting the Container
+#### Reiniciando el Contenedor
 
-To restart the container, use the following command
+Para reiniciar el contenedor, usa el siguiente comando
 
 ```bash
 docker start faucet-container
 ```
 
-## Using the Faucet
+## Usando la Faucet
 
-Using the faucet is quite straightforward, but for the sake of completeness, let's go through the
-steps, to collect your first test coins.
+Usar la faucet es bastante sencillo, pero por completitud, repasemos los pasos para recolectar tus primeras monedas de prueba.
 
-### Visit Avalanche Faucet Site
+### Visita el Sitio de la Faucet Avalanche
 
-Go to <https://faucet.avax.network>. You will see various network parameters like network name, faucet
-balance, drop amount, drop limit, faucet address, etc.
+Ve a <https://faucet.avax.network>. Verás varios parámetros de red como el nombre de la red, el saldo de la faucet, la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)
 
-### Select Network
+### Selecciona la Red
 
-You can use the dropdown to select the network of your choice and get some free coins (each network
-may have a different drop amount).
+Puedes usar el menú desplegable para seleccionar la red de tu elección y obtener algunas monedas gratis (cada red puede tener una cantidad de gota diferente).
 
 ![faucet 2](/img/faucet/faucet2.png)
 
-### Put Address and Request Coins
+### Ingresa la Dirección y Solicita Monedas
 
-Put your wallet address where you want to get a drop, and click the **Request** button. Within a
-second, you will get a **transaction hash** for the processed transaction. The hash would be a
-hyperlink to Subnet's explorer. You can see the transaction status, by clicking on that hyperlink.
+Ingresa tu dirección de billetera donde quieres recibir la gota, y haz clic en el botón **Request**. En un segundo, recibirás un **hash de transacción** para la transacción procesada. El hash será un hipervínculo al explorador de la Subnet. Puedes ver el estado de la transacción haciendo clic en ese hipervínculo.
 
 ![faucet 3](/img/faucet/faucet3.png)
 
-### More Interactions
+### Más Interacciones
 
-This is not just it. Using the buttons shown below, you can go to the Subnet explorer or add the
-Subnet to your browser wallet extensions like Core or MetaMask with a single click.
+Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subnet o agregar la Subnet a las extensiones de tu billetera de navegador como Core o MetaMask con un solo clic.
 
 ![faucet 4](/img/faucet/faucet4.png)
 
-### Probable Errors and Troubleshooting
+### Errores Probables y Solución de Problemas
 
-Errors are not expected, but if you are facing some of the errors shown, then you could try
-troubleshooting as shown below. If none of the troubleshooting works, reach us through
-[Discord](https://discord.com/channels/578992315641626624/).
+No se esperan errores, pero si te encuentras con algunos de los errores mostrados, puedes intentar solucionarlos de la siguiente manera. Si ninguna de las soluciones de problemas funciona, contáctanos a través de [Discord](https://discord.com/channels/578992315641626624/).
 
-- **Too many requests. Please try again after X minutes** This is a rate-limiting message. Every
-  Subnet can set its drop limits. The above message suggests that you have reached your drop limit,
-  that is the number of times you could request coins within the window of X minutes. You should try
-  requesting after X minutes. If you are facing this problem, even when you are requesting for the
-  first time in the window, you may be behind some proxy, Wi-Fi, or VPN service that is also being
-  used by some other user.
+- **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos**. Este es un mensaje de límite de tasa. Cada subred puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que podrías solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
 
-- **CAPTCHA verification failed! Try refreshing** We are using v3 of [Google's
-  reCAPTCHA](https://developers.google.com/recaptcha/docs/v3). This version uses scores between 0
-  and 1 to rate the interaction of humans with the site, with 0 being the most suspicious one.
-  You do not have to solve any puzzle or mark the **I am not a Robot** checkbox. The score will be
-  automatically calculated. We want our users to score at least 0.3 to use the faucet. This is
-  configurable, and we will update the threshold after having broader data. But if you are facing
-  this issue, then you can try refreshing your page, disabling ad-blockers, or switching off any
-  VPN. You can follow this [guide](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers)
-  to get rid of this issue.
+- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el grifo. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
 
-- **Internal RPC error! Please try after sometime** This is an internal error in the Subnet's node,
-  on which we are making an RPC for sending transactions. A regular check will update the RPC's
-  health status every 30 seconds (default) or whatever is set in the configuration. This may happen
-  only in rare scenarios and you cannot do much about it, rather than waiting.
+- **¡Error interno de RPC! Por favor, inténtalo después de un tiempo**. Este es un error interno en el nodo de la subred, en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
 
-- **Timeout of 10000ms exceeded** There could be many reasons for this message. It could be an
-  internal server error, or the request didn't receive by the server, slow internet, etc. You could
-  try again after some time, and if the problem persists, then you should raise this issue on our
-  [Discord](https://discord.com/channels/578992315641626624/) server.
+- **Se superó el tiempo de espera de 10000ms**. Puede haber muchas razones para este mensaje. Podría ser un error interno del servidor, o la solicitud no fue recibida por el servidor, internet lento, etc. Podrías intentarlo de nuevo después de un tiempo, y si el problema persiste, entonces deberías plantear este problema en nuestro servidor de [Discord](https://discord.com/channels/578992315641626624/).
 
-- **Couldn't see any transaction status on explorer** The transaction hash that you get for each
-  drop is pre-computed using the expected nonce, amount, and receiver's address. Though transactions
-  on Avalanche are near-instant, the explorer may take time to index those transactions. You should
-  wait for a few more seconds, before raising any issue or reaching out to us.
+- **No se pudo ver ningún estado de transacción en el explorador**. El hash de transacción que obtienes para cada caída se precalcula utilizando el nonce esperado, la cantidad y la dirección del receptor. Aunque las transacciones en Avalanche son casi instantáneas, el explorador puede tardar tiempo en indexar esas transacciones. Deberías esperar unos segundos más antes de plantear cualquier problema o comunicarte con nosotros.
