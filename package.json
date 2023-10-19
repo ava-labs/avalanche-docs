@@ -47,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "^2.4.3",
     "eslint-config-google": "0.14.0"
   }
 }

@@ -6,8 +6,7 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@docusaurus/recommended"
+        "plugin:react/recommended"
     ],
     "overrides": [
         {
