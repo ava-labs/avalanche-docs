@@ -1,20 +1,20 @@
 ---
-tags: [Build, Subnets]
-description: You can list the Subnets you've created with `avalanche subnet list`.
-sidebar_label: View Subnets
-pagination_label: View Your Created Subnets
+etiquetas: [Construir, Subredes]
+descripción: Puedes listar las Subredes que has creado con `avalanche subnet list`.
+sidebar_label: Ver Subredes
+pagination_label: Ver tus Subredes Creadas
 sidebar_position: 0
 ---
 
-# How to View Your Created Subnets
+# Cómo Ver tus Subredes Creadas
 
-## List Subnet Configurations
+## Listar Configuraciones de Subredes
 
-You can list the Subnets you've created with
+Puedes listar las Subredes que has creado con
 
 `avalanche subnet list`
 
-Example:
+Ejemplo:
 
 ```text
 > avalanche subnet list
@@ -25,14 +25,14 @@ Example:
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
-To see detailed information about your deployed Subnets, add the `--deployed` flag:
+Para ver información detallada sobre tus Subredes desplegadas, agrega la bandera `--deployed`:
 
 ```text
 > avalanche subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-| test        | test        | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
+| test        | test        | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Sí            | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
 +             +             +                                                   +               +-----------------------------------------------------------------+---------+
 |             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -40,13 +40,13 @@ To see detailed information about your deployed Subnets, add the `--deployed` fl
 
 
 
-## Describe Subnet Configurations
+## Describir Configuraciones de Subredes
 
-To see the details of a specific configuration, run
+Para ver los detalles de una configuración específica, ejecuta
 
-`avalanche subnet describe <subnetName>`
+`avalanche subnet describe <nombreSubred>`
 
-Example:
+Ejemplo:
 
 ```text
 > avalanche subnet describe firstsubnet
@@ -58,26 +58,26 @@ Example:
 | |__| |  __/ || (_| | | \__ \
 |_____/ \___|\__\__,_|_|_|___/
 +----------------------------+----------------------------------------------------+
-|         PARAMETER          |                       VALUE                        |
+|         PARÁMETRO          |                       VALOR                        |
 +----------------------------+----------------------------------------------------+
-| Subnet Name                | firstsubnet                                        |
+| Nombre de la Subred        | firstsubnet                                        |
 +----------------------------+----------------------------------------------------+
-| ChainID                    | 12345                                              |
+| ID de la Cadena            | 12345                                              |
 +----------------------------+----------------------------------------------------+
-| Token Name                 | FSN                                                |
+| Nombre del Token           | FSN                                                |
 +----------------------------+----------------------------------------------------+
-| VM ID                      | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu  |
+| ID de la VM                | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu  |
 +----------------------------+----------------------------------------------------+
-| Fuji SubnetID              | XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt  |
+| SubnetID Fuji              | XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt  |
 +----------------------------+----------------------------------------------------+
-| Fuji BlockchainID          | 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR  |
+| BlockchainID Fuji          | 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR  |
 +----------------------------+----------------------------------------------------+
-| Local Network SubnetID     | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk |
+| SubnetID Red Local         | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk |
 +----------------------------+----------------------------------------------------+
-| Local Network BlockchainID | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
+| BlockchainID Red Local     | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
 +----------------------------+----------------------------------------------------+
 
-  _____              _____             __ _
+_____              _____             __ _
  / ____|            / ____|           / _(_)
 | |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
 | | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
@@ -86,7 +86,7 @@ Example:
                                              __/ |
                                             |___/
 +--------------------------+-------------+
-|      GAS PARAMETER       |    VALUE    |
+|      PARÁMETRO DE GAS     |    VALOR    |
 +--------------------------+-------------+
 | GasLimit                 |    15000000 |
 +--------------------------+-------------+
@@ -114,7 +114,7 @@ Example:
                                | |
                                |_|
 +--------------------------------------------+------------------------+---------------------------+
-|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
+|                  DIRECCIÓN                 | CANTIDAD DE AIRDROP (10^18) |   CANTIDAD DE AIRDROP (WEI)    |
 +--------------------------------------------+------------------------+---------------------------+
 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
 +--------------------------------------------+------------------------+---------------------------+
@@ -129,16 +129,7 @@ Example:
                                     | |
                                     |_|
 
-No precompiles set
-```
-
-### Viewing a Genesis File
-
-If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command:
-
-`avalanche subnet describe <subnetName> --genesis`
-
-Example:
+No se han establecido precompilaciones.
 
 ```text
 > avalanche subnet describe firstsubnet --genesis

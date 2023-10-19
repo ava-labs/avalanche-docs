@@ -1,109 +1,109 @@
 ---
-tags: [Build, Subnets]
-description: Gracefully pause and resume a local subnet while preserving state.
-sidebar_label: Pause and Resume
-pagination_label: Pause and Resume Local Subnets
+etiquetas: [Construir, Subredes]
+descripción: Pausar y reanudar de manera elegante una subred local mientras se preserva el estado.
+sidebar_label: Pausar y Reanudar
+pagination_label: Pausar y Reanudar Subredes Locales
 sidebar_position: 1
 ---
 
-# How to Pause and Resume Local Subnets
+# Cómo Pausar y Reanudar Subredes Locales
 
-If you've deployed a Subnet locally, you can preserve and restore the state of your deployed Subnets.
+Si has desplegado una Subred localmente, puedes preservar y restaurar el estado de tus Subredes desplegadas.
 
-## Stopping the Local Network
+## Detener la Red Local
 
-To gracefully stop a running local network while preserving state, run
+Para detener de manera elegante una red local en ejecución mientras se preserva el estado, ejecuta
 
 ```shell
 avalanche network stop
 ```
 
-When restarted, all of your deployed Subnets resume where they left off.
+Cuando se reinicie, todas tus Subredes desplegadas se reanudarán desde donde quedaron.
 
 ```text
 > avalanche network stop
-Network stopped successfully.
+Red detenida exitosamente.
 ```
 
-### Resuming the Local Network
+### Reanudar la Red Local
 
-To resume a stopped network, run
+Para reanudar una red detenida, ejecuta
 
 ```shell
 avalanche network start
 ```
 
-The network resumes with the same state it paused with.
+La red se reanuda con el mismo estado con el que se pausó.
 
 <!-- markdownlint-disable MD013 -->
 
 ```text
 > avalanche network start
-Starting previously deployed and stopped snapshot
-Booting Network. Wait until healthy...
+Iniciando instantánea previamente desplegada y detenida
+Iniciando Red. Espera hasta que esté saludable...
 ...............
-Network ready to use. Local network node endpoints:
+Red lista para usar. Puntos finales del nodo de red local:
 +-------+----------+------------------------------------------------------------------------------------+
-| NODE  |    VM    |                                        URL                                         |
+| NODO  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| node5 | mySubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo5 | miSubred | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node1 | mySubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo1 | miSubred | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node2 | mySubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo2 | miSubred | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node3 | mySubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo3 | miSubred | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node4 | mySubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo4 | miSubred | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-## Checking Network Status
+## Verificar el Estado de la Red
 
-If you'd like to determine whether or not a local Avalanche network is running on your machine, run
+Si deseas determinar si una red Avalanche local está en ejecución en tu máquina, ejecuta
 
 ```shell
 avalanche network status
 ```
 
-### Example Call
+### Ejemplo de Llamada
 
-If the local network is running, the command prints something like
+Si la red local está en ejecución, el comando imprime algo como
 
 ```text
-Requesting network status...
-Network is Up. Network information:
+Solicitando estado de la red...
+Red está activa. Información de la red:
 ==================================================================================================
-Healthy: true
-Custom VMs healthy: true
-Number of nodes: 5
-Number of custom VMs: 1
-======================================== Node information ========================================
-node5 has ID NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 and endpoint http://127.0.0.1:9658:
-node1 has ID NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg and endpoint http://127.0.0.1:9650:
-node2 has ID NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ and endpoint http://127.0.0.1:9652:
-node3 has ID NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN and endpoint http://127.0.0.1:9654:
-node4 has ID NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu and endpoint http://127.0.0.1:9656:
-==================================== Custom VM information =======================================
-Endpoint at node4 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node5 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node1 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node2 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Endpoint at node3 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Saludable: true
+VMs personalizadas saludables: true
+Número de nodos: 5
+Número de VMs personalizadas: 1
+======================================== Información del Nodo ========================================
+nodo5 tiene ID NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 y punto final http://127.0.0.1:9658:
+nodo1 tiene ID NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg y punto final http://127.0.0.1:9650:
+nodo2 tiene ID NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ y punto final http://127.0.0.1:9652:
+nodo3 tiene ID NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN y punto final http://127.0.0.1:9654:
+nodo4 tiene ID NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu y punto final http://127.0.0.1:9656:
+==================================== Información de la VM Personalizada =======================================
+Punto final en nodo4 para blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Punto final en nodo5 para blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Punto final en nodo1 para blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Punto final en nodo2 para blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Punto final en nodo3 para blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
 ```
 
-If the network isn't running, the command instead prints
+Si la red no está en ejecución, en cambio, el comando imprime
 
 ```text
-Requesting network status...
-No local network running
+Solicitando estado de la red...
+No hay una red local en ejecución
 ```
 
-or
+o
 
 ```text
-Requesting network status...
-Error: timed out trying to contact backend controller, it is most probably not running
+Solicitando estado de la red...
+Error: tiempo de espera agotado al intentar contactar al controlador de backend, probablemente no está en ejecución
 ```

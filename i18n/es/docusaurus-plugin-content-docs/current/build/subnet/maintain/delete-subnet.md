@@ -1,24 +1,24 @@
 ---
-tags: [Build, Subnets]
-description: To delete a created Subnet configuration, run `avalanche subnet delete <subnetName>`.
-sidebar_label: Delete a Subnet
-pagination_label: How to Delete a Subnet
+etiquetas: [Construir, Subredes]
+descripción: Para eliminar una configuración de Subred creada, ejecuta `avalanche subnet delete <nombreSubred>`.
+sidebar_label: Eliminar una Subred
+pagination_label: Cómo Eliminar una Subred
 sidebar_position: 2
 ---
 
-# How to Delete a Subnet
+# Cómo Eliminar una Subred
 
-## Deleting a Subnet Configuration
+## Eliminando una Configuración de Subred
 
-To delete a created Subnet configuration, run
+Para eliminar una configuración de Subred creada, ejecuta
 
-`avalanche subnet delete <subnetName>`
+`avalanche subnet delete <nombreSubred>`
 
-## Deleting a Deployed Subnet
+## Eliminando una Subred Desplegada
 
-You can't delete Subnets deployed to Mainnet or the Fuji Testnet.
+No puedes eliminar Subredes desplegadas en Mainnet o en la Testnet Fuji.
 
-However, you may delete Subnets deployed to a local network by cleaning the network state with
+Sin embargo, puedes eliminar Subredes desplegadas en una red local limpiando el estado de la red con
 
 ```shell
 avalanche network clean

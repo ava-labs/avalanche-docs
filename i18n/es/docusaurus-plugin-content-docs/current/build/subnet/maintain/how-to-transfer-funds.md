@@ -1,95 +1,78 @@
 ---
-tags: [Build, Subnets, Avalanche-CLI]
-description:  If you need to send funds to your Subnet control key or need to move funds from one Ledger address index to another, this guide will demostrate how to enable direct transfers between ledger P-Chain addresses using the Avalanche-CLI command `avalanche key transfer`.
-sidebar_label: Transfer P-Chain Funds
-pagination_label: How to Use Avalanche-CLI to Transfer P-Chain Funds
+etiquetas: [Construir, Subredes, Avalanche-CLI]
+descripción: Si necesitas enviar fondos a tu clave de control de Subred o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
+sidebar_label: Transferir Fondos de la Cadena P
+pagination_label: Cómo Usar Avalanche-CLI para Transferir Fondos de la Cadena P
 sidebar_position: 3
 ---
 
-# How to Use Avalanche-CLI to Transfer P-Chain Funds
+# Cómo Usar Avalanche-CLI para Transferir Fondos de la Cadena P
 
-Transferring funds between P-Chain wallets becomes necessary in certain situations:
+Transferir fondos entre billeteras de la Cadena P se vuelve necesario en ciertas situaciones:
 
-1. Funds need to be sent to the Subnet control key, which might have a zero balance 
-due to fee payments. The Subnet control key requires funding to ensure proper 
-support for Subnet operations.
-2. Funds need to be moved from one Ledger address index to another. A Ledger manages an
-infinite sequence of addresses all derived from a master private key and
-can sign for any of those addresses. Each one is referred to by an index, or the associated 
-address. Avalanche-CLI usually expects to use index 0, but sometimes, the funds are in a 
-different index. Occasionally, a transfer made to a ledger can be made to an address different
-from the default one used by the CLI.
+1. Los fondos necesitan ser enviados a la clave de control de la Subred, que podría tener un saldo cero debido a pagos de tarifas. La clave de control de la Subred requiere financiamiento para asegurar un soporte adecuado para las operaciones de la Subred.
+2. Los fondos necesitan ser movidos de un índice de dirección Ledger a otro. Un Ledger administra una secuencia infinita de direcciones, todas derivadas de una clave privada maestra y puede firmar por cualquiera de esas direcciones. Cada una se denomina por un índice, o la dirección asociada. Avalanche-CLI suele esperar usar el índice 0, pero a veces, los fondos están en un índice diferente. Ocasionalmente, una transferencia hecha a un ledger se puede hacer a una dirección diferente a la que usa por defecto la CLI.
 
-To enable direct transfers between P-Chain addresses, use the command
-`avalanche key transfer`. This operation involves a series of import/export
-actions with the P-Chain and X-Chain. The fee for this operation is four times the typical
-import operation fee, which comes out to 0.004 AVAX. You can find more
-information about fees [here](/reference/standards/guides/txn-fees).
+Para habilitar transferencias directas entre direcciones de la Cadena P, usa el comando `avalanche key transfer` de Avalanche-CLI. Esta operación implica una serie de acciones de importación/exportación con la Cadena P y la Cadena X. La tarifa por esta operación es cuatro veces la tarifa típica de operación de importación, lo que equivale a 0.004 AVAX. Puedes encontrar más información sobre las tarifas [aquí](/reference/standards/guides/txn-fees).
 
-:::note
+:::nota
 
-The `key transfer` command can also be applied to the stored keys managed by the CLI. It enables
-moving funds from one stored key to another, and from a ledger to a stored key or the other way.
+El comando `key transfer` también se puede aplicar a las claves almacenadas gestionadas por la CLI. Permite mover fondos de una clave almacenada a otra, y de un ledger a una clave almacenada o viceversa.
 
 :::
-This how-to guide focuses on transferring funds between ledger accounts.
+Esta guía paso a paso se centra en transferir fondos entre cuentas ledger.
 
-## Prerequisites
+## Requisitos Previos
 
-- [`Avalanche-CLI`](/tooling/cli-guides/install-avalanche-cli) installed
-- Multiple Ledger devices [configured for Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
+- [`Avalanche-CLI`](/tooling/cli-guides/install-avalanche-cli) instalado
+- Múltiples dispositivos Ledger [configurados para Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
 
-## Example: Sending All Funds From One Ledger to Another
+## Ejemplo: Enviar Todos los Fondos de un Ledger a Otro
 
-- Source address: ledger A, index 2 (the web wallet shows 4.5 AVAX for this ledger)
-- Target address: ledger B, index 0 (the web wallet shows 0 AVAX for this ledger)
+- Dirección de origen: ledger A, índice 2 (la billetera web muestra 4.5 AVAX para este ledger)
+- Dirección de destino: ledger B, índice 0 (la billetera web muestra 0 AVAX para este ledger)
 
-### Determine Sender Address Index
+### Determinar el Índice de la Dirección del Remitente
 
+Un ledger puede gestionar una cantidad infinita de direcciones derivadas de una clave privada principal. Debido a esto, muchas operaciones requieren que el usuario especifique un índice de dirección.
 
-A ledger can manage an infinite amount of addresses derived from a main private key. Because of this,
-many operations require the user to specify an address index.
+Después de confirmar con una billetera web que hay 4.5 AVAX disponibles en la dirección de la cadena p `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0`, conecta el ledger A.
 
-After confirming with a web wallet that 4.5 AVAX is available on p-chain address 
-`P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0`, connect ledger A.
-
-With the avalanche app running, execute:
+Con la aplicación Avalanche en ejecución, ejecuta:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
 ```
 
-To see p-chain addresses and balances for the first 6 indices in the ledger derived owner addresses.
+Para ver las direcciones y saldos de la cadena p para los primeros 6 índices en las direcciones de propietario derivadas del ledger.
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-|  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
+|  TIPO  |  NOMBRE |          CADENA         |                    DIRECCIÓN                   | BALANCE | RED     |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-| ledger | index 0 | P-Chain (Bech32 format) | P-avax1g8yucm7j0cnwwru4rp5lkzw6dpdxjmc2rfkqs9 |       0 | Mainnet |
+| ledger | índice 0 | P-Chain (formato Bech32) | P-avax1g8yucm7j0cnwwru4rp5lkzw6dpdxjmc2rfkqs9 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 1 |                         | P-avax1drppshkst2ccygyq37m2z9e3ex2jhkd2txcm5r |       0 | Mainnet |
+|        | índice 1 |                         | P-avax1drppshkst2ccygyq37m2z9e3ex2jhkd2txcm5r |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 2 |                         | P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 |     4.5 | Mainnet |
+|        | índice 2 |                         | P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 |     4.5 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 3 |                         | P-avax1yfpm7v5y5rej2nu7t2r0ffgrlpfq36je0rc5k6 |       0 | Mainnet |
+|        | índice 3 |                         | P-avax1yfpm7v5y5rej2nu7t2r0ffgrlpfq36je0rc5k6 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
+|        | índice 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
+|        | índice 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-The address `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` has 4.5 AVAX and
-is associated with index 2 of ledger A.
+La dirección `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` tiene 4.5 AVAX y está asociada con el índice 2 del ledger A.
 
-### Determine Receiver Address Index
+### Determinar el Índice de la Dirección del Receptor
 
-In this case the user wants to use index 0, the one CLI by default expects to contain funds.
+En este caso, el usuario quiere usar el índice 0, el que la CLI espera contener fondos de forma predeterminada.
 
-For the transfer command, it is also needed to know the target p-chain address. Do the following to
-obtain it:
+Para el comando de transferencia, también es necesario conocer la dirección de la cadena p de destino. Haz lo siguiente para obtenerla:
 
-With the ledger B connected and the avalache app running, execute:
+Con el ledger B conectado y la aplicación avalanche en ejecución, ejecuta:
 
 ```bash
 avalanche key list --mainnet --ledger 0
@@ -97,239 +80,234 @@ avalanche key list --mainnet --ledger 0
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-|  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
+|  TIPO  |  NOMBRE |          CADENA         |                    DIRECCIÓN                   | BALANCE | RED     |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-| ledger | index 0 | P-Chain (Bech32 format) | P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm |       0 | Mainnet |
+| ledger | índice 0 | P-Chain (formato Bech32) | P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm |       0 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-Target address to be used is `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`, containing 0 funds.
+La dirección de destino a utilizar es `P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm`, que contiene 0 fondos.
 
-### Send the Transfer
+### Enviar la Transferencia
 
-A P-Chain to P-chain transfer is a two-part operation. There is no need for the two parts to be executed
-on the same machine, only for them to have some common params. For each part, the appropriate ledger
-(either source or target) must be connected to the machine executing it.
+Una transferencia de P-Chain a P-Chain es una operación de dos partes. No es necesario que las dos partes se ejecuten en la misma máquina, solo que tengan algunos parámetros en común. Para cada parte, el libro mayor apropiado (ya sea de origen o de destino) debe estar conectado a la máquina que lo ejecuta.
 
-The first step moves the money out of the
-source account into a X-Chain account owner by the receiver. It needs to be signed by the sending ledger.
+El primer paso mueve el dinero de la cuenta de origen a una cuenta de la X-Chain propiedad del receptor. Necesita ser firmado por el libro mayor de envío.
 
-Enter the amount of AVAX to send to the recipient. This amount does not include fees.
+Ingrese la cantidad de AVAX a enviar al destinatario. Esta cantidad no incluye tarifas.
 
-Note that the sending ledger pays all the fees.
+Tenga en cuenta que el libro mayor de envío paga todas las tarifas.
 
-Then start the command:
+Luego, inicie el comando:
 
 ```bash
 avalanche key transfer
 ```
 
-First step is to specify the network. `Mainnet` in this case:
+El primer paso es especificar la red. `Mainnet` en este caso:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Network to use:
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Qué red usar?:
   ▸ Mainnet
     Fuji
-    Local Network
+    Red local
 ```
 
-Next, the step of the transfer must be specified. Send in this case:
+A continuación, se debe especificar el paso de la transferencia. Enviar en este caso:
 
 ```text
-? Step of the transfer:
-  ▸ Send
-    Receive
+? ¿Paso de la transferencia?:
+  ▸ Enviar
+    Recibir
 ```
 
-Next, the key source for the sender address. That is, the key that is going to sign the sending
-transactions. Select `Use ledger`:
+A continuación, se solicita la fuente de clave para la dirección del remitente. Es decir, la clave que va a firmar las transacciones de envío. Seleccione `Usar ledger`:
 
 ```text
-? Which key source should be used to  for the sender address?:
-    Use stored key
-  ▸ Use ledger
+? ¿Qué fuente de clave se debe usar para la dirección del remitente?:
+    Usar clave almacenada
+  ▸ Usar ledger
 ```
 
-Next, the ledger index is asked for. Input `2`:
+A continuación, se solicita el índice del ledger. Ingrese `2`:
 
 ```text
-✗ Ledger index to use: 2
+✗ Índice del ledger a usar: 2
 ```
 
-Next, the amount to be sent is asked for:
+A continuación, se solicita la cantidad a enviar:
 
 ```text
-✗ Amount to send (AVAX units): 4.496
+✗ Cantidad a enviar (unidades de AVAX): 4.496
 ```
 
-The, the target address is required:
+Luego, se requiere la dirección de destino:
 
 ```text
-✗ Receiver address: P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
+✗ Dirección del receptor: P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
 ```
 
-After that, a confirmation message is printed. Read carefully and choose `Yes`:
+Después de eso, se imprime un mensaje de confirmación. Lea cuidadosamente y elija `Sí`:
 
 ```text
-this operation is going to:
-- send 4.496000000 AVAX from P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 to target address P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
-- take a fee of 0.004000000 AVAX from source address P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0
+esta operación va a:
+- enviar 4.496000000 AVAX desde la dirección P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 a la dirección de destino P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
+- tomar una tarifa de 0.004000000 AVAX de la dirección de origen P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0
 
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Confirm transfer:
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Confirmar transferencia?:
     No
-  ▸ Yes
+  ▸ Sí
 ```
 
-After this, the first part is completed:
+Después de esto, se completa la primera parte:
 
 ```text
-Issuing ExportTx P -> X
+Emitiendo ExportTx P -> X
 ```
 
-### Receive the Transfer
+### Recibir la transferencia
 
-In this step, Ledger B signs the transaction to receive the funds. It imports the funds on the X-Chain
-before exporting them back to the desired P-Chain address.
+En este paso, el Ledger B firma la transacción para recibir los fondos. Importa los fondos en la X-Chain
+antes de exportarlos de vuelta a la dirección deseada en la P-Chain.
 
-Connect ledger B and execute avalanche app.
+Conecte el ledger B y ejecute la aplicación avalanche.
 
-Then start the command:
+Luego, inicie el comando:
 
 ```bash
 avalanche key transfer
 ```
 
-Specify the `Mainnet` network:
+Especifique la red `Mainnet`:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Network to use:
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Qué red usar?:
   ▸ Mainnet
     Fuji
-    Local Network
+    Red local
 ```
 
-Next, the step of the transfer must be specified. Receive in this case:
+A continuación, se debe especificar el paso de la transferencia. Recibir en este caso:
 
 ```text
-? Step of the transfer:
-    Send
-  ▸ Receive
+? ¿Paso de la transferencia?:
+    Enviar
+  ▸ Recibir
 ```
 
-Then, select Ledger as the key source that is going to sign the receiver operations.
+Luego, seleccione Ledger como la fuente de clave que va a firmar las operaciones de recepción.
 
 ```text
-? Which key source should be used to  for the receiver address?:
-    Use stored key
-  ▸ Use ledger
+? ¿Qué fuente de clave se debe usar para la dirección del receptor?:
+    Usar clave almacenada
+  ▸ Usar ledger
 ```
 
-Next, the ledger index is asked for. Input `0`:
+A continuación, se solicita el índice del ledger. Ingrese `0`:
 
 ```text
-✗ Ledger index to use: 0
+✗ Índice del ledger a usar: 0
 ```
 
-Next, the amount to receive is asked for:
+A continuación, se solicita la cantidad a recibir:
 
 ```text
-✗ Amount to send (AVAX units): 4.496
+✗ Cantidad a enviar (unidades de AVAX): 4.496
 ```
 
-After that, a confirmation message is printed. Select `Yes`:
+Después de eso, se imprime un mensaje de confirmación. Seleccione `Sí`:
 
 ```text
-this operation is going to:
-- receive 4.496000000 AVAX at target address P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm:
+esta operación va a:
+- recibir 4.496000000 AVAX en la dirección de destino P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm:
 
-Use the arrow keys to navigate: ↓ ↑ → ←
-? Confirm transfer:
+Use las teclas de flecha para navegar: ↓ ↑ → ←
+? ¿Confirmar transferencia?:
     No
-  ▸ Yes
+  ▸ Sí
 ```
 
-Finally, the second part of the operation is executed and the transfer is completed.
+Finalmente, se ejecuta la segunda parte de la operación y se completa la transferencia.
 
 ```text
-Issuing ImportTx P -> X
-Issuing ExportTx X -> P
-Issuing ImportTx X -> P
+Emitiendo ImportTx P -> X
+Emitiendo ExportTx X -> P
+Emitiendo ImportTx X -> P
 ```
 
-### Verifying Results of the Transfer Operation using `key list`
+### Verificar los resultados de la operación de transferencia usando `key list`
 
-First verify ledger A accounts. Connect ledger A and open the avalanche app:
+Primero verifique las cuentas del ledger A. Conecte el ledger A y abra la aplicación avalanche:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
 ```
 
-With result:
+Con el resultado:
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-|  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
+|  TIPO  |  NOMBRE |          CADENA          |                    DIRECCIÓN                   | BALANCE | RED     |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-| ledger | index 0 | P-Chain (Bech32 format) | P-avax1g8yucm7j0cnwwru4rp5lkzw6dpdxjmc2rfkqs9 |       0 | Mainnet |
+| ledger | índice 0 | P-Chain (formato Bech32) | P-avax1g8yucm7j0cnwwru4rp5lkzw6dpdxjmc2rfkqs9 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 1 |                         | P-avax1drppshkst2ccygyq37m2z9e3ex2jhkd2txcm5r |       0 | Mainnet |
+|        | índice 1 |                         | P-avax1drppshkst2ccygyq37m2z9e3ex2jhkd2txcm5r |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 2 |                         | P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 |       0 | Mainnet |
+|        | índice 2 |                         | P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 3 |                         | P-avax1yfpm7v5y5rej2nu7t2r0ffgrlpfq36je0rc5k6 |       0 | Mainnet |
+|        | índice 3 |                         | P-avax1yfpm7v5y5rej2nu7t2r0ffgrlpfq36je0rc5k6 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
+|        | índice 4 |                         | P-avax17nqvwcqsa8ddgeww8gzmfe932pz2syaj2vyd89 |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
+|        | índice 5 |                         | P-avax1jzvnd05vsfksrtatm2e3rzu6eux9a287493yf8 |       0 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-Next, verify ledger B accounts. Connect ledger B and open the avalanche app:
+A continuación, verifique las cuentas del ledger B. Conecte el ledger B y abra la aplicación avalanche:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
 ```
 
-With result:
+Con resultado:
 
 ```text
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-|  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
+|  TIPO  |  NOMBRE |          CADENA         |                   DIRECCIÓN                   | BALANCE | RED     |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-| ledger | index 0 | P-Chain (Bech32 format) | P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm |   4.496 | Mainnet |
+| ledger | índice 0 | P-Chain (formato Bech32) | P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm |   4.496 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 1 |                         | P-avax18e9qsm30du590lhkwydhmkfwhcc9999gvxcaez |       0 | Mainnet |
+|        | índice 1 |                         | P-avax18e9qsm30du590lhkwydhmkfwhcc9999gvxcaez |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 2 |                         | P-avax1unkkjstggvdty5gtnfhc0mgnl7qxa52z2d4c9y |       0 | Mainnet |
+|        | índice 2 |                         | P-avax1unkkjstggvdty5gtnfhc0mgnl7qxa52z2d4c9y |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 3 |                         | P-avax1ek7n0zky3py7prxcrgnmh44y3wm6lc7r7x5r8e |       0 | Mainnet |
+|        | índice 3 |                         | P-avax1ek7n0zky3py7prxcrgnmh44y3wm6lc7r7x5r8e |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 4 |                         | P-avax1rsz6nt6qht5ep37qjk7ht0u9h30mgfhehsmqea |       0 | Mainnet |
+|        | índice 4 |                         | P-avax1rsz6nt6qht5ep37qjk7ht0u9h30mgfhehsmqea |       0 | Mainnet |
 +        +---------+                         +-----------------------------------------------+---------+---------+
-|        | index 5 |                         | P-avax17u5wm4tfex7xr27xlwejm28pyk84tj0jzp42zz |       0 | Mainnet |
+|        | índice 5 |                         | P-avax17u5wm4tfex7xr27xlwejm28pyk84tj0jzp42zz |       0 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-### Recovery Steps
+### Pasos de Recuperación
 
-As a multi step operation, the receiving part of the transfer can have intermediate errors, due for example
-to temporal network connections on the client side.
+Como una operación de varios pasos, la parte receptora de la transferencia puede tener errores intermedios, debido, por ejemplo,
+a conexiones de red temporales en el lado del cliente.
 
-The CLI is going to capture errors and provide the user with a recovery message of the kind:
+La CLI va a capturar los errores y proporcionar al usuario un mensaje de recuperación del tipo:
 
 ```text
-ERROR: restart from this step by using the same command with extra arguments: --receive-recovery-step 1
+ERROR: reinicie desde este paso utilizando el mismo comando con argumentos adicionales: --receive-recovery-step 1
 ```
 
-If this happen, the receiving operation should be started the same way, choosing the same options, but
-adding the extra suggested parameter:
+Si esto sucede, la operación receptora debe iniciarse de la misma manera, eligiendo las mismas opciones, pero
+agregando el parámetro adicional sugerido:
 
 ```bash
 avalanche key transfer --receive-recovery-step 1
 ```
 
-Then, the CLI is going to resume where it left off.
-
+Luego, la CLI va a continuar desde donde se quedó.
