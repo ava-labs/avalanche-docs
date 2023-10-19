@@ -20,7 +20,8 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
+- Created a Cloud Server node as described for [AWS](/docs/tooling/cli-guides/create-a-validator-aws.md)
+or [GCP](/docs/tooling/cli-guides/create-a-validator-gcp.md)
 - A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>` to check 
 bootstrap status)
 - Deployed a Subnet on Fuji through CLI as described [here](/build/subnet/deploy/fuji-testnet-subnet)
