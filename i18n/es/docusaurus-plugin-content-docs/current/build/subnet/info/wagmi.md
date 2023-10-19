@@ -1,125 +1,102 @@
 ---
-tags: [Build, Subnets]
-description: The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet C-Chain and will is used to experiment with release candidates before included in an official Coreth release.
-sidebar_label: "Case Study: WAGMI Subnet"
-pagination_label: "WAGMI Subnet"
+etiquetas: [Construir, Subredes]
+descripción: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
+sidebar_label: "Estudio de caso: Subred WAGMI"
+pagination_label: "Subred WAGMI"
 sidebar_position: 1
 ---
-# WAGMI Subnet
+# Subred WAGMI
 
-The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum
-Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than
-Fuji/Mainnet C-Chain and will is used to experiment with release candidates before included
-in an official Coreth release.
+La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
 
-## Overview
+## Resumen
 
-This is one of the first cases of using Avalanche Subnets as a proving ground for changes in a
-production VM (Coreth). Many underestimate how useful the isolation of Subnets is for performing
-complex VM testing on a live network (without impacting the stability of the primary network).
+Este es uno de los primeros casos de uso de las Subredes Avalanche como terreno de prueba para cambios en una VM de producción (Coreth). Muchos subestiman lo útil que es el aislamiento de las Subredes para realizar pruebas de VM complejas en una red viva (sin afectar la estabilidad de la red primaria).
 
-We created a basic WAGMI Explorer [https://subnets-test.avax.network/wagmi](https://subnets-test.avax.network/wagmi)
-that surfaces aggregated usage statistics about the Subnet.
+Creamos un explorador básico de WAGMI [https://subnets-test.avax.network/wagmi](https://subnets-test.avax.network/wagmi) que muestra estadísticas de uso agregadas sobre la Subred.
 
-- SubnetID: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
-- ChainID: [2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt](https://testnet.avascan.info/blockchain/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt)
+- ID de Subred: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
+- ID de Cadena: [2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt](https://testnet.avascan.info/blockchain/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt)
 
-### Network Parameters
+### Parámetros de la Red
 
-- NetworkID: 11111
-- ChainID: 11111
-- Block Gas Limit: 20,000,000 (2.5x C-Chain)
-- 10s Gas Target: 100,000,000 (~6.67x C-Chain)
-- Min Fee: 1 Gwei (4% of C-Chain)
-- Target Block Rate: 2s (Same as C-Chain)
+- ID de Red: 11111
+- ID de Cadena: 11111
+- Límite de Gas de Bloque: 20,000,000 (2.5 veces la C-Chain)
+- Objetivo de Gas de 10s: 100,000,000 (~6.67 veces la C-Chain)
+- Tarifa Mínima: 1 Gwei (4% de la C-Chain)
+- Tasa de Bloques Objetivo: 2s (igual que la C-Chain)
 
-The genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
+El archivo génesis de WAGMI se puede encontrar [aquí](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
 
-
-### Adding WAGMI to Core
+### Agregando WAGMI a Core
 
 ```text
-- Network Name: WAGMI
-- RPC URL: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc>
-- WS URL: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
-- Chain ID: 11111
-- Symbol: WGM
-- Explorer: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
+- Nombre de Red: WAGMI
+- URL RPC: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc>
+- URL WS: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
+- ID de Cadena: 11111
+- Símbolo: WGM
+- Explorador: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
 ```
 
 :::info
 
-This can be used with other wallets too, such as MetaMask.
+Esto también se puede usar con otras billeteras, como MetaMask.
 
 :::
 
-## Case Study: WAGMI Upgrade
+## Estudio de caso: Actualización de WAGMI
 
-This case study uses [WAGMI](https://subnets-test.avax.network/wagmi) Subnet upgrade to show how a
-network upgrade on an EVM-based (Ethereum Virtual Machine) Subnet can be done simply, and how the
-resulting upgrade can be used to dynamically control fee structure on the Subnet.
+Este estudio de caso utiliza la actualización de la Subred [WAGMI](https://subnets-test.avax.network/wagmi) para mostrar cómo se puede hacer una actualización de red en una Subred basada en EVM (Máquina Virtual Ethereum) de manera sencilla, y cómo la actualización resultante se puede utilizar para controlar dinámicamente la estructura de tarifas en la Subred.
 
-### Introduction
+### Introducción
 
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) aims to provide an easy to use toolbox to
-customize the EVM for your blockchain. It is meant to run out of the box for many Subnets without
-any modification. But what happens when you want to add a new feature updating the rules of your
-EVM?
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) tiene como objetivo proporcionar una caja de herramientas fácil de usar para personalizar la EVM para tu blockchain. Está diseñado para funcionar sin problemas para muchas Subredes sin necesidad de ninguna modificación. Pero, ¿qué sucede cuando quieres agregar una nueva característica actualizando las reglas de tu EVM?
 
-Instead of hard coding the timing of network upgrades in client code like most EVM chains, requiring
-coordinated deployments of new code, [Subnet-EVM
-v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8) introduces the long awaited
-feature to perform network upgrades by just using a few lines of JSON in a configuration file.
+En lugar de codificar en duro el momento de las actualizaciones de red en el código del cliente como la mayoría de las cadenas EVM, que requieren implementaciones coordinadas de nuevo código, [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8) introduce la esperada característica de realizar actualizaciones de red utilizando solo unas pocas líneas de JSON en un archivo de configuración.
 
-### Network Upgrades: Enable/Disable Precompiles
+### Actualizaciones de Red: Habilitar/Deshabilitar Precompilaciones
 
-Detailed description of how to do this can be found in [Customize a
-Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial.
-Here's a summary:
+Una descripción detallada de cómo hacer esto se puede encontrar en el tutorial [Personalizar una Subred](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles). Aquí tienes un resumen:
 
-- Network Upgrade utilizes existing precompiles on the Subnet-EVM:
-  - ContractDeployerAllowList, for restricting smart contract deployers
-  - TransactionAllowList, for restricting who can submit transactions
-  - NativeMinter, for minting native coins
-  - FeeManager, for configuring dynamic fees
-- Each of these precompiles can be individually enabled or disabled at a given timestamp as a
-  network upgrade, or any of the parameters governing its behavior changed.
-- These upgrades must be specified in a file named `upgrade.json` placed in the same directory where
-  [`config.json`](/build/subnet/upgrade/customize-a-subnet.md#avalanchego-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
+- La actualización de red utiliza precompilaciones existentes en Subnet-EVM:
+  - ContractDeployerAllowList, para restringir a los desplegadores de contratos inteligentes
+  - TransactionAllowList, para restringir quién puede enviar transacciones
+  - NativeMinter, para acuñar monedas nativas
+  - FeeManager, para configurar tarifas dinámicas
+- Cada una de estas precompilaciones se puede habilitar o deshabilitar individualmente en un momento dado como una actualización de red, o cualquiera de los parámetros que rigen su comportamiento se puede cambiar.
+- Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde se encuentra el archivo [`config.json`](/build/subnet/upgrade/customize-a-subnet.md#avalanchego-chain-configs) de la cadena: `{directorio-de-configuración-de-cadena}/{ID-de-blockchain}/upgrade.json`.
 
-### Preparation
+### Preparación
 
-To prepare for the WAGMI network upgrade, on August 15, 2022, we had announced on
-[Twitter](https://twitter.com/AaronBuchwald/status/1559249414102720512) and shared on other social
-media such as Discord, with the following information:
+Para preparar la actualización de red de WAGMI, el 15 de agosto de 2022, anunciamos en
+[Twitter](https://twitter.com/AaronBuchwald/status/1559249414102720512) y compartimos en otras redes sociales como Discord, la siguiente información:
 
-> With Subnet-EVM v0.2.8 It's time for a whole new Subnet Season: Network Upgrade Edition.
+> Con Subnet-EVM v0.2.8 es hora de una nueva temporada de Subred: Edición de Actualización de Red.
 >
-> Like every great show, we're kicking this season off with a pilot episode: WAGMI Network Upgrade.
+> Como en todo gran programa, estamos comenzando esta temporada con un episodio piloto: Actualización de Red WAGMI.
 >
-> Stay tuned because this pilot is literally a can't miss for every WAGMI node 😉
+> Manténganse atentos porque este piloto es literalmente imperdible para cada nodo WAGMI 😉
 >
-> The upgrade will activate the fee config manager, and enable smooth fee config updates in the
-> future <https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees>
+> La actualización activará el administrador de configuración de tarifas y permitirá actualizaciones de configuración de tarifas suaves en el futuro <https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees>
 >
-> This upgrade changes how blocks are processed on WAGMI, so every WAGMI node needs to upgrade to
-> continue to validate WAGMI correctly.
+> Esta actualización cambia cómo se procesan los bloques en WAGMI, por lo que cada nodo WAGMI necesita actualizarse para seguir validando WAGMI correctamente.
 >
-> In order to update your node, you need to update to Subnet-EVM v0.2.8 and follow the instructions
-> to enable a stateful precompile on Subnet-EVM here:
+> Para actualizar tu nodo, debes actualizar a Subnet-EVM v0.2.8 y seguir las instrucciones para habilitar una precompilación estatal en Subnet-EVM aquí:
 > <https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles>
 >
-> You can find the JSON to configure the network upgrade in this gist:
+> Puedes encontrar el JSON para configurar la actualización de red en este gist:
 > <https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b>
 >
-> TLDR; you will need to place the JSON file into your node's file directory within
-> `chain-config-dir/wagmi blockchainID/upgrade.json` and restart your node.
+> TLDR; necesitarás colocar el archivo JSON en el directorio de archivos de tu nodo dentro de
+> `directorio-de-configuración-de-cadena/wagmi ID-de-blockchain/upgrade.json` y reiniciar tu nodo.
 >
-> Note: the WAGMI blockchainID is 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt.
+> Nota: el ID de blockchain de WAGMI es 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt.
 
-### Deploying upgrade.json
+### Desplegando upgrade.json
 
-The content of the `upgrade.json` is:
+El contenido de `upgrade.json` es:
 
 ```json
 {
@@ -134,25 +111,25 @@ The content of the `upgrade.json` is:
 }
 ```
 
-Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees).
+Una explicación detallada de feeManagerConfig se puede encontrar en la documentación de las precompilaciones (/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees).
 
-With the above `upgrade.json`, we intend to change the `adminAddresses` at timestamp `1660658400`:
+Con el archivo `upgrade.json` anterior, pretendemos cambiar las `adminAddresses` en el momento de tiempo `1660658400`:
 
-- `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the FeeManager
-- `1660658400` is the [Unix timestamp](https://www.unixtimestamp.com/) for 10:00 AM EDT August 16, 2022
-  (future time when we made the announcement) when the new FeeManager change would take effect.
+- `0x6f0f6DA1852857d7789f68a28bba866671f3880D` está nombrado como el nuevo administrador del FeeManager.
+- `1660658400` es el [timestamp Unix](https://www.unixtimestamp.com/) para las 10:00 AM EDT del 16 de agosto de 2022
+  (hora futura en la que hicimos el anuncio) cuando el cambio del nuevo FeeManager entraría en efecto.
 
-We place the `upgrade.json` file in the chain config directory, which in our case is
-`~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/`. After that, we
-restart the node so the upgrade file is loaded.
+Colocamos el archivo `upgrade.json` en el directorio de configuración de la cadena, que en nuestro caso es
+`~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/`. Después de eso,
+reiniciamos el nodo para que se cargue el archivo de actualización.
 
-When the node restarts, AvalancheGo reads the contents of the JSON file and passes it into
-Subnet-EVM. We see a log of the chain configuration that includes the updated precompile upgrade. It
-looks like this:
+Cuando el nodo se reinicia, AvalancheGo lee el contenido del archivo JSON y lo pasa a
+Subnet-EVM. Vemos un registro de la configuración de la cadena que incluye la actualización de precompilación. Se
+ve así:
 
 ```text
 INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
-github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration
+github.com/ava-labs/subnet-evm/eth/backend.go:155: Configuración de cadena inicializada
 config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0
 Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet-EVM: 0, FeeConfig:
 {\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\
@@ -164,97 +141,79 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet-EVM: 0, Fee
 Engine: Dummy Consensus Engine}”
 ```
 
-We note that `precompileUpgrades` correctly shows the upcoming precompile upgrade. Upgrade is locked
-in and ready.
+Observamos que `precompileUpgrades` muestra correctamente la próxima actualización de precompilación. La actualización está bloqueada
+y lista para usar.
 
-### Activation
+### Activación
 
-When the time passed 10:00 AM EDT August 16, 2022 (Unix timestamp 1660658400), the `upgrade.json` had
-been executed as planned and the new FeeManager admin address has been activated. From now on, we
-don't need to issue any new code or deploy anything on the WAGMI nodes to change the fee structure.
-Let's see how it works in practice!
+Cuando pasó el tiempo de las 10:00 AM EDT del 16 de agosto de 2022 (timestamp Unix 1660658400), el `upgrade.json` había
+sido ejecutado según lo planeado y la nueva dirección de administrador del FeeManager ha sido activada. A partir de ahora,
+no necesitamos emitir ningún código nuevo o desplegar nada en los nodos WAGMI para cambiar la estructura de tarifas.
+¡Veamos cómo funciona en la práctica!
 
-### Using Fee Manager
+### Uso del Fee Manager
 
-The owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D` can now configure the fees on the Subnet as
-they see fit. To do that, all that's needed is access to the network, the private key for the newly
-set manager address and making calls on the precompiled contract.
+El propietario `0x6f0f6DA1852857d7789f68a28bba866671f3880D` ahora puede configurar las tarifas en la Subnet como
+consideren adecuado. Para hacer eso, todo lo que se necesita es acceso a la red, la clave privada de la dirección de administrador recién
+establecida y realizar llamadas al contrato precompilado.
 
-We will use [Remix](https://remix.ethereum.org) online Solidity IDE and the [Core Browser
-Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
-Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add
-WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) yourself.
+Usaremos [Remix](https://remix.ethereum.org) un IDE de Solidity en línea y la [Extensión del Navegador Core](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
+Core viene con la red WAGMI incorporada. MetaMask también servirá, pero deberá [agregar WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) usted mismo.
 
-First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
+Primero, usando Core, abrimos la cuenta como propietario `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 
-Then we connect Core to WAGMI, Switch on the `Testnet Mode` in `Advanced` page in the hamburger menu:
+Luego conectamos Core a WAGMI, activamos el `Modo Testnet` en la página `Avanzado` en el menú de hamburguesa:
 
-![Core Testnet mode](/img/network-upgrade/core-testnet-mode.png)
+![Modo Testnet de Core](/img/network-upgrade/core-testnet-mode.png)
 
-And then open the `Manage Networks` menu in the networks dropdown. Select WAGMI there by clicking
-the star icon:
+Y luego abrimos el menú `Manage Networks` en el menú desplegable de redes. Seleccionamos WAGMI allí haciendo clic
+en el icono de estrella:
 
-![Core network selection](/img/network-upgrade/core-network-select.png)
+![Selección de red de Core](/img/network-upgrade/core-network-select.png)
 
-We then switch to WAGMI in the networks dropdown. We are ready to move on to Remix now, so we open
-it in the browser. First, we check that Remix sees the extension and correctly talks to it. We
-select `Deploy & run transactions` icon on the left edge, and on the Environment dropdown, select
-`Injected Provider`. We need to approve the Remix network access in the Core browser extension. When
-that is done, `Custom (11111) network` is shown:
+Luego cambiamos a WAGMI en el menú desplegable de redes. Estamos listos para pasar a Remix ahora, así que lo abrimos
+en el navegador. Primero, verificamos que Remix vea la extensión y hable correctamente con ella. Seleccionamos el icono `Deploy & run transactions` en el borde izquierdo, y en el menú desplegable de Entorno, seleccionamos `Injected Provider`. Necesitamos aprobar el acceso de la red Remix en la extensión del navegador Core. Cuando eso esté hecho, se muestra `Custom (11111) network`:
 
-![Injected provider](/img/network-upgrade/remix-injected-provider.png)
+![Proveedor inyectado](/img/network-upgrade/remix-injected-provider.png)
 
-Good, we're talking to WAGMI Subnet. Next we need to load the contracts into Remix. Using 'load from
-GitHub' option from the Remix home screen we load two contracts:
+¡Bien, estamos hablando con la Subnet WAGMI! A continuación, necesitamos cargar los contratos en Remix. Usando la opción 'load from
+GitHub' desde la pantalla de inicio de Remix, cargamos dos contratos:
 
 - [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
-- and
+- y
   [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract/contracts/interfaces/IFeeManager.sol).
 
-IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We
-compile IFeeManager.sol and deploy at the precompile address
-`0x0200000000000000000000000000000000000003` used on the
+IFeeManager es nuestro precompilado, pero hace referencia a IAllowList, así que también necesitamos ese. Compilamos IFeeManager.sol y lo desplegamos en la dirección de precompilación
+`0x0200000000000000000000000000000000000003` utilizada en la
 [Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go#L33).
 
-![Deployed contract](/img/network-upgrade/deployed-contract.png)
+![Contrato desplegado](/img/network-upgrade/deployed-contract.png)
 
-Now we can interact with the FeeManager precompile from within Remix via Core. For example, we can
-use the `getFeeConfig` method to check the current fee configuration. This action can be performed
-by anyone as it is just a read operation.
+Ahora podemos interactuar con el precompilado FeeManager desde Remix a través de Core. Por ejemplo, podemos
+usar el método `getFeeConfig` para verificar la configuración de tarifas actual. Cualquiera puede realizar esta acción, ya que es solo una operación de lectura.
 
-Once we have the new desired configuration for the fees on the Subnet, we can use the `setFeeConfig`
-to change the parameters. This action can **only** be performed by the owner
-`0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json`
-above](#deploying-upgradejson).
+Una vez que tengamos la nueva configuración deseada para las tarifas en la Subnet, podemos usar `setFeeConfig`
+para cambiar los parámetros. ¡Esta acción **solo** puede ser realizada por el propietario
+`0x6f0f6DA1852857d7789f68a28bba866671f3880D` como la `adminAddress` especificada en el [`upgrade.json` anterior](#deploying-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 
-When we call that method by pressing the `transact` button, a new transaction is posted to the
-Subnet, and we can see it on [the
-explorer](https://subnets-test.avax.network/wagmi/block/0xad95ccf04f6a8e018ece7912939860553363cc23151a0a31ea429ba6e60ad5a3):
+Cuando llamamos a ese método presionando el botón `transact`, se publica una nueva transacción en la Subnet, y podemos verla en [el
+explorador](https://subnets-test.avax.network/wagmi/block/0xad95ccf04f6a8e018ece7912939860553363cc23151a0a31ea429ba6e60ad5a3):
 
-![transaction](/img/network-upgrade/wagmi-tx.png)
+![transacción](/img/network-upgrade/wagmi-tx.png)
 
-Immediately after the transaction is accepted, the new fee config takes effect. We can check with
-the `getFeeCofig` that the values are reflected in the active fee config (again this action can be
-performed by anyone):
+Inmediatamente después de que se acepta la transacción, la nueva configuración de tarifas entra en efecto. Podemos verificar con
+`getFeeCofig` que los valores se reflejan en la configuración de tarifas activa (una vez más, esta acción puede ser
+realizada por cualquier persona):
 
 ![getFeeConfig](/img/network-upgrade/getFeeConfig.png)
 
-That's it, fees changed! No network upgrades, no complex and risky deployments, just making a simple
-contract call and the new fee configuration is in place!
+¡Eso es todo, tarifas cambiadas! Sin actualizaciones de red, sin despliegues complejos y arriesgados, solo haciendo una simple
+llamada de contrato y ¡la nueva configuración de tarifas está en su lugar!
 
-### Conclusion
+### Conclusión
 
-Network upgrades can be complex and perilous procedures to carry out safely. Our continuing efforts
-with Subnets is to make upgrades as painless and simple as possible. With the powerful combination
-of stateful precompiles and network upgrades via the upgrade configuration files we have managed to
-greatly simplify both the network upgrades and network parameter changes. This in turn enables much
-safer experimentation and many new use cases that were too risky and complex to carry out with
-high-coordination efforts required with the traditional network upgrade mechanisms.
+Las actualizaciones de red pueden ser procedimientos complejos y peligrosos de llevar a cabo de manera segura. Nuestros esfuerzos continuos con Subnets son para hacer las actualizaciones lo más indoloras y simples posible. Con la poderosa combinación de precompilaciones estatales y actualizaciones de red a través de archivos de configuración de actualización, hemos logrado simplificar en gran medida tanto las actualizaciones de red como los cambios de parámetros de red. Esto, a su vez, permite experimentación mucho más segura y muchos nuevos casos de uso que eran demasiado arriesgados y complejos de llevar a cabo con los mecanismos tradicionales de actualización de red que requieren altos esfuerzos de coordinación.
 
-We hope this case study will help spark ideas for new things you may try on your own. We're looking
-forward to seeing what you have built and how easy upgrades help you in managing your Subnets! If
-you have any questions or issues, feel free to contact us on our
-[Discord](https://chat.avalabs.org). Or just reach out to tell us what exciting new things you have
-built!
+Esperamos que este estudio de caso ayude a inspirar ideas para nuevas cosas que puedas probar por tu cuenta. ¡Estamos ansiosos por ver qué has construido y cómo las actualizaciones fáciles te ayudan a gestionar tus Subnets! Si tienes alguna pregunta o problema, no dudes en contactarnos en nuestro [Discord](https://chat.avalabs.org). ¡O simplemente acércate para contarnos qué emocionantes cosas nuevas has construido!
