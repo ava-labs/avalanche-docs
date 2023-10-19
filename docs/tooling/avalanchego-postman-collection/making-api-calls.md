@@ -38,7 +38,8 @@ The output will be displayed in the **Body** tab.
 
 :::info 
 Data visualization is available for a number of methods. 
-Learn how to use it with the help of [this](../avalanchego-postman-collection/data-visualization.md) guide.
+Learn how to use it with the help of 
+[this](../avalanchego-postman-collection/data-visualization.md) guide.
 :::
 
 ![Make Call](/img/postman/postman-38-make-api-call.png)

@@ -98,7 +98,8 @@ choose an API to make the call.
 
 3. Click on the **Visualize** tab.
 
-4. Now all data from the output can be seen displayed in a table.
+4. Now all data from the output
+can be seen displayed in a table.
 
 :::info 
 Learn how to make an API call with Postman with the help of this guide.
@@ -131,4 +132,5 @@ width="1000px" height="600px"/>
 
 ### `eth_getBalance`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' width="1000px" height="600px"/>
+<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
+width="1000px" height="600px"/>
