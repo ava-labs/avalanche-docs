@@ -34,6 +34,6 @@ To receive testnet tokens, users can request funds from the
 documentation.
 - While Fuji Network is a valuable resource, developers also
 have the option to explore
-[Avalanche Network Runner](https://docs.avax.network/tooling/network-runner)
+[Avalanche Network Runner](/tooling/network-runner.md)
 as an alternative means of locally testing their projects, ensuring comprehensive evaluation and 
 fine-tuning before interacting with the wider network. 
