@@ -32,8 +32,8 @@ la bandera `--local`. Por ejemplo:
 
 El comando puede tardar unos minutos en ejecutarse.
 
-Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac, 
-necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando 
+Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac,
+necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando
 `softwareupdate --install-rosetta`.
 
 ### Resultados

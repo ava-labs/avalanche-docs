@@ -45,7 +45,7 @@ tu propia ejecución de este tutorial.
 - [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en cada nodo validador
 - Un dispositivo [Ledger](https://www.ledger.com/)
 - Has [creado una configuración de Subred](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-y probado completamente una implementación de Subred en [Fuji Testnet
+  y probado completamente una implementación de Subred en [Fuji Testnet
   ](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
@@ -310,8 +310,6 @@ Selecciona automático.
 ✔ Ruta a tu archivo de configuración existente (o donde se va a generar): config.json
 ```
 
-
-
 Proporcione la ruta a un archivo de configuración. Si este comando se ejecuta en la máquina donde se está ejecutando su validador, podría apuntar esto al archivo de configuración realmente utilizado, por ejemplo, `/etc/avalanchego/config.json` - solo asegúrese de que la herramienta tenga acceso de **escritura** al archivo. O podría simplemente copiar el archivo más tarde. En cualquier caso, la herramienta va a intentar editar el archivo existente especificado por la ruta dada, o crear un nuevo archivo. Nuevamente, establezca permisos de escritura.
 
 #### Establecer Directorio de Plugins
@@ -423,7 +421,7 @@ Sus claves de autenticación de la Subnet para la creación de la TX de addValid
 
 ### Establecer NodeID
 
-Ahora ingrese el [**NodeID**](#obtener-sus-nodeids-de-mainnet) del validador.
+Ahora ingrese el [**NodeID**](#obtener-tus-nodeids-de-mainnet) del validador.
 
 ```text
 A continuación, necesitamos el NodeID del validador que desea incluir en la lista blanca.

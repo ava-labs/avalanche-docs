@@ -22,7 +22,7 @@ Avalanche-CLI requiere Ledgers para implementaciones en Mainnet. Esta guía asum
 
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) instalado
 - Familiaridad con el proceso de [Implementar una Subred en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
- y [Implementar una Subred con permisos en Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+  y [Implementar una Subred con permisos en Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 - Múltiples dispositivos Ledger [configurados para Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
 - Una configuración de Subred lista para implementar en la Testnet Fuji o en la Mainnet
 
@@ -357,7 +357,7 @@ Usa las teclas de flecha para navegar: ↓ ↑ → ←
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
     P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
     P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-````
+```
 
 ```text
 ✔ Mainnet
@@ -377,7 +377,6 @@ Si estás configurando una multisig, no selecciones que el tiempo de inicio de t
 proceso de firma lleva significativamente más tiempo cuando se usa una multisig.
 
 :::
-
 
 ```text
 A continuación, necesitamos el NodeID del validador que quieres agregar a la lista blanca.
