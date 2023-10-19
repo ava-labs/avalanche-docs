@@ -1,264 +1,242 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial walks you through the process of using Avalanche-CLI to create a Subnet, deploy it to a local network, and connect to it with Core wallet.
-sidebar_label: Build Your First Subnet
-pagination_label: Build Your First Subnet
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
+sidebar_label: Construye tu primera Subred
+pagination_label: Construye tu primera Subred
 ---
 
-# Build Your First Subnet
+# Construye tu primera Subred
 
-This tutorial walks you through the process of using Avalanche-CLI to create a Subnet,
-deploy it to a local network, and connect to it with Core wallet.
+Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred,
+desplegarla en una red local y conectarte a ella con la billetera Core.
 
-The first step of learning Subnet development is learning to use [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
+El primer paso para aprender el desarrollo de Subredes es aprender a usar [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
-## Installation
+## Instalación
 
-The fastest way to install the latest Avalanche-CLI binary is by running the install script:
+La forma más rápida de instalar el último binario de Avalanche-CLI es ejecutando el script de instalación:
 
 ```shell
 curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
 ```
 
-The binary installs inside the `~/bin` directory. If the directory doesn't exist,
-it will be created.
+El binario se instala dentro del directorio `~/bin`. Si el directorio no existe,
+se creará.
 
-You can run all of the commands in this tutorial by calling `~/bin/avalanche`.
+Puedes ejecutar todos los comandos de este tutorial llamando a `~/bin/avalanche`.
 
-You can also add the command to your system path by running
+También puedes agregar el comando a tu ruta del sistema ejecutando
 
 ```shell
 export PATH=~/bin:$PATH
 ```
 
-If you add it to your path, you should be able to call the program anywhere with just `avalanche`.
-To add it to your path permanently, add an export command to your shell initialization script
-(ex: .bashrc or .zshrc).
+Si lo agregas a tu ruta, deberías poder llamar al programa en cualquier lugar con solo `avalanche`.
+Para agregarlo permanentemente a tu ruta, agrega un comando de exportación a tu script de inicialización de la shell
+(por ejemplo, .bashrc o .zshrc).
 
-For more detailed installation instructions, see [Avalanche-CLI Installation](/tooling/cli-guides/install-avalanche-cli.md)
+Para obtener instrucciones de instalación más detalladas, consulta [Instalación de Avalanche-CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
-## Create Your Subnet Configuration
+## Crea la configuración de tu Subred
 
-This tutorials teaches you how to create an Ethereum Virtual Machine (EVM) based Subnet. To do so,
-you use Subnet-EVM, Avalanche's Subnet fork of the EVM. It supports airdrops, custom fee tokens,
-configurable gas parameters, and multiple stateful precompiles. To learn more, take a look at
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm). The goal of your first command is to create
-a Subnet-EVM configuration.
+Este tutorial te enseña cómo crear una Subred basada en la Máquina Virtual Ethereum (EVM). Para hacerlo,
+usas Subnet-EVM, la bifurcación de la EVM de Avalanche para Subredes. Soporta airdrops, tokens de tarifa personalizados,
+parámetros de gas configurables y precompilaciones estatales múltiples. Para obtener más información, echa un vistazo a
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm). El objetivo de tu primer comando es crear
+una configuración de Subred-EVM.
 
-The Subnet command suite provides a collection of tools for developing and deploying Subnets.
+La suite de comandos de Subred proporciona una colección de herramientas para desarrollar y desplegar Subredes.
 
-The Subnet Creation Wizard walks you through the process of creating your Subnet. To get started,
-first pick a name for your Subnet. This tutorial uses `mySubnet`, but feel free to substitute that
-with any name you like. Once you've picked your name, run
+El Asistente de Creación de Subredes te guía a través del proceso de crear tu Subred. Para empezar,
+elige un nombre para tu Subred. Este tutorial usa `miSubred`, pero siéntete libre de sustituirlo
+por cualquier nombre que te guste. Una vez que hayas elegido tu nombre, ejecuta
 
-`avalanche subnet create mySubnet`
+`avalanche subnet create miSubred`
 
-The following sections walk through each question in the wizard.
+Las siguientes secciones explican cada pregunta en el asistente.
 
-### Choose Your VM
+### Elige tu VM
 
-Select `SubnetEVM`.
+Selecciona `SubnetEVM`.
 
-### Enter Your Subnet's ChainID
+### Ingresa el ChainID de tu Subred
 
-Choose a positive integer for your EVM-style ChainID.
+Elige un entero positivo para tu ChainID de estilo EVM.
 
-In production environments, this ChainID needs to be unique and not shared with any other chain.
-You can visit [chainlist](https://chainlist.org/) to verify that your selection is unique.
-Because this is a development Subnet, feel free to pick any number. Stay away from well-known
-ChainIDs such as 1 (Ethereum) or 43114 (Avalanche C-Chain) as those may cause issues with other
-tools.
+En entornos de producción, este ChainID necesita ser único y no compartido con ninguna otra cadena.
+Puedes visitar [chainlist](https://chainlist.org/) para verificar que tu selección sea única.
+Como esta es una Subred de desarrollo, siéntete libre de elegir cualquier número. Evita los
+ChainIDs conocidos como 1 (Ethereum) o 43114 (Avalanche C-Chain) ya que pueden causar problemas con otras
+herramientas.
 
-### Token Symbol
+### Símbolo del Token
 
-Enter a string to name your Subnet's native token. The token symbol doesn't necessarily need to be unique.
-Example token symbols are AVAX, JOE, and BTC.
+Ingresa una cadena para nombrar el token nativo de tu Subred. El símbolo del token no necesariamente necesita ser único.
+Ejemplos de símbolos de tokens son AVAX, JOE y BTC.
 
-### Subnet-EVM Version
+### Versión de Subnet-EVM
 
-Select `Use latest version`.
+Selecciona `Usar la última versión`.
 
-### Gas Fee Configuration
+### Configuración de Tarifa de Gas
 
-This question determines how to set gas fees on your Subnet.
+Esta pregunta determina cómo establecer las tarifas de gas en tu Subred.
 
-Select `Low disk use / Low Throughput 1.5 mil gas/s (C-Chain's setting)`.
+Selecciona `Bajo uso de disco / Baja capacidad 1.5 mil gas/s (configuración de C-Chain)`.
 
 ### Airdrop
 
-Select `Airdrop 1 million tokens to the default address (do not use in production)`.
+Selecciona `Airdrop de 1 millón de tokens a la dirección predeterminada (no lo uses en producción)`.
 
-This address's private key is well-known, so DO NOT send any production funds to it. Attackers
-would likely drain the funds instantly.
+La clave privada de esta dirección es conocida, así que NO envíes fondos de producción a ella. Los atacantes
+probablemente drenarían los fondos al instante.
 
-When you are ready to start more mature testing, select `Customize your airdrop` to distribute
-funds to additional addresses.
+Cuando estés listo para realizar pruebas más maduras, selecciona `Personaliza tu airdrop` para distribuir
+fondos a direcciones adicionales.
 
-### Precompiles
+### Precompilaciones
 
-Precompiles are Avalanche's way of customizing the behavior of your Subnet. They're strictly an
-advanced feature, so you can safely select `No` for now.
+Las precompilaciones son la forma en que Avalanche personaliza el comportamiento de tu Subred. Son estrictamente una
+característica avanzada, así que puedes seleccionar de forma segura `No` por ahora.
 
-### Wrapping Up
+### Conclusión
 
-If all worked successfully, the command prints `Successfully created subnet configuration`.
+Si todo funcionó correctamente, el comando imprime `Configuración de Subred creada exitosamente`.
 
-You've successfully created your first Subnet configuration. Now it's time to deploy it.
+Has creado exitosamente la configuración de tu primera Subred. Ahora es hora de desplegarla.
 
-## Deploying Subnets Locally
+## Desplegando Subredes Localmente
 
-To deploy your Subnet, run
+Para desplegar tu Subred, ejecuta
 
-`avalanche subnet deploy mySubnet`
+`avalanche subnet deploy miSubred`
 
-Make sure to substitute the name of your Subnet if you used a different one than `mySubnet`.
+Asegúrate de sustituir el nombre de tu Subred si usaste uno diferente a `miSubred`.
 
-Next, select `Local Network`.
+A continuación, selecciona `Red Local`.
 
-This command boots a five node Avalanche network on your machine. It needs to download the latest
-versions of AvalancheGo and Subnet-EVM. The command may take a couple minutes to run.
+Este comando inicia una red Avalanche de cinco nodos en tu máquina. Necesita descargar las últimas
+versiones de AvalancheGo y Subnet-EVM. El comando puede tardar unos minutos en ejecutarse.
 
-Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on Mac, you will 
-require Rosetta 2 to be able to deploy Subnets locally. You can download Rosetta 2 using 
+Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac, 
+necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando 
 `softwareupdate --install-rosetta` .
 
-If all works as expected, the command output should look something like this:
+Si todo funciona como se espera, la salida del comando debería verse algo así:
 
 <!-- markdownlint-disable MD013 -->
 
 ```text
-> avalanche subnet deploy mySubnet
-✔ Local Network
-Deploying [mySubnet] to Local Network
-Installing subnet-evm-v0.4.3...
-subnet-evm-v0.4.3 installation successful
-Backend controller started, pid: 93928, output at: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
-Installing avalanchego-v1.9.3...
-avalanchego-v1.9.3 installation successful
-VMs ready.
-Starting network...
+> avalanche subnet deploy miSubred
+✔ Red Local
+Desplegando [miSubred] en Red Local
+Instalando subnet-evm-v0.4.3...
+Instalación exitosa de subnet-evm-v0.4.3
+Controlador de backend iniciado, pid: 93928, salida en: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
+Instalando avalanchego-v1.9.3...
+Instalación exitosa de avalanchego-v1.9.3
+VMs listas.
+Iniciando red...
 ..................
-Blockchain has been deployed. Wait until network acknowledges...
+La cadena de bloques ha sido desplegada. Espera hasta que la red lo reconozca...
 ......
-Network ready to use. Local network node endpoints:
+Red lista para usar. Puntos finales de los nodos de la red local:
 +-------+----------+------------------------------------------------------------------------------------+
-| NODE  |    VM    |                                        URL                                         |
+| NODO  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| node2 | mySubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo2 | miSubred | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node3 | mySubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo3 | miSubred | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node4 | mySubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo4 | miSubred | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node5 | mySubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo5 | miSubred | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node1 | mySubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo1 | miSubred | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     mySubnet
-Chain ID:         54325
-Currency Symbol:  TUTORIAL
-```
 
-<!-- markdownlint-enable MD013 -->
 
-You can use the deployment details to connect to and interact with your Subnet. Now it's time to
-interact with it.
+Detalles de conexión de la extensión del navegador (cualquier URL de nodo de arriba funciona):
+URL de RPC:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Dirección financiada:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC con 1000000 (10^18) - clave privada: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Nombre de red:     mySubnet
+ID de cadena:         54325
+Símbolo de moneda:  TUTORIAL
 
-## Interacting with Your Subnet
+Puedes usar los detalles de conexión de la extensión del navegador para conectarte e interactuar con tu Subnet. Ahora es el momento de interactuar con ella.
 
-You can use the value provided by `Browser Extension connection details` to connect to your Subnet
-with Core, MetaMask, or any other wallet.
+## Interactuando con tu Subnet
+
+Puedes usar el valor proporcionado por `Detalles de conexión de la extensión del navegador` para conectarte a tu Subnet con Core, MetaMask u cualquier otra billetera.
 
 :::note
 
-To allow API calls from other machines, use `--http-host=0.0.0.0` in the config.
+Para permitir llamadas de API desde otras máquinas, usa `--http-host=0.0.0.0` en la configuración.
 
 :::
 
+Esta tutorial utiliza Core.
 
-<!-- markdownlint-disable MD013 -->
-
-```text
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     mySubnet
-Chain ID:         54325
-Currency Symbol:  TUTORIAL
-```
-
-<!-- markdownlint-enable MD013 -->
-
-This tutorial uses Core.
-
-### Importing the Test Private Key
+### Importando la clave privada de prueba
 
 :::warning
-This address derives from a well-known private key. Anyone can steal funds sent to this address.
-Only use it on development networks that only you have access to. If you send production funds to
-this address, attackers may steal them instantly.
+Esta dirección se deriva de una clave privada conocida. Cualquiera puede robar fondos enviados a esta dirección. Úsala solo en redes de desarrollo a las que solo tú tienes acceso. Si envías fondos de producción a esta dirección, los atacantes pueden robarlos al instante.
 :::
 
-First, you need to import your airdrop private key into Core. 
+Primero, necesitas importar tu clave privada de airdrop en Core.
 
-In the Accounts screen, select the `Imported` tab. Click on `Import private key`.
+En la pantalla de Cuentas, selecciona la pestaña `Imported`. Haz clic en `Importar clave privada`.
 
-![Import Account](/img/first-subnet/import1.png)
+![Importar cuenta](/img/first-subnet/import1.png)
 
-Here, enter the private key. Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
+Aquí, ingresa la clave privada. Importa la clave privada conocida `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
 
-![Enter private key](/img/first-subnet/import2.png)
+![Ingresar clave privada](/img/first-subnet/import2.png)
 
-Next, rename the Core account to prevent confusion. On the `Imported` tab, click on the pen icon
-next to your account. Rename the account `DO NOT USE -- Public test key` to prevent confusion with any
-personal wallets.
+A continuación, cambia el nombre de la cuenta de Core para evitar confusiones. En la pestaña `Imported`, haz clic en el ícono de lápiz junto a tu cuenta. Cambia el nombre de la cuenta a `NO USAR -- Clave de prueba pública` para evitar confusiones con cualquier billetera personal.
 
-![Rename Account](/img/first-subnet/import3.png)
+![Renombrar cuenta](/img/first-subnet/import3.png)
 
-![Rename Account](/img/first-subnet/import4.png)
+![Renombrar cuenta](/img/first-subnet/import4.png)
 
-### Connect to the Subnet
+### Conectarse a la Subnet
 
-Next, you need to add your Subnet to Core's networks.
+A continuación, necesitas agregar tu Subnet a las redes de Core.
 
-In the Core Extension click, `See All Networks` and then select the
- ` + ` icon in the top right.
+En la Extensión de Core, haz clic en `Ver todas las redes` y luego selecciona el
+icono ` + ` en la esquina superior derecha.
 
-![Add network](/img/first-subnet/network1.png)
+![Agregar red](/img/first-subnet/network1.png)
 
-Enter your Subnet's details, found in the output of your `avalanche subnet deploy` 
-[command](#deploying-subnets-locally), into the form and click `Save`.
+Ingresa los detalles de tu Subnet, que se encuentran en la salida de tu comando `avalanche subnet deploy`
+[command](#deploying-subnets-locally), en el formulario y haz clic en `Guardar`.
 
-![Add network 2](/img/first-subnet/network2.png)
+![Agregar red 2](/img/first-subnet/network2.png)
 
-If all worked as expected, your balance should read 1 million tokens. 
-Your Subnet is ready for action. You might want to try to 
-[Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core](/build/subnet/utility/deploy-smart-contract-to-subnet.md).
+Si todo funcionó como se esperaba, tu saldo debería mostrar 1 millón de tokens.
+Tu Subnet está lista para la acción. Puedes intentar
+[Desplegar un Contrato Inteligente en tu Subnet-EVM Usando Remix y Core](/build/subnet/utility/deploy-smart-contract-to-subnet.md).
 
-![Subnet in Core](/img/first-subnet/subnet-in-core.png)
+![Subnet en Core](/img/first-subnet/subnet-in-core.png)
 
-## Next Steps
+## Siguientes Pasos
 
-Congrats Subnetooooor, you just deployed your first Subnet!
+¡Felicidades Subnetooooor, acabas de desplegar tu primera Subnet!
 
-After you feel comfortable with this deployment flow, try deploying smart contracts on your chain
-with [Remix](https://remix.ethereum.org/), [Hardhat](https://hardhat.org/), or
-[Foundry](https://github.com/foundry-rs/foundry). You can also experiment with customizing your
-Subnet by addingprecompiles or adjusting the airdrop.
+Después de sentirte cómodo con este flujo de despliegue, intenta desplegar contratos inteligentes en tu cadena
+con [Remix](https://remix.ethereum.org/), [Hardhat](https://hardhat.org/) o
+[Foundry](https://github.com/foundry-rs/foundry). También puedes experimentar con personalizar tu
+Subnet agregando precompilaciones o ajustando el airdrop.
 
-Once you've developed a stable Subnet you like, see
-[Create an EVM Subnet on Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md) to take your 
-Subnet one step closer to production.
+Una vez que hayas desarrollado una Subnet estable que te guste, consulta
+[Crear una Subnet EVM en la Testnet Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) para llevar tu
+Subnet un paso más cerca de la producción.
 
-Good Subnetting!
+¡Buena Subnetting!
 
-## FAQ
+## Preguntas Frecuentes
 
-**How is the Subnet ID determined upon creation?**
+**¿Cómo se determina la ID de la Subnet al crearla?**
 
-The Subnet ID is the hash of the transaction that created the Subnet.
-
+La ID de la Subnet es el hash de la transacción que creó la Subnet.

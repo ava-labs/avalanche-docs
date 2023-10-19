@@ -1,127 +1,78 @@
 ---
-tags: [Build, Subnets]
-description: Planning a successful Subnet deployment starts by determining your application's needs.
-sidebar_label: Getting Started
-pagination_label: What's the Subnet Development Lifecycle?
+etiquetas: [Construir, Subredes]
+descripción: Planificar una implementación exitosa de Subredes comienza por determinar las necesidades de tu aplicación.
+sidebar_label: Empezando
+pagination_label: ¿Cuál es el ciclo de vida del desarrollo de Subredes?
 ---
 
-# What's the Subnet Development Lifecycle?
+# ¿Cuál es el ciclo de vida del desarrollo de Subredes?
 
-As you begin your Subnet journey, it's useful to look at the lifecycle of taking a Subnet from idea
-to production.
+Al comenzar tu viaje en Subredes, es útil ver el ciclo de vida de llevar una Subred desde la idea a la producción.
 
-## Figure Out Your Needs
+## Descubre tus necesidades
 
-The first step of planning your Subnet is determining your application's needs. What features do you
-need that the Avalanche C-Chain doesn't provide? Perhaps you want your own gas token or only want
-to allow access to KYCed customers. [When to Build on a Subnet vs. on the C-Chain](/build/subnet/c-chain-vs-subnet.md)
-can help you make the decision.
+El primer paso para planificar tu Subred es determinar las necesidades de tu aplicación. ¿Qué características necesitas que la C-Chain Avalanche no proporciona? Tal vez quieres tu propio token de gas o sólo quieres permitir el acceso a clientes con KYC. [Cuándo construir en una Subred vs. en la C-Chain](/build/subnet/c-chain-vs-subnet.md) puede ayudarte a tomar la decisión.
 
-### Decide What Type of Subnet You Want
+### Decide qué tipo de Subred quieres
 
-Once you've decided to use a Subnet, you need to decide what type of Subnet to build. This means
-choosing a virtual machine (VM) to create your Subnet with. Broadly speaking, there are three types
-of VMs to choose from:
+Una vez que has decidido usar una Subred, necesitas decidir qué tipo de Subred construir. Esto significa elegir una máquina virtual (VM) para crear tu Subred. En términos generales, hay tres tipos de VM para elegir:
 
-#### EVM-Based Subnets
+#### Subredes basadas en EVM
 
-EVM-based Subnets are forks of the Avalanche C-Chain. They support Solidity
-smart contracts and standard [Ethereum
-APIs](/reference/avalanchego/c-chain/api.md#ethereum-apis).
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) is Ava Labs' implementation
-of an EVM-Based Subnet.
+Las Subredes basadas en EVM son bifurcaciones de la C-Chain Avalanche. Soportan contratos inteligentes en Solidity y APIs estándar de Ethereum. [Subnet-EVM](https://github.com/ava-labs/subnet-evm) es la implementación de Ava Labs de una Subred basada en EVM.
 
-Subnet-EVM is far and away the safest and most popular choice to build your Subnet with. It has the
-most mature developer tooling and receives regular updates by the Ava Labs team.
+Subnet-EVM es, con mucho, la opción más segura y popular para construir tu Subred. Tiene las herramientas de desarrollo más maduras y recibe actualizaciones regulares por parte del equipo de Ava Labs.
 
-#### Experimental Subnets
+#### Subredes experimentales
 
-Experimental Subnets are proof-of-concept VMs developed by Ava Labs. They include the 
-[TimestampVM Go](/build/vm/create/golang-vm-simple.md), 
-[TimestampVMRust](/build/vm/create/rust-vm.md), and others. These VMs are demo software
-and aren't ready for production environments. Although they do receive periodic updates, the Ava
-Labs team hasn't audited their performance and security, internally or externally. However, these
-open source projects are intended to inspire the community, and provide novel capabilities not
-available inside the EVM.
+Las Subredes experimentales son VMs de prueba de concepto desarrolladas por Ava Labs. Incluyen la VM Go de Timestamp, la VMRust de Timestamp y otras. Estas VMs son software de demostración y no están listas para entornos de producción. Aunque reciben actualizaciones periódicas, el equipo de Ava Labs no ha auditado su rendimiento y seguridad, interna o externamente. Sin embargo, estos proyectos de código abierto están destinados a inspirar a la comunidad y proporcionar capacidades novedosas no disponibles dentro de la EVM.
 
-If you're looking to push the boundaries of what's possible with Subnets, this is a great place to
-get started.
+Si estás buscando empujar los límites de lo que es posible con las Subredes, este es un buen lugar para empezar.
 
-#### Custom Subnets
+#### Subredes personalizadas
 
-Custom Subnets are an open-ended interface that allow developers to build any VM they can dream.
-These VMs may be a fork of an existing VM such as Subnet-EVM, or even a
-non-Avalanche-native VM such as Solana's virtual machine. Alternatively, you can build your VM
-entirely from scratch using almost any programming language. See [Introduction to
-VMs](/build/vm/intro.md) for advice on getting started.
+Las Subredes personalizadas son una interfaz abierta que permite a los desarrolladores construir cualquier VM que puedan imaginar. Estas VMs pueden ser una bifurcación de una VM existente como Subnet-EVM, o incluso una VM no nativa de Avalanche como la máquina virtual de Solana. Alternativamente, puedes construir tu VM completamente desde cero utilizando casi cualquier lenguaje de programación. Consulta [Introducción a las VMs](/build/vm/intro.md) para obtener consejos sobre cómo empezar.
 
-### Determine Tokenomics
+### Determina la tokenomía
 
-Subnets are powered by gas tokens. When you build a Subnet, you have the option to decide what token
-you use and optionally, how you distribute it. You may use AVAX, an existing C-Chain token, or a
-brand new token. You'll need to decide how much of the supply you want to use to reward validators,
-what kind of emitting schedule you want, and how much to airdrop. Blocks may burn transaction fees
-or give them to validators as a block reward.
+Las Subredes son alimentadas por tokens de gas. Cuando construyes una Subred, tienes la opción de decidir qué token usar y, opcionalmente, cómo distribuirlo. Puedes usar AVAX, un token existente de la C-Chain, o un token completamente nuevo. Tendrás que decidir cuánto de la oferta quieres usar para recompensar a los validadores, qué tipo de calendario de emisión quieres y cuánto airdrop hacer. Los bloques pueden quemar las tarifas de transacción o dárselas a los validadores como recompensa de bloque.
 
-### Decide how to Customize Your Subnet
+### Decide cómo personalizar tu Subred
 
-After you've selected your VM, you may want to customize it. This may mean airdropping tokens to
-your team in the genesis, setting how gas fees rates on your network, or changing the
-behavior of your VM via precompiles. These customizations are hard to get right on paper and usually
-require some trial and error to determine correctly. See [Customize Your EVM-Powered
-Subnet](/build/subnet/upgrade/customize-a-subnet.md) for instructions on configuring Subnet-EVM.
+Después de seleccionar tu VM, es posible que quieras personalizarla. Esto puede significar hacer airdrop de tokens a tu equipo en la génesis, establecer tasas de tarifas de gas en tu red o cambiar el comportamiento de tu VM a través de precompilaciones. Estas personalizaciones son difíciles de hacer correctamente en papel y generalmente requieren un poco de prueba y error para determinarlas correctamente. Consulta [Personaliza tu Subred alimentada por EVM](/build/subnet/upgrade/customize-a-subnet.md) para obtener instrucciones sobre cómo configurar Subnet-EVM.
 
-## Learn Avalanche-CLI
+## Aprende Avalanche-CLI
 
-Now that you've specified your Subnet requirements, the next step is learning Avalanche-CLI.
+Ahora que has especificado los requisitos de tu Subred, el siguiente paso es aprender Avalanche-CLI.
 
-Avalanche-CLI is the best tool for rapidly prototyping Subnets and deploying them to production. You
-can use it throughout the entire Subnet development lifecycle. To get started, take a look at [Build
-Your First Subnet](/build/subnet/hello-subnet.md).
+Avalanche-CLI es la mejor herramienta para prototipar rápidamente Subredes y desplegarlas en producción. Puedes usarla a lo largo de todo el ciclo de vida del desarrollo de la Subred. Para empezar, echa un vistazo a [Construye tu primera Subred](/build/subnet/hello-subnet.md).
 
-### Deploy Your Subnet Locally
+### Despliega tu Subred localmente
 
-The first stage of Subnet development involves testing your Subnet on your local machine or on a
-private cloud server such as Amazon EC2. The goal of this phase is to lock-in your Subnet
-customizations and create your full-stack dapp without the constraints of deploying on a public
-network.
+La primera etapa del desarrollo de la Subred implica probar tu Subred en tu máquina local o en un servidor de nube privado como Amazon EC2. El objetivo de esta fase es asegurar tus personalizaciones de Subred y crear tu dapp de pila completa sin las restricciones de desplegar en una red pública.
 
-Development is extremely quick and updates take seconds to minutes to apply. In this phase,
-you should restrict dapp access to trusted parties. Because you're interacting with a local copy of
-the Avalanche network, you can't access production state or other production Subnets.
+El desarrollo es extremadamente rápido y las actualizaciones tardan segundos o minutos en aplicarse. En esta fase, debes restringir el acceso de la dapp a partes de confianza. Debido a que estás interactuando con una copia local de la red Avalanche, no puedes acceder al estado de producción u otras Subredes de producción.
 
-### Deploy Your Subnet to Fuji
+### Despliega tu Subred en Fuji
 
-The second stage of Subnet development involves deploying your Subnet and your dapp to the Fuji
-Testnet. This phase tests your ability to run validator nodes, coordinate all parties involved in
-the Subnet, and monitor network health. You can also practice using Ledgers to manage Subnet
-transactions.
+La segunda etapa del desarrollo de la Subred implica desplegar tu Subred y tu dapp en la Testnet Fuji. Esta fase prueba tu capacidad para ejecutar nodos validadores, coordinar a todas las partes involucradas en la Subred y monitorear la salud de la red. También puedes practicar el uso de Ledgers para gestionar transacciones de la Subred.
 
-The Subnet is publicly visible and you may want to allow external users to test your
-dapp. Development on Fuji is significantly slower than with local development. Updates may now take
-hours to days to apply. It's important to do as much local testing as possible before moving to
-Fuji.
+La Subred es públicamente visible y es posible que quieras permitir que usuarios externos prueben tu dapp. El desarrollo en Fuji es significativamente más lento que con el desarrollo local. Las actualizaciones ahora pueden tardar horas o días en aplicarse. Es importante hacer tantas pruebas locales como sea posible antes de pasar a Fuji.
 
-### Deploy Your Subnet to Mainnet
+### Despliega tu Subred en Mainnet
 
-The final stage of Subnet development is creating your Subnet on Mainnet and deploying your dapp.
-It's time to let your real users in.
+La etapa final del desarrollo de la Subred es crear tu Subred en Mainnet y desplegar tu dapp. Es hora de dejar entrar a tus usuarios reales.
 
-Once your Subnet is in production, you have little flexibility
-to change it. Some alterations are possible, but they require days to weeks to implement and roll
-out.
+Una vez que tu Subred está en producción, tienes poca flexibilidad para cambiarla. Algunas alteraciones son posibles, pero requieren días o semanas para implementarse y desplegarse.
 
-Your focus should shift to preserving network stability and upgrading your nodes as needed.
+Tu enfoque debería cambiar a preservar la estabilidad de la red y actualizar tus nodos según sea necesario.
 
-## Start Developing Custom VMs
+## Empieza a desarrollar VMs personalizadas
 
-If you've mastered Subnet-EVM and are looking for an additional challenge, consider building a
-custom VM. The Avalanche network supports far more than just the EVM. Current VMs only scratch the
-surface of what's possible.
+Si has dominado Subnet-EVM y estás buscando un desafío adicional, considera construir una VM personalizada. La red Avalanche soporta mucho más que sólo la EVM. Las VMs actuales sólo rascan la superficie de lo que es posible.
 
-Some ideas:
+Algunas ideas:
 
-- Port an existing blockchain project to Avalanche. For example: Use Bitcoin's VM or Solana's VM.
-- Create an app-specific VM instead of a general purpose VM. For example, create a DEX
-  or a CLOB VM instead of something like the EVM.
-- Create a more efficient implementation of the EVM.
+- Porta un proyecto de blockchain existente a Avalanche. Por ejemplo: Usa la VM de Bitcoin o la VM de Solana.
+- Crea una VM específica para una aplicación en lugar de una VM de propósito general. Por ejemplo, crea una VM de DEX o una VM de CLOB en lugar de algo como la EVM.
+- Crea una implementación más eficiente de la EVM.

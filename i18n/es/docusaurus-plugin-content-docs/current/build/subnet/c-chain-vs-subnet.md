@@ -1,132 +1,62 @@
 ---
-tags: [Build, Subnets]
-description: In this article, we discuss often-overlooked differentiating characteristics of Subnets, with a primary focus on EVM-based applications, to help developers determine the best place to launch their application.
-sidebar_label: C-Chain or Subnet?
-pagination_label: When to Build on a Subnet vs. on the C-Chain
+etiquetas: [Construir, Subredes]
+descripción: En este artículo, discutimos características diferenciadoras a menudo pasadas por alto de las Subredes, con un enfoque principal en aplicaciones basadas en EVM, para ayudar a los desarrolladores a determinar el mejor lugar para lanzar su aplicación.
+sidebar_label: ¿C-Chain o Subred?
+pagination_label: Cuándo construir en una Subred vs. en la C-Chain
 ---
 
-# When to Build on a Subnet vs. on the C-Chain
+# Cuándo construir en una Subred vs. en la C-Chain
 
-In this article, we discuss often-overlooked differentiating characteristics of Subnets,
-with a primary focus on EVM-based applications. The goal is to identify the pros and cons of
-building an app on [C-Chain](/learn/avalanche/avalanche-platform#c-chain) 
-versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), and help developers make more 
-informed decisions.
+En este artículo, discutimos características diferenciadoras a menudo pasadas por alto de las Subredes, con un enfoque principal en aplicaciones basadas en EVM. El objetivo es identificar los pros y los contras de construir una aplicación en [C-Chain](/learn/avalanche/avalanche-platform#c-chain) versus [Subnet-EVM](https://github.com/ava-labs/subnet-evm), y ayudar a los desarrolladores a tomar decisiones más informadas.
 
-## When to Use a Subnet
+## Cuándo usar una Subred
 
-There are many advantages to running your own Subnet. If you find one or more of these a good match
-for your project then a Subnet might be a good solution for you. But make sure to check the reasons
-to use the C-Chain instead, as some trade-offs involved might make that a preferred solution.
+Hay muchas ventajas en ejecutar tu propia Subred. Si encuentras que una o más de estas son una buena coincidencia para tu proyecto, entonces una Subred podría ser una buena solución para ti. Pero asegúrate de revisar las razones para usar la C-Chain en su lugar, ya que algunos compromisos involucrados podrían hacer que sea una solución preferida.
 
-### We Want Our Own Gas Token
+### Queremos nuestro propio token de gas
 
-C-Chain is an Ethereum Virtual Machine (EVM) chain; it requires the gas fees to be paid in its
-native token. That is, the application may create its own utility tokens (ERC-20) on the C-Chain,
-but the gas must be paid in AVAX. In the meantime,
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) effectively creates an application-specific
-EVM-chain with full control over native(gas) coins. The operator can pre-allocate the native tokens
-in the chain genesis, and mint more using the [Subnet-EVM](https://github.com/ava-labs/subnet-evm)
-precompile contract. And these fees can be either burned (as AVAX burns in C-Chain) or configured to
-be sent to an address which can be a smart contract.
+C-Chain es una cadena de Máquina Virtual Ethereum (EVM); requiere que las tarifas de gas se paguen en su token nativo. Es decir, la aplicación puede crear sus propios tokens de utilidad (ERC-20) en la C-Chain, pero el gas debe pagarse en AVAX. Mientras tanto, [Subnet-EVM](https://github.com/ava-labs/subnet-evm) crea efectivamente una cadena EVM específica de la aplicación con control total sobre las monedas nativas (gas). El operador puede preasignar los tokens nativos en la génesis de la cadena, y acuñar más utilizando el contrato de precompilación de [Subnet-EVM](https://github.com/ava-labs/subnet-evm). Y estas tarifas pueden ser quemadas (como las quemaduras de AVAX en la C-Chain) o configuradas para ser enviadas a una dirección que puede ser un contrato inteligente.
 
-Note that the Subnet gas token is specific to the application in the chain, thus unknown to the
-external parties. Moving assets to other chains requires trusted bridge contracts (or upcoming cross
-Subnet communication feature).
+Ten en cuenta que el token de gas de la Subred es específico de la aplicación en la cadena, por lo que es desconocido para las partes externas. Mover activos a otras cadenas requiere contratos de puente de confianza (o la próxima función de comunicación entre Subredes).
 
-### We Want Higher Throughput
+### Queremos mayor rendimiento
 
-The primary goal of the gas limit on C-Chain is to restrict the block size and therefore prevent
-network saturation. If a block can be arbitrarily large, it takes longer to propagate, potentially
-degrading the network performance. The C-Chain gas limit acts as a deterrent against any system
-abuse but can be quite limiting for high throughput applications. Unlike C-Chain, Subnet can be
-single-tenant, dedicated to the specific application, and thus host its own set of validators with
-higher bandwidth requirements, which allows for a higher gas limit thus higher transaction
-throughput. Plus, [Subnet-EVM](https://github.com/ava-labs/subnet-evm) supports fee configuration
-upgrades that can be adaptive to the surge in application traffic.
+El objetivo principal del límite de gas en la C-Chain es restringir el tamaño del bloque y, por lo tanto, prevenir la saturación de la red. Si un bloque puede ser arbitrariamente grande, tarda más en propagarse, lo que potencialmente degrada el rendimiento de la red. El límite de gas de la C-Chain actúa como un disuasivo contra cualquier abuso del sistema, pero puede ser bastante limitante para aplicaciones de alto rendimiento. A diferencia de la C-Chain, una Subred puede ser de un solo inquilino, dedicada a la aplicación específica y, por lo tanto, alojar su propio conjunto de validadores con mayores requisitos de ancho de banda, lo que permite un límite de gas más alto y, por lo tanto, un mayor rendimiento de transacción. Además, [Subnet-EVM](https://github.com/ava-labs/subnet-evm) admite actualizaciones de configuración de tarifas que pueden ser adaptables al aumento del tráfico de la aplicación.
 
-Subnet workloads are isolated from the Primary Network; which means, the noisy neighbor effect of
-one workload (for example NFT mint on C-Chain) cannot destabilize the Subnet or surge its gas price.
-This failure isolation model in the Subnet can provide higher application reliability.
+Las cargas de trabajo de la Subred están aisladas de la Red Primaria; lo que significa que el efecto del vecino ruidoso de una carga de trabajo (por ejemplo, la creación de NFT en la C-Chain) no puede desestabilizar la Subred o aumentar su precio de gas. Este modelo de aislamiento de fallas en la Subred puede proporcionar una mayor confiabilidad de la aplicación.
 
-### We Want Strict Access Control
+### Queremos un control de acceso estricto
 
-The C-Chain is open and permissionless where anyone can deploy and interact with contracts. However,
-for regulatory reasons, some applications may need a consistent access control mechanism for all
-on-chain transactions. With [Subnet-EVM](https://github.com/ava-labs/subnet-evm), an application can
-require that “only authorized users may deploy contracts or make transactions.” Allow-lists are only
-updated by the administrators, and the allow list itself is implemented within the precompile
-contract, thus more transparent and auditable for compliance matters.
+La C-Chain es abierta y sin permisos, donde cualquiera puede implementar e interactuar con contratos. Sin embargo, por razones regulatorias, algunas aplicaciones pueden necesitar un mecanismo de control de acceso consistente para todas las transacciones en cadena. Con [Subnet-EVM](https://github.com/ava-labs/subnet-evm), una aplicación puede requerir que "solo los usuarios autorizados puedan implementar contratos o realizar transacciones". Las listas de permitidos solo son actualizadas por los administradores, y la lista de permitidos en sí está implementada dentro del contrato de precompilación, por lo que es más transparente y auditable para asuntos de cumplimiento.
 
-### We Need EVM Customization
+### Necesitamos personalización de EVM
 
-If your project is deployed on the C-Chain then your execution environment is dictated by the setup
-of the C-Chain. Changing any of the execution parameters means that the configuration of the C-Chain
-would need to change, and that is expensive, complex and difficult to change. So if your project
-needs some other capabilities, different execution parameters or precompiles that C-Chain does not
-provide, then Subnets are a solution you need. You can configure the EVM in a Subnet to run however
-you want, adding precompiles, and setting runtime parameters to whatever your project needs.
+Si tu proyecto está implementado en la C-Chain, entonces tu entorno de ejecución está dictado por la configuración de la C-Chain. Cambiar cualquiera de los parámetros de ejecución significa que la configuración de la C-Chain tendría que cambiar, y eso es costoso, complejo y difícil de cambiar. Entonces, si tu proyecto necesita otras capacidades, diferentes parámetros de ejecución o precompilaciones que la C-Chain no proporciona, entonces las Subredes son una solución que necesitas. Puedes configurar la EVM en una Subred para que se ejecute como quieras, agregando precompilaciones y configurando parámetros de tiempo de ejecución según lo que tu proyecto necesite.
 
-## When to Use the C-Chain
+## Cuándo usar la C-Chain
 
-All the reasons for using a Subnet outlined above are very attractive to developers and might make
-it seem that every new project should look into launching a Subnet instead of using the C-Chain. Of
-course, things are rarely that simple and without trade-offs. Here are some advantages of the
-C-Chain that you should take into account.
+Todas las razones para usar una Subred mencionadas anteriormente son muy atractivas para los desarrolladores y podrían hacer parecer que cada nuevo proyecto debería considerar lanzar una Subred en lugar de usar la C-Chain. Por supuesto, las cosas rara vez son tan simples y sin compromisos. Aquí hay algunas ventajas de la C-Chain que debes tener en cuenta.
 
-### We Want High Composability with C-Chain Assets
+### Queremos alta composabilidad con activos de la C-Chain
 
-C-Chain is a better option for seamless integration with existing C-Chain assets and contracts. It
-is easier to build a DeFi application on C-Chain, as it provides larger liquidity pools and thus
-allows for efficient exchange between popular assets. A DeFi Subnet can still support composability
-of contracts on C-Chain assets but requires some sort of oﬀ-chain system via the bridge contract. In
-other words, a Subnet can be a better choice if the application does not need high composability
-with the existing C-Chain assets. Plus, the upcoming support for cross Subnet communication will
-greatly simplify the bridging process.
+La C-Chain es una mejor opción para una integración perfecta con activos y contratos existentes en la C-Chain. Es más fácil construir una aplicación DeFi en la C-Chain, ya que proporciona piscinas de liquidez más grandes y, por lo tanto, permite un intercambio eficiente entre activos populares. Una Subred DeFi aún puede soportar composabilidad de contratos sobre activos de la C-Chain, pero requiere algún tipo de sistema fuera de la cadena a través del contrato de puente. En otras palabras, una Subred puede ser una mejor opción si la aplicación no necesita una alta composabilidad con los activos existentes en la C-Chain. Además, el próximo soporte para la comunicación entre Subredes simplificará en gran medida el proceso de puente.
 
-### We Want High Security
+### Queremos alta seguridad
 
-The security of Avalanche Primary Network is a function of the security of the underlying validators
-and stake delegators. Some choose C-Chain in order to achieve maximum security by utilizing
-thousands of Avalanche Primary Network validators. Some may choose to not rely on the entire
-security of the base chain.
+La seguridad de la Red Primaria de Avalanche es una función de la seguridad de los validadores y delegadores de stake subyacentes. Algunos eligen la C-Chain para lograr máxima seguridad utilizando miles de validadores de la Red Primaria de Avalanche. Algunos pueden optar por no depender de la seguridad completa de la cadena base.
 
-The better approach is to scale up the security as the application accrues more values and adoption
-from its users. And Subnet can provide elastic, on-demand security to take such organic growth into
-account.
+El enfoque más adecuado es escalar la seguridad a medida que la aplicación acumula más valor y adopción de sus usuarios. Y una Subred puede proporcionar seguridad elástica y bajo demanda para tener en cuenta dicho crecimiento orgánico.
 
-### We Want Low Initial Cost
+### Queremos un costo inicial bajo
 
-C-Chain has economic advantages of low-cost deployment, whereas each Subnet validator is required to
-validate the Primary Network by staking AVAX (minimum 2,000 AVAX for Mainnet). For fault tolerance,
-we recommend at least five validators for a Subnet, even though there is no requirement that the
-Subnet owner should own all these 5 validators, it still further increases the upfront costs.
+La C-Chain tiene ventajas económicas de implementación de bajo costo, mientras que se requiere que cada validador de una Subred valide la Red Primaria al apostar AVAX (mínimo 2,000 AVAX para Mainnet). Para la tolerancia a fallas, recomendamos al menos cinco validadores para una Subred, aunque no hay ningún requisito de que el propietario de la Subred deba poseer todos estos 5 validadores, aún aumenta los costos iniciales.
 
-### We Want Low Operational Costs
+### Queremos costos operativos bajos
 
-C-Chain is run and operated by thousands of nodes, it is highly decentralized and reliable, and all
-the infrastructure (explorers, indexers, exchanges, bridges) has already been built out by dedicated
-teams that maintain them for you at no extra charge. Project deployed on the C-Chain can leverage
-all of that basically for free. On the other hand, if you run your own Subnet you are basically in
-charge of running your own L1 network. You (or someone who you partner with or pay to) will need to
-do all those things and you will ultimately be responsible for them. If you don't have a desire,
-resources or partnerships to operate a high-availability 24/7 platform, you're probably better off
-deploying on the C-Chain.
+La C-Chain es ejecutada y operada por miles de nodos, es altamente descentralizada y confiable, y toda la infraestructura (exploradores, indexadores, intercambios, puentes) ya ha sido construida por equipos dedicados que los mantienen sin cargo adicional. Un proyecto implementado en la C-Chain puede aprovechar todo eso básicamente de forma gratuita. Por otro lado, si ejecutas tu propia Subred, básicamente estás a cargo de ejecutar tu propia red L1. Tú (o alguien con quien te asocias o pagas) deberá hacer todas esas cosas y, en última instancia, serás responsable de ellas. Si no tienes el deseo, los recursos o las asociaciones para operar una plataforma de alta disponibilidad 24/7, probablemente es mejor que implementes en la C-Chain.
 
-## Conclusion
+## Conclusión
 
-Here we presented some considerations both in favor of running your own Subnet and in favor of
-deploying on the C-Chain. You should carefully weigh and consider what makes the most sense for your
-and your project: deploying on a Subnet or deploying on the C-Chain.
+Aquí presentamos algunas consideraciones a favor de ejecutar tu propia Subred y a favor de implementar en la C-Chain. Debes sopesar cuidadosamente y considerar qué tiene más sentido para ti y tu proyecto: implementar en una Subred o implementar en la C-Chain.
 
-But, there is also a third way: deploy on C-Chain now, then move to your own Subnet later. If an
-application has relatively low transaction rate and no special circumstances that would make the
-C-Chain a non-starter, you can begin with C-Chain deployment to leverage existing technical
-infrastructure, and later expand to a Subnet. That way you can focus on working on the core of your 
-project and once you have a
-solid product/market fit and have gained enough traction that the C-Chain is constricting you, plan
-a move to your own Subnet.
-
-Of course, we're happy to talk to you about your architecture and help you choose the best path
-forward. Feel free to reach out to us on [Discord](https://chat.avalabs.org) or other [community
-channels](https://www.avax.network/community) we run.
+Pero, también hay una tercera opción: implementar en la C-Chain ahora, y luego moverte a tu propia Subred más adelante. Si una aplicación tiene una tasa de transacción relativamente baja y no tiene circunstancias especiales que la hagan inviable en la C-Chain, puedes comenzar con la implementación en la C-Chain para aprovechar la infraestructura técnica existente, y luego expandirte a una Subred. De esa manera, puedes concentrarte en trabajar en el núcleo de tu proyecto y una vez que tengas un ajuste sólido de producto/mercado y hayas ganado suficiente tracción como para que la C-Chain te esté
