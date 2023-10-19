@@ -18,9 +18,10 @@ choose an API to make the call.
 The next step is to make sure the URL is the correct one for the call.
 This URL consists of the base URL and the endpoint: 
 
-* The base URL is set by an environment variable called `baseURL`, therefore it is by default 
-"https://api.avax.network", which is our public API. If you need to make a local
-API call, simply change the URL to localhost. This can be done by changing the value
+* The base URL is set by an environment variable called `baseURL`, and it is by
+default our [public API](../../tooling/rpc-providers.md).
+If you need to make a local API call, simply change the URL to localhost. 
+This can be done by changing the value
 of the `baseURL` variable or changing the URL directly on the call tab.
 Check out the [RPC providers](../rpc-providers.md) to see all public URLs.
 
