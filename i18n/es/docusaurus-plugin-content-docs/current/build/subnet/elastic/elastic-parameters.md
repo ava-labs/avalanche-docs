@@ -1,217 +1,214 @@
 ---
-tags: [Build, Subnets]
-description: This reference describes the structural parameters of an Elastic (Permissionless) Subnet and illustrates the constraints they must satisfy.
-sidebar_label: Parameters
-pagination_label: Elastic Subnets Parameters
+etiquetas: [Construir, Subredes]
+descripción: Esta referencia describe los parámetros estructurales de una Subred Elástica (sin permisos) e ilustra las restricciones que deben cumplir.
+sidebar_label: Parámetros
+pagination_label: Parámetros de las Subredes Elásticas
 sidebar_position: 1
 ---
 
-# Elastic Subnets Parameters
+# Parámetros de las Subredes Elásticas
 
-Avalanche Permissioned Subnets can be turned into Elastic Subnets via the
-[`TransformSubnetTx`](/reference/standards/guides/banff-changes.md#transformsubnettx) transaction.
-`TransformSubnetTx` specifies a set of structural parameters for the Elastic Subnet.
-This reference describes these structural parameters and
-illustrates the constraints they must satisfy.
+Las Subredes Permisionadas de Avalanche pueden convertirse en Subredes Elásticas a través de la transacción
+[`TransformSubnetTx`](/reference/standards/guides/banff-changes.md#transformsubnettx).
+`TransformSubnetTx` especifica un conjunto de parámetros estructurales para la Subred Elástica.
+Esta referencia describe estos parámetros estructurales e
+ilustra las restricciones que deben cumplir.
 
-## Elastic Subnet Parameters
+## Parámetros de la Subred Elástica
 
 ### `Subnet`
 
-`Subnet` has type `ids.ID` and it's the Subnet ID.
-`Subnet` is the ID of the `CreateSubnetTx` transaction that created the Subnet in the first place.
-The following constraints apply:
+`Subnet` tiene tipo `ids.ID` y es el ID de la Subred.
+`Subnet` es el ID de la transacción `CreateSubnetTx` que creó la Subred en primer lugar.
+Se aplican las siguientes restricciones:
 
-- `Subnet` must be different from `PrimaryNetworkID`.
+- `Subnet` debe ser diferente de `PrimaryNetworkID`.
 
 ### `AssetID`
 
-`AssetID` has type `ids.ID` and it's the ID of the asset to use when staking on the Subnet.
-The following constraints apply:
+`AssetID` tiene tipo `ids.ID` y es el ID del activo a utilizar cuando se apuesta en la Subred.
+Se aplican las siguientes restricciones:
 
-- `AssetID` must not be the `Empty ID`.
-- `AssetID` must not be `AVAX ID`, the Primary Network asset.
+- `AssetID` no debe ser el `ID Vacío`.
+- `AssetID` no debe ser el ID `AVAX`, el activo de la Red Primaria.
 
 ### `InitialSupply`
 
-`InitialSupply` has type `uint64` and it's the initial amount of `AssetID`
-transferred in the Elastic Subnet upon its transformation. Such amount is
-available for distributing staking rewards. The following constraints apply:
+`InitialSupply` tiene tipo `uint64` y es la cantidad inicial de `AssetID`
+transferidos en la Subred Elástica al momento de su transformación. Dicha cantidad está
+disponible para distribuir recompensas de apuesta. Se aplican las siguientes restricciones:
 
-- `InitialSupply` must be larger than zero.
+- `InitialSupply` debe ser mayor que cero.
 
 ### `MaximumSupply`
 
-`MaximumSupply` has type `uint64` and it's the maximum amount of `AssetID` that
-Subnet has available for staking and rewards at any time. The following constraints apply:
+`MaximumSupply` tiene tipo `uint64` y es la cantidad máxima de `AssetID` que
+la Subred tiene disponible para apuesta y recompensas en cualquier momento. Se aplican las siguientes restricciones:
 
-- `MaximumSupply` must be larger or equal to `InitialSupply`.
+- `MaximumSupply` debe ser mayor o igual a `InitialSupply`.
 
-A Subnet supply can vary in time but it should be no larger than the configured
-maximum at any point in time, including at Subnet creation.
+El suministro de una Subred puede variar con el tiempo, pero no debe ser mayor que el máximo configurado en ningún momento, incluida la creación de la Subred.
 
 ### `MinConsumptionRate`
 
-`MinConsumptionRate` has type `uint64` and it's the minimal rate a validator can earn if the
-`UptimeRequirement` is satisfied. If `StakingPeriod` == `MinStakeDuration`, the
-validator will earn the `MinConsumptionRate`.
-You can find more details about it in the [Reward Formula section](#reward-formula).
-The following constraints apply:
+`MinConsumptionRate` tiene tipo `uint64` y es la tasa mínima que un validador puede ganar si se
+satisface el `UptimeRequirement`. Si `StakingPeriod` == `MinStakeDuration`, el
+validador ganará la `MinConsumptionRate`.
+Puedes encontrar más detalles al respecto en la sección de la Fórmula de Recompensa.
+Se aplican las siguientes restricciones:
 
-- `MinConsumptionRate` must be smaller or equal to `PercentDenominator`.
+- `MinConsumptionRate` debe ser menor o igual a `PercentDenominator`.
 
-See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
+Ver la sección [Notas sobre Porcentajes](#notas-sobre-porcentajes) para entender el papel de `PercentDenominator`.
 
 ### `MaxConsumptionRate`
 
-`MaxConsumptionRate` has type `uint64` and it's the maximal rate a validator can earn if the
-`UptimeRequirement` is satisfied. If `StakingPeriod` == `MaxStakeDuration` == `MintingPeriod`, the
-validator will earn the `MaxConsumptionRate`.
-You can find more details about it in the [Reward Formula section](#reward-formula).
-The following constraints apply:
+`MaxConsumptionRate` tiene tipo `uint64` y es la tasa máxima que un validador puede ganar si se
+satisface el `UptimeRequirement`. Si `StakingPeriod` == `MaxStakeDuration` == `MintingPeriod`, el
+validador ganará la `MaxConsumptionRate`.
+Puedes encontrar más detalles al respecto en la sección de la Fórmula de Recompensa.
+Se aplican las siguientes restricciones:
 
-- `MaxConsumptionRate` must be larger or equal to `MinConsumptionRate`.
-- `MaxConsumptionRate` must be smaller or equal to `PercentDenominator`.
+- `MaxConsumptionRate` debe ser mayor o igual a `MinConsumptionRate`.
+- `MaxConsumptionRate` debe ser menor o igual a `PercentDenominator`.
 
-See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
+Ver la sección [Notas sobre Porcentajes](#notas-sobre-porcentajes) para entender el papel de `PercentDenominator`.
 
 ### `MinValidatorStake`
 
-`MinValidatorStake` has type `uint64` and it's the minimum amount of funds required to become a validator.
-The following constraints apply:
+`MinValidatorStake` tiene tipo `uint64` y es la cantidad mínima de fondos requeridos para convertirse en un validador.
+Se aplican las siguientes restricciones:
 
-- `MinValidatorStake` must be larger than zero
-- `MinValidatorStake` must be smaller or equal to `InitialSupply`
+- `MinValidatorStake` debe ser mayor que cero.
+- `MinValidatorStake` debe ser menor o igual a `InitialSupply`.
 
 ### `MaxValidatorStake`
 
-`MaxValidatorStake` has type `uint64` and it's the maximum amount of funds a single
-validator can be allocated, including delegated funds.
-The following constraints apply:
+`MaxValidatorStake` tiene tipo `uint64` y es la cantidad máxima de fondos que un solo
+validador puede recibir, incluidos los fondos delegados.
+Se aplican las siguientes restricciones:
 
-- `MaxValidatorStake` must be larger or equal to `MinValidatorStake`
-- `MaxValidatorStake` must be smaller or equal to `MaximumSupply`
+- `MaxValidatorStake` debe ser mayor o igual a `MinValidatorStake`.
+- `MaxValidatorStake` debe ser menor o igual a `MaximumSupply`.
 
 ### `MinStakeDuration`
 
-`MinStakeDuration` has type `uint32` and it's the minimum number of seconds a staker can stake for.
-The following constraints apply:
+`MinStakeDuration` tiene tipo `uint32` y es el número mínimo de segundos que un apostador puede apostar.
+Se aplican las siguientes restricciones:
 
-- `MinStakeDuration` must be larger than zero.
+- `MinStakeDuration` debe ser mayor que cero.
 
 ### `MaxStakeDuration`
 
-`MaxStakeDuration` has type `uint32` and it's the maximum number of seconds a staker can stake for.
-The following constraints apply:
+`MaxStakeDuration` tiene tipo `uint32` y es el número máximo de segundos que un apostador puede apostar.
+Se aplican las siguientes restricciones:
 
-- `MaxStakeDuration` must be larger or equal to `MinStakeDuration`.
-- `MaxStakeDuration` must be smaller or equal to `GlobalMaxStakeDuration`.
+- `MaxStakeDuration` debe ser mayor o igual a `MinStakeDuration`.
+- `MaxStakeDuration` debe ser menor o igual a `GlobalMaxStakeDuration`.
 
-`GlobalMaxStakeDuration` is defined in genesis and applies to both the Primary Network and all
-Subnets.
+`GlobalMaxStakeDuration` está definido en el génesis y se aplica tanto a la Red Primaria como a todas las
+Subredes.
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
 
-Its Mainnet value is $365 \times 24 \times time.Hour$.
+Su valor en Mainnet es $365 \times 24 \times time.Hour$.
 
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
 ### `MinDelegationFee`
 
-`MinDelegationFee` has type `uint32` and it's the minimum fee rate a delegator
-must pay to its validator for delegating. `MinDelegationFee` is a percentage; the
-actual fee is calculated multiplying the fee rate for the delegator reward.
-The following constraints apply:
+`MinDelegationFee` tiene tipo `uint32` y es la tasa mínima de tarifa que un delegador
+debe pagar a su validador por la delegación. `MinDelegationFee` es un porcentaje; la
+tarifa real se calcula multiplicando la tasa de tarifa por la recompensa del delegador.
+Se aplican las siguientes restricciones:
 
-- `MinDelegationFee` must be smaller or equal to `PercentDenominator`.
+- `MinDelegationFee` debe ser menor o igual a `PercentDenominator`.
 
-The `MinDelegationFee` rate applies to Primary Network as well. Its Mainnet value is $2\%$.
+La tasa `MinDelegationFee` también se aplica a la Red Primaria. Su valor en Mainnet es $2\%$.
 
 ### `MinDelegatorStake`
 
-`MinDelegatorStake` has type `uint64` and it's the minimum amount of funds required to become a delegator.
-The following constraints apply:
+`MinDelegatorStake` tiene tipo `uint64` y es la cantidad mínima de fondos requeridos para convertirse en un delegador.
+Se aplican las siguientes restricciones:
 
-- `MinDelegatorStake` must be larger than zero.
+- `MinDelegatorStake` debe ser mayor que cero.
 
 ### `MaxValidatorWeightFactor`
 
-`MaxValidatorWeightFactor` has type `uint8` and it's the factor which calculates
-the maximum amount of delegation a validator can receive. A value of 1
-effectively disables delegation. You can find more details about it in the
-[Delegators Weight Checks section](#delegators-weight-checks).
-The following constraints apply:
+`MaxValidatorWeightFactor` tiene tipo `uint8` y es el factor que calcula
+la cantidad máxima de delegación que un validador puede recibir. Un valor de 1
+deshabilita efectivamente la delegación. Puedes encontrar más detalles al respecto en la
+sección de Verificaciones de Peso de Delegadores.
+Se aplican las siguientes restricciones:
 
-- `MaxValidatorWeightFactor` must be larger than zero.
+- `MaxValidatorWeightFactor` debe ser mayor que cero.
 
 ### `UptimeRequirement`
 
-`UptimeRequirement` has type `uint32` and it's the minimum percentage of its
-staking time that a validator must be online and responsive for to receive a
-reward.
-The following constraints apply:
+`UptimeRequirement` tiene tipo `uint32` y es el porcentaje mínimo de su
+tiempo de apuesta que un validador debe estar en línea y ser receptivo para recibir una
+recompensa.
+Se aplican las siguientes restricciones:
 
-- `UptimeRequirement` must be smaller or equal `PercentDenominator`.
+- `UptimeRequirement` debe ser menor o igual a `PercentDenominator`.
 
-See [Notes on Percentages](#notes-on-percentages) section to understand `PercentDenominator` role.
+Ver la sección [Notas sobre Porcentajes](#notas-sobre-porcentajes) para entender el papel de `PercentDenominator`.
 
-## Reward Formula
+## Fórmula de Recompensa
 
-Consider an Elastic Subnet validator which stakes a $Stake$ amount `AssetID` for $StakingPeriod$ seconds.
+Considera un validador de una Subred Elástica que apuesta una cantidad de $Stake$ `AssetID` durante $StakingPeriod$ segundos.
 
-Assume that at the start of the staking period there is a $Supply$ amount of `AssetID` in the Subnet.
-The maximum amount of Subnet asset is $MaximumSupply$ `AssetID`.
+Supongamos que al inicio del período de apuesta hay una cantidad de $Supply$ `AssetID` en la Subred.
+La cantidad máxima de activos de la Subred es $MaximumSupply$ `AssetID`.
 
-Then at the end of its staking period, a responsive Elastic Subnet validator
-receives a reward calculated as follows:
+Entonces, al final de su período de apuesta, un validador elástico y receptivo de la Subred
+recibe una recompensa calculada de la siguiente manera:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
 
 $$
-Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
+Recompensa = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times TasaDeConsumoEfectiva
 $$
 
-where
+donde
 
 $$
-MaximumSupply - Supply = \text{the number of tokens left to emit in the subnet}
-$$
-
-$$
-\frac{Stake}{Supply} = \text{the individual's stake as a percentage of all available tokens in the network}
+MaximumSupply - Supply = \text{la cantidad de tokens que quedan por emitir en la subred}
 $$
 
 $$
-\frac{StakingPeriod}{MintingPeriod} = \text{time tokens are locked up divided by the $MintingPeriod$}
+\frac{Stake}{Supply} = \text{la apuesta individual como porcentaje de todos los tokens disponibles en la red}
 $$
 
 $$
-\text{$MintingPeriod$ is one year as configured by the Primary Network).}
+\frac{StakingPeriod}{MintingPeriod} = \text{tiempo que los tokens están bloqueados dividido por el $MintingPeriod$}
 $$
 
 $$
-EffectiveConsumptionRate =
+\text{$MintingPeriod$ es un año, configurado por la Red Primaria).}
+$$
+
+$$
+TasaDeConsumoEfectiva =
 $$
 
 $$
 \frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
 $$
 
+
+
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-Note that $StakingPeriod$ is the staker's entire staking period, not just the
-staker's uptime, that is the aggregated time during which the staker has been
-responsive. The uptime comes into play only to decide whether a staker should be
-rewarded; to calculate the actual reward only the staking period duration is
-taken into account.
+Ten en cuenta que $StakingPeriod$ es el período completo de staking del staker, no solo el tiempo de actividad del staker, es decir, el tiempo agregado durante el cual el staker ha estado receptivo. El tiempo de actividad solo entra en juego para decidir si se debe recompensar a un staker; para calcular la recompensa real, solo se tiene en cuenta la duración del período de staking.
 
-$EffectiveConsumptionRate$ is the rate at which the validator is rewarded based on $StakingPeriod$ selection.
+$EffectiveConsumptionRate$ es la tasa a la que se recompensa al validador en función de la selección de $StakingPeriod$.
 
-$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$:
+$MinConsumptionRate$ y $MaxConsumptionRate$ limitan $EffectiveConsumptionRate$:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
@@ -223,11 +220,11 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
-The smaller $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MinConsumptionRate$.
+Cuanto mayor sea $StakingPeriod$, más cercano será $EffectiveConsumptionRate$ a $MaxConsumptionRate$.
+Cuanto menor sea $StakingPeriod$, más cercano será $EffectiveConsumptionRate$ a $MinConsumptionRate$.
 
-A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
-The reward is:
+Un staker logra la recompensa máxima por su stake si $StakingPeriod$ = $Minting Period$.
+La recompensa es:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
@@ -239,17 +236,15 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-Note that this formula is the same as the reward formula at the top of this section
-because $EffectiveConsumptionRate$ = $MaxConsumptionRate$.
+Ten en cuenta que esta fórmula es la misma que la fórmula de recompensa en la parte superior de esta sección porque $EffectiveConsumptionRate$ = $MaxConsumptionRate$.
 
-The reward formula above is used in the Primary Network to calculate
-stakers reward. For reference, you can find Primary network parameters in [the section below](#primary-network-parameters-on-mainnet).
+La fórmula de recompensa anterior se utiliza en la Red Primaria para calcular la recompensa de los stakers. Para referencia, puedes encontrar los parámetros de la red primaria en [la sección a continuación](#primary-network-parameters-on-mainnet).
 
-## Delegators Weight Checks
+## Verificaciones de peso de los delegadores
 
-There are bounds set of the maximum amount of delegators' stake that a validator can receive.
+Existen límites establecidos para la cantidad máxima de stake de los delegadores que un validador puede recibir.
 
-The maximum weight $MaxWeight$ a validator $Validator$ can have is:
+El peso máximo $MaxWeight$ que un validador $Validator$ puede tener es:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
@@ -261,37 +256,32 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-where $MaxValidatorWeightFactor$ and $MaxValidatorStake$ are the Elastic Subnet
-Parameters described above.
+donde $MaxValidatorWeightFactor$ y $MaxValidatorStake$ son los parámetros de la Subred Elástica descritos anteriormente.
 
-A delegator won't be added to a validator if the combination of their weights
-and all other validator's delegators' weight is larger than $MaxWeight$. Note
-that this must be true at any point in time.
+Un delegador no se agregará a un validador si la combinación de sus pesos y el peso de todos los otros delegadores del validador es mayor que $MaxWeight$. Ten en cuenta que esto debe ser cierto en cualquier momento.
 
 <!-- vale off -->
 
-Note that setting $MaxValidatorWeightFactor$ to 1 disables delegation since the $MaxWeight = Validator.Weight$.
+Ten en cuenta que establecer $MaxValidatorWeightFactor$ en 1 deshabilita la delegación, ya que $MaxWeight = Validator.Weight$.
 
 <!-- vale on -->
 
-## Notes on Percentages
+## Notas sobre Porcentajes
 
-`PercentDenominator = 1_000_000` is the denominator used to calculate percentages.
+`PercentDenominator = 1_000_000` es el denominador utilizado para calcular porcentajes.
 
-It allows you to specify percentages up to 4 digital positions.
-To denominate your percentage in `PercentDenominator` just multiply it by `10_000`.
-For example:
+Te permite especificar porcentajes de hasta 4 posiciones decimales.
+Para denominar tu porcentaje en `PercentDenominator`, simplemente multiplícalo por `10_000`.
+Por ejemplo:
 
-- `100%` corresponds to `100 * 10_000 = 1_000_000`
-- `1%` corresponds to `1* 10_000 = 10_000`
-- `0.02%` corresponds to `0.002 * 10_000 = 200`
-- `0.0007%` corresponds to `0.0007 * 10_000 = 7`
+- `100%` corresponde a `100 * 10_000 = 1_000_000`
+- `1%` corresponde a `1 * 10_000 = 10_000`
+- `0.02%` corresponde a `0.002 * 10_000 = 200`
+- `0.0007%` corresponde a `0.0007 * 10_000 = 7`
 
-## Primary Network Parameters on Mainnet
+## Parámetros de la Red Primaria en Mainnet
 
-An Elastic Subnet is free to pick any parameters affecting rewards, within the
-constraints specified above. For reference we list below Primary Network
-parameters on Mainnet:
+Una Subred Elástica es libre de elegir cualquier parámetro que afecte las recompensas, dentro de las restricciones especificadas anteriormente. A continuación, enumeramos los parámetros de la Red Primaria en Mainnet:
 
 - `AssetID = Avax`
 - `InitialSupply = 240_000_000 Avax`
@@ -303,8 +293,7 @@ parameters on Mainnet:
 - `MaxValidatorStake = 3_000_000 Avax`.
 - `MinStakeDuration = 2 * 7 * 24 * time.Hour`.
 - `MaxStakeDuration = 365 * 24 * time.Hour`.
-- `MinDelegationFee = 20000`, that is `2%`.
+- `MinDelegationFee = 20000`, es decir, `2%`.
 - `MinDelegatorStake = 25 Avax`.
-- `MaxValidatorWeightFactor = 5`. This is a platformVM parameter rather than a
-  genesis one, so it's shared across networks.
-- `UptimeRequirement = 0.8`, that is `80%`.
+- `MaxValidatorWeightFactor = 5`. Este es un parámetro de la plataformaVM en lugar de uno de génesis, por lo que se comparte entre redes.
+- `UptimeRequirement = 0.8`, es decir, `80%`.

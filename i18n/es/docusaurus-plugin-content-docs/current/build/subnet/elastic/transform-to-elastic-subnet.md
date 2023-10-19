@@ -1,110 +1,93 @@
 ---
-tags: [Build, Subnets]
-description: This how-to guide focuses on taking an already created permissioned Subnet and transforming it to an elastic (or permissionless) Subnet.
-sidebar_label: Make Subnet Permissionless
-pagination_label: Transform a Permissioned Subnet into an Elastic Subnet
+etiquetas: [Construir, Subredes]
+descripción: Esta guía de cómo hacer se centra en tomar una Subred con permisos ya creada y transformarla en una Subred elástica (o sin permisos).
+sidebar_label: Hacer Subred sin Permisos
+pagination_label: Transformar una Subred con Permisos en una Subred Elástica
 sidebar_position: 0
 ---
 
-# How to Transform a Permissioned Subnet into an Elastic Subnet
+# Cómo Transformar una Subred con Permisos en una Subred Elástica
 
-Elastic Subnets are permissionless Subnets. More information can be found [here](/build/subnet/elastic/elastic-parameters.md).
+Las Subredes Elásticas son Subredes sin permisos. Puedes encontrar más información [aquí](/build/subnet/elastic/elastic-parameters.md).
 
-This how-to guide focuses on taking an already created permissioned Subnet and transforming it to an
-elastic (or permissionless) Subnet.
+Esta guía de cómo hacer se centra en tomar una Subred con permisos ya creada y transformarla en una
+Subred elástica (o sin permisos).
 
-## Prerequisites
+## Requisitos previos
 
-- [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
-- You have deployed a permissioned Subnet on [local](/build/subnet/deploy/local-subnet.md), on 
-[Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) or on [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+- [Avalanche-CLI instalado](/tooling/cli-guides/install-avalanche-cli.md)
+- Has desplegado una Subred con permisos en [local](/build/subnet/deploy/local-subnet.md), en
+[Fuji](/build/subnet/deploy/fuji-testnet-subnet.md) o en [Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 
-## Getting Started
+## Empezando
 
-In the following commands, make sure to substitute the name of your Subnet configuration for
+En los siguientes comandos, asegúrate de sustituir el nombre de tu configuración de Subred por
 `<subnetName>`.
 
-To transform your permissioned Subnet into an Elastic Subnet (NOTE: this action is irreversible), run
+Para transformar tu Subred con permisos en una Subred Elástica (NOTA: esta acción es irreversible), ejecuta
 
 `avalanche subnet elastic <subnetName>`
 
-and select the network that you want to transform the Subnet on. Alternatively, you can bypass this 
-prompt by providing the `--local`, `--fuji`, or `--mainnet` flag. 
+y selecciona la red en la que quieres transformar la Subred. Alternativamente, puedes omitir esta
+solicitud proporcionando la bandera `--local`, `--fuji` o `--mainnet`.
 
-Provide the name and the symbol for the permissionless Subnet's native token. You can also bypass 
-this prompt by providing the `--tokenName` and `--tokenSymbol` flags.
+Proporciona el nombre y el símbolo del token nativo de la Subred sin permisos. También puedes omitir
+esta solicitud proporcionando las banderas `--tokenName` y `--tokenSymbol`.
 
-Next, select the Elastic Subnet config. You can choose to use the default values detailed 
-[here](/build/subnet/elastic/elastic-parameters.md#primary-network-parameters-on-mainnet)
-or customize the Elastic Subnet config. To bypass the prompt, you can use `--default` flag to use 
-the default Elastic Subnet config.
+A continuación, selecciona la configuración de la Subred Elástica. Puedes elegir usar los valores predeterminados detallados
+[aquí](/build/subnet/elastic/elastic-parameters.md#primary-network-parameters-on-mainnet)
+o personalizar la configuración de la Subred Elástica. Para omitir la solicitud, puedes usar la bandera `--default` para usar
+la configuración predeterminada de la Subred Elástica.
 
-The command may take a couple minutes to run.
+El comando puede tardar unos minutos en ejecutarse.
 
-### Elastic Subnet Transformation on Fuji and Mainnet
+### Transformación de la Subred Elástica en Fuji y Mainnet
 
-Elastic Subnet transformation on public network requires private key loaded into the tool, or a 
-connected ledger device.
+La transformación de la Subred Elástica en una red pública requiere que la clave privada esté cargada en la herramienta, o un
+dispositivo ledger conectado.
 
-Both stored key usage and ledger usage are enabled on Fuji (see more on creating keys 
-[here](/build/subnet/deploy/fuji-testnet-subnet.md#private-key)) 
-while only ledger usage is enabled on Mainnet (see more on setting up your ledger 
-[here](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)).
+Tanto el uso de claves almacenadas como el uso de ledger están habilitados en Fuji (más información sobre la creación de claves
+[aquí](/build/subnet/deploy/fuji-testnet-subnet.md#private-key))
+mientras que sólo el uso de ledger está habilitado en Mainnet (más información sobre la configuración de tu ledger
+[aquí](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)).
 
-To transform a permissioned Subnet into Elastic Subnet on public networks, users are required to 
-provide the keys that control the Subnet defined during the Subnet deployment process (more info on 
-keys in Fuji can be found 
-[here](/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
-while more info on ledger signing in Mainnet can be found 
-[here](/build/subnet/deploy/mainnet-subnet.md#deploy-the-subnet)). 
+Para transformar una Subred con permisos en una Subred Elástica en redes públicas, los usuarios deben
+proporcionar las claves que controlan la Subred definida durante el proceso de despliegue de la Subred (más información sobre las claves en Fuji se puede encontrar
+[aquí](/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
+mientras que más información sobre la firma de ledger en Mainnet se puede encontrar
+[aquí](/build/subnet/deploy/mainnet-subnet.md#deploy-the-subnet)).
 
-### Results
+### Resultados
 
-If all works as expected, you then have the option to automatically transform all existing 
-permissioned validators to permissionless validators. 
+Si todo funciona como se espera, entonces tienes la opción de transformar automáticamente todos los validadores con permisos existentes en validadores sin permisos.
 
-You can also to skip automatic transformation at this point and choose to manually add 
-permissionless validators later.
+También puedes omitir la transformación automática en este punto y elegir añadir manualmente validadores sin permisos más tarde.
 
-You can use the output details such as the Asset ID and Elastic Subnet ID to connect to and 
-interact with your Elastic Subnet.
+Puedes usar los detalles de salida como el ID del activo y el ID de la Subred Elástica para conectarte e interactuar con tu Subred Elástica.
 
-## Adding Permissionless Validators to Elastic Subnet
+## Añadir Validadores sin Permisos a la Subred Elástica
 
-If you are running this command on local network, you will need to first remove permissioned 
-validators (by running `avalanche subnet removeValidator <subnetName>`) so that you can have a list 
-of local nodes to choose from to be added as a permissionless validator in the Elastic Subnet.
+Si estás ejecutando este comando en una red local, primero tendrás que eliminar los validadores con permisos (ejecutando `avalanche subnet removeValidator <subnetName>`) para que puedas tener una lista de nodos locales para elegir a cuál añadir como validador sin permisos en la Subred Elástica.
 
-To add permissionless validators to an Elastic Subnet, run
+Para añadir validadores sin permisos a una Subred Elástica, ejecuta
 
 `avalanche subnet join <subnetName> --elastic`
 
-You will be prompted with which node you would like to add as a permissionless validator. You can 
-skip this prompt by using `--nodeID` flag.
+Se te pedirá qué nodo te gustaría añadir como validador sin permisos. Puedes omitir esta solicitud usando la bandera `--nodeID`.
 
-You will then be prompted with the amount of the Subnet native token that you like to stake in the 
-validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. Note 
-that choosing to add the maximum validator stake amount (defined during Elastic Subnet 
-transformation step above) means that you effectively disable delegation in your validator.
+A continuación, se te pedirá la cantidad del token nativo de la Subred que te gustaría apostar en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. Ten en cuenta que elegir añadir la cantidad máxima de apuesta del validador (definida durante el paso de transformación de la Subred Elástica arriba) significa que efectivamente deshabilitas la delegación en tu validador.
 
-Next, select when the validator will start validating and how long it will be validating for. You 
-can also bypass these prompts by using `--start-time` and `--staking-period` flags.
+A continuación, selecciona cuándo el validador empezará a validar y cuánto tiempo estará validando. También puedes omitir estas solicitudes usando las banderas `--start-time` y `--staking-period`.
 
-## Adding Permissionless Delegator to a Permissionless Validator in Elastic Subnet
+## Añadir Delegador sin Permisos a un Validador sin Permisos en la Subred Elástica
 
-To add permissionless delegators, run
+Para añadir delegadores sin permisos, ejecuta
 
 `avalanche subnet addPermissionlessDelegator <subnetName>`
 
-You will be prompted with which Subnet validator you would like to delegate to. You can skip this 
-prompt by using `--nodeID` flag.
+Se te pedirá a qué validador de la Subred te gustaría delegar. Puedes omitir esta solicitud usando la bandera `--nodeID`.
 
-You will then be prompted with the amount of the Subnet native token that you like to stake in the 
-validator. Alternatively, you can bypass this prompt by providing the `--stake-amount` flag. The 
-amount that can be delegated to a validator is detailed 
-[here](/build/subnet/elastic/elastic-parameters.md#delegators-weight-checks).
+A continuación, se te pedirá la cantidad del token nativo de la Subred que te gustaría apostar en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. La cantidad que se puede delegar a un validador se detalla
+[aquí](/build/subnet/elastic/elastic-parameters.md#delegators-weight-checks).
 
-Next, select when you want to start delegating and how long you want to delegate for. You can also 
-bypass these prompts by using `--start-time` and `--staking-period` flags.
-
-
+A continuación, selecciona cuándo quieres empezar a delegar y cuánto tiempo quieres delegar. También puedes omitir estas solicitudes usando las banderas `--start-time` y `--staking-period`.
