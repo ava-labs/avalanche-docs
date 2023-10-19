@@ -1,32 +1,32 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra cómo implementar una Subred en un entorno de producción.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra cómo implementar una Subnet en un entorno de producción.
 sidebar_label: En Infraestructura de Producción
-pagination_label: Implementar Subredes en Infraestructura de Producción
+pagination_label: Implementar Subnets en Infraestructura de Producción
 sidebar_position: 3
 ---
 
-# Implementar Subredes en Infraestructura de Producción
+# Implementar Subnets en Infraestructura de Producción
 
 ## Introducción
 
-Después de arquitectar tu entorno de Subred en la [máquina local](/build/subnet/deploy/local-subnet.md),
+Después de arquitectar tu entorno de Subnet en la [máquina local](/build/subnet/deploy/local-subnet.md),
 demostrando el diseño y probándolo en [la Testnet Fuji](/build/subnet/deploy/fuji-testnet-subnet.md),
-eventualmente necesitarás implementar tu Subred en un entorno de producción. Ejecutar una Subred en producción es mucho más
-complicado que las implementaciones locales y en Testnet, ya que tu Subred tendrá que cuidar el uso del mundo real,
+eventualmente necesitarás implementar tu Subnet en un entorno de producción. Ejecutar una Subnet en producción es mucho más
+complicado que las implementaciones locales y en Testnet, ya que tu Subnet tendrá que cuidar el uso del mundo real,
 manteniendo el tiempo de actividad, las actualizaciones y todo eso en un entorno potencialmente adversarial. El propósito
 de este documento es señalar un conjunto de consideraciones generales y proponer soluciones potenciales a
 ellas.
 
-La arquitectura del entorno que tu Subred particular usará estará muy influenciada por
-el tipo de carga y actividad que tu Subred está diseñada para soportar, por lo que tu solución probablemente será
+La arquitectura del entorno que tu Subnet particular usará estará muy influenciada por
+el tipo de carga y actividad que tu Subnet está diseñada para soportar, por lo que tu solución probablemente será
 diferente a lo que proponemos aquí. Aún así, podría ser útil seguir adelante, para construir la
 intuición para el tipo de preguntas que necesitarás considerar.
 
 ## Configuración de Nodos
 
-Los nodos Avalanche son elementos esenciales para ejecutar tu Subred en producción. Como mínimo, tu
-Subred necesitará nodos validadores, potencialmente también nodos que actúen como servidores RPC, indexadores o
+Los nodos Avalanche son elementos esenciales para ejecutar tu Subnet en producción. Como mínimo, tu
+Subnet necesitará nodos validadores, potencialmente también nodos que actúen como servidores RPC, indexadores o
 exploradores. Ejecutar un nodo es básicamente ejecutar una instancia de [AvalancheGo](/nodes/README.md) en un
 servidor.
 
@@ -47,11 +47,11 @@ Para ejecutar AvalancheGo como un validador en la Red Primaria, la configuració
 - Red: Conexión de red confiable IPv4 o IPv6, con un puerto público abierto
 
 Esa es la configuración suficiente para ejecutar un nodo de Red Primaria. Cualquier requisito de recursos
-para tu Subred se suman a esto, por lo que no debes ir por debajo de esta configuración, pero es posible que necesites
-aumentar la especificación si esperas que tu Subred maneje una cantidad significativa de transacciones.
+para tu Subnet se suman a esto, por lo que no debes ir por debajo de esta configuración, pero es posible que necesites
+aumentar la especificación si esperas que tu Subnet maneje una cantidad significativa de transacciones.
 
 Asegúrate de configurar el monitoreo del consumo de recursos para tus nodos porque el agotamiento de recursos puede
-causar que tu nodo se ralentice o incluso se detenga, lo que puede afectar severamente tu Subred negativamente.
+causar que tu nodo se ralentice o incluso se detenga, lo que puede afectar severamente tu Subnet negativamente.
 
 ### Ubicación del Servidor
 
@@ -92,21 +92,21 @@ contra cortes de energía.
 
 ### Número de Validadores
 
-El número de validadores en una Subred es una decisión crucial que debes tomar. Por estabilidad y
+El número de validadores en una Subnet es una decisión crucial que debes tomar. Por estabilidad y
 descentralización, debes esforzarte por tener tantos validadores como sea posible.
 
-Por razones de estabilidad, nuestra recomendación es tener **al menos** 5 validadores completos en tu Subred.
-Si tienes menos de 5 validadores, la vida útil de tu Subred estará en riesgo cada vez que un solo validador
-se desconecte, y si tienes menos de 4, incluso un nodo desconectado detendrá tu Subred.
+Por razones de estabilidad, nuestra recomendación es tener **al menos** 5 validadores completos en tu Subnet.
+Si tienes menos de 5 validadores, la vida útil de tu Subnet estará en riesgo cada vez que un solo validador
+se desconecte, y si tienes menos de 4, incluso un nodo desconectado detendrá tu Subnet.
 
 Debes ser consciente de que 5 es el mínimo que recomendamos. Pero, desde un punto de vista de descentralización,
-tener más validadores siempre es mejor ya que aumenta la estabilidad de tu Subred y la hace
-más resistente tanto a fallas técnicas como a acciones adversariales. En resumen: ejecuta tantos validadores de Subred
+tener más validadores siempre es mejor ya que aumenta la estabilidad de tu Subnet y la hace
+más resistente tanto a fallas técnicas como a acciones adversariales. En resumen: ejecuta tantos validadores de Subnet
 como puedas.
 
 Teniendo en cuenta que a veces tendrás que sacar nodos de línea, para mantenimiento de rutina (al menos para
 actualizaciones de nodos que ocurren con cierta regularidad) o interrupciones y fallas no programadas, debes ser
-capaz de manejar rutinariamente al menos un nodo fuera de línea sin que el rendimiento de tu Subred se degrade.
+capaz de manejar rutinariamente al menos un nodo fuera de línea sin que el rendimiento de tu Subnet se degrade.
 
 ### Inicio de Nodos
 
@@ -121,7 +121,7 @@ Si los nodos que ejecutarás como validadores no necesitan tener todo el histori
 puedes usar [sincronización de estado](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). Con
 esta bandera habilitada, en lugar de reproducir toda la historia para llegar al estado actual, los nodos simplemente
 descargan solo el estado actual de otros pares de la red, acortando el proceso de inicio desde
-varios días a un par de horas. Si los nodos se utilizarán exclusivamente para validación de Subred, puedes
+varios días a un par de horas. Si los nodos se utilizarán exclusivamente para validación de Subnet, puedes
 usar la sincronización de estado sin ningún problema. Actualmente, la sincronización de estado solo está disponible para la C-Chain,
 pero dado que la mayor parte de las transacciones en la plataforma ocurren allí, aún tiene un impacto significativo
 en la velocidad de inicio.

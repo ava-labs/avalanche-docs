@@ -1,16 +1,16 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra cómo implementar una Subnet con permisos en la Mainnet de Avalanche.
 sidebar_label: En la Mainnet de Avalanche
-pagination_label: Implementar una Subred con permisos en Mainnet
+pagination_label: Implementar una Subnet con permisos en Mainnet
 sidebar_position: 2
 ---
 
-# Implementar una Subred con permisos en Mainnet
+# Implementar una Subnet con permisos en Mainnet
 
 :::warning
 
-Implementar una Subred en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
+Implementar una Subnet en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
 láser en seguridad. Este tutorial hace todo lo posible por señalar peligros comunes, pero puede haber
 otros riesgos no discutidos aquí.
 
@@ -21,16 +21,16 @@ implementación en producción.
 
 :::
 
-Después de gestionar con éxito una implementación de Subred en la `Fuji Testnet`, estás listo para
-implementar tu Subred en Mainnet. Si no lo has hecho, primero [implementa una Subred en
+Después de gestionar con éxito una implementación de Subnet en la `Fuji Testnet`, estás listo para
+implementar tu Subnet en Mainnet. Si no lo has hecho, primero [implementa una Subnet en
 Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 Este tutorial muestra cómo hacer lo siguiente en `Mainnet`.
 
-- Crear una Subred.
+- Crear una Subnet.
 - Implementar una máquina virtual basada en Subnet-EVM.
-- Unir un nodo a la Subred recién creada.
-- Agregar un nodo como validador a la Subred.
+- Unir un nodo a la Subnet recién creada.
+- Agregar un nodo como validador a la Subnet.
 
 :::note
 
@@ -44,13 +44,13 @@ tu propia ejecución de este tutorial.
 - 5+ nodos en ejecución y [totalmente arrancados](/nodes/README.md) en `Mainnet`
 - [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en cada nodo validador
 - Un dispositivo [Ledger](https://www.ledger.com/)
-- Has [creado una configuración de Subred](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-  y probado completamente una implementación de Subred en [Fuji Testnet
+- Has [creado una configuración de Subnet](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
+  y probado completamente una implementación de Subnet en [Fuji Testnet
   ](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
-Aunque solo se requiere estrictamente un validador para ejecutar una Subred, ejecutarla con menos de
+Aunque solo se requiere estrictamente un validador para ejecutar una Subnet, ejecutarla con menos de
 cinco validadores es extremadamente peligroso y garantiza un tiempo de inactividad de la red. Planea
 soportar al menos cinco validadores en tu red de producción.
 
@@ -100,7 +100,7 @@ Los dispositivos Ledger admiten la firma de TX para cualquier dirección dentro 
 generada automáticamente por el dispositivo.
 
 De forma predeterminada, Avalanche-CLI utiliza la primera dirección de la derivación, y esa dirección
-necesita fondos para emitir las TX para crear la Subred y agregar validadores.
+necesita fondos para emitir las TX para crear la Subnet y agregar validadores.
 
 Para obtener la primera dirección `Mainnet` de tu dispositivo Ledger, primero asegúrate de que esté
 conectado, desbloqueado y ejecutando la aplicación Avalanche. Luego ejecuta el comando `key list`:
@@ -119,7 +119,7 @@ avalanche key list --ledger 0 --mainnet
 
 El comando imprime la dirección de la P-Chain para `Mainnet`,
 `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, y su saldo. Debes financiar esta dirección con al
-menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subred cuesta 2 AVAX. Agregar
+menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subnet cuesta 2 AVAX. Agregar
 validadores cuesta 0.001 AVAX cada uno. Para más detalles, consulta [Tarifas](/reference/standards/guides/txn-fees)
 
 :::note
@@ -143,7 +143,7 @@ izquierdo de la billetera web. Consulta este
 [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet-between-x-and-c-chain)
 para obtener más instrucciones.
 
-## Implementar la Subred
+## Implementar la Subnet
 
 Con tu Ledger desbloqueado y ejecutando la aplicación Avalanche, ejecuta
 

@@ -1,14 +1,14 @@
 ---
-tags: [Construir, Subredes]
+tags: [Construir, Subnets]
 description: Pausar y reanudar de manera elegante una subred local mientras se preserva el estado.
 sidebar_label: Pausar y Reanudar
-pagination_label: Pausar y Reanudar Subredes Locales
+pagination_label: Pausar y Reanudar Subnets Locales
 sidebar_position: 1
 ---
 
-# Cómo Pausar y Reanudar Subredes Locales
+# Cómo Pausar y Reanudar Subnets Locales
 
-Si has desplegado una Subred localmente, puedes preservar y restaurar el estado de tus Subredes desplegadas.
+Si has desplegado una Subnet localmente, puedes preservar y restaurar el estado de tus Subnets desplegadas.
 
 ## Detener la Red Local
 
@@ -18,7 +18,7 @@ Para detener de manera elegante una red local en ejecución mientras se preserva
 avalanche network stop
 ```
 
-Cuando se reinicie, todas tus Subredes desplegadas se reanudarán desde donde quedaron.
+Cuando se reinicie, todas tus Subnets desplegadas se reanudarán desde donde quedaron.
 
 ```text
 > avalanche network stop
@@ -46,15 +46,15 @@ Red lista para usar. Puntos finales del nodo de red local:
 +-------+----------+------------------------------------------------------------------------------------+
 | NODO  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo5 | miSubred | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo5 | miSubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo1 | miSubred | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo1 | miSubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo2 | miSubred | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo2 | miSubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo3 | miSubred | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo3 | miSubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo4 | miSubred | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo4 | miSubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 ```
 

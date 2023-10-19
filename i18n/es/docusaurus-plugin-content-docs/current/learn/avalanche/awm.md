@@ -26,27 +26,27 @@ Los casos de uso para AWM pueden incluir, pero no se limitan a:
 - Transferencias de tokens entre subredes
 - Shardización de estado entre múltiples subredes
 
-## Elementos de la Comunicación entre Subredes
+## Elementos de la Comunicación entre Subnets
 
 La comunicación consta de los siguientes cuatro pasos:
 
 ![imagen que muestra los cuatro pasos de la comunicación entre subredes: Firma, agregación, entrega y verificación](/img/cross-subnet-communication.png)
 
-### Firma de Mensajes en la Subred de Origen
+### Firma de Mensajes en la Subnet de Origen
 
 AWM es un protocolo de mensajería de bajo nivel. Cualquier tipo de datos codificados en un arreglo de bytes puede incluirse en el mensaje enviado a otra subred. AWM utiliza el esquema de firma BLS, que permite a los destinatarios del mensaje verificar la autenticidad de estos mensajes. Por lo tanto, cada validador en la red Avalanche tiene un par de claves BLS, que consiste en una clave privada para firmar mensajes y una clave pública que otros pueden usar para verificar la firma.
 
-### Agregación de Firmas en la Subred de Origen
+### Agregación de Firmas en la Subnet de Origen
 
 Si el conjunto de validadores de una subred es muy grande, esto resultaría en que los validadores de la subred envíen muchas firmas entre ellos. Una de las características poderosas de BLS es la capacidad de agregar muchas firmas de diferentes firmantes en una sola firma múltiple. Por lo tanto, los validadores de una subred ahora pueden firmar individualmente un mensaje y estas firmas se agregan en una firma múltiple corta que se puede verificar rápidamente.
 
-### Entrega de Mensajes a la Subred de Destino
+### Entrega de Mensajes a la Subnet de Destino
 
 Los mensajes no pasan a través de un protocolo central o una entidad de confianza, y no hay registro de los mensajes enviados entre subredes en la red primaria. Esto evita un cuello de botella en la comunicación de subred a subred, y las subredes no públicas pueden comunicarse de forma privada.
 
 Depende de las subredes y sus usuarios determinar cómo quieren transportar los datos desde los validadores de la subred de origen a los validadores de la subred de destino y qué garantías quieren proporcionar para el transporte.
 
-### Verificación de Mensajes en la Subred de Destino
+### Verificación de Mensajes en la Subnet de Destino
 
 Cuando una subred quiere procesar el mensaje de otra subred, buscará tanto las Claves Públicas BLS como la participación de la subred de origen. La autenticidad del mensaje se puede verificar utilizando estas claves públicas y la firma.
 

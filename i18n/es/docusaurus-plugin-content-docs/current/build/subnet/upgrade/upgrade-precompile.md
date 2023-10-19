@@ -1,5 +1,5 @@
 ---
-tags: [Construir, Subredes]
+tags: [Construir, Subnets]
 description: Puedes personalizar las subredes basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
 sidebar_label: Configuración de precompilación de subredes
 pagination_label: Actualiza la configuración de precompilación de tu Subnet-EVM

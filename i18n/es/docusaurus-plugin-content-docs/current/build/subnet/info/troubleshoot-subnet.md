@@ -1,14 +1,14 @@
 ---
-tags: [Construir, Subredes]
-description: Una referencia para consejos para resolver problemas comunes al implementar Subredes en Avalanche.
+tags: [Construir, Subnets]
+description: Una referencia para consejos para resolver problemas comunes al implementar Subnets en Avalanche.
 sidebar_label: Solución de problemas
-pagination_label: Solución de problemas en implementaciones de Subredes
+pagination_label: Solución de problemas en implementaciones de Subnets
 sidebar_position: 2
 ---
 
-# Solución de problemas en implementaciones de Subredes
+# Solución de problemas en implementaciones de Subnets
 
-Si tienes problemas para implementar tu Subred, utiliza este documento para obtener consejos para resolver problemas comunes.
+Si tienes problemas para implementar tu Subnet, utiliza este documento para obtener consejos para resolver problemas comunes.
 
 ## Tiempo de implementación agotado
 

@@ -1,5 +1,5 @@
 ---
-tags: [Construir, Subredes]
+tags: [Construir, Subnets]
 description: Este tutorial demuestra el proceso de implementación de un puente entre cadenas EVM cruzadas. Construye bajo tu propio riesgo.
 sidebar_label: Agregar un puente cruzado entre cadenas
 pagination_label: Implementar un puente EVM cruzado entre cadenas
@@ -26,7 +26,7 @@ La versión envuelta de una moneda nativa es su representación ERC20 anclada. E
 facilita ciertos procesos como transacciones delegadas. Puedes obtener fácilmente tokens envueltos
 enviando la moneda nativa a la dirección del contrato de token envuelto.
 
-> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subred personalizada en la red Avalanche.
+> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subnet personalizada en la red Avalanche.
 
 Estaremos utilizando el repositorio del puente de **ChainSafe**, para configurar fácilmente un puente robusto y seguro.
 

@@ -1,7 +1,7 @@
 ---
-title: 🔺 Subredes de Avalanche
-tags: [Construir, Subredes]
-description: Subredes
+title: 🔺 Subnets de Avalanche
+tags: [Construir, Subnets]
+description: Subnets
 sidebar_label: 🔗 Enlaces rápidos
 pagination_label: Resumen de subredes
 ---
@@ -13,7 +13,7 @@ Las subredes de Avalanche son un subconjunto de validadores de la red primaria d
 | Introducción a las subredes                                      |                                                                                                                         |
 | :--------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
 | [**Empezando**](/build/subnet/getting-started.md)                | Planificar una implementación exitosa de una subred comienza determinando las necesidades de tu aplicación              |
-| [**¿C-Chain o Subred?**](/build/subnet/c-chain-vs-subnet.md)     | Ayuda a los desarrolladores a determinar el mejor lugar para lanzar su aplicación                                       |
+| [**¿C-Chain o Subnet?**](/build/subnet/c-chain-vs-subnet.md)     | Ayuda a los desarrolladores a determinar el mejor lugar para lanzar su aplicación                                       |
 | [**Construye tu primera subred**](/build/subnet/hello-subnet.md) | Cómo usar Avalanche-CLI para crear una subred, implementarla en una red local y conectarse a ella con la billetera Core |
 
 | Desplegar una subred                                                                  |     |
@@ -25,7 +25,7 @@ Las subredes de Avalanche son un subconjunto de validadores de la red primaria d
 | [**Con autorización de firma múltiple**](/build/subnet/deploy/multisig-auth.md)       |
 | [**Con una Máquina Virtual personalizada**](/build/subnet/deploy/custom-vm-subnet.md) |
 
-| Subredes elásticas                                                                                                     |     |
+| Subnets elásticas                                                                                                      |     |
 | :--------------------------------------------------------------------------------------------------------------------- | --- |
 | [**Transformar una subred permisionada en una subred elástica**](/build/subnet/elastic/transform-to-elastic-subnet.md) |
 | [**Parámetros de la subred elástica**](/build/subnet/elastic/elastic-parameters.md)                                    |
@@ -46,5 +46,5 @@ Las subredes de Avalanche son un subconjunto de validadores de la red primaria d
 | Más                                                                                       |     |
 | :---------------------------------------------------------------------------------------- | --- |
 | [**Comandos de subred Avalanche-CLI**](/tooling/avalanche-cli.md)                         |
-| [**Estudio de caso: Subred WAGMI**](build/subnet/info/wagmi.md)                           |
+| [**Estudio de caso: Subnet WAGMI**](build/subnet/info/wagmi.md)                           |
 | [**Solución de problemas de implementaciones**](build/subnet/info/troubleshoot-subnet.md) |

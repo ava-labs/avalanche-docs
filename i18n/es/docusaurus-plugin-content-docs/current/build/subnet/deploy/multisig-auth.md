@@ -1,14 +1,14 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra cómo implementar una Subnet con permisos en la Mainnet de Avalanche.
 sidebar_label: Con autorización multisig
-pagination_label: Implementar una Subred con autorización multisig
+pagination_label: Implementar una Subnet con autorización multisig
 sidebar_position: 4
 ---
 
-# Implementar una Subred con autorización multisig
+# Implementar una Subnet con autorización multisig
 
-Los creadores de Subredes pueden controlar operaciones críticas de la Subred con una multisig de N de M. Esta multisig debe configurarse en el momento de la implementación y no se puede editar posteriormente. Las multisigs están disponibles tanto en la Testnet Fuji como en la Mainnet.
+Los creadores de Subnets pueden controlar operaciones críticas de la Subnet con una multisig de N de M. Esta multisig debe configurarse en el momento de la implementación y no se puede editar posteriormente. Las multisigs están disponibles tanto en la Testnet Fuji como en la Mainnet.
 
 Para configurar tu multisig, necesitas conocer la dirección de la cadena P de cada titular de clave y cuál es tu umbral de firma.
 
@@ -21,18 +21,18 @@ Avalanche-CLI requiere Ledgers para implementaciones en Mainnet. Esta guía asum
 ## Requisitos previos
 
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) instalado
-- Familiaridad con el proceso de [Implementar una Subred en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
-  y [Implementar una Subred con permisos en Mainnet](/build/subnet/deploy/mainnet-subnet.md)
+- Familiaridad con el proceso de [Implementar una Subnet en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
+  y [Implementar una Subnet con permisos en Mainnet](/build/subnet/deploy/mainnet-subnet.md)
 - Múltiples dispositivos Ledger [configurados para Avalanche](/build/subnet/deploy/mainnet-subnet.md#setting-up-your-ledger)
-- Una configuración de Subred lista para implementar en la Testnet Fuji o en la Mainnet
+- Una configuración de Subnet lista para implementar en la Testnet Fuji o en la Mainnet
 
 ## Empezando
 
-Cuando emites las transacciones para crear la Subred, necesitas firmar las TXs con múltiples claves de la multisig.
+Cuando emites las transacciones para crear la Subnet, necesitas firmar las TXs con múltiples claves de la multisig.
 
 ### Especificar la red
 
-Inicia la implementación de la Subred con
+Inicia la implementación de la Subnet con
 
 ```bash
 avalanche subnet deploy testsubnet
@@ -65,9 +65,9 @@ Dirección de Ledger: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 A continuación, la CLI le pide al usuario que especifique las claves de control. Aquí es donde configuras tu multisig.
 
 ```text
-Configura qué direcciones pueden realizar cambios en la Subred.
+Configura qué direcciones pueden realizar cambios en la Subnet.
 Estas direcciones se conocen como tus claves de control. También vas a
-establecer cuántas claves de control se requieren para hacer un cambio en la Subred (el umbral).
+establecer cuántas claves de control se requieren para hacer un cambio en la Subnet (el umbral).
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
 ? ¿Cómo te gustaría establecer tus claves de control?:
   ▸ Usar dirección de Ledger
@@ -103,16 +103,16 @@ Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1g7nkguzg8yju8cq3nd
 ✔ Agregar
 Ingresa la dirección de la cadena P (Ejemplo: P-...): P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
 ✔ Hecho
-Tus claves de control de la Subred: [P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28 P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+Tus claves de control de la Subnet: [P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28 P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
 ```
 
 :::note
 
-Cuando implementas una Subred con Ledgers, debes incluir la dirección predeterminada del Ledger determinada en
+Cuando implementas una Subnet con Ledgers, debes incluir la dirección predeterminada del Ledger determinada en
 [Especificar la red](#especificar-la-red) para que la implementación tenga éxito. Puedes ver un error como
 
 ```text
-Error: la billetera no contiene claves de autorización de la Subred
+Error: la billetera no contiene claves de autorización de la Subnet
 estado de salida 1
 ```
 
@@ -125,7 +125,7 @@ de claves de control que agregaste en el paso anterior.
 
 ```text
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
-? Selecciona el número requerido de firmas de clave de control para hacer un cambio en la Subred:
+? Selecciona el número requerido de firmas de clave de control para hacer un cambio en la Subnet:
   ▸ 1
     2
     3
@@ -135,11 +135,11 @@ Usa las teclas de flecha para navegar: ↓ ↑ → ←
 
 ### Especificar las claves de control para firmar la TX de creación de la cadena
 
-Ahora necesitas que N de tus titulares de clave firmen la transacción de implementación de la Subred. Debes seleccionar qué
+Ahora necesitas que N de tus titulares de clave firmen la transacción de implementación de la Subnet. Debes seleccionar qué
 direcciones quieres que firmen la TX.
 
 ```text
-? Elige una clave de autorización de la Subred:
+? Elige una clave de autorización de la Subnet:
   ▸ P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
     P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
@@ -153,8 +153,8 @@ Una selección exitosa de la clave de control se ve así:
 ✔ 2
 ✔ P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-Tus claves de autorización de la Subred para la creación de la cadena: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af]
-*** Por favor, firma el hash de creación de la Subred en el dispositivo Ledger ***
+Tus claves de autorización de la Subnet para la creación de la cadena: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af]
+*** Por favor, firma el hash de creación de la Subnet en el dispositivo Ledger ***
 ```
 
 #### Errores potenciales
@@ -309,7 +309,7 @@ La CLI reconoce automáticamente la red de despliegue y envía la TX apropiadame
 +--------------------+-------------------------------------------------------------------------------------+
 | Nombre de la Cadena | testsubnet                                                                          |
 +--------------------+-------------------------------------------------------------------------------------+
-| ID de la Subred     | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew                                  |
+| ID de la Subnet     | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew                                  |
 +--------------------+-------------------------------------------------------------------------------------+
 | ID de la VM         | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                   |
 +--------------------+-------------------------------------------------------------------------------------+
@@ -321,7 +321,7 @@ La CLI reconoce automáticamente la red de despliegue y envía la TX apropiadame
 +--------------------+-------------------------------------------------------------------------------------+
 ```
 
-Tu Subred se desplegó exitosamente con una multisig.
+Tu Subnet se desplegó exitosamente con una multisig.
 
 ## Agregar Validadores Usando la Multisig
 
@@ -431,7 +431,7 @@ Comando de firma:
 
 ## Firmar y Confirmar la TX de Agregar Validador
 
-El proceso es muy similar a la firma de la TX de Despliegue de Subred. Hasta ahora, una dirección ha firmado la
+El proceso es muy similar a la firma de la TX de Despliegue de Subnet. Hasta ahora, una dirección ha firmado la
 TX, pero necesitas N firmas. Para obtener las firmas restantes, puedes conectar un Ledger diferente
 a la misma computadora en la que has estado trabajando. Alternativamente, puedes enviar el archivo
 `partialAddValidatorTx.txt` a otros usuarios para que lo firmen ellos mismos.

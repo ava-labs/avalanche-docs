@@ -1,16 +1,16 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
-sidebar_label: Construye tu primera Subred
-pagination_label: Construye tu primera Subred
+tags: [Construir, Subnets]
+description: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subnet, desplegarla en una red local y conectarte a ella con la billetera Core.
+sidebar_label: Construye tu primera Subnet
+pagination_label: Construye tu primera Subnet
 ---
 
-# Construye tu primera Subred
+# Construye tu primera Subnet
 
-Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred,
+Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subnet,
 desplegarla en una red local y conectarte a ella con la billetera Core.
 
-El primer paso para aprender el desarrollo de Subredes es aprender a usar [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
+El primer paso para aprender el desarrollo de Subnets es aprender a usar [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
 ## Instalación
 
@@ -37,21 +37,21 @@ Para agregarlo permanentemente a tu ruta, agrega un comando de exportación a tu
 
 Para obtener instrucciones de instalación más detalladas, consulta [Instalación de Avalanche-CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
-## Crea la configuración de tu Subred
+## Crea la configuración de tu Subnet
 
-Este tutorial te enseña cómo crear una Subred basada en la Máquina Virtual Ethereum (EVM). Para hacerlo,
-usas Subnet-EVM, la bifurcación de la EVM de Avalanche para Subredes. Soporta airdrops, tokens de tarifa personalizados,
+Este tutorial te enseña cómo crear una Subnet basada en la Máquina Virtual Ethereum (EVM). Para hacerlo,
+usas Subnet-EVM, la bifurcación de la EVM de Avalanche para Subnets. Soporta airdrops, tokens de tarifa personalizados,
 parámetros de gas configurables y precompilaciones estatales múltiples. Para obtener más información, echa un vistazo a
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm). El objetivo de tu primer comando es crear
-una configuración de Subred-EVM.
+una configuración de Subnet-EVM.
 
-La suite de comandos de Subred proporciona una colección de herramientas para desarrollar y desplegar Subredes.
+La suite de comandos de Subnet proporciona una colección de herramientas para desarrollar y desplegar Subnets.
 
-El Asistente de Creación de Subredes te guía a través del proceso de crear tu Subred. Para empezar,
-elige un nombre para tu Subred. Este tutorial usa `miSubred`, pero siéntete libre de sustituirlo
+El Asistente de Creación de Subnets te guía a través del proceso de crear tu Subnet. Para empezar,
+elige un nombre para tu Subnet. Este tutorial usa `miSubnet`, pero siéntete libre de sustituirlo
 por cualquier nombre que te guste. Una vez que hayas elegido tu nombre, ejecuta
 
-`avalanche subnet create miSubred`
+`avalanche subnet create miSubnet`
 
 Las siguientes secciones explican cada pregunta en el asistente.
 
@@ -59,19 +59,19 @@ Las siguientes secciones explican cada pregunta en el asistente.
 
 Selecciona `SubnetEVM`.
 
-### Ingresa el ChainID de tu Subred
+### Ingresa el ChainID de tu Subnet
 
 Elige un entero positivo para tu ChainID de estilo EVM.
 
 En entornos de producción, este ChainID necesita ser único y no compartido con ninguna otra cadena.
 Puedes visitar [chainlist](https://chainlist.org/) para verificar que tu selección sea única.
-Como esta es una Subred de desarrollo, siéntete libre de elegir cualquier número. Evita los
+Como esta es una Subnet de desarrollo, siéntete libre de elegir cualquier número. Evita los
 ChainIDs conocidos como 1 (Ethereum) o 43114 (Avalanche C-Chain) ya que pueden causar problemas con otras
 herramientas.
 
 ### Símbolo del Token
 
-Ingresa una cadena para nombrar el token nativo de tu Subred. El símbolo del token no necesariamente necesita ser único.
+Ingresa una cadena para nombrar el token nativo de tu Subnet. El símbolo del token no necesariamente necesita ser único.
 Ejemplos de símbolos de tokens son AVAX, JOE y BTC.
 
 ### Versión de Subnet-EVM
@@ -80,7 +80,7 @@ Selecciona `Usar la última versión`.
 
 ### Configuración de Tarifa de Gas
 
-Esta pregunta determina cómo establecer las tarifas de gas en tu Subred.
+Esta pregunta determina cómo establecer las tarifas de gas en tu Subnet.
 
 Selecciona `Bajo uso de disco / Baja capacidad 1.5 mil gas/s (configuración de C-Chain)`.
 
@@ -96,22 +96,22 @@ fondos a direcciones adicionales.
 
 ### Precompilaciones
 
-Las precompilaciones son la forma en que Avalanche personaliza el comportamiento de tu Subred. Son estrictamente una
+Las precompilaciones son la forma en que Avalanche personaliza el comportamiento de tu Subnet. Son estrictamente una
 característica avanzada, así que puedes seleccionar de forma segura `No` por ahora.
 
 ### Conclusión
 
-Si todo funcionó correctamente, el comando imprime `Configuración de Subred creada exitosamente`.
+Si todo funcionó correctamente, el comando imprime `Configuración de Subnet creada exitosamente`.
 
-Has creado exitosamente la configuración de tu primera Subred. Ahora es hora de desplegarla.
+Has creado exitosamente la configuración de tu primera Subnet. Ahora es hora de desplegarla.
 
-## Desplegando Subredes Localmente
+## Desplegando Subnets Localmente
 
-Para desplegar tu Subred, ejecuta
+Para desplegar tu Subnet, ejecuta
 
-`avalanche subnet deploy miSubred`
+`avalanche subnet deploy miSubnet`
 
-Asegúrate de sustituir el nombre de tu Subred si usaste uno diferente a `miSubred`.
+Asegúrate de sustituir el nombre de tu Subnet si usaste uno diferente a `miSubnet`.
 
 A continuación, selecciona `Red Local`.
 
@@ -119,7 +119,7 @@ Este comando inicia una red Avalanche de cinco nodos en tu máquina. Necesita de
 versiones de AvalancheGo y Subnet-EVM. El comando puede tardar unos minutos en ejecutarse.
 
 Nota: Si ejecutas `bash` en tu shell y estás ejecutando Avalanche-CLI en ARM64 en Mac,
-necesitarás Rosetta 2 para poder desplegar Subredes localmente. Puedes descargar Rosetta 2 usando
+necesitarás Rosetta 2 para poder desplegar Subnets localmente. Puedes descargar Rosetta 2 usando
 `softwareupdate --install-rosetta` .
 
 Si todo funciona como se espera, la salida del comando debería verse algo así:
@@ -127,9 +127,9 @@ Si todo funciona como se espera, la salida del comando debería verse algo así:
 <!-- markdownlint-disable MD013 -->
 
 ```text
-> avalanche subnet deploy miSubred
+> avalanche subnet deploy miSubnet
 ✔ Red Local
-Desplegando [miSubred] en Red Local
+Desplegando [miSubnet] en Red Local
 Instalando subnet-evm-v0.4.3...
 Instalación exitosa de subnet-evm-v0.4.3
 Controlador de backend iniciado, pid: 93928, salida en: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
@@ -144,15 +144,15 @@ Red lista para usar. Puntos finales de los nodos de la red local:
 +-------+----------+------------------------------------------------------------------------------------+
 | NODO  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo2 | miSubred | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo2 | miSubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo3 | miSubred | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo3 | miSubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo4 | miSubred | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo4 | miSubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo5 | miSubred | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo5 | miSubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| nodo1 | miSubred | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| nodo1 | miSubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 
 

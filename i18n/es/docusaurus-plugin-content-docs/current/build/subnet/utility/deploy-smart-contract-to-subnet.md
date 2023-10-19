@@ -1,34 +1,34 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra el proceso de implementar un contrato inteligente en una Subred basada en EVM.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra el proceso de implementar un contrato inteligente en una Subnet basada en EVM.
 sidebar_label: Implementar un Contrato Inteligente
-pagination_label: Implementar un Contrato Inteligente en tu Subred-EVM Usando Remix y Core
+pagination_label: Implementar un Contrato Inteligente en tu Subnet-EVM Usando Remix y Core
 sidebar_position: 0
 ---
 
-# Implementar un Contrato Inteligente en tu Subred-EVM Usando Remix y Core
+# Implementar un Contrato Inteligente en tu Subnet-EVM Usando Remix y Core
 
 ## Introducción
 
 Este tutorial asume que:
 
-- Se ha creado una Subred y blockchain EVM (/build/subnet/deploy/fuji-testnet-subnet.md)
-- Tu Nodo está validando actualmente tu Subred objetivo
-- Tu billetera tiene un saldo del Token Nativo de la Subred (Especificado bajo _alloc_ en tu
+- Se ha creado una Subnet y blockchain EVM (/build/subnet/deploy/fuji-testnet-subnet.md)
+- Tu Nodo está validando actualmente tu Subnet objetivo
+- Tu billetera tiene un saldo del Token Nativo de la Subnet (Especificado bajo _alloc_ en tu
   [Archivo Génesis](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 ## Paso 1: Configurar Core
 
-### **Configuraciones de la Subred EVM:** [(Tutorial de Core EVM)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
+### **Configuraciones de la Subnet EVM:** [(Tutorial de Core EVM)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
-- **`Nombre de Red`**: Subred-EVM Personalizada
+- **`Nombre de Red`**: Subnet-EVM Personalizada
 - **`Nueva URL RPC`**: <http://DirecciónIPNodo:9650/ext/bc/IDBlockchain/rpc> (Nota: el número de puerto debe
   coincidir con tu configuración local, que puede ser diferente de 9650.)
-- **`ChainID`**: ID de Cadena de la Subred-EVM
-- **`Símbolo`**: Símbolo del Token de la Subred-EVM
+- **`ChainID`**: ID de Cadena de la Subnet-EVM
+- **`Símbolo`**: Símbolo del Token de la Subnet-EVM
 - **`Explorador`**: N/A
 
-Deberías ver un saldo del Token Nativo de tu Subred en Core.
+Deberías ver un saldo del Token Nativo de tu Subnet en Core.
 
 <div style={{textAlign: 'center'}}>
 
@@ -101,7 +101,7 @@ con nosotros, ¡puedes unirte a nuestra comunidad en [Discord](https://chat.aval
 
 ## Otras Herramientas
 
-Puedes usar Subred-EVM de la misma manera que usas herramientas de C-Chain y EVM. Las únicas diferencias son `chainID` y
+Puedes usar Subnet-EVM de la misma manera que usas herramientas de C-Chain y EVM. Las únicas diferencias son `chainID` y
 la URL RPC. Por ejemplo, puedes implementar tus contratos con
 [guía de inicio rápido de hardhat](/build/dapp/smart-contracts/toolchains/hardhat.md)
 cambiando `url` y `chainId` en el `hardhat.config.ts`.

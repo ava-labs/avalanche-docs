@@ -1,78 +1,78 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subred, incluyendo qué tener en cuenta y las precauciones sugeridas.
+tags: [Construir, Subnets]
+description: Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subnet, incluyendo qué tener en cuenta y las precauciones sugeridas.
 sidebar_label: Consideraciones
-pagination_label: Consideraciones clave al actualizar una Subred
+pagination_label: Consideraciones clave al actualizar una Subnet
 sidebar_position: 0
 ---
 
-# Consideraciones clave al actualizar una Subred
+# Consideraciones clave al actualizar una Subnet
 
-En el curso de la operación de una Subred, inevitablemente necesitarás actualizar o cambiar alguna parte del
-stack de software que está ejecutando tu Subred. Como mínimo, tendrás que actualizar el
+En el curso de la operación de una Subnet, inevitablemente necesitarás actualizar o cambiar alguna parte del
+stack de software que está ejecutando tu Subnet. Como mínimo, tendrás que actualizar el
 cliente de nodo AvalancheGo. Lo mismo ocurre con el binario del plugin de VM que se utiliza para ejecutar la blockchain en
-tu Subred, que probablemente sea el [Subnet-EVM](https://github.com/ava-labs/subnet-evm), la
-implementación de la Subred de la máquina virtual Ethereum.
+tu Subnet, que probablemente sea el [Subnet-EVM](https://github.com/ava-labs/subnet-evm), la
+implementación de la Subnet de la máquina virtual Ethereum.
 
-Las actualizaciones de nodo y VM generalmente no cambian la forma en que funciona tu Subred, en cambio, mantienen tu
-Subred sincronizada con el resto de la red, aportando actualizaciones de seguridad, rendimiento y características.
+Las actualizaciones de nodo y VM generalmente no cambian la forma en que funciona tu Subnet, en cambio, mantienen tu
+Subnet sincronizada con el resto de la red, aportando actualizaciones de seguridad, rendimiento y características.
 La mayoría de las actualizaciones son opcionales, pero todas son recomendadas, y debes incluir las actualizaciones opcionales
-como parte de tu mantenimiento de rutina de la Subred. Algunas actualizaciones serán obligatorias, y se comunicarán claramente como tales
+como parte de tu mantenimiento de rutina de la Subnet. Algunas actualizaciones serán obligatorias, y se comunicarán claramente como tales
 con anticipación, debes prestar especial atención a esas.
 
 Además de las actualizaciones debido a nuevas versiones, es posible que también desees cambiar la configuración de la VM,
-para alterar la forma en que la Subred se ejecuta, para diversas necesidades comerciales u operativas. Estas actualizaciones son únicamente
+para alterar la forma en que la Subnet se ejecuta, para diversas necesidades comerciales u operativas. Estas actualizaciones son únicamente
 competencia de tu equipo, y tienes control total sobre el momento de su implementación. Cualquier cambio de este tipo
 representa una **actualización de red** y debe ser cuidadosamente planificado y ejecutado.
 
 :::warning
-Las actualizaciones de red cambian permanentemente las reglas de tu Subred.
+Las actualizaciones de red cambian permanentemente las reglas de tu Subnet.
 
-¡Errores de procedimiento o una actualización fallida pueden detener tu Subred o provocar pérdida de datos!
+¡Errores de procedimiento o una actualización fallida pueden detener tu Subnet o provocar pérdida de datos!
 
-Al realizar una actualización de Subred, cada validador en la Subred deberá realizar la
+Al realizar una actualización de Subnet, cada validador en la Subnet deberá realizar la
 misma actualización. Si estás coordinando una actualización de red, debes programar un aviso anticipado a
-cada validador de la Subred para que tengan tiempo de realizar la actualización antes de la activación. Asegúrate
+cada validador de la Subnet para que tengan tiempo de realizar la actualización antes de la activación. Asegúrate
 de tener una línea de comunicación directa con todos tus validadores.
 :::
 
-Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subred. Señalaremos cosas a tener en cuenta y precauciones que debes tener en cuenta.
+Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subnet. Señalaremos cosas a tener en cuenta y precauciones que debes tener en cuenta.
 
 ## Consideraciones generales de actualización
 
-Cuando operas una Subred, siempre debes tener en cuenta que las redes de Prueba de Participación como Avalanche
+Cuando operas una Subnet, siempre debes tener en cuenta que las redes de Prueba de Participación como Avalanche
 solo pueden progresar si hay una cantidad suficiente de nodos validadores conectados y procesando
-transacciones. Cada validador en una Subred se le asigna un cierto `peso`, que es un valor numérico
+transacciones. Cada validador en una Subnet se le asigna un cierto `peso`, que es un valor numérico
 que representa la importancia del nodo en las decisiones de consenso. En la Red Primaria, el peso es
-igual a la cantidad de AVAX apostados en el nodo. En las Subredes, el peso se asigna actualmente por los
-propietarios de la Subred cuando emiten la transacción [agregando un
-validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subred.
+igual a la cantidad de AVAX apostados en el nodo. En las Subnets, el peso se asigna actualmente por los
+propietarios de la Subnet cuando emiten la transacción [agregando un
+validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subnet.
 
-Las Subredes pueden operar normalmente solo si los validadores que representan el 80% o más del peso acumulativo del validador
-están conectados. Si la cantidad de stake conectado cae cerca o por debajo del 80%, el rendimiento de la Subred
-(tiempo de finalidad) sufrirá, y en última instancia la Subred se detendrá (dejará de procesar
+Las Subnets pueden operar normalmente solo si los validadores que representan el 80% o más del peso acumulativo del validador
+están conectados. Si la cantidad de stake conectado cae cerca o por debajo del 80%, el rendimiento de la Subnet
+(tiempo de finalidad) sufrirá, y en última instancia la Subnet se detendrá (dejará de procesar
 transacciones).
 
-Como operador de una Subred, debes asegurarte de que, hagas lo que hagas, al menos el 80% del peso acumulativo de los validadores esté conectado y funcionando en todo momento.
+Como operador de una Subnet, debes asegurarte de que, hagas lo que hagas, al menos el 80% del peso acumulativo de los validadores esté conectado y funcionando en todo momento.
 
 :::info
 
-Es obligatorio que el peso acumulativo de todos los validadores en la Subred sea al menos
+Es obligatorio que el peso acumulativo de todos los validadores en la Subnet sea al menos
 el valor de
 [`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#snow-sample-size-int) (valor predeterminado
-20). Por ejemplo, si solo hay un validador en la Subred, su peso debe ser al menos
+20). Por ejemplo, si solo hay un validador en la Subnet, su peso debe ser al menos
 `snow-sample-size`. Por lo tanto, al asignar peso a los nodos, siempre usa valores mayores que 20.
 Recuerda que el peso de un validador no se puede cambiar mientras está validando, así que asegúrate de usar un
 valor apropiado.
 :::
 
-## Actualización de nodos validadores de la Subred
+## Actualización de nodos validadores de la Subnet
 
 AvalancheGo, el cliente de nodo que ejecuta los validadores Avalanche, está en constante y rápido
 desarrollo. Nuevas versiones salen a menudo (aproximadamente cada dos semanas), trayendo capacidades adicionales,
 mejoras de rendimiento o correcciones de seguridad. Las actualizaciones suelen ser opcionales, pero de vez en cuando
 (mucho menos frecuentemente que las actualizaciones regulares) habrá una actualización que incluye una actualización de red obligatoria.
-Esas actualizaciones son **OBLIGATORIAS** para cada nodo que ejecuta la Subred. Cualquier nodo que
+Esas actualizaciones son **OBLIGATORIAS** para cada nodo que ejecuta la Subnet. Cualquier nodo que
 no realice la actualización antes de la marca de tiempo de activación dejará de funcionar inmediatamente cuando la
 actualización se active.
 
@@ -80,21 +80,21 @@ Por eso, tener una estrategia de actualización de nodos es absolutamente vital,
 último cliente AvalancheGo inmediatamente cuando esté disponible.
 
 Para una guía general sobre cómo actualizar AvalancheGo, echa un vistazo a [este
-tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). Al actualizar nodos de Subred y
+tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). Al actualizar nodos de Subnet y
 teniendo en cuenta la sección anterior, asegúrate de escalonar las actualizaciones de nodos y comenzar una nueva actualización
 solo una vez que el nodo anterior se haya actualizado correctamente. Usa la [API de Salud](/reference/avalanchego/health-api.md#healthhealth) para verificar que el valor `healthy` en la respuesta
-sea `true` en el nodo actualizado, y en otros validadores de la Subred verifica que
+sea `true` en el nodo actualizado, y en otros validadores de la Subnet verifica que
 [platform.getCurrentValidators()](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
 tenga `true` en el atributo `connected` para el `nodeID` del nodo actualizado. Una vez que se satisfacen esas dos condiciones,
-el nodo se confirma que está en línea y validando la Subred y puedes comenzar a actualizar
+el nodo se confirma que está en línea y validando la Subnet y puedes comenzar a actualizar
 otro nodo.
 
-Continúa el ciclo de actualización hasta que todos los nodos de la Subred estén actualizados.
+Continúa el ciclo de actualización hasta que todos los nodos de la Subnet estén actualizados.
 
-## Actualización de binarios de plugin de VM de la Subred
+## Actualización de binarios de plugin de VM de la Subnet
 
 Además del cliente AvalancheGo en sí, se lanzan nuevas versiones de los binarios de VM que ejecutan las
-blockchains en la Subred. En la mayoría de las Subredes, eso es el
+blockchains en la Subnet. En la mayoría de las Subnets, eso es el
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm), por lo que este tutorial pasará por los pasos para
 actualizar el binario `subnet-evm`. El proceso de actualización será similar para actualizar cualquier binario de plugin de VM.
 
@@ -124,7 +124,7 @@ es el binario del plugin. Ahora debes detener el nodo (si el nodo se está ejecu
 systemctl stop avalanchego`). Ahora debes colocar ese archivo en el directorio de plugins donde
 se encuentra el binario AvalancheGo. Si el nodo está instalado usando el script de instalación, la ruta será
 `~/avalanche-node/plugins`. En lugar del nombre de archivo `subnet-evm`, el binario de la VM debe tener el nombre
-del ID de VM de la cadena en la Subred. Por ejemplo, para la [Subred WAGMI](https://subnets-test.avax.network/wagmi) ese ID de VM es
+del ID de VM de la cadena en la Subnet. Por ejemplo, para la [Subnet WAGMI](https://subnets-test.avax.network/wagmi) ese ID de VM es
 `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. Entonces, el comando para
 
 :::advertencia

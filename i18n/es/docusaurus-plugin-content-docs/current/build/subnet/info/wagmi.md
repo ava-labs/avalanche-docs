@@ -1,22 +1,22 @@
 ---
-tags: [Construir, Subredes]
-description: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
-sidebar_label: "Estudio de caso: Subred WAGMI"
-pagination_label: "Subred WAGMI"
+tags: [Construir, Subnets]
+description: La Subnet WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
+sidebar_label: "Estudio de caso: Subnet WAGMI"
+pagination_label: "Subnet WAGMI"
 sidebar_position: 1
 ---
 
-# Subred WAGMI
+# Subnet WAGMI
 
-La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
+La Subnet WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual Ethereum (EVM). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
 
 ## Resumen
 
-Este es uno de los primeros casos de uso de las Subredes Avalanche como terreno de prueba para cambios en una VM de producción (Coreth). Muchos subestiman lo útil que es el aislamiento de las Subredes para realizar pruebas de VM complejas en una red viva (sin afectar la estabilidad de la red primaria).
+Este es uno de los primeros casos de uso de las Subnets Avalanche como terreno de prueba para cambios en una VM de producción (Coreth). Muchos subestiman lo útil que es el aislamiento de las Subnets para realizar pruebas de VM complejas en una red viva (sin afectar la estabilidad de la red primaria).
 
-Creamos un explorador básico de WAGMI [https://subnets-test.avax.network/wagmi](https://subnets-test.avax.network/wagmi) que muestra estadísticas de uso agregadas sobre la Subred.
+Creamos un explorador básico de WAGMI [https://subnets-test.avax.network/wagmi](https://subnets-test.avax.network/wagmi) que muestra estadísticas de uso agregadas sobre la Subnet.
 
-- ID de Subred: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
+- ID de Subnet: [28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY](https://explorer-xp.avax-test.network/subnet/28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY?tab=validators)
 - ID de Cadena: [2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt](https://testnet.avascan.info/blockchain/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt)
 
 ### Parámetros de la Red
@@ -49,17 +49,17 @@ Esto también se puede usar con otras billeteras, como MetaMask.
 
 ## Estudio de caso: Actualización de WAGMI
 
-Este estudio de caso utiliza la actualización de la Subred [WAGMI](https://subnets-test.avax.network/wagmi) para mostrar cómo se puede hacer una actualización de red en una Subred basada en EVM (Máquina Virtual Ethereum) de manera sencilla, y cómo la actualización resultante se puede utilizar para controlar dinámicamente la estructura de tarifas en la Subred.
+Este estudio de caso utiliza la actualización de la Subnet [WAGMI](https://subnets-test.avax.network/wagmi) para mostrar cómo se puede hacer una actualización de red en una Subnet basada en EVM (Máquina Virtual Ethereum) de manera sencilla, y cómo la actualización resultante se puede utilizar para controlar dinámicamente la estructura de tarifas en la Subnet.
 
 ### Introducción
 
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) tiene como objetivo proporcionar una caja de herramientas fácil de usar para personalizar la EVM para tu blockchain. Está diseñado para funcionar sin problemas para muchas Subredes sin necesidad de ninguna modificación. Pero, ¿qué sucede cuando quieres agregar una nueva característica actualizando las reglas de tu EVM?
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) tiene como objetivo proporcionar una caja de herramientas fácil de usar para personalizar la EVM para tu blockchain. Está diseñado para funcionar sin problemas para muchas Subnets sin necesidad de ninguna modificación. Pero, ¿qué sucede cuando quieres agregar una nueva característica actualizando las reglas de tu EVM?
 
 En lugar de codificar en duro el momento de las actualizaciones de red en el código del cliente como la mayoría de las cadenas EVM, que requieren implementaciones coordinadas de nuevo código, [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8) introduce la esperada característica de realizar actualizaciones de red utilizando solo unas pocas líneas de JSON en un archivo de configuración.
 
 ### Actualizaciones de Red: Habilitar/Deshabilitar Precompilaciones
 
-Una descripción detallada de cómo hacer esto se puede encontrar en el tutorial [Personalizar una Subred](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles). Aquí tienes un resumen:
+Una descripción detallada de cómo hacer esto se puede encontrar en el tutorial [Personalizar una Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles). Aquí tienes un resumen:
 
 - La actualización de red utiliza precompilaciones existentes en Subnet-EVM:
   - ContractDeployerAllowList, para restringir a los desplegadores de contratos inteligentes
@@ -74,7 +74,7 @@ Una descripción detallada de cómo hacer esto se puede encontrar en el tutorial
 Para preparar la actualización de red de WAGMI, el 15 de agosto de 2022, anunciamos en
 [Twitter](https://twitter.com/AaronBuchwald/status/1559249414102720512) y compartimos en otras redes sociales como Discord, la siguiente información:
 
-> Con Subnet-EVM v0.2.8 es hora de una nueva temporada de Subred: Edición de Actualización de Red.
+> Con Subnet-EVM v0.2.8 es hora de una nueva temporada de Subnet: Edición de Actualización de Red.
 >
 > Como en todo gran programa, estamos comenzando esta temporada con un episodio piloto: Actualización de Red WAGMI.
 >

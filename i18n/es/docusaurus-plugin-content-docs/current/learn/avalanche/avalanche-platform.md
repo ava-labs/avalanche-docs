@@ -29,7 +29,7 @@ Avalanche es una red heterogénea de blockchains. A diferencia de las redes homo
 todas las aplicaciones residen en la misma cadena, las redes heterogéneas permiten que se creen
 cadenas separadas para diferentes aplicaciones.
 
-La Red Primaria es una [Subred](subnets-overview.md) especial que ejecuta tres blockchains:
+La Red Primaria es una [Subnet](subnets-overview.md) especial que ejecuta tres blockchains:
 
 - La Cadena de Contratos [(C-Chain)](avalanche-platform.md#c-chain)
 - La Cadena de Plataforma [(P-Chain)](avalanche-platform.md#p-chain)
@@ -37,7 +37,7 @@ La Red Primaria es una [Subred](subnets-overview.md) especial que ejecuta tres b
 
 :::nota
 La [Mainnet de Avalanche](/learn/avalanche/mainnet.md) está compuesta por la Red Primaria
-y todas las Subredes desplegadas.
+y todas las Subnets desplegadas.
 :::
 
 Un nodo puede convertirse en un validador para la Red Primaria al apostar al menos **2,000 AVAX**.
@@ -59,9 +59,9 @@ La C-Chain es una instancia de la
 
 ### P-Chain
 
-La **P-Chain** es responsable de todas las operaciones a nivel de validador y Subred.
+La **P-Chain** es responsable de todas las operaciones a nivel de validador y Subnet.
 La [API de la P-Chain](/reference/avalanchego/p-chain/api.md) soporta la creación de nuevas
-blockchains y Subredes, la adición de validadores a Subredes, operaciones de apuesta y otras
+blockchains y Subnets, la adición de validadores a Subnets, operaciones de apuesta y otras
 operaciones a nivel de plataforma.
 
 La P-Chain es una instancia de la Máquina Virtual de Plataforma.

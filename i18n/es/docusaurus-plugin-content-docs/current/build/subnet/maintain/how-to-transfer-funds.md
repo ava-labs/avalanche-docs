@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Subredes, Avalanche-CLI]
-description: Si necesitas enviar fondos a tu clave de control de Subred o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
+tags: [Construir, Subnets, Avalanche-CLI]
+description: Si necesitas enviar fondos a tu clave de control de Subnet o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
 sidebar_label: Transferir Fondos de la Cadena P
 pagination_label: Cómo Usar Avalanche-CLI para Transferir Fondos de la Cadena P
 sidebar_position: 3
@@ -10,7 +10,7 @@ sidebar_position: 3
 
 Transferir fondos entre billeteras de la Cadena P se vuelve necesario en ciertas situaciones:
 
-1. Los fondos necesitan ser enviados a la clave de control de la Subred, que podría tener un saldo cero debido a pagos de tarifas. La clave de control de la Subred requiere financiamiento para asegurar un soporte adecuado para las operaciones de la Subred.
+1. Los fondos necesitan ser enviados a la clave de control de la Subnet, que podría tener un saldo cero debido a pagos de tarifas. La clave de control de la Subnet requiere financiamiento para asegurar un soporte adecuado para las operaciones de la Subnet.
 2. Los fondos necesitan ser movidos de un índice de dirección Ledger a otro. Un Ledger administra una secuencia infinita de direcciones, todas derivadas de una clave privada maestra y puede firmar por cualquiera de esas direcciones. Cada una se denomina por un índice, o la dirección asociada. Avalanche-CLI suele esperar usar el índice 0, pero a veces, los fondos están en un índice diferente. Ocasionalmente, una transferencia hecha a un ledger se puede hacer a una dirección diferente a la que usa por defecto la CLI.
 
 Para habilitar transferencias directas entre direcciones de la Cadena P, usa el comando `avalanche key transfer` de Avalanche-CLI. Esta operación implica una serie de acciones de importación/exportación con la Cadena P y la Cadena X. La tarifa por esta operación es cuatro veces la tarifa típica de operación de importación, lo que equivale a 0.004 AVAX. Puedes encontrar más información sobre las tarifas [aquí](/reference/standards/guides/txn-fees).

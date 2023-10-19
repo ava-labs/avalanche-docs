@@ -1,14 +1,14 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra el proceso de crear una Subred con una máquina virtual personalizada y desplegarla localmente.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra el proceso de crear una Subnet con una máquina virtual personalizada y desplegarla localmente.
 sidebar_label: Con una Máquina Virtual Personalizada
-pagination_label: Desplegar una Subred con Autorización Multifirma
+pagination_label: Desplegar una Subnet con Autorización Multifirma
 sidebar_position: 5
 ---
 
-# Crear una Subred con una Máquina Virtual Personalizada
+# Crear una Subnet con una Máquina Virtual Personalizada
 
-Este tutorial guía a través del proceso de crear una Subred con una máquina virtual personalizada y
+Este tutorial guía a través del proceso de crear una Subnet con una máquina virtual personalizada y
 desplegarla localmente.
 Aunque el tutorial utiliza un fork de Subnet-EVM como ejemplo, puedes extender sus lecciones para soportar
 cualquier binario de VM personalizado.
@@ -116,10 +116,10 @@ compatible con tu VM personalizada.
 
 Abre un editor de texto y copia el texto anterior en un archivo llamado `custom_genesis.json`.
 
-## Crear la Configuración de la Subred
+## Crear la Configuración de la Subnet
 
-Ahora que tienes tu binario, es hora de crear la configuración de la Subred. Este tutorial utiliza
-`myCustomSubnet` como nombre de la Subred. Invoca el Asistente de Creación de Subred con este comando:
+Ahora que tienes tu binario, es hora de crear la configuración de la Subnet. Este tutorial utiliza
+`myCustomSubnet` como nombre de la Subnet. Invoca el Asistente de Creación de Subnet con este comando:
 
 ```shell
 avalanche subnet create myCustomSubnet
@@ -155,17 +155,17 @@ creaste [anteriormente](#modificar-y-construir-subnet-evm).
 
 ### Finalizando
 
-Si todo funcionó correctamente, el comando imprime `Configuración de Subred creada exitosamente`.
+Si todo funcionó correctamente, el comando imprime `Configuración de Subnet creada exitosamente`.
 
 Ahora es hora de desplegarla.
 
-## Desplegar la Subred Localmente
+## Desplegar la Subnet Localmente
 
-Para desplegar tu Subred, ejecuta
+Para desplegar tu Subnet, ejecuta
 
 `avalanche subnet deploy myCustomSubnet`
 
-Asegúrate de sustituir el nombre de tu Subred si usaste uno diferente a `myCustomSubnet`.
+Asegúrate de sustituir el nombre de tu Subnet si usaste uno diferente a `myCustomSubnet`.
 
 A continuación, selecciona `Red Local`.
 
@@ -218,14 +218,14 @@ Detalles de conexión de la extensión del navegador (cualquier URL de nodo de a
 URL RPC:          http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc
 ```
 
-Puedes usar la `URL RPC` para conectarte e interactuar con tu Subred.
+Puedes usar la `URL RPC` para conectarte e interactuar con tu Subnet.
 
-## Interactúa con tu Subred
+## Interactúa con tu Subnet
 
 ### Verifica la Versión
 
-Puedes verificar que tu Subred se haya desplegado correctamente consultando al nodo local para ver qué
-Subredes está ejecutando. Necesitas usar el endpoint
+Puedes verificar que tu Subnet se haya desplegado correctamente consultando al nodo local para ver qué
+Subnets está ejecutando. Necesitas usar el endpoint
 [`getNodeVersion`](/reference/avalanchego/info-api.md#infogetnodeversion). Intenta ejecutar este
 comando curl:
 

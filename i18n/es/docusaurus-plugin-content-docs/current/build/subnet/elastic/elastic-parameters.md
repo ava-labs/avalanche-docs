@@ -1,32 +1,32 @@
 ---
-tags: [Construir, Subredes]
-description: Esta referencia describe los parámetros estructurales de una Subred Elástica (sin permisos) e ilustra las restricciones que deben cumplir.
+tags: [Construir, Subnets]
+description: Esta referencia describe los parámetros estructurales de una Subnet Elástica (sin permisos) e ilustra las restricciones que deben cumplir.
 sidebar_label: Parámetros
-pagination_label: Parámetros de las Subredes Elásticas
+pagination_label: Parámetros de las Subnets Elásticas
 sidebar_position: 1
 ---
 
-# Parámetros de las Subredes Elásticas
+# Parámetros de las Subnets Elásticas
 
-Las Subredes Permisionadas de Avalanche pueden convertirse en Subredes Elásticas a través de la transacción
+Las Subnets Permisionadas de Avalanche pueden convertirse en Subnets Elásticas a través de la transacción
 [`TransformSubnetTx`](/reference/standards/guides/banff-changes.md#transformsubnettx).
-`TransformSubnetTx` especifica un conjunto de parámetros estructurales para la Subred Elástica.
+`TransformSubnetTx` especifica un conjunto de parámetros estructurales para la Subnet Elástica.
 Esta referencia describe estos parámetros estructurales e
 ilustra las restricciones que deben cumplir.
 
-## Parámetros de la Subred Elástica
+## Parámetros de la Subnet Elástica
 
 ### `Subnet`
 
-`Subnet` tiene tipo `ids.ID` y es el ID de la Subred.
-`Subnet` es el ID de la transacción `CreateSubnetTx` que creó la Subred en primer lugar.
+`Subnet` tiene tipo `ids.ID` y es el ID de la Subnet.
+`Subnet` es el ID de la transacción `CreateSubnetTx` que creó la Subnet en primer lugar.
 Se aplican las siguientes restricciones:
 
 - `Subnet` debe ser diferente de `PrimaryNetworkID`.
 
 ### `AssetID`
 
-`AssetID` tiene tipo `ids.ID` y es el ID del activo a utilizar cuando se apuesta en la Subred.
+`AssetID` tiene tipo `ids.ID` y es el ID del activo a utilizar cuando se apuesta en la Subnet.
 Se aplican las siguientes restricciones:
 
 - `AssetID` no debe ser el `ID Vacío`.
@@ -35,7 +35,7 @@ Se aplican las siguientes restricciones:
 ### `InitialSupply`
 
 `InitialSupply` tiene tipo `uint64` y es la cantidad inicial de `AssetID`
-transferidos en la Subred Elástica al momento de su transformación. Dicha cantidad está
+transferidos en la Subnet Elástica al momento de su transformación. Dicha cantidad está
 disponible para distribuir recompensas de apuesta. Se aplican las siguientes restricciones:
 
 - `InitialSupply` debe ser mayor que cero.
@@ -43,11 +43,11 @@ disponible para distribuir recompensas de apuesta. Se aplican las siguientes res
 ### `MaximumSupply`
 
 `MaximumSupply` tiene tipo `uint64` y es la cantidad máxima de `AssetID` que
-la Subred tiene disponible para apuesta y recompensas en cualquier momento. Se aplican las siguientes restricciones:
+la Subnet tiene disponible para apuesta y recompensas en cualquier momento. Se aplican las siguientes restricciones:
 
 - `MaximumSupply` debe ser mayor o igual a `InitialSupply`.
 
-El suministro de una Subred puede variar con el tiempo, pero no debe ser mayor que el máximo configurado en ningún momento, incluida la creación de la Subred.
+El suministro de una Subnet puede variar con el tiempo, pero no debe ser mayor que el máximo configurado en ningún momento, incluida la creación de la Subnet.
 
 ### `MinConsumptionRate`
 
@@ -107,7 +107,7 @@ Se aplican las siguientes restricciones:
 - `MaxStakeDuration` debe ser menor o igual a `GlobalMaxStakeDuration`.
 
 `GlobalMaxStakeDuration` está definido en el génesis y se aplica tanto a la Red Primaria como a todas las
-Subredes.
+Subnets.
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
@@ -158,12 +158,12 @@ Ver la sección [Notas sobre Porcentajes](#notas-sobre-porcentajes) para entende
 
 ## Fórmula de Recompensa
 
-Considera un validador de una Subred Elástica que apuesta una cantidad de $Stake$ `AssetID` durante $StakingPeriod$ segundos.
+Considera un validador de una Subnet Elástica que apuesta una cantidad de $Stake$ `AssetID` durante $StakingPeriod$ segundos.
 
-Supongamos que al inicio del período de apuesta hay una cantidad de $Supply$ `AssetID` en la Subred.
-La cantidad máxima de activos de la Subred es $MaximumSupply$ `AssetID`.
+Supongamos que al inicio del período de apuesta hay una cantidad de $Supply$ `AssetID` en la Subnet.
+La cantidad máxima de activos de la Subnet es $MaximumSupply$ `AssetID`.
 
-Entonces, al final de su período de apuesta, un validador elástico y receptivo de la Subred
+Entonces, al final de su período de apuesta, un validador elástico y receptivo de la Subnet
 recibe una recompensa calculada de la siguiente manera:
 
 <!-- markdownlint-disable MD013 -->
@@ -254,7 +254,7 @@ $$
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
-donde $MaxValidatorWeightFactor$ y $MaxValidatorStake$ son los parámetros de la Subred Elástica descritos anteriormente.
+donde $MaxValidatorWeightFactor$ y $MaxValidatorStake$ son los parámetros de la Subnet Elástica descritos anteriormente.
 
 Un delegador no se agregará a un validador si la combinación de sus pesos y el peso de todos los otros delegadores del validador es mayor que $MaxWeight$. Ten en cuenta que esto debe ser cierto en cualquier momento.
 
@@ -279,7 +279,7 @@ Por ejemplo:
 
 ## Parámetros de la Red Primaria en Mainnet
 
-Una Subred Elástica es libre de elegir cualquier parámetro que afecte las recompensas, dentro de las restricciones especificadas anteriormente. A continuación, enumeramos los parámetros de la Red Primaria en Mainnet:
+Una Subnet Elástica es libre de elegir cualquier parámetro que afecte las recompensas, dentro de las restricciones especificadas anteriormente. A continuación, enumeramos los parámetros de la Red Primaria en Mainnet:
 
 - `AssetID = Avax`
 - `InitialSupply = 240_000_000 Avax`

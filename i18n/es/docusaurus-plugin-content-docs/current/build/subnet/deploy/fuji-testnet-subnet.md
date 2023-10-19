@@ -1,28 +1,28 @@
 ---
-tags: [Construir, Subredes]
-description: Este tutorial demuestra cómo implementar una Subred con permisos en la Testnet Fuji.
+tags: [Construir, Subnets]
+description: Este tutorial demuestra cómo implementar una Subnet con permisos en la Testnet Fuji.
 sidebar_label: En la Testnet Fuji
-pagination_label: Implementar una Subred con permisos en la Testnet Fuji
+pagination_label: Implementar una Subnet con permisos en la Testnet Fuji
 sidebar_position: 1
 ---
 
-# Implementar una Subred con permisos en la Testnet Fuji
+# Implementar una Subnet con permisos en la Testnet Fuji
 
 :::note
 
-Este documento describe cómo usar Avalanche-CLI para implementar una Subred en `Fuji`.
+Este documento describe cómo usar Avalanche-CLI para implementar una Subnet en `Fuji`.
 
 :::
 
-Después de probar una Subred en un equipo local siguiendo [este tutorial](/build/subnet/deploy/local-subnet.md),
+Después de probar una Subnet en un equipo local siguiendo [este tutorial](/build/subnet/deploy/local-subnet.md),
 el siguiente paso es probarlo en la Testnet `Fuji`.
 
 En este artículo, se muestra cómo hacer lo siguiente en la Testnet `Fuji`.
 
-- Crear una Subred.
+- Crear una Subnet.
 - Implementar una máquina virtual basada en Subnet-EVM.
-- Unir un nodo a la Subred recién creada.
-- Agregar un nodo como validador a la Subred.
+- Unir un nodo a la Subnet recién creada.
+- Agregar un nodo como validador a la Subnet.
 
 Todos los ID en este artículo son con fines ilustrativos. Pueden ser diferentes en su propia
 ejecución de este tutorial.
@@ -40,7 +40,7 @@ Avalanche puede ejecutar múltiples blockchains. Cada blockchain es una instanci
 un lenguaje orientado a objetos es una instancia de una clase.
 Es decir, la VM define el comportamiento de la blockchain.
 
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm) es la VM que define las Cadenas de Contratos de la Subred.
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm) es la VM que define las Cadenas de Contratos de la Subnet.
 Subnet-EVM es una versión simplificada de [Cadena C de Avalanche](https://github.com/ava-labs/coreth).
 
 Esta cadena implementa la Máquina Virtual Ethereum y admite contratos inteligentes en Solidity, así como

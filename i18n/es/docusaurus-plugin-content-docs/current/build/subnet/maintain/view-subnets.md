@@ -1,16 +1,16 @@
 ---
-tags: [Construir, Subredes]
-description: Puedes listar las Subredes que has creado con `avalanche subnet list`.
-sidebar_label: Ver Subredes
-pagination_label: Ver tus Subredes Creadas
+tags: [Construir, Subnets]
+description: Puedes listar las Subnets que has creado con `avalanche subnet list`.
+sidebar_label: Ver Subnets
+pagination_label: Ver tus Subnets Creadas
 sidebar_position: 0
 ---
 
-# Cómo Ver tus Subredes Creadas
+# Cómo Ver tus Subnets Creadas
 
-## Listar Configuraciones de Subredes
+## Listar Configuraciones de Subnets
 
-Puedes listar las Subredes que has creado con
+Puedes listar las Subnets que has creado con
 
 `avalanche subnet list`
 
@@ -25,7 +25,7 @@ Ejemplo:
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
-Para ver información detallada sobre tus Subredes desplegadas, agrega la bandera `--deployed`:
+Para ver información detallada sobre tus Subnets desplegadas, agrega la bandera `--deployed`:
 
 ```text
 > avalanche subnet list --deployed
@@ -38,11 +38,11 @@ Para ver información detallada sobre tus Subredes desplegadas, agrega la bander
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 ```
 
-## Describir Configuraciones de Subredes
+## Describir Configuraciones de Subnets
 
 Para ver los detalles de una configuración específica, ejecuta
 
-`avalanche subnet describe <nombreSubred>`
+`avalanche subnet describe <nombreSubnet>`
 
 Ejemplo:
 
@@ -58,7 +58,7 @@ Ejemplo:
 +----------------------------+----------------------------------------------------+
 |         PARÁMETRO          |                       VALOR                        |
 +----------------------------+----------------------------------------------------+
-| Nombre de la Subred        | firstsubnet                                        |
+| Nombre de la Subnet        | firstsubnet                                        |
 +----------------------------+----------------------------------------------------+
 | ID de la Cadena            | 12345                                              |
 +----------------------------+----------------------------------------------------+
