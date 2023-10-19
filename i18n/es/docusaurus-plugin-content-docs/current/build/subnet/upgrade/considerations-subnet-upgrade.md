@@ -1,153 +1,137 @@
 ---
-tags: [Build, Subnets]
-description: This tutorial will guide you through the process of doing various Subnet upgrades and changes including what to watch out for and suggested precautions.
-sidebar_label: Considerations
-pagination_label: Key Considerations When Upgrading a Subnet
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subred, incluyendo qué tener en cuenta y las precauciones sugeridas.
+sidebar_label: Consideraciones
+pagination_label: Consideraciones clave al actualizar una Subred
 sidebar_position: 0
 ---
 
-# Key Considerations When Upgrading a Subnet
+# Consideraciones clave al actualizar una Subred
 
-In the course of Subnet operation, you will inevitably need to upgrade or change some part of the
-software stack that is running your Subnet. If nothing else, you will have to upgrade the
-AvalancheGo node client. Same goes for the VM plugin binary that is used to run the blockchain on
-your Subnet, which is most likely the [Subnet-EVM](https://github.com/ava-labs/subnet-evm), the
-Subnet implementation of the Ethereum virtual machine.
+En el curso de la operación de una Subred, inevitablemente necesitarás actualizar o cambiar alguna parte del
+stack de software que está ejecutando tu Subred. Como mínimo, tendrás que actualizar el
+cliente de nodo AvalancheGo. Lo mismo ocurre con el binario del plugin de VM que se utiliza para ejecutar la blockchain en
+tu Subred, que probablemente sea el [Subnet-EVM](https://github.com/ava-labs/subnet-evm), la
+implementación de la Subred de la máquina virtual Ethereum.
 
-Node and VM upgrades usually don't change the way your Subnet functions, instead they keep your
-Subnet in sync with the rest of the network, bringing security, performance and feature upgrades.
-Most upgrades are optional, but all of them are recommended, and you should make optional upgrades
-part of your routine Subnet maintenance. Some upgrades will be mandatory, and those will be clearly
-communicated as such ahead of time, you need to pay special attention to those.
+Las actualizaciones de nodo y VM generalmente no cambian la forma en que funciona tu Subred, en cambio, mantienen tu
+Subred sincronizada con el resto de la red, aportando actualizaciones de seguridad, rendimiento y características.
+La mayoría de las actualizaciones son opcionales, pero todas son recomendadas, y debes incluir las actualizaciones opcionales
+como parte de tu mantenimiento de rutina de la Subred. Algunas actualizaciones serán obligatorias, y se comunicarán claramente como tales
+con anticipación, debes prestar especial atención a esas.
 
-Besides the upgrades due to new releases, you also may want to change the configuration of the VM,
-to alter the way Subnet runs, for various business or operational needs. These upgrades are solely
-the purview of your team, and you have complete control over the timing of their roll out. Any such
-change represents a **network upgrade** and needs to be carefully planned and executed.
+Además de las actualizaciones debido a nuevas versiones, es posible que también desees cambiar la configuración de la VM,
+para alterar la forma en que la Subred se ejecuta, para diversas necesidades comerciales u operativas. Estas actualizaciones son únicamente
+competencia de tu equipo, y tienes control total sobre el momento de su implementación. Cualquier cambio de este tipo
+representa una **actualización de red** y debe ser cuidadosamente planificado y ejecutado.
 
-:::warning 
-Network Upgrades Permanently Change the Rules of Your Subnet.
+:::warning
+Las actualizaciones de red cambian permanentemente las reglas de tu Subred.
 
-Procedural mistakes or a botched upgrade can halt your Subnet or lead to data loss!
+¡Errores de procedimiento o una actualización fallida pueden detener tu Subred o provocar pérdida de datos!
 
-When performing a Subnet upgrade, every single validator on the Subnet will need to perform the
-identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to
-every Subnet validator so that they have time to perform the upgrade prior to activation. Make sure
-you have direct line of communication to all your validators! 
+Al realizar una actualización de Subred, cada validador en la Subred deberá realizar la
+misma actualización. Si estás coordinando una actualización de red, debes programar un aviso anticipado a
+cada validador de la Subred para que tengan tiempo de realizar la actualización antes de la activación. Asegúrate
+de tener una línea de comunicación directa con todos tus validadores.
 :::
 
-This tutorial will guide you through the process of doing various Subnet upgrades and changes. We
-will point out things to watch out for and precautions you need to be mindful about.
+Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subred. Señalaremos cosas a tener en cuenta y precauciones que debes tener en cuenta.
 
-## General Upgrade Considerations
+## Consideraciones generales de actualización
 
-When operating a Subnet, you should always keep in mind that Proof of Stake networks like Avalanche
-can only make progress if sufficient amount of validating nodes are connected and processing
-transactions. Each validator on a Subnet is assigned a certain `weight`, which is a numerical value
-representing the significance of the node in consensus decisions. On the Primary Network, weight is
-equal to the amount of AVAX staked on the node. On Subnets, weight is currently assigned by the
-Subnet owners when they issue the transaction [adding a
-validator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) to the Subnet.
+Cuando operas una Subred, siempre debes tener en cuenta que las redes de Prueba de Participación como Avalanche
+solo pueden progresar si hay una cantidad suficiente de nodos validadores conectados y procesando
+transacciones. Cada validador en una Subred se le asigna un cierto `peso`, que es un valor numérico
+que representa la importancia del nodo en las decisiones de consenso. En la Red Primaria, el peso es
+igual a la cantidad de AVAX apostados en el nodo. En las Subredes, el peso se asigna actualmente por los
+propietarios de la Subred cuando emiten la transacción [agregando un
+validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subred.
 
-Subnets can operate normally only if validators representing 80% or more of the cumulative validator
-weight is connected. If the amount of connected stake falls close to or below 80%, Subnet
-performance (time to finality) will suffer, and ultimately the Subnet will halt (stop processing
-transactions).
+Las Subredes pueden operar normalmente solo si los validadores que representan el 80% o más del peso acumulativo del validador
+están conectados. Si la cantidad de stake conectado cae cerca o por debajo del 80%, el rendimiento de la Subred
+(tiempo de finalidad) sufrirá, y en última instancia la Subred se detendrá (dejará de procesar
+transacciones).
 
-You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators'
-cumulative weight is connected and working at all times.
+Como operador de una Subred, debes asegurarte de que, hagas lo que hagas, al menos el 80% del peso acumulativo de los validadores esté conectado y funcionando en todo momento.
 
-:::info 
+:::info
 
-It is mandatory that the cumulative weight of all validators in the Subnet must be at least
-the value of
-[`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#snow-sample-size-int) (default
-20). For example, if there is only one validator in the Subnet, its weight must be at least
-`snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20.
-Recall that a validator's weight can't be changed while it is validating, so take care to use an
-appropriate value. 
-
+Es obligatorio que el peso acumulativo de todos los validadores en la Subred sea al menos
+el valor de
+[`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#snow-sample-size-int) (valor predeterminado
+20). Por ejemplo, si solo hay un validador en la Subred, su peso debe ser al menos
+`snow-sample-size`. Por lo tanto, al asignar peso a los nodos, siempre usa valores mayores que 20.
+Recuerda que el peso de un validador no se puede cambiar mientras está validando, así que asegúrate de usar un
+valor apropiado.
 :::
 
-## Upgrading Subnet Validator Nodes
+## Actualización de nodos validadores de la Subred
 
-AvalancheGo, the node client that is running the Avalanche validators is under constant and rapid
-development. New versions come out often (roughly every two weeks), bringing added capabilities,
-performance improvements or security fixes. Updates are usually optional, but from time to time
-(much less frequently than regular updates) there will be an update that includes a mandatory
-network upgrade. Those upgrades are **MANDATORY** for every node running the Subnet. Any node that
-does not perform the update before the activation timestamp will immediately stop working when the
-upgrade activates.
+AvalancheGo, el cliente de nodo que ejecuta los validadores Avalanche, está en constante y rápido
+desarrollo. Nuevas versiones salen a menudo (aproximadamente cada dos semanas), trayendo capacidades adicionales,
+mejoras de rendimiento o correcciones de seguridad. Las actualizaciones suelen ser opcionales, pero de vez en cuando
+(mucho menos frecuentemente que las actualizaciones regulares) habrá una actualización que incluye una actualización de red obligatoria.
+Esas actualizaciones son **OBLIGATORIAS** para cada nodo que ejecuta la Subred. Cualquier nodo que
+no realice la actualización antes de la marca de tiempo de activación dejará de funcionar inmediatamente cuando la
+actualización se active.
 
-That's why having a node upgrade strategy is absolutely vital, and you should always update to the
-latest AvalancheGo client immediately when it is made available.
+Por eso, tener una estrategia de actualización de nodos es absolutamente vital, y siempre debes actualizar al
+último cliente AvalancheGo inmediatamente cuando esté disponible.
 
-For a general guide on upgrading AvalancheGo check out [this
-tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
-keeping in mind the previous section, make sure to stagger node upgrades and start a new upgrade
-only once the previous node has successfully upgraded. Use the [Health
-API](/reference/avalanchego/health-api.md#healthhealth) to check that `healthy` value in the response
-is `true` on the upgraded node, and on other Subnet validators check that
+Para una guía general sobre cómo actualizar AvalancheGo, echa un vistazo a [este
+tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). Al actualizar nodos de Subred y
+teniendo en cuenta la sección anterior, asegúrate de escalonar las actualizaciones de nodos y comenzar una nueva actualización
+solo una vez que el nodo anterior se haya actualizado correctamente. Usa la [API de Salud](/reference/avalanchego/health-api.md#healthhealth) para verificar que el valor `healthy` en la respuesta
+sea `true` en el nodo actualizado, y en otros validadores de la Subred verifica que
 [platform.getCurrentValidators()](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
-has `true` in `connected` attribute for the upgraded node's `nodeID`. Once those two conditions are
-satisfied, node is confirmed to be online and validating the Subnet and you can start upgrading
-another node.
+tenga `true` en el atributo `connected` para el `nodeID` del nodo actualizado. Una vez que se satisfacen esas dos condiciones,
+el nodo se confirma que está en línea y validando la Subred y puedes comenzar a actualizar
+otro nodo.
 
-Continue the upgrade cycle until all the Subnet nodes are upgraded.
+Continúa el ciclo de actualización hasta que todos los nodos de la Subred estén actualizados.
 
-## Upgrading Subnet VM Plugin Binaries
+## Actualización de binarios de plugin de VM de la Subred
 
-Besides the AvalancheGo client itself, new versions get released for the VM binaries that run the
-blockchains on the Subnet. On most Subnets, that is the
-[Subnet-EVM](https://github.com/ava-labs/subnet-evm), so this tutorial will go through the steps for
-updating the `subnet-evm` binary. The update process will be similar for updating any VM plugin
-binary.
+Además del cliente AvalancheGo en sí, se lanzan nuevas versiones de los binarios de VM que ejecutan las
+blockchains en la Subred. En la mayoría de las Subredes, eso es el
+[Subnet-EVM](https://github.com/ava-labs/subnet-evm), por lo que este tutorial pasará por los pasos para
+actualizar el binario `subnet-evm`. El proceso de actualización será similar para actualizar cualquier binario de plugin de VM.
 
-All the considerations for doing staggered node upgrades as discussed in previous section are valid
-for VM upgrades as well.
+Todas las consideraciones para hacer actualizaciones escalonadas de nodos, como se discutió en la sección anterior, son válidas
+también para las actualizaciones de VM.
 
-In the future, VM upgrades will be handled by the [Avalanche-CLI
-tool](https://github.com/ava-labs/avalanche-cli), but for now we need to do it manually.
+En el futuro, las actualizaciones de VM serán manejadas por la herramienta [Avalanche-CLI
+](https://github.com/ava-labs/avalanche-cli), pero por ahora debemos hacerlo manualmente.
 
-Go to the [releases page](https://github.com/ava-labs/subnet-evm/releases) of the Subnet-EVM
-repository. Locate the latest version, and copy link that corresponds to the OS and architecture of
-the machine the node is running on (`darwin` = Mac, `amd64` = Intel/AMD processor, `arm64` = Arm
-processor). Log into the machine where the node is running and download the archive, using `wget`
-and the link to the archive, like this:
+Ve a la [página de versiones](https://github.com/ava-labs/subnet-evm/releases) del repositorio de Subnet-EVM.
+Localiza la última versión y copia el enlace que corresponda al sistema operativo y la arquitectura de
+la máquina en la que se está ejecutando el nodo (`darwin` = Mac, `amd64` = procesador Intel/AMD, `arm64` = procesador Arm). Inicia sesión en la máquina donde se está ejecutando el nodo y descarga el archivo, usando `wget`
+y el enlace al archivo, así:
 
 ```bash
 wget https://github.com/ava-labs/subnet-evm/releases/download/v0.2.9/subnet-evm_0.2.9_linux_amd64.tar.gz
 ```
 
-This will download the archive to the machine. Unpack it like this (use the correct filename, of course):
+Esto descargará el archivo a la máquina. Descomprímelo así (usa el nombre de archivo correcto, por supuesto):
 
 ```bash
 tar xvf subnet-evm_0.2.9_linux_amd64.tar.gz
 ```
 
-This will unpack and place the contents of the archive in the current directory, file `subnet-evm`
-is the plugin binary. You need to stop the node now (if the node is running as a service, use `sudo
-systemctl stop avalanchego` command). You need to place that file into the plugins directory where
-the AvalancheGo binary is located. If the node is installed using the install script, the path will
-be `~/avalanche-node/plugins` Instead of the `subnet-evm` filename, VM binary needs to be named as
-the VM ID of the chain on the Subnet. For example, for the [WAGMI
-Subnet](https://subnets-test.avax.network/wagmi) that VM ID is
-`srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. So, the command to copy the new plugin binary
-would look like:
+Esto descomprimirá y colocará el contenido del archivo en el directorio actual, el archivo `subnet-evm`
+es el binario del plugin. Ahora debes detener el nodo (si el nodo se está ejecutando como un servicio, usa el comando `sudo
+systemctl stop avalanchego`). Ahora debes colocar ese archivo en el directorio de plugins donde
+se encuentra el binario AvalancheGo. Si el nodo está instalado usando el script de instalación, la ruta será
+`~/avalanche-node/plugins`. En lugar del nombre de archivo `subnet-evm`, el binario de la VM debe tener el nombre
+del ID de VM de la cadena en la Subred. Por ejemplo, para la [Subred WAGMI](https://subnets-test.avax.network/wagmi) ese ID de VM es
+`srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. Entonces, el comando para
 
-```bash
-cp subnet-evm ~/avalanche-node/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
-```
-
-:::warning
-Make sure you use the correct VM ID, otherwise, your VM will not get updated and your Subnet may halt.
+:::advertencia
+Asegúrate de usar el ID de VM correcto, de lo contrario, tu VM no se actualizará y tu Subnet puede detenerse.
 :::
 
-After you do that, you can start the node back up (if running as service do `sudo systemctl start
-avalanchego`). You can monitor the log output on the node to check that everything is OK, or you can
-use the
-[info.getNodeVersion()](https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeversion) API
-to check the versions. Example output would look like:
+Después de hacer eso, puedes volver a iniciar el nodo (si se está ejecutando como servicio, haz `sudo systemctl start avalanchego`). Puedes monitorear la salida del registro en el nodo para verificar que todo esté bien, o puedes usar la API [info.getNodeVersion()](https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeversion) para verificar las versiones. Un ejemplo de salida se vería así:
 
 ```json
 {
@@ -168,40 +152,23 @@ to check the versions. Example output would look like:
 }
 ```
 
-Note that entry next to the VM ID we upgraded correctly says `v0.2.9`. You have successfully
-upgraded the VM!
+Ten en cuenta que la entrada junto al ID de VM que actualizamos correctamente dice `v0.2.9`. ¡Has actualizado con éxito la VM!
 
-Refer to the previous section on how to make sure node is healthy and connected before moving on to
-upgrading the next Subnet validator.
+Consulta la sección anterior sobre cómo asegurarte de que el nodo esté saludable y conectado antes de pasar a actualizar el siguiente validador de la Subnet.
 
-If you don't get the expected result, you can stop the `AvalancheGo`, examine and follow closely
-step-by-step of the above. You are free to remove files under `~/avalanche-node/plugins`, however,
-you should keep in mind that removing files is to remove an existing VM binary. You must put the
-correct VM plugin in place before you restart AvalancheGo.
+Si no obtienes el resultado esperado, puedes detener `AvalancheGo`, examinar y seguir de cerca paso a paso lo anterior. Eres libre de eliminar archivos en `~/avalanche-node/plugins`, sin embargo, debes tener en cuenta que eliminar archivos es para eliminar una VM binaria existente. Debes colocar el plugin de VM correcto en su lugar antes de reiniciar AvalancheGo.
 
-## Network Upgrades
+## Actualizaciones de red
 
-Sometimes you need to do a network upgrade to change the configured rules in the genesis under which
-the Chain operates. In regular EVM, network upgrades are a pretty involved process that includes
-deploying the new EVM binary, coordinating the timed upgrade and deploying changes to the nodes. But
-since [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), we introduced
-the long awaited feature to perform network upgrades by just using a few lines of JSON. Upgrades can
-consist of enabling/disabling particular precompiles, or changing their parameters. Currently
-available precompiles allow you to:
+A veces necesitas hacer una actualización de red para cambiar las reglas configuradas en el génesis bajo las cuales opera la Cadena. En EVM regular, las actualizaciones de red son un proceso bastante complicado que incluye desplegar la nueva binaria de EVM, coordinar la actualización programada y desplegar cambios en los nodos. Pero desde [Subnet-EVM v0.2.8](https://github.com/ava-labs/subnet-evm/releases/tag/v0.2.8), hemos introducido la tan esperada característica de realizar actualizaciones de red usando solo unas pocas líneas de JSON. Las actualizaciones pueden consistir en habilitar/deshabilitar precompilaciones particulares o cambiar sus parámetros. Las precompilaciones disponibles actualmente te permiten:
 
-- Restrict Smart Contract Deployers
-- Restrict Who Can Submit Transactions
-- Mint Native Coins
-- Configure Dynamic Fees
+- Restringir los desplegadores de contratos inteligentes
+- Restringir quién puede enviar transacciones
+- Acuñar monedas nativas
+- Configurar tarifas dinámicas
 
-Please refer to [Customize a
-Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for 
-a detailed discussion
-of possible precompile upgrade parameters.
+Consulta [Personalizar una Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) para obtener una discusión detallada de los posibles parámetros de actualización de precompilación.
 
-## Summary
+## Resumen
 
-Vital part of Subnet maintenance is performing timely upgrades at all levels of the software stack
-running your Subnet. We hope this tutorial will give you enough information and context to allow you
-to do those upgrades with confidence and ease. If you have additional questions or any issues,
-please reach out to us on [Discord](https://chat.avalabs.org).
+Una parte vital del mantenimiento de una Subnet es realizar actualizaciones oportunas en todos los niveles de la pila de software que ejecuta tu Subnet. Esperamos que este tutorial te brinde suficiente información y contexto para que puedas realizar esas actualizaciones con confianza y facilidad. Si tienes preguntas adicionales o algún problema, no dudes en comunicarte con nosotros en [Discord](https://chat.avalabs.org).

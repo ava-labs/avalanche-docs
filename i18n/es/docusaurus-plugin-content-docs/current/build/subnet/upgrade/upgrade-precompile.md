@@ -1,422 +1,411 @@
 ---
-tags: [Build, Subnets]
-description: You can customize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
-sidebar_label: Subnet Precompile Config
-pagination_label: Upgrade Your Subnet-EVM Precompile Configuration 
+etiquetas: [Construir, Subredes]
+descripción: Puedes personalizar las subredes basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
+sidebar_label: Configuración de precompilación de subredes
+pagination_label: Actualiza la configuración de precompilación de tu Subnet-EVM
 sidebar_position: 3
 ---
 
-# How to Upgrade Your Subnet-EVM Precompile Configuration 
+# Cómo actualizar la configuración de precompilación de tu Subnet-EVM
 
-## Upgrading a Subnet
+## Actualizando una Subnet
 
-You can customize Subnet-EVM based Subnets after deployment by enabling and disabling precompiles.
-To do this, create a `upgrade.json` file and place it in the appropriate directory. 
+Puedes personalizar las subredes basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
+Para hacer esto, crea un archivo `upgrade.json` y colócalo en el directorio correspondiente.
 
-This document describes how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
+Este documento describe cómo realizar dichas actualizaciones de red. Es específico para las actualizaciones de Subnet-EVM.
 
 
-The document [Upgrade a Subnet](/build/subnet/upgrade/considerations-subnet-upgrade.md) 
-describes all the background information required regarding Subnet upgrades.
+El documento [Actualizar una Subnet](/build/subnet/upgrade/considerations-subnet-upgrade.md)
+describe toda la información de fondo requerida con respecto a las actualizaciones de Subnet.
 
 :::warning
 
-It's very important that you have read and understood the previously linked document. 
-Failing to do so can potentially grind your network to a halt.
-
+Es muy importante que hayas leído y comprendido el documento previamente enlazado.
+No hacerlo puede potencialmente paralizar tu red.
 
 :::
 
-This tutorial assumes that you have already 
-[installed](/tooling/cli-guides/install-avalanche-cli.md) Avalanche-CLI.
-It assumes you have already created and deployed a Subnet called `testSubnet`. 
+Este tutorial asume que ya has
+[instalado](/tooling/cli-guides/install-avalanche-cli.md) Avalanche-CLI.
+Asume que ya has creado e implementado una Subnet llamada `testSubnet`.
 
 
-## Generate the Upgrade File
+## Genera el archivo de actualización
 
-The 
-[Precompiles](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles)
-documentation describes what files the network upgrade requires, and where to place them.
+La documentación de
+[Precompilaciones](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles)
+describe qué archivos requiere la actualización de red y dónde colocarlos.
 
-To generate a valid `upgrade.json` file, run:
+Para generar un archivo `upgrade.json` válido, ejecuta:
 
 ```shell
 avalanche subnet upgrade generate testSubnet
 ```
 
-If you didn't create `testSubnet` yet, you would see this result:
+Si aún no has creado `testSubnet`, verás este resultado:
 
 ```shell
 avalanche subnet upgrade generate testSubnet
-The provided subnet name "testSubnet" does not exist
+El nombre de subred proporcionado "testSubnet" no existe
 ```
 
-Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. 
-If that's the case, please go ahead and 
-[create](/build/subnet/hello-subnet.md) the Subnet first.
+Nuevamente, no tiene sentido intentar el comando de actualización si la Subnet no existe.
+Si ese es el caso, por favor continúa y
+[crea](/build/subnet/hello-subnet.md) la Subnet primero.
 
-If the Subnet definition exists, the tool launches a wizard.
-It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
+Si la definición de la Subnet existe, la herramienta inicia un asistente.
+Puede parecer un poco redundante, pero primero ves algunas advertencias, para enfocar la atención en los peligros involucrados:
 
 ```shell
 avalanche subnet upgrade generate testSubnet       
-Performing a network upgrade requires coordinating the upgrade network-wide.
-A network upgrade changes the rule set used to process and verify blocks, such that any node that 
-upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become 
-out of sync with the rest of the network.
+Realizar una actualización de red requiere coordinar la actualización en toda la red.
+Una actualización de red cambia el conjunto de reglas utilizado para procesar y verificar bloques, de modo que cualquier nodo que
+se actualice incorrectamente o no se actualice a tiempo para que la actualización entre en efecto puede quedar
+fuera de sincronía con el resto de la red.
 
-Any mistakes in configuring network upgrades or coordinating them on validators may cause the 
-network to halt and recovering may be difficult.
-Please consult 
-https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles 
-for more information
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Press [Enter] to continue, or abort by choosing 'no': 
-  ▸ Yes
+Cualquier error en la configuración de las actualizaciones de red o en su coordinación en validadores puede hacer que la
+red se detenga y la recuperación pueda ser difícil.
+Por favor, consulta
+https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles
+para obtener más información
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? Presiona [Enter] para continuar, o aborta eligiendo 'no': 
+  ▸ Sí
     No
 ```
 
-Go ahead and select `Yes` if you understand everything and you agree.
+Continúa y selecciona `Sí` si entiendes todo y estás de acuerdo.
 
-You see a last note, before the actual configuration wizard starts:
+Ves una última nota, antes de que comience el asistente de configuración real:
 
 ```shell
-Avalanchego and this tool support configuring multiple precompiles. 
-However, we suggest to only configure one per upgrade.
+Avalanchego y esta herramienta admiten configurar múltiples precompilaciones.
+Sin embargo, sugerimos configurar solo una por actualización.
 
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Select the precompile to configure: 
-  ▸ Contract Deployment Allow List
-    Manage Fee Settings
-    Native Minting
-    Transaction Allow List
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? Selecciona la precompilación a configurar: 
+  ▸ Lista de permitidos de despliegue de contratos
+    Configurar ajustes de tarifa
+    Acuñación nativa
+    Lista de permitidos de transacciones
 ```
 
-Refer to [Precompiles](/build/subnet/upgrade/customize-a-subnet.md#precompiles) 
-for a description of available precompiles and how to configure them. 
+Consulta [Precompilaciones](/build/subnet/upgrade/customize-a-subnet.md#precompiles)
+para obtener una descripción de las precompilaciones disponibles y cómo configurarlas.
 
-Make sure you understand precompiles thoroughly and how to configure them before 
-attempting to continue.
+Asegúrate de entender completamente las precompilaciones y cómo configurarlas antes de
+intentar continuar.
 
-For every precompile in the list, the wizard guides you to provide correct information 
-by prompting relevant questions.
-For the sake of this tutorial, select `Transaction Allow List`. 
-The document 
-[Restricting Who Can Submit 
-Transactions](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions) 
-describes what this precompile is about.
+Para cada precompilación en la lista, el asistente te guía para proporcionar información correcta
+mediante preguntas relevantes.
+Para este tutorial, selecciona `Lista de permitidos de transacciones`.
+El documento
+[Restringir quién puede enviar
+transacciones](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
+describe de qué se trata esta precompilación.
 
 ```shell
-✔ Transaction Allow List 
-Set parameters for the "Manage Fee Settings" precompile
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? When should the precompile be activated?: 
-  ▸ In 5 minutes
-    In 1 day
-    In 1 week
-    In 2 weeks
-    Custom
+✔ Lista de permitidos de transacciones
+Establece parámetros para la precompilación "Configurar ajustes de tarifa"
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Cuándo se debe activar la precompilación?: 
+  ▸ En 5 minutos
+    En 1 día
+    En 1 semana
+    En 2 semanas
+    Personalizado
 ```
 
-This is actually common to all precompiles: they require an 
-activation timestamp.
-If you think about it, it makes sense: you want a synchronized activation of your precompile.
-So think for a moment about when you want to set the activation timestamp to.
-You can select one of the suggested times in the future, or you can pick a custom one.
-After picking `Custom`, it shows the following prompt:
+Esto es en realidad común a todas las precompilaciones: requieren una marca de tiempo de activación.
+Si lo piensas, tiene sentido: quieres una activación sincronizada de tu precompilación.
+Así que piensa por un momento en cuándo quieres establecer la marca de tiempo de activación.
+Puedes seleccionar uno de los tiempos sugeridos en el futuro, o puedes elegir uno personalizado.
+Después de seleccionar `Personalizado`, muestra el siguiente mensaje:
 
 ```shell
-✔ Custom
-✗ Enter the block activation UTC datetime in 'YYYY-MM-DD HH:MM:SS' format: 
+✔ Personalizado
+✗ Ingresa la fecha y hora de activación del bloque en formato UTC 'YYYY-MM-DD HH:MM:SS': 
 ```
 
-The format is `YYYY-MM-DD HH:MM:SS`, therefore `2023-03-31 14:00:00` would be a valid timestamp.
-Notice that the timestamp is in UTC. 
-Please make sure you have converted the time from your timezone to UTC.
-Also notice the `✗` at the beginning of the line. The CLI tool does input validation, so if you 
-provide a valid timestamp, the `x` disappears:
+El formato es `YYYY-MM-DD HH:MM:SS`, por lo tanto, `2023-03-31 14:00:00` sería una marca de tiempo válida.
+Observa que la marca de tiempo está en UTC.
+Asegúrate de haber convertido la hora de tu zona horaria a UTC.
+También observa el `✗` al principio de la línea. La herramienta CLI realiza validación de entrada, por lo que si
+proporcionas una marca de tiempo válida, la `x` desaparece:
 
 ```shell
-✔ Enter the block activation UTC datetime in 'YYYY-MM-DD HH:MM:SS' format: 2023-03-31 14:00:00
+✔ Ingresa la fecha y hora de activación del bloque en formato UTC 'YYYY-MM-DD HH:MM:SS': 2023-03-31 14:00:00
 ```
 
-The timestamp must be in the **future**, so make sure you use such a 
-timestamp should you be running this tutorial after `2023-03-31 14:00:00` ;-) .
+La marca de tiempo debe estar en el **futuro**, así que asegúrate de usar una marca de tiempo así
+si estás realizando este tutorial después de `2023-03-31 14:00:00` ;-) .
 
-After you provided the valid timestamp, proceed with the precompile specific configurations:
+Después de proporcionar la marca de tiempo válida, continúa con las configuraciones específicas de la precompilación:
 
 ```shell
-The chosen block activation time is 2023-03-31 14:00:00
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Add 'adminAddresses'?: 
-  ▸ Yes
+La hora de activación del bloque elegida es 2023-03-31 14:00:00
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Agregar 'adminAddresses'?: 
+  ▸ Sí
     No
 ```
 
-This will enable the addresses added in this section to add other admins and/or 
-add enabled addresses for transaction issuance.
-The addresses provided in this tutorial are fake.
+Esto permitirá que las direcciones agregadas en esta sección agreguen otros administradores y/o
+agreguen direcciones habilitadas para emisión de transacciones.
+Las direcciones proporcionadas en este tutorial son falsas.
 
 :::caution
 
-However, make sure you or someone you trust have full control over the addresses.
-Otherwise, you might bring your Subnet to a halt.
+Sin embargo, asegúrate de que tú o alguien en quien confíes tenga control total sobre las direcciones.
+De lo contrario, podrías detener tu Subnet.
 
 :::
 
 ```shell
-✔ Yes
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Provide 'adminAddresses': 
-  ▸ Add
-    Delete
-    Preview
-    More Info
-↓   Done
+✔ Sí
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? Proporciona 'adminAddresses': 
+  ▸ Agregar
+    Eliminar
+    Vista previa
+    Más información
+↓   Hecho
 ```
 
-The prompting runs with a pattern used throughout the tool: 
+La solicitud se ejecuta con un patrón utilizado en toda la herramienta:
 
-* Select an operation:
-  * `Add`: adds a new address to the current list
-  * `Delete`: removes an address from the current list
-  * `Preview`: prints the current list 
-* `More info` prints additional information for better guidance, if available
-* Select `Done` when you completed the list
+* Selecciona una operación:
+  * `Agregar`: agrega una nueva dirección a la lista actual
+  * `Eliminar`: elimina una dirección de la lista actual
+  * `Vista previa`: imprime la lista actual
+* `Más información` imprime información adicional para una mejor orientación, si está disponible
+* Selecciona `Hecho` cuando hayas completado la lista
 
-Go ahead and add your first address:
+Continúa y agrega tu primera dirección:
 
 ```shell
-✔ Add
-✔ Add an address: 0xaaaabbbbccccddddeeeeffff1111222233334444
+✔ Agregar
+✔ Agrega una dirección: 0xaaaabbbbccccddddeeeeffff1111222233334444
 ```
 
-Add another one:
+Agrega otra:
 
 ```shell
-✔ Add
-Add an address: 0xaaaabbbbccccddddeeeeffff1111222233334444
-✔ Add
-✔ Add an address: 0x1111222233334444aaaabbbbccccddddeeeeffff
+✔ Agregar
+Agrega una dirección: 0xaaaabbbbccccddddeeeeffff1111222233334444
+✔ Agregar
+✔ Agrega una dirección: 0x1111222233334444aaaabbbbccccddddeeeeffff
 ```
 
-Select `Preview` this time to confirm the list is correct:
+Selecciona `Vista previa` esta vez para confirmar que la lista es correcta:
 
 ```shell
-✔ Preview
+✔ Vista previa
 0. 0xaaaAbbBBCccCDDddEeEEFFfF1111222233334444
 1. 0x1111222233334444aAaAbbBBCCCCDdDDeEeEffff
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Provide 'adminAddresses': 
-  ▸ Add
-    Delete
-    Preview
-    More Info
-↓   Done
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? Proporciona 'adminAddresses': 
+  ▸ Agregar
+    Eliminar
+    Vista previa
+    Más información
+↓   Hecho
 ```
 
-If it looks good, select `Done` to continue:
+Si se ve bien, selecciona `Hecho` para continuar:
 
 ```shell
-✔ Done
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Add 'enabledAddresses'?: 
-  ▸ Yes
+✔ Hecho
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Agregar 'enabledAddresses'?: 
+  ▸ Sí
     No
 ```
 
-Add one such enabled address, these are addresses which can issue transactions:
+Agrega una de esas direcciones habilitadas, que son direcciones que pueden emitir transacciones:
 
 ```shell
-✔ Add
-✔ Add an address: 0x55554444333322221111eeeeaaaabbbbccccdddd█
+✔ Agregar
+✔ Agregar una dirección: 0x55554444333322221111eeeeaaaabbbbccccdddd█
 ```
 
-After you added this address, and selected `Done`, the tool asks if you want to 
-add another precompile:
+Después de agregar esta dirección y seleccionar `Hecho`, la herramienta pregunta si quieres agregar otro precompilado:
 
 ```shell
-✔ Done
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Should we configure another precompile?: 
+✔ Hecho
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Deberíamos configurar otro precompilado?: 
   ▸ No
-    Yes
+    Sí
 ```
 
-If you needed to add another one, you would select `Yes` here. The wizard would guide you
-through the other available precompiles, excluding already configured ones.
+Si necesitaras agregar otro, seleccionarías `Sí` aquí. El asistente te guiaría a través de los otros precompilados disponibles, excluyendo los que ya están configurados.
 
-To avoid making this tutorial too long, the assumption is you're done here.
-Select `No`, which ends the wizard.
+Para evitar que este tutorial sea demasiado largo, se asume que has terminado aquí. Selecciona `No`, lo que finaliza el asistente.
 
-This means you have successfully terminated the generation of the upgrade file,
-often called upgrade bytes. The tool stores them internally.
+Esto significa que has terminado con éxito la generación del archivo de actualización, a menudo llamado bytes de actualización. La herramienta los almacena internamente.
 
 :::warning
 
-You shouldn't move files around manually.
-Use the `export` and `import` commands to get access to the files.
+No debes mover los archivos manualmente. Usa los comandos `export` e `import` para acceder a los archivos.
 
 :::
 
-So at this point you can either:
+Entonces, en este punto puedes hacer una de las siguientes cosas:
 
-* Deploy your upgrade bytes locally
-* Export your upgrade bytes to a file, for installation on a validator running on another machine
-* Import a file into a different machine running Avalanche-CLI 
+* Desplegar tus bytes de actualización localmente
+* Exportar tus bytes de actualización a un archivo, para instalarlos en un validador que se ejecuta en otra máquina
+* Importar un archivo en una máquina diferente que ejecuta Avalanche-CLI
 
 
-## How To Upgrade a Local Network
+## Cómo Actualizar una Red Local
 
-The normal use case for this operation is that:
+El caso de uso normal para esta operación es que:
 
-* You already created a Subnet
-* You already deployed the Subnet locally
-* You already generated the upgrade file with the preceding command or imported into the tool
-* This tool already started the network
+* Ya has creado una Subnet
+* Ya has desplegado la Subnet localmente
+* Ya has generado el archivo de actualización con el comando anterior o lo has importado a la herramienta
+* Esta herramienta ya ha iniciado la red
 
-If the preceding requirements aren't met, the network upgrade command fails.
+Si no se cumplen los requisitos anteriores, el comando de actualización de red falla.
 
-Therefore, to apply your generated or imported upgrade configuration:
+Por lo tanto, para aplicar tu configuración de actualización generada o importada:
 
 ```shell
 avalanche subnet upgrade apply testSubnet
 ```
 
-A number of checks run. For example, if you created the Subnet but didn't deploy it locally:
+Se ejecutan una serie de comprobaciones. Por ejemplo, si creaste la Subnet pero no la desplegaste localmente:
 
 ```shell
 avalanche subnet upgrade apply testSubnet 
-Error: no deployment target available
-Usage:
-  avalanche subnet upgrade apply [subnetName] [flags]
+Error: no hay un objetivo de despliegue disponible
+Uso:
+  avalanche subnet upgrade apply [nombreSubnet] [flags]
 
-Flags:
-      --avalanchego-chain-config-dir string   avalanchego's chain config file directory (default "/home/fabio/.avalanchego/chains")
-      --config                                create upgrade config for future subnet deployments (same as generate)
-      --fuji fuji                             apply upgrade existing fuji deployment (alias for `testnet`)
-  -h, --help                                  help for apply
-      --local local                           apply upgrade existing local deployment
-      --mainnet mainnet                       apply upgrade existing mainnet deployment
-      --print                                 if true, print the manual config without prompting (for public networks only)
-      --testnet testnet                       apply upgrade existing testnet deployment (alias for `fuji`)
+Banderas:
+      --avalanchego-chain-config-dir string   directorio del archivo de configuración de la cadena de avalanchego (por defecto "/home/fabio/.avalanchego/chains")
+      --config                                crear configuración de actualización para despliegues futuros de la subnet (igual que generar)
+      --fuji fuji                             aplicar actualización a un despliegue fuji existente (alias de `testnet`)
+  -h, --help                                  ayuda para aplicar
+      --local local                           aplicar actualización a un despliegue local existente
+      --mainnet mainnet                       aplicar actualización a un despliegue mainnet existente
+      --print                                 si es verdadero, imprime la configuración manual sin solicitarla (solo para redes públicas)
+      --testnet testnet                       aplicar actualización a un despliegue testnet existente (alias de `fuji`)
 
-Global Flags:
-      --log-level string   log level for the application (default "ERROR")
+Banderas globales:
+      --log-level string   nivel de registro para la aplicación (por defecto "ERROR")
 ```
 
-Go ahead and [deploy](/build/subnet/deploy/local-subnet.md) 
-first your Subnet if that's your case.
+Adelante y [despliega](/build/subnet/deploy/local-subnet.md) 
+primero tu Subnet si ese es tu caso.
 
-If you already had deployed the Subnet instead, you see something like this:
+Si ya habías desplegado la Subnet en su lugar, verás algo como esto:
 
 ```shell
 avalanche subnet upgrade apply testSubnet     
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? What deployment would you like to upgrade: 
-  ▸ Existing local deployment
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Qué despliegue quieres actualizar: 
+  ▸ Despliegue local existente
 ```
 
-Select `Existing local deployment`. This installs the upgrade file on all nodes of your local 
-network running in the background.
+Selecciona `Despliegue local existente`. Esto instala el archivo de actualización en todos los nodos de tu red local que se ejecutan en segundo plano.
 
-Et voilà. This is the output shown if all went well:
+Et voilà. Este es el resultado que se muestra si todo salió bien:
 
 ```shell
-✔ Existing local deployment
+✔ Despliegue local existente
 .......
-Network restarted and ready to use. Upgrade bytes have been applied to running nodes at these endpoints.
-The next upgrade will go into effect 2023-03-31 09:00:00
+Red reiniciada y lista para usar. Los bytes de actualización se han aplicado a los nodos en ejecución en estos puntos finales.
+La próxima actualización entrará en efecto el 2023-03-31 09:00:00
 +-------+------------+-----------------------------------------------------------------------------------+
-| NODE  |     VM     |                                        URL                                        |
+| NODO  |     VM     |                                        URL                                        |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node1 | testSubnet | http://0.0.0.0:9650/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| nodo1 | testSubnet | http://0.0.0.0:9650/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node2 | testSubnet | http://0.0.0.0:9652/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| nodo2 | testSubnet | http://0.0.0.0:9652/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node3 | testSubnet | http://0.0.0.0:9654/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| nodo3 | testSubnet | http://0.0.0.0:9654/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node4 | testSubnet | http://0.0.0.0:9656/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| nodo4 | testSubnet | http://0.0.0.0:9656/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node5 | testSubnet | http://0.0.0.0:9658/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| nodo5 | testSubnet | http://0.0.0.0:9658/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
 ```
 
-There is only so much the tool can do here for you. 
-It installed the upgrade bytes *as-is* as you configured respectively provided them to the tool.
-You should verify yourself that the upgrades were actually installed correctly, 
-for example issuing some transactions - mind the timestamp!.
+Hay un límite de lo que la herramienta puede hacer aquí por ti. 
+Instaló los bytes de actualización *tal como están* como los configuraste o proporcionaste a la herramienta.
+Debes verificar por ti mismo que las actualizaciones se hayan instalado correctamente, 
+por ejemplo, emitiendo algunas transacciones - ¡ten en cuenta la marca de tiempo!.
 
 
-## Apply the Upgrade to a Public Node (Fuji or Mainnet)
+## Aplicar la Actualización a un Nodo Público (Fuji o Mainnet)
 
-For this scenario to work, you should also have deployed the Subnet 
-to the public network (Fuji or Mainnet) with this tool.
-Otherwise, the tool won't know the details of the Subnet, and won't be able to guide you.
+Para que este escenario funcione, también debes haber desplegado la Subnet 
+en la red pública (Fuji o Mainnet) con esta herramienta.
+De lo contrario, la herramienta no conocerá los detalles de la Subnet y no podrá guiarte.
 
-Assuming the Subnet has been already deployed to Fuji, when running the `apply` command, 
-the tool notices the deployment:
+Suponiendo que la Subnet ya ha sido desplegada en Fuji, al ejecutar el comando `apply`, 
+la herramienta detecta el despliegue:
 
 ```shell
 avalanche subnet upgrade apply testSubnet  
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? What deployment would you like to upgrade: 
-    Existing local deployment
+Usa las teclas de flecha para navegar: ↓ ↑ → ← 
+? ¿Qué despliegue quieres actualizar: 
+    Despliegue local existente
   ▸ Fuji
 ```
 
-If not, you would not find the `Fuji` entry here.
+Si no, no encontrarías la entrada `Fuji` aquí.
 
 :::important
 
-This scenario assumes that you are running the `fuji` validator on the same machine
-which is running Avalanche-CLI.
+Este escenario asume que estás ejecutando el validador `fuji` en la misma máquina
+que está ejecutando Avalanche-CLI.
 
 :::
 
-If this is the case, the tool tries to install the upgrade file at the expected destination.
-If you use default paths, it tries to install at `$HOME/.avalanchego/chains/`, creating the 
-chain id directory, 
-so that the file finally ends up at `$HOME/.avalanchego/chains/<chain-id>/upgrade.json`.
+Si este es el caso, la herramienta intenta instalar el archivo de actualización en el destino esperado.
+Si usas las rutas por defecto, intenta instalar en `$HOME/.avalanchego/chains/`, creando el directorio de la 
+identificación de la cadena, 
+para que el archivo finalmente termine en `$HOME/.avalanchego/chains/<id-de-cadena>/upgrade.json`.
 
-If you are *not* using default paths, you can configure the path by providing the 
-flag `--avalanchego-chain-config-dir` to the tool.
-For example:
+Si *no* estás utilizando rutas predeterminadas, puedes configurar la ruta proporcionando la bandera `--avalanchego-chain-config-dir` a la herramienta.
+Por ejemplo:
 
 ```shell
-avalanche subnet upgrade apply testSubnet --avalanchego-chain-config-dir /path/to/your/chains
+avalanche subnet upgrade apply testSubnet --avalanchego-chain-config-dir /ruta/hacia/tus/cadenas
 ```
 
-Make sure to identify correctly where your chain config dir is, or the node might fail to find it.
+Asegúrate de identificar correctamente dónde se encuentra tu directorio de configuración de cadenas, o el nodo podría no encontrarlo.
 
-If all is correct, the file gets installed:
+Si todo es correcto, el archivo se instala:
 
 ```shell
 avalanche subnet upgrade apply testSubnet
 ✔ Fuji
-The chain config dir avalanchego uses is set at /home/fabio/.avalanchego/chains
-Trying to install the upgrade files at the provided /home/fabio/.avalanchego/chains path
-Successfully installed upgrade file
+El directorio de configuración de cadenas que avalanchego utiliza está configurado en /home/fabio/.avalanchego/chains
+Intentando instalar los archivos de actualización en la ruta proporcionada /home/fabio/.avalanchego/chains
+Archivo de actualización instalado correctamente
 ```
 
+Sin embargo, si el nodo *no* se está ejecutando en la misma máquina donde estás ejecutando Avalanche-CLI, no tiene sentido ejecutar este comando para un nodo Fuji.
+En este caso, es posible que prefieras exportar el archivo e instalarlo en la ubicación correcta.
 
-If however the node is *not* running on this same machine where you are executing Avalanche-CLI, 
-there is no point in running this command for a Fuji node.
-In this case, you might rather export the file and install it at the right location.
-
-To see the instructions about how to go about this, add the `--print` flag:
+Para ver las instrucciones sobre cómo hacer esto, agrega la bandera `--print`:
 
 ```shell
 avalanche subnet upgrade apply testSubnet --print 
 ✔ Fuji
-To install the upgrade file on your validator:
+Para instalar el archivo de actualización en tu validador:
 
-1. Identify where your validator has the avalanchego chain config dir configured.
-   The default is at $HOME/.avalanchego/chains (/home/user/.avalanchego/chains on this machine).
-   If you are using a different chain config dir for your node, use that one.
-2. Create a directory with the blockchainID in the configured chain-config-dir (e.g. $HOME/.avalanchego/chains/ExDKhjXqiVg7s35p8YJ56CJpcw6nJgcGCCE7DbQ4oBknZ1qXi) if doesn't already exist.
-3. Create an `upgrade.json` file in the blockchain directory with the content of your upgrade file.
-   This is the content of your upgrade file as configured in this tool:
+1. Identifica dónde tiene configurado el directorio de configuración de cadenas el validador.
+   El valor predeterminado es $HOME/.avalanchego/chains (/home/user/.avalanchego/chains en esta máquina).
+   Si estás utilizando un directorio de configuración de cadenas diferente para tu nodo, utiliza ese.
+2. Crea un directorio con el blockchainID en el directorio de configuración de cadenas configurado (por ejemplo, $HOME/.avalanchego/chains/ExDKhjXqiVg7s35p8YJ56CJpcw6nJgcGCCE7DbQ4oBknZ1qXi) si aún no existe.
+3. Crea un archivo `upgrade.json` en el directorio del blockchain con el contenido de tu archivo de actualización.
+   Este es el contenido de tu archivo de actualización como se configura en esta herramienta:
 {
     "precompileUpgrades": [
         {
@@ -432,51 +421,48 @@ To install the upgrade file on your validator:
 }
 
    ******************************************************************************************************************
-   * Upgrades are tricky. The syntactic correctness of the upgrade file is important.                               *
-   * The sequence of upgrades must be strictly observed.                                                            *
-   * Make sure you understand https://docs.avax.network/nodes/configure/chain-config-flags.md#subnet-chain-configs  *
-   * before applying upgrades manually.                                                                             *
+   * Las actualizaciones son complicadas. La corrección sintáctica del archivo de actualización es importante.       *
+   * La secuencia de actualizaciones debe observarse estrictamente.                                                  *
+   * Asegúrate de entender https://docs.avax.network/nodes/configure/chain-config-flags.md#subnet-chain-configs     *
+   * antes de aplicar actualizaciones manualmente.                                                                   *
    ******************************************************************************************************************
 ```
 
-The instructions also show the content of your current upgrade file, so you can just 
-select that if you wish.
-Or actually export the file.
+Las instrucciones también muestran el contenido de tu archivo de actualización actual, por lo que puedes simplemente seleccionarlo si lo deseas.
+O incluso exportar el archivo.
 
-## Export the Upgrade File
+## Exportar el Archivo de Actualización
 
-If you have generated the upgrade file, you can export it:
+Si has generado el archivo de actualización, puedes exportarlo:
 
 ```shell
 avalanche subnet upgrade export testSubnet
-✔ Provide a path where we should export the file to: /tmp/testSubnet-upgrade.json
+✔ Proporciona una ruta donde debemos exportar el archivo: /tmp/testSubnet-upgrade.json
 ```
 
-Just provide a valid path to the prompt, and the tool exports the file there. 
+Simplemente proporciona una ruta válida cuando se te solicite, y la herramienta exportará el archivo allí.
 
 ```shell
 avalanche subnet upgrade export testSubnet 
-Provide a path where we should export the file to: /tmp/testSubnet-upgrade.json
-Writing the upgrade bytes file to "/tmp/testSubnet-upgrade.json"...
-File written successfully.
+Proporciona una ruta donde debemos exportar el archivo: /tmp/testSubnet-upgrade.json
+Escribiendo el archivo de bytes de actualización en "/tmp/testSubnet-upgrade.json"...
+Archivo escrito exitosamente.
 ```
 
-You can now take that file and copy it to validator nodes, see preceding instructions.
+Ahora puedes tomar ese archivo y copiarlo a los nodos validadores, consulta las instrucciones anteriores.
 
-## Import the Upgrade File
+## Importar el Archivo de Actualización
 
-You or someone else might have generated the file elsewhere, or on another machine.
-And now you want to install it on the validator machine, using Avalanche-CLI.
+Tú o alguien más podría haber generado el archivo en otro lugar, o en otra máquina.
+Y ahora quieres instalarlo en la máquina validadora, utilizando Avalanche-CLI.
 
-You can import the file:
+Puedes importar el archivo:
 
 ```shell
 avalanche subnet upgrade import testSubnet
-Provide the path to the upgrade file to import: /tmp/testSubnet-upgrade.json
+Proporciona la ruta al archivo de actualización para importar: /tmp/testSubnet-upgrade.json
 ```
 
-An existing file with the same path and filename would be overwritten.
+Un archivo existente con la misma ruta y nombre de archivo sería sobrescrito.
 
-After you have imported the file, you can `apply` it either to a local network or to 
-a locally running validator. Follow the instructions for the appropriate use case.
-
+Después de haber importado el archivo, puedes `aplicarlo` ya sea a una red local o a un validador en ejecución local. Sigue las instrucciones para el caso de uso apropiado.

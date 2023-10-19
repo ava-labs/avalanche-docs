@@ -1,43 +1,43 @@
 ---
-tags: [Build, Subnets]
-description: How to customize a Subnet by utilizing Genesis, Precompile, and Blockchain Configs.
-sidebar_label: Customize a Subnet 
-pagination_label: Customize your EVM-Powered Subnet
+etiquetas: [Construir, Subredes]
+descripción: Cómo personalizar una Subred utilizando Genesis, Precompilación y Configuraciones de Blockchain.
+sidebar_label: Personalizar una Subred
+pagination_label: Personaliza tu Subred impulsada por EVM
 sidebar_position: 1
 ---
 
-# Customize Your EVM-Powered Subnet
+# Personaliza tu Subred impulsada por EVM
 
-All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
+Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subred).
 
-A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a
-special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific
-configuration file. See [here](/nodes/configure/chain-config-flags.md) for detailed explanation.
+Una Subred puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
+configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
-A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
-customized by utilizing one or more of the following methods:
+Una blockchain creada por o bifurcada de [Subnet-EVM](https://github.com/ava-labs/subnet-evm) se puede
+personalizar utilizando uno o más de los siguientes métodos:
 
 - [Genesis](#genesis)
-- [Precompile](#precompiles)
-- [Upgrade Configs](#network-upgrades-enabledisable-precompiles)
-- [Chain Configs](#avalanchego-chain-configs)
+- [Precompilación](#precompilaciones)
+- [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilaciones)
+- [Configuraciones de cadena](#configuraciones-de-cadena-avalanchego)
 
-## Subnet Configs
+## Configuraciones de Subred
 
-A Subnet can customized by setting parameters for the following:
+Una Subred se puede personalizar configurando parámetros para lo siguiente:
 
-- [Validator-only communication to create a private Subnet](/nodes/configure/subnet-configs.md#validatoronly-bool)
-- [Consensus](/nodes/configure/subnet-configs.md#consensus-parameters)
-- [Gossip](/nodes/configure/subnet-configs.md#gossip-configs)
+- [Comunicación solo para validadores para crear una Subred privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Consenso](/nodes/configure/subnet-configs.md#parámetros-de-consenso)
+- [Gossip](/nodes/configure/subnet-configs.md#configuraciones-de-gossip)
 
-See [here](/nodes/configure/subnet-configs.md) for more info.
+Consulta [aquí](/nodes/configure/subnet-configs.md) para obtener más información.
 
 ## Genesis
 
-Each blockchain has some genesis state when it’s created. Each Virtual Machine defines the format and
-semantics of its genesis data.
+Cada blockchain tiene algún estado de genesis cuando se crea. Cada Máquina Virtual define el formato y
+la semántica de sus datos de genesis.
 
-The default genesis Subnet-EVM provided below has some well defined parameters:
+El genesis predeterminado proporcionado por Subnet-EVM a continuación tiene algunos parámetros bien definidos:
 
 ```json
 {
@@ -84,143 +84,139 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
 }
 ```
 
-### Chain Config
+### Configuración de Cadena
 
-`chainID`: Denotes the ChainID of to be created chain. Must be picked carefully since a conflict with
-other chains can cause issues. One suggestion is to check with [chainlist.org](https://chainlist.org/)
-to avoid ID collision, reserve and publish your ChainID properly.
+`chainID`: Denota el ID de Cadena de la cadena a crear. Debe elegirse cuidadosamente, ya que un conflicto con
+otras cadenas puede causar problemas. Una sugerencia es consultar [chainlist.org](https://chainlist.org/)
+para evitar colisiones de ID, reservar y publicar correctamente tu ID de Cadena.
 
-You can use `eth_getChainConfig` RPC call to get the current chain config. See
-[here](/reference/subnet-evm/api#ethgetchainconfig) for more info.
+Puedes usar la llamada RPC `eth_getChainConfig` para obtener la configuración de cadena actual. Consulta
+[aquí](/reference/subnet-evm/api#ethgetchainconfig) para obtener más información.
 
-#### Hard Forks
+#### Forks Duros
 
 `homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
-`petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` are hard fork activation
-times. Changing these may cause issues, so treat them carefully.
+`petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` son tiempos de activación de forks duros.
+Cambiar estos tiempos puede causar problemas, así que trátalos con cuidado.
 
-#### Fee Config
+#### Configuración de Tarifas
 
-`gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
-amount of computation that can be done in a single block, which in turn sets a limit on the 
-maximum gas usage allowed for a single transaction.
-For reference, C-Chain value is set to `15,000,000`.
+`gasLimit`: Establece la cantidad máxima de gas consumido por bloque. Esta restricción pone un límite en la
+cantidad de cómputo que se puede hacer en un solo bloque, lo que a su vez establece un límite en el
+uso máximo de gas permitido para una sola transacción.
+Para referencia, el valor de la C-Chain se establece en `15,000,000`.
 
-`targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
-indicates that more blocks than anticipated are being issued to the network, resulting in an 
-increase in base fees.
-For C-chain this value is set to `2`.
+`targetBlockRate`: Establece la tasa objetivo de producción de bloques en segundos. Un objetivo de 2 apuntará
+a producir un bloque cada 2 segundos. Si la red comienza a producir bloques a una velocidad más rápida,
+indica que se emiten más bloques de los previstos a la red, lo que resulta en un
+aumento en las tarifas base.
+Para la C-chain, este valor se establece en `2`.
 
-`minBaseFee`: Sets a lower bound on the EIP-1559 base fee of a block. Since the block's base fee sets
-the minimum gas price for any transaction included in that block, this effectively sets a minimum gas
-price for any transaction.
+`minBaseFee`: Establece un límite inferior en la tarifa base EIP-1559 de un bloque. Dado que la tarifa base del bloque establece
+el precio de gas mínimo para cualquier transacción incluida en ese bloque, esto efectivamente establece un gas mínimo
+precio para cualquier transacción.
 
-`targetGas`: Specifies the targeted amount of gas (including block gas cost) to consume within a
-rolling 10-seconds window. When the dynamic fee algorithm observes that network activity is
-above/below the `targetGas`, it increases/decreases the base fee proportionally to how far above/below
-the target actual network activity is. If the network starts producing blocks with gas cost higher than
-this, base fees are increased accordingly.
+`targetGas`: Especifica la cantidad objetivo de gas (incluido el costo de gas del bloque) para consumir dentro de un
+ventana rodante de 10 segundos. Cuando el algoritmo de tarifa dinámica observa que la actividad de la red es
+por encima/por debajo del `targetGas`, aumenta/disminuye la tarifa base proporcionalmente a qué tan lejos por encima/por debajo
+la actividad de red real está del objetivo. Si la red comienza a producir bloques con un costo de gas más alto que
+esto, las tarifas base se incrementan en consecuencia.
 
-`baseFeeChangeDenominator`: Divides the difference between actual and target utilization to determine
-how much to increase/decrease the base fee. A larger denominator indicates a slower changing, stickier
-base fee, while a lower denominator allows the base fee to adjust more quickly.
-For reference, the C-chain value is set to `36`. This value sets the
-base fee to increase or decrease by a factor of `1/36` of the parent block's
-base fee.
+`baseFeeChangeDenominator`: Divide la diferencia entre la utilización real y la objetivo para determinar
+cuánto aumentar/disminuir la tarifa base. Un denominador más grande indica una tarifa base que cambia más lentamente, más pegajosa,
+mientras que un denominador más bajo permite que la tarifa base se ajuste más rápidamente.
+Para referencia, el valor de la C-chain se establece en `36`. Este valor establece la
+tarifa base para aumentar o disminuir en un factor de `1/36` de la tarifa base del bloque padre.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
-This value is set to `0` in C-Chain.
+`minBlockGasCost`: Establece la cantidad mínima de gas a cobrar por la producción de un bloque.
+Este valor se establece en `0` en la C-Chain.
 
-`maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
+`maxBlockGasCost`: Establece la cantidad máxima de gas a cobrar por la producción de un bloque.
 
-`blockGasCostStep`: Determines how much to increase/decrease the block gas cost depending on the
-amount of time elapsed since the previous block.
+`blockGasCostStep`: Determina cuánto aumentar/disminuir el costo de gas del bloque según el
+tiempo transcurrido desde el bloque anterior.
 
-If the block is produced at the target rate, the block gas cost will stay the same as the block gas
-cost for the parent block.
+Si el bloque se produce a la tasa objetivo, el costo de gas del bloque se mantendrá igual que el costo de gas del bloque padre.
 
-If it is produced faster/slower, the block gas cost will be increased/decreased by the step value for
-each second faster/slower than the target block rate accordingly.
+Si se produce más rápido/más lento, el costo de gas del bloque se incrementará/decrementará por el valor de paso por
+cada segundo más rápido/más lento que la tasa de bloque objetivo correspondientemente.
 
-:::note
-If the `blockGasCostStep` is set to a very large number, it effectively requires block production to
-go no faster than the `targetBlockRate`. For example, if a block is produced two seconds faster than
-the target block rate, the block gas cost will increase by `2 * blockGasCostStep`.
+:::nota
+Si el `blockGasCostStep` se establece en un número muy grande, efectivamente requiere que la producción de bloques
+no vaya más rápido que la `targetBlockRate`. Por ejemplo, si un bloque se produce dos segundos más rápido que
+la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockGasCostStep`.
 
 :::
 
-#### Custom Fee Recipients
+#### Destinatarios de Tarifas Personalizados
 
-See section [Setting a Custom Fee Recipient](#setting-a-custom-fee-recipient)
+Consulta la sección [Configuración de un Destinatario de Tarifas Personalizado](#configuración-de-un-destinatario-de-tarifas-personalizado)
 
 ### Alloc
 
-See section [Setting the Genesis Allocation](#setting-the-genesis-allocation)
+Consulta la sección [Configuración de la Asignación de Genesis](#configuración-de-la-asignación-de-genesis)
 
 ### Header
 
-The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`,
-`number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be
-set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis
-header fields.
+Los campos `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`,
+`number`, `gasUsed`, `parentHash` definen la cabecera del bloque génesis. El campo `gasLimit` debe ser
+ajustado para que coincida con el `gasLimit` establecido en la `feeConfig`. No es necesario cambiar ninguno de los otros campos de la cabecera del génesis.
 
-`nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
-For Avalanche, these don't play any relevant role, so you should just leave them as their 
-default values:
+`nonce`, `mixHash` y `difficulty` son parámetros remanentes de los sistemas de Prueba de Trabajo.
+Para Avalanche, estos no juegan ningún papel relevante, así que simplemente debes dejarlos en sus
+valores por defecto:
 
-`nonce`: The result of the mining process iteration is this value. It can be any value in 
-the genesis block. Default value is `0x0`.
+`nonce`: El resultado de la iteración del proceso de minería es este valor. Puede ser cualquier valor en
+el bloque génesis. El valor por defecto es `0x0`.
 
-`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
-cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
+`mixHash`: La combinación de `nonce` y `mixHash` permite verificar que el Bloque ha sido realmente
+minado criptográficamente, por lo tanto, desde este aspecto, es válido. El valor por defecto es `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
-Default value is `0x0`.
+`difficulty`: El nivel de dificultad aplicado durante el proceso de descubrimiento de nonce de este bloque.
+El valor por defecto es `0x0`.
 
-`timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
+`timestamp`: La marca de tiempo de la creación del bloque génesis. Comúnmente se establece en `0x0`.
 
-`extraData`: Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
+`extraData`: Datos extra opcionales que pueden incluirse en el bloque génesis. Comúnmente se establece en `0x`.
 
-`gasLimit`: The total amount of gas that can be used in a single block. It should be set to
-the same value as in the [fee config](#fee-config). The value `e4e1c0` is
-hexadecimal and is equal to `15,000,000`.
+`gasLimit`: La cantidad total de gas que se puede usar en un solo bloque. Debe ser establecido en
+el mismo valor que en la [configuración de tarifas](#fee-config). El valor `e4e1c0` es
+hexadecimal y es igual a `15,000,000`.
 
-`coinbase`: Refers to the address of the block producers. This also means it represents the 
-recipient of the block reward. It is usually set
-to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
-Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
+`coinbase`: Se refiere a la dirección de los productores de bloques. Esto también significa que representa la
+receptor de la recompensa del bloque. Comúnmente se establece
+en `0x0000000000000000000000000000000000000000` para el bloque génesis. Para permitir receptores de tarifas en
+Subnet-EVM, consulta [esta sección](#setting-a-custom-fee-recipient).
 
-`parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
-usually set to
-`0x0000000000000000000000000000000000000000000000000000000000000000` for the
-genesis block.
+`parentHash`: Este es el hash Keccak de 256 bits de toda la cabecera del bloque padre. Comúnmente se establece en
+`0x0000000000000000000000000000000000000000000000000000000000000000` para el
+bloque génesis.
 
-`gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
+`gasUsed`: Esta es la cantidad de gas utilizada por el bloque génesis. Comúnmente se establece en `0x0`.
 
-`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
-Otherwise it will error.
+`number`: Este es el número del bloque génesis. Debe ser `0x0` para el génesis.
+De lo contrario, dará error.
 
-### Genesis Examples
+### Ejemplos de Génesis
 
-Another example of a genesis file can be found in the
-[networks folder](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
-Note: please remove `airdropHash` and `airdropAmount` fields if you want to start with it.
+Otro ejemplo de un archivo génesis se puede encontrar en la
+[carpeta de redes](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
+Nota: por favor, elimina los campos `airdropHash` y `airdropAmount` si quieres empezar con él.
 
-Here are a few examples on how a genesis file is used:
+Aquí tienes algunos ejemplos de cómo se utiliza un archivo génesis:
 
 - [scripts/run.sh](https://github.com/ava-labs/subnet-evm/blob/master/scripts/run.sh#L99)
 
-### Setting the Genesis Allocation
+### Configurando la Asignación del Génesis
 
-Alloc defines addresses and their initial balances. This should be changed accordingly for each chain.
-If you don't provide any genesis allocation, you won't be able to interact with your new chain (all
-transactions require a fee to be paid from the sender's balance).
+Alloc define direcciones y sus saldos iniciales. Esto debe cambiarse adecuadamente para cada cadena.
+Si no proporcionas ninguna asignación de génesis, no podrás interactuar con tu nueva cadena (todas
+las transacciones requieren que se pague una tarifa desde el saldo del remitente).
 
-The `alloc` field expects key-value pairs. Keys of each entry must be a valid `address`. The `balance`
-field in the value can be either a `hexadecimal` or `number` to indicate initial balance of the address.
-The default value contains `8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` with `50000000000000000000000000`
-balance in it. Default:
+El campo `alloc` espera pares clave-valor. Las claves de cada entrada deben ser una dirección válida. El campo `balance`
+en el valor puede ser tanto un número `hexadecimal` como un número para indicar el saldo inicial de la dirección.
+El valor por defecto contiene `8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` con un saldo de `50000000000000000000000000`
+en él. Por defecto:
 
 ```json
   "alloc": {
@@ -230,7 +226,7 @@ balance in it. Default:
   }
 ```
 
-To specify a different genesis allocation, populate the `alloc` field in the genesis JSON as follows:
+Para especificar una asignación de génesis diferente, completa el campo `alloc` en el JSON de génesis de la siguiente manera:
 
 ```json
   "alloc": {
@@ -243,14 +239,14 @@ To specify a different genesis allocation, populate the `alloc` field in the gen
   },
 ```
 
-The keys in the allocation are [hex](https://en.wikipedia.org/wiki/Hexadecimal) addresses
-**without the canonical `0x` prefix**. The balances are denominated in Wei
-([10^18 Wei = 1 Whole Unit of Native Token](https://eth-converter.com/)) and expressed as hex strings
-**with the canonical `0x` prefix**. You can use [this converter](https://www.rapidtables.com/convert/number/hex-to-decimal.html)
-to translate between decimal and hex numbers.
+Las claves en la asignación son direcciones hexadecimales
+**sin el prefijo canónico `0x`**. Los saldos están denominados en Wei
+([10^18 Wei = 1 Unidad Entera del Token Nativo](https://eth-converter.com/)) y se expresan como cadenas hexadecimales
+**con el prefijo canónico `0x`**. Puedes usar [este convertidor](https://www.rapidtables.com/convert/number/hex-to-decimal.html)
+para traducir entre números decimales y hexadecimales.
 
-The above example yields the following genesis allocations (denominated in whole units of the native
-token, that is 1 AVAX/1 WAGMI):
+El ejemplo anterior produce las siguientes asignaciones de génesis (denominadas en unidades enteras del
+token nativo, es decir, 1 AVAX/1 WAGMI):
 
 <!-- markdownlint-disable MD013 -->
 
@@ -261,14 +257,14 @@ token, that is 1 AVAX/1 WAGMI):
 
 <!-- markdownlint-enable MD013 -->
 
-### Setting a Custom Fee Recipient
+### Estableciendo un Receptor de Tarifas Personalizado
 
-By default, all fees are burned (sent to the black hole address with `"allowFeeRecipients": false`).
-However, it is possible to enable block producers to set a fee recipient (who will get compensated
-for blocks they produce).
+Por defecto, todas las tarifas se queman (se envían a la dirección del agujero negro con `"allowFeeRecipients": false`).
+Sin embargo, es posible habilitar que los productores de bloques establezcan un receptor de tarifas (que será compensado
+por los bloques que producen).
 
-To enable this feature, you'll need to add the following to your
-genesis file (under the `"config"` key):
+Para habilitar esta característica, debes añadir lo siguiente a tu
+archivo génesis (bajo la clave `"config"`):
 
 ```json
 {
@@ -278,87 +274,86 @@ genesis file (under the `"config"` key):
 }
 ```
 
-#### Fee Recipient Address
+#### Dirección del Receptor de Tarifas
 
-With `allowFeeRecipients` enabled, your validators can specify their addresses to collect fees. They
-need to update their EVM [chain config](#avalanchego-chain-configs) with the following to specify where
-the fee should be sent to.
+Con `allowFeeRecipients` habilitado, tus validadores pueden especificar sus direcciones para recoger las tarifas. Ellos
+necesitan actualizar su [configuración de cadena](#avalanchego-chain-configs) EVM con lo siguiente para especificar dónde
+debe ser enviada la tarifa.
 
 ```json
 {
-  "feeRecipient": "<YOUR 0x-ADDRESS>"
+  "feeRecipient": "<TU DIRECCIÓN 0x>"
 }
 ```
 
 :::warning
 
-If `allowFeeRecipients` feature is enabled on the Subnet, but a validator doesn't specify a
-"feeRecipient", the fees will be burned in blocks it produces.
+Si la característica `allowFeeRecipients` está habilitada en la Subnet, pero un validador no especifica un
+"feeRecipient", las tarifas se quemarán en los bloques que produce.
 
 :::
 
-_Note: this mechanism can be also activated as a precompile._
-_See [Changing Fee Reward Mechanisms](#changing-fee-reward-mechanisms) section for more details._
+_Nota: este mecanismo también se puede activar como un precompilado._
+_Ver la sección [Cambiando los Mecanismos de Recompensa de Tarifas](#changing-fee-reward-mechanisms) para más detalles._
 
-## Precompiles
+## Precompilados
 
-Subnet-EVM can provide custom functionalities with precompiled contracts. These precompiled
-contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
+Subnet-EVM puede proporcionar funcionalidades personalizadas con contratos precompilados. Estos contratos precompilados
+se pueden activar a través de `ChainConfig` (en el génesis o como una actualización).
 
-### AllowList Interface
+### Interfaz de AllowList
 
-The `AllowList` interface is used by precompiles to check if a given address is allowed to use a
-precompiled contract. `AllowList` consist of two main roles, `Admin` and `Enabled`. `Admin` can
-add/remove other `Admin` and `Enabled` addresses. `Enabled` addresses can use the precompiled
-contract, but cannot modify other roles.
+La interfaz de `AllowList` se utiliza por los precompilados para comprobar si una dirección dada está permitida para usar un
+contrato precompilado. `AllowList` consiste en dos roles principales, `Admin` y `Enabled`. `Admin` puede
+añadir/eliminar otras direcciones `Admin` y `Enabled`. Las direcciones `Enabled` pueden usar el contrato precompilado, pero no pueden modificar otros roles.
 
-`AllowList` adds `adminAddresses` and `enabledAddresses` fields to precompile contract configurations.
-For instance fee manager precompile contract configuration looks like this:
+`AllowList` añade los campos `adminAddresses` y `enabledAddresses` a las configuraciones de los contratos precompilados.
+Por ejemplo, la configuración del contrato precompilado del gestor de tarifas se ve así:
 
 ```json
 {
   "feeManagerConfig": {
     "blockTimestamp": 0,
-    "adminAddresses": [<list of addresses>],
-    "enabledAddresses": [<list of addresses>]
+    "adminAddresses": [<lista de direcciones>],
+    "enabledAddresses": [<lista de direcciones>]
   }
 }
 ```
 
-`AllowList` configuration affects only the related precompile. For instance, the admin address in
-`feeManagerConfig` does not affect admin addresses in other activated precompiles.
 
-The `AllowList` solidity interface is defined as follows, and can be found in [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
+
+La configuración de `AllowList` afecta solo a la precompilación relacionada. Por ejemplo, la dirección de administrador en `feeManagerConfig` no afecta a las direcciones de administrador en otras precompilaciones activadas.
+
+La interfaz de solidez de la lista de permitidos se define de la siguiente manera y se puede encontrar en [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 interface IAllowList {
-  // Set [addr] to have the admin role over the precompile
+  // Establece [addr] para tener el rol de administrador sobre la precompilación
   function setAdmin(address addr) external;
 
-  // Set [addr] to be enabled on the precompile contract.
+  // Establece [addr] para estar habilitado en el contrato de precompilación.
   function setEnabled(address addr) external;
 
-  // Set [addr] to have no role the precompile contract.
+  // Establece [addr] para no tener ningún rol en el contrato de precompilación.
   function setNone(address addr) external;
 
-  // Read the status of [addr].
+  // Lee el estado de [addr].
   function readAllowList(address addr) external view returns (uint256 role);
 }
 ```
 
-`readAllowList(addr)` will return a uint256 with a value of 0, 1, or 2, corresponding to the roles
-`None`, `Enabled`, and `Admin` respectively.
+`readAllowList(addr)` devolverá un uint256 con un valor de 0, 1 o 2, correspondiente a los roles `None`, `Enabled` y `Admin` respectivamente.
 
-_Note: `AllowList` is not an actual contract but just an interface. It's not callable by itself._
-_This is used by other precompiles. Check other precompile sections to see how this works._
+_Nota: `AllowList` no es un contrato real sino solo una interfaz. No se puede llamar por sí mismo._
+_Esto es utilizado por otras precompilaciones. Verifique las secciones de precompilación adicionales para ver cómo funciona esto._
 
-### Restricting Smart Contract Deployers
+### Restringir a los desplegadores de contratos inteligentes
 
-If you'd like to restrict who has the ability to deploy contracts on your
-Subnet, you can provide an `AllowList` configuration in your genesis or upgrade file:
+Si desea restringir quién tiene la capacidad de desplegar contratos en su
+Subnet, puede proporcionar una configuración de `AllowList` en su archivo de génesis o de actualización:
 
 ```json
 {
@@ -369,44 +364,41 @@ Subnet, you can provide an `AllowList` configuration in your genesis or upgrade 
 }
 ```
 
-In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `ContractDeployerAllowList`. This enables it to add other `Admin` or to add
-`Enabled` addresses. Both `Admin` and `Enabled` can deploy contracts. To provide
-a great UX with factory contracts, the `tx.Origin` is checked for being a valid
-deployer instead of the caller of `CREATE`. This means that factory contracts will still be
-able to create new contracts as long as the sender of the original transaction is an allow
-listed deployer.
+En este ejemplo, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` se nombra como el
+`Admin` de la `ContractDeployerAllowList`. Esto le permite agregar otros `Admin` o agregar
+direcciones `Enabled`. Tanto los `Admin` como los `Enabled` pueden desplegar contratos. Para proporcionar
+una gran experiencia de usuario con contratos de fábrica, se verifica que `tx.Origin` sea un desplegador válido
+en lugar del llamador de `CREATE`. Esto significa que los contratos de fábrica aún podrán crear nuevos contratos siempre que el remitente de la transacción original sea un desplegador permitido.
 
-The `Stateful Precompile` contract powering the `ContractDeployerAllowList` adheres to the
-[AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000000`
-(you can load this interface and interact directly in Remix):
+El contrato de precompilación `Stateful Precompile` que alimenta la `ContractDeployerAllowList` se adhiere a la
+[interfaz de solidez AllowList](#interfaz-allowlist) en `0x0200000000000000000000000000000000000000`
+(puede cargar esta interfaz e interactuar directamente en Remix):
 
-- If you attempt to add a `Enabled` and you are not an `Admin`, you will see
-  something like:
+- Si intenta agregar un `Enabled` y no es un `Admin`, verá algo como:
   ![admin fail](/img/admin_fail.png)
 
-- If you attempt to deploy a contract but you are not an `Admin` not
-  a `Enabled`, you will see something like:
+- Si intenta desplegar un contrato pero no es un `Admin` ni
+  un `Enabled`, verá algo como:
   ![deploy fail](/img/deploy_fail.png)
 
-- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return
-  a uint256 with a value of 0, 1, or 2, corresponding to the roles `None`, `Enabled`, and `Admin` respectively.
+- Si llama a `readAllowList(addr)` entonces puede leer el rol actual de `addr`, que devolverá
+  un uint256 con un valor de 0, 1 o 2, correspondiente a los roles `None`, `Enabled` y `Admin` respectivamente.
 
 :::warning
 
-If you remove all of the admins from the allow list, it will no longer be possible to update the
-allow list without modifying the Subnet-EVM to schedule a network upgrade.
+Si elimina a todos los administradores de la lista de permitidos, ya no será posible actualizar la
+lista de permitidos sin modificar el Subnet-EVM para programar una actualización de red.
 
 :::
 
-#### Initial Contract Allow List Configuration
+#### Configuración inicial de la lista de permitidos de contratos
 
-It's possible to enable this precompile with an initial configuration to activate its effect on
-activation timestamp. This provides a way to enable the precompile without an admin address to manage
-the deployer list. With this, you can define a list of addresses that are allowed to deploy contracts.
-Since there will be no admin address to manage the deployer list, it can only be modified through a
-network upgrade. To use initial configuration, you need to specify addresses in `enabledAddresses`
-field in your genesis or upgrade file:
+Es posible habilitar esta precompilación con una configuración inicial para activar su efecto en
+la marca de tiempo de activación. Esto proporciona una forma de habilitar la precompilación sin una dirección de administrador para gestionar
+la lista de desplegadores. Con esto, puede definir una lista de direcciones que tienen permitido desplegar contratos.
+Dado que no habrá una dirección de administrador para gestionar la lista de desplegadores, solo se puede modificar a través de una
+actualización de red. Para usar la configuración inicial, debe especificar direcciones en el campo `enabledAddresses`
+en su archivo de génesis o de actualización:
 
 ```json
 {
@@ -417,14 +409,14 @@ field in your genesis or upgrade file:
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to deploy contracts. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+Esto permitirá que solo `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` despliegue contratos. Para obtener más
+información sobre las configuraciones iniciales de precompilación, consulte [Configuraciones iniciales de precompilación](#configuraciones-iniciales-de-precompilación).
 
-### Restricting Who Can Submit Transactions
+### Restringir quién puede enviar transacciones
 
-Similar to restricting contract deployers, this precompile restricts which addresses may submit
-transactions on chain. Like the previous section, you can activate the precompile by including an
-`AllowList` configuration in your genesis file:
+Similar a la restricción de los desplegadores de contratos, esta precompilación restringe qué direcciones pueden enviar
+transacciones en la cadena. Al igual que en la sección anterior, puede activar la precompilación incluyendo una
+configuración de `AllowList` en su archivo de génesis:
 
 ```json
 {
@@ -437,39 +429,38 @@ transactions on chain. Like the previous section, you can activate the precompil
 }
 ```
 
-In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
-`Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
-`Allowed`. Both `Admins` and `Enabled` can submit transactions to the chain.
+En este ejemplo, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` se nombra como el
+`Admin` de la `TransactionAllowList`. Esto les permite agregar otros `Admins` o agregar
+`Allowed`. Tanto los `Admins` como los `Enabled` pueden enviar transacciones a la cadena.
 
-The `Stateful Precompile` contract powering the `TxAllowList` adheres to the
-[AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000002`
-(you can load this interface and interact directly in Remix):
+El contrato de precompilación `Stateful Precompile` que alimenta la `TxAllowList` se adhiere a la
+[interfaz de solidez AllowList](#interfaz-allowlist) en `0x0200000000000000000000000000000000000002`
+(puede cargar esta interfaz e interactuar directamente en Remix):
 
-- If you attempt to add an `Enabled` and you are not an `Admin`, you will see
-  something like:
+- Si intenta agregar un `Enabled` y no es un `Admin`, verá algo como:
   ![admin fail](/img/admin_fail.png)
 
-- If you attempt to submit a transaction but you are not an `Admin` or not
-  `Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
+- Si intenta enviar una transacción pero no es un `Admin` o no está
+  `Enabled`, verá algo como: `cannot issue transaction from non-allow listed address`
 
-- If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return
-  a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
+- Si llama a `readAllowList(addr)` entonces puede leer el rol actual de `addr`, que devolverá
+  un `uint256` con un valor de 0, 1 o 2, correspondiente a los roles `None`, `Allowed` y `Admin` respectivamente.
 
 :::warning
 
-If you remove all of the admins from the allow list, it will no longer be possible to update the
-allow list without modifying the Subnet-EVM to schedule a network upgrade.
+Si elimina a todos los administradores de la lista de permitidos, ya no será posible actualizar la
+lista de permitidos sin modificar el Subnet-EVM para programar una actualización de red.
 
 :::
 
-#### Initial TX Allow List Configuration
+#### Configuración inicial de la lista de permitidos de transacciones
 
-It's possible to enable this precompile with an initial configuration to activate its effect on
-activation timestamp. This provides a way to enable the precompile without an admin address to manage
-the TX allow list. With this, you can define a list of addresses that are allowed to submit
-transactions. Since there will be no admin address to manage the TX list, it can only be modified
-through a network upgrade. To use initial configuration, you need to specify addresses in
-`enabledAddresses` field in your genesis or upgrade file:
+Es posible habilitar esta precompilación con una configuración inicial para activar su efecto en
+la marca de tiempo de activación. Esto proporciona una forma de habilitar la precompilación sin una dirección de administrador para gestionar
+la lista de transacciones. Con esto, puede definir una lista de direcciones que tienen permitido enviar
+transacciones. Dado que no habrá una dirección de administrador para gestionar la lista de transacciones, solo se puede modificar
+a través de una actualización de red. Para usar la configuración inicial, debe especificar direcciones en
+el campo `enabledAddresses` en su archivo de génesis o de actualización:
 
 ```json
 {
@@ -480,13 +471,13 @@ through a network upgrade. To use initial configuration, you need to specify add
 }
 ```
 
-This will allow only `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to submit transactions. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+Esto permitirá que solo `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` envíe transacciones. Para obtener más
+información sobre las configuraciones iniciales de precompilación, consulte [Configuraciones iniciales de precompilación](#configuraciones-iniciales-de-precompilación).
 
-### Minting Native Coins
+### Acuñando monedas nativas
 
-You can mint native(gas) coins with a precompiled contract. In order to activate this feature, you
-can provide `nativeMinterConfig` in genesis:
+Puede acuñar monedas nativas (gas) con un contrato precompilado. Para activar esta función, usted
+puede proporcionar `nativeMinterConfig` en el génesis:
 
 ```json
 {
@@ -499,54 +490,36 @@ can provide `nativeMinterConfig` in genesis:
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and
-`Enabled` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses
-same methods as in `ContractDeployerAllowList`.
+`adminAddresses` denota las cuentas de administrador que pueden agregar otras cuentas `Admin` o `Enabled`. Tanto `Admin` como `Enabled` son elegibles para acuñar monedas nativas para otras direcciones. El `ContractNativeMinter` utiliza los mismos métodos que en `ContractDeployerAllowList`.
 
-The `Stateful Precompile` contract powering the `ContractNativeMinter` adheres to the following
-Solidity interface at `0x0200000000000000000000000000000000000001` (you can load this interface and
-interact directly in Remix):
+El contrato de `Stateful Precompile` que alimenta al `ContractNativeMinter` cumple con la siguiente interfaz de Solidity en `0x0200000000000000000000000000000000000001` (puedes cargar esta interfaz e interactuar directamente en Remix):
 
 ```solidity
-// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
+// (c) 2022-2023, Ava Labs, Inc. Todos los derechos reservados.
+// Consulta el archivo LICENSE para conocer los términos de licencia.
 
 pragma solidity ^0.8.0;
 import "./IAllowList.sol";
 
 interface INativeMinter is IAllowList {
-  // Mint [amount] number of native coins and send to [addr]
+  // Acuña [amount] número de monedas nativas y las envía a [addr]
   function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
 
-`mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the
-amount in minimum denomination of native coins (10^18). For example, if you want to mint 1 native
-coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
+`mintNativeCoin` toma una dirección y una cantidad de monedas nativas que se van a acuñar. La cantidad denota la cantidad en la denominación mínima de monedas nativas (10^18). Por ejemplo, si quieres acuñar 1 moneda nativa (en AVAX), debes pasar 1 \* 10^18 como la cantidad.
 
-Note that this uses `IAllowList` interface directly, meaning that it uses the same `AllowList`
-interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information
-see [AllowList Solidity interface](#allowlist-interface).
+Ten en cuenta que esto usa la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de interfaz de `AllowList` como `readAllowList` y `setAdmin`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
 
 :::warning
 
-EVM does not prevent overflows when storing the address balance. Overflows in
-balance opcodes are handled by setting the
-balance to maximum. However the same won't apply for API calls. If you try to mint more than the
-maximum balance, API calls will return the overflowed hex-balance. This can break external
-tooling. Make sure the total supply of native coins is always less than 2^256-1.
+La EVM no evita los desbordamientos al almacenar el saldo de la dirección. Los desbordamientos en los opcodes de saldo se manejan estableciendo el saldo en el máximo. Sin embargo, lo mismo no se aplicará a las llamadas de API. Si intentas acuñar más que el saldo máximo, las llamadas de API devolverán el saldo hexadecimal desbordado. Esto puede romper las herramientas externas. Asegúrate de que el suministro total de monedas nativas siempre sea menor que 2^256-1.
 
 :::
 
-#### Initial Native Minter Configuration
+#### Configuración inicial del Acuñador Nativo
 
-It's possible to enable this precompile with an initial configuration to activate its effect on
-activation timestamp. This provides a way to enable the precompile without an admin address to mint
-native coins. With this, you can define a list of addresses that will receive an initial mint of the
-native coin when this precompile activates. This can be useful for networks that require a one-time
-mint without specifying any admin addresses. To use initial configuration, you need to specify a map
-of addresses with their corresponding mint amounts in `initialMint` field in your genesis or upgrade
-file:
+Es posible habilitar este precompilado con una configuración inicial para activar su efecto en la marca de tiempo de activación. Esto proporciona una forma de habilitar el precompilado sin una dirección de administrador para acuñar monedas nativas. Con esto, puedes definir una lista de direcciones que recibirán una acuñación inicial de la moneda nativa cuando este precompilado se active. Esto puede ser útil para redes que requieren una acuñación única sin especificar ninguna dirección de administrador. Para usar la configuración inicial, debes especificar un mapa de direcciones con sus cantidades de acuñación correspondientes en el campo `initialMint` en tu archivo de génesis o actualización:
 
 ```json
 {
@@ -560,15 +533,11 @@ file:
 }
 ```
 
-In the amount field you can specify either decimal or hex string. This will mint 1000000000000000000
-(equivalent of 1 Native Coin denominated as 10^18) to both addresses. Note that these are both in
-string format. "0xde0b6b3a7640000" hex is equivalent to 1000000000000000000. For further information
-about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+En el campo de cantidad, puedes especificar una cadena decimal o hexadecimal. Esto acuñará 1000000000000000000 (equivalente a 1 Moneda Nativa denominada como 10^18) a ambas direcciones. Ten en cuenta que ambas están en formato de cadena. El hex "0xde0b6b3a7640000" es equivalente a 1000000000000000000. Para obtener más información sobre las configuraciones iniciales de los precompilados, consulta [Configuraciones Iniciales de Precompilados](#configuraciones-iniciales-de-precompilados).
 
-### Configuring Dynamic Fees
+### Configurando Tarifas Dinámicas
 
-You can configure the parameters of the dynamic fee algorithm on chain using the `FeeConfigManager`.
-In order to activate this feature, you will need to provide the `FeeConfigManager` in the genesis:
+Puedes configurar los parámetros del algoritmo de tarifas dinámicas en la cadena utilizando el `FeeConfigManager`. Para activar esta función, deberás proporcionar el `FeeConfigManager` en el génesis:
 
 ```json
 {
@@ -581,13 +550,9 @@ In order to activate this feature, you will need to provide the `FeeConfigManage
 }
 ```
 
-The precompile implements the `FeeManager` interface which includes the same `AllowList` interface
-used by ContractNativeMinter, TxAllowList, etc. For an example of the `AllowList` interface, see the
-[TxAllowList](#allowlist-interface) above.
+El precompilado implementa la interfaz `FeeManager` que incluye la misma interfaz `AllowList` utilizada por ContractNativeMinter, TxAllowList, etc. Para un ejemplo de la interfaz `AllowList`, consulta el [TxAllowList](#interfaz-de-allowlist) anterior.
 
-The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity
-interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact
-directly in Remix). It can be also found in
+El contrato de `Stateful Precompile` que alimenta al `FeeConfigManager` cumple con la siguiente interfaz de Solidity en `0x0200000000000000000000000000000000000003` (puedes cargar esta interfaz e interactuar directamente en Remix). También se puede encontrar en
 [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IFeeManager.sol):
 
 ```solidity
@@ -596,7 +561,7 @@ pragma solidity ^0.8.0;
 import "./IAllowList.sol";
 
 interface IFeeManager is IAllowList {
-  // Set fee config fields to contract storage
+  // Establece los campos de configuración de tarifas en el almacenamiento del contrato
   function setFeeConfig(
     uint256 gasLimit,
     uint256 targetBlockRate,
@@ -608,7 +573,7 @@ interface IFeeManager is IAllowList {
     uint256 blockGasCostStep
   ) external;
 
-  // Get fee config from the contract storage
+  // Obtiene la configuración de tarifas desde el almacenamiento del contrato
   function getFeeConfig()
     external
     view
@@ -623,7 +588,7 @@ interface IFeeManager is IAllowList {
       uint256 blockGasCostStep
     );
 
-  // Get the last block number changed the fee config from the contract storage
+  // Obtiene el último número de bloque que cambió la configuración de tarifas desde el almacenamiento del contrato
   function getFeeConfigLastChangedAt()
     external
     view
@@ -631,26 +596,21 @@ interface IFeeManager is IAllowList {
 }
 ```
 
-FeeConfigManager precompile uses `IAllowList` interface directly, meaning that it uses the same
-`AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For
-more information see [AllowList Solidity interface](#allowlist-interface).
+El FeeConfigManager precompilado utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de interfaz de `AllowList` como `readAllowList` y `setAdmin`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
 
-In addition to the `AllowList` interface, the FeeConfigManager adds the following capabilities:
+Además de la interfaz `AllowList`, el FeeConfigManager agrega las siguientes capacidades:
 
-- `getFeeConfig` - retrieves the current dynamic fee config
-- `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
-- `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the
-  fee config parameters)
+- `getFeeConfig` - recupera la configuración actual de tarifas dinámicas
+- `getFeeConfigLastChangedAt` - recupera la marca de tiempo del último bloque donde se actualizó la configuración de tarifas
+- `setFeeConfig` - establece la configuración de tarifas dinámicas en la cadena (consulta [aquí](#configuración-de-tarifas) para obtener detalles sobre los parámetros de configuración de tarifas)
 
-You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more
-information see [here](/reference/subnet-evm/api#eth_feeconfig).
+También puedes obtener la configuración de tarifas en un bloque con el método RPC `eth_feeConfig`. Para obtener más información, consulta [aquí](/reference/subnet-evm/api#eth_feeconfig).
 
-#### Initial Fee Config Configuration
+#### Configuración Inicial de la Configuración de Tarifas
 
-It's possible to enable this precompile with an initial configuration to activate its effect on
-activation timestamp. This provides a way to define your fee structure to take effect at the
-activation. To use the initial configuration, you need to specify the fee config in
-`initialFeeConfig` field in your genesis or upgrade file:
+Es posible habilitar este precompilado con una configuración inicial para activar su efecto en la marca de tiempo de activación. Esto proporciona una forma de definir tu estructura de tarifas para que tenga efecto en la activación. Para usar la configuración inicial, debes especificar la configuración de tarifas en el campo `initialFeeConfig` en tu archivo de génesis o actualización:
+
+
 
 ```json
 {
@@ -670,15 +630,14 @@ activation. To use the initial configuration, you need to specify the fee config
 }
 ```
 
-This will set the fee config to the values specified in the `initialFeeConfig` field. For further
-information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).
+Esto establecerá la configuración de tarifas en los valores especificados en el campo `initialFeeConfig`. Para obtener más información sobre las configuraciones iniciales de los precompilados, consulte [Configuraciones iniciales de precompilados](#initial-precompile-configurations).
 
-### Changing Fee Reward Mechanisms
+### Cambiando los mecanismos de recompensa de tarifas
 
-Fee reward mechanism can be configured with this stateful precompile contract called as
-`RewardManager`. Configuration can include burning fees, sending fees to a predefined address, or
-enabling fees to be collected by block producers. This precompile can be configured as follows in
-the genesis file:
+El mecanismo de recompensa de tarifas se puede configurar con este contrato de precompilado estatal llamado
+`RewardManager`. La configuración puede incluir quemar tarifas, enviar tarifas a una dirección predefinida o
+permitir que las tarifas sean recolectadas por los productores de bloques. Este precompilado se puede configurar de la siguiente manera en
+el archivo génesis:
 
 ```json
 {
@@ -691,15 +650,15 @@ the genesis file:
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and
-`Enabled` are both eligible to change the current fee mechanism.
+`adminAddresses` denota las cuentas de administrador que pueden agregar otras cuentas `Admin` o `Enabled`. `Admin` y
+`Enabled` son ambos elegibles para cambiar el mecanismo de tarifa actual.
 
-The precompile implements the `RewardManager` interface which includes the `AllowList` interface.
-For an example of the `AllowList` interface, see the [TxAllowList](#allowlist-interface) above.
+El precompilado implementa la interfaz `RewardManager` que incluye la interfaz `AllowList`.
+Para un ejemplo de la interfaz `AllowList`, consulte [TxAllowList](#allowlist-interface) arriba.
 
-The `Stateful Precompile` contract powering the `RewardManager` adheres to the following Solidity
-interface at `0x0200000000000000000000000000000000000004` (you can load this interface and interact
-directly in Remix). It can be also found in
+El contrato de precompilado `Stateful Precompile` que alimenta el `RewardManager` se adhiere a la siguiente interfaz de Solidity
+en `0x0200000000000000000000000000000000000004` (puede cargar esta interfaz e interactuar
+directamente en Remix). También se puede encontrar en
 [IRewardManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IRewardManager.sol):
 
 ```solidity
@@ -725,52 +684,49 @@ interface IRewardManager is IAllowList {
 }
 ```
 
-`RewardManager` precompile uses `IAllowList` interface directly, meaning that it uses the same
-`AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For
-more information see [AllowList Solidity interface](#allowlist-interface).
+El precompilado `RewardManager` utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas
+funciones de la interfaz `AllowList` como `readAllowList` y `setAdmin`, `setEnabled`, `setNone`. Para
+más información, consulte [Interfaz de Solidity de AllowList](#allowlist-interface).
 
-In addition to the `AllowList` interface, the `RewardManager` adds the following capabilities:
+Además de la interfaz `AllowList`, el `RewardManager` agrega las siguientes capacidades:
 
-- `setRewardAddress` - sets the address to which fees are sent. This address can be a contract or a
-  user address. The address becomes the required coinbase address for the blocks that this mechanism
-  is enabled on. Meaning that it will receive the fees collected from the transactions in the block.
-  Receiving fees will not call any contract functions or fallback functions. It will simply increase
-  the balance of the address by the amount of fees.
+- `setRewardAddress` - establece la dirección a la que se envían las tarifas. Esta dirección puede ser un contrato o una
+  dirección de usuario. La dirección se convierte en la dirección de coinbase requerida para los bloques en los que este mecanismo
+  está habilitado. Esto significa que recibirá las tarifas recolectadas de las transacciones en el bloque.
+  Recibir tarifas no llamará a ninguna función de contrato ni a funciones de fallback. Simplemente aumentará
+  el saldo de la dirección por la cantidad de tarifas.
 
-- `allowFeeRecipients` - enables block producers to claim fees. This will allow block producers to
-  claim fees by specifying their own addresses in their chain configs. See [here](#fee-recipient)
-  for more information on how to specify the fee recipient address in the chain config.
+- `allowFeeRecipients` - permite a los productores de bloques reclamar tarifas. Esto permitirá a los productores de bloques
+  reclamar tarifas especificando sus propias direcciones en sus configuraciones de cadena. Consulte [aquí](#fee-recipient)
+  para obtener más información sobre cómo especificar la dirección del receptor de tarifas en la configuración de la cadena.
 
-- `disableRewards` - disables block rewards and starts burning fees.
+- `disableRewards` - deshabilita las recompensas de bloque y comienza a quemar tarifas.
 
-- `currentRewardAddress` - returns the current reward address. This is the address to which fees are
-  sent. It can include black hole address (`0x010...0`) which means that fees are burned. It can also
-  include a predefined hash (`0x0000000000000000000000000000000000000000`) denoting custom fee
-  recipients are allowed. It's advised to use the `areFeeRecipientsAllowed` function to check if
-  custom fee recipients are allowed first.
+- `currentRewardAddress` - devuelve la dirección de recompensa actual. Esta es la dirección a la que se envían las tarifas. Puede incluir una dirección de agujero negro (`0x010...0`) lo que significa que las tarifas se queman. También puede
+  incluir un hash predefinido (`0x0000000000000000000000000000000000000000`) que denota que se permiten receptores de tarifas personalizados. Se recomienda utilizar la función `areFeeRecipientsAllowed` para verificar si
+  se permiten receptores de tarifas personalizados primero.
 
-- `areFeeRecipientsAllowed` - returns true if custom fee recipients are allowed.
+- `areFeeRecipientsAllowed` - devuelve true si se permiten receptores de tarifas personalizados.
 
-These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by
-block producers) cannot be enabled at the same time. Enabling one mechanism will take over the
-previous mechanism. For example, if you enable `allowFeeRecipients` and then enable
-`disableRewards`, the `disableRewards` will take over and fees will be burned.
+Estos 3 mecanismos (quemar, enviar a una dirección predefinida y permitir que los productores de bloques recojan
+tarifas) no se pueden habilitar al mismo tiempo. Habilitar un mecanismo tomará el control sobre el
+mecanismo anterior. Por ejemplo, si habilita `allowFeeRecipients` y luego habilita
+`disableRewards`, el `disableRewards` tomará el control y las tarifas se quemarán.
 
-_Note: Reward addresses or fee recipient addresses are not required to be an admin or enabled account._
+_Nota: Las direcciones de recompensa o direcciones de receptores de tarifas no necesitan ser una cuenta de administrador o habilitada._
 
-#### Initial Configuration
+#### Configuración inicial
 
-It's possible to enable this precompile with an initial configuration to activate its effect on
-activation timestamp. This provides a way to enable the precompile without an admin address to
-change the fee reward mechanism. This can be useful for networks that require a one-time reward
-mechanism change without specifying any admin addresses. Without this initial configuration, the
-precompile will inherit the `feeRecipients` mechanism activated at genesis. Meaning that if
-`allowFeeRecipients` is set to true in the genesis file, the precompile will be enabled with the
-`allowFeeRecipients` mechanism. Otherwise it will keep burning fees. To use the initial
-configuration, you need to specify the initial reward mechanism in `initialRewardConfig` field in
-your genesis or upgrade file.
+Es posible habilitar este precompilado con una configuración inicial para activar su efecto en
+la marca de tiempo de activación. Esto proporciona una forma de habilitar el precompilado sin una dirección de administrador para
+cambiar el mecanismo de recompensa de tarifas. Esto puede ser útil para redes que requieren un cambio de mecanismo de recompensa de una sola vez sin especificar ninguna dirección de administrador. Sin esta configuración inicial, el
+precompilado heredará el mecanismo `feeRecipients` activado en el génesis. Esto significa que si
+`allowFeeRecipients` se establece en verdadero en el archivo génesis, el precompilado se habilitará con el
+mecanismo `allowFeeRecipients`. De lo contrario, seguirá quemando tarifas. Para usar la configuración inicial,
+debe especificar el mecanismo de recompensa inicial en el campo `initialRewardConfig` en
+su archivo de génesis o actualización.
 
-In order to allow custom fee recipients, you need to specify the `allowFeeRecipients` field in the `initialRewardConfig`:
+Para permitir receptores de tarifas personalizados, debe especificar el campo `allowFeeRecipients` en el `initialRewardConfig`:
 
 ```json
 {
@@ -783,8 +739,8 @@ In order to allow custom fee recipients, you need to specify the `allowFeeRecipi
 }
 ```
 
-In order to set an address to receive all transaction rewards, you need to specify the
-`rewardAddress` field in the `initialRewardConfig`:
+Para establecer una dirección para recibir todas las recompensas de transacción, debe especificar la
+campo `rewardAddress` en el `initialRewardConfig`:
 
 ```json
 {
@@ -797,8 +753,8 @@ In order to set an address to receive all transaction rewards, you need to speci
 }
 ```
 
-In order to disable rewards and start burning fees, you need to leave all fields in the
-`initialRewardConfig` empty:
+Para deshabilitar las recompensas y comenzar a quemar tarifas, debe dejar todos los campos en el
+`initialRewardConfig` vacío:
 
 ```json
 {
@@ -809,12 +765,11 @@ In order to disable rewards and start burning fees, you need to leave all fields
 }
 ```
 
-However this is different than the default behavior of the precompile. If you don't specify the
-`initialRewardConfig` field, the precompile will inherit the `feeRecipients` mechanism activated at
-genesis. Meaning that if `allowFeeRecipients` is set to true in the genesis file, the precompile
-will be enabled with the `allowFeeRecipients` mechanism. Otherwise it will keep burning fees.
-Example
-configuration for this case:
+Sin embargo, esto es diferente al comportamiento predeterminado del precompilado. Si no especifica el
+campo `initialRewardConfig`, el precompilado heredará el mecanismo `feeRecipients` activado en el
+génesis. Esto significa que si `allowFeeRecipients` se establece en verdadero en el archivo génesis, el precompilado
+se habilitará con el mecanismo `allowFeeRecipients`. De lo contrario, seguirá quemando tarifas.
+Configuración de ejemplo para este caso:
 
 ```json
 {
@@ -825,50 +780,37 @@ configuration for this case:
 }
 ```
 
-If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRewardConfig` field
-then an error will be returned and precompile won't be activated. For further information about
-precompile initial configurations see [Initial Precompile
-Configurations](#initial-precompile-configurations).
+Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `initialRewardConfig`,
+se devolverá un error y el precompilado no se activará. Para obtener más información sobre
+configuraciones iniciales de precompilados, consulte [Configuraciones iniciales de precompilados](#initial-precompile-configurations).
 
-## Contract Examples
+## Ejemplos de contratos
 
-Subnet-EVM contains example contracts for precompiles under `/contracts`. It's a hardhat
-project with tests and tasks. For more information see 
-[contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
+Subnet-EVM contiene contratos de ejemplo para precompilaciones en `/contracts`. Es un proyecto de hardhat con pruebas y tareas. Para obtener más información, consulta el archivo README de ejemplos de contratos (https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
 
-## Network Upgrades: Enable/Disable Precompiles
+## Actualizaciones de red: Habilitar/Deshabilitar Precompilaciones
 
 :::warning
 
-Performing a network upgrade requires coordinating the upgrade network-wide. A network upgrade
-changes the rule set used to process and verify blocks, such that any node that upgrades incorrectly
-or fails to upgrade by the time that upgrade goes into effect may become out of sync with the rest
-of the network.
+Realizar una actualización de red requiere coordinar la actualización en toda la red. Una actualización de red cambia el conjunto de reglas utilizado para procesar y verificar bloques, de modo que cualquier nodo que se actualice incorrectamente o no se actualice a tiempo cuando esa actualización entre en efecto puede quedar fuera de sincronización con el resto de la red.
 
-Any mistakes in configuring network upgrades or coordinating them on validators may cause the network
-to halt and recovering may be difficult.
+Cualquier error en la configuración de las actualizaciones de red o en su coordinación en los validadores puede hacer que la red se detenga y la recuperación pueda ser difícil.
 
 :::
 
-In addition to specifying the configuration for each of the above precompiles in the genesis chain
-config, they can be individually enabled or disabled at a given timestamp as a network upgrade.
-Disabling a precompile disables calling the precompile and destructs its storage so it can be enabled
-at a later timestamp with a new configuration if desired.
+Además de especificar la configuración para cada una de las precompilaciones anteriores en la configuración de la cadena génesis, se pueden habilitar o deshabilitar individualmente en un momento dado como una actualización de red. Deshabilitar una precompilación deshabilita la llamada a la precompilación y destruye su almacenamiento para que pueda ser habilitada en un momento posterior con una nueva configuración si se desea.
 
-These upgrades must be specified in a file named `upgrade.json` placed in the same directory where
-[`config.json`](#avalanchego-chain-configs) resides: `{chain-config-dir}/{blockchainID}/upgrade.json`.
-For example, `WAGMI Subnet` upgrade should be placed in
-`~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
+Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside `config.json` (https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subred WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
 
-The content of the `upgrade.json` should be formatted according to the following:
+El contenido de `upgrade.json` debe formatearse de acuerdo con lo siguiente:
 
 ```json
 {
   "precompileUpgrades": [
     {
-      "[PRECOMPILE_NAME]": {
-        "blockTimestamp": "[ACTIVATION_TIMESTAMP]", // unix timestamp precompile should activate at
-        "[PARAMETER]": "[VALUE]" // precompile specific configuration options, eg. "adminAddresses"
+      "[NOMBRE_PRECOMPILACIÓN]": {
+        "blockTimestamp": "[MARCA_DE_TIEMPO_ACTIVACIÓN]", // marca de tiempo Unix en la que la precompilación debe activarse
+        "[PARÁMETRO]": "[VALOR]" // opciones de configuración específicas de la precompilación, por ejemplo, "adminAddresses"
       }
     }
   ]
@@ -877,14 +819,11 @@ The content of the `upgrade.json` should be formatted according to the following
 
 :::warning
 
-An invalid `blockTimestamp` in an upgrade file results the update failing.
-The `blockTimestamp` value should be set to a valid Unix timestamp value which is
-in the _future_ relative to the _head of the chain_.
-If the node encounters a `blockTimestamp` which is in the past, it will fail on startup.
+Un `blockTimestamp` inválido en un archivo de actualización hace que la actualización falle. El valor de `blockTimestamp` debe establecerse en un valor de marca de tiempo Unix válido que esté en el _futuro_ en relación con la _cabeza de la cadena_. Si el nodo encuentra un `blockTimestamp` que está en el pasado, fallará al iniciarse.
 
 :::
 
-To disable a precompile, the following format should be used:
+Para deshabilitar una precompilación, se debe usar el siguiente formato:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -892,8 +831,8 @@ To disable a precompile, the following format should be used:
 {
   "precompileUpgrades": [
     {
-      "<precompileName>": {
-        "blockTimestamp": "[DEACTIVATION_TIMESTAMP]", // unix timestamp the precompile should deactivate at
+      "<nombrePrecompilación>": {
+        "blockTimestamp": "[MARCA_DE_TIEMPO_DESACTIVACIÓN]", // marca de tiempo Unix en la que la precompilación debe desactivarse
         "disable": true
       }
     }
@@ -903,27 +842,21 @@ To disable a precompile, the following format should be used:
 
 <!-- markdownlint-enable MD013 -->
 
-Each item in `precompileUpgrades` must specify exactly one precompile to enable or disable and the
-block timestamps must be in increasing order. Once an upgrade has been activated (a block after the
-specified timestamp has been accepted), it must always be present in `upgrade.json` exactly as it
-was configured at the time of activation (otherwise the node will refuse to start).
+Cada elemento en `precompileUpgrades` debe especificar exactamente una precompilación para habilitar o deshabilitar y las marcas de tiempo de bloque deben estar en orden creciente. Una vez que se ha activado una actualización (se ha aceptado un bloque después de la marca de tiempo especificada), siempre debe estar presente en `upgrade.json` exactamente como se configuró en el momento de la activación (de lo contrario, el nodo se negará a iniciar).
 
-Enabling and disabling a precompile is a network upgrade and should always be done with caution.
+Habilitar y deshabilitar una precompilación es una actualización de red y siempre se debe hacer con precaución.
 
 :::danger
 
-For safety, you should always treat `precompileUpgrades` as append-only.
+Por seguridad, siempre debes tratar `precompileUpgrades` como de solo agregado.
 
-As a last resort measure, it is possible to abort or reconfigure a precompile upgrade that has not
-been activated since the chain is still processing blocks using the prior rule set.
+Como medida de último recurso, es posible abortar o reconfigurar una actualización de precompilación que no se ha activado, ya que la cadena aún está procesando bloques utilizando el conjunto de reglas anterior.
 
 :::
 
-If aborting an upgrade becomes necessary, you can remove the precompile upgrade from `upgrade.json`
-from the end of the list of upgrades. As long as the blockchain has not accepted a block with a
-timestamp past that upgrade's timestamp, it will abort the upgrade for that node.
+Si es necesario abortar una actualización, puedes eliminar la actualización de precompilación de `upgrade.json` desde el final de la lista de actualizaciones. Mientras la cadena de bloques no haya aceptado un bloque con una marca de tiempo posterior a la marca de tiempo de esa actualización, abortará la actualización para ese nodo.
 
-### Example
+### Ejemplo
 
 ```json
 {
@@ -950,17 +883,11 @@ timestamp past that upgrade's timestamp, it will abort the upgrade for that node
 }
 ```
 
-This example enables the `feeManagerConfig` at the first block with timestamp >= `1668950000`, enables
-`txAllowListConfig` at the first block with timestamp >= `1668960000`, and disables `feeManagerConfig`
-at the first block with timestamp >= `1668970000`.
+Este ejemplo habilita `feeManagerConfig` en el primer bloque con marca de tiempo >= `1668950000`, habilita `txAllowListConfig` en el primer bloque con marca de tiempo >= `1668960000` y deshabilita `feeManagerConfig` en el primer bloque con marca de tiempo >= `1668970000`.
 
-When a precompile disable takes effect (that is, after its `blockTimestamp` has passed), its storage
-will be wiped. If you want to reenable it, you will need to treat it as a new configuration.
+Cuando una desactivación de precompilación entra en efecto (es decir, después de que haya pasado su `blockTimestamp`), se borrará su almacenamiento. Si quieres volver a habilitarlo, deberás tratarlo como una nueva configuración.
 
-After you have created the `upgrade.json` and placed it in the chain config directory, you need to
-restart the node for the upgrade file to be loaded (again, make sure you don't restart all Subnet
-validators at once!). On node restart, it will print out the configuration of the chain, where you
-can double-check that the upgrade has loaded correctly. In our example:
+Después de haber creado `upgrade.json` y haberlo colocado en el directorio de configuración de la cadena, debes reiniciar el nodo para que el archivo de actualización se cargue (una vez más, ¡asegúrate de no reiniciar todos los validadores de la Subred a la vez!). Al reiniciar el nodo, imprimirá la configuración de la cadena, donde puedes verificar que la actualización se haya cargado correctamente. En nuestro ejemplo:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -977,19 +904,13 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 
 <!-- markdownlint-enable MD013 -->
 
-Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the
-activated precompiles at a timestamp with the
-[`eth_getActivePrecompilesAt`](/reference/subnet-evm/api#eth_getactiveprecompilesat)
-RPC method. The [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig)
-RPC method will also return the configured upgrades in the response.
+Ten en cuenta que la entrada `precompileUpgrades` refleja correctamente los cambios. También puedes verificar los precompiles activados en un momento específico con el método RPC [`eth_getActivePrecompilesAt`](/reference/subnet-evm/api#eth_getactiveprecompilesat). El método RPC [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig) también devolverá las actualizaciones configuradas en la respuesta.
 
-That's it, your Subnet is all set and the desired upgrades will be activated at the indicated timestamp!
+¡Eso es todo, tu Subnet está lista y las actualizaciones deseadas se activarán en el momento indicado!
 
-### Initial Precompile Configurations
+### Configuraciones iniciales de precompilación
 
-Precompiles can be managed by some privileged addresses to change their configurations and activate
-their effects. For example, the `feeManagerConfig` precompile can have `adminAddresses` which can
-change the fee structure of the network.
+Los precompiles pueden ser gestionados por algunas direcciones privilegiadas para cambiar sus configuraciones y activar sus efectos. Por ejemplo, el precompile `feeManagerConfig` puede tener `adminAddresses` que pueden cambiar la estructura de tarifas de la red.
 
 ```json
 {
@@ -1004,16 +925,9 @@ change the fee structure of the network.
 }
 ```
 
-In this example, only the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is allowed to change
-the fee structure of the network. The admin address has to call the precompile in order to activate
-its effect; that is it needs to send a transaction with a new fee config to perform the update.
-This is a very powerful feature, but it also gives a large amount of power to the admin address. If
-the address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is compromised, the network is compromised.
+En este ejemplo, solo la dirección `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` tiene permitido cambiar la estructura de tarifas de la red. La dirección de administrador debe llamar al precompile para activar su efecto; es decir, necesita enviar una transacción con una nueva configuración de tarifas para realizar la actualización. Esta es una característica muy poderosa, pero también otorga una gran cantidad de poder a la dirección de administrador. Si la dirección `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` se ve comprometida, la red se ve comprometida.
 
-With the initial configurations, precompiles can immediately activate their effect on the activation
-timestamp. With this way admin addresses can be omitted from the precompile configuration. For example,
-the `feeManagerConfig` precompile can have `initialFeeConfig` to setup the fee configuration on the
-activation:
+Con las configuraciones iniciales, los precompiles pueden activar inmediatamente su efecto en la marca de tiempo de activación. De esta manera, las direcciones de administrador pueden omitirse de la configuración de precompilación. Por ejemplo, el precompile `feeManagerConfig` puede tener `initialFeeConfig` para configurar la configuración de tarifas en la activación:
 
 ```json
 {
@@ -1037,132 +951,100 @@ activation:
 }
 ```
 
-Notice that there is no `adminAddresses` field in the configuration. This means that there will be
-no admin addresses to manage the fee structure with this precompile. The precompile will simply
-update the fee configuration to the specified fee config when it activates on the `blockTimestamp` `1668950000`.
+Ten en cuenta que no hay un campo `adminAddresses` en la configuración. Esto significa que no habrá direcciones de administrador para gestionar la estructura de tarifas con este precompile. El precompile simplemente actualizará la configuración de tarifas a la configuración de tarifas especificada cuando se active en el `blockTimestamp` `1668950000`.
 
 :::note
-It's still possible to add `adminAddresses` or `enabledAddresses` along with these initial
-configurations. In this case, the precompile will be activated with the initial configuration, and
-admin/enabled addresses can access to the precompiled contract normally.
+Todavía es posible agregar `adminAddresses` o `enabledAddresses` junto con estas configuraciones iniciales. En este caso, el precompile se activará con la configuración inicial, y las direcciones de administrador/habilitadas pueden acceder al contrato precompilado normalmente.
 :::
 
 :::info
 
-If you want to change the precompile initial configuration, you will need to first disable it then
-activate the precompile again with the new configuration.
+Si deseas cambiar la configuración inicial de precompilación, primero deberás desactivarla y luego activar el precompile nuevamente con la nueva configuración.
 
 :::
 
-See every precompile initial configuration in their relevant `Initial Configuration` sections under [Precompiles](#precompiles).
+Consulta cada configuración inicial de precompilación en sus secciones relevantes de `Configuración inicial` bajo [Precompiles](#precompiles).
 
-## AvalancheGo Chain Configs
+## Configuraciones de la cadena AvalancheGo
 
-As described in [this doc](/nodes/configure/chain-config-flags.md#subnet-chain-configs), each blockchain
-of Subnets can have its own custom configuration. If a Subnet's ChainID is
-`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at
-`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+Como se describe en [este documento](/nodes/configure/chain-config-flags.md#subnet-chain-configs), cada blockchain de Subnets puede tener su propia configuración personalizada. Si el ChainID de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, el archivo de configuración para esta cadena se encuentra en `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-EVM, most
-[C-Chain configs](/nodes/configure/chain-config-flags.md#c-chain-configs) are applicable except
-[Avalanche Specific APIs](/nodes/configure/chain-config-flags.md#enabling-avalanche-specific-apis).
+Para blockchains creadas por o bifurcadas de Subnet-EVM, la mayoría de las configuraciones de [C-Chain](/nodes/configure/chain-config-flags.md#c-chain-configs) son aplicables, excepto las [APIs específicas de Avalanche](/nodes/configure/chain-config-flags.md#enabling-avalanche-specific-apis).
 
-### Priority Regossip
+### Regossip de prioridad
 
-A transaction is "regossiped" when the node does not find the transaction in
-a block after `priority-regossip-frequency` (defaults to `1m`). By default, up to 16 transactions
-(max 1 per address) are regossiped to validators per minute.
+Una transacción se "regossipea" cuando el nodo no encuentra la transacción en un bloque después de `priority-regossip-frequency` (por defecto, `1m`). Por defecto, hasta 16 transacciones (máximo 1 por dirección) se regossipean a validadores por minuto.
 
-Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of
-important addresses (like bridge relayers). To do so, you'll need to update your
-[chain config](/nodes/configure/chain-config-flags.md#subnet-chain-configs) with the following:
+Los operadores pueden usar "regossip de prioridad" para regossipar más agresivamente transacciones para un conjunto de direcciones importantes (como relayers de puentes). Para hacerlo, deberás actualizar tu [configuración de cadena](/nodes/configure/chain-config-flags.md#subnet-chain-configs) con lo siguiente:
 
 ```json
 {
-  "priority-regossip-addresses": ["<YOUR 0x-ADDRESS>"]
+  "priority-regossip-addresses": ["<TU DIRECCIÓN 0x>"]
 }
 ```
 
-By default, up to 32 transactions from priority addresses (max 16 per address) are regossipped to
-validators per second. You can override these defaults with the following config:
+Por defecto, hasta 32 transacciones de direcciones prioritarias (máximo 16 por dirección) se regossipean a validadores por segundo. Puedes anular estos valores predeterminados con la siguiente configuración:
 
 ```json
 {
   "priority-regossip-frequency": "1s",
   "priority-regossip-max-txs": 32,
-  "priority-regossip-addresses": ["<YOUR 0x-ADDRESS>"],
+  "priority-regossip-addresses": ["<TU DIRECCIÓN 0x>"],
   "priority-regossip-txs-per-address": 16
 }
 ```
 
-### Fee Recipient
+### Receptor de tarifas
 
-This works together with [`allowFeeRecipients`](#setting-a-custom-fee-recipient) and [RewardManager
-precompile](#changing-fee-reward-mechanisms) to specify where the fees should be sent to.
+Esto funciona junto con [`allowFeeRecipients`](#setting-a-custom-fee-recipient) y el precompile de [RewardManager](#changing-fee-reward-mechanisms) para especificar a dónde se deben enviar las tarifas.
 
-With `allowFeeRecipients` enabled, validators can specify their addresses to collect fees.
+Con `allowFeeRecipients` habilitado, los validadores pueden especificar sus direcciones para recolectar tarifas.
 
 ```json
 {
-  "feeRecipient": "<YOUR 0x-ADDRESS>"
+  "feeRecipient": "<TU DIRECCIÓN 0x>"
 }
 ```
 
 :::warning
 
-If `allowFeeRecipients` or `RewardManager` precompile is enabled on the Subnet, but a validator
-doesn't specify a "feeRecipient", the fees will be burned in blocks it produces.
+Si `allowFeeRecipients` o el precompile de `RewardManager` está habilitado en la Subnet, pero un validador no especifica un "feeRecipient", las tarifas se quemarán en los bloques que produce.
 
 :::
 
-## Network Upgrades: State Upgrades
+## Actualizaciones de red: Actualizaciones de estado
 
-Subnet-EVM allows the network operators to specify a modification to state that will take place
-at the beginning of the first block with a timestamp greater than or equal to the one specified
-in the configuration.
+Subnet-EVM permite a los operadores de red especificar una modificación de estado que tendrá lugar al comienzo del primer bloque con una marca de tiempo mayor o igual a la especificada en la configuración.
 
-This provides a last resort path to updating non-upgradeable contracts via a network upgrade
-(for example, to fix issues when you are running your own blockchain).
+Esto proporciona un camino de último recurso para actualizar contratos no actualizables a través de una actualización de red (por ejemplo, para solucionar problemas cuando estás ejecutando tu propia blockchain).
 
 :::warning
 
-This should only be used as a last resort alternative to forking `subnet-evm` and specifying
-the network upgrade in code.
+Esto solo debe usarse como una alternativa de último recurso a bifurcar `subnet-evm` y especificar la actualización de red en el código.
 
-Using a network upgrade to modify state is not part of normal operations of the
-EVM. You should ensure the modifications do not invalidate any of the assumptions of
-deployed contracts or cause incompatibilities with downstream infrastructure such as
-block explorers.
+Usar una actualización de red para modificar el estado no es parte de las operaciones normales de la EVM. Debes asegurarte de que las modificaciones no invaliden ninguna de las suposiciones de los contratos desplegados o causen incompatibilidades con la infraestructura aguas abajo, como los exploradores de bloques.
 
 :::
 
-The timestamps for upgrades in `stateUpgrades` must be in increasing order.
-`stateUpgrades` can be specified along with `precompileUpgrades` or by itself.
+Las marcas de tiempo para las actualizaciones en `stateUpgrades` deben estar en orden creciente. `stateUpgrades` se puede especificar junto con `precompileUpgrades` o por sí solo.
 
-The following three state modifications are supported:
+Se admiten las siguientes tres modificaciones de estado:
 
-- `balanceChange`: adds a specified amount to the balance of a given account. This amount can be
-  specified as hex or decimal and must be positive.
-- `storage`: modifies the specified storage slots to the specified values. Keys and values must
-  be 32 bytes specified in hex, with a `0x` prefix.
-- `code`: modifies the code stored in the specified account. The
-  code must _only_ be the runtime portion of a code. The code must start with a `0x` prefix.
+- `balanceChange`: agrega una cantidad especificada al saldo de una cuenta dada. Esta cantidad puede ser especificada en hexadecimal o decimal y debe ser positiva.
+- `storage`: modifica las ranuras de almacenamiento especificadas a los valores especificados. Las claves y valores deben ser de 32 bytes especificados en hexadecimal, con el prefijo `0x`.
+- `code`: modifica el código almacenado en la cuenta especificada. El código debe ser _solo_ la parte en tiempo de ejecución de un código. El código debe comenzar con el prefijo `0x`.
 
 :::warning
 
-If modifying the code, _only_ the runtime portion of the bytecode should be provided in
-`upgrades.json`. Do not use the bytecode that would be used for deploying a new contract, as this
-includes the constructor code as well. Refer to your compiler's documentation for information
-on how to find the runtime portion of the contract you wish to modify.
+Si se modifica el código, _solo_ se debe proporcionar la parte en tiempo de ejecución del bytecode en `upgrades.json`. No utilices el bytecode que se usaría para desplegar un nuevo contrato, ya que esto incluye el código del constructor también. Consulta la documentación de tu compilador para obtener información sobre cómo encontrar la parte en tiempo de ejecución del contrato que deseas modificar.
 
 :::
 
-The `upgrades.json` file shown below describes a network upgrade that will make the following
-state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM GMT`:
+El archivo `upgrades.json` que se muestra a continuación describe una actualización de red que realizará las siguientes modificaciones de estado en el primer bloque después (o en) `8 de marzo de 2023 1:30:00 AM GMT`:
 
-- Sets the code for the account at `0x71562b71999873DB5b286dF957af199Ec94617F7`,
-- And adds `100` wei to the balance of the account at `0xb794f5ea0ba39494ce839613fffba74279579268`,
-- Sets the storage slot `0x1234` to the value `0x6666` for the account at `0xb794f5ea0ba39494ce839613fffba74279579268`.
+- Establece el código para la cuenta en `0x71562b71999873DB5b286dF957af199Ec94617F7`,
+- Y agrega `100` wei al saldo de la cuenta en `0xb794f5ea0ba39494ce839613fffba74279579268`,
+- Establece la ranura de almacenamiento `0x1234` en el valor `0x6666` para la cuenta en `0xb794f5ea0ba39494ce839613fffba74279579268`.
 
 ```json
 {
