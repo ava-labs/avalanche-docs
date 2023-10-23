@@ -2,7 +2,7 @@
 tags: [Build, Dapps]
 description: Real-time and historical custom data indexing for any evm chain.
 sidebar_label: Flair
-pagination_label: Using Flair for indexing Avalanche on-chain data
+pagination_label: Using Flair for indexing Avalanche on-chain and subnet data
 sidebar_position: 1
 keywords: [indexing, on-chain data]
 ---
