@@ -2,7 +2,7 @@
 tags: [Build, Dapps]
 description: Real-time and historical custom data indexing for any evm chain.
 sidebar_label: Flair
-pagination_label: Using Flair for indexing Avalanche on-chain and subnet data
+pagination_label: Using Flair for indexing Avalanche on-chain and Subnet data
 sidebar_position: 1
 keywords: [indexing, on-chain data]
 ---
@@ -31,7 +31,7 @@ Compared to other alternatives the main reasons are:
   * Works with both websocket and https-only RPCs.
 * ✅ Track and ingest **any contract** for **any event topic.**
   * Auto-track new contracts deployed from factory contracts.
-* ✅ **Custom processor scripts** with Javascript runtime (with **Typescript** support)
+* ✅ **Custom processor scripts** with JavaScript runtime (with **Typescript** support)
   * Make external API or Webhook calls to third-party or your backend.
   * Get current or historical USD value of any ERC20 token amount of any contract address on any chain.
   * Use any external NPM library.
@@ -55,7 +55,7 @@ Learn more about the [structure of manifest.yml](https://docs.flair.dev/referenc
 
 2️⃣ Configure Avalanche RPC nodes
 
-Set a unique namespace, Avalanche chainId (or any subnet chainId) and RPC endpoint in your config. Remember that you can add up to 10 RPC endpoints for resiliency.
+Set a unique namespace, Avalanche chainId (or any Subnet chainId) and RPC endpoint in your config. Remember that you can add up to 10 RPC endpoints for resiliency.
 
 ```yaml
 {
@@ -109,6 +109,6 @@ Explore real-world usage of Flair indexing primitives for various use-cases.
 
 * [Index ERC721 and ERC1155 NFTs on any EVM chain with an RPC URL](https://github.com/flair-sdk/examples/tree/main/erc721-and-erc1155-nft-indexing)
 
-## Need help?
+## Need Help?
 
 [Our engineers](https://docs.flair.dev/talk-to-an-engineer) are available to help you at any stage.

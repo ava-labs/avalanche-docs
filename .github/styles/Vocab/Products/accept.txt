@@ -52,6 +52,7 @@ bundlers
 calldata
 CAPTCHA
 ChainBridge
+chainId
 Chainlink
 chainlist
 ChainSafe
@@ -82,6 +83,7 @@ Daly
 DAO
 dapp
 Dapp
+dApp
 delegatee
 delegators
 Delegators
@@ -142,6 +144,7 @@ hotfix
 incentivized
 infeasibly
 Infura
+ingestors
 inlined
 ints
 IPCs
@@ -258,6 +261,7 @@ repo
 Repo
 requesters
 Rimble
+rollups
 RPC
 RPCs
 ruleset
