@@ -4,7 +4,7 @@
     "description": "The alt text of navbar logo"
   },
   "item.label.Learn": {
-    "message": "Learn",
+    "message": "Aprender",
     "description": "Navbar item with label Learn"
   },
   "item.label.Build": {
@@ -12,15 +12,15 @@
     "description": "Navbar item with label Build"
   },
   "item.label.Nodes": {
-    "message": "Nodes",
+    "message": "Construir",
     "description": "Navbar item with label Nodes"
   },
   "item.label.Tooling": {
-    "message": "Tooling",
+    "message": "Útiles",
     "description": "Navbar item with label Tooling"
   },
   "item.label.Reference": {
-    "message": "Reference",
+    "message": "Referencia",
     "description": "Navbar item with label Reference"
   },
   "item.label.Dapps": {
@@ -32,7 +32,7 @@
     "description": "Navbar item with label Subnets"
   },
   "item.label.Virtual Machines": {
-    "message": "Virtual Machines",
+    "message": "Maquinas Virtuales",
     "description": "Navbar item with label Virtual Machines"
   }
 }
