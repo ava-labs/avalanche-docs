@@ -1,101 +1,92 @@
 ---
-tags: [Nodes, AvalancheGo]
-description: The quickest way to learn about Avalanche is to run a node and interact with the network. This tutorial demonstrates how to install and run an Avalanche node, and connect to the Avalanche Network by compiling a node from source and running it manually.
-sidebar_label: Manually
-pagination_label: Run an Avalanche Node Manually
+etiquetas: [Nodos, AvalancheGo]
+descripción: La forma más rápida de aprender sobre Avalanche es ejecutar un nodo e interactuar con la red. Este tutorial demuestra cómo instalar y ejecutar un nodo Avalanche, y conectarse a la Red Avalanche compilando un nodo desde el origen y ejecutándolo manualmente.
+sidebar_label: Manualmente
+pagination_label: Ejecutar un Nodo Avalanche Manualmente
 sidebar_position: 0
-keywords: [avalanche node, run a node, rpc, rpc node, track mainnet, avalanche mainnet, build from source, binary, avalanchego, blockchain node]
+palabras clave: [nodo avalanche, ejecutar un nodo, rpc, nodo rpc, rastrear mainnet, avalanche mainnet, construir desde el origen, binario, avalanchego, nodo blockchain]
 ---
 
-# Run an Avalanche Node Manually
+# Ejecutar un Nodo Avalanche Manualmente
 
-The quickest way to learn about Avalanche is to run a node and interact with the network.
+La forma más rápida de aprender sobre Avalanche es ejecutar un nodo e interactuar con la red.
 
-In this tutorial, we will:
+En este tutorial, haremos lo siguiente:
 
-- Install AvalancheGo and run an Avalanche node
-- Connect to Avalanche
+- Instalar AvalancheGo y ejecutar un nodo Avalanche
+- Conectarse a Avalanche
 
-<details><summary>Other Options</summary>
+<details><summary>Otras Opciones</summary>
 <p>
 
-- To use a third-party service to host your node or run a 
-validator, [see here](/nodes/run/third-party/aws-node.md) for dedicated tutorials.
+- Para usar un servicio de terceros para alojar su nodo o ejecutar un validador, [vea aquí](/nodes/run/third-party/aws-node.md) tutoriales dedicados.
 
-- If you're just interested in setting up a node for
-staking, it's recommended to follow the 
-[AvalancheGo Install Script](/nodes/run/with-installer.md) tutorial.
+- Si solo está interesado en configurar un nodo para hacer staking, se recomienda seguir el tutorial [AvalancheGo Install Script](/nodes/run/with-installer.md).
 
 </p></details>
 
-## Hardware and OS Requirements
+## Requisitos de Hardware y Sistema Operativo
 
-Avalanche is an incredibly lightweight protocol, so nodes can run on commodity
-hardware. Note that as network usage increases, hardware requirements may
-change.
+Avalanche es un protocolo increíblemente liviano, por lo que los nodos pueden ejecutarse en hardware de consumo. Tenga en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden cambiar.
 
-- CPU: Equivalent of 8 AWS vCPU
+- CPU: Equivalente a 8 vCPU de AWS
 - RAM: 16 GiB
-- Storage: 1 TiB SSD
-- OS: Ubuntu 20.04 or MacOS &gt;= 12
+- Almacenamiento: 1 TiB SSD
+- SO: Ubuntu 20.04 o MacOS >= 12
 
 :::caution
 
-Please do not try running a node on an HDD, as you may get poor and random 
-read/write latencies, therefore reducing performance and reliability.
+Por favor, no intente ejecutar un nodo en un HDD, ya que puede obtener latencias de lectura/escritura pobres y aleatorias, lo que reduce el rendimiento y la confiabilidad.
 
 :::
 
-## Run an Avalanche Node from Source
+## Ejecutar un Nodo Avalanche desde el Origen
 
-The following steps walk through downloading the AvalancheGo source code and locally
-building the binary program.
+Los siguientes pasos explican cómo descargar el código fuente de AvalancheGo y construir localmente el programa binario.
 
-### Install Dependencies
+### Instalar Dependencias
 
-- Install [gcc](https://gcc.gnu.org/)
-- Install [go](https://go.dev/)
+- Instalar [gcc](https://gcc.gnu.org/)
+- Instalar [go](https://go.dev/)
 
-### Build and Start
+### Construir y Comenzar
 
-#### 1. Set the [$GOPATH](https://github.com/golang/go/wiki/SettingGOPATH)
+#### 1. Configurar el [$GOPATH](https://github.com/golang/go/wiki/SettingGOPATH)
 
-#### 2. Create a directory in your `$GOPATH`
+#### 2. Crear un directorio en su `$GOPATH`
 
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
 ``` 
 
-#### 3. Clone AvalancheGo
+#### 3. Clonar AvalancheGo
 
-In the `$GOPATH`, clone [AvalancheGo](https://github.com/ava-labs/avalanchego), 
-the consensus engine and node implementation that is the core of the Avalanche
-Network.
+En el `$GOPATH`, clone [AvalancheGo](https://github.com/ava-labs/avalanchego), el motor de consenso e implementación de nodo que es el núcleo de la Red Avalanche.
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs
 git clone https://github.com/ava-labs/avalanchego.git
 ``` 
 
-#### 4. Run the Build Script
+#### 4. Ejecutar el Script de Construcción
 
-From the `avalanchego` directory, run the build script
+Desde el directorio `avalanchego`, ejecute el script de construcción
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ``` 
 
-#### 5. Start the Node
+#### 5. Iniciar el Nodo
 
-On Avalanche Mainnet:
+En Avalanche Mainnet:
 
 ```bash 
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego
 ```
 
-On Fuji Testnet:
+En Fuji Testnet:
 
 ```bash 
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -103,56 +94,54 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
 :::info
-To kill the node, press `Ctrl + C`. 
+Para detener el nodo, presione `Ctrl + C`. 
 :::
 
-## Run with a Pre-Built Binary
+## Ejecutar con un Binario Pre-Construido
 
-To download a pre-built binary instead of building from source, go
-to the [AvalancheGo releases page](https://github.com/ava-labs/avalanchego/releases), 
-and select the desired version.
+Para descargar un binario pre-construido en lugar de construir desde el origen, vaya a la página de versiones de [AvalancheGo releases](https://github.com/ava-labs/avalanchego/releases), y seleccione la versión deseada.
 
-### Download
+### Descargar
 
-Under `Assets`, select the appropriate file.
+Bajo `Assets`, seleccione el archivo apropiado.
 
 #### MacOS 
 
-Download: `avalanchego-macos-<VERSION>.zip` 
+Descargar: `avalanchego-macos-<VERSION>.zip` 
 
-Unzip:
+Descomprimir:
 
 ```zsh
 unzip avalanchego-macos-<VERSION>.zip
 ```
 
-the resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+la carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-#### Linux(PCs or Cloud Providers) 
+#### Linux(PCs o Proveedores de Nube) 
 
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
+Descargar: `avalanchego-linux-amd64-<VERSION>.tar.gz`
 
-Unzip: 
+Descomprimir: 
 
 ```bash
 tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz
 ```
 
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
 #### Linux(Arm64) 
 
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
+Descargar: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 
-Unzip: 
+Descomprimir: 
 
 ```bash
 tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz
 ```
 
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-### Start the Node
+### Iniciar el Nodo
 
 #### MacOS
 
@@ -182,73 +171,52 @@ Fuji Testnet:
 ./avalanchego-<VERSION>-linux/avalanchego --network-id=fuji
 ```
 
-## Run with Docker
+## Ejecutar con Docker
 
-See the [AvalancheGo GitHub](https://github.com/ava-labs/avalanchego#docker-install)
-repository for more information.
+Consulte el repositorio [AvalancheGo GitHub](https://github.com/ava-labs/avalanchego#docker-install) para obtener más información.
 
 ## Networking
 
-To run successfully, AvalancheGo needs to accept connections from the Internet
-on the network port `9651`. Before you proceed with the installation, you need
-to determine the networking environment your node will run in.
+Para ejecutarse correctamente, AvalancheGo necesita aceptar conexiones desde Internet en el puerto de red `9651`. Antes de continuar con la instalación, debe determinar el entorno de red en el que se ejecutará su nodo.
 
-<details><summary>Running on a Cloud Provider</summary>
+<details><summary>Ejecutando en un Proveedor de Nube</summary>
 <p>
-If your node is running on a cloud provider computer instance, it will have a
-static IP. Find out what that static IP is, or set it up if you didn't already.
+Si su nodo se está ejecutando en una instancia de computadora de un proveedor de nube, tendrá una IP estática. Descubra cuál es esa IP estática, o configúrela si aún no lo ha hecho.
 </p></details>
 
-<details><summary>Running on a Home Connection</summary>
+<details><summary>Ejecutando en una Conexión Doméstica</summary>
 <p>
 
-If you're running a node on a computer that is on a residential internet
-connection, you have a dynamic IP; that is, your IP will change periodically.
-**For the sake of demonstration, you can ignore the following information.**
-Otherwise, you will need to set up inbound port forwarding of port `9651` from 
-the internet to the computer the node is installed on.
+Si está ejecutando un nodo en una computadora que está en una conexión de internet residencial, tiene una IP dinámica; es decir, su IP cambiará periódicamente. **Para efectos de demostración, puede ignorar la siguiente información.** De lo contrario, deberá configurar el reenvío de puertos de entrada del puerto `9651` desde Internet hacia la computadora en la que se instala el nodo.
 
-As there are too many models and router configurations, we cannot provide
-instructions on what exactly to do, but there are online guides to be found
-(like
-[this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/),
-or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)
-), and your service provider support might help too.
+Como hay demasiados modelos y configuraciones de enrutadores, no podemos proporcionar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar (como [esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)), y el soporte de su proveedor de servicios también podría ayudar.
 
 :::warning
 
-Please note that a fully connected Avalanche node maintains and communicates
-over a couple of thousand of live TCP connections. For some low-powered and
-older home routers that might be too much to handle. If that is the case you may
-experience lagging on other computers connected to the same router, node getting
-benched, failing to sync and similar issues.
+Tenga en cuenta que un nodo Avalanche completamente conectado mantiene y se comunica a través de un par de miles de conexiones TCP en vivo. Para algunos enrutadores domésticos de baja potencia y más antiguos, eso podría ser demasiado para manejar. Si ese es el caso, es posible que experimente retrasos en otras computadoras conectadas al mismo enrutador, el nodo se queda en modo de espera, falla al sincronizar y problemas similares.
 
 :::
 </p></details>
 
 :::info
-To be able to make API calls to your node from other machines, include the argument `--http-host=`
-when starting the node.
+Para poder realizar llamadas de API a su nodo desde otras máquinas, incluya el argumento `--http-host=` al iniciar el nodo.
 :::
 
 ## Bootstrapping
 
-A new node needs to catch up to the latest network state before it can participate in consensus 
-and serve API calls. This process (called bootstrapping) currently takes several days for a new 
-node connected to Mainnet, and a day or so for a new node connected to Fuji Testnet. 
-When a given chain is done bootstrapping, it will print logs like this:
+Un nuevo nodo necesita ponerse al día con el último estado de la red antes de poder participar en el consenso y servir llamadas de API. Este proceso (llamado bootstrapping) actualmente lleva varios días para un nuevo nodo conectado a Mainnet, y un día aproximadamente para un nuevo nodo conectado a Fuji Testnet. Cuando una cadena dada ha terminado de arrancar, imprimirá registros como estos:
 
 ```text
-[09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
-[09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
-[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consensus starting {"lenFrontier": 1}
+[09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consenso iniciando {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
+[09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consenso iniciando {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
+[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consenso iniciando {"lenFrontier": 1}
 ```
 
-### Check Bootstrapping Progress
+### Verificar el Progreso de Inicio Rápido
 
-To check if a given chain is done bootstrapping, in another terminal window call
+Para verificar si una cadena dada ha terminado de iniciar rápidamente, en otra ventana de terminal llama a
 [`info.isBootstrapped`](/reference/avalanchego/info-api.md#infoisbootstrapped)
-by copying and pasting the following command:
+copiando y pegando el siguiente comando:
 
 ```sh
 curl -X POST --data '{
@@ -261,17 +229,17 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped; otherwise, it returns
-`false`. If you make other API calls to a chain that is not done bootstrapping,
-it will return `API call rejected because chain is not done bootstrapping`. If
-you are still experiencing issues please contact us on
+Si esto devuelve `true`, la cadena ha terminado de iniciar rápidamente; de lo contrario, devuelve
+`false`. Si haces otras llamadas de API a una cadena que no ha terminado de iniciar rápidamente,
+devolverá `Llamada de API rechazada porque la cadena no ha terminado de iniciar rápidamente`. Si
+sigues teniendo problemas, contáctanos en
 [Discord.](https://chat.avalabs.org/)
 
-Learn more about bootstrapping [here](/nodes/maintain/node-bootstrap).
+Aprende más sobre el inicio rápido [aquí](/nodes/maintain/node-bootstrap).
 
 ## RPC
 
-When finished bootstrapping, the X, P, and C-Chain RPC endpoints will be: 
+Cuando haya terminado de iniciar rápidamente, los puntos finales RPC de las cadenas X, P y C serán:
 
 ```bash
 localhost:9650/ext/bc/P
@@ -279,7 +247,7 @@ localhost:9650/ext/bc/X
 localhost:9650/ext/bc/C/rpc
 ```
 
-if run locally, or
+si se ejecuta localmente, o
 
 ```bash
 XXX.XX.XX.XXX:9650/ext/bc/P
@@ -287,21 +255,20 @@ XXX.XX.XX.XXX:9650/ext/bc/X
 XXX.XX.XX.XXX:9650/ext/bc/C/rpc
 ```
 
-if run on a cloud provider. The “XXX.XX.XX.XXX" should be replaced with the public 
-IP of your EC2 instance. 
+si se ejecuta en un proveedor de nube. El "XXX.XX.XX.XXX" debe ser reemplazado por la IP pública
+de tu instancia EC2.
 
-For more information on the requests available at these endpoints, please see the
-[AvalancheGo API Reference](/reference) documentation.
+Para obtener más información sobre las solicitudes disponibles en estos puntos finales, consulta la
+documentación de referencia de la API de AvalancheGo.
 
-## Going Further
+## Ir más allá
 
-Your Avalanche node will perform consensus on its own, but it is not yet a
-validator on the network. This means that the rest of the network will not query
-your node when sampling the network during consensus. If you want to add your
-node as a validator, check out [Add a Validator](/nodes/validate/add-a-validator.md)
-to take it a step further.
+Tu nodo Avalanche realizará consenso por sí solo, pero aún no es un validador en la red. Esto significa
+que el resto de la red no consultará tu nodo al muestrear la red durante el consenso. Si quieres agregar tu
+nodo como validador, consulta [Agregar un Validador](/nodes/validate/add-a-validator.md)
+para llevarlo un paso más allá.
 
-Also check out the [Maintain](/nodes/maintain/node-bootstrap.md) section to learn about how
-to maintain and customize your node to fit your needs.
+También echa un vistazo a la sección de [Mantenimiento](/nodes/maintain/node-bootstrap.md) para aprender cómo
+mantener y personalizar tu nodo para que se ajuste a tus necesidades.
 
-To track a Subnet with your node, head to the [Subnet Node](/nodes/run/subnet-node.md) tutorial.
+Para rastrear una Subnet con tu nodo, dirígete al tutorial de [Nodo de Subnet](/nodes/run/subnet-node.md).
