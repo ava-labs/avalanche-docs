@@ -1,61 +1,43 @@
 ---
-tags: [Nodes]
-description: Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
-sidebar_label: System Requirements
-pagination_label: System Requirements for Running an Avalanche Node
+etiquetas: [Nodos]
+descripción: Avalanche es un protocolo increíblemente ligero, por lo que los nodos pueden funcionar en hardware de consumo. Ten en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden cambiar.
+sidebar_label: Requisitos del sistema
+pagination_label: Requisitos del sistema para ejecutar un nodo Avalanche
 ---
 
-# System Requirements for Running an Avalanche Node
+# Requisitos del sistema para ejecutar un nodo Avalanche
 
-## Hardware and Operating Systems
+## Hardware y sistemas operativos
 
-Avalanche is an incredibly lightweight protocol, so nodes can run on commodity
-hardware. Note that as network usage increases, hardware requirements may
-change.
+Avalanche es un protocolo increíblemente ligero, por lo que los nodos pueden funcionar en hardware de consumo. Ten en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden cambiar.
 
-- CPU: Equivalent of 8 AWS vCPU
+- CPU: Equivalente a 8 vCPU de AWS
 - RAM: 16 GiB
-- Storage: 1 TiB SSD
-- OS: Ubuntu 20.04 or MacOS &gt;= 12
+- Almacenamiento: 1 TiB SSD
+- SO: Ubuntu 20.04 o MacOS >= 12
 
-:::caution
+:::precaución
 
-Nodes which choose to use a HDD may get poor and random 
-read/write latencies, therefore reducing performance and reliability. An SSD is strongly suggested.
+Los nodos que eligen usar un HDD pueden tener latencias de lectura/escritura pobres y aleatorias, lo que reduce el rendimiento y la confiabilidad. Se recomienda encarecidamente un SSD.
 
 :::
 
-## Networking
+## Redes
 
-To run successfully, AvalancheGo needs to accept connections from the Internet
-on the network port `9651`. Before you proceed with the installation, you need
-to determine the networking environment your node will run in.
+Para funcionar correctamente, AvalancheGo necesita aceptar conexiones desde Internet en el puerto de red `9651`. Antes de continuar con la instalación, debes determinar el entorno de red en el que se ejecutará tu nodo.
 
-### Running on a Cloud Provider
+### Ejecución en un proveedor de nube
 
-If your node is running on a cloud provider computer instance, it will have a
-static IP. Find out what that static IP is, or set it up if you didn't already.
+Si tu nodo se está ejecutando en una instancia de computadora de un proveedor de nube, tendrá una IP estática. Descubre cuál es esa IP estática o configúrala si aún no lo has hecho.
 
-### Running on a Home Connection
+### Ejecución en una conexión residencial
 
-If you're running a node on a computer that is on a residential internet
-connection, you have a dynamic IP; that is, your IP will change periodically.
-You will need to set up inbound port forwarding of port `9651` from the internet
-to the computer the node is installed on.
+Si estás ejecutando un nodo en una computadora que está en una conexión de internet residencial, tienes una IP dinámica; es decir, tu IP cambiará periódicamente. Deberás configurar el reenvío de puertos de entrada del puerto `9651` desde Internet hacia la computadora en la que se instala el nodo.
 
-As there are too many models and router configurations, we cannot provide
-instructions on what exactly to do, but there are online guides to be found
-(like
-[this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/),
-or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)
-), and your service provider support might help too.
+Dado que hay demasiados modelos y configuraciones de enrutadores, no podemos proporcionar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar (como [esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)), y el soporte de tu proveedor de servicios también podría ayudar.
 
-:::warning
+:::advertencia
 
-A fully connected Avalanche node maintains and communicates
-over a couple of thousand of live TCP connections. For some low-powered and
-older home routers that might be too much to handle. If that is the case you may
-experience lagging on other computers connected to the same router, node getting
-benched, failing to sync and similar issues.
+Un nodo Avalanche completamente conectado mantiene y comunica más de un par de miles de conexiones TCP en vivo. Para algunos enrutadores residenciales de baja potencia y más antiguos, eso puede ser demasiado para manejar. Si ese es el caso, es posible que experimentes retrasos en otras computadoras conectadas al mismo enrutador, que el nodo se quede en espera, falle al sincronizar y problemas similares.
 
 :::
