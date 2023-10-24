@@ -1,53 +1,53 @@
 ---
-tags: [Nodes]
-description: Detailed instructions for running an Avalanche node with Latitude.sh
+tags: [Nodos]
+description: Instrucciones detalladas para ejecutar un nodo Avalanche con Latitude.sh
 sidebar_label: Latitude
-pagination_label: Run an Avalanche Node with Latitude.sh
+pagination_label: Ejecutar un nodo Avalanche con Latitude.sh
 sidebar_position: 3
 ---
 
-# Run an Avalanche Node with Latitude.sh
+# Ejecutar un nodo Avalanche con Latitude.sh
 
-## Introduction
+## Introducción
 
-This tutorial will guide you through setting up an Avalanche node on [Latitude.sh](https://latitude.sh).
-Latitude.sh provides high-performance lighting-fast bare metal servers to ensure that your node is highly
-secure, available, and accessible.
+Este tutorial te guiará a través de la configuración de un nodo Avalanche en [Latitude.sh](https://latitude.sh).
+Latitude.sh proporciona servidores bare metal de alto rendimiento para asegurar que tu nodo sea altamente
+seguro, disponible y accesible.
 
-To get started, you'll need:
+Para empezar, necesitarás:
 
-- A Latitude.sh account
-- A terminal with which to SSH into your Latitude.sh machine
+- Una cuenta de Latitude.sh
+- Una terminal desde la cual hacer SSH a tu máquina Latitude.sh
 
-For the instructions on creating an account and server with Lattitude.sh, please reference their
-[GitHub tutorial](https://github.com/NottherealIllest/Latitude.sh-post/blob/main/avalanhe/avax-copy.md)
-, or visit [this page](https://www.latitude.sh/dashboard/signup) to sign up and create your first project.
+Para obtener instrucciones sobre cómo crear una cuenta y un servidor con Lattitude.sh, por favor consulta su
+[tutorial en GitHub](https://github.com/NottherealIllest/Latitude.sh-post/blob/main/avalanhe/avax-copy.md)
+, o visita [esta página](https://www.latitude.sh/dashboard/signup) para registrarte y crear tu primer proyecto.
 
-This tutorial assumes your local machine has a Unix-style terminal. If you're on Windows, you'll have
-to adapt some of the commands used here.
+Este tutorial asume que tu máquina local tiene una terminal de estilo Unix. Si estás en Windows, tendrás
+que adaptar algunos de los comandos utilizados aquí.
 
-## Configuring Your Server
+## Configurando tu servidor
 
-### Create a Latitude.sh Account
+### Crear una cuenta de Latitude.sh
 
-At this point your account has been verified, and you have created a new project and deployed the
-server according to the instructions linked above.
+En este punto, tu cuenta ha sido verificada y has creado un nuevo proyecto y desplegado el
+servidor de acuerdo a las instrucciones enlazadas arriba.
 
-### Access Your Server & Further Steps
+### Acceder a tu servidor y pasos adicionales
 
-All your Lattitude.sh credentials are available by clicking the `server` under your project, and can
-be used to access your Latitude.sh machine from your local machine using a terminal.
+Todas tus credenciales de Lattitude.sh están disponibles haciendo clic en el `servidor` bajo tu proyecto, y pueden
+ser utilizadas para acceder a tu máquina Latitude.sh desde tu máquina local utilizando una terminal.
 
 :::note
-You will need to install the `avalanche node installer script` directly in the server's terminal.
+Necesitarás instalar el `script de instalación del nodo avalanche` directamente en la terminal del servidor.
 :::
 
-After gaining access, we’ll need to set up our Avalanche node. To do this, follow the instructions
-here to install and run your node [Set Up Avalanche Node With Installer](/nodes/run/with-installer).
+Después de obtener acceso, necesitaremos configurar nuestro nodo Avalanche. Para hacer esto, sigue las instrucciones
+aquí para instalar y ejecutar tu nodo [Configurar nodo Avalanche con instalador](/nodes/run/with-installer).
 
-Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few
-hours. To check if it's done, you can issue an API call using `curl`.
-The request is:
+Tu nodo AvalancheGo debería estar ahora en funcionamiento y en proceso de bootstrap, lo cual puede llevar algunas
+horas. Para comprobar si ha terminado, puedes emitir una llamada de API usando `curl`.
+La solicitud es:
 
 ```sh
 curl -X POST --data '{
@@ -60,7 +60,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+Una vez que el nodo haya terminado de bootstrapear, la respuesta será:
 
 ```json
 {
@@ -72,8 +72,8 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
-In order to make your node a validator, you'll need its node ID. To get it, run:
+Puedes continuar, incluso si AvalancheGo no ha terminado de bootstrapear.
+Para hacer que tu nodo sea un validador, necesitarás su ID de nodo. Para obtenerlo, ejecuta:
 
 ```sh
 curl -X POST --data '{
@@ -83,7 +83,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+La respuesta contiene el ID de nodo.
 
 ```json
 {
@@ -93,36 +93,36 @@ The response contains the node ID.
 }
 ```
 
-In the above example the node ID is `NodeID-KhDnAoZDW8iRJ3F26iQgK5xXVFMPcaYeu`.
+En el ejemplo anterior, el ID de nodo es `NodeID-KhDnAoZDW8iRJ3F26iQgK5xXVFMPcaYeu`.
 
-AvalancheGo has other APIs, such as the [Health API](https://docs.avax.network/apis/avalanchego/apis/health),
-that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs,
-modify the ExecStart section of `/etc/systemd/system/avalanchego.service` (created during the
-installation process) to include flags that enable these endpoints. Don't manually enable any APIs
-unless you have a reason to.
+AvalancheGo tiene otras APIs, como la [API de Salud](https://docs.avax.network/apis/avalanchego/apis/health),
+que se pueden utilizar para interactuar con el nodo. Algunas APIs están desactivadas por defecto. Para habilitar
+estas APIs, modifica la sección ExecStart de `/etc/systemd/system/avalanchego.service` (creada durante el
+proceso de instalación) para incluir banderas que habiliten estos endpoints. No habilites manualmente ninguna API
+a menos que tengas una razón para hacerlo.
 
-Exit out of the SSH server by running:
+Sal del servidor SSH ejecutando:
 
 ```sh
 exit
 ```
 
-### Upgrading Your Node
+### Actualizando tu nodo
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are
-recommended but not required. Advance notice will be given for upgrades that are not backwards
-compatible. To update your node to the latest version, SSH into your server using a terminal and
-run the installer script again.
+AvalancheGo es un proyecto en curso y hay actualizaciones regulares de versión. La mayoría de las actualizaciones son
+recomendadas pero no requeridas. Se dará aviso previo para las actualizaciones que no sean compatibles con versiones
+anteriores. Para actualizar tu nodo a la última versión, haz SSH a tu servidor utilizando una terminal y
+ejecuta el script de instalación de nuevo.
 
 ```sh
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service,
-run `sudo systemctl status avalanchego.`
+Tu máquina ahora está ejecutando la versión más reciente de AvalancheGo. Para ver el estado del servicio AvalancheGo,
+ejecuta `sudo systemctl status avalanchego.`
 
-## Wrap Up
+## Conclusión
 
-That's it! You now have an AvalancheGo node running on a Latitude.sh machine. We recommend setting up
-[node monitoring](https://docs.avax.network/nodes/maintain/setting-up-node-monitoring) for your
-AvalancheGo node.
+¡Eso es todo! Ahora tienes un nodo AvalancheGo ejecutándose en una máquina Latitude.sh. Recomendamos configurar
+[monitoreo de nodo](https://docs.avax.network/nodes/maintain/setting-up-node-monitoring) para tu
+nodo AvalancheGo.

@@ -1,11 +1,11 @@
 ---
-tags: [Nodes]
-description: Detailed instructions for running an Avalanche node with Alibaba Cloud
-sidebar_label: Alibaba Cloud
-pagination_label: Run an Avalanche Node with Alibaba Cloud
-sidebar_position: 5
+etiquetas: [Nodos]
+descripción: Instrucciones detalladas para ejecutar un nodo Avalanche con Alibaba Cloud
+etiqueta_de_barra_lateral: Alibaba Cloud
+etiqueta_de_paginación: Ejecutar un nodo Avalanche con Alibaba Cloud
+posición_de_barra_lateral: 5
 ---
 
-# Run an Avalanche Node with Alibaba Cloud
+# Ejecutar un nodo Avalanche con Alibaba Cloud
 
-Detailed instructions can be found [here](https://www.alibabacloud.com/blog/avax-naas-node-as-a-service-on-alibaba-cloud_599481).
+Las instrucciones detalladas se pueden encontrar [aquí](https://www.alibabacloud.com/blog/avax-naas-node-as-a-service-on-alibaba-cloud_599481).

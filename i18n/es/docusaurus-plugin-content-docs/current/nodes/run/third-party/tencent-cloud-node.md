@@ -1,11 +1,11 @@
 ---
-tags: [Nodes]
-description: Detailed instructions for running an Avalanche node with Tencent Cloud
-sidebar_label: Tencent Cloud
-pagination_label: Run an Avalanche Node with Tencent Cloud
-sidebar_position: 5
+etiquetas: [Nodos]
+descripción: Instrucciones detalladas para ejecutar un nodo Avalanche con Tencent Cloud
+etiqueta_de_barra_lateral: Tencent Cloud
+etiqueta_de_paginación: Ejecutar un nodo Avalanche con Tencent Cloud
+posición_de_barra_lateral: 5
 ---
 
-# Run an Avalanche Node with Tencent Cloud
+# Ejecutar un nodo Avalanche con Tencent Cloud
 
-Detailed instructions can be found [here](https://www.tencentcloud.com/dynamic/insights/sample-article/100424).
+Las instrucciones detalladas se pueden encontrar [aquí](https://www.tencentcloud.com/dynamic/insights/sample-article/100424).

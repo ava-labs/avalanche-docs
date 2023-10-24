@@ -1,219 +1,145 @@
 ---
-tags: [Nodes]
-description: Launch an Avalanche Node on Google Cloud Platform.
+tags: [Nodos]
+description: Ejecuta un Nodo Avalanche en la Plataforma de Google Cloud.
 sidebar_label: Google Cloud
-pagination_label: Run an Avalanche Node with Google Cloud Platform
+pagination_label: Ejecutar un Nodo Avalanche con Google Cloud Platform
 sidebar_position: 3
 ---
 
-# Run an Avalanche Node with Google Cloud Platform
+# Ejecutar un Nodo Avalanche con Google Cloud Platform
 
 :::caution
-This document was written by a community member, some information may be outdated.
+Este documento fue escrito por un miembro de la comunidad, alguna información puede estar desactualizada.
 :::
 
-## Introduction
+## Introducción
 
-Google's Cloud Platform (GCP) is a scalable, trusted and reliable hosting
-platform. Google operates a significant amount of it's own global networking
-infrastructure. It's [fiber
-network](https://cloud.google.com/blog/products/networking/google-cloud-networking-in-depth-cloud-cdn)
-can provide highly stable and consistent global connectivity.
-In this article, we will leverage GCP to deploy a node on which Avalanche can
-installed via [terraform](https://www.terraform.io/). Leveraging `terraform` may
-seem like overkill, it should set you apart as an operator
-and administrator as it will enable you greater flexibility and provide the
-basis on which you can easily build further automation.
+La Plataforma de Google Cloud (GCP) es una plataforma de alojamiento escalable, confiable y de confianza. Google opera una cantidad significativa de su propia infraestructura de red global. Su [red de fibra](https://cloud.google.com/blog/products/networking/google-cloud-networking-in-depth-cloud-cdn) puede proporcionar conectividad global altamente estable y consistente. En este artículo, aprovecharemos GCP para implementar un nodo en el que Avalanche pueda instalarse a través de [terraform](https://www.terraform.io/). Aprovechar `terraform` puede parecer excesivo, pero te distinguirá como operador y administrador, ya que te permitirá una mayor flexibilidad y proporcionará la base sobre la cual puedes construir fácilmente más automatización.
 
-## Conventions
+## Convenciones
 
-- `Items` highlighted in this manor are GCP parlance and can be searched for
-  further reference in the Google documentation for their cloud products.
+- `Items` resaltados de esta manera son términos utilizados en GCP y se pueden buscar para obtener más referencias en la documentación de Google sobre sus productos en la nube.
 
-## Important Notes
+## Notas importantes
 
-- The machine type used in this documentation is for reference only and the
-  actual sizing you use will depend entirely upon the amount that is staked and
-  delegated to the node.
+- El tipo de máquina utilizado en esta documentación es solo de referencia y el tamaño real que uses dependerá completamente de la cantidad que se apueste y se delege al nodo.
 
-## Architectural Description
+## Descripción arquitectónica
 
-This section aims to describe the architecture of the system that the steps in
-the [Setup Instructions](#setup-instructions) section deploy when enacted. This
-is done so that the executor can not only deploy the reference architecture, but
-also understand and potentially optimize it for their needs.
+Esta sección tiene como objetivo describir la arquitectura del sistema que los pasos en la sección de [Instrucciones de configuración](#instrucciones-de-configuración) implementan cuando se ejecutan. Esto se hace para que el ejecutor no solo pueda implementar la arquitectura de referencia, sino también comprender y potencialmente optimizarla para sus necesidades.
 
-### Project
+### Proyecto
 
-We will create and utilize a single GCP `Project` for deployment of all resources.
+Crearemos y utilizaremos un único `Proyecto` GCP para la implementación de todos los recursos.
 
-#### Service Enablement
+#### Habilitación de servicios
 
-Within our GCP project we will need to enable the following Cloud Services:
+Dentro de nuestro proyecto GCP, deberemos habilitar los siguientes servicios en la nube:
 
 - `Compute Engine`
 - `IAP`
 
-### Networking
+### Redes
 
-#### Compute Network
+#### Red de cómputo
 
-We will deploy a single `Compute Network` object. This unit is where we will
-deploy all subsequent networking objects. It provides a logical boundary and
-securitization context should you wish to deploy other chain stacks or other
-infrastructure in GCP.
+Implementaremos un único objeto de `Red de cómputo`. Esta unidad es donde implementaremos todos los objetos de red subsiguientes. Proporciona un límite lógico y un contexto de securitización en caso de que desees implementar otras pilas de cadenas u otra infraestructura en GCP.
 
-#### Public IP
+#### IP pública
 
-Avalanche requires that a validator communicate outbound on the same public IP
-address that it advertises for other peers to connect to it on. Within GCP this
-precludes the possibility of us using a Cloud NAT Router for the outbound
-communications and requires us to bind the public IP that we provision to the
-interface of the machine. We will provision a single `EXTERNAL` static IPv4
-`Compute Address`.
+Avalanche requiere que un validador se comunique de salida en la misma dirección IP pública que anuncia para que otros pares se conecten a él. Dentro de GCP, esto excluye la posibilidad de usar un enrutador NAT en la nube para las comunicaciones de salida y nos obliga a vincular la IP pública que provisionamos a la interfaz de la máquina. Proveeremos una única dirección IPv4 estática `EXTERNAL` `Compute Address`.
 
-#### Subnets
+#### Subredes
 
-For the purposes of this documentation we will deploy a single `Compute
-Subnetwork` in the US-EAST1 `Region` with a /24 address range giving us 254 IP
-addresses (not all usable but for the sake of generalized documentation).
+Para fines de esta documentación, implementaremos una única `Subred de cómputo` en la `Región` US-EAST1 con un rango de direcciones /24 que nos brinda 254 direcciones IP (no todas utilizables, pero para fines de documentación generalizada).
 
-### Compute
+### Cómputo
 
-#### Disk
+#### Disco
 
-We will provision a single 400GB `PD-SSD` disk that will be attached to our VM.
+Provisionaremos un único disco `PD-SSD` de 400GB que se adjuntará a nuestra VM.
 
-#### Instance
+#### Instancia
 
-We will deploy a single `Compute Instance` of size `e2-standard-8`. Observations
-of operations using this machine specification suggest it is memory over
-provisioned and could be brought down to 16GB using custom machine
-specification; but please review and adjust as needed (the beauty of compute
-virtualization!!).
+Implementaremos una única `Instancia de cómputo` de tamaño `e2-standard-8`. Las observaciones de las operaciones utilizando esta especificación de máquina sugieren que está sobredimensionada en memoria y se podría reducir a 16GB utilizando una especificación de máquina personalizada; pero revisa y ajusta según sea necesario (¡¡la belleza de la virtualización de cómputo!!).
 
-#### Zone
+#### Zona
 
-We will deploy our instance into the `US-EAST1-B` `Zone`
+Implementaremos nuestra instancia en la `Zona` `US-EAST1-B`.
 
 #### Firewall
 
-We will provision the following `Compute Firewall` rules:
+Provisionaremos las siguientes reglas de `Firewall de cómputo`:
 
-- IAP INGRESS for SSH (TCP 22) - this only allows GCP IAP sources inbound on SSH.
-- P2P INGRESS for AVAX Peers (TCP 9651)
+- IAP INGRESS para SSH (TCP 22) - esto solo permite que las fuentes de IAP de GCP entren por SSH.
+- P2P INGRESS para pares AVAX (TCP 9651)
 
-These are obviously just default ports and can be tailored to your needs as you desire.
+Estos son obviamente puertos predeterminados y se pueden adaptar a tus necesidades según lo desees.
 
-## <a name="setup-instructions"></a> Setup Instructions
+## <a name="instrucciones-de-configuración"></a> Instrucciones de configuración
 
-### GCP Account
+### Cuenta de GCP
 
-1. If you don't already have a GCP account go create one [here](https://console.cloud.google.com/freetrial)
+1. Si aún no tienes una cuenta de GCP, crea una [aquí](https://console.cloud.google.com/freetrial)
 
-You will get some free bucks to run a trial, the trial is feature complete but
-your usage will start to deplete your free bucks so turn off anything you don't
-need and/or add a credit card to your account if you intend to run things long
-term to avoid service shutdowns.
+Obtendrás algunos dólares gratis para ejecutar una prueba, la prueba es completa en cuanto a funciones, pero tu uso comenzará a agotar tus dólares gratis, así que apaga todo lo que no necesites y/o agrega una tarjeta de crédito a tu cuenta si tienes la intención de ejecutar cosas a largo plazo para evitar cierres de servicio.
 
-### Project
+### Proyecto
 
-Login to the GCP `Cloud Console` and create a new `Project` in your
-organization. Let's use the name `my-avax-nodes` for the sake of this setup.
+Inicia sesión en la `Consola en la nube` de GCP y crea un nuevo `Proyecto` en tu organización. Usemos el nombre `my-avax-nodes` por el bien de esta configuración.
 
-1. ![Select Project Dropdown](/img/cloud_console_project_dropdown.png)
-2. ![Click New Project Button](/img/cloud_console_new_project_button.png)
-3. ![Create New Project](/img/cloud_console_create_new_project.png)
+1. ![Seleccionar menú desplegable del proyecto](/img/cloud_console_project_dropdown.png)
+2. ![Hacer clic en el botón Nuevo proyecto](/img/cloud_console_new_project_button.png)
+3. ![Crear nuevo proyecto](/img/cloud_console_create_new_project.png)
 
-### Terraform State
+### Estado de Terraform
 
-Terraform uses a state files to compose a differential between current
-infrastructure configuration and the proposed plan. You can store this state in
-a variety of different places, but using GCP storage is a reasonable approach
-given where we are deploying so we will stick with that.
+Terraform utiliza archivos de estado para componer una diferencia entre la configuración de infraestructura actual y el plan propuesto. Puedes almacenar este estado en una variedad de lugares diferentes, pero usar el almacenamiento de GCP es un enfoque razonable dada la ubicación donde estamos implementando, así que nos quedaremos con eso.
 
-1. ![Select Cloud Storage Browser](/img/cloud_storage_browser.png)
-2. ![Create New Bucket](/img/cloud_storage_create_bucket.png)
+1. ![Seleccionar Navegador de almacenamiento en la nube](/img/cloud_storage_browser.png)
+2. ![Crear nuevo bucket](/img/cloud_storage_create_bucket.png)
 
-Authentication to GCP from terraform has a few different options which are laid
-out [here](https://www.terraform.io/language/settings/backends/gcs). Please
-chose the option that aligns with your context and ensure those steps are
-completed before continuing.
+La autenticación a GCP desde terraform tiene algunas opciones diferentes que se describen [aquí](https://www.terraform.io/language/settings/backends/gcs). Elije la opción que se alinee con tu contexto y asegúrate de completar esos pasos antes de continuar.
 
 :::note
 
-Depending upon how you intend to execute your terraform operations you may or
-may not need to enable public access to the bucket. Obviously, not exposing the
-bucket for `public` access (even if authenticated) is preferable. If you intend
-to simply run terraform commands from your local machine then you will need to
-open the access up. I recommend to employ a full CI/CD pipeline using GCP Cloud
-Build which if utilized will mean the bucket can be marked as `private`. A full
-walk through of Cloud Build setup in this context can be found
-[here](https://cloud.google.com/architecture/managing-infrastructure-as-code)
+Dependiendo de cómo planees ejecutar tus operaciones de terraform, es posible que necesites habilitar o no el acceso público al bucket. Obviamente, no exponer el bucket para acceso "público" (incluso si está autenticado) es preferible. Si planeas simplemente ejecutar comandos de terraform desde tu máquina local, entonces deberás abrir el acceso. Recomiendo emplear un pipeline completo de CI/CD utilizando GCP Cloud Build, que si se utiliza significa que el bucket se puede marcar como "privado". Se puede encontrar una guía completa de configuración de Cloud Build en este contexto [aquí](https://cloud.google.com/architecture/managing-infrastructure-as-code).
 
 :::
 
-### Clone GitHub Repository
+### Clonar el repositorio de GitHub
 
-I have provided a rudimentary terraform construct to provision a node on which
-to run Avalanche which can be found
-[here](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project).
-Documentation below assumes you are using this repository but if you have
-another terraform skeleton similar steps will apply.
+He proporcionado una construcción rudimentaria de terraform para aprovisionar un nodo en el que ejecutar Avalanche, que se puede encontrar [aquí](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project). La documentación a continuación asume que estás utilizando este repositorio, pero si tienes otro esqueleto de terraform, se aplicarán pasos similares.
 
-### Terraform Configuration
+### Configuración de Terraform
 
-1. If running terraform locally, please
-   [install](https://learn.hashicorp.com/tutorials/terraform/install-cli) it.
-2. In this repository, navigate to the `terraform` directory.
-3. Under the `projects` directory, rename the `my-avax-project` directory to
-   match your GCP project name that you created (not required, but nice to be
-   consistent)
-4. Under the folder you just renamed locate the `terraform.tfvars` file.
-5. Edit this file and populate it with the values which make sense for your
-   context and save it.
-6. Locate the `backend.tf` file in the same directory.
-7. Edit this file ensuring to replace the `bucket` property with the GCS bucket
-   name that you created earlier.
+1. Si ejecutas terraform localmente, por favor [instálalo](https://learn.hashicorp.com/tutorials/terraform/install-cli).
+2. En este repositorio, navega hasta el directorio `terraform`.
+3. En el directorio `projects`, cambia el nombre del directorio `my-avax-project` para que coincida con el nombre de tu proyecto GCP que creaste (no es necesario, pero es bueno ser consistente).
+4. Bajo la carpeta que acabas de renombrar, localiza el archivo `terraform.tfvars`.
+5. Edita este archivo y completa los valores que tengan sentido para tu contexto y guárdalo.
+6. Localiza el archivo `backend.tf` en el mismo directorio.
+7. Edita este archivo asegurándote de reemplazar la propiedad `bucket` con el nombre del bucket de GCS que creaste anteriormente.
 
-If you do not with to use cloud storage to persist terraform state then simply
-switch the `backend` to some other desirable provider.
+Si no deseas usar el almacenamiento en la nube para persistir el estado de terraform, simplemente cambia el `backend` a algún otro proveedor deseable.
 
-### Terraform Execution
+### Ejecución de Terraform
 
-Terraform enables us to see what it would do if we were to run it without
-actually applying any changes... this is called a `plan` operation. This plan is
-then enacted (optionally) by an `apply`.
+Terraform nos permite ver qué haría si lo ejecutáramos sin aplicar realmente ningún cambio... esto se llama operación de `plan`. Este plan luego se lleva a cabo (opcionalmente) mediante un `apply`.
 
 #### Plan
 
-1. In a terminal which is able to execute the `tf` binary, `cd` to the
-   ~`my-avax-project` directory that you renamed in step 3 of `Terraform
-   Configuration`.
-2. Execute the command `tf plan`
-3. You should see a JSON output to the stdout of the terminal which lays out the
-   operations that terraform will execute to apply the intended state.
+1. En una terminal que pueda ejecutar el binario `tf`, `cd` al directorio ~`my-avax-project` que renombraste en el paso 3 de `Configuración de Terraform`.
+2. Ejecuta el comando `tf plan`.
+3. Deberías ver una salida JSON en la salida estándar de la terminal que muestra las operaciones que terraform ejecutará para aplicar el estado previsto.
 
 #### Apply
 
-1. In a terminal which is able to execute the `tf` binary, `cd` to the
-   ~`my-avax-project` directory that you renamed in step 3 of `Terraform
-   Configuration`.
-2. Execute the command `tf apply`
+1. En una terminal que pueda ejecutar el binario `tf`, haz `cd` al directorio `~my-avax-project` que renombraste en el paso 3 de la "Configuración de Terraform".
+2. Ejecuta el comando `tf apply`.
 
-If you want to ensure that terraform does **exactly** what you saw in the
-`apply` output, you can optionally request for the `plan` output to be saved
-to a file to feed to `apply`. This is generally considered best practice in
-highly fluid environments where rapid change is occurring from multiple sources.
+Si quieres asegurarte de que Terraform haga **exactamente** lo que viste en la salida de `apply`, opcionalmente puedes solicitar que la salida del `plan` se guarde en un archivo para alimentarlo a `apply`. Esto generalmente se considera una buena práctica en entornos altamente fluidos donde ocurren cambios rápidos desde múltiples fuentes.
 
-## Conclusion
+## Conclusión
 
-Establishing CI/CD practices using tools such as GitHub and Terraform to manage
-your infrastructure assets is a great way to ensure base disaster recovery
-capabilities and to ensure you have a place to embed any ~tweaks you have to
-make operationally removing the potential to miss them when you have to scale
-from 1 node to 10. Having an automated pipeline also gives you a place to build
-a bigger house... what starts as your interest in building and managing a single
-AVAX node today can quickly change into you building an infrastructure operation
-for many different chains working with multiple different team members. I hope
-this may have inspired you to take a leap into automation in this context!
+Establecer prácticas de CI/CD utilizando herramientas como GitHub y Terraform para gestionar tus activos de infraestructura es una excelente manera de asegurar capacidades básicas de recuperación ante desastres y asegurarte de tener un lugar para incrustar cualquier ~ajuste que tengas que hacer operativamente, evitando el riesgo de pasarlos por alto cuando tengas que escalar de 1 nodo a 10. Tener un pipeline automatizado también te da un lugar para construir una casa más grande... lo que comienza como tu interés en construir y gestionar un solo nodo AVAX hoy puede cambiar rápidamente a construir una operación de infraestructura para muchas cadenas diferentes trabajando con varios miembros del equipo. ¡Espero que esto te haya inspirado a dar un salto hacia la automatización en este contexto!

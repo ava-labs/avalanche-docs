@@ -1,393 +1,186 @@
 ---
-tags: [Nodes]
-description: Running a validator and staking with Avalanche using Microsoft Azure infrastructure provides extremely competitive rewards. Find out more info here.
+etiquetas: [Nodos]
+descripción: Ejecutar un validador y hacer stake con Avalanche utilizando la infraestructura de Microsoft Azure proporciona recompensas extremadamente competitivas. Encuentra más información aquí.
 sidebar_label: Microsoft Azure
-pagination_label: Run an Avalanche Node with Microsoft Azure
+pagination_label: Ejecutar un Nodo Avalanche con Microsoft Azure
 sidebar_position: 2
 ---
 
-# Run an Avalanche Node with Microsoft Azure
+# Ejecutar un Nodo Avalanche con Microsoft Azure
 
 :::caution
-This document was written by a community member, some information may be out of date.
+Este documento fue escrito por un miembro de la comunidad, es posible que alguna información esté desactualizada.
 :::
 
-Running a validator and staking with Avalanche provides extremely competitive
-rewards of between 9.69% and 11.54% depending on the length you stake for. The
-maximum rate is earned by staking for a year, whilst the lowest rate for 14
-days. There is also no slashing, so you don’t need to worry about a hardware
-failure or bug in the client which causes you to lose part or all of your stake.
-Instead with Avalanche you only need to currently maintain at least 80% uptime
-to receive rewards. If you fail to meet this requirement you don’t get slashed,
-but you don’t receive the rewards. **You also do not need to put your private
-keys onto a node to begin validating on that node.** Even if someone breaks into
-your cloud environment and gains access to the node, the worst they can do is
-turn off the node.
+Ejecutar un validador y hacer stake con Avalanche proporciona recompensas extremadamente competitivas, entre el 9,69% y el 11,54%, dependiendo del tiempo durante el cual hagas el stake. La tasa máxima se obtiene haciendo stake durante un año, mientras que la tasa más baja es para 14 días. Además, no hay penalizaciones, por lo que no tienes que preocuparte por una falla de hardware o un error en el cliente que te haga perder parte o todo tu stake. En cambio, con Avalanche, solo necesitas mantener actualmente al menos un 80% de tiempo de actividad para recibir recompensas. Si no cumples con este requisito, no te penalizan, pero no recibes las recompensas. **Tampoco necesitas poner tus claves privadas en un nodo para comenzar a validar en ese nodo.** Incluso si alguien irrumpe en tu entorno en la nube y obtiene acceso al nodo, lo peor que pueden hacer es apagar el nodo.
 
-Not only does running a validator node enable you to receive rewards in AVAX,
-but later you will also be able to validate other Subnets in the ecosystem as
-well and receive rewards in the token native to their Subnets.
+No solo ejecutar un nodo validador te permite recibir recompensas en AVAX, sino que más adelante también podrás validar otras Subnets en el ecosistema y recibir recompensas en el token nativo de sus Subnets.
 
-Hardware requirements to run a validator are relatively modest: 8 CPU cores, 16
-GB of RAM and 1 TB SSD. It also doesn't use enormous amounts of energy.
-Avalanche’s [revolutionary consensus
-mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656)
-is able to scale to millions of validators participating in consensus at once,
-offering unparalleled decentralisation.
+Los requisitos de hardware para ejecutar un validador son relativamente modestos: 8 núcleos de CPU, 16 GB de RAM y 1 TB de SSD. Además, no utiliza cantidades enormes de energía. El [mecanismo de consenso revolucionario](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) de Avalanche es capaz de escalar a millones de validadores participando en el consenso a la vez, ofreciendo una descentralización sin precedentes.
 
-Currently the minimum amount required to stake to become a validator is 2,000
-AVAX. Alternatively,
-validators can also charge a small fee to enable users to delegate their stake
-with them to help towards running costs. You can use a calculator
-[here](https://vscout.io/) to see how much rewards you would earn when running a
-node, compared to delegating.
+Actualmente, la cantidad mínima requerida para hacer stake y convertirse en un validador es de 2,000 AVAX. Alternativamente, los validadores también pueden cobrar una pequeña tarifa para permitir a los usuarios delegar su stake con ellos y ayudar a cubrir los costos de funcionamiento. Puedes usar una calculadora [aquí](https://vscout.io/) para ver cuántas recompensas ganarías al ejecutar un nodo, en comparación con la delegación.
 
-In this article we will step through the process of configuring a node on
-Microsoft Azure. This tutorial assumes no prior experience with Microsoft Azure
-and will go through each step with as few assumptions possible.
+En este artículo, repasaremos el proceso de configurar un nodo en Microsoft Azure. Este tutorial asume que no tienes experiencia previa con Microsoft Azure y pasará por cada paso con la menor cantidad de suposiciones posible.
 
-At the time of this article, spot pricing for a virtual machine with 2 Cores and
-8 GB memory costs as little as $0.01060 per hour which works out at about
-$113.44 a year, **a saving of 83.76%! compared to normal pay as you go prices.**
-In comparison a virtual machine in AWS with 2 Cores and 4 GB Memory with spot
-pricing is around $462 a year.
+En el momento de este artículo, el precio de spot para una máquina virtual con 2 núcleos y 8 GB de memoria cuesta tan solo $0.01060 por hora, lo que equivale a aproximadamente $113.44 al año, **¡un ahorro del 83.76% en comparación con los precios normales de pago por uso.** En comparación, una máquina virtual en AWS con 2 núcleos y 4 GB de memoria con precios de spot es de alrededor de $462 al año.
 
-## Initial Subscription Configuration
+## Configuración inicial de la suscripción
 
-### Set up 2 Factor
+### Configurar la autenticación de dos factores
 
-First you will need a Microsoft Account, if you don’t have one already you will
-see an option to create one at the following link. If you already have one, make
-sure to set up 2 Factor authentication to secure your node by going to the
-following link and then selecting "Two-step verification" and following the
-steps provided.
+Primero, necesitarás una cuenta de Microsoft, si no tienes una, verás la opción de crear una en el siguiente enlace. Si ya tienes una, asegúrate de configurar la autenticación de dos factores para asegurar tu nodo yendo al siguiente enlace y luego seleccionando "Verificación en dos pasos" y siguiendo los pasos proporcionados.
 
 [https://account.microsoft.com/security](https://account.microsoft.com/security)
 
-![Image for post](https://miro.medium.com/max/1135/1*tr3rEcrvI4rEpC7KPYqg6g.png)
+![Imagen para el artículo](https://miro.medium.com/max/1135/1*tr3rEcrvI4rEpC7KPYqg6g.png)
 
-Once two factor has been configured log into the Azure portal by going to
-[https://portal.azure.com](https://portal.azure.com/) and signing in with your
-Microsoft account. When you login you won’t have a subscription, so we need to
-create one first. Select "Subscriptions" as highlighted below:
+Una vez que se haya configurado la autenticación de dos factores, inicia sesión en el portal de Azure yendo a [https://portal.azure.com](https://portal.azure.com/) e inicia sesión con tu cuenta de Microsoft. Cuando inicies sesión, no tendrás una suscripción, así que necesitamos crear una primero. Selecciona "Suscripciones" como se muestra a continuación:
 
-![Image for post](https://miro.medium.com/max/648/1*5Jp8oXzczaEND-z9_QZaQA.png)
+![Imagen para el artículo](https://miro.medium.com/max/648/1*5Jp8oXzczaEND-z9_QZaQA.png)
 
-Then select "+ Add" to add a new subscription
+Luego selecciona "+ Agregar" para agregar una nueva suscripción.
 
-![Image for post](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
+![Imagen para el artículo](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
 
-If you want to use Spot Instance VM Pricing (which will be considerably cheaper)
-you can’t use a Free Trial account (and you will receive an error upon
-validation), so **make sure to select Pay-As-You-Go.**
+Si quieres usar precios de instancia de spot (que serán considerablemente más baratos), no puedes usar una cuenta de prueba gratuita (y recibirás un error al validar), así que **asegúrate de seleccionar Pago por uso.**
 
-![Image for post](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
+![Imagen para el artículo](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
 
-Enter your billing details and confirm identity as part of the sign-up process,
-when you get to Add technical support select the without support option (unless
-you want to pay extra for support) and press Next.
+Ingresa tus detalles de facturación y confirma tu identidad como parte del proceso de registro. Cuando llegues a Agregar soporte técnico, selecciona la opción sin soporte (a menos que quieras pagar extra por soporte) y presiona Siguiente.
 
-![Image for post](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
+![Imagen para el artículo](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
-## Create a Virtual Machine
+## Crear una Máquina Virtual
 
-Now that we have a subscription, we can create the Ubuntu Virtual Machine for
-our Avalanche Node. Select the Icon in the top left for the Menu and choose "+
-Create a resource"
+Ahora que tenemos una suscripción, podemos crear la Máquina Virtual Ubuntu para nuestro Nodo Avalanche. Selecciona el ícono en la parte superior izquierda para abrir el menú y elige "+ Crear un recurso".
 
-![Image for post](https://miro.medium.com/max/565/1*3nSPwgEM3oIgrIlIo-TS1w.png)
+![Imagen para el artículo](https://miro.medium.com/max/565/1*3nSPwgEM3oIgrIlIo-TS1w.png)
 
-Select Ubuntu Server 18.04 LTS (this will normally be under the popular section
-or alternatively search for it in the marketplace)
+Selecciona Ubuntu Server 18.04 LTS (esto normalmente estará bajo la sección popular o, alternativamente, búscalo en el marketplace).
 
-![Image for post](https://miro.medium.com/max/605/1*Y0iZEZExC36c7FXqPlrPuw.png)
+![Imagen para el artículo](https://miro.medium.com/max/605/1*Y0iZEZExC36c7FXqPlrPuw.png)
 
-This will take you to the Create a virtual machine page as shown below:
+Esto te llevará a la página de Crear una máquina virtual, como se muestra a continuación:
 
-![Image for post](https://miro.medium.com/max/775/1*cv0z0mt6Uavx5MkiazpiUA.png)
+![Imagen para el artículo](https://miro.medium.com/max/775/1*cv0z0mt6Uavx5MkiazpiUA.png)
 
-First, enter a virtual machine a name, this can be anything but in my example, I
-have called it Avalanche (This will also automatically change the resource group
-name to match)
+Primero, ingresa un nombre para la máquina virtual, puede ser cualquier cosa, pero en mi ejemplo, lo he llamado Avalanche (esto también cambiará automáticamente el nombre del grupo de recursos para que coincida).
 
-Then select a region from the drop-down list. Select one of the recommended ones
-in a region that you prefer as these tend to be the larger ones with most
-features enabled and cheaper prices. In this example I have selected North
-Europe.
+Luego selecciona una región de la lista desplegable. Selecciona una de las recomendadas en una región que prefieras, ya que suelen ser las más grandes con la mayoría de las características habilitadas y precios más baratos. En este ejemplo, he seleccionado Europa del Norte.
 
-![Image for post](https://miro.medium.com/max/769/1*XOpa22qSdNI-0PW5oIyUhQ.png)
+![Imagen para el artículo](https://miro.medium.com/max/769/1*XOpa22qSdNI-0PW5oIyUhQ.png)
 
-You have the option of using spot pricing to save significant amounts on running
-costs. Spot instances use a supply and demand market price structure. As demand
-for instances goes up, the price for the spot instance goes up. If there is
-insufficient capacity, then your VM will be turned off. The chances of this
-happening are incredibly low though, especially if you select the Capacity only
-option. Even in the unlikely event it does get turned off temporarily you only
-need to maintain at least 80% up time to receive the staking rewards and there
-is no slashing implemented in Avalanche.
+Tienes la opción de usar precios de spot para ahorrar cantidades significativas en costos de funcionamiento. Las instancias de spot utilizan una estructura de precios de mercado de oferta y demanda. A medida que aumenta la demanda de instancias, el precio de la instancia de spot aumenta. Si no hay capacidad suficiente, entonces tu VM se apagará. Sin embargo, las posibilidades de que esto suceda son increíblemente bajas, especialmente si seleccionas la opción solo de capacidad. Incluso en el improbable caso de que se apague temporalmente, solo necesitas mantener al menos un 80% de tiempo de actividad para recibir las recompensas de stake y no hay penalizaciones implementadas en Avalanche.
 
-Select Yes for Azure Spot instance, select Eviction type to Capacity Only and
-**make sure to set the eviction policy to Stop / Deallocate. This is very
-important otherwise the VM will be deleted**
+Selecciona Sí para instancia de spot de Azure, selecciona el tipo de desalojo solo capacidad y **asegúrate de establecer la política de desalojo en Detener / Desasignar. Esto es muy importante, de lo contrario, la VM será eliminada**.
 
-![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
+![Imagen para el artículo](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Choose "Select size" to change the Virtual Machine size, and from the menu
-select D2s_v4 under the D-Series v4 selection (This size has 2 Cores, 8 GB
-Memory and enables Premium SSDs). You can use F2s_v2 instances instead, with are
-2 Cores, 4 GB Memory and enables Premium SSDs) but the spot price actually works
-out cheaper for the larger VM currently with spot instance prices. You can use
-[this
-link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/)
-to view the prices across the different regions.
+Elige "Seleccionar tamaño" para cambiar el tamaño de la Máquina Virtual y, desde el menú, selecciona D2s_v4 bajo la selección de la serie D v4 (este tamaño tiene 2 núcleos, 8 GB de memoria y habilita SSD Premium). En su lugar, puedes usar instancias F2s_v2, que tienen 2 núcleos, 4 GB de memoria y habilitan SSD Premium, pero el precio de spot en realidad es más barato para la VM más grande actualmente con precios de instancia de spot. Puedes usar [este enlace](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) para ver los precios en las diferentes regiones.
 
-![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
+![Imagen para el artículo](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
-Once you have selected the size of the Virtual Machine, select "View pricing
-history and compare prices in nearby regions" to see how the spot price has
-changed over the last 3 months, and whether it’s cheaper to use a nearby region
-which may have more spare capacity.
+Una vez que hayas seleccionado el tamaño de la Máquina Virtual, selecciona "Ver historial de precios y comparar precios en regiones cercanas" para ver cómo ha cambiado el precio de spot en los últimos 3 meses y si es más barato usar una región cercana que pueda tener más capacidad disponible.
 
-![Image for post](https://miro.medium.com/max/763/1*UQYmhtL8JMhrOkaWk8cloA.png)
+En el momento de este artículo, el precio spot para D2s_v4 en Europa del Norte cuesta $0.07975 por hora, o alrededor de $698.61 al año. Con el precio spot, el precio cae a $0.01295 por hora, lo que equivale a unos $113.44 al año, ¡un ahorro del 83.76%!
 
-At the time of this article, spot pricing for D2s_v4 in North Europe costs
-$0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls
-to $0.01295 per hour, which works out at about $113.44 a year, **a saving of
-83.76%!**
+Hay algunas regiones que son aún más baratas, como el Este de EE.UU., que cuesta $0.01060 por hora o alrededor de $92.86 al año.
 
-There are some regions which are even cheaper, East US for example is $0.01060
-per hour or around $92.86 a year!
+A continuación, puedes ver el historial de precios de la VM en los últimos 3 meses para Europa del Norte y regiones cercanas.
 
-![Image for post](https://miro.medium.com/max/677/1*Th5aDwLS6_IoM0LidRbH6g.png)
+Más barato que Amazon AWS
 
-Below you can see the price history of the VM over the last 3 months for North
-Europe and regions nearby.![Image for
-post](https://miro.medium.com/max/30/1*OJ4monpMy8DhWw_HWycMjg.png?q=20)
+Como comparación, una instancia c5.large cuesta $0.085 USD por hora en AWS. Esto suma ~$745 USD al año. Las instancias spot pueden ahorrar un 62%, reduciendo ese total a $462.
 
-![Image for post](https://miro.medium.com/max/968/1*OJ4monpMy8DhWw_HWycMjg.png)
+El siguiente paso es cambiar el nombre de usuario para la VM, para que coincida con otros tutoriales de Avalanche cambia el nombre de usuario a Ubuntu. De lo contrario, tendrás que cambiar varios comandos más adelante en este artículo y reemplazar Ubuntu con tu nuevo nombre de usuario.
 
-### Cheaper Than Amazon AWS
+Discos
 
-As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This
-totals ~$745 USD per year. Spot instances can save 62%, bringing that total down
-to $462.
+Selecciona Siguiente: Discos para luego configurar los discos para la instancia. Hay 2 opciones de discos, ya sea Premium SSD que ofrecen un mayor rendimiento con un disco de 64 GB que cuesta alrededor de $10 al mes, o está el SSD estándar que ofrece un rendimiento más bajo y cuesta alrededor de $5 al mes. También tienes que pagar $0.002 por 10,000 unidades de transacción (lecturas / escrituras y eliminaciones) con el SSD estándar, mientras que con los SSD Premium todo está incluido. Personalmente, elegí el SSD Premium para un mayor rendimiento, pero también porque es probable que los discos se utilicen mucho y así incluso podrían resultar más baratos a largo plazo.
 
-The next step is to change the username for the VM, to align with other
-Avalanche tutorials change the username to Ubuntu. Otherwise you will need to
-change several commands later in this article and swap out Ubuntu with your new
-username.
+Selecciona Siguiente: Redes para pasar a la configuración de red.
 
-![Image for post](https://miro.medium.com/max/780/1*CNmFTz056EUmahfi5zG3JQ.png)
+Configuración de Red
 
-### Disks
+Quieres usar una IP estática para que la IP pública asignada a la nodo no cambie en caso de que se detenga. Bajo IP pública selecciona "Crear nueva".
 
-Select Next: Disks to then configure the disks for the instance. There are 2
-choices for disks, either Premium SSD which offer greater performance with a 64
-GB disk costs around $10 a month, or there is the standard SSD which offers
-lower performance and is around $5 a month. You also have to pay $0.002 per
-10,000 transaction units (reads / writes and deletes) with the Standard SSD,
-whereas with Premium SSDs everything is included. Personally, I chose the
-Premium SSD for greater performance, but also because the disks are likely to be
-heavily used and so may even work out cheaper in the long run.
+Luego selecciona "Estática" como tipo de asignación.
 
-Select Next: Networking to move onto the network configuration
+Luego necesitamos configurar el grupo de seguridad de red para controlar el acceso entrante a la nodo Avalanche. Selecciona "Avanzado" como tipo de grupo de seguridad de red de la NIC y selecciona "Crear nuevo".
 
-![Image for post](https://miro.medium.com/max/763/1*Oqv9nA8KoSIyq95DuPDN4g.png)
+Por razones de seguridad, quieres restringir quién puede conectarse de forma remota a tu nodo. Para hacer esto, primero querrás averiguar cuál es tu IP pública existente. Esto se puede hacer yendo a Google y buscando "cuál es mi IP".
 
-### Network Config
+Es probable que se te haya asignado una IP pública dinámica para tu hogar, a menos que lo hayas solicitado específicamente, por lo que tu IP pública asignada puede cambiar en el futuro. Aún se recomienda restringir el acceso a tu IP actual, y luego en caso de que tu IP de casa cambie y ya no puedas conectarte de forma remota a la VM, simplemente puedes actualizar las reglas de seguridad de red con tu nueva IP pública para poder conectarte de nuevo.
 
-You want to use a Static IP so that the public IP assigned to the node doesn’t
-change in the event it stops. Under Public IP select "Create new"
+NOTA: Si necesitas cambiar las reglas del grupo de seguridad de red después de la implementación si tu IP de casa ha cambiado, busca "avalanche-nsg" y puedes modificar la regla para SSH y el puerto 9650 con la nueva IP. Sin embargo, el puerto 9651 debe permanecer abierto para todos, ya que así es como se comunica con otros nodos Avalanche.
 
-![Image for post](https://miro.medium.com/max/774/1*2wsz1_OG7DpLA7jmTJfm0A.png)
+Ahora que tienes tu IP pública, selecciona la regla de permitir ssh por defecto a la izquierda bajo reglas de entrada para modificarla. Cambia Origen de "Cualquiera" a "Direcciones IP" y luego ingresa tu dirección IP pública que encontraste en Google en el campo Dirección IP de origen. Cambia la Prioridad hacia abajo a 100 y luego presiona Guardar.
 
-Then select "Static" as the Assignment type
+Luego selecciona "+ Agregar una regla de entrada" para agregar otra regla para el acceso RPC, esto también debería estar restringido solo a tu IP. Cambia Origen a "Direcciones IP" e ingresa tu IP pública devuelta por Google en el campo IP de origen. Esta vez cambia el campo "Rangos de puerto de destino" a 9650 y selecciona "TCP" como protocolo. Cambia la prioridad a 110 y dale un nombre de "Avalanche_RPC" y presiona Agregar.
 
-![Image for post](https://miro.medium.com/max/347/1*y-JbYlRNN3GNNXtZDP-UXQ.png)
+Selecciona "+ Agregar una regla de entrada" para agregar una regla final para el Protocolo Avalanche para que otros nodos puedan comunicarse con tu nodo. Esta regla debe estar abierta para todos, así que deja "Origen" en "Cualquiera". Cambia el rango de puerto de destino a "9651" y cambia el protocolo a "TCP". Ingresa una prioridad de 120 y un nombre de Avalanche_Protocol y presiona Agregar.
 
-Then we need to configure the network security group to control access inbound
-to the Avalanche node. Select "Advanced" as the NIC network security group type
-and select "Create new"
+El grupo de seguridad de red debería verse como el siguiente (aunque tu dirección IP pública será diferente) y presiona OK.
 
-![Image for post](https://miro.medium.com/max/763/1*e5Y-mHGkn42A-mJx6o3J0g.png)
+Deja los demás ajustes como predeterminados y luego presiona "Revisar + crear" para crear la máquina virtual.
 
-For security purposes you want to restrict who is able to remotely connect to
-your node. To do this you will first want to find out what your existing public
-IP is. This can be done by going to google and searching for "what’s my IP"
+Primero realizará una prueba de validación. Si recibes un error aquí, asegúrate de haber seleccionado el modelo de suscripción de pago por uso y no estás usando la suscripción de prueba gratuita, ya que las instancias spot no están disponibles. Verifica que todo se vea correcto y presiona "Crear".
 
-![Image for post](https://miro.medium.com/max/450/1*-aV-AdrABCUmludxXUPV6Q.png)
+Luego deberías recibir un aviso que te pide generar un nuevo par de claves para conectar tu máquina virtual. Selecciona "Descargar clave privada y crear recurso" para descargar la clave privada a tu PC.
 
-It’s likely that you have been assigned a dynamic public IP for your home,
-unless you have specifically requested it, and so your assigned public IP may
-change in the future. It’s still recommended to restrict access to your current
-IP though, and then in the event your home IP changes and you are no longer able
-to remotely connect to the VM, you can just update the network security rules
-with your new public IP so you are able to connect again.
+Una vez que tu implementación haya terminado, selecciona "Ir al recurso".
 
-NOTE: If you need to change the network security group rules after deployment if
-your home IP has changed, search for "avalanche-nsg" and you can modify the rule
-for SSH and Port 9650 with the new IP. **Port 9651 needs to remain open to
-everyone** though as that’s how it communicates with other Avalanche nodes.
+Cambiar el tamaño del disco provisionado
 
-![Image for post](https://miro.medium.com/max/481/1*fR6SrKhTSTQ4cS3PoFrQfQ.png)
+Por defecto, la VM de Ubuntu se provisionará con un SSD Premium de 30 GB. Deberías aumentar esto a 250 GB, para permitir el crecimiento de la base de datos.
 
-Now that you have your public IP select the default allow ssh rule on the left
-under inbound rules to modify it. Change Source from "Any" to "IP Addresses" and
-then enter in your Public IP address that you found from google in the Source IP
-address field. Change the Priority towards the bottom to 100 and then press
-Save.
+Para cambiar el tamaño del disco, la VM necesita detenerse y desasignarse. Selecciona "Detener" y espera a que el estado muestre "desasignado". Luego selecciona "Discos" en la izquierda.
 
-![Image for post](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
+Selecciona el nombre del disco que está actualmente provisionado para modificarlo.
 
-Then select "+ Add an inbound rule" to add another rule for RPC access, this
-should also be restricted to only your IP. Change Source to "IP Addresses" and
-enter in your public IP returned from google into the Source IP field. This time
-change the "Destination port ranges" field to 9650 and select "TCP" as the
-protocol. Change the priority to 110 and give it a name of "Avalanche_RPC" and
-press Add.
+Selecciona "Tamaño + rendimiento" a la izquierda, bajo configuración, y cambia el tamaño a 250 GB y presiona "Redimensionar".
 
-![Image for post](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
+Hacer esto ahora también extenderá automáticamente la partición dentro de Ubuntu. Para volver a la página de resumen de la máquina virtual, selecciona Avalanche en la configuración de navegación.
 
-Select "+ Add an inbound rule" to add a final rule for the Avalanche Protocol so
-that other nodes can communicate with your node. This rule needs to be open to
-everyone so keep "Source" set to "Any." Change the Destination port range to
-"9651" and change the protocol to "TCP." Enter a priority of 120 and a name of
-Avalanche_Protocol and press Add.
+Luego inicia la VM.
 
-![Image for post](https://miro.medium.com/max/662/1*tIMEp7O83NIUitWwlcHAxw.png)
+## Conéctate a la Node de Avalanche
 
-The network security group should look like the below (albeit your public IP
-address will be different) and press OK.
+Las siguientes instrucciones muestran cómo conectarse a la Máquina Virtual desde una máquina con Windows 10. Para instrucciones sobre cómo conectarse desde una máquina Ubuntu, consulta el tutorial de AWS.
 
-![Image for post](https://miro.medium.com/max/363/1*7rAR3C_UrX94iXxL4sdV9g.png)
+En tu PC local, crea una carpeta en la raíz de la unidad C: llamada Avalanche y luego mueve el archivo Avalanche_key.pem que descargaste antes a la carpeta. Luego haz clic derecho en el archivo y selecciona Propiedades. Ve a la pestaña de seguridad y selecciona "Avanzado" en la parte inferior.
 
-Leave the other settings as default and then press "Review + create" to create the Virtual machine.
+Selecciona "Deshabilitar herencia" y luego "Quitar todos los permisos heredados de este objeto" para eliminar todos los permisos existentes sobre ese archivo.
 
-![Image for post](https://miro.medium.com/max/828/1*01yGser7qYjiXDngemqClQ.png)
+Luego selecciona "Agregar" para agregar un nuevo permiso y elige "Seleccionar un principal" en la parte superior. En la ventana emergente, ingresa tu cuenta de usuario que usas para iniciar sesión en tu máquina. En este ejemplo, inicio sesión con un usuario local llamado Seq, es posible que tengas una cuenta de Microsoft con la que inicias sesión, así que usa la cuenta con la que inicias sesión en tu PC y presiona "Comprobar nombres" y debería subrayarlo para verificar y presiona OK.
 
-First it will perform a validation test. If you receive an error here, make sure
-you selected Pay-As-You-Go subscription model and you are not using the Free
-Trial subscription as Spot instances are not available. Verify everything looks
-correct and press "Create"
+Luego, desde la sección de permisos, asegúrate de que solo estén seleccionados "Leer y ejecutar" y "Leer" y presiona OK.
 
-![Image for post](https://miro.medium.com/max/751/1*HyQP7HJCiVQPPiWodRj6aQ.png)
+Debería verse algo como lo siguiente, excepto con un nombre de PC / cuenta de usuario diferente. Esto simplemente significa que el archivo de clave no se puede modificar o acceder por ninguna otra cuenta en esta máquina por motivos de seguridad, para que no puedan acceder a tu Node de Avalanche.
 
-You should then receive a prompt asking you to generate a new key pair to
-connect your virtual machine. Select "Download private key and create resource"
-to download the private key to your PC.
+### Encuentra la IP pública de tu Node de Avalanche
 
-![Image for post](https://miro.medium.com/max/456/1*FCAVco29fcianH4TjxVGzQ.png)
+Desde el Portal de Azure, toma nota de tu dirección IP pública estática que se ha asignado a tu nodo.
 
-Once your deployment has finished, select "Go to resource"
+Para iniciar sesión en la node de Avalanche, abre el símbolo del sistema buscando `cmd` y seleccionando "Símbolo del sistema" en tu máquina con Windows 10.
 
-![Image for post](https://miro.medium.com/max/608/1*dXl1RkH6xZvHkdI1d-XsOQ.png)
-
-## Change the Provisioned Disk Size
-
-By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD. You
-should increase this to 250 GB, to allow for database growth.
-
-![Image for post](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
-
-To change the Disk size, the VM needs to be stopped and deallocated. Select
-"Stop" and wait for the status to show deallocated. Then select "Disks" on the
-left.
-
-![Image for post](https://miro.medium.com/max/976/1*eUCBMgyQtEukvCyi3pm48g.png)
-
-Select the Disk name that’s current provisioned to modify it
-
-![Image for post](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
-
-Select "Size + performance" on the left under settings and change the size to 250 GB and press "Resize"
-
-![Image for post](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
-
-Doing this now will also extend the partition automatically within Ubuntu. To go
-back to the virtual machine overview page, select Avalanche in the navigation
-setting.
-
-![Image for post](https://miro.medium.com/max/946/1*RGlKMhmlZ1__6u3RjFSDMA.png)
-
-Then start the VM
-
-![Image for post](https://miro.medium.com/max/929/1*vgVR-3sRejyBcXrMn65v5g.png)
-
-## Connect to the Avalanche Node
-
-The following instructions show how to connect to the Virtual Machine from a
-Windows 10 machine. For instructions on how to connect from a Ubuntu machine see
-the [AWS
-tutorial](/nodes/run/third-party/aws-node.md).
-
-On your local PC, create a folder on the root of the C: drive called Avalanche
-and then move the Avalanche_key.pem file you downloaded before into the folder.
-Then right click the file and select Properties. Go to the security tab and
-select "Advanced" at the bottom
-
-![Image for post](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
-
-Select "Disable inheritance" and then "Remove all inherited permissions from
-this object" to remove all existing permissions on that file.
-
-![Image for post](https://miro.medium.com/max/740/1*VxuomVeWbhYquRynA8hP4Q.png)
-
-Then select "Add" to add a new permission and choose "Select a principal" at the
-top. From the pop-up box enter in your user account that you use to log into
-your machine. In this example I log on with a local user called Seq, you may
-have a Microsoft account that you use to log in, so use whatever account you
-login to your PC with and press "Check Names" and it should underline it to
-verify and press OK.
-
-![Image for post](https://miro.medium.com/max/758/1*sMxk7zaRHVTqA0UyHTKwzQ.png)
-
-Then from the permissions section make sure only "Read & Execute" and "Read" are selected and press OK.
-
-![Image for post](https://miro.medium.com/max/903/1*5Fkh3FJQuNeWQyEd0irjtA.png)
-
-It should look something like the below, except with a different PC name / user
-account. This just means the key file can’t be modified or accessed by any other
-accounts on this machine for security purposes so they can’t access your
-Avalanche Node.
-
-![Image for post](https://miro.medium.com/max/736/1*F-YK0xdB92cIweCQFGGRvA.png)
-
-### Find your Avalanche Node Public IP
-
-From the Azure Portal make a note of your static public IP address that has been assigned to your node.
-
-![Image for post](https://miro.medium.com/max/1082/1*5cf1dAAO0G7Dzu2s0Xxh-Q.png)
-
-To log onto the Avalanche node, open command prompt by searching for `cmd` and
-selecting "Command Prompt" on your Windows 10 machine.
-
-![Image for post](https://miro.medium.com/max/384/1*NlYlg9of5O9fQtiroqMFZw.png)
-
-Then use the following command and replace the EnterYourAzureIPHere with the
-static IP address shown on the Azure portal.
+Luego usa el siguiente comando y reemplaza "EnterYourAzureIPHere" con la dirección IP estática que se muestra en el portal de Azure.
 
 ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@EnterYourAzureIPHere
 
-for my example its:
+para mi ejemplo es:
 
 ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@13.74.10.81
 
-The first time you connect you will receive a prompt asking to continue, enter yes.
+La primera vez que te conectes, recibirás un mensaje pidiendo que continúes, ingresa "yes".
 
-![Image for post](https://miro.medium.com/max/651/1*Hp1AF-03TbO-eRUvuKvZcA.png)
+Ahora deberías estar conectado a tu Node.
 
-You should now be connected to your Node.
+La siguiente sección está tomada del excelente tutorial de Colin para [configurar una Node de Avalanche en AWS de Amazon](/nodes/run/third-party/aws-node.md).
 
-![Image for post](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
+### Actualiza Linux con parches de seguridad
 
-The following section is taken from Colin’s excellent tutorial for [configuring
-an Avalanche Node on Amazon’s
-AWS](/nodes/run/third-party/aws-node.md).
-
-### Update Linux with Security Patches
-
-Now that we are on our node, it’s a good idea to update it to the latest
-packages. To do this, run the following commands, one-at-a-time, in order:
+Ahora que estamos en nuestra node, es una buena idea actualizarla a los últimos paquetes. Para hacer esto, ejecuta los siguientes comandos, uno a la vez, en orden:
 
 ```text
 sudo apt update
@@ -395,29 +188,19 @@ sudo apt upgrade -y
 sudo reboot
 ```
 
-![Image for post](https://miro.medium.com/max/793/1*_2UmPN6vabjGe6aihX9KqA.png)
+Esto pondrá nuestra instancia al día con los últimos parches de seguridad para nuestro sistema operativo. También reiniciará la node. Daremos a la node un minuto o dos para que se reinicie, luego iniciaremos sesión nuevamente, igual que antes.
 
-This will make our instance up to date with the latest security patches for our
-operating system. This will also reboot the node. We’ll give the node a minute
-or two to boot back up, then log in again, same as before.
+### Configura la Node de Avalanche
 
-### Set up the Avalanche Node
+Ahora necesitaremos configurar nuestra node de Avalanche. Para hacer esto, sigue el tutorial [Configurar Node de Avalanche con el instalador](/nodes/run/with-installer.md) que automatiza el proceso de instalación. Necesitarás la "IP pública IPv4" copiada del Portal de Azure que configuramos anteriormente.
 
-Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up
-Avalanche Node With Installer](/nodes/run/with-installer.md) tutorial
-which automates the installation process. You will need the "IPv4 Public IP"
-copied from the Azure Portal we set up earlier.
-
-Once the installation is complete, our node should now be bootstrapping! We can
-run the following command to take a peek at the latest status of the AvalancheGo
-node:
+Una vez que la instalación esté completa, ¡nuestra node debería estar iniciando! Podemos ejecutar el siguiente comando para echar un vistazo al estado más reciente de la node AvalancheGo:
 
 ```text
 sudo systemctl status avalanchego
 ```
 
-To check the status of the bootstrap, we’ll need to make a request to the local
-RPC using `curl`. This request is as follows:
+Para verificar el estado del bootstrap, necesitaremos hacer una solicitud al RPC local usando `curl`. Esta solicitud es la siguiente:
 
 ```text
 curl -X POST --data '{
@@ -430,10 +213,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The node can take some time (upward of an hour at this moment writing) to
-bootstrap. Bootstrapping means that the node downloads and verifies the history
-of the chains. Give this some time. Once the node is finished bootstrapping, the
-response will be:
+La node puede tardar algún tiempo (más de una hora en este momento) en bootstrap. Bootstrapping significa que la node descarga y verifica el historial de las cadenas. Dale un poco de tiempo. Una vez que la node haya terminado de bootstrap, la respuesta será:
 
 ```text
 {
@@ -445,14 +225,11 @@ response will be:
 }
 ```
 
-We can always use `sudo systemctl status avalanchego` to peek at the latest
-status of our service as before, as well.
+Siempre podemos usar `sudo systemctl status avalanchego` para echar un vistazo al estado más reciente de nuestro servicio, como antes.
 
-### Get Your NodeID
+### Obtén tu NodeID
 
-We absolutely must get our NodeID if we plan to do any validating on this node.
-This is retrieved from the RPC as well. We call the following curl command to
-get our NodeID.
+Absolutamente debemos obtener nuestra NodeID si planeamos hacer alguna validación en esta node. Esto se obtiene del RPC también. Llamamos al siguiente comando curl para obtener nuestra NodeID.
 
 ```text
 curl -X POST --data '{
@@ -462,30 +239,25 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If all is well, the response should look something like:
+Si todo va bien, la respuesta debería verse algo así:
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR"},"id":1}
 ```
 
-That portion that says, "NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR" is our
-NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing
-confidential or secure about this value, but it’s an absolute must for when we
-submit this node to be a validator.
+Esa parte que dice "NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR" es nuestro
+NodeID, el cual debemos copiar y guardar en nuestras notas. No hay nada
+confidencial o seguro acerca de este valor, pero es absolutamente necesario cuando
+enviemos este nodo para que sea un validador.
 
-### Backup Your Staking Keys
+### Haz una copia de seguridad de tus claves de staking
 
-The last thing that should be done is backing up our staking keys in the
-untimely event that our instance is corrupted or terminated. It’s just good
-practice for us to keep these keys. To back them up, we use the following
-command:
+Lo último que se debe hacer es hacer una copia de seguridad de nuestras claves de staking en caso de que nuestra instancia se corrompa o se termine. Es una buena práctica para nosotros mantener estas claves. Para hacer una copia de seguridad, usamos el siguiente comando:
 
 ```text
 scp -i C:\Avalanche\avalanche_key.pem -r ubuntu@EnterYourAzureIPHere:/home/ubuntu/.avalanchego/staking C:\Avalanche
 ```
 
-As before, we’ll need to replace "EnterYourAzureIPHere" with the appropriate
-value that we retrieved. This backs up our staking key and staking certificate
-into the C:\Avalanche folder we created before.
+Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropiado que obtuvimos. Esto hace una copia de seguridad de nuestra clave de staking y certificado de staking en la carpeta C:\Avalanche que creamos antes.
 
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)

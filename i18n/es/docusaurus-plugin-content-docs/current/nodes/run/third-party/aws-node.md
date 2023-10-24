@@ -1,280 +1,250 @@
 ---
-tags: [Nodes]
-description: This tutorial will guide you through setting up an Avalanche node on Amazon Web Services (AWS). Cloud services like AWS are a good way to ensure that your node is highly secure, available, and accessible.
+etiquetas: [Nodos]
+descripción: Este tutorial te guiará en la configuración de un nodo Avalanche en Amazon Web Services (AWS). Los servicios en la nube como AWS son una buena manera de asegurar que tu nodo sea altamente seguro, disponible y accesible.
 sidebar_label: Amazon Web Services
-pagination_label: Run an Avalanche Node with Amazon Web Services
+pagination_label: Ejecutar un Nodo Avalanche con Amazon Web Services
 sidebar_position: 0
 ---
 
-# Run an Avalanche Node with Amazon Web Services (AWS)
+# Ejecutar un Nodo Avalanche con Amazon Web Services (AWS)
 
-## Introduction
+## Introducción
 
-This tutorial will guide you through setting up an Avalanche node on [Amazon Web
-Services (AWS)](https://aws.amazon.com/). Cloud services like AWS are a good way
-to ensure that your node is highly secure, available, and accessible.
+Este tutorial te guiará en la configuración de un nodo Avalanche en [Amazon Web
+Services (AWS)](https://aws.amazon.com/). Los servicios en la nube como AWS son una buena manera
+de asegurar que tu nodo sea altamente seguro, disponible y accesible.
 
-To get started, you'll need:
+Para empezar, necesitarás:
 
-- An AWS account
-- A terminal with which to SSH into your AWS machine
-- A place to securely store and back up files
+- Una cuenta de AWS
+- Una terminal desde la cual hacer SSH a tu máquina de AWS
+- Un lugar para almacenar y hacer copias de seguridad de archivos de manera segura
 
-This tutorial assumes your local machine has a Unix style terminal. If you're on
-Windows, you'll have to adapt some of the commands used here.
+Este tutorial asume que tu máquina local tiene una terminal de estilo Unix. Si estás en
+Windows, tendrás que adaptar algunos de los comandos utilizados aquí.
 
-## Log Into AWS
+## Iniciar sesión en AWS
 
-Signing up for AWS is outside the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
+Registrarse en AWS está fuera del alcance de este artículo, pero Amazon tiene instrucciones [aquí](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
-It is _highly_ recommended that you set up Multi-Factor Authentication on your
-AWS root user account to protect it. Amazon has documentation for this
-[here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
+Es _altamente_ recomendable que configures la Autenticación de Múltiples Factores en tu
+cuenta de usuario raíz de AWS para protegerla. Amazon tiene documentación para esto
+[aquí](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
 
-Once your account is set up, you should create a new EC2 instance. An EC2 is a
-virtual machine instance in AWS's cloud. Go to the [AWS Management
-Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
+Una vez que tu cuenta esté configurada, debes crear una nueva instancia EC2. Una EC2 es una
+instancia de máquina virtual en la nube de AWS. Ve al [AWS Management
+Console](https://console.aws.amazon.com/) e ingresa al panel de control de EC2.
 
 ![AWS Management Console.png](</img/image(35).png>)
 
-To log into the EC2 instance, you will need a key on your local machine that
-grants access to the instance. First, create that key so that it can be assigned
-to the EC2 instance later on. On the bar on the left side, under **Network &
-Security**, select **Key Pairs.**
+Para iniciar sesión en la instancia EC2, necesitarás una llave en tu máquina local que
+conceda acceso a la instancia. Primero, crea esa llave para que luego pueda ser asignada
+a la instancia EC2. En la barra lateral izquierda, debajo de **Red y seguridad**, selecciona **Pares de claves.**
 
-![Select "Key Pairs" under the "Network & Security" drop-down.](</img/image(38).png>)
+![Selecciona "Pares de claves" debajo del desplegable "Red y seguridad".](</img/image(38).png>)
 
-Select **Create key pair** to launch the key pair creation wizard.
+Selecciona **Crear par de claves** para lanzar el asistente de creación de pares de claves.
 
-![Select "Create key pair."](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
+![Selecciona "Crear par de claves."](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-Name your key `avalanche`. If your local machine has MacOS or Linux, select the
-`pem` file format. If it's Windows, use the `ppk` file format. Optionally, you
-can add tags for the key pair to assist with tracking.
+Nombra tu llave `avalanche`. Si tu máquina local tiene MacOS o Linux, selecciona el
+formato de archivo `pem`. Si es Windows, usa el formato de archivo `ppk`. Opcionalmente, puedes
+agregar etiquetas para el par de claves para ayudar con el seguimiento.
 
-![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
+![Crea un par de claves que luego se asignará a tu instancia EC2.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-Click `Create key pair`. You should see a success message, and the key file
-should be downloaded to your local machine. Without this file, you will not be
-able to access your EC2 instance. **Make a copy of this file and put it on a
-separate storage medium such as an external hard drive. Keep this file secret;
-do not share it with others.**
+Haz clic en `Crear par de claves`. Deberías ver un mensaje de éxito y el archivo de la llave
+debería descargarse a tu máquina local. Sin este archivo, no podrás
+acceder a tu instancia EC2. **Haz una copia de este archivo y colócalo en un
+medio de almacenamiento separado, como un disco duro externo. Mantén este archivo en secreto;
+no lo compartas con otros.**
 
-![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
+![Mensaje de éxito después de crear un par de claves.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
 
-## Create a Security Group
+## Crear un Grupo de Seguridad
 
-An AWS Security Group defines what internet traffic can enter and leave your EC2
-instance. Think of it like a firewall. Create a new Security Group by selecting
-**Security Groups** under the **Network & Security** drop-down.
+Un Grupo de Seguridad de AWS define qué tráfico de internet puede entrar y salir de tu instancia EC2.
+Piensa en ello como un cortafuegos. Crea un nuevo Grupo de Seguridad seleccionando
+**Grupos de seguridad** bajo el desplegable **Red y seguridad**.
 
-![Select "Security Groups" underneath "Network & Security."](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
+![Selecciona "Grupos de seguridad" debajo de "Red y seguridad".](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
-This opens the Security Groups panel. Click **Create security group** in the top
-right of the Security Groups panel.
+Esto abre el panel de Grupos de Seguridad. Haz clic en **Crear grupo de seguridad** en la parte superior
+derecha del panel de Grupos de Seguridad.
 
-![Select "Create security group."](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
+![Selecciona "Crear grupo de seguridad."](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-You'll need to specify what inbound traffic is allowed. Allow SSH traffic from
-your IP address so that you can log into your EC2 instance (each time your ISP
-changes your IP address, you will need to modify this rule). Allow TCP traffic on
-port 9651 so your node can communicate with other nodes on the network. Allow TCP
-traffic on port 9650 from your IP so you can make API calls to your node.
-**It's important that you only allow traffic on the SSH and API port from your IP.**
-If you allow incoming traffic from anywhere, this could be used to brute force entry to your
-node (SSH port) or used as a denial of service attack vector (API port). Finally, allow all
-outbound traffic.
+Necesitarás especificar qué tráfico entrante se permite. Permite el tráfico SSH desde
+tu dirección IP para que puedas iniciar sesión en tu instancia EC2 (cada vez que tu ISP
+cambia tu dirección IP, deberás modificar esta regla). Permite tráfico TCP en
+el puerto 9651 para que tu nodo pueda comunicarse con otros nodos en la red. Permite tráfico TCP
+en el puerto 9650 desde tu IP para que puedas hacer llamadas de API a tu nodo.
+**Es importante que solo permitas tráfico en el puerto SSH y de la API desde tu IP.**
+Si permites tráfico entrante desde cualquier lugar, esto podría usarse para forzar la entrada a tu
+nodo (puerto SSH) o como un vector de ataque de denegación de servicio (puerto de la API). Finalmente, permite todo el
+tráfico saliente.
 
-![Your inbound and outbound rules should look like this.](/img/inbound-rules.png)
+![Tus reglas de tráfico entrante y saliente deberían verse así.](/img/inbound-rules.png)
 
-Add a tag to the new security group with key `Name` and value`Avalanche Security
-Group`. This will enable us to know what this security group is when we see it
-in the list of security groups.
+Agrega una etiqueta al nuevo grupo de seguridad con la clave `Name` y el valor `Grupo de Seguridad Avalanche`.
+Esto nos permitirá saber qué grupo de seguridad es cuando lo veamos
+en la lista de grupos de seguridad.
 
-![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
+![Etiqueta el grupo de seguridad para que puedas identificarlo más tarde.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-Click `Create security group`. You should see the new security group in the list of security groups.
+Haz clic en `Crear grupo de seguridad`. Deberías ver el nuevo grupo de seguridad en la lista de grupos de seguridad.
 
-## Launch an EC2 Instance
+## Lanzar una Instancia EC2
 
-Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
+Ahora estás listo para lanzar una instancia EC2. Ve al Panel de Control de EC2 y selecciona **Lanzar instancia**.
 
-![Select "Launch Instance."](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
+![Selecciona "Lanzar instancia."](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-Select **Ubuntu 20.04 LTS (HVM), SSD Volume Type** for the operating system.
+Selecciona **Ubuntu 20.04 LTS (HVM), Tipo de Volumen SSD** para el sistema operativo.
 
-![Select Ubuntu 20.04 LTS.](/img/Ubuntu-20.04-LTS.png)
+![Selecciona Ubuntu 20.04 LTS.](/img/Ubuntu-20.04-LTS.png)
 
-Next, choose your instance type. This defines the hardware specifications of the
-cloud instance. In this tutorial we set up a **c5.2xlarge**. This should be more
-than powerful enough since Avalanche is a lightweight consensus protocol. To
-create a c5.2xlarge instance, select the **Compute-optimized** option from the
-filter drop-down menu.
+A continuación, elige tu tipo de instancia. Esto define las especificaciones de hardware de la
+instancia en la nube. En este tutorial configuramos una **c5.2xlarge**. Esto debería ser más
+que suficientemente poderoso ya que Avalanche es un protocolo de consenso liviano. Para
+crear una instancia c5.2xlarge, selecciona la opción **Optimizado para cómputo** del
+menú desplegable de filtros.
 
-![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
+![Filtra por optimizado para cómputo.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Select the checkbox next to the c5.2xlarge instance in the table.
+Selecciona la casilla junto a la instancia c5.2xlarge en la tabla.
 
-![Select c5.2xlarge.](/img/c5-2xlarge.png)
+![Selecciona c5.2xlarge.](/img/c5-2xlarge.png)
 
-Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
+Haz clic en el botón **Siguiente: Configurar detalles de la instancia** en la esquina inferior derecha.
 
-![Configure instance details](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
+![Configurar detalles de la instancia](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
-The instance details can stay as their defaults.
+Los detalles de la instancia pueden mantenerse en sus valores predeterminados.
 
-### Optional: Using Reserved Instances
+### Opcional: Usar Instancias Reservadas
 
-By default, you will be charged hourly for running your EC2 instance. For a long
-term usage that is not optimal.
+De forma predeterminada, se te cobrará por hora por ejecutar tu instancia EC2. Para un uso a largo
+plazo, eso no es óptimo.
 
-You could save money by using a **Reserved Instance**. With a reserved instance,
-you pay upfront for an entire year of EC2 usage, and receive a lower per-hour
-rate in exchange for locking in. If you intend to run a node for a long time and
-don't want to risk service interruptions, this is a good option to save money.
-Again, do your own research before selecting this option.
+Podrías ahorrar dinero usando una **Instancia Reservada**. Con una instancia reservada,
+pagas por adelantado un año completo de uso de EC2 y recibes una tarifa más baja por hora
+a cambio de bloquearlo. Si tienes la intención de ejecutar un nodo durante mucho tiempo y
+no quieres arriesgar interrupciones del servicio, esta es una buena opción para ahorrar dinero.
+Nuevamente, investiga por tu cuenta antes de seleccionar esta opción.
 
-### Add Storage, Tags, Security Group
+### Agregar Almacenamiento, Etiquetas, Grupo de Seguridad
 
-Click the **Next: Add Storage** button in the bottom right corner of the screen.
+Haz clic en el botón **Siguiente: Agregar almacenamiento** en la esquina inferior derecha de la pantalla.
 
-You need to add space to your instance's disk. You should start with at least
-700GB of disk space. Although upgrades to reduce disk usage are always in
-development, on average the database will continually grow, so you need to
-constantly monitor disk usage on the node and increase disk space if needed.
+Necesitas agregar espacio al disco de tu instancia. Deberías comenzar con al menos
+700GB de espacio en disco. Aunque las actualizaciones para reducir el uso de disco están siempre en
+desarrollo, en promedio la base de datos crecerá continuamente, por lo que necesitas
+monitorear constantemente el uso de disco en el nodo e incrementar el espacio en disco si es necesario.
 
-Note that the image below shows 100GB as disk size, which was appropriate at the
-time the screenshot was taken. You should check the current [recommended disk
-space size](https://github.com/ava-labs/avalanchego#installation) before
-entering the actual value here.
+Ten en cuenta que la imagen a continuación muestra 100GB como tamaño de disco, lo cual era apropiado en ese momento
+en que se tomó la captura de pantalla. Debes verificar el [tamaño actual recomendado de espacio en disco](https://github.com/ava-labs/avalanchego#installation) antes de
+ingresar el valor real aquí.
 
-![Select disk size.](/img/add-storage.png)
+![Selecciona el tamaño del disco.](/img/add-storage.png)
 
-Click **Next: Add Tags** in the bottom right corner of the screen to add tags to
-the instance. Tags enable us to associate metadata with our instance. Add a tag
-with key `Name` and value `My Avalanche Node`. This will make it clear what this
-instance is on your list of EC2 instances.
+Haz clic en **Siguiente: Agregar etiquetas** en la esquina inferior derecha de la pantalla para agregar etiquetas a la instancia. Las etiquetas nos permiten asociar metadatos con nuestra instancia. Agrega una etiqueta con clave `Name` y valor `Mi Nodo Avalanche`. Esto hará claro qué es esta instancia en tu lista de instancias de EC2.
 
-![Add a tag with key "Name" and value "My Avalanche Node."](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
+![Agrega una etiqueta con clave "Name" y valor "Mi Nodo Avalanche".](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
-Now assign the security group created earlier to the instance. Choose **Select
-an existing security group** and choose the security group created earlier.
+Ahora asigna el grupo de seguridad creado anteriormente a la instancia. Elige **Seleccionar un grupo de seguridad existente** y elige el grupo de seguridad creado anteriormente.
 
-![Choose the security group created earlier.](/img/configure-security-group.png)
+![Elige el grupo de seguridad creado anteriormente.](/img/configure-security-group.png)
 
-Finally, click **Review and Launch** in the bottom right. A review page will
-show the details of the instance you're about to launch. Review those, and if
-all looks good, click the blue **Launch** button in the bottom right corner of
-the screen.
+Finalmente, haz clic en **Revisar y lanzar** en la esquina inferior derecha. Una página de revisión mostrará los detalles de la instancia que estás a punto de lanzar. Revísalos y, si todo parece correcto, haz clic en el botón azul **Lanzar** en la esquina inferior derecha de la pantalla.
 
-You'll be asked to select a key pair for this instance. Select **Choose an
-existing key pair** and then select the `avalanche` key pair you made earlier in
-the tutorial. Check the box acknowledging that you have access to the `.pem` or
-`.ppk` file created earlier (make sure you've backed it up!) and then click
-**Launch Instances**.
+Se te pedirá que selecciones un par de claves para esta instancia. Selecciona **Elegir un par de claves existente** y luego selecciona el par de claves `avalanche` que hiciste anteriormente en el tutorial. Marca la casilla reconociendo que tienes acceso al archivo `.pem` o `.ppk` creado anteriormente (¡asegúrate de haberlo respaldado!) y luego haz clic en **Lanzar instancias**.
 
-![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
+![Usa el par de claves creado anteriormente.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-You should see a new pop up that confirms the instance is launching!
+¡Deberías ver una nueva ventana emergente que confirma que la instancia se está lanzando!
 
-![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
+![¡Tu instancia se está lanzando!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-### Assign an Elastic IP
+### Asignar una IP Elástica
 
-By default, your instance will not have a fixed IP. Let's give it a fixed IP
-through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network
-& Security,** select **Elastic IPs**.
+Por defecto, tu instancia no tendrá una IP fija. Vamos a darle una IP fija a través del servicio de IP Elástica de AWS. Vuelve al panel de control de EC2. Bajo **Red y seguridad**, selecciona **IPs Elásticas**.
 
-![Select "Elastic IPs" under "Network & Security."](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
+![Selecciona "IPs Elásticas" bajo "Red y seguridad".](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-Select **Allocate Elastic IP address**.
+Selecciona **Asignar dirección IP elástica**.
 
-![Select "Allocate Elastic IP address."](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
+![Selecciona "Asignar dirección IP elástica".](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
-Select the region your instance is running in, and choose to use Amazon’s pool
-of IPv4 addresses. Click **Allocate**.
+Selecciona la región en la que se está ejecutando tu instancia y elige usar el pool de direcciones IPv4 de Amazon. Haz clic en **Asignar**.
 
-![Settings for the Elastic IP.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
+![Configuración para la IP Elástica.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
 
-Select the Elastic IP you just created from the Elastic IP manager. From the
-**Actions** drop-down, choose **Associate Elastic IP address**.
+Selecciona la IP Elástica que acabas de crear en el administrador de IP Elásticas. Desde el menú desplegable **Acciones**, elige **Asociar dirección IP elástica**.
 
-![Under "Actions" select "Associate Elastic IP address."](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
+![Bajo "Acciones" selecciona "Asociar dirección IP elástica".](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-Select the instance you just created. This will associate the new Elastic IP
-with the instance and give it a public IP address that won't change.
+Selecciona la instancia que acabas de crear. Esto asociará la nueva IP Elástica con la instancia y le dará una dirección IP pública que no cambiará.
 
-![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
+![Asigna la IP Elástica a tu instancia de EC2.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo
+## Configurar AvalancheGo
 
-Go back to the EC2 Dashboard and select `Running Instances`.
+Vuelve al panel de control de EC2 y selecciona `Instancias en ejecución`.
 
-![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
+![Ve a tus instancias en ejecución.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Select the newly created EC2 instance. This opens a details panel with information about the instance.
+Selecciona la instancia de EC2 recién creada. Esto abre un panel de detalles con información sobre la instancia.
 
-![Details about your new instance.](/img/ec2-description.png)
+![Detalles sobre tu nueva instancia.](/img/ec2-description.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
+Copia el campo `IPv4 Public IP` para usarlo más adelante. A partir de ahora llamaremos a este valor `PUBLICIP`.
 
-**Remember: the terminal commands below assume you're running Linux. Commands
-may differ for MacOS or other operating systems. When copy-pasting a command
-from a code block, copy and paste the entirety of the text in the block.**
+**Recuerda: los comandos de terminal a continuación asumen que estás ejecutando Linux. Los comandos pueden ser diferentes para MacOS u otros sistemas operativos. Al copiar y pegar un comando desde un bloque de código, copia y pega la totalidad del texto en el bloque.**
 
-Log into the AWS instance from your local machine. Open a terminal (try shortcut
-`CTRL + ALT + T`) and navigate to the directory containing the `.pem` file you
-downloaded earlier.
+Inicia sesión en la instancia de AWS desde tu máquina local. Abre una terminal (prueba el atajo `CTRL + ALT + T`) y navega al directorio que contiene el archivo `.pem` que descargaste anteriormente.
 
-Move the `.pem` file to `$HOME/.ssh` (where `.pem` files generally live) with:
+Mueve el archivo `.pem` a `$HOME/.ssh` (donde generalmente residen los archivos `.pem`) con:
 
 ```bash
 mv avalanche.pem ~/.ssh
 ```
 
-Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
+Agrégalo al agente SSH para que podamos usarlo para SSH en tu instancia de EC2, y márcalo como de solo lectura.
 
 ```bash
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-SSH into the instance. (Remember to replace `PUBLICIP` with the public IP field from earlier.)
+Haz SSH a la instancia. (Recuerda reemplazar `PUBLICIP` con el campo de IP pública de antes.)
 
 ```text
 ssh ubuntu@PUBLICIP
 ```
 
-If the permissions are **not** set correctly, you will see the following error.
+Si los permisos **no** están configurados correctamente, verás el siguiente error.
 
-![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
+![Asegúrate de configurar los permisos correctamente.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
 
-You are now logged into the EC2 instance.
+Ahora estás conectado a la instancia de EC2.
 
-![You're on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
+![Estás en la instancia de EC2.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
-If you have not already done so, update the instance to make sure it has the
-latest operating system and security updates:
+Si aún no lo has hecho, actualiza la instancia para asegurarte de que tenga el sistema operativo y las actualizaciones de seguridad más recientes:
 
 ```text
 sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-This also reboots the instance. Wait 5 minutes, then log in again by running
-this command on your local machine:
+Esto también reinicia la instancia. Espera 5 minutos, luego inicia sesión nuevamente ejecutando este comando en tu máquina local:
 
 ```bash
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Now we’ll need to set up our
-Avalanche node. To do this, follow the [Set Up Avalanche Node With
-Installer](/nodes/run/with-installer.md) tutorial which automates the
-installation process. You will need the `PUBLICIP` we set up earlier.
+Estás conectado nuevamente a la instancia de EC2. Ahora necesitaremos configurar nuestro nodo Avalanche. Para hacer esto, sigue el tutorial [Configurar un Nodo Avalanche con el Instalador](/nodes/run/with-installer.md) que automatiza el proceso de instalación. Necesitarás la `PUBLICIP` que configuramos antes.
 
-Your AvalancheGo node should now be running and in the process of bootstrapping,
-which can take a few hours. To check if it's done, you can issue an API call
-using `curl`. If you're making the request from the EC2 instance, the request
-is:
+Tu nodo AvalancheGo debería estar funcionando ahora y en proceso de arranque, lo cual puede llevar algunas horas. Para verificar si ha terminado, puedes hacer una llamada de API usando `curl`. Si estás haciendo la solicitud desde la instancia de EC2, la solicitud es:
 
 ```text
 curl -X POST --data '{
@@ -287,7 +257,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+Una vez que el nodo haya terminado de arrancar, la respuesta será:
 
 ```text
 {
@@ -299,9 +269,9 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
+Puedes continuar, incluso si AvalancheGo no ha terminado de arrancar.
 
-In order to make your node a validator, you'll need its node ID. To get it, run:
+Para hacer que tu nodo sea un validador, necesitarás su ID de nodo. Para obtenerlo, ejecuta:
 
 ```text
 curl -X POST --data '{
@@ -311,80 +281,54 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+La respuesta contiene el ID de nodo.
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`.
-Copy your node ID for later. Your node ID is not a secret, so you can just paste
-it into a text editor.
+En el ejemplo anterior, el ID del nodo es `NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`.
+Copia tu ID de nodo para más adelante. Tu ID de nodo no es un secreto, así que puedes simplemente pegarlo en un editor de texto.
 
-AvalancheGo has other APIs, such as the [Health
-API](/reference/avalanchego/health-api.md), that may be used to interact with
-the node. Some APIs are disabled by default. To enable such APIs, modify the
-ExecStart section of `/etc/systemd/system/avalanchego.service` (created during
-the installation process) to include flags that enable these endpoints. Don't
-manually enable any APIs unless you have a reason to.
+AvalancheGo tiene otras APIs, como la [API de Salud](/reference/avalanchego/health-api.md), que se pueden usar para interactuar con el nodo. Algunas APIs están deshabilitadas de forma predeterminada. Para habilitar estas APIs, modifica la sección ExecStart de `/etc/systemd/system/avalanchego.service` (creado durante el proceso de instalación) para incluir banderas que habiliten estos puntos finales. No habilites manualmente ninguna API a menos que tengas una razón para hacerlo.
 
-![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
+![Algunas APIs están deshabilitadas de forma predeterminada.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is
-corrupted or otherwise unavailable. The node's ID is derived from its staking
-key and certificate. If you lose your staking key or certificate then your node
-will get a new node ID, which could cause you to become ineligible for a staking
-reward if your node is a validator. **It is very strongly advised that you copy
-your node's staking key and certificate**. The first time you run a node, it
-will generate a new staking key/certificate pair and store them in directory
-`/home/ubuntu/.avalanchego/staking`.
+Haz una copia de seguridad de la clave de staking y el certificado del nodo en caso de que la instancia de EC2 se corrompa o no esté disponible. El ID del nodo se deriva de su clave de staking y certificado. Si pierdes tu clave de staking o certificado, entonces tu nodo obtendrá un nuevo ID de nodo, lo que podría hacer que seas inelegible para una recompensa de staking si tu nodo es un validador. **Se recomienda encarecidamente que copies la clave de staking y el certificado de tu nodo**. La primera vez que ejecutas un nodo, generará un nuevo par de clave/certificado de staking y los almacenará en el directorio `/home/ubuntu/.avalanchego/staking`.
 
-Exit out of the SSH instance by running:
+Sal de la instancia de SSH ejecutando:
 
 ```bash
 exit
 ```
 
-Now you're no longer connected to the EC2 instance; you're back on your local machine.
+Ahora ya no estás conectado a la instancia de EC2; estás de vuelta en tu máquina local.
 
-To copy the staking key and certificate to your machine, run the following
-command. As always, replace `PUBLICIP`.
+Para copiar la clave de staking y el certificado a tu máquina, ejecuta el siguiente comando. Como siempre, reemplaza `PUBLICIP`.
 
 ```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 ```
 
-Now your staking key and certificate are in directory `~/aws_avalanche_backup` .
-**The contents of this directory are secret.** You should hold this directory on
-storage not connected to the internet (like an external hard drive.)
+Ahora tu clave de staking y certificado están en el directorio `~/aws_avalanche_backup`. **El contenido de este directorio es secreto**. Deberías guardar este directorio en un almacenamiento no conectado a internet (como un disco duro externo).
 
-### Upgrading Your Node
+### Actualizando tu Nodo
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most
-upgrades are recommended but not required. Advance notice will be given for
-upgrades that are not backwards compatible. To update your node to the latest
-version, SSH into your AWS instance as before and run the installer script
-again.
+AvalancheGo es un proyecto en curso y hay actualizaciones regulares de versión. La mayoría de las actualizaciones son recomendadas pero no requeridas. Se dará aviso previo para las actualizaciones que no sean compatibles con versiones anteriores. Para actualizar tu nodo a la última versión, SSH en tu instancia de AWS como antes y ejecuta el script de instalación nuevamente.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of
-the AvalancheGo service, run `sudo systemctl status avalanchego.`
+Tu máquina ahora está ejecutando la versión más nueva de AvalancheGo. Para ver el estado del servicio AvalancheGo, ejecuta `sudo systemctl status avalanchego.`
 
-## Increase Volume Size
+## Aumentar el Tamaño del Volumen
 
-If you need to increase the volume size, follow these instructions from AWS:
+Si necesitas aumentar el tamaño del volumen, sigue estas instrucciones de AWS:
 
-- [Request modifications to your EBS volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html)
-- [Extend a Linux file system after resizing a volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
+- [Solicitar modificaciones a tus volúmenes EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html)
+- [Extender un sistema de archivos Linux después de redimensionar un volumen](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
 
-## Wrap Up
+## Conclusión
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We
-recommend setting up [node monitoring
-](/nodes/maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also
-recommend setting up AWS billing alerts so you're not surprised when the bill
-arrives. If you have feedback on this tutorial, or anything else, send us a
-message on [Discord](https://chat.avalabs.org).
+¡Eso es todo! Ahora tienes un nodo AvalancheGo ejecutándose en una instancia AWS EC2. Recomendamos configurar [monitoreo de nodo](/nodes/maintain/setting-up-node-monitoring.md) para tu nodo AvalancheGo. También recomendamos configurar alertas de facturación de AWS para que no te lleves sorpresas cuando llegue la factura. Si tienes comentarios sobre este tutorial, o cualquier otra cosa, envíanos un mensaje en [Discord](https://chat.avalabs.org).
