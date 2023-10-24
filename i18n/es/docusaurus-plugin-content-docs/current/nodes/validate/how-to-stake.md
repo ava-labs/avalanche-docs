@@ -1,303 +1,205 @@
 ---
-tags: [Nodes]
-description: This section provides documents on how to stake AVAX on the Avalanche Network. 
-sidebar_label: How to Stake
-pagination_label: How to Stake AVAX
+etiquetas: [Nodos]
+descripción: Esta sección proporciona documentos sobre cómo apostar AVAX en la Red Avalanche.
+sidebar_label: Cómo Apostar
+pagination_label: Cómo Apostar AVAX
 sidebar_position: 2
 ---
 
-# How to Stake on Avalanche
+# Cómo Apostar en Avalanche
 
-## Staking Parameters on Avalanche
+## Parámetros de Apostar en Avalanche
 
-When a validator is done validating the [Primary
-Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network),
-it receives back the AVAX tokens it staked. It may receive a reward for helping
-to secure the network. A validator only receives a [validation
-reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards)
-if it is sufficiently responsive and correct during the time it validates. Read
-the [Avalanche token white paper](https://www.avalabs.org/whitepapers) to learn
-more about AVAX and the mechanics of staking.
+Cuando un validador ha terminado de validar la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), recibe de vuelta los tokens AVAX que apostó. Puede recibir una recompensa por ayudar a asegurar la red. Un validador solo recibe una [recompensa de validación](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) si es suficientemente receptivo y correcto durante el tiempo en el que valida. Lee el [white paper](https://www.avalabs.org/whitepapers) del token Avalanche para aprender más sobre AVAX y los mecanismos de apostar.
 
 :::caution
 
-Staking rewards are sent to your wallet address at the end of the staking term
-**as long as all of these parameters are met**.
+Las recompensas de apostar se envían a tu dirección de billetera al final del período de apostar **si se cumplen todos estos parámetros**.
 
 :::
 
 ### Mainnet
 
-- The minimum amount that a validator must stake is 2,000 AVAX
-- The minimum amount that a delegator must delegate is 25 AVAX
-- The minimum amount of time one can stake funds for validation is 2 weeks
-- The maximum amount of time one can stake funds for validation is 1 year
-- The minimum amount of time one can stake funds for delegation is 2 weeks
-- The maximum amount of time one can stake funds for delegation is 1 year
-- The minimum delegation fee rate is 2%
-- The maximum weight of a validator (their own stake + stake delegated to them)
-  is the minimum of 3 million AVAX and 5 times the amount the validator staked.
-  For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX
-  can be delegated to your node total (not per delegator)
+- La cantidad mínima que un validador debe apostar es de 2,000 AVAX
+- La cantidad mínima que un delegador debe delegar es de 25 AVAX
+- El tiempo mínimo en el que se pueden apostar fondos para validación es de 2 semanas
+- El tiempo máximo en el que se pueden apostar fondos para validación es de 1 año
+- El tiempo mínimo en el que se pueden apostar fondos para delegación es de 2 semanas
+- El tiempo máximo en el que se pueden apostar fondos para delegación es de 1 año
+- La tasa mínima de tarifa de delegación es del 2%
+- El peso máximo de un validador (su propia apuesta + apuesta delegada a ellos) es el mínimo de 3 millones de AVAX y 5 veces la cantidad que el validador apostó. Por ejemplo, si apostaste 2,000 AVAX para convertirte en un validador, solo 8,000 AVAX pueden ser delegados a tu nodo en total (no por delegador).
 
-A validator will receive a staking reward if they are online and response for
-more than 80% of their validation period, as measured by a majority of
-validators, weighted by stake. **You should aim for your validator be online and
-responsive 100% of the time.**
+Un validador recibirá una recompensa de apostar si está en línea y responde durante más del 80% de su período de validación, según lo medido por la mayoría de los validadores, ponderado por la apuesta. **Deberías apuntar a que tu validador esté en línea y sea receptivo el 100% del tiempo**.
 
-You can call API method `info.uptime` on your node to learn its weighted uptime
-and what percentage of the network currently thinks your node has an uptime high
-enough to receive a staking reward. See
-[here.](/reference/avalanchego/info-api.md#infouptime) You can get another
-opinion on your node's uptime from Avalanche's [Validator Health
-dashboard](https://stats.avax.network/dashboard/validator-health-check/). If
-your reported uptime is not close to 100%, there may be something wrong with
-your node setup, which may jeopardize your staking reward. If this is the case,
-please see [here](#why-is-my-uptime-low) or contact us on
-[Discord](https://chat.avax.network) so we can help you find the issue. Note
-that only checking the uptime of your validator as measured by non-staking
-nodes, validators with small stake, or validators that have not been online for
-the full duration of your validation period can provide an inaccurate view of
-your node's true uptime.
+Puedes llamar al método de API `info.uptime` en tu nodo para aprender su tiempo de actividad ponderado y qué porcentaje de la red piensa actualmente que tu nodo tiene un tiempo de actividad suficientemente alto para recibir una recompensa de apostar. Ver [aquí](/reference/avalanchego/info-api.md#infouptime). Puedes obtener otra opinión sobre el tiempo de actividad de tu nodo desde el [tablero de salud del validador](https://stats.avax.network/dashboard/validator-health-check/) de Avalanche. Si tu tiempo de actividad reportado no está cerca del 100%, puede haber algo mal con la configuración de tu nodo, lo que puede poner en peligro tu recompensa de apostar. Si este es el caso, por favor ve [aquí](#why-is-my-uptime-low) o contáctanos en [Discord](https://chat.avax.network) para que podamos ayudarte a encontrar el problema. Ten en cuenta que solo verificar el tiempo de actividad de tu validador según lo medido por nodos que no están apostando, validadores con una pequeña apuesta o validadores que no han estado en línea durante toda la duración de tu período de validación puede proporcionar una vista inexacta del verdadero tiempo de actividad de tu nodo.
 
 ### Fuji Testnet
 
-On Fuji Testnet, all staking parameters are the same as those on Mainnet except the following ones:
+En Fuji Testnet, todos los parámetros de apostar son iguales que en Mainnet, excepto los siguientes:
 
-- The minimum amount that a validator must stake is 1 AVAX
-- The minimum amount that a delegator must delegate is 1 AVAX
-- The minimum amount of time one can stake funds for validation is 24 hours
-- The minimum amount of time one can stake funds for delegation is 24 hours
+- La cantidad mínima que un validador debe apostar es de 1 AVAX
+- La cantidad mínima que un delegador debe delegar es de 1 AVAX
+- El tiempo mínimo en el que se pueden apostar fondos para validación es de 24 horas
+- El tiempo mínimo en el que se pueden apostar fondos para delegación es de 24 horas
 
-## Validators
+## Validadores
 
-**Validators** secure Avalanche, create new blocks/vertices, and process
-transactions. To achieve consensus, validators repeatedly sample each other. The
-probability that a given validator is sampled is proportional to its stake.
+**Validadores** aseguran Avalanche, crean nuevos bloques/vértices y procesan transacciones. Para lograr consenso, los validadores muestrean repetidamente a los demás. La probabilidad de que se muestree a un validador dado es proporcional a su apuesta.
 
-When you add a node to the validator set, you specify:
+Cuando agregas un nodo al conjunto de validadores, especificas:
 
-- Your node’s ID
-- When you want to start and stop validating
-- How many AVAX you are staking
-- The address to send any rewards to
-- Your delegation fee rate (see below)
+- La ID de tu nodo
+- Cuándo quieres comenzar y dejar de validar
+- Cuántos AVAX estás apostando
+- La dirección a la que enviar cualquier recompensa
+- Tu tasa de tarifa de delegación (ver más abajo)
 
 :::info
-The minimum amount that a validator must stake is 2,000 AVAX.
-:::
-
-:::warning 
-
-Note that once you issue the transaction to add a node as a
-validator, there is no way to change the parameters. **You can’t remove your
-stake early or change the stake amount, node ID, or reward address.** Please
-make sure you’re using the correct values in the API calls below. If you’re not
-sure, ask for help on [Discord](https://chat.avax.network). If you want to add
-more tokens to your own validator, you can delegate the tokens to this node -
-but you cannot increase the base validation amount (so delegating to yourself
-goes against your delegation cap). 
-
-:::
-
-### Running a Validator
-
-If you’re running a validator, it’s important that your node is well connected
-to ensure that you receive a reward. 
-
-When you issue the transaction to add a validator, the staked tokens and
-transaction fee (which is 0) are deducted from the addresses you control. When
-you are done validating, the staked funds are returned to the addresses they
-came from. If you earned a reward, it is sent to the address you specified when
-you added yourself as a validator.
-
-#### Allow API Calls
-
-To make API calls to your node from remote machines, allow traffic on the API
-port (`9650` by default), and run your node with argument `--http-host=`
-
-You should disable all APIs you will not use via command-line arguments. You
-should configure your network to only allow access to the API port from trusted
-machines (for example, your personal computer.)
-
-#### Why Is My Uptime Low?
-
-Every validator on Avalanche keeps track of the uptime of other validators.
-Every validator has a weight (that is the amount staked on it.) The more weight a
-validator has, the more influence they have when validators vote on whether your
-node should receive a staking reward. You can call API method `info.uptime` on
-your node to learn its weighted uptime and what percentage of the network stake
-currently thinks your node has an uptime high enough to receive a staking
-reward.
-
-You can also see the connections a node has by calling `info.peers`, as well as
-the uptime of each connection. **This is only one node’s point of view**. Other
-nodes may perceive the uptime of your node differently. Just because one node
-perceives your uptime as being low does not mean that you will not receive
-staking rewards.
-
-If your node's uptime is low, make sure you're setting config option
-`--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP
-traffic on port 9651.
-
-#### Secret Management
-
-The only secret that you need on your validating node is its Staking Key, the
-TLS key that determines your node’s ID. The first time you start a node, the
-Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You
-should back up this file (and `staker.crt`) somewhere secure. Losing your
-Staking Key could jeopardize your validation reward, as your node will have a
-new ID.
-
-You do not need to have AVAX funds on your validating node. In fact, it's best
-practice to **not** have a lot of funds on your node. Almost all of your funds
-should be in "cold" addresses whose private key is not on any computer.
-
-#### Monitoring
-
-Follow this [tutorial](/nodes/maintain/setting-up-node-monitoring.md) to learn how
-to monitor your node's uptime, general health, etc.
-
-### Reward Formula
-
-Consider a validator which stakes a $Stake$ amount of Avax for $StakingPeriod$ seconds.
-
-Assume that at the start of the staking period there is a $Supply$ amount of Avax in the Primary Network.
-The maximum amount of Avax is $MaximumSupply$ .
-
-Then at the end of its staking period, a responsive validator
-receives a reward calculated as follows:
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{Staking Period}{Minting Period} \times EffectiveConsumptionRate
-$$
-where
-$$
-EffectiveConsumptionRate = 
-$$
-$$
-\frac{MinConsumptionRate}{PercentDenominator} \times \left(1- \frac{Staking Period}{Minting Period}\right) + \frac{MaxConsumptionRate}{PercentDenominator} \times \frac{Staking Period}{Minting Period}
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
-
-Note that $StakingPeriod$ is the staker's entire staking period, not just the
-staker's uptime, that is the aggregated time during which the staker has been
-responsive. The uptime comes into play only to decide whether a staker should be
-rewarded; to calculate the actual reward, only the staking period duration is
-taken into account.
-
-$EffectiveConsumptionRate$ is a linear combination of $MinConsumptionRate$ and
-$MaxConsumptionRate$.
-$MinConsumptionRate$ and $MaxConsumptionRate$ bound $EffectiveConsumptionRate$ because 
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-MinConsumptionRate \leq EffectiveConsumptionRate \leq MaxConsumptionRate
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
-
-The larger $StakingPeriod$ is, the closer $EffectiveConsumptionRate$ is to $MaxConsumptionRate$.
-
-A staker achieves the maximum reward for its stake if $StakingPeriod$ = $Minting Period$.
-The reward is:
-
-<!-- markdownlint-disable MD013 -->
-<!-- vale off -->
-$$
-Max Reward = \left(MaximumSupply - Supply \right) \times \frac{Stake}{Supply} \times \frac{MaxConsumptionRate}{PercentDenominator}
-$$
-<!-- vale on -->
-<!-- markdownlint-enable MD013 -->
-
-
-
-## Delegators
-
-A delegator is a token holder, who wants to participate in staking, but chooses
-to trust an existing validating node through delegation.
-
-When you delegate stake to a validator, you specify:
-
-- The ID of the node you’re delegating to
-- When you want to start/stop delegating stake (must be while the validator is validating)
-- How many AVAX you are staking
-- The address to send any rewards to
-
-:::info
-The minimum amount that a delegator must delegate is 25 AVAX.
+La cantidad mínima que un validador debe apostar es de 2,000 AVAX.
 :::
 
 :::warning
 
-Note that once you issue the transaction to add your stake to a delegator, there
-is no way to change the parameters. **You can’t remove your stake early or
-change the stake amount, node ID, or reward address.** If you’re not sure, ask
-for help on [Discord](https://chat.avax.network).
+Ten en cuenta que una vez que emites la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. **No puedes quitar tu apuesta temprano o cambiar la cantidad de apuesta, la ID del nodo o la dirección de recompensa.** Asegúrate de usar los valores correctos en las llamadas de API a continuación. Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network). Si quieres agregar más tokens a tu propio validador, puedes delegar los tokens a este nodo, pero no puedes aumentar la cantidad de validación base (así que delegar a ti mismo va en contra de tu límite de delegación).
 
 :::
 
-### Delegator Rewards
+### Ejecutando un Validador
 
-If the validator that you delegate tokens to is sufficiently correct and
-responsive, you will receive a reward when you are done delegating. Delegators
-are rewarded according to the same function as validators. However, the
-validator that you delegate to keeps a portion of your reward specified by the
-validator’s delegation fee rate.
+Si estás ejecutando un validador, es importante que tu nodo esté bien conectado para asegurarte de recibir una recompensa.
 
-When you issue the transaction to delegate tokens, the staked tokens and
-transaction fee are deducted from the addresses you control. When you are done
-delegating, the staked tokens are returned to your address. If you earned a
-reward, it is sent to the address you specified when you delegated tokens. 
-Rewards are sent to delegators right after the delegation ends with the 
-return of staked tokens, and before the validation period of the node 
-they're delegating to is complete.
+Cuando emites la transacción para agregar un validador, los tokens apostados y la tarifa de transacción (que es 0) se deducen de las direcciones que controlas. Cuando terminas de validar, los fondos apostados se devuelven a las direcciones de las que vinieron. Si ganaste una recompensa, se envía a la dirección que especificaste cuando te agregaste como validador.
 
-## FAQ
+#### Permitir Llamadas de API
 
-### Is There a Tool to Check the Health of a Validator?
+Para hacer llamadas de API a tu nodo desde máquinas remotas, permite el tráfico en el puerto de la API (`9650` de forma predeterminada) y ejecuta tu nodo con el argumento `--http-host=`
 
-Yes, just enter your node's ID in the Avalanche Stats 
-[Validator Health Dashboard](https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-Jp4dLMTHd6huttS1jZhqNnBN9ZMNmTmWC).
+Deberías deshabilitar todas las API que no vayas a usar a través de argumentos de línea de comandos. Deberías configurar tu red para permitir el acceso al puerto de la API solo desde máquinas de confianza (por ejemplo, tu computadora personal).
 
-### How Is It Determined Whether a Validator Receives a Staking Reward?
+#### ¿Por qué es Bajo mi Tiempo de Actividad?
 
-When a node leaves the validator set, the validators vote on whether the leaving
-node should receive a staking reward or not. If a validator calculates that the
-leaving node was responsive for more than the required uptime (currently 80%),
-the validator will vote for the leaving node to receive a staking reward.
-Otherwise, the validator will vote that the leaving node should not receive a
-staking reward. The result of this vote, which is weighted by stake, determines
-whether the leaving node receives a reward or not.
+Cada validador en Avalanche lleva un registro del tiempo de actividad de los otros validadores. Cada validador tiene un peso (que es la cantidad apostada en él). Cuanto más peso tenga un validador, más influencia tendrá cuando los validadores voten si tu nodo debe recibir una recompensa de apostar. Puedes llamar al método de API `info.uptime` en tu nodo para aprender su tiempo de actividad ponderado y qué porcentaje de la red de apuestas actualmente piensa que tu nodo tiene un tiempo de actividad suficientemente alto para recibir una recompensa de apostar.
 
-Each validator only votes "yes" or "no." It does not share its data such as the
-leaving node's uptime.
+También puedes ver las conexiones que tiene un nodo llamando a `info.peers`, así como el tiempo de actividad de cada conexión. **Esta es solo la perspectiva de un nodo**. Otros nodos pueden percibir el tiempo de actividad de tu nodo de manera diferente. Solo porque un nodo perciba que tu tiempo de actividad es bajo no significa que no recibirás recompensas de apostar.
 
-Each validation period is considered separately. That is, suppose a node joins
-the validator set, and then leaves. Then it joins and leaves again. The node's
-uptime during its first period in the validator set does not affect the uptime
-calculation in the second period, hence, has no impact on whether the node
-receives a staking reward for its second period in the validator set.
+Si el tiempo de actividad de tu nodo es bajo, asegúrate de establecer la opción de configuración `--public-ip=[IP PÚBLICA DEL NODO]` y de que tu nodo pueda recibir tráfico TCP entrante en el puerto 9651.
 
-### How Are Delegation Fees Distributed To Validators?
+#### Gestión de Secretos
 
-If a validator is online for 80% of a delegation period, 
-they receive a % of the reward (the fee) earned by the delegator. 
-The P-Chain used to distribute this fee as a separate UTXO per delegation period. 
-After the 
-[Cortina Activation](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), 
-instead of sending a fee UTXO for each successful delegation period, 
-fees are now batched during a node’s entire validation period and are distributed when it is unstaked.
+El único secreto que necesitas en tu nodo validador es su Clave de Apostar, la clave TLS que determina la ID de tu nodo. La primera vez que inicias un nodo, se crea la Clave de Apostar y se coloca en `$HOME/.avalanchego/staking/staker.key`. Deberías hacer una copia de seguridad de este archivo (y `staker.crt`) en algún lugar seguro. Perder tu Clave de Apostar podría poner en peligro tu recompensa de validación, ya que tu nodo tendrá una nueva ID.
 
-### Error: Couldn't Issue TX: Validator Would Be Over Delegated
+No necesitas tener fondos AVAX en tu nodo validador. De hecho, es una buena práctica **no** tener muchos fondos en tu nodo. Casi todos tus fondos deberían estar en direcciones "frías" cuya clave privada no está en ninguna computadora.
 
-This error occurs whenever the delegator can not delegate to the named validator. 
-This can be caused by the following.
+#### Monitoreo
 
-- The delegator `startTime` is before the validator `startTime`
-- The delegator `endTime` is after the validator `endTime`
-- The delegator weight would result in the validator total weight exceeding its maximum weight
+Sigue este [tutorial](/nodes/maintain/setting-up-node-monitoring.md) para aprender cómo monitorear el tiempo de actividad de tu nodo, su salud general, etc.
+
+### Fórmula de Recompensa
+
+Considera un validador que apuesta una cantidad de $Stake$ dólares de Avax durante un período de apuesta de $StakingPeriod$ segundos.
+
+Supongamos que al comienzo del período de apuesta hay una cantidad de $Supply$ dólares de Avax en la Red Primaria. La cantidad máxima de Avax es $MaximumSupply$.
+
+Entonces, al final de su período de apuesta, un validador receptivo recibe una recompensa calculada de la siguiente manera:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+Recompensa = \left(SuministroMaximo - Suministro \right) \times \frac{Participacion}{Suministro} \times \frac{PeriodoDeStaking}{PeriodoDeMinting} \times TasaDeConsumoEfectiva
+$$
+donde
+$$
+TasaDeConsumoEfectiva = 
+$$
+$$
+\frac{TasaDeConsumoMinima}{DenominadorDePorcentaje} \times \left(1- \frac{PeriodoDeStaking}{PeriodoDeMinting}\right) + \frac{TasaDeConsumoMaxima}{DenominadorDePorcentaje} \times \frac{PeriodoDeStaking}{PeriodoDeMinting}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+Ten en cuenta que $PeriodoDeStaking$ es el período completo de staking del staker, no solo el tiempo de actividad del staker, es decir, el tiempo agregado durante el cual el staker ha sido receptivo. El tiempo de actividad entra en juego solo para decidir si un staker debe ser recompensado; para calcular la recompensa real, solo se tiene en cuenta la duración del período de staking.
+
+$TasaDeConsumoEfectiva$ es una combinación lineal de $TasaDeConsumoMinima$ y $TasaDeConsumoMaxima$.
+$TasaDeConsumoMinima$ y $TasaDeConsumoMaxima$ acotan $TasaDeConsumoEfectiva$ porque
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+TasaDeConsumoMinima \leq TasaDeConsumoEfectiva \leq TasaDeConsumoMaxima
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+Cuanto mayor sea $PeriodoDeStaking$, más cerca estará $TasaDeConsumoEfectiva$ de $TasaDeConsumoMaxima$.
+
+Un staker logra la recompensa máxima por su participación si $PeriodoDeStaking$ = $PeriodoDeMinting$.
+La recompensa es:
+
+<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
+$$
+RecompensaMaxima = \left(SuministroMaximo - Suministro \right) \times \frac{Participacion}{Suministro} \times \frac{TasaDeConsumoMaxima}{DenominadorDePorcentaje}
+$$
+<!-- vale on -->
+<!-- markdownlint-enable MD013 -->
+
+## Delegadores
+
+Un delegador es un titular de tokens que desea participar en el staking, pero elige confiar en un nodo validador existente a través de la delegación.
+
+Cuando delegas participación a un validador, especificas:
+
+- El ID del nodo al que estás delegando
+- Cuándo quieres comenzar / dejar de delegar participación (debe ser mientras el validador está validando)
+- Cuántos AVAX estás apostando
+- La dirección a la que enviar cualquier recompensa
+
+:::info
+La cantidad mínima que un delegador debe delegar son 25 AVAX.
+:::
+
+:::warning
+
+Ten en cuenta que una vez que emites la transacción para agregar tu participación a un delegador, no hay forma de cambiar los parámetros. **No puedes quitar tu participación antes de tiempo o cambiar la cantidad de participación, el ID del nodo o la dirección de recompensa.** Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network).
+
+:::
+
+### Recompensas del Delegador
+
+Si el validador al que delegas tokens es suficientemente correcto y receptivo, recibirás una recompensa cuando hayas terminado de delegar. Los delegadores son recompensados según la misma función que los validadores. Sin embargo, el validador al que delegas mantiene una parte de tu recompensa especificada por la tasa de tarifa de delegación del validador.
+
+Cuando emites la transacción para delegar tokens, los tokens apostados y la tarifa de transacción se deducen de las direcciones que controlas. Cuando terminas de delegar, los tokens apostados se devuelven a tu dirección. Si ganaste una recompensa, se envía a la dirección que especificaste cuando delegaste los tokens. Las recompensas se envían a los delegadores justo después de que la delegación termine con la devolución de los tokens apostados, y antes de que el período de validación del nodo al que están delegando esté completo.
+
+## Preguntas frecuentes
+
+### ¿Hay una herramienta para verificar la salud de un validador?
+
+Sí, simplemente ingresa el ID de tu nodo en el Avalanche Stats 
+[Panel de control de salud del validador](https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-Jp4dLMTHd6huttS1jZhqNnBN9ZMNmTmWC).
+
+### ¿Cómo se determina si un validador recibe una recompensa de staking?
+
+Cuando un nodo sale del conjunto de validadores, los validadores votan si el nodo que sale debe recibir una recompensa de staking o no. Si un validador calcula que el nodo que sale fue receptivo durante más del tiempo de actividad requerido (actualmente 80%), el validador votará para que el nodo que sale reciba una recompensa de staking. De lo contrario, el validador votará que el nodo que sale no debe recibir una recompensa de staking. El resultado de esta votación, que está ponderada por la participación, determina si el nodo que sale recibe una recompensa o no.
+
+Cada validador solo vota "sí" o "no". No comparte sus datos como el tiempo de actividad del nodo que sale.
+
+Cada período de validación se considera por separado. Es decir, supongamos que un nodo se une al conjunto de validadores y luego sale. Luego se une y sale de nuevo. El tiempo de actividad del nodo durante su primer período en el conjunto de validadores no afecta el cálculo del tiempo de actividad en el segundo período, por lo tanto, no tiene ningún impacto en si el nodo recibe una recompensa de staking por su segundo período en el conjunto de validadores.
+
+### ¿Cómo se distribuyen las tarifas de delegación a los validadores?
+
+Si un validador está en línea durante el 80% de un período de delegación, 
+recibe un % de la recompensa (la tarifa) ganada por el delegador. 
+La P-Chain solía distribuir esta tarifa como una salida UTXO separada por período de delegación. 
+Después de la 
+[Activación de Cortina](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), 
+en lugar de enviar una salida UTXO de tarifa por cada período de delegación exitoso, 
+las tarifas ahora se agrupan durante todo el período de validación de un nodo y se distribuyen cuando se desapuesta.
+
+### Error: No se pudo emitir la TX: el validador estaría sobredelegado
+
+Este error ocurre cada vez que el delegador no puede delegar al validador nombrado. 
+Esto puede ser causado por lo siguiente.
+
+- El `startTime` del delegador es antes del `startTime` del validador
+- El `endTime` del delegador es después del `endTime` del validador
+- El peso del delegador haría que el peso total del validador exceda su peso máximo

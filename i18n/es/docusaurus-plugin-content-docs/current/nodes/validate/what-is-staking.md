@@ -1,25 +1,15 @@
 ---
-tags: [Nodes]
-description: Staking is an essential part of proof-of-stake (PoS) consensus mechanisms used by many blockchain networks, including Avalanche.
-sidebar_label: What Is Staking?
-pagination_label: What Is Staking?
+etiquetas: [Nodos]
+descripción: El staking es una parte esencial de los mecanismos de consenso de prueba de participación (PoS) utilizados por muchas redes blockchain, incluyendo Avalanche.
+sidebar_label: ¿Qué es el Staking?
+pagination_label: ¿Qué es el Staking?
 sidebar_position: 0
 ---
 
-# What Is Staking?
+# ¿Qué es el Staking?
 
-Staking is the process where users lock up their tokens to support a blockchain network and, in return,
-receive rewards. It is an essential part of proof-of-stake (PoS) consensus mechanisms used by many 
-blockchain networks, including Avalanche. PoS systems require participants to stake a certain amount
-of tokens as collateral to participate in the network and validate transactions.
+El staking es el proceso en el que los usuarios bloquean sus tokens para apoyar una red blockchain y, a cambio, reciben recompensas. Es una parte esencial de los mecanismos de consenso de prueba de participación (PoS) utilizados por muchas redes blockchain, incluyendo Avalanche. Los sistemas PoS requieren que los participantes apuesten una cierta cantidad de tokens como garantía para participar en la red y validar transacciones.
 
-## How Does Proof-of-Stake Work?
+## ¿Cómo funciona la prueba de participación?
 
-To resist [sybil
-attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack),
-a decentralized network must require that network influence is paid with a
-scarce resource. This makes it infeasibly expensive for an attacker to gain
-enough influence over the network to compromise its security. On Avalanche, the scarce
-resource is the native token,
-[AVAX](/learn/avalanche/intro.md#avax). For a node to validate
-a blockchain on Avalanche, it must stake AVAX.
+Para resistir los ataques [sybil](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), una red descentralizada debe requerir que la influencia en la red se pague con un recurso escaso. Esto hace que sea demasiado caro para un atacante obtener suficiente influencia sobre la red para comprometer su seguridad. En Avalanche, el recurso escaso es el token nativo, [AVAX](/learn/avalanche/intro.md#avax). Para que un nodo valide una blockchain en Avalanche, debe apostar AVAX.

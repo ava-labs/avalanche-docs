@@ -1,51 +1,52 @@
 ---
-tags: [Nodes]
-description: This section details the difference between staking and delegating on Avalanche.
-sidebar_label: Validate vs. Delegate
-pagination_label: Validate vs. Delegate
+etiquetas: [Nodos]
+descripción: Esta sección detalla la diferencia entre hacer stake y delegar en Avalanche.
+sidebar_label: Validar vs Delegar
+pagination_label: Validar vs Delegar
 sidebar_position: 1
 ---
 
-# The Differences Between Validation and Delegation on Avalanche
+# Las Diferencias Entre la Validación y la Delegación en Avalanche
 
-## Validation
+## Validación
 
-Validation in the context of staking refers to the act of running a node on the 
-blockchain network to validate transactions and secure the network.
+La validación en el contexto del staking se refiere al acto de ejecutar un nodo en la red blockchain 
+para validar transacciones y asegurar la red.
 
-- **Stake Requirement:** To become a validator on the Avalanche network,
-one must stake a minimum amount of 2,000 AVAX tokens on the Mainnet (1 AVAX on the Fuji Testnet).
-- **Process:** Validators participate in achieving consensus by repeatedly sampling other validators.
-The probability of being sampled is proportional to the validator's stake, meaning the more tokens a
-validator stakes, the more influential they are in the consensus process.
-- **Rewards:** Validators are eligible to receive rewards for their efforts in securing the network.
-To receive rewards, a validator must be online and responsive for more than 80% of their validation
-period.
+- **Requisito de Stake:** Para convertirse en un validador en la red Avalanche, se debe hacer stake 
+de una cantidad mínima de 2,000 tokens AVAX en la Mainnet (1 AVAX en la Fuji Testnet).
+- **Proceso:** Los validadores participan en lograr consenso muestreando repetidamente a otros 
+validadores. La probabilidad de ser muestreado es proporcional al stake del validador, lo que significa 
+que cuantos más tokens haga stake un validador, más influyente es en el proceso de consenso.
+- **Recompensas:** Los validadores son elegibles para recibir recompensas por sus esfuerzos en 
+asegurar la red. Para recibir recompensas, un validador debe estar en línea y ser receptivo durante 
+más del 80% de su período de validación.
 
-## Delegation
+## Delegación
 
-Delegation allows token holders who do not wish to run their own validator node to still participate
-in staking by "delegating" their tokens to an existing validator node.
+La delegación permite a los titulares de tokens que no desean ejecutar su propio nodo validador 
+participar aún en el staking al "delegar" sus tokens a un nodo validador existente.
 
-- **Stake Requirement:** To delegate on the Avalanche network, a minimum of 25 AVAX tokens is
-required on the Mainnet (1 AVAX on the Fuji Testnet).
-- **Process:** Delegators choose a specific validator node to delegate their tokens to, trusting 
-that the validator will behave correctly and help secure the network on their behalf.
-- **Rewards:** Delegators are also eligible to receive rewards for their stake. The validator they 
-delegate to shares a portion of the reward with them, according to the validator's delegation fee rate.
+- **Requisito de Stake:** Para delegar en la red Avalanche, se requiere un mínimo de 25 tokens AVAX 
+en la Mainnet (1 AVAX en la Fuji Testnet).
+- **Proceso:** Los delegadores eligen un nodo validador específico para delegar sus tokens, 
+confiando en que el validador se comportará correctamente y ayudará a asegurar la red en su nombre.
+- **Recompensas:** Los delegadores también son elegibles para recibir recompensas por su stake. 
+El validador al que delegan comparte una parte de la recompensa con ellos, según la tasa de tarifa de 
+delegación del validador.
 
-## Key Differences
+## Diferencias Clave
 
-- **Responsibilities:** Validators actively run a node, validate transactions, and actively 
-participate in securing the network. Delegators, on the other hand, do not run a node themselves 
-but entrust their tokens to a validator to participate on their behalf.
-- **Stake Requirement:** Validators have a higher minimum stake requirement compared to delegators, 
-as they take on more responsibility in the network.
-- **Rewards Distribution:** Validators receive rewards directly for their validation efforts. 
-Delegators receive rewards indirectly through the validator they delegate to, sharing a portion of 
-the validator's reward.
+- **Responsabilidades:** Los validadores ejecutan activamente un nodo, validan transacciones y 
+participan activamente en asegurar la red. Los delegadores, por otro lado, no ejecutan un nodo 
+ellos mismos, sino que confían sus tokens a un validador para participar en su nombre.
+- **Requisito de Stake:** Los validadores tienen un requisito de stake mínimo más alto en comparación 
+con los delegadores, ya que asumen más responsabilidad en la red.
+- **Distribución de Recompensas:** Los validadores reciben recompensas directamente por sus esfuerzos 
+de validación. Los delegadores reciben recompensas indirectamente a través del validador al que 
+delegan, compartiendo una parte de la recompensa del validador.
 
-In summary, validation involves actively participating in securing the network by running a node, 
-while delegation allows token holders to participate passively by trusting their stake to a chosen 
-validator. Both validators and delegators can earn rewards, but validators have higher stakes and 
-more direct involvement in the Avalanche network.
+En resumen, la validación implica participar activamente en asegurar la red ejecutando un nodo, 
+mientras que la delegación permite a los titulares de tokens participar de manera pasiva confiando 
+su stake a un validador elegido. Tanto los validadores como los delegadores pueden ganar recompensas, 
+pero los validadores tienen stakes más altos y una participación más directa en la red Avalanche.
