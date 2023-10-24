@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: El staking es una parte esencial de los mecanismos de consenso de prueba de participación (PoS) utilizados por muchas redes blockchain, incluyendo Avalanche.
+tags: [Nodos]
+description: El staking es una parte esencial de los mecanismos de consenso de prueba de participación (PoS) utilizados por muchas redes blockchain, incluyendo Avalanche.
 sidebar_label: ¿Qué es el Staking?
 pagination_label: ¿Qué es el Staking?
 sidebar_position: 0

@@ -73,7 +73,7 @@ De forma predeterminada, el archivo de configuración de la C-Chain se encuentra
 
 Si necesitas la funcionalidad de un [Nodo de Archivo](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) de Ethereum, debes desactivar la poda de la C-Chain, que está habilitada de forma predeterminada para conservar espacio en disco. Para preservar el estado histórico completo, incluye `"pruning-enabled": false` en el archivo de configuración de la C-Chain.
 
-:::nota
+:::note
 
 Después de cambiar la bandera para desactivar la poda de la base de datos, deberás ejecutar el proceso de inicio rápido nuevamente, ya que el nodo no rellenará ningún dato ya podado y faltante.
 
@@ -85,7 +85,7 @@ Para volver a iniciar el nodo, detenlo, elimina la base de datos (almacenada de 
 
 De forma predeterminada, las API de depuración están deshabilitadas. Para habilitarlas, debes habilitar las API EVM apropiadas en el archivo de configuración incluyendo el valor `eth-apis` en tu archivo de configuración de la C-Chain para incluir las API `debug`, `debug-tracer` e `internal-debug`.
 
-:::nota
+:::note
 
 Incluir `eth-apis` en la bandera de configuración anula los valores predeterminados, ¡así que debes incluir también las API predeterminadas!
 

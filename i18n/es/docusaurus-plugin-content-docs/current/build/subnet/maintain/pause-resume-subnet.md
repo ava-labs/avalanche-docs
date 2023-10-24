@@ -1,6 +1,6 @@
 ---
 tags: [Construir, Subnets]
-description: Pausar y reanudar de manera elegante una subred local mientras se preserva el estado.
+description: Pausar y reanudar de manera elegante una Subnet  local mientras se preserva el estado.
 sidebar_label: Pausar y Reanudar
 pagination_label: Pausar y Reanudar Subnets Locales
 sidebar_position: 1

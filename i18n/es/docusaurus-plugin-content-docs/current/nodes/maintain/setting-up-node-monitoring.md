@@ -141,7 +141,7 @@ Ejecuta el script para ejecutar el segundo paso:
 
 Debería producir una salida similar a esta:
 
-```text
+````text
 Instalador de monitoreo de AvalancheGo
 --------------------------------
 PASO 2: Instalando Grafana
@@ -162,7 +162,7 @@ Para asegurarte de que está funcionando correctamente:
 
 ```text
 sudo systemctl status grafana-server
-```
+````
 
 lo cual debería mostrar nuevamente a Grafana como `activo`. Grafana ahora debería estar disponible en
 `http://tu-dirección-ip-del-nodo:3000/` desde tu navegador. Inicia sesión con nombre de usuario: admin,

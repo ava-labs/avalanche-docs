@@ -1,8 +1,8 @@
 ---
-etiquetas: [Nodos]
-descripción: Instrucciones detalladas para ejecutar un nodo Avalanche con Alibaba Cloud
-etiqueta_de_barra_lateral: Alibaba Cloud
-etiqueta_de_paginación: Ejecutar un nodo Avalanche con Alibaba Cloud
+tags: [Nodos]
+description: Instrucciones detalladas para ejecutar un nodo Avalanche con Alibaba Cloud
+sidebar_label: Alibaba Cloud
+pagination_label: Ejecutar un nodo Avalanche con Alibaba Cloud
 posición_de_barra_lateral: 5
 ---
 

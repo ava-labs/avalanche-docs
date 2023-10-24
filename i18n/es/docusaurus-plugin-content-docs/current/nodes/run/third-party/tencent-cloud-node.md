@@ -1,8 +1,8 @@
 ---
-etiquetas: [Nodos]
-descripción: Instrucciones detalladas para ejecutar un nodo Avalanche con Tencent Cloud
-etiqueta_de_barra_lateral: Tencent Cloud
-etiqueta_de_paginación: Ejecutar un nodo Avalanche con Tencent Cloud
+tags: [Nodos]
+description: Instrucciones detalladas para ejecutar un nodo Avalanche con Tencent Cloud
+sidebar_label: Tencent Cloud
+pagination_label: Ejecutar un nodo Avalanche con Tencent Cloud
 posición_de_barra_lateral: 5
 ---
 

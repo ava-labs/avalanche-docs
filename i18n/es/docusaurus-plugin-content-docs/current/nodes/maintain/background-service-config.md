@@ -5,6 +5,7 @@ sidebar_label: Ejecutar como un Servicio en Segundo Plano
 pagination_label: Ejecutar un Nodo Avalanche como un Servicio en Segundo Plano
 sidebar_position: 6
 ---
+
 # Ejecutar un Nodo Avalanche como un Servicio en Segundo Plano
 
 ## Resumen
@@ -29,14 +30,14 @@ sudo nano /etc/systemd/system/avalanchego.service
 
 Pega la siguiente configuración en el archivo `avalanchego.service`
 
-***Recuerda modificar los valores de:***
+**_Recuerda modificar los valores de:_**
 
-- ***user=***
-- ***group=***
-- ***WorkingDirectory=***
-- ***ExecStart=***
+- **_user=_**
+- **_group=_**
+- **_WorkingDirectory=_**
+- **_ExecStart=_**
 
-***Por aquellos que has configurado en tu servidor***
+**_Por aquellos que has configurado en tu servidor_**
 
 ```shell
 [Unit]
@@ -53,9 +54,9 @@ TimeoutStartSec=10s
 StartLimitInterval=120s
 StartLimitBurst=5
 WorkingDirectory=/Tu/Ruta/Hacia/avalanchego
-ExecStart=/Tu/Ruta/Hacia/avalanchego/./avalanchego \  
+ExecStart=/Tu/Ruta/Hacia/avalanchego/./avalanchego \
    --network-id=fuji \
-   --api-metrics-enabled=true 
+   --api-metrics-enabled=true
 
 [Install]
 WantedBy=multi-user.target

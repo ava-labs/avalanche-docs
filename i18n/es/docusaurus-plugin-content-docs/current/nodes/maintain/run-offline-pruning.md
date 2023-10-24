@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este documento, aprende cómo ejecutar la poda sin conexión en tu nodo para reducir su uso de disco.
+tags: [Nodos]
+description: En este documento, aprende cómo ejecutar la poda sin conexión en tu nodo para reducir su uso de disco.
 sidebar_label: Reducir el uso de disco
 pagination_label: "Espacio en disco de un nodo: ejecutar poda sin conexión en C-Chain"
 sidebar_position: 4
@@ -210,3 +210,4 @@ Para asegurar que el nodo no entre en un estado inconsistente, el filtro de bloo
 La base de datos subyacente (LevelDB) utiliza marcadores de eliminación (tumbas) para identificar claves recién eliminadas. Estos marcadores se persisten temporalmente en disco hasta que se eliminan durante un proceso conocido como compactación. Esto llevará a un aumento en el uso del disco durante el recorte. Si su nodo se queda sin espacio en disco durante el recorte, puede reiniciar de forma segura la operación de recorte. Esto puede tener éxito ya que reiniciar el nodo desencadena la compactación.
 
 Si reiniciar la operación de recorte no tiene éxito, se debe aprovisionar espacio en disco adicional.
+```

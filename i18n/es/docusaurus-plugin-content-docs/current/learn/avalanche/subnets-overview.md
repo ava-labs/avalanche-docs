@@ -1,7 +1,7 @@
 ---
 tags: [Subnet]
 description: Una Subnet es un conjunto dinámico de validadores que trabajan juntos para lograr consenso sobre el estado de un conjunto de redes blockchain.
-palabras clave:
+keywords:
   [documentación, avalanche, subnets, blockchains soberanas, interoperabilidad]
 sidebar_label: Subnets
 ---

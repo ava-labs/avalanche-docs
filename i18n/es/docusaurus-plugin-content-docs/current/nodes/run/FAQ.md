@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Si experimentas algún problema al construir tu nodo, aquí tienes algunos errores comunes y posibles soluciones.
+tags: [Nodos]
+description: Si experimentas algún problema al construir tu nodo, aquí tienes algunos errores comunes y posibles soluciones.
 sidebar_label: Errores Comunes
 pagination_label: Errores Comunes al Construir un Nodo
 sidebar_position: 5

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Este tutorial te guiará en la configuración de un nodo Avalanche en Amazon Web Services (AWS). Los servicios en la nube como AWS son una buena manera de asegurar que tu nodo sea altamente seguro, disponible y accesible.
+tags: [Nodos]
+description: Este tutorial te guiará en la configuración de un nodo Avalanche en Amazon Web Services (AWS). Los servicios en la nube como AWS son una buena manera de asegurar que tu nodo sea altamente seguro, disponible y accesible.
 sidebar_label: Amazon Web Services
 pagination_label: Ejecutar un Nodo Avalanche con Amazon Web Services
 sidebar_position: 0

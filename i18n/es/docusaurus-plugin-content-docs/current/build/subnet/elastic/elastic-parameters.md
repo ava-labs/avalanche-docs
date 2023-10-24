@@ -176,7 +176,7 @@ $$
 donde
 
 $$
-MaximumSupply - Supply = \text{la cantidad de tokens que quedan por emitir en la subred}
+MaximumSupply - Supply = \text{la cantidad de tokens que quedan por emitir en la Subnet }
 $$
 
 $$

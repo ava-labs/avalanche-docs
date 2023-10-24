@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Aprende cómo construir una máquina virtual compleja en Avalanche usando Golang.
+tags: [Construir, Máquinas Virtuales]
+description: Aprende cómo construir una máquina virtual compleja en Avalanche usando Golang.
 sidebar_label: VM Golang Compleja
 pagination_label: Construir una VM Golang Compleja
 sidebar_position: 2

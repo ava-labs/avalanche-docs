@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Ejecutar un validador y hacer stake con Avalanche utilizando la infraestructura de Microsoft Azure proporciona recompensas extremadamente competitivas. Encuentra más información aquí.
+tags: [Nodos]
+description: Ejecutar un validador y hacer stake con Avalanche utilizando la infraestructura de Microsoft Azure proporciona recompensas extremadamente competitivas. Encuentra más información aquí.
 sidebar_label: Microsoft Azure
 pagination_label: Ejecutar un Nodo Avalanche con Microsoft Azure
 sidebar_position: 2

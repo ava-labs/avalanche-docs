@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Referencia de todas las opciones y banderas de configuración de Subnet disponibles.
+tags: [Nodos]
+description: Referencia de todas las opciones y banderas de configuración de Subnet disponibles.
 sidebar_label: Configuraciones de Subnet
 pagination_label: Configuraciones de Subnet
 sidebar_position: 2
@@ -82,18 +82,18 @@ clave `consensusParameters`. Los parámetros de consenso de una Subnet se establ
 mismos valores utilizados para la Red Primaria, que se dan en [Parámetros Snow
 CLI](/nodes/configure/avalanchego-config-flags.md#snow-parameters).
 
-| Clave CLI                             | Clave JSON                 |
-| :---------------------------------- | :----------------------- |
-| --snow-sample-size                  | k                        |
-| --snow-quorum-size                  | alpha                    |
-| --snow-virtuous-commit-threshold    | `betaVirtuous`           |
-| --snow-rogue-commit-threshold       | `betaRogue`              |
-| --snow-concurrent-repolls           | concurrentRepolls        |
-| --snow-optimal-processing           | `optimalProcessing`      |
-| --snow-max-processing               | maxOutstandingItems      |
-| --snow-max-time-processing          | maxItemProcessingTime    |
-| --snow-avalanche-batch-size         | `batchSize`              |
-| --snow-avalanche-num-parents        | `parentSize`             |
+| Clave CLI                        | Clave JSON            |
+| :------------------------------- | :-------------------- |
+| --snow-sample-size               | k                     |
+| --snow-quorum-size               | alpha                 |
+| --snow-virtuous-commit-threshold | `betaVirtuous`        |
+| --snow-rogue-commit-threshold    | `betaRogue`           |
+| --snow-concurrent-repolls        | concurrentRepolls     |
+| --snow-optimal-processing        | `optimalProcessing`   |
+| --snow-max-processing            | maxOutstandingItems   |
+| --snow-max-time-processing       | maxItemProcessingTime |
+| --snow-avalanche-batch-size      | `batchSize`           |
+| --snow-avalanche-num-parents     | `parentSize`          |
 
 ### Configuraciones de Gossip
 
@@ -105,7 +105,7 @@ parámetros son diferentes de sus claves `CLI` correspondientes. Estos parámetr
 se establecen por defecto en los mismos valores utilizados para la Red Primaria. Para más información,
 consulta [Configuraciones de Gossip CLI](/nodes/configure/avalanchego-config-flags.md#gossiping).
 
-| Clave CLI                                                 | Clave JSON                               |
+| Clave CLI                                               | Clave JSON                             |
 | :------------------------------------------------------ | :------------------------------------- |
 | --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
 | --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |

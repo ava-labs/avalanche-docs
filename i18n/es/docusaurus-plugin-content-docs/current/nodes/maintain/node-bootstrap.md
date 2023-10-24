@@ -1,162 +1,236 @@
 ---
-etiquetas: [Nodos]
-descripción: El inicio de un nodo es el proceso en el que un nodo *seguramente* descarga bloques de la cadena lineal para recrear el estado más reciente de la cadena localmente. El inicio de un nodo es un proceso de varios pasos que requiere descargar las cadenas requeridas por la Red Primaria (es decir, la C-Chain, P-Chain y X-Chain), así como las cadenas requeridas por cualquier Subred adicional que el nodo rastree explícitamente.
-sidebar_label: "Inicio de un Nodo: Qué esperar"
-pagination_label: Qué esperar durante el inicio de un nodo
+tags: [Nodes]
+description: Node Bootstrap is the process where a node *securely* downloads linear chain blocks to recreate the latest state of the chain locally. Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
+sidebar_label: "Bootstrapping: What to Expect"
+pagination_label: What to Expect While Bootstrapping
 sidebar_position: 0
 ---
 
-# Inicio de un Nodo
+# Node Bootstrap
 
-El inicio de un nodo es el proceso en el que un nodo *seguramente* descarga bloques de la cadena lineal para recrear el estado más reciente de la cadena localmente.
+Node Bootstrap is the process where a node _securely_ downloads linear chain
+blocks to recreate the latest state of the chain locally.
 
-El inicio debe garantizar que el estado local de un nodo esté sincronizado con el estado de otros nodos válidos. Una vez que se completa el inicio, un nodo tiene el estado más reciente de la cadena y puede verificar nuevas transacciones entrantes y alcanzar consenso con otros nodos, moviendo colectivamente hacia adelante las cadenas.
+Bootstrap must guarantee that the local state of a node is in sync with the
+state of other valid nodes. Once bootstrap is completed, a node has the latest
+state of the chain and can verify new incoming transactions and reach consensus
+with other nodes, collectively moving forward the chains.
 
-El inicio de un nodo es un proceso de varios pasos que requiere descargar las cadenas requeridas por la Red Primaria (es decir, la C-Chain, P-Chain y X-Chain), así como las cadenas requeridas por cualquier Subred adicional que el nodo rastree explícitamente.
+Bootstrapping a node is a multi-step process which requires downloading the
+chains required by the Primary Network (that is, the C-Chain, P-Chain, and
+X-Chain), as well as the chains required by any additional Subnets that the node
+explicitly tracks.
 
-Este documento cubre los detalles técnicos de alto nivel de cómo funciona el inicio de un nodo. Este documento pasa por alto algunos detalles específicos, pero el código base de
-[AvalancheGo](https://github.com/ava-labs/avalanchego) es de código abierto
-y está disponible para lectores curiosos que deseen aprender más.
+This document covers the high-level technical details of how bootstrapping
+works. This document glosses over some specifics, but the
+[AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source
+and is available for curious-minded readers to learn more.
 
-## Validadores y dónde encontrarlos
+## Validators and Where to Find Them
 
-El inicio de un nodo se trata de descargar todos los contenedores aceptados previamente
-*seguramente* para que un nodo pueda tener el estado correcto más reciente de la cadena. Un nodo
-no puede confiar arbitrariamente en cualquier fuente, ya que un actor malintencionado podría proporcionar bloques maliciosos, corrompiendo el estado local del nodo de inicio y haciéndolo
-imposible para el nodo validar correctamente la red y alcanzar consenso
-con otros nodos correctos.
+Bootstrapping is all about downloading all previously accepted containers
+_securely_ so a node can have the latest correct state of the chain. A node
+can't arbitrarily trust any source - a malicious actor could provide malicious
+blocks, corrupting the bootstrapping node's local state, and making it
+impossible for the node to correctly validate the network and reach consensus
+with other correct nodes.
 
-¿Cuál es la fuente de información más confiable en el ecosistema Avalanche? Es
-una mayoría *suficientemente grande* de validadores. Por lo tanto, el primer paso de
-inicio es encontrar una cantidad suficiente de validadores para descargar
-contenedores de ellos.
+What's the most reliable source of information in the Avalanche ecosystem? It's
+a _large enough_ majority of validators. Therefore, the first step of
+bootstrapping is finding a sufficient amount of validators to download
+containers from.
 
-La P-Chain es responsable de todas las operaciones a nivel de plataforma, incluidos los eventos de participación
-que modifican el conjunto de validadores de una Subred. Cada vez que cualquier cadena (excepto la
-P-Chain en sí misma) se inicia, solicita un conjunto de validadores actualizado para esa
-Subred (la Red Primaria es una Subred también). Una vez que se conoce el conjunto de validadores
-actual de la Subred, el nodo puede descargar contenedores de estos validadores de manera segura para
-iniciar la cadena.
+The P-Chain is responsible for all platform-level operations, including staking
+events that modify a Subnet's validator set. Whenever any chain (aside from the
+P-Chain itself) bootstraps, it requests an up-to-date validator set for that
+Subnet (Primary Network is a Subnet too). Once the Subnet's current validator
+set is known, the node can securely download containers from these validators to
+bootstrap the chain.
 
-Aquí hay un detalle importante: el conjunto de validadores debe estar *actualizado*. Si un
-el conjunto de validadores de un nodo de inicio está desactualizado, el nodo puede creer incorrectamente
-que algunos nodos todavía son validadores cuando su período de validación ya ha
-expirado. Un nodo podría terminar sin saberlo solicitando bloques de no validadores
-que responden con bloques maliciosos que no son seguros para descargar.
+There is a caveat here: the validator set must be _up-to-date_. If a
+bootstrapping node's validator set is stale, the node may incorrectly believe
+that some nodes are still validators when their validation period has already
+expired. A node might unknowingly end up requesting blocks from non-validators
+which respond with malicious blocks that aren't safe to download.
 
-**Por esta razón, cada nodo Avalanche debe iniciar completamente la P-chain primero
-antes de pasar a las otras cadenas de la Red Primaria y otras Subredes para
-garantizar que sus conjuntos de validadores estén actualizados**.
+**For this reason, every Avalanche node must fully bootstrap the P-chain first
+before moving on to the other Primary Network chains and other Subnets to
+guarantee that their validator sets are up-to-date**.
 
-¿Y qué pasa con la P-chain? La P-chain no puede tener nunca un conjunto de validadores actualizado
-antes de completar su inicio. Para resolver esta situación de huevo y gallina, la
-Fundación Avalanche mantiene un conjunto predeterminado de validadores confiables llamados
-beacons (pero los usuarios son libres de configurar los suyos propios). Los ID de nodo y las direcciones IP de los Beacons se enumeran en el [código base de AvalancheGo](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json).
-Cada nodo tiene la lista de beacons disponible desde el principio y puede comunicarse con ellos
-tan pronto como se inicia.
+What about the P-chain? The P-chain can't ever have an up-to-date validator set
+before completing its bootstrap. To solve this chicken-and-egg situation the
+Avalanche Foundation maintains a trusted default set of validators called
+beacons (but users are free to configure their own). Beacon Node-IDs and IP
+addresses are listed in the [AvalancheGo codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json).
+Every node has the beacon list available from the start and can reach out to them
+as soon as it starts.
 
-Los validadores son las únicas fuentes de verdad para una blockchain. La disponibilidad de validadores es tan clave para el proceso de inicio que **el inicio está bloqueado hasta que el nodo establece una cantidad suficiente de conexiones seguras a validadores**. Si el nodo no logra alcanzar una cantidad suficiente dentro de un
-período de tiempo dado, se apaga ya que no se puede llevar a cabo ninguna operación de manera segura.
+Validators are the only sources of truth for a blockchain. Validator
+availability is so key to the bootstrapping process that **bootstrapping is
+blocked until the node establishes a sufficient amount of secure connections to
+validators**. If the node fails to reach a sufficient amount within a given
+period of time, it shuts down as no operation can be carried out safely.
 
-## Iniciando la Blockchain
+## Bootstrapping the Blockchain
 
-Una vez que un nodo es capaz de descubrir y conectarse a nodos validadores y beacons, está
-capaz de comenzar a iniciar la blockchain descargando los contenedores individuales.
+Once a node is able to discover and connect to validator and beacon nodes, it's
+able to start bootstrapping the blockchain by downloading the individual
+containers.
 
-Un error común es que las blockchains Avalanche se inician recuperando contenedores a partir de génesis y trabajando hasta la
-frontera aceptada actualmente.
+One common misconception is that Avalanche blockchains are bootstrapped by
+retrieving containers starting at genesis and working up to the currently
+accepted frontier.
 
-En cambio, los contenedores se descargan desde la frontera aceptada hacia abajo hasta
-génesis, y luego sus transiciones de estado correspondientes se ejecutan hacia arriba
-desde génesis hasta la frontera aceptada. La frontera aceptada es el último
-bloque aceptado para cadenas lineales.
+Instead, containers are downloaded from the accepted frontier downwards to
+genesis, and then their corresponding state transitions are executed upwards
+from genesis to the accepted frontier. The accepted frontier is the last
+accepted block for linear chains.
 
-¿Por qué los nodos no pueden simplemente descargar bloques en orden cronológico, comenzando desde
-génesis hacia arriba? La razón es la eficiencia: si los nodos descargaran contenedores
-hacia arriba, solo obtendrían una garantía de seguridad al consultar a una mayoría de
-validadores para cada contenedor individual. Eso es mucho tráfico de red para un
-solo contenedor, y un nodo aún tendría que hacer eso por cada contenedor en
-la cadena.
+Why can't nodes simply download blocks in chronological order, starting from
+genesis upwards? The reason is efficiency: if nodes downloaded containers
+upwards they would only get a safety guarantee by polling a majority of
+validators for every single container. That's a lot of network traffic for a
+single container, and a node would still need to do that for each container in
+the chain.
 
-En cambio, si un nodo comienza recuperando de manera segura la frontera aceptada de un
-mayoría de nodos honestos y luego recupera de manera recursiva los contenedores padres desde
-la frontera aceptada hasta génesis, puede verificar de manera económica que los contenedores sean
-correctos simplemente verificando sus ID. Cada contenedor Avalanche tiene los ID de sus
-padres (un padre de bloque para cadenas lineales)
-y la integridad de un ID se puede garantizar criptográficamente.
+Instead, if a node starts by securely retrieving the accepted frontier from a
+majority of honest nodes and then recursively fetches the parent containers from
+the accepted frontier down to genesis, it can cheaply check that containers are
+correct just by verifying their IDs. Each Avalanche container has the IDs of its
+parents (one block parent for linear chains)
+and an ID's integrity can be guaranteed cryptographically.
 
-Profundicemos en las dos fases de inicio: recuperación de la frontera y
-ejecución de contenedores.
+Let's dive deeper into the two bootstrap phases - frontier retrieval and
+container execution.
 
-### Recuperación de la Frontera
+### Frontier Retrieval
 
-La frontera actual se recupera solicitándola a nodos validadores o beacons. El inicio de Avalanche está diseñado para ser robusto, debe ser capaz de progresar incluso en presencia de validadores lentos o fallas de red. Este
-proceso debe ser tolerante a fallas de este tipo, ya que
-el inicio puede llevar bastante tiempo en completarse y las conexiones de red pueden
-ser poco confiables.
+The current frontier is retrieved by requesting them from validator or beacon
+nodes. Avalanche bootstrap is designed to be robust - it must be able to make
+progress even in the presence of slow validators or network failures. This
+process needs to be fault-tolerant to these types of failures, since
+bootstrapping may take quite some time to complete and network connections can
+be unreliable.
 
-El inicio comienza cuando un nodo se ha conectado a una mayoría suficiente de participación de validadores. Un nodo es capaz de comenzar el inicio cuando se ha conectado al menos al
-$75\%$ de la participación total de validadores.
+Bootstrap starts when a node has connected to a sufficient majority of validator
+stake. A node is able to start bootstrapping when it has connected to at least
+$75\%$ of total validator stake.
 
-Los seeders son el primer conjunto de pares a los que un nodo se acerca cuando intenta
-descubrir la frontera actual. Un subconjunto de seeders se muestrea al azar desde
-el conjunto de validadores. Los seeders pueden ser lentos y proporcionar una frontera obsoleta, ser
-maliciosos y devolver ID de contenedores maliciosos, pero siempre proporcionan un conjunto inicial
-de fronteras candidatas con las que trabajar.
+Seeders are the first set of peers that a node reaches out to when trying to
+figure out the current frontier. A subset of seeders is randomly sampled from
+the validator set. Seeders might be slow and provide a stale frontier, be
+malicious and return malicious container IDs, but they always provide an initial
+set of candidate frontiers to work with.
 
-Una vez que un nodo ha recibido las fronteras candidatas de sus seeders, consulta a
-**cada validador de la red** para evaluar las fronteras candidatas. Envía la lista
-de fronteras candidatas que recibió de los seeders a cada validador, preguntando
-si conocen o no estas fronteras. Cada validador responde
-devolviendo el subconjunto de candidatos conocidos, independientemente de lo actualizados o obsoletos que sean los contenedores. Cada validador devuelve contenedores independientemente de su edad
-para que el inicio funcione incluso en presencia de una frontera obsoleta.
+Once a node has received the candidate frontiers form its seeders, it polls
+**every network validator** to vet the candidates frontiers. It sends the list
+of candidate frontiers it received from the seeders to each validator, asking
+whether or not they know about these frontiers. Each validator responds
+returning the subset of known candidates, regardless of how up-to-date or stale
+the containers are. Each validator returns containers irrespective of their age
+so that bootstrap works even in the presence of a stale frontier.
 
-La recuperación de la frontera se completa cuando al menos una de las fronteras candidatas es
-soportada por al menos $50\%$ de la participación total de validadores. Pueden ser soportadas múltiples fronteras candidatas por una mayoría de participación, después de lo cual comienza la siguiente
-fase, la obtención de contenedores.
+Frontier retrieval is completed when at least one of the candidate frontiers is
+supported by at least $50\%$ of total validator stake. Multiple candidate
+frontiers may be supported by a majority of stake, after which point the next
+phase, container fetching starts.
 
-En cualquier momento de estos pasos puede ocurrir un problema de red, impidiendo que un nodo
-recupere o valide las fronteras. Si esto ocurre, el inicio se reinicia
-muestreando un nuevo conjunto de seeders y repitiendo el proceso de inicio,
-asumiendo optimistamente que el problema de red desaparecerá.
+At any point in these steps a network issue may occur, preventing a node from
+retrieving or validating frontiers. If this occurs, bootstrap restarts by
+sampling a new set of seeders and repeating the bootstrapping process,
+optimistically assuming that the network issue will go away.
 
-### Ejecución de Contenedores
+### Containers Execution
 
-Una vez que un nodo tiene al menos una frontera válida, comienza a descargar contenedores padres para cada frontera. Si es la primera vez que se ejecuta el nodo, no sabrá nada sobre ningún contenedor y tratará de obtener todos los contenedores padres de manera recursiva desde la frontera aceptada hasta génesis (a menos que [sincron
+Once a node has at least one valid frontiers, it starts downloading parent
+containers for each frontier. If it's the first time the node is running, it
+won't know about any containers and will try fetching all parent containers
+recursively from the accepted frontier down to genesis (unless [state sync](#state-sync) is enabled). If bootstrap had already run previously,
+some containers are already available locally and the node will stop as soon as
+it finds a known one.
 
-La cadena P siempre es la primera en arrancar antes que cualquier otra cadena. Una vez que la cadena P ha terminado, todas las demás cadenas comienzan a arrancar en paralelo, conectándose a sus propios validadores de manera independiente.
+A node first just fetches and parses containers. Once the chain is complete, the
+node executes them in chronological order starting from the earliest downloaded
+container to the accepted frontier. This allows the node to rebuild the full
+chain state and to eventually be in sync with the rest of the network.
 
-Un nodo completa el arranque de una Subred una vez que todas sus cadenas correspondientes han completado el arranque. Debido a que la Red Primaria es un caso especial de Subred que incluye toda la red, esto también se aplica a ella, así como a cualquier otra Subred rastreada manualmente.
+## When Does Bootstrapping Finish?
 
-Tenga en cuenta que el arranque de las Subredes es independiente entre sí, por lo que incluso si una Subred ha arrancado y está validando nuevas transacciones y agregando nuevos contenedores, otras Subredes aún pueden estar arrancando en paralelo.
+You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single
+chain. However, a node must bootstrap the chains in the Primary Network as well
+as the chains in each Subnet it tracks. This begs the questions -
+when are these chains bootstrapped? When is a node done bootstrapping?
 
-Sin embargo, dentro de una sola Subred, una Subred no ha terminado de arrancar hasta que la última cadena completa el arranque. Es posible que una sola cadena bloquee efectivamente a un nodo para que termine el arranque de una sola Subred, si tiene un historial lo suficientemente largo o cada operación es compleja y lleva tiempo. Peor aún, los validadores de otras Subredes están aceptando continuamente nuevas transacciones y agregando nuevos contenedores sobre la frontera previamente conocida, por lo que un nodo que se arranca lentamente puede quedarse continuamente atrás del resto de la red.
+The P-chain is always the first to bootstrap before any other chain. Once the
+P-Chain has finished, all other chains start bootstrapping in parallel,
+connecting to their own validators independently of one another.
 
-Los nodos mitigan esto reiniciando el arranque para cualquier cadena que esté bloqueada esperando a que las cadenas restantes de la Subred terminen de arrancar. Estas cadenas repiten las fases de recuperación de frontera y descarga de contenedores para mantenerse actualizadas con la frontera actual en constante movimiento de la Subred hasta que la cadena más lenta haya completado el arranque.
+A node completes bootstrapping a Subnet once all of its corresponding chains
+have completed bootstrapping. Because the Primary Network is a special case of
+Subnet that includes the entire network, this applies to it as well as any other
+manually tracked Subnets.
 
-Una vez que esto está completo, un nodo finalmente está listo para validar la red.
+Note that Subnets bootstrap is independently of one another - so even if one Subnet
+has bootstrapped and is validating new transactions and adding new containers,
+other Subnets may still be bootstrapping in parallel.
 
-## Sincronización de Estado
+Within a single Subnet however, a Subnet isn't done bootstrapping until the last
+chain completes bootstrapping. It's possible for a single chain to effectively
+stall a node from finishing the bootstrap for a single Subnet, if it has a
+sufficiently long history or each operation is complex and time consuming. Even
+worse, other Subnet validators are continuously accepting new transactions and
+adding new containers on top of the previously known frontier, so a node that's
+slow to bootstrap can continuously fall behind the rest of the network.
 
-El proceso de arranque de un nodo completo es largo y se vuelve cada vez más largo con el tiempo a medida que se aceptan más y más contenedores. Los nodos necesitan arrancar una cadena reconstruyendo el estado completo de la cadena localmente, pero descargar y ejecutar cada contenedor no es la única forma de hacerlo.
+Nodes mitigate this by restarting bootstrap for any chains which is blocked
+waiting for the remaining Subnet chains to finish bootstrapping. These chains
+repeat the frontier retrieval and container downloading phases to stay
+up-to-date with the Subnet's ever moving current frontier until the slowest
+chain has completed bootstrapping.
 
-A partir de la versión [AvalancheGo 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), los nodos pueden usar la sincronización de estado para reducir drásticamente el tiempo de arranque en la C-Chain. En lugar de ejecutar cada bloque, la sincronización de estado utiliza técnicas criptográficas para descargar y verificar solo el estado asociado con la frontera actual. Los nodos sincronizados con el estado no pueden servir cada bloque de la C-chain aceptado históricamente, pero pueden recuperar de manera segura el estado completo de la C-chain necesario para validar en un tiempo mucho más corto. La sincronización de estado buscará los 256 bloques anteriores para admitir el código de operación de hash del bloque anterior.
+Once this is complete, a node is finally ready to validate the network.
 
-Actualmente, la sincronización de estado solo está disponible para la C-chain. La P-chain y la X-chain actualmente se arrancan descargando todos los bloques. Tenga en cuenta que, independientemente del método de arranque utilizado (incluida la sincronización de estado), cada cadena aún está bloqueada en todas las demás cadenas de su Subred que completan su arranque antes de continuar con la operación normal.
+## State Sync
 
-:::nota
+The full node bootstrap process is long, and gets longer and longer over time as
+more and more containers are accepted. Nodes need to bootstrap a chain by
+reconstructing the full chain state locally - but downloading and executing each
+container isn't the only way to do this.
 
-No hay configuraciones para sincronizar el estado de un nodo de archivo. Si necesita todo el estado histórico, no debe usar la sincronización de estado y configurar la configuración del nodo para un nodo de archivo.
+Starting from
+[AvalancheGo version 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11),
+nodes can
+use state sync to drastically cut down bootstrapping time on the C-Chain.
+Instead of executing each block, state sync uses cryptographic techniques to
+download and verify just the state associated with the current frontier. State
+synced nodes can't serve every C-chain block ever historically accepted, but
+they can safely retrieve the full C-chain state needed to validate in a much
+shorter time. State sync will fetch the previous 256 blocks prior to support the previous block
+hash operation code.
+
+State sync is currently only available for the C-chain. The P-chain and X-chain
+currently bootstrap by downloading all blocks. Note that irrespective of the
+bootstrap method used (including state sync), each chain is still blocked on all
+other chains in its Subnet completing their bootstrap before continuing into
+normal operation.
+
+:::note
+
+There are no configs to state sync an archival node. If you need all the historical state then
+you must not use state sync and setup the config of the node for an archival node.
 
 :::
 
-## Conclusiones y Preguntas Frecuentes
+## Conclusions and FAQ
 
-Si has llegado hasta aquí, espero que hayas tenido una mejor idea de lo que está sucediendo cuando tu nodo se arranca. Aquí tienes algunas preguntas frecuentes sobre el arranque.
+If you got this far, you've hopefully gotten a better idea of what's going on
+when your node bootstraps. Here's a few frequently asked questions about
+bootstrapping.
 
-### ¿Cómo puedo obtener la ETA para el arranque del nodo?
+### How Can I Get the ETA for Node Bootstrap?
 
-Los registros proporcionan información sobre la descarga de contenedores y su ejecución para cada cadena. Aquí tienes un ejemplo:
+Logs provide information about both container downloading and their execution
+for each chain. Here is an example
 
 ```text
 [02-16|17:31:42.950] INFO <P Chain> bootstrap/bootstrapper.go:494 fetching blocks {"numFetchedBlocks": 5000, "numTotalBlocks": 101357, "eta": "2m52s"}
@@ -168,12 +242,22 @@ Los registros proporcionan información sobre la descarga de contenedores y su e
 [02-16|17:37:52.468] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 52713, "numToExecute": 101357, "eta": "1m23s"}
 ```
 
-Registros similares se emiten para las cadenas X y C y cualquier cadena en Subredes explícitamente rastreadas.
+Similar logs are emitted for X and C chains and any chain in explicitly tracked
+Subnets.
 
-### ¿Por qué la ETA de arranque de la cadena sigue cambiando?
+### Why Chain Bootstrap ETA Keeps On Changing?
 
-Como viste en la sección de [finalización del arranque](#cuando-termina-el-arranque), una Subred como la Red Primaria completa una vez que todas sus cadenas terminan de arrancar. Algunas cadenas de la Subred pueden tener que esperar a que termine la más lenta. Reiniciarán el arranque mientras tanto, para asegurarse de no quedarse demasiado atrás con respecto a la frontera aceptada por la red.
+As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish),
+a Subnet like the Primary Network
+completes once all of its chains finish bootstrapping. Some Subnet chains may
+have to wait for the slowest to finish. They'll restart bootstrapping in the
+meantime, to make sure they won't fall back too much with respect to the network
+accepted frontier.
 
-### ¿Por qué se desactivan las API de AvalancheGo durante el arranque?
+### Why Are AvalancheGo APIs Disabled During Bootstrapping?
 
-Las API de AvalancheGo se desactivan [explícitamente](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379) durante el arranque. La razón es que si el nodo no ha reconstruido completamente el estado de sus Subredes, no puede proporcionar información precisa. Las API de AvalancheGo se activan una vez que el arranque se completa y el nodo pasa a su modo de operación normal, aceptando y validando transacciones.
+AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379)
+during bootstrapping. The reason is that if the node has not fully rebuilt its
+Subnets state, it can't provide accurate information. AvalancheGo APIs are
+activated once bootstrap completes and node transition into its normal operating
+mode, accepting and validating transactions.

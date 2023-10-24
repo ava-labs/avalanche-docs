@@ -1,11 +1,11 @@
 ---
-etiquetas: [Nodos]
-descripción: Avalanche es un protocolo increíblemente ligero, por lo que los nodos pueden funcionar en hardware de consumo. Ten en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden cambiar.
+tags: [Nodos]
+description: Avalanche es un protocolo increíblemente ligero, por lo que los nodos pueden funcionar en hardware de consumo. Ten en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden cambiar.
 sidebar_label: Requisitos del sistema
 pagination_label: Requisitos del sistema para ejecutar un nodo Avalanche
 ---
 
-# Requisitos del sistema para ejecutar un nodo Avalanche
+# Requisitos del Sistema Para Ejecutar un Nodo Avalanche
 
 ## Hardware y sistemas operativos
 

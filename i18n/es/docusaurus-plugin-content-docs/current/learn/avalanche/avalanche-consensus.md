@@ -1,7 +1,7 @@
 ---
 tags: [Consenso Avalanche, Protocolo Avalanche]
 description: El Consenso Avalanche es un protocolo de consenso que es escalable, robusto y descentralizado.
-palabras clave:
+keywords:
   [
     consenso avalanche,
     consenso snowman,
@@ -45,7 +45,7 @@ aceptada, le pregunta a un pequeño subconjunto aleatorio de
 por su preferencia. Cada validador consultado responde con la transacción que prefiere, o piensa
 debería ser aceptada.
 
-:::nota
+:::note
 
 El consenso nunca incluirá una transacción que se determine como **inválida**. Por ejemplo, si
 enviaras una transacción para enviar 100 AVAX a un amigo, pero tu billetera solo tiene 2 AVAX, esta transacción

@@ -10,8 +10,7 @@ sidebar_position: 1
 
 Tenemos un script de shell (bash) que instala AvalancheGo en tu computadora. Este
 script configura un nodo completo y en funcionamiento en cuestión de minutos con una entrada de usuario mínima
-requerida. El script también se puede utilizar para instalaciones no atendidas, [automatizadas
-](#instalación-no-atendida).
+requerida. El script también se puede utilizar para instalaciones no atendidas, [automatizadas](#instalación-automática).
 
 ## Antes de Empezar
 
@@ -160,9 +159,10 @@ Y luego el script te pedirá información sobre el entorno de red:
 
 Para completar la configuración, se necesita información de red.
 ¿Dónde está instalado el nodo?:
-1) Red residencial (IP dinámica)
-2) Proveedor de nube (IP estática)
-Ingrese su tipo de conexión [1,2]:
+
+1. Red residencial (IP dinámica)
+2. Proveedor de nube (IP estática)
+   Ingrese su tipo de conexión [1,2]:
 
 Ingrese `1` si tiene una IP dinámica y `2` si tiene una IP estática. Si está en una IP estática, intentará detectar automáticamente la IP y pedirá confirmación.
 
@@ -175,7 +175,7 @@ El puerto RPC debe ser público (este es un nodo de API pública) o privado (est
 
 Como esta es una configuración sensible, se le pedirá que confirme si elige `público`. Por favor, lea atentamente la siguiente nota:
 
-:::nota
+:::note
 
 Si elige permitir solicitudes RPC en cualquier interfaz de red, deberá configurar un firewall para permitir solo las solicitudes RPC de direcciones IP conocidas, ¡de lo contrario, su nodo será accesible para cualquiera y podría ser abrumado por llamadas RPC de actores malintencionados! Si no planea usar su nodo para enviar llamadas RPC de forma remota, ingrese `privado`.
 
@@ -196,13 +196,11 @@ Se creó el enlace simbólico /etc/systemd/system/multi-user.target.wants/avalan
 Su nodo ahora debería estar arrancando.
 El archivo de configuración del nodo es /home/ubuntu/.avalanchego/configs/node.json
 El archivo de configuración de la cadena C es /home/ubuntu/.avalanchego/configs/chains/C/config.json
-El directorio de complementos, para almacenar binarios de VM de subred, es /home/ubuntu/.avalanchego/plugins
+El directorio de complementos, para almacenar binarios de VM de Subnet , es /home/ubuntu/.avalanchego/plugins
 Para verificar que el servicio esté en funcionamiento, use el siguiente comando (q para salir):
 sudo systemctl status avalanchego
 Para seguir el registro, use (ctrl-c para detener):
 sudo journalctl -u avalanchego -f
-
-Encuéntrenos en https://chat.avax.network si tienen problemas.
 
 El script ha terminado y debería ver el indicador del sistema nuevamente.
 

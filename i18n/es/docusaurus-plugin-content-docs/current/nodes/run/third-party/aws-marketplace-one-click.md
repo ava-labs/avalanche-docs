@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Este tutorial te guiará a través de la puesta en marcha de un nodo Avalanche a través del nodo validador de un solo clic a través del AWS Marketplace. Esto incluye suscribirse al software, lanzarlo en EC2, conectarse al nodo a través de ssh, llamar a comandos curl, agregar el nodo como un validador en la red Fuji usando la billetera web Avalanche y confirmar que el nodo es un validador pendiente.
+tags: [Nodos]
+description: Este tutorial te guiará a través de la puesta en marcha de un nodo Avalanche a través del nodo validador de un solo clic a través del AWS Marketplace. Esto incluye suscribirse al software, lanzarlo en EC2, conectarse al nodo a través de ssh, llamar a comandos curl, agregar el nodo como un validador en la red Fuji usando la billetera web Avalanche y confirmar que el nodo es un validador pendiente.
 sidebar_label: AWS Marketplace
 pagination_label: Ejecutar un nodo Avalanche con Amazon Web Services con un solo clic
 sidebar_position: 1
@@ -36,7 +36,6 @@ Una vez en la página "Suscribirse a este software", verás un botón que te per
 
 Esta página te permite elegir una opción de cumplimiento y una versión de software para lanzar este software. No se necesitan cambios, ya que la configuración predeterminada es suficiente. Deja la opción de "Cumplimiento" como "Imagen de máquina Amazon (AMI) de 64 bits (x86)". La versión de software es la última compilación de [el nodo completo AvalancheGo](https://github.com/ava-labs/avalanchego/releases), `v1.9.5 (22 de diciembre de 2022)`, también conocido como `Banff.5`. Esto siempre mostrará la última versión. Además, la región de implementación se puede dejar como "US East (N. Virginia)". A la derecha verás los precios del software e infraestructura. Por último, haz clic en el botón "Continuar para iniciar".
 
-
 ## Lanza este software
 
 Aquí puedes revisar los detalles de la configuración de lanzamiento y seguir las instrucciones para lanzar el nodo validador Avalanche. Los cambios son muy pequeños. Deja la acción como "Lanzar desde el sitio web". El tipo de instancia EC2 debe seguir siendo `c5.2xlarge`. El cambio principal que deberás hacer es elegir un par de claves que te permitirá `ssh` en la instancia EC2 recién creada para ejecutar comandos `curl` en el nodo validador. Puedes buscar pares de claves existentes o crear un nuevo par de claves y descargarlo a tu máquina local. Si creas un nuevo par de claves, deberás mover el par de claves a la ubicación adecuada, cambiar los permisos y agregarlo al agente de autenticación OpenSSH. Por ejemplo, en MacOS se vería similar a lo siguiente:
@@ -51,15 +50,15 @@ test -f ~/Downloads/avalanche.pem && echo "avalance.pem existe."
 
 # Mueve el par de claves avalanche.pem del directorio ~/Downloads al directorio oculto ~/.ssh
 mv ~/Downloads/avalanche.pem ~/.ssh
-  
+
 # A continuación, agrega la identidad de la clave privada al agente de autenticación OpenSSH
-ssh-add ~/.ssh/avalanche.pem; 
+ssh-add ~/.ssh/avalanche.pem;
 
 # Cambia los modos de archivo o las listas de control de acceso
 sudo chmod 600 ~/.ssh/avalanche.pem
 ```
 
-Una vez que se completen estos pasos, estás listo para lanzar el nodo validador en EC2. Para hacer que eso suceda, haz clic en el botón "Lanzar" 
+Una vez que se completen estos pasos, estás listo para lanzar el nodo validador en EC2. Para hacer que eso suceda, haz clic en el botón "Lanzar"
 
 ![lanzamiento exitoso](/img/one-click-validator-node/launch-successful.png)
 
@@ -84,7 +83,6 @@ ssh nombredeusuario@dirección.ip.de.la.instancia.ec2
 De forma predeterminada, el nodo Avalanche disponible a través del AWS Marketplace sincroniza la Mainnet. Si esto es lo que estás buscando, puedes saltarte este paso.
 
 Para este tutorial, quieres sincronizar y validar la Testnet Fuji. Ahora que estás `ssh` en la instancia EC2, puedes hacer los cambios necesarios para sincronizar Fuji en lugar de Mainnet.
-
 
 Primero, confirma que el nodo está sincronizando la Mainnet ejecutando el comando `info.getNetworkID`.
 

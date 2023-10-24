@@ -166,8 +166,8 @@ falla con:
 ✔ 2
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 ✔ P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-Tus claves de autorización de subred para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
-Error: la billetera no contiene claves de autorización de subred
+Tus claves de autorización de Subnet  para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+Error: la billetera no contiene claves de autorización de Subnet
 estado de salida 1
 ```
 
@@ -179,34 +179,34 @@ Si el usuario tiene la dirección correcta pero no tiene suficiente saldo para p
 ✔ 2
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 ✔ P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-Tus claves de autorización de subred para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
-*** Por favor firma el hash de creación de subred en el dispositivo Ledger ***
+Tus claves de autorización de Subnet  para la creación de la cadena: [P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g]
+*** Por favor firma el hash de creación de Subnet  en el dispositivo Ledger ***
 Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000000 unidades más del activo "rgNLkDPpANwqg3pHC4o9aGJmf2YU4GgTVUMRKAdnKodihkqgr"
 estado de salida 1
 ```
 
-### Firma de la TX de despliegue de subred con la primera dirección
+### Firma de la TX de despliegue de Subnet con la primera dirección
 
-La TX de despliegue de subred está lista para ser firmada.
+La TX de despliegue de Subnet está lista para ser firmada.
 
 ```text
-*** Por favor firma el hash de creación de subred en el dispositivo Ledger ***
+*** Por favor firma el hash de creación de Subnet  en el dispositivo Ledger ***
 ```
 
 Esto activa una ventana de "Por favor revisa" en el Ledger. Navega a la ventana de "APROBAR" del Ledger
 usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
 ```text
-La subred ha sido creada con ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Ahora creando la cadena de bloques...
+La Subnet  ha sido creada con ID: 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew. Ahora creando la cadena de bloques...
 *** Por favor firma el hash de creación de blockchain en el dispositivo Ledger ***
 ```
 
-Después de crear exitosamente la subred, la CLI le pide al usuario que firme la TX de creación de la cadena de bloques.
+Después de crear exitosamente la Subnet , la CLI le pide al usuario que firme la TX de creación de la cadena de bloques.
 
 Esto activa una ventana de "Por favor revisa" en el Ledger. Navega a la ventana de "APROBAR" del Ledger
 usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
-En caso de éxito, la CLI proporciona los detalles del despliegue de la subred. Como solo una dirección firmó la creación de la cadena,
+En caso de éxito, la CLI proporciona los detalles del despliegue de la Subnet . Como solo una dirección firmó la creación de la cadena,
 la CLI escribe un archivo en disco para guardar la TX y continuar el proceso de firma con otro comando.
 
 ```text
@@ -215,7 +215,7 @@ la CLI escribe un archivo en disco para guardar la TX y continuar el proceso de 
 +--------------------+----------------------------------------------------+
 | Nombre de la cadena | testsubnet                                         |
 +--------------------+----------------------------------------------------+
-| ID de la subred    | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew |
+| ID de la Subnet     | 2qUKjvPx68Fgc1NMi8w4mtaBt5hStgBzPhsQrS1m7vSub2q9ew |
 +--------------------+----------------------------------------------------+
 | ID de la VM        | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii  |
 +--------------------+----------------------------------------------------+
@@ -239,9 +239,9 @@ Comando de firma:
   avalanche transaction sign testsubnet --input-tx-filepath partiallySigned.txt
 ```
 
-## Reunir las firmas restantes y emitir la TX de despliegue de subred
+## Reunir las firmas restantes y emitir la TX de despliegue de Subnet
 
-Hasta ahora, una dirección ha firmado la TX de despliegue de subred, pero necesitas N firmas. Tu subred no ha sido
+Hasta ahora, una dirección ha firmado la TX de despliegue de Subnet , pero necesitas N firmas. Tu Subnet no ha sido
 desplegada completamente aún. Para obtener las firmas restantes, puedes conectar un Ledger diferente al mismo
 ordenador en el que has estado trabajando. Alternativamente, puedes enviar el archivo `partiallySigned.txt`
 a otros usuarios para que lo firmen ellos mismos.
@@ -265,12 +265,12 @@ Dirección del Ledger: P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
 *** Por favor firma el hash de la TX en el dispositivo Ledger ***
 ```
 
-A continuación, la CLI inicia un nuevo proceso de firma para la TX de despliegue de subred. Si el Ledger no es el correcto,
+A continuación, la CLI inicia un nuevo proceso de firma para la TX de despliegue de Subnet . Si el Ledger no es el correcto,
 debería aparecer el siguiente error en su lugar:
 
 ```text
 Dirección del Ledger: P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
-Error: la billetera no contiene claves de autorización de subred
+Error: la billetera no contiene claves de autorización de Subnet
 estado de salida 1
 ```
 
@@ -293,7 +293,7 @@ Comando de commit:
 
 Ahora, `partiallySigned.txt` contiene una TX completamente firmada.
 
-### Commitir la TX de despliegue de subred
+### Commitir la TX de despliegue de Subnet
 
 Para enviar la TX completamente firmada, ejecuta
 
@@ -351,7 +351,7 @@ para firmar la TX.
 ```text
 ✔ Mainnet
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
-? Elige una clave de autenticación de subred:
+? Elige una clave de autenticación de Subnet :
   ▸ P-avax1wryu62weky9qjlp40cpmnqf6ml2hytnagj5q28
     P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
@@ -363,7 +363,7 @@ Usa las teclas de flecha para navegar: ↓ ↑ → ←
 ✔ Mainnet
 ✔ P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5
 ✔ P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
-Tus claves de autenticación de subred para la creación de la TX de agregar validador: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
+Tus claves de autenticación de Subnet  para la creación de la TX de agregar validador: [P-avax1kdzq569g2c9urm9887cmldlsa3w3jhxe0knfy5 P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af].
 ```
 
 ### Terminar de Ensamblar la TX
@@ -386,7 +386,7 @@ Consulta https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid para
 ¿Cuál es el NodeID del validador que te gustaría agregar a la lista blanca?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
 ✔ Predeterminado (20)
 ¿Cuándo debería comenzar tu validador a validar?
-Si tu validador no está listo en este momento, puede haber tiempo de inactividad de la subred.
+Si tu validador no está listo en este momento, puede haber tiempo de inactividad de la Subnet .
 ✔ Personalizado
 ¿Cuándo debería comenzar el validador a validar? Ingresa una fecha y hora UTC en formato 'AAAA-MM-DD HH:MM:SS': 2022-11-22 23:00:00
 ✔ Hasta que expire el validador de la red primaria

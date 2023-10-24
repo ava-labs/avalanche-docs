@@ -15,7 +15,7 @@ Transferir fondos entre billeteras de la Cadena P se vuelve necesario en ciertas
 
 Para habilitar transferencias directas entre direcciones de la Cadena P, usa el comando `avalanche key transfer` de Avalanche-CLI. Esta operación implica una serie de acciones de importación/exportación con la Cadena P y la Cadena X. La tarifa por esta operación es cuatro veces la tarifa típica de operación de importación, lo que equivale a 0.004 AVAX. Puedes encontrar más información sobre las tarifas [aquí](/reference/standards/guides/txn-fees).
 
-:::nota
+:::note
 
 El comando `key transfer` también se puede aplicar a las claves almacenadas gestionadas por la CLI. Permite mover fondos de una clave almacenada a otra, y de un ledger a una clave almacenada o viceversa.
 

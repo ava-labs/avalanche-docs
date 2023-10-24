@@ -3,20 +3,20 @@ title: 🔺 Subnets de Avalanche
 tags: [Construir, Subnets]
 description: Subnets
 sidebar_label: 🔗 Enlaces rápidos
-pagination_label: Resumen de subredes
+pagination_label: Resumen de Subnets
 ---
 
-Las subredes de Avalanche son un subconjunto de validadores de la red primaria de Avalanche que acuerdan ejecutar las mismas [Máquinas Virtuales (VM)](/learn/avalanche/subnets-overview.md#virtual-machines). Las subredes permiten dimensiones adicionales de confiabilidad, eficiencia y soberanía de datos. Consulta [aquí](/learn/avalanche/subnets-overview.md) para obtener una visión general amplia.
+Las Subnets de Avalanche son un subconjunto de validadores de la red primaria de Avalanche que acuerdan ejecutar las mismas [Máquinas Virtuales (VM)](/learn/avalanche/subnets-overview.md#virtual-machines). Las Subnets permiten dimensiones adicionales de confiabilidad, eficiencia y soberanía de datos. Consulta [aquí](/learn/avalanche/subnets-overview.md) para obtener una visión general amplia.
 
-## 🔗 Enlaces rápidos de subredes
+## 🔗 Enlaces rápidos de Subnets
 
-| Introducción a las subredes                                      |                                                                                                                         |
-| :--------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| [**Empezando**](/build/subnet/getting-started.md)                | Planificar una implementación exitosa de una subred comienza determinando las necesidades de tu aplicación              |
-| [**¿C-Chain o Subnet?**](/build/subnet/c-chain-vs-subnet.md)     | Ayuda a los desarrolladores a determinar el mejor lugar para lanzar su aplicación                                       |
-| [**Construye tu primera subred**](/build/subnet/hello-subnet.md) | Cómo usar Avalanche-CLI para crear una subred, implementarla en una red local y conectarse a ella con la billetera Core |
+| Introducción a las Subnets                                        |                                                                                                                          |
+| :---------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [**Empezando**](/build/subnet/getting-started.md)                 | Planificar una implementación exitosa de una Subnet comienza determinando las necesidades de tu aplicación               |
+| [**¿C-Chain o Subnet?**](/build/subnet/c-chain-vs-subnet.md)      | Ayuda a los desarrolladores a determinar el mejor lugar para lanzar su aplicación                                        |
+| [**Construye tu primera Subnet **](/build/subnet/hello-subnet.md) | Cómo usar Avalanche-CLI para crear una Subnet , implementarla en una red local y conectarse a ella con la billetera Core |
 
-| Desplegar una subred                                                                  |     |
+| Desplegar una Subnet                                                                  |     |
 | :------------------------------------------------------------------------------------ | --- |
 | [**En una red local**](/build/subnet/deploy/local-subnet.md)                          |
 | [**En la testnet Fuji**](/build/subnet/deploy/fuji-testnet-subnet.md)                 |
@@ -27,24 +27,24 @@ Las subredes de Avalanche son un subconjunto de validadores de la red primaria d
 
 | Subnets elásticas                                                                                                      |     |
 | :--------------------------------------------------------------------------------------------------------------------- | --- |
-| [**Transformar una subred permisionada en una subred elástica**](/build/subnet/elastic/transform-to-elastic-subnet.md) |
-| [**Parámetros de la subred elástica**](/build/subnet/elastic/elastic-parameters.md)                                    |
+| [**Transformar una Subnet permisionada en una Subnet elástica**](/build/subnet/elastic/transform-to-elastic-subnet.md) |
+| [**Parámetros de la Subnet elástica**](/build/subnet/elastic/elastic-parameters.md)                                    |
 
-| Gestionar subredes                                                                                                 |     |
-| :----------------------------------------------------------------------------------------------------------------- | --- |
-| [**Ver tus subredes creadas**](/build/subnet/maintain/view-subnets.md)                                             |
-| [**Pausar y reanudar subredes locales**](/build/subnet/maintain/pause-resume-subnet.md)                            |
-| [**Eliminar una subred**](/build/subnet/maintain/delete-subnet.md)                                                 |
-| [**Implementar un contrato inteligente en tu subred**](/build/subnet/utility/deploy-smart-contract-to-subnet.md)   |
-| [**Agregar un grifo de testnet**](/build/subnet/utility/avalanche-subnet-faucet.md)                                |
-| [**Implementar un puente de cadena cruzada**](/build/subnet/utility/cross-chain-evm-bridge.md)                     |     |
-| [**Consideraciones al actualizar una subred**](/build/subnet/upgrade/considerations-subnet-upgrade.md)             |
-| [**Personalizar tu subred alimentada por EVM**](/build/subnet/upgrade/customize-a-subnet.md)                       |
-| [**Actualizar la Máquina Virtual de una subred**](/build/subnet/upgrade/upgrade-subnet-vm.md)                      |
-| [**Actualizar la configuración de precompilación de una subred-EVM**](/build/subnet/upgrade/upgrade-precompile.md) |
+| Gestionar Subnets                                                                                                   |     |
+| :------------------------------------------------------------------------------------------------------------------ | --- |
+| [**Ver tus Subnets creadas**](/build/subnet/maintain/view-subnets.md)                                               |
+| [**Pausar y reanudar Subnets locales**](/build/subnet/maintain/pause-resume-subnet.md)                              |
+| [**Eliminar una Subnet **](/build/subnet/maintain/delete-subnet.md)                                                 |
+| [**Implementar un contrato inteligente en tu Subnet **](/build/subnet/utility/deploy-smart-contract-to-subnet.md)   |
+| [**Agregar un grifo de testnet**](/build/subnet/utility/avalanche-subnet-faucet.md)                                 |
+| [**Implementar un puente de cadena cruzada**](/build/subnet/utility/cross-chain-evm-bridge.md)                      |     |
+| [**Consideraciones al actualizar una Subnet **](/build/subnet/upgrade/considerations-subnet-upgrade.md)             |
+| [**Personalizar tu Subnet alimentada por EVM**](/build/subnet/upgrade/customize-a-subnet.md)                        |
+| [**Actualizar la Máquina Virtual de una Subnet **](/build/subnet/upgrade/upgrade-subnet-vm.md)                      |
+| [**Actualizar la configuración de precompilación de una Subnet -EVM**](/build/subnet/upgrade/upgrade-precompile.md) |
 
 | Más                                                                                       |     |
 | :---------------------------------------------------------------------------------------- | --- |
-| [**Comandos de subred Avalanche-CLI**](/tooling/avalanche-cli.md)                         |
+| [**Comandos de Subnet Avalanche-CLI**](/tooling/avalanche-cli.md)                         |
 | [**Estudio de caso: Subnet WAGMI**](build/subnet/info/wagmi.md)                           |
 | [**Solución de problemas de implementaciones**](build/subnet/info/troubleshoot-subnet.md) |

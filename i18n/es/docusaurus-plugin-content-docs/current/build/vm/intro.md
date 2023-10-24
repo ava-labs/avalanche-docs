@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Una Máquina Virtual es un plano para una blockchain. Las VM pueden definir cualquier cosa que desees, pero generalmente definirán transacciones que se ejecutan y cómo se crean los bloques.
+tags: [Construir, Máquinas Virtuales]
+description: Una Máquina Virtual es un plano para una blockchain. Las VM pueden definir cualquier cosa que desees, pero generalmente definirán transacciones que se ejecutan y cómo se crean los bloques.
 sidebar_label: Introducción a las VM
 pagination_label: Introducción a las Máquinas Virtuales
 ---

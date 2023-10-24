@@ -16,7 +16,7 @@ En lugar de tener que hacer una copia de seguridad y restaurar todo, necesitamos
 
 Incluso si tu nodo es un validador en la red y tiene múltiples delegaciones en él, no necesitas preocuparte por hacer una copia de seguridad de nada más, porque las transacciones de validación y delegación también se almacenan en la blockchain y se restaurarán durante el arranque, junto con el resto de los datos de la blockchain.
 
-La instalación en sí se puede recrear fácilmente instalando el nodo en una nueva máquina, y todos los gigabytes restantes de datos de la blockchain se pueden recrear fácilmente mediante el proceso de arranque, que copia los datos de otros pares de la red. Sin embargo, si quieres acelerar el proceso, consulta la sección de [Copia de seguridad y restauración de la base de datos](#database).
+La instalación en sí se puede recrear fácilmente instalando el nodo en una nueva máquina, y todos los gigabytes restantes de datos de la blockchain se pueden recrear fácilmente mediante el proceso de arranque, que copia los datos de otros pares de la red. Sin embargo, si quieres acelerar el proceso, consulta la sección de [Copia de seguridad y restauración de la base de datos](#base-de-datos).
 
 ## NodeID
 
@@ -106,8 +106,6 @@ O si necesitas especificar la ruta a la clave SSH:
 ```text
 scp -i /ruta/a/la/clave.pem ~/avalanche_backup/staker.* ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking
 ```
-
-
 
 Y de nuevo, reemplaza `ubuntu` con el nombre de usuario correcto si es diferente, y `PUBLICIP` con la IP pública real de la máquina que ejecuta el nodo, así como la ruta a la clave SSH si se utiliza.
 

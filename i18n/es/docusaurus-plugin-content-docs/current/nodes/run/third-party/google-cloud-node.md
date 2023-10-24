@@ -49,9 +49,9 @@ Implementaremos un único objeto de `Red de cómputo`. Esta unidad es donde impl
 
 Avalanche requiere que un validador se comunique de salida en la misma dirección IP pública que anuncia para que otros pares se conecten a él. Dentro de GCP, esto excluye la posibilidad de usar un enrutador NAT en la nube para las comunicaciones de salida y nos obliga a vincular la IP pública que provisionamos a la interfaz de la máquina. Proveeremos una única dirección IPv4 estática `EXTERNAL` `Compute Address`.
 
-#### Subredes
+#### Subnets
 
-Para fines de esta documentación, implementaremos una única `Subred de cómputo` en la `Región` US-EAST1 con un rango de direcciones /24 que nos brinda 254 direcciones IP (no todas utilizables, pero para fines de documentación generalizada).
+Para fines de esta documentación, implementaremos una única `Subnet de cómputo` en la `Región` US-EAST1 con un rango de direcciones /24 que nos brinda 254 direcciones IP (no todas utilizables, pero para fines de documentación generalizada).
 
 ### Cómputo
 

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Esta es una documentación de alto nivel, independiente del lenguaje, que explica los conceptos básicos de cómo empezar a implementar tu propia máquina virtual desde cero.
+tags: [Construir, Máquinas Virtuales]
+description: Esta es una documentación de alto nivel, independiente del lenguaje, que explica los conceptos básicos de cómo empezar a implementar tu propia máquina virtual desde cero.
 sidebar_label: VM Simple en Cualquier Lenguaje
 pagination_label: Construir una VM Simple desde Cero
 sidebar_position: 0
@@ -36,7 +36,7 @@ implementar:
 Puedes y debes usar una herramienta como `buf` para generar el código (Cliente/Servidor) a partir de las interfaces
 como se indica en la página del módulo [Avalanche](https://buf.build/ava-labs/avalanche).
 
-:::nota
+:::note
 Hay interfaces de _servidor_ y de _cliente_ que implementar.
 AvalancheGo llama a las interfaces de _servidor_ expuestas por tu VM y tu VM llama a las interfaces de _cliente_ expuestas por AvalancheGo.
 :::
@@ -239,6 +239,7 @@ Suponiendo que AvalancheGo acepta el bloque `0x123...`. Los siguientes métodos 
 Para habilitar tu punto de conexión json-RPC, debes implementar el método HandleSimple de la interfaz [`Http`](https://buf.build/ava-labs/avalanche/docs/main:http).
 
 - [`Http.HandleSimple`](https://buf.build/ava-labs/avalanche/docs/main:http#http.HTTP.HandleSimple)
+
   - Parámetro: un [HandleSimpleHTTPRequest](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPRequest) que contiene el método, la URL, las cabeceras y el cuerpo de la solicitud original.
   - Analiza, deserializa y maneja la solicitud
 

@@ -1,24 +1,34 @@
 ---
-etiquetas: [Nodos, Subredes]
-descripción: Instrucciones detalladas para ejecutar un nodo Avalanche que rastrea una Subred.
-sidebar_label: Nodos de Subred
-pagination_label: Ejecutar un Nodo de Subred
+tags: [Nodos, Subnets]
+description: Instrucciones detalladas para ejecutar un nodo Avalanche que rastrea una Subnet.
+sidebar_label: Nodos de Subnet
+pagination_label: Ejecutar un Nodo de Subnet
 sidebar_position: 2
-palabras clave: [subred, avalanche, subred avalanche, ejecutar un nodo de subred, nodo de subred, rastrear subred, máquina virtual, binario]
+keywords:
+  [
+    Subnet,
+    avalanche,
+    Subnet  avalanche,
+    ejecutar un nodo de Subnet,
+    nodo de Subnet,
+    rastrear Subnet,
+    máquina virtual,
+    binario,
+  ]
 ---
 
-# Ejecutar un Nodo de Subred
+# Ejecutar un Nodo de Subnet
 
 ## Introducción
 
-Este artículo describe cómo ejecutar un nodo que rastrea una Subred. Requiere construir AvalancheGo, agregar
+Este artículo describe cómo ejecutar un nodo que rastrea una Subnet. Requiere construir AvalancheGo, agregar
 los binarios de la Máquina Virtual como complementos a su directorio de datos local y ejecutar AvalancheGo para rastrear estos
 binarios.
 
-Este tutorial cubre específicamente el rastreo de una Subred construida con la
+Este tutorial cubre específicamente el rastreo de una Subnet construida con la
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) de Avalanche, la Máquina Virtual
 por defecto [Virtual Machine](/learn/avalanche/virtual-machines.md)
-ejecutada por las Subredes en Avalanche.
+ejecutada por las Subnets en Avalanche.
 
 ## Construir AvalancheGo
 
@@ -35,6 +45,7 @@ que muestra cómo construir y ejecutar un nodo Avalanche básico. A continuació
 
 Tenga en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden
 cambiar.
+
 </p></details>
 
 <details><summary>Para construir desde el código fuente:</summary>
@@ -49,7 +60,8 @@ cambiar.
 
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
-``` 
+```
+
 <!-- markdownlint-disable MD029 -->
 
 5. Clonar AvalancheGo
@@ -61,7 +73,7 @@ Red Avalanche.
 ```bash
 cd $GOPATH/src/github.com/ava-labs
 git clone https://github.com/ava-labs/avalanchego.git
-``` 
+```
 
 6. Ejecutar el script de construcción
 
@@ -70,11 +82,11 @@ Desde el directorio `avalanchego`, ejecutar el script de construcción
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
-``` 
+```
 
 </p></details>
 
-## Gestionar los Binarios de la Subred
+## Gestionar los Binarios de la Subnet
 
 _Despues de construir AvalancheGo exitosamente,_
 
@@ -88,17 +100,17 @@ git clone https://github.com/ava-labs/subnet-evm.git
 ### 2. Construir el Binario y Guardarlo como un Complemento
 
 En el directorio de Subnet-EVM, ejecutar el script de construcción y guardarlo en la carpeta "plugins" de su
-directorio de datos `.avalanchego`. Nombre el complemento con el `VMID` de la Subred que desea rastrear.
-El `VMID` de la Subred WAGMI es el valor que comienza con "srEX...".
+directorio de datos `.avalanchego`. Nombre el complemento con el `VMID` de la Subnet que desea rastrear.
+El `VMID` de la Subnet WAGMI es el valor que comienza con "srEX...".
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh ~/.avalanchego/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-<details><summary>¿Dónde puedo encontrar parámetros de la Subred como VMID?</summary>
+<details><summary>¿Dónde puedo encontrar parámetros de la Subnet como VMID?</summary>
 <p>
-El VMID, ID de Subred, ChainID y todos los demás parámetros se pueden encontrar en la sección "Chain Info"
+El VMID, ID de Subnet, ChainID y todos los demás parámetros se pueden encontrar en la sección "Chain Info"
 del Subnet Explorer.
 
 - [Mainnet Avalanche](https://subnets.avax.network/c-chain)
@@ -109,7 +121,7 @@ del Subnet Explorer.
 ### 3. Especificar el Complemento con un Config.json
 
 Cree un archivo llamado `config.json` y agregue un campo `track-subnets` que esté poblado con el
-`SubnetID` que desea rastrear. El `SubnetID` de la Subred WAGMI es el valor que comienza con
+`SubnetID` que desea rastrear. El `SubnetID` de la Subnet WAGMI es el valor que comienza con
 "28nr...".
 
 ```bash
@@ -121,7 +133,7 @@ echo '{"track-subnets": "28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY"}' >
 
 ## Ejecutar el Nodo
 
-Ejecute AvalancheGo con la bandera `--config-file` para iniciar su nodo y asegurarse de que rastree las Subredes
+Ejecute AvalancheGo con la bandera `--config-file` para iniciar su nodo y asegurarse de que rastree las Subnets
 incluidas en el archivo de configuración.
 
 ```bash
@@ -129,13 +141,13 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --config-file ~/.avalanchego/config.json --network-id=fuji
 ```
 
-Nota: El comando anterior incluye el comando `--network-id=fuji` porque la Subred WAGMI está desplegada
+Nota: El comando anterior incluye el comando `--network-id=fuji` porque la Subnet WAGMI está desplegada
 en la Testnet Fuji.
 
 <details><summary>Ejecutar a través de la línea de comandos en su lugar</summary>
 <p>
 
-Si prefiere rastrear Subredes usando una bandera de línea de comandos, en su lugar puede usar la bandera `--track-subnets`.
+Si prefiere rastrear Subnets usando una bandera de línea de comandos, en su lugar puede usar la bandera `--track-subnets`.
 
 Por ejemplo:
 
@@ -151,7 +163,7 @@ y ha comenzado a arrancar en la red.
 ## Detalles de Arranque y RPC
 
 Puede tomar algunas horas para que el nodo se [arranque](/nodes/run/node-manually.md#bootstrapping)
-completamente a la Red Primaria Avalanche y las Subredes rastreadas.
+completamente a la Red Primaria Avalanche y las Subnets rastreadas.
 
 Cuando termine de arrancar, el punto final será:
 

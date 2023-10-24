@@ -1,12 +1,14 @@
 ---
-etiquetas: [Nodos]
-descripción: Este documento enumera todas las configuraciones y banderas disponibles para AvalancheGo.
+tags: [Nodos]
+description: Este documento enumera todas las configuraciones y banderas disponibles para AvalancheGo.
 sidebar_label: Configuraciones + Banderas de AvalancheGo
 pagination_label: Configuraciones y Banderas de AvalancheGo
 sidebar_position: 0
 ---
 
 # Configuraciones y Banderas de AvalancheGo
+
+<!-- markdownlint-disable MD001 -->
 
 Puedes especificar la configuración de un nodo con los argumentos a continuación.
 
@@ -181,8 +183,6 @@ debe ser el mismo que el número de `--state-sync-ids` dados.
 
 #### `--partial-sync-primary-network` (cadena)
 
-
-
 La sincronización parcial permite a los no validadores sincronizar opcionalmente solo la cadena P en la red primaria.
 
 ## Configuraciones de la Cadena
@@ -203,7 +203,7 @@ Las configuraciones de la cadena se pasan desde la ubicación `chain-config-dir`
 
 La referencia completa de todas las opciones de configuración para algunas cadenas estándar se puede encontrar en un documento separado de [banderas de configuración de la cadena](chain-config-flags.md).
 
-La referencia completa de la configuración de actualización de la subred `subnet-evm` se puede encontrar en un documento separado de [Personalizar una Subred](/build/subnet/upgrade/customize-a-subnet.md).
+La referencia completa de la configuración de actualización de la Subnet `subnet-evm` se puede encontrar en un documento separado de [Personalizar una Subnet](/build/subnet/upgrade/customize-a-subnet.md).
 
 #### `--chain-config-content` (cadena)
 
@@ -219,7 +219,7 @@ Ruta al archivo JSON que define alias para ID de Blockchains. Por defecto, es `~
 }
 ```
 
-El ejemplo anterior asigna alias a la Blockchain cuyo ID es `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` como `"DFK"`. Los alias de la cadena se agregan después de agregar alias de red primaria y antes de cualquier cambio en los alias a través de la API de administración. Esto significa que el primer alias incluido para una Blockchain en una Subred se tratará como el "Alias Primario" en lugar del blockchainID completo. El Alias Primario se utiliza en todas las métricas y registros.
+El ejemplo anterior asigna alias a la Blockchain cuyo ID es `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` como `"DFK"`. Los alias de la cadena se agregan después de agregar alias de red primaria y antes de cualquier cambio en los alias a través de la API de administración. Esto significa que el primer alias incluido para una Blockchain en una Subnet se tratará como el "Alias Primario" en lugar del blockchainID completo. El Alias Primario se utiliza en todas las métricas y registros.
 
 #### `--chain-aliases-file-content` (cadena)
 
@@ -662,26 +662,26 @@ se especifica `--staking-tls-key-file-content`.
 Como alternativa a `--staking-tls-key-file`, permite especificar el contenido base64
 codificado de la clave privada TLS utilizada por el nodo. Tenga en cuenta que el contenido completo de la clave privada, con el encabezado inicial y final, debe estar codificado en base64.
 
-## Subredes
+## Subnets
 
-### Seguimiento de subredes
+### Seguimiento de Subnets
 
 #### `--track-subnets` (cadena)
 
-Lista separada por comas de los ID de subred que este nodo rastreará si se agrega.
+Lista separada por comas de los ID de Subnet que este nodo rastreará si se agrega.
 El valor predeterminado es vacío (solo validará la Red Primaria).
 
-### Configuraciones de subredes
+### Configuraciones de Subnets
 
-Es posible proporcionar parámetros para Subredes. Estos parámetros se aplican a todas las cadenas en las Subredes especificadas. Los parámetros deben especificarse con un archivo de configuración `{subnetID}.json` bajo `--subnet-config-dir`. AvalancheGo carga las configuraciones para las Subredes especificadas en el parámetro `--track-subnets`.
+Es posible proporcionar parámetros para Subnets. Estos parámetros se aplican a todas las cadenas en las Subnets especificadas. Los parámetros deben especificarse con un archivo de configuración `{subnetID}.json` bajo `--subnet-config-dir`. AvalancheGo carga las configuraciones para las Subnets especificadas en el parámetro `--track-subnets`.
 
-La referencia completa de todas las opciones de configuración para una Subred se puede encontrar en un documento aparte de [Configuraciones de Subred](./subnet-configs).
+La referencia completa de todas las opciones de configuración para una Subnet se puede encontrar en un documento aparte de [Configuraciones de Subnet](./subnet-configs).
 
 #### `--subnet-config-dir` (`string`)
 
-Especifica el directorio que contiene las configuraciones de las Subredes, como se describe anteriormente. Por defecto, es `$HOME/.avalanchego/configs/subnets`. Si se establece explícitamente la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--subnet-config-content`.
+Especifica el directorio que contiene las configuraciones de las Subnets, como se describe anteriormente. Por defecto, es `$HOME/.avalanchego/configs/subnets`. Si se establece explícitamente la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--subnet-config-content`.
 
-Ejemplo: Digamos que tenemos una Subred con ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. Podemos crear un archivo de configuración en el directorio `subnet-config-dir` por defecto en `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. Un archivo de configuración de ejemplo es:
+Ejemplo: Digamos que tenemos una Subnet con ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. Podemos crear un archivo de configuración en el directorio `subnet-config-dir` por defecto en `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. Un archivo de configuración de ejemplo es:
 
 ```json
 {
@@ -700,7 +700,7 @@ Por defecto, ninguno de estos directorios y/o archivos existe. Deberá crearlos 
 
 #### `--subnet-config-content` (string)
 
-Como alternativa a `--subnet-config-dir`, permite especificar parámetros codificados en base64 para una Subred.
+Como alternativa a `--subnet-config-dir`, permite especificar parámetros codificados en base64 para una Subnet.
 
 ## Versión
 
@@ -784,7 +784,7 @@ Tarifa de transacción, en nAVAX, para transacciones que crean nuevos activos. P
 
 #### `--create-subnet-tx-fee` (int)
 
-Tarifa de transacción, en nAVAX, para transacciones que crean nuevas Subredes. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
+Tarifa de transacción, en nAVAX, para transacciones que crean nuevas Subnets. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--create-blockchain-tx-fee` (int)
 
@@ -792,7 +792,7 @@ Tarifa de transacción, en nAVAX, para transacciones que crean nuevas blockchain
 
 #### `--transform-subnet-tx-fee` (int)
 
-Tarifa de transacción, en nAVAX, para transacciones que transforman Subredes. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
+Tarifa de transacción, en nAVAX, para transacciones que transforman Subnets. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--add-primary-network-validator-fee` (int)
 
@@ -804,11 +804,11 @@ Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos delegado
 
 #### `--add-subnet-validator-fee` (int)
 
-Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos validadores de Subredes. Por defecto es `10000000` nAVAX (.01 AVAX).
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos validadores de Subnets. Por defecto es `10000000` nAVAX (.01 AVAX).
 
 #### `--add-subnet-delegator-fee` (int)
 
-Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos delegadores de Subredes. Por defecto es `10000000` nAVAX (.01 AVAX).
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos delegadores de Subnets. Por defecto es `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)
 

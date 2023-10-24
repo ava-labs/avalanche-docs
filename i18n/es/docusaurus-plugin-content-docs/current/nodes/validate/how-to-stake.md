@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Esta sección proporciona documentos sobre cómo apostar AVAX en la Red Avalanche.
+tags: [Nodos]
+description: Esta sección proporciona documentos sobre cómo apostar AVAX en la Red Avalanche.
 sidebar_label: Cómo Apostar
 pagination_label: Cómo Apostar AVAX
 sidebar_position: 2
@@ -104,16 +104,21 @@ Entonces, al final de su período de apuesta, un validador receptivo recibe una 
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
+
 $$
 Recompensa = \left(SuministroMaximo - Suministro \right) \times \frac{Participacion}{Suministro} \times \frac{PeriodoDeStaking}{PeriodoDeMinting} \times TasaDeConsumoEfectiva
 $$
+
 donde
+
 $$
-TasaDeConsumoEfectiva = 
+TasaDeConsumoEfectiva =
 $$
+
 $$
 \frac{TasaDeConsumoMinima}{DenominadorDePorcentaje} \times \left(1- \frac{PeriodoDeStaking}{PeriodoDeMinting}\right) + \frac{TasaDeConsumoMaxima}{DenominadorDePorcentaje} \times \frac{PeriodoDeStaking}{PeriodoDeMinting}
 $$
+
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
@@ -124,9 +129,11 @@ $TasaDeConsumoMinima$ y $TasaDeConsumoMaxima$ acotan $TasaDeConsumoEfectiva$ por
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
+
 $$
 TasaDeConsumoMinima \leq TasaDeConsumoEfectiva \leq TasaDeConsumoMaxima
 $$
+
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
@@ -137,9 +144,11 @@ La recompensa es:
 
 <!-- markdownlint-disable MD013 -->
 <!-- vale off -->
+
 $$
 RecompensaMaxima = \left(SuministroMaximo - Suministro \right) \times \frac{Participacion}{Suministro} \times \frac{TasaDeConsumoMaxima}{DenominadorDePorcentaje}
 $$
+
 <!-- vale on -->
 <!-- markdownlint-enable MD013 -->
 
@@ -174,7 +183,7 @@ Cuando emites la transacción para delegar tokens, los tokens apostados y la tar
 
 ### ¿Hay una herramienta para verificar la salud de un validador?
 
-Sí, simplemente ingresa el ID de tu nodo en el Avalanche Stats 
+Sí, simplemente ingresa el ID de tu nodo en el Avalanche Stats
 [Panel de control de salud del validador](https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-Jp4dLMTHd6huttS1jZhqNnBN9ZMNmTmWC).
 
 ### ¿Cómo se determina si un validador recibe una recompensa de staking?
@@ -187,17 +196,17 @@ Cada período de validación se considera por separado. Es decir, supongamos que
 
 ### ¿Cómo se distribuyen las tarifas de delegación a los validadores?
 
-Si un validador está en línea durante el 80% de un período de delegación, 
-recibe un % de la recompensa (la tarifa) ganada por el delegador. 
-La P-Chain solía distribuir esta tarifa como una salida UTXO separada por período de delegación. 
-Después de la 
-[Activación de Cortina](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6), 
-en lugar de enviar una salida UTXO de tarifa por cada período de delegación exitoso, 
+Si un validador está en línea durante el 80% de un período de delegación,
+recibe un % de la recompensa (la tarifa) ganada por el delegador.
+La P-Chain solía distribuir esta tarifa como una salida UTXO separada por período de delegación.
+Después de la
+[Activación de Cortina](https://medium.com/avalancheavax/cortina-x-chain-linearization-a1d9305553f6),
+en lugar de enviar una salida UTXO de tarifa por cada período de delegación exitoso,
 las tarifas ahora se agrupan durante todo el período de validación de un nodo y se distribuyen cuando se desapuesta.
 
 ### Error: No se pudo emitir la TX: el validador estaría sobredelegado
 
-Este error ocurre cada vez que el delegador no puede delegar al validador nombrado. 
+Este error ocurre cada vez que el delegador no puede delegar al validador nombrado.
 Esto puede ser causado por lo siguiente.
 
 - El `startTime` del delegador es antes del `startTime` del validador

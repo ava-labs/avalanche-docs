@@ -8,7 +8,7 @@ sidebar_position: 0
 
 # Node Bootstrap
 
-Node Bootstrap is the process where a node *securely* downloads linear chain
+Node Bootstrap is the process where a node _securely_ downloads linear chain
 blocks to recreate the latest state of the chain locally.
 
 Bootstrap must guarantee that the local state of a node is in sync with the
@@ -29,14 +29,14 @@ and is available for curious-minded readers to learn more.
 ## Validators and Where to Find Them
 
 Bootstrapping is all about downloading all previously accepted containers
-*securely* so a node can have the latest correct state of the chain. A node
+_securely_ so a node can have the latest correct state of the chain. A node
 can't arbitrarily trust any source - a malicious actor could provide malicious
 blocks, corrupting the bootstrapping node's local state, and making it
 impossible for the node to correctly validate the network and reach consensus
 with other correct nodes.
 
 What's the most reliable source of information in the Avalanche ecosystem? It's
-a *large enough* majority of validators. Therefore, the first step of
+a _large enough_ majority of validators. Therefore, the first step of
 bootstrapping is finding a sufficient amount of validators to download
 containers from.
 
@@ -47,7 +47,7 @@ Subnet (Primary Network is a Subnet too). Once the Subnet's current validator
 set is known, the node can securely download containers from these validators to
 bootstrap the chain.
 
-There is a caveat here: the validator set must be *up-to-date*. If a
+There is a caveat here: the validator set must be _up-to-date_. If a
 bootstrapping node's validator set is stale, the node may incorrectly believe
 that some nodes are still validators when their validation period has already
 expired. A node might unknowingly end up requesting blocks from non-validators
@@ -61,8 +61,7 @@ What about the P-chain? The P-chain can't ever have an up-to-date validator set
 before completing its bootstrap. To solve this chicken-and-egg situation the
 Avalanche Foundation maintains a trusted default set of validators called
 beacons (but users are free to configure their own). Beacon Node-IDs and IP
-addresses are listed in the [AvalancheGo
-codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json).
+addresses are listed in the [AvalancheGo codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json).
 Every node has the beacon list available from the start and can reach out to them
 as soon as it starts.
 
@@ -146,8 +145,7 @@ optimistically assuming that the network issue will go away.
 Once a node has at least one valid frontiers, it starts downloading parent
 containers for each frontier. If it's the first time the node is running, it
 won't know about any containers and will try fetching all parent containers
-recursively from the accepted frontier down to genesis (unless [state
-sync](#state-sync) is enabled). If bootstrap had already run previously,
+recursively from the accepted frontier down to genesis (unless [state sync](#state-sync) is enabled). If bootstrap had already run previously,
 some containers are already available locally and the node will stop as soon as
 it finds a known one.
 
@@ -199,14 +197,15 @@ more and more containers are accepted. Nodes need to bootstrap a chain by
 reconstructing the full chain state locally - but downloading and executing each
 container isn't the only way to do this.
 
-Starting from [AvalancheGo version
-1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), nodes can
+Starting from
+[AvalancheGo version 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11),
+nodes can
 use state sync to drastically cut down bootstrapping time on the C-Chain.
 Instead of executing each block, state sync uses cryptographic techniques to
 download and verify just the state associated with the current frontier. State
 synced nodes can't serve every C-chain block ever historically accepted, but
 they can safely retrieve the full C-chain state needed to validate in a much
-shorter time. State sync will fetch the previous 256 blocks prior to support the previous block 
+shorter time. State sync will fetch the previous 256 blocks prior to support the previous block
 hash operation code.
 
 State sync is currently only available for the C-chain. The P-chain and X-chain
@@ -218,7 +217,7 @@ normal operation.
 :::note
 
 There are no configs to state sync an archival node. If you need all the historical state then
- you must not use state sync and setup the config of the node for an archival node.
+you must not use state sync and setup the config of the node for an archival node.
 
 :::
 
@@ -248,8 +247,8 @@ Subnets.
 
 ### Why Chain Bootstrap ETA Keeps On Changing?
 
-As you saw in the [bootstrap completion
-section](#when-does-bootstrapping-finish), a Subnet like the Primary Network
+As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish),
+a Subnet like the Primary Network
 completes once all of its chains finish bootstrapping. Some Subnet chains may
 have to wait for the slowest to finish. They'll restart bootstrapping in the
 meantime, to make sure they won't fall back too much with respect to the network
@@ -257,8 +256,7 @@ accepted frontier.
 
 ### Why Are AvalancheGo APIs Disabled During Bootstrapping?
 
-AvalancheGo APIs are [explicitly
-disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379)
+AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379)
 during bootstrapping. The reason is that if the node has not fully rebuilt its
 Subnets state, it can't provide accurate information. AvalancheGo APIs are
 activated once bootstrap completes and node transition into its normal operating

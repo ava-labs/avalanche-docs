@@ -9,7 +9,7 @@ tags:
     Cadena de Contratos,
   ]
 description: Avalanche cuenta con 3 blockchains incorporadas que incluyen la Cadena de Intercambio (X-Chain), Cadena de Plataforma (P-Chain) y Cadena de Contratos (C-Chain). Más información aquí.
-palabras clave:
+keywords:
   [
     documentación,
     avalanche,
@@ -35,7 +35,7 @@ La Red Primaria es una [Subnet](subnets-overview.md) especial que ejecuta tres b
 - La Cadena de Plataforma [(P-Chain)](avalanche-platform.md#p-chain)
 - La Cadena de Intercambio [(X-Chain)](avalanche-platform.md#x-chain)
 
-:::nota
+:::note
 La [Mainnet de Avalanche](/learn/avalanche/mainnet.md) está compuesta por la Red Primaria
 y todas las Subnets desplegadas.
 :::

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Avalanche Notify es un sistema de monitoreo activo que verifica la capacidad de respuesta de un validador cada minuto. Para recibir alertas por correo electrónico si un validador se vuelve irresponsivo o desactualizado, regístrese con la herramienta Avalanche Notify.
+tags: [Nodos]
+description: Avalanche Notify es un sistema de monitoreo activo que verifica la capacidad de respuesta de un validador cada minuto. Para recibir alertas por correo electrónico si un validador se vuelve irresponsivo o desactualizado, regístrese con la herramienta Avalanche Notify.
 sidebar_label: Inscríbete en Avalanche Notify
 pagination_label: Inscríbete en Avalanche Notify
 sidebar_position: 5

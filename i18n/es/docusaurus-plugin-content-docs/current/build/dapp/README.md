@@ -1,8 +1,8 @@
 ---
 tags: [Construir, Aplicaciones Descentralizadas]
 description: Dapps
-etiqueta_de_barra_lateral: 🔗 Enlaces Rápidos
-etiqueta_de_paginación: Enlaces Rápidos de Dapps
+sidebar_label: 🔗 Enlaces Rápidos
+pagination_label: Enlaces Rápidos de Dapps
 ---
 
 # 🔗 Enlaces Rápidos de Dapps

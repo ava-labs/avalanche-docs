@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
+tags: [Nodos]
+description: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
 sidebar_label: Configuraciones de la Cadena
 pagination_label: Configuraciones de la Cadena
 sidebar_position: 1
@@ -45,8 +45,8 @@ Para una cadena dada, AvalancheGo seguirá la siguiente secuencia para buscar su
 archivo de configuración, donde todos los nombres de carpetas y archivos distinguen entre mayúsculas y minúsculas:
 
 - Primero busca un subdirectorio de configuración cuyo nombre sea el ID de la cadena - Si no
-se encuentra, busca un subdirectorio de configuración cuyo nombre sea el alias principal de la cadena - Si no se encuentra,
-busca un subdirectorio de configuración cuyo nombre sea otro alias para la cadena
+  se encuentra, busca un subdirectorio de configuración cuyo nombre sea el alias principal de la cadena - Si no se encuentra,
+  busca un subdirectorio de configuración cuyo nombre sea otro alias para la cadena
 
 Alternativamente, para algunas configuraciones puede ser más conveniente proporcionar la configuración
 completamente a través de la línea de comandos. Para eso, puede usar la bandera `--chain-config-content` de AvalancheGo, como se documenta
@@ -112,7 +112,6 @@ Si no se especifica (o está vacío), se seleccionan pares al azar. Por defecto,
 Tamaño de la caché de trie utilizada para proporcionar datos de sincronización de estado a los pares en MB. Debe ser
 un múltiplo de `64`. Por defecto, es `64`.
 
-
 ### Perfilado Continuo
 
 #### `continuous-profiler-dir` (cadena)
@@ -155,7 +154,7 @@ Use el campo `eth-apis` para especificar el conjunto exacto de servicios a habil
 su nodo. Si este campo no está configurado, entonces la lista predeterminada será:
 `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
-:::nota
+:::note
 
 Los nombres utilizados en esta bandera de configuración se han actualizado en Coreth `v0.8.14`.
 Los nombres anteriores que contienen `public-` y `private-` están obsoletos. Si bien
@@ -164,9 +163,7 @@ en futuras actualizaciones y se recomienda actualizar a los nuevos valores.
 
 La asignación de valores obsoletos y su equivalente actualizado es la siguiente:
 
-
-
-| Obsoleto                           | Usar en su lugar      |
+| Obsoleto                           | Usar en su lugar       |
 | ---------------------------------- | ---------------------- |
 | `public-eth`                       | `eth`                  |
 | `public-eth-filter`                | `eth-filter`           |
@@ -627,7 +624,7 @@ Para anular esto y cambiar al modo de poda, además de `pruning-enabled: true`, 
 
 :::
 
-#### `populate-missing-tries` (*uint64)
+#### `populate-missing-tries` (\*uint64)
 
 Si no es nulo, establece el punto de partida para repoblar los tries faltantes y regenerar el bosque de merkle de archivo.
 
@@ -712,7 +709,7 @@ Los parámetros son los siguientes:
 
 Habilita la indexación de transacciones de AVM si se establece en `true`. El valor predeterminado es `false`. Cuando se establece en `true`, las transacciones de AVM se indexan según la `dirección` y el `assetID` involucrados. Estos datos están disponibles a través de la API `avm.getAddressTxs` [API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
 
-:::nota
+:::note
 Si `index-transactions` se establece en true, siempre debe mantenerse en true durante toda la vida útil del nodo. Si se establece en `false` después de haber sido establecido en true, el nodo se negará a iniciar a menos que `index-allow-incomplete` también se establezca en true (ver más abajo).
 :::
 
@@ -726,7 +723,6 @@ Este valor de configuración se ignora si no hay datos indexados de la cadena X 
 
 Como se mencionó anteriormente, si el ID de cadena de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, la configuración para esta cadena debería estar en
 `{directorio-de-configuración-de-cadena}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
-
 
 ## Preguntas frecuentes
 

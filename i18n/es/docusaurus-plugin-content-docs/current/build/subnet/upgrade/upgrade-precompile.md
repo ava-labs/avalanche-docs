@@ -1,7 +1,7 @@
 ---
 tags: [Construir, Subnets]
-description: Puedes personalizar las subredes basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
-sidebar_label: Configuración de precompilación de subredes
+description: Puedes personalizar las Subnets  basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
+sidebar_label: Configuración de precompilación de Subnets
 pagination_label: Actualiza la configuración de precompilación de tu Subnet-EVM
 sidebar_position: 3
 ---
@@ -10,7 +10,7 @@ sidebar_position: 3
 
 ## Actualizando una Subnet
 
-Puedes personalizar las subredes basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
+Puedes personalizar las Subnets basadas en Subnet-EVM después de su implementación habilitando y deshabilitando precompilaciones.
 Para hacer esto, crea un archivo `upgrade.json` y colócalo en el directorio correspondiente.
 
 Este documento describe cómo realizar dichas actualizaciones de red. Es específico para las actualizaciones de Subnet-EVM.
@@ -45,7 +45,7 @@ Si aún no has creado `testSubnet`, verás este resultado:
 
 ```shell
 avalanche subnet upgrade generate testSubnet
-El nombre de subred proporcionado "testSubnet" no existe
+El nombre de Subnet  proporcionado "testSubnet" no existe
 ```
 
 Nuevamente, no tiene sentido intentar el comando de actualización si la Subnet no existe.

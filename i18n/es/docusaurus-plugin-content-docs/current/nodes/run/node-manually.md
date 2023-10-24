@@ -1,10 +1,22 @@
 ---
-etiquetas: [Nodos, AvalancheGo]
-descripción: La forma más rápida de aprender sobre Avalanche es ejecutar un nodo e interactuar con la red. Este tutorial demuestra cómo instalar y ejecutar un nodo Avalanche, y conectarse a la Red Avalanche compilando un nodo desde el origen y ejecutándolo manualmente.
+tags: [Nodos, AvalancheGo]
+description: La forma más rápida de aprender sobre Avalanche es ejecutar un nodo e interactuar con la red. Este tutorial demuestra cómo instalar y ejecutar un nodo Avalanche, y conectarse a la Red Avalanche compilando un nodo desde el origen y ejecutándolo manualmente.
 sidebar_label: Manualmente
 pagination_label: Ejecutar un Nodo Avalanche Manualmente
 sidebar_position: 0
-palabras clave: [nodo avalanche, ejecutar un nodo, rpc, nodo rpc, rastrear mainnet, avalanche mainnet, construir desde el origen, binario, avalanchego, nodo blockchain]
+keywords:
+  [
+    nodo avalanche,
+    ejecutar un nodo,
+    rpc,
+    nodo rpc,
+    rastrear mainnet,
+    avalanche mainnet,
+    construir desde el origen,
+    binario,
+    avalanchego,
+    nodo blockchain,
+  ]
 ---
 
 # Ejecutar un Nodo Avalanche Manualmente
@@ -57,7 +69,7 @@ Los siguientes pasos explican cómo descargar el código fuente de AvalancheGo y
 
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
-``` 
+```
 
 #### 3. Clonar AvalancheGo
 
@@ -66,7 +78,7 @@ En el `$GOPATH`, clone [AvalancheGo](https://github.com/ava-labs/avalanchego), e
 ```bash
 cd $GOPATH/src/github.com/ava-labs
 git clone https://github.com/ava-labs/avalanchego.git
-``` 
+```
 
 #### 4. Ejecutar el Script de Construcción
 
@@ -75,26 +87,26 @@ Desde el directorio `avalanchego`, ejecute el script de construcción
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
-``` 
+```
 
 #### 5. Iniciar el Nodo
 
 En Avalanche Mainnet:
 
-```bash 
+```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego
 ```
 
 En Fuji Testnet:
 
-```bash 
+```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --network-id=fuji
 ```
 
 :::info
-Para detener el nodo, presione `Ctrl + C`. 
+Para detener el nodo, presione `Ctrl + C`.
 :::
 
 ## Ejecutar con un Binario Pre-Construido
@@ -105,9 +117,9 @@ Para descargar un binario pre-construido en lugar de construir desde el origen, 
 
 Bajo `Assets`, seleccione el archivo apropiado.
 
-#### MacOS 
+#### MacOS
 
-Descargar: `avalanchego-macos-<VERSION>.zip` 
+Descargar: `avalanchego-macos-<VERSION>.zip`
 
 Descomprimir:
 
@@ -117,11 +129,11 @@ unzip avalanchego-macos-<VERSION>.zip
 
 la carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-#### Linux(PCs o Proveedores de Nube) 
+#### Linux(PCs o Proveedores de Nube)
 
 Descargar: `avalanchego-linux-amd64-<VERSION>.tar.gz`
 
-Descomprimir: 
+Descomprimir:
 
 ```bash
 tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz
@@ -129,11 +141,11 @@ tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz
 
 La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-#### Linux(Arm64) 
+#### Linux(Arm64)
 
 Descargar: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 
-Descomprimir: 
+Descomprimir:
 
 ```bash
 tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz
@@ -196,6 +208,7 @@ Como hay demasiados modelos y configuraciones de enrutadores, no podemos proporc
 Tenga en cuenta que un nodo Avalanche completamente conectado mantiene y se comunica a través de un par de miles de conexiones TCP en vivo. Para algunos enrutadores domésticos de baja potencia y más antiguos, eso podría ser demasiado para manejar. Si ese es el caso, es posible que experimente retrasos en otras computadoras conectadas al mismo enrutador, el nodo se queda en modo de espera, falla al sincronizar y problemas similares.
 
 :::
+
 </p></details>
 
 :::info

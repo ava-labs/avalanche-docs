@@ -1,7 +1,7 @@
 ---
 tags: [Fuji Testnet]
 description: Fuji Testnet es la red de pruebas oficial para el ecosistema Avalanche.
-palabras clave: [docs, fuji, testnet, construir en avalanche]
+keywords: [docs, fuji, testnet, construir en avalanche]
 sidebar_label: Fuji Testnet
 ---
 

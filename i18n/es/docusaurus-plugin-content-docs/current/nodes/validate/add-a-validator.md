@@ -1,12 +1,12 @@
 ---
-etiquetas: [Nodos]
-descripción: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
+tags: [Nodos]
+description: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
 sidebar_label: Nodo ➡️ Validador
 pagination_label: Agregar un nodo al conjunto de validadores
 sidebar_position: 3
 ---
 
-# Agregar un nodo al conjunto de validadores
+# Agregar un Nodo al Conjunto de Validadores
 
 ## Introducción
 
@@ -15,7 +15,7 @@ es inherente a la plataforma Avalanche y valida las blockchains incorporadas en 
 tutorial, agregaremos un nodo a la Red Primaria en Avalanche.
 
 La P-Chain gestiona metadatos en Avalanche. Esto incluye hacer un seguimiento de qué nodos
-están en qué Subredes, qué blockchains existen y qué Subredes están validando
+están en qué Subnets, qué blockchains existen y qué Subnets están validando
 qué blockchains. Para agregar un validador, emitiremos
 [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)
 a la P-Chain.
@@ -153,13 +153,13 @@ haz clic
 Localiza esta línea en el archivo
 
 ```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
 ```
 
 y reemplázala con una clave privada que controles. Puedes usar [este código para generar una nueva clave](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```js
-const privKey: string = "<TU-CLAVE-PRIVADA-AQUÍ>"
+const privKey: string = "<TU-CLAVE-PRIVADA-AQUÍ>";
 ```
 
 #### Configuración de red
@@ -167,23 +167,21 @@ const privKey: string = "<TU-CLAVE-PRIVADA-AQUÍ>"
 La siguiente configuración funciona cuando se usa un nodo local iniciado con [`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
 
 ```js
-const ip: string = "localhost"
-const port: number = 9650
-const protocol: string = "http"
-const networkID: number = 5
+const ip: string = "localhost";
+const port: number = 9650;
+const protocol: string = "http";
+const networkID: number = 5;
 ```
 
 Sin embargo, para conectarse directamente al servidor de la [API de Avalanche Fuji Testnet](/tooling/rpc-providers.md),
 se necesitan los siguientes cambios:
 
 ```js
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
+const ip: string = "api.avax-test.network";
+const port: number = 443;
+const protocol: string = "https";
+const networkID: number = 5;
 ```
-
-
 
 Dependiendo de la networkID pasada al instanciar un objeto `Avalanche` en el código, las direcciones codificadas utilizadas tendrán una Parte Legible por Humanos (HRP) distintiva por red.
 
@@ -198,10 +196,10 @@ Para obtener más información sobre las direcciones codificadas, haz clic [aqu�
 A continuación, necesitamos especificar el período de validación y la tarifa de delegación del nodo.
 
 ```ts
-const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
-const delegationFee: number = 10
+const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg";
+const startTime: BN = UnixNow().add(new BN(60 * 1));
+const endTime: BN = startTime.add(new BN(26300000));
+const delegationFee: number = 10;
 ```
 
 #### ID del nodo
@@ -225,15 +223,15 @@ Para crear tus propios tiempos de inicio, sigue los pasos a continuación:
 Localiza esta línea en el archivo
 
 ```ts
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
+const startTime: BN = UnixNow().add(new BN(60 * 1));
+const endTime: BN = startTime.add(new BN(26300000));
 ```
 
 Cambia `startTime` y `endTime` por nuevos valores de `BN`, por ejemplo:
 
 ```ts
-const startTime: BN = new BN(1654656829) // Mié Jun 08 2022 02:53:49 GMT+0000
-const endTime: BN = new BN(1662602029) // Jue Sep 08 2022 01:53:49 GMT+0000
+const startTime: BN = new BN(1654656829); // Mié Jun 08 2022 02:53:49 GMT+0000
+const endTime: BN = new BN(1662602029); // Jue Sep 08 2022 01:53:49 GMT+0000
 ```
 
 #### Tarifa de delegación
@@ -249,12 +247,12 @@ Establece la cantidad adecuada de stake al llamar a `pchain.buildAddValidatorTx`
 Por defecto, el ejemplo usa la variable `pAddressStrings` para definir `toAddresses`, `fromAddresses`, `changeAddresses` y `rewardAddresses`:
 
 ```js
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 ```
 
 Esto recupera las direcciones de la P-Chain que pertenecen a la `clave privada` que aparece antes en el ejemplo.
 
-No se necesita ningún cambio en las direcciones para la acción predeterminada. Para personalización, consulta [esta sección](#customizing-addresses).
+No se necesita ningún cambio en las direcciones para la acción predeterminada.
 
 #### Ejecutar el código
 
@@ -274,7 +272,7 @@ La respuesta tiene el ID de transacción.
 
 Podemos verificar el estado de la transacción ejecutando el script de ejemplo: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts) siguiendo los pasos a continuación:
 
-1. Asegúrate de que tu [configuración de red](#network-setting) sea correcta antes de ejecutar el script.
+1. Asegúrate de que tu [configuración de red](/build/dapp/chain-settings.md) sea correcta antes de ejecutar el script.
 
 2. Localiza esta línea en el archivo
 
@@ -308,7 +306,7 @@ Esto devuelve:
 
 El estado debería ser `Committed`, lo que significa que la transacción fue exitosa.
 
-Podemos ver si el nodo está ahora en el conjunto de validadores pendientes para la red Fuji usando el ejemplo: [`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Simplemente cambia la [configuración de red](#network-setting) para cumplir con los requisitos de Fuji y luego ejecuta el script:
+Podemos ver si el nodo está ahora en el conjunto de validadores pendientes para la red Fuji usando el ejemplo: [`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Simplemente cambia la [configuración de red](/build/dapp/chain-settings.md) para cumplir con los requisitos de Fuji y luego ejecuta el script:
 
 ```sh
 ts-node examples/platformvm/getPendingValidators.ts
@@ -349,24 +347,24 @@ La apuesta de un validador nunca se reduce, sin importar su comportamiento, siem
 Localiza esta parte del código
 
 ```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+pKeychain.importKey(privKey);
 ```
 
-y reemplaza `privKey` con claves privadas que controlas. Para generar un nuevo par de claves, podemos usar el script de ejemplo [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) junto con la [Configuración de la Red Fuji](#network-setting).
+y reemplaza `privKey` con claves privadas que controlas. Para generar un nuevo par de claves, podemos usar el script de ejemplo [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) junto con la [Configuración de la Red Fuji](/build/dapp/chain-settings.md).
 
 ```ts
 let privKey: string =
-  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s"
-pKeychain.importKey(privKey)
-priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91"
-pKeychain.importKey(privKey)
+  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM";
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG";
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s";
+pKeychain.importKey(privKey);
+priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91";
+pKeychain.importKey(privKey);
 
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 ```
 
 Este ejemplo crearía un keychain con 4 direcciones:
@@ -396,7 +394,7 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   threshold,
   memo,
   asOf
-)
+);
 ```
 
 ### Flujo de trabajo en Mainnet
