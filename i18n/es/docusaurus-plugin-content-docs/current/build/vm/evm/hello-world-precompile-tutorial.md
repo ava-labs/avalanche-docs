@@ -988,7 +988,7 @@ Save the file after making the update.
 Congratulations! You have successfully implemented the HelloWorld precompile contract. Now let's move on
 to testing the contract.
 
-```go
+````go
 package precompiles
 
 import (
@@ -1062,7 +1062,7 @@ import (
 	// AGREGA TU PRECOMPILACIÓN AQUÍ
 	// _ "github.com/ava-labs/subnet-evm/precompile/contracts/yourprecompile"
 )
-```
+````
 
 <!-- vale off -->
 
@@ -1344,7 +1344,7 @@ Ahora podemos activar este contrato de prueba a través de las pruebas de `hardh
 
 El script de prueba se ve así:
 
-```ts
+````ts
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
@@ -1361,7 +1361,7 @@ const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
 // func TestHelloWorld(t *testing.T) {
 // 	// TODO: Add your test here
 // }
-```
+````
 
 Uncomment this code and replace `// TODO: Add your test here` with the name of your test function,
 which in our case is `TestHelloWorldE2E`.

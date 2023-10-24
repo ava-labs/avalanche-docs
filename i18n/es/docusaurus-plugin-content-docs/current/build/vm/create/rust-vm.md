@@ -1,73 +1,89 @@
 ---
-tags: [Construir, Máquinas Virtuales]
-description: Aprende cómo desarrollar máquinas virtuales en Avalanche usando Rust.
-sidebar_label: VM de Rust
-pagination_label: Construir una VM de Rust
+tags: [Build, Virtual Machines]
+description: Learn how to develop virtual machines on Avalanche using Rust.
+sidebar_label: Rust VM
+pagination_label: Build a Rust VM
 sidebar_position: 3
 ---
 
-# Cómo Construir una VM de Rust Simple
+# How to Build a Simple Rust VM
 
-## Introducción
+## Introduction
 
-El SDK de Rust de Avalanche es un conjunto de herramientas para desarrolladores compuesto por bloques de construcción poderosos y tipos primitivos. Este tutorial te guiará a través de la creación de una VM simple conocida como la [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs) utilizando el SDK de Rust. Cada bloque en la blockchain de la TimestampVM contiene una marca de tiempo creciente de forma monótona cuando se creó el bloque y una carga útil de datos de 32 bytes.
+The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and primitive
+types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM
+RS](https://github.com/ava-labs/timestampvm-rs) using the Rust SDK. Each block in the TimestampVM's
+blockchain contains a monotonically increasing timestamp when the block was created and a 32-byte
+payload of data.
 
-## Requisitos previos
+## Prerequisites
 
-- Instala la última versión estable de Rust utilizando [`rustup`](https://www.rust-lang.org/tools/install).
-- Marca y revisa el repositorio de GitHub de [avalanche-rs](https://github.com/ava-labs/avalanche-rs), específicamente los traits y ayudantes de Subnet definidos en la crate `avalanche-types`.
-- Para desarrolladores nuevos en Rust, visita el libro en línea gratuito [The Rust Programming Language](https://doc.rust-lang.org/book/).
+- Install the latest stable version of Rust using [`rustup`](https://www.rust-lang.org/tools/install).
+- Bookmark and review the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) GitHub
+  repository, specifically the Subnet traits and helpers defined in the `avalanche-types` crate
+- For developers new to Rust please visit the free online book [The Rust Programming
+  Language](https://doc.rust-lang.org/book/).
 
   :::note
-  Las VM de ejemplo en estos tutoriales se basan en
-  [avalanche-types-rs](https://github.com/ava-labs/avalanche-types-rs), un predecesor de
-  el repositorio [avalanche-rs](https://github.com/ava-labs/avalanche-rs) que ahora es el
-  estándar aceptado. Las ubicaciones de los directorios pueden variar.
+  The example VMs in these tutorials are based on
+  [avalanche-types-rs](https://github.com/ava-labs/avalanche-types-rs), a predecessor of
+  the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) repository that is now the
+  accepted standard. Directory locations will vary.
   :::
-  
 
-Si has experimentado con nuestras VM de ejemplo en Golang, encontrarás que el SDK de Rust es bastante familiar. ¿Eres completamente nuevo en la creación de una VM personalizada en Avalanche? No hay problema, por favor revisa [Introducción a las VM](/build/vm/intro.md).
+If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
+Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to
+VMs](/build/vm/intro.md).
 
-## Componentes
+## Components
 
-Una VM define cómo se debe construir una blockchain. Un bloque se popula con una transacción que muta el estado de la blockchain cuando se ejecuta. Al ejecutar una serie de bloques cronológicamente, cualquiera puede verificar y reconstruir el estado de la blockchain en un punto arbitrario en el tiempo.
+A VM defines how a blockchain should be built. A block is populated with a transaction which mutates
+the state of the blockchain when executed. By executing a series of blocks chronologically, anyone
+can verify and reconstruct the state of the blockchain at an arbitrary point in time.
 
-El repositorio de la TimestampVM RS tiene algunos componentes para manejar el ciclo de vida de las tareas desde que se emite una transacción hasta que se acepta un bloque en la red:
+The TimestampVM RS repository has a few components to handle the lifecycle of tasks from a
+transaction being issued to a block being accepted across the network:
 
-- **Mempool** - Almacena transacciones pendientes que aún no se han finalizado.
-- **Bloque** - Define el formato del bloque, cómo verificarlo y cómo debe ser aceptado o rechazado en la red.
-- **Máquina Virtual** - Lógica a nivel de aplicación. Implementa el trait de la VM necesario para interactuar con el consenso Avalanche y define el plano de la blockchain.
-- **Servicio** - Expone APIs para que los usuarios puedan interactuar con la VM.
-- **Estado** - Gestiona estados tanto en memoria como persistentes.
+- **Mempool** - Stores pending transactions that haven't been finalized yet.
+- **Block** - Defines the block format, how to verify it, and how it should be accepted or rejected
+  across the network
+- **Virtual Machine** - Application-level logic. Implements the VM trait needed to interact with
+  Avalanche consensus and defines the blueprint for the blockchain.
+- **Service** - Exposes APIs so users can interact with the VM.
+- **State** - Manages both in memory and persistent states.
 
-## Implementación de la TimestampVM RS
+## TimestampVM RS Implementation
 
-La TimestampVM RS implementa el trait
-[snowman::block::ChainVM](https://github.com/ava-labs/avalanche-types-rs/blob/main/src/subnet/rpc/snowman/block.rs).
-A continuación encontrarás documentación adicional sobre los métodos del trait. Para ayudar con una comprensión lógica de las expectativas para estos métodos, por favor ve los ejemplos de código a continuación.
+The TimestampVM RS implements the
+[snowman::block::ChainVM](https://github.com/ava-labs/avalanche-types-rs/blob/main/src/subnet/rpc/snowman/block.rs)
+trait. Below you will find additional documentation on the trait methods. To assist with a logical
+understanding of the expectations for these methods please see the code examples below.
 
-Documentación adicional
+Additional Documentation
 
 - [ChainVM
   GoDoc](https://pkg.go.dev/github.com/ava-labs/avalanchego/snow/engine/snowman/block#ChainVm)
 - [Avalanche Proto Docs](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM)
-- [VMs Snowman](https://github.com/ava-labs/avalanchego/tree/master/vms#snowman-vms)
+- [Snowman VMs](https://github.com/ava-labs/avalanchego/tree/master/vms#snowman-vms)
 
-Ahora sabemos los traits (interfaces) que nuestra VM debe implementar y las bibliotecas que podemos usar para construir una VM utilizando el SDK de Rust.
+Now we know the traits (interfaces) our VM must implement and the libraries we can use to build a VM
+using the Rust SDK.
 
-Escribamos nuestra VM, que implementa `snowman::block::ChainVM` y cuyos bloques implementan `snowman::Block`. También puedes seguir el código en el [repositorio de la TimestampVM RS](https://github.com/ava-labs/timestampvm-rs).
+Let’s write our VM, which implements `snowman::block::ChainVM` and whose blocks implement
+`snowman::Block`. You can also follow the code in the [TimestampVM RS
+repository](https://github.com/ava-labs/timestampvm-rs).
 
-### Estado
+### State
 
-`Estado` gestiona los estados de bloque y cadena para esta VM, tanto en memoria como persistentes.
+`State` manages block and chain states for this VM, both in-memory and persistent.
 
 ```rust title="/timestampvm/src/state/mod.rs"
 #[derive(Clone)]
 pub struct State {
     pub db: Arc<RwLock<Box<dyn subnet::rpc::database::Database + Send + Sync>>>,
 
-    /// Mapea el Id del bloque a un Bloque.
-    /// Cada elemento está verificado pero aún no ha sido aceptado/rechazado (por ejemplo, preferido).
+    /// Maps block Id to Block.
+    /// Each element is verified but not yet accepted/rejected (e.g., preferred).
     pub verified_blocks: Arc<RwLock<HashMap<ids::Id, Block>>>,
 }
 
@@ -86,7 +102,7 @@ const STATUS_PREFIX: u8 = 0x0;
 
 const DELIMITER: u8 = b'/';
 
-/// Devuelve un vec de bytes utilizado como clave para identificar bloques en el estado.
+/// Returns a vec of bytes used as a key for identifying blocks in state.
 /// 'STATUS_PREFIX' + 'BYTE_DELIMITER' + [block_id]
 fn block_with_status_key(blk_id: &ids::Id) -> Vec<u8> {
     let mut k: Vec<u8> = Vec::with_capacity(ids::LEN + 2);
@@ -96,8 +112,8 @@ fn block_with_status_key(blk_id: &ids::Id) -> Vec<u8> {
     k
 }
 
-/// Envuelve un [`Bloque`](crate::block::Block) y su estado.
-/// Este es el formato de datos que [`Estado`](State) utiliza para persistir bloques.
+/// Wraps a [`Block`](crate::block::Block) and its status.
+/// This is the data format that [`State`](State) uses to persist blocks.
 #[derive(Serialize, Deserialize, Clone)]
 struct BlockWithStatus {
     block_bytes: Vec<u8>,
@@ -125,9 +141,8 @@ impl BlockWithStatus {
     }
 }
 
-
-impl Estado {
-    /// Persiste el último bloque aceptado.
+impl State {
+    /// Persists the last accepted block Id.
     pub async fn set_last_accepted_block(&self, blk_id: &ids::Id) -> io::Result<()> {
         let mut db = self.db.write().await;
         db.put(LAST_ACCEPTED_BLOCK_KEY, &blk_id.to_vec())
@@ -135,24 +150,24 @@ impl Estado {
             .map_err(|e| {
                 Error::new(
                     ErrorKind::Other,
-                    format!("no se pudo guardar el último bloque aceptado: {:?}", e),
+                    format!("failed to put last accepted block: {:?}", e),
                 )
             })
     }
 
-    /// Devuelve "true" si se encuentra un último bloque aceptado.
+    /// Returns "true" if there's a last accepted block found.
     pub async fn has_last_accepted_block(&self) -> io::Result<bool> {
         let db = self.db.read().await;
         match db.has(LAST_ACCEPTED_BLOCK_KEY).await {
-            Ok(encontrado) => Ok(encontrado),
+            Ok(found) => Ok(found),
             Err(e) => Err(Error::new(
                 ErrorKind::Other,
-                format!("no se pudo cargar el último bloque aceptado: {}", e),
+                format!("failed to load last accepted block: {}", e),
             )),
         }
     }
 
-    /// Devuelve el Id del último bloque aceptado.
+    /// Returns the last accepted block Id.
     pub async fn get_last_accepted_block_id(&self) -> io::Result<ids::Id> {
         let db = self.db.read().await;
         match db.get(LAST_ACCEPTED_BLOCK_KEY).await {
@@ -166,28 +181,28 @@ impl Estado {
         }
     }
 
-    /// Agrega un bloque a "verified_blocks".
+    /// Adds a block to "verified_blocks".
     pub async fn add_verified(&mut self, block: &Block) {
         let blk_id = block.id();
-        log::info!("verificado agregado {blk_id}");
+        log::info!("verified added {blk_id}");
 
         let mut verified_blocks = self.verified_blocks.write().await;
         verified_blocks.insert(blk_id, block.clone());
     }
 
-    /// Elimina un bloque de "verified_blocks".
+    /// Removes a block from "verified_blocks".
     pub async fn remove_verified(&mut self, blk_id: &ids::Id) {
         let mut verified_blocks = self.verified_blocks.write().await;
         verified_blocks.remove(blk_id);
     }
 
-    /// Devuelve "true" si el Id del bloque ya ha sido verificado.
+    /// Returns "true" if the block Id has been already verified.
     pub async fn has_verified(&self, blk_id: &ids::Id) -> bool {
         let verified_blocks = self.verified_blocks.read().await;
         verified_blocks.contains_key(blk_id)
     }
 
-    /// Escribe un bloque en el almacenamiento de estado.
+    /// Writes a block to the state storage.
     pub async fn write_block(&mut self, block: &Block) -> io::Result<()> {
         let blk_id = block.id();
         let blk_bytes = block.to_slice()?;
@@ -202,12 +217,12 @@ impl Estado {
 
         db.put(&block_with_status_key(&blk_id), &blk_status_bytes)
             .await
-            .map_err(|e| Error::new(ErrorKind::Other, format!("no se pudo guardar el bloque: {:?}", e)))
+            .map_err(|e| Error::new(ErrorKind::Other, format!("failed to put block: {:?}", e)))
     }
 
-    /// Lee un bloque del almacenamiento de estado utilizando la clave block_with_status_key.
+    /// Reads a block from the state storage using the block_with_status_key.
     pub async fn get_block(&self, blk_id: &ids::Id) -> io::Result<Block> {
-        // verifica si el bloque existe en memoria como verificado previamente.
+        // check if the block exists in memory as previously verified.
         let verified_blocks = self.verified_blocks.read().await;
         if let Some(b) = verified_blocks.get(blk_id) {
             return Ok(b.clone());
@@ -228,46 +243,46 @@ impl Estado {
 
 ### Block
 
-Esta implementación de `snowman::Block` proporciona a la VM almacenamiento, recuperación y estado de bloques.
+This implementation of `snowman::Block` provides the VM with storage, retrieval and status of blocks.
 
-Block es un bloque en la cadena.
-Cada bloque contiene:
+Block is a block on the chain.
+Each block contains:
 
-- ID del bloque padre
-- Altura
-- Marca de tiempo
-- Un trozo de datos (cadena codificada en hexadecimal)
+- ParentID
+- Height
+- Timestamp
+- A piece of data (hex encoded string)
 
 ```rust title="/timestampvm/src/block/mod.rs"
 #[serde_as]
 #[derive(Serialize, Deserialize, Clone, Derivative)]
 #[derivative(Debug, PartialEq, Eq)]
 pub struct Block {
-    /// El ID del bloque padre.
+    /// The block Id of the parent block.
     parent_id: ids::Id,
-    /// Altura de este bloque.
-    /// La altura del bloque génesis es 0.
+    /// This block's height.
+    /// The height of the genesis block is 0.
     height: u64,
-    /// Segundo Unix en el que se propuso este bloque.
+    /// Unix second when this block was proposed.
     timestamp: u64,
-    /// Datos arbitrarios.
+    /// Arbitrary data.
     #[serde_as(as = "Hex0xBytes")]
     data: Vec<u8>,
 
-    /// Estado actual del bloque.
+    /// Current block status.
     #[serde(skip)]
     status: choices::status::Status,
-    /// Bytes codificados de este bloque.
+    /// This block's encoded bytes.
     #[serde(skip)]
     bytes: Vec<u8>,
-    /// ID generado del bloque.
+    /// Generated block Id.
     #[serde(skip)]
     id: ids::Id,
 
-/// Referencia al administrador de estado de la VM para bloques.
-#[derivative(Debug = "ignore", PartialEq = "ignore")]
-#[serde(skip)]
-state: state::State,
+    /// Reference to the Vm state manager for blocks.
+    #[derivative(Debug = "ignore", PartialEq = "ignore")]
+    #[serde(skip)]
+    state: state::State,
 }
 
 impl Default for Block {
@@ -318,28 +333,28 @@ impl Block {
         serde_json::to_string(&self).map_err(|e| {
             Error::new(
                 ErrorKind::Other,
-                format!("no se pudo serializar el bloque a una cadena JSON {}", e),
+                format!("failed to serialize Block to JSON string {}", e),
             )
         })
     }
 
-    /// Codifica el [`Block`](Block) a JSON en bytes.
+    /// Encodes the [`Block`](Block) to JSON in bytes.
     pub fn to_slice(&self) -> io::Result<Vec<u8>> {
         serde_json::to_vec(&self).map_err(|e| {
             Error::new(
                 ErrorKind::Other,
-                format!("no se pudo serializar el bloque a bytes JSON {}", e),
+                format!("failed to serialize Block to JSON bytes {}", e),
             )
         })
     }
 
-    /// Carga un [`Block`](Block) a partir de bytes JSON.
+    /// Loads [`Block`](Block) from JSON bytes.
     pub fn from_slice(d: impl AsRef<[u8]>) -> io::Result<Self> {
         let dd = d.as_ref();
         let mut b: Self = serde_json::from_slice(dd).map_err(|e| {
             Error::new(
                 ErrorKind::Other,
-                format!("no se pudo deserializar el bloque desde JSON {}", e),
+                format!("failed to deserialize Block from JSON {}", e),
             )
         })?;
 
@@ -349,80 +364,208 @@ impl Block {
         Ok(b)
     }
 
-    /// Devuelve el Id del bloque padre.
+    /// Returns the parent block Id.
     pub fn parent_id(&self) -> ids::Id {
         self.parent_id
     }
 
-    /// Devuelve la altura de este bloque.
+    /// Returns the height of this block.
     pub fn height(&self) -> u64 {
         self.height
     }
 
-    /// Devuelve la marca de tiempo de este bloque.
+    /// Returns the timestamp of this block.
     pub fn timestamp(&self) -> u64 {
         self.timestamp
     }
 
-    /// Devuelve los datos de este bloque.
+    /// Returns the data of this block.
     pub fn data(&self) -> &[u8] {
         &self.data
     }
 
-    /// Devuelve el estado de este bloque.
+    /// Returns the status of this block.
     pub fn status(&self) -> choices::status::Status {
         self.status.clone()
     }
 
-    /// Actualiza el estado de este bloque.
+    /// Updates the status of this block.
     pub fn set_status(&mut self, status: choices::status::Status) {
         self.status = status;
     }
 
-    /// Devuelve la representación en bytes de este bloque.
+    /// Returns the byte representation of this block.
     pub fn bytes(&self) -> &[u8] {
         &self.bytes
     }
 
-    /// Devuelve el ID de este bloque.
+    /// Returns the ID of this block
     pub fn id(&self) -> ids::Id {
         self.id
     }
 
-    /// Actualiza el estado del bloque.
+    /// Updates the state of the block.
     pub fn set_state(&mut self, state: state::State) {
         self.state = state;
     }
 
-    /// Verifica las propiedades del [`Block`](Block) (por ejemplo, alturas),
-    /// y una vez verificado, lo registra en el [`State`](crate::state::State).
+    /// Verifies [`Block`](Block) properties (e.g., heights),
+    /// and once verified, records it to the [`State`](crate::state::State).
     pub async fn verify(&mut self) -> io::Result<()> {
         if self.height == 0 && self.parent_id == ids::Id::empty() {
             log::debug!(
-                "el bloque {} tiene un Id de padre vacío ya que es un bloque génesis - omitiendo verificación",
+                "block {} has an empty parent Id since it's a genesis block -- skipping verify",
                 self.id
             );
             self.state.add_verified(&self.clone()).await;
             return Ok(());
         }
 
-        // si ya existe en la base de datos, significa que ya ha sido aceptado
-        // por lo tanto, no es necesario verificarlo una vez más
+        // if already exists in database, it means it's already accepted
+        // thus no need to verify once more
         if self.state.get_block(&self.id).await.is_ok() {
-            log::debug!("bloque {} ya verificado", self.id);
+            log::debug!("block {} already verified", self.id);
             return Ok(());
         }
 
         let prnt_blk = self.state.get_block(&self.parent_id).await?;
 
+        // ensure the height of the block is immediately following its parent
+        if prnt_blk.height != self.height - 1 {
+            return Err(Error::new(
+                ErrorKind::InvalidData,
+                format!(
+                    "parent block height {} != current block height {} - 1",
+                    prnt_blk.height, self.height
+                ),
+            ));
+        }
 
-/// Marca este bloque como aceptado y actualiza el estado en consecuencia.
+        // ensure block timestamp is after its parent
+        if prnt_blk.timestamp > self.timestamp {
+            return Err(Error::new(
+                ErrorKind::InvalidData,
+                format!(
+                    "parent block timestamp {} > current block timestamp {}",
+                    prnt_blk.timestamp, self.timestamp
+                ),
+            ));
+        }
+
+        // ensure block timestamp is no more than an hour ahead of this nodes time
+        if self.timestamp >= (Utc::now() + Duration::hours(1)).timestamp() as u64 {
+            return Err(Error::new(
+                ErrorKind::InvalidData,
+                format!(
+                    "block timestamp {} is more than 1 hour ahead of local time",
+                    self.timestamp
+                ),
+            ));
+        }
+
+        // add newly verified block to memory
+        self.state.add_verified(&self.clone()).await;
+        Ok(())
+    }
+
+    /// Mark this [`Block`](Block) accepted and updates [`State`](crate::state::State) accordingly.
+    pub async fn accept(&mut self) -> io::Result<()> {
+        self.set_status(choices::status::Status::Accepted);
+
+        // only decided blocks are persistent -- no reorg
+        self.state.write_block(&self.clone()).await?;
+        self.state.set_last_accepted_block(&self.id()).await?;
+
+        self.state.remove_verified(&self.id()).await;
+        Ok(())
+    }
+
+    /// Mark this [`Block`](Block) rejected and updates [`State`](crate::state::State) accordingly.
+    pub async fn reject(&mut self) -> io::Result<()> {
+        self.set_status(choices::status::Status::Rejected);
+
+        // only decided blocks are persistent -- no reorg
+        self.state.write_block(&self.clone()).await?;
+
+        self.state.remove_verified(&self.id()).await;
+        Ok(())
+    }
+}
+```
+
+#### `verify`
+
+This method verifies that a block is valid and stores it in the memory. It is important to store the
+verified block in the memory and return them in the `vm.get_block()` method.
+
+```rust title="/timestampvm/src/block/mod.rs"
+pub async fn verify(&mut self) -> io::Result<()> {
+    if self.height == 0 && self.parent_id == ids::Id::empty() {
+        log::debug!(
+            "block {} has an empty parent Id since it's a genesis block -- skipping verify",
+            self.id
+        );
+        self.state.add_verified(&self.clone()).await;
+        return Ok(());
+    }
+
+    // if already exists in database, it means it's already accepted
+    // thus no need to verify once more
+    if self.state.get_block(&self.id).await.is_ok() {
+        log::debug!("block {} already verified", self.id);
+        return Ok(());
+    }
+
+    let prnt_blk = self.state.get_block(&self.parent_id).await?;
+
+    // ensure the height of the block is immediately following its parent
+    if prnt_blk.height != self.height - 1 {
+        return Err(Error::new(
+            ErrorKind::InvalidData,
+            format!(
+                "parent block height {} != current block height {} - 1",
+                prnt_blk.height, self.height
+            ),
+        ));
+    }
+
+    // ensure block timestamp is after its parent
+    if prnt_blk.timestamp > self.timestamp {
+        return Err(Error::new(
+            ErrorKind::InvalidData,
+            format!(
+                "parent block timestamp {} > current block timestamp {}",
+                prnt_blk.timestamp, self.timestamp
+            ),
+        ));
+    }
+
+    // ensure block timestamp is no more than an hour ahead of this nodes time
+    if self.timestamp >= (Utc::now() + Duration::hours(1)).timestamp() as u64 {
+        return Err(Error::new(
+            ErrorKind::InvalidData,
+            format!(
+                "block timestamp {} is more than 1 hour ahead of local time",
+                self.timestamp
+            ),
+        ));
+    }
+
+    // add newly verified block to memory
+    self.state.add_verified(&self.clone()).await;
+    Ok(())
+}
+```
+
+#### `accept`
+
+Called by the consensus engine to indicate this block is accepted.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn accept(&mut self) -> io::Result<()> {
     self.set_status(choices::status::Status::Accepted);
 
-    // solo los bloques decididos son persistentes, sin reorganización
+    // only decided blocks are persistent -- no reorg
     self.state.write_block(&self.clone()).await?;
     self.state.set_last_accepted_block(&self.id()).await?;
 
@@ -433,24 +576,121 @@ pub async fn accept(&mut self) -> io::Result<()> {
 
 #### `reject`
 
-Called by the consensus engine to indicate this block is rejected.
+Called by the consensus engine to indicate the block is rejected.
 
 ```rust title="/timestampvm/src/block/mod.rs"
 pub async fn reject(&mut self) -> io::Result<()> {
     self.set_status(choices::status::Status::Rejected);
 
-    // solo los bloques decididos son persistentes, sin reorganización
+    // only decided blocks are persistent -- no reorg
     self.state.write_block(&self.clone()).await?;
 
     self.state.remove_verified(&self.id()).await;
     Ok(())
 }
+```
+
+#### Block Field Methods
+
+These methods are required by the `snowman::Block` trait.
+
+```rust title="/timestampvm/src/block/mod.rs"
+impl subnet::rpc::consensus::snowman::Block for Block {
+    async fn bytes(&self) -> &[u8] {
+        return self.bytes.as_ref();
+    }
+
+    async fn to_bytes(&self) -> io::Result<Vec<u8>> {
+        self.to_slice()
+    }
+
+    async fn height(&self) -> u64 {
+        self.height
+    }
+
+    async fn timestamp(&self) -> u64 {
+        self.timestamp
+    }
+
+    async fn parent(&self) -> ids::Id {
+        self.parent_id.clone()
+    }
+
+    async fn verify(&mut self) -> io::Result<()> {
+        self.verify().await
+    }
+}
+```
+
+#### Helper Functions
+
+These methods are convenience methods for blocks.
+
+#### `init`
+
+Initializes a block from a bytes slice and status.
+
+```rust title="/timestampvm/src/block/mod.rs"
+impl subnet::rpc::consensus::snowman::Initializer for Block {
+    async fn init(&mut self, bytes: &[u8], status: choices::status::Status) -> io::Result<()> {
+        *self = Block::from_slice(bytes)?;
+        self.status = status;
+
+        Ok(())
+    }
+}
+```
+
+#### `set_status`
+
+Updates the status of this block.
+
+```rust title="/timestampvm/src/block/mod.rs"
+impl subnet::rpc::consensus::snowman::StatusWriter for Block {
+    async fn set_status(&mut self, status: choices::status::Status) {
+        self.set_status(status)
+    }
+}
+```
+
+### Coding the Virtual Machine
+
+Now, let’s look at our timestamp VM implementation, which implements the `block::ChainVM` trait.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+pub struct Vm {
+    /// Maintains the Vm-specific states.
+    pub state: Arc<RwLock<VmState>>,
+    pub app_sender: Option<Box<dyn subnet::rpc::common::appsender::AppSender + Send + Sync>>,
+
+    /// A queue of data that have not been put into a block and proposed yet.
+    /// Mempool is not persistent, so just keep in memory via Vm.
+    pub mempool: Arc<RwLock<VecDeque<Vec<u8>>>>,
+}
+
+/// Represents VM-specific states.
+/// Defined in a separate struct, for interior mutability in [`Vm`](Vm).
+/// To be protected with `Arc` and `RwLock`.
+pub struct VmState {
+    pub ctx: Option<subnet::rpc::context::Context>,
+    pub version: Version,
+    pub genesis: Genesis,
+
+    /// Represents persistent Vm state.
+    pub state: Option<state::State>,
+    /// Currently preferred block Id.
+    pub preferred: ids::Id,
+    /// Channel to send messages to the snowman consensus engine.
+    pub to_engine: Option<Sender<subnet::rpc::common::message::Message>>,
+    /// Set "true" to indicate that the Vm has finished bootstrapping
+    /// for the chain.
+    pub bootstrapped: bool,
 }
 ```
 
 #### `initialize`
 
-Este método se llama cuando se inicializa una nueva instancia de la VM. El bloque génesis se crea bajo este método.
+This method is called when a new instance of VM is initialized. Genesis block is created under this method.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn initialize(
@@ -464,7 +704,7 @@ async fn initialize(
     _fxs: &[subnet::rpc::common::vm::Fx],
     app_sender: Box<dyn subnet::rpc::common::appsender::AppSender + Send + Sync>,
 ) -> io::Result<()> {
-    log::info!("inicializando Vm");
+    log::info!("initializing Vm");
     let mut vm_state = self.state.write().await;
 
     vm_state.ctx = ctx;
@@ -491,7 +731,7 @@ async fn initialize(
     if has_last_accepted {
         let last_accepted_blk_id = state.get_last_accepted_block_id().await?;
         vm_state.preferred = last_accepted_blk_id;
-        log::info!("Vm inicializada con el último bloque aceptado {last_accepted_blk_id}");
+        log::info!("initialized Vm with last accepted block {last_accepted_blk_id}");
     } else {
         let mut genesis_block = Block::new(
             ids::Id::empty(),
@@ -503,25 +743,25 @@ async fn initialize(
         genesis_block.set_state(state.clone());
         genesis_block.accept().await?;
 
-
         let genesis_blk_id = genesis_block.id();
         vm_state.preferred = genesis_blk_id;
-        log::info!("VM inicializada con bloque génesis {genesis_blk_id}");
+        log::info!("initialized Vm with genesis block {genesis_blk_id}");
     }
 
     self.mempool = Arc::new(RwLock::new(VecDeque::with_capacity(100)));
 
-    log::info!("VM inicializada exitosamente");
+    log::info!("successfully initialized Vm");
     Ok(())
 }
 ```
 
 #### `create_handlers`
 
-Registra los controladores definidos en `api::chain_handlers::Service`. Ver más abajo para más información sobre las APIs.
+Registers handlers defined in `api::chain_handlers::Service`. See
+[below](/build/vm/create/rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
-/// Crea los controladores específicos de la VM.
+/// Creates VM-specific handlers.
 async fn create_handlers(
     &mut self,
 ) -> io::Result<HashMap<String, subnet::rpc::common::http_handler::HttpHandler>> {
@@ -540,7 +780,8 @@ async fn create_handlers(
 
 #### `create_static_handlers`
 
-Registra los controladores definidos en `api::chain_handlers::Service`. Ver más abajo para más información sobre las APIs.
+Registers handlers defined in `api::chain_handlers::Service`. See
+[below](/build/vm/create/rust-vm.md#api) for more on APIs.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn create_static_handlers(
@@ -561,7 +802,7 @@ async fn create_static_handlers(
 
 #### `build_block`
 
-Construye un nuevo bloque a partir de los datos de la mempool y lo devuelve. Esto es principalmente solicitado por el motor de consenso.
+Builds a new block from mempool data and returns it. This is primarily requested by the consensus engine.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 async fn build_block(
@@ -569,17 +810,17 @@ async fn build_block(
 ) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
     let mut mempool = self.mempool.write().await;
 
-    log::info!("se llamó a build_block para la mempool de {} elementos", mempool.len());
+    log::info!("build_block called for {} mempool", mempool.len());
     if mempool.is_empty() {
-        return Err(Error::new(ErrorKind::Other, "ningún bloque pendiente"));
+        return Err(Error::new(ErrorKind::Other, "no pending block"));
     }
 
     let vm_state = self.state.read().await;
     if let Some(state) = &vm_state.state {
         self.notify_block_ready().await;
 
-        // "state" debe tener el bloque preferido en caché/verified_block
-        // de lo contrario, error de no encontrado desde la base de datos rpcchainvm
+        // "state" must have preferred block in cache/verified_block
+        // otherwise, not found error from rpcchainvm database
         let prnt_blk = state.get_block(&vm_state.preferred).await?;
         let unix_now = Utc::now().timestamp() as u64;
 
@@ -594,17 +835,18 @@ async fn build_block(
         block.set_state(state.clone());
         block.verify().await?;
 
-        log::info!("bloque construido exitosamente");
+        log::info!("successfully built block");
         return Ok(Box::new(block));
     }
 
-    Err(Error::new(ErrorKind::NotFound, "administrador de estado no encontrado"))
+    Err(Error::new(ErrorKind::NotFound, "state manager not found"))
 }
 ```
 
 #### `notify_block_ready`
 
-Indica al motor de consenso que un nuevo bloque está listo para ser creado. Después de esto, el motor de consenso llamará de vuelta a `vm.build_block`.
+Signals the consensus engine that a new block is ready to be created. After this is sent the
+consensus engine will call back to `vm.build_block`.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub async fn notify_block_ready(&self) {
@@ -613,18 +855,18 @@ pub async fn notify_block_ready(&self) {
         engine
             .send(subnet::rpc::common::message::Message::PendingTxs)
             .await
-            .unwrap_or_else(|e| log::warn!("descartando mensaje al motor de consenso: {}", e));
+            .unwrap_or_else(|e| log::warn!("dropping message to consensus engine: {}", e));
 
-        log::info!("¡notificado de que el bloque está listo!");
+        log::info!("notified block ready!");
     } else {
-        log::error!("fallo al inicializar el canal del motor de consenso");
+        log::error!("consensus engine channel failed to initialized");
     }
 }
 ```
 
 #### `get_block`
 
-Devuelve el bloque con el ID de bloque dado.
+Returns the block with the given block ID.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 impl subnet::rpc::snowman::block::Getter for Vm {
@@ -638,105 +880,205 @@ impl subnet::rpc::snowman::block::Getter for Vm {
             return Ok(Box::new(block));
         }
 
-        Err(Error::new(ErrorKind::NotFound, "administrador de estado no encontrado"))
+        Err(Error::new(ErrorKind::NotFound, "state manager not found"))
     }
 }
 ```
 
 #### `propose_block`
 
-Propone datos arbitrarios a la mempool y notifica que un bloque está listo para ser construido. Otras VM pueden optimizar la mempool con mecanismos de agrupación más complicados.
+Proposes arbitrary data to mempool and notifies that a block is ready for builds. Other VMs may
+optimize mempool with more complicated batching mechanisms.
 
 ```rust title="/timestampvm/src/vm/mod.rs"
 pub async fn propose_block(&self, d: Vec<u8>) -> io::Result<()> {
     let size = d.len();
-    log::info!("recibido propose_block de {size} bytes");
+    log::info!("received propose_block of {size} bytes");
 
-
-
-    fn propose_block(&self, args: ProposeBlockArgs) -> BoxFuture<Result<ProposeBlockResponse>> {
-        log::debug!("proposeBlock called");
-        let size = args.data.len();
-        if size > PROPOSE_LIMIT_BYTES {
-            log::info!("límite excedido... devolviendo un error...");
-            return Box::pin(async move {
-                Err(Error::new(
-                    ErrorKind::InvalidInput,
-                    format!(
-                        "los datos de {} bytes exceden el límite de {} bytes",
-                        size, PROPOSE_LIMIT_BYTES
-                    ),
-                ))
-            });
-        }
-
-        let mut mempool = self.vm.mempool.write().await;
-        mempool.push_back(args.data);
-        log::info!("se propusieron {} bytes de datos para un bloque");
-
-        self.vm.notify_block_ready().await;
-        Box::pin(async move { Ok(ProposeBlockResponse { success: true }) })
+    if size > PROPOSE_LIMIT_BYTES {
+        log::info!("limit exceeded... returning an error...");
+        return Err(Error::new(
+            ErrorKind::InvalidInput,
+            format!(
+                "data {}-byte exceeds the limit {}-byte",
+                size, PROPOSE_LIMIT_BYTES
+            ),
+        ));
     }
 
-    fn last_accepted(&self) -> BoxFuture<Result<LastAcceptedResponse>> {
-        log::debug!("lastAccepted called");
-        let vm_state = self.vm.state.read().await;
-        if let Some(state) = &vm_state.state {
-            let last_accepted = state.last_accepted();
-            Box::pin(async move { Ok(LastAcceptedResponse { id: last_accepted }) })
-        } else {
-            Box::pin(async move { Err(Error::new(ErrorKind::NotFound, "administrador de estado no encontrado")) })
-        }
-    }
+    let mut mempool = self.mempool.write().await;
+    mempool.push_back(d);
+    log::info!("proposed {size} bytes of data for a block");
 
-    fn get_block(&self, args: GetBlockArgs) -> BoxFuture<Result<GetBlockResponse>> {
-        log::debug!("getBlock called");
-        let vm_state = self.vm.state.read().await;
+    self.notify_block_ready().await;
+    Ok(())
+}
+```
+
+#### `parse_block`
+
+Parses a block from its byte representation.
+
+```rust title="/timestampvm/src/vm/mod.rs"
+impl subnet::rpc::snowman::block::Parser for Vm {
+    async fn parse_block(
+        &self,
+        bytes: &[u8],
+    ) -> io::Result<Box<dyn subnet::rpc::consensus::snowman::Block + Send + Sync>> {
+        let vm_state = self.state.read().await;
         if let Some(state) = &vm_state.state {
-            let block_id = ids::Id::from_str(&args.id).unwrap();
-            match state.get_block(&block_id).await {
-                Ok(block) => Box::pin(async move { Ok(GetBlockResponse { block }) }),
-                Err(_) => Box::pin(async move { Err(Error::new(ErrorKind::NotFound, "bloque no encontrado")) }),
-            }
-        } else {
-            Box::pin(async move { Err(Error::new(ErrorKind::NotFound, "administrador de estado no encontrado")) })
+            let mut new_block = Block::from_slice(bytes)?;
+            new_block.set_status(choices::status::Status::Processing);
+            new_block.set_state(state.clone());
+            log::debug!("parsed block {}", new_block.id());
+
+            match state.get_block(&new_block.id()).await {
+                Ok(prev) => {
+                    log::debug!("returning previously parsed block {}", prev.id());
+                    return Ok(Box::new(prev));
+                }
+                Err(_) => return Ok(Box::new(new_block)),
+            };
         }
+
+        Err(Error::new(ErrorKind::NotFound, "state manager not found"))
     }
 }
 ```
 
-### Main
+#### `set_preference`
 
-The `main` function is the entry point of the `timestampvm-rs` application. It initializes the logger,
-configures the network, and starts the server.
+Sets the container preference of the VM.
 
-```rust title="/timestampvm/src/main.rs"
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Initialize logger
-    logger::init();
-
-    // Load configuration
-    let config = Config::load()?;
-
-    // Configure network
-    let network_config = NetworkConfig::new(
-        config.network.listen_address,
-        config.network.public_address,
-        config.network.network_id,
-        config.network.network_peers,
-    );
-
-    // Start server
-    let server = Server::new(config, network_config)?;
-    server.start().await?;
+```rust title="/timestampvm/src/vm/mod.rs"
+pub async fn set_preference(&self, id: ids::Id) -> io::Result<()> {
+    let mut vm_state = self.state.write().await;
+    vm_state.preferred = id;
 
     Ok(())
 }
 ```
 
+### Mempool
+
+The mempool is a buffer of volatile memory that stores pending transactions. Transactions are stored
+in the mempool whenever a node learns about a new transaction.
+
+The mempool implementation for `timestampvm-rs` is very simple.
+
+```rust
+ mempool: Arc::new(RwLock::new(VecDeque::with_capacity(100))),
+```
+
+By using
+[VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) we
+can have better control of element ordering (ex. pop_back(), pop_front()).
+
+### Static API
+
+:::note
+
+If this method is called, no other method will be called on this VM. Each registered VM will have a
+single instance created to handle static APIs. This instance will be handled separately from
+instances created to service an instance of a chain.
+
+:::
+
+```rust title="/timestampvm/src/api/static_handlers.rs"
+#[rpc]
+pub trait Rpc {
+    #[rpc(name = "ping", alias("timestampvm.ping"))]
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>>;
+}
+
+/// Implements API services for the static handlers.
+pub struct Service {
+    pub vm: vm::Vm,
+}
+
+impl Service {
+    pub fn new(vm: vm::Vm) -> Self {
+        Self { vm }
+    }
+}
+
+impl Rpc for Service {
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>> {
+        log::debug!("ping called");
+        Box::pin(async move { Ok(crate::api::PingResponse { success: true }) })
+    }
+}
+```
+
+### API
+
+Defines RPCs specific to the chain.
+
+```rust title="/timestampvm/src/api/chain_handlers.rs"
+#[rpc]
+pub trait Rpc {
+    /// Pings the VM.
+    #[rpc(name = "ping", alias("timestampvm.ping"))]
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>>;
+
+    /// Proposes the arbitrary data.
+    #[rpc(name = "proposeBlock", alias("timestampvm.proposeBlock"))]
+    fn propose_block(&self, args: ProposeBlockArgs) -> BoxFuture<Result<ProposeBlockResponse>>;
+
+    /// Fetches the last accepted block.
+    #[rpc(name = "lastAccepted", alias("timestampvm.lastAccepted"))]
+    fn last_accepted(&self) -> BoxFuture<Result<LastAcceptedResponse>>;
+
+    /// Fetches the block.
+    #[rpc(name = "getBlock", alias("timestampvm.getBlock"))]
+    fn get_block(&self, args: GetBlockArgs) -> BoxFuture<Result<GetBlockResponse>>;
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ProposeBlockArgs {
+    #[serde(with = "avalanche_types::codec::serde::base64_bytes")]
+    pub data: Vec<u8>,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ProposeBlockResponse {
+    pub success: bool,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LastAcceptedResponse {
+    pub id: ids::Id,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct GetBlockArgs {
+    pub id: String,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct GetBlockResponse {
+    pub block: Block,
+}
+
+/// Implements API services for the chain-specific handlers.
+pub struct Service {
+    pub vm: vm::Vm,
+}
+
+impl Service {
+    pub fn new(vm: vm::Vm) -> Self {
+        Self { vm }
+    }
+}
+
+impl Rpc for Service {
+    fn ping(&self) -> BoxFuture<Result<crate::api::PingResponse>> {
+        log::debug!("ping called");
+        Box::pin(async move { Ok(crate::api::PingResponse { success: true }) })
+    }
+
     fn propose_block(&self, args: ProposeBlockArgs) -> BoxFuture<Result<ProposeBlockResponse>> {
-        log::debug!("se llamó a propose_block");
+        log::debug!("propose_block called");
         let vm = self.vm.clone();
 
         Box::pin(async move {
@@ -748,7 +1090,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     fn last_accepted(&self) -> BoxFuture<Result<LastAcceptedResponse>> {
-        log::debug!("se llamó al método last_accepted");
+        log::debug!("last accepted method called");
         let vm = self.vm.clone();
 
         Box::pin(async move {
@@ -764,7 +1106,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             Err(Error {
                 code: ErrorCode::InternalError,
-                message: String::from("no se encontró el administrador de estado"),
+                message: String::from("no state manager found"),
                 data: None,
             })
         })
@@ -772,7 +1114,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     fn get_block(&self, args: GetBlockArgs) -> BoxFuture<Result<GetBlockResponse>> {
         let blk_id = ids::Id::from_str(&args.id).unwrap();
-        log::info!("se llamó a get_block para {}", blk_id);
+        log::info!("get_block called for {}", blk_id);
 
         let vm = self.vm.clone();
 
@@ -789,7 +1131,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             Err(Error {
                 code: ErrorCode::InternalError,
-                message: String::from("no se encontró el administrador de estado"),
+                message: String::from("no state manager found"),
                 data: None,
             })
         })
@@ -797,12 +1139,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-A continuación se muestran ejemplos de llamadas a la API, en los que "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" es
-el ID de la blockchain.
+Below are examples of API calls, in which "2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7" is
+the blockchain ID.
 
 #### `timestampvm.getBlock`
 
-Dado un ID de bloque válido, devuelve un bloque serializado.
+Given a valid block ID, returns a serialized block.
 
 ```sh
 curl -X POST --data '{
@@ -812,16 +1154,16 @@ curl -X POST --data '{
     "params" : [{"id":"SDfFUzkdzWZbJ6YMysPPNEF5dWLp9q35mEMaLa8Ha2w9aMKoC"}]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
 
-# ejemplo de respuesta
+# example response
 # {"jsonrpc":"2.0","result":{"block":{"data":"0x32596655705939524358","height":0,"parent_id":"11111111111111111111111111111111LpoYY","timestamp":0}},"id":1}
 ```
 
 #### `timestampvm.proposeBlock`
 
-Propone datos arbitrarios para un nuevo bloque en el consenso.
+Proposes arbitrary data for a new block to consensus.
 
 ```sh
-# para proponer datos
+# to propose data
 echo 1 | base64 | tr -d \\n
 # MQo=
 
@@ -832,13 +1174,13 @@ curl -X POST --data '{
     "params" : [{"data":"MQo="}]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
 
-# ejemplo de respuesta
+# example response
 # {"jsonrpc":"2.0","result":{"success":true},"id":1}
 ```
 
 #### `timestampvm.lastAccepted`
 
-Devuelve el ID del último bloque aceptado.
+Returns the ID of the last accepted block.
 
 ```sh
 curl -X POST --data '{
@@ -848,55 +1190,126 @@ curl -X POST --data '{
     "params" : []
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/2wb1UXxAstB8ywwv4rU2rFCjLgXnhT44hbLPbwpQoGvFb2wRR7/rpc
 
-# ejemplo de respuesta
+# example response
 # {"jsonrpc":"2.0","result":{"id":"SDfFUzkdzWZbJ6YMysPPNEF5dWLp9q35mEMaLa8Ha2w9aMKoC"},"id":1}
 ```
 
 ### Plugin
 
-Para que esta VM sea compatible con `go-plugin`, necesitamos definir un paquete y método `main`,
-que sirva nuestra VM a través de gRPC para que AvalancheGo pueda llamar a sus métodos.
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method,
+which serves our VM over gRPC so that AvalancheGo can call its methods.
 
-El contenido de `main.rs` es:
+`main.rs`'s contents are:
 
 ```rust title="timestampvm/src/bin/timestampvm/main.rs"
 async fn main() -> io::Result<()> {
     let matches = Command::new(APP_NAME)
         .version(crate_version!())
-        .about("VM de Timestamp")
+        .about("Timestamp Vm")
         .subcommands(vec![genesis::command(), vm_id::command()])
         .get_matches();
 
+    // ref. https://github.com/env-logger-rs/env_logger/issues/47
+    env_logger::init_from_env(
+        env_logger::Env::default().filter_or(env_logger::DEFAULT_FILTER_ENV, "info"),
+    );
 
+    match matches.subcommand() {
+        Some((genesis::NAME, sub_matches)) => {
+            let data = sub_matches.get_one::<String>("DATA").expect("required");
+            let genesis = timestampvm::genesis::Genesis { data: data.clone() };
+            println!("{genesis}");
 
-// ref. https://github.com/env-logger-rs/env_logger/issues/47
-env_logger::init_from_env(
-    env_logger::Env::default().filter_or(env_logger::DEFAULT_FILTER_ENV, "info"),
-);
+            Ok(())
+        }
 
-match matches.subcommand() {
-    Some((genesis::NAME, sub_matches)) => {
-        let data = sub_matches.get_one::<String>("DATA").expect("required");
-        let genesis = timestampvm::genesis::Genesis { data: data.clone() };
-        println!("{genesis}");
+        Some((vm_id::NAME, sub_matches)) => {
+            let vm_name = sub_matches.get_one::<String>("VM_NAME").expect("required");
+            let id = subnet::vm_name_to_id(vm_name)?;
+            println!("{id}");
 
-        Ok(())
-    }
+            Ok(())
+        }
 
-    Some((vm_id::NAME, sub_matches)) => {
-        let vm_name = sub_matches.get_one::<String>("VM_NAME").expect("required");
-        let id = subnet::vm_name_to_id(vm_name)?;
-        println!("{id}");
+        _ => {
+            log::info!("starting timestampvm");
 
-        Ok(())
-    }
-
-    _ => {
-        log::info!("starting timestampvm");
-
-        let (stop_ch_tx, stop_ch_rx): (Sender<()>, Receiver<()>) = broadcast::channel(1);
-        let vm_server = subnet::rpc::vm::server::Server::new(vm::Vm::new(), stop_ch_tx);
-        subnet::rpc::plugin::serve(vm_server, stop_ch_rx).await
+            let (stop_ch_tx, stop_ch_rx): (Sender<()>, Receiver<()>) = broadcast::channel(1);
+            let vm_server = subnet::rpc::vm::server::Server::new(vm::Vm::new(), stop_ch_tx);
+            subnet::rpc::plugin::serve(vm_server, stop_ch_rx).await
+        }
     }
 }
+```
+
+### Installing a VM
+
+AvalancheGo searches for and registers VM plugins under the `plugins` [directory](/nodes/configure/avalanchego-config-flags.md#--plugin-dir-string).
+
+To install the virtual machine onto your node, you need to move the built virtual machine binary
+under this directory. Virtual machine executable names must be either a full virtual machine ID
+(encoded in CB58), or a VM alias.
+
+Copy the binary into the plugins directory.
+
+```bash
+cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
+```
+
+#### Node Is Not Running
+
+If your node isn't running yet, you can install all virtual machines under your `plugin` directory
+by starting the node.
+
+#### Node Is Already Running
+
+Load the binary with the `loadVMs` API.
+
+```bash
+curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.loadVMs",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+Confirm the response of `loadVMs` contains the newly installed virtual machine
+`tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX`. You'll see this virtual machine as well as any
+others that weren't already installed previously in the response.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjcJ32c6GpePhtqo9rrHJ1oR9wFBtCcMgaosthX": [
+        "timestampvm-rs",
+        "timestamp-rs"
+      ],
+      "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": []
+    }
+  },
+  "id": 1
 }
+```
+
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm-rs` and
+`/ext/vm/timestamp-rs`. For more details about VM configs, see
+[here](/nodes/configure/avalanchego-config-flags.md#vm-configs).
+
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
+AvalancheGo would also accept `timestampvm-rs` or `timestamp-rs` since those are registered aliases
+in previous step.
+
+## Wrapping Up
+
+That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp
+server written in Rust!
+
+In this tutorial, we learned:
+
+- The `block::ChainVM` trait, which all VMs that define a linear chain must implement
+- The `snowman::Block` trait, which all blocks that are part of a linear chain must implement
+- The `subnet` mod, which allows blockchains to run in their own processes using the `rpcchainvm`.
+- An actual implementation of `block::ChainVM` and `snowman::Block`.

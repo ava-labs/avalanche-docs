@@ -335,3 +335,4 @@ type Decidable interface {
 //
 // Si se ha llamado a Accept en un elemento con este ID, se debe devolver Accepted. De manera similar, si se ha llamado a Reject en un elemento con este ID, se debe devolver Rejected. Si el contenido de este elemento es desconocido, entonces se debe devolver Unknown. De lo contrario, se debe devolver Processing.
 Status() Status
+```

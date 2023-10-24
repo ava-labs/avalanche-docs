@@ -95,12 +95,12 @@ _AvalancheGo inicia/detiene tu proceso varias veces antes de lanzar la inicializ
 - [VM.StateSyncEnabled](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.StateSyncEnabled)
   - Devolución: `true` si quieres habilitar StateSync, `false` en caso contrario.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
-    _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
+  _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
   - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `StateSyncing`.
   - Establece el estado de tu blockchain a `StateSyncing`.
   - Devolución: una [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) construida a partir del bloque génesis.
 - [VM.GetOngoingSyncStateSummary](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.GetOngoingSyncStateSummary)
-    _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
+  _Si habías especificado `true` en el resultado de `StateSyncEnabled`_
   - Devolución: una [GetOngoingSyncStateSummaryResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.GetOngoingSyncStateSummaryResponse) construida a partir del bloque génesis.
 - [VM.SetState](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.SetState)
   - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `Bootstrapping`.
@@ -113,11 +113,11 @@ _AvalancheGo inicia/detiene tu proceso varias veces antes de lanzar la inicializ
   - Parámetro: una [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) con el valor `NormalOp`.
   - Establece el estado de tu blockchain a `NormalOp`.
   - Devolución: una [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) construida a partir del bloque génesis.
-- [VM.Connected](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Connected) 
-(para cada otro nodo que valida esta Subnet en la red)
+- [VM.Connected](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Connected)
+  (para cada otro nodo que valida esta Subnet en la red)
   - Parámetro: una [ConnectedRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ConnectedRequest) con el NodeID y la versión de AvalancheGo.
   - Devolución: Vacío.
-- [VM.Health](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Health) 
+- [VM.Health](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Health)
   - Parámetro: Vacío.
   - Devolución: una [HealthResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.HealthResponse) con una propiedad `details` vacía.
 - [VM.ParseBlock](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.ParseBlock)
@@ -134,11 +134,11 @@ Cuando tu VM recibe transacciones (por ejemplo, usando los puntos finales json-R
 
 Supongamos que tenemos una red de 3 nodos con nodeX, nodeY, nodeZ.
 
-NodeX ha recibido una nueva transacción en su punto final json-RPC: 
+NodeX ha recibido una nueva transacción en su punto final json-RPC:
 _en nodeX_
 
 - [`AppSender.SendAppGossip`](https://buf.build/ava-labs/avalanche/docs/main:appsender#appsender.AppSender.SendAppGossip)
-(cliente)
+  (cliente)
   - Debes serializar los datos de tu transacción en un arreglo de bytes y llamar al método `SendAppGossip` para propagar la transacción.
 
 AvalancheGo luego propaga esto a los otros nodos.
@@ -157,8 +157,8 @@ Supongamos que nodeY quiere construir el bloque. _probablemente implementarás a
 
 _en nodeY_
 
-- _cliente_ 
-[`Messenger.Notify`](https://buf.build/ava-labs/avalanche/docs/main:messenger#messenger.Messenger.Notify)
+- _cliente_
+  [`Messenger.Notify`](https://buf.build/ava-labs/avalanche/docs/main:messenger#messenger.Messenger.Notify)
   - Debes enviar una solicitud de notificación a AvalancheGo llamando al método con el valor `MESSAGE_BUILD_BLOCK`.
 
 _en nodeY_
@@ -212,7 +212,7 @@ Hay tres bloques en conflicto (hashes diferentes), y si miramos los archivos de 
 ... snowman/voter.go:58 filtrando resultados de la votación ...
 ... snowman/voter.go:65 finalizando votación ...
 ... snowman/voter.go:87 el motor Snowman no puede quedar en reposo
-... 
+...
 ... snowman/voter.go:58 filtrando resultados de la votación ...
 ... snowman/voter.go:65 finalizando votación ...
 ... snowman/topological.go:600 aceptando bloque
@@ -241,8 +241,9 @@ Para habilitar tu punto de conexión json-RPC, debes implementar el método Hand
 - [`Http.HandleSimple`](https://buf.build/ava-labs/avalanche/docs/main:http#http.HTTP.HandleSimple)
   - Parámetro: un [HandleSimpleHTTPRequest](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPRequest) que contiene el método, la URL, las cabeceras y el cuerpo de la solicitud original.
   - Analiza, deserializa y maneja la solicitud
-    
+
     _por ejemplo, si la solicitud representa una transacción, debemos deserializarla, verificar la firma, almacenarla y difundirla a los otros nodos usando el cliente de mensajería (ver [secuencia de construcción de bloques](#secuencia-de-construcción-de-bloques))_
+
   - Retorna la respuesta [HandleSimpleHTTPResponse](https://buf.build/ava-labs/avalanche/docs/main:http#http.HandleSimpleHTTPResponse) que se enviará de vuelta al remitente original.
 
 Este servidor se registra con AvalancheGo durante el proceso de inicialización cuando se llama al método `VM.CreateHandlers`.

@@ -32,10 +32,10 @@ El repositorio de BlobVM tiene algunos componentes para manejar el ciclo de vida
 - **Mempool** - Almacena transacciones pendientes que aún no se han finalizado
 - **Red** - Propaga transacciones desde el mempool a otros nodos en la red
 - **Bloque** - Define el formato del bloque, cómo verificarlo y cómo debe ser aceptado o rechazado
-en la red
+  en la red
 - **Constructor de Bloques** - Construye bloques incluyendo transacciones del mempool
 - **Máquina Virtual** - Lógica a nivel de aplicación. Implementa la interfaz de la VM necesaria para interactuar con
-el consenso Avalanche y define el plano de la blockchain.
+  el consenso Avalanche y define el plano de la blockchain.
 - **Servicio** - Expone APIs para que los usuarios puedan interactuar con la VM
 - **Fábrica** - Utilizada para inicializar la VM
 
@@ -50,14 +50,14 @@ ciclo de vida de una transacción desde su emisión hasta su finalización en la
 - La transacción se envía a la VM
   - La transacción se agrega al mempool de la VM
 - La VM periódicamente de forma asíncrona hace gossip de nuevas transacciones en su mempool a otros nodos en la
-red para que puedan conocerlas
+  red para que puedan conocerlas
 - La VM envía al motor de consenso Avalanche un mensaje para indicar que tiene transacciones en el
-mempool que están listas para ser construidas en un bloque
+  mempool que están listas para ser construidas en un bloque
 - La VM propone el bloque con el consenso
 - El consenso verifica que el bloque sea válido y esté bien formado
 - El consenso hace que la red vote si el bloque debe ser aceptado o rechazado
   - Si un bloque es rechazado, sus transacciones son reclamadas por el mempool para que puedan ser incluidas en
-   un bloque futuro
+    un bloque futuro
   - Si un bloque es aceptado, se finaliza escribiéndolo en la blockchain
 
 ## Codificando la Máquina Virtual
@@ -93,9 +93,9 @@ cantidad arbitraria de tipos de transacciones únicas para soportar diferentes o
 BlobVM implementa dos tipos de transacciones diferentes:
 
 - [TransferTx](https://github.com/ava-labs/blobvm/blob/master/chain/transfer_tx.go) - Transfiere monedas
-entre cuentas.
+  entre cuentas.
 - [SetTx](https://github.com/ava-labs/blobvm/blob/master/chain/set_tx.go) - Almacena un par clave-valor
-en la blockchain.
+  en la blockchain.
 
 #### UnsignedTransaction
 
@@ -127,23 +127,23 @@ type UnsignedTransaction interface {
 La funcionalidad común y los metadatos para los tipos de transacción son implementados por [`BaseTx`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go).
 
 - [`SetBlockID`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L26) establece el
-ID de bloque de la transacción.
+  ID de bloque de la transacción.
 - [`GetBlockID`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L22) devuelve el
-ID de bloque de la transacción.
+  ID de bloque de la transacción.
 - [`SetMagic`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L34) establece el número mágico.
-El número mágico se utiliza para diferenciar cadenas y prevenir ataques de reproducción.
+  El número mágico se utiliza para diferenciar cadenas y prevenir ataques de reproducción.
 - [`GetMagic`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L30) devuelve el número mágico.
-El número mágico está definido en el genesis.
+  El número mágico está definido en el genesis.
 - [`SetPrice`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L42) establece el precio
-por unidad de tarifa para esta transacción.
+  por unidad de tarifa para esta transacción.
 - [`GetPrice`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L38) devuelve el precio
-de esta transacción.
+  de esta transacción.
 - [`FeeUnits`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L59) devuelve las unidades de tarifa
-que esta transacción consumirá.
+  que esta transacción consumirá.
 - [`LoadUnits`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L63) idéntico a `FeeUnits`
 - [`ExecuteBase`](https://github.com/ava-labs/blobvm/blob/master/chain/base_tx.go#L46) ejecuta
-verificaciones de validación comunes en diferentes tipos de transacción. Esto valida que la transacción contenga
-un ID de bloque válido, un número mágico y un precio de gas según lo definido por el genesis.
+  verificaciones de validación comunes en diferentes tipos de transacción. Esto valida que la transacción contenga
+  un ID de bloque válido, un número mágico y un precio de gas según lo definido por el genesis.
 
 #### TransferTx
 
@@ -159,8 +159,6 @@ digestHash := crypto.Keccak256(txBytes)
 ```
 
 - Sign the digest hash with the issuer's private key.
-
-
 
 ```go
 digest, err := chain.DigestHash(utx)
@@ -193,7 +191,7 @@ txID, err = cli.IssueRawTx(ctx, tx.Bytes())
 
 La [mempool](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go) es un búfer de memoria volátil que almacena transacciones pendientes. Las transacciones se almacenan en la mempool cada vez que un nodo aprende sobre una nueva transacción ya sea a través de gossip con otros nodos o a través de una llamada de API emitida por un usuario.
 
-La mempool está implementada como un [heap](https://en.wikipedia.org/wiki/Heap_(data_structure)) min-max ordenado por el precio de gas de cada transacción. La mempool se crea durante la [inicialización](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) de la VM.
+La mempool está implementada como un [heap](<https://en.wikipedia.org/wiki/Heap_(data_structure)>) min-max ordenado por el precio de gas de cada transacción. La mempool se crea durante la [inicialización](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) de la VM.
 
 ```go
 vm.mempool = mempool.New(vm.genesis, vm.config.MempoolSize)
@@ -412,7 +410,7 @@ Veamos algunos de los métodos importantes de `vm.go` que deben ser implementado
 
 BlobVM al inicializarse persiste estos campos en su propio estado para usarlos a lo largo de la vida útil de su ejecución.
 
-```go
+````go
 // implementa "snowmanblock.ChainVM.common.VM"
 func (vm *VM) Initialize(
 	ctx *snow.Context,
@@ -594,7 +592,7 @@ totalCost += cost
 color.Yellow("subida root=%v txID=%s costo=%d costoTotal=%d", rk, txID, cost, totalCost)
 return rk, nil
 }
-```
+````
 
 #### Ejemplo 1
 
@@ -666,4 +664,4 @@ Esta documentación cubre conceptos sobre la Máquina Virtual al recorrer una VM
 almacenamiento de clave-valor descentralizado.
 
 Puedes aprender más sobre BlobVM consultando el [
-  README](https://github.com/ava-labs/blobvm/blob/master/README.md) en el repositorio de GitHub.
+README](https://github.com/ava-labs/blobvm/blob/master/README.md) en el repositorio de GitHub.
