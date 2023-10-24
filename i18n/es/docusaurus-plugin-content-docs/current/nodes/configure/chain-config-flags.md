@@ -1,175 +1,172 @@
 ---
-tags: [Nodes]
-description: Reference for all available chain config options and flags.
-sidebar_label: Chain Configs
-pagination_label: Chain Configs
+etiquetas: [Nodos]
+descripción: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
+sidebar_label: Configuraciones de la Cadena
+pagination_label: Configuraciones de la Cadena
 sidebar_position: 1
 ---
 
-# Chain Configs
+# Configuraciones de la Cadena
 
-Some chains allow the node operator to provide a custom configuration.
-AvalancheGo can read chain configurations from files and pass them to the
-corresponding chains on initialization.
+Algunas cadenas permiten que el operador del nodo proporcione una configuración personalizada.
+AvalancheGo puede leer las configuraciones de la cadena desde archivos y pasarlas a las
+cadenas correspondientes durante la inicialización.
 
-AvalancheGo looks for these files in the directory specified by
-`--chain-config-dir` AvalancheGo flag, as documented
-[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value
-defaults to `$HOME/.avalanchego/configs/chains`. This directory can have
-sub-directories whose names are chain IDs or chain aliases. Each sub-directory
-contains the configuration for the chain specified in the directory name. Each
-sub-directory should contain a file named `config`, whose value is passed in
-when the corresponding chain is initialized (see below for extension). For
-example, config for the C-Chain should be at:
+AvalancheGo busca estos archivos en el directorio especificado por
+la bandera `--chain-config-dir` de AvalancheGo, como se documenta
+[aquí](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). Si se omite, el valor
+por defecto es `$HOME/.avalanchego/configs/chains`. Este directorio puede tener
+subdirectorios cuyos nombres son ID de cadena o alias de cadena. Cada subdirectorio
+contiene la configuración de la cadena especificada en el nombre del directorio. Cada
+subdirectorio debe contener un archivo llamado `config`, cuyo valor se pasa
+cuando se inicializa la cadena correspondiente (ver más abajo para la extensión). Por
+ejemplo, la configuración para la C-Chain debería estar en:
 `{chain-config-dir}/C/config.json`.
 
-This also applies to Subnets, for example, if a Subnet's chain id is
-`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
-should be at
+Esto también se aplica a las Subnets, por ejemplo, si el ID de cadena de una Subnet es
+`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, la configuración para esta cadena
+debería estar en
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
-:::tip
+:::consejo
 
-By default, none of these directories and/or files exist. You would need to
-create them manually if needed.
+Por defecto, ninguno de estos directorios y/o archivos existe. Deberá
+crearlos manualmente si es necesario.
 
 :::
 
-The filename extension that these files should have, and the contents of these
-files, is VM-dependent. For example, some chains may expect `config.txt` while
-others expect `config.json`. If multiple files are provided with the same name
-but different extensions (for example `config.json` and `config.txt`) in the same
-sub-directory, AvalancheGo will exit with an error.
+La extensión de archivo que estos archivos deben tener, y el contenido de estos
+archivos, depende de la VM. Por ejemplo, algunas cadenas pueden esperar `config.txt` mientras
+que otras esperan `config.json`. Si se proporcionan varios archivos con el mismo nombre
+pero con extensiones diferentes (por ejemplo, `config.json` y `config.txt`) en el mismo
+subdirectorio, AvalancheGo saldrá con un error.
 
-For a given chain, AvalancheGo will follow the sequence below to look for its
-config file, where all folder and file names are case sensitive:
+Para una cadena dada, AvalancheGo seguirá la siguiente secuencia para buscar su
+archivo de configuración, donde todos los nombres de carpetas y archivos distinguen entre mayúsculas y minúsculas:
 
-- First it looks for a config sub-directory whose name is the chain ID - If it
-isn't found, it looks for a config sub-directory whose name is the chain's
-primary alias - If it's not found, it looks for a config sub-directory whose
-name is another alias for the chain
+- Primero busca un subdirectorio de configuración cuyo nombre sea el ID de la cadena - Si no
+se encuentra, busca un subdirectorio de configuración cuyo nombre sea el alias principal de la cadena - Si no se encuentra,
+busca un subdirectorio de configuración cuyo nombre sea otro alias para la cadena
 
-Alternatively, for some setups it might be more convenient to provide config
-entirely via the command line. For that, you can use AvalancheGo
-`--chain-config-content` flag, as documented
-[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
+Alternativamente, para algunas configuraciones puede ser más conveniente proporcionar la configuración
+completamente a través de la línea de comandos. Para eso, puede usar la bandera `--chain-config-content` de AvalancheGo, como se documenta
+[aquí](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
 
-It is not required to provide these custom configurations. If they are not
-provided, a VM-specific default config will be used. And the values of these
-default config are printed when the node starts.
+No es necesario proporcionar estas configuraciones personalizadas. Si no se proporcionan, se utilizará una configuración predeterminada específica de la VM. Y los valores de estas
+configuraciones predeterminadas se imprimen cuando el nodo se inicia.
 
-## C-Chain Configs
+## Configuraciones de la C-Chain
 
-In order to specify a config for the C-Chain, a JSON config file should be
-placed at `{chain-config-dir}/C/config.json`. This file does not exist by
-default.
+Para especificar una configuración para la C-Chain, se debe colocar un archivo de configuración JSON en
+`{chain-config-dir}/C/config.json`. Este archivo no existe por
+defecto.
 
-For example if `chain-config-dir` has the default value which is
-`$HOME/.avalanchego/configs/chains`, then `config.json` should be placed at
+Por ejemplo, si `chain-config-dir` tiene el valor predeterminado que es
+`$HOME/.avalanchego/configs/chains`, entonces `config.json` debería colocarse en
 `$HOME/.avalanchego/configs/chains/C/config.json`.
 
-The C-Chain config is printed out in the log when a node starts. Default values
-for each config flag are specified below.
+La configuración de la C-Chain se imprime en el registro cuando un nodo se inicia. Los valores predeterminados
+para cada bandera de configuración se especifican a continuación.
 
-Default values are overridden only if specified in the given config file. It is
-recommended to only provide values which are different from the default, as that
-makes the config more resilient to future default changes. Otherwise, if
-defaults change, your node will remain with the old values, which might
-adversely affect your node operation.
+Los valores predeterminados se anulan solo si se especifican en el archivo de configuración dado. Es
+recomendable proporcionar solo valores que sean diferentes de los predeterminados, ya que eso
+hace que la configuración sea más resistente a futuros cambios predeterminados. De lo contrario, si
+los valores predeterminados cambian, su nodo seguirá con los valores antiguos, lo que podría
+afectar negativamente la operación de su nodo.
 
-### State Sync
+### Sincronización de Estado
 
-#### `state-sync-enabled` (boolean)
+#### `state-sync-enabled` (booleano)
 
-Set to `true` to start the chain with state sync enabled. The peer will
-download chain state from peers up to a recent block near tip, then proceed with
-normal bootstrapping.
+Establece en `true` para iniciar la cadena con la sincronización de estado habilitada. El par
+descargará el estado de la cadena de los pares hasta un bloque reciente cerca de la punta, luego procederá con
+el arranque normal.
 
-Defaults to perform state sync if starting a new node from scratch. However, if
-running with an existing database it will default to false and not perform state
-sync on subsequent runs.
+Por defecto, realiza la sincronización de estado si se inicia un nuevo nodo desde cero. Sin embargo, si
+se ejecuta con una base de datos existente, el valor predeterminado será falso y no realizará la sincronización de estado
+en ejecuciones posteriores.
 
-Please note that if you need historical data, state sync isn't the right option.
-However, it is sufficient if you are just running a validator.
+Tenga en cuenta que si necesita datos históricos, la sincronización de estado no es la opción correcta.
+Sin embargo, es suficiente si solo está ejecutando un validador.
 
-#### `state-sync-skip-resume` (boolean)
+#### `state-sync-skip-resume` (booleano)
 
-If set to `true`, the chain will not resume a previously started state sync
-operation that did not complete. Normally, the chain should be able to resume
-state syncing without any issue. Defaults to `false`.
+Si se establece en `true`, la cadena no reanudará una operación de sincronización de estado iniciada previamente que no se completó. Normalmente, la cadena debería poder reanudar
+la sincronización de estado sin ningún problema. Por defecto, es `false`.
 
-#### `state-sync-min-blocks` (int)
+#### `state-sync-min-blocks` (entero)
 
-Minimum number of blocks the chain should be ahead of the local node to prefer
-state syncing over bootstrapping. If the node's database is already close to the
-chain's tip, bootstrapping is more efficient. Defaults to `300000`.
+Número mínimo de bloques por delante de la cadena que el nodo local debe estar para preferir
+la sincronización de estado sobre el arranque. Si la base de datos del nodo ya está cerca de la
+punta de la cadena, el arranque es más eficiente. Por defecto, es `300000`.
 
-#### `state-sync-ids` (string)
+#### `state-sync-ids` (cadena)
 
-Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync
-data from. An example setting of this field would be
+Lista separada por comas de ID de nodo (precedidos de `NodeID-`) para obtener datos de sincronización de estado
+de. Un ejemplo de configuración de este campo sería
 `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
-If not specified (or empty), peers are selected at random. Defaults to empty
-string (`""`).
+Si no se especifica (o está vacío), se seleccionan pares al azar. Por defecto, es una cadena vacía (`""`).
 
-#### `state-sync-server-trie-cache` (int)
+#### `state-sync-server-trie-cache` (entero)
 
-Size of trie cache used for providing state sync data to peers in MBs. Should be
-a multiple of `64`. Defaults to `64`.
+Tamaño de la caché de trie utilizada para proporcionar datos de sincronización de estado a los pares en MB. Debe ser
+un múltiplo de `64`. Por defecto, es `64`.
 
 
-### Continuous Profiling
+### Perfilado Continuo
 
-#### `continuous-profiler-dir` (string)
+#### `continuous-profiler-dir` (cadena)
 
-Enables the continuous profiler (captures a CPU/Memory/Lock profile at a
-specified interval). Defaults to `""`. If a non-empty string is provided, it
-enables the continuous profiler and specifies the directory to place the
-profiles in.
+Habilita el perfilador continuo (captura un perfil de CPU/Memoria/Bloqueo a un
+intervalo especificado). Por defecto, es `""`. Si se proporciona una cadena no vacía, se
+habilita el perfilador continuo y se especifica el directorio para colocar los
+perfiles.
 
-#### `continuous-profiler-frequency` (duration)
+#### `continuous-profiler-frequency` (duración)
 
-Specifies the frequency to run the continuous profiler. Defaults `900000000000`
-nano seconds which is 15 minutes.
+Especifica la frecuencia con la que se ejecuta el perfilador continuo. Por defecto, `900000000000`
+nanosegundos, que son 15 minutos.
 
-#### `continuous-profiler-max-files` (int)
+#### `continuous-profiler-max-files` (entero)
 
-Specifies the maximum number of profiles to keep before removing the oldest.
-Defaults to `5`.
+Especifica el número máximo de perfiles a mantener antes de eliminar los más antiguos.
+Por defecto, es `5`.
 
-### Enabling Avalanche Specific APIs
+### Habilitando APIs Específicas de Avalanche
 
-#### `snowman-api-enabled` (boolean)
+#### `snowman-api-enabled` (booleano)
 
-Enables the Snowman API. Defaults to `false`.
+Habilita la API de Snowman. Por defecto, es `false`.
 
-#### `coreth-admin-api-enabled` (boolean)
+#### `coreth-admin-api-enabled` (booleano)
 
-Enables the Admin API. Defaults to `false`.
+Habilita la API de Admin. Por defecto, es `false`.
 
-#### `coreth-admin-api-dir` (string)
+#### `coreth-admin-api-dir` (cadena)
 
-Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
-Defaults to `""`.
+Especifica el directorio para que la API de Admin use para almacenar perfiles de CPU/Memoria/Bloqueo.
+Por defecto, es `""`.
 
-### Enabling EVM APIs
+### Habilitando APIs de EVM
 
-#### `eth-apis` ([]string)
+#### `eth-apis` ([]cadena)
 
-Use the `eth-apis` field to specify the exact set of below services to enable on
-your node. If this field is not set, then the default list will be:
+Use el campo `eth-apis` para especificar el conjunto exacto de servicios a habilitar en
+su nodo. Si este campo no está configurado, entonces la lista predeterminada será:
 `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
-:::note
+:::nota
 
-The names used in this configuration flag have been updated in Coreth `v0.8.14`.
-The previous names containing `public-` and `private-` are deprecated. While
-the current version continues to accept deprecated values, they may not be
-supported in future updates and updating to the new values is recommended.
+Los nombres utilizados en esta bandera de configuración se han actualizado en Coreth `v0.8.14`.
+Los nombres anteriores que contienen `public-` y `private-` están obsoletos. Si bien
+la versión actual continúa aceptando valores obsoletos, es posible que no se admitan
+en futuras actualizaciones y se recomienda actualizar a los nuevos valores.
 
-The mapping of deprecated values and their updated equivalent follows:
+La asignación de valores obsoletos y su equivalente actualizado es la siguiente:
 
-| Deprecated                         | Use instead            |
+
+
+| Obsoleto                           | Usar en su lugar      |
 | ---------------------------------- | ---------------------- |
 | `public-eth`                       | `eth`                  |
 | `public-eth-filter`                | `eth-filter`           |
@@ -189,30 +186,30 @@ The mapping of deprecated values and their updated equivalent follows:
 
 :::note
 
-If you populate this field, it will override the defaults so you must include
-every service you wish to enable.
+Si completas este campo, anulará los valores predeterminados, por lo que debes incluir
+cada servicio que desees habilitar.
 
 :::
 
 #### `eth`
 
-The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously
-under this name have been migrated to `eth`.
+El nombre de API `public-eth` está obsoleto a partir de la versión 1.7.15, y las API previamente
+bajo este nombre se han migrado a `eth`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
 `eth_coinbase`
 `eth_etherbase`
 
 #### `eth-filter`
 
-The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs
-previously under this name have been migrated to `eth-filter`.
+El nombre de API `public-eth-filter` está obsoleto a partir de la versión 1.7.15, y las API
+anteriormente bajo este nombre se han migrado a `eth-filter`.
 
-Enables the public filter API for the `eth_*` namespace. Defaults to `true`.
+Habilita la API de filtro público para el espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
-Adds the following RPC calls (see [here](https://eth.wiki/json-rpc/API) for
-complete documentation):
+Agrega las siguientes llamadas RPC (ver [aquí](https://eth.wiki/json-rpc/API) para
+documentación completa):
 
 - `eth_newPendingTransactionFilter`
 - `eth_newPendingTransactions`
@@ -228,20 +225,20 @@ complete documentation):
 
 #### `admin`
 
-The API name `private-admin` is deprecated as of v1.7.15, and the APIs
-previously under this name have been migrated to `admin`.
+El nombre de API `private-admin` está obsoleto a partir de la versión 1.7.15, y las API
+anteriormente bajo este nombre se han migrado a `admin`.
 
-Adds the following RPC calls to the `admin_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `admin_*`. El valor predeterminado es `false`.
 
 - `admin_importChain`
 - `admin_exportChain`
 
 #### `debug`
 
-The API names `private-debug` and `public-debug` are deprecated as of v1.7.15,
-and the APIs previously under these names have been migrated to `debug`.
+Los nombres de API `private-debug` y `public-debug` están obsoletos a partir de la versión 1.7.15,
+y las API previamente bajo estos nombres se han migrado a `debug`.
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
 - `debug_dumpBlock`
 - `debug_accountRange`
@@ -254,20 +251,20 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 #### `net`
 
-Adds the following RPC calls to the `net_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `net_*`. El valor predeterminado es `true`.
 
 - `net_listening`
 - `net_peerCount`
 - `net_version`
 
-Note: Coreth is a virtual machine and does not have direct access to the
-networking layer, so `net_listening` always returns true and `net_peerCount`
-always returns 0. For accurate metrics on the network layer, users should use
-the AvalancheGo APIs.
+Nota: Coreth es una máquina virtual y no tiene acceso directo a la
+capa de red, por lo que `net_listening` siempre devuelve verdadero y `net_peerCount`
+siempre devuelve 0. Para métricas precisas sobre la capa de red, los usuarios deben usar
+las API de AvalancheGo.
 
 #### `debug-tracer`
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
 - `debug_traceChain`
 - `debug_traceBlockByNumber`
@@ -280,17 +277,17 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 #### `web3`
 
-Adds the following RPC calls to the `web3_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `web3_*`. El valor predeterminado es `true`.
 
 - `web3_clientVersion`
 - `web3_sha3`
 
 #### `internal-eth`
 
-The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs
-previously under this name have been migrated to `internal-eth`.
+El nombre de API `internal-public-eth` está obsoleto a partir de la versión 1.7.15, y las API
+anteriormente bajo este nombre se han migrado a `internal-eth`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
 - `eth_gasPrice`
 - `eth_baseFee`
@@ -299,10 +296,10 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 #### `internal-blockchain`
 
-The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the
-APIs previously under this name have been migrated to `internal-blockchain`.
+El nombre de API `internal-public-blockchain` está obsoleto a partir de la versión 1.7.15, y las
+API previamente bajo este nombre se han migrado a `internal-blockchain`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
 - `eth_chainId`
 - `eth_blockNumber`
@@ -325,11 +322,11 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 #### `internal-transaction`
 
-The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and
-the APIs previously under this name have been migrated to
+El nombre de API `internal-public-transaction-pool` está obsoleto a partir de la versión 1.7.15, y
+las API previamente bajo este nombre se han migrado a
 `internal-transaction`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
 - `eth_getBlockTransactionCountByNumber`
 - `eth_getBlockTransactionCountByHash`
@@ -351,10 +348,10 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 #### `internal-tx-pool`
 
-The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs
-previously under this name have been migrated to `internal-tx-pool`.
+El nombre de API `internal-public-tx-pool` está obsoleto a partir de la versión 1.7.15, y las
+API previamente bajo este nombre se han migrado a `internal-tx-pool`.
 
-Adds the following RPC calls to the `txpool_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `txpool_*`. El valor predeterminado es `false`.
 
 - `txpool_content`
 - `txpool_contentFrom`
@@ -363,11 +360,11 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to `false`.
 
 #### `internal-debug`
 
-The API names `internal-private-debug` and `internal-public-debug` are
-deprecated as of v1.7.15, and the APIs previously under these names have been
-migrated to `internal-debug`.
+Los nombres de API `internal-private-debug` e `internal-public-debug` están
+obsoletos a partir de la versión 1.7.15, y las API que antes estaban bajo estos nombres se han
+migrado a `internal-debug`.
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
 - `debug_getHeaderRlp`
 - `debug_getBlockRlp`
@@ -377,7 +374,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 #### `debug-handler`
 
-Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
 - `debug_verbosity`
 - `debug_vmodule`
@@ -397,19 +394,19 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
 #### `internal-account`
 
-The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs
-previously under this name have been migrated to `internal-account`.
+El nombre de API `internal-public-account` está obsoleto a partir de la versión 1.7.15, y las API
+que antes estaban bajo este nombre se han migrado a `internal-account`.
 
-Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
+Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
 - `eth_accounts`
 
 #### `internal-personal`
 
-The API name `internal-private-personal` is deprecated as of v1.7.15, and the
-APIs previously under this name have been migrated to `internal-personal`.
+El nombre de API `internal-private-personal` está obsoleto a partir de la versión 1.7.15, y las
+API que antes estaban bajo este nombre se han migrado a `internal-personal`.
 
-Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
+Agrega las siguientes llamadas RPC al espacio de nombres `personal_*`. El valor predeterminado es `false`.
 
 - `personal_listAccounts`
 - `personal_listWallets`
@@ -427,338 +424,276 @@ Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
 - `personal_initializeWallet`
 - `personal_unpair`
 
-### API Configuration
+### Configuración de la API
 
 #### `rpc-gas-cap` (int)
 
-The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and
-`eth_call`). Defaults to `50,000,000`.
+El gas máximo que consumirá una llamada RPC (utilizado en `eth_estimateGas` y
+`eth_call`). El valor predeterminado es `50,000,000`.
 
 #### `rpc-tx-fee-cap` (int)
 
-Global transaction fee (price \* `gaslimit`) cap (measured in AVAX) for
-send-transaction variants. Defaults to `100`.
+Límite global de tarifa de transacción (precio \* `gaslimit`) (medido en AVAX) para
+variantes de send-transaction. El valor predeterminado es `100`.
 
 #### `api-max-duration` (duration)
 
-Maximum API call duration. If API calls exceed this duration, they will time
-out. Defaults to `0` (no maximum).
+Duración máxima de una llamada de API. Si las llamadas de API exceden esta duración, se agotará el tiempo de espera. El valor predeterminado es `0` (sin máximo).
 
 #### `api-max-blocks-per-request` (int)
 
-Maximum number of blocks to serve per `getLogs` request. Defaults to `0` (no
-maximum).
+Número máximo de bloques para servir por solicitud de `getLogs`. El valor predeterminado es `0` (sin máximo).
 
 #### `ws-cpu-refill-rate` (duration)
 
-The refill rate specifies the maximum amount of CPU time to allot a single
-connection per second. Defaults to no maximum (`0`).
+La tasa de relleno especifica la cantidad máxima de tiempo de CPU que se asignará a una sola
+conexión por segundo. El valor predeterminado es sin máximo (`0`).
 
 #### `ws-cpu-max-stored` (duration)
 
-Specifies the maximum amount of CPU time that can be stored for a single WS
-connection. Defaults to no maximum (`0`).
+Especifica la cantidad máxima de tiempo de CPU que se pueden almacenar para una sola conexión WS. El valor predeterminado es sin máximo (`0`).
 
 #### `allow-unfinalized-queries` (boolean)
 
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults
-to `false`.
+Permite consultas de bloques/transacciones no finalizados (aún no aceptados). El valor predeterminado es `false`.
 
 #### `accepted-cache-size` `(int)
 
-Specifies the depth to keep accepted headers and accepted logs in the cache. This
-is particularly useful to improve the performance of `eth_getLogs` for recent logs.
+Especifica la profundidad para mantener encabezados y registros aceptados en la caché. Esto
+es particularmente útil para mejorar el rendimiento de `eth_getLogs` para registros recientes.
 
-### Transaction Pool
+### Pool de transacciones
 
 #### `local-txs-enabled` (boolean)
 
-Enables local transaction handling (prioritizes transactions submitted through
-this node). Defaults to `false`.
+Habilita el manejo de transacciones locales (prioriza las transacciones enviadas a través
+de este nodo). El valor predeterminado es `false`.
 
 #### `allow-unprotected-txs` (boolean)
 
-If `true`, the APIs will allow transactions that are not replay protected
-(EIP-155) to be issued through this node. Defaults to `false`.
+Si es `true`, las API permitirán que se emitan transacciones que no están protegidas contra reproducción
+(EIP-155) a través de este nodo. El valor predeterminado es `false`.
 
 #### `allow-unprotected-tx-hashes` ([]TxHash)
 
-Specifies an array of transaction hashes that should be allowed to bypass
-replay protection. This flag is intended for node operators that want to explicitly
-allow specific transactions to be issued through their API. Defaults to an empty list.
+Especifica una matriz de hashes de transacciones que se deben permitir pasar
+la protección de reproducción. Esta bandera está destinada a operadores de nodos que desean explícitamente
+permitir que se emitan transacciones específicas a través de su API. El valor predeterminado es una lista vacía.
 
 #### `remote-tx-gossip-only-enabled` (boolean)
 
-If `true`, the node will only gossip remote transactions to prevent transactions
-issued through this node from being broadcast to the network. Defaults to
+Si es `true`, el nodo solo difundirá transacciones remotas para evitar que las transacciones
+emitidas a través de este nodo se transmitan a la red. El valor predeterminado es
 `false`.
 
 #### `tx-regossip-frequency` (duration)
 
-Amount of time that should elapse before we attempt to re-gossip a transaction
-that was already gossiped once. Defaults to `60000000000` nano seconds which is
-1 minute.
+Cantidad de tiempo que debe transcurrir antes de intentar volver a difundir una transacción
+que ya se difundió una vez. El valor predeterminado es `60000000000` nanosegundos, que es
+1 minuto.
 
 #### `tx-regossip-max-size` (int)
 
-Maximum number of transactions to re-gossip at once. Defaults to `15`.
+Número máximo de transacciones para volver a difundir a la vez. El valor predeterminado es `15`.
 
 #### `tx-pool-journal` (string)
 
-Specifies file path to a transaction journal to store local transactions that survive
-between node restarts.
+Especifica la ruta de archivo de un diario de transacciones para almacenar transacciones locales que sobreviven
+entre reinicios del nodo.
 
-Defaults to empty string and being disabled. To enable transaction pool journaling,
-the user must specify a non-empty journal and enable local transactions via `local-txs-enabled`.
+El valor predeterminado es una cadena vacía y está desactivado. Para habilitar el registro de la piscina de transacciones,
+el usuario debe especificar un diario no vacío y habilitar las transacciones locales a través de `local-txs-enabled`.
 
 #### `tx-pool-rejournal` (duration)
 
-Time interval to regenerate the local transaction journal. Defaults to 1 hour.
+Intervalo de tiempo para regenerar el diario de transacciones locales. El valor predeterminado es 1 hora.
 
 #### `tx-pool-price-limit` (int)
 
-Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
+Precio mínimo de gas para aplicar para la aceptación en la piscina. El valor predeterminado es 1 wei.
 
 #### `tx-pool-price-bump` (int)
 
-Minimum price bump percentage to replace an already existing transaction (nonce).  Defaults to 10%.
+Porcentaje mínimo de aumento de precio para reemplazar una transacción que ya existe (nonce). El valor predeterminado es 10%.
 
 #### `tx-pool-account-slots` (int)
 
-Number of executable transaction slots guaranteed per account. Defaults to 16.
+Número de espacios de transacción ejecutables garantizados por cuenta. El valor predeterminado es 16.
 
 #### `tx-pool-global-slots` (int)
 
-Maximum number of executable transaction slots for all accounts. Defaults to 5120.
+Número máximo de espacios de transacción ejecutables para todas las cuentas. El valor predeterminado es 5120.
 
 #### `tx-pool-account-queue` (int)
 
-Maximum number of non-executable transaction slots permitted per account. Defaults to 64.
+Número máximo de espacios de transacción no ejecutables permitidos por cuenta. El valor predeterminado es 64.
 
 #### `tx-pool-global-queue` (int)
 
-Maximum number of non-executable transaction slots for all accounts. Defaults to 1024.
+Número máximo de espacios de transacción no ejecutables para todas las cuentas. El valor predeterminado es 1024.
 
-### Metrics
+### Métricas
 
 #### `metrics-enabled` (boolean)
 
-Enables metrics. Defaults to `false`.
+Habilita las métricas. El valor predeterminado es `false`.
 
 #### `metrics-expensive-enabled` (boolean)
 
-Enables expensive metrics. Defaults to `false`.
+Habilita métricas costosas. El valor predeterminado es `false`.
 
-### Snapshots
+### Instantáneas
 
 #### `snapshot-async` (boolean)
 
-If `true`, allows snapshot generation to be executed asynchronously. Defaults to
+Si es `true`, permite que la generación de instantáneas se ejecute de forma asíncrona. El valor predeterminado es
 `true`.
 
 #### `snapshot-verification-enabled` (boolean)
 
-If `true`, verifies the complete snapshot after it has been generated. Defaults
-to `false`.
+Si es `true`, verifica la instantánea completa después de que se ha generado. El valor predeterminado es
+`false`.
 
-### Logging
+### Registro
 
 #### `log-level` (string)
 
-Defines the log level for the chain. Must be one of `"trace"`, `"debug"`, `"info"`,
-`"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
+Define el nivel de registro para la cadena. Debe ser uno de `"trace"`, `"debug"`, `"info"`,
+`"warn"`, `"error"`, `"crit"`. El valor predeterminado es `"info"`.
 
 #### `log-json-format` (bool)
 
-If `true`, changes logs to JSON format. Defaults to `false`.
+Si es `true`, cambia los registros al formato JSON. El valor predeterminado es `false`.
 
-### Keystore Settings
+### Configuración de Keystore
 
 #### `keystore-directory` (string)
 
-The directory that contains private keys. Can be given as a relative path. If
-empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty
-string (`""`).
+El directorio que contiene las claves privadas. Puede ser una ruta relativa. Si
+está vacío, utiliza un directorio temporal en `coreth-keystore`. El valor predeterminado es una cadena vacía (`""`).
 
 #### `keystore-external-signer` (string)
 
-Specifies an external URI for a clef-type signer. Defaults to the empty string
-(`""` as not enabled).
+Especifica una URI externa para un firmante de tipo clef. El valor predeterminado es una cadena vacía
+(`""` como no habilitado).
 
 #### `keystore-insecure-unlock-allowed` (bool)
 
-If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults
-to `false`.
+Si es `true`, permite desbloquear cuentas en un entorno HTTP inseguro. El valor predeterminado es `false`.
 
-### Database
+### Base de datos
 
 #### `trie-clean-cache` (int)
 
-Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`.
-Defaults to `512`.
+Tamaño de la caché utilizada para nodos de trie limpios (en MB). Debe ser un múltiplo de `64`. Por defecto, es `512`.
 
 #### `trie-dirty-cache` (int)
 
-Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed
-this limit, they are written to disk. Defaults to `256`.
+Tamaño de la caché utilizada para nodos de trie sucios (en MB). Cuando los nodos sucios superan este límite, se escriben en disco. Por defecto, es `256`.
 
 #### `trie-dirty-commit-target` (int)
 
-Memory limit to target in the dirty cache before performing a commit (in MBs).
-Defaults to `20`.
+Límite de memoria a alcanzar en la caché sucia antes de realizar una confirmación (en MB). Por defecto, es `20`.
 
 #### `snapshot-cache` (int)
 
-Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
-`64`. Defaults to `256`.
+Tamaño de la caché limpia de la capa de disco de instantáneas (en MB). Debe ser un múltiplo de `64`. Por defecto, es `256`.
 
 #### `trie-clean-journal` (string)
 
-Directory to use to save the trie clean cache (must be populated to enable
-journaling the trie clean cache). Empty and disabled by default.
+Directorio utilizado para guardar la caché limpia del trie (debe estar poblado para habilitar el registro de la caché limpia del trie). Vacío y deshabilitado por defecto.
 
 #### `trie-clean-rejournal` (duration)
 
-Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must
-be populated to enable journaling the trie clean cache).
+Frecuencia para volver a registrar la caché limpia del trie en disco (mínimo 1 minuto, debe estar poblado para habilitar el registro de la caché limpia del trie).
 
 #### `acceptor-queue-limit` (int)
 
-Specifies the maximum number of blocks to queue during block acceptance before
-blocking on Accept. Defaults to `64`.
+Especifica el número máximo de bloques en cola durante la aceptación de bloques antes de bloquearse en Aceptar. Por defecto, es `64`.
 
 #### `commit-interval` (int)
 
-Specifies the commit interval at which to persist the merkle trie to disk.
-Defaults to `4096`.
+Especifica el intervalo de confirmación en el que persistir el trie de merkle en disco. Por defecto, es `4096`.
 
 #### `pruning-enabled` (boolean)
 
-If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount 
-of data written to disk, but does not delete any state that is written to the disk previously.
-This flag should be set to `false` for nodes that need access to all data at
-historical roots. Pruning will be done only for new data. Defaults to `false` in
-v1.4.9, and `true` in subsequent versions.
+Si es `true`, se habilitará la poda de datos históricos obsoletos de la base de datos. Esto reduce la cantidad de datos escritos en disco, pero no elimina ningún estado que se haya escrito en el disco anteriormente. Esta bandera debe establecerse en `false` para nodos que necesiten acceso a todos los datos en raíces históricas. La poda se hará solo para datos nuevos. Por defecto, es `false` en la versión 1.4.9 y `true` en versiones posteriores.
 
 :::note
 
-If a node is ever run with `pruning-enabled` as `false` (archival mode), setting
-`pruning-enabled` to `true` will result in a warning and the node will shut
-down. This is to protect against unintentional misconfigurations of an archival
-node.
+Si un nodo se ejecuta alguna vez con `pruning-enabled` como `false` (modo de archivo), establecer `pruning-enabled` en `true` resultará en una advertencia y el nodo se apagará. Esto es para protegerse contra configuraciones incorrectas no intencionales de un nodo de archivo.
 
-To override this and switch to pruning mode, in addition to `pruning-enabled:
-true`, `allow-missing-tries` should be set to `true` as well.
+Para anular esto y cambiar al modo de poda, además de `pruning-enabled: true`, `allow-missing-tries` también debe establecerse en `true`.
 
 :::
 
 #### `populate-missing-tries` (*uint64)
 
-If non-nil, sets the starting point for repopulating missing tries to
-re-generate archival merkle forest.
+Si no es nulo, establece el punto de partida para repoblar los tries faltantes y regenerar el bosque de merkle de archivo.
 
-To restore an archival merkle forest that has been corrupted (missing trie nodes
-for a section of the blockchain), specify the starting point of the last block
-on disk, where the full trie was available at that block to re-process blocks
-from that height onwards and re-generate the archival merkle forest on startup.
-This flag should be used once to re-generate the archival merkle forest and
-should be removed from the config after completion. This flag will cause the
-node to delay starting up while it re-processes old blocks.
+Para restaurar un bosque de merkle de archivo que ha sido corrompido (nodos de trie faltantes para una sección de la cadena de bloques), especifique el punto de partida del último bloque en disco, donde el trie completo estaba disponible en ese bloque para volver a procesar bloques desde esa altura en adelante y regenerar el bosque de merkle de archivo al iniciar. Esta bandera debe usarse una vez para regenerar el bosque de merkle de archivo y debe eliminarse de la configuración después de completar. Esta bandera hará que el nodo retrase su inicio mientras vuelve a procesar bloques antiguos.
 
 #### `populate-missing-tries-parallelism` (int)
 
-Number of concurrent readers to use when re-populating missing tries on startup.
-Defaults to 1024.
+Número de lectores concurrentes a utilizar al volver a poblar los tries faltantes al iniciar. Por defecto, es `1024`.
 
 #### `allow-missing-tries` (boolean)
 
-If `true`, allows a node that was once configured as archival to switch to
-pruning mode. Defaults to `false`.
+Si es `true`, permite que un nodo que alguna vez se configuró como de archivo cambie al modo de poda. Por defecto, es `false`.
 
 #### `preimages-enabled` (boolean)
 
-If `true`, enables preimages. Defaults to `false`.
+Si es `true`, habilita las preimágenes. Por defecto, es `false`.
 
 #### `offline-pruning-enabled` (boolean)
 
-If `true`, offline pruning will run on startup and block until it completes
-(approximately one hour on Mainnet). This will reduce the size of the database
-by deleting old trie nodes. **While performing offline pruning, your node will
-not be able to process blocks and will be considered offline.** While ongoing,
-the pruning process consumes a small amount of additional disk space (for
-deletion markers and the bloom filter). For more information see
-[here.](/nodes/maintain/run-offline-pruning.md#disk-space-considerations)
+Si es `true`, la poda sin conexión se ejecutará al iniciar y bloqueará hasta que se complete (aproximadamente una hora en Mainnet). Esto reducirá el tamaño de la base de datos eliminando nodos de trie antiguos. **Mientras se realiza la poda sin conexión, su nodo no podrá procesar bloques y se considerará fuera de línea.** Mientras está en curso, el proceso de poda consume una pequeña cantidad de espacio adicional en disco (para marcadores de eliminación y el filtro de bloom). Para obtener más información, consulte [aquí](/nodes/maintain/run-offline-pruning.md#disk-space-considerations).
 
-Since offline pruning deletes old state data, this should not be run on nodes
-that need to support archival API requests.
+Dado que la poda sin conexión elimina datos de estado antiguos, esto no debe ejecutarse en nodos que necesiten admitir solicitudes de API de archivo.
 
-This is meant to be run manually, so after running with this flag once, it must
-be toggled back to false before running the node again. Therefore, you should
-run with this flag set to true and then set it to false on the subsequent run.
+Esto está destinado a ejecutarse manualmente, por lo que después de ejecutarlo una vez con esta bandera, debe cambiarse nuevamente a falso antes de ejecutar el nodo nuevamente. Por lo tanto, debe ejecutarse con esta bandera establecida en verdadero y luego establecerla en falso en la ejecución posterior.
 
 #### `offline-pruning-bloom-filter-size` (int)
 
-This flag sets the size of the bloom filter to use in offline pruning
-(denominated in MB and defaulting to 512 MB). The bloom filter is kept in memory
-for efficient checks during pruning and is also written to disk to allow pruning
-to resume without re-generating the bloom filter.
+Esta bandera establece el tamaño del filtro de bloom a utilizar en la poda sin conexión (denominado en MB y con un valor predeterminado de 512 MB). El filtro de bloom se mantiene en memoria para verificaciones eficientes durante la poda y también se escribe en disco para permitir que la poda se reanude sin volver a generar el filtro de bloom.
 
-The active state is added to the bloom filter before iterating the DB to find
-trie nodes that can be safely deleted, any trie nodes not in the bloom filter
-are considered safe for deletion. The size of the bloom filter may impact its
-false positive rate, which can impact the results of offline pruning. This is an
-advanced parameter that has been tuned to 512 MB and should not be changed
-without thoughtful consideration.
+El estado activo se agrega al filtro de bloom antes de iterar la base de datos para encontrar nodos de trie que se pueden eliminar de forma segura, cualquier nodo de trie que no esté en el filtro de bloom se considera seguro para su eliminación. El tamaño del filtro de bloom puede afectar su tasa de falsos positivos, lo que puede afectar los resultados de la poda sin conexión. Este es un parámetro avanzado que se ha ajustado a 512 MB y no debe cambiarse sin una consideración cuidadosa.
 
 #### `offline-pruning-data-directory` (string)
 
-This flag must be set when offline pruning is enabled and sets the directory
-that offline pruning will use to write its bloom filter to disk. This directory
-should not be changed in between runs until offline pruning has completed.
+Esta bandera debe establecerse cuando se habilita la poda sin conexión y establece el directorio que la poda sin conexión utilizará para escribir su filtro de bloom en disco. Este directorio no debe cambiarse entre ejecuciones hasta que se complete la poda sin conexión.
 
 #### `tx-lookup-limit` (uint64)
 
-Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
-transaction lookup indices will be maintained for all blocks. Defaults to `0`.
+Número de bloques recientes para los cuales mantener índices de búsqueda de transacciones en la base de datos. Si se establece en 0, se mantendrán índices de búsqueda de transacciones para todos los bloques. Por defecto, es `0`.
 
 ### VM Networking
 
 #### `max-outbound-active-requests` (int)
 
-Specifies the maximum number of outbound VM2VM requests in flight at once. Defaults to `16`.
+Especifica el número máximo de solicitudes salientes de VM a VM en vuelo a la vez. Por defecto, es `16`.
 
 #### `max-outbound-active-cross-chain-requests` (int)
 
-Specifies the maximum number of outbound cross-chain requests in flight at once. Defaults to `64`.
+Especifica el número máximo de solicitudes salientes de cadena cruzada en vuelo a la vez. Por defecto, es `64`.
 
-### Miscellaneous
+### Varios
 
 #### `airdrop` (string)
 
-Path to a json file that contains a list of addresses for a genesis airdrop.
-Each address will be airdropped `AirdropAmount` at genesis, and the hash of the
-airdrop file must match `AirdropHash`. `AirdropAmount` and `AirdropHash` are
-part of the genesis config. This option applies to `subnet-evm` only (not
-applicable to `coreth`).
+Ruta a un archivo json que contiene una lista de direcciones para un airdrop de génesis. Cada dirección recibirá un airdrop de `AirdropAmount` en el génesis, y el hash del archivo de airdrop debe coincidir con `AirdropHash`. `AirdropAmount` y `AirdropHash` son parte de la configuración de génesis. Esta opción se aplica solo a `subnet-evm` (no aplicable a `coreth`).
 
 #### `skip-upgrade-check` (bool)
 
-If set to `true`, the chain will skip verifying that all expected network
-upgrades have taken place before the last accepted block on startup. This allows
-node operators to recover if their node has accepted blocks after a network
-upgrade with a version of the code prior to the upgrade. Defaults to `false`.
+Si se establece en `true`, la cadena omitirá verificar que todas las actualizaciones de red esperadas se hayan realizado antes del último bloque aceptado al iniciar. Esto permite que los operadores de nodos se recuperen si su nodo ha aceptado bloques después de una actualización de red con una versión del código anterior a la actualización. Por defecto, es `false`.
 
-## X-Chain Configs
+## Configuraciones de la Cadena X
 
-In order to specify a config for the X-Chain, a JSON config file should be
-placed at `{chain-config-dir}/X/config.json`.
+Para especificar una configuración para la Cadena X, se debe colocar un archivo de configuración JSON en `{chain-config-dir}/X/config.json`.
 
-For example if `chain-config-dir` has the default value which is
-`$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at
-`$HOME/.avalanchego/configs/chains/X/config.json`.
+Por ejemplo, si `chain-config-dir` tiene el valor predeterminado que es `$HOME/.avalanchego/configs/chains`, entonces `config.json` se puede colocar en `$HOME/.avalanchego/configs/chains/X/config.json`.
 
-This allows you to specify a config to be passed into the X-Chain. The default
-values for this config are:
+Esto le permite especificar una configuración que se pasará a la Cadena X. Los valores predeterminados para esta configuración son:
 
 ```json
 {
@@ -767,48 +702,34 @@ values for this config are:
 }
 ```
 
-Default values are overridden only if explicitly specified in the config.
+Los valores predeterminados se anulan solo si se especifican explícitamente en la configuración.
 
-The parameters are as follows:
+Los parámetros son los siguientes:
 
-**Transaction Indexing**
+**Indexación de Transacciones**
 
 ### `index-transactions` (boolean)
 
-Enables AVM transaction indexing if set to `true`. Default value is `false`.
-When set to `true`, AVM transactions are indexed against the `address` and
-`assetID` involved. This data is available via `avm.getAddressTxs`
-[API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
+Habilita la indexación de transacciones de AVM si se establece en `true`. El valor predeterminado es `false`. Cuando se establece en `true`, las transacciones de AVM se indexan según la `dirección` y el `assetID` involucrados. Estos datos están disponibles a través de la API `avm.getAddressTxs` [API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
 
-:::note
-If `index-transactions` is set to true, it must always be set to true
-for the node's lifetime. If set to `false` after having been set to `true`, the
-node will refuse to start unless `index-allow-incomplete` is also set to `true`
-(see below).
+:::nota
+Si `index-transactions` se establece en true, siempre debe mantenerse en true durante toda la vida útil del nodo. Si se establece en `false` después de haber sido establecido en true, el nodo se negará a iniciar a menos que `index-allow-incomplete` también se establezca en true (ver más abajo).
 :::
 
-### `index-allow-incomplete` (boolean)
+### `index-allow-incomplete` (booleano)
 
-Allows incomplete indices. Default value is `false`.
+Permite índices incompletos. El valor predeterminado es `false`.
 
-This config value is ignored if there is no X-Chain indexed data in the DB and
-`index-transactions` is set to `false`.
+Este valor de configuración se ignora si no hay datos indexados de la cadena X en la base de datos y `index-transactions` se establece en `false`.
 
-## Subnet Chain Configs
+## Configuraciones de la Cadena de Subnet
 
-As mentioned above, if a Subnet's chain id is
-`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
-should be at
-`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+Como se mencionó anteriormente, si el ID de cadena de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, la configuración para esta cadena debería estar en
+`{directorio-de-configuración-de-cadena}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 
-## FAQ
+## Preguntas frecuentes
 
-- When using `getBlockNumber` it will return finalized blocks. To allow for queries
-for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries` 
-and set to true (by default it is set to `false`)
+- Cuando se utiliza `getBlockNumber`, devolverá bloques finalizados. Para permitir consultas de bloques/transacciones no finalizadas (aún no aceptadas), use `allow-unfainalized-queries` y establézcalo en true (por defecto, está establecido en `false`).
 
-- When deactivating offline pruning  `(pruning-enabled: false)` from previously 
-enabled state, this will not impact blocks whose state was already pruned. This will 
-return missing trie node errors, as the node can't lookup the state of a historical
-block if that state was deleted.
+- Cuando se desactiva la poda sin conexión `(pruning-enabled: false)` desde un estado previamente habilitado, esto no afectará a los bloques cuyo estado ya fue podado. Esto devolverá errores de nodo de trie faltante, ya que el nodo no puede buscar el estado de un bloque histórico si ese estado fue eliminado.

@@ -1,33 +1,31 @@
 ---
-tags: [Nodes]
-description: This documents list all available configuration and flags for AvalancheGo.
-sidebar_label: AvalancheGo Configs + Flags
-pagination_label: AvalancheGo Configs and Flags
+etiquetas: [Nodos]
+descripción: Este documento enumera todas las configuraciones y banderas disponibles para AvalancheGo.
+sidebar_label: Configuraciones + Banderas de AvalancheGo
+pagination_label: Configuraciones y Banderas de AvalancheGo
 sidebar_position: 0
 ---
 
-# AvalancheGo Configs and Flags
+# Configuraciones y Banderas de AvalancheGo
 
-<!-- markdownlint-disable MD001 -->
+Puedes especificar la configuración de un nodo con los argumentos a continuación.
 
-You can specify the configuration of a node with the arguments below.
+## Directorio de Datos
 
-## Data Directory
+#### `--data-dir` (cadena)
 
-#### `--data-dir` (string)
+Establece el directorio base de datos donde se colocarán los subdirectorios por defecto a menos que se especifique lo contrario.
+Por defecto, es `$HOME/.avalanchego`.
 
-Sets the base data directory where default sub-directories will be placed unless otherwise specified.
-Defaults to `$HOME/.avalanchego`.
+## Archivo de Configuración
 
-## Config File
+#### `--config-file` (cadena)
 
-#### `--config-file` (string)
+Ruta a un archivo JSON que especifica la configuración de este nodo. Los argumentos de línea de comandos
+anularán los argumentos establecidos en el archivo de configuración. Esta bandera se ignora
+si se especifica `--config-file-content`.
 
-Path to a JSON file that specifies this node's configuration. Command line
-arguments will override arguments set in the config file. This flag is ignored
-if `--config-file-content` is specified.
-
-Example JSON config file:
+Ejemplo de archivo de configuración JSON:
 
 ```json
 {
@@ -35,214 +33,185 @@ Example JSON config file:
 }
 ```
 
-:::tip
-[Install Script](/nodes/run/with-installer.md) creates the node config
-file at `~/.avalanchego/configs/node.json`. No default file is created if
-[AvalancheGo is built from source](/nodes/run/node-manually.md), you
-would need to create it manually if needed.
+:::consejo
+[El script de instalación](/nodes/run/with-installer.md) crea el archivo de configuración del nodo
+en `~/.avalanchego/configs/node.json`. No se crea ningún archivo por defecto si
+[AvalancheGo se construye desde el código fuente](/nodes/run/node-manually.md),
+deberías crearlo manualmente si es necesario.
 :::
 
-#### `--config-file-content` (string)
+#### `--config-file-content` (cadena)
 
-As an alternative to `--config-file`, it allows specifying base64 encoded config
-content.
+Como alternativa a `--config-file`, permite especificar el contenido de configuración codificado en base64.
 
-#### `--config-file-content-type` (string)
+#### `--config-file-content-type` (cadena)
 
-Specifies the format of the base64 encoded config content. JSON, TOML, YAML are
-among currently supported file format (see
-[here](https://github.com/spf13/viper#reading-config-files) for full list). Defaults to `JSON`.
+Especifica el formato del contenido de configuración codificado en base64. JSON, TOML, YAML son
+algunos de los formatos de archivo actualmente soportados (ver
+[aquí](https://github.com/spf13/viper#reading-config-files) para la lista completa). Por defecto, es `JSON`.
 
 ## APIs
 
-#### `--api-admin-enabled` (boolean)
+#### `--api-admin-enabled` (booleano)
 
-If set to `true`, this node will expose the Admin API. Defaults to `false`.
-See [here](/reference/avalanchego/admin-api.md) for more information.
+Si se establece en `true`, este nodo expondrá la API de Administración. Por defecto, es `false`.
+Ver [aquí](/reference/avalanchego/admin-api.md) para más información.
 
-#### `--api-auth-required` (boolean)
+#### `--api-auth-required` (booleano)
 
-If set to `true`, API calls require an authorization token. Defaults to `false`.
-See [here](/reference/avalanchego/auth-api.md) for more information.
+Si se establece en `true`, las llamadas de API requieren un token de autorización. Por defecto, es `false`.
+Ver [aquí](/reference/avalanchego/auth-api.md) para más información.
 
-#### `--api-auth-password` (string)
+#### `--api-auth-password` (cadena)
 
-The password needed to create/revoke authorization tokens. If
-`--api-auth-required=true`, must be specified; otherwise ignored. See
-[here](/reference/avalanchego/auth-api.md) for more information.
+La contraseña necesaria para crear/revocar tokens de autorización. Si
+`--api-auth-required=true`, debe especificarse; de lo contrario, se ignora. Ver
+[aquí](/reference/avalanchego/auth-api.md) para más información.
 
-#### `--api-auth-password-file` (string)
+#### `--api-auth-password-file` (cadena)
 
-Password file used to initially create/validate API authorization tokens.
-Ignored if `---api-auth-password` is specified.
-Leading and trailing whitespace is removed from the password. Can be changed via API call.
+Archivo de contraseña utilizado para crear/validar inicialmente tokens de autorización de API.
+Se ignora si se especifica `---api-auth-password`.
+Se elimina el espacio en blanco al principio y al final de la contraseña. Se puede cambiar a través de una llamada de API.
 
-#### `--api-health-enabled` (boolean)
+#### `--api-health-enabled` (booleano)
 
-If set to `false`, this node will not expose the Health API. Defaults to `true`. See
-[here](/reference/avalanchego/health-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API de Salud. Por defecto, es `true`. Ver
+[aquí](/reference/avalanchego/health-api.md) para más información.
 
-#### `--index-enabled` (boolean)
+#### `--index-enabled` (booleano)
 
-If set to `true`, this node will enable the indexer and the Index API will be
-available. Defaults to `false`. See
-[here](/reference/avalanchego/index-api.md) for more information.
+Si se establece en `true`, este nodo habilitará el indexador y la API de Índice estará
+disponible. Por defecto, es `false`. Ver
+[aquí](/reference/avalanchego/index-api.md) para más información.
 
-#### `--api-info-enabled` (boolean)
+#### `--api-info-enabled` (booleano)
 
-If set to `false`, this node will not expose the Info API. Defaults to `true`. See
-[here](/reference/avalanchego/info-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API de Información. Por defecto, es `true`. Ver
+[aquí](/reference/avalanchego/info-api.md) para más información.
 
-#### `--api-ipcs-enabled` (boolean)
+#### `--api-ipcs-enabled` (booleano)
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
-[here](/reference/avalanchego/ipc-api.md) for more information.
+Si se establece en `true`, este nodo expondrá la API de IPCs. Por defecto, es `false`. Ver
+[aquí](/reference/avalanchego/ipc-api.md) para más información.
 
-#### `--api-keystore-enabled` (boolean)
+#### `--api-keystore-enabled` (booleano)
 
-If set to `true`, this node will expose the Keystore API. Defaults to `false`.
-See [here](/reference/avalanchego/keystore-api.md) for more information.
+Si se establece en `true`, este nodo expondrá la API de Keystore. Por defecto, es `false`.
+Ver [aquí](/reference/avalanchego/keystore-api.md) para más información.
 
-#### `--api-metrics-enabled` (boolean)
+#### `--api-metrics-enabled` (booleano)
 
-If set to `false`, this node will not expose the Metrics API. Defaults to
-`true`. See [here](/reference/avalanchego/metrics-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API de Métricas. Por defecto, es
+`true`. Ver [aquí](/reference/avalanchego/metrics-api.md) para más información.
 
-#### `--http-shutdown-wait` (duration)
+#### `--http-shutdown-wait` (duración)
 
-Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown.
-The `/health` endpoint will return unhealthy during this duration (if the Health
-API is enabled.) Defaults to `0s`.
+Duración de espera después de recibir SIGTERM o SIGINT antes de iniciar el apagado.
+El punto final `/health` devolverá no saludable durante esta duración (si la API de Salud
+está habilitada). Por defecto, es `0s`.
 
-#### `--http-shutdown-timeout` (duration)
+#### `--http-shutdown-timeout` (duración)
 
-Maximum duration to wait for existing connections to complete during node
-shutdown. Defaults to `10s`.
+Duración máxima de espera para que las conexiones existentes se completen durante el
+apagado del nodo. Por defecto, es `10s`.
 
-## Bootstrapping
+## Arranque
 
-#### `--bootstrap-beacon-connection-timeout` (duration)
+#### `--bootstrap-beacon-connection-timeout` (duración)
 
-Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
+Tiempo de espera al intentar conectar con beacons de arranque. Por defecto, es `1m`.
 
-#### `--bootstrap-ids` (string)
+#### `--bootstrap-ids` (cadena)
 
-Bootstrap IDs is a comma-separated list of validator IDs. These IDs will be used
-to authenticate bootstrapping peers. An example setting of this field would be
+Los IDs de arranque son una lista separada por comas de los IDs de validadores. Estos IDs se utilizarán
+para autenticar a los pares de arranque. Un ejemplo de configuración de este campo sería
 `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
-The number of given IDs here must be same with number of given
-`--bootstrap-ips`. The default value depends on the network ID.
+El número de IDs dados aquí debe ser el mismo que el número dado
+`--bootstrap-ips`. El valor por defecto depende del ID de red.
 
-#### `--bootstrap-ips` (string)
+#### `--bootstrap-ips` (cadena)
 
-Bootstrap IPs is a comma-separated list of IP:port pairs. These IP Addresses
-will be used to bootstrap the current Avalanche state. An example setting of
-this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number
-of given IPs here must be same with number of given `--bootstrap-ids`. The
-default value depends on the network ID.
+Las IPs de arranque son una lista separada por comas de pares IP:puerto. Estas direcciones IP
+se utilizarán para arrancar el estado actual de Avalanche. Un ejemplo de configuración de
+este campo sería `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. El número
+de IPs dados aquí debe ser el mismo que el número dado `--bootstrap-ids`. El
+valor por defecto depende del ID de red.
 
-#### `--bootstrap-retry-enabled` (boolean)
+#### `--bootstrap-retry-enabled` (booleano)
 
-If set to `false`, will not retry bootstrapping if it fails. Defaults to `true`.
+Si se establece en `false`, no se volverá a intentar el arranque si falla. Por defecto, es `true`.
 
 #### `--bootstrap-retry-warn-frequency` (uint)
 
-Specifies how many times bootstrap should be retried before warning the operator. Defaults to `50`.
+Especifica cuántas veces se debe reintentar el arranque antes de advertir al operador. Por defecto, es `50`.
 
 #### `--bootstrap-ancestors-max-containers-sent` (uint)
 
-Max number of containers in an `Ancestors` message sent by this node. Defaults to `2000`.
+Número máximo de contenedores en un mensaje `Ancestors` enviado por este nodo. Por defecto, es `2000`.
 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
 
-This node reads at most this many containers from an incoming `Ancestors` message. Defaults to `2000`.
+Este nodo lee como máximo esta cantidad de contenedores de un mensaje `Ancestors` entrante. Por defecto, es `2000`.
 
-#### `--bootstrap-max-time-get-ancestors` (duration)
+#### `--bootstrap-max-time-get-ancestors` (duración)
 
-Max Time to spend fetching a container and its ancestors when responding to a GetAncestors message.
-Defaults to `50ms`.
+Tiempo máximo para gastar recuperando un contenedor y sus ancestros al responder a un mensaje GetAncestors.
+Por defecto, es `50ms`.
 
-## State Syncing
+## Sincronización de Estado
 
-#### `--state-sync-ids` (string)
+#### `--state-sync-ids` (cadena)
 
-State sync IDs is a comma-separated list of validator IDs. The specified
-validators will be contacted to get and authenticate the starting point (state
-summary) for state sync. An example setting of this field would be
+Los IDs de sincronización de estado son una lista separada por comas de los IDs de validadores. Los
+validadores especificados serán contactados para obtener y autenticar el punto de inicio (resumen de estado) para la sincronización de estado. Un ejemplo de configuración de este campo sería
 `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
-The number of given IDs here must be same with number of given
-`--state-sync-ips`. The default value is empty, which results in all validators
-being sampled.
+El número de IDs dados aquí debe ser el mismo que el número dado
+`--state-sync-ips`. El valor por defecto es vacío, lo que resulta en que se muestreen todos los validadores.
 
-#### `--state-sync-ips` (string)
+#### `--state-sync-ips` (cadena)
 
-State sync IPs is a comma-separated list of IP:port pairs. These IP Addresses
-will be contacted to get and authenticate the starting point (state summary) for
-state sync. An example setting of this field would be
-`--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here
-must be the same with the number of given `--state-sync-ids`.
+Las IPs de sincronización de estado son una lista separada por comas de pares IP:puerto. Estas direcciones IP
+serán contactadas para obtener y autenticar el punto de inicio (resumen de estado) para
+la sincronización de estado. Un ejemplo de configuración de este campo sería
+`--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. El número de IPs dados aquí
+debe ser el mismo que el número de `--state-sync-ids` dados.
 
-## Partial Sync Primary Network
+## Sincronización Parcial Red Primaria
 
-#### `--partial-sync-primary-network` (string)
+#### `--partial-sync-primary-network` (cadena)
 
-Partial sync enables non-validators to optionally sync only the P-chain on the primary network.
 
-## Chain Configs
 
-Some blockchains allow the node operator to provide custom configurations for
-individual blockchains. These custom configurations are broken down into two
-categories: network upgrades and optional chain configurations. AvalancheGo
-reads in these configurations from the chain configuration directory and passes
-them into the VM on initialization.
+La sincronización parcial permite a los no validadores sincronizar opcionalmente solo la cadena P en la red primaria.
 
-#### `--chain-config-dir` (string)
+## Configuraciones de la Cadena
 
-Specifies the directory that contains chain configs, as described
-[here](chain-config-flags.md). Defaults to `$HOME/.avalanchego/configs/chains`.
-If this flag is not provided and the default directory does not exist,
-AvalancheGo will not exit since custom configs are optional. However, if the
-flag is set, the specified folder must exist, or AvalancheGo will exit with an
-error. This flag is ignored if `--chain-config-content` is specified.
+Algunas blockchains permiten que el operador del nodo proporcione configuraciones personalizadas para blockchains individuales. Estas configuraciones personalizadas se dividen en dos categorías: actualizaciones de red y configuraciones opcionales de la cadena. AvalancheGo lee estas configuraciones desde el directorio de configuración de la cadena y las pasa a la VM durante la inicialización.
+
+#### `--chain-config-dir` (cadena)
+
+Especifica el directorio que contiene las configuraciones de la cadena, como se describe [aquí](chain-config-flags.md). Por defecto, es `$HOME/.avalanchego/configs/chains`. Si no se proporciona esta bandera y el directorio predeterminado no existe, AvalancheGo no saldrá ya que las configuraciones personalizadas son opcionales. Sin embargo, si se establece la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--chain-config-content`.
 
 :::note
-Please replace `chain-config-dir` and `blockchainID` with their actual values.
+Por favor, reemplace `chain-config-dir` y `blockchainID` con sus valores reales.
 :::
 
-Network upgrades are passed in from the location:
-`chain-config-dir`/`blockchainID`/`upgrade.*`.
-Upgrade files are typically json encoded and therefore named `upgrade.json`.
-However, the format of the file is VM dependent.
-After a blockchain has activated a network upgrade, the same upgrade
-configuration must always be passed in to ensure that the network upgrades
-activate at the correct time.
+Las actualizaciones de red se pasan desde la ubicación: `chain-config-dir`/`blockchainID`/`upgrade.*`. Los archivos de actualización suelen estar codificados en json y, por lo tanto, se llaman `upgrade.json`. Sin embargo, el formato del archivo depende de la VM. Después de que una blockchain ha activado una actualización de red, la misma configuración de actualización debe pasarse siempre para asegurar que las actualizaciones de red se activen en el momento correcto.
 
-The chain configs are passed in from the location
-`chain-config-dir`/`blockchainID`/`config.*`.
-Upgrade files are typically json encoded and therefore named `upgrade.json`.
-However, the format of the file is VM dependent.
-This configuration is used by the VM to handle optional configuration flags such
-as enabling/disabling APIs, updating log level, etc.
-The chain configuration is intended to provide optional configuration parameters
-and the VM will use default values if nothing is passed in.
+Las configuraciones de la cadena se pasan desde la ubicación `chain-config-dir`/`blockchainID`/`config.*`. Los archivos de configuración suelen estar codificados en json y, por lo tanto, se llaman `config.json`. Sin embargo, el formato del archivo depende de la VM. Esta configuración es utilizada por la VM para manejar banderas de configuración opcionales como habilitar/deshabilitar APIs, actualizar el nivel de registro, etc. La configuración de la cadena está destinada a proporcionar parámetros de configuración opcionales y la VM utilizará valores predeterminados si no se pasa nada.
 
-Full reference for all configuration options for some standard chains can be
-found in a separate [chain config flags](chain-config-flags.md) document.
+La referencia completa de todas las opciones de configuración para algunas cadenas estándar se puede encontrar en un documento separado de [banderas de configuración de la cadena](chain-config-flags.md).
 
-Full reference for `subnet-evm` upgrade configuration can be found in a separate
-[Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md) document.
+La referencia completa de la configuración de actualización de la subred `subnet-evm` se puede encontrar en un documento separado de [Personalizar una Subred](/build/subnet/upgrade/customize-a-subnet.md).
 
-#### `--chain-config-content` (string)
+#### `--chain-config-content` (cadena)
 
-As an alternative to `--chain-config-dir`, chains custom configurations can be
-loaded altogether from command line via `--chain-config-content` flag. Content
-must be base64 encoded.
+Como alternativa a `--chain-config-dir`, las configuraciones personalizadas de las cadenas se pueden cargar en su totalidad desde la línea de comandos a través de la bandera `--chain-config-content`. El contenido debe estar codificado en base64.
 
-#### `--chain-aliases-file` (string)
+#### `--chain-aliases-file` (cadena)
 
-Path to JSON file that defines aliases for Blockchain IDs. Defaults to
-`~/.avalanchego/configs/chains/aliases.json`. This flag is ignored if
-`--chain-aliases-file-content` is specified. Example content:
+Ruta al archivo JSON que define alias para ID de Blockchains. Por defecto, es `~/.avalanchego/configs/chains/aliases.json`. Esta bandera se ignora si se especifica `--chain-aliases-file-content`. Ejemplo de contenido:
 
 ```json
 {
@@ -250,518 +219,469 @@ Path to JSON file that defines aliases for Blockchain IDs. Defaults to
 }
 ```
 
-The above example aliases the Blockchain whose ID is
-`"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain
-aliases are added after adding primary network aliases and before any changes to
-the aliases via the admin API. This means that the first alias included for a
-Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the
-full blockchainID. The Primary Alias is used in all metrics and logs.
+El ejemplo anterior asigna alias a la Blockchain cuyo ID es `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` como `"DFK"`. Los alias de la cadena se agregan después de agregar alias de red primaria y antes de cualquier cambio en los alias a través de la API de administración. Esto significa que el primer alias incluido para una Blockchain en una Subred se tratará como el "Alias Primario" en lugar del blockchainID completo. El Alias Primario se utiliza en todas las métricas y registros.
 
-#### `--chain-aliases-file-content` (string)
+#### `--chain-aliases-file-content` (cadena)
 
-As an alternative to `--chain-aliases-file`, it allows specifying base64 encoded
-aliases for Blockchains.
+Como alternativa a `--chain-aliases-file`, permite especificar contenido de alias de Blockchains codificado en base64.
 
-#### `--chain-data-dir` (string)
+#### `--chain-data-dir` (cadena)
 
-Chain specific data directory. Defaults to `$HOME/.avalanchego/chainData`.
+Directorio de datos específico de la cadena. Por defecto, es `$HOME/.avalanchego/chainData`.
 
-## Database
+## Base de Datos
 
-##### `--db-dir` (string, file path)
+##### `--db-dir` (cadena, ruta de archivo)
 
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
+Especifica el directorio en el que se persiste la base de datos. Por defecto, es `"$HOME/.avalanchego/db"`.
 
-##### `--db-type` (string)
+##### `--db-type` (cadena)
 
-Specifies the type of database to use. Must be one of `LevelDB` or `memdb`.
-`memdb` is an in-memory, non-persisted database.
+Especifica el tipo de base de datos a utilizar. Debe ser uno de `LevelDB` o `memdb`. `memdb` es una base de datos en memoria, no persistente.
 
 :::note
 
-`memdb` stores everything in memory. So if you have a 900 GiB LevelDB instance, then using `memdb`
-you’d need 900 GiB of RAM.
-`memdb` is useful for fast one-off testing, not for running an actual node (on Fuji or Mainnet).
-Also note that `memdb` doesn’t persist after restart. So any time you restart the node it would
-start syncing from scratch.
+`memdb` almacena todo en memoria. Así que si tienes una instancia de LevelDB de 900 GiB, entonces usando `memdb` necesitarías 900 GiB de RAM. `memdb` es útil para pruebas rápidas ocasionales, no para ejecutar un nodo real (en Fuji o Mainnet). También tenga en cuenta que `memdb` no persiste después de reiniciar. Así que cada vez que reinicies el nodo, comenzará a sincronizar desde cero.
 
 :::
 
-### Database Config
+### Configuración de la Base de Datos
 
-#### `--db-config-file` (string)
+#### `--db-config-file` (cadena)
 
-Path to the database config file. Ignored if `--config-file-content` is specified.
+Ruta al archivo de configuración de la base de datos. Se ignora si se especifica `--db-config-file-content`.
 
-#### `--db-config-file-content` (string)
+#### `--db-config-file-content` (cadena)
 
-As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
+Como alternativa a `--db-config-file`, permite especificar el contenido de la configuración de la base de datos codificado en base64.
 
-#### LevelDB Config
+#### Configuración de LevelDB
 
-A LevelDB config file must be JSON and may have these keys.
-Any keys not given will receive the default value.
+Un archivo de configuración de LevelDB debe ser JSON y puede tener estas claves. Cualquier clave no especificada recibirá el valor predeterminado.
 
 ```go
 {
-	// BlockCacheCapacity defines the capacity of the 'sorted table' block caching.
-	// Use -1 for zero.
+	// BlockCacheCapacity define la capacidad de la caché de bloques de 'sorted table'.
+	// Use -1 para cero.
 	//
-	// The default value is 12MiB.
+	// El valor predeterminado es 12MiB.
 	"blockCacheCapacity": int
 
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted table'
-	// block.
+	// BlockSize es el tamaño mínimo sin comprimir en bytes de cada bloque de 'sorted table'.
 	//
-	// The default value is 4KiB.
+	// El valor predeterminado es 4KiB.
 	"blockSize": int
 
-	// CompactionExpandLimitFactor limits compaction size after expanded.
-	// This will be multiplied by table size limit at compaction target level.
+	// CompactionExpandLimitFactor limita el tamaño de la compactación después de la expansión.
+	// Esto se multiplicará por el límite de tamaño de tabla en el nivel de destino de la compactación.
 	//
-	// The default value is 25.
+	// El valor predeterminado es 25.
 	"compactionExpandLimitFactor": int
 
-	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
-	// that a single 'sorted table' generates.  This will be multiplied by
-	// table size limit at grandparent level.
+	// CompactionGPOverlapsFactor limita las superposiciones en el abuelo (Nivel + 2)
+	// que una sola 'sorted table' genera. Esto se multiplicará por
+	// el límite de tamaño de tabla en el nivel de abuelo.
 	//
-	// The default value is 10.
+	// El valor predeterminado es 10.
 	"compactionGPOverlapsFactor": int
 
-	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
-	// trigger compaction.
+	// CompactionL0Trigger define el número de 'sorted table' en el nivel-0 que
+	// desencadenará la compactación.
 	//
-	// The default value is 4.
+	// El valor predeterminado es 4.
 	"compactionL0Trigger": int
 
-	// CompactionSourceLimitFactor limits compaction source size. This doesn't apply to
-	// level-0.
-	// This will be multiplied by table size limit at compaction target level.
+	// CompactionSourceLimitFactor limita el tamaño de la fuente de compactación. Esto no se aplica a
+	// nivel-0.
+	// Esto se multiplicará por el límite de tamaño de tabla en el nivel de destino de la compactación.
 	//
-	// The default value is 1.
+	// El valor predeterminado es 1.
 	"compactionSourceLimitFactor": int
 
-	// CompactionTableSize limits size of 'sorted table' that compaction generates.
-	// The limits for each level will be calculated as:
-	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
-	// The multiplier for each level can also fine-tuned using CompactionTableSizeMultiplierPerLevel.
+	// CompactionTableSize limita el tamaño de la 'sorted table' que genera la compactación.
+	// Los límites para cada nivel se calcularán como:
+	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Nivel)
+	// El multiplicador para cada nivel también se puede ajustar finamente utilizando CompactionTableSizeMultiplierPerLevel.
 	//
-	// The default value is 2MiB.
+	// El valor predeterminado es 2MiB.
 	"compactionTableSize": int
 
-	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	// CompactionTableSizeMultiplier define el multiplicador para CompactionTableSize.
 	//
-	// The default value is 1.
+	// El valor predeterminado es 1.
 	"compactionTableSizeMultiplier": float
 
-	// CompactionTableSizeMultiplierPerLevel defines per-level multiplier for
+	// CompactionTableSizeMultiplierPerLevel define el multiplicador por nivel para
 	// CompactionTableSize.
-	// Use zero to skip a level.
+	// Use cero para omitir un nivel.
 	//
-	// The default value is nil.
+	// El valor predeterminado es nulo.
 	"compactionTableSizeMultiplierPerLevel": []float
 
-	// CompactionTotalSize limits total size of 'sorted table' for each level.
-	// The limits for each level will be calculated as:
-	//   CompactionTotalSize * (CompactionTotalSizeMultiplier ^ Level)
-	// The multiplier for each level can also fine-tuned using
+	// CompactionTotalSize limita el tamaño total de la 'sorted table' para cada nivel.
+	// Los límites para cada nivel se calcularán como:
+	//   CompactionTotalSize * (CompactionTotalSizeMultiplier ^ Nivel)
+	// El multiplicador para cada nivel también se puede ajustar finamente utilizando
 	// CompactionTotalSizeMultiplierPerLevel.
 	//
-	// The default value is 10MiB.
+	// El valor predeterminado es 10MiB.
 	"compactionTotalSize": int
 
-	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+	// CompactionTotalSizeMultiplier define el multiplicador para CompactionTotalSize.
 	//
-	// The default value is 10.
+	// El valor predeterminado es 10.
 	"compactionTotalSizeMultiplier": float
 
-	// DisableSeeksCompaction allows disabling 'seeks triggered compaction'.
-	// The purpose of 'seeks triggered compaction' is to optimize database so
-	// that 'level seeks' can be minimized, however this might generate many
-	// small compaction which may not preferable.
-	//
-	// The default is true.
-	"disableSeeksCompaction": bool
 
-	// OpenFilesCacheCapacity defines the capacity of the open files caching.
-	// Use -1 for zero, this has same effect as specifying NoCacher to OpenFilesCacher.
-	//
-	// The default value is 1024.
-	"openFilesCacheCapacity": int
 
-	// WriteBuffer defines maximum size of a 'memdb' before flushed to
-	// 'sorted table'. 'memdb' is an in-memory DB backed by an on-disk
-	// unsorted journal.
-	//
-	// LevelDB may held up to two 'memdb' at the same time.
-	//
-	// The default value is 6MiB.
-	"writeBuffer": int
+// disableSeeksCompaction permite desactivar la 'compactación desencadenada por búsquedas'.
+// El propósito de la 'compactación desencadenada por búsquedas' es optimizar la base de datos para
+// minimizar las 'búsquedas de nivel', sin embargo, esto puede generar muchas
+// compactaciones pequeñas que pueden no ser preferibles.
+//
+// El valor predeterminado es true.
+"disableSeeksCompaction": bool
 
-	// FilterBitsPerKey is the number of bits to add to the bloom filter per
-	// key.
-	//
-	// The default value is 10.
-	"filterBitsPerKey": int
+// openFilesCacheCapacity define la capacidad de la caché de archivos abiertos.
+// Use -1 para cero, esto tiene el mismo efecto que especificar NoCacher a OpenFilesCacher.
+//
+// El valor predeterminado es 1024.
+"openFilesCacheCapacity": int
 
-	// MaxManifestFileSize is the maximum size limit of the MANIFEST-****** file.
-	// When the MANIFEST-****** file grows beyond this size, LevelDB will create
-	// a new MANIFEST file.
-	//
-	// The default value is infinity.
-	"maxManifestFileSize": int
+// writeBuffer define el tamaño máximo de un 'memdb' antes de que se vacíe en
+// una 'tabla ordenada'. 'memdb' es una base de datos en memoria respaldada por un
+// diario desordenado en disco.
+//
+// LevelDB puede contener hasta dos 'memdb' al mismo tiempo.
+//
+// El valor predeterminado es 6MiB.
+"writeBuffer": int
 
-	// MetricUpdateFrequency is the frequency to poll LevelDB metrics in
-	// nanoseconds.
-	// If <= 0, LevelDB metrics aren't polled.
-	//
-	// The default value is 10s.
-	"metricUpdateFrequency": int
+// filterBitsPerKey es el número de bits que se agregan al filtro de Bloom por
+// clave.
+//
+// El valor predeterminado es 10.
+"filterBitsPerKey": int
+
+// maxManifestFileSize es el límite máximo de tamaño del archivo MANIFEST-******.
+// Cuando el archivo MANIFEST-****** crece más allá de este tamaño, LevelDB creará
+// un nuevo archivo MANIFEST.
+//
+// El valor predeterminado es infinito.
+"maxManifestFileSize": int
+
+// metricUpdateFrequency es la frecuencia para sondear las métricas de LevelDB en
+// nanosegundos.
+// Si <= 0, las métricas de LevelDB no se sondean.
+//
+// El valor predeterminado es 10s.
+"metricUpdateFrequency": int
 }
 ```
 
-## Genesis
+## Génesis
 
 #### `--genesis-file` (string)
 
-Path to a JSON file containing the genesis data to use. Ignored when running
-standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is
-specified. If not given, uses default genesis data.
+Ruta a un archivo JSON que contiene los datos de génesis a utilizar. Se ignora cuando se ejecutan
+redes estándar (Mainnet, Fuji Testnet), o cuando se especifica `--genesis-content`. Si no se proporciona, utiliza los datos de génesis predeterminados.
 
-These are the main properties in the JSON file:
+Estas son las propiedades principales en el archivo JSON:
 
-- `networkID`: A unique identifier for the blockchain, must be a number in the range [0, 2^32).
-- `allocations`: The list of initial addresses, their initial balances and the unlock schedule for each.
-- `startTime`: The time of the beginning of the blockchain, it must be a Unix
-  timestamp and it can't be a time in the future.
-- `initialStakeDuration`: The stake duration, in seconds, of the validators that exist at network genesis.
-- `initialStakeDurationOffset`: The offset, in seconds, between the start times
-  of the validators that exist at genesis.
-- `initialStakedFunds`: A list of addresses that own the funds staked at genesis
-  (each address must be present in `allocations` as well)
-- `initialStakers`: The validators that exist at genesis. Each element contains
-  the `rewardAddress`, NodeID and the `delegationFee` of the validator.
-- `cChainGenesis`: The genesis info to be passed to the C-Chain.
-- `message`: A message to include in the genesis. Not required.
+- `networkID`: Un identificador único para la blockchain, debe ser un número en el rango [0, 2^32).
+- `allocations`: La lista de direcciones iniciales, sus saldos iniciales y el cronograma de desbloqueo para cada una.
+- `startTime`: La hora de inicio de la blockchain, debe ser una marca de tiempo Unix
+  y no puede ser una hora en el futuro.
+- `initialStakeDuration`: La duración de stake, en segundos, de los validadores que existen en el génesis de la red.
+- `initialStakeDurationOffset`: El desplazamiento, en segundos, entre los tiempos de inicio
+  de los validadores que existen en el génesis.
+- `initialStakedFunds`: Una lista de direcciones que poseen los fondos stakeados en el génesis
+  (cada dirección debe estar presente en `allocations` también)
+- `initialStakers`: Los validadores que existen en el génesis. Cada elemento contiene
+  la `rewardAddress`, NodeID y la `delegationFee` del validador.
+- `cChainGenesis`: La información de génesis que se pasará a la C-Chain.
+- `message`: Un mensaje para incluir en el génesis. No es obligatorio.
 
-For an example of a JSON representation of genesis data, see [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
+Para un ejemplo de una representación JSON de los datos de génesis, consulte [genesis_local.json](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.json).
 
 #### `--genesis-file-content` (string)
 
-As an alternative to `--genesis-file`, it allows specifying base64 encoded genesis data to use.
+Como alternativa a `--genesis-file`, permite especificar los datos de génesis codificados en base64 a utilizar.
 
-## HTTP Server
+## Servidor HTTP
 
 #### `--http-host` (string)
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that
-by default, your node can only handle API calls made from the same machine. To
-allow API calls from other machines, use `--http-host=`. You can also enter
-domain names as parameter.
+La dirección en la que escuchan las API HTTP. De forma predeterminada, es `127.0.0.1`. Esto significa que,
+de forma predeterminada, su nodo solo puede manejar llamadas de API realizadas desde la misma máquina. Para
+permitir llamadas de API desde otras máquinas, use `--http-host=`. También puede ingresar
+nombres de dominio como parámetro.
 
 #### `--http-port` (int)
 
-Each node runs an HTTP server that provides the APIs for interacting with the
-node and the Avalanche network. This argument specifies the port that the HTTP
-server will listen on. The default value is `9650`.
+Cada nodo ejecuta un servidor HTTP que proporciona las API para interactuar con el
+nodo y la red Avalanche. Este argumento especifica el puerto en el que el servidor HTTP
+escuchará. El valor predeterminado es `9650`.
 
-#### `--http-tls-cert-file` (string, file path)
+#### `--http-tls-cert-file` (string, ruta de archivo)
 
-This argument specifies the location of the TLS certificate used by the node for
-the HTTPS server. This must be specified when `--http-tls-enabled=true`. There
-is no default value. This flag is ignored if `--http-tls-cert-file-content` is
-specified.
+Este argumento especifica la ubicación del certificado TLS utilizado por el nodo para
+el servidor HTTPS. Esto debe especificarse cuando `--http-tls-enabled=true`. No
+hay un valor predeterminado. Esta bandera se ignora si se especifica `--http-tls-cert-file-content`.
 
 #### `--http-tls-cert-file-content` (string)
 
-As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded
-content of the TLS certificate used by the node for the HTTPS server. Note that
-full certificate content, with the leading and trailing header, must be base64
-encoded. This must be specified when `--http-tls-enabled=true`.
+Como alternativa a `--http-tls-cert-file`, permite especificar el contenido codificado en base64
+del certificado TLS utilizado por el nodo para el servidor HTTPS. Tenga en cuenta que
+el contenido completo del certificado, con el encabezado inicial y final, debe estar codificado en base64.
+Esto debe especificarse cuando `--http-tls-enabled=true`.
 
-#### `--http-tls-enabled` (boolean)
+#### `--http-tls-enabled` (booleano)
 
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
+Si se establece en `true`, esta bandera intentará actualizar el servidor para usar HTTPS. De forma predeterminada, es `false`.
 
-#### `--http-tls-key-file` (string, file path)
+#### `--http-tls-key-file` (string, ruta de archivo)
 
-This argument specifies the location of the TLS private key used by the node for
-the HTTPS server. This must be specified when `--http-tls-enabled=true`. There
-is no default value. This flag is ignored if `--http-tls-key-file-content` is
-specified.
+Este argumento especifica la ubicación de la clave privada TLS utilizada por el nodo para
+el servidor HTTPS. Esto debe especificarse cuando `--http-tls-enabled=true`. No
+hay un valor predeterminado. Esta bandera se ignora si se especifica `--http-tls-key-file-content`.
 
 #### `--http-tls-key-file-content` (string)
 
-As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded
-content of the TLS private key used by the node for the HTTPS server. Note that
-full private key content, with the leading and trailing header, must be base64
-encoded. This must be specified when `--http-tls-enabled=true`.
+Como alternativa a `--http-tls-key-file`, permite especificar el contenido codificado en base64
+de la clave privada TLS utilizada por el nodo para el servidor HTTPS. Tenga en cuenta que
+el contenido completo de la clave privada, con el encabezado inicial y final, debe estar codificado en base64.
+Esto debe especificarse cuando `--http-tls-enabled=true`.
 
 #### `--http-read-timeout` (string)
 
-Maximum duration for reading the entire request, including the body. A zero or
-negative value means there will be no timeout.
+Duración máxima para leer la solicitud completa, incluido el cuerpo. Un valor cero o
+negativo significa que no habrá tiempo de espera.
 
 #### `--http-read-header-timeout` (string)
 
-Maximum duration to read request headers. The connection’s read deadline is
-reset after reading the headers. If `--http-read-header-timeout` is zero, the
-value of `--http-read-timeout` is used. If both are zero, there is no timeout.
+Duración máxima para leer las cabeceras de la solicitud. El plazo de lectura de la conexión se restablece después de leer las cabeceras. Si `--http-read-header-timeout` es cero, se utiliza el valor de `--http-read-timeout`. Si ambos son cero, no hay tiempo de espera.
 
 #### `--http-write-timeout` (string)
 
-Maximum duration before timing out writes of the response. It is reset whenever
-a new request’s header is read. A zero or negative value means there will be no
-timeout.
+Duración máxima antes de agotar el tiempo de espera de escritura de la respuesta. Se restablece cada vez
+que se lee el encabezado de una nueva solicitud. Un valor cero o negativo significa que no habrá tiempo de espera.
 
 #### `--http-idle-timeout` (string)
 
-Maximum duration to wait for the next request when keep-alives are enabled. If
-`--http-idle-timeout` is zero, the value of `--http-read-timeout` is used. If both are zero,
-there is no timeout.
+Duración máxima para esperar la siguiente solicitud cuando las conexiones persistentes están habilitadas. Si
+`--http-idle-timeout` es cero, se utiliza el valor de `--http-read-timeout`. Si ambos son cero,
+no hay tiempo de espera.
 
 #### `--http-allowed-origins` (string)
 
-Origins to allow on the HTTP port. Defaults to `*` which allows all origins. Example:
+Orígenes permitidos en el puerto HTTP. De forma predeterminada, es `*`, lo que permite todos los orígenes. Ejemplo:
 `"https://*.avax.network https://*.avax-test.network"`
 
 #### `--http-allowed-hosts` (string)
 
-List of acceptable host names in API requests. Provide the wildcard (`'*'`) to accept
-requests from all hosts. API requests where the `Host` field is empty or an IP address
-will always be accepted. An API call whose HTTP `Host` field isn't acceptable will
-receive a 403 error code. Defaults to `localhost`.
+Lista de nombres de host aceptables en las solicitudes de API. Proporcione el comodín (`'*'`) para aceptar
+solicitudes de todos los hosts. Una llamada de API cuyo campo `Host` HTTP no sea aceptable recibirá un código de error 403. De forma predeterminada, es `localhost`.
 
 ## IPCs
 
 #### `--ipcs-chain-ids` (string)
 
-Comma separated list of chain ids to connect to (for example
+Lista separada por comas de los IDs de cadena a los que conectarse (por ejemplo,
 `11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
-There is no default value.
+No hay un valor predeterminado.
 
 #### `--ipcs-path` (string)
 
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
+El directorio (Unix) o el prefijo de la tubería con nombre (Windows) para los sockets IPC. De forma predeterminada, es `/tmp`.
 
-## File Descriptor Limit
+## Límite de descriptores de archivo
 
 #### `--fd-limit` (int)
 
-Attempts to raise the process file descriptor limit to at least this value and
-error if the value is above the system max. Linux default `32768`.
+Intenta aumentar el límite de descriptores de archivo del proceso a al menos este valor y
+devuelve un error si el valor está por encima del máximo del sistema. Predeterminado de Linux `32768`.
 
-## Logging
+## Registro
 
 #### `--log-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
 
-The log level determines which events to log. There are 8 different levels, in
-order from highest priority to lowest.
+El nivel de registro determina qué eventos se registran. Hay 8 niveles diferentes, en orden de mayor a menor prioridad.
 
-- `off`: No logs have this level of logging. Turns off logging.
-- `fatal`: Fatal errors that are not recoverable.
-- `error`: Errors that the node encounters, these errors were able to be recovered.
-- `warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-- `info`: Useful descriptions of node status updates.
-- `trace`: Traces container (block, vertex, transaction) job results. Useful for
-  tracing container IDs and their outcomes.
-- `debug`: Debug logging is useful when attempting to understand possible bugs
-  in the code. More information that would be typically desired for normal usage
-  will be displayed.
-- `verbo`: Tracks extensive amounts of information the node is processing. This
-  includes message contents and binary dumps of data for extremely low level
-  protocol analysis.
+- `off`: Ningún registro tiene este nivel de registro. Desactiva el registro.
+- `fatal`: Errores fatales que no son recuperables.
+- `error`: Errores que encuentra el nodo, estos errores pudieron ser recuperados.
+- `warn`: Una advertencia que podría ser indicativa de un nodo bizantino espurio, o un error potencial futuro.
+- `info`: Descripciones útiles de actualizaciones de estado del nodo.
+- `trace`: Rastrea los resultados del trabajo de los contenedores (bloque, vértice, transacción). Útil para rastrear identificadores de contenedores y sus resultados.
+- `debug`: El registro de depuración es útil cuando se intenta entender posibles errores en el código. Se mostrará más información de la que se desearía típicamente para el uso normal.
+- `verbo`: Rastrea cantidades extensas de información que el nodo está procesando. Esto incluye el contenido de los mensajes y volcados binarios de datos para un análisis de protocolo de nivel extremadamente bajo.
 
-When specifying a log level note that all logs with the specified priority or
-higher will be tracked. Defaults to `info`.
+Al especificar un nivel de registro, tenga en cuenta que se rastrearán todos los registros con la prioridad especificada o superior. El valor predeterminado es `info`.
 
-#### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`)
+#### `--log-display-level` (cadena, `{verbo, debug, trace, info, warn, error, fatal, off}`)
 
-The log level determines which events to display to stdout. If left blank,
-will default to the value provided to `--log-level`.
+El nivel de registro determina qué eventos mostrar en stdout. Si se deja en blanco, se utilizará el valor proporcionado a `--log-level`.
 
-#### `--log-format` (string, `{auto, plain, colors, json}`)
+#### `--log-format` (cadena, `{auto, plain, colors, json}`)
 
-The structure of log format. Defaults to `auto` which formats terminal-like
-logs, when the output is a terminal. Otherwise, should be one of `{auto, plain, colors, json}`
+La estructura del formato de registro. El valor predeterminado es `auto`, que formatea los registros como en una terminal, cuando la salida es una terminal. De lo contrario, debe ser uno de `{auto, plain, colors, json}`.
 
-#### `--log-dir` (string, file path)
+#### `--log-dir` (cadena, ruta de archivo)
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
-If you are running the node as a system service (ex. using the installer script) logs will also be
-stored in `$HOME/var/log/syslog`.
+Especifica el directorio en el que se guardan los registros del sistema. El valor predeterminado es `"$HOME/.avalanchego/logs"`. Si está ejecutando el nodo como un servicio del sistema (por ejemplo, utilizando el script de instalación), los registros también se almacenarán en `$HOME/var/log/syslog`.
 
-#### `--log-disable-display-plugin-logs` (boolean)
+#### `--log-disable-display-plugin-logs` (booleano)
 
-Disables displaying plugin logs in stdout. Defaults to `false`.
+Deshabilita la visualización de los registros de los complementos en stdout. El valor predeterminado es `false`.
 
-#### `--log-rotater-max-size` (uint)
+#### `--log-rotater-max-size` (entero sin signo)
 
-The maximum file size in megabytes of the log file before it gets rotated. Defaults to `8`.
+El tamaño máximo del archivo de registro en megabytes antes de que se rote. El valor predeterminado es `8`.
 
-#### `--log-rotater-max-files` (uint)
+#### `--log-rotater-max-files` (entero sin signo)
 
-The maximum number of old log files to retain. 0 means retain all old log files. Defaults to `7`.
+El número máximo de archivos de registro antiguos para retener. 0 significa retener todos los archivos de registro antiguos. El valor predeterminado es `7`.
 
-#### `--log-rotater-max-age` (uint)
+#### `--log-rotater-max-age` (entero sin signo)
 
-The maximum number of days to retain old log files based on the timestamp
-encoded in their filename. 0 means retain all old log files. Defaults to `0`.
+El número máximo de días para retener archivos de registro antiguos según la marca de tiempo codificada en su nombre de archivo. 0 significa retener todos los archivos de registro antiguos. El valor predeterminado es `0`.
 
-#### `--log-rotater-compress-enabled` (boolean)
+#### `--log-rotater-compress-enabled` (booleano)
 
-Enables the compression of rotated log files through gzip. Defaults to `false`.
+Habilita la compresión de archivos de registro rotados a través de gzip. El valor predeterminado es `false`.
 
-## Network ID
+## ID de red
 
-#### `--network-id` (string)
+#### `--network-id` (cadena)
 
-The identity of the network the node should connect to. Can be one of:
+La identidad de la red a la que el nodo debe conectarse. Puede ser uno de:
 
-- `--network-id=mainnet` -&gt; Connect to Mainnet (default).
-- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-- `--network-id=testnet` -&gt; Connect to the current test-network. (Right now, this is Fuji.)
-- `--network-id=local` -&gt; Connect to a local test-network.
-- `--network-id=network-{id}` -&gt; Connect to the network with the given ID.
-  `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Conectarse a Mainnet (predeterminado).
+- `--network-id=fuji` -&gt; Conectarse a la red de prueba Fuji.
+- `--network-id=testnet` -&gt; Conectarse a la red de prueba actual. (En este momento, esto es Fuji).
+- `--network-id=local` -&gt; Conectarse a una red de prueba local.
+- `--network-id=network-{id}` -&gt; Conectarse a la red con el ID dado.
+  `id` debe estar en el rango `[0, 2^32)`.
 
 ## OpenTelemetry
 
-AvalancheGo supports collecting and exporting [OpenTelemetry](https://opentelemetry.io/) traces.
-This might be useful for debugging, performance analysis, or monitoring.
+AvalancheGo admite recopilar y exportar trazas de [OpenTelemetry](https://opentelemetry.io/). Esto puede ser útil para la depuración, el análisis de rendimiento o el monitoreo.
 
-#### `--tracing-enabled` (boolean)
+#### `--tracing-enabled` (booleano)
 
-If true, enable OpenTelemetry tracing. Defaults to `false`.
+Si es verdadero, habilita el rastreo de OpenTelemetry. El valor predeterminado es `false`.
 
-#### `--tracing-endpoint` (string)
+#### `--tracing-endpoint` (cadena)
 
-The endpoint to export trace data to. Defaults to `localhost:4317`.
+El punto final para exportar los datos de traza. El valor predeterminado es `localhost:4317`.
 
-#### `--tracing-insecure` (string)
+#### `--tracing-insecure` (cadena)
 
-If true, don't use TLS when exporting trace data. Defaults to `true`.
+Si es verdadero, no utiliza TLS al exportar los datos de traza. El valor predeterminado es `true`.
 
-#### `--tracing-sample-rate` (float)
+#### `--tracing-sample-rate` (flotante)
 
-The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample.
-Defaults to `0.1`.
+La fracción de trazas a muestrear. Si es >= 1, siempre se muestrea. Si es <= 0, nunca se muestrea.
+El valor predeterminado es `0.1`.
 
-#### `--tracing-exporter-type`(string)
+#### `--tracing-exporter-type`(cadena)
 
-Type of exporter to use for tracing. Options are [`grpc`,`http`]. Defaults to `grpc`.
+Tipo de exportador a utilizar para el rastreo. Las opciones son [`grpc`,`http`]. El valor predeterminado es `grpc`.
 
-## Public IP
+## IP pública
 
-Validators must know one of their public facing IP addresses so they can enable
-other nodes to connect to them.
+Los validadores deben conocer una de sus direcciones IP públicas para que puedan habilitar
+que otros nodos se conecten a ellos.
 
-By default, the node will attempt to perform NAT traversal to get the node's IP
-according to its router.
+De forma predeterminada, el nodo intentará realizar el tránsito de NAT para obtener la IP del nodo
+según su enrutador.
 
-#### `--public-ip` (string)
+#### `--public-ip` (cadena)
 
-If this argument is provided, the node assume this is its public IP.
+Si se proporciona este argumento, el nodo asumirá que esta es su IP pública.
 
 :::tip
-When running a local network it may be easiest to set this value to `127.0.0.1`.
+Cuando se ejecuta una red local, puede ser más fácil establecer este valor en `127.0.0.1`.
 :::
 
-#### `--public-ip-resolution-frequency` (duration)
+#### `--public-ip-resolution-frequency` (duración)
 
-Frequency at which this node resolves/updates its public IP and renew NAT
-mappings, if applicable. Default to 5 minutes.
+Frecuencia con la que este nodo resuelve/actualiza su IP pública y renueva los mapeos NAT, si corresponde. El valor predeterminado es de 5 minutos.
 
-#### `--public-ip-resolution-service` (string)
+#### `--public-ip-resolution-service` (cadena)
 
-When provided, the node will use that service to periodically resolve/update its
-public IP. Only acceptable values are `ifconfigCo`, `opendns` or `ifconfigMe`.
+Cuando se proporciona, el nodo utilizará ese servicio para resolver/actualizar periódicamente su IP pública.
+Los únicos valores aceptables son `ifconfigCo`, `opendns` o `ifconfigMe`.
 
-## Staking
+## Staking (Participación)
 
-#### `--staking-port` (int)
+#### `--staking-port` (entero)
 
-The port through which the network peers will connect to this node externally.
-Having this port accessible from the internet is required for correct node
-operation. Defaults to `9651`.
+El puerto a través del cual los pares de la red se conectarán a este nodo externamente.
+Tener este puerto accesible desde Internet es necesario para el correcto funcionamiento del nodo.
+El valor predeterminado es `9651`.
 
-#### `--sybil-protection-enabled` (boolean)
+#### `--sybil-protection-enabled` (booleano)
 
-Avalanche uses Proof of Stake (PoS) as sybil resistance to make it prohibitively
-expensive to attack the network. If false, sybil resistance is disabled and all
-peers will be sampled during consensus. Defaults to `true`. Note that this can
-not be disabled on public networks (`Fuji` and `Mainnet`).
+Avalanche utiliza Prueba de Participación (PoS) como resistencia a sybil para hacer prohibitivamente
+costoso atacar la red. Si es falso, la resistencia a sybil está deshabilitada y todos
+los pares serán muestreados durante el consenso. El valor predeterminado es `true`. Tenga en cuenta que esto no se puede desactivar en redes públicas (`Fuji` y `Mainnet`).
 
-Setting this flag to `false` **does not** mean "this node is not a validator."
-It means that this node will sample all nodes, not just validators.
-**You should not set this flag to false unless you understand what you are doing.**
+Establecer este indicador en `false` **no significa** "este nodo no es un validador".
+Significa que este nodo muestreará a todos los nodos, no solo a los validadores.
+**No debe establecer este indicador en falso a menos que entienda lo que está haciendo.**
 
-#### `--sybil-protection-disabled-weight` (uint)
+#### `--sybil-protection-disabled-weight` (entero sin signo)
 
-Weight to provide to each peer when staking is disabled. Defaults to `100`.
+Peso que se proporcionará a cada par cuando la participación esté deshabilitada. El valor predeterminado es `100`.
 
-#### `--staking-tls-cert-file` (string, file path)
+#### `--staking-tls-cert-file` (cadena, ruta de archivo)
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes.
-This argument specifies the location of the TLS certificate used by the node. By
-default, the node expects the TLS certificate to be at
-`$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if
-`--staking-tls-cert-file-content` is specified.
+Avalanche utiliza conexiones TLS autenticadas de dos vías para conectar nodos de forma segura.
+Este argumento especifica la ubicación del certificado TLS utilizado por el nodo. De
+forma predeterminada, el nodo espera que el certificado TLS esté en
+`$HOME/.avalanchego/staking/staker.crt`. Esta bandera se ignora si
+se especifica `--staking-tls-cert-file-content`.
 
-#### `--staking-tls-cert-file-content` (string)
+#### `--staking-tls-cert-file-content` (cadena)
 
-As an alternative to `--staking-tls-cert-file`, it allows specifying base64
-encoded content of the TLS certificate used by the node. Note that full
-certificate content, with the leading and trailing header, must be base64
-encoded.
+Como alternativa a `--staking-tls-cert-file`, permite especificar el contenido base64
+codificado del certificado TLS utilizado por el nodo. Tenga en cuenta que el contenido completo del certificado, con el encabezado inicial y final, debe estar codificado en base64.
 
-#### `--staking-tls-key-file` (string, file path)
+#### `--staking-tls-key-file` (cadena, ruta de archivo)
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes.
-This argument specifies the location of the TLS private key used by the node. By
-default, the node expects the TLS private key to be at
-`$HOME/.avalanchego/staking/staker.key`. This flag is ignored if
-`--staking-tls-key-file-content` is specified.
+Avalanche utiliza conexiones TLS autenticadas de dos vías para conectar nodos de forma segura.
+Este argumento especifica la ubicación de la clave privada TLS utilizada por el nodo. De
+forma predeterminada, el nodo espera que la clave privada TLS esté en
+`$HOME/.avalanchego/staking/staker.key`. Esta bandera se ignora si
+se especifica `--staking-tls-key-file-content`.
 
-#### `--staking-tls-key-file-content` (string)
+#### `--staking-tls-key-file-content` (cadena)
 
-As an alternative to `--staking-tls-key-file`, it allows specifying base64
-encoded content of the TLS private key used by the node. Note that full private
-key content, with the leading and trailing header, must be base64 encoded.
+Como alternativa a `--staking-tls-key-file`, permite especificar el contenido base64
+codificado de la clave privada TLS utilizada por el nodo. Tenga en cuenta que el contenido completo de la clave privada, con el encabezado inicial y final, debe estar codificado en base64.
 
-## Subnets
+## Subredes
 
-### Subnet Tracking
+### Seguimiento de subredes
 
-#### `--track-subnets` (string)
+#### `--track-subnets` (cadena)
 
-Comma separated list of Subnet IDs that this node would track if added to.
-Defaults to empty (will only validate the Primary Network).
+Lista separada por comas de los ID de subred que este nodo rastreará si se agrega.
+El valor predeterminado es vacío (solo validará la Red Primaria).
 
-### Subnet Configs
+### Configuraciones de subredes
 
-It is possible to provide parameters for Subnets. Parameters here apply to all
-chains in the specified Subnets. Parameters must be specified with a
-`{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
-configs for Subnets specified in
-`--track-subnets` parameter.
+Es posible proporcionar parámetros para Subredes. Estos parámetros se aplican a todas las cadenas en las Subredes especificadas. Los parámetros deben especificarse con un archivo de configuración `{subnetID}.json` bajo `--subnet-config-dir`. AvalancheGo carga las configuraciones para las Subredes especificadas en el parámetro `--track-subnets`.
 
-Full reference for all configuration options for a Subnet can be found in a
-separate [Subnet Configs](./subnet-configs) document.
+La referencia completa de todas las opciones de configuración para una Subred se puede encontrar en un documento aparte de [Configuraciones de Subred](./subnet-configs).
 
 #### `--subnet-config-dir` (`string`)
 
-Specifies the directory that contains Subnet configs, as described above.
-Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly,
-the specified folder must exist, or AvalancheGo will exit with an error. This
-flag is ignored if `--subnet-config-content` is specified.
+Especifica el directorio que contiene las configuraciones de las Subredes, como se describe anteriormente. Por defecto, es `$HOME/.avalanchego/configs/subnets`. Si se establece explícitamente la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--subnet-config-content`.
 
-Example: Let's say we have a Subnet with ID
-`p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file
-under the default `subnet-config-dir` at
-`$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`.
-An example config file is:
+Ejemplo: Digamos que tenemos una Subred con ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. Podemos crear un archivo de configuración en el directorio `subnet-config-dir` por defecto en `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. Un archivo de configuración de ejemplo es:
 
 ```json
 {
@@ -775,638 +695,553 @@ An example config file is:
 ```
 
 :::tip
-By default, none of these directories and/or files exist. You would need to create them manually if needed.
+Por defecto, ninguno de estos directorios y/o archivos existe. Deberá crearlos manualmente si es necesario.
 :::
 
 #### `--subnet-config-content` (string)
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
+Como alternativa a `--subnet-config-dir`, permite especificar parámetros codificados en base64 para una Subred.
 
-## Version
+## Versión
 
-#### `--version` (boolean)
+#### `--version` (booleano)
 
-If this is `true`, print the version and quit. Defaults to `false`.
+Si es `true`, imprime la versión y sale. Por defecto es `false`.
 
-## Advanced Options
+## Opciones Avanzadas
 
-The following options may affect the correctness of a node. Only power users should change these.
+Las siguientes opciones pueden afectar la corrección de un nodo. Solo los usuarios avanzados deben cambiar estas opciones.
 
 ### Gossiping
 
 #### `--consensus-app-gossip-validator-size` (uint)
 
-Number of validators to gossip an AppGossip message to. Defaults to `10`.
+Número de validadores a los que hacer gossip de un mensaje de AppGossip. Por defecto es `10`.
 
 #### `--consensus-app-gossip-non-validator-size` (uint)
 
-Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
+Número de no validadores a los que hacer gossip de un mensaje de AppGossip. Por defecto es `0`.
 
 #### `--consensus-app-gossip-peer-size` (uint)
 
-Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
+Número de pares (que pueden o no ser validadores) a los que hacer gossip de un mensaje de AppGossip. Por defecto es `0`.
 
 #### `--consensus-accepted-frontier-gossip-validator-size` (uint)
 
-Number of validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+Número de validadores a los que hacer gossip de la frontera aceptada. Por defecto es `0`.
 
 #### `--consensus-accepted-frontier-gossip-non-validator-size` (uint)
 
-Number of non-validators to gossip to when gossiping accepted frontier. Defaults to `0`.
+Número de no validadores a los que hacer gossip de la frontera aceptada. Por defecto es `0`.
 
 #### `--consensus-accepted-frontier-gossip-peer-size` (uint)
 
-Number of peers to gossip to when gossiping accepted frontier. Defaults to `15`.
+Número de pares a los que hacer gossip de la frontera aceptada. Por defecto es `15`.
 
-#### `--consensus-accepted-frontier-gossip-frequency` (duration)
+#### `--consensus-accepted-frontier-gossip-frequency` (duración)
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+Tiempo entre gossipeos de fronteras aceptadas. Por defecto es `10s`.
 
 #### `--consensus-on-accept-gossip-validator-size` (uint)
 
-Number of validators to gossip to each accepted container to. Defaults to `0`.
+Número de validadores a los que hacer gossip de cada contenedor aceptado. Por defecto es `0`.
 
 #### `--consensus-on-accept-gossip-non-validator-size` (uint)
 
-Number of non-validators to gossip to each accepted container to. Defaults to `0`.
+Número de no validadores a los que hacer gossip de cada contenedor aceptado. Por defecto es `0`.
 
 #### `--consensus-on-accept-gossip-peer-size` (uint)
 
-Number of peers to gossip to each accepted container to. Defaults to `10`.
+Número de pares a los que hacer gossip de cada contenedor aceptado. Por defecto es `10`.
 
 ### Benchlist
 
-#### `--benchlist-duration` (duration)
+#### `--benchlist-duration` (duración)
 
-Maximum amount of time a peer is benchlisted after surpassing
-`--benchlist-fail-threshold`. Defaults to `15m`.
+Cantidad máxima de tiempo que un par está en la lista de bench después de superar `--benchlist-fail-threshold`. Por defecto es `15m`.
 
 #### `--benchlist-fail-threshold` (int)
 
-Number of consecutive failed queries to a node before benching it (assuming all
-queries to it will fail). Defaults to `10`.
+Número de consultas fallidas consecutivas a un nodo antes de ponerlo en bench (asumiendo que todas las consultas a él fallarán). Por defecto es `10`.
 
-#### `--benchlist-min-failing-duration` (duration)
+#### `--benchlist-min-failing-duration` (duración)
 
-Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
+Cantidad mínima de tiempo que las consultas a un par deben estar fallando antes de que el par sea puesto en bench. Por defecto es `150s`.
 
-### Consensus Parameters
+### Parámetros de Consenso
 
 :::note
-Some of these parameters can only be set on a local or private network, not on Fuji Testnet or Mainnet
+Algunos de estos parámetros solo se pueden establecer en una red local o privada, no en la Testnet Fuji o en Mainnet
 :::
 
-#### `--consensus-shutdown-timeout` (duration)
+#### `--consensus-shutdown-timeout` (duración)
 
-Timeout before killing an unresponsive chain. Defaults to `5s`.
+Tiempo de espera antes de matar una cadena no receptiva. Por defecto es `5s`.
 
 #### `--create-asset-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new assets. Defaults to
-`10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local
-network.
+Tarifa de transacción, en nAVAX, para transacciones que crean nuevos activos. Por defecto es `10000000` nAVAX (.01 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--create-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to
-`1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local
-network.
+Tarifa de transacción, en nAVAX, para transacciones que crean nuevas Subredes. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--create-blockchain-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new blockchains.
-Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be
-changed on a local network.
+Tarifa de transacción, en nAVAX, para transacciones que crean nuevas blockchains. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--transform-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that transform Subnets. Defaults to
-`1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Tarifa de transacción, en nAVAX, para transacciones que transforman Subredes. Por defecto es `1000000000` nAVAX (1 AVAX) por transacción. Esto solo se puede cambiar en una red local.
 
 #### `--add-primary-network-validator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new primary network validators. Defaults to 0.
-This can only be changed on a local network.
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos validadores de la red primaria. Por defecto es 0. Esto solo se puede cambiar en una red local.
 
 #### `--add-primary-network-delegator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new primary network delegators. Defaults to 0.
-This can only be changed on a local network.
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos delegadores de la red primaria. Por defecto es 0. Esto solo se puede cambiar en una red local.
 
 #### `--add-subnet-validator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new Subnet validators.
-Defaults to `10000000` nAVAX (.01 AVAX).
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos validadores de Subredes. Por defecto es `10000000` nAVAX (.01 AVAX).
 
 #### `--add-subnet-delegator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new Subnet delegators.
-Defaults to `10000000` nAVAX (.01 AVAX).
+Tarifa de transacción, en nAVAX, para transacciones que agregan nuevos delegadores de Subredes. Por defecto es `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)
 
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
+La participación mínima, en nAVAX, que se puede delegar a un validador de la Red Primaria.
 
-Defaults to `25000000000` (25 AVAX) on Mainnet. Defaults to `5000000` (.005
-AVAX) on Test Net. This can only be changed on a local network.
+Por defecto es `25000000000` (25 AVAX) en Mainnet. Por defecto es `5000000` (.005 AVAX) en Test Net. Esto solo se puede cambiar en una red local.
 
 #### `--min-delegation-fee` (int)
 
-The minimum delegation fee that can be charged for delegation on the Primary
-Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults
-to `20000` (2%) on Mainnet. This can only be changed on a local network.
+La tarifa mínima de delegación que se puede cobrar por la delegación en la Red Primaria, multiplicada por `10,000`. Debe estar en el rango `[0, 1000000]`. Por defecto es `20000` (2%) en Mainnet. Esto solo se puede cambiar en una red local.
 
-#### `--min-stake-duration` (duration)
+#### `--min-stake-duration` (duración)
 
-Minimum staking duration. The Default on Mainnet is `336h` (two weeks). This can only be changed on
-a local network. This applies to both delegation and validation periods.
+Duración mínima de stake. El valor por defecto en Mainnet es `336h` (dos semanas). Esto solo se puede cambiar en una red local. Esto se aplica tanto a los períodos de delegación como de validación.
 
 #### `--min-validator-stake` (int)
 
-The minimum stake, in nAVAX, required to validate the Primary Network. This can
-only be changed on a local network.
+La participación mínima, en nAVAX, requerida para validar la Red Primaria. Esto solo se puede cambiar en una red local.
 
-Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005 AVAX) on Test Net.
+Por defecto es `2000000000000` (2,000 AVAX) en Mainnet. Por defecto es `5000000` (.005 AVAX) en Test Net.
 
-#### `--max-stake-duration` (duration)
+#### `--max-stake-duration` (duración)
 
-The maximum staking duration, in hours. Defaults to `8760h` (365 days) on
-Mainnet. This can only be changed on a local network.
+La duración máxima de apuesta, en horas. Por defecto es `8760h` (365 días) en Mainnet. Esto solo se puede cambiar en una red local.
 
 #### `--max-validator-stake` (int)
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary
-network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This
-includes stake provided by both the validator and by delegators to the
-validator. This can only be changed on a local network.
+La apuesta máxima, en nAVAX, que se puede colocar en un validador en la red primaria. Por defecto es `3000000000000000` (3,000,000 AVAX) en Mainnet. Esto incluye la apuesta proporcionada tanto por el validador como por los delegadores al validador. Esto solo se puede cambiar en una red local.
 
-#### `--stake-minting-period` (duration)
+#### `--stake-minting-period` (duración)
 
-Consumption period of the staking function, in hours. The Default on Mainnet is
-`8760h` (365 days). This can only be changed on a local network.
+Período de consumo de la función de apuesta, en horas. El valor predeterminado en Mainnet es `8760h` (365 días). Esto solo se puede cambiar en una red local.
 
 #### `--stake-max-consumption-rate` (uint)
 
-The maximum percentage of the consumption rate for the remaining token supply in
-the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is
-12% per years. This can only be changed on a local network.
+El porcentaje máximo de la tasa de consumo para el suministro de tokens restante en el período de acuñación, que es de 1 año en Mainnet. Por defecto es `120,000`, que es un 12% por año. Esto solo se puede cambiar en una red local.
 
 #### `--stake-min-consumption-rate` (uint)
 
-The minimum percentage of the consumption rate for the remaining token supply in
-the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is
-10% per years. This can only be changed on a local network.
+El porcentaje mínimo de la tasa de consumo para el suministro de tokens restante en el período de acuñación, que es de 1 año en Mainnet. Por defecto es `100,000`, que es un 10% por año. Esto solo se puede cambiar en una red local.
 
 #### `--stake-supply-cap` (uint)
 
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults
-to `720,000,000,000,000,000` nAVAX. This can only be changed on a local network.
+El suministro máximo de apuestas, en nAVAX, que se pueden colocar en un validador. Por defecto es `720,000,000,000,000,000` nAVAX. Esto solo se puede cambiar en una red local.
 
 #### `--tx-fee` (int)
 
-The required amount of nAVAX to be burned for a transaction to be valid on the
-X-Chain, and for import/export transactions on the P-Chain. This parameter
-requires network agreement in its current form. Changing this value from the
-default should only be done on private networks or local network. Defaults to
-`1,000,000` nAVAX per transaction.
+La cantidad requerida de nAVAX a quemar para que una transacción sea válida en la X-Chain, y para transacciones de importación/exportación en la P-Chain. Este parámetro requiere acuerdo de la red en su forma actual. Cambiar este valor desde el valor predeterminado solo debe hacerse en redes privadas o redes locales. Por defecto, son `1,000,000` nAVAX por transacción.
 
 #### `--uptime-requirement` (float)
 
-Fraction of time a validator must be online to receive rewards. Defaults to
-`0.8`. This can only be changed on a local network.
+Fracción de tiempo que un validador debe estar en línea para recibir recompensas. Por defecto es `0.8`. Esto solo se puede cambiar en una red local.
 
-#### `--uptime-metric-freq` (duration)
+#### `--uptime-metric-freq` (duración)
 
-Frequency of renewing this node's average uptime metric. Defaults to `30s`.
+Frecuencia de renovación de la métrica de tiempo de actividad promedio de este nodo. Por defecto es `30s`.
 
-#### Snow Parameters
+#### Parámetros de Snow
 
 ##### `--snow-concurrent-repolls` (int)
 
-Snow consensus requires repolling transactions that are issued during low time
-of network usage. This parameter lets one define how aggressive the client will
-be in finalizing these pending transactions. This should only be changed after
-careful consideration of the tradeoffs of Snow consensus. The value must be at
-least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
+El consenso de Snow requiere repollar transacciones que se emiten durante períodos de baja
+uso de la red. Este parámetro permite definir qué tan agresivo será el cliente en
+finalizar estas transacciones pendientes. Esto solo debe cambiarse después de
+considerar cuidadosamente los compromisos del consenso de Snow. El valor debe ser al
+menos `1` y como máximo `--snow-rogue-commit-threshold`. Por defecto es `4`.
 
 ##### `--snow-sample-size` (int)
 
-Snow consensus defines `k` as the number of validators that are sampled during
-each network poll. This parameter lets one define the `k` value used for
-consensus. This should only be changed after careful consideration of the
-tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
+El consenso de Snow define `k` como el número de validadores que se muestrean durante
+cada encuesta de red. Este parámetro permite definir el valor `k` utilizado para
+consenso. Esto solo debe cambiarse después de considerar cuidadosamente los
+compromisos del consenso de Snow. El valor debe ser al menos `1`. Por defecto es `20`.
 
 ##### `--snow-quorum-size` (int)
 
-Snow consensus defines `alpha` as the number of validators that must prefer a
-transaction during each network poll to increase the confidence in the
-transaction. This parameter lets us define the `alpha` value used for consensus.
-This should only be changed after careful consideration of the tradeoffs of Snow
-consensus. The value must be at greater than `k/2`. Defaults to `15`.
+El consenso de Snow define `alpha` como el número de validadores que deben preferir una
+transacción durante cada encuesta de red para aumentar la confianza en la
+transacción. Este parámetro nos permite definir el valor `alpha` utilizado para el consenso.
+Esto solo debe cambiarse después de considerar cuidadosamente los compromisos del consenso de Snow. El
+valor debe ser mayor que `k/2`. Por defecto es `15`.
 
 ##### `--snow-virtuous-commit-threshold` (int)
 
-Snow consensus defines `beta1` as the number of consecutive polls that a
-virtuous transaction must increase its confidence for it to be accepted. This
-parameter lets us define the `beta1` value used for consensus. This should only
-be changed after careful consideration of the tradeoffs of Snow consensus. The
-value must be at least `1`. Defaults to `15`.
+El consenso de Snow define `beta1` como el número de encuestas consecutivas en las que una
+transacción virtuosa debe aumentar su confianza para que sea aceptada. Este
+parámetro nos permite definir el valor `beta1` utilizado para el consenso. Esto solo debe
+cambiarse después de considerar cuidadosamente los compromisos del consenso de Snow. El
+valor debe ser al menos `1`. Por defecto es `15`.
 
 ##### `--snow-rogue-commit-threshold` (int)
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue
-transaction must increase its confidence for it to be accepted. This parameter
-lets us define the `beta2` value used for consensus. This should only be changed
-after careful consideration of the tradeoffs of Snow consensus. The value must
-be at least `beta1`. Defaults to `20`.
+El consenso de Snow define `beta2` como el número de encuestas consecutivas en las que una
+transacción rogue debe aumentar su confianza para que sea aceptada. Este parámetro
+nos permite definir el valor `beta2` utilizado para el consenso. Esto solo debe cambiarse
+después de considerar cuidadosamente los compromisos del consenso de Snow. El valor debe
+ser al menos `beta1`. Por defecto es `20`.
 
 ##### `--snow-optimal-processing` (int)
 
-Optimal number of processing items in consensus. The value must be at least `1`. Defaults to `50`.
+Número óptimo de elementos de procesamiento en el consenso. El valor debe ser al menos `1`. Por defecto es `50`.
 
 ##### `--snow-max-processing` (int)
 
-Maximum number of processing items to be considered healthy. Reports unhealthy
-if more than this number of items are outstanding. The value must be at least
-`1`. Defaults to `1024`.
+Número máximo de elementos de procesamiento que se considerarán saludables. Informa de no saludable
+si hay más de este número de elementos pendientes. El valor debe ser al menos
+`1`. Por defecto es `1024`.
 
-##### `--snow-max-time-processing` (duration)
+##### `--snow-max-time-processing` (duración)
 
-Maximum amount of time an item should be processing and still be healthy.
-Reports unhealthy if there is an item processing for longer than this duration.
-The value must be greater than `0`. Defaults to `2m`.
+Tiempo máximo que un elemento debe estar en proceso y aún así estar saludable.
+Informa de no saludable si hay un elemento en proceso durante más tiempo que esta duración.
+El valor debe ser mayor que `0`. Por defecto es `2m`.
 
-### ProposerVM Parameters
+### Parámetros de ProposerVM
 
 #### `--proposervm-use-current-height` (bool)
 
-Have the ProposerVM always report the last accepted P-chain block height. Defaults to `false`.
+Hacer que ProposerVM informe siempre la altura del último bloque aceptado en la P-chain. Por defecto es `false`.
 
-### Continuous Profiling
+### Perfilado continuo
 
-You can configure your node to continuously run memory/CPU profiles and save the
-most recent ones. Continuous memory/CPU profiling is enabled if
-`--profile-continuous-enabled` is set.
+Puede configurar su nodo para que ejecute continuamente perfiles de memoria/CPU y guarde los más recientes. El perfilado continuo de memoria/CPU está habilitado si se establece `--profile-continuous-enabled`.
 
 #### `--profile-continuous-enabled` (boolean)
 
-Whether the app should continuously produce performance profiles. Defaults to the false (not enabled).
+Si la aplicación debe producir continuamente perfiles de rendimiento. Por defecto es falso (no habilitado).
 
 #### `--profile-dir` (string)
 
-If profiling enabled, node continuously runs memory/CPU profiles and puts them
-at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+Si el perfilado está habilitado, el nodo ejecuta continuamente perfiles de memoria/CPU y los coloca en este directorio. Por defecto es `$HOME/.avalanchego/profiles/`.
 
-#### `--profile-continuous-freq` (duration)
+#### `--profile-continuous-freq` (duración)
 
-How often a new CPU/memory profile is created. Defaults to `15m`.
+Con qué frecuencia se crea un nuevo perfil de CPU/memoria. Por defecto es `15m`.
 
 #### `--profile-continuous-max-files` (int)
 
-Maximum number of CPU/memory profiles files to keep. Defaults to 5.
+Número máximo de archivos de perfiles de CPU/memoria que se mantendrán. Por defecto son 5.
 
-### Health
+### Salud
 
-#### `--health-check-frequency` (duration)
+#### `--health-check-frequency` (duración)
 
-Health check runs with this frequency. Defaults to `30s`.
+La frecuencia con la que se ejecuta la comprobación de salud. Por defecto es `30s`.
 
-#### `--health-check-averager-halflife` (duration)
+#### `--health-check-averager-halflife` (duración)
 
-Half life of averagers used in health checks (to measure the rate of message
-failures, for example.) Larger value --&gt; less volatile calculation of
-averages. Defaults to `10s`.
+Vida media de los promedios utilizados en las comprobaciones de salud (para medir la tasa de fallos de mensajes, por ejemplo). Un valor más grande --&gt; cálculo de promedios menos volátil. Por defecto es `10s`.
 
-### Network
+### Red
 
 #### `--network-allow-private-ips` (bool)
 
-Allows the node to connect peers with private IPs. Defaults to `true`.
+Permite que el nodo se conecte a pares con IPs privadas. Por defecto es `true`.
 
 #### `--network-compression-type` (string)
 
-The type of compression to use when sending messages to peers. Defaults to `gzip`.
-Must be one of [`gzip`, `zstd`, `none`].
+El tipo de compresión a utilizar al enviar mensajes a los pares. Por defecto es `gzip`.
+Debe ser uno de [`gzip`, `zstd`, `none`].
 
-Nodes can handle inbound `gzip` compressed messages but by default send `zstd` compressed messages.
+Los nodos pueden manejar mensajes entrantes comprimidos con `gzip`, pero por defecto envían mensajes comprimidos con `zstd`.
 
-#### `--network-initial-timeout` (duration)
+#### `--network-initial-timeout` (duración)
 
-Initial timeout value of the adaptive timeout manager. Defaults to `5s`.
+Valor de tiempo de espera inicial del administrador de tiempo de espera adaptativo. Por defecto es `5s`.
 
-#### `--network-initial-reconnect-delay` (duration)
+#### `--network-initial-reconnect-delay` (duración)
 
-Initial delay duration must be waited before attempting to reconnect a peer. Defaults to `1s`.
+Duración de retraso inicial que se debe esperar antes de intentar reconectar un par. Por defecto es `1s`.
 
-#### `--network-max-reconnect-delay` (duration)
+#### `--network-max-reconnect-delay` (duración)
 
-Maximum delay duration must be waited before attempting to reconnect a peer. Defaults to `1h`.
+Duración máxima de retraso que se debe esperar antes de intentar reconectar un par. Por defecto es `1h`.
 
-#### `--network-minimum-timeout` (duration)
+#### `--network-minimum-timeout` (duración)
 
-Minimum timeout value of the adaptive timeout manager. Defaults to `2s`.
+Valor de tiempo de espera mínimo del administrador de tiempo de espera adaptativo. Por defecto es `2s`.
 
-#### `--network-maximum-timeout` (duration)
+#### `--network-maximum-timeout` (duración)
 
-Maximum timeout value of the adaptive timeout manager. Defaults to `10s`.
+Valor de tiempo de espera máximo del administrador de tiempo de espera adaptativo. Por defecto es `10s`.
 
-#### `--network-maximum-inbound-timeout` (duration)
+#### `--network-maximum-inbound-timeout` (duración)
 
-Maximum timeout value of an inbound message. Defines duration within which an
-incoming message must be fulfilled. Incoming messages containing deadline higher
-than this value will be overridden with this value. Defaults to `10s`.
+Valor de tiempo de espera máximo de un mensaje entrante. Define la duración dentro de la cual se debe cumplir un
+mensaje entrante. Los mensajes entrantes que contengan un plazo límite superior
+a este valor se anularán con este valor. Por defecto es `10s`.
 
-#### `--network-timeout-halflife` (duration)
+#### `--network-timeout-halflife` (duración)
 
-Half life used when calculating average network latency. Larger value --&gt; less
-volatile network latency calculation. Defaults to `5m`.
+Vida media utilizada al calcular la latencia de red promedio. Un valor más grande --&gt; menos
+cálculo de latencia de red volátil. Por defecto es `5m`.
 
-#### `--network-timeout-coefficient` (duration)
+#### `--network-timeout-coefficient` (duración)
 
-Requests to peers will time out after \[`network-timeout-coefficient`\] \*
-\[average request latency\]. Defaults to `2`.
+Las solicitudes a los pares expirarán después de \[`network-timeout-coefficient`\] \* \[latencia promedio de la solicitud\]. El valor predeterminado es `2`.
 
-#### `--network-read-handshake-timeout` (duration)
+#### `--network-read-handshake-timeout` (duración)
 
-Timeout value for reading handshake messages. Defaults to `15s`.
+Valor de tiempo de espera para leer mensajes de saludo. El valor predeterminado es `15s`.
 
-#### `--network-ping-timeout` (duration)
+#### `--network-ping-timeout` (duración)
 
-Timeout value for Ping-Pong with a peer. Defaults to `30s`.
+Valor de tiempo de espera para Ping-Pong con un par. El valor predeterminado es `30s`.
 
-#### `--network-ping-frequency` (duration)
+#### `--network-ping-frequency` (duración)
 
-Frequency of pinging other peers. Defaults to `22.5s`.
+Frecuencia de envío de pings a otros pares. El valor predeterminado es `22.5s`.
 
 #### `--network-health-min-conn-peers` (uint)
 
-Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+El nodo informará que está en mal estado si está conectado a menos de esta cantidad de pares. El valor predeterminado es `1`.
 
-#### `--network-health-max-time-since-msg-received` (duration)
+#### `--network-health-max-time-since-msg-received` (duración)
 
-Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+El nodo informará que está en mal estado si no ha recibido un mensaje durante este tiempo. El valor predeterminado es `1m`.
 
-#### `--network-health-max-time-since-msg-sent` (duration)
+#### `--network-health-max-time-since-msg-sent` (duración)
 
-Network layer returns unhealthy if haven't sent a message for at least this much time. Defaults to `1m`.
+La capa de red informa que está en mal estado si no ha enviado un mensaje durante al menos este tiempo. El valor predeterminado es `1m`.
 
 #### `--network-health-max-portion-send-queue-full` (float)
 
-Node will report unhealthy if its send queue is more than this portion full.
-Must be in \[0,1\]. Defaults to `0.9`.
+El nodo informará que está en mal estado si su cola de envío está más llena que esta proporción. Debe estar en \[0,1\]. El valor predeterminado es `0.9`.
 
 #### `--network-health-max-send-fail-rate` (float)
 
-Node will report unhealthy if more than this portion of message sends fail. Must
-be in \[0,1\]. Defaults to `0.25`.
+El nodo informará que está en mal estado si falla más de esta proporción de envíos de mensajes. Debe estar en \[0,1\]. El valor predeterminado es `0.25`.
 
-#### `--network-health-max-outstanding-request-duration` (duration)
+#### `--network-health-max-outstanding-request-duration` (duración)
 
-Node reports unhealthy if there has been a request outstanding for this duration. Defaults to `5m`.
+El nodo informa que está en mal estado si ha habido una solicitud pendiente durante esta duración. El valor predeterminado es `5m`.
 
-#### `--network-max-clock-difference` (duration)
+#### `--network-max-clock-difference` (duración)
 
-Max allowed clock difference value between this node and peers. Defaults to `1m`.
+Valor máximo de diferencia de reloj permitida entre este nodo y los pares. El valor predeterminado es `1m`.
 
 #### `--network-require-validator-to-connect` (bool)
 
-If true, this node will only maintain a connection with another node if this
-node is a validator, the other node is a validator, or the other node is a
-beacon.
+Si es verdadero, este nodo solo mantendrá una conexión con otro nodo si este nodo es un validador, el otro nodo es un validador o el otro nodo es un beacon.
 
 #### `--network-tcp-proxy-enabled` (bool)
 
-Require all P2P connections to be initiated with a TCP proxy header. Defaults to `false`.
+Requiere que todas las conexiones P2P se inicien con una cabecera de proxy TCP. El valor predeterminado es `false`.
 
-#### `--network-tcp-proxy-read-timeout` (duration)
+#### `--network-tcp-proxy-read-timeout` (duración)
 
-Maximum duration to wait for a TCP proxy header. Defaults to `3s`.
+Duración máxima para esperar una cabecera de proxy TCP. El valor predeterminado es `3s`.
 
-#### `--network-outbound-connection-timeout` (duration)
+#### `--network-outbound-connection-timeout` (duración)
 
-Timeout while dialing a peer. Defaults to `30s`.
+Tiempo de espera al marcar un par. El valor predeterminado es `30s`.
 
-### Message Rate-Limiting
+### Limitación de velocidad de mensajes
 
-These flags govern rate-limiting of inbound and outbound messages. For more
-information on rate-limiting and the flags below, see package `throttling` in
-AvalancheGo.
+Estas banderas gobiernan la limitación de velocidad de los mensajes entrantes y salientes. Para obtener más información sobre la limitación de velocidad y las banderas a continuación, consulte el paquete `throttling` en AvalancheGo.
 
-#### CPU Based
+#### Basado en CPU
 
-Rate-limiting based on how much CPU usage a peer causes.
+Limitación de velocidad basada en cuánto uso de CPU causa un par.
 
 ##### `--throttler-inbound-cpu-validator-alloc` (float)
 
-Number of CPU allocated for use by validators. Value should be in range (0, total core count].
-Defaults to half of the number of CPUs on the machine.
+Número de CPU asignadas para uso de validadores. El valor debe estar en el rango (0, recuento total de núcleos]. El valor predeterminado es la mitad del número de CPU en la máquina.
 
-##### `--throttler-inbound-cpu-max-recheck-delay` (duration)
+##### `--throttler-inbound-cpu-max-recheck-delay` (duración)
 
-In the CPU rate-limiter, check at least this often whether the node's CPU usage
-has fallen to an acceptable level. Defaults to `5s`.
+En el limitador de velocidad de CPU, verifique al menos con esta frecuencia si el uso de CPU del nodo ha disminuido a un nivel aceptable. El valor predeterminado es `5s`.
 
-##### `--throttler-inbound-disk-max-recheck-delay` (duration)
+##### `--throttler-inbound-disk-max-recheck-delay` (duración)
 
-In the disk-based network throttler, check at least this often whether the node's disk usage has
-fallen to an acceptable level. Defaults to `5s`.
+En el limitador de velocidad de red basado en disco, verifique al menos con esta frecuencia si el uso de disco del nodo ha disminuido a un nivel aceptable. El valor predeterminado es `5s`.
 
 ##### `--throttler-inbound-cpu-max-non-validator-usage` (float)
 
-Number of CPUs that if fully utilized, will rate limit all non-validators. Value should be in range
-[0, total core count].
-Defaults to %80 of the number of CPUs on the machine.
+Número de CPU que, si se utilizan por completo, limitarán la velocidad de todos los no validadores. El valor debe estar en el rango [0, recuento total de núcleos]. El valor predeterminado es el 80% del número de CPU en la máquina.
 
 ##### `--throttler-inbound-cpu-max-non-validator-node-usage` (float)
 
-Maximum number of CPUs that a non-validator can utilize. Value should be in range [0, total core count].
-Defaults to the number of CPUs / 8.
+Número máximo de CPU que un no validador puede utilizar. El valor debe estar en el rango [0, recuento total de núcleos]. El valor predeterminado es el número de CPU / 8.
 
 ##### `--throttler-inbound-disk-validator-alloc` (float)
 
-Maximum number of disk reads/writes per second to allocate for use by validators. Must be > 0.
-Defaults to `1000 GiB/s`.
+Número máximo de lecturas/escrituras de disco por segundo para asignar para uso de validadores. Debe ser > 0. El valor predeterminado es `1000 GiB/s`.
 
 ##### `--throttler-inbound-disk-max-non-validator-usage` (float)
 
-Number of disk reads/writes per second that, if fully utilized, will rate limit all non-validators.
-Must be >= 0.
-Defaults to `1000 GiB/s`.
+Número de lecturas/escrituras de disco por segundo que, si se utilizan por completo, limitarán la velocidad de todos los no validadores. Debe ser >= 0. El valor predeterminado es `1000 GiB/s`.
 
 ##### `--throttler-inbound-disk-max-non-validator-node-usage` (float)
 
-Maximum number of disk reads/writes per second that a non-validator can utilize. Must be >= 0.
-Defaults to `1000 GiB/s`.
+Número máximo de lecturas/escrituras de disco por segundo que un no validador puede utilizar. Debe ser >= 0. El valor predeterminado es `1000 GiB/s`.
 
-#### Bandwidth Based
+#### Basado en ancho de banda
 
-Rate-limiting based on the bandwidth a peer uses.
+Limitación de velocidad basada en el ancho de banda que utiliza un par.
 
 ##### `--throttler-inbound-bandwidth-refill-rate` (uint)
 
-Max average inbound bandwidth usage of a peer, in bytes per second. See
-interface `throttling.BandwidthThrottler`. Defaults to `512`.
+Uso máximo promedio de ancho de banda entrante de un par, en bytes por segundo. Consulte la interfaz `throttling.BandwidthThrottler`. El valor predeterminado es `512`.
 
 ##### `--throttler-inbound-bandwidth-max-burst-size` (uint)
 
-Max inbound bandwidth a node can use at once. See interface
-`throttling.BandwidthThrottler`. Defaults to `2 MiB`.
+Ancho de banda entrante máximo que un nodo puede usar a la vez. Consulte la interfaz `throttling.BandwidthThrottler`. El valor predeterminado es `2 MiB`.
 
-#### Message Size Based
+#### Basado en el tamaño del mensaje
 
-Rate-limiting based on the total size, in bytes, of unprocessed messages.
+Limitación de velocidad basada en el tamaño total, en bytes, de los mensajes no procesados.
 
 ##### `--throttler-inbound-at-large-alloc-size` (uint)
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` (6 MiB).
+Tamaño, en bytes, de la asignación en grande en el limitador de velocidad de mensajes entrantes. El valor predeterminado es `6291456` (6 MiB).
 
 ##### `--throttler-inbound-validator-alloc-size` (uint)
 
-Size, in bytes, of validator allocation in the inbound message throttler.
-Defaults to `33554432` (32 MiB).
+Tamaño, en bytes, de la asignación de validador en el limitador de velocidad de mensajes entrantes. El valor predeterminado es `33554432` (32 MiB).
 
 ##### `--throttler-inbound-node-max-at-large-bytes` (uint)
 
-Maximum number of bytes a node can take from the at-large allocation of the
-inbound message throttler. Defaults to `2097152` (2 MiB).
+Número máximo de bytes que un nodo puede tomar de la asignación en grande del limitador de velocidad de mensajes entrantes. El valor predeterminado es `2097152` (2 MiB).
 
-#### Message Based
+#### Basado en el número de mensajes
 
-Rate-limiting based on the number of unprocessed messages.
+Limitación de velocidad basada en el número de mensajes no procesados.
 
 ##### `--throttler-inbound-node-max-processing-msgs` (uint)
 
-Node will stop reading messages from a peer when it is processing this many messages from the peer.
-Will resume reading messages from the peer when it is processing less than this many messages.
-Defaults to `1024`.
+El nodo dejará de leer mensajes de un par cuando esté procesando esta cantidad de mensajes del par. Reanudará la lectura de mensajes del par cuando esté procesando menos de esta cantidad de mensajes. El valor predeterminado es `1024`.
 
-#### Outbound
+#### Saliente
 
-Rate-limiting for outbound messages.
+Limitación de velocidad para mensajes salientes.
 
 ##### `--throttler-outbound-at-large-alloc-size` (uint)
 
-Size, in bytes, of at-large allocation in the outbound message throttler.
-Defaults to `33554432` (32 MiB).
+Tamaño, en bytes, de la asignación en grande en el limitador de velocidad de mensajes salientes. El valor predeterminado es `33554432` (32 MiB).
 
 ##### `--throttler-outbound-validator-alloc-size` (uint)
 
-Size, in bytes, of validator allocation in the outbound message throttler.
-Defaults to `33554432` (32 MiB).
+Tamaño, en bytes, de la asignación de validador en el limitador de velocidad de mensajes salientes. El valor predeterminado es `33554432` (32 MiB).
 
 ##### `--throttler-outbound-node-max-at-large-bytes` (uint)
 
-Maximum number of bytes a node can take from the at-large allocation of the
-outbound message throttler. Defaults to `2097152` (2 MiB).
+Número máximo de bytes que un nodo puede tomar de la asignación en grande del limitador de velocidad de mensajes salientes. El valor predeterminado es `2097152` (2 MiB).
 
-### Connection Rate-Limiting
+### Limitación de velocidad de conexión
 
-#### `--network-inbound-connection-throttling-cooldown` (duration)
+#### `--network-inbound-connection-throttling-cooldown` (duración)
 
-Node will upgrade an inbound connection from a given IP at most once within this
-duration. Defaults to `10s`. If 0 or negative, will not consider recency of last
-upgrade when deciding whether to upgrade.
+El nodo mejorará una conexión entrante desde una IP dada como máximo una vez dentro de esta duración. El valor predeterminado es `10s`. Si es 0 o negativo, no considerará la recencia de la última mejora al decidir si mejorar.
 
 #### `--network-inbound-connection-throttling-max-conns-per-sec` (uint)
 
-Node will accept at most this many inbound connections per second. Defaults to `512`.
+El nodo aceptará como máximo esta cantidad de conexiones entrantes por segundo. El valor predeterminado es `512`.
 
 #### `--network-outbound-connection-throttling-rps` (uint)
 
-Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
+El nodo realiza como máximo esta cantidad de intentos de conexión saliente por segundo. El valor predeterminado es `50`.
 
-### Peer List Gossiping
+### Chismes de la lista de pares que hacen gossiping
 
-Nodes gossip peers to each other so that each node can have an up-to-date peer
-list. A node gossips `--network-peer-list-num-validator-ips` validator IPs to
-`--network-peer-list-validator-gossip-size` validators,
-`--network-peer-list-non-validator-gossip-size` non-validators and
-`--network-peer-list-peers-gossip-size` peers every
-`--network-peer-list-gossip-frequency`.
+Los nodos hacen gossiping de pares entre sí para que cada nodo pueda tener una lista de pares actualizada. Un nodo hace gossiping de `--network-peer-list-num-validator-ips` IPs de validadores a `--network-peer-list-validator-gossip-size` validadores, `--network-peer-list-non-validator-gossip-size` no validadores y `--network-peer-list-peers-gossip-size` pares cada `--network-peer-list-gossip-frequency`.
 
 #### `--network-peer-list-num-validator-ips` (int)
 
-Number of validator IPs to gossip to other nodes Defaults to `15`.
+Número de IPs de validadores para hacer gossiping a otros nodos. Por defecto: `15`.
 
 #### `--network-peer-list-validator-gossip-size` (int)
 
-Number of validators that the node will gossip peer list to. Defaults to `20`.
+Número de validadores a los que el nodo hará gossiping de la lista de pares. Por defecto: `20`.
 
 #### `--network-peer-list-non-validator-gossip-size` (int)
 
-Number of non-validators that the node will gossip peer list to. Defaults to `0`.
+Número de no validadores a los que el nodo hará gossiping de la lista de pares. Por defecto: `0`.
 
 #### `--network-peer-list-peers-gossip-size` (int)
 
-Number of total peers (including non-validator or validator) that the node will gossip peer list to
-Defaults to `0`.
+Número total de pares (incluyendo no validadores o validadores) a los que el nodo hará gossiping de la lista de pares. Por defecto: `0`.
 
-#### `--network-peer-list-gossip-frequency` (duration)
+#### `--network-peer-list-gossip-frequency` (duración)
 
-Frequency to gossip peers to other nodes. Defaults to `1m`.
+Frecuencia para hacer gossiping de los pares a otros nodos. Por defecto: `1m`.
 
-#### ` --network-peer-read-buffer-size` (int)
+#### `--network-peer-read-buffer-size` (int)
 
-Size of the buffer that peer messages are read into (there is one buffer per
-peer), defaults to `8` KiB (8192 Bytes).
+Tamaño del búfer en el que se leen los mensajes de los pares (hay un búfer por cada par). Por defecto: `8` KiB (8192 bytes).
 
 #### `--network-peer-write-buffer-size` (int)
 
-Size of the buffer that peer messages are written into (there is one buffer per
-peer), defaults to `8` KiB (8192 Bytes).
+Tamaño del búfer en el que se escriben los mensajes de los pares (hay un búfer por cada par). Por defecto: `8` KiB (8192 bytes).
 
-### Resource Usage Tracking
+### Seguimiento del uso de recursos
 
 #### `--meter-vm-enabled` (bool)
 
-Enable Meter VMs to track VM performance with more granularity. Defaults to `true`.
+Habilitar las VM de medición para rastrear el rendimiento de la VM con más precisión. Por defecto: `true`.
 
-#### `--system-tracker-frequency` (duration)
+#### `--system-tracker-frequency` (duración)
 
-Frequency to check the real system usage of tracked processes. More frequent
-checks --> usage metrics are more accurate, but more expensive to track.
-Defaults to `500ms`.
+Frecuencia para comprobar el uso real del sistema de los procesos rastreados. Más comprobaciones frecuentes --> métricas de uso más precisas, pero más caro de rastrear. Por defecto: `500ms`.
 
-#### `--system-tracker-processing-halflife` (duration)
+#### `--system-tracker-processing-halflife` (duración)
 
-Half life to use for the processing requests tracker. Larger half life --> usage
-metrics change more slowly. Defaults to `15s`.
+Vida media a utilizar para el rastreador de solicitudes de procesamiento. Una vida media más grande --> las métricas de uso cambian más lentamente. Por defecto: `15s`.
 
-#### `--system-tracker-cpu-halflife` (duration)
+#### `--system-tracker-cpu-halflife` (duración)
 
-Half life to use for the CPU tracker. Larger half life --> CPU usage metrics
-change more slowly. Defaults to `15s`.
+Vida media a utilizar para el rastreador de CPU. Una vida media más grande --> las métricas de uso de la CPU cambian más lentamente. Por defecto: `15s`.
 
-#### `--system-tracker-disk-halflife` (duration)
+#### `--system-tracker-disk-halflife` (duración)
 
-Half life to use for the disk tracker. Larger half life --> disk usage metrics
-change more slowly. Defaults to `1m`.
+Vida media a utilizar para el rastreador de disco. Una vida media más grande --> las métricas de uso de disco cambian más lentamente. Por defecto: `1m`.
 
 #### `--system-tracker-disk-required-available-space` (uint)
 
-"Minimum number of available bytes on disk, under which the node will shutdown.
-Defaults to `536870912` (512 MiB).
+Número mínimo de bytes disponibles en disco, por debajo de los cuales el nodo se apagará. Por defecto: `536870912` (512 MiB).
 
 #### `--system-tracker-disk-warning-threshold-available-space` (uint)
 
-Warning threshold for the number of available bytes on disk, under which the
-node will be considered unhealthy. Must be >=
-`--system-tracker-disk-required-available-space`. Defaults to `1073741824` (1
-GiB).
+Umbral de advertencia para el número de bytes disponibles en disco, por debajo del cual el nodo se considerará no saludable. Debe ser >= `--system-tracker-disk-required-available-space`. Por defecto: `1073741824` (1 GiB).
 
 ### Plugins
 
 #### `--plugin-dir` (string)
 
-Sets the directory for [VM plugins](/build/vm/intro.md). The default value is `$HOME/.avalanchego/plugins`.
+Establece el directorio para los [plugins de VM](/build/vm/intro.md). El valor por defecto es `$HOME/.avalanchego/plugins`.
 
-### Virtual Machine (VM) Configs
+### Configuraciones de Máquinas Virtuales (VM)
 
 #### `--vm-aliases-file (string)`
 
-Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to
-`~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if
-`--vm-aliases-file-content` is specified. Example content:
+Ruta del archivo JSON que define alias para IDs de Máquinas Virtuales. Por defecto: `~/.avalanchego/configs/vms/aliases.json`. Esta bandera se ignora si se especifica `--vm-aliases-file-content`. Ejemplo de contenido:
 
 ```json
 {
@@ -1417,29 +1252,24 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to
 }
 ```
 
-The above example aliases the VM whose ID is
-`"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and
-`"timerpc"`.
+El ejemplo anterior asigna los alias "timestampvm" y "timerpc" a la VM cuyo ID es "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH".
 
 `--vm-aliases-file-content` (string)
 
-As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded
-aliases for Virtual Machine IDs.
+Como alternativa a `--vm-aliases-file`, permite especificar los alias codificados en base64 para IDs de Máquinas Virtuales.
 
-### Indexing
+### Indexación
 
 #### `--index-allow-incomplete` (boolean)
 
-If true, allow running the node in such a way that could cause an index to miss transactions.
-Ignored if index is disabled. Defaults to `false`.
+Si es verdadero, permite ejecutar el nodo de una manera que podría hacer que un índice pierda transacciones. Ignorado si el índice está desactivado. Por defecto: `false`.
 
-### Router
+### Enrutador
 
 #### `--router-health-max-drop-rate` (float)
 
-Node reports unhealthy if the router drops more than this portion of messages. Defaults to `1`.
+El nodo se reporta como no saludable si el enrutador deja caer más de esta proporción de mensajes. Por defecto: `1`.
 
 #### `--router-health-max-outstanding-requests` (uint)
 
-Node reports unhealthy if there are more than this many outstanding consensus requests
-(Get, PullQuery, etc.) over all chains. Defaults to `1024`.
+El nodo se reporta como no saludable si hay más de esta cantidad de solicitudes de consenso pendientes (Get, PullQuery, etc.) en todas las cadenas. Por defecto: `1024`.
