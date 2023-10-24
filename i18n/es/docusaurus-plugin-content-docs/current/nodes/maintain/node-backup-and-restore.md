@@ -1,202 +1,125 @@
 ---
-tags: [Nodes]
-description: Should your machine ever have a failure due to either hardware or software issues, it's best to be prepared for such a situation by making a backup.
-sidebar_label: Backup and Restore
-pagination_label: Node Backup and Restore
+tags: [Nodos]
+description: Si tu máquina alguna vez tiene una falla debido a problemas de hardware o software, es mejor estar preparado para tal situación haciendo una copia de seguridad.
+sidebar_label: Copia de seguridad y restauración
+pagination_label: Copia de seguridad y restauración de nodos
 sidebar_position: 1
 ---
 
-# Node Backup and Restore
+# Copia de seguridad y restauración de nodos
 
-Once you have your node up and running, it's time to prepare for disaster
-recovery. Should your machine ever have a catastrophic failure due to either
-hardware or software issues, or even a case of natural disaster, it's best to be
-prepared for such a situation by making a backup.
+Una vez que tienes tu nodo funcionando, es hora de prepararse para la recuperación de desastres. Si tu máquina alguna vez tiene una falla catastrófica debido a problemas de hardware o software, o incluso un caso de desastre natural, es mejor estar preparado para tal situación haciendo una copia de seguridad.
 
-When running, a complete node installation along with the database can grow to
-be multiple gigabytes in size. Having to back up and restore such a large volume
-of data can be expensive, complicated and time-consuming. Luckily, there is a
-better way.
+Cuando se ejecuta, una instalación completa del nodo junto con la base de datos puede llegar a tener varios gigabytes de tamaño. Tener que hacer una copia de seguridad y restaurar un volumen tan grande de datos puede ser costoso, complicado y llevar mucho tiempo. Afortunadamente, hay una mejor manera.
 
-Instead of having to back up and restore everything, we need to back up only
-what is essential, that is, those files that cannot be reconstructed because
-they are unique to your node. For AvalancheGo node, unique files are those that
-identify your node on the network, in other words, files that define your
-NodeID.
+En lugar de tener que hacer una copia de seguridad y restaurar todo, necesitamos hacer una copia de seguridad sólo de lo que es esencial, es decir, aquellos archivos que no se pueden reconstruir porque son únicos de tu nodo. Para un nodo AvalancheGo, los archivos únicos son aquellos que identifican tu nodo en la red, en otras palabras, los archivos que definen tu NodeID.
 
-Even if your node is a validator on the network and has multiple delegations on
-it, you don't need to worry about backing up anything else, because the
-validation and delegation transactions are also stored on the blockchain and
-will be restored during bootstrapping, along with the rest of the blockchain
-data.
+Incluso si tu nodo es un validador en la red y tiene múltiples delegaciones en él, no necesitas preocuparte por hacer una copia de seguridad de nada más, porque las transacciones de validación y delegación también se almacenan en la blockchain y se restaurarán durante el arranque, junto con el resto de los datos de la blockchain.
 
-The installation itself can be easily recreated by installing the node on a new
-machine, and all the remaining gigabytes of blockchain data can be easily
-recreated by the process of bootstrapping, which copies the data over from other
-network peers. However, if you would like to speed up the process, see the
-[Database Backup and Restore section](#database)
+La instalación en sí se puede recrear fácilmente instalando el nodo en una nueva máquina, y todos los gigabytes restantes de datos de la blockchain se pueden recrear fácilmente mediante el proceso de arranque, que copia los datos de otros pares de la red. Sin embargo, si quieres acelerar el proceso, consulta la sección de [Copia de seguridad y restauración de la base de datos](#database).
 
 ## NodeID
 
 :::warning
 
-If more than one running nodes share the same NodeID, the communications from
-other nodes in the Avalanche network to this NodeID will be random to one of
-these nodes. If this NodeID is of a validator, it will dramatically impact the
-uptime calculation of the validator which will very likely disqualify the
-validator from receiving the staking rewards. Please make sure only one node
-with the same NodeID run at one time.
+Si más de un nodo en ejecución comparte el mismo NodeID, las comunicaciones desde otros nodos en la red Avalanche a este NodeID serán aleatorias para uno de estos nodos. Si este NodeID es de un validador, impactará drásticamente en el cálculo del tiempo de actividad del validador, lo que muy probablemente descalificará al validador de recibir las recompensas de staking. Asegúrate de que sólo se ejecute un nodo con el mismo NodeID a la vez.
 
 :::
 
-NodeID is a unique identifier that differentiates your node from all the other
-peers on the network. It's a string formatted like
-`NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical
-background of how the NodeID is constructed
-[here](/reference/standards/cryptographic-primitives.md#tls-addresses). In essence,
-NodeID is defined by two files:
+NodeID es un identificador único que diferencia tu nodo de todos los demás pares en la red. Es una cadena formateada como `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. Puedes buscar el trasfondo técnico de cómo se construye el NodeID [aquí](/reference/standards/cryptographic-primitives.md#tls-addresses). En esencia, el NodeID está definido por dos archivos:
 
 - `staker.crt`
 - `staker.key`
 
-In the default installation, they can be found in the working directory,
-specifically in `~/.avalanchego/staking/`. All we need to do to recreate the
-node on another machine is to run a new installation with those same two files.
-If these two files are removed from a node, which is restarted afterwards, they 
-will be recreated and a new node ID will be assigned.  
+En la instalación por defecto, se pueden encontrar en el directorio de trabajo, específicamente en `~/.avalanchego/staking/`. Todo lo que necesitamos hacer para recrear el nodo en otra máquina es ejecutar una nueva instalación con esos mismos dos archivos. Si estos dos archivos se eliminan de un nodo, que se reinicia después, se recrearán y se asignará un nuevo ID de nodo.
 
 :::caution
 
-If you have users defined in the keystore of your node, then you need to back up
-and restore those as well. [Keystore
-API](/reference/avalanchego/keystore-api.md) has methods that can be used to
-export and import user keys. Note that Keystore API is used by developers only
-and not intended for use in production nodes. If you don't know what a keystore
-API is and have not used it, you don't need to worry about it.
+Si tienes usuarios definidos en el keystore de tu nodo, entonces también necesitas hacer una copia de seguridad y restaurar esos usuarios. La API del Keystore tiene métodos que se pueden utilizar para exportar e importar claves de usuario. Ten en cuenta que la API del Keystore se utiliza sólo para desarrolladores y no está destinada a ser utilizada en nodos de producción. Si no sabes qué es una API del keystore y no la has utilizado, no necesitas preocuparte por ello.
 
 :::
 
-### Backup
+### Copia de seguridad
 
-To back up your node, we need to store `staker.crt` and `staker.key` files
-somewhere safe and private, preferably to a different computer, to your private
-storage in the cloud, a USB stick or similar. Storing them to a couple of
-different, secure locations increases the safety.
+Para hacer una copia de seguridad de tu nodo, necesitamos almacenar los archivos `staker.crt` y `staker.key` en algún lugar seguro y privado, preferiblemente en una computadora diferente, en tu almacenamiento privado en la nube, en una memoria USB u otro lugar similar. Almacenarlos en un par de ubicaciones seguras y diferentes aumenta la seguridad.
 
 :::caution
 
-If someone gets a hold of your staker files, they still cannot get to your
-funds, as they are controlled by the wallet private keys, not by the node. But,
-they could re-create your node somewhere else, and depending on the
-circumstances make you lose the staking rewards. So make sure your staker files
-are secure.
+Si alguien obtiene tus archivos de staker, aún no pueden acceder a tus fondos, ya que están controlados por las claves privadas de la billetera, no por el nodo. Pero podrían recrear tu nodo en otro lugar y, dependiendo de las circunstancias, hacerte perder las recompensas de staking. Así que asegúrate de que tus archivos de staker estén seguros.
 
 :::
 
-Let's get the staker files off the machine running the node.
+Vamos a sacar los archivos de staker de la máquina que ejecuta el nodo.
 
-#### From Local Node
+#### Desde un nodo local
 
-If you're running the node locally, on your desktop computer, just navigate to
-where the files are and copy them somewhere safe.
+Si estás ejecutando el nodo localmente, en tu computadora de escritorio, simplemente navega hasta donde están los archivos y cópialos a algún lugar seguro.
 
-On a default Linux installation, the path to them will be
-`/home/USERNAME/.avalanchego/staking/`, where `USERNAME` needs to be replaced
-with the actual username running the node. Select and copy the files from there
-to a backup location. You don't need to stop the node to do that.
+En una instalación de Linux por defecto, la ruta a ellos será `/home/USUARIO/.avalanchego/staking/`, donde `USUARIO` debe ser reemplazado por el nombre de usuario real que ejecuta el nodo. Selecciona y copia los archivos desde allí a una ubicación de respaldo. No necesitas detener el nodo para hacer eso.
 
-#### From Remote Node Using `scp`
+#### Desde un nodo remoto usando `scp`
 
-`scp` is a 'secure copy' command line program, available built-in on Linux and
-MacOS computers. There is also a Windows version, `pscp`, as part of the
-[PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) package.
-If using `pscp`, in the following commands replace each usage of `scp` with
-`pscp -scp`.
+`scp` es un programa de línea de comandos de 'copia segura', disponible de forma integrada en computadoras Linux y MacOS. También hay una versión para Windows, `pscp`, como parte del paquete [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). Si usas `pscp`, en los siguientes comandos reemplaza cada uso de `scp` con `pscp -scp`.
 
-To copy the files from the node, you will need to be able to remotely log into
-the machine. You can use account password, but the secure and recommended way is
-to use the SSH keys. The procedure for acquiring and setting up SSH keys is
-highly dependent on your cloud provider and machine configuration. You can refer
-to our [Amazon Web
-Services](/nodes/run/third-party/aws-node.md)
-and [Microsoft Azure](/nodes/run/third-party/microsoft-azure-node.md)
-setup guides for those providers. Other providers will have similar procedures.
+Para copiar los archivos desde el nodo, necesitarás poder iniciar sesión de forma remota en la máquina. Puedes usar la contraseña de la cuenta, pero la forma segura y recomendada es usar las claves SSH. El procedimiento para adquirir y configurar las claves SSH depende en gran medida de tu proveedor de nube y de la configuración de la máquina. Puedes consultar nuestras guías de configuración de [Amazon Web Services](/nodes/run/third-party/aws-node.md) y [Microsoft Azure](/nodes/run/third-party/microsoft-azure-node.md) para esos proveedores. Otros proveedores tendrán procedimientos similares.
 
-When you have means of remote login into the machine, you can copy the files
-over with the following command:
+Cuando tengas los medios para iniciar sesión de forma remota en la máquina, puedes copiar los archivos con el siguiente comando:
 
 ```text
-scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
+scp -r ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
-This assumes the username on the machine is `ubuntu`, replace with correct
-username in both places if it is different. Also, replace `PUBLICIP` with the
-actual public IP of the machine. If `scp` doesn't automatically use your
-downloaded SSH key, you can point to it manually:
+Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `DIRECCION_IP_PUBLICA` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes apuntar a ella manualmente:
 
 ```text
-scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
+scp -i /ruta/a/la/clave.pem -r ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
-Once executed, this command will create `avalanche_backup` directory in you home
-directory and place staker files in it. You need to store them somewhere safe.
+Una vez ejecutado, este comando creará un directorio `avalanche_backup` en tu directorio de inicio y colocará los archivos de staker en él. Debes almacenarlos en algún lugar seguro.
 
-### Restore
+### Restauración
 
-To restore your node from a backup, we need to do the reverse: restore
-`staker.key` and `staker.crt` from the backup to the working directory of the
-node.
+Para restaurar tu nodo desde una copia de seguridad, necesitamos hacer lo contrario: restaurar los archivos `staker.key` y `staker.crt` desde la copia de seguridad al directorio de trabajo del nodo.
 
-First, we need to do the usual
-[installation](/nodes/run/with-installer.md) of the node. This will
-create a new NodeID, which we need to replace. When the node is installed
-correctly, log into the machine where the node is running and stop it:
+Primero, necesitamos hacer la instalación habitual del nodo. Esto creará un nuevo NodeID, que necesitamos reemplazar. Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
 
 ```text
 sudo systemctl stop avalanchego
 ```
 
-We're ready to restore the node.
+Estamos listos para restaurar el nodo.
 
-#### To Local Node
+#### A un nodo local
 
-If you're running the node locally, just copy the `staker.key` and `staker.crt`
-files from the backup location into the working directory, which on the default
-Linux installation will be `/home/USERNAME/.avalanchego/staking/`. Replace
-`USERNAME` with the actual username used to run the node.
+Si estás ejecutando el nodo localmente, simplemente copia los archivos `staker.key` y `staker.crt` desde la ubicación de la copia de seguridad al directorio de trabajo, que en la instalación de Linux por defecto será `/home/USUARIO/.avalanchego/staking/`. Reemplaza `USUARIO` con el nombre de usuario real utilizado para ejecutar el nodo.
 
-#### To Remote Node Using `scp`
+#### A un nodo remoto usando `scp`
 
-Again, the process is just the reverse operation. Using `scp` we need to copy
-the `staker.key` and `staker.crt` files from the backup location into the remote
-working directory. Assuming the backed up files are located in the directory
-where the above backup procedure placed them:
+Nuevamente, el proceso es simplemente la operación inversa. Usando `scp` necesitamos copiar los archivos `staker.key` y `staker.crt` desde la ubicación de la copia de seguridad al directorio de trabajo remoto. Suponiendo que los archivos de copia de seguridad se encuentran en el directorio donde el procedimiento de copia de seguridad anterior los colocó:
 
 ```text
-scp ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
+scp ~/avalanche_backup/staker.* ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking
 ```
 
-Or if you need to specify the path to the SSH key:
+O si necesitas especificar la ruta a la clave SSH:
 
 ```text
-scp -i /path/to/the/key.pem ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
+scp -i /ruta/a/la/clave.pem ~/avalanche_backup/staker.* ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking
 ```
 
-And again, replace `ubuntu` with correct username if different, and `PUBLICIP`
-with the actual public IP of the machine running the node, as well as the path
-to the SSH key if used.
 
-#### Restart the Node and Verify
 
-Once the files have been replaced, log into the machine and start the node using:
+Y de nuevo, reemplaza `ubuntu` con el nombre de usuario correcto si es diferente, y `PUBLICIP` con la IP pública real de la máquina que ejecuta el nodo, así como la ruta a la clave SSH si se utiliza.
+
+#### Reiniciar el Nodo y Verificar
+
+Una vez que los archivos hayan sido reemplazados, inicia sesión en la máquina y comienza el nodo usando:
 
 ```text
 sudo systemctl start avalanchego
 ```
 
-You can now check that the node is restored with the correct NodeID by issuing
-the [getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) API call in
-the same console you ran the previous command:
+Ahora puedes verificar que el nodo se haya restaurado con el NodeID correcto emitiendo la llamada de API [getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) en la misma consola en la que ejecutaste el comando anterior:
 
 ```text
 curl -X POST --data '{
@@ -206,187 +129,143 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-You should see your original NodeID. Restore process is done.
+Deberías ver tu NodeID original. El proceso de restauración está completo.
 
-## Database
+## Base de Datos
 
-Normally, when starting a new node, you can just bootstrap from scratch.
-However, there are situations when you may prefer to reuse an existing database
-(ex: preserve keystore records, reduce sync time).
+Normalmente, al iniciar un nuevo nodo, puedes simplemente arrancar desde cero. Sin embargo, hay situaciones en las que puede que prefieras reutilizar una base de datos existente (por ejemplo, preservar registros de keystore, reducir el tiempo de sincronización).
 
-This tutorial will walk you through compressing your node's
-DB and moving it to another computer using `zip` and `scp`.
+Este tutorial te guiará a través de la compresión de la base de datos de tu nodo y su traslado a otra computadora usando `zip` y `scp`.
 
-### Database Backup
+### Respaldo de la Base de Datos
 
-First, make sure to stop AvalancheGo, run:
+Primero, asegúrate de detener AvalancheGo, ejecuta:
 
 ```bash
 sudo systemctl stop avalanchego
 ```
 
 :::warning
-You must stop the Avalanche node before you back up the database otherwise data
-could become corrupted.
+Debes detener el nodo Avalanche antes de hacer una copia de seguridad de la base de datos, de lo contrario los datos podrían corromperse.
 :::
 
-Once the node is stopped, you can `zip` the database directory to reduce the
-size of the backup and speed up the transfer using `scp`:
+Una vez que el nodo esté detenido, puedes comprimir el directorio de la base de datos para reducir el tamaño de la copia de seguridad y acelerar la transferencia usando `scp`:
 
 ```bash
 zip -r avalanche_db_backup.zip .avalanchego/db
 ```
 
-_Note: It may take > 30 minutes to zip the node's DB._
+_Nota: Puede tomar más de 30 minutos comprimir la base de datos del nodo._
 
-Next, you can transfer the backup to another machine:
+A continuación, puedes transferir la copia de seguridad a otra máquina:
 
 ```bash
 scp -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
 
-This assumes the username on the machine is `ubuntu`, replace with correct
-username in both places if it is different. Also, replace `PUBLICIP` with the
-actual public IP of the machine. If `scp` doesn't automatically use your
-downloaded SSH key, you can point to it manually:
+Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `PUBLICIP` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes apuntar a ella manualmente:
 
 ```bash
-scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
+scp -i /ruta/a/la/clave.pem -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
 
-Once executed, this command will create `avalanche_db_backup.zip` directory in you home directory.
+Una vez ejecutado, este comando creará el directorio `avalanche_db_backup.zip` en tu directorio de inicio.
 
-### Database Restore
+### Restauración de la Base de Datos
 
-_This tutorial assumes you have already completed "Database Backup" and have
-a backup at ~/avalanche_db_backup.zip._
+_Este tutorial asume que ya has completado "Respaldo de la Base de Datos" y tienes una copia de seguridad en ~/avalanche_db_backup.zip._
 
-First, we need to do the usual
-[installation](/nodes/run/with-installer.md) of the node. When the
-node is installed correctly, log into the machine where the node is running and
-stop it:
+Primero, necesitamos hacer la instalación habitual del nodo de [instalación](/nodes/run/with-installer.md). Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
 
 ```bash
 sudo systemctl stop avalanchego
 ```
 
 :::warning
-You must stop the Avalanche node before you restore the database otherwise data
-could become corrupted.
+Debes detener el nodo Avalanche antes de restaurar la base de datos, de lo contrario los datos podrían corromperse.
 :::
 
-We're ready to restore the database. First, let's move the DB on the existing
-node (you can remove this old DB later if the restore was successful):
+Estamos listos para restaurar la base de datos. Primero, movamos la DB en el nodo existente (puedes eliminar esta antigua DB más tarde si la restauración fue exitosa):
 
 ```bash
 mv .avalanchego/db .avalanchego/db-old
 ```
 
-Next, we'll unzip the backup we moved from another node (this will place the
-unzipped files in `~/.avalanchego/db` when the command is run in the home directory):
+A continuación, descomprimiremos la copia de seguridad que movimos desde otro nodo (esto colocará los archivos descomprimidos en `~/.avalanchego/db` cuando se ejecute el comando en el directorio de inicio):
 
 ```bash
 unzip avalanche_db_backup.zip
 ```
 
-After the database has been restored on a new node, use this command to start the node:
+Después de que la base de datos haya sido restaurada en un nuevo nodo, usa este comando para iniciar el nodo:
 
 ```bash
 sudo systemctl start avalanchego
 ```
 
-Node should now be running from the database on the new instance. To check that
-everything is in order and that node is not bootstrapping from scratch (which
-would indicate a problem), use:
+El nodo ahora debería estar funcionando desde la base de datos en la nueva instancia. Para verificar que todo esté en orden y que el nodo no esté arrancando desde cero (lo que indicaría un problema), usa:
 
 ```bash
 sudo journalctl -u avalanchego -f
 ```
 
-The node should be catching up to the network and fetching a small number of
-blocks before resuming normal operation (all the ones produced from the time
-when the node was stopped before the backup).
+El nodo debería estar poniéndose al día con la red y recuperando un pequeño número de bloques antes de reanudar su operación normal (todos los producidos desde el momento en que el nodo se detuvo antes de la copia de seguridad).
 
-Once the backup has been restored and is working as expected, the zip can be deleted:
+Una vez que la copia de seguridad se haya restaurado y esté funcionando como se esperaba, el archivo zip se puede eliminar:
 
 ```bash
 rm avalanche_db_backup.zip
 ```
 
-### Database Direct Copy
+### Copia Directa de la Base de Datos
 
-You may be in a situation where you don't have enough disk space to create the
-archive containing the whole database, so you cannot complete the backup process
-as described previously.
+Puede que te encuentres en una situación en la que no tienes suficiente espacio en disco para crear el archivo que contiene toda la base de datos, por lo que no puedes completar el proceso de copia de seguridad como se describe anteriormente.
 
-In that case, you can still migrate your database to a new computer, by using a
-different approach: `direct copy`. Instead of creating the archive, moving the
-archive and unpacking it, we can do all of that on the fly.
+En ese caso, aún puedes migrar tu base de datos a una nueva computadora, utilizando un enfoque diferente: `copia directa`. En lugar de crear el archivo, mover el archivo y descomprimirlo, podemos hacer todo eso sobre la marcha.
 
-To do so, you will need `ssh` access from the destination machine (where you
-want the database to end up) to the source machine (where the database currently
-is). Setting up `ssh` is the same as explained for `scp` earlier in the
-document.
+Para hacerlo, necesitarás acceso `ssh` desde la máquina de destino (donde quieres que termine la base de datos) a la máquina de origen (donde se encuentra actualmente la base de datos). Configurar `ssh` es lo mismo que se explica para `scp` anteriormente en el documento.
 
-Same as shown previously, you need to stop the node (on both machines):
+Igual que se mostró anteriormente, debes detener el nodo (en ambas máquinas):
 
 ```bash
 sudo systemctl stop avalanchego
 ```
 
 :::warning
-You must stop the Avalanche node before you back up the database otherwise data
-could become corrupted.
+Debes detener el nodo Avalanche antes de hacer una copia de seguridad de la base de datos, de lo contrario los datos podrían corromperse.
 :::
 
-Then, on the destination machine, change to a directory where you would like to
-the put the database files, enter the following command:
+Luego, en la máquina de destino, cambia a un directorio donde te gustaría poner los archivos de la base de datos, ingresa el siguiente comando:
 
 ```bash
-ssh -i /path/to/the/key.pem ubuntu@PUBLICIP 'tar czf - .avalanchego/db' | tar xvzf - -C .
+ssh -i /ruta/a/la/clave.pem ubuntu@PUBLICIP 'tar czf - .avalanchego/db' | tar xvzf - -C .
 ```
 
-Make sure to replace the correct path to the key, and correct IP of the source
-machine. This will compress the database, but instead of writing it to a file it
-will pipe it over `ssh` directly to destination machine, where it will be
-decompressed and written to disk. The process can take a long time, make sure it
-completes before continuing.
+Asegúrate de reemplazar la ruta correcta de la clave y la IP correcta de la máquina de origen. Esto comprimirá la base de datos, pero en lugar de escribirla en un archivo, la enviará a través de `ssh` directamente a la máquina de destino, donde se descomprimirá y se escribirá en el disco. El proceso puede llevar mucho tiempo, asegúrate de que se complete antes de continuar.
 
-After copying is done, all you need to do now is move the database to the
-correct location on the destination machine. Assuming there is a default
-AvalancheGo node installation, we remove the old database and replace it with
-the new one:
+Después de que se haya completado la copia, todo lo que necesitas hacer ahora es mover la base de datos a la ubicación correcta en la máquina de destino. Suponiendo que haya una instalación predeterminada del nodo AvalancheGo, eliminamos la base de datos antigua y la reemplazamos con la nueva:
 
 ```bash
 rm -rf ~/.avalanchego/db
 mv db ~/.avalanchego/db
 ```
 
-You can now start the node on the destination machine:
+Ahora puedes iniciar el nodo en la máquina de destino:
 
 ```bash
 sudo systemctl start avalanchego
 ```
 
-Node should now be running from the copied database. To check that everything is
-in order and that node is not bootstrapping from scratch (which would indicate a
-problem), use:
+El nodo ahora debería estar funcionando desde la base de datos copiada. Para verificar que todo esté en orden y que el nodo no esté arrancando desde cero (lo que indicaría un problema), usa:
 
 ```bash
 sudo journalctl -u avalanchego -f
 ```
 
-The node should be catching up to the network and fetching a small number of
-blocks before resuming normal operation (all the ones produced from the time
-when the node was stopped before the backup).
+El nodo debería estar poniéndose al día con la red y recuperando un pequeño número de bloques antes de reanudar su operación normal (todos los producidos desde el momento en que el nodo se detuvo antes de la copia de seguridad).
 
-## Summary
+## Resumen
 
-Essential part of securing your node is the backup that enables full and
-painless restoration of your node. Following this tutorial you can rest easy
-knowing that should you ever find yourself in a situation where you need to
-restore your node from scratch, you can easily and quickly do so.
+Parte esencial de asegurar tu nodo es la copia de seguridad que permite la restauración completa y sin dolor de tu nodo. Siguiendo este tutorial, puedes estar tranquilo sabiendo que si alguna vez te encuentras en una situación en la que necesitas restaurar tu nodo desde cero, puedes hacerlo fácil y rápidamente.
 
-If you have any problems following this tutorial, comments you want to share
-with us or just want to chat, you can reach us on our
-[Discord](https://chat.avalabs.org/) server.
+Si tienes algún problema siguiendo este tutorial, comentarios que quieres compartir con nosotros o simplemente quieres chatear, puedes encontrarnos en nuestro servidor de [Discord](https://chat.avalabs.org/).

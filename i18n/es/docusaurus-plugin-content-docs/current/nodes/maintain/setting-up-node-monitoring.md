@@ -1,123 +1,108 @@
 ---
-tags: [Nodes]
-description: This tutorial demonstrates how to set up infrastructure to monitor an instance of AvalancheGo.
-sidebar_label: Monitoring
-pagination_label: Monitor an Avalanche Node
+tags: [Nodos]
+description: Este tutorial demuestra cómo configurar la infraestructura para monitorear una instancia de AvalancheGo.
+sidebar_label: Monitoreo
+pagination_label: Monitorear un Nodo Avalanche
 sidebar_position: 2
 ---
 
-# Monitor an Avalanche Node
+# Monitorear un Nodo Avalanche
 
-## Introduction
+## Introducción
 
-This tutorial demonstrates how to set up infrastructure to monitor an instance of
-[AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+Este tutorial demuestra cómo configurar la infraestructura para monitorear una instancia de
+[AvalancheGo](https://github.com/ava-labs/avalanchego). Utilizaremos:
 
-- [Prometheus](https://prometheus.io/) to gather and store data
-- [`node_exporter`](https://github.com/prometheus/node_exporter) to get information about the machine,
-- AvalancheGo’s [Metrics API](/reference/avalanchego/metrics-api.md) to get information about the node
-- [Grafana](https://grafana.com/) to visualize data on a dashboard.
-- A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-monitoring/tree/main/grafana/dashboards)
+- [Prometheus](https://prometheus.io/) para recopilar y almacenar datos
+- [`node_exporter`](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
+- La API de métricas de AvalancheGo (/reference/avalanchego/metrics-api.md) para obtener información sobre el nodo
+- [Grafana](https://grafana.com/) para visualizar los datos en un panel de control.
+- Un conjunto de paneles de control predefinidos de Avalanche [Avalanche dashboards](https://github.com/ava-labs/avalanche-monitoring/tree/main/grafana/dashboards)
 
-Prerequisites:
+Requisitos previos:
 
-- A running AvalancheGo node
-- Shell access to the machine running the node
-- Administrator privileges on the machine
+- Un nodo AvalancheGo en funcionamiento
+- Acceso a la shell de la máquina que ejecuta el nodo
+- Privilegios de administrador en la máquina
 
-This tutorial assumes you have Ubuntu 20.04 running on your node. Other Linux
-flavors that use `systemd` for running services and `apt-get` for package
-management might work but have not been tested. Community member has reported it
-works on Debian 10, might work on other Debian releases as well.
+Este tutorial asume que tienes Ubuntu 20.04 ejecutándose en tu nodo. Otras distribuciones de Linux que utilizan `systemd` para ejecutar servicios y `apt-get` para la gestión de paquetes podrían funcionar, pero no se han probado. Un miembro de la comunidad ha informado que funciona en Debian 10, y podría funcionar en otras versiones de Debian también.
 
-### Caveat: Security
+### Advertencia: Seguridad
 
 :::danger
 
-The system as described here **should not** be opened to the public internet.
-Neither Prometheus nor Grafana as shown here is hardened against unauthorized
-access. Make sure that both of them are accessible only over a secured proxy,
-local network, or VPN. Setting that up is beyond the scope of this tutorial, but
-exercise caution. Bad security practices could lead to attackers gaining control
-over your node! It is your responsibility to follow proper security practices.
+El sistema descrito aquí **no debe** abrirse a Internet público. Ni Prometheus ni Grafana, tal como se muestran aquí, están protegidos contra el acceso no autorizado. Asegúrate de que ambos sean accesibles solo a través de un proxy seguro, una red local o una VPN. Configurar eso está fuera del alcance de este tutorial, pero ten cuidado. ¡Prácticas de seguridad deficientes podrían permitir que los atacantes tomen el control de tu nodo! Es tu responsabilidad seguir las prácticas de seguridad adecuadas.
 
 :::
 
-## Monitoring Installer Script
+## Script de instalación del monitor
 
-In order to make node monitoring easier to install, we have made a script that
-does most of the work for you. To download and run the script, log into the
-machine the node runs on with a user that has administrator privileges and enter
-the following command:
+Para facilitar la instalación del monitoreo del nodo, hemos creado un script que hace la mayor parte del trabajo por ti. Para descargar y ejecutar el script, inicia sesión en la máquina en la que se ejecuta el nodo con un usuario que tenga privilegios de administrador e ingresa el siguiente comando:
 
 ```bash
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/main/grafana/monitoring-installer.sh ;\
 chmod 755 monitoring-installer.sh;
 ```
 
-This will download the script and make it executable.
+Esto descargará el script y lo hará ejecutable.
 
-Script itself is run multiple times with different arguments, each installing a
-different tool or part of the environment. To make sure it downloaded and set up
-correctly, begin by running:
+El propio script se ejecuta varias veces con diferentes argumentos, cada uno instalando una herramienta diferente o parte del entorno. Para asegurarte de que se descargó y configuró correctamente, comienza ejecutando:
 
 ```bash
 ./monitoring-installer.sh --help
 ```
 
-It should display:
+Debería mostrar:
 
 ```text
-Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--5|--help]
+Uso: ./monitoring-installer.sh [--1|--2|--3|--4|--5|--help]
 
-Options:
---help   Shows this message
---1      Step 1: Installs Prometheus
---2      Step 2: Installs Grafana
---3      Step 3: Installs node_exporter
---4      Step 4: Installs AvalancheGo Grafana dashboards
---5      Step 5: (Optional) Installs additional dashboards
+Opciones:
+--help   Muestra este mensaje
+--1      Paso 1: Instala Prometheus
+--2      Paso 2: Instala Grafana
+--3      Paso 3: Instala node_exporter
+--4      Paso 4: Instala paneles de control de Grafana para AvalancheGo
+--5      Paso 5: (Opcional) Instala paneles de control adicionales
 
-Run without any options, script will download and install latest version of AvalancheGo dashboards.
+Si se ejecuta sin ninguna opción, el script descargará e instalará la última versión de los paneles de control de AvalancheGo.
 ```
 
-Let's get to it.
+¡Empecemos!
 
-## Step 1: Set up Prometheus <a id="prometheus"></a>
+## Paso 1: Configurar Prometheus <a id="prometheus"></a>
 
-Run the script to execute the first step:
+Ejecuta el script para ejecutar el primer paso:
 
 ```bash
 ./monitoring-installer.sh --1
 ```
 
-It should produce output something like this:
+Debería producir una salida similar a esta:
 
 ```text
-AvalancheGo monitoring installer
+Instalador de monitoreo de AvalancheGo
 --------------------------------
-STEP 1: Installing Prometheus
+PASO 1: Instalando Prometheus
 
-Checking environment...
-Found arm64 architecture...
-Prometheus install archive found:
+Comprobando el entorno...
+Se encontró la arquitectura arm64...
+Se encontró el archivo de instalación de Prometheus:
 https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
-Attempting to download:
+Intentando descargar:
 https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
 prometheus.tar.gz                           100%[=========================================================================================>]  65.11M   123MB/s    in 0.5s
 2021-11-05 14:16:11 URL:https://github-releases.githubusercontent.com/6838921/a215b0e7-df1f-402b-9541-a3ec9d431f76?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T141610Z&X-Amz-Expires=300&X-Amz-Signature=72a8ae4c6b5cea962bb9cad242cb4478082594b484d6a519de58b8241b319d94&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=6838921&response-content-disposition=attachment%3B%20filename%3Dprometheus-2.31.0.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [68274531/68274531] -> "prometheus.tar.gz" [1]
 ...
 ```
 
-You may be prompted to confirm additional package installs, do that if asked.
-Script run should end with instructions on how to check that Prometheus
-installed correctly. Let's do that, run:
+Es posible que se te solicite confirmar la instalación de paquetes adicionales, hazlo si se te pide. La ejecución del script debería terminar con instrucciones sobre cómo verificar que Prometheus se instaló correctamente. Hagamos eso, ejecuta:
 
 ```bash
 sudo systemctl status prometheus
 ```
 
-It should output something like:
+Debería mostrar algo como:
 
 ```text
 ● prometheus.service - Prometheus
@@ -134,35 +119,34 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z ca
 Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
 
-Note the `active (running)` status (press `q` to exit). You can also check
-Prometheus web interface, available on `http://your-node-host-ip:9090/`
+Observa el estado `active (running)` (presiona `q` para salir). También puedes verificar la interfaz web de Prometheus, disponible en `http://la-ip-de-tu-nodo:9090/`
 
 :::warning
 
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or
-adjust the security settings to allow connections to port 9090 if the node is
-running on a cloud instance. For AWS, you can look it up
-[here](/nodes/run/third-party/aws-node.md#f8df).
-If on public internet, make sure to only allow your IP to connect!
+Es posible que necesites hacer `sudo ufw allow 9090/tcp` si el firewall está activado y/o ajustar la configuración de seguridad para permitir conexiones al puerto 9090 si el nodo se está ejecutando en una instancia en la nube. Para AWS, puedes consultarlo
+[aquí](/nodes/run/third-party/aws-node.md#f8df).
+Si está en Internet público, ¡asegúrate de permitir solo que tu IP se conecte!
 
 :::
 
-If everything is OK, let's move on.
+Si todo está bien, pasemos al siguiente paso.
 
-## Step 2: Install Grafana <a id="grafana"></a>
+## Paso 2: Instalar Grafana <a id="grafana"></a>
 
-Run the script to execute the second step:
+Ejecuta el script para ejecutar el segundo paso:
 
 ```bash
 ./monitoring-installer.sh --2
 ```
 
-It should produce output something like this:
+Debería producir una salida similar a esta:
 
 ```text
-AvalancheGo monitoring installer
+Instalador de monitoreo de AvalancheGo
 --------------------------------
-STEP 2: Installing Grafana
+PASO 2: Instalando Grafana
+
+
 
 OK
 deb https://packages.grafana.com/oss/deb stable main
@@ -173,78 +157,76 @@ Hit:4 http://ppa.launchpad.net/longsleep/golang-backports/ubuntu focal InRelease
 Get:5 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [114 kB]
 Get:6 https://packages.grafana.com/oss/deb stable InRelease [12.1 kB]
 ...
-```
 
-To make sure it’s running properly:
+Para asegurarte de que está funcionando correctamente:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should again show Grafana as `active`. Grafana should now be available at
-`http://your-node-host-ip:3000/` from your browser. Log in with username: admin,
-password: admin, and you will be prompted to set up a new, secure password. Do
-that.
+lo cual debería mostrar nuevamente a Grafana como `activo`. Grafana ahora debería estar disponible en
+`http://tu-dirección-ip-del-nodo:3000/` desde tu navegador. Inicia sesión con nombre de usuario: admin,
+contraseña: admin, y se te pedirá que configures una nueva contraseña segura. Haz
+eso.
 
 :::warning
 
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or
-adjust the cloud instance settings to allow connections to port 3000. If on
-public internet, make sure to only allow your IP to connect!
+Es posible que necesites hacer `sudo ufw allow 3000/tcp` si el firewall está activado y/o
+ajustar la configuración de la instancia en la nube para permitir conexiones al puerto 3000. Si estás en
+internet público, ¡asegúrate de permitir solo que tu IP se conecte!
 
 :::
 
-Prometheus and Grafana are now installed, we're ready for the next step.
+Prometheus y Grafana ahora están instalados, estamos listos para el siguiente paso.
 
-## Step 3: Set up `node_exporter` <a id="exporter"></a>
+## Paso 3: Configurar `node_exporter` <a id="exporter"></a>
 
-In addition to metrics from AvalancheGo, let’s set up monitoring of the machine
-itself, so we can check CPU, memory, network and disk usage and be aware of any
-anomalies. For that, we will use `node_exporter`, a Prometheus plugin.
+Además de las métricas de AvalancheGo, configuremos el monitoreo de la máquina
+en sí, para que podamos verificar el uso de CPU, memoria, red y disco y estar al tanto de cualquier
+anomalía. Para eso, usaremos `node_exporter`, un complemento de Prometheus.
 
-Run the script to execute the third step:
+Ejecuta el script para ejecutar el tercer paso:
 
 ```bash
 ./monitoring-installer.sh --3
 ```
 
-The output should look something like this:
+La salida debería verse algo así:
 
 ```bash
-AvalancheGo monitoring installer
+Instalador de monitoreo de AvalancheGo
 --------------------------------
-STEP 3: Installing node_exporter
+PASO 3: Instalando node_exporter
 
-Checking environment...
-Found arm64 architecture...
-Dowloading archive...
+Verificando el entorno...
+Se encontró una arquitectura arm64...
+Descargando archivo...
 https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
-node_exporter.tar.gz                        100%[=========================================================================================>]   7.91M  --.-KB/s    in 0.1s
+node_exporter.tar.gz                        100%[=========================================================================================>]   7.91M  --.-KB/s    en 0.1s
 2021-11-05 14:57:25 URL:https://github-releases.githubusercontent.com/9524057/6dc22304-a1f5-419b-b296-906f6dd168dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T145725Z&X-Amz-Expires=300&X-Amz-Signature=3890e09e58ea9d4180684d9286c9e791b96b0c411d8f8a494f77e99f260bdcbb&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=9524057&response-content-disposition=attachment%3B%20filename%3Dnode_exporter-1.2.2.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [8296266/8296266] -> "node_exporter.tar.gz" [1]
 node_exporter-1.2.2.linux-arm64/LICENSE
 ```
 
-Again, we check that the service is running correctly:
+Nuevamente, verificamos que el servicio se esté ejecutando correctamente:
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-If the service is running, Prometheus, Grafana and `node_exporter` should all work
-together now. To check, in your browser visit Prometheus web interface on
-`http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Si el servicio está en ejecución, Prometheus, Grafana y `node_exporter` deberían funcionar todos
+juntos ahora. Para verificarlo, en tu navegador visita la interfaz web de Prometheus en
+`http://tu-dirección-ip-del-nodo:9090/targets`. Deberías ver tres objetivos habilitados:
 
 - Prometheus
 - AvalancheGo
 - `avalanchego-machine`
 
-Make sure that all of them have `State` as `UP`.
+Asegúrate de que todos ellos tengan el estado `UP` en la columna `State`.
 
 :::info
 
-If you run your AvalancheGo node with TLS enabled on your API port, you will
-need to manually edit the `/etc/prometheus/prometheus.yml` file and change the
-`avalanchego` job to look like this:
+Si ejecutas tu nodo AvalancheGo con TLS habilitado en tu puerto de API, deberás editar manualmente el archivo `/etc/prometheus/prometheus.yml` y cambiar el
+trabajo `avalanchego` para que se vea así:
 
 ```yaml
 - job_name: "avalanchego"
@@ -256,30 +238,30 @@ need to manually edit the `/etc/prometheus/prometheus.yml` file and change the
     - targets: ["localhost:9650"]
 ```
 
-Mind the spacing (leading spaces too)! You will need admin privileges to do that
-(use `sudo`). Restart Prometheus service afterwards with `sudo systemctl restart
+¡Ten en cuenta los espacios (espacios iniciales también)! Necesitarás privilegios de administrador para hacer eso
+(usar `sudo`). Reinicia el servicio de Prometheus después con `sudo systemctl restart
 prometheus`.
 
 :::
 
-All that's left to do now is to provision the data source and install the actual
-dashboards that will show us the data.
+Ahora solo queda aprovisionar la fuente de datos e instalar los paneles de control reales
+que nos mostrarán los datos.
 
-## Step 4: Dashboards <a id="dashboards"></a>
+## Paso 4: Paneles de control <a id="dashboards"></a>
 
-Run the script to install the dashboards:
+Ejecuta el script para instalar los paneles de control:
 
 ```bash
 ./monitoring-installer.sh --4
 ```
 
-It will produce output something like this:
+Producirá una salida algo así:
 
 ```text
-AvalancheGo monitoring installer
+Instalador de monitoreo de AvalancheGo
 --------------------------------
 
-Downloading...
+Descargando...
 Last-modified header missing -- time-stamps turned off.
 2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/master/grafana/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
 FINISHED --2021-11-05 14:57:47--
@@ -289,87 +271,71 @@ Last-modified header missing -- time-stamps turned off.
 ...
 ```
 
-This will download the latest versions of the dashboards from GitHub and
-provision Grafana to load them, as well as defining Prometheus as a data source.
-It may take up to 30 seconds for the dashboards to show up. In your browser, go
-to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche
-dashboards:
+Esto descargará las últimas versiones de los paneles de control desde GitHub y
+aprovisionará Grafana para cargarlos, así como definir Prometheus como fuente de datos.
+Puede tomar hasta 30 segundos para que los paneles de control aparezcan. En tu navegador, ve
+a: `http://tu-dirección-ip-del-nodo:3000/dashboards`. Deberías ver 7 paneles de control de Avalanche:
 
-![Imported dashboards](/img/monitoring-01-dashboards.png)
+![Paneles de control importados](/img/monitoring-01-dashboards.png)
 
-Select 'Avalanche Main Dashboard' by clicking its title. It should load, and look similar to this:
+Selecciona 'Avalanche Main Dashboard' haciendo clic en su título. Debería cargarse y verse similar a esto:
 
-![Main Dashboard](/img/monitoring-02-main-dashboard.png)
+![Panel de control principal](/img/monitoring-02-main-dashboard.png)
 
-Some graphs may take some time to populate fully, as they need a series of
-data points in order to render correctly.
+Algunas gráficas pueden tardar un poco en llenarse por completo, ya que necesitan una serie de
+puntos de datos para renderizarse correctamente.
 
-You can bookmark the main dashboard as it shows the most important information
-about the node at a glance. Every dashboard has a link to all the others as the
-first row, so you can move between them easily.
+Puedes marcar el panel de control principal como favorito, ya que muestra la información más importante
+sobre el nodo de un vistazo. Cada panel de control tiene un enlace a todos los demás como la
+primera fila, por lo que puedes moverte entre ellos fácilmente.
 
-## Step 5: Additional Dashboards (Optional)
+## Paso 5: Paneles de control adicionales (opcional)
 
-Step 4 installs the basic set of dashboards that make sense to have on any node.
-Step 5 is for installing additional dashboards that may not be useful for every
-installation.
+El Paso 4 instala el conjunto básico de paneles de control que tienen sentido tener en cualquier nodo.
+El Paso 5 es para instalar paneles de control adicionales que pueden no ser útiles para cada
+instalación.
 
-Currently, there is only one additional dashboard: Subnets. If your node is
-running any Subnets, you may want to add this as well. Do:
+Actualmente, solo hay un panel de control adicional: Subnets. Si tu nodo está
+ejecutando alguna Subnet, es posible que desees agregar esto también. Haz:
 
 ```bash
 ./monitoring-installer.sh --5
 ```
 
-This will add the Subnets dashboard. It allows you to monitor operational data
-for any Subnet that is synced on the node. There is a Subnet switcher that
-allows you to switch between different Subnets. As there are many Subnets and
-not every node will have all of them, by default, it comes populated only with
-Spaces and WAGMI Subnets that exist on Fuji testnet:
+Esto agregará el panel de control de Subnets. Te permite monitorear datos operativos
+para cualquier Subnet que esté sincronizada en el nodo. Hay un interruptor de Subnet que
+te permite cambiar entre diferentes Subnets. Como hay muchas Subnets y
+no todos los nodos tendrán todas ellas, por defecto, viene poblado solo con
+las Subnets de Spaces y WAGMI que existen en la testnet Fuji:
 
-![Subnets switcher](/img/monitoring-03-subnets.png)
+![Interruptor de Subnets](/img/monitoring-03-subnets.png)
 
-To configure the dashboard and add any Subnets that your node is syncing, you
-will need to edit the dashboard. Select the `dashboard settings` icon (image of
-a cog) in the upper right corner of the dashboard display and switch to
-`Variables` section and select the `subnet` variable. It should look something
-like this:
+Para configurar el panel de control y agregar cualquier Subnet que tu nodo esté sincronizando, necesitarás editar el panel de control. Selecciona el ícono de "configuración del panel de control" (imagen de una rueda dentada) en la esquina superior derecha de la pantalla del panel de control y cambia a la sección de "Variables" y selecciona la variable de "subnet". Debería verse algo así:
 
-![Variables screen](/img/monitoring-04-variables.png)
+![Pantalla de variables](/img/monitoring-04-variables.png)
 
-The variable format is:
+El formato de la variable es:
 
 ```text
-Subnet name:<BlockchainID>
+Nombre de la Subnet:<BlockchainID>
 ```
 
-and the separator between entries is a comma. Entries for Spaces and WAGMI look like:
+y el separador entre las entradas es una coma. Las entradas para Spaces y WAGMI se ven así:
 
 ```text
 Spaces (Fuji) : 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, WAGMI (Fuji) : 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
 ```
 
-After editing the values, press `Update` and then click `Save dashboard` button
-and confirm. Press the back arrow in the upper left corner to return to the
-dashboard. New values should now be selectable from the dropdown and data for
-the selected Subnet will be shown in the panels.
+Después de editar los valores, presiona "Actualizar" y luego haz clic en el botón "Guardar panel de control" y confirma. Presiona la flecha hacia atrás en la esquina superior izquierda para volver al panel de control. Ahora deberías poder seleccionar los nuevos valores del menú desplegable y se mostrarán los datos de la Subnet seleccionada en los paneles.
 
-## Updating
+## Actualización
 
-Available node metrics are updated constantly, new ones are added and obsolete
-removed, so it is good a practice to update the dashboards from time to time,
-especially if you notice any missing data in panels. Updating the dashboards is
-easy, just run the script with no arguments, and it will refresh the dashboards
-with the latest available versions. Allow up to 30s for dashboards to update in
-Grafana.
+Las métricas disponibles del nodo se actualizan constantemente, se agregan nuevas y se eliminan las obsoletas, por lo que es buena práctica actualizar los paneles de control de vez en cuando, especialmente si notas datos faltantes en los paneles. Actualizar los paneles de control es fácil, simplemente ejecuta el script sin argumentos y actualizará los paneles de control con las versiones más recientes disponibles. Permítele hasta 30 segundos para que los paneles de control se actualicen en Grafana.
 
-If you added the optional extra dashboards (step 5), they will be updated as well.
+Si agregaste los paneles de control opcionales adicionales (paso 5), también se actualizarán.
 
-## Summary
+## Resumen
 
-Using the script to install node monitoring is easy, and it gives you insight
-into how your node is behaving and what's going on under the hood. Also, pretty
-graphs!
+Usar el script para instalar el monitoreo del nodo es fácil y te brinda información sobre cómo se comporta tu nodo y qué está sucediendo bajo el capó. ¡Además, gráficos bonitos!
 
-If you have feedback on this tutorial, problems with the script or following the
-steps, send us a message on [Discord](https://chat.avalabs.org).
+Si tienes comentarios sobre este tutorial, problemas con el script o siguiendo los pasos, envíanos un mensaje en [Discord](https://chat.avalabs.org).
