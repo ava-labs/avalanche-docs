@@ -76,7 +76,7 @@ Provisionaremos las siguientes reglas de `Firewall de cómputo`:
 
 Estos son obviamente puertos predeterminados y se pueden adaptar a tus necesidades según lo desees.
 
-## <a name="instrucciones-de-configuración"></a> Instrucciones de configuración
+## Instrucciones de configuración
 
 ### Cuenta de GCP
 
