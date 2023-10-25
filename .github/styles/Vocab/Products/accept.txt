@@ -182,6 +182,7 @@ minimalistic
 mintable
 Mintable
 mmap'd
+Moralis
 Morty
 multicurrency
 Multiput
@@ -202,6 +203,7 @@ NFTs
 Nimish
 NodeID
 NodeIDs
+Nodies
 NOWNodes
 npm
 npx
@@ -296,6 +298,7 @@ Tencent
 testnet
 Testnet
 textlint
+thirdweb
 toolchain
 Toolchains
 trie
