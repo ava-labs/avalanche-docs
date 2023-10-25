@@ -8,6 +8,7 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import { translate } from "@docusaurus/Translate";
 import {
   BsYoutube,
   BsGithub,
@@ -42,7 +43,7 @@ function Footer() {
                 className="footer-main-list"
                 href="https://subnets.avax.network/"
               >
-                <h3>Explorer</h3>
+                <h3>{translate({ message: "Explorer" })}</h3>
               </Link>
             </div>
             <div className="footer-row">
@@ -51,7 +52,7 @@ function Footer() {
                 href="https://academy.avax.com/?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=footer"
               >
                 <h3>
-                  Academy{" "}
+                  {translate({ message: "Academy" })}{" "}
                   <FaGraduationCap className="footer-academy-cap"></FaGraduationCap>
                 </h3>
               </Link>
@@ -61,12 +62,12 @@ function Footer() {
                 className="footer-main-list"
                 href="https://support.avax.network/en/"
               >
-                <h3>Support</h3>
+                <h3>{translate({ message: "Support" })}</h3>
               </Link>
             </div>
             <div className="footer-row">
               <Link className="footer-main-list" href="https://core.app/en/">
-                <h3>Wallet</h3>
+                <h3>{translate({ message: "Wallet" })}</h3>
               </Link>
             </div>
           </div>
@@ -102,18 +103,42 @@ function Footer() {
               style={{ marginTop: "10px", maxWidth: "500px" }}
             >
               <div class="col" style={{}}>
-                <h4 className="footer-heading">Developers</h4>
-                <a href="https://forum.avax.network/">
-                  <div className="footer-list">Forum</div>
+                <h4 className="footer-heading">
+                  {translate({ message: "Developers" })}
+                </h4>
+                <a href={translate({ message: "https://forum.avax.network/" })}>
+                  <div className="footer-list">
+                    {translate({ message: "Forum" })}
+                  </div>
                 </a>
-                <a href="https://stats.avax.network/dashboard/overview/">
-                  <div className="footer-list">Network Stats</div>
+                <a
+                  href={translate({
+                    message: "https://stats.avax.network/dashboard/overview/",
+                  })}
+                >
+                  <div className="footer-list">
+                    {translate({ message: "Network Stats" })}
+                  </div>
                 </a>
-                <a href="https://www.youtube.com/playlist?list=PLRHl-ulWK4-GTJhSLF9omG2x_qn7E1O7n">
-                  <div className="footer-list">Video Tutorials</div>
+                <a
+                  href={translate({
+                    message:
+                      "https://www.youtube.com/playlist?list=PLRHl-ulWK4-GTJhSLF9omG2x_qn7E1O7n",
+                  })}
+                >
+                  <div className="footer-list">
+                    {translate({ message: "Video Tutorials" })}
+                  </div>
                 </a>
-                <a href="https://hackenproof.com/avalanche/avalanche-protocol">
-                  <div className="footer-list">Bug Bounty</div>
+                <a
+                  href={translate({
+                    message:
+                      "https://hackenproof.com/avalanche/avalanche-protocol",
+                  })}
+                >
+                  <div className="footer-list">
+                    {translate({ message: "Bug Bounty" })}
+                  </div>
                 </a>
               </div>
               <div class="col">
