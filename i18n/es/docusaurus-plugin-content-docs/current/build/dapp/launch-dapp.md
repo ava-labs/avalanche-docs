@@ -127,9 +127,9 @@ Siendo una blockchain compatible con Ethereum, todas las herramientas y entornos
 
 Hay un [tutorial](/build/dapp/smart-contracts/remix-deploy.md) para usar Remix para implementar contratos inteligentes en Avalanche. Se basa en Core para acceder a la red Avalanche.
 
-### Truffle
+### thirdweb
 
-También puedes usar Truffle para probar e implementar contratos inteligentes en Avalanche. Descubre cómo en este [tutorial](/build/dapp/smart-contracts/toolchains/truffle.md).
+También puedes usar thirdweb para probar y desplegar contratos inteligentes en Avalanche. Descubre cómo en este [tutorial](/build/dapp/smart-contracts/toolchains/thirdweb.md).
 
 ### Hardhat
 
@@ -157,8 +157,6 @@ La verificación de contratos inteligentes proporciona transparencia para los us
 - haz clic en `verify & publish`
 
 Si tienes éxito, la pestaña `code` ahora tendrá una marca de verificación verde, y tus usuarios podrán verificar el contenido de tu contrato. Esta es una señal positiva fuerte de que tus usuarios pueden confiar en tus contratos, y se recomienda encarecidamente para todos los contratos de producción.
-
-Consulta [esto](/build/dapp/smart-contracts/verification/verify-truffle.md) para obtener un tutorial detallado con Truffle.
 
 ## Verificaciones de seguridad de contratos
 

@@ -81,7 +81,7 @@ Las transacciones de Avalanche C-Chain son idénticas a las transacciones EVM es
 Para fines de desarrollo, Avalanche admite todas las herramientas populares para Ethereum, por lo que los desarrolladores familiarizados con Ethereum y Solidity pueden sentirse como en casa. Tenemos tutoriales y repositorios para varios entornos de desarrollo populares:
 
 - [Core y Remix](/build/dapp/smart-contracts/remix-deploy.md)
-- [Truffle](/build/dapp/smart-contracts/toolchains/truffle.md)
+- [thirdweb](/build/dapp/smart-contracts/toolchains/thirdweb.md)
 - [Hardhat](/build/dapp/smart-contracts/toolchains/hardhat.md)
 
 ## Ingesta de datos en cadena
