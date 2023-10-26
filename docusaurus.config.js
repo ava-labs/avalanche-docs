@@ -43,7 +43,7 @@ const config = {
         path: "fr",
       },
       es: {
-        label: "Spanish",
+        label: "Español",
         direction: "ltr",
         htmlLang: "es-ES",
         calendar: "gregory",
