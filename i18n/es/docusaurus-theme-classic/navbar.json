@@ -8,11 +8,11 @@
     "description": "Navbar item with label Learn"
   },
   "item.label.Build": {
-    "message": "Build",
+    "message": "Construir",
     "description": "Navbar item with label Build"
   },
   "item.label.Nodes": {
-    "message": "Construir",
+    "message": "Nodos",
     "description": "Navbar item with label Nodes"
   },
   "item.label.Tooling": {

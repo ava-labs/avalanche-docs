@@ -461,7 +461,7 @@
     "message": "🔺 Fundamentos de Avalanche",
     "description": "Translation for the first card label in the 'Learn with Avalanche Academy' section"
   },
-  "Beginner-friendly course to get a high-level overview of Avalanche Consensus, Subnets, and VM": {
+  "Beginner-friendly course to get a high level overview of Avalanche Consensus, Subnets, and VM": {
     "message": "Curso apto para principiantes para obtener una descripción de alto nivel del Consenso Avalanche, Subnets y VM",
     "description": "Translation for the first card description in the 'Learn with Avalanche Academy' section"
   },
@@ -496,5 +496,13 @@
   "Wallet": {
     "message": "Billetera",
     "description": "Translation for the wallet link"
+  },
+  "Community": {
+    "message": "Comunidad",
+    "description": "footer community section"
+  },
+  "More": {
+    "message": "Más",
+    "description": "footer community section"
   }
 }

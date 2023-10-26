@@ -142,7 +142,9 @@ function Footer() {
                 </a>
               </div>
               <div class="col">
-                <h4 className="footer-heading">Community</h4>
+                <h4 className="footer-heading">
+                  {translate({ message: "Community" })}
+                </h4>
                 <a href="https://medium.com/@avaxdevelopers">
                   <div className="footer-list">Medium</div>
                 </a>
@@ -157,7 +159,9 @@ function Footer() {
                 </a>
               </div>
               <div class="col">
-                <h4 className="footer-heading">More</h4>
+                <h4 className="footer-heading">
+                  {translate({ message: "More" })}
+                </h4>
                 <a href="https://www.avalabs.org/whitepapers">
                   <div className="footer-list">Whitepapers</div>
                 </a>
