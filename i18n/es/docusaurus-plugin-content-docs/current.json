@@ -4,7 +4,7 @@
     "description": "The label for version current"
   },
   "sidebar.learn.category.Networks": {
-    "message": "Networks",
+    "message": "Redes",
     "description": "The label for category Networks in sidebar learn"
   },
   "sidebar.learn.link.Whitepapers": {
@@ -84,7 +84,7 @@
     "description": "The label for category X-Chain in sidebar reference"
   },
   "sidebar.reference.category.📖 Guides": {
-    "message": "📖 Guides",
+    "message": "📖 Guías",
     "description": "The label for category 📖 Guides in sidebar reference"
   },
   "sidebar.reference.link.Release Notes": {
@@ -92,7 +92,7 @@
     "description": "The label for link Release Notes in sidebar reference, linking to https://github.com/ava-labs/avalanchego/releases"
   },
   "sidebar.reference.doc.🔌 RPC Providers": {
-    "message": "🔌 RPC Providers",
+    "message": "🔌 Proveedores de RPC",
     "description": "The label for the doc item 🔌 RPC Providers in sidebar reference, linking to the doc tooling/rpc-providers"
   },
   "sidebar.reference.doc.📎 Postman Collection": {

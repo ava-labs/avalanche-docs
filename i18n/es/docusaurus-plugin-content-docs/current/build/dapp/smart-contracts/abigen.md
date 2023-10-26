@@ -1,3 +1,10 @@
+---
+tags: [Construir, Dapps]
+description: Este tutorial demuestra cómo compilar un contrato de solidity a Golang para implementar y llamar contratos de forma programática.
+sidebar_label: Interactuar desde Golang
+pagination_label: Interactuar con un Contrato Inteligente de Solidity desde una Aplicación en Golang
+---
+
 # Interactuar con un Contrato Inteligente de Solidity desde una Aplicación en Golang
 
 `abigen` es una herramienta proporcionada por el cliente Go Ethereum (Geth) que genera enlaces de Go para contratos inteligentes escritos en Solidity. Los desarrolladores necesitarían usar abigen cuando quieren interactuar con un contrato inteligente escrito en Solidity desde una aplicación de programación en lenguaje Go. Permite a los desarrolladores llamar fácilmente a funciones y acceder a datos de contratos en Solidity en una aplicación Go. Este tutorial demuestra cómo compilar un contrato de Solidity en Golang para desplegar y llamar a contratos de forma programática.
