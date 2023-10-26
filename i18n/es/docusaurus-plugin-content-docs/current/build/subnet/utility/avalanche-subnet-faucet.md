@@ -1,43 +1,43 @@
 ---
 tags: [Construir, Subnets]
-description: Implementa un grifo de testnet personalizado para tu Subnet con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
-sidebar_label: Agregar un Grifo de Testnet
-pagination_label: Grifo de Subnet Avalanche
+description: Implementa un faucet de testnet personalizado para tu Subnet con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
+sidebar_label: Agregar un Faucet de Testnet
+pagination_label: Faucet de Subnet Avalanche
 sidebar_position: 1
 ---
 
-# Habilitar Capacidades de Testnet en una Subnet con el Grifo de Subnet Avalanche
+# Habilitar Capacidades de Testnet en una Subnet con el Faucet de Subnet Avalanche
 
 Hay miles de redes y cadenas en el espacio de la blockchain, cada una con sus propias capacidades y casos de uso. Cada red requiere monedas nativas para realizar cualquier transacción en ellas, las cuales también pueden tener un valor monetario. Estas monedas se pueden recolectar a través de intercambios centralizados, ventas de tokens, etc., a cambio de algunos activos monetarios como USD.
 
-Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación alojada en esa red, sin probarlos primero. Por lo tanto, estas redes a menudo tienen redes de prueba o testnets, donde las monedas nativas no tienen ningún valor monetario y, por lo tanto, se pueden obtener libremente a través de grifos.
+Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación alojada en esa red, sin probarlos primero. Por lo tanto, estas redes a menudo tienen redes de prueba o testnets, donde las monedas nativas no tienen ningún valor monetario y, por lo tanto, se pueden obtener libremente a través de faucets.
 
 Estas testnets suelen ser los bancos de pruebas para cualquier nueva característica nativa de la propia red, o cualquier dapp o [Subnet](learn/avalanche/subnets-overview.md) que va a vivir en la red principal (Mainnet). Por ejemplo, la red [Fuji](learn/avalanche/fuji.md) es la Testnet para la Mainnet de Avalanche.
 
 Además de la Testnet Fuji, el
-[Grifo Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
+[Faucet Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
 se puede utilizar para obtener tokens de prueba gratuitos en Subnets de testnet como:
 
 - [Testnet WAGMI](https://core.app/tools/testnet-faucet/?subnet=wagmi)
 - [Testnet DeFI Kingdoms](https://core.app/tools/testnet-faucet/?subnet=dfk)
 - [Testnet Beam](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) y muchos más.
 
-Puedes usar este [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio grifo o simplemente hacer un PR con las
+Puedes usar este [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio faucet o simplemente hacer un PR con las
 [configuraciones](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) de la Subnet.
-Este grifo viene con muchas características como soporte para múltiples cadenas, limitación de velocidad personalizada por Subnet, verificación CAPTCHA y manejo de transacciones concurrentes.
+Este faucet viene con muchas características como soporte para múltiples cadenas, limitación de velocidad personalizada por Subnet, verificación CAPTCHA y manejo de transacciones concurrentes.
 
 ## Resumen
 
-Un [Grifo](https://faucet.avax.network/) alimentado por Avalanche para la Red Fuji y otras Subnets.
+Un [Faucet](https://faucet.avax.network/) alimentado por Avalanche para la Red Fuji y otras Subnets.
 Puedes -
 
 - Solicitar monedas de prueba para las Subnets soportadas
-- Integrar tu Subnet EVM con el grifo haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
-- Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio grifo para cualquier cadena EVM
+- Integrar tu Subnet EVM con el faucet haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
+- Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio faucet para cualquier cadena EVM
 
 ## Agregar una Nueva Subnet
 
-También puedes integrar una nueva Subnet en el [grifo](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subnet. Los siguientes parámetros son requeridos.
+También puedes integrar una nueva Subnet en el [faucet](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subnet. Los siguientes parámetros son requeridos.
 
 ```json
 {
@@ -64,8 +64,8 @@ También puedes integrar una nueva Subnet en el [grifo](https://faucet.avax.netw
 - `CHAINID` - ChainID de la cadena
 - `EXPLORER` - URL base del sitio del explorador estándar.
 - `IMAGE` - URL del icono de la cadena que se mostrará en el menú desplegable.
-- `MAX_PRIORITY_FEE` - Propina máxima por caída de grifo en **wei** o en unidad **10<sup>-18</sup>** (para cadenas compatibles con EIP1559)
-- `MAX_FEE` - Tarifa máxima que se puede pagar por una caída de grifo en **wei** o en unidad **10<sup>-18</sup>**
+- `MAX_PRIORITY_FEE` - Propina máxima por caída de faucet en **wei** o en unidad **10<sup>-18</sup>** (para cadenas compatibles con EIP1559)
+- `MAX_FEE` - Tarifa máxima que se puede pagar por una caída de faucet en **wei** o en unidad **10<sup>-18</sup>**
 - `DRIP_AMOUNT` - Cantidad de monedas a enviar por solicitud en **gwei** o en unidad **10<sup>-9</sup>**
 - `RECALIBRATE` _(opcional)_ - Número de segundos después de los cuales el nonce y el saldo se recalibrarán
 - `RATELIMIT` - Número de veces (MAX_LIMIT) permitidas por usuario dentro del WINDOW_SIZE (en minutos)
@@ -73,9 +73,9 @@ También puedes integrar una nueva Subnet en el [grifo](https://faucet.avax.netw
 Agrega la configuración en el arreglo de `evmchains` dentro del archivo
 [config.json](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) y haz un PR.
 
-## Construcción e Implementación de un Grifo
+## Construcción e Implementación de un Faucet
 
-También puedes implementar y construir tu propio grifo utilizando el repositorio [Avalanche
+También puedes implementar y construir tu propio faucet utilizando el repositorio [Avalanche
 Faucet](https://github.com/ava-labs/avalanche-faucet).
 
 ### Requisitos
@@ -118,9 +118,9 @@ Necesitamos configurar nuestra aplicación con los puntos finales de la API del 
 }
 ```
 
-Coloca la clave del sitio reCAPTCHA de Google sin la cual el cliente del grifo no puede enviar la respuesta CAPTCHA necesaria al servidor. Esta clave no es un secreto y podría ser pública.
+Coloca la clave del sitio reCAPTCHA de Google sin la cual el cliente del faucet no puede enviar la respuesta CAPTCHA necesaria al servidor. Esta clave no es un secreto y podría ser pública.
 
-En el archivo anterior, hay 2 puntos finales base para el servidor del grifo `apiBaseEndpointProduction` y
+En el archivo anterior, hay 2 puntos finales base para el servidor del faucet `apiBaseEndpointProduction` y
 `apiBaseEndpointDevelopment`.
 
 En modo de producción, el lado del cliente se servirá como contenido estático a través del punto final del servidor, y por lo tanto no tenemos que proporcionar la dirección IP o el dominio del servidor.
@@ -438,7 +438,7 @@ No se esperan errores, pero si te encuentras con algunos de los errores mostrado
 
 - **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos**. Este es un mensaje de límite de tasa. Cada Subnet puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que podrías solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
 
-- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el grifo. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
+- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el faucet. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
 
 - **¡Error interno de RPC! Por favor, inténtalo después de un tiempo**. Este es un error interno en el nodo de la Subnet , en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
 

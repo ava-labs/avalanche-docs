@@ -21,7 +21,7 @@ En este tutorial, pasaremos por un ejemplo de flujo de trabajo de Fuji para most
 1. Configurar la red Fuji en Core (opcional)
 2. Generar una mnemónica de 24 palabras en inglés a través de AvalancheJS
 3. Derivar direcciones externas de la C-Chain a través de AvalancheJS
-4. Obtener AVAX del grifo de Fuji
+4. Obtener AVAX del faucet de Fuji
 5. Enviar AVAX a través de ethersJS
 6. Examinar la transacción resultante en el Avalanche Explorer
 7. Usar una clave privada derivada de una mnemónica para iniciar sesión en la billetera web
@@ -301,13 +301,13 @@ Podemos repetir este proceso de inicio de sesión usando las claves privadas de 
 
 ## Resumen
 
-La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Las herramientas como AvalancheJS, la API pública, el grifo y el explorador ayudan a asegurar que tu entorno de prueba y control de calidad esté cerca de la red principal para que puedas tener confianza cuando lo lanzas en la red principal.
+La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Las herramientas como AvalancheJS, la API pública, el faucet y el explorador ayudan a asegurar que tu entorno de prueba y control de calidad esté cerca de la red principal para que puedas tener confianza cuando lo lanzas en la red principal.
 
 ## Recursos
 
 Para recursos adicionales y valiosos, consulta a continuación.
 
-### Grifo
+### Faucet
 
 El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o de la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
 

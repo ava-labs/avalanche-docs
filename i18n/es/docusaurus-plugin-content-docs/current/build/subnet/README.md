@@ -36,7 +36,7 @@ Las Subnets de Avalanche son un subconjunto de validadores de la red primaria de
 | [**Pausar y reanudar Subnets locales**](/build/subnet/maintain/pause-resume-subnet.md)                              |
 | [**Eliminar una Subnet **](/build/subnet/maintain/delete-subnet.md)                                                 |
 | [**Implementar un contrato inteligente en tu Subnet **](/build/subnet/utility/deploy-smart-contract-to-subnet.md)   |
-| [**Agregar un grifo de testnet**](/build/subnet/utility/avalanche-subnet-faucet.md)                                 |
+| [**Agregar un faucet de testnet**](/build/subnet/utility/avalanche-subnet-faucet.md)                                |
 | [**Implementar un puente de cadena cruzada**](/build/subnet/utility/cross-chain-evm-bridge.md)                      |     |
 | [**Consideraciones al actualizar una Subnet **](/build/subnet/upgrade/considerations-subnet-upgrade.md)             |
 | [**Personalizar tu Subnet alimentada por EVM**](/build/subnet/upgrade/customize-a-subnet.md)                        |
