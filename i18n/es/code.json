@@ -402,15 +402,15 @@
     "description": "The title of the tag list page"
   },
   "Welcome to Avalanche Dev Docs": {
-    "message": "Bienvenido a la Documentación de Avalanche Dev",
+    "message": "Bienvenido a Avalanche Dev Docs",
     "description": "Translation for the homepage title"
   },
   "🚀 Launch Your First Subnet": {
-    "message": "🚀 ¡Lanza tu primer Subnet!",
+    "message": "🚀 ¡Inicia tu primera Subnet!",
     "description": "Translation for the first card label"
   },
   "Start your Subnet development journey by creating a subnet in under five minutes": {
-    "message": "Inicia tu viaje de desarrollo de Subnet creando un subnet en menos de cinco minutos",
+    "message": "Comienza tu viaje de desarrollo de Subnets creando una Subnet en menos de cinco minutos",
     "description": "Translation for the first card description"
   },
   "🔺 Learn about Avalanche": {
@@ -418,7 +418,7 @@
     "description": "Translation for the second card label"
   },
   "Discover how Subnets and Avalanche Consensus are revolutionizing Web3": {
-    "message": "Descubre cómo los Subnets y el Consenso Avalanche están revolucionando Web3",
+    "message": "Descubre cómo las Subnets y el Consenso Avalanche están revolucionando Web3",
     "description": "Translation for the second card description"
   },
   "😎 Become a Validator": {
@@ -430,11 +430,11 @@
     "description": "Translation for the third card description"
   },
   "💻 View Avalanche APIs": {
-    "message": "💻 Ver las APIs de Avalanche",
+    "message": "💻 Ver APIs de Avalanche",
     "description": "Translation for the fourth card label"
   },
   "Access low-level protocol interfaces to build your custom dapp": {
-    "message": "Accede a interfaces de protocolo de bajo nivel para construir tu dapp personalizado",
+    "message": "Accede a interfaces de protocolo de bajo nivel para construir tu dapp personalizada",
     "description": "Translation for the fourth card description"
   },
   "🛠️ Launch Your Dapp on Avalanche": {
@@ -450,7 +450,7 @@
     "description": "Translation for the sixth card label"
   },
   "Opinionated Framework for Building Hyper-Scalable Blockchains on Avalanche": {
-    "message": "Marco de trabajo con opiniones para construir blockchains altamente escalables en Avalanche",
+    "message": "Framework de opinión para construir blockchains hiperescalables en Avalanche",
     "description": "Translation for the sixth card description"
   },
   "Learn with Avalanche Academy": {
@@ -462,7 +462,7 @@
     "description": "Translation for the first card label in the 'Learn with Avalanche Academy' section"
   },
   "Beginner-friendly course to get a high level overview of Avalanche Consensus, Subnets, and VM": {
-    "message": "Curso apto para principiantes para obtener una descripción de alto nivel del Consenso Avalanche, Subnets y VM",
+    "message": "Curso amigable para principiantes para obtener una visión general de alto nivel del Consenso Avalanche, Subnets y VM",
     "description": "Translation for the first card description in the 'Learn with Avalanche Academy' section"
   },
   "🌐 Subnet Architecture": {
@@ -470,7 +470,7 @@
     "description": "Translation for the second card label in the 'Learn with Avalanche Academy' section"
   },
   "Explore Avalanche's Subnet Architecture designed for Scalability and Enterprise Adoption": {
-    "message": "Explora la Arquitectura de Subnet de Avalanche diseñada para Escalabilidad y Adopción Empresarial",
+    "message": "Explora la Arquitectura de Subnets de Avalanche diseñada para Escalabilidad y Adopción Empresarial",
     "description": "Translation for the second card description in the 'Learn with Avalanche Academy' section"
   },
   "🛠️ Customize the EVM": {
@@ -478,7 +478,7 @@
     "description": "Translation for the third card label in the 'Learn with Avalanche Academy' section"
   },
   "Learn to Customize Ethereum Virtual Machine and Launch Your Personalized Blockchain on Avalanche": {
-    "message": "Aprende a personalizar la Máquina Virtual Ethereum y lanza tu propia cadena de bloques personalizada en Avalanche",
+    "message": "Aprende a personalizar la Máquina Virtual Ethereum y lanza tu blockchain personalizada en Avalanche",
     "description": "Translation for the third card description in the 'Learn with Avalanche Academy' section"
   },
   "Explorer": {
