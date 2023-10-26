@@ -25,7 +25,6 @@ Before we begin, you will need to have:
   or [GCP](/tooling/cli-guides/create-a-validator-gcp.md)
 - A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>`to check
   bootstrap status as described[here](/tooling/cli-guides/create-a-validator-aws.md#check-bootstrap-status)
-  )
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network.
   Instructions on how to fund stored key on Fuji can be found [here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key).
 
