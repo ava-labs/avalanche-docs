@@ -61,7 +61,7 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
   con su extensión de dominio. Por ejemplo: la guía que muestra cómo
   [Ejecutar un Nodo Avalanche Manualmente](https://docs.avax.network/es/nodes/run/node-manually)
   se encuentra en este repositorio en `i18n/es/docusaurus-plugin-content-docs/current/nodes/run/node-manually.md`, y está alojada en
-  [https://docs.avax.network/es/nodes/run/node-manually](https://docs.avax.network/es/nodes/run/node-manually).
+  [https://docs.avax.network/es/nodes/run/node-manually](https://docs.avax.network/es/nodes/run/node-manually). Si un archivo no existe en este camino de archivos, entonces por defecto se mostrará el archivo en inglés ubicado en el camino de archivos [docs](docs).
 - La barra lateral izquierda de la página está controlada principalmente por
   [sidebars.json](sidebars.json), donde las subsecciones a veces se ordenan por su
   campo de metadatos [`sidebar_position`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_position).
