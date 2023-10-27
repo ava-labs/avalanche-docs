@@ -55,11 +55,13 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
 
 ### Estructura y Sintaxis
 
-- La documentación se encuentra en el directorio [docs](docs). La ruta de un documento corresponde
+- La documentación se encuentra en el directorio
+  [i18n/es/docusaurus-plugin-content-docs/current/](i18n/es/docusaurus-plugin-content-docs/current/).
+  La ruta de un documento corresponde
   con su extensión de dominio. Por ejemplo: la guía que muestra cómo
-  [Ejecutar un Nodo Avalanche Manualmente](https://docs.avax.network/nodes/run/node-manually)
-  se encuentra en este repositorio en `docs/nodes/run/node-manually`, y está alojada en
-  [https://docs.avax.network/nodes/run/node-manually](https://docs.avax.network/nodes/run/node-manually).
+  [Ejecutar un Nodo Avalanche Manualmente](https://docs.avax.network/es/nodes/run/node-manually)
+  se encuentra en este repositorio en `i18n/es/docusaurus-plugin-content-docs/current/nodes/run/node-manually.md`, y está alojada en
+  [https://docs.avax.network/es/nodes/run/node-manually](https://docs.avax.network/es/nodes/run/node-manually).
 - La barra lateral izquierda de la página está controlada principalmente por
   [sidebars.json](sidebars.json), donde las subsecciones a veces se ordenan por su
   campo de metadatos [`sidebar_position`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_position).
