@@ -52,7 +52,7 @@ Por favor, no intente ejecutar un nodo en un HDD, ya que puede obtener latencias
 
 :::
 
-## Ejecutar un Nodo Avalanche desde el Origen
+## Ejecutar un Nodo Avalanche desde el Código Fuente
 
 Los siguientes pasos explican cómo descargar el código fuente de AvalancheGo y construir localmente el programa binario.
 
@@ -220,9 +220,9 @@ Para poder realizar llamadas de API a su nodo desde otras máquinas, incluya el 
 Un nuevo nodo necesita ponerse al día con el último estado de la red antes de poder participar en el consenso y servir llamadas de API. Este proceso (llamado bootstrapping) actualmente lleva varios días para un nuevo nodo conectado a Mainnet, y un día aproximadamente para un nuevo nodo conectado a Fuji Testnet. Cuando una cadena dada ha terminado de arrancar, imprimirá registros como estos:
 
 ```text
-[09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consenso iniciando {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
-[09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consenso iniciando {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
-[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consenso iniciando {"lenFrontier": 1}
+[09-09|17:01:45.295] INFO <C Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2qaFwDJtmCCbMKP4jRpJwH8EFws82Q2yC1HhWgAiy3tGrpGFeb"}
+[09-09|17:01:46.199] INFO <P Chain> snowman/transitive.go:392 consensus starting {"lastAcceptedBlock": "2ofmPJuWZbdroCPEMv6aHGvZ45oa8SBp2reEm9gNxvFjnfSGFP"}
+[09-09|17:01:51.628] INFO <X Chain> snowman/transitive.go:334 consensus starting {"lenFrontier": 1}
 ```
 
 ### Verificar el Progreso de Inicio Rápido
