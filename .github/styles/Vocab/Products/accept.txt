@@ -92,6 +92,7 @@ Deployers
 Deregister
 deserialize
 deserializing
+Dev
 dev
 Dexalot
 dockerhub
