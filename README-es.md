@@ -48,6 +48,7 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
 - Realiza los cambios en tu rama
 - `git add .`
 - **`yarn build` para asegurarte de que la construcción pase**
+- `git commit -m "mensaje de confirmación"` 
 - `git push`
 - Ve a [GitHub](https://github.com/ava-labs/avalanche-docs)
   y abre una nueva solicitud de extracción
