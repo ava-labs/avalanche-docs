@@ -92,6 +92,7 @@ Deployers
 Deregister
 deserialize
 deserializing
+Dev
 dev
 Dexalot
 dockerhub
@@ -167,6 +168,7 @@ Linearizes
 liveness
 lol
 lookups
+MacOS
 Mainnet
 Manov
 Markdownlint
