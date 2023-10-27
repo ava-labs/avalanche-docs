@@ -10,13 +10,13 @@ sidebar_position: 1
 
 We have a shell (bash) script that installs AvalancheGo on your computer. This
 script sets up full, running node in a matter of minutes with minimal user input
-required. Script can also be used for unattended, [automated
-installs](#unattended-installation).
+required. Script can also be used for unattended,
+[automated installs](#unattended-installation).
 
 ## Before You Start
 
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity
-hardware with the following minimum specifications. 
+hardware with the following minimum specifications.
 
 - CPU: Equivalent of 8 AWS vCPU
 - RAM: 16 GiB
@@ -26,7 +26,7 @@ hardware with the following minimum specifications.
 
 :::caution
 
-Using an HDD may result in poor and random 
+Using an HDD may result in poor and random
 read/write latencies, therefore reducing performance and reliability.
 
 :::
@@ -191,17 +191,17 @@ RPC port should be public (this is a public API node) or private (this is a vali
 ```
 
 - `private`: this setting only allows RPC requests from the node machine itself.
-- `public`: this setting exposes the RPC port to all network interfaces. 
+- `public`: this setting exposes the RPC port to all network interfaces.
 
 As this is a sensitive setting you will be asked to confirm if choosing
 `public`. Please read the following note carefully:
 
 :::note
 
-If you choose to allow RPC requests on any network interface you will need 
-to set up a firewall to only let through RPC requests from known IP addresses, 
-otherwise your node will be accessible to anyone and might be overwhelmed by 
-RPC calls from malicious actors! If you do not plan to use your node to send 
+If you choose to allow RPC requests on any network interface you will need
+to set up a firewall to only let through RPC requests from known IP addresses,
+otherwise your node will be accessible to anyone and might be overwhelmed by
+RPC calls from malicious actors! If you do not plan to use your node to send
 RPC calls remotely, enter `private`.
 
 :::

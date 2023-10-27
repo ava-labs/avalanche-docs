@@ -18,7 +18,7 @@ nodes and emergent system properties. A lot of testing can't be addressed by uni
 a special kind of integration testing, where the code runs in interaction with other nodes,
 attempting to simulate real network scenarios.
 
-In the context of Avalanche, **[Subnets](/docs/learn/avalanche/subnets-overview.md)** are a special
+In the context of Avalanche, **[Subnets](/learn/avalanche/subnets-overview.md)** are a special
 focus which requires new tooling and support for playing, working and testing with this unique
 feature of the Avalanche ecosystem.
 
