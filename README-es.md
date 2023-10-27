@@ -24,6 +24,13 @@ Para pequeños errores tipográficos o correcciones, es fácil contribuir sin ne
 repositorio. Simplemente:
 
 - Desplázate hasta el final de la página y haz clic en "Editar esta página"
+- Hacer un fork del repositorio
+- Anotar la ruta en la parte superior de la página
+  (por ejemplo: `avalanche-docs/docs/learn/avalanche/intro.md`)
+- Hacer clic en "Cancel changes"
+- Navegar a la ruta de la página en español
+  (`avalanche-docs/i18n/es/docusaurus-plugin-content-docs/current/learn/avalanche/intro.md`)
+- Hacer clic en "Edit this file"
 - Realiza los cambios en la página directamente en la interfaz gráfica de Github
 - Haz clic en "Commit changes ..."
 - Edita el `commit message` para describir el cambio en 4 palabras o menos,
