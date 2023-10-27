@@ -37,8 +37,6 @@ repositorio. Simplemente:
   e incluye cualquier detalle adicional en la descripción
 - Haz clic en "Sign off and commit changes" para crear una solicitud de extracción con tus cambios propuestos
 
-![](https://github.com/ava-labs/avalanche-docs/blob/master/static/img/quick-edit-readme.gif)
-
 ### Nuevo Contenido o Cambios Extensos
 
 Para proponer nueva documentación o ediciones grandes a nuestras páginas existentes, sigue los pasos correspondientes:
