@@ -167,6 +167,7 @@ Linearizes
 liveness
 lol
 lookups
+MacOS
 Mainnet
 Manov
 Markdownlint
