@@ -46,7 +46,7 @@ configuración. Si un nodo establece `validatorOnly` en verdadero, el nodo inter
 mensajes sólo con los validadores de esta Subnet. Otros pares no podrán
 aprender el contenido de esta Subnet desde este nodo.
 
-:::consejo
+:::tip
 
 Esta es una configuración específica del nodo. Cada validador de esta Subnet tiene que usar
 esta configuración para crear una Subnet privada completa.
@@ -58,7 +58,7 @@ esta configuración para crear una Subnet privada completa.
 Si `validatorOnly=true`, esto permite que se permitan explícitamente los NodeIDs especificados
 para sincronizar la Subnet independientemente de su estado de validador. Por defecto, está vacío.
 
-:::consejo
+:::tip
 
 Esta es una configuración específica del nodo. Cada validador de esta Subnet tiene que usar
 esta configuración para permitir correctamente un nodo en la Subnet privada.

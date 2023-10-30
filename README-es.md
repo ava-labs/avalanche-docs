@@ -24,13 +24,18 @@ Para pequeños errores tipográficos o correcciones, es fácil contribuir sin ne
 repositorio. Simplemente:
 
 - Desplázate hasta el final de la página y haz clic en "Editar esta página"
+- Hacer un fork del repositorio
+- Anotar la ruta en la parte superior de la página
+  (por ejemplo: `avalanche-docs/docs/learn/avalanche/intro.md`)
+- Hacer clic en "Cancel changes"
+- Navegar a la ruta de la página en español
+  (`avalanche-docs/i18n/es/docusaurus-plugin-content-docs/current/learn/avalanche/intro.md`)
+- Hacer clic en "Edit this file"
 - Realiza los cambios en la página directamente en la interfaz gráfica de Github
 - Haz clic en "Commit changes ..."
 - Edita el `commit message` para describir el cambio en 4 palabras o menos,
   e incluye cualquier detalle adicional en la descripción
 - Haz clic en "Sign off and commit changes" para crear una solicitud de extracción con tus cambios propuestos
-
-![](https://github.com/ava-labs/avalanche-docs/blob/master/static/img/quick-edit-readme.gif)
 
 ### Nuevo Contenido o Cambios Extensos
 
@@ -43,17 +48,20 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
 - Realiza los cambios en tu rama
 - `git add .`
 - **`yarn build` para asegurarte de que la construcción pase**
+- `git commit -m "mensaje de confirmación"` 
 - `git push`
 - Ve a [GitHub](https://github.com/ava-labs/avalanche-docs)
   y abre una nueva solicitud de extracción
 
 ### Estructura y Sintaxis
 
-- La documentación se encuentra en el directorio [docs](docs). La ruta de un documento corresponde
+- La documentación se encuentra en el directorio
+  [i18n/es/docusaurus-plugin-content-docs/current/](i18n/es/docusaurus-plugin-content-docs/current/).
+  La ruta de un documento corresponde
   con su extensión de dominio. Por ejemplo: la guía que muestra cómo
-  [Ejecutar un Nodo Avalanche Manualmente](https://docs.avax.network/nodes/run/node-manually)
-  se encuentra en este repositorio en `docs/nodes/run/node-manually`, y está alojada en
-  [https://docs.avax.network/nodes/run/node-manually](https://docs.avax.network/nodes/run/node-manually).
+  [Ejecutar un Nodo Avalanche Manualmente](https://docs.avax.network/es/nodes/run/node-manually)
+  se encuentra en este repositorio en `i18n/es/docusaurus-plugin-content-docs/current/nodes/run/node-manually.md`, y está alojada en
+  [https://docs.avax.network/es/nodes/run/node-manually](https://docs.avax.network/es/nodes/run/node-manually). Si un archivo no existe en este camino de archivos, entonces por defecto se mostrará el archivo en inglés ubicado en el camino de archivos [docs](docs).
 - La barra lateral izquierda de la página está controlada principalmente por
   [sidebars.json](sidebars.json), donde las subsecciones a veces se ordenan por su
   campo de metadatos [`sidebar_position`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_position).

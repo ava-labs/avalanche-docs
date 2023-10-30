@@ -45,6 +45,7 @@ To propose new docs or large edits to our existing pages, follow the steps accor
 - Make changes on your branch
 - `git add .`
 - **`yarn build` to ensure the build passes**
+- `git commit -m "some commit message"`
 - `git push`
 - Head to [GitHub](https://github.com/ava-labs/avalanche-docs)
   and open a new pull request

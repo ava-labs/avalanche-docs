@@ -1,7 +1,7 @@
 ---
 tags: [Construir, Dapps]
 description: Este tutorial se centra en cómo obtener un "goteo" de AVAX del faucet de la red de pruebas Fuji.
-sidebar_label: 💰 Obtener Fondos de Prueba
+sidebar_label: 💰 Obtener Fondos
 pagination_label: Obtener Fondos de Prueba del Faucet de la Red de Pruebas Fuji
 ---
 

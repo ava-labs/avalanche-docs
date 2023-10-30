@@ -20,7 +20,7 @@ qué blockchains. Para agregar un validador, emitiremos
 [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)
 a la P-Chain.
 
-:::advertencia
+:::warning
 
 Ten en cuenta que una vez que emites la transacción para agregar un nodo como validador, no hay
 forma de cambiar los parámetros. **No puedes eliminar tu participación temprano o cambiar
@@ -78,7 +78,7 @@ La respuesta tiene el ID de tu nodo:
 Abre [la billetera](https://wallet.avax.network/), y ve a la pestaña `Earn` (Ganar). Elige
 `Add Validator` (Agregar validador) bajo la sección `Validate` (Validar).
 
-Completa los parámetros de participación. Se explican con más detalle en [este
+Completa los parámetros de staking. Se explican con más detalle en [este
 documento](/nodes/validate/how-to-stake.md). Cuando hayas completado todos los parámetros de participación
 y los hayas verificado, haz clic en `Confirm` (Confirmar). Asegúrate de que el período de participación sea de al
 menos 2 semanas, la tasa de tarifa de delegación sea de al menos 2% y estés haciendo stake de al
