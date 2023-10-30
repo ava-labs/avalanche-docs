@@ -93,14 +93,14 @@ Se aplican las siguientes restricciones:
 
 ### `MinStakeDuration`
 
-`MinStakeDuration` tiene tipo `uint32` y es el número mínimo de segundos que un apostador puede apostar.
+`MinStakeDuration` tiene tipo `uint32` y es el número mínimo de segundos que se puede hacer stake.
 Se aplican las siguientes restricciones:
 
 - `MinStakeDuration` debe ser mayor que cero.
 
 ### `MaxStakeDuration`
 
-`MaxStakeDuration` tiene tipo `uint32` y es el número máximo de segundos que un apostador puede apostar.
+`MaxStakeDuration` tiene tipo `uint32` y es el número máximo de segundos que se puede hacer stake.
 Se aplican las siguientes restricciones:
 
 - `MaxStakeDuration` debe ser mayor o igual a `MinStakeDuration`.

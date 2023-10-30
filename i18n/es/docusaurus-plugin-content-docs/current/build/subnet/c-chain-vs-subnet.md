@@ -49,7 +49,7 @@ El enfoque más adecuado es escalar la seguridad a medida que la aplicación acu
 
 ### Queremos un costo inicial bajo
 
-La C-Chain tiene ventajas económicas de implementación de bajo costo, mientras que se requiere que cada validador de una Subnet valide la Red Primaria al apostar AVAX (mínimo 2,000 AVAX para Mainnet). Para la tolerancia a fallas, recomendamos al menos cinco validadores para una Subnet, aunque no hay ningún requisito de que el propietario de la Subnet deba poseer todos estos 5 validadores, aún aumenta los costos iniciales.
+La C-Chain tiene ventajas económicas de implementación de bajo costo, mientras que se requiere que cada validador de una Subnet valide la Red Primaria al hacer staking de AVAX (mínimo 2,000 AVAX para Mainnet). Para la tolerancia a fallas, recomendamos al menos cinco validadores para una Subnet, aunque no hay ningún requisito de que el propietario de la Subnet deba poseer todos estos 5 validadores, aún aumenta los costos iniciales.
 
 ### Queremos costos operativos bajos
 

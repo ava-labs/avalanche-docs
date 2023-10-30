@@ -75,7 +75,7 @@ Para añadir validadores sin permisos a una Subnet Elástica, ejecuta
 
 Se te pedirá qué nodo te gustaría añadir como validador sin permisos. Puedes omitir esta solicitud usando la bandera `--nodeID`.
 
-A continuación, se te pedirá la cantidad del token nativo de la Subnet que te gustaría apostar en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. Ten en cuenta que elegir añadir la cantidad máxima de apuesta del validador (definida durante el paso de transformación de la Subnet Elástica arriba) significa que efectivamente deshabilitas la delegación en tu validador.
+A continuación, se te pedirá la cantidad del token nativo de la Subnet que te gustaría poner en stake en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. Ten en cuenta que elegir añadir la cantidad máxima de apuesta del validador (definida durante el paso de transformación de la Subnet Elástica arriba) significa que efectivamente deshabilitas la delegación en tu validador.
 
 A continuación, selecciona cuándo el validador empezará a validar y cuánto tiempo estará validando. También puedes omitir estas solicitudes usando las banderas `--start-time` y `--staking-period`.
 
@@ -87,7 +87,7 @@ Para añadir delegadores sin permisos, ejecuta
 
 Se te pedirá a qué validador de la Subnet te gustaría delegar. Puedes omitir esta solicitud usando la bandera `--nodeID`.
 
-A continuación, se te pedirá la cantidad del token nativo de la Subnet que te gustaría apostar en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. La cantidad que se puede delegar a un validador se detalla
+A continuación, se te pedirá la cantidad del token nativo de la Subnet que te gustaría poner en stake en el validador. Alternativamente, puedes omitir esta solicitud proporcionando la bandera `--stake-amount`. La cantidad que se puede delegar a un validador se detalla
 [aquí](/build/subnet/elastic/elastic-parameters.md#delegators-weight-checks).
 
 A continuación, selecciona cuándo quieres empezar a delegar y cuánto tiempo quieres delegar. También puedes omitir estas solicitudes usando las banderas `--start-time` y `--staking-period`.

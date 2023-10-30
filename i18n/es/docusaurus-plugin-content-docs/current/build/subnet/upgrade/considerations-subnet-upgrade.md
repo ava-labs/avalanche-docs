@@ -44,7 +44,7 @@ Cuando operas una Subnet, siempre debes tener en cuenta que las redes de Prueba 
 solo pueden progresar si hay una cantidad suficiente de nodos validadores conectados y procesando
 transacciones. Cada validador en una Subnet se le asigna un cierto `peso`, que es un valor numérico
 que representa la importancia del nodo en las decisiones de consenso. En la Red Primaria, el peso es
-igual a la cantidad de AVAX apostados en el nodo. En las Subnets, el peso se asigna actualmente por los
+igual a la cantidad de AVAX en staking en el nodo. En las Subnets, el peso se asigna actualmente por los
 propietarios de la Subnet cuando emiten la transacción [agregando un
 validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subnet.
 

@@ -188,9 +188,9 @@ Los nodos pueden no necesitar esperar hasta recibir todas las respuestas de cons
 
 Si fuera gratis convertirse en un validador en la red Avalanche, eso sería problemático porque un actor malicioso podría iniciar muchos, muchos nodos que serían consultados con mucha frecuencia. El actor malicioso podría hacer que el nodo actúe mal y cause una falla de seguridad o de vida. Los validadores, los nodos que se consultan como parte del consenso, tienen influencia sobre la red. Tienen que pagar por esa influencia con un valor del mundo real para evitar este tipo de manipulación de votos. Esta idea de usar un valor del mundo real para comprar influencia sobre la red se llama Prueba de Participación.
 
-Para convertirse en un validador, un nodo debe **enlazar** (apostar) algo valioso (**AVAX**). Cuanto más AVAX enlace un nodo, más a menudo será consultado por otros nodos. Cuando un nodo muestrea la red, no es uniformemente aleatorio. Más bien, está ponderado por la cantidad de enlace. Los nodos tienen incentivos para ser validadores porque obtienen una recompensa si, mientras validan, son suficientemente correctos y receptivos.
+Para convertirse en un validador, un nodo debe **bloquear** (stake) algo valioso (**AVAX**). Cuanto más AVAX bloquea en un nodo, más a menudo será consultado por otros nodos. Cuando un nodo muestrea la red, no es uniformemente aleatorio. Más bien, está ponderado por la cantidad del stake. Los nodos tienen incentivos para ser validadores porque obtienen una recompensa si, mientras validan, son suficientemente correctos y receptivos.
 
-Avalanche no tiene "slashing". Si un nodo no se comporta bien mientras valida, como dar respuestas incorrectas o tal vez no responder en absoluto, su enlace aún se devuelve en su totalidad, pero sin recompensa. Mientras una porción suficiente del AVAX enlazado sea sostenida por nodos correctos, entonces la red es segura y está viva para transacciones virtuosas.
+Avalanche no tiene "slashing". Si un nodo no se comporta bien mientras valida, como dar respuestas incorrectas o tal vez no responder en absoluto, su stake aún se devuelve en su totalidad, pero sin recompensa. Mientras una porción suficiente del AVAX en staking sea sostenida por nodos correctos, entonces la red es segura y está viva para transacciones virtuosas.
 
 ### Ideas Principales
 
