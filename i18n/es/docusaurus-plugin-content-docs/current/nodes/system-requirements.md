@@ -36,7 +36,7 @@ Si estás ejecutando un nodo en una computadora que está en una conexión de in
 
 Dado que hay demasiados modelos y configuraciones de enrutadores, no podemos proporcionar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar (como [esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)), y el soporte de tu proveedor de servicios también podría ayudar.
 
-:::advertencia
+:::warning
 
 Un nodo Avalanche completamente conectado mantiene y comunica más de un par de miles de conexiones TCP en vivo. Para algunos enrutadores residenciales de baja potencia y más antiguos, eso puede ser demasiado para manejar. Si ese es el caso, es posible que experimentes retrasos en otras computadoras conectadas al mismo enrutador, que el nodo se quede en espera, falle al sincronizar y problemas similares.
 
