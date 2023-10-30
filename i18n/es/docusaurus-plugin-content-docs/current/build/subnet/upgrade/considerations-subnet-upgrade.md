@@ -127,7 +127,7 @@ se encuentra el binario AvalancheGo. Si el nodo está instalado usando el script
 del ID de VM de la cadena en la Subnet. Por ejemplo, para la [Subnet WAGMI](https://subnets-test.avax.network/wagmi) ese ID de VM es
 `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. Entonces, el comando para
 
-:::advertencia
+:::warning
 Asegúrate de usar el ID de VM correcto, de lo contrario, tu VM no se actualizará y tu Subnet puede detenerse.
 :::
 

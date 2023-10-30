@@ -20,7 +20,7 @@ qué blockchains. Para agregar un validador, emitiremos
 [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)
 a la P-Chain.
 
-:::advertencia
+:::warning
 
 Ten en cuenta que una vez que emites la transacción para agregar un nodo como validador, no hay
 forma de cambiar los parámetros. **No puedes eliminar tu participación temprano o cambiar
