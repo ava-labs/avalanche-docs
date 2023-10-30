@@ -16,7 +16,7 @@ Avalanche es un protocolo increíblemente ligero, por lo que los nodos pueden fu
 - Almacenamiento: 1 TiB SSD
 - SO: Ubuntu 20.04 o MacOS >= 12
 
-:::precaución
+:::caution
 
 Los nodos que eligen usar un HDD pueden tener latencias de lectura/escritura pobres y aleatorias, lo que reduce el rendimiento y la confiabilidad. Se recomienda encarecidamente un SSD.
 
