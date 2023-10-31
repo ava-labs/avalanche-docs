@@ -78,10 +78,10 @@ La respuesta tiene el ID de tu nodo:
 Abre [la billetera](https://wallet.avax.network/), y ve a la pestaña `Earn` (Ganar). Elige
 `Add Validator` (Agregar validador) bajo la sección `Validate` (Validar).
 
-Completa los parámetros de participación. Se explican con más detalle en [este
+Completa los parámetros de staking. Se explican con más detalle en [este
 documento](/nodes/validate/how-to-stake.md). Cuando hayas completado todos los parámetros de participación
 y los hayas verificado, haz clic en `Confirm` (Confirmar). Asegúrate de que el período de participación sea de al
-menos 2 semanas, la tasa de tarifa de delegación sea de al menos 2% y estés apostando al
+menos 2 semanas, la tasa de tarifa de delegación sea de al menos 2% y estés haciendo stake de al
 menos 2,000 AVAX en Mainnet (1 AVAX en Fuji Testnet).
 
 Deberías ver un mensaje de éxito y tu saldo debería actualizarse.
@@ -404,4 +404,4 @@ El flujo de trabajo en Fuji se puede adaptar a Mainnet con las siguientes modifi
 - La clave privada correcta.
 - La configuración de red debe ser para un nodo de Mainnet, ya sea [un nodo local en Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) o [un servidor de API de Avalanche Mainnet](/tooling/rpc-providers.md#using-the-public-api-nodes) donde se debe usar `api.avax.network` para la `ip`.
 - `const networkID: number = 1` basado en [esto](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
-- Establecer la cantidad correcta para apostar.
+- Establecer la cantidad correcta para hacer staking.

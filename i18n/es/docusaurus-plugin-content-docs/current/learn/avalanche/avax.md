@@ -27,7 +27,7 @@ Cualquier entidad que intente ejecutar una transacción en Avalanche paga una ta
 
 Se acuñó una cantidad fija de 360M de AVAX en el génesis, pero una pequeña cantidad de AVAX se acuña constantemente como recompensa para los validadores. El protocolo recompensa a los validadores por un buen comportamiento acuñándoles recompensas de AVAX al final de su período de staking. El proceso de acuñación compensa el AVAX quemado por las tarifas de transacción. Aunque AVAX todavía está lejos de alcanzar su límite de suministro, casi siempre seguirá siendo un activo inflacionario.
 
-Avalanche no elimina ninguna parte de los tokens ya apostados de un validador (comúnmente conocido como "slashing") por períodos de staking negligentes/maliciosos, sin embargo, este comportamiento está desincentivado ya que los validadores que intentan hacer daño a la red gastarían los recursos de cómputo de su nodo sin ninguna recompensa.
+Avalanche no elimina ninguna parte de los tokens en staking de un validador (comúnmente conocido como "slashing") por períodos de staking negligentes/maliciosos, sin embargo, este comportamiento está desincentivado ya que los validadores que intentan hacer daño a la red gastarían los recursos de cómputo de su nodo sin ninguna recompensa.
 
 <!-- vale off -->
 
@@ -55,7 +55,7 @@ $$
 \rho(u.s_{amount}, u.s_{time}) = (0.002 \times u.s_{time} + 0.896) \times \frac{u.s_{amount}}{R_j}
 $$
 
-Si todo el suministro de tokens en el año $j$ se apuesta durante el máximo tiempo de staking (un año, o 52 semanas), entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. Si, en cambio, cada token se apuesta continuamente durante la duración mínima de stake de dos semanas, entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Por lo tanto, el staking durante el máximo tiempo de duración incurre en una cantidad adicional del 11.11% de tokens acuñados, incentivando a los stakers a apostar por períodos más largos.
+Si todo el suministro de tokens en el año $j$ se apuesta durante el máximo tiempo de staking (un año, o 52 semanas), entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. Si, en cambio, cada token se apuesta continuamente durante la duración mínima de stake de dos semanas, entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Por lo tanto, el staking durante el máximo tiempo de duración incurre en una cantidad adicional del 11.11% de tokens acuñados, incentivando a los stakers a bloquear por períodos más largos.
 
 Debido al suministro limitado, la función anterior garantiza que, independientemente de los cambios de gobernanza, AVAX nunca excederá un total de $720M$ tokens, o $\lim_{j \to \infty} R(j) = 720M$.
 

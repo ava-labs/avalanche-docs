@@ -40,7 +40,7 @@ La [Mainnet de Avalanche](/learn/avalanche/mainnet.md) está compuesta por la Re
 y todas las Subnets desplegadas.
 :::
 
-Un nodo puede convertirse en un validador para la Red Primaria al apostar al menos **2,000 AVAX**.
+Un nodo puede convertirse en un validador para la Red Primaria al hacer staking al menos **2,000 AVAX**.
 
 ![Red primaria](/img/primary-network.png)
 

@@ -32,7 +32,7 @@ lo que reduce el rendimiento y la confiabilidad.
 
 :::note
 
-Los requisitos de hardware se escalarán con la cantidad de AVAX apostados en
+Los requisitos de hardware se escalarán con la cantidad de AVAX en stake en
 el nodo y/o la actividad de la red. Los nodos con grandes apuestas (100k+ AVAX) necesitarán máquinas más potentes
 que las enumeradas, y también utilizarán más ancho de banda.
 
@@ -461,7 +461,7 @@ rm -rf ~/.avalanchego/
 
 Si estás en una red residencial (IP dinámica), no olvides configurar el reenvío de puertos. Si estás en un proveedor de servicios en la nube, estás listo para empezar.
 
-Ahora puedes [interactuar con tu nodo](/reference/standards/guides/issuing-api-calls.md), [apostar tus tokens](/nodes/validate/what-is-staking.md), o mejorar tu instalación configurando [monitoreo de nodo](/nodes/maintain/setting-up-node-monitoring.md) para obtener una mejor visión de lo que hace tu nodo. Además, es posible que quieras usar nuestra [Colección de Postman](/tooling/avalanchego-postman-collection.md) para emitir comandos más fácilmente a tu nodo.
+Ahora puedes [interactuar con tu nodo](/reference/standards/guides/issuing-api-calls.md), hacer [staking de tus tokens](/nodes/validate/what-is-staking.md), o mejorar tu instalación configurando [monitoreo de nodo](/nodes/maintain/setting-up-node-monitoring.md) para obtener una mejor visión de lo que hace tu nodo. Además, es posible que quieras usar nuestra [Colección de Postman](/tooling/avalanchego-postman-collection.md) para emitir comandos más fácilmente a tu nodo.
 
 Finalmente, si aún no lo has hecho, es una buena idea [hacer una copia de seguridad](/nodes/maintain/node-backup-and-restore.md) de archivos importantes en caso de que necesites restaurar tu nodo en una máquina diferente.
 
