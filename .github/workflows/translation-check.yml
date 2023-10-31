@@ -3,51 +3,46 @@ name: Verify PR Changes for Translated Docs
 on:
   pull_request:
     paths:
-      - 'docs/build/**'
-      - 'docs/learn/**'
-      - 'docs/nodes/**'
+      - "docs/build/**"
+      - "docs/learn/**"
+      - "docs/nodes/**"
 
 jobs:
   check-doc-translations:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check for Translated Docs Changes
-      id: check-translations
-      run: |
-        # Define an array of paths that require translation checks
-        paths=("docs/build/" "docs/learn/" "docs/nodes/")
+      - name: Check for Translated Docs Changes
+        id: check-translations
+        run: |
+          # Define an array of paths that require translation checks
+          paths=("docs/build/" "docs/learn/" "docs/nodes/")
 
-        # Loop through the changed files in the PR
-        for file in $(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }}); do
-          for path in "${paths[@]}"; do
-            if [[ $file == $path*.md ]]; then
-              # Extract the corresponding translated file path
-              translated_file=$(echo "$file" | sed 's|/docs/|/i18n/es/docusaurus-plugin-content-docs/current/|')
-              # Check that translated file exists
-              if [[ ! -f "$translated_file" ]]; then
-                echo "PR includes changes to $file, but there are no corresponding translations in $translated_file"
-                exit 1
+          # Loop through the changed files in the PR
+          for file in $(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }}); do
+            for path in "${paths[@]}"; do
+              if [[ $file == $path*.md ]]; then
+                # Extract the corresponding translated file path
+                translated_file=$(echo "$file" | sed 's|/docs/|/i18n/es/docusaurus-plugin-content-docs/current/|')
+                # Check if the PR includes changes to the translated file
+                translated_diff=$(git --no-pager diff --name-only "$translated_file")
+                if [[ -n "$translated_diff" ]]; then
+                  echo "PR changes include corresponding translations."
+                else
+                  echo "PR includes changes to $file, but there are no corresponding changes in $translated_file"
+                  exit 1
+                fi
               fi
-              # Check if the PR includes changes to the translated file
-              translated_diff=$(git --no-pager diff --name-only "$translated_file")
-              if [[ -n "$translated_diff" ]]; then
-                echo "PR changes include corresponding translations."
-              else
-                echo "PR includes changes to $file, but there are no corresponding changes in $translated_file"
-                exit 1
-              fi
-            fi
+            done
           done
-        done
 
-        echo "PR changes include corresponding translations."
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      shell: bash
+          echo "PR changes include corresponding translations."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
 
-    - name: Set Build Status
-      if: failure()
-      run: |
-        echo "The PR does not include corresponding translations."
-        exit 1
+      - name: Set Build Status
+        if: failure()
+        run: |
+          echo "The PR does not include corresponding translations."
+          exit 1
