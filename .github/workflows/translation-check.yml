@@ -11,7 +11,7 @@ jobs:
     name: Test changed files
     steps:
       - name: Checkout code
-        uses: actions/checkout@v40
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0 # To retrieve the preceding commit
 
