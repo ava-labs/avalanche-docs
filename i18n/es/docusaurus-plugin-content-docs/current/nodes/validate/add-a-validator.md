@@ -35,7 +35,7 @@ a nuestro [Discord](https://chat.avalabs.org/) para hacer preguntas.
 Has completado [Ejecutar un nodo Avalanche](/nodes/run/node-manually.md) y estás familiarizado con
 la [arquitectura de Avalanche](/learn/avalanche/avalanche-platform.md). En este
 tutorial, usamos [AvalancheJS](/tooling/avalanchejs-overview.md) y
-[la colección de Postman de Avalanche](/tooling/avalanchego-postman-collection.md) para ayudarnos
+[la colección de Postman de Avalanche](/tooling/avalanchego-postman-collection/setup.md) para ayudarnos
 a realizar llamadas de API.
 
 Para asegurarte de que tu nodo esté bien conectado, asegúrate de que tu nodo pueda

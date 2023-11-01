@@ -26,7 +26,7 @@ of the `baseURL` variable or changing the URL directly on the call tab.
 Check out the [RPC providers](../rpc-providers.md) to see all public URLs.
 
 * The API endpoint depends on which API is used. Please check out 
-[our APIs](../../reference/README.md) to find the proper endpoint.
+[our APIs](../../reference/avalanchego/c-chain/api.md) to find the proper endpoint.
 
 
 Add the needed parameters for the call. For example, if a user wants to fetch data
