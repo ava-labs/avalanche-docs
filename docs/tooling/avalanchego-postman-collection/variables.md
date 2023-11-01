@@ -118,7 +118,7 @@ Now it can be used on any call from this collection
 
 
 
-### Set An Environment Variable
+### Set an Environment Variable
 
 Go to Environments
 
