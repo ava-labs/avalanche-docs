@@ -71,7 +71,7 @@ jobs:
             echo "Path for expected Spanish translation with change: $translated_file"
             # Check that translated_file matches one of the paths in spanishChanges; if not, exit with an error
             if [[ ! " ${spanishChanges[@]} " =~ " ${translated_file} " ]]; then
-              echo "No corresponding translated file found for $englishDoc."
+              echo "!ERROR!: No corresponding translated file found for $englishDoc. Those with write access should write the following in a PR comment: /gt $englishDoc $translated_file spanish"
               exit 1
             fi
           done
