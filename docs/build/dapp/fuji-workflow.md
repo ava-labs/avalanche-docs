@@ -30,7 +30,7 @@ be used. We'll do the following:
 
 ## Set up Fuji Network on Core (optional)
 
-To access the Fuji test network, Testnet Mode needs to be enabled. 
+To access the Fuji test network, Testnet Mode needs to be enabled.
 In order to do that, go to **Settings** and click on **Advanced**.
 
 <div style={{textAlign: 'center'}}>
@@ -40,7 +40,7 @@ In order to do that, go to **Settings** and click on **Advanced**.
 </div>
 
 Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to
-Fuji Testnet. 
+Fuji Testnet.
 
 <div style={{textAlign: 'center'}}>
 
@@ -50,7 +50,8 @@ Fuji Testnet.
 
 :::info
 
-If you are using other wallets, like MetaMask, you can add the Fuji Testnet using the following specs:
+If you are using other wallets, like MetaMask, you can add the Fuji Testnet
+using the following specs:
 
 - **Network Name**: Avalanche C-Chain
 - **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
@@ -73,12 +74,12 @@ First, generate a 24 word english
 mnemonic via AvalancheJS.
 
 ```typescript
-import { Mnemonic } from "avalanche"
-const mnemonic: Mnemonic = Mnemonic.getInstance()
-const strength: number = 256
-const wordlist = mnemonic.getWordlists("english") as string[]
-const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
-console.log(m)
+import { Mnemonic } from "avalanche";
+const mnemonic: Mnemonic = Mnemonic.getInstance();
+const strength: number = 256;
+const wordlist = mnemonic.getWordlists("english") as string[];
+const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist);
+console.log(m);
 // "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
 ```
 
@@ -89,35 +90,35 @@ After generating a mnemonic we can use AvalancheJS to derive
 hierarchical deterministic (HD) Keypairs.
 
 ```typescript
-import HDNode from "avalanche/dist/utils/hdnode"
-import { Avalanche, Mnemonic, Buffer } from "avalanche"
-import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm"
-import { ethers } from "ethers"
+import HDNode from "avalanche/dist/utils/hdnode";
+import { Avalanche, Mnemonic, Buffer } from "avalanche";
+import { EVMAPI, KeyChain } from "avalanche/dist/apis/evm";
+import { ethers } from "ethers";
 
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
+const ip: string = "api.avax-test.network";
+const port: number = 443;
+const protocol: string = "https";
+const networkID: number = 5;
+const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID);
+const cchain: EVMAPI = avalanche.CChain();
 
-const mnemonic: Mnemonic = Mnemonic.getInstance()
+const mnemonic: Mnemonic = Mnemonic.getInstance();
 const m: string =
-  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder"
-const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
-const hdnode: HDNode = new HDNode(seed)
+  "chimney asset heavy ecology accuse window gold weekend annual oil emerge alley retreat rabbit seed advance define off amused board quick wealth peasant disorder";
+const seed: Buffer = mnemonic.mnemonicToSeedSync(m);
+const hdnode: HDNode = new HDNode(seed);
 
-const keyChain: KeyChain = cchain.newKeyChain()
+const keyChain: KeyChain = cchain.newKeyChain();
 
-const cAddresses: string[] = []
+const cAddresses: string[] = [];
 
 for (let i: number = 0; i <= 2; i++) {
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  cAddresses.push(cchainAddress)
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
+  keyChain.importKey(child.privateKey);
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey);
+  cAddresses.push(cchainAddress);
 }
-console.log(cAddresses)
+console.log(cAddresses);
 // [
 //   '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
 //   '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
@@ -139,18 +140,18 @@ For example, if you want to generate the private keys for the first 3 address in
 you might update the example script above to the following:
 
 ```typescript
-const cAddresses: string[] = []
-const privateKeys: string[] = []
+const cAddresses: string[] = [];
+const privateKeys: string[] = [];
 for (let i: number = 0; i <= 2; i++) {
   // Deriving the _i_th external BIP44 C-Chain address
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`)
-  keyChain.importKey(child.privateKey)
+  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
+  keyChain.importKey(child.privateKey);
   // Converting the BIP44 addresses to hexadecimal addresses
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey)
-  privateKeys.push(child.privateKey.toString("hex"))
-  cAddresses.push(cchainAddress)
+  const cchainAddress = ethers.utils.computeAddress(child.privateKey);
+  privateKeys.push(child.privateKey.toString("hex"));
+  cAddresses.push(cchainAddress);
 }
-console.log({ cAddresses, privateKeys })
+console.log({ cAddresses, privateKeys });
 // {
 //   cAddresses: [
 //     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
@@ -197,21 +198,21 @@ We can also use the Fuji Explorer to get the balance for the 1st address—[0x2d
 Alternatively, we can use [ethersJS](https://docs.ethers.io/v5/) to get the balance.
 
 ```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559"
+const ethers = require("ethers");
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
+const provider = ethers.getDefaultProvider(network);
+const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
     // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInAvax} AVAX`);
     // balance: 2 AVAX
-  })
-}
+  });
+};
 
-main()
+main();
 ```
 
 ## Sending AVAX
@@ -221,33 +222,33 @@ the 1st address to the 2nd address.
 
 ```typescript
 // import ethers.js
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 // network: using the Fuji testnet
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
 // provider: establish and RPC connection to the network
-const provider = new ethers.providers.JsonRpcProvider(network)
+const provider = new ethers.providers.JsonRpcProvider(network);
 
 // Sender private key:
 // corresponding address 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
 let privateKey =
-  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc"
+  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc";
 // Create a wallet instance
-let wallet = new ethers.Wallet(privateKey, provider)
+let wallet = new ethers.Wallet(privateKey, provider);
 // Receiver Address
-let receiverAddress = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
+let receiverAddress = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 // AVAX amount to send
-let amountInAvax = "0.01"
+let amountInAvax = "0.01";
 // Create a transaction object
 let tx = {
   to: receiverAddress,
   // Convert currency unit from ether to wei
   value: ethers.utils.parseEther(amountInAvax),
-}
+};
 // Send a transaction
 wallet.sendTransaction(tx).then((txObj) => {
-  console.log(`"tx, https://testnet.snowtrace.io/tx/${txObj.hash}`)
+  console.log(`"tx, https://testnet.snowtrace.io/tx/${txObj.hash}`);
   // A transaction result can be checked in a snowtrace with a transaction link which can be obtained here.
-})
+});
 ```
 
 ### Verify Success
@@ -266,21 +267,21 @@ We can also use the Fuji Explorer to get the balance for the 2nd address—[0x25
 Alternatively, we can use ethersJS to get the balance.
 
 ```typescript
-const ethers = require("ethers")
-const network = "https://api.avax-test.network/ext/bc/C/rpc"
-const provider = ethers.getDefaultProvider(network)
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C"
+const ethers = require("ethers");
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
+const provider = ethers.getDefaultProvider(network);
+const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
     // convert a currency unit from wei to ether
-    const balanceInAvax = ethers.utils.formatEther(balance)
-    console.log(`balance: ${balanceInAvax} AVAX`)
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInAvax} AVAX`);
     // balance: 0.02 AVAX
-  })
-}
+  });
+};
 
-main()
+main();
 ```
 
 ### Sign Into the Web Wallet
@@ -301,7 +302,7 @@ The balance is correct and the address is the 1st derived address.
 We can repeat this login process using the private keys from the remaining 2
 addresses in the [script above](#generate-private-keys-from-a-mnemonic).
 
-![Wallet derived addresses](/img/fuji-wf-alt-wallet-address-2.png) 
+![Wallet derived addresses](/img/fuji-wf-alt-wallet-address-2.png)
 ![Wallet derived addresses2](/img/fuji-wf-alt-wallet-address-3.png)  
 ![Wallet derived addresses3](/img/fuji-wf-alt-wallet-addresses.png)
 
