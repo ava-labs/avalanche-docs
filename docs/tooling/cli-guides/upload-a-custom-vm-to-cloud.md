@@ -24,17 +24,17 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as described [here](/docs/tooling/cli-guides/create-a-validator.md)
-- Created a Custom VM, as described [here](/docs/build/vm/intro.md).
-- Set up a key to be able to pay for the Fuji Fees, as described [here](/docs/build/subnet/deploy/fuji-testnet-subnet.md).
+- Created a Cloud Server node as described [here](/tooling/cli-guides/create-a-validator-aws.md)
+- Created a Custom VM, as described [here](/build/vm/intro.md).
+- Set up a key to be able to pay for the Fuji Fees, as described [here](/build/subnet/deploy/fuji-testnet-subnet.md).
 
-Currently, we only support AWS cloud services, but we plan to add support for more cloud 
+Currently, we only support AWS cloud services, but we plan to add support for more cloud
 services in the near future.
 
 ## Deploying the VM
 
 We will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
-example built with the HyperSDK. 
+example built with the HyperSDK.
 
 The following settings will be used:
 
@@ -49,7 +49,7 @@ The CLI needs a public repo url in order to be able to download and install the 
 ### Local Build Stage
 
 A locally compiled binary is needed to setup the Subnet. You can create it by locally
-cloning the HyperSDK, changing to the desired branch, and then executing the build 
+cloning the HyperSDK, changing to the desired branch, and then executing the build
 script. Eg:
 
 ```bash
@@ -59,7 +59,7 @@ git checkout main
 ./examples/tokenvm/scripts/build.sh <vmBinaryPath>
 ```
 
-where `<vmBinaryPath>` is the full path where you want the script's 
+where `<vmBinaryPath>` is the full path where you want the script's
 output binary to be saved (for example `~/tokenvm.bin`).
 
 ### Genesis File
@@ -71,58 +71,34 @@ Save it into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.js
 
 ```json
 {
-    "hrp": "token",
-    "minBlockGap": 100,
-    "minEmptyBlockGap": 2500,
-    "minUnitPrice": [
-        100,
-        100,
-        100,
-        100,
-        100
-    ],
-    "unitPriceChangeDenominator": [
-        48,
-        48,
-        48,
-        48,
-        48
-    ],
-    "windowTargetUnits": [
-        40000000,
-        450000,
-        450000,
-        450000,
-        450000
-    ],
-    "maxBlockUnits": [
-        1800000,
-        15000,
-        15000,
-        2500,
-        15000
-    ],
-    "validityWindow": 60000,
-    "baseUnits": 1,
-    "baseWarpUnits": 1024,
-    "warpUnitsPerSigner": 128,
-    "outgoingWarpComputeUnits": 1024,
-    "coldStorageKeyReadUnits": 5,
-    "coldStorageValueReadUnits": 2,
-    "warmStorageKeyReadUnits": 1,
-    "warmStorageValueReadUnits": 1,
-    "storageKeyCreateUnits": 20,
-    "storageKeyValueUnits": 5,
-    "coldStorageKeyModificationUnits": 10,
-    "coldStorageValueModificationUnits": 3,
-    "warmStorageKeyModificationUnits": 5,
-    "warmStorageValueModificationUnits": 3,
-    "customAllocation": [
-        {
-            "address": "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp",
-            "balance": 10000000000000000000
-        }
-    ]
+  "hrp": "token",
+  "minBlockGap": 100,
+  "minEmptyBlockGap": 2500,
+  "minUnitPrice": [100, 100, 100, 100, 100],
+  "unitPriceChangeDenominator": [48, 48, 48, 48, 48],
+  "windowTargetUnits": [40000000, 450000, 450000, 450000, 450000],
+  "maxBlockUnits": [1800000, 15000, 15000, 2500, 15000],
+  "validityWindow": 60000,
+  "baseUnits": 1,
+  "baseWarpUnits": 1024,
+  "warpUnitsPerSigner": 128,
+  "outgoingWarpComputeUnits": 1024,
+  "coldStorageKeyReadUnits": 5,
+  "coldStorageValueReadUnits": 2,
+  "warmStorageKeyReadUnits": 1,
+  "warmStorageValueReadUnits": 1,
+  "storageKeyCreateUnits": 20,
+  "storageKeyValueUnits": 5,
+  "coldStorageKeyModificationUnits": 10,
+  "coldStorageValueModificationUnits": 3,
+  "warmStorageKeyModificationUnits": 5,
+  "warmStorageValueModificationUnits": 3,
+  "customAllocation": [
+    {
+      "address": "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp",
+      "balance": 10000000000000000000
+    }
+  ]
 }
 ```
 
@@ -137,8 +113,8 @@ avalanche subnet create <subnetName>
 Choose custom
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose your VM: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose your VM:
     Subnet-EVM
   ▸ Custom
 ```
@@ -167,8 +143,8 @@ avalanche subnet deploy <subnetName>
 Choose Fuji:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Choose a network to deploy on: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Choose a network to deploy on:
     Local Network
   ▸ Fuji
     Mainnet
@@ -177,8 +153,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 Use stored the key:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which key source should be used to pay transaction fees?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which key source should be used to pay transaction fees?:
   ▸ Use stored key
     Use ledger
 ```
@@ -186,22 +162,22 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 Choose `<keyName>` as the key to use to pay the fees:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which stored key should be used to pay transaction fees?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which stored key should be used to pay transaction fees?:
   ▸ <keyName>
 ```
 
 Use the same key as the control key for the Subnet:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? How would you like to set your control keys?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? How would you like to set your control keys?:
   ▸ Use fee-paying key
     Use all stored keys
     Custom list
 ```
 
-The successfully creation of our Subnet and blockchain is 
+The successfully creation of our Subnet and blockchain is
 confirmed by the following output:
 
 ```text
@@ -226,7 +202,7 @@ Now creating blockchain...
 
 ## Set the Config Files
 
-Avalanche-CLI supports uploading the full set of configuration 
+Avalanche-CLI supports uploading the full set of configuration
 files for a blockchain:
 
 - Genesis File
@@ -244,23 +220,23 @@ into a file with path `<avagoFlagsPath>` (for example `~/tokenvm_avago.json`):
 
 ```json
 {
-	"log-display-level":"info",
-	"proposervm-use-current-height":true,
-	"throttler-inbound-validator-alloc-size":"10737418240",
-	"throttler-inbound-at-large-alloc-size":"10737418240",
-	"throttler-inbound-node-max-processing-msgs":"100000",
-	"throttler-inbound-bandwidth-refill-rate":"1073741824",
-	"throttler-inbound-bandwidth-max-burst-size":"1073741824",
-	"throttler-inbound-cpu-validator-alloc":"100000",
-	"throttler-inbound-disk-validator-alloc":"10737418240000",
-	"throttler-outbound-validator-alloc-size":"10737418240",
-	"throttler-outbound-at-large-alloc-size":"10737418240",
-	"consensus-on-accept-gossip-validator-size":"10",
-	"consensus-on-accept-gossip-peer-size":"10",
-	"network-compression-type":"zstd",
-	"consensus-app-concurrency":"512",
-	"profile-continuous-enabled":false,
-	"profile-continuous-freq":"1m"
+  "log-display-level": "info",
+  "proposervm-use-current-height": true,
+  "throttler-inbound-validator-alloc-size": "10737418240",
+  "throttler-inbound-at-large-alloc-size": "10737418240",
+  "throttler-inbound-node-max-processing-msgs": "100000",
+  "throttler-inbound-bandwidth-refill-rate": "1073741824",
+  "throttler-inbound-bandwidth-max-burst-size": "1073741824",
+  "throttler-inbound-cpu-validator-alloc": "100000",
+  "throttler-inbound-disk-validator-alloc": "10737418240000",
+  "throttler-outbound-validator-alloc-size": "10737418240",
+  "throttler-outbound-at-large-alloc-size": "10737418240",
+  "consensus-on-accept-gossip-validator-size": "10",
+  "consensus-on-accept-gossip-peer-size": "10",
+  "network-compression-type": "zstd",
+  "consensus-app-concurrency": "512",
+  "profile-continuous-enabled": false,
+  "profile-continuous-freq": "1m"
 }
 ```
 
@@ -273,8 +249,8 @@ avalanche subnet configure subnetName
 Select node-config.json:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which configuration file would you like to provide?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which configuration file would you like to provide?:
   ▸ node-config.json
     chain.json
     subnet.json
@@ -290,8 +266,8 @@ Provide the path to the AvalancheGo config file:
 Finally, choose no:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Would you like to provide the chain.json file as well?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Would you like to provide the chain.json file as well?:
   ▸ No
     Yes
 File ~/.avalanche-cli/subnets/subnetName/node-config.json successfully written
@@ -307,12 +283,14 @@ in a known file path (for example `~/tokenvm_chain.json`):
 {
   "mempoolSize": 10000000,
   "mempoolPayerSize": 10000000,
-  "mempoolExemptPayers":["token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp"],
+  "mempoolExemptPayers": [
+    "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp"
+  ],
   "parallelism": 5,
-  "verifySignatures":true,
+  "verifySignatures": true,
   "storeTransactions": false,
   "streamingBacklogSize": 10000000,
-  "trackedPairs":["*"],
+  "trackedPairs": ["*"],
   "logLevel": "info",
   "stateSyncServerDelay": 0
 }
@@ -327,8 +305,8 @@ avalanche subnet configure subnetName
 Select chain.json:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which configuration file would you like to provide?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which configuration file would you like to provide?:
     node-config.json
   ▸ chain.json
     subnet.json
@@ -344,8 +322,8 @@ Provide the path to the blockchain config file:
 Finally choose no:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Would you like to provide the subnet.json file as well?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Would you like to provide the subnet.json file as well?:
   ▸ No
     Yes
 File ~/.avalanche-cli/subnets/subnetName/chain.json successfully written
@@ -372,8 +350,8 @@ avalanche subnet configure subnetName
 Select `subnet.json`:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Which configuration file would you like to provide?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Which configuration file would you like to provide?:
     node-config.json
     chain.json
   ▸ subnet.json
@@ -389,8 +367,8 @@ Provide the path to the Subnet config file:
 Choose no:
 
 ```text
-Use the arrow keys to navigate: ↓ ↑ → ← 
-? Would you like to provide the chain.json file as well?: 
+Use the arrow keys to navigate: ↓ ↑ → ←
+? Would you like to provide the chain.json file as well?:
   ▸ No
     Yes
 File ~/.avalanche-cli/subnets/subnetName/subnet.json successfully written
@@ -455,4 +433,3 @@ Your custom VM is successfully deployed!
 
 You can also use `avalanche node update subnet <subnetName>` to reinstall the binary
 when the branch is updated, or update the config files.
-
