@@ -52,8 +52,8 @@ jobs:
           echo "List all the files that have changed: ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
 
           # Define an array of paths that require translation checks
-          englishChanges=("${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}")
-          spanishChanges=("${{ steps.changed-es-markdown.outputs.es_all_changed_files }}")
+          readarray -t englishChanges <<<"${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
+          readarray -t spanishChanges <<<"${{ steps.changed-es-markdown.outputs.es_all_changed_files }}"
           echo "List of changed Spanish files: $spanishChanges"
 
           # Loop through the changed files in the PR
