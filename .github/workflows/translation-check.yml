@@ -63,19 +63,24 @@ jobs:
           readarray -t spanishChanges <<<"$spanishChangesStr"
           echo "List of changed Spanish files: $spanishChanges"
 
+          errorMessage=""
           # Loop through the changed files in the PR
           for englishDoc in "${englishChanges[@]}"; do
             echo "Path for changed English doc: $englishDoc"
             # Extract the corresponding translated file path
             translated_file=$(echo $englishDoc | sed 's|docs/|i18n/es/docusaurus-plugin-content-docs/current/|')
             echo "Path for expected Spanish translation with change: $translated_file"
-            # Check that translated_file matches one of the paths in spanishChanges; if not, exit with an error
+            # Check that translated_file matches one of the paths in spanishChanges; if not, add to error message
             if [[ ! " ${spanishChanges[@]} " =~ " ${translated_file} " ]]; then
-              echo "!ERROR!: No corresponding translated file found for $englishDoc. Those with write access should write the following in a PR comment: /gt $englishDoc $translated_file spanish"
-              exit 1
+              errorMessage+="!ERROR!: No corresponding translated file found for $englishDoc. Those with write access should write the following in a PR comment: /gt $englishDoc $translated_file spanish\n"
             fi
           done
-          echo "PR changes include corresponding translations."
+          if [[ ! -z $errorMessage ]]; then
+            echo -e $errorMessage
+            exit 1
+          else
+            echo "PR changes include corresponding translations."
+          fi
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
