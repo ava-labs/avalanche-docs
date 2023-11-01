@@ -13,12 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # To retrieve the preceding commit
+          fetch-depth: 0
 
       - name: Get all changed English markdown files in the 'docs' directory
         id: changed-docs-markdown
         uses: tj-actions/changed-files@v40
         with:
+          fetch-depth: 0
           files_yaml: |
             doc:
               - docs/build/**/*.md
@@ -35,6 +36,7 @@ jobs:
         id: changed-es-markdown
         uses: tj-actions/changed-files@v40
         with:
+          fetch-depth: 0
           files_yaml: |
             doc:
               - i18n/es/docusaurus-plugin-content-docs/current/**/*.md
@@ -54,12 +56,14 @@ jobs:
           # Define an array of paths that require translation checks
           englishChanges=("${{ steps.changed-docs-markdown.outputs.doc_all_changed_files }}")
           spanishChanges=("${{ steps.changed-es-markdown.outputs.all_changed_files }}")
+          echo "List of changed Spanish files: $spanishChanges"
 
           # Loop through the changed files in the PR
           for englishDoc in "${englishChanges[@]}"; do
+            echo "Path for changed English doc: $englishDoc"
             # Extract the corresponding translated file path
             translated_file=$(echo "$englishDoc" | sed 's|/docs/|/i18n/es/docusaurus-plugin-content-docs/current/|')
-
+            echo "Path for expected Spanish translation with change: $translated_file"
             # Check that translated_file matches one of the paths in spanishChanges; if not, exit with an error
             if [[ ! " ${spanishChanges[@]} " =~ " ${translated_file} " ]]; then
               echo "No corresponding translated file found for $englishDoc."
