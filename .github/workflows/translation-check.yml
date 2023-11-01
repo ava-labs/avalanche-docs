@@ -51,9 +51,16 @@ jobs:
           echo "One or more doc file(s) have changed."
           echo "List all the files that have changed: ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
 
-          # Define an array of paths that require translation checks
-          IFS=$'\n' readarray -t englishChanges <<<"${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
-          IFS=$'\n' readarray -t spanishChanges <<<"${{ steps.changed-es-markdown.outputs.es_all_changed_files }}"
+          englishChangesStr="${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
+          spanishChangesStr="${{ steps.changed-es-markdown.outputs.es_all_changed_files }}"
+
+          # Convert space separated string into newline separated
+          englishChangesStr=$(echo $englishChangesStr | tr ' ' '\n')
+          spanishChangesStr=$(echo $spanishChangesStr | tr ' ' '\n')
+
+          # Then read into an array
+          readarray -t englishChanges <<<"$englishChangesStr"
+          readarray -t spanishChanges <<<"$spanishChangesStr"
           echo "List of changed Spanish files: $spanishChanges"
 
           # Loop through the changed files in the PR
