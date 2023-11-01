@@ -19,7 +19,6 @@ jobs:
         id: changed-docs-markdown
         uses: tj-actions/changed-files@v40
         with:
-          fetch-depth: 0
           files_yaml: |
             en:
               - docs/build/**/*.md
@@ -28,7 +27,7 @@ jobs:
 
       - name: List all changed English markdown files
         run: |
-          for file in ${{ steps.changed-docs-markdown.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}; do
             echo "$file was changed"
           done
 
@@ -36,14 +35,13 @@ jobs:
         id: changed-es-markdown
         uses: tj-actions/changed-files@v40
         with:
-          fetch-depth: 0
           files_yaml: |
             es:
               - i18n/es/docusaurus-plugin-content-docs/current/**/*.md
 
       - name: List all changed Spanish markdown files
         run: |
-          for file in ${{ steps.changed-es-markdown.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-es-markdown.outputs.es_all_changed_files }}; do
             echo "$file was changed"
           done
 
