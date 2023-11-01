@@ -70,11 +70,11 @@ Go to Environments
 
 ![Variables Scope](/img/postman/postman-10-set-global-var.png)
 
-<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 
 Select Globals
 
-<!-- markdownlint-enable MD013 -->
+<!-- vale on -->
 
 ![Variables Scope](/img/postman/postman-11-set-global-var.png)
 
@@ -121,11 +121,11 @@ Now it can be used on any call from this collection
 
 
 
-<!-- markdownlint-disable MD013 -->
+<!-- vale off -->
 
 ### Set an Environment Variable
 
-<!-- markdownlint-enable MD013 -->
+<!-- vale on -->
 
 Go to Environments
 
