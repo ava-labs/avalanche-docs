@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0
           files_yaml: |
-            doc:
+            en:
               - docs/build/**/*.md
               - docs/learn/**/*.md
               - docs/nodes/**/*.md
@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 0
           files_yaml: |
-            doc:
+            es:
               - i18n/es/docusaurus-plugin-content-docs/current/**/*.md
 
       - name: List all changed Spanish markdown files
@@ -48,14 +48,14 @@ jobs:
           done
 
       - name: If doc file(s) changed, check for corresponding changes in translated files
-        if: steps.changed-docs-markdown.outputs.doc_any_changed == 'true'
+        if: steps.changed-docs-markdown.outputs.en_any_changed == 'true'
         run: |
           echo "One or more doc file(s) have changed."
-          echo "List all the files that have changed: ${{ steps.changed-docs-markdown.outputs.doc_all_changed_files }}"
+          echo "List all the files that have changed: ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
 
           # Define an array of paths that require translation checks
-          englishChanges=("${{ steps.changed-docs-markdown.outputs.doc_all_changed_files }}")
-          spanishChanges=("${{ steps.changed-es-markdown.outputs.all_changed_files }}")
+          englishChanges=("${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}")
+          spanishChanges=("${{ steps.changed-es-markdown.outputs.es_all_changed_files }}")
           echo "List of changed Spanish files: $spanishChanges"
 
           # Loop through the changed files in the PR
