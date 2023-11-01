@@ -60,7 +60,7 @@ jobs:
           for englishDoc in "${englishChanges[@]}"; do
             echo "Path for changed English doc: $englishDoc"
             # Extract the corresponding translated file path
-            translated_file=$(echo $englishDoc | sed 's|/docs/|/i18n/es/docusaurus-plugin-content-docs/current/|')
+            translated_file=$(echo $englishDoc | sed 's|docs/|i18n/es/docusaurus-plugin-content-docs/current/|')
             echo "Path for expected Spanish translation with change: $translated_file"
             # Check that translated_file matches one of the paths in spanishChanges; if not, exit with an error
             if [[ ! " ${spanishChanges[@]} " =~ " ${translated_file} " ]]; then
