@@ -72,8 +72,9 @@ accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
 When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that
 will take care of node setup and configuration, we recommend using the [installer
-script](/nodes/run/with-installer/installing-avalanchego.md) to set up the nodes. It will abstract most of
-the setup process for you, set up the node as a system service and will enable easy node upgrades.
+script](/nodes/run/with-installer/installing-avalanchego.md) to set up the nodes.
+It will abstract most of the setup process for you, set up the node as a system
+service and will enable easy node upgrades.
 
 #### Cloud Providers
 
