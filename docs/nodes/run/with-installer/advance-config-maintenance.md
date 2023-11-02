@@ -29,7 +29,7 @@ options and their usage:
 - `rpc` - use `any` or `local` argument to select any or local network interface
   to be used to listen for RPC calls
 - `version` - install a specific node version, instead of the latest. See
-  [here](/nodes/run/with-installer.md#using-a-previous-version) for usage.
+  [here](#using-a-previous-version) for usage.
 
 Please note that configuring `index` and `archival` options on an existing node
 will require a fresh bootstrap to recreate the database.

@@ -15,7 +15,7 @@ also makes upgrading or reinstalling the nodes easy.
 
 GitHub: [https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/avalanchego-installer.sh)
 
-How-to: [Run an Avalanche Node Using the Install Script](/nodes/run/with-installer.md)
+How-to: [Run an Avalanche Node Using the Install Script](/nodes/run/with-installer/installing-avalanchego.md)
 
 If you want to run a node in a more complex environment, like in a docker or
 Kubernetes container, or as a part of an installation orchestrated using a tool

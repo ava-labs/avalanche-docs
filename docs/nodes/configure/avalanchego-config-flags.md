@@ -36,9 +36,9 @@ Example JSON config file:
 ```
 
 :::tip
-[Install Script](/nodes/run/with-installer.md) creates the node config
-file at `~/.avalanchego/configs/node.json`. No default file is created if
-[AvalancheGo is built from source](/nodes/run/node-manually.md), you
+[Install Script](/nodes/run/with-installer/installing-avalanchego.md) creates the
+node config file at `~/.avalanchego/configs/node.json`. No default file is
+created if [AvalancheGo is built from source](/nodes/run/node-manually.md), you
 would need to create it manually if needed.
 :::
 
