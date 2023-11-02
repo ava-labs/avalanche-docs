@@ -34,12 +34,12 @@ directory (which are used to back up your node). More info about node backup can
 
 :::note
 
-Please note that a stopped node on AWS can still incur cost (such as storage fees).
+Please note that a stopped node on AWS / GCP can still incur cost (such as storage fees).
 
 Ava Labs is not responsible for the cost incurred from stopping an Avalanche node with
 Avalanche-CLI.
 
 :::
 
-Once completed, the EC2 instance set up on AWS would have been stopped and the Elastic IP
+Once completed, the instance set up on AWS / GCP would have been stopped and the Static Public IP
 associated with it would have been released.

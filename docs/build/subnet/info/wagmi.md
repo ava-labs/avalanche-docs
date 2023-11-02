@@ -5,6 +5,7 @@ sidebar_label: "Case Study: WAGMI Subnet"
 pagination_label: "WAGMI Subnet"
 sidebar_position: 1
 ---
+
 # WAGMI Subnet
 
 The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum
@@ -34,7 +35,6 @@ that surfaces aggregated usage statistics about the Subnet.
 - Target Block Rate: 2s (Same as C-Chain)
 
 The genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
-
 
 ### Adding WAGMI to Core
 
@@ -224,8 +224,7 @@ by anyone as it is just a read operation.
 
 Once we have the new desired configuration for the fees on the Subnet, we can use the `setFeeConfig`
 to change the parameters. This action can **only** be performed by the owner
-`0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json`
-above](#deploying-upgradejson).
+`0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json` above](#deploying-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 

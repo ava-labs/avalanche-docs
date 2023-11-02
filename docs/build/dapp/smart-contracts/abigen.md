@@ -4,13 +4,14 @@ description: This tutorial demonstrates how to compile a solidity contract into 
 sidebar_label: Interact From a Golang App
 pagination_label: Interact with a Solidity Smart Contract from a Go Application
 ---
+
 # Interact with a Solidity Smart Contract from a Golang Application
 
-`abigen` is a tool provided by the Go Ethereum (Geth) client that generates Go bindings for 
-Solidity smart contracts. Developers would need to use abigen when they want to interact with a 
+`abigen` is a tool provided by the Go Ethereum (Geth) client that generates Go bindings for
+Solidity smart contracts. Developers would need to use Abigen when they want to interact with a
 smart contract written in Solidity from a Go programming language application. It enables developers
-to easily call functions and access data from Solidity contracts in a Go application. This tutorial 
-demonstrates how to compile a solidity contract into Golang to deploy and call contracts 
+to easily call functions and access data from Solidity contracts in a Go application. This tutorial
+demonstrates how to compile a solidity contract into Golang to deploy and call contracts
 programmatically.
 
 ## How to Build
@@ -31,11 +32,12 @@ solc, the solidity compiler commandline interface
 Version: 0.8.9+commit.e5eed63a.Linux.g++
 ```
 
-Build Abigen.
+Clone Coreth and Build Abigen.
 
 ```shell
-# cd ~/go/src/github.com/ava-labs/avalanche
-# go build -o abigen cmd/abigen/main.go
+# git clone git@github.com:ava-labs/coreth.git
+# cd coreth/
+# go build -o abigen cmd/abigen/*.go
 # cp abigen ~/bin
 ```
 
