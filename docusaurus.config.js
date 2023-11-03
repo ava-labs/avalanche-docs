@@ -261,6 +261,10 @@ const config = {
             className: "header-github-link",
             position: "right",
           },
+          {
+            type: 'search',
+            position: 'right',
+          },
         ],
       },
       footer: {

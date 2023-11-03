@@ -5,6 +5,14 @@ import styles from "./index.module.css";
 import Card from "../components/Card";
 import { translate } from "@docusaurus/Translate";
 
+
+import quick_start1 from "../../static/img/quick-start/quick_start1.png";
+import quick_start2 from "../../static/img/quick-start/quick_start2.png";
+import quick_start3 from "../../static/img/quick-start/quick_start3.png";
+import quick_start4 from "../../static/img/quick-start/quick_start4.png";
+import quick_start5 from "../../static/img/quick-start/quick_start5.png";
+import quick_start6 from "../../static/img/quick-start/quick_start6.png";
+
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -29,8 +37,9 @@ function Home() {
             <div className="row cards__container">
               <Card
                 to="/build/subnet/hello-subnet"
+                image={quick_start1}
                 header={{
-                  label: translate({ message: "🚀 Launch Your First Subnet" }),
+                  label: translate({ message: "Launch Your First Subnet" }),
                 }}
                 body={{
                   label: translate({
@@ -42,8 +51,9 @@ function Home() {
 
               <Card
                 to="intro"
+                image={quick_start2}
                 header={{
-                  label: translate({ message: "🔺 Learn about Avalanche" }),
+                  label: translate({ message: "Learn about Avalanche" }),
                 }}
                 body={{
                   label: translate({
@@ -55,8 +65,9 @@ function Home() {
 
               <Card
                 to="/nodes/validate/add-a-validator"
+                image={quick_start3}
                 header={{
-                  label: translate({ message: "😎 Become a Validator" }),
+                  label: translate({ message: "Become a Validator" }),
                 }}
                 body={{
                   label: translate({
@@ -68,8 +79,9 @@ function Home() {
 
               <Card
                 to="reference"
+                image={quick_start4}
                 header={{
-                  label: translate({ message: "💻 View Avalanche APIs" }),
+                  label: translate({ message: "View Avalanche APIs" }),
                 }}
                 body={{
                   label: translate({
@@ -81,9 +93,10 @@ function Home() {
 
               <Card
                 to="/build/dapp/launch-dapp"
+                image={quick_start5}
                 header={{
                   label: translate({
-                    message: "🛠️ Launch Your Dapp on Avalanche",
+                    message: "Launch Your Dapp on Avalanche",
                   }),
                 }}
                 body={{
@@ -96,6 +109,7 @@ function Home() {
 
               <Card
                 to="https://github.com/ava-labs/hypersdk"
+                image={quick_start6}
                 header={{
                   label: translate({ message: "🛠️ HyperSDK" }),
                 }}
