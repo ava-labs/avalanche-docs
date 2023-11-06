@@ -15,6 +15,7 @@ pagination_label: Dapps Quick Links
 | [**Deploy an NFT Collection**](/build/dapp/smart-contracts/nfts/deploy-collection.md)      |  Walkthrough deploying a basic ERC-721 (NFT) smart contract on the Avalanche Network |
 | [**Developer Toolchains**](/build/dapp/smart-contracts/toolchains/hardhat.md)      |  Best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain using common Toolchains like Hardhat and Foundry. |
 | [**Call a Smart Contract with Golang**](/build/dapp/smart-contracts/abigen.md)      |  Compile a solidity contract into Golang to deploy and call contracts programmatically |
+| [**Oracles**](/build/dapp/smart-contracts/oracles/api3)      |  Using Oracles on Avalanche |
 
 | Advanced Tutorials      |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
