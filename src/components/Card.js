@@ -4,7 +4,7 @@ import Link from "@docusaurus/Link";
 import styles from "./HomepageFeatures.module.css";
 import Translate from "@docusaurus/Translate";
 
-function Card({ to, header, body, externalIcon = false, image, icon }) {
+function Card({ to, header, body, externalIcon = false, image, Icon }) {
   /*
   Both the `header` and `body` expect an object with the following type
   header = {
@@ -15,11 +15,12 @@ function Card({ to, header, body, externalIcon = false, image, icon }) {
   return (
     <div className={clsx("col col--4 ", styles.feature)}>
       <Link className="navbar__link" to={to}>
-        <div>
+        <div style={{position: 'relative'}}>
           <img className="card-image" src={image} />
+          {Icon && <Icon style={{position: 'absolute', top: 15, left: 15}}/>}
         </div>
         <div>
-          <h4>
+          <h4 style={{fontSize: 16, lineHeight: '22px', marginTop: '23px'}}>
             {header.label}
             {externalIcon && (
               <svg
@@ -38,7 +39,7 @@ function Card({ to, header, body, externalIcon = false, image, icon }) {
           </h4>
         </div>
         <div>
-          <p>{body.label}</p>
+          <p style={{fontWeight: '400', fontSize: '14px'}}>{body.label}</p>
         </div>
       </Link>
     </div>

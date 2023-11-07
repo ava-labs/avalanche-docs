@@ -273,6 +273,7 @@ const config = {
         logo: {
           src: "/img/Avalanche_Horizontal_Red.svg",
         },
+        style: 'light'
       },
       prism: {
         theme: lightCodeTheme,

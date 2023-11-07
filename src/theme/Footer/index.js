@@ -34,74 +34,11 @@ function Footer() {
   }
 
   return (
-    <footer className="footer footer--dark">
+    <footer className="footer">
       <div className="container">
-        <div class="row">
-          <div class="col">
-            <div className="footer-row">
-              <Link
-                className="footer-main-list"
-                href="https://subnets.avax.network/"
-              >
-                <h3>{translate({ message: "Explorer" })}</h3>
-              </Link>
-            </div>
-            <div className="footer-row">
-              <Link
-                className="footer-main-list"
-                href="https://academy.avax.com/?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=footer"
-              >
-                <h3>
-                  {translate({ message: "Academy" })}{" "}
-                  <FaGraduationCap className="footer-academy-cap"></FaGraduationCap>
-                </h3>
-              </Link>
-            </div>
-            <div className="footer-row">
-              <Link
-                className="footer-main-list"
-                href="https://support.avax.network/en/"
-              >
-                <h3>{translate({ message: "Support" })}</h3>
-              </Link>
-            </div>
-            <div className="footer-row">
-              <Link className="footer-main-list" href="https://core.app/en/">
-                <h3>{translate({ message: "Wallet" })}</h3>
-              </Link>
-            </div>
-          </div>
-          <div class="col">
-            <div className="footer-row">
-              <a href="https://t.me/+KDajA4iToKY2ZjBk">
-                <BsTelegram className="footer-social"></BsTelegram>
-              </a>
-              <a href="https://chat.avax.network/">
-                <BsDiscord className="footer-social"></BsDiscord>
-              </a>
-              <a href="https://github.com/ava-labs">
-                <BsGithub className="footer-social"></BsGithub>
-              </a>
-              <a href="https://twitter.com/AvaxDevelopers">
-                <BsTwitter className="footer-social"></BsTwitter>
-              </a>
-              <a href="https://www.reddit.com/r/Avax/">
-                <BsReddit className="footer-social"></BsReddit>
-              </a>
-              <a href="https://www.youtube.com/@Avalancheavax">
-                <BsYoutube className="footer-social"></BsYoutube>
-              </a>
-              <a href="https://www.linkedin.com/company/avalancheavax">
-                <BsLinkedin className="footer-social"></BsLinkedin>
-              </a>
-              <a href="https://www.facebook.com/avalancheavax">
-                <BsFacebook className="footer-social"></BsFacebook>
-              </a>
-            </div>
-            <div
-              className="row"
-              style={{ marginTop: "10px", maxWidth: "500px" }}
-            >
+        <div class="row footer-container">
+          <div className="col col--8">
+            <div className="row" style={{ marginTop: "10px" }}>
               <div class="col" style={{}}>
                 <h4 className="footer-heading">
                   {translate({ message: "Developers" })}
@@ -177,16 +114,50 @@ function Footer() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="footer__bottom text--center">
-          <div
-            className="footer__copyright"
-            style={{ fontSize: "small", padding: "15px" }}
-          >
-            Copyright © {new Date().getFullYear()}{" "}
-            <a href="https://www.avax.network/terms-of-use" className="hover">
-              Ava Labs, Inc.
-            </a>
+
+          <div class="col col--4">
+            <div className="footer-row" style={{marginBottom: '16px'}}>
+              <a href="https://t.me/+KDajA4iToKY2ZjBk">
+                <BsTelegram className="footer-social"></BsTelegram>
+              </a>
+              <a href="https://chat.avax.network/">
+                <BsDiscord className="footer-social"></BsDiscord>
+              </a>
+              <a href="https://github.com/ava-labs">
+                <BsGithub className="footer-social"></BsGithub>
+              </a>
+              <a href="https://twitter.com/AvaxDevelopers">
+                <BsTwitter className="footer-social"></BsTwitter>
+              </a>
+            </div>
+            <div className="footer-row">
+              <a href="https://www.reddit.com/r/Avax/">
+                <BsReddit className="footer-social"></BsReddit>
+              </a>
+              <a href="https://www.youtube.com/@Avalancheavax">
+                <BsYoutube className="footer-social"></BsYoutube>
+              </a>
+              <a href="https://www.linkedin.com/company/avalancheavax">
+                <BsLinkedin className="footer-social"></BsLinkedin>
+              </a>
+              <a href="https://www.facebook.com/avalancheavax">
+                <BsFacebook className="footer-social"></BsFacebook>
+              </a>
+            </div>
+            <div className="footer__bottom text--center">
+              <div
+                className="footer__copyright"
+                style={{ fontSize: "small" }}
+              >
+                Copyright © {new Date().getFullYear()}{" "}
+                <a
+                  href="https://www.avax.network/terms-of-use"
+                  className="hover"
+                >
+                  Ava Labs, Inc.
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

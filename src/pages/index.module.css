@@ -8,6 +8,36 @@
   margin-top: 0px;
 }
 
+.headerText {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 90%; /* 64.8px */
+  letter-spacing: -2.16px;
+  width: 80%;
+  margin-left: 38px;
+}
+
+.academyText {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -2.16px;
+}
+
+.welcome {
+  align-items: center;
+  padding: 0 var(--ifm-spacing-horizontal);
+  margin-bottom: 96px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 90%; /* 21.6px */
+  letter-spacing: -0.72px;
+  margin-top: 30px;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -15,9 +45,60 @@
   overflow: hidden;
 }
 
+.readMoreBtn {
+  width: 222px;
+  height: 32px;
+  background: #E84142;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 40px
+}
+
 @media screen and (max-width: 966px) {
   .heroBanner {
     padding: 2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .welcome {
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  .lineImg {
+    display: none;
+  }
+  .headerText {
+    font-size: 48px;
+    text-align: center;
+  }
+  h3 {
+    font-size: 24px;
+    margin-bottom: 54px;
+    text-align: center;
+  }
+  .readMoreBtn {
+    width: 100%;
+  }
+  .academyText {
+    text-align: center;
+  }
+  .visitImg {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .headerText {
+    font-size: 56px;
+  }
+  .lineImg {
+    height: 141px;
   }
 }
 
@@ -35,6 +116,18 @@
   display: flex;
   align-items: top;
   width: 100%;
+}
+
+.featuresAcademy {
+  display: flex;
+  align-items: top;
+  width: 100%;
+  background-color: #F4F4F4;
+  padding-block: 120px;
+}
+
+.visitAcademy {
+  padding-block: 120px;
 }
 
 .featureImage {
