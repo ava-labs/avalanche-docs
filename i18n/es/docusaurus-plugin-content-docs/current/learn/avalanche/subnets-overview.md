@@ -8,7 +8,11 @@ sidebar_label: Subnets
 
 # ¿Qué es una Subnet?
 
-Una **Subnet** es una red soberana que define sus propias reglas con respecto a su membresía y economía de tokens. Está compuesta por un subconjunto dinámico de validadores Avalanche que trabajan juntos para lograr consenso sobre el estado de una o más blockchains. Cada blockchain es validada por exactamente una Subnet, mientras que una Subnet puede validar muchas blockchains.
+Una **Subnet** es una red soberana que define sus propias reglas con respecto a su membresía y
+economía de tokens. Está compuesta por un subconjunto dinámico de validadores Avalanche que
+trabajan juntos para lograr consenso sobre el estado de una o más blockchains. Cada blockchain
+es validada por exactamente una Subnet, mientras que una Subnet puede validar muchas
+blockchains.
 
 La [Red Primaria](avalanche-platform.md) de Avalanche es una Subnet especial que ejecuta tres blockchains:
 

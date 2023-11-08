@@ -13,8 +13,9 @@ Fuji es la red de prueba de la red Avalanche. Puedes usarla para probar tu dapp
 o contrato inteligente después de haberlo desarrollado localmente. (Puedes usar [Avalanche
 Network Runner](/tooling/network-runner.md) para probar cosas localmente). Fuji es
 típicamente de la misma versión que la Mainnet de Avalanche, pero a veces está
-ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el comportamiento de Fuji sea más o menos el mismo que el de la Mainnet de Avalanche. Herramientas como exploradores
-y billeteras deberían funcionar con la Testnet Fuji.
+ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el
+comportamiento de Fuji sea más o menos el mismo que el de la Mainnet de Avalanche.
+Herramientas como exploradores y billeteras deberían funcionar con la Testnet Fuji.
 
 En este tutorial, pasaremos por un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
 

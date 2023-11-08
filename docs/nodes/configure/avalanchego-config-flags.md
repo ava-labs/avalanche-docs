@@ -93,11 +93,6 @@ available. Defaults to `false`. See
 If set to `false`, this node will not expose the Info API. Defaults to `true`. See
 [here](/reference/avalanchego/info-api.md) for more information.
 
-#### `--api-ipcs-enabled` (boolean)
-
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
-[here](/reference/avalanchego/ipc-api.md) for more information.
-
 #### `--api-keystore-enabled` (boolean)
 
 If set to `true`, this node will expose the Keystore API. Defaults to `false`.
@@ -532,18 +527,6 @@ List of acceptable host names in API requests. Provide the wildcard (`'*'`) to a
 requests from all hosts. API requests where the `Host` field is empty or an IP address
 will always be accepted. An API call whose HTTP `Host` field isn't acceptable will
 receive a 403 error code. Defaults to `localhost`.
-
-## IPCs
-
-#### `--ipcs-chain-ids` (string)
-
-Comma separated list of chain ids to connect to (for example
-`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
-There is no default value.
-
-#### `--ipcs-path` (string)
-
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
 
 ## File Descriptor Limit
 

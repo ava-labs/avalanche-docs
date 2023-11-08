@@ -92,11 +92,6 @@ disponible. Por defecto, es `false`. Ver
 Si se establece en `false`, este nodo no expondrá la API de Información. Por defecto, es `true`. Ver
 [aquí](/reference/avalanchego/info-api.md) para más información.
 
-#### `--api-ipcs-enabled` (booleano)
-
-Si se establece en `true`, este nodo expondrá la API de IPCs. Por defecto, es `false`. Ver
-[aquí](/reference/avalanchego/ipc-api.md) para más información.
-
 #### `--api-keystore-enabled` (booleano)
 
 Si se establece en `true`, este nodo expondrá la API de Keystore. Por defecto, es `false`.
@@ -482,18 +477,6 @@ Orígenes permitidos en el puerto HTTP. De forma predeterminada, es `*`, lo que 
 
 Lista de nombres de host aceptables en las solicitudes de API. Proporcione el comodín (`'*'`) para aceptar
 solicitudes de todos los hosts. Una llamada de API cuyo campo `Host` HTTP no sea aceptable recibirá un código de error 403. De forma predeterminada, es `localhost`.
-
-## IPCs
-
-#### `--ipcs-chain-ids` (string)
-
-Lista separada por comas de los IDs de cadena a los que conectarse (por ejemplo,
-`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
-No hay un valor predeterminado.
-
-#### `--ipcs-path` (string)
-
-El directorio (Unix) o el prefijo de la tubería con nombre (Windows) para los sockets IPC. De forma predeterminada, es `/tmp`.
 
 ## Límite de descriptores de archivo
 

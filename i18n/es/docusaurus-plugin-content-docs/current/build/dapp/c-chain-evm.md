@@ -7,7 +7,9 @@ pagination_label: Construyendo en la C-Chain
 
 # Construyendo en la C-Chain
 
-Avalanche es una [red de redes](learn/avalanche/avalanche-platform.md). Una de las cadenas que se ejecutan en la Red Primaria de Avalanche es una bifurcación de EVM llamada C-Chain (cadena de contratos).
+Avalanche es una [red de redes](learn/avalanche/avalanche-platform.md).
+Una de las cadenas que se ejecutan en la Red Primaria de Avalanche es
+una bifurcación de EVM llamada C-Chain (cadena de contratos).
 
 La C-Chain ejecuta una bifurcación de [`go-ethereum`](https://geth.ethereum.org/docs/rpc/server)
 llamada [`coreth`](https://github.com/ava-labs/coreth) que tiene las partes de red y
