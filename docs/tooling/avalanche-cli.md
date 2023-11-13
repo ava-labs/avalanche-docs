@@ -14,6 +14,48 @@ build and test Subnets.
 To get started, look at the documentation for the subcommands or jump right
 in with `avalanche subnet create myNewSubnet`.
 
+[Install Avalanche CLI](https://docs.avax.network/tooling/cli-guides/install-avalanche-cli)
+
+## Primary
+
+The `primary` command suite provides a collection of tools for interacting with the Avalanche 
+Primary Network.
+
+
+### Primary AddValidator
+
+The `primary addValidator` command adds an Avalanche node as a validator in the Avalanche Primary
+Network with [AddPermissionlessValidatorTx](/reference/standards/guides/banff-changes.md#addpermissionlessvalidatortx).
+
+This command requires the node's BLS key and proof of possession key, more information regarding BLS
+can be found [here](/reference/avalanchego/p-chain/txn-format.md#proof-of-possession). 
+
+To get a node's BLS key and proof of possession key, call info.getNodeID API as shown [here](/reference/avalanchego/info-api.md#infogetnodeid)
+
+**Usage:**
+
+```shell
+avalanche primary addValidator [flags]
+```
+
+**Flags:**
+
+```shell
+    --nodeID string                 the node ID of the validator
+-k, --key string                    select the key to use [fuji deploy only]
+    --weight uint                   set the staking weight of the validator
+    --start-time string             UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+    --staking-period duration       how long this validator will be staking
+    --fuji fuji                     join on fuji (alias for `testnet`)
+    --testnet testnet               join on testnet (alias for `fuji`)
+    --mainnet mainnet               join on mainnet
+-g, --ledger                        use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings          use the given ledger addresses
+    --public-key string             set the BLS public key of the validator
+    --proof-of-possession string    set the BLS proof of possession of the validator
+    --delegation-fee uint           set the delegation fee (20 000 is equivalent to 2%)
+```
+
 ## Subnet
 
 The `subnet` command suite provides a collection of tools for developing

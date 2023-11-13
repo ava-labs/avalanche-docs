@@ -4,7 +4,19 @@ description: The quickest way to learn about Avalanche is to run a node and inte
 sidebar_label: Manually
 pagination_label: Run an Avalanche Node Manually
 sidebar_position: 0
-keywords: [avalanche node, run a node, rpc, rpc node, track mainnet, avalanche mainnet, build from source, binary, avalanchego, blockchain node]
+keywords:
+  [
+    avalanche node,
+    run a node,
+    rpc,
+    rpc node,
+    track mainnet,
+    avalanche mainnet,
+    build from source,
+    binary,
+    avalanchego,
+    blockchain node,
+  ]
 ---
 
 # Run an Avalanche Node Manually
@@ -19,8 +31,8 @@ In this tutorial, we will:
 <details><summary>Other Options</summary>
 <p>
 
-- To use a third-party service to host your node or run a 
-validator, [see here](/nodes/run/third-party/aws-node.md) for dedicated tutorials.
+- To use a third-party service to host your node or run a
+  validator, [see here](/nodes/run/third-party/aws-node.md) for dedicated tutorials.
 
 - If you're just interested in setting up a node for staking,
 it's recommended to follow the
@@ -42,7 +54,7 @@ change.
 
 :::caution
 
-Please do not try running a node on an HDD, as you may get poor and random 
+Please do not try running a node on an HDD, as you may get poor and random
 read/write latencies, therefore reducing performance and reliability.
 
 :::
@@ -65,18 +77,18 @@ building the binary program.
 
 ```bash
 mkdir -p $GOPATH/src/github.com/ava-labs
-``` 
+```
 
 #### 3. Clone AvalancheGo
 
-In the `$GOPATH`, clone [AvalancheGo](https://github.com/ava-labs/avalanchego), 
+In the `$GOPATH`, clone [AvalancheGo](https://github.com/ava-labs/avalanchego),
 the consensus engine and node implementation that is the core of the Avalanche
 Network.
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs
 git clone https://github.com/ava-labs/avalanchego.git
-``` 
+```
 
 #### 4. Run the Build Script
 
@@ -85,41 +97,41 @@ From the `avalanchego` directory, run the build script
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
-``` 
+```
 
 #### 5. Start the Node
 
 On Avalanche Mainnet:
 
-```bash 
+```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego
 ```
 
 On Fuji Testnet:
 
-```bash 
+```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --network-id=fuji
 ```
 
 :::info
-To kill the node, press `Ctrl + C`. 
+To kill the node, press `Ctrl + C`.
 :::
 
 ## Run with a Pre-Built Binary
 
 To download a pre-built binary instead of building from source, go
-to the [AvalancheGo releases page](https://github.com/ava-labs/avalanchego/releases), 
+to the [AvalancheGo releases page](https://github.com/ava-labs/avalanchego/releases),
 and select the desired version.
 
 ### Download
 
 Under `Assets`, select the appropriate file.
 
-#### MacOS 
+#### MacOS
 
-Download: `avalanchego-macos-<VERSION>.zip` 
+Download: `avalanchego-macos-<VERSION>.zip`
 
 Unzip:
 
@@ -129,11 +141,11 @@ unzip avalanchego-macos-<VERSION>.zip
 
 the resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
-#### Linux(PCs or Cloud Providers) 
+#### Linux(PCs or Cloud Providers)
 
 Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
 
-Unzip: 
+Unzip:
 
 ```bash
 tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz
@@ -141,11 +153,11 @@ tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz
 
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-#### Linux(Arm64) 
+#### Linux(Arm64)
 
 Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 
-Unzip: 
+Unzip:
 
 ```bash
 tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz
@@ -206,7 +218,7 @@ static IP. Find out what that static IP is, or set it up if you didn't already.
 If you're running a node on a computer that is on a residential internet
 connection, you have a dynamic IP; that is, your IP will change periodically.
 **For the sake of demonstration, you can ignore the following information.**
-Otherwise, you will need to set up inbound port forwarding of port `9651` from 
+Otherwise, you will need to set up inbound port forwarding of port `9651` from
 the internet to the computer the node is installed on.
 
 As there are too many models and router configurations, we cannot provide
@@ -225,6 +237,7 @@ experience lagging on other computers connected to the same router, node getting
 benched, failing to sync and similar issues.
 
 :::
+
 </p></details>
 
 :::info
@@ -234,9 +247,9 @@ when starting the node.
 
 ## Bootstrapping
 
-A new node needs to catch up to the latest network state before it can participate in consensus 
-and serve API calls. This process (called bootstrapping) currently takes several days for a new 
-node connected to Mainnet, and a day or so for a new node connected to Fuji Testnet. 
+A new node needs to catch up to the latest network state before it can participate in consensus
+and serve API calls. This process (called bootstrapping) currently takes several days for a new
+node connected to Mainnet, and a day or so for a new node connected to Fuji Testnet.
 When a given chain is done bootstrapping, it will print logs like this:
 
 ```text
@@ -272,7 +285,7 @@ Learn more about bootstrapping [here](/nodes/maintain/node-bootstrap).
 
 ## RPC
 
-When finished bootstrapping, the X, P, and C-Chain RPC endpoints will be: 
+When finished bootstrapping, the X, P, and C-Chain RPC endpoints will be:
 
 ```bash
 localhost:9650/ext/bc/P
@@ -288,8 +301,8 @@ XXX.XX.XX.XXX:9650/ext/bc/X
 XXX.XX.XX.XXX:9650/ext/bc/C/rpc
 ```
 
-if run on a cloud provider. The “XXX.XX.XX.XXX" should be replaced with the public 
-IP of your EC2 instance. 
+if run on a cloud provider. The “XXX.XX.XX.XXX" should be replaced with the public
+IP of your EC2 instance.
 
 For more information on the requests available at these endpoints, please see the
 [AvalancheGo API Reference](/reference) documentation.

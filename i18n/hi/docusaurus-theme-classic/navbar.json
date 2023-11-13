@@ -1,0 +1,38 @@
+{
+  "logo.alt": {
+    "message": "Avalanche Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Learn": {
+    "message": "Learn",
+    "description": "Navbar item with label Learn"
+  },
+  "item.label.Build": {
+    "message": "Build",
+    "description": "Navbar item with label Build"
+  },
+  "item.label.Nodes": {
+    "message": "Nodes",
+    "description": "Navbar item with label Nodes"
+  },
+  "item.label.Tooling": {
+    "message": "Tooling",
+    "description": "Navbar item with label Tooling"
+  },
+  "item.label.Reference": {
+    "message": "Reference",
+    "description": "Navbar item with label Reference"
+  },
+  "item.label.Dapps": {
+    "message": "Dapps",
+    "description": "Navbar item with label Dapps"
+  },
+  "item.label.Subnets": {
+    "message": "Subnets",
+    "description": "Navbar item with label Subnets"
+  },
+  "item.label.Virtual Machines": {
+    "message": "Virtual Machines",
+    "description": "Navbar item with label Virtual Machines"
+  }
+}

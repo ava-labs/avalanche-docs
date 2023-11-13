@@ -7,8 +7,7 @@ pagination_label: Building on the C-Chain
 
 # Building on the C-Chain
 
-Avalanche is a [network of
-networks](learn/avalanche/avalanche-platform.md). One of the chains
+Avalanche is a [network of networks](learn/avalanche/avalanche-platform.md). One of the chains
 running on Avalanche Primary Network is an EVM fork called the C-Chain (contract chain).
 
 C-Chain runs a fork of [`go-ethereum`](https://geth.ethereum.org/docs/rpc/server)
