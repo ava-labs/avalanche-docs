@@ -9,8 +9,7 @@ sidebar_position: 0
 
 We have a shell (bash) script that installs AvalancheGo on your computer. This
 script sets up full, running node in a matter of minutes with minimal user input
-required. Script can also be used for unattended, [automated
-installs](#unattended-installation).
+required. Script can also be used for unattended, automated installs.
 
 ## System Requirements
 

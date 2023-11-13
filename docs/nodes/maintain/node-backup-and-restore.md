@@ -262,7 +262,7 @@ _This tutorial assumes you have already completed "Database Backup" and have
 a backup at ~/avalanche_db_backup.zip._
 
 First, we need to do the usual
-[installation](/nodes/run/with-installer.md) of the node. When the
+[installation](/nodes/run/with-installer/installing-avalanchego.md) of the node. When the
 node is installed correctly, log into the machine where the node is running and
 stop it:
 
