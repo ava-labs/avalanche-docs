@@ -200,7 +200,7 @@ state and modify it.
 There is a template repo for how to build a precompile with this way called
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both Subnet-EVM and Precompile-EVM share
 similar directory structures and common codes.
-You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
+You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/12)
 
 ### Prerequisites
 
@@ -393,7 +393,12 @@ cd contracts/
 For Precompile-EVM interfaces and other contracts in Subnet-EVM
 can be accessible through `@avalabs/subnet-evm-contracts` package.
 This is already added to the `package.json` file.
-You can install it by running `npm install`.
+You can install it by running:
+
+```shell
+npm install
+```
+
 In order to import `IAllowList` interface, you can use the following import statement:
 
 ```sol
@@ -938,9 +943,16 @@ the value as `Hello World!` In this function, we will be returning whatever valu
 The below code snippet can be copied and pasted to overwrite the default `setGreeting` code.
 
 First, we add a helper function to get the greeting value from the stateDB, this will be helpful
-when we test our contract.
+when we test our contract. We will use the `storageKeyHash` to store the value in the Contract's reserved storage in the stateDB.
 
 ```go
+var (
+  // storageKeyHash is the hash of the storage key "storageKey" in the contract storage.
+	// This is used to store the value of the greeting in the contract storage.
+	// It is important to use a unique key here to avoid conflicts with other storage keys
+	// like addresses, AllowList, etc.
+	storageKeyHash = common.BytesToHash([]byte("storageKey"))
+)
 // GetGreeting returns the value of the storage key "storageKey" in the contract storage,
 // with leading zeroes trimmed.
 // This function is mostly used for tests.
@@ -957,7 +969,7 @@ Now we can modify the `sayHello` function to return the stored value.
 
 ```go
 func sayHello(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-	if remainingGas, err = contract.deductGas(suppliedGas, SayHelloGasCost); err != nil {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SayHelloGasCost); err != nil {
 		return nil, 0, err
 	}
 	// CUSTOM CODE STARTS HERE
@@ -1649,7 +1661,7 @@ If you want to use a different test command and genesis path than the defaults, 
 See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+The string passed in to `utils.RunDefaultHardhatTests(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 
