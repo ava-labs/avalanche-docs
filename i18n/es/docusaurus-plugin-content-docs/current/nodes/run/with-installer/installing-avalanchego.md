@@ -1,6 +1,6 @@
 ---
-tags: [Nodos]
-description: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
+etiquetas: [Nodos]
+descripción: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
 sidebar_label: Instalando AvalancheGo
 sidebar_position: 1
 ---
@@ -75,13 +75,13 @@ pedirá:
 - `privado`: esta configuración solo permite solicitudes RPC desde la máquina del nodo.
 - `público`: esta configuración expone el puerto RPC a todas las interfaces de red.
 
-Como esta es una configuración sensible, se te pedirá que confirmes si eliges
+Dado que esta es una configuración sensible, se te pedirá que confirmes si eliges
 `público`. Lee atentamente la siguiente nota:
 
 :::note
 
 Si eliges permitir solicitudes RPC en cualquier interfaz de red, deberás
-configurar un firewall para permitir solo las solicitudes RPC desde direcciones IP conocidas,
+configurar un firewall para permitir únicamente las solicitudes RPC desde direcciones IP conocidas,
 ¡de lo contrario, tu nodo será accesible para cualquiera y podría ser abrumado por
 llamadas RPC de actores malintencionados! Si no planeas usar tu nodo para enviar
 llamadas RPC de forma remota, ingresa `privado`.
@@ -141,7 +141,7 @@ A continuación, se muestra un ejemplo de cómo deberían verse los últimos reg
 <summary><b>Haz clic para expandir y ver los registros</b></summary>
 
 ```text
-● avalanchego.service - Servicio de sistema AvalancheGo
+● avalanchego.service - Servicio de systemd de AvalancheGo
 Loaded: loaded (/etc/systemd/system/avalanchego.service; enabled; vendor preset: enabled)
 Active: active (running) since Tue 2021-01-05 10:38:21 UTC; 51s ago
 Main PID: 2142 (avalanchego)
@@ -150,6 +150,8 @@ Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
 └─2142 /home/ubuntu/avalanche-node/avalanchego --public-ip-resolution-service=opendns --http-host=
 ```
+
+</details>
 
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: inicializando el último bloque aceptado como 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: inicializando el motor de consenso
