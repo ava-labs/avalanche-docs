@@ -26,8 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: errata-ai/vale-action@v2.29.4
+      - uses: errata-ai/vale-action@reviewdog
         with:
+          version: 2.29.4
           files: '[
             "docs/",
             "README.md",
