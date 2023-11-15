@@ -7,6 +7,8 @@ pagination_label: Avalanche Network Protocol
 
 # Avalanche Network Protocol
 
+## Overview
+
 Avalanche network defines the core communication format between Avalanche nodes.
 It uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for
 payload packing.
@@ -14,479 +16,441 @@ payload packing.
 `"Containers"` are mentioned extensively in the description. A Container is
 simply a generic term for blocks.
 
-## GetVersion
+This document describes the protocol for peer-to-peer communication using Protocol Buffers (proto3). The protocol defines a set of messages exchanged between peers in a peer-to-peer network. Each message is represented by the `Message` proto message, which can encapsulate various types of messages, including network messages, state-sync messages, bootstrapping messages, consensus messages, and application messages.
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+## Message
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+The `Message` proto message is the main container for all peer-to-peer communication. It uses the `oneof` construct to represent different message types. The supported compression algorithms include Gzip and Zstd.
 
-### What GetVersion Contains
-
-The payload of a `GetVersion` message is empty.
-
-```text
-[]
+```proto
+message Message {
+  oneof message {
+    bytes compressed_gzip = 1;
+    bytes compressed_zstd = 2;
+    // ... (other compression algorithms can be added)
+    Ping ping = 11;
+    Pong pong = 12;
+    Version version = 13;
+    PeerList peer_list = 14;
+    // ... (other message types)
+  }
+}
 ```
 
-### How GetVersion Is Handled
+### Compression
 
-A node receiving a `GetVersion` message must respond with a `Version` message
-containing the current time and node version.
+The `compressed_gzip` and `compressed_zstd` fields are used for Gzip and Zstd compression, respectively, of the encapsulated message. These fields are set only if the message type supports compression.
 
-### When GetVersion Is Sent
+## Network Messages
 
-`GetVersion` is sent when a node is connected to another node, but has not yet
-received a `Version` message. It may, however, be re-sent at any time.
+### Ping
 
-## Version
+The `Ping` message reports a peer's perceived uptime percentage.
 
-`Version` ensures that the nodes we are connected to are running compatible
-versions of Avalanche, and at least loosely agree on the current time.
-
-The OpCode used by `Version` messages is: `0x01`.
-
-### What Version Contains
-
-`Version` contains the node’s current time in Unix time format in number of
-milliseconds since the beginning of the epoch in January 1, 1970, as well as a
-version string describing the version of the code that the node is running.
-
-Content:
-
-```text
-[
-    Long   <- Unix Timestamp (Seconds)
-    String <- Version String
-]
+```proto
+message Ping {
+  uint32 uptime = 1;
+  repeated SubnetUptime subnet_uptimes = 2;
+}
 ```
 
-### How Version Is Handled
+- `uptime`: Uptime percentage on the primary network [0, 100].
+- `subnet_uptimes`: Uptime percentages on subnets.
 
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
+### Pong
 
-### When Version Is Sent
+The `Pong` message is sent in response to a `Ping` with the perceived uptime of the peer.
 
-`Version` is sent in response to a `GetVersion` message.
-
-### Version Example
-
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
-
-```text
-[
-    Long   <- 1226793600 = 0x00000000491f6280
-    String <- "avalanche/0.0.1"
-]
-=
-[
-    0x00, 0x00, 0x00, 0x00, 0x49, 0x1f, 0x62, 0x80,
-    0x00, 0x0f, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e,
-    0x63, 0x68, 0x65, 0x2f, 0x30, 0x2e, 0x30, 0x2e,
-    0x31,
-]
+```proto
+message Pong {
+  uint32 uptime = 1; // Deprecated: uptime is now sent in Ping
+  repeated SubnetUptime subnet_uptimes = 2; // Deprecated: uptime is now sent in Ping
+}
 ```
 
-## GetPeers
+### Version
 
-### Overview
+The `Version` message is the first outbound message sent to a peer during the p2p handshake.
 
-`GetPeers` requests that a `Peers` message be sent as a response.
-
-The OpCode used by `GetPeers` messages is: `0x02`.
-
-### What GetPeers Contains
-
-The payload of a `GetPeers` message is empty.
-
-```text
-[]
+```proto
+message Version {
+  uint32 network_id = 1;
+  uint64 my_time = 2;
+  bytes ip_addr = 3;
+  uint32 ip_port = 4;
+  string my_version = 5;
+  uint64 my_version_time = 6;
+  bytes sig = 7;
+  repeated bytes tracked_subnets = 8;
+}
 ```
 
-### How GetPeers Is Handled
+- `network_id`: Network identifier (e.g., local, testnet, mainnet).
+- `my_time`: Unix timestamp when the `Version` message was created.
+- `ip_addr`: IP address of the peer.
+- `ip_port`: IP port of the peer.
+- `my_version`: Avalanche client version.
+- `my_version_time`: Timestamp of the IP.
+- `sig`: Signature of the peer IP port pair at a provided timestamp.
+- `tracked_subnets`: Subnets the peer is tracking.
 
-A node receiving `GetPeers` request must respond with a `Peers` message
-containing the IP addresses of its connected, staking nodes.
+### PeerList
 
-### When GetPeers Is Sent
+The `PeerList` message contains network-level metadata for a set of validators.
 
-A node sends `GetPeers` messages upon startup to discover the participants in
-the network. It may also periodically send `GetPeers` messages in order to
-discover new nodes as they arrive in the network.
-
-## Peers
-
-### Overview
-
-`Peers` message contains a list of peers, represented as IP Addresses. Note that
-an IP Address contains both the IP and the port number, and supports both IPv4
-and IPv6 format.
-
-The OpCode used by `Peers` messages is: `0x03`.
-
-### What Peers Contains
-
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
-
-Content:
-
-```text
-[
-    Variable Length IP Address Array
-]
+```proto
+message PeerList {
+  repeated ClaimedIpPort claimed_ip_ports = 1;
+}
 ```
 
-### How Peers Is Handled
+- `claimed_ip_ports`: List of claimed IP and port pairs.
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the
-message to its own list of neighbors, and forge connections to any new nodes.
+### PeerListAck
 
-### When Peers Is Sent
+The `PeerListAck` message is sent in response to `PeerList` to acknowledge the subset of peers that the peer will attempt to connect to.
 
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and
-are sent periodically to announce newly arriving nodes. The default period for
-such push gossip is 60 seconds.
-
-### Peers Example
-
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
-
-```text
-[
-    Variable Length IP Address Array <- ["127.0.0.1:9650", "[2001:0db8:ac10:fe01::]:12345"]
-]
-=
-[
-    0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff,
-    0x7f, 0x00, 0x00, 0x01, 0x25, 0xb2, 0x20, 0x01,
-    0x0d, 0xb8, 0xac, 0x10, 0xfe, 0x01, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
-]
+```proto
+message PeerListAck {
+  reserved 1; // deprecated; used to be tx_ids
+  repeated PeerAck peer_acks = 2;
+}
 ```
 
-## Get
+- `peer_acks`: List of acknowledged peers.
 
-### Overview
+## State-Sync Messages
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+### GetStateSummaryFrontier
 
-The OpCode used by `Get` messages is: `0x04`.
+The `GetStateSummaryFrontier` message requests a peer's most recently accepted state summary.
 
-### What Get Contains
-
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a
-node. Each time a node sends an un-prompted message, the node will create a new
-unique `RequestID` for the message.
-
-**`ContainerID`** is the identifier of the requested container.
-
-```text
-[
-    Length 32 Byte Array <- SubnetID
-    UInt                 <- RequestID
-    Length 32 Byte Array <- ContainerID
-]
+```proto
+message GetStateSummaryFrontier {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+}
 ```
 
-### How Get Is Handled
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
 
-The node should reply with a `Put` message with the same `SubnetID`,
-`RequestID`, and `ContainerID` along with the `Container` with the specified
-identifier. Under correct situations, a node should only be asked for a
-container that it has. Therefore, if the node does not have the specified
-container, the `Get` message can safely be dropped.
+### StateSummaryFrontier
 
-### When Get Is Sent
+The `StateSummaryFrontier` message is sent in response to a `GetStateSummaryFrontier` request.
 
-A node will send a `Get` message to a node that tells us about the existence of
-a container. For example, suppose we have two nodes: Rick and Morty. If Rick
-sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t
-have the container for, then Morty will send a Get message containing the
-missing `ContainerID`.
-
-### Get Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x21, 0x22, 0x23, 0x24,
-    0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c,
-    0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34,
-    0x35, 0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c,
-    0x3d, 0x3e, 0x3f, 0x40,
-]
+```proto
+message StateSummaryFrontier {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  bytes summary = 3;
+}
 ```
 
-## Put
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `GetStateSummaryFrontier` request.
+- `summary`: The requested state summary.
 
-### Overview
+### GetAcceptedStateSummary
 
-A `Put` message provides a requested container to a node.
+The `GetAcceptedStateSummary` message requests a set of state summaries at specified block heights.
 
-The OpCode used by `Put` messages is: `0x05`.
-
-### What Put Contains
-
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message is sending.
-
-**`Container`** is the bytes of the container this message is sending.
-
-```text
-[
-    Length 32 Byte Array       <- SubnetID
-    UInt                       <- RequestID
-    Length 32 Byte Array       <- ContainerID
-    Variable Length Byte Array <- Container
-]
+```proto
+message GetAcceptedStateSummary {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  repeated uint64 heights = 4;
+}
 ```
 
-### How Put Is Handled
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `heights`: Heights being requested.
 
-The node should attempt to add the container to consensus.
+### AcceptedStateSummary
 
-### When Put Is Sent
+The `AcceptedStateSummary` message is sent in response to `GetAcceptedStateSummary`.
 
-A node will send a `Put` message in response to receiving a Get message for a
-container the node has access to.
-
-### Put Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-    Container   <- 0x2122232425
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f, 0x00, 0x00, 0x00, 0x05,
-    0x21, 0x22, 0x23, 0x24, 0x25,
-]
+```proto
+message AcceptedStateSummary {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  repeated bytes summary_ids = 3;
+}
 ```
 
-## PushQuery
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `GetAcceptedStateSummary` request.
+- `summary_ids`: State summary IDs.
 
-### Overview
+## Bootstrapping Messages
 
-A `PushQuery` message requests the preferred `containerIDs` from the node after
-the specified `ContainerID` has been added to consensus. If the `ContainerID` is
-not known, the `Container` is optimistically provided.
+### GetAcceptedFrontier
 
-The OpCode used by `PushQuery` messages is: `0x06`.
+The `GetAcceptedFrontier` message requests the accepted frontier from a peer.
 
-### What PushQuery Contains
-
-A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message expects to
-have been added to consensus before the response is sent.
-
-**`Container`** is the bytes of the container with identifier `ContainerID`.
-
-```text
-[
-    Length 32 Byte Array       <- SubnetID
-    UInt                       <- RequestID
-    Length 32 Byte Array       <- ContainerID
-    Variable Length Byte Array <- Container
-]
+```proto
+message GetAcceptedFrontier {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  EngineType engine_type = 4;
+}
 ```
 
-### How PushQuery Is Handled
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `engine_type`: Consensus type the remote peer should use to handle this message.
 
-The node should attempt to add the container to consensus. After the container
-is added to consensus, a `Chits` message should be sent with the current
-preferences of the node.
+### AcceptedFrontier
 
-### When PushQuery Is Sent
+The `AcceptedFrontier` message contains the remote peer's last accepted frontier.
 
-A node should send a `PushQuery` message if it wants to learn of this node’s
-current preferences and it feels that it is possible the node hasn’t learned of
-`Container` yet. The node will want to learn of nodes preferences when it learns
-of a new container or it has had pending containers for "awhile."
-
-### PushQuery Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-    Container   <- 0x2122232425
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f, 0x00, 0x00, 0x00, 0x05,
-    0x21, 0x22, 0x23, 0x24, 0x25,
-]
+```proto
+message AcceptedFrontier {
+  reserved 4; // Until Cortina upgrade is activated
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  bytes container_id = 3;
+}
 ```
 
-## PullQuery
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `GetAcceptedFrontier` request.
+- `container_id`: The ID of the last accepted frontier.
 
-### Overview
+### GetAccepted
 
-A `PullQuery` message requests the preferred `containerIDs` from the node after
-the specified `ContainerID` has been added to consensus.
+The `GetAccepted` message sends a request with the sender's accepted frontier to a remote peer.
 
-The OpCode used by `PullQuery` messages is: `0x07`.
-
-### What PullQuery Contains
-
-A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`ContainerID`** is the identifier of the container this message expects to
-have been added to consensus before the response is sent.
-
-```text
-[
-    Length 32 Byte Array <- SubnetID
-    UInt                 <- RequestID
-    Length 32 Byte Array <- ContainerID
-]
+```proto
+message GetAccepted {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  repeated bytes container_ids = 4;
+  EngineType engine_type = 5;
+}
 ```
 
-### How PullQuery Is Handled
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this message.
+- `deadline`: Timeout (ns) for this request.
+- `container_ids`: The
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container
-to consensus. After the container is added to consensus, a `Chits` message
-should be sent with the current preferences of the node.
+sender's accepted frontier.
 
-### When PullQuery Is Sent
+- `engine_type`: Consensus type to handle this message.
 
-A node should send a `PullQuery` message if it wants to learn of this node’s
-current preferences and it feels that it quite likely the node has already
-learned of `Container`. The node will want to learn of nodes preferences when it
-learns of a new container or it has had pending containers for "awhile."
+### Accepted
 
-### PullQuery Example
+The `Accepted` message is sent in response to `GetAccepted`.
 
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    ContainerID <- 0x5ba080dcf6861c94c24ec62bc09a3c8b0fdd4691ebf02491e0e921dd0c77206f
-]
-=
-[
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-    0x00, 0x00, 0xa8, 0x66, 0x5b, 0xa0, 0x80, 0xdc,
-    0xf6, 0x86, 0x1c, 0x94, 0xc2, 0x4e, 0xc6, 0x2b,
-    0xc0, 0x9a, 0x3c, 0x8b, 0x0f, 0xdd, 0x46, 0x91,
-    0xeb, 0xf0, 0x24, 0x91, 0xe0, 0xe9, 0x21, 0xdd,
-    0x0c, 0x77, 0x20, 0x6f,
-]
+```proto
+message Accepted {
+  reserved 4; // Until Cortina upgrade is activated
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  repeated bytes container_ids = 3;
+}
 ```
 
-## Chits
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `GetAccepted` request.
+- `container_ids`: Subset of container IDs from the `GetAccepted` request that the sender has accepted.
 
-### Overview
+### GetAncestors
 
-A `Chits` message provides a requested set of preferred containers to a node.
+The `GetAncestors` message requests the ancestors for a given container.
 
-The OpCode used by `Chits` messages is: `0x08`.
-
-### What Chits Contains
-
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
-
-**`SubnetID`** defines which Subnets this message is destined for.
-
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
-
-**`Preferences`** is the list of `containerIDs` that fully describe the node’s preferences.
-
-```text
-[
-    Length 32 Byte Array                         <- SubnetID
-    UInt                                         <- RequestID
-    Variable Length (Length 32 Byte Array) Array <- Preferences
-]
+```proto
+message GetAncestors {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  bytes container_id = 4;
+  EngineType engine_type = 5;
+}
 ```
 
-### How Chits Is Handled
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `container_id`: Container for which ancestors are being requested.
+- `engine_type`: Consensus type to handle this message.
 
-The node should attempt to add any referenced containers to consensus. If the
-referenced containers can’t be added, the node can ignore the missing containers
-and apply the remaining chits to the poll. Once a poll is completed, container
-confidences should be updated appropriately.
+### Ancestors
 
-### When Chits Is Sent
+The `Ancestors` message is sent in response to `GetAncestors`.
 
-A node will send a `Chits` message in response to receiving a `PullQuery` or
-`PushQuery` message for a container the node has added to consensus.
-
-### Chits Example
-
-```text
-[
-    SubnetID    <- 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20
-    RequestID   <- 43110 = 0x0000A866
-    Preferences <- [
-        0x2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40,
-        0x4142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f60,
-    ]
-]
-=
-[
-        0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-        0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-        0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-        0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20,
-        0x00, 0x00, 0xa8, 0x66, 0x00, 0x00, 0x00, 0x02,
-        0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
-        0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30,
-        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38,
-        0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0x40,
-        0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48,
-        0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50,
-        0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58,
-        0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x60,
-]
+```proto
+message Ancestors {
+  reserved 4; // Until Cortina upgrade is activated
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  repeated bytes containers = 3;
+}
 ```
+
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `GetAncestors` request.
+- `containers`: Ancestry for the requested container.
+
+## Consensus Messages
+
+### Get
+
+The `Get` message requests a container from a remote peer.
+
+```proto
+message Get {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  bytes container_id = 4;
+  EngineType engine_type = 5;
+}
+```
+
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `container_id`: Container being requested.
+- `engine_type`: Consensus type to handle this message.
+
+### Put
+
+The `Put` message is sent in response to `Get` with the requested block.
+
+```proto
+message Put {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  bytes container = 3;
+  EngineType engine_type = 4;
+}
+```
+
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `Get` request.
+- `container`: Requested container.
+- `engine_type`: Consensus type to handle this message.
+
+### PushQuery
+
+The `PushQuery` message requests the preferences of a remote peer given a container.
+
+```proto
+message PushQuery {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  bytes container = 4;
+  EngineType engine_type = 5;
+  uint64 requested_height = 6;
+}
+```
+
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `container`: Container being gossiped.
+- `engine_type`: Consensus type to handle this message.
+- `requested_height`: Requesting peer's last accepted height.
+
+### PullQuery
+
+The `PullQuery` message requests the preferences of a remote peer given a container id.
+
+```proto
+message PullQuery {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  bytes container_id = 4;
+  EngineType engine_type = 5;
+  uint64 requested_height = 6;
+}
+```
+
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `container_id`: Container id being gossiped.
+- `engine_type`: Consensus type to handle this message.
+- `requested_height`: Requesting peer's last accepted height.
+
+### Chits
+
+The `Chits` message contains the preferences of a peer in response to a `PushQuery` or `PullQuery` message.
+
+```proto
+message Chits {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  bytes preferred_id = 3;
+  bytes accepted_id = 4;
+  bytes preferred_id_at_height = 5;
+}
+```
+
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `PushQuery`/`PullQuery` request.
+- `preferred_id`: Currently preferred block.
+- `accepted_id`: Last accepted block.
+- `preferred_id_at_height`: Currently preferred block at the requested height.
+
+## Application Messages
+
+### AppRequest
+
+The `AppRequest` message is a VM-defined request.
+
+```proto
+message AppRequest {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  uint64 deadline = 3;
+  bytes app_bytes = 4;
+}
+```
+
+- `chain_id`: Chain being requested from.
+- `request_id`: Unique identifier for this request.
+- `deadline`: Timeout (ns) for this request.
+- `app_bytes`: Request body.
+
+### AppResponse
+
+The `AppResponse` message is a VM-defined response sent in response to `AppRequest`.
+
+```proto
+message AppResponse {
+  bytes chain_id = 1;
+  uint32 request_id = 2;
+  bytes app_bytes = 3;
+}
+```
+
+- `chain_id`: Chain being responded from.
+- `request_id`: Request ID of the original `AppRequest`.
+- `app_bytes`: Response body.
+
+### AppGossip
+
+The `AppGossip` message is a VM-defined message.
+
+```proto
+message AppGossip {
+  bytes chain_id = 1;
+  bytes app_bytes = 2;
+}
+```
+
+- `chain_id`: Chain the message is for.
+- `app_bytes`: Message body.
