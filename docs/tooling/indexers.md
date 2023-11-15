@@ -1,7 +1,7 @@
 ---
 tags: [Tooling, Indexers]
 description: tools or services that facilitate efficient and quick access to data stored on Avalanche network.
-keywords: [indexers,rpc, endpoint, api, graphql]
+keywords: [indexers, rpc, endpoint, api, graphql]
 ---
 
 # 🗄️ Indexers
@@ -28,6 +28,7 @@ project.
 SubQuery is a leading blockchain data indexer that provides developers with fast, flexible, universal, open source and decentralised APIs for web3 projects. Another one of SubQuery's competitive advantages is the ability to aggregate data not only within a chain but across multiple blockchains all within a single project.
 
 **Useful resources**:
+
 - [SubQuery Docs](https://academy.subquery.network/)
 - [Intro Quick Start Guide](https://academy.subquery.network/quickstart/quickstart.html)
 - [Avalanche Quickstart](https://academy.subquery.network/quickstart/quickstart_chains/avalanche.html)
