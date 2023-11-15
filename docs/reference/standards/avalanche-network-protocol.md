@@ -9,6 +9,8 @@ pagination_label: Avalanche Network Protocol
 
 ## Overview
 
+<!-- vale off -->
+
 Avalanche network defines the core communication format between Avalanche nodes.
 It uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for
 payload packing.
@@ -55,7 +57,7 @@ message Ping {
 ```
 
 - `uptime`: Uptime percentage on the primary network [0, 100].
-- `subnet_uptimes`: Uptime percentages on subnets.
+- `subnet_uptimes`: Uptime percentages on Subnets.
 
 ### Pong
 
@@ -85,7 +87,7 @@ message Version {
 }
 ```
 
-- `network_id`: Network identifier (e.g., local, testnet, mainnet).
+- `network_id`: Network identifier (e.g., local, testnet, Mainnet).
 - `my_time`: Unix timestamp when the `Version` message was created.
 - `ip_addr`: IP address of the peer.
 - `ip_port`: IP port of the peer.
@@ -454,3 +456,5 @@ message AppGossip {
 
 - `chain_id`: Chain the message is for.
 - `app_bytes`: Message body.
+
+<!-- vale on -->
