@@ -402,7 +402,8 @@
     "tooling/avalanche-plugin-manager",
     "tooling/avalanche-ops",
     "tooling/avalanchego-postman-collection",
-    "tooling/rpc-providers"
+    "tooling/rpc-providers",
+    "tooling/indexers"
   ],
 
   "reference": [
