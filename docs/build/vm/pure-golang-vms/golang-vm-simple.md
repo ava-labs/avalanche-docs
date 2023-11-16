@@ -1,6 +1,6 @@
 ---
 tags: [Build, Virtual Machines]
-description: Learn how to build a simple virtual machine on Avalanche using Golang. 
+description: Learn how to build a simple virtual machine on Avalanche using Golang.
 sidebar_label: Simple Golang VM
 pagination_label: Build a Simple Golang VM
 sidebar_position: 1
@@ -604,7 +604,7 @@ func (vm *VM) initGenesis(genesisData []byte) error {
 
 #### CreateHandlers
 
-Registered handlers defined in `Service`. See [below](/build/vm/create/golang-vm-simple.md#api) for 
+Registered handlers defined in `Service`. See [below](/build/vm/create/golang-vm-simple.md#api) for
 more on APIs.
 
 ```go title="/timestampvm/vm.go"
@@ -1222,8 +1222,8 @@ If no argument is given, the path defaults to a binary named with default VM ID:
 `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
 This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier
-for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array
-and encoded in CB58. 
+for the VM. For the timestampvm, this is the string "timestamp" zero-extended in a 32 byte array
+and encoded in CB58.
 
 ### VM Aliases
 
