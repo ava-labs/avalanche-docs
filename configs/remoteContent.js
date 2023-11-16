@@ -35,7 +35,7 @@ ${content}`,
       //docs/build/cross-chain/awm/deep-dive.md
       name: "awm-overview",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/v1.10.15/vms/platformvm/warp/",
+        "https://raw.githubusercontent.com/meaghanfitzgerald/translate-ai/master/scripts/",
       documents: ["README.md"],
       outDir: "docs/build/cross-chain/awm/",
       // change file name and add metadata
