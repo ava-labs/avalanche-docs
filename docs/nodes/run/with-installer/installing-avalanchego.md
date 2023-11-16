@@ -53,7 +53,7 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on
+Enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on
 a static IP, it will try to auto-detect the IP and ask for confirmation.
 
 ```text

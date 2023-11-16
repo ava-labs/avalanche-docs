@@ -184,7 +184,9 @@ eliminar también esos, puedes escribir:
 rm -rf ~/.avalanchego/
 ```
 
+:::warning
 ¡Ten en cuenta que esto es irreversible y la base de datos y el ID del nodo se eliminarán!
+:::
 
 ## ¿Qué Sigue?
 

@@ -98,8 +98,8 @@ switches should formatted differently than they would be for the command line.
 Therefore, don't enter options like `--public-ip-resolution-service=opendns` as shown 
 in the example above.
 
-Script also creates an empty C-Chain config file, located at
-`~/.avalanchego/configs/chains/C/config.json`. By editing that file you can
+The script also creates an empty C-Chain config file, located at
+`~/.avalanchego/configs/chains/C/config.json`. By editing that file, you can
 configure the C-Chain, as described in detail
 [here](/nodes/configure/chain-config-flags.md).
 
@@ -152,7 +152,7 @@ versions.
 
 ## Reinstall and Script Update
 
-Installer script gets updated from time to time, with new features and
+The installer script gets updated from time to time, with new features and
 capabilities added. To take advantage of new features or to recover from
 modifications that made the node fail, you may want to reinstall the node. To do
 that, fetch the latest version of the script from the web with:
@@ -188,7 +188,9 @@ remove those as well, you can type:
 rm -rf ~/.avalanchego/
 ```
 
+:::warning
 Please note that this is irreversible and the database and node ID will be deleted!
+:::
 
 ## What Next?
 
