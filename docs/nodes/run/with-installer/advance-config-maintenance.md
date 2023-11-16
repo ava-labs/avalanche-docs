@@ -31,8 +31,10 @@ options and their usage:
 - `version` - install a specific node version, instead of the latest. See
   [here](#using-a-previous-version) for usage.
 
-Please note that configuring `index` and `archival` options on an existing node
+:::note
+Configuring the `index` and `archival` options on an existing node
 will require a fresh bootstrap to recreate the database.
+:::
 
 Complete script usage can be displayed by entering:
 
@@ -78,7 +80,7 @@ For example:
 
 ## Node Configuration
 
-File that configures node operation is `~/.avalanchego/configs/node.json`. You
+The file that configures node operation is `~/.avalanchego/configs/node.json`. You
 can edit it to add or change configuration options. The documentation of
 configuration options can be found
 [here](/nodes/configure/avalanchego-config-flags.md). Configuration may look like
@@ -91,9 +93,10 @@ this:
 }
 ```
 
-Note that configuration file needs to be a properly formatted `JSON` file, so
-switches are formatted differently than for command line, so don't enter options
-like `--public-ip-resolution-service=opendns` but as in the example above.
+Note that the configuration file needs to be a properly formatted `JSON` file, so
+switches should formatted differently than they would be for the command line. 
+Therefore, don't enter options like `--public-ip-resolution-service=opendns` as shown 
+in the example above.
 
 Script also creates an empty C-Chain config file, located at
 `~/.avalanchego/configs/chains/C/config.json`. By editing that file you can

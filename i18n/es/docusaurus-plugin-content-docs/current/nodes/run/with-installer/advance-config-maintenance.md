@@ -29,8 +29,10 @@ y su uso:
 - `version` - instala una versión específica del nodo, en lugar de la última. Consulta
   [aquí](#usando-una-versión-anterior) para ver el uso.
 
+:::note
 Ten en cuenta que configurar las opciones `index` y `archival` en un nodo existente
 requerirá un arranque nuevo para recrear la base de datos.
+:::
 
 La forma de uso completa del script se puede mostrar ingresando:
 
