@@ -22,14 +22,14 @@ con las siguientes especificaciones mínimas.
 - SO: Ubuntu 20.04 o MacOS >= 12
 - Red: ancho de banda sostenido de 5Mbps de subida/bajada
 
-:::precaución
+:::caution
 
 Usar un HDD puede resultar en latencias de lectura/escritura pobres y aleatorias,
 lo que reduce el rendimiento y la confiabilidad.
 
 :::
 
-:::nota
+:::note
 
 Los requisitos de hardware escalarán con la cantidad de AVAX en juego en
 el nodo y/o la actividad de la red. Los nodos con grandes apuestas (100k+ AVAX) necesitarán
@@ -112,7 +112,7 @@ instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pue
 o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)
 ), y el soporte de tu proveedor de servicios también podría ayudar.
 
-:::advertencia
+:::warning
 
 Ten en cuenta que un nodo Avalanche completamente conectado mantiene y comunica
 más de un par de miles de conexiones TCP en vivo. Para algunos enrutadores domésticos de baja potencia y
