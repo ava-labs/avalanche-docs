@@ -322,7 +322,7 @@ Sin argumentos adicionales, el script instala el nodo en una configuración más
 - `index` - se habilitará la API de índice
 - `ip` - usa los argumentos `dynamic`, `static`, o ingresa una IP deseada directamente para ser utilizada como la IP pública que el nodo anunciará a la red
 - `rpc` - usa los argumentos `any` o `local` para seleccionar cualquier interfaz de red o la interfaz de red local que se utilizará para escuchar llamadas RPC
-- `version` - instala una versión específica del nodo, en lugar de la última. Consulta [aquí](/nodes/run/with-installer.md#using-a-previous-version) para ver cómo se utiliza.
+- `version` - instala una versión específica del nodo, en lugar de la última. Consulta [aquí](/nodes/run/with-installer/installing-avalanchego.md#using-a-previous-version) para ver cómo se utiliza.
 
 Ten en cuenta que configurar las opciones `index` y `archival` en un nodo existente requerirá un arranque nuevo para recrear la base de datos.
 

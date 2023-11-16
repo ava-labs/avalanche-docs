@@ -242,7 +242,7 @@ Esto también reinicia la instancia. Espera 5 minutos, luego inicia sesión nuev
 ssh ubuntu@PUBLICIP
 ```
 
-Estás conectado nuevamente a la instancia de EC2. Ahora necesitaremos configurar nuestro nodo Avalanche. Para hacer esto, sigue el tutorial [Configurar un Nodo Avalanche con el Instalador](/nodes/run/with-installer.md) que automatiza el proceso de instalación. Necesitarás la `PUBLICIP` que configuramos antes.
+Estás conectado nuevamente a la instancia de EC2. Ahora necesitaremos configurar nuestro nodo Avalanche. Para hacer esto, sigue el tutorial [Configurar un Nodo Avalanche con el Instalador](/nodes/run/with-installer/installing-avalanchego.md) que automatiza el proceso de instalación. Necesitarás la `PUBLICIP` que configuramos antes.
 
 Tu nodo AvalancheGo debería estar funcionando ahora y en proceso de arranque, lo cual puede llevar algunas horas. Para verificar si ha terminado, puedes hacer una llamada de API usando `curl`. Si estás haciendo la solicitud desde la instancia de EC2, la solicitud es:
 

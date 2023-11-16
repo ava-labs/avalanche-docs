@@ -24,7 +24,7 @@ Si usas tu nodo con fines de desarrollo y tienes usuarios de keystore en tu nodo
 
 ## Nodo instalado usando el script de instalación
 
-Si instalaste tu nodo usando el [script de instalación](/nodes/run/with-installer.md), para actualizar tu nodo, simplemente ejecuta el script de instalación nuevamente.
+Si instalaste tu nodo usando el [script de instalación](/nodes/run/with-installer/installing-avalanchego.md), para actualizar tu nodo, simplemente ejecuta el script de instalación nuevamente.
 
 ```text
 ./avalanchego-installer.sh
