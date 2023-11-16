@@ -8,6 +8,10 @@
 .docusaurus
 .cache-loader
 
+# Docs direct from GH repo via docusaurus-plugin-remote-content
+docs/build/cross-chain/teleporter/overview.md
+docs/build/cross-chain/awm/deep-dive.md
+
 # Misc
 .DS_Store
 .env.local

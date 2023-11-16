@@ -11,7 +11,8 @@ keywords:
     cross-subnet communication,
     cross-chain,
   ]
-sidebar_label: Avalanche Warp Messaging
+sidebar_label: Overview
+sidebar_position: 0
 ---
 
 # Avalanche Warp Messaging

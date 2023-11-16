@@ -6,9 +6,11 @@ const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 const math = require("remark-math");
 const katex = require("rehype-katex");
+const remoteContent = require("./configs/remoteContent");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  plugins: [...remoteContent],
   i18n: {
     defaultLocale: "en",
     locales: [
