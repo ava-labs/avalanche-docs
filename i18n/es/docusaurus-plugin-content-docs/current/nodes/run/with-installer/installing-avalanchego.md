@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
+tags: [Nodos]
+description: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
 sidebar_label: Instalando AvalancheGo
 sidebar_position: 1
 ---
@@ -19,7 +19,7 @@ chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
 
-¡Y estamos en marcha! La salida debería verse algo así:
+¡Y comenzamos! La salida debería verse algo así:
 
 <details>
 <summary><b>Haz clic para ver la salida en la Terminal</b></summary>
@@ -28,8 +28,8 @@ chmod 755 avalanchego-installer.sh;\
 Instalador de AvalancheGo
 ---------------------
 Preparando el entorno...
-Se encontró la arquitectura arm64...
-Buscando la última versión arm64...
+Se encontró arquitectura arm64...
+Buscando la última versión para arm64...
 Se intentará descargar:
  https://github.com/ava-labs/avalanchego/releases/download/v1.1.1/avalanchego-linux-arm64-v1.1.1.tar.gz
 avalanchego-linux-arm64-v1.1.1.tar.gz 100%[=========================================================================>]  29.83M  75.8MB/s    in 0.4s
@@ -75,21 +75,20 @@ pedirá:
 - `privado`: esta configuración solo permite solicitudes RPC desde la máquina del nodo.
 - `público`: esta configuración expone el puerto RPC a todas las interfaces de red.
 
-Dado que esta es una configuración sensible, se te pedirá que confirmes si eliges
+Como esta es una configuración sensible, se te pedirá que confirmes si eliges
 `público`. Lee atentamente la siguiente nota:
 
 :::note
 
 Si eliges permitir solicitudes RPC en cualquier interfaz de red, deberás
-configurar un firewall para permitir únicamente las solicitudes RPC desde direcciones IP conocidas,
+configurar un firewall para permitir solo las solicitudes RPC desde direcciones IP conocidas,
 ¡de lo contrario, tu nodo será accesible para cualquiera y podría ser abrumado por
 llamadas RPC de actores malintencionados! Si no planeas usar tu nodo para enviar
 llamadas RPC de forma remota, ingresa `privado`.
 
 :::
 
-Luego, el script te pedirá que elijas si habilitar la configuración de sincronización de estado
-o no:
+Luego, el script te pedirá que elijas si habilitar o no la configuración de sincronización de estado:
 
 ```text
 ¿Quieres que la sincronización de estado esté activada o desactivada? [activada, desactivada]:
@@ -98,10 +97,10 @@ o no:
 Activar la sincronización de estado aumentará en gran medida la velocidad de arranque,
 pero sincronizará solo el estado de red actual. Si tienes la intención de usar tu nodo para
 acceder a datos históricos (nodo de archivo), debes seleccionar `desactivada`. De lo contrario,
-selecciona `activada`. Los validadores pueden ser arrancados con la sincronización de estado activada.
+selecciona `activada`. Los validadores pueden arrancar con la sincronización de estado activada.
 
-Luego, el script continuará con la creación del servicio del sistema y terminará con
-el inicio del servicio.
+Luego, el script continuará con la creación del servicio del sistema y finalizará
+con el inicio del servicio.
 
 <details>
 <summary><b>Haz clic para ver la salida final</b></summary>
@@ -109,7 +108,7 @@ el inicio del servicio.
 ```text
 Se creó el enlace simbólico /etc/systemd/system/multi-user.target.wants/avalanchego.service → /etc/systemd/system/avalanchego.service.
 
-¡Hecho!
+¡Listo!
 
 Tu nodo ahora debería estar en proceso de arranque.
 El archivo de configuración del nodo es /home/ubuntu/.avalanchego/configs/node.json
@@ -149,15 +148,14 @@ Tasks: 8 (limit: 4495)
 Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
 └─2142 /home/ubuntu/avalanche-node/avalanchego --public-ip-resolution-service=opendns --http-host=
-```
 
-</details>
+
 
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: inicializando el último bloque aceptado como 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: inicializando el motor de consenso
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] avalanchego/api/server.go#143: agregando ruta /ext/bc/11111111111111111111111111111111LpoYY
 05 de enero 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] avalanchego/api/server.go#88: servidor de API HTTP escuchando en ":9650"
-05 de enero 10:38:58 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:58] <P Chain> avalanchego/snow/engine/common/bootstrapper.go#185: el arranque de la sincronización de arranque ha comenzado con 1 vértice en la frontera aceptada
+05 de enero 10:38:58 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:58] <P Chain> avalanchego/snow/engine/common/bootstrapper.go#185: el arranque de la sincronización ha comenzado con 1 vértice en la frontera aceptada
 05 de enero 10:39:02 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:02] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: se recuperaron 2500 bloques
 05 de enero 10:39:04 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:04] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: se recuperaron 5000 bloques
 05 de enero 10:39:06 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:06] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: se recuperaron 7500 bloques
