@@ -347,7 +347,7 @@
 /learn/setup-your-ledger-nano-s-with-avalanche/ https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 /learn/setup-your-ledger-nano-s-with-avalanche https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche 301
 
-# since the begining
+# since the beginning
 
 /learn / 301
 /learn/ / 301
@@ -511,7 +511,36 @@
 #  Docs Revamp - Deprecated Pages
 /subnets/deploy-a-gnosis-safe-on-your-evm /deprecated/deploy-a-gnosis-safe-on-your-evm 301
 /subnets/create-a-evm-blockchain-on-subnet-with-avalanchejs /build/subnet/hello-subnet 301
+/community/README https://www.avax.network/ 301
+/community/bug-bounty https://hackenproof.com/avalanche/avalanche-protocol 301
+/community/tutorials-contest /deprecated/tutorials-contest 301
+/community/tutorials-contest/2021 /deprecated/tutorials-contest/2021 301
+/community/tutorials-contest/2022 /deprecated/tutorials-contest/2022 301
+/community/tutorials-contest/2022/avax-subnet-customization /deprecated/tutorials-contest/2022/avax-subnet-customization 301
+/community/tutorials-contest/2022/local-subnet-development /deprecated/tutorials-contest/2022/local-subnet-development 301
+/community/tutorials-contest/2022/erc20-as-subnet-gas-token /deprecated/tutorials-contest/2022/erc20-as-subnet-gas-token 301
+/community/tutorials-contest/2022/avalanche-theGraph-index /deprecated/tutorials-contest/2022/avalanche-theGraph-index 301
+/community/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial /deprecated/tutorials-contest/2021/red-dev-avalanche-chainlink-tutorial 301
+/community/tutorials-contest/2021/pangolin-token-subgraph /deprecated/tutorials-contest/2021/pangolin-token-subgraph 301
+/community/tutorials-contest/2021/hardhat-fork /deprecated/tutorials-contest/2021/hardhat-fork 301
+/community/tutorials-contest/2021/red-dev-sig-verify-tutorial /deprecated/tutorials-contest/2021/red-dev-sig-verify-tutorial 301
+/community/tutorials-contest/2021/evoting-avalanche-dapp /deprecated/tutorials-contest/2021/evoting-avalanche-dapp 301
+/community/tutorials-contest/2021/avalanche-DAO /deprecated/tutorials-contest/2021/avalanche-DAO 301
+/community/tutorials-contest/2021/NFT-Marketplace-on-Avalanche /deprecated/tutorials-contest/2021/NFT-Marketplace-on-Avalanche 301
+/community/tutorials-contest/2021/avalanche-erc721-tutorial /deprecated/tutorials-contest/2021/avalanche-erc721-tutorial 301
+/community/tutorials-contest/2021/how-to-mint-erc721-using-openzeppelin/tutorial /deprecated/tutorials-contest/2021/how-to-mint-erc721-using-openzeppelin/tutorial 301
+/community/tutorials-contest/2021/avax-chat-dapp /deprecated/tutorials-contest/2021/avax-chat-dapp 301
+/community/tutorials-contest/2021/drizzle-auction-manager /deprecated/tutorials-contest/2021/drizzle-auction-manager 301
+/community/tutorials-contest/2021/distributed-file-manager /deprecated/tutorials-contest/2021/distributed-file-manager 301
 
+# Learn - Metadata
+/learn/projects /tooling 301
 
-# 08/07/2023 - Rust VM
-/build/vm/create/rust-vm /build/vm/create/rust-vm/getting-started 301
+# 10/02/23
+/dapps/developer-toolchains/using-foundry-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/foundry 301
+/dapps/developer-toolchains/using-hardhat-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/hardhat 301
+/dapps/developer-toolchains/using-truffle-with-the-avalanche-c-chain /build/dapp/smart-contracts/toolchains/truffle 301
+
+# 10/05/23
+/build/dapp/smart-contracts/toolchains/truffle /deprecated/truffle 301
+/build/dapp/smart-contracts/verification/verify-truffle /deprecated/verify-truffle 301

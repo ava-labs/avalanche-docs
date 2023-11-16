@@ -34,41 +34,30 @@ You can find more about SSH and how to use it
 [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
 :::
 
-### Modify Subnet-EVM
+### Modify and Build Subnet-EVM
 
-To prove you're running your custom binary and not the stock Subnet-EVM included with Avalanche-CLI,
-you need to modify the Subnet-EVM binary by making a minor change. Navigate to the directory you
-cloned Subnet-EVM into and open `./scripts/versions.sh` in a text editor.
+To prove you're running your custom binary and not the stock Subnet-EVM included with
+Avalanche-CLI, you need to modify the Subnet-EVM binary by making a minor change.
 
-The file should look something like this:
+Navigate to the directory you cloned Subnet-EVM into and generate a new commit:
 
-```bash
-#!/usr/bin/env bash
-
-# Set up the versions to be used
-subnet_evm_version=${SUBNET_EVM_VERSION:-'v0.4.4'}
-# Don't export them as they're used in the context of other calls
-avalanche_version=${AVALANCHE_VERSION:-'v1.9.3'}
-network_runner_version=${NETWORK_RUNNER_VERSION:-'35be10cd3867a94fbe960a1c14a455f179de60d9'}
-ginkgo_version=${GINKGO_VERSION:-'v2.2.0'}
-
-# This won't be used, but it's here to make code syncs easier
-latest_coreth_version=0.11.3
+```shell
+git commit -a --allow-empty -m "custom vm commit"
 ```
 
-Modify the file by setting a custom version. This tutorial uses `v6.6.6`, but the actual version you
-choose doesn't matter.
+Take note of the new commit hash:
 
-Replace the fourth line in the file to be:
-
-```bash
-subnet_evm_version="v6.6.6"
+```shell
+git rev-parse HEAD
+c0fe6506a40da466285f37dd0d3c044f494cce32
 ```
+
+In this case, `c0fe6506a40da466285f37dd0d3c044f494cce32`.
 
 Now build your custom binary by running
 
 ```shell
-./scripts/build.sh custom_evm.bin
+./scripts/build.sh custom_vm.bin
 ```
 
 This command builds the binary and saves it at `./custom_vm.bin`.
@@ -81,7 +70,13 @@ compatible with your custom VM.
 ```json
 {
     "config": {
+        "byzantiumBlock": 0,
         "chainId": 12345,
+        "constantinopleBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+        "eip155Block": 0,
+        "eip158Block": 0,
         "feeConfig": {
             "gasLimit": 15000000,
             "targetBlockRate": 2,
@@ -93,21 +88,15 @@ compatible with your custom VM.
             "blockGasCostStep": 200000
         },
         "homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-        "eip155Block": 0,
-        "eip158Block": 0,
-        "byzantiumBlock": 0,
-        "constantinopleBlock": 0,
-        "petersburgBlock": 0,
         "istanbulBlock": 0,
         "muirGlacierBlock": 0,
+        "petersburgBlock": 0,
         "subnetEVMTimestamp": 0
     },
     "nonce": "0x0",
     "timestamp": "0x0",
     "extraData": "0x",
-    "gasLimit": "0x7a1200",
+    "gasLimit": "0xe4e1c0",
     "difficulty": "0x0",
     "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "coinbase": "0x0000000000000000000000000000000000000000",
@@ -158,7 +147,7 @@ Enter the path to the genesis file you created in this [step](#create-a-custom-g
 ### Enter the Path to Your VM Binary
 
 Next, enter the path to your VM binary. This should be the path to the `custom_evm.bin` you
-created [previously](#modify-subnet-evm).
+created [previously](#modify-and-build-subnet-evm).
 
 ```shell
 ✔ Enter path to vm binary: ./custom_vm.bin
@@ -199,31 +188,32 @@ If all works as expected, the command output should look something like this:
 > avalanche subnet deploy myCustomSubnet
 ✔ Local Network
 Deploying [myCustomSubnet] to Local Network
-Backend controller started, pid: 95803, output at: /Users/connor/.avalanche-cli/runs/server_20221206_174845/avalanche-cli-backend
-Installing avalanchego-v1.9.3...
-avalanchego-v1.9.3 installation successful
-VMs ready.
+Backend controller started, pid: 26110, output at: /home/fm/.avalanche-cli/runs/server_20230816_131014/avalanche-cli-backend.log
+Installing avalanchego-v1.10.8...
+avalanchego-v1.10.8 installation successful
+Node log path: /home/fm/.avalanche-cli/runs/network_20230816_131608/node<i>/logs
 Starting network...
-.........
+VMs ready.
+
 Blockchain has been deployed. Wait until network acknowledges...
-.
+
 Network ready to use. Local network node endpoints:
-+-------+----------------+-------------------------------------------------------------------------------------+
-| NODE  |       VM       |                                         URL                                         |
-+-------+----------------+-------------------------------------------------------------------------------------+
-| node1 | myCustomSubnet | http://127.0.0.1:9650/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc |
-+-------+----------------+-------------------------------------------------------------------------------------+
-| node2 | myCustomSubnet | http://127.0.0.1:9652/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc |
-+-------+----------------+-------------------------------------------------------------------------------------+
-| node3 | myCustomSubnet | http://127.0.0.1:9654/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc |
-+-------+----------------+-------------------------------------------------------------------------------------+
-| node4 | myCustomSubnet | http://127.0.0.1:9656/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc |
-+-------+----------------+-------------------------------------------------------------------------------------+
-| node5 | myCustomSubnet | http://127.0.0.1:9658/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc |
-+-------+----------------+-------------------------------------------------------------------------------------+
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| NODE  |       VM       |                                        URL                                         |                    ALIAS URL                    |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| node1 | myCustomSubnet | http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| node2 | myCustomSubnet | http://127.0.0.1:9652/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9652/ext/bc/myCustomSubnet/rpc |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| node3 | myCustomSubnet | http://127.0.0.1:9654/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9654/ext/bc/myCustomSubnet/rpc |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| node4 | myCustomSubnet | http://127.0.0.1:9656/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9656/ext/bc/myCustomSubnet/rpc |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
+| node5 | myCustomSubnet | http://127.0.0.1:9658/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9658/ext/bc/myCustomSubnet/rpc |
++-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
 
 Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc
+RPC URL:          http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -257,15 +247,15 @@ The command returns a list of all the VMs your local node is currently running a
 {
   "jsonrpc": "2.0",
   "result": {
-    "version": "avalanche/1.9.3",
+    "version": "avalanche/1.10.8",
     "databaseVersion": "v1.4.5",
-    "rpcProtocolVersion": "19",
-    "gitCommit": "51c5edd85ccc7927443b945b427e64d91ff99f67",
+    "rpcProtocolVersion": "27",
+    "gitCommit": "e70a17d9d988b5067f3ef5c4a057f15ae1271ac4",
     "vmVersions": {
-      "avm": "v1.9.3",
-      "evm": "v0.11.3",
-      "platform": "v1.9.3",
-      "qDMnZ895HKpRXA2wEvujJew8nNFEkvcrH5frCR9T1Suk1sREe": "v6.6.6@e3cbd01f63209b24e8e024e20cb4c17d37f26855"
+      "avm": "v1.10.8",
+      "evm": "v0.12.5",
+      "platform": "v1.10.8",
+      "qDMnZ895HKpRXA2wEvujJew8nNFEkvcrH5frCR9T1Suk1sREe": "v0.5.4@c0fe6506a40da466285f37dd0d3c044f494cce32"
     }
   },
   "id": 1
@@ -273,8 +263,8 @@ The command returns a list of all the VMs your local node is currently running a
 ```
 
 Your results may be slightly different, but you can see that in addition to the X-Chain's
-`avm`, the C-Chain's `evm`, and the P-Chains' `platform` VM, the node is running the custom VM with
-version `v6.6.6`.
+`avm`, the C-Chain's `evm`, and the P-Chain's `platform` VM, the node is running the custom VM with
+commit `c0fe6506a40da466285f37dd0d3c044f494cce32`.
 
 ### Check a Balance
 
@@ -285,7 +275,7 @@ deployment output.
 <!-- markdownlint-disable MD013 -->
 
 ```shell
-curl --location --request POST 'http://127.0.0.1:9650/ext/bc/2eVmtiGvE4A9AEPwvqEWT4reCASPziNZA27goXMRqQ25Y6oaYm/rpc' \
+curl --location --request POST 'http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "jsonrpc": "2.0",

@@ -93,11 +93,6 @@ available. Defaults to `false`. See
 If set to `false`, this node will not expose the Info API. Defaults to `true`. See
 [here](/reference/avalanchego/info-api.md) for more information.
 
-#### `--api-ipcs-enabled` (boolean)
-
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
-[here](/reference/avalanchego/ipc-api.md) for more information.
-
 #### `--api-keystore-enabled` (boolean)
 
 If set to `true`, this node will expose the Keystore API. Defaults to `false`.
@@ -181,6 +176,12 @@ will be contacted to get and authenticate the starting point (state summary) for
 state sync. An example setting of this field would be
 `--state-sync-ips="127.0.0.1:12345,1.2.3.4:5678"`. The number of given IPs here
 must be the same with the number of given `--state-sync-ids`.
+
+## Partial Sync Primary Network
+
+#### `--partial-sync-primary-network` (string)
+
+Partial sync enables non-validators to optionally sync only the P-chain on the primary network.
 
 ## Chain Configs
 
@@ -526,18 +527,6 @@ List of acceptable host names in API requests. Provide the wildcard (`'*'`) to a
 requests from all hosts. API requests where the `Host` field is empty or an IP address
 will always be accepted. An API call whose HTTP `Host` field isn't acceptable will
 receive a 403 error code. Defaults to `localhost`.
-
-## IPCs
-
-#### `--ipcs-chain-ids` (string)
-
-Comma separated list of chain ids to connect to (for example
-`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
-There is no default value.
-
-#### `--ipcs-path` (string)
-
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
 
 ## File Descriptor Limit
 
@@ -1081,6 +1070,8 @@ Allows the node to connect peers with private IPs. Defaults to `true`.
 
 The type of compression to use when sending messages to peers. Defaults to `gzip`.
 Must be one of [`gzip`, `zstd`, `none`].
+
+Nodes can handle inbound `gzip` compressed messages but by default send `zstd` compressed messages.
 
 #### `--network-initial-timeout` (duration)
 

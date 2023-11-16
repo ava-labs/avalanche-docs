@@ -804,7 +804,7 @@ platform.getBlock({
 
 **Response:**
 
-- `block` is the transaction encoded to `encoding`.
+- `block` is the block encoded to `encoding`.
 - `encoding` is the `encoding`.
 
 #### Hex Example
@@ -846,6 +846,139 @@ curl -X POST --data '{
     "method": "platform.getBlock",
     "params": {
         "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
+        "encoding": "json"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": {
+      "parentID": "5615di9ytxujackzaXNrVuWQy5y8Yrt8chPCscMr5Ku9YxJ1S",
+      "height": 1000001,
+      "txs": [
+        {
+          "unsignedTx": {
+            "inputs": {
+              "networkID": 1,
+              "blockchainID": "11111111111111111111111111111111LpoYY",
+              "outputs": [],
+              "inputs": [
+                {
+                  "txID": "DTqiagiMFdqbNQ62V2Gt1GddTVLkKUk2caGr4pyza9hTtsfta",
+                  "outputIndex": 0,
+                  "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+                  "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                  "input": {
+                    "amount": 13839124063,
+                    "signatureIndices": [0]
+                  }
+                }
+              ],
+              "memo": "0x"
+            },
+            "destinationChain": "2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5",
+            "exportedOutputs": [
+              {
+                "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+                "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                "output": {
+                  "addresses": [
+                    "P-avax1jkjyvlwclyu42n4yuegpczpfgwrf8r9lyj0d3c"
+                  ],
+                  "amount": 13838124063,
+                  "locktime": 0,
+                  "threshold": 1
+                }
+              }
+            ]
+          },
+          "credentials": [
+            {
+              "signatures": [
+                "0xc79711c4b48dcde205b63603efef7c61773a0eb47efb503fcebe40d21962b7c25ebd734057400a12cce9cf99aceec8462923d5d91fffe1cb908372281ed7385801"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "encoding": "json"
+  },
+  "id": 1
+}
+```
+
+### `platform.getBlockByHeight`
+
+Get a block by its height.
+
+**Signature:**
+
+```sh
+platform.getBlockByHeight({
+    height: int
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}
+```
+
+**Request:**
+
+- `height` is the block height.
+- `encoding` is the encoding format to use. Can be either `hex` or `json`. Defaults to `hex`.
+
+**Response:**
+
+- `block` is the block encoded to `encoding`.
+- `encoding` is the `encoding`.
+
+#### Hex Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getBlockByHeight",
+    "params": {
+        "height": 1000001,
+        "encoding": "hex"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x00000000000309473dc99a0851a29174d84e522da8ccb1a56ac23f7b0ba79f80acce34cf576900000000000f4241000000010000001200000001000000000000000000000000000000000000000000000000000000000000000000000000000000011c4c57e1bcb3c567f9f03caa75563502d1a21393173c06d9d79ea247b20e24800000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000000338e0465f0000000100000000000000000427d4b22a2a78bcddd456742caf91b56badbff985ee19aef14573e7343fd6520000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000000338d1041f0000000000000000000000010000000195a4467dd8f939554ea4e6501c08294386938cbf000000010000000900000001c79711c4b48dcde205b63603efef7c61773a0eb47efb503fcebe40d21962b7c25ebd734057400a12cce9cf99aceec8462923d5d91fffe1cb908372281ed738580119286dde",
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
+#### JSON Example
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getBlockByHeight",
+    "params": {
+        "height": 1000001,
         "encoding": "json"
     },
     "id": 1

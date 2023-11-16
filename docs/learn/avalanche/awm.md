@@ -1,7 +1,11 @@
 ---
+tags: [Avalanche Warp Messaging, Cross-Subnet Communication]
+description: AWM allows seamless communication between different subnetworks on Avalanche, enabling developers to establish custom communication protocols.
+keywords: [docs, documentation, avalanche, avalanche warp messaging, awm, cross-subnet communication, cross-chain, ]
 sidebar_label: Avalanche Warp Messaging
 ---
-# Cross-Subnet Communication
+
+# Avalanche Warp Messaging
 
 Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows [Virtual Machine
 (VM)](/learn/avalanche/subnets-overview.md#virtual-machines) developers to implement arbitrary
@@ -61,7 +65,7 @@ valid can be set according to the individual requirements of each Subnet-to-Subn
 Subnet A may accept messages from Subnet B that are signed by at least 70% of stake. Messages from
 Subnet C are only accepted if they have been signed by validators that account for 90% of the stake.
 
-Since all validators' public keys of the validators and their stake weights are recorded on the
+Since both the public keys and stake weights of all validators are recorded on the
 primary network's P-chain, they are readily accessible to any virtual machine run by the validators.
 Therefore, the Subnets do not need to communicate with each other about changes in their respective
 sets of validators, but can simply rely on the latest information on the P-Chain. Therefore, AWM

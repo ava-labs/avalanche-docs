@@ -12,8 +12,7 @@ It uses the [primitive serialization](/reference/standards/serialization-primiti
 payload packing.
 
 `"Containers"` are mentioned extensively in the description. A Container is
-simply a generic term for blocks or vertices, without needing to specify whether
-the consensus algorithm is DAG or Chain.
+simply a generic term for blocks.
 
 ## GetVersion
 

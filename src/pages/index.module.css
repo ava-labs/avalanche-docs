@@ -3,6 +3,11 @@
  * and scoped locally.
  */
 
+.main {
+  margin-bottom: 50px;
+  margin-top: 0px;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -29,7 +34,6 @@
 .features {
   display: flex;
   align-items: top;
-  padding: 2rem 0;
   width: 100%;
 }
 

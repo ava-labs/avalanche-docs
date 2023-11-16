@@ -14,6 +14,48 @@ build and test Subnets.
 To get started, look at the documentation for the subcommands or jump right
 in with `avalanche subnet create myNewSubnet`.
 
+[Install Avalanche CLI](https://docs.avax.network/tooling/cli-guides/install-avalanche-cli)
+
+## Primary
+
+The `primary` command suite provides a collection of tools for interacting with the Avalanche 
+Primary Network.
+
+
+### Primary AddValidator
+
+The `primary addValidator` command adds an Avalanche node as a validator in the Avalanche Primary
+Network with [AddPermissionlessValidatorTx](/reference/standards/guides/banff-changes.md#addpermissionlessvalidatortx).
+
+This command requires the node's BLS key and proof of possession key, more information regarding BLS
+can be found [here](/reference/avalanchego/p-chain/txn-format.md#proof-of-possession). 
+
+To get a node's BLS key and proof of possession key, call info.getNodeID API as shown [here](/reference/avalanchego/info-api.md#infogetnodeid)
+
+**Usage:**
+
+```shell
+avalanche primary addValidator [flags]
+```
+
+**Flags:**
+
+```shell
+    --nodeID string                 the node ID of the validator
+-k, --key string                    select the key to use [fuji deploy only]
+    --weight uint                   set the staking weight of the validator
+    --start-time string             UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+    --staking-period duration       how long this validator will be staking
+    --fuji fuji                     join on fuji (alias for `testnet`)
+    --testnet testnet               join on testnet (alias for `fuji`)
+    --mainnet mainnet               join on mainnet
+-g, --ledger                        use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings          use the given ledger addresses
+    --public-key string             set the BLS public key of the validator
+    --proof-of-possession string    set the BLS proof of possession of the validator
+    --delegation-fee uint           set the delegation fee (20 000 is equivalent to 2%)
+```
+
 ## Subnet
 
 The `subnet` command suite provides a collection of tools for developing
@@ -639,6 +681,259 @@ avalanche subnet upgrade export [subnetName] [flags]
 ```shell
     --deployed   show additional deploy information
 -h, --help       help for list
+```
+
+## Node
+
+The `node` command suite provides a collection of tools for creating and maintaining 
+validators on the Avalanche Network.
+
+To get started, use the node create command wizard to walk through the
+configuration to make your node a primary validator on Avalanche public network. You can use the 
+rest of the commands to maintain your node and make your node a Subnet Validator.
+
+### Node Create
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node create` command sets up a validator on a cloud server of your choice. 
+The validator will be validating the Avalanche Primary Network and Subnet 
+of your choice. By default, the command runs an interactive wizard. It 
+walks you through all the steps you need to set up a validator.
+Once this command is run, you will have to wait for the validator
+to finish bootstrapping on the primary network before running further
+commands on it, for example validating a Subnet. You can check the bootstrapping
+status by running `avalanche node status`. 
+
+The created node will be part of group of validators called `<clusterName>`
+and users can call node commands with `<clusterName>` so that the command
+will apply to all nodes in the cluster.
+
+**Usage:**
+
+```shell
+  avalanche node create [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for create
+```
+
+### Node List
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node list` command lists all clusters with their nodes.
+
+**Usage:**
+
+```shell
+  avalanche node list [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for list
+```
+
+### Node Status
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node status` command gets the bootstrap status of all nodes in a cluster on
+the Primary Network. 
+To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
+
+**Usage:**
+
+```shell
+  avalanche node status [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help            help for status
+      --subnet string   specify the subnet the node is syncing with
+```
+
+### Node Stop
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node stop` command stops a running node in cloud server
+
+Note that a stopped node may still incur cloud server storage fees.
+
+**Usage:**
+
+```shell
+  avalanche node stop [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for stop
+```
+
+### Node Sync
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node sync` command enables all nodes in a cluster to be bootstrapped to a Subnet. 
+You can check the Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet <subnetName>`
+
+**Usage:**
+
+```shell
+  avalanche node sync [clusterName] [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for sync
+```
+
+### Node Update
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node update` command suite provides a collection of commands for nodes to update
+their AvalancheGo version or VM version/config.
+You can check the status after update by calling `avalanche node status`
+
+### Node Update Subnet
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node update subnet` command updates all nodes in a cluster with latest Subnet configuration and
+You can check the updated Subnet bootstrap status by calling avalanche
+`node status <clusterName> --subnet <subnetName>`
+
+**Usage:**
+
+```shell
+  avalanche node update subnet [clusterName] [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help   help for subnet
+```
+
+### Node Validate
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node validate` command suite provides a collection of commands for nodes to join
+the Primary Network and Subnets as validators.
+If any of the commands is run before the nodes are bootstrapped on the Primary Network, the command 
+will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`.
+
+### Node Validate Primary
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node validate primary` command enables all nodes in a cluster to be validators of Primary
+Network.
+
+**Usage:**
+
+```shell
+  avalanche node validate primary [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -f, --fuji testnet              set up validator in fuji (alias to testnet
+  -h, --help                      help for primary
+  -k, --key string                select the key to use [fuji only]
+  -g, --ledger                    use ledger instead of key (always true on mainnet, defaults to false on fuji)
+      --ledger-addrs strings      use the given ledger addresses
+  -m, --mainnet                   set up validator in mainnet
+      --stake-amount uint         how many AVAX to stake in the validator
+      --staking-period duration   how long validator validates for after start time
+  -t, --testnet fuji              set up validator in testnet (alias to fuji)
+```
+
+### Node Validate Subnet
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node validate subnet` command enables all nodes in a cluster to be validators of a Subnet.
+If the command is run before the nodes are Primary Network validators, the command will first
+make the nodes Primary Network validators before making them Subnet validators. 
+If The command is run before the nodes are bootstrapped on the Primary Network, the command
+will fail. 
+You can check the bootstrap status by calling `avalanche node status <clusterName>`.
+If The command is run before the nodes are synced to the Subnet, the command will fail.
+You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <subnetName>`.
+
+**Usage:**
+
+```shell
+  avalanche node validate subnet [clusterName] [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -f, --fuji testnet              set up validator in fuji (alias to testnet
+  -h, --help                      help for subnet
+  -k, --key string                select the key to use [fuji only]
+  -g, --ledger                    use ledger instead of key (always true on mainnet, defaults to false on fuji)
+      --ledger-addrs strings      use the given ledger addresses
+  -m, --mainnet                   set up validator in mainnet
+      --stake-amount uint         how many AVAX to stake in the validator
+      --staking-period duration   how long validator validates for after start time
+  -t, --testnet fuji              set up validator in testnet (alias to fuji)
 ```
 
 ## Network

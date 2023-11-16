@@ -1,6 +1,7 @@
 ---
 tags: [Tooling, RPC Providers, AvalancheGo APIs]
 description: There are multiple RPC providers which will work as intermediaries to help you interact with the Avalanche network. You'll experience different latency levels depending on the provider's configurations. You can potentially use multiple providers for redundancy and balancing.
+keywords: [rpc, avalanche rpc, endpoint, curl, rpc provider]
 ---
 
 # 🔌 RPC Providers
@@ -89,36 +90,6 @@ try using a community RPC provider.
 
 If you have questions, problems, or suggestions, join the official [Avalanche Discord](https://chat.avalabs.org/).
 
-## Subnets RPC - Public API Servers 
-
-### DeFi Kingdom (DFK)
-
-#### HTTP
-
-- The URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc`.
-
-Note: on Fuji Testnet, the URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/rpc`.
-
-#### Websockets
-
-- The URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain/ws`.
-
-Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws`.
-
-### Dexalot
-
-#### HTTP
-
-- The URL is `https://subnets.avax.network/dexalot/mainnet/rpc`.
-
-Note: on Fuji Testnet, the URL is `https://subnets.avax.network/dexalot/testnet/rpc`.
-
-#### Websockets
-
-- The URL is `wss://subnets.avax.network/dexalot/mainnet/ws`.
-
-Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws`.
-
 ## Community Providers
 
 :::info Disclaimer
@@ -133,17 +104,6 @@ and conduct your own research to properly evaluate the risks and benefits of any
 project.
 
 :::
-
-### Infura
-
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network)
-currently only supports the C-Chain.
-
-#### HTTP
-
-- For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
-
-Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
 
 ### ANKR
 
@@ -169,8 +129,6 @@ Features:
 - Automatic geo-routing across North America, Europe, and Asia.
 
 Note: soft limited to 1 million daily requests per IP or referring domain. Batch calls limited to 1000.
-
-Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 ### Blast
 
@@ -210,6 +168,82 @@ Support is available on the [ANKR Discord](https://discord.gg/9yVU8YvayA).
 
 - For C-Chain RPC Endpoint AVAX, the URL is `https://web3endpoints.com/avax-mainnet`
 
+### Chainstack
+
+[Chainstack](https://chainstack.com/build-better-with-avalanche/) supports the
+C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
+
+Features:
+
+- Globally distributed infrastructure for optimal performance.
+- Crypto payments natively.
+- 24/7 customer support.
+
+#### Mainnet
+
+##### HTTP
+
+- For C-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`, 
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
+- For X-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`, 
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
+- For P-Chain API, the regional elastic node URL is 
+`https://nd-123-145-789.p2pify.com/API_KEY/ext/P`,
+and the global elastic node URL is 
+`https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
+
+##### Websockets
+
+Websockets are available for the C-chain and the X-chain.
+
+- For C-Chain API, the regional elastic node URL is 
+`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`, 
+and the global elastic node URL is 
+`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
+- For X-Chain API, the regional elastic node URL is 
+`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`, 
+and the global elastic node URL is 
+`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
+
+#### Testnet (Fuji)
+
+##### HTTP
+
+- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
+- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
+- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
+
+##### Websockets
+
+Websockets are available for the C-chain and the X-chain.
+
+- For C-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
+- For X-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+ 
+### DRPC
+
+[DRPC](https://drpc.org/) supports the C-Chain.
+
+
+#### Mainnet
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche.drpc.org`
+
+#### Testnet (Fuji)
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-fuji.drpc.org`
+
+  Features:
+
+- Decentralized RPC nodes
+- Node balancing
+- Unlimited compute units per month on the free tier
+- On free-tier is available Websockets
+
 ### GetBlock 
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
@@ -226,6 +260,57 @@ Note: on Fuji Testnet, the URL is `https://avax.getblock.io/api_key/testnet/ext/
 
 Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
 
+### Infura
+
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently
+only supports the C-Chain.
+
+#### HTTP
+
+- For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
+
+Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
+
+### Moralis
+
+[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-Chain.
+
+#### Mainnet
+
+- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances,
+transfers, sales and more
+- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances,
+transfers, prices, burns, mints and more
+- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances,
+transaction history, net worth and more
+- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks,
+transactions, logs and events
+- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about
+any on-chain event
+
+Features:
+
+- Free plan available
+- Supports all major EVM networks
+
+### Nodies
+
+[Nodies](https://nodies.app) supports the C, X, P, and DFK Subnet chains.
+
+Features:
+
+- Generous free tier
+- Globally distributed infrastructure in 3+ geographic regions
+- Decentralized and Centralized API's
+
+#### HTTP
+
+- For `C-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
+- For `X-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
+- For `P-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
+- For `DFK-Subnet`, the URL is
+`https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
+
 ### QuickNode
 
 [QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
@@ -239,46 +324,40 @@ P-Chain, C-Chain, and Index API.
 
 - The URL is  `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
 
-### ChainStack
+### Stackup
 
-[ChainStack](https://chainstack.com/build-better-with-avalanche/) supports the
-C-Chain, X-Chain, P-Chain, and the Fuji Testnet.
+[Stackup](https://www.stackup.sh) currently supports the Avalanche C-Chain on Mainnet and Fuji Testnet.
 
 Features:
 
-- Globally distributed infrastructure for optimal performance.
-- Crypto payments natively.
-- 24/7 customer support.
+- Free
+- Account abstraction RPC endpoints
+- ERC-4337 bundlers and paymasters
+
+#### HTTP
+
+- The URL is `https://api.stackup.sh/v1/node/YOUR-API-KEY`
+
+### NOWNodes
+
+[NOWNodes](https://nownodes.io/nodes/avalanche-avax) supports the X-Chain, P-Chain, C-Chain, and Blockbook.
+
+Features:
+
+- Privacy oriented (non custodial, no KYC)
+- Dedicated access with no limits by request
+- Free starter plan
+- Technical guides 
 
 #### Mainnet
 
-##### HTTP
+#### RPC
 
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
-- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
+- The URL is  `https://avalanche.nownodes.io/your-api-key`
+  
+#### Blockbook
 
-##### Websockets
-
-Websockets are available for the C-chain and the X-chain.
-
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
-
-#### Testnet (Fuji)
-
-##### HTTP
-
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`
-- For P-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`
-
-##### Websockets
-
-Websockets are available for the C-chain and the X-chain.
-
-- For C-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
-- For X-Chain API, the URL is `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
+- The URL is  `https://avax-blockbook.nownodes.io/your-request`
 
 ### PublicNode by Allnodes
 
@@ -293,6 +372,65 @@ Features:
 
 #### Mainnet
 
-##### HTTPS
-
 - For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
+
+### 1RPC
+
+[1RPC](https://1rpc.io), by Automata Network supports the C-Chain, X-Chain, and P-Chain.
+
+Features:
+
+- Free to use
+- First RPC relay to be attested on-chain
+- Eradicate metadata exposure and leakage
+- Zero tracking
+
+#### Mainnet RPC
+
+- For C-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/c`
+- For X-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/x`
+- For P-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/p`
+
+## Subnets RPC - Public API Servers 
+
+### Beam
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/beam/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/beam/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/beam/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/beam/testnet/ws`.
+
+### DeFi Kingdom (DFK)
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/defi-kingdoms/dfk-chain-testnet/ws`.
+
+### Dexalot
+
+#### HTTP
+
+- The URL is `https://subnets.avax.network/dexalot/mainnet/rpc`.
+
+Note: on Fuji Testnet, the URL is `https://subnets.avax.network/dexalot/testnet/rpc`.
+
+#### Websockets
+
+- The URL is `wss://subnets.avax.network/dexalot/mainnet/ws`.
+
+Note: on Fuji Testnet, the URL is `wss://subnets.avax.network/dexalot/testnet/ws`.

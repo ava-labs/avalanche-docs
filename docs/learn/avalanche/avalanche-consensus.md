@@ -1,5 +1,8 @@
 ---
-description: Avalanche is a consensus protocol that is scalable, robust, and decentralized.
+tags: [Avalanche Consensus, Avalanche Protocol]
+description: Avalanche Consensus is a consensus protocol that is scalable, robust, and decentralized.
+keywords: [avalanche consensus, snowman consensus, scaling blockchains, nakamoto consensus]
+sidebar_label: Avalanche Consensus
 ---
 
 # Avalanche Consensus

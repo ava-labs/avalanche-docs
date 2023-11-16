@@ -10,7 +10,123 @@ const katex = require("rehype-katex");
 const config = {
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: [
+      // "de",
+      "en",
+      "es",
+      // "fa",
+      // "fr",
+      // "hi",
+      // "it",
+      // "ja",
+      // "ko",
+      // "ru",
+      // "tu",
+      // "vi",
+      // "zh-CN",
+      // "zh-TW",
+    ],
+    path: "i18n",
+    localeConfigs: {
+      en: {
+        label: "English",
+        direction: "ltr",
+        htmlLang: "en-US",
+        calendar: "gregory",
+        path: "en",
+      },
+      fr: {
+        label: "French",
+        direction: "ltr",
+        htmlLang: "fr-FR",
+        calendar: "gregory",
+        path: "fr",
+      },
+      es: {
+        label: "Español",
+        direction: "ltr",
+        htmlLang: "es-ES",
+        calendar: "gregory",
+        path: "es",
+      },
+      ja: {
+        label: "Japanese",
+        direction: "ltr",
+        htmlLang: "ja-JP",
+        calendar: "gregory",
+        path: "ja",
+      },
+      ko: {
+        label: "Korean",
+        direction: "ltr",
+        htmlLang: "ko-KR",
+        calendar: "gregory",
+        path: "ko",
+      },
+      ru: {
+        label: "Russian",
+        direction: "ltr",
+        htmlLang: "ru-RU",
+        calendar: "gregory",
+        path: "ru",
+      },
+      "zh-CN": {
+        label: "Chinese (Simplified)",
+        direction: "ltr",
+        htmlLang: "zh-CN",
+        calendar: "gregory",
+        path: "zh-CN",
+      },
+      "zh-TW": {
+        label: "Chinese (Traditional)",
+        direction: "ltr",
+        htmlLang: "zh-TW",
+        calendar: "gregory",
+        path: "zh-TW",
+      },
+      vi: {
+        label: "Vietnamese",
+        direction: "ltr",
+        htmlLang: "vi-VI",
+        calendar: "gregory",
+        path: "vi",
+      },
+      tu: {
+        label: "Turkish",
+        direction: "ltr",
+        htmlLang: "tu-TU",
+        calendar: "gregory",
+        path: "tu",
+      },
+      it: {
+        label: "Italian",
+        direction: "ltr",
+        htmlLang: "it-IT",
+        calendar: "gregory",
+        path: "it",
+      },
+      de: {
+        label: "German",
+        direction: "ltr",
+        htmlLang: "de-DE",
+        calendar: "gregory",
+        path: "de",
+      },
+      fa: {
+        label: "Persian",
+        direction: "ltr",
+        htmlLang: "fa-FA",
+        calendar: "gregory",
+        path: "fa",
+      },
+      hi: {
+        label: "Hindi",
+        direction: "ltr",
+        htmlLang: "hi-HI",
+        calendar: "gregory",
+        path: "hi",
+      },
+    },
   },
 
   title: "Avalanche Dev Docs",
@@ -41,9 +157,8 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: "G-HGX2HKR5GK",
-          anonymizeIP: true,
+        googleTagManager: {
+          containerId: "GTM-MHVBTGVC",
         },
       }),
     ],
@@ -133,23 +248,12 @@ const config = {
             label: "Reference",
           },
           {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "community",
-            label: "Community",
-          },
-          {
             type: "localeDropdown",
             position: "right",
           },
           {
             href: "https://chat.avax.network/",
             className: "header-discord-link",
-            position: "right",
-          },
-          {
-            href: "https://twitter.com/AvaxDevelopers",
-            className: "header-twitter-link",
             position: "right",
           },
           {
@@ -160,53 +264,11 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Discord",
-                href: "https://chat.avax.network",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/avax",
-              },
-              {
-                label: "Telegram",
-                href: "https://t.me/avalancheavax",
-              },
-              {
-                label: "Medium",
-                href: "https://medium.com/avalancheavax",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "YouTube",
-                href: "https://youtube.com/avalancheavax",
-              },
-              {
-                label: "Ecosystem",
-                href: "https://ecosystem.avax.network",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/ava-labs/avalanche-docs",
-              },
-              {
-                label: "Terms of Use",
-                href: "https://www.avax.network/terms-of-use",
-              },
-            ],
-          },
-          {},
-        ],
+        links: [],
         copyright: `Copyright © ${new Date().getFullYear()} Ava Labs, Inc.`,
+        logo: {
+          src: "/img/Avalanche_Horizontal_Red.svg",
+        },
       },
       prism: {
         theme: lightCodeTheme,
