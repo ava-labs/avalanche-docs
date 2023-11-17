@@ -31,7 +31,7 @@ therefore reducing performance and reliability.
 
 :::note
 
-HW requirements shall scale with the amount of AVAX staked on
+Hardware requirements shall scale with the amount of AVAX staked on
 the node and/or network activity. Nodes with big stakes (100k+ AVAX) will need
 more powerful machines than listed, and will use more bandwidth as well.
 
