@@ -353,6 +353,11 @@
       "type": "link",
       "label": "HyperSDK",
       "href": "https://github.com/ava-labs/hypersdk#readme"
+    },
+    {
+      "type": "link",
+      "label": "Avalanche-Types",
+      "href": "https://crates.io/crates/avalanche-types"
     }
   ],
 
