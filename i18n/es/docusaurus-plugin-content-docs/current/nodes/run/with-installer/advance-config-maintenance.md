@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este tutorial, aprenderás sobre opciones avanzadas de configuración de nodos Avalanche y tareas de mantenimiento.
+tags: [Nodos]
+description: En este tutorial, aprenderás sobre opciones avanzadas de configuración de nodos Avalanche y tareas de mantenimiento.
 sidebar_label: Configuración y Mantenimiento del Nodo
 sidebar_position: 3
 ---

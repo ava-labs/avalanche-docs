@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este tutorial, aprenderás cómo gestionar tu nodo AvalancheGo.
+tags: [Nodos]
+description: En este tutorial, aprenderás cómo gestionar tu nodo AvalancheGo.
 sidebar_label: Gestión de AvalancheGo
 sidebar_position: 2
 ---

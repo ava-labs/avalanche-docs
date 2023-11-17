@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este tutorial, aprenderás cómo preparar tu entorno para la instalación de AvalancheGo y configurar tus ajustes de red.
+tags: [Nodos]
+description: En este tutorial, aprenderás cómo preparar tu entorno para la instalación de AvalancheGo y configurar tus ajustes de red.
 sidebar_label: Preparando tu Entorno
 sidebar_position: 0
 ---

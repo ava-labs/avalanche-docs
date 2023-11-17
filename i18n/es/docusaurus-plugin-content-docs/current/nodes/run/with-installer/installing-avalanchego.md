@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
+tags: [Nodos]
+description: En este tutorial, aprenderás cómo descargar e instalar AvalancheGo utilizando el script de instalación.
 sidebar_label: Instalando AvalancheGo
 sidebar_position: 1
 ---
