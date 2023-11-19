@@ -50,7 +50,7 @@ npm start
 ```
 
 If everything works as expected, you should be able to load
-"<http://localhost:3000/>" on your browser, click on the "Connect Avalanche"
+"http://localhost:3000/" on your browser, click on the "Connect Avalanche"
 button on the page as below:
 
 ![connect core](/img/connect-core.jpeg)

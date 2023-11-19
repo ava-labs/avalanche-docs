@@ -23,7 +23,8 @@ run by Subnets on Avalanche.
 It is recommended that you first complete [this comprehensive guide](/nodes/run/node-manually.md) 
 which demonstrates how to build and run a basic Avalanche node. Below are the high level details.
 
-<details><summary>System Requirements</summary>
+<details>
+<summary>System Requirements</summary>
 <p>
 
 - CPU: Equivalent of 8 AWS vCPU
@@ -35,7 +36,8 @@ Note that as network usage increases, hardware requirements may
 change.
 </p></details>
 
-<details><summary>To build from source:</summary>
+<details>
+<summary>To build from source:</summary>
 <p>
 
 1. Install [gcc](https://gcc.gnu.org/)
@@ -94,7 +96,8 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh ~/.avalanchego/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-<details><summary>Where can I find Subnet parameters like VMID?</summary>
+<details>
+<summary>Where can I find Subnet parameters like VMID?</summary>
 <p>
 VMID, Subnet ID, ChainID, and all other parameters can be found in the "Chain Info" 
 section of the Subnet Explorer. 
@@ -132,7 +135,8 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 Note: The above command includes the `--network-id=fuji` command because the WAGMI Subnet is deployed
 on Fuji Testnet. 
 
-<details><summary>Run via the command line instead</summary>
+<details>
+<summary>Run via the command line instead</summary>
 <p>
 
 If you would prefer to track Subnets using a command line flag, you can instead use the `--track-subnets`

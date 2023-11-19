@@ -621,7 +621,7 @@ often met cases.
     });
     ```
 
-    Note: We do not actually need **{from: contractDeployer}** as a parameter. If it
+    Note: We do not actually need **\{from: contractDeployer}** as a parameter. If it
     is missing, Truffle would automatically take the first address into
     consideration for the function call. However, you will see that for minting an
     NFT we would use the **creator** address, so we would then need to specify this.

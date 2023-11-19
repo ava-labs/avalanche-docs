@@ -44,8 +44,8 @@ So do we store links to the metadata of every NFT in the collection? The answer 
 OpenZeppelin has come up with a smart way where you just need to store the
 prefix of the url where the metadata is stored and the tokenID is appended to it
 to return the url of the metadata for an individual NFT. For example, if the
-baseURI is "<https://mynft.com/>" and if you want the metadata for tokenID 1 the
-contract simply returns ("<https://mynft.com/1>"). This way we don't need to store
+baseURI is "https://mynft.com/" and if you want the metadata for tokenID 1 the
+contract simply returns ("https://mynft.com/1"). This way we don't need to store
 the url of the metadata for every tokenID.
 
 To achieve this we need to rename our images/videos with respect to tokenID.
@@ -96,10 +96,10 @@ So now we have the baseURI for the assets to get any asset all we need to do is
 append the tokenID and extension to the baseURI.
 
 This is the baseURI in my case.
-<https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2>
+https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2
 
 To get asset for tokenID 0 all I need to do is append "/" +  tokenID + extension (.gif in this case)
-<https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif>
+https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif
 
 
 ### Getting Metadata Ready to Be Uploaded to Decentralized Storage
@@ -263,7 +263,7 @@ Hooray! We have now minted an NFT to ourselves! 🎉
 
 You can check the NFT on the explorer. My URL is below.
 
-<https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers>
+https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers
 
 ![NFT-on-explorer](images/minting-erc721-23-nft-on-explorer.png)
 

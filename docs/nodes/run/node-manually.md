@@ -28,7 +28,8 @@ In this tutorial, we will:
 - Install AvalancheGo and run an Avalanche node
 - Connect to Avalanche
 
-<details><summary>Other Options</summary>
+<details>
+<summary>Other Options</summary>
 <p>
 
 - To use a third-party service to host your node or run a
@@ -205,13 +206,15 @@ To run successfully, AvalancheGo needs to accept connections from the Internet
 on the network port `9651`. Before you proceed with the installation, you need
 to determine the networking environment your node will run in.
 
-<details><summary>Running on a Cloud Provider</summary>
+<details>
+<summary>Running on a Cloud Provider</summary>
 <p>
 If your node is running on a cloud provider computer instance, it will have a
 static IP. Find out what that static IP is, or set it up if you didn't already.
 </p></details>
 
-<details><summary>Running on a Home Connection</summary>
+<details>
+<summary>Running on a Home Connection</summary>
 <p>
 
 If you're running a node on a computer that is on a residential internet

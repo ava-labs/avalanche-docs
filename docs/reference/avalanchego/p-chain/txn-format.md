@@ -1196,46 +1196,46 @@ for this type is 24 or `0x00000018`.
     - Must be > 0
 - **`MaximumSupply`** is a long which is the amount to specify as the maximum token supply.
   - Restrictions
-    - Must be >= [InitialSupply]
+    - Must be &gt;&equals; [InitialSupply]
 - **`MinConsumptionRate`** is a long which is the rate to allocate funds if the
   validator's stake duration is 0.
 - **`MaxConsumptionRate`** is a long which is the rate to allocate funds if the
   validator's stake duration is equal to the minting period.
   - Restrictions
-    - Must be >= [MinConsumptionRate]
-    - Must be <= [`reward.PercentDenominator`]
+    - Must be &gt;&equals; [MinConsumptionRate]
+    - Must be &lt;&equals; [`reward.PercentDenominator`]
 - **`MinValidatorStake`** is a long which the minimum amount of funds required to become a validator.
   - Restrictions
-    - Must be > 0
-    - Must be <= [InitialSupply]
+    - Must be &gt; 0
+    - Must be &lt;&equals; [InitialSupply]
 - **`MaxValidatorStake`** is a long which is the maximum amount of funds a
   single validator can be allocated, including delegated funds.
   - Restrictions:
-    - Must be >= [MinValidatorStake]
-    - Must be <= [MaximumSupply]
+    - Must be &gt;&equals; [MinValidatorStake]
+    - Must be &lt;&equals; [MaximumSupply]
 - **`MinStakeDuration`** is a short which is the minimum number of seconds a staker can stake for.
   - Restrictions
-    - Must be > 0
+    - Must be &gt; 0
 - **`MaxStakeDuration`** is a short which is the maximum number of seconds a staker can stake for.
   - Restrictions
-    - Must be >= [MinStakeDuration]
-    - Must be <= [GlobalMaxStakeDuration]
+    - Must be &gt;&equals; [MinStakeDuration]
+    - Must be &lt;&equals; [GlobalMaxStakeDuration]
 - **`MinDelegationFee`** is a short is the minimum percentage a validator must
   charge a delegator for delegating.
   - Restrictions
-    - Must be <= [`reward.PercentDenominator`]
+    - Must be &lt;&equals; [`reward.PercentDenominator`]
 - **`MinDelegatorStake`** is a short which is the minimum amount of funds required to become a delegator.
   - Restrictions
-    - Must be > 0
+    - Must be &gt; 0
 - **`MaxValidatorWeightFactor`** is a byte which is the factor which calculates
   the maximum amount of delegation a validator can receive. Note: a value of 1
   effectively disables delegation.
   - Restrictions
-    - Must be > 0
+    - Must be &gt; 0
 - **`UptimeRequirement`** is a short which is the minimum percentage a validator
   must be online and responsive to receive a reward.
   - Restrictions
-    - Must be <= [`reward.PercentDenominator`]
+    - Must be &lt;&equals; [`reward.PercentDenominator`]
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
   control signature to authorizes this transformation. The array must be sorted

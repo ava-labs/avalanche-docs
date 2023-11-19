@@ -100,17 +100,17 @@ media such as Discord, with the following information:
 > Stay tuned because this pilot is literally a can't miss for every WAGMI node 😉
 >
 > The upgrade will activate the fee config manager, and enable smooth fee config updates in the
-> future <https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees>
+> future https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees
 >
 > This upgrade changes how blocks are processed on WAGMI, so every WAGMI node needs to upgrade to
 > continue to validate WAGMI correctly.
 >
 > In order to update your node, you need to update to Subnet-EVM v0.2.8 and follow the instructions
 > to enable a stateful precompile on Subnet-EVM here:
-> <https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles>
+> https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles
 >
 > You can find the JSON to configure the network upgrade in this gist:
-> <https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b>
+> https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b
 >
 > TLDR; you will need to place the JSON file into your node's file directory within
 > `chain-config-dir/wagmi blockchainID/upgrade.json` and restart your node.

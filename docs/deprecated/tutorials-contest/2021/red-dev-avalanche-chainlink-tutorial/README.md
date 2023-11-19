@@ -326,7 +326,7 @@ Please follow the README.md file to install and start the adaptor.
 ## Login to Chainlink GUI
 
 You can now connect to your Chainlink node's UI interface by navigating to
-<http://localhost:6688>. If using a VPS, you can create a SSH tunnel to your node
+http://localhost:6688 . If using a VPS, you can create a SSH tunnel to your node
 for 6688:localhost:6688 to enable connectivity to the GUI. Typically this is
 done like this: 
 
@@ -334,7 +334,7 @@ done like this:
 ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 
-Access <http://localhost:6688> in your favorite browser, and this will return to
+Access http://localhost:6688 in your favorite browser, and this will return to
 the Chainlink login page:
 
 ![Chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)

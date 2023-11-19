@@ -97,8 +97,7 @@ transferred.
 
 ## Fuji Workflow
 
-This tutorial uses [**X-Chain <->
-C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
+This tutorial uses [**X-Chain \<-> C-Chain**](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildExportTx-cchain-avax.ts)
 transfers as an example. Transferring between other chains are very similar.
 
 ### Transfer from the X-Chain to the C-Chain

@@ -931,7 +931,7 @@ by signature indexes.
 
 Once the multi-sig UTXO is created, this UTXO can only be used if we have the
 threshold signers in our keychain. The `util` functions can be tweaked a little
-bit to create and return inputs with a part number of signers (<threshold). We
+bit to create and return inputs with a part number of signers (&lt;threshold). We
 can then partially sign the inputs and ask other owners to add signature index
 and sign.
 

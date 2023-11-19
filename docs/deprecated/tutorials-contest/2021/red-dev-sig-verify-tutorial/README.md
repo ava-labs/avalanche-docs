@@ -436,13 +436,13 @@ will probably want to take further actions accordingly.
 Here are some resources that can use to teach yourself the subjects you need in
 order to understand this tutorial.
 
-1. This is a useful documentation from Ava Labs on cryptographic primitives: <https://docs.avax.network/build/references/cryptographic-primitives>
+1. This is a useful documentation from Ava Labs on cryptographic primitives: [https://docs.avax.network/build/references/cryptographic-primitives](https://docs.avax.network/build/references/cryptographic-primitives)
 2. Here is a great YouTube video by Connor Daly of Ava Labs on how to use
    Hardhat to deploy and run your smart contract on Avalanche network:
-   <https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s>
+   https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s
 3. If you want to learn more on how the private/public keys and the wallets
    work, you may enjoy going through this awesome tutorial by Greg Walker:
-   <https://learnmeabitcoin.com/technical/>
+   https://learnmeabitcoin.com/technical/
 4. Andrea Corbellini has done great work explaining Elliptic Curve Cryptography
    in detail in her blog post:
-   <https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/>
+   https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/

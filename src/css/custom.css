@@ -73,7 +73,7 @@ html[data-theme='dark'] .DocSearch {
 .navbar {
   box-shadow: none;
   padding-inline: 80px;
-  background: white;
+  /*background: white;*/
   margin-bottom: 146px;
 }
 .navbar__logo {
@@ -105,8 +105,8 @@ main {
 }
 
 .cards__container {
-  margin: 3em 0;
   margin-top: 24px;
+  justify-content: center;
 }
 
 .cards__container .col {
@@ -264,15 +264,6 @@ span.menu__item {
   grid-template-columns: 1fr 2fr;
 }
 
-.usefulLinks {
-  background-color: #313131;
-  padding-inline: 56px;
-  padding-block: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10%;
-}
-
 .footer__bottom {
   margin-top: 10px;
 }
@@ -328,23 +319,6 @@ span.menu__item {
   text-decoration: none;
 }
 
-.footer-main-list {
-  padding-left: 16px ;
-  color: white ;
-}
-
-.footer-main-list:hover {
-  color: var(--ifm-color-primary);
-  transition: color 0.15s, color 0.15s;
-  text-decoration: none;
-}
-
-.footer-academy-cap {
-  padding-top: 3px;
-}
-
-
-
 @media screen
 and (max-width: 1180px) {
   .navbar__items {
@@ -387,12 +361,6 @@ and (max-width: 996px) {
   }
   .footer-main-list {
     margin-left: 24px;
-  }
-  .usefulLinks {
-    flex-direction: column;
-  }
-  .usefulLinks .row {
-    flex-direction: column;
   }
   .footer-container {
     flex-direction: row;
