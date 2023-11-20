@@ -18,7 +18,7 @@ Además, Ava Labs mantiene una implementación de la [API de Rosetta](https://ww
 
 ### Ejecutar un nodo Avalanche
 
-Si desea construir su nodo desde el origen o incluirlo en una imagen de Docker, consulte el [repositorio de GitHub de AvalancheGo](https://github.com/ava-labs/avalanchego). Para ponerse en marcha rápidamente, puede utilizar el [script de instalación del nodo](/nodes/run/with-installer.md) que automatiza la instalación y actualización del nodo AvalancheGo como un servicio `systemd` en Linux, utilizando binarios precompilados.
+Si desea construir su nodo desde el origen o incluirlo en una imagen de Docker, consulte el [repositorio de GitHub de AvalancheGo](https://github.com/ava-labs/avalanchego). Para ponerse en marcha rápidamente, puede utilizar el [script de instalación del nodo](/nodes/run/with-installer/installing-avalanchego.md) que automatiza la instalación y actualización del nodo AvalancheGo como un servicio `systemd` en Linux, utilizando binarios precompilados.
 
 ### Configuración de un nodo Avalanche
 

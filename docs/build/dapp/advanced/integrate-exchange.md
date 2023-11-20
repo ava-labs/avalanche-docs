@@ -31,7 +31,7 @@ If you want to build your node form source or include it in a docker image,
 reference the [AvalancheGo GitHub
 repository](https://github.com/ava-labs/avalanchego). To quickly get up and
 running, you can use the [node installation
-script](/nodes/run/with-installer.md) that automates installing
+script](/nodes/run/with-installer/installing-avalanchego.md) that automates installing
 and updating AvalancheGo node as a `systemd` service on Linux, using prebuilt
 binaries.
 

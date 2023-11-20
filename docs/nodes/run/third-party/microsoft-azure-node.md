@@ -404,7 +404,7 @@ or two to boot back up, then log in again, same as before.
 ### Set up the Avalanche Node
 
 Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up
-Avalanche Node With Installer](/nodes/run/with-installer.md) tutorial
+Avalanche Node With Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
 which automates the installation process. You will need the "IPv4 Public IP"
 copied from the Azure Portal we set up earlier.
 
