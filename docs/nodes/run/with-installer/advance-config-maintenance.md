@@ -105,7 +105,8 @@ configure the C-Chain, as described in detail
 
 ## Using a Previous Version
 
-The installer script can also be used to install a version of AvalancheGo other than the latest version.
+The installer script can also be used to install a version of AvalancheGo other than the latest
+version.
 
 To see a list of available versions for installation, run:
 
