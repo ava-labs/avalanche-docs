@@ -268,8 +268,9 @@ ssh ubuntu@PUBLICIP
 
 You're logged into the EC2 instance again. Now we’ll need to set up our
 Avalanche node. To do this, follow the [Set Up Avalanche Node With
-Installer](/nodes/run/with-installer.md) tutorial which automates the
-installation process. You will need the `PUBLICIP` we set up earlier.
+Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
+which automates the installation process. You will need the `PUBLICIP`
+we set up earlier.
 
 Your AvalancheGo node should now be running and in the process of bootstrapping,
 which can take a few hours. To check if it's done, you can issue an API call

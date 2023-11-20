@@ -30,8 +30,8 @@ node, you should back up those too.
 ## Node Installed Using the Installer Script
 
 If you installed your node using the [installer
-script](/nodes/run/with-installer.md), to upgrade your node, just run
-the installer script again.
+script](/nodes/run/with-installer/installing-avalanchego.md), to upgrade your
+node, just run the installer script again.
 
 ```text
 ./avalanchego-installer.sh

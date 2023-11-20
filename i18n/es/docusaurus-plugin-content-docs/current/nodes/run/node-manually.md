@@ -33,7 +33,7 @@ En este tutorial, haremos lo siguiente:
 
 - Para usar un servicio de terceros para alojar su nodo o ejecutar un validador, [vea aquí](/nodes/run/third-party/aws-node.md) tutoriales dedicados.
 
-- Si solo está interesado en configurar un nodo para hacer staking, se recomienda seguir el tutorial [AvalancheGo Install Script](/nodes/run/with-installer.md).
+- Si solo está interesado en configurar un nodo para hacer staking, se recomienda seguir el tutorial [AvalancheGo Install Script](/nodes/run/with-installer/installing-avalanchego.md).
 
 </p></details>
 

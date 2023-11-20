@@ -36,7 +36,7 @@ Ejemplo de archivo de configuración JSON:
 ```
 
 :::tip
-[El script de instalación](/nodes/run/with-installer.md) crea el archivo de configuración del nodo
+[El script de instalación](/nodes/run/with-installer/installing-avalanchego.md) crea el archivo de configuración del nodo
 en `~/.avalanchego/configs/node.json`. No se crea ningún archivo por defecto si
 [AvalancheGo se construye desde el código fuente](/nodes/run/node-manually.md),
 deberías crearlo manualmente si es necesario.

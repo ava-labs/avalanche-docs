@@ -92,7 +92,7 @@ how to download, build, and install AvalancheGo. Simpler solution is to use the
 prebuilt binary, available on
 [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to
 run a node on a Linux machine, you can use the [installer
-script](/nodes/run/with-installer.md) to install the node as a
+script](/nodes/run/with-installer/installing-avalanchego.md) to install the node as a
 `systemd` service. Script also handles node upgrading. If you want to run a node
 in a docker container, there are [build
 scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the

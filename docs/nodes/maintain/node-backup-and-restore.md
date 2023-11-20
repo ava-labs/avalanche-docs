@@ -148,9 +148,9 @@ To restore your node from a backup, we need to do the reverse: restore
 node.
 
 First, we need to do the usual
-[installation](/nodes/run/with-installer.md) of the node. This will
-create a new NodeID, which we need to replace. When the node is installed
-correctly, log into the machine where the node is running and stop it:
+[installation](/nodes/run/with-installer/installing-avalanchego.md) of the node.
+This will create a new NodeID, which we need to replace. When the node is
+installed correctly, log into the machine where the node is running and stop it:
 
 ```text
 sudo systemctl stop avalanchego
@@ -262,7 +262,7 @@ _This tutorial assumes you have already completed "Database Backup" and have
 a backup at ~/avalanche_db_backup.zip._
 
 First, we need to do the usual
-[installation](/nodes/run/with-installer.md) of the node. When the
+[installation](/nodes/run/with-installer/installing-avalanchego.md) of the node. When the
 node is installed correctly, log into the machine where the node is running and
 stop it:
 
