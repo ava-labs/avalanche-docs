@@ -36,10 +36,10 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div class="row footer-container">
+        <div className="row footer-container">
           <div className="col col--8">
             <div className="row" style={{ marginTop: "10px" }}>
-              <div class="col" style={{}}>
+              <div className="col" style={{}}>
                 <h4 className="footer-heading">
                   {translate({ message: "Developers" })}
                 </h4>

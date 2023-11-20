@@ -5,7 +5,10 @@
 
 .main {
     margin-bottom: 50px;
-    margin-top: 0px;
+    margin-top: 146px;
+}
+.academy{
+    margin-bottom: 50px;
 }
 
 .headerText {
@@ -74,7 +77,9 @@ h3 {
 .cardTitle {
     color: #e84142;
 }
-
+.centeredContainer {
+    display: flex;
+}
 .features {
     display: flex;
     align-items: top;
@@ -138,9 +143,9 @@ h3 {
     color: var(--ifm-color-primary);
     transition: color 0.15s;
 }
-html[data-theme='dark'] .usefulLinks {
-    background-color: #e11b1c;
-}
+/*html[data-theme='dark'] .usefulLinks {*/
+/*    background-color: #e11b1c;*/
+/*}*/
 
 
 @media screen and (max-width: 1024px) {
@@ -157,7 +162,23 @@ html[data-theme='dark'] .usefulLinks {
         padding: 2rem;
     }
 }
-
+@media screen and (max-width: 996px){
+    .visitAcademy, .featuresAcademy{
+        text-align: center;
+    }
+    .centeredContainer {
+        justify-content: center;
+    }
+    .academyText {
+        text-align: center;
+    }
+    .readMoreBtn{
+        margin: 40px auto;
+    }
+    .main{
+        margin-top: 125px;
+    }
+}
 @media screen and (max-width: 768px) {
     .linksContainer{
         display: grid;
@@ -187,20 +208,22 @@ html[data-theme='dark'] .usefulLinks {
         margin-bottom: 54px;
         text-align: center;
     }
-
-    .readMoreBtn {
-        width: 100%;
-    }
-
-    .academyText {
-        text-align: center;
+    .main{
+        margin-top: 80px;
     }
 }
 
 @media screen and (max-width: 375px){
+
     .linksContainer{
         display: flex;
         flex-direction: column;
     }
+    .readMoreBtn {
+        width: 100%;
+    }
 }
 
+html[data-theme='dark'] .featuresAcademy {
+    background-color: inherit;
+}

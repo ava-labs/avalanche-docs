@@ -4,7 +4,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./index.module.css";
 import Card from "../components/Card";
 import {translate} from "@docusaurus/Translate";
-import Link from "@docusaurus/Link";
 
 import banner from "../../static/img/homepage_banner.png";
 import academy from "../../static/img/academy.png";
@@ -170,7 +169,7 @@ function Home() {
                 </section>
             </main>
 
-            <main className={styles.main}>
+            <section className={styles.academy}>
                 <br/>
                 <section className={styles.featuresAcademy}>
                     <div className="container">
@@ -178,10 +177,10 @@ function Home() {
                             className={clsx("row")}
                             style={{justifyContent: "space-between", marginBottom: 120}}
                         >
-                            <div className="col col--6">
+                            <div className={clsx("col col--6",styles.centeredContainer)}>
                                 <img src={academy}/>
                             </div>
-                            <div className={clsx("col col--5")}>
+                            <div className={clsx("col col--5" )}>
                                 <h1 className={styles.academyText}>
                                     {translate({
                                         message: "Continue Learning With Avalanche Academy",
@@ -274,13 +273,13 @@ function Home() {
                                 </p>
                                 <div className={styles.readMoreBtn}>Visit The Academy</div>
                             </div>
-                            <div className="col col--6">
-                                <img src={visitAcademy} className={styles.visitImg}/>
+                            <div className={clsx("col col--6",styles.centeredContainer)}>
+                                <img alt='visit image' src={visitAcademy} className={styles.visitImg}/>
                             </div>
                         </div>
                     </div>
                 </section>
-            </main>
+            </section>
             <section className={styles.usefulLinks}>
                 <div className="container">
                     <div

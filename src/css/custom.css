@@ -73,24 +73,25 @@ html[data-theme='dark'] .DocSearch {
 .navbar {
   box-shadow: none;
   padding-inline: 80px;
-  /*background: white;*/
-  margin-bottom: 146px;
+  /*margin-bottom: 146px;*/
 }
 .navbar__logo {
   margin-right: 78px;
 }
-
-.dropdown > .navbar__link:after {
-  border: none;
-  content: '';
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background: url('../../static/img/dropdownArrow.png') no-repeat center center;
-  background-size: contain;
-  position: absolute;
-  top: 15px;
+.header-build-dropdown{
+  white-space: nowrap;
 }
+/*.dropdown > .navbar__link:after {*/
+/*  border: none;*/
+/*  content: '';*/
+/*  display: inline-block;*/
+/*  width: 14px;*/
+/*  height: 14px;*/
+/*  background: url('../../static/img/dropdownArrow.png') no-repeat center center;*/
+/*  background-size: contain;*/
+/*  position: absolute;*/
+/*  top: 15px;*/
+/*}*/
 
 .theme-back-to-top-button {
   display: none;
@@ -106,7 +107,7 @@ main {
 
 .cards__container {
   margin-top: 24px;
-  justify-content: center;
+  justify-content:center;
 }
 
 .cards__container .col {
@@ -119,16 +120,25 @@ main {
   .welcome .col {
     --ifm-col-width: calc(6 / 12 * 100%);
   }
+  .cards__container {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    justify-content: inherit;
+  }
+  .navbar {
+    padding-inline: 26px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .welcome .col {
     --ifm-col-width: 100%;
   }
-  .cards__container {
-    flex-wrap: nowrap;
-    overflow: scroll;
-  }
+  /*.cards__container {*/
+  /*  flex-wrap: nowrap;*/
+  /*  overflow: scroll;*/
+  /*  justify-content: inherit;*/
+  /*}*/
 }
 
 .card {
@@ -319,8 +329,23 @@ span.menu__item {
   text-decoration: none;
 }
 
+html[data-theme='dark'] .footer {
+  background-color:inherit;
+}
+html[data-theme='dark'] .footer-list {
+  color:#FFFFFF;
+}
+
+
 @media screen
 and (max-width: 1180px) {
+
+  .header-discord-link:before {
+    margin-left: 0;
+  }
+  .header-github-link:before {
+    margin-right: 0;
+  }
   .navbar__items {
     flex-direction: row-reverse;
     justify-content: start;
@@ -336,6 +361,7 @@ and (max-width: 1180px) {
   }
   .navbar__items--right > .navbar__item {
     display: block;
+    right: 70px;
   }
 }
 
@@ -343,13 +369,20 @@ and (max-width: 1180px) {
 and (max-width: 768px) {
   .navbar__items {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap:60px;
   }
   .navbar__items--right > .navbar__item {
     display: none;
   }
 }
-
+@media screen and (max-width: 375px){
+  .navbar__items {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap:20px;
+  }
+}
 @media screen
 and (max-width: 996px) {
   .footer-heading {

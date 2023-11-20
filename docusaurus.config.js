@@ -211,6 +211,7 @@ const config = {
             type: "dropdown",
             position: "left",
             label: "Build",
+            className: "header-build-dropdown",
             items: [
               {
                 type: "docSidebar",
