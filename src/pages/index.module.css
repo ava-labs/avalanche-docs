@@ -133,6 +133,16 @@ h3 {
     padding-left: 16px ;
     color: white ;
 }
+.usefulLinkWrapper {
+    display:flex;
+    align-items:center;
+    height:100%;
+    gap:8px;
+}
+.usefulIcon {
+    width: 24px;
+    height: 24px;
+}
 .usefulContainerGap{
     gap:132px
 }
