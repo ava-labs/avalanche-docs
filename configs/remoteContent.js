@@ -41,7 +41,7 @@ const remoteContent = [
   [
     "docusaurus-plugin-remote-content",
     {
-      // docs/build/cross-chain/teleporter/overview.md
+      // /docs/build/cross-chain/teleporter/overview.md
       name: "teleporter-overview",
       sourceBaseUrl:
         "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/Teleporter/",
