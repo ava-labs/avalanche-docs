@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -15,17 +15,16 @@ The steps to deploy on the Mainnet are identical and the differences are mention
 
 ## Contents
 
-* [Getting images ready to be uploaded to decentralized
+- [Getting images ready to be uploaded to decentralized
   storage.](#getting-images-ready-to-be-uploaded-to-decentralized-storage) (IPFS
   in this tutorial)
-* [Getting metadata ready to be uploaded to decentralized
+- [Getting metadata ready to be uploaded to decentralized
   storage.](#getting-metadata-ready-to-be-uploaded-to-decentralized-storage)
   (IPFS in this tutorial)
-* [Writing code in Remix IDE](#writing-code-in-remix-ide)
-* [Compiling and Deploying to Avalanche Fuji C-Chain
+- [Writing code in Remix IDE](#writing-code-in-remix-ide)
+- [Compiling and Deploying to Avalanche Fuji C-Chain
   Testnet.](#compiling-and-deploying-to-avalanche-fuji-c-chain-testnet)
-* [Check the NFT on the explorer.](#check-the-nft-on-the-explorer)
-
+- [Check the NFT on the explorer.](#check-the-nft-on-the-explorer)
 
 ### Getting Images Ready to Be Uploaded to Decentralized Storage
 
@@ -44,8 +43,8 @@ So do we store links to the metadata of every NFT in the collection? The answer 
 OpenZeppelin has come up with a smart way where you just need to store the
 prefix of the url where the metadata is stored and the tokenID is appended to it
 to return the url of the metadata for an individual NFT. For example, if the
-baseURI is "https://mynft.com/" and if you want the metadata for tokenID 1 the
-contract simply returns ("https://mynft.com/1"). This way we don't need to store
+baseURI is "[https://mynft.com/]" and if you want the metadata for tokenID 1 the
+contract simply returns ("[https://mynft.com/1]"). This way we don't need to store
 the url of the metadata for every tokenID.
 
 To achieve this we need to rename our images/videos with respect to tokenID.
@@ -53,7 +52,7 @@ Make sure to have all the assets in a single folder if you plan to create a
 collection of NFT's.
 
 Image / Video for tokenID 0 should be named 0 followed by the extension (jpg,
-png, tiff, gif, mp4, etc...) 
+png, tiff, gif, mp4, etc...)
 
 ![image-naming](images/minting-erc721-00-image-naming.png)
 
@@ -64,7 +63,7 @@ otherwise 1 whichever is your case. In this tutorial, we will start from 0.
 
 Let's upload these assets to pinata for pinning on IPFS.
 
-In the pinata dashboard you should see an upload button. 
+In the pinata dashboard you should see an upload button.
 
 ![pinata-upload-button](images/minting-erc721-01-pinata-upload-button.png)
 
@@ -96,11 +95,10 @@ So now we have the baseURI for the assets to get any asset all we need to do is
 append the tokenID and extension to the baseURI.
 
 This is the baseURI in my case.
-https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2
+[https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2]
 
-To get asset for tokenID 0 all I need to do is append "/" +  tokenID + extension (.gif in this case)
-https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif
-
+To get asset for tokenID 0 all I need to do is append "/" + tokenID + extension (.gif in this case)
+[https://gateway.pinata.cloud/ipfs/QmaHGo7pQ9x7B1rNvPbkzTnrZNuHA4mx53t8ZnAA8JFUG2/0.gif]
 
 ### Getting Metadata Ready to Be Uploaded to Decentralized Storage
 
@@ -120,15 +118,15 @@ This is the metadata format expected by marketplaces like OpenSea.
 
 ![metadata-format](images/minting-erc721-07-metadata-format.png)
 
-* Let's go through every attribute one by one.
-  * `name` - specify the name of the NFT.
-  * `tokenId` - specify the tokenID of the NFT.
-  * `image` - specify the URL where the assets for the NFT are hosted. This is
-      the same URL I have given above. Make sure to include the complete URL
-      including the tokenID and extension part.
-  * `description` - specify some description about the entire NFT collection.
-  * `attributes` - specify the attributes of the NFT. Notice the format to
-      specify the attributes.
+- Let's go through every attribute one by one.
+  - `name` - specify the name of the NFT.
+  - `tokenId` - specify the tokenID of the NFT.
+  - `image` - specify the URL where the assets for the NFT are hosted. This is
+    the same URL I have given above. Make sure to include the complete URL
+    including the tokenID and extension part.
+  - `description` - specify some description about the entire NFT collection.
+  - `attributes` - specify the attributes of the NFT. Notice the format to
+    specify the attributes.
 
 I have also attached the same metadata file in the repository in case you want
 to copy and edit it go for it.
@@ -145,7 +143,6 @@ Upload the folder of metadata to pinata.
 ![pinata-metadata-folder-uploaded](images/minting-erc721-09-pinata-metadata-folder-uploaded.png)
 
 You can click on the folder name and see the contents on IPFS.
-
 
 ### Writing Code in Remix IDE
 
@@ -167,34 +164,33 @@ same name as the token.
 
 ![remix-file-created](images/minting-erc721-12-remix-file-created.png)
 
-I have attached the code for the NFT in the same repository. 
+I have attached the code for the NFT in the same repository.
 
-* Let's go through the code.
-  * Inherits
-    * `ERC721("MyNFT", "MN")` - replace <code>MyNFT</code> with the name you
-          want the collection to have, replace <code>MN</code> with the symbol
-          you want for the collection.
-    * `Ownable` - ownable is used to have an access control mechanism.
-          Ownable provides utility functions to `getOwner`, `setOwner` and
-          `renounceOwnership`.
-  * Variables
-    * `tokenCounter` - It is used to keep track of the tokenId to mint.
-    * `price` - specify the price you want the minter to pay (in Wei) (0.01
-          AVAX in this case).
-    * `MAX_TOKENS` - specify the maximum number of NFT that can be minted
-          from this collection. (100 in this case)
-    * `baseURI` - the base URL for the metadata stored on Pinata. *(you will
-          need to specify this)*
-  * Functions
-    * `mint` - the main mint function that is to be called in order to
-          create an NFT. It consists of 2 require statements one to check if the
-          max supply is exceeded and the second to check if the minter is paying
-          the correct price.
-    * `_baseURI` - we need to override the default OpenZeppelin _baseURI
-          because the default one returns an empty string.
-    * `withdraw` - this function can be called by the owner of the NFT
-          collection to withdraw the funds deposited by the NFT minters. 🤑
-
+- Let's go through the code.
+  - Inherits
+    - `ERC721("MyNFT", "MN")` - replace <code>MyNFT</code> with the name you
+      want the collection to have, replace <code>MN</code> with the symbol
+      you want for the collection.
+    - `Ownable` - ownable is used to have an access control mechanism.
+      Ownable provides utility functions to `getOwner`, `setOwner` and
+      `renounceOwnership`.
+  - Variables
+    - `tokenCounter` - It is used to keep track of the tokenId to mint.
+    - `price` - specify the price you want the minter to pay (in Wei) (0.01
+      AVAX in this case).
+    - `MAX_TOKENS` - specify the maximum number of NFT that can be minted
+      from this collection. (100 in this case)
+    - `baseURI` - the base URL for the metadata stored on Pinata. _(you will
+      need to specify this)_
+  - Functions
+    - `mint` - the main mint function that is to be called in order to
+      create an NFT. It consists of 2 require statements one to check if the
+      max supply is exceeded and the second to check if the minter is paying
+      the correct price.
+    - `_baseURI` - we need to override the default OpenZeppelin \_baseURI
+      because the default one returns an empty string.
+    - `withdraw` - this function can be called by the owner of the NFT
+      collection to withdraw the funds deposited by the NFT minters. 🤑
 
 ### Compiling and Deploying to Avalanche Fuji C-Chain Testnet
 
@@ -208,7 +204,7 @@ Make sure you have the correct compiler selected from the dropdown and click the
 ![compile-NFT](images/minting-erc721-14-compile-nft.png)
 
 Once compiled we can now deploy the contract to the Avalanche Fuji C-Chain
-testnet. *The steps to deploy on the Mainnet are the same.*
+testnet. _The steps to deploy on the Mainnet are the same._
 
 Click the deploy button as shown in the image below.
 
@@ -263,16 +259,16 @@ Hooray! We have now minted an NFT to ourselves! 🎉
 
 You can check the NFT on the explorer. My URL is below.
 
-https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers
+[https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers](https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers)
 
 ![NFT-on-explorer](images/minting-erc721-23-nft-on-explorer.png)
 
 The format is as follows.
 
-*Testnet* - 
+_Testnet_ -
 `https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers`
 
-*Mainnet* - `https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers`
+_Mainnet_ - `https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers`
 
 ### Conclusion
 

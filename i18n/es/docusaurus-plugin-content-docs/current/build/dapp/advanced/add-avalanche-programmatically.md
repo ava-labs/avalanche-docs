@@ -47,7 +47,7 @@ npm start
 ```
 
 Si todo funciona como se espera, deberías poder cargar
-"<http://localhost:3000/>" en tu navegador, hacer clic en el botón "Connect Avalanche"
+[http://localhost:3000/] en tu navegador, hacer clic en el botón "Connect Avalanche"
 en la página como se muestra a continuación:
 
 ![connect core](/img/connect-core.jpeg)
@@ -89,7 +89,7 @@ export const AVALANCHE_MAINNET_PARAMS = {
   },
   rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
   blockExplorerUrls: ["https://snowtrace.io/"],
-}
+};
 ```
 
 Datos de la red de pruebas:
@@ -105,7 +105,7 @@ export const AVALANCHE_TESTNET_PARAMS = {
   },
   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
   blockExplorerUrls: ["https://testnet.snowtrace.io/"],
-}
+};
 ```
 
 ### Agregar la Red
@@ -121,9 +121,9 @@ function addAvalancheNetwork() {
         params: [AVALANCHE_MAINNET_PARAMS],
       })
       .catch((error: any) => {
-        console.log(error)
-      })
-  })
+        console.log(error);
+      });
+  });
 }
 ```
 

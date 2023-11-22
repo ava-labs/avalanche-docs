@@ -13,7 +13,7 @@ y luego validar la red Avalanche usando un nodo AvalancheGo.
 | Ejecutar un nodo                                                                                          |                                                                                       |
 | :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ |
 | [**Manualmente**](/nodes/run/node-manually.md)                                                            | Compilar un nodo Avalanche desde el código fuente y ejecutarlo manualmente            |
-| [**Usando el Script de Instalación**](/nodes/run/with-installer.md)                                       | Cómo instalar y ejecutar AvalancheGo con el script de instalación                     |
+| [**Usando el Script de Instalación**](/nodes/run/with-installer/installing-avalanchego.md)                                       | Cómo instalar y ejecutar AvalancheGo con el script de instalación                     |
 | [**Ejecutar un Nodo de Subnet**](/nodes/run/subnet-node.md)                                               | Cómo ejecutar un nodo de Subnet                                                       |
 | [**Errores Comunes**](nodes/run/FAQ.md)                                                                   | Aprende sobre los errores comunes al construir tu nodo                                |
 | **Usando un Servicio en la Nube de Terceros**                                                             |                                                                                       |

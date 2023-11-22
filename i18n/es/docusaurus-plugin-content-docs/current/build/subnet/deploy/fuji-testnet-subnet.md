@@ -845,7 +845,7 @@ with the following values:
 
 ```text
 - Network Name: testsubnet
-- RPC URL: <http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc>
+- RPC URL: [http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc]
 - Chain ID: 3333
 - Symbol: TST
 ```

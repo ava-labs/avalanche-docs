@@ -192,7 +192,7 @@ Esto pondrá nuestra instancia al día con los últimos parches de seguridad par
 
 ### Configura la Node de Avalanche
 
-Ahora necesitaremos configurar nuestra node de Avalanche. Para hacer esto, sigue el tutorial [Configurar Node de Avalanche con el instalador](/nodes/run/with-installer.md) que automatiza el proceso de instalación. Necesitarás la "IP pública IPv4" copiada del Portal de Azure que configuramos anteriormente.
+Ahora necesitaremos configurar nuestra node de Avalanche. Para hacer esto, sigue el tutorial [Configurar Node de Avalanche con el instalador](/nodes/run/with-installer/installing-avalanchego.md) que automatiza el proceso de instalación. Necesitarás la "IP pública IPv4" copiada del Portal de Azure que configuramos anteriormente.
 
 Una vez que la instalación esté completa, ¡nuestra node debería estar iniciando! Podemos ejecutar el siguiente comando para echar un vistazo al estado más reciente de la node AvalancheGo:
 

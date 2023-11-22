@@ -31,9 +31,7 @@ We built AvalancheJS with ease of use in mind. With this library, any JavaScript
 developer is able to interact with a node on the Avalanche Platform who has
 enabled their API endpoints for the developer’s consumption. We keep the library
 up-to-date with the latest changes in the Avalanche Platform Specification found
-in the [Platform Chain Specification](/reference/avalanchego/p-chain/api.md), [Exchange
-Chain (X-Chain) Specification](/reference/avalanchego/x-chain/api.md), [Contract Chain
-(C-Chain) Specification](/reference/avalanchego/c-chain/api.md).
+in the [Platform Chain Specification](/reference/avalanchego/p-chain/api.md), [Exchange Chain (X-Chain) Specification](/reference/avalanchego/x-chain/api.md), [Contract Chain (C-Chain) Specification](/reference/avalanchego/c-chain/api.md).
 
 Using AvalancheJS, developers can:
 
@@ -57,7 +55,7 @@ AvalancheJS requires Node.js version 14.18.0 or higher to compile.
 
 ### Using the NPM Package
 
-Add AvalancheJS to your project via `npm` or `yarn`. 
+Add AvalancheJS to your project via `npm` or `yarn`.
 
 For installing via `npm`:
 
@@ -98,27 +96,27 @@ This will generate a pure JavaScript library and place it in a folder named
 project as a pure JavaScript implementation of Avalanche.
 
 ![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
- 
+
 ## Use AvalancheJS in Projects
 
 The AvalancheJS library can be imported into your existing Node.js project as follows:
 
 ```ts
-const avalanche = require("avalanche")
+const avalanche = require("avalanche");
 ```
 
 Or into your TypeScript project like this:
 
 ```ts
-import { Avalanche } from "avalanche"
+import { Avalanche } from "avalanche";
 ```
 
 ## Importing Essentials
 
 ```ts
-import { Avalanche, BinTools, Buffer, BN } from "avalanche"
+import { Avalanche, BinTools, Buffer, BN } from "avalanche";
 
-let bintools = BinTools.getInstance()
+let bintools = BinTools.getInstance();
 ```
 
 The above lines import the libraries used in the tutorials. The libraries include:
@@ -161,11 +159,11 @@ simply run the script:
 
 ### Example
 
-Let's say that the AvalancheJS repository was cloned. There are a lot of 
-useful scripts in `Examples`. Suppose the one we want to run is AVM's 
-`getTx`, which has the path `examples/avm/getTX.ts`. 
+Let's say that the AvalancheJS repository was cloned. There are a lot of
+useful scripts in `Examples`. Suppose the one we want to run is AVM's
+`getTx`, which has the path `examples/avm/getTX.ts`.
 
-To execute the script, we use: 
+To execute the script, we use:
 
 `ts-node examples/avm/getTx.ts`
 

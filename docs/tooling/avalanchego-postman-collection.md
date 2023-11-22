@@ -7,9 +7,8 @@ pagination_label: AvalancheGo Install Script
 # AvalancheGo Postman Collection
 
 We have made a Postman collection for Avalanche, that includes all the public
-API calls that are available on [AvalancheGo
-instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
-allowing developers to quickly issue commands to your node and see the response, without having to 
+API calls that are available on [AvalancheGo instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
+allowing developers to quickly issue commands to your node and see the response, without having to
 copy and paste long and complicated `curl` commands.
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-postman-collection/)
@@ -86,17 +85,16 @@ Import it to your workspace. Now, we will need to edit that environment to suit
 the actual parameters of your particular installation. These are the parameters
 that differ from the defaults in the imported file.
 
-Select the Environments tab, choose the Avalanche environment which was just added. 
+Select the Environments tab, choose the Avalanche environment which was just added.
 You can directly edit any values here:
 
 ![Environment content](/img/postman/postman-6-variables.png)
 
-As a minimum, you will need to change the IP address of your node, which is the value of 
+As a minimum, you will need to change the IP address of your node, which is the value of
 the `host` variable. Change it to the IP of your node (change both the `initial` and `current`
 values). Also, if your node is not running on the same machine where you
 installed Postman, make sure your node is accepting the connections on the API
-port from the outside by checking the appropriate [command line
-option](/nodes/configure/avalanchego-config-flags.md#http-server).
+port from the outside by checking the appropriate [command line option](/nodes/configure/avalanchego-config-flags.md#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 
@@ -106,7 +104,7 @@ Open one of the API call groups, for example `Health`. Click `health` call:
 
 ![API call](/img/postman/postman-7-making-calls.png)
 
-You will see that format of the call uses the `baseURL` environment 
+You will see that format of the call uses the `baseURL` environment
 variable. Click `Send`. Request will be sent, and soon you will see
 the response, in the `Body` tab in the `Response`:
 

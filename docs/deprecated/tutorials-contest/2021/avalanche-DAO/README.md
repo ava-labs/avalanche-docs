@@ -2,16 +2,16 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
 
 ## What Is a DAO
 
-The DAO's are systems that help us to work with people around the world in a safe and clear way.  
+The DAO's are systems that help us to work with people around the world in a safe and clear way.
 
 Think of them like an internet-native business that's collectively owned and
 managed by its members. They have built-in treasuries that no one has the
@@ -20,7 +20,7 @@ proposals and voting to ensure everyone in the organization has a voice.
 
 There's no CEO who can authorize spending based on their own whims and no chance
 of a dodgy CFO manipulating the books. Everything is out in the open and the
-rules around spending are baked into the DAO via its code.  
+rules around spending are baked into the DAO via its code.
 
 ## How the DAO's Work?
 
@@ -31,9 +31,9 @@ Generally the DAO consists of two main smart contracts: the ERC20 token that is
 a governance token, and the smart contract that have the rules for the DAO. So
 like a DAO's members you need to have some governance tokens and then deposit to
 the DAO contract, and then we can create a proposal if the proposal is accepted
-the other members in the DAO can start to vote.  
+the other members in the DAO can start to vote.
 
-The vote is based in how many governance tokens have been deposited on the DAO.  
+The vote is based in how many governance tokens have been deposited on the DAO.
 
 For example if you have a 100 of the governance tokens but you deposited only 20
 tokens on the DAO contract only 20 tokens will be taken into account for you
@@ -41,9 +41,9 @@ vote.
 
 ## Let's Start to Build Our DAO
 
-* **Tools We will use**  
-  * [REMIX IDE](https://remix.ethereum.org/)
-  * [MetaMask Wallet](https://metamask.io/)
+- **Tools We will use**
+  - [REMIX IDE](https://remix.ethereum.org/)
+  - [MetaMask Wallet](https://metamask.io/)
 
 > We need to setup the Fuji Testnet on our MetaMask. [`find here the rpc values`](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
 
@@ -60,7 +60,7 @@ The first line tells you that the source code is licensed under the GPL version
 publishing the source code is the default.
 
 `pragma` Specifies that the source code is written for Solidity version 0.7.0 or
-a newer version of the language up to, but not including version 0.9.0.  
+a newer version of the language up to, but not including version 0.9.0.
 
 `contract MyDAO {...}` specifies the name and a new block of code for our contract.
 
@@ -70,10 +70,10 @@ a newer version of the language up to, but not including version 0.9.0.
 
 Commonly the DAO's contract has four main functions:
 
-* Deposit governance tokens.  
-* Withdraw the tokens.
-* Create a proposal.
-* Vote.
+- Deposit governance tokens.
+- Withdraw the tokens.
+- Create a proposal.
+- Vote.
 
 We use AVAX our governance token.
 Fuji contract address: 0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70
@@ -85,30 +85,30 @@ template from [OpenZeppelin](https://openzeppelin.com/).
 
 For the proposal format we defined a group with custom properties, the properties for our proposal are:
 
-* Author which is an address from the account that create a proposal.
-* Id that will help us to identify a proposal.
-* Name of the proposal.
-* Creation date, that allow us to set a period of time for allow the voting.
-* Voting options, in this case we will keep it simple(Yes / NO).  
-* Number of Votes for Yes and Votes for No this will allow us set an status for
+- Author which is an address from the account that create a proposal.
+- Id that will help us to identify a proposal.
+- Name of the proposal.
+- Creation date, that allow us to set a period of time for allow the voting.
+- Voting options, in this case we will keep it simple(Yes / NO).
+- Number of Votes for Yes and Votes for No this will allow us set an status for
   the proposal when number of votes for any option be greater than fifty
   percent.
-* Status for the Proposal this options will be Accepted, Rejected, Pending.
+- Status for the Proposal this options will be Accepted, Rejected, Pending.
 
-For the voting options and the proposal status we will use an `enums` types.  
+For the voting options and the proposal status we will use an `enums` types.
 
 `Enums` can be used to create custom types with a finite set of 'constant
 values'. **[see more about
 Enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
 
 ```solidity
-enum VotingOptions { Yes, No } 
+enum VotingOptions { Yes, No }
 enum Status { Accepted, Rejected, Pending }
-```  
+```
 
 For the other proposal properties we can use an `struct` type.  
 `Structs` alow us to define a custom group of properties. **[see more about
-structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**  
+structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**
 
 ```solidity
     struct Proposal {
@@ -132,7 +132,7 @@ pragma solidity >=0.7.0 <0.9.0;
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol';
 
 contract MyDAO {
-    
+
     enum VotingOptions { Yes, No }
     enum Status { Accepted, Rejected, Pending }
     struct Proposal {
@@ -144,7 +144,7 @@ contract MyDAO {
         uint256 votesForNo;
         Status status;
     }
-    
+
 }
 ```
 
@@ -162,7 +162,7 @@ mapping(address => mapping(uint => bool)) public votes;
 // one share for governance tokens
 mapping(address => uint256) public shares;
 uint public totalShares;
-// the IERC20 allow us to use avax like our governance token.
+// the IERC20 allow us to use Avax like our governance token.
 IERC20 public token;
 // the user need minimum 25 AVAX to create a proposal.
 uint constant CREATE_PROPOSAL_MIN_SHARE = 25 * 10 ** 18;
@@ -215,7 +215,7 @@ pragma solidity >=0.7.0 <0.9.0;
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol';
 
 contract MyDAO {
-    
+
     enum VotingOptions { Yes, No }
     enum Status { Accepted, Rejected, Pending }
     struct Proposal {
@@ -235,23 +235,23 @@ contract MyDAO {
     // one share for governance tokens
     mapping(address => uint256) public shares;
     uint public totalShares;
-    // the IERC20 allow us to use avax like our governance token.
+    // the IERC20 allow us to use Avax like our governance token.
     IERC20 public token;
     // the user need minimum 25 AVAX to create a proposal.
     uint constant CREATE_PROPOSAL_MIN_SHARE = 25 * 10 ** 18;
     uint constant VOTING_PERIOD = 7 days;
     uint public nextProposalId;
-    
+
     constructor() {
         token = IERC20(0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70); // AVAX address
     }
-    
+
     function deposit(uint _amount) external {
         shares[msg.sender] += _amount;
         totalShares += _amount;
         token.transferFrom(msg.sender, address(this), _amount);
     }
-    
+
     function withdraw(uint _amount) external {
         require(shares[msg.sender] >= _amount, 'Not enough shares');
         shares[msg.sender] -= _amount;
@@ -270,7 +270,7 @@ does not have minimum 25 AVAX tokens He cannot create a new proposal.
 function createProposal(string memory name) external {
     // validate the user has enough shares to create a proposal
     require(shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE, 'Not enough shares to create a proposal');
-    
+
     proposals[nextProposalId] = Proposal(
         nextProposalId,
         msg.sender,
