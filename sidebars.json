@@ -2,7 +2,7 @@
   "learn": [
     {
       "type": "html",
-      "value": "<span class='menu__item'><b><medium> The Avalanche Protocol </medium></b></span>"
+      "value": "<span class='menu__item sidebar_subtitle'>The Avalanche Protocol</span>"
     },
     "learn/avalanche/intro",
     "learn/avalanche/avalanche-platform",
@@ -19,17 +19,19 @@
     "learn/avalanche/awm",
     {
       "type": "html",
-      "value": "<hr/>"
+      "value": "<hr />"
     },
     {
       "type": "link",
       "label": "Whitepapers",
-      "href": "https://www.avalabs.org/whitepapers"
+      "href": "https://www.avalabs.org/whitepapers",
+      "className": "externalLink"
     },
     {
       "type": "link",
       "label": "Audits",
-      "href": "https://github.com/ava-labs/audits"
+      "href": "https://github.com/ava-labs/audits",
+      "className": "externalLink"
     },
     "disclaimer"
   ],
@@ -37,7 +39,7 @@
   "nodes": [
     {
       "type": "html",
-      "value": "<span class='menu__item'><b><medium> 🔺 Nodes </medium></b></span>"
+      "value": "<span class='menu__item sidebar_subtitle'>Nodes</span>"
     },
     "nodes/README",
     "nodes/system-requirements",
@@ -118,7 +120,7 @@
   "build-dapp": [
     {
       "type": "html",
-      "value": "<span class='menu__item'><b><medium> 🔺 Decentralized Apps </medium></b></span>"
+      "value": "<span class='menu__item sidebar_subtitle'>Decentralized Apps</span>"
     },
     "build/dapp/README",
     "build/dapp/c-chain-evm",
@@ -205,7 +207,7 @@
   "build-subnet": [
     {
       "type": "html",
-      "value": "<span class='menu__item'><b><medium> 🔺 Avalanche Subnets </medium></b></span>"
+      "value": "<span class='menu__item sidebar_subtitle'>Avalanche Subnets</span>"
     },
     "build/subnet/README",
     "build/subnet/getting-started",
@@ -296,14 +298,15 @@
     {
       "type": "link",
       "label": "❓FAQ",
-      "href": "https://support.avax.network/en/articles/6158840-subnet-faq"
+      "href": "https://support.avax.network/en/articles/6158840-subnet-faq",
+      "className": "externalLink"
     }
   ],
 
   "build-vm": [
     {
       "type": "html",
-      "value": "<span class='menu__item'><b><medium> 🔺 Virtual Machines </medium></b></span>"
+      "value": "<span class='menu__item sidebar_subtitle'>Virtual Machines</span>"
     },
     "build/vm/README",
     "build/vm/intro",
@@ -343,7 +346,8 @@
     {
       "type": "link",
       "label": "HyperSDK",
-      "href": "https://github.com/ava-labs/hypersdk#readme"
+      "href": "https://github.com/ava-labs/hypersdk#readme",
+      "className": "externalLink"
     }
   ],
 
@@ -391,7 +395,8 @@
     {
       "type": "link",
       "label": "HyperSDK",
-      "href": "https://github.com/ava-labs/hypersdk#readme"
+      "href": "https://github.com/ava-labs/hypersdk#readme",
+      "className": "externalLink"
     },
     {
       "type": "html",
@@ -459,7 +464,8 @@
     {
       "type": "link",
       "label": "Release Notes",
-      "href": "https://github.com/ava-labs/avalanchego/releases"
+      "href": "https://github.com/ava-labs/avalanchego/releases",
+      "className": "externalLink"
     },
     {
       "type": "html",
