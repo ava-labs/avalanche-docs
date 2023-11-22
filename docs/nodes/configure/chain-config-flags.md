@@ -618,7 +618,7 @@ Defaults to `20`.
 
 #### `trie-prefetcher-parallelism` (int)
 
-Max concurrent disk reads trie prefetcher should perform at once.
+Max concurrent disk reads trie pre-fetcher should perform at once.
 Defaults to `16`.
 
 #### `snapshot-cache` (int)
@@ -737,7 +737,7 @@ transaction lookup indices will be maintained for all blocks. Defaults to `0`.
 
 #### `skip-tx-indexing` (bool)
 
-If set to `true`, the node will not index transactions. TxLookupLimit can be still used to control unindexing old transactions.
+If set to `true`, the node will not index transactions. TxLookupLimit can be still used to control deleting old transaction indices.
 Defaults to `false`.
 
 ### VM Networking
