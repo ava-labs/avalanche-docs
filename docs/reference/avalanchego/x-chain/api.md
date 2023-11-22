@@ -1,9 +1,10 @@
 ---
 tags: [X-Chain, AvalancheGo APIs]
-description: This page is an overview of the Exchange Chain (X-Chain) API associated with AvalancheGo. 
+description: This page is an overview of the Exchange Chain (X-Chain) API associated with AvalancheGo.
 sidebar_label: API
-pagination_label: X-Chain API 
+pagination_label: X-Chain API
 ---
+
 # X-Chain API
 
 The [X-Chain](/learn/avalanche/avalanche-platform.md#exchange-chain-x-chain),
@@ -232,8 +233,8 @@ curl -X POST --data '{
 }
 ```
 
-<!-- 
-TODO: Add avm.createAsset  
+<!--
+TODO: Add avm.createAsset
 -->
 
 ### `avm.createFixedCapAsset`
@@ -532,8 +533,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 :::
 
 Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call
-the [C-Chain's `avax.import`](/reference/avalanchego/c-chain/api.md#avaximport) or the [P-Chain's
-`platform.importAVAX`](/reference/avalanchego/p-chain/api.md#platformimportavax) to complete the transfer.
+the [C-Chain's `avax.import`](/reference/avalanchego/c-chain/api.md#avaximport) or the [P-Chain's `platform.importAVAX`](/reference/avalanchego/p-chain/api.md#platformimportavax) to complete the transfer.
 
 **Signature:**
 
@@ -598,7 +598,7 @@ curl -X POST --data '{
 }
 ```
 
-<!-- 
+<!--
 TODO: Add avm.exportAVAX
 -->
 
@@ -809,7 +809,7 @@ avm.getAssetDescription({assetID: string}) -> {
 
 :::note
 
-The AssetID for AVAX differs depending on the network you are on. 
+The AssetID for AVAX differs depending on the network you are on.
 
 Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
 
@@ -1098,9 +1098,7 @@ curl -X POST --data '{
             "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
             "input": {
               "amount": 2570382395,
-              "signatureIndices": [
-                0
-              ]
+              "signatureIndices": [0]
             }
           }
         ],
@@ -1111,9 +1109,7 @@ curl -X POST --data '{
             "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
             "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
             "output": {
-              "addresses": [
-                "X-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"
-              ],
+              "addresses": ["X-avax1tnuesf6cqwnjw7fxjyk7lhch0vhf0v95wj5jvy"],
               "amount": 2569382395,
               "locktime": 0,
               "threshold": 1
@@ -1184,7 +1180,7 @@ from `threshold` of the addresses in `addresses`.
 
 ### `avm.getTxStatus`
 
-:::caution 
+:::caution
 Deprecated as of **v1.10.0**.
 :::
 
@@ -1409,7 +1405,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is
 called, you must call the P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax)
-or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate 
+or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate
 the transfer.
 
 **Signature:**
@@ -1461,6 +1457,7 @@ curl -X POST --data '{
 <!--
 TODO: Add avm.importAVAX
 -->
+
 ### `avm.importKey`
 
 :::caution
@@ -1681,7 +1678,6 @@ curl -X POST --data '{
   }
 }
 ```
-
 
 ### `avm.mintNFT`
 
@@ -2221,7 +2217,6 @@ Endpoint deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/
 
 :::
 
-
 #### **Golang Example**
 
 ```go
@@ -2304,11 +2299,11 @@ func main() {
 
 **Operations:**
 
-| Command          | Description                  | Example                                                      | Arguments                                                                                                                          |
-| :--------------- | :--------------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| **NewSet**       | create a new address map set | `{"newSet":{}}`                                                |                                                                                                                                    |
+| Command          | Description                  | Example                                                        | Arguments                                                                                                                              |
+| :--------------- | :--------------------------- | :------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **NewSet**       | create a new address map set | `{"newSet":{}}`                                                |                                                                                                                                        |
 | **NewBloom**     | create a new bloom set.      | `{"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}}` | `maxElements` - number of elements in filter must be &gt; 0 `collisionProb` - allowed collision probability must be &gt; 0 and &lt;= 1 |
-| **AddAddresses** | add an address to the set    | `{"addAddresses":{"addresses":\["X-fuji..."\]}}`               | addresses - list of addresses to match                                                                                             |
+| **AddAddresses** | add an address to the set    | `{"addAddresses":{"addresses":\["X-fuji..."\]}}`               | addresses - list of addresses to match                                                                                                 |
 
 Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**.
 **AddAddresses** can be called multiple times.

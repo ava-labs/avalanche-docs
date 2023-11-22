@@ -32,8 +32,7 @@ payload of data.
   :::
 
 If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
-Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to
-VMs](/build/vm/intro.md).
+Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to VMs](/build/vm/intro.md).
 
 ## Components
 

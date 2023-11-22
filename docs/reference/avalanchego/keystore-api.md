@@ -5,7 +5,6 @@ sidebar_label: Keystore API
 pagination_label: Keystore API
 ---
 
-
 # Keystore API
 
 :::warning
@@ -29,8 +28,7 @@ following docs for details:
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public
-server](/tooling/rpc-providers.md).
+This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
 
 :::
 

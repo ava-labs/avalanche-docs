@@ -173,7 +173,7 @@ Una vez ejecutado, este comando creará el directorio `avalanche_db_backup.zip` 
 
 _Este tutorial asume que ya has completado "Respaldo de la Base de Datos" y tienes una copia de seguridad en ~/avalanche_db_backup.zip._
 
-Primero, necesitamos hacer la instalación habitual del nodo de [instalación](/nodes/run/with-installer.md). Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
+Primero, necesitamos hacer la instalación habitual del nodo de [instalación](/nodes/run/with-installer/installing-avalanchego.md). Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
 
 ```bash
 sudo systemctl stop avalanchego

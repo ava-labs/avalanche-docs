@@ -70,7 +70,7 @@ manejar un par de miles de conexiones TCP persistentes y que el ancho de banda d
 acomodar al menos 5 Mbps de tráfico de red constante de subida y bajada.
 
 Al instalar el nodo AvalancheGo en las máquinas, a menos que tengas un personal de DevOps dedicado que
-se encargará de la configuración y la configuración del nodo, recomendamos usar el [script de instalación](/nodes/run/with-installer.md)
+se encargará de la configuración y la configuración del nodo, recomendamos usar el [script de instalación](/nodes/run/with-installer/installing-avalanchego.md)
 para configurar los nodos. Abstraerá la mayor parte del
 proceso de configuración para ti, configurará el nodo como un servicio del sistema y permitirá actualizaciones fáciles del nodo.
 

@@ -29,8 +29,7 @@ npm install -g yarn
 ### AvalancheGo y Avalanche Network Runner
 
 [AvalancheGo](https://github.com/ava-labs/avalanchego) es una implementación de nodo Avalanche
-escrita en Go. [Avalanche Network
-Runner](/tooling/network-runner.md) es una herramienta para desplegar rápidamente redes de prueba locales.
+escrita en Go. [Avalanche Network Runner](/tooling/network-runner.md) es una herramienta para desplegar rápidamente redes de prueba locales.
 Juntos, puedes desplegar redes de prueba locales y ejecutar pruebas en ellas.
 
 ### Solidity y Avalanche

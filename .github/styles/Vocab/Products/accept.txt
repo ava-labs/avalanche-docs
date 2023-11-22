@@ -2,6 +2,7 @@
 Abigen
 ABIs
 accessors
+address_index
 addValidator
 AddValidator
 Agrawal
@@ -62,6 +63,7 @@ CLIs
 codec
 Codec
 coinbase
+coin_type
 composability
 Composability
 Consensys
@@ -305,6 +307,7 @@ toolchain
 Toolchains
 trie
 TXIDs
+tx
 TX
 TXs
 typechain
@@ -313,6 +316,7 @@ typings
 uint
 UIs
 unfinalized
+Unfinalized
 unicode
 Uniswap
 Unix

@@ -5,6 +5,7 @@ sidebar_label: On Production Infrastructure
 pagination_label: Deploy Subnets on Production Infrastructure
 sidebar_position: 3
 ---
+
 # Deploy Subnets on Production Infrastructure
 
 ## Introduction
@@ -33,7 +34,7 @@ server.
 
 ### Server OS
 
-Although AvalancheGo can run on a macOS or a Windows computer, we strongly recommend running nodes
+Although AvalancheGo can run on a MacOS or a Windows computer, we strongly recommend running nodes
 on computers running Linux as they are designed specifically for server loads and all the tools and
 utilities needed for administering a server are native to Linux.
 
@@ -71,9 +72,10 @@ handle a couple of thousands of persistent TCP connections and that network band
 accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
 When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that
-will take care of node setup and configuration, we recommend using the [installer
-script](/nodes/run/with-installer.md) to set up the nodes. It will abstract most of
-the setup process for you, set up the node as a system service and will enable easy node upgrades.
+will take care of node setup and configuration, we recommend using the
+[installer script](/nodes/run/with-installer/installing-avalanchego.md) to set up the nodes.
+It will abstract most of the setup process for you, set up the node as a system
+service and will enable easy node upgrades.
 
 #### Cloud Providers
 
@@ -166,10 +168,8 @@ which is a `json` formatted, human-readable file. Describing the contents and th
 in the genesis file is beyond the scope of this document, and if you're ready to deploy your Subnet
 to production you probably have it mapped out already.
 
-If you want to review, we have a description of the genesis file in our document on [customizing EVM
-Subnets](/build/subnet/upgrade/customize-a-subnet.md).
-
-
+If you want to review, we have a description of the genesis file in our document on
+[customizing EVM Subnets](/build/subnet/upgrade/customize-a-subnet.md).
 
 ## Validator Configuration
 
@@ -205,8 +205,7 @@ An example of a node config syncing two Subnets:
 
 But that is not all. Besides tracking the SubnetID, the node also needs to have the
 plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
-been through that on Testnet and Fuji, but for a refresher, you can refer to [this
-tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
+been through that on Testnet and Fuji, but for a refresher, you can refer to [this tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins`
 directory where the node binary is (for installer-script created nodes that would be

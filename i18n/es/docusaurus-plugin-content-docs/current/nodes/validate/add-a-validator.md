@@ -78,8 +78,7 @@ La respuesta tiene el ID de tu nodo:
 Abre [la billetera](https://wallet.avax.network/), y ve a la pestaña `Earn` (Ganar). Elige
 `Add Validator` (Agregar validador) bajo la sección `Validate` (Validar).
 
-Completa los parámetros de staking. Se explican con más detalle en [este
-documento](/nodes/validate/how-to-stake.md). Cuando hayas completado todos los parámetros de participación
+Completa los parámetros de staking. Se explican con más detalle en [este documento](/nodes/validate/how-to-stake.md). Cuando hayas completado todos los parámetros de participación
 y los hayas verificado, haz clic en `Confirm` (Confirmar). Asegúrate de que el período de participación sea de al
 menos 2 semanas, la tasa de tarifa de delegación sea de al menos 2% y estés haciendo stake de al
 menos 2,000 AVAX en Mainnet (1 AVAX en Fuji Testnet).
