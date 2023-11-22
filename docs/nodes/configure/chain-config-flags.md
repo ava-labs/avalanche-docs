@@ -45,9 +45,9 @@ For a given chain, AvalancheGo will follow the sequence below to look for its
 config file, where all folder and file names are case sensitive:
 
 - First it looks for a config sub-directory whose name is the chain ID - If it
-isn't found, it looks for a config sub-directory whose name is the chain's
-primary alias - If it's not found, it looks for a config sub-directory whose
-name is another alias for the chain
+  isn't found, it looks for a config sub-directory whose name is the chain's
+  primary alias - If it's not found, it looks for a config sub-directory whose
+  name is another alias for the chain
 
 Alternatively, for some setups it might be more convenient to provide config
 entirely via the command line. For that, you can use AvalancheGo
@@ -117,7 +117,6 @@ string (`""`).
 Size of trie cache used for providing state sync data to peers in MBs. Should be
 a multiple of `64`. Defaults to `64`.
 
-
 ### Continuous Profiling
 
 #### `continuous-profiler-dir` (string)
@@ -145,9 +144,13 @@ Enables the Snowman API. Defaults to `false`.
 
 #### `coreth-admin-api-enabled` (boolean)
 
+Deprecated as of `v0.12.5`. Use `admin-api-enabled` instead.
+
 Enables the Admin API. Defaults to `false`.
 
 #### `coreth-admin-api-dir` (string)
+
+Deprecated as of `v0.12.5`. Use `admin-api-dir` instead.
 
 Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles.
 Defaults to `""`.
@@ -489,17 +492,23 @@ allow specific transactions to be issued through their API. Defaults to an empty
 
 #### `remote-tx-gossip-only-enabled` (boolean)
 
+Deprecated as of `v0.12.5`. Use `tx-gossip-enabled` instead.
+
 If `true`, the node will only gossip remote transactions to prevent transactions
 issued through this node from being broadcast to the network. Defaults to
 `false`.
 
 #### `tx-regossip-frequency` (duration)
 
+Deprecated as of `v0.12.5`. Use `regossip-frequency` instead.
+
 Amount of time that should elapse before we attempt to re-gossip a transaction
 that was already gossiped once. Defaults to `60000000000` nano seconds which is
 1 minute.
 
 #### `tx-regossip-max-size` (int)
+
+Deprecated as of `v0.12.5`. Use `regossip-max-txs ` instead.
 
 Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
@@ -521,7 +530,7 @@ Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
 
 #### `tx-pool-price-bump` (int)
 
-Minimum price bump percentage to replace an already existing transaction (nonce).  Defaults to 10%.
+Minimum price bump percentage to replace an already existing transaction (nonce). Defaults to 10%.
 
 #### `tx-pool-account-slots` (int)
 
@@ -607,6 +616,11 @@ this limit, they are written to disk. Defaults to `256`.
 Memory limit to target in the dirty cache before performing a commit (in MBs).
 Defaults to `20`.
 
+#### `trie-prefetcher-parallelism` (int)
+
+Max concurrent disk reads trie prefetcher should perform at once.
+Defaults to `16`.
+
 #### `snapshot-cache` (int)
 
 Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
@@ -634,7 +648,7 @@ Defaults to `4096`.
 
 #### `pruning-enabled` (boolean)
 
-If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount 
+If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount
 of data written to disk, but does not delete any state that is written to the disk previously.
 This flag should be set to `false` for nodes that need access to all data at
 historical roots. Pruning will be done only for new data. Defaults to `false` in
@@ -652,7 +666,7 @@ true`, `allow-missing-tries` should be set to `true` as well.
 
 :::
 
-#### `populate-missing-tries` (*uint64)
+#### `populate-missing-tries` (\*uint64)
 
 If non-nil, sets the starting point for repopulating missing tries to
 re-generate archival merkle forest.
@@ -720,6 +734,11 @@ should not be changed in between runs until offline pruning has completed.
 
 Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
 transaction lookup indices will be maintained for all blocks. Defaults to `0`.
+
+#### `skip-tx-indexing` (bool)
+
+If set to `true`, the node will not index transactions. TxLookupLimit can be still used to control unindexing old transactions.
+Defaults to `false`.
 
 ### VM Networking
 
@@ -801,14 +820,13 @@ As mentioned above, if a Subnet's chain id is
 should be at
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
-
 ## FAQ
 
 - When using `getBlockNumber` it will return finalized blocks. To allow for queries
-for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries` 
-and set to true (by default it is set to `false`)
+  for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries`
+  and set to true (by default it is set to `false`)
 
-- When deactivating offline pruning  `(pruning-enabled: false)` from previously 
-enabled state, this will not impact blocks whose state was already pruned. This will 
-return missing trie node errors, as the node can't lookup the state of a historical
-block if that state was deleted.
+- When deactivating offline pruning `(pruning-enabled: false)` from previously
+  enabled state, this will not impact blocks whose state was already pruned. This will
+  return missing trie node errors, as the node can't lookup the state of a historical
+  block if that state was deleted.
