@@ -29,6 +29,7 @@ In this tutorial, we will:
 - Connect to Avalanche
 
 <details>
+
 <summary>Other Options</summary>
 <p>
 
@@ -209,6 +210,7 @@ on the network port `9651`. Before you proceed with the installation, you need
 to determine the networking environment your node will run in.
 
 <details>
+
 <summary>Running on a Cloud Provider</summary>
 <p>
 If your node is running on a cloud provider computer instance, it will have a
@@ -217,6 +219,7 @@ static IP. Find out what that static IP is, or set it up if you didn't already.
 </details>
 
 <details>
+
 <summary>Running on a Home Connection</summary>
 <p>
 

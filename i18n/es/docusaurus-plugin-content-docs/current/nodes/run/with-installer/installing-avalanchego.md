@@ -22,7 +22,10 @@ chmod 755 avalanchego-installer.sh;\
 ¡Y estamos en marcha! La salida debería verse algo así:
 
 <details>
-<summary><b>Haz clic para ver la salida en la Terminal</b></summary>
+
+<summary>
+<b>Haz clic para ver la salida en la Terminal</b>
+</summary>
 
 ```text
 Instalador de AvalancheGo
@@ -104,7 +107,10 @@ Luego, el script continuará con la creación del servicio del sistema y termina
 el inicio del servicio.
 
 <details>
-<summary><b>Haz clic para ver la salida final</b></summary>
+
+<summary>
+<b>Haz clic para ver la salida final</b>
+</summary>
 
 ```text
 Se creó el enlace simbólico /etc/systemd/system/multi-user.target.wants/avalanchego.service → /etc/systemd/system/avalanchego.service.
@@ -138,7 +144,10 @@ sudo systemctl status avalanchego
 A continuación, se muestra un ejemplo de cómo deberían verse los últimos registros del nodo:
 
 <details>
-<summary><b>Haz clic para expandir y ver los registros</b></summary>
+
+<summary>
+<b>Haz clic para expandir y ver los registros</b>
+</summary>
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service

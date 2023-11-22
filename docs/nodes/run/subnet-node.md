@@ -35,6 +35,7 @@ It is recommended that you first complete [this comprehensive guide](/nodes/run/
 which demonstrates how to build and run a basic Avalanche node. Below are the high level details.
 
 <details>
+
 <summary>System Requirements</summary>
 <p>
 
@@ -49,6 +50,7 @@ change.
 </p></details>
 
 <details>
+
 <summary>To build from source:</summary>
 <p>
 
@@ -111,6 +113,7 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
 <details>
+
 <summary>Where can I find Subnet parameters like VMID?</summary>
 <p>
 VMID, Subnet ID, ChainID, and all other parameters can be found in the "Chain Info" 
@@ -149,6 +152,7 @@ Note: The above command includes the `--network-id=fuji` command because the WAG
 on Fuji Testnet.
 
 <details>
+
 <summary>Run via the command line instead</summary>
 <p>
 

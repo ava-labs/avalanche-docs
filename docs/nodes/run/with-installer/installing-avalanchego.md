@@ -22,7 +22,10 @@ chmod 755 avalanchego-installer.sh;\
 And we're off! The output should look something like this:
 
 <details>
-<summary><b>Click to see the Terminal output</b></summary>
+
+<summary>
+<b>Click to see the Terminal output</b>
+</summary>
 
 ```text
 AvalancheGo installer
@@ -73,17 +76,17 @@ RPC port should be public (this is a public API node) or private (this is a vali
 ```
 
 - `private`: this setting only allows RPC requests from the node machine itself.
-- `public`: this setting exposes the RPC port to all network interfaces. 
+- `public`: this setting exposes the RPC port to all network interfaces.
 
 As this is a sensitive setting you will be asked to confirm if choosing
 `public`. Please read the following note carefully:
 
 :::note
 
-If you choose to allow RPC requests on any network interface you will need 
-to set up a firewall to only let through RPC requests from known IP addresses, 
-otherwise your node will be accessible to anyone and might be overwhelmed by 
-RPC calls from malicious actors! If you do not plan to use your node to send 
+If you choose to allow RPC requests on any network interface you will need
+to set up a firewall to only let through RPC requests from known IP addresses,
+otherwise your node will be accessible to anyone and might be overwhelmed by
+RPC calls from malicious actors! If you do not plan to use your node to send
 RPC calls remotely, enter `private`.
 
 :::
@@ -104,7 +107,10 @@ The script will then continue with system service creation and finish with
 starting the service.
 
 <details>
-<summary><b>Click to see the final output</b></summary>
+
+<summary>
+<b>Click to see the final output</b>
+</summary>
 
 ```text
 Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service → /etc/systemd/system/avalanchego.service.
@@ -138,7 +144,10 @@ sudo systemctl status avalanchego
 Below is an example of what the node's latest logs should look like:
 
 <details>
-<summary><b>Click to expand and see the Logs</b></summary>
+
+<summary>
+<b>Click to expand and see the Logs</b>
+</summary>
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service

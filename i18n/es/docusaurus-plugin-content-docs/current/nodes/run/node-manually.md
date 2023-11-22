@@ -29,6 +29,7 @@ En este tutorial, haremos lo siguiente:
 - Conectarse a Avalanche
 
 <details>
+
 <summary>Otras Opciones</summary>
 <p>
 
@@ -194,6 +195,7 @@ Consulte el repositorio [AvalancheGo GitHub](https://github.com/ava-labs/avalanc
 Para ejecutarse correctamente, AvalancheGo necesita aceptar conexiones desde Internet en el puerto de red `9651`. Antes de continuar con la instalación, debe determinar el entorno de red en el que se ejecutará su nodo.
 
 <details>
+
 <summary>Ejecutando en un Proveedor de Nube</summary>
 <p>
 Si su nodo se está ejecutando en una instancia de computadora de un proveedor de nube, tendrá una IP estática. Descubra cuál es esa IP estática, o configúrela si aún no lo ha hecho.
@@ -201,6 +203,7 @@ Si su nodo se está ejecutando en una instancia de computadora de un proveedor d
 </details>
 
 <details>
+
 <summary>Ejecutando en una Conexión Doméstica</summary>
 <p>
 

@@ -36,6 +36,7 @@ Se recomienda que primero completes [esta guía completa](/nodes/run/node-manual
 que muestra cómo construir y ejecutar un nodo Avalanche básico. A continuación se presentan los detalles generales.
 
 <details>
+
 <summary>Requisitos del sistema</summary>
 <p>
 
@@ -51,6 +52,7 @@ cambiar.
 </details>
 
 <details>
+
 <summary>Para construir desde el código fuente:</summary>
 <p>
 
@@ -113,6 +115,7 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ```
 
 <details>
+
 <summary>¿Dónde puedo encontrar parámetros de la Subnet como VMID?</summary>
 <p>
 El VMID, ID de Subnet, ChainID y todos los demás parámetros se pueden encontrar en la sección "Chain Info"
@@ -151,6 +154,7 @@ Nota: El comando anterior incluye el comando `--network-id=fuji` porque la Subne
 en la Testnet Fuji.
 
 <details>
+
 <summary>Ejecutar a través de la línea de comandos en su lugar</summary>
 <p>
 
