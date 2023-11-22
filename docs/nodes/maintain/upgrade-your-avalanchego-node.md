@@ -29,9 +29,8 @@ node, you should back up those too.
 
 ## Node Installed Using the Installer Script
 
-If you installed your node using the [installer
-script](/nodes/run/with-installer.md), to upgrade your node, just run
-the installer script again.
+If you installed your node using the [installer script](/nodes/run/with-installer/installing-avalanchego.md), to upgrade your
+node, just run the installer script again.
 
 ```text
 ./avalanchego-installer.sh
@@ -100,8 +99,7 @@ the pre-built binary. You don’t need to do both.
 Downloading pre-built binary is easier and recommended if you're just looking to
 run your own node and stake on it.
 
-Building the node [from
-source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if
+Building the node [from source](/nodes/maintain/upgrade-your-avalanchego-node.md#build-from-source) is recommended if
 you're a developer looking to experiment and build on Avalanche.
 
 ## Download Pre-Built Binary
@@ -118,8 +116,8 @@ to be notified about new releases.
 
 In addition, or if you don't have a node ID, you can get release notifications from github.
 To do so, you can go to our
-[repository](https://github.com/ava-labs/avalanchego) and look on the top-right 
-corner for the **Watch** option. After you click on it, select **Custom**, 
+[repository](https://github.com/ava-labs/avalanchego) and look on the top-right
+corner for the **Watch** option. After you click on it, select **Custom**,
 and then **Releases**. Press **Apply** and it is done.
 
 :::
@@ -180,8 +178,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/avalanchego.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 Then move to the AvalancheGo directory:

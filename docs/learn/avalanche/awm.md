@@ -1,24 +1,33 @@
 ---
 tags: [Avalanche Warp Messaging, Cross-Subnet Communication]
 description: AWM allows seamless communication between different subnetworks on Avalanche, enabling developers to establish custom communication protocols.
-keywords: [docs, documentation, avalanche, avalanche warp messaging, awm, cross-subnet communication, cross-chain, ]
+keywords:
+  [
+    docs,
+    documentation,
+    avalanche,
+    avalanche warp messaging,
+    awm,
+    cross-subnet communication,
+    cross-chain,
+  ]
 sidebar_label: Avalanche Warp Messaging
 ---
 
 # Avalanche Warp Messaging
 
-Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows [Virtual Machine
-(VM)](/learn/avalanche/subnets-overview.md#virtual-machines) developers to implement arbitrary
+Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows
+[Virtual Machine (VM)](/learn/avalanche/subnets-overview.md#virtual-machines) developers to implement arbitrary
 communication protocols
 between any two Subnets.
 
-## Use Cases 
+## Use Cases
 
 Use cases for AWM may include but is not limited to:
 
 - Oracle Networks: Connecting a Subnet to an oracle network is a costly process. AWM makes it easy
   for oracle networks to broadcast their data from their origin chain to other Subnets.
-- Token transfers between Subnets 
+- Token transfers between Subnets
 - State Sharding between multiple Subnets
 
 ## Elements of Cross-Subnet Communication
@@ -76,4 +85,3 @@ participating honestly.
 
 A Proof-of-Concept VM called [XSVM](https://github.com/ava-labs/xsvm) was created to demonstrate the
 power of AWM. XSVM enables simple AWM transfers between any two Subnets if run out-of-the-box.
-

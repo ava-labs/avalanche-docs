@@ -386,7 +386,7 @@ docker run -p 3000:8000 --name faucet-container --env-file ../.env faucet-image
 
 El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior interactúe. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos elegido el 3000. Esta bandera `-p 3000:8000` logra lo mismo.
 
-Esto iniciará nuestra aplicación de faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el contenedor). Puedes interactuar con la aplicación visitando <http://localhost:3000> en tu navegador.
+Esto iniciará nuestra aplicación de faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el contenedor). Puedes interactuar con la aplicación visitando [http://localhost:3000] en tu navegador.
 
 #### Deteniendo el Contenedor
 
@@ -410,7 +410,7 @@ Usar la faucet es bastante sencillo, pero por completitud, repasemos los pasos p
 
 ### Visita el Sitio de la Faucet Avalanche
 
-Ve a <https://faucet.avax.network>. Verás varios parámetros de red como el nombre de la red, el saldo de la faucet, la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
+Ve a [https://faucet.avax.network]. Verás varios parámetros de red como el nombre de la red, el saldo de la faucet, la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)
 

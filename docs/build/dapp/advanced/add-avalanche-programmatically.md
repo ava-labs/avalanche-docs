@@ -38,8 +38,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/avalanche-dapp-sdks.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 Then check out [this sample project under `packages/avalanche-connector-example`](https://github.com/ava-labs/avalanche-dapp-sdks/tree/alpha-release/packages/avalanche-connector-example#readme)
@@ -50,7 +50,7 @@ npm start
 ```
 
 If everything works as expected, you should be able to load
-"<http://localhost:3000/>" on your browser, click on the "Connect Avalanche"
+[http://localhost:3000/] on your browser, click on the "Connect Avalanche"
 button on the page as below:
 
 ![connect core](/img/connect-core.jpeg)
@@ -100,7 +100,7 @@ export const AVALANCHE_MAINNET_PARAMS = {
   },
   rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
   blockExplorerUrls: ["https://snowtrace.io/"],
-}
+};
 ```
 
 Test network data:
@@ -116,7 +116,7 @@ export const AVALANCHE_TESTNET_PARAMS = {
   },
   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
   blockExplorerUrls: ["https://testnet.snowtrace.io/"],
-}
+};
 ```
 
 ### Adding the Network
@@ -133,9 +133,9 @@ function addAvalancheNetwork() {
         params: [AVALANCHE_MAINNET_PARAMS],
       })
       .catch((error: any) => {
-        console.log(error)
-      })
-  })
+        console.log(error);
+      });
+  });
 }
 ```
 

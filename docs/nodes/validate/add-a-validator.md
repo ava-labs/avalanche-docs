@@ -10,8 +10,7 @@ sidebar_position: 3
 
 ## Introduction
 
-The [Primary
-Network](/learn/avalanche/avalanche-platform.md)
+The [Primary Network](/learn/avalanche/avalanche-platform.md)
 is inherent to the Avalanche platform and validates Avalanche’s built-in
 blockchains. In this
 tutorial, we’ll add a node to the Primary Network on Avalanche.
@@ -34,10 +33,8 @@ our [Discord](https://chat.avalabs.org/) to ask questions.
 
 ## Requirements
 
-You've completed [Run an Avalanche
-Node](/nodes/run/node-manually.md) and are familiar with
-[Avalanche's
-architecture](/learn/avalanche/avalanche-platform.md). In this
+You've completed [Run an Avalanche Node](/nodes/run/node-manually.md) and are familiar with
+[Avalanche's architecture](/learn/avalanche/avalanche-platform.md). In this
 tutorial, we use [AvalancheJS](/tooling/avalanchejs-overview.md) and
 [Avalanche’s Postman collection](/tooling/avalanchego-postman-collection/setup.md) 
 to help us make API calls.
@@ -82,8 +79,7 @@ The response has your node’s ID:
 Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose
 `Add Validator` under the `Validate` section.
 
-Fill out the staking parameters. They are explained in more detail in [this
-doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters
+Fill out the staking parameters. They are explained in more detail in [this doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters
 and double-checked them, click `Confirm`. Make sure the staking period is at
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
 least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
@@ -125,8 +121,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/avalanchejs.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 or add it to an existing project:
@@ -157,35 +153,35 @@ please click
 Locate this line in the file
 
 ```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
+const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
 ```
 
 and replace this with a private key that you control. You can use [this code to generate a new key](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
 
 ```js
-const privKey: string = "<YOUR-PRIVATE-KEY-HERE>"
+const privKey: string = "<YOUR-PRIVATE-KEY-HERE>";
 ```
 
 #### Network Setting
 
-The following settings work when using a local node started with [`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
+The following settings work when using a local node started with
+[`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
 
 ```js
-const ip: string = "localhost"
-const port: number = 9650
-const protocol: string = "http"
-const networkID: number = 5
+const ip: string = "localhost";
+const port: number = 9650;
+const protocol: string = "http";
+const networkID: number = 5;
 ```
 
-However, to connect directly to the [Avalanche Fuji Testnet API
-server](/tooling/rpc-providers.md), the following changes are
+However, to connect directly to the [Avalanche Fuji Testnet API server](/tooling/rpc-providers.md), the following changes are
 needed:
 
 ```js
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
+const ip: string = "api.avax-test.network";
+const port: number = 443;
+const protocol: string = "https";
+const networkID: number = 5;
 ```
 
 Depending on the networkID passed in when instantiating an `Avalanche` object in
@@ -203,10 +199,10 @@ To learn more about encoded addresses, click [here](/tooling/avalanchejs-guides/
 Next we need to specify the node's validation period and delegation fee.
 
 ```ts
-const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
-const delegationFee: number = 10
+const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg";
+const startTime: BN = UnixNow().add(new BN(60 * 1));
+const endTime: BN = startTime.add(new BN(26300000));
+const delegationFee: number = 10;
 ```
 
 #### Node ID
@@ -243,15 +239,15 @@ To create your own start times, please follow the steps below:
 Locate this line in the file
 
 ```ts
-const startTime: BN = UnixNow().add(new BN(60 * 1))
-const endTime: BN = startTime.add(new BN(26300000))
+const startTime: BN = UnixNow().add(new BN(60 * 1));
+const endTime: BN = startTime.add(new BN(26300000));
 ```
 
 Change `startTime` and `endTime` to new `BN` values, for example:
 
 ```ts
-const startTime: BN = new BN(1654656829) // Wed Jun 08 2022 02:53:49 GMT+0000
-const endTime: BN = new BN(1662602029) // Thu Sep 08 2022 01:53:49 GMT+0000
+const startTime: BN = new BN(1654656829); // Wed Jun 08 2022 02:53:49 GMT+0000
+const endTime: BN = new BN(1662602029); // Thu Sep 08 2022 01:53:49 GMT+0000
 ```
 
 #### Delegation Fee Rate
@@ -275,7 +271,7 @@ By default, the example uses the variable `pAddressStrings` to define
 `toAddresses`, `fromAddresses`, `changeAddresses` and `rewardAddresses`:
 
 ```js
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 ```
 
 This retrieves the P-Chain addresses that belong to the `private key` that appears earlier in the example.
@@ -394,8 +390,8 @@ always receive their stake back when they’re done validating.
 Locate this part of the code
 
 ```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
-pKeychain.importKey(privKey)
+let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+pKeychain.importKey(privKey);
 ```
 
 and replace `privKey` with private keys that you control. To generate a new
@@ -405,16 +401,16 @@ example script along with [Fuji Network Settings](#network-setting).
 
 ```ts
 let privKey: string =
-  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG"
-pKeychain.importKey(privKey)
-privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s"
-pKeychain.importKey(privKey)
-priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91"
-pKeychain.importKey(privKey)
+  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM";
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG";
+pKeychain.importKey(privKey);
+privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s";
+pKeychain.importKey(privKey);
+priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91";
+pKeychain.importKey(privKey);
 
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings()
+const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 ```
 
 This example would create a keychain with 4 addresses:
@@ -444,7 +440,7 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
   threshold,
   memo,
   asOf
-)
+);
 ```
 
 ### Mainnet Workflow
@@ -452,10 +448,9 @@ const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
 The Fuji workflow above can be adapted to Mainnet with the following modifications:
 
 - The correct private key.
-- Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
-  [Avalanche Mainnet API
-  server](/tooling/rpc-providers.md#using-the-public-api-nodes)
+- Network setting should be to a Mainnet node, either
+  [a local node on Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
+  [Avalanche Mainnet API server](/tooling/rpc-providers.md#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to stake.
